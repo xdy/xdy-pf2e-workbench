@@ -1,0 +1,40 @@
+{
+    "name": "xdy-pf2e-workbench",
+    "title": "xdy-pf2e-workbench",
+    "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
+    "url": "https://github.com/xdy/xdy-pf2e-workbench/",
+    "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json",
+    "readme": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/README.md",
+    "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/xdy-pf2e-workbench.zip",
+    "changelog": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/CHANGELOG.md",
+    "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
+    "license": "./LICENSE",
+    "version": "0.0.1",
+    "author": "Jonas Karlsson (xdy)",
+    "authors": [
+        {
+            "name": "Jonas Karlsson",
+            "url": "https://gnu.xdy.se/home",
+            "discord": "xdy#3735",
+            "twitter": "@xdy",
+            "reddit": "u/xdyxdy"
+        }
+    ],
+    "minimumCoreVersion": "0.8.9",
+    "compatibleCoreVersion": "0.8.9",
+    "scripts": [],
+    "esmodules": ["module/xdy-pf2e-workbench.js"],
+    "styles": ["styles/xdy-pf2e-workbench.css"],
+    "packs": [],
+    "dependencies": [],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "socket": false,
+    "system": ["pf2e"],
+    "library": false
+}

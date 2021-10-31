@@ -1,0 +1,27 @@
+# IDE
+.idea/
+.vs/
+*.iml
+/.vscode
+icons/\!dox/
+/node_modules/
+.DS_Store
+**.env
+npm-debug.log
+coverage/
+debug/
+docs/
+node_modules/
+dist/
+
+#Foundry bundle
+foundry.js
+#Pathfinder bundle (take from non-minified build)
+main.bundle.js
+
+#This project
+foundryconfig.json
+.eslintrc.js
+webpack.config.ts
+
+
