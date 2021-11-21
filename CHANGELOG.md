@@ -3,14 +3,22 @@
 
 ### Features
 
-* Adds support for: ([4b8b2cc](https://github.com/xdy/xdy-pf2e-workbench/commit/4b8b2ccd502c13c7c2d642c07ae452c1c8232f00))
+Adds support for:
+* Filtering out creature type traits
+* Filtering out creature family traits
+* Filtering out 'other' traits
+([4b8b2cc](https://github.com/xdy/xdy-pf2e-workbench/commit/4b8b2ccd502c13c7c2d642c07ae452c1c8232f00))
 
 # [1.2.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v1.1.1...v1.2.0) (2021-11-21)
 
 
 ### Features
 
-* Adds support for: ([b7cf761](https://github.com/xdy/xdy-pf2e-workbench/commit/b7cf76143183dd3d7ea102e863f35c8da00a9af2))
+Adds support for:
+* Filtering out elite and weak.
+* Filtering out traits that have been added to a blacklist.
+* Adding a prefix (defaults to 'Unknown') to the mystified name.
+([b7cf761](https://github.com/xdy/xdy-pf2e-workbench/commit/b7cf76143183dd3d7ea102e863f35c8da00a9af2))
 
 ## [1.1.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v1.1.0...v1.1.1) (2021-11-21)
 
