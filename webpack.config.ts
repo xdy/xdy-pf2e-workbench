@@ -1,3 +1,5 @@
+//Adapted from https://gitlab.com/hooking/foundry-vtt---pathfinder-2e/-/blob/master/webpack.config.ts
+
 import * as fs from "fs-extra";
 import * as os from "os";
 import * as path from "path";
