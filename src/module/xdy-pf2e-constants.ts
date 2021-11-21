@@ -1,6 +1,8 @@
-export const PF2E_RARITIES: string[] = ["common", "uncommon", "rare", "unique"];
+//add PF2E_RARITIES,PF2E_CREATURE_TYPES,PF2E_CREATURE_FAMILIES to an array
 
-export const PF2E_CREATURE_TYPES: string[] = [
+const PF2E_RARITIES: string[] = ["common", "uncommon", "rare", "unique"];
+
+const PF2E_CREATURE_TYPES: string[] = [
     "aberration",
     "animal",
     "astral",
@@ -27,7 +29,7 @@ export const PF2E_CREATURE_TYPES: string[] = [
     "undead",
 ];
 
-export const PF2E_CREATURE_FAMILIES: string[] = [
+const PF2E_CREATURE_FAMILIES: string[] = [
     "aeon",
     "agathion",
     "alghollthu",
@@ -233,3 +235,12 @@ export const PF2E_CREATURE_FAMILIES: string[] = [
     "xulgath",
     "zombie",
 ];
+
+const ELITE_WEAK: string[] = ["elite", "weak"];
+
+export const TRAITS = {
+    RARITIES: PF2E_RARITIES,
+    CREATURE_TYPES: PF2E_CREATURE_TYPES,
+    CREATURE_FAMILIES: PF2E_CREATURE_FAMILIES,
+    ELITE_WEAK: ELITE_WEAK,
+};

@@ -9,7 +9,7 @@
 
 // Import TypeScript modules
 import { preloadTemplates } from "./preloadTemplates";
-import { PF2E_CREATURE_FAMILIES, PF2E_CREATURE_TYPES, PF2E_RARITIES } from "./xdy-pf2e-constants";
+import { TRAITS } from "./xdy-pf2e-constants";
 
 const MODULENAME = "xdy-pf2e-workbench";
 
@@ -63,6 +63,7 @@ function registerSettings() {
         default: true,
         type: Boolean,
     });
+
     game.settings.register(MODULENAME, "npcMystifierFilterRarities", {
         name: "No npc rarity in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Name`),
         hint: "Filter out rarities from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.filterRarities.Hint`),
@@ -70,6 +71,33 @@ function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "npcMystifierFilterEliteWeak", {
+        name: "No npc elite/weak status in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.FilterElitWeak.Name`),
+        hint: "Filter out elite/weak from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.filterEliteWeak.Hint`),
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "npcMystifierFilterBlacklist", {
+        name: "Blacklist traits to never add to name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterBlacklist.Name`),
+        hint: "Filter out all words in this comma-separated blacklist from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.filterBlacklist.Hint`),
+        scope: "world",
+        config: true,
+        default: "",
+        type: String,
+    });
+
+    game.settings.register(MODULENAME, "npcMystifierPrefix", {
+        name: "Word to prefix new name with", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.prefix.Hint`),
+        hint: "What to prefix new name with (default 'Unknown').", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifier.prefix.Name`),
+        scope: "world",
+        config: true,
+        type: String,
+        default: "Unknown",
     });
 
     game.settings.register(MODULENAME, "npcMystifierKey", {
@@ -109,18 +137,38 @@ Hooks.on("preCreateToken", async (token: Token, data: any) => {
         if (game.keyboard.isDown(mystifyKey) && !hasProperty(data.flags, MODULENAME + ".OriginalName")) {
             //Option to filter out other traits?
             let traitsList = token?.actor?.data?.data["traits"]["traits"]?.value;
-            if (game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
-                traitsList = traitsList.filter((trait: string) => !PF2E_RARITIES.includes(trait));
-            }
 
-            const rarities = traitsList.filter((trait: string) => PF2E_RARITIES.includes(trait));
-            const creatures = traitsList.filter((trait: string) => PF2E_CREATURE_TYPES.includes(trait));
-            const families = traitsList.filter((trait: string) => PF2E_CREATURE_FAMILIES.includes(trait));
+            //TODO Clean up this mess
+            if (game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
+                traitsList = traitsList.filter((trait: string) => !TRAITS.RARITIES.includes(trait));
+            }
+            if (game.settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
+                traitsList = traitsList.filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait));
+            }
+            if (game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
+                const blacklist =
+                    (<string>game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")).split(",") || null;
+                if (blacklist) {
+                    traitsList = traitsList.filter((trait: string) => {
+                        return !blacklist.map((trait: string) => trait.trim()).includes(trait);
+                    });
+                }
+            }
+            const eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
+            const rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
+            const creatures = traitsList.filter((trait: string) => TRAITS.CREATURE_TYPES.includes(trait));
+            const families = traitsList.filter((trait: string) => TRAITS.CREATURE_FAMILIES.includes(trait));
             const others = traitsList
+                .filter((trait: string) => !eliteWeak.includes(trait))
                 .filter((trait: string) => !rarities.includes(trait))
                 .filter((trait: string) => !creatures.includes(trait))
                 .filter((trait: string) => !families.includes(trait));
-            traitsList = rarities.concat(others).concat(creatures).concat(families);
+            traitsList = [<string>game.settings.get(MODULENAME, "npcMystifierPrefix")]
+                .concat(eliteWeak)
+                .concat(rarities)
+                .concat(others)
+                .concat(creatures)
+                .concat(families);
 
             name = traitsList
                 .map((trait: string) => {
