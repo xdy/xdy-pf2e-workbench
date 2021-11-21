@@ -15,7 +15,7 @@ const MODULENAME = "xdy-pf2e-workbench";
 
 // Initialize module
 Hooks.once("init", async () => {
-    console.log(MODULENAME + " | Initializing xdy-pf2e-workbench");
+    console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
 
     // Assign custom classes and constants here
 
@@ -30,18 +30,18 @@ Hooks.once("init", async () => {
 
 // Setup module
 Hooks.once("setup", async () => {
-    console.log(MODULENAME + " | Setting up");
+    console.log(`${MODULENAME} | Setting up`);
     // Do anything after initialization but before ready
 });
 
 // When ready
 Hooks.once("ready", async () => {
     // Do anything once the module is ready
-    console.log(MODULENAME + " | Ready");
+    console.log(`${MODULENAME} | Ready`);
 });
 
 function registerSettings() {
-    console.log(MODULENAME + " | registerSettings");
+    console.log(`${MODULENAME} | registerSettings`);
 
     game.settings.register(MODULENAME, "npcMystifier", {
         hint: "Turn on npc mystifier, renaming tokens based on their traits if Alt is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.SETTINGS.npcMystifier.Hint`),
@@ -79,7 +79,7 @@ function registerSettings() {
 //TODO Add a way to revert the name change from the sheet. (Hover over the name gives a context menu? Or inject a button on the sheet title bar?)
 Hooks.on("preCreateToken", async (token: Token, data: any) => {
     if (game.settings.get(MODULENAME, "npcMystifier")) {
-        console.log(MODULENAME + " | preCreateToken");
+        console.log(`${MODULENAME} | preCreateToken`);
 
         const originalName = getProperty(token.data.flags, MODULENAME + ".OriginalName") || token.actor?.name;
         console.log(originalName);
