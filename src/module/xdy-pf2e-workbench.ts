@@ -47,8 +47,8 @@ function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
     game.settings.register(MODULENAME, "npcMystifier", {
-        hint: "Turn on npc mystifier, renaming tokens based on their traits if Alt (configurable) is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.SETTINGS.npcMystifier.Hint`),
-        name: "Turn on npc mystifier.", // game.i18n.localize(`${MODULENAME}.npcMystifier.Name`),
+        name: "Turn on npc mystifier.", // game.i18n.localize(`${MODULENAME}.settings.npcMystifier.on.Name`),
+        hint: "Turn on npc mystifier, renaming tokens based on their traits if Alt (configurable) is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.settings.npcMystifier.on.Hint`),
         scope: "world",
         config: true,
         default: true,
@@ -56,16 +56,16 @@ function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierAddRandomNumber", {
-        hint: "Turns on adding a random number when mystifying npcs.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.Hint`),
         name: "Add random number to name.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.Name`),
+        hint: "Turns on adding a random number when mystifying npcs.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.addRandomNumber.Hint`),
         scope: "world",
         config: true,
         default: true,
         type: Boolean,
     });
     game.settings.register(MODULENAME, "npcMystifierFilterRarities", {
-        hint: "Filter out rarities from the mystified name.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierFilterRarities.Hint`),
-        name: "No npc rarity in name.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierFilterRarities.Name`),
+        name: "No npc rarity in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Name`),
+        hint: "Filter out rarities from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.filterRarities.Hint`),
         scope: "world",
         config: true,
         default: false,
@@ -73,8 +73,8 @@ function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierKey", {
-        name: "Key to mystify", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKey.Hint`),
-        hint: "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (the default) it also hides the npc.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKey.Name`),
+        name: "Key to mystify", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.key.Hint`),
+        hint: "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (the default) it also hides the npc.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifier.key.Name`),
         scope: "world",
         config: true,
         type: String,
