@@ -7,7 +7,7 @@ This module is intended to hold a few features for the foundry vtt pf2e system t
 
 ## Current features
 
-* NPC Mystification according to my house rules.
+* NPC Mystification that sets the npc name to it's traits if Alt is held when the npc is dragged to the scene. (E.g. a 'Skeletal Champion' would become 'Common Undead Skeleton'. By default a number is added to the npc name and the rarity can optionally be excluded (there are settings for both).
 
 ## Installation
 

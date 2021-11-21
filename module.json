@@ -1,6 +1,6 @@
 {
     "name": "xdy-pf2e-workbench",
-    "title": "xdy-pf2e-workbench",
+    "title": "PF2E Workbench",
     "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
     "url": "https://github.com/xdy/xdy-pf2e-workbench/",
     "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json",
