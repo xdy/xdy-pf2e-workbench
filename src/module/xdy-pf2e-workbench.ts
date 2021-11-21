@@ -13,6 +13,9 @@ import { PF2E_CREATURE_FAMILIES, PF2E_CREATURE_TYPES, PF2E_RARITIES } from "./xd
 
 const MODULENAME = "xdy-pf2e-workbench";
 
+// Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
+let mystifyKey: string;
+
 // Initialize module
 Hooks.once("init", async () => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
@@ -44,7 +47,7 @@ function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
     game.settings.register(MODULENAME, "npcMystifier", {
-        hint: "Turn on npc mystifier, renaming tokens based on their traits if Alt is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.SETTINGS.npcMystifier.Hint`),
+        hint: "Turn on npc mystifier, renaming tokens based on their traits if aLT is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.SETTINGS.npcMystifier.Hint`),
         name: "Turn on npc mystifier.", // game.i18n.localize(`${MODULENAME}.npcMystifier.Name`),
         scope: "world",
         config: true,
@@ -68,6 +71,23 @@ function registerSettings() {
         default: false,
         type: Boolean,
     });
+
+    game.settings.register(MODULENAME, "npcMystifierKey", {
+        name: "Key to mystify", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKey.Hint`),
+        hint: "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (the default) it also hides the npc.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKey.Name`),
+        scope: "world",
+        config: true,
+        type: String,
+        choices: {
+            Alt: "Alt",
+            Control: "Ctrl",
+        },
+        default: "Alt",
+        onChange: (key) => {
+            return (mystifyKey = <string>key);
+        },
+    });
+    mystifyKey = <string>game.settings.get(MODULENAME, "npcMystifierKey");
 }
 
 // Add any additional hooks if necessary
@@ -85,7 +105,7 @@ Hooks.on("preCreateToken", async (token: Token, data: any) => {
         console.log(originalName);
         let name: string;
         // @ts-ignore Nope, game.keyboard is never *actually* undefined. Shut up, TypeScript.
-        if (game.keyboard.isDown("Alt") && !hasProperty(data.flags, MODULENAME + ".OriginalName")) {
+        if (game.keyboard.isDown(mystifyKey) && !hasProperty(data.flags, MODULENAME + ".OriginalName")) {
             //Option to filter out other traits?
             let traitsList = token?.actor?.data?.data["traits"]["traits"]?.value;
             if (game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {

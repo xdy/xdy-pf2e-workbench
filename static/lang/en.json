@@ -1,16 +1,20 @@
 {
     "SETTINGS": {
         "npcMystifier": {
-            "hint": "Turn on npc mystifier, renaming tokens based on their traits if Alt is clicked when adding to scene.",
-            "name": "Turn on npc mystifier."
+            "name": "Turn on npc mystifier.",
+            "hint": "Turn on npc mystifier, renaming tokens based on their traits if Alt is clicked when adding to scene."
         },
         "npcMystifierAddRandomNumber": {
-            "hint": "Turns on adding a random number when mystifying npcs.",
-            "name": "Add random number to name."
+            "name": "Add random number to name.",
+            "hint": "Turns on adding a random number when mystifying npcs."
         },
         "npcMystifierFilterRarities": {
-            "hint": "Filter out rarities from the mystified name.",
-            "name": "No npc rarity in the name."
+            "name": "No npc rarity in the name.",
+            "hint": "Filter out rarities from the mystified name."
+        },
+        "npcMystifierKey": {
+            "name": "Key to mystify",
+            "hint": "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (the default) it also hides the npc."
         }
     }
 }
