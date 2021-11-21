@@ -1,3 +1,10 @@
+# 1.0.0 (2021-11-21)
+
+
+### Features
+
+* Seems to work. ([9e51f85](https://github.com/xdy/xdy-pf2e-workbench/commit/9e51f85dfb5e1544ebcff7b86b383ab149b9f46c))
+
 # 1.0.0 (2021-08-09)
 
 
