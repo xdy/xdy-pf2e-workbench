@@ -10,6 +10,22 @@
                     "name": "Add random number to name.",
                     "hint": "Turns on adding a random number when mystifying npcs."
                 },
+                "npcMystifierFilterEliteWeak": {
+                    "name": "No npc elite/weak status in name.",
+                    "hint": "Filter out elite/weak from the mystified name."
+                },
+                "npcMystifierFilterCreatureTypesTraits": {
+                    "name": "No npc creature type traits in name.",
+                    "hint": "Filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name."
+                },
+                "npcMystifierFilterCreatureFamilyTraits": {
+                    "name": "No npc creature family traits in name.",
+                    "hint": "Filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name."
+                },
+                "npcMystifierFilterOthers": {
+                    "name": "No npc traits not in the above trait types.",
+                    "hint": "Filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name."
+                },
                 "npcMystifierFilterRarities": {
                     "name": "No npc rarity in the name.",
                     "hint": "Filter out rarities from the mystified name."

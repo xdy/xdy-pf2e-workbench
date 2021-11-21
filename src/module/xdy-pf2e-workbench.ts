@@ -47,8 +47,8 @@ function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
     game.settings.register(MODULENAME, "npcMystifier", {
-        name: "Turn on npc mystifier.", // game.i18n.localize(`${MODULENAME}.settings.npcMystifier.on.Name`),
-        hint: "Turn on npc mystifier, renaming tokens based on their traits if Alt (configurable) is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.settings.npcMystifier.on.Hint`),
+        name: "Turn on npc mystifier.", // game.i18n.localize(`${MODULENAME}.settings.npcMystifierOn.Name`),
+        hint: "Turn on npc mystifier, renaming tokens based on their traits if Alt (configurable) is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.settings.npcMystifierOn.Hint`),
         scope: "world",
         config: true,
         default: true,
@@ -57,7 +57,7 @@ function registerSettings() {
 
     game.settings.register(MODULENAME, "npcMystifierAddRandomNumber", {
         name: "Add random number to name.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.Name`),
-        hint: "Turns on adding a random number when mystifying npcs.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.addRandomNumber.Hint`),
+        hint: "Turns on adding a random number when mystifying npcs.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierAddRandomNumber.Hint`),
         scope: "world",
         config: true,
         default: true,
@@ -66,7 +66,7 @@ function registerSettings() {
 
     game.settings.register(MODULENAME, "npcMystifierFilterRarities", {
         name: "No npc rarity in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Name`),
-        hint: "Filter out rarities from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.filterRarities.Hint`),
+        hint: "Filter out rarities from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Hint`),
         scope: "world",
         config: true,
         default: false,
@@ -74,8 +74,35 @@ function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierFilterEliteWeak", {
-        name: "No npc elite/weak status in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.FilterElitWeak.Name`),
-        hint: "Filter out elite/weak from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.filterEliteWeak.Hint`),
+        name: "No npc elite/weak status in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterElitWeak.Name`),
+        hint: "Filter out elite/weak from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterEliteWeak.Hint`),
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "npcMystifierFilterCreatureTypesTraits", {
+        name: "No npc creature type traits in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterCreatureTypesTraits.Name`),
+        hint: "Filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterCreatureTypesTraits.Hint`),
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "npcMystifierFilterCreatureFamilyTraits", {
+        name: "No npc creature family traits in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterCreatureFamilyTraits.Name`),
+        hint: "Filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterCreatureFamilyTraits.Hint`),
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "npcMystifierFilterOtherTraits", {
+        name: "No npc traits not in the above trait types.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.FilterOtherTraits.Name`),
+        hint: "Filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterOtherTraits.Hint`),
         scope: "world",
         config: true,
         default: false,
@@ -84,7 +111,7 @@ function registerSettings() {
 
     game.settings.register(MODULENAME, "npcMystifierFilterBlacklist", {
         name: "Blacklist traits to never add to name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterBlacklist.Name`),
-        hint: "Filter out all words in this comma-separated blacklist from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.filterBlacklist.Hint`),
+        hint: "Filter out all words in this comma-separated blacklist from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterBlacklist.Hint`),
         scope: "world",
         config: true,
         default: "",
@@ -92,8 +119,8 @@ function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierPrefix", {
-        name: "Word to prefix new name with", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.prefix.Hint`),
-        hint: "What to prefix new name with (default 'Unknown').", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifier.prefix.Name`),
+        name: "Word to prefix new name with", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierPrefix.Hint`),
+        hint: "What to prefix new name with (default 'Unknown').", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierPrefix.Name`),
         scope: "world",
         config: true,
         type: String,
@@ -139,12 +166,6 @@ Hooks.on("preCreateToken", async (token: Token, data: any) => {
             let traitsList = token?.actor?.data?.data["traits"]["traits"]?.value;
 
             //TODO Clean up this mess
-            if (game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
-                traitsList = traitsList.filter((trait: string) => !TRAITS.RARITIES.includes(trait));
-            }
-            if (game.settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
-                traitsList = traitsList.filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait));
-            }
             if (game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
                 const blacklist =
                     (<string>game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")).split(",") || null;
@@ -154,15 +175,31 @@ Hooks.on("preCreateToken", async (token: Token, data: any) => {
                     });
                 }
             }
-            const eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
-            const rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
-            const creatures = traitsList.filter((trait: string) => TRAITS.CREATURE_TYPES.includes(trait));
-            const families = traitsList.filter((trait: string) => TRAITS.CREATURE_FAMILIES.includes(trait));
-            const others = traitsList
-                .filter((trait: string) => !eliteWeak.includes(trait))
-                .filter((trait: string) => !rarities.includes(trait))
-                .filter((trait: string) => !creatures.includes(trait))
-                .filter((trait: string) => !families.includes(trait));
+            let eliteWeak: string[] = [];
+            if (!game.settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
+                eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
+            }
+            let rarities: string[] = [];
+            if (!game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
+                rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
+            }
+            let creatures: string[] = [];
+            if (!game.settings.get(MODULENAME, "npcMystifierFilterCreatureTypesTraits")) {
+                creatures = traitsList.filter((trait: string) => TRAITS.CREATURE_TYPES.includes(trait));
+            }
+            let families: string[] = [];
+            if (!game.settings.get(MODULENAME, "npcMystifierFilterCreatureFamilyTraits")) {
+                families = traitsList.filter((trait: string) => TRAITS.CREATURE_FAMILIES.includes(trait));
+            }
+            let others: string[] = [];
+            if (!game.settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
+                others = traitsList
+                    .filter((trait: string) => !eliteWeak.includes(trait))
+                    .filter((trait: string) => !rarities.includes(trait))
+                    .filter((trait: string) => !creatures.includes(trait))
+                    .filter((trait: string) => !families.includes(trait));
+            }
+
             traitsList = [<string>game.settings.get(MODULENAME, "npcMystifierPrefix")]
                 .concat(eliteWeak)
                 .concat(rarities)
