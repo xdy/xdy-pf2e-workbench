@@ -76,6 +76,7 @@ function registerSettings() {
 //TODO Make it so holding shift pops up a dialog where one can change the name
 //TODO Fix localization
 //TODO Can I use the pf2e localization strings?
+//TODO Add a way to revert the name change from the sheet. (Hover over the name gives a context menu? Or inject a button on the sheet title bar?)
 Hooks.on("preCreateToken", async (token: Token, data: any) => {
     if (game.settings.get(MODULENAME, "npcMystifier")) {
         console.log(MODULENAME + " | preCreateToken");
