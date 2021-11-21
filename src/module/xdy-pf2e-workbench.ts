@@ -2,7 +2,7 @@
  * This is your TypeScript entry file for Foundry VTT.
  * Register custom settings, sheets, and constants using the Foundry API.
  * Change this heading to be more descriptive to your module, or remove it.
- * Author: xdy (Jonas Karlsson
+ * Author: xdy (Jonas Karlsson)
  * Content License: See LICENSE and README.md for license details
  * Software License: Apache 2.0
  */
@@ -40,6 +40,7 @@ Hooks.once("ready", async () => {
 // Add any additional hooks if necessary
 //TODO Move out to each separate app (once there are more than one...)
 //TODO Start using the actual pf2e types
+//TODO Make it so holding shift pops up a dialog where one can change the name
 // if (true) { //game.settings.get('xdy-pf2e-workbench', 'NpcMystifierOn')) {
 Hooks.on("preCreateToken", async (token: Token, data: any) => {
     console.log(token, token.data, data);
