@@ -151,8 +151,12 @@ function registerSettings() {
 //TODO Make it so holding shift pops up a dialog where one can change the name
 //TODO Fix localization
 //TODO Can I use the pf2e localization strings?
-//TODO Add a way to revert the name change from the sheet. (Hover over the name gives a context menu? Or inject a button on the sheet title bar?)
+//TODO Add a way to revert the name change from the sheet. (Hover over the name gives a context menu? Or inject a button on the sheet title bar? Maybe just a function that can be called from a macro?)
 //TODO Add the option to randomize a name from a list of names (kinda like token mold)
+//TODO Add the option to replace rarities greater than common with a word (default to 'Unusual')
+//TODO Add a way to disable the 'traits -> name' stuff but keep the rest. I.e. modularize the name generation.
+//TODO Consider doing something to handle the actor name or the original token name being shown in abilities, etc.
+//TODO Make issues out of the harder of the above todos...
 Hooks.on("preCreateToken", async (token: Token, data: any) => {
     if (game.settings.get(MODULENAME, "npcMystifier")) {
         console.log(`${MODULENAME} | preCreateToken`);
