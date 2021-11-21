@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v1.0.0...v1.0.1) (2021-11-21)
+
+
+### Bug Fixes
+
+* Fix module name and description ([cd33bd1](https://github.com/xdy/xdy-pf2e-workbench/commit/cd33bd1fd799f6ccd243080a3c04dbd38bf5f0bd))
+
 # 1.0.0 (2021-11-21)
 
 
