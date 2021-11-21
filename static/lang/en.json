@@ -1,1 +1,16 @@
-{}
+{
+    "SETTINGS": {
+        "npcMystifier": {
+            "hint": "Turn on npc mystifier, renaming tokens based on their traits if Alt is clicked when adding to scene.",
+            "name": "Turn on npc mystifier."
+        },
+        "npcMystifierAddRandomNumber": {
+            "hint": "Turns on adding a random number when mystifying npcs.",
+            "name": "Add random number to name."
+        },
+        "npcMystifierFilterRarities": {
+            "hint": "Filter out rarities from the mystified name.",
+            "name": "No npc rarity in the name."
+        }
+    }
+}

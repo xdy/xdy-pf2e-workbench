@@ -8,13 +8,14 @@
  */
 
 // Import TypeScript modules
-import { registerSettings } from "./settings";
 import { preloadTemplates } from "./preloadTemplates";
 import { PF2E_CREATURE_FAMILIES, PF2E_CREATURE_TYPES, PF2E_RARITIES } from "./xdy-pf2e-constants";
 
+const MODULENAME = "xdy-pf2e-workbench";
+
 // Initialize module
 Hooks.once("init", async () => {
-    console.log("xdy-pf2e-workbench | Initializing xdy-pf2e-workbench");
+    console.log(MODULENAME + " | Initializing xdy-pf2e-workbench");
 
     // Assign custom classes and constants here
 
@@ -29,56 +30,96 @@ Hooks.once("init", async () => {
 
 // Setup module
 Hooks.once("setup", async () => {
+    console.log(MODULENAME + " | Setting up");
     // Do anything after initialization but before ready
 });
 
 // When ready
 Hooks.once("ready", async () => {
     // Do anything once the module is ready
+    console.log(MODULENAME + " | Ready");
 });
+
+function registerSettings() {
+    console.log(MODULENAME + " | registerSettings");
+
+    game.settings.register(MODULENAME, "npcMystifier", {
+        hint: "Turn on npc mystifier, renaming tokens based on their traits if Alt is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.SETTINGS.npcMystifier.Hint`),
+        name: "Turn on npc mystifier.", // game.i18n.localize(`${MODULENAME}.npcMystifier.Name`),
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "npcMystifierAddRandomNumber", {
+        hint: "Turns on adding a random number when mystifying npcs.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.Hint`),
+        name: "Add random number to name.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.Name`),
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean,
+    });
+    game.settings.register(MODULENAME, "npcMystifierFilterRarities", {
+        hint: "Filter out rarities from the mystified name.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierFilterRarities.Hint`),
+        name: "No npc rarity in name.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierFilterRarities.Name`),
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+}
 
 // Add any additional hooks if necessary
 //TODO Move out to each separate app (once there are more than one...)
 //TODO Start using the actual pf2e types
 //TODO Make it so holding shift pops up a dialog where one can change the name
-// if (true) { //game.settings.get('xdy-pf2e-workbench', 'NpcMystifierOn')) {
+//TODO Fix localization
+//TODO Can I use the pf2e localization strings?
 Hooks.on("preCreateToken", async (token: Token, data: any) => {
-    console.log(token, token.data, data);
+    if (game.settings.get(MODULENAME, "npcMystifier")) {
+        console.log(MODULENAME + " | preCreateToken");
 
-    const originalName = getProperty(token.data.flags, "xdy-pf2e-workbench.OriginalName") || token.actor?.name;
-    console.log(originalName);
-    let name;
-    // @ts-ignore Nope, game.keyboard is never *actually* undefined. Shut up, TypeScript.
-    if (game.keyboard.isDown("Alt") && !hasProperty(data.flags, "xdy-pf2e-workbench.OriginalName")) {
-        //Option to filter out other traits?
-        let traitsList = token?.actor?.data?.data["traits"]["traits"]?.value;
-        // if (game.settings.get('xdy-pf2e-workbench', 'NpcMystifierFilterRarities')) {
-        //     traitsList = traitsList.filter((trait: string) => !PF2E_RARITIES.includes(trait));
-        // }
+        const originalName = getProperty(token.data.flags, MODULENAME + ".OriginalName") || token.actor?.name;
+        console.log(originalName);
+        let name: string;
+        // @ts-ignore Nope, game.keyboard is never *actually* undefined. Shut up, TypeScript.
+        if (game.keyboard.isDown("Alt") && !hasProperty(data.flags, MODULENAME + ".OriginalName")) {
+            //Option to filter out other traits?
+            let traitsList = token?.actor?.data?.data["traits"]["traits"]?.value;
+            if (game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
+                traitsList = traitsList.filter((trait: string) => !PF2E_RARITIES.includes(trait));
+            }
 
-        const rarities = traitsList.filter((trait: string) => PF2E_RARITIES.includes(trait));
-        const creatures = traitsList.filter((trait: string) => PF2E_CREATURE_TYPES.includes(trait));
-        const families = traitsList.filter((trait: string) => PF2E_CREATURE_FAMILIES.includes(trait));
-        const others = traitsList
-            .filter((trait: string) => !rarities.includes(trait))
-            .filter((trait: string) => !creatures.includes(trait))
-            .filter((trait: string) => !families.includes(trait));
-        traitsList = rarities.concat(creatures).concat(families).concat(others);
-        name = traitsList
-            .join(" ")
-            .replace(/\b\w/g, (l: string) => game.i18n.localize("PF2E.TraitDescription." + l.toUpperCase()));
+            const rarities = traitsList.filter((trait: string) => PF2E_RARITIES.includes(trait));
+            const creatures = traitsList.filter((trait: string) => PF2E_CREATURE_TYPES.includes(trait));
+            const families = traitsList.filter((trait: string) => PF2E_CREATURE_FAMILIES.includes(trait));
+            const others = traitsList
+                .filter((trait: string) => !rarities.includes(trait))
+                .filter((trait: string) => !creatures.includes(trait))
+                .filter((trait: string) => !families.includes(trait));
+            traitsList = rarities.concat(others).concat(creatures).concat(families);
 
-        // if (game.settings.get("xdy-pf2e-workbench", "NpcMystifierAddRandomNumber")) {
-        name += ` ${Math.floor(Math.random() * 100)}`;
-        // }
-    } else {
-        name = originalName;
+            name = traitsList
+                .map((trait: string) => {
+                    return trait.charAt(0).toUpperCase() + trait.slice(1);
+                })
+                // .map((trait: string) => {
+                //     return game.i18n.localize(`PF2E.TraitDescription.${trait}`);
+                // })
+                .join(" ");
+
+            if (game.settings.get(MODULENAME, "npcMystifierAddRandomNumber")) {
+                name += ` ${Math.floor(Math.random() * 100)}`;
+            }
+        } else {
+            name = originalName;
+        }
+        data.name = name;
+        setProperty(data.flags, MODULENAME + ".OriginalName", originalName);
+        // @ts-ignore
+        token.data.update(data);
+        console.log(originalName + " changed to " + name);
+        console.log(token.data);
     }
-    data.name = name;
-    setProperty(data.flags, "xdy-pf2e-workbench.OriginalName", originalName);
-    // @ts-ignore
-    token.data.update(data);
-    console.log(originalName + " changed to " + name);
-    console.log(token.data);
 });
-//}
