@@ -111,6 +111,7 @@ Hooks.on("preCreateToken", async (token: Token, data: any) => {
 
             if (game.settings.get(MODULENAME, "npcMystifierAddRandomNumber")) {
                 name += ` ${Math.floor(Math.random() * 100)}`;
+                //TODO Check if token exists with this name, if so, reroll.
             }
         } else {
             name = originalName;
