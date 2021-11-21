@@ -47,7 +47,7 @@ function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
     game.settings.register(MODULENAME, "npcMystifier", {
-        hint: "Turn on npc mystifier, renaming tokens based on their traits if aLT is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.SETTINGS.npcMystifier.Hint`),
+        hint: "Turn on npc mystifier, renaming tokens based on their traits if Alt (configurable) is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.SETTINGS.npcMystifier.Hint`),
         name: "Turn on npc mystifier.", // game.i18n.localize(`${MODULENAME}.npcMystifier.Name`),
         scope: "world",
         config: true,

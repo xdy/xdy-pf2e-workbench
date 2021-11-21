@@ -2,7 +2,7 @@
     "SETTINGS": {
         "npcMystifier": {
             "name": "Turn on npc mystifier.",
-            "hint": "Turn on npc mystifier, renaming tokens based on their traits if Alt is clicked when adding to scene."
+            "hint": "Turn on npc mystifier, renaming tokens based on their traits if Alt (configurable) is clicked when adding to scene."
         },
         "npcMystifierAddRandomNumber": {
             "name": "Add random number to name.",
