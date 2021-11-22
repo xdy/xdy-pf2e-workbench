@@ -63,8 +63,9 @@ function filterTraitList(traitsList: any) {
 }
 
 export function generateNameFromTraits(token: Token) {
-    //Option to filter out other traits?
-    let traitsList = token?.actor?.data?.data["traits"]["traits"]?.value;
+    let traitsList = token?.actor?.data?.data["traits"]["traits"]?.value.filter(
+        (trait: string, index: number, self: string[]) => self.indexOf(trait) === index
+    );
 
     traitsList = filterTraitList(traitsList);
 
