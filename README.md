@@ -10,8 +10,8 @@ get done) can be seen [here](featureIdeas.md)
 ## Current features
 
 * NPC Mystification that sets the npc name to it's traits if Alt is held when the npc is dragged to the scene. (E.g. a '
-  Skeletal Champion' would become 'Common Undead Skeleton'. There are settings to add a number after the name (default),
-  whether to use Alt (default) or Ctrl to mystify, whether to include rarity in name (default).
+  Skeletal Champion' would by default become 'Unknown Mindless Undead Skeleton' + random number. There are settings to add a number after the name (default),
+  whether to use Alt (default) or Ctrl to mystify, whether to include rarity in name (default), etc.
 
 ## Installation
 
