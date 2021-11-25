@@ -32,7 +32,7 @@
         "@semantic-release/exec": "^6.0.2",
         "@semantic-release/git": "^10.0.1",
         "@semantic-release/github": "^8.0.2",
-        "@semantic-release/release-notes-generator": "^10.0.2",
+        "@semantic-release/release-notes-generator": "^10.0.3",
         "@types/copy-webpack-plugin": "^8.0.1",
         "@types/css-minimizer-webpack-plugin": "^3.0.2",
         "@types/fs-extra": "^9.0.13",
