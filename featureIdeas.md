@@ -30,7 +30,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) are:
     Unblocker:
       Module that allows walls (including unidirectional ones) to have a 'condition to ignore' that could be a skill check, or having a particular ability, etc.
       
-    Exploration Manager:
+    Exploration Manager (basically https://gitlab.com/silvative/pf2e-exploration-effects, but with some automation. Ask Cora if she'd prefer it as a PR to her module):
       Feature that for each of the exploration activities adds an effect that does 'the appropriate things' to the character with it. A few examples below:
         * Avoid Notice: halve speed (unless Swift Sneak/Legendary Sneak), sets initiative to Stealth, 
         * Defend: Halve speed, add Raised shield effect (will expiration work right for that?)
