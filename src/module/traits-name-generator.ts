@@ -23,13 +23,16 @@ function filterTraitList(traitsList: any) {
     let rarities: string[] = [];
     if (!game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
         rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
-        const replacement: string = <string>game.settings.get(MODULENAME, "npcMystifierFilterRaritiesReplacement");
+        const replacement: string = (<string>(
+            game.settings.get(MODULENAME, "npcMystifierFilterRaritiesReplacement")
+        )).toLocaleLowerCase();
         if (replacement !== "") {
             rarities = rarities.map((trait: string) => {
                 if (trait !== "common") {
                     return replacement;
+                } else {
+                    return trait;
                 }
-                return trait;
             });
         }
     }
@@ -47,10 +50,10 @@ function filterTraitList(traitsList: any) {
     let others: string[] = [];
     if (!game.settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
         others = traitsList
-            .filter((trait: string) => !eliteWeak.includes(trait))
-            .filter((trait: string) => !rarities.includes(trait))
-            .filter((trait: string) => !creatures.includes(trait))
-            .filter((trait: string) => !families.includes(trait));
+            .filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait))
+            .filter((trait: string) => !TRAITS.RARITIES.includes(trait))
+            .filter((trait: string) => !TRAITS.CREATURE_TYPES.includes(trait))
+            .filter((trait: string) => !TRAITS.CREATURE_FAMILIES.includes(trait));
     }
 
     return [<string>game.settings.get(MODULENAME, "npcMystifierPrefix")]
@@ -63,15 +66,23 @@ function filterTraitList(traitsList: any) {
 }
 
 export function generateNameFromTraits(token: Token) {
-    let traitsList = token?.actor?.data?.data["traits"]["traits"]?.value.filter(
+    let traitsList: string[] = token?.actor?.data?.data["traits"]["traits"]?.value.filter(
         (trait: string, index: number, self: string[]) => self.indexOf(trait) === index
     );
+    const customTraits = token?.actor?.data?.data["traits"]["traits"]["custom"];
+    if (customTraits) {
+        traitsList = traitsList.concat(customTraits.trim().split(","));
+    }
+    const tokenrarities = token?.actor?.data?.data["traits"]["rarity"]?.value;
+    if (tokenrarities) {
+        traitsList = traitsList.concat(tokenrarities);
+    }
 
     traitsList = filterTraitList(traitsList);
 
     let name = traitsList
         .map((trait: string) => {
-            return trait.charAt(0).toUpperCase() + trait.slice(1);
+            return trait?.charAt(0).toUpperCase() + trait?.slice(1);
         })
         // .map((trait: string) => {
         //     return game.i18n.localize(`PF2E.TraitDescription.${trait}`);

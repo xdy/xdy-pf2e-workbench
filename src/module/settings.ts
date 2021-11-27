@@ -9,7 +9,7 @@ export function registerSettings() {
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
     game.settings.register(MODULENAME, "npcMystifier", {
         name: "Turn on npc mystifier.", // game.i18n.localize(`${MODULENAME}.settings.npcMystifierOn.Name`),
-        hint: "Turn on npc mystifier, renaming tokens based on their traits if Alt (configurable) is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.settings.npcMystifierOn.Hint`),
+        hint: "Turn on npc mystifier, renaming tokens based on their traits if Ctrl (configurable) is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.settings.npcMystifierOn.Hint`),
         scope: "world",
         config: true,
         default: true,
@@ -49,7 +49,7 @@ export function registerSettings() {
 
     game.settings.register(MODULENAME, "npcMystifierKey", {
         name: "Key to mystify", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.key.Hint`),
-        hint: "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (the default) it also hides the npc.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifier.key.Name`),
+        hint: "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (not the default) it also hides the npc.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifier.key.Name`),
         scope: "world",
         config: true,
         type: String,
@@ -57,7 +57,7 @@ export function registerSettings() {
             Alt: "Alt",
             Control: "Ctrl",
         },
-        default: "Alt",
+        default: "Control",
         onChange: (key) => {
             return (mystifyKey = <string>key);
         },
@@ -78,7 +78,7 @@ export function registerSettings() {
         hint: "Filter out rarities from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Hint`),
         scope: "world",
         config: true,
-        default: false,
+        default: true,
         type: Boolean,
     });
 
