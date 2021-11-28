@@ -25,7 +25,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) are:
         Bonus:  Configure what compendium/s to search.
         Status: Should probably just be a bonus feature of PF2e Merchant Restock.
 
-    Unblocker:
+    Wallhack:
       Module that allows walls (including unidirectional ones) to have a 'condition to ignore' that could be a skill check, or having a particular feat, etc.
       
     Exploration Manager (basically https://gitlab.com/silvative/pf2e-exploration-effects, but with some automation. Ask Cora if she'd prefer it as a PR to her module):
