@@ -29,8 +29,13 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
 }
 
 export function preTokenCreateMystification(token: Token) {
-    // @ts-ignore Nope, game.keyboard is never *actually* undefined. Shut up, TypeScript.
-    if (game.keyboard.isDown(mystifyKey) && (!game.keyboard.isDown("V") || game.keyboard.isDown("Insert"))) {
+    if (
+        game.user?.isGM &&
+        // @ts-ignore Nope, game.keyboard is never *actually* undefined. Shut up, TypeScript.
+        game.keyboard.isDown(mystifyKey) &&
+        // @ts-ignore Nope, game.keyboard is never *actually* undefined. Shut up, TypeScript.
+        (!game.keyboard.isDown("V") || game.keyboard.isDown("Insert"))
+    ) {
         mystifyToken(token, isMystified(token));
     }
 }
@@ -41,7 +46,7 @@ function isMystified(token: Token | null) {
 
 export function renderNameHud(data: any, html: JQuery<HTMLElement>) {
     let token: Token;
-    if (canvas instanceof Canvas && canvas && canvas["tokens"]) {
+    if (game.user?.isGM && canvas instanceof Canvas && canvas && canvas["tokens"]) {
         token = canvas["tokens"].get(data._id);
 
         const title = isMystified(token) ? "Unmystify" : "Mystify";
