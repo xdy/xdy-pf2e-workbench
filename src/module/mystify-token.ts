@@ -62,6 +62,6 @@ export function renderNameHud(data: any, html: JQuery<HTMLElement>) {
             }
             hudElement.toggleClass("active");
         });
-        html.find("div.col.right").append(toggle);
+        html.find("div.col.left").append(toggle);
     }
 }
