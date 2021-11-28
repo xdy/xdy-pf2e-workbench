@@ -13,6 +13,10 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
                 default:
                     name = generateNameFromTraits(token);
             }
+            if ((game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber")) {
+                name += ` ${Math.floor(Math.random() * 100)}`;
+                //TODO Check if token exists with this name, if so, reroll.
+            }
         }
     }
     if (token.document) {

@@ -83,7 +83,7 @@ export function generateNameFromTraits(token: Token) {
 
     traitsList = filterTraitList(traitsList);
 
-    let name = traitsList
+    const name = traitsList
         .map((trait: string) => {
             return trait?.charAt(0).toUpperCase() + trait?.slice(1);
         })
@@ -92,9 +92,5 @@ export function generateNameFromTraits(token: Token) {
         // })
         .join(" ");
 
-    if ((game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber")) {
-        name += ` ${Math.floor(Math.random() * 100)}`;
-        //TODO Check if token exists with this name, if so, reroll.
-    }
     return name;
 }
