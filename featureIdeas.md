@@ -3,11 +3,9 @@ My current ideas (as in, no guarantee they'll ever actually get done) are:
     NPC Mystifier:
       A module that when a creature is dropped on the canvas renames it to something like 'Unknown ' + Size trait + Type trait. E.g. 'Young Copper Dragon' would become 'Unknown Large Dragon' and stores the original name on a flag on the token. A token button and/or a macro that if called on an actor with that flag set, revert it to the original name is also needed.
         Bonus: Add additional traits based on Recall Knowledge roll, or just all the time? E.g. the above might become 'Unknown Large Earth Dragon'.
-        Bonus: With the option to keep type secret and just set 'Creature' instead.
         Bonus: Possibly roll random type and additional traits for crit fails on CK. So, the above might become 'Unknown Large Undead Demon'. :)
-        Bonus: Option to skip size as that's visible from token size anyway.
         Bonus: Have the gm somehow see both the token and actor name. Perhaps like 'Unknown Large Dragon (Young Copper Dragon)'
-        Status: In progress
+        Status: MVP is released (configurable mystification from types, with HUD button), no code support for RK.
 
     Quicklootify:
       Module or macro that when one drags an item to a scene creates a Loot Actor and puts the item in that loot actor, giving the loot actor the item's image and name.
@@ -28,7 +26,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) are:
         Status: Should probably just be a bonus feature of PF2e Merchant Restock.
 
     Unblocker:
-      Module that allows walls (including unidirectional ones) to have a 'condition to ignore' that could be a skill check, or having a particular ability, etc.
+      Module that allows walls (including unidirectional ones) to have a 'condition to ignore' that could be a skill check, or having a particular feat, etc.
       
     Exploration Manager (basically https://gitlab.com/silvative/pf2e-exploration-effects, but with some automation. Ask Cora if she'd prefer it as a PR to her module):
       Feature that for each of the exploration activities adds an effect that does 'the appropriate things' to the character with it. A few examples below:
