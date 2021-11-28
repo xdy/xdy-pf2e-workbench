@@ -54,13 +54,13 @@ Hooks.once("ready", async () => {
 Hooks.on("preCreateToken", async (token: Token) => {
     console.log(`${MODULENAME} | preCreateToken`);
 
-    if (game.settings.get(MODULENAME, "npcMystifier")) {
+    if ((game as Game).settings.get(MODULENAME, "npcMystifier")) {
         preTokenCreateMystification(token);
     }
 });
 
-Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: Token.Data) => {
-    if (game.settings.get(MODULENAME, "npcMystifier")) {
+Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
+    if ((game as Game).settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);
     }
 });

@@ -1,12 +1,11 @@
-// Add any additional hooks if necessary
-import { TRAITS } from "./xdy-pf2e-constants";
+import { GAME, TRAITS } from "./xdy-pf2e-constants";
 import { MODULENAME } from "./xdy-pf2e-workbench";
 
 function filterTraitList(traitsList: any) {
     //TODO Clean up this mess
-    if (game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
+    if (GAME.settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
         const blacklist =
-            (<string>game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")).toLocaleLowerCase().split(",") ||
+            (<string>GAME.settings.get(MODULENAME, "npcMystifierFilterBlacklist")).toLocaleLowerCase().split(",") ||
             null;
         if (blacklist) {
             traitsList = traitsList.filter((trait: string) => {
@@ -16,15 +15,15 @@ function filterTraitList(traitsList: any) {
     }
 
     let eliteWeak: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
+    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
         eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
     }
 
     let rarities: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
+    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
         rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
         const replacement: string = (<string>(
-            game.settings.get(MODULENAME, "npcMystifierFilterRaritiesReplacement")
+            GAME.settings.get(MODULENAME, "npcMystifierFilterRaritiesReplacement")
         )).toLocaleLowerCase();
         if (replacement !== "") {
             rarities = rarities.map((trait: string) => {
@@ -38,17 +37,17 @@ function filterTraitList(traitsList: any) {
     }
 
     let creatures: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterCreatureTypesTraits")) {
+    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterCreatureTypesTraits")) {
         creatures = traitsList.filter((trait: string) => TRAITS.CREATURE_TYPES.includes(trait));
     }
 
     let families: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterCreatureFamilyTraits")) {
+    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterCreatureFamilyTraits")) {
         families = traitsList.filter((trait: string) => TRAITS.CREATURE_FAMILIES.includes(trait));
     }
 
     let others: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
+    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
         others = traitsList
             .filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait))
             .filter((trait: string) => !TRAITS.RARITIES.includes(trait))
@@ -56,26 +55,29 @@ function filterTraitList(traitsList: any) {
             .filter((trait: string) => !TRAITS.CREATURE_FAMILIES.includes(trait));
     }
 
-    return [<string>game.settings.get(MODULENAME, "npcMystifierPrefix")]
+    return [<string>GAME.settings.get(MODULENAME, "npcMystifierPrefix")]
         .concat(eliteWeak)
         .concat(rarities)
         .concat(others)
         .concat(creatures)
         .concat(families)
-        .concat([<string>game.settings.get(MODULENAME, "npcMystifierPostfix")]);
+        .concat([<string>GAME.settings.get(MODULENAME, "npcMystifierPostfix")]);
 }
 
 export function generateNameFromTraits(token: Token) {
-    let traitsList: string[] = token?.actor?.data?.data["traits"]["traits"]?.value.filter(
+    const data = token?.actor?.data?.data;
+    // @ts-ignore How to type this?
+    const traits = data?.traits;
+    let traitsList: string[] = traits?.traits?.value.filter(
         (trait: string, index: number, self: string[]) => self.indexOf(trait) === index
     );
-    const customTraits = token?.actor?.data?.data["traits"]["traits"]["custom"];
+    const customTraits = traits?.traits?.custom;
     if (customTraits) {
         traitsList = traitsList.concat(customTraits.trim().split(","));
     }
-    const tokenrarities = token?.actor?.data?.data["traits"]["rarity"]?.value;
-    if (tokenrarities) {
-        traitsList = traitsList.concat(tokenrarities);
+    const tokenRarities = traits.rarity?.value;
+    if (tokenRarities) {
+        traitsList = traitsList.concat(tokenRarities);
     }
 
     traitsList = filterTraitList(traitsList);
@@ -89,7 +91,7 @@ export function generateNameFromTraits(token: Token) {
         // })
         .join(" ");
 
-    if (game.settings.get(MODULENAME, "npcMystifierAddRandomNumber")) {
+    if ((game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber")) {
         name += ` ${Math.floor(Math.random() * 100)}`;
         //TODO Check if token exists with this name, if so, reroll.
     }

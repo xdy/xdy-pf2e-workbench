@@ -1,4 +1,4 @@
-//add PF2E_RARITIES,PF2E_CREATURE_TYPES,PF2E_CREATURE_FAMILIES to an array
+export const GAME = game as Game;
 
 const PF2E_RARITIES: string[] = ["common", "uncommon", "rare", "unique"];
 

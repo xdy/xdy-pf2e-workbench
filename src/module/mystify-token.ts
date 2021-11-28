@@ -1,27 +1,25 @@
 import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "./xdy-pf2e-workbench";
 import { mystifyKey } from "./settings";
+import { GAME } from "./xdy-pf2e-constants";
 
 export async function mystifyToken(token: Token | null, mystified: boolean): Promise<string> {
     if (token === null) return "";
     let name = token?.name || "";
     if (token) {
         if (mystified) {
-            name = token.actor.name;
+            name = token?.actor?.name || "";
         } else {
-            switch (game.settings.get(MODULENAME, "npcMystifierMethod")) {
+            switch ((game as Game).settings.get(MODULENAME, "npcMystifierMethod")) {
                 default:
                     name = generateNameFromTraits(token);
             }
         }
     }
-    // @ts-ignore
     if (token.document) {
-        // @ts-ignore
         await token.document.update({ name: name });
     } else {
         token.data.name = name;
-        // @ts-ignore
         token.data.update(token.data);
     }
 
@@ -30,24 +28,22 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
 
 export function preTokenCreateMystification(token: Token) {
     if (
-        game.user?.isGM &&
-        // @ts-ignore Nope, game.keyboard is never *actually* undefined. Shut up, TypeScript.
-        game.keyboard.isDown(mystifyKey) &&
-        // @ts-ignore Nope, game.keyboard is never *actually* undefined. Shut up, TypeScript.
-        (!game.keyboard.isDown("V") || game.keyboard.isDown("Insert"))
+        GAME.user?.isGM &&
+        GAME.keyboard?.isDown(mystifyKey) &&
+        (!GAME.keyboard?.isDown("V") || GAME.keyboard.isDown("Insert"))
     ) {
         mystifyToken(token, isMystified(token));
     }
 }
 
 function isMystified(token: Token | null) {
-    return token?.data.name !== token?.actor.name || false;
+    return token?.data.name !== token?.actor?.name || false;
 }
 
 export function renderNameHud(data: any, html: JQuery<HTMLElement>) {
-    let token: Token;
-    if (game.user?.isGM && canvas instanceof Canvas && canvas && canvas["tokens"]) {
-        token = canvas["tokens"].get(data._id);
+    let token: Token | null;
+    if ((game as Game).user?.isGM && canvas instanceof Canvas && canvas && canvas.tokens) {
+        token = canvas.tokens.get(data._id) ?? null;
 
         const title = isMystified(token) ? "Unmystify" : "Mystify";
         const toggle = $(

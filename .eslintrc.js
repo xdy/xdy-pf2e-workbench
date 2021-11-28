@@ -35,11 +35,11 @@ module.exports = {
                 extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
             },
             "eslint-import-resolver-typescript": true,
-            typescript: {
-                alwaysTryTypes: true,
-            },
+            typescript: {},
         },
-        "import/parsers": {"@typescript-eslint/parser": [".ts"]},
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts"]
+        },
     },
     plugins: ["prettier", "@typescript-eslint", "import"],
     overrides: [
