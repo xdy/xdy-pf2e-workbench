@@ -1,12 +1,13 @@
-import { GAME, TRAITS } from "./xdy-pf2e-constants";
+import { TRAITS } from "./xdy-pf2e-constants";
 import { MODULENAME } from "./xdy-pf2e-workbench";
 
 function filterTraitList(traitsList: any) {
     //TODO Clean up this mess
-    if (GAME.settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
+    if ((game as Game).settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
         const blacklist =
-            (<string>GAME.settings.get(MODULENAME, "npcMystifierFilterBlacklist")).toLocaleLowerCase().split(",") ||
-            null;
+            (<string>(game as Game).settings.get(MODULENAME, "npcMystifierFilterBlacklist"))
+                .toLocaleLowerCase()
+                .split(",") || null;
         if (blacklist) {
             traitsList = traitsList.filter((trait: string) => {
                 return !blacklist.map((trait: string) => trait.trim()).includes(trait);
@@ -15,15 +16,15 @@ function filterTraitList(traitsList: any) {
     }
 
     let eliteWeak: string[] = [];
-    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
+    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
         eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
     }
 
     let rarities: string[] = [];
-    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
+    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterRarities")) {
         rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
         const replacement: string = (<string>(
-            GAME.settings.get(MODULENAME, "npcMystifierFilterRaritiesReplacement")
+            (game as Game).settings.get(MODULENAME, "npcMystifierFilterRaritiesReplacement")
         )).toLocaleLowerCase();
         if (replacement !== "") {
             rarities = rarities.map((trait: string) => {
@@ -37,17 +38,17 @@ function filterTraitList(traitsList: any) {
     }
 
     let creatures: string[] = [];
-    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterCreatureTypesTraits")) {
+    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterCreatureTypesTraits")) {
         creatures = traitsList.filter((trait: string) => TRAITS.CREATURE_TYPES.includes(trait));
     }
 
     let families: string[] = [];
-    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterCreatureFamilyTraits")) {
+    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterCreatureFamilyTraits")) {
         families = traitsList.filter((trait: string) => TRAITS.CREATURE_FAMILIES.includes(trait));
     }
 
     let others: string[] = [];
-    if (!GAME.settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
+    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
         others = traitsList
             .filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait))
             .filter((trait: string) => !TRAITS.RARITIES.includes(trait))
@@ -55,13 +56,13 @@ function filterTraitList(traitsList: any) {
             .filter((trait: string) => !TRAITS.CREATURE_FAMILIES.includes(trait));
     }
 
-    return [<string>GAME.settings.get(MODULENAME, "npcMystifierPrefix")]
+    return [<string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix")]
         .concat(eliteWeak)
         .concat(rarities)
         .concat(others)
         .concat(creatures)
         .concat(families)
-        .concat([<string>GAME.settings.get(MODULENAME, "npcMystifierPostfix")]);
+        .concat([<string>(game as Game).settings.get(MODULENAME, "npcMystifierPostfix")]);
 }
 
 export function generateNameFromTraits(token: Token) {

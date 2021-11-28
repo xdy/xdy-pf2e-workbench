@@ -1,7 +1,6 @@
 import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "./xdy-pf2e-workbench";
 import { mystifyKey } from "./settings";
-import { GAME } from "./xdy-pf2e-constants";
 
 export async function mystifyToken(token: Token | null, mystified: boolean): Promise<string> {
     if (token === null) return "";
@@ -28,9 +27,9 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
 
 export function preTokenCreateMystification(token: Token) {
     if (
-        GAME.user?.isGM &&
-        GAME.keyboard?.isDown(mystifyKey) &&
-        (!GAME.keyboard?.isDown("V") || GAME.keyboard.isDown("Insert"))
+        (game as Game).user?.isGM &&
+        (game as Game).keyboard?.isDown(mystifyKey) &&
+        (!(game as Game).keyboard?.isDown("V") || (game as Game).keyboard?.isDown("Insert"))
     ) {
         mystifyToken(token, isMystified(token));
     }

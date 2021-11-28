@@ -1,5 +1,3 @@
-export const GAME = game as Game;
-
 const PF2E_RARITIES: string[] = ["common", "uncommon", "rare", "unique"];
 
 const PF2E_CREATURE_TYPES: string[] = [
