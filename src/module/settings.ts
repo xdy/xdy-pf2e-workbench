@@ -73,6 +73,15 @@ export function registerSettings() {
         type: Boolean,
     });
 
+    settings.register(MODULENAME, "npcMystifierKeepRandomNumberWhenDemystified", {
+        name: "Keep random number when demystifying.", //(game as Game).i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKeepRandomNumberWhenDemystified.Name`),
+        hint: "Keep random number (if any) when demystifying npcs.", //(game as Game).i18n.localize(`${MODULENAME}.settings.npcMystifierKeepRandomNumberWhenDemystified.Hint`),
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
     //TODO These apply only to trait mystification and should be grouped together, maybe on a separate tab?
     settings.register(MODULENAME, "npcMystifierFilterRarities", {
         name: "No npc rarity in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Name`),

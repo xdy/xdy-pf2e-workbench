@@ -7,15 +7,23 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
     let name = token?.name || "";
     if (token) {
         if (mystified) {
-            name = token?.actor?.name || "";
+            if ((game as Game).settings.get(MODULENAME, "npcMystifierKeepRandomNumberWhenDemystified")) {
+                name = `${token?.actor?.name} ${name?.match(/\d+$/)?.[0] ?? ""}`;
+            } else {
+                name = token?.actor?.name || "";
+            }
         } else {
             switch ((game as Game).settings.get(MODULENAME, "npcMystifierMethod")) {
                 default:
                     name = generateNameFromTraits(token);
             }
             if ((game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber")) {
-                name += ` ${Math.floor(Math.random() * 100)}`;
-                //TODO Check if token exists with this name, if so, reroll.
+                let rolled = Math.floor(Math.random() * 100) + 1;
+                //Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
+                if ((game as Game).scenes?.active?.tokens?.find((t) => t.name.endsWith(rolled.toString()))) {
+                    rolled = Math.floor(Math.random() * 100) + 1;
+                }
+                name += ` ${rolled}`;
             }
         }
     }
@@ -35,12 +43,22 @@ export function preTokenCreateMystification(token: Token) {
         (game as Game).keyboard?.isDown(mystifyKey) &&
         (!(game as Game).keyboard?.isDown("V") || (game as Game).keyboard?.isDown("Insert"))
     ) {
-        mystifyToken(token, isMystified(token));
+        mystifyToken(token, isTokenNameDifferent(token));
     }
 }
 
-function isMystified(token: Token | null) {
-    return token?.data.name !== token?.actor?.name || false;
+function isTokenNameDifferent(token: Token | null): boolean {
+    const tokenName = token?.data.name;
+    const actorName = token?.actor?.name;
+    if (
+        tokenName !== actorName &&
+        (game as Game).settings.get(MODULENAME, "npcMystifierKeepRandomNumberWhenDemystified")
+    ) {
+        const tokenNameNoNumber = tokenName?.trim().replace(/\d+$/, "").trim();
+        const actorNameNoNumber = actorName?.replace(/\d+$/, "").trim();
+        return tokenNameNoNumber !== actorNameNoNumber;
+    }
+    return tokenName !== actorName || false;
 }
 
 export function renderNameHud(data: any, html: JQuery<HTMLElement>) {
@@ -48,16 +66,16 @@ export function renderNameHud(data: any, html: JQuery<HTMLElement>) {
     if ((game as Game).user?.isGM && canvas instanceof Canvas && canvas && canvas.tokens) {
         token = canvas.tokens.get(data._id) ?? null;
 
-        const title = isMystified(token) ? "Unmystify" : "Mystify";
+        const title = isTokenNameDifferent(token) ? "Unmystify" : "Mystify";
         const toggle = $(
             `<div class="control-icon ${
-                isMystified(token) ? "active" : ""
+                isTokenNameDifferent(token) ? "active" : ""
             }" > <i class="fas fa-eye-slash"  title=${title}></i></div>`
         );
         toggle.on("click", async (e) => {
             const hudElement = $(e.currentTarget);
             const active = hudElement.hasClass("active");
-            if (isMystified(token) === active) {
+            if (isTokenNameDifferent(token) === active) {
                 await mystifyToken(token, active);
             }
             hudElement.toggleClass("active");
