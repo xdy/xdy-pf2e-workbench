@@ -17,7 +17,8 @@
             "url": "https://gnu.xdy.se/home",
             "discord": "xdy#3735",
             "twitter": "@xdy",
-            "reddit": "u/xdyxdy"
+            "reddit": "u/xdyxdy",
+            "ko-fi": "xdy1337"
         }
     ],
     "minimumCoreVersion": "0.8.9",
@@ -36,5 +37,13 @@
     ],
     "socket": false,
     "system": ["pf2e"],
-    "library": false
+    "library": false,
+    "media": [
+        {
+            "type": "cover",
+            "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/master/static/assets/media/pf2e_workshop_cover_compressed.webp",
+            "caption": "PF2e Workbench"
+        }
+    ],
+    "manifestPlusVersion": "1.2.0"
 }
