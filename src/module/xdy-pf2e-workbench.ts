@@ -15,6 +15,7 @@
 //TODO Add the option to randomize a name from a list of names (kinda like token mold)
 //TODO Add a way to disable the 'traits -> name' stuff but keep the rest. I.e. modularize the name generation.
 //TODO Consider doing something to handle the actor name or the original token name being shown in abilities, etc.
+//TODO Make the button post a chat message with a properly set up roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify all mystified tokens with the same base actor on that scene. After all, if you've recognized one zombie shambler I figure you would recognize all zombie shamblers.
 //TODO Make issues out of the harder of the above todos...
 
 // Import TypeScript modules
