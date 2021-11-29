@@ -73,12 +73,12 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    settings.register(MODULENAME, "npcMystifierKeepRandomNumberWhenDemystified", {
-        name: "Keep random number when demystifying.", //(game as Game).i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKeepRandomNumberWhenDemystified.Name`),
-        hint: "Keep random number (if any) when demystifying npcs.", //(game as Game).i18n.localize(`${MODULENAME}.settings.npcMystifierKeepRandomNumberWhenDemystified.Hint`),
+    settings.register(MODULENAME, "npcMystifierKeepNumberAtEndOfName", {
+        name: "Keep token number when mystifying/demystifying.", //(game as Game).i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.Name`),
+        hint: "Keep token number at end of name (if any) when mystifying/demystifying npcs.", //(game as Game).i18n.localize(`${MODULENAME}.settings.npcMystifierKeepNumberAtEndOfName.Hint`),
         scope: "world",
         config: true,
-        default: false,
+        default: true,
         type: Boolean,
     });
 

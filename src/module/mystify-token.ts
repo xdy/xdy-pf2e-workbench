@@ -7,7 +7,7 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
     let name = token?.name || "";
     if (token) {
         if (mystified) {
-            if ((game as Game).settings.get(MODULENAME, "npcMystifierKeepRandomNumberWhenDemystified")) {
+            if ((game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
                 name = `${token?.actor?.name} ${name?.match(/\d+$/)?.[0] ?? ""}`;
             } else {
                 name = token?.actor?.name || "";
@@ -17,10 +17,22 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
                 default:
                     name = generateNameFromTraits(token);
             }
-            if ((game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber")) {
+
+            if (
+                (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName") &&
+                token?.name?.match(/ \d+$/)
+            ) {
+                name = `${name} ${token?.name?.match(/ \d+$/)?.[0] ?? ""}`;
+            } else if (
+                (game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber") &&
+                !(
+                    (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName") &&
+                    token?.name?.match(/ \d+$/)
+                )
+            ) {
                 let rolled = Math.floor(Math.random() * 100) + 1;
                 //Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
-                if ((game as Game).scenes?.active?.tokens?.find((t) => t.name.endsWith(rolled.toString()))) {
+                if ((game as Game).scenes?.active?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
                     rolled = Math.floor(Math.random() * 100) + 1;
                 }
                 name += ` ${rolled}`;
@@ -50,10 +62,7 @@ export function preTokenCreateMystification(token: Token) {
 function isTokenNameDifferent(token: Token | null): boolean {
     const tokenName = token?.data.name;
     const actorName = token?.actor?.name;
-    if (
-        tokenName !== actorName &&
-        (game as Game).settings.get(MODULENAME, "npcMystifierKeepRandomNumberWhenDemystified")
-    ) {
+    if (tokenName !== actorName && (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
         const tokenNameNoNumber = tokenName?.trim().replace(/\d+$/, "").trim();
         const actorNameNoNumber = actorName?.replace(/\d+$/, "").trim();
         return tokenNameNoNumber !== actorNameNoNumber;
