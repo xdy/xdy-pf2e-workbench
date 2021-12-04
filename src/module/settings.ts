@@ -66,7 +66,7 @@ export function registerSettings() {
 
     settings.register(MODULENAME, "npcMystifierAddRandomNumber", {
         name: "Add random number to name.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.Name`),
-        hint: "Turns on adding a random number when mystifying npcs.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierAddRandomNumber.Hint`),
+        hint: "Turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierAddRandomNumber.Hint`),
         scope: "world",
         config: true,
         default: true,
@@ -75,10 +75,19 @@ export function registerSettings() {
 
     settings.register(MODULENAME, "npcMystifierKeepNumberAtEndOfName", {
         name: "Keep token number when mystifying/demystifying.", //(game as Game).i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.Name`),
-        hint: "Keep token number at end of name (if any) when mystifying/demystifying npcs.", //(game as Game).i18n.localize(`${MODULENAME}.settings.npcMystifierKeepNumberAtEndOfName.Hint`),
+        hint: "Keep token number *added by this module* at end of name (if any) when mystifying/demystifying npcs.", //(game as Game).i18n.localize(`${MODULENAME}.settings.npcMystifierKeepNumberAtEndOfName.Hint`),
         scope: "world",
         config: true,
         default: true,
+        type: Boolean,
+    });
+
+    settings.register(MODULENAME, "npcMystifierUseMystifiedNameInChat", {
+        name: "(Experimental) Use mystified name inside chat messages.", //(game as Game).i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.Name`),
+        hint: "(Experimental) Use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.", //(game as Game).i18n.localize(`${MODULENAME}.settings.npcMystifierKeepNumberAtEndOfName.Hint`),
+        scope: "world",
+        config: true,
+        default: false,
         type: Boolean,
     });
 

@@ -22,7 +22,7 @@
 // Import TypeScript modules
 import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
-import { preTokenCreateMystification, renderNameHud } from "./mystify-token";
+import { mangleChatMessage, preTokenCreateMystification, renderNameHud } from "./mystify-token";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -64,5 +64,11 @@ Hooks.on("preCreateToken", async (token: Token) => {
 Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
     if ((game as Game).settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);
+    }
+});
+
+Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
+    if ((game as Game).settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
+        mangleChatMessage(message, html);
     }
 });

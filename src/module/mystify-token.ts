@@ -92,3 +92,15 @@ export function renderNameHud(data: any, html: JQuery<HTMLElement>) {
         html.find("div.col.left").append(toggle);
     }
 }
+
+export function mangleChatMessage(message: ChatMessage, html: JQuery) {
+    const actorId = <string>message.data.speaker.actor;
+    const tokenId = message.data.speaker.token;
+    const actor = (game as Game).actors?.get(actorId);
+    const jqueryContent = html.find(".action-card");
+
+    const tokenName = <string>(game as Game).scenes?.active?.tokens?.find((t) => t?.id === tokenId)?.name;
+    const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
+
+    jqueryContent.html(jqueryContent.html().replace(new RegExp(<string>actor?.name, "gi"), tokenNameNoNumber));
+}

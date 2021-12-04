@@ -84,6 +84,7 @@ export function generateNameFromTraits(token: Token) {
     traitsList = filterTraitList(traitsList);
 
     const name = traitsList
+        .filter((trait: string) => trait !== "")
         .map((trait: string) => {
             return trait?.charAt(0).toUpperCase() + trait?.slice(1);
         })
