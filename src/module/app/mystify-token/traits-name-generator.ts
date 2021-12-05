@@ -1,5 +1,5 @@
-import { TRAITS } from "./xdy-pf2e-constants";
-import { MODULENAME } from "./xdy-pf2e-workbench";
+import { TRAITS } from "../../xdy-pf2e-constants";
+import { MODULENAME } from "../../xdy-pf2e-workbench";
 
 function filterTraitList(traitsList: any) {
     //TODO Clean up this mess

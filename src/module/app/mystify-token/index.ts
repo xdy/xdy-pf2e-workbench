@@ -1,6 +1,6 @@
 import { generateNameFromTraits } from "./traits-name-generator";
-import { MODULENAME } from "./xdy-pf2e-workbench";
-import { mystifyKey } from "./settings";
+import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { mystifyKey } from "../../settings";
 
 export async function mystifyToken(token: Token | null, mystified: boolean): Promise<string> {
     if (token === null) return "";

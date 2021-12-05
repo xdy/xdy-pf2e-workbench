@@ -7,7 +7,6 @@
  * Software License: Apache 2.0
  */
 
-//TODO Move out to each separate app (once there are more than one...)
 //TODO Start using the actual pf2e types
 //TODO Make it so holding shift pops up a dialog where one can change the name
 //TODO Fix localization
@@ -22,7 +21,7 @@
 // Import TypeScript modules
 import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
-import { mangleChatMessage, preTokenCreateMystification, renderNameHud } from "./mystify-token";
+import { mangleChatMessage, preTokenCreateMystification, renderNameHud } from "./app/mystify-token";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
