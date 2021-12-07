@@ -39,7 +39,7 @@
         "@types/mini-css-extract-plugin": "^2.4.0",
         "@types/node": "^16.11.11",
         "@types/webpack-env": "^1.16.3",
-        "@typescript-eslint/eslint-plugin": "^5.5.0",
+        "@typescript-eslint/eslint-plugin": "^5.6.0",
         "@typescript-eslint/parser": "^5.5.0",
         "copy-webpack-plugin": "^10.0.0",
         "css-loader": "^6.5.1",
