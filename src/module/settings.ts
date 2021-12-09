@@ -36,7 +36,7 @@ export function registerSettings() {
         scope: "world",
         config: true,
         type: String,
-        default: "Unknown",
+        default: "",
     });
 
     settings.register(MODULENAME, "npcMystifierPostfix", {
@@ -107,7 +107,7 @@ export function registerSettings() {
         hint: "SETTINGS.npcMystifierFilterRaritiesReplacement.hint",
         scope: "world",
         config: true,
-        default: "Unusual",
+        default: "",
         type: String,
     });
 
@@ -156,5 +156,5 @@ export function registerSettings() {
         type: String,
     });
 
-    mystifyKey = (<string>settings.get(MODULENAME, "npcMystifierKey")).toUpperCase();
+    mystifyKey = (<string>settings.get(MODULENAME, "npcMystifierKey")).toLocaleUpperCase();
 }

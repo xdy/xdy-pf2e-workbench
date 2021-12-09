@@ -49,6 +49,10 @@ under [Paizo's Community Use Policy (paizo.com/communityuse)](paizo.com/communit
 charging you to use or access this content. This module is not published, endorsed, or specifically approved by Paizo.
 For more information about Paizo Inc. and Paizo products, visit [paizo.com](paizo.com).
 
+Open Game License:
+
+* See [OpenGameLicense.md](OpenGameLicense.md)
+
 Project Licensing:
 
 * Everything in this project that is not covered by one of the following license exceptions is made available under the

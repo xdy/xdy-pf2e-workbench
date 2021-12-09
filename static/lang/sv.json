@@ -11,7 +11,7 @@
         },
         "npcMystifierPrefix": {
             "name": "Ord att prefixa nytt namn med",
-            "hint": "Vad ska det nya namnet prefixas med (default 'Okänd')."
+            "hint": "Vad ska det nya namnet prefixas med, default '' (exempel: 'Okänd')."
         },
         "npcMystifierPostfix": {
             "name": "Ord att postfixa nytt namn med",
@@ -34,12 +34,12 @@
             "hint": "(Experimentellt) Använd mystifierat namn i chattmeddelanden genom att ersätta karaktärns namn med det mystifierade namnet. Kommer utan tvekan att se riktigt dåligt ut på vissa förmågor."
         },
         "npcMystifierFilterRarities": {
-            "name": "Ingen npc-raritet i namnet.",
-            "hint": "Filtrera bort rariteter från det mystifierade namnet."
+            "name": "Ingen npc-sällsynthet i namnet.",
+            "hint": "Filtrera bort sällsyntheter från det mystifierade namnet."
         },
         "npcMystifierFilterRaritiesReplacement": {
-            "name": "Ord att ersätta rariteter större än Vanligt med.",
-            "hint": "Ersätter rariteter större än Common med (t.ex. 'Ovanlig'). Om det är tomt, ändra inte den visade rariteten."
+            "name": "Ord att ersätta sällsyntheter större än Vanligt med.",
+            "hint": "Ersätter sällsyntheter ovanligare än Common med (t.ex. 'Ovanlig'). Om det är tomt, ändra inte den visade sällsyntheten."
         },
         "npcMystifierFilterEliteWeak": {
             "name": "Ingen npc-elit/vek status i namnet.",
@@ -61,5 +61,13 @@
             "name": "Svartlista egenskaper så de aldrig läggs till namn.",
             "hint": "Filtrera bort alla ord i denna kommaseparerade svartlistan från det mystifierade namnet."
         }
+    },
+    "TRAITS": {
+        "TraitDragon": "Drake",
+        "TraitEvil": "Ond",
+        "TraitFire": "Eld",
+        "TraitGood": "God",
+        "TraitLawful": "Laglydig",
+        "TraitUndead": "Odöd"
     }
 }

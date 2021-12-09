@@ -56,7 +56,7 @@ function filterTraitList(traitsList: any) {
             .filter((trait: string) => !TRAITS.CREATURE_FAMILIES.includes(trait));
     }
 
-    return [<string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix")]
+    return [(game as Game).i18n.localize(<string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix"))]
         .concat(eliteWeak)
         .concat(rarities)
         .concat(others)
@@ -83,15 +83,13 @@ export function generateNameFromTraits(token: Token) {
 
     traitsList = filterTraitList(traitsList);
 
-    const name = traitsList
+    return traitsList
         .filter((trait: string) => trait !== "")
         .map((trait: string) => {
-            return trait?.charAt(0).toUpperCase() + trait?.slice(1);
+            return trait?.charAt(0).toLocaleUpperCase() + trait?.slice(1);
         })
-        // .map((trait: string) => {
-        //     return game.i18n.localize(`PF2E.TraitDescription.${trait}`);
-        // })
+        .map((trait: string) => {
+            return (game as Game)?.i18n.localize(`TRAITS.Trait${trait}`);
+        })
         .join(" ");
-
-    return name;
 }
