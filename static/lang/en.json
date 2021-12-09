@@ -1,56 +1,65 @@
 {
-    "xdy-pf2e-workbench": {
-        "settings": {
-            "npcMystifier": {
-                "on": {
-                    "name": "Turn on npc mystifier.",
-                    "hint": "Turn on npc mystifier, renaming tokens based on their traits if Alt (configurable) is clicked when adding to scene."
-                },
-                "npcMystifierMethod": {
-                    "name": "How to generate mystified npc names.",
-                    "hint": "Currently Mystifying by using the NPCs traits is the only supported option."
-                },
-                "npcMystifierFilterRaritiesReplacement": {
-                    "name": "Word to replace rarities greater than Common with.",
-                    "hint": "Set the word to replace rarities greater than Common with. If empty, do not change the displayed rarity."
-                },
-                "npcMystifierAddRandomNumber": {
-                    "name": "Add random number to name.",
-                    "hint": "Turns on adding a random number when mystifying npcs."
-                },
-                "npcMystifierFilterEliteWeak": {
-                    "name": "No npc elite/weak status in name.",
-                    "hint": "Filter out elite/weak from the mystified name."
-                },
-                "npcMystifierFilterCreatureTypesTraits": {
-                    "name": "No npc creature type traits in name.",
-                    "hint": "Filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name."
-                },
-                "npcMystifierFilterCreatureFamilyTraits": {
-                    "name": "No npc creature family traits in name.",
-                    "hint": "Filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name."
-                },
-                "npcMystifierFilterOthers": {
-                    "name": "No npc traits not in the above trait types.",
-                    "hint": "Filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name."
-                },
-                "npcMystifierFilterRarities": {
-                    "name": "No npc rarity in the name.",
-                    "hint": "Filter out rarities from the mystified name."
-                },
-                "npcMystifierKey": {
-                    "name": "Key to mystify",
-                    "hint": "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (the default) it also hides the npc."
-                },
-                "npcMystifierPrefix": {
-                    "name": "Word to prefix new name with",
-                    "hint": "What to prefix new name with (default 'Unknown')."
-                },
-                "npcMystifierPostfix": {
-                    "name": "Word to postfix new name with",
-                    "hint": "What to postfix new name with, defaults to '' (example: 'Creature')."
-                }
-            }
+    "SETTINGS": {
+        "npcMystifier": {
+            "name": "Turn on npc mystifier.",
+            "hint": "Turn on npc mystifier, renaming tokens based on their traits if Ctrl (configurable) is clicked when adding to scene."
+        },
+        "npcMystifierMethod": {
+            "name": "How to generate mystified npc names.",
+            "hint": "Currently Mystifying by using the NPCs traits is the only supported option.",
+            "traits": "Mystify by NPC Traits"
+        },
+        "npcMystifierPrefix": {
+            "name": "Word to prefix new name with",
+            "hint": "What to prefix new name with (default 'Unknown')."
+        },
+        "npcMystifierPostfix": {
+            "name": "Word to postfix new name with",
+            "hint": "What to postfix new name with, defaults to '' (example: 'Creature')."
+        },
+        "npcMystifierKey": {
+            "name": "Key to mystify",
+            "hint": "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (not the default) it also hides the npc."
+        },
+        "npcMystifierAddRandomNumber": {
+            "name": "Add random number to name.",
+            "hint": "Turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well."
+        },
+        "npcMystifierKeepNumberAtEndOfName": {
+            "name": "Keep token number when mystifying/demystifying.",
+            "hint": "Keep token number *added by this module* at end of name (if any) when mystifying/demystifying npcs."
+        },
+        "npcMystifierUseMystifiedNameInChat": {
+            "name": "(Experimental) Use mystified name inside chat messages.",
+            "hint": "(Experimental) Use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities."
+        },
+        "npcMystifierFilterRarities": {
+            "name": "No npc rarity in the name.",
+            "hint": "Filter out rarities from the mystified name."
+        },
+        "npcMystifierFilterRaritiesReplacement": {
+            "name": "Word to replace rarities greater than Common with.",
+            "hint": "Set the word to replace rarities greater than Common with (e.g. 'Unusual'). If empty, do not change the displayed rarity."
+        },
+        "npcMystifierFilterEliteWeak": {
+            "name": "No npc elite/weak status in name.",
+            "hint": "Filter out elite/weak from the mystified name."
+        },
+        "npcMystifierFilterCreatureTypesTraits": {
+            "name": "No npc creature type traits in name.",
+            "hint": "Filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name."
+        },
+        "npcMystifierFilterCreatureFamilyTraits": {
+            "name": "No npc creature family traits in name.",
+            "hint": "Filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name."
+        },
+        "npcMystifierFilterOtherTraits": {
+            "name": "No npc traits not in the above trait types.",
+            "hint": "Filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name."
+        },
+        "npcMystifierFilterBlacklist": {
+            "name": "Blacklist traits to never add to name.",
+            "hint": "Filter out all words in this comma-separated blacklist from the mystified name."
         }
     }
 }

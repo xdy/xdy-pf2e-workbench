@@ -9,7 +9,6 @@
 
 //TODO Start using the actual pf2e types
 //TODO Make it so holding shift pops up a dialog where one can change the name
-//TODO Fix localization
 //TODO Can I use the pf2e localization strings?
 //TODO Add the option to randomize a name from a list of names (kinda like token mold)
 //TODO Add a way to disable the 'traits -> name' stuff but keep the rest. I.e. modularize the name generation.

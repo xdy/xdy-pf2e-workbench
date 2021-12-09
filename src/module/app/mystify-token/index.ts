@@ -52,8 +52,10 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
 export function preTokenCreateMystification(token: Token) {
     if (
         (game as Game).user?.isGM &&
-        (game as Game).keyboard?.isDown(mystifyKey) &&
-        (!(game as Game).keyboard?.isDown("V") || (game as Game).keyboard?.isDown("Insert"))
+        // @ts-ignore
+        (game as Game).keyboard?.downKeys.has(mystifyKey) &&
+        // @ts-ignore
+        (!(game as Game).keyboard?.downKeys.has("V") || (game as Game).keyboard?.downKeys.has("Insert"))
     ) {
         mystifyToken(token, isTokenNameDifferent(token));
     }

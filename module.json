@@ -21,8 +21,8 @@
             "ko-fi": "xdy1337"
         }
     ],
-    "minimumCoreVersion": "0.8.9",
-    "compatibleCoreVersion": "0.8.9",
+    "minimumCoreVersion": 9.235,
+    "compatibleCoreVersion": 9,
     "scripts": [],
     "esmodules": ["xdy-pf2e-workbench.bundle.js"],
     "styles": ["styles/xdy-pf2e-workbench.css"],
@@ -33,6 +33,11 @@
             "lang": "en",
             "name": "English",
             "path": "lang/en.json"
+        },
+        {
+            "lang": "sv",
+            "name": "Svenska",
+            "path": "lang/sv.json"
         }
     ],
     "socket": false,

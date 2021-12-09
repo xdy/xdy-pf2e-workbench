@@ -9,8 +9,8 @@ export function registerSettings() {
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
     const settings = (game as Game).settings;
     settings.register(MODULENAME, "npcMystifier", {
-        name: "Turn on npc mystifier.", // game.i18n.localize(`${MODULENAME}.settings.npcMystifierOn.Name`),
-        hint: "Turn on npc mystifier, renaming tokens based on their traits if Ctrl (configurable) is clicked when adding to scene.", // game.i18n.format(`${MODULENAME}.settings.npcMystifierOn.Hint`),
+        name: "SETTINGS.npcMystifier.name",
+        hint: "SETTINGS.npcMystifier.hint",
         scope: "world",
         config: true,
         default: true,
@@ -18,21 +18,21 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierMethod", {
-        name: "How to generate mystified npc names.", // game.i18n.localize(`${MODULENAME}.settings.npcMystifierOn.Name`),
-        hint: "Currently Mystifying by using the NPCs traits is the only supported option.", // game.i18n.format(`${MODULENAME}.settings.npcMystifierOn.Hint`),
+        name: "SETTINGS.npcMystifierMethod.name",
+        hint: "SETTINGS.npcMystifierMethod.hint",
         scope: "world",
         config: true,
         default: "traits",
         type: String,
         choices: {
-            traits: "Mystify by NPC Traits",
+            traits: "SETTINGS.npcMystifierMethod.traits",
         },
     });
 
     //These apply to all mystification methods, I think
     settings.register(MODULENAME, "npcMystifierPrefix", {
-        name: "Word to prefix new name with", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierPrefix.Hint`),
-        hint: "What to prefix new name with (default 'Unknown').", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierPrefix.Name`),
+        name: "SETTINGS.npcMystifierPrefix.name",
+        hint: "SETTINGS.npcMystifierPrefix.hint",
         scope: "world",
         config: true,
         type: String,
@@ -40,8 +40,8 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierPostfix", {
-        name: "Word to postfix new name with", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierPostfix.Hint`),
-        hint: "What to postfix new name with, defaults to '' (example: 'Creature').", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierPostfix.Name`),
+        name: "SETTINGS.npcMystifierPostfix.name",
+        hint: "SETTINGS.npcMystifierPostfix.hint",
         scope: "world",
         config: true,
         type: String,
@@ -49,24 +49,25 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierKey", {
-        name: "Key to mystify", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.key.Hint`),
-        hint: "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (not the default) it also hides the npc.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifier.key.Name`),
+        name: "SETTINGS.npcMystifierKey.name",
+        hint: "SETTINGS.npcMystifierKey.hint",
         scope: "world",
         config: true,
         type: String,
         choices: {
-            Alt: "Alt",
-            Control: "Ctrl",
+            ALT: "Alt",
+            CONTROL: "Ctrl",
+            SHIFT: "Shift",
         },
-        default: "Control",
+        default: "CONTROL",
         onChange: (key) => {
             return (mystifyKey = <string>key);
         },
     });
 
     settings.register(MODULENAME, "npcMystifierAddRandomNumber", {
-        name: "Add random number to name.", //game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.Name`),
-        hint: "Turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierAddRandomNumber.Hint`),
+        name: "SETTINGS.npcMystifierAddRandomNumber.name",
+        hint: "SETTINGS.npcMystifierAddRandomNumber.hint",
         scope: "world",
         config: true,
         default: true,
@@ -74,8 +75,8 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierKeepNumberAtEndOfName", {
-        name: "Keep token number when mystifying/demystifying.", //(game as Game).i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.Name`),
-        hint: "Keep token number *added by this module* at end of name (if any) when mystifying/demystifying npcs.", //(game as Game).i18n.localize(`${MODULENAME}.settings.npcMystifierKeepNumberAtEndOfName.Hint`),
+        name: "SETTINGS.npcMystifierKeepNumberAtEndOfName.name",
+        hint: "SETTINGS.npcMystifierKeepNumberAtEndOfName.hint",
         scope: "world",
         config: true,
         default: true,
@@ -83,8 +84,8 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierUseMystifiedNameInChat", {
-        name: "(Experimental) Use mystified name inside chat messages.", //(game as Game).i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.Name`),
-        hint: "(Experimental) Use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.", //(game as Game).i18n.localize(`${MODULENAME}.settings.npcMystifierKeepNumberAtEndOfName.Hint`),
+        name: "SETTINGS.npcMystifierUseMystifiedNameInChat.name",
+        hint: "SETTINGS.npcMystifierUseMystifiedNameInChat.hint",
         scope: "world",
         config: true,
         default: false,
@@ -93,8 +94,8 @@ export function registerSettings() {
 
     //TODO These apply only to trait mystification and should be grouped together, maybe on a separate tab?
     settings.register(MODULENAME, "npcMystifierFilterRarities", {
-        name: "No npc rarity in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Name`),
-        hint: "Filter out rarities from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Hint`),
+        name: "SETTINGS.npcMystifierFilterRarities.name",
+        hint: "SETTINGS.npcMystifierFilterRarities.hint",
         scope: "world",
         config: true,
         default: true,
@@ -102,8 +103,8 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierFilterRaritiesReplacement", {
-        name: "Word to replace rarities greater than Common with.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Name`),
-        hint: "Set the word to replace rarities greater than Common with (e.g. 'Unusual'). If empty, do not change the displayed rarity.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterRarities.Hint`),
+        name: "SETTINGS.npcMystifierFilterRaritiesReplacement.name",
+        hint: "SETTINGS.npcMystifierFilterRaritiesReplacement.hint",
         scope: "world",
         config: true,
         default: "Unusual",
@@ -111,8 +112,8 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierFilterEliteWeak", {
-        name: "No npc elite/weak status in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterElitWeak.Name`),
-        hint: "Filter out elite/weak from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterEliteWeak.Hint`),
+        name: "SETTINGS.npcMystifierFilterEliteWeak.name",
+        hint: "SETTINGS.npcMystifierFilterEliteWeak.hint",
         scope: "world",
         config: true,
         default: false,
@@ -120,8 +121,8 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierFilterCreatureTypesTraits", {
-        name: "No npc creature type traits in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterCreatureTypesTraits.Name`),
-        hint: "Filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterCreatureTypesTraits.Hint`),
+        name: "SETTINGS.npcMystifierFilterCreatureTypesTraits.name",
+        hint: "SETTINGS.npcMystifierFilterCreatureTypesTraits.hint",
         scope: "world",
         config: true,
         default: false,
@@ -129,8 +130,8 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierFilterCreatureFamilyTraits", {
-        name: "No npc creature family traits in name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterCreatureFamilyTraits.Name`),
-        hint: "Filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterCreatureFamilyTraits.Hint`),
+        name: "SETTINGS.npcMystifierFilterCreatureFamilyTraits.name",
+        hint: "SETTINGS.npcMystifierFilterCreatureFamilyTraits.hint",
         scope: "world",
         config: true,
         default: false,
@@ -138,8 +139,8 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierFilterOtherTraits", {
-        name: "No npc traits not in the above trait types.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifier.FilterOtherTraits.Name`),
-        hint: "Filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterOtherTraits.Hint`),
+        name: "SETTINGS.npcMystifierFilterOtherTraits.name",
+        hint: "SETTINGS.npcMystifierFilterOtherTraits.hint",
         scope: "world",
         config: true,
         default: false,
@@ -147,13 +148,13 @@ export function registerSettings() {
     });
 
     settings.register(MODULENAME, "npcMystifierFilterBlacklist", {
-        name: "Blacklist traits to never add to name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterBlacklist.Name`),
-        hint: "Filter out all words in this comma-separated blacklist from the mystified name.", //game.i18n.localize(`${MODULENAME}.settings.npcMystifierFilterBlacklist.Hint`),
+        name: "SETTINGS.npcMystifierFilterBlacklist.name",
+        hint: "SETTINGS.npcMystifierFilterBlacklist.hint",
         scope: "world",
         config: true,
         default: "",
         type: String,
     });
 
-    mystifyKey = <string>settings.get(MODULENAME, "npcMystifierKey");
+    mystifyKey = (<string>settings.get(MODULENAME, "npcMystifierKey")).toUpperCase();
 }

@@ -1,0 +1,65 @@
+{
+    "SETTINGS": {
+        "npcMystifier": {
+            "name": "Slå på npcmystifierare.",
+            "hint": "Slå på npcmystifierare, byt namn på spelfigurs baserat på deras egenskaper om Ctrl (konfigurerbar) klickas när du lägger till scenen."
+        },
+        "npcMystifierMethod": {
+            "name": "Hur man genererar mystifierade npc-namn.",
+            "hint": "För närvarande är mystifiering genom att använda npcns egenskaper det enda alternativet som stöds.",
+            "traits": "Mystifiera mha npc:s egenskaper."
+        },
+        "npcMystifierPrefix": {
+            "name": "Ord att prefixa nytt namn med",
+            "hint": "Vad ska det nya namnet prefixas med (default 'Okänd')."
+        },
+        "npcMystifierPostfix": {
+            "name": "Ord att postfixa nytt namn med",
+            "hint": "Vad ska ett nytt namn postfixas med, default '' (exempel: 'Varelse')."
+        },
+        "npcMystifierKey": {
+            "name": "Tangent för mystifiering",
+            "hint": "Håll denna tengent för att mystifiera npc när den dras ut till scenen. Observera att om du väljer Alt (inte standard) döljer den också npc:n."
+        },
+        "npcMystifierAddRandomNumber": {
+            "name": "Lägg till slumpmässigt nummer i namnet.",
+            "hint": "Aktiverar att lägga till ett slumpmässigt nummer när man mystifierar npcs. Observera att om spelfigur eller karaktär redan har ett nummer som suffix kommer detta inte att fungera bra."
+        },
+        "npcMystifierKeepNumberAtEndOfName": {
+            "name": "Behåll spelfigurnummer när du mystifierar/avmystifierar.",
+            "hint": "Behåll spelfigurnummer *tillagt av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs."
+        },
+        "npcMystifierUseMystifiedNameInChat": {
+            "name": "(Experimentell) Använd mystifierat namn i chattmeddelanden.",
+            "hint": "(Experimentellt) Använd mystifierat namn i chattmeddelanden genom att ersätta karaktärns namn med det mystifierade namnet. Kommer utan tvekan att se riktigt dåligt ut på vissa förmågor."
+        },
+        "npcMystifierFilterRarities": {
+            "name": "Ingen npc-raritet i namnet.",
+            "hint": "Filtrera bort rariteter från det mystifierade namnet."
+        },
+        "npcMystifierFilterRaritiesReplacement": {
+            "name": "Ord att ersätta rariteter större än Vanligt med.",
+            "hint": "Ersätter rariteter större än Common med (t.ex. 'Ovanlig'). Om det är tomt, ändra inte den visade rariteten."
+        },
+        "npcMystifierFilterEliteWeak": {
+            "name": "Ingen npc-elit/vek status i namnet.",
+            "hint": "Filtrera bort elit/vek från det mystifierade namnet."
+        },
+        "npcMystifierFilterCreatureTypesTraits": {
+            "name": "Inga npc-varelsetypegenskaper i namnet.",
+            "hint": "Filtrera bort egenskaper av varelsetyp (se https://2e.aonprd.com/Traits.aspx) från det mystifierade namnet."
+        },
+        "npcMystifierFilterCreatureFamilyTraits": {
+            "name": "Inga npc-varelsefamiljedrag i namnet.",
+            "hint": "Filtrera bort varelsefamiljedrag (se https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) från det mystifierade namnet."
+        },
+        "npcMystifierFilterOtherTraits": {
+            "name": "Inga npc-egenskaper som inte finns i ovanstående egenskapstyper.",
+            "hint": "Filtrera bort npc-egenskaper som inte finns med ovanstående egenskaper (se länkarna i ovanstående inställningsalternativ) från det mystifierade namnet."
+        },
+        "npcMystifierFilterBlacklist": {
+            "name": "Svartlista egenskaper så de aldrig läggs till namn.",
+            "hint": "Filtrera bort alla ord i denna kommaseparerade svartlistan från det mystifierade namnet."
+        }
+    }
+}
