@@ -56,7 +56,7 @@ function filterTraitList(traitsList: any) {
             .filter((trait: string) => !TRAITS.CREATURE_FAMILIES.includes(trait));
     }
 
-    return [(game as Game).i18n.localize(<string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix"))]
+    return [<string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix")]
         .concat(eliteWeak)
         .concat(rarities)
         .concat(others)
