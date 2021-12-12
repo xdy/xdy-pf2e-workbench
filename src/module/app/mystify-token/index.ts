@@ -2,11 +2,11 @@ import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { mystifyKey } from "../../settings";
 
-function skipRandomIfUnique(token: Token) {
+function shouldSkipRandomNumber(token: Token) {
     return (
         (game as Game).settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
         // @ts-ignore
-        token?.data?.data?.traits?.rarity?.value === "unique"
+        token?.actor?.data?.data?.traits?.rarity?.value === "unique"
     );
 }
 
@@ -14,8 +14,9 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
     if (token === null) return "";
     let name = token?.name || "";
     if (token) {
+        const keep = (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName");
         if (mystified) {
-            if ((game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
+            if (keep) {
                 name = `${token?.actor?.name} ${name?.match(/\d+$/)?.[0] ?? ""}`;
             } else {
                 name = token?.actor?.name || "";
@@ -26,25 +27,18 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
                     name = generateNameFromTraits(token);
             }
 
-            if (
-                (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName") &&
-                token?.name?.match(/ \d+$/)
-            ) {
+            const addRandom = (game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber");
+            if (token?.name?.match(/ \d+$/)?.[0] && keep && !shouldSkipRandomNumber(token)) {
                 name = `${name} ${token?.name?.match(/ \d+$/)?.[0] ?? ""}`;
-            } else if (
-                (game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber") &&
-                !skipRandomIfUnique(token) &&
-                !(
-                    (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName") &&
-                    token?.name?.match(/ \d+$/)
-                )
-            ) {
-                let rolled = Math.floor(Math.random() * 100) + 1;
-                //Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
-                if ((game as Game).scenes?.active?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
-                    rolled = Math.floor(Math.random() * 100) + 1;
+            } else {
+                if (addRandom && !shouldSkipRandomNumber(token)) {
+                    let rolled = Math.floor(Math.random() * 100) + 1;
+                    //Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
+                    if ((game as Game).scenes?.active?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
+                        rolled = Math.floor(Math.random() * 100) + 1;
+                    }
+                    name += ` ${rolled}`;
                 }
-                name += ` ${rolled}`;
             }
         }
     }

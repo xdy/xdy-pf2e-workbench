@@ -79,7 +79,7 @@ export function registerSettings() {
         hint: "SETTINGS.npcMystifierSkipRandomNumberForUnique.hint",
         scope: "world",
         config: true,
-        default: true,
+        default: false,
         type: Boolean,
     });
 
@@ -144,6 +144,15 @@ export function registerSettings() {
         scope: "world",
         config: true,
         default: false,
+        type: Boolean,
+    });
+
+    settings.register(MODULENAME, "npcMystifierFilterAlignmentTraits", {
+        name: "SETTINGS.npcMystifierFilterAlignmentTraits.name",
+        hint: "SETTINGS.npcMystifierFilterAlignmentTraits.hint",
+        scope: "world",
+        config: true,
+        default: true,
         type: Boolean,
     });
 

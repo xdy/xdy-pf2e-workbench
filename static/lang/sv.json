@@ -31,7 +31,7 @@
         },
         "npcMystifierKeepNumberAtEndOfName": {
             "name": "Behåll spelfigurnummer när du mystifierar/avmystifierar.",
-            "hint": "Behåll spelfigurnummer *tillagt av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs."
+            "hint": "Behåll spelfigurnummer *i samma format som dom som läggs till av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs."
         },
         "npcMystifierUseMystifiedNameInChat": {
             "name": "(Experimentell) Använd mystifierat namn i chattmeddelanden.",
@@ -56,6 +56,10 @@
         "npcMystifierFilterCreatureFamilyTraits": {
             "name": "Inga npc-varelsefamiljedrag i namnet.",
             "hint": "Filtrera bort varelsefamiljedrag (se https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) från det mystifierade namnet."
+        },
+        "npcMystifierFilterAlignmentTraits": {
+            "name": "Inga livsåskådningar i namnet.",
+            "hint": "Filtrera bort livåskådningar från det mystifierade namnet."
         },
         "npcMystifierFilterOtherTraits": {
             "name": "Inga npc-egenskaper som inte finns i ovanstående egenskapstyper.",

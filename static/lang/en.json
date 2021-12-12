@@ -31,7 +31,7 @@
         },
         "npcMystifierKeepNumberAtEndOfName": {
             "name": "Keep token number when mystifying/demystifying.",
-            "hint": "Keep token number *added by this module* at end of name (if any) when mystifying/demystifying npcs."
+            "hint": "Keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs."
         },
         "npcMystifierUseMystifiedNameInChat": {
             "name": "(Experimental) Use mystified name inside chat messages.",
@@ -56,6 +56,10 @@
         "npcMystifierFilterCreatureFamilyTraits": {
             "name": "No npc creature family traits in name.",
             "hint": "Filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name."
+        },
+        "npcMystifierFilterAlignmentTraits": {
+            "name": "No npc alignment traits in name.",
+            "hint": "Filter out alignment traits from the mystified name."
         },
         "npcMystifierFilterOtherTraits": {
             "name": "No npc traits not in the above trait types.",

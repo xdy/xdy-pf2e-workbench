@@ -47,17 +47,24 @@ function filterTraitList(traitsList: any) {
         families = traitsList.filter((trait: string) => TRAITS.CREATURE_FAMILIES.includes(trait));
     }
 
+    let alignments: string[] = [];
+    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterAlignmentTraits")) {
+        alignments = traitsList.filter((trait: string) => TRAITS.ALIGNMENTS.includes(trait));
+    }
+
     let others: string[] = [];
     if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
         others = traitsList
             .filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait))
             .filter((trait: string) => !TRAITS.RARITIES.includes(trait))
             .filter((trait: string) => !TRAITS.CREATURE_TYPES.includes(trait))
-            .filter((trait: string) => !TRAITS.CREATURE_FAMILIES.includes(trait));
+            .filter((trait: string) => !TRAITS.CREATURE_FAMILIES.includes(trait))
+            .filter((trait: string) => !TRAITS.ALIGNMENTS.includes(trait));
     }
 
     return [<string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix")]
         .concat(eliteWeak)
+        .concat(alignments)
         .concat(rarities)
         .concat(others)
         .concat(creatures)
@@ -89,7 +96,10 @@ export function generateNameFromTraits(token: Token) {
             return trait?.charAt(0).toLocaleUpperCase() + trait?.slice(1);
         })
         .map((trait: string) => {
-            return (game as Game)?.i18n.localize(`TRAITS.Trait${trait}`);
+            const translationNeeded =
+                trait !== <string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix") &&
+                trait !== <string>(game as Game).settings.get(MODULENAME, "npcMystifierPostfix");
+            return translationNeeded ? (game as Game)?.i18n.localize(`TRAITS.Trait${trait}`) : trait;
         })
         .join(" ");
 }
