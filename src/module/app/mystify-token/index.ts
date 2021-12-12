@@ -107,5 +107,7 @@ export function mangleChatMessage(message: ChatMessage, html: JQuery) {
     const tokenName = <string>(game as Game).scenes?.active?.tokens?.find((t) => t?.id === tokenId)?.name;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 
-    jqueryContent.html(jqueryContent.html().replace(new RegExp(<string>actor?.name, "gi"), tokenNameNoNumber));
+    if (tokenNameNoNumber && actor?.name?.trim() !== tokenNameNoNumber) {
+        jqueryContent.html(jqueryContent.html().replace(new RegExp(<string>actor?.name, "gi"), tokenNameNoNumber));
+    }
 }
