@@ -25,6 +25,10 @@
             "name": "Add random number to name.",
             "hint": "Turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well."
         },
+        "npcMystifierSkipRandomNumberForUnique": {
+            "name": "No random number for unique npcs.",
+            "hint": "Skips adding a random number when mystifying unique npcs."
+        },
         "npcMystifierKeepNumberAtEndOfName": {
             "name": "Keep token number when mystifying/demystifying.",
             "hint": "Keep token number *added by this module* at end of name (if any) when mystifying/demystifying npcs."

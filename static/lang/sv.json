@@ -25,6 +25,10 @@
             "name": "Lägg till slumpmässigt nummer i namnet.",
             "hint": "Aktiverar att lägga till ett slumpmässigt nummer när man mystifierar npcs. Observera att om spelfigur eller karaktär redan har ett nummer som suffix kommer detta inte att fungera bra."
         },
+        "npcMystifierSkipRandomNumberForUnique": {
+            "name": "Inget slumpmässigt nummer för unika npcs.",
+            "hint": "Låter bli att lägga till slumpmässigt nummer för unika npcs."
+        },
         "npcMystifierKeepNumberAtEndOfName": {
             "name": "Behåll spelfigurnummer när du mystifierar/avmystifierar.",
             "hint": "Behåll spelfigurnummer *tillagt av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs."

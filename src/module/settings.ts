@@ -74,6 +74,15 @@ export function registerSettings() {
         type: Boolean,
     });
 
+    settings.register(MODULENAME, "npcMystifierSkipRandomNumberForUnique", {
+        name: "SETTINGS.npcMystifierSkipRandomNumberForUnique.name",
+        hint: "SETTINGS.npcMystifierSkipRandomNumberForUnique.hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean,
+    });
+
     settings.register(MODULENAME, "npcMystifierKeepNumberAtEndOfName", {
         name: "SETTINGS.npcMystifierKeepNumberAtEndOfName.name",
         hint: "SETTINGS.npcMystifierKeepNumberAtEndOfName.hint",

@@ -2,6 +2,14 @@ import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { mystifyKey } from "../../settings";
 
+function skipRandomIfUnique(token: Token) {
+    return (
+        (game as Game).settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
+        // @ts-ignore
+        token?.data?.data?.traits?.rarity?.value === "unique"
+    );
+}
+
 export async function mystifyToken(token: Token | null, mystified: boolean): Promise<string> {
     if (token === null) return "";
     let name = token?.name || "";
@@ -25,6 +33,7 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
                 name = `${name} ${token?.name?.match(/ \d+$/)?.[0] ?? ""}`;
             } else if (
                 (game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber") &&
+                !skipRandomIfUnique(token) &&
                 !(
                     (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName") &&
                     token?.name?.match(/ \d+$/)
@@ -72,7 +81,7 @@ function isTokenNameDifferent(token: Token | null): boolean {
     return tokenName !== actorName || false;
 }
 
-export function renderNameHud(data: any, html: JQuery<HTMLElement>) {
+export function renderNameHud(data: any, html: JQuery) {
     let token: Token | null;
     if ((game as Game).user?.isGM && canvas instanceof Canvas && canvas && canvas.tokens) {
         token = canvas.tokens.get(data._id) ?? null;
