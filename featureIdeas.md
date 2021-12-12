@@ -46,3 +46,6 @@ Not really pf2 related, but, I still want them:
 
     Unspacer:
       Module that allows one to change from space for pause button as gm
+      
+    Macromover:
+      Module that exports all macros, including toolbar positions and permissions from a world, and enables importing them to the same positions and permissions in another world.
