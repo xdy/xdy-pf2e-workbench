@@ -73,7 +73,8 @@ export function registerSettings() {
         hint: "Select tokens and press this key to mystify them.", //Localization doesn't work for some reason? Should just be "SETTINGS.npcMystifierMystifyKey.hint",
         editable: [
             {
-                key: "M",
+                //TODO Clean this up once I'm sure it works
+                key: foundry.utils.isNewerVersion((game as Game)?.data?.version, "9.235") ? "KeyM" : "M",
             },
         ],
         onDown: () => {
@@ -195,5 +196,5 @@ export function registerSettings() {
         type: String,
     });
 
-    mystifyModifierKey = (<string>settings.get(MODULENAME, "npcMystifierModifierKey")).toLocaleUpperCase();
+    mystifyModifierKey = <string>settings.get(MODULENAME, "npcMystifierModifierKey");
 }

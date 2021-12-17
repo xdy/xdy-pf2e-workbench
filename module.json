@@ -22,7 +22,7 @@
         }
     ],
     "minimumCoreVersion": 9.235,
-    "compatibleCoreVersion": 9,
+    "compatibleCoreVersion": 9.235,
     "scripts": [],
     "esmodules": ["xdy-pf2e-workbench.bundle.js"],
     "styles": ["styles/xdy-pf2e-workbench.css"],
