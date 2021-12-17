@@ -101,15 +101,15 @@ export function renderNameHud(data: any, html: JQuery) {
 }
 
 export function mangleChatMessage(message: ChatMessage, html: JQuery) {
-    const actorId = <string>message.data.speaker.actor;
-    const tokenId = message.data.speaker.token;
+    const actorId = <string>message?.data?.speaker?.actor;
+    const tokenId = message?.data?.speaker?.token;
     const actor = (game as Game).actors?.get(actorId);
-    const jqueryContent = html.find(".action-card");
+    const jqueryContent = html?.find(".action-card");
 
     const tokenName = <string>(game as Game).scenes?.active?.tokens?.find((t) => t?.id === tokenId)?.name;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 
-    if (tokenNameNoNumber && actor?.name?.trim() !== tokenNameNoNumber) {
+    if (tokenNameNoNumber && actor?.name?.trim() !== tokenNameNoNumber && jqueryContent && jqueryContent.html()) {
         jqueryContent.html(jqueryContent.html().replace(new RegExp(<string>actor?.name, "gi"), tokenNameNoNumber));
     }
 }
