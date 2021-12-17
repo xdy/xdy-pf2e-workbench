@@ -21,8 +21,8 @@
             "ko-fi": "xdy1337"
         }
     ],
-    "minimumCoreVersion": 9.235,
-    "compatibleCoreVersion": 9.235,
+    "minimumCoreVersion": 9.236,
+    "compatibleCoreVersion": 9,
     "scripts": [],
     "esmodules": ["xdy-pf2e-workbench.bundle.js"],
     "styles": ["styles/xdy-pf2e-workbench.css"],

@@ -53,21 +53,15 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
 }
 
 function isMystifyModifierKeyPressed() {
-    //TODO Clean this up once I'm sure it works
-    if (foundry.utils.isNewerVersion((game as Game)?.data?.version, "9.235")) {
-        switch (mystifyModifierKey) {
-            case "ALT":
-                // @ts-ignore
-                return (game as Game)?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
-            case "CONTROL":
-                // @ts-ignore
-                return (game as Game)?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
-            default:
-                return false;
-        }
-    } else {
-        // @ts-ignore
-        return (game as Game).keyboard?.downKeys.has(mystifyModifierKey);
+    switch (mystifyModifierKey) {
+        case "ALT":
+            // @ts-ignore
+            return (game as Game)?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
+        case "CONTROL":
+            // @ts-ignore
+            return (game as Game)?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
+        default:
+            return false;
     }
 }
 
