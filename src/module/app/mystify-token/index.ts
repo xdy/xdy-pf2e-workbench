@@ -1,6 +1,6 @@
 import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { mystifyKey } from "../../settings";
+import { mystifyModifierKey } from "../../settings";
 
 function shouldSkipRandomNumber(token: Token) {
     return (
@@ -55,8 +55,10 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
 export function preTokenCreateMystification(token: Token) {
     if (
         (game as Game).user?.isGM &&
-        // @ts-ignore
-        (game as Game).keyboard?.downKeys.has(mystifyKey) &&
+        !((game as Game).settings.get(MODULENAME, "npcMystifierModifierKey") === "DISABLED") &&
+        ((game as Game).settings.get(MODULENAME, "npcMystifierModifierKey") === "ALWAYS" ||
+            // @ts-ignore
+            (game as Game).keyboard?.downKeys.has(mystifyModifierKey)) &&
         // @ts-ignore
         (!(game as Game).keyboard?.downKeys.has("V") || (game as Game).keyboard?.downKeys.has("Insert"))
     ) {
@@ -64,7 +66,7 @@ export function preTokenCreateMystification(token: Token) {
     }
 }
 
-function isTokenNameDifferent(token: Token | null): boolean {
+export function isTokenNameDifferent(token: Token | null): boolean {
     const tokenName = token?.data.name;
     const actorName = token?.actor?.name;
     if (tokenName !== actorName && (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {

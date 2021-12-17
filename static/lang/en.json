@@ -17,9 +17,13 @@
             "name": "Word to postfix new name with",
             "hint": "What to postfix new name with, defaults to '' (example: 'Creature')."
         },
-        "npcMystifierKey": {
-            "name": "Key to mystify",
-            "hint": "Hold this to mystify npc as it's dragged out to the scene. Note that if you choose Alt (not the default) it also hides the npc."
+        "npcMystifierModifierKey": {
+            "name": "Modifier key to use when mystifying by dragging onto the scene",
+            "hint": "Hold this to mystify creature as it's dragged out to the scene. Note that if you choose Alt (not the default) it also hides the npc."
+        },
+        "npcMystifierMystifyKey": {
+            "name": "Key for mystifying selected tokens",
+            "hint": "Select tokens and press this key to mystify them."
         },
         "npcMystifierAddRandomNumber": {
             "name": "Add random number to name.",

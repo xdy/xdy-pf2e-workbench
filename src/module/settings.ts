@@ -1,7 +1,8 @@
 // Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
 import { MODULENAME } from "./xdy-pf2e-workbench";
+import { isTokenNameDifferent, mystifyToken } from "./app/mystify-token";
 
-export let mystifyKey: string;
+export let mystifyModifierKey: string;
 
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
@@ -48,21 +49,41 @@ export function registerSettings() {
         default: "",
     });
 
-    settings.register(MODULENAME, "npcMystifierKey", {
-        name: "SETTINGS.npcMystifierKey.name",
-        hint: "SETTINGS.npcMystifierKey.hint",
+    settings.register(MODULENAME, "npcMystifierModifierKey", {
+        name: "SETTINGS.npcMystifierModifierKey.name",
+        hint: "SETTINGS.npcMystifierModifierKey.hint",
         scope: "world",
         config: true,
         type: String,
         choices: {
+            ALWAYS: "Always",
+            DISABLED: "Disabled",
             ALT: "Alt",
             CONTROL: "Ctrl",
-            SHIFT: "Shift",
         },
         default: "CONTROL",
         onChange: (key) => {
-            return (mystifyKey = <string>key);
+            return (mystifyModifierKey = <string>key);
         },
+    });
+
+    // @ts-ignore
+    game.keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
+        name: "SETTINGS.npcMystifierMystifyKey.name",
+        hint: "SETTINGS.npcMystifierMystifyKey.hint",
+        editable: [
+            {
+                key: "M",
+            },
+        ],
+        onDown: () => {
+            canvas?.tokens?.controlled.filter((token) => mystifyToken(token, isTokenNameDifferent(token)));
+        },
+        onUp: () => {},
+        restricted: false,
+        reservedModifiers: [],
+        // @ts-ignore
+        precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
 
     settings.register(MODULENAME, "npcMystifierAddRandomNumber", {
@@ -174,5 +195,5 @@ export function registerSettings() {
         type: String,
     });
 
-    mystifyKey = (<string>settings.get(MODULENAME, "npcMystifierKey")).toLocaleUpperCase();
+    mystifyModifierKey = (<string>settings.get(MODULENAME, "npcMystifierModifierKey")).toLocaleUpperCase();
 }

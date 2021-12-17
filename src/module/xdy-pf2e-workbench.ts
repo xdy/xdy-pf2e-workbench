@@ -11,8 +11,6 @@
 //TODO Make it so holding shift pops up a dialog where one can change the name
 //TODO Can I use the pf2e localization strings?
 //TODO Add the option to randomize a name from a list of names (kinda like token mold)
-//TODO Add a way to disable the 'traits -> name' stuff but keep the rest. I.e. modularize the name generation.
-//TODO Consider doing something to handle the actor name or the original token name being shown in abilities, etc. (i.e. If I get it working it'll hook into chat message creation from the token and simply string replace the actor name with the token name in the final chat message. E.g. if you're using an "Acid Beast" that has been renamed to "Unknown Creature 23' which has the ability "The Acid Beast spits acid" the text 'Acid Beast' will be replaced with 'Unknown Creature 23', making the final chat message read "The Unknown Creature 23 spids acid".)
 //TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog that does that, with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
 //TODO Make the button post a chat message with a properly set up roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify all mystified tokens with the same base actor on that scene. After all, if you've recognized one zombie shambler I figure you would recognize all zombie shamblers.
 //TODO Make issues out of the harder of the above todos...
