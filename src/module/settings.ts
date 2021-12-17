@@ -70,7 +70,7 @@ export function registerSettings() {
     // @ts-ignore
     game.keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
         name: "SETTINGS.npcMystifierMystifyKey.name",
-        hint: "SETTINGS.npcMystifierMystifyKey.hint",
+        hint: "Select tokens and press this key to mystify them.", //Localization doesn't work for some reason? Should just be "SETTINGS.npcMystifierMystifyKey.hint",
         editable: [
             {
                 key: "M",
