@@ -1,5 +1,7 @@
 import { TRAITS } from "../../xdy-pf2e-constants";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
+// eslint-disable-next-line import/named
+import { Translations } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/localization";
 
 function filterTraitList(traitsList: any) {
     //TODO Clean up this mess
@@ -76,9 +78,7 @@ export function generateNameFromTraits(token: Token) {
     const data = token?.actor?.data?.data;
     // @ts-ignore How to type this?
     const traits = data?.traits;
-    let traitsList: string[] = traits?.traits?.value.filter(
-        (trait: string, index: number, self: string[]) => self.indexOf(trait) === index
-    );
+    let traitsList: string[] = traits?.traits?.value;
     const customTraits = traits?.traits?.custom;
     if (customTraits) {
         traitsList = traitsList.concat(customTraits.trim().split(","));
@@ -91,7 +91,10 @@ export function generateNameFromTraits(token: Token) {
     traitsList = filterTraitList(traitsList);
 
     return traitsList
-        .filter((trait: string) => trait !== "")
+        .map((trait: string) => trait.trim())
+        .filter((trait: string, index: number) => {
+            return traitsList.indexOf(trait) === index;
+        })
         .map((trait: string) => {
             return trait?.charAt(0).toLocaleUpperCase() + trait?.slice(1);
         })
@@ -99,7 +102,11 @@ export function generateNameFromTraits(token: Token) {
             const translationNeeded =
                 trait !== <string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix") &&
                 trait !== <string>(game as Game).settings.get(MODULENAME, "npcMystifierPostfix");
-            return translationNeeded ? (game as Game)?.i18n.localize(`TRAITS.Trait${trait}`) : trait;
+            return (
+                (translationNeeded
+                    ? (<Translations>(game as Game).i18n.translations[MODULENAME] ?? {})[`TRAITS.Trait${trait}`]
+                    : trait) ?? trait
+            );
         })
         .join(" ");
 }
