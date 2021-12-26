@@ -10,8 +10,8 @@
             "traits": "Mystifiera mha npc:s egenskaper."
         },
         "npcMystifierPrefix": {
-            "name": "Ord att prefixa nytt namn med",
-            "hint": "Vad ska det nya namnet prefixas med, default '' (exempel: 'Okänd')."
+            "name": "Ord eller slumptabell att prefixa nytt namn med",
+            "hint": "Vad ska det nya namnet prefixas med, default '' (exempel: 'Okänd'), om det är namnet på en slumptabell så används en rad från den tabellen som prefix ."
         },
         "npcMystifierPostfix": {
             "name": "Ord att postfixa nytt namn med",

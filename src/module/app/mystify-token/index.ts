@@ -1,6 +1,7 @@
 import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { mystifyModifierKey } from "../../settings";
+import { TokenData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
 function shouldSkipRandomNumber(token: Token) {
     return (
@@ -24,7 +25,7 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
         } else {
             switch ((game as Game).settings.get(MODULENAME, "npcMystifierMethod")) {
                 default:
-                    name = generateNameFromTraits(token);
+                    name = await generateNameFromTraits(token);
             }
 
             const addRandom = (game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber");
@@ -90,10 +91,10 @@ export function isTokenNameDifferent(token: Token | null): boolean {
     return tokenName !== actorName || false;
 }
 
-export function renderNameHud(data: any, html: JQuery) {
+export function renderNameHud(data: TokenData, html: JQuery) {
     let token: Token | null;
     if ((game as Game).user?.isGM && canvas instanceof Canvas && canvas && canvas.tokens) {
-        token = canvas.tokens.get(data._id) ?? null;
+        token = canvas.tokens.get(<string>data._id) ?? null;
 
         const title = isTokenNameDifferent(token) ? "Unmystify" : "Mystify";
         const toggle = $(

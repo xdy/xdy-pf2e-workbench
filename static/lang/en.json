@@ -10,8 +10,8 @@
             "traits": "Mystify by NPC Traits"
         },
         "npcMystifierPrefix": {
-            "name": "Word to prefix new name with",
-            "hint": "What to prefix new name with, defaults to '' (example: 'Unknown')."
+            "name": "Word or rollable table to prefix new name with",
+            "hint": "What to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a row from this table will be used as the prefix."
         },
         "npcMystifierPostfix": {
             "name": "Word to postfix new name with",

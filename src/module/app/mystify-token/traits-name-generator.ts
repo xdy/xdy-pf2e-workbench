@@ -3,7 +3,19 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 // eslint-disable-next-line import/named
 import { Translations } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/localization";
 
-function filterTraitList(traitsList: any) {
+async function fixesPreAndPost(settingkey: string): Promise<string> {
+    const fixSetting: string = <string>(game as Game).settings.get(MODULENAME, settingkey);
+
+    return (
+        (game as Game)?.tables
+            ?.find((table) => table.name === fixSetting)
+            // @ts-ignore
+            ?.draw({ displayChat: false })
+            .then((draw) => draw.results[0].getChatText()) ?? fixSetting
+    );
+}
+
+function filterTraitList(traitsList: string[], prefix: string, postfix: string): string[] {
     //TODO Clean up this mess
     if ((game as Game).settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
         const blacklist =
@@ -64,17 +76,17 @@ function filterTraitList(traitsList: any) {
             .filter((trait: string) => !TRAITS.ALIGNMENTS.includes(trait));
     }
 
-    return [<string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix")]
+    return [prefix]
         .concat(eliteWeak)
         .concat(alignments)
         .concat(rarities)
         .concat(others)
         .concat(creatures)
         .concat(families)
-        .concat([<string>(game as Game).settings.get(MODULENAME, "npcMystifierPostfix")]);
+        .concat([postfix]);
 }
 
-export function generateNameFromTraits(token: Token) {
+export async function generateNameFromTraits(token: Token) {
     const data = token?.actor?.data?.data;
     // @ts-ignore How to type this?
     const traits = data?.traits;
@@ -88,7 +100,9 @@ export function generateNameFromTraits(token: Token) {
         traitsList = traitsList.concat(tokenRarities);
     }
 
-    traitsList = filterTraitList(traitsList);
+    const prefix = await fixesPreAndPost("npcMystifierPrefix");
+    const postfix = await fixesPreAndPost("npcMystifierPostfix");
+    traitsList = filterTraitList(traitsList, prefix, postfix);
 
     return traitsList
         .map((trait: string) => trait.trim())
@@ -99,9 +113,7 @@ export function generateNameFromTraits(token: Token) {
             return trait?.charAt(0).toLocaleUpperCase() + trait?.slice(1);
         })
         .map((trait: string) => {
-            const translationNeeded =
-                trait !== <string>(game as Game).settings.get(MODULENAME, "npcMystifierPrefix") &&
-                trait !== <string>(game as Game).settings.get(MODULENAME, "npcMystifierPostfix");
+            const translationNeeded = trait !== prefix && trait !== postfix;
             return (
                 (translationNeeded
                     ? (<Translations>(game as Game).i18n.translations[MODULENAME] ?? {})[`TRAITS.Trait${trait}`]
