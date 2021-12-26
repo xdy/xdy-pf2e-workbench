@@ -3,7 +3,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { mystifyModifierKey } from "../../settings";
 import { TokenData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
-function shouldSkipRandomNumber(token: Token) {
+function shouldSkipRandomNumber(token: Token | TokenDocument) {
     return (
         (game as Game).settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
         // @ts-ignore
@@ -11,12 +11,16 @@ function shouldSkipRandomNumber(token: Token) {
     );
 }
 
-export async function mystifyToken(token: Token | null, mystified: boolean): Promise<string> {
+export async function mystifyToken(
+    token: Token | TokenDocument | null,
+    isMystified: boolean,
+    doUpdate = true
+): Promise<string> {
     if (token === null) return "";
     let name = token?.name || "";
     if (token) {
         const keep = (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName");
-        if (mystified) {
+        if (isMystified) {
             if (keep) {
                 name = `${token?.actor?.name} ${name?.match(/\d+$/)?.[0] ?? ""}`;
             } else {
@@ -43,14 +47,18 @@ export async function mystifyToken(token: Token | null, mystified: boolean): Pro
             }
         }
     }
-    if (token.document) {
-        await token.document.update({ name: name });
-    } else {
-        token.data.name = name;
-        token.data.update(token.data);
-    }
 
-    return name;
+    if (doUpdate) {
+        if (!(token instanceof TokenDocument)) {
+            await token.document.update({ name: name });
+        } else {
+            token.data.name = name;
+            token.data.update(token.data);
+        }
+        return name;
+    } else {
+        return name;
+    }
 }
 
 function isMystifyModifierKeyPressed() {
@@ -76,11 +84,11 @@ export function preTokenCreateMystification(token: Token) {
         // @ts-ignore
         (!(game as Game).keyboard?.downKeys.has("V") || (game as Game).keyboard?.downKeys.has("Insert"))
     ) {
-        mystifyToken(token, isTokenNameDifferent(token));
+        mystifyToken(token, isTokenMystified(token));
     }
 }
 
-export function isTokenNameDifferent(token: Token | null): boolean {
+export function isTokenMystified(token: Token | TokenDocument | null): boolean {
     const tokenName = token?.data.name;
     const actorName = token?.actor?.name;
     if (tokenName !== actorName && (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
@@ -91,22 +99,46 @@ export function isTokenNameDifferent(token: Token | null): boolean {
     return tokenName !== actorName || false;
 }
 
+export async function doMystification(token: Token, active: boolean) {
+    const b = isTokenMystified(token);
+    //define array of objects to be updated
+    const updates = [
+        {
+            _id: <string>token.id,
+            name: await mystifyToken(token, active, false),
+        },
+    ];
+
+    if (b && (game as Game).settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor")) {
+        (canvas as Canvas)?.scene?.tokens
+            ?.filter((t) => t.actor?.id === token?.actor?.id)
+            ?.filter((x) => isTokenMystified(x))
+            ?.forEach(async (x) =>
+                updates.push({
+                    _id: <string>x.id,
+                    name: await mystifyToken(x, active, false),
+                })
+            );
+    }
+    (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
+}
+
 export function renderNameHud(data: TokenData, html: JQuery) {
     let token: Token | null;
     if ((game as Game).user?.isGM && canvas instanceof Canvas && canvas && canvas.tokens) {
         token = canvas.tokens.get(<string>data._id) ?? null;
 
-        const title = isTokenNameDifferent(token) ? "Unmystify" : "Mystify";
+        const title = isTokenMystified(token) ? "Unmystify" : "Mystify";
         const toggle = $(
             `<div class="control-icon ${
-                isTokenNameDifferent(token) ? "active" : ""
+                isTokenMystified(token) ? "active" : ""
             }" > <i class="fas fa-eye-slash"  title=${title}></i></div>`
         );
         toggle.on("click", async (e) => {
             const hudElement = $(e.currentTarget);
             const active = hudElement.hasClass("active");
-            if (isTokenNameDifferent(token) === active) {
-                await mystifyToken(token, active);
+            if (token !== null && isTokenMystified(token) === active) {
+                await doMystification(token, active);
             }
             hudElement.toggleClass("active");
         });

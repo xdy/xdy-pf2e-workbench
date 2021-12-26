@@ -86,7 +86,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
         .concat([postfix]);
 }
 
-export async function generateNameFromTraits(token: Token) {
+export async function generateNameFromTraits(token: Token | TokenDocument) {
     const data = token?.actor?.data?.data;
     // @ts-ignore How to type this?
     const traits = data?.traits;

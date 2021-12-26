@@ -1,6 +1,6 @@
 // Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
 import { MODULENAME } from "./xdy-pf2e-workbench";
-import { isTokenNameDifferent, mystifyToken } from "./app/mystify-token";
+import { doMystification, isTokenMystified } from "./app/mystify-token";
 
 export let mystifyModifierKey: string;
 
@@ -49,6 +49,15 @@ export function registerSettings() {
         default: "",
     });
 
+    settings.register(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor", {
+        name: "SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.name",
+        hint: "SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
     settings.register(MODULENAME, "npcMystifierModifierKey", {
         name: "SETTINGS.npcMystifierModifierKey.name",
         hint: "SETTINGS.npcMystifierModifierKey.hint",
@@ -77,7 +86,7 @@ export function registerSettings() {
             },
         ],
         onDown: () => {
-            canvas?.tokens?.controlled.filter((token) => mystifyToken(token, isTokenNameDifferent(token)));
+            canvas?.tokens?.controlled.filter(async (token) => await doMystification(token, isTokenMystified(token)));
         },
         onUp: () => {},
         restricted: false,

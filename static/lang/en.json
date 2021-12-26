@@ -17,6 +17,10 @@
             "name": "Word to postfix new name with",
             "hint": "What to postfix new name with, defaults to '' (example: 'Creature')."
         },
+        "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+            "name": "Demystify all tokens based on the same actor.",
+            "hint": "When this is enabled, all mystified tokens with the same base actor as the token being renamed will be demystified."
+        },
         "npcMystifierModifierKey": {
             "name": "Modifier key to use when mystifying by dragging onto the scene",
             "hint": "Hold this to mystify creature as it's dragged out to the scene. Note that if you choose Alt (not the default) it also hides the npc."
