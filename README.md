@@ -10,7 +10,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 
 ## Current features
 
-* NPC Mystification. Sets a token's name based on it's traits if mystified (by holding the configured modifier key when dragging into the scene, or by clicking the mystify button in the token hud). There are several options to filter out certain types of traits. A prefix or postfix can be added to the mystified name (either a partiular word, or one rolled on a user-provided rollable table). A random number can be added after the postfix, and optionally be kept when demystifying the creature.
+* NPC Mystification. Sets a token's name based on it's traits if mystified (by holding the configured modifier key when dragging into the scene, or by clicking the mystify button in the token hud). There are several options to filter out certain types of traits. A prefix or postfix can be added to the mystified name (either a user-provided word, or one rolled on a user-provided rollable table). A random number can be added after the postfix, and optionally be kept when demystifying the creature.
 E.g. 'Skeletal Champion' can become 'Unknown Mindless Undead Skeleton' + random number.
 
 ## Installation
