@@ -27,6 +27,15 @@ export function registerSettings() {
         type: Boolean,
     });
 
+    settings.register(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP", {
+        name: "SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.name",
+        hint: "SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
     //Mystification below this
     settings.register(MODULENAME, "npcMystifier", {
         name: "SETTINGS.npcMystifier.name",

@@ -4,9 +4,13 @@
             "name": "Ta bort alla utgångna effekter varje runda.",
             "hint": "Ta bort alla utgångna effekter varje runda i strid."
         },
+        "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
+            "name": "Aktivera automatiskt flytt av stridande som blir medvetslös utanför sin egen tur till strax före nuvarande stridande.",
+            "hint": "Aktivera automatiskt flytt av stridande som blir medvetslös utanför sin egen tur till strax före nuvarande stridande."
+        },
         "enableMoveBeforeCurrentCombatant": {
-            "name": "Möjliggör att vald stridande flyttas före den nuvarande kombattanten.",
-            "hint": "Möjliggör att flytta utvald stridande till före den nuvarande kombattanten, normalt eftersom nuvarande stridande har dödat vald stridande."
+            "name": "Möjliggör att vald stridande flyttas före nuvarande stridande.",
+            "hint": "Möjliggör att flytta utvald stridande till före nuvarande stridande, normalt eftersom nuvarande stridande har dödat vald stridande."
         },
         "moveBeforeCurrentCombatantContextMenu": {
             "name": "Flytta vald stridande före nuvarande stridande."

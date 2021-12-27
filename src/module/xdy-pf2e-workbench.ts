@@ -86,3 +86,18 @@ Hooks.on("updateCombat", () => {
         (game as Game).pf2e.effectTracker.removeExpired();
     }
 });
+
+Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) => {
+    if ((game as Game).settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP")) {
+        const combatant = <Combatant>(game as Game)?.combat?.getCombatantByToken(<string>actor.token?.id);
+        if (
+            combatant &&
+            combatant !== (game as Game).combat?.combatant &&
+            // @ts-ignore
+            actor.data.data.attributes.hp.value > 0 &&
+            getProperty(update, "data.attributes.hp.value") <= 0
+        ) {
+            await moveSelectedAheadOfCurrent(combatant);
+        }
+    }
+});
