@@ -18,9 +18,11 @@ export function registerKeybindings() {
         hint: "Key for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.", //Foundry bug: hint is not translated
         editable: [],
         onDown: async () => {
-            await moveSelectedAheadOfCurrent(
-                <Combatant>(game as Game)?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
-            );
+            if ((game as Game).user?.isGM) {
+                await moveSelectedAheadOfCurrent(
+                    <Combatant>(game as Game)?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
+                );
+            }
         },
     });
 

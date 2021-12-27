@@ -74,7 +74,9 @@ Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMen
             icon: '<i class="fas fa-skull"></i>',
             name: "SETTINGS.moveBeforeCurrentCombatantContextMenu.name",
             callback: async (li: any) => {
-                await moveSelectedAheadOfCurrent(getCombatantById(li.data("combatant-id")));
+                if ((game as Game).user?.isGM) {
+                    await moveSelectedAheadOfCurrent(getCombatantById(li.data("combatant-id")));
+                }
             },
         });
     }
@@ -89,7 +91,13 @@ Hooks.on("updateCombat", () => {
 
 Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) => {
     if ((game as Game).settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP")) {
-        const combatant = <Combatant>(game as Game)?.combat?.getCombatantByToken(<string>actor.token?.id);
+        const combatant = <Combatant>(
+            (game as Game)?.combat?.getCombatantByToken(
+                actor.isToken
+                    ? <string>actor.token?.id
+                    : <string>(canvas as Canvas)?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
+            )
+        );
         if (
             combatant &&
             combatant !== (game as Game).combat?.combatant &&

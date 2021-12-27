@@ -3,7 +3,7 @@ export async function moveSelectedAheadOfCurrent(selectedCombatant: Combatant): 
     //TODO Handle moving several tokens at once? For now, just take the first selected token.
     const combat = (game as Game)?.combat;
     // @ts-ignore
-    if ((game as Game).user?.isGM && combat && selectedCombatant && selectedCombatant !== combat?.combatant) {
+    if (combat && selectedCombatant && selectedCombatant !== combat?.combatant) {
         const previous = combat?.combatants
             .map((c) => ({
                 initiative: c.initiative || 0,
