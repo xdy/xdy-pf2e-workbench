@@ -1,6 +1,5 @@
 // Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
 import { MODULENAME } from "./xdy-pf2e-workbench";
-import { doMystification, isTokenMystified } from "./app/mystify-token";
 
 export let mystifyModifierKey: string;
 
@@ -9,6 +8,8 @@ export function registerSettings() {
 
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
     const settings = (game as Game).settings;
+
+    //Mystification below this
     settings.register(MODULENAME, "npcMystifier", {
         name: "SETTINGS.npcMystifier.name",
         hint: "SETTINGS.npcMystifier.hint",
@@ -74,25 +75,6 @@ export function registerSettings() {
         onChange: (key) => {
             return (mystifyModifierKey = <string>key);
         },
-    });
-
-    // @ts-ignore
-    game.keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
-        name: "SETTINGS.npcMystifierMystifyKey.name",
-        hint: "Select tokens and press this key to mystify them.", //Localization doesn't work for some reason? Should just be "SETTINGS.npcMystifierMystifyKey.hint",
-        editable: [
-            {
-                key: "KeyM",
-            },
-        ],
-        onDown: () => {
-            canvas?.tokens?.controlled.filter(async (token) => await doMystification(token, isTokenMystified(token)));
-        },
-        onUp: () => {},
-        restricted: false,
-        reservedModifiers: [],
-        // @ts-ignore
-        precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
 
     settings.register(MODULENAME, "npcMystifierAddRandomNumber", {

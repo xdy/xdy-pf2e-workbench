@@ -100,7 +100,6 @@ export function isTokenMystified(token: Token | TokenDocument | null): boolean {
 }
 
 export async function doMystification(token: Token, active: boolean) {
-    const b = isTokenMystified(token);
     //define array of objects to be updated
     const updates = [
         {
@@ -109,7 +108,11 @@ export async function doMystification(token: Token, active: boolean) {
         },
     ];
 
-    if (b && (game as Game).settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor")) {
+    if (
+        (game as Game).user?.isGM &&
+        isTokenMystified(token) &&
+        (game as Game).settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor")
+    ) {
         (canvas as Canvas)?.scene?.tokens
             ?.filter((t) => t.actor?.id === token?.actor?.id)
             ?.filter((x) => isTokenMystified(x))

@@ -1,5 +1,9 @@
 {
     "SETTINGS": {
+        "moveBeforeCurrentCombatantKey": {
+            "name": "Key for moving selected combatant before the current combatant.",
+            "hint": "Key for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list."
+        },
         "npcMystifier": {
             "name": "Turn on npc mystifier.",
             "hint": "Turn on npc mystifier, renaming tokens based on their traits if Ctrl (configurable) is clicked when adding to scene."

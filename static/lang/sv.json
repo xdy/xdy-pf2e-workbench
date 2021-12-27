@@ -1,5 +1,9 @@
 {
     "SETTINGS": {
+        "moveBeforeCurrentCombatantKey": {
+            "name": "Tangent för att flytta vald stridande före aktuell stridande.",
+            "hint": "Tangent för att flytta vald stridande före aktuell stridande, normalt eftersom aktuell stridande har dödat vald stridande... Pga avrundning kan flera stridande visa samma initiativ i listan. "
+        },
         "npcMystifier": {
             "name": "Slå på npcmystifierare.",
             "hint": "Slå på npcmystifierare, byt namn på spelfigurs baserat på deras egenskaper om Ctrl (konfigurerbar) klickas när du lägger till spelfiguren scenen."

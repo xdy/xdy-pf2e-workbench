@@ -19,6 +19,7 @@
 import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
 import { mangleChatMessage, preTokenCreateMystification, renderNameHud } from "./app/mystify-token";
+import { registerKeybindings } from "./keybinds";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -26,12 +27,9 @@ export const MODULENAME = "xdy-pf2e-workbench";
 Hooks.once("init", async () => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
 
-    // Assign custom classes and constants here
-
-    // Register custom module settings
     registerSettings();
+    registerKeybindings();
 
-    // Preload Handlebars templates
     await preloadTemplates();
 
     // Register custom sheets (if any)
