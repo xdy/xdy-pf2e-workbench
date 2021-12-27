@@ -9,6 +9,15 @@ export function registerSettings() {
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
     const settings = (game as Game).settings;
 
+    settings.register(MODULENAME, "purgeExpiredEffectsEachTurn", {
+        name: "SETTINGS.purgeExpiredEffectsEachTurn.name",
+        hint: "SETTINGS.purgeExpiredEffectsEachTurn.hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
     settings.register(MODULENAME, "enableMoveBeforeCurrentCombatant", {
         name: "SETTINGS.enableMoveBeforeCurrentCombatant.name",
         hint: "SETTINGS.enableMoveBeforeCurrentCombatant.hint",

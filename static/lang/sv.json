@@ -1,5 +1,9 @@
 {
     "SETTINGS": {
+        "purgeExpiredEffectsEachTurn": {
+            "name": "Ta bort alla utgångna effekter varje runda.",
+            "hint": "Ta bort alla utgångna effekter varje runda i strid."
+        },
         "enableMoveBeforeCurrentCombatant": {
             "name": "Möjliggör att vald stridande flyttas före den nuvarande kombattanten.",
             "hint": "Möjliggör att flytta utvald stridande till före den nuvarande kombattanten, normalt eftersom nuvarande stridande har dödat vald stridande."
