@@ -17,3 +17,16 @@ export async function moveSelectedAheadOfCurrent(selectedCombatant: Combatant): 
         await combat?.setInitiative(<string>selectedCombatant?.id, initiative);
     }
 }
+
+export function getCombatantById(combatantId: any) {
+    return <Combatant>(game as Game)?.combat?.getCombatantByToken(
+        <string>(game as Game)?.combat?.combatants
+            .map((c) => ({
+                id: <string>c.id,
+                tokenId: <string>c.token?.id,
+            }))
+            .find((c) => {
+                return c.id === combatantId;
+            })?.tokenId
+    );
+}

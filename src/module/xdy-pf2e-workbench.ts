@@ -20,7 +20,7 @@ import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
 import { mangleChatMessage, preTokenCreateMystification, renderNameHud } from "./app/mystify-token";
 import { registerKeybindings } from "./keybinds";
-import { moveSelectedAheadOfCurrent } from "./app/moveCombatant";
+import { getCombatantById, moveSelectedAheadOfCurrent } from "./app/moveCombatant";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -74,18 +74,7 @@ Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMen
             icon: '<i class="fas fa-skull"></i>',
             name: "SETTINGS.moveBeforeCurrentCombatantContextMenu.name",
             callback: async (li: any) => {
-                await moveSelectedAheadOfCurrent(
-                    <Combatant>(game as Game)?.combat?.getCombatantByToken(
-                        <string>(game as Game)?.combat?.combatants
-                            .map((c) => ({
-                                id: <string>c.id,
-                                tokenId: <string>c.token?.id,
-                            }))
-                            .find((c) => {
-                                return c.id === li.data("combatant-id");
-                            })?.tokenId
-                    )
-                );
+                await moveSelectedAheadOfCurrent(getCombatantById(li.data("combatant-id")));
             },
         });
     }
