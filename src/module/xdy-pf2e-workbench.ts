@@ -20,6 +20,7 @@ import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
 import { mangleChatMessage, preTokenCreateMystification, renderNameHud } from "./app/mystify-token";
 import { registerKeybindings } from "./keybinds";
+import { moveSelectedAheadOfCurrent } from "./app/moveCombatant";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -64,5 +65,28 @@ Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
 Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
     if ((game as Game).settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
         mangleChatMessage(message, html);
+    }
+});
+
+Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMenuEntry[]) => {
+    if ((game as Game).user?.isGM && (game as Game).settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
+        entryOptions.push({
+            icon: '<i class="fas fa-skull"></i>',
+            name: "SETTINGS.moveBeforeCurrentCombatantContextMenu.name",
+            callback: async (li: any) => {
+                await moveSelectedAheadOfCurrent(
+                    <Combatant>(game as Game)?.combat?.getCombatantByToken(
+                        <string>(game as Game)?.combat?.combatants
+                            .map((c) => ({
+                                id: <string>c.id,
+                                tokenId: <string>c.token?.id,
+                            }))
+                            .find((c) => {
+                                return c.id === li.data("combatant-id");
+                            })?.tokenId
+                    )
+                );
+            },
+        });
     }
 });

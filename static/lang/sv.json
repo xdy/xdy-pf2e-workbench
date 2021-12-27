@@ -1,5 +1,12 @@
 {
     "SETTINGS": {
+        "enableMoveBeforeCurrentCombatant": {
+            "name": "Möjliggör att vald stridande flyttas före den nuvarande kombattanten.",
+            "hint": "Möjliggör att flytta utvald stridande till före den nuvarande kombattanten, normalt eftersom nuvarande stridande har dödat vald stridande."
+        },
+        "moveBeforeCurrentCombatantContextMenu": {
+            "name": "Flytta vald stridande före nuvarande stridande."
+        },
         "moveBeforeCurrentCombatantKey": {
             "name": "Tangent för att flytta vald stridande före aktuell stridande.",
             "hint": "Tangent för att flytta vald stridande före aktuell stridande, normalt eftersom aktuell stridande har dödat vald stridande... Pga avrundning kan flera stridande visa samma initiativ i listan. "
