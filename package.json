@@ -26,7 +26,7 @@
         "docs": "typedoc"
     },
     "devDependencies": {
-        "@league-of-foundry-developers/foundry-vtt-types": "^0.8.9-9",
+        "@league-of-foundry-developers/foundry-vtt-types": "^0.8.9-10",
         "@semantic-release/changelog": "^6.0.1",
         "@semantic-release/commit-analyzer": "^9.0.2",
         "@semantic-release/exec": "^6.0.3",
@@ -40,8 +40,8 @@
         "@types/mini-css-extract-plugin": "^2.4.0",
         "@types/node": "^16.11.17",
         "@types/webpack-env": "^1.16.3",
-        "@typescript-eslint/eslint-plugin": "^5.8.0",
-        "@typescript-eslint/parser": "^5.8.0",
+        "@typescript-eslint/eslint-plugin": "^5.8.1",
+        "@typescript-eslint/parser": "^5.8.1",
         "copy-webpack-plugin": "^10.2.0",
         "css-loader": "^6.5.1",
         "css-minimizer-webpack-plugin": "^3.3.1",
