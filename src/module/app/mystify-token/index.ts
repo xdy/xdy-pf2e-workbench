@@ -123,7 +123,8 @@ export async function doMystification(token: Token, active: boolean) {
                 })
             );
     }
-    (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
+
+    return updates;
 }
 
 export function renderNameHud(data: TokenData, html: JQuery) {
@@ -141,7 +142,8 @@ export function renderNameHud(data: TokenData, html: JQuery) {
             const hudElement = $(e.currentTarget);
             const active = hudElement.hasClass("active");
             if (token !== null && isTokenMystified(token) === active) {
-                await doMystification(token, active);
+                const updates = await doMystification(token, active);
+                await (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
             }
             hudElement.toggleClass("active");
         });

@@ -1,7 +1,7 @@
 // Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
 import { MODULENAME } from "./xdy-pf2e-workbench";
-import { doMystification, isTokenMystified } from "./app/mystify-token";
 import { moveSelectedAheadOfCurrent } from "./app/moveCombatant";
+import { doMystification, isTokenMystified } from "./app/mystify-token";
 
 export let mystifyModifierKey: string;
 
@@ -35,8 +35,13 @@ export function registerKeybindings() {
                 key: "KeyM",
             },
         ],
-        onDown: () => {
-            canvas?.tokens?.controlled.filter(async (token) => await doMystification(token, isTokenMystified(token)));
+        onDown: async () => {
+            const updates = [];
+            for (const token of canvas?.tokens?.controlled || []) {
+                updates.push(...(await doMystification(token, isTokenMystified(token))));
+            }
+
+            await (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
         },
         restricted: false,
         reservedModifiers: [],
