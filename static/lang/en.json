@@ -30,11 +30,11 @@
         },
         "npcMystifierPrefix": {
             "name": "Word or rollable table to prefix new name with",
-            "hint": "What to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a row from this table will be used as the prefix."
+            "hint": "What to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead."
         },
         "npcMystifierPostfix": {
-            "name": "Word to postfix new name with",
-            "hint": "What to postfix new name with, defaults to '' (example: 'Creature')."
+            "name": "Word or rollable table to postfix new name with",
+            "hint": "What to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead."
         },
         "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
             "name": "Demystify all tokens based on the same actor.",
