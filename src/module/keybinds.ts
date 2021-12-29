@@ -17,6 +17,7 @@ export function registerKeybindings() {
         name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
         hint: "Key for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.", //Foundry bug: hint is not translated
         editable: [],
+        // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
             if ((game as Game).user?.isGM) {
                 await moveSelectedAheadOfCurrent(
@@ -35,6 +36,7 @@ export function registerKeybindings() {
                 key: "KeyM",
             },
         ],
+        // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
             if (canMystify()) {
                 const updates = [];
