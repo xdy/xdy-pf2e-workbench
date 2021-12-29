@@ -129,7 +129,7 @@ export async function doMystification(token: Token, active: boolean) {
 
 export function renderNameHud(data: TokenData, html: JQuery) {
     let token: Token | null;
-    if ((game as Game).user?.isGM && canvas instanceof Canvas && canvas && canvas.tokens) {
+    if (canvas && canvas.tokens) {
         token = canvas.tokens.get(<string>data._id) ?? null;
 
         const title = isTokenMystified(token) ? "Unmystify" : "Mystify";
@@ -138,16 +138,18 @@ export function renderNameHud(data: TokenData, html: JQuery) {
                 isTokenMystified(token) ? "active" : ""
             }" > <i class="fas fa-eye-slash"  title=${title}></i></div>`
         );
-        toggle.on("click", async (e) => {
-            const hudElement = $(e.currentTarget);
-            const active = hudElement.hasClass("active");
-            if (token !== null && isTokenMystified(token) === active) {
-                const updates = await doMystification(token, active);
-                await (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
-            }
-            hudElement.toggleClass("active");
-        });
-        html.find("div.col.left").append(toggle);
+        if (canMystify()) {
+            toggle.on("click", async (e) => {
+                const hudElement = $(e.currentTarget);
+                const active = hudElement.hasClass("active");
+                if (token !== null && isTokenMystified(token) === active) {
+                    const updates = await doMystification(token, active);
+                    await (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
+                }
+                hudElement.toggleClass("active");
+            });
+            html.find("div.col.left").append(toggle);
+        }
     }
 }
 
@@ -163,4 +165,8 @@ export function mangleChatMessage(message: ChatMessage, html: JQuery) {
     if (tokenNameNoNumber && actor?.name?.trim() !== tokenNameNoNumber && jqueryContent && jqueryContent.html()) {
         jqueryContent.html(jqueryContent.html().replace(new RegExp(<string>actor?.name, "gi"), tokenNameNoNumber));
     }
+}
+
+export function canMystify() {
+    return (game as Game).user?.isGM && canvas instanceof Canvas && canvas && canvas.tokens && canvas.scene?.active;
 }

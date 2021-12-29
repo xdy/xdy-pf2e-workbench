@@ -1,8 +1,11 @@
 {
     "SETTINGS": {
+        "notifications": {
+            "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
+        },
         "purgeExpiredEffectsEachTurn": {
             "name": "Purge all expired effects each turn.",
-            "hint": "Purge all expired effects each turn in combat."
+            "hint": "Purge all expired effects each turn in combat. Reload (f5) after changing."
         },
         "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
             "name": "Enable automatically moving combatant that goes unconscious outside it's own turn to just before the current combatant.",
@@ -21,7 +24,7 @@
         },
         "npcMystifier": {
             "name": "Turn on npc mystifier.",
-            "hint": "Turn on npc mystifier, renaming tokens based on their traits if Ctrl (configurable) is clicked when adding to scene."
+            "hint": "Turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene."
         },
         "npcMystifierMethod": {
             "name": "How to generate mystified npc names.",
@@ -38,11 +41,11 @@
         },
         "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
             "name": "Demystify all tokens based on the same actor.",
-            "hint": "When this is enabled, all mystified tokens with the same base actor as the token being renamed will be demystified."
+            "hint": "When this is enabled, all mystified tokens on the active scene with the same base actor as the token being renamed will be demystified."
         },
         "npcMystifierModifierKey": {
             "name": "Modifier key to use when mystifying by dragging onto the scene",
-            "hint": "Hold this to mystify creature as it's dragged out to the scene. Note that if you choose Alt (not the default) it also hides the npc."
+            "hint": "Hold this to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc."
         },
         "npcMystifierMystifyKey": {
             "name": "Key for mystifying selected tokens",

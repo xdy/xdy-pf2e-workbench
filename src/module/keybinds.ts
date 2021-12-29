@@ -1,7 +1,7 @@
 // Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
 import { MODULENAME } from "./xdy-pf2e-workbench";
 import { moveSelectedAheadOfCurrent } from "./app/moveCombatant";
-import { doMystification, isTokenMystified } from "./app/mystify-token";
+import { canMystify, doMystification, isTokenMystified } from "./app/mystify-token";
 
 export let mystifyModifierKey: string;
 
@@ -29,19 +29,23 @@ export function registerKeybindings() {
     //Mystification below this
     keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
         name: "SETTINGS.npcMystifierMystifyKey.name",
-        hint: "Select tokens and press this key to mystify them.", //Localization doesn't work for some reason? Should just be "SETTINGS.npcMystifierMystifyKey.hint",
+        hint: "Select tokens and press this key to mystify them.", //Localization of the keybind hint doesn't work for some reason. Should just be "SETTINGS.npcMystifierMystifyKey.hint",
         editable: [
             {
                 key: "KeyM",
             },
         ],
         onDown: async () => {
-            const updates = [];
-            for (const token of canvas?.tokens?.controlled || []) {
-                updates.push(...(await doMystification(token, isTokenMystified(token))));
-            }
+            if (canMystify()) {
+                const updates = [];
+                for (const token of canvas?.tokens?.controlled || []) {
+                    updates.push(...(await doMystification(token, isTokenMystified(token))));
+                }
 
-            await (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
+                await (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
+            } else {
+                ui.notifications?.warn((game as Game).i18n.localize("SETTINGS.notifications.cantMystify"));
+            }
         },
         restricted: false,
         reservedModifiers: [],
