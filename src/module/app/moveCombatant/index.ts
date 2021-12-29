@@ -2,7 +2,6 @@ export async function moveSelectedAheadOfCurrent(selectedCombatant: Combatant): 
     //TODO Ugly hack, might want to do a PR to expose the code in encounter-tracker#setInitiativeFromDrop?
     //TODO Handle moving several tokens at once? For now, just take the first selected token.
     const combat = (game as Game)?.combat;
-    // @ts-ignore
     if (combat && selectedCombatant && selectedCombatant !== combat?.combatant) {
         const previous = combat?.combatants
             .map((c) => ({

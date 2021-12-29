@@ -12,7 +12,6 @@ export function registerKeybindings() {
     // @ts-ignore
     const keybindings = (game as Game).keybindings;
 
-    // @ts-ignore
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
         hint: "Key for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.", //Foundry bug: hint is not translated
@@ -51,7 +50,6 @@ export function registerKeybindings() {
         },
         restricted: false,
         reservedModifiers: [],
-        // @ts-ignore
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
 }

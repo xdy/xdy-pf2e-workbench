@@ -64,10 +64,8 @@ export async function mystifyToken(
 function isMystifyModifierKeyPressed() {
     switch (mystifyModifierKey) {
         case "ALT":
-            // @ts-ignore
             return (game as Game)?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
         case "CONTROL":
-            // @ts-ignore
             return (game as Game)?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
         default:
             return false;
@@ -79,9 +77,7 @@ export function preTokenCreateMystification(token: Token) {
         (game as Game).user?.isGM &&
         !((game as Game).settings.get(MODULENAME, "npcMystifierModifierKey") === "DISABLED") &&
         ((game as Game).settings.get(MODULENAME, "npcMystifierModifierKey") === "ALWAYS" ||
-            // @ts-ignore
             isMystifyModifierKeyPressed()) &&
-        // @ts-ignore
         (!(game as Game).keyboard?.downKeys.has("V") || (game as Game).keyboard?.downKeys.has("Insert"))
     ) {
         mystifyToken(token, isTokenMystified(token));

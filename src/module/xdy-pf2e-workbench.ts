@@ -124,11 +124,7 @@ Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
                 .filter((row: UpdateRow) => row.data?.slug === "dying")
                 .find((row: UpdateRow) => row.data?.value.value === 1);
         const combatant = <Combatant>(game as Game)?.combat?.getCombatantByToken(<string>tokenDoc.id);
-        const move =
-            combatant &&
-            combatant !== (game as Game).combat?.combatant &&
-            // @ts-ignore
-            shouldMove;
+        const move = combatant && combatant !== (game as Game).combat?.combatant && shouldMove;
         if (move) {
             await moveSelectedAheadOfCurrent(combatant);
         }
