@@ -36,6 +36,15 @@ export function registerSettings() {
         type: Boolean,
     });
 
+    settings.register(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying", {
+        name: "SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnStatusDying.name",
+        hint: "SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnStatusDying.hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
     //Mystification below this
     settings.register(MODULENAME, "npcMystifier", {
         name: "SETTINGS.npcMystifier.name",

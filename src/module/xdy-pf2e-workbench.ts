@@ -109,3 +109,28 @@ Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) 
         }
     }
 });
+
+// @ts-ignore Can't be bothered to type update
+Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
+    type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
+    if ((game as Game).settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying")) {
+        const shouldMove =
+            //@ts-ignore - This is a dirty hack to get around the fact that _actor is protected so I can check if already dying
+            !tokenDoc?._actor?.hasCondition("dying") &&
+            update.actorData?.items &&
+            update.actorData.items
+                .filter((row: UpdateRow) => row.type === "condition")
+                .filter((row: UpdateRow) => row.data?.active)
+                .filter((row: UpdateRow) => row.data?.slug === "dying")
+                .find((row: UpdateRow) => row.data?.value.value === 1);
+        const combatant = <Combatant>(game as Game)?.combat?.getCombatantByToken(<string>tokenDoc.id);
+        const move =
+            combatant &&
+            combatant !== (game as Game).combat?.combatant &&
+            // @ts-ignore
+            shouldMove;
+        if (move) {
+            await moveSelectedAheadOfCurrent(combatant);
+        }
+    }
+});

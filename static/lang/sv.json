@@ -7,9 +7,13 @@
             "name": "Ta bort alla utgångna effekter varje runda.",
             "hint": "Ta bort alla utgångna effekter varje runda i strid. Ladda om (f5) efter ändring."
         },
+        "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
+            "name": "Aktivera automatisk sättning av initiativ på stridande som får statusen Dying utanför sin egen runda till strax före  nuvarande stridande.",
+            "hint": "Aktivera automatisk sättning av initiativ på stridande som får statusen Dying utanför sin egen runda till strax före  nuvarande stridande."
+        },
         "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
-            "name": "Aktivera automatiskt flytt av stridande som blir medvetslös utanför sin egen tur till strax före nuvarande stridande.",
-            "hint": "Aktivera automatiskt flytt av stridande som blir medvetslös utanför sin egen tur till strax före nuvarande stridande."
+            "name": "Aktivera automatisk sättning av initiativ på stridande som går ner till 0 hp utanför sin egen runda till strax före nuvarande stridande.",
+            "hint": "Aktivera automatisk sättning av initiativ på stridande som går ner till 0 hp utanför sin egen runda till strax före nuvarande stridande."
         },
         "enableMoveBeforeCurrentCombatant": {
             "name": "Möjliggör att vald stridande flyttas före nuvarande stridande.",

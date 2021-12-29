@@ -7,9 +7,13 @@
             "name": "Purge all expired effects each turn.",
             "hint": "Purge all expired effects each turn in combat. Reload (f5) after changing."
         },
+        "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
+            "name": "Enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant.",
+            "hint": "Enable automatically setting initiative of that gets the Dying status outside it's own turn to just before the current combatant."
+        },
         "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
-            "name": "Enable automatically moving combatant that goes unconscious outside it's own turn to just before the current combatant.",
-            "hint": "Enable automatically moving combatant that goes unconscious outside it's own turn to just before the current combatant."
+            "name": "Enable automatically setting initiative of that goes down to 0 hp outside it's own turn to just before the current combatant.",
+            "hint": "Enable automatically setting initiative of that goes down to 0 hp outside it's own turn to just before the current combatant."
         },
         "enableMoveBeforeCurrentCombatant": {
             "name": "Enable manually moving selected combatant before the current combatant.",
