@@ -115,8 +115,8 @@ Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
     type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
     if ((game as Game).settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying")) {
         const shouldMove =
-            //@ts-ignore - This is a dirty hack to get around the fact that _actor is protected so I can check if already dying
-            !tokenDoc?._actor?.hasCondition("dying") &&
+            //@ts-ignore Only pf2e actor has the hasCondition method and I haven't the type for that, so...
+            !tokenDoc?.actor?.hasCondition("dying") &&
             update.actorData?.items &&
             update.actorData.items
                 .filter((row: UpdateRow) => row.type === "condition")
