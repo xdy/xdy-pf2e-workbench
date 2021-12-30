@@ -4,10 +4,10 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { Translations } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/localization";
 
 async function fixesPreAndPost(settingkey: string): Promise<string> {
-    const fixSetting: string = <string>(game as Game).settings.get(MODULENAME, settingkey);
+    const fixSetting: string = <string>game.settings.get(MODULENAME, settingkey);
 
     return (
-        (game as Game)?.tables
+        game?.tables
             ?.find((table) => table.name === fixSetting)
             // @ts-ignore
             ?.draw({ displayChat: false })
@@ -17,11 +17,9 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
 
 function filterTraitList(traitsList: string[], prefix: string, postfix: string): string[] {
     //TODO Clean up this mess
-    if ((game as Game).settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
+    if (game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
         const blacklist =
-            (<string>(game as Game).settings.get(MODULENAME, "npcMystifierFilterBlacklist"))
-                .toLocaleLowerCase()
-                .split(",") || null;
+            game.settings.get(MODULENAME, "npcMystifierFilterBlacklist").toLocaleLowerCase().split(",") || null;
         if (blacklist) {
             traitsList = traitsList.filter((trait: string) => {
                 return !blacklist.map((trait: string) => trait.trim()).includes(trait);
@@ -30,15 +28,15 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     }
 
     let eliteWeak: string[] = [];
-    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
+    if (!game.settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
         eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
     }
 
     let rarities: string[] = [];
-    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterRarities")) {
+    if (!game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
         rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
         const replacement: string = (<string>(
-            (game as Game).settings.get(MODULENAME, "npcMystifierFilterRaritiesReplacement")
+            game.settings.get(MODULENAME, "npcMystifierFilterRaritiesReplacement")
         )).toLocaleLowerCase();
         if (replacement !== "") {
             rarities = rarities.map((trait: string) => {
@@ -52,22 +50,22 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     }
 
     let creatures: string[] = [];
-    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterCreatureTypesTraits")) {
+    if (!game.settings.get(MODULENAME, "npcMystifierFilterCreatureTypesTraits")) {
         creatures = traitsList.filter((trait: string) => TRAITS.CREATURE_TYPES.includes(trait));
     }
 
     let families: string[] = [];
-    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterCreatureFamilyTraits")) {
+    if (!game.settings.get(MODULENAME, "npcMystifierFilterCreatureFamilyTraits")) {
         families = traitsList.filter((trait: string) => TRAITS.CREATURE_FAMILIES.includes(trait));
     }
 
     let alignments: string[] = [];
-    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterAlignmentTraits")) {
+    if (!game.settings.get(MODULENAME, "npcMystifierFilterAlignmentTraits")) {
         alignments = traitsList.filter((trait: string) => TRAITS.ALIGNMENTS.includes(trait));
     }
 
     let others: string[] = [];
-    if (!(game as Game).settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
+    if (!game.settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
         others = traitsList
             .filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait))
             .filter((trait: string) => !TRAITS.RARITIES.includes(trait))
@@ -116,7 +114,7 @@ export async function generateNameFromTraits(token: Token | TokenDocument) {
             const translationNeeded = trait !== prefix && trait !== postfix;
             return (
                 (translationNeeded
-                    ? (<Translations>(game as Game).i18n.translations[MODULENAME] ?? {})[`TRAITS.Trait${trait}`]
+                    ? (<Translations>game.i18n.translations[MODULENAME] ?? {})[`TRAITS.Trait${trait}`]
                     : trait) ?? trait
             );
         })

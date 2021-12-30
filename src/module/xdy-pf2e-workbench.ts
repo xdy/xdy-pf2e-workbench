@@ -24,6 +24,15 @@ import { getCombatantById, moveSelectedAheadOfCurrent } from "./app/moveCombatan
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
+declare global {
+    interface LenientGlobalVariableTypes {
+        game: never;
+        canvas: never;
+        ui: never;
+        i18n: never;
+    }
+}
+
 // Initialize module
 Hooks.once("init", async () => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
@@ -51,30 +60,30 @@ Hooks.once("ready", async () => {
 Hooks.on("preCreateToken", async (token: Token) => {
     console.log(`${MODULENAME} | preCreateToken`);
 
-    if ((game as Game).settings.get(MODULENAME, "npcMystifier")) {
+    if (game.settings.get(MODULENAME, "npcMystifier")) {
         preTokenCreateMystification(token);
     }
 });
 
 Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
-    if ((game as Game).settings.get(MODULENAME, "npcMystifier")) {
+    if (game.settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);
     }
 });
 
 Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
-    if ((game as Game).settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
+    if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
         mangleChatMessage(message, html);
     }
 });
 
 Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMenuEntry[]) => {
-    if ((game as Game).user?.isGM && (game as Game).settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
+    if (game.user?.isGM && game.settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
         entryOptions.push({
             icon: '<i class="fas fa-skull"></i>',
             name: "SETTINGS.moveBeforeCurrentCombatantContextMenu.name",
             callback: async (li: any) => {
-                if ((game as Game).user?.isGM) {
+                if (game.user?.isGM) {
                     await moveSelectedAheadOfCurrent(getCombatantById(li.data("combatant-id")));
                 }
             },
@@ -83,24 +92,24 @@ Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMen
 });
 
 Hooks.on("updateCombat", () => {
-    if ((game as Game).settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
+    if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
         // @ts-ignore
-        (game as Game).pf2e.effectTracker.removeExpired();
+        game.pf2e.effectTracker.removeExpired();
     }
 });
 
 Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) => {
-    if ((game as Game).settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP")) {
+    if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP")) {
         const combatant = <Combatant>(
-            (game as Game)?.combat?.getCombatantByToken(
+            game?.combat?.getCombatantByToken(
                 actor.isToken
                     ? <string>actor.token?.id
-                    : <string>(canvas as Canvas)?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
+                    : <string>canvas?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
             )
         );
         if (
             combatant &&
-            combatant !== (game as Game).combat?.combatant &&
+            combatant !== game.combat?.combatant &&
             // @ts-ignore
             actor.data.data.attributes.hp.value > 0 &&
             getProperty(update, "data.attributes.hp.value") <= 0
@@ -113,7 +122,7 @@ Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) 
 // @ts-ignore Can't be bothered to type update
 Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
     type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
-    if ((game as Game).settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying")) {
+    if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying")) {
         const shouldMove =
             //@ts-ignore Only pf2e actor has the hasCondition method and I haven't the type for that, so...
             !tokenDoc?.actor?.hasCondition("dying") &&
@@ -123,8 +132,8 @@ Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
                 .filter((row: UpdateRow) => row.data?.active)
                 .filter((row: UpdateRow) => row.data?.slug === "dying")
                 .find((row: UpdateRow) => row.data?.value.value === 1);
-        const combatant = <Combatant>(game as Game)?.combat?.getCombatantByToken(<string>tokenDoc.id);
-        const move = combatant && combatant !== (game as Game).combat?.combatant && shouldMove;
+        const combatant = <Combatant>game?.combat?.getCombatantByToken(<string>tokenDoc.id);
+        const move = combatant && combatant !== game.combat?.combatant && shouldMove;
         if (move) {
             await moveSelectedAheadOfCurrent(combatant);
         }

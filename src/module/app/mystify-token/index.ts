@@ -5,7 +5,7 @@ import { TokenData } from "@league-of-foundry-developers/foundry-vtt-types/src/f
 
 function shouldSkipRandomNumber(token: Token | TokenDocument) {
     return (
-        (game as Game).settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
+        game.settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
         // @ts-ignore
         token?.actor?.data?.data?.traits?.rarity?.value === "unique"
     );
@@ -19,7 +19,7 @@ export async function mystifyToken(
     if (token === null) return "";
     let name = token?.name || "";
     if (token) {
-        const keep = (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName");
+        const keep = game.settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName");
         if (isMystified) {
             if (keep) {
                 name = `${token?.actor?.name} ${name?.match(/\d+$/)?.[0] ?? ""}`;
@@ -27,19 +27,19 @@ export async function mystifyToken(
                 name = token?.actor?.name || "";
             }
         } else {
-            switch ((game as Game).settings.get(MODULENAME, "npcMystifierMethod")) {
+            switch (game.settings.get(MODULENAME, "npcMystifierMethod")) {
                 default:
                     name = await generateNameFromTraits(token);
             }
 
-            const addRandom = (game as Game).settings.get(MODULENAME, "npcMystifierAddRandomNumber");
+            const addRandom = game.settings.get(MODULENAME, "npcMystifierAddRandomNumber");
             if (token?.name?.match(/ \d+$/)?.[0] && keep && !shouldSkipRandomNumber(token)) {
                 name = `${name} ${token?.name?.match(/ \d+$/)?.[0] ?? ""}`;
             } else {
                 if (addRandom && !shouldSkipRandomNumber(token)) {
                     let rolled = Math.floor(Math.random() * 100) + 1;
                     //Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
-                    if ((game as Game).scenes?.active?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
+                    if (game.scenes?.active?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
                         rolled = Math.floor(Math.random() * 100) + 1;
                     }
                     name += ` ${rolled}`;
@@ -64,9 +64,9 @@ export async function mystifyToken(
 function isMystifyModifierKeyPressed() {
     switch (mystifyModifierKey) {
         case "ALT":
-            return (game as Game)?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
+            return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
         case "CONTROL":
-            return (game as Game)?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
+            return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
         default:
             return false;
     }
@@ -74,11 +74,10 @@ function isMystifyModifierKeyPressed() {
 
 export function preTokenCreateMystification(token: Token) {
     if (
-        (game as Game).user?.isGM &&
-        !((game as Game).settings.get(MODULENAME, "npcMystifierModifierKey") === "DISABLED") &&
-        ((game as Game).settings.get(MODULENAME, "npcMystifierModifierKey") === "ALWAYS" ||
-            isMystifyModifierKeyPressed()) &&
-        (!(game as Game).keyboard?.downKeys.has("V") || (game as Game).keyboard?.downKeys.has("Insert"))
+        game.user?.isGM &&
+        !(game.settings.get(MODULENAME, "npcMystifierModifierKey") === "DISABLED") &&
+        (game.settings.get(MODULENAME, "npcMystifierModifierKey") === "ALWAYS" || isMystifyModifierKeyPressed()) &&
+        (!game.keyboard?.downKeys.has("V") || game.keyboard?.downKeys.has("Insert"))
     ) {
         mystifyToken(token, isTokenMystified(token));
     }
@@ -87,7 +86,7 @@ export function preTokenCreateMystification(token: Token) {
 export function isTokenMystified(token: Token | TokenDocument | null): boolean {
     const tokenName = token?.data.name;
     const actorName = token?.actor?.name;
-    if (tokenName !== actorName && (game as Game).settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
+    if (tokenName !== actorName && game.settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
         const tokenNameNoNumber = tokenName?.trim().replace(/\d+$/, "").trim();
         const actorNameNoNumber = actorName?.replace(/\d+$/, "").trim();
         return tokenNameNoNumber !== actorNameNoNumber;
@@ -105,11 +104,11 @@ export async function doMystification(token: Token, active: boolean) {
     ];
 
     if (
-        (game as Game).user?.isGM &&
+        game.user?.isGM &&
         isTokenMystified(token) &&
-        (game as Game).settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor")
+        game.settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor")
     ) {
-        (canvas as Canvas)?.scene?.tokens
+        canvas?.scene?.tokens
             ?.filter((t) => t.actor?.id === token?.actor?.id)
             ?.filter((x) => isTokenMystified(x))
             ?.forEach(async (x) =>
@@ -140,7 +139,7 @@ export function renderNameHud(data: TokenData, html: JQuery) {
                 const active = hudElement.hasClass("active");
                 if (token !== null && isTokenMystified(token) === active) {
                     const updates = await doMystification(token, active);
-                    await (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
+                    await game.scenes?.active?.updateEmbeddedDocuments("Token", updates);
                 }
                 hudElement.toggleClass("active");
             });
@@ -152,10 +151,10 @@ export function renderNameHud(data: TokenData, html: JQuery) {
 export function mangleChatMessage(message: ChatMessage, html: JQuery) {
     const actorId = <string>message?.data?.speaker?.actor;
     const tokenId = message?.data?.speaker?.token;
-    const actor = (game as Game).actors?.get(actorId);
+    const actor = game.actors?.get(actorId);
     const jqueryContent = html?.find(".action-card");
 
-    const tokenName = <string>(game as Game).scenes?.active?.tokens?.find((t) => t?.id === tokenId)?.name;
+    const tokenName = <string>game.scenes?.active?.tokens?.find((t) => t?.id === tokenId)?.name;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 
     if (tokenNameNoNumber && actor?.name?.trim() !== tokenNameNoNumber && jqueryContent && jqueryContent.html()) {
@@ -164,5 +163,5 @@ export function mangleChatMessage(message: ChatMessage, html: JQuery) {
 }
 
 export function canMystify() {
-    return (game as Game).user?.isGM && canvas instanceof Canvas && canvas && canvas.tokens && canvas.scene?.active;
+    return game.user?.isGM && canvas && canvas.tokens && canvas.scene?.active;
 }

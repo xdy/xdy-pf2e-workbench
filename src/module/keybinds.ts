@@ -10,7 +10,7 @@ export function registerKeybindings() {
 
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
     // @ts-ignore
-    const keybindings = (game as Game).keybindings;
+    const keybindings = game.keybindings;
 
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
@@ -18,9 +18,9 @@ export function registerKeybindings() {
         editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
-            if ((game as Game).user?.isGM) {
+            if (game.user?.isGM) {
                 await moveSelectedAheadOfCurrent(
-                    <Combatant>(game as Game)?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
+                    <Combatant>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
                 );
             }
         },
@@ -43,9 +43,9 @@ export function registerKeybindings() {
                     updates.push(...(await doMystification(token, isTokenMystified(token))));
                 }
 
-                await (game as Game).scenes?.active?.updateEmbeddedDocuments("Token", updates);
+                await game.scenes?.active?.updateEmbeddedDocuments("Token", updates);
             } else {
-                ui.notifications?.warn((game as Game).i18n.localize("SETTINGS.notifications.cantMystify"));
+                ui.notifications?.warn(game.i18n.localize("SETTINGS.notifications.cantMystify"));
             }
         },
         restricted: false,
