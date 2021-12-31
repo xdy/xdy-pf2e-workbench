@@ -1,7 +1,7 @@
 // Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
 import { MODULENAME } from "./xdy-pf2e-workbench";
 
-export let mystifyModifierKey: string;
+// export let mystifyModifierKey: string;
 
 declare global {
     namespace ClientSettings {
@@ -22,7 +22,7 @@ declare global {
             "xdy-pf2e-workbench.npcMystifierFilterRaritiesReplacement": string;
             "xdy-pf2e-workbench.npcMystifierKeepNumberAtEndOfName": boolean;
             "xdy-pf2e-workbench.npcMystifierMethod": string;
-            "xdy-pf2e-workbench.npcMystifierModifierKey": string;
+            // "xdy-pf2e-workbench.npcMystifierModifierKey": string;
             "xdy-pf2e-workbench.npcMystifierPostfix": string;
             "xdy-pf2e-workbench.npcMystifierPrefix": string;
             "xdy-pf2e-workbench.npcMystifierSkipRandomNumberForUnique": boolean;
@@ -122,23 +122,23 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    game.settings.register(MODULENAME, "npcMystifierModifierKey", {
-        name: "SETTINGS.npcMystifierModifierKey.name",
-        hint: "SETTINGS.npcMystifierModifierKey.hint",
-        scope: "world",
-        config: true,
-        type: String,
-        choices: {
-            ALWAYS: "Always",
-            DISABLED: "Disabled",
-            ALT: "Alt",
-            CONTROL: "Ctrl",
-        },
-        default: "CONTROL",
-        onChange: (key) => {
-            return (mystifyModifierKey = <string>key);
-        },
-    });
+    // game.settings.register(MODULENAME, "npcMystifierModifierKey", {
+    //     name: "SETTINGS.npcMystifierModifierKey.name",
+    //     hint: "SETTINGS.npcMystifierModifierKey.hint",
+    //     scope: "world",
+    //     config: true,
+    //     type: String,
+    //     choices: {
+    //         ALWAYS: "Always",
+    //         DISABLED: "Disabled",
+    //         ALT: "Alt",
+    //         CONTROL: "Ctrl",
+    //     },
+    //     default: "CONTROL",
+    //     onChange: (key) => {
+    //         return (mystifyModifierKey = <string>key);
+    //     },
+    // });
 
     game.settings.register(MODULENAME, "npcMystifierAddRandomNumber", {
         name: "SETTINGS.npcMystifierAddRandomNumber.name",
@@ -249,5 +249,5 @@ export function registerSettings() {
         type: String,
     });
 
-    mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");
+    // mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");
 }

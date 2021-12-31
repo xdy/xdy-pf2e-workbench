@@ -3,8 +3,6 @@ import { MODULENAME } from "./xdy-pf2e-workbench";
 import { moveSelectedAheadOfCurrent } from "./app/moveCombatant";
 import { canMystify, doMystification, isTokenMystified } from "./app/mystify-token";
 
-export let mystifyModifierKey: string;
-
 export function registerKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);
 
@@ -43,7 +41,7 @@ export function registerKeybindings() {
                     updates.push(...(await doMystification(token, isTokenMystified(token))));
                 }
 
-                await game.scenes?.active?.updateEmbeddedDocuments("Token", updates);
+                await game.scenes?.current?.updateEmbeddedDocuments("Token", updates);
             } else {
                 ui.notifications?.warn(game.i18n.localize("SETTINGS.notifications.cantMystify"));
             }

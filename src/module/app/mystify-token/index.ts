@@ -1,6 +1,5 @@
 import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { mystifyModifierKey } from "../../settings";
 import { TokenData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
 function shouldSkipRandomNumber(token: Token | TokenDocument) {
@@ -11,11 +10,7 @@ function shouldSkipRandomNumber(token: Token | TokenDocument) {
     );
 }
 
-export async function mystifyToken(
-    token: Token | TokenDocument | null,
-    isMystified: boolean,
-    doUpdate = true
-): Promise<string> {
+export async function mystifyToken(token: Token | TokenDocument | null, isMystified: boolean): Promise<string> {
     if (token === null) return "";
     let name = token?.name || "";
     if (token) {
@@ -39,7 +34,7 @@ export async function mystifyToken(
                 if (addRandom && !shouldSkipRandomNumber(token)) {
                     let rolled = Math.floor(Math.random() * 100) + 1;
                     //Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
-                    if (game.scenes?.active?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
+                    if (game.scenes?.current?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
                         rolled = Math.floor(Math.random() * 100) + 1;
                     }
                     name += ` ${rolled}`;
@@ -48,40 +43,37 @@ export async function mystifyToken(
         }
     }
 
-    if (doUpdate) {
-        if (!(token instanceof TokenDocument)) {
-            await token.document.update({ name: name });
-        } else {
-            token.data.name = name;
-            token.data.update(token.data);
-        }
-        return name;
-    } else {
-        return name;
-    }
+    return name;
 }
 
-function isMystifyModifierKeyPressed() {
-    switch (mystifyModifierKey) {
-        case "ALT":
-            return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
-        case "CONTROL":
-            return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
-        default:
-            return false;
-    }
-}
+// function isMystifyModifierKeyPressed() {
+//     switch (mystifyModifierKey) {
+//         case "ALT":
+//             return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
+//         case "CONTROL":
+//             return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
+//         default:
+//             return false;
+//     }
+// }
 
-export function preTokenCreateMystification(token: Token) {
-    if (
-        game.user?.isGM &&
-        !(game.settings.get(MODULENAME, "npcMystifierModifierKey") === "DISABLED") &&
-        (game.settings.get(MODULENAME, "npcMystifierModifierKey") === "ALWAYS" || isMystifyModifierKeyPressed()) &&
-        (!game.keyboard?.downKeys.has("V") || game.keyboard?.downKeys.has("Insert"))
-    ) {
-        mystifyToken(token, isTokenMystified(token));
-    }
-}
+// export async function preTokenCreateMystification(token: Token) {
+//     const key = game.settings.get(MODULENAME, "npcMystifierModifierKey");
+//     if (
+//         game.user?.isGM &&
+//         key !== "DISABLED" &&
+//         (key === "ALWAYS" || isMystifyModifierKeyPressed()) &&
+//         (!game.keyboard?.downKeys.has("V") || game.keyboard?.downKeys.has("Insert"))
+//     ) {
+//         token.data.name = await mystifyToken(token, isTokenMystified(token));
+//         try {
+//             token.data.update(token.data);
+//         } catch (e) {
+//             console.error(e);
+//         }
+//         console.log(token);
+//     }
+// }
 
 export function isTokenMystified(token: Token | TokenDocument | null): boolean {
     const tokenName = token?.data.name;
@@ -99,7 +91,7 @@ export async function doMystification(token: Token, active: boolean) {
     const updates = [
         {
             _id: <string>token.id,
-            name: await mystifyToken(token, active, false),
+            name: await mystifyToken(token, active),
         },
     ];
 
@@ -114,7 +106,7 @@ export async function doMystification(token: Token, active: boolean) {
             ?.forEach(async (x) =>
                 updates.push({
                     _id: <string>x.id,
-                    name: await mystifyToken(x, active, false),
+                    name: await mystifyToken(x, active),
                 })
             );
     }
@@ -139,7 +131,7 @@ export function renderNameHud(data: TokenData, html: JQuery) {
                 const active = hudElement.hasClass("active");
                 if (token !== null && isTokenMystified(token) === active) {
                     const updates = await doMystification(token, active);
-                    await game.scenes?.active?.updateEmbeddedDocuments("Token", updates);
+                    await game.scenes?.current?.updateEmbeddedDocuments("Token", updates);
                 }
                 hudElement.toggleClass("active");
             });
@@ -154,7 +146,7 @@ export function mangleChatMessage(message: ChatMessage, html: JQuery) {
     const actor = game.actors?.get(actorId);
     const jqueryContent = html?.find(".action-card");
 
-    const tokenName = <string>game.scenes?.active?.tokens?.find((t) => t?.id === tokenId)?.name;
+    const tokenName = <string>game.scenes?.current?.tokens?.find((t) => t?.id === tokenId)?.name;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 
     if (tokenNameNoNumber && actor?.name?.trim() !== tokenNameNoNumber && jqueryContent && jqueryContent.html()) {
@@ -163,5 +155,5 @@ export function mangleChatMessage(message: ChatMessage, html: JQuery) {
 }
 
 export function canMystify() {
-    return game.user?.isGM && canvas && canvas.tokens && canvas.scene?.active;
+    return game.user?.isGM && canvas && canvas.tokens;
 }
