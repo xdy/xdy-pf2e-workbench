@@ -7,9 +7,9 @@ export function registerKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);
 
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
-    // @ts-ignore
     const keybindings = game.keybindings;
 
+    //Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
         hint: "Key for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.", //Foundry bug: hint is not translated
@@ -24,7 +24,7 @@ export function registerKeybindings() {
         },
     });
 
-    //Mystification below this
+    //Mystification
     keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
         name: "SETTINGS.npcMystifierMystifyKey.name",
         hint: "Select tokens and press this key to mystify them.", //Localization of the keybind hint doesn't work for some reason. Should just be "SETTINGS.npcMystifierMystifyKey.hint",
@@ -50,4 +50,18 @@ export function registerKeybindings() {
         reservedModifiers: [],
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
+
+    //Macro keybinds
+    for (let page = 1; page <= 5; page++) {
+        for (let column = 1; column <= 10; column++) {
+            keybindings.register(MODULENAME, `callHotbarPage${page}Macro${column}`, {
+                name: `Call hotbar macro on page ${page} position ${column}`, //TODO Localize. Preferably without 50 strings to translate...
+                hint: `Call hotbar macro on page ${page} position ${column}`, //TODO Localize. Preferably without 50 strings to translate...
+                editable: [],
+                onDown: () => {
+                    game.user?.getHotbarMacros(page)[column - 1]?.macro?.execute();
+                },
+            });
+        }
+    }
 }
