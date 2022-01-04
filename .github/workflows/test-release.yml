@@ -83,4 +83,4 @@ jobs:
                     password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
                     module-id: 1702
                     manifest-url: https://github.com/xdy/xdy-pf2e-workbench/releases/download/${{ env.WORKBENCH_VERSION }}/module.json
-                    manifest-file: static/system.json
+                    manifest-file: module.json
