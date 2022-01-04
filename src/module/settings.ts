@@ -36,6 +36,19 @@ export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
+
+    game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
+        name: "SETTINGS.autoCollapseItemChatCardContent.Name",
+        hint: "SETTINGS.autoCollapseItemChatCardContent.Hint",
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange() {
+            ui.chat.render();
+        },
+    });
+
     game.settings.register(MODULENAME, "purgeExpiredEffectsEachTurn", {
         name: "SETTINGS.purgeExpiredEffectsEachTurn.name",
         hint: "SETTINGS.purgeExpiredEffectsEachTurn.hint",

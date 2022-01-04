@@ -74,6 +74,17 @@ Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
     if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
         mangleChatMessage(message, html);
     }
+    if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) {
+        html.on("click", "h3", (event: JQuery.ClickEvent) => {
+            event.preventDefault();
+            const header = event.currentTarget;
+            const card = header.closest(".chat-message");
+            const content = card.querySelector(".card-content");
+            content.style.display = content.style.display === "none" ? "block" : "none";
+        });
+
+        html.find(".card-content").hide();
+    }
 });
 
 Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMenuEntry[]) => {

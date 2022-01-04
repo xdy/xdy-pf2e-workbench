@@ -1,5 +1,9 @@
 {
     "SETTINGS": {
+        "autoCollapseItemChatCardContent": {
+            "Name": "Fäll automatiskt ihop chatkorts beskrivning.",
+            "Hint": "Fäll automatiskt ihop chatkorts beskrivning. Klicka kort-titeln för att expandera."
+        },
         "notifications": {
             "cantMystify": "Du kan inte mystifiera denna spelfigur. Är den på den aktiva scenen, och är du en GM?"
         },
