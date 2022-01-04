@@ -7,7 +7,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) are:
         Bonus: Have the gm somehow see both the token and actor name. Perhaps like 'Unknown Large Dragon (Young Copper Dragon)'
         Status: MVP is released (configurable mystification from types, with HUD button), no code support for RK.
 
-    Quicklootify:
+    Quicklootify (will probably be handled by https://github.com/Haxxer/FoundryVTT-ItemPiles/)
       Module or macro that when one drags an item to a scene creates a Loot Actor and puts the item in that loot actor, giving the loot actor the item's image and name.
         Status: No action so far
         Responses: [6:43 PM] Tim: This could easily just be a core thing, not a module thing [6:44 PM] Tim: If no actor, make loot actor. If loot actor, add to loot actor inventory.
