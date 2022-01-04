@@ -1,7 +1,7 @@
 // Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
 import { MODULENAME } from "./xdy-pf2e-workbench";
-import { moveSelectedAheadOfCurrent } from "./app/moveCombatant";
-import { canMystify, doMystification, isTokenMystified } from "./app/mystify-token";
+import { moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
+import { canMystify, doMystification, isTokenMystified } from "./feature/mystify-token";
 
 export function registerKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);

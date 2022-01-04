@@ -17,9 +17,9 @@
 // Import TypeScript modules
 import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
-import { mangleChatMessage, renderNameHud } from "./app/mystify-token";
+import { mangleChatMessage, renderNameHud } from "./feature/mystify-token";
 import { registerKeybindings } from "./keybinds";
-import { getCombatantById, moveSelectedAheadOfCurrent } from "./app/moveCombatant";
+import { getCombatantById, moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
