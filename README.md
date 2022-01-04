@@ -68,7 +68,6 @@ Asset licenses:
 * The cover image is modified by me
   from [Picture taken at a garage exhibit at LACMA.](https://unsplash.com/photos/1UimDTf69ho)
   by [Elmer Mercanas](https://unsplash.com/@elmercanasjr) under the [Unsplash License](https://unsplash.com/license)
-*
 * The icons in the assets folder as well as the original icons from [https://game-icons.net/](https://game-icons.net/)
   are provided under
   the [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/) and
