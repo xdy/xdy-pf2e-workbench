@@ -44,7 +44,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) are:
 
 Not really pf2 related, but, I still want them:
 
-    Unspacer:
+    Unspacer (can be done in core with V9):
       Module that allows one to change from space for pause button as gm
       
     Macromover:
