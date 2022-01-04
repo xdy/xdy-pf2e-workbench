@@ -14,6 +14,8 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Optional keybind and combat context menu to move the selected combatant to before the current combatant in the
   initiative order (normally used when the current combatant has just killed the selected combatant).
 * Option to automatically purge all expired effects each turn.
+* Optional keybinds for executing a macro in any position on any page of the macro hotbar, whether that page is currently showing or not.
+* Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, etc, might hit others as well). Click on title to expand again.
 
 ## Installation
 
