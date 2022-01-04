@@ -2,82 +2,85 @@ name: Test and release
 
 # Run the workflow when a Pull Request is opened or when changes are pushed to main on 'xdy/xdy-pf2e-workbench' (i.e. don't run on forks)
 on:
-  pull_request:
-  push:
-    branches: [ main ]
+    pull_request:
+    push:
+        branches: [ main ]
 
 jobs:
-  test:
-    if: github.repository == 'xdy/xdy-pf2e-workbench'
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        # Run the steps below with the following versions of Node.js
-        node-version: [ 16.x ]
-    steps:
-      # Fetch the latest commit
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          submodules: 'true'
+    test:
+        if: github.repository == 'xdy/xdy-pf2e-workbench'
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                # Run the steps below with the following versions of Node.js
+                node-version: [ 16.x ]
+        steps:
+            # Fetch the latest commit
+            -   name: Checkout
+                uses: actions/checkout@v2
+                with:
+                    submodules: 'true'
 
-      # Setup Node.js using the appropriate version
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.5.1
-        with:
-          node-version: ${{ matrix.node-version }}
+            # Setup Node.js using the appropriate version
+            -   name: Use Node.js ${{ matrix.node-version }}
+                uses: actions/setup-node@v2.5.1
+                with:
+                    node-version: ${{ matrix.node-version }}
 
-      # Install package dependencies
-      - name: Install
-        run: npm install
+            # Install package dependencies
+            -   name: Install
+                run: npm install
 
-      # Lint the code
-      - name: Lint
-        run: npm run lint
+            # Lint the code
+            -   name: Lint
+                run: npm run lint
 
-      # Building is the only test right now (mainly tests if dependabot actually can update)
-      - name: Build
-        run: npm run build
+            # Building is the only test right now (mainly tests if dependabot actually can update)
+            -   name: Build
+                run: npm run build
 
-      # Run tests
-      #- name: Test
-      #run: npm test
+            # Run tests
+            #- name: Test
+            #run: npm test
 
-  release:
-    # Only release on push to main on xdy/xdy-pf2e-workbench
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
-    runs-on: ubuntu-latest
-    # Waits for test jobs for each Node.js version to complete
-    needs: [ test ]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          submodules: 'true'
+    release:
+        # Only release on push to main on xdy/xdy-pf2e-workbench
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
+        runs-on: ubuntu-latest
+        # Waits for test jobs for each Node.js version to complete
+        needs: [ test ]
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+                with:
+                    submodules: 'true'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2.5.1
-        with:
-          node-version: 16.x
+            -   name: Setup Node.js
+                uses: actions/setup-node@v2.5.1
+                with:
+                    node-version: 16.x
 
-      - name: Install
-        run: npm install
+            -   name: Install
+                run: npm install
 
-      - name: Build
-        run: npm run build
+            -   name: Build
+                run: npm run build
 
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+            -   name: Release
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                run: npx semantic-release
 
-#      # Publish the release to FoundryVTT's package repository
-#      - name: FoundryVTT AutoPublish
-#        uses: Varriount/fvtt-autopublish@v1.0.6
-#        with:
-#          username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
-#          password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
-#          module-id: 1702
-#          manifest-url: https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json
-#          manifest-file: ./module.json
+            -   name: Get tag
+                run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+                # Publish the release to FoundryVTT's package repository
+            -   name: Publish to Foundry Admin
+                uses: Varriount/fvtt-autopublish@v1.0.6
+                with:
+                    username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
+                    password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
+                    module-id: 1702
+                    manifest-url: https://github.com/xdy/xdy-pf2e-workbench/releases/download/${{ env.WORKBENCH_VERSION }}/module.json
+                    manifest-file: static/system.json
