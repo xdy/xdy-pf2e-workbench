@@ -1,8 +1,8 @@
 {
     "SETTINGS": {
         "autoCollapseItemChatCardContent": {
-            "Name": "Automatically collapse item chat card content.",
-            "Hint": "Automatically collapse item chat card content. Click the card title to expand."
+            "name": "Automatically collapse item chat card content.",
+            "hint": "Automatically collapse item chat card content. Click the card title to expand."
         },
         "notifications": {
             "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
