@@ -53,7 +53,7 @@
         "fork-ts-checker-webpack-plugin": "^7.0.0-alpha.10",
         "fs-extra": "^10.0.0",
         "lint-staged": "^12.1.5",
-        "mini-css-extract-plugin": "^2.4.5",
+        "mini-css-extract-plugin": "^2.4.6",
         "prettier": "^2.5.1",
         "semantic-release": "^18.0.1",
         "simple-progress-webpack-plugin": "^2.0.0",
