@@ -102,10 +102,12 @@ Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMen
     }
 });
 
-Hooks.on("updateCombat", () => {
+Hooks.on("updateCombat", (combat: Combat) => {
     if (game.user?.isGM && game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
-        // @ts-ignore
-        game.pf2e.effectTracker.removeExpired();
+        if (combat.combatant?.actor) {
+            // @ts-ignore
+            game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
+        }
     }
 });
 
