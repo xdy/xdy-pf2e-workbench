@@ -75,6 +75,7 @@ Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
         mangleChatMessage(message, html);
     }
     if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) {
+        html.find(".card-content").hide();
         html.on("click", "h3", (event: JQuery.ClickEvent) => {
             const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
             if (content && content.style) {
