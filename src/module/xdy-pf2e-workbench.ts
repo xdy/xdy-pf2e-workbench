@@ -17,7 +17,7 @@
 // Import TypeScript modules
 import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
-import { mangleChatMessage, renderNameHud } from "./feature/mystify-token";
+import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/mystify-token";
 import { registerKeybindings } from "./keybinds";
 import { getCombatantById, moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
 
@@ -56,13 +56,13 @@ Hooks.once("ready", async () => {
     console.log(`${MODULENAME} | Ready`);
 });
 
-// Hooks.on("preCreateToken", async (token: Token) => {
-//     console.log(`${MODULENAME} | preCreateToken`);
-//
-//     if (game.settings.get(MODULENAME, "npcMystifier")) {
-//         preTokenCreateMystification(token);
-//     }
-// });
+Hooks.on("createToken", async (token: any) => {
+    console.log(`${MODULENAME} | preCreateToken`);
+
+    if (game.settings.get(MODULENAME, "npcMystifier")) {
+        tokenCreateMystification(token);
+    }
+});
 
 Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
     if (game.settings.get(MODULENAME, "npcMystifier")) {

@@ -1,6 +1,7 @@
 import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
+import { mystifyModifierKey } from "../../settings";
 
 function shouldSkipRandomNumber(token: Token | TokenDocument) {
     return (
@@ -46,34 +47,29 @@ export async function mystifyToken(token: Token | TokenDocument | null, isMystif
     return name;
 }
 
-// function isMystifyModifierKeyPressed() {
-//     switch (mystifyModifierKey) {
-//         case "ALT":
-//             return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
-//         case "CONTROL":
-//             return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
-//         default:
-//             return false;
-//     }
-// }
+function isMystifyModifierKeyPressed() {
+    switch (mystifyModifierKey) {
+        case "ALT":
+            return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
+        case "CONTROL":
+            return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
+        default:
+            return false;
+    }
+}
 
-// export async function preTokenCreateMystification(token: Token) {
-//     const key = game.settings.get(MODULENAME, "npcMystifierModifierKey");
-//     if (
-//         game.user?.isGM &&
-//         key !== "DISABLED" &&
-//         (key === "ALWAYS" || isMystifyModifierKeyPressed()) &&
-//         (!game.keyboard?.downKeys.has("V") || game.keyboard?.downKeys.has("Insert"))
-//     ) {
-//         token.data.name = await mystifyToken(token, isTokenMystified(token));
-//         try {
-//             token.data.update(token.data);
-//         } catch (e) {
-//             console.error(e);
-//         }
-//         console.log(token);
-//     }
-// }
+export async function tokenCreateMystification(token: any) {
+    const key = game.settings.get(MODULENAME, "npcMystifierModifierKey");
+    if (
+        game.user?.isGM &&
+        token &&
+        key !== "DISABLED" &&
+        (key === "ALWAYS" || isMystifyModifierKeyPressed()) &&
+        (!game.keyboard?.downKeys.has("V") || game.keyboard?.downKeys.has("Insert"))
+    ) {
+        await game.scenes?.current?.updateEmbeddedDocuments("Token", await doMystification(token, false));
+    }
+}
 
 export function isTokenMystified(token: Token | TokenDocument | null): boolean {
     const tokenName = token?.data.name;
