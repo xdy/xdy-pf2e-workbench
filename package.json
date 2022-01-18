@@ -55,7 +55,7 @@
         "lint-staged": "^12.1.7",
         "mini-css-extract-plugin": "^2.5.0",
         "prettier": "^2.5.1",
-        "semantic-release": "^18.0.1",
+        "semantic-release": "^19.0.2",
         "simple-progress-webpack-plugin": "^2.0.0",
         "terser-webpack-plugin": "^5.3.0",
         "thread-loader": "^3.0.4",
