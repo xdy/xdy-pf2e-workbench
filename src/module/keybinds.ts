@@ -12,7 +12,7 @@ export function registerKeybindings() {
     //Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
-        hint: "Key for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.", //Foundry bug: hint is not translated
+        hint: "SETTINGS.moveBeforeCurrentCombatantKey.hint",
         editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
@@ -27,12 +27,8 @@ export function registerKeybindings() {
     //Mystification
     keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
         name: "SETTINGS.npcMystifierMystifyKey.name",
-        hint: "Select tokens and press this key to mystify them.", //Localization of the keybind hint doesn't work for some reason. Should just be "SETTINGS.npcMystifierMystifyKey.hint",
-        editable: [
-            {
-                key: "KeyM",
-            },
-        ],
+        hint: "SETTINGS.npcMystifierMystifyKey.hint",
+        editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
             if (canMystify()) {
