@@ -73,10 +73,13 @@ Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
 Hooks.on("createChatMessage", (message: ChatMessage) => {
     if (game.settings.get(MODULENAME, "autoRollDamageForStrike")) {
         if (message.data.type === 5) {
-            //TODO Localize this
-            const strikeName = message.data.flavor?.match("(<strong>Strike): (.*?)<\\/strong>");
+            const strikeName = message.data.flavor?.match(
+                `(<strong>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.strike")}): (.*?)<\\/strong>`
+            );
             if (strikeName && strikeName[1] && strikeName[2]) {
-                const degreeOfSuccess = message.data.flavor?.match('(<b>Result): <span class="(.*?)">');
+                const degreeOfSuccess = message.data.flavor?.match(
+                    `(<b>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.result")}): <span class="(.*?)">`
+                );
                 if (degreeOfSuccess && degreeOfSuccess[1] && degreeOfSuccess[2]) {
                     // @ts-ignore
                     const relevantStrike = game.actors

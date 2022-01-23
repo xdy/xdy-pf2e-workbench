@@ -1,8 +1,10 @@
 {
     "SETTINGS": {
         "autoRollDamageForStrike": {
-            "name": "Rulla skador automatiskt för anfall.",
-            "hint": "Rulla skador automatiskt för anfall."
+            "name": "Rulla skador automatiskt för strike som träffar.",
+            "hint": "Rulla skador automatiskt för strike som träffar.",
+            "strike": "Strike",
+            "result": "Result"
         },
         "autoCollapseItemChatCardContent": {
             "name": "Fäll automatiskt ihop chatkorts beskrivning.",

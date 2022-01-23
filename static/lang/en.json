@@ -1,8 +1,10 @@
 {
     "SETTINGS": {
         "autoRollDamageForStrike": {
-            "name": "Automatically roll damage for strikes.",
-            "hint": "Automatically roll damage for strikes."
+            "name": "Automatically roll damage for strikes that hit.",
+            "hint": "Automatically roll damage for strikes that hit.",
+            "strike": "Strike",
+            "result": "Result"
         },
         "autoCollapseItemChatCardContent": {
             "name": "Automatically collapse item chat card content.",
