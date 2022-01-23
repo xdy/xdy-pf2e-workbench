@@ -70,6 +70,41 @@ Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
     }
 });
 
+Hooks.on("createChatMessage", (message: ChatMessage) => {
+    if (game.settings.get(MODULENAME, "autoRollDamageForStrike")) {
+        if (message.data.type === 5) {
+            //TODO Localize this
+            const strikeName = message.data.flavor?.match("(<strong>Strike): (.*?)<\\/strong>");
+            if (strikeName && strikeName[1] && strikeName[2]) {
+                const degreeOfSuccess = message.data.flavor?.match('(<b>Result): <span class="(.*?)">');
+                if (degreeOfSuccess && degreeOfSuccess[1] && degreeOfSuccess[2]) {
+                    // @ts-ignore
+                    const relevantStrike = game.actors
+                        // @ts-ignore
+                        ?.get(message.data.speaker.actor)
+                        // @ts-ignore
+                        ?.data.data?.actions.filter((a: { type: string }) => a.type === "strike")
+                        .find((action: { name: string }) => action.name === strikeName[2]);
+                    const rollOptions = game.actors
+                        // @ts-ignore
+                        ?.get(message.data.speaker.actor)
+                        // @ts-ignore
+                        ?.getRollOptions(["all", "damage-roll"]);
+                    if (degreeOfSuccess[2] === "success") {
+                        relevantStrike?.damage({
+                            options: rollOptions,
+                        });
+                    } else if (degreeOfSuccess[2] === "criticalSuccess") {
+                        relevantStrike?.critical({
+                            options: rollOptions,
+                        });
+                    }
+                }
+            }
+        }
+    }
+});
+
 Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
     if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
         mangleChatMessage(message, html);

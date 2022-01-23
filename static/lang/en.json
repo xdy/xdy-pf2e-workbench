@@ -1,5 +1,9 @@
 {
     "SETTINGS": {
+        "autoRollDamageForStrike": {
+            "name": "Automatically roll damage for strikes.",
+            "hint": "Automatically roll damage for strikes."
+        },
         "autoCollapseItemChatCardContent": {
             "name": "Automatically collapse item chat card content.",
             "hint": "Automatically collapse item chat card content. Click the card title to expand."
