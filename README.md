@@ -13,6 +13,8 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * NPC Mystification. Sets the name of a token on the current scene based on it's traits if mystified by dragging it from the sidebar while holding the configured modifier key, clicking the mystify button in the token hud or using the mystify keyboard shortcut (defaults to M). There are several options to filter out certain types of traits. A prefix or postfix can be added to the mystified name (either a user-provided word, or one rolled on a user-provided rollable table). A random number can also be added after the postfix, and optionally be kept when demystifying the creature. E.g. 'Skeletal Champion' can become 'Unknown Mindless Undead Skeleton' + random number.
 * Optional keybind and combat context menu to move the selected combatant to before the current combatant in the
   initiative order (normally used when the current combatant has just killed the selected combatant).
+* Optional feature to automatically move combatant that goes to 0 hp to just before the current combatant. (See above.)
+* Optional feature to automatically move combatant that gets the Dying condition to just before the current combatant. (See above.)
 * Option to automatically purge all expired effects each turn.
 * Optional keybinds for executing a macro in any position on any page of the macro hotbar, whether that page is currently showing or not.
 * Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, etc, might hit others as well). Click on title to expand again.
