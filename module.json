@@ -9,7 +9,7 @@
     "changelog": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/CHANGELOG.md",
     "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
     "license": "./LICENSE",
-    "version": "2.16.1",
+    "version": "2.16.2",
     "author": "Jonas Karlsson (xdy)",
     "authors": [
         {
