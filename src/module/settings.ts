@@ -22,12 +22,14 @@ declare global {
             "xdy-pf2e-workbench.npcMystifierFilterRaritiesReplacement": string;
             "xdy-pf2e-workbench.npcMystifierKeepNumberAtEndOfName": boolean;
             "xdy-pf2e-workbench.npcMystifierMethod": string;
-            // "xdy-pf2e-workbench.npcMystifierModifierKey": string;
+            "xdy-pf2e-workbench.npcMystifierModifierKey": string;
             "xdy-pf2e-workbench.npcMystifierPostfix": string;
             "xdy-pf2e-workbench.npcMystifierPrefix": string;
             "xdy-pf2e-workbench.npcMystifierSkipRandomNumberForUnique": boolean;
             "xdy-pf2e-workbench.npcMystifierUseMystifiedNameInChat": boolean;
             "xdy-pf2e-workbench.purgeExpiredEffectsEachTurn": boolean;
+            "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
+            "xdy-pf2e-workbench.autoCollapseItemChatCardContent": boolean;
         }
     }
 }
