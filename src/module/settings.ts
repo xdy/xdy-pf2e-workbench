@@ -30,6 +30,7 @@ declare global {
             "xdy-pf2e-workbench.purgeExpiredEffectsEachTurn": boolean;
             "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
             "xdy-pf2e-workbench.autoCollapseItemChatCardContent": boolean;
+            "xdy-pf2e-workbench.heroPointHandler": boolean;
         }
     }
 }
@@ -38,6 +39,15 @@ export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
+
+    game.settings.register(MODULENAME, "heroPointHandler", {
+        name: "SETTINGS.heroPointHandler.name",
+        hint: "SETTINGS.heroPointHandler.hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
 
     game.settings.register(MODULENAME, "autoRollDamageForStrike", {
         name: "SETTINGS.autoRollDamageForStrike.name",

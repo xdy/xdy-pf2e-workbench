@@ -1,5 +1,13 @@
 {
     "SETTINGS": {
+        "heroPointHandler": {
+            "Namn": "(Experimentell) Hjältepoängshanterare som kan återställa och / eller lägga till Hjältepoäng, med en timmes påminnelse.",
+            "Hint": "(Experimentell) Hjältepoängshanterare med en valfri keybind för att öppna en dialogruta som kan återställa eller lägga till Hjältepoäng för alla karaktärer, lägg till en Hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast, starta en timer som gör att dialogrutan återkommer efter (som standard) 60 minuter.",
+            "timerValue": "Timervärde",
+            "Showafter": "Visa dialogrutan igen efter så här många minuter",
+            "HeropintHandlerertitle": "Hjältepoängshanterare",
+            "StartTimerLabel": "Skicka ändringar och starta timern"
+        },
         "autoRollDamageForStrike": {
             "name": "Rulla skador automatiskt för strike som träffar.",
             "hint": "Rulla skador automatiskt för strike som träffar.",

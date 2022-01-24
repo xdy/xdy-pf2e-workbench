@@ -2,12 +2,40 @@
 import { MODULENAME } from "./xdy-pf2e-workbench";
 import { moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
 import { canMystify, doMystification, isTokenMystified } from "./feature/mystify-token";
+import { heroPointHandler } from "./feature/heroPointHandler";
 
 export function registerKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);
 
-    //TODO Make a settings menu with the following settings that is set to be restricted to GMs
     const keybindings = game.keybindings;
+
+    //Move combatant
+    keybindings.register(MODULENAME, "heroPointHandler", {
+        name: "SETTINGS.heroPointHandlerKey.name",
+        hint: "SETTINGS.heroPointHandlerKey.hint",
+        editable: [],
+        onDown: () => {
+            if (game.user?.isGM) {
+                heroPointHandler();
+            }
+        },
+    });
+
+
+    //Move combatant
+    keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
+        name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
+        hint: "SETTINGS.moveBeforeCurrentCombatantKey.hint",
+        editable: [],
+        // @ts-ignore Shut up Typescript, it can be async,
+        onDown: async () => {
+            if (game.user?.isGM) {
+                await moveSelectedAheadOfCurrent(
+                    <Combatant>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
+                );
+            }
+        },
+    });
 
     //Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {

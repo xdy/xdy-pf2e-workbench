@@ -1,5 +1,17 @@
 {
     "SETTINGS": {
+        "heroPointHandler": {
+            "name": "(Experimental) Heropoint handler feature that can automatially reset and/or add heropoints, with an hourly reminder.",
+            "hint": "(Experimental) Heropoint handler feature with an optional keybind to open a dialog that can reset or add heropoints for all characters, add one heropoint to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
+            "timerValue": "Timer value",
+            "showAfter": "Show dialog again after this many minutes",
+            "heroPointHandlerTitle": "Hero Point Handler",
+            "startTimerLabel": "Submit changes and start timer"
+        },
+        "heroPointHandlerKey": {
+            "name": "(Experimental) Keybind to open the Hero point handler dialog.",
+            "hint": "(Experimental) Keybind to open the Hero point handler dialog that enables resetting and adding heropoints with an hourly reminder"
+        },
         "autoRollDamageForStrike": {
             "name": "Automatically roll damage for strikes that hit.",
             "hint": "Automatically roll damage for strikes that hit.",
