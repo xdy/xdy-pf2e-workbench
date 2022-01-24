@@ -19,6 +19,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Optional keybinds for executing a macro in any position on any page of the macro hotbar, whether that page is currently showing or not.
 * Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, etc, might hit others as well). Click on title to expand again.
 * Optional setting to automatically roll damage for Strikes on a hit. On a critical success it rolls critical damage. Needs the PF2e system setting 'Show results on attacks and saves' to be set so that the attacker can see the result in the chat. (E.g. for non-gm use either 'Owner' or 'All').
+* Experimental heropoint handler feature. Adds an optional keybind to open a dialog that can reset or add heropoints for all characters, add one heropoint to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.
 
 ## Installation
 
