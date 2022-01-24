@@ -5,8 +5,12 @@
             "hint": "(Experimental) Heropoint handler feature with an optional keybind to open a dialog that can reset or add heropoints for all characters, add one heropoint to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
             "timerValue": "Timer value",
             "showAfter": "Show dialog again after this many minutes",
-            "heroPointHandlerTitle": "Hero Point Handler",
-            "startTimerLabel": "Submit changes and start timer"
+            "title": "Hero Point Handler",
+            "startTimerLabel": "Submit changes and start timer",
+            "noTimerLabel": "Submit changes <b>without</b> starting timer",
+            "doWhat": "Do what to the heropoints of all characters?",
+            "thisMany": "This many",
+            "addOne": "Add one hero point to selected character (defaults to random roll)"
         },
         "heroPointHandlerKey": {
             "name": "(Experimental) Keybind to open the Hero point handler dialog.",

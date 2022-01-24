@@ -1,5 +1,4 @@
 //TODO Clean up horrendously ugly code...
-//TODO Make sure dialog can't be opened if still open
 
 async function resetHeroPoints(heropoints: number) {
     //TODO Don't do a bunch of updates
@@ -7,14 +6,16 @@ async function resetHeroPoints(heropoints: number) {
         ?.filter((x) => x.hasPlayerOwner)
         .filter((x) => x.type === "character")
         .forEach((actor) => {
-            // @ts-ignore
+            const value = Math.clamped(
+                heropoints,
+                0,
+                // @ts-ignore
+                parseInt(actor.data.data.resources.heroPoints.max)
+            );
             actor.update({
-                "data.resources.heroPoints.value": <
-                    number // @ts-ignore
-                >Math.min(heropoints, parseInt(actor.data.data.resources.heroPoints.max)),
+                // @ts-ignore
+                "data.resources.heroPoints.value": value,
             });
-            // @ts-ignore
-            console.log(actor.data.data.resources.heroPoints.value);
         });
 }
 
@@ -22,28 +23,31 @@ async function addHeroPoints(heropoints: number, actorId: any = null) {
     if (actorId && actorId !== "ALL" && actorId !== "NONE") {
         const actor = game?.actors?.get(actorId);
         if (actor) {
-            actor.update({
+            const value = Math.clamped(
                 // @ts-ignore
-                "data.resources.heroPoints.value": <number>Math.min(
-                    // @ts-ignore
-                    parseInt(actor.heroPoints.value) + heropoints,
-                    // @ts-ignore
-                    parseInt(actor.data.data.resources.heroPoints.max)
-                ),
+                parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
+                0,
+                // @ts-ignore
+                parseInt(actor.data.data.resources.heroPoints.max)
+            );
+            actor.update({
+                "data.resources.heroPoints.value": value,
             });
         }
     } else if (actorId && actorId === "ALL") {
         const filter = game?.actors?.filter((x) => x.hasPlayerOwner).filter((x) => x.type === "character");
         filter?.forEach((actor) => {
             //TODO Don't do a bunch of updates
+            const value = Math.clamped(
+                // @ts-ignore
+                parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
+                0,
+                // @ts-ignore
+                parseInt(actor.data.data.resources.heroPoints.max)
+            );
             actor.update({
                 // @ts-ignore
-                "data.resources.heroPoints.value": <number>Math.min(
-                    // @ts-ignore
-                    parseInt(actor.heroPoints.value) + heropoints,
-                    // @ts-ignore
-                    parseInt(actor.data.data.resources.heroPoints.max)
-                ),
+                "data.resources.heroPoints.value": value,
             });
         });
     }
@@ -76,10 +80,20 @@ export function heroPointHandler() {
     // * Button to start timer to open this dialog in textbox with default 60 minutes
     // * Button to just close dialog
 
+    const title: any = `${game.i18n.localize("SETTINGS.heroPointHandler.title")}`;
+
+    //TODO There has to be a better way to not allow opening the same dialog twice
+    for (let key in ui.windows) {
+        // @ts-ignore
+        if (ui.windows[key].data.title===title) {
+            return;
+        }
+    }
+
     const startContent = `
 <!-- Multiple Radios -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="radios">Do what to the heropoints of all characters?</label>
+  <label class="col-md-4 control-label" for="radios">${game.i18n.localize("SETTINGS.heroPointHandler.doWhat")}</label>
   <div class="col-md-4">
       <div class="radio">
         <label for="radios-0">
@@ -104,7 +118,7 @@ export function heroPointHandler() {
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="heropoints">This many</label>
+  <label class="col-md-4 control-label" for="heropoints">${game.i18n.localize("SETTINGS.heroPointHandler.thisMany")}</label>
   <div class="col-md-4">
     <input id="heropoints" name="heropoints" type="number" value=1 class="form-control input-md">
   </div>
@@ -112,7 +126,7 @@ export function heroPointHandler() {
 
 <!-- Multiple Radios -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="characters">Add one hero point to selected character (defaults to random roll)</label>
+  <label class="col-md-4 control-label" for="characters">${game.i18n.localize("SETTINGS.heroPointHandler.addOne")}</label>
   <div class="col-md-4">`;
 
     //TODO Get user name, add within parentheses after actor name
@@ -153,10 +167,10 @@ export function heroPointHandler() {
 <div class="form-group">
   <div class="col-md-4">
     <div class="input-group">
-      <span class="input-group-addon">${game.i18n.localize("timerValue")}</span>
+      <span class="input-group-addon">${game.i18n.localize("SETTINGS.heroPointHandler.timerValue")}</span>
       <input id="timerTextId" name="timerText" class="form-control" value="60" type="text">
     </div>
-    <p class="help-block">${game.i18n.localize("showAfter")}</p>
+    <p class="help-block">${game.i18n.localize("SETTINGS.heroPointHandler.showAfter")}</p>
   </div>
 </div>
 `;
@@ -164,12 +178,12 @@ export function heroPointHandler() {
     const content = startContent + charactersContent + remainingContent;
 
     const handlerDialog = new Dialog({
-        title: `${game.i18n.localize("heropointHandlerTitle")}`,
+        title: title,
         content,
         buttons: {
             timer: {
                 icon: '<i class="fas fa-hourglass"></i>',
-                label: `${game.i18n.localize("startTimerLabel")}`,
+                label: `${game.i18n.localize("SETTINGS.heroPointHandler.startTimerLabel")}`,
                 callback: async (html: any) => {
                     const timer = await handleDialog(html);
                     setTimeout(() => {
@@ -178,7 +192,7 @@ export function heroPointHandler() {
                 },
             },
             noTimer: {
-                label: "Submit changes <b>without</b> starting timer",
+                label: `${game.i18n.localize("SETTINGS.heroPointHandler.noTimerLabel")}`,
                 callback: async (html) => {
                     await handleDialog(html);
                 },

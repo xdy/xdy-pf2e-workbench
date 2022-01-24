@@ -1,12 +1,17 @@
 {
     "SETTINGS": {
         "heroPointHandler": {
-            "Namn": "(Experimentell) Hjältepoängshanterare som kan återställa och / eller lägga till Hjältepoäng, med en timmes påminnelse.",
-            "Hint": "(Experimentell) Hjältepoängshanterare med en valfri keybind för att öppna en dialogruta som kan återställa eller lägga till Hjältepoäng för alla karaktärer, lägg till en Hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast, starta en timer som gör att dialogrutan återkommer efter (som standard) 60 minuter.",
+            "Namn": "(Experimentell) Hjältepoängshanterare som kan återställa och / eller lägga till hjältepoäng, med en timmes påminnelse.",
+            "Hint": "(Experimentell) Hjältepoängshanterare med en valfri keybind för att öppna en dialogruta som kan återställa eller lägga till hjältepoäng för alla karaktärer, lägg till en Hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast, starta en timer som gör att dialogrutan återkommer efter (som standard) 60 minuter.",
             "timerValue": "Timervärde",
-            "Showafter": "Visa dialogrutan igen efter så här många minuter",
-            "HeropintHandlerertitle": "Hjältepoängshanterare",
-            "StartTimerLabel": "Skicka ändringar och starta timern"
+            "showAfter": "Visa dialogrutan igen efter så här många minuter",
+            "title": "Hjältepoängshanterare",
+            "startTimerLabel": "Skicka ändringar och starta timern",
+            "noTimerLabel": "Skicka ändringar <b>utan</b> att starta timern",
+            "doWhat": "Gör vad med hjältepoängen för alla karaktärer?",
+            "thisMany": "Så här många",
+            "addOne": "Lägg till en hjältepoäng till utvald karakär (default framslumpad)"
+
         },
         "autoRollDamageForStrike": {
             "name": "Rulla skador automatiskt för strike som träffar.",
@@ -19,7 +24,7 @@
             "hint": "Fäll automatiskt ihop chatkorts beskrivning. Klicka kort-titeln för att expandera."
         },
         "notifications": {
-            "cantMystify": "Du kan inte mystifiera denna spelfigur. Är den på den aktiva scenen, och är du en GM?"
+            "cantMystify": "Du kan inte mystifiera denna spelfigur. Är den på den aktiva scenen, och är du en spelledare?"
         },
         "purgeExpiredEffectsEachTurn": {
             "name": "Ta bort alla utgångna effekter varje runda.",
