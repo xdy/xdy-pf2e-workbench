@@ -83,9 +83,9 @@ export function heroPointHandler() {
     const title: any = `${game.i18n.localize("SETTINGS.heroPointHandler.title")}`;
 
     //TODO There has to be a better way to not allow opening the same dialog twice
-    for (let key in ui.windows) {
+    for (const key in ui.windows) {
         // @ts-ignore
-        if (ui.windows[key].data.title===title) {
+        if (ui.windows[key].data.title === title) {
             return;
         }
     }
@@ -118,7 +118,9 @@ export function heroPointHandler() {
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="heropoints">${game.i18n.localize("SETTINGS.heroPointHandler.thisMany")}</label>
+  <label class="col-md-4 control-label" for="heropoints">${game.i18n.localize(
+      "SETTINGS.heroPointHandler.thisMany"
+  )}</label>
   <div class="col-md-4">
     <input id="heropoints" name="heropoints" type="number" value=1 class="form-control input-md">
   </div>
@@ -126,7 +128,9 @@ export function heroPointHandler() {
 
 <!-- Multiple Radios -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="characters">${game.i18n.localize("SETTINGS.heroPointHandler.addOne")}</label>
+  <label class="col-md-4 control-label" for="characters">${game.i18n.localize(
+      "SETTINGS.heroPointHandler.addOne"
+  )}</label>
   <div class="col-md-4">`;
 
     //TODO Get user name, add within parentheses after actor name
