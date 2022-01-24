@@ -1,15 +1,21 @@
 //TODO Clean up horrendously ugly code...
 //TODO Make sure dialog can't be opened if still open
 
-
 async function resetHeroPoints(heropoints: number) {
     //TODO Don't do a bunch of updates
-    game?.actors?.filter(x => x.hasPlayerOwner).filter(x => x.type === "character").forEach(actor => {
-        // @ts-ignore
-        actor.update({ "data.resources.heroPoints.value": <number>Math.min(heropoints, parseInt(actor.data.data.resources.heroPoints.max)), });
-        // @ts-ignore
-        console.log(actor.data.data.resources.heroPoints.value);
-    });
+    game?.actors
+        ?.filter((x) => x.hasPlayerOwner)
+        .filter((x) => x.type === "character")
+        .forEach((actor) => {
+            // @ts-ignore
+            actor.update({
+                "data.resources.heroPoints.value": <
+                    number // @ts-ignore
+                >Math.min(heropoints, parseInt(actor.data.data.resources.heroPoints.max)),
+            });
+            // @ts-ignore
+            console.log(actor.data.data.resources.heroPoints.value);
+        });
 }
 
 async function addHeroPoints(heropoints: number, actorId: any = null) {
@@ -18,26 +24,36 @@ async function addHeroPoints(heropoints: number, actorId: any = null) {
         if (actor) {
             actor.update({
                 // @ts-ignore
-                "data.resources.heroPoints.value": <number>Math.min(parseInt(actor.heroPoints.value) + heropoints, parseInt(actor.data.data.resources.heroPoints.max)),
+                "data.resources.heroPoints.value": <number>Math.min(
+                    // @ts-ignore
+                    parseInt(actor.heroPoints.value) + heropoints,
+                    // @ts-ignore
+                    parseInt(actor.data.data.resources.heroPoints.max)
+                ),
             });
         }
     } else if (actorId && actorId === "ALL") {
-        const filter = game?.actors?.filter(x => x.hasPlayerOwner).filter(x => x.type === "character");
-        filter?.forEach(actor => {
+        const filter = game?.actors?.filter((x) => x.hasPlayerOwner).filter((x) => x.type === "character");
+        filter?.forEach((actor) => {
             //TODO Don't do a bunch of updates
             actor.update({
                 // @ts-ignore
-                "data.resources.heroPoints.value": <number>Math.min(parseInt(actor.heroPoints.value) + heropoints, parseInt(actor.data.data.resources.heroPoints.max)),
+                "data.resources.heroPoints.value": <number>Math.min(
+                    // @ts-ignore
+                    parseInt(actor.heroPoints.value) + heropoints,
+                    // @ts-ignore
+                    parseInt(actor.data.data.resources.heroPoints.max)
+                ),
             });
         });
     }
 }
 
 async function handleDialog(html: any) {
-    let radios = html.find('input[name="radios"]:checked').val();
-    let heroPoints = parseInt(html.find('input[name="heropoints"]').val());
-    let actorId = html.find('input[name="characters"]:checked').val();
-    let timer = parseInt(html.find('input[name="timerText"]').val());
+    const radios = html.find('input[name="radios"]:checked').val();
+    const heroPoints = parseInt(html.find('input[name="heropoints"]').val());
+    const actorId = html.find('input[name="characters"]:checked').val();
+    const timer = parseInt(html.find('input[name="timerText"]').val());
 
     //Reset or add to all
     if (radios === "RESET") {
@@ -101,16 +117,18 @@ export function heroPointHandler() {
 
     //TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
-    let characters = game?.actors?.filter(x => x.hasPlayerOwner).filter(x => x.type === "character");
+    const characters = game?.actors?.filter((x) => x.hasPlayerOwner).filter((x) => x.type === "character");
     // @ts-ignore
     const length = characters.length;
-    let checked = Math.floor(Math.random() * length);
+    const checked = Math.floor(Math.random() * length);
     for (let i = 0; i < length; i++) {
-        const actor = characters?.filter(x => x.type === "character")[i];
+        const actor = characters?.filter((x) => x.type === "character")[i];
         charactersContent += `
     <div class="radio">
         <label for="characters-${i}">
-          <input type="radio" name="characters" id="characters-${i}" value="${actor?.id}" ${checked === i ? 'checked="checked"' : ''}>
+          <input type="radio" name="characters" id="characters-${i}" value="${actor?.id}" ${
+            checked === i ? 'checked="checked"' : ""
+        }>
           ${actor?.name}
         </label>
     </div>`;
@@ -145,7 +163,7 @@ export function heroPointHandler() {
 
     const content = startContent + charactersContent + remainingContent;
 
-    let handlerDialog = new Dialog({
+    const handlerDialog = new Dialog({
         title: `${game.i18n.localize("heropointHandlerTitle")}`,
         content,
         buttons: {
@@ -156,17 +174,17 @@ export function heroPointHandler() {
                     const timer = await handleDialog(html);
                     setTimeout(() => {
                         heroPointHandler();
-                    }, timer * 60* 1000);
+                    }, timer * 60 * 1000);
                 },
             },
             noTimer: {
-                label: 'Submit changes <b>without</b> starting timer',
+                label: "Submit changes <b>without</b> starting timer",
                 callback: async (html) => {
                     await handleDialog(html);
                 },
             },
         },
-        default: 'timer',
+        default: "timer",
     });
     handlerDialog.render(true);
 }

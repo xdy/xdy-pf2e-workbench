@@ -21,7 +21,6 @@ export function registerKeybindings() {
         },
     });
 
-
     //Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
