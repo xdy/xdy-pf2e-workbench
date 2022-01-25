@@ -60,7 +60,7 @@ export function registerKeybindings() {
         onDown: async () => {
             if (canMystify()) {
                 const updates = [];
-                for (const token of canvas?.tokens?.controlled || []) {
+                for (const token of canvas?.tokens?.controlled.filter((x) => !x.actor?.hasPlayerOwner) || []) {
                     updates.push(...(await doMystification(token, isTokenMystified(token))));
                 }
 

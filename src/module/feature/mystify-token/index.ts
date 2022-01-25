@@ -63,6 +63,7 @@ export async function tokenCreateMystification(token: any) {
     if (
         game.user?.isGM &&
         token &&
+        !token?.actor?.hasPlayerOwner &&
         key !== "DISABLED" &&
         (key === "ALWAYS" || isMystifyModifierKeyPressed()) &&
         (!game.keyboard?.downKeys.has("V") || game.keyboard?.downKeys.has("Insert"))
@@ -121,7 +122,7 @@ export function renderNameHud(data: TokenData, html: JQuery) {
                 isTokenMystified(token) ? "active" : ""
             }" > <i class="fas fa-eye-slash"  title=${title}></i></div>`
         );
-        if (canMystify()) {
+        if (canMystify() && !token?.actor?.hasPlayerOwner) {
             toggle.on("click", async (e) => {
                 const hudElement = $(e.currentTarget);
                 const active = hudElement.hasClass("active");
