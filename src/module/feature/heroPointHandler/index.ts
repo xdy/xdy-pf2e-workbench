@@ -3,8 +3,13 @@
 async function resetHeroPoints(heropoints: number) {
     //TODO Don't do a bunch of updates
     game?.actors
-        ?.filter((x) => x.hasPlayerOwner)
-        .filter((x) => x.type === "character")
+        ?.filter((actor) => actor.hasPlayerOwner)
+        .filter((actor) => actor.type === "character")
+        .filter((actor) => actor.hasPlayerOwner)
+        // @ts-ignore
+        .filter((actor) => !actor.data.data.traits.traits.value.includes("minion"))
+        // @ts-ignore
+        .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon"))
         .forEach((actor) => {
             const value = Math.clamped(
                 heropoints,
@@ -35,34 +40,40 @@ async function addHeroPoints(heropoints: number, actorId: any = null) {
             });
         }
     } else if (actorId && actorId === "ALL") {
-        const filter = game?.actors?.filter((x) => x.hasPlayerOwner).filter((x) => x.type === "character");
-        filter?.forEach((actor) => {
-            //TODO Don't do a bunch of updates
-            const value = Math.clamped(
-                // @ts-ignore
-                parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
-                0,
-                // @ts-ignore
-                parseInt(actor.data.data.resources.heroPoints.max)
-            );
-            actor.update({
-                // @ts-ignore
-                "data.resources.heroPoints.value": value,
+        game?.actors
+            ?.filter((x) => x.hasPlayerOwner)
+            .filter((x) => x.type === "character")
+            // @ts-ignore
+            .filter((actor) => !actor.data.data.traits.traits.value.includes("minion"))
+            // @ts-ignore
+            .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon"))
+            ?.forEach((actor) => {
+                //TODO Don't do a bunch of updates
+                const value = Math.clamped(
+                    // @ts-ignore
+                    parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
+                    0,
+                    // @ts-ignore
+                    parseInt(actor.data.data.resources.heroPoints.max)
+                );
+                actor.update({
+                    // @ts-ignore
+                    "data.resources.heroPoints.value": value,
+                });
             });
-        });
     }
 }
 
 async function handleDialog(html: any) {
-    const radios = html.find('input[name="radios"]:checked').val();
+    const sessionStart = html.find('input[name="sessionStart"]:checked').val();
     const heroPoints = parseInt(html.find('input[name="heropoints"]').val());
     const actorId = html.find('input[name="characters"]:checked').val();
     const timer = parseInt(html.find('input[name="timerText"]').val());
 
     //Reset or add to all
-    if (radios === "RESET") {
+    if (sessionStart === "RESET") {
         await resetHeroPoints(heroPoints);
-    } else if (radios === "ADD") {
+    } else if (sessionStart === "ADD") {
         await addHeroPoints(heroPoints);
     }
 
@@ -96,20 +107,20 @@ export function heroPointHandler() {
   <label class="col-md-4 control-label" for="radios">${game.i18n.localize("SETTINGS.heroPointHandler.doWhat")}</label>
   <div class="col-md-4">
       <div class="radio">
-        <label for="radios-0">
-          <input type="radio" name="radios" id="radios-0" value="RESET" checked="checked">
+        <label for="sessionStart-0">
+          <input type="radio" name="sessionStart" id="sessionStart-0" value="RESET">
           Reset to
         </label>
       </div>
       <div class="radio">
-        <label for="radios-1">
-          <input type="radio" name="radios" id="radios-1" value="ADD">
+        <label for="sessionStart-1">
+          <input type="radio" name="sessionStart" id="sessionStart-1" value="ADD">
           Add
         </label>
       </div>
       <div class="radio">
-        <label for="radios-2">
-          <input type="radio" name="radios" id="radios-2" value="NOTHING">
+        <label for="sessionStart-2">
+          <input type="radio" name="sessionStart" id="sessionStart-2" value="NOTHING" checked="checked">
           Ignore
         </label>
       </div>
@@ -135,7 +146,13 @@ export function heroPointHandler() {
 
     //TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
-    const characters = game?.actors?.filter((x) => x.hasPlayerOwner).filter((x) => x.type === "character");
+    const characters = game?.actors
+        ?.filter((x) => x.hasPlayerOwner)
+        .filter((x) => x.type === "character")
+        // @ts-ignore
+        .filter((actor) => !actor.data.data.traits.traits.value.includes("minion"))
+        // @ts-ignore
+        .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon"));
     // @ts-ignore
     const length = characters.length;
     const checked = Math.floor(Math.random() * length);
