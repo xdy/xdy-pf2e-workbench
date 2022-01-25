@@ -141,6 +141,14 @@ Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMen
     }
 });
 
+Hooks.on("updateWorldTime", async (_total, diff) => {
+    // @ts-ignore
+    if (game.user?.isGM && !game.combat?.active && diff >= 1 && game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat")) {
+        // @ts-ignore
+        game.pf2e.effectTracker.removeExpired();
+    }
+});
+
 Hooks.on("updateCombat", (combat: Combat) => {
     if (game.user?.isGM && game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
         if (combat.combatant?.actor) {

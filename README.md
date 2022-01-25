@@ -8,7 +8,7 @@ modules and may well be eaten by the system at some point.
 
 My current ideas (as in, no guarantee they'll ever actually get done) can be seen [here](featureIdeas.md)
 
-## Current features
+## Current features (in the order they were added)
 
 * NPC Mystification. Sets the name of a token on the current scene based on it's traits if mystified by dragging it from the sidebar while holding the configured modifier key, clicking the mystify button in the token hud or using the mystify keyboard shortcut (no default set). There are several options to filter out certain types of traits. A prefix or postfix can be added to the mystified name (either a user-provided word, or one rolled on a user-provided rollable table). A random number can also be added after the postfix, and optionally be kept when demystifying the creature. E.g. 'Skeletal Champion' could become 'Jack the Mindless Undead Skeleton 23'.
 * Optional keybind and combat context menu to move the selected combatant to before the current combatant in the
@@ -20,6 +20,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, etc, might hit others as well). Click on title to expand again.
 * Optional setting to automatically roll damage for Strikes on a hit. On a critical success it rolls critical damage. Needs the PF2e system setting 'Show results on attacks and saves' to be set so that the attacker can see the result in the chat. (E.g. for non-gm use either 'Owner' or 'All').
 * Experimental heropoint handler feature. Adds an optional keybind to open a dialog that can reset or add heropoints for all characters, add one heropoint to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes. Note that currently the timer goes away if you do a ctrl-f5 or restart foundry.
+* Option to automatically purge all expired effects every time the game world clock increases out of combat.
 
 ## Installation
 

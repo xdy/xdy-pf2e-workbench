@@ -11,7 +11,6 @@
             "doWhat": "Gör vad med hjältepoängen för alla karaktärer?",
             "thisMany": "Så här många",
             "addOne": "Lägg till en hjältepoäng till utvald karakär (default framslumpad)"
-
         },
         "autoRollDamageForStrike": {
             "name": "Rulla skador automatiskt för strike som träffar.",
@@ -25,6 +24,10 @@
         },
         "notifications": {
             "cantMystify": "Du kan inte mystifiera denna spelfigur. Är den på den aktiva scenen, och är du en spelledare?"
+        },
+        "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
+            "name": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid.",
+            "hint": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid."
         },
         "purgeExpiredEffectsEachTurn": {
             "name": "Ta bort alla utgångna effekter varje runda.",

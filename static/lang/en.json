@@ -29,6 +29,10 @@
         "notifications": {
             "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
         },
+        "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
+            "name": "Purge all expired effects every time the game world time increases out of combat.",
+            "hint": "Purge all expired effects every time the game world time increases out of combat."
+        },
         "purgeExpiredEffectsEachTurn": {
             "name": "Purge all expired effects each turn.",
             "hint": "Purge all expired effects each turn in combat. Reload (f5) after changing this setting."

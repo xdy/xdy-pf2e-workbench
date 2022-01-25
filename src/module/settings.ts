@@ -28,6 +28,7 @@ declare global {
             "xdy-pf2e-workbench.npcMystifierSkipRandomNumberForUnique": boolean;
             "xdy-pf2e-workbench.npcMystifierUseMystifiedNameInChat": boolean;
             "xdy-pf2e-workbench.purgeExpiredEffectsEachTurn": boolean;
+            "xdy-pf2e-workbench.purgeExpiredEffectsOnTimeIncreaseOutOfCombat": boolean;
             "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
             "xdy-pf2e-workbench.autoCollapseItemChatCardContent": boolean;
             "xdy-pf2e-workbench.heroPointHandler": boolean;
@@ -68,6 +69,15 @@ export function registerSettings() {
         onChange() {
             ui.chat.render();
         },
+    });
+
+    game.settings.register(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat", {
+        name: "SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.name",
+        hint: "SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
     });
 
     game.settings.register(MODULENAME, "purgeExpiredEffectsEachTurn", {
