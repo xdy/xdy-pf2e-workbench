@@ -26,29 +26,29 @@ const outDir = (() => {
 type Optimization = Configuration["optimization"];
 const optimization: Optimization = isProductionBuild
     ? {
-          minimize: false,
-          minimizer: [
-              new TerserPlugin({
-                  terserOptions: {
-                      mangle: false,
-                  },
-              }),
-              new CssMinimizerPlugin(),
-          ],
-          splitChunks: {
-              chunks: "all",
-              cacheGroups: {
-                  default: {
-                      name: "xdy-pf2e-workbench",
-                      test: "src/module/xdy-pf2e-workbench.ts",
-                  },
-                  vendor: {
-                      name: "vendor",
-                      test: /node_modules/,
-                  },
-              },
-          },
-      }
+        minimize: false,
+        minimizer: [
+            new TerserPlugin({
+                terserOptions: {
+                    mangle: false,
+                },
+            }),
+            new CssMinimizerPlugin(),
+        ],
+        splitChunks: {
+            chunks: "all",
+            cacheGroups: {
+                default: {
+                    name: "xdy-pf2e-workbench",
+                    test: "src/module/xdy-pf2e-workbench.ts",
+                },
+                vendor: {
+                    name: "vendor",
+                    test: /node_modules/,
+                },
+            },
+        },
+    }
     : undefined;
 
 const config: Configuration = {
@@ -128,7 +128,10 @@ const config: Configuration = {
         new copyWebpackPlugin({
             patterns: [
                 { from: "module.json" },
-                { from: "packs/*" },
+                {
+                    from: "packs/**",
+                    noErrorOnMissing: true
+                },
                 {
                     from: "static/",
                     transform(content: Buffer, absoluteFrom: string) {
