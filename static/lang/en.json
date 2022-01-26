@@ -31,7 +31,7 @@
         },
         "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
             "name": "Purge all expired effects every time the game world time increases out of combat.",
-            "hint": "Purge all expired effects every time the game world time increases out of combat."
+            "hint": "Purge all expired effects every time the game world time increases out of combat. Reload (f5) after changing this setting."
         },
         "purgeExpiredEffectsEachTurn": {
             "name": "Purge all expired effects each turn.",

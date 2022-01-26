@@ -27,7 +27,7 @@
         },
         "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
             "name": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid.",
-            "hint": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid."
+            "hint": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid. Ladda om (f5) efter ändring."
         },
         "purgeExpiredEffectsEachTurn": {
             "name": "Ta bort alla utgångna effekter varje runda.",

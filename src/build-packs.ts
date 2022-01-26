@@ -8,7 +8,6 @@ const asymonousSource = [
     "./submodules/my-foundryvtt-macros/PF2e/Contributions by others",
 ];
 const packsSource = "packs";
-const workSource = "packs";
 
 const pf2eSystemPath = (() => {
     const configPath = path.resolve(process.cwd(), "foundryconfig.json");
@@ -36,17 +35,17 @@ function copyFolder(source: string, target: string) {
             //Log last part of path
             console.log(`Copied ${path.basename(targetPath)}`);
             // eslint-disable-next-line
-            fs.appendFileSync(targetPath, `\n//# source https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(path.dirname(sourcePath))}/${file}`);
+            fs.appendFileSync(targetPath, `\n//# source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(path.dirname(sourcePath))}/${file}" - Fetched on ${new Date().toISOString()}`);
         });
 }
 
-fs.mkdirsSync(outDir + "/" + workSource + "/" + "asymonous-benefactor-macros");
+fs.mkdirsSync(outDir + "/" + packsSource + "/" + "asymonous-benefactor-macros");
 copyFolder(path.resolve(".", asymonousSource[0]), path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"));
 copyFolder(path.resolve(".", asymonousSource[1]), path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"));
 
 function getFolders(dir: string) {
     const results = [];
-    const folders = fs.readdirSync(workSource);
+    const folders = fs.readdirSync(packsSource);
     for (const folder of folders) {
         if (fs.statSync(path.join(dir, folder)).isDirectory()) {
             results.push(folder);
@@ -67,9 +66,25 @@ for (const folder of folders) {
             continue;
         }
         try {
+            const macroName = path.parse(file).name;
+            const importMacro = `/** Import this macro "${macroName}", not the one named "XDY DO_NOT_IMPORT ${macroName}", it will call the most recent version from the compendium, so no need to update your world when a new version of the macro appears. */
+async function _executeMacroByName(name) {
+    let pack = game.packs.get('xdy-pf2e-workbench.asymonous-benefactor-macros');
+    pack.getIndex().then(index => {
+        let id = index.find(e => e.name === name)?._id;
+        if (id)
+            pack.getDocument(id).then(e => e.execute()
+    )});
+}
+
+_executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
+//This macro is based on a macro by DrentalBot that can be found here: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274
+;`;
             const contents = fs.readFileSync(filePath, { encoding: "utf8" });
             // eslint-disable-next-line
-            const json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(contents)},"flags": {},"img":"icons/svg/dice-target.svg","name": "${path.parse(file).name}","permission": {"default": 1},"scope": "global","type": "script"}`;
+            let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(contents)},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}\n`;
+            // eslint-disable-next-line
+            json += `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(importMacro)},"flags": {},"img":"icons/svg/dice-target.svg","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
             lines.push(json);
         } catch (err) {
             console.error(`Failed to read JSON file ${filePath}`, err);

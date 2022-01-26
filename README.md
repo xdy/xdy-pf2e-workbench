@@ -22,7 +22,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Experimental heropoint handler feature. Adds an optional keybind to open a dialog that can reset or add heropoints for all characters, add one heropoint to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes. Note that currently the timer goes away if you do a ctrl-f5 or restart foundry.
 * Option to automatically purge all expired effects every time the game world clock increases out of combat.
 * From now on each release of PF2e Workbench will include the latest versions of all V9-compatible macros from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e They can be found in the asymonous-benefactor-macros pack, with the express permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor.
-Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of each macro.
+Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of each macro. Do not import the macros named like 'XDY DO_NOT_IMPORT', instead import the ones with proper names.
 
 ## Installation
 

@@ -21,6 +21,7 @@
     "scripts": {
         "build": "npm run && webpack --mode production",
         "build:dev": "npm run && webpack",
+        "clean": "rm -rf dist/*",
         "lint": "eslint ./src --ext .ts",
         "lint:fix": "eslint ./src --ext .ts --fix",
         "docs": "typedoc",
@@ -53,7 +54,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "fork-ts-checker-webpack-plugin": "^7.0.0-alpha.12",
         "fs-extra": "^10.0.0",
-        "lint-staged": "^12.3.1",
+        "lint-staged": "^12.3.2",
         "mini-css-extract-plugin": "^2.5.3",
         "prettier": "^2.5.1",
         "semantic-release": "^19.0.2",
