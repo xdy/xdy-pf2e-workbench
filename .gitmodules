@@ -1,0 +1,3 @@
+[submodule "submodules/my-foundryvtt-macros"]
+	path = submodules/my-foundryvtt-macros
+	url = https://gitlab.com/symonsch/my-foundryvtt-macros.git

@@ -79,3 +79,11 @@ Asset licenses:
   are provided under
   the [Creative Commons Attribution 3.0 Unported (CC BY 3.0) license](https://creativecommons.org/licenses/by/3.0/) and
   were made by numerous authors. The full list of those can be found at: https://game-icons.net/about.html#authors
+
+build-packs license:
+
+* The build-packs.ts script  has been dreadfully hacked from https://github.com/CarlosFdez/pf2e-persistent-damage/blob/master/build-packs.ts and is, like the original, provided under the [ISC license](https://www.isc.org/licenses/)
+
+asymonous-benefactor-macros:
+
+* The macros found in the asymonous-benefactor-macros pack are, with the express permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous benefactor, collected from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e at build time. Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of the file.

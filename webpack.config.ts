@@ -128,6 +128,7 @@ const config: Configuration = {
         new copyWebpackPlugin({
             patterns: [
                 { from: "module.json" },
+                { from: "packs/*" },
                 {
                     from: "static/",
                     transform(content: Buffer, absoluteFrom: string) {

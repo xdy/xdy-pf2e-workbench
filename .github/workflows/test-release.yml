@@ -51,7 +51,7 @@ jobs:
         needs: [ test ]
         steps:
             -   name: Checkout
-                uses: actions/checkout@v2
+                uses: actions/checkout@v2.4.0
                 with:
                     submodules: 'true'
 
@@ -62,6 +62,9 @@ jobs:
 
             -   name: Install
                 run: npm install
+
+            -   name: Build packs
+                run: npm run build:packs
 
             -   name: Build
                 run: npm run build

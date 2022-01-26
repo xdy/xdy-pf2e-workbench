@@ -23,7 +23,8 @@
         "build:dev": "npm run && webpack",
         "lint": "eslint ./src --ext .ts",
         "lint:fix": "eslint ./src --ext .ts --fix",
-        "docs": "typedoc"
+        "docs": "typedoc",
+        "build:packs": "ts-node -r tsconfig-paths/register src/build-packs.ts"
     },
     "devDependencies": {
         "@league-of-foundry-developers/foundry-vtt-types": "^9.242.0",
