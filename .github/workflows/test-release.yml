@@ -62,14 +62,9 @@ jobs:
                     git submodule update --init --recursive
                     git submodule update --recursive --remote
 
-            -   name: Commit
-                run: |
-                    git config user.email "actions@github.com"
-                    git config user.name "GitHub Actions - update submodules"
-                    git commit -am "Update submodules"
-
-            -   name: Push
-                run: git push origin main
+            - uses: stefanzweifel/git-auto-commit-action@v4.13.1
+              with:
+                  commit_message: "chore: Update submodules"
 
             -   name: Setup Node.js
                 uses: actions/setup-node@v2.5.1
