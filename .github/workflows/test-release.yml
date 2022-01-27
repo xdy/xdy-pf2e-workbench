@@ -43,6 +43,7 @@ jobs:
             #- name: Test
             #run: npm test
 
+            #
     release:
         # Only release on push to main on xdy/xdy-pf2e-workbench
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
@@ -54,6 +55,16 @@ jobs:
                 uses: actions/checkout@v2.4.0
                 with:
                     submodules: 'true'
+
+                # Not sure this is the right way to do it
+            -   name: Update submodules
+                run: git submodule update --init --recursive
+
+            -   name: Commit
+                run: git commit -am "Update submodules"
+
+            -   name: Push
+                run: git push origin main
 
             -   name: Setup Node.js
                 uses: actions/setup-node@v2.5.1
