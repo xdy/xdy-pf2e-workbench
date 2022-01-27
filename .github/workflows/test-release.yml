@@ -57,11 +57,16 @@ jobs:
                     submodules: 'true'
 
                 # Not sure this is the right way to do it
-            -   name: Update submodules
-                run: git submodule update --init --recursive
+            -   name: Pull & update submodules recursively
+                run: |
+                    git submodule update --init --recursive
+                    git submodule update --recursive --remote
 
             -   name: Commit
-                run: git commit -am "Update submodules"
+                run: |
+                    git config user.email "actions@github.com"
+                    git config user.name "GitHub Actions - update submodules"
+                    git commit -am "Update submodules"
 
             -   name: Push
                 run: git push origin main
