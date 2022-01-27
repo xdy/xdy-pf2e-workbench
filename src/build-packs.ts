@@ -67,7 +67,7 @@ for (const folder of folders) {
         }
         try {
             const macroName = path.parse(file).name;
-            const importMacro = `/** Import this macro "${macroName}", not the one named "XDY DO_NOT_IMPORT ${macroName}", it will call the most recent version from the compendium, so no need to update your world when a new version of the macro appears. */
+            const importMacro = `/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
 async function _executeMacroByName(name) {
     let pack = game.packs.get('xdy-pf2e-workbench.asymonous-benefactor-macros');
     pack.getIndex().then(index => {
@@ -78,9 +78,10 @@ async function _executeMacroByName(name) {
 }
 
 _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
-//This macro is based on a macro by DrentalBot that can be found here: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274
-;`;
+
+//This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274;`;
             const contents = fs.readFileSync(filePath, { encoding: "utf8" });
+            //TODO Instead of hardcoding icons, have a map of icons to use (yes, it'll get out of date eventually, but, eh, it's a start)
             // eslint-disable-next-line
             let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(contents)},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}\n`;
             // eslint-disable-next-line
