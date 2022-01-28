@@ -34,7 +34,16 @@
             "path": "packs/asymonous-benefactor-macros.db",
             "module": "xdy-pf2e-workbench",
             "entity": "Macro"
+        },
+        {
+            "name": "asymonous-benefactor-effects",
+            "label": "asymonous-benefactor-effects.db",
+            "system": "pf2e",
+            "path": "packs/asymonous-benefactor-effects.db",
+            "module": "xdy-pf2e-workbench",
+            "entity": "Item"
         }
+
     ],
     "dependencies": [],
     "languages": [

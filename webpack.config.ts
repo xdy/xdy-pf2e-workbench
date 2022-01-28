@@ -133,6 +133,10 @@ const config: Configuration = {
                     noErrorOnMissing: true
                 },
                 {
+                    from: "static/packs/**",
+                    noErrorOnMissing: true
+                },
+                {
                     from: "static/",
                     transform(content: Buffer, absoluteFrom: string) {
                         if (path.basename(absoluteFrom) === "en.json") {
