@@ -71,37 +71,37 @@ Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
 });
 
 Hooks.on("createChatMessage", (message: ChatMessage) => {
-    if (game.settings.get(MODULENAME, "autoRollDamageForStrike")) {
-        if (message.data.type === 5) {
-            const strikeName = message.data.flavor?.match(
-                `(<strong>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.strike")}): (.*?)<\\/strong>`
+    // @ts-ignore
+    const messageActor = game.actors?.get(message.data.speaker.actor);
+    if (
+        message.data.type === 5 &&
+        game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
+        messageActor &&
+        ((!game.user?.isGM && messageActor.isOwner) || (game.user?.isGM && !messageActor.hasPlayerOwner))
+    ) {
+        const strikeName = message.data.flavor?.match(
+            `(<strong>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.strike")}): (.*?)<\\/strong>`
+        );
+        if (strikeName && strikeName[1] && strikeName[2]) {
+            const degreeOfSuccess = message.data.flavor?.match(
+                `(<b>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.result")}): <span class="(.*?)">`
             );
-            if (strikeName && strikeName[1] && strikeName[2]) {
-                const degreeOfSuccess = message.data.flavor?.match(
-                    `(<b>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.result")}): <span class="(.*?)">`
-                );
-                if (degreeOfSuccess && degreeOfSuccess[1] && degreeOfSuccess[2]) {
+            if (degreeOfSuccess && degreeOfSuccess[1] && degreeOfSuccess[2]) {
+                // @ts-ignore
+                const relevantStrike = messageActor?.data.data?.actions
+                    .filter((a: { type: string }) => a.type === "strike")
+                    .find((action: { name: string }) => action.name === strikeName[2]);
+                const rollOptions = messageActor
                     // @ts-ignore
-                    const relevantStrike = game.actors
-                        // @ts-ignore
-                        ?.get(message.data.speaker.actor)
-                        // @ts-ignore
-                        ?.data.data?.actions.filter((a: { type: string }) => a.type === "strike")
-                        .find((action: { name: string }) => action.name === strikeName[2]);
-                    const rollOptions = game.actors
-                        // @ts-ignore
-                        ?.get(message.data.speaker.actor)
-                        // @ts-ignore
-                        ?.getRollOptions(["all", "damage-roll"]);
-                    if (degreeOfSuccess[2] === "success") {
-                        relevantStrike?.damage({
-                            options: rollOptions,
-                        });
-                    } else if (degreeOfSuccess[2] === "criticalSuccess") {
-                        relevantStrike?.critical({
-                            options: rollOptions,
-                        });
-                    }
+                    ?.getRollOptions(["all", "damage-roll"]);
+                if (degreeOfSuccess[2] === "success") {
+                    relevantStrike?.damage({
+                        options: rollOptions,
+                    });
+                } else if (degreeOfSuccess[2] === "criticalSuccess") {
+                    relevantStrike?.critical({
+                        options: rollOptions,
+                    });
                 }
             }
         }
