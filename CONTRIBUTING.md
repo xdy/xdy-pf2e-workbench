@@ -27,7 +27,7 @@ break any relevant (or irrelevant) law...
 Either send me the file or make a Pull Request, making sure to also add your system to "languages" in module.json before
 you do the Pull Request. (See below for instructions).
 
-Or, if you prefer to do it as a separate module, make sure to mention it on the discord so we can link to it!
+Or, if you prefer to do it as a separate module, make sure to ping me so I can link to it here!
 
 ## How to set up for development
 
