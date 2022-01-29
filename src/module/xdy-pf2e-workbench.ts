@@ -93,11 +93,11 @@ Hooks.on("createChatMessage", (message: ChatMessage) => {
                 const rollOptions = messageActor
                     // @ts-ignore
                     ?.getRollOptions(["all", "damage-roll"]);
-                if (degreeOfSuccess[0] === '"success') {
+                if (degreeOfSuccess[0].includes("success")) {
                     relevantStrike?.damage({
                         options: rollOptions,
                     });
-                } else if (degreeOfSuccess[0] === '"criticalSuccess"') {
+                } else if (degreeOfSuccess[0].includes("criticalSuccess")) {
                     relevantStrike?.critical({
                         options: rollOptions,
                     });
