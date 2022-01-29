@@ -27,6 +27,10 @@ export async function mystifyToken(token: Token | TokenDocument | null, isMystif
                 default:
                     name = await generateNameFromTraits(token);
             }
+            //Do not allow name to be just empty string
+            if (name === "") {
+                name = "...";
+            }
 
             const addRandom = game.settings.get(MODULENAME, "npcMystifierAddRandomNumber");
             if (token?.name?.match(/ \d+$/)?.[0] && keep && !shouldSkipRandomNumber(token)) {
