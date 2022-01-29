@@ -20,6 +20,7 @@ import { registerSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/mystify-token";
 import { registerKeybindings } from "./keybinds";
 import { getCombatantById, moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
+import { isFirstOwner } from "./utilities";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -71,13 +72,13 @@ Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
 });
 
 Hooks.on("createChatMessage", (message: ChatMessage) => {
-    // @ts-ignore
-    const messageActor = game.actors?.get(message.data.speaker.actor);
+    const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
+
     if (
         message.data.type === 5 &&
         game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
         messageActor &&
-        ((!game.user?.isGM && messageActor.isOwner) || (game.user?.isGM && !messageActor.hasPlayerOwner))
+        ((!game.user?.isGM && isFirstOwner(messageActor)) || game.user?.isGM)
     ) {
         const strikeName = message.data.flavor?.match(
             `(<strong>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.strike")}): (.*?)<\\/strong>`
