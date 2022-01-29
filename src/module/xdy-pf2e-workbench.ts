@@ -83,11 +83,9 @@ Hooks.on("createChatMessage", (message: ChatMessage) => {
         const strikeName = message.data.flavor?.match(
             `(<strong>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.strike")}): (.*?)<\\/strong>`
         );
-        if (strikeName && strikeName[1] && strikeName[2]) {
-            const degreeOfSuccess = message.data.flavor?.match(
-                `(<b>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.result")}): <span class="(.*?)">`
-            );
-            if (degreeOfSuccess && degreeOfSuccess[1] && degreeOfSuccess[2]) {
+        if (strikeName && strikeName[1]) {
+            const degreeOfSuccess = message.data.flavor?.match(`(\\"success\\"|\\"criticalSuccess\\")`);
+            if (degreeOfSuccess && degreeOfSuccess[0]) {
                 // @ts-ignore
                 const relevantStrike = messageActor?.data.data?.actions
                     .filter((a: { type: string }) => a.type === "strike")
@@ -95,11 +93,11 @@ Hooks.on("createChatMessage", (message: ChatMessage) => {
                 const rollOptions = messageActor
                     // @ts-ignore
                     ?.getRollOptions(["all", "damage-roll"]);
-                if (degreeOfSuccess[2] === "success") {
+                if (degreeOfSuccess[0] === '"success') {
                     relevantStrike?.damage({
                         options: rollOptions,
                     });
-                } else if (degreeOfSuccess[2] === "criticalSuccess") {
+                } else if (degreeOfSuccess[0] === '"criticalSuccess"') {
                     relevantStrike?.critical({
                         options: rollOptions,
                     });
