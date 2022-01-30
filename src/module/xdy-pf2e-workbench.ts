@@ -20,7 +20,6 @@ import { registerSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/mystify-token";
 import { registerKeybindings } from "./keybinds";
 import { getCombatantById, moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
-import { isFirstOwner } from "./utilities";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -73,17 +72,20 @@ Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
 
 Hooks.on("createChatMessage", (message: ChatMessage) => {
     const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
-
-    if (
-        message.data.type === 5 &&
-        game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
-        messageActor &&
-        ((!game.user?.isGM && isFirstOwner(messageActor)) || game.user?.isGM)
-    ) {
+    const messageUserId = message.data.user;
+    const isSenderActive = game.users?.players
+        .filter((u) => u.active)
+        .filter((u) => !u.isGM)
+        .find((u) => u.id === messageUserId);
+    const amIMessageSender = messageUserId === game.user?.id;
+    const autorollDamageEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
+    const rollAsPlayer = !game.user?.isGM && amIMessageSender;
+    const rollAsGM = game.user?.isGM && (amIMessageSender || !isSenderActive);
+    if (message.data.type === 5 && autorollDamageEnabled && messageActor && (rollAsPlayer || rollAsGM)) {
         const strikeName = message.data.flavor?.match(
             `(<strong>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.strike")}): (.*?)<\\/strong>`
         );
-        if (strikeName && strikeName[1]) {
+        if (strikeName && strikeName[1] && strikeName[2]) {
             const degreeOfSuccess = message.data.flavor?.match(`(\\"success\\"|\\"criticalSuccess\\")`);
             if (degreeOfSuccess && degreeOfSuccess[0]) {
                 // @ts-ignore
