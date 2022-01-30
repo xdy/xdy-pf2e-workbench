@@ -4,7 +4,6 @@
     "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
     "version": "2.23.0",
     "minimumCoreVersion": "9",
-
     "compatibleCoreVersion": "9",
     "scripts": [],
     "esmodules": ["xdy-pf2e-workbench.bundle.js"],
@@ -46,14 +45,11 @@
         }
     ],
     "system": ["pf2e"],
+    "author": "Jonas Karlsson",
     "authors": [
         {
             "name": "Jonas Karlsson (xdy)",
-            "url": "https://gnu.xdy.se/home",
-            "discord": "xdy#3735",
-            "twitter": "@xdy",
-            "reddit": "u/xdyxdy",
-            "ko-fi": "xdy1337"
+            "url": "https://gnu.xdy.se/home"
         }
     ],
     "socket": false,
@@ -65,7 +61,6 @@
     "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
     "changelog": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/CHANGELOG.md",
     "library": false,
-
     "media": [
         {
             "type": "cover",
@@ -73,8 +68,6 @@
             "caption": "PF2e Workbench"
         }
     ],
-    "manifestPlusVersion": "1.2.0",
-
     "flags": {
         "media": [
             {
