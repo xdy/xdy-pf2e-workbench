@@ -72,6 +72,9 @@ Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
 
 Hooks.on("createChatMessage", (message: ChatMessage) => {
     const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
+    const messageToken: TokenDocument = <TokenDocument>(
+        game.scenes?.current?.tokens.get(<string>message.data.speaker.token)
+    );
     const messageUserId = message.data.user;
     const isSenderActive = game.users?.players
         .filter((u) => u.active)
@@ -89,7 +92,12 @@ Hooks.on("createChatMessage", (message: ChatMessage) => {
             const degreeOfSuccess = message.data.flavor?.match(`(\\"success\\"|\\"criticalSuccess\\")`);
             if (degreeOfSuccess && degreeOfSuccess[0]) {
                 // @ts-ignore
-                const relevantStrike = messageActor?.data.data?.actions
+                const actions: any =
+                    // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
+                    messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
+                    // @ts-ignore
+                    messageActor?.data.data?.actions;
+                const relevantStrike = actions
                     .filter((a: { type: string }) => a.type === "strike")
                     .find((action: { name: string }) => action.name === strikeName[2]);
                 const rollOptions = messageActor
