@@ -1,5 +1,5 @@
 Preamble:
-This license does not apply to the content listed in this software's "packs" or "assets" directory. See README.md for licensing information for those (and license details in general).
+This license does not apply to the content listed in this software's "packs" or "assets" directory. See [README.md](README.md) for licensing information for those (and license details in general).
 
                                  Apache License
                            Version 2.0, January 2004
