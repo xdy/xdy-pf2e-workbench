@@ -8,12 +8,11 @@
     "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/xdy-pf2e-workbench.zip",
     "changelog": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/CHANGELOG.md",
     "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
-    "license": "./LICENSE",
+    "license": "./LICENSE.md",
     "version": "2.21.8",
-    "author": "Jonas Karlsson (xdy)",
     "authors": [
         {
-            "name": "Jonas Karlsson",
+            "name": "Jonas Karlsson (xdy)",
             "url": "https://gnu.xdy.se/home",
             "discord": "xdy#3735",
             "twitter": "@xdy",
@@ -73,5 +72,8 @@
             "caption": "PF2e Workbench"
         }
     ],
-    "manifestPlusVersion": "1.2.0"
+    "manifestPlusVersion": "1.2.0",
+    "flags": {
+        "allowBugReporter": true
+    }
 }
