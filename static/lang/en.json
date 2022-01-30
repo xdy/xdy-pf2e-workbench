@@ -17,8 +17,8 @@
             "hint": "(Experimental) Keybind to open the Hero point handler dialog that enables resetting and adding heropoints with an hourly reminder"
         },
         "autoRollDamageForStrike": {
-            "name": "Automatically roll damage for strikes that hit.",
-            "hint": "Automatically roll damage for strikes that hit.",
+            "name": "Per user setting to automatically roll damage for strikes that hit.",
+            "hint": "Per user setting to automatically roll damage for strikes that hit.",
             "strike": "Strike",
             "result": "Result"
         },

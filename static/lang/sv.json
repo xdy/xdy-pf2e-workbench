@@ -13,8 +13,8 @@
             "addOne": "Lägg till en hjältepoäng till utvald karakär (default framslumpad)"
         },
         "autoRollDamageForStrike": {
-            "name": "Rulla skador automatiskt för strike som träffar.",
-            "hint": "Rulla skador automatiskt för strike som träffar.",
+            "name": "Användarinställning för att rulla skador automatiskt för strike som träffar.",
+            "hint": "Användarinställning för att rulla skador automatiskt för strike som träffar.",
             "strike": "Strike",
             "result": "Result"
         },
