@@ -15,12 +15,12 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
   initiative order (normally used when the current combatant has just killed the selected combatant).
 * Optional feature to automatically move combatant that goes to 0 hp to just before the current combatant. (See above.)
 * Optional feature to automatically move combatant that gets the Dying condition to just before the current combatant. (See above.)
-* Option to automatically purge all expired effects each turn.
+* (Still in the module, but a variant is in the system) Option to automatically purge all expired effects each turn.
 * Optional keybinds for executing a macro in any position on any page of the macro hotbar, whether that page is currently showing or not.
 * Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, etc, might hit others as well). Click on title to expand again.
 * Optional setting to automatically roll damage for Strikes on a hit. On a critical success it rolls critical damage. Needs the PF2e system setting 'Show results on attacks and saves' to be set so that the attacker can see the result in the chat. (E.g. for non-gm use either 'Owner' or 'All').
 * Experimental heropoint handler feature. Adds an optional keybind to open a dialog that can reset or add heropoints for all characters, add one heropoint to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes. Note that currently the timer goes away if you do a ctrl-f5 or restart foundry.
-* Option to automatically purge all expired effects every time the game world clock increases out of combat.
+* (Still in the module, but a variant is in the system) Option to automatically purge all expired effects every time the game world clock increases out of combat.
 * From now on each release of PF2e Workbench will include the latest versions of all V9-compatible macros from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e They can be found in the asymonous-benefactor-macros compendium, with the express permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor.
 Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of each macro. Do not import the macros named like 'XDY DO_NOT_IMPORT', instead import the ones with proper names.
 * Effects for the Lingering Heroics macro included with the above are now included in the asymonous-benefactor-effects compendium , import these to automatically get the proper duration effect sent to chat.
