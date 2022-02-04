@@ -9,19 +9,17 @@ export function registerKeybindings() {
 
     const keybindings = game.keybindings;
 
-    //Move combatant
     keybindings.register(MODULENAME, "heroPointHandler", {
         name: "SETTINGS.heroPointHandlerKey.name",
         hint: "SETTINGS.heroPointHandlerKey.hint",
         editable: [],
         onDown: () => {
-            if (game.user?.isGM) {
+            if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
                 heroPointHandler();
             }
         },
     });
 
-    //Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
         hint: "SETTINGS.moveBeforeCurrentCombatantKey.hint",

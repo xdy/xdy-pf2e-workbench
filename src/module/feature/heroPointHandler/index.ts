@@ -1,74 +1,67 @@
 //TODO Clean up horrendously ugly code...
 
-async function resetHeroPoints(heropoints: number) {
-    //TODO Don't do a bunch of updates
-    game?.actors
-        ?.filter((actor) => actor.hasPlayerOwner)
-        .filter((actor) => actor.type === "character")
-        .filter((actor) => actor.hasPlayerOwner)
-        // @ts-ignore
-        .filter((actor) => !actor.data.data.traits.traits.value.includes("minion"))
-        // @ts-ignore
-        .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon"))
-        .forEach((actor) => {
-            const value = Math.clamped(
-                heropoints,
-                0,
-                // @ts-ignore
-                parseInt(actor.data.data.resources.heroPoints.max)
-            );
-            actor.update({
-                // @ts-ignore
-                "data.resources.heroPoints.value": value,
-            });
-        });
-}
+import { MODULENAME } from "../../xdy-pf2e-workbench";
 
-async function addHeroPoints(heropoints: number, actorId: any = null) {
-    if (actorId && actorId !== "ALL" && actorId !== "NONE") {
-        const actor = game?.actors?.get(actorId);
-        if (actor) {
-            const value = Math.clamped(
-                // @ts-ignore
-                parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
-                0,
-                // @ts-ignore
-                parseInt(actor.data.data.resources.heroPoints.max)
-            );
-            actor.update({
-                "data.resources.heroPoints.value": value,
-            });
-        }
-    } else if (actorId && actorId === "ALL") {
+function heroes() {
+    return (
         game?.actors
-            ?.filter((x) => x.hasPlayerOwner)
-            .filter((x) => x.type === "character")
+            ?.filter((actor) => actor.hasPlayerOwner)
+            .filter((actor) => actor.type === "character")
             // @ts-ignore
             .filter((actor) => !actor.data.data.traits.traits.value.includes("minion"))
             // @ts-ignore
-            .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon"))
-            ?.forEach((actor) => {
-                //TODO Don't do a bunch of updates
-                const value = Math.clamped(
-                    // @ts-ignore
-                    parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
-                    0,
-                    // @ts-ignore
-                    parseInt(actor.data.data.resources.heroPoints.max)
-                );
-                actor.update({
-                    // @ts-ignore
-                    "data.resources.heroPoints.value": value,
-                });
-            });
+            .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon")) || []
+    );
+}
+
+async function resetHeroPoints(heropoints: number) {
+    const heroes1 = heroes();
+    for (const actor of heroes1) {
+        const value = Math.min(
+            heropoints,
+            // @ts-ignore
+            parseInt(actor.data.data.resources.heroPoints.max)
+        );
+        await actor.update({
+            // @ts-ignore
+            "data.resources.heroPoints.value": value,
+        });
     }
 }
 
-async function handleDialog(html: any) {
+async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
+    let actors: any[];
+    switch (actorId) {
+        case "ALL":
+            actors = heroes();
+            break;
+        case "NONE":
+            actors = [];
+            break;
+        default:
+            actors = [game.actors?.get(actorId)];
+            break;
+    }
+
+    for (const actor of actors) {
+        const value = Math.min(
+            // @ts-ignore
+            parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
+            // @ts-ignore
+            parseInt(actor.data.data.resources.heroPoints.max)
+        );
+        await actor.update({
+            // @ts-ignore
+            "data.resources.heroPoints.value": value,
+        });
+    }
+}
+
+async function handleDialogResponse(html: any) {
     const sessionStart = html.find('input[name="sessionStart"]:checked').val();
     const heroPoints = parseInt(html.find('input[name="heropoints"]').val());
     const actorId = html.find('input[name="characters"]:checked').val();
-    const timer = parseInt(html.find('input[name="timerText"]').val());
+    const remainingMinutes = parseInt(html.find('input[name="timerText"]').val());
 
     //Reset or add to all
     if (sessionStart === "RESET") {
@@ -77,23 +70,44 @@ async function handleDialog(html: any) {
         await addHeroPoints(heroPoints);
     }
 
-    //Add to random
+    //Add to random character
     await addHeroPoints(1, actorId);
-    return timer;
+    return remainingMinutes;
 }
 
-//TODO How to start using bootstrap? (I use bootstrap classes).
-export function heroPointHandler() {
-    // TODO On pressing key, open dialog, should have:
-    // * Unchecked checkbox to reset heropoints for all to dropdown with default 1
-    // * List of all characters with radio button next to each, and a 'ALL' radio button
-    // * A random character should be selected, unless checkbox to reset all is checked, select another if you prefer.
-    // * Button to start timer to open this dialog in textbox with default 60 minutes
-    // * Button to just close dialog
+export async function handleTimer(remainingMinutes: number) {
+    if (remainingMinutes > 0) {
+        const timeout = setTimeout(() => {
+            heroPointHandler();
+        }, remainingMinutes * 60 * 1000);
 
+        const updateData = {
+            flags: {
+                "xdy-pf2e-workbench": {
+                    heroPointHandler: {
+                        startTime: game.time.serverTime,
+                        remainingMinutes: remainingMinutes,
+                        timeout: timeout,
+                    },
+                },
+            },
+        };
+        await game.user?.update(updateData);
+    } else {
+        const timeout = <NodeJS.Timeout>game.user?.getFlag(MODULENAME, "heroPointHandler.timeout");
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        await game.user?.unsetFlag(MODULENAME, "heroPointHandler.startTime");
+        await game.user?.unsetFlag(MODULENAME, "heroPointHandler.remainingMinutes");
+        await game.user?.unsetFlag(MODULENAME, "heroPointHandler.timeout");
+    }
+}
+
+//TODO How to start using bootstrap? (I use bootstrap classes in the html).
+export async function heroPointHandler() {
     const title: any = `${game.i18n.localize("SETTINGS.heroPointHandler.title")}`;
 
-    //TODO There has to be a better way to not allow opening the same dialog twice
     for (const key in ui.windows) {
         // @ts-ignore
         if (ui.windows[key].data.title === title) {
@@ -101,33 +115,39 @@ export function heroPointHandler() {
         }
     }
 
+    const startTime = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime") || game.time.serverTime;
+    const remainingMinutes =
+        <number>((await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60) -
+        Math.floor((game.time.serverTime - startTime) / (60 * 1000));
+    await handleTimer(remainingMinutes);
+
+    //TODO Extract to a handlebars template
     const startContent = `
-<!-- Multiple Radios -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="radios">${game.i18n.localize("SETTINGS.heroPointHandler.doWhat")}</label>
   <div class="col-md-4">
+
       <div class="radio">
         <label for="sessionStart-0">
           <input type="radio" name="sessionStart" id="sessionStart-0" value="RESET">
-          Reset to
+          ${game.i18n.localize("SETTINGS.heroPointHandler.resetTo")}
         </label>
       </div>
       <div class="radio">
         <label for="sessionStart-1">
           <input type="radio" name="sessionStart" id="sessionStart-1" value="ADD">
-          Add
+          ${game.i18n.localize("SETTINGS.heroPointHandler.add")}
         </label>
       </div>
       <div class="radio">
         <label for="sessionStart-2">
           <input type="radio" name="sessionStart" id="sessionStart-2" value="NOTHING" checked="checked">
-          Ignore
+          ${game.i18n.localize("SETTINGS.heroPointHandler.ignore")}
         </label>
       </div>
   </div>
 </div>
 
-<!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="heropoints">${game.i18n.localize(
       "SETTINGS.heroPointHandler.thisMany"
@@ -137,7 +157,6 @@ export function heroPointHandler() {
   </div>
 </div>
 
-<!-- Multiple Radios -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="characters">${game.i18n.localize(
       "SETTINGS.heroPointHandler.addOne"
@@ -155,7 +174,10 @@ export function heroPointHandler() {
         .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon"));
     // @ts-ignore
     const length = characters.length;
-    const checked = Math.floor(Math.random() * length);
+    const checked =
+        ((await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60) === 60
+            ? Math.floor(Math.random() * length)
+            : -1;
     for (let i = 0; i < length; i++) {
         const actor = characters?.filter((x) => x.type === "character")[i];
         charactersContent += `
@@ -171,25 +193,28 @@ export function heroPointHandler() {
 
     const remainingContent = `
   <div class="radio">
-    <label for="characters-${length + 1}">
-      <input type="radio" name="characters" id="characters-2" value="ALL">
-      ALL
+    <label for="characters-ALL">
+      <input type="radio" name="characters" id="characters-ALL" value="ALL">
+      ${game.i18n.localize("SETTINGS.heroPointHandler.all")}
     </label>
   </div>
   <div class="radio">
-    <label for="characters-${length + 2}">
-      <input type="radio" name="characters" id="characters-2" value="NONE">
-      NONE
+    <label for="characters-NONE">
+      <input type="radio" name="characters" id="characters-NONE" value="NONE" ${
+          checked === -1 ? 'checked="checked"' : ""
+      }>
+      ${game.i18n.localize("SETTINGS.heroPointHandler.none")}
     </label>
   </div>
 </div>
 
-<!-- Prepended text-->
 <div class="form-group">
   <div class="col-md-4">
     <div class="input-group">
       <span class="input-group-addon">${game.i18n.localize("SETTINGS.heroPointHandler.timerValue")}</span>
-      <input id="timerTextId" name="timerText" class="form-control" value="60" type="text">
+      <input id="timerTextId" name="timerText" class="form-control" value="${
+          (await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60
+      }" type="text">
     </div>
     <p class="help-block">${game.i18n.localize("SETTINGS.heroPointHandler.showAfter")}</p>
   </div>
@@ -204,18 +229,20 @@ export function heroPointHandler() {
         buttons: {
             timer: {
                 icon: '<i class="fas fa-hourglass"></i>',
-                label: `${game.i18n.localize("SETTINGS.heroPointHandler.startTimerLabel")}`,
+                label: `${game.i18n.localize("SETTINGS.heroPointHandler.startTimerLabel")} (${
+                    (await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60
+                })`,
                 callback: async (html: any) => {
-                    const timer = await handleDialog(html);
-                    setTimeout(() => {
-                        heroPointHandler();
-                    }, timer * 60 * 1000);
+                    1;
+                    const minutes = await handleDialogResponse(html);
+                    await handleTimer(minutes);
                 },
             },
             noTimer: {
                 label: `${game.i18n.localize("SETTINGS.heroPointHandler.noTimerLabel")}`,
                 callback: async (html) => {
-                    await handleDialog(html);
+                    await handleDialogResponse(html);
+                    await handleTimer(0);
                 },
             },
         },

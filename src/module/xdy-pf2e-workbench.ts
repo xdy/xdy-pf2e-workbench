@@ -20,6 +20,7 @@ import { registerSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/mystify-token";
 import { registerKeybindings } from "./keybinds";
 import { getCombatantById, moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
+import { handleTimer } from "./feature/heroPointHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -54,6 +55,14 @@ Hooks.once("setup", async () => {
 Hooks.once("ready", async () => {
     // Do anything once the module is ready
     console.log(`${MODULENAME} | Ready`);
+
+    if (game.settings.get(MODULENAME, "heroPointHandler")) {
+        const startTime = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime") || game.time.serverTime;
+        const remainingMinutes =
+            <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes") -
+            Math.floor((game.time.serverTime - startTime) / (60 * 1000));
+        await handleTimer(remainingMinutes);
+    }
 });
 
 Hooks.on("createToken", async (token: any) => {

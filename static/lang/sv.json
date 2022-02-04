@@ -6,11 +6,16 @@
             "timerValue": "Timervärde",
             "showAfter": "Visa dialogrutan igen efter så här många minuter",
             "title": "Hjältepoängshanterare",
-            "startTimerLabel": "Skicka ändringar och starta timern",
-            "noTimerLabel": "Skicka ändringar <b>utan</b> att starta timern",
+            "startTimerLabel": "Skicka ändringar och starta/fortsätt timern",
+            "noTimerLabel": "Skicka ändringar <b>utan</b> timer. <b>Stoppar</b> eventuell existerande timer.",
             "doWhat": "Gör vad med hjältepoängen för alla karaktärer?",
             "thisMany": "Så här många",
-            "addOne": "Lägg till en hjältepoäng till utvald karakär (default framslumpad)"
+            "addOne": "Lägg till en hjältepoäng till utvald karaktär (default framslumpad)",
+            "resetTo": "Sätt till",
+            "add": "Lägg till",
+            "ignore": "Ignorera",
+            "all": "Alla",
+            "none": "Ingen"
         },
         "autoRollDamageForStrike": {
             "name": "Användarinställning för att rulla skador automatiskt för strike som träffar.",
