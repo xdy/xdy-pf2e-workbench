@@ -108,11 +108,8 @@ export async function handleTimer(remainingMinutes: number) {
 export async function heroPointHandler() {
     const title: any = `${game.i18n.localize("SETTINGS.heroPointHandler.title")}`;
 
-    for (const key in ui.windows) {
-        // @ts-ignore
-        if (ui.windows[key].data.title === title) {
-            return;
-        }
+    if (Object.values(ui.windows).find((w) => w.title === title)) {
+        return;
     }
 
     const startTime = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime") || game.time.serverTime;
