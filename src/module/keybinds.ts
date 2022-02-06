@@ -17,6 +17,7 @@ export function registerKeybindings() {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
                 heroPointHandler();
             }
+            return true;
         },
     });
 
@@ -31,6 +32,7 @@ export function registerKeybindings() {
                     <Combatant>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
                 );
             }
+            return true;
         },
     });
 
@@ -46,6 +48,7 @@ export function registerKeybindings() {
                     <Combatant>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
                 );
             }
+            return true;
         },
     });
 
@@ -66,6 +69,7 @@ export function registerKeybindings() {
             } else {
                 ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));
             }
+            return true;
         },
         restricted: false,
         reservedModifiers: [],
@@ -81,6 +85,7 @@ export function registerKeybindings() {
                 editable: [],
                 onDown: () => {
                     game.user?.getHotbarMacros(page)[column - 1]?.macro?.execute();
+                    return true;
                 },
             });
         }
