@@ -1,146 +1,140 @@
 {
-    "SETTINGS": {
-        "heroPointHandler": {
-            "Namn": "(Experimentell) Hjältepoängshanterare som kan återställa och / eller lägga till hjältepoäng, med en timmes påminnelse.",
-            "Hint": "(Experimentell) Hjältepoängshanterare med en valfri keybind för att öppna en dialogruta som kan återställa eller lägga till hjältepoäng för alla karaktärer, lägg till en Hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast, starta en timer som gör att dialogrutan återkommer efter (som standard) 60 minuter.",
-            "timerValue": "Timervärde",
-            "showAfter": "Visa dialogrutan igen efter så här många minuter",
-            "title": "Hjältepoängshanterare",
-            "startTimerLabel": "Skicka ändringar och starta/fortsätt timern",
-            "noTimerLabel": "Skicka ändringar <b>utan</b> timer. <b>Stoppar</b> eventuell existerande timer.",
-            "doWhat": "Gör vad med hjältepoängen för alla karaktärer?",
-            "thisMany": "Så här många",
-            "addOne": "Lägg till en hjältepoäng till utvald karaktär (default framslumpad)",
-            "resetTo": "Sätt till",
-            "add": "Lägg till",
-            "ignore": "Ignorera",
-            "all": "Alla",
-            "none": "Ingen"
-        },
-        "autoRollDamageForStrike": {
-            "name": "Användarinställning för att rulla skador automatiskt för strike som träffar.",
-            "hint": "Användarinställning för att rulla skador automatiskt för strike som träffar.",
-            "strike": "Strike",
-            "result": "Result"
-        },
-        "autoCollapseItemChatCardContent": {
-            "name": "Fäll automatiskt ihop chatkorts beskrivning.",
-            "hint": "Fäll automatiskt ihop chatkorts beskrivning. Klicka kort-titeln för att expandera."
-        },
-        "notifications": {
-            "cantMystify": "Du kan inte mystifiera denna spelfigur. Är den på den aktiva scenen, och är du en spelledare?"
-        },
-        "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-            "name": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid.",
-            "hint": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid. Ladda om (f5) efter ändring."
-        },
-        "purgeExpiredEffectsEachTurn": {
-            "name": "Ta bort alla utgångna effekter varje runda.",
-            "hint": "Ta bort alla utgångna effekter varje runda i strid. Ladda om (f5) efter ändring."
-        },
-        "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
-            "name": "Aktivera automatisk sättning av initiativ på stridande som får statusen Dying utanför sin egen runda till strax före  nuvarande stridande.",
-            "hint": "Aktivera automatisk sättning av initiativ på stridande som får statusen Dying utanför sin egen runda till strax före  nuvarande stridande."
-        },
-        "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
-            "name": "Aktivera automatisk sättning av initiativ på stridande som går ner till 0 hp utanför sin egen runda till strax före nuvarande stridande.",
-            "hint": "Aktivera automatisk sättning av initiativ på stridande som går ner till 0 hp utanför sin egen runda till strax före nuvarande stridande."
-        },
-        "enableMoveBeforeCurrentCombatant": {
-            "name": "Möjliggör att vald stridande flyttas före nuvarande stridande.",
-            "hint": "Möjliggör att flytta utvald stridande till före nuvarande stridande, normalt eftersom nuvarande stridande har dödat vald stridande."
-        },
-        "moveBeforeCurrentCombatantContextMenu": {
-            "name": "Flytta vald stridande före nuvarande stridande."
-        },
-        "moveBeforeCurrentCombatantKey": {
-            "name": "Tangent för att flytta vald stridande före aktuell stridande.",
-            "hint": "Tangent för att flytta vald stridande före aktuell stridande, normalt eftersom aktuell stridande har dödat vald stridande... Pga avrundning kan flera stridande visa samma initiativ i listan. "
-        },
-        "npcMystifier": {
-            "name": "Slå på npcmystifierare.",
-            "hint": "Slå på npcmystifierare, byt namn på spelfigur på den aktiva scenen baserat på deras egenskaper om Ctrl (konfigurerbar) klickas när du lägger till spelfiguren scenen."
-        },
-        "npcMystifierMethod": {
-            "name": "Hur man genererar mystifierade npc-namn.",
-            "hint": "För närvarande är mystifiering genom att använda npcns egenskaper det enda alternativet som stöds.",
-            "traits": "Mystifiera mha npc:s egenskaper."
-        },
-        "npcMystifierPrefix": {
-            "name": "Ord eller slumptabell att prefixa nytt namn med",
-            "hint": "Vad ska det nya namnet prefixas med, default '' (exempel: 'Okänd'), om det är namnet på en slumptabell så används en textrad från den tabellen som prefix ."
-        },
-        "npcMystifierPostfix": {
-            "name": "Ord eller slumptabell att postfixa nytt namn med",
-            "hint": "Vad ska ett nytt namn postfixas med, default '' (exempel: 'Varelse'), om det är namnet på en slumptabell så används en textrad från den tabellen som postfix ."
-        },
-        "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
-            "name": "Avmystifiera alla spelfigurer som är baserade på samma varelse.",
-            "hint": "Aktiverar att alla spelfigurer på den aktiva scenen som är baserade på samma varelse som den som avmystifieras också avmystifieras."
-        },
-        "npcMystifierModifierKey": {
-            "name": "Modifieringstangent för att mystifiera när varelse dras ut till scenen.",
-            "hint": "Håll denna tengent för att mystifiera varelse när den dras ut till den aktiva scenen. Observera att om du väljer Alt (inte standard) döljer den också npc:n."
-        },
-        "npcMystifierMystifyKey": {
-            "name": "Tangent för att mystifiera valda spelfigurer",
-            "hint": "Välj spelfigurer och tryck denna knapp för att mystifiera dom."
-        },
-        "npcMystifierAddRandomNumber": {
-            "name": "Lägg till slumpmässigt nummer i namnet.",
-            "hint": "Aktiverar att lägga till ett slumpmässigt nummer när man mystifierar npcs. Observera att om spelfigur eller karaktär redan har ett nummer som suffix kommer detta inte att fungera bra."
-        },
-        "npcMystifierSkipRandomNumberForUnique": {
-            "name": "Inget slumpmässigt nummer för unika npcs.",
-            "hint": "Låter bli att lägga till slumpmässigt nummer för unika npcs."
-        },
-        "npcMystifierKeepNumberAtEndOfName": {
-            "name": "Behåll spelfigurnummer när du mystifierar/avmystifierar.",
-            "hint": "Behåll spelfigurnummer *i samma format som dom som läggs till av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs."
-        },
-        "npcMystifierUseMystifiedNameInChat": {
-            "name": "(Experimentell) Använd mystifierat namn i chattmeddelanden.",
-            "hint": "(Experimentellt) Använd mystifierat namn i chattmeddelanden genom att ersätta karaktärns namn med det mystifierade namnet. Kommer utan tvekan att se riktigt dåligt ut på vissa förmågor."
-        },
-        "npcMystifierFilterRarities": {
-            "name": "Ingen npc-sällsynthet i namnet.",
-            "hint": "Filtrera bort sällsyntheter från det mystifierade namnet."
-        },
-        "npcMystifierFilterRaritiesReplacement": {
-            "name": "Ord att ersätta sällsyntheter större än Vanligt med.",
-            "hint": "Ersätter sällsyntheter ovanligare än Common med (t.ex. 'Ovanlig'). Om det är tomt, ändra inte den visade sällsyntheten."
-        },
-        "npcMystifierFilterEliteWeak": {
-            "name": "Ingen npc-elit/vek status i namnet.",
-            "hint": "Filtrera bort elit/vek från det mystifierade namnet."
-        },
-        "npcMystifierFilterCreatureTypesTraits": {
-            "name": "Inga npc-varelsetypegenskaper i namnet.",
-            "hint": "Filtrera bort egenskaper av varelsetyp (se https://2e.aonprd.com/Traits.aspx) från det mystifierade namnet."
-        },
-        "npcMystifierFilterCreatureFamilyTraits": {
-            "name": "Inga npc-varelsefamiljedrag i namnet.",
-            "hint": "Filtrera bort varelsefamiljedrag (se https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) från det mystifierade namnet."
-        },
-        "npcMystifierFilterAlignmentTraits": {
-            "name": "Inga livsåskådningar i namnet.",
-            "hint": "Filtrera bort livåskådningar från det mystifierade namnet."
-        },
-        "npcMystifierFilterOtherTraits": {
-            "name": "Inga npc-egenskaper som inte finns i ovanstående egenskapstyper.",
-            "hint": "Filtrera bort npc-egenskaper som inte finns med ovanstående egenskaper (se länkarna i ovanstående inställningsalternativ) från det mystifierade namnet."
-        },
-        "npcMystifierFilterBlacklist": {
-            "name": "Svartlista egenskaper så de aldrig läggs till namn.",
-            "hint": "Filtrera bort alla ord i denna kommaseparerade svartlistan från det mystifierade namnet."
+    "xdy-pf2e-workbench": {
+        "SETTINGS": {
+            "heroPointHandler": {
+                "Namn": "(Experimentell) Hjältepoängshanterare som kan återställa och / eller lägga till hjältepoäng, med en timmes påminnelse.",
+                "Hint": "(Experimentell) Hjältepoängshanterare med en valfri keybind för att öppna en dialogruta som kan återställa eller lägga till hjältepoäng för alla karaktärer, lägg till en Hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast, starta en timer som gör att dialogrutan återkommer efter (som standard) 60 minuter.",
+                "timerValue": "Timervärde",
+                "showAfter": "Visa dialogrutan igen efter så här många minuter",
+                "title": "Hjältepoängshanterare",
+                "startTimerLabel": "Skicka ändringar och starta/fortsätt timern",
+                "noTimerLabel": "Skicka ändringar <b>utan</b> timer. <b>Stoppar</b> eventuell existerande timer.",
+                "doWhat": "Gör vad med hjältepoängen för alla karaktärer?",
+                "thisMany": "Så här många",
+                "addOne": "Lägg till en hjältepoäng till utvald karaktär (default framslumpad)",
+                "resetTo": "Sätt till",
+                "add": "Lägg till",
+                "ignore": "Ignorera",
+                "all": "Alla",
+                "none": "Ingen"
+            },
+            "autoRollDamageForStrike": {
+                "name": "Användarinställning för att rulla skador automatiskt för strike som träffar.",
+                "hint": "Användarinställning för att rulla skador automatiskt för strike som träffar.",
+                "strike": "Strike",
+                "result": "Result"
+            },
+            "autoCollapseItemChatCardContent": {
+                "name": "Fäll automatiskt ihop chatkorts beskrivning.",
+                "hint": "Fäll automatiskt ihop chatkorts beskrivning. Klicka kort-titeln för att expandera."
+            },
+            "notifications": {
+                "cantMystify": "Du kan inte mystifiera denna spelfigur. Är den på den aktiva scenen, och är du en spelledare?"
+            },
+            "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
+                "name": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid.",
+                "hint": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid. Ladda om (f5) efter ändring."
+            },
+            "purgeExpiredEffectsEachTurn": {
+                "name": "Ta bort alla utgångna effekter varje runda.",
+                "hint": "Ta bort alla utgångna effekter varje runda i strid. Ladda om (f5) efter ändring."
+            },
+            "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
+                "name": "Aktivera automatisk sättning av initiativ på stridande som får statusen Dying utanför sin egen runda till strax före  nuvarande stridande.",
+                "hint": "Aktivera automatisk sättning av initiativ på stridande som får statusen Dying utanför sin egen runda till strax före  nuvarande stridande."
+            },
+            "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
+                "name": "Aktivera automatisk sättning av initiativ på stridande som går ner till 0 hp utanför sin egen runda till strax före nuvarande stridande.",
+                "hint": "Aktivera automatisk sättning av initiativ på stridande som går ner till 0 hp utanför sin egen runda till strax före nuvarande stridande."
+            },
+            "enableMoveBeforeCurrentCombatant": {
+                "name": "Möjliggör att vald stridande flyttas före nuvarande stridande.",
+                "hint": "Möjliggör att flytta utvald stridande till före nuvarande stridande, normalt eftersom nuvarande stridande har dödat vald stridande."
+            },
+            "moveBeforeCurrentCombatantContextMenu": {
+                "name": "Flytta vald stridande före nuvarande stridande."
+            },
+            "moveBeforeCurrentCombatantKey": {
+                "name": "Tangent för att flytta vald stridande före aktuell stridande.",
+                "hint": "Tangent för att flytta vald stridande före aktuell stridande, normalt eftersom aktuell stridande har dödat vald stridande... Pga avrundning kan flera stridande visa samma initiativ i listan. "
+            },
+            "npcMystifier": {
+                "name": "Slå på npcmystifierare.",
+                "hint": "Slå på npcmystifierare, byt namn på spelfigur på den aktiva scenen baserat på deras egenskaper om Ctrl (konfigurerbar) klickas när du lägger till spelfiguren scenen."
+            },
+            "npcMystifierMethod": {
+                "name": "Hur man genererar mystifierade npc-namn.",
+                "hint": "För närvarande är mystifiering genom att använda npcns egenskaper det enda alternativet som stöds.",
+                "traits": "Mystifiera mha npc:s egenskaper."
+            },
+            "npcMystifierPrefix": {
+                "name": "Ord eller slumptabell att prefixa nytt namn med",
+                "hint": "Vad ska det nya namnet prefixas med, default '' (exempel: 'Okänd'), om det är namnet på en slumptabell så används en textrad från den tabellen som prefix ."
+            },
+            "npcMystifierPostfix": {
+                "name": "Ord eller slumptabell att postfixa nytt namn med",
+                "hint": "Vad ska ett nytt namn postfixas med, default '' (exempel: 'Varelse'), om det är namnet på en slumptabell så används en textrad från den tabellen som postfix ."
+            },
+            "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+                "name": "Avmystifiera alla spelfigurer som är baserade på samma varelse.",
+                "hint": "Aktiverar att alla spelfigurer på den aktiva scenen som är baserade på samma varelse som den som avmystifieras också avmystifieras."
+            },
+            "npcMystifierModifierKey": {
+                "name": "Modifieringstangent för att mystifiera när varelse dras ut till scenen.",
+                "hint": "Håll denna tengent för att mystifiera varelse när den dras ut till den aktiva scenen. Observera att om du väljer Alt (inte standard) döljer den också npc:n."
+            },
+            "npcMystifierMystifyKey": {
+                "name": "Tangent för att mystifiera valda spelfigurer",
+                "hint": "Välj spelfigurer och tryck denna knapp för att mystifiera dom."
+            },
+            "npcMystifierAddRandomNumber": {
+                "name": "Lägg till slumpmässigt nummer i namnet.",
+                "hint": "Aktiverar att lägga till ett slumpmässigt nummer när man mystifierar npcs. Observera att om spelfigur eller karaktär redan har ett nummer som suffix kommer detta inte att fungera bra."
+            },
+            "npcMystifierSkipRandomNumberForUnique": {
+                "name": "Inget slumpmässigt nummer för unika npcs.",
+                "hint": "Låter bli att lägga till slumpmässigt nummer för unika npcs."
+            },
+            "npcMystifierKeepNumberAtEndOfName": {
+                "name": "Behåll spelfigurnummer när du mystifierar/avmystifierar.",
+                "hint": "Behåll spelfigurnummer *i samma format som dom som läggs till av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs."
+            },
+            "npcMystifierUseMystifiedNameInChat": {
+                "name": "(Experimentell) Använd mystifierat namn i chattmeddelanden.",
+                "hint": "(Experimentellt) Använd mystifierat namn i chattmeddelanden genom att ersätta karaktärns namn med det mystifierade namnet. Kommer utan tvekan att se riktigt dåligt ut på vissa förmågor."
+            },
+            "npcMystifierFilterRarities": {
+                "name": "Ingen npc-sällsynthet i namnet.",
+                "hint": "Filtrera bort sällsyntheter från det mystifierade namnet."
+            },
+            "npcMystifierFilterRaritiesReplacement": {
+                "name": "Ord att ersätta sällsyntheter större än Vanligt med.",
+                "hint": "Ersätter sällsyntheter ovanligare än Common med (t.ex. 'Ovanlig'). Om det är tomt, ändra inte den visade sällsyntheten."
+            },
+            "npcMystifierFilterEliteWeak": {
+                "name": "Ingen npc-elit/vek status i namnet.",
+                "hint": "Filtrera bort elit/vek från det mystifierade namnet."
+            },
+            "npcMystifierFilterCreatureTypesTraits": {
+                "name": "Inga npc-varelsetypegenskaper i namnet.",
+                "hint": "Filtrera bort egenskaper av varelsetyp (se https://2e.aonprd.com/Traits.aspx) från det mystifierade namnet."
+            },
+            "npcMystifierFilterCreatureFamilyTraits": {
+                "name": "Inga npc-varelsefamiljedrag i namnet.",
+                "hint": "Filtrera bort varelsefamiljedrag (se https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) från det mystifierade namnet."
+            },
+            "npcMystifierFilterAlignmentTraits": {
+                "name": "Inga livsåskådningar i namnet.",
+                "hint": "Filtrera bort livåskådningar från det mystifierade namnet."
+            },
+            "npcMystifierFilterOtherTraits": {
+                "name": "Inga npc-egenskaper som inte finns i ovanstående egenskapstyper.",
+                "hint": "Filtrera bort npc-egenskaper som inte finns med ovanstående egenskaper (se länkarna i ovanstående inställningsalternativ) från det mystifierade namnet."
+            },
+            "npcMystifierFilterBlacklist": {
+                "name": "Svartlista egenskaper så de aldrig läggs till namn.",
+                "hint": "Filtrera bort alla ord i denna kommaseparerade svartlistan från det mystifierade namnet."
+            }
         }
-    },
-    "TRAITS": {
-        "TraitDragon": "Drake",
-        "TraitEvil": "Ond",
-        "TraitFire": "Eld",
-        "TraitGood": "God",
-        "TraitLawful": "Laglydig",
-        "TraitUndead": "Odöd"
     }
 }

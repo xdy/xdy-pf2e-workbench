@@ -106,7 +106,7 @@ export async function handleTimer(remainingMinutes: number) {
 
 //TODO How to start using bootstrap? (I use bootstrap classes in the html).
 export async function heroPointHandler() {
-    const title: any = `${game.i18n.localize("SETTINGS.heroPointHandler.title")}`;
+    const title: any = `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.title`)}`;
 
     if (Object.values(ui.windows).find((w) => w.title === title)) {
         return;
@@ -121,25 +121,27 @@ export async function heroPointHandler() {
     //TODO Extract to a handlebars template
     const startContent = `
 <div class="form-group">
-  <label class="col-md-4 control-label" for="radios">${game.i18n.localize("SETTINGS.heroPointHandler.doWhat")}</label>
+  <label class="col-md-4 control-label" for="radios">${game.i18n.localize(
+      `${MODULENAME}.SETTINGS.heroPointHandler.doWhat`
+  )}</label>
   <div class="col-md-4">
 
       <div class="radio">
         <label for="sessionStart-0">
           <input type="radio" name="sessionStart" id="sessionStart-0" value="RESET">
-          ${game.i18n.localize("SETTINGS.heroPointHandler.resetTo")}
+          ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.resetTo`)}
         </label>
       </div>
       <div class="radio">
         <label for="sessionStart-1">
           <input type="radio" name="sessionStart" id="sessionStart-1" value="ADD">
-          ${game.i18n.localize("SETTINGS.heroPointHandler.add")}
+          ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.add`)}
         </label>
       </div>
       <div class="radio">
         <label for="sessionStart-2">
           <input type="radio" name="sessionStart" id="sessionStart-2" value="NOTHING" checked="checked">
-          ${game.i18n.localize("SETTINGS.heroPointHandler.ignore")}
+          ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.ignore`)}
         </label>
       </div>
   </div>
@@ -147,7 +149,7 @@ export async function heroPointHandler() {
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="heropoints">${game.i18n.localize(
-      "SETTINGS.heroPointHandler.thisMany"
+      `${MODULENAME}.SETTINGS.heroPointHandler.thisMany`
   )}</label>
   <div class="col-md-4">
     <input id="heropoints" name="heropoints" type="number" value=1 class="form-control input-md">
@@ -156,7 +158,7 @@ export async function heroPointHandler() {
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="characters">${game.i18n.localize(
-      "SETTINGS.heroPointHandler.addOne"
+      `${MODULENAME}.SETTINGS.heroPointHandler.addOne`
   )}</label>
   <div class="col-md-4">`;
 
@@ -192,7 +194,7 @@ export async function heroPointHandler() {
   <div class="radio">
     <label for="characters-ALL">
       <input type="radio" name="characters" id="characters-ALL" value="ALL">
-      ${game.i18n.localize("SETTINGS.heroPointHandler.all")}
+      ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.all`)}
     </label>
   </div>
   <div class="radio">
@@ -200,7 +202,7 @@ export async function heroPointHandler() {
       <input type="radio" name="characters" id="characters-NONE" value="NONE" ${
           checked === -1 ? 'checked="checked"' : ""
       }>
-      ${game.i18n.localize("SETTINGS.heroPointHandler.none")}
+      ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.none`)}
     </label>
   </div>
 </div>
@@ -208,12 +210,12 @@ export async function heroPointHandler() {
 <div class="form-group">
   <div class="col-md-4">
     <div class="input-group">
-      <span class="input-group-addon">${game.i18n.localize("SETTINGS.heroPointHandler.timerValue")}</span>
+      <span class="input-group-addon">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`)}</span>
       <input id="timerTextId" name="timerText" class="form-control" value="${
           (await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60
       }" type="text">
     </div>
-    <p class="help-block">${game.i18n.localize("SETTINGS.heroPointHandler.showAfter")}</p>
+    <p class="help-block">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`)}</p>
   </div>
 </div>
 `;
@@ -226,7 +228,7 @@ export async function heroPointHandler() {
         buttons: {
             timer: {
                 icon: '<i class="fas fa-hourglass"></i>',
-                label: `${game.i18n.localize("SETTINGS.heroPointHandler.startTimerLabel")} (${
+                label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`)} (${
                     (await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60
                 })`,
                 callback: async (html: any) => {
@@ -236,7 +238,7 @@ export async function heroPointHandler() {
                 },
             },
             noTimer: {
-                label: `${game.i18n.localize("SETTINGS.heroPointHandler.noTimerLabel")}`,
+                label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noTimerLabel`)}`,
                 callback: async (html) => {
                     await handleDialogResponse(html);
                     await handleTimer(0);

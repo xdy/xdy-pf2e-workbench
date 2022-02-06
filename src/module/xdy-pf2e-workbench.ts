@@ -9,7 +9,6 @@
 
 //TODO Start using the actual pf2e types
 //TODO Make it so holding shift pops up a dialog where one can change the name
-//TODO Can I use the pf2e localization strings?
 //TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog that does that, with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
 //TODO Make the button post a chat message with a properly set up roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify all mystified tokens with the same base actor on that scene. After all, if you've recognized one zombie shambler I figure you would recognize all zombie shamblers.
 //TODO Make issues out of the harder of the above todos...
@@ -95,7 +94,7 @@ Hooks.on("createChatMessage", (message: ChatMessage) => {
     const rollAsGM = game.user?.isGM && (amIMessageSender || !isSenderActive);
     if (message.data.type === 5 && autorollDamageEnabled && messageActor && (rollAsPlayer || rollAsGM)) {
         const strikeName = message.data.flavor?.match(
-            `(<strong>${game.i18n.localize("SETTINGS.autoRollDamageForStrike.strike")}): (.*?)<\\/strong>`
+            `(<strong>${game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`)}): (.*?)<\\/strong>`
         );
         if (strikeName && strikeName[1] && strikeName[2]) {
             const degreeOfSuccess = message.data.flavor?.match(`(\\"success\\"|\\"criticalSuccess\\")`);
@@ -149,7 +148,7 @@ Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMen
     if (game.user?.isGM && game.settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
         entryOptions.push({
             icon: '<i class="fas fa-skull"></i>',
-            name: "SETTINGS.moveBeforeCurrentCombatantContextMenu.name",
+            name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantContextMenu.name`,
             callback: async (li: any) => {
                 if (game.user?.isGM) {
                     await moveSelectedAheadOfCurrent(getCombatantById(li.data("combatant-id")));

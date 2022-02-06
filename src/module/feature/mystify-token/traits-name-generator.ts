@@ -1,7 +1,7 @@
 import { TRAITS } from "../../xdy-pf2e-constants";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
+
 // eslint-disable-next-line import/named
-import { Translations } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/localization";
 
 async function fixesPreAndPost(settingkey: string): Promise<string> {
     const fixSetting: string = <string>game.settings.get(MODULENAME, settingkey);
@@ -107,16 +107,13 @@ export async function generateNameFromTraits(token: Token | TokenDocument) {
         .filter((trait: string, index: number) => {
             return traitsList.indexOf(trait) === index;
         })
+        .filter((trait) => trait.trim().length > 0)
         .map((trait: string) => {
             return trait?.charAt(0).toLocaleUpperCase() + trait?.slice(1);
         })
         .map((trait: string) => {
-            const translationNeeded = trait !== prefix && trait !== postfix;
-            return (
-                (translationNeeded
-                    ? (<Translations>game.i18n.translations[MODULENAME] ?? {})[`TRAITS.Trait${trait}`]
-                    : trait) ?? trait
-            );
+            const translations: any = game.i18n.translations.PF2E ?? {};
+            return (trait !== prefix && trait !== postfix ? translations[`Trait${trait}`] : trait) ?? trait;
         })
         .join(" ");
 }

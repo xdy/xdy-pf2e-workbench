@@ -42,8 +42,8 @@ export function registerSettings() {
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
 
     game.settings.register(MODULENAME, "heroPointHandler", {
-        name: "SETTINGS.heroPointHandler.name",
-        hint: "SETTINGS.heroPointHandler.hint",
+        name: `${MODULENAME}.SETTINGS.heroPointHandler.name`,
+        hint: `${MODULENAME}.SETTINGS.heroPointHandler.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -51,8 +51,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "autoRollDamageForStrike", {
-        name: "SETTINGS.autoRollDamageForStrike.name",
-        hint: "SETTINGS.autoRollDamageForStrike.hint",
+        name: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.name`,
+        hint: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.hint`,
         scope: "client",
         config: true,
         default: false,
@@ -60,8 +60,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
-        name: "SETTINGS.autoCollapseItemChatCardContent.name",
-        hint: "SETTINGS.autoCollapseItemChatCardContent.hint",
+        name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
+        hint: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.hint`,
         scope: "client",
         config: true,
         default: false,
@@ -72,8 +72,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat", {
-        name: "SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.name",
-        hint: "SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.hint",
+        name: `${MODULENAME}.SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.name`,
+        hint: `${MODULENAME}.SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -81,8 +81,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "purgeExpiredEffectsEachTurn", {
-        name: "SETTINGS.purgeExpiredEffectsEachTurn.name",
-        hint: "SETTINGS.purgeExpiredEffectsEachTurn.hint",
+        name: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.name`,
+        hint: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -90,8 +90,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "enableMoveBeforeCurrentCombatant", {
-        name: "SETTINGS.enableMoveBeforeCurrentCombatant.name",
-        hint: "SETTINGS.enableMoveBeforeCurrentCombatant.hint",
+        name: `${MODULENAME}.SETTINGS.enableMoveBeforeCurrentCombatant.name`,
+        hint: `${MODULENAME}.SETTINGS.enableMoveBeforeCurrentCombatant.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -99,8 +99,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP", {
-        name: "SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.name",
-        hint: "SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.hint",
+        name: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.name`,
+        hint: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -108,8 +108,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying", {
-        name: "SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnStatusDying.name",
-        hint: "SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnStatusDying.hint",
+        name: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnStatusDying.name`,
+        hint: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnStatusDying.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -118,8 +118,8 @@ export function registerSettings() {
 
     //Mystification below this
     game.settings.register(MODULENAME, "npcMystifier", {
-        name: "SETTINGS.npcMystifier.name",
-        hint: "SETTINGS.npcMystifier.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifier.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifier.hint`,
         scope: "world",
         config: true,
         default: true,
@@ -127,21 +127,21 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierMethod", {
-        name: "SETTINGS.npcMystifierMethod.name",
-        hint: "SETTINGS.npcMystifierMethod.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierMethod.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierMethod.hint`,
         scope: "world",
         config: true,
         default: "traits",
         type: String,
         choices: {
-            traits: "SETTINGS.npcMystifierMethod.traits",
+            traits: `${MODULENAME}.SETTINGS.npcMystifierMethod.traits`,
         },
     });
 
     //These apply to all mystification methods, I think
     game.settings.register(MODULENAME, "npcMystifierPrefix", {
-        name: "SETTINGS.npcMystifierPrefix.name",
-        hint: "SETTINGS.npcMystifierPrefix.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierPrefix.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierPrefix.hint`,
         scope: "world",
         config: true,
         type: String,
@@ -149,8 +149,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierPostfix", {
-        name: "SETTINGS.npcMystifierPostfix.name",
-        hint: "SETTINGS.npcMystifierPostfix.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierPostfix.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierPostfix.hint`,
         scope: "world",
         config: true,
         type: String,
@@ -158,8 +158,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor", {
-        name: "SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.name",
-        hint: "SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -167,8 +167,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierModifierKey", {
-        name: "SETTINGS.npcMystifierModifierKey.name",
-        hint: "SETTINGS.npcMystifierModifierKey.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierModifierKey.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierModifierKey.hint`,
         scope: "world",
         config: true,
         type: String,
@@ -185,8 +185,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierAddRandomNumber", {
-        name: "SETTINGS.npcMystifierAddRandomNumber.name",
-        hint: "SETTINGS.npcMystifierAddRandomNumber.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.hint`,
         scope: "world",
         config: true,
         default: true,
@@ -194,8 +194,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierSkipRandomNumberForUnique", {
-        name: "SETTINGS.npcMystifierSkipRandomNumberForUnique.name",
-        hint: "SETTINGS.npcMystifierSkipRandomNumberForUnique.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomNumberForUnique.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomNumberForUnique.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -203,8 +203,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierKeepNumberAtEndOfName", {
-        name: "SETTINGS.npcMystifierKeepNumberAtEndOfName.name",
-        hint: "SETTINGS.npcMystifierKeepNumberAtEndOfName.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.hint`,
         scope: "world",
         config: true,
         default: true,
@@ -212,8 +212,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierUseMystifiedNameInChat", {
-        name: "SETTINGS.npcMystifierUseMystifiedNameInChat.name",
-        hint: "SETTINGS.npcMystifierUseMystifiedNameInChat.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -222,8 +222,8 @@ export function registerSettings() {
 
     //TODO These apply only to trait mystification and should be grouped together, maybe on a separate tab?
     game.settings.register(MODULENAME, "npcMystifierFilterRarities", {
-        name: "SETTINGS.npcMystifierFilterRarities.name",
-        hint: "SETTINGS.npcMystifierFilterRarities.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierFilterRarities.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterRarities.hint`,
         scope: "world",
         config: true,
         default: true,
@@ -231,8 +231,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierFilterRaritiesReplacement", {
-        name: "SETTINGS.npcMystifierFilterRaritiesReplacement.name",
-        hint: "SETTINGS.npcMystifierFilterRaritiesReplacement.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierFilterRaritiesReplacement.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterRaritiesReplacement.hint`,
         scope: "world",
         config: true,
         default: "",
@@ -240,8 +240,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierFilterEliteWeak", {
-        name: "SETTINGS.npcMystifierFilterEliteWeak.name",
-        hint: "SETTINGS.npcMystifierFilterEliteWeak.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierFilterEliteWeak.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterEliteWeak.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -249,8 +249,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierFilterCreatureTypesTraits", {
-        name: "SETTINGS.npcMystifierFilterCreatureTypesTraits.name",
-        hint: "SETTINGS.npcMystifierFilterCreatureTypesTraits.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierFilterCreatureTypesTraits.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterCreatureTypesTraits.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -258,8 +258,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierFilterCreatureFamilyTraits", {
-        name: "SETTINGS.npcMystifierFilterCreatureFamilyTraits.name",
-        hint: "SETTINGS.npcMystifierFilterCreatureFamilyTraits.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierFilterCreatureFamilyTraits.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterCreatureFamilyTraits.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -267,8 +267,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierFilterAlignmentTraits", {
-        name: "SETTINGS.npcMystifierFilterAlignmentTraits.name",
-        hint: "SETTINGS.npcMystifierFilterAlignmentTraits.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierFilterAlignmentTraits.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterAlignmentTraits.hint`,
         scope: "world",
         config: true,
         default: true,
@@ -276,8 +276,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierFilterOtherTraits", {
-        name: "SETTINGS.npcMystifierFilterOtherTraits.name",
-        hint: "SETTINGS.npcMystifierFilterOtherTraits.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierFilterOtherTraits.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterOtherTraits.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -285,8 +285,8 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "npcMystifierFilterBlacklist", {
-        name: "SETTINGS.npcMystifierFilterBlacklist.name",
-        hint: "SETTINGS.npcMystifierFilterBlacklist.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierFilterBlacklist.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterBlacklist.hint`,
         scope: "world",
         config: true,
         default: "",

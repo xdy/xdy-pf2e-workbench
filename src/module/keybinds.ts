@@ -10,8 +10,8 @@ export function registerKeybindings() {
     const keybindings = game.keybindings;
 
     keybindings.register(MODULENAME, "heroPointHandler", {
-        name: "SETTINGS.heroPointHandlerKey.name",
-        hint: "SETTINGS.heroPointHandlerKey.hint",
+        name: `${MODULENAME}.SETTINGS.heroPointHandlerKey.name`,
+        hint: `${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`,
         editable: [],
         onDown: () => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
@@ -21,8 +21,8 @@ export function registerKeybindings() {
     });
 
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
-        name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
-        hint: "SETTINGS.moveBeforeCurrentCombatantKey.hint",
+        name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.name`,
+        hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
         editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
@@ -36,8 +36,8 @@ export function registerKeybindings() {
 
     //Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
-        name: "SETTINGS.moveBeforeCurrentCombatantKey.name",
-        hint: "SETTINGS.moveBeforeCurrentCombatantKey.hint",
+        name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.name`,
+        hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
         editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
@@ -51,8 +51,8 @@ export function registerKeybindings() {
 
     //Mystification
     keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
-        name: "SETTINGS.npcMystifierMystifyKey.name",
-        hint: "SETTINGS.npcMystifierMystifyKey.hint",
+        name: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.hint`,
         editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
@@ -64,7 +64,7 @@ export function registerKeybindings() {
 
                 await game.scenes?.current?.updateEmbeddedDocuments("Token", updates);
             } else {
-                ui.notifications?.warn(game.i18n.localize("SETTINGS.notifications.cantMystify"));
+                ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));
             }
         },
         restricted: false,

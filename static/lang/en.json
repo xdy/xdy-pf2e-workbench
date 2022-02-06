@@ -1,528 +1,144 @@
 {
-    "SETTINGS": {
-        "heroPointHandler": {
-            "name": "(Experimental) Hero point handler feature that can automatially reset and/or add hero points, with an hourly reminder.",
-            "hint": "(Experimental) Hero point handler feature with an optional keybind to open a dialog that can reset or add hero points for all characters, add one hero point to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
-            "timerValue": "Timer value",
-            "showAfter": "Show dialog again after this many minutes",
-            "title": "Hero Point Handler",
-            "startTimerLabel": "Submit changes and start/continue timer",
-            "noTimerLabel": "Submit changes with <b>no</b> timer. Will <b>stop</b> any existing timer.",
-            "doWhat": "Do what to the hero points of all characters?",
-            "thisMany": "This many",
-            "addOne": "Add one hero point to selected character (defaults to random roll)",
-            "resetTo": "Reset to",
-            "add": "Add",
-            "ignore": "Ignore",
-            "all": "All",
-            "none": "None"
-        },
-        "heroPointHandlerKey": {
-            "name": "(Experimental) Keybind to open the Hero point handler dialog.",
-            "hint": "(Experimental) Keybind to open the Hero point handler dialog that enables resetting and adding hero points with an hourly reminder"
-        },
-        "autoRollDamageForStrike": {
-            "name": "Per user setting to automatically roll damage for strikes that hit.",
-            "hint": "Per user setting to automatically roll damage for strikes that hit.",
-            "strike": "Strike",
-            "result": "Result"
-        },
-        "autoCollapseItemChatCardContent": {
-            "name": "Automatically collapse item chat card content.",
-            "hint": "Automatically collapse item chat card content. Click the card title to expand."
-        },
-        "notifications": {
-            "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
-        },
-        "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-            "name": "Purge all expired effects every time the game world time increases out of combat.",
-            "hint": "Purge all expired effects every time the game world time increases out of combat. Reload (f5) after changing this setting."
-        },
-        "purgeExpiredEffectsEachTurn": {
-            "name": "Purge all expired effects each turn.",
-            "hint": "Purge all expired effects each turn in combat. Reload (f5) after changing this setting."
-        },
-        "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
-            "name": "Enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant.",
-            "hint": "Enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant."
-        },
-        "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
-            "name": "Enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant.",
-            "hint": "Enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant."
-        },
-        "enableMoveBeforeCurrentCombatant": {
-            "name": "Enable manually moving selected combatant before the current combatant.",
-            "hint": "Enable manually moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list."
-        },
-        "moveBeforeCurrentCombatantContextMenu": {
-            "name": "Move selected combatant before the current combatant."
-        },
-        "moveBeforeCurrentCombatantKey": {
-            "name": "Key for moving selected combatant before the current combatant.",
-            "hint": "Key for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list."
-        },
-        "npcMystifier": {
-            "name": "Turn on npc mystifier.",
-            "hint": "Turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene."
-        },
-        "npcMystifierMethod": {
-            "name": "How to generate mystified npc names.",
-            "hint": "Currently Mystifying by using the NPCs traits is the only supported option.",
-            "traits": "Mystify by NPC Traits"
-        },
-        "npcMystifierPrefix": {
-            "name": "Word or rollable table to prefix new name with",
-            "hint": "What to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead."
-        },
-        "npcMystifierPostfix": {
-            "name": "Word or rollable table to postfix new name with",
-            "hint": "What to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead."
-        },
-        "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
-            "name": "Demystify all tokens based on the same actor.",
-            "hint": "When this is enabled, all mystified tokens on the active scene with the same base actor as the token being renamed will be demystified."
-        },
-        "npcMystifierModifierKey": {
-            "name": "Modifier key to use when mystifying by dragging onto the scene",
-            "hint": "Hold this to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc."
-        },
-        "npcMystifierMystifyKey": {
-            "name": "Key for mystifying selected tokens",
-            "hint": "Select tokens and press this key to mystify them."
-        },
-        "npcMystifierAddRandomNumber": {
-            "name": "Add random number to name.",
-            "hint": "Turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well."
-        },
-        "npcMystifierSkipRandomNumberForUnique": {
-            "name": "No random number for unique npcs.",
-            "hint": "Skips adding a random number when mystifying unique npcs."
-        },
-        "npcMystifierKeepNumberAtEndOfName": {
-            "name": "Keep token number when mystifying/demystifying.",
-            "hint": "Keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs."
-        },
-        "npcMystifierUseMystifiedNameInChat": {
-            "name": "(Experimental) Use mystified name inside chat messages.",
-            "hint": "(Experimental) Use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities."
-        },
-        "npcMystifierFilterRarities": {
-            "name": "No npc rarity in the name.",
-            "hint": "Filter out rarities from the mystified name."
-        },
-        "npcMystifierFilterRaritiesReplacement": {
-            "name": "Word to replace rarities greater than Common with.",
-            "hint": "Set the word to replace rarities greater than Common with (e.g. 'Unusual'). If empty, do not change the displayed rarity."
-        },
-        "npcMystifierFilterEliteWeak": {
-            "name": "No npc elite/weak status in name.",
-            "hint": "Filter out elite/weak from the mystified name."
-        },
-        "npcMystifierFilterCreatureTypesTraits": {
-            "name": "No npc creature type traits in name.",
-            "hint": "Filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name."
-        },
-        "npcMystifierFilterCreatureFamilyTraits": {
-            "name": "No npc creature family traits in name.",
-            "hint": "Filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name."
-        },
-        "npcMystifierFilterAlignmentTraits": {
-            "name": "No npc alignment traits in name.",
-            "hint": "Filter out alignment traits from the mystified name."
-        },
-        "npcMystifierFilterOtherTraits": {
-            "name": "No npc traits not in the above trait types.",
-            "hint": "Filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name."
-        },
-        "npcMystifierFilterBlacklist": {
-            "name": "Blacklist traits to never add to name.",
-            "hint": "Filter out all words in this comma-separated blacklist from the mystified name."
+    "xdy-pf2e-workbench": {
+        "SETTINGS": {
+            "heroPointHandler": {
+                "name": "(Experimental) Hero point handler feature that can automatially reset and/or add hero points, with an hourly reminder.",
+                "hint": "(Experimental) Hero point handler feature with an optional keybind to open a dialog that can reset or add hero points for all characters, add one hero point to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
+                "timerValue": "Timer value",
+                "showAfter": "Show dialog again after this many minutes",
+                "title": "Hero Point Handler",
+                "startTimerLabel": "Submit changes and start/continue timer",
+                "noTimerLabel": "Submit changes with <b>no</b> timer. Will <b>stop</b> any existing timer.",
+                "doWhat": "Do what to the hero points of all characters?",
+                "thisMany": "This many",
+                "addOne": "Add one hero point to selected character (defaults to random roll)",
+                "resetTo": "Reset to",
+                "add": "Add",
+                "ignore": "Ignore",
+                "all": "All",
+                "none": "None"
+            },
+            "heroPointHandlerKey": {
+                "name": "(Experimental) Keybind to open the Hero point handler dialog.",
+                "hint": "(Experimental) Keybind to open the Hero point handler dialog that enables resetting and adding hero points with an hourly reminder"
+            },
+            "autoRollDamageForStrike": {
+                "name": "Per user setting to automatically roll damage for strikes that hit.",
+                "hint": "Per user setting to automatically roll damage for strikes that hit.",
+                "strike": "Strike",
+                "result": "Result"
+            },
+            "autoCollapseItemChatCardContent": {
+                "name": "Automatically collapse item chat card content.",
+                "hint": "Automatically collapse item chat card content. Click the card title to expand."
+            },
+            "notifications": {
+                "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
+            },
+            "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
+                "name": "Purge all expired effects every time the game world time increases out of combat.",
+                "hint": "Purge all expired effects every time the game world time increases out of combat. Reload (f5) after changing this setting."
+            },
+            "purgeExpiredEffectsEachTurn": {
+                "name": "Purge all expired effects each turn.",
+                "hint": "Purge all expired effects each turn in combat. Reload (f5) after changing this setting."
+            },
+            "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
+                "name": "Enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant.",
+                "hint": "Enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant."
+            },
+            "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
+                "name": "Enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant.",
+                "hint": "Enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant."
+            },
+            "enableMoveBeforeCurrentCombatant": {
+                "name": "Enable manually moving selected combatant before the current combatant.",
+                "hint": "Enable manually moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list."
+            },
+            "moveBeforeCurrentCombatantContextMenu": {
+                "name": "Move selected combatant before the current combatant."
+            },
+            "moveBeforeCurrentCombatantKey": {
+                "name": "Key for moving selected combatant before the current combatant.",
+                "hint": "Key for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list."
+            },
+            "npcMystifier": {
+                "name": "Turn on npc mystifier.",
+                "hint": "Turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene."
+            },
+            "npcMystifierMethod": {
+                "name": "How to generate mystified npc names.",
+                "hint": "Currently Mystifying by using the NPCs traits is the only supported option.",
+                "traits": "Mystify by NPC Traits"
+            },
+            "npcMystifierPrefix": {
+                "name": "Word or rollable table to prefix new name with",
+                "hint": "What to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead."
+            },
+            "npcMystifierPostfix": {
+                "name": "Word or rollable table to postfix new name with",
+                "hint": "What to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead."
+            },
+            "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+                "name": "Demystify all tokens based on the same actor.",
+                "hint": "When this is enabled, all mystified tokens on the active scene with the same base actor as the token being renamed will be demystified."
+            },
+            "npcMystifierModifierKey": {
+                "name": "Modifier key to use when mystifying by dragging onto the scene",
+                "hint": "Hold this to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc."
+            },
+            "npcMystifierMystifyKey": {
+                "name": "Key for mystifying selected tokens",
+                "hint": "Select tokens and press this key to mystify them."
+            },
+            "npcMystifierAddRandomNumber": {
+                "name": "Add random number to name.",
+                "hint": "Turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well."
+            },
+            "npcMystifierSkipRandomNumberForUnique": {
+                "name": "No random number for unique npcs.",
+                "hint": "Skips adding a random number when mystifying unique npcs."
+            },
+            "npcMystifierKeepNumberAtEndOfName": {
+                "name": "Keep token number when mystifying/demystifying.",
+                "hint": "Keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs."
+            },
+            "npcMystifierUseMystifiedNameInChat": {
+                "name": "(Experimental) Use mystified name inside chat messages.",
+                "hint": "(Experimental) Use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities."
+            },
+            "npcMystifierFilterRarities": {
+                "name": "No npc rarity in the name.",
+                "hint": "Filter out rarities from the mystified name."
+            },
+            "npcMystifierFilterRaritiesReplacement": {
+                "name": "Word to replace rarities greater than Common with.",
+                "hint": "Set the word to replace rarities greater than Common with (e.g. 'Unusual'). If empty, do not change the displayed rarity."
+            },
+            "npcMystifierFilterEliteWeak": {
+                "name": "No npc elite/weak status in name.",
+                "hint": "Filter out elite/weak from the mystified name."
+            },
+            "npcMystifierFilterCreatureTypesTraits": {
+                "name": "No npc creature type traits in name.",
+                "hint": "Filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name."
+            },
+            "npcMystifierFilterCreatureFamilyTraits": {
+                "name": "No npc creature family traits in name.",
+                "hint": "Filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name."
+            },
+            "npcMystifierFilterAlignmentTraits": {
+                "name": "No npc alignment traits in name.",
+                "hint": "Filter out alignment traits from the mystified name."
+            },
+            "npcMystifierFilterOtherTraits": {
+                "name": "No npc traits not in the above trait types.",
+                "hint": "Filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name."
+            },
+            "npcMystifierFilterBlacklist": {
+                "name": "Blacklist traits to never add to name.",
+                "hint": "Filter out all words in this comma-separated blacklist from the mystified name."
+            }
         }
-    },
-    "TRAITS": {
-        "TraitAasimar": "Aasimar",
-        "TraitAberration": "Aberration",
-        "TraitAbjuration": "Abjuration",
-        "TraitAcid": "Acid",
-        "TraitAesir": "Aesir",
-        "TraitAeon": "Aeon",
-        "TraitAgathion": "Agathion",
-        "TraitAgile": "Agile",
-        "TraitAir": "Air",
-        "TraitAlchemical": "Alchemical",
-        "TraitAlchemist": "Alchemist",
-        "TraitAll": "All",
-        "TraitAmmunition": "Ammunition",
-        "TraitAmphibious": "Amphibious",
-        "TraitAnadi": "Anadi",
-        "TraitAndroid": "Android",
-        "TraitAngel": "Angel",
-        "TraitAnimal": "Animal",
-        "TraitAnugobu": "Anugobu",
-        "TraitApex": "Apex",
-        "TraitAphorite": "Aphorite",
-        "TraitAquatic": "Aquatic",
-        "TraitArcane": "Arcane",
-        "TraitArchetype": "Archetype",
-        "TraitArchon": "Archon",
-        "TraitAreaDamage": "Area Damage",
-        "TraitArtifact": "Artifact",
-        "TraitAstral": "Astral",
-        "TraitAsura": "Asura",
-        "TraitAttached": "Attached",
-        "TraitAttack": "Attack",
-        "TraitAuditory": "Auditory",
-        "TraitAutomaton": "Automaton",
-        "TraitAura": "Aura",
-        "TraitAzarketi": "Azarketi",
-        "TraitAzata": "Azata",
-        "TraitBarbarian": "Barbarian",
-        "TraitBard": "Bard",
-        "TraitBeast": "Beast",
-        "TraitBeastkin": "Beastkin",
-        "TraitBleed": "Bleed",
-        "TraitBludgeoning": "Bludgeoning",
-        "TraitBoggard": "Boggard",
-        "TraitBomb": "Bomb",
-        "TraitBrutal": "Brutal",
-        "TraitBulwark": "Bulwark",
-        "TraitCaligni": "Caligni",
-        "TraitCantrip": "Cantrip",
-        "TraitCapacity": "Capacity",
-        "TraitCatalyst": "Catalyst",
-        "TraitCatfolk": "Catfolk",
-        "TraitCelestial": "Celestial",
-        "TraitChampion": "Champion",
-        "TraitChangeling": "Changeling",
-        "TraitChaotic": "Chaotic",
-        "TraitCharauKa": "Charau-ka",
-        "TraitCleric": "Cleric",
-        "TraitClimbing": "Climbing",
-        "TraitClockwork": "Clockwork",
-        "TraitCobbled": "Cobbled",
-        "TraitCold": "Cold",
-        "TraitColdiron": "Cold Iron",
-        "TraitCombination": "Combination",
-        "TraitComfort": "Comfort",
-        "TraitCommon": "Common",
-        "TraitComplex": "Complex",
-        "TraitCompanion": "Companion",
-        "TraitComposition": "Composition",
-        "TraitConcealable": "Concealable",
-        "TraitConcentrate": "Concentrate",
-        "TraitConcussive": "Concussive",
-        "TraitConfusion": "Confusion",
-        "TraitConjuration": "Conjuration",
-        "TraitConrasu": "Conrasu",
-        "TraitConstruct": "Construct",
-        "TraitConsecration": "Consecration",
-        "TraitConsumable": "Consumable",
-        "TraitContact": "Contact",
-        "TraitContingency": "Contingency",
-        "TraitContract": "Contract",
-        "TraitCouatl": "Couatl",
-        "TraitCriticalFusion": "Critical Fusion",
-        "TraitCriticalHits": "Critical Hits",
-        "TraitCurse": "Curse",
-        "TraitCursed": "Cursed",
-        "TraitCursebound": "Cursebound",
-        "TraitDaemon": "Daemon",
-        "TraitDarkness": "Darkness",
-        "TraitDeath": "Death",
-        "TraitDedication": "Dedication",
-        "TraitDemon": "Demon",
-        "TraitDero": "Dero",
-        "TraitDetection": "Detection",
-        "TraitDevil": "Devil",
-        "TraitDhampir": "Dhampir",
-        "TraitDinosaur": "Dinosaur",
-        "TraitDisarm": "Disarm",
-        "TraitDisease": "Disease",
-        "TraitDiv": "Div",
-        "TraitDivination": "Divination",
-        "TraitDivine": "Divine",
-        "TraitDowntime": "Downtime",
-        "TraitDragon": "Dragon",
-        "TraitDream": "Dream",
-        "TraitDrow": "Drow",
-        "TraitDrug": "Drug",
-        "TraitDruid": "Druid",
-        "TraitDuergar": "Duergar",
-        "TraitDuskwalker": "Duskwalker",
-        "TraitDwarf": "Dwarf",
-        "TraitEarth": "Earth",
-        "TraitEidolon": "Eidolon",
-        "TraitElectricity": "Electricity",
-        "TraitElemental": "Elemental",
-        "TraitElf": "Elf",
-        "TraitElixir": "Elixir",
-        "TraitEmotion": "Emotion",
-        "TraitEnchantment": "Enchantment",
-        "TraitEnergy": "Energy",
-        "TraitEnvironmental": "Environmental",
-        "TraitEthereal": "Ethereal",
-        "TraitEvil": "Evil",
-        "TraitEvocation": "Evocation",
-        "TraitEvolution": "Evolution",
-        "TraitExploration": "Exploration",
-        "TraitExtradimensional": "Extradimensional",
-        "TraitFear": "Fear",
-        "TraitFetchling": "Fetchling",
-        "TraitFey": "Fey",
-        "TraitFiend": "Fiend",
-        "TraitFighter": "Fighter",
-        "TraitFinesse": "Finesse",
-        "TraitFinisher": "Finisher",
-        "TraitFire": "Fire",
-        "TraitFleshwarp": "Fleshwarp",
-        "TraitFlexible": "Flexible",
-        "TraitFlourish": "Flourish",
-        "TraitFocused": "Focused",
-        "TraitForce": "Force",
-        "TraitForceful": "Forceful",
-        "TraitFormian": "Formian",
-        "TraitFortune": "Fortune",
-        "TraitFulu": "Fulu",
-        "TraitFungus": "Fungus",
-        "TraitGadget": "Gadget",
-        "TraitGanzi": "Ganzi",
-        "TraitGeneral": "General",
-        "TraitGenie": "Genie",
-        "TraitGeniekin": "Geniekin",
-        "TraitGhoran": "Ghoran",
-        "TraitGhost": "Ghost",
-        "TraitGhoul": "Ghoul",
-        "TraitGiant": "Giant",
-        "TraitGnoll": "Gnoll",
-        "TraitGnome": "Gnome",
-        "TraitGoblin": "Goblin",
-        "TraitGolem": "Golem",
-        "TraitGoloma": "Goloma",
-        "TraitGood": "Good",
-        "TraitGrapple": "Grapple",
-        "TraitGremlin": "Gremlin",
-        "TraitGrimoire": "Grimoire",
-        "TraitGrioth": "Grioth",
-        "TraitGrippli": "Grippli",
-        "TraitGunslinger": "Gunslinger",
-        "TraitHag": "Hag",
-        "TraitHalcyon": "Halcyon",
-        "TraitHalfElf": "Half-Elf",
-        "TraitHalfOrc": "Half-Orc",
-        "TraitHalfling": "Halfling",
-        "TraitHampering": "Hampering",
-        "TraitHantu": "Hantu",
-        "TraitHaunt": "Haunt",
-        "TraitHealing": "Healing",
-        "TraitHerald": "Herald",
-        "TraitHeritage": "Heritage",
-        "TraitHex": "Hex",
-        "TraitHobgoblin": "Hobgoblin",
-        "TraitHuman": "Human",
-        "TraitHumanoid": "Humanoid",
-        "TraitIfrit": "Ifrit",
-        "TraitIkeshti": "Ikeshti",
-        "TraitIllusion": "Illusion",
-        "TraitImprovised": "Improvised",
-        "TraitIncapacitation": "Incapacitation",
-        "TraitIncarnate": "Incarnate",
-        "TraitIncorporeal": "Incorporeal",
-        "TraitInevitable": "Inevitable",
-        "TraitInfused": "Infused",
-        "TraitIngested": "Ingested",
-        "TraitInhaled": "Inhaled",
-        "TraitInjection": "Injection",
-        "TraitInjury": "Injury",
-        "TraitIntelligent": "Intelligent",
-        "TraitInteract": "Interact",
-        "TraitInventor": "Inventor",
-        "TraitInvested": "Invested",
-        "TraitInvestigator": "Investigator",
-        "TraitKaiju": "Kaiju",
-        "TraitKami": "Kami",
-        "TraitKickback": "Kickback",
-        "TraitKitsune": "Kitsune",
-        "TraitKobold": "Kobold",
-        "TraitKovintus": "Kovintus",
-        "TraitLawful": "Lawful",
-        "TraitLeshy": "Leshy",
-        "TraitLight": "Light",
-        "TraitLineage": "Lineage",
-        "TraitLinguistic": "Linguistic",
-        "TraitLitany": "Litany",
-        "TraitLizardfolk": "Lizardfolk",
-        "TraitLocathah": "Locathah",
-        "TraitMagical": "Magical",
-        "TraitMagus": "Magus",
-        "TraitManipulate": "Manipulate",
-        "TraitMechanical": "Mechanical",
-        "TraitMental": "Mental",
-        "TraitMerfolk": "Merfolk",
-        "TraitMetamagic": "Metamagic",
-        "TraitMindless": "Mindless",
-        "TraitMinion": "Minion",
-        "TraitMisfortune": "Misfortune",
-        "TraitModification": "Modification",
-        "TraitMonitor": "Monitor",
-        "TraitMonk": "Monk",
-        "TraitMorlock": "Morlock",
-        "TraitMorph": "Morph",
-        "TraitMortic": "Mortic",
-        "TraitMounted": "Mounted",
-        "TraitMove": "Move",
-        "TraitMulticlass": "Multiclass",
-        "TraitMummy": "Mummy",
-        "TraitMunavri": "Munavri",
-        "TraitMutagen": "Mutagen",
-        "TraitMutant": "Mutant",
-        "TraitNagaji": "Nagaji",
-        "TraitNecromancy": "Necromancy",
-        "TraitNegative": "Negative",
-        "TraitNoisy": "Noisy",
-        "TraitNonlethal": "Nonlethal",
-        "TraitNymph": "Nymph",
-        "TraitOath": "Oath",
-        "TraitOccult": "Occult",
-        "TraitOil": "Oil",
-        "TraitOlfactory": "Olfactory",
-        "TraitOni": "Oni",
-        "TraitOoze": "Ooze",
-        "TraitOpen": "Open",
-        "TraitOracle": "Oracle",
-        "TraitOrc": "Orc",
-        "TraitOread": "Oread",
-        "TraitPaaridar": "Paaridar",
-        "TraitParry": "Parry",
-        "TraitPetitioner": "Petitioner",
-        "TraitPhantom": "Phantom",
-        "TraitPhysical": "Physical",
-        "TraitPiercing": "Piercing",
-        "TraitPlant": "Plant",
-        "TraitPoison": "Poison",
-        "TraitPolymorph": "Polymorph",
-        "TraitPortable": "Portable",
-        "TraitPoppet": "Poppet",
-        "TraitPositive": "Positive",
-        "TraitPossession": "Possession",
-        "TraitPotion": "Potion",
-        "TraitPrecious": "Precious",
-        "TraitPrecision": "Precision",
-        "TraitPrediction": "Prediction",
-        "TraitPress": "Press",
-        "TraitPrimal": "Primal",
-        "TraitPropulsive": "Propulsive",
-        "TraitProtean": "Protean",
-        "TraitPsychopomp": "Psychopomp",
-        "TraitQlippoth": "Qlippoth",
-        "TraitRage": "Rage",
-        "TraitRakshasa": "Rakshasa",
-        "TraitRange": "Range",
-        "TraitRanger": "Ranger",
-        "TraitRare": "Rare",
-        "TraitRatfolk": "Ratfolk",
-        "TraitReach": "Reach",
-        "TraitReckless": "Reckless",
-        "TraitRepeating": "Repeating",
-        "TraitResonant": "Resonant",
-        "TraitRevelation": "Revelation",
-        "TraitRogue": "Rogue",
-        "TraitSaggorak": "Saggorak",
-        "TraitSahkil": "Sahkil",
-        "TraitSalt": "Salt",
-        "TraitSaltWater": "Salt Water",
-        "TraitSamsaran": "Samsaran",
-        "TraitScatter": "Scatter",
-        "TraitScroll": "Scroll",
-        "TraitScrying": "Scrying",
-        "TraitSeaDevil": "Sea Devil",
-        "TraitSeugathi": "Seugathi",
-        "TraitSecret": "Secret",
-        "TraitSerpentfolk": "Serpentfolk",
-        "TraitShabti": "Shabti",
-        "TraitShadow": "Shadow",
-        "TraitShisk": "Shisk",
-        "TraitShobhad": "Shobhad",
-        "TraitShoony": "Shoony",
-        "TraitShove": "Shove",
-        "TraitSiktempora": "Siktempora",
-        "TraitSimple": "Simple",
-        "TraitSkeleton": "Skeleton",
-        "TraitSkelm": "Skelm",
-        "TraitSkill": "Skill",
-        "TraitSkulk": "Skulk",
-        "TraitSlashing": "Slashing",
-        "TraitSleep": "Sleep",
-        "TraitSnare": "Snare",
-        "TraitSonic": "Sonic",
-        "TraitSorcerer": "Sorcerer",
-        "TraitSoulbound": "Soulbound",
-        "TraitSpellDeflection": "Spell Deflection",
-        "TraitSpellheart": "Spellheart",
-        "TraitSpirit": "Spirit",
-        "TraitSplash": "Splash",
-        "TraitSpriggan": "Spriggan",
-        "TraitSprite": "Sprite",
-        "TraitStaff": "Staff",
-        "TraitStamina": "Stamina",
-        "TraitStance": "Stance",
-        "TraitSteam": "Steam",
-        "TraitStheno": "Stheno",
-        "TraitStrix": "Strix",
-        "TraitStructure": "Structure",
-        "TraitSuli": "Suli",
-        "TraitSummon": "Summon",
-        "TraitSummoned": "Summoned",
-        "TraitSummoner": "Summoner",
-        "TraitSwarmMind": "Swarm Mind",
-        "TraitSwashbuckler": "Swashbuckler",
-        "TraitSwarm": "Swarm",
-        "TraitSweep": "Sweep",
-        "TraitSylph": "Sylph",
-        "TraitTalisman": "Talisman",
-        "TraitTandem": "Tandem",
-        "TraitTane": "Tane",
-        "TraitTanggal": "Tanggal",
-        "TraitTattoo": "Tattoo",
-        "TraitTeleportation": "Teleportation",
-        "TraitTengu": "Tengu",
-        "TraitTethered": "Tethered",
-        "TraitTiefling": "Tiefling",
-        "TraitTime": "Time",
-        "TraitTitan": "Titan",
-        "TraitTransmutation": "Transmutation",
-        "TraitTrap": "Trap",
-        "TraitTrip": "Trip",
-        "TraitTroll": "Troll",
-        "TraitTroop": "Troop",
-        "TraitTrueName": "True Name",
-        "TraitTwin": "Twin",
-        "TraitUnarmed": "Unarmed",
-        "TraitUncommon": "Uncommon",
-        "TraitUndead": "Undead",
-        "TraitUndine": "Undine",
-        "TraitUnique": "Unique",
-        "TraitUnstable": "Unstable",
-        "TraitUntyped": "Untyped",
-        "TraitUrdefhan": "Urdefhan",
-        "TraitVampire": "Vampire",
-        "TraitVanara": "Vanara",
-        "TraitVelstrac": "Velstrac",
-        "TraitVigilante": "Vigilante",
-        "TraitVirulent": "Virulent",
-        "TraitVishkanya": "Vishkanya",
-        "TraitVisual": "Visual",
-        "TraitVorpalFear": "Vorpal Fear",
-        "TraitWand": "Wand",
-        "TraitWater": "Water",
-        "TraitWayang": "Wayang",
-        "TraitWeapons": "Weapons",
-        "TraitWerecreature": "Werecreature",
-        "TraitWight": "Wight",
-        "TraitWitch": "Witch",
-        "TraitWizard": "Wizard",
-        "TraitWraith": "Wraith",
-        "TraitWyrwood": "Wyrwood",
-        "TraitXulgath": "Xulgath",
-        "TraitZombie": "Zombie"
     }
 }
