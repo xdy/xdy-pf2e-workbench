@@ -7,7 +7,7 @@ function shouldSkipRandomNumber(token: Token | TokenDocument) {
     return (
         game.settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
         // @ts-ignore
-        token?.actor?.data?.data?.traits?.rarity?.value === "unique"
+        token?.actor?.data?.data?.traits?.rarity === "unique"
     );
 }
 

@@ -93,7 +93,7 @@ export async function generateNameFromTraits(token: Token | TokenDocument) {
     if (customTraits) {
         traitsList = traitsList.concat(customTraits.trim().split(","));
     }
-    const tokenRarities = traits.rarity?.value;
+    const tokenRarities = traits.rarity;
     if (tokenRarities) {
         traitsList = traitsList.concat(tokenRarities);
     }
@@ -112,6 +112,15 @@ export async function generateNameFromTraits(token: Token | TokenDocument) {
             return trait?.charAt(0).toLocaleUpperCase() + trait?.slice(1);
         })
         .map((trait: string) => {
+            const lowercaseTrait = trait.toLocaleLowerCase();
+            if (TRAITS.ELITE_WEAK.includes(lowercaseTrait)) {
+                switch (lowercaseTrait) {
+                    case TRAITS.ELITE_WEAK[0]:
+                        return game.i18n.localize("PF2E.NPC.Adjustment.EliteLabel");
+                    case TRAITS.ELITE_WEAK[1]:
+                        return game.i18n.localize("PF2E.NPC.Adjustment.WeakLabel");
+                }
+            }
             const translations: any = game.i18n.translations.PF2E ?? {};
             return (trait !== prefix && trait !== postfix ? translations[`Trait${trait}`] : trait) ?? trait;
         })
