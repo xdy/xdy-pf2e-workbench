@@ -1,139 +1,144 @@
 {
-    "xdy-pf2e-workbench": {
-        "SETTINGS": {
-            "autoCollapseItemChatCardContent": {
-                "hint": "Réduit automatiquement le contenu de la carte d'équipement dans la conversation. Cliquer sur le titre de la carte pour l'étendre.",
-                "name": "Réduit automatiquement le contenu de la carte d'équipement dans la conversation."
-            },
-            "autoRollDamageForStrike": {
-                "hint": "Lancer les dégâts automatiquement pour les frappes qui touchent.",
-                "name": "Lancer automatiquement les dégats des frappes qui touchent",
-                "result": "Résultat",
-                "strike": "Frappe"
-            },
-            "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
-                "hint": "Permettre de déplacer automatiquement l'initiative du combattant qui passe sous 0 pv en dehors de son propre tour juste avant le combattant actuel.",
-                "name": "Permet de déplacer automatiquement l'initiative du combattant qui passe sous 0 pv en dehors de son propre tour juste avant le combattant actuel."
-            },
-            "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
-                "hint": "Permettre de déplacer automatiquement l'initiative du combattant qui obtient la condition mourant en dehors de son propre tour juste avant le combattant actuel.",
-                "name": "Permet de déplacer automatiquement l'initiative du combattant qui obtient la condition mourant en dehors de son propre tour juste avant le combattant actuel."
-            },
-            "enableMoveBeforeCurrentCombatant": {
-                "hint": "Permet de déplacer manuellement le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste.",
-                "name": "Permet de sélectionner manuellement le combattant sélectionné pour le placer avant le combattant actuel."
-            },
-            "heroPointHandler": {
-                "addOne": "Ajouter un point d'héroïsme au personnage choisi (La valeur par défaut est un test aléatoire)",
-                "doWhat": "Que faire à tous les points d'héroïsme de tous les personnages ?",
-                "hint": "(Expérimental) Le gestionnaire de point d'héroïsme feature avec une touche liée pour ouvrir un dialogue qui peut remettre à zéro ou ajouterdes points d'héroïsme pour tous les personnages, ajouter un point d'héroïsme à un personnag aléatoire (ou choisi) et de manière plus importante débute une minuterie pour faire  réapparaître le dialogue parès (par défaut) 60 minutes.",
-                "name": "(Expérimental) gestionnaire de point d'héroïsme qui peut automatiquement se mettre à zéro et/ou ajouter des points d'héroïsme, avec un rappel à chaque heure.",
-                "noTimerLabel": "Soumettre les changements <b>sans</b> démarrer la minuterie",
-                "showAfter": "Montrer de nouveau le dialogue après ce nombre de minutes",
-                "startTimerLabel": "Soumettre les changements et démarrer la minuterie",
-                "thisMany": "Ce montant",
-                "timerValue": "Valeur de la minuterie",
-                "title": "Gestionnaire de point d'héroïsme"
-            },
-            "heroPointHandlerKey": {
-                "hint": "(Expérimental) Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme qui permet de remettre à zéro et d'ajouter des points d'héroïsme avec un pense bête chaque heure.",
-                "name": "(Expérimental) Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme."
-            },
-            "moveBeforeCurrentCombatantContextMenu": {
-                "name": "Déplacer les combattants sélectionnés avant le combattant actuel"
-            },
-            "moveBeforeCurrentCombatantKey": {
-                "hint": "Touche pour déplacer le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste.",
-                "name": "Touche pour déplacer le combattant sélectionné avant le combattant actuel."
-            },
-            "notifications": {
-                "cantMystify": "Vous ne pouvez pas mystifier ce jeton. S'il est sur une scène active, êtes vous un MJ ?"
-            },
-            "npcMystifier": {
-                "hint": "Activer la mystification des pnj, renommant les jetons sur la scène active en fonction de leurs traits si vous appuyez sur Ctrl (configurable) lorsque vous ajoutez la scène.",
-                "name": "Activier la mystification des PNJ"
-            },
-            "npcMystifierAddRandomNumber": {
-                "hint": "permet d'ajouter un nombre aléatoire lorsque vous mystifiez les PNJ. Notez que si le jeton ou l'acteur possède déjà un nombre comme suffixe cela ne fonctionnera pas bien.",
-                "name": "Ajouter un nombre aléatoire au nom"
-            },
-            "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
-                "hint": "Lorsque c'est activé, tous les jetons mystifiés sur la scène actuelle avec la même base de nom que l'acteur qui est renommé seront démystifiés.",
-                "name": "Démystifiez tous les jetons basés sur le nom de l'acteur."
-            },
-            "npcMystifierFilterAlignmentTraits": {
-                "hint": "Filtrer les traits d'alignement du nom mystifié",
-                "name": "Pas de traits d'alignement des PNJ dans le nom"
-            },
-            "npcMystifierFilterBlacklist": {
-                "hint": "Filtrer tous les noms de cette liste noire séparée par des virgules du nom mystifié.",
-                "name": "Mettre les traits sur la liste noire pour ne jamais les ajouter au nom"
-            },
-            "npcMystifierFilterCreatureFamilyTraits": {
-                "hint": "Filtrer les types de traits de famille de créature (voir https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) du nom mystifié.",
-                "name": "Pas de traits de famille de créature de PNJ dans le nom."
-            },
-            "npcMystifierFilterCreatureTypesTraits": {
-                "hint": "Filtrer les types de traits type de créature (voir https://2e.aonprd.com/Traits.aspx) du nom mystifié.",
-                "name": "Pas de type de créature de PNJ dans le nom."
-            },
-            "npcMystifierFilterEliteWeak": {
-                "hint": "Filtrer Élite/Faible du nom mystifié",
-                "name": "Pas de statut faible/élite dans les traits"
-            },
-            "npcMystifierFilterOtherTraits": {
-                "hint": "Filtrer les traits des PNJ qui n'appartiennent pas aux types ci-dessus (voir les liens dans les options de réglage ci-dessus) du nom mystifié.",
-                "name": "Pas de trait de PNJ qui ne soit pas dans les types de trait."
-            },
-            "npcMystifierFilterRarities": {
-                "hint": "Filter les raretés du nom mystifié.",
-                "name": "Pas de rareté du PNJ dans le nom"
-            },
-            "npcMystifierFilterRaritiesReplacement": {
-                "hint": "Définir le mot pour remplacer les raretés supérieures à courante (ex. 'Inhabituell'). Si c'est vide, cela ne change pas la rareté montrée.",
-                "name": "Mot pour remplacer la rareté supérieure à courante."
-            },
-            "npcMystifierKeepNumberAtEndOfName": {
-                "hint": "Conserve le numéro du jeton sous le même format que celui ajouté par ce module à la fin du nom (s'il y en a) lorsque vous mystifiez/démystifiez les PNJ.",
-                "name": "Garder le nombre du jeton lorsque vous Mystifiez/démystifiez"
-            },
-            "npcMystifierMethod": {
-                "hint": "La mystification en utilisant les traits des PNJ est la seule option actuellement supportée",
-                "name": "Comment générer les noms des PNJ mystifiés",
-                "traits": "Mystifier par les traits de PNJ"
-            },
-            "npcMystifierModifierKey": {
-                "hint": "Maintenir cela pour mystifier la créature lorsqu'elle est glissée sur la scène active. Noter que si vous choisissez Alt (pas par défaut) cela cache aussi le PNJ.",
-                "name": "Touche modificatrice à utiliser lorsque vous mystifiez en glissant sur la scène"
-            },
-            "npcMystifierMystifyKey": {
-                "hint": "Choisissez les jetons et presser cette clé pour les mystifier.",
-                "name": "Clé pour mystifié les jetons sélectionnés"
-            },
-            "npcMystifierPostfix": {
-                "hint": "Que mettre après le nouveau nom par défaut '' (exemple: 'créature'), si cela correspond au nom d'une table aléatoire un texte aléatoire provenant de cette table sera utilisé comme suffixe à la place.",
-                "name": "Mot ou table aléatoire pour mettre à la suite du nouveau nom"
-            },
-            "npcMystifierPrefix": {
-                "hint": "Que mettre avant le nouveau nom par défaut '' (exemple: 'Inconnu'), si cela correspond au nom d'une table aléatoire un texte aléatoire provenant de cette table sera utilisé comme préfixe à la place.",
-                "name": "Mot ou tale aléatoire pour mettre un préfixe au nouveau nom avec"
-            },
-            "npcMystifierSkipRandomNumberForUnique": {
-                "hint": "Àvite d'accoler un numéro aléatoire lorsque vous mystifiez des PNJ uniques",
-                "name": "Pas de numéro aléatoire pour les PNJ uniques."
-            },
-            "npcMystifierUseMystifiedNameInChat": {
-                "hint": "(Expérimental) Utilise le nom mystifié à l'intérieur des messages de la conversation e remplaçant le nom de l'acteur par le nom mystifié. Cela va vraisemblablement pas être joli pour certains capacités.",
-                "name": "(Experimental) Utilise noms mystifiés dans les messages de la conversation."
-            },
-            "purgeExpiredEffectsEachTurn": {
-                "hint": "Purger tous les effets expirés à chaque tour. Recharger (F5) après avoir changé ce réglage",
-                "name": "Purge de tous les effets expirés à chaque tour."
-            },
-            "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-                "hint": "Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat. Recharger (f5) après avoir changé ce réglage.",
-                "name": "Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat."
-            }
-        }
+  "xdy-pf2e-workbench": {
+    "SETTINGS": {
+      "heroPointHandler": {
+        "name": "(Expérimental) gestionnaire de point d'héroïsme qui peut automatiquement se mettre à zéro et/ou ajouter des points d'héroïsme, avec un rappel à chaque heure.",
+        "hint": "(Expérimental) Le gestionnaire de point d'héroïsme feature avec une touche liée pour ouvrir un dialogue qui peut remettre à zéro ou ajouterdes points d'héroïsme pour tous les personnages, ajouter un point d'héroïsme à un personnag aléatoire (ou choisi) et de manière plus importante débute une minuterie pour faire  réapparaître le dialogue parès (par défaut) 60 minutes.",
+        "timerValue": "Valeur de la minuterie",
+        "showAfter": "Montrer de nouveau le dialogue après ce nombre de minutes",
+        "title": "Gestionnaire de point d'héroïsme",
+        "startTimerLabel": "Soumettre les changements et démarrer la minuterie",
+        "noTimerLabel": "Soumettre les changements <b>sans</b> démarrer la minuterie",
+        "doWhat": "Que faire à tous les points d'héroïsme de tous les personnages ?",
+        "thisMany": "Ce montant",
+        "addOne": "Ajouter un point d'héroïsme au personnage choisi (La valeur par défaut est un test aléatoire)",
+        "resetTo": "Réinitialiser à",
+        "add": "Ajouter",
+        "ignore": "Ignorer",
+        "all": "Tout",
+        "none": "Rien"
+      },
+      "heroPointHandlerKey": {
+        "name": "(Expérimental) Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme.",
+        "hint": "(Expérimental) Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme qui permet de remettre à zéro et d'ajouter des points d'héroïsme avec un pense bête chaque heure."
+      },
+      "autoRollDamageForStrike": {
+        "name": "Lancer automatiquement les dégats des frappes qui touchent",
+        "hint": "Lancer les dégâts automatiquement pour les frappes qui touchent.",
+        "strike": "Frappe",
+        "result": "Résultat"
+      },
+      "autoCollapseItemChatCardContent": {
+        "name": "Réduit automatiquement le contenu de la carte d'équipement dans la conversation.",
+        "hint": "Réduit automatiquement le contenu de la carte d'équipement dans la conversation. Cliquer sur le titre de la carte pour l'étendre."
+      },
+      "notifications": {
+        "cantMystify": "Vous ne pouvez pas mystifier ce jeton. S'il est sur une scène active, êtes vous un MJ ?"
+      },
+      "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
+        "name": "Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat.",
+        "hint": "Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat. Recharger (f5) après avoir changé ce réglage."
+      },
+      "purgeExpiredEffectsEachTurn": {
+        "name": "Purge de tous les effets expirés à chaque tour.",
+        "hint": "Purger tous les effets expirés à chaque tour. Recharger (F5) après avoir changé ce réglage"
+      },
+      "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
+        "name": "Permet de déplacer automatiquement l'initiative du combattant qui obtient la condition mourant en dehors de son propre tour juste avant le combattant actuel.",
+        "hint": "Permettre de déplacer automatiquement l'initiative du combattant qui obtient la condition mourant en dehors de son propre tour juste avant le combattant actuel."
+      },
+      "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
+        "name": "Permet de déplacer automatiquement l'initiative du combattant qui passe sous 0 pv en dehors de son propre tour juste avant le combattant actuel.",
+        "hint": "Permettre de déplacer automatiquement l'initiative du combattant qui passe sous 0 pv en dehors de son propre tour juste avant le combattant actuel."
+      },
+      "enableMoveBeforeCurrentCombatant": {
+        "name": "Permet de sélectionner manuellement le combattant sélectionné pour le placer avant le combattant actuel.",
+        "hint": "Permet de déplacer manuellement le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste."
+      },
+      "moveBeforeCurrentCombatantContextMenu": {
+        "name": "Déplacer les combattants sélectionnés avant le combattant actuel"
+      },
+      "moveBeforeCurrentCombatantKey": {
+        "name": "Touche pour déplacer le combattant sélectionné avant le combattant actuel.",
+        "hint": "Touche pour déplacer le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste."
+      },
+      "npcMystifier": {
+        "name": "Activier la mystification des PNJ",
+        "hint": "Activer la mystification des pnj, renommant les jetons sur la scène active en fonction de leurs traits si vous appuyez sur Ctrl (configurable) lorsque vous ajoutez la scène."
+      },
+      "npcMystifierMethod": {
+        "name": "Comment générer les noms des PNJ mystifiés",
+        "hint": "La mystification en utilisant les traits des PNJ est la seule option actuellement supportée",
+        "traits": "Mystifier par les traits de PNJ"
+      },
+      "npcMystifierPrefix": {
+        "name": "Mot ou tale aléatoire pour mettre un préfixe au nouveau nom avec",
+        "hint": "Que mettre avant le nouveau nom par défaut '' (exemple: 'Inconnu'), si cela correspond au nom d'une table aléatoire un texte aléatoire provenant de cette table sera utilisé comme préfixe à la place."
+      },
+      "npcMystifierPostfix": {
+        "name": "Mot ou table aléatoire pour mettre à la suite du nouveau nom",
+        "hint": "Que mettre après le nouveau nom par défaut '' (exemple: 'créature'), si cela correspond au nom d'une table aléatoire un texte aléatoire provenant de cette table sera utilisé comme suffixe à la place."
+      },
+      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+        "name": "Démystifiez tous les jetons basés sur le nom de l'acteur.",
+        "hint": "Lorsque c'est activé, tous les jetons mystifiés sur la scène actuelle avec la même base de nom que l'acteur qui est renommé seront démystifiés."
+      },
+      "npcMystifierModifierKey": {
+        "name": "Touche modificatrice à utiliser lorsque vous mystifiez en glissant sur la scène",
+        "hint": "Maintenir cela pour mystifier la créature lorsqu'elle est glissée sur la scène active. Noter que si vous choisissez Alt (pas par défaut) cela cache aussi le PNJ."
+      },
+      "npcMystifierMystifyKey": {
+        "name": "Clé pour mystifié les jetons sélectionnés",
+        "hint": "Choisissez les jetons et presser cette clé pour les mystifier."
+      },
+      "npcMystifierAddRandomNumber": {
+        "name": "Ajouter un nombre aléatoire au nom",
+        "hint": "permet d'ajouter un nombre aléatoire lorsque vous mystifiez les PNJ. Notez que si le jeton ou l'acteur possède déjà un nombre comme suffixe cela ne fonctionnera pas bien."
+      },
+      "npcMystifierSkipRandomNumberForUnique": {
+        "name": "Pas de numéro aléatoire pour les PNJ uniques.",
+        "hint": "Àvite d'accoler un numéro aléatoire lorsque vous mystifiez des PNJ uniques"
+      },
+      "npcMystifierKeepNumberAtEndOfName": {
+        "name": "Garder le nombre du jeton lorsque vous Mystifiez/démystifiez",
+        "hint": "Conserve le numéro du jeton sous le même format que celui ajouté par ce module à la fin du nom (s'il y en a) lorsque vous mystifiez/démystifiez les PNJ."
+      },
+      "npcMystifierUseMystifiedNameInChat": {
+        "name": "(Experimental) Utilise noms mystifiés dans les messages de la conversation.",
+        "hint": "(Expérimental) Utilise le nom mystifié à l'intérieur des messages de la conversation e remplaçant le nom de l'acteur par le nom mystifié. Cela va vraisemblablement pas être joli pour certains capacités."
+      },
+      "npcMystifierFilterRarities": {
+        "name": "Pas de rareté du PNJ dans le nom",
+        "hint": "Filter les raretés du nom mystifié."
+      },
+      "npcMystifierFilterRaritiesReplacement": {
+        "name": "Mot pour remplacer la rareté supérieure à courante.",
+        "hint": "Définir le mot pour remplacer les raretés supérieures à courante (ex. 'Inhabituell'). Si c'est vide, cela ne change pas la rareté montrée."
+      },
+      "npcMystifierFilterEliteWeak": {
+        "name": "Pas de statut faible/élite dans les traits",
+        "hint": "Filtrer Élite/Faible du nom mystifié"
+      },
+      "npcMystifierFilterCreatureTypesTraits": {
+        "name": "Pas de type de créature de PNJ dans le nom.",
+        "hint": "Filtrer les types de traits type de créature (voir https://2e.aonprd.com/Traits.aspx) du nom mystifié."
+      },
+      "npcMystifierFilterCreatureFamilyTraits": {
+        "name": "Pas de traits de famille de créature de PNJ dans le nom.",
+        "hint": "Filtrer les types de traits de famille de créature (voir https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) du nom mystifié."
+      },
+      "npcMystifierFilterAlignmentTraits": {
+        "name": "Pas de traits d'alignement des PNJ dans le nom",
+        "hint": "Filtrer les traits d'alignement du nom mystifié"
+      },
+      "npcMystifierFilterOtherTraits": {
+        "name": "Pas de trait de PNJ qui ne soit pas dans les types de trait.",
+        "hint": "Filtrer les traits des PNJ qui n'appartiennent pas aux types ci-dessus (voir les liens dans les options de réglage ci-dessus) du nom mystifié."
+      },
+      "npcMystifierFilterBlacklist": {
+        "name": "Mettre les traits sur la liste noire pour ne jamais les ajouter au nom",
+        "hint": "Filtrer tous les noms de cette liste noire séparée par des virgules du nom mystifié."
+      }
     }
+  }
 }
