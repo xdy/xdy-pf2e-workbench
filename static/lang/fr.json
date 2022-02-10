@@ -24,11 +24,16 @@
         "name": "Permet de sélectionner manuellement le combattant sélectionné pour le placer avant le combattant actuel."
       },
       "heroPointHandler": {
+        "add": "Ajouter",
         "addOne": "Ajouter un point d'héroïsme au personnage choisi (La valeur par défaut est un test aléatoire)",
+        "all": "Tout",
         "doWhat": "Que faire à tous les points d'héroïsme de tous les personnages ?",
         "hint": "(Expérimental) Le gestionnaire de point d'héroïsme feature avec une touche liée pour ouvrir un dialogue qui peut remettre à zéro ou ajouterdes points d'héroïsme pour tous les personnages, ajouter un point d'héroïsme à un personnag aléatoire (ou choisi) et de manière plus importante débute une minuterie pour faire  réapparaître le dialogue parès (par défaut) 60 minutes.",
+        "ignore": "Ignorer",
         "name": "(Expérimental) gestionnaire de point d'héroïsme qui peut automatiquement se mettre à zéro et/ou ajouter des points d'héroïsme, avec un rappel à chaque heure.",
+        "none": "Rien",
         "noTimerLabel": "Soumettre les changements <b>sans</b> démarrer la minuterie",
+        "resetTo": "Réinitialiser à",
         "showAfter": "Montrer de nouveau le dialogue après ce nombre de minutes",
         "startTimerLabel": "Soumettre les changements et démarrer la minuterie",
         "thisMany": "Ce montant",
