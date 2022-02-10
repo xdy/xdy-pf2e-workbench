@@ -28,9 +28,8 @@
         "addOne": "Lägg till en hjältepoäng till utvald karaktär (default framslumpad)",
         "all": "Alla",
         "doWhat": "Gör vad med hjältepoängen för alla karaktärer?",
-        "Hint": "(Experimentell) Hjältepoängshanterare med en valfri keybind för att öppna en dialogruta som kan återställa eller lägga till hjältepoäng för alla karaktärer, lägg till en Hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast, starta en timer som gör att dialogrutan återkommer efter (som standard) 60 minuter.",
         "ignore": "Ignorera",
-        "Namn": "(Experimentell) Hjältepoängshanterare som kan återställa och / eller lägga till hjältepoäng, med en timmes påminnelse.",
+        "name": "(Experimentell) Funktion för hjältepoänghanterare som automatiskt kan återställa och/eller lägga till hjältepoäng, med en påminnelse varje timme.",
         "none": "Ingen",
         "noTimerLabel": "Skicka ändringar <b>utan</b> timer. <b>Stoppar</b> eventuell existerande timer.",
         "resetTo": "Sätt till",
@@ -38,7 +37,12 @@
         "startTimerLabel": "Skicka ändringar och starta/fortsätt timern",
         "thisMany": "Så här många",
         "timerValue": "Timervärde",
-        "title": "Hjältepoängshanterare"
+        "title": "Hjältepoängshanterare",
+        "Namn": "(Experimentell) Hjältepoängshanterare som kan återställa och / eller lägga till hjältepoäng, med en timmes påminnelse.",
+        "Hint": "(Experimentell) Hjältepoängshanterare med en valfri keybind för att öppna en dialogruta som kan återställa eller lägga till hjältepoäng för alla karaktärer, lägg till en Hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast, starta en timer som gör att dialogrutan återkommer efter (som standard) 60 minuter."
+      },
+      "heroPointHandlerKey": {
+        "hint": "(Experimentell) Keybind för att öppna dialogrutan för hjältepoänghanterare som gör det möjligt att återställa och lägga till hjältepoäng med en påminnelse varje timme"
       },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Flytta vald stridande före nuvarande stridande."
