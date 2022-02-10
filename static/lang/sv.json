@@ -40,6 +40,10 @@
         "timerValue": "Timervärde",
         "title": "Hjältepoängshanterare"
       },
+      "heroPointHandlerKey": {
+        "hint": "(Experimentell) Keybind för att öppna dialogrutan för hjältepoänghanterare som gör det möjligt att återställa och lägga till hjältepoäng med en påminnelse varje timme",
+        "name": "(Experimentell) Nyckelbindning för att öppna dialogrutan för hjältepoänghanterare."
+      },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Flytta vald stridande före nuvarande stridande."
       },
