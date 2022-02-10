@@ -40,6 +40,9 @@
         "timerValue": "Timervärde",
         "title": "Hjältepoängshanterare"
       },
+      "heroPointHandlerKey": {
+        "name": "(Experimentell) Nyckelbindning för att öppna dialogrutan för hjältepoänghanterare."
+      },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Flytta vald stridande före nuvarande stridande."
       },
