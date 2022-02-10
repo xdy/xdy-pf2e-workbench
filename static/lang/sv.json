@@ -28,6 +28,7 @@
         "addOne": "Lägg till en hjältepoäng till utvald karaktär (default framslumpad)",
         "all": "Alla",
         "doWhat": "Gör vad med hjältepoängen för alla karaktärer?",
+        "hint": "(Experimentell) Funktion för hjältepoängsshanterare med valfri tangentbindning för att öppna en dialogruta som kan återställa eller lägga till hjältepoäng för alla karaktärer, lägga till en hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast av allt, starta en timer så att dialogen visas igen efter (som standard) 60 minuter.",
         "ignore": "Ignorera",
         "name": "(Experimentell) Funktion för hjältepoänghanterare som automatiskt kan återställa och/eller lägga till hjältepoäng, med en påminnelse varje timme.",
         "none": "Ingen",
@@ -42,7 +43,8 @@
         "Hint": "(Experimentell) Hjältepoängshanterare med en valfri keybind för att öppna en dialogruta som kan återställa eller lägga till hjältepoäng för alla karaktärer, lägg till en Hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast, starta en timer som gör att dialogrutan återkommer efter (som standard) 60 minuter."
       },
       "heroPointHandlerKey": {
-        "hint": "(Experimentell) Keybind för att öppna dialogrutan för hjältepoänghanterare som gör det möjligt att återställa och lägga till hjältepoäng med en påminnelse varje timme"
+        "hint": "(Experimentell) Keybind för att öppna dialogrutan för hjältepoänghanterare som gör det möjligt att återställa och lägga till hjältepoäng med en påminnelse varje timme",
+        "name": "(Experimentell) Nyckelbindning för att öppna dialogrutan för hjältepoänghanterare."
       },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Flytta vald stridande före nuvarande stridande."
