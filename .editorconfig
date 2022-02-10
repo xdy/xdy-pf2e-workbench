@@ -11,3 +11,6 @@ insert_final_newline = true
 [*.md]
 # do not remove any whitespace characters preceding newline characters
 trim_trailing_whitespace = false
+
+[*.json]
+indent_size = 2
