@@ -98,8 +98,8 @@ export async function generateNameFromTraits(token: Token | TokenDocument) {
         traitsList = traitsList.concat(tokenRarities);
     }
 
-    const prefix = await fixesPreAndPost("npcMystifierPrefix");
-    const postfix = await fixesPreAndPost("npcMystifierPostfix");
+    const prefix = (await fixesPreAndPost("npcMystifierPrefix")) || "";
+    const postfix = (await fixesPreAndPost("npcMystifierPostfix")) || "";
     traitsList = filterTraitList(traitsList, prefix, postfix);
 
     return traitsList
