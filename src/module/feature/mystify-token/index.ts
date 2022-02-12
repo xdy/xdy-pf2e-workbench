@@ -39,7 +39,7 @@ export async function mystifyToken(token: Token | TokenDocument | null, isMystif
                 if (addRandom && !shouldSkipRandomNumber(token)) {
                     let rolled = Math.floor(Math.random() * 100) + 1;
                     //Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
-                    if (game.scenes?.current?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
+                    if (canvas?.scene?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
                         rolled = Math.floor(Math.random() * 100) + 1;
                     }
                     name += ` ${rolled}`;
@@ -72,7 +72,7 @@ export async function tokenCreateMystification(token: any) {
         (key === "ALWAYS" || isMystifyModifierKeyPressed()) &&
         (!game.keyboard?.downKeys.has("V") || game.keyboard?.downKeys.has("Insert"))
     ) {
-        await game.scenes?.current?.updateEmbeddedDocuments("Token", await doMystification(token, false));
+        await canvas?.scene?.updateEmbeddedDocuments("Token", await doMystification(token, false));
     }
 }
 
@@ -132,7 +132,7 @@ export function renderNameHud(data: TokenData, html: JQuery) {
                 const active = hudElement.hasClass("active");
                 if (token !== null && isTokenMystified(token) === active) {
                     const updates = await doMystification(token, active);
-                    await game.scenes?.current?.updateEmbeddedDocuments("Token", updates);
+                    await canvas?.scene?.updateEmbeddedDocuments("Token", updates);
                 }
                 hudElement.toggleClass("active");
             });
@@ -147,7 +147,7 @@ export function mangleChatMessage(message: ChatMessage, html: JQuery) {
     const actor = game.actors?.get(actorId);
     const jqueryContent = html?.find(".action-card");
 
-    const tokenName = <string>game.scenes?.current?.tokens?.find((t) => t?.id === tokenId)?.name;
+    const tokenName = <string>canvas?.scene?.tokens?.find((t) => t?.id === tokenId)?.name;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 
     if (tokenNameNoNumber && actor?.name?.trim() !== tokenNameNoNumber && jqueryContent && jqueryContent.html()) {

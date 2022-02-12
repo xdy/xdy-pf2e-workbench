@@ -65,7 +65,7 @@ export function registerKeybindings() {
                     updates.push(...(await doMystification(token, isTokenMystified(token))));
                 }
 
-                await game.scenes?.current?.updateEmbeddedDocuments("Token", updates);
+                await canvas?.scene?.updateEmbeddedDocuments("Token", updates);
             } else {
                 ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));
             }

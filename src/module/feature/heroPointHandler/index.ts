@@ -232,7 +232,6 @@ export async function heroPointHandler() {
                     (await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60
                 })`,
                 callback: async (html: any) => {
-                    1;
                     const minutes = await handleDialogResponse(html);
                     await handleTimer(minutes);
                 },

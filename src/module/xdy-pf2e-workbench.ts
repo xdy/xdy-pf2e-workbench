@@ -80,9 +80,7 @@ Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
 
 Hooks.on("createChatMessage", (message: ChatMessage) => {
     const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
-    const messageToken: TokenDocument = <TokenDocument>(
-        game.scenes?.current?.tokens.get(<string>message.data.speaker.token)
-    );
+    const messageToken: TokenDocument = <TokenDocument>canvas?.scene?.tokens.get(<string>message.data.speaker.token);
     const messageUserId = message.data.user;
     const isSenderActive = game.users?.players
         .filter((u) => u.active)
