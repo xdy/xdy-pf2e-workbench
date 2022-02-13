@@ -2,6 +2,14 @@
 
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 
+export function calcRemainingMinutes() {
+    const startTime = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime") || game.time.serverTime;
+    return (
+        <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes") -
+        Math.floor((game.time.serverTime - startTime) / (60 * 1000))
+    );
+}
+
 function heroes() {
     return (
         game?.actors
@@ -57,7 +65,24 @@ async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
     }
 }
 
-async function handleDialogResponse(html: any) {
+function addOneToSelectedCharacter(actorId: any) {
+    addHeroPoints(1, actorId).then(() => {
+        const name = game?.actors?.find((actor) => actor.id === actorId)?.name;
+        if (actorId === "ALL") {
+            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
+                heroPoints: 1,
+            });
+            return ChatMessage.create({ flavor: message }, {});
+        } else if (name) {
+            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedFor`, {
+                name: name,
+            });
+            return ChatMessage.create({ flavor: message }, {});
+        }
+    });
+}
+
+function handleDialogResponse(html: any) {
     const sessionStart = html.find('input[name="sessionStart"]:checked').val();
     const heroPoints = parseInt(html.find('input[name="heropoints"]').val());
     const actorId = html.find('input[name="characters"]:checked').val();
@@ -65,17 +90,34 @@ async function handleDialogResponse(html: any) {
 
     //Reset or add to all
     if (sessionStart === "RESET") {
-        await resetHeroPoints(heroPoints);
+        resetHeroPoints(heroPoints).then(() => {
+            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.resetToForAll`, {
+                heroPoints: heroPoints,
+            });
+            ChatMessage.create({ flavor: message }, {}).then();
+            addOneToSelectedCharacter(actorId);
+        });
     } else if (sessionStart === "ADD") {
-        await addHeroPoints(heroPoints);
+        addHeroPoints(heroPoints).then(() => {
+            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
+                heroPoints: heroPoints,
+            });
+
+            ChatMessage.create({ flavor: message }, {}).then();
+            addOneToSelectedCharacter(actorId);
+        });
+    } else if (sessionStart === "NOTHING") {
+        addOneToSelectedCharacter(actorId);
     }
 
-    //Add to random character
-    await addHeroPoints(1, actorId);
     return remainingMinutes;
 }
 
 export async function handleTimer(remainingMinutes: number) {
+    const oldTimeout = <NodeJS.Timeout>game.user?.getFlag(MODULENAME, "heroPointHandler.timeout");
+    if (oldTimeout) {
+        clearTimeout(oldTimeout);
+    }
     if (remainingMinutes > 0) {
         const timeout = setTimeout(() => {
             heroPointHandler();
@@ -94,10 +136,6 @@ export async function handleTimer(remainingMinutes: number) {
         };
         await game.user?.update(updateData);
     } else {
-        const timeout = <NodeJS.Timeout>game.user?.getFlag(MODULENAME, "heroPointHandler.timeout");
-        if (timeout) {
-            clearTimeout(timeout);
-        }
         await game.user?.unsetFlag(MODULENAME, "heroPointHandler.startTime");
         await game.user?.unsetFlag(MODULENAME, "heroPointHandler.remainingMinutes");
         await game.user?.unsetFlag(MODULENAME, "heroPointHandler.timeout");
@@ -112,11 +150,7 @@ export async function heroPointHandler() {
         return;
     }
 
-    const startTime = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime") || game.time.serverTime;
-    const remainingMinutes =
-        <number>((await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60) -
-        Math.floor((game.time.serverTime - startTime) / (60 * 1000));
-    await handleTimer(remainingMinutes);
+    await handleTimer(calcRemainingMinutes());
 
     //TODO Extract to a handlebars template
     const startContent = `
@@ -179,17 +213,17 @@ export async function heroPointHandler() {
             : -1;
     for (let i = 0; i < length; i++) {
         const actor = characters?.filter((x) => x.type === "character")[i];
+        const string = checked === i ? 'checked="checked"' : "";
         charactersContent += `
     <div class="radio">
         <label for="characters-${i}">
-          <input type="radio" name="characters" id="characters-${i}" value="${actor?.id}" ${
-            checked === i ? 'checked="checked"' : ""
-        }>
+          <input type="radio" name="characters" id="characters-${i}" value="${actor?.id}" ${string}>
           ${actor?.name}
         </label>
     </div>`;
     }
 
+    let remainingMinutes = <number>await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes") || 60;
     const remainingContent = `
   <div class="radio">
     <label for="characters-ALL">
@@ -211,9 +245,7 @@ export async function heroPointHandler() {
   <div class="col-md-4">
     <div class="input-group">
       <span class="input-group-addon">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`)}</span>
-      <input id="timerTextId" name="timerText" class="form-control" value="${
-          (await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60
-      }" type="text">
+      <input id="timerTextId" name="timerText" class="form-control" value="${remainingMinutes}" type="text">
     </div>
     <p class="help-block">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`)}</p>
   </div>
@@ -222,29 +254,37 @@ export async function heroPointHandler() {
 
     const content = startContent + charactersContent + remainingContent;
 
+    remainingMinutes = <number>await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes") || 60;
     const handlerDialog = new Dialog({
         title: title,
         content,
         buttons: {
             timer: {
                 icon: '<i class="fas fa-hourglass"></i>',
-                label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`)} (${
-                    (await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60
-                })`,
+                label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`)}`,
                 callback: async (html: any) => {
-                    const minutes = await handleDialogResponse(html);
-                    await handleTimer(minutes);
+                    remainingMinutes = handleDialogResponse(html);
                 },
             },
             noTimer: {
                 label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noTimerLabel`)}`,
                 callback: async (html) => {
-                    await handleDialogResponse(html);
-                    await handleTimer(0);
+                    handleDialogResponse(html);
+                    remainingMinutes = 0;
                 },
             },
         },
         default: "timer",
+        close: async () => {
+            await handleTimer(remainingMinutes);
+            const message =
+                remainingMinutes > 0
+                    ? game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.willBeResetIn`, {
+                          remainingMinutes: remainingMinutes,
+                      })
+                    : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerStopped`);
+            return ChatMessage.create({ flavor: message, whisper: [game.user?.id as string] }, {});
+        },
     });
     handlerDialog.render(true);
 }
