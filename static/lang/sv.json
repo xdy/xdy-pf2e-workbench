@@ -25,6 +25,8 @@
       },
       "heroPointHandler": {
         "add": "Lägg till",
+        "addedFor": "1 hjältepoäng tillagd för {name}",
+        "addedToForAll": "Lagt till {heroPoints} hjältepoäng för alla",
         "addOne": "Lägg till en hjältepoäng till utvald karaktär (default framslumpad)",
         "all": "Alla",
         "doWhat": "Gör vad med hjältepoängen för alla karaktärer?",
@@ -34,11 +36,14 @@
         "none": "Ingen",
         "noTimerLabel": "Skicka ändringar <b>utan</b> timer. <b>Stoppar</b> eventuell existerande timer.",
         "resetTo": "Sätt till",
+        "resetToForAll": "Hjältepoäng återställs till {heroPoints} för alla",
         "showAfter": "Visa dialogrutan igen efter så här många minuter",
         "startTimerLabel": "Skicka ändringar och starta/fortsätt timern",
         "thisMany": "Så här många",
+        "timerStopped": "Hjältepoängstimern stoppas.",
         "timerValue": "Timervärde",
-        "title": "Hjältepoängshanterare"
+        "title": "Hjältepoängshanterare",
+        "willBeResetIn": "Hjältepoäng kommer att återställas om {remainingMinutes} minuter."
       },
       "heroPointHandlerKey": {
         "hint": "(Experimentell) Keybind för att öppna dialogrutan för hjältepoänghanterare som gör det möjligt att återställa och lägga till hjältepoäng med en påminnelse varje timme",
