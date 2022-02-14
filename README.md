@@ -92,3 +92,4 @@ build-packs license:
 asymonous-benefactor-macros:
 
 * The macros found in the asymonous-benefactor-macros pack are, with the express permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous benefactor, collected from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e at build time. Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of the file.
+
