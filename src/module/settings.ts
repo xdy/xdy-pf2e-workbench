@@ -39,12 +39,11 @@ declare global {
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
-    //TODO Make a settings menu with the following settings that is set to be restricted to GMs
-
-    game.settings.register(MODULENAME, "heroPointHandler", {
-        name: `${MODULENAME}.SETTINGS.heroPointHandler.name`,
-        hint: `${MODULENAME}.SETTINGS.heroPointHandler.hint`,
-        scope: "world",
+    //Settings open for all
+    game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
+        name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
+        hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,
+        scope: "client",
         config: true,
         default: false,
         type: Boolean,
@@ -69,6 +68,17 @@ export function registerSettings() {
         onChange() {
             ui.chat.render();
         },
+    });
+
+    //TODO Make a settings menu with the following settings that is set to be restricted to GMs
+
+    game.settings.register(MODULENAME, "heroPointHandler", {
+        name: `${MODULENAME}.SETTINGS.heroPointHandler.name`,
+        hint: `${MODULENAME}.SETTINGS.heroPointHandler.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
     });
 
     game.settings.register(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat", {

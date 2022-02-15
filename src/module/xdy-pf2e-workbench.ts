@@ -128,6 +128,18 @@ async function hooksForEveryone() {
             }
         });
     }
+
+    if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
+        Hooks.on("pf2e.endTurn", async (combatant: Combatant, _combat: Combat, _userId: string) => {
+            if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
+                // @ts-ignore
+                if (combatant?.actor && combatant?.actor?.hasCondition("frightened")) {
+                    // @ts-ignore
+                    await combatant?.actor.decreaseCondition("frightened");
+                }
+            }
+        });
+    }
 }
 
 async function hooksForGM() {

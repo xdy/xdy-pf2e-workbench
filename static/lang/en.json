@@ -11,6 +11,10 @@
         "result": "Result",
         "strike": "Strike"
       },
+      "decreaseFrightenedConditionEachTurn": {
+        "hint": "Automatically decrease the frightened condition each turn.",
+        "name": "Automatically decrease the frightened condition each turn."
+      },
       "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
         "hint": "Enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant.",
         "name": "Enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant."
