@@ -8,7 +8,7 @@ on:
 
 jobs:
     test:
-        if: github.event_name == 'push' && (github.ref != 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
+        if: github.repository == 'xdy/xdy-pf2e-workbench'
         runs-on: ubuntu-latest
         strategy:
             matrix:
