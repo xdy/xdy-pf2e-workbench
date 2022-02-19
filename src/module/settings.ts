@@ -40,6 +40,42 @@ export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
     //Settings open for all
+    game.settings.register(MODULENAME, "applyPersistentDamage", {
+        name: `${MODULENAME}.SETTINGS.applyPersistentDamage.name`,
+        hint: `${MODULENAME}.SETTINGS.applyPersistentDamage.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "applyPersistentHealing", {
+        name: `${MODULENAME}.SETTINGS.applyPersistentHealing.name`,
+        hint: `${MODULENAME}.SETTINGS.applyPersistentHealing.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "separatePersistentDamageMessage", {
+        name: `${MODULENAME}.SETTINGS.separatePersistentDamageMessage.name`,
+        hint: `${MODULENAME}.SETTINGS.separatePersistentDamageMessage.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "separatePersistentHealingMessage", {
+        name: `${MODULENAME}.SETTINGS.separatePersistentHealingMessage.name`,
+        hint: `${MODULENAME}.SETTINGS.separatePersistentHealingMessage.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
     game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
         name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
         hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,

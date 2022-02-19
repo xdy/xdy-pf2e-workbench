@@ -12,6 +12,7 @@ export function registerKeybindings() {
     keybindings.register(MODULENAME, "heroPointHandler", {
         name: `${MODULENAME}.SETTINGS.heroPointHandlerKey.name`,
         hint: `${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`,
+        restricted: true,
         editable: [],
         onDown: () => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
@@ -24,6 +25,7 @@ export function registerKeybindings() {
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.name`,
         hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
+        restricted: true,
         editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
@@ -40,6 +42,7 @@ export function registerKeybindings() {
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.name`,
         hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
+        restricted: true,
         editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
@@ -56,6 +59,7 @@ export function registerKeybindings() {
     keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
         name: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.name`,
         hint: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.hint`,
+        restricted: true,
         editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
@@ -71,7 +75,6 @@ export function registerKeybindings() {
             }
             return true;
         },
-        restricted: false,
         reservedModifiers: [],
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
@@ -82,6 +85,7 @@ export function registerKeybindings() {
             keybindings.register(MODULENAME, `callHotbarPage${page}Macro${column}`, {
                 name: `Call hotbar macro on page ${page} position ${column}`, //TODO Localize. Preferably without 50 strings to translate...
                 hint: `Call hotbar macro on page ${page} position ${column}`, //TODO Localize. Preferably without 50 strings to translate...
+                restricted: false,
                 editable: [],
                 onDown: () => {
                     game.user?.getHotbarMacros(page)[column - 1]?.macro?.execute();

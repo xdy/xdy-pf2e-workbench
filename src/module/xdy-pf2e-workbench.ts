@@ -48,34 +48,39 @@ Hooks.once("init", async () => {
 Hooks.once("setup", async () => {
     console.log(`${MODULENAME} | Setting up`);
     // Do anything after initialization but before ready
+    await hooksForEveryone();
+    await hooksForGM();
 });
 
 // When ready
 Hooks.once("ready", async () => {
     // Do anything once the module is ready
     console.log(`${MODULENAME} | Ready`);
-    await hooksForEveryone();
-    await hooksForGM();
 });
+
+function shouldIHandleThis(message: ChatMessage) {
+    const messageUserId = message.data.user;
+    const isSenderActive = game.users?.players
+        .filter((u) => u.active)
+        .filter((u) => !u.isGM)
+        .find((u) => u.id === messageUserId);
+    const amIMessageSender = messageUserId === game.user?.id;
+    const rollAsPlayer = !game.user?.isGM && amIMessageSender;
+    const rollAsGM = game.user?.isGM && (amIMessageSender || !isSenderActive);
+    const shouldIRoll = rollAsPlayer || rollAsGM;
+    return shouldIRoll;
+}
 
 async function hooksForEveryone() {
     //Hooks for everyone
     if (game.settings.get(MODULENAME, "autoRollDamageForStrike")) {
         Hooks.on("createChatMessage", (message: ChatMessage) => {
-            const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
-            const messageToken: TokenDocument = <TokenDocument>(
-                canvas?.scene?.tokens.get(<string>message.data.speaker.token)
-            );
-            const messageUserId = message.data.user;
-            const isSenderActive = game.users?.players
-                .filter((u) => u.active)
-                .filter((u) => !u.isGM)
-                .find((u) => u.id === messageUserId);
-            const amIMessageSender = messageUserId === game.user?.id;
             const autorollDamageEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
-            const rollAsPlayer = !game.user?.isGM && amIMessageSender;
-            const rollAsGM = game.user?.isGM && (amIMessageSender || !isSenderActive);
-            if (message.data.type === 5 && autorollDamageEnabled && messageActor && (rollAsPlayer || rollAsGM)) {
+            const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
+            if (message.data.type === 5 && autorollDamageEnabled && messageActor && shouldIHandleThis(message)) {
+                const messageToken: TokenDocument = <TokenDocument>(
+                    canvas?.scene?.tokens.get(<string>message.data.speaker.token)
+                );
                 const strikeName = message.data.flavor?.match(
                     `(<strong>${game.i18n.localize(
                         `${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`
@@ -131,11 +136,94 @@ async function hooksForEveryone() {
 
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
         Hooks.on("pf2e.endTurn", async (combatant: Combatant, _combat: Combat, _userId: string) => {
-            if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-                // @ts-ignore
-                if (combatant?.actor && combatant?.actor?.hasCondition("frightened")) {
+            if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn") && combatant && combatant.actor) {
+                //@ts-ignore Only pf2e actor has the hasCondition method and I haven't the type for that, so...
+                if (combatant.actor.hasCondition("frightened")) {
                     // @ts-ignore
-                    await combatant?.actor.decreaseCondition("frightened");
+                    await combatant.actor.decreaseCondition("frightened");
+                }
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
+        Hooks.on("createChatMessage", async (message: ChatMessage) => {
+            if (
+                game.settings.get(MODULENAME, "applyPersistentDamage") &&
+                canvas.ready &&
+                "persistent" in message.data.flags &&
+                message.data.speaker.token &&
+                message.data.flavor &&
+                message.roll?.total &&
+                shouldIHandleThis(message) &&
+                game.actors
+            ) {
+                const token = canvas.tokens?.get(message.data.speaker.token);
+                if (token && token.isOwner) {
+                    const damage = message.roll.total;
+
+                    // @ts-ignore
+                    await token?.actor?.applyDamage(damage, token, false);
+
+                    if (game.settings.get(MODULENAME, "separatePersistentDamageMessage")) {
+                        await ChatMessage.create({
+                            content: game.i18n.format(`${MODULENAME}.SETTINGS.applyPersistentDamage.wasDamaged`, {
+                                damage: damage,
+                            }),
+                            speaker: message.data.speaker,
+                            flavor: $(message.data.flavor).filter("div").text().trim().split("\n")[0],
+                            whisper:
+                                game.settings.get("pf2e", "metagame.secretDamage") && !token.actor?.hasPlayerOwner
+                                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                                    : [],
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
+        Hooks.on("renderChatMessage", async (message, data, html) => {
+            if (
+                game.settings.get(MODULENAME, "applyPersistentHealing") &&
+                canvas.ready &&
+                message.data.flavor &&
+                message.roll &&
+                message.roll.total &&
+                game.combats &&
+                game.combats.active &&
+                game.combats.active.combatant &&
+                game.combats.active.combatant.actor &&
+                shouldIHandleThis(message)
+            ) {
+                const token = game.combats.active.combatant.token;
+                if (token && token.isOwner) {
+                    console.log(message.data.flavor);
+                    if (
+                        [
+                            game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentHealing.FastHealingLabel`),
+                            game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentHealing.RegenerationLabel`),
+                        ].some((text) => message.data.flavor?.includes(text))
+                    ) {
+                        const healing = message.roll.total * -1;
+
+                        // @ts-ignore
+                        await token.actor.applyDamage(healing, token, false);
+                        if (game.settings.get(MODULENAME, "separatePersistentHealingMessage")) {
+                            await ChatMessage.create({
+                                content: game.i18n.format(`${MODULENAME}.SETTINGS.applyPersistentHealing.wasHealed`, {
+                                    healing: Math.abs(healing),
+                                }),
+                                speaker: { token: game.combats.active.combatant.token?.id },
+                                flavor: message.data.flavor.split("\n")[0],
+                                whisper:
+                                    game.settings.get("pf2e", "metagame.secretDamage") && !token.actor?.hasPlayerOwner
+                                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                                        : [],
+                            });
+                        }
+                    }
                 }
             }
         });
@@ -177,10 +265,10 @@ async function hooksForGM() {
     if (game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat")) {
         Hooks.on("updateWorldTime", async (_total, diff) => {
             if (
+                game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat") &&
                 // @ts-ignore
                 !game.combat?.active &&
-                diff >= 1 &&
-                game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat")
+                diff >= 1
             ) {
                 // @ts-ignore
                 game.pf2e.effectTracker.removeExpired();
@@ -190,11 +278,13 @@ async function hooksForGM() {
 
     if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
         Hooks.on("updateCombat", (combat: Combat) => {
-            if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
-                if (combat.combatant?.actor) {
-                    // @ts-ignore
-                    game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
-                }
+            if (
+                game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn") &&
+                combat.combatant &&
+                combat.combatant.actor
+            ) {
+                // @ts-ignore
+                game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
             }
         });
     }
@@ -215,9 +305,12 @@ async function hooksForGM() {
 
     if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP")) {
         Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) => {
-            if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP")) {
+            if (
+                game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP") &&
+                game.combat
+            ) {
                 const combatant = <Combatant>(
-                    game?.combat?.getCombatantByToken(
+                    game.combat.getCombatantByToken(
                         actor.isToken
                             ? <string>actor.token?.id
                             : <string>canvas?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
@@ -225,7 +318,7 @@ async function hooksForGM() {
                 );
                 if (
                     combatant &&
-                    combatant !== game.combat?.combatant &&
+                    combatant !== game.combat.combatant &&
                     // @ts-ignore
                     actor.data.data.attributes.hp.value > 0 &&
                     getProperty(update, "data.attributes.hp.value") <= 0
@@ -240,18 +333,23 @@ async function hooksForGM() {
         // @ts-ignore Can't be bothered to type preUpdateToken
         Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
             type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
-            if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying")) {
+            if (
+                game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying") &&
+                game.combat &&
+                tokenDoc.actor &&
+                update.actorData
+            ) {
                 const shouldMove =
                     //@ts-ignore Only pf2e actor has the hasCondition method and I haven't the type for that, so...
-                    !tokenDoc?.actor?.hasCondition("dying") &&
-                    update.actorData?.items &&
+                    !tokenDoc.actor.hasCondition("dying") &&
+                    update.actorData.items &&
                     update.actorData.items
                         .filter((row: UpdateRow) => row.type === "condition")
-                        .filter((row: UpdateRow) => row.data?.active)
-                        .filter((row: UpdateRow) => row.data?.slug === "dying")
-                        .find((row: UpdateRow) => row.data?.value.value === 1);
-                const combatant = <Combatant>game?.combat?.getCombatantByToken(<string>tokenDoc.id);
-                if (combatant && combatant !== game.combat?.combatant && shouldMove) {
+                        .filter((row: UpdateRow) => row.data.active)
+                        .filter((row: UpdateRow) => row.data.slug === "dying")
+                        .find((row: UpdateRow) => row.data.value.value === 1);
+                const combatant = <Combatant>game.combat.getCombatantByToken(<string>tokenDoc.id);
+                if (combatant && combatant !== game.combat.combatant && shouldMove) {
                     await moveSelectedAheadOfCurrent(combatant);
                 }
             }

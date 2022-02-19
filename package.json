@@ -28,7 +28,7 @@
         "build:packs": "ts-node -r tsconfig-paths/register src/build-packs.ts"
     },
     "devDependencies": {
-        "@league-of-foundry-developers/foundry-vtt-types": "^9.249.2",
+        "@league-of-foundry-developers/foundry-vtt-types": "^9.249.4",
         "@semantic-release/changelog": "^6.0.1",
         "@semantic-release/commit-analyzer": "^9.0.2",
         "@semantic-release/exec": "^6.0.3",
@@ -48,7 +48,7 @@
         "css-loader": "^6.6.0",
         "css-minimizer-webpack-plugin": "^3.4.1",
         "eslint": "^8.9.0",
-        "eslint-config-prettier": "^8.3.0",
+        "eslint-config-prettier": "^8.4.0",
         "eslint-import-resolver-typescript": "^2.5.0",
         "eslint-plugin-import": "^2.25.4",
         "eslint-plugin-prettier": "^4.0.0",
@@ -64,7 +64,7 @@
         "ts-loader": "^9.2.6",
         "ts-node": "^10.5.0",
         "typescript": "^4.5.5",
-        "webpack": "^5.68.0",
+        "webpack": "^5.69.1",
         "webpack-cli": "^4.9.2",
         "write-file-webpack-plugin": "^4.5.1",
         "yargs": "^17.3.1"
