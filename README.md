@@ -27,7 +27,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of each macro. Do not import the macros named like 'XDY DO_NOT_IMPORT', instead import the ones with proper names.
 * Effects for the Lingering Heroics macro included with the above are now included in the asymonous-benefactor-effects compendium , import these to automatically get the proper duration effect sent to chat.
 * Option to automatically reduce frighted condition at the end of each turn.
-* Option to automatically apply persistent damage, fast healing and regeneration (with an optional extra debug chat message) inspired by @Jamz' code.
+* Option to automatically apply persistent damage (from the awesome [Persistent Damage module](https://github.com/CarlosFdez/pf2e-persistent-damage)) as well as the PF2e system's fast healing and regeneration (with an optional extra debug chat message) inspired by @Jamz' code.
 
 ## Installation
 
