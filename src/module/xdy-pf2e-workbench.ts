@@ -32,25 +32,6 @@ declare global {
     }
 }
 
-function hooksForGMInit() {
-    //Hooks that must be early
-    if (game.settings.get(MODULENAME, "npcMystifier")) {
-        Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
-            if (game.settings.get(MODULENAME, "npcMystifier")) {
-                renderNameHud(data, html);
-            }
-        });
-    }
-
-    if (game.settings.get(MODULENAME, "npcMystifier")) {
-        Hooks.on("createToken", async (token: any) => {
-            if (game.settings.get(MODULENAME, "npcMystifier")) {
-                tokenCreateMystification(token);
-            }
-        });
-    }
-}
-
 // Initialize module
 Hooks.once("init", async () => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
@@ -59,7 +40,8 @@ Hooks.once("init", async () => {
     registerKeybindings();
 
     await preloadTemplates();
-    hooksForGMInit();
+    await hooksForEveryone();
+    await hooksForGMInit();
 
     // Register custom sheets (if any)
 });
@@ -68,8 +50,7 @@ Hooks.once("init", async () => {
 Hooks.once("setup", async () => {
     console.log(`${MODULENAME} | Setting up`);
     // Do anything after initialization but before ready
-    await hooksForEveryone();
-    await hooksForGMSetup();
+    hooksForGMSetup();
 });
 
 // When ready
@@ -249,51 +230,19 @@ async function hooksForEveryone() {
     }
 }
 
-async function hooksForGMSetup() {
-    //GM-only hooks
-    if (!game.user?.isGM) return;
-
-    if (game.settings.get(MODULENAME, "heroPointHandler")) {
-        await handleTimer(calcRemainingMinutes());
-    }
-
-    if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
-        Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
-            if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
-                mangleChatMessage(message, html);
-            }
-        });
-    }
-
-    if (game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat")) {
-        Hooks.on("updateWorldTime", async (_total, diff) => {
-            if (
-                game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat") &&
-                // @ts-ignore
-                !game.combat?.active &&
-                diff >= 1
-            ) {
-                // @ts-ignore
-                game.pf2e.effectTracker.removeExpired();
-            }
-        });
-    }
-
-    if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
-        Hooks.on("updateCombat", (combat: Combat) => {
-            if (
-                game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn") &&
-                combat.combatant &&
-                combat.combatant.actor
-            ) {
-                // @ts-ignore
-                game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
+async function hooksForGMInit() {
+    if (game.settings.get(MODULENAME, "npcMystifier")) {
+        Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
+            if (!game.user?.isGM) return;
+            if (game.settings.get(MODULENAME, "npcMystifier")) {
+                renderNameHud(data, html);
             }
         });
     }
 
     if (game.settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
         Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMenuEntry[]) => {
+            if (!game.user?.isGM) return;
             if (game.settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
                 entryOptions.push({
                     icon: '<i class="fas fa-skull"></i>',
@@ -308,6 +257,7 @@ async function hooksForGMSetup() {
 
     if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP")) {
         Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) => {
+            if (!game.user?.isGM) return;
             if (
                 game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP") &&
                 game.combat
@@ -335,6 +285,7 @@ async function hooksForGMSetup() {
     if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying")) {
         // @ts-ignore Can't be bothered to type preUpdateToken
         Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
+            if (!game.user?.isGM) return;
             type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
             if (
                 game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying") &&
@@ -355,6 +306,60 @@ async function hooksForGMSetup() {
                 if (combatant && combatant !== game.combat.combatant && shouldMove) {
                     await moveSelectedAheadOfCurrent(combatant);
                 }
+            }
+        });
+    }
+    if (game.settings.get(MODULENAME, "npcMystifier")) {
+        Hooks.on("createToken", async (token: any) => {
+            if (!game.user?.isGM) return;
+            if (game.settings.get(MODULENAME, "npcMystifier")) {
+                tokenCreateMystification(token);
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "heroPointHandler")) {
+        if (!game.user?.isGM) return;
+        await handleTimer(calcRemainingMinutes());
+    }
+}
+
+function hooksForGMSetup() {
+    //GM-only hooks that must run at setup
+    if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
+        Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
+            if (!game.user?.isGM) return;
+            if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
+                mangleChatMessage(message, html);
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat")) {
+        Hooks.on("updateWorldTime", async (_total, diff) => {
+            if (!game.user?.isGM) return;
+            if (
+                game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat") &&
+                // @ts-ignore
+                !game.combat?.active &&
+                diff >= 1
+            ) {
+                // @ts-ignore
+                game.pf2e.effectTracker.removeExpired();
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
+        Hooks.on("updateCombat", (combat: Combat) => {
+            if (!game.user?.isGM) return;
+            if (
+                game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn") &&
+                combat.combatant &&
+                combat.combatant.actor
+            ) {
+                // @ts-ignore
+                game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
             }
         });
     }

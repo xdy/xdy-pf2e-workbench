@@ -74,7 +74,7 @@
         "name": "(Experimental) World keybind to open the Hero Point handler dialog."
       },
       "moveBeforeCurrentCombatantContextMenu": {
-        "name": "World setting to enable moving selected combatant before the current combatant."
+        "name": "Move selected combatant before the current combatant."
       },
       "moveBeforeCurrentCombatantKey": {
         "hint": "World keybind for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
