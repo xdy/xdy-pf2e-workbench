@@ -1,19 +1,15 @@
 /**
- * This is your TypeScript entry file for Foundry VTT.
- * Register custom settings, sheets, and constants using the Foundry API.
- * Change this heading to be more descriptive to your module, or remove it.
+ * Entrypoint for xdy-pf2e-workbench.
  * Author: xdy (Jonas Karlsson)
  * Content License: See LICENSE and README.md for license details
  * Software License: Apache 2.0
  */
 
 //TODO Start using the actual pf2e types
-//TODO Make it so holding shift pops up a dialog where one can change the name
-//TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog that does that, with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
-//TODO Make the button post a chat message with a properly set up roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify all mystified tokens with the same base actor on that scene. After all, if you've recognized one zombie shambler I figure you would recognize all zombie shamblers.
-//TODO Make issues out of the harder of the above todos...
+//TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
+//TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
+//TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
 
-// Import TypeScript modules
 import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/mystify-token";
@@ -57,6 +53,7 @@ Hooks.once("setup", async () => {
 Hooks.once("ready", async () => {
     // Do anything once the module is ready
     console.log(`${MODULENAME} | Ready`);
+    Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
 
 function shouldIHandleThis(message: ChatMessage) {
@@ -74,7 +71,7 @@ function shouldIHandleThis(message: ChatMessage) {
 async function hooksForEveryone() {
     //Hooks for everyone
     if (game.settings.get(MODULENAME, "autoRollDamageForStrike")) {
-        Hooks.on("createChatMessage", (message: ChatMessage, options: any) => {
+        Hooks.on("createChatMessage", (message: ChatMessage) => {
             const autorollDamageEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
             const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
             if (message.data.type === 5 && autorollDamageEnabled && messageActor && shouldIHandleThis(message)) {
@@ -184,7 +181,7 @@ async function hooksForEveryone() {
     }
 
     if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
-        Hooks.on("renderChatMessage", async (message, data, html) => {
+        Hooks.on("renderChatMessage", async (message) => {
             if (
                 game.settings.get(MODULENAME, "applyPersistentHealing") &&
                 canvas.ready &&
@@ -233,8 +230,7 @@ async function hooksForEveryone() {
 async function hooksForGMInit() {
     if (game.settings.get(MODULENAME, "npcMystifier")) {
         Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
-            if (!game.user?.isGM) return;
-            if (game.settings.get(MODULENAME, "npcMystifier")) {
+            if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
                 renderNameHud(data, html);
             }
         });
@@ -242,8 +238,7 @@ async function hooksForGMInit() {
 
     if (game.settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
         Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMenuEntry[]) => {
-            if (!game.user?.isGM) return;
-            if (game.settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
+            if (game.user?.isGM && game.settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
                 entryOptions.push({
                     icon: '<i class="fas fa-skull"></i>',
                     name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantContextMenu.name`,
@@ -257,8 +252,8 @@ async function hooksForGMInit() {
 
     if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP")) {
         Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) => {
-            if (!game.user?.isGM) return;
             if (
+                game.user?.isGM &&
                 game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP") &&
                 game.combat
             ) {
@@ -285,9 +280,9 @@ async function hooksForGMInit() {
     if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying")) {
         // @ts-ignore Can't be bothered to type preUpdateToken
         Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
-            if (!game.user?.isGM) return;
             type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
             if (
+                game.user?.isGM &&
                 game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying") &&
                 game.combat &&
                 tokenDoc.actor &&
@@ -311,8 +306,7 @@ async function hooksForGMInit() {
     }
     if (game.settings.get(MODULENAME, "npcMystifier")) {
         Hooks.on("createToken", async (token: any) => {
-            if (!game.user?.isGM) return;
-            if (game.settings.get(MODULENAME, "npcMystifier")) {
+            if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
                 tokenCreateMystification(token);
             }
         });
@@ -328,8 +322,7 @@ function hooksForGMSetup() {
     //GM-only hooks that must run at setup
     if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
         Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
-            if (!game.user?.isGM) return;
-            if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
+            if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
                 mangleChatMessage(message, html);
             }
         });
@@ -337,8 +330,8 @@ function hooksForGMSetup() {
 
     if (game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat")) {
         Hooks.on("updateWorldTime", async (_total, diff) => {
-            if (!game.user?.isGM) return;
             if (
+                game.user?.isGM &&
                 game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat") &&
                 // @ts-ignore
                 !game.combat?.active &&
@@ -352,8 +345,8 @@ function hooksForGMSetup() {
 
     if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
         Hooks.on("updateCombat", (combat: Combat) => {
-            if (!game.user?.isGM) return;
             if (
+                game.user?.isGM &&
                 game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn") &&
                 combat.combatant &&
                 combat.combatant.actor
