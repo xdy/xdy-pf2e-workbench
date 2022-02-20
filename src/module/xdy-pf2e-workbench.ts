@@ -87,14 +87,13 @@ function shouldIHandleThis(message: ChatMessage) {
     const amIMessageSender = messageUserId === game.user?.id;
     const rollAsPlayer = !game.user?.isGM && amIMessageSender;
     const rollAsGM = game.user?.isGM && (amIMessageSender || !isSenderActive);
-    const shouldIRoll = rollAsPlayer || rollAsGM;
-    return shouldIRoll;
+    return rollAsPlayer || rollAsGM;
 }
 
 async function hooksForEveryone() {
     //Hooks for everyone
     if (game.settings.get(MODULENAME, "autoRollDamageForStrike")) {
-        Hooks.on("createChatMessage", (message: ChatMessage) => {
+        Hooks.on("createChatMessage", (message: ChatMessage, options: any) => {
             const autorollDamageEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
             const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
             if (message.data.type === 5 && autorollDamageEnabled && messageActor && shouldIHandleThis(message)) {

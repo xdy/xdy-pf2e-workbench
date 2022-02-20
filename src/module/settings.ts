@@ -85,6 +85,7 @@ export function registerSettings() {
         type: Boolean,
     });
 
+    //NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
     game.settings.register(MODULENAME, "autoRollDamageForStrike", {
         name: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.name`,
         hint: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.hint`,
