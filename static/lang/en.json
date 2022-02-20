@@ -2,50 +2,50 @@
   "xdy-pf2e-workbench": {
     "SETTINGS": {
       "applyPersistentDamage": {
-        "hint": "Automatically apply persistent damage rolled by the Persistent Damage module.",
-        "name": "Automatically apply persistent damage rolled by the Persistent Damage module.",
+        "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
+        "name": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
         "wasDamaged": "{damage} damage was automatically applied"
       },
       "applyPersistentHealing": {
-        "hint": "Automatically apply persistent damage rolled by the system.",
-        "name": "Automatically apply persistent damage rolled by the system.",
+        "hint": "Client setting to automatically apply persistent damage rolled by the system.",
+        "name": "Client setting to automatically apply persistent damage rolled by the system.",
         "FastHealingLabel": "Received Fast Healing",
         "RegenerationLabel": "Received Regeneration",
         "wasHealed": "{healing} healing was automatically applied."
       },
       "separatePersistentDamageMessage": {
-        "name": "Show separate persistent damage message",
-        "hint": "Show separate persistent damage message"
+        "name": "Client setting to show separate persistent damage message",
+        "hint": "Client setting to show separate persistent damage message"
       },
       "separatePersistentHealingMessage": {
-        "name": "Show separate persistent healing message",
-        "hint": "Show separate persistent healing message"
+        "name": "Client setting to show separate persistent healing message",
+        "hint": "Client setting to show separate persistent healing message"
       },
       "autoCollapseItemChatCardContent": {
-        "hint": "Automatically collapse item chat card content. Click the card title to expand.",
-        "name": "Automatically collapse item chat card content."
+        "hint": "Client setting to automatically collapse item chat card content. Click the card title to expand.",
+        "name": "Client setting to automatically collapse item chat card content."
       },
       "autoRollDamageForStrike": {
-        "hint": "Per user setting to automatically roll damage for strikes that hit.",
-        "name": "Per user setting to automatically roll damage for strikes that hit.",
+        "hint": "Client setting to automatically roll damage for strikes that hit.",
+        "name": "Client setting to automatically roll damage for strikes that hit.",
         "result": "Result",
         "strike": "Strike"
       },
       "decreaseFrightenedConditionEachTurn": {
-        "hint": "Automatically decrease the frightened condition each turn.",
-        "name": "Automatically decrease the frightened condition each turn."
+        "hint": "Client setting to automatically decrease the frightened condition each turn.",
+        "name": "Client setting to aAutomatically decrease the frightened condition each turn."
       },
       "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
-        "hint": "Enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant.",
-        "name": "Enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant."
+        "hint": "World setting to enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant.",
+        "name": "World setting to enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant."
       },
       "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
-        "hint": "Enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant.",
-        "name": "Enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant."
+        "hint": "World setting to enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant.",
+        "name": "World setting to enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant."
       },
       "enableMoveBeforeCurrentCombatant": {
-        "hint": "Enable manually moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
-        "name": "Enable manually moving selected combatant before the current combatant."
+        "hint": "World setting to enable manually moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
+        "name": "World setting to enable manually moving selected combatant before the current combatant."
       },
       "heroPointHandler": {
         "add": "Add",
@@ -54,9 +54,9 @@
         "addOne": "Adds one Hero Point to selected character (defaults to random roll)",
         "all": "All",
         "doWhat": "Do what to the Hero Points of all characters?",
-        "hint": "(Experimental) Hero Point handler feature with an optional keybind to open a dialog that can reset or add Hero Points for all characters, add one Hero Point to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
+        "hint": "(Experimental) World setting to enable Hero Point handler feature with an optional keybind to open a dialog that can reset or add Hero Points for all characters, add one Hero Point to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
         "ignore": "Ignore",
-        "name": "(Experimental) Hero Point handler feature that can automatially reset and/or add Hero Points, with an hourly reminder.",
+        "name": "(Experimental) World setting to enable Hero Point handler feature that can automatially reset and/or add Hero Points, with an hourly reminder.",
         "none": "None",
         "noTimerLabel": "Submit changes with <b>no</b> timer. Will <b>stop</b> any existing timer.",
         "resetTo": "Reset to",
@@ -70,66 +70,66 @@
         "willBeResetIn": "Hero Points will be reset in {remainingMinutes} minutes."
       },
       "heroPointHandlerKey": {
-        "hint": "(Experimental) Keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
-        "name": "(Experimental) Keybind to open the Hero Point handler dialog."
+        "hint": "(Experimental) World keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
+        "name": "(Experimental) World keybind to open the Hero Point handler dialog."
       },
       "moveBeforeCurrentCombatantContextMenu": {
-        "name": "Move selected combatant before the current combatant."
+        "name": "World setting to enable moving selected combatant before the current combatant."
       },
       "moveBeforeCurrentCombatantKey": {
-        "hint": "Key for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
-        "name": "Key for moving selected combatant before the current combatant."
+        "hint": "World keybind for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
+        "name": "World keybind for moving selected combatant before the current combatant."
       },
       "notifications": {
         "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
       },
       "npcMystifier": {
-        "hint": "Turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene.",
-        "name": "Turn on npc mystifier."
+        "hint": "World setting to turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene.",
+        "name": "World setting to turn on npc mystifier."
       },
       "npcMystifierAddRandomNumber": {
-        "hint": "Turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.",
-        "name": "Add random number to name."
+        "hint": "World setting that turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.",
+        "name": "World setting that adds random number to name."
       },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
-        "hint": "When this is enabled, all mystified tokens on the active scene with the same base actor as the token being renamed will be demystified.",
-        "name": "Demystify all tokens based on the same actor."
+        "hint": "When this world setting is enabled, all mystified tokens on the active scene with the same base actor as the token being renamed will be demystified.",
+        "name": "World setting to demystify all tokens based on the same actor."
       },
       "npcMystifierFilterAlignmentTraits": {
-        "hint": "Filter out alignment traits from the mystified name.",
-        "name": "No npc alignment traits in name."
+        "hint": "World setting to filter out alignment traits from the mystified name.",
+        "name": "World setting to exclude npc alignment traits in name."
       },
       "npcMystifierFilterBlacklist": {
-        "hint": "Filter out all words in this comma-separated blacklist from the mystified name.",
-        "name": "Blacklist traits to never add to name."
+        "hint": "World setting to filter out all words in this comma-separated blacklist from the mystified name.",
+        "name": "World setting to blacklist traits to never add to name."
       },
       "npcMystifierFilterCreatureFamilyTraits": {
-        "hint": "Filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name.",
-        "name": "No npc creature family traits in name."
+        "hint": "World setting to filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name.",
+        "name": "World setting to exclude npc creature family traits in name."
       },
       "npcMystifierFilterCreatureTypesTraits": {
-        "hint": "Filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name.",
-        "name": "No npc creature type traits in name."
+        "hint": "World setting to filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name.",
+        "name": "World setting to exclude npc creature type traits in name."
       },
       "npcMystifierFilterEliteWeak": {
-        "hint": "Filter out elite/weak from the mystified name.",
-        "name": "No npc elite/weak status in name."
+        "hint": "World setting to filter out elite/weak from the mystified name.",
+        "name": "World setting to exclude npc elite/weak status in name."
       },
       "npcMystifierFilterOtherTraits": {
-        "hint": "Filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name.",
-        "name": "No npc traits not in the above trait types."
+        "hint": "World setting to filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name.",
+        "name": "World setting to exclude npc traits not in the above trait types."
       },
       "npcMystifierFilterRarities": {
-        "hint": "Filter out rarities from the mystified name.",
-        "name": "No npc rarity in the name."
+        "hint": "World setting to filter out rarities from the mystified name.",
+        "name": "World setting to exclude npc rarity in the name."
       },
       "npcMystifierFilterRaritiesReplacement": {
-        "hint": "Set the word to replace rarities greater than Common with (e.g. 'Unusual'). If empty, do not change the displayed rarity.",
-        "name": "Word to replace rarities greater than Common with."
+        "hint": "World setting to set the word to replace rarities greater than Common with (e.g. 'Unusual'). If empty, do not change the displayed rarity.",
+        "name": "World setting to set word to replace rarities greater than Common with."
       },
       "npcMystifierKeepNumberAtEndOfName": {
-        "hint": "Keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs.",
-        "name": "Keep token number when mystifying/demystifying."
+        "hint": "World setting to keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs.",
+        "name": "World setting to keep token number when mystifying/demystifying."
       },
       "npcMystifierMethod": {
         "hint": "Currently Mystifying by using the NPCs traits is the only supported option.",
@@ -137,36 +137,36 @@
         "traits": "Mystify by NPC Traits"
       },
       "npcMystifierModifierKey": {
-        "hint": "Hold this to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
-        "name": "Modifier key to use when mystifying by dragging onto the scene"
+        "hint": "World setting to set which ke to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
+        "name": "World setting for which modifier key to use when mystifying by dragging onto the scene"
       },
       "npcMystifierMystifyKey": {
-        "hint": "Select tokens and press this key to mystify them.",
-        "name": "Key for mystifying selected tokens"
+        "hint": "World keybind to select tokens and press this key to mystify them.",
+        "name": "World keybind for mystifying selected tokens"
       },
       "npcMystifierPostfix": {
-        "hint": "What to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead.",
-        "name": "Word or rollable table to postfix new name with"
+        "hint": "World setting for what to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead.",
+        "name": "World setting for word or rollable table to postfix new name with"
       },
       "npcMystifierPrefix": {
-        "hint": "What to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead.",
-        "name": "Word or rollable table to prefix new name with"
+        "hint": "World setting for what to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead.",
+        "name": "World setting for word or rollable table to prefix new name with"
       },
       "npcMystifierSkipRandomNumberForUnique": {
-        "hint": "Skips adding a random number when mystifying unique npcs.",
-        "name": "No random number for unique npcs."
+        "hint": "World setting to skip adding a random number when mystifying unique npcs.",
+        "name": "World setting to not add random number for unique npcs."
       },
       "npcMystifierUseMystifiedNameInChat": {
-        "hint": "(Experimental) Use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.",
-        "name": "(Experimental) Use mystified name inside chat messages."
+        "hint": "(Experimental) World setting to use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.",
+        "name": "(Experimental) World setting to use mystified name inside chat messages."
       },
       "purgeExpiredEffectsEachTurn": {
-        "hint": "Purge all expired effects each turn in combat. Reload (f5) after changing this setting.",
-        "name": "Purge all expired effects each turn."
+        "hint": "World setting to purge all expired effects each turn in combat. Reload (f5) after changing this setting.",
+        "name": "World setting to purge all expired effects each turn."
       },
       "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-        "hint": "Purge all expired effects every time the game world time increases out of combat. Reload (f5) after changing this setting.",
-        "name": "Purge all expired effects every time the game world time increases out of combat."
+        "hint": "World setting to purge all expired effects every time the game world time increases out of combat. Reload (f5) after changing this setting.",
+        "name": "World setting to purge all expired effects every time the game world time increases out of combat."
       }
     }
   }
