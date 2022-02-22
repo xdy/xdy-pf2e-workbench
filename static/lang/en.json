@@ -7,8 +7,8 @@
         "wasDamaged": "{damage} damage was automatically applied"
       },
       "applyPersistentHealing": {
-        "hint": "Client setting to automatically apply persistent damage rolled by the system.",
-        "name": "Client setting to automatically apply persistent damage rolled by the system.",
+        "hint": "Client setting to automatically apply persistent healing rolled by the system.",
+        "name": "Client setting to automatically apply persistent healing rolled by the system.",
         "FastHealingLabel": "Received Fast Healing",
         "RegenerationLabel": "Received Regeneration",
         "wasHealed": "{healing} healing was automatically applied."
