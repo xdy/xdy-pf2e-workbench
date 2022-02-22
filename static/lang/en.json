@@ -56,8 +56,11 @@
         "doWhat": "Do what to the Hero Points of all characters?",
         "hint": "(Experimental) World setting to enable Hero Point handler feature with an optional keybind to open a dialog that can reset or add Hero Points for all characters, add one Hero Point to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
         "ignore": "Ignore",
+        "instructions": "Note that the timer is paused while this dialog is open. Close this dialog without pressing any of these buttons to unpause the timer, or press the appropriate button to do what the button says.",
+        "minutesLeft": "minutes left on current timer",
         "name": "(Experimental) World setting to enable Hero Point handler feature that can automatially reset and/or add Hero Points, with an hourly reminder.",
         "none": "None",
+        "noRunningTimer": "No timer running",
         "noTimerLabel": "Submit changes with <b>no</b> timer. Will <b>stop</b> any existing timer.",
         "resetTo": "Reset to",
         "resetToForAll": "Hero Points reset to {heroPoints} for all",
@@ -67,7 +70,7 @@
         "timerStopped": "Hero Points timer is stopped.",
         "timerValue": "Timer value",
         "title": "Hero Point Handler",
-        "willBeResetIn": "Hero Points will be reset in {remainingMinutes} minutes."
+        "willBeResetIn": "Hero Points will be reset in {remainingMinutes} minutes ({time})."
       },
       "heroPointHandlerKey": {
         "hint": "(Experimental) World keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",

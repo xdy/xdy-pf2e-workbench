@@ -23,8 +23,7 @@ function heroes() {
 }
 
 async function resetHeroPoints(heropoints: number) {
-    const heroes1 = heroes();
-    for (const actor of heroes1) {
+    for (const actor of heroes()) {
         const value = Math.min(
             heropoints,
             // @ts-ignore
@@ -119,8 +118,10 @@ export async function handleTimer(remainingMinutes: number) {
         clearTimeout(oldTimeout);
     }
     if (remainingMinutes > 0) {
-        const timeout = setTimeout(() => {
-            heroPointHandler();
+        const timeout = setTimeout(async () => {
+            remainingMinutes = calcRemainingMinutes();
+            await handleTimer(remainingMinutes);
+            await heroPointHandler();
         }, remainingMinutes * 60 * 1000);
 
         const updateData = {
@@ -135,31 +136,110 @@ export async function handleTimer(remainingMinutes: number) {
             },
         };
         await game.user?.update(updateData);
-    } else {
+    } else if (!remainingMinutes || remainingMinutes <= 0) {
         await game.user?.unsetFlag(MODULENAME, "heroPointHandler.startTime");
         await game.user?.unsetFlag(MODULENAME, "heroPointHandler.remainingMinutes");
         await game.user?.unsetFlag(MODULENAME, "heroPointHandler.timeout");
     }
 }
 
-//TODO How to start using bootstrap? (I use bootstrap classes in the html).
 export async function heroPointHandler() {
-    const title: any = `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.title`)}`;
-
-    if (Object.values(ui.windows).find((w) => w.title === title)) {
+    if (
+        Object.values(ui.windows).find((w) =>
+            w.title.includes(`${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.title`)}`)
+        )
+    ) {
         return;
     }
 
-    await handleTimer(calcRemainingMinutes());
+    let remainingMinutes = <number>await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes");
 
+    const title: any = `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.title`)} (${
+        remainingMinutes
+            ? remainingMinutes + " " + game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.minutesLeft`)
+            : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noRunningTimer`)
+    })`;
+
+    await handleTimer(remainingMinutes);
+
+    const content = await buildHtml(remainingMinutes);
+
+    let button: string | null = null;
+    const handlerDialog = new Dialog({
+        title: title,
+        content,
+        buttons: {
+            timer: {
+                icon: '<i class="fas fa-hourglass"></i>',
+                label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`)}`,
+                callback: async (html: any) => {
+                    remainingMinutes = handleDialogResponse(html);
+                    button = "timer";
+                },
+            },
+            noTimer: {
+                label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noTimerLabel`)}`,
+                callback: async (html) => {
+                    handleDialogResponse(html);
+                    remainingMinutes = 0;
+                    button = "noTimer";
+                },
+            },
+        },
+        default: "timer",
+        close: async () => {
+            await handleTimer(remainingMinutes);
+            if (button) {
+                const message =
+                    remainingMinutes > 0
+                        ? game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.willBeResetIn`, {
+                              remainingMinutes: remainingMinutes,
+                              time: new Date(Date.now() + remainingMinutes * 60 * 1000).toLocaleTimeString(),
+                          })
+                        : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerStopped`);
+                return ChatMessage.create({ flavor: message, whisper: [game.user?.id as string] }, {});
+            }
+        },
+    });
+    handlerDialog.render(true);
+}
+
+async function buildHtml(remainingMinutes: number) {
+    //TODO How to start using bootstrap? (I use bootstrap classes in the html).
     //TODO Extract to a handlebars template
+
+    //TODO Get user name, add within parentheses after actor name
+    let charactersContent = "";
+
+    const characters = game?.actors
+        ?.filter((x) => x.hasPlayerOwner)
+        .filter((x) => x.type === "character")
+        .filter((x) =>
+            (
+                game?.users
+                    ?.filter((user) => user.active)
+                    .map((user) => user.character)
+                    .filter((actor) => !!actor) || []
+            ).includes(x)
+        )
+        // @ts-ignore
+        .filter((actor) => !actor.data.data.traits.traits.value.includes("minion"))
+        // @ts-ignore
+        .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon"));
+
+    //filter out logged in players
+
+    // @ts-ignore
+    const length = characters.length;
+    const checked = remainingMinutes === undefined && length > 0 ? Math.floor(Math.random() * length) : -1;
+
     const startContent = `
 <div class="form-group">
+<div>${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.instructions`)}</div>
   <label class="col-md-4 control-label" for="radios">${game.i18n.localize(
       `${MODULENAME}.SETTINGS.heroPointHandler.doWhat`
   )}</label>
   <div class="col-md-4">
-
       <div class="radio">
         <label for="sessionStart-0">
           <input type="radio" name="sessionStart" id="sessionStart-0" value="RESET">
@@ -196,41 +276,29 @@ export async function heroPointHandler() {
   )}</label>
   <div class="col-md-4">`;
 
-    //TODO Get user name, add within parentheses after actor name
-    let charactersContent = "";
-    const characters = game?.actors
-        ?.filter((x) => x.hasPlayerOwner)
-        .filter((x) => x.type === "character")
-        // @ts-ignore
-        .filter((actor) => !actor.data.data.traits.traits.value.includes("minion"))
-        // @ts-ignore
-        .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon"));
-    // @ts-ignore
-    const length = characters.length;
-    const checked =
-        ((await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")) || 60) === 60
-            ? Math.floor(Math.random() * length)
-            : -1;
     for (let i = 0; i < length; i++) {
-        const actor = characters?.filter((x) => x.type === "character")[i];
-        const string = checked === i ? 'checked="checked"' : "";
         charactersContent += `
     <div class="radio">
         <label for="characters-${i}">
-          <input type="radio" name="characters" id="characters-${i}" value="${actor?.id}" ${string}>
-          ${actor?.name}
+          <input type="radio" name="characters" id="characters-${i}" value="${
+            characters?.filter((x) => x.type === "character")[i]?.id
+        }" ${checked === i ? 'checked="checked"' : ""}>
+          ${characters?.filter((x) => x.type === "character")[i]?.name}
         </label>
     </div>`;
     }
 
-    let remainingMinutes = <number>await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes") || 60;
-    const remainingContent = `
+    const all =
+        length > 0
+            ? `
   <div class="radio">
     <label for="characters-ALL">
       <input type="radio" name="characters" id="characters-ALL" value="ALL">
       ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.all`)}
     </label>
-  </div>
+  </div>`
+            : "";
+    const remainingContent = `${all}
   <div class="radio">
     <label for="characters-NONE">
       <input type="radio" name="characters" id="characters-NONE" value="NONE" ${
@@ -245,46 +313,12 @@ export async function heroPointHandler() {
   <div class="col-md-4">
     <div class="input-group">
       <span class="input-group-addon">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`)}</span>
-      <input id="timerTextId" name="timerText" class="form-control" value="${remainingMinutes}" type="text">
+      <input id="timerTextId" name="timerText" class="form-control" value="${remainingMinutes || 60}" type="text">
     </div>
     <p class="help-block">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`)}</p>
   </div>
 </div>
 `;
 
-    const content = startContent + charactersContent + remainingContent;
-
-    remainingMinutes = <number>await game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes") || 60;
-    const handlerDialog = new Dialog({
-        title: title,
-        content,
-        buttons: {
-            timer: {
-                icon: '<i class="fas fa-hourglass"></i>',
-                label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`)}`,
-                callback: async (html: any) => {
-                    remainingMinutes = handleDialogResponse(html);
-                },
-            },
-            noTimer: {
-                label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noTimerLabel`)}`,
-                callback: async (html) => {
-                    handleDialogResponse(html);
-                    remainingMinutes = 0;
-                },
-            },
-        },
-        default: "timer",
-        close: async () => {
-            await handleTimer(remainingMinutes);
-            const message =
-                remainingMinutes > 0
-                    ? game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.willBeResetIn`, {
-                          remainingMinutes: remainingMinutes,
-                      })
-                    : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerStopped`);
-            return ChatMessage.create({ flavor: message, whisper: [game.user?.id as string] }, {});
-        },
-    });
-    handlerDialog.render(true);
+    return startContent + charactersContent + remainingContent;
 }

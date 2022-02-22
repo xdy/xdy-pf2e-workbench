@@ -59,7 +59,7 @@
         "timerStopped": "La minutrie des points d'héroïsme est arrêtée.",
         "timerValue": "Valeur de la minuterie",
         "title": "Gestionnaire de point d'héroïsme",
-        "willBeResetIn": "Les points d'héroïsme seront réinitialisés dans {remainingMinutes} minutes."
+        "willBeResetIn": "Les points d'héroïsme seront réinitialisés dans {remainingMinutes} minutes ({time})."
       },
       "heroPointHandlerKey": {
         "hint": "(Expérimental) Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme qui permet de remettre à zéro et d'ajouter des points d'héroïsme avec un rappel automatique à chaque heure.",

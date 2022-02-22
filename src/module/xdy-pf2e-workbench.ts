@@ -313,8 +313,9 @@ async function hooksForGMInit() {
     }
 
     if (game.settings.get(MODULENAME, "heroPointHandler")) {
-        if (!game.user?.isGM) return;
-        await handleTimer(calcRemainingMinutes());
+        if (game.user?.isGM) {
+            await handleTimer(calcRemainingMinutes());
+        }
     }
 }
 
