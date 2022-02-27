@@ -10,6 +10,7 @@ declare global {
             "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
             "xdy-pf2e-workbench.enableAutomaticMove": string;
             "xdy-pf2e-workbench.heroPointHandler": boolean;
+            "xdy-pf2e-workbench.notifyOnSpellCardNotFound": boolean;
             "xdy-pf2e-workbench.npcMystifier": boolean;
             "xdy-pf2e-workbench.npcMystifierAddRandomNumber": boolean;
             "xdy-pf2e-workbench.npcMystifierDemystifyAllTokensBasedOnTheSameActor": boolean;
@@ -45,6 +46,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
+        onChange: () => location.reload(),
     });
 
     game.settings.register(MODULENAME, "enableAutomaticMove", {
@@ -60,6 +62,7 @@ export function registerSettings() {
             gettingStatusDying: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.gettingStatusDying`),
             deprecatedManually: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.deprecatedManually`),
         },
+        onChange: () => location.reload(),
     });
 
     game.settings.register(MODULENAME, "npcMystifier", {
@@ -248,6 +251,26 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
+        onChange: () => location.reload(),
+    });
+
+    game.settings.register(MODULENAME, "autoRollDamageForSpellAttack", {
+        name: `${MODULENAME}.SETTINGS.autoRollDamageForSpellAttack.name`,
+        hint: `${MODULENAME}.SETTINGS.autoRollDamageForSpellAttack.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => location.reload(),
+    });
+
+    game.settings.register(MODULENAME, "notifyOnSpellCardNotFound", {
+        name: `${MODULENAME}.SETTINGS.notifyOnSpellCardNotFound.name`,
+        hint: `${MODULENAME}.SETTINGS.notifyOnSpellCardNotFound.hint`,
+        scope: "client",
+        config: true,
+        default: true,
+        type: Boolean,
     });
 
     game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
@@ -307,6 +330,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
+        onChange: () => location.reload(),
     });
 
     //DEPRECATED
@@ -317,6 +341,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
+        onChange: () => location.reload(),
     });
 
     //DEPRECATED
@@ -327,6 +352,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
+        onChange: () => location.reload(),
     });
 
     mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");

@@ -63,17 +63,19 @@ export function registerKeybindings() {
         editable: [],
         // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
-            if (canMystify()) {
-                const updates = [];
-                for (const token of canvas?.tokens?.controlled.filter((x) => !x.actor?.hasPlayerOwner) || []) {
-                    updates.push(...(await doMystification(token, isTokenMystified(token))));
-                }
+            if (game.settings.get(MODULENAME, "npcMystifier")) {
+                if (canMystify()) {
+                    const updates = [];
+                    for (const token of canvas?.tokens?.controlled.filter((x) => !x.actor?.hasPlayerOwner) || []) {
+                        updates.push(...(await doMystification(token, isTokenMystified(token))));
+                    }
 
-                await canvas?.scene?.updateEmbeddedDocuments("Token", updates);
-            } else {
-                ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));
+                    await canvas?.scene?.updateEmbeddedDocuments("Token", updates);
+                } else {
+                    ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));
+                }
+                return true;
             }
-            return true;
         },
         reservedModifiers: [],
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,

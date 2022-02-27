@@ -1,5 +1,6 @@
 {
   "xdy-pf2e-workbench": {
+    "spellCardNotFound": "The spell card could not be found. Casting {spell} at minimum level for that spell.",
     "SETTINGS": {
       "applyPersistentDamage": {
         "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module. Save settings to show/hide additional options.",
@@ -26,10 +27,16 @@
         "name": "Client setting to automatically collapse item chat card content."
       },
       "autoRollDamageForStrike": {
-        "hint": "Client setting to automatically roll damage for strikes that hit.",
-        "name": "Client setting to automatically roll damage for strikes that hit.",
-        "result": "Result",
-        "strike": "Strike"
+        "hint": "Client setting to automatically roll damage for strikes that hit. Note that critical hits roll critical damage.",
+        "name": "Client setting to automatically roll damage for strikes that hit."
+      },
+      "autoRollDamageForSpellAttack": {
+        "hint": "Client setting to automatically roll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
+        "name": "Client setting to automatically roll damage for spell attacks that hit."
+      },
+      "notifyOnSpellCardNotFound": {
+        "hint": "Client setting to notify when a spell attack is rolled and no spell card was found to roll damage for.",
+        "name": "Client setting to notify when a spell attack is rolled and no spell card was found."
       },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn.",
@@ -160,11 +167,11 @@
         "name": "(Experimental) World setting to use mystified name inside chat messages."
       },
       "purgeExpiredEffectsEachTurn": {
-        "hint": "(Deprecated) World setting to purge all expired effects each turn in combat. Reload (f5) after changing this setting.",
+        "hint": "(Deprecated) World setting to purge all expired effects each turn in combat.",
         "name": "(Deprecated) World setting to purge all expired effects each turn."
       },
       "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-        "hint": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat. Reload (f5) after changing this setting.",
+        "hint": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat.",
         "name": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat."
       }
     }

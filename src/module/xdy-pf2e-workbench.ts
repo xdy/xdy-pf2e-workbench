@@ -5,7 +5,7 @@
  * Software License: Apache 2.0
  */
 
-//TODO Start using the actual pf2e types
+//TODO Start using the actual pf2e types (for now, some types in types/pf2etypes.d.ts)
 //TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
 //TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
 //TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
@@ -16,6 +16,7 @@ import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./fe
 import { registerKeybindings } from "./keybinds";
 import { getCombatantById, moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
 import { calcRemainingMinutes, handleTimer } from "./feature/heroPointHandler";
+import { ActorFlagsPF2e, SpellPF2e } from "../types/pf2etypes";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -70,41 +71,77 @@ function shouldIHandleThis(message: ChatMessage) {
 
 async function hooksForEveryone() {
     //Hooks for everyone
-    if (game.settings.get(MODULENAME, "autoRollDamageForStrike")) {
+    if (
+        game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
+        game.settings.get(MODULENAME, "autoRollDamageForSpellAttack")
+    ) {
         Hooks.on("createChatMessage", async (message: ChatMessage) => {
-            const autorollDamageEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
-            const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
-            if (message.data.type === 5 && autorollDamageEnabled && messageActor && shouldIHandleThis(message)) {
-                const messageToken: TokenDocument = <TokenDocument>(
-                    canvas?.scene?.tokens.get(<string>message.data.speaker.token)
-                );
-                const strike = game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`);
-                const strikeName =
-                    message.data.flavor?.match(`<h4 class="action">${strike}: (.*?)<\\/h4>`) ||
-                    message.data.flavor?.match(`<strong>${strike}: (.*?)<\\/strong>`); //To support pf2e system before 3.5.0. BREAKING CHANGE to remove, so, do it whenever I do another breaking change
-                if (strikeName && strikeName[1]) {
-                    const degreeOfSuccess = message.data.flavor?.match(`(\\"success\\"|\\"criticalSuccess\\")`);
-                    if (degreeOfSuccess && degreeOfSuccess[0]) {
+            const numberOfMessagesToCheck = 5;
+            if (shouldIHandleThis(message)) {
+                const autorollDamageStrikeEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
+                const autorollDamageSpellAttackEnabled = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
+                const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
+                const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
+                const rollType = flags.context?.type;
+                if (
+                    messageActor &&
+                    ((rollType === "attack-roll" && autorollDamageStrikeEnabled) ||
+                        (rollType === "spell-attack-roll" && autorollDamageSpellAttackEnabled))
+                ) {
+                    const actionId = <string>flags?.origin?.uuid;
+                    const degreeOfSuccess = flags.context?.outcome ?? "";
+                    if (rollType === "spell-attack-roll") {
+                        if (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess") {
+                            const spell = <SpellPF2e>await fromUuid(actionId);
+                            let spellLevel = spell.data.data.level;
+                            let levelFromChatCard = false;
+                            const chatLength = game.messages?.contents.length ?? 0;
+                            for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
+                                const msg = game.messages?.contents[chatLength - i];
+                                if (msg && (<ActorFlagsPF2e>msg.data.flags.pf2e).origin?.uuid === actionId) {
+                                    const level = msg.data.content.match(/data-spell-lvl="(\d+)"/);
+                                    if (level && level[1]) {
+                                        levelFromChatCard = true;
+                                        spellLevel = parseInt(level[1]);
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!levelFromChatCard && game.settings.get(MODULENAME, "notifyOnSpellCardNotFound")) {
+                                ui.notifications.info(
+                                    game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
+                                        // @ts-ignore
+                                        spell: spell.data.name,
+                                    })
+                                );
+                            }
+
+                            //Until spell level flags are added to attack rolls it is the best I could come up with.
+                            //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
+                            //@ts-ignore
+                            spell.rollDamage({
+                                currentTarget: {
+                                    closest: () => {
+                                        return { dataset: { spellLvl: Math.abs(spellLevel) } };
+                                    },
+                                },
+                            });
+                        }
+                    } else if (rollType === "attack-roll") {
+                        //@ts-ignore
+                        const rollOptions = messageActor?.getRollOptions(["all", "damage-roll"]);
                         // @ts-ignore
-                        const actions: any =
-                            // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
-                            messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
-                            // @ts-ignore
-                            messageActor?.data.data?.actions;
-                        const relevantStrike = actions
-                            .filter((a: { type: string }) => a.type === "strike")
-                            .find((action: { name: string }) => action.name === strikeName[1]);
-                        const rollOptions = messageActor
-                            // @ts-ignore
-                            ?.getRollOptions(["all", "damage-roll"]);
-                        if (degreeOfSuccess[0].includes("success")) {
-                            await relevantStrike?.damage({
-                                options: rollOptions,
-                            });
-                        } else if (degreeOfSuccess[0].includes("criticalSuccess")) {
-                            await relevantStrike?.critical({
-                                options: rollOptions,
-                            });
+                        const actions = messageActor.data.data.actions;
+                        const actionIds = actionId.match(/Item.(\w+)/);
+                        if (actionIds && actionIds[1]) {
+                            const action = actions
+                                .filter((a: { type: string }) => a.type === "strike")
+                                .find((a: { item: { id: any } }) => a.item.id === actionIds[1]);
+                            if (degreeOfSuccess === "success") {
+                                action?.damage({ options: rollOptions });
+                            } else if (degreeOfSuccess === "criticalSuccess") {
+                                action?.critical({ options: rollOptions });
+                            }
                         }
                     }
                 }
