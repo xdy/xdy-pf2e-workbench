@@ -35,17 +35,13 @@
         "hint": "Client setting to automatically decrease the frightened condition each turn.",
         "name": "Client setting to automatically decrease the frightened condition each turn."
       },
-      "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
-        "hint": "World setting to enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant.",
-        "name": "World setting to enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant."
-      },
-      "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
-        "hint": "World setting to enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant.",
-        "name": "World setting to enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant."
-      },
-      "enableMoveBeforeCurrentCombatant": {
-        "hint": "(Deprecated) World setting to enable manually moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
-        "name": "(Deprecated) World setting to enable manually moving selected combatant before the current combatant."
+      "enableAutomaticMove": {
+        "hint": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant.",
+        "name": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant.",
+        "noAutomation": "Never",
+        "reaching0HP": "When combatant reaches 0 HP.",
+        "gettingStatusDying": "When combatant gets status Dying.",
+        "deprecatedManually": "(Deprecated) Enables manual option on selected combatant."
       },
       "heroPointHandler": {
         "add": "Add",

@@ -27,17 +27,12 @@
         "hint": "Réduire automatiquement la condition Effrayée chaque tour.",
         "name": "Réduire automatiquement la condition Effrayée chaque tour."
       },
-      "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
-        "hint": "Permettre de déplacer automatiquement l'initiative du combattant qui passe sous 0 pv en dehors de son propre tour juste avant le combattant actuel.",
-        "name": "Permet de déplacer automatiquement l'initiative du combattant qui passe sous 0 pv en dehors de son propre tour juste avant le combattant actuel."
-      },
-      "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
-        "hint": "Permettre de déplacer automatiquement l'initiative du combattant qui obtient la condition mourant en dehors de son propre tour juste avant le combattant actuel.",
-        "name": "Permet de déplacer automatiquement l'initiative du combattant qui obtient la condition mourant en dehors de son propre tour juste avant le combattant actuel."
-      },
-      "enableMoveBeforeCurrentCombatant": {
-        "hint": "(Obsolète) Permettre de déplacer manuellement le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste.",
-        "name": "(Obsolète) Permet de sélectionner manuellement le combattant sélectionné pour le placer avant le combattant actuel."
+      "enableAutomaticMove": {
+        "hint": "Permettre de déplacer automatiquement l'initiative du combattant en dehors de son propre tour juste avant le combattant actuel.",
+        "name": "Permettre de déplacer automatiquement l'initiative du combattant en dehors de son propre tour juste avant le combattant actuel.",
+        "reaching0HP": "Permettre de déplacer automatiquement l'initiative du combattant qui passe sous 0 pv en dehors de son propre tour juste avant le combattant actuel.",
+        "gettingStatusDying": "Permettre de déplacer automatiquement l'initiative du combattant qui obtient la condition mourant en dehors de son propre tour juste avant le combattant actuel.",
+        "enableMoveBeforeCurrentCombatant": "(Obsolète) Permettre de déplacer manuellement le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste."
       },
       "heroPointHandler": {
         "add": "Ajouter",

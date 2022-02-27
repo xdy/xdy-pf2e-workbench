@@ -11,17 +11,13 @@
         "result": "Result",
         "strike": "Strike"
       },
-      "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
-        "hint": "Aktivera automatisk sättning av initiativ på stridande som går ner till 0 hp utanför sin egen runda till strax före nuvarande stridande.",
-        "name": "Aktivera automatisk sättning av initiativ på stridande som går ner till 0 hp utanför sin egen runda till strax före nuvarande stridande."
-      },
-      "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": {
-        "hint": "Aktivera automatisk sättning av initiativ på stridande som får statusen Dying utanför sin egen runda till strax före  nuvarande stridande.",
-        "name": "Aktivera automatisk sättning av initiativ på stridande som får statusen Dying utanför sin egen runda till strax före  nuvarande stridande."
-      },
-      "enableMoveBeforeCurrentCombatant": {
-        "hint": "Möjliggör att flytta utvald stridande till före nuvarande stridande, normalt eftersom nuvarande stridande har dödat vald stridande.",
-        "name": "Möjliggör att vald stridande flyttas före nuvarande stridande."
+      "enableAutomaticMove": {
+        "hint": "Aktivera sättning av initiativ på stridande utanför sin egen runda till strax före nuvarande stridande, normalt eftersom nuvarande stridande har dödat vald stridande.",
+        "name": "Aktivera sättning av initiativ på stridande utanför sin egen runda till strax före nuvarande stridande.",
+        "noAutomation": "Aldrig",
+        "reaching0HP": "När stridande går ner till 0 HP.",
+        "gettingStatusDying": "När stridande får status Dying.",
+        "deprecatedManually": "(Utfasad) Aktiverar möjlighet att manuellt flytta vald stridande till före aktuell stridande"
       },
       "heroPointHandler": {
         "add": "Lägg till",

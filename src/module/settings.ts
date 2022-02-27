@@ -6,9 +6,10 @@ export let mystifyModifierKey: string;
 declare global {
     namespace ClientSettings {
         interface Values {
-            "xdy-pf2e-workbench.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": boolean;
-            "xdy-pf2e-workbench.enableAutomaticMoveBeforeCurrentCombatantOnStatusDying": boolean;
-            "xdy-pf2e-workbench.enableMoveBeforeCurrentCombatant": boolean;
+            "xdy-pf2e-workbench.autoCollapseItemChatCardContent": boolean;
+            "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
+            "xdy-pf2e-workbench.enableAutomaticMove": string;
+            "xdy-pf2e-workbench.heroPointHandler": boolean;
             "xdy-pf2e-workbench.npcMystifier": boolean;
             "xdy-pf2e-workbench.npcMystifierAddRandomNumber": boolean;
             "xdy-pf2e-workbench.npcMystifierDemystifyAllTokensBasedOnTheSameActor": boolean;
@@ -27,11 +28,8 @@ declare global {
             "xdy-pf2e-workbench.npcMystifierPrefix": string;
             "xdy-pf2e-workbench.npcMystifierSkipRandomNumberForUnique": boolean;
             "xdy-pf2e-workbench.npcMystifierUseMystifiedNameInChat": boolean;
-            "xdy-pf2e-workbench.purgeExpiredEffectsEachTurn": boolean;
-            "xdy-pf2e-workbench.purgeExpiredEffectsOnTimeIncreaseOutOfCombat": boolean;
-            "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
-            "xdy-pf2e-workbench.autoCollapseItemChatCardContent": boolean;
-            "xdy-pf2e-workbench.heroPointHandler": boolean;
+            "xdy-pf2e-workbench.purgeExpiredEffectsEachTurn": boolean; //Deprecated
+            "xdy-pf2e-workbench.purgeExpiredEffectsOnTimeIncreaseOutOfCombat": boolean; //Deprecated
         }
     }
 }
@@ -49,23 +47,19 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    //TODO Change into a dropdown menu with the following options:
-    game.settings.register(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP", {
-        name: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.name`,
-        hint: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.hint`,
+    game.settings.register(MODULENAME, "enableAutomaticMove", {
+        name: `${MODULENAME}.SETTINGS.enableAutomaticMove.name`,
+        hint: `${MODULENAME}.SETTINGS.enableAutomaticMove.hint`,
         scope: "world",
         config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying", {
-        name: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnStatusDying.name`,
-        hint: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnStatusDying.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
+        default: "noAutomation",
+        type: String,
+        choices: {
+            noAutomation: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.noAutomation`),
+            reaching0HP: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HP`),
+            gettingStatusDying: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.gettingStatusDying`),
+            deprecatedManually: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.deprecatedManually`),
+        },
     });
 
     game.settings.register(MODULENAME, "npcMystifier", {
@@ -329,16 +323,6 @@ export function registerSettings() {
     game.settings.register(MODULENAME, "purgeExpiredEffectsEachTurn", {
         name: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.name`,
         hint: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    //DEPRECATED
-    game.settings.register(MODULENAME, "enableMoveBeforeCurrentCombatant", {
-        name: `${MODULENAME}.SETTINGS.enableMoveBeforeCurrentCombatant.name`,
-        hint: `${MODULENAME}.SETTINGS.enableMoveBeforeCurrentCombatant.hint`,
         scope: "world",
         config: true,
         default: false,

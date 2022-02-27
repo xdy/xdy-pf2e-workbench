@@ -235,9 +235,9 @@ async function hooksForGMInit() {
         });
     }
 
-    if (game.settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
+    if (game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedManually") {
         Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMenuEntry[]) => {
-            if (game.user?.isGM && game.settings.get(MODULENAME, "enableMoveBeforeCurrentCombatant")) {
+            if (game.user?.isGM && game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedManually") {
                 entryOptions.push({
                     icon: '<i class="fas fa-skull"></i>',
                     name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantContextMenu.name`,
@@ -249,11 +249,11 @@ async function hooksForGMInit() {
         });
     }
 
-    if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP")) {
+    if (game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
         Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) => {
             if (
                 game.user?.isGM &&
-                game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP") &&
+                game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" &&
                 game.combat
             ) {
                 const combatant = <Combatant>(
@@ -276,13 +276,13 @@ async function hooksForGMInit() {
         });
     }
 
-    if (game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying")) {
+    if (game.settings.get(MODULENAME, "enableAutomaticMove") === "gettingStatusDying") {
         // @ts-ignore Can't be bothered to type preUpdateToken
         Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
             type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
             if (
                 game.user?.isGM &&
-                game.settings.get(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnStatusDying") &&
+                game.settings.get(MODULENAME, "enableAutomaticMove") === "gettingStatusDying" &&
                 game.combat &&
                 tokenDoc.actor &&
                 update.actorData
@@ -321,6 +321,7 @@ async function hooksForGMInit() {
         const settings: [string, ClientSettings.CompleteSetting][] = Array.from(game.settings.settings.entries());
         settings.forEach((setting: [string, ClientSettings.CompleteSetting]) => {
             const settingName = setting[0];
+            //TODO Do this in a more elegant way
             //Disable all dependent npcMystifier settings
             if (settingName !== `${MODULENAME}.npcMystifier` && setting[0].startsWith(`${MODULENAME}.npcMystifier`)) {
                 const valueFunction = !game.settings.get(MODULENAME, "npcMystifier");
