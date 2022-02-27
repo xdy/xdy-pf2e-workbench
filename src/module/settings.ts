@@ -10,6 +10,7 @@ declare global {
             "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
             "xdy-pf2e-workbench.enableAutomaticMove": string;
             "xdy-pf2e-workbench.heroPointHandler": boolean;
+            "xdy-pf2e-workbench.notifyOnSpellCardNotFound": boolean;
             "xdy-pf2e-workbench.npcMystifier": boolean;
             "xdy-pf2e-workbench.npcMystifierAddRandomNumber": boolean;
             "xdy-pf2e-workbench.npcMystifierDemystifyAllTokensBasedOnTheSameActor": boolean;
@@ -247,6 +248,15 @@ export function registerSettings() {
         scope: "client",
         config: true,
         default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "notifyOnSpellCardNotFound", {
+        name: `${MODULENAME}.SETTINGS.notifyOnSpellCardNotFound.name`,
+        hint: `${MODULENAME}.SETTINGS.notifyOnSpellCardNotFound.hint`,
+        scope: "client",
+        config: true,
+        default: true,
         type: Boolean,
     });
 

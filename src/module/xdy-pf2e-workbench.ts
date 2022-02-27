@@ -71,41 +71,81 @@ function shouldIHandleThis(message: ChatMessage) {
 async function hooksForEveryone() {
     //Hooks for everyone
     if (game.settings.get(MODULENAME, "autoRollDamageForStrike")) {
-        Hooks.on("createChatMessage", (message: ChatMessage) => {
+        Hooks.on("createChatMessage", async (message: ChatMessage) => {
             const autorollDamageEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
             const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
-            if (message.data.type === 5 && autorollDamageEnabled && messageActor && shouldIHandleThis(message)) {
-                const messageToken: TokenDocument = <TokenDocument>(
-                    canvas?.scene?.tokens.get(<string>message.data.speaker.token)
-                );
-                const strike = game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`);
-                const strikeName =
-                    message.data.flavor?.match(`<h4 class="action">${strike}: (.*?)<\\/h4>`) ||
-                    message.data.flavor?.match(`<strong>${strike}: (.*?)<\\/strong>`); //To support pf2e system before 3.5.0. BREAKING CHANGE to remove, so, do it whenever I do another breaking change
-                if (strikeName && strikeName[1]) {
-                    const degreeOfSuccess = message.data.flavor?.match(`(\\"success\\"|\\"criticalSuccess\\")`);
-                    if (degreeOfSuccess && degreeOfSuccess[0]) {
-                        // @ts-ignore
-                        const actions: any =
-                            // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
-                            messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
-                            // @ts-ignore
-                            messageActor?.data.data?.actions;
-                        const relevantStrike = actions
-                            .filter((a: { type: string }) => a.type === "strike")
-                            .find((action: { name: string }) => action.name === strikeName[1]);
-                        const rollOptions = messageActor
-                            // @ts-ignore
-                            ?.getRollOptions(["all", "damage-roll"]);
-                        if (degreeOfSuccess[0].includes("success")) {
-                            relevantStrike?.damage({
-                                options: rollOptions,
-                            });
-                        } else if (degreeOfSuccess[0].includes("criticalSuccess")) {
-                            relevantStrike?.critical({
-                                options: rollOptions,
+            const flags = message.data.flags.pf2e;
+            //@ts-ignore
+            const rollType = message.data.flags?.pf2e?.context?.type;
+            if (
+                rollType === "attack-roll" ||
+                (rollType === "spell-attack-roll" &&
+                    autorollDamageEnabled &&
+                    messageActor &&
+                    shouldIHandleThis(message))
+            ) {
+                //@ts-ignore
+                const actionId = flags?.origin?.uuid;
+                //@ts-ignore
+                const degreeOfSuccess = flags.context.outcome;
+                if (rollType === "spell-attack-roll") {
+                    if (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess") {
+                        const spell = await fromUuid(actionId);
+                        //@ts-ignore
+                        let spellLevel = spell.data.data.level;
+                        let levelFromChatCard = false;
+                        //@ts-ignore
+                        const chatLength = game.messages.contents.length;
+                        //check the last 5 messages for the spell info card. skips the last message which is the attach roll
+                        //most use cases shouldm't need to search further back than that
+                        for (let i = 1; i <= Math.min(6, chatLength); i++) {
+                            //@ts-ignore
+                            const m = game.messages.contents[chatLength - i];
+                            //@ts-ignore
+                            if (m.data.flags.pf2e.origin.uuid === actionId) {
+                                const re = m.data.content.match(/data-spell-lvl="(\d+)"/);
+                                if (re) {
+                                    levelFromChatCard = true;
+                                    spellLevel = re[1];
+                                    break;
+                                }
+                            }
+                        }
+                        if (
+                            !levelFromChatCard &&
+                            game.settings.get(MODULENAME, "notifyOnSpellCardNotFound") &&
+                            shouldIHandleThis(message)
+                        ) {
+                            //@ts-ignore
+                            ui.notifications.info(
+                                //@ts-ignore
+                                `The spell card could not be found. Casting ${spell.data.name} at minimum level for that spell.`
+                            );
+                        } else {
+                            //Until spell level flags are added to attack rolls it is the best I could come up with.
+                            //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
+                            //@ts-ignore
+                            spell.rollDamage({
+                                currentTarget: {
+                                    closest: () => {
+                                        return { dataset: { spellLvl: Math.abs(spellLevel) } };
+                                    },
+                                },
                             });
                         }
+                    }
+                } else if (rollType === "attack-roll") {
+                    //@ts-ignore
+                    const rollOptions = messageActor?.getRollOptions(["all", "damage-roll"]);
+                    //@ts-ignore
+                    const actions = messageActor.data.data.actions;
+                    const action = actions
+                        .filter((a: { type: string }) => a.type === "strike")
+                        .find((a: { item: { id: any } }) => a.item.id === actionId);
+                    if (degreeOfSuccess === "success") {
+                        action?.damage({ options: rollOptions });
+                    } else if (degreeOfSuccess === "criticalSuccess") {
+                        action?.critical({ options: rollOptions });
                     }
                 }
             }

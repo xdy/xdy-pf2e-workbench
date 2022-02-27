@@ -31,6 +31,10 @@
         "result": "Result",
         "strike": "Strike"
       },
+      "notifyOnSpellCardNotFound": {
+        "hint": "Client setting to notify when a spell attack is rolled and no spell card was found.",
+        "name": "Client setting to notify when a spell attack is rolled and no spell card was found."
+      },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn.",
         "name": "Client setting to automatically decrease the frightened condition each turn."
