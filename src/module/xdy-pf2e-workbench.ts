@@ -78,12 +78,11 @@ async function hooksForEveryone() {
                 const messageToken: TokenDocument = <TokenDocument>(
                     canvas?.scene?.tokens.get(<string>message.data.speaker.token)
                 );
-                const strikeName = message.data.flavor?.match(
-                    `(<strong>${game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`
-                    )}): (.*?)<\\/strong>`
-                );
-                if (strikeName && strikeName[1] && strikeName[2]) {
+                const strike = game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`);
+                const strikeName =
+                    message.data.flavor?.match(`<h4 class="action">${strike}: (.*?)<\\/h4>`) ||
+                    message.data.flavor?.match(`<strong>${strike}: (.*?)<\\/strong>`); //To support pf2e system before 3.5.0. BREAKING CHANGE to remove, so, do it whenever I do another breaking change
+                if (strikeName && strikeName[1]) {
                     const degreeOfSuccess = message.data.flavor?.match(`(\\"success\\"|\\"criticalSuccess\\")`);
                     if (degreeOfSuccess && degreeOfSuccess[0]) {
                         // @ts-ignore
@@ -94,7 +93,7 @@ async function hooksForEveryone() {
                             messageActor?.data.data?.actions;
                         const relevantStrike = actions
                             .filter((a: { type: string }) => a.type === "strike")
-                            .find((action: { name: string }) => action.name === strikeName[2]);
+                            .find((action: { name: string }) => action.name === strikeName[1]);
                         const rollOptions = messageActor
                             // @ts-ignore
                             ?.getRollOptions(["all", "damage-roll"]);
