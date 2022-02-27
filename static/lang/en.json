@@ -58,7 +58,7 @@
         "ignore": "Ignore",
         "instructions": "Note that the timer is paused while this dialog is open. Close this dialog without pressing any of these buttons to unpause the timer, or press the appropriate button to do what the button says.",
         "minutesLeft": "minutes left on current timer",
-        "name": "World setting to enable Hero Point handler feature that can automatially reset and/or add Hero Points, with an hourly reminder.",
+        "name": "World setting to enable Hero Point handler feature that can automatically reset and/or add Hero Points, with an hourly reminder.",
         "none": "None",
         "noRunningTimer": "No timer running",
         "noTimerLabel": "Submit changes with <b>no</b> timer. Will <b>stop</b> any existing timer.",
