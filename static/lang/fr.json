@@ -36,8 +36,8 @@
         "name": "Permet de déplacer automatiquement l'initiative du combattant qui obtient la condition mourant en dehors de son propre tour juste avant le combattant actuel."
       },
       "enableMoveBeforeCurrentCombatant": {
-        "hint": "Permettre de déplacer manuellement le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste.",
-        "name": "Permet de sélectionner manuellement le combattant sélectionné pour le placer avant le combattant actuel."
+        "hint": "(Obsolète) Permettre de déplacer manuellement le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste.",
+        "name": "(Obsolète) Permet de sélectionner manuellement le combattant sélectionné pour le placer avant le combattant actuel."
       },
       "heroPointHandler": {
         "add": "Ajouter",
@@ -46,9 +46,9 @@
         "addedToForAll": "{heroPoints} Point(s) d'héroïsme ajoutés pour tous",
         "all": "Tous",
         "doWhat": "Que faire à tous les points d'héroïsme de tous les personnages ?",
-        "hint": "(Expérimental) Le gestionnaire de point d'héroïsme s'ouvre avec une touche liée qui ouvre un dialogue permettant de remettre à zéro ou d'ajouter des points d'héroïsme pour tous les personnages, ajouter un point d'héroïsme à un personnage aléatoire (ou choisi) et, de manière plus importante, pour mettre en route une minuterie qui fait réapparaître le dialogue après 60 minutes (par défaut).",
+        "hint": "Le gestionnaire de point d'héroïsme s'ouvre avec une touche liée qui ouvre un dialogue permettant de remettre à zéro ou d'ajouter des points d'héroïsme pour tous les personnages, ajouter un point d'héroïsme à un personnage aléatoire (ou choisi) et, de manière plus importante, pour mettre en route une minuterie qui fait réapparaître le dialogue après 60 minutes (par défaut).",
         "ignore": "Ignorer",
-        "name": "(Expérimental) gestionnaire de point d'héroïsme qui peut automatiquement se mettre à zéro et/ou ajouter des points d'héroïsme, avec un rappel à chaque heure.",
+        "name": "gestionnaire de point d'héroïsme qui peut automatiquement se mettre à zéro et/ou ajouter des points d'héroïsme, avec un rappel à chaque heure.",
         "noTimerLabel": "Soumettre les changements <b>sans</b> démarrer la minuterie",
         "none": "Aucun",
         "resetTo": "Réinitialisé à",
@@ -62,8 +62,8 @@
         "willBeResetIn": "Les points d'héroïsme seront réinitialisés dans {remainingMinutes} minutes ({time})."
       },
       "heroPointHandlerKey": {
-        "hint": "(Expérimental) Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme qui permet de remettre à zéro et d'ajouter des points d'héroïsme avec un rappel automatique à chaque heure.",
-        "name": "(Expérimental) Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme."
+        "hint": "Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme qui permet de remettre à zéro et d'ajouter des points d'héroïsme avec un rappel automatique à chaque heure.",
+        "name": "Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme."
       },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Déplacer les combattants sélectionnés avant le combattant actuel"
@@ -149,22 +149,22 @@
         "name": "Pas de numéro aléatoire pour les PNJ uniques."
       },
       "npcMystifierUseMystifiedNameInChat": {
-        "hint": "(Expérimental) Utilise le nom mystifié à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié. Cela va vraisemblablement ne pas être joli pour certaines capacités.",
-        "name": "(Experimental) Utiliser les noms mystifiés dans les messages de la conversation."
+        "hint": "Utilise le nom mystifié à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié. Cela va vraisemblablement ne pas être joli pour certaines capacités.",
+        "name": "Utiliser les noms mystifiés dans les messages de la conversation."
       },
       "purgeExpiredEffectsEachTurn": {
-        "hint": "Purger tous les effets expirés à chaque tour. Recharger (F5) après avoir changé ce réglage",
-        "name": "Purge de tous les effets expirés à chaque tour."
+        "hint": "(Obsolète) Purger tous les effets expirés à chaque tour. Recharger (F5) après avoir changé ce réglage",
+        "name": "(Obsolète) Purge de tous les effets expirés à chaque tour."
       },
       "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-        "hint": "Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat. Recharger (f5) après avoir changé ce réglage.",
-        "name": "Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat."
+        "hint": "(Obsolète) Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat. Recharger (f5) après avoir changé ce réglage.",
+        "name": "(Obsolète) Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat."
       },
-      "separatePersistentDamageMessage": {
+      "applyPersistentDamageSeparateMessage": {
         "hint": "Montrer séparément le message des dégâts persistants",
         "name": "Montrer séparément le message des dégâts persistants"
       },
-      "separatePersistentHealingMessage": {
+      "applyPersistentHealingSeparateMessage": {
         "hint": "Montrer séparément le message des soins persistants",
         "name": "Montrer séparément le message des soins persistants"
       }

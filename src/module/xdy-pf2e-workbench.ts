@@ -161,7 +161,7 @@ async function hooksForEveryone() {
                     // @ts-ignore
                     await token?.actor?.applyDamage(damage, token, false);
 
-                    if (game.settings.get(MODULENAME, "separatePersistentDamageMessage")) {
+                    if (game.settings.get(MODULENAME, "applyPersistentDamageSeparateMessage")) {
                         await ChatMessage.create({
                             content: game.i18n.format(`${MODULENAME}.SETTINGS.applyPersistentDamage.wasDamaged`, {
                                 damage: damage,
@@ -206,7 +206,7 @@ async function hooksForEveryone() {
 
                         // @ts-ignore
                         await token.actor.applyDamage(healing, token, false);
-                        if (game.settings.get(MODULENAME, "separatePersistentHealingMessage")) {
+                        if (game.settings.get(MODULENAME, "applyPersistentHealingSeparateMessage")) {
                             await ChatMessage.create({
                                 content: game.i18n.format(`${MODULENAME}.SETTINGS.applyPersistentHealing.wasHealed`, {
                                     healing: Math.abs(healing),
@@ -316,11 +316,46 @@ async function hooksForGMInit() {
             await handleTimer(calcRemainingMinutes());
         }
     }
+
+    Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
+        const settings: [string, ClientSettings.CompleteSetting][] = Array.from(game.settings.settings.entries());
+        settings.forEach((setting: [string, ClientSettings.CompleteSetting]) => {
+            const settingName = setting[0];
+            //Disable all dependent npcMystifier settings
+            if (settingName !== `${MODULENAME}.npcMystifier` && setting[0].startsWith(`${MODULENAME}.npcMystifier`)) {
+                const valueFunction = !game.settings.get(MODULENAME, "npcMystifier");
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+            }
+            //Disable all dependent persistentDamage settings
+            if (
+                settingName !== `${MODULENAME}.applyPersistentDamage` &&
+                setting[0].startsWith(`${MODULENAME}.applyPersistentDamage`)
+            ) {
+                const valueFunction = !game.settings.get(MODULENAME, "applyPersistentDamage");
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+            }
+            //Disable all dependent persistentHealing settings
+            if (
+                settingName !== `${MODULENAME}.applyPersistentHealing` &&
+                setting[0].startsWith(`${MODULENAME}.applyPersistentHealing`)
+            ) {
+                const valueFunction = !game.settings.get(MODULENAME, "applyPersistentHealing");
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+            }
+        });
+    });
 }
 
 function hooksForGMSetup() {
     //GM-only hooks that must run at setup
-    if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
+    if (
+        game.settings.get(MODULENAME, "npcMystifier") &&
+        game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")
+    ) {
         Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
                 mangleChatMessage(message, html);

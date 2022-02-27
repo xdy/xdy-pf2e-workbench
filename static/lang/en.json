@@ -2,22 +2,22 @@
   "xdy-pf2e-workbench": {
     "SETTINGS": {
       "applyPersistentDamage": {
-        "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
-        "name": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
+        "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module. Save settings to show/hide additional options.",
+        "name": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module. Save settings to show/hide additional options.",
         "wasDamaged": "{damage} damage was automatically applied"
       },
       "applyPersistentHealing": {
-        "hint": "Client setting to automatically apply persistent healing rolled by the system.",
-        "name": "Client setting to automatically apply persistent healing rolled by the system.",
+        "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
+        "name": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
         "FastHealingLabel": "Received Fast Healing",
         "RegenerationLabel": "Received Regeneration",
         "wasHealed": "{healing} healing was automatically applied."
       },
-      "separatePersistentDamageMessage": {
+      "applyPersistentDamageSeparateMessage": {
         "name": "Client setting to show separate persistent damage message",
         "hint": "Client setting to show separate persistent damage message"
       },
-      "separatePersistentHealingMessage": {
+      "applyPersistentHealingSeparateMessage": {
         "name": "Client setting to show separate persistent healing message",
         "hint": "Client setting to show separate persistent healing message"
       },
@@ -44,8 +44,8 @@
         "name": "World setting to enable automatically setting initiative of combatant that gets the Dying status outside it's own turn to just before the current combatant."
       },
       "enableMoveBeforeCurrentCombatant": {
-        "hint": "World setting to enable manually moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
-        "name": "World setting to enable manually moving selected combatant before the current combatant."
+        "hint": "(Deprecated) World setting to enable manually moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
+        "name": "(Deprecated) World setting to enable manually moving selected combatant before the current combatant."
       },
       "heroPointHandler": {
         "add": "Add",
@@ -54,11 +54,11 @@
         "addOne": "Adds one Hero Point to selected character (defaults to random roll)",
         "all": "All",
         "doWhat": "Do what to the Hero Points of all characters?",
-        "hint": "(Experimental) World setting to enable Hero Point handler feature with an optional keybind to open a dialog that can reset or add Hero Points for all characters, add one Hero Point to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
+        "hint": "World setting to enable Hero Point handler feature with an optional keybind to open a dialog that can reset or add Hero Points for all characters, add one Hero Point to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
         "ignore": "Ignore",
         "instructions": "Note that the timer is paused while this dialog is open. Close this dialog without pressing any of these buttons to unpause the timer, or press the appropriate button to do what the button says.",
         "minutesLeft": "minutes left on current timer",
-        "name": "(Experimental) World setting to enable Hero Point handler feature that can automatially reset and/or add Hero Points, with an hourly reminder.",
+        "name": "World setting to enable Hero Point handler feature that can automatially reset and/or add Hero Points, with an hourly reminder.",
         "none": "None",
         "noRunningTimer": "No timer running",
         "noTimerLabel": "Submit changes with <b>no</b> timer. Will <b>stop</b> any existing timer.",
@@ -73,8 +73,8 @@
         "willBeResetIn": "Hero Points will be reset in {remainingMinutes} minutes ({time})."
       },
       "heroPointHandlerKey": {
-        "hint": "(Experimental) World keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
-        "name": "(Experimental) World keybind to open the Hero Point handler dialog."
+        "hint": "World keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
+        "name": "World keybind to open the Hero Point handler dialog."
       },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Move selected combatant before the current combatant."
@@ -87,8 +87,8 @@
         "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
       },
       "npcMystifier": {
-        "hint": "World setting to turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene.",
-        "name": "World setting to turn on npc mystifier."
+        "hint": "World setting to turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene. Save settings to show/hide additional options.",
+        "name": "World setting to turn on npc mystifier. Save settings to show/hide additional options."
       },
       "npcMystifierAddRandomNumber": {
         "hint": "World setting that turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.",
@@ -164,12 +164,12 @@
         "name": "(Experimental) World setting to use mystified name inside chat messages."
       },
       "purgeExpiredEffectsEachTurn": {
-        "hint": "World setting to purge all expired effects each turn in combat. Reload (f5) after changing this setting.",
-        "name": "World setting to purge all expired effects each turn."
+        "hint": "(Deprecated) World setting to purge all expired effects each turn in combat. Reload (f5) after changing this setting.",
+        "name": "(Deprecated) World setting to purge all expired effects each turn."
       },
       "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-        "hint": "World setting to purge all expired effects every time the game world time increases out of combat. Reload (f5) after changing this setting.",
-        "name": "World setting to purge all expired effects every time the game world time increases out of combat."
+        "hint": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat. Reload (f5) after changing this setting.",
+        "name": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat."
       }
     }
   }

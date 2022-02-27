@@ -39,76 +39,7 @@ declare global {
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
-    //Settings open for all
-    game.settings.register(MODULENAME, "applyPersistentDamage", {
-        name: `${MODULENAME}.SETTINGS.applyPersistentDamage.name`,
-        hint: `${MODULENAME}.SETTINGS.applyPersistentDamage.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "applyPersistentHealing", {
-        name: `${MODULENAME}.SETTINGS.applyPersistentHealing.name`,
-        hint: `${MODULENAME}.SETTINGS.applyPersistentHealing.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "separatePersistentDamageMessage", {
-        name: `${MODULENAME}.SETTINGS.separatePersistentDamageMessage.name`,
-        hint: `${MODULENAME}.SETTINGS.separatePersistentDamageMessage.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "separatePersistentHealingMessage", {
-        name: `${MODULENAME}.SETTINGS.separatePersistentHealingMessage.name`,
-        hint: `${MODULENAME}.SETTINGS.separatePersistentHealingMessage.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
-        name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
-        hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    //NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
-    game.settings.register(MODULENAME, "autoRollDamageForStrike", {
-        name: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.name`,
-        hint: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
-        name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
-        hint: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-        onChange() {
-            ui.chat.render();
-        },
-    });
-
     //TODO Make a settings menu with the following settings that is set to be restricted to GMs
-
     game.settings.register(MODULENAME, "heroPointHandler", {
         name: `${MODULENAME}.SETTINGS.heroPointHandler.name`,
         hint: `${MODULENAME}.SETTINGS.heroPointHandler.hint`,
@@ -118,33 +49,7 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    game.settings.register(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat", {
-        name: `${MODULENAME}.SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.name`,
-        hint: `${MODULENAME}.SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "purgeExpiredEffectsEachTurn", {
-        name: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.name`,
-        hint: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "enableMoveBeforeCurrentCombatant", {
-        name: `${MODULENAME}.SETTINGS.enableMoveBeforeCurrentCombatant.name`,
-        hint: `${MODULENAME}.SETTINGS.enableMoveBeforeCurrentCombatant.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
+    //TODO Change into a dropdown menu with the following options:
     game.settings.register(MODULENAME, "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP", {
         name: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.name`,
         hint: `${MODULENAME}.SETTINGS.enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP.hint`,
@@ -163,7 +68,6 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    //Mystification below this
     game.settings.register(MODULENAME, "npcMystifier", {
         name: `${MODULENAME}.SETTINGS.npcMystifier.name`,
         hint: `${MODULENAME}.SETTINGS.npcMystifier.hint`,
@@ -171,6 +75,7 @@ export function registerSettings() {
         config: true,
         default: true,
         type: Boolean,
+        onChange: () => location.reload(),
     });
 
     game.settings.register(MODULENAME, "npcMystifierMethod", {
@@ -258,16 +163,6 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    game.settings.register(MODULENAME, "npcMystifierUseMystifiedNameInChat", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    //TODO These apply only to trait mystification and should be grouped together, maybe on a separate tab?
     game.settings.register(MODULENAME, "npcMystifierFilterRarities", {
         name: `${MODULENAME}.SETTINGS.npcMystifierFilterRarities.name`,
         hint: `${MODULENAME}.SETTINGS.npcMystifierFilterRarities.hint`,
@@ -338,6 +233,116 @@ export function registerSettings() {
         config: true,
         default: "",
         type: String,
+    });
+
+    game.settings.register(MODULENAME, "npcMystifierUseMystifiedNameInChat", {
+        name: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    //Settings open for all
+
+    //NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
+    game.settings.register(MODULENAME, "autoRollDamageForStrike", {
+        name: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.name`,
+        hint: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
+        name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
+        hint: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange() {
+            ui.chat.render();
+        },
+    });
+
+    game.settings.register(MODULENAME, "applyPersistentDamage", {
+        name: `${MODULENAME}.SETTINGS.applyPersistentDamage.name`,
+        hint: `${MODULENAME}.SETTINGS.applyPersistentDamage.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => location.reload(),
+    });
+
+    game.settings.register(MODULENAME, "applyPersistentDamageSeparateMessage", {
+        name: `${MODULENAME}.SETTINGS.applyPersistentDamageSeparateMessage.name`,
+        hint: `${MODULENAME}.SETTINGS.applyPersistentDamageSeparateMessage.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "applyPersistentHealing", {
+        name: `${MODULENAME}.SETTINGS.applyPersistentHealing.name`,
+        hint: `${MODULENAME}.SETTINGS.applyPersistentHealing.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => location.reload(),
+    });
+
+    game.settings.register(MODULENAME, "applyPersistentHealingSeparateMessage", {
+        name: `${MODULENAME}.SETTINGS.applyPersistentHealingSeparateMessage.name`,
+        hint: `${MODULENAME}.SETTINGS.applyPersistentHealingSeparateMessage.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
+        name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
+        hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    //DEPRECATED
+    game.settings.register(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat", {
+        name: `${MODULENAME}.SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.name`,
+        hint: `${MODULENAME}.SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    //DEPRECATED
+    game.settings.register(MODULENAME, "purgeExpiredEffectsEachTurn", {
+        name: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.name`,
+        hint: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    //DEPRECATED
+    game.settings.register(MODULENAME, "enableMoveBeforeCurrentCombatant", {
+        name: `${MODULENAME}.SETTINGS.enableMoveBeforeCurrentCombatant.name`,
+        hint: `${MODULENAME}.SETTINGS.enableMoveBeforeCurrentCombatant.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
     });
 
     mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");
