@@ -33,7 +33,7 @@
       },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn.",
-        "name": "Client setting to aAutomatically decrease the frightened condition each turn."
+        "name": "Client setting to automatically decrease the frightened condition each turn."
       },
       "enableAutomaticMoveBeforeCurrentCombatantOnReaching0HP": {
         "hint": "World setting to enable automatically setting initiative of combatant that goes down to 0 hp outside it's own turn to just before the current combatant.",
