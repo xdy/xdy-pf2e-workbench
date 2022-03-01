@@ -71,7 +71,7 @@ function shouldIHandleThis(message: ChatMessage) {
 async function hooksForEveryone() {
     //Hooks for everyone
     if (game.settings.get(MODULENAME, "autoRollDamageForStrike")) {
-        Hooks.on("createChatMessage", (message: ChatMessage) => {
+        Hooks.on("createChatMessage", async (message: ChatMessage) => {
             const autorollDamageEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
             const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
             if (message.data.type === 5 && autorollDamageEnabled && messageActor && shouldIHandleThis(message)) {
@@ -98,11 +98,11 @@ async function hooksForEveryone() {
                             // @ts-ignore
                             ?.getRollOptions(["all", "damage-roll"]);
                         if (degreeOfSuccess[0].includes("success")) {
-                            relevantStrike?.damage({
+                            await relevantStrike?.damage({
                                 options: rollOptions,
                             });
                         } else if (degreeOfSuccess[0].includes("criticalSuccess")) {
-                            relevantStrike?.critical({
+                            await relevantStrike?.critical({
                                 options: rollOptions,
                             });
                         }
@@ -195,7 +195,6 @@ async function hooksForEveryone() {
             ) {
                 const token = game.combats.active.combatant.token;
                 if (token && token.isOwner) {
-                    console.log(message.data.flavor);
                     if (
                         [
                             game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentHealing.FastHealingLabel`),
