@@ -5,6 +5,7 @@ profile followed by a brief and incomplete description of what this person has c
 
 * [xdy](https://github.com/xdy/) - Started the project, has added most bugs, and keeps adding more bugs.
 * [rectulo](https://github.com/rectulo/) - Contributed the French translation
+* [WesBelmont](https://github.com/WesBelmont/) - Contributed the feature to automatically roll damage for spells (and improved the code to autoroll damage for strikes).
 
 I've probably forgotten someone, if so, please tell me!
 
