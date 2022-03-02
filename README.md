@@ -28,6 +28,8 @@ Attribution for the macros can normally be found inside each macro, and the sour
 * Effects for the Lingering Heroics macro included with the above are now included in the asymonous-benefactor-effects compendium , import these to automatically get the proper duration effect sent to chat.
 * Option to automatically reduce frighted condition at the end of each turn.
 * Option to automatically apply persistent damage (from the awesome [Persistent Damage module](https://github.com/CarlosFdez/pf2e-persistent-damage)) as well as the PF2e system's fast healing and regeneration (with an optional extra debug chat message) inspired by @Jamz' code.
+* Optional setting to automatically roll damage for spell attacks on a hit (including support for heightened spells.) Note that unlike strikes n a critical success still rolls normal damage. Needs the PF2e system setting 'Show results on attacks and saves' to be set so that the attacker can see the result in the chat. (E.g. for non-gm use either 'Owner' or 'All'). Courtesy of @WesBelmont.
+
 
 ## Installation
 
