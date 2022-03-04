@@ -57,36 +57,46 @@ Hooks.once("ready", async () => {
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
 
-function shouldIHandleThis(message: ChatMessage) {
+function shouldIHandleThis(message: ChatMessage, playerCondition: boolean, gmCondition: boolean) {
     const messageUserId = message.data.user;
     const isSenderActive = game.users?.players
         .filter((u) => u.active)
         .filter((u) => !u.isGM)
         .find((u) => u.id === messageUserId);
     const amIMessageSender = messageUserId === game.user?.id;
-    const rollAsPlayer = !game.user?.isGM && amIMessageSender;
-    const rollAsGM = game.user?.isGM && (amIMessageSender || !isSenderActive);
+    const rollAsPlayer = !game.user?.isGM && amIMessageSender && playerCondition;
+    const rollAsGM = game.user?.isGM && (amIMessageSender || !isSenderActive) && gmCondition;
     return rollAsPlayer || rollAsGM;
 }
 
 async function hooksForEveryone() {
     //Hooks for everyone
     if (
-        game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
-        game.settings.get(MODULENAME, "autoRollDamageForSpellAttack")
+        game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
+        (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
+            game.settings.get(MODULENAME, "autoRollDamageForSpellAttack"))
     ) {
         Hooks.on("createChatMessage", async (message: ChatMessage) => {
             const numberOfMessagesToCheck = 5;
-            if (shouldIHandleThis(message)) {
-                const autorollDamageStrikeEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
-                const autorollDamageSpellAttackEnabled = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
+            if (
+                shouldIHandleThis(
+                    message,
+                    ["all", "players"].includes(game.settings.get(MODULENAME, "autoRollDamageAllow")),
+                    ["all", "gm"].includes(game.settings.get(MODULENAME, "autoRollDamageAllow"))
+                )
+            ) {
+                const autoRollDamageForStrikeEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
+                const autoRollDamageForSpellAttackEnabled = game.settings.get(
+                    MODULENAME,
+                    "autoRollDamageForSpellAttack"
+                );
                 const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
                 const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
                 const rollType = flags.context?.type;
                 if (
                     messageActor &&
-                    ((rollType === "attack-roll" && autorollDamageStrikeEnabled) ||
-                        (rollType === "spell-attack-roll" && autorollDamageSpellAttackEnabled))
+                    ((rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
+                        (rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
                 ) {
                     const actionId = <string>flags?.origin?.uuid;
                     const degreeOfSuccess = flags.context?.outcome ?? "";
@@ -107,7 +117,10 @@ async function hooksForEveryone() {
                                     }
                                 }
                             }
-                            if (!levelFromChatCard && game.settings.get(MODULENAME, "notifyOnSpellCardNotFound")) {
+                            if (
+                                !levelFromChatCard &&
+                                game.settings.get(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound")
+                            ) {
                                 ui.notifications.info(
                                     game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
                                         // @ts-ignore
@@ -191,7 +204,11 @@ async function hooksForEveryone() {
                 message.data.speaker.token &&
                 message.data.flavor &&
                 message.roll?.total &&
-                shouldIHandleThis(message) &&
+                shouldIHandleThis(
+                    message,
+                    ["all", "player"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
+                    ["all", "gm"].includes(game.settings.get(MODULENAME, "applyPersistentAllow"))
+                ) &&
                 game.actors
             ) {
                 const token = canvas.tokens?.get(message.data.speaker.token);
@@ -231,7 +248,11 @@ async function hooksForEveryone() {
                 game.combats.active &&
                 game.combats.active.combatant &&
                 game.combats.active.combatant.actor &&
-                shouldIHandleThis(message)
+                shouldIHandleThis(
+                    message,
+                    ["all", "player"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
+                    ["all", "gm"].includes(game.settings.get(MODULENAME, "applyPersistentAllow"))
+                )
             ) {
                 const token = game.combats.active.combatant.token;
                 if (token && token.isOwner) {
@@ -263,6 +284,57 @@ async function hooksForEveryone() {
             }
         });
     }
+
+    Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
+        const settings: [string, ClientSettings.CompleteSetting][] = Array.from(game.settings.settings.entries());
+        settings.forEach((setting: [string, ClientSettings.CompleteSetting]) => {
+            const settingName = setting[0];
+            //TODO Do this in a more elegant way
+            //Disable all dependent persistentDamage settings
+            if (
+                settingName !== `${MODULENAME}.applyPersistentAllow` &&
+                setting[0].startsWith(`${MODULENAME}.applyPersistent`)
+            ) {
+                const applyToggle = !(
+                    game.settings.get(MODULENAME, "applyPersistentAllow") === "none" ||
+                    (game.user?.isGM
+                        ? game.settings.get(MODULENAME, "applyPersistentAllow") === "players"
+                        : game.settings.get(MODULENAME, "applyPersistentAllow") === "gm")
+                );
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
+            }
+            //Disable all dependent persistentHealing settings
+            if (
+                settingName !== `${MODULENAME}.applyPersistentAllow` &&
+                setting[0].startsWith(`${MODULENAME}.applyPersistent`)
+            ) {
+                const applyToggle = !(
+                    game.settings.get(MODULENAME, "applyPersistentAllow") === "none" ||
+                    (game.user?.isGM
+                        ? game.settings.get(MODULENAME, "applyPersistentAllow") === "players"
+                        : game.settings.get(MODULENAME, "applyPersistentAllow") === "gm")
+                );
+                // const valueFunction = game.settings.get(MODULENAME, "applyPersistentAllow") === "none";
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
+            }
+            if (
+                settingName !== `${MODULENAME}.autoRollDamageAllow` &&
+                setting[0].startsWith(`${MODULENAME}.autoRollDamage`)
+            ) {
+                // const valueFunction = game.settings.get(MODULENAME, "autoRollDamage") === "none";
+                const applyToggle = !(
+                    game.settings.get(MODULENAME, "autoRollDamageAllow") === "none" ||
+                    (game.user?.isGM
+                        ? game.settings.get(MODULENAME, "autoRollDamageAllow") === "players"
+                        : game.settings.get(MODULENAME, "autoRollDamageAllow") === "gm")
+                );
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
+                html.find(`select[name="${settingName}"]`).parent().parent().toggle(applyToggle);
+            }
+        });
+    });
 }
 
 async function hooksForGMInit() {
@@ -367,24 +439,6 @@ async function hooksForGMInit() {
 
                 html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
                 html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-            }
-            //Disable all dependent persistentDamage settings
-            if (
-                settingName !== `${MODULENAME}.applyPersistentDamage` &&
-                setting[0].startsWith(`${MODULENAME}.applyPersistentDamage`)
-            ) {
-                const valueFunction = !game.settings.get(MODULENAME, "applyPersistentDamage");
-
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-            }
-            //Disable all dependent persistentHealing settings
-            if (
-                settingName !== `${MODULENAME}.applyPersistentHealing` &&
-                setting[0].startsWith(`${MODULENAME}.applyPersistentHealing`)
-            ) {
-                const valueFunction = !game.settings.get(MODULENAME, "applyPersistentHealing");
-
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
             }
         });
     });

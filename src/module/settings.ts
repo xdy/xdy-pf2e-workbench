@@ -6,11 +6,16 @@ export let mystifyModifierKey: string;
 declare global {
     namespace ClientSettings {
         interface Values {
+            "xdy-pf2e-workbench.applyPersistentAllow": string;
+            "xdy-pf2e-workbench.applyPersistentDamage": boolean;
+            "xdy-pf2e-workbench.applyPersistentHealing": boolean;
             "xdy-pf2e-workbench.autoCollapseItemChatCardContent": string;
+            "xdy-pf2e-workbench.autoRollDamageAllow": string;
+            "xdy-pf2e-workbench.autoRollDamageNotifyOnSpellCardNotFound": boolean;
+            "xdy-pf2e-workbench.autoRollDamageForSpellAttack": boolean;
             "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
             "xdy-pf2e-workbench.enableAutomaticMove": string;
             "xdy-pf2e-workbench.heroPointHandler": boolean;
-            "xdy-pf2e-workbench.notifyOnSpellCardNotFound": boolean;
             "xdy-pf2e-workbench.npcMystifier": boolean;
             "xdy-pf2e-workbench.npcMystifierAddRandomNumber": boolean;
             "xdy-pf2e-workbench.npcMystifierDemystifyAllTokensBasedOnTheSameActor": boolean;
@@ -38,7 +43,6 @@ declare global {
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
-    //TODO Make a settings menu with the following settings that is set to be restricted to GMs
     game.settings.register(MODULENAME, "heroPointHandler", {
         name: `${MODULENAME}.SETTINGS.heroPointHandler.name`,
         hint: `${MODULENAME}.SETTINGS.heroPointHandler.hint`,
@@ -241,7 +245,21 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    //Settings open for all
+    game.settings.register(MODULENAME, "autoRollDamage", {
+        name: `${MODULENAME}.SETTINGS.autoRollDamage.name`,
+        hint: `${MODULENAME}.SETTINGS.autoRollDamage.hint`,
+        scope: "world",
+        config: true,
+        default: "none",
+        type: String,
+        choices: {
+            none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamage.none`),
+            all: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamage.all`),
+            gm: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamage.gm`),
+            players: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamage.players`),
+        },
+        onChange: () => location.reload(),
+    });
 
     //NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
     game.settings.register(MODULENAME, "autoRollDamageForStrike", {
@@ -264,30 +282,27 @@ export function registerSettings() {
         onChange: () => location.reload(),
     });
 
-    game.settings.register(MODULENAME, "notifyOnSpellCardNotFound", {
-        name: `${MODULENAME}.SETTINGS.notifyOnSpellCardNotFound.name`,
-        hint: `${MODULENAME}.SETTINGS.notifyOnSpellCardNotFound.hint`,
+    game.settings.register(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound", {
+        name: `${MODULENAME}.SETTINGS.autoRollDamageNotifyOnSpellCardNotFound.name`,
+        hint: `${MODULENAME}.SETTINGS.autoRollDamageNotifyOnSpellCardNotFound.hint`,
         scope: "client",
         config: true,
         default: true,
         type: Boolean,
     });
 
-    game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
-        name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
-        hint: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.hint`,
+    game.settings.register(MODULENAME, "applyPersistentAllow", {
+        name: `${MODULENAME}.SETTINGS.applyPersistent.name`,
+        hint: `${MODULENAME}.SETTINGS.applyPersistent.hint`,
         scope: "world",
         config: true,
-        default: "noCollapse",
+        default: "none",
         type: String,
         choices: {
-            noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.noCollapse`),
-            collapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.collapsedDefault`
-            ),
-            nonCollapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.nonCollapsedDefault`
-            ),
+            none: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistent.none`),
+            all: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistent.all`),
+            gm: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistent.gm`),
+            players: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistent.players`),
         },
         onChange: () => location.reload(),
     });
@@ -328,6 +343,25 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
+        name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
+        hint: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.hint`,
+        scope: "world",
+        config: true,
+        default: "noCollapse",
+        type: String,
+        choices: {
+            noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.noCollapse`),
+            collapsedDefault: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.collapsedDefault`
+            ),
+            nonCollapsedDefault: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.nonCollapsedDefault`
+            ),
+        },
+        onChange: () => location.reload(),
     });
 
     game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {

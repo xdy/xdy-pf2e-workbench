@@ -2,21 +2,29 @@
   "xdy-pf2e-workbench": {
     "spellCardNotFound": "The spell card could not be found. Casting {spell} at minimum level for that spell.",
     "SETTINGS": {
+      "applyPersistentAllow": {
+        "hint": "World setting for who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options.",
+        "name": "World setting for who is allowed to set the option to automatically apply persistent damage/healing.",
+        "none": "None",
+        "all": "All",
+        "gm": "GM",
+        "players": "Players"
+      },
       "applyPersistentDamage": {
         "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module. Save settings to show/hide additional options.",
-        "name": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module. Save settings to show/hide additional options.",
+        "name": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
         "wasDamaged": "{damage} damage was automatically applied"
-      },
-      "applyPersistentHealing": {
-        "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
-        "name": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
-        "FastHealingLabel": "Received Fast Healing",
-        "RegenerationLabel": "Received Regeneration",
-        "wasHealed": "{healing} healing was automatically applied."
       },
       "applyPersistentDamageSeparateMessage": {
         "name": "Client setting to show separate persistent damage message",
         "hint": "Client setting to show separate persistent damage message"
+      },
+      "applyPersistentHealing": {
+        "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
+        "name": "Client setting to automatically apply persistent healing rolled by the system.",
+        "FastHealingLabel": "Received Fast Healing",
+        "RegenerationLabel": "Received Regeneration",
+        "wasHealed": "{healing} healing was automatically applied."
       },
       "applyPersistentHealingSeparateMessage": {
         "name": "Client setting to show separate persistent healing message",
@@ -29,6 +37,14 @@
         "collapsedDefault": "Collapsed by default, click title to expand.",
         "nonCollapsedDefault": "Expanded by default, click title to collapse."
       },
+      "autoRollDamageAllow": {
+        "hint": "World setting for who is allowed to set the option to automatically roll damage on a hit. Save settings to show/hide additional options.",
+        "name": "World setting for who is allowed to set the option to automatically roll damage on a hit.",
+        "none": "None",
+        "all": "All",
+        "gm": "GM",
+        "players": "Players"
+      },
       "autoRollDamageForStrike": {
         "hint": "Client setting to automatically roll damage for strikes that hit. Note that critical hits roll critical damage.",
         "name": "Client setting to automatically roll damage for strikes that hit."
@@ -37,7 +53,7 @@
         "hint": "Client setting to automatically roll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
         "name": "Client setting to automatically roll damage for spell attacks that hit."
       },
-      "notifyOnSpellCardNotFound": {
+      "autoRollDamageNotifyOnSpellCardNotFound": {
         "hint": "Client setting to notify when a spell attack is rolled and no spell card was found to roll damage for.",
         "name": "Client setting to notify when a spell attack is rolled and no spell card was found."
       },
