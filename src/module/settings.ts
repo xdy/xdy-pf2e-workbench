@@ -348,7 +348,7 @@ export function registerSettings() {
     game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
         name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
         hint: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.hint`,
-        scope: "world",
+        scope: "client",
         config: true,
         default: "noCollapse",
         type: String,

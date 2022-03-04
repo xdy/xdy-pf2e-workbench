@@ -10,25 +10,27 @@ modules and may well be eaten by the system at some point.
 
 My current ideas (as in, no guarantee they'll ever actually get done) can be seen [here](featureIdeas.md)
 
-## Current features (in the order they were added)
+## Current features (in no particular order)
 
 * NPC Mystification. Sets the name of a token on the current scene based on it's traits if mystified by dragging it from the sidebar while holding the configured modifier key, clicking the mystify button in the token hud or using the mystify keyboard shortcut (no default set). There are several options to filter out certain types of traits. A prefix or postfix can be added to the mystified name (either a user-provided word, or one rolled on a user-provided rollable table). A random number can also be added after the postfix, and optionally be kept when demystifying the creature. E.g. 'Skeletal Champion' could become 'Jack the Mindless Undead Skeleton 23'. Note that player owned tokens are not mystified.
-* Optional keybind and combat context menu to move the selected combatant to before the current combatant in the
-  initiative order (normally used when the current combatant has just killed the selected combatant).
-* Optional feature to automatically move combatant that goes to 0 hp to just before the current combatant. (See above.)
-* Optional feature to automatically move combatant that gets the Dying condition to just before the current combatant. (See above.)
-* (Still in the module, but a variant is in the system) Option to automatically purge all expired effects each turn.
+* Hero point handler feature. Adds an optional keybind to open a dialog that can reset or add hero points for all characters, add one hero point to a random (or selected) character (on new timers only) and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.  Timer now survives refreshes. Reopen the dialog to see how much time remains (press escape to leave without changes).
+* Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, actions, etc). Can be configured to default to collapsed or expanded.
+* Optional settings to (if the GM allows it) automatically roll damage a hit for the below. Needs the PF2e system setting 'Show results on attacks and saves' to be set so that the attacker can see the result in the chat. (E.g. for non-gm use either 'Owner' or 'All').
+  * Strikes. On a critical success it rolls critical damage.
+  * Spell attacks (incl support for heightened spells). On a critical success it rolls normal damage, use the 'double damage' button on the damage card. Courtesy of @WesBelmont
+* Optional settings to (if the GM allows it) automatically apply persistent damage (from the awesome [Persistent Damage module](https://github.com/CarlosFdez/pf2e-persistent-damage)) as well as the PF2e system's fast healing and regeneration (with an optional extra debug chat message) inspired by @Jamz' code.
 * Optional keybinds for executing a macro in any position on any page of the macro hotbar, whether that page is currently showing or not.
-* Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, etc, might hit others as well). Click on title to expand again.
-* Optional setting to automatically roll damage for Strikes on a hit. On a critical success it rolls critical damage. Needs the PF2e system setting 'Show results on attacks and saves' to be set so that the attacker can see the result in the chat. (E.g. for non-gm use either 'Owner' or 'All').
-* Experimental hero point handler feature. Adds an optional keybind to open a dialog that can reset or add hero points for all characters, add one hero point to a random (or selected) character (on new timers only) and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.  Timer now survives refreshes. Reopen the dialog to see how much time remains (press escape to leave without changes).
+* The latest versions of all V9-compatible macros from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e are included in each Workbench release. They can be found in the asymonous-benefactor-macros compendium, with the express permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor. Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of each macro. Do not import the macros named like 'XDY DO_NOT_IMPORT', instead import the ones with proper names. Effects for the Lingering Heroics macro included with the above are now included in the asymonous-benefactor-effects compendium, import these to automatically get the proper duration effect sent to chat.
+* Option to automatically reduce the Frightened condition at the end of each turn.
+* Options to automatically move combatant that goes to 0 hp and/or gets the Dying condition to just before the current combatant. (Normally due to the current combatant just having downed the target combatant.)
+
+Experimental features:
+None right now. (Though some feature settings are experimental.)
+
+Deprecated features (will be removed eventually):
+* (Still in the module, but a variant is in the system) Option to automatically purge all expired effects each turn.
 * (Still in the module, but a variant is in the system) Option to automatically purge all expired effects every time the game world clock increases out of combat.
-* From now on each release of PF2e Workbench will include the latest versions of all V9-compatible macros from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e They can be found in the asymonous-benefactor-macros compendium, with the express permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor.
-Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of each macro. Do not import the macros named like 'XDY DO_NOT_IMPORT', instead import the ones with proper names.
-* Effects for the Lingering Heroics macro included with the above are now included in the asymonous-benefactor-effects compendium , import these to automatically get the proper duration effect sent to chat.
-* Option to automatically reduce frighted condition at the end of each turn.
-* Option to automatically apply persistent damage (from the awesome [Persistent Damage module](https://github.com/CarlosFdez/pf2e-persistent-damage)) as well as the PF2e system's fast healing and regeneration (with an optional extra debug chat message) inspired by @Jamz' code.
-* Optional setting to automatically roll damage for spell attacks on a hit (including support for heightened spells.) Note that unlike strikes n a critical success still rolls normal damage. Needs the PF2e system setting 'Show results on attacks and saves' to be set so that the attacker can see the result in the chat. (E.g. for non-gm use either 'Owner' or 'All'). Courtesy of @WesBelmont.
+* (Still in the module, but the system has drag and drop initiative) Optional combat context menu to move the selected combatant to before the current combatant in the initiative order (normally used when the current combatant has just killed the selected combatant).
 
 
 ## Installation
