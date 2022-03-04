@@ -289,9 +289,7 @@ export function registerSettings() {
                 `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.nonCollapsedDefault`
             ),
         },
-        onChange() {
-            ui.chat.render();
-        },
+        onChange: () => location.reload(),
     });
 
     game.settings.register(MODULENAME, "applyPersistentDamage", {

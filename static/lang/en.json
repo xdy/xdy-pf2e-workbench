@@ -23,8 +23,11 @@
         "hint": "Client setting to show separate persistent healing message"
       },
       "autoCollapseItemChatCardContent": {
-        "hint": "Client setting to automatically collapse item chat card content. Click the card title to expand.",
-        "name": "Client setting to automatically collapse item chat card content."
+        "hint": "Client setting to automatically collapse item chat card content.",
+        "name": "Client setting to automatically collapse item chat card content.",
+        "noCollapse": "Never collapse",
+        "collapsedDefault": "Collapsed by default, click title to expand.",
+        "nonCollapsedDefault": "Expanded by default, click title to collapse."
       },
       "autoRollDamageForStrike": {
         "hint": "Client setting to automatically roll damage for strikes that hit. Note that critical hits roll critical damage.",
