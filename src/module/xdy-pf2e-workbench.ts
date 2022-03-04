@@ -206,7 +206,7 @@ async function hooksForEveryone() {
                 message.roll?.total &&
                 shouldIHandleThis(
                     message,
-                    ["all", "player"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
+                    ["all", "players"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
                     ["all", "gm"].includes(game.settings.get(MODULENAME, "applyPersistentAllow"))
                 ) &&
                 game.actors
@@ -250,7 +250,7 @@ async function hooksForEveryone() {
                 game.combats.active.combatant.actor &&
                 shouldIHandleThis(
                     message,
-                    ["all", "player"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
+                    ["all", "players"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
                     ["all", "gm"].includes(game.settings.get(MODULENAME, "applyPersistentAllow"))
                 )
             ) {
