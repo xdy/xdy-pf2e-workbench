@@ -6,7 +6,7 @@ export let mystifyModifierKey: string;
 declare global {
     namespace ClientSettings {
         interface Values {
-            "xdy-pf2e-workbench.autoCollapseItemChatCardContent": boolean;
+            "xdy-pf2e-workbench.autoCollapseItemChatCardContent": string;
             "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
             "xdy-pf2e-workbench.enableAutomaticMove": string;
             "xdy-pf2e-workbench.heroPointHandler": boolean;
@@ -276,10 +276,19 @@ export function registerSettings() {
     game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
         name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
         hint: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.hint`,
-        scope: "client",
+        scope: "world",
         config: true,
-        default: false,
-        type: Boolean,
+        default: "noCollapse",
+        type: String,
+        choices: {
+            noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.noCollapse`),
+            collapsedDefault: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.collapsedDefault`
+            ),
+            nonCollapsedDefault: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.nonCollapsedDefault`
+            ),
+        },
         onChange() {
             ui.chat.render();
         },

@@ -149,21 +149,24 @@ async function hooksForEveryone() {
         });
     }
 
-    if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) {
+    if (
+        game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+        game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
+    ) {
         Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
-            if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) {
+            if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
                 html.find(".card-content").hide();
-                html.on("click", "h3", (event: JQuery.ClickEvent) => {
-                    const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
-                    if (content && content.style) {
-                        event.preventDefault();
-                        content.style.display = content.style.display === "none" ? "block" : "none";
-                        if (content.style.display === "none") {
-                            html.find(".card-content").hide();
-                        }
-                    }
-                });
             }
+            html.on("click", "h3", (event: JQuery.ClickEvent) => {
+                const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
+                if (content && content.style) {
+                    event.preventDefault();
+                    content.style.display = content.style.display === "none" ? "block" : "none";
+                    if (content.style.display === "none") {
+                        html.find(".card-content").hide();
+                    }
+                }
+            });
         });
     }
 
