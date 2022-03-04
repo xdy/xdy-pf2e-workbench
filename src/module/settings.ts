@@ -245,18 +245,18 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    game.settings.register(MODULENAME, "autoRollDamage", {
-        name: `${MODULENAME}.SETTINGS.autoRollDamage.name`,
-        hint: `${MODULENAME}.SETTINGS.autoRollDamage.hint`,
+    game.settings.register(MODULENAME, "autoRollDamageAllow", {
+        name: `${MODULENAME}.SETTINGS.autoRollDamageAllow.name`,
+        hint: `${MODULENAME}.SETTINGS.autoRollDamageAllow.hint`,
         scope: "world",
         config: true,
         default: "none",
         type: String,
         choices: {
-            none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamage.none`),
-            all: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamage.all`),
-            gm: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamage.gm`),
-            players: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamage.players`),
+            none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.none`),
+            all: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.all`),
+            gm: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.gm`),
+            players: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.players`),
         },
         onChange: () => location.reload(),
     });
@@ -292,17 +292,17 @@ export function registerSettings() {
     });
 
     game.settings.register(MODULENAME, "applyPersistentAllow", {
-        name: `${MODULENAME}.SETTINGS.applyPersistent.name`,
-        hint: `${MODULENAME}.SETTINGS.applyPersistent.hint`,
+        name: `${MODULENAME}.SETTINGS.applyPersistentAllow.name`,
+        hint: `${MODULENAME}.SETTINGS.applyPersistentAllow.hint`,
         scope: "world",
         config: true,
         default: "none",
         type: String,
         choices: {
-            none: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistent.none`),
-            all: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistent.all`),
-            gm: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistent.gm`),
-            players: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistent.players`),
+            none: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentAllow.none`),
+            all: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentAllow.all`),
+            gm: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentAllow.gm`),
+            players: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentAllow.players`),
         },
         onChange: () => location.reload(),
     });
