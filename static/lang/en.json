@@ -62,7 +62,7 @@
         "name": "Client setting to automatically decrease the frightened condition each turn."
       },
       "enableAutomaticMove": {
-        "hint": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant.",
+        "hint": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
         "name": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant.",
         "noAutomation": "Never",
         "reaching0HP": "When combatant reaches 0 HP.",
@@ -110,7 +110,7 @@
       },
       "npcMystifier": {
         "hint": "World setting to turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene. Save settings to show/hide additional options.",
-        "name": "World setting to turn on npc mystifier. Save settings to show/hide additional options."
+        "name": "World setting to turn on npc mystifier."
       },
       "npcMystifierAddRandomNumber": {
         "hint": "World setting that turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.",
