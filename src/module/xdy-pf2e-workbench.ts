@@ -91,10 +91,14 @@ async function hooksForEveryone() {
                     "autoRollDamageForSpellAttack"
                 );
                 const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
+                const messageToken: TokenDocument = <TokenDocument>(
+                    canvas?.scene?.tokens.get(<string>message.data.speaker.token)
+                );
                 const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
                 const rollType = flags.context?.type;
                 if (
                     messageActor &&
+                    messageToken &&
                     ((rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
                         (rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
                 ) {
@@ -142,14 +146,40 @@ async function hooksForEveryone() {
                         }
                     } else if (rollType === "attack-roll") {
                         //@ts-ignore
-                        const rollOptions = messageActor?.getRollOptions(["all", "damage-roll"]);
+                        const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
                         // @ts-ignore
-                        const actions = messageActor.data.data.actions;
+                        const actions: any =
+                            // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
+                            messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
+                            // @ts-ignore
+                            messageActor?.data.data?.actions;
                         const actionIds = actionId.match(/Item.(\w+)/);
+                        let action: any;
                         if (actionIds && actionIds[1]) {
-                            const action = actions
-                                .filter((a: { type: string }) => a.type === "strike")
-                                .find((a: { item: { id: any } }) => a.item.id === actionIds[1]);
+                            const strikes = actions.filter((a: { type: string }) => a.type === "strike");
+                            const itemStrikes = strikes.filter(
+                                (a: { item: { id: any } }) => a.item.id === actionIds[1]
+                            );
+                            if (itemStrikes.length === 1) {
+                                //Normal case
+                                action = itemStrikes[0];
+                            } else if (itemStrikes.length > 1) {
+                                //The strike is most likely based on an RE which means that all actions get the same item id (e.g. animal form), try to regex it out of the message instead
+                                const strikeName = message.data.flavor?.match(
+                                    `<h4 class="action">${game.i18n.localize(
+                                        `${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`
+                                    )}: (.*?)<\\/h4>`
+                                );
+                                if (strikeName && strikeName[1]) {
+                                    action = strikes.find((a: { name: string }) => a.name === strikeName[1]);
+                                } else {
+                                    //If we can't find the strike name, give up.
+                                    action = null;
+                                }
+                            } else {
+                                //If we can't find the strike, give up.
+                                action = null;
+                            }
                             if (degreeOfSuccess === "success") {
                                 action?.damage({ options: rollOptions });
                             } else if (degreeOfSuccess === "criticalSuccess") {

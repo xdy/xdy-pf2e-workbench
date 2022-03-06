@@ -47,7 +47,8 @@
       },
       "autoRollDamageForStrike": {
         "hint": "Client setting to automatically roll damage for strikes that hit. Note that critical hits roll critical damage.",
-        "name": "Client setting to automatically roll damage for strikes that hit."
+        "name": "Client setting to automatically roll damage for strikes that hit.",
+        "strike": "Strike"
       },
       "autoRollDamageForSpellAttack": {
         "hint": "Client setting to automatically roll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
