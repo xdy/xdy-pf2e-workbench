@@ -15,7 +15,7 @@ import { registerSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/mystify-token";
 import { registerKeybindings } from "./keybinds";
 import { getCombatantById, moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
-import { calcRemainingMinutes, handleTimer } from "./feature/heroPointHandler";
+import { calcRemainingMinutes, startTimer } from "./feature/heroPointHandler";
 import { ActorFlagsPF2e, SpellPF2e } from "../types/pf2etypes";
 
 export const MODULENAME = "xdy-pf2e-workbench";
@@ -454,7 +454,7 @@ async function hooksForGMInit() {
 
     if (game.settings.get(MODULENAME, "heroPointHandler")) {
         if (game.user?.isGM) {
-            await handleTimer(calcRemainingMinutes());
+            await startTimer(calcRemainingMinutes());
         }
     }
 

@@ -2,7 +2,7 @@
 import { MODULENAME } from "./xdy-pf2e-workbench";
 import { moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
 import { canMystify, doMystification, isTokenMystified } from "./feature/mystify-token";
-import { heroPointHandler } from "./feature/heroPointHandler";
+import { heroPointHandler, HPHState } from "./feature/heroPointHandler";
 
 export function registerKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);
@@ -16,7 +16,11 @@ export function registerKeybindings() {
         editable: [],
         onDown: () => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
-                heroPointHandler();
+                heroPointHandler(
+                    game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes")
+                        ? HPHState.Check
+                        : HPHState.Start
+                );
             }
             return true;
         },

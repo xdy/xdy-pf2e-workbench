@@ -93,7 +93,7 @@
         "timerStopped": "Hero Points timer is stopped.",
         "timerValue": "Timer value",
         "title": "Hero Point Handler",
-        "willBeResetIn": "Hero Points will be reset in {remainingMinutes} minutes ({time})."
+        "willBeResetIn": "Hero Point Handler returns in {remainingMinutes} minutes ({time})."
       },
       "heroPointHandlerKey": {
         "hint": "World keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
