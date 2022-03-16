@@ -56,7 +56,7 @@
         "fs-extra": "^10.0.1",
         "lint-staged": "^12.3.5",
         "mini-css-extract-plugin": "^2.6.0",
-        "prettier": "^2.5.1",
+        "prettier": "^2.6.0",
         "semantic-release": "^19.0.2",
         "simple-progress-webpack-plugin": "^2.0.0",
         "terser-webpack-plugin": "^5.3.1",
