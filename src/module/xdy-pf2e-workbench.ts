@@ -57,16 +57,25 @@ Hooks.once("ready", async () => {
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
 
-function shouldIHandleThis(message: ChatMessage, playerCondition: boolean, gmCondition: boolean) {
-    const messageUserId = message.data.user;
-    const isSenderActive = game.users?.players
+function shouldIHandleThis(
+    userId: string | undefined | null,
+    playerCondition = true,
+    gmCondition = true,
+    extraCondition = false
+) {
+    const isUserActive = game.users?.players
         .filter((u) => u.active)
         .filter((u) => !u.isGM)
-        .find((u) => u.id === messageUserId);
-    const amIMessageSender = messageUserId === game.user?.id;
-    const rollAsPlayer = !game.user?.isGM && amIMessageSender && playerCondition;
-    const rollAsGM = game.user?.isGM && (amIMessageSender || !isSenderActive) && gmCondition;
+        .find((u) => u.id === userId);
+    const rollAsPlayer = !game.user?.isGM && extraCondition && playerCondition;
+    const rollAsGM = game.user?.isGM && (extraCondition || !isUserActive) && gmCondition;
     return rollAsPlayer || rollAsGM;
+}
+
+function shouldIHandleThisMessage(message: ChatMessage, playerCondition: boolean, gmCondition: boolean) {
+    const userId = message.data.user;
+    const amIMessageSender = userId === game.user?.id;
+    return shouldIHandleThis(userId, playerCondition, gmCondition, amIMessageSender);
 }
 
 async function hooksForEveryone() {
@@ -79,7 +88,7 @@ async function hooksForEveryone() {
         Hooks.on("createChatMessage", async (message: ChatMessage) => {
             const numberOfMessagesToCheck = 5;
             if (
-                shouldIHandleThis(
+                shouldIHandleThisMessage(
                     message,
                     ["all", "players"].includes(game.settings.get(MODULENAME, "autoRollDamageAllow")),
                     ["all", "gm"].includes(game.settings.get(MODULENAME, "autoRollDamageAllow"))
@@ -215,7 +224,12 @@ async function hooksForEveryone() {
 
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
         Hooks.on("pf2e.endTurn", async (combatant: Combatant, _combat: Combat, _userId: string) => {
-            if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn") && combatant && combatant.actor) {
+            if (
+                game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn") &&
+                combatant &&
+                combatant.actor &&
+                shouldIHandleThis(combatant.isOwner ? game.user?.id : null)
+            ) {
                 //@ts-ignore Only pf2e actor has the hasCondition method and I haven't the type for that, so...
                 if (combatant.actor.hasCondition("frightened")) {
                     // @ts-ignore
@@ -234,7 +248,7 @@ async function hooksForEveryone() {
                 message.data.speaker.token &&
                 message.data.flavor &&
                 message.roll?.total &&
-                shouldIHandleThis(
+                shouldIHandleThisMessage(
                     message,
                     ["all", "players"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
                     ["all", "gm"].includes(game.settings.get(MODULENAME, "applyPersistentAllow"))
@@ -278,7 +292,7 @@ async function hooksForEveryone() {
                 game.combats.active &&
                 game.combats.active.combatant &&
                 game.combats.active.combatant.actor &&
-                shouldIHandleThis(
+                shouldIHandleThisMessage(
                     message,
                     ["all", "players"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
                     ["all", "gm"].includes(game.settings.get(MODULENAME, "applyPersistentAllow"))

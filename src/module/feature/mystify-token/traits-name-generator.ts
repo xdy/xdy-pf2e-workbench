@@ -1,8 +1,6 @@
 import { TRAITS } from "../../xdy-pf2e-constants";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 
-// eslint-disable-next-line import/named
-
 async function fixesPreAndPost(settingkey: string): Promise<string> {
     const fixSetting: string = <string>game.settings.get(MODULENAME, settingkey);
 
