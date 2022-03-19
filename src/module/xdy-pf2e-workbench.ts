@@ -78,6 +78,31 @@ function shouldIHandleThisMessage(message: ChatMessage, playerCondition: boolean
     return shouldIHandleThis(userId, playerCondition, gmCondition, amIMessageSender);
 }
 
+function getActionFromMessage(actions: any, actionIds: RegExpMatchArray, message: ChatMessage) {
+    const strikes = actions.filter((a: { type: string }) => a.type === "strike");
+    const itemStrikes = strikes.filter((a: { item: { id: any } }) => a.item.id === actionIds[1]);
+    if (itemStrikes.length === 1) {
+        //Normal case
+        return itemStrikes[0];
+    } else if (itemStrikes.length > 1) {
+        //The strike is most likely based on an RE which means that all actions get the same item id (e.g. animal form), try to regex it out of the message instead
+        const strikeName = message.data.flavor?.match(
+            `<h4 class="action">${game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`
+            )}: (.*?)<\\/h4>`
+        );
+        if (strikeName && strikeName[1]) {
+            return strikes.find((a: { name: string }) => a.name === strikeName[1]);
+        } else {
+            //If we can't find the strike name, give up.
+            return null;
+        }
+    } else {
+        //If we can't find the strike, give up.
+        return null;
+    }
+}
+
 async function hooksForEveryone() {
     //Hooks for everyone
     if (
@@ -165,35 +190,58 @@ async function hooksForEveryone() {
                         const actionIds = actionId.match(/Item.(\w+)/);
                         let action: any;
                         if (actionIds && actionIds[1]) {
-                            const strikes = actions.filter((a: { type: string }) => a.type === "strike");
-                            const itemStrikes = strikes.filter(
-                                (a: { item: { id: any } }) => a.item.id === actionIds[1]
-                            );
-                            if (itemStrikes.length === 1) {
-                                //Normal case
-                                action = itemStrikes[0];
-                            } else if (itemStrikes.length > 1) {
-                                //The strike is most likely based on an RE which means that all actions get the same item id (e.g. animal form), try to regex it out of the message instead
-                                const strikeName = message.data.flavor?.match(
-                                    `<h4 class="action">${game.i18n.localize(
-                                        `${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`
-                                    )}: (.*?)<\\/h4>`
-                                );
-                                if (strikeName && strikeName[1]) {
-                                    action = strikes.find((a: { name: string }) => a.name === strikeName[1]);
-                                } else {
-                                    //If we can't find the strike name, give up.
-                                    action = null;
-                                }
-                            } else {
-                                //If we can't find the strike, give up.
-                                action = null;
-                            }
+                            action = getActionFromMessage(actions, actionIds, message);
                             if (degreeOfSuccess === "success") {
                                 action?.damage({ options: rollOptions });
                             } else if (degreeOfSuccess === "criticalSuccess") {
                                 action?.critical({ options: rollOptions });
                             }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "aaOnMiss")) {
+        Hooks.on("createChatMessage", async (message: ChatMessage) => {
+            if (game.modules.get("autoanimations") && game.settings.get(MODULENAME, "aaOnMiss")) {
+                const messageToken: TokenDocument = <TokenDocument>(
+                    canvas?.scene?.tokens.get(<string>message.data.speaker.token)
+                );
+                const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
+                const rollType = flags.context?.type;
+                if (messageToken && rollType === "attack-roll") {
+                    const degreeOfSuccess = flags.context?.outcome ?? "";
+                    if (degreeOfSuccess === "failure" || degreeOfSuccess === "criticalFailure") {
+                        const pack = game.packs.get("xdy-pf2e-workbench.xdy-pf2e-workbench-items");
+                        const item = ((await pack?.getDocuments()) ?? []).find(
+                            (item: any) => item.data.name === "AA Miss"
+                        );
+
+                        if (pack && item) {
+                            //Needs to be unlocked for some reason. Meh.
+                            await pack.configure({ locked: false });
+                            // @ts-ignore
+                            await item.setFlag(
+                                "autoanimations",
+                                "options.customPath",
+                                game.settings.get(MODULENAME, "aaOnMissAnimation")
+                            );
+                            // @ts-ignore
+                            await item.setFlag(
+                                "autoanimations",
+                                "audio.a01.file",
+                                game.settings.get(MODULENAME, "aaOnMissSound")
+                            );
+                            // @ts-ignore
+                            await AutoAnimations.playAnimation(
+                                messageToken,
+                                // @ts-ignore
+                                Array.from(message.user.targets),
+                                item,
+                                { playOnMiss: true }
+                            );
                         }
                     }
                 }
@@ -475,14 +523,20 @@ async function hooksForGMInit() {
     Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
         const settings: [string, ClientSettings.CompleteSetting][] = Array.from(game.settings.settings.entries());
         settings.forEach((setting: [string, ClientSettings.CompleteSetting]) => {
-            const settingName = setting[0];
+            const name = setting[0];
             //TODO Do this in a more elegant way
             //Disable all dependent npcMystifier settings
-            if (settingName !== `${MODULENAME}.npcMystifier` && setting[0].startsWith(`${MODULENAME}.npcMystifier`)) {
+            if (name !== `${MODULENAME}.npcMystifier` && setting[0].startsWith(`${MODULENAME}.npcMystifier`)) {
                 const valueFunction = !game.settings.get(MODULENAME, "npcMystifier");
 
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-                html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`input[name="${name}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`select[name="${name}"]`).parent().parent().toggle(!valueFunction);
+            }
+            if (name !== `${MODULENAME}.aaOnMiss` && setting[0].startsWith(`${MODULENAME}.aaOnMiss`)) {
+                const valueFunction = !game.settings.get(MODULENAME, "aaOnMiss");
+
+                html.find(`input[name="${name}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`select[name="${name}"]`).parent().parent().toggle(!valueFunction);
             }
         });
     });

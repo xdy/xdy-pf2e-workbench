@@ -1,82 +1,96 @@
 {
-    "name": "xdy-pf2e-workbench",
-    "title": "PF2e Workbench",
-    "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
-    "version": "2.33.9",
-    "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9",
-    "scripts": [],
-    "esmodules": ["xdy-pf2e-workbench.bundle.js"],
-    "styles": ["styles/xdy-pf2e-workbench.css"],
-    "packs": [
-        {
-            "name": "asymonous-benefactor-macros",
-            "label": "asymonous-benefactor-macros",
-            "system": "pf2e",
-            "path": "packs/asymonous-benefactor-macros.db",
-            "module": "xdy-pf2e-workbench",
-            "entity": "Macro"
-        },
-        {
-            "name": "asymonous-benefactor-effects",
-            "label": "asymonous-benefactor-effects.db",
-            "system": "pf2e",
-            "path": "packs/asymonous-benefactor-effects.db",
-            "module": "xdy-pf2e-workbench",
-            "entity": "Item"
-        }
-    ],
-    "dependencies": [],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
-            "path": "lang/en.json"
-        },
-        {
-            "lang": "fr",
-            "name": "Français",
-            "path": "lang/fr.json"
-        },
-        {
-            "lang": "sv",
-            "name": "Svenska",
-            "path": "lang/sv.json"
-        }
-    ],
-    "system": ["pf2e"],
-    "author": "Jonas Karlsson",
-    "authors": [
-        {
-            "name": "Jonas Karlsson (xdy)",
-            "url": "https://gnu.xdy.se/home"
-        }
-    ],
-    "socket": false,
-    "url": "https://github.com/xdy/xdy-pf2e-workbench/",
-    "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json",
-    "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/xdy-pf2e-workbench.zip",
-    "license": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/LICENSE.md",
-    "readme": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/README.md",
-    "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
-    "changelog": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/CHANGELOG.md",
-    "library": false,
-    "media": [
-        {
-            "type": "cover",
-            "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/master/static/assets/media/pf2e_workshop_cover_compressed.webp",
-            "caption": "PF2e Workbench"
-        }
-    ],
-    "flags": {
-        "media": [
-            {
-                "type": "cover",
-                "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/master/static/assets/media/pf2e_workshop_cover_compressed.webp",
-                "caption": "PF2e Workbench"
-            }
-        ],
-        "manifestPlusVersion": "1.2.0",
-        "allowBugReporter": true
+  "name": "xdy-pf2e-workbench",
+  "title": "PF2e Workbench",
+  "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
+  "version": "2.33.9",
+  "minimumCoreVersion": "9",
+  "compatibleCoreVersion": "9",
+  "scripts": [],
+  "esmodules": [
+    "xdy-pf2e-workbench.bundle.js"
+  ],
+  "styles": [
+    "styles/xdy-pf2e-workbench.css"
+  ],
+  "packs": [
+    {
+      "name": "asymonous-benefactor-macros",
+      "label": "asymonous-benefactor-macros",
+      "system": "pf2e",
+      "path": "packs/asymonous-benefactor-macros.db",
+      "module": "xdy-pf2e-workbench",
+      "entity": "Macro"
+    },
+    {
+      "name": "asymonous-benefactor-effects",
+      "label": "asymonous-benefactor-effects.db",
+      "system": "pf2e",
+      "path": "packs/asymonous-benefactor-effects.db",
+      "module": "xdy-pf2e-workbench",
+      "entity": "Item"
+    },
+    {
+      "name": "xdy-pf2e-workbench-items",
+      "label": "xdy-pf2e-workbench-items",
+      "system": "pf2e",
+      "path": "packs/xdy-pf2e-workbench-items.db",
+      "module": "xdy-pf2e-workbench",
+      "entity": "Item"
     }
+  ],
+  "dependencies": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json"
+    },
+    {
+      "lang": "sv",
+      "name": "Svenska",
+      "path": "lang/sv.json"
+    }
+  ],
+  "system": [
+    "pf2e"
+  ],
+  "author": "Jonas Karlsson",
+  "authors": [
+    {
+      "name": "Jonas Karlsson (xdy)",
+      "url": "https://gnu.xdy.se/home"
+    }
+  ],
+  "socket": false,
+  "url": "https://github.com/xdy/xdy-pf2e-workbench/",
+  "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json",
+  "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/xdy-pf2e-workbench.zip",
+  "license": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/LICENSE.md",
+  "readme": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/README.md",
+  "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
+  "changelog": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/CHANGELOG.md",
+  "library": false,
+  "media": [
+    {
+      "type": "cover",
+      "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/master/static/assets/media/pf2e_workshop_cover_compressed.webp",
+      "caption": "PF2e Workbench"
+    }
+  ],
+  "flags": {
+    "media": [
+      {
+        "type": "cover",
+        "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/master/static/assets/media/pf2e_workshop_cover_compressed.webp",
+        "caption": "PF2e Workbench"
+      }
+    ],
+    "manifestPlusVersion": "1.2.0",
+    "allowBugReporter": true
+  }
 }

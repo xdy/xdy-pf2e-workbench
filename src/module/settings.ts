@@ -6,6 +6,7 @@ export let mystifyModifierKey: string;
 declare global {
     namespace ClientSettings {
         interface Values {
+            "xdy-pf2e-workbench.aaOnMissEnabled": boolean;
             "xdy-pf2e-workbench.applyPersistentAllow": string;
             "xdy-pf2e-workbench.applyPersistentDamage": boolean;
             "xdy-pf2e-workbench.applyPersistentHealing": boolean;
@@ -258,6 +259,40 @@ export function registerSettings() {
             gm: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.gm`),
             players: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.players`),
         },
+        onChange: () => location.reload(),
+    });
+
+    game.settings.register(MODULENAME, "aaOnMiss", {
+        name: `${MODULENAME}.SETTINGS.aaOnMiss.name`,
+        hint: `${MODULENAME}.SETTINGS.aaOnMiss.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => location.reload(),
+    });
+
+    game.settings.register(MODULENAME, "aaOnMissAnimation", {
+        name: `${MODULENAME}.SETTINGS.aaOnMissAnimation.name`,
+        hint: `${MODULENAME}.SETTINGS.aaOnMissAnimation.hint`,
+        scope: "world",
+        config: true,
+        default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
+        type: String,
+        // @ts-ignore
+        filePicker: "video",
+        onChange: () => location.reload(),
+    });
+
+    game.settings.register(MODULENAME, "aaOnMissSound", {
+        name: `${MODULENAME}.SETTINGS.aaOnMissSound.name`,
+        hint: `${MODULENAME}.SETTINGS.aaOnMissSound.hint`,
+        scope: "world",
+        config: true,
+        default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",
+        type: String,
+        // @ts-ignore
+        filePicker: "audio",
         onChange: () => location.reload(),
     });
 
