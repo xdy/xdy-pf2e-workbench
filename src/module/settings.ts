@@ -281,7 +281,6 @@ export function registerSettings() {
         type: String,
         // @ts-ignore
         filePicker: "video",
-        onChange: () => location.reload(),
     });
 
     game.settings.register(MODULENAME, "aaOnMissSound", {
@@ -293,7 +292,6 @@ export function registerSettings() {
         type: String,
         // @ts-ignore
         filePicker: "audio",
-        onChange: () => location.reload(),
     });
 
     //NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
