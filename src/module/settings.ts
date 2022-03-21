@@ -6,6 +6,16 @@ export let mystifyModifierKey: string;
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
+    game.settings.register(MODULENAME, "abpVariantAllowItemBonuses", {
+        name: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.name`,
+        hint: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => location.reload(),
+    });
+
     game.settings.register(MODULENAME, "heroPointHandler", {
         name: `${MODULENAME}.SETTINGS.heroPointHandler.name`,
         hint: `${MODULENAME}.SETTINGS.heroPointHandler.hint`,

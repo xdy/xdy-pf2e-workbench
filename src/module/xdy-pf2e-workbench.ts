@@ -24,6 +24,11 @@ import { TokenDocumentPF2e } from "../../types/src/module/scene/token-document/d
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
+//Can't put it in types for some reason, so, dumping it here. Webpack is weird.
+export declare class AutomaticBonusProgression {
+    static suppressRuleElement(rule: any): boolean;
+}
+
 // Initialize module
 Hooks.once("init", async () => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
@@ -34,6 +39,11 @@ Hooks.once("init", async () => {
     await preloadTemplates();
     await hooksForEveryone();
     await hooksForGMInit();
+    if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
+        AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(rule: any) {
+            return false;
+        };
+    }
 
     // Register custom sheets (if any)
 });
@@ -589,3 +599,4 @@ function hooksForGMSetup() {
         });
     }
 }
+

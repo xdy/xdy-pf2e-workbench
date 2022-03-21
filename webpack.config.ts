@@ -199,7 +199,7 @@ const config: Configuration = {
         new SimpleProgressWebpackPlugin({ format: "compact" }),
     ],
     resolve: {
-        extensions: [".ts"],
+        extensions: [".ts", ".d.ts"],
     },
     output: {
         clean: true,
