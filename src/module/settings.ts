@@ -246,22 +246,6 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    game.settings.register(MODULENAME, "autoRollDamageAllow", {
-        name: `${MODULENAME}.SETTINGS.autoRollDamageAllow.name`,
-        hint: `${MODULENAME}.SETTINGS.autoRollDamageAllow.hint`,
-        scope: "world",
-        config: true,
-        default: "none",
-        type: String,
-        choices: {
-            none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.none`),
-            all: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.all`),
-            gm: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.gm`),
-            players: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.players`),
-        },
-        onChange: () => location.reload(),
-    });
-
     game.settings.register(MODULENAME, "aaOnMiss", {
         name: `${MODULENAME}.SETTINGS.aaOnMiss.name`,
         hint: `${MODULENAME}.SETTINGS.aaOnMiss.hint`,
@@ -292,6 +276,22 @@ export function registerSettings() {
         type: String,
         // @ts-ignore
         filePicker: "audio",
+    });
+
+    game.settings.register(MODULENAME, "autoRollDamageAllow", {
+        name: `${MODULENAME}.SETTINGS.autoRollDamageAllow.name`,
+        hint: `${MODULENAME}.SETTINGS.autoRollDamageAllow.hint`,
+        scope: "world",
+        config: true,
+        default: "none",
+        type: String,
+        choices: {
+            none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.none`),
+            all: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.all`),
+            gm: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.gm`),
+            players: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.players`),
+        },
+        onChange: () => location.reload(),
     });
 
     //NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
