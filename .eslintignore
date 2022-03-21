@@ -23,5 +23,5 @@ main.bundle.js
 foundryconfig.json
 .eslintrc.js
 webpack.config.ts
-
+types/
 

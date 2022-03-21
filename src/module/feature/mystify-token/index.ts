@@ -1,9 +1,10 @@
 import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { TokenData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import { mystifyModifierKey } from "../../settings";
+import { TokenDataPF2e, TokenDocumentPF2e } from "../../../../types/src/module/scene/token-document";
+import { TokenPF2e } from "../../../../types/src/module/canvas/token";
 
-function shouldSkipRandomNumber(token: Token | TokenDocument) {
+function shouldSkipRandomNumber(token: TokenPF2e | TokenDocumentPF2e) {
     return (
         game.settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
         // @ts-ignore
@@ -11,7 +12,7 @@ function shouldSkipRandomNumber(token: Token | TokenDocument) {
     );
 }
 
-export async function mystifyToken(token: Token | TokenDocument | null, isMystified: boolean): Promise<string> {
+export async function mystifyToken(token: TokenPF2e | TokenDocumentPF2e | null, isMystified: boolean): Promise<string> {
     if (token === null) return "";
     let name = token?.name || "";
     if (token) {
@@ -76,7 +77,7 @@ export async function tokenCreateMystification(token: any) {
     }
 }
 
-export function isTokenMystified(token: Token | TokenDocument | null): boolean {
+export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): boolean {
     const tokenName = token?.data.name;
     const actorName = token?.actor?.name;
     if (tokenName !== actorName && game.settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
@@ -87,7 +88,7 @@ export function isTokenMystified(token: Token | TokenDocument | null): boolean {
     return tokenName !== actorName || false;
 }
 
-export async function doMystification(token: Token, active: boolean) {
+export async function doMystification(token: TokenPF2e, active: boolean) {
     //define array of objects to be updated
     const updates = [
         {
@@ -115,8 +116,8 @@ export async function doMystification(token: Token, active: boolean) {
     return updates;
 }
 
-export function renderNameHud(data: TokenData, html: JQuery) {
-    let token: Token | null;
+export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
+    let token: TokenPF2e | null;
     if (canvas && canvas.tokens) {
         token = canvas.tokens.get(<string>data._id) ?? null;
 

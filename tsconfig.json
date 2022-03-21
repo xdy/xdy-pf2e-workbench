@@ -1,25 +1,86 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": [
       "DOM",
       "ES2021"
     ],
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "paths": {
+      "@actor": [
+        "types/src/module/actor"
+      ],
+      "@actor/*": [
+        "types/src/module/actor/*"
+      ],
+      "@apps": [
+        "types/src/module/actor"
+      ],
+      "@apps/*": [
+        "types/src/module/actor/*"
+      ],
+      "@canvas": [
+        "types/src/module/canvas"
+      ],
+      "@canvas/*": [
+        "types/src/module/canvas/*"
+      ],
+      "@item": [
+        "types/src/module/item"
+      ],
+      "@item/*": [
+        "types/src/module/item/*"
+      ],
+      "@module/*": [
+        "types/src/module/*"
+      ],
+      "@pf2e/*": [
+        "types/src/*"
+      ],
+      "@scene": [
+        "types/src/module/scene"
+      ],
+      "@scene/*": [
+        "types/src/module/scene/*"
+      ],
+      "@scripts/*": [
+        "types/src/scripts/*"
+      ],
+      "@system/*": [
+        "types/src/module/system/*"
+      ],
+      "@util": [
+        "types/src/util"
+      ],
+      "@util/*": [
+        "types/src/util/*"
+      ],
+      // https://github.com/Hypercubed/mini-signals/issues/20
+      "mini-signals": [
+        "node_modules/resource-loader/typings/mini-signals.d.ts"
+      ]
+    },
+    "removeComments": false,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "target": "ES2021",
     "types": [
-      "@league-of-foundry-developers/foundry-vtt-types",
-      "handlebars"
+      "handlebars",
+      "jquery",
+      "node",
+      "socket.io",
     ],
     "typeRoots": [
-      "src/types"
+      "node_modules/@types",
+      "node_modules/handlebars",
+      "types/foundry"
     ],
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "sourceMap": true,
-    "strictNullChecks": true
   },
-  "include": [
-    "src"
-  ]
+  "ts-node": {
+    "files": true
+  }
 }

@@ -5,7 +5,7 @@ module.exports = {
     },
     extends: ["prettier", "plugin:import/errors", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
     parserOptions: {
-        ecmaVersion: 2018,
+        ecmaVersion: 2021,
         sourceType: "module",
         project: "./tsconfig.json",
     },
@@ -32,7 +32,7 @@ module.exports = {
         "import/resolver": {
             node: {
                 paths: ["src", "types", "", "dist"],
-                extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+                extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".d.ts"],
             },
             "eslint-import-resolver-typescript": true,
             typescript: {},

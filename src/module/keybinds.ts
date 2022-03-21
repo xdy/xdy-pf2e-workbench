@@ -3,10 +3,12 @@ import { MODULENAME } from "./xdy-pf2e-workbench";
 import { moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
 import { canMystify, doMystification, isTokenMystified } from "./feature/mystify-token";
 import { heroPointHandler, HPHState } from "./feature/heroPointHandler";
+import { CombatantPF2e } from "../../types/src/module/encounter/combatant";
 
 export function registerKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);
 
+    // @ts-ignore
     const keybindings = game.keybindings;
 
     keybindings.register(MODULENAME, "heroPointHandler", {
@@ -31,11 +33,10 @@ export function registerKeybindings() {
         hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
         restricted: true,
         editable: [],
-        // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
             if (game.user?.isGM) {
                 await moveSelectedAheadOfCurrent(
-                    <Combatant>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
+                    <CombatantPF2e>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
                 );
             }
             return true;
@@ -48,11 +49,10 @@ export function registerKeybindings() {
         hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
         restricted: true,
         editable: [],
-        // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
             if (game.user?.isGM) {
                 await moveSelectedAheadOfCurrent(
-                    <Combatant>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
+                    <CombatantPF2e>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
                 );
             }
             return true;
@@ -65,11 +65,10 @@ export function registerKeybindings() {
         hint: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.hint`,
         restricted: true,
         editable: [],
-        // @ts-ignore Shut up Typescript, it can be async,
         onDown: async () => {
             if (game.settings.get(MODULENAME, "npcMystifier")) {
                 if (canMystify()) {
-                    const updates = [];
+                    const updates: any[] = [];
                     for (const token of canvas?.tokens?.controlled.filter((x) => !x.actor?.hasPlayerOwner) || []) {
                         updates.push(...(await doMystification(token, isTokenMystified(token))));
                     }
@@ -82,6 +81,7 @@ export function registerKeybindings() {
             }
         },
         reservedModifiers: [],
+        // @ts-ignore
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
 
@@ -94,7 +94,7 @@ export function registerKeybindings() {
                 restricted: false,
                 editable: [],
                 onDown: () => {
-                    game.user?.getHotbarMacros(page)[column - 1]?.macro?.execute();
+                    game.user?.getHotbarMacros(page)?.[column - 1]["macro"].execute();
                     return true;
                 },
             });

@@ -3,50 +3,6 @@ import { MODULENAME } from "./xdy-pf2e-workbench";
 
 export let mystifyModifierKey: string;
 
-declare global {
-    namespace ClientSettings {
-        export interface Values {
-            "xdy-pf2e-workbench.automatedAnimationOn": boolean;
-            "xdy-pf2e-workbench.automatedAnimationOnFailAnimation": string;
-            "xdy-pf2e-workbench.automatedAnimationOnFailSound": string;
-            "xdy-pf2e-workbench.automatedAnimationOnCritFailAnimation": string;
-            "xdy-pf2e-workbench.automatedAnimationOnCritFailSound": string;
-            "xdy-pf2e-workbench.automatedAnimationOnCritSuccessAnimation": string;
-            "xdy-pf2e-workbench.automatedAnimationOnCritSuccessSound": string;
-            "xdy-pf2e-workbench.applyPersistentAllow": string;
-            "xdy-pf2e-workbench.applyPersistentDamage": boolean;
-            "xdy-pf2e-workbench.applyPersistentHealing": boolean;
-            "xdy-pf2e-workbench.autoCollapseItemChatCardContent": string;
-            "xdy-pf2e-workbench.autoRollDamageAllow": string;
-            "xdy-pf2e-workbench.autoRollDamageNotifyOnSpellCardNotFound": boolean;
-            "xdy-pf2e-workbench.autoRollDamageForSpellAttack": boolean;
-            "xdy-pf2e-workbench.autoRollDamageForStrike": boolean;
-            "xdy-pf2e-workbench.enableAutomaticMove": string;
-            "xdy-pf2e-workbench.heroPointHandler": boolean;
-            "xdy-pf2e-workbench.npcMystifier": boolean;
-            "xdy-pf2e-workbench.npcMystifierAddRandomNumber": boolean;
-            "xdy-pf2e-workbench.npcMystifierDemystifyAllTokensBasedOnTheSameActor": boolean;
-            "xdy-pf2e-workbench.npcMystifierFilterAlignmentTraits": boolean;
-            "xdy-pf2e-workbench.npcMystifierFilterBlacklist": string;
-            "xdy-pf2e-workbench.npcMystifierFilterCreatureFamilyTraits": boolean;
-            "xdy-pf2e-workbench.npcMystifierFilterCreatureTypesTraits": boolean;
-            "xdy-pf2e-workbench.npcMystifierFilterEliteWeak": boolean;
-            "xdy-pf2e-workbench.npcMystifierFilterOtherTraits": boolean;
-            "xdy-pf2e-workbench.npcMystifierFilterRarities": boolean;
-            "xdy-pf2e-workbench.npcMystifierFilterRaritiesReplacement": string;
-            "xdy-pf2e-workbench.npcMystifierKeepNumberAtEndOfName": boolean;
-            "xdy-pf2e-workbench.npcMystifierMethod": string;
-            "xdy-pf2e-workbench.npcMystifierModifierKey": string;
-            "xdy-pf2e-workbench.npcMystifierPostfix": string;
-            "xdy-pf2e-workbench.npcMystifierPrefix": string;
-            "xdy-pf2e-workbench.npcMystifierSkipRandomNumberForUnique": boolean;
-            "xdy-pf2e-workbench.npcMystifierUseMystifiedNameInChat": boolean;
-            "xdy-pf2e-workbench.purgeExpiredEffectsEachTurn": boolean; //Deprecated
-            "xdy-pf2e-workbench.purgeExpiredEffectsOnTimeIncreaseOutOfCombat": boolean; //Deprecated
-        }
-    }
-}
-
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
@@ -140,7 +96,7 @@ export function registerSettings() {
         },
         default: "CONTROL",
         onChange: (key) => {
-            return (mystifyModifierKey = <string>key);
+            mystifyModifierKey = <string>key;
         },
     });
 
@@ -269,7 +225,6 @@ export function registerSettings() {
         config: true,
         default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
         type: String,
-        // @ts-ignore
         filePicker: "video",
     });
 
@@ -280,7 +235,6 @@ export function registerSettings() {
         config: true,
         default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",
         type: String,
-        // @ts-ignore
         filePicker: "audio",
     });
 
@@ -291,7 +245,6 @@ export function registerSettings() {
         config: true,
         default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
         type: String,
-        // @ts-ignore
         filePicker: "video",
     });
 
@@ -302,7 +255,6 @@ export function registerSettings() {
         config: true,
         default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",
         type: String,
-        // @ts-ignore
         filePicker: "audio",
     });
 
@@ -313,7 +265,6 @@ export function registerSettings() {
         config: true,
         default: "modules/JB2A_DnD5e/Library/Generic/UI/Critical_02_Red_200x200.webm",
         type: String,
-        // @ts-ignore
         filePicker: "video",
     });
 
@@ -324,7 +275,6 @@ export function registerSettings() {
         config: true,
         default: "modules/soundfxlibrary/Combat/Single/Melee%20Hit/melee-hit-13.mp3",
         type: String,
-        // @ts-ignore
         filePicker: "audio",
     });
 

@@ -9,25 +9,21 @@
 //TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
 //TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
 //TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
-
 import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/mystify-token";
 import { registerKeybindings } from "./keybinds";
 import { getCombatantById, moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
 import { calcRemainingMinutes, startTimer } from "./feature/heroPointHandler";
-import { ActorFlagsPF2e, SpellPF2e } from "../types/pf2etypes";
+import { CombatantPF2e } from "../../types/src/module/encounter/combatant";
+import { ChatMessagePF2e } from "../../types/src/module/chat-message/index";
+import { ActorFlagsPF2e } from "../../types/src/module/actor/data/base";
+import { SpellPF2e } from "../../types/src/module/item/spell/index";
+import { ActorPF2e } from "../../types/src/module/actor/base";
+import { EncounterPF2e } from "../../types/src/module/encounter/document";
+import { TokenDocumentPF2e } from "../../types/src/module/scene/token-document/document";
 
 export const MODULENAME = "xdy-pf2e-workbench";
-
-declare global {
-    interface LenientGlobalVariableTypes {
-        game: never;
-        canvas: never;
-        ui: never;
-        i18n: never;
-    }
-}
 
 // Initialize module
 Hooks.once("init", async () => {
@@ -72,13 +68,13 @@ function shouldIHandleThis(
     return rollAsPlayer || rollAsGM;
 }
 
-function shouldIHandleThisMessage(message: ChatMessage, playerCondition: boolean, gmCondition: boolean) {
+function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition: boolean, gmCondition: boolean) {
     const userId = message.data.user;
     const amIMessageSender = userId === game.user?.id;
     return shouldIHandleThis(userId, playerCondition, gmCondition, amIMessageSender);
 }
 
-function getActionFromMessage(actions: any, actionIds: RegExpMatchArray, message: ChatMessage) {
+function getActionFromMessage(actions: any, actionIds: RegExpMatchArray, message: ChatMessagePF2e) {
     const strikes = actions.filter((a: { type: string }) => a.type === "strike");
     const itemStrikes = strikes.filter((a: { item: { id: any } }) => a.item.id === actionIds[1]);
     if (itemStrikes.length === 1) {
@@ -110,13 +106,13 @@ async function hooksForEveryone() {
         (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
             game.settings.get(MODULENAME, "autoRollDamageForSpellAttack"))
     ) {
-        Hooks.on("createChatMessage", async (message: ChatMessage) => {
+        Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
             const numberOfMessagesToCheck = 5;
             if (
                 shouldIHandleThisMessage(
                     message,
-                    ["all", "players"].includes(game.settings.get(MODULENAME, "autoRollDamageAllow")),
-                    ["all", "gm"].includes(game.settings.get(MODULENAME, "autoRollDamageAllow"))
+                    ["all", "players"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow")),
+                    ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow"))
                 )
             ) {
                 const autoRollDamageForStrikeEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
@@ -124,8 +120,8 @@ async function hooksForEveryone() {
                     MODULENAME,
                     "autoRollDamageForSpellAttack"
                 );
-                const messageActor: Actor = <Actor>game.actors?.get(<string>message.data.speaker.actor);
-                const messageToken: TokenDocument = <TokenDocument>(
+                const messageActor: ActorPF2e = <ActorPF2e>game.actors?.get(<string>message.data.speaker.actor);
+                const messageToken: TokenDocumentPF2e = <TokenDocumentPF2e>(
                     canvas?.scene?.tokens.get(<string>message.data.speaker.token)
                 );
                 const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
@@ -150,6 +146,7 @@ async function hooksForEveryone() {
                                     const level = msg.data.content.match(/data-spell-lvl="(\d+)"/);
                                     if (level && level[1]) {
                                         levelFromChatCard = true;
+                                        // @ts-ignore Wtf? How to make a number into a OneToTen?
                                         spellLevel = parseInt(level[1]);
                                         break;
                                     }
@@ -161,7 +158,6 @@ async function hooksForEveryone() {
                             ) {
                                 ui.notifications.info(
                                     game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
-                                        // @ts-ignore
                                         spell: spell.data.name,
                                     })
                                 );
@@ -173,15 +169,14 @@ async function hooksForEveryone() {
                             spell.rollDamage({
                                 currentTarget: {
                                     closest: () => {
+                                        // @ts-ignore Wtf? How to make a number into a OneToTen?
                                         return { dataset: { spellLvl: Math.abs(spellLevel) } };
                                     },
                                 },
                             });
                         }
                     } else if (rollType === "attack-roll") {
-                        //@ts-ignore
                         const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
-                        // @ts-ignore
                         const actions: any =
                             // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
                             messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
@@ -204,7 +199,7 @@ async function hooksForEveryone() {
     }
 
     if (game.settings.get(MODULENAME, "automatedAnimationOn")) {
-        Hooks.on("createChatMessage", async (message: ChatMessage) => {
+        Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
             if (game.modules.get("autoanimations") && game.settings.get(MODULENAME, "automatedAnimationOn")) {
                 const messageToken: TokenDocument = <TokenDocument>(
                     canvas?.scene?.tokens.get(<string>message.data.speaker.token)
@@ -221,40 +216,42 @@ async function hooksForEveryone() {
                         case "criticalSuccess":
                             if (game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessAnimation")) {
                                 animation =
-                                    game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessAnimation") ||
+                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessAnimation") ||
                                     animation;
                             }
                             if (game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessSound")) {
-                                sound = game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessSound") || sound;
+                                sound =
+                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessSound") ||
+                                    sound;
                             }
                             break;
                         case "criticalFailure":
                             if (game.settings.get(MODULENAME, "automatedAnimationOnCritFailAnimation")) {
                                 animation =
-                                    game.settings.get(MODULENAME, "automatedAnimationOnCritFailAnimation") || animation;
+                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnCritFailAnimation") ||
+                                    animation;
                             }
                             if (game.settings.get(MODULENAME, "automatedAnimationOnCritFailSound")) {
-                                sound = game.settings.get(MODULENAME, "automatedAnimationOnCritFailSound") || sound;
+                                sound =
+                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnCritFailSound") || sound;
                             }
                             break;
                         case "failure":
                             if (game.settings.get(MODULENAME, "automatedAnimationOnFailAnimation")) {
                                 animation =
-                                    game.settings.get(MODULENAME, "automatedAnimationOnFailAnimation") || animation;
+                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnFailAnimation") ||
+                                    animation;
                             }
                             if (game.settings.get(MODULENAME, "automatedAnimationOnFailSound")) {
-                                sound = game.settings.get(MODULENAME, "automatedAnimationOnFailSound") || sound;
+                                sound = <string>game.settings.get(MODULENAME, "automatedAnimationOnFailSound") || sound;
                             }
                             break;
                     }
-                    if (pack && item && animation && sound) {
+                    if (pack && item && animation && sound && message.user && message.user.targets) {
                         //Needs to be unlocked for some reason. Meh.
                         await pack.configure({ locked: false });
-                        // @ts-ignore
                         await item.setFlag("autoanimations", "options.customPath", animation);
-                        // @ts-ignore
                         await item.setFlag("autoanimations", "audio.a01.file", sound);
-                        // @ts-ignore
                         const from = Array.from(message.user.targets);
                         // @ts-ignore
                         await AutoAnimations.playAnimation(messageToken, from, item, { playOnMiss: true });
@@ -268,7 +265,7 @@ async function hooksForEveryone() {
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
     ) {
-        Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
+        Hooks.on("renderChatMessage", (message: ChatMessagePF2e, html: JQuery) => {
             if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
                 html.find(".card-content").hide();
             }
@@ -286,16 +283,14 @@ async function hooksForEveryone() {
     }
 
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-        Hooks.on("pf2e.endTurn", async (combatant: Combatant, _combat: Combat, _userId: string) => {
+        Hooks.on("pf2e.endTurn", async (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
             if (
                 game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn") &&
                 combatant &&
                 combatant.actor &&
                 shouldIHandleThis(combatant.isOwner ? game.user?.id : null)
             ) {
-                //@ts-ignore Only pf2e actor has the hasCondition method and I haven't the type for that, so...
                 if (combatant.actor.hasCondition("frightened")) {
-                    // @ts-ignore
                     await combatant.actor.decreaseCondition("frightened");
                 }
             }
@@ -303,7 +298,7 @@ async function hooksForEveryone() {
     }
 
     if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-        Hooks.on("createChatMessage", async (message: ChatMessage) => {
+        Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
             if (
                 game.settings.get(MODULENAME, "applyPersistentDamage") &&
                 canvas.ready &&
@@ -313,8 +308,8 @@ async function hooksForEveryone() {
                 message.roll?.total &&
                 shouldIHandleThisMessage(
                     message,
-                    ["all", "players"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
-                    ["all", "gm"].includes(game.settings.get(MODULENAME, "applyPersistentAllow"))
+                    ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
+                    ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
                 ) &&
                 game.actors
             ) {
@@ -322,7 +317,6 @@ async function hooksForEveryone() {
                 if (token && token.isOwner) {
                     const damage = message.roll.total;
 
-                    // @ts-ignore
                     await token?.actor?.applyDamage(damage, token, false);
 
                     if (game.settings.get(MODULENAME, "applyPersistentDamageSeparateMessage")) {
@@ -344,7 +338,7 @@ async function hooksForEveryone() {
     }
 
     if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
-        Hooks.on("renderChatMessage", async (message) => {
+        Hooks.on("renderChatMessage", async (message: ChatMessagePF2e) => {
             if (
                 game.settings.get(MODULENAME, "applyPersistentHealing") &&
                 canvas.ready &&
@@ -357,8 +351,8 @@ async function hooksForEveryone() {
                 game.combats.active.combatant.actor &&
                 shouldIHandleThisMessage(
                     message,
-                    ["all", "players"].includes(game.settings.get(MODULENAME, "applyPersistentAllow")),
-                    ["all", "gm"].includes(game.settings.get(MODULENAME, "applyPersistentAllow"))
+                    ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
+                    ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
                 )
             ) {
                 const token = game.combats.active.combatant.token;
@@ -371,7 +365,6 @@ async function hooksForEveryone() {
                     ) {
                         const healing = message.roll.total * -1;
 
-                        // @ts-ignore
                         await token.actor.applyDamage(healing, token, false);
                         if (game.settings.get(MODULENAME, "applyPersistentHealingSeparateMessage")) {
                             await ChatMessage.create({
@@ -393,8 +386,8 @@ async function hooksForEveryone() {
     }
 
     Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
-        const settings: [string, ClientSettings.PartialSettingConfig][] = Array.from(game.settings.settings.entries());
-        settings.forEach((setting: [string, ClientSettings.PartialSettingConfig]) => {
+        const settings: [string, any][] = Array.from(game.settings.settings.entries());
+        settings.forEach((setting: [string, any]) => {
             const settingName = setting[0];
             //TODO Do this in a more elegant way
             //Disable all dependent persistentDamage settings
@@ -454,7 +447,7 @@ async function hooksForGMInit() {
     }
 
     if (game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedManually") {
-        Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: ContextMenuEntry[]) => {
+        Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: any) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedManually") {
                 entryOptions.push({
                     icon: '<i class="fas fa-skull"></i>',
@@ -468,13 +461,13 @@ async function hooksForGMInit() {
     }
 
     if (game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
-        Hooks.on("preUpdateActor", async (actor: Actor, update: Record<string, string>) => {
+        Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
             if (
                 game.user?.isGM &&
                 game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" &&
                 game.combat
             ) {
-                const combatant = <Combatant>(
+                const combatant = <CombatantPF2e>(
                     game.combat.getCombatantByToken(
                         actor.isToken
                             ? <string>actor.token?.id
@@ -495,8 +488,7 @@ async function hooksForGMInit() {
     }
 
     if (game.settings.get(MODULENAME, "enableAutomaticMove") === "gettingStatusDying") {
-        // @ts-ignore Can't be bothered to type preUpdateToken
-        Hooks.on("preUpdateToken", async (tokenDoc: TokenDocument, update) => {
+        Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update) => {
             type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
             if (
                 game.user?.isGM &&
@@ -506,7 +498,6 @@ async function hooksForGMInit() {
                 update.actorData
             ) {
                 const shouldMove =
-                    //@ts-ignore Only pf2e actor has the hasCondition method and I haven't the type for that, so...
                     !tokenDoc.actor.hasCondition("dying") &&
                     update.actorData.items &&
                     update.actorData.items
@@ -514,7 +505,7 @@ async function hooksForGMInit() {
                         .filter((row: UpdateRow) => row.data.active)
                         .filter((row: UpdateRow) => row.data.slug === "dying")
                         .find((row: UpdateRow) => row.data.value.value === 1);
-                const combatant = <Combatant>game.combat.getCombatantByToken(<string>tokenDoc.id);
+                const combatant = <CombatantPF2e>game.combat.getCombatantByToken(<string>tokenDoc.id);
                 if (combatant && combatant !== game.combat.combatant && shouldMove) {
                     await moveSelectedAheadOfCurrent(combatant);
                 }
@@ -536,8 +527,8 @@ async function hooksForGMInit() {
     }
 
     Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
-        const settings: [string, ClientSettings.PartialSettingConfig][] = Array.from(game.settings.settings.entries());
-        settings.forEach((setting: [string, ClientSettings.PartialSettingConfig]) => {
+        const settings: [string, any][] = Array.from(game.settings.settings.entries());
+        settings.forEach((setting: [string, any]) => {
             const name = setting[0];
             //TODO Do this in a more elegant way
             //Disable all dependent npcMystifier settings
@@ -578,25 +569,22 @@ function hooksForGMSetup() {
             if (
                 game.user?.isGM &&
                 game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat") &&
-                // @ts-ignore
                 !game.combat?.active &&
                 diff >= 1
             ) {
-                // @ts-ignore
                 game.pf2e.effectTracker.removeExpired();
             }
         });
     }
 
     if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
-        Hooks.on("updateCombat", (combat: Combat) => {
+        Hooks.on("updateCombat", (combat: EncounterPF2e) => {
             if (
                 game.user?.isGM &&
                 game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn") &&
                 combat.combatant &&
                 combat.combatant.actor
             ) {
-                // @ts-ignore
                 game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
             }
         });

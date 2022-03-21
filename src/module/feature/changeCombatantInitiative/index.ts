@@ -1,4 +1,6 @@
-export async function moveSelectedAheadOfCurrent(selectedCombatant: Combatant): Promise<void> {
+import { CombatantPF2e } from "../../../../types/src/module/encounter";
+
+export async function moveSelectedAheadOfCurrent(selectedCombatant: CombatantPF2e): Promise<void> {
     //TODO Ugly hack, might want to do a PR to expose the code in encounter-tracker#setInitiativeFromDrop?
     //TODO Handle moving several tokens at once? For now, just take the first selected token.
     const combat = game?.combat;
@@ -18,7 +20,7 @@ export async function moveSelectedAheadOfCurrent(selectedCombatant: Combatant): 
 }
 
 export function getCombatantById(combatantId: any) {
-    return <Combatant>game?.combat?.getCombatantByToken(
+    return <CombatantPF2e>game?.combat?.getCombatantByToken(
         <string>game?.combat?.combatants
             .map((c) => ({
                 id: <string>c.id,

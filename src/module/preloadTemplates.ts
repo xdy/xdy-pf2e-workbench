@@ -1,7 +1,7 @@
-export async function preloadTemplates(): Promise<Handlebars.TemplateDelegate[]> {
+export async function preloadTemplates(): Promise<void> {
     const templatePaths: string[] = [
         // Add paths to "modules/xdy-pf2e-workbench/templates"
     ];
 
-    return loadTemplates(templatePaths);
+    loadTemplates(templatePaths);
 }

@@ -3,13 +3,13 @@
 // * Check on an existing timer, recalc timeout, ignore on the first, none on the second
 // * Timeout, recalc timeout, ignore on the first, random on the second
 
+import { MODULENAME } from "../../xdy-pf2e-workbench";
+
 export enum HPHState {
     Start,
     Check,
     Timeout,
 }
-
-import { MODULENAME } from "../../xdy-pf2e-workbench";
 
 export async function startTimer(remainingMinutes: number) {
     const oldTimeout = <NodeJS.Timeout>game.user?.getFlag(MODULENAME, "heroPointHandler.timeout");
@@ -130,10 +130,8 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
                         .filter((actor) => !!actor) || []
                 ).includes(x)
             )
-            // @ts-ignore
-            .filter((actor) => !actor.data.data.traits.traits.value.includes("minion"))
-            // @ts-ignore
-            .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon")) || [];
+            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("minion"))
+            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("eidolon")) || [];
 
     let checked: number;
     switch (state) {
@@ -250,10 +248,8 @@ function heroes() {
         game?.actors
             ?.filter((actor) => actor.hasPlayerOwner)
             .filter((actor) => actor.type === "character")
-            // @ts-ignore
-            .filter((actor) => !actor.data.data.traits.traits.value.includes("minion"))
-            // @ts-ignore
-            .filter((actor) => !actor.data.data.traits.traits.value.includes("eidolon")) || []
+            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("minion"))
+            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("eidolon")) || []
     );
 }
 
@@ -265,7 +261,6 @@ async function resetHeroPoints(heropoints: number) {
             parseInt(actor.data.data.resources.heroPoints.max)
         );
         await actor.update({
-            // @ts-ignore
             "data.resources.heroPoints.value": value,
         });
     }
@@ -287,9 +282,7 @@ async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
 
     for (const actor of actors) {
         const value = Math.min(
-            // @ts-ignore
             parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
-            // @ts-ignore
             parseInt(actor.data.data.resources.heroPoints.max)
         );
         await actor.update({
