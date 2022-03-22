@@ -1,14 +1,25 @@
 {
-    "compilerOptions": {
-        "target": "ES2021",
-        "lib": ["DOM", "ES2021"],
-        "types": ["@league-of-foundry-developers/foundry-vtt-types", "src/types", "handlebars"],
-        "esModuleInterop": true,
-        "moduleResolution": "node",
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "sourceMap": true,
-        "strictNullChecks": true
-    },
-    "include": ["src"]
+  "compilerOptions": {
+    "target": "ES2021",
+    "lib": [
+      "DOM",
+      "ES2021"
+    ],
+    "types": [
+      "@league-of-foundry-developers/foundry-vtt-types",
+      "handlebars"
+    ],
+    "typeRoots": [
+      "src/types"
+    ],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "sourceMap": true,
+    "strictNullChecks": true
+  },
+  "include": [
+    "src"
+  ]
 }

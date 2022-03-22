@@ -6,13 +6,21 @@
         "hint": "World setting for using the module automated-animations to play animation and/or sound on a strike miss. Save settings to show/hide additional options.",
         "name": "World setting for using the module automated-animations to play animation and/or sound on a strike miss."
       },
-      "aaOnMissAnimation": {
+      "aaOnMissFailAnimation": {
         "hint": "World setting for animation to play on strike miss, default is from the JB2A_DnD5e module which must be installed for it to be usable.",
         "name": "World setting for animation to play on strike miss."
       },
-      "aaOnMissSound": {
+      "aaOnMissFailSound": {
         "hint": "World setting for sound to play on strike miss, default is from the soundfxlibrary module which must be installed for it to be usable.",
         "name": "World setting for sound to play on strike miss."
+      },
+      "aaOnMissCritFailAnimation": {
+        "hint": "World setting for animation to play on strike critical miss, default is from the JB2A_DnD5e module which must be installed for it to be usable.",
+        "name": "World setting for animation to play on strike critical miss."
+      },
+      "aaOnMissCritFailSound": {
+        "hint": "World setting for sound to play on strike critical miss, default is from the soundfxlibrary module which must be installed for it to be usable.",
+        "name": "World setting for sound to play on strike critical miss."
       },
       "applyPersistentAllow": {
         "hint": "World setting for who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options.",

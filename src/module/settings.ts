@@ -256,9 +256,9 @@ export function registerSettings() {
         onChange: () => location.reload(),
     });
 
-    game.settings.register(MODULENAME, "aaOnMissAnimation", {
-        name: `${MODULENAME}.SETTINGS.aaOnMissAnimation.name`,
-        hint: `${MODULENAME}.SETTINGS.aaOnMissAnimation.hint`,
+    game.settings.register(MODULENAME, "aaOnMissFailAnimation", {
+        name: `${MODULENAME}.SETTINGS.aaOnMissFailAnimation.name`,
+        hint: `${MODULENAME}.SETTINGS.aaOnMissFailAnimation.hint`,
         scope: "world",
         config: true,
         default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
@@ -267,9 +267,31 @@ export function registerSettings() {
         filePicker: "video",
     });
 
-    game.settings.register(MODULENAME, "aaOnMissSound", {
-        name: `${MODULENAME}.SETTINGS.aaOnMissSound.name`,
-        hint: `${MODULENAME}.SETTINGS.aaOnMissSound.hint`,
+    game.settings.register(MODULENAME, "aaOnMissFailSound", {
+        name: `${MODULENAME}.SETTINGS.aaOnMissFailSound.name`,
+        hint: `${MODULENAME}.SETTINGS.aaOnMissFailSound.hint`,
+        scope: "world",
+        config: true,
+        default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",
+        type: String,
+        // @ts-ignore
+        filePicker: "audio",
+    });
+
+    game.settings.register(MODULENAME, "aaOnMissCritFailAnimation", {
+        name: `${MODULENAME}.SETTINGS.aaOnMissCritFailAnimation.name`,
+        hint: `${MODULENAME}.SETTINGS.aaOnMissCritFailAnimation.hint`,
+        scope: "world",
+        config: true,
+        default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
+        type: String,
+        // @ts-ignore
+        filePicker: "video",
+    });
+
+    game.settings.register(MODULENAME, "aaOnMissCritFailSound", {
+        name: `${MODULENAME}.SETTINGS.aaOnMissCritFailSound.name`,
+        hint: `${MODULENAME}.SETTINGS.aaOnMissCritFailSound.hint`,
         scope: "world",
         config: true,
         default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",

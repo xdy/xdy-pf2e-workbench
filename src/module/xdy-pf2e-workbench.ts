@@ -213,36 +213,29 @@ async function hooksForEveryone() {
                 const rollType = flags.context?.type;
                 if (messageToken && rollType === "attack-roll") {
                     const degreeOfSuccess = flags.context?.outcome ?? "";
-                    if (degreeOfSuccess === "failure" || degreeOfSuccess === "criticalFailure") {
-                        const pack = game.packs.get("xdy-pf2e-workbench.xdy-pf2e-workbench-items");
-                        const item = ((await pack?.getDocuments()) ?? []).find(
-                            (item: any) => item.data.name === "AA Miss"
-                        );
-
-                        if (pack && item) {
-                            //Needs to be unlocked for some reason. Meh.
-                            await pack.configure({ locked: false });
-                            // @ts-ignore
-                            await item.setFlag(
-                                "autoanimations",
-                                "options.customPath",
-                                game.settings.get(MODULENAME, "aaOnMissAnimation")
-                            );
-                            // @ts-ignore
-                            await item.setFlag(
-                                "autoanimations",
-                                "audio.a01.file",
-                                game.settings.get(MODULENAME, "aaOnMissSound")
-                            );
-                            // @ts-ignore
-                            await AutoAnimations.playAnimation(
-                                messageToken,
+                    const pack = game.packs.get("xdy-pf2e-workbench.xdy-pf2e-workbench-items");
+                    const item = ((await pack?.getDocuments()) ?? []).find((item: any) => item.data.name === "AA Miss");
+                    let animation = game.settings.get(MODULENAME, "aaOnMissFailAnimation");
+                    let sound = game.settings.get(MODULENAME, "aaOnMissFailSound");
+                    switch (degreeOfSuccess) {
+                        case "criticalFailure":
+                            animation = game.settings.get(MODULENAME, "aaOnMissCritFailAnimation") || animation;
+                            sound = game.settings.get(MODULENAME, "aaOnMissCritFailSound") || sound;
+                        // eslint-disable-next-line no-fallthrough
+                        case "failure":
+                            if (pack && item) {
+                                //Needs to be unlocked for some reason. Meh.
+                                await pack.configure({ locked: false });
                                 // @ts-ignore
-                                Array.from(message.user.targets),
-                                item,
-                                { playOnMiss: true }
-                            );
-                        }
+                                await item.setFlag("autoanimations", "options.customPath", animation);
+                                // @ts-ignore
+                                await item.setFlag("autoanimations", "audio.a01.file", sound);
+                                // @ts-ignore
+                                const from = Array.from(message.user.targets);
+                                // @ts-ignore
+                                await AutoAnimations.playAnimation(messageToken, from, item, { playOnMiss: true });
+                            }
+                            break;
                     }
                 }
             }
@@ -378,8 +371,8 @@ async function hooksForEveryone() {
     }
 
     Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
-        const settings: [string, ClientSettings.CompleteSetting][] = Array.from(game.settings.settings.entries());
-        settings.forEach((setting: [string, ClientSettings.CompleteSetting]) => {
+        const settings: [string, ClientSettings.PartialSettingConfig][] = Array.from(game.settings.settings.entries());
+        settings.forEach((setting: [string, ClientSettings.PartialSettingConfig]) => {
             const settingName = setting[0];
             //TODO Do this in a more elegant way
             //Disable all dependent persistentDamage settings
@@ -521,8 +514,8 @@ async function hooksForGMInit() {
     }
 
     Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
-        const settings: [string, ClientSettings.CompleteSetting][] = Array.from(game.settings.settings.entries());
-        settings.forEach((setting: [string, ClientSettings.CompleteSetting]) => {
+        const settings: [string, ClientSettings.PartialSettingConfig][] = Array.from(game.settings.settings.entries());
+        settings.forEach((setting: [string, ClientSettings.PartialSettingConfig]) => {
             const name = setting[0];
             //TODO Do this in a more elegant way
             //Disable all dependent npcMystifier settings
