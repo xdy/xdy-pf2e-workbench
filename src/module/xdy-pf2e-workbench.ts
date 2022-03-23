@@ -259,7 +259,6 @@ async function hooksForEveryone() {
                         // @ts-ignore
                         await AutoAnimations.playAnimation(messageToken, from, item, { playOnMiss: true });
                     }
-
                 }
             }
         });
