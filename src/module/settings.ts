@@ -5,8 +5,14 @@ export let mystifyModifierKey: string;
 
 declare global {
     namespace ClientSettings {
-        interface Values {
-            "xdy-pf2e-workbench.aaOnMissEnabled": boolean;
+        export interface Values {
+            "xdy-pf2e-workbench.automatedAnimationOn": boolean;
+            "xdy-pf2e-workbench.automatedAnimationOnFailAnimation": string;
+            "xdy-pf2e-workbench.automatedAnimationOnFailSound": string;
+            "xdy-pf2e-workbench.automatedAnimationOnCritFailAnimation": string;
+            "xdy-pf2e-workbench.automatedAnimationOnCritFailSound": string;
+            "xdy-pf2e-workbench.automatedAnimationOnCritSuccessAnimation": string;
+            "xdy-pf2e-workbench.automatedAnimationOnCritSuccessSound": string;
             "xdy-pf2e-workbench.applyPersistentAllow": string;
             "xdy-pf2e-workbench.applyPersistentDamage": boolean;
             "xdy-pf2e-workbench.applyPersistentHealing": boolean;
@@ -246,9 +252,9 @@ export function registerSettings() {
         type: Boolean,
     });
 
-    game.settings.register(MODULENAME, "aaOnMiss", {
-        name: `${MODULENAME}.SETTINGS.aaOnMiss.name`,
-        hint: `${MODULENAME}.SETTINGS.aaOnMiss.hint`,
+    game.settings.register(MODULENAME, "automatedAnimationOn", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationOn.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationOn.hint`,
         scope: "world",
         config: true,
         default: false,
@@ -256,9 +262,9 @@ export function registerSettings() {
         onChange: () => location.reload(),
     });
 
-    game.settings.register(MODULENAME, "aaOnMissFailAnimation", {
-        name: `${MODULENAME}.SETTINGS.aaOnMissFailAnimation.name`,
-        hint: `${MODULENAME}.SETTINGS.aaOnMissFailAnimation.hint`,
+    game.settings.register(MODULENAME, "automatedAnimationOnFailAnimation", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationOnFailAnimation.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationOnFailAnimation.hint`,
         scope: "world",
         config: true,
         default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
@@ -267,9 +273,9 @@ export function registerSettings() {
         filePicker: "video",
     });
 
-    game.settings.register(MODULENAME, "aaOnMissFailSound", {
-        name: `${MODULENAME}.SETTINGS.aaOnMissFailSound.name`,
-        hint: `${MODULENAME}.SETTINGS.aaOnMissFailSound.hint`,
+    game.settings.register(MODULENAME, "automatedAnimationOnFailSound", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationOnFailSound.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationOnFailSound.hint`,
         scope: "world",
         config: true,
         default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",
@@ -278,9 +284,9 @@ export function registerSettings() {
         filePicker: "audio",
     });
 
-    game.settings.register(MODULENAME, "aaOnMissCritFailAnimation", {
-        name: `${MODULENAME}.SETTINGS.aaOnMissCritFailAnimation.name`,
-        hint: `${MODULENAME}.SETTINGS.aaOnMissCritFailAnimation.hint`,
+    game.settings.register(MODULENAME, "automatedAnimationOnCritFailAnimation", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationOnCritFailAnimation.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationOnCritFailAnimation.hint`,
         scope: "world",
         config: true,
         default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
@@ -289,9 +295,31 @@ export function registerSettings() {
         filePicker: "video",
     });
 
-    game.settings.register(MODULENAME, "aaOnMissCritFailSound", {
-        name: `${MODULENAME}.SETTINGS.aaOnMissCritFailSound.name`,
-        hint: `${MODULENAME}.SETTINGS.aaOnMissCritFailSound.hint`,
+    game.settings.register(MODULENAME, "automatedAnimationOnCritFailSound", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationOnCritFailSound.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationOnCritFailSound.hint`,
+        scope: "world",
+        config: true,
+        default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",
+        type: String,
+        // @ts-ignore
+        filePicker: "audio",
+    });
+
+    game.settings.register(MODULENAME, "automatedAnimationOnCritSuccessAnimation", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationOnCritSuccessAnimation.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationOnCritSuccessAnimation.hint`,
+        scope: "world",
+        config: true,
+        default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
+        type: String,
+        // @ts-ignore
+        filePicker: "video",
+    });
+
+    game.settings.register(MODULENAME, "automatedAnimationOnCritSuccessSound", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationOnCritSuccessSound.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationOnCritSuccessSound.hint`,
         scope: "world",
         config: true,
         default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",

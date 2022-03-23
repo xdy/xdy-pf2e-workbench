@@ -203,9 +203,9 @@ async function hooksForEveryone() {
         });
     }
 
-    if (game.settings.get(MODULENAME, "aaOnMiss")) {
+    if (game.settings.get(MODULENAME, "automatedAnimationOn")) {
         Hooks.on("createChatMessage", async (message: ChatMessage) => {
-            if (game.modules.get("autoanimations") && game.settings.get(MODULENAME, "aaOnMiss")) {
+            if (game.modules.get("autoanimations") && game.settings.get(MODULENAME, "automatedAnimationOn")) {
                 const messageToken: TokenDocument = <TokenDocument>(
                     canvas?.scene?.tokens.get(<string>message.data.speaker.token)
                 );
@@ -215,28 +215,51 @@ async function hooksForEveryone() {
                     const degreeOfSuccess = flags.context?.outcome ?? "";
                     const pack = game.packs.get("xdy-pf2e-workbench.xdy-pf2e-workbench-items");
                     const item = ((await pack?.getDocuments()) ?? []).find((item: any) => item.data.name === "AA Miss");
-                    let animation = game.settings.get(MODULENAME, "aaOnMissFailAnimation");
-                    let sound = game.settings.get(MODULENAME, "aaOnMissFailSound");
+                    let animation = "";
+                    let sound = "";
                     switch (degreeOfSuccess) {
+                        case "criticalSuccess":
+                            if (game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessAnimation")) {
+                                animation =
+                                    game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessAnimation") ||
+                                    animation;
+                            }
+                            if (game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessSound")) {
+                                sound = game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessSound") || sound;
+                            }
+                            break;
                         case "criticalFailure":
-                            animation = game.settings.get(MODULENAME, "aaOnMissCritFailAnimation") || animation;
-                            sound = game.settings.get(MODULENAME, "aaOnMissCritFailSound") || sound;
-                        // eslint-disable-next-line no-fallthrough
+                            if (game.settings.get(MODULENAME, "automatedAnimationOnCritFailAnimation")) {
+                                animation =
+                                    game.settings.get(MODULENAME, "automatedAnimationOnCritFailAnimation") || animation;
+                            }
+                            if (game.settings.get(MODULENAME, "automatedAnimationOnCritFailSound")) {
+                                sound = game.settings.get(MODULENAME, "automatedAnimationOnCritFailSound") || sound;
+                            }
+                            break;
                         case "failure":
-                            if (pack && item) {
-                                //Needs to be unlocked for some reason. Meh.
-                                await pack.configure({ locked: false });
-                                // @ts-ignore
-                                await item.setFlag("autoanimations", "options.customPath", animation);
-                                // @ts-ignore
-                                await item.setFlag("autoanimations", "audio.a01.file", sound);
-                                // @ts-ignore
-                                const from = Array.from(message.user.targets);
-                                // @ts-ignore
-                                await AutoAnimations.playAnimation(messageToken, from, item, { playOnMiss: true });
+                            if (game.settings.get(MODULENAME, "automatedAnimationOnFailAnimation")) {
+                                animation =
+                                    game.settings.get(MODULENAME, "automatedAnimationOnFailAnimation") || animation;
+                            }
+                            if (game.settings.get(MODULENAME, "automatedAnimationOnFailSound")) {
+                                sound = game.settings.get(MODULENAME, "automatedAnimationOnFailSound") || sound;
                             }
                             break;
                     }
+                    if (pack && item && animation && sound) {
+                        //Needs to be unlocked for some reason. Meh.
+                        await pack.configure({ locked: false });
+                        // @ts-ignore
+                        await item.setFlag("autoanimations", "options.customPath", animation);
+                        // @ts-ignore
+                        await item.setFlag("autoanimations", "audio.a01.file", sound);
+                        // @ts-ignore
+                        const from = Array.from(message.user.targets);
+                        // @ts-ignore
+                        await AutoAnimations.playAnimation(messageToken, from, item, { playOnMiss: true });
+                    }
+
                 }
             }
         });
@@ -525,8 +548,11 @@ async function hooksForGMInit() {
                 html.find(`input[name="${name}"]`).parent().parent().toggle(!valueFunction);
                 html.find(`select[name="${name}"]`).parent().parent().toggle(!valueFunction);
             }
-            if (name !== `${MODULENAME}.aaOnMiss` && setting[0].startsWith(`${MODULENAME}.aaOnMiss`)) {
-                const valueFunction = !game.settings.get(MODULENAME, "aaOnMiss");
+            if (
+                name !== `${MODULENAME}.automatedAnimationOn` &&
+                setting[0].startsWith(`${MODULENAME}.automatedAnimationOn`)
+            ) {
+                const valueFunction = !game.settings.get(MODULENAME, "automatedAnimationOn");
 
                 html.find(`input[name="${name}"]`).parent().parent().toggle(!valueFunction);
                 html.find(`select[name="${name}"]`).parent().parent().toggle(!valueFunction);
