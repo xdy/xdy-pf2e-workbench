@@ -311,7 +311,7 @@ export function registerSettings() {
         hint: `${MODULENAME}.SETTINGS.automatedAnimationOnCritSuccessAnimation.hint`,
         scope: "world",
         config: true,
-        default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
+        default: "modules/JB2A_DnD5e/Library/Generic/UI/Critical_02_Red_200x200.webm",
         type: String,
         // @ts-ignore
         filePicker: "video",
@@ -322,7 +322,7 @@ export function registerSettings() {
         hint: `${MODULENAME}.SETTINGS.automatedAnimationOnCritSuccessSound.hint`,
         scope: "world",
         config: true,
-        default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",
+        default: "modules/soundfxlibrary/Combat/Single/Melee%20Hit/melee-hit-13.mp3",
         type: String,
         // @ts-ignore
         filePicker: "audio",
