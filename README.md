@@ -24,6 +24,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to automatically reduce the Frightened condition at the end of each turn.
 * Options to automatically move combatant that goes to 0 hp and/or gets the Dying condition to just before the current combatant. (Normally due to the current combatant just having downed the target combatant.)
 * Option to do a custom animation and sound on a miss, critical miss and/or critical success. Requires that the module https://foundryvtt.com/packages/autoanimations be installed (along with it's dependencies). For the default miss animation install the module https://foundryvtt.com/packages/JB2A_DnD5e. For the default miss sound install the module https://foundryvtt.com/packages/soundfxlibrary. Or replace with your own animation and/or sound.
+* Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
 
 Experimental features:
 None right now. (Though some feature settings are experimental.)
