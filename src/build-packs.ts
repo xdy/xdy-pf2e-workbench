@@ -44,7 +44,7 @@ copyFolder(path.resolve(".", asymonousSource[0]), path.resolve(outDir, packsSour
 copyFolder(path.resolve(".", asymonousSource[1]), path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"));
 
 function getFolders(dir: string) {
-    const results = [];
+    const results: string[] = [];
     const folders = fs.readdirSync(packsSource);
     for (const folder of folders) {
         if (fs.statSync(path.join(dir, folder)).isDirectory()) {

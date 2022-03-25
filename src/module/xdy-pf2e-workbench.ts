@@ -5,7 +5,6 @@
  * Software License: Apache 2.0
  */
 
-//TODO Start using the actual pf2e types (for now, some types in types/pf2etypes.d.ts)
 //TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
 //TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
 //TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
