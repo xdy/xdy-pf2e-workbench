@@ -95,4 +95,4 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
     const file1 = path.resolve(outDir, "packs", folder + ".db");
     fs.writeFileSync(file1, result, "utf8");
 }
-fs.rmdirSync(path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"));
+fs.rmdirSync(path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"), { recursive: true });
