@@ -3,6 +3,12 @@ import { MODULENAME } from "./xdy-pf2e-workbench";
 
 export let mystifyModifierKey: string;
 
+function debouncedReload() {
+    foundry.utils.debounce(() => {
+        location.reload();
+    }, 100);
+}
+
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
@@ -13,7 +19,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "heroPointHandler", {
@@ -23,7 +29,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "enableAutomaticMove", {
@@ -39,7 +45,7 @@ export function registerSettings() {
             gettingStatusDying: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.gettingStatusDying`),
             deprecatedManually: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.deprecatedManually`),
         },
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "npcMystifier", {
@@ -49,7 +55,7 @@ export function registerSettings() {
         config: true,
         default: true,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "npcMystifierMethod", {
@@ -225,7 +231,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "automatedAnimationOnFailAnimation", {
@@ -236,6 +242,7 @@ export function registerSettings() {
         default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
         type: String,
         filePicker: "video",
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "automatedAnimationOnFailSound", {
@@ -246,6 +253,7 @@ export function registerSettings() {
         default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",
         type: String,
         filePicker: "audio",
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "automatedAnimationOnCritFailAnimation", {
@@ -256,6 +264,7 @@ export function registerSettings() {
         default: "modules/JB2A_DnD5e/Library/Generic/UI/Miss_02_White_200x200.webm",
         type: String,
         filePicker: "video",
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "automatedAnimationOnCritFailSound", {
@@ -266,6 +275,7 @@ export function registerSettings() {
         default: "modules/soundfxlibrary/Combat/Single/Melee%20Miss/melee-miss-1.mp3",
         type: String,
         filePicker: "audio",
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "automatedAnimationOnCritSuccessAnimation", {
@@ -276,6 +286,7 @@ export function registerSettings() {
         default: "modules/JB2A_DnD5e/Library/Generic/UI/Critical_02_Red_200x200.webm",
         type: String,
         filePicker: "video",
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "automatedAnimationOnCritSuccessSound", {
@@ -286,6 +297,29 @@ export function registerSettings() {
         default: "modules/soundfxlibrary/Combat/Single/Melee%20Hit/melee-hit-13.mp3",
         type: String,
         filePicker: "audio",
+        onChange: () => debouncedReload(),
+    });
+
+    game.settings.register(MODULENAME, "automatedAnimationOnSuccessAnimation", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationOnSuccessAnimation.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationOnSuccessAnimation.hint`,
+        scope: "world",
+        config: true,
+        default: "modules/JB2A_DnD5e/Library/Generic/Impact/Impact_01_Regular_Blue_400x400.webm",
+        type: String,
+        filePicker: "video",
+        onChange: () => debouncedReload(),
+    });
+
+    game.settings.register(MODULENAME, "automatedAnimationOnSuccessSound", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationOnSuccessSound.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationOnSuccessSound.hint`,
+        scope: "world",
+        config: true,
+        default: "modules/soundfxlibrary/Combat/Single/Melee%20Hit/melee-hit-1.mp3",
+        type: String,
+        filePicker: "audio",
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "autoRollDamageAllow", {
@@ -301,7 +335,7 @@ export function registerSettings() {
             gm: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.gm`),
             players: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.players`),
         },
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     //NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
@@ -312,7 +346,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "autoRollDamageForSpellAttack", {
@@ -322,7 +356,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound", {
@@ -347,7 +381,7 @@ export function registerSettings() {
             gm: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentAllow.gm`),
             players: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentAllow.players`),
         },
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "applyPersistentDamage", {
@@ -357,7 +391,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "applyPersistentDamageSeparateMessage", {
@@ -376,7 +410,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "applyPersistentHealingSeparateMessage", {
@@ -404,7 +438,7 @@ export function registerSettings() {
                 `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.nonCollapsedDefault`
             ),
         },
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
@@ -414,7 +448,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     //DEPRECATED
@@ -425,7 +459,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     //DEPRECATED
@@ -436,7 +470,7 @@ export function registerSettings() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => location.reload(),
+        onChange: () => debouncedReload(),
     });
 
     mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");

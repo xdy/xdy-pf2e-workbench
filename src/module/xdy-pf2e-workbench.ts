@@ -29,6 +29,10 @@ export declare class AutomaticBonusProgression {
     static suppressRuleElement(rule: any): boolean;
 }
 
+export declare class AutoAnimations {
+    static playAnimation(messageToken: TokenDocument, from: any, item: any, { playOnMiss: boolean });
+}
+
 // Initialize module
 Hooks.once("init", async () => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
@@ -210,15 +214,15 @@ async function hooksForEveryone() {
     if (game.settings.get(MODULENAME, "automatedAnimationOn")) {
         Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
             if (game.modules.get("autoanimations") && game.settings.get(MODULENAME, "automatedAnimationOn")) {
-                const messageToken: TokenDocument = <TokenDocument>(
-                    canvas?.scene?.tokens.get(<string>message.data.speaker.token)
-                );
-                const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
+                const messageToken = canvas?.scene?.tokens.get(<string>message.data.speaker.token);
+                const flags = message.data.flags.pf2e;
                 const rollType = flags.context?.type;
                 if (messageToken && rollType === "attack-roll") {
                     const degreeOfSuccess = flags.context?.outcome ?? "";
                     const pack = game.packs.get("xdy-pf2e-workbench.xdy-pf2e-workbench-items");
-                    const item = ((await pack?.getDocuments()) ?? []).find((item: any) => item.data.name === "AA Miss");
+                    const item = ((await pack?.getDocuments()) ?? []).find(
+                        (item: any) => item.data.name === "AutoAnimationTemplate"
+                    );
                     let animation = "";
                     let sound = "";
                     switch (degreeOfSuccess) {
@@ -255,15 +259,34 @@ async function hooksForEveryone() {
                                 sound = <string>game.settings.get(MODULENAME, "automatedAnimationOnFailSound") || sound;
                             }
                             break;
+                        case "success":
+                            if (game.settings.get(MODULENAME, "automatedAnimationOnSuccessAnimation")) {
+                                animation =
+                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnSuccessAnimation") ||
+                                    animation;
+                            }
+                            if (game.settings.get(MODULENAME, "automatedAnimationOnFailSound")) {
+                                sound =
+                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnSuccessSound") || sound;
+                            }
+                            break;
                     }
-                    if (pack && item && animation && sound && message.user && message.user.targets) {
+                    if (pack && item && (animation || sound) && message.user && message.user.targets) {
                         //Needs to be unlocked for some reason. Meh.
                         await pack.configure({ locked: false });
-                        await item.setFlag("autoanimations", "options.customPath", animation);
-                        await item.setFlag("autoanimations", "audio.a01.file", sound);
+                        if (animation) {
+                            await item.setFlag("autoanimations", "options.customPath", animation);
+                        } else {
+                            await item.unsetFlag("autoanimations", "options.customPath");
+                        }
+                        if (sound) {
+                            // @ts-ignore
+                            new Sequence(MODULENAME).sound().file(sound).fadeInAudio(100).fadeOutAudio(100).play();
+                        }
                         const from = Array.from(message.user.targets);
-                        // @ts-ignore
-                        await AutoAnimations.playAnimation(messageToken, from, item, { playOnMiss: true });
+                        await AutoAnimations.playAnimation(messageToken, from, item, {
+                            playOnMiss: !degreeOfSuccess.toLowerCase().includes("success"),
+                        });
                     }
                 }
             }

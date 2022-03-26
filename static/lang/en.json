@@ -34,6 +34,14 @@
         "hint": "World setting for sound to play on strike critical success, default is from the soundfxlibrary module which must be installed for it to be usable. Leave empty to play no sound.",
         "name": "World setting for sound to play on strike critical success."
       },
+      "automatedAnimationOnSuccessAnimation": {
+        "hint": "World setting for animation to play on strike success, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
+        "name": "World setting for animation to play on strike success."
+      },
+      "automatedAnimationOnSuccessSound": {
+        "hint": "World setting for sound to play on strike success, default is from the soundfxlibrary module which must be installed for it to be usable. Leave empty to play no sound.",
+        "name": "World setting for sound to play on strike success."
+      },
       "applyPersistentAllow": {
         "hint": "World setting for who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options.",
         "name": "World setting for who is allowed to set the option to automatically apply persistent damage/healing.",
