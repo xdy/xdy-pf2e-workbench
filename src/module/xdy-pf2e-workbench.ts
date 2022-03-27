@@ -24,12 +24,7 @@ import { TokenDocumentPF2e } from "../../types/src/module/scene/token-document/d
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
-//Can't put it in types for some reason, so, dumping it here. Webpack is weird.
-export declare class AutomaticBonusProgression {
-    static suppressRuleElement(rule: any): boolean;
-}
-
-export declare class AutoAnimations {
+declare class AutoAnimations {
     static playAnimation(messageToken: TokenDocument, from: any, item: any, { playOnMiss: boolean });
 }
 
@@ -44,7 +39,8 @@ Hooks.once("init", async () => {
     await hooksForEveryone();
     await hooksForGMInit();
     if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
-        AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(rule: any) {
+        // @ts-ignore
+        game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
             return false;
         };
     }
