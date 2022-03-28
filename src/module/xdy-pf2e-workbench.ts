@@ -209,7 +209,7 @@ async function hooksForEveryone() {
 
     if (game.settings.get(MODULENAME, "automatedAnimationOn")) {
         Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
-            if (game.modules.get("autoanimations") && game.settings.get(MODULENAME, "automatedAnimationOn")) {
+            if (game.user.isGM && game.settings.get(MODULENAME, "automatedAnimationOn")) {
                 const messageToken = canvas?.scene?.tokens.get(<string>message.data.speaker.token);
                 const flags = message.data.flags.pf2e;
                 const rollType = flags.context?.type;
@@ -268,21 +268,27 @@ async function hooksForEveryone() {
                             break;
                     }
                     if (pack && item && (animation || sound) && message.user && message.user.targets) {
-                        //Needs to be unlocked for some reason. Meh.
-                        await pack.configure({ locked: false });
-                        if (animation) {
-                            await item.setFlag("autoanimations", "options.customPath", animation);
-                        } else {
-                            await item.unsetFlag("autoanimations", "options.customPath");
+                        if (game.modules.get("autoanimations")?.active) {
+                            await pack.configure({ locked: false });
+                            if (animation) {
+                                await item.setFlag("autoanimations", "options.customPath", animation);
+                            } else {
+                                await item.unsetFlag("autoanimations", "options.customPath");
+                            }
+                            const from = Array.from(message.user.targets);
+                            await AutoAnimations.playAnimation(messageToken, from, item, {
+                                playOnMiss: !degreeOfSuccess.toLowerCase().includes("success"),
+                            });
                         }
-                        if (sound) {
+                        if (sound && game.modules.get("sequencer")?.active) {
                             // @ts-ignore
-                            new Sequence(MODULENAME).sound().file(sound).fadeInAudio(100).fadeOutAudio(100).play();
+                            await new Sequence(MODULENAME)
+                                .sound()
+                                .file(sound)
+                                .fadeInAudio(100)
+                                .fadeOutAudio(100)
+                                .play();
                         }
-                        const from = Array.from(message.user.targets);
-                        await AutoAnimations.playAnimation(messageToken, from, item, {
-                            playOnMiss: !degreeOfSuccess.toLowerCase().includes("success"),
-                        });
                     }
                 }
             }
