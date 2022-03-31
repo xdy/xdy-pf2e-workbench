@@ -583,6 +583,55 @@ async function hooksForGMInit() {
             }
         });
     });
+
+    if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
+        Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
+            if (
+                // game.settings.get(MODULENAME, "breathWeaponReminder") &&
+                message.data.content &&
+                game.combats &&
+                game.combats.active &&
+                game.combats.active.combatant &&
+                game.combats.active.combatant.actor &&
+                shouldIHandleThisMessage(message, true, true)
+            ) {
+                const token = game.combats.active.combatant.token;
+                const prefix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.prefix`);
+                const postfix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.postfix`);
+                const matcher = `<p>.*${prefix}.*1d([46])${postfix}.*</p>`;
+                const match = message.data.content.match(matcher);
+                const matchString = match ? `1d${match[1]}` : "";
+
+                if (matchString) {
+                    const effect = {
+                        type: "effect",
+                        name: "Breath",
+                        img: "systems/pf2e/icons/spells/dragon-breath.webp",
+                        data: {
+                            tokenIcon: {
+                                show: true,
+                            },
+                            duration: {
+                                value: 1,
+                                unit: "rounds",
+                                sustained: false,
+                                expiry: "turn-start",
+                            },
+                        },
+                    };
+
+                    effect.data.duration.value = new Roll(matchString).roll({ async: false }).total + 1;
+                    const regExpMatchArray = message.data.content.match(/.*title="(.*?)" width.*/);
+                    effect.name =
+                        game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.used`) +
+                        (regExpMatchArray
+                            ? regExpMatchArray[1]
+                            : game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`));
+                    await token.actor.createEmbeddedDocuments("Item", [effect]);
+                }
+            }
+        });
+    }
 }
 
 function hooksForGMSetup() {

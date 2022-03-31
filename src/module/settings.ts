@@ -5,7 +5,7 @@ export let mystifyModifierKey: string;
 
 function debouncedReload() {
     foundry.utils.debounce(() => {
-        location.reload();
+        window.location.reload();
     }, 100);
 }
 
@@ -444,6 +444,16 @@ export function registerSettings() {
     game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
         name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
         hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
+    game.settings.register(MODULENAME, "reminderBreathWeapon", {
+        name: `${MODULENAME}.SETTINGS.reminderBreathWeapon.name`,
+        hint: `${MODULENAME}.SETTINGS.reminderBreathWeapon.hint`,
         scope: "client",
         config: true,
         default: false,

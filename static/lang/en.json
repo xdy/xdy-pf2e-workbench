@@ -233,6 +233,14 @@
       "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
         "hint": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat.",
         "name": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat."
+      },
+      "reminderBreathWeapon": {
+        "hint": "Client setting to set reminder for breath weapon use.",
+        "name": "Client setting for breath weapon reminder",
+        "prefix": "can't use",
+        "postfix": " rounds",
+        "defaultName": "Breath",
+        "used": "Used "
       }
     }
   }
