@@ -13,7 +13,6 @@ import { registerSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
 import { registerKeybindings } from "./keybinds";
 import { calcRemainingMinutes, startTimer } from "./feature/heroPointHandler";
-import { shouldIHandleThis, shouldIHandleThisMessage } from "./utils";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
 import { deprecatedMoveManually, moveOnDying, moveOnZeroHP } from "./feature/initiativeHandler";
 import { ActorPF2e } from "@actor";
@@ -21,6 +20,10 @@ import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { TokenDocumentPF2e } from "@scene";
 import { playAnimationAndSound } from "./feature/sfxHandler";
+import { reminderBreathWeapon } from "./feature/reminderEffects";
+import { toggleSettings } from "./feature/settingsHandler";
+import { reduceFrightened } from "./feature/conditionHandler";
+import { chatCardCollapse } from "./feature/qolHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -29,11 +32,12 @@ Hooks.once("init", async () => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
 
     registerSettings();
+
     registerKeybindings();
 
     await preloadTemplates();
-    await hooksForEveryone();
-    await hooksForGMInit();
+
+    //General module setup
     if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
         // @ts-ignore
         game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
@@ -41,144 +45,108 @@ Hooks.once("init", async () => {
         };
     }
 
-    // Register custom sheets (if any)
-});
-
-// Setup module
-Hooks.once("setup", async () => {
-    console.log(`${MODULENAME} | Setting up`);
-    // Do anything after initialization but before ready
-    hooksForGMSetup();
-});
-
-// When ready
-Hooks.once("ready", async () => {
-    // Do anything once the module is ready
-    console.log(`${MODULENAME} | Ready`);
-    Hooks.callAll(`${MODULENAME}.moduleReady`);
-});
-
-async function hooksForEveryone() {
-    //Hooks for everyone
-    if (
-        game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
-        (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
-            game.settings.get(MODULENAME, "autoRollDamageForSpellAttack"))
-    ) {
-        Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
-            await autoRollDamage(message);
-        });
+    if (game.settings.get(MODULENAME, "heroPointHandler")) {
+        if (game.user?.isGM) {
+            await startTimer(calcRemainingMinutes());
+        }
     }
 
-    if (game.settings.get(MODULENAME, "automatedAnimationOn")) {
+    //Hooks that always run
+    Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
+        toggleSettings(html);
+    });
+
+    //Hooks that only run if a setting that needs it has been enabled
+    if (
+        (game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
+            (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
+                game.settings.get(MODULENAME, "autoRollDamageForSpellAttack"))) ||
+        game.settings.get(MODULENAME, "automatedAnimationOn") ||
+        game.settings.get(MODULENAME, "applyPersistentDamage") ||
+        game.settings.get(MODULENAME, "reminderBreathWeapon")
+    ) {
         Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
             if (game.user.isGM && game.settings.get(MODULENAME, "automatedAnimationOn")) {
                 await playAnimationAndSound(message);
+            }
+
+            if (
+                game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
+                (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
+                    game.settings.get(MODULENAME, "autoRollDamageForSpellAttack"))
+            ) {
+                await autoRollDamage(message);
+            }
+
+            if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
+                await persistentDamage(message);
+            }
+
+            if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
+                await reminderBreathWeapon(message);
             }
         });
     }
 
     if (
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
-        game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
+        game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
+        game.settings.get(MODULENAME, "applyPersistentHealing") ||
+        (game.settings.get(MODULENAME, "npcMystifier") &&
+            game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
-        Hooks.on("renderChatMessage", (message: ChatMessagePF2e, html: JQuery) => {
-            if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
-                html.find(".card-content").hide();
+        Hooks.on("renderChatMessage", async (message: ChatMessagePF2e, html: JQuery) => {
+            if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
+                mangleChatMessage(message, html);
             }
-            html.on("click", "h3", (event: JQuery.ClickEvent) => {
-                const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
-                if (content && content.style) {
-                    event.preventDefault();
-                    content.style.display = content.style.display === "none" ? "block" : "none";
-                    if (content.style.display === "none") {
-                        html.find(".card-content").hide();
-                    }
-                }
-            });
+
+            if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
+                await persistentHealing(message);
+            }
+
+            if (
+                game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+                game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
+            ) {
+                chatCardCollapse(html);
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat")) {
+        Hooks.on("updateWorldTime", async (_total, diff) => {
+            if (
+                game.user?.isGM &&
+                game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat") &&
+                !game.combat?.active &&
+                diff >= 1
+            ) {
+                game.pf2e.effectTracker.removeExpired();
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
+        Hooks.on("updateCombat", (combat: EncounterPF2e) => {
+            if (
+                game.user?.isGM &&
+                game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn") &&
+                combat.combatant &&
+                combat.combatant.actor
+            ) {
+                game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
+            }
         });
     }
 
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
         Hooks.on("pf2e.endTurn", async (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
-            if (
-                game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn") &&
-                combatant &&
-                combatant.actor &&
-                shouldIHandleThis(combatant.isOwner ? game.user?.id : null)
-            ) {
-                if (combatant.actor.hasCondition("frightened")) {
-                    await combatant.actor.decreaseCondition("frightened");
-                }
+            if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
+                await reduceFrightened(combatant);
             }
         });
     }
 
-    if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-        Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
-            await persistentDamage(message);
-        });
-    }
-
-    if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
-        Hooks.on("renderChatMessage", async (message: ChatMessagePF2e) => {
-            await persistentHealing(message);
-        });
-    }
-
-    Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
-        const settings: [string, any][] = Array.from(game.settings.settings.entries());
-        settings.forEach((setting: [string, any]) => {
-            const settingName = setting[0];
-            //TODO Do this in a more elegant way
-            //Disable all dependent persistentDamage settings
-            if (
-                settingName !== `${MODULENAME}.applyPersistentAllow` &&
-                setting[0].startsWith(`${MODULENAME}.applyPersistent`)
-            ) {
-                const applyToggle = !(
-                    game.settings.get(MODULENAME, "applyPersistentAllow") === "none" ||
-                    (game.user?.isGM
-                        ? game.settings.get(MODULENAME, "applyPersistentAllow") === "players"
-                        : game.settings.get(MODULENAME, "applyPersistentAllow") === "gm")
-                );
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
-            }
-            //Disable all dependent persistentHealing settings
-            if (
-                settingName !== `${MODULENAME}.applyPersistentAllow` &&
-                setting[0].startsWith(`${MODULENAME}.applyPersistent`)
-            ) {
-                const applyToggle = !(
-                    game.settings.get(MODULENAME, "applyPersistentAllow") === "none" ||
-                    (game.user?.isGM
-                        ? game.settings.get(MODULENAME, "applyPersistentAllow") === "players"
-                        : game.settings.get(MODULENAME, "applyPersistentAllow") === "gm")
-                );
-                // const valueFunction = game.settings.get(MODULENAME, "applyPersistentAllow") === "none";
-
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
-            }
-            if (
-                settingName !== `${MODULENAME}.autoRollDamageAllow` &&
-                setting[0].startsWith(`${MODULENAME}.autoRollDamage`)
-            ) {
-                // const valueFunction = game.settings.get(MODULENAME, "autoRollDamage") === "none";
-                const applyToggle = !(
-                    game.settings.get(MODULENAME, "autoRollDamageAllow") === "none" ||
-                    (game.user?.isGM
-                        ? game.settings.get(MODULENAME, "autoRollDamageAllow") === "players"
-                        : game.settings.get(MODULENAME, "autoRollDamageAllow") === "gm")
-                );
-
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
-                html.find(`select[name="${settingName}"]`).parent().parent().toggle(applyToggle);
-            }
-        });
-    });
-}
-
-async function hooksForGMInit() {
     if (game.settings.get(MODULENAME, "npcMystifier")) {
         Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
@@ -212,12 +180,6 @@ async function hooksForGMInit() {
         });
     }
 
-    if (game.settings.get(MODULENAME, "heroPointHandler")) {
-        if (game.user?.isGM) {
-            await startTimer(calcRemainingMinutes());
-        }
-    }
-
     Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
         const settings: [string, any][] = Array.from(game.settings.settings.entries());
         settings.forEach((setting: [string, any]) => {
@@ -242,92 +204,18 @@ async function hooksForGMInit() {
         });
     });
 
-    if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
-        Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
-            if (
-                game.settings.get(MODULENAME, "reminderBreathWeapon") &&
-                message.data.content &&
-                game.combats &&
-                game.combats.active &&
-                game.combats.active.combatant &&
-                game.combats.active.combatant.token &&
-                shouldIHandleThisMessage(message, true, true)
-            ) {
-                const token = game.combats.active.combatant.token;
-                const prefix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.prefix`);
-                const postfix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.postfix`);
-                const matcher = `<p>.*${prefix}.*1d([46])${postfix}.*</p>`;
-                const match = message.data.content.match(matcher);
-                const matchString = match ? `1d${match[1]}` : "";
+    // Register custom sheets (if any)
+});
 
-                if (matchString) {
-                    const effect = {
-                        type: "effect",
-                        name: "Breath",
-                        img: "systems/pf2e/icons/spells/dragon-breath.webp",
-                        data: {
-                            tokenIcon: {
-                                show: true,
-                            },
-                            duration: {
-                                value: 1,
-                                unit: "rounds",
-                                sustained: false,
-                                expiry: "turn-start",
-                            },
-                        },
-                    };
+// Setup module
+Hooks.once("setup", async () => {
+    console.log(`${MODULENAME} | Setting up`);
+    // Do anything after initialization but before ready
+});
 
-                    effect.data.duration.value = new Roll(matchString).roll({ async: false }).total + 1;
-                    const title = message.data.content.match(/.*title="(.*?)" width.*/);
-                    effect.name =
-                        game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.used`) +
-                        (title
-                            ? title[1]
-                            : game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`));
-                    await token.actor.createEmbeddedDocuments("Item", [effect]);
-                }
-            }
-        });
-    }
-}
-
-function hooksForGMSetup() {
-    //GM-only hooks that must run at setup
-    if (
-        game.settings.get(MODULENAME, "npcMystifier") &&
-        game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")
-    ) {
-        Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
-            if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
-                mangleChatMessage(message, html);
-            }
-        });
-    }
-
-    if (game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat")) {
-        Hooks.on("updateWorldTime", async (_total, diff) => {
-            if (
-                game.user?.isGM &&
-                game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat") &&
-                !game.combat?.active &&
-                diff >= 1
-            ) {
-                game.pf2e.effectTracker.removeExpired();
-            }
-        });
-    }
-
-    if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
-        Hooks.on("updateCombat", (combat: EncounterPF2e) => {
-            if (
-                game.user?.isGM &&
-                game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn") &&
-                combat.combatant &&
-                combat.combatant.actor
-            ) {
-                game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
-            }
-        });
-    }
-}
+// When ready
+Hooks.once("ready", async () => {
+    // Do anything once the module is ready
+    console.log(`${MODULENAME} | Ready`);
+    Hooks.callAll(`${MODULENAME}.moduleReady`);
+});

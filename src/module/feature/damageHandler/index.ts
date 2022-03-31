@@ -96,7 +96,6 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
 export async function persistentDamage(message: ChatMessagePF2e) {
     if (
-        game.settings.get(MODULENAME, "applyPersistentDamage") &&
         canvas.ready &&
         "persistent" in message.data.flags &&
         message.data.speaker.token &&
