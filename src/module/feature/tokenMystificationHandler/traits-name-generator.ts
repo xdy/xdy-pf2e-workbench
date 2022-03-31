@@ -1,7 +1,7 @@
-import { TRAITS } from "../../xdy-pf2e-constants";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { TokenPF2e } from "../../../../types/src/module/canvas/token";
-import { TokenDocumentPF2e } from "../../../../types/src/module/scene/token-document/document";
+import { TokenDocumentPF2e } from "@scene";
+import { TRAITS } from "../../xdy-pf2e-constants";
+import { TokenPF2e } from "@canvas";
 
 async function fixesPreAndPost(settingkey: string): Promise<string> {
     const fixSetting: string = <string>game.settings.get(MODULENAME, settingkey);

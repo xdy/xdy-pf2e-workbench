@@ -9,6 +9,7 @@
     ],
     "moduleResolution": "node",
     "outDir": "dist",
+    "baseUrl": "./",
     "paths": {
       "@actor": [
         "types/src/module/actor"
@@ -72,13 +73,13 @@
       "handlebars",
       "jquery",
       "node",
-      "socket.io",
+      "socket.io"
     ],
     "typeRoots": [
       "node_modules/@types",
       "node_modules/handlebars",
       "types/foundry"
-    ],
+    ]
   },
   "ts-node": {
     "files": true

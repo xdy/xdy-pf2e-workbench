@@ -10,23 +10,19 @@
 //TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
 import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
-import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/mystify-token";
+import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
 import { registerKeybindings } from "./keybinds";
-import { getCombatantById, moveSelectedAheadOfCurrent } from "./feature/changeCombatantInitiative";
 import { calcRemainingMinutes, startTimer } from "./feature/heroPointHandler";
-import { CombatantPF2e } from "../../types/src/module/encounter/combatant";
-import { ChatMessagePF2e } from "../../types/src/module/chat-message/index";
-import { ActorFlagsPF2e } from "../../types/src/module/actor/data/base";
-import { SpellPF2e } from "../../types/src/module/item/spell/index";
-import { ActorPF2e } from "../../types/src/module/actor/base";
-import { EncounterPF2e } from "../../types/src/module/encounter/document";
-import { TokenDocumentPF2e } from "../../types/src/module/scene/token-document/document";
+import { shouldIHandleThis, shouldIHandleThisMessage } from "./utils";
+import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
+import { deprecatedMoveManually, moveOnDying, moveOnZeroHP } from "./feature/initiativeHandler";
+import { ActorPF2e } from "@actor";
+import { ChatMessagePF2e } from "@module/chat-message";
+import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
+import { TokenDocumentPF2e } from "@scene";
+import { playAnimationAndSound } from "./feature/sfxHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
-
-declare class AutoAnimations {
-    static playAnimation(messageToken: TokenDocument, from: any, item: any, { playOnMiss: boolean });
-}
 
 // Initialize module
 Hooks.once("init", async () => {
@@ -62,52 +58,6 @@ Hooks.once("ready", async () => {
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
 
-function shouldIHandleThis(
-    userId: string | undefined | null,
-    playerCondition = true,
-    gmCondition = true,
-    extraCondition = false
-) {
-    const isUserActive = game.users?.players
-        .filter((u) => u.active)
-        .filter((u) => !u.isGM)
-        .find((u) => u.id === userId);
-    const rollAsPlayer = !game.user?.isGM && extraCondition && playerCondition;
-    const rollAsGM = game.user?.isGM && (extraCondition || !isUserActive) && gmCondition;
-    return rollAsPlayer || rollAsGM;
-}
-
-function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition: boolean, gmCondition: boolean) {
-    const userId = message.data.user;
-    const amIMessageSender = userId === game.user?.id;
-    return shouldIHandleThis(userId, playerCondition, gmCondition, amIMessageSender);
-}
-
-function getActionFromMessage(actions: any, actionIds: RegExpMatchArray, message: ChatMessagePF2e) {
-    const strikes = actions.filter((a: { type: string }) => a.type === "strike");
-    const itemStrikes = strikes.filter((a: { item: { id: any } }) => a.item.id === actionIds[1]);
-    if (itemStrikes.length === 1) {
-        //Normal case
-        return itemStrikes[0];
-    } else if (itemStrikes.length > 1) {
-        //The strike is most likely based on an RE which means that all actions get the same item id (e.g. animal form), try to regex it out of the message instead
-        const strikeName = message.data.flavor?.match(
-            `<h4 class="action">${game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`
-            )}: (.*?)<\\/h4>`
-        );
-        if (strikeName && strikeName[1]) {
-            return strikes.find((a: { name: string }) => a.name === strikeName[1]);
-        } else {
-            //If we can't find the strike name, give up.
-            return null;
-        }
-    } else {
-        //If we can't find the strike, give up.
-        return null;
-    }
-}
-
 async function hooksForEveryone() {
     //Hooks for everyone
     if (
@@ -116,181 +66,14 @@ async function hooksForEveryone() {
             game.settings.get(MODULENAME, "autoRollDamageForSpellAttack"))
     ) {
         Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
-            const numberOfMessagesToCheck = 5;
-            if (
-                shouldIHandleThisMessage(
-                    message,
-                    ["all", "players"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow")),
-                    ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow"))
-                )
-            ) {
-                const autoRollDamageForStrikeEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
-                const autoRollDamageForSpellAttackEnabled = game.settings.get(
-                    MODULENAME,
-                    "autoRollDamageForSpellAttack"
-                );
-                const messageActor: ActorPF2e = <ActorPF2e>game.actors?.get(<string>message.data.speaker.actor);
-                const messageToken: TokenDocumentPF2e = <TokenDocumentPF2e>(
-                    canvas?.scene?.tokens.get(<string>message.data.speaker.token)
-                );
-                const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
-                const rollType = flags.context?.type;
-                if (
-                    messageActor &&
-                    messageToken &&
-                    ((rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
-                        (rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
-                ) {
-                    const actionId = <string>flags?.origin?.uuid;
-                    const degreeOfSuccess = flags.context?.outcome ?? "";
-                    if (rollType === "spell-attack-roll") {
-                        if (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess") {
-                            const spell = <SpellPF2e>await fromUuid(actionId);
-                            let spellLevel = spell.data.data.level;
-                            let levelFromChatCard = false;
-                            const chatLength = game.messages?.contents.length ?? 0;
-                            for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
-                                const msg = game.messages?.contents[chatLength - i];
-                                if (msg && (<ActorFlagsPF2e>msg.data.flags.pf2e).origin?.uuid === actionId) {
-                                    const level = msg.data.content.match(/data-spell-lvl="(\d+)"/);
-                                    if (level && level[1]) {
-                                        levelFromChatCard = true;
-                                        // @ts-ignore Wtf? How to make a number into a OneToTen?
-                                        spellLevel = parseInt(level[1]);
-                                        break;
-                                    }
-                                }
-                            }
-                            if (
-                                !levelFromChatCard &&
-                                game.settings.get(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound")
-                            ) {
-                                ui.notifications.info(
-                                    game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
-                                        spell: spell.data.name,
-                                    })
-                                );
-                            }
-
-                            //Until spell level flags are added to attack rolls it is the best I could come up with.
-                            //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
-                            //@ts-ignore
-                            spell.rollDamage({
-                                currentTarget: {
-                                    closest: () => {
-                                        // @ts-ignore Wtf? How to make a number into a OneToTen?
-                                        return { dataset: { spellLvl: Math.abs(spellLevel) } };
-                                    },
-                                },
-                            });
-                        }
-                    } else if (rollType === "attack-roll") {
-                        const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
-                        const actions: any =
-                            // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
-                            messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
-                            // @ts-ignore
-                            messageActor?.data.data?.actions;
-                        const actionIds = actionId.match(/Item.(\w+)/);
-                        let action: any;
-                        if (actionIds && actionIds[1]) {
-                            action = getActionFromMessage(actions, actionIds, message);
-                            if (degreeOfSuccess === "success") {
-                                action?.damage({ options: rollOptions });
-                            } else if (degreeOfSuccess === "criticalSuccess") {
-                                action?.critical({ options: rollOptions });
-                            }
-                        }
-                    }
-                }
-            }
+            await autoRollDamage(message);
         });
     }
 
     if (game.settings.get(MODULENAME, "automatedAnimationOn")) {
         Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
             if (game.user.isGM && game.settings.get(MODULENAME, "automatedAnimationOn")) {
-                const messageToken = canvas?.scene?.tokens.get(<string>message.data.speaker.token);
-                const flags = message.data.flags.pf2e;
-                const rollType = flags.context?.type;
-                if (messageToken && rollType === "attack-roll") {
-                    const degreeOfSuccess = flags.context?.outcome ?? "";
-                    const pack = game.packs.get("xdy-pf2e-workbench.xdy-pf2e-workbench-items");
-                    const item = ((await pack?.getDocuments()) ?? []).find(
-                        (item: any) => item.data.name === "AutoAnimationTemplate"
-                    );
-                    let animation = "";
-                    let sound = "";
-                    switch (degreeOfSuccess) {
-                        case "criticalSuccess":
-                            if (game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessAnimation")) {
-                                animation =
-                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessAnimation") ||
-                                    animation;
-                            }
-                            if (game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessSound")) {
-                                sound =
-                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnCritSuccessSound") ||
-                                    sound;
-                            }
-                            break;
-                        case "criticalFailure":
-                            if (game.settings.get(MODULENAME, "automatedAnimationOnCritFailAnimation")) {
-                                animation =
-                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnCritFailAnimation") ||
-                                    animation;
-                            }
-                            if (game.settings.get(MODULENAME, "automatedAnimationOnCritFailSound")) {
-                                sound =
-                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnCritFailSound") || sound;
-                            }
-                            break;
-                        case "failure":
-                            if (game.settings.get(MODULENAME, "automatedAnimationOnFailAnimation")) {
-                                animation =
-                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnFailAnimation") ||
-                                    animation;
-                            }
-                            if (game.settings.get(MODULENAME, "automatedAnimationOnFailSound")) {
-                                sound = <string>game.settings.get(MODULENAME, "automatedAnimationOnFailSound") || sound;
-                            }
-                            break;
-                        case "success":
-                            if (game.settings.get(MODULENAME, "automatedAnimationOnSuccessAnimation")) {
-                                animation =
-                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnSuccessAnimation") ||
-                                    animation;
-                            }
-                            if (game.settings.get(MODULENAME, "automatedAnimationOnFailSound")) {
-                                sound =
-                                    <string>game.settings.get(MODULENAME, "automatedAnimationOnSuccessSound") || sound;
-                            }
-                            break;
-                    }
-                    if (pack && item && (animation || sound) && message.user && message.user.targets) {
-                        if (game.modules.get("autoanimations")?.active) {
-                            await pack.configure({ locked: false });
-                            if (animation) {
-                                await item.setFlag("autoanimations", "options.customPath", animation);
-                            } else {
-                                await item.unsetFlag("autoanimations", "options.customPath");
-                            }
-                            const from = Array.from(message.user.targets);
-                            await AutoAnimations.playAnimation(messageToken, from, item, {
-                                playOnMiss: !degreeOfSuccess.toLowerCase().includes("success"),
-                            });
-                        }
-                        if (sound && game.modules.get("sequencer")?.active) {
-                            // @ts-ignore
-                            await new Sequence(MODULENAME)
-                                .sound()
-                                .file(sound)
-                                .fadeInAudio(100)
-                                .fadeOutAudio(100)
-                                .play();
-                        }
-                    }
-                }
+                await playAnimationAndSound(message);
             }
         });
     }
@@ -333,89 +116,13 @@ async function hooksForEveryone() {
 
     if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
         Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
-            if (
-                game.settings.get(MODULENAME, "applyPersistentDamage") &&
-                canvas.ready &&
-                "persistent" in message.data.flags &&
-                message.data.speaker.token &&
-                message.data.flavor &&
-                message.roll?.total &&
-                shouldIHandleThisMessage(
-                    message,
-                    ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
-                    ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
-                ) &&
-                game.actors
-            ) {
-                const token = canvas.tokens?.get(message.data.speaker.token);
-                if (token && token.isOwner) {
-                    const damage = message.roll.total;
-
-                    await token?.actor?.applyDamage(damage, token, false);
-
-                    if (game.settings.get(MODULENAME, "applyPersistentDamageSeparateMessage")) {
-                        await ChatMessage.create({
-                            content: game.i18n.format(`${MODULENAME}.SETTINGS.applyPersistentDamage.wasDamaged`, {
-                                damage: damage,
-                            }),
-                            speaker: message.data.speaker,
-                            flavor: $(message.data.flavor).filter("div").text().trim().split("\n")[0],
-                            whisper:
-                                game.settings.get("pf2e", "metagame.secretDamage") && !token.actor?.hasPlayerOwner
-                                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                                    : [],
-                        });
-                    }
-                }
-            }
+            await persistentDamage(message);
         });
     }
 
     if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
         Hooks.on("renderChatMessage", async (message: ChatMessagePF2e) => {
-            if (
-                game.settings.get(MODULENAME, "applyPersistentHealing") &&
-                canvas.ready &&
-                message.data.flavor &&
-                message.roll &&
-                message.roll.total &&
-                game.combats &&
-                game.combats.active &&
-                game.combats.active.combatant &&
-                game.combats.active.combatant.actor &&
-                shouldIHandleThisMessage(
-                    message,
-                    ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
-                    ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
-                )
-            ) {
-                const token = game.combats.active.combatant.token;
-                if (token && token.isOwner) {
-                    if (
-                        [
-                            game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentHealing.FastHealingLabel`),
-                            game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentHealing.RegenerationLabel`),
-                        ].some((text) => message.data.flavor?.includes(text))
-                    ) {
-                        const healing = message.roll.total * -1;
-
-                        await token.actor.applyDamage(healing, token, false);
-                        if (game.settings.get(MODULENAME, "applyPersistentHealingSeparateMessage")) {
-                            await ChatMessage.create({
-                                content: game.i18n.format(`${MODULENAME}.SETTINGS.applyPersistentHealing.wasHealed`, {
-                                    healing: Math.abs(healing),
-                                }),
-                                speaker: { token: game.combats.active.combatant.token?.id },
-                                flavor: message.data.flavor.split("\n")[0],
-                                whisper:
-                                    game.settings.get("pf2e", "metagame.secretDamage") && !token.actor?.hasPlayerOwner
-                                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                                        : [],
-                            });
-                        }
-                    }
-                }
-            }
+            await persistentHealing(message);
         });
     }
 
@@ -482,68 +189,19 @@ async function hooksForGMInit() {
 
     if (game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedManually") {
         Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: any) => {
-            if (game.user?.isGM && game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedManually") {
-                entryOptions.push({
-                    icon: '<i class="fas fa-skull"></i>',
-                    name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantContextMenu.name`,
-                    callback: async (li: any) => {
-                        await moveSelectedAheadOfCurrent(getCombatantById(li.data("combatant-id")));
-                    },
-                });
-            }
+            deprecatedMoveManually(entryOptions);
         });
     }
 
     if (game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
-            if (
-                game.user?.isGM &&
-                game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" &&
-                game.combat
-            ) {
-                const combatant = <CombatantPF2e>(
-                    game.combat.getCombatantByToken(
-                        actor.isToken
-                            ? <string>actor.token?.id
-                            : <string>canvas?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
-                    )
-                );
-                if (
-                    combatant &&
-                    combatant !== game.combat.combatant &&
-                    // @ts-ignore
-                    actor.data.data.attributes.hp.value > 0 &&
-                    getProperty(update, "data.attributes.hp.value") <= 0
-                ) {
-                    await moveSelectedAheadOfCurrent(combatant);
-                }
-            }
+            await moveOnZeroHP(actor, update);
         });
     }
 
     if (game.settings.get(MODULENAME, "enableAutomaticMove") === "gettingStatusDying") {
         Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update) => {
-            type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
-            if (
-                game.user?.isGM &&
-                game.settings.get(MODULENAME, "enableAutomaticMove") === "gettingStatusDying" &&
-                game.combat &&
-                tokenDoc.actor &&
-                update.actorData
-            ) {
-                const shouldMove =
-                    !tokenDoc.actor.hasCondition("dying") &&
-                    update.actorData.items &&
-                    update.actorData.items
-                        .filter((row: UpdateRow) => row.type === "condition")
-                        .filter((row: UpdateRow) => row.data.active)
-                        .filter((row: UpdateRow) => row.data.slug === "dying")
-                        .find((row: UpdateRow) => row.data.value.value === 1);
-                const combatant = <CombatantPF2e>game.combat.getCombatantByToken(<string>tokenDoc.id);
-                if (combatant && combatant !== game.combat.combatant && shouldMove) {
-                    await moveSelectedAheadOfCurrent(combatant);
-                }
-            }
+            await moveOnDying(tokenDoc, update);
         });
     }
     if (game.settings.get(MODULENAME, "npcMystifier")) {
@@ -587,12 +245,12 @@ async function hooksForGMInit() {
     if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
         Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
             if (
-                // game.settings.get(MODULENAME, "breathWeaponReminder") &&
+                game.settings.get(MODULENAME, "reminderBreathWeapon") &&
                 message.data.content &&
                 game.combats &&
                 game.combats.active &&
                 game.combats.active.combatant &&
-                game.combats.active.combatant.actor &&
+                game.combats.active.combatant.token &&
                 shouldIHandleThisMessage(message, true, true)
             ) {
                 const token = game.combats.active.combatant.token;
@@ -621,11 +279,11 @@ async function hooksForGMInit() {
                     };
 
                     effect.data.duration.value = new Roll(matchString).roll({ async: false }).total + 1;
-                    const regExpMatchArray = message.data.content.match(/.*title="(.*?)" width.*/);
+                    const title = message.data.content.match(/.*title="(.*?)" width.*/);
                     effect.name =
                         game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.used`) +
-                        (regExpMatchArray
-                            ? regExpMatchArray[1]
+                        (title
+                            ? title[1]
                             : game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`));
                     await token.actor.createEmbeddedDocuments("Item", [effect]);
                 }

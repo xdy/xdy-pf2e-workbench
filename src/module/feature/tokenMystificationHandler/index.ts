@@ -1,8 +1,9 @@
-import { generateNameFromTraits } from "./traits-name-generator";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { TokenDocumentPF2e } from "@scene";
 import { mystifyModifierKey } from "../../settings";
-import { TokenDataPF2e, TokenDocumentPF2e } from "../../../../types/src/module/scene/token-document";
-import { TokenPF2e } from "../../../../types/src/module/canvas/token";
+import { TokenDataPF2e } from "@scene/token-document";
+import { TokenPF2e } from "@canvas";
+import { generateNameFromTraits } from "./traits-name-generator";
 
 function shouldSkipRandomNumber(token: TokenPF2e | TokenDocumentPF2e) {
     return (

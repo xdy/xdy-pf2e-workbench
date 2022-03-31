@@ -1,4 +1,5 @@
 // Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
+
 import { MODULENAME } from "./xdy-pf2e-workbench";
 
 export let mystifyModifierKey: string;
