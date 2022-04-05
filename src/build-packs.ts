@@ -3,21 +3,6 @@
 import fs from "fs-extra";
 import path from "path";
 
-const asymonousSource = [
-    "./submodules/my-foundryvtt-macros/PF2e",
-    "./submodules/my-foundryvtt-macros/PF2e/Contributions by others",
-];
-const packsSource = "packs";
-
-const pf2eSystemPath = (() => {
-    const configPath = path.resolve(process.cwd(), "foundryconfig.json");
-    const configData = fs.existsSync(configPath) ? fs.readJSONSync(configPath) : undefined;
-    return configData !== undefined ? path.join(configData.dataPath, "Data", "modules", configData.moduleName) : null;
-})();
-const outDir = pf2eSystemPath ?? path.join(".");
-
-fs.mkdirsSync(path.resolve(outDir, "packs"));
-
 function randomID() {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     return Array.from(Array(16).keys())
@@ -38,11 +23,6 @@ function copyFolder(source: string, target: string) {
             fs.appendFileSync(targetPath, `\n//# source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(path.dirname(sourcePath))}/${file}" - Fetched on ${new Date().toISOString()}`);
         });
 }
-
-fs.mkdirsSync(outDir + "/" + packsSource + "/" + "asymonous-benefactor-macros");
-copyFolder(path.resolve(".", asymonousSource[0]), path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"));
-copyFolder(path.resolve(".", asymonousSource[1]), path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"));
-
 function getFolders(dir: string) {
     const results: string[] = [];
     const folders = fs.readdirSync(packsSource);
@@ -54,6 +34,25 @@ function getFolders(dir: string) {
 
     return results;
 }
+
+const asymonousSource = [
+    "./submodules/my-foundryvtt-macros/PF2e",
+    "./submodules/my-foundryvtt-macros/PF2e/Contributions by others",
+];
+const packsSource = "packs";
+
+const pf2eSystemPath = (() => {
+    const configPath = path.resolve(process.cwd(), "foundryconfig.json");
+    const configData = fs.existsSync(configPath) ? fs.readJSONSync(configPath) : undefined;
+    return configData !== undefined ? path.join(configData.dataPath, "Data", "modules", configData.moduleName) : null;
+})();
+const outDir = pf2eSystemPath ?? path.join(".");
+
+fs.mkdirsSync(path.resolve(outDir, "packs"));
+
+fs.mkdirsSync(outDir + "/" + packsSource + "/" + "asymonous-benefactor-macros");
+copyFolder(path.resolve(".", asymonousSource[0]), path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"));
+copyFolder(path.resolve(".", asymonousSource[1]), path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"));
 
 const folders = getFolders(packsSource);
 const lines: string[] = [];
@@ -95,4 +94,4 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
     const file1 = path.resolve(outDir, "packs", folder + ".db");
     fs.writeFileSync(file1, result, "utf8");
 }
-fs.rmdirSync(path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"), { recursive: true });
+fs.rmSync(path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"), { recursive: true });

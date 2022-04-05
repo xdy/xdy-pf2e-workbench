@@ -48,7 +48,7 @@ export async function moveOnZeroHP(actor: ActorPF2e, update: Record<string, stri
 export async function moveOnDying(tokenDoc: TokenDocumentPF2e, update): Promise<void> {
     if (
         game.user?.isGM &&
-        game.settings.get(MODULENAME, "enableAutomaticMove") === "gettingStatusDying" &&
+        game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedGettingStatusDying" &&
         game.combat &&
         tokenDoc.actor &&
         update.actorData

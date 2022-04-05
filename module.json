@@ -15,7 +15,7 @@
   "packs": [
     {
       "name": "asymonous-benefactor-macros",
-      "label": "asymonous-benefactor-macros",
+      "label": "Symon-provided macros (asymonous-benefactor-macros)",
       "system": "pf2e",
       "path": "packs/asymonous-benefactor-macros.db",
       "module": "xdy-pf2e-workbench",
@@ -23,7 +23,7 @@
     },
     {
       "name": "asymonous-benefactor-effects",
-      "label": "asymonous-benefactor-effects.db",
+      "label": "asymonous-benefactor-effects",
       "system": "pf2e",
       "path": "packs/asymonous-benefactor-effects.db",
       "module": "xdy-pf2e-workbench",

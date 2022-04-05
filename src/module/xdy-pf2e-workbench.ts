@@ -167,7 +167,7 @@ Hooks.once("init", async () => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "enableAutomaticMove") === "gettingStatusDying") {
+    if (game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedGettingStatusDying") {
         Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update) => {
             await moveOnDying(tokenDoc, update);
         });

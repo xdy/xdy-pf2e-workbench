@@ -107,7 +107,7 @@
         "name": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant.",
         "noAutomation": "Never",
         "reaching0HP": "When combatant reaches 0 HP.",
-        "gettingStatusDying": "When combatant gets status Dying.",
+        "gettingStatusDying": "(Deprecated) When combatant gets status Dying.",
         "deprecatedManually": "(Deprecated) Enables manual option on selected combatant."
       },
       "heroPointHandler": {
