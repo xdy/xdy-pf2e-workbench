@@ -43,7 +43,9 @@ export function registerSettings() {
         choices: {
             noAutomation: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.noAutomation`),
             reaching0HP: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HP`),
-            deprecatedGettingStatusDying: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.deprecatedGettingStatusDying`),
+            deprecatedGettingStatusDying: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.enableAutomaticMove.deprecatedGettingStatusDying`
+            ),
             deprecatedManually: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.deprecatedManually`),
         },
         onChange: () => debouncedReload(),
