@@ -149,6 +149,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     const startContent = `
 <div class="form-group">
 <div>${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.instructions`)}</div>
+<hr>
   <label class="col-md-4 control-label" for="radios">${game.i18n.localize(
       `${MODULENAME}.SETTINGS.heroPointHandler.doWhat`
   )}</label>
@@ -183,6 +184,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
   </div>
 </div>
 
+<hr>
 <div class="form-group">
   <label class="col-md-4 control-label" for="characters">${game.i18n.localize(
       `${MODULENAME}.SETTINGS.heroPointHandler.addOne`
@@ -201,17 +203,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     </div>`;
     }
 
-    const all =
-        characters.length > 0
-            ? `
-  <div class="radio">
-    <label for="characters-ALL">
-      <input type="radio" name="characters" id="characters-ALL" value="ALL">
-      ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.all`)}
-    </label>
-  </div>`
-            : "";
-    const remainingContent = `${all}
+    const remainingContent = `
   <div class="radio">
     <label for="characters-NONE">
       <input type="radio" name="characters" id="characters-NONE" value="NONE" ${
@@ -222,6 +214,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
   </div>
 </div>
 
+<hr>
 <div class="form-group">
   <div class="col-md-4">
     <div class="input-group">
