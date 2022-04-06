@@ -12,7 +12,6 @@ import { preloadTemplates } from "./preloadTemplates";
 import { registerSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
 import { registerKeybindings } from "./keybinds";
-import { calcRemainingMinutes, startTimer } from "./feature/heroPointHandler";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
 import { deprecatedMoveManually, moveOnDying, moveOnZeroHP } from "./feature/initiativeHandler";
 import { ActorPF2e } from "@actor";
@@ -24,6 +23,7 @@ import { reminderBreathWeapon } from "./feature/reminderEffects";
 import { toggleSettings } from "./feature/settingsHandler";
 import { reduceFrightened } from "./feature/conditionHandler";
 import { chatCardCollapse } from "./feature/qolHandler";
+import { calcRemainingMinutes, startTimer } from "./feature/heroPointHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -36,20 +36,6 @@ Hooks.once("init", async () => {
     registerKeybindings();
 
     await preloadTemplates();
-
-    //General module setup
-    if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
-        // @ts-ignore
-        game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
-            return false;
-        };
-    }
-
-    if (game.settings.get(MODULENAME, "heroPointHandler")) {
-        if (game.user?.isGM) {
-            await startTimer(calcRemainingMinutes());
-        }
-    }
 
     //Hooks that always run
     Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
@@ -211,11 +197,26 @@ Hooks.once("init", async () => {
 Hooks.once("setup", async () => {
     console.log(`${MODULENAME} | Setting up`);
     // Do anything after initialization but before ready
+    //General module setup
+    if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
+        // @ts-ignore
+        game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
+            return false;
+        };
+    }
 });
 
 // When ready
 Hooks.once("ready", async () => {
     // Do anything once the module is ready
     console.log(`${MODULENAME} | Ready`);
+
+    // Must be in ready
+    if (game.settings.get(MODULENAME, "heroPointHandler")) {
+        if (game.user?.isGM) {
+            await startTimer(calcRemainingMinutes());
+        }
+    }
+
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
