@@ -60,7 +60,7 @@
         "null-loader": "^4.0.1",
         "pixi.js": "~6.2.2",
         "prettier": "^2.6.2",
-        "sass": "^1.49.11",
+        "sass": "^1.50.0",
         "sass-loader": "^12.6.0",
         "semantic-release": "^19.0.2",
         "simple-progress-webpack-plugin": "^2.0.0",
