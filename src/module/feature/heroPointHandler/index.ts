@@ -11,7 +11,7 @@ export enum HPHState {
     Timeout,
 }
 
-const DEFAULT_TIMEOUT = 60;
+const TIMEOUT_MINUTES = 60;
 const ONE_MINUTE_IN_MS = 60 * 1000;
 
 export async function startTimer(remainingMinutes: number) {
@@ -56,13 +56,13 @@ export async function heroPointHandler(state: HPHState) {
     let remainingMinutes: number;
     switch (state) {
         case HPHState.Start:
-            remainingMinutes = DEFAULT_TIMEOUT;
+            remainingMinutes = TIMEOUT_MINUTES;
             break;
         case HPHState.Check:
             remainingMinutes = calcRemainingMinutes();
             break;
         case HPHState.Timeout:
-            remainingMinutes = DEFAULT_TIMEOUT;
+            remainingMinutes = TIMEOUT_MINUTES;
             break;
     }
 
@@ -104,7 +104,10 @@ export async function heroPointHandler(state: HPHState) {
                     remainingMinutes > 0
                         ? game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.willBeResetIn`, {
                               remainingMinutes: remainingMinutes,
-                              time: new Date(Date.now() + remainingMinutes * ONE_MINUTE_IN_MS).toLocaleTimeString(),
+                              time: new Date(Date.now() + remainingMinutes * ONE_MINUTE_IN_MS).toLocaleTimeString([], {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                              }),
                           })
                         : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerStopped`);
                 return ChatMessage.create(
@@ -229,7 +232,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     <div class="input-group">
       <span class="input-group-addon">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`)}</span>
       <input id="timerTextId" name="timerText" class="form-control" value="${
-          remainingMinutes || DEFAULT_TIMEOUT
+          remainingMinutes || TIMEOUT_MINUTES
       }" type="text">
     </div>
     <p class="help-block">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`)}</p>
@@ -241,9 +244,13 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 }
 
 export function calcRemainingMinutes() {
-    const startTime = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime") || game.time.serverTime;
-    const minutes = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes") || DEFAULT_TIMEOUT;
-    return minutes - Math.floor((game.time.serverTime - startTime) / (minutes * ONE_MINUTE_IN_MS));
+    const currentTime: number = game.time.serverTime;
+    const startTime: number = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime");
+    const previous: number = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes");
+    const startMinutes: number = previous ?? TIMEOUT_MINUTES;
+    const passedMillis = game.time.serverTime - (startTime ?? currentTime);
+    const passedMinutes = Math.floor(passedMillis / ONE_MINUTE_IN_MS);
+    return startMinutes - passedMinutes;
 }
 
 function heroes() {
