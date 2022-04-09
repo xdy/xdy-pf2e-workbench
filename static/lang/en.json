@@ -139,6 +139,10 @@
         "hint": "World keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
         "name": "World keybind to open the Hero Point handler dialog."
       },
+      "callHotbarMacro": {
+        "hint": "Call hotbar macro on page {page} position {column}",
+        "name": "Call hotbar macro on page {page} position {column}"
+      },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Move selected combatant before the current combatant."
       },

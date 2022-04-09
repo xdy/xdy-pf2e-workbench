@@ -33,8 +33,6 @@ Hooks.once("init", async () => {
 
     registerSettings();
 
-    registerKeybindings();
-
     await preloadTemplates();
 
     //Hooks that always run
@@ -197,6 +195,9 @@ Hooks.once("init", async () => {
 Hooks.once("setup", async () => {
     console.log(`${MODULENAME} | Setting up`);
     // Do anything after initialization but before ready
+
+    registerKeybindings();
+
     //General module setup
     if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
         // @ts-ignore

@@ -45,6 +45,10 @@
         "hint": "(Experimentell) Keybind för att öppna dialogrutan för hjältepoänghanterare som gör det möjligt att återställa och lägga till hjältepoäng med en påminnelse varje timme",
         "name": "(Experimentell) Nyckelbindning för att öppna dialogrutan för hjältepoänghanterare."
       },
+      "callHotbarMacro": {
+        "hint": "Anropa snabbfältsmakrot på sida {page} position {column}",
+        "name": "Anropa snabbfältsmakrot på sida {page} position {column}"
+      },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Flytta vald stridande före nuvarande stridande."
       },
