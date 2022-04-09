@@ -5,5 +5,10 @@
  */
 declare class InverseOcclusionMaskFilter extends AbstractBaseMaskFilter {
     static fragmentShader(channel: number): string;
-    static create<T extends InverseOcclusionMaskFilter>(this: ConstructorOf<T>, defaultUniforms?: DefaultShaderUniforms, channel?: string): T;
+
+    static override create<T extends InverseOcclusionMaskFilter>(
+        this: ConstructorOf<T>,
+        defaultUniforms?: DefaultShaderUniforms,
+        channel?: string
+    ): T;
 }

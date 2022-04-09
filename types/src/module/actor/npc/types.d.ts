@@ -6,9 +6,8 @@ import { SheetInventory } from "@actor/sheet/data-types";
 import { ActionData, EffectData, ItemDataPF2e } from "@item/data";
 import { IdentifyCreatureData } from "@module/recall-knowledge";
 import { FlattenedCondition } from "@system/conditions";
-import { NPCPF2e } from "./index";
+import { NPCPF2e } from ".";
 import { NPCArmorClass, NPCAttributes, NPCSaveData, NPCSkillData, NPCStrike, NPCSystemData } from "./data";
-
 interface ActionsDetails {
     label: string;
     actions: NPCSheetItemData<RawObject<ActionData>>[];
@@ -78,10 +77,6 @@ interface NPCSheetData extends CreatureSheetData<NPCPF2e> {
     unspecificLoreProgression?: string;
     isNotCommon?: boolean;
     actorSize?: string;
-    traits?: Record<string, string>;
-    immunities?: Record<string, string>;
-    hasImmunities?: boolean;
-    languages?: Record<string, string>;
     isWeak?: boolean;
     isElite?: boolean;
     eliteState: "active" | "inactive";

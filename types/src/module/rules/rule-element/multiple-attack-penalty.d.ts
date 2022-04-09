@@ -1,6 +1,5 @@
 import { PredicatePF2e } from "@system/predication";
-import { RuleElementPF2e } from "./index";
-
+import { RuleElementPF2e } from "./";
 /**
  * @category RuleElement
  */

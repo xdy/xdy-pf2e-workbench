@@ -1,7 +1,6 @@
 import { ActorSourcePF2e } from "@actor/data";
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 /** Update feats, items, and rule elements to accurately process cumulative item bonuses */
 export declare class Migration723CumulativeItemBonuses extends MigrationBase {
     static version: number;

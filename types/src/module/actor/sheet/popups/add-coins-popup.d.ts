@@ -1,6 +1,5 @@
 import { Coins } from "@item/treasure/helpers";
 import { ActorPF2e } from "@actor/base";
-
 interface AddCoinsFormData extends Coins {
     combineStacks: boolean;
 }

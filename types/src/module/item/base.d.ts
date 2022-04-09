@@ -1,13 +1,12 @@
 /// <reference types="jquery" />
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorPF2e } from "@actor";
-import { RuleElementOptions, RuleElementPF2e } from "../rules";
-import { ItemDataPF2e, ItemSourcePF2e, ItemSummaryData, ItemType, TraitChatData } from "./data";
+import { RuleElementPF2e, RuleElementOptions } from "../rules";
+import { ItemSummaryData, ItemDataPF2e, ItemSourcePF2e, TraitChatData, ItemType } from "./data";
 import { ItemSheetPF2e } from "./sheet/base";
 import { UserPF2e } from "@module/user";
 import { GhostTemplate } from "@module/ghost-measured-template";
 import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
-
 export interface ItemConstructionContextPF2e extends DocumentConstructionContext<ItemPF2e> {
     pf2e?: {
         ready?: boolean;
@@ -87,7 +86,7 @@ declare class ItemPF2e extends Item<ActorPF2e> {
     static createDialog(data?: {
         folder?: string;
     }, options?: Partial<FormApplicationOptions>): Promise<ItemPF2e | undefined>;
-    /** If necessary, migrate this item before importing */
+    /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
     static createDocuments<T extends ConstructorOf<ItemPF2e>>(this: T, data?: PreCreate<InstanceType<T>["data"]["_source"]>[], context?: DocumentModificationContext<InstanceType<T>>): Promise<InstanceType<T>[]>;
     static deleteDocuments<T extends ConstructorOf<ItemPF2e>>(this: T, ids?: string[], context?: DocumentModificationContext<InstanceType<T>>): Promise<InstanceType<T>[]>;

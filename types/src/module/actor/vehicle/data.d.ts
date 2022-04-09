@@ -1,14 +1,6 @@
-import {
-    ActorSystemData,
-    BaseActorAttributes,
-    BaseActorDataPF2e,
-    BaseActorSourcePF2e,
-    BaseHitPointsData,
-    BaseTraitsData
-} from "@actor/data/base";
+import { ActorSystemData, BaseActorAttributes, BaseActorDataPF2e, BaseActorSourcePF2e, BaseHitPointsData, BaseTraitsData } from "@actor/data/base";
 import { ValuesList } from "@module/data";
-import { VehiclePF2e } from "./index";
-
+import { VehiclePF2e } from ".";
 /** The stored source data of a vehicle actor */
 export declare type VehicleSource = BaseActorSourcePF2e<"vehicle", VehicleSystemData>;
 /** The boxed data object of the vehicle actor */

@@ -1,6 +1,5 @@
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 /** Add AE-likes to certain items that give the owner a higher tiebreak priority */
 export declare class Migration690InitiativeTiebreakItems extends MigrationBase {
     /** Nice */

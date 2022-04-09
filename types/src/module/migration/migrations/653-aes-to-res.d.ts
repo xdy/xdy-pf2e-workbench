@@ -1,7 +1,6 @@
 import { ActorSourcePF2e } from "@actor/data";
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 /** Remove `ActiveEffect`s from classes, convert AE changes on several item types to AE-likes */
 export declare class Migration653AEstoREs extends MigrationBase {
     static version: number;

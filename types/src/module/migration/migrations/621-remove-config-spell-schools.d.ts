@@ -1,6 +1,5 @@
 import { MigrationBase } from "../base";
 import { ItemSourcePF2e } from "@item/data";
-
 /** Remove duplicate magic schools localization map */
 export declare class Migration621RemoveConfigSpellSchools extends MigrationBase {
     static version: number;

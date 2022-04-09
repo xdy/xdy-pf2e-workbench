@@ -1,5 +1,4 @@
 import { Fraction } from "@util";
-
 /**
  * Implementation of travel speed https://2e.aonprd.com/Rules.aspx?ID=470
  */

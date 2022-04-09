@@ -1,7 +1,6 @@
 import { ActorSourcePF2e } from "@actor/data";
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 /** Replace the "Giant" language with "Jotun" */
 export declare class Migration681GiantLanguageToJotun extends MigrationBase {
     static version: number;

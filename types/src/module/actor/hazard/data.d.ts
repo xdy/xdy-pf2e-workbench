@@ -1,16 +1,8 @@
 import { SaveData } from "@actor/creature/data";
 import { SaveType } from "@actor/data";
-import {
-    ActorSystemData,
-    BaseActorAttributes,
-    BaseActorDataPF2e,
-    BaseActorSourcePF2e,
-    BaseHitPointsData,
-    BaseTraitsData
-} from "@actor/data/base";
+import { ActorSystemData, BaseActorAttributes, BaseActorDataPF2e, BaseActorSourcePF2e, BaseHitPointsData, BaseTraitsData } from "@actor/data/base";
 import { ZeroToTwo } from "@module/data";
-import { HazardPF2e } from "./index";
-
+import { HazardPF2e } from ".";
 /** The stored source data of a hazard actor */
 export declare type HazardSource = BaseActorSourcePF2e<"hazard", HazardSystemData>;
 export declare class HazardData extends BaseActorDataPF2e<HazardPF2e> {
@@ -40,6 +32,7 @@ interface HazardAttributes extends BaseActorAttributes {
 }
 interface HazardHitPoints extends Required<BaseHitPointsData> {
     negativeHealing: boolean;
+    brokenThreshold: number;
 }
 /** The raw information contained within the actor data object for hazards. */
 export interface HazardSystemData extends ActorSystemData {

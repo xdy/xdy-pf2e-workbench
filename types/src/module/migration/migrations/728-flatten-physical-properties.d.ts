@@ -1,6 +1,5 @@
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 /** Flatten several physical-item properties, remove others no longer in use */
 export declare class Migration728FlattenPhysicalProperties extends MigrationBase {
     static version: number;

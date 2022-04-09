@@ -1,7 +1,6 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { ChatMessagePF2e } from "./index";
-
+import { ChatMessagePF2e } from ".";
 export declare class CriticalHitAndFumbleCards {
     private static rollTypes;
     private static diceSoNice;

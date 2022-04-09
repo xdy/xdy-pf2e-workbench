@@ -2,7 +2,6 @@
 /// <reference types="tooltipster" />
 import { KitPF2e } from "@item/kit";
 import { ItemSheetPF2e } from "../sheet/base";
-
 /**
  * @category Other
  */
@@ -20,7 +19,7 @@ export declare class KitSheetPF2e extends ItemSheetPF2e<KitPF2e> {
             rare: string;
             unique: string;
         };
-        traits: import("../sheet/data-types").SheetOptions;
+        traits: import("@module/sheet/helpers").SheetOptions;
         itemType: string | null;
         item: import("./data").KitData;
         data: import("./data").KitSystemData;

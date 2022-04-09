@@ -4,8 +4,7 @@ import { ABCSystemData } from "@item/abc/data";
 import { ItemTraits } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
 import { Size, ValuesList } from "@module/data";
-import type { AncestryPF2e } from "./index";
-
+import type { AncestryPF2e } from ".";
 export declare type AncestrySource = BaseNonPhysicalItemSource<"ancestry", AncestrySystemData>;
 export declare class AncestryData extends BaseNonPhysicalItemData<AncestryPF2e> {
     static DEFAULT_ICON: ImagePath;

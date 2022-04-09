@@ -1,5 +1,4 @@
 import { IdentifyCreatureData } from "@module/recall-knowledge";
-
 export declare class RecallKnowledgePopup extends Application {
     private data;
     static get defaultOptions(): ApplicationOptions;

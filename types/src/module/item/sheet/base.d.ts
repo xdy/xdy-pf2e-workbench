@@ -1,19 +1,12 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { ItemSheetDataPF2e, SheetOptions, SheetSelections } from "./data-types";
 import { ItemPF2e } from "@item";
-
+import { ItemSheetDataPF2e } from "./data-types";
 export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
     static get defaultOptions(): DocumentSheetOptions;
     getData(options?: Partial<DocumentSheetOptions>): Promise<any>;
     /** An alternative to super.getData() for subclasses that don't need this class's `getData` */
     protected getBaseData(options?: Partial<DocumentSheetOptions>): ItemSheetDataPF2e<TItem>;
-    /** Prepare form options on the item sheet */
-    protected prepareOptions(options: Record<string, string>, selections: SheetSelections | (string[] & {
-        custom?: never;
-    }), { selectedOnly }?: {
-        selectedOnly?: boolean | undefined;
-    }): SheetOptions;
     protected onTagSelector(event: JQuery.TriggeredEvent): void;
     /**
      * Get NPC attack effect options

@@ -1,5 +1,4 @@
 import { ItemSystemData } from "@item/data/base";
-
 export interface ABCFeatureEntryData {
     pack?: string;
     id: string;

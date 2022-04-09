@@ -1,8 +1,7 @@
-import { ItemPF2e } from "../index";
+import { ItemPF2e } from "..";
 import { FeatData, FeatSource, FeatTrait, FeatType } from "./data";
 import { OneToThree } from "@module/data";
 import { UserPF2e } from "@module/user";
-
 export declare class FeatPF2e extends ItemPF2e {
     static get schema(): typeof FeatData;
     get featType(): FeatType;

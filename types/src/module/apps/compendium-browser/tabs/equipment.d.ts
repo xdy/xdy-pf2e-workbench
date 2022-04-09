@@ -1,7 +1,6 @@
-import { CompendiumBrowser } from "../index";
+import { CompendiumBrowser } from "..";
 import { CompendiumBrowserTab } from "./base";
 import { EquipmentFilters } from "./data";
-
 export declare class CompendiumBrowserEquipmentTab extends CompendiumBrowserTab {
     filterData: EquipmentFilters;
     constructor(browser: CompendiumBrowser);

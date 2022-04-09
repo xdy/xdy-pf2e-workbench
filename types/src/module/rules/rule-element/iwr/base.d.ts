@@ -1,6 +1,5 @@
-import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "../index";
+import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from "../";
 import { ItemPF2e } from "@item";
-
 /** @category RuleElement */
 declare abstract class IWRRuleElement extends RuleElementPF2e {
     constructor(data: IWRRuleElementSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);

@@ -1,7 +1,6 @@
-import { REPreCreateParameters, RuleElementOptions, RuleElementPF2e } from "../index";
+import { RuleElementPF2e, REPreCreateParameters, RuleElementOptions } from "../";
 import { ItemPF2e } from "@item";
 import { ChoiceSetData, ChoiceSetSource } from "./data";
-
 /**
  * Present a set of options to the user and assign their selection to an injectable property
  * @category RuleElement
@@ -21,8 +20,9 @@ declare class ChoiceSetRuleElement extends RuleElementPF2e {
      * create an array of choices.
      */
     private inflateChoices;
+    private getChoicesFromPath;
     /** Perform an NeDB query against the system feats compendium (or a different one if specified) */
-    private queryFeats;
+    private queryCompendium;
     /** If this rule element's parent item was granted with a pre-selected choice, the prompt is to be skipped */
     private getPreselection;
 }

@@ -1,7 +1,6 @@
-import { RuleElementData, RuleElementSource } from "../index";
+import { RuleElementData, RuleElementSource } from "../";
 import { ArmorPF2e, EffectPF2e, WeaponPF2e } from "@item";
 import { TokenDocumentPF2e } from "@scene";
-
 interface ArmorTargetData {
     type: "armor";
     target: Embedded<ArmorPF2e> | null;

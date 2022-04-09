@@ -1,7 +1,6 @@
 import { MigrationBase } from "../base";
 import { ItemSourcePF2e } from "@item/data";
 import { IdentificationData, IdentificationStatus, IdentifiedData } from "@item/physical/data";
-
 declare type MaybeOldData = ItemSourcePF2e & {
     data: ItemSourcePF2e["data"] & {
         identified?: unknown;

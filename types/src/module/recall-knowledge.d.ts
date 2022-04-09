@@ -8,7 +8,6 @@
 import { SkillAbbreviation } from "@actor/creature/data";
 import { NPCSystemData } from "@actor/npc/data";
 import { DCAdjustment, DCOptions } from "./dc";
-
 export interface RecallKnowledgeDC {
     dc: number;
     progression: number[];

@@ -1,5 +1,4 @@
 import { ActorPF2e } from "../../base";
-
 interface PopupData extends FormApplicationData<ActorPF2e> {
     selection?: string[];
     actorInfo?: {

@@ -1,7 +1,6 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { UserVisibility } from "../../scripts/ui/user-visibility";
-
+import { UserVisibility } from "@scripts/ui/user-visibility";
 /** Censor enriched HTML according to metagame knowledge settings */
 declare class TextEditorPF2e extends TextEditor {
     static enrichHTML(content?: string, options?: EnrichHTMLOptionsPF2e): string;

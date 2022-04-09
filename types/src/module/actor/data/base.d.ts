@@ -1,13 +1,5 @@
-import {
-    DocumentSchemaRecord,
-    LabeledNumber,
-    LabeledValue,
-    Rarity,
-    Size,
-    ValueAndMaybeMax,
-    ValuesList
-} from "@module/data";
-import { ActorType } from "./index";
+import { DocumentSchemaRecord, LabeledNumber, Rarity, Size, ValueAndMaybeMax, ValuesList } from "@module/data";
+import { ActorType } from ".";
 import type { ActorPF2e } from "@actor/base";
 import type { ActiveEffectPF2e } from "@module/active-effect";
 import type { ItemPF2e } from "@item/base";
@@ -20,7 +12,6 @@ import { AutoChangeEntry } from "@module/rules/rule-element/ae-like";
 import { MeleePF2e, WeaponPF2e } from "@item";
 import { ActorSizePF2e } from "@actor/data/size";
 import { SkillAbbreviation } from "@actor/creature/data";
-
 export interface BaseActorSourcePF2e<TActorType extends ActorType = ActorType, TSystemSource extends ActorSystemSource = ActorSystemSource> extends foundry.data.ActorSource {
     type: TActorType;
     data: TSystemSource;
@@ -52,6 +43,7 @@ export interface ActorSystemData extends ActorSystemSource {
     tokenEffects: TemporaryEffect[];
     /** An audit log of automatic, non-modifier changes applied to various actor data nodes */
     autoChanges: Record<string, AutoChangeEntry[] | undefined>;
+    toggles: RollToggle[];
 }
 export interface RollOptionFlags {
     all: Record<string, boolean | undefined>;
@@ -59,9 +51,10 @@ export interface RollOptionFlags {
 }
 export interface ActorFlagsPF2e extends foundry.data.ActorFlags {
     pf2e: {
-        rollOptions: RollOptionFlags;
+        favoredWeaponRank: number;
         freeCrafting: boolean;
         quickAlchemy: boolean;
+        rollOptions: RollOptionFlags;
         [key: string]: unknown;
     };
 }
@@ -89,14 +82,14 @@ export interface BaseActorAttributes {
         flatFootable: FlatFootableCircumstance;
     };
 }
-declare type FlatFootableCircumstance =
+declare type FlatFootableCircumstance = 
 /** Flat-footable in all flanking situations */
 true
 /** Flat-footable if the flanker's level is less than or equal to the actor's own */
  | number
 /** Never flat-footable */
  | false;
-export declare type GangUpCircumstance =
+export declare type GangUpCircumstance = 
 /** Requires at least `number` allies within melee reach of the target */
 number
 /** Requires the actor's animal companion to be adjacent to the target */
@@ -121,8 +114,6 @@ export interface BaseTraitsSource {
     };
     /** Actual Pathfinder traits */
     traits: ValuesList;
-    /** Condition immunities */
-    ci: LabeledValue[];
     /** Damage immunities this actor has. */
     di: ValuesList<ImmunityType>;
     /** Damage resistances that this actor has. */
@@ -133,7 +124,7 @@ export interface BaseTraitsSource {
 export interface BaseTraitsData extends BaseTraitsSource {
     size: ActorSizePF2e;
 }
-export declare type AbilityString = typeof ABILITY_ABBREVIATIONS[number];
+export declare type AbilityString = SetElement<typeof ABILITY_ABBREVIATIONS>;
 /** Basic skill and save data (not including custom modifiers). */
 export interface AbilityBasedStatistic {
     /** The actual modifier for this martial type. */
@@ -235,7 +226,8 @@ export interface StrikeData {
 }
 export interface RollToggle {
     label: string;
-    inputName: string;
+    domain: string;
+    option: string;
     checked: boolean;
     enabled: boolean;
 }

@@ -2,7 +2,6 @@ import { CreatureTraits } from "@item/ancestry/data";
 import { ItemSystemData } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
 import type { HeritagePF2e } from "./document";
-
 export declare type HeritageSource = BaseNonPhysicalItemSource<"heritage", HeritageSystemSource>;
 export declare class HeritageData extends BaseNonPhysicalItemData<HeritagePF2e> {
     static DEFAULT_ICON: ImagePath;

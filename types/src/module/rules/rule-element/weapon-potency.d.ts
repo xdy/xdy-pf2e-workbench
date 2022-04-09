@@ -1,7 +1,6 @@
-import { RuleElementPF2e } from "./index";
+import { RuleElementPF2e } from "./";
 import { ActorType } from "@actor/data";
 import { PredicatePF2e } from "@system/predication";
-
 /**
  * Copies potency runes from the weapon its attached to, to another weapon based on a predicate.
  * @category RuleElement

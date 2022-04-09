@@ -2,7 +2,6 @@
 /// <reference types="tooltipster" />
 import { ModifierPF2e, StatisticModifier } from "../actor/modifiers";
 import { CheckRollContext } from "./rolls";
-
 /**
  * Dialog for excluding certain modifiers before rolling a check.
  * @category Other

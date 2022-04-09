@@ -1,8 +1,7 @@
-import { REPreCreateParameters, RuleElementOptions, RuleElementPF2e } from "../index";
+import { RuleElementPF2e, REPreCreateParameters, RuleElementOptions } from "../";
 import { EffectPF2e, ItemPF2e } from "@item";
 import { EffectTargetData, EffectTargetSource } from "./data";
 import { ActorType } from "@actor/data";
-
 /**
  * Present a set of options to the user and assign their selection to an injectable property
  * @category RuleElement

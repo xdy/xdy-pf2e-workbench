@@ -1,5 +1,4 @@
 import { ItemTransferData } from "@actor/item-transfer";
-
 interface TransferCallbackMessage {
     request: "itemTransfer";
     data: ItemTransferData;

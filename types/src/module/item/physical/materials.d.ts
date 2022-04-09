@@ -1,6 +1,5 @@
 import { Rarity } from "@module/data";
 import { PreciousMaterialGrade, PreciousMaterialType } from "./data";
-
 export interface MaterialGradeData {
     level: number;
     price: number;

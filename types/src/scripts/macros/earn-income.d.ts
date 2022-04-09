@@ -5,7 +5,6 @@ import { ProficiencyRank } from "@item/data";
 import { Coins } from "@item/treasure/helpers";
 import { DCOptions } from "@module/dc";
 import { DegreeIndex, RollBrief } from "@system/degree-of-success";
-
 export declare type TrainedProficiencies = Exclude<ProficiencyRank, "untrained">;
 declare type Rewards = {
     [rank in TrainedProficiencies]: Partial<Coins>;

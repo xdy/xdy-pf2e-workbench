@@ -2,7 +2,6 @@
 /// <reference types="tooltipster" />
 import { FamiliarPF2e } from "@actor/familiar";
 import type { ItemPF2e } from "@item/base";
-
 /**
  * @category Actor
  */
@@ -36,7 +35,7 @@ export declare class FamiliarSheetPF2e extends ActorSheet<FamiliarPF2e, ItemPF2e
         data: any;
         items: any;
         cssClass: "editable" | "locked";
-        effects: RawObject<foundry.abstract.DocumentData<foundry.abstract.Document> & foundry.data.ActiveEffectData<import("../../active-effect").ActiveEffectPF2e>>[];
+        effects: RawObject<foundry.data.ActiveEffectData<foundry.documents.BaseActiveEffect>>[];
         limited: boolean;
         options: ActorSheetOptions;
         editable: boolean;

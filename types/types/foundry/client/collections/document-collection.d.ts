@@ -4,17 +4,36 @@
  */
 declare abstract class DocumentCollection<TDocument extends foundry.abstract.Document> extends Collection<TDocument> {
     constructor();
+
     /** An Array of application references which will be automatically updated when the collection content changes */
     apps: Application[];
+
+    /* -------------------------------------------- */
+    /*  Collection Properties                       */
+    /* -------------------------------------------- */
+
     /** The Collection class name */
     get name(): string;
+
     /** A reference to the Document class definition which is contained within this DocumentCollection. */
     get documentClass(): new (...args: any[]) => TDocument;
+
     /** A reference to the named Document class which is contained within this DocumentCollection. */
     abstract get documentName(): string | null;
-    set(id: string, document: TDocument): this;
+
+    /* -------------------------------------------- */
+    /*  Collection Methods                          */
+    /* -------------------------------------------- */
+
+    override set(id: string, document: TDocument): this;
+
     /** Render any Applications associated with this DocumentCollection. */
     render(force: boolean, options?: RenderOptions): void;
+
+    /* -------------------------------------------- */
+    /*  Database Operations                         */
+    /* -------------------------------------------- */
+
     /**
      * Update all objects in this DocumentCollection with a provided transformation.
      * Conditionally filter to only apply to Entities which match a certain condition.
@@ -23,14 +42,24 @@ declare abstract class DocumentCollection<TDocument extends foundry.abstract.Doc
      * @param [options]      Additional options passed to Entity.update
      * @return An array of updated data once the operation is complete
      */
-    updateAll(transformation: DocumentUpdateData<TDocument> | ((document: TDocument) => DocumentUpdateData<TDocument>), condition?: ((document: TDocument) => boolean) | null, options?: DocumentModificationContext): Promise<TDocument[]>;
+    updateAll(
+        transformation: DocumentUpdateData<TDocument> | ((document: TDocument) => DocumentUpdateData<TDocument>),
+        condition?: ((document: TDocument) => boolean) | null,
+        options?: DocumentModificationContext
+    ): Promise<TDocument[]>;
+
     /**
      * Preliminary actions taken before a set of Documents in this Collection are created.
      * @param result  An Array of created data objects
      * @param options Options which modified the creation operation
      * @param userId  The ID of the User who triggered the operation
      */
-    protected _preCreateDocuments(result: TDocument["data"]["_source"][], options: DocumentModificationContext, userId: string): void;
+    protected _preCreateDocuments(
+        result: TDocument["data"]["_source"][],
+        options: DocumentModificationContext,
+        userId: string
+    ): void;
+
     /**
      * Follow-up actions taken after a set of Documents in this Collection are created.
      * @param documents An Array of created Documents
@@ -38,14 +67,25 @@ declare abstract class DocumentCollection<TDocument extends foundry.abstract.Doc
      * @param options   Options which modified the creation operation
      * @param userId    The ID of the User who triggered the operation
      */
-    protected _onCreateDocuments(documents: TDocument[], result: TDocument["data"]["_source"][], options: DocumentModificationContext, userId: string): void;
+    protected _onCreateDocuments(
+        documents: TDocument[],
+        result: TDocument["data"]["_source"][],
+        options: DocumentModificationContext,
+        userId: string
+    ): void;
+
     /**
      * Preliminary actions taken before a set of Documents in this Collection are updated.
      * @param result  An Array of incremental data objects
      * @param options Options which modified the update operation
      * @param userId  The ID of the User who triggered the operation
      */
-    protected _preUpdateDocuments(result: TDocument["data"]["_source"][], options: DocumentModificationContext, userId: string): void;
+    protected _preUpdateDocuments(
+        result: TDocument["data"]["_source"][],
+        options: DocumentModificationContext,
+        userId: string
+    ): void;
+
     /**
      * Follow-up actions taken after a set of Documents in this Collection are updated.
      * @param documents An Array of updated Documents
@@ -53,14 +93,25 @@ declare abstract class DocumentCollection<TDocument extends foundry.abstract.Doc
      * @param options   Options which modified the update operation
      * @param userId    The ID of the User who triggered the operation
      */
-    protected _onUpdateDocuments(documents: TDocument[], result: TDocument["data"]["_source"][], options: DocumentModificationContext, userId: string): void;
+    protected _onUpdateDocuments(
+        documents: TDocument[],
+        result: TDocument["data"]["_source"][],
+        options: DocumentModificationContext,
+        userId: string
+    ): void;
+
     /**
      * Preliminary actions taken before a set of Documents in this Collection are deleted.
      * @param result  An Array of document IDs being deleted
      * @param options Options which modified the deletion operation
      * @param userId  The ID of the User who triggered the operation
      */
-    protected _preDeleteDocuments(result: TDocument["data"]["_source"][], options: DocumentModificationContext, userId: string): void;
+    protected _preDeleteDocuments(
+        result: TDocument["data"]["_source"][],
+        options: DocumentModificationContext,
+        userId: string
+    ): void;
+
     /**
      * Follow-up actions taken after a set of Documents in this Collection are deleted.
      * @param documents An Array of deleted Documents
@@ -68,5 +119,10 @@ declare abstract class DocumentCollection<TDocument extends foundry.abstract.Doc
      * @param options   Options which modified the deletion operation
      * @param userId    The ID of the User who triggered the operation
      */
-    protected _onDeleteDocuments(documents: TDocument[], result: TDocument["data"]["_source"][], options: DocumentModificationContext, userId: string): void;
+    protected _onDeleteDocuments(
+        documents: TDocument[],
+        result: TDocument["data"]["_source"][],
+        options: DocumentModificationContext,
+        userId: string
+    ): void;
 }

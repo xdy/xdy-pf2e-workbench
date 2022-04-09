@@ -8,7 +8,6 @@ import type { NPCData, NPCSource } from "@actor/npc/data";
 import { AbilityString } from "./base";
 import { SAVE_TYPES } from "./values";
 import { DCSlug, SaveType } from "./types";
-
 export declare type CreatureData = CharacterData | NPCData | FamiliarData;
 export declare type ActorType = CreatureType | "hazard" | "loot" | "vehicle";
 export declare type ActorDataPF2e = CreatureData | HazardData | LootData | VehicleData;

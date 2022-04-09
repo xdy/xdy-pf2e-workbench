@@ -1,7 +1,6 @@
-import { CompendiumBrowser } from "../index";
+import { CompendiumBrowser } from "..";
 import { CompendiumBrowserTab } from "./base";
 import { ActionFilters } from "./data";
-
 export declare class CompendiumBrowserActionTab extends CompendiumBrowserTab {
     filterData: ActionFilters;
     protected index: string[];

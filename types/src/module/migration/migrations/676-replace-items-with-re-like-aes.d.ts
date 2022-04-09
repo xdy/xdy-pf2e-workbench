@@ -1,6 +1,5 @@
 import { ActorSourcePF2e } from "@actor/data";
 import { MigrationBase } from "../base";
-
 /** Replace items containing FlatModifier `ActiveEffect`s with latest ones without */
 export declare class Migration676ReplaceItemsWithRELikeAEs extends MigrationBase {
     static version: number;

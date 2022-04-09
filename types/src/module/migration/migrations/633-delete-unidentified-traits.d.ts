@@ -1,6 +1,5 @@
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 declare type ItemDataWithIdentification = ItemSourcePF2e & {
     "data.-=identification"?: null;
     "data.identification.unidentified.data.-=traits"?: null;

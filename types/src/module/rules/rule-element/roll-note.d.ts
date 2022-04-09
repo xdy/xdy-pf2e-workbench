@@ -1,5 +1,4 @@
-import { BracketedValue, RuleElementData, RuleElementPF2e } from "./index";
-
+import { RuleElementPF2e, BracketedValue, RuleElementData } from "./";
 /**
  * @category RuleElement
  */

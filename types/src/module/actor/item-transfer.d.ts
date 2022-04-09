@@ -1,5 +1,4 @@
 import { UserPF2e } from "@module/user";
-
 export interface ItemTransferData {
     source: {
         tokenId?: string;

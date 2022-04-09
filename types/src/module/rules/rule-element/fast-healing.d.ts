@@ -1,7 +1,6 @@
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
-import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index";
-
+import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from ".";
 /**
  * Rule element to implement fast healing and regeneration.
  * Creates a chat card every round of combat.

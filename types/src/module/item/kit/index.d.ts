@@ -1,7 +1,6 @@
 import { ActorPF2e } from "@actor/index";
 import { ItemPF2e, PhysicalItemPF2e } from "@item/index";
 import { KitData, KitEntryData } from "./data";
-
 export declare class KitPF2e extends ItemPF2e {
     static get schema(): typeof KitData;
     get entries(): KitEntryData[];

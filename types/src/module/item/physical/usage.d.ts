@@ -1,5 +1,4 @@
 import { EquippedData } from "./data";
-
 interface Held {
     type: "held";
     hands: number;

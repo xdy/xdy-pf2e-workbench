@@ -1,5 +1,4 @@
 import { SortDirection } from "../data";
-
 export declare type CheckBoxOptions = Record<string, {
     label: string;
     selected: boolean;

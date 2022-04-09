@@ -1,5 +1,6 @@
 /// <reference types="jquery" />
-import { ArmorPF2e, type ConditionPF2e, ContainerPF2e, ItemPF2e, PhysicalItemPF2e, WeaponPF2e } from "@item";
+import { ItemPF2e, PhysicalItemPF2e, ContainerPF2e, WeaponPF2e } from "@item";
+import { ArmorPF2e, type ConditionPF2e } from "@item";
 import { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/data";
 import type { ActiveEffectPF2e } from "@module/active-effect";
 import { RuleElementPF2e } from "@module/rules/rule-element/base";
@@ -17,7 +18,6 @@ import { RuleElementSynthetics } from "@module/rules";
 import { TokenPF2e } from "@module/canvas";
 import { ModifierAdjustment } from "@actor/modifiers";
 import { ActorDimensions } from "./types";
-
 interface ActorConstructorContextPF2e extends DocumentConstructionContext<ActorPF2e> {
     pf2e?: {
         ready?: boolean;
@@ -125,6 +125,18 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
      * @param skill {String}    The skill id
      */
     rollAttribute(event: JQuery.Event, attributeName: string): void;
+    /** Toggle the provided roll option (swapping it from true to false or vice versa). */
+    toggleRollOption(domain: string, option: string, value?: boolean): Promise<this>;
+    /**
+     * Handle how changes to a Token attribute bar are applied to the Actor.
+     *
+     * If the attribute bar is for hp and the change is in delta form, defer to the applyDamage method. Otherwise, do nothing special
+     * @param attribute The attribute path
+     * @param value     The target attribute value
+     * @param isDelta   Whether the number represents a relative change (true) or an absolute change (false)
+     * @param isBar     Whether the new value is part of an attribute bar, or just a direct value
+     */
+    modifyTokenAttribute(attribute: string, value: number, isDelta?: boolean, isBar?: boolean): Promise<this>;
     /**
      * Apply rolled dice damage to the token or tokens which are currently controlled.
      * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
@@ -181,16 +193,14 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
     }): Promise<void>;
     /** Toggle a condition as present or absent. If a valued condition is toggled on, it will be set to a value of 1. */
     toggleCondition(conditionSlug: ConditionSlug): Promise<void>;
-    /** If necessary, migrate this actor before importing */
+    /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
-    /** Determine whether a requested JSON import can be performed */
-    canImportJSON(source: unknown): source is ActorSourcePF2e;
     /** Ensure imported actors are current on their schema version */
     protected _preCreate(data: PreDocumentId<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: ActorUpdateContext<this>, user: UserPF2e): Promise<void>;
     protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: ActorUpdateContext<this>, userId: string): void;
     /** Unregister all effects possessed by this actor */
-    protected _onDelete(options: DocumentModificationContext, userId: string): void;
+    protected _onDelete(options: DocumentModificationContext<this>, userId: string): void;
     protected _onEmbeddedDocumentChange(embeddedName: "Item" | "ActiveEffect"): void;
 }
 interface ActorPF2e extends Actor<TokenDocumentPF2e> {

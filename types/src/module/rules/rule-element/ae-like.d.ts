@@ -1,6 +1,5 @@
 import { ItemPF2e } from "@item";
-import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource, RuleValue } from "./index";
-
+import { RuleElementPF2e, RuleElementSource, RuleElementData, RuleElementOptions, RuleValue } from "./";
 /**
  * Make a numeric modification to an arbitrary property in a similar way as `ActiveEffect`s
  * @category RuleElement

@@ -4,13 +4,13 @@ import { ConditionPF2e } from "@item";
 import { ActorPF2e } from "@actor";
 import { TokenPF2e } from "@module/canvas";
 import { FlattenedCondition } from "./types";
-
 /** A helper class to manage PF2e Conditions. */
 export declare class ConditionManager {
+    #private;
     static conditions: Map<ConditionSlug, ConditionPF2e>;
     /** Gets a list of condition slugs. */
     static get conditionsSlugs(): string[];
-    static init(): Promise<void>;
+    static initialize(force?: boolean): Promise<void>;
     /**
      * Get a condition using the condition name.
      * @param slug A condition slug

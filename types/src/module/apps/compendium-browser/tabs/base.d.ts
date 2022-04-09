@@ -1,7 +1,6 @@
-import { CompendiumBrowser } from "../index";
+import { CompendiumBrowser } from "..";
 import { BaseFilterData, CheckBoxOptions } from "./data";
 import { TabName } from "../data";
-
 export declare abstract class CompendiumBrowserTab {
     /** A reference to the parent CompendiumBrowser */
     protected browser: CompendiumBrowser;

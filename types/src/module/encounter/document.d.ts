@@ -1,7 +1,6 @@
 import { RollInitiativeOptionsPF2e } from "@actor/data";
 import { ScenePF2e } from "@scene";
 import { CombatantPF2e, RolledCombatant } from "./combatant";
-
 export declare class EncounterPF2e extends Combat<CombatantPF2e> {
     get active(): boolean;
     /** Sort combatants by initiative rolls, falling back to tiebreak priority and then finally combatant ID (random) */

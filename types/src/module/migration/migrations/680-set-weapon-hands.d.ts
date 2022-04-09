@@ -1,6 +1,5 @@
 import { ArmorSource, ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 /** Set the "hands" (usage) property of weapons */
 export declare class Migration680SetWeaponHands extends MigrationBase {
     static version: number;

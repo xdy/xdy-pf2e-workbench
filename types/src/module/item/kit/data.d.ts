@@ -1,8 +1,7 @@
 import { ItemSystemData } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
 import { PhysicalItemTraits } from "@item/physical/data";
-import type { KitPF2e } from "./index";
-
+import type { KitPF2e } from ".";
 export declare type KitSource = BaseNonPhysicalItemSource<"kit", KitSystemData>;
 export declare class KitData extends BaseNonPhysicalItemData<KitPF2e> {
     static DEFAULT_ICON: ImagePath;

@@ -1,7 +1,6 @@
 import { MigrationBase } from "../base";
 import { ItemSourcePF2e } from "@item/data";
 import { ActorSourcePF2e } from "@actor/data";
-
 /** Add roll options to abilities allowing one to ignore the flat-footed condition from being flanked */
 export declare class Migration719ShrugFlanking extends MigrationBase {
     static version: number;

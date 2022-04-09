@@ -1,7 +1,6 @@
 import { ConsumableData, ConsumableType } from "./data";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
-
 export declare class ConsumablePF2e extends PhysicalItemPF2e {
     static get schema(): typeof ConsumableData;
     get consumableType(): ConsumableType;

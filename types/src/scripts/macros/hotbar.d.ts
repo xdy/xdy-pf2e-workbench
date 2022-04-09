@@ -2,7 +2,6 @@ import { ItemPF2e } from "@item/base";
 import { ItemSourcePF2e } from "@item/data";
 import { EffectPF2e } from "@item/effect";
 import { SkillAbbreviation } from "@actor/creature/data";
-
 /**
  * Create a Macro from an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.

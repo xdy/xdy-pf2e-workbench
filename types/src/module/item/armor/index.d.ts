@@ -1,7 +1,6 @@
 import { PhysicalItemHitPoints } from "@item/physical/data";
 import { PhysicalItemPF2e } from "../physical";
 import { ArmorCategory, ArmorData, ArmorGroup, BaseArmorType } from "./data";
-
 export declare class ArmorPF2e extends PhysicalItemPF2e {
     static get schema(): typeof ArmorData;
     isStackableWith(item: PhysicalItemPF2e): boolean;

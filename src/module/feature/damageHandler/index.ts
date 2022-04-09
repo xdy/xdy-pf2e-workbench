@@ -3,8 +3,8 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
 import { SpellPF2e } from "@item";
-import { ActorFlagsPF2e } from "@apps/data/base";
 import { ChatMessagePF2e } from "@module/chat-message";
+import { ActorFlagsPF2e } from "@actor/data/base";
 
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 5;
@@ -158,7 +158,7 @@ export async function persistentHealing(message: ChatMessagePF2e) {
             ) {
                 const healing = message.roll.total * -1;
 
-                await token.actor.applyDamage(healing, token, false);
+                await token.actor?.applyDamage(healing, token.actor?.getActiveTokens()[0], false);
                 if (game.settings.get(MODULENAME, "applyPersistentHealingSeparateMessage")) {
                     await ChatMessage.create({
                         content: game.i18n.format(`${MODULENAME}.SETTINGS.applyPersistentHealing.wasHealed`, {

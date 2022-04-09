@@ -4,7 +4,6 @@ import { MeleeData } from "@item/data";
 import { RollNotePF2e } from "@module/notes";
 import { NPCData } from "./data";
 import { NPCSheetPF2e } from "./sheet";
-
 export declare class NPCPF2e extends CreaturePF2e {
     static get schema(): typeof NPCData;
     /** This NPC's ability scores */
@@ -17,7 +16,7 @@ export declare class NPCPF2e extends CreaturePF2e {
     get visionLevel(): VisionLevel;
     /** Users with limited permission can loot a dead NPC */
     canUserModify(user: User, action: UserAction): boolean;
-    /** A user can see an NPC in the actor directory only if they have at least Observer permission */
+    /** A user can see a synthetic NPC in the actor directory only if they have at least Observer permission */
     get visible(): boolean;
     get isLootable(): boolean;
     /** Grant all users at least limited permission on dead NPCs */

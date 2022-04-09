@@ -1,6 +1,5 @@
 import type { ActorPF2e } from "@actor";
 import type { ItemDataPF2e, PhysicalItemData } from "@item/data";
-
 export declare const DENOMINATIONS: readonly ["cp", "sp", "gp", "pp"];
 export interface Coins {
     pp: number;

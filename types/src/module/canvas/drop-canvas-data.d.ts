@@ -1,5 +1,4 @@
 import type { ItemPF2e } from "@item";
-
 export declare type DropCanvasItemDataPF2e = DropCanvasData<"Item", ItemPF2e> & {
     value?: number;
     level?: number;

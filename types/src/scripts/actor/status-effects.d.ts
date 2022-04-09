@@ -3,7 +3,6 @@
 import { StatusEffectIconTheme } from "@scripts/config";
 import { ActorPF2e } from "@actor/base";
 import { TokenPF2e } from "@module/canvas/token";
-
 /** Handle interaction with the TokenHUD */
 export declare class StatusEffects {
     /** Set the theme for condition icons on tokens */

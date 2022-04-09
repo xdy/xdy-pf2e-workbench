@@ -3,8 +3,7 @@ import { AbilityString } from "@actor/data/base";
 import { ABCSystemData } from "@item/abc/data";
 import { ItemTraits } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
-import { BackgroundPF2e } from "./index";
-
+import { BackgroundPF2e } from ".";
 export declare type BackgroundSource = BaseNonPhysicalItemSource<"background", BackgroundSystemData>;
 export declare class BackgroundData extends BaseNonPhysicalItemData<BackgroundPF2e> {
     static DEFAULT_ICON: ImagePath;

@@ -2,9 +2,7 @@
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor/base";
 import { EffectData } from "@item/data";
-import { Application } from "pixi.js";
 import { FlattenedCondition } from "../system/conditions";
-
 interface EffectsPanelData {
     conditions: FlattenedCondition[];
     effects: EffectData[];

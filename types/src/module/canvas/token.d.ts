@@ -1,6 +1,5 @@
 import { TokenDocumentPF2e } from "@module/scene";
-import { TokenLayerPF2e } from "./index";
-
+import { TokenLayerPF2e } from ".";
 export declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     /** Used to track conditions and other token effects by game.pf2e.StatusEffects */
     statusEffectChanged: boolean;

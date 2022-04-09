@@ -1,8 +1,7 @@
 import { ItemSystemData } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
 import { ZeroToFour } from "@module/data";
-import type { LorePF2e } from "./index";
-
+import type { LorePF2e } from ".";
 export declare type LoreSource = BaseNonPhysicalItemSource<"lore", LoreSystemData>;
 export declare class LoreData extends BaseNonPhysicalItemData<LorePF2e> {
     static DEFAULT_ICON: ImagePath;

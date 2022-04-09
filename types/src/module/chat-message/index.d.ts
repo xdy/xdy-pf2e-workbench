@@ -6,7 +6,6 @@ import { ItemPF2e } from "@item";
 import { ChatMessageDataPF2e, ChatMessageSourcePF2e } from "./data";
 import { TokenDocumentPF2e } from "@scene";
 import { UserPF2e } from "@module/user";
-
 declare class ChatMessagePF2e extends ChatMessage<ActorPF2e> {
     /** The chat log doesn't wait for data preparation before rendering, so set some data in the constructor */
     constructor(data?: DeepPartial<ChatMessageSourcePF2e>, context?: DocumentConstructionContext<ChatMessagePF2e>);

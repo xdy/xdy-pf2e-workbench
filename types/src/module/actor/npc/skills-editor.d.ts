@@ -2,7 +2,6 @@
 /// <reference types="tooltipster" />
 import type { NPCPF2e } from "@actor";
 import { NPCSkillData } from "@actor/npc/data";
-
 /** Specialized form to setup skills for an NPC character. */
 export declare class NPCSkillsEditor extends FormApplication<NPCPF2e> {
     get npc(): NPCPF2e;

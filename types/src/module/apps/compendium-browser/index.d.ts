@@ -1,7 +1,6 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { PackInfo, TabData, TabName, TabType } from "./data";
-
+import { TabData, PackInfo, TabName, TabType } from "./data";
 declare class PackLoader {
     loadedPacks: {
         Actor: Record<string, {

@@ -3,7 +3,6 @@
 import { ActorPF2e, CreaturePF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { ItemSummaryData } from "@item/data";
-
 /**
  * Implementation used to populate item summaries, toggle visibility
  * of item summaries, and save expanded/collapsed state of item summaries.

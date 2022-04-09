@@ -1,21 +1,16 @@
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
 import { CheckType } from "@system/rolls";
 import { ActorPF2e } from "@actor";
-import {
-    BaseStatisticData,
-    StatisticChatData,
-    StatisticCompatData,
-    StatisticData,
-    StatisticDataWithCheck,
-    StatisticDataWithDC
-} from "./data";
+import { BaseStatisticData, StatisticChatData, StatisticCompatData, StatisticData, StatisticDataWithCheck, StatisticDataWithDC } from "./data";
 import { ItemPF2e } from "@item";
 import { CheckDC } from "@system/degree-of-success";
-
+import { CheckRoll } from "@system/check/roll";
 export * from "./data";
 export interface StatisticRollParameters {
     /** Which attack this is (for the purposes of multiple attack penalty) */
     attackNumber?: number;
+    /** Optional target for the roll */
+    target?: ActorPF2e | null;
     /** Optional DC data for the roll */
     dc?: CheckDC | null;
     /** Any additional options which should be used in the roll. */
@@ -34,6 +29,7 @@ export interface StatisticRollParameters {
 interface RollOptionParameters {
     extraRollOptions?: string[];
     item?: ItemPF2e | null;
+    target?: ActorPF2e | null;
 }
 declare type CheckValue<T extends BaseStatisticData> = T["check"] extends object ? StatisticCheck : null;
 declare type DCValue<T extends BaseStatisticData> = T["dc"] extends object ? StatisticDifficultyClass : null;
@@ -85,7 +81,7 @@ declare class StatisticCheck {
         label: string;
         penalty: number;
     };
-    roll(args?: StatisticRollParameters): Promise<void>;
+    roll(args?: StatisticRollParameters): Promise<Rolled<CheckRoll> | null>;
     get breakdown(): string;
 }
 declare class StatisticDifficultyClass {

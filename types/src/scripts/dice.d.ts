@@ -1,7 +1,6 @@
 /// <reference types="jquery" />
 import { ItemPF2e } from "@item";
 import { ActorPF2e } from "../module/actor/base";
-
 /**
  * @category Other
  */

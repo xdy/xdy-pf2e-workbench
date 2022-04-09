@@ -1,6 +1,5 @@
 import { MeasuredTemplatePF2e } from "@module/canvas/measured-template";
 import { ScenePF2e } from "./document";
-
 export declare class MeasuredTemplateDocumentPF2e extends MeasuredTemplateDocument {
 }
 export interface MeasuredTemplateDocumentPF2e extends MeasuredTemplateDocument {

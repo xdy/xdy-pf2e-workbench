@@ -5,7 +5,7 @@ import { getContainerMap } from "@item/container/helpers";
 import { ArmorData, ConsumableData, EquipmentData, PhysicalItemData, TreasureData, WeaponData } from "@item/data";
 import { IdentificationData, MystifiedData } from "@item/physical/data";
 import { Coins } from "@item/treasure/helpers";
-
+import { SheetOptions } from "@module/sheet/helpers";
 declare type ContainerMap = ReturnType<typeof getContainerMap>;
 declare type SheetContainerData = ContainerMap extends Map<string, infer X> ? X : never;
 export declare type InventoryItem<D extends PhysicalItemData = PhysicalItemData> = D & {
@@ -40,6 +40,7 @@ export interface SheetInventory {
     treasure: SheetItemList<TreasureData>;
 }
 export interface ActorSheetDataPF2e<TActor extends ActorPF2e> extends ActorSheetData<TActor> {
+    traits: SheetOptions;
     isTargetFlatFooted: boolean;
     user: {
         isGM: boolean;
@@ -49,6 +50,8 @@ export interface ActorSheetDataPF2e<TActor extends ActorPF2e> extends ActorSheet
     totalCoinageGold: string;
     totalWealth: Coins;
     totalWealthGold: string;
+    immunities: SheetOptions;
+    hasImmunities: boolean;
 }
 export interface LootSheetDataPF2e extends ActorSheetDataPF2e<LootPF2e> {
     isLoot: boolean;

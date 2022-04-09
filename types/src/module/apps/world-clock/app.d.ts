@@ -2,7 +2,6 @@
 /// <reference types="tooltipster" />
 import { DateTime } from "luxon";
 import { animateDarkness } from "./animate-darkness";
-
 interface WorldClockData {
     date: string;
     time: string;

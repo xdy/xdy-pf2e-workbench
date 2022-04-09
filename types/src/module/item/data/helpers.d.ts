@@ -1,16 +1,5 @@
-import {
-    FeatData,
-    ItemDataPF2e,
-    ItemSourcePF2e,
-    MagicItemData,
-    MagicItemSource,
-    PhysicalItemData,
-    PhysicalItemSource,
-    SpellData,
-    TraitChatData
-} from "./index";
+import { FeatData, ItemDataPF2e, ItemSourcePF2e, MagicItemData, MagicItemSource, PhysicalItemData, PhysicalItemSource, SpellData, TraitChatData } from ".";
 import { ItemSystemData, ItemTraits } from "./base";
-
 export declare function isItemSystemData(data: Record<string, any>): data is ItemSystemData;
 /** Checks if the given item data is a physical item with a quantity and other physical fields. */
 export declare function isPhysicalData(itemData: ItemSourcePF2e): itemData is PhysicalItemSource;

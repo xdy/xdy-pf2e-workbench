@@ -1,7 +1,6 @@
-import { CompendiumBrowser } from "../index";
+import { CompendiumBrowser } from "..";
 import { CompendiumBrowserTab } from "./base";
 import { HazardFilters } from "./data";
-
 export declare class CompendiumBrowserHazardTab extends CompendiumBrowserTab {
     filterData: HazardFilters;
     protected index: string[];

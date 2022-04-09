@@ -2,7 +2,6 @@
 /// <reference types="tooltipster" />
 import { EncounterPF2e } from "@module/encounter";
 import Sortable from "sortablejs";
-
 export declare class EncounterTrackerPF2e extends CombatTracker<EncounterPF2e> {
     sortable: Sortable;
     /** Fix Foundry setting the title to "Combat Tracker" unlocalized */

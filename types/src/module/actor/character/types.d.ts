@@ -1,6 +1,5 @@
 import { HitPointsSummary } from "@actor/base";
 import { WeaponPF2e } from "@item";
-
 interface CharacterHitPointsSummary extends HitPointsSummary {
     recoveryMultiplier: number;
 }

@@ -2,7 +2,6 @@ import { DCSlug } from "@actor/data";
 import { ZeroToThree } from "@module/data";
 import { PredicatePF2e } from "./predication";
 import { RollDataPF2e } from "./rolls";
-
 /** Get the degree of success from a roll and a difficulty class */
 declare class DegreeOfSuccess {
     /** The calculated degree of success */

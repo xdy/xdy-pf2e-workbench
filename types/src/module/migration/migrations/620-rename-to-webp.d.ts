@@ -1,7 +1,6 @@
 import { ActorSourcePF2e } from "@actor/data";
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 export declare class Migration620RenameToWebp extends MigrationBase {
     static version: number;
     private regexp;

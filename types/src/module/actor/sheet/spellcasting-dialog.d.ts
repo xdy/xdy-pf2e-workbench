@@ -3,7 +3,6 @@
 import { AbilityString } from "@actor/data";
 import { SpellcastingEntryPF2e } from "@item";
 import { MagicTradition, PreparationType } from "@item/spellcasting-entry/data";
-
 interface SpellcastingDialogOptions {
     entry?: SpellcastingEntryPF2e;
     callback: (result: SpellcastingDialogResult, $html: JQuery) => void;

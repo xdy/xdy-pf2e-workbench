@@ -1,7 +1,6 @@
 import { UserPF2e } from "@module/user";
 import { ItemPF2e } from "../base";
 import { ConditionData, ConditionSlug } from "./data";
-
 export declare class ConditionPF2e extends ItemPF2e {
     static get schema(): typeof ConditionData;
     /** Forthcoming universal "effect badge" */

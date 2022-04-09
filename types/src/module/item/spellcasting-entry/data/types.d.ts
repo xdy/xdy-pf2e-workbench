@@ -3,11 +3,10 @@ import { SpellPF2e } from "@item";
 import { ItemSystemData } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
 import { MAGIC_TRADITIONS } from "@item/spell/data";
-import { OneToTen, ZeroToEleven, ZeroToFour } from "@module/data";
+import { OneToFour, OneToTen, ZeroToEleven } from "@module/data";
 import { RollNotePF2e } from "@module/notes";
 import { Statistic, StatisticChatData } from "@system/statistic";
-import { SpellcastingEntryPF2e } from "../index";
-
+import { SpellcastingEntryPF2e } from "..";
 export interface SpellcastingEntry {
     id: string;
     statistic: Statistic;
@@ -71,13 +70,10 @@ export interface SpellcastingEntrySystemData extends ItemSystemData {
         value: boolean;
     };
     proficiency: {
-        value: ZeroToFour;
+        value: OneToFour;
     };
     displayLevels: Record<number, boolean>;
     slots: Record<SlotKey, SpellSlotData>;
-    signatureSpells: {
-        value: string[];
-    };
     autoHeightenLevel: {
         value: OneToTen | null;
     };

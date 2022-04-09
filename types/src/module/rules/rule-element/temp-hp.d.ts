@@ -1,8 +1,7 @@
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
-import { RuleElementData, RuleElementPF2e, RuleElementSource } from "./index";
+import { RuleElementPF2e, RuleElementData, RuleElementSource } from "./";
 import { RuleElementOptions } from "./base";
-
 /**
  * @category RuleElement
  */

@@ -6,7 +6,6 @@ import { PredicateStatement } from "@system/predication";
 import type { ResilientRuneType } from "./armor/data";
 import type { ArmorData, WeaponData } from "./data";
 import type { OtherWeaponTag, StrikingRuneType, WeaponTrait } from "./weapon/data";
-
 export declare function getPropertySlots(itemData: WeaponData | ArmorData): ZeroToFour;
 export declare function getPropertyRunes(itemData: WeaponData | ArmorData, slots: number): string[];
 export declare function getStrikingDice(itemData: {

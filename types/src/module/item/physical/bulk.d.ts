@@ -1,7 +1,6 @@
 import { Size } from "@module/data";
 import { Optional } from "@util";
 import { ItemDataPF2e, PhysicalItemData } from "../data";
-
 interface StackDefinition {
     size: number;
     lightBulk: number;

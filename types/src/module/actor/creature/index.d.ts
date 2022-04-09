@@ -1,11 +1,11 @@
 import { ActorPF2e } from "@actor";
 import { CreatureData, SaveType } from "@actor/data";
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
-import { ArmorPF2e, ItemPF2e, PhysicalItemPF2e } from "@item";
+import { ItemPF2e, ArmorPF2e, PhysicalItemPF2e } from "@item";
 import { RuleElementSynthetics } from "@module/rules";
 import { RollNotePF2e } from "@module/notes";
 import { ActiveEffectPF2e } from "@module/active-effect";
-import { Alignment, CreatureSkills, CreatureSpeeds, LabeledSpeed, MovementType, SenseData, VisionLevel } from "./data";
+import { CreatureSkills, CreatureSpeeds, LabeledSpeed, MovementType, SenseData, VisionLevel } from "./data";
 import { Statistic } from "@system/statistic";
 import { RawPredicate } from "@system/predication";
 import { UserPF2e } from "@module/user";
@@ -14,16 +14,8 @@ import { HitPointsSummary } from "@actor/base";
 import { Rarity } from "@module/data";
 import { DeferredModifier } from "@module/rules/rule-element/data";
 import { DamageType } from "@system/damage";
-import {
-    AttackItem,
-    AttackRollContext,
-    GetReachParameters,
-    IsFlatFootedParams,
-    StrikeRollContext,
-    StrikeRollContextParams
-} from "./types";
+import { Alignment, AttackItem, AttackRollContext, GetReachParameters, IsFlatFootedParams, StrikeRollContext, StrikeRollContextParams } from "./types";
 import { ItemCarryType } from "@item/physical/data";
-
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 export declare abstract class CreaturePF2e extends ActorPF2e {
     /** Saving throw rolls for the creature, built during data prep */
@@ -82,8 +74,6 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
     addCustomModifier(stat: string, name: string, value: number, type: string, predicate?: RawPredicate, damageType?: DamageType, damageCategory?: string): Promise<void>;
     /** Removes a custom modifier by slug */
     removeCustomModifier(stat: string, modifier: number | string): Promise<void>;
-    /** Toggle the given roll option (swapping it from true to false, or vice versa). */
-    toggleRollOption(domain: string, option: string): Promise<this>;
     /** Prepare derived creature senses from Rules Element synthetics */
     prepareSenses(data: SenseData[], synthetics: RuleElementSynthetics): CreatureSensePF2e[];
     prepareSpeed(movementType: "land"): CreatureSpeeds;
@@ -101,8 +91,6 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
     getAttackRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): AttackRollContext<this, I>;
     protected getDamageRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
     protected getStrikeRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
-    /** Re-prepare familiars when their masters are updated */
-    protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentUpdateContext<this>, userId: string): void;
     protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentUpdateContext<this>, user: UserPF2e): Promise<void>;
 }
 export interface CreaturePF2e {

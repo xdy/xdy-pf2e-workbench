@@ -3,7 +3,6 @@ import { AbilityString } from "@actor/data";
 import { SpellPF2e } from "@item";
 import { Statistic } from "@system/statistic";
 import { SpellcastingEntry } from "./data";
-
 export declare const TRICK_MAGIC_SKILLS: readonly ["arc", "nat", "occ", "rel"];
 export declare type TrickMagicItemSkill = typeof TRICK_MAGIC_SKILLS[number];
 export declare const TraditionSkills: {

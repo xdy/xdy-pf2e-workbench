@@ -1,7 +1,6 @@
 import { CharacterPF2e } from "@actor";
 import { PhysicalItemTrait } from "@item/physical/data";
 import { CraftingFormula } from "./formula";
-
 export declare class CraftingEntry implements CraftingEntryData {
     private parentActor;
     actorPreparedFormulas: ActorPreparedFormula[];
@@ -23,6 +22,7 @@ export declare class CraftingEntry implements CraftingEntryData {
         [k: string]: PreparedFormula[];
     };
     get reagentCost(): number;
+    static isValid(data?: Partial<CraftingEntry>): data is CraftingEntry;
     prepareFormula(formula: CraftingFormula): Promise<void>;
     checkEntryRequirements(formula: CraftingFormula, { warn }?: {
         warn?: boolean | undefined;

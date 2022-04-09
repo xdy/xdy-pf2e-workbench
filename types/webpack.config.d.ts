@@ -1,6 +1,5 @@
 import { Configuration as WebpackConfiguration } from "webpack";
 import { Configuration as WebpackDevServerConfiguration, Request } from "webpack-dev-server";
-
 interface Configuration extends Omit<WebpackConfiguration, "devServer"> {
     devServer?: Omit<WebpackDevServerConfiguration, "proxy"> & {
         proxy?: {

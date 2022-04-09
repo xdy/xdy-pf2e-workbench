@@ -3,13 +3,12 @@
 import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
 import { Coins } from "@item/treasure/helpers";
-import { BasicConstructorOptions, TagSelectorOptions, TagSelectorType } from "@module/system/trait-selector";
+import { BasicConstructorOptions, TagSelectorType, TagSelectorOptions } from "@system/tag-selector";
 import type { ActorPF2e } from "../base";
 import { ActorSheetDataPF2e, CoinageSummary } from "./data-types";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data";
 import { FolderPF2e } from "@module/folder";
 import { ItemSummaryRendererPF2e } from "./item-summary-renderer";
-
 /**
  * Extend the basic ActorSheet class to do all the PF2e things!
  * This sheet is an Abstract layer which is not used.
@@ -25,7 +24,6 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     protected abstract prepareItems(sheetData: ActorSheetDataPF2e<TActor>): void;
     protected findActiveList(): JQuery<HTMLElement>;
     protected static coinsToSheetData(coins: Coins): CoinageSummary;
-    protected prepareTraits(traits: any): void;
     /** Save any open tinyMCE editor before closing */
     close(options?: {
         force?: boolean;

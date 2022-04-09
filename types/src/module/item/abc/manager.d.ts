@@ -1,9 +1,8 @@
-import { ClassPF2e, FeatPF2e, ItemPF2e } from "@item/index";
+import { FeatPF2e, ClassPF2e, ItemPF2e } from "@item/index";
 import { AncestrySource, BackgroundSource, ClassSource } from "@item/data";
 import { ABCFeatureEntryData } from "@item/abc/data";
 import { CharacterPF2e } from "@actor/index";
 import type { FeatSource } from "@item/feat/data";
-
 export interface ABCManagerOptions {
     assurance?: string[];
 }

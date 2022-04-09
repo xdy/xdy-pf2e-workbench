@@ -1,7 +1,6 @@
 import { EquipmentTrait } from "@item/equipment/data";
 import { PhysicalItemPF2e } from "@item/physical";
 import { ContainerData } from "./data";
-
 export declare class ContainerPF2e extends PhysicalItemPF2e {
     /** This container's contents, reloaded every data preparation cycle */
     contents: Collection<Embedded<PhysicalItemPF2e>>;

@@ -1,8 +1,7 @@
 import { ItemLevelData, ItemSystemData } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
 import { OneToFour } from "@module/data";
-import { EffectPF2e } from "./index";
-
+import { EffectPF2e } from ".";
 export declare type EffectSource = BaseNonPhysicalItemSource<"effect", EffectSystemSource>;
 export declare class EffectData extends BaseNonPhysicalItemData<EffectPF2e> {
     static DEFAULT_ICON: ImagePath;

@@ -1,6 +1,5 @@
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 /** Consolidate all class features with multiple instances for different levels to single items */
 export declare class Migration700SingleClassFeatures extends MigrationBase {
     static version: number;

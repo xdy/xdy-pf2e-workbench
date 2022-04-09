@@ -1,12 +1,4 @@
-import {
-    CompendiumBrowserActionTab,
-    CompendiumBrowserBestiaryTab,
-    CompendiumBrowserEquipmentTab,
-    CompendiumBrowserFeatTab,
-    CompendiumBrowserHazardTab,
-    CompendiumBrowserSpellTab
-} from "./tabs";
-
+import { CompendiumBrowserActionTab, CompendiumBrowserBestiaryTab, CompendiumBrowserEquipmentTab, CompendiumBrowserFeatTab, CompendiumBrowserHazardTab, CompendiumBrowserSpellTab } from "./tabs/index";
 export interface PackInfo {
     load: boolean;
     name: string;

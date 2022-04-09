@@ -7,7 +7,6 @@ import { RollNotePF2e } from "@module/notes";
 import { MultipleAttackPenaltyPF2e } from "./multiple-attack-penalty";
 import { StrikingPF2e } from "./striking";
 import { WeaponPotencyPF2e } from "./weapon-potency";
-
 export declare type RuleElementSource = {
     key: string;
     data?: unknown;

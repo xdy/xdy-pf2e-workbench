@@ -1,10 +1,9 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { PromptChoice, RulesElementPrompt, RulesElementPromptData } from "@module/rules/apps/prompt";
+import { PickableThing, PickAThingConstructorArgs, PickAThingPrompt } from "@module/apps/pick-a-thing-prompt";
 import { PredicatePF2e } from "@system/predication";
-
 /** Prompt the user for a selection among a set of options */
-export declare class ChoiceSetPrompt extends RulesElementPrompt<string | number | object> {
+export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | object> {
     /** Does this choice set contain UUIDs? If true, options are always buttons and an item-drop zone is added */
     private containsUUIDs;
     /** The prompt statement to present the user in this application's window */
@@ -15,21 +14,21 @@ export declare class ChoiceSetPrompt extends RulesElementPrompt<string | number 
     static get defaultOptions(): ApplicationOptions;
     get template(): string;
     getData(options?: Partial<ApplicationOptions>): Promise<ChoiceSetTemplateData>;
-    protected getChoices(): PromptChoice[];
+    protected getChoices(): PickableThing[];
     activateListeners($html: JQuery): void;
     /** Handle a dropped homebrew item */
     _onDrop(event: ElementDragEvent): Promise<void>;
     _canDragDrop(): boolean;
 }
-interface ChoiceSetPromptData extends RulesElementPromptData<string | number | object> {
+interface ChoiceSetPromptData extends PickAThingConstructorArgs<string | number | object> {
     prompt?: string;
-    choices?: PromptChoice[];
+    choices?: PickableThing[];
     containsUUIDs: boolean;
     allowedDrops: PredicatePF2e;
 }
 interface ChoiceSetTemplateData {
     prompt: string;
-    choices: PromptChoice[];
+    choices: PickableThing[];
     containsUUIDs: boolean;
     allowNoSelection: boolean;
 }

@@ -1,12 +1,12 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { Alignment, SkillAbbreviation } from "@actor/creature/data";
+import { SkillAbbreviation } from "@actor/creature/data";
 import { ItemSheetPF2e } from "@item/sheet/base";
-import { ItemSheetDataPF2e, SheetOptions } from "@item/sheet/data-types";
+import { ItemSheetDataPF2e } from "@item/sheet/data-types";
+import { SheetOptions } from "@module/sheet/helpers";
 import { DeityPF2e } from "./document";
 import type * as TinyMCE from "tinymce";
-import { SpellPF2e } from "@item/spell";
-
+import { Alignment } from "@actor/creature/types";
 export declare class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
     #private;
     static get defaultOptions(): {
@@ -33,8 +33,7 @@ export declare class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
         tabs: TabsOptions[];
         title: string;
     };
-    getData(): Promise<DeitySheetData>;
-    /** Close the sidebar editors when clicking outside of it */
+    getData(options?: Partial<DocumentSheetOptions>): Promise<DeitySheetData>;
     activateListeners($html: JQuery): void;
     /** Hide the toolbar for the smaller sidebar editors */
     activateEditor(name: string, options?: Partial<TinyMCE.EditorSettings>, initialContent?: string): void;
@@ -45,10 +44,14 @@ export declare class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
 interface DeitySheetData extends ItemSheetDataPF2e<DeityPF2e> {
     alignments: Record<Alignment, string>;
     followerAlignments: SheetOptions;
-    abilities: SheetOptions;
     skills: Record<SkillAbbreviation, string>;
-    favoredWeapons: SheetOptions;
     divineFonts: SheetOptions;
-    spells: SpellPF2e[];
+    spells: SpellBrief[];
+}
+interface SpellBrief {
+    uuid: ItemUUID;
+    level: number;
+    name: string;
+    img: ImagePath;
 }
 export {};

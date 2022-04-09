@@ -1,7 +1,6 @@
 import { ActorSourcePF2e } from "@actor/data";
 import { NPCSystemData } from "@actor/npc/data";
 import { MigrationBase } from "../base";
-
 interface NPCSystemDataOld extends NPCSystemData {
     details: NPCSystemData["details"] & {
         flavorText?: string;

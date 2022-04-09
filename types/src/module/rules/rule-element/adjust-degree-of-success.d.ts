@@ -1,8 +1,7 @@
-import { RuleElementData, RuleElementPF2e } from "./index";
+import { RuleElementPF2e, RuleElementData } from "./";
 import { CharacterPF2e, NPCPF2e } from "@actor";
 import { SkillAbbreviation } from "@actor/creature/data";
 import { CheckDCModifiers } from "@system/degree-of-success";
-
 /**
  * @category RuleElement
  */

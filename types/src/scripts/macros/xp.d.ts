@@ -3,7 +3,6 @@
  * including the variant rules for proficiency without level https://2e.aonprd.com/Rules.aspx?ID=1371
  */
 import { DCOptions } from "@module/dc";
-
 interface HazardLevel {
     level: number;
     isComplex: boolean;

@@ -1,11 +1,10 @@
-import { BracketedValue, RuleElementSource } from "../index";
+import { BracketedValue, RuleElementSource } from "../";
 import { CreatureTrait, MovementType, SkillAbbreviation } from "@actor/creature/data";
 import { SenseAcuity, SenseType } from "@actor/creature/sense";
 import { AbilityString } from "@actor/data";
 import { ImmunityType, ResistanceType, WeaknessType } from "@actor/data/base";
 import { BaseWeaponType, WeaponCategory, WeaponDamage, WeaponGroup, WeaponTrait } from "@item/weapon/data";
 import { Size } from "@module/data";
-
 export interface BattleFormSource extends RuleElementSource {
     overrides?: BattleFormOverrides;
     canCast?: boolean;

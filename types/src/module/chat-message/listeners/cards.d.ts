@@ -1,7 +1,6 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ItemPF2e } from "@item";
-
 export declare const ChatCards: {
     listen: ($html: JQuery) => void;
     /**

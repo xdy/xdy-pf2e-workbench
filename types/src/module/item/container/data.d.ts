@@ -1,23 +1,17 @@
 import { EquipmentTrait } from "@item/equipment/data";
-import {
-    BasePhysicalItemData,
-    BasePhysicalItemSource,
-    MagicItemSystemData,
-    PhysicalItemTraits
-} from "@item/physical/data";
-import { ContainerPF2e } from "./index";
-
-export declare type ContainerSource = BasePhysicalItemSource<"backpack", ContainerSystemData>;
-export declare class ContainerData extends BasePhysicalItemData<ContainerPF2e> {
+import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource } from "@item/physical/data";
+import { ContainerPF2e } from ".";
+declare type ContainerSource = BasePhysicalItemSource<"backpack", ContainerSystemSource>;
+declare class ContainerData extends BasePhysicalItemData<ContainerPF2e> {
     static DEFAULT_ICON: ImagePath;
 }
-export interface ContainerData extends Omit<ContainerSource, "effects" | "flags"> {
+interface ContainerData extends Omit<ContainerSource, "effects" | "flags"> {
     type: ContainerSource["type"];
-    data: ContainerSource["data"];
+    data: ContainerSystemData;
     readonly _source: ContainerSource;
 }
 declare type ContainerTraits = PhysicalItemTraits<EquipmentTrait>;
-export interface ContainerSystemData extends MagicItemSystemData {
+interface ContainerSystemSource extends Investable<PhysicalSystemSource> {
     traits: ContainerTraits;
     stowing: boolean;
     bulkCapacity: {
@@ -25,4 +19,5 @@ export interface ContainerSystemData extends MagicItemSystemData {
     };
     collapsed: boolean;
 }
-export {};
+declare type ContainerSystemData = ContainerSystemSource & PhysicalSystemData;
+export { ContainerData, ContainerSource };

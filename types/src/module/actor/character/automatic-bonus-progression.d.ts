@@ -1,7 +1,6 @@
 import { WeaponPF2e } from "@item";
 import { RuleElementSynthetics, WeaponPotencyPF2e } from "@module/rules/rule-element";
 import { FlatModifierRuleElement } from "@module/rules/rule-element/flat-modifier";
-
 export declare class AutomaticBonusProgression {
     static get isEnabled(): boolean;
     /**
@@ -13,11 +12,10 @@ export declare class AutomaticBonusProgression {
     static cleanupRunes(weapon: WeaponPF2e): void;
     static applyPropertyRunes(potency: WeaponPotencyPF2e[], weapon: Embedded<WeaponPF2e>): void;
     /**
-     * Determine whether a rule element can be applied to an actor. This analysis is limited in that it has no way of
-     * determining whether an effect item is associated with an article of equipment.
+     * Determine whether a rule element can be applied to an actor.
      * @param rule The rule element to assess
      * @returns Whether the rule element is to be ignored
      */
-    static suppressRuleElement(rule: FlatModifierRuleElement): boolean;
+    static suppressRuleElement(rule: FlatModifierRuleElement, value: number): boolean;
     private static abpValues;
 }

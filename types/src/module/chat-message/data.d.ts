@@ -3,8 +3,7 @@ import { MagicTradition } from "@item/spellcasting-entry/data";
 import { RawModifier } from "@actor/modifiers";
 import { DegreeOfSuccessString } from "@system/degree-of-success";
 import { CheckRollContextFlag } from "@system/rolls";
-import { ChatMessagePF2e } from "./index";
-
+import { ChatMessagePF2e } from ".";
 interface ChatMessageDataPF2e<TChatMessage extends ChatMessagePF2e = ChatMessagePF2e> extends foundry.data.ChatMessageData<TChatMessage> {
     readonly _source: ChatMessageSourcePF2e;
     flags: ChatMessageFlagsPF2e;

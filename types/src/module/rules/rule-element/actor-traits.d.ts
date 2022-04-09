@@ -1,6 +1,5 @@
 import { ItemPF2e } from "@item";
-import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index";
-
+import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from "./";
 /**
  * @category RuleElement
  */

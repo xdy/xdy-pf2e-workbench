@@ -3,7 +3,6 @@ import { ActorSourcePF2e } from "@actor/data";
 import type { ItemPF2e } from "@item";
 import { ActiveEffectPF2e } from "@module/active-effect";
 import { FakeCollection } from "./fake-collection";
-
 export declare class FakeActor {
     options: DocumentConstructionContext<ActorPF2e>;
     _data: ActorSourcePF2e;

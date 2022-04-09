@@ -5,7 +5,6 @@ import { ActiveEffectPF2e } from "@module/active-effect";
 import { UserPF2e } from "@module/user";
 import { ActorPF2e, HitPointsSummary } from "../base";
 import { TokenDimensions, VehicleData, VehicleSource } from "./data";
-
 export declare class VehiclePF2e extends ActorPF2e {
     static get schema(): typeof VehicleData;
     /** Vehicle dimensions are specified for all three axes and usually do not form cubes */

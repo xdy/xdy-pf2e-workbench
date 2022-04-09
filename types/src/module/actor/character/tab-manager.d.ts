@@ -1,5 +1,4 @@
-import { CharacterPF2e } from "./index";
-
+import { CharacterPF2e } from ".";
 export declare class PCSheetTabManager {
     actor: CharacterPF2e;
     link: HTMLAnchorElement;

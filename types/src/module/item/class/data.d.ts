@@ -3,8 +3,7 @@ import { ABCSystemData } from "@item/abc/data";
 import { ItemTraits } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
 import { ZeroToFour } from "@module/data";
-import type { ClassPF2e } from "./index";
-
+import type { ClassPF2e } from ".";
 export declare type ClassSource = BaseNonPhysicalItemSource<"class", ClassSystemData>;
 export declare class ClassData extends BaseNonPhysicalItemData<ClassPF2e> {
     static DEFAULT_ICON: ImagePath;

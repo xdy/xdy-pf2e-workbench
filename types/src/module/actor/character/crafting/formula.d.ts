@@ -1,6 +1,5 @@
 import { PhysicalItemPF2e } from "@item";
 import { Rarity } from "@module/data";
-
 export declare class CraftingFormula implements CraftingFormulaData {
     item: PhysicalItemPF2e;
     /** The difficulty class to craft this item */

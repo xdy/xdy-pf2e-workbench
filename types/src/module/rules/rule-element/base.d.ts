@@ -3,15 +3,7 @@ import type { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
 import { BaseRawModifier } from "@actor/modifiers";
 import { TokenDocumentPF2e } from "@scene";
-import {
-    BracketedValue,
-    REPreCreateParameters,
-    REPreDeleteParameters,
-    RuleElementData,
-    RuleElementSource,
-    RuleValue
-} from "./data";
-
+import { BracketedValue, RuleElementSource, RuleElementData, RuleValue, REPreCreateParameters, REPreDeleteParameters } from "./data";
 /**
  * Rule Elements allow you to modify actorData and tokenData values when present on items. They can be configured
  * in the item's Rules tab which has to be enabled using the "Advanced Rule Element UI" system setting.
@@ -22,6 +14,7 @@ declare abstract class RuleElementPF2e {
     item: Embedded<ItemPF2e>;
     data: RuleElementData;
     key: string;
+    slug: string | null;
     protected suppressWarnings: boolean;
     /** A list of actor types on which this rule element can operate (all unless overridden) */
     protected static validActorTypes: ActorType[];

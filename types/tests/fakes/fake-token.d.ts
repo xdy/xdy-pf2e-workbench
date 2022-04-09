@@ -1,7 +1,6 @@
 import { ActorPF2e } from "@actor/base";
 import { ScenePF2e } from "@module/scene";
 import { TokenDocumentPF2e } from "@module/scene/token-document";
-
 export declare class FakeToken {
     _actor: ActorPF2e | null;
     parent: ScenePF2e | null;

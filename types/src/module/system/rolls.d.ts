@@ -9,8 +9,8 @@ import { ChatMessagePF2e } from "@module/chat-message";
 import { ZeroToThree } from "@module/data";
 import { TokenDocumentPF2e } from "@scene";
 import { StrikeTrait } from "@actor/data/base";
-import { AttackTarget, StrikeTarget } from "@actor/creature/types";
-
+import { AttackTarget } from "@actor/creature/types";
+import { CheckRoll } from "./check/roll";
 export interface RollDataPF2e extends RollData {
     totalModifier?: number;
     degreeOfSuccess?: ZeroToThree;
@@ -38,8 +38,10 @@ export interface StrikeRollParams extends RollParameters {
     getFormula?: true;
     /** The strike is to use the melee usage of a combination weapon */
     meleeUsage?: boolean;
+    /** Should this roll be rolled twice? If so, should it keep highest or lowest? */
+    rollTwice?: RollTwiceOption;
 }
-export declare type FateString = "none" | "fortune" | "misfortune";
+export declare type RollTwiceOption = "no" | "keep-higher" | "keep-lower";
 export declare type AttackCheck = "attack-roll" | "spell-attack-roll";
 export declare type CheckType = "check" | "counteract-check" | "initiative" | "skill-check" | "perception-check" | "saving-throw" | "flat-check" | AttackCheck;
 export interface BaseRollContext {
@@ -52,7 +54,7 @@ export interface BaseRollContext {
     /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
     rollMode?: RollMode;
     /** If this is an attack, the target of that attack */
-    target?: StrikeTarget | null;
+    target?: AttackTarget | null;
     /** Any traits for the check. */
     traits?: StrikeTrait[];
     /** The outcome a roll (usually relevant only to rerolls) */
@@ -68,8 +70,8 @@ export interface CheckRollContext extends BaseRollContext {
     /** The type of this roll, like 'perception-check' or 'saving-throw'. */
     type?: CheckType;
     target?: AttackTarget | null;
-    /** Should this roll be rolled with 'fortune' (2 dice, keep higher) or 'misfortune' (2 dice, keep lower)? */
-    fate?: FateString;
+    /** Should this roll be rolled twice? If so, should it keep highest or lowest? */
+    rollTwice?: RollTwiceOption;
     /** The actor which initiated this roll. */
     actor?: ActorPF2e;
     /** The token which initiated this roll. */
@@ -102,7 +104,7 @@ export declare class CheckPF2e {
     /**
      * Roll the given statistic, optionally showing the check modifier dialog if 'Shift' is held down.
      */
-    static roll(check: CheckModifier, context?: CheckRollContext, event?: JQuery.TriggeredEvent | null, callback?: (roll: Rolled<Roll>, outcome: typeof DEGREE_OF_SUCCESS_STRINGS[number] | null | undefined, message: ChatMessagePF2e) => Promise<void> | void): Promise<Rolled<Roll<RollDataPF2e>> | null>;
+    static roll(check: CheckModifier, context?: CheckRollContext, event?: JQuery.TriggeredEvent | null, callback?: (roll: Rolled<Roll>, outcome: typeof DEGREE_OF_SUCCESS_STRINGS[number] | null | undefined, message: ChatMessagePF2e) => Promise<void> | void): Promise<Rolled<CheckRoll> | null>;
     /** Reroll a rolled check given a chat message. */
     static rerollFromMessage(message: ChatMessagePF2e, { heroPoint, keep }?: RerollOptions): Promise<void>;
     /**

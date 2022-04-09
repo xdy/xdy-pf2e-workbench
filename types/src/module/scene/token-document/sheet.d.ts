@@ -1,7 +1,6 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { TokenDocumentPF2e } from "./index";
-
+import { TokenDocumentPF2e } from ".";
 export declare class TokenConfigPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends TokenConfig<TDocument> {
     get template(): string;
     /** Get this token's dimensions were they linked to its actor's size */

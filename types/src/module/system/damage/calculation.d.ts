@@ -1,6 +1,5 @@
-import { Alignment } from "@actor/creature/data";
+import { Alignment } from "@actor/creature/types";
 import { ModeOfBeing } from "@actor/data";
-
 export declare const DAMAGE_TYPES: Set<"force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped">;
 export declare type DamageType = SetElement<typeof DAMAGE_TYPES>;
 export declare function isDamageType(value: string): value is DamageType;

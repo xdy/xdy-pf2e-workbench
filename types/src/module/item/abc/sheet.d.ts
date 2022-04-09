@@ -4,7 +4,6 @@ import { AbilityString } from "@actor/data";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item/index";
 import { ItemSheetPF2e } from "../sheet/base";
 import { ABCSheetData } from "../sheet/data-types";
-
 declare type ABCItem = AncestryPF2e | BackgroundPF2e | ClassPF2e;
 export declare abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> {
     static get defaultOptions(): {

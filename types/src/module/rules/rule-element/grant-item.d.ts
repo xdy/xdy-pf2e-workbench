@@ -1,8 +1,7 @@
 import { ItemPF2e } from "@item";
-import { REPreCreateParameters, REPreDeleteParameters, RuleElementData, RuleElementPF2e, RuleElementSource } from "./index";
+import { RuleElementPF2e, REPreCreateParameters, REPreDeleteParameters, RuleElementData, RuleElementSource } from "./";
 import { RuleElementOptions } from "./base";
 import { ActorType } from "@actor/data";
-
 declare class GrantItemRuleElement extends RuleElementPF2e {
     static validActorTypes: ActorType[];
     /** Permit this grant to be applied during an actor update--if it isn't already granted and the predicate passes */

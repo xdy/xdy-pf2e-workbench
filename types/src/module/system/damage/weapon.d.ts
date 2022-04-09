@@ -3,10 +3,9 @@ import { WeaponData } from "@item/data";
 import { DamageDicePF2e, DiceModifierPF2e, ModifierPF2e } from "@actor/modifiers";
 import { RollNotePF2e } from "@module/notes";
 import { StrikingPF2e, WeaponPotencyPF2e } from "@module/rules/rule-element";
-import { DamageDieSize, DamageType } from "./index";
+import { DamageDieSize, DamageType } from ".";
 import { CharacterPF2e, NPCPF2e } from "@actor";
 import { DeferredModifier } from "@module/rules/rule-element/data";
-
 export interface DamagePartials {
     [damageType: string]: {
         [damageCategory: string]: string;

@@ -7,7 +7,6 @@ import { CreatureSheetItemRenderer } from "@actor/sheet/item-summary-renderer";
 import { CharacterStrike } from "@actor/character/data";
 import { NPCStrike } from "@actor/npc/data";
 import { CreatureSheetData } from "./types";
-
 /**
  * Base class for NPC and character sheets
  * @category Actor

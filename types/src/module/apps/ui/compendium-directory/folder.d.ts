@@ -1,5 +1,4 @@
 import { EnfolderedSummaryData } from "./index";
-
 interface DataParameters {
     id: string;
     name: string;

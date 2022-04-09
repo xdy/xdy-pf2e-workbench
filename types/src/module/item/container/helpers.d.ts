@@ -1,7 +1,6 @@
 import { Bulk, BulkConfig, BulkItem } from "../physical/bulk";
 import { PhysicalItemData } from "../data";
 import { Size } from "@module/data";
-
 /**
  * Datatype that holds container information for *every* item, even non containers
  * @category Other

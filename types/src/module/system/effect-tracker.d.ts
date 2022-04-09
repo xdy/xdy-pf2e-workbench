@@ -1,7 +1,6 @@
 import type { ActorPF2e } from "@actor/base";
 import type { EffectPF2e } from "@item/index";
 import { EncounterPF2e } from "@module/encounter";
-
 export declare class EffectTracker {
     private trackedEffects;
     private insert;

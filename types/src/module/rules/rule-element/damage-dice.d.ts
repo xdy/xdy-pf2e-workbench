@@ -1,9 +1,8 @@
 import { CharacterPF2e, NPCPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { DamageDiceOverride } from "@actor/modifiers";
-import { RuleElementData, RuleElementPF2e } from "./index";
+import { RuleElementData, RuleElementPF2e } from "./";
 import { RuleElementSource } from "./data";
-
 /**
  * @category RuleElement
  */

@@ -5,7 +5,6 @@ import { NPCPF2e } from "@actor/index";
 import { ItemDataPF2e } from "@item/data";
 import { SheetInventory } from "../sheet/data-types";
 import { NPCSheetData } from "./types";
-
 export declare class NPCSheetPF2e extends CreatureSheetPF2e<NPCPF2e> {
     static get defaultOptions(): ActorSheetOptions;
     /** Show either the actual NPC sheet or a briefened lootable version if the NPC is dead */
@@ -18,11 +17,9 @@ export declare class NPCSheetPF2e extends CreatureSheetPF2e<NPCPF2e> {
      * @param sheetData Data from the actor associated to this sheet.
      */
     protected prepareItems(sheetData: NPCSheetData): void;
-    private prepareIWR;
     private getIdentifyCreatureData;
     getData(): Promise<NPCSheetData>;
     activateListeners($html: JQuery): void;
-    private prepareOptions;
     private prepareAbilities;
     private prepareSize;
     private prepareAlignment;
@@ -58,6 +55,5 @@ export declare class NPCSheetPF2e extends CreatureSheetPF2e<NPCPF2e> {
     private onClickMakeWeak;
     private onClickMakeElite;
     private onChangeSpellcastingEntry;
-    private onSpellSlotIncrementReset;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }

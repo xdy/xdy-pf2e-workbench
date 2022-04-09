@@ -1,7 +1,6 @@
 import { ActorSourcePF2e } from "@actor/data";
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
-
 /** Convert rations to a consumable with seven uses */
 export declare class Migration684RationsToConsumable extends MigrationBase {
     static version: number;

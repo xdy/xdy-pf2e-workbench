@@ -2,7 +2,6 @@
 /// <reference types="tooltipster" />
 import { IdentifyAlchemyDCs, IdentifyMagicDCs } from "@item/identification";
 import { PhysicalItemPF2e } from "@item/physical";
-
 export declare class IdentifyItemPopup extends FormApplication<PhysicalItemPF2e> {
     static get defaultOptions(): FormApplicationOptions;
     get item(): PhysicalItemPF2e;

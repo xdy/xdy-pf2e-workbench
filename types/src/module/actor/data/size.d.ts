@@ -1,5 +1,4 @@
 import { Size } from "@module/data";
-
 export declare class ActorSizePF2e {
     /** The size category of this category */
     value: Size;

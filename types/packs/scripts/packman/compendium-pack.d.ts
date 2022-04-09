@@ -1,7 +1,6 @@
 import { ItemSourcePF2e } from "@item/data";
 import { ActorSourcePF2e } from "@actor/data";
 import { RuleElementSource } from "@module/rules";
-
 export interface PackMetadata {
     system: string;
     name: string;

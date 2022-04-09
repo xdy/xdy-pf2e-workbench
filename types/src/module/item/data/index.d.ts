@@ -20,16 +20,24 @@ import type { SpellcastingEntryData, SpellcastingEntrySource } from "@item/spell
 import type { TreasureData, TreasureSource } from "@item/treasure/data";
 import type { WeaponData, WeaponSource } from "@item/weapon/data";
 import { PROFICIENCY_RANKS } from "@module/data";
-import { PhysicalItemType } from "../physical/data";
+import { PhysicalItemTraits, PhysicalItemType } from "../physical/data";
+import { ItemTraits } from "./base";
 import { NonPhysicalItemType } from "./non-physical";
-
 export declare type ProficiencyRank = typeof PROFICIENCY_RANKS[number];
 export declare type ItemType = NonPhysicalItemType | PhysicalItemType;
 /** Actual physical items which you carry (as opposed to feats, lore, proficiencies, statuses, etc). */
-export declare type PhysicalItemData = ArmorData | BookData | ConsumableData | ContainerData | EquipmentData | TreasureData | WeaponData;
+export declare type PhysicalItemData = {
+    data: {
+        traits: PhysicalItemTraits;
+    };
+} & (ArmorData | BookData | ConsumableData | ContainerData | EquipmentData | TreasureData | WeaponData);
 export declare type MagicItemData = Exclude<PhysicalItemData, ConsumableData | TreasureData>;
 export declare type MagicItemSource = Exclude<PhysicalItemSource, ConsumableSource | TreasureSource>;
-export declare type ItemDataPF2e = PhysicalItemData | ActionData | AncestryData | BackgroundData | ClassData | ConditionData | DeityData | EffectData | FeatData | HeritageData | KitData | LoreData | MeleeData | SpellcastingEntryData | SpellData;
+export declare type ItemDataPF2e = (PhysicalItemData | ActionData | AncestryData | BackgroundData | ClassData | ConditionData | DeityData | EffectData | FeatData | HeritageData | KitData | LoreData | MeleeData | SpellcastingEntryData | SpellData) & {
+    data: {
+        traits?: ItemTraits;
+    };
+};
 export declare type PhysicalItemSource = PhysicalItemData["_source"];
 export declare type ItemSourcePF2e = ItemDataPF2e["_source"];
 export interface ItemSummaryData {

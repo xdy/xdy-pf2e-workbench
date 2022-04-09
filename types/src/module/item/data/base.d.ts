@@ -3,36 +3,35 @@ import type { ItemPF2e } from "@item/base";
 import type { ActiveEffectPF2e } from "@module/active-effect";
 import { RuleElementSource } from "@module/rules";
 import { DocumentSchemaRecord, OneToThree, Rarity, ValuesList } from "@module/data";
-import { ItemType } from "./index";
+import { ItemType } from ".";
 import { PhysicalItemTrait } from "../physical/data";
 import { NPCAttackTrait } from "@item/melee/data";
 import { ActionTrait } from "@item/action/data";
-
-export interface BaseItemSourcePF2e<TItemType extends ItemType = ItemType, TSystemData extends ItemSystemData = ItemSystemData> extends foundry.data.ItemSource {
+interface BaseItemSourcePF2e<TItemType extends ItemType = ItemType, TSystemSource extends ItemSystemSource = ItemSystemSource> extends foundry.data.ItemSource {
     type: TItemType;
-    data: TSystemData;
+    data: TSystemSource;
     flags: DeepPartial<ItemFlagsPF2e>;
 }
-export declare abstract class BaseItemDataPF2e<TItem extends ItemPF2e = ItemPF2e> extends foundry.data.ItemData<TItem, ActiveEffectPF2e> {
+declare abstract class BaseItemDataPF2e<TItem extends ItemPF2e = ItemPF2e> extends foundry.data.ItemData<TItem, ActiveEffectPF2e> {
     /** Is this physical item data? */
     abstract isPhysical: boolean;
 }
-export interface BaseItemDataPF2e extends Omit<BaseItemSourcePF2e, "effects"> {
+interface BaseItemDataPF2e extends Omit<BaseItemSourcePF2e, "effects"> {
     type: ItemType;
     data: ItemSystemData;
     flags: ItemFlagsPF2e;
     readonly _source: BaseItemSourcePF2e;
 }
-export declare type ItemTrait = ActionTrait | CreatureTrait | PhysicalItemTrait | NPCAttackTrait;
-export declare type ActionType = keyof ConfigPF2e["PF2E"]["actionTypes"];
-export interface ActionCost {
+declare type ItemTrait = ActionTrait | CreatureTrait | PhysicalItemTrait | NPCAttackTrait;
+declare type ActionType = keyof ConfigPF2e["PF2E"]["actionTypes"];
+interface ActionCost {
     type: ActionType;
     value: OneToThree | null;
 }
-export interface ItemTraits<T extends ItemTrait = ItemTrait> extends ValuesList<T> {
+interface ItemTraits<T extends ItemTrait = ItemTrait> extends ValuesList<T> {
     rarity: Rarity;
 }
-export interface ItemFlagsPF2e extends foundry.data.ItemFlags {
+interface ItemFlagsPF2e extends foundry.data.ItemFlags {
     pf2e: {
         rulesSelections: Record<string, string | number | object>;
         itemGrants: string[];
@@ -40,12 +39,12 @@ export interface ItemFlagsPF2e extends foundry.data.ItemFlags {
         [key: string]: unknown;
     };
 }
-export interface ItemLevelData {
+interface ItemLevelData {
     level: {
         value: number;
     };
 }
-export interface ItemSystemData {
+interface ItemSystemSource {
     description: {
         value: string;
     };
@@ -60,3 +59,5 @@ export interface ItemSystemData {
     slug: string | null;
     schema: DocumentSchemaRecord;
 }
+declare type ItemSystemData = ItemSystemSource;
+export { ActionCost, ActionType, BaseItemDataPF2e, BaseItemSourcePF2e, ItemFlagsPF2e, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTraits, };

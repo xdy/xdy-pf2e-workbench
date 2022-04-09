@@ -5,7 +5,6 @@ import { MaterialGradeData } from "@item/physical/materials";
 import { IdentificationStatus, MystifiedData } from "@item/physical/data";
 import { MeleePF2e } from "@item/melee";
 import { ConsumablePF2e } from "@item";
-
 export declare class WeaponPF2e extends PhysicalItemPF2e {
     static get schema(): typeof WeaponData;
     isStackableWith(item: PhysicalItemPF2e): boolean;

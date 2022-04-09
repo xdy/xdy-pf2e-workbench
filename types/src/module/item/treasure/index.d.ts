@@ -1,6 +1,5 @@
 import { PhysicalItemPF2e } from "@item/physical";
 import { TreasureData } from "./data";
-
 export declare class TreasurePF2e extends PhysicalItemPF2e {
     static get schema(): typeof TreasureData;
     get isCoinage(): boolean;

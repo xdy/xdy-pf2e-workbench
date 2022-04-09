@@ -1,5 +1,4 @@
-import { ConfigPF2eHomebrewRecord } from "./index";
-
+import { ConfigPF2eHomebrewRecord } from ".";
 /** User-defined type guard for checking that an object is a well-formed flag of module-provided homebrew elements */
 export declare function isHomebrewFlag(flag: object & {
     [K in string]?: unknown;

@@ -1,5 +1,4 @@
-import { DamageRollContext, DamageTemplate } from "./index";
-
+import { DamageRollContext, DamageTemplate } from ".";
 /** Dialog for excluding certain modifiers before rolling for damage. */
 export declare class DamageRollModifiersDialog extends Application {
     private static DAMAGE_TYPE_ICONS;

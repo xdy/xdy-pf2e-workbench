@@ -1,7 +1,6 @@
-import { CompendiumBrowser } from "../index";
+import { CompendiumBrowser } from "..";
 import { CompendiumBrowserTab } from "./base";
 import { BestiaryFilters } from "./data";
-
 export declare class CompendiumBrowserBestiaryTab extends CompendiumBrowserTab {
     protected index: string[];
     filterData: BestiaryFilters;

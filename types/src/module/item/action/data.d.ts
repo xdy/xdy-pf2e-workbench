@@ -1,10 +1,9 @@
 import { ActionType, ItemSystemData, ItemTraits } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
-import { ActionPF2e } from "./index";
+import { ActionItemPF2e } from ".";
 import { OneToThree } from "@module/data";
-
 export declare type ActionSource = BaseNonPhysicalItemSource<"action", ActionSystemData>;
-export declare class ActionData extends BaseNonPhysicalItemData<ActionPF2e> {
+export declare class ActionData extends BaseNonPhysicalItemData<ActionItemPF2e> {
     static DEFAULT_ICON: ImagePath;
 }
 export interface ActionData extends Omit<ActionSource, "effects" | "flags"> {

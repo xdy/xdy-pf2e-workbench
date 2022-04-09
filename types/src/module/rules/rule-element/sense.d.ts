@@ -1,10 +1,9 @@
-import { RuleElementData, RuleElementPF2e, RuleElementSource } from "./index";
+import { RuleElementPF2e, RuleElementData, RuleElementSource } from "./";
 import { CharacterPF2e, FamiliarPF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
 import { SenseAcuity, SenseType } from "@actor/creature/sense";
 import { RuleElementOptions } from "./base";
-
 /**
  * @category RuleElement
  */

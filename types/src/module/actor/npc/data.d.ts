@@ -1,28 +1,9 @@
-import {
-    Abilities,
-    Alignment,
-    BaseCreatureData,
-    BaseCreatureSource,
-    CreatureAttributes,
-    CreatureHitPoints,
-    CreatureInitiative,
-    CreatureSystemData,
-    HeldShieldData,
-    SaveData,
-    SkillData
-} from "@actor/creature/data";
-import {
-    AbilityString,
-    ActorFlagsPF2e,
-    ArmorClassData,
-    DexterityModifierCapData,
-    PerceptionData,
-    StrikeData
-} from "@actor/data/base";
+import { Abilities, BaseCreatureData, BaseCreatureSource, CreatureAttributes, CreatureHitPoints, CreatureInitiative, CreatureSystemData, HeldShieldData, SaveData, SkillData } from "@actor/creature/data";
+import { AbilityString, ActorFlagsPF2e, ArmorClassData, DexterityModifierCapData, PerceptionData, StrikeData } from "@actor/data/base";
 import { MeleePF2e } from "@item";
 import { StatisticModifier } from "@actor/modifiers";
-import type { NPCPF2e } from "./index";
-
+import type { NPCPF2e } from ".";
+import { Alignment } from "@actor/creature/types";
 export interface NPCSource extends BaseCreatureSource<"npc", NPCSystemData> {
     flags: DeepPartial<NPCFlags>;
 }

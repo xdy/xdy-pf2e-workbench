@@ -1,16 +1,7 @@
-import {
-    BaseCreatureData,
-    BaseCreatureSource,
-    CreatureAttributes,
-    CreatureSystemData,
-    CreatureSystemSource,
-    CreatureTraitsData,
-    SkillAbbreviation
-} from "@actor/creature/data";
+import { CreatureAttributes, BaseCreatureData, BaseCreatureSource, CreatureSystemData, SkillAbbreviation, CreatureSystemSource, CreatureTraitsData } from "@actor/creature/data";
 import { AbilityString, Rollable } from "@actor/data/base";
 import { StatisticModifier } from "@actor/modifiers";
-import type { FamiliarPF2e } from "./index";
-
+import type { FamiliarPF2e } from ".";
 export declare type FamiliarSource = BaseCreatureSource<"familiar", FamiliarSystemSource>;
 export declare class FamiliarData extends BaseCreatureData<FamiliarPF2e, FamiliarSystemData> {
     static DEFAULT_ICON: ImagePath;

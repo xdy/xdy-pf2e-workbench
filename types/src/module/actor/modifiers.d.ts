@@ -3,7 +3,6 @@ import { DegreeOfSuccessAdjustment } from "@system/degree-of-success";
 import { PredicatePF2e, RawPredicate } from "@system/predication";
 import { RollNotePF2e } from "../notes";
 import { DamageDieSize, DamageType } from "../system/damage";
-
 export declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 export declare function ensureProficiencyOption(options: string[], rank: number): void;
 /**
@@ -19,8 +18,8 @@ export declare const MODIFIER_TYPE: {
     readonly STATUS: "status";
     readonly UNTYPED: "untyped";
 };
-export declare const MODIFIER_TYPES: readonly ["ability", "circumstance", "item", "potency", "proficiency", "status", "untyped"];
-export declare type ModifierType = typeof MODIFIER_TYPE[keyof typeof MODIFIER_TYPE];
+export declare const MODIFIER_TYPES: Set<"item" | "status" | "untyped" | "ability" | "proficiency" | "circumstance" | "potency">;
+export declare type ModifierType = SetElement<typeof MODIFIER_TYPES>;
 export interface BaseRawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
     slug?: string;

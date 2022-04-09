@@ -1,10 +1,9 @@
-import { RuleElementData, RuleElementOptions, RuleElementPF2e } from "../index";
+import { RuleElementPF2e, RuleElementData, RuleElementOptions } from "../";
 import { BattleFormAC, BattleFormOverrides, BattleFormSource } from "./types";
 import { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
 import { BaseRawModifier } from "@actor/modifiers";
-
 export declare class BattleFormRuleElement extends RuleElementPF2e {
     overrides: this["data"]["overrides"];
     /** The label given to modifiers of AC, skills, and strikes */

@@ -1,5 +1,4 @@
 import { ActorPF2e } from "@actor/base";
-
 interface PopupData extends FormApplicationData<ActorPF2e> {
     tokenInfo: Array<{
         id: string;

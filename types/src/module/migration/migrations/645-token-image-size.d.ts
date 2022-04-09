@@ -1,7 +1,6 @@
 import { ActorPF2e } from "@actor";
 import { ActorSourcePF2e } from "@actor/data";
 import { MigrationBase } from "../base";
-
 /** Restore saved token images and sizes from old versions of the respective rule elements */
 export declare class Migration645TokenImageSize extends MigrationBase {
     static version: number;

@@ -1,6 +1,5 @@
 import { DegreeOfSuccessString } from "@system/degree-of-success";
 import { PredicatePF2e } from "@system/predication";
-
 export declare class RollNotePF2e {
     /** The selector used to determine on which rolls the note will be shown for. */
     selector: string;

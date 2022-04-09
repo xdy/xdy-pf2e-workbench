@@ -1,5 +1,5 @@
 /// <reference types="jquery" />
-import { ItemConstructionContextPF2e, ItemPF2e, SpellcastingEntryPF2e } from "@item";
+import { ItemPF2e, ItemConstructionContextPF2e, SpellcastingEntryPF2e } from "@item";
 import { MagicTradition } from "@item/spellcasting-entry/data";
 import { OneToTen } from "@module/data";
 import { MagicSchool, SpellData, SpellTrait } from "./data";
@@ -7,7 +7,7 @@ import { ItemSourcePF2e } from "@item/data";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
-
+import { UserPF2e } from "@module/user";
 interface SpellConstructionContext extends ItemConstructionContextPF2e {
     fromConsumable?: boolean;
 }
@@ -62,6 +62,7 @@ export declare class SpellPF2e extends ItemPF2e {
      * Rely upon the DicePF2e.d20Roll logic for the core implementation
      */
     rollCounteract(event: JQuery.ClickEvent): void;
+    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
 }
 export interface SpellPF2e {
     readonly data: SpellData;

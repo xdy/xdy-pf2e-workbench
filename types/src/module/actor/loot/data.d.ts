@@ -1,14 +1,5 @@
-import {
-    ActorSystemData,
-    ActorSystemSource,
-    BaseActorDataPF2e,
-    BaseActorSourcePF2e,
-    BaseTraitsData,
-    BaseTraitsSource,
-    GangUpCircumstance
-} from "@actor/data/base";
-import { LootPF2e } from "./index";
-
+import { ActorSystemData, ActorSystemSource, BaseActorDataPF2e, BaseActorSourcePF2e, BaseTraitsData, BaseTraitsSource, GangUpCircumstance } from "@actor/data/base";
+import { LootPF2e } from ".";
 /** The stored source data of a loot actor */
 export declare type LootSource = BaseActorSourcePF2e<"loot", LootSystemSource>;
 export declare class LootData extends BaseActorDataPF2e<LootPF2e> {

@@ -1,10 +1,9 @@
 import { MagicTradition, SpellcastingEntry, SpellcastingEntryData, SpellcastingEntryListData } from "./data";
 import { SpellPF2e } from "@item/spell";
-import { ZeroToFour } from "@module/data";
+import { OneToFour } from "@module/data";
 import { ItemPF2e } from "../base";
 import { UserPF2e } from "@module/user";
 import { Statistic } from "@system/statistic";
-
 export declare class SpellcastingEntryPF2e extends ItemPF2e implements SpellcastingEntry {
     static get schema(): typeof SpellcastingEntryData;
     private _spells;
@@ -17,7 +16,7 @@ export declare class SpellcastingEntryPF2e extends ItemPF2e implements Spellcast
      * Returns the proficiency used for calculations.
      * For innate spells, this is the highest spell proficiency (min trained)
      */
-    get rank(): ZeroToFour;
+    get rank(): OneToFour;
     get isPrepared(): boolean;
     get isFlexible(): boolean;
     get isSpontaneous(): boolean;
@@ -27,7 +26,9 @@ export declare class SpellcastingEntryPF2e extends ItemPF2e implements Spellcast
     get highestLevel(): number;
     /** Spellcasting attack and dc data created during actor preparation */
     statistic: Statistic;
-    prepareData(): void;
+    prepareBaseData(): void;
+    prepareDerivedData(): void;
+    prepareActorData(this: Embedded<SpellcastingEntryPF2e>): void;
     /** Casts the given spell as if it was part of this spellcasting entry */
     cast(spell: SpellPF2e, options?: {
         slot?: number;
@@ -35,7 +36,7 @@ export declare class SpellcastingEntryPF2e extends ItemPF2e implements Spellcast
         consume?: boolean;
         message?: boolean;
     }): Promise<void>;
-    consume(name: string, level: number, slot?: number): Promise<boolean>;
+    consume(spell: SpellPF2e, level: number, slot?: number): Promise<boolean>;
     /**
      * Adds a spell to this spellcasting entry, either moving it from another one if its the same actor,
      * or creating a new spell if its not.
@@ -49,7 +50,7 @@ export declare class SpellcastingEntryPF2e extends ItemPF2e implements Spellcast
     setSlotExpendedState(spellLevel: number, spellSlot: number, isExpended: boolean): Promise<this>;
     /** Returns rendering data to display the spellcasting entry in the sheet */
     getSpellData(): SpellcastingEntryListData;
-    prepareActorData(this: Embedded<SpellcastingEntryPF2e>): void;
+    private getSpellPrepList;
     getRollOptions(prefix?: string): string[];
     protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
 }

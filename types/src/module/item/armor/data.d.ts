@@ -1,13 +1,7 @@
-import {
-    BasePhysicalItemData,
-    BasePhysicalItemSource,
-    MagicItemSystemData,
-    PhysicalItemTraits
-} from "@item/physical/data";
+import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource } from "@item/physical/data";
 import { ZeroToFour, ZeroToThree } from "@module/data";
 import type { LocalizePF2e } from "@module/system/localize";
-import type { ArmorPF2e } from "./index";
-
+import type { ArmorPF2e } from ".";
 export declare type ArmorSource = BasePhysicalItemSource<"armor", ArmorSystemSource>;
 export declare class ArmorData extends BasePhysicalItemData<ArmorPF2e> {
     static DEFAULT_ICON: ImagePath;
@@ -23,7 +17,7 @@ export declare type ArmorCategory = keyof ConfigPF2e["PF2E"]["armorTypes"];
 export declare type ArmorGroup = keyof ConfigPF2e["PF2E"]["armorGroups"];
 export declare type BaseArmorType = keyof typeof LocalizePF2e.translations.PF2E.Item.Armor.Base;
 export declare type ResilientRuneType = "" | "resilient" | "greaterResilient" | "majorResilient";
-export interface ArmorSystemSource extends MagicItemSystemData {
+export interface ArmorSystemSource extends Investable<PhysicalSystemSource> {
     traits: ArmorTraits;
     armor: {
         value: number;
@@ -62,7 +56,9 @@ export interface ArmorSystemSource extends MagicItemSystemData {
         value: string;
     };
 }
-interface ArmorSystemData extends ArmorSystemSource {
+interface ArmorSystemData extends ArmorSystemSource, Investable<PhysicalSystemData> {
+    baseItem: BaseArmorType;
+    traits: ArmorTraits;
     runes: {
         potency: number;
         resilient: ZeroToThree;

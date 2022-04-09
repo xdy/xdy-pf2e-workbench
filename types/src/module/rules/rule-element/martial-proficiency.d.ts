@@ -1,4 +1,4 @@
-import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index";
+import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from ".";
 import { CharacterPF2e } from "@actor";
 import { MartialProficiency } from "@actor/character/data";
 import { ActorType } from "@actor/data";
@@ -6,7 +6,6 @@ import { ItemPF2e } from "@item";
 import { ProficiencyRank } from "@item/data";
 import { WeaponCategory } from "@item/weapon/data";
 import { RawPredicate } from "@system/predication";
-
 declare class MartialProficiencyRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
     constructor(data: MartialProficiencySource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);

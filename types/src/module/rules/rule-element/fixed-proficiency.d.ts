@@ -1,20 +1,24 @@
-import { RuleElementData, RuleElementPF2e } from "./index";
-import { CharacterPF2e, NPCPF2e } from "@actor";
-import { ActorType } from "@actor/data";
-
+import { RuleElementPF2e, RuleElementSource } from "./";
+import { CharacterPF2e } from "@actor";
+import { AbilityString, ActorType } from "@actor/data";
+import { RuleElementOptions } from "./base";
+import { ItemPF2e } from "@item";
 /**
  * @category RuleElement
  */
-export declare class FixedProficiencyRuleElement extends RuleElementPF2e {
+declare class FixedProficiencyRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
+    slug: string;
+    ability: AbilityString | null;
+    constructor(data: FixedProficiencySource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     beforePrepareData(): void;
     afterPrepareData(): void;
 }
-export interface FixedProficiencyRuleElement {
-    data: RuleElementData & {
-        name?: string;
-        ability?: string;
-        force?: boolean;
-    };
-    get actor(): CharacterPF2e | NPCPF2e;
+interface FixedProficiencyRuleElement {
+    get actor(): CharacterPF2e;
 }
+interface FixedProficiencySource extends RuleElementSource {
+    ability?: unknown;
+    force?: unknown;
+}
+export { FixedProficiencyRuleElement };

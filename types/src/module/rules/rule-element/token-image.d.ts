@@ -1,5 +1,4 @@
-import { RuleElementPF2e } from "./index";
-
+import { RuleElementPF2e } from "./";
 /**
  * Change the image representing an actor's token
  * @category RuleElement

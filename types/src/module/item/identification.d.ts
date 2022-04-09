@@ -1,7 +1,6 @@
 import { PhysicalItemData } from "./data";
 import { DCOptions } from "../dc";
 import { PhysicalItemPF2e } from "./physical";
-
 export declare class IdentifyMagicDCs {
     arc: number;
     nat: number;

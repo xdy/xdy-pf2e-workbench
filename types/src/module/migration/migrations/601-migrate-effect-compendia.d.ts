@@ -1,6 +1,5 @@
 import { MigrationBase } from "../base";
 import { ItemSourcePF2e } from "@item/data";
-
 export declare class Migration601SplitEffectCompendia extends MigrationBase {
     static version: number;
     static effectLocations: {

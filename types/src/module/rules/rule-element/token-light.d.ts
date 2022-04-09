@@ -1,7 +1,6 @@
 import { ItemPF2e } from "@item";
-import { RuleElementData, RuleElementOptions, RuleElementPF2e } from "./index";
+import { RuleElementPF2e, RuleElementData, RuleElementOptions } from "./";
 import { RuleElementSource } from "./data";
-
 /**
  * Add or change the light emitted by a token
  * @category RuleElement

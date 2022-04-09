@@ -1,19 +1,11 @@
 import { ItemFlagsPF2e } from "@item/data/base";
-import {
-    BasePhysicalItemData,
-    BasePhysicalItemSource,
-    MagicItemSystemData,
-    PhysicalItemTraits,
-    PreciousMaterialGrade,
-    PreciousMaterialType
-} from "@item/physical/data";
+import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, PreciousMaterialType } from "@item/physical/data";
 import { WEAPON_PROPERTY_RUNES } from "@item/runes";
 import { OneToFour, ZeroToThree } from "@module/data";
 import { DamageDieSize, DamageType } from "@system/damage";
 import type { LocalizePF2e } from "@system/localize";
-import type { WeaponPF2e } from "../index";
+import type { WeaponPF2e } from "..";
 import { MELEE_WEAPON_GROUPS, RANGED_WEAPON_GROUPS, WEAPON_CATEGORIES, WEAPON_GROUPS, WEAPON_RANGES } from "./values";
-
 export interface WeaponSource extends BasePhysicalItemSource<"weapon", WeaponSystemSource> {
     flags: DeepPartial<WeaponFlags>;
 }
@@ -36,10 +28,10 @@ interface WeaponSourceTraits extends PhysicalItemTraits<WeaponTrait> {
     otherTags?: OtherWeaponTag[];
 }
 declare type WeaponTraits = Required<WeaponSourceTraits>;
-export declare type WeaponCategory = typeof WEAPON_CATEGORIES[number];
-export declare type WeaponGroup = typeof WEAPON_GROUPS[number];
-export declare type MeleeWeaponGroup = typeof MELEE_WEAPON_GROUPS[number];
-export declare type RangedWeaponGroup = typeof RANGED_WEAPON_GROUPS[number];
+export declare type WeaponCategory = SetElement<typeof WEAPON_CATEGORIES>;
+export declare type WeaponGroup = SetElement<typeof WEAPON_GROUPS>;
+export declare type MeleeWeaponGroup = SetElement<typeof MELEE_WEAPON_GROUPS>;
+export declare type RangedWeaponGroup = SetElement<typeof RANGED_WEAPON_GROUPS>;
 export declare type BaseWeaponType = keyof typeof LocalizePF2e.translations.PF2E.Weapon.Base;
 export interface WeaponDamage {
     value: string;
@@ -71,7 +63,7 @@ declare type SpecificWeaponData = {
 export interface WeaponPropertyRuneSlot {
     value: WeaponPropertyRuneType | null;
 }
-export interface WeaponSystemSource extends MagicItemSystemData {
+export interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     traits: WeaponSourceTraits;
     category: WeaponCategory;
     group: WeaponGroup | null;
@@ -125,15 +117,17 @@ export interface WeaponSystemSource extends MagicItemSystemData {
     };
     selectedAmmoId: string | null;
 }
-export declare type WeaponRangeIncrement = typeof WEAPON_RANGES[number];
-export interface WeaponSystemData extends WeaponSystemSource {
+export interface WeaponSystemData extends WeaponSystemSource, Investable<PhysicalSystemData> {
+    baseItem: BaseWeaponType | null;
     traits: WeaponTraits;
     runes: {
         potency: number;
         striking: ZeroToThree;
         property: WeaponPropertyRuneType[];
     };
+    usage: WeaponSystemSource["usage"];
 }
+export declare type WeaponRangeIncrement = typeof WEAPON_RANGES[number];
 export interface ComboWeaponMeleeUsage {
     damage: {
         type: DamageType;

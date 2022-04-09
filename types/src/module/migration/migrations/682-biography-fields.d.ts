@@ -1,7 +1,6 @@
 import { CharacterSystemData } from "@actor/character/data";
 import { ActorSourcePF2e } from "@actor/data";
 import { MigrationBase } from "../base";
-
 interface CharacterSystemDataOld extends CharacterSystemData {
     details: CharacterSystemData["details"] & {
         biography: CharacterSystemData["details"]["biography"] & {

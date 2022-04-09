@@ -2,7 +2,6 @@ import { CharacterPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { AncestrySource, BackgroundSource, ClassSource } from "@item/data";
 import { ABCManagerOptions } from "@item/abc/manager";
-
 export declare class ActorImporter {
     /**
      * Adds an ancestry to a given character. Linked features are created automatically.

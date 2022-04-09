@@ -1,6 +1,5 @@
 import { PhysicalItemPF2e } from "../physical";
 import { EquipmentData, EquipmentTrait } from "./data";
-
 export declare class EquipmentPF2e extends PhysicalItemPF2e {
     static get schema(): typeof EquipmentData;
     getChatData(this: Embedded<EquipmentPF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;

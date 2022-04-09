@@ -2,14 +2,12 @@ import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
 import { DamageType } from "@system/damage";
 import { PredicatePF2e } from "@system/predication";
-import { RuleElementOptions } from "./index";
+import { RuleElementOptions } from "./";
 import { AELikeData, AELikeRuleElement, AELikeSource } from "./ae-like";
-
 declare class AdjustModifierRuleElement extends AELikeRuleElement {
     protected static validActorTypes: ActorType[];
     /** An optional relabeling of the adjusted modifier */
     relabel?: string;
-    slug: string | null;
     selectors: string[];
     constructor(data: AdjustModifierSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     protected validateData(): void;

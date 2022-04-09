@@ -1,7 +1,6 @@
 import { MeasuredTemplateDocumentPF2e } from "@module/scene/measured-template-document";
-import { Rectangle } from "pixi.js";
-import { TemplateLayerPF2e } from "./index";
-
+import { TemplateLayerPF2e } from ".";
+declare type Rectangle = NormalizedRectangle;
 declare class MeasuredTemplatePF2e extends MeasuredTemplate<MeasuredTemplateDocumentPF2e> {
     get type(): MeasuredTemplateType;
     /** Highlight grid according to Pathfinder 2e effect-area shapes */

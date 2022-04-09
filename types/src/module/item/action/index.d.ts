@@ -3,12 +3,11 @@ import { ActionData } from "./data";
 import { OneToThree } from "@module/data";
 import { UserPF2e } from "@module/user";
 import { ActionCost } from "@item/data/base";
-
-export declare class ActionPF2e extends ItemPF2e {
+export declare class ActionItemPF2e extends ItemPF2e {
     static get schema(): typeof ActionData;
     get actionCost(): ActionCost | null;
     prepareData(): void;
-    getChatData(this: Embedded<ActionPF2e>, htmlOptions?: EnrichHTMLOptions): {
+    getChatData(this: Embedded<ActionItemPF2e>, htmlOptions?: EnrichHTMLOptions): {
         properties: string[];
         traits: import("../data").TraitChatData[];
         actionType: {
@@ -41,6 +40,6 @@ export declare class ActionPF2e extends ItemPF2e {
     };
     protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
 }
-export interface ActionPF2e {
+export interface ActionItemPF2e {
     readonly data: ActionData;
 }

@@ -2,13 +2,12 @@
 /// <reference types="tooltipster" />
 import { ItemPF2e } from "@item/base";
 import { ItemSourcePF2e } from "@item/data";
-import { CharacterPF2e } from "./index";
+import { CharacterPF2e } from ".";
 import { CreatureSheetPF2e } from "../creature/sheet";
 import { CharacterStrike } from "./data";
 import { CraftingFormula } from "./crafting";
 import { CharacterSheetData, CraftingEntriesSheetData } from "./data/sheet";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
-
 export declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
     private knownFormulas;
     static get defaultOptions(): ActorSheetOptions & {
@@ -50,7 +49,7 @@ export declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e>
     private onRemoveCustomModifier;
     private isFeatValidInFeatSlot;
     /** Handle cycling of dying, wounded, or doomed */
-    private onClickDyingWoundedDoomed;
+    private onClickDyingWounded;
     private getNearestSlotId;
     protected _onDropItem(event: ElementDragEvent, data: DropCanvasData<"Item", ItemPF2e>): Promise<ItemPF2e[]>;
     protected _onDrop(event: ElementDragEvent): Promise<boolean | void>;
@@ -66,10 +65,6 @@ export declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e>
      * Get the font-awesome icon used to display a certain level of wounded
      */
     private getWoundedIcon;
-    /**
-     * Get the font-awesome icon used to display a certain level of doomed
-     */
-    private getDoomedIcon;
     /** Get the font-awesome icon used to display hero points */
     private getHeroPointsIcon;
 }

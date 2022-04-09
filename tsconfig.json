@@ -18,10 +18,10 @@
         "types/src/module/actor/*"
       ],
       "@apps": [
-        "types/src/module/actor"
+        "types/src/module/apps"
       ],
       "@apps/*": [
-        "types/src/module/actor/*"
+        "types/src/module/apps/*"
       ],
       "@canvas": [
         "types/src/module/canvas"

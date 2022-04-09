@@ -1,5 +1,4 @@
 import { SenseData } from "./data";
-
 export declare class CreatureSensePF2e implements SenseData {
     /** low-light vision, darkvision, scent, etc. */
     type: SenseType;

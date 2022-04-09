@@ -1,6 +1,5 @@
 import { ActorSourcePF2e } from "@actor/data";
 import { MigrationBase } from "../base";
-
 export declare class Migration622RemoveOldTokenEffectIcons extends MigrationBase {
     static version: number;
     updateActor(actorData: ActorWithTokenEffect): Promise<void>;

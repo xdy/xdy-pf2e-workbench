@@ -1,8 +1,7 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActorSheetPF2e } from "../sheet/base";
-import { HazardPF2e } from "./index";
-
+import { HazardPF2e } from ".";
 export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
     static get defaultOptions(): ActorSheetOptions;
     /** Get the HTML template path to use depending on whether this sheet is in edit mode */
@@ -10,8 +9,8 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
     getData(): Promise<{
         flags: any;
         hazardTraits: {
-            aquatic: string;
             alchemical: string;
+            aquatic: string;
             auditory: string;
             clockwork: string;
             consumable: string;
@@ -23,6 +22,7 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
             kaiju: string;
             magical: string;
             mechanical: string;
+            poison: string;
             steam: string;
             summoned: string;
             technological: string;
@@ -72,7 +72,6 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
         actorRarity: string;
         stealthDC: number;
         hasStealthDescription: string | boolean;
-        hasImmunities: boolean | ("hidden" | "force" | "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | "alignment" | "coldiron" | "energy" | "ghostTouch" | "physical" | "precision" | "salt" | "salt-water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "critical-hits" | "emotion" | "abjuration" | "conjuration" | "divination" | "enchantment" | "evocation" | "illusion" | "necromancy" | "transmutation" | "blinded" | "broken" | "clumsy" | "concealed" | "confused" | "controlled" | "dazzled" | "deafened" | "doomed" | "drained" | "dying" | "encumbered" | "enfeebled" | "fascinated" | "fatigued" | "flat-footed" | "fleeing" | "friendly" | "frightened" | "grabbed" | "helpful" | "hostile" | "immobilized" | "indifferent" | "invisible" | "observed" | "paralyzed" | "petrified" | "prone" | "quickened" | "restrained" | "sickened" | "slowed" | "stunned" | "stupefied" | "unconscious" | "undetected" | "unfriendly" | "unnoticed" | "wounded" | "auditory" | "confusion" | "curse" | "detection" | "death-effects" | "disease" | "fear-effects" | "healing" | "inhaled" | "magic" | "nonmagical-attacks" | "object-immunities" | "olfactory" | "polymorph" | "possession" | "scrying" | "sleep" | "spellDeflection" | "swarm-attacks" | "swarm-mind" | "trip" | "visual")[];
         hasResistances: boolean;
         hasWeaknesses: boolean;
         hasDescription: string | boolean;
@@ -82,6 +81,7 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
         hasHPDetails: string | boolean;
         hasWillSave: boolean;
         brokenThreshold: number;
+        traits: import("../../sheet/helpers").SheetOptions;
         isTargetFlatFooted: boolean;
         user: {
             isGM: boolean;
@@ -91,11 +91,13 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
         totalCoinageGold: string;
         totalWealth: import("../../item/treasure/helpers").Coins;
         totalWealthGold: string;
+        immunities: import("../../sheet/helpers").SheetOptions;
+        hasImmunities: boolean;
         actor: any;
         data: any;
         items: any;
         cssClass: "editable" | "locked";
-        effects: RawObject<foundry.abstract.DocumentData<foundry.abstract.Document> & foundry.data.ActiveEffectData<import("../../active-effect").ActiveEffectPF2e>>[];
+        effects: RawObject<foundry.data.ActiveEffectData<foundry.documents.BaseActiveEffect>>[];
         limited: boolean;
         options: ActorSheetOptions;
         editable: boolean;

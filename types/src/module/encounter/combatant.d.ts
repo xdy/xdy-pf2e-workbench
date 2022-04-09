@@ -1,6 +1,5 @@
 import type { ActorPF2e } from "@actor/base";
-import { EncounterPF2e } from "./index";
-
+import { EncounterPF2e } from ".";
 declare class CombatantPF2e<TActor extends ActorPF2e | null = ActorPF2e | null> extends Combatant<TActor> {
     get encounter(): EncounterPF2e | null;
     get defeated(): boolean;

@@ -1,5 +1,4 @@
 import { ConditionSlug } from "@item/condition/data";
-
 export interface FlattenedCondition {
     id: string;
     active: boolean;
