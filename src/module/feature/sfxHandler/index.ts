@@ -80,13 +80,23 @@ export async function playAnimationAndSound(message: ChatMessagePF2e) {
     }
 
     async function pickSound(sound: string): Promise<string> {
-        return (
-            game?.tables
+        let toPlay: string;
+        toPlay =
+            (await game?.tables
                 ?.find((table) => table.name === sound)
                 ?.draw({ displayChat: false })
                 .then((draw) => {
                     return draw.results[0].getChatText();
-                }) ?? sound
-        );
+                })) ?? sound;
+
+        if (toPlay === sound) {
+            const sounds = game.playlists.getName(sound)?.sounds;
+            if (sounds) {
+                toPlay = (<PlaylistSound>Array.from(sounds)[Math.floor(Math.random() * sounds.size)])
+                    .data.path;
+            }
+        }
+
+        return toPlay;
     }
 }
