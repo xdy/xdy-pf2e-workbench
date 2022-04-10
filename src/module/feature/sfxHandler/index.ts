@@ -92,8 +92,7 @@ export async function playAnimationAndSound(message: ChatMessagePF2e) {
         if (toPlay === sound) {
             const sounds = game.playlists.getName(sound)?.sounds;
             if (sounds) {
-                toPlay = (<PlaylistSound>Array.from(sounds)[Math.floor(Math.random() * sounds.size)])
-                    .data.path;
+                toPlay = (<PlaylistSound>Array.from(sounds)[Math.floor(Math.random() * sounds.size)]).data.path;
             }
         }
 
