@@ -15,7 +15,7 @@
         "name": "World setting for animation to play on strike miss."
       },
       "automatedAnimationOnFailSound": {
-        "hint": "World setting for sound to play on strike miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table a random text result from this table will be used as the path to the sound instead. Leave empty to play no sound.",
+        "hint": "World setting for sound to play on strike miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
         "name": "World setting for sound to play on strike miss."
       },
       "automatedAnimationOnCritFailAnimation": {
@@ -23,7 +23,7 @@
         "name": "World setting for animation to play on strike critical miss."
       },
       "automatedAnimationOnCritFailSound": {
-        "hint": "World setting for sound to play on strike critical miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table a random text result from this table will be used as the path to the sound instead. Leave empty to play no sound.",
+        "hint": "World setting for sound to play on strike critical miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
         "name": "World setting for sound to play on strike critical miss."
       },
       "automatedAnimationOnCritSuccessAnimation": {
@@ -31,7 +31,7 @@
         "name": "World setting for animation to play on strike critical success."
       },
       "automatedAnimationOnCritSuccessSound": {
-        "hint": "World setting for sound to play on strike critical success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table a random text result from this table will be used as the path to the sound instead. Leave empty to play no sound.",
+        "hint": "World setting for sound to play on strike critical success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
         "name": "World setting for sound to play on strike critical success."
       },
       "automatedAnimationOnSuccessAnimation": {
@@ -39,7 +39,7 @@
         "name": "World setting for animation to play on strike success."
       },
       "automatedAnimationOnSuccessSound": {
-        "hint": "World setting for sound to play on strike success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table a random text result from this table will be used as the path to the sound instead. Leave empty to play no sound.",
+        "hint": "World setting for sound to play on strike success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
         "name": "World setting for sound to play on strike success."
       },
       "applyPersistentAllow": {
