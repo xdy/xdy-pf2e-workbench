@@ -69,8 +69,24 @@ export async function playAnimationAndSound(message: ChatMessagePF2e) {
             }
             if (sound && game.modules.get("sequencer")?.active) {
                 // @ts-ignore
-                await new Sequence(MODULENAME).sound().file(sound).fadeInAudio(100).fadeOutAudio(100).play();
+                await new Sequence(MODULENAME)
+                    .sound()
+                    .file(await pickSound(sound))
+                    .fadeInAudio(100)
+                    .fadeOutAudio(100)
+                    .play();
             }
         }
+    }
+
+    async function pickSound(sound: string): Promise<string> {
+        return (
+            game?.tables
+                ?.find((table) => table.name === sound)
+                ?.draw({ displayChat: false })
+                .then((draw) => {
+                    return draw.results[0].getChatText();
+                }) ?? sound
+        );
     }
 }
