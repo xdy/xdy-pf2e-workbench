@@ -80,7 +80,7 @@
     "webpack-dev-server": "^4.8.1",
     "webpack-import-glob-loader": "^1.6.3",
     "write-file-webpack-plugin": "^4.5.1",
-    "yargs": "^17.4.0"
+    "yargs": "^17.4.1"
   },
   "lint-staged": {
     "*.(ts)": "eslint --fix",
