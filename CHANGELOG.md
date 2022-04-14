@@ -1,3 +1,10 @@
+## [2.42.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.42.0...v2.42.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* Typo and cut and paste fixes ([c27810f](https://github.com/xdy/xdy-pf2e-workbench/commit/c27810f0eb6a99098d3b4526f08cd28360db6722))
+
 # [2.42.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.41.3...v2.42.0) (2022-04-14)
 
 
