@@ -1,3 +1,16 @@
+# [2.42.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.41.3...v2.42.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* Mention playlists as well as tables in the sound hints. ([ae9a8a5](https://github.com/xdy/xdy-pf2e-workbench/commit/ae9a8a5c0b9979e8e588e888296a03694729d49a))
+
+
+### Features
+
+* Add toggle for whether the Hero Point Handler timer should start automatically on world load. Started cleaning up setting text. ([ee17a0b](https://github.com/xdy/xdy-pf2e-workbench/commit/ee17a0b042fb0421c076abb5f9c1bc5c237d0a98))
+* Add toggle for whether the Hero Point Handler timer should start automatically on world load. Started cleaning up setting text. ([9d40fa9](https://github.com/xdy/xdy-pf2e-workbench/commit/9d40fa9c1bd55269b33020c7455a04d499f99527))
+
 ## [2.41.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.41.2...v2.41.3) (2022-04-10)
 
 
