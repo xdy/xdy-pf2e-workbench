@@ -107,7 +107,7 @@
         "name": "(World) setting initiative to just before the current combatant.",
         "noAutomation": "Never",
         "reaching0HP": "When combatant reaches 0 HP.",
-        "gettingStatusDying": "(Deprecated) When combatant gets status Dying.",
+        "deprecatedGettingStatusDying": "(Deprecated) When combatant gets status Dying.",
         "deprecatedManually": "(Deprecated) Enables manual option on selected combatant."
       },
       "heroPointHandler": {

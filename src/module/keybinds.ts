@@ -23,21 +23,6 @@ export function registerKeybindings() {
         },
     });
 
-    keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
-        name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.name`,
-        hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
-        restricted: true,
-        editable: [],
-        onDown: async () => {
-            if (game.user?.isGM) {
-                await moveSelectedAheadOfCurrent(
-                    <CombatantPF2e>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
-                );
-            }
-            return true;
-        },
-    });
-
     //Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.name`,
