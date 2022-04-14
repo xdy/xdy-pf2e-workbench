@@ -6,7 +6,7 @@ export let mystifyModifierKey: string;
 
 function debouncedReload() {
     foundry.utils.debounce(() => {
-        window.location.reload();
+        location.reload();
     }, 100);
 }
 
@@ -26,6 +26,16 @@ export function registerSettings() {
     game.settings.register(MODULENAME, "heroPointHandler", {
         name: `${MODULENAME}.SETTINGS.heroPointHandler.name`,
         hint: `${MODULENAME}.SETTINGS.heroPointHandler.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
+    game.settings.register(MODULENAME, "heroPointHandlerStartTimerOnReady", {
+        name: `${MODULENAME}.SETTINGS.heroPointHandlerStartTimerOnReady.name`,
+        hint: `${MODULENAME}.SETTINGS.heroPointHandlerStartTimerOnReady.hint`,
         scope: "world",
         config: true,
         default: false,

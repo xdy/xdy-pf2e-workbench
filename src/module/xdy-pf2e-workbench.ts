@@ -23,7 +23,7 @@ import { reminderBreathWeapon } from "./feature/reminderEffects";
 import { toggleSettings } from "./feature/settingsHandler";
 import { reduceFrightened } from "./feature/conditionHandler";
 import { chatCardCollapse } from "./feature/qolHandler";
-import { calcRemainingMinutes, startTimer } from "./feature/heroPointHandler";
+import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./feature/heroPointHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -215,7 +215,12 @@ Hooks.once("ready", async () => {
     // Must be in ready
     if (game.settings.get(MODULENAME, "heroPointHandler")) {
         if (game.user?.isGM) {
-            await startTimer(calcRemainingMinutes());
+            let remainingMinutes = calcRemainingMinutes(false);
+            if (remainingMinutes > 0 || game.settings.get(MODULENAME, "heroPointHandlerStartTimerOnReady")) {
+                remainingMinutes = calcRemainingMinutes(true);
+                await startTimer(remainingMinutes);
+                await createRemainingTimeMessage(remainingMinutes);
+            }
         }
     }
 

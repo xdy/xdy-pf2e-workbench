@@ -4,47 +4,47 @@
     "SETTINGS": {
       "abpVariantAllowItemBonuses": {
         "hint": "World setting to not disable item bonuses when using ABP.",
-        "name": "World setting to not disable item bonuses when using ABP."
+        "name": "(World) not disable item bonuses when using ABP."
       },
       "automatedAnimationOn": {
         "hint": "World setting for using the module automated-animations to play animation and/or sound on a strike miss. Save settings to show/hide additional options.",
-        "name": "World setting for using the module automated-animations to play animation and/or sound on a strike miss."
+        "name": "(World) use the module automated-animations to play animation and/or sound on a strike miss."
       },
       "automatedAnimationOnFailAnimation": {
         "hint": "World setting for animation to play on strike miss, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "World setting for animation to play on strike miss."
+        "name": "(World) animation to play on strike miss."
       },
       "automatedAnimationOnFailSound": {
         "hint": "World setting for sound to play on strike miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "World setting for sound to play on strike miss."
+        "name": "(World) sound to play on strike miss."
       },
       "automatedAnimationOnCritFailAnimation": {
         "hint": "World setting for animation to play on strike critical miss, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "World setting for animation to play on strike critical miss."
+        "name": "(World) animation to play on strike critical miss."
       },
       "automatedAnimationOnCritFailSound": {
         "hint": "World setting for sound to play on strike critical miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "World setting for sound to play on strike critical miss."
+        "name": "(World) sound to play on strike critical miss."
       },
       "automatedAnimationOnCritSuccessAnimation": {
         "hint": "World setting for animation to play on strike critical success, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "World setting for animation to play on strike critical success."
+        "name": "(World) animation to play on strike critical success."
       },
       "automatedAnimationOnCritSuccessSound": {
         "hint": "World setting for sound to play on strike critical success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "World setting for sound to play on strike critical success."
+        "name": "(World) sound to play on strike critical success."
       },
       "automatedAnimationOnSuccessAnimation": {
         "hint": "World setting for animation to play on strike success, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "World setting for animation to play on strike success."
+        "name": "(World) animation to play on strike success."
       },
       "automatedAnimationOnSuccessSound": {
         "hint": "World setting for sound to play on strike success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "World setting for sound to play on strike success."
+        "name": "(World) sound to play on strike success."
       },
       "applyPersistentAllow": {
         "hint": "World setting for who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options.",
-        "name": "World setting for who is allowed to set the option to automatically apply persistent damage/healing.",
+        "name": "(World) who is allowed to set the option to automatically apply persistent damage/healing.",
         "none": "None",
         "all": "All",
         "gm": "GM",
@@ -52,59 +52,59 @@
       },
       "applyPersistentDamage": {
         "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module. Save settings to show/hide additional options.",
-        "name": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
+        "name": "Automatically apply persistent damage rolled by the Persistent Damage module.",
         "wasDamaged": "{damage} damage was automatically applied"
       },
       "applyPersistentDamageSeparateMessage": {
         "name": "Client setting to show separate persistent damage message",
-        "hint": "Client setting to show separate persistent damage message"
+        "hint": "Show separate persistent damage message"
       },
       "applyPersistentHealing": {
         "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
-        "name": "Client setting to automatically apply persistent healing rolled by the system.",
+        "name": "Automatically apply persistent healing rolled by the system.",
         "FastHealingLabel": "Received Fast Healing",
         "RegenerationLabel": "Received Regeneration",
         "wasHealed": "{healing} healing was automatically applied."
       },
       "applyPersistentHealingSeparateMessage": {
-        "name": "Client setting to show separate persistent healing message",
-        "hint": "Client setting to show separate persistent healing message"
+        "hint": "Client setting to show separate persistent healing message",
+        "name": "Show separate persistent healing message"
       },
       "autoCollapseItemChatCardContent": {
         "hint": "Client setting to automatically collapse item chat card content.",
-        "name": "Client setting to automatically collapse item chat card content.",
+        "name": "Automatically collapse item chat card content.",
         "noCollapse": "Never collapse",
         "collapsedDefault": "Collapsed by default, click title to expand.",
         "nonCollapsedDefault": "Expanded by default, click title to collapse."
       },
       "autoRollDamageAllow": {
-        "hint": "World setting for who is allowed to set the option to automatically roll damage on a hit. Save settings to show/hide additional options.",
-        "name": "World setting for who is allowed to set the option to automatically roll damage on a hit.",
+        "hint": "World setting for who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options.",
+        "name": "(World) who is allowed to set the option to Autoroll damage on a hit.",
         "none": "None",
         "all": "All",
         "gm": "GM",
         "players": "Players"
       },
       "autoRollDamageForStrike": {
-        "hint": "Client setting to automatically roll damage for strikes that hit. Note that critical hits roll critical damage.",
-        "name": "Client setting to automatically roll damage for strikes that hit.",
+        "hint": "Client setting to Autoroll damage for strikes that hit. Note that critical hits roll critical damage.",
+        "name": "Autoroll damage for strikes that hit.",
         "strike": "Strike"
       },
       "autoRollDamageForSpellAttack": {
-        "hint": "Client setting to automatically roll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
-        "name": "Client setting to automatically roll damage for spell attacks that hit."
+        "hint": "Client setting to Autoroll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
+        "name": "Autoroll damage for spell attacks that hit."
       },
       "autoRollDamageNotifyOnSpellCardNotFound": {
         "hint": "Client setting to notify when a spell attack is rolled and no spell card was found to roll damage for.",
-        "name": "Client setting to notify when a spell attack is rolled and no spell card was found."
+        "name": "Notify when a spell attack is rolled and no spell card was found."
       },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn.",
-        "name": "Client setting to automatically decrease the frightened condition each turn."
+        "name": "Automatically decrease the frightened condition each turn."
       },
       "enableAutomaticMove": {
         "hint": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
-        "name": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant.",
+        "name": "(World) setting initiative to just before the current combatant.",
         "noAutomation": "Never",
         "reaching0HP": "When combatant reaches 0 HP.",
         "gettingStatusDying": "(Deprecated) When combatant gets status Dying.",
@@ -121,7 +121,7 @@
         "ignore": "Nothing",
         "instructions": "Note that the timer is paused while this dialog is open. Close this dialog without pressing any of these buttons to unpause the timer, or press the appropriate button to do what the button says.",
         "minutesLeft": "minutes left on current timer",
-        "name": "World setting to enable Hero Point handler feature that can automatically reset and/or add Hero Points, with an hourly reminder.",
+        "name": "(World) enable Hero Point handler.",
         "none": "No character",
         "noRunningTimer": "No timer running",
         "noTimerLabel": "Submit changes with <b>no</b> timer. Will <b>stop</b> any existing timer.",
@@ -137,7 +137,11 @@
       },
       "heroPointHandlerKey": {
         "hint": "World keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
-        "name": "World keybind to open the Hero Point handler dialog."
+        "name": "(World) keybind to open the Hero Point handler dialog."
+      },
+      "heroPointHandlerStartTimerOnReady": {
+        "hint": "World setting for automatically starting the Hero Point handler timer when the game is ready.",
+        "name": "(World) automatically start Hero Point Handler."
       },
       "callHotbarMacro": {
         "hint": "Call hotbar macro on page {page} position {column}",
@@ -148,58 +152,58 @@
       },
       "moveBeforeCurrentCombatantKey": {
         "hint": "World keybind for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
-        "name": "World keybind for moving selected combatant before the current combatant."
+        "name": "(World) keybind to move selected combatant before current combatant."
       },
       "notifications": {
         "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
       },
       "npcMystifier": {
         "hint": "World setting to turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene. Save settings to show/hide additional options.",
-        "name": "World setting to turn on npc mystifier."
+        "name": "(World) turn on npc mystifier."
       },
       "npcMystifierAddRandomNumber": {
         "hint": "World setting that turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.",
-        "name": "World setting that adds random number to name."
+        "name": "(World) add random number"
       },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
         "hint": "When this world setting is enabled, all mystified tokens on the active scene with the same base actor as the token being renamed will be demystified.",
-        "name": "World setting to demystify all tokens based on the same actor."
+        "name": "(World) demystify all tokens of actor"
       },
       "npcMystifierFilterAlignmentTraits": {
         "hint": "World setting to filter out alignment traits from the mystified name.",
-        "name": "World setting to exclude npc alignment traits in name."
+        "name": "(World) exclude npc alignment traits."
       },
       "npcMystifierFilterBlacklist": {
         "hint": "World setting to filter out all words in this comma-separated blacklist from the mystified name.",
-        "name": "World setting to blacklist traits to never add to name."
+        "name": "(World) blacklist traits to never add"
       },
       "npcMystifierFilterCreatureFamilyTraits": {
         "hint": "World setting to filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name.",
-        "name": "World setting to exclude npc creature family traits in name."
+        "name": "(World) exclude creature family traits."
       },
       "npcMystifierFilterCreatureTypesTraits": {
         "hint": "World setting to filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name.",
-        "name": "World setting to exclude npc creature type traits in name."
+        "name": "(World) exclude creature type traits"
       },
       "npcMystifierFilterEliteWeak": {
         "hint": "World setting to filter out elite/weak from the mystified name.",
-        "name": "World setting to exclude npc elite/weak status in name."
+        "name": "(World) exclude elite/weak status"
       },
       "npcMystifierFilterOtherTraits": {
         "hint": "World setting to filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name.",
-        "name": "World setting to exclude npc traits not in the above trait types."
+        "name": "(World) exclude other traits"
       },
       "npcMystifierFilterRarities": {
         "hint": "World setting to filter out rarities from the mystified name.",
-        "name": "World setting to exclude npc rarity in the name."
+        "name": "(World) exclude rarity"
       },
       "npcMystifierFilterRaritiesReplacement": {
         "hint": "World setting to set the word to replace rarities greater than Common with (e.g. 'Unusual'). If empty, do not change the displayed rarity.",
-        "name": "World setting to set word to replace rarities greater than Common with."
+        "name": "(World) replace rarities rarer than Common"
       },
       "npcMystifierKeepNumberAtEndOfName": {
         "hint": "World setting to keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs.",
-        "name": "World setting to keep token number when mystifying/demystifying."
+        "name": "(World) keep token number when mystifying/demystifying."
       },
       "npcMystifierMethod": {
         "hint": "Currently Mystifying by using the NPCs traits is the only supported option.",
@@ -208,7 +212,7 @@
       },
       "npcMystifierModifierKey": {
         "hint": "World setting to set which ke to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
-        "name": "World setting for which modifier key to use when mystifying by dragging onto the scene"
+        "name": "(World) Mystifies on drag to scene"
       },
       "npcMystifierMystifyKey": {
         "hint": "World keybind to select tokens and press this key to mystify them.",
@@ -216,31 +220,31 @@
       },
       "npcMystifierPostfix": {
         "hint": "World setting for what to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead.",
-        "name": "World setting for word or rollable table to postfix new name with"
+        "name": "(World) word or rollable table postfix"
       },
       "npcMystifierPrefix": {
         "hint": "World setting for what to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead.",
-        "name": "World setting for word or rollable table to prefix new name with"
+        "name": "(World) word or rollable table prefix"
       },
       "npcMystifierSkipRandomNumberForUnique": {
         "hint": "World setting to skip adding a random number when mystifying unique npcs.",
-        "name": "World setting to not add random number for unique npcs."
+        "name": "(World) skip random number for unique npcs."
       },
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "(Experimental) World setting to use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.",
-        "name": "(Experimental) World setting to use mystified name inside chat messages."
+        "name": "(Experimental) (World) mystify name in chat messages."
       },
       "purgeExpiredEffectsEachTurn": {
         "hint": "(Deprecated) World setting to purge all expired effects each turn in combat.",
-        "name": "(Deprecated) World setting to purge all expired effects each turn."
+        "name": "(Deprecated) (World) purge all expired effects each turn"
       },
       "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
         "hint": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat.",
-        "name": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat."
+        "name": "(Deprecated) (World) purge all expired effects on time increase"
       },
       "reminderBreathWeapon": {
         "hint": "Client setting to set reminder for breath weapon use.",
-        "name": "Client setting for breath weapon reminder",
+        "name": "Breath weapon reminder",
         "prefix": "can't use",
         "postfix": " rounds",
         "defaultName": "Breath",

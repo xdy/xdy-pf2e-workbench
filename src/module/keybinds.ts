@@ -17,7 +17,7 @@ export function registerKeybindings() {
         editable: [],
         onDown: () => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
-                heroPointHandler(calcRemainingMinutes() > 0 ? HPHState.Check : HPHState.Start);
+                heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start);
             }
             return true;
         },
