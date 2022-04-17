@@ -335,6 +335,32 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "actionsReminderAllow", {
+        name: `${MODULENAME}.SETTINGS.actionsReminderAllow.name`,
+        hint: `${MODULENAME}.SETTINGS.actionsReminderAllow.hint`,
+        scope: "world",
+        config: true,
+        default: "none",
+        type: String,
+        choices: {
+            none: game.i18n.localize(`${MODULENAME}.SETTINGS.actionsReminderAllow.none`),
+            all: game.i18n.localize(`${MODULENAME}.SETTINGS.actionsReminderAllow.all`),
+            gm: game.i18n.localize(`${MODULENAME}.SETTINGS.actionsReminderAllow.gm`),
+            players: game.i18n.localize(`${MODULENAME}.SETTINGS.actionsReminderAllow.players`),
+        },
+        onChange: () => debouncedReload(),
+    });
+
+    game.settings.register(MODULENAME, "actionsReminderAutoReduceStunned", {
+        name: `${MODULENAME}.SETTINGS.actionsReminderAutoReduceStunned.name`,
+        hint: `${MODULENAME}.SETTINGS.actionsReminderAutoReduceStunned.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "autoRollDamageAllow", {
         name: `${MODULENAME}.SETTINGS.autoRollDamageAllow.name`,
         hint: `${MODULENAME}.SETTINGS.autoRollDamageAllow.hint`,

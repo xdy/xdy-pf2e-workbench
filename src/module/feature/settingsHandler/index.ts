@@ -5,6 +5,20 @@ export function toggleSettings(html: JQuery) {
     settings.forEach((setting: [string, any]) => {
         const settingName = setting[0];
         //TODO Do this in a more elegant way
+        //Disable all dependent actionsReminder settings
+        if (
+            settingName !== `${MODULENAME}.actionsReminderAllow` &&
+            setting[0].startsWith(`${MODULENAME}.actionsReminder`)
+        ) {
+            const applyToggle = !(
+                game.settings.get(MODULENAME, "actionsReminderAllow") === "none" ||
+                (game.user?.isGM
+                    ? game.settings.get(MODULENAME, "actionsReminderAllow") === "players"
+                    : game.settings.get(MODULENAME, "actionsReminderAllow") === "gm")
+            );
+            html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
+        }
+
         //Disable all dependent persistentDamage settings
         if (
             settingName !== `${MODULENAME}.applyPersistentAllow` &&

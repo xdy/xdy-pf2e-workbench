@@ -249,6 +249,18 @@
         "postfix": " rounds",
         "defaultName": "Breath",
         "used": "Used "
+      },
+      "actionsReminderAllow": {
+        "hint": "Show number of actions reminder as chat message. Save settings to show/hide additional options.",
+        "name": "(World) Who gets an actions reminder",
+        "none": "None",
+        "all": "All",
+        "gm": "GM",
+        "players": "Players"
+      },
+      "actionsReminderAutoReduceStunned": {
+        "hint": "Client setting to automatically reduce Stunned on turn start, requires number of actions reminder.",
+        "name": "Automatically reduce stunned on turn start"
       }
     }
   }
