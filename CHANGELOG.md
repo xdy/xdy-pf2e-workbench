@@ -1,3 +1,15 @@
+# [2.43.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.42.1...v2.43.0) (2022-04-17)
+
+
+### Bug Fixes
+
+* Typo ([bddb325](https://github.com/xdy/xdy-pf2e-workbench/commit/bddb325e89af5dd415129a7bd6ab5b14665a53fc))
+
+
+### Features
+
+* Adds option to automatically reduce Stunned condition at the start of the turn hidden behind option to show actions reminder each turn, which handles Quickened, Slowed and Stunned. ([9ce337a](https://github.com/xdy/xdy-pf2e-workbench/commit/9ce337af5068bd9275cf668f0c0b9f0a9afbf5fe))
+
 ## [2.42.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.42.0...v2.42.1) (2022-04-14)
 
 
