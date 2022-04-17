@@ -211,7 +211,7 @@
         "traits": "Mystify by NPC Traits"
       },
       "npcMystifierModifierKey": {
-        "hint": "World setting to set which ke to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
+        "hint": "World setting to set which key to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
         "name": "(World) Mystifies on drag to scene"
       },
       "npcMystifierMystifyKey": {
