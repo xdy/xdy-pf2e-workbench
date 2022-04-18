@@ -27,6 +27,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
 * Option to automatically add a reminder effect when breath weapons are used (i.e. sent to chat.) Breath weapon description must match 
 ```"<p>.*can't use.*1d([46]) rounds.*</p>"``` or the localized equivalent for it to be recognized.
+* Option to automatically reduce Stunned condition at the start of the turn hidden behind option to show actions reminder each turn, which handles Quickened, Slowed and Stunned.
 
 Experimental features:
 None right now. (Though some feature settings are experimental.)
