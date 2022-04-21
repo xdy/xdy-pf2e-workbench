@@ -98,6 +98,10 @@
         "hint": "Client setting to notify when a spell attack is rolled and no spell card was found to roll damage for.",
         "name": "Notify when a spell attack is rolled and no spell card was found."
       },
+      "giveWoundedWhenDyingRemoved": {
+        "hint": "Client setting to automatically give Wounded condition when Dying condition is removed.",
+        "name": "Automatically give Wounded when Dying is removed."
+      },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn.",
         "name": "Automatically decrease the frightened condition each turn."

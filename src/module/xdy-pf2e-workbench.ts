@@ -25,6 +25,7 @@ import { reduceFrightened } from "./feature/conditionHandler";
 import { chatCardCollapse } from "./feature/qolHandler";
 import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./feature/heroPointHandler";
 import { shouldIHandleThis } from "./utils";
+import { ItemPF2e } from "@item";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -120,6 +121,14 @@ Hooks.once("init", async () => {
                 combat.combatant.actor
             ) {
                 game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
+        Hooks.on("deleteItem", async (item: ItemPF2e, options: {}) => {
+            if (item.slug === "dying" && game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
+                await item.parent?.increaseCondition("wounded");
             }
         });
     }

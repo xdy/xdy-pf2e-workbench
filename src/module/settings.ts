@@ -480,6 +480,16 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "giveWoundedWhenDyingRemoved", {
+        name: `${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.name`,
+        hint: `${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
         name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
         hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,
