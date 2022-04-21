@@ -59,7 +59,7 @@
     "lint-staged": "^12.4.0",
     "mini-css-extract-plugin": "^2.6.0",
     "null-loader": "^4.0.1",
-    "pixi.js": "~6.2.2",
+    "pixi.js": "~6.3.0",
     "prettier": "^2.6.2",
     "sass": "^1.50.1",
     "sass-loader": "^12.6.0",
