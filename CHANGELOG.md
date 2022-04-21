@@ -1,3 +1,10 @@
+# [2.44.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.43.0...v2.44.0) (2022-04-21)
+
+
+### Features
+
+* Adds option automatically give the Wounded condition any time the Dying condition is removed. ([403b872](https://github.com/xdy/xdy-pf2e-workbench/commit/403b87279d4c4b1aacff05de46a0221c7c5a3ce7))
+
 # [2.43.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.42.1...v2.43.0) (2022-04-17)
 
 
