@@ -21,7 +21,7 @@ import { TokenDocumentPF2e } from "@scene";
 import { playAnimationAndSound } from "./feature/sfxHandler";
 import { reminderBreathWeapon } from "./feature/reminderEffects";
 import { toggleSettings } from "./feature/settingsHandler";
-import { reduceFrightened } from "./feature/conditionHandler";
+import { increaseDyingOnZeroHP, reduceFrightened } from "./feature/conditionHandler";
 import { chatCardCollapse } from "./feature/qolHandler";
 import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./feature/heroPointHandler";
 import { shouldIHandleThis } from "./utils";
@@ -30,7 +30,7 @@ import { ItemPF2e } from "@item";
 export const MODULENAME = "xdy-pf2e-workbench";
 
 // Initialize module
-Hooks.once("init", async () => {
+Hooks.once("init", async (actor: ActorPF2e) => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
 
     registerSettings();
@@ -204,9 +204,23 @@ Hooks.once("init", async () => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
+    if (
+        game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" ||
+        game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "no"
+    ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
-            await moveOnZeroHP(actor, update);
+            const a = game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
+            if (game.user?.isGM && a !== "none") {
+                await increaseDyingOnZeroHP(actor, update);
+            }
+
+            if (
+                game.combat &&
+                game.user?.isGM &&
+                game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP"
+            ) {
+                await moveOnZeroHP(actor, update, game.combat);
+            }
         });
     }
 

@@ -1,5 +1,5 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { CombatantPF2e } from "@module/encounter";
+import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { ActorPF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
 
@@ -24,24 +24,26 @@ export async function moveSelectedAheadOfCurrent(selectedCombatant: CombatantPF2
     }
 }
 
-export async function moveOnZeroHP(actor: ActorPF2e, update: Record<string, string>): Promise<void> {
-    if (game.user?.isGM && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" && game.combat) {
-        const combatant = <CombatantPF2e>(
-            game.combat.getCombatantByToken(
-                actor.isToken
-                    ? <string>actor.token?.id
-                    : <string>canvas?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
-            )
-        );
-        if (
-            combatant &&
-            combatant !== game.combat.combatant &&
-            // @ts-ignore
-            actor.data.data.attributes.hp.value > 0 &&
-            getProperty(update, "data.attributes.hp.value") <= 0
-        ) {
-            await moveSelectedAheadOfCurrent(combatant);
-        }
+export async function moveOnZeroHP(
+    actor: ActorPF2e,
+    update: Record<string, string>,
+    combat: EncounterPF2e
+): Promise<void> {
+    const combatant = <CombatantPF2e>(
+        combat.getCombatantByToken(
+            actor.isToken
+                ? <string>actor.token?.id
+                : <string>canvas?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
+        )
+    );
+    if (
+        combatant &&
+        combatant !== combat.combatant &&
+        // @ts-ignore
+        actor.data.data.attributes.hp.value > 0 &&
+        getProperty(update, "data.attributes.hp.value") <= 0
+    ) {
+        await moveSelectedAheadOfCurrent(combatant);
     }
 }
 

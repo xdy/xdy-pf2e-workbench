@@ -490,6 +490,20 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "autoGainDyingAtZeroHP", {
+        name: `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.name`,
+        hint: `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.hint`,
+        scope: "client",
+        config: true,
+        default: "none",
+        type: String,
+        choices: {
+            none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.no`),
+            addOne: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addOne`),
+            addWoundedLevel: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addWoundedLevel`),
+        },
+        onChange: () => debouncedReload(),
+    });
     game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
         name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
         hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,

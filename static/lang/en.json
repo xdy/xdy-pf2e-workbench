@@ -98,6 +98,13 @@
         "hint": "Client setting to notify when a spell attack is rolled and no spell card was found to roll damage for.",
         "name": "Notify when a spell attack is rolled and no spell card was found."
       },
+      "autoGainDyingAtZeroHP": {
+        "hint": "Client setting to automatically increase Dying at zero HP.",
+        "name": "Automatically automatically increase Dying at zero HP.",
+        "no": "No",
+        "addOne": "Add one",
+        "addWoundedLevel": "Add Wounded level"
+      },
       "giveWoundedWhenDyingRemoved": {
         "hint": "Client setting to automatically give Wounded condition when Dying condition is removed.",
         "name": "Automatically give Wounded when Dying is removed."
