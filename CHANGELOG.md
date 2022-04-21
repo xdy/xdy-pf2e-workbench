@@ -1,3 +1,10 @@
+# [2.45.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.44.0...v2.45.0) (2022-04-21)
+
+
+### Features
+
+* Option to automatically increase Dying by either 1 or the dying character's Wounded level when it reaches 0 HP. ([0eabede](https://github.com/xdy/xdy-pf2e-workbench/commit/0eabede63fc3836fb4b4afd3108b412166160904))
+
 # [2.44.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.43.0...v2.44.0) (2022-04-21)
 
 
