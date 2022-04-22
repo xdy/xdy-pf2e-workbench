@@ -28,6 +28,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to automatically add a reminder effect when breath weapons are used (i.e. sent to chat.) Breath weapon description must match 
 ```"<p>.*can't use.*1d([46]) rounds.*</p>"``` or the localized equivalent for it to be recognized.
 * Option to automatically reduce Stunned condition at the start of the turn hidden behind option to show actions reminder each turn, which handles Quickened, Slowed and Stunned.
+* The xdy-pf2e-workbench-items pack now includes a 'Feat' named "Workbench Flat Check Notes". This 'Feat' holds several useful Note RE:s that when appropriate add notes about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your characters as a Bonus or Campaign Specific feat. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or dazzled.
 
 Experimental features:
 None right now. (Though some feature settings are experimental.)
