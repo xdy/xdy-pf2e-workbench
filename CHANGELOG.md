@@ -1,3 +1,10 @@
+## [2.46.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.0...v2.46.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* Assorted edge cases around conditions ([aea25c9](https://github.com/xdy/xdy-pf2e-workbench/commit/aea25c9cd5ae8b4ce98af14e6b94207bc5ebb71c))
+
 # [2.46.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.45.1...v2.46.0) (2022-04-22)
 
 
