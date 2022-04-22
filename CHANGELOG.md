@@ -1,3 +1,10 @@
+# [2.46.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.45.1...v2.46.0) (2022-04-22)
+
+
+### Features
+
+* The xdy-pf2e-workbench-items pack now includes a 'Feat' named "Workbench Flat Check Notes". This 'Feat' holds several useful Note RE:s that when appropriate add notes about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your characters as a Bonus or Campaign Specific feat. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or dazzled. ([26a5b5f](https://github.com/xdy/xdy-pf2e-workbench/commit/26a5b5f26cfbc8bfc118fe1ee0cd9be67816d801))
+
 ## [2.45.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.45.0...v2.45.1) (2022-04-22)
 
 
