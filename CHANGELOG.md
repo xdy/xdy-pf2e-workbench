@@ -1,3 +1,10 @@
+## [2.45.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.45.0...v2.45.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* Fix 'moving initiative' breakage. ([b99431e](https://github.com/xdy/xdy-pf2e-workbench/commit/b99431e909cf6a69fd95123b7c1eeebba5429fcf)), closes [#219](https://github.com/xdy/xdy-pf2e-workbench/issues/219)
+
 # [2.45.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.44.0...v2.45.0) (2022-04-21)
 
 
