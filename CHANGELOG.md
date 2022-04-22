@@ -1,3 +1,12 @@
+## [2.46.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.2...v2.46.3) (2022-04-22)
+
+
+### Bug Fixes
+
+* Adds options for only adding Dying on reaching 0 HP to Characters (i.e. no npcs, vehicles, etc). ([802989a](https://github.com/xdy/xdy-pf2e-workbench/commit/802989ad8444c4b751d00faa74845c477f8f1117)), closes [#222](https://github.com/xdy/xdy-pf2e-workbench/issues/222)
+* Now adds 1 + Wounded if Add Wounded Level is chosen. ([5ca2784](https://github.com/xdy/xdy-pf2e-workbench/commit/5ca27843b6eae1c7a5256497ee59e190d8b24f43)), closes [#223](https://github.com/xdy/xdy-pf2e-workbench/issues/223)
+* See below. ([0070044](https://github.com/xdy/xdy-pf2e-workbench/commit/007004453ad015e631f58525cecc1b34f474365a))
+
 ## [2.46.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.1...v2.46.2) (2022-04-22)
 
 
