@@ -100,7 +100,7 @@
       },
       "autoGainDyingAtZeroHP": {
         "hint": "Client setting to automatically increase Dying at zero HP.",
-        "name": "Automatically automatically increase Dying at zero HP.",
+        "name": "Automatically increase Dying at zero HP.",
         "no": "No",
         "addOne": "Add one",
         "addWoundedLevel": "Add Wounded level"
