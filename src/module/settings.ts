@@ -501,6 +501,8 @@ export function registerSettings() {
             none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.no`),
             addOne: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addOne`),
             addWoundedLevel: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addWoundedLevel`),
+            addOneForCharacters: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addOneForCharacters`),
+            addWoundedLevelForCharacters: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addWoundedLevelForCharacters`),
         },
         onChange: () => debouncedReload(),
     });

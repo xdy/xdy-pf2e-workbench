@@ -22,11 +22,15 @@ export async function increaseDyingOnZeroHP(actor: ActorPF2e, update: Record<str
         hp > 0 &&
         getProperty(update, "data.attributes.hp.value") <= 0
     ) {
-        if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") === "addWoundedLevel") {
-            hp = actor.getCondition("wounded")?.value ?? 1;
-        }
-        for (let i = 0; i < Math.max(1, hp); i++) {
-            await actor.increaseCondition("dying");
+        let value = 1;
+        const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
+        if (option.endsWith("ForCharacters") ? actor.data.type === "character" : true) {
+            if (option?.startsWith("addWoundedLevel")) {
+                value = actor.getCondition("wounded")?.value ?? 1;
+            }
+            for (let i = 0; i < Math.max(1, value); i++) {
+                await actor.increaseCondition("dying");
+            }
         }
     }
 }
