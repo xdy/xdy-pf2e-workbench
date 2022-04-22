@@ -1,3 +1,10 @@
+## [2.46.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.1...v2.46.2) (2022-04-22)
+
+
+### Bug Fixes
+
+* Tautological fix ([34eb4ed](https://github.com/xdy/xdy-pf2e-workbench/commit/34eb4ed5125ca85fed0e43cd7a831c6efe045e77))
+
 ## [2.46.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.0...v2.46.1) (2022-04-22)
 
 
