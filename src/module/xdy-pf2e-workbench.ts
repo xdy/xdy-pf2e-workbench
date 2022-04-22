@@ -209,26 +209,27 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "no"
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
-            const a = game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
-            if (game.user?.isGM && a !== "none") {
-                await increaseDyingOnZeroHP(actor, update);
-            }
-
             if (
                 game.combat &&
                 game.user?.isGM &&
                 game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP"
             ) {
-                await moveOnZeroHP(actor, update, game.combat);
+                await moveOnZeroHP(actor, deepClone(update), game.combat);
+            }
+
+            const a = game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
+            if (game.user?.isGM && a !== "none") {
+                await increaseDyingOnZeroHP(actor, deepClone(update));
             }
         });
     }
 
     if (game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedGettingStatusDying") {
         Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update) => {
-            await moveOnDying(tokenDoc, update);
+            await moveOnDying(tokenDoc, deepClone(update));
         });
     }
+
     if (game.settings.get(MODULENAME, "npcMystifier")) {
         Hooks.on("createToken", async (token: any) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
