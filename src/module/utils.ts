@@ -4,14 +4,14 @@ export function shouldIHandleThis(
     userId: string | undefined | null,
     playerCondition = true,
     gmCondition = true,
-    extraCondition = false
+    extraCondition = true
 ) {
     const isUserActive = game.users?.players
         .filter((u) => u.active)
         .filter((u) => !u.isGM)
         .find((u) => u.id === userId);
-    const rollAsPlayer = !game.user?.isGM && extraCondition && playerCondition;
-    const rollAsGM = game.user?.isGM && (extraCondition || !isUserActive) && gmCondition;
+    const rollAsPlayer = isUserActive && !game.user?.isGM && extraCondition && playerCondition;
+    const rollAsGM = game.user?.isGM && extraCondition && !isUserActive && gmCondition;
     return rollAsPlayer || rollAsGM;
 }
 

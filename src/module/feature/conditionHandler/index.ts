@@ -15,17 +15,17 @@ export async function reduceFrightened(combatant: CombatantPF2e) {
     }
 }
 
-export async function increaseDyingOnZeroHP(actor: ActorPF2e, update: Record<string, string>) {
+export async function increaseDyingOnZeroHP(actor: ActorPF2e, update: Record<string, string>, hp: number) {
     if (
+        shouldIHandleThis(actor.isOwner ? game.user?.id : null) &&
         // @ts-ignore
-        actor.data.data.attributes.hp.value > 0 &&
+        hp > 0 &&
         getProperty(update, "data.attributes.hp.value") <= 0
     ) {
-        let value = 1;
         if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") === "addWoundedLevel") {
-            value = actor.getCondition("wounded")?.value ?? 1;
+            hp = actor.getCondition("wounded")?.value ?? 1;
         }
-        for (let i = 0; i < Math.max(1, value); i++) {
+        for (let i = 0; i < Math.max(1, hp); i++) {
             await actor.increaseCondition("dying");
         }
     }

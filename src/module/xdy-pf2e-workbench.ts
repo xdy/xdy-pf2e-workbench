@@ -127,7 +127,11 @@ Hooks.once("init", async (actor: ActorPF2e) => {
 
     if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
         Hooks.on("deleteItem", async (item: ItemPF2e, options: {}) => {
-            if (item.slug === "dying" && game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
+            if (
+                item.slug === "dying" &&
+                game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") &&
+                shouldIHandleThis(item.isOwner ? game.user?.id : null)
+            ) {
                 await item.parent?.increaseCondition("wounded");
             }
         });
@@ -209,17 +213,14 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "no"
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
-            if (
-                game.combat &&
-                game.user?.isGM &&
-                game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP"
-            ) {
-                await moveOnZeroHP(actor, deepClone(update), game.combat);
+            const hp = actor.data.data.attributes.hp?.value || 0;
+            const updateClone = deepClone(update);
+            if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
+                await moveOnZeroHP(actor, updateClone, game.combat, hp);
             }
 
-            const a = game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
-            if (game.user?.isGM && a !== "none") {
-                await increaseDyingOnZeroHP(actor, deepClone(update));
+            if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
+                await increaseDyingOnZeroHP(actor, updateClone, hp);
             }
         });
     }

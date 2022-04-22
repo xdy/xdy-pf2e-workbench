@@ -2,6 +2,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { ActorPF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
+import { shouldIHandleThis } from "../../utils";
 
 type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
 
@@ -27,7 +28,8 @@ export async function moveSelectedAheadOfCurrent(selectedCombatant: CombatantPF2
 export async function moveOnZeroHP(
     actor: ActorPF2e,
     update: Record<string, string>,
-    combat: EncounterPF2e
+    combat: EncounterPF2e,
+    hp: number
 ): Promise<void> {
     const combatant = <CombatantPF2e>(
         combat.getCombatantByToken(
@@ -37,10 +39,10 @@ export async function moveOnZeroHP(
         )
     );
     if (
+        shouldIHandleThis(combatant.isOwner ? game.user?.id : null) &&
         combatant &&
         combatant !== combat.combatant &&
-        // @ts-ignore
-        actor.data.data.attributes.hp.value > 0 &&
+        hp > 0 &&
         getProperty(update, "data.attributes.hp.value") <= 0
     ) {
         await moveSelectedAheadOfCurrent(combatant);
@@ -49,7 +51,7 @@ export async function moveOnZeroHP(
 
 export async function moveOnDying(tokenDoc: TokenDocumentPF2e, update): Promise<void> {
     if (
-        game.user?.isGM &&
+        shouldIHandleThis(tokenDoc.isOwner ? game.user?.id : null) &&
         game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedGettingStatusDying" &&
         game.combat &&
         tokenDoc.actor &&
