@@ -7,7 +7,8 @@ profile followed by a brief and incomplete description of what this person has c
 * [rectulo](https://github.com/rectulo/) - Contributed the French translation.
 * [WesBelmont](https://github.com/WesBelmont/) - Contributed the feature to automatically roll damage for spells (and improved the code to autoroll damage for strikes).
 * [websterguy](https://github.com/websterguy/) - Improved the Hero Point Handler gui.
-* [roguedevjake](https://github.com/roguedevjake/) - Provided REs for "Workbench Flat Check Notes"
+* [roguedevjake](https://github.com/roguedevjake/) - Provided REs for "Workbench Flat Check Notes".
+* [Jamz](https://github.com/JamzTheMan/) - Improved REs for "Workbench Flat Check Notes".
 
 I've probably forgotten someone, if so, please tell me!
 
