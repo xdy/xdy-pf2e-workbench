@@ -23,6 +23,7 @@ function copyFolder(source: string, target: string) {
             fs.appendFileSync(targetPath, `\n//# source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(path.dirname(sourcePath))}/${file}" - Fetched on ${new Date().toISOString()}`);
         });
 }
+
 function getFolders(dir: string) {
     const results: string[] = [];
     const folders = fs.readdirSync(packsSource);
@@ -80,11 +81,45 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
 
 //This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274;`;
             const contents = fs.readFileSync(filePath, { encoding: "utf8" });
-            //TODO Instead of hardcoding icons, have a map of icons to use (yes, it'll get out of date eventually, but, eh, it's a start)
+            const map = new Map<string, string>();
+            map.set("2-Action Harm", "systems/pf2e/icons/spells/harm.webp");
+            map.set("2-Action Heal v2", "systems/pf2e/icons/spells/heal.webp");
+            map.set("Actions with Potency", "icons/svg/dice-target.svg");
+            map.set("Apply Conditions", "icons/svg/dice-target.svg");
+            map.set("BattleMedicineImmunity", "icons/svg/dice-target.svg");
+            map.set("Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp");
+            map.set("Conditions Manager", "systems/pf2e/icons/conditions/doomed.webp");
+            map.set("Countdown-Cooldown", "icons/svg/dice-target.svg");
+            map.set(
+                "Custom Saves and Skill Checks",
+                "systems/pf2e/icons/equipment/held-items/abadars-flawless-scale.webp"
+            );
+            map.set("Eldritch Shot", "systems/pf2e/icons/equipment/consumables/ammunition/spellstrike-ammunition.webp");
+            map.set("Lingering Composition", "icons/svg/dice-target.svg");
+            map.set("Lingering Heroics", "systems/pf2e/icons/spells/inspire-heroics.webp");
+            map.set("Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp");
+            map.set("Magic Missile v2", "systems/pf2e/icons/spells/magic-missile.webp");
+            map.set("Modded BM immunity tracker", "systems/pf2e/icons/features/feats/treat-wounds.webp");
+            map.set("Modded Countdown Cooldown", "systems/pf2e/icons/spells/time-beacon.webp");
+            map.set("One for All", "icons/svg/dice-target.svg");
+            map.set("Overdrive", "icons/svg/dice-target.svg");
+            map.set("Post Save buttons to chat", "icons/svg/dice-target.svg");
+            map.set("QuickSkillActions", "icons/svg/dice-target.svg");
+            map.set("Scorching Ray", "systems/pf2e/icons/spells/scorching-ray.webp");
+            map.set("Spell DCs by Level", "systems/pf2e/icons/features/classes/conflux-spells.webp");
+            map.set(
+                "Spellsling",
+                "systems/pf2e/icons/equipment/consumables/ammunition/energized-cartridge-electricity.webp"
+            );
+            map.set("SpellStrike", "systems/pf2e/icons/features/classes/spellstrike.webp");
+            map.set("Treat Wounds and Battle Medicine", "systems/pf2e/icons/conditions/wounded.webp");
+            map.set("Use Scroll or Wand", "systems/pf2e/icons/equipment/wands/magic-wands/magic-wand.webp");
+            const img = map.get(macroName) || "icons/svg/dice-target.svg";
+
             // eslint-disable-next-line
             let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(contents)},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}\n`;
             // eslint-disable-next-line
-            json += `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(importMacro)},"flags": {},"img":"icons/svg/dice-target.svg","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
+            json += `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(importMacro)},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
             lines.push(json);
         } catch (err) {
             console.error(`Failed to read JSON file ${filePath}`, err);
