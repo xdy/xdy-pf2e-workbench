@@ -1,3 +1,10 @@
+# [2.48.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.47.0...v2.48.0) (2022-04-23)
+
+
+### Features
+
+* 'Workbench Flat Check Notes' now has support for the Blind-Fight feat, courtesy of Jamz ([81cce4e](https://github.com/xdy/xdy-pf2e-workbench/commit/81cce4eddbce7ef53575962f78bd92f5e23db60b))
+
 # [2.47.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.4...v2.47.0) (2022-04-23)
 
 
