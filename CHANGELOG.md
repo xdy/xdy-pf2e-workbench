@@ -1,3 +1,10 @@
+## [2.46.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.3...v2.46.4) (2022-04-23)
+
+
+### Bug Fixes
+
+* The 'Workbench Flat Check Notes' item in the compendium xdy-pf2e-workbench-items is now a 'Boon', meaning it'll appear on the Deity Boons/Curses section of the Effects tab rather than on the feat list. This change was done to put it in a more out of the way place. I also gave it a new icon. ([bfcbf96](https://github.com/xdy/xdy-pf2e-workbench/commit/bfcbf9601659d916acd01332c4e7add628bd804d))
+
 ## [2.46.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.2...v2.46.3) (2022-04-22)
 
 
