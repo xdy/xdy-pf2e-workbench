@@ -39,8 +39,8 @@ export async function moveOnZeroHP(
         )
     );
     if (
-        shouldIHandleThis(combatant.isOwner ? game.user?.id : null) &&
         combatant &&
+        shouldIHandleThis(combatant.isOwner ? game.user?.id : null) &&
         combatant !== combat.combatant &&
         hp > 0 &&
         getProperty(update, "data.attributes.hp.value") <= 0
