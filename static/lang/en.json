@@ -278,6 +278,12 @@
       "actionsReminderAutoReduceStunned": {
         "hint": "Client setting to automatically reduce Stunned on turn start, requires number of actions reminder.",
         "name": "Automatically reduce stunned on turn start"
+      },
+      "addUserTargets": {
+        "hint": "Keybind to add selected and hovered tokens to the chosen user's targets.",
+        "name": "Add user targets",
+        "title": "Select user to add targets for",
+        "addFor": "Add targets for"
       }
     }
   }

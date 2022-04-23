@@ -10,6 +10,56 @@ export function registerKeybindings() {
     // @ts-ignore
     const keybindings = game.keybindings;
 
+    keybindings.register(MODULENAME, "addUserTargets", {
+        name: `${MODULENAME}.SETTINGS.addUserTargets.name`,
+        hint: `${MODULENAME}.SETTINGS.addUserTargets.hint`,
+        restricted: true,
+        editable: [],
+        onDown: () => {
+            let userId;
+            const map = game.users
+                .filter((user) => !user.isGM)
+                .map((user) => {
+                    return { label: user.name, key: user.id };
+                });
+
+            let content = `<div style="display: flex; line-height: 2rem;">
+        <label style="flex-grow: 1;" for="dialogUserId">User</label>
+        <select style="height: 2rem;" id="dialogUserId">`;
+            for (const { key, label } of map) {
+                content += `<option value=${key}>${label}</option>`;
+            }
+            content += `</div></select>`;
+
+            const d = new Dialog({
+                title: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.title`),
+                content,
+                buttons: {
+                    addFor: {
+                        icon: '<i class="fas fa-check"></i>',
+                        label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
+                        callback: async (html: JQuery) => {
+                            userId = html.find("#dialogUserId").val() as string;
+                            const targets = Array.from(canvas.tokens?.controlled).concat(
+                                canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1)
+                            );
+                            const user = game.users.find((u) => u.id === userId);
+                            if (game.user?.isGM && targets && user) {
+                                targets.forEach((t) => {
+                                    t.setTarget(true, { user: user, releaseOthers: false });
+                                    user.targets.add(t);
+                                });
+                            }
+                        },
+                    },
+                },
+                default: "addFor",
+            });
+            d.render(true);
+            return true;
+        },
+    });
+
     keybindings.register(MODULENAME, "heroPointHandler", {
         name: `${MODULENAME}.SETTINGS.heroPointHandlerKey.name`,
         hint: `${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`,
