@@ -480,6 +480,16 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "toggleUndetectedWithVisibilityState", {
+        name: `${MODULENAME}.SETTINGS.toggleUndetectedWithVisibilityState.name`,
+        hint: `${MODULENAME}.SETTINGS.toggleUndetectedWithVisibilityState.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "giveWoundedWhenDyingRemoved", {
         name: `${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.name`,
         hint: `${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.hint`,
@@ -508,6 +518,7 @@ export function registerSettings() {
         },
         onChange: () => debouncedReload(),
     });
+
     game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
         name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
         hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,

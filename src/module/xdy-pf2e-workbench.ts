@@ -225,9 +225,22 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedGettingStatusDying") {
-        Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update) => {
-            await moveOnDying(tokenDoc, deepClone(update));
+    if (
+        game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedGettingStatusDying" ||
+        game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState")
+    ) {
+        Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update, options, userId) => {
+            const clonedUpdate = deepClone(update);
+
+            if (
+                game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState") &&
+                (update.hidden === true || update.hidden === false)
+            ) {
+                tokenDoc.actor?.toggleCondition("undetected");
+            }
+
+            //Deprecated
+            await moveOnDying(tokenDoc, clonedUpdate);
         });
     }
 

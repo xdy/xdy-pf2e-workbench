@@ -56,8 +56,8 @@
         "wasDamaged": "{damage} damage was automatically applied"
       },
       "applyPersistentDamageSeparateMessage": {
-        "name": "Client setting to show separate persistent damage message",
-        "hint": "Show separate persistent damage message"
+        "name": "Show separate persistent damage message",
+        "hint": "Client setting to show separate persistent damage message"
       },
       "applyPersistentHealing": {
         "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
@@ -110,6 +110,10 @@
       "giveWoundedWhenDyingRemoved": {
         "hint": "Client setting to automatically give Wounded condition when Dying condition is removed.",
         "name": "Automatically give Wounded when Dying is removed."
+      },
+      "toggleUndetectedWithVisibilityState": {
+        "hint": "World setting for using token visilibity for toggling Undetected condition.",
+        "name": "(World) Use visibility to toggle Undetected condition."
       },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn.",
