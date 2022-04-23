@@ -1,3 +1,15 @@
+# [2.47.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.4...v2.47.0) (2022-04-23)
+
+
+### Bug Fixes
+
+* Error when check if zero hp if not in encounter. ([733b7e4](https://github.com/xdy/xdy-pf2e-workbench/commit/733b7e4c9f7d4e6a118cb7331fb6e0eca4093376))
+
+
+### Features
+
+* Adds option to use the token hud visibility toggle to also toggle the Undetected condition. ([202c4d9](https://github.com/xdy/xdy-pf2e-workbench/commit/202c4d9a17688f51786f01479d37553540a4e8ce))
+
 ## [2.46.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.46.3...v2.46.4) (2022-04-23)
 
 
