@@ -1,3 +1,15 @@
+# [2.49.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.48.0...v2.49.0) (2022-04-23)
+
+
+### Bug Fixes
+
+* Set proper icons for the Asymonous Benefactor macros. ([5912d7d](https://github.com/xdy/xdy-pf2e-workbench/commit/5912d7d4282284616d77f06ccdfa2721179b41c2))
+
+
+### Features
+
+* Adds optional keybind called "Add user targets" that lets the GM add token targets to other users by selecting or hovering over those tokens, pressing the keybind and choosing which user should target those tokens. Enables GMs to help players having problems with targeting. Also useful in conjunction with "Workshop Flat Check Notes" to let a player target an Undetected token that they first need to roll a Flat Check to be able to hit. ([91a41fe](https://github.com/xdy/xdy-pf2e-workbench/commit/91a41fe87054ba8ddd77ca32df3e2ef5ff1b34de))
+
 # [2.48.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.47.0...v2.48.0) (2022-04-23)
 
 
