@@ -6,6 +6,7 @@ declare class GrantItemRuleElement extends RuleElementPF2e {
     static validActorTypes: ActorType[];
     /** Permit this grant to be applied during an actor update--if it isn't already granted and the predicate passes */
     reevaluateOnUpdate: boolean;
+    allowDuplicate: boolean;
     constructor(data: GrantItemSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     preCreate(args: Omit<REPreCreateParameters, "ruleSource">): Promise<void>;
     /** Grant an item if this rule element permits it and the predicate passes */
@@ -23,6 +24,7 @@ interface GrantItemSource extends RuleElementSource {
     replaceSelf?: unknown;
     preselectChoices?: unknown;
     reevaluateOnUpdate?: unknown;
+    allowDuplicate?: unknown;
 }
 interface GrantItemData extends RuleElementData {
     uuid: ItemUUID;

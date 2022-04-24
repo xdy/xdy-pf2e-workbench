@@ -1,12 +1,15 @@
 /// <reference types="jquery" />
 import type { ActorPF2e } from "@actor/base";
 import { CreaturePF2e } from "@actor";
+import { TokenDocumentPF2e } from "@scene";
 import { ModifierPF2e } from "@actor/modifiers";
 import { Statistic, StatisticDataWithDC } from "@system/statistic";
 import { RollNotePF2e } from "@module/notes";
 import { CheckDC, DegreeOfSuccessString, DEGREE_OF_SUCCESS_STRINGS } from "@system/degree-of-success";
 import { seek } from "./basic/seek";
 import { senseMotive } from "./basic/sense-motive";
+import { arcaneSlam } from "./ancestry/automaton/arcane-slam";
+import { avoidNotice } from "./exploration/avoid-notice";
 import { balance } from "./acrobatics/balance";
 import { maneuverInFlight } from "./acrobatics/maneuver-in-flight";
 import { squeeze } from "./acrobatics/squeeze";
@@ -32,6 +35,7 @@ import { makeAnImpression } from "./diplomacy/make-an-impression";
 import { request } from "./diplomacy/request";
 import { coerce } from "./intimidation/coerce";
 import { demoralize } from "./intimidation/demoralize";
+import { treatPoison } from "./medicine/treat-poison";
 import { hide } from "./stealth/hide";
 import { sneak } from "./stealth/sneak";
 import { pickALock } from "./thievery/pick-a-lock";
@@ -60,7 +64,7 @@ interface SimpleRollActionCheckOptions {
     actionGlyph: ActionGlyph | undefined;
     title: string;
     subtitle: string;
-    modifiers: ModifierPF2e[] | undefined;
+    modifiers: ((roller: ActorPF2e) => ModifierPF2e[] | undefined) | ModifierPF2e[] | undefined;
     rollOptions: string[];
     extraOptions: string[];
     traits: string[];
@@ -73,11 +77,17 @@ interface SimpleRollActionCheckOptions {
     createMessage?: boolean;
     weaponTrait?: WeaponTrait;
     weaponTraitWithPenalty?: WeaponTrait;
+    target?: () => {
+        token: TokenDocumentPF2e;
+        actor: ActorPF2e;
+    } | null;
 }
 export declare class ActionMacros {
     static macros: {
         seek: typeof seek;
         senseMotive: typeof senseMotive;
+        arcaneSlam: typeof arcaneSlam;
+        avoidNotice: typeof avoidNotice;
         balance: typeof balance;
         maneuverInFlight: typeof maneuverInFlight;
         squeeze: typeof squeeze;
@@ -103,6 +113,7 @@ export declare class ActionMacros {
         request: typeof request;
         coerce: typeof coerce;
         demoralize: typeof demoralize;
+        treatPoison: typeof treatPoison;
         hide: typeof hide;
         sneak: typeof sneak;
         pickALock: typeof pickALock;
@@ -115,6 +126,10 @@ export declare class ActionMacros {
     };
     static note(selector: string, translationPrefix: string, outcome: DegreeOfSuccessString, translationKey?: string): RollNotePF2e;
     static simpleRollActionCheck(options: SimpleRollActionCheckOptions): Promise<void>;
+    static target(): {
+        token: TokenDocumentPF2e<ActorPF2e> | null;
+        actor: ActorPF2e | null;
+    };
     private static getWeaponPotencyModifier;
     private static getApplicableEquippedWeapons;
 }

@@ -301,6 +301,7 @@ export declare const PF2ECONFIG: {
         "etched-onto-thrown-weapon": string;
         "held-in-one-hand": string;
         "held-in-two-hands": string;
+        other: string;
         "sewn-into-clothing": string;
         "tattooed-on-the-body": string;
         worn: string;
@@ -2348,6 +2349,7 @@ export declare const PF2ECONFIG: {
         strix: string;
         structure: string;
         suli: string;
+        summon: string;
         summoned: string;
         summoner: string;
         swashbuckler: string;
@@ -2384,6 +2386,7 @@ export declare const PF2ECONFIG: {
         uncommon: string;
         undine: string;
         unique: string;
+        unstable: string;
         "versatile-b": string;
         "versatile-fire": string;
         "versatile-p": string;
@@ -2398,7 +2401,6 @@ export declare const PF2ECONFIG: {
         water: string;
         witch: string;
         wizard: string;
-        summon: string;
         range: string;
         "range-5": string;
         "range-10": string;

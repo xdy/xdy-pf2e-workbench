@@ -20,7 +20,7 @@ import { ItemCarryType } from "@item/physical/data";
 export declare abstract class CreaturePF2e extends ActorPF2e {
     /** Saving throw rolls for the creature, built during data prep */
     saves: Record<SaveType, Statistic>;
-    /** Skill check rolls for the creature. */
+    /** Skill `Statistic`s for the creature */
     get skills(): CreatureSkills;
     /** The creature's position on the alignment axes */
     get alignment(): Alignment;

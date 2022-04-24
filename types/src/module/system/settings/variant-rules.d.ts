@@ -4,7 +4,7 @@ export declare class VariantRulesSettings extends FormApplication {
     static get defaultOptions(): FormApplicationOptions;
     getData(): Promise<Record<string, {
         value: unknown;
-        setting: ClientSettingsData;
+        setting: SettingRegistration;
     }>>;
     static registerSettings(): void;
     activateListeners($html: JQuery): void;

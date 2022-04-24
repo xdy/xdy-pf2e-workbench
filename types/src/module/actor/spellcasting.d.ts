@@ -40,7 +40,7 @@ export declare class ActorSpellcasting extends Collection<SpellcastingEntryPF2e>
             _id: string;
         }) | (Partial<import("../item/data").BackgroundSource> & {
             _id: string;
-        }) | (Partial<import("../item/data").ClassSource> & {
+        }) | (Partial<import("../item/class/data").ClassSource> & {
             _id: string;
         }) | (Partial<import("../item/data").ConditionSource> & {
             _id: string;

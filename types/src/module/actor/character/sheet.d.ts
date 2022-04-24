@@ -47,7 +47,6 @@ export declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e>
     private onDecrementModifierValue;
     private onAddCustomModifier;
     private onRemoveCustomModifier;
-    private isFeatValidInFeatSlot;
     /** Handle cycling of dying, wounded, or doomed */
     private onClickDyingWounded;
     private getNearestSlotId;

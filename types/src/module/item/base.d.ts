@@ -37,9 +37,10 @@ declare class ItemPF2e extends Item<ActorPF2e> {
      * Create a chat card for this item and either return the message or send it to the chat log. Many cards contain
      * follow-up options for attack rolls, effect application, etc.
      */
-    toMessage(event?: JQuery.TriggeredEvent, { create, data }?: {
-        create?: boolean | undefined;
-        data?: {} | undefined;
+    toMessage(event?: JQuery.TriggeredEvent, { rollMode, create, data }?: {
+        rollMode?: RollMode;
+        create?: boolean;
+        data?: {};
     }): Promise<ChatMessagePF2e | undefined>;
     /** A shortcut to `item.toMessage(..., { create: true })`, kept for backward compatibility */
     toChat(event?: JQuery.TriggeredEvent): Promise<ChatMessagePF2e | undefined>;

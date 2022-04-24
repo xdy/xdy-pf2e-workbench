@@ -25,6 +25,7 @@ export declare class ActionItemPF2e extends ItemPF2e {
         trigger: {
             value: string;
         };
+        deathNote: boolean;
         description: {
             value: string;
         };

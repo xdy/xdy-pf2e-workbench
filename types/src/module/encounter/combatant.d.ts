@@ -12,6 +12,7 @@ declare class CombatantPF2e<TActor extends ActorPF2e | null = ActorPF2e | null> 
         than: RolledCombatant;
     }): boolean;
     prepareBaseData(): void;
+    protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentUpdateContext<this>, userId: string): void;
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
     toggleDefeated(): Promise<void>;
     /**

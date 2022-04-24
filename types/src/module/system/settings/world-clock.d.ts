@@ -1,12 +1,10 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-interface FormInputData extends Omit<ClientSettingsData, "scope"> {
-    key: string;
+interface FormInputData extends Omit<SettingConfig, "config" | "namespace" | "scope"> {
     value: unknown;
     isSelect: boolean;
     isCheckbox: boolean;
     isDateTime: boolean;
-    scope?: "world" | "client";
 }
 interface TemplateData extends FormApplicationData {
     settings: FormInputData[];

@@ -3,9 +3,8 @@ import { ItemPF2e } from "@item/base";
 import { StatisticModifier } from "@actor/modifiers";
 import { RollParameters } from "@system/rolls";
 import { BaseWeaponProficiencyKey, CharacterData, CharacterStrike, WeaponGroupProficiencyKey, AuxiliaryAction, FeatSlot } from "./data";
-import { AncestryPF2e, BackgroundPF2e, ClassPF2e, ConsumablePF2e, DeityPF2e, HeritagePF2e, WeaponPF2e } from "@item";
+import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, WeaponPF2e } from "@item";
 import { CreaturePF2e } from "../";
-import { WeaponCategory } from "@item/weapon/data";
 import { AbilityString } from "@actor/data/base";
 import { CreatureSpeeds, LabeledSpeed, MovementType } from "@actor/creature/data";
 import { ActiveEffectPF2e } from "@module/active-effect";
@@ -14,7 +13,7 @@ import { UserPF2e } from "@module/user";
 import { CraftingEntry, CraftingFormula } from "./crafting";
 import { FeatData, ItemSourcePF2e } from "@item/data";
 import { AttackItem, AttackRollContext, StrikeRollContext, StrikeRollContextParams } from "@actor/creature/types";
-import { CharacterHitPointsSummary, CreateAuxiliaryParams } from "./types";
+import { CharacterHitPointsSummary, CharacterSkills, CreateAuxiliaryParams } from "./types";
 import { FamiliarPF2e } from "@actor/familiar";
 declare class CharacterPF2e extends CreaturePF2e {
     /** Core singular embeds for PCs */
@@ -25,7 +24,7 @@ declare class CharacterPF2e extends CreaturePF2e {
     deity: Embedded<DeityPF2e> | null;
     /** A cached reference to this PC's familiar */
     familiar: FamiliarPF2e | null;
-    featGroups: Record<string, FeatSlot>;
+    featGroups: Record<string, FeatSlot | undefined>;
     pfsBoons: FeatData[];
     deityBoonsCurses: FeatData[];
     static get schema(): typeof CharacterData;
@@ -33,6 +32,7 @@ declare class CharacterPF2e extends CreaturePF2e {
     /** This PC's ability scores */
     get abilities(): import("@actor/creature/data").Abilities;
     get hitPoints(): CharacterHitPointsSummary;
+    get skills(): CharacterSkills;
     get heroPoints(): {
         value: number;
         max: number;
@@ -41,6 +41,7 @@ declare class CharacterPF2e extends CreaturePF2e {
     getCraftingEntries(): Promise<CraftingEntry[]>;
     getCraftingEntry(selector: string): Promise<CraftingEntry | null>;
     performDailyCrafting(): Promise<void>;
+    insertFeat(feat: FeatPF2e, featType: string, slotId?: string): Promise<ItemPF2e[]>;
     /** If one exists, prepare this character's familiar */
     prepareData(): void;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */
@@ -57,12 +58,12 @@ declare class CharacterPF2e extends CreaturePF2e {
     prepareFeats(): void;
     /** Create an "auxiliary" action, an Interact or Release action using a weapon */
     createAuxAction({ weapon, action, purpose, hands }: CreateAuxiliaryParams): AuxiliaryAction;
+    /** Prepare this character's strike actions */
+    prepareStrikes({ includeBasicUnarmed }?: {
+        includeBasicUnarmed?: boolean | undefined;
+    }): CharacterStrike[];
     /** Prepare a strike action from a weapon */
-    prepareStrike(weapon: Embedded<WeaponPF2e>, options: {
-        categories: WeaponCategory[];
-        ammos?: Embedded<ConsumablePF2e>[];
-        defaultAbility?: AbilityString;
-    }): CharacterStrike;
+    private prepareStrike;
     /** Possibly modify this weapon depending on its */
     protected getStrikeRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
     /** Create attack-roll modifiers from weapon traits */

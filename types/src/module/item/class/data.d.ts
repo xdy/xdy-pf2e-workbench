@@ -4,11 +4,12 @@ import { ItemTraits } from "@item/data/base";
 import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
 import { ZeroToFour } from "@module/data";
 import type { ClassPF2e } from ".";
-export declare type ClassSource = BaseNonPhysicalItemSource<"class", ClassSystemData>;
-export declare class ClassData extends BaseNonPhysicalItemData<ClassPF2e> {
+import { CLASS_TRAITS } from "./values";
+declare type ClassSource = BaseNonPhysicalItemSource<"class", ClassSystemData>;
+declare class ClassData extends BaseNonPhysicalItemData<ClassPF2e> {
     static DEFAULT_ICON: ImagePath;
 }
-export interface ClassData extends Omit<ClassSource, "effects" | "flags"> {
+interface ClassData extends Omit<ClassSource, "effects" | "flags"> {
     type: ClassSource["type"];
     data: ClassSource["data"];
     readonly _source: ClassSource;
@@ -61,10 +62,6 @@ interface ClassSystemData extends ABCSystemData {
     skillIncreaseLevels: {
         value: number[];
     };
-    abilityBoostLevels: {
-        value: number[];
-    };
 }
-export declare const CLASS_TRAITS: readonly ["alchemist", "barbarian", "bard", "champion", "cleric", "druid", "fighter", "gunslinger", "inventor", "investigator", "magus", "monk", "oracle", "ranger", "rogue", "sorcerer", "summoner", "swashbuckler", "witch", "wizard"];
-export declare type ClassTrait = typeof CLASS_TRAITS[number];
-export {};
+declare type ClassTrait = SetElement<typeof CLASS_TRAITS>;
+export { ClassData, ClassSource, ClassSystemData, ClassTrait };

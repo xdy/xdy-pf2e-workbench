@@ -5,6 +5,8 @@ import { BaseStatisticData, StatisticChatData, StatisticCompatData, StatisticDat
 import { ItemPF2e } from "@item";
 import { CheckDC } from "@system/degree-of-success";
 import { CheckRoll } from "@system/check/roll";
+import { ZeroToFour } from "@module/data";
+import { AbilityString } from "@actor/data";
 export * from "./data";
 export interface StatisticRollParameters {
     /** Which attack this is (for the purposes of multiple attack penalty) */
@@ -38,9 +40,11 @@ export declare class Statistic<T extends BaseStatisticData = StatisticData> {
     actor: ActorPF2e;
     readonly data: T;
     options?: RollOptionParameters | undefined;
-    abilityModifier?: ModifierPF2e;
+    ability: AbilityString | null;
+    abilityModifier: ModifierPF2e | null;
+    rank: ZeroToFour | null;
     modifiers: ModifierPF2e[];
-    get slug(): string;
+    slug: string;
     constructor(actor: ActorPF2e, data: T, options?: RollOptionParameters | undefined);
     /** Compatibility function which creates a statistic from a StatisticModifier instead of from StatisticData. */
     static from(actor: ActorPF2e, stat: StatisticModifier, slug: string, label: string, type: CheckType, domains?: string[]): Statistic<{

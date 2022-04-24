@@ -1,6 +1,6 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { PickableThing, PickAThingConstructorArgs, PickAThingPrompt } from "@module/apps/pick-a-thing-prompt";
+import { PickableThing, PickAThingConstructorArgs, PickAThingPrompt, PromptTemplateData } from "@module/apps/pick-a-thing-prompt";
 import { PredicatePF2e } from "@system/predication";
 /** Prompt the user for a selection among a set of options */
 export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | object> {
@@ -26,7 +26,7 @@ interface ChoiceSetPromptData extends PickAThingConstructorArgs<string | number 
     containsUUIDs: boolean;
     allowedDrops: PredicatePF2e;
 }
-interface ChoiceSetTemplateData {
+interface ChoiceSetTemplateData extends PromptTemplateData {
     prompt: string;
     choices: PickableThing[];
     containsUUIDs: boolean;

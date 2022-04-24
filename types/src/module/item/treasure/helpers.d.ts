@@ -18,7 +18,7 @@ export declare function extractPriceFromItem(itemData: {
         price: {
             value: string;
         };
-        quantity: number;
+        quantity?: number;
     };
 }, quantity?: number): Coins;
 export declare function multiplyCoinValue(coins: Coins, factor: number): Coins;

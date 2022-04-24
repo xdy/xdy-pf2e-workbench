@@ -16,13 +16,11 @@ declare abstract class PickAThingPrompt<T> extends Application {
     static get defaultOptions(): ApplicationOptions;
     /** Collect all options within the specified scope and then eliminate any that fail the predicate test */
     protected getChoices(): PickableThing<T>[];
-    protected getSelection(event: JQuery.ClickEvent): PickableThing<T> | null;
+    protected getSelection(event: MouseEvent): PickableThing<T> | null;
     abstract get template(): string;
     /** Return a promise containing the user's item selection, or `null` if no selection was made */
     resolveSelection(): Promise<PickableThing<T> | null>;
-    getData(options?: Partial<ApplicationOptions>): Promise<{
-        choices: PickableThing[];
-    }>;
+    getData(options?: Partial<ApplicationOptions>): Promise<PromptTemplateData>;
     activateListeners($html: JQuery): void;
     /** Close the dialog, applying the effect with configured target or warning the user that something went wrong. */
     close({ force }?: {
@@ -46,4 +44,9 @@ interface PickableThing<T = string | number | object> {
     /** A numeric order by which to sort the choices */
     sort?: number;
 }
-export { PickAThingPrompt, PickAThingConstructorArgs, PickableThing };
+interface PromptTemplateData {
+    choices: PickableThing[];
+    /** Whether to use a select menu instead of a column of buttons */
+    selectMenu: boolean;
+}
+export { PickAThingConstructorArgs, PickAThingPrompt, PickableThing, PromptTemplateData };

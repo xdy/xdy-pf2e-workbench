@@ -4,10 +4,12 @@ import { MeleeData } from "@item/data";
 import { RollNotePF2e } from "@module/notes";
 import { NPCData } from "./data";
 import { NPCSheetPF2e } from "./sheet";
-export declare class NPCPF2e extends CreaturePF2e {
+import { VariantCloneParams } from "./types";
+declare class NPCPF2e extends CreaturePF2e {
     static get schema(): typeof NPCData;
     /** This NPC's ability scores */
     get abilities(): import("@actor/creature/data").Abilities;
+    get description(): string;
     /** Does this NPC have the Elite adjustment? */
     get isElite(): boolean;
     /** Does this NPC have the Weak adjustment? */
@@ -35,10 +37,20 @@ export declare class NPCPF2e extends CreaturePF2e {
     protected getHpAdjustment(level: number, adjustment: "elite" | "weak" | "normal"): number;
     /** Make the NPC elite, weak, or normal */
     applyAdjustment(adjustment: "elite" | "weak" | "normal"): Promise<void>;
+    /** Returns the base level of a creature, as this gets modified on elite and weak adjustments */
     getBaseLevel(): number;
+    /** Create a variant clone of this NPC, adjusting any of name, description, and images */
+    variantClone(params: VariantCloneParams & {
+        save?: false;
+    }): this;
+    variantClone(params: VariantCloneParams & {
+        save: true;
+    }): Promise<this>;
+    variantClone(params: VariantCloneParams): this | Promise<this>;
 }
-export interface NPCPF2e {
+interface NPCPF2e {
     readonly data: NPCData;
     get sheet(): NPCSheetPF2e;
     _sheet: NPCSheetPF2e | null;
 }
+export { NPCPF2e };

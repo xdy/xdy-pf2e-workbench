@@ -28,4 +28,4 @@ And then running this:
 run node_modules/.bin/tsc
 ```
 
-As well as foundry types copied from pf2e-monster-import (made by doing the above on foundry?)
+As well as foundry types copied from pf2e.

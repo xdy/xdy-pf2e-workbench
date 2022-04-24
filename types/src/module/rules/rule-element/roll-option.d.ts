@@ -1,3 +1,4 @@
+import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { PredicatePF2e } from "@system/predication";
 import { RuleElementOptions, RuleElementPF2e } from "./base";
@@ -18,6 +19,8 @@ declare class RollOptionRuleElement extends RuleElementPF2e {
     toggleable: boolean;
     /** Whether the toggle is interactable by the user. The `value` may still be true even if the toggle is disabled */
     enabledIf?: PredicatePF2e;
+    /** Whether this roll option is countable - the roll option will have a numeric value counting how many rules added this option */
+    count?: boolean;
     constructor(data: RollOptionSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     private resolveOption;
     onApplyActiveEffects(): void;
@@ -26,13 +29,24 @@ declare class RollOptionRuleElement extends RuleElementPF2e {
      * (re-)called here.
      */
     beforeRoll(domains: string[], rollOptions: string[]): void;
-    /** Clean up when this item is deleted */
-    onDelete(actorUpdates: Record<string, unknown>): void;
+    /**
+     * Toggle the provided roll option (swapping it from true to false or vice versa).
+     * @returns the new value if successful or otherwise `null`
+     */
+    static toggleOption({ domain, option, actor, itemId, value, }: ToggleParameters): Promise<boolean | null>;
 }
 interface RollOptionSource extends RuleElementSource {
     domain?: unknown;
     option?: unknown;
     toggleable?: unknown;
     enabledIf?: unknown;
+    count?: unknown;
+}
+interface ToggleParameters {
+    domain: string;
+    option: string;
+    actor: ActorPF2e;
+    itemId?: string | null;
+    value?: boolean;
 }
 export { RollOptionRuleElement };

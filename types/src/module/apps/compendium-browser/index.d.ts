@@ -19,6 +19,8 @@ declare class PackLoader {
         pack: CompendiumCollection<CompendiumDocument>;
         index: CompendiumIndex;
     }, void, unknown>;
+    /** Set art provided by a module if any is available */
+    private setModuleArt;
 }
 export declare class CompendiumBrowser extends Application {
     settings: Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;
@@ -64,6 +66,7 @@ export declare class CompendiumBrowser extends Application {
     /** Activate click listeners on loaded actors and items */
     private activateResultListeners;
     private takePhysicalItem;
+    private buyPhysicalItem;
     private getPhysicalItem;
     protected _canDragStart(): boolean;
     protected _canDragDrop(): boolean;
