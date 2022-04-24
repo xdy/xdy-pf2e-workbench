@@ -28,7 +28,9 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to automatically add a reminder effect when breath weapons are used (i.e. sent to chat.) Breath weapon description must match 
 ```"<p>.*can't use.*1d([46]) rounds.*</p>"``` or the localized equivalent for it to be recognized.
 * Option to automatically reduce Stunned condition at the start of the turn hidden behind option to show actions reminder each turn, which handles Quickened, Slowed and Stunned.
-* The xdy-pf2e-workbench-items pack now includes a 'Boon' named "Workbench Flat Check Notes". This 'Boon' holds several useful Note RE:s that when appropriate add notes about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your characters, it'll appear on the Deity Boons/Curses section of the Effects tab rather than on the feat list. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or dazzled.
+* The xdy-pf2e-workbench-items pack now includes a 'Boon' named "Workbench Flat Check Notes". This 'Boon' holds several useful Note RE:s that when appropriate add notes about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your characters, it'll appear on the Deity Boons/Curses section of the Effects tab rather than on the feat list. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or dazzled. Self has Blind-Fight.
+* Option to use the token hud visibility toggle to also toggle the Undetected condition
+* Optional keybind called "Add user targets" that lets the GM add token targets to other users by selecting or hovering over those tokens, pressing the keybind and choosing which user should target those tokens. Enables GMs to help players having problems with targeting. Also useful in conjunction with "Workshop Flat Check Notes" to make a player target an Undetected token that they first need to roll a Flat Check to be able to hit.
 
 Experimental features:
 None right now. (Though some feature settings are experimental.)
