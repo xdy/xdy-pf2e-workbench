@@ -13,7 +13,7 @@ import { registerSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
 import { registerKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
-import { deprecatedMoveManually, moveOnDying, moveOnZeroHP } from "./feature/initiativeHandler";
+import { moveOnZeroHP } from "./feature/initiativeHandler";
 import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
@@ -99,32 +99,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat")) {
-        Hooks.on("updateWorldTime", async (_total, diff) => {
-            if (
-                game.user?.isGM &&
-                game.settings.get(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat") &&
-                !game.combat?.active &&
-                diff >= 1
-            ) {
-                game.pf2e.effectTracker.removeExpired();
-            }
-        });
-    }
-
-    if (game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn")) {
-        Hooks.on("updateCombat", (combat: EncounterPF2e) => {
-            if (
-                game.user?.isGM &&
-                game.settings.get(MODULENAME, "purgeExpiredEffectsEachTurn") &&
-                combat.combatant &&
-                combat.combatant.actor
-            ) {
-                game.pf2e.effectTracker.removeExpired(combat.combatant.actor);
-            }
-        });
-    }
-
     if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
         Hooks.on("deleteItem", async (item: ItemPF2e, options: {}) => {
             if (
@@ -202,12 +176,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedManually") {
-        Hooks.on("getCombatTrackerEntryContext", (html: JQuery, entryOptions: any) => {
-            deprecatedMoveManually(entryOptions);
-        });
-    }
-
     if (
         game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" ||
         game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "no"
@@ -225,22 +193,14 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         });
     }
 
-    if (
-        game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedGettingStatusDying" ||
-        game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState")
-    ) {
+    if (game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState")) {
         Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update, options, userId) => {
-            const clonedUpdate = deepClone(update);
-
             if (
                 game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState") &&
                 (update.hidden === true || update.hidden === false)
             ) {
                 tokenDoc.actor?.toggleCondition("undetected");
             }
-
-            //Deprecated
-            await moveOnDying(tokenDoc, clonedUpdate);
         });
     }
 

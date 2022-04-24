@@ -34,9 +34,7 @@ Experimental features:
 None right now. (Though some feature settings are experimental.)
 
 Deprecated features (will be removed eventually):
-* (Still in the module, but a variant is in the system) Option to automatically purge all expired effects each turn.
-* (Still in the module, but a variant is in the system) Option to automatically purge all expired effects every time the game world clock increases out of combat.
-* (Still in the module, but the system has drag and drop initiative) Optional combat context menu to move the selected combatant to before the current combatant in the initiative order (normally used when the current combatant has just killed the selected combatant).
+None right now.
 
 ## Installation
 

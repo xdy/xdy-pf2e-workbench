@@ -30,9 +30,7 @@
       "enableAutomaticMove": {
         "hint": "Permettre de déplacer automatiquement l'initiative du combattant en dehors de son propre tour juste avant le combattant actuel.",
         "name": "Permettre de déplacer automatiquement l'initiative du combattant en dehors de son propre tour juste avant le combattant actuel.",
-        "reaching0HP": "Permettre de déplacer automatiquement l'initiative du combattant qui passe sous 0 pv en dehors de son propre tour juste avant le combattant actuel.",
-        "gettingStatusDying": "Permettre de déplacer automatiquement l'initiative du combattant qui obtient la condition mourant en dehors de son propre tour juste avant le combattant actuel.",
-        "enableMoveBeforeCurrentCombatant": "(Obsolète) Permettre de déplacer manuellement le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste."
+        "reaching0HP": "Permettre de déplacer automatiquement l'initiative du combattant qui passe sous 0 pv en dehors de son propre tour juste avant le combattant actuel."
       },
       "heroPointHandler": {
         "add": "Ajouter",
@@ -146,14 +144,6 @@
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "Utilise le nom mystifié à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié. Cela va vraisemblablement ne pas être joli pour certaines capacités.",
         "name": "Utiliser les noms mystifiés dans les messages de la conversation."
-      },
-      "purgeExpiredEffectsEachTurn": {
-        "hint": "(Obsolète) Purger tous les effets expirés à chaque tour. Recharger (F5) après avoir changé ce réglage",
-        "name": "(Obsolète) Purge de tous les effets expirés à chaque tour."
-      },
-      "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-        "hint": "(Obsolète) Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat. Recharger (f5) après avoir changé ce réglage.",
-        "name": "(Obsolète) Purger tous les effets expirés à chaque fois que le temps de jeu du monde augmente en dehors du combat."
       },
       "applyPersistentDamageSeparateMessage": {
         "hint": "Montrer séparément le message des dégâts persistants",

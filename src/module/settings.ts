@@ -53,10 +53,6 @@ export function registerSettings() {
         choices: {
             noAutomation: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.noAutomation`),
             reaching0HP: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HP`),
-            deprecatedGettingStatusDying: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.enableAutomaticMove.deprecatedGettingStatusDying`
-            ),
-            deprecatedManually: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.deprecatedManually`),
         },
         onChange: () => debouncedReload(),
     });
@@ -533,28 +529,6 @@ export function registerSettings() {
         name: `${MODULENAME}.SETTINGS.reminderBreathWeapon.name`,
         hint: `${MODULENAME}.SETTINGS.reminderBreathWeapon.hint`,
         scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-        onChange: () => debouncedReload(),
-    });
-
-    //DEPRECATED
-    game.settings.register(MODULENAME, "purgeExpiredEffectsOnTimeIncreaseOutOfCombat", {
-        name: `${MODULENAME}.SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.name`,
-        hint: `${MODULENAME}.SETTINGS.purgeExpiredEffectsOnTimeIncreaseOutOfCombat.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-        onChange: () => debouncedReload(),
-    });
-
-    //DEPRECATED
-    game.settings.register(MODULENAME, "purgeExpiredEffectsEachTurn", {
-        name: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.name`,
-        hint: `${MODULENAME}.SETTINGS.purgeExpiredEffectsEachTurn.hint`,
-        scope: "world",
         config: true,
         default: false,
         type: Boolean,

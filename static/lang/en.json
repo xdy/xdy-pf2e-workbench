@@ -123,9 +123,7 @@
         "hint": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
         "name": "(World) setting initiative to just before the current combatant.",
         "noAutomation": "Never",
-        "reaching0HP": "When combatant reaches 0 HP.",
-        "deprecatedGettingStatusDying": "(Deprecated) When combatant gets status Dying.",
-        "deprecatedManually": "(Deprecated) Enables manual option on selected combatant."
+        "reaching0HP": "When combatant reaches 0 HP."
       },
       "heroPointHandler": {
         "add": "Add",
@@ -250,14 +248,6 @@
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "(Experimental) World setting to use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.",
         "name": "(Experimental) (World) mystify name in chat messages."
-      },
-      "purgeExpiredEffectsEachTurn": {
-        "hint": "(Deprecated) World setting to purge all expired effects each turn in combat.",
-        "name": "(Deprecated) (World) purge all expired effects each turn"
-      },
-      "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-        "hint": "(Deprecated) World setting to purge all expired effects every time the game world time increases out of combat.",
-        "name": "(Deprecated) (World) purge all expired effects on time increase"
       },
       "reminderBreathWeapon": {
         "hint": "Client setting to set reminder for breath weapon use.",

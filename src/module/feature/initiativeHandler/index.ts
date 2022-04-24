@@ -1,7 +1,5 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { ActorPF2e } from "@actor";
-import { TokenDocumentPF2e } from "@scene";
 import { shouldIHandleThis } from "../../utils";
 
 type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
@@ -46,53 +44,5 @@ export async function moveOnZeroHP(
         getProperty(update, "data.attributes.hp.value") <= 0
     ) {
         await moveSelectedAheadOfCurrent(combatant);
-    }
-}
-
-export async function moveOnDying(tokenDoc: TokenDocumentPF2e, update): Promise<void> {
-    if (
-        shouldIHandleThis(tokenDoc.isOwner ? game.user?.id : null) &&
-        game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedGettingStatusDying" &&
-        game.combat &&
-        tokenDoc.actor &&
-        update.actorData
-    ) {
-        const shouldMove =
-            !tokenDoc.actor.hasCondition("dying") &&
-            update.actorData.items &&
-            update.actorData.items
-                .filter((row: UpdateRow) => row.type === "condition")
-                .filter((row: UpdateRow) => row.data.active)
-                .filter((row: UpdateRow) => row.data.slug === "dying")
-                .find((row: UpdateRow) => row.data.value.value === 1);
-        const combatant = <CombatantPF2e>game.combat.getCombatantByToken(<string>tokenDoc.id);
-        if (combatant && combatant !== game.combat.combatant && shouldMove) {
-            await moveSelectedAheadOfCurrent(combatant);
-        }
-    }
-}
-
-export function getCombatantById(combatantId: any): CombatantPF2e<ActorPF2e | null> {
-    return <CombatantPF2e>game?.combat?.getCombatantByToken(
-        <string>game?.combat?.combatants
-            .map((c) => ({
-                id: <string>c.id,
-                tokenId: <string>c.token?.id,
-            }))
-            .find((c) => {
-                return c.id === combatantId;
-            })?.tokenId
-    );
-}
-
-export function deprecatedMoveManually(entryOptions: any): void {
-    if (game.user?.isGM && game.settings.get(MODULENAME, "enableAutomaticMove") === "deprecatedManually") {
-        entryOptions.push({
-            icon: '<i class="fas fa-skull"></i>',
-            name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantContextMenu.name`,
-            callback: async (li: any) => {
-                await moveSelectedAheadOfCurrent(getCombatantById(li.data("combatant-id")));
-            },
-        });
     }
 }

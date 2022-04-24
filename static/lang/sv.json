@@ -16,8 +16,7 @@
         "name": "Aktivera sättning av initiativ på stridande utanför sin egen runda till strax före nuvarande stridande.",
         "noAutomation": "Aldrig",
         "reaching0HP": "När stridande går ner till 0 HP.",
-        "gettingStatusDying": "När stridande får status Dying.",
-        "deprecatedManually": "(Utfasad) Aktiverar möjlighet att manuellt flytta vald stridande till före aktuell stridande"
+        "gettingStatusDying": "När stridande får status Dying."
       },
       "heroPointHandler": {
         "add": "Lägg till",
@@ -135,14 +134,6 @@
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "(Experimentellt) Använd mystifierat namn i chattmeddelanden genom att ersätta karaktärns namn med det mystifierade namnet. Kommer utan tvekan att se riktigt dåligt ut på vissa förmågor.",
         "name": "(Experimentell) Använd mystifierat namn i chattmeddelanden."
-      },
-      "purgeExpiredEffectsEachTurn": {
-        "hint": "Ta bort alla utgångna effekter varje runda i strid. Ladda om (f5) efter ändring.",
-        "name": "Ta bort alla utgångna effekter varje runda."
-      },
-      "purgeExpiredEffectsOnTimeIncreaseOutOfCombat": {
-        "hint": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid. Ladda om (f5) efter ändring.",
-        "name": "Ta bort alla utgångna effekter varje gång spelvärdsklockan ökar utanför strid."
       }
     }
   }

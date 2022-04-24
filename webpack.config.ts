@@ -42,7 +42,7 @@ const [outDir, foundryUri] = (() => {
     const outDir =
         config instanceof Object
             ? path.join(config.dataPath, "Data", "systems", config.systemName ?? "pf2e")
-        : path.join(__dirname, "dist/");
+            : path.join(__dirname, "dist/");
     const foundryUri = (config instanceof Object ? config.foundryUri : "") ?? "http://localhost:30000";
     return [outDir, foundryUri];
 })();
@@ -50,8 +50,8 @@ const [outDir, foundryUri] = (() => {
 type Optimization = Configuration["optimization"];
 const optimization: Optimization = isProductionBuild
     ? {
-          minimize: true,
-          minimizer: [new TerserPlugin({ terserOptions: { mangle: false, module: true } }), new CssMinimizerPlugin()],
+        minimize: true,
+        minimizer: [new TerserPlugin({ terserOptions: { mangle: false, module: true } }), new CssMinimizerPlugin()],
         splitChunks: {
             chunks: "all",
             cacheGroups: {
@@ -78,13 +78,13 @@ const config: Configuration = {
         rules: [
             !isProductionBuild
                 ? {
-                      test: /\.html$/,
-                      loader: "raw-loader",
-                  }
+                    test: /\.html$/,
+                    loader: "raw-loader",
+                }
                 : {
-                      test: /\.html$/,
-                      loader: "null-loader",
-                  },
+                    test: /\.html$/,
+                    loader: "null-loader",
+                },
             {
                 test: /\.ts$/,
                 use: [
@@ -173,7 +173,7 @@ const config: Configuration = {
         },
     },
     plugins: [
-        new ForkTsCheckerWebpackPlugin({ typescript: { memoryLimit: 4096 } }),
+        new ForkTsCheckerWebpackPlugin(),
         new DefinePlugin({
             BUILD_MODE: JSON.stringify(buildMode),
         }),
