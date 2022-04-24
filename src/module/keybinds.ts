@@ -109,6 +109,7 @@ export function registerKeybindings() {
                 }
                 return true;
             }
+            return false;
         },
         reservedModifiers: [],
         // @ts-ignore
