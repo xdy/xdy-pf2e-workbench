@@ -1,3 +1,10 @@
+## [2.49.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.49.0...v2.49.1) (2022-04-24)
+
+
+### Bug Fixes
+
+* Includes the latest Asymonous Benefactor macro, 'Dual Class'. ([64daf5d](https://github.com/xdy/xdy-pf2e-workbench/commit/64daf5d4e54393a6bbc2856faf97f61bb1282b15))
+
 # [2.49.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.48.0...v2.49.0) (2022-04-23)
 
 
