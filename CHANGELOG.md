@@ -1,3 +1,15 @@
+# [2.50.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.49.1...v2.50.0) (2022-04-24)
+
+
+### Bug Fixes
+
+* Clamp hero point handler minutes to between 0 and 60 minutes. ([a4a4ded](https://github.com/xdy/xdy-pf2e-workbench/commit/a4a4dedac81543873e57f2e38f477adb41b8599c))
+
+
+### Features
+
+* Removing all deprecated features ("moving initative on dying", "moving initiative manually", "purging effects each turn", "purging effects on time increase"). ([3446150](https://github.com/xdy/xdy-pf2e-workbench/commit/3446150aff7b215e4c4e2d8d32475a33f105d8d6))
+
 ## [2.49.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.49.0...v2.49.1) (2022-04-24)
 
 
