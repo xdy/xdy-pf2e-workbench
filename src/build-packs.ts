@@ -94,6 +94,7 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
                 "Custom Saves and Skill Checks",
                 "systems/pf2e/icons/equipment/held-items/abadars-flawless-scale.webp"
             );
+            map.set("Dual Class", "systems/pf2e/icons/spells/guidance.webp");
             map.set("Eldritch Shot", "systems/pf2e/icons/equipment/consumables/ammunition/spellstrike-ammunition.webp");
             map.set("Lingering Composition", "icons/svg/dice-target.svg");
             map.set("Lingering Heroics", "systems/pf2e/icons/spells/inspire-heroics.webp");
