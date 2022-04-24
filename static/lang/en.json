@@ -148,7 +148,7 @@
         "startTimerLabel": "Submit changes and start/continue timer",
         "thisMany": "This many",
         "timerStopped": "Hero Points timer is stopped.",
-        "timerValue": "Timer value",
+        "timerValue": "Timer value (range 0-60)",
         "title": "Hero Point Handler",
         "willBeResetIn": "Hero Point Handler returns in {remainingMinutes} minutes ({time})."
       },

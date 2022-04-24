@@ -240,13 +240,19 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 </div>
 
 <hr>
+<script>$('#timerTextId').on('input', function () {
+    const value = $(this).val();
+    if ((value !== '') && (value.indexOf('.') === -1)) {
+        $(this).val(Math.max(Math.min(value, ${TIMEOUT_MINUTES}), 0));
+    }
+});</script>
 <div class="form-group">
   <div class="col-md-4">
     <div class="input-group">
       <span class="input-group-addon">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`)}</span>
       <input id="timerTextId" name="timerText" class="form-control" value="${
           remainingMinutes || TIMEOUT_MINUTES
-      }" type="text">
+      }" type="number">
     </div>
     <p class="help-block">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`)}</p>
   </div>
@@ -259,10 +265,13 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 export function calcRemainingMinutes(useDefault: boolean): number {
     const savedTime: number = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime");
     const savedMinutes = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes");
-    const remainingMinutes: number = savedMinutes ?? (useDefault ? TIMEOUT_MINUTES : 0);
+    const remainingMinutes: number = Math.clamped(
+        savedMinutes ?? (useDefault ? TIMEOUT_MINUTES : 0),
+        0,
+        TIMEOUT_MINUTES
+    );
     const passedMillis = game.time.serverTime - (savedTime ?? game.time.serverTime);
-    const passedMinutes = remainingMinutes - Math.floor(passedMillis / ONE_MINUTE_IN_MS);
-    return passedMinutes;
+    return remainingMinutes - Math.floor(passedMillis / ONE_MINUTE_IN_MS);
 }
 
 function heroes() {
