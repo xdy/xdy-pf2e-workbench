@@ -1,3 +1,10 @@
+## [2.50.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.50.0...v2.50.1) (2022-04-26)
+
+
+### Bug Fixes
+
+* Hooked into preUpdateActor too often. ([1ac799e](https://github.com/xdy/xdy-pf2e-workbench/commit/1ac799e64f8d24cd56d9cc212f7dc6835744d63a))
+
 # [2.50.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.49.1...v2.50.0) (2022-04-24)
 
 
