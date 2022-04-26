@@ -178,7 +178,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
 
     if (
         game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" ||
-        game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "no"
+        game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none"
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
             const hp = actor.data.data.attributes.hp?.value || 0;
