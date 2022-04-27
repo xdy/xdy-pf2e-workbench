@@ -70,7 +70,7 @@
     "string-replace-loader": "^3.1.0",
     "terser-webpack-plugin": "^5.3.1",
     "thread-loader": "^3.0.4",
-    "tinymce": "~5.10.3",
+    "tinymce": "~5.10.4",
     "ts-loader": "^9.2.8",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.14.1",
