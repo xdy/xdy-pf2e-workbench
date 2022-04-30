@@ -1,3 +1,10 @@
+## [2.50.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.50.1...v2.50.2) (2022-04-30)
+
+
+### Bug Fixes
+
+* Include latest Asymonous Benefactor macros. ([451a62a](https://github.com/xdy/xdy-pf2e-workbench/commit/451a62a3261d7d7ab64522ddcd4f79c15998d16c))
+
 ## [2.50.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.50.0...v2.50.1) (2022-04-26)
 
 
