@@ -85,6 +85,7 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             map.set("2-Action Harm", "systems/pf2e/icons/spells/harm.webp");
             map.set("2-Action Heal v2", "systems/pf2e/icons/spells/heal.webp");
             map.set("Actions with Potency", "icons/svg/dice-target.svg");
+            map.set("Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp");
             map.set("Apply Conditions", "icons/svg/dice-target.svg");
             map.set("BattleMedicineImmunity", "icons/svg/dice-target.svg");
             map.set("Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp");
