@@ -112,7 +112,7 @@
         "name": "Automatically give Wounded when Dying is removed."
       },
       "toggleUndetectedWithVisibilityState": {
-        "hint": "World setting for using token visilibity for toggling Undetected condition.",
+        "hint": "World setting for using token visilibity for toggling Undetected condition. Won't affect Loot actors.",
         "name": "(World) Use visibility to toggle Undetected condition."
       },
       "decreaseFrightenedConditionEachTurn": {

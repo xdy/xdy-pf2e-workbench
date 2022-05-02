@@ -196,6 +196,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     if (game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState")) {
         Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update, options, userId) => {
             if (
+                tokenDoc.actor?.type !== "loot" &&
                 game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState") &&
                 (update.hidden === true || update.hidden === false)
             ) {
