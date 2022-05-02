@@ -1,3 +1,12 @@
+## [2.50.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.50.4...v2.50.5) (2022-05-02)
+
+
+### Bug Fixes
+
+* Enable a sub-setting for animations on misses to not make the appear off-target. ([c0cc807](https://github.com/xdy/xdy-pf2e-workbench/commit/c0cc807f189cba5aa06271d84fa92e2f8971e1e1)), closes [#236](https://github.com/xdy/xdy-pf2e-workbench/issues/236)
+* Make "Effect: Dirge of Doom" give Frightened 1 as well as make sure Frightened doesn't get automatically reduced below 1. ([89c5e82](https://github.com/xdy/xdy-pf2e-workbench/commit/89c5e82b30dfd140047cf15078e9bbedff8a079b)), closes [#220](https://github.com/xdy/xdy-pf2e-workbench/issues/220)
+* Using token visilibity for toggling Undetected condition shouldn't affect Loot actors. ([0c1ed17](https://github.com/xdy/xdy-pf2e-workbench/commit/0c1ed17c5a83576af8431baeb0ddb63a5161dd52)), closes [#237](https://github.com/xdy/xdy-pf2e-workbench/issues/237)
+
 ## [2.50.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.50.3...v2.50.4) (2022-05-01)
 
 
