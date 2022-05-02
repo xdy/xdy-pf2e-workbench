@@ -64,7 +64,9 @@ export async function playAnimationAndSound(message: ChatMessagePF2e) {
                 }
                 const from = Array.from(message.user.targets);
                 await AutoAnimations.playAnimation(messageToken, from, item, {
-                    playOnMiss: !degreeOfSuccess.toLowerCase().includes("success"),
+                    playOnMiss:
+                        !degreeOfSuccess.toLowerCase().includes("success") &&
+                        game.settings.get(MODULENAME, "automatedAnimationMissOffTarget"),
                 });
             }
             if (sound && game.modules.get("sequencer")?.active) {

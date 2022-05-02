@@ -42,6 +42,10 @@
         "hint": "World setting for sound to play on strike success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
         "name": "(World) sound to play on strike success."
       },
+      "automatedAnimationMissOffTarget": {
+        "hint": "Client setting for making miss and critical miss animations appear at a random spot near the missed target token.",
+        "name": "Make miss animations appear off-target."
+      },
       "applyPersistentAllow": {
         "hint": "World setting for who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options.",
         "name": "(World) who is allowed to set the option to automatically apply persistent damage/healing.",

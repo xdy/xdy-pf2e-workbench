@@ -331,6 +331,16 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "automatedAnimationMissOffTarget", {
+        name: `${MODULENAME}.SETTINGS.automatedAnimationMissOffTarget.name`,
+        hint: `${MODULENAME}.SETTINGS.automatedAnimationMissOffTarget.hint`,
+        scope: "client",
+        config: true,
+        default: true,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "actionsReminderAllow", {
         name: `${MODULENAME}.SETTINGS.actionsReminderAllow.name`,
         hint: `${MODULENAME}.SETTINGS.actionsReminderAllow.hint`,
