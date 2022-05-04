@@ -123,6 +123,14 @@ declare global {
     interface SettingRegistration extends Omit<SettingConfig, "config" | "key" | "namespace" | "scope"> {
         config?: boolean;
         scope?: "client" | "world";
+        default: unknown;
+        name: string;
+        hint?: string;
+        type?: NumberConstructor | StringConstructor | BooleanConstructor | ObjectConstructor | FunctionConstructor;
+        range?: this["type"] extends NumberConstructor ? { min: number; max: number; step: number } : undefined;
+        choices?: Record<string, string> | Record<number, string>;
+        onChange?: (choice?: string) => void | Promise<void>;
+        filePicker?: true | 'audio' | 'image' | 'video' | 'imagevideo' | 'folder'; //TODO XDY Add to pf2e
     }
 
     interface ClientSettingsMap extends Map<string, SettingConfig> {
