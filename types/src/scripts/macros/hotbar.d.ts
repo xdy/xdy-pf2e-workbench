@@ -18,5 +18,4 @@ export declare function rollItemMacro(itemId: string): ReturnType<ItemPF2e["toCh
 export declare function createActionMacro(actionIndex: number, actorId: string, slot: number): Promise<void>;
 export declare function rollActionMacro(actorId: string, actionIndex: number, actionName: string): Promise<void>;
 export declare function createSkillMacro(skill: SkillAbbreviation, skillName: string, actorId: string, slot: number): Promise<void>;
-export declare function createTogglePropertyMacro(property: string, label: string, actorId: string, slot: number): Promise<void>;
 export declare function createToggleEffectMacro(effect: EffectPF2e, slot: number): Promise<void>;

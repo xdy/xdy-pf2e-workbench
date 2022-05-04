@@ -27,6 +27,10 @@ export declare class KitSheetPF2e extends ItemSheetPF2e<KitPF2e> {
             isGM: boolean;
         };
         enabledRulesUI: boolean;
+        ruleSelection: {
+            selected: string | null;
+            types: string[];
+        };
         cssClass: string;
         editable: boolean;
         document: KitPF2e;

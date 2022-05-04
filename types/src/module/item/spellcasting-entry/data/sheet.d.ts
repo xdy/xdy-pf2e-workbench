@@ -23,7 +23,7 @@ export interface SpellcastingEntryListData extends SpellListData {
         value: number;
         max: number;
     };
-    spellPrepList: Record<number, SpellPrepEntry[]>;
+    spellPrepList: Record<number, SpellPrepEntry[]> | null;
 }
 export interface SpellcastingSlotLevel {
     label: string;
@@ -38,7 +38,6 @@ export interface SpellcastingSlotLevel {
         value?: number;
         max: number;
     };
-    displayPrepared?: boolean;
     active: (ActiveSpell | null)[];
 }
 export interface SpellPrepEntry {

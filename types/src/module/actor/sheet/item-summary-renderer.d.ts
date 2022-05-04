@@ -8,8 +8,12 @@ import { ItemSummaryData } from "@item/data";
  * of item summaries, and save expanded/collapsed state of item summaries.
  */
 export declare class ItemSummaryRendererPF2e<AType extends ActorPF2e> {
-    protected sheet: ActorSheet<AType, ItemPF2e>;
-    constructor(sheet: ActorSheet<AType, ItemPF2e>);
+    protected sheet: Application & {
+        get actor(): AType;
+    };
+    constructor(sheet: Application & {
+        get actor(): AType;
+    });
     activateListeners($html: JQuery): void;
     /**
      * Triggers toggling the visibility of an item summary element,

@@ -7,9 +7,7 @@ import { FlattenedCondition } from "@system/conditions";
 import { CharacterSystemData } from ".";
 import { CreatureSheetData, SpellcastingSheetData } from "@actor/creature/types";
 import { CHARACTER_SHEET_TABS } from "./values";
-interface CharacterSheetOptions extends ActorSheetOptions {
-    showUnpreparedSpells: boolean;
-}
+declare type CharacterSheetOptions = ActorSheetOptions;
 declare type CharacterSystemSheetData = CharacterSystemData & {
     attributes: {
         dying: {
@@ -72,7 +70,6 @@ interface CharacterSheetData extends CreatureSheetData<CharacterPF2e> {
     options: CharacterSheetOptions;
     preparationType: Object;
     showPFSTab: boolean;
-    showUnpreparedSpells: boolean;
     spellcastingEntries: SpellcastingSheetData[];
     tabVisibility: CharacterSheetTabVisibility;
 }

@@ -8,6 +8,8 @@ import { ChoiceSetData, ChoiceSetSource } from "./data";
 declare class ChoiceSetRuleElement extends RuleElementPF2e {
     /** Allow the user to make no selection without suppressing all other rule elements on the parent item */
     allowNoSelection: boolean;
+    /** An optional roll option to be set from the selection */
+    rollOption: string | null;
     constructor(data: ChoiceSetSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     /**
      * Adjust the effect's name and set the targetId from the user's selection, or set the entire rule element to be
@@ -25,6 +27,7 @@ declare class ChoiceSetRuleElement extends RuleElementPF2e {
     private queryCompendium;
     /** If this rule element's parent item was granted with a pre-selected choice, the prompt is to be skipped */
     private getPreselection;
+    private setRollOption;
 }
 interface ChoiceSetRuleElement extends RuleElementPF2e {
     data: ChoiceSetData;

@@ -7,6 +7,7 @@ import { RollNotePF2e } from "@module/notes";
 import { MultipleAttackPenaltyPF2e } from "./multiple-attack-penalty";
 import { StrikingPF2e } from "./striking";
 import { WeaponPotencyPF2e } from "./weapon-potency";
+import { StrikeAdjustment } from "./adjust-strike";
 export declare type RuleElementSource = {
     key: string;
     data?: unknown;
@@ -20,6 +21,7 @@ export declare type RuleElementSource = {
     priority?: number;
     ignored?: unknown;
     requiresInvestment?: unknown;
+    requiresEquipped?: unknown;
     removeUponCreate?: unknown;
 };
 export interface RuleElementData extends RuleElementSource {
@@ -33,7 +35,6 @@ export interface RuleElementData extends RuleElementSource {
     predicate?: PredicatePF2e;
     priority: number;
     ignored: boolean;
-    requiresInvestment?: boolean;
     removeUponCreate?: boolean;
 }
 export declare type RuleValue = string | number | boolean | object | null;
@@ -62,17 +63,15 @@ export interface REPreDeleteParameters {
     /** The context object from the `ItemPF2e.deleteDocuments` call */
     context: DocumentModificationContext<ItemPF2e>;
 }
-export declare type DeferredModifier = DeferredValue<ModifierPF2e | null>;
-export interface RuleElementSynthetics {
+declare type DeferredModifier = DeferredValue<ModifierPF2e | null>;
+interface RuleElementSynthetics {
     damageDice: Record<string, DamageDicePF2e[]>;
     modifierAdjustments: Record<string, ModifierAdjustment[]>;
     multipleAttackPenalties: Record<string, MultipleAttackPenaltyPF2e[]>;
     rollNotes: Record<string, RollNotePF2e[]>;
     senses: SenseSynthetic[];
     statisticsModifiers: Record<string, DeferredModifier[]>;
-    strikeAdjustments: {
-        adjustStrike(weapon: Embedded<WeaponPF2e>): void;
-    }[];
+    strikeAdjustments: StrikeAdjustment[];
     strikes: Embedded<WeaponPF2e>[];
     striking: Record<string, StrikingPF2e[]>;
     weaponPotency: Record<string, WeaponPotencyPF2e[]>;
@@ -88,4 +87,4 @@ interface SenseSynthetic {
     predicate: PredicatePF2e | null;
     force: boolean;
 }
-export {};
+export { DeferredModifier, RuleElementSynthetics, StrikeAdjustment };

@@ -130,12 +130,7 @@ declare type BrokenBulk = Optional<string> | Optional<number>;
  * @param weight
  */
 export declare function normalizeWeight(weight: BrokenBulk): string | undefined;
-/**
- * @param item
- * @param nestedItems
- * @return
- */
-export declare function toBulkItem(item: PhysicalItemData, nestedItems?: BulkItem[]): BulkItem;
+export declare function toBulkItem(itemData: PhysicalItemData, nestedItems?: BulkItem[]): BulkItem;
 /**
  * Items that reference other others need to be nested into them. If an item has a reference
  * to an id, it should be nested into that container unless the container with that id does

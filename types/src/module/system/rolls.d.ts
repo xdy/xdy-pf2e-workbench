@@ -12,6 +12,7 @@ import { StrikeTrait } from "@actor/data/base";
 import { AttackTarget } from "@actor/creature/types";
 import { CheckRoll } from "./check/roll";
 export interface RollDataPF2e extends RollData {
+    rollerId?: string;
     totalModifier?: number;
     degreeOfSuccess?: ZeroToThree;
     strike?: {

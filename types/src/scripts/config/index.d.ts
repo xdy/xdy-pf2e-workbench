@@ -1,6 +1,5 @@
 import { ActionItemPF2e, AncestryPF2e, BackgroundPF2e, BookPF2e, ArmorPF2e, ClassPF2e, ConditionPF2e, ConsumablePF2e, ContainerPF2e, DeityPF2e, EffectPF2e, EquipmentPF2e, FeatPF2e, HeritagePF2e, KitPF2e, LorePF2e, MeleePF2e, SpellPF2e, SpellcastingEntryPF2e, TreasurePF2e, WeaponPF2e } from "@item";
 import { CharacterPF2e, NPCPF2e, FamiliarPF2e, HazardPF2e, LootPF2e, VehiclePF2e } from "@actor";
-import { PreciousMaterialGrade } from "@item/physical/data";
 import { ActorType } from "@actor/data";
 import { JournalSheetPF2e } from "@module/journal-entry/sheet";
 export declare type StatusEffectIconTheme = "default" | "blackWhite" | "legacy";
@@ -101,8 +100,8 @@ export declare const PF2ECONFIG: {
         sp: string;
         cp: string;
     };
-    preciousMaterialGrades: Record<PreciousMaterialGrade, string>;
-    preciousMaterials: Record<"abysium" | "adamantine" | "coldIron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "siccatite" | "silver" | "sovereignSteel" | "warpglass", string>;
+    preciousMaterialGrades: Record<"high" | "low" | "standard", string>;
+    preciousMaterials: Record<"abysium" | "adamantine" | "coldIron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "peachwood" | "siccatite" | "silver" | "sovereignSteel" | "warpglass", string>;
     armorPotencyRunes: {
         "1": string;
         "2": string;
@@ -438,6 +437,7 @@ export declare const PF2ECONFIG: {
         ratfolk: string;
         shisk: string;
         shoony: string;
+        skeleton: string;
         sprite: string;
         strix: string;
         suli: string;
@@ -492,6 +492,7 @@ export declare const PF2ECONFIG: {
         ratfolk: string;
         shisk: string;
         shoony: string;
+        skeleton: string;
         sprite: string;
         strix: string;
         suli: string;
@@ -610,11 +611,21 @@ export declare const PF2ECONFIG: {
         "two-hand-d10": string;
         "two-hand-d12": string;
         unarmed: string;
-        "versatile-s": string;
+        "versatile-acid": string;
+        "versatile-b": string;
+        "versatile-chaotic": string;
+        "versatile-cold": string;
+        "versatile-electricity": string;
+        "versatile-evil": string;
+        "versatile-fire": string;
+        "versatile-force": string;
+        "versatile-good": string;
+        "versatile-lawful": string;
+        "versatile-negative": string;
         "versatile-p": string;
         "versatile-positive": string;
-        "versatile-fire": string;
-        "versatile-b": string;
+        "versatile-s": string;
+        "versatile-sonic": string;
         "volley-20": string;
         "volley-30": string;
         "volley-50": string;
@@ -681,6 +692,7 @@ export declare const PF2ECONFIG: {
         ratfolk: string;
         shisk: string;
         shoony: string;
+        skeleton: string;
         sprite: string;
         strix: string;
         suli: string;
@@ -692,11 +704,7 @@ export declare const PF2ECONFIG: {
         evil: string;
         lawful: string;
     };
-    otherWeaponTags: {
-        crossbow: string;
-        improvised: string;
-        "ghost-touch": string;
-    };
+    otherWeaponTags: Record<import("@item/weapon/data").OtherWeaponTag, string>;
     armorTraits: {
         air: string;
         apex: string;
@@ -843,6 +851,7 @@ export declare const PF2ECONFIG: {
         ratfolk: string;
         shisk: string;
         shoony: string;
+        skeleton: string;
         sprite: string;
         strix: string;
         suli: string;
@@ -856,6 +865,7 @@ export declare const PF2ECONFIG: {
         lawful: string;
     };
     actionTraits: {
+        circus: string;
         summon: string;
         brutal: string;
         curse: string;
@@ -941,6 +951,7 @@ export declare const PF2ECONFIG: {
         mithral: string;
         noqual: string;
         orichalcum: string;
+        peachwood: string;
         siccatite: string;
         silver: string;
         sovereignSteel: string;
@@ -1050,11 +1061,21 @@ export declare const PF2ECONFIG: {
         "two-hand-d10": string;
         "two-hand-d12": string;
         unarmed: string;
-        "versatile-s": string;
+        "versatile-acid": string;
+        "versatile-b": string;
+        "versatile-chaotic": string;
+        "versatile-cold": string;
+        "versatile-electricity": string;
+        "versatile-evil": string;
+        "versatile-fire": string;
+        "versatile-force": string;
+        "versatile-good": string;
+        "versatile-lawful": string;
+        "versatile-negative": string;
         "versatile-p": string;
         "versatile-positive": string;
-        "versatile-fire": string;
-        "versatile-b": string;
+        "versatile-s": string;
+        "versatile-sonic": string;
         "volley-20": string;
         "volley-30": string;
         "volley-50": string;
@@ -1121,6 +1142,7 @@ export declare const PF2ECONFIG: {
         ratfolk: string;
         shisk: string;
         shoony: string;
+        skeleton: string;
         sprite: string;
         strix: string;
         suli: string;
@@ -1581,6 +1603,7 @@ export declare const PF2ECONFIG: {
         ratfolk: string;
         shisk: string;
         shoony: string;
+        skeleton: string;
         sprite: string;
         strix: string;
         suli: string;
@@ -1613,6 +1636,7 @@ export declare const PF2ECONFIG: {
         construct: string;
         couatl: string;
         daemon: string;
+        darvakka: string;
         demon: string;
         dero: string;
         devil: string;
@@ -1793,6 +1817,7 @@ export declare const PF2ECONFIG: {
         construct: string;
         couatl: string;
         daemon: string;
+        darvakka: string;
         demon: string;
         dero: string;
         devil: string;
@@ -2034,6 +2059,7 @@ export declare const PF2ECONFIG: {
         mithral: string;
         noqual: string;
         orichalcum: string;
+        peachwood: string;
         siccatite: string;
         silver: string;
         sovereignSteel: string;
@@ -2143,11 +2169,21 @@ export declare const PF2ECONFIG: {
         "two-hand-d10": string;
         "two-hand-d12": string;
         unarmed: string;
-        "versatile-s": string;
+        "versatile-acid": string;
+        "versatile-b": string;
+        "versatile-chaotic": string;
+        "versatile-cold": string;
+        "versatile-electricity": string;
+        "versatile-evil": string;
+        "versatile-fire": string;
+        "versatile-force": string;
+        "versatile-good": string;
+        "versatile-lawful": string;
+        "versatile-negative": string;
         "versatile-p": string;
         "versatile-positive": string;
-        "versatile-fire": string;
-        "versatile-b": string;
+        "versatile-s": string;
+        "versatile-sonic": string;
         "volley-20": string;
         "volley-30": string;
         "volley-50": string;
@@ -2214,6 +2250,7 @@ export declare const PF2ECONFIG: {
         ratfolk: string;
         shisk: string;
         shoony: string;
+        skeleton: string;
         sprite: string;
         strix: string;
         suli: string;
@@ -2333,6 +2370,7 @@ export declare const PF2ECONFIG: {
         shisk: string;
         shoony: string;
         shove: string;
+        skeleton: string;
         skill: string;
         sleep: string;
         snare: string;
@@ -2387,11 +2425,21 @@ export declare const PF2ECONFIG: {
         undine: string;
         unique: string;
         unstable: string;
+        "versatile-acid": string;
         "versatile-b": string;
+        "versatile-chaotic": string;
+        "versatile-cold": string;
+        "versatile-electricity": string;
+        "versatile-evil": string;
         "versatile-fire": string;
+        "versatile-force": string;
+        "versatile-good": string;
+        "versatile-lawful": string;
+        "versatile-negative": string;
         "versatile-p": string;
         "versatile-positive": string;
         "versatile-s": string;
+        "versatile-sonic": string;
         virulent: string;
         visual: string;
         "volley-20": string;
@@ -2533,6 +2581,7 @@ export declare const PF2ECONFIG: {
         cursebound: string;
         cursed: string;
         darkness: string;
+        darvakka: string;
         "deadly-2d10": string;
         "deadly-2d12": string;
         "deadly-2d8": string;
@@ -2672,6 +2721,7 @@ export declare const PF2ECONFIG: {
         orc: string;
         oread: string;
         parry: string;
+        peachwood: string;
         plant: string;
         poison: string;
         polymorph: string;
@@ -2789,6 +2839,9 @@ export declare const PF2ECONFIG: {
         90: string;
         100: string;
         120: string;
+        500: string;
+        1000: string;
+        1320: string;
         5280: string;
     };
     alignments: Record<"LE" | "CE" | "LG" | "NG" | "CG" | "LN" | "N" | "CN" | "NE", string>;

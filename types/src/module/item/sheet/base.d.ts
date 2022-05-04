@@ -4,6 +4,8 @@ import { ItemPF2e } from "@item";
 import { ItemSheetDataPF2e } from "./data-types";
 export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
     static get defaultOptions(): DocumentSheetOptions;
+    /** Maintain selected rule element at the sheet level (do not persist) */
+    private selectedRuleElement;
     getData(options?: Partial<DocumentSheetOptions>): Promise<any>;
     /** An alternative to super.getData() for subclasses that don't need this class's `getData` */
     protected getBaseData(options?: Partial<DocumentSheetOptions>): ItemSheetDataPF2e<TItem>;

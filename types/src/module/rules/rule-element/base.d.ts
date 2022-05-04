@@ -16,6 +16,10 @@ declare abstract class RuleElementPF2e {
     key: string;
     slug: string | null;
     protected suppressWarnings: boolean;
+    /** Must the parent item be equipped for this rule element to apply (`null` for non-physical items)? */
+    requiresEquipped: boolean | null;
+    /** Must the parent item be invested for this rule element to apply (`null` unless an investable physical item)? */
+    requiresInvestment: boolean | null;
     /** A list of actor types on which this rule element can operate (all unless overridden) */
     protected static validActorTypes: ActorType[];
     /**
@@ -59,7 +63,9 @@ declare abstract class RuleElementPF2e {
      * @param actorData current actor data
      * @return the looked up value on the specific object
      */
+    resolveInjectedProperties<T extends object>(source: T): T;
     resolveInjectedProperties(source?: string): string;
+    resolveInjectedProperties(source: string | object): string | object;
     /**
      * Parses the value attribute on a rule.
      *

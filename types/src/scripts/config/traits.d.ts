@@ -1,8 +1,9 @@
 import { AlignmentTrait } from "@actor/creature/types";
 import { ClassTrait } from "@item/class/data";
-import { PreciousMaterialType } from "@item/physical/data";
+import { PreciousMaterialType } from "@item/physical/types";
 import { MagicSchool } from "@item/spell/data";
 import { MagicTradition } from "@item/spellcasting-entry/data";
+import { OtherWeaponTag } from "@item/weapon/data";
 declare const ancestryTraits: {
     "half-elf": string;
     "half-orc": string;
@@ -44,6 +45,7 @@ declare const ancestryTraits: {
     ratfolk: string;
     shisk: string;
     shoony: string;
+    skeleton: string;
     sprite: string;
     strix: string;
     suli: string;
@@ -98,6 +100,7 @@ declare const ancestryItemTraits: {
     ratfolk: string;
     shisk: string;
     shoony: string;
+    skeleton: string;
     sprite: string;
     strix: string;
     suli: string;
@@ -146,6 +149,7 @@ declare const creatureTraits: {
     construct: string;
     couatl: string;
     daemon: string;
+    darvakka: string;
     demon: string;
     dero: string;
     devil: string;
@@ -579,11 +583,21 @@ declare const weaponTraits: {
     "two-hand-d10": string;
     "two-hand-d12": string;
     unarmed: string;
-    "versatile-s": string;
+    "versatile-acid": string;
+    "versatile-b": string;
+    "versatile-chaotic": string;
+    "versatile-cold": string;
+    "versatile-electricity": string;
+    "versatile-evil": string;
+    "versatile-fire": string;
+    "versatile-force": string;
+    "versatile-good": string;
+    "versatile-lawful": string;
+    "versatile-negative": string;
     "versatile-p": string;
     "versatile-positive": string;
-    "versatile-fire": string;
-    "versatile-b": string;
+    "versatile-s": string;
+    "versatile-sonic": string;
     "volley-20": string;
     "volley-30": string;
     "volley-50": string;
@@ -650,6 +664,7 @@ declare const weaponTraits: {
     ratfolk: string;
     shisk: string;
     shoony: string;
+    skeleton: string;
     sprite: string;
     strix: string;
     suli: string;
@@ -662,11 +677,7 @@ declare const weaponTraits: {
     lawful: string;
 };
 declare const preciousMaterials: Record<PreciousMaterialType, string>;
-declare const otherWeaponTags: {
-    crossbow: string;
-    improvised: string;
-    "ghost-touch": string;
-};
+declare const otherWeaponTags: Record<OtherWeaponTag, string>;
 declare const npcAttackTraits: {
     brutal: string;
     curse: string;
@@ -752,6 +763,7 @@ declare const npcAttackTraits: {
     mithral: string;
     noqual: string;
     orichalcum: string;
+    peachwood: string;
     siccatite: string;
     silver: string;
     sovereignSteel: string;
@@ -861,11 +873,21 @@ declare const npcAttackTraits: {
     "two-hand-d10": string;
     "two-hand-d12": string;
     unarmed: string;
-    "versatile-s": string;
+    "versatile-acid": string;
+    "versatile-b": string;
+    "versatile-chaotic": string;
+    "versatile-cold": string;
+    "versatile-electricity": string;
+    "versatile-evil": string;
+    "versatile-fire": string;
+    "versatile-force": string;
+    "versatile-good": string;
+    "versatile-lawful": string;
+    "versatile-negative": string;
     "versatile-p": string;
     "versatile-positive": string;
-    "versatile-fire": string;
-    "versatile-b": string;
+    "versatile-s": string;
+    "versatile-sonic": string;
     "volley-20": string;
     "volley-30": string;
     "volley-50": string;
@@ -932,6 +954,7 @@ declare const npcAttackTraits: {
     ratfolk: string;
     shisk: string;
     shoony: string;
+    skeleton: string;
     sprite: string;
     strix: string;
     suli: string;
@@ -1118,6 +1141,7 @@ declare const featTraits: {
     ratfolk: string;
     shisk: string;
     shoony: string;
+    skeleton: string;
     sprite: string;
     strix: string;
     suli: string;
@@ -1206,6 +1230,7 @@ declare const consumableTraits: {
     lawful: string;
 };
 declare const actionTraits: {
+    circus: string;
     summon: string;
     brutal: string;
     curse: string;
@@ -1291,6 +1316,7 @@ declare const actionTraits: {
     mithral: string;
     noqual: string;
     orichalcum: string;
+    peachwood: string;
     siccatite: string;
     silver: string;
     sovereignSteel: string;
@@ -1400,11 +1426,21 @@ declare const actionTraits: {
     "two-hand-d10": string;
     "two-hand-d12": string;
     unarmed: string;
-    "versatile-s": string;
+    "versatile-acid": string;
+    "versatile-b": string;
+    "versatile-chaotic": string;
+    "versatile-cold": string;
+    "versatile-electricity": string;
+    "versatile-evil": string;
+    "versatile-fire": string;
+    "versatile-force": string;
+    "versatile-good": string;
+    "versatile-lawful": string;
+    "versatile-negative": string;
     "versatile-p": string;
     "versatile-positive": string;
-    "versatile-fire": string;
-    "versatile-b": string;
+    "versatile-s": string;
+    "versatile-sonic": string;
     "volley-20": string;
     "volley-30": string;
     "volley-50": string;
@@ -1471,6 +1507,7 @@ declare const actionTraits: {
     ratfolk: string;
     shisk: string;
     shoony: string;
+    skeleton: string;
     sprite: string;
     strix: string;
     suli: string;

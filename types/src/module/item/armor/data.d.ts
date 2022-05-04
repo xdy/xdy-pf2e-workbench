@@ -56,7 +56,7 @@ export interface ArmorSystemSource extends Investable<PhysicalSystemSource> {
         value: string;
     };
 }
-interface ArmorSystemData extends ArmorSystemSource, Investable<PhysicalSystemData> {
+interface ArmorSystemData extends Omit<ArmorSystemSource, "temporary" | "usage">, Investable<PhysicalSystemData> {
     baseItem: BaseArmorType;
     traits: ArmorTraits;
     runes: {

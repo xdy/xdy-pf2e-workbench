@@ -5,7 +5,8 @@ import { RollNotePF2e } from "@module/notes";
 import { StrikingPF2e, WeaponPotencyPF2e } from "@module/rules/rule-element";
 import { DamageDieSize, DamageType } from ".";
 import { CharacterPF2e, NPCPF2e } from "@actor";
-import { DeferredModifier } from "@module/rules/rule-element/data";
+import { DeferredModifier, StrikeAdjustment } from "@module/rules/rule-element/data";
+import { WeaponMaterialEffect } from "@item/weapon/types";
 export interface DamagePartials {
     [damageType: string]: {
         [damageCategory: string]: string;
@@ -39,6 +40,7 @@ export interface DamageTemplate {
     notes: RollNotePF2e[];
     numericModifiers: ModifierPF2e[];
     traits: string[];
+    materials: WeaponMaterialEffect[];
 }
 /** A pool of damage dice & modifiers, grouped by damage type. */
 export declare type DamagePool = Record<string, {
@@ -58,7 +60,7 @@ export declare type DamagePool = Record<string, {
  */
 export declare class WeaponDamagePF2e {
     static calculateStrikeNPC(weapon: any, actor: NPCPF2e, traits: StrikeTrait[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: string[] | undefined, rollNotes: Record<string, RollNotePF2e[]>): DamageTemplate;
-    static calculate(weapon: WeaponData, actor: CharacterPF2e | NPCPF2e, traits: StrikeTrait[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: string[] | undefined, rollNotes: Record<string, RollNotePF2e[]>, weaponPotency: WeaponPotencyPF2e | null, striking: Record<string, StrikingPF2e[]>): DamageTemplate;
+    static calculate(weapon: WeaponData, actor: CharacterPF2e | NPCPF2e, traits: StrikeTrait[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: string[] | undefined, rollNotes: Record<string, RollNotePF2e[]>, weaponPotency: WeaponPotencyPF2e | null, striking: Record<string, StrikingPF2e[]>, strikeAdjustments: StrikeAdjustment[]): DamageTemplate;
     /** Convert the damage definition into a final formula, depending on whether the hit is a critical or not. */
     static getFormula(damage: Omit<DamageTemplate, "formula">, critical: boolean): DamageFormula;
     /** Add dice to the given damage pool. */

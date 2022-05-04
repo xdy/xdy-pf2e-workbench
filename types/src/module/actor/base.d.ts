@@ -126,7 +126,8 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
      */
     rollAttribute(event: JQuery.Event, attributeName: string): void;
     /** Toggle the provided roll option (swapping it from true to false or vice versa). */
-    toggleRollOption(domain: string, option: string, itemId?: string | null, value?: boolean): Promise<boolean | null>;
+    toggleRollOption(domain: string, option: string, value?: boolean): Promise<boolean | null>;
+    toggleRollOption(domain: string, option: string, itemId: string | null, value?: boolean): Promise<boolean | null>;
     /**
      * Handle how changes to a Token attribute bar are applied to the Actor.
      *
@@ -145,7 +146,6 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
      * @param shieldBlockRequest Whether the user has toggled the Shield Block button
      */
     applyDamage(damage: number, token: TokenPF2e, shieldBlockRequest?: boolean): Promise<void>;
-    _setShowUnpreparedSpells(entryId: string, spellLevel: number): Promise<void>;
     isLootableBy(user: UserPF2e): boolean;
     /**
      * Moves an item to another actor's inventory.

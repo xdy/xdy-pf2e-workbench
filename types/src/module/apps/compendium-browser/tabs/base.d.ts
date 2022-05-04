@@ -1,11 +1,11 @@
 import { CompendiumBrowser } from "..";
-import { BaseFilterData, CheckBoxOptions } from "./data";
+import { BaseFilterData, CheckBoxOptions, RangesData } from "./data";
 import { TabName } from "../data";
 export declare abstract class CompendiumBrowserTab {
     /** A reference to the parent CompendiumBrowser */
     protected browser: CompendiumBrowser;
     /** An unmodified copy of this.filterData */
-    protected defaultFilterData: BaseFilterData;
+    defaultFilterData: BaseFilterData;
     /** The full CompendiumIndex of this tab */
     protected indexData: CompendiumIndexData[];
     /** Is this tab initialized? */
@@ -33,6 +33,8 @@ export declare abstract class CompendiumBrowserTab {
     protected filterIndexData(_entry: CompendiumIndexData): boolean;
     /** Sort result array by name, level or price */
     protected sortResult(result: CompendiumIndexData[]): CompendiumIndexData[];
+    /** Return new range filter values based on input */
+    parseRangeFilterInput(_name: string, lower: string, upper: string): RangesData["values"];
     /** Check if an array includes any keys of another array */
     protected arrayIncludes(array: string[], other: string[]): boolean;
     /** Generates a localized and sorted CheckBoxOptions object from config data */

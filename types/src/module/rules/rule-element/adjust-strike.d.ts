@@ -1,5 +1,6 @@
 import { ActorType } from "@actor/data";
-import { ItemPF2e } from "@item";
+import { ItemPF2e, WeaponPF2e } from "@item";
+import { WeaponMaterialEffect } from "@item/weapon/types";
 import { PredicatePF2e } from "@system/predication";
 import { AELikeRuleElement, AELikeData, AELikeSource } from "./ae-like";
 import { RuleElementOptions } from "./base";
@@ -26,4 +27,10 @@ interface AdjustStrikeSource extends Exclude<AELikeSource, "path"> {
     property?: unknown;
     definition?: unknown;
 }
-export { AdjustStrikeRuleElement };
+interface StrikeAdjustment {
+    adjustDamageRoll?: (weapon: Embedded<WeaponPF2e>, { materials }: {
+        materials?: Set<WeaponMaterialEffect>;
+    }) => void;
+    adjustWeapon?: (weapon: Embedded<WeaponPF2e>) => void;
+}
+export { AdjustStrikeRuleElement, StrikeAdjustment };

@@ -19,13 +19,12 @@ export declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e>
             contentSelector: string;
             initial: string;
         }[];
-        showUnpreparedSpells: boolean;
     };
     get template(): string;
     getData(options?: ActorSheetOptions): Promise<CharacterSheetData>;
     /** Organize and classify Items for Character sheets */
     protected prepareItems(sheetData: ActorSheetDataPF2e<CharacterPF2e>): void;
-    protected prepareSpellcasting(sheetData: CharacterSheetData): void;
+    private prepareSpellcasting;
     protected prepareCraftingFormulas(): Promise<Record<number, CraftingFormula[]>>;
     protected prepareCraftingEntries(): Promise<CraftingEntriesSheetData>;
     /** Disable the initiative button located on the sidebar */

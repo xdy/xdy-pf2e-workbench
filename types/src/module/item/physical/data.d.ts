@@ -1,6 +1,6 @@
 import { ActionCost, BaseItemDataPF2e, BaseItemSourcePF2e, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTraits } from "../data/base";
 import type { PhysicalItemPF2e } from "@item/physical";
-import type { ITEM_CARRY_TYPES, PHYSICAL_ITEM_TYPES, PRECIOUS_MATERIAL_TYPES } from "../data/values";
+import type { ITEM_CARRY_TYPES, PHYSICAL_ITEM_TYPES } from "../data/values";
 import { EquipmentTrait } from "@item/equipment/data";
 import { ArmorTrait } from "@item/armor/data";
 import { WeaponTrait } from "@item/weapon/data";
@@ -8,19 +8,10 @@ import { ConsumableTrait } from "@item/consumable/data";
 import { Size, ValuesList } from "@module/data";
 import { ActionTrait } from "@item/action/data";
 import { UsageDetails } from "./usage";
+import { PreciousMaterialGrade, PreciousMaterialType } from "./types";
 declare type ItemCarryType = SetElement<typeof ITEM_CARRY_TYPES>;
 declare type BasePhysicalItemSource<TItemType extends PhysicalItemType = PhysicalItemType, TSystemSource extends PhysicalSystemSource = PhysicalSystemSource> = BaseItemSourcePF2e<TItemType, TSystemSource>;
 declare class BasePhysicalItemData<TItem extends PhysicalItemPF2e = PhysicalItemPF2e, TSystemData extends PhysicalSystemData = PhysicalSystemData> extends BaseItemDataPF2e<TItem> {
-    /** Prepared data */
-    readonly isPhysical: true;
-    isEquipped: boolean;
-    isIdentified: boolean;
-    isAlchemical: boolean;
-    isMagical: boolean;
-    isInvested: boolean | null;
-    isCursed: boolean;
-    isTemporary: boolean;
-    usage: UsageDetails;
 }
 interface BasePhysicalItemData<TItem extends PhysicalItemPF2e = PhysicalItemPF2e> extends Omit<BasePhysicalItemSource, "effects" | "flags"> {
     type: PhysicalItemType;
@@ -69,14 +60,14 @@ interface PhysicalSystemSource extends ItemSystemSource, ItemLevelData {
 }
 interface PhysicalSystemData extends PhysicalSystemSource, ItemSystemData {
     traits: PhysicalItemTraits;
+    temporary: boolean;
+    usage: UsageDetails;
 }
 declare type Investable<TData extends PhysicalSystemData | PhysicalSystemSource> = TData & {
     equipped: {
         invested: boolean | null;
     };
 };
-declare type PreciousMaterialType = typeof PRECIOUS_MATERIAL_TYPES[number];
-declare type PreciousMaterialGrade = "low" | "standard" | "high";
 interface ActivatedEffectData {
     activation: {
         type: string;
@@ -153,4 +144,4 @@ interface PhysicalItemHitPoints {
     max: number;
     brokenThreshold: number;
 }
-export { ActivatedEffectData, BasePhysicalItemData, BasePhysicalItemSource, EquippedData, IdentificationData, IdentificationStatus, IdentifiedData, Investable, ItemActivation, ItemCarryType, MystifiedData, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalItemTraits, PhysicalItemType, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, PreciousMaterialType, };
+export { ActivatedEffectData, BasePhysicalItemData, BasePhysicalItemSource, EquippedData, IdentificationData, IdentificationStatus, IdentifiedData, Investable, ItemActivation, ItemCarryType, MystifiedData, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalItemTraits, PhysicalItemType, PhysicalSystemData, PhysicalSystemSource, };

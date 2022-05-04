@@ -13,8 +13,6 @@ interface BaseItemSourcePF2e<TItemType extends ItemType = ItemType, TSystemSourc
     flags: DeepPartial<ItemFlagsPF2e>;
 }
 declare abstract class BaseItemDataPF2e<TItem extends ItemPF2e = ItemPF2e> extends foundry.data.ItemData<TItem, ActiveEffectPF2e> {
-    /** Is this physical item data? */
-    abstract isPhysical: boolean;
 }
 interface BaseItemDataPF2e extends Omit<BaseItemSourcePF2e, "effects"> {
     type: ItemType;

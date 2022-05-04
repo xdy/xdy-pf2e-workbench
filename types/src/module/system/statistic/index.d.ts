@@ -43,6 +43,7 @@ export declare class Statistic<T extends BaseStatisticData = StatisticData> {
     ability: AbilityString | null;
     abilityModifier: ModifierPF2e | null;
     rank: ZeroToFour | null;
+    proficient: boolean;
     modifiers: ModifierPF2e[];
     slug: string;
     constructor(actor: ActorPF2e, data: T, options?: RollOptionParameters | undefined);

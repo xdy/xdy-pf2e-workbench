@@ -21,6 +21,7 @@ export declare function extractPriceFromItem(itemData: {
         quantity?: number;
     };
 }, quantity?: number): Coins;
+export declare function coinStringToCoins(coinString: string, quantity?: number): Coins;
 export declare function multiplyCoinValue(coins: Coins, factor: number): Coins;
 /**
  * Sums up all wealth of a character, not just the treasure, but all other equipment

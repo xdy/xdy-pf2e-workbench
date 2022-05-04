@@ -1,18 +1,16 @@
 import { EquippedData } from "./data";
-interface Held {
+interface HeldUsage {
+    value: string;
     type: "held";
     hands: number;
 }
-interface Worn {
+interface WornUsage {
+    value: string;
     type: "worn";
     where?: string | null;
     hands?: 0;
 }
-declare type Usage = Held | Worn;
-declare type NoUsage = {
-    type: null;
-};
-export declare type UsageDetails = Usage | NoUsage;
+export declare type UsageDetails = HeldUsage | WornUsage;
 export declare function isEquipped(usage: UsageDetails, equipped: EquippedData): boolean;
-export declare function getUsageDetails(usage: string | null): UsageDetails;
+export declare function getUsageDetails(usage: string): UsageDetails;
 export {};

@@ -1,6 +1,7 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { TabData, PackInfo, TabName, TabType } from "./data";
+import { SpellcastingEntryPF2e } from "@item";
 declare class PackLoader {
     loadedPacks: {
         Actor: Record<string, {
@@ -60,6 +61,7 @@ export declare class CompendiumBrowser extends Application {
     loadSettings(): void;
     hookTab(): void;
     openTab(tab: TabName, filter?: string[], maxLevel?: number): Promise<void>;
+    openSpellTab(entry: SpellcastingEntryPF2e, level?: number | null): Promise<void>;
     loadTab(tab: TabName): Promise<void>;
     loadedPacks(tab: TabName): string[];
     activateListeners($html: JQuery): void;

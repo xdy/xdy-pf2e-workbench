@@ -1,12 +1,13 @@
 import { PhysicalItemPF2e } from "../physical";
 import { RuneValuationData } from "../runes";
-import { BaseWeaponType, WeaponCategory, WeaponData, WeaponGroup, WeaponRangeIncrement, WeaponTrait } from "./data";
+import { BaseWeaponType, WeaponCategory, WeaponData, WeaponGroup, WeaponMaterialData, WeaponRangeIncrement, WeaponTrait } from "./data";
 import { MaterialGradeData } from "@item/physical/materials";
 import { IdentificationStatus, MystifiedData } from "@item/physical/data";
 import { MeleePF2e } from "@item/melee";
 import { ConsumablePF2e } from "@item";
-export declare class WeaponPF2e extends PhysicalItemPF2e {
+declare class WeaponPF2e extends PhysicalItemPF2e {
     static get schema(): typeof WeaponData;
+    get isEquipped(): boolean;
     isStackableWith(item: PhysicalItemPF2e): boolean;
     get baseType(): BaseWeaponType | null;
     get group(): WeaponGroup | null;
@@ -18,6 +19,7 @@ export declare class WeaponPF2e extends PhysicalItemPF2e {
     get isSpecific(): boolean;
     get isMelee(): boolean;
     get isRanged(): boolean;
+    get material(): WeaponMaterialData;
     /** Does this weapon require ammunition in order to make a strike? */
     get requiresAmmo(): boolean;
     get ammo(): Embedded<ConsumablePF2e> | null;
@@ -43,7 +45,8 @@ export declare class WeaponPF2e extends PhysicalItemPF2e {
     /** Generate a melee item from this weapon for use by NPCs */
     toNPCAttack(this: Embedded<WeaponPF2e>): Embedded<MeleePF2e>;
 }
-export interface WeaponPF2e {
+interface WeaponPF2e {
     readonly data: WeaponData;
     get traits(): Set<WeaponTrait>;
 }
+export { WeaponPF2e };

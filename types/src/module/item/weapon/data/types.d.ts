@@ -1,10 +1,13 @@
 import { ItemFlagsPF2e } from "@item/data/base";
-import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, PreciousMaterialType } from "@item/physical/data";
+import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource } from "@item/physical/data";
+import { BaseMaterial, PreciousMaterialGrade } from "@item/physical/types";
+import { UsageDetails } from "@item/physical/usage";
 import { WEAPON_PROPERTY_RUNES } from "@item/runes";
 import { OneToFour, ZeroToThree } from "@module/data";
 import { DamageDieSize, DamageType } from "@system/damage";
 import type { LocalizePF2e } from "@system/localize";
 import type { WeaponPF2e } from "..";
+import { WeaponMaterialType } from "../types";
 import { MELEE_WEAPON_GROUPS, RANGED_WEAPON_GROUPS, WEAPON_CATEGORIES, WEAPON_GROUPS, WEAPON_RANGES } from "./values";
 export interface WeaponSource extends BasePhysicalItemSource<"weapon", WeaponSystemSource> {
     flags: DeepPartial<WeaponFlags>;
@@ -42,7 +45,6 @@ export interface WeaponDamage {
 }
 export declare type StrikingRuneType = "striking" | "greaterStriking" | "majorStriking";
 export declare type WeaponPropertyRuneType = keyof typeof WEAPON_PROPERTY_RUNES[number];
-export declare type WeaponMaterialType = Exclude<PreciousMaterialType, "dragonhide" | "grisantian-pelt">;
 export interface WeaponRuneData {
     potency: OneToFour | null;
     striking: StrikingRuneType | null;
@@ -117,15 +119,26 @@ export interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     };
     selectedAmmoId: string | null;
 }
-export interface WeaponSystemData extends WeaponSystemSource, Investable<PhysicalSystemData> {
+export interface WeaponSystemData extends Omit<WeaponSystemSource, "temporary" | "usage">, Investable<PhysicalSystemData> {
     baseItem: BaseWeaponType | null;
     traits: WeaponTraits;
     runes: {
         potency: number;
         striking: ZeroToThree;
         property: WeaponPropertyRuneType[];
+        effects: [];
     };
-    usage: WeaponSystemSource["usage"];
+    material: WeaponMaterialData;
+    usage: UsageDetails & WeaponSystemSource["usage"];
+}
+export interface WeaponMaterialData {
+    /** The "base material" or category: icon/steel (metal), wood, rope, etc. */
+    base: BaseMaterial[];
+    /** The precious material of which this weapon is composed */
+    precious: {
+        type: WeaponMaterialType;
+        grade: PreciousMaterialGrade;
+    } | null;
 }
 export declare type WeaponRangeIncrement = typeof WEAPON_RANGES[number];
 export interface ComboWeaponMeleeUsage {
@@ -136,5 +149,5 @@ export interface ComboWeaponMeleeUsage {
     group: MeleeWeaponGroup;
     traits: WeaponTrait[];
 }
-export declare type OtherWeaponTag = "crossbow" | "ghost-touch";
+export declare type OtherWeaponTag = "crossbow" | "improvised";
 export {};

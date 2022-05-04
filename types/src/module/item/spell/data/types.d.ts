@@ -9,10 +9,6 @@ import type { SpellPF2e } from "@item";
 import { MAGIC_SCHOOLS } from "./values";
 export declare type SpellSource = BaseNonPhysicalItemSource<"spell", SpellSystemSource>;
 export declare class SpellData extends BaseNonPhysicalItemData<SpellPF2e> {
-    /** Prepared data */
-    isCantrip: boolean;
-    isFocusSpell: boolean;
-    isRitual: boolean;
     static DEFAULT_ICON: ImagePath;
 }
 export interface SpellData extends Omit<SpellSource, "effects" | "flags"> {
@@ -33,6 +29,19 @@ export interface SpellDamage {
     value: string;
     applyMod?: boolean;
     type: SpellDamageType;
+}
+export interface SpellHeighteningInterval {
+    type: "interval";
+    interval: number;
+    damage: Record<string, string>;
+}
+export interface SpellHeighteningFixed {
+    type: "fixed";
+    levels: Record<OneToTen, Partial<SpellSystemData>>;
+}
+export interface SpellHeightenLayer {
+    level: number;
+    data: Partial<SpellSystemData>;
 }
 export interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
     traits: SpellTraits;
@@ -77,10 +86,7 @@ export interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
     damage: {
         value: Record<string, SpellDamage>;
     };
-    scaling?: {
-        interval: number;
-        damage: Record<string, string>;
-    };
+    heightening?: SpellHeighteningFixed | SpellHeighteningInterval;
     save: {
         basic: string;
         value: SaveType | "";
