@@ -188,7 +188,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
             }
 
             if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
-                await increaseDyingOnZeroHP(actor, updateClone, hp);
+                return await increaseDyingOnZeroHP(actor, updateClone, hp);
             }
         });
     }

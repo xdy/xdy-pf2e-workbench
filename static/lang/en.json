@@ -1,6 +1,9 @@
 {
   "xdy-pf2e-workbench": {
     "spellCardNotFound": "The spell card could not be found. Casting {spell} at minimum level for that spell.",
+    "effects": {
+      "orcFerocityUsed": "Orc Ferocity Used"
+    },
     "SETTINGS": {
       "abpVariantAllowItemBonuses": {
         "hint": "World setting to not disable item bonuses when using ABP.",
