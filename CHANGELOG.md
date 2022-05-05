@@ -1,3 +1,10 @@
+# [2.51.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.50.5...v2.51.0) (2022-05-05)
+
+
+### Features
+
+* Automated Orc Ferocity, Undying Ferocity, Incredible Ferocity and Rampaging Ferocity (including immunity effect with the proper duration.) ([9fd1439](https://github.com/xdy/xdy-pf2e-workbench/commit/9fd1439dd21169ec6b485256befd902d91ae82bf)), closes [#221](https://github.com/xdy/xdy-pf2e-workbench/issues/221)
+
 ## [2.50.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.50.4...v2.50.5) (2022-05-02)
 
 
