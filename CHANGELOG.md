@@ -1,3 +1,10 @@
+# [2.52.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.51.0...v2.52.0) (2022-05-06)
+
+
+### Features
+
+* The optional features for adding Wounded when removing Dying and adding Dying on reaching zero hit points now also automatically handles the feats "Numb to Death", "Bounce Back", "Deliberate Death" (reminder note about free attack possibility). All three have immunity effects to make sure they don't trigger too often. (Deliberate Death automatically adds the immunity effect even if the attacker is not in melee range, remove it manually if it shouldn't be added.) ([a5e9e66](https://github.com/xdy/xdy-pf2e-workbench/commit/a5e9e66bfa59a6cebe39a1f86f7ed06f48496217))
+
 # [2.51.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.50.5...v2.51.0) (2022-05-05)
 
 
