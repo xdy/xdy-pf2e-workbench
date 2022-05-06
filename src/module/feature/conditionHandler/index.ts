@@ -27,12 +27,14 @@ export async function increaseDyingOnZeroHP(
         getProperty(update, "data.attributes.hp.value") <= 0
     ) {
         const orcFerocity = actor.data.items.find((feat) => feat.slug === "orc-ferocity");
+        const orcFerocityUsed: any = actor.data.items.find((effect) => effect.slug === "orc-ferocity-used");
         const incredibleFerocity = actor.data.items.find((feat) => feat.slug === "incredible-ferocity");
         const undyingFerocity = actor.data.items.find((feat) => feat.slug === "undying-ferocity");
         const rampagingFerocity = actor.data.items.find((feat) => feat.slug === "rampaging-ferocity");
-        const orcFerocityUsed = actor.data.items.find((effect) => effect.slug === "orc-ferocity-used");
+        const deliberateDeath = actor.data.items.find((feat) => feat.slug === "deliberate-death");
+        const deliberateDeathUsed: any = actor.data.items.find((effect) => effect.slug === "deliberate-death-used");
 
-        if (orcFerocity && !orcFerocityUsed) {
+        if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
             setProperty(update, "data.attributes.hp.value", 1);
             if (undyingFerocity) {
                 setProperty(update, "data.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
@@ -56,7 +58,6 @@ export async function increaseDyingOnZeroHP(
                     },
                 },
             };
-
             await actor.createEmbeddedDocuments("Item", [effect]);
 
             if (rampagingFerocity) {
@@ -75,9 +76,45 @@ export async function increaseDyingOnZeroHP(
                             : [],
                 });
             }
+
             await actor.update(update);
             return false;
         }
+
+        if (deliberateDeath && (!deliberateDeathUsed || deliberateDeathUsed.isExpired)) {
+            const effect: any = {
+                type: "effect",
+                name: game.i18n.localize(`${MODULENAME}.effects.deliberateDeathUsed`),
+                img: "icons/skills/melee/strike-dagger-skull-white.webp",
+                data: {
+                    slug: "deliberate-death-used",
+                    tokenIcon: {
+                        show: false,
+                    },
+                    duration: {
+                        value: 24,
+                        unit: "hours",
+                        sustained: false,
+                        expiry: "turn-start",
+                    },
+                },
+            };
+            await actor.createEmbeddedDocuments("Item", [effect]);
+
+            await ChatMessage.create({
+                flavor: game.i18n.format(
+                    `${
+                        actor.token?.name ?? actor.name
+                    } can <b>before gaining Dying</b> as a result of another creature's attack or ability, if that creature is within melee reach, make a melee Strike against the triggering creature.<br>Remove 'Deliberate Death Used' effect if it actually can't be used.`
+                ),
+                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                whisper:
+                    game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
+                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                        : [],
+            });
+        }
+
         let value = 1;
         const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
         if (option.endsWith("ForCharacters") ? actor.data.type === "character" : true) {

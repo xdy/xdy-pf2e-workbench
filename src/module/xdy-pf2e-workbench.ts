@@ -101,12 +101,76 @@ Hooks.once("init", async (actor: ActorPF2e) => {
 
     if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
         Hooks.on("deleteItem", async (item: ItemPF2e, options: {}) => {
+            const actor = <ActorPF2e>item.parent;
+            const bounceBack = actor.data.items.find((feat) => feat.slug === "bounce-back"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1441
+            const bounceBackUsed: any = actor.data.items.find((effect) => effect.slug === "bounce-back-used") ?? false;
+
+            const numbToDeath = actor.data.items.find((feat) => feat.slug === "numb-to-death"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1182
+            const numbToDeathUsed: any =
+                actor.data.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
             if (
                 item.slug === "dying" &&
-                game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") &&
+                (await game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) &&
                 shouldIHandleThis(item.isOwner ? game.user?.id : null)
             ) {
-                await item.parent?.increaseCondition("wounded");
+                if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
+                    const effect: any = {
+                        type: "effect",
+                        name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
+                        img: "icons/magic/death/hand-dirt-undead-zombie.webp",
+                        data: {
+                            slug: "numb-to-death-used",
+                            tokenIcon: {
+                                show: false,
+                            },
+                            duration: {
+                                value: 24,
+                                unit: "hours",
+                                sustained: false,
+                                expiry: "turn-start",
+                            },
+                        },
+                    };
+
+                    await ChatMessage.create({
+                        flavor: game.i18n.format(
+                            `${
+                                actor.token?.name ?? actor.name
+                            } has just triggered Numb To Death and can now heal ${TextEditor.enrichHTML(
+                                `[[/r ${actor.level}]] points of damage.`
+                            )}.`
+                        ),
+                        speaker: ChatMessage.getSpeaker({ actor: actor }),
+                        whisper:
+                            game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
+                                ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                                : [],
+                    });
+
+                    await actor.createEmbeddedDocuments("Item", [effect]);
+                } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
+                    const effect: any = {
+                        type: "effect",
+                        name: game.i18n.localize(`${MODULENAME}.effects.bounceBackUsed`),
+                        img: "icons/magic/life/ankh-gold-blue.webp",
+                        data: {
+                            slug: "bounce-back-used",
+                            tokenIcon: {
+                                show: false,
+                            },
+                            duration: {
+                                value: 24,
+                                unit: "hours",
+                                sustained: false,
+                                expiry: "turn-start",
+                            },
+                        },
+                    };
+
+                    await actor.createEmbeddedDocuments("Item", [effect]);
+                } else {
+                    await item.parent?.increaseCondition("wounded");
+                }
             }
         });
     }

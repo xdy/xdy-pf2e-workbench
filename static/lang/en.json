@@ -2,7 +2,10 @@
   "xdy-pf2e-workbench": {
     "spellCardNotFound": "The spell card could not be found. Casting {spell} at minimum level for that spell.",
     "effects": {
-      "orcFerocityUsed": "Orc Ferocity Used"
+      "orcFerocityUsed": "Orc Ferocity Used",
+      "bounceBackUsed": "Bounce Back Used",
+      "numbToDeathUsed": "Numb To Death Used",
+      "deliberateDeathUsed": "Deliberate Death Used"
     },
     "SETTINGS": {
       "abpVariantAllowItemBonuses": {
