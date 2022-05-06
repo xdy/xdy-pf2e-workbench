@@ -31,8 +31,8 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * The xdy-pf2e-workbench-items pack now includes a 'Boon' named "Workbench Flat Check Notes". This 'Boon' holds several useful Note RE:s that when appropriate add notes about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your characters, it'll appear on the Deity Boons/Curses section of the Effects tab rather than on the feat list. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or dazzled. Self has Blind-Fight.
 * Option to use the token hud visibility toggle to also toggle the Undetected condition
 * Optional keybind called "Add user targets" that lets the GM add token targets to other users by selecting or hovering over those tokens, pressing the keybind and choosing which user should target those tokens. Enables GMs to help players having problems with targeting. Also useful in conjunction with "Workshop Flat Check Notes" to make a player target an Undetected token that they first need to roll a Flat Check to be able to hit.
-* Option to automatically increase Dying on reaching zero hp (handles Orc Ferocity, Undying Ferocity, Incredible Ferocity and Rampaging Ferocity)
-* Option to automatically increase Wounded when Dying is removed.
+* Option to automatically increase Dying on reaching zero hp (handles the feats [Orc Ferocity](https://2e.aonprd.com/Feats.aspx?ID=83), [Undying Ferocity](https://2e.aonprd.com/Feats.aspx?ID=1291), [Incredible Ferocity](https://2e.aonprd.com/Feats.aspx?ID=90), [Rampaging Ferocity](https://2e.aonprd.com/Feats.aspx?ID=1294) and partial handling of [Deliberate Death](https://2e.aonprd.com/Feats.aspx?ID=2355))
+* Option to automatically increase Wounded when Dying is removed (handles the feats [Bounce Back](https://2e.aonprd.com/Feats.aspx?ID=1441) and [Numb to Death](https://2e.aonprd.com/Feats.aspx?ID=1182)
 Experimental features:
 None right now. (Though some feature settings are experimental.)
 
