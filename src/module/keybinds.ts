@@ -16,7 +16,6 @@ export function registerKeybindings() {
         restricted: true,
         editable: [],
         onDown: () => {
-            let userId;
             const map = game.users
                 .filter((user) => !user.isGM)
                 .map((user) => {
@@ -36,18 +35,30 @@ export function registerKeybindings() {
                 content,
                 buttons: {
                     addFor: {
-                        icon: '<i class="fas fa-check"></i>',
+                        icon: '<i class="fas fa-users"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
                         callback: async (html: JQuery) => {
-                            userId = html.find("#dialogUserId").val() as string;
                             const targets = Array.from(canvas.tokens?.controlled).concat(
                                 canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1)
                             );
-                            const user = game.users.find((u) => u.id === userId);
+                            const user = game.users.find((u) => u.id === (html.find("#dialogUserId").val() as string));
                             if (game.user?.isGM && targets && user) {
                                 targets.forEach((t) => {
                                     t.setTarget(true, { user: user, releaseOthers: false });
                                     user.targets.add(t);
+                                });
+                            }
+                        },
+                    },
+                    clearFor: {
+                        icon: '<i class="fas fa-users-slash"></i>',
+                        label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
+                        callback: async (html: JQuery) => {
+                            const user = game.users.find((u) => u.id === (html.find("#dialogUserId").val() as string));
+                            if (game.user?.isGM && user) {
+                                const targets = user.targets;
+                                targets.forEach((t) => {
+                                    t.setTarget(false, { user: user, releaseOthers: false });
                                 });
                             }
                         },
