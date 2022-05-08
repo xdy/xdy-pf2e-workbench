@@ -1,3 +1,10 @@
+# [2.53.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.52.1...v2.53.0) (2022-05-08)
+
+
+### Features
+
+* The keybind that allows the gm to add targets for a user now also lets the gm clear the targets for that user. ([9a2ef51](https://github.com/xdy/xdy-pf2e-workbench/commit/9a2ef51c2367537ffe57ba0cf8ff648432e80978)), closes [#246](https://github.com/xdy/xdy-pf2e-workbench/issues/246)
+
 ## [2.52.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.52.0...v2.52.1) (2022-05-07)
 
 
