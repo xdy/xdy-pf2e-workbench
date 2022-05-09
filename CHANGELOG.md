@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.53.0...v3.0.0) (2022-05-09)
+
+
+### Features
+
+* Split macro compendiums into one named "Symon-provided macros (asymonous-benefactor-macros)" that should be imported, and one named "XDY Internal Utility Macros" that should not. ([814be83](https://github.com/xdy/xdy-pf2e-workbench/commit/814be8332120f1d79fdfacb6108be2786436dfd0))
+
+
+### BREAKING CHANGES
+
+* This means that all macros that were previously imported from the above compendium have broken and will need to be reimported.
+
 # [2.53.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v2.52.1...v2.53.0) (2022-05-08)
 
 
