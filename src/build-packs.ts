@@ -56,8 +56,9 @@ copyFolder(path.resolve(".", asymonousSource[0]), path.resolve(outDir, packsSour
 copyFolder(path.resolve(".", asymonousSource[1]), path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"));
 
 const folders = getFolders(packsSource);
-const lines: string[] = [];
 for (const folder of folders) {
+    const lines: string[] = [];
+    const linesInternal: string[] = [];
     const folderPath = path.join(packsSource, folder);
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
@@ -65,21 +66,31 @@ for (const folder of folders) {
         if (!filePath.endsWith(".js")) {
             continue;
         }
+
         try {
             const macroName = path.parse(file).name;
             const importMacro = `/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
-async function _executeMacroByName(name) {
-    let pack = game.packs.get('xdy-pf2e-workbench.asymonous-benefactor-macros');
-    pack.getIndex().then(index => {
-        let id = index.find(e => e.name === name)?._id;
-        if (id)
-            pack.getDocument(id).then(e => e.execute()
-    )});
+async function _executeMacroByName(
+    macroName,
+    compendiumName = "xdy-pf2e-workbench.asymonous-benefactor-macros-internal"
+) {
+    const pack = game.packs.get(compendiumName);
+    if (pack) {
+        const macro_data = (await pack.getDocuments()).find((i) => i.data.name === macroName)?.toObject();
+        if (macro_data) {
+            const temp_macro = new Macro(macro_data);
+            temp_macro.data.permission.default = CONST.DOCUMENT_PERMISSION_LEVELS.OWNER;
+            temp_macro.execute();
+        } else {
+            ui.notifications.error("Macro " + macroName + " not found");
+        }
+    } else {
+        ui.notifications.error("Compendium " + compendiumName + " not found");
+    }
 }
-
 _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
 
-//This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274;`;
+//This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274; and modified by Mark Pearce https://discord.com/channels/880968862240239708/880969174661353484/972962446098702376`;
             const contents = fs.readFileSync(filePath, { encoding: "utf8" });
             const map = new Map<string, string>();
             map.set("2-Action Harm", "systems/pf2e/icons/spells/harm.webp");
@@ -119,16 +130,16 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
             // eslint-disable-next-line
-            let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(contents)},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}\n`;
+            let jsonInternal = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(contents)},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
+            linesInternal.push(jsonInternal);
             // eslint-disable-next-line
-            json += `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(importMacro)},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
+            let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(importMacro)},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
             lines.push(json);
         } catch (err) {
             console.error(`Failed to read JSON file ${filePath}`, err);
         }
     }
-    const result = lines.join("\n");
-    const file1 = path.resolve(outDir, "packs", folder + ".db");
-    fs.writeFileSync(file1, result, "utf8");
+    fs.writeFileSync(path.resolve(outDir, "packs", folder + ".db"), lines.join("\n"), "utf8");
+    fs.writeFileSync(path.resolve(outDir, "packs", folder + "-internal.db"), linesInternal.join("\n"), "utf8");
 }
 fs.rmSync(path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"), { recursive: true });

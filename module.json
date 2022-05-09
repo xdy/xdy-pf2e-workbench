@@ -22,6 +22,15 @@
       "entity": "Macro"
     },
     {
+      "name": "asymonous-benefactor-macros-internal",
+      "label": "XDY Internal utility macros, do not import",
+      "system": "pf2e",
+      "path": "packs/asymonous-benefactor-macros-internal.db",
+      "module": "xdy-pf2e-workbench",
+      "entity": "Macro",
+      "private": true
+    },
+    {
       "name": "asymonous-benefactor-effects",
       "label": "asymonous-benefactor-effects",
       "system": "pf2e",
