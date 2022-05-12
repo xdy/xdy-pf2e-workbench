@@ -9,6 +9,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [websterguy](https://github.com/websterguy/) - Improved the Hero Point Handler gui.
 * [roguedevjake](https://github.com/roguedevjake/) - Provided REs for "Workbench Flat Check Notes".
 * [Jamz](https://github.com/JamzTheMan/) - Improved REs for "Workbench Flat Check Notes".
+* [DJ](https://github.com/Djphoenix719) - Wrote the original code for the Quick Quantities feature.
 
 I've probably forgotten someone, if so, please tell me!
 
