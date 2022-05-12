@@ -545,5 +545,15 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "quickQuantities", {
+        name: `${MODULENAME}.SETTINGS.quickQuantities.name`,
+        hint: `${MODULENAME}.SETTINGS.quickQuantities.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");
 }

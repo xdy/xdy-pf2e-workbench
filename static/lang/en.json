@@ -267,6 +267,10 @@
         "defaultName": "Breath",
         "used": "Used "
       },
+      "quickQuantities": {
+        "hint": "Use shift-click on item quantities to add 5, ctrl-click to add 10.",
+        "name": "Use shift-click on item quantities to add 5, ctrl-click to add 10."
+      },
       "actionsReminderAllow": {
         "hint": "Show number of actions reminder as chat message. Save settings to show/hide additional options.",
         "name": "(World) Who gets an actions reminder",

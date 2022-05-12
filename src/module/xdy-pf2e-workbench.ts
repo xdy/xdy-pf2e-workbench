@@ -26,6 +26,7 @@ import { chatCardCollapse } from "./feature/qolHandler";
 import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./feature/heroPointHandler";
 import { shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
+import { onQuantitiesHook } from "./feature/quickQuantities";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -43,6 +44,14 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     });
 
     //Hooks that only run if a setting that needs it has been enabled
+    if (game.settings.get(MODULENAME, "quickQuantities")) {
+        Hooks.on("renderActorSheet", (app: any, html: JQuery) => {
+            if (game.settings.get(MODULENAME, "quickQuantities")) {
+                onQuantitiesHook(app, html);
+            }
+        });
+    }
+
     if (
         (game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
             (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
