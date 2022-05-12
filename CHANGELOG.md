@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.0.1...v3.1.0) (2022-05-12)
+
+
+### Features
+
+* Yoinked most of the Quick Quantities feature from the PF2e Toolbox. The difference is that the amount changed on a shift click is hardcoded to 5, and a control click to 10. ([f7124cf](https://github.com/xdy/xdy-pf2e-workbench/commit/f7124cfe7ed8783c42ae693e9ae4fee9e4a51282))
+
 ## [3.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.0.0...v3.0.1) (2022-05-12)
 
 
