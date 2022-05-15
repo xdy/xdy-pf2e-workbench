@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.1.0...v3.1.1) (2022-05-15)
+
+
+### Bug Fixes
+
+* Item price is handled differently from pf2e 3.10.0, getting in line with that. ([e307719](https://github.com/xdy/xdy-pf2e-workbench/commit/e307719596a8188ae0cee5acf5ce06cef668fb54))
+
 # [3.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.0.1...v3.1.0) (2022-05-12)
 
 
