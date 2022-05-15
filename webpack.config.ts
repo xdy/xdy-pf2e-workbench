@@ -116,21 +116,8 @@ const config: Configuration = {
                 ],
             },
             {
-                test: /\.scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: "css-loader",
-                        options: {
-                            url: false,
-                            sourceMap: true,
-                        },
-                    },
-                    {
-                        loader: "sass-loader",
-                        options: { sourceMap: true },
-                    },
-                ],
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"]
             },
             {
                 test: /nouislider\.min\.css$/,

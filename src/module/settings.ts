@@ -555,5 +555,15 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "playerItemsRarityColour", {
+        name: `${MODULENAME}.SETTINGS.playerItemsRarityColour.name`,
+        hint: `${MODULENAME}.SETTINGS.playerItemsRarityColour.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");
 }

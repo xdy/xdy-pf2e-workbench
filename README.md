@@ -34,6 +34,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to automatically increase Dying on reaching zero hp (handles the feats [Orc Ferocity](https://2e.aonprd.com/Feats.aspx?ID=83), [Undying Ferocity](https://2e.aonprd.com/Feats.aspx?ID=1291), [Incredible Ferocity](https://2e.aonprd.com/Feats.aspx?ID=90), [Rampaging Ferocity](https://2e.aonprd.com/Feats.aspx?ID=1294) and partial handling of [Deliberate Death](https://2e.aonprd.com/Feats.aspx?ID=2355))
 * Option to automatically increase Wounded when Dying is removed (handles the feats [Bounce Back](https://2e.aonprd.com/Feats.aspx?ID=1441) and [Numb to Death](https://2e.aonprd.com/Feats.aspx?ID=1182)
 * Option to hold control or shift to quickly increase/decrease item quantities by 5 or 10 (from https://github.com/Djphoenix719/FVTT-PF2EToolbox)
+* Option to colorize the items per rarity on the player sheet like on the npc sheet.
 
 Experimental features:
 None right now. (Though some feature settings are experimental.)

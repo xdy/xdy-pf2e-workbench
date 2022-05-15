@@ -310,6 +310,22 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         });
     });
 
+    if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
+        Hooks.on("renderActorSheet", (_sheet, $html: JQuery) => {
+            $html.find(".item-list").each((i, e) => {
+                $(e)
+                    .find(".list-row")
+                    .each((i, e) => {
+                        const $e = $(e);
+                        const rarity = $e.attr("data-item-rarity");
+                        if (rarity) {
+                            $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
+                        }
+                    });
+            });
+        });
+    }
+
     // Register custom sheets (if any)
 });
 

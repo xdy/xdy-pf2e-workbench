@@ -289,6 +289,10 @@
         "title": "Select user to add targets for",
         "addFor": "Add targets for",
         "clearFor": "Clear targets for"
+      },
+      "playerItemsRarityColour": {
+        "hint": "Client setting to show item names in rarity colour on actor sheets.",
+        "name": "Show item names in rarity colour on actor sheets."
       }
     }
   }

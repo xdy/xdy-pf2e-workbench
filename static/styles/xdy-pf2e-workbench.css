@@ -1,0 +1,15 @@
+/*Modified from the npc sheet*/
+.xdy-pf2e-workbench-rarity-uncommon {
+    border-color: #98513D;
+    color: #98513D
+}
+
+.xdy-pf2e-workbench-rarity-rare {
+    border-color: #002664;
+    color: #002664
+}
+
+.xdy-pf2e-workbench-rarity-unique {
+    border-color: #54166E;
+    color: #54166E
+}

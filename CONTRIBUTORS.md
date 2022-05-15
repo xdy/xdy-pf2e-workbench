@@ -10,6 +10,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [roguedevjake](https://github.com/roguedevjake/) - Provided REs for "Workbench Flat Check Notes".
 * [Jamz](https://github.com/JamzTheMan/) - Improved REs for "Workbench Flat Check Notes".
 * [DJ](https://github.com/Djphoenix719) - Wrote the original code for the Quick Quantities feature.
+* [TomChristoffer]() - Gave me the start of the item rarity colorization feature.
 
 I've probably forgotten someone, if so, please tell me!
 
