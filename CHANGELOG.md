@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.1.1...v3.2.0) (2022-05-15)
+
+
+### Features
+
+* Adds optional feature to colorize items on player character sheets by rarity (the same colors used on the npc sheet), thanks to @TomChristoffer for the original code and idea. ([bf0f65b](https://github.com/xdy/xdy-pf2e-workbench/commit/bf0f65bd22f5b8c6560aa8ce647f60387de79be5)), closes [#259](https://github.com/xdy/xdy-pf2e-workbench/issues/259)
+
 ## [3.1.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.1.0...v3.1.1) (2022-05-15)
 
 
