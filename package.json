@@ -55,7 +55,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "fork-ts-checker-webpack-plugin": "^7.2.11",
     "fs-extra": "^10.1.0",
-    "glob": "^8.0.1",
+    "glob": "^8.0.3",
     "lint-staged": "^12.4.1",
     "mini-css-extract-plugin": "^2.6.0",
     "null-loader": "^4.0.1",
