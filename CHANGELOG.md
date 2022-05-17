@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.2.0...v3.2.1) (2022-05-17)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. Setting icons on 'Level Based DCs' and 'Marshal Stances' macros. Excluding 'Adjust Merchant Prices' until it has been fixed (it can break actors now.) ([d49b4c6](https://github.com/xdy/xdy-pf2e-workbench/commit/d49b4c6ed67ff631aa02011e5b60e0cb7dbb4142))
+
 # [3.2.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.1.1...v3.2.0) (2022-05-15)
 
 
