@@ -69,6 +69,9 @@ for (const folder of folders) {
 
         try {
             const macroName = path.parse(file).name;
+            if (macroName === "Adjust Merchant Prices") {
+                continue;
+            }
             const importMacro = `/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
 async function _executeMacroByName(
     macroName,
@@ -108,10 +111,12 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             );
             map.set("Dual Class", "systems/pf2e/icons/spells/guidance.webp");
             map.set("Eldritch Shot", "systems/pf2e/icons/equipment/consumables/ammunition/spellstrike-ammunition.webp");
+            map.set("Level Based DCs", "systems/pf2e/icons/equipment/held-items/radiant-spark.webp");
             map.set("Lingering Composition", "icons/svg/dice-target.svg");
             map.set("Lingering Heroics", "systems/pf2e/icons/spells/inspire-heroics.webp");
             map.set("Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp");
             map.set("Magic Missile v2", "systems/pf2e/icons/spells/magic-missile.webp");
+            map.set("Marshal Stances", "systems/pf2e/icons/features/feats/dread-marshal-stance.webp");
             map.set("Modded BM immunity tracker", "systems/pf2e/icons/features/feats/treat-wounds.webp");
             map.set("Modded Countdown Cooldown", "systems/pf2e/icons/spells/time-beacon.webp");
             map.set("One for All", "icons/svg/dice-target.svg");
