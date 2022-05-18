@@ -286,30 +286,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         });
     }
 
-    Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
-        const settings: [string, any][] = Array.from(game.settings.settings.entries());
-        settings.forEach((setting: [string, any]) => {
-            const name = setting[0];
-            //TODO Do this in a more elegant way
-            //Disable all dependent npcMystifier settings
-            if (name !== `${MODULENAME}.npcMystifier` && setting[0].startsWith(`${MODULENAME}.npcMystifier`)) {
-                const valueFunction = !game.settings.get(MODULENAME, "npcMystifier");
-
-                html.find(`input[name="${name}"]`).parent().parent().toggle(!valueFunction);
-                html.find(`select[name="${name}"]`).parent().parent().toggle(!valueFunction);
-            }
-            if (
-                name !== `${MODULENAME}.automatedAnimationOn` &&
-                setting[0].startsWith(`${MODULENAME}.automatedAnimationOn`)
-            ) {
-                const valueFunction = !game.settings.get(MODULENAME, "automatedAnimationOn");
-
-                html.find(`input[name="${name}"]`).parent().parent().toggle(!valueFunction);
-                html.find(`select[name="${name}"]`).parent().parent().toggle(!valueFunction);
-            }
-        });
-    });
-
     if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
         Hooks.on("renderActorSheet", (_sheet, $html: JQuery) => {
             $html.find(".item-list").each((i, e) => {
