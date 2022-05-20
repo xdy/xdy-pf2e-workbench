@@ -21,28 +21,13 @@ jobs:
                 with:
                     submodules: 'true'
 
-            -   name: Cache node modules
-                id: cache-npm
-                uses: actions/cache@v3
-                env:
-                    cache-name:
-                        cache-node-modules
+            # Setup Node.js using the appropriate version
+            -   name: Use Node.js ${{ matrix.node-version }}
+                uses: actions/setup-node@v3.1.1
                 with:
-                    # npm cache files are stored in `~/.npm` on Linux/macOS
-                    path: ~/.npm
-                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-                    restore-keys: |
-                        ${{ runner.os }}-build-${{ env.cache-name }}-
-                        ${{ runner.os }}-build-
-                        ${{ runner.os }}-
+                    node-version: ${{ matrix.node-version }}
 
-
-            -   if: ${{ steps.cache-npm.outputs.cache-hit == false }}
-                name: List the state of node modules
-                continue-on-error: true
-                run: npm list
-
-                # Install package dependencies
+            # Install package dependencies
             -   name: Install
                 run: npm install
 
@@ -50,10 +35,15 @@ jobs:
             -   name: Lint
                 run: npm run lint
 
-                # Building is the only test right now (mainly tests if dependabot actually can update)
+            # Building is the only test right now (mainly tests if dependabot actually can update)
             -   name: Build
                 run: npm run build
 
+            # Run tests
+            #- name: Test
+            #run: npm test
+
+            #
     release:
         # Only release on push to main on xdy/xdy-pf2e-workbench
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
@@ -72,29 +62,14 @@ jobs:
                     git submodule update --init --recursive
                     git submodule update --recursive --remote
 
-            -   uses: stefanzweifel/git-auto-commit-action@v4.14.1
-                with:
-                    commit_message: "chore: Update submodules"
+            - uses: stefanzweifel/git-auto-commit-action@v4.14.1
+              with:
+                  commit_message: "chore: Update submodules"
 
-            -   name: Cache node modules
-                id:cache-npm
-                uses:actions/cache@v3
-                env:
-                    cache-name:
-                        cache-node-modules
+            -   name: Setup Node.js
+                uses: actions/setup-node@v3.1.1
                 with:
-                    # npm cache files are stored in `~/.npm` on Linux/macOS
-                    path: ~/.npm
-                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-                    restore-keys: |
-                        ${{ runner.os }}-build-${{ env.cache-name }}-
-                        ${{ runner.os }}-build-
-                        ${{ runner.os }}-
-
-            -   if: ${{ steps.cache-npm.outputs.cache-hit == false }}
-                name: List the state of node modules
-                continue-on-error: true
-                run: npm list
+                    node-version: 16.x
 
             -   name: Install
                 run: npm install
