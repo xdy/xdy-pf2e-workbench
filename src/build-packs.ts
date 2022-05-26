@@ -101,6 +101,7 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             map.set("Actions with Potency", "icons/svg/dice-target.svg");
             map.set("Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp");
             map.set("Apply Conditions", "icons/svg/dice-target.svg");
+            map.set("Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp");
             map.set("BattleMedicineImmunity", "icons/svg/dice-target.svg");
             map.set("Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp");
             map.set("Conditions Manager", "systems/pf2e/icons/conditions/doomed.webp");
