@@ -1,3 +1,10 @@
+## [3.2.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.2.4...v3.2.5) (2022-05-26)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. Assign icon to "Assign Standby Spell" macro. ([61da953](https://github.com/xdy/xdy-pf2e-workbench/commit/61da953964861e1bf2ff68fc8ef3e90a276bca5f))
+
 ## [3.2.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.2.3...v3.2.4) (2022-05-25)
 
 
