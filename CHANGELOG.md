@@ -1,3 +1,10 @@
+## [3.3.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.3.1...v3.3.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* Re-adds option to always autoroll damage on *non-attack* spells. Now with fewer showstopper bugs... ([1a145f1](https://github.com/xdy/xdy-pf2e-workbench/commit/1a145f12f33b82c3ff99827e6d76e16cb80d42bc))
+
 ## [3.3.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.3.0...v3.3.1) (2022-06-03)
 
 
