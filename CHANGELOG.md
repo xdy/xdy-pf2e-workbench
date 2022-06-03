@@ -1,3 +1,10 @@
+## [3.4.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.1...v3.4.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* Fixes bug in autorolling damage feature. ([1cba563](https://github.com/xdy/xdy-pf2e-workbench/commit/1cba563ef86cf72f28e4c8f421eb6c9d545de67b))
+
 ## [3.4.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.0...v3.4.1) (2022-06-03)
 
 
