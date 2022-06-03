@@ -33,19 +33,19 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
         const spell = actionId ? <SpellPF2e>await fromUuid(actionId) : null;
 
         if (
-            spell &&
             messageActor &&
             messageToken &&
-            (rollForNonAttackSpell ||
+            ((spell !== null && rollForNonAttackSpell) ||
                 (rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
-                (rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
+                (spell !== null && rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
         ) {
             let degreeOfSuccess = flags.context?.outcome ?? "";
             if (
-                rollType === "spell-attack-roll" ||
-                (!spell?.traits.has("attack") &&
-                    rollForNonAttackSpell &&
-                    Object.keys(spell.data?.data?.damage?.value).length !== 0)
+                spell !== null &&
+                (rollType === "spell-attack-roll" ||
+                    (!spell?.traits.has("attack") &&
+                        rollForNonAttackSpell &&
+                        Object.keys(spell.data?.data?.damage?.value).length !== 0))
             ) {
                 if (
                     degreeOfSuccess === "success" ||
