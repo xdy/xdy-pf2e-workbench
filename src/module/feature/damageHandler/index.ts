@@ -30,7 +30,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 (rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
         ) {
             const actionId = <string>flags?.origin?.uuid;
-            const degreeOfSuccess = flags.context?.outcome ?? "";
+            let degreeOfSuccess = flags.context?.outcome ?? "";
             if (rollType === "spell-attack-roll") {
                 if (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess") {
                     const spell = <SpellPF2e>await fromUuid(actionId);
@@ -81,11 +81,20 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     messageActor?.data.data?.actions;
                 const actionIds = actionId.match(/Item.(\w+)/);
                 let action: any;
+                if (flags?.context?.isReroll) {
+                    const match = message.data.flavor?.match(
+                        'Result: <span .*? class="(.*?)"'
+                    );
+                    if (match && match[1]) {
+                        degreeOfSuccess = match[1];
+                    }
+                }
+
                 if (actionIds && actionIds[1]) {
                     action = getActionFromMessage(actions, actionIds, message);
-                    if (degreeOfSuccess === "success") {
+                    if (degreeOfSuccess === "success" || degreeOfSuccess === 2) {
                         action?.damage({ options: rollOptions });
-                    } else if (degreeOfSuccess === "criticalSuccess") {
+                    } else if (degreeOfSuccess === "criticalSuccess" || degreeOfSuccess === 3) {
                         action?.critical({ options: rollOptions });
                     }
                 }
