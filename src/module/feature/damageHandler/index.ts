@@ -17,6 +17,10 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
     ) {
         const autoRollDamageForStrikeEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
         const autoRollDamageForSpellAttackEnabled = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
+        const autoRollDamageForSpellNotAnAttackEnabled = game.settings.get(
+            MODULENAME,
+            "autoRollDamageForSpellNotAnAttack"
+        );
         const messageActor: ActorPF2e = <ActorPF2e>game.actors?.get(<string>message.data.speaker.actor);
         const messageToken: TokenDocumentPF2e = <TokenDocumentPF2e>(
             canvas?.scene?.tokens.get(<string>message.data.speaker.token)
@@ -26,13 +30,18 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
         if (
             messageActor &&
             messageToken &&
-            ((rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
+            ((autoRollDamageForSpellNotAnAttackEnabled && rollType === undefined) ||
+                (rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
                 (rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
         ) {
             const actionId = <string>flags?.origin?.uuid;
             let degreeOfSuccess = flags.context?.outcome ?? "";
-            if (rollType === "spell-attack-roll") {
-                if (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess") {
+            if (rollType === "spell-attack-roll" || rollType === undefined) {
+                if (
+                    degreeOfSuccess === "success" ||
+                    degreeOfSuccess === "criticalSuccess" ||
+                    autoRollDamageForSpellNotAnAttackEnabled
+                ) {
                     const spell = <SpellPF2e>await fromUuid(actionId);
                     let spellLevel = spell.data.data.level;
                     let levelFromChatCard = false;
@@ -82,9 +91,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 const actionIds = actionId.match(/Item.(\w+)/);
                 let action: any;
                 if (flags?.context?.isReroll) {
-                    const match = message.data.flavor?.match(
-                        'Result: <span .*? class="(.*?)"'
-                    );
+                    const match = message.data.flavor?.match('Result: <span .*? class="(.*?)"');
                     if (match && match[1]) {
                         degreeOfSuccess = match[1];
                     }

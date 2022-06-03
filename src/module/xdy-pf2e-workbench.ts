@@ -68,7 +68,8 @@ Hooks.once("init", async (actor: ActorPF2e) => {
             if (
                 game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
                 (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
-                    game.settings.get(MODULENAME, "autoRollDamageForSpellAttack"))
+                    game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
+                    game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"))
             ) {
                 await autoRollDamage(message);
             }
