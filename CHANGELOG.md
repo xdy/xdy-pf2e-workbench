@@ -1,3 +1,12 @@
+# [3.3.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.2.7...v3.3.0) (2022-06-03)
+
+
+### Features
+
+* Adds option to always autoroll damage on *non-attack* spells. Also, if the autoroll damage for attacks feature is switched on, also roll damage if an attack is rerolled into a success or critical success. ([7a51088](https://github.com/xdy/xdy-pf2e-workbench/commit/7a510882dd92e6b71a628ec79e3d010e837ede8b))
+* Adds option to always autoroll damage on *non-attack* spells. Especially handy for basic saves as many targets will need to interact with the damage message regardless of save results. ([b6442d5](https://github.com/xdy/xdy-pf2e-workbench/commit/b6442d5e8689cc01408a5d0b61bdb5d173a08ef8)), closes [#254](https://github.com/xdy/xdy-pf2e-workbench/issues/254)
+* If the autoroll damage for attacks feature is switched on, also roll damage if an attack is rerolled into a success or critical succes. ([33a1768](https://github.com/xdy/xdy-pf2e-workbench/commit/33a1768a2654e063484e7e80420c129967107052)), closes [#253](https://github.com/xdy/xdy-pf2e-workbench/issues/253)
+
 ## [3.2.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.2.6...v3.2.7) (2022-05-31)
 
 
