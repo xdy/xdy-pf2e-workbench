@@ -1,3 +1,10 @@
+## [3.3.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.3.0...v3.3.1) (2022-06-03)
+
+
+### Bug Fixes
+
+* Temporarily removes the option to autoroll damage on non-attack spells. I messed up the release. ([db877df](https://github.com/xdy/xdy-pf2e-workbench/commit/db877df4232ea3124df28eacf598a7c6708eb77c))
+
 # [3.3.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.2.7...v3.3.0) (2022-06-03)
 
 
