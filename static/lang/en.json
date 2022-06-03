@@ -96,13 +96,17 @@
         "players": "Players"
       },
       "autoRollDamageForStrike": {
-        "hint": "Client setting to Autoroll damage for strikes that hit. Note that critical hits roll critical damage.",
+        "hint": "Client setting to autoroll damage for strikes that hit. Note that critical hits roll critical damage.",
         "name": "Autoroll damage for strikes that hit.",
         "strike": "Strike"
       },
       "autoRollDamageForSpellAttack": {
-        "hint": "Client setting to Autoroll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
+        "hint": "Client setting to autoroll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
         "name": "Autoroll damage for spell attacks that hit."
+      },
+      "autoRollDamageForSpellNotAnAttack": {
+        "hint": "Client setting to *always* autoroll normal damage for *non-attack* spells when they are cast.",
+        "name": "Autoroll damage for cast spells that are not attacks."
       },
       "autoRollDamageNotifyOnSpellCardNotFound": {
         "hint": "Client setting to notify when a spell attack is rolled and no spell card was found to roll damage for.",

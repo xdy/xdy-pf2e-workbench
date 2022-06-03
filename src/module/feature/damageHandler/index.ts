@@ -9,6 +9,7 @@ import { ActorFlagsPF2e } from "@actor/data/base";
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 5;
     if (
+        !message.isDamageRoll &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow")),
@@ -17,23 +18,39 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
     ) {
         const autoRollDamageForStrikeEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
         const autoRollDamageForSpellAttackEnabled = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
+        const autoRollDamageForSpellNotAnAttackEnabled = <boolean>(
+            game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack")
+        );
         const messageActor: ActorPF2e = <ActorPF2e>game.actors?.get(<string>message.data.speaker.actor);
         const messageToken: TokenDocumentPF2e = <TokenDocumentPF2e>(
             canvas?.scene?.tokens.get(<string>message.data.speaker.token)
         );
         const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
         const rollType = flags.context?.type;
+        const rollForNonAttackSpell: boolean =
+            autoRollDamageForSpellNotAnAttackEnabled && rollType === undefined && flags.casting !== null;
+
         if (
             messageActor &&
             messageToken &&
-            ((rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
+            (rollForNonAttackSpell ||
+                (rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
                 (rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
         ) {
             const actionId = <string>flags?.origin?.uuid;
+            const spell = <SpellPF2e>await fromUuid(actionId);
             let degreeOfSuccess = flags.context?.outcome ?? "";
-            if (rollType === "spell-attack-roll") {
-                if (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess") {
-                    const spell = <SpellPF2e>await fromUuid(actionId);
+            if (
+                rollType === "spell-attack-roll" ||
+                (!spell.traits.has("attack") &&
+                    rollForNonAttackSpell &&
+                    Object.keys(spell.data?.data?.damage?.value).length !== 0)
+            ) {
+                if (
+                    degreeOfSuccess === "success" ||
+                    degreeOfSuccess === "criticalSuccess" ||
+                    (!spell.traits.has("attack") && rollForNonAttackSpell)
+                ) {
                     let spellLevel = spell.data.data.level;
                     let levelFromChatCard = false;
                     const chatLength = game.messages?.contents.length ?? 0;
