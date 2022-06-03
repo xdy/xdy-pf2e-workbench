@@ -404,16 +404,6 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
-    game.settings.register(MODULENAME, "autoRollDamageForSpellNotAnAttack", {
-        name: `${MODULENAME}.SETTINGS.autoRollDamageForSpellNotAnAttack.name`,
-        hint: `${MODULENAME}.SETTINGS.autoRollDamageForSpellNotAnAttack.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-        onChange: () => debouncedReload(),
-    });
-
     game.settings.register(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound", {
         name: `${MODULENAME}.SETTINGS.autoRollDamageNotifyOnSpellCardNotFound.name`,
         hint: `${MODULENAME}.SETTINGS.autoRollDamageNotifyOnSpellCardNotFound.hint`,
