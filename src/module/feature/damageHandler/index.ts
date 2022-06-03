@@ -82,9 +82,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 const actionIds = actionId.match(/Item.(\w+)/);
                 let action: any;
                 if (flags?.context?.isReroll) {
-                    const match = message.data.flavor?.match(
-                        'Result: <span .*? class="(.*?)"'
-                    );
+                    const match = message.data.flavor?.match('Result: <span .*? class="(.*?)"');
                     if (match && match[1]) {
                         degreeOfSuccess = match[1];
                     }
