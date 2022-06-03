@@ -2,14 +2,13 @@ import { shouldIHandleThisMessage } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
-import { SpellPF2e } from "@item";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
+import { SpellPF2e } from "@item";
 
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 5;
     if (
-        !message.isDamageRoll &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow")),
@@ -30,19 +29,21 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
         const rollForNonAttackSpell: boolean =
             autoRollDamageForSpellNotAnAttackEnabled && rollType === undefined && flags.casting !== null;
 
+        const actionId = <string>flags?.origin?.uuid;
+        const spell = actionId ? <SpellPF2e>await fromUuid(actionId) : null;
+
         if (
+            spell &&
             messageActor &&
             messageToken &&
             (rollForNonAttackSpell ||
                 (rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
                 (rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
         ) {
-            const actionId = <string>flags?.origin?.uuid;
-            const spell = <SpellPF2e>await fromUuid(actionId);
             let degreeOfSuccess = flags.context?.outcome ?? "";
             if (
                 rollType === "spell-attack-roll" ||
-                (!spell.traits.has("attack") &&
+                (!spell?.traits.has("attack") &&
                     rollForNonAttackSpell &&
                     Object.keys(spell.data?.data?.damage?.value).length !== 0)
             ) {

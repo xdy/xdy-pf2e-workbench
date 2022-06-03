@@ -66,6 +66,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
             }
 
             if (
+                !message.isDamageRoll &&
                 game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
                 (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
                     game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
@@ -287,19 +288,64 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
-        Hooks.on("renderActorSheet", (_sheet, $html: JQuery) => {
-            $html.find(".item-list").each((i, e) => {
-                $(e)
-                    .find(".list-row")
-                    .each((i, e) => {
-                        const $e = $(e);
-                        const rarity = $e.attr("data-item-rarity");
-                        if (rarity) {
-                            $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
-                        }
-                    });
-            });
+    if (
+        game.settings.get(MODULENAME, "playerItemsRarityColour") ||
+        game.settings.get(MODULENAME, "addGmRKButtonToNpc")
+    ) {
+        Hooks.on("renderActorSheet", (sheet: ActorSheet<ActorPF2e, ItemPF2e>, $html: JQuery) => {
+            if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
+                $html.find(".item-list").each((i, e) => {
+                    $(e)
+                        .find(".list-row")
+                        .each((i, e) => {
+                            const $e = $(e);
+                            const rarity = $e.attr("data-item-rarity");
+                            if (rarity) {
+                                $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
+                            }
+                        });
+                });
+            }
+            if (game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
+                $html.find(".recall-knowledge").each((i, e) => {
+                    const token = sheet.token;
+                    const actor = token?.actor;
+                    $(e)
+                        .find(".section-body")
+                        .each((i, e) => {
+                            const $e = $(e);
+                            const dcs = <string>$e.find(".identification-skills")[0].title;
+                            const skills = $e.find("ul");
+                            for (const s of skills.text().trim().split("\n")) {
+                                const skill = s.toLowerCase().trim();
+                                const a = `<button class="gm-recall-knowledge-${skill}" data-skill="${skill}" data-dcs="${dcs}" data-token="${token?.id}">Recall Knowledge: ${skill}</button>`;
+                                $e.append(a);
+                                const b = `.gm-recall-knowledge-${skill}`;
+                                $html.find(b).on("click", async (e) => {
+                                    const attr = <string>$(e.currentTarget).attr("data-token");
+                                    const token = game?.scenes?.active?.tokens?.get(attr);
+                                    const skill = $(e.currentTarget).attr("data-skill");
+                                    const dcs = (<string>$(e.currentTarget).attr("data-dcs")).split("/") || [];
+                                    if (dcs && dcs.length >= 3) {
+                                        let content = `To Recall Knowledge about ${token?.name}, roll:<br >1st: @Check[type:${skill}|dc:${dcs[0]}|traits:secret,action:recall-knowledge]<br>2nd: @Check[type:${skill}|dc:${dcs[1]}|traits:secret,action:recall-knowledge]<br>3rd: @Check[type:${skill}|dc:${dcs[2]}|traits:secret,action:recall-knowledge]`;
+                                        if (dcs.length > 3) {
+                                            content += `<br>4th: @Check[type:${skill}|dc:${dcs[3]}|traits:secret,action:recall-knowledge]`;
+                                        }
+                                        await ChatMessage.create({
+                                            content: game.i18n.format(TextEditor.enrichHTML(content)),
+                                            speaker: ChatMessage.getSpeaker({ token: token }),
+                                            whisper:
+                                                game.settings.get("pf2e", "metagame.secretDamage") &&
+                                                !actor?.hasPlayerOwner
+                                                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                                                    : [],
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                });
+            }
         });
     }
 
