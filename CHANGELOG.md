@@ -1,3 +1,10 @@
+## [3.4.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.0...v3.4.1) (2022-06-03)
+
+
+### Bug Fixes
+
+* Recall Knowledge chat message should always be public. ([1588175](https://github.com/xdy/xdy-pf2e-workbench/commit/1588175b4681ae4480e795067385dabd9bc5d6cd))
+
 # [3.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.3.2...v3.4.0) (2022-06-03)
 
 
