@@ -334,11 +334,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                                         await ChatMessage.create({
                                             content: game.i18n.format(TextEditor.enrichHTML(content)),
                                             speaker: ChatMessage.getSpeaker({ token: token }),
-                                            whisper:
-                                                game.settings.get("pf2e", "metagame.secretDamage") &&
-                                                !actor?.hasPlayerOwner
-                                                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                                                    : [],
                                         });
                                     }
                                 });
