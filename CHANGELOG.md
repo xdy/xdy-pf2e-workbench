@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.3.2...v3.4.0) (2022-06-03)
+
+
+### Features
+
+* Option to add Recall Knowledge button to an npc:s Recall Knowledge section. This button sends skill checks for first, second, third and fourth attempt at using the Recall Knowledge skill(s) for the npc to the chat. Note that lores will need to be handled manually. Also note that the Recall Knowledge chat messages show the *token* name to the players, so if you consider that a secret, do not use this feature. (I.e. this feature is intended for use with npc mystification.) ([53e12a6](https://github.com/xdy/xdy-pf2e-workbench/commit/53e12a643772647ec5cc8e750899d6209ad251a6))
+
 ## [3.3.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.3.1...v3.3.2) (2022-06-03)
 
 
