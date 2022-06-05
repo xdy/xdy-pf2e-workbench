@@ -23,6 +23,16 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "addGmRKButtonToNpcHideNpcName", {
+        name: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.hideNpcName`,
+        hint: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.hideNpcName`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "abpVariantAllowItemBonuses", {
         name: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.name`,
         hint: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.hint`,

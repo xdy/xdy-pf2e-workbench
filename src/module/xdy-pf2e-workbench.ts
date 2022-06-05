@@ -341,14 +341,18 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                                     const token = game?.scenes?.active?.tokens?.get(attr);
                                     const skill = $(e.currentTarget).attr("data-skill");
                                     const dcs = (<string>$(e.currentTarget).attr("data-dcs")).split("/") || [];
-                                    let content = `To Recall Knowledge about ${token?.name}, roll:`;
+
+                                    const name = game.settings.get(MODULENAME, "addGmRKButtonToNpcHideNpcName")
+                                        ? ""
+                                        : ` about ${token?.name}`;
+                                    let content = `To Recall Knowledge${name}, roll:`;
+                                    content += "<br>@Check[type:occultism|dc:32|name:Weaken the images]<br>";
 
                                     for (let i = 0; i < dcs.length; i++) {
                                         content += `<br>${i + 1}${nth(i + 1)}: @Check[type:${skill}|dc:${
                                             dcs[i]
                                         }|traits:secret,action:recall-knowledge]`;
                                     }
-
                                     await ChatMessage.create({
                                         content: game.i18n.format(TextEditor.enrichHTML(content)),
                                         speaker: ChatMessage.getSpeaker({ token: token }),
