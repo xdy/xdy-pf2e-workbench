@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.5...v3.5.0) (2022-06-05)
+
+
+### Features
+
+* Adds option to either expand all damage cards, or only expand new cards (if the latter, on a refresh the last three messages are expanded if they are damage cards). ([b43019d](https://github.com/xdy/xdy-pf2e-workbench/commit/b43019d9ecf9b61cb6eb08df7c4fbbb76ee3507f)), closes [#273](https://github.com/xdy/xdy-pf2e-workbench/issues/273)
+
 ## [3.4.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.4...v3.4.5) (2022-06-05)
 
 
