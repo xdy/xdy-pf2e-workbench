@@ -121,9 +121,9 @@
         "name": "Automatically increase Dying at zero HP.",
         "no": "No",
         "addOne": "Add one",
-        "addWoundedLevel": "Add Wounded level",
-        "addOneForCharacters": "Add one, for Characters only",
-        "addWoundedLevelForCharacters": "Add Wounded level, for Characters only"
+        "addWoundedLevel": "Add 1 + Wounded level",
+        "addOneForCharacters": "Add one, for characters only",
+        "addWoundedLevelForCharacters": "Add 1 + Wounded level, for Characters only"
       },
       "giveWoundedWhenDyingRemoved": {
         "hint": "Client setting to automatically give Wounded condition when Dying condition is removed.",
