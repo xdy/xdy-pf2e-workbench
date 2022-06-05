@@ -1,3 +1,10 @@
+## [3.4.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.3...v3.4.4) (2022-06-05)
+
+
+### Bug Fixes
+
+* Fixed several bugs with autorolling damage. Fixes bug with recall knowledge button on npcs not always working. ([6d137f6](https://github.com/xdy/xdy-pf2e-workbench/commit/6d137f634be686c83b0b6e53cf3e5f0dde0ad74a))
+
 ## [3.4.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.2...v3.4.3) (2022-06-05)
 
 
