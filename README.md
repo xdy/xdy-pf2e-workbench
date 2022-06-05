@@ -36,7 +36,8 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to automatically increase Wounded when Dying is removed (handles the feats [Bounce Back](https://2e.aonprd.com/Feats.aspx?ID=1441) and [Numb to Death](https://2e.aonprd.com/Feats.aspx?ID=1182)
 * Option to hold control or shift to quickly increase/decrease item quantities by 5 or 10 (from https://github.com/Djphoenix719/FVTT-PF2EToolbox)
 * Option to colorize the items per rarity on the player sheet like on the npc sheet.
-* Option to add a button to all npcs that sends the relevant Recall Knowledge checks to chat (for skills only, lores not handled yet).
+* Option to add a button to all npcs that sends the relevant Recall Knowledge checks to chat (for skills only, lores not handled yet). Has suboption to hide the npc token name on the chat card.
+* Option to either expand all damage cards, or only expand new cards. If the latter, on a refresh the last three messages are expanded if they are damage cards.
 
 Experimental features:
 None right now. (Though some feature settings are experimental.)
