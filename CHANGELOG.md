@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.5.0...v3.6.0) (2022-06-05)
+
+
+### Features
+
+* Make it possible to hide the npc token name on npc recall knowledge buttons. ([9399b57](https://github.com/xdy/xdy-pf2e-workbench/commit/9399b57a551315d2fe92c21beffc50cced235ef1))
+
 # [3.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.5...v3.5.0) (2022-06-05)
 
 
