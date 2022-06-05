@@ -22,7 +22,7 @@ import { playAnimationAndSound } from "./feature/sfxHandler";
 import { reminderBreathWeapon } from "./feature/reminderEffects";
 import { toggleSettings } from "./feature/settingsHandler";
 import { increaseDyingOnZeroHP, reduceFrightened } from "./feature/conditionHandler";
-import { chatCardCollapse } from "./feature/qolHandler";
+import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
 import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./feature/heroPointHandler";
 import { nth, shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
@@ -88,6 +88,9 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     if (
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
+        game.settings.get(MODULENAME, "autoExpandDamageRolls") === "collapsedAll" ||
+        game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
+        game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
         game.settings.get(MODULENAME, "applyPersistentHealing") ||
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
@@ -105,7 +108,15 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                 game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
                 game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
             ) {
-                chatCardCollapse(html);
+                chatCardDescriptionCollapse(html);
+            }
+
+            if (
+                !!message.data.flags.pf2e.damageRoll &&
+                (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
+                    game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew")
+            ) {
+                damageCardExpand(html);
             }
         });
     }

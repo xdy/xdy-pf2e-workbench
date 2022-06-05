@@ -506,6 +506,21 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "autoExpandDamageRolls", {
+        name: `${MODULENAME}.SETTINGS.autoExpandDamageRolls.name`,
+        hint: `${MODULENAME}.SETTINGS.autoExpandDamageRolls.hint`,
+        scope: "client",
+        config: true,
+        default: "collapsedDefault",
+        type: String,
+        choices: {
+            collapsedAll: game.i18n.localize(`${MODULENAME}.SETTINGS.autoExpandDamageRolls.collapsedAll`),
+            expandedAll: game.i18n.localize(`${MODULENAME}.SETTINGS.autoExpandDamageRolls.expandedAll`),
+            expandedNew: game.i18n.localize(`${MODULENAME}.SETTINGS.autoExpandDamageRolls.expandedNew`),
+        },
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "toggleUndetectedWithVisibilityState", {
         name: `${MODULENAME}.SETTINGS.toggleUndetectedWithVisibilityState.name`,
         hint: `${MODULENAME}.SETTINGS.toggleUndetectedWithVisibilityState.hint`,

@@ -88,8 +88,15 @@
         "hint": "Client setting to automatically collapse item chat card content.",
         "name": "Automatically collapse item chat card content.",
         "noCollapse": "Never collapse",
-        "collapsedDefault": "Collapsed by default, click title to expand.",
+        "collapsedDefault": "collapsedAll by default, click title to expand.",
         "nonCollapsedDefault": "Expanded by default, click title to collapse."
+      },
+      "autoExpandDamageRolls": {
+        "hint": "Client setting to automatically expand damage rolls (foundry default is all damage rolls collapsed). Click dice roll to expand/collapse.",
+        "name": "Automatically expand damage rolls.",
+        "collapsedAll": "All damage rolls collapse.",
+        "expandedAll": "All damage rolls expand.",
+        "expandedNew": "New damage rolls expand (also checks last three messages on refresh)."
       },
       "autoRollDamageAllow": {
         "hint": "World setting for who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options.",

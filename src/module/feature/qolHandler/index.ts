@@ -1,6 +1,6 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 
-export function chatCardCollapse(html: JQuery) {
+export function chatCardDescriptionCollapse(html: JQuery) {
     if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
         html.find(".card-content").hide();
     }
@@ -14,4 +14,18 @@ export function chatCardCollapse(html: JQuery) {
             }
         }
     });
+}
+
+export function damageCardExpand(html: JQuery) {
+    if (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll") {
+        html.find(".dice-tooltip").css("display", "block");
+    }
+
+    if (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew") {
+        for (let i = 1; i <= Math.min(3, game.messages.size); i++) {
+            if ((game.messages?.contents[game.messages.size - i]?.id || null) === (html.data("message-id") || null)) {
+                html.find(".dice-tooltip").css("display", "block");
+            }
+        }
+    }
 }
