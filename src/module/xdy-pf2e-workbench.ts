@@ -346,15 +346,17 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                                         ? ""
                                         : ` about ${token?.name}`;
                                     let content = `To Recall Knowledge${name}, roll:`;
-                                    content += "<br>@Check[type:occultism|dc:32|name:Weaken the images]<br>";
 
                                     for (let i = 0; i < dcs.length; i++) {
                                         content += `<br>${i + 1}${nth(i + 1)}: @Check[type:${skill}|dc:${
                                             dcs[i]
                                         }|traits:secret,action:recall-knowledge]`;
+                                        content += game.settings.get(MODULENAME, "addGmRKButtonToNpcHideSkill")
+                                            ? `{Recall Knowledge} `
+                                            : " ";
                                     }
                                     await ChatMessage.create({
-                                        content: game.i18n.format(TextEditor.enrichHTML(content)),
+                                        content: TextEditor.enrichHTML(content),
                                         speaker: ChatMessage.getSpeaker({ token: token }),
                                     });
                                 });

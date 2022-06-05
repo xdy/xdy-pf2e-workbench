@@ -33,6 +33,16 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "addGmRKButtonToNpcHideSkill", {
+        name: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.hideSkill`,
+        hint: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.hideSkill`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "abpVariantAllowItemBonuses", {
         name: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.name`,
         hint: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.hint`,
