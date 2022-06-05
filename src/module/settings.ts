@@ -6,7 +6,7 @@ export let mystifyModifierKey: string;
 
 function debouncedReload() {
     foundry.utils.debounce(() => {
-        location.reload();
+        window.location.reload();
     }, 100);
 }
 
