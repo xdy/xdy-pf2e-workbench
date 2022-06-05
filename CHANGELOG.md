@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.6.0...v3.7.0) (2022-06-05)
+
+
+### Features
+
+* Adds option to npc Recall Knowledge button to hide skill used on chat message. Also, removed debug printout. ([265cbfa](https://github.com/xdy/xdy-pf2e-workbench/commit/265cbfa0a52b796bdd34e38a7d4efe2c82c6659f)), closes [#272](https://github.com/xdy/xdy-pf2e-workbench/issues/272)
+
 # [3.6.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.5.0...v3.6.0) (2022-06-05)
 
 
