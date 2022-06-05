@@ -1,3 +1,10 @@
+## [3.4.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.4...v3.4.5) (2022-06-05)
+
+
+### Bug Fixes
+
+* Reduced need for reloads after changing settings, thanks @Dorako! ([d15d0ba](https://github.com/xdy/xdy-pf2e-workbench/commit/d15d0ba239ff2312d1e8f0fa70a7cca47b32e491))
+
 ## [3.4.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.3...v3.4.4) (2022-06-05)
 
 
