@@ -15,44 +15,41 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow"))
         )
     ) {
-        const autoRollDamageForStrikeEnabled = game.settings.get(MODULENAME, "autoRollDamageForStrike");
-        const autoRollDamageForSpellAttackEnabled = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
-        const autoRollDamageForSpellNotAnAttackEnabled = <boolean>(
-            game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack")
-        );
-        const messageActor: ActorPF2e = <ActorPF2e>game.actors?.get(<string>message.data.speaker.actor);
-        const messageToken: TokenDocumentPF2e = <TokenDocumentPF2e>(
-            canvas?.scene?.tokens.get(<string>message.data.speaker.token)
-        );
         const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
-        const rollType = flags.context?.type;
-        const rollForNonAttackSpell: boolean =
-            autoRollDamageForSpellNotAnAttackEnabled && rollType === undefined && flags.casting !== null;
-
         const actionId = <string>flags?.origin?.uuid;
-        const spell = actionId ? <SpellPF2e>await fromUuid(actionId) : null;
+        //Exit early if no actionId is found.
+        if (actionId) {
+            const autoRollDamageForStrike = game.settings.get(MODULENAME, "autoRollDamageForStrike");
+            const autoRollDamageForSpellAttack = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
+            const autoRollDamageForSpellNotAnAttack = <boolean>(
+                game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack")
+            );
+            const messageActor: ActorPF2e = <ActorPF2e>game.actors?.get(<string>message.data.speaker.actor);
+            const messageToken: TokenDocumentPF2e = <TokenDocumentPF2e>(
+                canvas?.scene?.tokens.get(<string>message.data.speaker.token)
+            );
+            const rollType = flags.context?.type;
 
-        if (
-            messageActor &&
-            messageToken &&
-            ((spell !== null && rollForNonAttackSpell) ||
-                (rollType === "attack-roll" && autoRollDamageForStrikeEnabled) ||
-                (spell !== null && rollType === "spell-attack-roll" && autoRollDamageForSpellAttackEnabled))
-        ) {
-            let degreeOfSuccess = flags.context?.outcome ?? "";
-            if (
+            const spell: SpellPF2e | null = actionId ? await fromUuid(actionId) : null;
+
+            const rollForNonAttackSpell =
+                autoRollDamageForSpellNotAnAttack &&
+                rollType === undefined &&
+                flags.casting !== null &&
                 spell !== null &&
-                (rollType === "spell-attack-roll" ||
-                    (!spell?.traits.has("attack") &&
-                        rollForNonAttackSpell &&
-                        Object.keys(spell.data?.data?.damage?.value).length !== 0))
-            ) {
+                Object.keys(spell.data?.data?.damage?.value).length !== 0 &&
+                !spell?.traits.has("attack");
+
+            const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
+            const rollForAttackSpell =
+                spell !== null && rollType === "spell-attack-roll" && autoRollDamageForSpellAttack;
+            let degreeOfSuccess = flags.context?.outcome ?? "";
+            if (messageActor && messageToken && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
                 if (
-                    degreeOfSuccess === "success" ||
-                    degreeOfSuccess === "criticalSuccess" ||
-                    (!spell.traits.has("attack") && rollForNonAttackSpell)
+                    rollForNonAttackSpell ||
+                    (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
                 ) {
-                    let spellLevel = spell.data.data.level;
+                    let spellLevel = spell?.data.data.level;
                     let levelFromChatCard = false;
                     const chatLength = game.messages?.contents.length ?? 0;
                     for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
@@ -73,7 +70,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     ) {
                         ui.notifications.info(
                             game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
-                                spell: spell.data.name,
+                                spell: spell?.data.name,
                             })
                         );
                     }
@@ -81,7 +78,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     //Until spell level flags are added to attack rolls it is the best I could come up with.
                     //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
                     //@ts-ignore
-                    spell.rollDamage({
+                    spell?.rollDamage({
                         currentTarget: {
                             closest: () => {
                                 // @ts-ignore Wtf? How to make a number into a OneToTen?
@@ -89,29 +86,29 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             },
                         },
                     });
-                }
-            } else if (rollType === "attack-roll") {
-                const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
-                const actions: any =
-                    // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
-                    messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
-                    // @ts-ignore
-                    messageActor?.data.data?.actions;
-                const actionIds = actionId.match(/Item.(\w+)/);
-                let action: any;
-                if (flags?.context?.isReroll) {
-                    const match = message.data.flavor?.match('Result: <span .*? class="(.*?)"');
-                    if (match && match[1]) {
-                        degreeOfSuccess = match[1];
+                } else if (rollForStrike) {
+                    const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
+                    const actions: any =
+                        // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
+                        messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
+                        // @ts-ignore
+                        messageActor?.data.data?.actions;
+                    const actionIds = actionId.match(/Item.(\w+)/);
+                    let action: any;
+                    if (flags?.context?.isReroll) {
+                        const match = message.data.flavor?.match('Result: <span .*? class="(.*?)"');
+                        if (match && match[1]) {
+                            degreeOfSuccess = match[1];
+                        }
                     }
-                }
 
-                if (actionIds && actionIds[1]) {
-                    action = getActionFromMessage(actions, actionIds, message);
-                    if (degreeOfSuccess === "success" || degreeOfSuccess === 2) {
-                        action?.damage({ options: rollOptions });
-                    } else if (degreeOfSuccess === "criticalSuccess" || degreeOfSuccess === 3) {
-                        action?.critical({ options: rollOptions });
+                    if (actionIds && actionIds[1]) {
+                        action = getActionFromMessage(actions, actionIds, message);
+                        if (degreeOfSuccess === "success" || degreeOfSuccess === 2) {
+                            action?.damage({ options: rollOptions });
+                        } else if (degreeOfSuccess === "criticalSuccess" || degreeOfSuccess === 3) {
+                            action?.critical({ options: rollOptions });
+                        }
                     }
                 }
             }

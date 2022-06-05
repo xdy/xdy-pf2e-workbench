@@ -20,3 +20,7 @@ export function shouldIHandleThisMessage(message: ChatMessagePF2e, playerConditi
     const amIMessageSender = userId === game.user?.id;
     return shouldIHandleThis(userId, playerCondition, gmCondition, amIMessageSender);
 }
+
+export function nth(n) {
+    return ["st", "nd", "rd"][((((n + 90) % 100) - 10) % 10) - 1] || "th";
+}

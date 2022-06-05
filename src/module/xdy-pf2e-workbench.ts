@@ -24,7 +24,7 @@ import { toggleSettings } from "./feature/settingsHandler";
 import { increaseDyingOnZeroHP, reduceFrightened } from "./feature/conditionHandler";
 import { chatCardCollapse } from "./feature/qolHandler";
 import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./feature/heroPointHandler";
-import { shouldIHandleThis } from "./utils";
+import { nth, shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 
@@ -53,34 +53,34 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     }
 
     if (
-        (game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
-            (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
-                game.settings.get(MODULENAME, "autoRollDamageForSpellAttack"))) ||
+        game.settings.get(MODULENAME, "autoRollDamageAllow") ||
+        game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
+        game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
         game.settings.get(MODULENAME, "automatedAnimationOn") ||
         game.settings.get(MODULENAME, "applyPersistentDamage") ||
         game.settings.get(MODULENAME, "reminderBreathWeapon")
     ) {
-        Hooks.on("createChatMessage", async (message: ChatMessagePF2e) => {
-            if (game.user.isGM && game.settings.get(MODULENAME, "automatedAnimationOn")) {
-                await playAnimationAndSound(message);
-            }
-
+        Hooks.on("createChatMessage", (message: ChatMessagePF2e) => {
             if (
                 !message.isDamageRoll &&
-                game.settings.get(MODULENAME, "autoRollDamageForStrike") &&
+                game.settings.get(MODULENAME, "autoRollDamageAllow") &&
                 (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
                     game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
                     game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"))
             ) {
-                await autoRollDamage(message);
+                autoRollDamage(message).then(() => console.log("Workbench autoRollDamage complete"));
             }
 
             if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-                await persistentDamage(message);
+                persistentDamage(message).then(() => console.log("Workbench persistentDamage complete"));
             }
 
             if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
-                await reminderBreathWeapon(message);
+                reminderBreathWeapon(message).then(() => console.log("Workbench reminderBreathWeapon complete"));
+            }
+
+            if (game.user.isGM && game.settings.get(MODULENAME, "automatedAnimationOn")) {
+                playAnimationAndSound(message).then(() => console.log("Workbench playAnimationAndSound complete"));
             }
         });
     }
@@ -92,13 +92,13 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
-        Hooks.on("renderChatMessage", async (message: ChatMessagePF2e, html: JQuery) => {
+        Hooks.on("renderChatMessage", (message: ChatMessagePF2e, html: JQuery) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
                 mangleChatMessage(message, html);
             }
 
             if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
-                await persistentHealing(message);
+                persistentHealing(message).then(() => console.log("Workbench persistentHealing complete"));
             }
 
             if (
@@ -187,9 +187,9 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     }
 
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-        Hooks.on("pf2e.endTurn", async (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
+        Hooks.on("pf2e.endTurn", (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
             if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-                await reduceFrightened(combatant);
+                reduceFrightened(combatant).then(() => console.log("Workbench reduceFrightened complete"));
             }
         });
     }
@@ -259,11 +259,15 @@ Hooks.once("init", async (actor: ActorPF2e) => {
             const hp = actor.data.data.attributes.hp?.value || 0;
             const updateClone = deepClone(update);
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
-                await moveOnZeroHP(actor, updateClone, game.combat, hp);
+                moveOnZeroHP(actor, updateClone, game.combat, hp).then(() =>
+                    console.log("Workbench moveOnZeroHP complete")
+                );
             }
 
             if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
-                return await increaseDyingOnZeroHP(actor, updateClone, hp);
+                increaseDyingOnZeroHP(actor, updateClone, hp).then(() =>
+                    console.log("Workbench increaseDyingOnZeroHP complete")
+                );
             }
         });
     }
@@ -283,7 +287,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     if (game.settings.get(MODULENAME, "npcMystifier")) {
         Hooks.on("createToken", async (token: any) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
-                tokenCreateMystification(token);
+                tokenCreateMystification(token).then(() => console.log("Workbench tokenCreateMystification complete"));
             }
         });
     }
@@ -326,16 +330,18 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                                     const token = game?.scenes?.active?.tokens?.get(attr);
                                     const skill = $(e.currentTarget).attr("data-skill");
                                     const dcs = (<string>$(e.currentTarget).attr("data-dcs")).split("/") || [];
-                                    if (dcs && dcs.length >= 3) {
-                                        let content = `To Recall Knowledge about ${token?.name}, roll:<br >1st: @Check[type:${skill}|dc:${dcs[0]}|traits:secret,action:recall-knowledge]<br>2nd: @Check[type:${skill}|dc:${dcs[1]}|traits:secret,action:recall-knowledge]<br>3rd: @Check[type:${skill}|dc:${dcs[2]}|traits:secret,action:recall-knowledge]`;
-                                        if (dcs.length > 3) {
-                                            content += `<br>4th: @Check[type:${skill}|dc:${dcs[3]}|traits:secret,action:recall-knowledge]`;
-                                        }
-                                        await ChatMessage.create({
-                                            content: game.i18n.format(TextEditor.enrichHTML(content)),
-                                            speaker: ChatMessage.getSpeaker({ token: token }),
-                                        });
+                                    let content = `To Recall Knowledge about ${token?.name}, roll:`;
+
+                                    for (let i = 0; i < dcs.length; i++) {
+                                        content += `<br>${i + 1}${nth(i + 1)}: @Check[type:${skill}|dc:${
+                                            dcs[i]
+                                        }|traits:secret,action:recall-knowledge]`;
                                     }
+
+                                    await ChatMessage.create({
+                                        content: game.i18n.format(TextEditor.enrichHTML(content)),
+                                        speaker: ChatMessage.getSpeaker({ token: token }),
+                                    });
                                 });
                             }
                         });
@@ -374,8 +380,10 @@ Hooks.once("ready", async () => {
             let remainingMinutes = calcRemainingMinutes(false);
             if (remainingMinutes > 0 || game.settings.get(MODULENAME, "heroPointHandlerStartTimerOnReady")) {
                 remainingMinutes = calcRemainingMinutes(true);
-                await startTimer(remainingMinutes);
-                await createRemainingTimeMessage(remainingMinutes);
+                startTimer(remainingMinutes).then(() => {
+                    createRemainingTimeMessage(remainingMinutes);
+                    console.log("Workbench tokenCreateMystification complete");
+                });
             }
         }
     }
