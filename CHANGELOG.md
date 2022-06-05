@@ -1,3 +1,10 @@
+## [3.4.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.2...v3.4.3) (2022-06-05)
+
+
+### Bug Fixes
+
+* Better wording in the dropdown for the option to automatically increase dying at zero hp. ([81c23cf](https://github.com/xdy/xdy-pf2e-workbench/commit/81c23cfdb49183e97a0fc9cb6c7556ea08767874))
+
 ## [3.4.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.4.1...v3.4.2) (2022-06-03)
 
 
