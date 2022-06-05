@@ -123,7 +123,7 @@
         "addOne": "Add one",
         "addWoundedLevel": "Add 1 + Wounded level",
         "addOneForCharacters": "Add one, for characters only",
-        "addWoundedLevelForCharacters": "Add 1 + Wounded level, for Characters only"
+        "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters only"
       },
       "giveWoundedWhenDyingRemoved": {
         "hint": "Client setting to automatically give Wounded condition when Dying condition is removed.",
