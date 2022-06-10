@@ -1,3 +1,10 @@
+# [3.9.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.8.0...v3.9.0) (2022-06-10)
+
+
+### Features
+
+* Adds option for a reminder notification on attack strikes and spells without a target. ([c4e422a](https://github.com/xdy/xdy-pf2e-workbench/commit/c4e422a67d6c241581e8476a2319db29bb600ca2)), closes [#281](https://github.com/xdy/xdy-pf2e-workbench/issues/281)
+
 # [3.8.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.7.1...v3.8.0) (2022-06-10)
 
 
