@@ -1,3 +1,10 @@
+# [3.8.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.7.1...v3.8.0) (2022-06-10)
+
+
+### Features
+
+* If the play sounds on strikes feature is on, it now uses the reroll degree of success sound rather than the initial one on a reroll. ([a525199](https://github.com/xdy/xdy-pf2e-workbench/commit/a525199a0416eac6bcd22d36418eb6b637190239)), closes [#284](https://github.com/xdy/xdy-pf2e-workbench/issues/284)
+
 ## [3.7.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.7.0...v3.7.1) (2022-06-09)
 
 
