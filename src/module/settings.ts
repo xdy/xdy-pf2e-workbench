@@ -13,6 +13,16 @@ function debouncedReload() {
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
+    game.settings.register(MODULENAME, "reminderTargeting", {
+        name: `${MODULENAME}.SETTINGS.reminderTargeting.name`,
+        hint: `${MODULENAME}.SETTINGS.reminderTargeting.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "addGmRKButtonToNpc", {
         name: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.name`,
         hint: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.hint`,

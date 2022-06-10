@@ -19,7 +19,6 @@ import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { TokenDocumentPF2e } from "@scene";
 import { playAnimationAndSound } from "./feature/sfxHandler";
-import { reminderBreathWeapon } from "./feature/reminderEffects";
 import { toggleSettings } from "./feature/settingsHandler";
 import { increaseDyingOnZeroHP, reduceFrightened } from "./feature/conditionHandler";
 import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
@@ -27,6 +26,7 @@ import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./
 import { nth, shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
+import { actionsReminder, reminderBreathWeapon, reminderTargeting } from "./feature/reminders";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -58,9 +58,14 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
         game.settings.get(MODULENAME, "automatedAnimationOn") ||
         game.settings.get(MODULENAME, "applyPersistentDamage") ||
-        game.settings.get(MODULENAME, "reminderBreathWeapon")
+        game.settings.get(MODULENAME, "reminderBreathWeapon") ||
+        game.settings.get(MODULENAME, "reminderTargeting")
     ) {
         Hooks.on("createChatMessage", (message: ChatMessagePF2e) => {
+            if (game.settings.get(MODULENAME, "reminderTargeting")) {
+                reminderTargeting(message);
+            }
+
             if (
                 !message.isDamageRoll &&
                 game.settings.get(MODULENAME, "autoRollDamageAllow") &&
@@ -208,48 +213,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     if (game.settings.get(MODULENAME, "actionsReminderAllow")) {
         Hooks.on("pf2e.startTurn", async (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
             if (game.settings.get(MODULENAME, "actionsReminderAllow")) {
-                if (
-                    combatant &&
-                    combatant.actor &&
-                    shouldIHandleThis(
-                        combatant.isOwner ? game.user?.id : null,
-                        ["all", "players"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow")),
-                        ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow"))
-                    )
-                ) {
-                    if (
-                        combatant.actor.hasCondition("stunned") ||
-                        combatant.actor.hasCondition("slowed") ||
-                        combatant.actor.hasCondition("quickened")
-                    ) {
-                        const stunned = combatant.actor.getCondition("stunned")?.value ?? 0;
-                        const slowed = combatant.actor.getCondition("slowed")?.value ?? 0;
-                        const quickened = combatant.actor.hasCondition("quickened") ? 1 : 0;
-                        const maxActions = 3 + quickened;
-                        let autoReduceStunnedMessage = "";
-                        if (stunned && game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")) {
-                            const stunReduction = Math.min(stunned, maxActions);
-                            for (let i = 0; i < stunReduction; i++) {
-                                await combatant.actor?.decreaseCondition("stunned");
-                            }
-                            autoReduceStunnedMessage = `Stunned reduced by ${stunReduction}.<br>`;
-                        }
-                        const actionsMessage = `${autoReduceStunnedMessage}${combatant.token?.name} has ${Math.max(
-                            maxActions - Math.max(stunned, slowed),
-                            0
-                        )} actions remaining.`;
-                        // ui.notifications.info(actionsMessage);
-                        await ChatMessage.create(
-                            {
-                                flavor: actionsMessage,
-                                whisper: !combatant.actor?.hasPlayerOwner
-                                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                                    : [],
-                            },
-                            {}
-                        );
-                    }
-                }
+                actionsReminder(combatant).then(() => console.log("Workbench actionsReminderAllow complete"));
             }
         });
     }

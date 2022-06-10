@@ -16,7 +16,7 @@
         "hint": "World setting to add Recall Knowleged button to NPCs. Currently only for the skill, lores will have to be handled manually.",
         "name": "(World )Add Recall Knowledge button to NPCs.",
         "hideNpcName": "(World) Hide NPC name on Recall Knowledge message.",
-        "hideSkill":  "(World) Hide skill name on Recall Knowledge message."
+        "hideSkill": "(World) Hide skill name on Recall Knowledge message."
       },
       "automatedAnimationOn": {
         "hint": "World setting for using the module automated-animations to play animation and/or sound on a strike miss. Save settings to show/hide additional options.",
@@ -283,6 +283,11 @@
         "postfix": " rounds",
         "defaultName": "Breath",
         "used": "Used "
+      },
+      "reminderTargeting": {
+        "hint": "World setting to show reminder for targeting in combat.",
+        "name": "(World) Targeting reminder",
+        "note": "Please target before you attack."
       },
       "quickQuantities": {
         "hint": "Use shift-click on item quantities to add 5, ctrl-click to add 10.",
