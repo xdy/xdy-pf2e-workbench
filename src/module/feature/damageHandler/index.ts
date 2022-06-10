@@ -1,4 +1,4 @@
-import { shouldIHandleThisMessage } from "../../utils";
+import { degreeOfSuccessWithRerollHandling, shouldIHandleThisMessage } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
@@ -43,7 +43,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
             const rollForAttackSpell =
                 spell !== null && rollType === "spell-attack-roll" && autoRollDamageForSpellAttack;
-            let degreeOfSuccess = flags.context?.outcome ?? "";
+            const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             if (messageActor && messageToken && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
                 if (
                     rollForNonAttackSpell ||
@@ -95,18 +95,12 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         messageActor?.data.data?.actions;
                     const actionIds = actionId.match(/Item.(\w+)/);
                     let action: any;
-                    if (flags?.context?.isReroll) {
-                        const match = message.data.flavor?.match('Result: <span .*? class="(.*?)"');
-                        if (match && match[1]) {
-                            degreeOfSuccess = match[1];
-                        }
-                    }
 
                     if (actionIds && actionIds[1]) {
                         action = getActionFromMessage(actions, actionIds, message);
-                        if (degreeOfSuccess === "success" || degreeOfSuccess === 2) {
+                        if (degreeOfSuccess === "success") {
                             action?.damage({ options: rollOptions });
-                        } else if (degreeOfSuccess === "criticalSuccess" || degreeOfSuccess === 3) {
+                        } else if (degreeOfSuccess === "criticalSuccess") {
                             action?.critical({ options: rollOptions });
                         }
                     }

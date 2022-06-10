@@ -10,7 +10,7 @@
     "SETTINGS": {
       "abpVariantAllowItemBonuses": {
         "hint": "World setting to not disable item bonuses when using ABP.",
-        "name": "(World) not disable item bonuses when using ABP."
+        "name": "(World) Do not disable item bonuses when using ABP."
       },
       "addGmRKButtonToNpc": {
         "hint": "World setting to add Recall Knowleged button to NPCs. Currently only for the skill, lores will have to be handled manually.",

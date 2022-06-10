@@ -1,5 +1,7 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ChatMessagePF2e } from "@module/chat-message";
+import { degreeOfSuccessWithRerollHandling } from "../../utils";
+import { ActorFlagsPF2e } from "@actor/data/base";
 
 declare class AutoAnimations {
     static playAnimation(messageToken: TokenDocument, from: any, item: any, { playOnMiss: boolean });
@@ -7,10 +9,10 @@ declare class AutoAnimations {
 
 export async function playAnimationAndSound(message: ChatMessagePF2e) {
     const messageToken = canvas?.scene?.tokens.get(<string>message.data.speaker.token);
-    const flags = message.data.flags.pf2e;
+    const flags: ActorFlagsPF2e = <ActorFlagsPF2e>message.data.flags.pf2e;
     const rollType = flags.context?.type;
     if (messageToken && rollType === "attack-roll") {
-        const degreeOfSuccess = flags.context?.outcome ?? "";
+        const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
         const pack = game.packs.get("xdy-pf2e-workbench.xdy-pf2e-workbench-items");
         const item = ((await pack?.getDocuments()) ?? []).find(
             (item: any) => item.data.name === "AutoAnimationTemplate"
