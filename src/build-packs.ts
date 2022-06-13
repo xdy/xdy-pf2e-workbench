@@ -69,9 +69,6 @@ for (const folder of folders) {
 
         try {
             const macroName = path.parse(file).name;
-            if (macroName === "Adjust Merchant Prices") {
-                continue;
-            }
             const importMacro = `/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
 async function _executeMacroByName(
     macroName,
@@ -132,6 +129,7 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             );
             map.set("SpellStrike", "systems/pf2e/icons/features/classes/spellstrike.webp");
             map.set("Treat Wounds and Battle Medicine", "systems/pf2e/icons/conditions/wounded.webp");
+            map.set("Versatile Performance", "systems/pf2e/icons/spells/summon-instrument.webp");
             map.set("Use Scroll or Wand", "systems/pf2e/icons/equipment/wands/magic-wands/magic-wand.webp");
             const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
