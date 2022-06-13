@@ -121,6 +121,7 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             map.set("Overdrive", "icons/svg/dice-target.svg");
             map.set("Post Save buttons to chat", "icons/svg/dice-target.svg");
             map.set("QuickSkillActions", "icons/svg/dice-target.svg");
+            map.set("Recall Knowledge", "icons/skills/trades/academics-book-study-runes.webp");
             map.set("Scorching Ray", "systems/pf2e/icons/spells/scorching-ray.webp");
             map.set("Spell DCs by Level", "systems/pf2e/icons/features/classes/conflux-spells.webp");
             map.set(
