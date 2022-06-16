@@ -57,7 +57,7 @@
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
     "lint-staged": "^13.0.1",
-    "mini-css-extract-plugin": "^2.6.0",
+    "mini-css-extract-plugin": "^2.6.1",
     "null-loader": "^4.0.1",
     "pixi.js": "^6.4.2",
     "prettier": "^2.6.2",
