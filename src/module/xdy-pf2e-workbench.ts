@@ -26,7 +26,7 @@ import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./
 import { nth, shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
-import { actionsReminder, reminderBreathWeapon, reminderTargeting } from "./feature/reminders";
+import { actionsReminder, reminderBreathWeapon, reminderIWR, reminderTargeting } from "./feature/reminders";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -66,26 +66,32 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                 reminderTargeting(message);
             }
 
-            if (
-                !message.isDamageRoll &&
-                game.settings.get(MODULENAME, "autoRollDamageAllow") &&
-                (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
-                    game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
-                    game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"))
-            ) {
-                autoRollDamage(message).then(() => console.log("Workbench autoRollDamage complete"));
-            }
+            if (!message.isDamageRoll) {
+                if (
+                    game.settings.get(MODULENAME, "autoRollDamageAllow") &&
+                    (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
+                        game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
+                        game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"))
+                ) {
+                    autoRollDamage(message).then(() => console.log("Workbench autoRollDamage complete"));
+                }
 
-            if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-                persistentDamage(message).then(() => console.log("Workbench persistentDamage complete"));
-            }
+                if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
+                    persistentDamage(message).then(() => console.log("Workbench persistentDamage complete"));
+                }
 
-            if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
-                reminderBreathWeapon(message).then(() => console.log("Workbench reminderBreathWeapon complete"));
-            }
+                if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
+                    reminderBreathWeapon(message).then(() => console.log("Workbench reminderBreathWeapon complete"));
+                }
 
-            if (game.user.isGM && game.settings.get(MODULENAME, "automatedAnimationOn")) {
-                playAnimationAndSound(message).then(() => console.log("Workbench playAnimationAndSound complete"));
+                if (game.user.isGM && game.settings.get(MODULENAME, "automatedAnimationOn")) {
+                    playAnimationAndSound(message).then(() => console.log("Workbench playAnimationAndSound complete"));
+                }
+            } else {
+                if (game.settings.get(MODULENAME, "reminderIWR")) {
+                    reminderIWR(message).then(() => console.log("Workbench reminderIWR complete"));
+                }
+
             }
         });
     }

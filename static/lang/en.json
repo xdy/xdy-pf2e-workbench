@@ -284,6 +284,14 @@
         "defaultName": "Breath",
         "used": "Used "
       },
+      "reminderIWR": {
+        "hint": "World setting to show reminder for IWR when damage is taken.",
+        "name": "(World) IWR reminder",
+        "weakTo": " <strong>Weak</strong> to ",
+        "resistantTo": " <strong>Resistant</strong> to ",
+        "immuneTo": " <strong>Immune</strong> to ",
+        "is": "{name} is"
+      },
       "reminderTargeting": {
         "hint": "World setting to show reminder for targeting in combat.",
         "name": "(World) Targeting reminder",
