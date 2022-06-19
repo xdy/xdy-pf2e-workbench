@@ -1,3 +1,11 @@
+# [3.10.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.9.5...v3.10.0) (2022-06-19)
+
+
+### Features
+
+* Adds option to create an IWR (Immunity, Weakness, Resistance) reminder message after a damage roll against a target with an IWR that matches damage types of the attacking weapon. ([610b3b4](https://github.com/xdy/xdy-pf2e-workbench/commit/610b3b4aaf2a50ec7d5a37253a5026f185f1ee85))
+* Adds option to create an IWR (Immunity, Weakness, Resistance) reminder message after a damage roll against a target with an IWR that matches damage types of the attacking weapon. ([5521c2d](https://github.com/xdy/xdy-pf2e-workbench/commit/5521c2dff79e9dc573bd9b169cac6ed892865f7b)), closes [#274](https://github.com/xdy/xdy-pf2e-workbench/issues/274)
+
 ## [3.9.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.9.4...v3.9.5) (2022-06-18)
 
 
