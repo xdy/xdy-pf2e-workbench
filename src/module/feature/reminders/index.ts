@@ -118,12 +118,12 @@ export async function reminderTargeting(message: ChatMessagePF2e) {
 
 export async function reminderIWR(message: ChatMessagePF2e) {
     if (
+        game.user?.isGM &&
         message.data &&
         message.data.flags &&
         message.user &&
         message.user.targets &&
-        message.user.targets.size >= 1 &&
-        shouldIHandleThisMessage(message, true, true)
+        message.user.targets.size >= 1
     ) {
         const targets = message.user.targets;
         const output: string[] = [];
