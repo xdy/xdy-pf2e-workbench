@@ -38,6 +38,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to colorize the items per rarity on the player sheet like on the npc sheet.
 * Option to add a button to all npcs that sends the relevant Recall Knowledge checks to chat (for skills only, lores not handled yet). Has suboption to hide the npc token name on the chat card.
 * Option to either expand all damage cards, or only expand new cards. If the latter, on a refresh the last three messages are expanded if they are damage cards.
+* Option to create an IWR (Immunity, Weakness, Resistance) reminder message after a damage roll against a target with an IWR that matches damage types of the attacking weapon.
 
 Experimental features:
 None right now. (Though some feature settings are experimental.)
