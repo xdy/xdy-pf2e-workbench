@@ -91,7 +91,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                 if (game.settings.get(MODULENAME, "reminderIWR")) {
                     reminderIWR(message).then(() => console.log("Workbench reminderIWR complete"));
                 }
-
             }
         });
     }
