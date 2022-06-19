@@ -1,3 +1,10 @@
+## [3.10.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.10.0...v3.10.1) (2022-06-19)
+
+
+### Bug Fixes
+
+* Limit IWR to GM for now. ([bc97cf9](https://github.com/xdy/xdy-pf2e-workbench/commit/bc97cf9e0d0cd11235e44ed414e9bf5e8e6113be))
+
 # [3.10.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.9.5...v3.10.0) (2022-06-19)
 
 
