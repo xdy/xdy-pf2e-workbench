@@ -177,9 +177,8 @@ export async function reminderIWR(message: ChatMessagePF2e) {
                             game.i18n.format(`${MODULENAME}.SETTINGS.reminderIWR.is`, {
                                 name: target?.actor?.token?.name || "",
                             }) + output,
-                        whisper: !message.actor?.hasPlayerOwner
-                            ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                            : [],
+                        whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
+                        blind: true,
                     });
                 }
             }
