@@ -16,16 +16,21 @@ export interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData
     detailsTemplate?: () => string;
     item: TItem["data"];
     data: TItem["data"]["data"];
+    isPhysical: boolean;
     user: {
         isGM: boolean;
     };
     enabledRulesUI: boolean;
+    ruleEditing: boolean;
     ruleSelection: {
         selected: string | null;
-        types: string[];
+        types: Record<string, string>;
     };
 }
 export interface PhysicalItemSheetData<TItem extends PhysicalItemPF2e> extends ItemSheetDataPF2e<TItem> {
+    isPhysical: true;
+    basePriceString: string;
+    priceString: string;
     actionTypes: ConfigPF2e["PF2E"]["actionTypes"];
     actionsNumber: ConfigPF2e["PF2E"]["actionsNumber"];
     frequencies: ConfigPF2e["PF2E"]["frequencies"];

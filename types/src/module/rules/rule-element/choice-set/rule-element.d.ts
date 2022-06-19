@@ -1,4 +1,4 @@
-import { RuleElementPF2e, REPreCreateParameters, RuleElementOptions } from "../";
+import { RuleElementPF2e, RuleElementOptions } from "../";
 import { ItemPF2e } from "@item";
 import { ChoiceSetData, ChoiceSetSource } from "./data";
 /**
@@ -15,14 +15,16 @@ declare class ChoiceSetRuleElement extends RuleElementPF2e {
      * Adjust the effect's name and set the targetId from the user's selection, or set the entire rule element to be
      * ignored if no selection was made.
      */
-    preCreate({ ruleSource }: REPreCreateParameters<ChoiceSetSource>): Promise<void>;
+    preCreate({ ruleSource }: RuleElementPF2e.PreCreateParams<ChoiceSetSource>): Promise<void>;
     private setDefaultFlag;
     /**
      * If an array was passed, localize & sort the labels and return. If a string, look it up in CONFIG.PF2E and
      * create an array of choices.
      */
     private inflateChoices;
-    private getChoicesFromPath;
+    private choicesFromPath;
+    private choicesFromOwnedItems;
+    private choicesFromUnarmedAttacks;
     /** Perform an NeDB query against the system feats compendium (or a different one if specified) */
     private queryCompendium;
     /** If this rule element's parent item was granted with a pre-selected choice, the prompt is to be skipped */

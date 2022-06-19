@@ -33,7 +33,7 @@ export declare class ActorSizePF2e {
      * @param size The size to which this size is being compared
      * @param [smallIsMedium] Treat small as medium for both sizes
      */
-    isLargerThan(size: ActorSizePF2e, { smallIsMedium }?: {
+    isLargerThan(size: ActorSizePF2e | Size, { smallIsMedium }?: {
         smallIsMedium?: boolean | undefined;
     }): boolean;
     /**

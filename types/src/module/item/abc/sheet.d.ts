@@ -29,6 +29,7 @@ export declare abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSh
         id: string;
         tabs: TabsOptions[];
         title: string;
+        filters: SearchFilterConfiguration[];
     };
     getData(): Promise<ABCSheetData<TItem>>;
     protected getLocalizedAbilities(traits: {

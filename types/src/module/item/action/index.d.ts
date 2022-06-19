@@ -4,14 +4,13 @@ import { OneToThree } from "@module/data";
 import { UserPF2e } from "@module/user";
 import { ActionCost } from "@item/data/base";
 export declare class ActionItemPF2e extends ItemPF2e {
-    static get schema(): typeof ActionData;
     get actionCost(): ActionCost | null;
     prepareData(): void;
     getChatData(this: Embedded<ActionItemPF2e>, htmlOptions?: EnrichHTMLOptions): {
         properties: string[];
         traits: import("../data").TraitChatData[];
         actionType: {
-            value: "passive" | "action" | "free" | "reaction";
+            value: "passive" | "action" | "reaction" | "free";
         };
         actionCategory: {
             value: string;

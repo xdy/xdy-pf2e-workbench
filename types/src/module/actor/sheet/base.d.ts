@@ -2,13 +2,13 @@
 /// <reference types="tooltipster" />
 import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
-import { Coins } from "@item/treasure/helpers";
 import { BasicConstructorOptions, TagSelectorType, TagSelectorOptions } from "@system/tag-selector";
 import type { ActorPF2e } from "../base";
-import { ActorSheetDataPF2e, CoinageSummary } from "./data-types";
+import { ActorSheetDataPF2e, CoinageSummary, SheetInventory } from "./data-types";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data";
 import { FolderPF2e } from "@module/folder";
 import { ItemSummaryRendererPF2e } from "./item-summary-renderer";
+import { Coins } from "@item/physical/data";
 /**
  * Extend the basic ActorSheet class to do all the PF2e things!
  * This sheet is an Abstract layer which is not used.
@@ -22,6 +22,7 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     get isLootSheet(): boolean;
     getData(options?: ActorSheetOptions): Promise<ActorSheetDataPF2e<TActor>>;
     protected abstract prepareItems(sheetData: ActorSheetDataPF2e<TActor>): void;
+    protected prepareInventory(): SheetInventory;
     protected findActiveList(): JQuery<HTMLElement>;
     protected static coinsToSheetData(coins: Coins): CoinageSummary;
     /** Save any open tinyMCE editor before closing */
@@ -29,6 +30,8 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
         force?: boolean;
     }): Promise<void>;
     activateListeners($html: JQuery): void;
+    /** Opens the spell preparation sheet, but only if its a prepared entry */
+    openSpellPreparationSheet(entryId: string): void;
     onClickDeleteItem(event: JQuery.TriggeredEvent): Promise<void>;
     private onClickBrowseEquipmentCompendia;
     protected _canDragStart(selector: string): boolean;
@@ -52,6 +55,8 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     moveItemBetweenActors(event: ElementDragEvent, sourceActorId: string, sourceTokenId: string, targetActorId: string, targetTokenId: string, itemId: string): Promise<void>;
     /** Post the item's summary as a chat message */
     private onClickItemToChat;
+    /** Attempt to repair the item */
+    private repairItem;
     /** Opens an item container */
     private toggleContainer;
     /** Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset */

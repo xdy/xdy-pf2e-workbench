@@ -4,7 +4,6 @@ import { Rarity } from "@module/data";
 import { SaveType } from "@actor/data";
 import { Statistic } from "@system/statistic";
 export declare class HazardPF2e extends ActorPF2e {
-    static get schema(): typeof HazardData;
     get rarity(): Rarity;
     get isComplex(): boolean;
     /** Minimal check since the disabled status of a hazard isn't logged */

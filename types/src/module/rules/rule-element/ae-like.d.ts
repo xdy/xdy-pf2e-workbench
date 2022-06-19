@@ -6,6 +6,11 @@ import { RuleElementPF2e, RuleElementSource, RuleElementData, RuleElementOptions
  */
 declare class AELikeRuleElement extends RuleElementPF2e {
     static CHANGE_MODES: string[];
+    /**
+     * Pattern to match data.skills.${longForm} paths for replacement
+     * Temporary solution until skill data is represented in long form
+     */
+    static SKILL_LONG_FORM_PATH: RegExp;
     constructor(data: AELikeSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     protected validateData(): void;
     get path(): string;

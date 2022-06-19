@@ -18,9 +18,7 @@ export declare class CraftingEntry implements CraftingEntryData {
     maxItemLevel: number;
     constructor(parentActor: CharacterPF2e, knownFormulas: CraftingFormula[], data: CraftingEntryData);
     get formulas(): (PreparedFormula | null)[];
-    get formulasByLevel(): {
-        [k: string]: PreparedFormula[];
-    };
+    get formulasByLevel(): Record<string, PreparedFormula[]>;
     get reagentCost(): number;
     static isValid(data?: Partial<CraftingEntry>): data is CraftingEntry;
     prepareFormula(formula: CraftingFormula): Promise<void>;
@@ -30,6 +28,7 @@ export declare class CraftingEntry implements CraftingEntryData {
     unprepareFormula(index: number, itemUUID: string): Promise<void>;
     increaseFormulaQuantity(index: number, itemUUID: string): Promise<void>;
     decreaseFormulaQuantity(index: number, itemUUID: string): Promise<void>;
+    setFormulaQuantity(index: number, itemUUID: string, quantity: number): Promise<void>;
     toggleFormulaExpended(index: number, itemUUID: string): Promise<void>;
     toggleSignatureItem(index: number, itemUUID: string): Promise<void>;
     updateActorEntryFormulas(): Promise<void>;

@@ -320,6 +320,22 @@ declare global {
          * have their vertical scroll positions preserved during a re-render.
          */
         scrollY: string[];
+        /** filters An array of {@link SearchFilter} configuration objects. */
+        filters: SearchFilterConfiguration[];
+    }
+
+    /** Options which customize the behavior of the filter */
+    interface SearchFilterConfiguration {
+        /** The CSS selector used to target the text input element. */
+        inputSelector: string;
+        /** The CSS selector used to target the content container for these tabs. */
+        contentSelector: string;
+        /** A callback function which executes when the filter changes. */
+        callback?: Function;
+        /** The initial value of the search query. */
+        initial?: string;
+        /** The number of milliseconds to wait for text input before processing. */
+        delay?: number;
     }
 
     interface ApplicationHeaderButton {
@@ -345,7 +361,7 @@ declare global {
         /** A context-providing string which suggests what event triggered the render */
         renderContext?: string;
         /** The data change which motivated the render request */
-        renderData?: any;
+        renderData?: Record<string, unknown>;
     }
 
     interface ApplicationPosition {

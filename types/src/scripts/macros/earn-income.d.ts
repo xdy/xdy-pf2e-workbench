@@ -2,13 +2,11 @@
  * Implementation of Earn Income rules on https://2e.aonprd.com/Skills.aspx?ID=2&General=true
  */
 import { ProficiencyRank } from "@item/data";
-import { Coins } from "@item/treasure/helpers";
+import { Coins } from "@item/physical/data";
 import { DCOptions } from "@module/dc";
 import { DegreeIndex, RollBrief } from "@system/degree-of-success";
-export declare type TrainedProficiencies = Exclude<ProficiencyRank, "untrained">;
-declare type Rewards = {
-    [rank in TrainedProficiencies]: Partial<Coins>;
-};
+export declare type TrainedProficiency = Exclude<ProficiencyRank, "untrained">;
+declare type Rewards = Record<TrainedProficiency, Coins>;
 declare const earnIncomeTable: {
     0: {
         failure: {
@@ -149,8 +147,8 @@ declare type IncomeForLevel = IncomeLevelMap[IncomeEarnerLevel];
 export declare function getIncomeForLevel(level: number): IncomeForLevel;
 export interface EarnIncomeResult {
     rewards: {
-        perDay: Partial<Coins>;
-        combined: Partial<Coins>;
+        perDay: Coins;
+        combined: Coins;
     };
     degreeOfSuccess: DegreeIndex;
     daysSpentWorking: number;
@@ -159,13 +157,12 @@ export interface EarnIncomeResult {
     roll: number;
 }
 export interface PerDayEarnIncomeResult {
-    rewards: Partial<Coins>;
+    rewards: Coins;
     degreeOfSuccess: DegreeIndex;
 }
 export interface EarnIncomeOptions {
     useLoreAsExperiencedProfessional: boolean;
 }
-export declare function multiplyIncome(income: Partial<Coins>, factor: number): Partial<Coins>;
 /**
  * @param level number between 0 and 20
  * @param days how many days you want to work for
@@ -174,5 +171,5 @@ export declare function multiplyIncome(income: Partial<Coins>, factor: number): 
  * @param earnIncomeOptions feats or items that affect earn income
  * @param dcOptions if dc by level is active
  */
-export declare function earnIncome(level: number, days: number, rollBrief: RollBrief, proficiency: TrainedProficiencies, earnIncomeOptions: EarnIncomeOptions, dcOptions: DCOptions): EarnIncomeResult;
+export declare function earnIncome(level: number, days: number, rollBrief: RollBrief, proficiency: TrainedProficiency, earnIncomeOptions: EarnIncomeOptions, dcOptions: DCOptions): EarnIncomeResult;
 export {};

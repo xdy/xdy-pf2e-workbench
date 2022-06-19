@@ -2,13 +2,12 @@ import { ItemPF2e } from "..";
 import { FeatData, FeatSource, FeatTrait, FeatType } from "./data";
 import { OneToThree } from "@module/data";
 import { UserPF2e } from "@module/user";
-export declare class FeatPF2e extends ItemPF2e {
-    static get schema(): typeof FeatData;
+declare class FeatPF2e extends ItemPF2e {
     get featType(): FeatType;
     get level(): number;
     get traits(): Set<FeatTrait>;
     get actionCost(): {
-        type: "action" | "free" | "reaction";
+        type: "action" | "reaction" | "free";
         value: OneToThree | null;
     } | null;
     get isFeature(): boolean;
@@ -27,6 +26,7 @@ export declare class FeatPF2e extends ItemPF2e {
     /** Warn the owning user(s) if this feat was taken despite some restriction */
     protected _onCreate(data: FeatSource, options: DocumentModificationContext<this>, userId: string): void;
 }
-export interface FeatPF2e {
+interface FeatPF2e {
     readonly data: FeatData;
 }
+export { FeatPF2e };

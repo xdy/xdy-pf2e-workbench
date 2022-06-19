@@ -13,27 +13,11 @@ declare function groupBy<T, R>(array: T[], criterion: (value: T) => R): Map<R, T
  * until the desired length is being reached
  */
 declare function padArray<T>(array: T[], requiredLength: number, padWith: T): T[];
-/**
- * Return a new object that combines all the keys and values from
- * both. If both have the same key, assign the value of the merge function.
- * Example:
- *     // returns {a: 3, b: 5, c: 0}
- *     combineObjects({a: 3, b: 4}, {b: 1, c: 0}, (a, b) => a+b)
- * @param first
- * @param second
- * @param mergeFunction if duplicate keys exist, both values
- * are passed into this function to return the result
- * @return
- */
-declare function combineObjects<V>(first: Record<RecordKey, V>, second: Record<RecordKey, V>, mergeFunction: (first: V, second: V) => V): Record<RecordKey, V>;
-declare type RecordKey = string | number;
 declare type Optional<T> = T | null | undefined;
 /**
  * Returns true if the string is null, undefined or only consists of 1..n spaces
  */
 declare function isBlank(text: Optional<string>): text is null | undefined | "";
-/** Used as a function reference */
-declare function add(x: number, y: number): number;
 /**
  * Adds a + if positive, nothing if 0 or - if negative
  */
@@ -104,7 +88,12 @@ declare function isObject<T extends object>(value: unknown): value is DeepPartia
 declare function isObject<T extends string>(value: unknown): value is {
     [K in T]?: unknown;
 };
+/** Create a copy of a record with its insertion order sorted by label */
+declare function sortLabeledRecord<T extends Record<string, {
+    label: string;
+}>>(record: T): T;
+declare function sortStringRecord<T extends Record<string, string>>(record: T): T;
 /** JSON.stringify with recursive key sorting */
 declare function sortObjByKey(value: unknown): unknown;
 declare function sortedStringify(obj: object): string;
-export { ErrorPF2e, Fraction, add, addSign, applyNTimes, combineObjects, fontAwesomeIcon, getActionGlyph, getActionIcon, groupBy, isBlank, isObject, localizeList, objectHasKey, ordinal, Optional, padArray, parseHTML, setHasElement, sluggify, sortObjByKey, sortedStringify, sum, tupleHasValue, zip, };
+export { ErrorPF2e, Fraction, Optional, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, groupBy, isBlank, isObject, localizeList, objectHasKey, ordinal, padArray, parseHTML, setHasElement, sluggify, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };

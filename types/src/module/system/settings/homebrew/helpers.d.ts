@@ -1,8 +1,7 @@
-import { ConfigPF2eHomebrewRecord } from ".";
-/** User-defined type guard for checking that an object is a well-formed flag of module-provided homebrew elements */
-export declare function isHomebrewFlag(flag: object & {
+/** User-defined type guard for checking that an object is a well-formed flag category of module-provided homebrew elements */
+export declare function isHomebrewFlagCategory(value: object & {
     [K in string]?: unknown;
-}): flag is Record<ConfigPF2eHomebrewRecord, Record<string, string | LabelAndDescription> | undefined>;
+}): value is Record<string, string | LabelAndDescription>;
 interface LabelAndDescription {
     label: string;
     description: string;

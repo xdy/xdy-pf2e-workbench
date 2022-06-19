@@ -1,8 +1,7 @@
 import { UserPF2e } from "@module/user";
 import { ItemPF2e } from "../base";
 import { ConditionData, ConditionSlug } from "./data";
-export declare class ConditionPF2e extends ItemPF2e {
-    static get schema(): typeof ConditionData;
+declare class ConditionPF2e extends ItemPF2e {
     /** Forthcoming universal "effect badge" */
     get badge(): {
         value: number;
@@ -24,10 +23,11 @@ export declare class ConditionPF2e extends ItemPF2e {
     protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: ConditionModificationContext<this>, userId: string): void;
     protected _onDelete(options: DocumentModificationContext<this>, userId: string): void;
 }
-export interface ConditionPF2e {
+interface ConditionPF2e {
     readonly data: ConditionData;
     get slug(): ConditionSlug;
 }
-export interface ConditionModificationContext<T extends ConditionPF2e> extends DocumentModificationContext<T> {
+interface ConditionModificationContext<T extends ConditionPF2e> extends DocumentModificationContext<T> {
     conditionValue?: number | null;
 }
+export { ConditionPF2e, ConditionModificationContext };

@@ -103,10 +103,10 @@ declare class ClientDocument<TDocument extends foundry.abstract.Document = found
     get permission(): PermissionLevel;
 
     /** Lazily obtain a FormApplication instance used to configure this Document, or null if no sheet is available. */
-    get sheet(): FormApplication;
+    get sheet(): FormApplication<this> | null;
 
     /** A Universally Unique Identifier (uuid) for this Document instance. */
-    get uuid(): string;
+    get uuid(): DocumentUUID;
 
     /**
      * A boolean indicator for whether or not the current game User has at least limited visibility for this Document.
@@ -174,13 +174,13 @@ declare class ClientDocument<TDocument extends foundry.abstract.Document = found
 
     protected override _onCreate(
         data: this["data"]["_source"],
-        options: DocumentModificationContext,
+        options: DocumentModificationContext<this>,
         userId: string
     ): void;
 
     protected override _onUpdate(
         changed: DeepPartial<this["data"]["_source"]>,
-        options: DocumentModificationContext,
+        options: DocumentModificationContext<this>,
         userId: string
     ): void;
 

@@ -1,24 +1,23 @@
-import { PhysicalItemPF2e } from "../physical";
-import { RuneValuationData } from "../runes";
-import { BaseWeaponType, WeaponCategory, WeaponData, WeaponGroup, WeaponMaterialData, WeaponRangeIncrement, WeaponTrait } from "./data";
-import { MaterialGradeData } from "@item/physical/materials";
+import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
 import { IdentificationStatus, MystifiedData } from "@item/physical/data";
-import { MeleePF2e } from "@item/melee";
-import { ConsumablePF2e } from "@item";
+import { MaterialGradeData } from "@item/physical/materials";
+import { RuneValuationData } from "../runes";
+import { WeaponData, WeaponMaterialData } from "./data";
+import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types";
 declare class WeaponPF2e extends PhysicalItemPF2e {
-    static get schema(): typeof WeaponData;
     get isEquipped(): boolean;
     isStackableWith(item: PhysicalItemPF2e): boolean;
     get baseType(): BaseWeaponType | null;
     get group(): WeaponGroup | null;
     get category(): WeaponCategory;
     get hands(): "0" | "1" | "1+" | "2";
-    /** The range of this weapon, or null if a melee weapon */
+    /** The range increment of this weapon, or null if a melee weapon */
     get rangeIncrement(): WeaponRangeIncrement | null;
-    get reload(): string | null;
+    get reload(): WeaponReloadTime | null;
     get isSpecific(): boolean;
     get isMelee(): boolean;
     get isRanged(): boolean;
+    get isThrown(): boolean;
     get material(): WeaponMaterialData;
     /** Does this weapon require ammunition in order to make a strike? */
     get requiresAmmo(): boolean;
@@ -39,11 +38,20 @@ declare class WeaponPF2e extends PhysicalItemPF2e {
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;
+    /**
+     * Get the "alternative usages" of a weapon: melee (in the case of combination weapons) and thrown (in the case
+     * of thrown melee weapons)
+     * @param [options.recurse=true] Whether to get the alternative usages of alternative usages
+     */
+    getAltUsages(options?: {
+        recurse?: boolean;
+    }): this[];
+    /** Generate a clone of this thrown melee weapon with its thrown usage overlain, or `null` if not applicable */
+    private toThrownUsage;
     /** Generate a clone of this combination weapon with its melee usage overlain, or `null` if not applicable */
-    toMeleeUsage(this: Embedded<WeaponPF2e>): Embedded<WeaponPF2e> | null;
-    toMeleeUsage(this: WeaponPF2e): WeaponPF2e | null;
+    private toMeleeUsage;
     /** Generate a melee item from this weapon for use by NPCs */
-    toNPCAttack(this: Embedded<WeaponPF2e>): Embedded<MeleePF2e>;
+    toNPCAttacks(this: Embedded<WeaponPF2e>): Embedded<MeleePF2e>[];
 }
 interface WeaponPF2e {
     readonly data: WeaponData;

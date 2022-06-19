@@ -1,8 +1,7 @@
 import { PhysicalItemHitPoints } from "@item/physical/data";
 import { PhysicalItemPF2e } from "../physical";
 import { ArmorCategory, ArmorData, ArmorGroup, BaseArmorType } from "./data";
-export declare class ArmorPF2e extends PhysicalItemPF2e {
-    static get schema(): typeof ArmorData;
+declare class ArmorPF2e extends PhysicalItemPF2e {
     isStackableWith(item: PhysicalItemPF2e): boolean;
     get isShield(): boolean;
     get isArmor(): boolean;
@@ -24,12 +23,13 @@ export declare class ArmorPF2e extends PhysicalItemPF2e {
     getRollOptions(prefix?: string): string[];
     prepareBaseData(): void;
     prepareDerivedData(): void;
-    prepareActorData(this: Embedded<ArmorPF2e>): void;
+    prepareActorData(): void;
     getChatData(this: Embedded<ArmorPF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;
 }
-export interface ArmorPF2e {
+interface ArmorPF2e {
     readonly data: ArmorData;
 }
+export { ArmorPF2e };

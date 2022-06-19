@@ -1,9 +1,8 @@
 import { AlignmentTrait } from "@actor/creature/types";
 import { ClassTrait } from "@item/class/data";
 import { PreciousMaterialType } from "@item/physical/types";
-import { MagicSchool } from "@item/spell/data";
-import { MagicTradition } from "@item/spellcasting-entry/data";
-import { OtherWeaponTag } from "@item/weapon/data";
+import { MagicSchool, MagicTradition } from "@item/spell/types";
+import { OtherWeaponTag } from "@item/weapon/types";
 declare const ancestryTraits: {
     "half-elf": string;
     "half-orc": string;
@@ -535,6 +534,7 @@ declare const weaponTraits: {
     hampering: string;
     healing: string;
     infused: string;
+    inhaled: string;
     injection: string;
     intelligent: string;
     invested: string;
@@ -696,7 +696,6 @@ declare const npcAttackTraits: {
     "reload-1": string;
     "reload-2": string;
     "reload-1-min": string;
-    range: string;
     "range-5": string;
     "range-10": string;
     "range-15": string;
@@ -825,6 +824,7 @@ declare const npcAttackTraits: {
     hampering: string;
     healing: string;
     infused: string;
+    inhaled: string;
     injection: string;
     intelligent: string;
     invested: string;
@@ -1249,7 +1249,6 @@ declare const actionTraits: {
     "reload-1": string;
     "reload-2": string;
     "reload-1-min": string;
-    range: string;
     "range-5": string;
     "range-10": string;
     "range-15": string;
@@ -1378,6 +1377,7 @@ declare const actionTraits: {
     hampering: string;
     healing: string;
     infused: string;
+    inhaled: string;
     injection: string;
     intelligent: string;
     invested: string;
@@ -1534,7 +1534,6 @@ declare const actionTraits: {
     hex: string;
     incapacitation: string;
     incarnate: string;
-    inhaled: string;
     linguistic: string;
     litany: string;
     metamagic: string;

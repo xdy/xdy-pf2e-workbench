@@ -1,25 +1,17 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { ItemPF2e } from "@item/base";
+import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
+import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
 import { CharacterPF2e } from ".";
 import { CreatureSheetPF2e } from "../creature/sheet";
-import { CharacterStrike } from "./data";
 import { CraftingFormula } from "./crafting";
+import { CharacterStrike } from "./data";
 import { CharacterSheetData, CraftingEntriesSheetData } from "./data/sheet";
-import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
-export declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
+declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
     private knownFormulas;
-    static get defaultOptions(): ActorSheetOptions & {
-        classes: string[];
-        width: number;
-        height: number;
-        tabs: {
-            navSelector: string;
-            contentSelector: string;
-            initial: string;
-        }[];
-    };
+    private formulaQuantities;
+    static get defaultOptions(): ActorSheetOptions;
     get template(): string;
     getData(options?: ActorSheetOptions): Promise<CharacterSheetData>;
     /** Organize and classify Items for Character sheets */
@@ -57,15 +49,14 @@ export declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e>
      * @param itemData
      */
     protected _onSortItem(event: ElementDragEvent, itemData: ItemSourcePF2e): Promise<ItemPF2e[]>;
-    /** Get the font-awesome icon used to display a certain level of dying */
+    /** Get the font-awesome icon used to display a certain dying value */
     private getDyingIcon;
-    /**
-     * Get the font-awesome icon used to display a certain level of wounded
-     */
+    /** Get the font-awesome icon used to display a certain wounded value */
     private getWoundedIcon;
     /** Get the font-awesome icon used to display hero points */
     private getHeroPointsIcon;
 }
-export interface CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
+interface CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
     getStrikeFromDOM(target: HTMLElement): CharacterStrike | null;
 }
+export { CharacterSheetPF2e };

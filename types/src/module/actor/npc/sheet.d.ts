@@ -2,10 +2,8 @@
 /// <reference types="tooltipster" />
 import { CreatureSheetPF2e } from "../creature/sheet";
 import { NPCPF2e } from "@actor/index";
-import { ItemDataPF2e } from "@item/data";
-import { SheetInventory } from "../sheet/data-types";
 import { NPCSheetData } from "./types";
-export declare class NPCSheetPF2e extends CreatureSheetPF2e<NPCPF2e> {
+export declare class NPCSheetPF2e<TActor extends NPCPF2e> extends CreatureSheetPF2e<TActor> {
     static get defaultOptions(): ActorSheetOptions;
     /** Show either the actual NPC sheet or a briefened lootable version if the NPC is dead */
     get template(): string;
@@ -16,10 +14,16 @@ export declare class NPCSheetPF2e extends CreatureSheetPF2e<NPCPF2e> {
      * Prepares items in the actor for easier access during sheet rendering.
      * @param sheetData Data from the actor associated to this sheet.
      */
-    protected prepareItems(sheetData: NPCSheetData): void;
+    protected prepareItems(sheetData: NPCSheetData<TActor>): void;
     private getIdentifyCreatureData;
-    getData(): Promise<NPCSheetData>;
+    getData(): Promise<NPCSheetData<TActor>>;
     activateListeners($html: JQuery): void;
+    /** Replace sheet config with a special NPC config form application */
+    protected _getHeaderButtons(): ApplicationHeaderButton[];
+    /**
+     * Shim for {@link DocumentSheet#_onConfigureSheet} that will be replaced in v10 when this class subclasses it.
+     */
+    protected _onConfigureSheet(event: Event): void;
     private prepareAbilities;
     private prepareSize;
     private prepareAlignment;
@@ -37,13 +41,6 @@ export declare class NPCSheetPF2e extends CreatureSheetPF2e<NPCPF2e> {
      * @param sheetData Data of the actor to show in the sheet.
      */
     private prepareSpellcasting;
-    /**
-     * Prepares the equipment list of the actor.
-     * @param sheetData Data of the sheet.
-     */
-    prepareInventory(sheetData: {
-        items: ItemDataPF2e[];
-    }): SheetInventory;
     private get isWeak();
     private get isElite();
     private getSizeLocalizedKey;

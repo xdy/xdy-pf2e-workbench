@@ -4,7 +4,7 @@ import { MartialProficiency } from "@actor/character/data";
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
 import { ProficiencyRank } from "@item/data";
-import { WeaponCategory } from "@item/weapon/data";
+import { WeaponCategory } from "@item/weapon/types";
 import { RawPredicate } from "@system/predication";
 declare class MartialProficiencyRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];

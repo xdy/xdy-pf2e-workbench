@@ -1,5 +1,5 @@
-import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource, RuleElementSynthetics } from "./rule-element";
 import type { ItemPF2e } from "@item";
+import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource, RuleElementSynthetics } from "./rule-element";
 /**
  * @category RuleElement
  */

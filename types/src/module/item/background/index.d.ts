@@ -1,11 +1,11 @@
 import { ABCItemPF2e } from "../abc";
 import { BackgroundData } from "./data";
-export declare class BackgroundPF2e extends ABCItemPF2e {
-    static get schema(): typeof BackgroundData;
+declare class BackgroundPF2e extends ABCItemPF2e {
     /** Set a skill feat granted by a GrantItem RE as one of this background's configured items */
     prepareSiblingData(this: Embedded<BackgroundPF2e>): void;
     prepareActorData(this: Embedded<BackgroundPF2e>): void;
 }
-export interface BackgroundPF2e {
+interface BackgroundPF2e {
     readonly data: BackgroundData;
 }
+export { BackgroundPF2e };

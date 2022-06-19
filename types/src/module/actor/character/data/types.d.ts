@@ -1,34 +1,28 @@
-import { Abilities, CreatureAttributes, BaseCreatureData, BaseCreatureSource, CreatureHitPoints, CreatureSystemData, SaveData, SkillAbbreviation, SkillData, CreatureInitiative, HeldShieldData } from "@actor/creature/data";
-import { AbilityString, ActorFlagsPF2e, ArmorClassData, DexterityModifierCapData, PerceptionData, AbilityBasedStatistic, StrikeData } from "@actor/data/base";
-import { ArmorCategory } from "@item/armor/data";
-import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/data";
-import { StatisticModifier } from "@actor/modifiers";
-import { ZeroToFour } from "@module/data";
-import type { CharacterPF2e } from "..";
-import { SaveType } from "@actor/data";
-import { MagicTradition } from "@item/spellcasting-entry/data";
-import { CraftingFormulaData } from "@actor/character/crafting/formula";
-import { DegreeOfSuccessAdjustment } from "@system/degree-of-success";
 import { CraftingEntryData } from "@actor/character/crafting/entry";
-import { PredicatePF2e } from "@system/predication";
-import { FeatData, ProficiencyRank } from "@item/data";
+import { CraftingFormulaData } from "@actor/character/crafting/formula";
+import { Abilities, BaseCreatureData, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureHitPoints, CreatureInitiative, CreatureSystemData, CreatureTraitsData, HeldShieldData, SaveData, SkillAbbreviation, SkillData } from "@actor/creature/data";
+import { CreatureSensePF2e } from "@actor/creature/sense";
+import { SaveType } from "@actor/data";
+import { AbilityBasedStatistic, AbilityString, ActorFlagsPF2e, ArmorClassData, DexterityModifierCapData, PerceptionData, StrikeData } from "@actor/data/base";
+import { StatisticModifier } from "@actor/modifiers";
 import { FeatPF2e, WeaponPF2e } from "@item";
-import { CharacterSheetTabVisibility } from "./sheet";
+import { ArmorCategory } from "@item/armor/data";
+import { FeatData, ProficiencyRank } from "@item/data";
 import { DeitySystemData } from "@item/deity/data";
-import { Alignment } from "@actor/creature/types";
-import { FeatType } from "@item/feat/data";
 import { DeityDomain } from "@item/deity/types";
-export interface CharacterSource extends BaseCreatureSource<"character", CharacterSystemData> {
+import { FeatType } from "@item/feat/data";
+import { MagicTradition } from "@item/spell/types";
+import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/types";
+import { ZeroToFour } from "@module/data";
+import { DegreeOfSuccessAdjustment } from "@system/degree-of-success";
+import { PredicatePF2e } from "@system/predication";
+import type { CharacterPF2e } from "..";
+import { CharacterSheetTabVisibility } from "./sheet";
+interface CharacterSource extends BaseCreatureSource<"character", CharacterSystemData> {
     flags: DeepPartial<CharacterFlags>;
 }
-export declare class CharacterData extends BaseCreatureData<CharacterPF2e, CharacterSystemData> {
-    static DEFAULT_ICON: ImagePath;
-}
-export interface CharacterData extends Omit<CharacterSource, "effects" | "flags" | "items" | "token"> {
-    readonly type: CharacterSource["type"];
-    data: CharacterSystemData;
+interface CharacterData extends Omit<CharacterSource, "data" | "effects" | "items" | "token" | "type">, BaseCreatureData<CharacterPF2e, "character", CharacterSystemData, CharacterSource> {
     flags: CharacterFlags;
-    readonly _source: CharacterSource;
 }
 declare type CharacterFlags = ActorFlagsPF2e & {
     pf2e: {
@@ -37,7 +31,7 @@ declare type CharacterFlags = ActorFlagsPF2e & {
         sheetTabs: CharacterSheetTabVisibility;
     };
 };
-export interface CharacterSkillData extends SkillData {
+interface CharacterSkillData extends SkillData {
     ability: AbilityString;
     /** The proficiency rank ("TEML") */
     rank: ZeroToFour;
@@ -45,7 +39,7 @@ export interface CharacterSkillData extends SkillData {
     armor: boolean;
 }
 /** The raw information contained within the actor data object for characters. */
-export interface CharacterSystemData extends CreatureSystemData {
+interface CharacterSystemData extends CreatureSystemData {
     /** The six primary ability scores. */
     abilities: Abilities;
     /** The three save types. */
@@ -62,9 +56,8 @@ export interface CharacterSystemData extends CreatureSystemData {
         aliases?: Record<string, string | undefined>;
     };
     /** Player skills, used for various skill checks. */
-    skills: {
-        [K in SkillAbbreviation]: CharacterSkillData;
-    };
+    skills: Record<SkillAbbreviation, CharacterSkillData>;
+    traits: CharacterTraitsData;
     /** Pathfinder Society Organized Play */
     pfs: PathfinderSocietyData;
     /** Special strikes which the character can take. */
@@ -81,8 +74,8 @@ interface CharacterSaveData extends SaveData {
     /** The proficiency rank ("TEML") */
     rank: ZeroToFour;
 }
-export declare type CharacterSaves = Record<SaveType, CharacterSaveData>;
-export interface CharacterProficiency {
+declare type CharacterSaves = Record<SaveType, CharacterSaveData>;
+interface CharacterProficiency {
     /** The actual modifier for this martial type. */
     value: number;
     /** Describes how the value was computed. */
@@ -94,7 +87,7 @@ export interface CharacterProficiency {
     custom?: true;
 }
 /** A proficiency with a rank that depends on another proficiency */
-export interface MartialProficiency extends Omit<CharacterProficiency, "custom"> {
+interface MartialProficiency extends Omit<CharacterProficiency, "custom"> {
     /** A predicate to match against weapons and unarmed attacks */
     definition: PredicatePF2e;
     /** Can this proficiency be edited or deleted? */
@@ -104,31 +97,31 @@ export interface MartialProficiency extends Omit<CharacterProficiency, "custom">
     /** The maximum rank this proficiency can reach */
     maxRank?: Exclude<ProficiencyRank, "untrained">;
 }
-export interface LinkedProficiency extends MartialProficiency {
+interface LinkedProficiency extends MartialProficiency {
     sameAs: WeaponCategory;
 }
-export declare type MagicTraditionProficiencies = Record<MagicTradition, CharacterProficiency>;
-export declare type CategoryProficiencies = Record<ArmorCategory | WeaponCategory, CharacterProficiency>;
-export declare type BaseWeaponProficiencyKey = `weapon-base-${BaseWeaponType}`;
+declare type MagicTraditionProficiencies = Record<MagicTradition, CharacterProficiency>;
+declare type CategoryProficiencies = Record<ArmorCategory | WeaponCategory, CharacterProficiency>;
+declare type BaseWeaponProficiencyKey = `weapon-base-${BaseWeaponType}`;
 declare type BaseWeaponProficiencies = Record<BaseWeaponProficiencyKey, CharacterProficiency>;
-export declare type WeaponGroupProficiencyKey = `weapon-group-${WeaponGroup}`;
+declare type WeaponGroupProficiencyKey = `weapon-group-${WeaponGroup}`;
 declare type WeaponGroupProfiencies = Record<WeaponGroupProficiencyKey, CharacterProficiency>;
 declare type LinkedProficiencies = Record<string, MartialProficiency>;
-export declare type MartialProficiencies = CategoryProficiencies & BaseWeaponProficiencies & WeaponGroupProfiencies & LinkedProficiencies;
-export declare type MartialProficiencyKey = keyof Required<MartialProficiencies>;
+declare type MartialProficiencies = CategoryProficiencies & BaseWeaponProficiencies & WeaponGroupProfiencies & LinkedProficiencies;
+declare type MartialProficiencyKey = keyof Required<MartialProficiencies>;
 /** The full data for the class DC; similar to SkillData, but is not rollable. */
-export interface ClassDCData extends StatisticModifier, AbilityBasedStatistic {
+interface ClassDCData extends StatisticModifier, AbilityBasedStatistic {
     rank: ZeroToFour;
 }
 /** The full data for a character action (used primarily for strikes.) */
-export declare type CharacterStrike = StatisticModifier & Omit<StrikeData, "item"> & {
+interface CharacterStrike extends StrikeData {
     item: Embedded<WeaponPF2e>;
     slug: string | null;
     adjustments?: DegreeOfSuccessAdjustment[];
-    meleeUsage: CharacterStrike | null;
+    altUsages: CharacterStrike[];
     auxiliaryActions: AuxiliaryAction[];
-};
-export interface AuxiliaryAction {
+}
+interface AuxiliaryAction {
     label: string;
     img: string;
     execute: () => Promise<void>;
@@ -154,7 +147,7 @@ interface PathfinderSocietyData {
     /** Character's Reputation with all the factions */
     reputation: PathfinderSocietyReputation;
 }
-export declare type CharacterArmorClass = StatisticModifier & Required<ArmorClassData>;
+declare type CharacterArmorClass = StatisticModifier & Required<ArmorClassData>;
 interface CharacterResources {
     /** The current number of focus points and pool size */
     focus: {
@@ -181,14 +174,10 @@ interface CharacterResources {
 interface CharacterPerception extends PerceptionData {
     rank: ZeroToFour;
 }
-export declare type CharacterDetails = {
+declare type CharacterDetails = CreatureDetails & {
     /** The key ability which class saves (and other class-related things) scale off of. */
     keyability: {
         value: AbilityString;
-    };
-    /** Character alignment (LN, N, NG, etc.) */
-    alignment: {
-        value: Alignment;
     };
     /** How old the character is (user-provided field). */
     age: {
@@ -252,11 +241,6 @@ export declare type CharacterDetails = {
         /** COMPUTED: The percentage completion of the current level (value / max). */
         pct: number;
     };
-    /** Information about the current character level. */
-    level: {
-        /** The current level of this character. */
-        value: number;
-    };
     /** Convenience information for easy access when the item class instance isn't available */
     ancestry: {
         name: string;
@@ -285,7 +269,7 @@ declare type DeityDetails = Pick<DeitySystemData, "alignment" | "skill"> & {
         label: string;
     }[];
 };
-export interface CharacterAttributes extends CreatureAttributes {
+interface CharacterAttributes extends CreatureAttributes {
     /** The perception skill. */
     perception: CharacterPerception;
     /** The class DC, used for saves related to class abilities. */
@@ -366,22 +350,26 @@ export interface CharacterAttributes extends CreatureAttributes {
 }
 interface CharacterHitPoints extends CreatureHitPoints {
     recoveryMultiplier: number;
+    recoveryAddend: number;
 }
-export interface GrantedFeat {
+interface CharacterTraitsData extends CreatureTraitsData {
+    senses: CreatureSensePF2e[];
+}
+interface GrantedFeat {
     feat: FeatPF2e;
     grants: GrantedFeat[];
 }
-export interface SlottedFeat {
+interface SlottedFeat {
     id: string;
     level: number | string;
     feat?: FeatData;
     grants: GrantedFeat[];
 }
-export interface BonusFeat {
+interface BonusFeat {
     feat: FeatData;
     grants: GrantedFeat[];
 }
-export interface FeatSlot {
+interface FeatSlot {
     label: string;
     feats: (SlottedFeat | BonusFeat)[];
     /** Whether the feats are slotted by level or free-form */
@@ -389,4 +377,4 @@ export interface FeatSlot {
     featFilter?: string;
     supported: FeatType[] | "all";
 }
-export {};
+export { AuxiliaryAction, BaseWeaponProficiencyKey, BonusFeat, CategoryProficiencies, CharacterArmorClass, CharacterAttributes, CharacterData, CharacterDetails, CharacterProficiency, CharacterResources, CharacterSaves, CharacterSkillData, CharacterSource, CharacterStrike, CharacterSystemData, ClassDCData, FeatSlot, GrantedFeat, LinkedProficiency, MagicTraditionProficiencies, MartialProficiencies, MartialProficiency, MartialProficiencyKey, SlottedFeat, WeaponGroupProficiencyKey, };

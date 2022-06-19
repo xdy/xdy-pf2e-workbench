@@ -1,17 +1,9 @@
 import { CONDITION_SLUGS } from "@actor/data/values";
-import { ItemSystemData, ItemSystemSource } from "@item/data/base";
-import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
+import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemSystemData, ItemSystemSource } from "@item/data/base";
 import { ConditionPF2e } from ".";
-export declare type ConditionSource = BaseNonPhysicalItemSource<"condition", ConditionSystemSource>;
-export declare class ConditionData extends BaseNonPhysicalItemData<ConditionPF2e> {
-    static DEFAULT_ICON: ImagePath;
-}
-export interface ConditionData extends Omit<ConditionSource, "effects" | "flags"> {
-    type: ConditionSource["type"];
-    data: ConditionSystemData;
-    readonly _source: ConditionSource;
-}
-export interface ConditionSystemSource extends ItemSystemSource {
+declare type ConditionSource = BaseItemSourcePF2e<"condition", ConditionSystemSource>;
+declare type ConditionData = Omit<ConditionSource, "effects" | "flags"> & BaseItemDataPF2e<ConditionPF2e, "condition", ConditionSystemData, ConditionSource>;
+interface ConditionSystemSource extends ItemSystemSource {
     slug: ConditionSlug;
     active: boolean;
     removable: boolean;
@@ -106,5 +98,5 @@ declare type ConditionValueData = {
         }
     ];
 };
-export declare type ConditionSlug = SetElement<typeof CONDITION_SLUGS>;
-export {};
+declare type ConditionSlug = SetElement<typeof CONDITION_SLUGS>;
+export { ConditionData, ConditionSource, ConditionSlug };

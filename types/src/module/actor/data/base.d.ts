@@ -12,23 +12,25 @@ import { AutoChangeEntry } from "@module/rules/rule-element/ae-like";
 import { MeleePF2e, WeaponPF2e } from "@item";
 import { ActorSizePF2e } from "@actor/data/size";
 import { SkillAbbreviation } from "@actor/creature/data";
-export interface BaseActorSourcePF2e<TActorType extends ActorType = ActorType, TSystemSource extends ActorSystemSource = ActorSystemSource> extends foundry.data.ActorSource {
-    type: TActorType;
-    data: TSystemSource;
-    items: ItemSourcePF2e[];
+import { ActorAlliance } from "@actor/types";
+/** Base interface for all actor data */
+interface BaseActorSourcePF2e<TType extends ActorType = ActorType, TSystemSource extends ActorSystemSource = ActorSystemSource> extends foundry.data.ActorSource<TType, TSystemSource, ItemSourcePF2e> {
     flags: DeepPartial<ActorFlagsPF2e>;
 }
-/** Base class for all actor data */
-export declare abstract class BaseActorDataPF2e<TActor extends ActorPF2e = ActorPF2e> extends foundry.data.ActorData<TActor, ActiveEffectPF2e, ItemPF2e> {
-}
-export interface BaseActorDataPF2e extends Omit<BaseActorSourcePF2e<ActorType, ActorSystemData>, "effects" | "items" | "token"> {
-    type: BaseActorSourcePF2e["type"];
-    data: ActorSystemData;
+interface BaseActorDataPF2e<TActor extends ActorPF2e = ActorPF2e, TType extends ActorType = ActorType, TSystemData extends ActorSystemData = ActorSystemData, TSource extends BaseActorSourcePF2e<TType> = BaseActorSourcePF2e<TType>> extends Omit<BaseActorSourcePF2e<TType, ActorSystemSource>, "effects" | "items" | "token">, foundry.data.ActorData<TActor, ActiveEffectPF2e, ItemPF2e> {
+    readonly type: TType;
+    readonly data: TSystemData;
     token: PrototypeTokenDataPF2e;
     flags: ActorFlagsPF2e;
-    readonly _source: BaseActorSourcePF2e;
+    readonly _source: TSource;
 }
 export interface ActorSystemSource {
+    details?: {
+        level?: {
+            value: number;
+        };
+        alliance?: ActorAlliance;
+    };
     attributes: {
         hp?: ValueAndMaybeMax;
     };
@@ -135,7 +137,7 @@ export interface AbilityBasedStatistic {
     ability?: AbilityString;
 }
 /** A roll function which can be called to roll a given skill. */
-export declare type RollFunction<T extends RollParameters = RollParameters> = (params: T) => Promise<string | void>;
+export declare type RollFunction<T extends RollParameters = RollParameters> = (params: T) => Promise<Rolled<Roll> | null | string | void>;
 /** Basic initiative-relevant data. */
 export interface InitiativeData {
     /** What skill or ability is currently being used to compute initiative. */
@@ -163,7 +165,7 @@ export interface ArmorClassData {
     /** The cap for the bonus that dexterity can give to AC, if any. If null, there is no cap. */
     dexCap?: DexterityModifierCapData;
 }
-export interface StrikeTrait {
+export interface TraitViewData {
     /** The name of this action. */
     name: string;
     /** The label for this action which will be rendered on the UI. */
@@ -178,7 +180,7 @@ export interface StrikeTrait {
     description?: string;
 }
 /** An strike which a character can use. */
-export interface StrikeData {
+export interface StrikeData extends StatisticModifier {
     /** The type of action; currently just 'strike'. */
     type: "strike";
     /** The image URL for this strike (shown on the UI). */
@@ -192,7 +194,7 @@ export interface StrikeData {
     /** A description of what happens on a success. */
     success: string;
     /** Any traits this strike has. */
-    traits: StrikeTrait[];
+    traits: TraitViewData[];
     /** Any options always applied to this strike. */
     options: string[];
     /** Whether the strike is ready (usually when the weapon corresponding with the strike is equipped) */
@@ -222,7 +224,7 @@ export interface StrikeData {
     /** The item that generated this strike */
     origin?: Embedded<ItemPF2e> | null;
     /** The weapon or melee item--possibly ephemeral--being used for the strike */
-    item?: WeaponPF2e | MeleePF2e;
+    item: WeaponPF2e | MeleePF2e;
 }
 export interface RollToggle {
     /** The ID of the item with a rule element for this toggle */
@@ -238,11 +240,11 @@ export interface Rollable {
     /** Roll this save or skill with the given options (caused by the given event, and with the given optional callback). */
     roll: RollFunction;
 }
-export interface PrototypeTokenDataPF2e extends foundry.data.PrototypeTokenData {
+interface PrototypeTokenDataPF2e extends foundry.data.PrototypeTokenData {
     flags: foundry.data.PrototypeTokenData["flags"] & {
         pf2e: {
             linkToActorSize: boolean;
         };
     };
 }
-export {};
+export { BaseActorDataPF2e, BaseActorSourcePF2e, PrototypeTokenDataPF2e };

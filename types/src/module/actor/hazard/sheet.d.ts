@@ -86,13 +86,13 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
         user: {
             isGM: boolean;
         };
-        hasRealContainers?: boolean | undefined;
         totalCoinage: import("../sheet/data-types").CoinageSummary;
         totalCoinageGold: string;
-        totalWealth: import("../../item/treasure/helpers").Coins;
+        totalWealth: import("../../item/physical/data").Coins;
         totalWealthGold: string;
         immunities: import("../../sheet/helpers").SheetOptions;
         hasImmunities: boolean;
+        inventory: import("../sheet/data-types").SheetInventory;
         actor: any;
         data: any;
         items: any;

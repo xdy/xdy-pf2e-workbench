@@ -1,20 +1,19 @@
 /// <reference types="jquery" />
-import { ItemPF2e } from "@item/base";
-import { StatisticModifier } from "@actor/modifiers";
-import { RollParameters } from "@system/rolls";
-import { BaseWeaponProficiencyKey, CharacterData, CharacterStrike, WeaponGroupProficiencyKey, AuxiliaryAction, FeatSlot } from "./data";
-import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, WeaponPF2e } from "@item";
-import { CreaturePF2e } from "../";
-import { AbilityString } from "@actor/data/base";
-import { CreatureSpeeds, LabeledSpeed, MovementType } from "@actor/creature/data";
-import { ActiveEffectPF2e } from "@module/active-effect";
-import { CharacterSource } from "@actor/data";
-import { UserPF2e } from "@module/user";
-import { CraftingEntry, CraftingFormula } from "./crafting";
-import { FeatData, ItemSourcePF2e } from "@item/data";
+import { CreaturePF2e, FamiliarPF2e } from "@actor";
+import { Abilities, CreatureSpeeds, LabeledSpeed, MovementType } from "@actor/creature/data";
 import { AttackItem, AttackRollContext, StrikeRollContext, StrikeRollContextParams } from "@actor/creature/types";
+import { CharacterSource } from "@actor/data";
+import { AbilityString } from "@actor/data/base";
+import { StatisticModifier } from "@actor/modifiers";
+import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, ItemPF2e, WeaponPF2e } from "@item";
+import { FeatData, ItemSourcePF2e } from "@item/data";
+import { ActiveEffectPF2e } from "@module/active-effect";
+import { UserPF2e } from "@module/user";
+import { CheckRoll } from "@system/check/roll";
+import { RollParameters } from "@system/rolls";
+import { CraftingEntry, CraftingFormula } from "./crafting";
+import { AuxiliaryAction, BaseWeaponProficiencyKey, CharacterData, CharacterStrike, FeatSlot, WeaponGroupProficiencyKey } from "./data";
 import { CharacterHitPointsSummary, CharacterSkills, CreateAuxiliaryParams } from "./types";
-import { FamiliarPF2e } from "@actor/familiar";
 declare class CharacterPF2e extends CreaturePF2e {
     /** Core singular embeds for PCs */
     ancestry: Embedded<AncestryPF2e> | null;
@@ -27,10 +26,9 @@ declare class CharacterPF2e extends CreaturePF2e {
     featGroups: Record<string, FeatSlot | undefined>;
     pfsBoons: FeatData[];
     deityBoonsCurses: FeatData[];
-    static get schema(): typeof CharacterData;
     get keyAbility(): AbilityString;
     /** This PC's ability scores */
-    get abilities(): import("@actor/creature/data").Abilities;
+    get abilities(): Abilities;
     get hitPoints(): CharacterHitPointsSummary;
     get skills(): CharacterSkills;
     get heroPoints(): {
@@ -51,7 +49,8 @@ declare class CharacterPF2e extends CreaturePF2e {
     prepareDerivedData(): void;
     /** Set roll operations for ability scores, proficiency ranks, and number of hands free */
     protected setNumericRollOptions(): void;
-    prepareSaves(): void;
+    private prepareSaves;
+    private prepareSkills;
     prepareSpeed(movementType: "land"): CreatureSpeeds;
     prepareSpeed(movementType: Exclude<MovementType, "land">): LabeledSpeed & StatisticModifier;
     prepareSpeed(movementType: MovementType): CreatureSpeeds | (LabeledSpeed & StatisticModifier);
@@ -64,6 +63,11 @@ declare class CharacterPF2e extends CreaturePF2e {
     }): CharacterStrike[];
     /** Prepare a strike action from a weapon */
     private prepareStrike;
+    getStrikeDescription(weapon: WeaponPF2e): {
+        description: string;
+        criticalSuccess: string;
+        success: string;
+    };
     /** Possibly modify this weapon depending on its */
     protected getStrikeRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
     /** Create attack-roll modifiers from weapon traits */
@@ -80,7 +84,7 @@ declare class CharacterPF2e extends CreaturePF2e {
      * Roll a Recovery Check
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
      */
-    rollRecovery(event: JQuery.TriggeredEvent): void;
+    rollRecovery(event: JQuery.TriggeredEvent): Promise<Rolled<CheckRoll> | null>;
     protected _preUpdate(changed: DeepPartial<CharacterSource>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     /** Perform heritage and deity deletions prior to the creation of new ones */
     preCreateDelete(toCreate: PreCreate<ItemSourcePF2e>[]): Promise<void>;

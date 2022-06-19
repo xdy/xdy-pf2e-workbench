@@ -1,5 +1,5 @@
-import { Coins } from "@item/treasure/helpers";
-import { ActorPF2e } from "../../base";
+import { Coins } from "@item/physical/data";
+import { ActorPF2e } from "@actor";
 interface PopupFormData extends Coins {
     removeByValue: boolean;
 }

@@ -1,13 +1,11 @@
-import { CreatureTraitsData } from "@actor/creature/data";
 import { CreatureSheetData, SpellcastingSheetData } from "@actor/creature/types";
 import { SaveType } from "@actor/data";
 import { HitPointsData, PerceptionData } from "@actor/data/base";
-import { SheetInventory } from "@actor/sheet/data-types";
 import { ActionData, EffectData, ItemDataPF2e } from "@item/data";
 import { IdentifyCreatureData } from "@module/recall-knowledge";
 import { FlattenedCondition } from "@system/conditions";
 import { NPCPF2e } from ".";
-import { NPCArmorClass, NPCAttributes, NPCSaveData, NPCSkillData, NPCStrike, NPCSystemData } from "./data";
+import { NPCArmorClass, NPCAttributes, NPCSaveData, NPCSkillData, NPCStrike, NPCSystemData, NPCTraitsData } from "./data";
 interface ActionsDetails {
     label: string;
     actions: NPCSheetItemData<RawObject<ActionData>>[];
@@ -57,14 +55,14 @@ interface NPCSystemSheetData extends NPCSystemData {
     saves: Record<SaveType, NPCSaveData & WithAdjustments & {
         labelShort?: string;
     }>;
-    traits: CreatureTraitsData & {
+    traits: NPCTraitsData & {
         size: {
             localizedName?: string;
         };
     };
 }
 /** Additional fields added in sheet data preparation */
-interface NPCSheetData extends CreatureSheetData<NPCPF2e> {
+interface NPCSheetData<T extends NPCPF2e> extends CreatureSheetData<T> {
     actions: NPCActionSheetData;
     attacks: NPCAttackSheetData;
     data: NPCSystemSheetData;
@@ -92,11 +90,10 @@ interface NPCSheetData extends CreatureSheetData<NPCPF2e> {
     eliteState: "active" | "inactive";
     weakState: "active" | "inactive";
     notAdjusted: boolean;
-    inventory: SheetInventory;
     hasShield?: boolean;
     hasHardness?: boolean;
     configLootableNpc?: boolean;
-    isSpellcaster?: boolean;
+    npcAttacksFromWeapons?: boolean;
 }
 declare type NPCSheetItemData<T extends ItemDataPF2e | RawObject<ItemDataPF2e> = ItemDataPF2e> = T & {
     glyph: string;

@@ -4,7 +4,7 @@ import { ScenePF2e, TokenConfigPF2e } from "@module/scene";
 import { TokenDataPF2e } from "./data";
 import { CombatantPF2e } from "@module/encounter";
 import { PrototypeTokenDataPF2e } from "@actor/data/base";
-export declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
+declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
     /** Has this token gone through at least one cycle of data preparation? */
     private initialized?;
     /** Filter trackable attributes for relevance and avoidance of circular references */
@@ -42,12 +42,13 @@ export declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> ext
     /** Refresh the effects panel and encounter tracker */
     protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, userId: string): void;
 }
-export interface TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
+interface TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
     readonly data: TokenDataPF2e<this>;
     readonly _object: TokenPF2e | null;
     get object(): TokenPF2e;
     readonly parent: ScenePF2e | null;
     get combatant(): Embedded<CombatantPF2e> | null;
-    _sheet: TokenConfigPF2e | null;
-    get sheet(): TokenConfigPF2e;
+    _sheet: TokenConfigPF2e<this> | null;
+    get sheet(): TokenConfigPF2e<this>;
 }
+export { TokenDocumentPF2e };

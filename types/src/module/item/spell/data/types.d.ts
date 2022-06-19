@@ -1,23 +1,12 @@
 import { SaveType } from "@actor/data";
 import { AbilityString } from "@actor/data/base";
-import { ItemLevelData, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/data/base";
-import { BaseNonPhysicalItemData, BaseNonPhysicalItemSource } from "@item/data/non-physical";
-import { MagicTradition } from "@item/spellcasting-entry/data";
+import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/data/base";
 import { DamageType } from "@system/damage";
 import { ValuesList, OneToTen, ValueAndMax } from "@module/data";
 import type { SpellPF2e } from "@item";
-import { MAGIC_SCHOOLS } from "./values";
-export declare type SpellSource = BaseNonPhysicalItemSource<"spell", SpellSystemSource>;
-export declare class SpellData extends BaseNonPhysicalItemData<SpellPF2e> {
-    static DEFAULT_ICON: ImagePath;
-}
-export interface SpellData extends Omit<SpellSource, "effects" | "flags"> {
-    type: SpellSource["type"];
-    data: SpellSource["data"];
-    readonly _source: SpellSource;
-}
-export declare type MagicSchool = typeof MAGIC_SCHOOLS[number];
-export declare type SpellTrait = keyof ConfigPF2e["PF2E"]["spellTraits"] | MagicSchool | MagicTradition;
+import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "../types";
+declare type SpellSource = BaseItemSourcePF2e<"spell", SpellSystemSource>;
+declare type SpellData = Omit<SpellSource, "effects" | "flags"> & BaseItemDataPF2e<SpellPF2e, "spell", SpellSystemData, SpellSource>;
 export declare type SpellTraits = ItemTraits<SpellTrait>;
 declare type SpellDamageCategory = keyof ConfigPF2e["PF2E"]["damageCategories"];
 export interface SpellDamageType {
@@ -43,7 +32,7 @@ export interface SpellHeightenLayer {
     level: number;
     data: Partial<SpellSystemData>;
 }
-export interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
+interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
     traits: SpellTraits;
     level: {
         value: OneToTen;
@@ -58,12 +47,7 @@ export interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
     school: {
         value: MagicSchool;
     };
-    components: {
-        focus: boolean;
-        material: boolean;
-        somatic: boolean;
-        verbal: boolean;
-    };
+    components: Record<SpellComponent, boolean>;
     materials: {
         value: string;
     };
@@ -115,5 +99,7 @@ export interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
         uses?: ValueAndMax;
     };
 }
-export declare type SpellSystemData = SpellSystemSource & ItemSystemData;
-export {};
+interface SpellSystemData extends SpellSystemSource, ItemSystemData {
+    traits: SpellTraits;
+}
+export { SpellData, SpellSource, SpellSystemData, SpellSystemSource };

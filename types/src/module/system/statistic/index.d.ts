@@ -46,14 +46,15 @@ export declare class Statistic<T extends BaseStatisticData = StatisticData> {
     proficient: boolean;
     modifiers: ModifierPF2e[];
     slug: string;
+    label: string;
     constructor(actor: ActorPF2e, data: T, options?: RollOptionParameters | undefined);
     /** Compatibility function which creates a statistic from a StatisticModifier instead of from StatisticData. */
     static from(actor: ActorPF2e, stat: StatisticModifier, slug: string, label: string, type: CheckType, domains?: string[]): Statistic<{
         slug: string;
         domains: string[] | undefined;
+        label: string;
         check: {
             adjustments: import("@system/degree-of-success").DegreeOfSuccessAdjustment[] | undefined;
-            label: string;
             type: CheckType;
         };
         dc: {};
@@ -77,8 +78,8 @@ declare class StatisticCheck {
     domains: string[];
     mod: number;
     modifiers: ModifierPF2e[];
-    label: string;
     constructor(parent: Statistic<StatisticDataWithCheck>, options?: RollOptionParameters);
+    get label(): string;
     createRollOptions(args?: RollOptionParameters): string[];
     calculateMap(options: {
         item: ItemPF2e;

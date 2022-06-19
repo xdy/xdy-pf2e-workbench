@@ -4,7 +4,7 @@ import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 declare const UserVisibilityPF2e: {
     /** Edits HTML live based on permission settings. Used to hide certain blocks and values */
-    process: ($html: JQuery, { message, actor }?: ProcessOptions) => void;
+    process: ($html: JQuery, options?: ProcessOptions) => void;
 };
 declare type UserVisibility = "all" | "owner" | "gm" | "none";
 interface ProcessOptions {

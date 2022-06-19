@@ -1,5 +1,5 @@
 /** For use in worlds to rerun select migrations */
-export declare function remigrate(schemaVersions: number | {
+export declare function remigrate(versionRange: {
     from: number;
     to?: number;
 }): Promise<void>;

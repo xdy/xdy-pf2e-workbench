@@ -4,8 +4,6 @@ import { EncounterPF2e } from "@module/encounter";
 import Sortable from "sortablejs";
 export declare class EncounterTrackerPF2e extends CombatTracker<EncounterPF2e> {
     sortable: Sortable;
-    /** Fix Foundry setting the title to "Combat Tracker" unlocalized */
-    static get defaultOptions(): CombatTrackerOptions;
     /** Make the combatants sortable */
     activateListeners($html: JQuery): void;
     /** Allow CTRL-clicking to make the rolls blind */

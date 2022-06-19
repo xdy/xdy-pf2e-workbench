@@ -1,12 +1,12 @@
-import { StrikeTrait } from "@actor/data/base";
-import { WeaponData } from "@item/data";
+import { CharacterPF2e, NPCPF2e } from "@actor";
+import { TraitViewData } from "@actor/data/base";
 import { DamageDicePF2e, DiceModifierPF2e, ModifierPF2e } from "@actor/modifiers";
+import { WeaponData } from "@item/data";
+import { WeaponMaterialEffect } from "@item/weapon/types";
 import { RollNotePF2e } from "@module/notes";
 import { StrikingPF2e, WeaponPotencyPF2e } from "@module/rules/rule-element";
-import { DamageDieSize, DamageType } from ".";
-import { CharacterPF2e, NPCPF2e } from "@actor";
 import { DeferredModifier, StrikeAdjustment } from "@module/rules/rule-element/data";
-import { WeaponMaterialEffect } from "@item/weapon/types";
+import { DamageDieSize, DamageType } from ".";
 export interface DamagePartials {
     [damageType: string]: {
         [damageCategory: string]: string;
@@ -59,8 +59,8 @@ export declare type DamagePool = Record<string, {
  * @category PF2
  */
 export declare class WeaponDamagePF2e {
-    static calculateStrikeNPC(weapon: any, actor: NPCPF2e, traits: StrikeTrait[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: string[] | undefined, rollNotes: Record<string, RollNotePF2e[]>): DamageTemplate;
-    static calculate(weapon: WeaponData, actor: CharacterPF2e | NPCPF2e, traits: StrikeTrait[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: string[] | undefined, rollNotes: Record<string, RollNotePF2e[]>, weaponPotency: WeaponPotencyPF2e | null, striking: Record<string, StrikingPF2e[]>, strikeAdjustments: StrikeAdjustment[]): DamageTemplate;
+    static calculateStrikeNPC(weapon: any, actor: NPCPF2e, traits: TraitViewData[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: string[] | undefined, rollNotes: Record<string, RollNotePF2e[]>): DamageTemplate;
+    static calculate(weapon: WeaponData, actor: CharacterPF2e | NPCPF2e, traits: TraitViewData[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: string[] | undefined, rollNotes: Record<string, RollNotePF2e[]>, weaponPotency: WeaponPotencyPF2e | null, striking: Record<string, StrikingPF2e[]>, strikeAdjustments: StrikeAdjustment[]): DamageTemplate;
     /** Convert the damage definition into a final formula, depending on whether the hit is a critical or not. */
     static getFormula(damage: Omit<DamageTemplate, "formula">, critical: boolean): DamageFormula;
     /** Add dice to the given damage pool. */

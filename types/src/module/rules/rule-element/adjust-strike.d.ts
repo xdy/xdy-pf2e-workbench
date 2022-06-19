@@ -1,8 +1,9 @@
 import { ActorType } from "@actor/data";
-import { ItemPF2e, WeaponPF2e } from "@item";
+import { ItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
+import { ActionTrait } from "@item/action/data";
 import { WeaponMaterialEffect } from "@item/weapon/types";
 import { PredicatePF2e } from "@system/predication";
-import { AELikeRuleElement, AELikeData, AELikeSource } from "./ae-like";
+import { AELikeData, AELikeRuleElement, AELikeSource } from "./ae-like";
 import { RuleElementOptions } from "./base";
 declare class AdjustStrikeRuleElement extends AELikeRuleElement {
     protected static validActorTypes: ActorType[];
@@ -32,5 +33,6 @@ interface StrikeAdjustment {
         materials?: Set<WeaponMaterialEffect>;
     }) => void;
     adjustWeapon?: (weapon: Embedded<WeaponPF2e>) => void;
+    adjustTraits?: (weapon: WeaponPF2e | MeleePF2e, traits: ActionTrait[]) => void;
 }
 export { AdjustStrikeRuleElement, StrikeAdjustment };

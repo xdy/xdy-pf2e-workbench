@@ -8,8 +8,10 @@ declare class TimeOfDay {
     readonly minute: MinuteNumbers;
     readonly second: SecondNumbers;
     constructor(hour: HourNumbers, minute: MinuteNumbers, second: SecondNumbers);
+    /** Point in morning twilight where dim light begins */
     static DAWN: TimeOfDay;
     static NOON: TimeOfDay;
+    /** Point in evening twilight where dim light begins */
     static DUSK: TimeOfDay;
     static MIDNIGHT: TimeOfDay;
     /**

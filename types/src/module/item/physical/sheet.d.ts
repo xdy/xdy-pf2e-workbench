@@ -7,6 +7,5 @@ export declare class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e = Phys
     /** Show the identified data for editing purposes */
     getData(): Promise<PhysicalItemSheetData<TItem>>;
     activateListeners($html: JQuery): void;
-    /** Normalize nullable fields to actual `null`s */
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }

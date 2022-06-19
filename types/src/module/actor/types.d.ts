@@ -3,4 +3,5 @@ interface ActorDimensions {
     width: number;
     height: number;
 }
-export { ActorDimensions };
+declare type ActorAlliance = "party" | "opposition" | null;
+export { ActorDimensions, ActorAlliance };

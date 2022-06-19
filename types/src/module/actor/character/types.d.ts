@@ -1,17 +1,19 @@
 import { HitPointsSummary } from "@actor/base";
 import { SkillAbbreviation } from "@actor/creature/data";
 import { AbilityString } from "@actor/data";
+import { SkillLongForm } from "@actor/data/types";
 import { WeaponPF2e } from "@item";
 import { ZeroToFour } from "@module/data";
 import { Statistic } from "@system/statistic";
 interface CharacterHitPointsSummary extends HitPointsSummary {
     recoveryMultiplier: number;
+    recoveryAddend: number;
 }
 declare type CharacterSkill = Statistic & {
     rank: ZeroToFour;
     ability: AbilityString;
 };
-declare type CharacterSkills = Record<SkillAbbreviation, CharacterSkill> & Partial<Record<string, CharacterSkill>>;
+declare type CharacterSkills = Record<SkillAbbreviation, CharacterSkill> & Record<SkillLongForm, CharacterSkill> & Partial<Record<string, CharacterSkill>>;
 interface CreateAuxiliaryInteractParams {
     weapon: Embedded<WeaponPF2e>;
     action: "Interact";

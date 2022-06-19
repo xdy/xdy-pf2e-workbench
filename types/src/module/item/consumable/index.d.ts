@@ -1,8 +1,7 @@
 import { ConsumableData, ConsumableType } from "./data";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
-export declare class ConsumablePF2e extends PhysicalItemPF2e {
-    static get schema(): typeof ConsumableData;
+declare class ConsumablePF2e extends PhysicalItemPF2e {
     get consumableType(): ConsumableType;
     get isAmmunition(): boolean;
     get charges(): {
@@ -21,6 +20,7 @@ export declare class ConsumablePF2e extends PhysicalItemPF2e {
     consume(this: Embedded<ConsumablePF2e>): Promise<void>;
     castEmbeddedSpell(this: Embedded<ConsumablePF2e>, trickMagicItemData?: TrickMagicItemEntry): Promise<void>;
 }
-export interface ConsumablePF2e {
+interface ConsumablePF2e {
     readonly data: ConsumableData;
 }
+export { ConsumablePF2e };

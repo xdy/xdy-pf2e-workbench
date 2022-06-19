@@ -1,5 +1,5 @@
 import { ItemType } from "@item/data";
-import { MagicTradition } from "@item/spellcasting-entry/data";
+import { MagicTradition } from "@item/spell/types";
 import { RawModifier } from "@actor/modifiers";
 import { DegreeOfSuccessString } from "@system/degree-of-success";
 import { CheckRollContextFlag } from "@system/rolls";
@@ -27,6 +27,7 @@ declare type ChatMessageFlagsPF2e = foundry.data.ChatMessageFlags & {
         modifiers?: RawModifier[];
         preformatted?: "flavor" | "content" | "both";
         isFromConsumable?: boolean;
+        journalEntry?: DocumentUUID;
         [key: string]: unknown;
     };
     core: NonNullable<foundry.data.ChatMessageFlags["core"]>;

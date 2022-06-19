@@ -1,19 +1,21 @@
 /// <reference types="jquery" />
 import { ActorPF2e } from "@actor";
+import { AttackTarget } from "@actor/creature/types";
+import { TraitViewData } from "@actor/data/base";
 import { ItemPF2e } from "@item";
-import { CheckModifier, ModifierPF2e } from "../actor/modifiers";
-import { CheckDC, DEGREE_OF_SUCCESS_STRINGS } from "./degree-of-success";
-import { DamageRollContext, DamageTemplate } from "@system/damage";
-import { RollNotePF2e } from "@module/notes";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ZeroToThree } from "@module/data";
+import { RollNotePF2e } from "@module/notes";
+import { RollSubstitution } from "@module/rules/rule-element/data";
 import { TokenDocumentPF2e } from "@scene";
-import { StrikeTrait } from "@actor/data/base";
-import { AttackTarget } from "@actor/creature/types";
+import { DamageRollContext, DamageTemplate } from "@system/damage";
+import { CheckModifier, ModifierPF2e } from "../actor/modifiers";
 import { CheckRoll } from "./check/roll";
+import { CheckDC, DegreeOfSuccessString, DEGREE_OF_SUCCESS_STRINGS } from "./degree-of-success";
 export interface RollDataPF2e extends RollData {
     rollerId?: string;
     totalModifier?: number;
+    isReroll?: boolean;
     degreeOfSuccess?: ZeroToThree;
     strike?: {
         actor: ActorUUID | TokenDocumentUUID;
@@ -37,12 +39,12 @@ export interface RollParameters {
 export interface StrikeRollParams extends RollParameters {
     /** Retrieve the formula of the strike roll without following through to the end */
     getFormula?: true;
-    /** The strike is to use the melee usage of a combination weapon */
-    meleeUsage?: boolean;
+    /** The strike is involve throwing a thrown melee weapon or to use the melee usage of a combination weapon */
+    altUsage?: "thrown" | "melee" | null;
     /** Should this roll be rolled twice? If so, should it keep highest or lowest? */
     rollTwice?: RollTwiceOption;
 }
-export declare type RollTwiceOption = "no" | "keep-higher" | "keep-lower";
+export declare type RollTwiceOption = "keep-higher" | "keep-lower" | false;
 export declare type AttackCheck = "attack-roll" | "spell-attack-roll";
 export declare type CheckType = "check" | "counteract-check" | "initiative" | "skill-check" | "perception-check" | "saving-throw" | "flat-check" | AttackCheck;
 export interface BaseRollContext {
@@ -57,7 +59,7 @@ export interface BaseRollContext {
     /** If this is an attack, the target of that attack */
     target?: AttackTarget | null;
     /** Any traits for the check. */
-    traits?: StrikeTrait[];
+    traits?: TraitViewData[];
     /** The outcome a roll (usually relevant only to rerolls) */
     outcome?: typeof DEGREE_OF_SUCCESS_STRINGS[number] | null;
     /** The outcome prior to being changed by abilities raising or lowering degree of success */
@@ -85,27 +87,31 @@ export interface CheckRollContext extends BaseRollContext {
     dc?: CheckDC | null;
     /** Is the roll a reroll? */
     isReroll?: boolean;
+    /** D20 results substituted for an actual roll */
+    substitutions?: RollSubstitution[];
+    /** Is the weapon used in this attack roll an alternative usage? */
+    altUsage?: "thrown" | "melee" | null;
 }
 interface CheckTargetFlag {
     actor: ActorUUID | TokenDocumentUUID;
     token?: TokenDocumentUUID;
 }
-declare type ContextFlagOmissions = "actor" | "token" | "item" | "target" | "createMessage";
-export interface CheckRollContextFlag extends Required<Omit<CheckRollContext, ContextFlagOmissions>> {
+declare type ContextFlagOmission = "actor" | "token" | "item" | "target" | "altUsage" | "createMessage";
+export interface CheckRollContextFlag extends Required<Omit<CheckRollContext, ContextFlagOmission>> {
     actor: string | null;
     token: string | null;
     item?: undefined;
     target: CheckTargetFlag | null;
+    altUsage?: "thrown" | "melee" | null;
 }
 interface RerollOptions {
     heroPoint?: boolean;
     keep?: "new" | "best" | "worst";
 }
 export declare class CheckPF2e {
-    /**
-     * Roll the given statistic, optionally showing the check modifier dialog if 'Shift' is held down.
-     */
-    static roll(check: CheckModifier, context?: CheckRollContext, event?: JQuery.TriggeredEvent | null, callback?: (roll: Rolled<Roll>, outcome: typeof DEGREE_OF_SUCCESS_STRINGS[number] | null | undefined, message: ChatMessagePF2e) => Promise<void> | void): Promise<Rolled<CheckRoll> | null>;
+    /** Roll the given statistic, optionally showing the check modifier dialog if 'Shift' is held down. */
+    static roll(check: CheckModifier, context?: CheckRollContext, event?: JQuery.TriggeredEvent | null, callback?: (roll: Rolled<CheckRoll>, outcome: DegreeOfSuccessString | null | undefined, message: ChatMessagePF2e) => Promise<void> | void): Promise<Rolled<CheckRoll> | null>;
+    private static createTagFlavor;
     /** Reroll a rolled check given a chat message. */
     static rerollFromMessage(message: ChatMessagePF2e, { heroPoint, keep }?: RerollOptions): Promise<void>;
     /**
@@ -116,11 +122,8 @@ export declare class CheckPF2e {
     static renderReroll(roll: Rolled<Roll>, { isOld }: {
         isOld: boolean;
     }): Promise<string>;
-    private static createFlavorMarkup;
+    private static createResultFlavor;
 }
-/**
- * @category PF2
- */
 export declare class DamageRollPF2e {
     static roll(damage: DamageTemplate, context: DamageRollContext, callback?: Function): Promise<void>;
 }

@@ -144,3 +144,17 @@ export { Migration741RollOptionToggleToItem } from "./741-roll-option-toggle-to-
 export { Migration742RMAbilityBoostLevels } from "./742-rm-class-ability-boost-levels";
 export { Migration743FixWeaknessStructure } from "./743-fix-weakness-structure";
 export { Migration744MigrateSpellHeighten } from "./744-migrate-spell-heighten";
+export { Migration745EffectTargetToChoiceSet } from "./745-effect-target-to-choice-set";
+export { Migration746StandardizePricing } from "./746-standardize-pricing";
+export { Migration747FixedHeightening } from "./747-fixed-heightening";
+export { Migration748BatchConsumablePricing } from "./748-batch-consumable-pricing";
+export { Migration749AssuranceREs } from "./749-assurance-res";
+export { Migration750FixCorruptedPrice } from "./750-fix-corrupted-price";
+export { Migration751ResetRollOptions } from "./751-reset-roll-options";
+export { Migration752StrikeVsWeaponTraits } from "./752-strike-vs-weapon-traits";
+export { Migration753WeaponReloadTimes } from "./753-weapon-reload-times";
+export { Migration754MightyBulwarkAdjustModifiers } from "./754-mighty-bulwark-adjust-modifiers";
+export { Migration755GrantIdsToData } from "./755-grant-ids-to-data";
+export { Migration756RMStoredResourceMaxes } from "./756-rm-stored-resource-maxes";
+export { Migration757HillockHalfling } from "./757-hillock-halfling";
+export { Migration758PrunePCAttributes } from "./758-prune-pc-attributes";

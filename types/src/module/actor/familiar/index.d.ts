@@ -4,7 +4,6 @@ import { ActiveEffectPF2e } from "@module/active-effect";
 import { ItemPF2e } from "@item";
 import { FamiliarData } from "./data";
 export declare class FamiliarPF2e extends CreaturePF2e {
-    static get schema(): typeof FamiliarData;
     /** The familiar's master, if selected */
     get master(): CharacterPF2e | null;
     prepareData({ fromMaster }?: {

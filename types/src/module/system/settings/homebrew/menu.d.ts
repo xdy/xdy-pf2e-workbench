@@ -1,7 +1,7 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
+import { BaseWeaponType } from "@item/weapon/types";
 import { MenuTemplateData, PartialSettingsData, SettingsMenuPF2e } from "../menu";
-import { BaseWeaponType } from "@item/weapon/data";
 import "@yaireo/tagify/src/tagify.scss";
 export declare type ConfigPF2eHomebrewRecord = typeof HomebrewElements.SETTINGS[number];
 export declare type HomebrewSettingsKey = `homebrew.${ConfigPF2eHomebrewRecord}`;

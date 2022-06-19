@@ -1,15 +1,18 @@
-import { MagicTradition, SpellcastingEntry, SpellcastingEntryData, SpellcastingEntryListData } from "./data";
+import { SpellcastingEntry, SpellcastingEntryData, SpellcastingEntryListData } from "./data";
 import { SpellPF2e } from "@item/spell";
 import { OneToFour } from "@module/data";
 import { ItemPF2e } from "../base";
 import { UserPF2e } from "@module/user";
 import { Statistic } from "@system/statistic";
-export declare class SpellcastingEntryPF2e extends ItemPF2e implements SpellcastingEntry {
-    static get schema(): typeof SpellcastingEntryData;
+import { MagicTradition } from "@item/spell/types";
+import { AbilityString } from "@actor/data";
+declare class SpellcastingEntryPF2e extends ItemPF2e implements SpellcastingEntry {
     private _spells;
+    /** Spellcasting attack and dc data created during actor preparation */
+    statistic: Statistic;
     /** A collection of all spells contained in this entry regardless of organization */
     get spells(): Collection<Embedded<SpellPF2e>>;
-    get ability(): "con" | "dex" | "wis" | "str" | "int" | "cha";
+    get ability(): AbilityString;
     /** This entry's magic tradition, defaulting to arcane if unset or invalid */
     get tradition(): MagicTradition;
     /**
@@ -24,8 +27,6 @@ export declare class SpellcastingEntryPF2e extends ItemPF2e implements Spellcast
     get isFocusPool(): boolean;
     get isRitual(): boolean;
     get highestLevel(): number;
-    /** Spellcasting attack and dc data created during actor preparation */
-    statistic: Statistic;
     prepareBaseData(): void;
     prepareDerivedData(): void;
     prepareActorData(this: Embedded<SpellcastingEntryPF2e>): void;
@@ -41,7 +42,7 @@ export declare class SpellcastingEntryPF2e extends ItemPF2e implements Spellcast
      * Adds a spell to this spellcasting entry, either moving it from another one if its the same actor,
      * or creating a new spell if its not.
      */
-    addSpell(spell: SpellPF2e, targetLevel: number): Promise<SpellPF2e | null>;
+    addSpell(spell: SpellPF2e, targetLevel?: number): Promise<SpellPF2e | null>;
     /** Saves the prepared spell slot data to the spellcasting entry  */
     prepareSpell(spell: SpellPF2e, spellLevel: number, spellSlot: number): Promise<this>;
     /** Removes the spell slot and updates the spellcasting entry */
@@ -54,6 +55,7 @@ export declare class SpellcastingEntryPF2e extends ItemPF2e implements Spellcast
     getRollOptions(prefix?: string): string[];
     protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
 }
-export interface SpellcastingEntryPF2e {
+interface SpellcastingEntryPF2e {
     readonly data: SpellcastingEntryData;
 }
+export { SpellcastingEntryPF2e };

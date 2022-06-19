@@ -3,7 +3,6 @@ import { CreatureData, SaveType } from "@actor/data";
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
 import { ItemPF2e, ArmorPF2e, PhysicalItemPF2e } from "@item";
 import { RuleElementSynthetics } from "@module/rules";
-import { RollNotePF2e } from "@module/notes";
 import { ActiveEffectPF2e } from "@module/active-effect";
 import { CreatureSkills, CreatureSpeeds, LabeledSpeed, MovementType, SenseData, VisionLevel } from "./data";
 import { Statistic } from "@system/statistic";
@@ -12,7 +11,6 @@ import { UserPF2e } from "@module/user";
 import { CreatureSensePF2e } from "./sense";
 import { HitPointsSummary } from "@actor/base";
 import { Rarity } from "@module/data";
-import { DeferredModifier } from "@module/rules/rule-element/data";
 import { DamageType } from "@system/damage";
 import { Alignment, AttackItem, AttackRollContext, GetReachParameters, IsFlatFootedParams, StrikeRollContext, StrikeRollContextParams } from "./types";
 import { ItemCarryType } from "@item/physical/data";
@@ -40,11 +38,11 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
     get isDead(): boolean;
     get isSpellcaster(): boolean;
     get perception(): Statistic;
-    get deception(): Statistic;
-    get stealth(): Statistic;
     get wornArmor(): Embedded<ArmorPF2e> | null;
     /** Get the held shield of most use to the wielder */
     get heldShield(): Embedded<ArmorPF2e> | null;
+    /** Whether this actor is an ally of the provided actor */
+    isAllyOf(actor: ActorPF2e): boolean;
     /** Whether the actor is flat-footed in the current scene context: currently only handles flanking */
     isFlatFooted({ dueTo }: IsFlatFootedParams): boolean;
     /** Construct a range penalty for this creature when making a ranged attack */
@@ -54,8 +52,7 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
     /** Apply ActiveEffect-Like rule elements immediately after application of actual `ActiveEffect`s */
     prepareEmbeddedDocuments(): void;
     prepareDerivedData(): void;
-    protected setNumericRollOptions(): void;
-    protected prepareInitiative(statisticsModifiers: Record<string, DeferredModifier[]>, rollNotes: Record<string, RollNotePF2e[] | undefined>): void;
+    protected prepareInitiative(): void;
     protected prepareSynthetics(): void;
     /** Add a circumstance bonus if this creature has a raised shield */
     protected getShieldBonus(): ModifierPF2e | null;

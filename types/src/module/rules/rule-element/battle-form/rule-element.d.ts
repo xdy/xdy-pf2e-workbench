@@ -2,8 +2,8 @@ import { RuleElementPF2e, RuleElementData, RuleElementOptions } from "../";
 import { BattleFormAC, BattleFormOverrides, BattleFormSource } from "./types";
 import { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data";
-import { ItemPF2e } from "@item";
-import { BaseRawModifier } from "@actor/modifiers";
+import { ItemPF2e, WeaponPF2e } from "@item";
+import { DiceModifierPF2e, ModifierPF2e } from "@actor/modifiers";
 export declare class BattleFormRuleElement extends RuleElementPF2e {
     overrides: this["data"]["overrides"];
     /** The label given to modifiers of AC, skills, and strikes */
@@ -13,6 +13,8 @@ export declare class BattleFormRuleElement extends RuleElementPF2e {
     static defaultIcons: Record<string, ImagePath | undefined>;
     /** Fill in base override data */
     private initialize;
+    /** Pre-clear other rule elements on this item as being compatible with the battle form */
+    preCreate({ itemSource }: RuleElementPF2e.PreCreateParams): Promise<void>;
     /** Set temporary hit points */
     onCreate(actorUpdates: Record<string, unknown>): void;
     beforePrepareData(): void;
@@ -36,7 +38,7 @@ export declare class BattleFormRuleElement extends RuleElementPF2e {
     /** Disable ineligible check modifiers */
     private suppressModifiers;
     private suppressNotes;
-    applyDamageExclusion(modifiers: BaseRawModifier[]): void;
+    applyDamageExclusion(weapon: WeaponPF2e, modifiers: (DiceModifierPF2e | ModifierPF2e)[]): void;
 }
 export interface BattleFormRuleElement extends RuleElementPF2e {
     get actor(): CharacterPF2e;

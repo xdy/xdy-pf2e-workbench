@@ -1,13 +1,13 @@
 /// <reference types="jquery" />
-import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorPF2e } from "@actor";
-import { RuleElementPF2e, RuleElementOptions } from "../rules";
-import { ItemSummaryData, ItemDataPF2e, ItemSourcePF2e, TraitChatData, ItemType } from "./data";
-import { ItemSheetPF2e } from "./sheet/base";
+import { ChatMessagePF2e } from "@module/chat-message";
 import { UserPF2e } from "@module/user";
-import { GhostTemplate } from "@module/ghost-measured-template";
 import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
-export interface ItemConstructionContextPF2e extends DocumentConstructionContext<ItemPF2e> {
+import { RuleElementOptions, RuleElementPF2e } from "../rules";
+import { ItemDataPF2e, ItemSourcePF2e, ItemSummaryData, ItemType, TraitChatData } from "./data";
+import type { PhysicalItemPF2e } from "./physical";
+import { ItemSheetPF2e } from "./sheet/base";
+interface ItemConstructionContextPF2e extends DocumentConstructionContext<ItemPF2e> {
     pf2e?: {
         ready?: boolean;
     };
@@ -27,9 +27,10 @@ declare class ItemPF2e extends Item<ActorPF2e> {
     get schemaVersion(): number | null;
     get description(): string;
     /** Check this item's type (or whether it's one among multiple types) without a call to `instanceof` */
+    isOfType(type: "physical"): this is PhysicalItemPF2e;
     isOfType<T extends ItemType>(...types: T[]): this is InstanceType<ConfigPF2e["PF2E"]["Item"]["documentClasses"][T]>;
     /** Redirect the deletion of any owned items to ActorPF2e#deleteEmbeddedDocuments for a single workflow */
-    delete(context?: DocumentModificationContext): Promise<this>;
+    delete(context?: DocumentModificationContext<this>): Promise<this>;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
     getRollData(): NonNullable<EnrichHTMLOptionsPF2e["rollData"]>;
@@ -60,7 +61,7 @@ declare class ItemPF2e extends Item<ActorPF2e> {
         [key: string]: unknown;
     }>(htmlOptions: EnrichHTMLOptionsPF2e | undefined, data: T): T;
     getChatData(htmlOptions?: EnrichHTMLOptionsPF2e, _rollOptions?: Record<string, unknown>): ItemSummaryData;
-    protected traitChatData(dictionary?: Record<string, string>): TraitChatData[];
+    protected traitChatData(dictionary?: Record<string, string | undefined>): TraitChatData[];
     /**
      * Roll a NPC Attack
      * Rely upon the DicePF2e.d20Roll logic for the core implementation
@@ -71,18 +72,6 @@ declare class ItemPF2e extends Item<ActorPF2e> {
      * Rely upon the DicePF2e.damageRoll logic for the core implementation
      */
     rollNPCDamage(this: Embedded<ItemPF2e>, event: JQuery.ClickEvent, critical?: boolean): void;
-    createTemplate(): GhostTemplate;
-    placeTemplate(_event: JQuery.ClickEvent): void;
-    calculateMap(): {
-        label: string;
-        map2: number;
-        map3: number;
-    };
-    static calculateMap(item: ItemDataPF2e): {
-        label: string;
-        map2: number;
-        map3: number;
-    };
     /** Don't allow the user to create a condition or spellcasting entry from the sidebar. */
     static createDialog(data?: {
         folder?: string;
@@ -102,9 +91,9 @@ declare class ItemPF2e extends Item<ActorPF2e> {
 interface ItemPF2e {
     readonly data: ItemDataPF2e;
     readonly parent: ActorPF2e | null;
-    _sheet: ItemSheetPF2e<ItemPF2e> | null;
+    _sheet: ItemSheetPF2e<this> | null;
     get sheet(): ItemSheetPF2e<this>;
     prepareSiblingData?(this: Embedded<ItemPF2e>): void;
     prepareActorData?(this: Embedded<ItemPF2e>): void;
 }
-export { ItemPF2e };
+export { ItemPF2e, ItemConstructionContextPF2e };

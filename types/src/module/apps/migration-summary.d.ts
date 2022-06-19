@@ -30,6 +30,7 @@ export declare class MigrationSummary extends Application<MigrationSummaryOption
         title: string;
         template: string | null;
         scrollY: string[];
+        filters: SearchFilterConfiguration[];
     };
     getData(): MigrationSummaryData;
     activateListeners($html: JQuery): void;

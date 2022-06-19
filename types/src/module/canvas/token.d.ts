@@ -61,7 +61,9 @@ export declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     /** Refresh vision and the `EffectsPanel` */
     protected _onRelease(options?: Record<string, unknown>): void;
     /** Work around Foundry bug in which unlinked token redrawing performed before data preparation completes */
-    protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this["document"]>, userId: string): void;
+    _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this["document"]>, userId: string): void;
+    /** If a single token (this one) was dropped, re-establish the hover status */
+    protected _onDragLeftDrop(event: TokenInteractionEvent<this>): Promise<this["document"][]>;
 }
 interface TokenImage extends PIXI.Sprite {
     src?: VideoPath;

@@ -1,11 +1,11 @@
-import { OneToFour, Rarity, ZeroToFour, ZeroToThree } from "@module/data";
 import { DiceModifierPF2e } from "@actor/modifiers";
-import { DegreeOfSuccessString } from "@system/degree-of-success";
+import { OneToFour, Rarity, ZeroToFour, ZeroToThree } from "@module/data";
 import { DamageDieSize } from "@system/damage/damage";
-import { PredicateStatement } from "@system/predication";
+import { DegreeOfSuccessString } from "@system/degree-of-success";
+import { RawPredicate } from "@system/predication";
 import type { ResilientRuneType } from "./armor/data";
 import type { ArmorData, WeaponData } from "./data";
-import type { OtherWeaponTag, StrikingRuneType, WeaponTrait } from "./weapon/data";
+import type { OtherWeaponTag, StrikingRuneType, WeaponPropertyRuneType, WeaponTrait } from "./weapon/types";
 export declare function getPropertySlots(itemData: WeaponData | ArmorData): ZeroToFour;
 export declare function getPropertyRunes(itemData: WeaponData | ArmorData, slots: number): string[];
 export declare function getStrikingDice(itemData: {
@@ -20,11 +20,7 @@ export declare function getResiliencyBonus(itemData: {
 }): ZeroToThree;
 interface RollNoteData {
     outcome?: DegreeOfSuccessString[];
-    predicate?: {
-        all?: PredicateStatement[];
-        any?: PredicateStatement[];
-        not?: PredicateStatement[];
-    };
+    predicate?: RawPredicate;
     text: string;
 }
 export interface WeaponPropertyRuneData {
@@ -36,11 +32,7 @@ export interface WeaponPropertyRuneData {
             damageType?: string;
             diceNumber?: number;
             dieSize?: DamageDieSize;
-            predicate?: {
-                all?: PredicateStatement[];
-                any?: PredicateStatement[];
-                not?: PredicateStatement[];
-            };
+            predicate?: RawPredicate;
         }[];
         notes?: RollNoteData[];
     };
@@ -52,10 +44,8 @@ export interface WeaponPropertyRuneData {
     traits: WeaponTrait[];
     otherTags?: OtherWeaponTag[];
 }
-export declare const WEAPON_PROPERTY_RUNES: {
-    [slug: string]: WeaponPropertyRuneData;
-};
-export declare function getPropertyRuneModifiers(runes: string[]): DiceModifierPF2e[];
+export declare const WEAPON_PROPERTY_RUNES: Record<WeaponPropertyRuneType, WeaponPropertyRuneData>;
+export declare function getPropertyRuneModifiers(runes: WeaponPropertyRuneType[]): DiceModifierPF2e[];
 export interface RuneValuationData {
     level: number;
     price: number;

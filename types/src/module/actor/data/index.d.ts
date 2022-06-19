@@ -8,13 +8,13 @@ import type { NPCData, NPCSource } from "@actor/npc/data";
 import { AbilityString } from "./base";
 import { SAVE_TYPES } from "./values";
 import { DCSlug, SaveType } from "./types";
-export declare type CreatureData = CharacterData | NPCData | FamiliarData;
-export declare type ActorType = CreatureType | "hazard" | "loot" | "vehicle";
-export declare type ActorDataPF2e = CreatureData | HazardData | LootData | VehicleData;
-export declare type ActorSourcePF2e = ActorDataPF2e["_source"];
-export declare type ModeOfBeing = "living" | "undead" | "construct" | "object";
-export interface RollInitiativeOptionsPF2e extends RollInitiativeOptions {
+declare type CreatureData = CharacterData | NPCData | FamiliarData;
+declare type ActorType = CreatureType | "hazard" | "loot" | "vehicle";
+declare type ActorDataPF2e = CreatureData | HazardData | LootData | VehicleData;
+declare type ActorSourcePF2e = ActorDataPF2e["_source"];
+declare type ModeOfBeing = "living" | "undead" | "construct" | "object";
+interface RollInitiativeOptionsPF2e extends RollInitiativeOptions {
     secret?: boolean;
     skipDialog?: boolean;
 }
-export { AbilityString, CharacterData, CharacterSource, DCSlug, NPCData, NPCSource, FamiliarData, FamiliarSource, HazardData, HazardSource, LootData, LootSource, SaveType, SAVE_TYPES, VehicleData, VehicleSource, };
+export { AbilityString, ActorDataPF2e, ActorSourcePF2e, ActorType, CharacterData, CharacterSource, CreatureData, DCSlug, FamiliarData, FamiliarSource, HazardData, HazardSource, LootData, LootSource, ModeOfBeing, NPCData, NPCSource, RollInitiativeOptionsPF2e, SAVE_TYPES, SaveType, VehicleData, VehicleSource, };

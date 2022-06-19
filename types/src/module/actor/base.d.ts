@@ -1,37 +1,32 @@
 /// <reference types="jquery" />
-import { ItemPF2e, PhysicalItemPF2e, ContainerPF2e, WeaponPF2e } from "@item";
-import { ArmorPF2e, type ConditionPF2e } from "@item";
+import { ModifierAdjustment } from "@actor/modifiers";
+import { ArmorPF2e, ContainerPF2e, ItemPF2e, PhysicalItemPF2e, type ConditionPF2e } from "@item";
+import { ConditionSlug } from "@item/condition/data";
 import { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/data";
 import type { ActiveEffectPF2e } from "@module/active-effect";
-import { RuleElementPF2e } from "@module/rules/rule-element/base";
-import { ActorSheetPF2e } from "./sheet/base";
-import { VisionLevel } from "./creature/data";
-import { RollOptionFlags } from "./data/base";
-import { ActorDataPF2e, ActorSourcePF2e, ActorType, ModeOfBeing, SaveType } from "./data";
-import { TokenDocumentPF2e } from "@scene";
-import { UserPF2e } from "@module/user";
-import { ConditionSlug } from "@item/condition/data";
-import { Size } from "@module/data";
-import { ActorSpellcasting } from "./spellcasting";
-import { Statistic } from "@system/statistic";
-import { RuleElementSynthetics } from "@module/rules";
 import { TokenPF2e } from "@module/canvas";
-import { ModifierAdjustment } from "@actor/modifiers";
+import { Size } from "@module/data";
+import { RuleElementSynthetics } from "@module/rules";
+import { RuleElementPF2e } from "@module/rules/rule-element/base";
+import { UserPF2e } from "@module/user";
+import { TokenDocumentPF2e } from "@scene";
+import { Statistic } from "@system/statistic";
+import { VisionLevel } from "./creature/data";
+import { ActorDataPF2e, ActorSourcePF2e, ActorType, ModeOfBeing, SaveType } from "./data";
+import { RollOptionFlags } from "./data/base";
+import { ActorInventory } from "./inventory";
+import { ActorSheetPF2e } from "./sheet/base";
+import { ActorSpellcasting } from "./spellcasting";
 import { ActorDimensions } from "./types";
-interface ActorConstructorContextPF2e extends DocumentConstructionContext<ActorPF2e> {
-    pf2e?: {
-        ready?: boolean;
-    };
-}
 /**
  * Extend the base Actor class to implement additional logic specialized for PF2e.
  * @category Actor
  */
-declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
+declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     /** Has this actor gone through at least one cycle of data preparation? */
     private initialized?;
     /** A separate collection of owned physical items for convenient access */
-    physicalItems: Collection<Embedded<PhysicalItemPF2e>>;
+    inventory: ActorInventory;
     /** A separate collection of owned spellcasting entries for convenience */
     spellcasting: ActorSpellcasting;
     /** Rule elements drawn from owned items */
@@ -40,7 +35,13 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
     saves?: {
         [K in SaveType]?: Statistic;
     };
+    /** A cached copy of `Actor#itemTypes`, lazily regenerated every data preparation cycle */
+    private _itemTypes?;
     constructor(data: PreCreate<ActorSourcePF2e>, context?: ActorConstructorContextPF2e);
+    /** Cache the return data before passing it to the caller */
+    get itemTypes(): {
+        [K in keyof ItemTypeMap]: Embedded<ItemTypeMap[K]>[];
+    };
     /** The compendium source ID of the actor **/
     get sourceId(): ActorUUID | null;
     /** The recorded schema version of this actor, updated after each data migration */
@@ -72,6 +73,8 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
     get heldShield(): Embedded<ArmorPF2e> | null;
     /** Most actor types can host rule elements */
     get canHostRuleElements(): boolean;
+    /** @deprecated */
+    get physicalItems(): ActorInventory;
     /** Add effect icons from effect items and rule elements */
     get temporaryEffects(): TemporaryEffect[];
     /** A means of checking this actor's type without risk of circular import references */
@@ -105,14 +108,9 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
     prepareDerivedData(): void;
     /** Set defaults for this actor's prototype token */
     private preparePrototypeToken;
-    getStrikeDescription(weapon: WeaponPF2e): {
-        description: string;
-        criticalSuccess: string;
-        success: string;
-    };
     /** If there is an active encounter, set roll options for it and this actor's participant */
     setEncounterRollOptions(): void;
-    getModifierAdjustments(selectors: string[], slug: string | null): ModifierAdjustment[];
+    getModifierAdjustments(selectors: string[], slug: string): ModifierAdjustment[];
     /**
      * Roll a Save Check
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus.
@@ -195,7 +193,6 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
     toggleCondition(conditionSlug: ConditionSlug): Promise<void>;
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
-    /** Ensure imported actors are current on their schema version */
     protected _preCreate(data: PreDocumentId<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: ActorUpdateContext<this>, user: UserPF2e): Promise<void>;
     protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: ActorUpdateContext<this>, userId: string): void;
@@ -203,13 +200,10 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e> {
     protected _onDelete(options: DocumentModificationContext<this>, userId: string): void;
     protected _onEmbeddedDocumentChange(embeddedName: "Item" | "ActiveEffect"): void;
 }
-interface ActorPF2e extends Actor<TokenDocumentPF2e> {
+interface ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     readonly data: ActorDataPF2e;
-    _sheet: ActorSheetPF2e<ActorPF2e> | ActorSheet<ActorPF2e, ItemPF2e> | null;
-    get sheet(): ActorSheetPF2e<ActorPF2e> | ActorSheet<ActorPF2e, ItemPF2e>;
-    get itemTypes(): {
-        [K in ItemType]: Embedded<InstanceType<ConfigPF2e["PF2E"]["Item"]["documentClasses"][K]>>[];
-    };
+    _sheet: ActorSheetPF2e<this> | ActorSheet<this, ItemPF2e> | null;
+    get sheet(): ActorSheetPF2e<this> | ActorSheet<this, ItemPF2e>;
     /** See implementation in class */
     createEmbeddedDocuments(embeddedName: "ActiveEffect", data: PreCreate<foundry.data.ActiveEffectSource>[], context?: DocumentModificationContext): Promise<ActiveEffectPF2e[]>;
     createEmbeddedDocuments(embeddedName: "Item", data: PreCreate<ItemSourcePF2e>[], context?: DocumentModificationContext): Promise<ItemPF2e[]>;
@@ -229,13 +223,21 @@ interface ActorPF2e extends Actor<TokenDocumentPF2e> {
         all: boolean;
     }): Embedded<ConditionPF2e>[] | Embedded<ConditionPF2e> | null;
 }
-export interface HitPointsSummary {
+interface ActorConstructorContextPF2e extends DocumentConstructionContext<ActorPF2e> {
+    pf2e?: {
+        ready?: boolean;
+    };
+}
+declare type ItemTypeMap = {
+    [K in ItemType]: InstanceType<ConfigPF2e["PF2E"]["Item"]["documentClasses"][K]>;
+};
+interface HitPointsSummary {
     value: number;
     max: number;
     temp: number;
     negativeHealing: boolean;
 }
-export interface ActorUpdateContext<T extends ActorPF2e> extends DocumentUpdateContext<T> {
+interface ActorUpdateContext<T extends ActorPF2e> extends DocumentUpdateContext<T> {
     damageTaken?: number;
 }
-export { ActorPF2e };
+export { ActorPF2e, HitPointsSummary, ActorUpdateContext };

@@ -16,6 +16,8 @@ export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | 
     getData(options?: Partial<ApplicationOptions>): Promise<ChoiceSetTemplateData>;
     protected getChoices(): PickableThing[];
     activateListeners($html: JQuery): void;
+    /** Return early if there is only one choice */
+    resolveSelection(): Promise<PickableThing<string | number | object> | null>;
     /** Handle a dropped homebrew item */
     _onDrop(event: ElementDragEvent): Promise<void>;
     _canDragDrop(): boolean;

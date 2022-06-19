@@ -11,7 +11,7 @@ export declare class LootSheetPF2e extends ActorSheetPF2e<LootPF2e> {
     get isLootSheet(): boolean;
     getData(): Promise<LootSheetDataPF2e>;
     activateListeners($html: JQuery): void;
-    prepareItems(sheetData: any): void;
+    protected prepareItems(): void;
     private distributeCoins;
     private lootNPCs;
     protected _onDropItem(event: ElementDragEvent, itemData: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;

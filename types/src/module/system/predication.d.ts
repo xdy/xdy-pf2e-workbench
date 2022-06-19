@@ -21,7 +21,7 @@ declare class PredicatePF2e implements RawPredicate {
     /** Structurally validate the predicates */
     static validate(raw: unknown): boolean;
     /** Test this predicate against a domain of discourse */
-    test(options: string[]): boolean;
+    test(options: string[] | Set<string>): boolean;
     /** Is the provided statement true? */
     private isTrue;
     private testBinaryOp;

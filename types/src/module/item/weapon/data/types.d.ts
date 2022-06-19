@@ -2,50 +2,33 @@ import { ItemFlagsPF2e } from "@item/data/base";
 import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource } from "@item/physical/data";
 import { BaseMaterial, PreciousMaterialGrade } from "@item/physical/types";
 import { UsageDetails } from "@item/physical/usage";
-import { WEAPON_PROPERTY_RUNES } from "@item/runes";
 import { OneToFour, ZeroToThree } from "@module/data";
 import { DamageDieSize, DamageType } from "@system/damage";
-import type { LocalizePF2e } from "@system/localize";
 import type { WeaponPF2e } from "..";
-import { WeaponMaterialType } from "../types";
-import { MELEE_WEAPON_GROUPS, RANGED_WEAPON_GROUPS, WEAPON_CATEGORIES, WEAPON_GROUPS, WEAPON_RANGES } from "./values";
-export interface WeaponSource extends BasePhysicalItemSource<"weapon", WeaponSystemSource> {
+import { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, StrikingRuneType, WeaponCategory, WeaponGroup, WeaponMaterialType, WeaponPropertyRuneType, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "../types";
+declare type WeaponSource = BasePhysicalItemSource<"weapon", WeaponSystemSource> & {
     flags: DeepPartial<WeaponFlags>;
-}
-export declare class WeaponData extends BasePhysicalItemData<WeaponPF2e> {
-    static DEFAULT_ICON: ImagePath;
-}
-export interface WeaponData extends Omit<WeaponSource, "effects" | "flags"> {
-    type: WeaponSource["type"];
-    data: WeaponSystemData;
+};
+declare type WeaponData = Omit<WeaponSource, "data" | "effects" | "flags"> & BasePhysicalItemData<WeaponPF2e, "weapon", WeaponSystemData, WeaponSource> & {
     flags: WeaponFlags;
-    readonly _source: WeaponSource;
-}
+};
 declare type WeaponFlags = ItemFlagsPF2e & {
     pf2e: {
         comboMeleeUsage: boolean;
     };
 };
-export declare type WeaponTrait = keyof ConfigPF2e["PF2E"]["weaponTraits"];
 interface WeaponSourceTraits extends PhysicalItemTraits<WeaponTrait> {
     otherTags?: OtherWeaponTag[];
 }
 declare type WeaponTraits = Required<WeaponSourceTraits>;
-export declare type WeaponCategory = SetElement<typeof WEAPON_CATEGORIES>;
-export declare type WeaponGroup = SetElement<typeof WEAPON_GROUPS>;
-export declare type MeleeWeaponGroup = SetElement<typeof MELEE_WEAPON_GROUPS>;
-export declare type RangedWeaponGroup = SetElement<typeof RANGED_WEAPON_GROUPS>;
-export declare type BaseWeaponType = keyof typeof LocalizePF2e.translations.PF2E.Weapon.Base;
-export interface WeaponDamage {
+interface WeaponDamage {
     value: string;
     dice: number;
     die: DamageDieSize;
     damageType: DamageType;
     modifier: number;
 }
-export declare type StrikingRuneType = "striking" | "greaterStriking" | "majorStriking";
-export declare type WeaponPropertyRuneType = keyof typeof WEAPON_PROPERTY_RUNES[number];
-export interface WeaponRuneData {
+interface WeaponRuneData {
     potency: OneToFour | null;
     striking: StrikingRuneType | null;
     property: Record<OneToFour, WeaponPropertyRuneType | null>;
@@ -62,10 +45,10 @@ declare type SpecificWeaponData = {
     };
     runes: Omit<WeaponRuneData, "property">;
 };
-export interface WeaponPropertyRuneSlot {
+interface WeaponPropertyRuneSlot {
     value: WeaponPropertyRuneType | null;
 }
-export interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
+interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     traits: WeaponSourceTraits;
     category: WeaponCategory;
     group: WeaponGroup | null;
@@ -82,7 +65,7 @@ export interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     };
     range: WeaponRangeIncrement | null;
     reload: {
-        value: string | null;
+        value: WeaponReloadTime | null;
     };
     usage: {
         value: "worngloves" | "held-in-one-hand" | "held-in-one-plus-hands" | "held-in-two-hands";
@@ -119,9 +102,14 @@ export interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     };
     selectedAmmoId: string | null;
 }
-export interface WeaponSystemData extends Omit<WeaponSystemSource, "temporary" | "usage">, Investable<PhysicalSystemData> {
+interface WeaponSystemData extends Omit<WeaponSystemSource, "price" | "temporary" | "usage">, Investable<PhysicalSystemData> {
     baseItem: BaseWeaponType | null;
     traits: WeaponTraits;
+    reload: {
+        value: WeaponReloadTime | null;
+        /** Whether the ammunition (or the weapon itself, if thrown) should be consumed upon firing */
+        consume: boolean | null;
+    };
     runes: {
         potency: number;
         striking: ZeroToThree;
@@ -131,7 +119,7 @@ export interface WeaponSystemData extends Omit<WeaponSystemSource, "temporary" |
     material: WeaponMaterialData;
     usage: UsageDetails & WeaponSystemSource["usage"];
 }
-export interface WeaponMaterialData {
+interface WeaponMaterialData {
     /** The "base material" or category: icon/steel (metal), wood, rope, etc. */
     base: BaseMaterial[];
     /** The precious material of which this weapon is composed */
@@ -140,8 +128,7 @@ export interface WeaponMaterialData {
         grade: PreciousMaterialGrade;
     } | null;
 }
-export declare type WeaponRangeIncrement = typeof WEAPON_RANGES[number];
-export interface ComboWeaponMeleeUsage {
+interface ComboWeaponMeleeUsage {
     damage: {
         type: DamageType;
         die: DamageDieSize;
@@ -149,5 +136,4 @@ export interface ComboWeaponMeleeUsage {
     group: MeleeWeaponGroup;
     traits: WeaponTrait[];
 }
-export declare type OtherWeaponTag = "crossbow" | "improvised";
-export {};
+export { ComboWeaponMeleeUsage, WeaponDamage, WeaponData, WeaponMaterialData, WeaponPropertyRuneSlot, WeaponRuneData, WeaponSource, WeaponSystemData, WeaponSystemSource, };

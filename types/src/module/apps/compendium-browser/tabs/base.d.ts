@@ -1,5 +1,5 @@
 import { CompendiumBrowser } from "..";
-import { BaseFilterData, CheckBoxOptions, RangesData } from "./data";
+import { BaseFilterData, CheckboxOptions, RangesData } from "./data";
 import { TabName } from "../data";
 export declare abstract class CompendiumBrowserTab {
     /** A reference to the parent CompendiumBrowser */
@@ -38,9 +38,13 @@ export declare abstract class CompendiumBrowserTab {
     /** Check if an array includes any keys of another array */
     protected arrayIncludes(array: string[], other: string[]): boolean;
     /** Generates a localized and sorted CheckBoxOptions object from config data */
-    protected generateCheckboxOptions(configData: Record<string, string>, sort?: boolean): CheckBoxOptions;
+    protected generateCheckboxOptions(configData: Record<string, string>, sort?: boolean): CheckboxOptions;
+    protected generateMultiselectOptions<T extends string>(optionsRecord: Record<T, string>, sort?: boolean): {
+        value: T;
+        label: string;
+    }[];
     /** Generates a sorted CheckBoxOptions object from a sources Set */
-    protected generateSourceCheckboxOptions(sources: Set<string>): CheckBoxOptions;
+    protected generateSourceCheckboxOptions(sources: Set<string>): CheckboxOptions;
     /** Provide a best-effort sort of an object (e.g. CONFIG.PF2E.monsterTraits) */
     protected sortedConfig(obj: Record<string, string>): {
         [k: string]: string;

@@ -18,6 +18,8 @@ declare class ChatMessagePF2e extends ChatMessage<ActorPF2e> {
         actor: ActorPF2e;
         token: Embedded<TokenDocumentPF2e>;
     } | null;
+    /** If the message came from dynamic inline content in a journal entry, the entry's ID may be used to retrieve it */
+    get journalEntry(): JournalEntry | null;
     /** Does this message include a check (1d20 + c) roll? */
     get isCheckRoll(): boolean;
     /** Does the message include a rerolled check? */
@@ -28,6 +30,7 @@ declare class ChatMessagePF2e extends ChatMessage<ActorPF2e> {
     get item(): Embedded<ItemPF2e> | null;
     /** Get stringified item source from the DOM-rendering of this chat message */
     getItemFromDOM(): Embedded<ItemPF2e> | null;
+    showDetails(): Promise<void>;
     /** Get the token of the speaker if possible */
     get token(): Embedded<TokenDocumentPF2e> | null;
     /** As of Foundry 9.251, players are able to delete their own messages, and GMs are unable to restrict it. */

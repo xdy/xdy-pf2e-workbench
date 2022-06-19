@@ -12,7 +12,6 @@ declare class CombatantPF2e<TActor extends ActorPF2e | null = ActorPF2e | null> 
         than: RolledCombatant;
     }): boolean;
     prepareBaseData(): void;
-    protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentUpdateContext<this>, userId: string): void;
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
     toggleDefeated(): Promise<void>;
     /**
@@ -25,6 +24,8 @@ declare class CombatantPF2e<TActor extends ActorPF2e | null = ActorPF2e | null> 
     _getInitiativeFormula(): string;
     /** Toggle the visibility of names to players */
     toggleNameVisibility(): Promise<void>;
+    /** Send out a message with information on an automatic effect that occurs upon an actor's death */
+    protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentUpdateContext<this>, userId: string): void;
 }
 declare type CombatantDataPF2e<T extends CombatantPF2e> = foundry.data.CombatantData<T> & {
     flags: {

@@ -4,7 +4,6 @@ import { ItemPF2e } from "@item";
 import { Rarity } from "@module/data";
 import { HeritageData } from "./data";
 declare class HeritagePF2e extends ItemPF2e {
-    static get schema(): typeof HeritageData;
     get traits(): Set<CreatureTrait>;
     get rarity(): Rarity;
     /** Prepare a character's data derived from their heritage */

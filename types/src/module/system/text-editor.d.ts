@@ -17,13 +17,14 @@ declare class TextEditorPF2e extends TextEditor {
     private static createTemplate;
     private static createItemCheck;
 }
-declare type EnrichHTMLOptionsPF2e = EnrichHTMLOptions & {
+interface EnrichHTMLOptionsPF2e extends EnrichHTMLOptions {
     rollData?: {
         actor?: ActorPF2e | null;
         item?: ItemPF2e | null;
         mod?: number;
+        [key: string]: unknown;
     };
-};
+}
 interface ConvertXMLNodeOptions {
     /** The value of the data-visibility attribute to add to the span element */
     visibility?: UserVisibility | null;

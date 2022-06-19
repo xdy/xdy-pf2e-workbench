@@ -6,7 +6,6 @@ import { LootData, LootSource } from "./data";
 import { ActiveEffectPF2e } from "@module/active-effect";
 import { ItemSourcePF2e } from "@item/data";
 export declare class LootPF2e extends ActorPF2e {
-    static get schema(): typeof LootData;
     get isLoot(): boolean;
     get isMerchant(): boolean;
     /** Should this actor's token(s) be hidden when there are no items in its inventory? */

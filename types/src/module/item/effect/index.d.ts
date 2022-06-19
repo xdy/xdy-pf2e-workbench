@@ -1,8 +1,7 @@
 import { UserPF2e } from "@module/user";
 import { ItemPF2e } from "../base";
 import { EffectData } from "./data";
-export declare class EffectPF2e extends ItemPF2e {
-    static get schema(): typeof EffectData;
+declare class EffectPF2e extends ItemPF2e {
     static DURATION_UNITS: Readonly<Record<string, number>>;
     get level(): number;
     get isExpired(): boolean;
@@ -25,6 +24,7 @@ export declare class EffectPF2e extends ItemPF2e {
     /** Show floaty text when this effect is deleted from an actor */
     protected _onDelete(options: DocumentModificationContext, userId: string): void;
 }
-export interface EffectPF2e {
+interface EffectPF2e {
     readonly data: EffectData;
 }
+export { EffectPF2e };
