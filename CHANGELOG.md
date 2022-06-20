@@ -1,3 +1,10 @@
+## [3.10.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.10.2...v3.10.3) (2022-06-20)
+
+
+### Bug Fixes
+
+* The autorolldamage option no longer tries (and fails) to autoroll damage for actions... ([1749ca6](https://github.com/xdy/xdy-pf2e-workbench/commit/1749ca6b137d4ea77310499db68aaeb143cc3478))
+
 ## [3.10.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.10.1...v3.10.2) (2022-06-19)
 
 
