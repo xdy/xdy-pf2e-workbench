@@ -1,3 +1,10 @@
+# [3.11.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.10.3...v3.11.0) (2022-06-21)
+
+
+### Features
+
+* IWR reminder message now works for spell damage rolls. ([7921bc8](https://github.com/xdy/xdy-pf2e-workbench/commit/7921bc84a0d0c43310304bc3593aef0bc1270670))
+
 ## [3.10.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.10.2...v3.10.3) (2022-06-20)
 
 
