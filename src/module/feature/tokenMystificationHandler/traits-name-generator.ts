@@ -27,6 +27,11 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
         }
     }
 
+    let size: string[] = [];
+    if (game.settings.get(MODULENAME, "npcMystifierUseSize")) {
+        size = traitsList.filter((trait: string) => TRAITS.SIZES.includes(trait));
+    }
+
     let eliteWeak: string[] = [];
     if (!game.settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
         eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
@@ -75,6 +80,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     }
 
     return [prefix]
+        .concat(size)
         .concat(eliteWeak)
         .concat(alignments)
         .concat(rarities)
@@ -89,6 +95,7 @@ export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2
     const data = token?.actor?.data?.data;
     const traits = data?.traits;
     const customTraits: any = traits?.traits?.custom;
+
     let traitsList = <string[]>traits?.traits?.value;
     if (traitsList && traits) {
         if (customTraits) {
@@ -97,6 +104,11 @@ export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2
         const tokenRarities: any = traits.rarity;
         if (tokenRarities) {
             traitsList = traitsList.concat(tokenRarities);
+        }
+
+        const size = traits?.size?.value;
+        if (size) {
+            traitsList.push(size);
         }
 
         const prefix = (await fixesPreAndPost("npcMystifierPrefix")) || "";
@@ -121,7 +133,10 @@ export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2
                         case TRAITS.ELITE_WEAK[1]:
                             return game.i18n.localize("PF2E.NPC.Adjustment.WeakLabel");
                     }
+                } else if (TRAITS.SIZES.includes(lowercaseTrait)) {
+                    return game.i18n.localize(CONFIG.PF2E.actorSizes[lowercaseTrait]);
                 }
+
                 const translations: any = game.i18n.translations.PF2E ?? {};
                 return (trait !== prefix && trait !== postfix ? translations[`Trait${trait}`] : trait) ?? trait;
             })

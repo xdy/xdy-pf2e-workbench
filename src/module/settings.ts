@@ -202,6 +202,15 @@ export function registerSettings() {
         type: Boolean,
     });
 
+    game.settings.register(MODULENAME, "npcMystifierUseSize", {
+        name: `${MODULENAME}.SETTINGS.npcMystifierUseSize.name`,
+        hint: `${MODULENAME}.SETTINGS.npcMystifierUseSize.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
     game.settings.register(MODULENAME, "npcMystifierFilterRarities", {
         name: `${MODULENAME}.SETTINGS.npcMystifierFilterRarities.name`,
         hint: `${MODULENAME}.SETTINGS.npcMystifierFilterRarities.hint`,
