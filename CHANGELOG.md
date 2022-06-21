@@ -1,3 +1,10 @@
+## [3.11.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.0...v3.11.1) (2022-06-21)
+
+
+### Bug Fixes
+
+* Autoroll damage now works for companions and eidolons. ([aae99c9](https://github.com/xdy/xdy-pf2e-workbench/commit/aae99c9718055f61867e6ad415debb1809bdaafd))
+
 # [3.11.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.10.3...v3.11.0) (2022-06-21)
 
 
