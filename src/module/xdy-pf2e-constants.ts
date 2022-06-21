@@ -2,6 +2,8 @@ const PF2E_RARITIES: string[] = ["common", "uncommon", "rare", "unique"];
 
 const PF2E_ALIGNMENTS: string[] = ["lawful", "neutral", "chaotic", "good", "evil"];
 
+const PF2E_SIZES: string[] = ["tiny", "sm", "med", "lg", "huge", "grg"];
+
 const PF2E_CREATURE_TYPES: string[] = [
     "aberration",
     "animal",
@@ -243,6 +245,7 @@ const ELITE_WEAK: string[] = ["elite", "weak"];
 
 export const TRAITS = {
     RARITIES: PF2E_RARITIES,
+    SIZES: PF2E_SIZES,
     CREATURE_TYPES: PF2E_CREATURE_TYPES,
     CREATURE_FAMILIES: PF2E_CREATURE_FAMILIES,
     ELITE_WEAK: ELITE_WEAK,
