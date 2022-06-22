@@ -76,10 +76,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                     autoRollDamage(message).then(() => console.log("Workbench autoRollDamage complete"));
                 }
 
-                if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-                    persistentDamage(message).then(() => console.log("Workbench persistentDamage complete"));
-                }
-
                 if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
                     reminderBreathWeapon(message).then(() => console.log("Workbench reminderBreathWeapon complete"));
                 }
@@ -112,6 +108,10 @@ Hooks.once("init", async (actor: ActorPF2e) => {
 
             if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
                 persistentHealing(message).then(() => console.log("Workbench persistentHealing complete"));
+            }
+
+            if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
+                persistentDamage(message).then(() => console.log("Workbench persistentDamage complete"));
             }
 
             if (
