@@ -1,3 +1,10 @@
+## [3.11.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.1...v3.11.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* Autorolling damage now works for Unarmed Attack. Also, option to add Recall Knowledge button to npcs no longer prints an error in the console when no skill matches (e.g. for newly created npcs.) ([487eb6f](https://github.com/xdy/xdy-pf2e-workbench/commit/487eb6f0e59b6cf4d482093aacf98a777f5aa59a))
+
 ## [3.11.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.0...v3.11.1) (2022-06-21)
 
 

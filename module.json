@@ -2,7 +2,7 @@
   "name": "xdy-pf2e-workbench",
   "title": "PF2e Workbench",
   "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
-  "version": "3.11.1",
+  "version": "3.11.2",
   "minimumCoreVersion": "9",
   "compatibleCoreVersion": "9",
   "scripts": [],
