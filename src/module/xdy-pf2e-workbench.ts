@@ -57,7 +57,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
         game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
         game.settings.get(MODULENAME, "automatedAnimationOn") ||
-        game.settings.get(MODULENAME, "applyPersistentDamage") ||
         game.settings.get(MODULENAME, "reminderBreathWeapon") ||
         game.settings.get(MODULENAME, "reminderTargeting")
     ) {
@@ -98,6 +97,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
         game.settings.get(MODULENAME, "applyPersistentHealing") ||
+        game.settings.get(MODULENAME, "applyPersistentDamage") ||
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
