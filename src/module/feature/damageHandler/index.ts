@@ -31,85 +31,80 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const rollType = flags.context?.type;
 
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
-            //Exit early if no origin is found.
-            if (origin !== null) {
-                const spellDamage = (<SpellPF2e>origin).data?.data?.damage?.value;
-                const rollForNonAttackSpell =
-                    autoRollDamageForSpellNotAnAttack &&
-                    rollType === undefined &&
-                    flags.casting !== null &&
-                    spellDamage &&
-                    Object.keys(spellDamage)?.length !== 0 &&
-                    !origin?.traits.has("attack");
-
-                const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
-                const rollForAttackSpell = rollType === "spell-attack-roll" && autoRollDamageForSpellAttack;
-                const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
-                if (messageActor && messageToken && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
+            //Exit early if no origin is found (probably unarmed attack)
+            const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
+            const rollForNonAttackSpell =
+                origin !== null &&
+                autoRollDamageForSpellNotAnAttack &&
+                rollType === undefined &&
+                flags.casting !== null &&
+                (<SpellPF2e>origin).data?.data?.damage?.value &&
+                Object.keys((<SpellPF2e>origin).data?.data?.damage?.value)?.length !== 0 &&
+                !origin?.traits.has("attack");
+            const rollForAttackSpell = rollType === "spell-attack-roll" && autoRollDamageForSpellAttack;
+            const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
+            if (messageActor && messageToken && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
+                if (
+                    rollForNonAttackSpell ||
+                    (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
+                ) {
+                    let spellLevel = (<SpellPF2e>origin)?.data.data.level;
+                    let levelFromChatCard = false;
+                    const chatLength = game.messages?.contents.length ?? 0;
+                    for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
+                        const msg = game.messages?.contents[chatLength - i];
+                        if (msg && (<ActorFlagsPF2e>msg.data.flags.pf2e).origin?.uuid === originUuid) {
+                            const level = msg.data.content.match(/data-spell-lvl="(\d+)"/);
+                            if (level && level[1]) {
+                                levelFromChatCard = true;
+                                // @ts-ignore Wtf? How to make a number into a OneToTen?
+                                spellLevel = parseInt(level[1]);
+                                break;
+                            }
+                        }
+                    }
                     if (
-                        rollForNonAttackSpell ||
-                        (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
+                        !levelFromChatCard &&
+                        game.settings.get(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound")
                     ) {
-                        let spellLevel = (<SpellPF2e>origin)?.data.data.level;
-                        let levelFromChatCard = false;
-                        const chatLength = game.messages?.contents.length ?? 0;
-                        for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
-                            const msg = game.messages?.contents[chatLength - i];
-                            if (msg && (<ActorFlagsPF2e>msg.data.flags.pf2e).origin?.uuid === originUuid) {
-                                const level = msg.data.content.match(/data-spell-lvl="(\d+)"/);
-                                if (level && level[1]) {
-                                    levelFromChatCard = true;
-                                    // @ts-ignore Wtf? How to make a number into a OneToTen?
-                                    spellLevel = parseInt(level[1]);
-                                    break;
-                                }
-                            }
-                        }
-                        if (
-                            !levelFromChatCard &&
-                            game.settings.get(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound")
-                        ) {
-                            ui.notifications.info(
-                                game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
-                                    spell: origin?.data.name,
-                                })
-                            );
-                        }
+                        ui.notifications.info(
+                            game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
+                                spell: origin?.data.name,
+                            })
+                        );
+                    }
 
-                        //Until spell level flags are added to attack rolls it is the best I could come up with.
-                        //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
-                        //@ts-ignore
-                        origin?.rollDamage({
-                            currentTarget: {
-                                closest: () => {
-                                    // @ts-ignore Wtf? How to make a number into a OneToTen?
-                                    return { dataset: { spellLvl: Math.abs(spellLevel) } };
-                                },
+                    //Until spell level flags are added to attack rolls it is the best I could come up with.
+                    //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
+                    //@ts-ignore
+                    origin?.rollDamage({
+                        currentTarget: {
+                            closest: () => {
+                                // @ts-ignore Wtf? How to make a number into a OneToTen?
+                                return { dataset: { spellLvl: Math.abs(spellLevel) } };
                             },
-                        });
-                    } else if (rollForStrike) {
-                        const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
-                        const actions: any =
-                            // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
-                            messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
-                            // @ts-ignore
-                            messageActor?.data.data?.actions;
-                        const actionIds = originUuid.match(/Item.(\w+)/);
-                        let action: any;
+                        },
+                    });
+                } else if (rollForStrike) {
+                    const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
+                    const actions: any =
+                        // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
+                        messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
+                        // @ts-ignore
+                        messageActor?.data.data?.actions;
+                    const actionIds = originUuid.match(/Item.(\w+)/);
+                    let action: any;
 
-                        if (actionIds && actionIds[1]) {
-                            action = getActionFromMessage(actions, actionIds, message);
-                            if (degreeOfSuccess === "success") {
-                                action?.damage({ options: rollOptions });
-                            } else if (degreeOfSuccess === "criticalSuccess") {
-                                action?.critical({ options: rollOptions });
-                            }
+                    if (actionIds && actionIds[1]) {
+                        action = getActionFromMessage(actions, actionIds, message);
+                        if (degreeOfSuccess === "success") {
+                            action?.damage({ options: rollOptions });
+                        } else if (degreeOfSuccess === "criticalSuccess") {
+                            action?.critical({ options: rollOptions });
                         }
                     }
                 }
             }
-        } else {
-            //TODOO Special case unarmed attack
         }
     }
 }

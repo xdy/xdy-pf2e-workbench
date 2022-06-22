@@ -298,6 +298,9 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                         .find(".section-body")
                         .each((i, e) => {
                             const $e = $(e);
+                            if ($e.find(".identification-skills").length === 0) {
+                                return;
+                            }
                             const dcs = <string>$e.find(".identification-skills")[0].title;
                             const skills = $e.find("ul");
                             for (const s of skills.text().trim().split("\n")) {
