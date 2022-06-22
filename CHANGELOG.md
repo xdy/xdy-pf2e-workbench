@@ -1,3 +1,11 @@
+## [3.11.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.2...v3.11.3) (2022-06-22)
+
+
+### Bug Fixes
+
+* Auto applying persistent damage from the pf2e Persistent Damage module works again. ([09dc064](https://github.com/xdy/xdy-pf2e-workbench/commit/09dc0647e6ab9ce3ac86cca05306d560c4362325))
+* Auto applying persistent damage from the pf2e Persistent Damage module works again. ([5698342](https://github.com/xdy/xdy-pf2e-workbench/commit/569834275ae42237a2405e4ac3795e46a6f90803))
+
 ## [3.11.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.1...v3.11.2) (2022-06-22)
 
 
