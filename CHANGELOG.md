@@ -1,3 +1,10 @@
+# [3.12.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.3...v3.12.0) (2022-06-30)
+
+
+### Features
+
+* Option to add an npc scaler feature when right clicking on an npc (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ! At some point Avery will have the time to add it to the system, until then I'll maintain it.) ([db6a5ca](https://github.com/xdy/xdy-pf2e-workbench/commit/db6a5ca3d0dd67bf5f771ae8c4c2c1da88be84f1))
+
 ## [3.11.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.2...v3.11.3) (2022-06-22)
 
 
