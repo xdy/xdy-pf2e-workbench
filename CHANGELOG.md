@@ -1,3 +1,10 @@
+# [3.15.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.14.0...v3.15.0) (2022-06-30)
+
+
+### Features
+
+* Option to output a reminder when a token that should not be able to attack due to being dead/defeated/having 0 hp/being unconscious but still attacks. ([f14a4d2](https://github.com/xdy/xdy-pf2e-workbench/commit/f14a4d2e2288648f192e36a7568fb786a832ba8d))
+
 # [3.14.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.13.0...v3.14.0) (2022-06-30)
 
 
