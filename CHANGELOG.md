@@ -1,3 +1,10 @@
+# [3.14.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.13.0...v3.14.0) (2022-06-30)
+
+
+### Features
+
+* Option to use the actor size for mystified names. ([8049ec8](https://github.com/xdy/xdy-pf2e-workbench/commit/8049ec8b399988debf124ccc370769ad3479f637))
+
 # [3.13.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.12.0...v3.13.0) (2022-06-30)
 
 
