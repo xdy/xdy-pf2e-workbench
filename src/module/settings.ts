@@ -610,6 +610,23 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP", {
+        name: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.name`,
+        hint: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.hint`,
+        scope: "client",
+        config: true,
+        default: "none",
+        type: String,
+        choices: {
+            none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.no`),
+            remove: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.removeDying`),
+            removeForCharacters: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.removeDyingForCharacters`
+            ),
+        },
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "decreaseFrightenedConditionEachTurn", {
         name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
         hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,

@@ -128,3 +128,25 @@ export async function increaseDyingOnZeroHP(
     }
     return true;
 }
+
+export async function removeDyingOnZeroHP(
+    actor: ActorPF2e,
+    update: Record<string, string>,
+    hp: number
+): Promise<boolean> {
+    if (
+        shouldIHandleThis(actor.isOwner ? game.user?.id : null) &&
+        // @ts-ignore
+        hp <= 0 &&
+        getProperty(update, "data.attributes.hp.value") > 0
+    ) {
+        const value = actor.getCondition("dying")?.value || 0;
+        const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
+        if (option.endsWith("ForCharacters") ? actor.data.type === "character" : true) {
+            for (let i = 0; i < Math.max(1, value); i++) {
+                await actor.decreaseCondition("dying");
+            }
+        }
+    }
+    return true;
+}

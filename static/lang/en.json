@@ -134,6 +134,13 @@
         "addOneForCharacters": "Add one, for characters only",
         "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters only"
       },
+      "autoRemoveDyingAtGreaterThanZeroHP": {
+        "hint": "Client setting to automatically remove Dying when healed to above zero hp.",
+        "name": "Automatically remove Dying when healed to above zero hp.",
+        "no": "No",
+        "removeDying": "Remove Dying for all",
+        "removeDyingForCharacters": "Remove Dying, for characters only"
+      },
       "giveWoundedWhenDyingRemoved": {
         "hint": "Client setting to automatically give Wounded condition when Dying condition is removed.",
         "name": "Automatically give Wounded when Dying is removed."

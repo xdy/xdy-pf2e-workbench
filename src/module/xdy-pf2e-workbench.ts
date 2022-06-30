@@ -20,7 +20,7 @@ import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { TokenDocumentPF2e } from "@scene";
 import { playAnimationAndSound } from "./feature/sfxHandler";
 import { toggleSettings } from "./feature/settingsHandler";
-import { increaseDyingOnZeroHP, reduceFrightened } from "./feature/conditionHandler";
+import { increaseDyingOnZeroHP, reduceFrightened, removeDyingOnZeroHP } from "./feature/conditionHandler";
 import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
 import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./feature/heroPointHandler";
 import { nth, shouldIHandleThis } from "./utils";
@@ -234,7 +234,8 @@ Hooks.once("init", async (actor: ActorPF2e) => {
 
     if (
         game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" ||
-        game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none"
+        game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
+        game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none"
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
             const hp = actor.data.data.attributes.hp?.value || 0;
@@ -248,6 +249,12 @@ Hooks.once("init", async (actor: ActorPF2e) => {
             if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
                 increaseDyingOnZeroHP(actor, updateClone, hp).then(() =>
                     console.log("Workbench increaseDyingOnZeroHP complete")
+                );
+            }
+
+            if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
+                removeDyingOnZeroHP(actor, updateClone, hp).then(() =>
+                    console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete")
                 );
             }
         });
