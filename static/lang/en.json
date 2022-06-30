@@ -299,6 +299,15 @@
         "defaultName": "Breath",
         "used": "Used "
       },
+      "reminderCannotAttack": {
+        "hint": "World setting to show reminder if attacking with a token that cannot attack due to being unconscious/dead/defeated/no hp/etc.",
+        "name": "(World) Reminder if attacking with token unable to attack",
+        "unconscious": "is unconscious",
+        "dead": "is dead",
+        "defeated": "is defeated",
+        "hasNoHp": "has no hp",
+        "note": "Are you sure about this attack? {actorName} {reason}, and thus not likely to be able attack..."
+      },
       "reminderIWR": {
         "hint": "World setting to show reminder for IWR when damage is taken.",
         "name": "(World) IWR reminder",

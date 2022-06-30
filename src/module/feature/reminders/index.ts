@@ -6,6 +6,7 @@ import { ActorFlagsPF2e, ImmunityType } from "@actor/data/base";
 import { ValuesList } from "@module/data";
 import { ChatMessagePF2e } from "../../../../types/src/module/chat-message/index";
 import { SpellPF2e } from "@item";
+import { CreaturePF2e } from "@actor";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     if (
@@ -96,6 +97,45 @@ export async function actionsReminder(combatant: CombatantPF2e) {
                 },
                 {}
             );
+        }
+    }
+}
+
+export async function reminderCannotAttack(message: ChatMessagePF2e) {
+    if (
+        message.data &&
+        message.data.flags &&
+        game.combats.active &&
+        game.combats.active.combatant &&
+        game.combats.active.combatant.token &&
+        game.combats.active.combatant.token.actor &&
+        message.user &&
+        ["spell-attack-roll", "attack-roll"].includes(
+            <string>(<ActorFlagsPF2e>message.data.flags.pf2e).context?.type
+        ) &&
+        shouldIHandleThisMessage(message, true, true)
+    ) {
+        const actor = game.combats.active.combatant.token.actor;
+        let reason = "";
+        if (actor) {
+            if ((<CreaturePF2e>actor).isDead) {
+                reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.dead`);
+            } else if ((actor?.hitPoints?.value ?? 0) <= 0) {
+                reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.hasNoHp`);
+            } else if (game.combats.active.combatant.defeated) {
+                reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.defeated`);
+            } else if (actor.hasCondition("unconscious")) {
+                reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.unconscious`);
+            }
+
+            if (reason.length > 0) {
+                ui.notifications.info(
+                    game.i18n.format(`${MODULENAME}.SETTINGS.reminderCannotAttack.note`, {
+                        actorName: actor.name,
+                        reason: reason,
+                    })
+                );
+            }
         }
     }
 }

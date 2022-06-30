@@ -13,6 +13,16 @@ function debouncedReload() {
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
+    game.settings.register(MODULENAME, "reminderCannotAttack", {
+        name: `${MODULENAME}.SETTINGS.reminderCannotAttack.name`,
+        hint: `${MODULENAME}.SETTINGS.reminderCannotAttack.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "npcScaler", {
         name: `${MODULENAME}.SETTINGS.npcScaler.name`,
         hint: `${MODULENAME}.SETTINGS.npcScaler.hint`,

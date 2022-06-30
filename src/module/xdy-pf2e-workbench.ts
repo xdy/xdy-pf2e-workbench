@@ -26,7 +26,13 @@ import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./
 import { nth, shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
-import { actionsReminder, reminderBreathWeapon, reminderIWR, reminderTargeting } from "./feature/reminders";
+import {
+    actionsReminder,
+    reminderBreathWeapon,
+    reminderCannotAttack,
+    reminderIWR,
+    reminderTargeting,
+} from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 
 export const MODULENAME = "xdy-pf2e-workbench";
@@ -59,9 +65,14 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
         game.settings.get(MODULENAME, "automatedAnimationOn") ||
         game.settings.get(MODULENAME, "reminderBreathWeapon") ||
-        game.settings.get(MODULENAME, "reminderTargeting")
+        game.settings.get(MODULENAME, "reminderTargeting") ||
+        game.settings.get(MODULENAME, "reminderCannotAttack")
     ) {
         Hooks.on("createChatMessage", (message: ChatMessagePF2e) => {
+            if (game.settings.get(MODULENAME, "reminderCannotAttack")) {
+                reminderCannotAttack(message);
+            }
+
             if (game.settings.get(MODULENAME, "reminderTargeting")) {
                 reminderTargeting(message);
             }
