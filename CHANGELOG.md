@@ -1,3 +1,39 @@
+# [3.12.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.3...v3.12.0) (2022-06-30)
+
+
+### Features
+
+* Option to add an npc scaler feature when right clicking on an npc (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ! At some point Avery will have the time to add it to the system, until then I'll maintain it.) ([db6a5ca](https://github.com/xdy/xdy-pf2e-workbench/commit/db6a5ca3d0dd67bf5f771ae8c4c2c1da88be84f1))
+
+## [3.11.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.2...v3.11.3) (2022-06-22)
+
+
+### Bug Fixes
+
+* Auto applying persistent damage from the pf2e Persistent Damage module works again. ([09dc064](https://github.com/xdy/xdy-pf2e-workbench/commit/09dc0647e6ab9ce3ac86cca05306d560c4362325))
+* Auto applying persistent damage from the pf2e Persistent Damage module works again. ([5698342](https://github.com/xdy/xdy-pf2e-workbench/commit/569834275ae42237a2405e4ac3795e46a6f90803))
+
+## [3.11.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.1...v3.11.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* Autorolling damage now works for Unarmed Attack. Also, option to add Recall Knowledge button to npcs no longer prints an error in the console when no skill matches (e.g. for newly created npcs.) ([487eb6f](https://github.com/xdy/xdy-pf2e-workbench/commit/487eb6f0e59b6cf4d482093aacf98a777f5aa59a))
+
+## [3.11.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.0...v3.11.1) (2022-06-21)
+
+
+### Bug Fixes
+
+* Autoroll damage now works for companions and eidolons. ([aae99c9](https://github.com/xdy/xdy-pf2e-workbench/commit/aae99c9718055f61867e6ad415debb1809bdaafd))
+
+# [3.11.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.10.3...v3.11.0) (2022-06-21)
+
+
+### Features
+
+* IWR reminder message now works for spell damage rolls. ([7921bc8](https://github.com/xdy/xdy-pf2e-workbench/commit/7921bc84a0d0c43310304bc3593aef0bc1270670))
+
 ## [3.10.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.10.2...v3.10.3) (2022-06-20)
 
 

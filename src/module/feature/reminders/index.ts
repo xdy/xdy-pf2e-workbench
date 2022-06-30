@@ -5,6 +5,7 @@ import { CombatantPF2e } from "@module/encounter";
 import { ActorFlagsPF2e, ImmunityType } from "@actor/data/base";
 import { ValuesList } from "@module/data";
 import { ChatMessagePF2e } from "../../../../types/src/module/chat-message/index";
+import { SpellPF2e } from "@item";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     if (
@@ -128,9 +129,15 @@ export async function reminderIWR(message: ChatMessagePF2e) {
         const targets = message.user.targets;
         const output: string[] = [];
         for (const target of targets) {
-            const damageTypes: string[] = Object.keys(
+            let damageTypes: string[] = Object.keys(
                 message.data?.flags?.pf2e?.damageRoll?.types?.valueOf() || {}
             ).flatMap((value, index) => value);
+            if (damageTypes.length === 0) {
+                const origin: SpellPF2e | null = <SpellPF2e>(
+                    await fromUuid(<string>message.data?.flags?.pf2e?.origin?.uuid)
+                );
+                damageTypes = Object.values(origin.data.data.damage.value).map((x) => x.type.value);
+            }
             if (damageTypes.length > 0) {
                 const traits = target.actor?.data.data.traits;
                 //Filter traits that are in damageTypes

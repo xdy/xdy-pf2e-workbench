@@ -27,6 +27,7 @@ import { nth, shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import { actionsReminder, reminderBreathWeapon, reminderIWR, reminderTargeting } from "./feature/reminders";
+import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -57,7 +58,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
         game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
         game.settings.get(MODULENAME, "automatedAnimationOn") ||
-        game.settings.get(MODULENAME, "applyPersistentDamage") ||
         game.settings.get(MODULENAME, "reminderBreathWeapon") ||
         game.settings.get(MODULENAME, "reminderTargeting")
     ) {
@@ -74,10 +74,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                         game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"))
                 ) {
                     autoRollDamage(message).then(() => console.log("Workbench autoRollDamage complete"));
-                }
-
-                if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-                    persistentDamage(message).then(() => console.log("Workbench persistentDamage complete"));
                 }
 
                 if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
@@ -102,6 +98,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
         game.settings.get(MODULENAME, "applyPersistentHealing") ||
+        game.settings.get(MODULENAME, "applyPersistentDamage") ||
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
@@ -112,6 +109,10 @@ Hooks.once("init", async (actor: ActorPF2e) => {
 
             if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
                 persistentHealing(message).then(() => console.log("Workbench persistentHealing complete"));
+            }
+
+            if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
+                persistentDamage(message).then(() => console.log("Workbench persistentDamage complete"));
             }
 
             if (
@@ -298,6 +299,9 @@ Hooks.once("init", async (actor: ActorPF2e) => {
                         .find(".section-body")
                         .each((i, e) => {
                             const $e = $(e);
+                            if ($e.find(".identification-skills").length === 0) {
+                                return;
+                            }
                             const dcs = <string>$e.find(".identification-skills")[0].title;
                             const skills = $e.find("ul");
                             for (const s of skills.text().trim().split("\n")) {
@@ -352,6 +356,9 @@ Hooks.once("setup", async () => {
         game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
             return false;
         };
+    }
+    if (game.settings.get(MODULENAME, "npcScaler")) {
+        setupNPCScaler();
     }
 });
 

@@ -31,20 +31,17 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const rollType = flags.context?.type;
 
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
-
-            const spellDamage = (<SpellPF2e>origin).data?.data?.damage?.value;
+            //Exit early if no origin is found (probably unarmed attack)
+            const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
             const rollForNonAttackSpell =
+                origin !== null &&
                 autoRollDamageForSpellNotAnAttack &&
                 rollType === undefined &&
                 flags.casting !== null &&
-                origin !== null &&
-                spellDamage &&
-                Object.keys(spellDamage)?.length !== 0 &&
+                (<SpellPF2e>origin).data?.data?.damage?.value &&
+                Object.keys((<SpellPF2e>origin).data?.data?.damage?.value)?.length !== 0 &&
                 !origin?.traits.has("attack");
-
-            const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
-            const rollForAttackSpell =
-                origin !== null && rollType === "spell-attack-roll" && autoRollDamageForSpellAttack;
+            const rollForAttackSpell = rollType === "spell-attack-roll" && autoRollDamageForSpellAttack;
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             if (messageActor && messageToken && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
                 if (
@@ -196,20 +193,20 @@ export async function persistentHealing(message: ChatMessagePF2e) {
 }
 
 function getActionFromMessage(actions: any, actionIds: RegExpMatchArray, message: ChatMessagePF2e) {
-    const strikes = actions.filter((a: { type: string }) => a.type === "strike");
+    const strikes = actions.filter((atk: { type: string }) => {
+        return atk?.type === "strike";
+    });
     const itemStrikes = strikes.filter((a: { item: { id: any } }) => a.item.id === actionIds[1]);
     if (itemStrikes.length === 1) {
         //Normal case
         return itemStrikes[0];
     } else if (itemStrikes.length > 1) {
         //The strike is most likely based on an RE which means that all actions get the same item id (e.g. animal form), try to regex it out of the message instead
-        const strikeName = message.data.flavor?.match(
-            `<h4 class="action">${game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`
-            )}: (.*?)<\\/h4>`
-        );
-        if (strikeName && strikeName[1]) {
-            return strikes.find((a: { name: string }) => a.name === strikeName[1]);
+        const strike = game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`);
+        const s = `<h4 class="action">(.*?)${strike}: (.*?)<`;
+        const strikeName = message.data.flavor?.match(s);
+        if (strikeName && strikeName[2]) {
+            return strikes.find((a: { name: string }) => a.name === strikeName[2]);
         } else {
             //If we can't find the strike name, give up.
             return null;
