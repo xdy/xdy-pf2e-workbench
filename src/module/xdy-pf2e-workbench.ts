@@ -27,6 +27,7 @@ import { nth, shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import { actionsReminder, reminderBreathWeapon, reminderIWR, reminderTargeting } from "./feature/reminders";
+import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -355,6 +356,9 @@ Hooks.once("setup", async () => {
         game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
             return false;
         };
+    }
+    if (game.settings.get(MODULENAME, "npcScaler")) {
+        setupNPCScaler();
     }
 });
 

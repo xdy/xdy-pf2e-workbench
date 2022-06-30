@@ -276,6 +276,10 @@
         "hint": "(Experimental) World setting to use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.",
         "name": "(Experimental) (World) mystify name in chat messages."
       },
+      "npcScaler": {
+        "hint": "World setting to allow scaling NPCs",
+        "name": "(World) setting to allow scaling NPCs"
+      },
       "reminderBreathWeapon": {
         "hint": "Client setting to set reminder for breath weapon use.",
         "name": "Breath weapon reminder",
