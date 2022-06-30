@@ -1,3 +1,10 @@
+# [3.13.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.12.0...v3.13.0) (2022-06-30)
+
+
+### Features
+
+* Add option to automatically remove Dying on going above zero hp, for all, or only for characters. ([9bf3550](https://github.com/xdy/xdy-pf2e-workbench/commit/9bf3550f0db128d8439f01148a706ef8f4b56a62))
+
 # [3.12.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.11.3...v3.12.0) (2022-06-30)
 
 
