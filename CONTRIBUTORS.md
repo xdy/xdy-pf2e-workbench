@@ -13,7 +13,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [DJ](https://github.com/DJphoenix719) - Allowed me to take over the quick quantities and npc scaler features from the PF2eToolbox after
   running out of time to maintain that module.
 * [TomChristoffer]() - Gave me the start of the item rarity colorization feature.
-* [JDCalvert](https://github.com/JDCalvert) - Added the option use size in mystified token names.
+* [JDCalvert](https://github.com/JDCalvert) - Added the option to use size in mystified token names.
 
 I've probably forgotten someone, if so, please tell me!
 
