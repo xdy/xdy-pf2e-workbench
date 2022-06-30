@@ -10,10 +10,10 @@ profile followed by a brief and incomplete description of what this person has c
 * [websterguy](https://github.com/websterguy/) - Improved the Hero Point Handler gui.
 * [roguedevjake](https://github.com/roguedevjake/) - Provided REs for "Workbench Flat Check Notes".
 * [Jamz](https://github.com/JamzTheMan/) - Improved REs for "Workbench Flat Check Notes".
-* [DJ](https://github.com/Djphoenix719) - Wrote the original code for the Quick Quantities feature.
-* [TomChristoffer]() - Gave me the start of the item rarity colorization feature.
-* [DJphoenix719](https://github.com/DJphoenix719) - Allowed me to take over the quick quantities and npc scaler features from the PF2eToolbox after
+* [DJ](https://github.com/DJphoenix719) - Allowed me to take over the quick quantities and npc scaler features from the PF2eToolbox after
   running out of time to maintain that module.
+* [TomChristoffer]() - Gave me the start of the item rarity colorization feature.
+* [JDCalvert](https://github.com/JDCalvert) - Added the option use size in mystified token names.
 
 I've probably forgotten someone, if so, please tell me!
 
