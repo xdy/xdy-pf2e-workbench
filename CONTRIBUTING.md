@@ -12,7 +12,7 @@ You will be paid in none or more of:
 
 ## How to contribute to xdy-pf2e-workbench
 
-Make an issue if you have ideas or have found bugs, or a pull request if you have code or documentation.
+Make an issue if you have ideas or have found bugs, or a pull request if you have code or documentation. If you have submitted a PR it's probably a good idea to ping me in the #pf2e-modules channel of the [Pathfinder 2e Game System discord](https://discord.gg/Dv8YkbHZqM) as well.
 
 If you see an already existing issue you would like to tackle, ping me in a comment on the issue first.
 
