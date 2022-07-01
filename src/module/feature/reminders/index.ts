@@ -8,6 +8,7 @@ import { ChatMessagePF2e } from "../../../../types/src/module/chat-message/index
 import { SpellPF2e } from "@item";
 import { CreaturePF2e } from "@actor";
 
+//TODO Handle Eidolon/Animal Companion
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     if (
         message.data.content &&
@@ -55,7 +56,6 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
         }
     }
 }
-
 export async function actionsReminder(combatant: CombatantPF2e) {
     if (
         combatant &&
@@ -101,6 +101,7 @@ export async function actionsReminder(combatant: CombatantPF2e) {
     }
 }
 
+//TODO Handle Eidolon/Animal Companion
 export async function reminderCannotAttack(message: ChatMessagePF2e) {
     if (
         message.data &&

@@ -1,15 +1,21 @@
 import { CombatantPF2e } from "@module/encounter";
 import { shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { ActorPF2e } from "@actor";
+import { ActorPF2e, CharacterPF2e } from "@actor";
+import { getActor } from "../cr-scaler/Utilities";
 
+//TODO Handle Eidolon/Animal Companion
 export async function reduceFrightened(combatant: CombatantPF2e) {
     if (combatant && combatant.actor && shouldIHandleThis(combatant.isOwner ? game.user?.id : null)) {
-        if (combatant.actor.hasCondition("frightened")) {
-            const minimumFrightened = <number>combatant.actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
-            const currentFrightened = combatant.actor?.getCondition("frightened")?.value ?? 0;
+        const actors = [combatant.actor];
+        if (combatant.actor.type === "character" && (<CharacterPF2e>combatant.actor).familiar) {
+            actors.push(<ActorPF2e>(<CharacterPF2e>combatant.actor).familiar);
+        }
+        for (const actor of actors) {
+            const minimumFrightened = <number>actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
+            const currentFrightened = actor?.getCondition("frightened")?.value ?? 0;
             if (currentFrightened - 1 >= minimumFrightened) {
-                await combatant.actor.decreaseCondition("frightened");
+                await actor.decreaseCondition("frightened");
             }
         }
     }
@@ -117,7 +123,7 @@ export async function increaseDyingOnZeroHP(
 
         let value = 1;
         const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
-        if (option.endsWith("ForCharacters") ? actor.data.type === "character" : true) {
+        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.data.type) : true) {
             if (option?.startsWith("addWoundedLevel")) {
                 value = (actor.getCondition("wounded")?.value ?? 0) + 1;
             }
@@ -142,7 +148,7 @@ export async function removeDyingOnZeroHP(
     ) {
         const value = actor.getCondition("dying")?.value || 0;
         const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
-        if (option.endsWith("ForCharacters") ? actor.data.type === "character" : true) {
+        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.data.type) : true) {
             for (let i = 0; i < Math.max(1, value); i++) {
                 await actor.decreaseCondition("dying");
             }

@@ -131,15 +131,15 @@
         "no": "No",
         "addOne": "Add one",
         "addWoundedLevel": "Add 1 + Wounded level",
-        "addOneForCharacters": "Add one, for characters only",
-        "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters only"
+        "addOneForCharacters": "Add one, for characters+familiars",
+        "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters+familiars"
       },
       "autoRemoveDyingAtGreaterThanZeroHP": {
         "hint": "Client setting to automatically remove Dying when healed to above zero hp.",
         "name": "Automatically remove Dying when healed to above zero hp.",
         "no": "No",
         "removeDying": "Remove Dying for all",
-        "removeDyingForCharacters": "Remove Dying, for characters only"
+        "removeDyingForCharacters": "Remove Dying, for characters+familiars"
       },
       "giveWoundedWhenDyingRemoved": {
         "hint": "Client setting to automatically give Wounded condition when Dying condition is removed.",
@@ -150,7 +150,7 @@
         "name": "(Experimental) (World) Use visibility to toggle Undetected condition."
       },
       "decreaseFrightenedConditionEachTurn": {
-        "hint": "Client setting to automatically decrease the frightened condition each turn.",
+        "hint": "Client setting to automatically decrease the frightened condition each turn for characters, npcs and familiars.",
         "name": "Automatically decrease the frightened condition each turn."
       },
       "enableAutomaticMove": {
