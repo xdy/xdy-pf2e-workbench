@@ -1,3 +1,10 @@
+# [3.16.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.15.0...v3.16.0) (2022-07-01)
+
+
+### Features
+
+* Familiars count as characters for dying+wounded+frightened increase/decrease automation. ([db7108b](https://github.com/xdy/xdy-pf2e-workbench/commit/db7108b1880a8bf40c7d7e1662c2f43497570223))
+
 # [3.15.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.14.0...v3.15.0) (2022-06-30)
 
 
