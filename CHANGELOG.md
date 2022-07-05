@@ -1,3 +1,10 @@
+# [3.17.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.16.0...v3.17.0) (2022-07-05)
+
+
+### Features
+
+* Option to apply Encumbered status automatically based on current bulk when bulk changes. (Note: Uses the system code which considers 5 bulk + 9 light to not exceed 5 bulk.) ([f960f5b](https://github.com/xdy/xdy-pf2e-workbench/commit/f960f5bb62a73f8a1777f24035dab19d66642cff)), closes [#305](https://github.com/xdy/xdy-pf2e-workbench/issues/305)
+
 # [3.16.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.15.0...v3.16.0) (2022-07-01)
 
 
