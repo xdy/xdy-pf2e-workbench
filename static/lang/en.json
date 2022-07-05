@@ -86,6 +86,10 @@
         "hint": "Client setting to show separate persistent healing message",
         "name": "Show separate persistent healing message"
       },
+      "applyEncumbranceBasedOnBulk": {
+        "hint": "World setting to automatically apply encumbrance based on bulk. (Uses system code which considers 5 bulk + 9 light to not exceed 5 bulk.)",
+        "name": "(World) automatically apply encumbrance based on bulk."
+      },
       "autoCollapseItemChatCardContent": {
         "hint": "Client setting to automatically collapse item chat card content.",
         "name": "Automatically collapse item chat card content.",
