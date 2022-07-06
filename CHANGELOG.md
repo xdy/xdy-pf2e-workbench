@@ -1,3 +1,10 @@
+# [3.18.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.17.0...v3.18.0) (2022-07-06)
+
+
+### Features
+
+* Fix (ok, stupid fix) for race condition when adding encumbrance due to bulk. ([2a7750a](https://github.com/xdy/xdy-pf2e-workbench/commit/2a7750ae976101b266cab4ee652f308b58ec7900))
+
 # [3.17.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.16.0...v3.17.0) (2022-07-05)
 
 
