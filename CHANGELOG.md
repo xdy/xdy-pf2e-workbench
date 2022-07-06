@@ -1,3 +1,10 @@
+# [3.19.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.18.0...v3.19.0) (2022-07-06)
+
+
+### Features
+
+* Option to change the max number of heropoints a character can have (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!) ([af71dff](https://github.com/xdy/xdy-pf2e-workbench/commit/af71dff5313f34eb632642312385d1165a95dbba)), closes [#318](https://github.com/xdy/xdy-pf2e-workbench/issues/318)
+
 # [3.18.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.17.0...v3.18.0) (2022-07-06)
 
 
