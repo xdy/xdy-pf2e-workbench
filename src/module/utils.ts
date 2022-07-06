@@ -7,13 +7,14 @@ export function shouldIHandleThis(
     gmCondition = true,
     extraCondition = true
 ) {
-    const isUserActive = game.users?.players
-        .filter((u) => u.active)
-        .filter((u) => !u.isGM)
-        .find((u) => u.id === userId);
-    const rollAsPlayer = isUserActive && !game.user?.isGM && extraCondition && playerCondition;
-    const rollAsGM = game.user?.isGM && extraCondition && !isUserActive && gmCondition;
-    return rollAsPlayer || rollAsGM;
+    const activePlayer =
+        game.users?.players
+            .filter((u) => u.active)
+            .filter((u) => !u.isGM)
+            .filter((u) => u.id === userId).length > 0;
+    const handleAsPlayer = activePlayer && !game.user?.isGM && extraCondition && playerCondition;
+    const handleAsGM = game.user?.isGM && extraCondition && !activePlayer && gmCondition;
+    return handleAsPlayer || handleAsGM;
 }
 
 export function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition: boolean, gmCondition: boolean) {

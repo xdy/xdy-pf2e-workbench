@@ -37,15 +37,19 @@ import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
-async function applyEncumbranceBasedOnBulk(item: any) {
-    const actor = item.actor;
-    if (actor.inventory.bulk.isEncumbered) {
-        if (!actor.hasCondition("encumbered")) {
-            await actor.toggleCondition("encumbered");
-        }
-    } else {
-        if (actor.hasCondition("encumbered")) {
-            await actor.toggleCondition("encumbered");
+async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
+    const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
+    if (physicalTypes.includes(item.type) && item.actor && shouldIHandleThis(item.isOwner ? game.user?.id : null)) {
+        //Sleep 0.25s to handle stupid race condition
+        await new Promise((resolve) => setTimeout(resolve, 250));
+        if (item.actor.inventory.bulk.isEncumbered) {
+            if (!item.actor.hasCondition("encumbered")) {
+                await item.actor.toggleCondition("encumbered");
+            }
+        } else {
+            if (item.actor.hasCondition("encumbered")) {
+                await item.actor.toggleCondition("encumbered");
+            }
         }
     }
 }
