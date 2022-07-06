@@ -13,6 +13,21 @@ function debouncedReload() {
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
+    game.settings.register(MODULENAME, "maxHeroPoints", {
+        name: `${MODULENAME}.SETTINGS.maxHeroPoints.name`,
+        hint: `${MODULENAME}.SETTINGS.maxHeroPoints.hint`,
+        scope: "world",
+        config: true,
+        default: 3,
+        type: Number,
+        // @ts-ignore Shut up typescript, it works.
+        range: {
+            min: 0,
+            max: 10,
+            step: 1,
+        },
+    });
+
     game.settings.register(MODULENAME, "applyEncumbranceBasedOnBulk", {
         name: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.name`,
         hint: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.hint`,

@@ -22,7 +22,12 @@ import { playAnimationAndSound } from "./feature/sfxHandler";
 import { toggleSettings } from "./feature/settingsHandler";
 import { increaseDyingOnZeroHP, reduceFrightened, removeDyingOnZeroHP } from "./feature/conditionHandler";
 import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
-import { calcRemainingMinutes, createRemainingTimeMessage, startTimer } from "./feature/heroPointHandler";
+import {
+    calcRemainingMinutes,
+    createRemainingTimeMessage,
+    startTimer,
+    maxHeroPoints,
+} from "./feature/heroPointHandler";
 import { nth, shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
@@ -279,9 +284,16 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     }
 
     if (game.settings.get(MODULENAME, "npcMystifier")) {
-        Hooks.on("renderTokenHUD", (_app: TokenHUD, html: JQuery, data: any) => {
+        Hooks.on("renderTokenHUD", (app: TokenHUD, html: JQuery, data: any) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
                 renderNameHud(data, html);
+            }
+        });
+    }
+    if (game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
+        Hooks.on("renderCharacterSheetPF2e", (app: TokenHUD, html: JQuery, data: any) => {
+            if (game.user?.isGM && game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
+                maxHeroPoints(app, html, data);
             }
         });
     }
