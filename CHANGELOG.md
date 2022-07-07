@@ -1,3 +1,15 @@
+# [3.20.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.19.0...v3.20.0) (2022-07-07)
+
+
+### Bug Fixes
+
+* Make AC, perception and saves scale if using the npc scaler feature. ([343ad83](https://github.com/xdy/xdy-pf2e-workbench/commit/343ad831afef350a1f385568a3876d9b2659985f))
+
+
+### Features
+
+* Support @Check in the NPC Scaler feature. ([a38ab82](https://github.com/xdy/xdy-pf2e-workbench/commit/a38ab82ef96c7774667adde35e500bd8f5345fb9))
+
 # [3.19.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.18.0...v3.19.0) (2022-07-06)
 
 
