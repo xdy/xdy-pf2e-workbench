@@ -15,6 +15,7 @@
  */
 
 import { scaleNPCToLevel } from "./NPCScaler";
+import { ActorPF2e, NPCPF2e } from "@actor";
 
 export const setupNPCScaler = () => Hooks.on("getActorDirectoryEntryContext", onScaleNPCContextHook);
 
@@ -30,7 +31,7 @@ function onScaleNPCContextHook(html: JQuery, buttons: any[]) {
         },
         callback: async (li: JQuery<HTMLLIElement>) => {
             const id = li.data("document-id") as string;
-            const actor = game.actors?.get(id) as Actor;
+            const actor = game.actors?.get(id) as NPCPF2e;
 
             // const oldLevel = actor.data.data.details.level.value;
             const oldLevel = 24;

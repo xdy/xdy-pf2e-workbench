@@ -17,10 +17,9 @@
 import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes";
 import { getActor, getFolder, getFolderInFolder } from "./Utilities";
 import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil";
+import { NPCPF2e } from "@actor";
 
-const EMBEDDED_ENTITY_TYPE = "Item";
-
-export async function scaleNPCToLevel(actor: Actor, newLevel: number) {
+export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     const rootFolder = getFolder("cr-scaler"); //TODO Turn into setting again
 
     const folderName = `Level ${newLevel}`;
@@ -32,8 +31,8 @@ export async function scaleNPCToLevel(actor: Actor, newLevel: number) {
             parent: rootFolder ? rootFolder.id : "",
         }));
 
-    const oldLevel = parseInt(actor.data.data["details"].level.value);
-    const data = {
+    const oldLevel = actor.data.data.details.level.value;
+    const updateData = {
         folder: folder.id,
         ["data.details.level.value"]: newLevel,
     };
@@ -44,80 +43,76 @@ export async function scaleNPCToLevel(actor: Actor, newLevel: number) {
         const value = 10 + mod * 2;
         const min = 3;
 
-        data[`data.abilities.${key}`] = { value, min, mod };
+        updateData[`data.abilities.${key}`] = { value, min, mod };
     }
 
     // parse resistances
     const drData: any[] = [];
-    for (let i = 0; i < actor.data.data["traits"].dr.length; i++) {
-        const dr = actor.data.data["traits"].dr[i];
+    for (let i = 0; i < actor.data.data.traits.dr.length; i++) {
+        const dr = actor.data.data.traits.dr[i];
 
         drData.push({
             label: dr.label,
             type: dr.type,
             exceptions: dr.exceptions ?? "",
-            value: getMinMaxData("resistance", parseInt(dr.value), oldLevel, newLevel).toString(),
+            value: getMinMaxData("resistance", dr.value, oldLevel, newLevel).toString(),
         });
     }
-    data["data.traits.dr"] = drData;
+    updateData["data.traits.dr"] = drData;
 
     // parse vulnerabilities
     const dvData: any[] = [];
-    for (let i = 0; i < actor.data.data["traits"].dv.length; i++) {
-        const dv = actor.data.data["traits"].dv[i];
+    for (let i = 0; i < actor.data.data.traits.dv.length; i++) {
+        const dv = actor.data.data.traits.dv[i];
 
         dvData.push({
             label: dv.label,
             type: dv.type,
             exceptions: dv.exceptions ?? "",
-            value: getMinMaxData("weakness", parseInt(dv.value), oldLevel, newLevel).toString(),
+            value: getMinMaxData("weakness", dv.value, oldLevel, newLevel).toString(),
         });
     }
-    data["data.traits.dv"] = dvData;
+    updateData["data.traits.dv"] = dvData;
 
     // parse simple modifiers
-    data["data.attributes.ac.base"] = getLeveledData(
+    updateData["data.attributes.ac.value"] = getLeveledData(
         "armorClass",
-        parseInt(actor.data.data["attributes"].ac.base),
+        actor.data.data.attributes.ac?.value ?? 0,
         oldLevel,
         newLevel
     ).total;
-    data["data.attributes.perception.base"] = getLeveledData(
+    updateData["data.attributes.perception.value"] = getLeveledData(
         "perception",
-        parseInt(actor.data.data["attributes"].perception.base),
+        actor.data.data.attributes["perception"].value,
         oldLevel,
         newLevel
     ).total;
-    data["data.saves.fortitude.base"] = getLeveledData(
+    updateData["data.saves.fortitude.value"] = getLeveledData(
         "savingThrow",
-        parseInt(actor.data.data["saves"].fortitude.base),
+        actor.data.data.saves.fortitude.value ?? 0,
         oldLevel,
         newLevel
     ).total;
-    data["data.saves.reflex.base"] = getLeveledData(
+    updateData["data.saves.reflex.value"] = getLeveledData(
         "savingThrow",
-        parseInt(actor.data.data["saves"].reflex.base),
+        actor.data.data.saves.reflex.value ?? 0,
         oldLevel,
         newLevel
     ).total;
-    data["data.saves.will.base"] = getLeveledData(
+    updateData["data.saves.will.value"] = getLeveledData(
         "savingThrow",
-        parseInt(actor.data.data["saves"].will.base),
+        actor.data.data.saves.reflex.value ?? 0,
         oldLevel,
         newLevel
     ).total;
 
-    const hp = getHPData(parseInt(actor.data.data["attributes"].hp.max), oldLevel, newLevel);
-    data["data.attributes.hp.max"] = hp;
-    data["data.attributes.hp.value"] = hp;
-
-    console.warn(actor.data);
+    const hp = getHPData(actor.data.data.attributes.hp?.max ?? 0, oldLevel, newLevel);
+    updateData["data.attributes.hp.max"] = hp;
+    updateData["data.attributes.hp.value"] = hp;
 
     let itemUpdates: IDataUpdates[] = [];
     for (const itemId of actor.items.keys()) {
         const item: any = actor.items.get(itemId);
-
-        console.warn(item);
 
         if ((item.type as IHandledItemType) === "lore") {
             const oldValue = parseInt(item.data.data.mod.value);
@@ -174,17 +169,16 @@ export async function scaleNPCToLevel(actor: Actor, newLevel: number) {
 
     let newActor: Actor | undefined = getActor(actor.name as string, folder.name);
     if (newActor !== undefined) {
-        await newActor.update(data);
+        await newActor.update(updateData);
     } else {
-        newActor = actor.clone(data);
+        newActor = actor.clone(updateData);
         newActor = (await Actor.create(newActor?.data as any)) as Actor;
     }
 
-    // @ts-ignore
-    await newActor.updateEmbeddedDocuments(EMBEDDED_ENTITY_TYPE, itemUpdates);
+    await newActor.updateEmbeddedDocuments("Item", itemUpdates);
 
     itemUpdates = [];
-    for (const item of actor.items.filter((i) => i.data.data["description"].value.includes("DC"))) {
+    for (const item of actor.items.filter((i) => i.data.data.description.value.includes("DC"))) {
         const DC_REGEX = /(data-pf2-dc=")([0-9]+)(")/g;
         const description = item.data.data["description"].value as string;
         let newDescription = description;
@@ -211,8 +205,7 @@ export async function scaleNPCToLevel(actor: Actor, newLevel: number) {
         });
     }
 
-    // @ts-ignore
-    await newActor.updateEmbeddedDocuments(EMBEDDED_ENTITY_TYPE, itemUpdates);
+    await newActor.updateEmbeddedDocuments("Item", itemUpdates);
 
     itemUpdates = [];
     for (const item of newActor.items.values()) {
@@ -240,6 +233,5 @@ export async function scaleNPCToLevel(actor: Actor, newLevel: number) {
         });
     }
 
-    // @ts-ignore
-    await newActor.updateEmbeddedDocuments(EMBEDDED_ENTITY_TYPE, itemUpdates);
+    await newActor.updateEmbeddedDocuments("Item", itemUpdates);
 }
