@@ -178,31 +178,35 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     await newActor.updateEmbeddedDocuments("Item", itemUpdates);
 
     itemUpdates = [];
-    for (const item of actor.items.filter((i) => i.data.data.description.value.includes("DC"))) {
-        const DC_REGEX = /(data-pf2-dc=")([0-9]+)(")/g;
-        const description = item.data.data["description"].value as string;
-        let newDescription = description;
-        let match: RegExpExecArray | null = DC_REGEX.exec(description);
+    const DC_REGEXES = [/(data-pf2-dc=")([0-9]+)(")/g, /(@Check\[.*?type:.*?|dc:)([0-9]+)(.*?])/g];
+    for (const regex of DC_REGEXES) {
+        for (const item of actor.data.items.filter(
+            (i) => i.data.data.description.value.includes("DC") || i.data.data.description.value.includes("dc:")
+        )) {
+            const description = item.data.data["description"].value as string;
+            let newDescription = description;
+            let match: RegExpExecArray | null = regex.exec(description);
 
-        let indexOffset = 0;
-        while (match !== null) {
-            const [fullMatch, attribute, value, suffix] = match;
-            const index = match.index + indexOffset;
-            const newDCValue = getLeveledData("difficultyClass", parseInt(value), oldLevel, newLevel).total;
-            const newDCString = `data-pf2-dc="${newDCValue}"`;
+            let indexOffset = 0;
+            while (match !== null) {
+                const [fullMatch, attribute, value, suffix] = match;
+                const index = match.index + indexOffset;
+                const newDCValue = getLeveledData("difficultyClass", parseInt(value), oldLevel, newLevel).total;
+                const newDCString = `${match[1]}${newDCValue}${match[3]}`;
 
-            newDescription =
-                newDescription.substr(0, index) + newDCString + newDescription.substr(index + fullMatch.length);
+                newDescription =
+                    newDescription.substr(0, index) + newDCString + newDescription.substr(index + fullMatch.length);
 
-            indexOffset += newDescription.length - description.length - indexOffset;
+                indexOffset += newDescription.length - description.length - indexOffset;
 
-            match = DC_REGEX.exec(description);
+                match = regex.exec(description);
+            }
+
+            itemUpdates.push({
+                _id: item.id as string,
+                ["data.description.value"]: newDescription,
+            });
         }
-
-        itemUpdates.push({
-            _id: item.id as string,
-            ["data.description.value"]: newDescription,
-        });
     }
 
     await newActor.updateEmbeddedDocuments("Item", itemUpdates);
