@@ -7,5 +7,5 @@ export declare const ChatCards: {
      * Apply rolled dice damage to the token or tokens which are currently controlled.
      * This allows for damage to be scaled by a multiplier to account for healing, critical hits, or resistance
      */
-    rollActorSaves: (ev: JQuery.ClickEvent, item: Embedded<ItemPF2e>) => Promise<void>;
+    rollActorSaves: (event: JQuery.ClickEvent<HTMLElement, undefined, HTMLElement>, item: Embedded<ItemPF2e>) => Promise<void>;
 };

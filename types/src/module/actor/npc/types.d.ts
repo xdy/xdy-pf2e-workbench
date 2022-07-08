@@ -1,9 +1,8 @@
 import { CreatureSheetData, SpellcastingSheetData } from "@actor/creature/types";
-import { SaveType } from "@actor/data";
 import { HitPointsData, PerceptionData } from "@actor/data/base";
+import { SaveType } from "@actor/types";
 import { ActionData, EffectData, ItemDataPF2e } from "@item/data";
 import { IdentifyCreatureData } from "@module/recall-knowledge";
-import { FlattenedCondition } from "@system/conditions";
 import { NPCPF2e } from ".";
 import { NPCArmorClass, NPCAttributes, NPCSaveData, NPCSkillData, NPCStrike, NPCSystemData, NPCTraitsData } from "./data";
 interface ActionsDetails {
@@ -62,13 +61,12 @@ interface NPCSystemSheetData extends NPCSystemData {
     };
 }
 /** Additional fields added in sheet data preparation */
-interface NPCSheetData<T extends NPCPF2e> extends CreatureSheetData<T> {
+interface NPCSheetData<T extends NPCPF2e = NPCPF2e> extends CreatureSheetData<T> {
     actions: NPCActionSheetData;
     attacks: NPCAttackSheetData;
     data: NPCSystemSheetData;
     items: NPCSheetItemData[];
     effectItems: EffectData[];
-    conditions: FlattenedCondition[];
     spellcastingEntries: SpellcastingSheetData[];
     orphanedSpells: boolean;
     identifyCreatureData: IdentifyCreatureData;

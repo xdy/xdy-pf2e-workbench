@@ -1,4 +1,4 @@
-import { ABCItemPF2e } from "../abc";
+import { ABCItemPF2e } from "@item";
 import { BackgroundData } from "./data";
 declare class BackgroundPF2e extends ABCItemPF2e {
     /** Set a skill feat granted by a GrantItem RE as one of this background's configured items */

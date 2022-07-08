@@ -1,7 +1,8 @@
-import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from "./";
+import { ActorType } from "@actor/data";
 import { ModifierType } from "@actor/modifiers";
-import { AbilityString, ActorType } from "@actor/data";
+import { AbilityString } from "@actor/types";
 import { ItemPF2e } from "@item";
+import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./";
 /**
  * Apply a constant modifier (or penalty/bonus) to a statistic or usage thereof
  * @category RuleElement

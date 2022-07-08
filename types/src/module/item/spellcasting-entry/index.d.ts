@@ -1,11 +1,10 @@
-import { SpellcastingEntry, SpellcastingEntryData, SpellcastingEntryListData } from "./data";
-import { SpellPF2e } from "@item/spell";
+import { AbilityString } from "@actor/types";
+import { ItemPF2e, SpellPF2e } from "@item";
+import { MagicTradition } from "@item/spell/types";
 import { OneToFour } from "@module/data";
-import { ItemPF2e } from "../base";
 import { UserPF2e } from "@module/user";
 import { Statistic } from "@system/statistic";
-import { MagicTradition } from "@item/spell/types";
-import { AbilityString } from "@actor/data";
+import { SpellcastingEntry, SpellcastingEntryData, SpellcastingEntryListData } from "./data";
 declare class SpellcastingEntryPF2e extends ItemPF2e implements SpellcastingEntry {
     private _spells;
     /** Spellcasting attack and dc data created during actor preparation */
@@ -31,7 +30,7 @@ declare class SpellcastingEntryPF2e extends ItemPF2e implements SpellcastingEntr
     prepareDerivedData(): void;
     prepareActorData(this: Embedded<SpellcastingEntryPF2e>): void;
     /** Casts the given spell as if it was part of this spellcasting entry */
-    cast(spell: SpellPF2e, options?: {
+    cast(spell: Embedded<SpellPF2e>, options?: {
         slot?: number;
         level?: number;
         consume?: boolean;

@@ -16,7 +16,6 @@ interface LootSystemData extends LootSystemSource, Omit<ActorSystemData, "attrib
     attributes: LootAttributesData;
     details: LootDetailsData;
     traits: BaseTraitsData;
-    [key: string]: any;
 }
 interface LootAttributesSource {
     hp?: never;

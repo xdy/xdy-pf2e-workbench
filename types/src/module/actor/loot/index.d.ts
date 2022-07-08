@@ -4,8 +4,9 @@ import { ItemPF2e } from "@item/base";
 import { UserPF2e } from "@module/user";
 import { LootData, LootSource } from "./data";
 import { ActiveEffectPF2e } from "@module/active-effect";
-import { ItemSourcePF2e } from "@item/data";
+import { ItemSourcePF2e, ItemType } from "@item/data";
 export declare class LootPF2e extends ActorPF2e {
+    get allowedItemTypes(): (ItemType | "physical")[];
     get isLoot(): boolean;
     get isMerchant(): boolean;
     /** Should this actor's token(s) be hidden when there are no items in its inventory? */
@@ -28,5 +29,6 @@ export declare class LootPF2e extends ActorPF2e {
 }
 export interface LootPF2e extends ActorPF2e {
     readonly data: LootData;
+    readonly saves?: never;
     get hitPoints(): null;
 }

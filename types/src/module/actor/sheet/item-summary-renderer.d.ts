@@ -17,9 +17,10 @@ export declare class ItemSummaryRendererPF2e<AType extends ActorPF2e> {
     activateListeners($html: JQuery): void;
     /**
      * Triggers toggling the visibility of an item summary element,
-     * delegating the populating of the item summary to renderItemSummary()
+     * delegating the populating of the item summary to renderItemSummary().
+     * Returns true if it the item is valid and it was toggled.
      */
-    toggleItemSummary($li: JQuery, options?: {
+    toggleSummary($element: JQuery, options?: {
         instant?: boolean;
     }): Promise<void>;
     /**

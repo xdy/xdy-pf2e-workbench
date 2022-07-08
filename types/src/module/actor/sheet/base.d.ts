@@ -1,14 +1,14 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
+import { type ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
-import { BasicConstructorOptions, TagSelectorType, TagSelectorOptions } from "@system/tag-selector";
-import type { ActorPF2e } from "../base";
-import { ActorSheetDataPF2e, CoinageSummary, SheetInventory } from "./data-types";
+import { Coins } from "@item/physical/data";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data";
 import { FolderPF2e } from "@module/folder";
+import { BasicConstructorOptions, TagSelectorOptions, TagSelectorType } from "@system/tag-selector";
+import { ActorSheetDataPF2e, CoinageSummary, SheetInventory } from "./data-types";
 import { ItemSummaryRendererPF2e } from "./item-summary-renderer";
-import { Coins } from "@item/physical/data";
 /**
  * Extend the basic ActorSheet class to do all the PF2e things!
  * This sheet is an Abstract layer which is not used.
@@ -23,12 +23,7 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     getData(options?: ActorSheetOptions): Promise<ActorSheetDataPF2e<TActor>>;
     protected abstract prepareItems(sheetData: ActorSheetDataPF2e<TActor>): void;
     protected prepareInventory(): SheetInventory;
-    protected findActiveList(): JQuery<HTMLElement>;
     protected static coinsToSheetData(coins: Coins): CoinageSummary;
-    /** Save any open tinyMCE editor before closing */
-    close(options?: {
-        force?: boolean;
-    }): Promise<void>;
     activateListeners($html: JQuery): void;
     /** Opens the spell preparation sheet, but only if its a prepared entry */
     openSpellPreparationSheet(entryId: string): void;
@@ -40,7 +35,6 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     protected _onDragStart(event: ElementDragEvent): void;
     /** Handle a drop event for an existing Owned Item to sort that item */
     protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e[]>;
-    protected _onDropItemCreate(itemSource: ItemSourcePF2e | ItemSourcePF2e[]): Promise<ItemPF2e[]>;
     onDropItem(data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
     /** Extend the base _onDropItem method to handle dragging spells onto spell slots. */
     protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;

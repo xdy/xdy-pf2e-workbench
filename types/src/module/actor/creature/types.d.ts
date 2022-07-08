@@ -10,9 +10,11 @@ import { CreaturePF2e } from ".";
 import { SheetOptions } from "@module/sheet/helpers";
 import { ALIGNMENTS, ALIGNMENT_TRAITS } from "./values";
 import { TraitViewData } from "@actor/data/base";
+import { FlattenedCondition } from "@system/conditions";
 declare type Alignment = SetElement<typeof ALIGNMENTS>;
 declare type AlignmentTrait = SetElement<typeof ALIGNMENT_TRAITS>;
 declare type AttackItem = WeaponPF2e | MeleePF2e | SpellPF2e;
+declare type ModeOfBeing = "living" | "undead" | "construct" | "object";
 interface StrikeSelf<A extends ActorPF2e = ActorPF2e, I extends AttackItem = AttackItem> {
     actor: A;
     token: TokenDocumentPF2e | null;
@@ -63,6 +65,12 @@ interface CreatureSheetData<TActor extends CreaturePF2e = CreaturePF2e> extends 
     rarity: ConfigPF2e["PF2E"]["rarityTraits"];
     attitude: ConfigPF2e["PF2E"]["attitude"];
     pfsFactions: ConfigPF2e["PF2E"]["pfsFactions"];
+    conditions: FlattenedCondition[];
+    dying: {
+        maxed: boolean;
+        remainingDying: number;
+        remainingWounded: number;
+    };
 }
-declare type SpellcastingSheetData = SpellcastingEntryData & SpellcastingEntryListData;
-export { Alignment, AlignmentTrait, AttackItem, AttackRollContext, AttackTarget, CreatureSheetData, GetReachParameters, IsFlatFootedParams, SpellcastingSheetData, StrikeRollContext, StrikeRollContextParams, StrikeSelf, };
+declare type SpellcastingSheetData = RawObject<SpellcastingEntryData> & SpellcastingEntryListData;
+export { Alignment, AlignmentTrait, AttackItem, AttackRollContext, AttackTarget, CreatureSheetData, GetReachParameters, IsFlatFootedParams, ModeOfBeing, SpellcastingSheetData, StrikeRollContext, StrikeRollContextParams, StrikeSelf, };

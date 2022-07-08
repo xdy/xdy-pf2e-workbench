@@ -1,6 +1,6 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { ActorSheetPF2e } from "../sheet/base";
+import { ActorSheetPF2e } from "@actor/sheet/base";
 import { HazardPF2e } from ".";
 export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
     static get defaultOptions(): ActorSheetOptions;
@@ -96,7 +96,7 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
         actor: any;
         data: any;
         items: any;
-        cssClass: "editable" | "locked";
+        cssClass: "locked" | "editable";
         effects: RawObject<foundry.data.ActiveEffectData<foundry.documents.BaseActiveEffect>>[];
         limited: boolean;
         options: ActorSheetOptions;

@@ -1,5 +1,7 @@
 /// <reference types="jquery" />
+import { ModeOfBeing } from "@actor/creature/types";
 import { ModifierAdjustment } from "@actor/modifiers";
+import { ActorAlliance, ActorDimensions, AuraData, SaveType } from "@actor/types";
 import { ArmorPF2e, ContainerPF2e, ItemPF2e, PhysicalItemPF2e, type ConditionPF2e } from "@item";
 import { ConditionSlug } from "@item/condition/data";
 import { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/data";
@@ -11,13 +13,13 @@ import { RuleElementPF2e } from "@module/rules/rule-element/base";
 import { UserPF2e } from "@module/user";
 import { TokenDocumentPF2e } from "@scene";
 import { Statistic } from "@system/statistic";
+import type { CreaturePF2e } from "./creature";
 import { VisionLevel } from "./creature/data";
-import { ActorDataPF2e, ActorSourcePF2e, ActorType, ModeOfBeing, SaveType } from "./data";
+import { ActorDataPF2e, ActorSourcePF2e, ActorType } from "./data";
 import { RollOptionFlags } from "./data/base";
 import { ActorInventory } from "./inventory";
 import { ActorSheetPF2e } from "./sheet/base";
 import { ActorSpellcasting } from "./spellcasting";
-import { ActorDimensions } from "./types";
 /**
  * Extend the base Actor class to implement additional logic specialized for PF2e.
  * @category Actor
@@ -32,20 +34,27 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     /** Rule elements drawn from owned items */
     rules: RuleElementPF2e[];
     synthetics: RuleElementSynthetics;
+    /** Data from rule elements for auras this actor may be emanating */
+    auras: Map<string, AuraData>;
     saves?: {
         [K in SaveType]?: Statistic;
     };
     /** A cached copy of `Actor#itemTypes`, lazily regenerated every data preparation cycle */
     private _itemTypes?;
     constructor(data: PreCreate<ActorSourcePF2e>, context?: ActorConstructorContextPF2e);
+    /** Shimmed ahead of moving to Actor instance level in V10 */
+    get flags(): this["data"]["flags"];
     /** Cache the return data before passing it to the caller */
     get itemTypes(): {
         [K in keyof ItemTypeMap]: Embedded<ItemTypeMap[K]>[];
     };
+    get allowedItemTypes(): (ItemType | "physical")[];
     /** The compendium source ID of the actor **/
     get sourceId(): ActorUUID | null;
     /** The recorded schema version of this actor, updated after each data migration */
     get schemaVersion(): number | null;
+    /** Get an active GM or, failing that, a player who can update this actor */
+    get primaryUpdater(): UserPF2e | null;
     /** Shortcut to system-data attributes */
     get attributes(): this["data"]["data"]["attributes"];
     get hitPoints(): HitPointsSummary | null;
@@ -73,11 +82,13 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     get heldShield(): Embedded<ArmorPF2e> | null;
     /** Most actor types can host rule elements */
     get canHostRuleElements(): boolean;
+    get alliance(): ActorAlliance;
     /** @deprecated */
     get physicalItems(): ActorInventory;
     /** Add effect icons from effect items and rule elements */
     get temporaryEffects(): TemporaryEffect[];
     /** A means of checking this actor's type without risk of circular import references */
+    isOfType(type: "creature"): this is CreaturePF2e;
     isOfType<T extends ActorType>(...types: T[]): this is InstanceType<ConfigPF2e["PF2E"]["Actor"]["documentClasses"][T]>;
     /** Whether this actor is an ally of the provided actor */
     isAllyOf(actor: ActorPF2e): boolean;
@@ -89,6 +100,12 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     }): number;
     /** Create a clone of this actor to recalculate its statistics with temporary roll options included */
     getContextualClone(rollOptions: string[]): this;
+    /** Apply effects from an aura: will later be expanded to handle effects from measured templates */
+    applyAreaEffects(aura: AuraData, { origin }: {
+        origin: ActorPF2e;
+    }): Promise<void>;
+    /** Review `removeOnExit` aura effects and remove any that no longer apply */
+    checkAreaEffects(): Promise<void>;
     /**
      * As of Foundry 0.8: All subclasses of ActorPF2e need to use this factory method rather than having their own
      * overrides, since Foundry itself will call `ActorPF2e.create` when a new actor is created from the sidebar.
@@ -101,6 +118,8 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     prepareBaseData(): void;
     /** Prepare the physical-item collection on this actor, item-sibling data, and rule elements */
     prepareEmbeddedDocuments(): void;
+    /** Prepare data among owned items as well as actor-data preparation performed by items */
+    protected prepareDataFromItems(): void;
     protected prepareRuleElements(): RuleElementPF2e[];
     /** Collect all sources of modifiers for statistics */
     protected prepareSynthetics(): void;
@@ -114,9 +133,9 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     /**
      * Roll a Save Check
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus.
-     * Will be removed once non-creature saves are implemented properly.
+     * @deprecated
      */
-    rollSave(event: JQuery.Event, saveName: SaveType): void;
+    rollSave(event: JQuery.TriggeredEvent, saveType: SaveType): void;
     /**
      * Roll a Attribute Check
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus

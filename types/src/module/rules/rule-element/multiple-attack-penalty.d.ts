@@ -6,7 +6,7 @@ import { RuleElementPF2e } from "./";
 export declare class MultipleAttackPenaltyRuleElement extends RuleElementPF2e {
     beforePrepareData(): void;
 }
-export interface MultipleAttackPenaltyPF2e {
+export interface MAPSynthetic {
     label: string;
     penalty: number;
     predicate?: PredicatePF2e;

@@ -20,6 +20,8 @@ declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends To
     get hasDarkvision(): boolean;
     /** Is this token's dimensions linked to its actor's size category? */
     get linkToActorSize(): boolean;
+    /** Is this token's scale locked at 1 or (for small creatures) 0.8? */
+    get autoscale(): boolean;
     get playersCanSeeName(): boolean;
     /** Refresh this token's properties if it's controlled and the request came from its actor */
     prepareData({ fromActor }?: {

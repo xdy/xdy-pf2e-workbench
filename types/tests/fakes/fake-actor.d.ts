@@ -11,7 +11,7 @@ export declare class FakeActor {
     _itemGuid: number;
     constructor(data: ActorSourcePF2e, options?: DocumentConstructionContext<ActorPF2e>);
     get id(): string;
-    get data(): import("@actor/data").CharacterSource | import("@actor/data").NPCSource | import("@actor/data").FamiliarSource | import("@actor/data").HazardSource | import("@actor/data").LootSource | import("@actor/data").VehicleSource;
+    get data(): import("../../src/module/actor/vehicle/data").VehicleSource | import("../../src/module/actor/character/data/types").CharacterSource | import("../../src/module/actor/npc/data").NPCSource | import("../../src/module/actor/familiar/data").FamiliarSource | import("../../src/module/actor/hazard/data").HazardSource | import("../../src/module/actor/loot/data").LootSource;
     get name(): string;
     prepareData(): void;
     static fromToken(token: Token): ActorPF2e | null;
@@ -21,5 +21,5 @@ export declare class FakeActor {
     updateEmbeddedDocuments(type: string, data: any[]): Promise<void>;
     createEmbeddedDocuments(type: string, data: any[], _context: DocumentModificationContext): Promise<void>;
     deleteEmbeddedDocuments(type: string, data: string[]): Promise<void>;
-    toObject(source?: boolean): import("@actor/data").CharacterSource | import("@actor/data").NPCSource | import("@actor/data").FamiliarSource | import("@actor/data").HazardSource | import("@actor/data").LootSource | import("@actor/data").VehicleSource;
+    toObject(source?: boolean): import("../../src/module/actor/vehicle/data").VehicleSource | import("../../src/module/actor/character/data/types").CharacterSource | import("../../src/module/actor/npc/data").NPCSource | import("../../src/module/actor/familiar/data").FamiliarSource | import("../../src/module/actor/hazard/data").HazardSource | import("../../src/module/actor/loot/data").LootSource;
 }

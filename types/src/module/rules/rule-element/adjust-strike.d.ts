@@ -29,7 +29,7 @@ interface AdjustStrikeSource extends Exclude<AELikeSource, "path"> {
     definition?: unknown;
 }
 interface StrikeAdjustment {
-    adjustDamageRoll?: (weapon: Embedded<WeaponPF2e>, { materials }: {
+    adjustDamageRoll?: (weapon: WeaponPF2e | MeleePF2e, { materials }: {
         materials?: Set<WeaponMaterialEffect>;
     }) => void;
     adjustWeapon?: (weapon: Embedded<WeaponPF2e>) => void;

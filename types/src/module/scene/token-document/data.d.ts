@@ -5,6 +5,7 @@ export interface TokenDataPF2e<T extends TokenDocumentPF2e = TokenDocumentPF2e> 
         pf2e: {
             [key: string]: unknown;
             linkToActorSize: boolean;
+            autoscale: boolean;
         };
         [key: string]: Record<string, unknown>;
     };

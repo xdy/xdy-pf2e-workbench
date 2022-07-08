@@ -1,7 +1,8 @@
-import { CreatureAttributes, BaseCreatureData, BaseCreatureSource, CreatureSystemData, SkillAbbreviation, CreatureSystemSource, CreatureTraitsData } from "@actor/creature/data";
+import { BaseCreatureData, BaseCreatureSource, CreatureAttributes, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, SkillAbbreviation } from "@actor/creature/data";
 import { CreatureSensePF2e } from "@actor/creature/sense";
-import { AbilityString, Rollable } from "@actor/data/base";
+import { Rollable } from "@actor/data/base";
 import { StatisticModifier } from "@actor/modifiers";
+import { AbilityString } from "@actor/types";
 import type { FamiliarPF2e } from ".";
 declare type FamiliarSource = BaseCreatureSource<"familiar", FamiliarSystemSource>;
 interface FamiliarData extends Omit<FamiliarSource, "data" | "effects" | "flags" | "items" | "token" | "type">, BaseCreatureData<FamiliarPF2e, "familiar", FamiliarSystemData, FamiliarSource> {

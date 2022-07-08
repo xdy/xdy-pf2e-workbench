@@ -1,11 +1,11 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { SkillAbbreviation } from "@actor/creature/data";
+import { Alignment } from "@actor/creature/types";
+import { DeityPF2e } from "@item";
 import { ItemSheetPF2e } from "@item/sheet/base";
 import { ItemSheetDataPF2e } from "@item/sheet/data-types";
 import { SheetOptions } from "@module/sheet/helpers";
-import { DeityPF2e } from "./document";
-import { Alignment } from "@actor/creature/types";
 export declare class DeitySheetPF2e<TItem extends DeityPF2e = DeityPF2e> extends ItemSheetPF2e<TItem> {
     static get defaultOptions(): DocumentSheetOptions;
     getData(options?: Partial<DocumentSheetOptions>): Promise<DeitySheetData>;
@@ -16,7 +16,6 @@ export declare class DeitySheetPF2e<TItem extends DeityPF2e = DeityPF2e> extends
 }
 interface DeitySheetData extends ItemSheetDataPF2e<DeityPF2e> {
     alignments: Record<Alignment, string>;
-    followerAlignments: SheetOptions;
     skills: Record<SkillAbbreviation, string>;
     divineFonts: SheetOptions;
     spells: SpellBrief[];

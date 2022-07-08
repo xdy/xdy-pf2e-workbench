@@ -1,47 +1,18 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
+import { CreatureSheetPF2e } from "@actor/creature/sheet";
 import { FamiliarPF2e } from "@actor/familiar";
-import type { ItemPF2e } from "@item/base";
+import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
+import { FamiliarSheetData } from "./types";
 /**
  * @category Actor
  */
-export declare class FamiliarSheetPF2e extends ActorSheet<FamiliarPF2e, ItemPF2e> {
+export declare class FamiliarSheetPF2e extends CreatureSheetPF2e<FamiliarPF2e> {
+    /** There is currently no actor config for familiars */
+    protected readonly actorConfigClass: null;
     static get defaultOptions(): ActorSheetOptions;
     get template(): string;
-    getData(): Promise<{
-        master: import("../character").CharacterPF2e | null;
-        masters: import("../base").ActorPF2e[];
-        abilities: {
-            str: string;
-            dex: string;
-            con: string;
-            int: string;
-            wis: string;
-            cha: string;
-        };
-        size: string;
-        familiarAbilities: {
-            value: number;
-        } | {
-            value: number;
-            breakdown: string;
-        };
-        traits: {
-            value: string;
-            label: string;
-            description: string;
-        }[];
-        actor: any;
-        data: any;
-        items: any;
-        cssClass: "editable" | "locked";
-        effects: RawObject<foundry.data.ActiveEffectData<foundry.documents.BaseActiveEffect>>[];
-        limited: boolean;
-        options: ActorSheetOptions;
-        editable: boolean;
-        document: FamiliarPF2e;
-        owner: boolean;
-        title: string;
-    }>;
+    getData(options?: ActorSheetOptions): Promise<FamiliarSheetData>;
+    protected prepareItems(_sheetData: ActorSheetDataPF2e<FamiliarPF2e>): void;
     activateListeners($html: JQuery): void;
 }

@@ -7,7 +7,7 @@ declare class FeatPF2e extends ItemPF2e {
     get level(): number;
     get traits(): Set<FeatTrait>;
     get actionCost(): {
-        type: "action" | "reaction" | "free";
+        type: "action" | "free" | "reaction";
         value: OneToThree | null;
     } | null;
     get isFeature(): boolean;
@@ -22,6 +22,7 @@ declare class FeatPF2e extends ItemPF2e {
     getChatData(this: Embedded<FeatPF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
+    protected _preCreate(data: PreDocumentId<FeatSource>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     /** Warn the owning user(s) if this feat was taken despite some restriction */
     protected _onCreate(data: FeatSource, options: DocumentModificationContext<this>, userId: string): void;

@@ -1,6 +1,6 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { AbilityString } from "@actor/data";
+import { AbilityString } from "@actor/types";
 import { SpellcastingEntryPF2e } from "@item";
 import { MagicTradition } from "@item/spell/types";
 import { PreparationType } from "@item/spellcasting-entry/data";

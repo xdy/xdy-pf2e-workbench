@@ -1,5 +1,5 @@
 import { CharacterPF2e } from "@actor";
-import { AbilityString } from "@actor/data";
+import { AbilityString } from "@actor/types";
 import { SpellPF2e } from "@item";
 import { Statistic } from "@system/statistic";
 import { BaseSpellcastingEntry } from "./data";

@@ -9,6 +9,7 @@ declare class AncestryPF2e extends ABCItemPF2e {
     get size(): Size;
     /** Include all ancestry features in addition to any with the expected location ID */
     getLinkedFeatures(): Embedded<FeatPF2e>[];
+    prepareBaseData(): void;
     /** Prepare a character's data derived from their ancestry */
     prepareActorData(this: Embedded<AncestryPF2e>): void;
 }

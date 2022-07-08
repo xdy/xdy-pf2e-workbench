@@ -3,12 +3,18 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { PredicatePF2e } from "@system/predication";
+import Tagify from "@yaireo/tagify";
 /** Prompt the user to pick from a number of options */
 declare abstract class PickAThingPrompt<T> extends Application {
     protected item: Embedded<ItemPF2e>;
     private resolve?;
     protected selection: PickableThing<T> | null;
     protected choices: PickableThing<T>[];
+    /** If the number of choices is beyond a certain length, a select menu is presented instead of a list of buttons */
+    protected selectMenu?: Tagify<{
+        value: string;
+        label: string;
+    }>;
     protected predicate: PredicatePF2e;
     protected allowNoSelection: boolean;
     constructor(data: PickAThingConstructorArgs<T>);

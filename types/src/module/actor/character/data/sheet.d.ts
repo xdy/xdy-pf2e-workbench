@@ -9,14 +9,6 @@ import { CreatureSheetData, SpellcastingSheetData } from "@actor/creature/types"
 import { CHARACTER_SHEET_TABS } from "./values";
 declare type CharacterSheetOptions = ActorSheetOptions;
 declare type CharacterSystemSheetData = CharacterSystemData & {
-    attributes: {
-        dying: {
-            icon: string;
-        };
-        wounded: {
-            icon: string;
-        };
-    };
     details: CharacterSystemData["details"] & {
         keyability: {
             value: keyof typeof CONFIG.PF2E.abilities;

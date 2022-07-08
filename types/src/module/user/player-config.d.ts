@@ -1,7 +1,6 @@
 /** Player-specific settings, stored as flags on each world User */
 export declare class PlayerConfigPF2e extends FormApplication {
     settings: UserSettingsPF2e;
-    constructor();
     static readonly defaultSettings: UserSettingsPF2e;
     static get defaultOptions(): Required<FormApplicationOptions>;
     getData(): PlayerConfigData;
@@ -21,5 +20,6 @@ export interface UserSettingsPF2e {
     showEffectPanel: boolean;
     showRollDialogs: boolean;
     darkvisionFilter: boolean;
+    searchPackContents: boolean;
 }
 export {};

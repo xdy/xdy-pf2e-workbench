@@ -1,8 +1,8 @@
-import { AbilityString } from "@actor/data/base";
+import { AbilityString } from "@actor/types";
+import { RollNotePF2e } from "@module/notes";
+import { DamageDieSize, DamageType } from "@system/damage";
 import { DegreeOfSuccessAdjustment } from "@system/degree-of-success";
 import { PredicatePF2e, RawPredicate } from "@system/predication";
-import { RollNotePF2e } from "../notes";
-import { DamageDieSize, DamageType } from "../system/damage";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 declare function ensureProficiencyOption(options: string[], rank: number): void;
 /**
@@ -18,7 +18,7 @@ declare const MODIFIER_TYPE: {
     readonly STATUS: "status";
     readonly UNTYPED: "untyped";
 };
-declare const MODIFIER_TYPES: Set<"item" | "status" | "untyped" | "ability" | "proficiency" | "circumstance" | "potency">;
+declare const MODIFIER_TYPES: Set<"item" | "status" | "untyped" | "ability" | "circumstance" | "potency" | "proficiency">;
 declare type ModifierType = SetElement<typeof MODIFIER_TYPES>;
 interface BaseRawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
@@ -80,8 +80,10 @@ interface DeferredValueParams {
 declare type DeferredValue<T> = (options?: DeferredValueParams) => T;
 /** Represents a discrete modifier, bonus, or penalty, to a statistic or check. */
 declare class ModifierPF2e implements RawModifier {
+    #private;
     slug: string;
     label: string;
+    /** The value of the modifier */
     modifier: number;
     type: ModifierType;
     ability: AbilityString | null;

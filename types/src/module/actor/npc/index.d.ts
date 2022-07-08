@@ -1,11 +1,12 @@
 import { CreaturePF2e } from "@actor";
 import { Abilities } from "@actor/creature/data";
-import { MeleeData } from "@item/data";
+import { ItemType, MeleeData } from "@item/data";
 import { RollNotePF2e } from "@module/notes";
 import { NPCData } from "./data";
 import { NPCSheetPF2e } from "./sheet";
 import { VariantCloneParams } from "./types";
 declare class NPCPF2e extends CreaturePF2e {
+    get allowedItemTypes(): (ItemType | "physical")[];
     /** This NPC's ability scores */
     get abilities(): Abilities;
     get description(): string;

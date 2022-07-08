@@ -1,15 +1,16 @@
 /// <reference types="jquery" />
-import { ItemPF2e, ItemConstructionContextPF2e, SpellcastingEntryPF2e } from "@item";
-import { OneToTen } from "@module/data";
-import { SpellData, SpellHeightenLayer, SpellSource } from "./data";
+import { ItemConstructionContextPF2e, ItemPF2e, SpellcastingEntryPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
+import { GhostTemplate } from "@module/canvas/ghost-measured-template";
 import { ChatMessagePF2e } from "@module/chat-message";
-import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
+import { OneToTen } from "@module/data";
 import { UserPF2e } from "@module/user";
 import { StatisticRollParameters } from "@system/statistic";
+import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
+import { SpellData, SpellHeightenLayer, SpellOverlayType, SpellSource } from "./data";
 import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "./types";
-import { GhostTemplate } from "@module/canvas/ghost-measured-template";
+import { SpellOverlayCollection } from "./overlay";
 interface SpellConstructionContext extends ItemConstructionContextPF2e {
     fromConsumable?: boolean;
 }
@@ -17,6 +18,8 @@ declare class SpellPF2e extends ItemPF2e {
     readonly isFromConsumable: boolean;
     /** The original spell. Only exists if this is a variant */
     original?: SpellPF2e;
+    /** The overlays that were applied to create this variant */
+    appliedOverlays?: Map<SpellOverlayType, string>;
     /** Set if casted with trick magic item. Will be replaced via overriding spellcasting on cast later. */
     trickMagicEntry: TrickMagicItemEntry | null;
     get baseLevel(): OneToTen;
@@ -38,6 +41,8 @@ declare class SpellPF2e extends ItemPF2e {
     /** Returns true if this spell has unlimited uses, false otherwise. */
     get unlimited(): boolean;
     get isVariant(): boolean;
+    get hasVariants(): boolean;
+    get uuid(): ItemUUID;
     constructor(data: PreCreate<ItemSourcePF2e>, context?: SpellConstructionContext);
     private computeCastLevel;
     getRollData(rollOptions?: {
@@ -51,7 +56,10 @@ declare class SpellPF2e extends ItemPF2e {
      * This handles heightening as well as alternative cast modes of spells.
      * If there's nothing to apply, returns null.
      */
-    loadVariant(castLevel: number): SpellPF2e | null;
+    loadVariant(options?: {
+        castLevel?: number;
+        overlayIds?: string[];
+    }): Embedded<SpellPF2e> | null;
     getHeightenLayers(level?: number): SpellHeightenLayer[];
     createTemplate(): GhostTemplate;
     placeTemplate(): void;
@@ -72,9 +80,11 @@ declare class SpellPF2e extends ItemPF2e {
      * Rely upon the DicePF2e.d20Roll logic for the core implementation
      */
     rollCounteract(event: JQuery.ClickEvent): void;
+    update(data: DocumentUpdateData<this>, options?: DocumentModificationContext<this>): Promise<this>;
     protected _preUpdate(changed: DeepPartial<SpellSource>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
 }
 interface SpellPF2e {
     readonly data: SpellData;
+    overlays: SpellOverlayCollection;
 }
 export { SpellPF2e };

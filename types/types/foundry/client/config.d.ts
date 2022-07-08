@@ -1,5 +1,4 @@
 import type * as TinyMCE from "tinymce";
-import * as PIXI from "pixi.js";
 
 declare global {
     interface Config<
@@ -47,7 +46,17 @@ declare global {
                 new (data: PreCreate<TActor["data"]["_source"]>, context?: DocumentConstructionContext<TActor>): TActor;
             };
             collection: ConstructorOf<Actors<TActor>>;
-            sheetClasses: Record<string, Record<string, typeof ActorSheet>>;
+            sheetClasses: Record<
+                string,
+                Record<
+                    string,
+                    {
+                        id: string;
+                        cls: typeof ActorSheet;
+                        default: boolean;
+                    }
+                >
+            >;
             typeLabels: Record<string, string | undefined>;
         };
 
@@ -95,7 +104,17 @@ declare global {
                 new (data: PreCreate<TItem["data"]["_source"]>, context?: DocumentConstructionContext<TItem>): TItem;
             };
             collection: typeof Items;
-            sheetClasses: Record<string, Record<string, typeof ItemSheet>>;
+            sheetClasses: Record<
+                string,
+                Record<
+                    string,
+                    {
+                        id: string;
+                        cls: typeof ItemSheet;
+                        default: boolean;
+                    }
+                >
+            >;
             typeLabels: Record<string, string | undefined>;
         };
 
@@ -128,21 +147,15 @@ declare global {
 
         /** Configuration for the Macro document */
         Macro: {
-            documentClass: {
-                new (data: PreCreate<TMacro["data"]["_source"]>, context?: DocumentConstructionContext<TMacro>): TMacro;
-            };
+            documentClass: ConstructorOf<TMacro>;
             collection: typeof Macros;
             sidebarIcon: string;
         };
 
         /** Configuration for Scene document */
         Scene: {
-            documentClass: {
-                new (data: PreCreate<TScene["data"]["_source"]>, context?: DocumentConstructionContext<TScene>): TScene;
-            };
-
+            documentClass: ConstructorOf<TScene>;
             collection: typeof Scenes;
-            notesClass: any;
             sidebarIcon: string;
         };
 
@@ -161,9 +174,7 @@ declare global {
 
         /** Configuration for the User document */
         User: {
-            documentClass: {
-                new (data: PreCreate<TUser["data"]["_source"]>, context?: DocumentConstructionContext<TUser>): TUser;
-            };
+            documentClass: ConstructorOf<TUser>;
             collection: typeof Users;
             permissions: undefined;
         };
@@ -227,7 +238,7 @@ declare global {
         /** Configuration for the Token embedded document type and its representation on the game Canvas */
         Token: {
             documentClass: ConstructorOf<TTokenDocument>;
-            objectClass: new (...args: any[]) => TTokenDocument["object"];
+            objectClass: ConstructorOf<TTokenDocument["object"]>;
             layerClass: ConstructorOf<TTokenDocument["object"]["layer"]>;
             prototypeSheetClass: ConstructorOf<TTokenDocument["sheet"]>;
         };
@@ -388,6 +399,12 @@ declare global {
             };
         };
 
+        /** Configure the default Token text style so that it may be reused and overridden by modules */
+        canvasTextStyle: PIXI.TextStyle;
+
+        /** Available Weather Effects implemntations */
+        weatherEffects: Record<string, SpecialEffect>;
+
         /** Configuration for dice rolling behaviors in the Foundry VTT client */
         Dice: {
             types: Array<typeof Die | typeof DiceTerm>;
@@ -402,9 +419,7 @@ declare global {
             randomUniform: Function;
         };
 
-        /**
-         * The control icons used for rendering common HUD operations
-         */
+        /** The control icons used for rendering common HUD operations */
         controlIcons: {
             combat: string;
             visibility: string;
@@ -416,29 +431,16 @@ declare global {
             [key: string]: string | undefined;
         };
 
-        /**
-         * Suggested font families that are displayed wherever a choice is presented
-         */
+        /** Suggested font families that are displayed wherever a choice is presented */
         fontFamilies: string[];
 
-        /**
-         * The default font family used for text labels on the PIXI Canvas
-         */
+        /** The default font family used for text labels on the PIXI Canvas */
         defaultFontFamily: string;
 
-        /**
-         * Available Weather Effects implemntations
-         */
-        weatherEffects: any;
-
-        /**
-         * An array of status effect icons which can be applied to Tokens
-         */
+        /** An array of status effect icons which can be applied to Tokens */
         statusEffects: string[];
 
-        /**
-         * A mapping of core audio effects used which can be replaced by systems or mods
-         */
+        /** A mapping of core audio effects used which can be replaced by systems or mods */
         sounds: {
             dice: AudioPath;
             lock: string;
@@ -446,17 +448,13 @@ declare global {
             combat: string;
         };
 
-        /**
-         * Define the set of supported languages for localization
-         */
+        /** Define the set of supported languages for localization */
         supportedLanguages: {
             en: string;
             [key: string]: string;
         };
 
-        /**
-         * Maximum canvas zoom scale
-         */
+        /** Maximum canvas zoom scale */
         maxCanvasZoom: number;
 
         /* -------------------------------------------- */

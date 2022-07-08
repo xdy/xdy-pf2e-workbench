@@ -40,5 +40,6 @@ export declare class CompendiumPack {
     save(): number;
     private isDocumentSource;
     private isPackData;
+    private assertSizeValid;
 }
 export {};

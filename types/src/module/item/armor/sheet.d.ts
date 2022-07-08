@@ -1,7 +1,7 @@
 import { PhysicalItemSheetPF2e } from "@item/physical/sheet";
 import { ArmorPF2e } from ".";
 export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
-    getData(): Promise<{
+    getData(options?: Partial<DocumentSheetOptions>): Promise<{
         armorPotencyRunes: {
             "1": string;
             "2": string;

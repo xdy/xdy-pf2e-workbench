@@ -1,6 +1,6 @@
 import { SaveData } from "@actor/creature/data";
-import { SaveType } from "@actor/data";
 import { ActorSystemData, ActorSystemSource, BaseActorAttributes, BaseActorDataPF2e, BaseActorSourcePF2e, BaseHitPointsData, BaseTraitsData } from "@actor/data/base";
+import { SaveType } from "@actor/types";
 import { ZeroToTwo } from "@module/data";
 import { HazardPF2e } from ".";
 /** The stored source data of a hazard actor */
@@ -30,7 +30,7 @@ interface HazardAttributes extends BaseActorAttributes {
         tiebreakPriority: ZeroToTwo;
     };
     stealth: {
-        value: number;
+        value: number | null;
         details: string;
     };
 }

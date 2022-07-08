@@ -4,5 +4,5 @@ interface ParamsFromEvent {
     secret?: boolean;
     skipDialog: boolean;
 }
-export declare function eventToRollParams(event: JQuery.TriggeredEvent | PointerEvent): ParamsFromEvent;
+export declare function eventToRollParams(event: JQuery.TriggeredEvent | MouseEvent): ParamsFromEvent;
 export {};

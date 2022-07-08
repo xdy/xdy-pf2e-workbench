@@ -1,5 +1,6 @@
 import { ActorSystemData, BaseActorAttributes, BaseActorDataPF2e, BaseActorSourcePF2e, BaseHitPointsData, BaseTraitsData } from "@actor/data/base";
 import { ValuesList } from "@module/data";
+import { StatisticCompatData } from "@system/statistic";
 import { VehiclePF2e } from ".";
 /** The stored source data of a vehicle actor */
 declare type VehicleSource = BaseActorSourcePF2e<"vehicle", VehicleSystemData>;
@@ -39,14 +40,12 @@ interface VehicleSystemData extends ActorSystemData {
         speed: number;
     };
     saves: {
-        fortitude: {
-            rank: number;
-            value: number;
-            saveDetail: string;
-        };
+        fortitude: VehicleFortitudeSaveData;
     };
     traits: VehicleTraitsData;
-    [key: string]: any;
+}
+interface VehicleFortitudeSaveData extends StatisticCompatData {
+    saveDetail: string;
 }
 declare type VehicleTrait = keyof ConfigPF2e["PF2E"]["vehicleTraits"];
 declare type VehicleTraits = ValuesList<VehicleTrait>;

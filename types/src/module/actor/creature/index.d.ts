@@ -1,23 +1,24 @@
+/// <reference types="jquery" />
 import { ActorPF2e } from "@actor";
-import { CreatureData, SaveType } from "@actor/data";
-import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
-import { ItemPF2e, ArmorPF2e, PhysicalItemPF2e } from "@item";
-import { RuleElementSynthetics } from "@module/rules";
-import { ActiveEffectPF2e } from "@module/active-effect";
-import { CreatureSkills, CreatureSpeeds, LabeledSpeed, MovementType, SenseData, VisionLevel } from "./data";
-import { Statistic } from "@system/statistic";
-import { RawPredicate } from "@system/predication";
-import { UserPF2e } from "@module/user";
-import { CreatureSensePF2e } from "./sense";
 import { HitPointsSummary } from "@actor/base";
-import { Rarity } from "@module/data";
-import { DamageType } from "@system/damage";
-import { Alignment, AttackItem, AttackRollContext, GetReachParameters, IsFlatFootedParams, StrikeRollContext, StrikeRollContextParams } from "./types";
+import { CreatureData } from "@actor/data";
+import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
+import { SaveType } from "@actor/types";
+import { ArmorPF2e, ItemPF2e, PhysicalItemPF2e } from "@item";
 import { ItemCarryType } from "@item/physical/data";
+import { ActiveEffectPF2e } from "@module/active-effect";
+import { Rarity } from "@module/data";
+import { RuleElementSynthetics } from "@module/rules";
+import { UserPF2e } from "@module/user";
+import { CheckRoll } from "@system/check/roll";
+import { DamageType } from "@system/damage";
+import { RawPredicate } from "@system/predication";
+import { Statistic } from "@system/statistic";
+import { CreatureSkills, CreatureSpeeds, LabeledSpeed, MovementType, SenseData, VisionLevel } from "./data";
+import { CreatureSensePF2e } from "./sense";
+import { Alignment, AttackItem, AttackRollContext, GetReachParameters, IsFlatFootedParams, StrikeRollContext, StrikeRollContextParams } from "./types";
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 export declare abstract class CreaturePF2e extends ActorPF2e {
-    /** Saving throw rolls for the creature, built during data prep */
-    saves: Record<SaveType, Statistic>;
     /** Skill `Statistic`s for the creature */
     get skills(): CreatureSkills;
     /** The creature's position on the alignment axes */
@@ -41,8 +42,6 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
     get wornArmor(): Embedded<ArmorPF2e> | null;
     /** Get the held shield of most use to the wielder */
     get heldShield(): Embedded<ArmorPF2e> | null;
-    /** Whether this actor is an ally of the provided actor */
-    isAllyOf(actor: ActorPF2e): boolean;
     /** Whether the actor is flat-footed in the current scene context: currently only handles flanking */
     isFlatFooted({ dueTo }: IsFlatFootedParams): boolean;
     /** Construct a range penalty for this creature when making a ranged attack */
@@ -71,6 +70,11 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
     addCustomModifier(stat: string, name: string, value: number, type: string, predicate?: RawPredicate, damageType?: DamageType, damageCategory?: string): Promise<void>;
     /** Removes a custom modifier by slug */
     removeCustomModifier(stat: string, modifier: number | string): Promise<void>;
+    /**
+     * Roll a Recovery Check
+     * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+     */
+    rollRecovery(event: JQuery.TriggeredEvent): Promise<Rolled<CheckRoll> | null>;
     /** Prepare derived creature senses from Rules Element synthetics */
     prepareSenses(data: SenseData[], synthetics: RuleElementSynthetics): CreatureSensePF2e[];
     prepareSpeed(movementType: "land"): CreatureSpeeds;
@@ -92,6 +96,8 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
 }
 export interface CreaturePF2e {
     readonly data: CreatureData;
+    /** Saving throw rolls for the creature, built during data prep */
+    saves: Record<SaveType, Statistic>;
     get hitPoints(): HitPointsSummary;
     /** See implementation in class */
     updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData<this>[], options?: DocumentModificationContext): Promise<ActiveEffectPF2e[]>;

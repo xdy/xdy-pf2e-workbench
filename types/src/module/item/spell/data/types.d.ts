@@ -1,9 +1,8 @@
-import { SaveType } from "@actor/data";
-import { AbilityString } from "@actor/data/base";
-import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/data/base";
-import { DamageType } from "@system/damage";
-import { ValuesList, OneToTen, ValueAndMax } from "@module/data";
+import { AbilityString, SaveType } from "@actor/types";
 import type { SpellPF2e } from "@item";
+import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/data/base";
+import { OneToTen, ValueAndMax, ValuesList } from "@module/data";
+import { DamageType } from "@system/damage";
 import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "../types";
 declare type SpellSource = BaseItemSourcePF2e<"spell", SpellSystemSource>;
 declare type SpellData = Omit<SpellSource, "effects" | "flags"> & BaseItemDataPF2e<SpellPF2e, "spell", SpellSystemData, SpellSource>;
@@ -32,6 +31,16 @@ export interface SpellHeightenLayer {
     level: number;
     data: Partial<SpellSystemData>;
 }
+interface SpellOverlayOverride extends Partial<SpellSource> {
+    overlayType: "override";
+}
+/** Not implemented */
+interface SpellOverlayDamage {
+    overlayType: "damage";
+    choices: DamageType[];
+}
+declare type SpellOverlay = SpellOverlayOverride | SpellOverlayDamage;
+declare type SpellOverlayType = SpellOverlay["overlayType"];
 interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
     traits: SpellTraits;
     level: {
@@ -71,6 +80,7 @@ interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
         value: Record<string, SpellDamage>;
     };
     heightening?: SpellHeighteningFixed | SpellHeighteningInterval;
+    overlays?: Record<string, SpellOverlay>;
     save: {
         basic: string;
         value: SaveType | "";
@@ -102,4 +112,4 @@ interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
 interface SpellSystemData extends SpellSystemSource, ItemSystemData {
     traits: SpellTraits;
 }
-export { SpellData, SpellSource, SpellSystemData, SpellSystemSource };
+export { SpellData, SpellSource, SpellSystemData, SpellSystemSource, SpellOverlay, SpellOverlayType };

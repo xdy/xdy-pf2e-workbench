@@ -1,12 +1,12 @@
-import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
-import { CheckType } from "@system/rolls";
 import { ActorPF2e } from "@actor";
-import { BaseStatisticData, StatisticChatData, StatisticCompatData, StatisticData, StatisticDataWithCheck, StatisticDataWithDC } from "./data";
+import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
+import { AbilityString } from "@actor/types";
 import { ItemPF2e } from "@item";
-import { CheckDC } from "@system/degree-of-success";
-import { CheckRoll } from "@system/check/roll";
 import { ZeroToFour } from "@module/data";
-import { AbilityString } from "@actor/data";
+import { CheckRoll } from "@system/check/roll";
+import { CheckDC } from "@system/degree-of-success";
+import { CheckRollCallback, CheckType, RollTwiceOption } from "@system/rolls";
+import { BaseStatisticData, StatisticChatData, StatisticCompatData, StatisticData, StatisticDataWithCheck, StatisticDataWithDC } from "./data";
 export * from "./data";
 export interface StatisticRollParameters {
     /** Which attack this is (for the purposes of multiple attack penalty) */
@@ -25,8 +25,10 @@ export interface StatisticRollParameters {
     secret?: boolean;
     /** Should the dialog be skipped */
     skipDialog?: boolean;
+    /** Should this roll be rolled twice? If so, should it keep highest or lowest? */
+    rollTwice?: RollTwiceOption;
     /** Callback called when the roll occurs. */
-    callback?: (roll: Rolled<Roll>) => void;
+    callback?: CheckRollCallback;
 }
 interface RollOptionParameters {
     extraRollOptions?: string[];
@@ -81,12 +83,6 @@ declare class StatisticCheck {
     constructor(parent: Statistic<StatisticDataWithCheck>, options?: RollOptionParameters);
     get label(): string;
     createRollOptions(args?: RollOptionParameters): string[];
-    calculateMap(options: {
-        item: ItemPF2e;
-    }): {
-        label: string;
-        penalty: number;
-    };
     roll(args?: StatisticRollParameters): Promise<Rolled<CheckRoll> | null>;
     get breakdown(): string;
 }

@@ -10,8 +10,9 @@ declare class EffectPF2e extends ItemPF2e {
         expired: boolean;
         remaining: number;
     };
+    /** Does this effect originate from an aura? */
+    get fromAura(): boolean;
     prepareBaseData(): void;
-    prepareDerivedData(): void;
     /** Set a self roll option for this effect */
     prepareActorData(this: Embedded<EffectPF2e>): void;
     /** Include a trimmed version of the "slug" roll option (e.g., effect:rage instead of effect:effect-rage) */

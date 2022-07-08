@@ -1,8 +1,8 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { ActorSheetPF2e } from "../sheet/base";
-import { HazardPF2e } from ".";
+import { ActorSheetPF2e } from "@actor/sheet/base";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
+import { HazardPF2e } from ".";
 import { HazardSheetData } from "./types";
 /** In development version of the hazard sheet. */
 export declare class HazardSheetGreenPF2e extends ActorSheetPF2e<HazardPF2e> {

@@ -1,6 +1,6 @@
 import { HazardPF2e } from "@actor";
-import { SaveType } from "@actor/data";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
+import { SaveType } from "@actor/types";
 import { ActionItemPF2e } from "@item";
 interface HazardSheetData extends ActorSheetDataPF2e<HazardPF2e> {
     actions: HazardActionSheetData;
@@ -11,7 +11,7 @@ interface HazardSheetData extends ActorSheetDataPF2e<HazardPF2e> {
     brokenThreshold: number;
     saves: HazardSaveSheetData[];
     stealthDC: number | null;
-    hasHealth: boolean;
+    hasDefenses: boolean;
     hasHPDetails: boolean;
     hasSaves: boolean;
     hasIWR: boolean;

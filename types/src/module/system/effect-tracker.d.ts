@@ -3,6 +3,8 @@ import type { EffectPF2e } from "@item/index";
 import { EncounterPF2e } from "@module/encounter";
 export declare class EffectTracker {
     private trackedEffects;
+    /** A separate collection of aura effects, including ones with unlimited duration */
+    auraEffects: Collection<Embedded<EffectPF2e>>;
     private insert;
     register(effect: Embedded<EffectPF2e>): void;
     unregister(toRemove: Embedded<EffectPF2e>): void;

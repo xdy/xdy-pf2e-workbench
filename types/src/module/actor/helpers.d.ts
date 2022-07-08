@@ -1,7 +1,12 @@
 import { ItemPF2e } from "@item";
-declare function calculateMAP(item: ItemPF2e): {
+/** Find the lowest multiple attack penalty for an attack with a given item */
+declare function calculateMAPs(item: ItemPF2e, { domains, options }: {
+    domains: string[];
+    options: string[];
+}): MAPData;
+interface MAPData {
     label: string;
+    map1: number;
     map2: number;
-    map3: number;
-};
-export { calculateMAP };
+}
+export { calculateMAPs };

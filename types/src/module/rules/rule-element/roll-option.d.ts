@@ -1,6 +1,5 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { PredicatePF2e } from "@system/predication";
 import { RuleElementOptions, RuleElementPF2e } from "./base";
 import { RuleElementSource } from "./data";
 /**
@@ -14,13 +13,15 @@ declare class RollOptionRuleElement extends RuleElementPF2e {
      * The value of the roll option: either a boolean or a string resolves to a boolean
      * If omitted, it defaults to `true` unless also `togglable`, in which case to `false`.
      */
-    value: string | boolean;
+    private value;
     /** Whether this roll option can be toggled by the user on an actor sheet */
-    toggleable: boolean;
-    /** Whether the toggle is interactable by the user. The `value` may still be true even if the toggle is disabled */
-    enabledIf?: PredicatePF2e;
-    /** Whether this roll option is countable - the roll option will have a numeric value counting how many rules added this option */
-    count?: boolean;
+    private toggleable;
+    /** An optional predicate to determine whether the toggle is interactable by the user */
+    private disabledIf?;
+    /** The value of the roll option if its toggle is disabled: null indicates the pre-disabled value is preserved */
+    private disabledValue?;
+    /** Whether this roll option is countable: it will have a numeric value counting how many rules added this option */
+    private count?;
     constructor(data: RollOptionSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     private resolveOption;
     onApplyActiveEffects(): void;
@@ -39,7 +40,8 @@ interface RollOptionSource extends RuleElementSource {
     domain?: unknown;
     option?: unknown;
     toggleable?: unknown;
-    enabledIf?: unknown;
+    disabledIf?: unknown;
+    disabledValue?: unknown;
     count?: unknown;
 }
 interface ToggleParameters {

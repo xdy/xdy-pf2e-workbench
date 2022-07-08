@@ -1,7 +1,7 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { AbilityString } from "@actor/data";
-import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item/index";
+import { AbilityString } from "@actor/types";
+import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item";
 import { ItemSheetPF2e } from "../sheet/base";
 import { ABCSheetData } from "../sheet/data-types";
 declare type ABCItem = AncestryPF2e | BackgroundPF2e | ClassPF2e;
@@ -31,7 +31,7 @@ export declare abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSh
         title: string;
         filters: SearchFilterConfiguration[];
     };
-    getData(): Promise<ABCSheetData<TItem>>;
+    getData(options?: Partial<DocumentSheetOptions>): Promise<ABCSheetData<TItem>>;
     protected getLocalizedAbilities(traits: {
         value: AbilityString[];
     }): {

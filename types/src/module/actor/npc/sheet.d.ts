@@ -1,9 +1,11 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { CreatureSheetPF2e } from "../creature/sheet";
+import { CreatureSheetPF2e } from "@actor/creature/sheet";
 import { NPCPF2e } from "@actor/index";
+import { NPCConfig } from "./config";
 import { NPCSheetData } from "./types";
 export declare class NPCSheetPF2e<TActor extends NPCPF2e> extends CreatureSheetPF2e<TActor> {
+    protected readonly actorConfigClass: typeof NPCConfig;
     static get defaultOptions(): ActorSheetOptions;
     /** Show either the actual NPC sheet or a briefened lootable version if the NPC is dead */
     get template(): string;
@@ -18,12 +20,6 @@ export declare class NPCSheetPF2e<TActor extends NPCPF2e> extends CreatureSheetP
     private getIdentifyCreatureData;
     getData(): Promise<NPCSheetData<TActor>>;
     activateListeners($html: JQuery): void;
-    /** Replace sheet config with a special NPC config form application */
-    protected _getHeaderButtons(): ApplicationHeaderButton[];
-    /**
-     * Shim for {@link DocumentSheet#_onConfigureSheet} that will be replaced in v10 when this class subclasses it.
-     */
-    protected _onConfigureSheet(event: Event): void;
     private prepareAbilities;
     private prepareSize;
     private prepareAlignment;
@@ -36,11 +32,6 @@ export declare class NPCSheetPF2e<TActor extends NPCPF2e> extends CreatureSheetP
      */
     private prepareActions;
     private prepareAttacks;
-    /**
-     * Prepare spells and spell entries
-     * @param sheetData Data of the actor to show in the sheet.
-     */
-    private prepareSpellcasting;
     private get isWeak();
     private get isElite();
     private getSizeLocalizedKey;
@@ -48,7 +39,6 @@ export declare class NPCSheetPF2e<TActor extends NPCPF2e> extends CreatureSheetP
     private rollPerception;
     private rollAbility;
     private onClickRollable;
-    private onClickToChat;
     private onClickMakeWeak;
     private onClickMakeElite;
     private onChangeSpellcastingEntry;
