@@ -1,3 +1,10 @@
+# [3.21.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.20.0...v3.21.0) (2022-07-08)
+
+
+### Features
+
+* Option to enable a Creature Builder button on npc sheets allowing the gm to create creatures from scratch, using the recommended values from the Game Mastery Guide. (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!) ([816af73](https://github.com/xdy/xdy-pf2e-workbench/commit/816af731d92c828b364abf8b7fab1df3c84bcbcc))
+
 # [3.20.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.19.0...v3.20.0) (2022-07-07)
 
 
