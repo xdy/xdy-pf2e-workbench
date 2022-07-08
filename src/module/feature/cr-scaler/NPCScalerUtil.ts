@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { SCALE_APP_DATA } from "./NPCScalerData";
 import { IDicePool } from "./NPCScalerTypes";
+import { SCALE_APP_DATA } from "../NPCScaleData";
 
 export function parseDamage(value: string): IDicePool {
     const [diceString, bonusString] = value.split("+");
@@ -52,6 +52,7 @@ export function constructFormula({
     }
     return formula;
 }
+
 export function getLeveledData(key: keyof typeof SCALE_APP_DATA, oldValue: number, oldLevel: number, newLevel: number) {
     const data = SCALE_APP_DATA[key];
     const oldLevelData = data[oldLevel + 1];
@@ -84,6 +85,7 @@ export function getLeveledData(key: keyof typeof SCALE_APP_DATA, oldValue: numbe
 
     return result;
 }
+
 export function getHPData(oldValue: number, oldLevel: number, newLevel: number) {
     const data = SCALE_APP_DATA["hitPoints"];
     const oldLevelData = data[oldLevel + 1];

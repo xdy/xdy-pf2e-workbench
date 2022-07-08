@@ -15,7 +15,7 @@
  */
 
 import { scaleNPCToLevel } from "./NPCScaler";
-import { ActorPF2e, NPCPF2e } from "@actor";
+import { NPCPF2e } from "@actor";
 
 export const setupNPCScaler = () => Hooks.on("getActorDirectoryEntryContext", onScaleNPCContextHook);
 

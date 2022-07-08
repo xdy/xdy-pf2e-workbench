@@ -39,6 +39,7 @@ import {
     reminderTargeting,
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
+import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -60,12 +61,18 @@ async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
 }
 
 // Initialize module
-Hooks.once("init", async (actor: ActorPF2e) => {
+Hooks.once("init", async (_actor: ActorPF2e) => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
 
     registerSettings();
 
     await preloadTemplates();
+
+    //Handlebars helpers
+    Handlebars.registerHelper("ifeq", function (v1, v2, options) {
+        if (v1 === v2) return options.fn(this);
+        else return options.inverse(this);
+    });
 
     //Hooks that always run
     Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
@@ -166,7 +173,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     }
 
     if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        Hooks.on("createItem", async (item: any, options: any, id: any) => {
+        Hooks.on("createItem", async (item: any, _options: any, _id: any) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
                 await applyEncumbranceBasedOnBulk(item);
             }
@@ -174,7 +181,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     }
 
     if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        Hooks.on("updateItem", async (item: any, options: any, id: any) => {
+        Hooks.on("updateItem", async (item: any, _options: any, _id: any) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
                 await applyEncumbranceBasedOnBulk(item);
             }
@@ -185,7 +192,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
         game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")
     ) {
-        Hooks.on("deleteItem", async (item: ItemPF2e, options: {}) => {
+        Hooks.on("deleteItem", async (item: ItemPF2e, _options: {}) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
                 await applyEncumbranceBasedOnBulk(item);
             }
@@ -327,7 +334,7 @@ Hooks.once("init", async (actor: ActorPF2e) => {
     }
 
     if (game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState")) {
-        Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update, options, userId) => {
+        Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update, _options, _userId) => {
             if (
                 tokenDoc.actor?.type !== "loot" &&
                 game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState") &&
@@ -367,7 +374,6 @@ Hooks.once("init", async (actor: ActorPF2e) => {
             if (game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
                 $html.find(".recall-knowledge").each((i, e) => {
                     const token = sheet.token;
-                    const actor = token?.actor;
                     $(e)
                         .find(".section-body")
                         .each((i, e) => {
@@ -430,8 +436,13 @@ Hooks.once("setup", async () => {
             return false;
         };
     }
+
     if (game.settings.get(MODULENAME, "npcScaler")) {
         setupNPCScaler();
+    }
+
+    if (game.settings.get(MODULENAME, "creatureBuilder")) {
+        setupCreatureBuilder();
     }
 });
 

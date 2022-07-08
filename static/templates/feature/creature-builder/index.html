@@ -1,0 +1,46 @@
+<form class="creature-builder" autocomplete="off" onsubmit="event.preventDefault();">
+    <label>Create the values of a creature from the values of the Game Mastery Guide</label>
+    <div class="sheet-header">
+        <h1 class="charname">
+            <input
+                name="name"
+                type="text"
+                value="{{object.name}}"
+                placeholder="Character Name"
+            />
+        </h1>
+    </div>
+    <div class='sheet-body'>
+        <div id='road-map-selector'>
+            <label for="road-map"><h2>Road Map</h2></label>
+            <select id="road-map">
+                {{#each roadMaps as |roadMap|}}
+                <option title='{{roadMap.tooltip}}'>{{roadMap.name}}</option>
+                {{/each}}
+            </select>
+            <div class="btn apply-road-map"><a><i class="fas fa-plus"></i>Apply Road Map (Resets Level)</a></div>
+        </div>
+        <div>
+            <label for="level"><h2>Level</h2></label>
+            <input name='{{CREATURE_LEVEL_FIELD}}' id='level' type='number' value='{{object.data.data.details.level.value}}'>
+        </div>
+        {{#each statisticCategories as |category|}}
+        <div class='category'>
+            <h2>{{category.name}}</h2>
+            {{#each category.statisticEntries as |entry|}}
+            <div class='entry'>
+                <label for='{{entry.name}}-group'><h3>{{entry.name}}</h3></label>
+                <div id='{{entry.name}}-group'>
+                    {{#each category.availableOptions as |option|}}
+                    <input type="radio"
+                           name='{{#if entry.name}}{{entry.name}}{{else}}{{category.name}}{{/if}}'
+                           value='{{option}}' {{#ifeq option entry.defaultValue}} Checked {{/ifeq}}> {{option}}
+                    {{/each}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/each}}
+    </div>
+    <button type="submit" name="submit" value="1"><i class="far fa-save"></i>Build</button>
+</form>
