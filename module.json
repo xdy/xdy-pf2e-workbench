@@ -5,9 +5,12 @@
   "version": "3.20.0",
   "minimumCoreVersion": "9",
   "compatibleCoreVersion": "9",
-  "scripts": [],
   "esmodules": [
+    "vendor.bundle.js",
     "xdy-pf2e-workbench.bundle.js"
+  ],
+  "scripts": [
+    "./lib/tooltipster.bundle.min.js"
   ],
   "styles": [
     "styles/xdy-pf2e-workbench.css"

@@ -5,11 +5,11 @@
     "forceConsistentCasingInFileNames": true,
     "lib": [
       "DOM",
-      "ES2021"
+      "esnext"
     ],
     "moduleResolution": "node",
     "outDir": "dist",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@actor": [
         "types/src/module/actor"
@@ -65,15 +65,17 @@
       ]
     },
     "removeComments": false,
-    "resolveJsonModule": true,
+//    "resolveJsonModule": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "ES2021",
+    "target": "ES2018",
     "types": [
       "handlebars",
       "jquery",
       "node",
-      "socket.io"
+      "socket.io",
+      "tooltipster",
+      "webpack-env"
     ],
     "typeRoots": [
       "node_modules/@types",
