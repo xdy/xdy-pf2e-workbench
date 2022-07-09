@@ -24,7 +24,7 @@ import {
     autoRemoveUnconsciousAtGreaterThanZeroHP,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP
+    removeDyingOnZeroHP,
 } from "./feature/conditionHandler";
 import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
 import {
