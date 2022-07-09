@@ -130,20 +130,29 @@
         "name": "Notify when a spell attack is rolled and no spell card was found."
       },
       "autoGainDyingAtZeroHP": {
-        "hint": "Client setting to automatically increase Dying at zero HP.",
-        "name": "Automatically increase Dying at zero HP.",
+        "hint": "Client setting to automatically increase Dying at 0 HP.",
+        "name": "Automatically increase Dying at 0 HP.",
         "no": "No",
         "addOne": "Add one",
         "addWoundedLevel": "Add 1 + Wounded level",
         "addOneForCharacters": "Add one, for characters+familiars",
         "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters+familiars"
       },
+      "giveUnconsciousIfDyingRemovedAt0HP": {
+        "hint": "Client setting to automatically give unconscious if Dying removed while at 0 HP.",
+        "name": "Automatically give unconscious if Dying removed at 0 HP.",
+        "no": "No"
+      },
       "autoRemoveDyingAtGreaterThanZeroHP": {
-        "hint": "Client setting to automatically remove Dying when healed to above zero hp.",
-        "name": "Automatically remove Dying when healed to above zero hp.",
+        "hint": "Client setting to automatically remove Dying when healed to above 0 HP.",
+        "name": "Automatically remove Dying when healed to above 0 HP.",
         "no": "No",
         "removeDying": "Remove Dying for all",
         "removeDyingForCharacters": "Remove Dying, for characters+familiars"
+      },
+      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
+        "hint": "Client setting to automatically remove unconscious if healed to greater than 0 HP.",
+        "name": "Automatically remove unconscious if healed to greater than 0 HP."
       },
       "giveWoundedWhenDyingRemoved": {
         "hint": "Client setting to automatically give Wounded condition when Dying condition is removed.",

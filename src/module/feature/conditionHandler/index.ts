@@ -142,7 +142,6 @@ export async function removeDyingOnZeroHP(
 ): Promise<boolean> {
     if (
         shouldIHandleThis(actor.isOwner ? game.user?.id : null) &&
-        // @ts-ignore
         hp <= 0 &&
         getProperty(update, "data.attributes.hp.value") > 0
     ) {
@@ -155,4 +154,19 @@ export async function removeDyingOnZeroHP(
         }
     }
     return true;
+}
+
+export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
+    actor: ActorPF2e,
+    update: Record<string, string>,
+    hp: number
+): Promise<void> {
+    if (
+        shouldIHandleThis(actor.isOwner ? game.user?.id : null) &&
+        hp <= 0 &&
+        getProperty(update, "data.attributes.hp.value") > 0 &&
+        actor.hasCondition("unconscious")
+    ) {
+        await actor.toggleCondition("unconscious");
+    }
 }

@@ -635,6 +635,26 @@ export function registerSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP", {
+        name: `${MODULENAME}.SETTINGS.giveUnconsciousIfDyingRemovedAt0HP.name`,
+        hint: `${MODULENAME}.SETTINGS.giveUnconsciousIfDyingRemovedAt0HP.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
+    game.settings.register(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP", {
+        name: `${MODULENAME}.SETTINGS.autoRemoveUnconsciousAtGreaterThanZeroHP.name`,
+        hint: `${MODULENAME}.SETTINGS.autoRemoveUnconsciousAtGreaterThanZeroHP.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "giveWoundedWhenDyingRemoved", {
         name: `${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.name`,
         hint: `${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.hint`,

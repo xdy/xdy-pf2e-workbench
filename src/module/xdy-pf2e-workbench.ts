@@ -20,7 +20,12 @@ import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { TokenDocumentPF2e } from "@scene";
 import { playAnimationAndSound } from "./feature/sfxHandler";
 import { toggleSettings } from "./feature/settingsHandler";
-import { increaseDyingOnZeroHP, reduceFrightened, removeDyingOnZeroHP } from "./feature/conditionHandler";
+import {
+    autoRemoveUnconsciousAtGreaterThanZeroHP,
+    increaseDyingOnZeroHP,
+    reduceFrightened,
+    removeDyingOnZeroHP
+} from "./feature/conditionHandler";
 import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
 import {
     calcRemainingMinutes,
@@ -190,7 +195,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     if (
         game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
-        game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")
+        game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
+        game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")
     ) {
         Hooks.on("deleteItem", async (item: ItemPF2e, _options: {}) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
@@ -271,6 +277,19 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     }
                 }
             }
+
+            if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
+                const actor = <ActorPF2e>item.parent;
+                if (
+                    item.slug === "dying" &&
+                    (await game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) &&
+                    shouldIHandleThis(item.isOwner ? game.user?.id : null) &&
+                    actor.data.data.attributes?.hp?.value === 0 &&
+                    !actor.hasCondition("unconscious")
+                ) {
+                    await item.parent?.toggleCondition("unconscious");
+                }
+            }
         });
     }
 
@@ -308,26 +327,32 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     if (
         game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" ||
         game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
-        game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none"
+        game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none" ||
+        game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
             const hp = actor.data.data.attributes.hp?.value || 0;
-            const updateClone = deepClone(update);
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
-                moveOnZeroHP(actor, updateClone, game.combat, hp).then(() =>
+                moveOnZeroHP(actor, deepClone(update), game.combat, hp).then(() =>
                     console.log("Workbench moveOnZeroHP complete")
                 );
             }
 
             if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
-                increaseDyingOnZeroHP(actor, updateClone, hp).then(() =>
+                increaseDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
                     console.log("Workbench increaseDyingOnZeroHP complete")
                 );
             }
 
             if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-                removeDyingOnZeroHP(actor, updateClone, hp).then(() =>
+                removeDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
                     console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete")
+                );
+            }
+
+            if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
+                    console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
                 );
             }
         });
