@@ -1,3 +1,11 @@
+# [3.22.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.21.1...v3.22.0) (2022-07-09)
+
+
+### Features
+
+* Adds two options for automating the unconscious condition. One to remove Unconscious if healed to above 0 hp. One to add Unconscious if Dying is removed when at 0 hp. ([8dbaf77](https://github.com/xdy/xdy-pf2e-workbench/commit/8dbaf77ca0bc4642f014481289e0380c8b8a51c9))
+* Adds two options for automating the unconscious condition. One to remove Unconscious if healed to above 0 hp. One to add Unconscious if Dying is removed when at 0 hp. ([887f0e4](https://github.com/xdy/xdy-pf2e-workbench/commit/887f0e4e1b7d280cf4953d86ad2bf542eea38e48))
+
 ## [3.21.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.21.0...v3.21.1) (2022-07-09)
 
 
