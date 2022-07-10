@@ -1,3 +1,11 @@
+# [3.23.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.22.1...v3.23.0) (2022-07-10)
+
+
+### Features
+
+* **settings:** hide npc mystification settings into a button ([d06380e](https://github.com/xdy/xdy-pf2e-workbench/commit/d06380ecf18dd52c7a641daa7b17b19a6c4f3b19))
+* **settings:** hide npc mystification settings into a button ([f5bdaf7](https://github.com/xdy/xdy-pf2e-workbench/commit/f5bdaf741fcce2ad7714b8bbba4b0738f07eed54))
+
 ## [3.22.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.22.0...v3.22.1) (2022-07-09)
 
 
