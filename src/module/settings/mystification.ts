@@ -1,5 +1,5 @@
 import { MODULENAME } from "../xdy-pf2e-workbench";
-import { SettingsMenuPF2e } from "./menu";
+import { SettingsMenuPF2eWorkbench } from "./menu";
 
 function debouncedReload() {
     foundry.utils.debounce(() => {
@@ -9,7 +9,7 @@ function debouncedReload() {
 
 export let mystifyModifierKey: string;
 
-export class MystificationSettings extends SettingsMenuPF2e {
+export class MystificationSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "mystificationSettings";
 
     protected static override get settings(): Record<string, SettingRegistration> {
@@ -159,7 +159,7 @@ export class MystificationSettings extends SettingsMenuPF2e {
                 scope: "world",
                 default: false,
                 type: Boolean,
-            }
+            },
         };
     }
 

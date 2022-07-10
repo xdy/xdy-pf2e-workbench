@@ -17,12 +17,12 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
 function filterTraitList(traitsList: string[], prefix: string, postfix: string): string[] {
     //TODO Clean up this mess
     if (game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
-        const blacklist =
+        const blocklist =
             (<string>game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")).toLocaleLowerCase().split(",") ||
             null;
-        if (blacklist) {
+        if (blocklist) {
             traitsList = traitsList.filter((trait: string) => {
-                return !blacklist.map((trait: string) => trait.trim()).includes(trait);
+                return !blocklist.map((trait: string) => trait.trim()).includes(trait);
             });
         }
     }

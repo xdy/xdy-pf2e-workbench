@@ -12,7 +12,7 @@ export interface MenuTemplateData extends FormApplicationData {
 }
 
 /** An adjusted copy of the settings menu from core pf2e meant for the module */
-export class SettingsMenuPF2e extends FormApplication {
+export class SettingsMenuPF2eWorkbench extends FormApplication {
     static readonly namespace: string;
 
     static override get defaultOptions() {
@@ -20,7 +20,7 @@ export class SettingsMenuPF2e extends FormApplication {
         options.classes.push("settings-menu");
 
         return mergeObject(options, {
-            title: `${MODULENAME}.SETTINGS.${this.namespace}.name`,
+            title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, //lgtm [js/mixed-static-instance-this-access]
             id: `${this.namespace}-settings`,
             template: `modules/xdy-pf2e-workbench/templates/menu.html`,
             width: 550,
@@ -30,7 +30,7 @@ export class SettingsMenuPF2e extends FormApplication {
     }
 
     get namespace(): string {
-        return (this.constructor as typeof SettingsMenuPF2e).namespace;
+        return (this.constructor as typeof SettingsMenuPF2eWorkbench).namespace;
     }
 
     /** Settings to be registered and also later referenced during user updates */
@@ -50,9 +50,10 @@ export class SettingsMenuPF2e extends FormApplication {
 
     static registerSettingsAndCreateMenu() {
         game.settings.registerMenu(MODULENAME, this.namespace, {
-            name: `${MODULENAME}.SETTINGS.${this.namespace}.name`,
-            label: `${MODULENAME}.SETTINGS.${this.namespace}.label`,
-            hint: `${MODULENAME}.SETTINGS.${this.namespace}.hint`,
+            //lgtm [js/mixed-static-instance-this-access]
+            name: `${MODULENAME}.SETTINGS.${this.namespace}.name`, //lgtm [js/mixed-static-instance-this-access]
+            label: `${MODULENAME}.SETTINGS.${this.namespace}.label`, //lgtm [js/mixed-static-instance-this-access]
+            hint: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, //lgtm [js/mixed-static-instance-this-access]
             icon: "fas fa-robot",
             type: this,
             restricted: true,
@@ -61,7 +62,7 @@ export class SettingsMenuPF2e extends FormApplication {
     }
 
     override getData(): MenuTemplateData {
-        const settings = (this.constructor as typeof SettingsMenuPF2e).settings;
+        const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
         const templateData: SettingsTemplateData[] = Object.entries(settings).map(([key, setting]) => {
             const value = game.settings.get(MODULENAME, key);
             return {
@@ -74,12 +75,12 @@ export class SettingsMenuPF2e extends FormApplication {
         });
         return mergeObject(super.getData(), {
             settings: templateData,
-            instructions: `${MODULENAME}.SETTINGS.${this.namespace}.hint`,
+            instructions: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, //lgtm [js/mixed-static-instance-this-access]
         });
     }
 
     protected override async _updateObject(_event: Event, data: Record<string, unknown>): Promise<void> {
-        const settings = (this.constructor as typeof SettingsMenuPF2e).settings;
+        const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
         for (const key of Object.keys(settings)) {
             await game.settings.set(MODULENAME, key, data[key]);
         }

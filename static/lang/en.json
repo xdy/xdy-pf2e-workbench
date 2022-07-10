@@ -229,52 +229,52 @@
         "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
       },
       "npcMystifier": {
-        "hint": "World setting to turn on npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene. Save settings to show/hide additional options.",
-        "name": "(World) turn on npc mystifier."
+        "hint": "Check to enable npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene. Save settings to show/hide additional options.",
+        "name": "Enable npc mystifier."
       },
       "npcMystifierAddRandomNumber": {
-        "hint": "World setting that turns on adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.",
-        "name": "(World) add random number"
+        "hint": "Check to enable adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.",
+        "name": "Add random number to name"
       },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
-        "hint": "When this world setting is enabled, all mystified tokens on the active scene with the same base actor as the token being renamed will be demystified.",
-        "name": "(World) demystify all tokens of actor"
+        "hint": "Check to enable all mystified tokens on the active scene with the same base actor as the token being renamed also being demystified.",
+        "name": "Demystify all tokens of actor"
       },
       "npcMystifierFilterAlignmentTraits": {
-        "hint": "World setting to filter out alignment traits from the mystified name.",
-        "name": "(World) exclude npc alignment traits."
+        "hint": "Check to enable filter out alignment traits from the mystified name.",
+        "name": "Exclude npc alignment traits."
       },
       "npcMystifierFilterBlacklist": {
-        "hint": "World setting to filter out all words in this comma-separated blacklist from the mystified name.",
-        "name": "(World) blacklist traits to never add"
+        "hint": "Add words to enable filtering out what's this comma-separated blocklist from the mystified name.",
+        "name": "Blocklist traits to never add"
       },
       "npcMystifierFilterCreatureFamilyTraits": {
-        "hint": "World setting to filter out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name.",
-        "name": "(World) exclude creature family traits."
+        "hint": "Check to enable filtering out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name.",
+        "name": "Exclude creature family traits."
       },
       "npcMystifierFilterCreatureTypesTraits": {
-        "hint": "World setting to filter out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name.",
-        "name": "(World) exclude creature type traits"
+        "hint": "Check to enable filtering out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name.",
+        "name": "Exclude creature type traits"
       },
       "npcMystifierFilterEliteWeak": {
-        "hint": "World setting to filter out elite/weak from the mystified name.",
-        "name": "(World) exclude elite/weak status"
+        "hint": "Check to enable filtering out elite/weak from the mystified name.",
+        "name": "Exclude elite/weak status"
       },
       "npcMystifierFilterOtherTraits": {
-        "hint": "World setting to filter out npc traits not in the above trait types (see the links in the above setting options) from the mystified name.",
-        "name": "(World) exclude other traits"
+        "hint": "Check to enable filtering out npc traits not in the above trait types (see the links in the above setting options) from the mystified name.",
+        "name": "Exclude other traits"
       },
       "npcMystifierFilterRarities": {
-        "hint": "World setting to filter out rarities from the mystified name.",
-        "name": "(World) exclude rarity"
+        "hint": "Check to enable filtering out rarities from the mystified name.",
+        "name": "Exclude rarity"
       },
       "npcMystifierFilterRaritiesReplacement": {
-        "hint": "World setting to set the word to replace rarities greater than Common with (e.g. 'Unusual'). If empty, do not change the displayed rarity.",
-        "name": "(World) replace rarities rarer than Common"
+        "hint": "Put word to replace rarities greater than Common with (e.g. 'Unusual') in this text field. If empty, do not change the displayed rarity.",
+        "name": "Replace rarities rarer than Common"
       },
       "npcMystifierKeepNumberAtEndOfName": {
-        "hint": "World setting to keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs.",
-        "name": "(World) keep token number when mystifying/demystifying."
+        "hint": "Check to enable keeping token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs.",
+        "name": "Keep token number when mystifying/demystifying."
       },
       "npcMystifierMethod": {
         "hint": "Currently Mystifying by using the NPCs traits is the only supported option.",
@@ -282,28 +282,32 @@
         "traits": "Mystify by NPC Traits"
       },
       "npcMystifierModifierKey": {
-        "hint": "World setting to set which key to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
-        "name": "(World) Mystifies on drag to scene"
+        "hint": "Select to enable setting which key to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
+        "name": "Key to mystify on drag to scene"
       },
       "npcMystifierMystifyKey": {
-        "hint": "World keybind to select tokens and press this key to mystify them.",
-        "name": "World keybind for mystifying selected tokens"
+        "hint": "Set keybind to mystify selected tokens.",
+        "name": "Keybind for mystifying selected tokens"
       },
       "npcMystifierPostfix": {
-        "hint": "World setting for what to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead.",
-        "name": "(World) word or rollable table postfix"
+        "hint": "Add text to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead.",
+        "name": "Word or rollable table postfix"
       },
       "npcMystifierPrefix": {
-        "hint": "World setting for what to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead.",
-        "name": "(World) word or rollable table prefix"
+        "hint": "Add text to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead.",
+        "name": "Word or rollable table prefix"
       },
       "npcMystifierSkipRandomNumberForUnique": {
-        "hint": "World setting to skip adding a random number when mystifying unique npcs.",
-        "name": "(World) skip random number for unique npcs."
+        "hint": "Check to enable skipping adding a random number when mystifying unique npcs.",
+        "name": "Skip random number for unique npcs."
       },
       "npcMystifierUseMystifiedNameInChat": {
-        "hint": "(Experimental) World setting to use mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.",
-        "name": "(Experimental) (World) mystify name in chat messages."
+        "hint": "(Experimental) Check to enable using mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.",
+        "name": "(Experimental) Mystify name in chat messages."
+      },
+      "npcMystifierUseSize": {
+        "hint": "Check to enable using the actor's size in the mystified name",
+        "name": "Use actor size"
       },
       "creatureBuilder": {
         "hint": "World setting to enable building custom creatures according to GMG rules.",
@@ -312,10 +316,6 @@
       "npcScaler": {
         "hint": "World setting to allow scaling NPCs",
         "name": "(World) setting to allow scaling NPCs"
-      },
-      "npcMystifierUseSize": {
-        "hint": "World setting to use the actor's size in the mystified name",
-        "name": "(World) use actor size"
       },
       "reminderBreathWeapon": {
         "hint": "Client setting to set reminder for breath weapon use.",

@@ -62,13 +62,6 @@ export function toggleSettings(html: JQuery) {
             html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
             html.find(`select[name="${settingName}"]`).parent().parent().toggle(applyToggle);
         }
-        //Disable all dependent npcMystifier settings
-        if (settingName !== `${MODULENAME}.npcMystifier` && setting[0].startsWith(`${MODULENAME}.npcMystifier`)) {
-            const valueFunction = !game.settings.get(MODULENAME, "npcMystifier");
-
-            html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-            html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-        }
         if (
             settingName !== `${MODULENAME}.automatedAnimationOn` &&
             setting[0].startsWith(`${MODULENAME}.automatedAnimationOn`)

@@ -2,6 +2,7 @@
 
 import { MODULENAME } from "../xdy-pf2e-workbench";
 import { MystificationSettings } from "./mystification";
+
 export { mystifyModifierKey } from "./mystification";
 
 function debouncedReload() {
