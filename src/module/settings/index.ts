@@ -1,8 +1,8 @@
 // Keyboard key controlling whether the actor should be mystified, if this feature is toggled on
 
-import { MODULENAME } from "./xdy-pf2e-workbench";
-
-export let mystifyModifierKey: string;
+import { MODULENAME } from "../xdy-pf2e-workbench";
+import { MystificationSettings } from "./mystification";
+export { mystifyModifierKey } from "./mystification";
 
 function debouncedReload() {
     foundry.utils.debounce(() => {
@@ -12,6 +12,8 @@ function debouncedReload() {
 
 export function registerSettings() {
     console.log(`${MODULENAME} | registerSettings`);
+
+    MystificationSettings.registerSettingsAndCreateMenu();
 
     game.settings.register(MODULENAME, "maxHeroPoints", {
         name: `${MODULENAME}.SETTINGS.maxHeroPoints.name`,
@@ -160,191 +162,6 @@ export function registerSettings() {
             reaching0HP: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HP`),
         },
         onChange: () => debouncedReload(),
-    });
-
-    game.settings.register(MODULENAME, "npcMystifier", {
-        name: `${MODULENAME}.SETTINGS.npcMystifier.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifier.hint`,
-        scope: "world",
-        config: true,
-        default: true,
-        type: Boolean,
-        onChange: () => debouncedReload(),
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierMethod", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierMethod.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierMethod.hint`,
-        scope: "world",
-        config: true,
-        default: "traits",
-        type: String,
-        choices: {
-            traits: `${MODULENAME}.SETTINGS.npcMystifierMethod.traits`,
-        },
-    });
-
-    //These apply to all mystification methods, I think
-    game.settings.register(MODULENAME, "npcMystifierPrefix", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierPrefix.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierPrefix.hint`,
-        scope: "world",
-        config: true,
-        type: String,
-        default: "",
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierPostfix", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierPostfix.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierPostfix.hint`,
-        scope: "world",
-        config: true,
-        type: String,
-        default: "",
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierModifierKey", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierModifierKey.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierModifierKey.hint`,
-        scope: "world",
-        config: true,
-        type: String,
-        choices: {
-            ALWAYS: "Always",
-            DISABLED: "Disabled",
-            ALT: "Alt",
-            CONTROL: "Ctrl",
-        },
-        default: "CONTROL",
-        onChange: (key) => {
-            mystifyModifierKey = <string>key;
-        },
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierAddRandomNumber", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.hint`,
-        scope: "world",
-        config: true,
-        default: true,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierSkipRandomNumberForUnique", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomNumberForUnique.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomNumberForUnique.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierKeepNumberAtEndOfName", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.hint`,
-        scope: "world",
-        config: true,
-        default: true,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierUseSize", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierUseSize.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierUseSize.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierFilterRarities", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierFilterRarities.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterRarities.hint`,
-        scope: "world",
-        config: true,
-        default: true,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierFilterRaritiesReplacement", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierFilterRaritiesReplacement.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterRaritiesReplacement.hint`,
-        scope: "world",
-        config: true,
-        default: "",
-        type: String,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierFilterEliteWeak", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierFilterEliteWeak.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterEliteWeak.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierFilterCreatureTypesTraits", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierFilterCreatureTypesTraits.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterCreatureTypesTraits.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierFilterCreatureFamilyTraits", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierFilterCreatureFamilyTraits.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterCreatureFamilyTraits.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierFilterAlignmentTraits", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierFilterAlignmentTraits.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterAlignmentTraits.hint`,
-        scope: "world",
-        config: true,
-        default: true,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierFilterOtherTraits", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierFilterOtherTraits.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterOtherTraits.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierFilterBlacklist", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierFilterBlacklist.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierFilterBlacklist.hint`,
-        scope: "world",
-        config: true,
-        default: "",
-        type: String,
-    });
-
-    game.settings.register(MODULENAME, "npcMystifierUseMystifiedNameInChat", {
-        name: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.name`,
-        hint: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
     });
 
     game.settings.register(MODULENAME, "automatedAnimationOn", {
@@ -740,6 +557,4 @@ export function registerSettings() {
         type: Boolean,
         onChange: () => debouncedReload(),
     });
-
-    mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");
 }

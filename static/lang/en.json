@@ -8,6 +8,11 @@
       "deliberateDeathUsed": "Deliberate Death Used"
     },
     "SETTINGS": {
+      "mystificationSettings": {
+        "hint": "Enable and configure NPC mystification",
+        "name": "NPC Mystification",
+        "label": "Manage NPC Mystification Settings"
+      },
       "abpVariantAllowItemBonuses": {
         "hint": "World setting to not disable item bonuses when using ABP.",
         "name": "(World) Do not disable item bonuses when using ABP."
