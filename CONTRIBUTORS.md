@@ -14,6 +14,7 @@ profile followed by a brief and incomplete description of what this person has c
   running out of time to maintain that module.
 * [TomChristoffer]() - Gave me the start of the item rarity colorization feature.
 * [JDCalvert](https://github.com/JDCalvert) - Added the option to use size in mystified token names.
+* [Supe](https://github.com/CarlosFdez/) - Added setting menu support.
 
 I've probably forgotten someone, if so, please tell me!
 
