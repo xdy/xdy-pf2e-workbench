@@ -19,7 +19,7 @@ import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { TokenDocumentPF2e } from "@scene";
 import { playAnimationAndSound } from "./feature/sfxHandler";
-import { toggleSettings } from "./feature/settingsHandler";
+import { toggleMenuSettings, toggleSettings } from "./feature/settingsHandler";
 import {
     autoRemoveUnconsciousAtGreaterThanZeroHP,
     increaseDyingOnZeroHP,
@@ -30,14 +30,15 @@ import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHand
 import {
     calcRemainingMinutes,
     createRemainingTimeMessage,
-    startTimer,
     maxHeroPoints,
+    startTimer,
 } from "./feature/heroPointHandler";
 import { nth, shouldIHandleThis } from "./utils";
 import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
     actionsReminder,
+    autoReduceStunned,
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
@@ -45,6 +46,7 @@ import {
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
+import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -80,6 +82,11 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     });
 
     //Hooks that always run
+
+    Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
+        toggleMenuSettings(html, _settings);
+    });
+
     Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
         toggleSettings(html);
     });
@@ -301,8 +308,16 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "actionsReminderAllow")) {
+    if (
+        game.settings.get(MODULENAME, "actionsReminderAllow") ||
+        game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")
+    ) {
         Hooks.on("pf2e.startTurn", async (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
+            if (game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")) {
+                autoReduceStunned(combatant).then(() =>
+                    console.log("Workbench actionsReminderAutoReduceStunned complete")
+                );
+            }
             if (game.settings.get(MODULENAME, "actionsReminderAllow")) {
                 actionsReminder(combatant).then(() => console.log("Workbench actionsReminderAllow complete"));
             }

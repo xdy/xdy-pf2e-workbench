@@ -10,18 +10,38 @@
     "SETTINGS": {
       "mystificationSettings": {
         "hint": "Enable and configure NPC mystification",
-        "name": "NPC Mystification",
+        "name": "NPC Mystification Settings",
         "label": "Manage NPC Mystification Settings"
+      },
+      "automationClientSettings": {
+        "hint": "Enable and configure automation for players",
+        "name": "Client Automation Settings",
+        "label": "Manage Client Automation Settings"
+      },
+      "automationWorldSettings": {
+        "hint": "Enable and configure automation for GMs",
+        "name": "World Automation Settings",
+        "label": "Manage World Automation Settings"
+      },
+      "qolWorldSettings": {
+        "hint": "Enable and configure quality of life settings for GMs",
+        "name": "World QoL Settings",
+        "label": "Manage World QoL Settings"
+      },
+      "remindersSettings": {
+        "hint": "Enable and configure various reminders",
+        "name": "Reminders Settings",
+        "label": "Manage Reminders Settings"
       },
       "abpVariantAllowItemBonuses": {
         "hint": "World setting to not disable item bonuses when using ABP.",
         "name": "(World) Do not disable item bonuses when using ABP."
       },
       "addGmRKButtonToNpc": {
-        "hint": "World setting to add Recall Knowleged button to NPCs. Currently only for the skill, lores will have to be handled manually.",
-        "name": "(World )Add Recall Knowledge button to NPCs.",
-        "hideNpcName": "(World) Hide NPC name on Recall Knowledge message.",
-        "hideSkill": "(World) Hide skill name on Recall Knowledge message."
+        "hint": "Check to add Recall Knowlege button to NPCs. Currently only for the skill, lores will have to be handled manually.",
+        "name": "Add Recall Knowledge button to NPCs.",
+        "hideNpcName": "Hide NPC name on Recall Knowledge message.",
+        "hideSkill": "Hide skill name on Recall Knowledge message."
       },
       "automatedAnimationOn": {
         "hint": "World setting for using the module automated-animations to play animation and/or sound on a strike miss. Save settings to show/hide additional options.",
@@ -64,8 +84,8 @@
         "name": "Make miss animations appear off-target."
       },
       "applyPersistentAllow": {
-        "hint": "World setting for who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options.",
-        "name": "(World) who is allowed to set the option to automatically apply persistent damage/healing.",
+        "hint": "Select who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options.",
+        "name": "Who is allowed to set the option to automatically apply persistent damage/healing.",
         "none": "None",
         "all": "All",
         "gm": "GM",
@@ -110,8 +130,8 @@
         "expandedNew": "New damage rolls expand (also checks last three messages on refresh)."
       },
       "autoRollDamageAllow": {
-        "hint": "World setting for who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options.",
-        "name": "(World) who is allowed to set the option to Autoroll damage on a hit.",
+        "hint": "Select who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options.",
+        "name": "Who is allowed to set the option to Autoroll damage on a hit.",
         "none": "None",
         "all": "All",
         "gm": "GM",
@@ -172,8 +192,8 @@
         "name": "Automatically decrease the frightened condition each turn."
       },
       "enableAutomaticMove": {
-        "hint": "World setting for setting initiative of combatant outside it's own turn to just before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
-        "name": "(World) setting initiative to just before the current combatant.",
+        "hint": "Select to enable setting initiative of combatant outside it's own turn to just before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
+        "name": "Setting initiative to just before the current combatant.",
         "noAutomation": "Never",
         "reaching0HP": "When combatant reaches 0 HP."
       },
@@ -184,11 +204,11 @@
         "addOne": "<b>Section 2</b> - Add one Hero Point to selected character from those logged in (defaults to random character when timer expires)",
         "all": "All",
         "doWhat": "<b>Section 1</b> - Choose what to do to the Hero Points of <em>all</em> characters with the following value",
-        "hint": "World setting to enable Hero Point handler feature with an optional keybind to open a dialog that can reset or add Hero Points for all characters, add one Hero Point to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
+        "hint": "Check to enable Hero Point handler feature with an optional keybind to open a dialog that can reset or add Hero Points for all characters, add one Hero Point to a random (or selected) character and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.",
         "ignore": "Nothing",
         "instructions": "Note that the timer is paused while this dialog is open. Close this dialog without pressing any of these buttons to unpause the timer, or press the appropriate button to do what the button says.",
         "minutesLeft": "minutes left on current timer",
-        "name": "(World) enable Hero Point handler.",
+        "name": "Enable Hero Point handler.",
         "none": "No character",
         "noRunningTimer": "No timer running",
         "noTimerLabel": "Submit changes with <b>no</b> timer. Will <b>stop</b> any existing timer.",
@@ -203,12 +223,12 @@
         "willBeResetIn": "Hero Point Handler returns in {remainingMinutes} minutes ({time})."
       },
       "heroPointHandlerKey": {
-        "hint": "World keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
-        "name": "(World) keybind to open the Hero Point handler dialog."
+        "hint": "Keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
+        "name": "Keybind to open the Hero Point handler dialog."
       },
       "heroPointHandlerStartTimerOnReady": {
-        "hint": "World setting for automatically starting the Hero Point handler timer when the game is ready.",
-        "name": "(World) automatically start Hero Point Handler."
+        "hint": "Check to automatically start the Hero Point handler timer when the game is ready.",
+        "name": "Automatically start Hero Point Handler."
       },
       "callHotbarMacro": {
         "hint": "Call hotbar macro on page {page} position {column}",
@@ -310,15 +330,15 @@
         "name": "Use actor size"
       },
       "creatureBuilder": {
-        "hint": "World setting to enable building custom creatures according to GMG rules.",
-        "name": "(World) setting to enable building custom creatures."
+        "hint": "Check to allow building custom creatures according to GMG rules.",
+        "name": "Allow building custom creatures."
       },
       "npcScaler": {
-        "hint": "World setting to allow scaling NPCs",
-        "name": "(World) setting to allow scaling NPCs"
+        "hint": "Check to allow scaling NPCs",
+        "name": "Allow scaling NPCs"
       },
       "reminderBreathWeapon": {
-        "hint": "Client setting to set reminder for breath weapon use.",
+        "hint": "Check to set reminder for breath weapon use.",
         "name": "Breath weapon reminder",
         "prefix": "can't use",
         "postfix": " rounds",
@@ -326,8 +346,8 @@
         "used": "Used "
       },
       "reminderCannotAttack": {
-        "hint": "World setting to show reminder if attacking with a token that cannot attack due to being unconscious/dead/defeated/no hp/etc.",
-        "name": "(World) Reminder if attacking with token unable to attack",
+        "hint": "Check to show reminder if attacking with a token that cannot attack due to being unconscious/dead/defeated/no hp/etc.",
+        "name": "Reminder if attacking with token unable to attack",
         "unconscious": "is unconscious",
         "dead": "is dead",
         "defeated": "is defeated",
@@ -335,16 +355,16 @@
         "note": "Are you sure about this attack? {actorName} {reason}, and thus not likely to be able attack..."
       },
       "reminderIWR": {
-        "hint": "World setting to show reminder for IWR when damage is taken.",
-        "name": "(World) IWR reminder",
+        "hint": "Check to show reminder for IWR when damage is taken. Currently only handles 'simple' damage types (e.g. handles ones like 'Bludgeoning' or 'Fire', not ones like 'All' or 'Physical')",
+        "name": "IWR reminder",
         "weakTo": " <strong>Weak</strong> to ",
         "resistantTo": " <strong>Resistant</strong> to ",
         "immuneTo": " <strong>Immune</strong> to ",
         "is": "{name} is"
       },
       "reminderTargeting": {
-        "hint": "World setting to show reminder for targeting in combat.",
-        "name": "(World) Targeting reminder",
+        "hint": "Check to show reminder for targeting in combat.",
+        "name": "Targeting reminder",
         "note": "Please target before you attack."
       },
       "quickQuantities": {
@@ -352,15 +372,15 @@
         "name": "Use shift-click on item quantities to add 5, ctrl-click to add 10."
       },
       "actionsReminderAllow": {
-        "hint": "Show number of actions reminder as chat message. Save settings to show/hide additional options.",
-        "name": "(World) Who gets an actions reminder",
+        "hint": "Check to show number of actions reminder as chat message.",
+        "name": "Who gets an actions reminder",
         "none": "None",
         "all": "All",
         "gm": "GM",
         "players": "Players"
       },
       "actionsReminderAutoReduceStunned": {
-        "hint": "Client setting to automatically reduce Stunned on turn start, requires number of actions reminder.",
+        "hint": "Client setting to automatically reduce Stunned on turn start.",
         "name": "Automatically reduce stunned on turn start"
       },
       "addUserTargets": {

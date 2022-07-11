@@ -1,18 +1,13 @@
 import { MODULENAME } from "../xdy-pf2e-workbench";
+import { debouncedReload } from "./index";
 import { SettingsMenuPF2eWorkbench } from "./menu";
-
-function debouncedReload() {
-    foundry.utils.debounce(() => {
-        window.location.reload();
-    }, 100);
-}
 
 export let mystifyModifierKey: string;
 
-export class MystificationSettings extends SettingsMenuPF2eWorkbench {
+export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "mystificationSettings";
 
-    protected static override get settings(): Record<string, SettingRegistration> {
+    public static override get settings(): Record<string, SettingRegistration> {
         return {
             npcMystifier: {
                 name: `${MODULENAME}.SETTINGS.npcMystifier.name`,

@@ -1,15 +1,28 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { SettingsMenuPF2eWorkbench } from "../../settings/menu";
 
 export function toggleSettings(html: JQuery) {
     const settings: [string, any][] = Array.from(game.settings.settings.entries());
     settings.forEach((setting: [string, any]) => {
         const settingName = setting[0];
-        //TODO Do this in a more elegant way
-        //Disable all dependent actionsReminder settings
+
         if (
-            settingName !== `${MODULENAME}.actionsReminderAllow` &&
-            setting[0].startsWith(`${MODULENAME}.actionsReminder`)
+            settingName !== `${MODULENAME}.automatedAnimationOn` &&
+            setting[0].startsWith(`${MODULENAME}.automatedAnimation`)
         ) {
+            const valueFunction = !game.settings.get(MODULENAME, "automatedAnimationOn");
+
+            html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+            html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+        }
+    });
+}
+
+export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkbench) {
+    for (const key in settings["settings"]) {
+        const settingName = settings["settings"][key].key;
+        //Disable all dependent actionsReminder settings
+        if (settingName !== `actionsReminderAllow` && settingName.startsWith(`actionsReminder`)) {
             const applyToggle = !(
                 game.settings.get(MODULENAME, "actionsReminderAllow") === "none" ||
                 (game.user?.isGM
@@ -20,10 +33,7 @@ export function toggleSettings(html: JQuery) {
         }
 
         //Disable all dependent persistentDamage settings
-        if (
-            settingName !== `${MODULENAME}.applyPersistentAllow` &&
-            setting[0].startsWith(`${MODULENAME}.applyPersistent`)
-        ) {
+        if (settingName !== `applyPersistentAllow` && settingName.startsWith(`applyPersistent`)) {
             const applyToggle = !(
                 game.settings.get(MODULENAME, "applyPersistentAllow") === "none" ||
                 (game.user?.isGM
@@ -33,10 +43,7 @@ export function toggleSettings(html: JQuery) {
             html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
         }
         //Disable all dependent persistentHealing settings
-        if (
-            settingName !== `${MODULENAME}.applyPersistentAllow` &&
-            setting[0].startsWith(`${MODULENAME}.applyPersistent`)
-        ) {
+        if (settingName !== `applyPersistentAllow` && settingName.startsWith(`applyPersistent`)) {
             const applyToggle = !(
                 game.settings.get(MODULENAME, "applyPersistentAllow") === "none" ||
                 (game.user?.isGM
@@ -47,10 +54,7 @@ export function toggleSettings(html: JQuery) {
 
             html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
         }
-        if (
-            settingName !== `${MODULENAME}.autoRollDamageAllow` &&
-            setting[0].startsWith(`${MODULENAME}.autoRollDamage`)
-        ) {
+        if (settingName !== `autoRollDamageAllow` && settingName.startsWith(`autoRollDamage`)) {
             // const valueFunction = game.settings.get(MODULENAME, "autoRollDamage") === "none";
             const applyToggle = !(
                 game.settings.get(MODULENAME, "autoRollDamageAllow") === "none" ||
@@ -62,23 +66,11 @@ export function toggleSettings(html: JQuery) {
             html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
             html.find(`select[name="${settingName}"]`).parent().parent().toggle(applyToggle);
         }
-        if (
-            settingName !== `${MODULENAME}.automatedAnimationOn` &&
-            setting[0].startsWith(`${MODULENAME}.automatedAnimationOn`)
-        ) {
-            const valueFunction = !game.settings.get(MODULENAME, "automatedAnimationOn");
-
-            html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-            html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-        }
-        if (
-            settingName !== `${MODULENAME}.addGmRKButtonToNpc` &&
-            setting[0].startsWith(`${MODULENAME}.addGmRKButtonToNpc`)
-        ) {
+        if (settingName !== `addGmRKButtonToNpc` && settingName.startsWith(`addGmRKButtonToNpc`)) {
             const valueFunction = !game.settings.get(MODULENAME, "addGmRKButtonToNpc");
 
             html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
             html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
         }
-    });
+    }
 }

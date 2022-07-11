@@ -2,11 +2,10 @@ import { shouldIHandleThis, shouldIHandleThisMessage } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
 import { CombatantPF2e } from "@module/encounter";
-import { ActorFlagsPF2e, ImmunityType } from "@actor/data/base";
-import { ValuesList } from "@module/data";
+import { ActorFlagsPF2e } from "@actor/data/base";
 import { ChatMessagePF2e } from "../../../../types/src/module/chat-message/index";
 import { SpellPF2e } from "@item";
-import { CreaturePF2e } from "@actor";
+import { ActorPF2e, CreaturePF2e } from "@actor";
 
 //TODO Handle Eidolon/Animal Companion
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
@@ -56,6 +55,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
         }
     }
 }
+
 export async function actionsReminder(combatant: CombatantPF2e) {
     if (
         combatant &&
@@ -71,23 +71,14 @@ export async function actionsReminder(combatant: CombatantPF2e) {
             combatant.actor.hasCondition("slowed") ||
             combatant.actor.hasCondition("quickened")
         ) {
-            const stunned = combatant.actor.getCondition("stunned")?.value ?? 0;
-            const slowed = combatant.actor.getCondition("slowed")?.value ?? 0;
-            const quickened = combatant.actor.hasCondition("quickened") ? 1 : 0;
-            const maxActions = 3 + quickened;
-            let autoReduceStunnedMessage = "";
-            if (stunned && game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")) {
-                const stunReduction = Math.min(stunned, maxActions);
-                for (let i = 0; i < stunReduction; i++) {
-                    await combatant.actor?.decreaseCondition("stunned");
-                }
-                autoReduceStunnedMessage = `Stunned reduced by ${stunReduction}.<br>`;
-            }
-            const actionsMessage = `${autoReduceStunnedMessage}${combatant.token?.name} has ${Math.max(
-                maxActions - Math.max(stunned, slowed),
+            const actionsMessage = `${combatant.token?.name} has ${Math.max(
+                calculateMaxActions(combatant.actor) -
+                    Math.max(
+                        combatant.actor.getCondition("stunned")?.value ?? 0,
+                        combatant.actor.getCondition("slowed")?.value ?? 0
+                    ),
                 0
             )} actions remaining.`;
-            // ui.notifications.info(actionsMessage);
             await ChatMessage.create(
                 {
                     flavor: actionsMessage,
@@ -97,6 +88,31 @@ export async function actionsReminder(combatant: CombatantPF2e) {
                 },
                 {}
             );
+        }
+    }
+}
+
+function calculateMaxActions(actor: ActorPF2e) {
+    return 3 + (actor.hasCondition("quickened") ? 1 : 0);
+}
+
+export async function autoReduceStunned(combatant: CombatantPF2e) {
+    if (
+        combatant &&
+        combatant.actor &&
+        shouldIHandleThis(
+            combatant.isOwner ? game.user?.id : null,
+            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")),
+            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned"))
+        ) &&
+        combatant.actor.hasCondition("stunned")
+    ) {
+        const stunned = combatant.actor.getCondition("stunned")?.value ?? 0;
+        if (stunned) {
+            const stunReduction = Math.min(stunned, calculateMaxActions(combatant.actor));
+            for (let i = 0; i < stunReduction; i++) {
+                await combatant.actor?.decreaseCondition("stunned");
+            }
         }
     }
 }

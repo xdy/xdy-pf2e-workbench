@@ -23,7 +23,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
             title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, //lgtm [js/mixed-static-instance-this-access]
             id: `${this.namespace}-settings`,
             template: `modules/xdy-pf2e-workbench/templates/menu.html`,
-            width: 550,
+            width: 650,
             height: "auto",
             closeOnSubmit: true,
         });
@@ -48,15 +48,15 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
         }
     }
 
-    static registerSettingsAndCreateMenu() {
+    static registerSettingsAndCreateMenu(icon = "fas fa-robot", restricted = true) {
         game.settings.registerMenu(MODULENAME, this.namespace, {
             //lgtm [js/mixed-static-instance-this-access]
             name: `${MODULENAME}.SETTINGS.${this.namespace}.name`, //lgtm [js/mixed-static-instance-this-access]
             label: `${MODULENAME}.SETTINGS.${this.namespace}.label`, //lgtm [js/mixed-static-instance-this-access]
             hint: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, //lgtm [js/mixed-static-instance-this-access]
-            icon: "fas fa-robot",
+            icon: icon,
             type: this,
-            restricted: true,
+            restricted: restricted,
         });
         this.registerSettings();
     }
