@@ -1,3 +1,10 @@
+# [3.24.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.23.0...v3.24.0) (2022-07-11)
+
+
+### Features
+
+* Move Quality of Life, Reminder and Automation settings to separate submenus. (Automation is split in two parts, World Automation Settings and Client Automation Settings). ([2dafef5](https://github.com/xdy/xdy-pf2e-workbench/commit/2dafef5276a159b85f324b3faf35d1008b22fccc))
+
 # [3.23.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.22.1...v3.23.0) (2022-07-10)
 
 
