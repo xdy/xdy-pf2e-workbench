@@ -82,7 +82,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     });
 
     //Hooks that always run
-
     Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
         toggleMenuSettings(html, _settings);
     });
@@ -92,14 +91,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     });
 
     //Hooks that only run if a setting that needs it has been enabled
-    if (game.settings.get(MODULENAME, "quickQuantities")) {
-        Hooks.on("renderActorSheet", (app: any, html: JQuery) => {
-            if (game.settings.get(MODULENAME, "quickQuantities")) {
-                onQuantitiesHook(app, html);
-            }
-        });
-    }
-
     if (
         game.settings.get(MODULENAME, "autoRollDamageAllow") ||
         game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
@@ -395,9 +386,14 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     if (
         game.settings.get(MODULENAME, "playerItemsRarityColour") ||
-        game.settings.get(MODULENAME, "addGmRKButtonToNpc")
+        game.settings.get(MODULENAME, "addGmRKButtonToNpc") ||
+        game.settings.get(MODULENAME, "quickQuantities")
     ) {
         Hooks.on("renderActorSheet", (sheet: ActorSheet<ActorPF2e, ItemPF2e>, $html: JQuery) => {
+            if (game.settings.get(MODULENAME, "quickQuantities")) {
+                onQuantitiesHook(sheet, $html);
+            }
+
             if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
                 $html.find(".item-list").each((i, e) => {
                     $(e)
