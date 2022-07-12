@@ -46,6 +46,7 @@ import {
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
+import { setupNpcRoller } from "./feature/npc-roller/NpcRoller";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 
 export const MODULENAME = "xdy-pf2e-workbench";
@@ -479,6 +480,10 @@ Hooks.once("setup", async () => {
 
     if (game.settings.get(MODULENAME, "creatureBuilder")) {
         setupCreatureBuilder();
+    }
+
+    if (game.settings.get(MODULENAME, "npcRoller")) {
+        setupNpcRoller();
     }
 });
 

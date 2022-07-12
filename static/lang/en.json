@@ -1,5 +1,22 @@
 {
   "xdy-pf2e-workbench": {
+    "npc-roller": {
+      "title": "NPC Roller",
+      "button-label": "NPC Roller",
+      "nav-labels": {
+        "strike": "Strikes",
+        "damage": "Damage",
+        "ac": "Armor Class",
+        "save": "Saves",
+        "hp": "Hit Points",
+        "spell": "Spell",
+        "dc": "DCs",
+        "areaDamage": "Area Damage",
+        "perception": "Perception",
+        "abilityScore": "Ability Scores",
+        "skill": "Skills"
+      }
+    },
     "spellCardNotFound": "The spell card could not be found. Casting {spell} at minimum level for that spell.",
     "effects": {
       "orcFerocityUsed": "Orc Ferocity Used",
@@ -336,6 +353,10 @@
       "npcScaler": {
         "hint": "Check to allow scaling NPCs",
         "name": "Allow scaling NPCs"
+      },
+      "npcRoller": {
+        "hint": "Check to enable the NPC quick roller utility.",
+        "name": "Enable NPC roller utility"
       },
       "reminderBreathWeapon": {
         "hint": "Check to set reminder for breath weapon use.",

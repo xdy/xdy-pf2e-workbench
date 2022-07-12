@@ -1,15 +1,99 @@
 /*Modified from the npc sheet*/
 .xdy-pf2e-workbench-rarity-uncommon {
-    border-color: #98513D;
-    color: #98513D
+    border-color: #98513d;
+    color: #98513d;
 }
 
 .xdy-pf2e-workbench-rarity-rare {
     border-color: #002664;
-    color: #002664
+    color: #002664;
 }
 
 .xdy-pf2e-workbench-rarity-unique {
-    border-color: #54166E;
-    color: #54166E
+    border-color: #54166e;
+    color: #54166e;
+}
+
+/* NPC Roller */
+
+.roll-app {
+    display: grid;
+    grid-template-columns: 128px 1fr;
+}
+
+.roll-app nav.roll-app-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-wrap: wrap;
+}
+
+.roll-app-nav button {
+    all: revert;
+    background: unset;
+    border: unset;
+    padding: 4px 8px;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-14);
+    cursor: pointer;
+    text-align: left;
+}
+
+.roll-app-nav button.active {
+    font-weight: bold;
+}
+
+.roll-app .roll-app-table {
+    margin: 0;
+}
+
+.roll-app .roll-app-table tbody tr,
+.roll-app .roll-app-table thead tr {
+    text-align: center;
+
+    td:not(:last-child) {
+        border-right: 1px solid black;
+    }
+}
+
+.roll-app .roll-app-table tbody tr.selected {
+    background: rgb(0 0 0 / 66%);
+    color: white;
+}
+.roll-app .roll-app-table tbody tr.selected button.rollable {
+    color: white;
+}
+.roll-app .roll-app-table tbody tr:nth-child(2n) {
+    background: rgba(0 0 0 / 20%);
+}
+.roll-app .roll-app-table tbody tr:nth-child(2n):hover {
+    background: rgba(0 0 0 / 30%);
+}
+.roll-app .roll-app-table tbody tr:not(.selected):hover {
+    background: rgba(0 0 0 / 10%);
+}
+
+.roll-app .roll-app-table tbody td {
+}
+
+.roll-app .roll-app-table tbody button {
+    all: revert;
+    background: unset;
+    padding: unset;
+    border: unset;
+    width: unset;
+    margin: unset;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-14);
+    display: block;
+    padding: 0 32px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.roll-app .roll-app-table tbody button:hover {
+    font-weight: bold;
+}
+
+.roll-app .roll-app-table button.rollable {
 }

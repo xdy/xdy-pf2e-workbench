@@ -1,0 +1,88 @@
+<div class="roll-app">
+    <nav
+        class="roll-app-nav"
+        role="tablist"
+        data-group="primary"
+        aria-controls="xdy-pf2e-workbench--npc-roller-tabpanel"
+    >
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-strike">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.strike'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-damage">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.damage'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-ac">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.ac'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-save">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.save'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-hp">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.hp'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-spell">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.spell'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-dc">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.dc'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-areaDamage">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.areaDamage'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-perception">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.perception'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-abilityScore">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.abilityScore'}}
+        </button>
+        <button role="tab" class="item" aria-selected="" data-tab="roll-app-skill">
+            {{localize 'xdy-pf2e-workbench.npc-roller.nav-labels.skill'}}
+        </button>
+    </nav>
+    <div id="xdy-pf2e-workbench--npc-roller-tabpanel" role="tabpanel" class="roll-app-body">
+        <div class="tab" data-group="primary" data-tab="roll-app-strike">
+            {{> rollAppTable data=data.levels selected=data.selected key="strikeAttack" formulaBase="1d20+"
+            rollName="Strike Attack"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-damage">
+            {{> rollAppTable data=data.levels selected=data.selected key="strikeDamage" formulaBase="" rollName="Strike
+            Damage"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-ac">
+            {{> rollAppTable data=data.levels selected=data.selected key="armorClass" formulaBase="" rollName="Armor
+            Class"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-save">
+            {{> rollAppTable data=data.levels selected=data.selected key="savingThrow" formulaBase="1d20+"
+            rollName="Saving Throw"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-hp">
+            {{> rollAppTable data=data.levels selected=data.selected key="hitPoints" formulaBase="" rollName="Hit
+            Points"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-spell">
+            {{> rollAppTable data=data.levels selected=data.selected key="spell" formulaBase="1d20+" rollName="Spell
+            Attack"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-dc">
+            {{> rollAppTable data=data.levels selected=data.selected key="difficultyClass" formulaBase=""
+            rollName="DC"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-areaDamage">
+            {{> rollAppTable data=data.levels selected=data.selected key="areaDamage" formulaBase="" rollName="Area
+            Damage"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-perception">
+            {{> rollAppTable data=data.levels selected=data.selected key="perception" formulaBase="1d20+"
+            rollName="Perception"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-skill">
+            {{> rollAppTable data=data.levels selected=data.selected key="skill" formulaBase="1d20+" rollName="Skill
+            Roll"}}
+        </div>
+        <div class="tab" data-group="primary" data-tab="roll-app-abilityScore">
+            {{> rollAppTable data=data.levels selected=data.selected key="abilityScore" formulaBase="1d20+"
+            rollName="Ability Roll"}}
+        </div>
+    </div>
+</div>
