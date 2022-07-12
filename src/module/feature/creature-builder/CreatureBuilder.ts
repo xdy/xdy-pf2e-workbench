@@ -28,23 +28,25 @@ import { SCALE_APP_DATA } from "../NPCScaleData";
 export const setupCreatureBuilder = () => Hooks.on("renderActorSheet", enableCreatureBuilderButton);
 
 function enableCreatureBuilderButton(sheet: ActorSheet, html: JQuery) {
-    // Only inject the link if the actor is of type "character" and the user has permission to update it
-    const actor = sheet.actor;
-    if (!(actor.type === "npc" && actor.canUserModify(game.user, "update"))) {
-        return;
+    if (game.user?.isGM) {
+        // Only inject the link if the actor is of type "character" and the user has permission to update it
+        const actor = sheet.actor;
+        if (!(actor.type === "npc" && actor.canUserModify(game.user, "update"))) {
+            return;
+        }
+
+        const element = html.find(".window-header .window-title");
+        if (element.length !== 1) {
+            return;
+        }
+
+        const button = $(`<a class="popout" style><i class="fas fa-book"></i>Creature Builder</a>`);
+        button.on("click", () => {
+            new CreatureBuilder(actor, {}).render(true);
+        });
+
+        element.after(button);
     }
-
-    const element = html.find(".window-header .window-title");
-    if (element.length !== 1) {
-        return;
-    }
-
-    const button = $(`<a class="popout" style><i class="fas fa-book"></i>Creature Builder</a>`);
-    button.on("click", () => {
-        new CreatureBuilder(actor, {}).render(true);
-    });
-
-    element.after(button);
 }
 
 class CreatureBuilder extends FormApplication {

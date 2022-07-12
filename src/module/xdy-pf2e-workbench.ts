@@ -407,7 +407,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         });
                 });
             }
-            if (game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
+            if (game.user?.isGM && game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
                 $html.find(".recall-knowledge").each((i, e) => {
                     const token = sheet.token;
                     $(e)
