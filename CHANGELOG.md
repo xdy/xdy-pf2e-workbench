@@ -1,3 +1,10 @@
+## [3.24.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.24.0...v3.24.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* Limited NPC Recall Knowledge Button, NPC Scaler and Creature Builder to GMs only. ([614882e](https://github.com/xdy/xdy-pf2e-workbench/commit/614882e6df56c1a724bcf9a7117dd37036b2dd7c)), closes [#329](https://github.com/xdy/xdy-pf2e-workbench/issues/329)
+
 # [3.24.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.23.0...v3.24.0) (2022-07-11)
 
 
