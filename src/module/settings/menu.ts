@@ -71,6 +71,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
                 value,
                 isSelect: !!setting.choices,
                 isCheckbox: setting.type === Boolean,
+                isText: setting.type === String,
             };
         });
         return mergeObject(super.getData(), {
@@ -81,8 +82,13 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
 
     protected override async _updateObject(_event: Event, data: Record<string, unknown>): Promise<void> {
         const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
-        for (const key of Object.keys(settings)) {
-            await game.settings.set(MODULENAME, key, data[key]);
+        for (let key of Object.keys(data)) {
+            const datum = data[key];
+            if (key.includes(MODULENAME)) {
+                //TODO Ugly hack, figure out what's going on. Why does the data have the module name in the key?
+                key = key.split(".")[2];
+            }
+            await game.settings.set(MODULENAME, key, datum);
         }
     }
 }

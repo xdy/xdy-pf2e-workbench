@@ -119,7 +119,7 @@
         "hint": "Client setting to automatically collapse item chat card content.",
         "name": "Automatically collapse item chat card content.",
         "noCollapse": "Never collapse",
-        "collapsedDefault": "collapsedAll by default, click title to expand.",
+        "collapsedDefault": "Collapsed by default, click title to expand.",
         "nonCollapsedDefault": "Expanded by default, click title to collapse."
       },
       "autoExpandDamageRolls": {
