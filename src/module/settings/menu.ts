@@ -83,10 +83,14 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
     protected override async _updateObject(_event: Event, data: Record<string, unknown>): Promise<void> {
         const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
         for (let key of Object.keys(data)) {
-            const datum = data[key];
+            let datum = data[key];
             if (key.includes(MODULENAME)) {
                 //TODO Ugly hack, figure out what's going on. Why does the data have the module name in the key?
                 key = key.split(".")[2];
+            }
+            //"null" check is due to a previous bug that may have left invalid data in text fields
+            if (datum === null || datum === "null") {
+                datum = "";
             }
             await game.settings.set(MODULENAME, key, datum);
         }

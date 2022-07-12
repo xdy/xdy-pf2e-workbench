@@ -4,14 +4,19 @@ import { TRAITS } from "../../xdy-pf2e-constants";
 import { TokenPF2e } from "@module/canvas";
 
 async function fixesPreAndPost(settingkey: string): Promise<string> {
-    const fixSetting: string = <string>game.settings.get(MODULENAME, settingkey);
+    const fixSetting = game.settings.get(MODULENAME, settingkey);
 
-    return (
-        game?.tables
-            ?.find((table) => table.name === fixSetting)
-            ?.draw({ displayChat: false })
-            .then((draw) => draw.results[0].getChatText()) ?? fixSetting
-    );
+    //"null" check is due to a previous bug that may have left invalid data in text fields
+    if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
+        const draw = await game?.tables?.find((table) => table.name === fixSetting)?.draw({ displayChat: false });
+        if (draw && draw?.results[0]) {
+            return draw?.results[0].getChatText();
+        } else {
+            return <string>fixSetting;
+        }
+    } else {
+        return "";
+    }
 }
 
 function filterTraitList(traitsList: string[], prefix: string, postfix: string): string[] {
