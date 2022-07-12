@@ -1,3 +1,10 @@
+## [3.24.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.24.2...v3.24.3) (2022-07-12)
+
+
+### Bug Fixes
+
+* "Null" should no longer appear in mystified names. As a consequence, sorry, you can no longer use the string null as a prefix or postfix. :) ([96ac06e](https://github.com/xdy/xdy-pf2e-workbench/commit/96ac06e1e99ed7b7f6b2823c0f2f67dc4d143bd0))
+
 ## [3.24.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.24.1...v3.24.2) (2022-07-12)
 
 
