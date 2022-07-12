@@ -1,3 +1,10 @@
+## [3.24.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.24.1...v3.24.2) (2022-07-12)
+
+
+### Bug Fixes
+
+* Should now be possible to set Mystification prefix and postfix again. ([b58b0f4](https://github.com/xdy/xdy-pf2e-workbench/commit/b58b0f4b690fd74a68bac47d5d26e3891dea85e9))
+
 ## [3.24.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.24.0...v3.24.1) (2022-07-12)
 
 
