@@ -25,6 +25,15 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
+            npcRoller: {
+                name: `${MODULENAME}.SETTINGS.npcRoller.name`,
+                hint: `${MODULENAME}.SETTINGS.npcRoller.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
             quickQuantities: {
                 name: `${MODULENAME}.SETTINGS.quickQuantities.name`,
                 hint: `${MODULENAME}.SETTINGS.quickQuantities.hint`,

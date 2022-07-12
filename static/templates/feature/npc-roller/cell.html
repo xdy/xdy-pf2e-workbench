@@ -1,0 +1,13 @@
+<td>
+    {{#if value.original}}
+    <button class="rollable" data-formula="{{formulaBase}}{{value.original}}" data-rollname="{{rollName}}">{{value.original}}</button>
+    {{else}}
+    {{#isNaN value}}
+    <button class="rollable" data-formula="(1d{{value.die}})+{{value.minimum}}-1" data-rollname="{{rollName}}">
+        {{value.minimum}}-{{value.maximum}}
+    </button>
+    {{else}}
+    <button class="rollable" data-formula="{{formulaBase}}{{value}}" data-rollname="{{rollName}}">{{value}}</button>
+    {{/isNaN}}
+    {{/if}}
+</td>

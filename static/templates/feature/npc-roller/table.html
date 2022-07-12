@@ -1,0 +1,40 @@
+<table class="roll-app-table">
+  <thead>
+      {{#with (lookup data key) as |parent|}}
+      <tr>
+          <td>Level</td>
+          {{#if (hasKey parent "extreme")}}<td>Extreme</td>{{/if}}
+          {{#if (hasKey parent "high")}}<td>High</td>{{/if}}
+          {{#if (hasKey parent "moderate")}}<td>Moderate</td>{{/if}}
+          {{#if (hasKey parent "low")}}<td>Low</td>{{/if}}
+          {{#if (hasKey parent "terrible")}}<td>Terrible</td>{{/if}}
+          {{#if (hasKey parent "abysmal")}}<td>Abysmal</td>{{/if}}
+          {{#if (hasKey parent "limited")}}<td>Limited</td>{{/if}}
+          {{#if (hasKey parent "unlimited")}}<td>Unlimited</td>{{/if}}
+      </tr>
+      {{/with}}
+  </thead>
+  <tbody>
+      {{#each (lookup data key)}}
+      <tr {{#includes ../selected level}}class="selected"{{/includes}}>
+          <td>{{level}}</td>
+
+          {{#ifne extreme undefined}} {{> rollAppCell value=extreme formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+
+          {{#ifne high undefined}} {{> rollAppCell value=high formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+
+          {{#ifne moderate undefined}} {{> rollAppCell value=moderate formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+
+          {{#ifne low undefined}} {{> rollAppCell value=low formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+
+          {{#ifne terrible undefined}} {{> rollAppCell value=terrible formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+
+          {{#ifne abysmal undefined}} {{> rollAppCell value=abysmal formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+
+          {{#ifne limited undefined}} {{> rollAppCell value=limited formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+
+          {{#ifne unlimited undefined}} {{> rollAppCell value=unlimited formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+      </tr>
+      {{/each}}
+  </tbody>
+</table>
