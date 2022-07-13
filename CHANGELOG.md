@@ -1,3 +1,10 @@
+## [3.25.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.25.0...v3.25.1) (2022-07-13)
+
+
+### Bug Fixes
+
+* Size is now only used for mystification name if that option is explicitly chosen. (I.e. it is not considered an 'other trait') ([1b6a4f8](https://github.com/xdy/xdy-pf2e-workbench/commit/1b6a4f88bf78710cdcfb3fff428199efa7328952))
+
 # [3.25.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.24.3...v3.25.0) (2022-07-13)
 
 
