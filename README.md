@@ -42,6 +42,9 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to add an npc scaler feature when right clicking on an npc (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ! At some point Avery will have the time to add it to the system, until then I'll maintain it.)
 * Option to apply Encumbered condition automatically based on current bulk when bulk changes. Note: Uses the system code which considers 5 bulk + 9 light to not exceed 5 bulk.
 * Option to change the max number of hero points a character can have. )This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
+* Option to add a creature builder button to npc character sheets, enabling building from scratch using the suggested values from the GMG (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
+* Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc using the suggested values from the GMG (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
+
 
 Experimental features:
 None right now. (Though some feature settings are experimental.)
