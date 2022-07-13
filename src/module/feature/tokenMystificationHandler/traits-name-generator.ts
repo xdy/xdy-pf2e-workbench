@@ -78,6 +78,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     if (!game.settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
         others = traitsList
             .filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait))
+            .filter((trait: string) => !TRAITS.SIZES.includes(trait))
             .filter((trait: string) => !TRAITS.RARITIES.includes(trait))
             .filter((trait: string) => !TRAITS.CREATURE_TYPES.includes(trait))
             .filter((trait: string) => !TRAITS.CREATURE_FAMILIES.includes(trait))
