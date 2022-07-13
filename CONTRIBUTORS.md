@@ -15,6 +15,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [TomChristoffer]() - Gave me the start of the item rarity colorization feature.
 * [JDCalvert](https://github.com/JDCalvert) - Added the option to use size in mystified token names.
 * [Supe](https://github.com/CarlosFdez/) - Added setting menu support.
+* [Skulbuny](https://github.com/sean-clayton/) - Ported over the npc quick roller from the toolbox.
 
 I've probably forgotten someone, if so, please tell me!
 
