@@ -1,3 +1,10 @@
+# [3.25.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.24.3...v3.25.0) (2022-07-13)
+
+
+### Features
+
+* Add npc quick roller ([121180e](https://github.com/xdy/xdy-pf2e-workbench/commit/121180efb6b8f7043e0b9927b10bf8ffa93e8ce6))
+
 ## [3.24.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.24.2...v3.24.3) (2022-07-12)
 
 
