@@ -7,51 +7,47 @@ import { ChatMessagePF2e } from "../../../../types/src/module/chat-message/index
 import { SpellPF2e } from "@item";
 import { ActorPF2e, CreaturePF2e } from "@actor";
 
-//TODO Handle Eidolon/Animal Companion
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
-    if (
-        message.data.content &&
-        game.combats &&
-        game.combats.active &&
-        game.combats.active.combatant &&
-        game.combats.active.combatant.token &&
-        shouldIHandleThisMessage(message, true, true)
-    ) {
+    if (message.data.content && game.combats && game.combats.active && shouldIHandleThisMessage(message, true, true)) {
         const token: TokenDocumentPF2e = <TokenDocumentPF2e>(
             canvas?.scene?.tokens.get(<string>message.data.speaker.token)
         );
 
-        const prefix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.prefix`);
-        const postfix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.postfix`);
-        const matcher = `.*${prefix}.*1d([46])${postfix}.*`;
-        const match = message.data.content.match(matcher);
-        const matchString = match ? `1d${match[1]}` : "";
+        const actors = [token.actor];
+        for (const actor of actors) {
+            const prefix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.prefix`);
+            const postfix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.postfix`);
+            const matcher = `.*${prefix}.*1d([46])${postfix}.*`;
+            const match = message.data.content.match(matcher);
+            const matchString = match ? `1d${match[1]}` : "";
 
-        if (matchString) {
-            const effect = {
-                type: "effect",
-                name: "Breath",
-                img: "systems/pf2e/icons/spells/dragon-breath.webp",
-                data: {
-                    tokenIcon: {
-                        show: true,
+            if (matchString) {
+                const effect = {
+                    type: "effect",
+                    name: "Breath",
+                    img: "systems/pf2e/icons/spells/dragon-breath.webp",
+                    data: {
+                        tokenIcon: {
+                            show: true,
+                        },
+                        duration: {
+                            value: 1,
+                            unit: "rounds",
+                            sustained: false,
+                            expiry: "turn-start",
+                        },
                     },
-                    duration: {
-                        value: 1,
-                        unit: "rounds",
-                        sustained: false,
-                        expiry: "turn-start",
-                    },
-                },
-            };
+                };
 
-            effect.data.duration.value = new Roll(matchString).roll({ async: false }).total + 1;
-            const title = message.data.content.match(/.*title="(.*?)" width.*/);
-            effect.name =
-                game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.used`) +
-                (title ? title[1] : game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`));
-            // @ts-ignore
-            await token.actor?.createEmbeddedDocuments("Item", [effect]);
+                effect.data.duration.value = new Roll(matchString).roll({ async: false }).total + 1;
+                const title = message.data.content.match(/.*title="(.*?)" width.*/);
+                effect.name =
+                    game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.used`) +
+                    (title ? title[1] : game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`));
+
+                // @ts-ignore
+                await actor?.createEmbeddedDocuments("Item", [effect]);
+            }
         }
     }
 }
@@ -117,38 +113,39 @@ export async function autoReduceStunned(combatant: CombatantPF2e) {
     }
 }
 
-//TODO Handle Eidolon/Animal Companion
 export async function reminderCannotAttack(message: ChatMessagePF2e) {
     if (
         message.data &&
         message.data.flags &&
         game.combats.active &&
-        game.combats.active.combatant &&
-        game.combats.active.combatant.token &&
-        game.combats.active.combatant.token.actor &&
         message.user &&
         ["spell-attack-roll", "attack-roll"].includes(
             <string>(<ActorFlagsPF2e>message.data.flags.pf2e).context?.type
         ) &&
         shouldIHandleThisMessage(message, true, true)
     ) {
-        const actor = game.combats.active.combatant.token.actor;
         let reason = "";
-        if (actor) {
+
+        const token: TokenDocumentPF2e = <TokenDocumentPF2e>(
+            canvas?.scene?.tokens.get(<string>message.data.speaker.token)
+        );
+
+        const actors = [token.actor];
+        for (const actor of actors) {
             if ((<CreaturePF2e>actor).isDead) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.dead`);
             } else if ((actor?.hitPoints?.value ?? 0) <= 0) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.hasNoHp`);
-            } else if (game.combats.active.combatant.defeated) {
+            } else if (game.combats.active?.combatant?.token === token && game.combats.active.combatant.defeated) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.defeated`);
-            } else if (actor.hasCondition("unconscious")) {
+            } else if (actor?.hasCondition("unconscious")) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.unconscious`);
             }
 
             if (reason.length > 0) {
                 ui.notifications.info(
                     game.i18n.format(`${MODULENAME}.SETTINGS.reminderCannotAttack.note`, {
-                        actorName: actor.name,
+                        actorName: actor?.name || "(unknown)",
                         reason: reason,
                     })
                 );
@@ -234,13 +231,14 @@ export async function reminderIWR(message: ChatMessagePF2e) {
                         game.i18n.localize(`${MODULENAME}.SETTINGS.reminderIWR.resistantTo`) + drTypes.join(", ")
                     );
                 }
-
                 if (output.length > 0) {
                     await ChatMessage.create({
                         content:
                             game.i18n.format(`${MODULENAME}.SETTINGS.reminderIWR.is`, {
                                 name: target?.actor?.token?.name || "",
-                            }) + output,
+                            }) +
+                            output +
+                            "<br><br>NOTE: Complex IWR such as All, Mental, Physical, etc, are not yet supported, check manually if you target might have such.",
                         whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
                         blind: true,
                     });

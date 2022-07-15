@@ -2,15 +2,11 @@ import { CombatantPF2e } from "@module/encounter";
 import { shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e, CharacterPF2e } from "@actor";
-import { getActor } from "../cr-scaler/Utilities";
 
-//TODO Handle Eidolon/Animal Companion
 export async function reduceFrightened(combatant: CombatantPF2e) {
     if (combatant && combatant.actor && shouldIHandleThis(combatant.isOwner ? game.user?.id : null)) {
         const actors = [combatant.actor];
-        if (combatant.actor.type === "character" && (<CharacterPF2e>combatant.actor).familiar) {
-            actors.push(<ActorPF2e>(<CharacterPF2e>combatant.actor).familiar);
-        }
+        actors.push(...getMinions(combatant.actor));
         for (const actor of actors) {
             const minimumFrightened = <number>actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
             const currentFrightened = actor?.getCondition("frightened")?.value ?? 0;
@@ -169,4 +165,30 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     ) {
         await actor.toggleCondition("unconscious");
     }
+}
+
+function getMinions(actor: ActorPF2e): ActorPF2e[] {
+    const actors: ActorPF2e[] = [];
+    if (actor?.type === "character") {
+        if ((<CharacterPF2e>actor).familiar) {
+            actors.push(<ActorPF2e>(<CharacterPF2e>actor).familiar);
+        }
+        const eidolons = <ActorPF2e[]>game.scenes.current?.tokens
+            ?.filter((user) => !game.user.isGM)
+            ?.filter((token) => token.canUserModify(game.user, "update"))
+            ?.map((token) => token.actor)
+            ?.filter((x) => x?.traits.has("eidolon"));
+        if (eidolons && eidolons.length > 0) {
+            actors.push(...(<ActorPF2e[]>eidolons));
+        }
+        const animalCompanions = game.scenes.current?.tokens
+            ?.filter((user) => !game.user.isGM)
+            ?.filter((token) => token.canUserModify(game.user, "update"))
+            ?.map((token) => token.actor)
+            ?.filter((chr: CharacterPF2e) => chr?.class?.name === "Animal Companion");
+        if (animalCompanions && animalCompanions.length > 0) {
+            actors.push(...(<ActorPF2e[]>animalCompanions));
+        }
+    }
+    return actors;
 }
