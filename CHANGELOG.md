@@ -1,3 +1,10 @@
+# [3.26.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.25.1...v3.26.0) (2022-07-15)
+
+
+### Features
+
+* Animal companions and eidolons (using the PF2e Companion Compendium module) owned by a logged-in player are now handled by the options to automatically reduce frightened, cannot attack reminders notifications and breath weapon reminder effects. Also added a brief note to the IWR reminder that the more complex IWR types such as All, Mental, Physical, etc, are not yet handled. ([caf7e1c](https://github.com/xdy/xdy-pf2e-workbench/commit/caf7e1c6bcbaaef7af47637db18ccd300ac7435b))
+
 ## [3.25.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.25.0...v3.25.1) (2022-07-13)
 
 
