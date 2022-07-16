@@ -4,7 +4,7 @@ import { CombatantPF2e } from "@module/encounter";
 import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler";
 import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler";
 
-export function registerKeybindings() {
+export function registerWorkbenchKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);
 
     // @ts-ignore

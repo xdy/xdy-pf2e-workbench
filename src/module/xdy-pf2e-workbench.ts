@@ -9,9 +9,9 @@
 //TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
 //TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
 import { preloadTemplates } from "./preloadTemplates";
-import { registerSettings } from "./settings";
+import { registerWorkbenchSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
-import { registerKeybindings } from "./keybinds";
+import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
 import { moveOnZeroHP } from "./feature/initiativeHandler";
 import { ActorPF2e } from "@actor";
@@ -72,7 +72,7 @@ async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
 Hooks.once("init", async (_actor: ActorPF2e) => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
 
-    registerSettings();
+    registerWorkbenchSettings();
 
     await preloadTemplates();
 
@@ -464,7 +464,7 @@ Hooks.once("setup", async () => {
     console.log(`${MODULENAME} | Setting up`);
     // Do anything after initialization but before ready
 
-    registerKeybindings();
+    registerWorkbenchKeybindings();
 
     //General module setup
     if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {

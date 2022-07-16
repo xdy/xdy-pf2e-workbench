@@ -15,7 +15,7 @@ export function debouncedReload() {
     }, 100);
 }
 
-export function registerSettings() {
+export function registerWorkbenchSettings() {
     console.log(`${MODULENAME} | registerSettings`);
 
     WorkbenchMystificationSettings.registerSettingsAndCreateMenu("fas fa-eye-slash");
