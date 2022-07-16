@@ -70,46 +70,41 @@
         "hint": "Aktiverar att alla spelfigurer på den aktiva scenen som är baserade på samma varelse som den som avmystifieras också avmystifieras.",
         "name": "Avmystifiera alla spelfigurer som är baserade på samma varelse."
       },
-      "npcMystifierFilterAlignmentTraits": {
+      "npcMystifierUseAlignmentTraits": {
         "hint": "Filtrera bort livåskådningar från det mystifierade namnet.",
         "name": "Inga livsåskådningar i namnet."
       },
-      "npcMystifierFilterBlacklist": {
+      "npcMystifierBlacklist": {
         "hint": "Filtrera bort alla ord i denna kommaseparerade svartlistan från det mystifierade namnet.",
         "name": "Svartlista egenskaper så de aldrig läggs till namn."
       },
-      "npcMystifierFilterCreatureFamilyTraits": {
+      "npcMystifierUseCreatureTraits": {
         "hint": "Filtrera bort varelsefamiljedrag (se https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) från det mystifierade namnet.",
         "name": "Inga npc-varelsefamiljedrag i namnet."
       },
-      "npcMystifierFilterCreatureTypesTraits": {
+      "npcMystifierUseCreatureTypesTraits": {
         "hint": "Filtrera bort egenskaper av varelsetyp (se https://2e.aonprd.com/Traits.aspx) från det mystifierade namnet.",
         "name": "Inga npc-varelsetypegenskaper i namnet."
       },
-      "npcMystifierFilterEliteWeak": {
+      "npcMystifierUseEliteWeak": {
         "hint": "Filtrera bort elit/vek från det mystifierade namnet.",
         "name": "Ingen npc-elit/vek status i namnet."
       },
-      "npcMystifierFilterOtherTraits": {
+      "npcMystifierUseOtherTraits": {
         "hint": "Filtrera bort npc-egenskaper som inte finns med ovanstående egenskaper (se länkarna i ovanstående inställningsalternativ) från det mystifierade namnet.",
         "name": "Inga npc-egenskaper som inte finns i ovanstående egenskapstyper."
       },
-      "npcMystifierFilterRarities": {
+      "npcMystifierUseRarities": {
         "hint": "Filtrera bort sällsyntheter från det mystifierade namnet.",
         "name": "Ingen npc-sällsynthet i namnet."
       },
-      "npcMystifierFilterRaritiesReplacement": {
+      "npcMystifierUseRaritiesReplacement": {
         "hint": "Ersätter sällsyntheter ovanligare än Common med (t.ex. 'Ovanlig'). Om det är tomt, ändra inte den visade sällsyntheten.",
         "name": "Ord att ersätta sällsyntheter större än Vanligt med."
       },
       "npcMystifierKeepNumberAtEndOfName": {
         "hint": "Behåll spelfigurnummer *i samma format som dom som läggs till av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs.",
         "name": "Behåll spelfigurnummer när du mystifierar/avmystifierar."
-      },
-      "npcMystifierMethod": {
-        "hint": "För närvarande är mystifiering genom att använda npcns egenskaper det enda alternativet som stöds.",
-        "name": "Hur man genererar mystifierade npc-namn.",
-        "traits": "Mystifiera mha npc:s egenskaper."
       },
       "npcMystifierModifierKey": {
         "hint": "Håll denna tengent för att mystifiera varelse när den dras ut till den aktiva scenen. Observera att om du väljer Alt (inte standard) döljer den också npc:n.",

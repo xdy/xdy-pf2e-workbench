@@ -80,46 +80,41 @@
         "hint": "Lorsque c'est activé, tous les jetons mystifiés sur la scène actuelle avec la même base de nom que l'acteur qui est renommé seront démystifiés.",
         "name": "Démystifier tous les jetons basés sur le nom de l'acteur."
       },
-      "npcMystifierFilterAlignmentTraits": {
+      "npcMystifierUseAlignmentTraits": {
         "hint": "Filtrer pour éviter de faire apparaître les traits d'alignement du nom mystifié",
         "name": "Pas de traits d'alignement des PNJ dans le nom"
       },
-      "npcMystifierFilterBlacklist": {
+      "npcMystifierBlacklist": {
         "hint": "Filtrer pour éviter de faire apparaître tous les noms de cette liste noire du nom mystifié (séparée par des virgules).",
         "name": "Mettre les traits sur la liste noire pour ne jamais les ajouter au nom"
       },
-      "npcMystifierFilterCreatureFamilyTraits": {
+      "npcMystifierUseCreatureTraits": {
         "hint": "Filtrer pour éviter les traits désignant une famille de créature (voir https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) du nom mystifié.",
         "name": "Pas de traits de famille de créature de PNJ dans le nom."
       },
-      "npcMystifierFilterCreatureTypesTraits": {
+      "npcMystifierUseCreatureTypesTraits": {
         "hint": "Filtrer pour éviter les traits de types de créature (voir https://2e.aonprd.com/Traits.aspx) du nom mystifié.",
         "name": "Pas de type de créature de PNJ dans le nom."
       },
-      "npcMystifierFilterEliteWeak": {
+      "npcMystifierUseEliteWeak": {
         "hint": "Filtrer pour éviter l'apparition d'Élite/Faible dans le nom mystifié",
         "name": "Pas de statut faible/élite dans les traits"
       },
-      "npcMystifierFilterOtherTraits": {
+      "npcMystifierUseOtherTraits": {
         "hint": "Filtrer les traits des PNJ qui n'appartiennent pas aux types ci-dessus (voir les liens dans les options de réglage ci-dessus) du nom mystifié.",
         "name": "Pas de trait de PNJ qui ne soit pas dans les types de trait."
       },
-      "npcMystifierFilterRarities": {
+      "npcMystifierUseRarities": {
         "hint": "Filter en éliminant les traits de rareté du nom mystifié.",
         "name": "Pas de rareté du PNJ dans le nom"
       },
-      "npcMystifierFilterRaritiesReplacement": {
+      "npcMystifierUseRaritiesReplacement": {
         "hint": "Définir le mot pour remplacer les raretés supérieures à courante (ex. 'Inhabituelle'). Si c'est vide, cela ne change pas la rareté montrée.",
         "name": "Mot pour remplacer une rareté supérieure à courante."
       },
       "npcMystifierKeepNumberAtEndOfName": {
         "hint": "Conserve le numéro du jeton sous le même format que celui ajouté par ce module à la fin du nom (s'il y en a) lorsque vous mystifiez/démystifiez les PNJ.",
         "name": "Garder le nombre du jeton lorsque vous Mystifiez/démystifiez"
-      },
-      "npcMystifierMethod": {
-        "hint": "La mystification qui utilise les traits des PNJ est la seule option actuellement supportée",
-        "name": "Comment générer les noms des PNJ mystifiés",
-        "traits": "Mystifier par les traits de PNJ"
       },
       "npcMystifierModifierKey": {
         "hint": "Maintenir la touche pour mystifier la créature lorsqu'elle est glissée sur la scène active. Notez que si vous choisissez Alt (pas par défaut) cela cache aussi le PNJ.",

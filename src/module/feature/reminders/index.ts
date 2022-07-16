@@ -52,7 +52,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     }
 }
 
-export async function actionsReminder(combatant: CombatantPF2e) {
+export async function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
     if (
         combatant &&
         combatant.actor &&
@@ -65,13 +65,15 @@ export async function actionsReminder(combatant: CombatantPF2e) {
         if (
             combatant.actor.hasCondition("stunned") ||
             combatant.actor.hasCondition("slowed") ||
-            combatant.actor.hasCondition("quickened")
+            combatant.actor.hasCondition("quickened") ||
+            reduction > 0
         ) {
             const actionsMessage = `${combatant.token?.name} has ${Math.max(
                 calculateMaxActions(combatant.actor) -
                     Math.max(
                         combatant.actor.getCondition("stunned")?.value ?? 0,
-                        combatant.actor.getCondition("slowed")?.value ?? 0
+                        combatant.actor.getCondition("slowed")?.value ?? 0,
+                        reduction
                     ),
                 0
             )} actions remaining.`;
@@ -92,25 +94,27 @@ function calculateMaxActions(actor: ActorPF2e) {
     return 3 + (actor.hasCondition("quickened") ? 1 : 0);
 }
 
-export async function autoReduceStunned(combatant: CombatantPF2e) {
+export async function autoReduceStunned(combatant: CombatantPF2e): Promise<number> {
+    let stunReduction = 0;
     if (
         combatant &&
         combatant.actor &&
         shouldIHandleThis(
             combatant.isOwner ? game.user?.id : null,
-            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")),
-            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned"))
+            <boolean>game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned"),
+            <boolean>game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")
         ) &&
         combatant.actor.hasCondition("stunned")
     ) {
         const stunned = combatant.actor.getCondition("stunned")?.value ?? 0;
         if (stunned) {
-            const stunReduction = Math.min(stunned, calculateMaxActions(combatant.actor));
+            stunReduction = Math.min(stunned, calculateMaxActions(combatant.actor));
             for (let i = 0; i < stunReduction; i++) {
                 await combatant.actor?.decreaseCondition("stunned");
             }
         }
     }
+    return stunReduction;
 }
 
 export async function reminderCannotAttack(message: ChatMessagePF2e) {

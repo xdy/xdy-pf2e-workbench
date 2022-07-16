@@ -129,8 +129,8 @@
         "name": "Show separate persistent healing message"
       },
       "applyEncumbranceBasedOnBulk": {
-        "hint": "World setting to automatically apply encumbrance based on bulk. (Uses system code which considers 5 bulk + 9 light to not exceed 5 bulk.)",
-        "name": "(World) automatically apply encumbrance based on bulk."
+        "hint": "Automatically apply encumbrance based on bulk. (Uses system code which considers 5 bulk + 9 light to not exceed 5 bulk.)",
+        "name": "Automatically apply encumbrance based on bulk."
       },
       "autoCollapseItemChatCardContent": {
         "hint": "Client setting to automatically collapse item chat card content.",
@@ -270,53 +270,53 @@
         "name": "Enable npc mystifier."
       },
       "npcMystifierAddRandomNumber": {
-        "hint": "Check to enable adding a random number when mystifying npcs. Note that if the token or actor already has a number as a suffix this will not work well.",
+        "hint": "Check to add a random number when mystifying npcs.",
         "name": "Add random number to name"
       },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
-        "hint": "Check to enable all mystified tokens on the active scene with the same base actor as the token being renamed also being demystified.",
+        "hint": "Check to make all mystification act on all tokens based on the same actor.",
         "name": "Demystify all tokens of actor"
       },
-      "npcMystifierFilterAlignmentTraits": {
-        "hint": "Check to enable filter out alignment traits from the mystified name.",
-        "name": "Exclude npc alignment traits."
+      "npcMystifierUseAlignmentTraits": {
+        "hint": "Check to use alignment traits in the mystified name.",
+        "name": "Use npc alignment traits."
       },
-      "npcMystifierFilterBlacklist": {
-        "hint": "Add words to enable filtering out what's this comma-separated blocklist from the mystified name.",
+      "npcMystifierBlacklist": {
+        "hint": "Add words to filter out contents of this comma-separated blocklist from the mystified name.",
         "name": "Blocklist traits to never add"
       },
-      "npcMystifierFilterCreatureFamilyTraits": {
-        "hint": "Check to enable filtering out creature family traits (see https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) from the mystified name.",
-        "name": "Exclude creature family traits."
+      "npcMystifierNoMatch": {
+        "hint": "Text to use when no matching trait is found, so name would be empty. (Empty string here will be set to '...')",
+        "name": "No match text"
       },
-      "npcMystifierFilterCreatureTypesTraits": {
-        "hint": "Check to enable filtering out creature type traits (see https://2e.aonprd.com/Traits.aspx) from the mystified name.",
-        "name": "Exclude creature type traits"
+      "npcMystifierUseCreatureTraits": {
+        "hint": "Check to use all 'creature traits' as defined in the pf2e system in the mystified name.",
+        "name": "Use creature traits."
       },
-      "npcMystifierFilterEliteWeak": {
-        "hint": "Check to enable filtering out elite/weak from the mystified name.",
-        "name": "Exclude elite/weak status"
+      "npcMystifierUseCreatureTypesTraits": {
+        "hint": "Check to use creature type traits (see https://2e.aonprd.com/Traits.aspx) in the mystified name.",
+        "name": "Use creature type traits"
       },
-      "npcMystifierFilterOtherTraits": {
-        "hint": "Check to enable filtering out npc traits not in the above trait types (see the links in the above setting options) from the mystified name.",
-        "name": "Exclude other traits"
+      "npcMystifierUseEliteWeak": {
+        "hint": "Check to use elite/weak in the mystified name.",
+        "name": "Use elite/weak status"
       },
-      "npcMystifierFilterRarities": {
-        "hint": "Check to enable filtering out rarities from the mystified name.",
-        "name": "Exclude rarity"
+      "npcMystifierUseOtherTraits": {
+        "hint": "Check to use all npc traits not already included by any of the above settings in the mystified name.",
+        "name": "Use other traits"
       },
-      "npcMystifierFilterRaritiesReplacement": {
-        "hint": "Put word to replace rarities greater than Common with (e.g. 'Unusual') in this text field. If empty, do not change the displayed rarity.",
-        "name": "Replace rarities rarer than Common"
+      "npcMystifierUseRarities": {
+        "hint": "Check to use rarities in the mystified name.",
+        "name": "Use rarity"
+      },
+      "npcMystifierUseRaritiesReplacement": {
+        "hint": "Enter word to replace rarities greater than Common with (e.g. 'Unusual') in this text field. If empty, do not change the displayed rarity.",
+        "name": "Replace rarities rarer than Common",
+        "unusal": "Unusual"
       },
       "npcMystifierKeepNumberAtEndOfName": {
-        "hint": "Check to enable keeping token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs.",
+        "hint": "Check to keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs.",
         "name": "Keep token number when mystifying/demystifying."
-      },
-      "npcMystifierMethod": {
-        "hint": "Currently Mystifying by using the NPCs traits is the only supported option.",
-        "name": "How to generate mystified npc names.",
-        "traits": "Mystify by NPC Traits"
       },
       "npcMystifierModifierKey": {
         "hint": "Select to enable setting which key to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
@@ -335,15 +335,15 @@
         "name": "Word or rollable table prefix"
       },
       "npcMystifierSkipRandomNumberForUnique": {
-        "hint": "Check to enable skipping adding a random number when mystifying unique npcs.",
+        "hint": "Check to skip adding a random number when mystifying unique npcs.",
         "name": "Skip random number for unique npcs."
       },
       "npcMystifierUseMystifiedNameInChat": {
-        "hint": "(Experimental) Check to enable using mystified name inside chat messages by replacing the actor name with the mystified name. Will doubtlessly look real bad on some abilities.",
+        "hint": "(Experimental) Check to use mystified name inside chat messages by replacing the actor name with the mystified name.",
         "name": "(Experimental) Mystify name in chat messages."
       },
       "npcMystifierUseSize": {
-        "hint": "Check to enable using the actor's size in the mystified name",
+        "hint": "Check to use the actor's size in the mystified name",
         "name": "Use actor size"
       },
       "creatureBuilder": {

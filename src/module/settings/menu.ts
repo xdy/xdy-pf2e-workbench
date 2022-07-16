@@ -26,6 +26,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
             width: 650,
             height: "auto",
             closeOnSubmit: true,
+            resizable: true,
         });
     }
 
@@ -81,7 +82,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
     }
 
     protected override async _updateObject(_event: Event, data: Record<string, unknown>): Promise<void> {
-        const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
+        // const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
         for (let key of Object.keys(data)) {
             let datum = data[key];
             if (key.includes(MODULENAME)) {

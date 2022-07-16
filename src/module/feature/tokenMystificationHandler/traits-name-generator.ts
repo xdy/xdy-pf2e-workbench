@@ -1,7 +1,16 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
-import { TRAITS } from "../../xdy-pf2e-constants";
+import { AON_CREATURE_TYPES, ELITE_WEAK } from "../../xdy-pf2e-constants";
 import { TokenPF2e } from "@module/canvas";
+
+let TRAITS: {
+    SIZES: string[];
+    RARITIES: string[];
+    PF2E_CREATURE_TRAITS: string[];
+    AON_CREATURE_TYPES: string[];
+    ELITE_WEAK: string[];
+    ALIGNMENTS: string[];
+};
 
 async function fixesPreAndPost(settingkey: string): Promise<string> {
     const fixSetting = game.settings.get(MODULENAME, settingkey);
@@ -19,12 +28,21 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
     }
 }
 
+function fillTraits() {
+    TRAITS = {
+        RARITIES: Object.keys(CONFIG.PF2E.rarityTraits),
+        SIZES: Object.keys(CONFIG.PF2E.actorSizes),
+        AON_CREATURE_TYPES: AON_CREATURE_TYPES,
+        PF2E_CREATURE_TRAITS: Object.keys(CONFIG.PF2E.creatureTraits),
+        ELITE_WEAK: ELITE_WEAK,
+        ALIGNMENTS: Object.keys(CONFIG.PF2E.alignmentTraits),
+    };
+}
+
 function filterTraitList(traitsList: string[], prefix: string, postfix: string): string[] {
-    //TODO Clean up this mess
-    if (game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")) {
+    if (game.settings.get(MODULENAME, "npcMystifierBlacklist")) {
         const blocklist =
-            (<string>game.settings.get(MODULENAME, "npcMystifierFilterBlacklist")).toLocaleLowerCase().split(",") ||
-            null;
+            (<string>game.settings.get(MODULENAME, "npcMystifierBlacklist")).toLocaleLowerCase().split(",") || null;
         if (blocklist) {
             traitsList = traitsList.filter((trait: string) => {
                 return !blocklist.map((trait: string) => trait.trim()).includes(trait);
@@ -38,62 +56,61 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     }
 
     let eliteWeak: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterEliteWeak")) {
+    if (!game.settings.get(MODULENAME, "npcMystifierUseEliteWeak")) {
         eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
     }
 
     let rarities: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterRarities")) {
+    if (game.settings.get(MODULENAME, "npcMystifierUseRarities")) {
         rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
         const replacement: string = (<string>(
-            game.settings.get(MODULENAME, "npcMystifierFilterRaritiesReplacement")
+            game.settings.get(MODULENAME, "npcMystifierUseRaritiesReplacement")
         )).toLocaleLowerCase();
         if (replacement !== "") {
-            rarities = rarities.map((trait: string) => {
-                if (trait !== "common") {
-                    return replacement;
-                } else {
-                    return trait;
-                }
-            });
+            rarities = rarities.map((trait: string) => (trait !== "common" ? replacement : trait));
         }
     }
 
-    let creatures: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterCreatureTypesTraits")) {
-        creatures = traitsList.filter((trait: string) => TRAITS.CREATURE_TYPES.includes(trait));
+    let aonCreatureTypes: string[] = [];
+    if (game.settings.get(MODULENAME, "npcMystifierUseCreatureTypesTraits")) {
+        aonCreatureTypes = traitsList.filter((trait: string) => TRAITS.AON_CREATURE_TYPES.includes(trait));
     }
 
-    let families: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterCreatureFamilyTraits")) {
-        families = traitsList.filter((trait: string) => TRAITS.CREATURE_FAMILIES.includes(trait));
+    let pf2eCreatureTraits: string[] = [];
+    if (game.settings.get(MODULENAME, "npcMystifierUseCreatureTraits")) {
+        pf2eCreatureTraits = traitsList.filter((trait: string) => TRAITS.PF2E_CREATURE_TRAITS.includes(trait));
     }
 
     let alignments: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterAlignmentTraits")) {
+    if (game.settings.get(MODULENAME, "npcMystifierUseAlignmentTraits")) {
         alignments = traitsList.filter((trait: string) => TRAITS.ALIGNMENTS.includes(trait));
     }
 
     let others: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierFilterOtherTraits")) {
+    if (game.settings.get(MODULENAME, "npcMystifierUseOtherTraits")) {
         others = traitsList
             .filter((trait: string) => !TRAITS.ELITE_WEAK.includes(trait))
             .filter((trait: string) => !TRAITS.SIZES.includes(trait))
             .filter((trait: string) => !TRAITS.RARITIES.includes(trait))
-            .filter((trait: string) => !TRAITS.CREATURE_TYPES.includes(trait))
-            .filter((trait: string) => !TRAITS.CREATURE_FAMILIES.includes(trait))
+            .filter((trait: string) => !TRAITS.AON_CREATURE_TYPES.includes(trait))
+            .filter((trait: string) => !TRAITS.PF2E_CREATURE_TRAITS.includes(trait))
             .filter((trait: string) => !TRAITS.ALIGNMENTS.includes(trait));
     }
 
-    return [prefix]
-        .concat(size)
-        .concat(eliteWeak)
-        .concat(alignments)
-        .concat(rarities)
-        .concat(others)
-        .concat(creatures)
-        .concat(families)
-        .concat([postfix]);
+    //Deduplicate using set
+    return Array.from(
+        new Set(
+            [prefix]
+                .concat(size)
+                .concat(eliteWeak)
+                .concat(alignments)
+                .concat(rarities)
+                .concat(others)
+                .concat(aonCreatureTypes)
+                .concat(pf2eCreatureTraits)
+                .concat([postfix])
+        ).values()
+    );
 }
 
 export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2e) {
@@ -101,6 +118,9 @@ export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2
     const data = token?.actor?.data?.data;
     const traits = data?.traits;
     const customTraits: any = traits?.traits?.custom;
+    if (!TRAITS) {
+        fillTraits();
+    }
 
     let traitsList = <string[]>traits?.traits?.value;
     if (traitsList && traits) {

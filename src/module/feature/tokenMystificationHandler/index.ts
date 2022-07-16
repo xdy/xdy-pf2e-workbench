@@ -8,35 +8,33 @@ import { generateNameFromTraits } from "./traits-name-generator";
 function shouldSkipRandomNumber(token: TokenPF2e | TokenDocumentPF2e) {
     return (
         game.settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
-        // @ts-ignore
         token?.actor?.data?.data?.traits?.rarity === "unique"
     );
 }
 
-export async function mystifyToken(token: TokenPF2e | TokenDocumentPF2e | null, isMystified: boolean): Promise<string> {
-    if (token === null) return "";
-    let name = token?.name || "";
-    if (token) {
-        const keep = game.settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName");
+export async function buildTokenName(
+    token: TokenPF2e | TokenDocumentPF2e | null,
+    isMystified: boolean
+): Promise<string> {
+    let tokenName = "";
+    if (token && token.actor) {
+        tokenName = token.name;
+        const keepNumber = game.settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName");
         if (isMystified) {
-            if (keep) {
-                name = `${token?.actor?.name} ${name?.match(/\d+$/)?.[0] ?? ""}`;
+            if (keepNumber) {
+                tokenName = `${token.actor.name} ${tokenName.match(/\d+$/)?.[0] ?? ""}`;
             } else {
-                name = token?.actor?.name || "";
+                tokenName = token.actor.name || "";
             }
         } else {
-            switch (game.settings.get(MODULENAME, "npcMystifierMethod")) {
+            switch (game.settings.get(MODULENAME, "npcMystifierUseOtherTraits")) {
                 default:
-                    name = await generateNameFromTraits(token);
-            }
-            //Do not allow name to be just empty string
-            if (name === "") {
-                name = "...";
+                    tokenName = await generateNameFromTraits(token);
             }
 
             const addRandom = game.settings.get(MODULENAME, "npcMystifierAddRandomNumber");
-            if (token?.name?.match(/ \d+$/)?.[0] && keep && !shouldSkipRandomNumber(token)) {
-                name = `${name} ${token?.name?.match(/ \d+$/)?.[0] ?? ""}`;
+            if (token.name.match(/ \d+$/)?.[0] && keepNumber && !shouldSkipRandomNumber(token)) {
+                tokenName = `${tokenName} ${token.name.match(/ \d+$/)?.[0] ?? ""}`;
             } else {
                 if (addRandom && !shouldSkipRandomNumber(token)) {
                     let rolled = Math.floor(Math.random() * 100) + 1;
@@ -44,13 +42,14 @@ export async function mystifyToken(token: TokenPF2e | TokenDocumentPF2e | null, 
                     if (canvas?.scene?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
                         rolled = Math.floor(Math.random() * 100) + 1;
                     }
-                    name += ` ${rolled}`;
+                    tokenName += ` ${rolled}`;
                 }
             }
         }
     }
 
-    return name;
+    //Never return an empty string
+    return tokenName === "" ? <string>game.settings.get(MODULENAME, "npcMystifierNoMatch") : tokenName;
 }
 
 function isMystifyModifierKeyPressed() {
@@ -74,7 +73,7 @@ export async function tokenCreateMystification(token: any) {
         (key === "ALWAYS" || isMystifyModifierKeyPressed()) &&
         (!game.keyboard?.downKeys.has("V") || game.keyboard?.downKeys.has("Insert"))
     ) {
-        await canvas?.scene?.updateEmbeddedDocuments("Token", await doMystification(token, false));
+        await doMystification(token, false);
     }
 }
 
@@ -90,11 +89,15 @@ export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): b
 }
 
 export async function doMystification(token: TokenPF2e, active: boolean) {
+    if (!token?.actor) {
+        return;
+    }
+
     //define array of objects to be updated
     const updates = [
         {
             _id: <string>token.id,
-            name: await mystifyToken(token, active),
+            name: await buildTokenName(token, active),
         },
     ];
 
@@ -103,18 +106,16 @@ export async function doMystification(token: TokenPF2e, active: boolean) {
         isTokenMystified(token) &&
         game.settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor")
     ) {
-        canvas?.scene?.tokens
+        for (const sceneToken of canvas?.scene?.tokens
             ?.filter((t) => t.actor?.id === token?.actor?.id)
-            ?.filter((x) => isTokenMystified(x))
-            ?.forEach(async (x) =>
-                updates.push({
-                    _id: <string>x.id,
-                    name: await mystifyToken(x, active),
-                })
-            );
+            ?.filter((x) => isTokenMystified(x)) || []) {
+            updates.push({
+                _id: <string>sceneToken.id,
+                name: await buildTokenName(sceneToken, active),
+            });
+        }
     }
-
-    return updates;
+    await canvas?.scene?.updateEmbeddedDocuments("Token", updates);
 }
 
 export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
@@ -133,8 +134,7 @@ export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
                 const hudElement = $(e.currentTarget);
                 const active = hudElement.hasClass("active");
                 if (token !== null && isTokenMystified(token) === active) {
-                    const updates = await doMystification(token, active);
-                    await canvas?.scene?.updateEmbeddedDocuments("Token", updates);
+                    await doMystification(token, active);
                 }
                 hudElement.toggleClass("active");
             });
