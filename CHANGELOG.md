@@ -1,3 +1,10 @@
+# [3.28.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.27.2...v3.28.0) (2022-07-16)
+
+
+### Features
+
+* Make hero point handler timeout configurable (defaults to 60). ([dcf9f18](https://github.com/xdy/xdy-pf2e-workbench/commit/dcf9f18c6daedd638c8bb6e6e154316939a5d8ff)), closes [#340](https://github.com/xdy/xdy-pf2e-workbench/issues/340)
+
 ## [3.27.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.27.1...v3.27.2) (2022-07-16)
 
 
