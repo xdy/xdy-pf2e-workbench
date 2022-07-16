@@ -13,6 +13,8 @@ declare class WeaponPF2e extends PhysicalItemPF2e {
     get hands(): "0" | "1" | "1+" | "2";
     /** The range increment of this weapon, or null if a melee weapon */
     get rangeIncrement(): WeaponRangeIncrement | null;
+    /** The maximum range of this weapon: `null` if melee, and usually 6 * range increment if ranged */
+    get maxRange(): number | null;
     get reload(): WeaponReloadTime | null;
     get isSpecific(): boolean;
     get isMelee(): boolean;

@@ -10,6 +10,7 @@ export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TIt
     private selectedRuleElementType;
     /** If we are currently editing an RE, this is the index */
     private editingRuleElementIndex;
+    private ruleElementForms;
     get editingRuleElement(): RuleElementSource | null;
     getData(options?: Partial<DocumentSheetOptions>): Promise<any>;
     /** An alternative to super.getData() for subclasses that don't need this class's `getData` */

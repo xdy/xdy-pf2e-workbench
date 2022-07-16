@@ -2,7 +2,7 @@ import { LabeledResistance, ResistanceType } from "@actor/data/base";
 import { IWRRuleElement, IWRRuleElementData } from "./base";
 /** @category RuleElement */
 declare class ResistanceRuleElement extends IWRRuleElement {
-    dictionary: Record<"all" | "force" | "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "ghostTouch" | "vorpal" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | "alignment" | "coldiron" | "energy" | "physical" | "precision" | "salt" | "salt-water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "weapons" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "critical-hits" | "protean anatomy", string>;
+    dictionary: Record<"all" | "force" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "positive" | "negative" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "chaotic" | "lawful" | "good" | "evil" | "mental" | "poison" | "untyped" | "adamantine" | "alignment" | "coldiron" | "darkwood" | "energy" | "ghostTouch" | "mithral" | "orichalcum" | "physical" | "precision" | "salt" | "salt-water" | "silver" | "warpglass" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "vorpal" | "weapons" | "critical-hits" | "protean anatomy", string>;
     get property(): LabeledResistance[];
     getIWR(value: number): LabeledResistance | null;
 }

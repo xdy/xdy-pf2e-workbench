@@ -1,11 +1,11 @@
 import { CreaturePF2e, FamiliarPF2e } from "@actor";
 import { Abilities, CreatureSpeeds, LabeledSpeed, MovementType } from "@actor/creature/data";
-import { AttackItem, AttackRollContext, StrikeRollContext, StrikeRollContextParams } from "@actor/creature/types";
+import { AttackItem, AttackRollContext, CreatureUpdateContext, StrikeRollContext, StrikeRollContextParams } from "@actor/creature/types";
 import { CharacterSource } from "@actor/data";
 import { StatisticModifier } from "@actor/modifiers";
 import { AbilityString } from "@actor/types";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, ItemPF2e, WeaponPF2e } from "@item";
-import { FeatData, ItemSourcePF2e, ItemType } from "@item/data";
+import { ItemSourcePF2e, ItemType } from "@item/data";
 import { ActiveEffectPF2e } from "@module/active-effect";
 import { UserPF2e } from "@module/user";
 import { RollParameters } from "@system/rolls";
@@ -22,8 +22,8 @@ declare class CharacterPF2e extends CreaturePF2e {
     /** A cached reference to this PC's familiar */
     familiar: FamiliarPF2e | null;
     featGroups: Record<string, FeatSlot | undefined>;
-    pfsBoons: FeatData[];
-    deityBoonsCurses: FeatData[];
+    pfsBoons: FeatPF2e[];
+    deityBoonsCurses: FeatPF2e[];
     get allowedItemTypes(): (ItemType | "physical")[];
     get keyAbility(): AbilityString;
     /** This PC's ability scores */
@@ -86,7 +86,7 @@ declare class CharacterPF2e extends CreaturePF2e {
     /** Add a proficiency in a weapon group or base weapon */
     addCombatProficiency(key: BaseWeaponProficiencyKey | WeaponGroupProficiencyKey): Promise<void>;
     removeCombatProficiency(key: BaseWeaponProficiencyKey | WeaponGroupProficiencyKey): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<CharacterSource>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<CharacterSource>, options: CreatureUpdateContext<this>, user: UserPF2e): Promise<void>;
     /** Perform heritage and deity deletions prior to the creation of new ones */
     preCreateDelete(toCreate: PreCreate<ItemSourcePF2e>[]): Promise<void>;
     /** Toggle between boost-driven and manual management of ability scores */

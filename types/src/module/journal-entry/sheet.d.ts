@@ -5,7 +5,7 @@ import "../../styles/tinymce.scss";
 declare class JournalSheetPF2e<TJournalEntry extends JournalEntry = JournalEntry> extends JournalSheet<TJournalEntry> {
     get template(): string;
     activateListeners($html: JQuery): void;
-    activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): void;
+    activateEditor(name: string, options?: Partial<TinyMCE.EditorSettings>, initialContent?: string): void;
 }
 declare class JournalSheetStyledPF2e extends JournalSheetPF2e {
     /** Use the system-themed styling only if the setting is enabled (on by default) */

@@ -1,1 +1,0 @@
-export { GrantItemRuleElement } from "./base";

@@ -16,7 +16,7 @@ import { RawPredicate } from "@system/predication";
 import { Statistic } from "@system/statistic";
 import { CreatureSkills, CreatureSpeeds, LabeledSpeed, MovementType, SenseData, VisionLevel } from "./data";
 import { CreatureSensePF2e } from "./sense";
-import { Alignment, AttackItem, AttackRollContext, GetReachParameters, IsFlatFootedParams, StrikeRollContext, StrikeRollContextParams } from "./types";
+import { Alignment, AttackItem, AttackRollContext, CreatureUpdateContext, GetReachParameters, IsFlatFootedParams, StrikeRollContext, StrikeRollContextParams } from "./types";
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 export declare abstract class CreaturePF2e extends ActorPF2e {
     /** Skill `Statistic`s for the creature */
@@ -92,13 +92,15 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
     getAttackRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): AttackRollContext<this, I>;
     protected getDamageRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
     protected getStrikeRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
-    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentUpdateContext<this>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: CreatureUpdateContext<this>, user: UserPF2e): Promise<void>;
 }
 export interface CreaturePF2e {
     readonly data: CreatureData;
     /** Saving throw rolls for the creature, built during data prep */
     saves: Record<SaveType, Statistic>;
     get hitPoints(): HitPointsSummary;
+    /** Expand DocumentModificationContext for creatures */
+    update(data: DocumentUpdateData<this>, options?: CreatureUpdateContext<this>): Promise<this>;
     /** See implementation in class */
     updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData<this>[], options?: DocumentModificationContext): Promise<ActiveEffectPF2e[]>;
     updateEmbeddedDocuments(embeddedName: "Item", updateData: EmbeddedDocumentUpdateData<this>[], options?: DocumentModificationContext): Promise<ItemPF2e[]>;

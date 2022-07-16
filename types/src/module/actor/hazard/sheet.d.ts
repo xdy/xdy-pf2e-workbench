@@ -58,9 +58,9 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
             earth: string;
             water: string;
             chaotic: string;
-            evil: string;
-            good: string;
             lawful: string;
+            good: string;
+            evil: string;
         };
         actorTraits: string[];
         actorRarities: {
@@ -96,7 +96,7 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
         actor: any;
         data: any;
         items: any;
-        cssClass: "locked" | "editable";
+        cssClass: "editable" | "locked";
         effects: RawObject<foundry.data.ActiveEffectData<foundry.documents.BaseActiveEffect>>[];
         limited: boolean;
         options: ActorSheetOptions;

@@ -133,9 +133,9 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
             49: string;
             50: string;
         };
-        preciousMaterials: Record<"abysium" | "adamantine" | "coldIron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "peachwood" | "siccatite" | "silver" | "sovereignSteel" | "warpglass", string>;
+        preciousMaterials: Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "coldIron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sovereignSteel", string>;
         preciousMaterialGrades: Record<"high" | "low" | "standard", string>;
-        sizes: Record<"tiny" | "sm" | "med" | "lg" | "huge" | "grg", string>;
+        sizes: Record<"med" | "tiny" | "sm" | "lg" | "huge" | "grg", string>;
         traits: import("@module/sheet/helpers").SheetOptions;
         isPhysical: true;
         basePriceString: string;
@@ -180,6 +180,11 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
             selected: string | null;
             types: Record<string, string>;
         };
+        ruleElements: {
+            template: string;
+            index: number;
+            rule: import("../../rules").RuleElementSource;
+        }[];
         cssClass: string;
         editable: boolean;
         document: ArmorPF2e;

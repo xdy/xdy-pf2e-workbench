@@ -212,6 +212,7 @@ declare const creatureTraits: {
     psychopomp: string;
     qlippoth: string;
     rakshasa: string;
+    reflection: string;
     sahkil: string;
     samsaran: string;
     "sea devil": string;
@@ -311,6 +312,7 @@ declare const creatureTraits: {
 };
 declare const classTraits: Record<ClassTrait, string>;
 declare const spellOtherTraits: {
+    amp: string;
     attack: string;
     auditory: string;
     aura: string;
@@ -353,6 +355,7 @@ declare const spellOtherTraits: {
     polymorph: string;
     possession: string;
     prediction: string;
+    psyche: string;
     revelation: string;
     scrying: string;
     shadow: string;
@@ -383,12 +386,13 @@ declare const damageTraits: {
     earth: string;
     water: string;
     chaotic: string;
-    evil: string;
-    good: string;
     lawful: string;
+    good: string;
+    evil: string;
 };
 declare const magicSchools: Record<MagicSchool, string>;
 declare const spellTraits: {
+    amp: string;
     attack: string;
     auditory: string;
     aura: string;
@@ -431,6 +435,7 @@ declare const spellTraits: {
     polymorph: string;
     possession: string;
     prediction: string;
+    psyche: string;
     revelation: string;
     scrying: string;
     shadow: string;
@@ -455,9 +460,9 @@ declare const spellTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    evil: string;
-    good: string;
     lawful: string;
+    good: string;
+    evil: string;
     alchemist: string;
     barbarian: string;
     bard: string;
@@ -471,11 +476,13 @@ declare const spellTraits: {
     magus: string;
     monk: string;
     oracle: string;
+    psychic: string;
     ranger: string;
     rogue: string;
     sorcerer: string;
     summoner: string;
     swashbuckler: string;
+    thaumaturge: string;
     witch: string;
     wizard: string;
 };
@@ -676,8 +683,8 @@ declare const weaponTraits: {
     tiefling: string;
     undine: string;
     chaotic: string;
-    evil: string;
     lawful: string;
+    evil: string;
 };
 declare const preciousMaterials: Record<PreciousMaterialType, string>;
 declare const otherWeaponTags: Record<OtherWeaponTag, string>;
@@ -754,22 +761,22 @@ declare const npcAttackTraits: {
     "range-increment-300": string;
     "range-increment-310": string;
     "range-increment-320": string;
-    abysium: string;
     adamantine: string;
-    coldIron: string;
     darkwood: string;
+    mithral: string;
+    orichalcum: string;
+    silver: string;
+    warpglass: string;
+    abysium: string;
+    coldIron: string;
     djezet: string;
     dragonhide: string;
     "grisantian-pelt": string;
     inubrix: string;
-    mithral: string;
     noqual: string;
-    orichalcum: string;
     peachwood: string;
     siccatite: string;
-    silver: string;
     sovereignSteel: string;
-    warpglass: string;
     alchemical: string;
     agile: string;
     artifact: string;
@@ -966,8 +973,8 @@ declare const npcAttackTraits: {
     tiefling: string;
     undine: string;
     chaotic: string;
-    evil: string;
     lawful: string;
+    evil: string;
 };
 declare const featTraits: {
     additive1: string;
@@ -982,9 +989,11 @@ declare const featTraits: {
     concentrate: string;
     dedication: string;
     detection: string;
+    deviant: string;
     downtime: string;
     emotion: string;
     evolution: string;
+    esoterica: string;
     exploration: string;
     fear: string;
     finisher: string;
@@ -995,6 +1004,7 @@ declare const featTraits: {
     lineage: string;
     manipulate: string;
     metamagic: string;
+    mindshift: string;
     modification: string;
     move: string;
     multiclass: string;
@@ -1006,6 +1016,7 @@ declare const featTraits: {
     press: string;
     rage: string;
     reckless: string;
+    reflection: string;
     secret: string;
     skill: string;
     social: string;
@@ -1018,6 +1029,7 @@ declare const featTraits: {
     unstable: string;
     vigilante: string;
     virulent: string;
+    amp: string;
     attack: string;
     beast: string;
     cantrip: string;
@@ -1049,6 +1061,7 @@ declare const featTraits: {
     polymorph: string;
     possession: string;
     prediction: string;
+    psyche: string;
     revelation: string;
     scrying: string;
     shadow: string;
@@ -1071,9 +1084,9 @@ declare const featTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    evil: string;
-    good: string;
     lawful: string;
+    good: string;
+    evil: string;
     alchemist: string;
     barbarian: string;
     bard: string;
@@ -1087,11 +1100,13 @@ declare const featTraits: {
     magus: string;
     monk: string;
     oracle: string;
+    psychic: string;
     ranger: string;
     rogue: string;
     sorcerer: string;
     summoner: string;
     swashbuckler: string;
+    thaumaturge: string;
     witch: string;
     wizard: string;
     arcane: string;
@@ -1230,13 +1245,14 @@ declare const consumableTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    evil: string;
-    good: string;
     lawful: string;
+    good: string;
+    evil: string;
 };
 declare const actionTraits: {
     circus: string;
     summon: string;
+    amp: string;
     attack: string;
     auditory: string;
     aura: string;
@@ -1279,6 +1295,7 @@ declare const actionTraits: {
     polymorph: string;
     possession: string;
     prediction: string;
+    psyche: string;
     revelation: string;
     scrying: string;
     shadow: string;
@@ -1303,9 +1320,9 @@ declare const actionTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    evil: string;
-    good: string;
     lawful: string;
+    good: string;
+    evil: string;
     alchemist: string;
     barbarian: string;
     bard: string;
@@ -1319,11 +1336,13 @@ declare const actionTraits: {
     magus: string;
     monk: string;
     oracle: string;
+    psychic: string;
     ranger: string;
     rogue: string;
     sorcerer: string;
     summoner: string;
     swashbuckler: string;
+    thaumaturge: string;
     witch: string;
     wizard: string;
     alchemical: string;
@@ -1372,14 +1391,17 @@ declare const actionTraits: {
     archetype: string;
     class: string;
     dedication: string;
+    deviant: string;
     downtime: string;
     evolution: string;
+    esoterica: string;
     exploration: string;
     finisher: string;
     flourish: string;
     general: string;
     lineage: string;
     manipulate: string;
+    mindshift: string;
     modification: string;
     multiclass: string;
     oath: string;
@@ -1388,6 +1410,7 @@ declare const actionTraits: {
     press: string;
     rage: string;
     reckless: string;
+    reflection: string;
     secret: string;
     skill: string;
     social: string;
@@ -1495,9 +1518,9 @@ declare const hazardTraits: {
     earth: string;
     water: string;
     chaotic: string;
-    evil: string;
-    good: string;
     lawful: string;
+    good: string;
+    evil: string;
 };
 declare const vehicleTraits: {
     artifact: string;

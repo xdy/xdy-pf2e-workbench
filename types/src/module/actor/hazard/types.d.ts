@@ -22,19 +22,13 @@ interface HazardSheetData extends ActorSheetDataPF2e<HazardPF2e> {
     hasRoutineDetails: boolean;
     hasResetDetails: boolean;
 }
+interface HazardActionSheetData {
+    reaction: ActionItemPF2e[];
+    action: ActionItemPF2e[];
+}
 interface HazardSaveSheetData {
     label: string;
     type: SaveType;
     mod?: number;
-}
-interface HazardActionSheetData {
-    passive: ActionsDetails;
-    free: ActionsDetails;
-    reaction: ActionsDetails;
-    action: ActionsDetails;
-}
-interface ActionsDetails {
-    label: string;
-    actions: ActionItemPF2e[];
 }
 export { HazardActionSheetData, HazardSaveSheetData, HazardSheetData };

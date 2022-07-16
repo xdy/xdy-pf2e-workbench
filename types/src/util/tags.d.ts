@@ -10,9 +10,9 @@ declare function tagify(input: HTMLInputElement | null, { whitelist, maxTags }: 
 declare type TagRecord = Record<"id" | "value", string>;
 interface TagifyOptions {
     /** The maximum number of tags that may be added to the input */
-    maxTags: number;
+    maxTags?: number;
     /** A whitelist record, typically pulled from `CONFIG.PF2E` */
-    whitelist: Record<string, string | {
+    whitelist: string[] | Record<string, string | {
         label: string;
     }>;
 }

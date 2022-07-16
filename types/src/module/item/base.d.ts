@@ -29,6 +29,7 @@ declare class ItemPF2e extends Item<ActorPF2e> {
     /** Check this item's type (or whether it's one among multiple types) without a call to `instanceof` */
     isOfType(type: "physical"): this is PhysicalItemPF2e;
     isOfType<T extends ItemType>(...types: T[]): this is InstanceType<ConfigPF2e["PF2E"]["Item"]["documentClasses"][T]>;
+    isOfType<T extends "physical" | ItemType>(...types: T[]): this is PhysicalItemPF2e | InstanceType<ConfigPF2e["PF2E"]["Item"]["documentClasses"][Exclude<T, "physical">]>;
     /** Redirect the deletion of any owned items to ActorPF2e#deleteEmbeddedDocuments for a single workflow */
     delete(context?: DocumentModificationContext<this>): Promise<this>;
     /** Generate a list of strings for use in predication */

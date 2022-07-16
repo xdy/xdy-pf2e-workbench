@@ -2,6 +2,7 @@ import { AuraData } from "@actor/types";
 import { TokenPF2e } from ".";
 import { EffectAreaSquare } from "../effect-area-square";
 import { ItemTrait } from "@item/data/base";
+/** Visual and statial facilities for auras emanated by a token's actor */
 declare class TokenAura extends PIXI.Graphics {
     #private;
     /** The token associated with this aura */

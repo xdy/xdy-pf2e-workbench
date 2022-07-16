@@ -80,7 +80,6 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
         hoverOutOthers?: boolean;
     }): boolean;
     protected _onHoverOut(event: PIXI.InteractionEvent): boolean;
-    _onCreate(data: foundry.data.TokenSource, options: DocumentModificationContext<TokenDocumentPF2e>, userId: string): void;
     /** Destroy auras before removing this token from the canvas */
     _onDelete(options: DocumentModificationContext<TokenDocumentPF2e>, userId: string): void;
     /** A callback for when a movement animation for this token finishes */

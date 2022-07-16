@@ -1,6 +1,5 @@
 /// <reference types="jquery" />
 import { ModeOfBeing } from "@actor/creature/types";
-import { ModifierAdjustment } from "@actor/modifiers";
 import { ActorAlliance, ActorDimensions, AuraData, SaveType } from "@actor/types";
 import { ArmorPF2e, ContainerPF2e, ItemPF2e, PhysicalItemPF2e, type ConditionPF2e } from "@item";
 import { ConditionSlug } from "@item/condition/data";
@@ -129,7 +128,6 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     private preparePrototypeToken;
     /** If there is an active encounter, set roll options for it and this actor's participant */
     setEncounterRollOptions(): void;
-    getModifierAdjustments(selectors: string[], slug: string): ModifierAdjustment[];
     /**
      * Roll a Save Check
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus.

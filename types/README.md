@@ -24,8 +24,11 @@ diff --git a/tsconfig.json b/tsconfig.json
 ```
 
 And then running this:
-````
+```
 run node_modules/.bin/tsc
 ```
 
-As well as foundry types copied from pf2e.
+It also has these files and directories taken as-is from the pf2e system:
+* foundryvtt\forks\pf2e\types\foundry\**
+* foundryvtt\forks\pf2e\src\global.d.ts
+* foundryvtt\forks\pf2e\static\lang\en.json 

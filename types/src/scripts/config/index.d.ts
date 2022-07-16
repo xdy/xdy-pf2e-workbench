@@ -102,7 +102,7 @@ export declare const PF2ECONFIG: {
         cp: string;
     };
     preciousMaterialGrades: Record<"high" | "low" | "standard", string>;
-    preciousMaterials: Record<"abysium" | "adamantine" | "coldIron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "peachwood" | "siccatite" | "silver" | "sovereignSteel" | "warpglass", string>;
+    preciousMaterials: Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "coldIron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sovereignSteel", string>;
     armorPotencyRunes: {
         "1": string;
         "2": string;
@@ -177,6 +177,8 @@ export declare const PF2ECONFIG: {
         majorStriking: string;
     };
     weaponPropertyRunes: {
+        ghostTouch: string;
+        vorpal: string;
         anarchic: string;
         ancestralEchoing: string;
         anchoring: string;
@@ -197,7 +199,6 @@ export declare const PF2ECONFIG: {
         fearsome: string;
         flaming: string;
         frost: string;
-        ghostTouch: string;
         greaterAnchoring: string;
         greaterBloodbane: string;
         greaterBrilliant: string;
@@ -230,7 +231,6 @@ export declare const PF2ECONFIG: {
         spellStoring: string;
         thundering: string;
         unholy: string;
-        vorpal: string;
         wounding: string;
     };
     damageTraits: {
@@ -252,17 +252,17 @@ export declare const PF2ECONFIG: {
         earth: string;
         water: string;
         chaotic: string;
-        evil: string;
-        good: string;
         lawful: string;
+        good: string;
+        evil: string;
     };
-    damageTypes: Record<"force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped", string>;
+    damageTypes: Record<"force" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "positive" | "negative" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "chaotic" | "lawful" | "good" | "evil" | "mental" | "poison" | "untyped", string>;
     damageSubtypes: {
         persistent: string;
         splash: string;
     };
-    damageCategories: Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "ghostTouch" | "alignment" | "coldiron" | "energy" | "physical" | "precision" | "salt" | "salt-water", string>;
-    resistanceTypes: Record<"all" | "force" | "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "ghostTouch" | "vorpal" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | "alignment" | "coldiron" | "energy" | "physical" | "precision" | "salt" | "salt-water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "weapons" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "critical-hits" | "protean anatomy", string>;
+    damageCategories: Record<"adamantine" | "alignment" | "coldiron" | "darkwood" | "energy" | "ghostTouch" | "mithral" | "orichalcum" | "physical" | "precision" | "salt" | "salt-water" | "silver" | "warpglass", string>;
+    resistanceTypes: Record<"all" | "force" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "positive" | "negative" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "chaotic" | "lawful" | "good" | "evil" | "mental" | "poison" | "untyped" | "adamantine" | "alignment" | "coldiron" | "darkwood" | "energy" | "ghostTouch" | "mithral" | "orichalcum" | "physical" | "precision" | "salt" | "salt-water" | "silver" | "warpglass" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "vorpal" | "weapons" | "critical-hits" | "protean anatomy", string>;
     stackGroups: {
         arrows: string;
         bolts: string;
@@ -276,7 +276,7 @@ export declare const PF2ECONFIG: {
         gems: string;
         sacks: string;
     };
-    weaknessTypes: Record<"force" | "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "ghostTouch" | "vorpal" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | "alignment" | "coldiron" | "energy" | "physical" | "precision" | "salt" | "salt-water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "weapons" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "critical-hits" | "axe" | "emotion" | "splash-damage" | "vampire-weaknesses" | "vorpal-fear" | "vulnerable-to-sunlight", string>;
+    weaknessTypes: Record<"force" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "positive" | "negative" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "chaotic" | "lawful" | "good" | "evil" | "mental" | "poison" | "untyped" | "adamantine" | "alignment" | "coldiron" | "darkwood" | "energy" | "ghostTouch" | "mithral" | "orichalcum" | "physical" | "precision" | "salt" | "salt-water" | "silver" | "warpglass" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "vorpal" | "weapons" | "critical-hits" | "splash-damage" | "emotion" | "axe" | "vampire-weaknesses" | "vorpal-fear" | "vulnerable-to-sunlight", string>;
     weaponDamage: {
         bludgeoning: string;
         piercing: string;
@@ -401,6 +401,7 @@ export declare const PF2ECONFIG: {
     };
     magicTraditions: Record<"arcane" | "divine" | "occult" | "primal", string>;
     spellOtherTraits: {
+        amp: string;
         attack: string;
         auditory: string;
         aura: string;
@@ -423,7 +424,7 @@ export declare const PF2ECONFIG: {
         fear: string;
         fortune: string;
         fungus: string;
-        healing: string;
+        healing: string; /** Base weapon types that are considered equivalent for all rules purposes */
         hex: string;
         incapacitation: string;
         incarnate: string;
@@ -443,6 +444,7 @@ export declare const PF2ECONFIG: {
         polymorph: string;
         possession: string;
         prediction: string;
+        psyche: string;
         revelation: string;
         scrying: string;
         shadow: string;
@@ -454,7 +456,7 @@ export declare const PF2ECONFIG: {
         visual: string;
     };
     magicSchools: Record<"abjuration" | "conjuration" | "divination" | "enchantment" | "evocation" | "illusion" | "necromancy" | "transmutation", string>;
-    classTraits: Record<"alchemist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "fighter" | "gunslinger" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "witch" | "wizard", string>;
+    classTraits: Record<"alchemist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "fighter" | "gunslinger" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "psychic" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "thaumaturge" | "witch" | "wizard", string>;
     ancestryTraits: {
         "half-elf": string;
         "half-orc": string;
@@ -560,7 +562,7 @@ export declare const PF2ECONFIG: {
         tiefling: string;
         undine: string;
     };
-    deityDomains: Record<"time" | "change" | "family" | "void" | "cold" | "fire" | "air" | "earth" | "water" | "abomination" | "ambition" | "cities" | "confidence" | "creation" | "darkness" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "fate" | "freedom" | "glyph" | "healing" | "indulgence" | "knowledge" | "lightning" | "luck" | "magic" | "might" | "moon" | "naga" | "nature" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "wealth" | "wyrmkin" | "zeal", {
+    deityDomains: Record<"time" | "change" | "family" | "void" | "cold" | "fire" | "air" | "earth" | "water" | "healing" | "magic" | "nature" | "abomination" | "apocryphal" | "ambition" | "cities" | "confidence" | "creation" | "darkness" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "fate" | "freedom" | "glyph" | "indulgence" | "knowledge" | "lightning" | "luck" | "might" | "moon" | "naga" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "wealth" | "wyrmkin" | "zeal", {
         label: string;
         description: string;
     }>;
@@ -761,8 +763,8 @@ export declare const PF2ECONFIG: {
         tiefling: string;
         undine: string;
         chaotic: string;
-        evil: string;
         lawful: string;
+        evil: string;
     };
     otherWeaponTags: Record<import("@item/weapon/types").OtherWeaponTag, string>;
     armorTraits: {
@@ -920,13 +922,14 @@ export declare const PF2ECONFIG: {
         tiefling: string;
         undine: string;
         chaotic: string;
-        evil: string;
-        good: string;
         lawful: string;
+        good: string;
+        evil: string;
     };
     actionTraits: {
         circus: string;
         summon: string;
+        amp: string;
         attack: string;
         auditory: string;
         aura: string;
@@ -949,7 +952,7 @@ export declare const PF2ECONFIG: {
         fear: string;
         fortune: string;
         fungus: string;
-        healing: string;
+        healing: string; /** Base weapon types that are considered equivalent for all rules purposes */
         hex: string;
         incapacitation: string;
         incarnate: string;
@@ -969,6 +972,7 @@ export declare const PF2ECONFIG: {
         polymorph: string;
         possession: string;
         prediction: string;
+        psyche: string;
         revelation: string;
         scrying: string;
         shadow: string;
@@ -993,9 +997,9 @@ export declare const PF2ECONFIG: {
         positive: string;
         sonic: string;
         chaotic: string;
-        evil: string;
-        good: string;
         lawful: string;
+        good: string;
+        evil: string;
         alchemist: string;
         barbarian: string;
         bard: string;
@@ -1009,11 +1013,13 @@ export declare const PF2ECONFIG: {
         magus: string;
         monk: string;
         oracle: string;
+        psychic: string;
         ranger: string;
         rogue: string;
         sorcerer: string;
         summoner: string;
         swashbuckler: string;
+        thaumaturge: string;
         witch: string;
         wizard: string;
         alchemical: string;
@@ -1062,14 +1068,17 @@ export declare const PF2ECONFIG: {
         archetype: string;
         class: string;
         dedication: string;
+        deviant: string;
         downtime: string;
         evolution: string;
+        esoterica: string;
         exploration: string;
         finisher: string;
         flourish: string;
         general: string;
         lineage: string;
         manipulate: string;
+        mindshift: string;
         modification: string;
         multiclass: string;
         oath: string;
@@ -1078,6 +1087,7 @@ export declare const PF2ECONFIG: {
         press: string;
         rage: string;
         reckless: string;
+        reflection: string;
         secret: string;
         skill: string;
         social: string;
@@ -1210,11 +1220,12 @@ export declare const PF2ECONFIG: {
         positive: string;
         sonic: string;
         chaotic: string;
-        evil: string;
-        good: string;
         lawful: string;
+        good: string;
+        evil: string;
     };
     spellTraits: {
+        amp: string;
         attack: string;
         auditory: string;
         aura: string;
@@ -1237,7 +1248,7 @@ export declare const PF2ECONFIG: {
         fear: string;
         fortune: string;
         fungus: string;
-        healing: string;
+        healing: string; /** Base weapon types that are considered equivalent for all rules purposes */
         hex: string;
         incapacitation: string;
         incarnate: string;
@@ -1257,6 +1268,7 @@ export declare const PF2ECONFIG: {
         polymorph: string;
         possession: string;
         prediction: string;
+        psyche: string;
         revelation: string;
         scrying: string;
         shadow: string;
@@ -1281,9 +1293,9 @@ export declare const PF2ECONFIG: {
         positive: string;
         sonic: string;
         chaotic: string;
-        evil: string;
-        good: string;
         lawful: string;
+        good: string;
+        evil: string;
         alchemist: string;
         barbarian: string;
         bard: string;
@@ -1297,11 +1309,13 @@ export declare const PF2ECONFIG: {
         magus: string;
         monk: string;
         oracle: string;
+        psychic: string;
         ranger: string;
         rogue: string;
         sorcerer: string;
         summoner: string;
         swashbuckler: string;
+        thaumaturge: string;
         witch: string;
         wizard: string;
     };
@@ -1318,9 +1332,11 @@ export declare const PF2ECONFIG: {
         concentrate: string;
         dedication: string;
         detection: string;
+        deviant: string;
         downtime: string;
         emotion: string;
         evolution: string;
+        esoterica: string;
         exploration: string;
         fear: string;
         finisher: string;
@@ -1331,6 +1347,7 @@ export declare const PF2ECONFIG: {
         lineage: string;
         manipulate: string;
         metamagic: string;
+        mindshift: string;
         modification: string;
         move: string;
         multiclass: string;
@@ -1342,6 +1359,7 @@ export declare const PF2ECONFIG: {
         press: string;
         rage: string;
         reckless: string;
+        reflection: string;
         secret: string;
         skill: string;
         social: string;
@@ -1354,6 +1372,7 @@ export declare const PF2ECONFIG: {
         unstable: string;
         vigilante: string;
         virulent: string;
+        amp: string;
         attack: string;
         beast: string;
         cantrip: string;
@@ -1369,7 +1388,7 @@ export declare const PF2ECONFIG: {
         eidolon: string;
         extradimensional: string;
         fungus: string;
-        healing: string;
+        healing: string; /** Base weapon types that are considered equivalent for all rules purposes */
         hex: string;
         incapacitation: string;
         incarnate: string;
@@ -1385,6 +1404,7 @@ export declare const PF2ECONFIG: {
         polymorph: string;
         possession: string;
         prediction: string;
+        psyche: string;
         revelation: string;
         scrying: string;
         shadow: string;
@@ -1407,9 +1427,9 @@ export declare const PF2ECONFIG: {
         positive: string;
         sonic: string;
         chaotic: string;
-        evil: string;
-        good: string;
         lawful: string;
+        good: string;
+        evil: string;
         alchemist: string;
         barbarian: string;
         bard: string;
@@ -1423,11 +1443,13 @@ export declare const PF2ECONFIG: {
         magus: string;
         monk: string;
         oracle: string;
+        psychic: string;
         ranger: string;
         rogue: string;
         sorcerer: string;
         summoner: string;
         swashbuckler: string;
+        thaumaturge: string;
         witch: string;
         wizard: string;
         arcane: string;
@@ -1578,6 +1600,7 @@ export declare const PF2ECONFIG: {
         psychopomp: string;
         qlippoth: string;
         rakshasa: string;
+        reflection: string;
         sahkil: string;
         samsaran: string;
         "sea devil": string;
@@ -1762,6 +1785,7 @@ export declare const PF2ECONFIG: {
         psychopomp: string;
         qlippoth: string;
         rakshasa: string;
+        reflection: string;
         sahkil: string;
         samsaran: string;
         "sea devil": string;
@@ -1932,22 +1956,22 @@ export declare const PF2ECONFIG: {
         "range-increment-300": string;
         "range-increment-310": string;
         "range-increment-320": string;
-        abysium: string;
         adamantine: string;
-        coldIron: string;
         darkwood: string;
+        mithral: string;
+        orichalcum: string;
+        silver: string;
+        warpglass: string;
+        abysium: string;
+        coldIron: string;
         djezet: string;
         dragonhide: string;
         "grisantian-pelt": string;
         inubrix: string;
-        mithral: string;
         noqual: string;
-        orichalcum: string;
         peachwood: string;
         siccatite: string;
-        silver: string;
         sovereignSteel: string;
-        warpglass: string;
         alchemical: string;
         agile: string;
         artifact: string;
@@ -2144,8 +2168,8 @@ export declare const PF2ECONFIG: {
         tiefling: string;
         undine: string;
         chaotic: string;
-        evil: string;
         lawful: string;
+        evil: string;
     };
     hazardTraits: {
         alchemical: string;
@@ -2197,9 +2221,9 @@ export declare const PF2ECONFIG: {
         earth: string;
         water: string;
         chaotic: string;
-        evil: string;
-        good: string;
         lawful: string;
+        good: string;
+        evil: string;
     };
     vehicleTraits: {
         artifact: string;
@@ -2246,6 +2270,7 @@ export declare const PF2ECONFIG: {
         "reach-40": string;
         "reach-50": string;
         "reach-60": string;
+        reflection: string;
         reload: string;
         "reload-0": string;
         "reload-1": string;
@@ -2296,6 +2321,7 @@ export declare const PF2ECONFIG: {
         teleportation: string;
         tengu: string;
         tethered: string;
+        thaumaturge: string;
         thrown: string;
         "thrown-10": string;
         "thrown-100": string;
@@ -2495,6 +2521,7 @@ export declare const PF2ECONFIG: {
         death: string;
         dedication: string;
         detection: string;
+        deviant: string;
         dhampir: string;
         disarm: string;
         disease: string;
@@ -2514,6 +2541,7 @@ export declare const PF2ECONFIG: {
         emotion: string;
         enchantment: string;
         environment: string;
+        esoterica: string;
         evil: string;
         evocation: string;
         exploration: string;
@@ -2633,6 +2661,7 @@ export declare const PF2ECONFIG: {
         press: string;
         primal: string;
         propulsive: string;
+        psychic: string;
         rage: string;
         ranger: string;
     };
@@ -2712,14 +2741,17 @@ export declare const PF2ECONFIG: {
     areaTypes: {
         burst: string;
         cone: string;
+        cube: string;
         emanation: string;
         line: string;
+        square: string;
     };
     areaSizes: {
         5: string;
         10: string;
         15: string;
         20: string;
+        25: string;
         30: string;
         40: string;
         45: string;
@@ -2736,8 +2768,8 @@ export declare const PF2ECONFIG: {
         1320: string;
         5280: string;
     };
-    alignments: Record<"LE" | "CE" | "LG" | "NG" | "CG" | "LN" | "N" | "CN" | "NE", string>;
-    alignmentTraits: Record<"chaotic" | "evil" | "good" | "lawful", string>;
+    alignments: Record<"LE" | "LG" | "NG" | "CG" | "LN" | "N" | "CN" | "NE" | "CE", string>;
+    alignmentTraits: Record<"chaotic" | "lawful" | "good" | "evil", string>;
     attitude: {
         hostile: string;
         unfriendly: string;
@@ -2793,7 +2825,7 @@ export declare const PF2ECONFIG: {
         9: string;
         10: string;
     };
-    featTypes: Record<"ancestry" | "ancestryfeature" | "class" | "classfeature" | "skill" | "general" | "archetype" | "bonus" | "pfsboon" | "deityboon" | "curse", string>;
+    featTypes: Record<"ancestry" | "class" | "curse" | "ancestryfeature" | "classfeature" | "skill" | "general" | "archetype" | "bonus" | "pfsboon" | "deityboon", string>;
     actionTypes: {
         action: string;
         reaction: string;
@@ -2819,7 +2851,7 @@ export declare const PF2ECONFIG: {
         P1W: string;
     };
     proficiencyLevels: readonly ["PF2E.ProficiencyLevel0", "PF2E.ProficiencyLevel1", "PF2E.ProficiencyLevel2", "PF2E.ProficiencyLevel3", "PF2E.ProficiencyLevel4"];
-    actorSizes: Record<"tiny" | "sm" | "med" | "lg" | "huge" | "grg", string>;
+    actorSizes: Record<"med" | "tiny" | "sm" | "lg" | "huge" | "grg", string>;
     actorTypes: Record<ActorType, string>;
     speedTypes: {
         swim: string;
@@ -2904,7 +2936,7 @@ export declare const PF2ECONFIG: {
         spells: string;
         swords: string;
     };
-    immunityTypes: Record<"hidden" | "force" | "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "ghostTouch" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | "alignment" | "coldiron" | "energy" | "physical" | "precision" | "salt" | "salt-water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "critical-hits" | "emotion" | "abjuration" | "conjuration" | "divination" | "enchantment" | "evocation" | "illusion" | "necromancy" | "transmutation" | "healing" | "magic" | "curse" | "blinded" | "broken" | "clumsy" | "concealed" | "confused" | "controlled" | "dazzled" | "deafened" | "doomed" | "drained" | "dying" | "encumbered" | "enfeebled" | "fascinated" | "fatigued" | "flat-footed" | "fleeing" | "friendly" | "frightened" | "grabbed" | "helpful" | "hostile" | "immobilized" | "indifferent" | "invisible" | "observed" | "paralyzed" | "petrified" | "prone" | "quickened" | "restrained" | "sickened" | "slowed" | "stunned" | "stupefied" | "unconscious" | "undetected" | "unfriendly" | "unnoticed" | "wounded" | "auditory" | "confusion" | "detection" | "death-effects" | "disease" | "fear-effects" | "inhaled" | "nonmagical-attacks" | "object-immunities" | "olfactory" | "polymorph" | "possession" | "scrying" | "sleep" | "spellDeflection" | "swarm-attacks" | "swarm-mind" | "trip" | "visual", string>;
+    immunityTypes: Record<"hidden" | "force" | "abjuration" | "conjuration" | "divination" | "enchantment" | "evocation" | "illusion" | "necromancy" | "transmutation" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "positive" | "negative" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "chaotic" | "lawful" | "good" | "evil" | "mental" | "poison" | "untyped" | "adamantine" | "alignment" | "coldiron" | "darkwood" | "energy" | "ghostTouch" | "mithral" | "orichalcum" | "physical" | "precision" | "salt" | "salt-water" | "silver" | "warpglass" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "critical-hits" | "object-immunities" | "blinded" | "broken" | "clumsy" | "concealed" | "confused" | "controlled" | "dazzled" | "deafened" | "doomed" | "drained" | "dying" | "encumbered" | "enfeebled" | "fascinated" | "fatigued" | "flat-footed" | "fleeing" | "friendly" | "frightened" | "grabbed" | "helpful" | "hostile" | "immobilized" | "indifferent" | "invisible" | "observed" | "paralyzed" | "petrified" | "prone" | "quickened" | "restrained" | "sickened" | "slowed" | "stunned" | "stupefied" | "unconscious" | "undetected" | "unfriendly" | "unnoticed" | "wounded" | "auditory" | "confusion" | "curse" | "detection" | "death-effects" | "disease" | "emotion" | "fear-effects" | "healing" | "inhaled" | "magic" | "nonmagical-attacks" | "olfactory" | "polymorph" | "possession" | "scrying" | "sleep" | "spellDeflection" | "swarm-attacks" | "swarm-mind" | "trip" | "visual", string>;
     languages: {
         common: string;
         draconic: string;
@@ -3037,6 +3069,8 @@ export declare const PF2ECONFIG: {
     runes: {
         weapon: {
             property: {
+                ghostTouch: import("@item/runes").WeaponPropertyRuneData;
+                vorpal: import("@item/runes").WeaponPropertyRuneData;
                 anarchic: import("@item/runes").WeaponPropertyRuneData;
                 ancestralEchoing: import("@item/runes").WeaponPropertyRuneData;
                 anchoring: import("@item/runes").WeaponPropertyRuneData;
@@ -3057,7 +3091,6 @@ export declare const PF2ECONFIG: {
                 fearsome: import("@item/runes").WeaponPropertyRuneData;
                 flaming: import("@item/runes").WeaponPropertyRuneData;
                 frost: import("@item/runes").WeaponPropertyRuneData;
-                ghostTouch: import("@item/runes").WeaponPropertyRuneData;
                 greaterAnchoring: import("@item/runes").WeaponPropertyRuneData;
                 greaterBloodbane: import("@item/runes").WeaponPropertyRuneData;
                 greaterBrilliant: import("@item/runes").WeaponPropertyRuneData;
@@ -3090,7 +3123,6 @@ export declare const PF2ECONFIG: {
                 spellStoring: import("@item/runes").WeaponPropertyRuneData;
                 thundering: import("@item/runes").WeaponPropertyRuneData;
                 unholy: import("@item/runes").WeaponPropertyRuneData;
-                vorpal: import("@item/runes").WeaponPropertyRuneData;
                 wounding: import("@item/runes").WeaponPropertyRuneData;
             };
         };

@@ -47,8 +47,8 @@ import { CheckPF2e } from "@system/rolls";
 import type { HomebrewSettingsKey, HomebrewTag } from "@system/settings/homebrew";
 import { TextEditorPF2e } from "@system/text-editor";
 import { sluggify } from "@util";
-import { CombatantPF2e, EncounterPF2e } from "./module/encounter";
-import { ConditionManager } from "./module/system/conditions";
+import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
+import { ConditionManager } from "@system/conditions";
 
 declare global {
     interface Game {
