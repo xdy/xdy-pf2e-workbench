@@ -1,3 +1,10 @@
+## [3.27.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.27.0...v3.27.1) (2022-07-16)
+
+
+### Bug Fixes
+
+* Clean up default value for the mystification setting to 'replace rarities greater than common with' ([685b29d](https://github.com/xdy/xdy-pf2e-workbench/commit/685b29d474eada7239f8aabb71853f2764f869ea))
+
 # [3.27.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.26.0...v3.27.0) (2022-07-16)
 
 
