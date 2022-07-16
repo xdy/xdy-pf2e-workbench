@@ -311,8 +311,7 @@
       },
       "npcMystifierUseRaritiesReplacement": {
         "hint": "Enter word to replace rarities greater than Common with (e.g. 'Unusual') in this text field. If empty, do not change the displayed rarity.",
-        "name": "Replace rarities rarer than Common",
-        "unusal": "Unusual"
+        "name": "Replace rarities rarer than Common"
       },
       "npcMystifierKeepNumberAtEndOfName": {
         "hint": "Check to keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs.",

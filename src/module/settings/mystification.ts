@@ -42,7 +42,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 name: `${MODULENAME}.SETTINGS.npcMystifierUseRaritiesReplacement.name`,
                 hint: `${MODULENAME}.SETTINGS.npcMystifierUseRaritiesReplacement.hint`,
                 scope: "world",
-                default: `${MODULENAME}.SETTINGS.npcMystifierUseRaritiesReplacement.unusual`,
+                default: "",
                 type: String,
             },
             npcMystifierUseEliteWeak: {
