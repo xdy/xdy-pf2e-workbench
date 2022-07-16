@@ -306,11 +306,13 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     ) {
         Hooks.on("pf2e.startTurn", async (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
             if (game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")) {
-                autoReduceStunned(combatant).then((reduction) =>
-                    actionsReminder(combatant, reduction).then(() =>
-                        console.log("Workbench actionsReminderAllow complete")
-                    )
-                );
+                autoReduceStunned(combatant).then((reduction) => {
+                    if (game.settings.get(MODULENAME, "actionsReminderAllow")) {
+                        return actionsReminder(combatant, reduction).then(() =>
+                            console.log("Workbench actionsReminderAllow complete")
+                        );
+                    }
+                });
             } else if (game.settings.get(MODULENAME, "actionsReminderAllow")) {
                 actionsReminder(combatant).then(() => console.log("Workbench actionsReminderAllow complete"));
             }
