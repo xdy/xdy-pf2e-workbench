@@ -1,3 +1,10 @@
+# [3.27.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.26.0...v3.27.0) (2022-07-16)
+
+
+### Features
+
+* Assorted mystification changes ([94d7a4b](https://github.com/xdy/xdy-pf2e-workbench/commit/94d7a4bfbbcefcc938e8f75bf1accdd403fcb4ef))
+
 # [3.26.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.25.1...v3.26.0) (2022-07-15)
 
 
