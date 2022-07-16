@@ -1,3 +1,10 @@
+## [3.27.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.27.1...v3.27.2) (2022-07-16)
+
+
+### Bug Fixes
+
+* Respect setting for whether action reminder message should be sent after stunned has been reduced. ([4c171dd](https://github.com/xdy/xdy-pf2e-workbench/commit/4c171ddebca4699b4c9f9f3ff4eb9266d1c22b42))
+
 ## [3.27.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.27.0...v3.27.1) (2022-07-16)
 
 
