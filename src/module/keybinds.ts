@@ -92,9 +92,10 @@ export function registerWorkbenchKeybindings() {
         editable: [],
         onDown: async () => {
             if (game.user?.isGM) {
-                await moveSelectedAheadOfCurrent(
-                    <CombatantPF2e>game?.combat?.getCombatantByToken(<string>canvas?.tokens?.controlled[0].id)
+                const combatantByToken: any = game?.combat?.getCombatantByToken(
+                    <string>canvas?.tokens?.controlled[0].id
                 );
+                await moveSelectedAheadOfCurrent(combatantByToken);
             }
             return true;
         },

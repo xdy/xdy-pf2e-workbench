@@ -340,9 +340,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
             const hp = actor.data.data.attributes.hp?.value || 0;
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
-                moveOnZeroHP(actor, deepClone(update), game.combat, hp).then(() =>
-                    console.log("Workbench moveOnZeroHP complete")
-                );
+                moveOnZeroHP(actor, deepClone(update), hp).then(() => console.log("Workbench moveOnZeroHP complete"));
             }
 
             if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {

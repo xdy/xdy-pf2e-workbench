@@ -2,7 +2,7 @@
 /// <reference types="tooltipster" />
 import { EncounterPF2e } from "@module/encounter";
 import Sortable from "sortablejs";
-export declare class EncounterTrackerPF2e extends CombatTracker<EncounterPF2e, CombatTrackerOptions> {
+export declare class EncounterTrackerPF2e extends CombatTracker<EncounterPF2e> {
     sortable: Sortable;
     /** Make the combatants sortable */
     activateListeners($html: JQuery): void;
