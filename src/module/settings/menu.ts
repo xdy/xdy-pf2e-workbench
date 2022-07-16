@@ -73,6 +73,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
                 isSelect: !!setting.choices,
                 isCheckbox: setting.type === Boolean,
                 isText: setting.type === String,
+                isNumber: setting.type === Number,
             };
         });
         return mergeObject(super.getData(), {

@@ -76,6 +76,15 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
+            heroPointHandlerDefaultTimeoutMinutes: {
+                name: `${MODULENAME}.SETTINGS.heroPointHandlerDefaultTimeoutMinutes.name`,
+                hint: `${MODULENAME}.SETTINGS.heroPointHandlerDefaultTimeoutMinutes.hint`,
+                scope: "world",
+                config: true,
+                default: 60,
+                type: Number,
+                onChange: () => debouncedReload(),
+            },
         };
     }
 }
