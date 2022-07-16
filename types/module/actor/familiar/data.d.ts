@@ -1,0 +1,61 @@
+import { BaseCreatureData, BaseCreatureSource, CreatureAttributes, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, SkillAbbreviation } from "@actor/creature/data";
+import { CreatureSensePF2e } from "@actor/creature/sense";
+import { Rollable } from "@actor/data/base";
+import { StatisticModifier } from "@actor/modifiers";
+import { AbilityString } from "@actor/types";
+import type { FamiliarPF2e } from ".";
+declare type FamiliarSource = BaseCreatureSource<"familiar", FamiliarSystemSource>;
+interface FamiliarData extends Omit<FamiliarSource, "data" | "effects" | "flags" | "items" | "token" | "type">, BaseCreatureData<FamiliarPF2e, "familiar", FamiliarSystemData, FamiliarSource> {
+}
+interface FamiliarSystemSource extends Pick<CreatureSystemSource, "schema"> {
+    details: {
+        creature: {
+            value: string;
+        };
+    };
+    attributes: {
+        hp: {
+            value: number;
+        };
+    };
+    master: {
+        id: string | null;
+        ability: AbilityString | null;
+    };
+}
+/** The raw information contained within the actor data object for familiar actors. */
+interface FamiliarSystemData extends Omit<FamiliarSystemSource, "toggles" | "traits">, CreatureSystemData {
+    details: CreatureSystemData["details"] & {
+        creature: {
+            value: string;
+        };
+    };
+    actions?: undefined;
+    attack: StatisticModifier & Rollable;
+    attributes: FamiliarAttributes;
+    skills: FamiliarSkills;
+    master: {
+        id: string | null;
+        ability: AbilityString | null;
+    };
+    traits: FamiliarTraitsData;
+}
+interface FamiliarAttributes extends CreatureAttributes {
+    ac: {
+        value: number;
+        breakdown: string;
+        check?: number;
+    };
+    perception: FamiliarPerception;
+}
+declare type FamiliarPerception = {
+    value: number;
+} & StatisticModifier & Rollable;
+declare type FamiliarSkill = StatisticModifier & Rollable & {
+    value: number;
+};
+declare type FamiliarSkills = Record<SkillAbbreviation, FamiliarSkill>;
+interface FamiliarTraitsData extends CreatureTraitsData {
+    senses: CreatureSensePF2e[];
+}
+export { FamiliarData, FamiliarSource, FamiliarSystemData, FamiliarSystemSource };

@@ -1,5 +1,3 @@
-//Copied from github.com/foundryvtt/pf2e/src/global.d.ts
-
 import { ActorPF2e } from "@actor/base";
 import { AutomaticBonusProgression } from "@actor/character/automatic-bonus-progression";
 import {
@@ -49,8 +47,8 @@ import { CheckPF2e } from "@system/rolls";
 import type { HomebrewSettingsKey, HomebrewTag } from "@system/settings/homebrew";
 import { TextEditorPF2e } from "@system/text-editor";
 import { sluggify } from "@util";
-import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
-import { ConditionManager } from "@module/system/conditions";
+import { CombatantPF2e, EncounterPF2e } from "./module/encounter";
+import { ConditionManager } from "./module/system/conditions";
 
 declare global {
     interface Game {
@@ -120,7 +118,7 @@ declare global {
             MacroPF2e,
             ScenePF2e,
             UserPF2e
-            >;
+        >;
 
         // eslint-disable-next-line no-var
         var ui: FoundryUI<ActorPF2e, ItemPF2e, ChatLogPF2e, CompendiumDirectoryPF2e>;
@@ -224,4 +222,4 @@ type ConfiguredConfig = Config<
     TokenDocumentPF2e,
     ScenePF2e,
     UserPF2e
-    >;
+>;
