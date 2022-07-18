@@ -2,6 +2,7 @@ import { CombatantPF2e } from "@module/encounter";
 import { shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e, CharacterPF2e } from "@actor";
+import { ItemPF2e } from "@item";
 
 export async function reduceFrightened(combatant: CombatantPF2e) {
     if (combatant && combatant.actor && shouldIHandleThis(combatant.isOwner ? game.user?.id : null)) {
@@ -191,4 +192,107 @@ function getMinions(actor: ActorPF2e): ActorPF2e[] {
         }
     }
     return actors;
+}
+
+export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
+    const actor = <ActorPF2e>item.parent;
+    const bounceBack = actor.data.items.find((feat) => feat.slug === "bounce-back"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1441
+    const bounceBackUsed: any = actor.data.items.find((effect) => effect.slug === "bounce-back-used") ?? false;
+
+    const numbToDeath = actor.data.items.find((feat) => feat.slug === "numb-to-death"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1182
+    const numbToDeathUsed: any = actor.data.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
+    if (
+        item.slug === "dying" &&
+        (await game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) &&
+        shouldIHandleThis(item.isOwner ? game.user?.id : null)
+    ) {
+        if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
+            const effect: any = {
+                type: "effect",
+                name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
+                img: "icons/magic/death/hand-dirt-undead-zombie.webp",
+                data: {
+                    slug: "numb-to-death-used",
+                    tokenIcon: {
+                        show: false,
+                    },
+                    duration: {
+                        value: 24,
+                        unit: "hours",
+                        sustained: false,
+                        expiry: "turn-start",
+                    },
+                },
+            };
+
+            await ChatMessage.create({
+                flavor: game.i18n.format(
+                    `${
+                        actor.token?.name ?? actor.name
+                    } has just triggered Numb To Death and can now heal ${TextEditor.enrichHTML(
+                        `[[/r ${actor.level}]] points of damage.`
+                    )}.`
+                ),
+                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                whisper:
+                    game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
+                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                        : [],
+            });
+
+            await actor.createEmbeddedDocuments("Item", [effect]);
+        } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
+            const effect: any = {
+                type: "effect",
+                name: game.i18n.localize(`${MODULENAME}.effects.bounceBackUsed`),
+                img: "icons/magic/life/ankh-gold-blue.webp",
+                data: {
+                    slug: "bounce-back-used",
+                    tokenIcon: {
+                        show: false,
+                    },
+                    duration: {
+                        value: 24,
+                        unit: "hours",
+                        sustained: false,
+                        expiry: "turn-start",
+                    },
+                },
+            };
+
+            await actor.createEmbeddedDocuments("Item", [effect]);
+        } else {
+            await item.parent?.increaseCondition("wounded");
+        }
+    }
+}
+
+export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
+    const actor = <ActorPF2e>item.parent;
+    if (
+        item.slug === "dying" &&
+        (await game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) &&
+        shouldIHandleThis(item.isOwner ? game.user?.id : null) &&
+        actor.data.data.attributes?.hp?.value === 0 &&
+        !actor.hasCondition("unconscious")
+    ) {
+        await item.parent?.toggleCondition("unconscious");
+    }
+}
+
+export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
+    const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
+    if (physicalTypes.includes(item.type) && item.actor && shouldIHandleThis(item.isOwner ? game.user?.id : null)) {
+        //Sleep 0.25s to handle stupid race condition
+        await new Promise((resolve) => setTimeout(resolve, 250));
+        if (item.actor.inventory.bulk.isEncumbered) {
+            if (!item.actor.hasCondition("encumbered")) {
+                await item.actor.toggleCondition("encumbered");
+            }
+        } else {
+            if (item.actor.hasCondition("encumbered")) {
+                await item.actor.toggleCondition("encumbered");
+            }
+        }
+    }
 }

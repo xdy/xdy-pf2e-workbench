@@ -20,8 +20,8 @@ export function registerWorkbenchSettings() {
     WorkbenchMystificationSettings.registerSettingsAndCreateMenu("fas fa-eye-slash");
     WorkbenchRemindersSettings.registerSettingsAndCreateMenu("fas fa-bell");
     WorkbenchQolWorldSettings.registerSettingsAndCreateMenu("fas fa-smile");
-    WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fas fa-robot");
     WorkbenchSfxWorldSettings.registerSettingsAndCreateMenu("fas fa-hat-wizard");
+    WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fas fa-robot");
     WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fas fa-magic", false);
 
     game.settings.register(MODULENAME, "maxHeroPoints", {

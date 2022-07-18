@@ -21,7 +21,9 @@ import { TokenDocumentPF2e } from "@scene";
 import { playAnimationAndSound } from "./feature/sfxHandler";
 import { toggleMenuSettings, toggleSettings } from "./feature/settingsHandler";
 import {
-    autoRemoveUnconsciousAtGreaterThanZeroHP,
+    applyEncumbranceBasedOnBulk,
+    autoRemoveUnconsciousAtGreaterThanZeroHP, giveUnconsciousIfDyingRemovedAt0HP,
+    giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
     removeDyingOnZeroHP,
@@ -51,23 +53,6 @@ import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
-async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
-    const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
-    if (physicalTypes.includes(item.type) && item.actor && shouldIHandleThis(item.isOwner ? game.user?.id : null)) {
-        //Sleep 0.25s to handle stupid race condition
-        await new Promise((resolve) => setTimeout(resolve, 250));
-        if (item.actor.inventory.bulk.isEncumbered) {
-            if (!item.actor.hasCondition("encumbered")) {
-                await item.actor.toggleCondition("encumbered");
-            }
-        } else {
-            if (item.actor.hasCondition("encumbered")) {
-                await item.actor.toggleCondition("encumbered");
-            }
-        }
-    }
-}
-
 // Initialize module
 Hooks.once("init", async (_actor: ActorPF2e) => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
@@ -78,8 +63,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     //Handlebars helpers
     Handlebars.registerHelper("ifeq", function (v1, v2, options) {
-        if (v1 === v2) return options.fn(this);
-        else return options.inverse(this);
+        return v1 === v2 ? options.fn(this) : options.inverse(this);
     });
 
     //Hooks that always run
@@ -94,11 +78,13 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     //Hooks that only run if a setting that needs it has been enabled
     if (
         game.settings.get(MODULENAME, "autoRollDamageAllow") ||
+        game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
         game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
         game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
         game.settings.get(MODULENAME, "automatedAnimationOn") ||
         game.settings.get(MODULENAME, "reminderBreathWeapon") ||
         game.settings.get(MODULENAME, "reminderTargeting") ||
+        game.settings.get(MODULENAME, "reminderIWR") ||
         game.settings.get(MODULENAME, "reminderCannotAttack")
     ) {
         Hooks.on("createChatMessage", (message: ChatMessagePF2e) => {
@@ -138,7 +124,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     if (
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
-        game.settings.get(MODULENAME, "autoExpandDamageRolls") === "collapsedAll" ||
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
         game.settings.get(MODULENAME, "applyPersistentHealing") ||
@@ -193,8 +178,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
 
     if (
-        game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
         game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
+        game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
         game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")
     ) {
         Hooks.on("deleteItem", async (item: ItemPF2e, _options: {}) => {
@@ -203,91 +188,11 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
-                const actor = <ActorPF2e>item.parent;
-                const bounceBack = actor.data.items.find((feat) => feat.slug === "bounce-back"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1441
-                const bounceBackUsed: any =
-                    actor.data.items.find((effect) => effect.slug === "bounce-back-used") ?? false;
-
-                const numbToDeath = actor.data.items.find((feat) => feat.slug === "numb-to-death"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1182
-                const numbToDeathUsed: any =
-                    actor.data.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
-                if (
-                    item.slug === "dying" &&
-                    (await game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) &&
-                    shouldIHandleThis(item.isOwner ? game.user?.id : null)
-                ) {
-                    if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
-                        const effect: any = {
-                            type: "effect",
-                            name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
-                            img: "icons/magic/death/hand-dirt-undead-zombie.webp",
-                            data: {
-                                slug: "numb-to-death-used",
-                                tokenIcon: {
-                                    show: false,
-                                },
-                                duration: {
-                                    value: 24,
-                                    unit: "hours",
-                                    sustained: false,
-                                    expiry: "turn-start",
-                                },
-                            },
-                        };
-
-                        await ChatMessage.create({
-                            flavor: game.i18n.format(
-                                `${
-                                    actor.token?.name ?? actor.name
-                                } has just triggered Numb To Death and can now heal ${TextEditor.enrichHTML(
-                                    `[[/r ${actor.level}]] points of damage.`
-                                )}.`
-                            ),
-                            speaker: ChatMessage.getSpeaker({ actor: actor }),
-                            whisper:
-                                game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
-                                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                                    : [],
-                        });
-
-                        await actor.createEmbeddedDocuments("Item", [effect]);
-                    } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
-                        const effect: any = {
-                            type: "effect",
-                            name: game.i18n.localize(`${MODULENAME}.effects.bounceBackUsed`),
-                            img: "icons/magic/life/ankh-gold-blue.webp",
-                            data: {
-                                slug: "bounce-back-used",
-                                tokenIcon: {
-                                    show: false,
-                                },
-                                duration: {
-                                    value: 24,
-                                    unit: "hours",
-                                    sustained: false,
-                                    expiry: "turn-start",
-                                },
-                            },
-                        };
-
-                        await actor.createEmbeddedDocuments("Item", [effect]);
-                    } else {
-                        await item.parent?.increaseCondition("wounded");
-                    }
-                }
+                await giveWoundedWhenDyingRemoved(item);
             }
 
             if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
-                const actor = <ActorPF2e>item.parent;
-                if (
-                    item.slug === "dying" &&
-                    (await game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) &&
-                    shouldIHandleThis(item.isOwner ? game.user?.id : null) &&
-                    actor.data.data.attributes?.hp?.value === 0 &&
-                    !actor.hasCondition("unconscious")
-                ) {
-                    await item.parent?.toggleCondition("unconscious");
-                }
+                await giveUnconsciousIfDyingRemovedAt0HP(item);
             }
         });
     }
