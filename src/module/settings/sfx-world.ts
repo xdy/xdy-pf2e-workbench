@@ -6,7 +6,9 @@ export class WorkbenchSfxWorldSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "sfxWorldSettings";
 
     public static override get settings(): Record<string, SettingRegistration> {
-        const default_jb2a_path = game.modules.get("jb2a_patreon")?.active ? "modules/jb2a_patreon/" : "modules/JB2A_DnD5e/";
+        const default_jb2a_path = game.modules.get("jb2a_patreon")?.active
+            ? "modules/jb2a_patreon/"
+            : "modules/JB2A_DnD5e/";
         return {
             automatedAnimationOn: {
                 name: `${MODULENAME}.SETTINGS.automatedAnimationOn.name`,
