@@ -4,17 +4,7 @@ import { PartialSettingsData, SettingsMenuPF2eWorkbench } from "../../settings/m
 export function toggleSettings(html: JQuery) {
     const settings: [string, any][] = Array.from(game.settings.settings.entries());
     settings.forEach((setting: [string, any]) => {
-        const settingName = setting[0];
-
-        if (
-            settingName !== `${MODULENAME}.automatedAnimationOn` &&
-            setting[0].startsWith(`${MODULENAME}.automatedAnimation`)
-        ) {
-            const valueFunction = !game.settings.get(MODULENAME, "automatedAnimationOn");
-
-            html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-            html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-        }
+        //None right now
     });
 }
 
@@ -23,6 +13,14 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
         const settingElement: PartialSettingsData = settings["settings"][key];
         if (settingElement && settingElement["key"]) {
             const settingName = settingElement["key"];
+
+            if (settingName !== `automatedAnimationOn` && settingName.startsWith(`automatedAnimation`)) {
+                const valueFunction = !game.settings.get(MODULENAME, "automatedAnimationOn");
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+            }
+
             //Disable all dependent actionsReminder settings
             if (settingName !== `actionsReminderAllow` && settingName.startsWith(`actionsReminder`)) {
                 const applyToggle = !(
@@ -32,6 +30,14 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                         : game.settings.get(MODULENAME, "actionsReminderAllow") === "gm")
                 );
                 html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
+            }
+
+            //Disable all dependent npcMystifier settings
+            if (settingName !== `npcMystifier` && settingName.startsWith(`npcMystifier`)) {
+                const valueFunction = !game.settings.get(MODULENAME, "npcMystifier");
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
             }
 
             //Disable all dependent persistentDamage settings

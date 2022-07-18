@@ -16,10 +16,12 @@
                 {{else if setting.isCheckbox}}
                     <input type="checkbox" name="{{setting.key}}" {{checked setting.value}} />
                 {{else if setting.isNumber}}
-                    <input type="number" name="{{setting.name}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
+                    <input type="number" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
                 {{else if setting.isText}}
-                    <!--TODO Handle filepicker again, not relevant until the automated animation-related settings are moved. -->
-                    <input type="text" name="{{setting.name}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
+                    <input type="text" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
+                {{else if setting.isFilepicker}}
+                    {{filePicker target=setting.name type="imagevideo"}}
+                    <input class="image" type="text" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
                 {{/if}}
             </div>
             <p class="notes">{{localize setting.hint}}</p>

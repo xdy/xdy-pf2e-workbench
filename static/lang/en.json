@@ -50,9 +50,14 @@
         "name": "Reminders Settings",
         "label": "Manage Reminders Settings"
       },
+      "sfxWorldSettings": {
+        "hint": "Enable and configure special effect settings for GMs (needs automated animation module, default values are from the JB2A and SoundFX modules)",
+        "name": "World Special Effect Settings",
+        "label": "Manage World Special Effect Settings"
+      },
       "abpVariantAllowItemBonuses": {
-        "hint": "World setting to not disable item bonuses when using ABP.",
-        "name": "(World) Do not disable item bonuses when using ABP."
+        "hint": "Do not disable item bonuses when using ABP.",
+        "name": "Do not disable item bonuses when using ABP."
       },
       "addGmRKButtonToNpc": {
         "hint": "Check to add Recall Knowlege button to NPCs. Currently only for the skill, lores will have to be handled manually.",
@@ -61,47 +66,47 @@
         "hideSkill": "Hide skill name on Recall Knowledge message."
       },
       "automatedAnimationOn": {
-        "hint": "World setting for using the module automated-animations to play animation and/or sound on a strike miss. Save settings to show/hide additional options.",
-        "name": "(World) use the module automated-animations to play animation and/or sound on a strike miss."
+        "hint": "Use the module automated-animations to play animation and/or sound on a strike miss. Save settings to show/hide additional options.",
+        "name": "Use the module automated-animations to play animation and/or sound on a strike miss."
       },
       "automatedAnimationOnFailAnimation": {
-        "hint": "World setting for animation to play on strike miss, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "(World) animation to play on strike miss."
+        "hint": "Animation to play on strike miss, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
+        "name": "Animation to play on strike miss."
       },
       "automatedAnimationOnFailSound": {
-        "hint": "World setting for sound to play on strike miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "(World) sound to play on strike miss."
+        "hint": "Sound to play on strike miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
+        "name": "Sound to play on strike miss."
       },
       "automatedAnimationOnCritFailAnimation": {
-        "hint": "World setting for animation to play on strike critical miss, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "(World) animation to play on strike critical miss."
+        "hint": "Animation to play on strike critical miss, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
+        "name": "Animation to play on strike critical miss."
       },
       "automatedAnimationOnCritFailSound": {
-        "hint": "World setting for sound to play on strike critical miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "(World) sound to play on strike critical miss."
+        "hint": "Sound to play on strike critical miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
+        "name": "Sound to play on strike critical miss."
       },
       "automatedAnimationOnCritSuccessAnimation": {
-        "hint": "World setting for animation to play on strike critical success, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "(World) animation to play on strike critical success."
+        "hint": "Animation to play on strike critical success, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
+        "name": "Animation to play on strike critical success."
       },
       "automatedAnimationOnCritSuccessSound": {
-        "hint": "World setting for sound to play on strike critical success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "(World) sound to play on strike critical success."
+        "hint": "Sound to play on strike critical success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
+        "name": "Sound to play on strike critical success."
       },
       "automatedAnimationOnSuccessAnimation": {
-        "hint": "World setting for animation to play on strike success, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "(World) animation to play on strike success."
+        "hint": "Animation to play on strike success, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
+        "name": "Animation to play on strike success."
       },
       "automatedAnimationOnSuccessSound": {
-        "hint": "World setting for sound to play on strike success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "(World) sound to play on strike success."
+        "hint": "Sound to play on strike success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
+        "name": "Sound to play on strike success."
       },
       "automatedAnimationMissOffTarget": {
-        "hint": "Client setting for making miss and critical miss animations appear at a random spot near the missed target token.",
+        "hint": "Make miss and critical miss animations appear at a random spot near the missed target token.",
         "name": "Make miss animations appear off-target."
       },
       "applyPersistentAllow": {
-        "hint": "Select who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options.",
+        "hint": "Select who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options on the client automation setting menu.",
         "name": "Who is allowed to set the option to automatically apply persistent damage/healing.",
         "none": "None",
         "all": "All",
@@ -109,7 +114,7 @@
         "players": "Players"
       },
       "applyPersistentDamage": {
-        "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module. Save settings to show/hide additional options.",
+        "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
         "name": "Automatically apply persistent damage rolled by the Persistent Damage module.",
         "wasDamaged": "{damage} damage was automatically applied"
       },
@@ -147,7 +152,7 @@
         "expandedNew": "New damage rolls expand (also checks last three messages on refresh)."
       },
       "autoRollDamageAllow": {
-        "hint": "Select who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options.",
+        "hint": "Select who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options on the client automation setting menu.",
         "name": "Who is allowed to set the option to Autoroll damage on a hit.",
         "none": "None",
         "all": "All",

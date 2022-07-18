@@ -70,10 +70,11 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
                 ...setting,
                 key,
                 value,
-                isSelect: !!setting.choices,
                 isCheckbox: setting.type === Boolean,
-                isText: setting.type === String,
+                isFilepicker: setting.type === String && setting.filePicker,
                 isNumber: setting.type === Number,
+                isSelect: !!setting.choices,
+                isText: setting.type === String && !setting.filePicker,
             };
         });
         return mergeObject(super.getData(), {
