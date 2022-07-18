@@ -1,3 +1,11 @@
+# [3.29.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.28.0...v3.29.0) (2022-07-18)
+
+
+### Features
+
+* Move automated animation settings to a submenu called World Special Effect Settings. For new worlds, sets default path to the jb2a animations based on whether the free jb2a module or the patreon one is installed. Fixes to hiding/showing subsettings. ([3b368b2](https://github.com/xdy/xdy-pf2e-workbench/commit/3b368b2ef5b90be1174a1a6a03595f44478e1362))
+* Move automated animation settings to a submenu called World Special Effect Settings. For new worlds, sets default path to the jb2a animations based on whether the free jb2a module or the patreon one is installed. Fixes to hiding/showing subsettings. ([8658dc8](https://github.com/xdy/xdy-pf2e-workbench/commit/8658dc81c8c28989ee6fb14048e042fda90c3748))
+
 # [3.28.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.27.2...v3.28.0) (2022-07-16)
 
 
