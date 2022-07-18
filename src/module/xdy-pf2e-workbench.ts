@@ -22,7 +22,8 @@ import { playAnimationAndSound } from "./feature/sfxHandler";
 import { toggleMenuSettings, toggleSettings } from "./feature/settingsHandler";
 import {
     applyEncumbranceBasedOnBulk,
-    autoRemoveUnconsciousAtGreaterThanZeroHP, giveUnconsciousIfDyingRemovedAt0HP,
+    autoRemoveUnconsciousAtGreaterThanZeroHP,
+    giveUnconsciousIfDyingRemovedAt0HP,
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
