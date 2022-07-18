@@ -1,3 +1,11 @@
+## [3.29.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.29.0...v3.29.1) (2022-07-18)
+
+
+### Bug Fixes
+
+* Fix some combinations of settings not working. Moved sfx above automation settings. ([4013b82](https://github.com/xdy/xdy-pf2e-workbench/commit/4013b82638c10cd6169b02354870aa5e562ff5bc))
+* Fix some combinations of settings not working. Moved sfx above automation settings. ([03f299a](https://github.com/xdy/xdy-pf2e-workbench/commit/03f299add76e092a0b3041eacce0f5b19bfe0936))
+
 # [3.29.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.28.0...v3.29.0) (2022-07-18)
 
 
