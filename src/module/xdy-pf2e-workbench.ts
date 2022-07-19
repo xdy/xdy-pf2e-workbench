@@ -36,7 +36,7 @@ import {
     maxHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
-import { nth, shouldIHandleThis } from "./utils";
+import { nth } from "./utils";
 import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
@@ -51,6 +51,8 @@ import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
 import { setupNpcRoller } from "./feature/npc-roller/NpcRoller";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu";
+import { ChatMessageDataPF2e } from "@module/chat-message/data";
+import { UserPF2e } from "@module/user";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -77,6 +79,101 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     });
 
     //Hooks that only run if a setting that needs it has been enabled
+
+    if (game.settings.get(MODULENAME, "castPrivateSpell")) {
+        Hooks.on(
+            "preCreateChatMessage",
+            async (message: ChatMessagePF2e, data: ChatMessageDataPF2e, options, user: UserPF2e) => {
+                if (
+                    game.settings.get(MODULENAME, "castPrivateSpell") &&
+                    message.data.flags.pf2e?.casting?.id &&
+                    (!message.data.whisper || message.data.whisper.length === 0) &&
+                    game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL)
+                ) {
+                    data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
+                    const gmIds = ChatMessage.getWhisperRecipients("GM")
+                        .filter((u) => u.active)
+                        ?.map((u) => u.id);
+                    data.whisper = [user.id, ...gmIds];
+                    message.data.update(data);
+
+                    if (
+                        game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessage") &&
+                        !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT)
+                    ) {
+                        const vsmf = message.data.content
+                            .match(
+                                "" +
+                                    game.i18n.localize(
+                                        `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.components`
+                                    ) +
+                                    " ([FVSM]+)"
+                            )?.[1]
+                            ?.toUpperCase();
+                        let content = `${
+                            message.token?.name ?? message.actor?.name
+                        } casts a ${vsmf} spell or cantrip. Ask your GM if you recognized it automatically.<br>`;
+                        const typeRegexp =
+                            "(" +
+                            game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.spell`) +
+                            "|" +
+                            game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.cantrip`) +
+                            ")" +
+                            " ([0-9]+)";
+                        const type = message.data.content.match(typeRegexp);
+                        if (type && type.length > 2) {
+                            let dc = 0;
+                            const level = Number.parseInt(type[2]);
+                            if (level === 1) {
+                                dc = 15;
+                            } else if (level === 2) {
+                                dc = 18;
+                            } else if (level === 3) {
+                                dc = 20;
+                            } else if (level === 4) {
+                                dc = 23;
+                            } else if (level === 5) {
+                                dc = 26;
+                            } else if (level === 6) {
+                                dc = 28;
+                            } else if (level === 7) {
+                                dc = 31;
+                            } else if (level === 8) {
+                                dc = 34;
+                            } else if (level === 9) {
+                                dc = 36;
+                            } else if (level === 10) {
+                                dc = 39;
+                            }
+                            const tradition = message.data.flags.pf2e.casting.tradition;
+                            let skill = "";
+                            if (tradition === "arcane") {
+                                skill = "arcana";
+                            } else if (tradition === "divine") {
+                                skill = "religion";
+                            } else if (tradition === "occult") {
+                                skill = "occult";
+                            } else if (tradition === "primal") {
+                                skill = "nature";
+                            }
+                            content +=
+                                ` If you can't, roll @Check[type:${skill}|dc:${dc}|traits:secret,action:recall-knowledge]` +
+                                "{Recall Knowledge} to recognize it.";
+                        } else {
+                            content += " If you can't, ask your GM for the Recall Knowledge DC.";
+                        }
+
+                        await ChatMessage.create({
+                            content: content,
+                            speaker: ChatMessage.getSpeaker({ actor: message.actor }),
+                        });
+                    }
+                    return true;
+                }
+            }
+        );
+    }
+
     if (
         game.settings.get(MODULENAME, "autoRollDamageAllow") ||
         game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
@@ -132,7 +229,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
-        Hooks.on("renderChatMessage", (message: ChatMessagePF2e, html: JQuery) => {
+        Hooks.on("renderChatMessage", async (message: ChatMessagePF2e, html: JQuery) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
                 mangleChatMessage(message, html);
             }
@@ -294,12 +391,20 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     if (
         game.settings.get(MODULENAME, "playerItemsRarityColour") ||
+        game.settings.get(MODULENAME, "castPrivateSpell") ||
         game.settings.get(MODULENAME, "addGmRKButtonToNpc") ||
         game.settings.get(MODULENAME, "quickQuantities")
     ) {
         Hooks.on("renderActorSheet", (sheet: ActorSheet<ActorPF2e, ItemPF2e>, $html: JQuery) => {
             if (game.settings.get(MODULENAME, "quickQuantities")) {
                 onQuantitiesHook(sheet, $html);
+            }
+
+            if (game.settings.get(MODULENAME, "castPrivateSpell")) {
+                $html.find(".cast-spell").each((i, e) => {
+                    const $e = $(e);
+                    $e.addClass(`xdy-pf2e-workbench-secret-spell`);
+                });
             }
 
             if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
