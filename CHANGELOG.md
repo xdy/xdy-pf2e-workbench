@@ -1,3 +1,10 @@
+## [3.30.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.30.0...v3.30.1) (2022-07-19)
+
+
+### Bug Fixes
+
+* Elite/Weak mystification setting was reversed. ([3bbc128](https://github.com/xdy/xdy-pf2e-workbench/commit/3bbc1287c941bc46a1ce3d69f04cfb8a59c11ce1))
+
 # [3.30.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.29.1...v3.30.0) (2022-07-19)
 
 
