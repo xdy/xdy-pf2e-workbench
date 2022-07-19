@@ -56,7 +56,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     }
 
     let eliteWeak: string[] = [];
-    if (!game.settings.get(MODULENAME, "npcMystifierUseEliteWeak")) {
+    if (game.settings.get(MODULENAME, "npcMystifierUseEliteWeak")) {
         eliteWeak = traitsList.filter((trait: string) => TRAITS.ELITE_WEAK.includes(trait));
     }
 
