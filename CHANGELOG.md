@@ -1,3 +1,11 @@
+# [3.30.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.29.1...v3.30.0) (2022-07-19)
+
+
+### Features
+
+* Adds option to hold CTRL while casting a spell to cast it as a whispered chat message. Separate option to output a separate public chat message with a Recall Knowledge button to recognize it (if this is enabled you can hold CTRL+SHIFT to skip this message). ([d03cacd](https://github.com/xdy/xdy-pf2e-workbench/commit/d03cacd6959f3acf89e5e4bea37aefecf12fdc2b)), closes [#342](https://github.com/xdy/xdy-pf2e-workbench/issues/342)
+* Adds option to hold CTRL while casting a spell to cast it as a whispered chat message. Separate option to output a separate public chat message with a Recall Knowledge button to recognize it (if this is enabled you can hold CTRL+SHIFT to skip this message). ([fd9e86f](https://github.com/xdy/xdy-pf2e-workbench/commit/fd9e86f4d54c43b71670fe29ea0d561f5955eea7)), closes [#342](https://github.com/xdy/xdy-pf2e-workbench/issues/342)
+
 ## [3.29.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.29.0...v3.29.1) (2022-07-18)
 
 
