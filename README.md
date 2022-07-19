@@ -44,6 +44,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to change the max number of hero points a character can have. )This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
 * Option to add a creature builder button to npc character sheets, enabling building from scratch using the suggested values from the GMG (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
 * Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc using the suggested values from the GMG (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
+* Option to hold CTRL while casting a spell to cast it as a whispered chat message. Separate option to output a separate public chat message with a Recall Knowledge button to recognize it, unless you hold CTRL+SHIFT to skip this message.
 
 
 Experimental features:
