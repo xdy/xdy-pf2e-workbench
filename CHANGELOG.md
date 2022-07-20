@@ -1,3 +1,10 @@
+## [3.30.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.30.1...v3.30.2) (2022-07-20)
+
+
+### Bug Fixes
+
+* Typo in skill for occult tradition when showing RK for private spell casting. ([b891ff1](https://github.com/xdy/xdy-pf2e-workbench/commit/b891ff1f393856156e797c9cd6b99cdf64a00684))
+
 ## [3.30.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.30.0...v3.30.1) (2022-07-19)
 
 
