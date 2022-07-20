@@ -1,3 +1,10 @@
+# [3.31.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.30.2...v3.31.0) (2022-07-20)
+
+
+### Features
+
+* Expand the feature that allows casting spells privately so that it outputs the save (if any) of the private spell on the optional public message. And, if auto-rolling damage for a non-attack spell, roll the damage privately if the spell was cast privately as the damage message includes the spell's name. ([0f830bb](https://github.com/xdy/xdy-pf2e-workbench/commit/0f830bb1b2f1c29fede54a2f4398f99f84651028))
+
 ## [3.30.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.30.1...v3.30.2) (2022-07-20)
 
 
