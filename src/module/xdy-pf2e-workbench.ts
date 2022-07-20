@@ -152,7 +152,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             } else if (tradition === "divine") {
                                 skill = "religion";
                             } else if (tradition === "occult") {
-                                skill = "occult";
+                                skill = "occultism";
                             } else if (tradition === "primal") {
                                 skill = "nature";
                             }
