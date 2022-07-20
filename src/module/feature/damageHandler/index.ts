@@ -73,7 +73,14 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             })
                         );
                     }
-
+                    //Hack to make automatic damageRoll be private if the spell is private. Ain't globals fun?
+                    const originalRollMode = game.settings.get("core", "rollMode");
+                    if (
+                        message.data.type === CONST.CHAT_MESSAGE_TYPES.WHISPER &&
+                        originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE
+                    ) {
+                        game.settings.set("core", "rollMode", CONST.DICE_ROLL_MODES.PRIVATE);
+                    }
                     //Until spell level flags are added to attack rolls it is the best I could come up with.
                     //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
                     //@ts-ignore
@@ -85,6 +92,10 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             },
                         },
                     });
+                    //Make sure to restore original roll mode
+                    if (originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) {
+                        game.settings.set("core", "rollMode", originalRollMode);
+                    }
                 } else if (rollForStrike) {
                     const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
                     const actions: any =

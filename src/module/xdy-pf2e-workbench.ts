@@ -113,37 +113,37 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         let content = `${
                             message.token?.name ?? message.actor?.name
                         } casts a ${vsmf} spell or cantrip. Ask your GM if you recognized it automatically.<br>`;
-                        const typeRegexp =
+                        const spellType = message.data.content.match(
                             "(" +
-                            game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.spell`) +
-                            "|" +
-                            game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.cantrip`) +
-                            ")" +
-                            " ([0-9]+)";
-                        const type = message.data.content.match(typeRegexp);
-                        if (type && type.length > 2) {
-                            let dc = 0;
-                            const level = Number.parseInt(type[2]);
+                                game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.spell`) +
+                                "|" +
+                                game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.cantrip`) +
+                                ")" +
+                                " ([0-9]+)"
+                        );
+                        if (spellType && spellType.length > 2) {
+                            let dcRk = 0;
+                            const level = Number.parseInt(spellType[2]);
                             if (level === 1) {
-                                dc = 15;
+                                dcRk = 15;
                             } else if (level === 2) {
-                                dc = 18;
+                                dcRk = 18;
                             } else if (level === 3) {
-                                dc = 20;
+                                dcRk = 20;
                             } else if (level === 4) {
-                                dc = 23;
+                                dcRk = 23;
                             } else if (level === 5) {
-                                dc = 26;
+                                dcRk = 26;
                             } else if (level === 6) {
-                                dc = 28;
+                                dcRk = 28;
                             } else if (level === 7) {
-                                dc = 31;
+                                dcRk = 31;
                             } else if (level === 8) {
-                                dc = 34;
+                                dcRk = 34;
                             } else if (level === 9) {
-                                dc = 36;
+                                dcRk = 36;
                             } else if (level === 10) {
-                                dc = 39;
+                                dcRk = 39;
                             }
                             const tradition = message.data.flags.pf2e.casting.tradition;
                             let skill = "";
@@ -157,10 +157,19 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 skill = "nature";
                             }
                             content +=
-                                ` If you can't, roll @Check[type:${skill}|dc:${dc}|traits:secret,action:recall-knowledge]` +
-                                "{Recall Knowledge} to recognize it.";
+                                ` If you didn't, you can spend an action on your turn to attempt to identify it: @Check[type:${skill}|dc:${dcRk}|traits:secret,action:recall-knowledge]` +
+                                "{Recall Knowledge}. ";
                         } else {
-                            content += " If you can't, ask your GM for the Recall Knowledge DC.";
+                            content +=
+                                "If you didn't, ask your GM for the Recall Knowledge DC if you wish to spend an action on your turn to attempt to identify it. ";
+                        }
+
+                        const buttons = $(data.content).find("button");
+                        const saveButtons = buttons.filter((i) => buttons[i].getAttribute("data-action") === "save");
+                        if (saveButtons.length === 1) {
+                            content += `<br>Save for the unknown spell is: @Check[type:${saveButtons.attr(
+                                "data-save"
+                            )}|dc:${saveButtons.attr("data-dc")}]`;
                         }
 
                         await ChatMessage.create({
