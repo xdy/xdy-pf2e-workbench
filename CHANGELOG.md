@@ -1,3 +1,10 @@
+## [3.31.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.31.0...v3.31.1) (2022-07-21)
+
+
+### Bug Fixes
+
+* When casting a private spell with a public message, consider rarity for Recall Knowledge DC, and show the tradition of the spell that is cast. ([8e1fed6](https://github.com/xdy/xdy-pf2e-workbench/commit/8e1fed6f7a33c8d83dfdc5f1aab107a8faeeda97))
+
 # [3.31.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.30.2...v3.31.0) (2022-07-20)
 
 
