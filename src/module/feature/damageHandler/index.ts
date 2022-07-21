@@ -87,8 +87,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     origin?.rollDamage({
                         currentTarget: {
                             closest: () => {
-                                // @ts-ignore Wtf? How to make a number into a OneToTen?
-                                return { dataset: { spellLvl: Math.abs(spellLevel) } };
+                                return { dataset: { spellLvl: spellLevel.value } };
                             },
                         },
                     });

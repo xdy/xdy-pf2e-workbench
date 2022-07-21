@@ -37,7 +37,7 @@ import {
     startTimer,
 } from "./feature/heroPointHandler";
 import { nth } from "./utils";
-import { ItemPF2e } from "@item";
+import { ItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
     actionsReminder,
@@ -110,41 +110,52 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                     " ([FVSM]+)"
                             )?.[1]
                             ?.toUpperCase();
-                        let content = `${
-                            message.token?.name ?? message.actor?.name
-                        } casts a ${vsmf} spell or cantrip. Ask your GM if you recognized it automatically.<br>`;
-                        const spellType = message.data.content.match(
-                            "(" +
-                                game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.spell`) +
-                                "|" +
-                                game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.cantrip`) +
-                                ")" +
-                                " ([0-9]+)"
-                        );
-                        if (spellType && spellType.length > 2) {
-                            let dcRk = 0;
-                            const level = Number.parseInt(spellType[2]);
+                        let content = `${message.token?.name ?? message.actor?.name} casts a ${vsmf} ${
+                            message.data.flags?.pf2e.origin?.type ?? "spell"
+                        } of the ${
+                            message.data.flags.pf2e.casting.tradition
+                        } tradition. Ask your GM if you recognized it automatically/with a reaction.<br>`;
+                        const uuid = <string>message.data.flags?.pf2e.origin?.uuid;
+                        const origin: SpellPF2e | null = await fromUuid(uuid);
+                        if (origin) {
+                            let dcRK = 0;
+                            const level = origin.data.data.level.value;
                             if (level === 1) {
-                                dcRk = 15;
+                                dcRK = 15;
                             } else if (level === 2) {
-                                dcRk = 18;
+                                dcRK = 18;
                             } else if (level === 3) {
-                                dcRk = 20;
+                                dcRK = 20;
                             } else if (level === 4) {
-                                dcRk = 23;
+                                dcRK = 23;
                             } else if (level === 5) {
-                                dcRk = 26;
+                                dcRK = 26;
                             } else if (level === 6) {
-                                dcRk = 28;
+                                dcRK = 28;
                             } else if (level === 7) {
-                                dcRk = 31;
+                                dcRK = 31;
                             } else if (level === 8) {
-                                dcRk = 34;
+                                dcRK = 34;
                             } else if (level === 9) {
-                                dcRk = 36;
+                                dcRK = 36;
                             } else if (level === 10) {
-                                dcRk = 39;
+                                dcRK = 39;
                             }
+
+                            switch ((<ItemPF2e>origin).data.data.traits?.rarity ?? "common") {
+                                case "uncommon":
+                                    dcRK += 2;
+                                    break;
+                                case "rare":
+                                    dcRK += 5;
+                                    break;
+                                case "unique":
+                                    dcRK += 10;
+                                    break;
+                                default:
+                                    dcRK += 0;
+                            }
+
                             const tradition = message.data.flags.pf2e.casting.tradition;
                             let skill = "";
                             if (tradition === "arcane") {
@@ -157,7 +168,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 skill = "nature";
                             }
                             content +=
-                                ` If you didn't, you can spend an action on your turn to attempt to identify it: @Check[type:${skill}|dc:${dcRk}|traits:secret,action:recall-knowledge]` +
+                                ` If you didn't, you can spend an action on your turn to attempt to identify it: @Check[type:${skill}|dc:${dcRK}|traits:secret,action:recall-knowledge]` +
                                 "{Recall Knowledge}. ";
                         } else {
                             content +=
