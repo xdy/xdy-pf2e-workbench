@@ -24,14 +24,15 @@ import {
     StatisticOptions,
 } from "./CreatureBuilderData";
 import { SCALE_APP_DATA } from "../NPCScaleData";
+import { ActorPF2e } from "@actor";
 
 export const setupCreatureBuilder = () => Hooks.on("renderActorSheet", enableCreatureBuilderButton);
 
 function enableCreatureBuilderButton(sheet: ActorSheet, html: JQuery) {
     if (game.user?.isGM) {
         // Only inject the link if the actor is of type "character" and the user has permission to update it
-        const actor = sheet.actor;
-        if (!(actor.type === "npc" && actor.canUserModify(game.user, "update"))) {
+        const actor: ActorPF2e = <ActorPF2e>sheet.actor;
+        if (!(actor.isOfType("npc") && actor.canUserModify(game.user, "update"))) {
             return;
         }
 

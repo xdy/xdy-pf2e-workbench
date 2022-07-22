@@ -170,7 +170,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
 
 function getMinions(actor: ActorPF2e): ActorPF2e[] {
     const actors: ActorPF2e[] = [];
-    if (actor?.type === "character") {
+    if (actor.isOfType("character")) {
         if ((<CharacterPF2e>actor).familiar) {
             actors.push(<ActorPF2e>(<CharacterPF2e>actor).familiar);
         }

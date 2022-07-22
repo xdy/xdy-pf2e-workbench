@@ -15,7 +15,7 @@
  */
 
 import { scaleNPCToLevel } from "./NPCScaler";
-import { NPCPF2e } from "@actor";
+import { ActorPF2e, NPCPF2e } from "@actor";
 
 export const setupNPCScaler = () => Hooks.on("getActorDirectoryEntryContext", onScaleNPCContextHook);
 
@@ -26,9 +26,9 @@ function onScaleNPCContextHook(html: JQuery, buttons: any[]) {
             icon: '<i class="fas fa-level-up-alt"></i>',
             condition: (li: JQuery<HTMLLIElement>) => {
                 const id = li.data("document-id") as string;
-                const actor = game.actors?.get(id) as Actor;
+                const actor = game.actors?.get(id) as ActorPF2e;
 
-                return actor.data.type === "npc";
+                return actor.isOfType("npc");
             },
             callback: async (li: JQuery<HTMLLIElement>) => {
                 const id = li.data("document-id") as string;
