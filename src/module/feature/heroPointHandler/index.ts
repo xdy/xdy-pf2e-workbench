@@ -51,12 +51,12 @@ export function createRemainingTimeMessage(remainingMinutes: number) {
     const message =
         remainingMinutes > 0
             ? game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.willBeResetIn`, {
-                remainingMinutes: remainingMinutes,
-                time: new Date(Date.now() + remainingMinutes * ONE_MINUTE_IN_MS).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                }),
-            })
+                  remainingMinutes: remainingMinutes,
+                  time: new Date(Date.now() + remainingMinutes * ONE_MINUTE_IN_MS).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                  }),
+              })
             : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerStopped`);
     return ChatMessage.create(
         {
@@ -179,8 +179,8 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 <div>${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.instructions`)}</div>
 <hr>
   <label class="col-md-4 control-label" for="radios">${game.i18n.localize(
-        `${MODULENAME}.SETTINGS.heroPointHandler.doWhat`
-    )}</label>
+      `${MODULENAME}.SETTINGS.heroPointHandler.doWhat`
+  )}</label>
   <div class="col-md-4">
       <div class="radio">
         <label for="sessionStart-0">
@@ -205,8 +205,8 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="heropoints">${game.i18n.localize(
-        `${MODULENAME}.SETTINGS.heroPointHandler.thisMany`
-    )}</label>
+      `${MODULENAME}.SETTINGS.heroPointHandler.thisMany`
+  )}</label>
   <div class="col-md-4">
     <input id="heropoints" name="heropoints" type="number" value=1 class="form-control input-md">
   </div>
@@ -215,8 +215,8 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 <hr>
 <div class="form-group">
   <label class="col-md-4 control-label" for="characters">${game.i18n.localize(
-        `${MODULENAME}.SETTINGS.heroPointHandler.addOne`
-    )}</label>
+      `${MODULENAME}.SETTINGS.heroPointHandler.addOne`
+  )}</label>
   <div class="col-md-4">`;
 
     for (let i = 0; i < characters.length; i++) {
@@ -235,8 +235,8 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
   <div class="radio">
     <label for="characters-NONE">
       <input type="radio" name="characters" id="characters-NONE" value="NONE" ${
-        checked === -1 ? 'checked="checked"' : ""
-    }>
+          checked === -1 ? 'checked="checked"' : ""
+      }>
       ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.none`)}
     </label>
   </div>
@@ -247,8 +247,8 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     const value = $(this).val();
     if ((value !== '') && (value.indexOf('.') === -1)) {
         $(this).val(Math.max(Math.min(value, ${Number.parseInt(
-        <string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")
-    )}), 0));
+            <string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")
+        )}), 0));
     }
 });</script>
 <div class="form-group">
@@ -256,9 +256,9 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     <div class="input-group">
       <span class="input-group-addon">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`)}</span>
       <input id="timerTextId" name="timerText" class="form-control" value="${
-        remainingMinutes ||
-        Number.parseInt(<string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
-    }" type="number">
+          remainingMinutes ||
+          Number.parseInt(<string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
+      }" type="number">
     </div>
     <p class="help-block">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`)}</p>
   </div>
@@ -273,9 +273,9 @@ export function calcRemainingMinutes(useDefault: boolean): number {
     const savedMinutes = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes");
     const remainingMinutes: number = Math.clamped(
         savedMinutes ??
-        (useDefault
-            ? Number.parseInt(<string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
-            : 0),
+            (useDefault
+                ? Number.parseInt(<string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
+                : 0),
         0,
         Number.parseInt(<string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
     );
