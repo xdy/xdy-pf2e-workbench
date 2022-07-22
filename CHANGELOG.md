@@ -1,3 +1,10 @@
+## [3.31.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.31.1...v3.31.2) (2022-07-22)
+
+
+### Bug Fixes
+
+* Fixed option to have combatant reaching zero hp move to just ahead of the current combatant in the initiative list. ([e6cfe0b](https://github.com/xdy/xdy-pf2e-workbench/commit/e6cfe0baf8218e3efbd5d68d5db2c79d08dc9147))
+
 ## [3.31.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.31.0...v3.31.1) (2022-07-21)
 
 
