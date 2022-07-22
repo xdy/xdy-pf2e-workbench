@@ -1,3 +1,11 @@
+# [3.32.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.31.2...v3.32.0) (2022-07-22)
+
+
+### Features
+
+* Replaced the 'Workbench Flat Check Notes' "boon" with the 'Workbench Flat Check Notes' "Equipment" which also works for npcs. To use this, manually remove the old boon where it is used, add this equipment instead. ([0568a51](https://github.com/xdy/xdy-pf2e-workbench/commit/0568a51f1417f3d6660bf383bd130c983da96283))
+* Replaced the 'Workbench Flat Check Notes' "boon" with the 'Workbench Flat Check Notes' "Equipment" which also works for npcs. To use this, manually remove the old boon where it is used, add this equipment instead. ([a9ed955](https://github.com/xdy/xdy-pf2e-workbench/commit/a9ed9559dfc8dcb7d17a6aa876c2e54893e5512f))
+
 ## [3.31.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.31.1...v3.31.2) (2022-07-22)
 
 
