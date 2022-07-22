@@ -36,9 +36,6 @@ export async function moveOnZeroHP(actor: ActorPF2e, update: Record<string, stri
         hp > 0 &&
         getProperty(update, "data.attributes.hp.value") <= 0
     ) {
-        const selectedCombatantId = game.combat?.combatant?.id;
-        if (selectedCombatantId) {
-            await moveSelectedAheadOfCurrent(selectedCombatantId);
-        }
+        await moveSelectedAheadOfCurrent(combatant.id);
     }
 }
