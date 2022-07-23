@@ -28,7 +28,7 @@
     "build:packs": "ts-node -r tsconfig-paths/register src/build-packs.ts"
   },
   "devDependencies": {
-    "@pixi/graphics-smooth": "^0.0.22",
+    "@pixi/graphics-smooth": "^0.0.30",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/exec": "^6.0.3",
