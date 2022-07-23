@@ -23,7 +23,15 @@ export async function increaseDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (shouldIHandleThisForClient(actor) && hp > 0 && getProperty(update, "data.attributes.hp.value") <= 0) {
+    if (
+        shouldIHandleThisForClient(
+            actor,
+            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
+            true
+        ) &&
+        hp > 0 &&
+        getProperty(update, "data.attributes.hp.value") <= 0
+    ) {
         const orcFerocity = actor.data.items.find((feat) => feat.slug === "orc-ferocity");
         const orcFerocityUsed: any = actor.data.items.find((effect) => effect.slug === "orc-ferocity-used");
         const incredibleFerocity = actor.data.items.find((feat) => feat.slug === "incredible-ferocity");
@@ -132,7 +140,15 @@ export async function removeDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (shouldIHandleThisForClient(actor) && hp <= 0 && getProperty(update, "data.attributes.hp.value") > 0) {
+    if (
+        shouldIHandleThisForClient(
+            actor,
+            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
+            true
+        ) &&
+        hp <= 0 &&
+        getProperty(update, "data.attributes.hp.value") > 0
+    ) {
         const value = actor.getCondition("dying")?.value || 0;
         const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
         if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.data.type) : true) {
@@ -150,7 +166,11 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     hp: number
 ): Promise<void> {
     if (
-        shouldIHandleThisForClient(actor) &&
+        shouldIHandleThisForClient(
+            actor,
+            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
+            true
+        ) &&
         hp <= 0 &&
         getProperty(update, "data.attributes.hp.value") > 0 &&
         actor.hasCondition("unconscious")
@@ -192,7 +212,14 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
 
     const numbToDeath = actor.data.items.find((feat) => feat.slug === "numb-to-death"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1182
     const numbToDeathUsed: any = actor.data.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
-    if (item.slug === "dying" && shouldIHandleThisForClient(item)) {
+    if (
+        item.slug === "dying" &&
+        shouldIHandleThisForClient(
+            actor,
+            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
+            true
+        )
+    ) {
         if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
             const effect: any = {
                 type: "effect",
@@ -259,7 +286,11 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
     if (
         item.slug === "dying" &&
         (await game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) &&
-        shouldIHandleThisForClient(item) &&
+        shouldIHandleThisForClient(
+            actor,
+            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
+            true
+        ) &&
         actor.data.data.attributes?.hp?.value === 0 &&
         !actor.hasCondition("unconscious")
     ) {

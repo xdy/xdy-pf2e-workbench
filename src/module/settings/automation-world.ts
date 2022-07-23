@@ -68,6 +68,15 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
+            allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation: {
+                name: `${MODULENAME}.SETTINGS.allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation.name`,
+                hint: `${MODULENAME}.SETTINGS.allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation.hint`,
+                scope: "world",
+                config: true,
+                default: true,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
         };
     }
 }

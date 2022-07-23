@@ -20,7 +20,7 @@ export function shouldIHandleThisForClient(clientdocument: ClientDocument, playe
     const b = !game.user?.isGM && playerCondition && activePlayerExists && canModify;
     if (b) {
         return true;
-    } else if (game.user?.isGM && gmCondition && !activePlayerExists) {
+    } else if (game.user?.isGM && gmCondition && (!activePlayerExists || !playerCondition)) {
         return true;
     } else {
         return false;
