@@ -409,7 +409,7 @@
         "gm": "GM",
         "players": "Players"
       },
-      "actionsReminderAutoReduceStunned": {
+      "autoReduceStunned": {
         "hint": "Client setting to automatically reduce Stunned on turn start.",
         "name": "Automatically reduce stunned on turn start"
       },

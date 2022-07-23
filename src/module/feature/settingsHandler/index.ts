@@ -1,9 +1,9 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { PartialSettingsData, SettingsMenuPF2eWorkbench } from "../../settings/menu";
 
-export function toggleSettings(html: JQuery) {
+export function toggleSettings(_html: JQuery) {
     const settings: [string, any][] = Array.from(game.settings.settings.entries());
-    settings.forEach((setting: [string, any]) => {
+    settings.forEach((_setting: [string, any]) => {
         //None right now
     });
 }
@@ -48,18 +48,6 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                         ? game.settings.get(MODULENAME, "applyPersistentAllow") === "players"
                         : game.settings.get(MODULENAME, "applyPersistentAllow") === "gm")
                 );
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
-            }
-            //Disable all dependent persistentHealing settings
-            if (settingName !== `applyPersistentAllow` && settingName.startsWith(`applyPersistent`)) {
-                const applyToggle = !(
-                    game.settings.get(MODULENAME, "applyPersistentAllow") === "none" ||
-                    (game.user?.isGM
-                        ? game.settings.get(MODULENAME, "applyPersistentAllow") === "players"
-                        : game.settings.get(MODULENAME, "applyPersistentAllow") === "gm")
-                );
-                // const valueFunction = game.settings.get(MODULENAME, "applyPersistentAllow") === "none";
-
                 html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
             }
             if (settingName !== `autoRollDamageAllow` && settingName.startsWith(`autoRollDamage`)) {

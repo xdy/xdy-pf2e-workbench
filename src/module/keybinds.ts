@@ -1,6 +1,5 @@
 import { MODULENAME } from "./xdy-pf2e-workbench";
 import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler";
-import { CombatantPF2e } from "@module/encounter";
 import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler";
 import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler";
 
@@ -76,9 +75,9 @@ export function registerWorkbenchKeybindings() {
         hint: `${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`,
         restricted: true,
         editable: [],
-        onDown: () => {
+        onDown: async () => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
-                heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start);
+                await heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start);
             }
             return true;
         },

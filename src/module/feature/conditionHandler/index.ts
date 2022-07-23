@@ -1,11 +1,11 @@
 import { CombatantPF2e } from "@module/encounter";
-import { shouldIHandleThis } from "../../utils";
+import { shouldIHandleThisForClient } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e, CharacterPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 
-export async function reduceFrightened(combatant: CombatantPF2e) {
-    if (combatant && combatant.actor && shouldIHandleThis(combatant.isOwner ? game.user?.id : null)) {
+export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
+    if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThisForClient(combatant))) {
         const actors = [combatant.actor];
         actors.push(...getMinions(combatant.actor));
         for (const actor of actors) {
@@ -23,12 +23,7 @@ export async function increaseDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (
-        shouldIHandleThis(actor.isOwner ? game.user?.id : null) &&
-        // @ts-ignore
-        hp > 0 &&
-        getProperty(update, "data.attributes.hp.value") <= 0
-    ) {
+    if (shouldIHandleThisForClient(actor) && hp > 0 && getProperty(update, "data.attributes.hp.value") <= 0) {
         const orcFerocity = actor.data.items.find((feat) => feat.slug === "orc-ferocity");
         const orcFerocityUsed: any = actor.data.items.find((effect) => effect.slug === "orc-ferocity-used");
         const incredibleFerocity = actor.data.items.find((feat) => feat.slug === "incredible-ferocity");
@@ -137,11 +132,7 @@ export async function removeDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (
-        shouldIHandleThis(actor.isOwner ? game.user?.id : null) &&
-        hp <= 0 &&
-        getProperty(update, "data.attributes.hp.value") > 0
-    ) {
+    if (shouldIHandleThisForClient(actor) && hp <= 0 && getProperty(update, "data.attributes.hp.value") > 0) {
         const value = actor.getCondition("dying")?.value || 0;
         const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
         if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.data.type) : true) {
@@ -159,7 +150,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     hp: number
 ): Promise<void> {
     if (
-        shouldIHandleThis(actor.isOwner ? game.user?.id : null) &&
+        shouldIHandleThisForClient(actor) &&
         hp <= 0 &&
         getProperty(update, "data.attributes.hp.value") > 0 &&
         actor.hasCondition("unconscious")
@@ -175,7 +166,7 @@ function getMinions(actor: ActorPF2e): ActorPF2e[] {
             actors.push(<ActorPF2e>(<CharacterPF2e>actor).familiar);
         }
         const eidolons = <ActorPF2e[]>game.scenes.current?.tokens
-            ?.filter((user) => !game.user.isGM)
+            ?.filter(() => !game.user.isGM)
             ?.filter((token) => token.canUserModify(game.user, "update"))
             ?.map((token) => token.actor)
             ?.filter((x) => x?.traits.has("eidolon"));
@@ -183,7 +174,7 @@ function getMinions(actor: ActorPF2e): ActorPF2e[] {
             actors.push(...(<ActorPF2e[]>eidolons));
         }
         const animalCompanions = game.scenes.current?.tokens
-            ?.filter((user) => !game.user.isGM)
+            ?.filter(() => !game.user.isGM)
             ?.filter((token) => token.canUserModify(game.user, "update"))
             ?.map((token) => token.actor)
             ?.filter((chr: CharacterPF2e) => chr?.class?.name === "Animal Companion");
@@ -201,11 +192,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
 
     const numbToDeath = actor.data.items.find((feat) => feat.slug === "numb-to-death"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1182
     const numbToDeathUsed: any = actor.data.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
-    if (
-        item.slug === "dying" &&
-        (await game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) &&
-        shouldIHandleThis(item.isOwner ? game.user?.id : null)
-    ) {
+    if (item.slug === "dying" && shouldIHandleThisForClient(item)) {
         if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
             const effect: any = {
                 type: "effect",
@@ -272,7 +259,7 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
     if (
         item.slug === "dying" &&
         (await game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) &&
-        shouldIHandleThis(item.isOwner ? game.user?.id : null) &&
+        shouldIHandleThisForClient(item) &&
         actor.data.data.attributes?.hp?.value === 0 &&
         !actor.hasCondition("unconscious")
     ) {
@@ -282,16 +269,14 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
 
 export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
     const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
-    if (physicalTypes.includes(item.type) && item.actor && shouldIHandleThis(item.isOwner ? game.user?.id : null)) {
-        //Sleep 0.25s to handle stupid race condition
-        await new Promise((resolve) => setTimeout(resolve, 250));
+    if (game.user.isGM && physicalTypes.includes(item.type) && item.actor) {
         if (item.actor.inventory.bulk.isEncumbered) {
             if (!item.actor.hasCondition("encumbered")) {
-                await item.actor.toggleCondition("encumbered");
+                await item.actor.increaseCondition("encumbered");
             }
         } else {
             if (item.actor.hasCondition("encumbered")) {
-                await item.actor.toggleCondition("encumbered");
+                await item.actor.decreaseCondition("encumbered", { forceRemove: true });
             }
         }
     }

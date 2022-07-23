@@ -178,7 +178,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     await newActor.updateEmbeddedDocuments("Item", itemUpdates);
 
     itemUpdates = [];
-    const DC_REGEXES = [/(data-pf2-dc=")([0-9]+)(")/g, /(@Check\[.*?type:.*?|dc:)([0-9]+)(.*?])/g];
+    const DC_REGEXES = [/(data-pf2-dc=")(\d+)(")/g, /(@Check\[.*?type:.*?|dc:)(\d+)(.*?])/g];
     for (const regex of DC_REGEXES) {
         for (const item of actor.data.items.filter(
             (i) => i.data.data.description.value.includes("DC") || i.data.data.description.value.includes("dc:")
@@ -189,13 +189,15 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
 
             let indexOffset = 0;
             while (match !== null) {
-                const [fullMatch, attribute, value, suffix] = match;
+                const [fullMatch, value] = match;
                 const index = match.index + indexOffset;
                 const newDCValue = getLeveledData("difficultyClass", parseInt(value), oldLevel, newLevel).total;
                 const newDCString = `${match[1]}${newDCValue}${match[3]}`;
 
                 newDescription =
-                    newDescription.substr(0, index) + newDCString + newDescription.substr(index + fullMatch.length);
+                    newDescription.substring(0, index) +
+                    newDCString +
+                    newDescription.substring(index + fullMatch.length);
 
                 indexOffset += newDescription.length - description.length - indexOffset;
 
@@ -213,7 +215,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
 
     itemUpdates = [];
     for (const item of newActor.items.values()) {
-        const DMG_REGEX = /[0-9]+d[0-9]+(\+[0-9]*)?/g;
+        const DMG_REGEX = /\d+d\d+(\+\d*)?/g;
         const description = item.data.data["description"].value as string;
         let newDescription = description;
         let match: RegExpExecArray | null = DMG_REGEX.exec(description);
@@ -224,7 +226,9 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
             const newDamageFormula = getAreaDamageData(fullMatch, oldLevel, newLevel);
 
             newDescription =
-                newDescription.substr(0, index) + newDamageFormula + newDescription.substr(index + fullMatch.length);
+                newDescription.substring(0, index) +
+                newDamageFormula +
+                newDescription.substring(index + fullMatch.length);
 
             indexOffset += newDescription.length - description.length - indexOffset;
 

@@ -3,5 +3,5 @@ export async function preloadTemplates(): Promise<void> {
         // Add paths to "modules/xdy-pf2e-workbench/templates"
     ];
 
-    loadTemplates(templatePaths);
+    await loadTemplates(templatePaths);
 }

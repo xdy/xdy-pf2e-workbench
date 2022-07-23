@@ -188,7 +188,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             speaker: ChatMessage.getSpeaker({ actor: message.actor }),
                         });
                     }
-                    return true;
                 }
             }
         );
@@ -249,17 +248,17 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
-        Hooks.on("renderChatMessage", async (message: ChatMessagePF2e, html: JQuery) => {
+        Hooks.on("renderChatMessage", (message: ChatMessagePF2e, html: JQuery) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
                 mangleChatMessage(message, html);
             }
 
             if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
-                persistentHealing(message).then(() => console.log("Workbench persistentHealing complete"));
+                persistentHealing(message).then();
             }
 
             if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-                persistentDamage(message).then(() => console.log("Workbench persistentDamage complete"));
+                persistentDamage(message).then();
             }
 
             if (
@@ -305,39 +304,50 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 await applyEncumbranceBasedOnBulk(item);
             }
 
-            if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
-                await giveWoundedWhenDyingRemoved(item);
-            }
-
-            if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
-                await giveUnconsciousIfDyingRemovedAt0HP(item);
+            if (
+                game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
+                game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")
+            ) {
+                if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
+                    giveWoundedWhenDyingRemoved(item).then(() => {
+                        console.log("Workbench giveWoundedWhenDyingRemoved complete");
+                        if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
+                            giveUnconsciousIfDyingRemovedAt0HP(item).then(() => {
+                                console.log("Workbench giveUnconsciousIfDyingRemovedAt0HP complete");
+                            });
+                        }
+                    });
+                } else if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
+                    await giveUnconsciousIfDyingRemovedAt0HP(item);
+                }
             }
         });
     }
 
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-        Hooks.on("pf2e.endTurn", (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
+        Hooks.on("pf2e.endTurn", (combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string) => {
             if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-                reduceFrightened(combatant).then(() => console.log("Workbench reduceFrightened complete"));
+                reduceFrightened(combatant, userId).then(() => console.log("Workbench reduceFrightened complete"));
             }
         });
     }
 
     if (
-        game.settings.get(MODULENAME, "actionsReminderAllow") ||
-        game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")
+        game.settings.get(MODULENAME, "actionsReminderAllow") !== "none" ||
+        game.settings.get(MODULENAME, "autoReduceStunned")
     ) {
         Hooks.on("pf2e.startTurn", async (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
-            if (game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")) {
+            const forWhom = game.settings.get(MODULENAME, "actionsReminderAllow");
+            if (game.settings.get(MODULENAME, "autoReduceStunned")) {
                 autoReduceStunned(combatant).then((reduction) => {
-                    if (game.settings.get(MODULENAME, "actionsReminderAllow")) {
-                        return actionsReminder(combatant, reduction).then(() =>
+                    if (forWhom !== "none") {
+                        actionsReminder(combatant, reduction).then(() =>
                             console.log("Workbench actionsReminderAllow complete")
                         );
                     }
                 });
-            } else if (game.settings.get(MODULENAME, "actionsReminderAllow")) {
-                actionsReminder(combatant).then(() => console.log("Workbench actionsReminderAllow complete"));
+            } else if (forWhom !== "none") {
+                actionsReminder(combatant, 0).then(() => console.log("Workbench actionsReminderAllow complete"));
             }
         });
     }
@@ -369,16 +379,27 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 moveOnZeroHP(actor, deepClone(update), hp).then(() => console.log("Workbench moveOnZeroHP complete"));
             }
 
-            if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
-                increaseDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
-                    console.log("Workbench increaseDyingOnZeroHP complete")
-                );
-            }
-
-            if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-                removeDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
-                    console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete")
-                );
+            if (
+                game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
+                game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none"
+            ) {
+                if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
+                    increaseDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
+                        console.log("Workbench increaseDyingOnZeroHP complete");
+                        if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
+                            //Ugh.
+                            new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
+                                removeDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
+                                    console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete")
+                                );
+                            });
+                        }
+                    });
+                } else {
+                    removeDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
+                        console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete")
+                    );
+                }
             }
 
             if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
@@ -450,12 +471,15 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             if ($e.find(".identification-skills").length === 0) {
                                 return;
                             }
-                            const dcs = <string>$e.find(".identification-skills")[0].title;
-                            const skills = $e.find("ul");
-                            for (const s of skills.text().trim().split("\n")) {
+                            for (const s of $e.find("ul").text().trim().split("\n")) {
                                 const skill = s.toLowerCase().trim();
-                                const a = `<button class="gm-recall-knowledge-${skill}" data-skill="${skill}" data-dcs="${dcs}" data-token="${token?.id}">Recall Knowledge: ${skill}</button>`;
-                                $e.append(a);
+                                $e.append(
+                                    `<button class="gm-recall-knowledge-${skill}" data-skill="${skill}" data-dcs="${<
+                                        string
+                                    >$e.find(".identification-skills")[0].title}" data-token="${
+                                        token?.id
+                                    }">Recall Knowledge: ${skill}</button>`
+                                );
                                 const b = `.gm-recall-knowledge-${skill}`;
                                 $html.find(b).on("click", async (e) => {
                                     const attr = <string>$(e.currentTarget).attr("data-token");
@@ -515,7 +539,7 @@ Hooks.once("setup", async () => {
     }
 
     if (game.settings.get(MODULENAME, "npcRoller")) {
-        setupNpcRoller();
+        await setupNpcRoller();
     }
 });
 

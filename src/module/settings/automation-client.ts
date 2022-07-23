@@ -7,16 +7,6 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
-            //TODO Badly named
-            actionsReminderAutoReduceStunned: {
-                name: `${MODULENAME}.SETTINGS.actionsReminderAutoReduceStunned.name`,
-                hint: `${MODULENAME}.SETTINGS.actionsReminderAutoReduceStunned.hint`,
-                scope: "client",
-                config: true,
-                default: false,
-                type: Boolean,
-                onChange: () => debouncedReload(),
-            },
             //NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
             autoRollDamageForStrike: {
                 name: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.name`,

@@ -1,8 +1,5 @@
-import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { ActorPF2e } from "@actor";
-import { shouldIHandleThis } from "../../utils";
-
-type UpdateRow = { type: string; data: { active: any; slug: string; value: { value: number } } };
+import { shouldIHandleThisForClient } from "../../utils";
 
 export async function moveSelectedAheadOfCurrent(selectedCombatantId): Promise<void> {
     //TODO Ugly hack, might want to do a PR to expose the code in encounter-tracker#setInitiativeFromDrop?
@@ -30,8 +27,8 @@ export async function moveOnZeroHP(actor: ActorPF2e, update: Record<string, stri
             : <string>canvas?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
     );
     if (
+        shouldIHandleThisForClient(actor) &&
         combatant &&
-        shouldIHandleThis(combatant.isOwner ? game.user?.id : null) &&
         combatant.id !== game.combat?.combatant?.id &&
         hp > 0 &&
         getProperty(update, "data.attributes.hp.value") <= 0

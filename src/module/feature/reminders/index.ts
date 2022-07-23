@@ -1,4 +1,4 @@
-import { shouldIHandleThis, shouldIHandleThisMessage } from "../../utils";
+import { shouldIHandleThisForClient, shouldIHandleThisMessageForClient } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
 import { CombatantPF2e } from "@module/encounter";
@@ -8,12 +8,12 @@ import { SpellPF2e } from "@item";
 import { ActorPF2e, CreaturePF2e } from "@actor";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
-    if (message.data.content && game.combats && game.combats.active && shouldIHandleThisMessage(message, true, true)) {
+    if (game.user.isGM && message.data.content && game.combats && game.combats.active) {
         const token: TokenDocumentPF2e = <TokenDocumentPF2e>(
             canvas?.scene?.tokens.get(<string>message.data.speaker.token)
         );
 
-        const actors = [token.actor];
+        const actors = [token?.actor];
         for (const actor of actors) {
             const prefix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.prefix`);
             const postfix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.postfix`);
@@ -53,20 +53,19 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
 }
 
 export async function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
-    if (
-        combatant &&
-        combatant.actor &&
-        shouldIHandleThis(
-            combatant.isOwner ? game.user?.id : null,
-            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow")),
-            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow"))
-        )
-    ) {
+    if (game.user.isGM && combatant && combatant.actor) {
+        const showForPC =
+            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow")) &&
+            combatant.actor?.hasPlayerOwner;
+        const showForNPC =
+            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow")) &&
+            !combatant.actor?.hasPlayerOwner;
         if (
-            combatant.actor.hasCondition("stunned") ||
-            combatant.actor.hasCondition("slowed") ||
-            combatant.actor.hasCondition("quickened") ||
-            reduction > 0
+            (showForPC || showForNPC) &&
+            (combatant.actor.hasCondition("stunned") ||
+                combatant.actor.hasCondition("slowed") ||
+                combatant.actor.hasCondition("quickened") ||
+                reduction > 0)
         ) {
             const actionsMessage = `${combatant.token?.name} has ${Math.max(
                 calculateMaxActions(combatant.actor) -
@@ -96,16 +95,7 @@ function calculateMaxActions(actor: ActorPF2e) {
 
 export async function autoReduceStunned(combatant: CombatantPF2e): Promise<number> {
     let stunReduction = 0;
-    if (
-        combatant &&
-        combatant.actor &&
-        shouldIHandleThis(
-            combatant.isOwner ? game.user?.id : null,
-            <boolean>game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned"),
-            <boolean>game.settings.get(MODULENAME, "actionsReminderAutoReduceStunned")
-        ) &&
-        combatant.actor.hasCondition("stunned")
-    ) {
+    if (game.user.isGM && combatant && combatant.actor && combatant.actor.hasCondition("stunned")) {
         const stunned = combatant.actor.getCondition("stunned")?.value ?? 0;
         if (stunned) {
             stunReduction = Math.min(stunned, calculateMaxActions(combatant.actor));
@@ -126,7 +116,7 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
         ["spell-attack-roll", "attack-roll"].includes(
             <string>(<ActorFlagsPF2e>message.data.flags.pf2e).context?.type
         ) &&
-        shouldIHandleThisMessage(message, true, true)
+        shouldIHandleThisMessageForClient(message, true, true)
     ) {
         let reason = "";
 
@@ -166,7 +156,7 @@ export async function reminderTargeting(message: ChatMessagePF2e) {
         ["spell-attack-roll", "attack-roll"].includes(
             <string>(<ActorFlagsPF2e>message.data.flags.pf2e).context?.type
         ) &&
-        shouldIHandleThisMessage(message, true, true)
+        shouldIHandleThisMessageForClient(message, true, true)
     ) {
         const targets = message.user.targets;
         if (!targets || targets.size === 0) {
@@ -189,12 +179,13 @@ export async function reminderIWR(message: ChatMessagePF2e) {
         for (const target of targets) {
             let damageTypes: string[] = Object.keys(
                 message.data?.flags?.pf2e?.damageRoll?.types?.valueOf() || {}
-            ).flatMap((value, index) => value);
+            ).flatMap((value, _index) => value);
             if (damageTypes.length === 0) {
-                const origin: SpellPF2e | null = <SpellPF2e>(
-                    await fromUuid(<string>message.data?.flags?.pf2e?.origin?.uuid)
-                );
-                damageTypes = Object.values(origin.data.data.damage.value).map((x) => x.type.value);
+                const originUUID = message.data?.flags?.pf2e?.origin?.uuid;
+                if (originUUID) {
+                    const origin: SpellPF2e | null = <SpellPF2e>await fromUuid(<string>originUUID);
+                    damageTypes = Object.values(origin.data.data.damage.value).map((x) => x.type.value);
+                }
             }
             if (damageTypes.length > 0) {
                 const traits = target.actor?.data.data.traits;

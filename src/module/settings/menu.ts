@@ -21,7 +21,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
 
         return mergeObject(options, {
             title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, //lgtm [js/mixed-static-instance-this-access]
-            id: `${this.namespace}-settings`,
+            id: `${this.namespace}-settings`, //lgtm [js/mixed-static-instance-this-access]
             template: `modules/xdy-pf2e-workbench/templates/menu.html`,
             width: 650,
             height: "auto",
@@ -51,7 +51,6 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
 
     static registerSettingsAndCreateMenu(icon, restricted = true) {
         game.settings.registerMenu(MODULENAME, this.namespace, {
-            //lgtm [js/mixed-static-instance-this-access]
             name: `${MODULENAME}.SETTINGS.${this.namespace}.name`, //lgtm [js/mixed-static-instance-this-access]
             label: `${MODULENAME}.SETTINGS.${this.namespace}.label`, //lgtm [js/mixed-static-instance-this-access]
             hint: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, //lgtm [js/mixed-static-instance-this-access]

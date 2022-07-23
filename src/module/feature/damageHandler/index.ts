@@ -1,4 +1,4 @@
-import { degreeOfSuccessWithRerollHandling, shouldIHandleThisMessage } from "../../utils";
+import { degreeOfSuccessWithRerollHandling, shouldIHandleThisMessageForClient } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
@@ -9,7 +9,7 @@ import { SpellPF2e } from "@item";
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 5;
     if (
-        shouldIHandleThisMessage(
+        shouldIHandleThisMessageForClient(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow")),
             ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow"))
@@ -126,7 +126,7 @@ export async function persistentDamage(message: ChatMessagePF2e) {
         message.data.speaker.token &&
         message.data.flavor &&
         message.roll?.total &&
-        shouldIHandleThisMessage(
+        shouldIHandleThisMessageForClient(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
             ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
@@ -167,7 +167,7 @@ export async function persistentHealing(message: ChatMessagePF2e) {
         game.combats.active &&
         game.combats.active.combatant &&
         game.combats.active.combatant.actor &&
-        shouldIHandleThisMessage(
+        shouldIHandleThisMessageForClient(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
             ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))

@@ -1,26 +1,44 @@
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
 
-export function shouldIHandleThis(
-    userId: string | undefined | null,
-    playerCondition = true,
-    gmCondition = true,
-    extraCondition = true
-) {
-    const activePlayer =
+/**
+ * Should only be used for optins with *client* settings.
+ * Note that this method *always* defers to a player if one is logged in. I.e. if a GM does something for a logged in player, client automation will not work. E.g. Wounded is not removed if pc is healed.
+ * @param clientdocument
+ * @param playerCondition
+ * @param gmCondition
+ */
+export function shouldIHandleThisForClient(clientdocument: ClientDocument, playerCondition = true, gmCondition = true) {
+    const activePlayerExists =
+        clientdocument.hasPlayerOwner &&
         game.users?.players
             .filter((u) => u.active)
             .filter((u) => !u.isGM)
-            .filter((u) => u.id === userId).length > 0;
-    const handleAsPlayer = activePlayer && !game.user?.isGM && extraCondition && playerCondition;
-    const handleAsGM = game.user?.isGM && extraCondition && !activePlayer && gmCondition;
-    return handleAsPlayer || handleAsGM;
+            .filter((u) => clientdocument.canUserModify(u, "update")).length > 0;
+
+    const canModify = clientdocument.canUserModify(game.user, "update");
+    const b = !game.user?.isGM && playerCondition && activePlayerExists && canModify;
+    if (b) {
+        return true;
+    } else if (game.user?.isGM && gmCondition && !activePlayerExists) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-export function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition: boolean, gmCondition: boolean) {
+export function shouldIHandleThisMessageForClient(
+    message: ChatMessagePF2e,
+    playerCondition: boolean,
+    gmCondition: boolean
+) {
     const userId = message.data.user;
     const amIMessageSender = userId === game.user?.id;
-    return shouldIHandleThis(userId, playerCondition, gmCondition, amIMessageSender);
+    if (!game.user?.isGM && playerCondition && amIMessageSender) {
+        return true;
+    } else if (game.user?.isGM && gmCondition && amIMessageSender) {
+        return true;
+    }
 }
 
 export function nth(n) {

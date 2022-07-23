@@ -1,8 +1,8 @@
 import { MODULENAME } from "../../../module/xdy-pf2e-workbench";
 import { SCALE_APP_DATA } from "../NPCScaleData";
 
-function registerHandlebarsTemplates() {
-    loadTemplates([
+async function registerHandlebarsTemplates() {
+    await loadTemplates([
         `modules/${MODULENAME}/templates/feature/npc-roller/index.html`,
         `modules/${MODULENAME}/templates/feature/npc-roller/table.html`,
         `modules/${MODULENAME}/templates/feature/npc-roller/cell.html`,
@@ -62,10 +62,10 @@ function registerHandlebarsHelpers() {
     });
 }
 
-export function setupNpcRoller() {
+export async function setupNpcRoller() {
     Hooks.on("renderJournalDirectory", enableNpcRollerButton);
 
-    registerHandlebarsTemplates();
+    await registerHandlebarsTemplates();
     registerHandlebarsHelpers();
 }
 
@@ -133,7 +133,7 @@ class NpcRoller extends Application {
         setTimeout(this.render.bind(this), 0);
     }
 
-    #handleRollButtonClick(event): void {
+    async #handleRollButtonClick(event): Promise<void> {
         const target = $(event.target);
         const rollName = target.data("rollname") as string;
         const token = (canvas as Canvas).tokens?.controlled[0];
@@ -142,7 +142,7 @@ class NpcRoller extends Application {
         if (formula) {
             const formulaString = formula.toString();
 
-            new Roll(formulaString).toMessage(
+            await new Roll(formulaString).toMessage(
                 {
                     speaker: ChatMessage.getSpeaker({ token: token?.document }),
                     flavor: rollName,

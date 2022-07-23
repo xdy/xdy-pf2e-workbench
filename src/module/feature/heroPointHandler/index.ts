@@ -332,19 +332,19 @@ async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
     }
 }
 
-function addOneToSelectedCharacter(actorId: any) {
+function addOneToSelectedCharacter(actorId: string): void {
     addHeroPoints(1, actorId).then(() => {
         const name = game?.actors?.find((actor) => actor.id === actorId)?.name;
         if (actorId === "ALL") {
             const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
                 heroPoints: 1,
             });
-            return ChatMessage.create({ flavor: message }, {});
+            ChatMessage.create({ flavor: message }, {}).then();
         } else if (name) {
             const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedFor`, {
                 name: name,
             });
-            return ChatMessage.create({ flavor: message }, {});
+            ChatMessage.create({ flavor: message }, {}).then();
         }
     });
 }
@@ -420,13 +420,13 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
     span.off("click");
     span.off("contextmenu");
 
-    span.on("click", async (e) => {
+    span.on("click", async (_e) => {
         if (value === max) return;
         await actor.update({
             ["data.resources.heroPoints.value"]: value + 1,
         });
     });
-    span.on("contextmenu", async (e) => {
+    span.on("contextmenu", async (_e) => {
         if (value === 0) return;
         await actor.update({
             ["data.resources.heroPoints.value"]: value - 1,

@@ -1,5 +1,5 @@
 import { MODULENAME } from "../xdy-pf2e-workbench";
-import { PartialSettingsData, SettingsMenuPF2eWorkbench } from "./menu";
+import { SettingsMenuPF2eWorkbench } from "./menu";
 import { debouncedReload } from "./index";
 
 export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench {
@@ -53,6 +53,15 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
             applyEncumbranceBasedOnBulk: {
                 name: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.name`,
                 hint: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
+            autoReduceStunned: {
+                name: `${MODULENAME}.SETTINGS.autoReduceStunned.name`,
+                hint: `${MODULENAME}.SETTINGS.autoReduceStunned.hint`,
                 scope: "world",
                 config: true,
                 default: false,

@@ -63,8 +63,7 @@ class CreatureBuilder extends FormApplication {
         const options = super.defaultOptions;
         options.title = "Creature Builder";
         options.template = `modules/xdy-pf2e-workbench/templates/feature/creature-builder/index.html`;
-        options.classes = options.classes ?? [];
-        options.classes = [...options.classes, "creature-builder"];
+        options.classes = [...(options.classes ?? []), "creature-builder"];
         options.width = 800;
         options.height = "auto";
         options.resizable = true;
