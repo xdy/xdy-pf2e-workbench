@@ -386,7 +386,7 @@
         "dead": "is dead",
         "defeated": "is defeated",
         "hasNoHp": "has no hp",
-        "note": "Are you sure about this attack? {actorName} {reason}, and thus not likely to be able attack..."
+        "note": "Are you sure about this attack? {actorName} {reason}, and thus not likely to be able to attack..."
       },
       "reminderIWR": {
         "hint": "Check to show reminder for IWR when damage is taken. Currently only handles 'simple' damage types (e.g. handles ones like 'Bludgeoning' or 'Fire', not ones like 'All' or 'Physical')",
