@@ -30,10 +30,9 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 ```"<p>.*can't use.*1d([46]) rounds.*</p>"``` or the localized equivalent for it to be recognized.
 * Option to automatically reduce Stunned condition at the start of the turn hidden behind option to show actions reminder each turn, which handles Quickened, Slowed and Stunned.
 * The xdy-pf2e-workbench-items pack now includes a 'Boon' named "Workbench Flat Check Notes". This 'Boon' holds several useful Note RE:s that when appropriate add notes about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your characters, it'll appear on the Deity Boons/Curses section of the Effects tab rather than on the feat list. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or dazzled. Self has Blind-Fight.
-* Option to use the token hud visibility toggle to also toggle the Undetected condition
 * Optional keybind called "Add user targets" that lets the GM add token targets to other users by selecting or hovering over those tokens, pressing the keybind and choosing which user should target those tokens. Enables GMs to help players having problems with targeting. Also useful in conjunction with "Workshop Flat Check Notes" to make a player target an Undetected token that they first need to roll a Flat Check to be able to hit.
-* Option to automatically increase Dying on reaching zero hp (handles the feats [Orc Ferocity](https://2e.aonprd.com/Feats.aspx?ID=83), [Undying Ferocity](https://2e.aonprd.com/Feats.aspx?ID=1291), [Incredible Ferocity](https://2e.aonprd.com/Feats.aspx?ID=90), [Rampaging Ferocity](https://2e.aonprd.com/Feats.aspx?ID=1294) and partial handling of [Deliberate Death](https://2e.aonprd.com/Feats.aspx?ID=2355))
-* Option to automatically increase Wounded when Dying is removed (handles the feats [Bounce Back](https://2e.aonprd.com/Feats.aspx?ID=1441) and [Numb to Death](https://2e.aonprd.com/Feats.aspx?ID=1182)
+* Option to automatically increase Dying on reaching zero hp (handles the feats [Orc Ferocity](https://2e.aonprd.com/Feats.aspx?ID=83), [Undying Ferocity](https://2e.aonprd.com/Feats.aspx?ID=1291), [Incredible Ferocity](https://2e.aonprd.com/Feats.aspx?ID=90), [Rampaging Ferocity](https://2e.aonprd.com/Feats.aspx?ID=1294) and partial handling of [Deliberate Death](https://2e.aonprd.com/Feats.aspx?ID=2355))  Only works for players if they themself apply the damage/healing.
+* Option to automatically increase Wounded when Dying is removed (handles the feats [Bounce Back](https://2e.aonprd.com/Feats.aspx?ID=1441) and [Numb to Death](https://2e.aonprd.com/Feats.aspx?ID=1182).  Only works for players if they themself apply the damage/healing.
 * Option to hold control or shift to quickly increase/decrease item quantities by 5 or 10 (from https://github.com/Djphoenix719/FVTT-PF2EToolbox)
 * Option to colorize the items per rarity on the player sheet like on the npc sheet.
 * Option to add a button to all npcs that sends the relevant Recall Knowledge checks to chat (for skills only, lores not handled yet). Has suboptions to hide the npc token name and/or the skill name on the chat card.
@@ -46,9 +45,12 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc using the suggested values from the GMG (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
 * Option to hold CTRL while casting a spell to cast it as a whispered chat message. Separate option to output a separate public chat message with a Recall Knowledge button to recognize it, unless you hold CTRL+SHIFT to skip this message.
 
-
 Experimental features:
-None right now. (Though some feature settings are experimental.)
+* For those GMs that prefer to always handle the damage/healing for their players, adds a setting so that automating of  wounded/dying/unconscious works for the GM only (rather than the default which is for the player only.) A reload is not needed after setting this option (as long as that is the only change), so can also be used by GMs that normally let players handle their own damage to temporarily help a player. You can use this in the console or from a script macro to toggle it:
+```await game.settings.set("xdy-pf2e-workbench","allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation", !game.settings.get("xdy-pf2e-workbench","allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"))```
+* Option to use the token hud visibility toggle to also toggle the Undetected condition. (Doesn't work well, not recommended.)
+* Option to use the mystified name in chat messages created from that npc (actions/spells). Relies on the original actor name being present in the text.
+
 
 Deprecated features (will be removed eventually):
 None right now.
