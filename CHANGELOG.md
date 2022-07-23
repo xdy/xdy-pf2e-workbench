@@ -1,3 +1,10 @@
+# [3.34.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.33.0...v3.34.0) (2022-07-23)
+
+
+### Features
+
+* Experimental setting for GMs that *always* set the damage for their players, adds a setting so that automating of  wounded/dying/unconscious works for the **GM** only (rather than the default which is for the **player** only.) ([939bc05](https://github.com/xdy/xdy-pf2e-workbench/commit/939bc05ff5ff4f8a372e074fff48c8d0cc5b03fe))
+
 # [3.33.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.32.0...v3.33.0) (2022-07-23)
 
 
