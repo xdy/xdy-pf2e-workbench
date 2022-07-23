@@ -12,6 +12,8 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 
 ## Current features (in no particular order)
 
+* A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
+
 * NPC Mystification. Sets the name of a token on the current scene based on it's traits if mystified by dragging it from the sidebar while holding the configured modifier key, clicking the mystify button in the token hud or using the mystify keyboard shortcut (no default set). There are several options to filter out certain types of traits. A prefix or postfix can be added to the mystified name (either a user-provided word, or one rolled on a user-provided rollable table). A random number can also be added after the postfix, and optionally be kept when demystifying the creature. E.g. 'Skeletal Champion' could become 'Jack the Mindless Undead Skeleton 23'. Note that player owned tokens are not mystified.
 * Hero point handler feature. Adds an optional keybind to open a dialog that can reset or add hero points for all characters, add one hero point to a random (or selected) character (on new timers only) and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes.  Timer now survives refreshes. Reopen the dialog to see how much time remains (press escape to leave without changes).
 * Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, actions, etc). Can be configured to default to collapsed or expanded.
