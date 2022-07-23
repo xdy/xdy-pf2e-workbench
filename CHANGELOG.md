@@ -1,3 +1,10 @@
+# [3.33.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.32.0...v3.33.0) (2022-07-23)
+
+
+### Features
+
+* Improved automation reliability. At a cost. Specifically: ([2c889a5](https://github.com/xdy/xdy-pf2e-workbench/commit/2c889a5ccb75e6b0e77b80498d68efc00bc047ec))
+
 # [3.32.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.31.2...v3.32.0) (2022-07-22)
 
 
