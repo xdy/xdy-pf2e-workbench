@@ -92,4 +92,14 @@ export function registerWorkbenchSettings() {
         type: Boolean,
         onChange: () => debouncedReload(),
     });
+
+    game.settings.register(MODULENAME, "workbenchVersion", {
+        name: `${MODULENAME}.SETTINGS.workbenchVersion.name`,
+        hint: `${MODULENAME}.SETTINGS.workbenchVersion.hint`,
+        scope: "world",
+        config: true,
+        default: "3.35.0",
+        type: String,
+        onChange: () => debouncedReload(),
+    });
 }

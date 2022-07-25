@@ -438,6 +438,10 @@
         "cantrip": "Cantrip",
         "components": "Components:",
         "spell": "Spell"
+      },
+      "workbenchVersion": {
+        "hint": "Version that the latest migration ran on. Can be lower than the module version. Don't modify this unless you know what you are doing.",
+        "name": "Workbench migration version"
       }
     }
   }

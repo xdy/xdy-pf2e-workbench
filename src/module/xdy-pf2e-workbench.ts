@@ -523,6 +523,7 @@ Hooks.once("setup", async () => {
     registerWorkbenchKeybindings();
 
     //General module setup
+
     if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
         // @ts-ignore
         game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
@@ -543,12 +544,60 @@ Hooks.once("setup", async () => {
     }
 });
 
+async function migrateFeatures() {
+    //Currently only flat check notes
+    const moduleVersion = game.modules.get(MODULENAME)?.data["version"];
+    const worldVersion = game.settings.get(MODULENAME, "workbenchVersion");
+    if (moduleVersion !== worldVersion) {
+        const pack = game.packs.find((p) => p.collection === `${MODULENAME}.xdy-pf2e-workbench-items`);
+        await pack?.getIndex();
+        const entry = pack?.index.find((e) => e.name.startsWith("Workbench Flat Check Notes"));
+        const flatcheckNotes: any = await pack?.getDocument(<string>entry?._id);
+        if (flatcheckNotes) {
+            for (const actor of game.actors) {
+                const filter = actor.items.filter((item) => item.name.startsWith("Workbench Flat Check Notes"));
+                for (const item of filter) {
+                    await actor.deleteEmbeddedDocuments("Item", [item.id]);
+                }
+                if (filter?.length > 0) {
+                    await actor.createEmbeddedDocuments("Item", [flatcheckNotes.data]);
+                }
+            }
+
+            for (const s of game.scenes) {
+                for (const t of s.tokens) {
+                    const actor = t.actor;
+                    if (!actor || t.isLinked) {
+                        //Ignore tokens with no actor as well as linked tokens (they have been handled above).
+                        continue;
+                    }
+                    const filter = actor.items.filter((item) => item.name.startsWith("Workbench Flat Check Notes"));
+                    for (const item of filter) {
+                        await actor.deleteEmbeddedDocuments("Item", [item.id]);
+                    }
+                    if (filter?.length > 0) {
+                        await actor.createEmbeddedDocuments("Item", [flatcheckNotes.data]);
+                    }
+                }
+            }
+        }
+        game.settings.set(MODULENAME, "workbenchVersion", moduleVersion);
+    } else {
+        return;
+    }
+}
+
 // When ready
 Hooks.once("ready", async () => {
     // Do anything once the module is ready
     console.log(`${MODULENAME} | Ready`);
 
     // Must be in ready
+
+    if (game.user?.isGM) {
+        await migrateFeatures();
+    }
+
     if (game.settings.get(MODULENAME, "heroPointHandler")) {
         if (game.user?.isGM) {
             let remainingMinutes = calcRemainingMinutes(false);
