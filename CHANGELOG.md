@@ -1,3 +1,10 @@
+# [3.35.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.34.0...v3.35.0) (2022-07-25)
+
+
+### Features
+
+* Changes the Workbench Flat Check Notes to an Action rather than Equipment. Automatically migrates to the newest version of Workbench Flat Check Notes for all pcs and npcs that have older versions. ([2fc7c84](https://github.com/xdy/xdy-pf2e-workbench/commit/2fc7c84bf1c24f92c09de2ce6d2668ffbe125a9b))
+
 # [3.34.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.33.0...v3.34.0) (2022-07-23)
 
 
