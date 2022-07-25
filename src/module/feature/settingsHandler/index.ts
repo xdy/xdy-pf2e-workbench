@@ -62,6 +62,14 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                 html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
                 html.find(`select[name="${settingName}"]`).parent().parent().toggle(applyToggle);
             }
+
+            if (settingName !== `reminderCannotAttack` && settingName.startsWith(`reminderCannotAttack`)) {
+                const valueFunction = !game.settings.get(MODULENAME, "reminderCannotAttack");
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+            }
+
             if (settingName !== `addGmRKButtonToNpc` && settingName.startsWith(`addGmRKButtonToNpc`)) {
                 const valueFunction = !game.settings.get(MODULENAME, "addGmRKButtonToNpc");
 

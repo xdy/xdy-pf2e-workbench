@@ -1,4 +1,4 @@
-import { shouldIHandleThisForClient, shouldIHandleThisMessageForClient } from "../../utils";
+import { shouldIHandleThisMessageForClient } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
 import { CombatantPF2e } from "@module/encounter";
@@ -107,6 +107,10 @@ export async function autoReduceStunned(combatant: CombatantPF2e): Promise<numbe
     return stunReduction;
 }
 
+function ignoreDeadEidolon(actor) {
+    return actor?.traits.has("eidolon") && game.settings.get(MODULENAME, "reminderCannotAttackIgnoreDeadEidolon");
+}
+
 export async function reminderCannotAttack(message: ChatMessagePF2e) {
     if (
         message.data &&
@@ -126,14 +130,16 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
 
         const actors = [token.actor];
         for (const actor of actors) {
-            if ((<CreaturePF2e>actor).isDead) {
+            if ((<CreaturePF2e>actor).isDead && !ignoreDeadEidolon(actor)) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.dead`);
-            } else if ((actor?.hitPoints?.value ?? 0) <= 0) {
+            } else if ((actor?.hitPoints?.value ?? 0) <= 0 && !ignoreDeadEidolon(actor)) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.hasNoHp`);
             } else if (game.combats.active?.combatant?.token === token && game.combats.active.combatant.defeated) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.defeated`);
             } else if (actor?.hasCondition("unconscious")) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.unconscious`);
+            } else if (actor?.hasCondition("petrified")) {
+                reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.petrified`);
             }
 
             if (reason.length > 0) {

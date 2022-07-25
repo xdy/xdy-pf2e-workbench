@@ -16,6 +16,15 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
+            reminderCannotAttackIgnoreDeadEidolon: {
+                name: `${MODULENAME}.SETTINGS.reminderCannotAttackIgnoreDeadEidolon.name`,
+                hint: `${MODULENAME}.SETTINGS.reminderCannotAttackIgnoreDeadEidolon.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
             reminderIWR: {
                 name: `${MODULENAME}.SETTINGS.reminderIWR.name`,
                 hint: `${MODULENAME}.SETTINGS.reminderIWR.hint`,
