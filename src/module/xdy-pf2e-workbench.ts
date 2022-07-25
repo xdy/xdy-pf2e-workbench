@@ -186,7 +186,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 {
                                     skill: skill,
                                     dcRK: dcRK,
-                                    rk: "&#123;Recall Knowledge	&#125;" //Grr
+                                    rk: "&#123;Recall Knowledge	&#125;", //Grr
                                 }
                             );
                         } else {
