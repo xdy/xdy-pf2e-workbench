@@ -1,3 +1,15 @@
+# [3.36.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.35.1...v3.36.0) (2022-07-25)
+
+
+### Bug Fixes
+
+* Changed Workbench Flat Check Notes to a passive action (makes it show up in the Free Action section at the very end of the Actions tab.) ([2a5f3e8](https://github.com/xdy/xdy-pf2e-workbench/commit/2a5f3e84001c7d03b8540d8288677edfd0fc812a))
+
+
+### Features
+
+* Optional subsetting to 'Reminder if attack with token that cannot attack' that makes it give no warning for an attacking Eidolon that is dead/has no hp. (Eidolons normally have no hit points.) ([315cfee](https://github.com/xdy/xdy-pf2e-workbench/commit/315cfee26df791d4cf5f9aec1c72a897dcc18a48))
+
 ## [3.35.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.35.0...v3.35.1) (2022-07-25)
 
 
