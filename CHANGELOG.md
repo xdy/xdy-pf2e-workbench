@@ -1,3 +1,10 @@
+## [3.35.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.35.0...v3.35.1) (2022-07-25)
+
+
+### Bug Fixes
+
+* Wrong version for 'previous migration'. If you installed 3.35.0 pcs and npcs with 'Workbench Flat Check Notes' may have lost them and you will have to re-add them manually. Sorry! ([0cffa4d](https://github.com/xdy/xdy-pf2e-workbench/commit/0cffa4d4cb2e32085cc9522ab39cc2fa273fd349))
+
 # [3.35.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.34.0...v3.35.0) (2022-07-25)
 
 
