@@ -101,20 +101,34 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessage") &&
                         !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT)
                     ) {
-                        const vsmf = message.data.content
-                            .match(
-                                "" +
+                        const vsmf = <string>(
+                            message.data.content
+                                .match(
                                     game.i18n.localize(
                                         `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.components`
-                                    ) +
-                                    " ([FVSM]+)"
-                            )?.[1]
-                            ?.toUpperCase();
-                        let content = `${message.token?.name ?? message.actor?.name} casts a ${vsmf} ${
-                            message.data.flags?.pf2e.origin?.type ?? "spell"
-                        } of the ${
-                            message.data.flags.pf2e.casting.tradition
-                        } tradition. Ask your GM if you recognized it automatically/with a reaction.<br>`;
+                                    ) + " ([FVSM]+)"
+                                )?.[1]
+                                ?.toUpperCase()
+                        );
+                        let tokenName: string;
+                        const anonymous = game.i18n.localize(
+                            `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.they`
+                        );
+                        if (<boolean>game.settings.get("pf2e", "metagame.tokenSetsNameVisibility")) {
+                            tokenName = anonymous;
+                        } else {
+                            tokenName = message.token?.name ?? message.actor?.name ?? anonymous;
+                        }
+                        const type = message.data.flags?.pf2e.origin?.type ?? "spell";
+                        const traditionString = message.data.flags.pf2e.casting.tradition;
+                        let content = game.i18n.localize(
+                            game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.firstPart`, {
+                                tokenName: tokenName,
+                                vsmf: vsmf,
+                                type: type,
+                                traditionString: traditionString,
+                            })
+                        );
                         const uuid = <string>message.data.flags?.pf2e.origin?.uuid;
                         const origin: SpellPF2e | null = await fromUuid(uuid);
                         if (origin) {
@@ -156,7 +170,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                     dcRK += 0;
                             }
 
-                            const tradition = message.data.flags.pf2e.casting.tradition;
+                            const tradition = traditionString;
                             let skill = "";
                             if (tradition === "arcane") {
                                 skill = "arcana";
@@ -167,20 +181,32 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             } else if (tradition === "primal") {
                                 skill = "nature";
                             }
-                            content +=
-                                ` If you didn't, you can spend an action on your turn to attempt to identify it: @Check[type:${skill}|dc:${dcRK}|traits:secret,action:recall-knowledge]` +
-                                "{Recall Knowledge}. ";
+                            content += game.i18n.format(
+                                `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.secondPartRK`,
+                                {
+                                    skill: skill,
+                                    dcRK: dcRK,
+                                    rk: "&#123;Recall Knowledge	&#125;" //Grr
+                                }
+                            );
                         } else {
-                            content +=
-                                "If you didn't, ask your GM for the Recall Knowledge DC if you wish to spend an action on your turn to attempt to identify it. ";
+                            content += game.i18n.localize(
+                                `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.secondPartNoRK`
+                            );
                         }
 
                         const buttons = $(data.content).find("button");
                         const saveButtons = buttons.filter((i) => buttons[i].getAttribute("data-action") === "save");
                         if (saveButtons.length === 1) {
-                            content += `<br>Save for the unknown spell is: @Check[type:${saveButtons.attr(
-                                "data-save"
-                            )}|dc:${saveButtons.attr("data-dc")}]`;
+                            const dataSave = saveButtons.attr("data-save") ?? "";
+                            const dataDC = saveButtons.attr("data-dc") ?? "";
+                            content += game.i18n.format(
+                                `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`,
+                                {
+                                    dataSave: dataSave,
+                                    dataDC: dataDC,
+                                }
+                            );
                         }
 
                         await ChatMessage.create({
