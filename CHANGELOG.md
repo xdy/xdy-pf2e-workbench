@@ -1,3 +1,11 @@
+# [3.37.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.36.0...v3.37.0) (2022-07-25)
+
+
+### Features
+
+* If the pf2e system's metagame setting 'Tokens determine NPC name visibility' is set, casting a private spell *always* hides the caster name. ([0db8f78](https://github.com/xdy/xdy-pf2e-workbench/commit/0db8f7831ceb873c714a985eceef11f4f1a2fedb))
+* If the pf2e system's metagame setting 'Tokens determine NPC name visibility' is set, casting a private spell *always* hides the caster name. ([3fc2b63](https://github.com/xdy/xdy-pf2e-workbench/commit/3fc2b63c036564bfe67cb32c2f4f35a22d728581))
+
 # [3.36.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.35.1...v3.36.0) (2022-07-25)
 
 
