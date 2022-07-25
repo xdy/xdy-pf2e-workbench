@@ -98,7 +98,7 @@ export function registerWorkbenchSettings() {
         hint: `${MODULENAME}.SETTINGS.workbenchVersion.hint`,
         scope: "world",
         config: true,
-        default: "3.35.0",
+        default: "3.34.0",
         type: String,
         onChange: () => debouncedReload(),
     });
