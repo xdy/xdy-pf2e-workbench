@@ -88,18 +88,18 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     game.settings.get(MODULENAME, "castPrivateSpell") &&
                     message.data.flags.pf2e?.casting?.id &&
                     (!message.data.whisper || message.data.whisper.length === 0) &&
-                    game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL)
+                    game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) //TODO Doesn't work on mac?
                 ) {
                     data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
-                    const gmIds = ChatMessage.getWhisperRecipients("GM")
-                        .filter((u) => u.active)
-                        ?.map((u) => u.id);
-                    data.whisper = [user.id, ...gmIds];
+                    data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
+                    if (!game.user.isGM) {
+                        data.whisper.push(game.user.id);
+                    }
                     message.data.update(data);
 
                     if (
                         game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessage") &&
-                        !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT)
+                        !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT) //TODO Doesn't work on mac?
                     ) {
                         const vsmf = <string>(
                             message.data.content
@@ -211,7 +211,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
                         await ChatMessage.create({
                             content: content,
-                            speaker: ChatMessage.getSpeaker({ actor: message.actor }),
+                            speaker: ChatMessage.getSpeaker({ token: message.token }),
                         });
                     }
                 }
