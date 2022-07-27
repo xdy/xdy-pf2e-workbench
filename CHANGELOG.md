@@ -1,3 +1,10 @@
+## [3.37.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.37.0...v3.37.1) (2022-07-27)
+
+
+### Bug Fixes
+
+* Fixes for null whisper recipient and wrong speaker for the public message when casting spells privately. ([6a24735](https://github.com/xdy/xdy-pf2e-workbench/commit/6a24735675455d53b1ecd57396b5ecf196724cdc))
+
 # [3.37.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.36.0...v3.37.0) (2022-07-25)
 
 
