@@ -1,3 +1,10 @@
+# [3.38.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.37.1...v3.38.0) (2022-07-27)
+
+
+### Features
+
+* Add option to the setting 'automatically expand damage' to only expand the very latest damage message. ([df1c1c8](https://github.com/xdy/xdy-pf2e-workbench/commit/df1c1c8276c9e13d348512eeee051a8239d677f0))
+
 ## [3.37.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.37.0...v3.37.1) (2022-07-27)
 
 
