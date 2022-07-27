@@ -17,15 +17,19 @@ export function chatCardDescriptionCollapse(html: JQuery) {
 }
 
 export function damageCardExpand(html: JQuery) {
-    if (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll") {
+    const expandDmg = <string>game.settings.get(MODULENAME, "autoExpandDamageRolls");
+    if (expandDmg === "expandedAll") {
         html.find(".dice-tooltip").css("display", "block");
     }
 
-    if (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew") {
-        for (let i = 1; i <= Math.min(3, game.messages.size); i++) {
-            if ((game.messages?.contents[game.messages.size - i]?.id || null) === (html.data("message-id") || null)) {
-                html.find(".dice-tooltip").css("display", "block");
-            }
+    if (expandDmg.startsWith("expandedNew")) {
+        const slice = game.messages.contents
+            .filter((m) => m.data.flags.pf2e.damageRoll)
+            .slice(-Math.min(expandDmg.endsWith("est") ? 1 : 3, game.messages.size));
+        const map = slice.map((m) => m.id);
+        const includes = map.includes(html.data("message-id"));
+        if (includes) {
+            html.find(".dice-tooltip").css("display", "block");
         }
     }
 }

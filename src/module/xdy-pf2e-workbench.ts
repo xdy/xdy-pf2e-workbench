@@ -269,6 +269,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
+        game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
         game.settings.get(MODULENAME, "applyPersistentHealing") ||
         game.settings.get(MODULENAME, "applyPersistentDamage") ||
         (game.settings.get(MODULENAME, "npcMystifier") &&
@@ -295,9 +296,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (
-                !!message.data.flags.pf2e.damageRoll &&
+                message.data.flags.pf2e.damageRoll &&
                 (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
-                    game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew")
+                    game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
+                    game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest")
             ) {
                 damageCardExpand(html);
             }

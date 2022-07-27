@@ -147,9 +147,10 @@
       "autoExpandDamageRolls": {
         "hint": "Client setting to automatically expand damage rolls (foundry default is all damage rolls collapsed). Click dice roll to expand/collapse.",
         "name": "Automatically expand damage rolls.",
-        "collapsedAll": "All damage rolls collapse.",
+        "collapsedAll": "All damage rolls collapse (default foundry).",
         "expandedAll": "All damage rolls expand.",
-        "expandedNew": "New damage rolls expand (also checks last three messages on refresh)."
+        "expandedNew": "New damage rolls expand (also expands last three damage rolls on refresh).",
+        "expandedNewest": "New damage rolls expand (also expands the very last damage roll on refresh)."
       },
       "autoRollDamageAllow": {
         "hint": "Select who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options on the client automation setting menu.",
