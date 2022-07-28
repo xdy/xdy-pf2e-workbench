@@ -1,3 +1,10 @@
+## [3.40.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.40.0...v3.40.1) (2022-07-28)
+
+
+### Bug Fixes
+
+* Had the wrong radius for Bless and Bane. ([e3c76c0](https://github.com/xdy/xdy-pf2e-workbench/commit/e3c76c0374a8bcb1df2fd014da8aeb11f30ae2f9))
+
 # [3.40.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.39.0...v3.40.0) (2022-07-28)
 
 
