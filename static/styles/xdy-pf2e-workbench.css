@@ -55,11 +55,10 @@
 .roll-app .roll-app-table tbody tr,
 .roll-app .roll-app-table thead tr {
     text-align: center;
+}
 
 td:not(:last-child) {
     border-right: 1px solid black;
-}
-
 }
 
 .roll-app .roll-app-table tbody tr.selected {
@@ -89,10 +88,8 @@ td:not(:last-child) {
 .roll-app .roll-app-table tbody button {
     all: revert;
     background: unset;
-    padding: unset;
     border: unset;
     width: unset;
-    margin: unset;
     font-family: var(--font-primary);
     font-size: var(--font-size-14);
     display: block;

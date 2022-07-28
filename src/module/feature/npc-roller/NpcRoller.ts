@@ -138,6 +138,7 @@ class NpcRoller extends Application {
         const rollName = target.data("rollname") as string;
         const token = (canvas as Canvas).tokens?.controlled[0];
         const formula = target.data("formula") as string | number | undefined;
+        const secret = <boolean>game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
 
         if (formula) {
             const formulaString = formula.toString();
@@ -146,9 +147,10 @@ class NpcRoller extends Application {
                 {
                     speaker: ChatMessage.getSpeaker({ token: token?.document }),
                     flavor: rollName,
+                    whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
                 },
                 {
-                    rollMode: game.settings.get("core", "rollMode"),
+                    rollMode: secret ? CONST.DICE_ROLL_MODES.PRIVATE : game.settings.get("core", "rollMode"),
                     create: true,
                 }
             );
