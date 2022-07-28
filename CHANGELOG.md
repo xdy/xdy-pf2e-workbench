@@ -1,3 +1,10 @@
+## [3.38.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.38.1...v3.38.2) (2022-07-28)
+
+
+### Bug Fixes
+
+* Make showing item rarity color on player character sheets work again. ([5a2ea55](https://github.com/xdy/xdy-pf2e-workbench/commit/5a2ea553fa22e4924d216c36b4923c0d5655d7cd))
+
 ## [3.38.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.38.0...v3.38.1) (2022-07-28)
 
 
