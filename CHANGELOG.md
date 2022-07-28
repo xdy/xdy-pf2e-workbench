@@ -1,3 +1,10 @@
+# [3.39.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.38.2...v3.39.0) (2022-07-28)
+
+
+### Features
+
+* When using the npc-roller, holding control when clicking any of the buttons now results in a private roll. ([d5bab32](https://github.com/xdy/xdy-pf2e-workbench/commit/d5bab32d55aa7e4f61623fb41690c9f1f0d7b22a))
+
 ## [3.38.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.38.1...v3.38.2) (2022-07-28)
 
 
