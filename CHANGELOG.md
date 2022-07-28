@@ -1,3 +1,10 @@
+# [3.40.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.39.0...v3.40.0) (2022-07-28)
+
+
+### Features
+
+* Added 'aura effects' for Bane, Bless, Inspire Courage, Inspire Defense. ([b7d95b1](https://github.com/xdy/xdy-pf2e-workbench/commit/b7d95b167bac09b04cd51e809e1535a0bc391158))
+
 # [3.39.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.38.2...v3.39.0) (2022-07-28)
 
 
