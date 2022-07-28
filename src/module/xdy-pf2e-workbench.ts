@@ -477,18 +477,16 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
-                $html.find(".item-list").each((i, e) => {
-                    $(e)
-                        .find(".list-row")
-                        .each((i, e) => {
-                            const $e = $(e);
-                            const rarity = $e.attr("data-item-rarity");
-                            if (rarity) {
-                                $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
-                            }
-                        });
+                $html.find(".item").each((i, e) => {
+                    $(e).each((i, e) => {
+                        const rarity = $(e).attr("data-item-rarity");
+                        if (rarity) {
+                            $(e).find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
+                        }
+                    });
                 });
             }
+
             if (game.user?.isGM && game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
                 $html.find(".recall-knowledge").each((i, e) => {
                     const token = sheet.token;
