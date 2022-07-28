@@ -1,3 +1,10 @@
+## [3.40.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.40.1...v3.40.2) (2022-07-28)
+
+
+### Bug Fixes
+
+* Had the wrong effect for Aura: Bless. ([8f33d58](https://github.com/xdy/xdy-pf2e-workbench/commit/8f33d58682f6ff7f62cb7043f8b7238e8e491c37))
+
 ## [3.40.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.40.0...v3.40.1) (2022-07-28)
 
 
