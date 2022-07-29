@@ -1,3 +1,11 @@
+## [3.40.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.40.2...v3.40.3) (2022-07-29)
+
+
+### Bug Fixes
+
+* 'Fix' broken css by deleting lines until it stops being broken. Best way to fix css. :) ([0f827c7](https://github.com/xdy/xdy-pf2e-workbench/commit/0f827c7ed92f837da819a62cbddbb143b39c5309))
+* Set Bane to affect enemies (support for enemies is not yet part of foundry pf2e system, but it's coming) ([c3b54f8](https://github.com/xdy/xdy-pf2e-workbench/commit/c3b54f8cdd4fde61eca8b06d40f9780ac417a8eb))
+
 ## [3.40.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.40.1...v3.40.2) (2022-07-28)
 
 
