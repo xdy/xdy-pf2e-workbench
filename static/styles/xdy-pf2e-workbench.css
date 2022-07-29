@@ -57,10 +57,6 @@
     text-align: center;
 }
 
-td:not(:last-child) {
-    border-right: 1px solid black;
-}
-
 .roll-app .roll-app-table tbody tr.selected {
     background: rgb(0 0 0 / 66%);
     color: white;
