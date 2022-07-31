@@ -1,3 +1,10 @@
+# [3.41.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.40.3...v3.41.0) (2022-07-31)
+
+
+### Features
+
+* Moved several client automation settings (giveUnconsciousIfDyingRemovedAt0HP, autoRemoveUnconsciousAtGreaterThanZeroHP, giveWoundedWhenDyingRemoved, autoGainDyingAtZeroHP,autoRemoveDyingAtGreaterThanZeroHP) to world settings instead as part of hopefully fixing the various condition automation bugs. ([bc28dca](https://github.com/xdy/xdy-pf2e-workbench/commit/bc28dcad8b60199651712e51c6d9ad05e0c9d88a))
+
 ## [3.40.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.40.2...v3.40.3) (2022-07-29)
 
 
