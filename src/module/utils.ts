@@ -1,37 +1,8 @@
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
+import { ActorPF2e } from "@actor";
 
-/**
- * Should only be used for optins with *client* settings.
- * Note that this method *always* defers to a player if one is logged in. I.e. if a GM does something for a logged in player, client automation will not work. E.g. Wounded is not removed if pc is healed.
- * @param clientdocument
- * @param playerCondition
- * @param gmCondition
- */
-export function shouldIHandleThisForClient(clientdocument: ClientDocument, playerCondition = true, gmCondition = true) {
-    const activePlayerExists =
-        clientdocument.hasPlayerOwner &&
-        game.users?.players
-            .filter((u) => u.active)
-            .filter((u) => !u.isGM)
-            .filter((u) => clientdocument.canUserModify(u, "update")).length > 0;
-
-    const canModify = clientdocument.canUserModify(game.user, "update");
-    const b = !game.user?.isGM && playerCondition && activePlayerExists && canModify;
-    if (b) {
-        return true;
-    } else if (game.user?.isGM && gmCondition && (!activePlayerExists || !playerCondition)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-export function shouldIHandleThisMessageForClient(
-    message: ChatMessagePF2e,
-    playerCondition: boolean,
-    gmCondition: boolean
-) {
+export function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
     const userId = message.data.user;
     const amIMessageSender = userId === game.user?.id;
     if (!game.user?.isGM && playerCondition && amIMessageSender) {
@@ -55,4 +26,22 @@ export function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): str
         }
     }
     return degreeOfSuccess;
+}
+
+export function shouldIHandleThis(actor: ActorPF2e | null) {
+    if (!actor) return null;
+    const currentUser = game.users.get(game.user.id, { strict: true });
+    const activeUsers = game.users.filter((u) => u.active);
+    const assignedUser = activeUsers.find((u) => u.character === actor);
+    const firstGM = activeUsers.find((u) => u.isGM);
+    const anyoneWithPermission = activeUsers.find((u) => actor.canUserModify(u, "update"));
+    const updater =
+        currentUser.active && actor.canUserModify(currentUser, "update")
+            ? currentUser
+            : assignedUser ?? firstGM ?? anyoneWithPermission ?? null;
+    return game.userId === updater?.id;
+}
+
+export function isFirstGM() {
+    return game.userId !== game.users?.find((u) => u.isGM && u.active)?.id;
 }

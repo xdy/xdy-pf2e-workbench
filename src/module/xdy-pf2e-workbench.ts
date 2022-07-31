@@ -36,7 +36,7 @@ import {
     maxHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
-import { nth } from "./utils";
+import { isFirstGM, nth } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
@@ -253,7 +253,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     reminderBreathWeapon(message).then(() => console.log("Workbench reminderBreathWeapon complete"));
                 }
 
-                if (game.user.isGM && game.settings.get(MODULENAME, "automatedAnimationOn")) {
+                if (isFirstGM() && game.settings.get(MODULENAME, "automatedAnimationOn")) {
                     playAnimationAndSound(message).then(() => console.log("Workbench playAnimationAndSound complete"));
                 }
             } else {

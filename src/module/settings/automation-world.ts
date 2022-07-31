@@ -68,13 +68,67 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
-            allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation: {
-                name: `${MODULENAME}.SETTINGS.allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation.name`,
-                hint: `${MODULENAME}.SETTINGS.allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation.hint`,
+            giveUnconsciousIfDyingRemovedAt0HP: {
+                name: `${MODULENAME}.SETTINGS.giveUnconsciousIfDyingRemovedAt0HP.name`,
+                hint: `${MODULENAME}.SETTINGS.giveUnconsciousIfDyingRemovedAt0HP.hint`,
                 scope: "world",
                 config: true,
-                default: true,
+                default: false,
                 type: Boolean,
+                onChange: () => debouncedReload(),
+            },
+            autoRemoveUnconsciousAtGreaterThanZeroHP: {
+                name: `${MODULENAME}.SETTINGS.autoRemoveUnconsciousAtGreaterThanZeroHP.name`,
+                hint: `${MODULENAME}.SETTINGS.autoRemoveUnconsciousAtGreaterThanZeroHP.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
+            giveWoundedWhenDyingRemoved: {
+                name: `${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.name`,
+                hint: `${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
+            autoGainDyingAtZeroHP: {
+                name: `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.name`,
+                hint: `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.hint`,
+                scope: "world",
+                config: true,
+                default: "none",
+                type: String,
+                choices: {
+                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.no`),
+                    addOne: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addOne`),
+                    addWoundedLevel: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addWoundedLevel`),
+                    addOneForCharacters: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addOneForCharacters`
+                    ),
+                    addWoundedLevelForCharacters: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addWoundedLevelForCharacters`
+                    ),
+                },
+                onChange: () => debouncedReload(),
+            },
+            autoRemoveDyingAtGreaterThanZeroHP: {
+                name: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.name`,
+                hint: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.hint`,
+                scope: "world",
+                config: true,
+                default: "none",
+                type: String,
+                choices: {
+                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.no`),
+                    remove: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.removeDying`),
+                    removeForCharacters: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.removeDyingForCharacters`
+                    ),
+                },
                 onChange: () => debouncedReload(),
             },
         };

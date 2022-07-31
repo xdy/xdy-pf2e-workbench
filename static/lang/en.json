@@ -178,32 +178,32 @@
         "name": "Notify when a spell attack is rolled and no spell card was found."
       },
       "autoGainDyingAtZeroHP": {
-        "hint": "Client setting to automatically increase Dying at 0 HP.",
+        "hint": "Setting to automatically increase Dying at 0 HP.",
         "name": "Automatically increase Dying at 0 HP.",
         "no": "No",
         "addOne": "Add one",
-        "addWoundedLevel": "Add 1 + Wounded level",
+        "addWoundedLevel": "Add 1 + Wounded level, for all",
         "addOneForCharacters": "Add one, for characters+familiars",
         "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters+familiars"
       },
       "giveUnconsciousIfDyingRemovedAt0HP": {
-        "hint": "Client setting to automatically give unconscious if Dying removed while at 0 HP.",
+        "hint": "Setting to automatically give unconscious if Dying removed while at 0 HP.",
         "name": "Automatically give unconscious if Dying removed at 0 HP.",
         "no": "No"
       },
       "autoRemoveDyingAtGreaterThanZeroHP": {
-        "hint": "Client setting to automatically remove Dying when healed to above 0 HP.",
+        "hint": "Setting to automatically remove Dying when healed to above 0 HP.",
         "name": "Automatically remove Dying when healed to above 0 HP.",
         "no": "No",
         "removeDying": "Remove Dying for all",
         "removeDyingForCharacters": "Remove Dying, for characters+familiars"
       },
       "autoRemoveUnconsciousAtGreaterThanZeroHP": {
-        "hint": "Client setting to automatically remove unconscious if healed to greater than 0 HP.",
+        "hint": "Setting to automatically remove unconscious if healed to greater than 0 HP.",
         "name": "Automatically remove unconscious if healed to greater than 0 HP."
       },
       "giveWoundedWhenDyingRemoved": {
-        "hint": "Client setting to automatically give Wounded condition when Dying condition is removed.",
+        "hint": "Setting to automatically give Wounded condition when Dying condition is removed.",
         "name": "Automatically give Wounded when Dying is removed."
       },
       "toggleUndetectedWithVisibilityState": {
@@ -213,10 +213,6 @@
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn for characters, npcs and familiars.",
         "name": "Automatically decrease the frightened condition each turn."
-      },
-      "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation": {
-        "hint": "(Experimental) Disable to support wounded/dying/unconscious automation if the GM *always* handles damage for users.",
-        "name": "(Experimental) Disable to support wounded/dying/unconscious automation if the GM *always* handles damage for users."
       },
       "enableAutomaticMove": {
         "hint": "Select to enable setting initiative of combatant outside it's own turn to just before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",

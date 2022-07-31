@@ -1,4 +1,4 @@
-import { degreeOfSuccessWithRerollHandling, shouldIHandleThisMessageForClient } from "../../utils";
+import { degreeOfSuccessWithRerollHandling, shouldIHandleThisMessage } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
@@ -9,7 +9,7 @@ import { SpellPF2e } from "@item";
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 5;
     if (
-        shouldIHandleThisMessageForClient(
+        shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow")),
             ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow"))
@@ -74,26 +74,30 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         );
                     }
                     //Hack to make automatic damageRoll be private if the spell is private. Ain't globals fun?
-                    const originalRollMode = game.settings.get("core", "rollMode");
-                    if (
-                        message.data.type === CONST.CHAT_MESSAGE_TYPES.WHISPER &&
-                        originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE
-                    ) {
-                        game.settings.set("core", "rollMode", CONST.DICE_ROLL_MODES.PRIVATE);
-                    }
-                    //Until spell level flags are added to attack rolls it is the best I could come up with.
-                    //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
-                    //@ts-ignore
-                    origin?.rollDamage({
-                        currentTarget: {
-                            closest: () => {
-                                return { dataset: { spellLvl: spellLevel.value } };
+                    let originalRollMode: any;
+                    try {
+                        originalRollMode = game.settings.get("core", "rollMode");
+                        if (
+                            message.data.type === CONST.CHAT_MESSAGE_TYPES.WHISPER &&
+                            originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE
+                        ) {
+                            game.settings.set("core", "rollMode", CONST.DICE_ROLL_MODES.PRIVATE);
+                        }
+                        //Until spell level flags are added to attack rolls it is the best I could come up with.
+                        //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
+                        //@ts-ignore
+                        origin?.rollDamage({
+                            currentTarget: {
+                                closest: () => {
+                                    return { dataset: { spellLvl: spellLevel.value } };
+                                },
                             },
-                        },
-                    });
-                    //Make sure to restore original roll mode
-                    if (originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) {
-                        game.settings.set("core", "rollMode", originalRollMode);
+                        });
+                    } finally {
+                        //Make sure to restore original roll mode
+                        if (originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) {
+                            game.settings.set("core", "rollMode", originalRollMode);
+                        }
                     }
                 } else if (rollForStrike) {
                     const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
@@ -126,7 +130,7 @@ export async function persistentDamage(message: ChatMessagePF2e) {
         message.data.speaker.token &&
         message.data.flavor &&
         message.roll?.total &&
-        shouldIHandleThisMessageForClient(
+        shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
             ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
@@ -167,7 +171,7 @@ export async function persistentHealing(message: ChatMessagePF2e) {
         game.combats.active &&
         game.combats.active.combatant &&
         game.combats.active.combatant.actor &&
-        shouldIHandleThisMessageForClient(
+        shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
             ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))

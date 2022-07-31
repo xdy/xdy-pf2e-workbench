@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { shouldIHandleThisForClient } from "../../utils";
+import { shouldIHandleThis } from "../../utils";
 
 export async function moveSelectedAheadOfCurrent(selectedCombatantId): Promise<void> {
     //TODO Ugly hack, might want to do a PR to expose the code in encounter-tracker#setInitiativeFromDrop?
@@ -27,7 +27,7 @@ export async function moveOnZeroHP(actor: ActorPF2e, update: Record<string, stri
             : <string>canvas?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
     );
     if (
-        shouldIHandleThisForClient(actor) &&
+        shouldIHandleThis(actor) &&
         combatant &&
         combatant.id !== game.combat?.combatant?.id &&
         hp > 0 &&

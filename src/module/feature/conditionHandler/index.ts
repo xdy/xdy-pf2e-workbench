@@ -1,11 +1,11 @@
 import { CombatantPF2e } from "@module/encounter";
-import { shouldIHandleThisForClient } from "../../utils";
+import { isFirstGM, shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e, CharacterPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
-    if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThisForClient(combatant))) {
+    if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThis(combatant.actor))) {
         const actors = [combatant.actor];
         actors.push(...getMinions(combatant.actor));
         for (const actor of actors) {
@@ -23,15 +23,7 @@ export async function increaseDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (
-        shouldIHandleThisForClient(
-            actor,
-            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
-            true
-        ) &&
-        hp > 0 &&
-        getProperty(update, "data.attributes.hp.value") <= 0
-    ) {
+    if (shouldIHandleThis(actor) && hp > 0 && getProperty(update, "data.attributes.hp.value") <= 0) {
         const orcFerocity = actor.data.items.find((feat) => feat.slug === "orc-ferocity");
         const orcFerocityUsed: any = actor.data.items.find((effect) => effect.slug === "orc-ferocity-used");
         const incredibleFerocity = actor.data.items.find((feat) => feat.slug === "incredible-ferocity");
@@ -140,15 +132,7 @@ export async function removeDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (
-        shouldIHandleThisForClient(
-            actor,
-            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
-            true
-        ) &&
-        hp <= 0 &&
-        getProperty(update, "data.attributes.hp.value") > 0
-    ) {
+    if (shouldIHandleThis(actor) && hp <= 0 && getProperty(update, "data.attributes.hp.value") > 0) {
         const value = actor.getCondition("dying")?.value || 0;
         const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
         if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.data.type) : true) {
@@ -166,11 +150,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     hp: number
 ): Promise<void> {
     if (
-        shouldIHandleThisForClient(
-            actor,
-            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
-            true
-        ) &&
+        shouldIHandleThis(actor) &&
         hp <= 0 &&
         getProperty(update, "data.attributes.hp.value") > 0 &&
         actor.hasCondition("unconscious")
@@ -186,7 +166,7 @@ function getMinions(actor: ActorPF2e): ActorPF2e[] {
             actors.push(<ActorPF2e>(<CharacterPF2e>actor).familiar);
         }
         const eidolons = <ActorPF2e[]>game.scenes.current?.tokens
-            ?.filter(() => !game.user.isGM)
+            ?.filter(() => !isFirstGM())
             ?.filter((token) => token.canUserModify(game.user, "update"))
             ?.map((token) => token.actor)
             ?.filter((x) => x?.traits.has("eidolon"));
@@ -194,7 +174,7 @@ function getMinions(actor: ActorPF2e): ActorPF2e[] {
             actors.push(...(<ActorPF2e[]>eidolons));
         }
         const animalCompanions = game.scenes.current?.tokens
-            ?.filter(() => !game.user.isGM)
+            ?.filter(() => !isFirstGM())
             ?.filter((token) => token.canUserModify(game.user, "update"))
             ?.map((token) => token.actor)
             ?.filter((chr: CharacterPF2e) => chr?.class?.name === "Animal Companion");
@@ -212,14 +192,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
 
     const numbToDeath = actor.data.items.find((feat) => feat.slug === "numb-to-death"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1182
     const numbToDeathUsed: any = actor.data.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
-    if (
-        item.slug === "dying" &&
-        shouldIHandleThisForClient(
-            actor,
-            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
-            true
-        )
-    ) {
+    if (item.slug === "dying" && isFirstGM()) {
         if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
             const effect: any = {
                 type: "effect",
@@ -284,23 +257,21 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
 export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
     const actor = <ActorPF2e>item.parent;
     if (
+        isFirstGM() &&
         item.slug === "dying" &&
-        (await game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) &&
-        shouldIHandleThisForClient(
-            actor,
-            <boolean>game.settings.get(MODULENAME, "allowPlayerConditionHandlingForDyingWoundedUnconsciousAutomation"),
-            true
-        ) &&
+        game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP") &&
         actor.data.data.attributes?.hp?.value === 0 &&
         !actor.hasCondition("unconscious")
     ) {
-        await item.parent?.toggleCondition("unconscious");
+        if (!actor.hasCondition("unconscious")) {
+            await item.parent?.toggleCondition("unconscious");
+        }
     }
 }
 
 export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
     const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
-    if (game.user.isGM && physicalTypes.includes(item.type) && item.actor) {
+    if (isFirstGM() && physicalTypes.includes(item.type) && item.actor) {
         if (item.actor.inventory.bulk.isEncumbered) {
             if (!item.actor.hasCondition("encumbered")) {
                 await item.actor.increaseCondition("encumbered");
