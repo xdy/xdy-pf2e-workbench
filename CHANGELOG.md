@@ -1,3 +1,10 @@
+## [3.41.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.41.0...v3.41.1) (2022-07-31)
+
+
+### Bug Fixes
+
+* Make altered max heropoints visible to players. ([a5f13a8](https://github.com/xdy/xdy-pf2e-workbench/commit/a5f13a81085cc54bdb10e443c0440bc70cf3596d)), closes [#354](https://github.com/xdy/xdy-pf2e-workbench/issues/354)
+
 # [3.41.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.40.3...v3.41.0) (2022-07-31)
 
 
