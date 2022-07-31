@@ -389,7 +389,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
     if (game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
         Hooks.on("renderCharacterSheetPF2e", (app: TokenHUD, html: JQuery, data: any) => {
-            if (game.user?.isGM && game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
+            if (game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
                 maxHeroPoints(app, html, data);
             }
         });
