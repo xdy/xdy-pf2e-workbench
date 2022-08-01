@@ -1,3 +1,10 @@
+## [3.42.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.42.0...v3.42.1) (2022-08-01)
+
+
+### Bug Fixes
+
+* Remove the module-specific "Spell Effect: Protective Ward" as it's not needed with the latest version of the pf2e system. ([bccf0d3](https://github.com/xdy/xdy-pf2e-workbench/commit/bccf0d3ef0ecb397cb0102de1cb453fd37fa94d3))
+
 # [3.42.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.41.4...v3.42.0) (2022-08-01)
 
 
