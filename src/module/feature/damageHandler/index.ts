@@ -89,6 +89,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         }
                         //Until spell level flags are added to attack rolls it is the best I could come up with.
                         //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
+                        await new Promise((resolve) => setTimeout(resolve, 100)); //Sleep to wait for flat check
+                        //TODO Check if pf2-flat-check is installed, and if the last message is a flat check, if so, do not roll damage on a fail.
                         //@ts-ignore
                         origin?.rollDamage({
                             currentTarget: {
@@ -115,6 +117,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
                     if (actionIds && actionIds[1]) {
                         action = getActionFromMessage(actions, actionIds, message);
+                        await new Promise((resolve) => setTimeout(resolve, 100)); //Sleep to wait for flat check
+                        //TODO Check if pf2-flat-check is installed, and if the last message is a flat check, if so, do not roll damage on a fail.
                         if (degreeOfSuccess === "success") {
                             action?.damage({ options: rollOptions });
                         } else if (degreeOfSuccess === "criticalSuccess") {
