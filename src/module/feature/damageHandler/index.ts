@@ -54,7 +54,11 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
                         const msg = game.messages?.contents[chatLength - i];
                         if (msg && (<ActorFlagsPF2e>msg.data.flags.pf2e).origin?.uuid === originUuid) {
-                            const level = msg.data.content.match(/data-spell-lvl="(\d+)"/);
+                            let level = msg.data.content.match(/data-slot-level="(\d+)"/);
+                            if (!level) {
+                                //For pre-V10/4.0 pf2e system
+                                level = msg.data.content.match(/data-spell-lvl="(\d+)"/);
+                            }
                             if (level && level[1]) {
                                 levelFromChatCard = true;
                                 // @ts-ignore Wtf? How to make a number into a OneToTen?
