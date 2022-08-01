@@ -7,7 +7,6 @@ import { ActorFlagsPF2e } from "@actor/data/base";
 import { SpellPF2e } from "@item";
 
 async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
-    //TODO Check if pf2-flat-check is installed, and if the last message is a flat check, if so, do not roll damage on a fail.
     let rollDamage = true;
     if (game.modules.get("pf2-flat-check")?.active) {
         await new Promise((resolve) => setTimeout(resolve, 100)); //Sleep to wait for flat check
@@ -18,8 +17,7 @@ async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolea
                 .slice(messageIndex)
                 .reverse()
                 .filter((msg) => {
-                    const includes = msg.data.content.includes("dice-result flat-check-success");
-                    return includes;
+                    return msg.data.content.includes("dice-result flat-check-success");
                 }).length > 0 || false;
         console.log(rollDamage);
     }
