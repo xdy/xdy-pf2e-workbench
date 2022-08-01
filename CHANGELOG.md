@@ -1,3 +1,10 @@
+# [3.42.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.41.4...v3.42.0) (2022-08-01)
+
+
+### Features
+
+* Added effects for Dread Marshal Stance and Inspiring Marshal Stance to the xdy-pf2e-workbench-items compendium, courtesy of [@stwlam](https://github.com/stwlam) ([6913876](https://github.com/xdy/xdy-pf2e-workbench/commit/691387654b9498adfe9bf9c234effebe1b1d366b))
+
 ## [3.41.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.41.3...v3.41.4) (2022-08-01)
 
 
