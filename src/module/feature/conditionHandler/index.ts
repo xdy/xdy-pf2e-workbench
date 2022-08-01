@@ -155,7 +155,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
         getProperty(update, "data.attributes.hp.value") > 0 &&
         actor.hasCondition("unconscious")
     ) {
-        await actor.toggleCondition("unconscious");
+        await actor.decreaseCondition("unconscious", { forceRemove: true });
     }
 }
 
