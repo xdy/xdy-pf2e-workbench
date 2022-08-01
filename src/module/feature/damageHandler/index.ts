@@ -6,6 +6,26 @@ import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
 import { SpellPF2e } from "@item";
 
+async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
+    //TODO Check if pf2-flat-check is installed, and if the last message is a flat check, if so, do not roll damage on a fail.
+    let rollDamage = true;
+    if (game.modules.get("pf2-flat-check")?.active) {
+        await new Promise((resolve) => setTimeout(resolve, 100)); //Sleep to wait for flat check
+        const array = Array.from(game.messages);
+        const messageIndex = array.findIndex((msg) => msg.id === message.id);
+        rollDamage =
+            array
+                .slice(messageIndex)
+                .reverse()
+                .filter((msg) => {
+                    const includes = msg.data.content.includes("dice-result flat-check-success");
+                    return includes;
+                }).length > 0 || false;
+        console.log(rollDamage);
+    }
+    return rollDamage;
+}
+
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 5;
     if (
@@ -87,18 +107,18 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         ) {
                             game.settings.set("core", "rollMode", CONST.DICE_ROLL_MODES.PRIVATE);
                         }
-                        //Until spell level flags are added to attack rolls it is the best I could come up with.
-                        //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
-                        await new Promise((resolve) => setTimeout(resolve, 100)); //Sleep to wait for flat check
-                        //TODO Check if pf2-flat-check is installed, and if the last message is a flat check, if so, do not roll damage on a fail.
-                        //@ts-ignore
-                        origin?.rollDamage({
-                            currentTarget: {
-                                closest: () => {
-                                    return { dataset: { spellLvl: spellLevel } };
+                        if (await noOrSuccessfulFlatcheck(message)) {
+                            //Until spell level flags are added to attack rolls it is the best I could come up with.
+                            //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
+                            //@ts-ignore
+                            origin?.rollDamage({
+                                currentTarget: {
+                                    closest: () => {
+                                        return { dataset: { spellLvl: spellLevel } };
+                                    },
                                 },
-                            },
-                        });
+                            });
+                        }
                     } finally {
                         //Make sure to restore original roll mode
                         if (originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) {
@@ -117,12 +137,12 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
                     if (actionIds && actionIds[1]) {
                         action = getActionFromMessage(actions, actionIds, message);
-                        await new Promise((resolve) => setTimeout(resolve, 100)); //Sleep to wait for flat check
-                        //TODO Check if pf2-flat-check is installed, and if the last message is a flat check, if so, do not roll damage on a fail.
-                        if (degreeOfSuccess === "success") {
-                            action?.damage({ options: rollOptions });
-                        } else if (degreeOfSuccess === "criticalSuccess") {
-                            action?.critical({ options: rollOptions });
+                        if (await noOrSuccessfulFlatcheck(message)) {
+                            if (degreeOfSuccess === "success") {
+                                action?.damage({ options: rollOptions });
+                            } else if (degreeOfSuccess === "criticalSuccess") {
+                                action?.critical({ options: rollOptions });
+                            }
                         }
                     }
                 }
