@@ -89,7 +89,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         origin?.rollDamage({
                             currentTarget: {
                                 closest: () => {
-                                    return { dataset: { spellLvl: spellLevel.value } };
+                                    return { dataset: { spellLvl: spellLevel } };
                                 },
                             },
                         });
