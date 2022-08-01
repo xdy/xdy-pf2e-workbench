@@ -16,6 +16,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [JDCalvert](https://github.com/JDCalvert) - Added the option to use size in mystified token names.
 * [Supe](https://github.com/CarlosFdez/) - Added setting menu support.
 * [Skulbuny](https://github.com/sean-clayton/) - Ported over the npc quick roller from the toolbox.
+* [stwlam](https://github.com/stwlam) - Added effects for Dread Marshal Stance and Inspiring Marshal Stance
 
 I've probably forgotten someone, if so, please tell me!
 
