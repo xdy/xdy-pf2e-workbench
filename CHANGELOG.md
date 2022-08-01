@@ -1,3 +1,10 @@
+# [3.43.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.42.2...v3.43.0) (2022-08-01)
+
+
+### Features
+
+* If the option to autoroll damage on a hit is enabled, the module [PF2e Flat Check](https://foundryvtt.com/packages/pf2-flat-check) is active, and a flat check fails, the Workbench does not autoroll damage. ([66866af](https://github.com/xdy/xdy-pf2e-workbench/commit/66866afbc2f9e83ea5a581378f3ca3b8bb3c17c7))
+
 ## [3.42.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.42.1...v3.42.2) (2022-08-01)
 
 
