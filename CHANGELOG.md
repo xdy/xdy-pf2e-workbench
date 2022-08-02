@@ -1,3 +1,10 @@
+## [3.43.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.43.2...v3.43.3) (2022-08-02)
+
+
+### Bug Fixes
+
+* If pf2-flat-check is installed and auto roll damage is enabled, wait a bit longer for flat check message result. ([5968a8e](https://github.com/xdy/xdy-pf2e-workbench/commit/5968a8e098dff0772b46b446fcae106174db7d0a))
+
 ## [3.43.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.43.1...v3.43.2) (2022-08-02)
 
 
