@@ -9,7 +9,7 @@ import { SpellPF2e } from "@item";
 async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
     if (game.modules.get("pf2-flat-check")?.active) {
-        await new Promise((resolve) => setTimeout(resolve, 100)); //Sleep to wait for flat check
+        await new Promise((resolve) => setTimeout(resolve, 250)); //Sleep to wait for flat check
         const array = Array.from(game.messages);
         const messageIndex = array.findIndex((msg) => msg.id === message.id);
         rollDamage =
@@ -19,7 +19,6 @@ async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolea
                 .filter((msg) => {
                     return msg.data.content.includes("dice-result flat-check-success");
                 }).length > 0 || false;
-        console.log(rollDamage);
     }
     return rollDamage;
 }
