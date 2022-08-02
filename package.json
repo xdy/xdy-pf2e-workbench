@@ -47,7 +47,7 @@
     "@types/sortablejs": "^1.13.0",
     "@types/tooltipster": "^0.0.31",
     "@types/webpack-env": "^1.17.0",
-    "@types/yaireo__tagify": "^4.12.0",
+    "@types/yaireo__tagify": "^4.15.0",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
     "copy-webpack-plugin": "^11.0.0",
