@@ -100,6 +100,7 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             map.set("Apply Conditions", "icons/svg/dice-target.svg");
             map.set("Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp");
             map.set("BattleMedicineImmunity", "icons/svg/dice-target.svg");
+            map.set("Update Aura Radius", "systems/pf2e/icons/spells/destructive-aura.webp");
             map.set("Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp");
             map.set("Conditions Manager", "systems/pf2e/icons/conditions/doomed.webp");
             map.set("Countdown-Cooldown", "icons/svg/dice-target.svg");
