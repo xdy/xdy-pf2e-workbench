@@ -1,3 +1,10 @@
+## [3.44.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.44.0...v3.44.1) (2022-08-03)
+
+
+### Bug Fixes
+
+* Mark the Special Effects/Automated Animation functionality as deprecated. It's now part of the module```[pf2e-jb2a-macros](https://github.com/MrVauxs/pf2e-jb2a-macros)``` ([85f6a9d](https://github.com/xdy/xdy-pf2e-workbench/commit/85f6a9de1067de85963b58452d04bada429b9d5d))
+
 # [3.44.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.43.6...v3.44.0) (2022-08-03)
 
 
