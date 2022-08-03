@@ -1,3 +1,10 @@
+## [3.43.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.43.4...v3.43.5) (2022-08-03)
+
+
+### Bug Fixes
+
+* Fixed problems with integration with the pf2-flat-check module. ([d169d44](https://github.com/xdy/xdy-pf2e-workbench/commit/d169d44df7917767d8c24ea8f55a7fa23abc70c8)), closes [#358](https://github.com/xdy/xdy-pf2e-workbench/issues/358)
+
 ## [3.43.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.43.3...v3.43.4) (2022-08-02)
 
 
