@@ -9,11 +9,15 @@ import { SpellPF2e } from "@item";
 async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
     if (game.modules.get("pf2-flat-check")?.active) {
-        const { token, item, actor } = message;
+        const { token, actor } = message;
+        let { item } = message;
+        if (!item && message.data.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/) && RegExp.$1 === "xxPF2ExUNARMEDxx") {
+            item = { type: "weapon", data: {} } as any;
+        }
         if (token && item && actor) {
             if (
                 //Reverse of the check in the pf2-flat-check module
-                (["ancestry", "feat", "melee", "weapon"].includes(item.type) &&
+                (["ancestry", "effect", "feat", "melee", "weapon"].includes(item.type) &&
                     message.isRoll &&
                     !message.isDamageRoll) ||
                 (item.type === "spell" && !message.isRoll)
@@ -60,7 +64,6 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const rollType = flags.context?.type;
 
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
-            //Exit early if no origin is found (probably unarmed attack)
             const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
             const rollForNonAttackSpell =
                 origin !== null &&
@@ -137,18 +140,13 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     }
                 } else if (rollForStrike) {
                     const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
-                    const actions: any =
-                        // @ts-ignore Oof this is ugly. TODO Figure out how to do it properly.
-                        messageToken["data"]["document"]["_actor"]["data"]["data"]["actions"] ??
-                        // @ts-ignore
-                        messageActor?.data.data?.actions;
+                    // @ts-ignore
+                    const actions = messageActor?.data.data?.actions;
                     const actionIds = originUuid.match(/Item.(\w+)/);
-                    let action: any;
-
-                    if (actionIds && actionIds[1]) {
-                        action = getActionFromMessage(actions, actionIds, message);
+                    if (actions && actionIds && actionIds[1]) {
                         const rollDamage = await noOrSuccessfulFlatcheck(message); //Can't be inlined
                         if (rollDamage) {
+                            const action = getActionFromMessage(actions, actionIds, message);
                             if (degreeOfSuccess === "success") {
                                 action?.damage({ options: rollOptions });
                             } else if (degreeOfSuccess === "criticalSuccess") {
