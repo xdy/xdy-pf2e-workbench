@@ -26,7 +26,6 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 * The latest versions of all V9-compatible macros from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e are included in each Workbench release. They can be found in the asymonous-benefactor-macros compendium, with the express permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor. Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of each macro. Do not import the macros named like 'XDY DO_NOT_IMPORT', instead import the ones with proper names. Effects for the Lingering Heroics macro included with the above are now included in the asymonous-benefactor-effects compendium, import these to automatically get the proper duration effect sent to chat.
 * Option to automatically reduce the Frightened condition at the end of each turn. See the included effect 'Effect: Dirge of Doom' for how to set a minimum frightened level that the module won't reduce below.
 * Options to automatically move combatant that goes to 0 hp to just before the current combatant. (Normally due to the current combatant just having downed the target combatant.)
-* Option to do a custom animation and sound on a hit, miss, critical miss and/or critical success. Requires that the module https://foundryvtt.com/packages/autoanimations be installed (along with it's dependencies). For the default miss animation install the module https://foundryvtt.com/packages/JB2A_DnD5e. For the default miss sound install the module https://foundryvtt.com/packages/soundfxlibrary. Or replace with your own animation and/or sound. The name of the sound file can instead be the name of a table or a playlist to draw a random sound from (for a table, make a table with a text line for each sound that has the path to the sound, setting the table's dice formula to, say, 1d23 if the table has 23 entries.)
 * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
 * Option to automatically add a reminder effect when breath weapons are used (i.e. sent to chat.) Breath weapon description must match 
 ```"<p>.*can't use.*1d([46]) rounds.*</p>"``` or the localized equivalent for it to be recognized.
@@ -55,7 +54,7 @@ Experimental features:
 
 
 Deprecated features (will be removed eventually):
-None right now.
+* (Deprecated, functionality replaced by the module [pf2e-jb2a-macros](https://github.com/MrVauxs/pf2e-jb2a-macros)) Option to do a custom animation and sound on a hit, miss, critical miss and/or critical success. Requires that the module https://foundryvtt.com/packages/autoanimations be installed (along with it's dependencies). For the default miss animation install the module https://foundryvtt.com/packages/JB2A_DnD5e. For the default miss sound install the module https://foundryvtt.com/packages/soundfxlibrary. Or replace with your own animation and/or sound. The name of the sound file can instead be the name of a table or a playlist to draw a random sound from (for a table, make a table with a text line for each sound that has the path to the sound, setting the table's dice formula to, say, 1d23 if the table has 23 entries.)
 
 ## Installation
 
