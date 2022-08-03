@@ -70,6 +70,15 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
+            castPrivateSpellWithPublicMessageShowTraits: {
+                name: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.name`,
+                hint: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
             addGmRKButtonToNpc: {
                 name: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.name`,
                 hint: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.hint`,

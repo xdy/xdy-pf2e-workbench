@@ -83,7 +83,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     if (game.settings.get(MODULENAME, "castPrivateSpell")) {
         Hooks.on(
             "preCreateChatMessage",
-            async (message: ChatMessagePF2e, data: ChatMessageDataPF2e, options, user: UserPF2e) => {
+            async (message: ChatMessagePF2e, data: ChatMessageDataPF2e, _options, _user: UserPF2e) => {
                 if (
                     game.settings.get(MODULENAME, "castPrivateSpell") &&
                     message.data.flags.pf2e?.casting?.id &&
@@ -121,17 +121,32 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         }
                         const type = message.data.flags?.pf2e.origin?.type ?? "spell";
                         const traditionString = message.data.flags.pf2e.casting.tradition;
-                        let content = game.i18n.localize(
-                            game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.firstPart`, {
-                                tokenName: tokenName,
-                                vsmf: vsmf,
-                                type: type,
-                                traditionString: traditionString,
-                            })
-                        );
-                        const uuid = <string>message.data.flags?.pf2e.origin?.uuid;
-                        const origin: SpellPF2e | null = await fromUuid(uuid);
+                        const origin: SpellPF2e | null = await fromUuid(<string>message.data.flags?.pf2e.origin?.uuid);
+                        let content = "";
                         if (origin) {
+                            content = game.i18n.localize(
+                                game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.firstPart`, {
+                                    tokenName: tokenName,
+                                    vsmf: vsmf ? vsmf : "",
+                                    type: type,
+                                    traditionString: traditionString,
+                                })
+                            );
+
+                            if (game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageShowTraits")) {
+                                content += game.i18n.localize(
+                                    game.i18n.format(
+                                        `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.traitPart`,
+                                        {
+                                            traits: Object.values(origin.data.data.traits.value)
+                                                .map((trait) => trait.valueOf())
+                                                .sort()
+                                                .join(", "),
+                                        }
+                                    )
+                                );
+                            }
+
                             let dcRK = 0;
                             const level = origin.data.data.level.value;
                             if (level === 1) {

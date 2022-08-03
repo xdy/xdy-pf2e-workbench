@@ -441,10 +441,15 @@
         "components": "Components:",
         "spell": "Spell",
         "they": "They",
-        "firstPart": "{tokenName} just cast a {vsmf} {type} of the {traditionString} tradition. Ask your GM if you recognized it automatically/with a reaction.<br>",
-        "secondPartRK": "If you didn't, you can spend an action on your turn to attempt to identify it: @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}. ",
-        "secondPartNoRk": "If you didn't, ask your GM for the Recall Knowledge DC if you wish to spend an action on your turn to attempt to identify it. ",
-        "savePart":"<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}]"
+        "firstPart": "{tokenName} just cast a {vsmf} {type} of the <strong>{traditionString}</strong> tradition",
+        "secondPartRK": ".<br>Ask your GM if you recognized it automatically/with a reaction. If you didn't, you can spend an action on your turn to attempt to identify it: @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
+        "secondPartNoRk": ".<br>Ask your GM if you recognized it automatically/with a reaction. If you didn't, ask your GM for the Recall Knowledge DC if you wish to spend an action on your turn to attempt to identify it.",
+        "savePart": "<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}]"
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "hint": "Show spell traits in the public message.",
+        "name": "Show spell traits in the public message.",
+        "traitPart": " with these traits: <strong>{traits}</strong>"
       },
       "workbenchVersion": {
         "hint": "Version that the latest migration ran on. Can be lower than the module version. Don't modify this unless you know what you are doing.",
