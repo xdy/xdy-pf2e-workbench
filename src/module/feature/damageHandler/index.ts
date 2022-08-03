@@ -9,16 +9,28 @@ import { SpellPF2e } from "@item";
 async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
     if (game.modules.get("pf2-flat-check")?.active) {
-        await new Promise((resolve) => setTimeout(resolve, 250)); //Sleep to wait for flat check
-        const array = Array.from(game.messages);
-        const messageIndex = array.findIndex((msg) => msg.id === message.id);
-        rollDamage =
-            array
-                .slice(messageIndex)
-                .reverse()
-                .filter((msg) => {
-                    return msg.data.content.includes("dice-result flat-check-success");
-                }).length > 0 || false;
+        const { token, item, actor } = message;
+        if (token && item && actor) {
+            if (
+                //Reverse of the check in the pf2-flat-check module
+                (["ancestry", "feat", "melee", "weapon"].includes(item.type) &&
+                    message.isRoll &&
+                    !message.isDamageRoll) ||
+                (item.type === "spell" && !message.isRoll)
+            ) {
+                await new Promise((resolve) => setTimeout(resolve, 100)); //Sleep to wait for flat check message
+                const array = Array.from(game.messages);
+                const messageIndex = array.findIndex((msg) => msg.id === message.id);
+                if (messageIndex > -1) {
+                    rollDamage = !array
+                        .slice(messageIndex)
+                        .reverse()
+                        .find((msg) => {
+                            return msg.data.content.includes("dice-result flat-check-failure");
+                        });
+                }
+            }
+        }
     }
     return rollDamage;
 }
@@ -104,7 +116,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         ) {
                             game.settings.set("core", "rollMode", CONST.DICE_ROLL_MODES.PRIVATE);
                         }
-                        if (await noOrSuccessfulFlatcheck(message)) {
+                        const rollDamage = await noOrSuccessfulFlatcheck(message); //Can't be inlined
+                        if (rollDamage) {
                             //Until spell level flags are added to attack rolls it is the best I could come up with.
                             //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
                             //@ts-ignore
@@ -134,7 +147,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
                     if (actionIds && actionIds[1]) {
                         action = getActionFromMessage(actions, actionIds, message);
-                        if (await noOrSuccessfulFlatcheck(message)) {
+                        const rollDamage = await noOrSuccessfulFlatcheck(message); //Can't be inlined
+                        if (rollDamage) {
                             if (degreeOfSuccess === "success") {
                                 action?.damage({ options: rollOptions });
                             } else if (degreeOfSuccess === "criticalSuccess") {
