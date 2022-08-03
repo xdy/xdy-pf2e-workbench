@@ -1,3 +1,10 @@
+# [3.44.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.43.6...v3.44.0) (2022-08-03)
+
+
+### Features
+
+* Added the option to show the cast spell's traits in the public message when casting spells privately. ([61d446f](https://github.com/xdy/xdy-pf2e-workbench/commit/61d446f89df341dfd8d858320cd1644941f9fb73))
+
 ## [3.43.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.43.5...v3.43.6) (2022-08-03)
 
 
