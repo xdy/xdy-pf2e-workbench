@@ -1,3 +1,10 @@
+## [3.43.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.43.5...v3.43.6) (2022-08-03)
+
+
+### Bug Fixes
+
+* Improves integration with the PF2 Flat Check module. ([8b56868](https://github.com/xdy/xdy-pf2e-workbench/commit/8b5686857fca27100b74e1d1c4b3eefaf498eaaa))
+
 ## [3.43.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.43.4...v3.43.5) (2022-08-03)
 
 
