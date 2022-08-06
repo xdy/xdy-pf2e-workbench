@@ -116,6 +116,7 @@ declare global {
     interface SettingRegistration extends Omit<SettingConfig, "config" | "key" | "namespace" | "scope"> {
         config?: boolean;
         scope?: "client" | "world";
+        filePicker?: true | 'audio' | 'image' | 'video' | 'imagevideo' | 'folder'; //TODO XDY Add to pf2e
     }
 
     interface ClientSettingsMap extends Map<string, SettingConfig> {
