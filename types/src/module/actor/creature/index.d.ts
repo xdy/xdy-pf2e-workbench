@@ -44,8 +44,6 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
     get heldShield(): Embedded<ArmorPF2e> | null;
     /** Whether the actor is flat-footed in the current scene context: currently only handles flanking */
     isFlatFooted({ dueTo }: IsFlatFootedParams): boolean;
-    /** Construct a range penalty for this creature when making a ranged attack */
-    protected getRangePenalty(increment: number | null, selectors: string[], rollOptions: string[]): ModifierPF2e | null;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */
     prepareBaseData(): void;
     /** Apply ActiveEffect-Like rule elements immediately after application of actual `ActiveEffect`s */
@@ -92,7 +90,7 @@ export declare abstract class CreaturePF2e extends ActorPF2e {
     getAttackRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): AttackRollContext<this, I>;
     protected getDamageRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
     protected getStrikeRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
-    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: CreatureUpdateContext<this>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: CreatureUpdateContext<this>, user: UserPF2e): Promise<void>;
 }
 export interface CreaturePF2e {
     readonly data: CreatureData;

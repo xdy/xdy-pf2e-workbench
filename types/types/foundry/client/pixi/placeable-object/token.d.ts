@@ -71,7 +71,7 @@ declare global {
         effects?: PIXI.Container;
         target?: PIXI.Graphics;
 
-        override get bounds(): NormalizedRectangle;
+        override get bounds(): PIXI.Rectangle;
 
         /** Translate the token's grid width into a pixel width based on the canvas size */
         get w(): number;
@@ -420,13 +420,13 @@ declare global {
         /* -------------------------------------------- */
 
         override _onCreate(
-            data: TDocument["data"]["_source"],
+            data: TDocument["_source"],
             options: DocumentModificationContext<TDocument>,
             userId: string
         ): void;
 
         override _onUpdate(
-            changed: DeepPartial<TDocument["data"]["_source"]>,
+            changed: DeepPartial<TDocument["_source"]>,
             options: DocumentModificationContext<TDocument>,
             userId: string
         ): void;

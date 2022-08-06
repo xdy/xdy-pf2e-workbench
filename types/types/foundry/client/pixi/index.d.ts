@@ -48,8 +48,7 @@ declare global {
 }
 
 import * as smooth from "@pixi/graphics-smooth";
-import { SmoothGraphics as Graphics } from "@pixi/graphics-smooth";
-import * as particles from "pixi-particles";
+import * as particles from "@pixi/particle-emitter";
 import {
     AccessibilityManager,
     Application,
@@ -64,6 +63,7 @@ import {
     FilterState,
     FilterSystem,
     Geometry,
+    Graphics,
     Graphics as LegacyGraphics,
     IDestroyOptions,
     InteractionData,

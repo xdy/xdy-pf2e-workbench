@@ -1,11 +1,12 @@
 import { TokenDocumentPF2e } from "@module/scene";
 import { TokenLayerPF2e } from "..";
-import { TokenAuras } from "./auras";
+import { AuraRenderers } from "./aura";
 declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     /** Visual representation and proximity-detection facilities for auras */
-    auras: TokenAuras;
+    auras: AuraRenderers;
     /** Used to track conditions and other token effects by game.pf2e.StatusEffects */
     statusEffectChanged: boolean;
+    constructor(document: TokenDocumentPF2e);
     /** The promise returned by the last call to `Token#draw()` */
     private drawLock?;
     /** Is the user currently controlling this token? */
@@ -24,6 +25,7 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     get linkToActorSize(): boolean;
     /** The ID of the highlight layer for this token */
     get highlightId(): string;
+    get kimsNaughtyModule(): boolean;
     isAdjacentTo(token: TokenPF2e): boolean;
     /**
      * Determine whether this token can flank another—given that they have a flanking buddy on the opposite side
@@ -72,7 +74,7 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     /** Refresh vision and the `EffectsPanel` */
     protected _onRelease(options?: Record<string, unknown>): void;
     /** Work around Foundry bug in which unlinked token redrawing performed before data preparation completes */
-    _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this["document"]>, userId: string): void;
+    _onUpdate(changed: DeepPartial<this["document"]["_source"]>, options: DocumentModificationContext<this["document"]>, userId: string): void;
     protected _onDragLeftStart(event: TokenInteractionEvent<this>): void;
     /** If a single token (this one) was dropped, re-establish the hover status */
     protected _onDragLeftDrop(event: TokenInteractionEvent<this>): Promise<this["document"][]>;

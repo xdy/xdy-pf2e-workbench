@@ -20,13 +20,11 @@ export { Migration618MigrateItemImagePaths } from "./618-migrate-item-img-paths"
 export { Migration619TraditionLowercaseAndRemoveWandScroll } from "./619-remove-wand-and-scroll-tradition";
 export { Migration620RenameToWebp } from "./620-rename-to-webp";
 export { Migration621RemoveConfigSpellSchools } from "./621-remove-config-spell-schools";
-export { Migration622RemoveOldTokenEffectIcons } from "./622-remove-old-token-effect-icons";
 export { Migration623NumifyPotencyRunes } from "./623-numify-potency-runes";
 export { Migration624RemoveTokenEffectIconFlags } from "./624-removed-token-effect-icon-flags";
 export { Migration625EnsurePresenceOfSaves } from "./625-ensure-presence-of-saves";
 export { Migration626UpdateSpellCategory } from "./626-update-spell-category";
 export { Migration627LowerCaseSpellSaves } from "./627-lowercase-spell-saves";
-export { Migration628UpdateIdentificationData } from "./628-update-identification-data";
 export { Migration629SetBaseItems } from "./629-set-base-items";
 export { Migration630FixTalismanSpelling } from "./630-fix-talisman-spelling";
 export { Migration631FixSenseRuleElementSelector } from "./631-fix-sense-rule-element-selector";
@@ -166,3 +164,8 @@ export { Migration763RestoreAnimalStrikeOptions } from "./763-restore-animal-str
 export { Migration764PanacheVivaciousREs } from "./764-panache-vivacious-res";
 export { Migration765ChoiceOwnedItemTypes } from "./765-choice-owned-item-types";
 export { Migration766WipeURLSources } from "./766-wipe-url-sources";
+export { Migration767ConvertVoluntaryFlaws } from "./767-convert-voluntary-flaws";
+export { Migration768AddNewAuras } from "./768-add-new-auras";
+export { Migration769NoUniversalistFocusPool } from "./769-no-universalist-focus-pool";
+export { Migration770REDataToSystem } from "./770-re-data-to-system";
+export { Migration771SpellVariantsToSystem } from "./771-spell-variants-to-system";

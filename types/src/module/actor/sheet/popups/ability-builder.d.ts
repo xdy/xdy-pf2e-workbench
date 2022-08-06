@@ -13,6 +13,7 @@ export declare class AbilityBuilderPopup extends Application {
     getData(options?: Partial<FormApplicationOptions>): Promise<PopupData>;
     private calculateAncestryBoosts;
     private calculateBackgroundBoosts;
+    private calculatedLeveledBoosts;
     private calculateBoostLabels;
     /** Remove this application from the actor's apps on close */
     close(options?: {
@@ -39,8 +40,9 @@ interface BoostFlawState {
     lockedBoost: boolean;
     boosted: boolean;
     available: boolean;
-    voluntaryFlaw: boolean;
+    voluntaryFlaws: number;
     canVoluntaryFlaw: boolean;
+    canVoluntaryFlawAgain: boolean;
     voluntaryBoost: boolean;
     canVoluntaryBoost: boolean;
 }
@@ -59,7 +61,10 @@ interface BackgroundBoosts {
     tooltip: string | null;
 }
 interface LevelBoostData {
-    boosts: AbilityString[];
+    boosts: {
+        ability: string;
+        taken: boolean;
+    }[];
     full: boolean;
     eligible: boolean;
     remaining: number;

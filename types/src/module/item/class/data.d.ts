@@ -1,11 +1,11 @@
-import { AbilityString } from "@actor/types";
+import { AbilityString, SaveType } from "@actor/types";
 import { ABCSystemData } from "@item/abc/data";
 import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemTraits } from "@item/data/base";
 import { ZeroToFour } from "@module/data";
 import type { ClassPF2e } from ".";
 import { CLASS_TRAITS } from "./values";
 declare type ClassSource = BaseItemSourcePF2e<"class", ClassSystemSource>;
-declare type ClassData = Omit<ClassSource, "effects" | "flags"> & BaseItemDataPF2e<ClassPF2e, "class", ClassSystemData, ClassSource>;
+declare type ClassData = Omit<ClassSource, "data" | "effects" | "flags"> & BaseItemDataPF2e<ClassPF2e, "class", ClassSystemData, ClassSource>;
 interface ClassSystemSource extends ABCSystemData {
     traits: ItemTraits;
     keyAbility: {
@@ -14,27 +14,9 @@ interface ClassSystemSource extends ABCSystemData {
     };
     hp: number;
     perception: ZeroToFour;
-    savingThrows: {
-        fortitude: ZeroToFour;
-        reflex: ZeroToFour;
-        will: ZeroToFour;
-    };
-    attacks: {
-        simple: ZeroToFour;
-        martial: ZeroToFour;
-        advanced: ZeroToFour;
-        unarmed: ZeroToFour;
-        other: {
-            name: string;
-            rank: ZeroToFour;
-        };
-    };
-    defenses: {
-        unarmored: ZeroToFour;
-        light: ZeroToFour;
-        medium: ZeroToFour;
-        heavy: ZeroToFour;
-    };
+    savingThrows: Record<SaveType, ZeroToFour>;
+    attacks: ClassAttackProficiencies;
+    defenses: ClassDefenseProficiencies;
     trainedSkills: {
         value: string[];
         additional: number;
@@ -57,5 +39,21 @@ interface ClassSystemSource extends ABCSystemData {
     };
 }
 declare type ClassSystemData = ClassSystemSource;
+interface ClassAttackProficiencies {
+    simple: ZeroToFour;
+    martial: ZeroToFour;
+    advanced: ZeroToFour;
+    unarmed: ZeroToFour;
+    other: {
+        name: string;
+        rank: ZeroToFour;
+    };
+}
+interface ClassDefenseProficiencies {
+    unarmored: ZeroToFour;
+    light: ZeroToFour;
+    medium: ZeroToFour;
+    heavy: ZeroToFour;
+}
 declare type ClassTrait = SetElement<typeof CLASS_TRAITS>;
-export { ClassData, ClassSource, ClassSystemData, ClassTrait };
+export { ClassAttackProficiencies, ClassData, ClassDefenseProficiencies, ClassSource, ClassSystemData, ClassTrait };

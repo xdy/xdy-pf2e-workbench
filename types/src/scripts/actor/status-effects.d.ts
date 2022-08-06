@@ -231,15 +231,15 @@ export declare class StatusEffects {
         iconTypes: {
             default: {
                 effectsIconFolder: string;
-                effectsIconFileType: string;
+                effectsIconFileType: "webp";
             };
             blackWhite: {
                 effectsIconFolder: string;
-                effectsIconFileType: string;
+                effectsIconFileType: "webp";
             };
             legacy: {
                 effectsIconFolder: string;
-                effectsIconFileType: string;
+                effectsIconFileType: "webp";
             };
         };
     };

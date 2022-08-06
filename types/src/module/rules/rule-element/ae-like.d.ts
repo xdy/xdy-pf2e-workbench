@@ -5,16 +5,18 @@ import { RuleElementPF2e, RuleElementSource, RuleElementData, RuleElementOptions
  * @category RuleElement
  */
 declare class AELikeRuleElement extends RuleElementPF2e {
-    static CHANGE_MODES: string[];
+    mode: AELikeChangeMode;
+    path: string;
+    phase: AELikeDataPrepPhase;
+    static CHANGE_MODES: readonly ["multiply", "add", "downgrade", "upgrade", "override"];
+    static PHASES: readonly ["applyAEs", "beforeDerived", "afterDerived", "beforeRoll"];
     /**
-     * Pattern to match data.skills.${longForm} paths for replacement
+     * Pattern to match system.skills.${longForm} paths for replacement
      * Temporary solution until skill data is represented in long form
      */
     static SKILL_LONG_FORM_PATH: RegExp;
     constructor(data: AELikeSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     protected validateData(): void;
-    get path(): string;
-    get mode(): AELikeChangeMode;
     get value(): RuleValue;
     /** Apply the modifications immediately after proper ActiveEffects are applied */
     onApplyActiveEffects(): void;
@@ -32,7 +34,7 @@ declare class AELikeRuleElement extends RuleElementPF2e {
     private logChange;
     protected warn(property: string): void;
 }
-export interface AutoChangeEntry {
+interface AutoChangeEntry {
     source: string;
     level: number | null;
     value: number | string;
@@ -42,16 +44,17 @@ interface AELikeRuleElement extends RuleElementPF2e {
     data: AELikeData;
 }
 declare type AELikeChangeMode = "add" | "multiply" | "upgrade" | "downgrade" | "override";
-export interface AELikeData extends RuleElementData {
+declare type AELikeDataPrepPhase = "applyAEs" | "beforeDerived" | "afterDerived" | "beforeRoll";
+interface AELikeData extends RuleElementData {
     path: string;
     value: RuleValue;
     mode: AELikeChangeMode;
     priority: number;
-    phase: "applyAEs" | "beforeDerived" | "afterDerived" | "beforeRoll";
+    phase: AELikeDataPrepPhase;
 }
-export interface AELikeSource extends RuleElementSource {
+interface AELikeSource extends RuleElementSource {
     mode?: unknown;
     path?: unknown;
     phase?: unknown;
 }
-export { AELikeRuleElement };
+export { AELikeData, AELikeRuleElement, AELikeSource, AutoChangeEntry };

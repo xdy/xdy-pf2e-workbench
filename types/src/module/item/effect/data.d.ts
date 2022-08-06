@@ -4,7 +4,7 @@ import { EffectPF2e } from ".";
 declare type EffectSource = BaseItemSourcePF2e<"effect", EffectSystemSource> & {
     flags: DeepPartial<EffectFlags>;
 };
-declare type EffectData = Omit<EffectSource, "effects" | "flags"> & BaseItemDataPF2e<EffectPF2e, "effect", EffectSystemData, EffectSource> & {
+declare type EffectData = Omit<EffectSource, "data" | "effects" | "flags"> & BaseItemDataPF2e<EffectPF2e, "effect", EffectSystemData, EffectSource> & {
     flags: EffectFlags;
 };
 declare type EffectFlags = ItemFlagsPF2e & {

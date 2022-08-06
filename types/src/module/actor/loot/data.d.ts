@@ -2,7 +2,7 @@ import { ActorSystemData, ActorSystemSource, BaseActorDataPF2e, BaseActorSourceP
 import { LootPF2e } from ".";
 /** The stored source data of a loot actor */
 declare type LootSource = BaseActorSourcePF2e<"loot", LootSystemSource>;
-interface LootData extends Omit<LootSource, "data" | "effects" | "flags" | "items" | "token" | "type">, BaseActorDataPF2e<LootPF2e, "loot", LootSystemData, LootSource> {
+interface LootData extends Omit<LootSource, "data" | "system" | "effects" | "flags" | "items" | "prototypeToken" | "type">, BaseActorDataPF2e<LootPF2e, "loot", LootSystemData, LootSource> {
 }
 /** The system-level data of loot actors. */
 interface LootSystemSource extends ActorSystemSource {

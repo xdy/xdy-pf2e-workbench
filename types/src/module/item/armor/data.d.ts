@@ -2,14 +2,9 @@ import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemT
 import { ZeroToFour, ZeroToThree } from "@module/data";
 import type { LocalizePF2e } from "@module/system/localize";
 import type { ArmorPF2e } from ".";
+import { OtherArmorTag } from "./types";
 declare type ArmorSource = BasePhysicalItemSource<"armor", ArmorSystemSource>;
 declare type ArmorData = Omit<ArmorSource, "data" | "effects" | "flags"> & BasePhysicalItemData<ArmorPF2e, "armor", ArmorSystemData, ArmorSource>;
-declare type ArmorTrait = keyof ConfigPF2e["PF2E"]["armorTraits"];
-declare type ArmorTraits = PhysicalItemTraits<ArmorTrait>;
-export declare type ArmorCategory = keyof ConfigPF2e["PF2E"]["armorTypes"];
-export declare type ArmorGroup = keyof ConfigPF2e["PF2E"]["armorGroups"];
-export declare type BaseArmorType = keyof typeof LocalizePF2e.translations.PF2E.Item.Armor.Base;
-export declare type ResilientRuneType = "" | "resilient" | "greaterResilient" | "majorResilient";
 interface ArmorSystemSource extends Investable<PhysicalSystemSource> {
     traits: ArmorTraits;
     armor: {
@@ -58,5 +53,14 @@ interface ArmorSystemData extends Omit<ArmorSystemSource, "price" | "temporary" 
         property: string[];
     };
 }
+declare type ArmorTrait = keyof ConfigPF2e["PF2E"]["armorTraits"];
+interface ArmorTraitsSource extends PhysicalItemTraits<ArmorTrait> {
+    otherTags?: OtherArmorTag[];
+}
+declare type ArmorTraits = Required<ArmorTraitsSource>;
+export declare type ArmorCategory = keyof ConfigPF2e["PF2E"]["armorTypes"];
+export declare type ArmorGroup = keyof ConfigPF2e["PF2E"]["armorGroups"];
+export declare type BaseArmorType = keyof typeof LocalizePF2e.translations.PF2E.Item.Armor.Base;
+export declare type ResilientRuneType = "" | "resilient" | "greaterResilient" | "majorResilient";
 declare const ARMOR_CATEGORIES: readonly ["unarmored", "light", "medium", "heavy"];
 export { ArmorData, ArmorSource, ArmorSystemData, ArmorSystemSource, ArmorTrait, ARMOR_CATEGORIES };

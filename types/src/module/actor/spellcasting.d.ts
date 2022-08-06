@@ -1,7 +1,10 @@
 import { ActorPF2e } from "@actor";
 import { ConsumablePF2e, SpellcastingEntryPF2e } from "@item";
+import { SpellCollection } from "@item/spellcasting-entry/collection";
 export declare class ActorSpellcasting extends Collection<SpellcastingEntryPF2e> {
     readonly actor: ActorPF2e;
+    /** All available spell lists on this actor */
+    collections: foundry.utils.Collection<SpellCollection>;
     constructor(actor: ActorPF2e, entries?: SpellcastingEntryPF2e[]);
     /** Returns a list of entries pre-filtered to SpellcastingEntryPF2e */
     get regular(): SpellcastingEntryPF2e[];
@@ -14,7 +17,7 @@ export declare class ActorSpellcasting extends Collection<SpellcastingEntryPF2e>
     refocus(options?: {
         all?: boolean;
     }): {
-        "data.resources.focus.value": number;
+        "system.resources.focus.value": number;
     } | null;
     /**
      * Recharges all spellcasting entries based on the type of entry it is
@@ -27,7 +30,7 @@ export declare class ActorSpellcasting extends Collection<SpellcastingEntryPF2e>
             _id: string;
         }))[];
         actorUpdates: {
-            "data.resources.focus.value": number;
+            "system.resources.focus.value": number;
         } | null;
     };
 }

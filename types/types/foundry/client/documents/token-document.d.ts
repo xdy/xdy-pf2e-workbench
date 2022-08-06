@@ -26,10 +26,10 @@ declare global {
         override get isOwner(): boolean;
 
         /** A convenient reference for whether this TokenDocument is linked to the Actor it represents, or is a synthetic copy */
-        get isLinked(): this["data"]["actorLink"];
+        get isLinked(): this["actorLink"];
 
         /** Return a reference to a Combatant that represents this Token, if one is present in the current encounter. */
-        get combatant(): Embedded<Combatant> | null;
+        get combatant(): Combatant<Combat> | null;
 
         /** An indicator for whether or not this Token is currently involved in the active combat encounter. */
         get inCombat(): boolean;
@@ -141,7 +141,7 @@ declare global {
         ): Promise<void>;
 
         protected override _onUpdate(
-            changed: DeepPartial<this["data"]["_source"]>,
+            changed: DeepPartial<this["_source"]>,
             options: DocumentModificationContext,
             userId: string
         ): void;
@@ -167,6 +167,9 @@ declare global {
         readonly data: foundry.data.TokenData<this>;
 
         readonly parent: Scene | null;
+
+        // V10 shim
+        readonly flags: this["data"]["flags"];
 
         get uuid(): TokenDocumentUUID;
 

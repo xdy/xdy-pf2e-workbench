@@ -2,7 +2,10 @@ import { ItemPF2e } from "..";
 import { FeatData, FeatSource, FeatTrait, FeatType } from "./data";
 import { OneToThree } from "@module/data";
 import { UserPF2e } from "@module/user";
+import { FeatCategory } from "@actor/character/feats";
+import { Frequency } from "@item/data/base";
 declare class FeatPF2e extends ItemPF2e {
+    category: FeatCategory | null;
     get featType(): FeatType;
     get level(): number;
     get traits(): Set<FeatTrait>;
@@ -10,6 +13,7 @@ declare class FeatPF2e extends ItemPF2e {
         type: "action" | "reaction" | "free";
         value: OneToThree | null;
     } | null;
+    get frequency(): Frequency | null;
     get isFeature(): boolean;
     get isFeat(): boolean;
     /** Whether this feat must be taken at character level 1 */
@@ -23,7 +27,7 @@ declare class FeatPF2e extends ItemPF2e {
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
     protected _preCreate(data: PreDocumentId<FeatSource>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     /** Warn the owning user(s) if this feat was taken despite some restriction */
     protected _onCreate(data: FeatSource, options: DocumentModificationContext<this>, userId: string): void;
 }

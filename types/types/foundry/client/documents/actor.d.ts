@@ -26,7 +26,7 @@ declare global {
         constructor(data: PreCreate<foundry.data.ActorSource>, context?: DocumentConstructionContext<Actor>);
 
         /** An object that tracks which tracks the changes to the data model which were applied by active effects */
-        overrides: DeepPartial<this["data"]["_source"]> & { token?: TParent["data"]["_source"] };
+        overrides: DeepPartial<this["_source"]> & { token?: TParent["_source"] };
 
         /**
          * A cached array of image paths which can be used for this Actor's token.
@@ -70,12 +70,12 @@ declare global {
          * @param [document=false] Return the Document instance rather than the PlaceableObject
          * @return An array of Token instances in the current Scene which reference this Actor.
          */
-        getActiveTokens(linked: boolean | undefined, document: true): NonNullable<TParent>[];
+        getActiveTokens(linked: boolean | undefined, document: true): Embedded<NonNullable<TParent>>[];
         getActiveTokens(linked?: undefined, document?: undefined): NonNullable<TParent["object"]>[];
         getActiveTokens(
             linked?: boolean,
             document?: boolean
-        ): NonNullable<TParent["object"]>[] | NonNullable<TParent["object"]>[];
+        ): Embedded<NonNullable<TParent>>[] | NonNullable<TParent["object"]>[];
 
         /** Prepare a data object which defines the data schema used by dice roll commands against this Actor */
         getRollData(): Record<string, unknown>;
@@ -129,13 +129,13 @@ declare global {
         override getEmbeddedCollection(embeddedName: "ActiveEffect" | "Item"): this["effects"] | this["items"];
 
         protected override _preCreate(
-            data: PreDocumentId<this["data"]["_source"]>,
+            data: PreDocumentId<this["_source"]>,
             options: DocumentModificationContext<this>,
             user: User
         ): Promise<void>;
 
         protected override _onUpdate(
-            changed: DeepPartial<this["data"]["_source"]>,
+            changed: DeepPartial<this["_source"]>,
             options: DocumentUpdateContext<this>,
             userId: string
         ): void;
@@ -176,6 +176,8 @@ declare global {
 
         readonly parent: TParent | null;
 
+        prototypeToken: foundry.data.PrototypeTokenData;
+
         get collection(): Actors<this>;
 
         _sheet: ActorSheet<this, Item> | null;
@@ -204,17 +206,17 @@ declare global {
     namespace Actor {
         function create<A extends Actor>(
             this: ConstructorOf<A>,
-            data: PreCreate<A["data"]["_source"]>,
+            data: PreCreate<A["_source"]>,
             context?: DocumentModificationContext
         ): Promise<A | undefined>;
         function create<A extends Actor>(
             this: ConstructorOf<A>,
-            data: PreCreate<A["data"]["_source"]>[],
+            data: PreCreate<A["_source"]>[],
             context?: DocumentModificationContext
         ): Promise<A[]>;
         function create<A extends Actor>(
             this: ConstructorOf<A>,
-            data: PreCreate<A["data"]["_source"]>[] | PreCreate<A["data"]["_source"]>,
+            data: PreCreate<A["_source"]>[] | PreCreate<A["_source"]>,
             context?: DocumentModificationContext
         ): Promise<A[] | A | undefined>;
     }

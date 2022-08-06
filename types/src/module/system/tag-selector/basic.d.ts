@@ -31,7 +31,7 @@ export declare class TagSelectorBasic extends TagSelectorBase {
         allowCustom: boolean;
         custom: string | null;
         flat: boolean;
-        object?: object | ItemPF2e | ActorPF2e | undefined;
+        object?: object | ActorPF2e | ItemPF2e | undefined;
         options?: Partial<FormApplicationOptions> | undefined;
         title?: string | undefined;
     } | {
@@ -43,9 +43,9 @@ export declare class TagSelectorBasic extends TagSelectorBase {
         allowCustom: boolean;
         custom: string | null;
         flat: boolean;
-        then<TResult1 = FormApplicationData<ItemPF2e | ActorPF2e>, TResult2 = never>(onfulfilled?: ((value: FormApplicationData<ItemPF2e | ActorPF2e>) => TResult1 | PromiseLike<TResult1>) | null | undefined, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined): Promise<TResult1 | TResult2>;
-        catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | null | undefined): Promise<FormApplicationData<ItemPF2e | ActorPF2e> | TResult>;
-        finally(onfinally?: (() => void) | null | undefined): Promise<FormApplicationData<ItemPF2e | ActorPF2e>>;
+        then<TResult1 = FormApplicationData<ActorPF2e | ItemPF2e>, TResult2 = never>(onfulfilled?: ((value: FormApplicationData<ActorPF2e | ItemPF2e>) => TResult1 | PromiseLike<TResult1>) | null | undefined, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined): Promise<TResult1 | TResult2>;
+        catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | null | undefined): Promise<FormApplicationData<ActorPF2e | ItemPF2e> | TResult>;
+        finally(onfinally?: (() => void) | null | undefined): Promise<FormApplicationData<ActorPF2e | ItemPF2e>>;
         [Symbol.toStringTag]: string;
     };
     activateListeners($html: JQuery): void;

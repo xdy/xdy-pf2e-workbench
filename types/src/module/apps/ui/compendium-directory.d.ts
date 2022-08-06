@@ -20,8 +20,6 @@ export declare class CompendiumDirectoryPF2e extends CompendiumDirectory {
     protected _canDragStart(): boolean;
     /** Replicate the functionality of dragging a compendium document from an open `Compendium` */
     protected _onDragStart(event: ElementDragEvent): void;
-    /** Reindex compendiums to include image path (workaround of V9 bug) and compile search index */
-    onReady(): Promise<void>;
 }
 interface CompendiumDirectoryDataPF2e extends CompendiumDirectoryData {
     searchContents: boolean;

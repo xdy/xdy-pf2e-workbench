@@ -1,11 +1,11 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor/base";
-import { EffectData } from "@item/data";
+import { EffectPF2e } from "@item";
 import { FlattenedCondition } from "../system/conditions";
 interface EffectsPanelData {
     conditions: FlattenedCondition[];
-    effects: EffectData[];
+    effects: EffectPF2e[];
     actor: ActorPF2e | null;
 }
 export declare class EffectsPanel extends Application {

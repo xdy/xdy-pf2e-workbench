@@ -16,6 +16,8 @@ declare global {
                 /** The base data object for this Document which persists both the original source and any derived data. */
                 readonly data: DocumentData<Document>;
 
+                _source: this["data"]["_source"];
+
                 /**
                  * A collection of Application instances which should be re-rendered whenever this Document experiences an update to
                  * its data. The keys of this object are the application ids and the values are Application instances. Each
@@ -34,7 +36,7 @@ declare global {
                  * Every document must define an object which represents its data schema.
                  * This must be a subclass of the DocumentData interface.
                  */
-                static get schema(): new (...args: any[]) => DocumentData;
+                static get schema(): ConstructorOf<DocumentData>;
 
                 /** Default metadata which applies to each instance of this Document type. */
                 static get metadata(): DocumentMetadata;
@@ -68,7 +70,7 @@ declare global {
                 get isEmbedded(): boolean;
 
                 /** The name of this Document, if it has one assigned */
-                get name(): string;
+                name: string;
 
                 /* ---------------------------------------- */
                 /*  Methods                                 */
@@ -80,6 +82,28 @@ declare global {
                  * @return Does the User have a sufficient role to create?
                  */
                 static canUserCreate(user: documents.BaseUser): boolean;
+
+                /**
+                 * Migrate candidate source data for this DataModel which may require initial cleaning or transformations.
+                 * @param source           The candidate source data from which the model will be constructed
+                 * @returns                Migrated source data, if necessary
+                 */
+                static migrateData<TSource extends DocumentSource>(source: TSource): TSource;
+
+                /**
+                 * Update the DataModel locally by applying an object of changes to its source data.
+                 * The provided changes are cleaned, validated, and stored to the source data object for this model.
+                 * The source data is then re-initialized to apply those changes to the prepared data.
+                 * The method returns an object of differential changes which modified the original data.
+                 *
+                 * @param changes      New values which should be applied to the data model
+                 * @param [options={}] Options which determine how the new data is merged
+                 * @returns An object containing the changed keys and values
+                 */
+                updateSource(
+                    data?: DocumentUpdateData,
+                    options?: DocumentModificationContext
+                ): DeepPartial<this["_source"]>;
 
                 /**
                  * Clone a document, creating a new document by combining current data with provided overrides.
@@ -162,7 +186,7 @@ declare global {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 static createDocuments<T extends ConstructorOf<any>>(
                     this: T,
-                    data?: PreCreate<InstanceType<T>["data"]["_source"]>[],
+                    data?: PreCreate<InstanceType<T>["_source"]>[],
                     context?: DocumentModificationContext
                 ): Promise<InstanceType<T>[]>;
 
@@ -253,17 +277,17 @@ declare global {
                  */
                 static create<T extends Document>(
                     this: ConstructorOf<T>,
-                    data: PreCreate<T["data"]["_source"]>,
+                    data: PreCreate<T["_source"]>,
                     context?: DocumentModificationContext
                 ): Promise<T | undefined>;
                 static create<T extends Document>(
                     this: ConstructorOf<T>,
-                    data: PreCreate<T["data"]["_source"]>[],
+                    data: PreCreate<T["_source"]>[],
                     context?: DocumentModificationContext
                 ): Promise<T[]>;
                 static create<T extends Document>(
                     this: ConstructorOf<T>,
-                    data: PreCreate<T["data"]["_source"]> | PreCreate<T["data"]["_source"]>[],
+                    data: PreCreate<T["_source"]> | PreCreate<T["_source"]>[],
                     context?: DocumentModificationContext
                 ): Promise<T[] | T | undefined>;
 
@@ -428,7 +452,7 @@ declare global {
                  * @param user    The User requesting the document creation
                  */
                 protected _preCreate(
-                    data: PreDocumentId<this["data"]["_source"]>,
+                    data: PreDocumentId<this["_source"]>,
                     options: DocumentModificationContext<this>,
                     user: documents.BaseUser
                 ): Promise<void>;
@@ -441,7 +465,7 @@ declare global {
                  * @param user    The User requesting the document update
                  */
                 protected _preUpdate(
-                    changed: DeepPartial<this["data"]["_source"]>,
+                    changed: DeepPartial<this["_source"]>,
                     options: DocumentUpdateContext<this>,
                     user: documents.BaseUser
                 ): Promise<void>;
@@ -464,7 +488,7 @@ declare global {
                  * @param options Additional options which modify the creation request
                  */
                 protected _onCreate(
-                    data: this["data"]["_source"],
+                    data: this["_source"],
                     options: DocumentModificationContext<this>,
                     userId: string
                 ): void;
@@ -477,7 +501,7 @@ declare global {
                  * @param userId  The ID of the User requesting the document update
                  */
                 protected _onUpdate(
-                    changed: DeepPartial<this["data"]["_source"]>,
+                    changed: DeepPartial<this["_source"]>,
                     options: DocumentUpdateContext<this>,
                     userId: string
                 ): void;
@@ -545,7 +569,7 @@ declare global {
 
             interface DocumentMetadata {
                 collection: string;
-                embedded: Record<string, new (...args: any[]) => foundry.abstract.Document>;
+                embedded: Record<string, ConstructorOf<Document>>;
                 hasSystemData: boolean;
                 isEmbedded?: boolean;
                 isPrimary?: boolean;
@@ -610,7 +634,7 @@ declare global {
     type PreDocumentId<T extends foundry.abstract.DocumentSource> = Omit<T, "_id"> & { _id: null };
 
     type DocumentUpdateData<T extends foundry.abstract.Document = foundry.abstract.Document> =
-        | Partial<T["data"]["_source"]>
+        | Partial<T["_source"]>
         | Record<string, unknown>;
 
     type EmbeddedDocumentUpdateData<T extends foundry.abstract.Document> = DocumentUpdateData<T> & { _id: string };

@@ -23,7 +23,7 @@ export declare class LootPF2e extends ActorPF2e {
     /** Hide this actor's token(s) when in loot (rather than merchant) mode, empty, and configured thus */
     toggleTokenHiding(): Promise<void>;
     protected _onCreate(data: LootSource, options: DocumentModificationContext<this>, userId: string): void;
-    protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentUpdateContext<this>, userId: string): void;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<this>, userId: string): void;
     protected _onCreateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", documents: ActiveEffectPF2e[] | ItemPF2e[], result: foundry.data.ActiveEffectSource[] | ItemSourcePF2e[], options: DocumentModificationContext<ActiveEffectPF2e | ItemPF2e>, userId: string): void;
     protected _onDeleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", documents: ActiveEffectPF2e[] | ItemPF2e[], result: foundry.data.ActiveEffectSource[] | ItemSourcePF2e[], options: DocumentModificationContext<ActiveEffectPF2e | ItemPF2e>, userId: string): void;
 }

@@ -11,7 +11,7 @@ import type { CreaturePF2e } from ".";
 import { CreatureSensePF2e, SenseAcuity, SenseType } from "./sense";
 import { Alignment, AlignmentTrait } from "./types";
 declare type BaseCreatureSource<TType extends CreatureType = CreatureType, TSystemSource extends CreatureSystemSource = CreatureSystemSource> = BaseActorSourcePF2e<TType, TSystemSource>;
-interface BaseCreatureData<TItem extends CreaturePF2e = CreaturePF2e, TType extends CreatureType = CreatureType, TSystemData extends CreatureSystemData = CreatureSystemData, TSource extends BaseCreatureSource<TType> = BaseCreatureSource<TType>> extends Omit<BaseCreatureSource<TType>, "data" | "effects" | "flags" | "items" | "token" | "type">, BaseActorDataPF2e<TItem, TType, TSystemData, TSource> {
+interface BaseCreatureData<TItem extends CreaturePF2e = CreaturePF2e, TType extends CreatureType = CreatureType, TSystemData extends CreatureSystemData = CreatureSystemData, TSource extends BaseCreatureSource<TType> = BaseCreatureSource<TType>> extends Omit<BaseCreatureSource<TType>, "data" | "system" | "effects" | "flags" | "items" | "prototypeToken" | "type">, BaseActorDataPF2e<TItem, TType, TSystemData, TSource> {
 }
 /** Skill and Lore statistics for rolling. Both short and longform are supported, but eventually only long form will be */
 declare type CreatureSkills = Record<SkillAbbreviation, Statistic> & Record<SkillLongForm, Statistic> & Partial<Record<string, Statistic>>;
@@ -21,7 +21,8 @@ interface CreatureSystemSource extends ActorSystemSource {
             value: number;
         };
         alliance?: ActorAlliance;
-        [key: string]: unknown;
+        /** Present on familiars */
+        creature?: unknown;
     };
     /** Traits, languages, and other information. */
     traits?: CreatureTraitsSource;

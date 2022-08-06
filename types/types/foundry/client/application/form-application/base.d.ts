@@ -114,7 +114,7 @@ declare global {
          * @param options        TinyMCE initialization options passed to TextEditor.create
          * @param initialContent Initial text content for the editor area.
          */
-        activateEditor(name: string, options?: Partial<TinyMCE.EditorSettings>, initialContent?: string): void;
+        activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): void;
 
         /**
          * Handle saving the content of a specific editor by name
@@ -142,13 +142,14 @@ declare global {
     class FormDataExtended extends FormData {
         constructor(form: HTMLElement, options?: { editors?: Record<string, TinyMCEEditorData>; dtypes?: string[] });
 
+        /** The object representation of the form data, available once processed. */
+        readonly object: Record<string, unknown>;
+
         /**
          * Process the HTML form element to populate the FormData instance.
          * @param form The HTML form
          */
         process(form: HTMLFormElement): void;
-
-        toObject(): Record<string, unknown>;
     }
 
     interface FormApplicationData<O extends {} = {}> {
@@ -197,7 +198,7 @@ declare global {
         hasButton: boolean;
         initial: string;
         mce: TinyMCE.Editor | null;
-        options: Partial<TinyMCE.EditorSettings>;
+        options: Partial<TinyMCE.EditorOptions>;
         target: string;
     }
 }

@@ -1,7 +1,7 @@
 import { DeferredValueParams, ModifierAdjustment, ModifierPF2e } from "@actor/modifiers";
 import { RollNotePF2e } from "@module/notes";
 import { RollTwiceOption } from "@system/rolls";
-import { RollSubstitution, RollTwiceSynthetic, RuleElementSynthetics } from "./rule-element/data";
+import { RollSubstitution, RollTwiceSynthetic, RuleElementSynthetics } from "./synthetics";
 /** Extracts a list of all cloned modifiers across all given keys in a single list. */
 declare function extractModifiers(synthetics: Pick<RuleElementSynthetics, "modifierAdjustments" | "statisticsModifiers">, selectors: string[], options?: DeferredValueParams): ModifierPF2e[];
 declare function extractModifierAdjustments(adjustmentsRecord: Record<string, ModifierAdjustment[]>, selectors: string[], slug: string): ModifierAdjustment[];

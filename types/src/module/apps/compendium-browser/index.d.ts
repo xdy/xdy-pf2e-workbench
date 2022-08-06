@@ -23,8 +23,8 @@ declare class PackLoader {
     /** Set art provided by a module if any is available */
     private setModuleArt;
 }
-export declare class CompendiumBrowser extends Application {
-    settings: Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;
+declare class CompendiumBrowser extends Application {
+    settings: CompendiumBrowserSettings;
     dataTabsList: readonly ["action", "bestiary", "equipment", "feat", "hazard", "spell"];
     tabs: Record<Exclude<TabName, "settings">, TabType>;
     packLoader: PackLoader;
@@ -52,7 +52,6 @@ export declare class CompendiumBrowser extends Application {
         }[];
         scrollY: string[];
     };
-    _render(force?: boolean, options?: RenderOptions): Promise<void>;
     /** Reset initial filtering */
     close(options?: {
         force?: boolean;
@@ -65,6 +64,13 @@ export declare class CompendiumBrowser extends Application {
     loadTab(tab: TabName): Promise<void>;
     loadedPacks(tab: TabName): string[];
     activateListeners($html: JQuery): void;
+    /**
+     * Append new results to the result list
+     * @param html The Compendium Browser app HTML
+     * @param list The result list HTML element
+     * @param start The index position to start from
+     */
+    private renderResultList;
     /** Activate click listeners on loaded actors and items */
     private activateResultListeners;
     private takePhysicalItem;
@@ -78,12 +84,11 @@ export declare class CompendiumBrowser extends Application {
     injectActorDirectory(): void;
     getData(): {
         user: Active<import("../../user").UserPF2e>;
-        settings: Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;
+        settings: CompendiumBrowserSettings;
         scrollLimit?: undefined;
     } | {
         [x: string]: number | Active<import("../../user").UserPF2e> | {
             filterData: import("./tabs/data").ActionFilters | import("./tabs/data").BestiaryFilters | import("./tabs/data").EquipmentFilters | import("./tabs/data").FeatFilters | import("./tabs/data").HazardFilters | import("./tabs/data").SpellFilters;
-            indexData: CompendiumIndexData[];
         };
         user: Active<import("../../user").UserPF2e>;
         scrollLimit: number;
@@ -96,4 +101,5 @@ export declare class CompendiumBrowser extends Application {
     private resetFilters;
     private clearScrollLimit;
 }
-export {};
+declare type CompendiumBrowserSettings = Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;
+export { CompendiumBrowser, CompendiumBrowserSettings };

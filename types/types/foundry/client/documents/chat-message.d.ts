@@ -13,8 +13,7 @@ declare global {
             context?: DocumentConstructionContext<ChatMessage>
         );
 
-        /** If the chat message contains a Roll instance, cache it here */
-        protected _roll: Rolled<Roll> | null;
+        flavor: string;
 
         /**
          * Return the recommended String alias for this message.
@@ -167,7 +166,7 @@ declare global {
         ): void;
 
         protected override _onUpdate(
-            changed: DeepPartial<this["data"]["_source"]>,
+            changed: DeepPartial<this["_source"]>,
             options: DocumentModificationContext,
             userId: string
         ): void;
@@ -178,25 +177,20 @@ declare global {
         export(): string;
     }
 
-    interface ChatMessage {
-        readonly data: foundry.data.ChatMessageData<this>;
-        readonly parent: null;
-    }
-
     namespace ChatMessage {
         function create<T extends ChatMessage>(
             this: ConstructorOf<T>,
-            data: PreCreate<T["data"]["_source"]>[],
+            data: PreCreate<T["_source"]>[],
             context?: ChatMessageModificationContext
         ): Promise<T[]>;
         function create<T extends ChatMessage>(
             this: ConstructorOf<T>,
-            data: PreCreate<T["data"]["_source"]>,
+            data: PreCreate<T["_source"]>,
             context?: ChatMessageModificationContext
         ): Promise<T | undefined>;
         function create<T extends ChatMessage>(
             this: ConstructorOf<T>,
-            data: PreCreate<T["data"]["_source"]>[] | PreCreate<T["data"]["_source"]>,
+            data: PreCreate<T["_source"]>[] | PreCreate<T["_source"]>,
             context?: ChatMessageModificationContext
         ): Promise<T[] | T | undefined>;
     }

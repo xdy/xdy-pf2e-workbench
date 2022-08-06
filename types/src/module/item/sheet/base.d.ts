@@ -27,7 +27,7 @@ export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TIt
     }): Promise<void>;
     activateListeners($html: JQuery): void;
     /** Ensure the source description is edited rather than a prepared one */
-    activateEditor(name: string, options?: Partial<TinyMCE.EditorSettings>, initialContent?: string): void;
+    activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): void;
     protected _getSubmitData(updateData?: Record<string, unknown>): Record<string, unknown>;
     /** Hide the sheet-config button unless there is more than one sheet option. */
     protected _getHeaderButtons(): ApplicationHeaderButton[];
