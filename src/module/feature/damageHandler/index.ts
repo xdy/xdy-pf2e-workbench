@@ -11,7 +11,7 @@ async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolea
     if (game.modules.get("pf2-flat-check")?.active) {
         const { token, actor } = message;
         let { item } = message;
-        if (!item && message.data.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/) && RegExp.$1 === "xxPF2ExUNARMEDxx") {
+        if (!item && message.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/) && RegExp.$1 === "xxPF2ExUNARMEDxx") {
             item = { type: "weapon", data: {} } as any;
         }
         if (token && item && actor) {
@@ -48,7 +48,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow"))
         )
     ) {
-        const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
+        const flags = <ActorFlagsPF2e>message.flags.pf2e;
         const originUuid = <string>flags?.origin?.uuid;
         //Exit early if no originUuid is found.
         if (originUuid) {
@@ -57,9 +57,9 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const autoRollDamageForSpellNotAnAttack = <boolean>(
                 game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack")
             );
-            const messageActor: ActorPF2e = <ActorPF2e>game.actors?.get(<string>message.data.speaker.actor);
+            const messageActor: ActorPF2e = <ActorPF2e>game.actors?.get(<string>message.speaker.actor);
             const messageToken: TokenDocumentPF2e = <TokenDocumentPF2e>(
-                canvas?.scene?.tokens.get(<string>message.data.speaker.token)
+                canvas?.scene?.tokens.get(<string>message.speaker.token)
             );
             const rollType = flags.context?.type;
 
@@ -70,8 +70,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 autoRollDamageForSpellNotAnAttack &&
                 rollType === undefined &&
                 flags.casting !== null &&
-                (<SpellPF2e>origin).data?.data?.damage?.value &&
-                Object.keys((<SpellPF2e>origin).data?.data?.damage?.value)?.length !== 0 &&
+                (<SpellPF2e>origin).data?.system.damage?.value &&
+                Object.keys((<SpellPF2e>origin).data?.system.damage?.value)?.length !== 0 &&
                 !origin?.traits.has("attack");
             const rollForAttackSpell = rollType === "spell-attack-roll" && autoRollDamageForSpellAttack;
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
@@ -80,17 +80,13 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     rollForNonAttackSpell ||
                     (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
                 ) {
-                    let spellLevel = (<SpellPF2e>origin)?.data.data.level;
+                    let spellLevel = (<SpellPF2e>origin)?.data?.system.level;
                     let levelFromChatCard = false;
                     const chatLength = game.messages?.contents.length ?? 0;
                     for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
                         const msg = game.messages?.contents[chatLength - i];
-                        if (msg && (<ActorFlagsPF2e>msg.data.flags.pf2e).origin?.uuid === originUuid) {
-                            let level = msg.data.content.match(/data-slot-level="(\d+)"/);
-                            if (!level) {
-                                //For pre-V10/4.0 pf2e system
-                                level = msg.data.content.match(/data-spell-lvl="(\d+)"/);
-                            }
+                        if (msg && (<ActorFlagsPF2e>msg.flags.pf2e).origin?.uuid === originUuid) {
+                            const level = msg.content.match(/data-slot-level="(\d+)"/);
                             if (level && level[1]) {
                                 levelFromChatCard = true;
                                 // @ts-ignore Wtf? How to make a number into a OneToTen?
@@ -105,7 +101,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     ) {
                         ui.notifications.info(
                             game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
-                                spell: origin?.data.name,
+                                spell: origin?.name,
                             })
                         );
                     }
@@ -141,7 +137,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 } else if (rollForStrike) {
                     const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
                     // @ts-ignore
-                    const actions = messageActor?.data.data?.actions;
+                    const actions = messageActor?.system?.actions;
                     const actionIds = originUuid.match(/Item.(\w+)/);
                     if (actions && actionIds && actionIds[1]) {
                         const rollDamage = await noOrSuccessfulFlatcheck(message); //Can't be inlined
@@ -163,10 +159,10 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 export async function persistentDamage(message: ChatMessagePF2e) {
     if (
         canvas.ready &&
-        "persistent" in message.data.flags &&
-        message.data.speaker.token &&
-        message.data.flavor &&
-        message.roll?.total &&
+        "persistent" in message.flags &&
+        message.speaker.token &&
+        message.flavor &&
+        message.rolls &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
@@ -174,9 +170,9 @@ export async function persistentDamage(message: ChatMessagePF2e) {
         ) &&
         game.actors
     ) {
-        const token = canvas.tokens?.get(message.data.speaker.token);
+        const token = canvas.tokens?.get(message.speaker.token);
         if (token && token.isOwner) {
-            const damage = message.roll.total;
+            const damage = message.rolls.reduce((sum, current) => sum + (current.total || 1), 0);
 
             await token?.actor?.applyDamage(damage, token, false);
 
@@ -185,8 +181,8 @@ export async function persistentDamage(message: ChatMessagePF2e) {
                     content: game.i18n.format(`${MODULENAME}.SETTINGS.applyPersistentDamage.wasDamaged`, {
                         damage: damage,
                     }),
-                    speaker: message.data.speaker,
-                    flavor: $(message.data.flavor).filter("div").text().trim().split("\n")[0],
+                    speaker: message.speaker,
+                    flavor: $(message.flavor).filter("div").text().trim().split("\n")[0],
                     whisper:
                         game.settings.get("pf2e", "metagame.secretDamage") && !token.actor?.hasPlayerOwner
                             ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
@@ -201,9 +197,8 @@ export async function persistentHealing(message: ChatMessagePF2e) {
     if (
         game.settings.get(MODULENAME, "applyPersistentHealing") &&
         canvas.ready &&
-        message.data.flavor &&
-        message.roll &&
-        message.roll.total &&
+        message.flavor &&
+        message.rolls &&
         game.combats &&
         game.combats.active &&
         game.combats.active.combatant &&
@@ -220,9 +215,9 @@ export async function persistentHealing(message: ChatMessagePF2e) {
                 [
                     game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentHealing.FastHealingLabel`),
                     game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentHealing.RegenerationLabel`),
-                ].some((text) => message.data.flavor?.includes(text))
+                ].some((text) => message.flavor?.includes(text))
             ) {
-                const healing = message.roll.total * -1;
+                const healing = message.rolls.reduce((sum, current) => sum + (current.total || 1), 0) * -1;
 
                 await token.actor?.applyDamage(healing, token.actor?.getActiveTokens()[0], false);
                 if (game.settings.get(MODULENAME, "applyPersistentHealingSeparateMessage")) {
@@ -231,7 +226,7 @@ export async function persistentHealing(message: ChatMessagePF2e) {
                             healing: Math.abs(healing),
                         }),
                         speaker: { token: game.combats.active.combatant.token?.id },
-                        flavor: message.data.flavor.split("\n")[0],
+                        flavor: message.flavor.split("\n")[0],
                         whisper:
                             game.settings.get("pf2e", "metagame.secretDamage") && !token.actor?.hasPlayerOwner
                                 ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
@@ -255,7 +250,7 @@ function getActionFromMessage(actions: any, actionIds: RegExpMatchArray, message
         //The strike is most likely based on an RE which means that all actions get the same item id (e.g. animal form), try to regex it out of the message instead
         const strike = game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`);
         const s = `<h4 class="action">(.*?)${strike}: (.*?)<`;
-        const strikeName = message.data.flavor?.match(s);
+        const strikeName = message.flavor?.match(s);
         if (strikeName && strikeName[2]) {
             return strikes.find((a: { name: string }) => a.name === strikeName[2]);
         } else {

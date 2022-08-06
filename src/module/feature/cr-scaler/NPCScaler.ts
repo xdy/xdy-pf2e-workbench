@@ -18,8 +18,10 @@ import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes";
 import { getActor, getFolder, getFolderInFolder } from "./Utilities";
 import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil";
 import { NPCPF2e } from "@actor";
+import { NPCSystemData } from "@actor/npc/data";
 
 export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
+    const npcData: NPCSystemData = <NPCSystemData>(<unknown>actor.data);
     const rootFolder = getFolder("cr-scaler"); //TODO Turn into setting again
 
     const folderName = `Level ${newLevel}`;
@@ -31,25 +33,25 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
             parent: rootFolder ? rootFolder.id : "",
         }));
 
-    const oldLevel = actor.data.data.details.level.value;
+    const oldLevel = npcData?.details?.level?.value || 0;
     const updateData = {
         folder: folder.id,
-        ["data.details.level.value"]: newLevel,
+        ["details.level.value"]: newLevel,
     };
 
     // parse attribute modifiers
-    for (const [key, attr] of Object.entries(actor.data.data["abilities"])) {
+    for (const [key, attr] of Object.entries(npcData["abilities"])) {
         const mod = getLeveledData("abilityScore", parseInt((attr as any).mod), oldLevel, newLevel).total;
         const value = 10 + mod * 2;
         const min = 3;
 
-        updateData[`data.abilities.${key}`] = { value, min, mod };
+        updateData[`abilities.${key}`] = { value, min, mod };
     }
 
     // parse resistances
     const drData: any[] = [];
-    for (let i = 0; i < actor.data.data.traits.dr.length; i++) {
-        const dr = actor.data.data.traits.dr[i];
+    for (let i = 0; i < npcData.traits.dr.length; i++) {
+        const dr = npcData.traits.dr[i];
 
         drData.push({
             label: dr.label,
@@ -58,12 +60,12 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
             value: getMinMaxData("resistance", dr.value, oldLevel, newLevel).toString(),
         });
     }
-    updateData["data.traits.dr"] = drData;
+    updateData["traits.dr"] = drData;
 
     // parse vulnerabilities
     const dvData: any[] = [];
-    for (let i = 0; i < actor.data.data.traits.dv.length; i++) {
-        const dv = actor.data.data.traits.dv[i];
+    for (let i = 0; i < npcData.traits.dv.length; i++) {
+        const dv = npcData.traits.dv[i];
 
         dvData.push({
             label: dv.label,
@@ -72,93 +74,89 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
             value: getMinMaxData("weakness", dv.value, oldLevel, newLevel).toString(),
         });
     }
-    updateData["data.traits.dv"] = dvData;
+    updateData["traits.dv"] = dvData;
 
     // parse simple modifiers
-    updateData["data.attributes.ac.value"] = getLeveledData(
+    updateData["attributes.ac.value"] = getLeveledData(
         "armorClass",
-        actor.data.data.attributes.ac?.value ?? 0,
+        npcData.attributes.ac?.value ?? 0,
         oldLevel,
         newLevel
     ).total;
-    updateData["data.attributes.perception.value"] = getLeveledData(
+    updateData["attributes.perception.value"] = getLeveledData(
         "perception",
-        actor.data.data.attributes["perception"].value,
+        npcData.attributes["perception"].value,
         oldLevel,
         newLevel
     ).total;
-    updateData["data.saves.fortitude.value"] = getLeveledData(
+    updateData["saves.fortitude.value"] = getLeveledData(
         "savingThrow",
-        actor.data.data.saves.fortitude.value ?? 0,
+        npcData.saves.fortitude.value ?? 0,
         oldLevel,
         newLevel
     ).total;
-    updateData["data.saves.reflex.value"] = getLeveledData(
+    updateData["saves.reflex.value"] = getLeveledData(
         "savingThrow",
-        actor.data.data.saves.reflex.value ?? 0,
+        npcData.saves.reflex.value ?? 0,
         oldLevel,
         newLevel
     ).total;
-    updateData["data.saves.will.value"] = getLeveledData(
+    updateData["saves.will.value"] = getLeveledData(
         "savingThrow",
-        actor.data.data.saves.reflex.value ?? 0,
+        npcData.saves.reflex.value ?? 0,
         oldLevel,
         newLevel
     ).total;
 
-    const hp = getHPData(actor.data.data.attributes.hp?.max ?? 0, oldLevel, newLevel);
-    updateData["data.attributes.hp.max"] = hp;
-    updateData["data.attributes.hp.value"] = hp;
+    const hp = getHPData(npcData.attributes.hp?.max ?? 0, oldLevel, newLevel);
+    updateData["system.attributes.hp.max"] = hp;
+    updateData["system.attributes.hp.value"] = hp;
 
     let itemUpdates: IDataUpdates[] = [];
     for (const itemId of actor.items.keys()) {
         const item: any = actor.items.get(itemId);
 
         if ((item.type as IHandledItemType) === "lore") {
-            const oldValue = parseInt(item.data.data.mod.value);
+            const oldValue = parseInt(item.system.mod.value);
             const newValue = getLeveledData("skill", oldValue, oldLevel, newLevel).total;
             itemUpdates.push({
                 _id: item.id,
-                ["data.mod.value"]: newValue,
+                ["mod.value"]: newValue,
             });
         } else if ((item.type as IHandledItemType) === "spellcastingEntry") {
-            const oldAttack = parseInt(item.data.data.spelldc.value);
+            const oldAttack = parseInt(item.system.spelldc.value);
             const newAttack = getLeveledData("spell", oldAttack, oldLevel, newLevel).total;
 
-            const oldDC = parseInt(item.data.data.spelldc.dc);
+            const oldDC = parseInt(item.system.spelldc.dc);
             const newDC = getLeveledData("difficultyClass", oldDC, oldLevel, newLevel).total;
 
             itemUpdates.push({
                 _id: item.id,
-                ["data.spelldc.value"]: newAttack,
-                ["data.spelldc.dc"]: newDC,
+                ["spelldc.value"]: newAttack,
+                ["spelldc.dc"]: newDC,
             });
         } else if ((item.type as IHandledItemType) === "melee") {
-            const oldAttack = parseInt(item.data.data.bonus.value);
+            const oldAttack = parseInt(item.system.bonus.value);
             const newAttack = getLeveledData("spell", oldAttack, oldLevel, newLevel).total;
 
             const attackUpdate: IDataUpdates = {
                 _id: item.id,
-                ["data.bonus.value"]: newAttack,
-                ["data.bonus.total"]: newAttack,
+                ["bonus.value"]: newAttack,
+                ["bonus.total"]: newAttack,
             };
 
-            const damage = item.data.data.damageRolls as any[] | object;
+            const damage = item.system.damageRolls as any[] | object;
 
             if (Array.isArray(damage)) {
                 for (let i = 0; i < damage.length; i++) {
-                    attackUpdate[`data.damageRolls.${i}.damage`] = getDamageData(damage[i].damage, oldLevel, newLevel);
-                    attackUpdate[`data.damageRolls.${i}.damageType`] = damage[i].damageType;
+                    attackUpdate[`damageRolls.${i}.damage`] = getDamageData(damage[i].damage, oldLevel, newLevel);
+                    attackUpdate[`damageRolls.${i}.damageType`] = damage[i].damageType;
                 }
             } else {
                 // Fix for #2 - some actors contain key/value pairs instead of array elements
                 for (const key in damage) {
-                    attackUpdate[`data.damageRolls.${key}.damage`] = getDamageData(
-                        damage[key].damage,
-                        oldLevel,
-                        newLevel
-                    );
-                    attackUpdate[`data.damageRolls.${key}.damageType`] = damage[key].damageType;
+                    attackUpdate[`damageRolls.${key}.damage`] = getDamageData(damage[key].damage, oldLevel, newLevel);
+                    attackUpdate[`damageRolls.${key}.damageType`] = damage[key].damageType;
                 }
             }
 
@@ -180,10 +178,8 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     itemUpdates = [];
     const DC_REGEXES = [/(data-pf2-dc=")(\d+)(")/g, /(@Check\[.*?type:.*?|dc:)(\d+)(.*?])/g];
     for (const regex of DC_REGEXES) {
-        for (const item of actor.data.items.filter(
-            (i) => i.data.data.description.value.includes("DC") || i.data.data.description.value.includes("dc:")
-        )) {
-            const description = item.data.data["description"].value as string;
+        for (const item of actor.items.filter((i) => i.description.includes("DC") || i.description.includes("dc:"))) {
+            const description = item.description;
             let newDescription = description;
             let match: RegExpExecArray | null = regex.exec(description);
 
@@ -206,7 +202,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
 
             itemUpdates.push({
                 _id: item.id as string,
-                ["data.description.value"]: newDescription,
+                ["description.value"]: newDescription,
             });
         }
     }
@@ -216,7 +212,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     itemUpdates = [];
     for (const item of newActor.items.values()) {
         const DMG_REGEX = /\d+d\d+(\+\d*)?/g;
-        const description = item.data.data["description"].value as string;
+        const description = item.system["description"].value as string;
         let newDescription = description;
         let match: RegExpExecArray | null = DMG_REGEX.exec(description);
         let indexOffset = 0;
@@ -237,7 +233,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
 
         itemUpdates.push({
             _id: item.id as string,
-            ["data.description.value"]: newDescription,
+            ["description.value"]: newDescription,
         });
     }
 

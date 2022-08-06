@@ -4,6 +4,7 @@
 // * Timeout, recalc timeout, ignore on the first, random on the second
 
 import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { CharacterSystemData } from "@actor/character/data";
 
 export enum HPHState {
     Start,
@@ -150,16 +151,17 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
         game?.actors
             ?.filter((x) => x.hasPlayerOwner)
             .filter((x) => x.isOfType("character"))
-            .filter((x) =>
-                (
-                    game?.users
-                        ?.filter((user) => user.active)
-                        .map((user) => user.character)
-                        .filter((actor) => !!actor) || []
-                ).includes(x)
-            )
-            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("minion"))
-            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("eidolon")) || [];
+            .filter((x) => x.alliance === "party")
+            ?.filter((actor) => !actor.system.traits.traits.value.toString().includes("minion"))
+            ?.filter((actor) => !actor.system.traits.traits.value.toString().includes("eidolon"))
+            ?.filter(
+                (actor) =>
+                    !game.users
+                        .filter((user) => user.active)
+                        .map((user) => user.character?.id)
+                        .filter((x) => x !== null)
+                        .includes(actor.id)
+            ) || [];
 
     let checked: number;
     switch (state) {
@@ -288,26 +290,22 @@ function heroes() {
         game?.actors
             ?.filter((actor) => actor.hasPlayerOwner)
             .filter((actor) => actor.isOfType("character"))
-            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("minion"))
-            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("eidolon")) || []
+            .filter((actor) => !actor.system.traits?.traits.value.toString().includes("minion"))
+            .filter((actor) => !actor.system.traits?.traits.value.toString().includes("eidolon")) || []
     );
 }
 
 async function resetHeroPoints(heropoints: number) {
     for (const actor of heroes()) {
-        const value = Math.min(
-            heropoints,
-            // @ts-ignore
-            parseInt(actor.data.data.resources.heroPoints.max)
-        );
+        const value = Math.min(heropoints, (<CharacterSystemData>actor.data.system).resources.heroPoints.max);
         await actor.update({
-            "data.resources.heroPoints.value": value,
+            "system.resources.heroPoints.value": value,
         });
     }
 }
 
 async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
-    let actors: any[];
+    let actors;
     switch (actorId) {
         case "ALL":
             actors = heroes();
@@ -321,13 +319,13 @@ async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
     }
 
     for (const actor of actors) {
+        const system = <CharacterSystemData>actor.data.system;
         const value = Math.min(
-            parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
-            parseInt(actor.data.data.resources.heroPoints.max)
+            system.resources.heroPoints.value + heropoints,
+            (<CharacterSystemData>actor.data.system).resources.heroPoints.max
         );
         await actor.update({
-            // @ts-ignore
-            "data.resources.heroPoints.value": value,
+            "system.resources.heroPoints.value": value,
         });
     }
 }
@@ -396,9 +394,9 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
      * limitations under the License.
      */
 
-    renderData.data.resources.heroPoints.max = <number>game.settings.get(MODULENAME, "maxHeroPoints");
+    renderData.resources.heroPoints.max = <number>game.settings.get(MODULENAME, "maxHeroPoints");
 
-    const { value, max }: { value: number; max: number } = renderData.data.resources.heroPoints;
+    const { value, max }: { value: number; max: number } = renderData.resources.heroPoints;
 
     const iconFilled = '<i class="fas fa-hospital-symbol"></i>';
     const iconEmpty = '<i class="far fa-circle"></i>';
@@ -411,10 +409,10 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
         icon += iconEmpty;
     }
 
-    renderData.data.resources.heroPoints.icon = icon;
+    renderData.resources.heroPoints.icon = icon;
 
     const actor: Actor = app["document"] as Actor;
-    const span = html.find('span[data-property="data.resources.heroPoints.value"]');
+    const span = html.find('span[data-property="resources.heroPoints.value"]');
     span.html(icon);
 
     span.off("click");
@@ -423,13 +421,13 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
     span.on("click", async (_e) => {
         if (value === max) return;
         await actor.update({
-            ["data.resources.heroPoints.value"]: value + 1,
+            ["resources.heroPoints.value"]: value + 1,
         });
     });
     span.on("contextmenu", async (_e) => {
         if (value === 0) return;
         await actor.update({
-            ["data.resources.heroPoints.value"]: value - 1,
+            ["resources.heroPoints.value"]: value - 1,
         });
     });
 }

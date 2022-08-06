@@ -8,7 +8,7 @@ import { generateNameFromTraits } from "./traits-name-generator";
 function shouldSkipRandomNumber(token: TokenPF2e | TokenDocumentPF2e) {
     return (
         game.settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
-        token?.actor?.data?.data?.traits?.rarity === "unique"
+        token?.actor?.system?.traits?.rarity === "unique"
     );
 }
 
@@ -78,7 +78,7 @@ export async function tokenCreateMystification(token: any) {
 }
 
 export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): boolean {
-    const tokenName = token?.data.name;
+    const tokenName = token?.name;
     const actorName = token?.actor?.name;
     if (tokenName !== actorName && game.settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
         const tokenNameNoNumber = tokenName?.trim().replace(/\d+$/, "").trim();
@@ -144,8 +144,8 @@ export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
 }
 
 export function mangleChatMessage(message: ChatMessage, html: JQuery) {
-    const actorId = <string>message?.data?.speaker?.actor;
-    const tokenId = message?.data?.speaker?.token;
+    const actorId = <string>message?.speaker?.actor;
+    const tokenId = message?.speaker?.token;
     const actor = game.actors?.get(actorId);
     const jqueryContent = html?.find(".action-card");
 

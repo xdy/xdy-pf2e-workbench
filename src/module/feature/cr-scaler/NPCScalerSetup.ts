@@ -34,7 +34,7 @@ function onScaleNPCContextHook(html: JQuery, buttons: any[]) {
                 const id = li.data("document-id") as string;
                 const actor = game.actors?.get(id) as NPCPF2e;
 
-                // const oldLevel = actor.data.data.details.level.value;
+                // const oldLevel = actor.system.details.level.value;
                 const oldLevel = 24;
 
                 const d = new Dialog({

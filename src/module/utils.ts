@@ -3,7 +3,7 @@ import { ActorFlagsPF2e } from "@actor/data/base";
 import { ActorPF2e } from "@actor";
 
 export function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
-    const userId = message.data.user;
+    const userId = message.user.id;
     const amIMessageSender = userId === game.user?.id;
     if (!game.user?.isGM && playerCondition && amIMessageSender) {
         return true;
@@ -17,10 +17,10 @@ export function nth(n) {
 }
 
 export function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
-    const flags = <ActorFlagsPF2e>message.data.flags.pf2e;
+    const flags = <ActorFlagsPF2e>message.flags.pf2e;
     let degreeOfSuccess = <string>flags.context?.outcome ?? "";
     if (flags?.context?.isReroll) {
-        const match = message.data.flavor?.match('Result: <span .*? class="(.*?)"');
+        const match = message.flavor?.match('Result: <span .*? class="(.*?)"');
         if (match && match[1]) {
             degreeOfSuccess = match[1];
         }
@@ -39,9 +39,9 @@ export function shouldIHandleThis(actor: ActorPF2e | null) {
         currentUser.active && actor.canUserModify(currentUser, "update")
             ? currentUser
             : assignedUser ?? firstGM ?? anyoneWithPermission ?? null;
-    return game.userId === updater?.id;
+    return game.user.id === updater?.id;
 }
 
 export function isFirstGM() {
-    return game.userId !== game.users?.find((u) => u.isGM && u.active)?.id;
+    return game.user.id === game.users?.find((u) => u.isGM && u.active)?.id;
 }

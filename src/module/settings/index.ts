@@ -4,7 +4,6 @@ import { WorkbenchRemindersSettings } from "./reminders";
 import { WorkbenchWorldAutomationSettings } from "./automation-world";
 import { WorkbenchClientAutomationSettings } from "./automation-client";
 import { WorkbenchQolWorldSettings } from "./qol-world";
-import { WorkbenchSfxWorldSettings } from "./sfx-world";
 
 export { mystifyModifierKey } from "./mystification";
 
@@ -20,7 +19,6 @@ export function registerWorkbenchSettings() {
     WorkbenchMystificationSettings.registerSettingsAndCreateMenu("fas fa-eye-slash");
     WorkbenchRemindersSettings.registerSettingsAndCreateMenu("fas fa-bell");
     WorkbenchQolWorldSettings.registerSettingsAndCreateMenu("fas fa-smile");
-    WorkbenchSfxWorldSettings.registerSettingsAndCreateMenu("fas fa-hat-wizard");
     WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fas fa-robot");
     WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fas fa-magic", false);
 

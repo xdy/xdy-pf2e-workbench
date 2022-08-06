@@ -36,7 +36,7 @@ export function onQuantitiesHook(app: ActorSheet, html: JQuery) {
         const itemId = $(event.currentTarget).parents(".item").attr("data-item-id") ?? "";
         const item = actor.items.get(itemId) as Item;
 
-        const quantity = Number(item.data.data["quantity"]) + getAmount(event) ?? 0;
+        const quantity = Number(item.system["quantity"]) + getAmount(event) ?? 0;
         await actor.updateEmbeddedDocuments("Item", [
             {
                 _id: itemId,
@@ -49,8 +49,8 @@ export function onQuantitiesHook(app: ActorSheet, html: JQuery) {
         const itemId = $(event.currentTarget).parents(".item").attr("data-item-id") ?? "";
         const item = actor.items.get(itemId) as Item;
 
-        if (Number(item.data.data["quantity"]) > 0) {
-            const quantity = Number(item.data.data["quantity"]) - getAmount(event) ?? 0;
+        if (Number(item.system["quantity"]) > 0) {
+            const quantity = Number(item.system["quantity"]) - getAmount(event) ?? 0;
             await actor.updateEmbeddedDocuments("Item", [
                 {
                     _id: itemId,
