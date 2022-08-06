@@ -115,7 +115,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
 
 export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2e) {
     let result: any;
-    const data = token?.actor?.data?.data;
+    const data = token?.actor?.system;
     const traits = data?.traits;
     const customTraits: any = traits?.traits?.custom;
     if (!TRAITS) {

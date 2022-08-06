@@ -117,7 +117,7 @@ class NpcRoller extends Application {
         };
 
         data["data"]["selected"] = canvas.tokens?.controlled.map((token: Token) =>
-            parseInt(token.actor?.data.data["details"].level.value)
+            parseInt(token.actor?.system["details"].level.value)
         );
 
         return data;

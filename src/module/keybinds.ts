@@ -6,7 +6,6 @@ import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/hero
 export function registerWorkbenchKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);
 
-    // @ts-ignore
     const keybindings = game.keybindings;
 
     keybindings.register(MODULENAME, "addUserTargets", {
@@ -36,7 +35,7 @@ export function registerWorkbenchKeybindings() {
                     addFor: {
                         icon: '<i class="fas fa-users"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
-                        callback: async (html: JQuery) => {
+                        callback: async (html) => {
                             const targets = Array.from(canvas.tokens?.controlled).concat(
                                 canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1)
                             );
@@ -75,9 +74,9 @@ export function registerWorkbenchKeybindings() {
         hint: `${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`,
         restricted: true,
         editable: [],
-        onDown: async () => {
+        onDown: () => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
-                await heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start);
+                heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start).then();
             }
             return true;
         },
@@ -89,12 +88,12 @@ export function registerWorkbenchKeybindings() {
         hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
         restricted: true,
         editable: [],
-        onDown: async () => {
+        onDown: () => {
             if (game.user?.isGM) {
                 const combatantByToken: any = game?.combat?.getCombatantByToken(
                     <string>canvas?.tokens?.controlled[0].id
                 );
-                await moveSelectedAheadOfCurrent(combatantByToken);
+                moveSelectedAheadOfCurrent(combatantByToken).then();
             }
             return true;
         },
@@ -106,11 +105,11 @@ export function registerWorkbenchKeybindings() {
         hint: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.hint`,
         restricted: true,
         editable: [],
-        onDown: async () => {
+        onDown: () => {
             if (game.settings.get(MODULENAME, "npcMystifier")) {
                 if (canMystify()) {
                     for (const token of canvas?.tokens?.controlled.filter((x) => !x.actor?.hasPlayerOwner) || []) {
-                        await doMystification(token, isTokenMystified(token));
+                        doMystification(token, isTokenMystified(token)).then();
                     }
                 } else {
                     ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));

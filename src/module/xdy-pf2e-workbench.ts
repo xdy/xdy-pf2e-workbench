@@ -18,7 +18,6 @@ import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { TokenDocumentPF2e } from "@scene";
-import { playAnimationAndSound } from "./feature/sfxHandler";
 import { toggleMenuSettings, toggleSettings } from "./feature/settingsHandler";
 import {
     applyEncumbranceBasedOnBulk,
@@ -53,6 +52,7 @@ import { setupNpcRoller } from "./feature/npc-roller/NpcRoller";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { UserPF2e } from "@module/user";
+import { SpellData } from "@item/spell/data";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -86,7 +86,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             async (message: ChatMessagePF2e, data: ChatMessageDataPF2e, _options, _user: UserPF2e) => {
                 if (
                     game.settings.get(MODULENAME, "castPrivateSpell") &&
-                    message.data.flags.pf2e?.casting?.id &&
+                    message.flags.pf2e?.casting?.id &&
                     (!message.data.whisper || message.data.whisper.length === 0) &&
                     game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) //TODO Doesn't work on mac?
                 ) {
@@ -102,7 +102,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT) //TODO Doesn't work on mac?
                     ) {
                         const vsmf = <string>(
-                            message.data.content
+                            message.content
                                 .match(
                                     game.i18n.localize(
                                         `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.components`
@@ -119,9 +119,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         } else {
                             tokenName = message.token?.name ?? message.actor?.name ?? anonymous;
                         }
-                        const type = message.data.flags?.pf2e.origin?.type ?? "spell";
-                        const traditionString = message.data.flags.pf2e.casting.tradition;
-                        const origin: SpellPF2e | null = await fromUuid(<string>message.data.flags?.pf2e.origin?.uuid);
+                        const type = message.flags?.pf2e.origin?.type ?? "spell";
+                        const traditionString = message.flags.pf2e.casting.tradition;
+                        const origin: SpellPF2e | null = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
                         let content = "";
                         if (origin) {
                             content = game.i18n.localize(
@@ -138,7 +138,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                     game.i18n.format(
                                         `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.traitPart`,
                                         {
-                                            traits: Object.values(origin.data.data.traits.value)
+                                            traits: Object.values(origin.system.traits.value)
                                                 .map((trait) => trait.valueOf())
                                                 .sort()
                                                 .join(", "),
@@ -148,7 +148,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             }
 
                             let dcRK = 0;
-                            const level = origin.data.data.level.value;
+                            const level = origin.system.level.value;
                             if (level === 1) {
                                 dcRK = 15;
                             } else if (level === 2) {
@@ -171,7 +171,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 dcRK = 39;
                             }
 
-                            switch ((<ItemPF2e>origin).data.data.traits?.rarity ?? "common") {
+                            switch (origin.system.traits?.rarity ?? "common") {
                                 case "uncommon":
                                     dcRK += 2;
                                     break;
@@ -267,10 +267,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
                     reminderBreathWeapon(message).then(() => console.log("Workbench reminderBreathWeapon complete"));
                 }
-
-                if (isFirstGM() && game.settings.get(MODULENAME, "automatedAnimationOn")) {
-                    playAnimationAndSound(message).then(() => console.log("Workbench playAnimationAndSound complete"));
-                }
             } else {
                 if (game.settings.get(MODULENAME, "reminderIWR")) {
                     reminderIWR(message).then(() => console.log("Workbench reminderIWR complete"));
@@ -311,7 +307,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (
-                message.data.flags.pf2e.damageRoll &&
+                message.flags.pf2e.damageRoll &&
                 (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
                     game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
                     game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest")
@@ -417,7 +413,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
-            const hp = actor.data.data.attributes.hp?.value || 0;
+            const hp = actor.system.attributes.hp?.value || 0;
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
                 moveOnZeroHP(actor, deepClone(update), hp).then(() => console.log("Workbench moveOnZeroHP complete"));
             }
@@ -449,18 +445,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
                     console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
                 );
-            }
-        });
-    }
-
-    if (game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState")) {
-        Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update, _options, _userId) => {
-            if (
-                tokenDoc.actor?.type !== "loot" &&
-                game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState") &&
-                (update.hidden === true || update.hidden === false)
-            ) {
-                tokenDoc.actor?.toggleCondition("undetected");
             }
         });
     }
@@ -542,7 +526,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                             : " ";
                                     }
                                     await ChatMessage.create({
-                                        content: TextEditor.enrichHTML(content),
+                                        content: TextEditor.enrichHTML(content, { async: false }),
                                         speaker: ChatMessage.getSpeaker({ token: token }),
                                     });
                                 });
@@ -566,7 +550,6 @@ Hooks.once("setup", async () => {
     //General module setup
 
     if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
-        // @ts-ignore
         game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
             return false;
         };
@@ -587,7 +570,8 @@ Hooks.once("setup", async () => {
 
 async function migrateFeatures() {
     //Currently only flat check notes
-    const moduleVersion = game.modules.get(MODULENAME)?.data["version"];
+    // @ts-ignore - no type definition for this yet
+    const moduleVersion = game.modules.get(MODULENAME)?.version;
     const worldVersion = game.settings.get(MODULENAME, "workbenchVersion");
     if (moduleVersion !== worldVersion) {
         const pack = game.packs.find((p) => p.collection === `${MODULENAME}.xdy-pf2e-workbench-items`);

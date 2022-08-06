@@ -50,11 +50,6 @@
         "name": "Reminders Settings",
         "label": "Manage Reminders Settings"
       },
-      "sfxWorldSettings": {
-        "hint": "(Deprecated) Enable and configure special effect settings for GMs (needs automated animation module, default values are from the JB2A and SoundFX modules). NOTE: All features on this submenu have been moved to the module pf2e-jb2a-macros, use that instead.",
-        "name": "(Deprecated) World Special Effect Settings",
-        "label": "(Deprecated) Manage World Special Effect Settings"
-      },
       "abpVariantAllowItemBonuses": {
         "hint": "Do not disable item bonuses when using ABP.",
         "name": "Do not disable item bonuses when using ABP."
@@ -64,46 +59,6 @@
         "name": "Add Recall Knowledge button to NPCs.",
         "hideNpcName": "Hide NPC name on Recall Knowledge message.",
         "hideSkill": "Hide skill name on Recall Knowledge message."
-      },
-      "automatedAnimationOn": {
-        "hint": "(Deprecated) Use the module automated-animations to play animation and/or sound on a strike miss. Save settings to show/hide additional options.",
-        "name": "(Deprecated) Use the module automated-animations to play animation and/or sound on a strike miss."
-      },
-      "automatedAnimationOnFailAnimation": {
-        "hint": "(Deprecated) Animation to play on strike miss, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "(Deprecated) Animation to play on strike miss."
-      },
-      "automatedAnimationOnFailSound": {
-        "hint": "(Deprecated) Sound to play on strike miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "(Deprecated) Sound to play on strike miss."
-      },
-      "automatedAnimationOnCritFailAnimation": {
-        "hint": "(Deprecated) Animation to play on strike critical miss, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "(Deprecated) Animation to play on strike critical miss."
-      },
-      "automatedAnimationOnCritFailSound": {
-        "hint": "(Deprecated) Sound to play on strike critical miss, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "(Deprecated) Sound to play on strike critical miss."
-      },
-      "automatedAnimationOnCritSuccessAnimation": {
-        "hint": "(Deprecated) Animation to play on strike critical success, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "(Deprecated) Animation to play on strike critical success."
-      },
-      "automatedAnimationOnCritSuccessSound": {
-        "hint": "(Deprecated) Sound to play on strike critical success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "(Deprecated) Sound to play on strike critical success."
-      },
-      "automatedAnimationOnSuccessAnimation": {
-        "hint": "(Deprecated) Animation to play on strike success, default is from the JB2A_DnD5e module which must be installed for it to be usable. Leave empty to play no animation.",
-        "name": "(Deprecated) Animation to play on strike success."
-      },
-      "automatedAnimationOnSuccessSound": {
-        "hint": "(Deprecated) Sound to play on strike success, default is from the soundfxlibrary module which must be installed for it to be usable. If this matches the name of a rollable table or a playlist a random text result from this will be used as the path to the sound instead. Leave empty to play no sound.",
-        "name": "(Deprecated) Sound to play on strike success."
-      },
-      "automatedAnimationMissOffTarget": {
-        "hint": "(Deprecated) Make miss and critical miss animations appear at a random spot near the missed target token.",
-        "name": "(Deprecated) Make miss animations appear off-target."
       },
       "applyPersistentAllow": {
         "hint": "Select who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options on the client automation setting menu.",
@@ -118,20 +73,12 @@
         "name": "Automatically apply persistent damage rolled by the Persistent Damage module.",
         "wasDamaged": "{damage} damage was automatically applied"
       },
-      "applyPersistentDamageSeparateMessage": {
-        "name": "Show separate persistent damage message",
-        "hint": "Client setting to show separate persistent damage message"
-      },
       "applyPersistentHealing": {
         "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
         "name": "Automatically apply persistent healing rolled by the system.",
         "FastHealingLabel": "Received Fast Healing",
         "RegenerationLabel": "Received Regeneration",
         "wasHealed": "{healing} healing was automatically applied."
-      },
-      "applyPersistentHealingSeparateMessage": {
-        "hint": "Client setting to show separate persistent healing message",
-        "name": "Show separate persistent healing message"
       },
       "applyEncumbranceBasedOnBulk": {
         "hint": "Automatically apply encumbrance based on bulk. (Uses system code which considers 5 bulk + 9 light to not exceed 5 bulk.)",
@@ -205,10 +152,6 @@
       "giveWoundedWhenDyingRemoved": {
         "hint": "Setting to automatically give Wounded condition when Dying condition is removed.",
         "name": "Automatically give Wounded when Dying is removed."
-      },
-      "toggleUndetectedWithVisibilityState": {
-        "hint": "(Experimental) World setting for using token visilibity for toggling Undetected condition. Won't affect Loot actors.",
-        "name": "(Experimental) (World) Use visibility to toggle Undetected condition."
       },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn for characters, npcs and familiars.",
@@ -371,10 +314,10 @@
       "reminderBreathWeapon": {
         "hint": "Check to set reminder for breath weapon use.",
         "name": "Breath weapon reminder",
-        "prefix": "can't use",
-        "postfix": " rounds",
+        "prefix": "Recharge Breath Weapon",
         "defaultName": "Breath",
-        "used": "Used "
+        "used": "Used ",
+        "source": "Breath Weapon reminder created by PF2e Workbench"
       },
       "reminderCannotAttack": {
         "hint": "Check to show reminder if attacking with a token that cannot attack due to being unconscious/dead/defeated/no hp/etc.",

@@ -2,13 +2,7 @@
 
 import fs from "fs-extra";
 import path from "path";
-
-function randomID() {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    return Array.from(Array(16).keys())
-        .map(() => letters[Math.floor(Math.random() * letters.length)])
-        .join("");
-}
+import { randomID } from "./module/utils";
 
 function copyFolder(source: string, target: string) {
     fs.readdirSync(source)
