@@ -6,10 +6,18 @@ import { ChoiceSetData, ChoiceSetSource } from "./data";
  * @category RuleElement
  */
 declare class ChoiceSetRuleElement extends RuleElementPF2e {
+    /** The prompt to present in the ChoiceSet application window */
+    private prompt;
+    /** Should the parent item's name be adjusted to reflect the choice made? */
+    private adjustName;
     /** Allow the user to make no selection without suppressing all other rule elements on the parent item */
-    allowNoSelection: boolean;
+    private allowNoSelection;
+    /** A predicate to valide dropped item selections */
+    private allowedDrops;
+    /** If the choice set contains UUIDs, the item slug can be recorded instead of the selected UUID */
+    private recordSlug;
     /** An optional roll option to be set from the selection */
-    rollOption: string | null;
+    private rollOption;
     constructor(data: ChoiceSetSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     /**
      * Adjust the effect's name and set the targetId from the user's selection, or set the entire rule element to be

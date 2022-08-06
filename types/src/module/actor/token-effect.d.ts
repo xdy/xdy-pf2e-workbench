@@ -1,11 +1,9 @@
 export declare class TokenEffect implements TemporaryEffect {
-    data: {
-        disabled: boolean;
-        icon: string;
-        tint: string;
-    };
+    disabled: boolean;
+    icon: ImagePath;
+    tint?: string;
     readonly isTemporary = true;
     readonly flags: Record<string, Record<string, string | boolean | undefined>>;
-    constructor(icon: string, overlay?: boolean, tint?: string | null | undefined);
+    constructor(icon: ImagePath, overlay?: boolean, tint?: string | null | undefined);
     getFlag(scope: string, flag: string): string | boolean | undefined;
 }

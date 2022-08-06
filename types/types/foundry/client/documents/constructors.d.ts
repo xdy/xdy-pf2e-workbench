@@ -12,6 +12,8 @@ export const ActiveEffectConstructor: ClientDocumentMixin<typeof foundry.documen
 
 export const ActorConstructor: ClientDocumentMixin<typeof foundry.documents.BaseActor>;
 
+export const CardsConstructor: ClientDocumentMixin<typeof foundry.documents.BaseCards>;
+
 export const CombatantConstructor: ClientDocumentMixin<typeof foundry.documents.BaseCombatant>;
 
 export const CombatConstructor: ClientDocumentMixin<typeof foundry.documents.BaseCombat>;
@@ -27,6 +29,8 @@ export const FolderConstructor: ClientDocumentMixin<typeof foundry.documents.Bas
 export const ItemConstructor: ClientDocumentMixin<typeof foundry.documents.BaseItem>;
 
 export const JournalEntryConstructor: ClientDocumentMixin<typeof foundry.documents.BaseJournalEntry>;
+
+export const JournalEntryPageConstructor: ClientDocumentMixin<typeof foundry.documents.BaseJournalEntryPage>;
 
 export const MacroConstructor: ClientDocumentMixin<typeof foundry.documents.BaseMacro>;
 

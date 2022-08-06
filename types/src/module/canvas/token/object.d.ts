@@ -1,19 +1,14 @@
 import { TokenDocumentPF2e } from "@module/scene";
 import { TokenLayerPF2e } from "..";
-import { TokenAuras } from "./auras";
+import { AuraRenderers } from "./aura";
 declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     /** Visual representation and proximity-detection facilities for auras */
-    auras: TokenAuras;
-    /** Used to track conditions and other token effects by game.pf2e.StatusEffects */
-    statusEffectChanged: boolean;
+    readonly auras: AuraRenderers;
+    constructor(document: TokenDocumentPF2e);
     /** The promise returned by the last call to `Token#draw()` */
     private drawLock?;
-    /** Is the user currently controlling this token? */
-    get isControlled(): boolean;
-    /** Is the user currently mouse-hovering this token? */
-    get isHovered(): boolean;
-    /** Is this token currently moving? */
-    get isMoving(): boolean;
+    /** Is this token currently animating? */
+    get isAnimating(): boolean;
     /** Is this token emitting light with a negative value */
     get emitsDarkness(): boolean;
     /** Is rules-based vision enabled, and does this token's actor have low-light vision (inclusive of darkvision)? */
@@ -36,12 +31,8 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     isFlanking(flankee: TokenPF2e, { reach }?: {
         reach?: number;
     }): boolean;
-    /** Max the brightness emitted by this token's `PointSource` if any controlled token has low-light vision */
-    updateSource({ defer, deleted, skipUpdateFog }?: {
-        defer?: boolean | undefined;
-        deleted?: boolean | undefined;
-        skipUpdateFog?: boolean | undefined;
-    }): void;
+    /** Overrides _drawBar() to also draw pf2e variants of normal resource bars (such as temp health) */
+    protected _drawBar(number: number, bar: PIXI.Graphics, data: TokenResourceData): void;
     /** Make the drawing promise accessible to `#redraw` */
     draw(): Promise<this>;
     /** Draw auras along with effect icons */
@@ -63,7 +54,7 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
         reach?: number | null;
     }): number;
     /** Add a callback for when a movement animation finishes */
-    animateMovement(ray: Ray): Promise<void>;
+    animate(updateData: Record<string, unknown>, options?: TokenAnimationOptions<this>): Promise<void>;
     /** Refresh vision and the `EffectsPanel` */
     protected _onControl(options?: {
         releaseOthers?: boolean;
@@ -71,8 +62,6 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     }): void;
     /** Refresh vision and the `EffectsPanel` */
     protected _onRelease(options?: Record<string, unknown>): void;
-    /** Work around Foundry bug in which unlinked token redrawing performed before data preparation completes */
-    _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this["document"]>, userId: string): void;
     protected _onDragLeftStart(event: TokenInteractionEvent<this>): void;
     /** If a single token (this one) was dropped, re-establish the hover status */
     protected _onDragLeftDrop(event: TokenInteractionEvent<this>): Promise<this["document"][]>;
@@ -83,7 +72,7 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     /** Destroy auras before removing this token from the canvas */
     _onDelete(options: DocumentModificationContext<TokenDocumentPF2e>, userId: string): void;
     /** A callback for when a movement animation for this token finishes */
-    private onFinishMoveAnimation;
+    private onFinishAnimation;
 }
 interface TokenPF2e extends Token<TokenDocumentPF2e> {
     get layer(): TokenLayerPF2e<this>;

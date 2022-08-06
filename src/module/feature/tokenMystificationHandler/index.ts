@@ -2,13 +2,13 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
 import { mystifyModifierKey } from "../../settings";
 import { TokenDataPF2e } from "@scene/token-document";
-import { TokenPF2e } from "@canvas";
 import { generateNameFromTraits } from "./traits-name-generator";
+import { TokenPF2e } from "@module/canvas";
 
 function shouldSkipRandomNumber(token: TokenPF2e | TokenDocumentPF2e) {
     return (
         game.settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
-        token?.actor?.data?.data?.traits?.rarity === "unique"
+        token?.actor?.system?.traits?.rarity === "unique"
     );
 }
 
@@ -38,7 +38,7 @@ export async function buildTokenName(
             } else {
                 if (addRandom && !shouldSkipRandomNumber(token)) {
                     let rolled = Math.floor(Math.random() * 100) + 1;
-                    //Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
+                    // Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
                     if (canvas?.scene?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
                         rolled = Math.floor(Math.random() * 100) + 1;
                     }
@@ -48,7 +48,7 @@ export async function buildTokenName(
         }
     }
 
-    //Never return an empty string
+    // Never return an empty string
     return tokenName === "" ? <string>game.settings.get(MODULENAME, "npcMystifierNoMatch") : tokenName;
 }
 
@@ -78,7 +78,7 @@ export async function tokenCreateMystification(token: any) {
 }
 
 export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): boolean {
-    const tokenName = token?.data.name;
+    const tokenName = token?.name;
     const actorName = token?.actor?.name;
     if (tokenName !== actorName && game.settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
         const tokenNameNoNumber = tokenName?.trim().replace(/\d+$/, "").trim();
@@ -88,12 +88,19 @@ export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): b
     return tokenName !== actorName || false;
 }
 
+export async function doMystificationFromToken(tokenId: string, active: boolean) {
+    const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));
+    if (token) {
+        return doMystification(token, active);
+    }
+}
+
 export async function doMystification(token: TokenPF2e, active: boolean) {
     if (!token?.actor) {
         return;
     }
 
-    //define array of objects to be updated
+    // define array of objects to be updated
     const updates = [
         {
             _id: <string>token.id,
@@ -127,7 +134,7 @@ export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
         const toggle = $(
             `<div class="control-icon ${
                 isTokenMystified(token) ? "active" : ""
-            }" > <i class="fas fa-eye-slash"  title=${title}></i></div>`
+            }" > <i class="fas fa-eye-slash"  title="${title}"></i></div>`
         );
         if (canMystify() && !token?.actor?.hasPlayerOwner) {
             toggle.on("click", async (e) => {
@@ -144,8 +151,8 @@ export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
 }
 
 export function mangleChatMessage(message: ChatMessage, html: JQuery) {
-    const actorId = <string>message?.data?.speaker?.actor;
-    const tokenId = message?.data?.speaker?.token;
+    const actorId = <string>message?.speaker?.actor;
+    const tokenId = message?.speaker?.token;
     const actor = game.actors?.get(actorId);
     const jqueryContent = html?.find(".action-card");
 

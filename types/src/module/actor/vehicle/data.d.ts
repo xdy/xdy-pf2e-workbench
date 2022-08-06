@@ -4,7 +4,7 @@ import { StatisticCompatData } from "@system/statistic";
 import { VehiclePF2e } from ".";
 /** The stored source data of a vehicle actor */
 declare type VehicleSource = BaseActorSourcePF2e<"vehicle", VehicleSystemData>;
-declare type VehicleData = Omit<VehicleSource, "effects" | "flags" | "items"> & BaseActorDataPF2e<VehiclePF2e, "vehicle", VehicleSystemData, VehicleSource>;
+declare type VehicleData = Omit<VehicleSource, "effects" | "flags" | "items" | "prototypeToken"> & BaseActorDataPF2e<VehiclePF2e, "vehicle", VehicleSystemData, VehicleSource>;
 interface VehicleHitPointsData extends Required<BaseHitPointsData> {
     brokenThreshold: number;
     negativeHealing: false;

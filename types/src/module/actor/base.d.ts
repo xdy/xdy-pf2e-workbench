@@ -15,7 +15,7 @@ import { Statistic } from "@system/statistic";
 import type { CreaturePF2e } from "./creature";
 import { VisionLevel } from "./creature/data";
 import { ActorDataPF2e, ActorSourcePF2e, ActorType } from "./data";
-import { RollOptionFlags } from "./data/base";
+import { ActorFlagsPF2e, PrototypeTokenPF2e, RollOptionFlags } from "./data/base";
 import { ActorInventory } from "./inventory";
 import { ActorSheetPF2e } from "./sheet/base";
 import { ActorSpellcasting } from "./spellcasting";
@@ -41,8 +41,6 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     /** A cached copy of `Actor#itemTypes`, lazily regenerated every data preparation cycle */
     private _itemTypes?;
     constructor(data: PreCreate<ActorSourcePF2e>, context?: ActorConstructorContextPF2e);
-    /** Shimmed ahead of moving to Actor instance level in V10 */
-    get flags(): this["data"]["flags"];
     /** Cache the return data before passing it to the caller */
     get itemTypes(): {
         [K in keyof ItemTypeMap]: Embedded<ItemTypeMap[K]>[];
@@ -55,7 +53,7 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     /** Get an active GM or, failing that, a player who can update this actor */
     get primaryUpdater(): UserPF2e | null;
     /** Shortcut to system-data attributes */
-    get attributes(): this["data"]["data"]["attributes"];
+    get attributes(): this["system"]["attributes"];
     get hitPoints(): HitPointsSummary | null;
     get traits(): Set<string>;
     get level(): number;
@@ -82,8 +80,6 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     /** Most actor types can host rule elements */
     get canHostRuleElements(): boolean;
     get alliance(): ActorAlliance;
-    /** @deprecated */
-    get physicalItems(): ActorInventory;
     /** Add effect icons from effect items and rule elements */
     get temporaryEffects(): TemporaryEffect[];
     /** A means of checking this actor's type without risk of circular import references */
@@ -109,7 +105,7 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
      * As of Foundry 0.8: All subclasses of ActorPF2e need to use this factory method rather than having their own
      * overrides, since Foundry itself will call `ActorPF2e.create` when a new actor is created from the sidebar.
      */
-    static createDocuments<A extends ConstructorOf<ActorPF2e>>(this: A, data?: PreCreate<InstanceType<A>["data"]["_source"]>[], context?: DocumentModificationContext<InstanceType<A>>): Promise<InstanceType<A>[]>;
+    static createDocuments<A extends ActorPF2e>(this: ConstructorOf<A>, data?: PreCreate<A["_source"]>[], context?: DocumentModificationContext<A>): Promise<A[]>;
     protected _initialize(): void;
     /** Prepare token data derived from this actor, refresh Effects Panel */
     prepareData(): void;
@@ -120,7 +116,7 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     /** Prepare data among owned items as well as actor-data preparation performed by items */
     protected prepareDataFromItems(): void;
     protected prepareRuleElements(): RuleElementPF2e[];
-    /** Collect all sources of modifiers for statistics */
+    /** Collect all rule element output */
     protected prepareSynthetics(): void;
     /** Set traits as roll options */
     prepareDerivedData(): void;
@@ -171,9 +167,9 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
      * @return The target item, if the transfer is successful, or otherwise `null`.
      */
     transferItemToActor(targetActor: ActorPF2e, item: Embedded<ItemPF2e>, quantity: number, containerId?: string, newStack?: boolean): Promise<Embedded<PhysicalItemPF2e> | null>;
-    addToInventory(itemData: PhysicalItemSource, container?: Embedded<ContainerPF2e>, newStack?: boolean): Promise<Embedded<PhysicalItemPF2e> | null>;
+    addToInventory(itemSource: PhysicalItemSource, container?: Embedded<ContainerPF2e>, newStack?: boolean): Promise<Embedded<PhysicalItemPF2e> | null>;
     /** Find an item already owned by the actor that can stack with the to-be-transferred item */
-    findStackableItem(actor: ActorPF2e, itemData: ItemSourcePF2e): Embedded<PhysicalItemPF2e> | null;
+    findStackableItem(actor: ActorPF2e, itemSource: ItemSourcePF2e): Embedded<PhysicalItemPF2e> | null;
     /**
      * Moves an item into the inventory into or out of a container.
      * @param actor       Actor whose inventory should be edited.
@@ -192,6 +188,8 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
      * @param domains The domains of discourse from which to pull options. Always includes the "all" domain.
      */
     getRollOptions(domains?: string[]): string[];
+    /** This allows @actor.level and such to work for roll macros */
+    getRollData(): Record<string, unknown>;
     /**
      * Does this actor have the provided condition?
      * @param slug The slug of the queried condition
@@ -210,15 +208,17 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     toggleCondition(conditionSlug: ConditionSlug): Promise<void>;
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
-    protected _preCreate(data: PreDocumentId<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: ActorUpdateContext<this>, user: UserPF2e): Promise<void>;
-    protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: ActorUpdateContext<this>, userId: string): void;
+    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<this>, user: UserPF2e): Promise<void>;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<this>, userId: string): void;
     /** Unregister all effects possessed by this actor */
     protected _onDelete(options: DocumentModificationContext<this>, userId: string): void;
     protected _onEmbeddedDocumentChange(embeddedName: "Item" | "ActiveEffect"): void;
 }
 interface ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     readonly data: ActorDataPF2e;
+    prototypeToken: PrototypeTokenPF2e;
+    flags: ActorFlagsPF2e;
     _sheet: ActorSheetPF2e<this> | ActorSheet<this, ItemPF2e> | null;
     get sheet(): ActorSheetPF2e<this> | ActorSheet<this, ItemPF2e>;
     /** See implementation in class */

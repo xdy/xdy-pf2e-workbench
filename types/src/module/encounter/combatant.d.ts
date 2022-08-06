@@ -1,15 +1,14 @@
 import type { ActorPF2e } from "@actor/base";
 import { EncounterPF2e } from ".";
-declare class CombatantPF2e<TActor extends ActorPF2e | null = ActorPF2e | null> extends Combatant<TActor> {
-    get encounter(): EncounterPF2e | null;
-    get defeated(): boolean;
+declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e | null, TActor extends ActorPF2e | null = ActorPF2e | null> extends Combatant<TParent, TActor> {
+    get encounter(): TParent;
     /** The round this combatant last had a turn */
     get roundOfLastTurn(): number | null;
     /** Can the user see this combatant's name? */
     get playersCanSeeName(): boolean;
     overridePriority(initiative: number): number | null;
-    hasHigherInitiative(this: RolledCombatant, { than }: {
-        than: RolledCombatant;
+    hasHigherInitiative(this: RolledCombatant<NonNullable<TParent>>, { than }: {
+        than: RolledCombatant<NonNullable<TParent>>;
     }): boolean;
     prepareBaseData(): void;
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
@@ -25,21 +24,19 @@ declare class CombatantPF2e<TActor extends ActorPF2e | null = ActorPF2e | null> 
     /** Toggle the visibility of names to players */
     toggleNameVisibility(): Promise<void>;
     /** Send out a message with information on an automatic effect that occurs upon an actor's death */
-    protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentUpdateContext<this>, userId: string): void;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<this>, userId: string): void;
 }
-declare type CombatantDataPF2e<T extends CombatantPF2e> = foundry.data.CombatantData<T> & {
-    flags: {
-        pf2e: {
-            roundOfLastTurn: number | null;
-            overridePriority: Record<number, number | undefined>;
-        };
+interface CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e | null, TActor extends ActorPF2e | null = ActorPF2e | null> extends Combatant<TParent, TActor> {
+    flags: CombatantFlags;
+}
+declare type CombatantFlags = {
+    pf2e: {
+        roundOfLastTurn: number | null;
+        overridePriority: Record<number, number | undefined>;
     };
+    [key: string]: unknown;
 };
-interface CombatantPF2e<TActor extends ActorPF2e | null = ActorPF2e | null> extends Combatant<TActor> {
-    readonly parent: EncounterPF2e | null;
-    readonly data: CombatantDataPF2e<this>;
-}
-declare type RolledCombatant = Embedded<CombatantPF2e> & {
+declare type RolledCombatant<TEncounter extends EncounterPF2e> = CombatantPF2e<TEncounter> & {
     get initiative(): number;
 };
 export { CombatantPF2e, RolledCombatant };

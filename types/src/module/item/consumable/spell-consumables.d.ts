@@ -1,12 +1,13 @@
-import { ConsumableData, ConsumableSource } from "@item/data";
-import { SpellPF2e } from "@item/spell";
+import { ConsumablePF2e, SpellPF2e } from "@item";
+import { ConsumableSource } from "@item/data";
 import { DCOptions } from "@module/dc";
-export declare function isSpellConsumable(itemId: string): boolean;
-export declare function createConsumableFromSpell(type: "scroll" | "wand", spell: SpellPF2e, heightenedLevel?: number): Promise<ConsumableSource>;
-export interface TrickMagicItemDifficultyData {
+declare function isSpellConsumable(itemId: string): boolean;
+declare function createConsumableFromSpell(type: "scroll" | "wand", spell: SpellPF2e, heightenedLevel?: import("../../data").OneToTen): Promise<ConsumableSource>;
+interface TrickMagicItemDifficultyData {
     arc?: number;
     rel?: number;
     occ?: number;
     nat?: number;
 }
-export declare function calculateTrickMagicItemCheckDC(itemData: ConsumableData, options?: DCOptions): TrickMagicItemDifficultyData;
+declare function calculateTrickMagicItemCheckDC(item: ConsumablePF2e, options?: DCOptions): TrickMagicItemDifficultyData;
+export { calculateTrickMagicItemCheckDC, createConsumableFromSpell, isSpellConsumable, TrickMagicItemDifficultyData };

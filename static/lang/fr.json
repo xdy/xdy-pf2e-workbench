@@ -140,13 +140,22 @@
         "hint": "Utilise le nom mystifié à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié. Cela va vraisemblablement ne pas être joli pour certaines capacités.",
         "name": "Utiliser les noms mystifiés dans les messages de la conversation."
       },
-      "applyPersistentDamageSeparateMessage": {
-        "hint": "Montrer séparément le message des dégâts persistants",
-        "name": "Montrer séparément le message des dégâts persistants"
-      },
-      "applyPersistentHealingSeparateMessage": {
-        "hint": "Montrer séparément le message des soins persistants",
-        "name": "Montrer séparément le message des soins persistants"
+      "skillActions": {
+        "Title": "Actions de Compétence",
+        "Settings": {
+          "Position": {
+            "name": "Position des actions de compétence",
+            "hint": "Position dans la page des actions; Haut : juste après les frappes, Bas : en dernière position.",
+            "top": "Haut",
+            "bottom": "Bas"
+          },
+          "IconStyle": {
+            "name": "Style d'icône",
+            "hint": "Style d'icône sur la compétence; Icône Coût de l'action: pour l'icône du coût des actions, Icône de compétence: pour l'icône des compétences si elle est disponible",
+            "actionCostIcon": "Icône Coût de l'action",
+            "skillIcon": "Icône de compétence"
+          }
+        }
       }
     }
   }

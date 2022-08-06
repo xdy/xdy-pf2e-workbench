@@ -5,35 +5,31 @@
  * Software License: Apache 2.0
  */
 
-//TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
-//TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
-//TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
+// TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
+// TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
+// TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
 import { preloadTemplates } from "./preloadTemplates";
 import { registerWorkbenchSettings } from "./settings";
-import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
+import {
+    doMystificationFromToken,
+    mangleChatMessage,
+    renderNameHud,
+    tokenCreateMystification,
+} from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
-import { moveOnZeroHP } from "./feature/initiativeHandler";
+import { moveOnZeroHP, moveSelectedAheadOfCurrent } from "./feature/initiativeHandler";
 import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
-import { TokenDocumentPF2e } from "@scene";
-import { playAnimationAndSound } from "./feature/sfxHandler";
 import { toggleMenuSettings, toggleSettings } from "./feature/settingsHandler";
-import {
-    applyEncumbranceBasedOnBulk,
-    autoRemoveUnconsciousAtGreaterThanZeroHP,
-    giveUnconsciousIfDyingRemovedAt0HP,
-    giveWoundedWhenDyingRemoved,
-    increaseDyingOnZeroHP,
-    reduceFrightened,
-    removeDyingOnZeroHP,
-} from "./feature/conditionHandler";
 import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
 import {
+    addHeroPoints,
     calcRemainingMinutes,
     createRemainingTimeMessage,
     maxHeroPoints,
+    resetHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
 import { isFirstGM, nth } from "./utils";
@@ -53,6 +49,18 @@ import { setupNpcRoller } from "./feature/npc-roller/NpcRoller";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { UserPF2e } from "@module/user";
+import { loadSkillActions, renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions";
+import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
+import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
+import {
+    applyEncumbranceBasedOnBulk,
+    autoRemoveUnconsciousAtGreaterThanZeroHP,
+    giveUnconsciousIfDyingRemovedAt0HP,
+    giveWoundedWhenDyingRemoved,
+    increaseDyingOnZeroHP,
+    reduceFrightened,
+    removeDyingOnZeroHP,
+} from "./feature/conditionHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -64,12 +72,12 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     await preloadTemplates();
 
-    //Handlebars helpers
+    // Handlebars helpers
     Handlebars.registerHelper("ifeq", function (v1, v2, options) {
         return v1 === v2 ? options.fn(this) : options.inverse(this);
     });
 
-    //Hooks that always run
+    // Hooks that always run
     Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
         toggleMenuSettings(html, _settings);
     });
@@ -78,7 +86,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         toggleSettings(html);
     });
 
-    //Hooks that only run if a setting that needs it has been enabled
+    // Hooks that only run if a setting that needs it has been enabled
 
     if (game.settings.get(MODULENAME, "castPrivateSpell")) {
         Hooks.on(
@@ -86,9 +94,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             async (message: ChatMessagePF2e, data: ChatMessageDataPF2e, _options, _user: UserPF2e) => {
                 if (
                     game.settings.get(MODULENAME, "castPrivateSpell") &&
-                    message.data.flags.pf2e?.casting?.id &&
+                    message.flags.pf2e?.casting?.id &&
                     (!message.data.whisper || message.data.whisper.length === 0) &&
-                    game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) //TODO Doesn't work on mac?
+                    game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) // TODO Doesn't work on mac?
                 ) {
                     data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
                     data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
@@ -99,10 +107,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
                     if (
                         game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessage") &&
-                        !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT) //TODO Doesn't work on mac?
+                        !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT) // TODO Doesn't work on mac?
                     ) {
                         const vsmf = <string>(
-                            message.data.content
+                            message.content
                                 .match(
                                     game.i18n.localize(
                                         `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.components`
@@ -119,9 +127,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         } else {
                             tokenName = message.token?.name ?? message.actor?.name ?? anonymous;
                         }
-                        const type = message.data.flags?.pf2e.origin?.type ?? "spell";
-                        const traditionString = message.data.flags.pf2e.casting.tradition;
-                        const origin: SpellPF2e | null = await fromUuid(<string>message.data.flags?.pf2e.origin?.uuid);
+                        const type = message.flags?.pf2e.origin?.type ?? "spell";
+                        const traditionString = message.flags.pf2e.casting.tradition;
+                        const origin: SpellPF2e | null = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
                         let content = "";
                         if (origin) {
                             content = game.i18n.localize(
@@ -138,7 +146,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                     game.i18n.format(
                                         `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.traitPart`,
                                         {
-                                            traits: Object.values(origin.data.data.traits.value)
+                                            traits: Object.values(origin.system.traits.value)
                                                 .map((trait) => trait.valueOf())
                                                 .sort()
                                                 .join(", "),
@@ -148,7 +156,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             }
 
                             let dcRK = 0;
-                            const level = origin.data.data.level.value;
+                            const level = origin.system.level.value;
                             if (level === 1) {
                                 dcRK = 15;
                             } else if (level === 2) {
@@ -171,7 +179,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 dcRK = 39;
                             }
 
-                            switch ((<ItemPF2e>origin).data.data.traits?.rarity ?? "common") {
+                            switch (origin.system.traits?.rarity ?? "common") {
                                 case "uncommon":
                                     dcRK += 2;
                                     break;
@@ -201,7 +209,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 {
                                     skill: skill,
                                     dcRK: dcRK,
-                                    rk: "&#123;Recall Knowledge	&#125;", //Grr
+                                    rk: "&#123;Recall Knowledge	&#125;", // Grr
                                 }
                             );
                         } else {
@@ -224,9 +232,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             );
                         }
 
+                        const token: any = message.token;
                         await ChatMessage.create({
                             content: content,
-                            speaker: ChatMessage.getSpeaker({ token: message.token }),
+                            speaker: ChatMessage.getSpeaker({ token: token }),
                         });
                     }
                 }
@@ -267,10 +276,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
                     reminderBreathWeapon(message).then(() => console.log("Workbench reminderBreathWeapon complete"));
                 }
-
-                if (isFirstGM() && game.settings.get(MODULENAME, "automatedAnimationOn")) {
-                    playAnimationAndSound(message).then(() => console.log("Workbench playAnimationAndSound complete"));
-                }
             } else {
                 if (game.settings.get(MODULENAME, "reminderIWR")) {
                     reminderIWR(message).then(() => console.log("Workbench reminderIWR complete"));
@@ -290,7 +295,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
-        Hooks.on("renderChatMessage", (message: ChatMessagePF2e, html: JQuery) => {
+        Hooks.on("renderChatMessage", (message: ChatMessage<Actor>, html: JQuery) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
                 mangleChatMessage(message, html);
             }
@@ -311,7 +316,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (
-                message.data.flags.pf2e.damageRoll &&
+                message.flags.pf2e.damageRoll &&
                 (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
                     game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
                     game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest")
@@ -396,7 +401,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
 
     if (game.settings.get(MODULENAME, "npcMystifier")) {
-        Hooks.on("renderTokenHUD", (app: TokenHUD, html: JQuery, data: any) => {
+        Hooks.on("renderTokenHUD", (_app, html: JQuery, data: any) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
                 renderNameHud(data, html);
             }
@@ -417,7 +422,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
-            const hp = actor.data.data.attributes.hp?.value || 0;
+            const hp = actor.system.attributes.hp?.value || 0;
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
                 moveOnZeroHP(actor, deepClone(update), hp).then(() => console.log("Workbench moveOnZeroHP complete"));
             }
@@ -430,7 +435,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     increaseDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
                         console.log("Workbench increaseDyingOnZeroHP complete");
                         if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-                            //Ugh.
+                            // Ugh.
                             new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
                                 removeDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
                                     console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete")
@@ -453,18 +458,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState")) {
-        Hooks.on("preUpdateToken", async (tokenDoc: TokenDocumentPF2e, update, _options, _userId) => {
-            if (
-                tokenDoc.actor?.type !== "loot" &&
-                game.settings.get(MODULENAME, "toggleUndetectedWithVisibilityState") &&
-                (update.hidden === true || update.hidden === false)
-            ) {
-                tokenDoc.actor?.toggleCondition("undetected");
-            }
-        });
-    }
-
     if (game.settings.get(MODULENAME, "npcMystifier")) {
         Hooks.on("createToken", async (token: any) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
@@ -477,25 +470,27 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "playerItemsRarityColour") ||
         game.settings.get(MODULENAME, "castPrivateSpell") ||
         game.settings.get(MODULENAME, "addGmRKButtonToNpc") ||
-        game.settings.get(MODULENAME, "quickQuantities")
+        game.settings.get(MODULENAME, "quickQuantities") ||
+        game.settings.get(MODULENAME, "skillActions") !== "disabled"
     ) {
-        Hooks.on("renderActorSheet", (sheet: ActorSheet<ActorPF2e, ItemPF2e>, $html: JQuery) => {
+        Hooks.on("renderActorSheet", (sheet: ActorSheet<Actor, Item>, $html: JQuery) => {
             if (game.settings.get(MODULENAME, "quickQuantities")) {
                 onQuantitiesHook(sheet, $html);
             }
 
             if (game.settings.get(MODULENAME, "castPrivateSpell")) {
-                $html.find(".cast-spell").each((i, e) => {
+                $html.find(".cast-spell").each((_i, e) => {
                     const $e = $(e);
                     $e.addClass(`xdy-pf2e-workbench-secret-spell`);
                 });
             }
 
             if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
-                $html.find(".item").each((i, e) => {
-                    $(e).each((i, e) => {
+                $html.find(".item").each((_i, e) => {
+                    $(e).each((_i, e) => {
                         const rarity = $(e).attr("data-item-rarity");
-                        if (rarity) {
+                        const mystified = $(e).find("span").hasClass("gm-mystified-data");
+                        if (rarity && !mystified) {
                             $(e).find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
                         }
                     });
@@ -503,11 +498,11 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (game.user?.isGM && game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
-                $html.find(".recall-knowledge").each((i, e) => {
+                $html.find(".recall-knowledge").each((_i, e) => {
                     const token = sheet.token;
                     $(e)
                         .find(".section-body")
-                        .each((i, e) => {
+                        .each((_i, e) => {
                             const $e = $(e);
                             if ($e.find(".identification-skills").length === 0) {
                                 return;
@@ -524,7 +519,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 const b = `.gm-recall-knowledge-${skill}`;
                                 $html.find(b).on("click", async (e) => {
                                     const attr = <string>$(e.currentTarget).attr("data-token");
-                                    const token = game?.scenes?.active?.tokens?.get(attr);
+                                    const token: any = game?.scenes?.active?.tokens?.get(attr);
                                     const skill = $(e.currentTarget).attr("data-skill");
                                     const dcs = (<string>$(e.currentTarget).attr("data-dcs")).split("/") || [];
 
@@ -542,13 +537,16 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                             : " ";
                                     }
                                     await ChatMessage.create({
-                                        content: TextEditor.enrichHTML(content),
+                                        content: TextEditor.enrichHTML(content, { async: false }),
                                         speaker: ChatMessage.getSpeaker({ token: token }),
                                     });
                                 });
                             }
                         });
                 });
+            }
+            if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+                renderSheetSkillActions(sheet, $html);
             }
         });
     }
@@ -563,10 +561,9 @@ Hooks.once("setup", async () => {
 
     registerWorkbenchKeybindings();
 
-    //General module setup
+    // General module setup
 
     if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
-        // @ts-ignore
         game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
             return false;
         };
@@ -586,8 +583,9 @@ Hooks.once("setup", async () => {
 });
 
 async function migrateFeatures() {
-    //Currently only flat check notes
-    const moduleVersion = game.modules.get(MODULENAME)?.data["version"];
+    // Currently only flat check notes
+    // @ts-ignore - no type definition for this yet
+    const moduleVersion = game.modules.get(MODULENAME)?.version;
     const worldVersion = game.settings.get(MODULENAME, "workbenchVersion");
     if (moduleVersion !== worldVersion) {
         const pack = game.packs.find((p) => p.collection === `${MODULENAME}.xdy-pf2e-workbench-items`);
@@ -601,7 +599,7 @@ async function migrateFeatures() {
                     await actor.deleteEmbeddedDocuments("Item", [item.id]);
                 }
                 if (filter?.length > 0) {
-                    await actor.createEmbeddedDocuments("Item", [flatcheckNotes.data]);
+                    await actor.createEmbeddedDocuments("Item", [flatcheckNotes.system]);
                 }
             }
 
@@ -609,7 +607,7 @@ async function migrateFeatures() {
                 for (const t of s.tokens) {
                     const actor = t.actor;
                     if (!actor || t.isLinked) {
-                        //Ignore tokens with no actor as well as linked tokens (they have been handled above).
+                        // Ignore tokens with no actor as well as linked tokens (they have been handled above).
                         continue;
                     }
                     const filter = actor.items.filter((item) => item.name.startsWith("Workbench Flat Check Notes"));
@@ -617,7 +615,7 @@ async function migrateFeatures() {
                         await actor.deleteEmbeddedDocuments("Item", [item.id]);
                     }
                     if (filter?.length > 0) {
-                        await actor.createEmbeddedDocuments("Item", [flatcheckNotes.data]);
+                        await actor.createEmbeddedDocuments("Item", [flatcheckNotes.system]);
                     }
                 }
             }
@@ -635,9 +633,25 @@ Hooks.once("ready", async () => {
 
     // Must be in ready
 
-    if (game.user?.isGM) {
+    if (isFirstGM()) {
         await migrateFeatures();
     }
+
+    if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
+        ui.notifications.error(
+            "The module pf2e-sheet-skill-actions is no longer maintained, all it's functions are part of the Workbench, please turn it off."
+        );
+    }
+
+    // Make some functions available for macros
+    game["PF2eWorkbench"] = {
+        resetHeroPoints: resetHeroPoints, // game.PF2eWorkbench.resetHeroPoints(1)
+        addHeroPoints: addHeroPoints, // game.PF2eWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
+        scaleNPCToLevelFromActor: scaleNPCToLevelFromActor, // await game.PF2eWorkbench.scaleNPCToLevelFromActor(_token.actor.id, 24);
+        moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
+        doMystificationFromToken: doMystificationFromToken, // await game.PF2eWorkbench.doMystificationFromToken(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromToken(_token.id, false)
+        generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
+    };
 
     if (game.settings.get(MODULENAME, "heroPointHandler")) {
         if (game.user?.isGM) {
@@ -652,5 +666,19 @@ Hooks.once("ready", async () => {
         }
     }
 
+    if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+        loadSkillActions();
+    }
+
+    // if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+    //     Hooks.once("babele.ready", async () => {
+    //         if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+    //             // Reload actions to have translated actions
+    //             await ActionsIndex.instance.loadCompendium("pf2e.feats-srd");
+    //             await ActionsIndex.instance.loadCompendium("pf2e.actionspf2e");
+    //         }
+    //     });
+    // }
+    //
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });

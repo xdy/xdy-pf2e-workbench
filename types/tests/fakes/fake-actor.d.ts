@@ -9,13 +9,11 @@ export declare class FakeActor {
     items: FakeCollection<ItemPF2e>;
     effects: FakeCollection<ActiveEffectPF2e>;
     _itemGuid: number;
+    id: string;
     constructor(data: ActorSourcePF2e, options?: DocumentConstructionContext<ActorPF2e>);
-    get id(): string;
     get data(): import("../../src/module/actor/vehicle/data").VehicleSource | import("../../src/module/actor/character/data/types").CharacterSource | import("../../src/module/actor/npc/data").NPCSource | import("../../src/module/actor/familiar/data").FamiliarSource | import("../../src/module/actor/hazard/data").HazardSource | import("../../src/module/actor/loot/data").LootSource;
     get name(): string;
     prepareData(): void;
-    static fromToken(token: Token): ActorPF2e | null;
-    static createTokenActor(baseActor: ActorPF2e, token: Token): ActorPF2e;
     update(changes: Record<string, any>): void;
     static updateDocuments(updates?: DocumentUpdateData<ActorPF2e>[], _context?: DocumentModificationContext): Promise<ActorPF2e[]>;
     updateEmbeddedDocuments(type: string, data: any[]): Promise<void>;

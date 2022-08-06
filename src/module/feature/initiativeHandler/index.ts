@@ -2,8 +2,8 @@ import { ActorPF2e } from "@actor";
 import { shouldIHandleThis } from "../../utils";
 
 export async function moveSelectedAheadOfCurrent(selectedCombatantId): Promise<void> {
-    //TODO Ugly hack, might want to do a PR to expose the code in encounter-tracker#setInitiativeFromDrop?
-    //TODO Handle moving several tokens at once? For now, just take the first selected token.
+    // TODO Ugly hack, might want to do a PR to expose the code in encounter-tracker#setInitiativeFromDrop?
+    // TODO Handle moving several tokens at once? For now, just take the first selected token.
     const combat = game?.combat;
     if (combat && selectedCombatantId && selectedCombatantId !== combat?.combatant?.id) {
         const previous = combat?.combatants
@@ -24,14 +24,14 @@ export async function moveOnZeroHP(actor: ActorPF2e, update: Record<string, stri
     const combatant = game.combat?.getCombatantByToken(
         actor.isToken
             ? <string>actor.token?.id
-            : <string>canvas?.scene?.data.tokens.find((t) => t.actor?.id === actor.id)?.id
+            : <string>canvas?.scene?.tokens.find((t) => t.actor?.id === actor.id)?.id
     );
     if (
         shouldIHandleThis(actor) &&
         combatant &&
         combatant.id !== game.combat?.combatant?.id &&
         hp > 0 &&
-        getProperty(update, "data.attributes.hp.value") <= 0
+        getProperty(update, "system.attributes.hp.value") <= 0
     ) {
         await moveSelectedAheadOfCurrent(combatant.id);
     }

@@ -10,7 +10,8 @@ import { ActiveEffectPF2e } from "@module/active-effect";
 import { UserPF2e } from "@module/user";
 import { RollParameters } from "@system/rolls";
 import { CraftingEntry, CraftingFormula } from "./crafting";
-import { AuxiliaryAction, BaseWeaponProficiencyKey, CharacterData, CharacterStrike, FeatSlot, WeaponGroupProficiencyKey } from "./data";
+import { AuxiliaryAction, BaseWeaponProficiencyKey, CharacterData, CharacterFlags, CharacterStrike, WeaponGroupProficiencyKey } from "./data";
+import { CharacterFeats } from "./feats";
 import { CharacterHitPointsSummary, CharacterSkills, CreateAuxiliaryParams } from "./types";
 declare class CharacterPF2e extends CreaturePF2e {
     /** Core singular embeds for PCs */
@@ -21,7 +22,7 @@ declare class CharacterPF2e extends CreaturePF2e {
     deity: Embedded<DeityPF2e> | null;
     /** A cached reference to this PC's familiar */
     familiar: FamiliarPF2e | null;
-    featGroups: Record<string, FeatSlot | undefined>;
+    feats: CharacterFeats;
     pfsBoons: FeatPF2e[];
     deityBoonsCurses: FeatPF2e[];
     get allowedItemTypes(): (ItemType | "physical")[];
@@ -38,7 +39,8 @@ declare class CharacterPF2e extends CreaturePF2e {
     getCraftingEntries(): Promise<CraftingEntry[]>;
     getCraftingEntry(selector: string): Promise<CraftingEntry | null>;
     performDailyCrafting(): Promise<void>;
-    insertFeat(feat: FeatPF2e, featType: string, slotId?: string): Promise<ItemPF2e[]>;
+    /** @deprecated */
+    insertFeat(feat: FeatPF2e, categoryId: string, slotId?: string): Promise<ItemPF2e[]>;
     /** If one exists, prepare this character's familiar */
     prepareData(): void;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */
@@ -52,7 +54,6 @@ declare class CharacterPF2e extends CreaturePF2e {
     prepareDataFromItems(): void;
     prepareDerivedData(): void;
     private setAbilityScores;
-    private setAbilityModifiers;
     /** Set roll operations for ability scores, proficiency ranks, and number of hands free */
     protected setNumericRollOptions(): void;
     private prepareSaves;
@@ -78,7 +79,9 @@ declare class CharacterPF2e extends CreaturePF2e {
     protected getStrikeRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
     /** Create attack-roll modifiers from weapon traits */
     getAttackRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): AttackRollContext<this, I>;
-    consumeAmmo(weapon: WeaponPF2e, args: RollParameters): boolean;
+    consumeAmmo({ weapon, ...params }: {
+        weapon: WeaponPF2e;
+    } & RollParameters): boolean;
     /** Prepare stored and synthetic martial proficiencies */
     prepareMartialProficiencies(): void;
     /** Toggle the invested state of an owned magical item */
@@ -91,11 +94,10 @@ declare class CharacterPF2e extends CreaturePF2e {
     preCreateDelete(toCreate: PreCreate<ItemSourcePF2e>[]): Promise<void>;
     /** Toggle between boost-driven and manual management of ability scores */
     toggleAbilityManagement(): Promise<void>;
-    /** Toggle between boost-driven and manual management of ability scores */
-    toggleVoluntaryFlaw(): Promise<void>;
 }
 interface CharacterPF2e {
     readonly data: CharacterData;
+    flags: CharacterFlags;
     deleteEmbeddedDocuments(embeddedName: "ActiveEffect", dataId: string[], context?: DocumentModificationContext): Promise<ActiveEffectPF2e[]>;
     deleteEmbeddedDocuments(embeddedName: "Item", dataId: string[], context?: DocumentModificationContext): Promise<ItemPF2e[]>;
     deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", dataId: string[], context?: DocumentModificationContext): Promise<ActiveEffectPF2e[] | ItemPF2e[]>;

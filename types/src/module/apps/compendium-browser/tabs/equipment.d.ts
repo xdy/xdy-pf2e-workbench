@@ -3,6 +3,7 @@ import { CompendiumBrowserTab } from "./base";
 import { EquipmentFilters, RangesData } from "./data";
 export declare class CompendiumBrowserEquipmentTab extends CompendiumBrowserTab {
     filterData: EquipmentFilters;
+    templatePath: string;
     constructor(browser: CompendiumBrowser);
     protected loadData(): Promise<void>;
     protected filterIndexData(entry: CompendiumIndexData): boolean;

@@ -8,6 +8,9 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
+[*.yml]
+indent_size = 2
+
 [*.md]
 # do not remove any whitespace characters preceding newline characters
 trim_trailing_whitespace = false

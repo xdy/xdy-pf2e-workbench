@@ -5,14 +5,14 @@ import { EquipmentTrait } from "@item/equipment/data";
 import type { PhysicalItemPF2e } from "@item/physical";
 import { WeaponTrait } from "@item/weapon/types";
 import { Size, ValuesList } from "@module/data";
-import { ActionCost, BaseItemDataPF2e, BaseItemSourcePF2e, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTraits } from "../data/base";
+import { ActionCost, BaseItemDataPF2e, BaseItemSourcePF2e, Frequency, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTraits } from "../data/base";
 import type { ITEM_CARRY_TYPES } from "../data/values";
 import { CoinsPF2e } from "./helpers";
 import { PhysicalItemType, PreciousMaterialGrade, PreciousMaterialType } from "./types";
 import { UsageDetails } from "./usage";
 declare type ItemCarryType = SetElement<typeof ITEM_CARRY_TYPES>;
 declare type BasePhysicalItemSource<TType extends PhysicalItemType = PhysicalItemType, TSystemSource extends PhysicalSystemSource = PhysicalSystemSource> = BaseItemSourcePF2e<TType, TSystemSource>;
-declare type BasePhysicalItemData<TItem extends PhysicalItemPF2e = PhysicalItemPF2e, TType extends PhysicalItemType = PhysicalItemType, TSystemData extends PhysicalSystemData = PhysicalSystemData, TSource extends BasePhysicalItemSource<TType> = BasePhysicalItemSource<TType>> = Omit<BasePhysicalItemSource, "data" | "effects" | "flags"> & BaseItemDataPF2e<TItem, TType, TSystemData, TSource>;
+declare type BasePhysicalItemData<TItem extends PhysicalItemPF2e = PhysicalItemPF2e, TType extends PhysicalItemType = PhysicalItemType, TSystemData extends PhysicalSystemData = PhysicalSystemData, TSource extends BasePhysicalItemSource<TType> = BasePhysicalItemSource<TType>> = Omit<BasePhysicalItemSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<TItem, TType, TSystemData, TSource>;
 interface PhysicalSystemSource extends ItemSystemSource, ItemLevelData {
     traits: PhysicalItemTraits;
     quantity: number;
@@ -102,7 +102,7 @@ interface ActivatedEffectData {
 declare type IdentificationStatus = "identified" | "unidentified";
 interface MystifiedData {
     name: string;
-    img: string;
+    img: ImagePath;
     data: {
         description: {
             value: string;
@@ -136,12 +136,7 @@ interface ItemActivation {
         interact: boolean;
         cast: boolean;
     };
-    frequency: {
-        value: number;
-        max: number;
-        /** Gap between recharges as an ISO8601 duration, or "day" for daily prep. */
-        duration: null | keyof ConfigPF2e["PF2E"]["frequencies"];
-    };
+    frequency?: Frequency;
     traits: ValuesList<ActionTrait>;
 }
 interface PhysicalItemHitPoints {

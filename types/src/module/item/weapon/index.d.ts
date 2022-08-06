@@ -1,10 +1,14 @@
 import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
+import { ItemSummaryData } from "@item/data";
 import { IdentificationStatus, MystifiedData } from "@item/physical/data";
+import { CoinsPF2e } from "@item/physical/helpers";
 import { MaterialGradeData } from "@item/physical/materials";
 import { RuneValuationData } from "../runes";
-import { WeaponData, WeaponMaterialData } from "./data";
-import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types";
+import { WeaponDamage, WeaponData, WeaponMaterialData } from "./data";
+import { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types";
 declare class WeaponPF2e extends PhysicalItemPF2e {
+    /** Given this weapon is an alternative usage, whether it is melee or thrown */
+    altUsageType: "melee" | "thrown" | null;
     get isEquipped(): boolean;
     isStackableWith(item: PhysicalItemPF2e): boolean;
     get baseType(): BaseWeaponType | null;
@@ -20,18 +24,22 @@ declare class WeaponPF2e extends PhysicalItemPF2e {
     get isMelee(): boolean;
     get isRanged(): boolean;
     get isThrown(): boolean;
+    /** This weapon's damage before modification by creature abilities, effects, etc. */
+    get baseDamage(): WeaponDamage;
     get material(): WeaponMaterialData;
     /** Does this weapon require ammunition in order to make a strike? */
     get requiresAmmo(): boolean;
     get ammo(): Embedded<ConsumablePF2e> | null;
+    get otherTags(): Set<OtherWeaponTag>;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
     prepareBaseData(): void;
     prepareDerivedData(): void;
     processMaterialAndRunes(): void;
+    computeAdjustedPrice(): CoinsPF2e | null;
     getRunesData(): RuneValuationData[];
     getMaterialData(): MaterialGradeData | null;
-    getChatData(this: Embedded<WeaponPF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;
+    getChatData(this: Embedded<WeaponPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
     /** Generate a weapon name base on precious-material composition and runes */
     generateMagicName(): string;
     getMystifiedData(status: IdentificationStatus, { source }?: {
@@ -48,6 +56,13 @@ declare class WeaponPF2e extends PhysicalItemPF2e {
     getAltUsages(options?: {
         recurse?: boolean;
     }): this[];
+    clone<T extends this>(data: DocumentUpdateData<this> | undefined, options: Omit<WeaponCloneOptions, "save"> & {
+        save: true;
+    }): Promise<T>;
+    clone<T extends this>(data?: DocumentUpdateData<this>, options?: Omit<WeaponCloneOptions, "save"> & {
+        save?: false;
+    }): T;
+    clone<T extends this>(data?: DocumentUpdateData<this>, options?: WeaponCloneOptions): T | Promise<T>;
     /** Generate a clone of this thrown melee weapon with its thrown usage overlain, or `null` if not applicable */
     private toThrownUsage;
     /** Generate a clone of this combination weapon with its melee usage overlain, or `null` if not applicable */
@@ -58,5 +73,11 @@ declare class WeaponPF2e extends PhysicalItemPF2e {
 interface WeaponPF2e {
     readonly data: WeaponData;
     get traits(): Set<WeaponTrait>;
+}
+interface WeaponCloneOptions {
+    save?: boolean;
+    keepId?: boolean;
+    /** If this clone is an alternative usage, the type */
+    altUsage?: "melee" | "thrown";
 }
 export { WeaponPF2e };

@@ -1,5 +1,6 @@
 import type { ItemPF2e } from "@item";
-import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource, RuleElementSynthetics } from "./rule-element";
+import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./rule-element";
+export { RuleElementSynthetics } from "./synthetics";
 /**
  * @category RuleElement
  */
@@ -12,4 +13,4 @@ declare class RuleElements {
     static fromOwnedItem(item: Embedded<ItemPF2e>, options?: RuleElementOptions): RuleElementPF2e[];
 }
 declare type RuleElementConstructor = new (data: RuleElementSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions) => RuleElementPF2e;
-export { RuleElements, RuleElementPF2e, RuleElementSource, RuleElementData, RuleElementOptions, RuleElementSynthetics };
+export { RuleElements, RuleElementPF2e, RuleElementSource, RuleElementData, RuleElementOptions };

@@ -32,7 +32,7 @@ export declare class MigrationSummary extends Application<MigrationSummaryOption
         scrollY: string[];
         filters: SearchFilterConfiguration[];
     };
-    getData(): MigrationSummaryData;
+    getData(): Promise<MigrationSummaryData>;
     activateListeners($html: JQuery): void;
 }
 interface MigrationSummaryOptions extends ApplicationOptions {
@@ -52,5 +52,6 @@ interface MigrationSummaryData {
     };
     canRemigrate: boolean;
     helpResources: boolean;
+    helpResourcesText: string;
 }
 export {};

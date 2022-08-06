@@ -1,8 +1,9 @@
 import { CreaturePF2e } from "@actor";
 import { Abilities } from "@actor/creature/data";
-import { ItemType, MeleeData } from "@item/data";
+import { MeleePF2e } from "@item";
+import { ItemType } from "@item/data";
 import { RollNotePF2e } from "@module/notes";
-import { NPCData } from "./data";
+import { NPCData, NPCFlags } from "./data";
 import { NPCSheetPF2e } from "./sheet";
 import { VariantCloneParams } from "./types";
 declare class NPCPF2e extends CreaturePF2e {
@@ -31,7 +32,7 @@ declare class NPCPF2e extends CreaturePF2e {
     prepareEmbeddedDocuments(): void;
     prepareDerivedData(): void;
     prepareSaves(): void;
-    protected getAttackEffects(sourceItemData: MeleeData): Promise<RollNotePF2e[]>;
+    protected getAttackEffects(attack: MeleePF2e): Promise<RollNotePF2e[]>;
     protected getHpAdjustment(level: number, adjustment: "elite" | "weak" | "normal"): number;
     /** Make the NPC elite, weak, or normal */
     applyAdjustment(adjustment: "elite" | "weak" | "normal"): Promise<void>;
@@ -48,6 +49,7 @@ declare class NPCPF2e extends CreaturePF2e {
 }
 interface NPCPF2e {
     readonly data: NPCData;
+    flags: NPCFlags;
     _sheet: NPCSheetPF2e<this> | null;
     get sheet(): NPCSheetPF2e<this>;
 }

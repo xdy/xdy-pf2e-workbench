@@ -1,7 +1,12 @@
+import { ItemSummaryData } from "@item/data";
 import { PhysicalItemPF2e } from "../physical";
 import { EquipmentData, EquipmentTrait } from "./data";
+import { OtherEquipmentTag } from "./types";
 declare class EquipmentPF2e extends PhysicalItemPF2e {
-    getChatData(this: Embedded<EquipmentPF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;
+    get otherTags(): Set<OtherEquipmentTag>;
+    prepareBaseData(): void;
+    prepareActorData(): void;
+    getChatData(this: Embedded<EquipmentPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;

@@ -1,2 +1,2 @@
-/** Handlebars template subcomponents */
-export declare function registerTemplates(): Promise<void>;
+/** Register Handlebars template partials */
+export declare function registerTemplates(): void;

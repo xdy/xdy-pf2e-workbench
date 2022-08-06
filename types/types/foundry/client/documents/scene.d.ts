@@ -87,8 +87,8 @@ declare global {
             user: User
         ): Promise<void>;
 
-        protected override _onUpdate(
-            changed: DeepPartial<this["data"]["_source"]>,
+        override _onUpdate(
+            changed: DeepPartial<this["_source"]>,
             options: DocumentModificationContext,
             userId: string
         ): void;
@@ -117,6 +117,13 @@ declare global {
             options: SceneEmbeddedModificationContext,
             userId: string
         ): void;
+        protected override _onCreateEmbeddedDocuments(
+            embeddedName: string,
+            documents: ClientDocument[],
+            result: object[],
+            options: SceneEmbeddedModificationContext,
+            userId: string
+        ): void;
 
         protected override _preUpdateEmbeddedDocuments(
             embeddedName: "Token",
@@ -128,14 +135,14 @@ declare global {
         protected override _onUpdateEmbeddedDocuments(
             embeddedName: "Token",
             documents: TTokenDocument[],
-            result: TTokenDocument["data"]["_source"][],
+            result: TTokenDocument["_source"][],
             options: SceneEmbeddedModificationContext,
             userId: string
         ): void;
 
         protected override _preDeleteEmbeddedDocuments(
             embeddedName: "Token",
-            result: TTokenDocument["data"]["_source"][],
+            result: TTokenDocument["_source"][],
             options: SceneEmbeddedModificationContext,
             userId: string
         ): void;
@@ -147,8 +154,15 @@ declare global {
             options: SceneEmbeddedModificationContext,
             userId: string
         ): void;
+        protected override _onDeleteEmbeddedDocuments(
+            embeddedName: string,
+            documents: ClientDocument[],
+            result: object[],
+            options: SceneEmbeddedModificationContext,
+            userId: string
+        ): void;
 
-        override toCompendium(pack: CompendiumCollection<this>): this["data"]["_source"];
+        override toCompendium(pack: CompendiumCollection<this>): this["_source"];
 
         /**
          * Create a 300px by 100px thumbnail image for this scene background

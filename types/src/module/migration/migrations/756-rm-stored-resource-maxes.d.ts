@@ -6,8 +6,8 @@ export declare class Migration756RMStoredResourceMaxes extends MigrationBase {
     updateActor(source: ActorSourceWithDeletions): Promise<void>;
 }
 declare type ActorSourceWithDeletions = ActorSourcePF2e & {
-    "data.resources.focus.-=max"?: null;
-    "data.resources.crafting.infusedReagents.-=max"?: null;
-    "data.resources.-=investiture"?: null;
+    "system.resources.focus.-=max"?: null;
+    "system.resources.crafting.infusedReagents.-=max"?: null;
+    "system.resources.-=investiture"?: null;
 };
 export {};

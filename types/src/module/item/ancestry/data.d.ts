@@ -5,7 +5,7 @@ import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemTraits } from "@item/data/bas
 import { Size, ValuesList } from "@module/data";
 import type { AncestryPF2e } from ".";
 declare type AncestrySource = BaseItemSourcePF2e<"ancestry", AncestrySystemSource>;
-declare type AncestryData = Omit<AncestrySource, "effects" | "flags"> & BaseItemDataPF2e<AncestryPF2e, "ancestry", AncestrySystemData, AncestrySource>;
+declare type AncestryData = Omit<AncestrySource, "system" | "effects" | "flags"> & BaseItemDataPF2e<AncestryPF2e, "ancestry", AncestrySystemData, AncestrySource>;
 export declare type CreatureTraits = ItemTraits<CreatureTrait>;
 interface AncestrySystemSource extends ABCSystemData {
     traits: CreatureTraits;
@@ -22,14 +22,10 @@ interface AncestrySystemSource extends ABCSystemData {
         value: AbilityString[];
         selected: AbilityString | null;
     }>;
-    voluntaryBoosts: Record<string, {
-        value: AbilityString[];
-        selected: AbilityString | null;
-    }>;
-    voluntaryFlaws: Record<string, {
-        value: AbilityString[];
-        selected: AbilityString | null;
-    }>;
+    voluntary?: {
+        boost: AbilityString | null;
+        flaws: AbilityString[];
+    };
     hp: number;
     languages: ValuesList<Language>;
     speed: number;
@@ -38,4 +34,4 @@ interface AncestrySystemSource extends ABCSystemData {
     vision: "normal" | "darkvision" | "lowLightVision";
 }
 declare type AncestrySystemData = AncestrySystemSource;
-export { AncestrySource, AncestryData };
+export { AncestrySource, AncestryData, AncestrySystemData };

@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor/base";
-import { UserDataPF2e } from "./data";
+import { UserFlagsPF2e } from "./data";
 import { UserSettingsPF2e } from "./player-config";
 export declare class UserPF2e extends User<ActorPF2e> {
     prepareData(): void;
@@ -10,5 +10,5 @@ export declare class UserPF2e extends User<ActorPF2e> {
     clearTargets(): void;
 }
 export interface UserPF2e extends User<ActorPF2e> {
-    readonly data: UserDataPF2e<this>;
+    flags: UserFlagsPF2e;
 }

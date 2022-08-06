@@ -1,16 +1,29 @@
 {
-  "name": "xdy-pf2e-workbench",
   "title": "PF2e Workbench",
   "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
-  "version": "3.44.3",
-  "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "9",
+  "version": "4.0.0",
+  "id": "xdy-pf2e-workbench",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10.284"
+  },
+  "relationship": {
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system",
+        "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
+        "compatibility": {
+          "minimum": "4.0.0",
+          "verified": "4.0.0"
+        }
+      }
+    ]
+  },
   "esmodules": [
-    "vendor.bundle.js",
-    "xdy-pf2e-workbench.bundle.js"
+    "main.bundle.js"
   ],
   "scripts": [
-    "./lib/tooltipster.bundle.min.js"
   ],
   "styles": [
     "styles/xdy-pf2e-workbench.css"
@@ -21,77 +34,80 @@
       "label": "Symon-provided macros (asymonous-benefactor-macros)",
       "system": "pf2e",
       "path": "packs/asymonous-benefactor-macros.db",
-      "module": "xdy-pf2e-workbench",
-      "entity": "Macro"
+      "type": "Macro",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "asymonous-benefactor-macros-internal",
       "label": "XDY Internal utility macros, do not import",
       "system": "pf2e",
       "path": "packs/asymonous-benefactor-macros-internal.db",
-      "module": "xdy-pf2e-workbench",
-      "entity": "Macro",
-      "private": true
+      "private": true,
+      "type": "Macro",
+      "flags": {}
     },
     {
       "name": "asymonous-benefactor-effects",
       "label": "asymonous-benefactor-effects",
       "system": "pf2e",
       "path": "packs/asymonous-benefactor-effects.db",
-      "module": "xdy-pf2e-workbench",
-      "entity": "Item"
+      "type": "Item",
+      "private": false,
+      "flags": {}
     },
     {
       "name": "xdy-pf2e-workbench-items",
       "label": "xdy-pf2e-workbench-items",
       "system": "pf2e",
       "path": "packs/xdy-pf2e-workbench-items.db",
-      "module": "xdy-pf2e-workbench",
-      "entity": "Item"
+      "type": "Item",
+      "private": false,
+      "flags": {}
     }
   ],
-  "dependencies": [],
   "languages": [
     {
       "lang": "en",
       "name": "English",
-      "path": "lang/en.json"
+      "path": "lang/en.json",
+      "flags": {}
     },
     {
       "lang": "fr",
       "name": "Français",
-      "path": "lang/fr.json"
+      "path": "lang/fr.json",
+      "flags": {}
     },
     {
       "lang": "sv",
       "name": "Svenska",
-      "path": "lang/sv.json"
+      "path": "lang/sv.json",
+      "flags": {}
     }
   ],
-  "system": [
-    "pf2e"
-  ],
-  "author": "Jonas Karlsson",
   "authors": [
     {
       "name": "Jonas Karlsson (xdy)",
-      "url": "https://gnu.xdy.se/home"
+      "url": "https://gnu.xdy.se/home",
+      "discord": "xdy#3735",
+      "flags": {}
     }
   ],
-  "socket": false,
   "url": "https://github.com/xdy/xdy-pf2e-workbench/",
-  "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json",
-  "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/xdy-pf2e-workbench.zip",
+  "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/download/v4.0.0-beta.40/module.json",
+  "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/download/v4.0.0-beta.40/xdy-pf2e-workbench.zip",
   "license": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/LICENSE.md",
   "readme": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/README.md",
   "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
   "changelog": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/CHANGELOG.md",
-  "library": false,
   "media": [
     {
       "type": "cover",
       "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/master/static/assets/media/pf2e_workshop_cover_compressed.webp",
-      "caption": "PF2e Workbench"
+      "caption": "PF2e Workbench",
+      "loop": false,
+      "flags": {}
     }
   ],
   "flags": {

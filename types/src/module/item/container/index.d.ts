@@ -1,3 +1,4 @@
+import { ItemSummaryData } from "@item/data";
 import { EquipmentTrait } from "@item/equipment/data";
 import { PhysicalItemPF2e } from "@item/physical";
 import { Bulk } from "@item/physical/bulk";
@@ -18,7 +19,7 @@ declare class ContainerPF2e extends PhysicalItemPF2e {
     prepareSiblingData(this: Embedded<ContainerPF2e>): void;
     /** Move the contents of this container into the next-higher container or otherwise the main actor inventory */
     ejectContents(): Promise<void>;
-    getChatData(this: Embedded<ContainerPF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;
+    getChatData(this: Embedded<ContainerPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
 }
 interface ContainerPF2e {
     readonly data: ContainerData;

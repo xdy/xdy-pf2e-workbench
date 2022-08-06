@@ -7,6 +7,6 @@ export declare class Migration758PrunePCAttributes extends MigrationBase {
     updateActor(source: ActorSourceWithDeletions): Promise<void>;
 }
 declare type ActorSourceWithDeletions = ActorSourcePF2e & {
-    [K in `data.attributes.${Migration758PrunePCAttributes["toDelete"][number]}`]?: null;
+    [K in `system.attributes.${Migration758PrunePCAttributes["toDelete"][number]}`]?: null;
 };
 export {};

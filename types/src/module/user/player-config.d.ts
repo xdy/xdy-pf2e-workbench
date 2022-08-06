@@ -19,7 +19,6 @@ export interface UserSettingsPF2e {
     uiTheme: "blue" | "red" | "original" | "ui";
     showEffectPanel: boolean;
     showRollDialogs: boolean;
-    darkvisionFilter: boolean;
     searchPackContents: boolean;
 }
 export {};

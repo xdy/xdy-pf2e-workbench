@@ -1,10 +1,11 @@
+import { CharacterPF2e, NPCPF2e } from "@actor";
 import { AbilityString } from "@actor/types";
 import { RollNotePF2e } from "@module/notes";
 import { DamageDieSize, DamageType } from "@system/damage";
 import { DegreeOfSuccessAdjustment } from "@system/degree-of-success";
 import { PredicatePF2e, RawPredicate } from "@system/predication";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
-declare function ensureProficiencyOption(options: string[], rank: number): void;
+declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
 /**
  * The canonical pathfinder modifier types; modifiers of the same type do not stack (except for 'untyped' modifiers,
  * which fully stack).
@@ -62,7 +63,7 @@ interface ModifierAdjustment {
     predicate: PredicatePF2e;
     damageType?: DamageType;
     relabel?: string;
-    suppress: boolean;
+    suppress?: boolean;
     getNewValue?: (current: number) => number;
     getDamageType?: (current: DamageType | null) => DamageType | null;
 }
@@ -75,7 +76,7 @@ interface DeferredValueParams {
     /** An object to merge into standard options for `RuleElementPF2e#resolveInjectedProperties` */
     injectables?: Record<string, unknown>;
     /** Roll Options to get against a predicate (if available) */
-    test?: string[];
+    test?: string[] | Set<string>;
 }
 declare type DeferredValue<T> = (options?: DeferredValueParams) => T;
 /** Represents a discrete modifier, bonus, or penalty, to a statistic or check. */
@@ -113,13 +114,13 @@ declare class ModifierPF2e implements RawModifier {
     constructor(...args: ModifierOrderedParams);
     /** Return a copy of this ModifierPF2e instance */
     clone(options?: {
-        test?: string[];
+        test?: Set<string> | string[];
     }): ModifierPF2e;
     /**
      * Get roll options for this modifier. The current data structure makes for occasional inability to distinguish
      * bonuses and penalties.
      */
-    getRollOptions(): string[];
+    getRollOptions(): Set<string>;
     /** Sets the ignored property after testing the predicate */
     test(options: string[] | Set<string>): void;
     toObject(): Required<RawModifier>;
@@ -137,30 +138,18 @@ declare type ModifierOrderedParams = [
     source?: string,
     notes?: string
 ];
-declare const AbilityModifier: {
-    /**
-     * Create a modifier from a given ability type and score.
-     * @param ability str = Strength, dex = Dexterity, con = Constitution, int = Intelligence, wis = Wisdom, cha = Charisma
-     * @param score The score of this ability.
-     * @returns The modifier provided by the given ability score.
-     */
-    fromScore: (ability: AbilityString, score: number) => ModifierPF2e;
-};
-declare const UNTRAINED: {
-    atLevel: (_level: number) => ModifierPF2e;
-};
-declare const TRAINED: {
-    atLevel: (level: number) => ModifierPF2e;
-};
-declare const EXPERT: {
-    atLevel: (level: number) => ModifierPF2e;
-};
-declare const MASTER: {
-    atLevel: (level: number) => ModifierPF2e;
-};
-declare const LEGENDARY: {
-    atLevel: (level: number) => ModifierPF2e;
-};
+/**
+ * Create a modifier from a given ability type and score.
+ * @param ability str = Strength, dex = Dexterity, con = Constitution, int = Intelligence, wis = Wisdom, cha = Charisma
+ * @param score The score of this ability.
+ * @returns The modifier provided by the given ability score.
+ */
+declare function createAbilityModifier({ actor, ability, domains }: CreateAbilityModifierParams): ModifierPF2e;
+interface CreateAbilityModifierParams {
+    actor: CharacterPF2e | NPCPF2e;
+    ability: AbilityString;
+    domains: string[];
+}
 declare const ProficiencyModifier: {
     /**
      * Create a modifier for a given proficiency level of some ability.
@@ -202,7 +191,7 @@ declare class StatisticModifier {
      * @param modifiers All relevant modifiers for this statistic.
      * @param rollOptions Roll options used for initial total calculation
      */
-    constructor(name: string, modifiers?: ModifierPF2e[], rollOptions?: string[]);
+    constructor(name: string, modifiers?: ModifierPF2e[], rollOptions?: string[] | Set<string>);
     /** Get the list of all modifiers in this collection (as a read-only list). */
     get modifiers(): readonly ModifierPF2e[];
     /** Add a modifier to the end of this collection. */
@@ -212,7 +201,7 @@ declare class StatisticModifier {
     /** Delete a modifier from this collection by name or reference */
     delete(modifierName: string | ModifierPF2e): boolean;
     /** Obtain the total modifier, optionally retesting predicates, and finally applying stacking rules. */
-    calculateTotal(rollOptions?: string[]): void;
+    calculateTotal(rollOptions?: Set<string>): void;
     private applyAdjustments;
 }
 /**
@@ -225,7 +214,7 @@ declare class CheckModifier extends StatisticModifier {
      * @param statistic The statistic modifier to copy fields from.
      * @param modifiers Additional modifiers to add to this check.
      */
-    constructor(name: string, statistic: StatisticModifier, modifiers?: ModifierPF2e[]);
+    constructor(name: string, statistic: StatisticModifier, modifiers?: ModifierPF2e[], rollOptions?: string[]);
 }
 interface DamageDiceOverride {
     /** Upgrade the damage dice to the next higher size (maximum d12) */
@@ -236,6 +225,8 @@ interface DamageDiceOverride {
     dieSize?: DamageDieSize;
     /** Override the damage type */
     damageType?: DamageType;
+    /** Override the number of damage dice */
+    diceNumber?: number;
 }
 /**
  * Represents extra damage dice for one or more weapons or attack actions.
@@ -282,4 +273,4 @@ declare class DamageDicePF2e extends DiceModifierPF2e {
     constructor(params: DamageDiceParameters);
     clone(): DamageDicePF2e;
 }
-export { AbilityModifier, BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DeferredValue, DeferredValueParams, DiceModifierPF2e, EXPERT, LEGENDARY, MASTER, MODIFIER_TYPE, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, ProficiencyModifier, RawModifier, StatisticModifier, TRAINED, UNTRAINED, applyStackingRules, ensureProficiencyOption, };
+export { BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DeferredValue, DeferredValueParams, DiceModifierPF2e, MODIFIER_TYPE, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, ProficiencyModifier, RawModifier, StatisticModifier, applyStackingRules, createAbilityModifier, ensureProficiencyOption, };

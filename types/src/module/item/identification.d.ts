@@ -1,4 +1,3 @@
-import { PhysicalItemData } from "./data";
 import { DCOptions } from "../dc";
 import { PhysicalItemPF2e } from "./physical";
 export interface IdentifyMagicDCs {
@@ -13,10 +12,10 @@ export interface IdentifyAlchemyDCs {
 export interface GenericIdentifyDCs {
     dc: number;
 }
-export declare function isMagical(itemData: PhysicalItemData): boolean;
+export declare function isMagical(item: PhysicalItemPF2e): boolean;
 interface IdentifyItemOptions extends DCOptions {
     notMatchingTraditionModifier: number;
 }
 export declare function identifyItem(item: PhysicalItemPF2e, { proficiencyWithoutLevel, notMatchingTraditionModifier }: IdentifyItemOptions): GenericIdentifyDCs | IdentifyMagicDCs | IdentifyAlchemyDCs;
-export declare function getUnidentifiedPlaceholderImage(itemData: PhysicalItemData): string;
+export declare function getUnidentifiedPlaceholderImage(item: PhysicalItemPF2e): string;
 export {};
