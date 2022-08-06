@@ -1,13 +1,14 @@
 import { DiceModifierPF2e } from "@actor/modifiers";
+import { ArmorPF2e, WeaponPF2e } from "@item";
 import { OneToFour, Rarity, ZeroToFour, ZeroToThree } from "@module/data";
+import { DamageType } from "@system/damage";
 import { DamageDieSize } from "@system/damage/damage";
 import { DegreeOfSuccessString } from "@system/degree-of-success";
 import { RawPredicate } from "@system/predication";
 import type { ResilientRuneType } from "./armor/data";
-import type { ArmorData, WeaponData } from "./data";
 import type { OtherWeaponTag, StrikingRuneType, WeaponPropertyRuneType, WeaponTrait } from "./weapon/types";
-export declare function getPropertySlots(itemData: WeaponData | ArmorData): ZeroToFour;
-export declare function getPropertyRunes(itemData: WeaponData | ArmorData, slots: number): string[];
+export declare function getPropertySlots(item: WeaponPF2e | ArmorPF2e): ZeroToFour;
+export declare function getPropertyRunes(item: WeaponPF2e | ArmorPF2e, slots: number): string[];
 export declare function getStrikingDice(itemData: {
     strikingRune: {
         value: StrikingRuneType | null;
@@ -29,7 +30,7 @@ export interface WeaponPropertyRuneData {
     };
     damage?: {
         dice?: {
-            damageType?: string;
+            damageType?: DamageType;
             diceNumber?: number;
             dieSize?: DamageDieSize;
             predicate?: RawPredicate;

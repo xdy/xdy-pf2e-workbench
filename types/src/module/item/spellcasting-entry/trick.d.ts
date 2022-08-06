@@ -5,7 +5,7 @@ import { Statistic } from "@system/statistic";
 import { BaseSpellcastingEntry } from "./data";
 export declare const TRICK_MAGIC_SKILLS: readonly ["arc", "nat", "occ", "rel"];
 export declare type TrickMagicItemSkill = typeof TRICK_MAGIC_SKILLS[number];
-export declare const TraditionSkills: {
+export declare const traditionSkills: {
     readonly arcane: "arc";
     readonly divine: "rel";
     readonly occult: "occ";

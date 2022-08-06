@@ -5,8 +5,7 @@ declare global {
         TScene extends Scene = Scene,
         TAmbientLight extends AmbientLight = AmbientLight,
         TMeasuredTemplate extends MeasuredTemplate = MeasuredTemplate,
-        TToken extends Token = Token,
-        TSightLayer extends SightLayer<TToken> = SightLayer<TToken>
+        TToken extends Token = Token
     > {
         constructor();
 
@@ -82,17 +81,17 @@ declare global {
         background: BackgroundLayer;
         controls: ControlsLayer;
         drawings: DrawingsLayer;
-        effects: EffectsLayer;
+        effects: EffectsLayer<TToken>;
         foreground: ForegroundLayer;
         grid: GridLayer;
         lighting: TAmbientLight["layer"];
         notes: NotesLayer;
-        sight: TSightLayer;
         sounds: SoundsLayer;
         templates: TMeasuredTemplate["layer"];
         tokens: TToken["layer"];
         walls: WallsLayer;
 
+        interface: InterfaceCanvasGroup;
         /**
          * Initialize the Canvas by creating the HTML element and PIXI application.
          * This step should only ever be performed once per client session.
@@ -103,6 +102,9 @@ declare global {
         /* -------------------------------------------- */
         /*  Properties and Attributes                   */
         /* -------------------------------------------- */
+
+        /** The currently displayed darkness level, which may override the saved Scene value. */
+        get darknessLevel(): number;
 
         /** The id of the currently displayed Scene. */
         get id(): string | null;

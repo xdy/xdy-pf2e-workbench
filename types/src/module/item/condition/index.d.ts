@@ -18,9 +18,9 @@ declare class ConditionPF2e extends ItemPF2e {
     prepareBaseData(): void;
     /** Set a self roll option for this condition */
     prepareActorData(this: Embedded<ConditionPF2e>): void;
-    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: ConditionModificationContext<this>, user: UserPF2e): Promise<void>;
-    protected _onCreate(data: this["data"]["_source"], options: DocumentModificationContext<this>, userId: string): void;
-    protected _onUpdate(changed: DeepPartial<this["data"]["_source"]>, options: ConditionModificationContext<this>, userId: string): void;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: ConditionModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _onCreate(data: this["_source"], options: DocumentModificationContext<this>, userId: string): void;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: ConditionModificationContext<this>, userId: string): void;
     protected _onDelete(options: DocumentModificationContext<this>, userId: string): void;
 }
 interface ConditionPF2e {

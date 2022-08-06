@@ -8,8 +8,8 @@ declare global {
         TChatLog extends ChatLog = ChatLog,
         TChatMessage extends ChatMessage = ChatMessage,
         TCombat extends Combat = Combat,
-        TCombatant extends Combatant<TActor | null> = Combatant<TActor | null>,
-        TCombatTracker extends CombatTracker<TCombat> = CombatTracker<TCombat>,
+        TCombatant extends Combatant<TCombat | null, TActor | null> = Combatant<TCombat | null, TActor | null>,
+        TCombatTracker extends CombatTracker<TCombat | null> = CombatTracker<TCombat | null>,
         TCompendiumDirectory extends CompendiumDirectory = CompendiumDirectory,
         TFogExploration extends FogExploration = FogExploration,
         TFolder extends Folder = Folder,
@@ -43,7 +43,7 @@ declare global {
         /** Configuration for the Actor document */
         Actor: {
             documentClass: {
-                new (data: PreCreate<TActor["data"]["_source"]>, context?: DocumentConstructionContext<TActor>): TActor;
+                new (data: PreCreate<TActor["_source"]>, context?: DocumentConstructionContext<TActor>): TActor;
             };
             collection: ConstructorOf<Actors<TActor>>;
             sheetClasses: Record<
@@ -60,13 +60,19 @@ declare global {
             typeLabels: Record<string, string | undefined>;
         };
 
-        /**
-         * Configuration for the FogExploration document
-         */
+        /** Configuration for the Cards primary Document type */
+        Cards: {
+            collection: WorldCollection<Cards>;
+            documentClass: ConstructorOf<Cards>;
+            sidebarIcon: string;
+            presets: Record<string, { type: string; label: string; source: string }>;
+        };
+
+        /** Configuration for the FogExploration document */
         FogExploration: {
             documentClass: {
                 new (
-                    data: PreCreate<TFogExploration["data"]["_source"]>,
+                    data: PreCreate<TFogExploration["_source"]>,
                     context?: DocumentConstructionContext<TFogExploration>
                 ): TFogExploration;
             };
@@ -76,10 +82,7 @@ declare global {
         /** Configuration for the Folder document */
         Folder: {
             documentClass: {
-                new (
-                    data: PreCreate<TFolder["data"]["_source"]>,
-                    context?: DocumentConstructionContext<TFolder>
-                ): TFolder;
+                new (data: PreCreate<TFolder["_source"]>, context?: DocumentConstructionContext<TFolder>): TFolder;
             };
             collection: typeof Folders;
         };
@@ -90,7 +93,7 @@ declare global {
             collection: typeof Messages;
             documentClass: {
                 new (
-                    data: PreCreate<TChatMessage["data"]["_source"]>,
+                    data: PreCreate<TChatMessage["_source"]>,
                     context?: DocumentConstructionContext<TChatMessage>
                 ): TChatMessage;
             };
@@ -101,7 +104,7 @@ declare global {
         /** Configuration for Item document */
         Item: {
             documentClass: {
-                new (data: PreCreate<TItem["data"]["_source"]>, context?: DocumentConstructionContext<TItem>): TItem;
+                new (data: PreCreate<TItem["_source"]>, context?: DocumentConstructionContext<TItem>): TItem;
             };
             collection: typeof Items;
             sheetClasses: Record<
@@ -121,10 +124,7 @@ declare global {
         /** Configuration for the Combat document */
         Combat: {
             documentClass: {
-                new (
-                    data: PreCreate<TCombat["data"]["_source"]>,
-                    context?: DocumentConstructionContext<TCombat>
-                ): TCombat;
+                new (data: PreCreate<TCombat["_source"]>, context?: DocumentConstructionContext<TCombat>): TCombat;
             };
             collection: typeof CombatEncounters;
             defeatedStatusId: string;
@@ -194,7 +194,7 @@ declare global {
         ActiveEffect: {
             documentClass: {
                 new (
-                    data: PreCreate<TActiveEffect["data"]["_source"]>,
+                    data: PreCreate<TActiveEffect["_source"]>,
                     context?: DocumentConstructionContext<TActiveEffect>
                 ): TActiveEffect;
             };
@@ -203,8 +203,8 @@ declare global {
         /** Configuration for the Combatant document */
         Combatant: {
             documentClass: new (
-                data: PreCreate<TCombat["turns"][number]["data"]["_source"]>,
-                context?: DocumentConstructionContext<TCombat["turns"][number]>
+                data: PreCreate<TCombatant["_source"]>,
+                context?: DocumentConstructionContext<TCombatant>
             ) => TCombatant;
         };
 
@@ -303,10 +303,6 @@ declare global {
                 lighting: {
                     group: "effects";
                     layerClass: ConstructorOf<TAmbientLightDocument["object"]["layer"]>;
-                };
-                sight: {
-                    group: "effects";
-                    layerClass: ConstructorOf<SightLayer<TTokenDocument["object"], TFogExploration>>;
                 };
                 weather: {
                     group: "effects";
@@ -463,9 +459,8 @@ declare global {
 
         /** Default configuration options for TinyMCE editors */
         // See https://www.tiny.cloud/docs/configure/content-appearance/
-        TinyMCE: Omit<TinyMCE.EditorSettings, "content_css" | "style_formats"> & {
-            content_css: string[];
-            style_formats: NonNullable<TinyMCE.EditorSettings["style_formats"]>;
+        TinyMCE: Omit<TinyMCE.EditorOptions, "style_formats"> & {
+            style_formats: NonNullable<TinyMCE.EditorOptions["style_formats"]>;
         };
 
         ui: {

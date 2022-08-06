@@ -29,7 +29,8 @@
     "docs": "typedoc"
   },
   "devDependencies": {
-    "@pixi/graphics-smooth": "^0.0.22",
+    "@pixi/graphics-smooth": "^0.0.30",
+    "@pixi/particle-emitter": "5.0.7",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/exec": "^6.0.3",
@@ -59,6 +60,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "foundry-types": "file:types/types/foundry",
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
     "handlebars": "4.7.7",

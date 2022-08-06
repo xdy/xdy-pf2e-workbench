@@ -3,10 +3,10 @@ export declare class LightingLayerPF2e<TAmbientLight extends AmbientLightPF2e = 
     /** Temporarilly disable the refreshLighting hook */
     noRefreshHooks: boolean;
     get lightingLevel(): number;
-    setPerceivedLightLevel({ hasLowLightVision }?: {
-        hasLowLightVision?: boolean;
-    }): void;
-    private adjustLightRadii;
+    /** Is the rules-based vision setting enabled? */
+    get rulesBasedVision(): boolean;
+    get hasLowLightVision(): boolean;
+    get hasDarkvision(): boolean;
     /** Add a noHook option that can be intercepted by system hook listener */
     refresh(options?: {
         darkness?: number | null;

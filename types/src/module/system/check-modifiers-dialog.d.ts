@@ -1,8 +1,8 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { StatisticModifier } from "../actor/modifiers";
+import { StatisticModifier } from "@actor/modifiers";
+import { RollSubstitution } from "@module/rules/synthetics";
 import { CheckRollContext } from "./rolls";
-import { RollSubstitution } from "@module/rules/rule-element/data";
 /**
  * Dialog for excluding certain modifiers before rolling a check.
  * @category Other

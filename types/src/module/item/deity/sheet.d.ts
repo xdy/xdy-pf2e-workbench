@@ -16,6 +16,7 @@ export declare class DeitySheetPF2e<TItem extends DeityPF2e = DeityPF2e> extends
 }
 interface DeitySheetData extends ItemSheetDataPF2e<DeityPF2e> {
     alignments: Record<Alignment, string>;
+    atheistic: boolean;
     skills: Record<SkillAbbreviation, string>;
     divineFonts: SheetOptions;
     spells: SpellBrief[];

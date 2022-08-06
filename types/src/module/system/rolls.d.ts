@@ -6,7 +6,7 @@ import { ItemPF2e } from "@item";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ZeroToThree } from "@module/data";
 import { RollNotePF2e } from "@module/notes";
-import { RollSubstitution } from "@module/rules/rule-element/data";
+import { RollSubstitution } from "@module/rules/synthetics";
 import { TokenDocumentPF2e } from "@scene";
 import { DamageRollContext, DamageTemplate } from "@system/damage";
 import { CheckModifier, ModifierPF2e } from "../actor/modifiers";

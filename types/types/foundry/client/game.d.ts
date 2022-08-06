@@ -30,10 +30,13 @@ declare global {
          */
         view: string;
 
+        // Undocumented
+        _documentsReady?: boolean;
+
         /** The object of world data passed from the server */
         data: {
-            actors: TActor["data"]["_source"][];
-            items: TItem["data"]["_source"][];
+            actors: TActor["_source"][];
+            items: TItem["_source"][];
             macros: foundry.data.MacroSource[];
             messages: foundry.data.ChatMessageSource[];
             packs: CompendiumMetadata[];
@@ -57,10 +60,10 @@ declare global {
             {
                 id: string;
                 active: boolean;
+                flags: Record<string, Record<string, unknown>>;
+                title: string;
                 data: {
                     compatibleCoreVersion: string | undefined;
-                    flags: Record<string, Record<string, unknown>>;
-                    title: string;
                 };
             }
         >;
@@ -195,8 +198,8 @@ declare global {
          */
         get system(): {
             id: string;
+            version: string;
             data: {
-                author: string;
                 authors: string[];
                 availability: number;
                 bugs: string;
@@ -235,7 +238,6 @@ declare global {
                 title: string;
                 unavailable: boolean;
                 url: string;
-                version: string;
             };
             documentTypes: {
                 Actor: string[];

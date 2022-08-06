@@ -1,11 +1,12 @@
 import { ItemPF2e } from "@item/base";
-import { ActionData } from "./data";
+import { ActionItemData, ActionItemSource } from "./data";
 import { OneToThree } from "@module/data";
 import { UserPF2e } from "@module/user";
-import { ActionCost } from "@item/data/base";
-export declare class ActionItemPF2e extends ItemPF2e {
+import { ActionCost, Frequency } from "@item/data/base";
+declare class ActionItemPF2e extends ItemPF2e {
     get actionCost(): ActionCost | null;
-    prepareData(): void;
+    get frequency(): Frequency | null;
+    prepareBaseData(): void;
     getChatData(this: Embedded<ActionItemPF2e>, htmlOptions?: EnrichHTMLOptions): {
         properties: string[];
         traits: import("../data").TraitChatData[];
@@ -25,6 +26,7 @@ export declare class ActionItemPF2e extends ItemPF2e {
             value: string;
         };
         deathNote: boolean;
+        frequency?: (import("@item/data/base").FrequencySource & Frequency) | undefined;
         description: {
             value: string;
         };
@@ -34,12 +36,14 @@ export declare class ActionItemPF2e extends ItemPF2e {
         options?: {
             value: string[];
         } | undefined;
-        rules: import("../../rules").RuleElementSource[];
+        rules: import("../../rules/rule-element/data").RuleElementSource[];
         slug: string | null;
         schema: import("@module/data").DocumentSchemaRecord;
     };
-    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preCreate(data: PreDocumentId<ActionItemSource>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
 }
-export interface ActionItemPF2e {
-    readonly data: ActionData;
+interface ActionItemPF2e {
+    readonly data: ActionItemData;
 }
+export { ActionItemPF2e };

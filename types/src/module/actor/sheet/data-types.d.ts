@@ -5,8 +5,8 @@ import { PhysicalItemPF2e } from "@item";
 import { Coins } from "@item/physical/data";
 import { PhysicalItemType } from "@item/physical/types";
 import { SheetOptions } from "@module/sheet/helpers";
-export interface InventoryItem<D extends PhysicalItemPF2e = PhysicalItemPF2e> {
-    item: D;
+export interface InventoryItem<TItem extends PhysicalItemPF2e = PhysicalItemPF2e> {
+    item: TItem;
     editable: boolean;
     isContainer: boolean;
     canBeEquipped: boolean;

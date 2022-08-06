@@ -67,6 +67,7 @@ interface CreatureSheetData<TActor extends CreaturePF2e = CreaturePF2e> extends 
         [K in Alignment]?: string;
     };
     rarity: ConfigPF2e["PF2E"]["rarityTraits"];
+    frequencies: ConfigPF2e["PF2E"]["frequencies"];
     attitude: ConfigPF2e["PF2E"]["attitude"];
     pfsFactions: ConfigPF2e["PF2E"]["pfsFactions"];
     conditions: FlattenedCondition[];

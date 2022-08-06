@@ -38,7 +38,7 @@ export declare class KitSheetPF2e extends ItemSheetPF2e<KitPF2e> {
         ruleElements: {
             template: string;
             index: number;
-            rule: import("../../rules").RuleElementSource;
+            rule: import("../../rules/rule-element/data").RuleElementSource;
         }[];
         cssClass: string;
         editable: boolean;

@@ -3,6 +3,7 @@ import { CompendiumBrowserTab } from "./base";
 import { ActionFilters } from "./data";
 export declare class CompendiumBrowserActionTab extends CompendiumBrowserTab {
     filterData: ActionFilters;
+    templatePath: string;
     protected index: string[];
     constructor(browser: CompendiumBrowser);
     protected loadData(): Promise<void>;

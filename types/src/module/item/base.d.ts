@@ -39,10 +39,10 @@ declare class ItemPF2e extends Item<ActorPF2e> {
      * Create a chat card for this item and either return the message or send it to the chat log. Many cards contain
      * follow-up options for attack rolls, effect application, etc.
      */
-    toMessage(event?: JQuery.TriggeredEvent, { rollMode, create, data }?: {
+    toMessage(event?: JQuery.TriggeredEvent, { rollMode, create, data, }?: {
         rollMode?: RollMode;
         create?: boolean;
-        data?: {};
+        data?: Record<string, unknown>;
     }): Promise<ChatMessagePF2e | undefined>;
     /** A shortcut to `item.toMessage(..., { create: true })`, kept for backward compatibility */
     toChat(event?: JQuery.TriggeredEvent): Promise<ChatMessagePF2e | undefined>;
@@ -79,11 +79,11 @@ declare class ItemPF2e extends Item<ActorPF2e> {
     }, options?: Partial<FormApplicationOptions>): Promise<ItemPF2e | undefined>;
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
-    static createDocuments<T extends ConstructorOf<ItemPF2e>>(this: T, data?: PreCreate<InstanceType<T>["data"]["_source"]>[], context?: DocumentModificationContext<InstanceType<T>>): Promise<InstanceType<T>[]>;
+    static createDocuments<T extends ConstructorOf<ItemPF2e>>(this: T, data?: PreCreate<InstanceType<T>["_source"]>[], context?: DocumentModificationContext<InstanceType<T>>): Promise<InstanceType<T>[]>;
     static deleteDocuments<T extends ConstructorOf<ItemPF2e>>(this: T, ids?: string[], context?: DocumentModificationContext<InstanceType<T>>): Promise<InstanceType<T>[]>;
-    protected _preCreate(data: PreDocumentId<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     /** Keep `TextEditor` and anything else up to no good from setting this item's description to `null` */
-    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     /** Call onCreate rule-element hooks */
     protected _onCreate(data: ItemSourcePF2e, options: DocumentModificationContext<this>, userId: string): void;
     /** Call onDelete rule-element hooks */

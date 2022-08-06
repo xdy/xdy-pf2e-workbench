@@ -62,7 +62,7 @@ interface ModifierAdjustment {
     predicate: PredicatePF2e;
     damageType?: DamageType;
     relabel?: string;
-    suppress: boolean;
+    suppress?: boolean;
     getNewValue?: (current: number) => number;
     getDamageType?: (current: DamageType | null) => DamageType | null;
 }
@@ -225,7 +225,7 @@ declare class CheckModifier extends StatisticModifier {
      * @param statistic The statistic modifier to copy fields from.
      * @param modifiers Additional modifiers to add to this check.
      */
-    constructor(name: string, statistic: StatisticModifier, modifiers?: ModifierPF2e[]);
+    constructor(name: string, statistic: StatisticModifier, modifiers?: ModifierPF2e[], rollOptions?: string[]);
 }
 interface DamageDiceOverride {
     /** Upgrade the damage dice to the next higher size (maximum d12) */
@@ -236,6 +236,8 @@ interface DamageDiceOverride {
     dieSize?: DamageDieSize;
     /** Override the damage type */
     damageType?: DamageType;
+    /** Override the number of damage dice */
+    diceNumber?: number;
 }
 /**
  * Represents extra damage dice for one or more weapons or attack actions.

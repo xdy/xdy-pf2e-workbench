@@ -10,7 +10,7 @@ export declare class Migration680SetWeaponHands extends MigrationBase {
     private wornGloves;
     private twoHandedWeapons;
     isShield(source: ItemSourcePF2e & {
-        data: {
+        system: {
             armorType?: {
                 value?: unknown;
             };

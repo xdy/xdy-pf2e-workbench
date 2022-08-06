@@ -2,6 +2,9 @@ import { PhysicalItemSheetPF2e } from "@item/physical/sheet";
 import { ArmorPF2e } from ".";
 export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
     getData(options?: Partial<DocumentSheetOptions>): Promise<{
+        sizes: Record<"med" | "tiny" | "sm" | "lg" | "huge" | "grg", string>;
+        traits: import("@module/sheet/helpers").SheetOptions;
+        otherTags: import("@module/sheet/helpers").SheetOptions;
         armorPotencyRunes: {
             "1": string;
             "2": string;
@@ -135,8 +138,6 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
         };
         preciousMaterials: Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "coldIron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sovereignSteel", string>;
         preciousMaterialGrades: Record<"high" | "low" | "standard", string>;
-        sizes: Record<"med" | "tiny" | "sm" | "lg" | "huge" | "grg", string>;
-        traits: import("@module/sheet/helpers").SheetOptions;
         isPhysical: true;
         basePriceString: string;
         priceString: string;
@@ -170,7 +171,7 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
         sidebarTemplate?: (() => string) | undefined;
         detailsTemplate?: (() => string) | undefined;
         item: import("./data").ArmorData;
-        data: import("./data").ArmorSystemData;
+        data: import("./data").ArmorSystemSource & import("../physical/data").PhysicalSystemSource & import("./data").ArmorSystemData;
         user: {
             isGM: boolean;
         };
@@ -183,7 +184,7 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
         ruleElements: {
             template: string;
             index: number;
-            rule: import("../../rules").RuleElementSource;
+            rule: import("../../rules/rule-element/data").RuleElementSource;
         }[];
         cssClass: string;
         editable: boolean;

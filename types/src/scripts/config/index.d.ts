@@ -422,12 +422,13 @@ export declare const PF2ECONFIG: {
         emotion: string;
         extradimensional: string;
         fear: string;
-        fortune: string;
+        fortune: string; /** Base weapon types that are considered equivalent for all rules purposes */
         fungus: string;
-        healing: string; /** Base weapon types that are considered equivalent for all rules purposes */
+        healing: string;
         hex: string;
         incapacitation: string;
         incarnate: string;
+        incorporeal: string;
         inhaled: string;
         light: string;
         linguistic: string;
@@ -562,7 +563,7 @@ export declare const PF2ECONFIG: {
         tiefling: string;
         undine: string;
     };
-    deityDomains: Record<"time" | "change" | "family" | "void" | "cold" | "fire" | "air" | "earth" | "water" | "healing" | "magic" | "nature" | "abomination" | "apocryphal" | "ambition" | "cities" | "confidence" | "creation" | "darkness" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "fate" | "freedom" | "glyph" | "indulgence" | "knowledge" | "lightning" | "luck" | "might" | "moon" | "naga" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "wealth" | "wyrmkin" | "zeal", {
+    deityDomains: Record<"time" | "change" | "family" | "void" | "cold" | "fire" | "air" | "earth" | "water" | "healing" | "magic" | "nature" | "abomination" | "ambition" | "cities" | "confidence" | "creation" | "darkness" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "fate" | "freedom" | "glyph" | "indulgence" | "knowledge" | "lightning" | "luck" | "might" | "moon" | "naga" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "wealth" | "wyrmkin" | "zeal" | "airapocryphal" | "ambitionapocryphal" | "confidenceapocryphal" | "darknessapocryphal" | "deathapocryphal" | "fateapocryphal" | "fireapocryphal" | "indulgenceapocryphal" | "knowledgeapocryphal" | "mightapocryphal" | "secrecyapocryphal" | "travelapocryphal" | "waterapocryphal", {
         label: string;
         description: string;
     }>;
@@ -664,6 +665,7 @@ export declare const PF2ECONFIG: {
         "thrown-30": string;
         "thrown-40": string;
         "thrown-60": string;
+        "thrown-80": string;
         "thrown-100": string;
         time: string;
         trip: string;
@@ -801,6 +803,7 @@ export declare const PF2ECONFIG: {
         necromancy: string;
         transmutation: string;
     };
+    otherArmorTags: Record<"innovation", string>;
     equipmentTraits: {
         adjustment: string;
         alchemical: string;
@@ -926,6 +929,7 @@ export declare const PF2ECONFIG: {
         good: string;
         evil: string;
     };
+    otherEquipmentTags: Record<"implement", string>;
     actionTraits: {
         circus: string;
         summon: string;
@@ -950,12 +954,13 @@ export declare const PF2ECONFIG: {
         emotion: string;
         extradimensional: string;
         fear: string;
-        fortune: string;
+        fortune: string; /** Base weapon types that are considered equivalent for all rules purposes */
         fungus: string;
-        healing: string; /** Base weapon types that are considered equivalent for all rules purposes */
+        healing: string;
         hex: string;
         incapacitation: string;
         incarnate: string;
+        incorporeal: string;
         inhaled: string;
         light: string;
         linguistic: string;
@@ -982,6 +987,18 @@ export declare const PF2ECONFIG: {
         teleportation: string;
         "true-name": string;
         visual: string;
+        arcane: string;
+        divine: string;
+        occult: string;
+        primal: string;
+        abjuration: string;
+        conjuration: string;
+        divination: string;
+        enchantment: string;
+        evocation: string;
+        illusion: string;
+        necromancy: string;
+        transmutation: string;
         air: string;
         earth: string;
         fire: string;
@@ -1027,6 +1044,7 @@ export declare const PF2ECONFIG: {
         clockwork: string;
         consumable: string;
         contact: string;
+        cursed: string;
         drug: string;
         elixir: string;
         fey: string;
@@ -1049,18 +1067,6 @@ export declare const PF2ECONFIG: {
         trap: string;
         virulent: string;
         wand: string;
-        arcane: string;
-        divine: string;
-        occult: string;
-        primal: string;
-        abjuration: string;
-        conjuration: string;
-        divination: string;
-        enchantment: string;
-        evocation: string;
-        illusion: string;
-        necromancy: string;
-        transmutation: string;
         additive1: string;
         additive2: string;
         additive3: string;
@@ -1154,6 +1160,7 @@ export declare const PF2ECONFIG: {
         clockwork: string;
         consumable: string;
         contact: string;
+        cursed: string;
         drug: string;
         elixir: string;
         emotion: string;
@@ -1246,12 +1253,13 @@ export declare const PF2ECONFIG: {
         emotion: string;
         extradimensional: string;
         fear: string;
-        fortune: string;
+        fortune: string; /** Base weapon types that are considered equivalent for all rules purposes */
         fungus: string;
-        healing: string; /** Base weapon types that are considered equivalent for all rules purposes */
+        healing: string;
         hex: string;
         incapacitation: string;
         incarnate: string;
+        incorporeal: string;
         inhaled: string;
         light: string;
         linguistic: string;
@@ -1278,6 +1286,18 @@ export declare const PF2ECONFIG: {
         teleportation: string;
         "true-name": string;
         visual: string;
+        arcane: string;
+        divine: string;
+        occult: string;
+        primal: string;
+        abjuration: string;
+        conjuration: string;
+        divination: string;
+        enchantment: string;
+        evocation: string;
+        illusion: string;
+        necromancy: string;
+        transmutation: string;
         air: string;
         earth: string;
         fire: string;
@@ -1388,10 +1408,11 @@ export declare const PF2ECONFIG: {
         eidolon: string;
         extradimensional: string;
         fungus: string;
-        healing: string; /** Base weapon types that are considered equivalent for all rules purposes */
+        healing: string;
         hex: string;
         incapacitation: string;
         incarnate: string;
+        incorporeal: string;
         inhaled: string;
         light: string;
         linguistic: string;
@@ -1412,6 +1433,18 @@ export declare const PF2ECONFIG: {
         summoned: string;
         teleportation: string;
         visual: string;
+        arcane: string;
+        divine: string;
+        occult: string;
+        primal: string;
+        abjuration: string;
+        conjuration: string;
+        divination: string;
+        enchantment: string;
+        evocation: string;
+        illusion: string;
+        necromancy: string;
+        transmutation: string;
         air: string;
         earth: string;
         fire: string;
@@ -1452,18 +1485,6 @@ export declare const PF2ECONFIG: {
         thaumaturge: string;
         witch: string;
         wizard: string;
-        arcane: string;
-        divine: string;
-        occult: string;
-        primal: string;
-        abjuration: string;
-        conjuration: string;
-        divination: string;
-        enchantment: string;
-        evocation: string;
-        illusion: string;
-        necromancy: string;
-        transmutation: string;
         "half-elf": string;
         "half-orc": string;
         aasimar: string;
@@ -2069,6 +2090,7 @@ export declare const PF2ECONFIG: {
         "thrown-30": string;
         "thrown-40": string;
         "thrown-60": string;
+        "thrown-80": string;
         "thrown-100": string;
         time: string;
         trip: string;
@@ -2192,6 +2214,7 @@ export declare const PF2ECONFIG: {
         teleportation: string;
         trap: string;
         virulent: string;
+        visual: string;
         arcane: string;
         divine: string;
         occult: string;
@@ -2332,6 +2355,7 @@ export declare const PF2ECONFIG: {
         "thrown-40": string;
         "thrown-50": string;
         "thrown-60": string;
+        "thrown-80": string;
         tiefling: string;
         time: string;
         transmutation: string;
@@ -2825,7 +2849,7 @@ export declare const PF2ECONFIG: {
         9: string;
         10: string;
     };
-    featTypes: Record<"ancestry" | "class" | "curse" | "ancestryfeature" | "classfeature" | "skill" | "general" | "archetype" | "bonus" | "pfsboon" | "deityboon", string>;
+    featTypes: Record<"curse" | "ancestry" | "ancestryfeature" | "class" | "classfeature" | "skill" | "general" | "archetype" | "bonus" | "pfsboon" | "deityboon", string>;
     actionTypes: {
         action: string;
         reaction: string;

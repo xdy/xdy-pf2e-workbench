@@ -18,10 +18,10 @@ declare class EffectPF2e extends ItemPF2e {
     /** Include a trimmed version of the "slug" roll option (e.g., effect:rage instead of effect:effect-rage) */
     getRollOptions(prefix?: string): string[];
     /** Set the start time and initiative roll of a newly created effect */
-    protected _preCreate(data: PreDocumentId<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     /** Show floaty text when this effect is created on an actor */
-    protected _onCreate(data: this["data"]["_source"], options: DocumentModificationContext<this>, userId: string): void;
+    protected _onCreate(data: this["_source"], options: DocumentModificationContext<this>, userId: string): void;
     /** Show floaty text when this effect is deleted from an actor */
     protected _onDelete(options: DocumentModificationContext, userId: string): void;
 }

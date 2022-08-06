@@ -2,8 +2,8 @@ import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
 import { IdentificationStatus, MystifiedData } from "@item/physical/data";
 import { MaterialGradeData } from "@item/physical/materials";
 import { RuneValuationData } from "../runes";
-import { WeaponData, WeaponMaterialData } from "./data";
-import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types";
+import { WeaponDamage, WeaponData, WeaponMaterialData } from "./data";
+import { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types";
 declare class WeaponPF2e extends PhysicalItemPF2e {
     get isEquipped(): boolean;
     isStackableWith(item: PhysicalItemPF2e): boolean;
@@ -20,10 +20,13 @@ declare class WeaponPF2e extends PhysicalItemPF2e {
     get isMelee(): boolean;
     get isRanged(): boolean;
     get isThrown(): boolean;
+    /** This weapon's damage before modification by creature abilities, effects, etc. */
+    get baseDamage(): WeaponDamage;
     get material(): WeaponMaterialData;
     /** Does this weapon require ammunition in order to make a strike? */
     get requiresAmmo(): boolean;
     get ammo(): Embedded<ConsumablePF2e> | null;
+    get otherTags(): Set<OtherWeaponTag>;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
     prepareBaseData(): void;

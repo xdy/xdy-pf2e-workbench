@@ -14,9 +14,6 @@ declare global {
         /** A reference to the Scene embedded Document instance which this object represents */
         document: TDocument;
 
-        /** The underlying data object which provides the basis for this placeable object */
-        data: TDocument["data"];
-
         /**
          * Track the field of vision for the placeable object.
          * This is necessary to determine whether a player has line-of-sight towards a placeable object or vice-versa
@@ -130,20 +127,16 @@ declare global {
         override destroy(options?: boolean | PIXI.IDestroyOptions): void;
 
         /** Draw the placeable object into its parent container */
-        abstract draw(): Promise<this>;
+        draw(): Promise<this>;
 
         /**
          * Refresh the current display state of the Placeable Object
          * @return The refreshed object
          */
-        abstract refresh(): this;
+        refresh(): this;
 
         /** Register pending canvas operations which should occur after a new PlaceableObject of this type is created */
-        _onCreate(
-            data: TDocument["data"]["_source"],
-            options: DocumentModificationContext<TDocument>,
-            userId: string
-        ): void;
+        _onCreate(data: TDocument["_source"], options: DocumentModificationContext<TDocument>, userId: string): void;
 
         /** Define additional steps taken when an existing placeable object of this type is updated with new data */
         _onUpdate(

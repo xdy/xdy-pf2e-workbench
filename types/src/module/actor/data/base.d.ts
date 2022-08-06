@@ -4,9 +4,7 @@ import { ActorSizePF2e } from "@actor/data/size";
 import { StatisticModifier } from "@actor/modifiers";
 import { AbilityString, ActorAlliance } from "@actor/types";
 import { IMMUNITY_TYPES, RESISTANCE_TYPES, WEAKNESS_TYPES } from "@actor/values";
-import { MeleePF2e, WeaponPF2e } from "@item";
-import type { ItemPF2e } from "@item/base";
-import { ConsumableData } from "@item/consumable/data";
+import { ConsumablePF2e, ItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
 import type { ActiveEffectPF2e } from "@module/active-effect";
 import { DocumentSchemaRecord, LabeledNumber, Rarity, Size, ValueAndMaybeMax, ValuesList } from "@module/data";
@@ -16,13 +14,13 @@ import { ActorType } from ".";
 /** Base interface for all actor data */
 interface BaseActorSourcePF2e<TType extends ActorType = ActorType, TSystemSource extends ActorSystemSource = ActorSystemSource> extends foundry.data.ActorSource<TType, TSystemSource, ItemSourcePF2e> {
     flags: DeepPartial<ActorFlagsPF2e>;
-    token: PrototypeTokenSourcePF2e;
+    prototypeToken: PrototypeTokenSourcePF2e;
 }
-interface BaseActorDataPF2e<TActor extends ActorPF2e = ActorPF2e, TType extends ActorType = ActorType, TSystemData extends ActorSystemData = ActorSystemData, TSource extends BaseActorSourcePF2e<TType> = BaseActorSourcePF2e<TType>> extends Omit<BaseActorSourcePF2e<TType, ActorSystemSource>, "effects" | "items" | "token">, foundry.data.ActorData<TActor, ActiveEffectPF2e, ItemPF2e> {
+// @ts-ignore
+interface BaseActorDataPF2e<TActor extends ActorPF2e = ActorPF2e, TType extends ActorType = ActorType, TSystemData extends ActorSystemData = ActorSystemData, TSource extends BaseActorSourcePF2e<TType> = BaseActorSourcePF2e<TType>> extends Omit<BaseActorSourcePF2e<TType, ActorSystemSource>, "effects" | "items" | "prototypeToken">, foundry.data.ActorData<TActor, ActiveEffectPF2e, ItemPF2e> {
     readonly type: TType;
-    readonly data: TSystemData;
+    readonly system: TSystemData;
     token: PrototypeTokenDataPF2e;
-    flags: ActorFlagsPF2e;
     readonly _source: TSource;
 }
 interface ActorSystemSource {
@@ -88,14 +86,14 @@ interface BaseActorAttributes {
         flatFootable: FlatFootableCircumstance;
     };
 }
-declare type FlatFootableCircumstance = 
+declare type FlatFootableCircumstance =
 /** Flat-footable in all flanking situations */
 true
 /** Flat-footable if the flanker's level is less than or equal to the actor's own */
  | number
 /** Never flat-footable */
  | false;
-declare type GangUpCircumstance = 
+declare type GangUpCircumstance =
 /** Requires at least `number` allies within melee reach of the target */
 number
 /** Requires the actor's animal companion to be adjacent to the target */
@@ -217,12 +215,12 @@ interface StrikeData extends StatisticModifier {
     }[];
     /** Ammunition choices and selected ammo if this is a ammo consuming weapon. */
     ammunition?: {
-        compatible: RawObject<ConsumableData>[];
-        incompatible: RawObject<ConsumableData>[];
-        selected?: {
+        compatible: ConsumablePF2e[];
+        incompatible: ConsumablePF2e[];
+        selected: {
             id: string;
             compatible: boolean;
-        };
+        } | null;
     };
     /** The item that generated this strike */
     origin?: Embedded<ItemPF2e> | null;

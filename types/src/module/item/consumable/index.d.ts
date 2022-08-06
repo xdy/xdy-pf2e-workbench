@@ -5,6 +5,7 @@ declare class ConsumablePF2e extends PhysicalItemPF2e {
     get consumableType(): ConsumableType;
     get isAmmunition(): boolean;
     get charges(): {
+        value: number;
         current: number;
         max: number;
     };

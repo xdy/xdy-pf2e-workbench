@@ -155,7 +155,8 @@ declare global {
 
     interface DropCanvasData<T extends string = string, D extends object = object> {
         type?: T;
-        data?: D extends foundry.abstract.Document ? D["data"]["_source"] : D;
+        data?: D extends foundry.abstract.Document ? D["_source"] : D;
+        uuid?: string;
         id?: string;
         pack?: string;
         x: number;

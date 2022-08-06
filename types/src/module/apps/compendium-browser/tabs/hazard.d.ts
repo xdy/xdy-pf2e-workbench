@@ -3,6 +3,7 @@ import { CompendiumBrowserTab } from "./base";
 import { HazardFilters } from "./data";
 export declare class CompendiumBrowserHazardTab extends CompendiumBrowserTab {
     filterData: HazardFilters;
+    templatePath: string;
     protected index: string[];
     constructor(browser: CompendiumBrowser);
     protected loadData(): Promise<void>;

@@ -1,10 +1,9 @@
-import { ModifierPF2e } from "@actor/modifiers";
-import { ConditionData, ConditionSlug, ConditionSource } from "@item/condition/data";
+import { ConditionSlug, ConditionSource } from "@item/condition/data";
 import { ConditionPF2e } from "@item";
 import { ActorPF2e } from "@actor";
 import { TokenPF2e } from "@module/canvas";
 import { FlattenedCondition } from "./types";
-/** A helper class to manage PF2e Conditions. */
+/** A helper class to manage PF2e Conditions */
 export declare class ConditionManager {
     #private;
     static conditions: Map<ConditionSlug, ConditionPF2e>;
@@ -38,13 +37,6 @@ export declare class ConditionManager {
     private static clearOverrides;
     private static processOverride;
     private static processConditions;
-    /**
-     * Gets a map of modifiers from a collection of conditions.
-     *
-     * @param conditions A collection of conditions to retrieve modifiers from.
-     * @return A map of PF2Modifiers from the conditions collection.
-     */
-    static getConditionModifiers(conditions: Iterable<ConditionData>): Map<string, Array<ModifierPF2e>>;
     /**
      * Adds a condition to a token.
      * @param name  A collection of conditions to retrieve modifiers from.
