@@ -394,9 +394,9 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
      * limitations under the License.
      */
 
-    renderData.resources.heroPoints.max = <number>game.settings.get(MODULENAME, "maxHeroPoints");
+    renderData.data.resources.heroPoints.max = <number>game.settings.get(MODULENAME, "maxHeroPoints");
 
-    const { value, max }: { value: number; max: number } = renderData.resources.heroPoints;
+    const { value, max }: { value: number; max: number } = renderData.data.resources.heroPoints;
 
     const iconFilled = '<i class="fas fa-hospital-symbol"></i>';
     const iconEmpty = '<i class="far fa-circle"></i>';
@@ -409,10 +409,10 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
         icon += iconEmpty;
     }
 
-    renderData.resources.heroPoints.icon = icon;
+    renderData.data.resources.heroPoints.icon = icon;
 
     const actor: Actor = app["document"] as Actor;
-    const span = html.find('span[data-property="resources.heroPoints.value"]');
+    const span = html.find('span[data-property="system.resources.heroPoints.value"]');
     span.html(icon);
 
     span.off("click");
@@ -421,13 +421,13 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
     span.on("click", async (_e) => {
         if (value === max) return;
         await actor.update({
-            ["resources.heroPoints.value"]: value + 1,
+            ["system.resources.heroPoints.value"]: value + 1,
         });
     });
     span.on("contextmenu", async (_e) => {
         if (value === 0) return;
         await actor.update({
-            ["resources.heroPoints.value"]: value - 1,
+            ["system.resources.heroPoints.value"]: value - 1,
         });
     });
 }

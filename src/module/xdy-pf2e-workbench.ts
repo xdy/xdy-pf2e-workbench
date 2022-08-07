@@ -90,13 +90,12 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     (!message.data.whisper || message.data.whisper.length === 0) &&
                     game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) //TODO Doesn't work on mac?
                 ) {
-                    data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
-                    data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
+                    const type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
+                    const whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
                     if (!game.user.isGM) {
-                        data.whisper.push(game.user.id);
+                        whisper.push(game.user.id);
                     }
-                    // @ts-ignore message.data
-                    message.update(data);
+                    const chatMessagePF2e = await message.update({ _id: message.id, type: type, whisper: whisper });
 
                     if (
                         game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessage") &&
@@ -402,7 +401,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     if (game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
         Hooks.on("renderCharacterSheetPF2e", (app: TokenHUD, html: JQuery, data: any) => {
             if (game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
-                //TODO Temporarily removed maxHeroPoints(app, html, data);
+                maxHeroPoints(app, html, data);
             }
         });
     }
