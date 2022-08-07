@@ -4,7 +4,7 @@ name: Test and release
 on:
     pull_request:
     push:
-        branches: [ main ]
+        branches: [ main, beta ]
 
 jobs:
     test:
@@ -46,8 +46,8 @@ jobs:
 
             #
     release:
-        # Only release on push to main on xdy/xdy-pf2e-workbench
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
+        # Only release on push to main or beta on xdy/xdy-pf2e-workbench
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta' ) && github.repository == 'xdy/xdy-pf2e-workbench'
         runs-on: ubuntu-latest
         # Waits for test jobs for each Node.js version to complete
         needs: [ test ]
@@ -91,8 +91,9 @@ jobs:
             -   name: Get tag
                 run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
-                # Publish the release to FoundryVTT's package repository
+                # Publish the release to FoundryVTT's package repository only if push on main
             -   name: Publish to Foundry Admin
+                if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
                 uses: Varriount/fvtt-autopublish@v1.0.6
                 with:
                     username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
