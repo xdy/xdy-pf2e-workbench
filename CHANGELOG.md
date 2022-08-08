@@ -1,3 +1,10 @@
+# [4.0.0-beta.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2022-08-08)
+
+
+### Bug Fixes
+
+* Always show mystified items on characters as default color. ([15ae0b1](https://github.com/xdy/xdy-pf2e-workbench/commit/15ae0b13937ab407bbf6636274ecf50253eefa56)), closes [#367](https://github.com/xdy/xdy-pf2e-workbench/issues/367)
+
 # [4.0.0-beta.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.44.2...v4.0.0-beta.1) (2022-08-08)
 
 
