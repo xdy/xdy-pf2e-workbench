@@ -274,7 +274,6 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
 export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
     const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
     if (isFirstGM() && physicalTypes.includes(item.type) && item.actor) {
-        console.log(item.actor.hasCondition("encumbered"));
         if (item.actor.inventory.bulk.isEncumbered) {
             if (!item.actor.hasCondition("encumbered")) {
                 await item.actor.increaseCondition("encumbered");
@@ -284,6 +283,5 @@ export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
                 await item.actor.decreaseCondition("encumbered", { forceRemove: true });
             }
         }
-        console.log(item.actor.hasCondition("encumbered"));
     }
 }

@@ -17,7 +17,6 @@ import { moveOnZeroHP } from "./feature/initiativeHandler";
 import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
-import { TokenDocumentPF2e } from "@scene";
 import { toggleMenuSettings, toggleSettings } from "./feature/settingsHandler";
 import {
     applyEncumbranceBasedOnBulk,
@@ -35,7 +34,7 @@ import {
     maxHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
-import { isFirstGM, nth } from "./utils";
+import { nth } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
@@ -52,7 +51,6 @@ import { setupNpcRoller } from "./feature/npc-roller/NpcRoller";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { UserPF2e } from "@module/user";
-import { SpellData } from "@item/spell/data";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -479,7 +477,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 $html.find(".item").each((i, e) => {
                     $(e).each((i, e) => {
                         const rarity = $(e).attr("data-item-rarity");
-                        if (rarity) {
+                        const mystified = $(e).find("span").hasClass("gm-mystified-data");
+                        if (rarity && !mystified) {
                             $(e).find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
                         }
                     });
