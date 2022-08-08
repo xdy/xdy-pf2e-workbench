@@ -85,14 +85,14 @@ interface BaseActorAttributes {
         flatFootable: FlatFootableCircumstance;
     };
 }
-declare type FlatFootableCircumstance =
+declare type FlatFootableCircumstance = 
 /** Flat-footable in all flanking situations */
 true
 /** Flat-footable if the flanker's level is less than or equal to the actor's own */
  | number
 /** Never flat-footable */
  | false;
-declare type GangUpCircumstance =
+declare type GangUpCircumstance = 
 /** Requires at least `number` allies within melee reach of the target */
 number
 /** Requires the actor's animal companion to be adjacent to the target */

@@ -5,7 +5,7 @@ import { ZeroToFour } from "@module/data";
 import type { ClassPF2e } from ".";
 import { CLASS_TRAITS } from "./values";
 declare type ClassSource = BaseItemSourcePF2e<"class", ClassSystemSource>;
-declare type ClassData = Omit<ClassSource, "data" | "effects" | "flags"> & BaseItemDataPF2e<ClassPF2e, "class", ClassSystemData, ClassSource>;
+declare type ClassData = Omit<ClassSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<ClassPF2e, "class", ClassSystemData, ClassSource>;
 interface ClassSystemSource extends ABCSystemData {
     traits: ItemTraits;
     keyAbility: {

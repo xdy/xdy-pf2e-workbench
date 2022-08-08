@@ -20,7 +20,7 @@ export declare class EffectsPanel extends Application {
         popOut: boolean;
         template: string;
     };
-    getData(options?: ApplicationOptions): EffectsPanelData;
+    getData(options?: ApplicationOptions): Promise<EffectsPanelData>;
     activateListeners($html: JQuery): void;
     private static getParentConditionsBreakdown;
     private static getRemainingDurationLabel;

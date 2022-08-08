@@ -171,7 +171,7 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
         sidebarTemplate?: (() => string) | undefined;
         detailsTemplate?: (() => string) | undefined;
         item: import("./data").ArmorData;
-        data: import("./data").ArmorSystemSource & import("../physical/data").PhysicalSystemSource & import("./data").ArmorSystemData;
+        data: import("./data").ArmorSystemData;
         user: {
             isGM: boolean;
         };

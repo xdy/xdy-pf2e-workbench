@@ -5,7 +5,7 @@ import { OneToTen, ValueAndMax, ValuesList } from "@module/data";
 import { DamageType } from "@system/damage";
 import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "../types";
 declare type SpellSource = BaseItemSourcePF2e<"spell", SpellSystemSource>;
-declare type SpellData = Omit<SpellSource, "data" | "effects" | "flags"> & BaseItemDataPF2e<SpellPF2e, "spell", SpellSystemData, SpellSource>;
+declare type SpellData = Omit<SpellSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<SpellPF2e, "spell", SpellSystemData, SpellSource>;
 export declare type SpellTraits = ItemTraits<SpellTrait>;
 declare type SpellDamageCategory = keyof ConfigPF2e["PF2E"]["damageCategories"];
 export interface SpellDamageType {

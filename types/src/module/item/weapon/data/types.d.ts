@@ -9,7 +9,7 @@ import { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, StrikingRuneType, Wea
 declare type WeaponSource = BasePhysicalItemSource<"weapon", WeaponSystemSource> & {
     flags: DeepPartial<WeaponFlags>;
 };
-declare type WeaponData = Omit<WeaponSource, "data" | "effects" | "flags"> & BasePhysicalItemData<WeaponPF2e, "weapon", WeaponSystemData, WeaponSource> & {
+declare type WeaponData = Omit<WeaponSource, "system" | "effects" | "flags"> & BasePhysicalItemData<WeaponPF2e, "weapon", WeaponSystemData, WeaponSource> & {
     flags: WeaponFlags;
 };
 declare type WeaponFlags = ItemFlagsPF2e & {

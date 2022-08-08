@@ -10,7 +10,7 @@ import { ActionTrait } from "@item/action/data";
 interface BaseItemSourcePF2e<TType extends ItemType = ItemType, TSystemSource extends ItemSystemSource = ItemSystemSource> extends foundry.data.ItemSource<TType, TSystemSource> {
     flags: ItemSourceFlagsPF2e;
 }
-interface BaseItemDataPF2e<TItem extends ItemPF2e = ItemPF2e, TType extends ItemType = ItemType, TSystemData extends ItemSystemData = ItemSystemData, TSource extends BaseItemSourcePF2e<TType> = BaseItemSourcePF2e<TType>> extends Omit<BaseItemSourcePF2e<TType, ItemSystemSource>, "data" | "system" | "effects">, foundry.data.ItemData<TItem, ActiveEffectPF2e> {
+interface BaseItemDataPF2e<TItem extends ItemPF2e = ItemPF2e, TType extends ItemType = ItemType, TSystemData extends ItemSystemData = ItemSystemData, TSource extends BaseItemSourcePF2e<TType> = BaseItemSourcePF2e<TType>> extends Omit<BaseItemSourcePF2e<TType, ItemSystemSource>, "system" | "effects">, foundry.data.ItemData<TItem, ActiveEffectPF2e> {
     readonly type: TType;
     readonly system: TSystemData;
     flags: ItemFlagsPF2e;

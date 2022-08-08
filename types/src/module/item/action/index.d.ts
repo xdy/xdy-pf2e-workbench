@@ -10,6 +10,7 @@ declare class ActionItemPF2e extends ItemPF2e {
     getChatData(this: Embedded<ActionItemPF2e>, htmlOptions?: EnrichHTMLOptions): {
         properties: string[];
         traits: import("../data").TraitChatData[];
+        frequency?: Frequency | undefined;
         actionType: {
             value: "passive" | "action" | "reaction" | "free";
         };
@@ -26,7 +27,6 @@ declare class ActionItemPF2e extends ItemPF2e {
             value: string;
         };
         deathNote: boolean;
-        frequency?: (import("@item/data/base").FrequencySource & Frequency) | undefined;
         description: {
             value: string;
         };

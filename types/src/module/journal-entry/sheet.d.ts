@@ -3,7 +3,6 @@
 import type * as TinyMCE from "tinymce";
 import "../../styles/tinymce.scss";
 declare class JournalSheetPF2e<TJournalEntry extends JournalEntry = JournalEntry> extends JournalSheet<TJournalEntry> {
-    get template(): string;
     activateListeners($html: JQuery): void;
     activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): void;
 }

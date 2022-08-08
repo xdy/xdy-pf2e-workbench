@@ -2,7 +2,7 @@ import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemT
 import type { EquipmentPF2e } from ".";
 import { EquipmentTrait, OtherEquipmentTag } from "./types";
 declare type EquipmentSource = BasePhysicalItemSource<"equipment", EquipmentSystemSource>;
-declare type EquipmentData = Omit<EquipmentSource, "data" | "effects" | "flags"> & BasePhysicalItemData<EquipmentPF2e, "equipment", EquipmentSystemData, EquipmentSource>;
+declare type EquipmentData = Omit<EquipmentSource, "system" | "effects" | "flags"> & BasePhysicalItemData<EquipmentPF2e, "equipment", EquipmentSystemData, EquipmentSource>;
 interface EquipmentSystemSource extends Investable<PhysicalSystemSource> {
     traits: EquipmentTraitsSource;
 }

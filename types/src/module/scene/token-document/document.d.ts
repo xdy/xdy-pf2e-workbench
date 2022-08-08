@@ -5,6 +5,7 @@ import { TokenDataPF2e } from "./data";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { PrototypeTokenDataPF2e } from "@actor/data/base";
 import { TokenAura } from "./aura";
+import { ActorSourcePF2e } from "@actor/data";
 declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
     /** Has this token gone through at least one cycle of data preparation? */
     private initialized;
@@ -40,7 +41,7 @@ declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends To
         sendMessage?: boolean;
     }): Promise<void>;
     /** Rerun token data preparation and possibly redraw token when the actor's embedded items change */
-    onActorItemChange(): void;
+    _onUpdateBaseActor(updates?: DeepPartial<ActorSourcePF2e>, options?: DocumentModificationContext<ActorPF2e>): void;
     /** Toggle token hiding if this token's actor is a loot actor */
     protected _onCreate(data: this["_source"], options: DocumentModificationContext<this>, userId: string): void;
     /** Refresh the effects panel and encounter tracker */

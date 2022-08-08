@@ -3,7 +3,7 @@ import { OneToThree } from "@module/data";
 import { FeatPF2e } from ".";
 import { FEAT_TYPES } from "./values";
 declare type FeatSource = BaseItemSourcePF2e<"feat", FeatSystemSource>;
-declare type FeatData = Omit<FeatSource, "data" | "effects" | "flags"> & BaseItemDataPF2e<FeatPF2e, "feat", FeatSystemData, FeatSource>;
+declare type FeatData = Omit<FeatSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<FeatPF2e, "feat", FeatSystemData, FeatSource>;
 export declare type FeatTrait = keyof ConfigPF2e["PF2E"]["featTraits"];
 export declare type FeatTraits = ItemTraits<FeatTrait>;
 export declare type FeatType = SetElement<typeof FEAT_TYPES>;

@@ -6,7 +6,7 @@ import { BaseWeaponType } from "@item/weapon/types";
 import type { DeityPF2e } from "./document";
 import { DeityDomain } from "./types";
 declare type DeitySource = BaseItemSourcePF2e<"deity", DeitySystemSource>;
-declare type DeityData = Omit<DeitySource, "data" | "effects" | "flags"> & BaseItemDataPF2e<DeityPF2e, "deity", DeitySystemData, DeitySource>;
+declare type DeityData = Omit<DeitySource, "system" | "effects" | "flags"> & BaseItemDataPF2e<DeityPF2e, "deity", DeitySystemData, DeitySource>;
 interface DeitySystemSource extends ItemSystemSource {
     category: "deity" | "pantheon" | "philosophy";
     alignment: {

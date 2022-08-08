@@ -4,7 +4,7 @@ import type { LocalizePF2e } from "@module/system/localize";
 import type { ArmorPF2e } from ".";
 import { OtherArmorTag } from "./types";
 declare type ArmorSource = BasePhysicalItemSource<"armor", ArmorSystemSource>;
-declare type ArmorData = Omit<ArmorSource, "data" | "effects" | "flags"> & BasePhysicalItemData<ArmorPF2e, "armor", ArmorSystemData, ArmorSource>;
+declare type ArmorData = Omit<ArmorSource, "system" | "effects" | "flags"> & BasePhysicalItemData<ArmorPF2e, "armor", ArmorSystemData, ArmorSource>;
 interface ArmorSystemSource extends Investable<PhysicalSystemSource> {
     traits: ArmorTraits;
     armor: {

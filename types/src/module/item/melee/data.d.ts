@@ -6,7 +6,7 @@ import type { MeleePF2e } from ".";
 declare type MeleeSource = BaseItemSourcePF2e<"melee", MeleeSystemSource> & {
     flags: DeepPartial<MeleeFlags>;
 };
-declare type MeleeData = Omit<MeleeSource, "data" | "effects" | "flags"> & BaseItemDataPF2e<MeleePF2e, "melee", MeleeSystemData, MeleeSource> & {
+declare type MeleeData = Omit<MeleeSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<MeleePF2e, "melee", MeleeSystemData, MeleeSource> & {
     flags: MeleeFlags;
 };
 declare type MeleeFlags = ItemFlagsPF2e & {
