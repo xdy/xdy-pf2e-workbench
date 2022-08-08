@@ -1,3 +1,15 @@
+# [4.0.0-beta.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.44.2...v4.0.0-beta.1) (2022-08-08)
+
+
+### Features
+
+* PF2e Workbench now requires Foundry V10 and PF2e 4.x ([96d6164](https://github.com/xdy/xdy-pf2e-workbench/commit/96d61646b2cb695858a4768f2b428ee0788e8f53))
+
+
+### BREAKING CHANGES
+
+* PF2e Workbench now requires Foundry V10 and PF2e 4.x, also, the World Special Effects settings and features have been removed, instead use the equivalent functionality in https://foundryvtt.com/packages/pf2e-jb2a-macros
+
 ## [3.44.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.44.0...v3.44.1) (2022-08-03)
 
 
