@@ -12,7 +12,7 @@ My current ideas (as in, no guarantee they'll ever actually get done) can be see
 
 ## Current features (order by setting section)
 
-** A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
+A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 
 * Mystification section
   * Enable NPC Mystification. Sets the name of a token on the current scene based on it's traits.
