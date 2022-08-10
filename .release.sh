@@ -4,7 +4,7 @@ BETA_REPLACE="\1download/v$1\3"
 
 sed -i -e 's|\(.*"version"\): "\(.*\)",.*|\1: '"\"$1\",|" module.json &&
     sed -i -r s"~$SEARCH_PATTERN~$BETA_REPLACE~" module.json &&
-    sed -i -r s"~$SEARCH_PATTERN~$MAIN_REPLACE~" module.json &&
+#    sed -i -r s"~$SEARCH_PATTERN~$MAIN_REPLACE~" module.json &&
     cp module.json dist &&
     sed -i -e 's|\(.*"version"\): "\(.*\)",.*|\1: '"\"$1\",|" package.json &&
     npm install &&
