@@ -1,3 +1,10 @@
+# [4.0.0-beta.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.4...v4.0.0-beta.5) (2022-08-10)
+
+
+### Bug Fixes
+
+* Had apparently forgotten to add system relationship to module.json. Added my discord while I was at it. ([5f2745c](https://github.com/xdy/xdy-pf2e-workbench/commit/5f2745c18fc3c3bce2d949ab9cff9d3801743ecd))
+
 # [4.0.0-beta.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2022-08-10)
 
 
