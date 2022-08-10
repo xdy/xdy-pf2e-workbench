@@ -9,7 +9,19 @@
     "maximum": "10"
   },
   "name": "xdy-pf2e-workbench",
-  "minimumCoreVersion": "10.277",
+  "relationship": {
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system",
+        "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
+        "compatibility": {
+          "minimum": "3.13.5",
+          "verified": "4.0.0"
+        }
+      }
+    ]
+  },
   "esmodules": [
     "xdy-pf2e-workbench.bundle.js"
   ],
@@ -81,6 +93,7 @@
     {
       "name": "Jonas Karlsson (xdy)",
       "url": "https://gnu.xdy.se/home",
+      "discord": "xdy#3735",
       "flags": {}
     }
   ],
