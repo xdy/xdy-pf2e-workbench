@@ -50,7 +50,7 @@ jobs:
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta' ) && github.repository == 'xdy/xdy-pf2e-workbench'
         runs-on: ubuntu-latest
         # Waits for test jobs for each Node.js version to complete
-        needs: [ test ]
+#        needs: [ test ]
         steps:
             -   name: Checkout
                 uses: actions/checkout@v3
