@@ -1,3 +1,11 @@
+# [4.0.0-beta.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.7...v4.0.0-beta.8) (2022-08-10)
+
+
+### Bug Fixes
+
+* Trying to fix download link. ([51b5627](https://github.com/xdy/xdy-pf2e-workbench/commit/51b5627833c764c58f8b9bf280bcd996337b67c4))
+* Trying to fix download link. ([919f2dd](https://github.com/xdy/xdy-pf2e-workbench/commit/919f2dd9bb05b405bc8b79e64dacc1618c9c656d))
+
 # [4.0.0-beta.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.6...v4.0.0-beta.7) (2022-08-10)
 
 
