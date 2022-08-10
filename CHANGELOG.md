@@ -1,3 +1,13 @@
+# [4.0.0-beta.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.3...v4.0.0-beta.4) (2022-08-10)
+
+
+### Bug Fixes
+
+* Comment out dependency on test. ([3968828](https://github.com/xdy/xdy-pf2e-workbench/commit/39688280621a5d30cb40f661725b6f75fd31289e))
+* Comment out test part of workflow as I keep running into secondary rate limits. Doesn't do anything useful anyway. ([6ebf80a](https://github.com/xdy/xdy-pf2e-workbench/commit/6ebf80a363bafc55ed4d51df581caad63828d45c))
+* Make codeql run on beta branch as it seems it'll be around for a while. ([910c44a](https://github.com/xdy/xdy-pf2e-workbench/commit/910c44a555acb014db47252021d03b2793ebd5c3))
+* Try to make the beta release installable. ([42c2cce](https://github.com/xdy/xdy-pf2e-workbench/commit/42c2ccea15e11aa57a7c15c62a00c10ffa882275))
+
 # [4.0.0-beta.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.2...v4.0.0-beta.3) (2022-08-10)
 
 
