@@ -2,9 +2,9 @@ import { PhysicalItemSheetPF2e } from "@item/physical/sheet";
 import { ArmorPF2e } from ".";
 export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
     getData(options?: Partial<DocumentSheetOptions>): Promise<{
-        sizes: Record<"med" | "tiny" | "sm" | "lg" | "huge" | "grg", string>;
         traits: import("@module/sheet/helpers").SheetOptions;
         otherTags: import("@module/sheet/helpers").SheetOptions;
+        hasDetails: boolean;
         armorPotencyRunes: {
             "1": string;
             "2": string;
@@ -160,6 +160,7 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
             day: string;
             P1W: string;
         };
+        sizes: Record<"med" | "tiny" | "sm" | "lg" | "huge" | "grg", string>;
         activations: {
             action: import("../physical/data").ItemActivation;
             id: string;
@@ -167,7 +168,6 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
         }[];
         itemType: string | null;
         hasSidebar: boolean;
-        hasDetails: boolean;
         sidebarTemplate?: (() => string) | undefined;
         detailsTemplate?: (() => string) | undefined;
         item: import("./data").ArmorData;

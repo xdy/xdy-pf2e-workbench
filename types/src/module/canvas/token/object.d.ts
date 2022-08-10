@@ -9,10 +9,6 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     constructor(document: TokenDocumentPF2e);
     /** The promise returned by the last call to `Token#draw()` */
     private drawLock?;
-    /** Is the user currently controlling this token? */
-    get isControlled(): boolean;
-    /** Is the user currently mouse-hovering this token? */
-    get isHovered(): boolean;
     /** Is this token currently moving? */
     get isMoving(): boolean;
     /** Is this token emitting light with a negative value */

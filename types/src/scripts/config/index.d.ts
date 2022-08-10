@@ -577,6 +577,7 @@ export declare const PF2ECONFIG: {
         backstabber: string;
         backswing: string;
         bomb: string;
+        brutal: string;
         "capacity-3": string;
         "capacity-4": string;
         "capacity-5": string;
@@ -1905,7 +1906,6 @@ export declare const PF2ECONFIG: {
         tiefling: string;
     };
     npcAttackTraits: {
-        brutal: string;
         curse: string;
         "reach-0": string;
         "reach-10": string;
@@ -2002,6 +2002,7 @@ export declare const PF2ECONFIG: {
         backstabber: string;
         backswing: string;
         bomb: string;
+        brutal: string;
         "capacity-3": string;
         "capacity-4": string;
         "capacity-5": string;

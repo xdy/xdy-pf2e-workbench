@@ -6,6 +6,9 @@ export declare class EquipmentSheetPF2e extends PhysicalItemSheetPF2e<EquipmentP
     getData(options?: Partial<DocumentSheetOptions>): Promise<EquipmentSheetData>;
 }
 interface EquipmentSheetData extends PhysicalItemSheetData<EquipmentPF2e> {
+    bulkTypes: ConfigPF2e["PF2E"]["bulkTypes"];
+    stackGroups: ConfigPF2e["PF2E"]["stackGroups"];
+    traits: SheetOptions;
     otherTags: SheetOptions;
 }
 export {};

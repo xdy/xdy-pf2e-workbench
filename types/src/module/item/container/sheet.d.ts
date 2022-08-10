@@ -7,7 +7,6 @@ export declare class ContainerSheetPF2e extends PhysicalItemSheetPF2e<ContainerP
 }
 interface ContainerSheetData extends PhysicalItemSheetData<ContainerPF2e> {
     bulkTypes: ConfigPF2e["PF2E"]["bulkTypes"];
-    sizes: ConfigPF2e["PF2E"]["actorSizes"];
     traits: SheetOptions;
 }
 export {};

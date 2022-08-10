@@ -512,6 +512,7 @@ declare const weaponTraits: {
     backstabber: string;
     backswing: string;
     bomb: string;
+    brutal: string;
     "capacity-3": string;
     "capacity-4": string;
     "capacity-5": string;
@@ -708,7 +709,6 @@ declare const otherArmorTags: Record<OtherArmorTag, string>;
 declare const otherEquipmentTags: Record<OtherEquipmentTag, string>;
 declare const otherWeaponTags: Record<OtherWeaponTag, string>;
 declare const npcAttackTraits: {
-    brutal: string;
     curse: string;
     "reach-0": string;
     "reach-10": string;
@@ -805,6 +805,7 @@ declare const npcAttackTraits: {
     backstabber: string;
     backswing: string;
     bomb: string;
+    brutal: string;
     "capacity-3": string;
     "capacity-4": string;
     "capacity-5": string;
