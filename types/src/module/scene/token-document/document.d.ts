@@ -8,7 +8,7 @@ import { TokenAura } from "./aura";
 import { ActorSourcePF2e } from "@actor/data";
 declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
     /** Has this token gone through at least one cycle of data preparation? */
-    private initialized;
+    private initialized?;
     auras: Map<string, TokenAura>;
     /** Filter trackable attributes for relevance and avoidance of circular references */
     static getTrackedAttributes(data?: Record<string, unknown>, _path?: string[]): TokenAttributes;

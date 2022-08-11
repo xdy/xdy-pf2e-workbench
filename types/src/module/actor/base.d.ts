@@ -167,7 +167,7 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
      * @return The target item, if the transfer is successful, or otherwise `null`.
      */
     transferItemToActor(targetActor: ActorPF2e, item: Embedded<ItemPF2e>, quantity: number, containerId?: string, newStack?: boolean): Promise<Embedded<PhysicalItemPF2e> | null>;
-    addToInventory(itemData: PhysicalItemSource, container?: Embedded<ContainerPF2e>, newStack?: boolean): Promise<Embedded<PhysicalItemPF2e> | null>;
+    addToInventory(itemSource: PhysicalItemSource, container?: Embedded<ContainerPF2e>, newStack?: boolean): Promise<Embedded<PhysicalItemPF2e> | null>;
     /** Find an item already owned by the actor that can stack with the to-be-transferred item */
     findStackableItem(actor: ActorPF2e, itemData: ItemSourcePF2e): Embedded<PhysicalItemPF2e> | null;
     /**

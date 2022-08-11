@@ -31,6 +31,7 @@ import {
     TileDocumentPF2e,
     TokenDocumentPF2e,
 } from "@module/scene";
+import { ConditionManager } from "@module/system/conditions";
 import { UserPF2e } from "@module/user";
 import { StatusEffects } from "@scripts/actor/status-effects";
 import { PF2ECONFIG, StatusEffectIconTheme } from "@scripts/config";
@@ -48,7 +49,6 @@ import type { HomebrewSettingsKey, HomebrewTag } from "@system/settings/homebrew
 import { TextEditorPF2e } from "@system/text-editor";
 import { sluggify } from "@util";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
-import { ConditionManager } from "@module/system/conditions";
 
 declare global {
     interface Game {

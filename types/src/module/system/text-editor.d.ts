@@ -3,6 +3,13 @@ import { ItemPF2e } from "@item";
 import { UserVisibility } from "@scripts/ui/user-visibility";
 /** Censor enriched HTML according to metagame knowledge settings */
 declare class TextEditorPF2e extends TextEditor {
+    #private;
+    static enrichHTML(content?: string, options?: EnrichHTMLOptionsPF2e & {
+        async?: false;
+    }): string;
+    static enrichHTML(content?: string, options?: EnrichHTMLOptionsPF2e & {
+        async: true;
+    }): Promise<string>;
     static enrichHTML(content?: string, options?: EnrichHTMLOptionsPF2e): string;
     static enrichString(data: string, options?: EnrichHTMLOptionsPF2e): string;
     /**
