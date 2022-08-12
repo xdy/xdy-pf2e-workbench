@@ -5,9 +5,9 @@
  * Software License: Apache 2.0
  */
 
-//TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
-//TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
-//TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
+// TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
+// TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
+// TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
 import { preloadTemplates } from "./preloadTemplates";
 import { registerWorkbenchSettings } from "./settings";
 import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
@@ -62,12 +62,12 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     await preloadTemplates();
 
-    //Handlebars helpers
+    // Handlebars helpers
     Handlebars.registerHelper("ifeq", function (v1, v2, options) {
         return v1 === v2 ? options.fn(this) : options.inverse(this);
     });
 
-    //Hooks that always run
+    // Hooks that always run
     Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
         toggleMenuSettings(html, _settings);
     });
@@ -76,7 +76,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         toggleSettings(html);
     });
 
-    //Hooks that only run if a setting that needs it has been enabled
+    // Hooks that only run if a setting that needs it has been enabled
 
     if (game.settings.get(MODULENAME, "castPrivateSpell")) {
         Hooks.on(
@@ -86,7 +86,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     game.settings.get(MODULENAME, "castPrivateSpell") &&
                     message.flags.pf2e?.casting?.id &&
                     (!message.data.whisper || message.data.whisper.length === 0) &&
-                    game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) //TODO Doesn't work on mac?
+                    game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) // TODO Doesn't work on mac?
                 ) {
                     data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
                     data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
@@ -97,7 +97,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
                     if (
                         game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessage") &&
-                        !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT) //TODO Doesn't work on mac?
+                        !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT) // TODO Doesn't work on mac?
                     ) {
                         const vsmf = <string>(
                             message.content
@@ -199,7 +199,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 {
                                     skill: skill,
                                     dcRK: dcRK,
-                                    rk: "&#123;Recall Knowledge	&#125;", //Grr
+                                    rk: "&#123;Recall Knowledge	&#125;", // Grr
                                 }
                             );
                         } else {
@@ -424,7 +424,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     increaseDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
                         console.log("Workbench increaseDyingOnZeroHP complete");
                         if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-                            //Ugh.
+                            // Ugh.
                             new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
                                 removeDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
                                     console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete")
@@ -546,7 +546,7 @@ Hooks.once("setup", async () => {
 
     registerWorkbenchKeybindings();
 
-    //General module setup
+    // General module setup
 
     if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
         game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
@@ -568,7 +568,7 @@ Hooks.once("setup", async () => {
 });
 
 async function migrateFeatures() {
-    //Currently only flat check notes
+    // Currently only flat check notes
     // @ts-ignore - no type definition for this yet
     const moduleVersion = game.modules.get(MODULENAME)?.version;
     const worldVersion = game.settings.get(MODULENAME, "workbenchVersion");
@@ -592,7 +592,7 @@ async function migrateFeatures() {
                 for (const t of s.tokens) {
                     const actor = t.actor;
                     if (!actor || t.isLinked) {
-                        //Ignore tokens with no actor as well as linked tokens (they have been handled above).
+                        // Ignore tokens with no actor as well as linked tokens (they have been handled above).
                         continue;
                     }
                     const filter = actor.items.filter((item) => item.name.startsWith("Workbench Flat Check Notes"));

@@ -15,7 +15,7 @@ let TRAITS: {
 async function fixesPreAndPost(settingkey: string): Promise<string> {
     const fixSetting = game.settings.get(MODULENAME, settingkey);
 
-    //"null" check is due to a previous bug that may have left invalid data in text fields
+    // "null" check is due to a previous bug that may have left invalid data in text fields
     if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
         const draw = await game?.tables?.find((table) => table.name === fixSetting)?.draw({ displayChat: false });
         if (draw && draw?.results[0]) {
@@ -97,7 +97,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
             .filter((trait: string) => !TRAITS.ALIGNMENTS.includes(trait));
     }
 
-    //Deduplicate using set
+    // Deduplicate using set
     return Array.from(
         new Set(
             [prefix]

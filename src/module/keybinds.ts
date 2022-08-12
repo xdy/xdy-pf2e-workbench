@@ -82,7 +82,7 @@ export function registerWorkbenchKeybindings() {
         },
     });
 
-    //Move combatant
+    // Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.name`,
         hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
@@ -99,7 +99,7 @@ export function registerWorkbenchKeybindings() {
         },
     });
 
-    //Mystification
+    // Mystification
     keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
         name: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.name`,
         hint: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.hint`,
@@ -123,7 +123,7 @@ export function registerWorkbenchKeybindings() {
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
 
-    //Macro keybinds
+    // Macro keybinds
     for (let page = 1; page <= 5; page++) {
         for (let column = 1; column <= 10; column++) {
             keybindings.register(MODULENAME, `callHotbarPage${page}Macro${column}`, {

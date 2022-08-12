@@ -1,4 +1,4 @@
-//These usecases should be handled
+// These usecases should be handled
 // * Show a new handler, set timeout to 60, ignore on the first, none on the second
 // * Check on an existing timer, recalc timeout, ignore on the first, none on the second
 // * Timeout, recalc timeout, ignore on the first, random on the second
@@ -141,10 +141,10 @@ export async function heroPointHandler(state: HPHState) {
 }
 
 async function buildHtml(remainingMinutes: number, state: HPHState) {
-    //TODO How to start using bootstrap? (I use bootstrap classes in the html).
-    //TODO Extract to a handlebars template
+    // TODO How to start using bootstrap? (I use bootstrap classes in the html).
+    // TODO Extract to a handlebars template
 
-    //TODO Get user name, add within parentheses after actor name
+    // TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
 
     const characters =

@@ -20,8 +20,8 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
         options.classes.push("settings-menu");
 
         return mergeObject(options, {
-            title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, //lgtm [js/mixed-static-instance-this-access]
-            id: `${this.namespace}-settings`, //lgtm [js/mixed-static-instance-this-access]
+            title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
+            id: `${this.namespace}-settings`, // lgtm [js/mixed-static-instance-this-access]
             template: `modules/xdy-pf2e-workbench/templates/menu.html`,
             width: 650,
             height: "auto",
@@ -51,9 +51,9 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
 
     static registerSettingsAndCreateMenu(icon, restricted = true) {
         game.settings.registerMenu(MODULENAME, this.namespace, {
-            name: `${MODULENAME}.SETTINGS.${this.namespace}.name`, //lgtm [js/mixed-static-instance-this-access]
-            label: `${MODULENAME}.SETTINGS.${this.namespace}.label`, //lgtm [js/mixed-static-instance-this-access]
-            hint: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, //lgtm [js/mixed-static-instance-this-access]
+            name: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
+            label: `${MODULENAME}.SETTINGS.${this.namespace}.label`, // lgtm [js/mixed-static-instance-this-access]
+            hint: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, // lgtm [js/mixed-static-instance-this-access]
             icon: icon,
             type: this,
             restricted: restricted,
@@ -78,14 +78,14 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
         });
         return mergeObject(super.getData(), {
             settings: templateData,
-            instructions: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, //lgtm [js/mixed-static-instance-this-access]
+            instructions: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, // lgtm [js/mixed-static-instance-this-access]
         });
     }
 
     protected override async _updateObject(_event: Event, data: Record<string, unknown>): Promise<void> {
         for (const key of Object.keys(data)) {
             let datum = data[key];
-            //"null" check is due to a previous bug that may have left invalid data in text fields
+            // "null" check is due to a previous bug that may have left invalid data in text fields
             if (datum === null || datum === "null") {
                 datum = "";
             }

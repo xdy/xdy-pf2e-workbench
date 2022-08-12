@@ -23,7 +23,7 @@
     ]
   },
   "esmodules": [
-    "xdy-pf2e-workbench.bundle.js"
+    "main.bundle.js"
   ],
   "scripts": [
     "./lib/tooltipster.bundle.min.js"

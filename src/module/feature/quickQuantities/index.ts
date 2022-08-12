@@ -1,4 +1,4 @@
-//This file has been changed by me, the original copyright statement is given unchanged below. Original file can be found at https://github.com/Djphoenix719/FVTT-PF2EToolbox/blob/master/src/module/features/QuickQuantities.ts
+// This file has been changed by me, the original copyright statement is given unchanged below. Original file can be found at https://github.com/Djphoenix719/FVTT-PF2EToolbox/blob/master/src/module/features/QuickQuantities.ts
 
 /*
  * Copyright 2021 Andrew Cuccinello

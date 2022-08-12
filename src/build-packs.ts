@@ -1,4 +1,4 @@
-//This script has been dreadfully hacked from the original at https://github.com/CarlosFdez/pf2e-persistent-damage/blob/master/build-packs.ts and is, like the original, provided under the [ISC license](https://www.isc.org/licenses/)
+// This script has been dreadfully hacked from the original at https://github.com/CarlosFdez/pf2e-persistent-damage/blob/master/build-packs.ts and is, like the original, provided under the [ISC license](https://www.isc.org/licenses/)
 
 import fs from "fs-extra";
 import path from "path";
@@ -11,7 +11,7 @@ function copyFolder(source: string, target: string) {
             const sourcePath = decodeURIComponent(path.join(source, file));
             const targetPath = decodeURIComponent(path.join(target, file));
             fs.copyFileSync(sourcePath, targetPath);
-            //Log last part of path
+            // Log last part of path
             console.log(`Copied ${path.basename(targetPath)}`);
             // eslint-disable-next-line
             fs.appendFileSync(targetPath, `\n//# source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(path.dirname(sourcePath))}/${file}" - Fetched on ${new Date().toISOString()}`);

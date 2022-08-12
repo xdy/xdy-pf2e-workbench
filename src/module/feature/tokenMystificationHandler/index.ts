@@ -38,7 +38,7 @@ export async function buildTokenName(
             } else {
                 if (addRandom && !shouldSkipRandomNumber(token)) {
                     let rolled = Math.floor(Math.random() * 100) + 1;
-                    //Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
+                    // Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
                     if (canvas?.scene?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
                         rolled = Math.floor(Math.random() * 100) + 1;
                     }
@@ -48,7 +48,7 @@ export async function buildTokenName(
         }
     }
 
-    //Never return an empty string
+    // Never return an empty string
     return tokenName === "" ? <string>game.settings.get(MODULENAME, "npcMystifierNoMatch") : tokenName;
 }
 
@@ -93,7 +93,7 @@ export async function doMystification(token: TokenPF2e, active: boolean) {
         return;
     }
 
-    //define array of objects to be updated
+    // define array of objects to be updated
     const updates = [
         {
             _id: <string>token.id,

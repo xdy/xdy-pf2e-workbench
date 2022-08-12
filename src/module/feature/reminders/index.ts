@@ -183,7 +183,7 @@ export async function reminderIWR(message: ChatMessagePF2e) {
             }
             if (damageTypes.length > 0) {
                 const traits = target.actor?.system.traits;
-                //Filter traits that are in damageTypes
+                // Filter traits that are in damageTypes
                 const diTypes =
                     traits?.di?.value
                         .filter((value: string) => {

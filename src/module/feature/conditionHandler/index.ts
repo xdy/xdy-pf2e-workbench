@@ -177,10 +177,10 @@ function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
 
 export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
     const actor = <ActorPF2e>item.parent;
-    const bounceBack = actor.items.find((feat) => feat.slug === "bounce-back"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1441
+    const bounceBack = actor.items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
     const bounceBackUsed: any = actor.items.find((effect) => effect.slug === "bounce-back-used") ?? false;
 
-    const numbToDeath = actor.items.find((feat) => feat.slug === "numb-to-death"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1182
+    const numbToDeath = actor.items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
     const numbToDeathUsed: any = actor.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
     if (item.slug === "dying" && isFirstGM()) {
         if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {

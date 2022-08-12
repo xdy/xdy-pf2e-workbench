@@ -7,7 +7,6 @@ import * as process from "process";
 import glob from "glob";
 import webpack from "webpack";
 import { Configuration as WebpackDevServerConfiguration, Request } from "webpack-dev-server";
-// eslint-disable-next-line import/default
 import CopyPlugin from "copy-webpack-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
@@ -41,7 +40,7 @@ const [outDir, foundryUri] = ((): [string, string] => {
     const config = fs.readJSONSync(configPath, { throws: false });
     const outDir =
         config instanceof Object
-            ? path.join(config.dataPath, "Data", "systems", config.systemName ?? "xdy-pf2e-workbench")
+            ? path.join(config.dataPath, "Data", "modules", config.systemName ?? "xdy-pf2e-workbench")
             : path.join(__dirname, "dist/");
     const foundryUri = (config instanceof Object ? String(config.foundryUri) : "") ?? "http://localhost:30000";
     return [outDir, foundryUri];
@@ -62,25 +61,25 @@ class EmptyStaticFilesPlugin {
 type Optimization = Configuration["optimization"];
 const optimization: Optimization = isProductionBuild
     ? {
-        minimize: true,
-        minimizer: [
-            new TerserPlugin({ terserOptions: { mangle: false, module: true, keep_classnames: true } }),
-            new CssMinimizerPlugin(),
-        ],
-        splitChunks: {
-            chunks: "all",
-            cacheGroups: {
-                default: {
-                    name: "xdy-pf2e-workbench",
-                    test: "src/module/xdy-pf2e-workbench.ts",
-                },
-                vendor: {
-                    name: "vendor",
-                    test: /node_modules/,
-                },
-            },
-        },
-    }
+          minimize: true,
+          minimizer: [
+              new TerserPlugin({ terserOptions: { mangle: false, module: true, keep_classnames: true } }),
+              new CssMinimizerPlugin(),
+          ],
+          splitChunks: {
+              chunks: "all",
+              cacheGroups: {
+                  default: {
+                      name: "xdy-pf2e-workbench",
+                      test: "src/module/xdy-pf2e-workbench.ts",
+                  },
+                  vendor: {
+                      name: "vendor",
+                      test: /node_modules/,
+                  },
+              },
+          },
+      }
     : undefined;
 
 const config: Configuration = {
@@ -93,13 +92,13 @@ const config: Configuration = {
         rules: [
             !isProductionBuild
                 ? {
-                    test: /\.html$/,
-                    loader: "raw-loader",
-                }
+                      test: /\.html$/,
+                      loader: "raw-loader",
+                  }
                 : {
-                    test: /\.html$/,
-                    loader: "null-loader",
-                },
+                      test: /\.html$/,
+                      loader: "null-loader",
+                  },
             {
                 test: /\.ts$/,
                 use: [
@@ -183,7 +182,7 @@ const config: Configuration = {
                 { from: "module.json" },
                 {
                     from: "packs/**",
-                    noErrorOnMissing: true
+                    noErrorOnMissing: true,
                 },
                 {
                     from: "static/",
@@ -202,13 +201,13 @@ const config: Configuration = {
     ],
     resolve: {
         alias: {
-            "@actor": path.resolve(__dirname, "src/module/actor"),
-            "@item": path.resolve(__dirname, "src/module/item"),
-            "@module": path.resolve(__dirname, "src/module"),
-            "@scene": path.resolve(__dirname, "src/module/scene"),
-            "@scripts": path.resolve(__dirname, "src/scripts"),
-            "@system": path.resolve(__dirname, "src/module/system"),
-            "@util": path.resolve(__dirname, "src/util"),
+            "@actor": path.resolve(__dirname, "types/src/module/actor"),
+            "@item": path.resolve(__dirname, "types/src/module/item"),
+            "@module": path.resolve(__dirname, "types/src/module"),
+            "@scene": path.resolve(__dirname, "types/src/module/scene"),
+            "@scripts": path.resolve(__dirname, "types/src/scripts"),
+            "@system": path.resolve(__dirname, "types/src/module/system"),
+            "@util": path.resolve(__dirname, "types/src/util"),
         },
         extensions: [".ts", ".js"],
     },
@@ -216,7 +215,6 @@ const config: Configuration = {
         clean: true,
         path: outDir,
         filename: "[name].bundle.js",
-        publicPath: "/modules/[name]",
     },
 };
 

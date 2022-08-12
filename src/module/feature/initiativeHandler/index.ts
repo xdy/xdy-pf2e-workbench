@@ -2,8 +2,8 @@ import { ActorPF2e } from "@actor";
 import { shouldIHandleThis } from "../../utils";
 
 export async function moveSelectedAheadOfCurrent(selectedCombatantId): Promise<void> {
-    //TODO Ugly hack, might want to do a PR to expose the code in encounter-tracker#setInitiativeFromDrop?
-    //TODO Handle moving several tokens at once? For now, just take the first selected token.
+    // TODO Ugly hack, might want to do a PR to expose the code in encounter-tracker#setInitiativeFromDrop?
+    // TODO Handle moving several tokens at once? For now, just take the first selected token.
     const combat = game?.combat;
     if (combat && selectedCombatantId && selectedCombatantId !== combat?.combatant?.id) {
         const previous = combat?.combatants

@@ -16,13 +16,13 @@ async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolea
         }
         if (token && item && actor) {
             if (
-                //Reverse of the check in the pf2-flat-check module
+                // Reverse of the check in the pf2-flat-check module
                 (["ancestry", "effect", "feat", "melee", "weapon"].includes(item.type) &&
                     message.isRoll &&
                     !message.isDamageRoll) ||
                 (item.type === "spell" && !message.isRoll)
             ) {
-                await new Promise((resolve) => setTimeout(resolve, 100)); //Sleep to wait for flat check message
+                await new Promise((resolve) => setTimeout(resolve, 100)); // Sleep to wait for flat check message
                 const array = Array.from(game.messages);
                 const messageIndex = array.findIndex((msg) => msg.id === message.id);
                 if (messageIndex > -1) {
@@ -50,7 +50,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
     ) {
         const flags = <ActorFlagsPF2e>message.flags.pf2e;
         const originUuid = <string>flags?.origin?.uuid;
-        //Exit early if no originUuid is found.
+        // Exit early if no originUuid is found.
         if (originUuid) {
             const autoRollDamageForStrike = game.settings.get(MODULENAME, "autoRollDamageForStrike");
             const autoRollDamageForSpellAttack = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
@@ -105,7 +105,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             })
                         );
                     }
-                    //Hack to make automatic damageRoll be private if the spell is private. Ain't globals fun?
+                    // Hack to make automatic damageRoll be private if the spell is private. Ain't globals fun?
                     let originalRollMode: any;
                     try {
                         originalRollMode = game.settings.get("core", "rollMode");
@@ -115,11 +115,11 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         ) {
                             game.settings.set("core", "rollMode", CONST.DICE_ROLL_MODES.PRIVATE);
                         }
-                        const rollDamage = await noOrSuccessfulFlatcheck(message); //Can't be inlined
+                        const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
                         if (rollDamage) {
-                            //Until spell level flags are added to attack rolls it is the best I could come up with.
-                            //fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
-                            //@ts-ignore
+                            // Until spell level flags are added to attack rolls it is the best I could come up with.
+                            // fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
+                            // @ts-ignore
                             origin?.rollDamage({
                                 currentTarget: {
                                     closest: () => {
@@ -129,7 +129,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             });
                         }
                     } finally {
-                        //Make sure to restore original roll mode
+                        // Make sure to restore original roll mode
                         if (originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) {
                             game.settings.set("core", "rollMode", originalRollMode);
                         }
@@ -140,7 +140,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     const actions = messageActor?.system?.actions;
                     const actionIds = originUuid.match(/Item.(\w+)/);
                     if (actions && actionIds && actionIds[1]) {
-                        const rollDamage = await noOrSuccessfulFlatcheck(message); //Can't be inlined
+                        const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
                         if (rollDamage) {
                             const action = getActionFromMessage(actions, actionIds, message);
                             if (degreeOfSuccess === "success") {
@@ -217,21 +217,21 @@ function getActionFromMessage(actions: any, actionIds: RegExpMatchArray, message
     });
     const itemStrikes = strikes.filter((a: { item: { id: any } }) => a.item.id === actionIds[1]);
     if (itemStrikes.length === 1) {
-        //Normal case
+        // Normal case
         return itemStrikes[0];
     } else if (itemStrikes.length > 1) {
-        //The strike is most likely based on an RE which means that all actions get the same item id (e.g. animal form), try to regex it out of the message instead
+        // The strike is most likely based on an RE which means that all actions get the same item id (e.g. animal form), try to regex it out of the message instead
         const strike = game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`);
         const s = `<h4 class="action">(.*?)${strike}: (.*?)<`;
         const strikeName = message.flavor?.match(s);
         if (strikeName && strikeName[2]) {
             return strikes.find((a: { name: string }) => a.name === strikeName[2]);
         } else {
-            //If we can't find the strike name, give up.
+            // If we can't find the strike name, give up.
             return null;
         }
     } else {
-        //If we can't find the strike, give up.
+        // If we can't find the strike, give up.
         return null;
     }
 }
