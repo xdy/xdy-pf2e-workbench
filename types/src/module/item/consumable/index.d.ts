@@ -1,14 +1,11 @@
 import { ConsumableData, ConsumableType } from "./data";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
+import { ValueAndMax } from "@module/data";
 declare class ConsumablePF2e extends PhysicalItemPF2e {
     get consumableType(): ConsumableType;
     get isAmmunition(): boolean;
-    get charges(): {
-        value: number;
-        current: number;
-        max: number;
-    };
+    get uses(): ValueAndMax;
     /** Should this item be automatically destroyed upon use */
     get autoDestroy(): boolean;
     get embeddedSpell(): Embedded<SpellPF2e> | null;
