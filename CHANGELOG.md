@@ -1,3 +1,10 @@
+# [4.0.0-beta.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.11...v4.0.0-beta.12) (2022-08-12)
+
+
+### Bug Fixes
+
+* Update to foundry v10 and pf2e v4 types. (And, patched in filepicker). ([3e90fbd](https://github.com/xdy/xdy-pf2e-workbench/commit/3e90fbd084ceea941c75dff79fd2c7f0bbb63fb6))
+
 # [4.0.0-beta.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.10...v4.0.0-beta.11) (2022-08-12)
 
 
