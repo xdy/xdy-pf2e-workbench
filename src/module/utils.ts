@@ -10,6 +10,7 @@ export function shouldIHandleThisMessage(message: ChatMessagePF2e, playerConditi
     } else if (game.user?.isGM && gmCondition && amIMessageSender) {
         return true;
     }
+    return false;
 }
 
 export function nth(n) {

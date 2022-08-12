@@ -59,7 +59,7 @@ class CreatureBuilder extends FormApplication {
         defaultValues: new Map(),
     };
 
-    static get defaultOptions() {
+    static override get defaultOptions() {
         const options = super.defaultOptions;
         options.title = "Creature Builder";
         options.template = `modules/xdy-pf2e-workbench/templates/feature/creature-builder/index.html`;
@@ -70,7 +70,7 @@ class CreatureBuilder extends FormApplication {
         return options;
     }
 
-    getData(options?: any): any {
+    override getData(options?: any): any {
         const renderData = super.getData(options);
 
         const statisticCategories = this.statisticCategories;
@@ -107,7 +107,7 @@ class CreatureBuilder extends FormApplication {
         return entry.name !== undefined ? entry.name : parentCategory.name;
     }
 
-    protected async _updateObject(event: Event | JQuery.Event, formData: any): Promise<any> {
+    protected async _updateObject(_event, formData: any): Promise<any> {
         const level = formData[CREATURE_LEVEL_FIELD];
 
         const newFormData = {};
@@ -294,7 +294,7 @@ class CreatureBuilder extends FormApplication {
         };
     }
 
-    activateListeners(html) {
+    override activateListeners(html) {
         super.activateListeners(html);
 
         html.find(".apply-road-map").on("click", (ev) => {

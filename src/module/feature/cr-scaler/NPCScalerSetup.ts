@@ -19,7 +19,7 @@ import { ActorPF2e, NPCPF2e } from "@actor";
 
 export const setupNPCScaler = () => Hooks.on("getActorDirectoryEntryContext", onScaleNPCContextHook);
 
-function onScaleNPCContextHook(html: JQuery, buttons: any[]) {
+function onScaleNPCContextHook(_html, buttons: any[]) {
     if (game.user?.isGM) {
         buttons.unshift({
             name: "Scale to Level",

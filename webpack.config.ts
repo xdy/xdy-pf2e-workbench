@@ -5,7 +5,7 @@ import * as os from "os";
 import * as path from "path";
 import * as process from "process";
 import glob from "glob";
-import { Configuration as WebpackConfiguration, DefinePlugin } from "webpack";
+import webpack from "webpack";
 import { Configuration as WebpackDevServerConfiguration, Request } from "webpack-dev-server";
 // eslint-disable-next-line import/default
 import CopyPlugin from "copy-webpack-plugin";
@@ -18,7 +18,7 @@ import SimpleProgressWebpackPlugin from "simple-progress-webpack-plugin";
 const buildMode = process.argv[3] === "production" ? "production" : "development";
 const isProductionBuild = buildMode === "production";
 
-interface Configuration extends Omit<WebpackConfiguration, "devServer"> {
+interface Configuration extends Omit<webpack.Configuration, "devServer"> {
     devServer?: Omit<WebpackDevServerConfiguration, "proxy"> & {
         // the types in typescript are wrong for this, so we're doing it live here.
         proxy?: {
@@ -29,29 +29,44 @@ interface Configuration extends Omit<WebpackConfiguration, "devServer"> {
     };
 }
 
-const allTemplates = () => {
+const allTemplates = (): string => {
     return glob
         .sync("**/*.html", { cwd: path.join(__dirname, "static/templates") })
         .map((file: string) => `"systems/pf2e/templates/${file}"`)
         .join(", ");
 };
 
-const [outDir, foundryUri] = (() => {
+const [outDir, foundryUri] = ((): [string, string] => {
     const configPath = path.resolve(process.cwd(), "foundryconfig.json");
     const config = fs.readJSONSync(configPath, { throws: false });
     const outDir =
         config instanceof Object
-            ? path.join(config.dataPath, "Data", "modules", "xdy-pf2e-workbench")
+            ? path.join(config.dataPath, "Data", "systems", config.systemName ?? "xdy-pf2e-workbench")
             : path.join(__dirname, "dist/");
-    const foundryUri = (config instanceof Object ? config.foundryUri : "") ?? "http://localhost:30000";
+    const foundryUri = (config instanceof Object ? String(config.foundryUri) : "") ?? "http://localhost:30000";
     return [outDir, foundryUri];
 })();
+
+/** Create an empty static files when in dev mode to keep the Foundry server happy */
+class EmptyStaticFilesPlugin {
+    apply(compiler: webpack.Compiler): void {
+        compiler.hooks.afterEmit.tap("EmptyStaticFilesPlugin", (): void => {
+            if (!isProductionBuild) {
+                fs.closeSync(fs.openSync(path.resolve(outDir, "styles/tinymce.css"), "w"));
+                fs.closeSync(fs.openSync(path.resolve(outDir, "vendor.bundle.js"), "w"));
+            }
+        });
+    }
+}
 
 type Optimization = Configuration["optimization"];
 const optimization: Optimization = isProductionBuild
     ? {
         minimize: true,
-        minimizer: [new TerserPlugin({ terserOptions: { mangle: false, module: true } }), new CssMinimizerPlugin()],
+        minimizer: [
+            new TerserPlugin({ terserOptions: { mangle: false, module: true, keep_classnames: true } }),
+            new CssMinimizerPlugin(),
+        ],
         splitChunks: {
             chunks: "all",
             cacheGroups: {
@@ -116,10 +131,6 @@ const config: Configuration = {
             },
             {
                 test: /\.css$/i,
-                use: ["style-loader", "css-loader"]
-            },
-            {
-                test: /nouislider\.min\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
@@ -128,6 +139,10 @@ const config: Configuration = {
                             url: false,
                             sourceMap: true,
                         },
+                    },
+                    {
+                        loader: "style-loader",
+                        options: { sourceMap: true },
                     },
                 ],
             },
@@ -160,7 +175,7 @@ const config: Configuration = {
     },
     plugins: [
         new ForkTsCheckerWebpackPlugin(),
-        new DefinePlugin({
+        new webpack.DefinePlugin({
             BUILD_MODE: JSON.stringify(buildMode),
         }),
         new CopyPlugin({
@@ -183,14 +198,25 @@ const config: Configuration = {
         }),
         new MiniCssExtractPlugin({ filename: "styles/[name].css" }),
         new SimpleProgressWebpackPlugin({ format: "compact" }),
+        new EmptyStaticFilesPlugin(),
     ],
     resolve: {
-        extensions: [".ts", ".d.ts"],
+        alias: {
+            "@actor": path.resolve(__dirname, "src/module/actor"),
+            "@item": path.resolve(__dirname, "src/module/item"),
+            "@module": path.resolve(__dirname, "src/module"),
+            "@scene": path.resolve(__dirname, "src/module/scene"),
+            "@scripts": path.resolve(__dirname, "src/scripts"),
+            "@system": path.resolve(__dirname, "src/module/system"),
+            "@util": path.resolve(__dirname, "src/util"),
+        },
+        extensions: [".ts", ".js"],
     },
     output: {
         clean: true,
         path: outDir,
-        filename: "xdy-pf2e-workbench.bundle.js",
+        filename: "[name].bundle.js",
+        publicPath: "/modules/[name]",
     },
 };
 

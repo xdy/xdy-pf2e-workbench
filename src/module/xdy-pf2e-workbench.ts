@@ -390,7 +390,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
 
     if (game.settings.get(MODULENAME, "npcMystifier")) {
-        Hooks.on("renderTokenHUD", (app: TokenHUD, html: JQuery, data: any) => {
+        Hooks.on("renderTokenHUD", (_app, html: JQuery, data: any) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
                 renderNameHud(data, html);
             }
@@ -467,15 +467,15 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (game.settings.get(MODULENAME, "castPrivateSpell")) {
-                $html.find(".cast-spell").each((i, e) => {
+                $html.find(".cast-spell").each((_i, e) => {
                     const $e = $(e);
                     $e.addClass(`xdy-pf2e-workbench-secret-spell`);
                 });
             }
 
             if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
-                $html.find(".item").each((i, e) => {
-                    $(e).each((i, e) => {
+                $html.find(".item").each((_i, e) => {
+                    $(e).each((_i, e) => {
                         const rarity = $(e).attr("data-item-rarity");
                         const mystified = $(e).find("span").hasClass("gm-mystified-data");
                         if (rarity && !mystified) {
@@ -486,11 +486,11 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (game.user?.isGM && game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
-                $html.find(".recall-knowledge").each((i, e) => {
+                $html.find(".recall-knowledge").each((_i, e) => {
                     const token = sheet.token;
                     $(e)
                         .find(".section-body")
-                        .each((i, e) => {
+                        .each((_i, e) => {
                             const $e = $(e);
                             if ($e.find(".identification-skills").length === 0) {
                                 return;

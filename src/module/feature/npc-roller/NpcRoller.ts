@@ -69,7 +69,7 @@ export async function setupNpcRoller() {
     registerHandlebarsHelpers();
 }
 
-function enableNpcRollerButton(app: Application, html: JQuery) {
+function enableNpcRollerButton(_app, html: JQuery) {
     const button = $(
         `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npc-roller.button-label`)}</button>`
     );
@@ -90,7 +90,7 @@ class NpcRoller extends Application {
         Hooks.on("controlToken", this.#onControlToken.bind(this));
     }
 
-    static get defaultOptions(): ApplicationOptions {
+    static override get defaultOptions(): ApplicationOptions {
         const options = super.defaultOptions;
         return {
             ...options,
@@ -109,7 +109,7 @@ class NpcRoller extends Application {
         };
     }
 
-    getData(options?: any): any {
+    override getData(options?: any): any {
         const data = super.getData(options);
 
         data["data"] = {
@@ -123,7 +123,7 @@ class NpcRoller extends Application {
         return data;
     }
 
-    activateListeners(html: JQuery<HTMLElement>): void {
+    override activateListeners(html: JQuery<HTMLElement>): void {
         super.activateListeners(html);
 
         html.find("button.rollable").on("click", this.#handleRollButtonClick);
@@ -157,7 +157,7 @@ class NpcRoller extends Application {
         }
     }
 
-    close(): Promise<void> {
+    override close(): Promise<void> {
         Hooks.off("controlToken", this.#onControlToken.bind(this));
 
         return super.close();

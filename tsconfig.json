@@ -1,33 +1,28 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+//    "allowSyntheticDefaultImports": true, //Do I need this?
+    "allowUnusedLabels": false,
+    "baseUrl": ".",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
-      "DOM",
+      "dom",
       "esnext"
     ],
-    "moduleResolution": "node",
+    "module": "commonjs",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "outDir": "dist",
-    "baseUrl": ".",
     "paths": {
       "@actor": [
         "types/src/module/actor"
       ],
       "@actor/*": [
         "types/src/module/actor/*"
-      ],
-      "@apps": [
-        "types/src/module/apps"
-      ],
-      "@apps/*": [
-        "types/src/module/apps/*"
-      ],
-      "@canvas": [
-        "types/src/module/canvas"
-      ],
-      "@canvas/*": [
-        "types/src/module/canvas/*"
       ],
       "@item": [
         "types/src/module/item"
@@ -37,9 +32,6 @@
       ],
       "@module/*": [
         "types/src/module/*"
-      ],
-      "@pf2e/*": [
-        "types/src/*"
       ],
       "@scene": [
         "types/src/module/scene"
@@ -65,22 +57,25 @@
       ]
     },
     "removeComments": false,
-//    "resolveJsonModule": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
     "sourceMap": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": false, //Gives tons of errors, take a look later.
     "strictNullChecks": true,
-    "target": "ES2018",
+    "strictPropertyInitialization": true,
+    "target": "es2018",
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/handlebars",
+      "types/types/foundry"
+    ],
     "types": [
       "handlebars",
       "jquery",
       "node",
-      "socket.io",
       "tooltipster",
       "webpack-env"
-    ],
-    "typeRoots": [
-      "node_modules/@types",
-      "node_modules/handlebars",
-      "types/foundry"
     ]
   },
   "ts-node": {
