@@ -1,3 +1,10 @@
+# [4.0.0-beta.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2022-08-12)
+
+
+### Bug Fixes
+
+* Stricter configuration, cleanup ([b7722fc](https://github.com/xdy/xdy-pf2e-workbench/commit/b7722fc0d288931058f7f560c56c6d730820b43d))
+
 # [4.0.0-beta.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.8...v4.0.0-beta.9) (2022-08-11)
 
 
