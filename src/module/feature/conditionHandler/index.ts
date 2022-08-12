@@ -1,15 +1,15 @@
 import { CombatantPF2e } from "@module/encounter";
 import { isFirstGM, shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { ActorPF2e, CharacterPF2e } from "@actor";
+import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
     if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThis(combatant.actor))) {
         const actors = [combatant.actor];
-        actors.push(...getMinions(combatant.actor));
+        actors.push(...getMinionAndEidolons(combatant.actor));
         for (const actor of actors) {
-            const minimumFrightened = <number>actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
+            const minimumFrightened = <number>actor?.getFlag(MODULENAME, "excondition.frightened.min") ?? 0;
             const currentFrightened = actor?.getCondition("frightened")?.value ?? 0;
             if (currentFrightened - 1 >= minimumFrightened) {
                 await actor.decreaseCondition("frightened");
@@ -46,15 +46,15 @@ export async function increaseDyingOnZeroHP(
                 data: {
                     slug: "orc-ferocity-used",
                     tokenIcon: {
-                        show: false,
+                        show: false
                     },
                     duration: {
                         value: incredibleFerocity ? 1 : 24,
                         unit: "hours",
                         sustained: false,
-                        expiry: "turn-start",
-                    },
-                },
+                        expiry: "turn-start"
+                    }
+                }
             };
             await actor.createEmbeddedDocuments("Item", [effect]);
 
@@ -72,7 +72,7 @@ export async function increaseDyingOnZeroHP(
                     whisper:
                         game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                             ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                            : [],
+                            : []
                 });
             }
 
@@ -88,15 +88,15 @@ export async function increaseDyingOnZeroHP(
                 data: {
                     slug: "deliberate-death-used",
                     tokenIcon: {
-                        show: false,
+                        show: false
                     },
                     duration: {
                         value: 24,
                         unit: "hours",
                         sustained: false,
-                        expiry: "turn-start",
-                    },
-                },
+                        expiry: "turn-start"
+                    }
+                }
             };
             await actor.createEmbeddedDocuments("Item", [effect]);
 
@@ -110,7 +110,7 @@ export async function increaseDyingOnZeroHP(
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                        : [],
+                        : []
             });
         }
 
@@ -160,27 +160,16 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     }
 }
 
-function getMinions(actor: ActorPF2e): ActorPF2e[] {
+function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
     const actors: ActorPF2e[] = [];
     if (actor.isOfType("character")) {
-        if ((<CharacterPF2e>actor).familiar) {
-            actors.push(<ActorPF2e>(<CharacterPF2e>actor).familiar);
-        }
-        const eidolons = <ActorPF2e[]>game.scenes.current?.tokens
+        const minionsAndEidolons = <ActorPF2e[]>game.scenes.current?.tokens
             ?.filter(() => !game.user.isGM)
             ?.filter((token) => token.canUserModify(game.user, "update"))
             ?.map((token) => token.actor)
-            ?.filter((x) => x?.traits.has("eidolon"));
-        if (eidolons && eidolons.length > 0) {
-            actors.push(...(<ActorPF2e[]>eidolons));
-        }
-        const animalCompanions = game.scenes.current?.tokens
-            ?.filter(() => !isFirstGM())
-            ?.filter((token) => token.canUserModify(game.user, "update"))
-            ?.map((token) => token.actor)
-            ?.filter((chr: CharacterPF2e) => chr?.class?.name === "Animal Companion");
-        if (animalCompanions && animalCompanions.length > 0) {
-            actors.push(...(<ActorPF2e[]>animalCompanions));
+            ?.filter((x) => x?.traits.has("eidolon") || x?.traits.has("minion"));
+        if (minionsAndEidolons && minionsAndEidolons.length > 0) {
+            actors.push(...(<ActorPF2e[]>minionsAndEidolons));
         }
     }
     return actors;
@@ -202,15 +191,15 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 data: {
                     slug: "numb-to-death-used",
                     tokenIcon: {
-                        show: false,
+                        show: false
                     },
                     duration: {
                         value: 24,
                         unit: "hours",
                         sustained: false,
-                        expiry: "turn-start",
-                    },
-                },
+                        expiry: "turn-start"
+                    }
+                }
             };
 
             await ChatMessage.create({
@@ -226,7 +215,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                        : [],
+                        : []
             });
 
             await actor.createEmbeddedDocuments("Item", [effect]);
@@ -238,15 +227,15 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 data: {
                     slug: "bounce-back-used",
                     tokenIcon: {
-                        show: false,
+                        show: false
                     },
                     duration: {
                         value: 24,
                         unit: "hours",
                         sustained: false,
-                        expiry: "turn-start",
-                    },
-                },
+                        expiry: "turn-start"
+                    }
+                }
             };
 
             await actor.createEmbeddedDocuments("Item", [effect]);
