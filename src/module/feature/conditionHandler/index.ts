@@ -46,15 +46,15 @@ export async function increaseDyingOnZeroHP(
                 data: {
                     slug: "orc-ferocity-used",
                     tokenIcon: {
-                        show: false
+                        show: false,
                     },
                     duration: {
                         value: incredibleFerocity ? 1 : 24,
                         unit: "hours",
                         sustained: false,
-                        expiry: "turn-start"
-                    }
-                }
+                        expiry: "turn-start",
+                    },
+                },
             };
             await actor.createEmbeddedDocuments("Item", [effect]);
 
@@ -72,7 +72,7 @@ export async function increaseDyingOnZeroHP(
                     whisper:
                         game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                             ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                            : []
+                            : [],
                 });
             }
 
@@ -88,15 +88,15 @@ export async function increaseDyingOnZeroHP(
                 data: {
                     slug: "deliberate-death-used",
                     tokenIcon: {
-                        show: false
+                        show: false,
                     },
                     duration: {
                         value: 24,
                         unit: "hours",
                         sustained: false,
-                        expiry: "turn-start"
-                    }
-                }
+                        expiry: "turn-start",
+                    },
+                },
             };
             await actor.createEmbeddedDocuments("Item", [effect]);
 
@@ -110,7 +110,7 @@ export async function increaseDyingOnZeroHP(
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                        : []
+                        : [],
             });
         }
 
@@ -191,15 +191,15 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 data: {
                     slug: "numb-to-death-used",
                     tokenIcon: {
-                        show: false
+                        show: false,
                     },
                     duration: {
                         value: 24,
                         unit: "hours",
                         sustained: false,
-                        expiry: "turn-start"
-                    }
-                }
+                        expiry: "turn-start",
+                    },
+                },
             };
 
             await ChatMessage.create({
@@ -215,7 +215,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                        : []
+                        : [],
             });
 
             await actor.createEmbeddedDocuments("Item", [effect]);
@@ -227,15 +227,15 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 data: {
                     slug: "bounce-back-used",
                     tokenIcon: {
-                        show: false
+                        show: false,
                     },
                     duration: {
                         value: 24,
                         unit: "hours",
                         sustained: false,
-                        expiry: "turn-start"
-                    }
-                }
+                        expiry: "turn-start",
+                    },
+                },
             };
 
             await actor.createEmbeddedDocuments("Item", [effect]);
