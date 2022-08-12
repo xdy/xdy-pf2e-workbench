@@ -1,3 +1,11 @@
+# [4.0.0-beta.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.10...v4.0.0-beta.11) (2022-08-12)
+
+
+### Bug Fixes
+
+* Simplify and rename getMinions ([4d534da](https://github.com/xdy/xdy-pf2e-workbench/commit/4d534da7a79e6057f7266ffbd6db733365f0be1d))
+* Simplify and rename getMinions ([0d67afe](https://github.com/xdy/xdy-pf2e-workbench/commit/0d67afe3b0db80a2049fd9ac0c56bb4e6c21126e))
+
 # [4.0.0-beta.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.9...v4.0.0-beta.10) (2022-08-12)
 
 
