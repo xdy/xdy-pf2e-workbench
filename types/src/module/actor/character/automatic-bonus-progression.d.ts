@@ -1,4 +1,4 @@
-import { WeaponPF2e } from "@item";
+import { ArmorPF2e, WeaponPF2e } from "@item";
 import { FlatModifierRuleElement } from "@module/rules/rule-element/flat-modifier";
 import { PotencySynthetic, RuleElementSynthetics } from "@module/rules/synthetics";
 export declare class AutomaticBonusProgression {
@@ -9,7 +9,7 @@ export declare class AutomaticBonusProgression {
      */
     static concatModifiers(level: number, synthetics: RuleElementSynthetics): void;
     /** Remove stored runes from specific magic weapons or otherwise set prior to enabling ABP */
-    static cleanupRunes(weapon: WeaponPF2e): void;
+    static cleanupRunes(item: ArmorPF2e | WeaponPF2e): void;
     static applyPropertyRunes(potency: PotencySynthetic[], weapon: Embedded<WeaponPF2e>): void;
     /**
      * Determine whether a rule element can be applied to an actor.

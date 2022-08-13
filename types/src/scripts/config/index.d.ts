@@ -581,13 +581,11 @@ export declare const PF2ECONFIG: {
         "capacity-3": string;
         "capacity-4": string;
         "capacity-5": string;
-        charm: string;
         climbing: string;
         clockwork: string;
         cobbled: string;
         combination: string;
         concealable: string;
-        concentrate: string;
         concussive: string;
         consumable: string;
         "critical-fusion": string;
@@ -605,7 +603,6 @@ export declare const PF2ECONFIG: {
         "deadly-2d12": string;
         "deadly-3d12": string;
         "deadly-4d12": string;
-        death: string;
         disarm: string;
         disease: string;
         "double-barrel": string;
@@ -621,7 +618,6 @@ export declare const PF2ECONFIG: {
         fortune: string;
         "free-hand": string;
         fungus: string;
-        good: string;
         grapple: string;
         hampering: string;
         healing: string;
@@ -656,7 +652,6 @@ export declare const PF2ECONFIG: {
         splash: string;
         staff: string;
         sweep: string;
-        telepathy: string;
         teleportation: string;
         tethered: string;
         thrown: string;
@@ -668,7 +663,6 @@ export declare const PF2ECONFIG: {
         "thrown-60": string;
         "thrown-80": string;
         "thrown-100": string;
-        time: string;
         trip: string;
         twin: string;
         "two-hand-d6": string;
@@ -767,6 +761,7 @@ export declare const PF2ECONFIG: {
         undine: string;
         chaotic: string;
         lawful: string;
+        good: string;
         evil: string;
     };
     otherWeaponTags: Record<import("@item/weapon/types").OtherWeaponTag, string>;
@@ -1153,7 +1148,6 @@ export declare const PF2ECONFIG: {
         undine: string;
     };
     consumableTraits: {
-        air: string;
         alchemical: string;
         auditory: string;
         aura: string;
@@ -1213,6 +1207,7 @@ export declare const PF2ECONFIG: {
         illusion: string;
         necromancy: string;
         transmutation: string;
+        air: string;
         earth: string;
         fire: string;
         water: string;
@@ -2006,13 +2001,11 @@ export declare const PF2ECONFIG: {
         "capacity-3": string;
         "capacity-4": string;
         "capacity-5": string;
-        charm: string;
         climbing: string;
         clockwork: string;
         cobbled: string;
         combination: string;
         concealable: string;
-        concentrate: string;
         concussive: string;
         consumable: string;
         "critical-fusion": string;
@@ -2030,7 +2023,6 @@ export declare const PF2ECONFIG: {
         "deadly-2d12": string;
         "deadly-3d12": string;
         "deadly-4d12": string;
-        death: string;
         disarm: string;
         disease: string;
         "double-barrel": string;
@@ -2046,7 +2038,6 @@ export declare const PF2ECONFIG: {
         fortune: string;
         "free-hand": string;
         fungus: string;
-        good: string;
         grapple: string;
         hampering: string;
         healing: string;
@@ -2081,7 +2072,6 @@ export declare const PF2ECONFIG: {
         splash: string;
         staff: string;
         sweep: string;
-        telepathy: string;
         teleportation: string;
         tethered: string;
         thrown: string;
@@ -2093,7 +2083,6 @@ export declare const PF2ECONFIG: {
         "thrown-60": string;
         "thrown-80": string;
         "thrown-100": string;
-        time: string;
         trip: string;
         twin: string;
         "two-hand-d6": string;
@@ -2192,6 +2181,7 @@ export declare const PF2ECONFIG: {
         undine: string;
         chaotic: string;
         lawful: string;
+        good: string;
         evil: string;
     };
     hazardTraits: {

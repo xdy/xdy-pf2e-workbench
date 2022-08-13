@@ -516,13 +516,11 @@ declare const weaponTraits: {
     "capacity-3": string;
     "capacity-4": string;
     "capacity-5": string;
-    charm: string;
     climbing: string;
     clockwork: string;
     cobbled: string;
     combination: string;
     concealable: string;
-    concentrate: string;
     concussive: string;
     consumable: string;
     "critical-fusion": string;
@@ -540,7 +538,6 @@ declare const weaponTraits: {
     "deadly-2d12": string;
     "deadly-3d12": string;
     "deadly-4d12": string;
-    death: string;
     disarm: string;
     disease: string;
     "double-barrel": string;
@@ -556,7 +553,6 @@ declare const weaponTraits: {
     fortune: string;
     "free-hand": string;
     fungus: string;
-    good: string;
     grapple: string;
     hampering: string;
     healing: string;
@@ -591,7 +587,6 @@ declare const weaponTraits: {
     splash: string;
     staff: string;
     sweep: string;
-    telepathy: string;
     teleportation: string;
     tethered: string;
     thrown: string;
@@ -603,7 +598,6 @@ declare const weaponTraits: {
     "thrown-60": string;
     "thrown-80": string;
     "thrown-100": string;
-    time: string;
     trip: string;
     twin: string;
     "two-hand-d6": string;
@@ -702,6 +696,7 @@ declare const weaponTraits: {
     undine: string;
     chaotic: string;
     lawful: string;
+    good: string;
     evil: string;
 };
 declare const preciousMaterials: Record<PreciousMaterialType, string>;
@@ -809,13 +804,11 @@ declare const npcAttackTraits: {
     "capacity-3": string;
     "capacity-4": string;
     "capacity-5": string;
-    charm: string;
     climbing: string;
     clockwork: string;
     cobbled: string;
     combination: string;
     concealable: string;
-    concentrate: string;
     concussive: string;
     consumable: string;
     "critical-fusion": string;
@@ -833,7 +826,6 @@ declare const npcAttackTraits: {
     "deadly-2d12": string;
     "deadly-3d12": string;
     "deadly-4d12": string;
-    death: string;
     disarm: string;
     disease: string;
     "double-barrel": string;
@@ -849,7 +841,6 @@ declare const npcAttackTraits: {
     fortune: string;
     "free-hand": string;
     fungus: string;
-    good: string;
     grapple: string;
     hampering: string;
     healing: string;
@@ -884,7 +875,6 @@ declare const npcAttackTraits: {
     splash: string;
     staff: string;
     sweep: string;
-    telepathy: string;
     teleportation: string;
     tethered: string;
     thrown: string;
@@ -896,7 +886,6 @@ declare const npcAttackTraits: {
     "thrown-60": string;
     "thrown-80": string;
     "thrown-100": string;
-    time: string;
     trip: string;
     twin: string;
     "two-hand-d6": string;
@@ -995,6 +984,7 @@ declare const npcAttackTraits: {
     undine: string;
     chaotic: string;
     lawful: string;
+    good: string;
     evil: string;
 };
 declare const featTraits: {
@@ -1193,7 +1183,6 @@ declare const featTraits: {
     undine: string;
 };
 declare const consumableTraits: {
-    air: string;
     alchemical: string;
     auditory: string;
     aura: string;
@@ -1253,6 +1242,7 @@ declare const consumableTraits: {
     illusion: string;
     necromancy: string;
     transmutation: string;
+    air: string;
     earth: string;
     fire: string;
     water: string;

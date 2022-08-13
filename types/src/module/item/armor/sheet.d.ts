@@ -198,4 +198,5 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
         owner: boolean;
         title: string;
     }>;
+    protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }

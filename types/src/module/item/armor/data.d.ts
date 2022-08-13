@@ -1,5 +1,5 @@
 import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource } from "@item/physical/data";
-import { ZeroToFour, ZeroToThree } from "@module/data";
+import { OneToFour, ZeroToThree } from "@module/data";
 import type { LocalizePF2e } from "@module/system/localize";
 import type { ArmorPF2e } from ".";
 import { OtherArmorTag } from "./types";
@@ -26,10 +26,10 @@ interface ArmorSystemSource extends Investable<PhysicalSystemSource> {
         value: number;
     };
     potencyRune: {
-        value: ZeroToFour;
+        value: OneToFour | null;
     };
     resiliencyRune: {
-        value: ResilientRuneType | "";
+        value: ResilientRuneType | null;
     };
     propertyRune1: {
         value: string;

@@ -9,7 +9,6 @@ export declare class AbilityBuilderPopup extends Application {
     constructor(actor: CharacterPF2e);
     static get defaultOptions(): ApplicationOptions;
     get id(): string;
-    activateListeners($html: JQuery): void;
     getData(options?: Partial<FormApplicationOptions>): Promise<PopupData>;
     private calculateAncestryBoosts;
     private calculateBackgroundBoosts;
@@ -19,6 +18,7 @@ export declare class AbilityBuilderPopup extends Application {
     close(options?: {
         force?: boolean;
     }): Promise<void>;
+    activateListeners($html: JQuery): void;
 }
 interface PopupData {
     actor: CharacterPF2e;
