@@ -10,7 +10,7 @@ declare class FeatPF2e extends ItemPF2e {
     get level(): number;
     get traits(): Set<FeatTrait>;
     get actionCost(): {
-        type: "action" | "reaction" | "free";
+        type: "action" | "free" | "reaction";
         value: OneToThree | null;
     } | null;
     get frequency(): Frequency | null;

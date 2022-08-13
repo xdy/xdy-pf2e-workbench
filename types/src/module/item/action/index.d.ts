@@ -12,7 +12,7 @@ declare class ActionItemPF2e extends ItemPF2e {
         traits: import("../data").TraitChatData[];
         frequency?: Frequency | undefined;
         actionType: {
-            value: "passive" | "action" | "reaction" | "free";
+            value: "passive" | "action" | "free" | "reaction";
         };
         actionCategory: {
             value: string;

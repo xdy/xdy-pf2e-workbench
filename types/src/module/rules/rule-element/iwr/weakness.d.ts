@@ -2,7 +2,7 @@ import { LabeledWeakness, WeaknessType } from "@actor/data/base";
 import { IWRRuleElement, IWRRuleElementData } from "./base";
 /** @category RuleElement */
 declare class WeaknessRuleElement extends IWRRuleElement {
-    dictionary: Record<"force" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "positive" | "negative" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "chaotic" | "lawful" | "good" | "evil" | "mental" | "poison" | "untyped" | "adamantine" | "alignment" | "coldiron" | "darkwood" | "energy" | "ghostTouch" | "mithral" | "orichalcum" | "physical" | "precision" | "salt" | "salt-water" | "silver" | "warpglass" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "vorpal" | "weapons" | "critical-hits" | "splash-damage" | "emotion" | "axe" | "vampire-weaknesses" | "vorpal-fear" | "vulnerable-to-sunlight", string>;
+    dictionary: Record<"force" | "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "ghostTouch" | "vorpal" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | "alignment" | "coldiron" | "energy" | "physical" | "precision" | "salt" | "salt-water" | "area-damage" | "nonlethal-attacks" | "persistent-damage" | "weapons" | "air" | "earth" | "light" | "magical" | "unarmed" | "water" | "critical-hits" | "axe" | "emotion" | "splash-damage" | "vampire-weaknesses" | "vorpal-fear" | "vulnerable-to-sunlight", string>;
     get property(): LabeledWeakness[];
     getIWR(value: number): LabeledWeakness | null;
 }

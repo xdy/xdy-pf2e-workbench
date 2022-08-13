@@ -136,7 +136,7 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
             49: string;
             50: string;
         };
-        preciousMaterials: Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "coldIron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sovereignSteel", string>;
+        preciousMaterials: Record<"abysium" | "adamantine" | "coldIron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "peachwood" | "siccatite" | "silver" | "sovereignSteel" | "warpglass", string>;
         preciousMaterialGrades: Record<"high" | "low" | "standard", string>;
         isPhysical: true;
         basePriceString: string;
@@ -160,7 +160,7 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
             day: string;
             P1W: string;
         };
-        sizes: Record<"med" | "tiny" | "sm" | "lg" | "huge" | "grg", string>;
+        sizes: Record<"tiny" | "sm" | "med" | "lg" | "huge" | "grg", string>;
         activations: {
             action: import("../physical/data").ItemActivation;
             id: string;

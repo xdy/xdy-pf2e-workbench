@@ -389,9 +389,9 @@ declare const damageTraits: {
     earth: string;
     water: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const magicSchools: Record<MagicSchool, string>;
 declare const spellTraits: {
@@ -476,9 +476,9 @@ declare const spellTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
     alchemist: string;
     barbarian: string;
     bard: string;
@@ -695,9 +695,9 @@ declare const weaponTraits: {
     tiefling: string;
     undine: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const preciousMaterials: Record<PreciousMaterialType, string>;
 declare const otherArmorTags: Record<OtherArmorTag, string>;
@@ -775,22 +775,22 @@ declare const npcAttackTraits: {
     "range-increment-300": string;
     "range-increment-310": string;
     "range-increment-320": string;
-    adamantine: string;
-    darkwood: string;
-    mithral: string;
-    orichalcum: string;
-    silver: string;
-    warpglass: string;
     abysium: string;
+    adamantine: string;
     coldIron: string;
+    darkwood: string;
     djezet: string;
     dragonhide: string;
     "grisantian-pelt": string;
     inubrix: string;
+    mithral: string;
     noqual: string;
+    orichalcum: string;
     peachwood: string;
     siccatite: string;
+    silver: string;
     sovereignSteel: string;
+    warpglass: string;
     alchemical: string;
     agile: string;
     artifact: string;
@@ -983,9 +983,9 @@ declare const npcAttackTraits: {
     tiefling: string;
     undine: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const featTraits: {
     additive1: string;
@@ -1108,9 +1108,9 @@ declare const featTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
     alchemist: string;
     barbarian: string;
     bard: string;
@@ -1258,9 +1258,9 @@ declare const consumableTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const actionTraits: {
     circus: string;
@@ -1346,9 +1346,9 @@ declare const actionTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
     alchemist: string;
     barbarian: string;
     bard: string;
@@ -1534,9 +1534,9 @@ declare const hazardTraits: {
     earth: string;
     water: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const vehicleTraits: {
     artifact: string;

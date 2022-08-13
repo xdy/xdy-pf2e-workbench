@@ -18,7 +18,7 @@ declare const MODIFIER_TYPE: {
     readonly STATUS: "status";
     readonly UNTYPED: "untyped";
 };
-declare const MODIFIER_TYPES: Set<"item" | "status" | "untyped" | "ability" | "circumstance" | "potency" | "proficiency">;
+declare const MODIFIER_TYPES: Set<"item" | "status" | "untyped" | "potency" | "ability" | "circumstance" | "proficiency">;
 declare type ModifierType = SetElement<typeof MODIFIER_TYPES>;
 interface BaseRawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
