@@ -30,7 +30,7 @@ async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolea
                         .slice(messageIndex)
                         .reverse()
                         .find((msg) => {
-                            return msg.data.content.includes("dice-result flat-check-failure");
+                            return msg.content.includes("dice-result flat-check-failure");
                         });
                 }
             }
