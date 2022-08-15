@@ -39,7 +39,9 @@ export function registerWorkbenchKeybindings() {
                             const targets = Array.from(canvas.tokens?.controlled).concat(
                                 canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1)
                             );
-                            const user = game.users.find((u) => u.id === (html.find("#dialogUserId").val() as string));
+                            const user: any = game.users.find(
+                                (u) => u.id === (html.find("#dialogUserId").val() as string)
+                            );
                             if (game.user?.isGM && targets && user) {
                                 targets.forEach((t) => {
                                     t.setTarget(true, { user: user, releaseOthers: false });
@@ -52,7 +54,9 @@ export function registerWorkbenchKeybindings() {
                         icon: '<i class="fas fa-users-slash"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
                         callback: async (html: JQuery) => {
-                            const user = game.users.find((u) => u.id === (html.find("#dialogUserId").val() as string));
+                            const user: any = game.users.find(
+                                (u) => u.id === (html.find("#dialogUserId").val() as string)
+                            );
                             if (game.user?.isGM && user) {
                                 const targets = user.targets;
                                 targets.forEach((t) => {

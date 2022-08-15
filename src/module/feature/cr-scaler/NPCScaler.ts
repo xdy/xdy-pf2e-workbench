@@ -171,7 +171,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     }
     console.warn(itemUpdates);
 
-    let newActor: Actor | undefined = getActor(actor.name as string, folder.name);
+    let newActor = <any>getActor(actor.name as string, folder.name);
     if (newActor !== undefined) {
         await newActor.update(updateData);
     } else {

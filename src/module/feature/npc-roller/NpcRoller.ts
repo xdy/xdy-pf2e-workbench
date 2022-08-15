@@ -1,5 +1,6 @@
 import { MODULENAME } from "../../../module/xdy-pf2e-workbench";
 import { SCALE_APP_DATA } from "../NPCScaleData";
+import { CanvasPF2e, TokenPF2e } from "@module/canvas";
 
 async function registerHandlebarsTemplates() {
     await loadTemplates([
@@ -116,8 +117,8 @@ class NpcRoller extends Application {
             levels: duplicate(SCALE_APP_DATA),
         };
 
-        data["data"]["selected"] = canvas.tokens?.controlled.map((token: Token) =>
-            parseInt(token.actor?.system["details"].level.value)
+        data["data"]["selected"] = canvas.tokens?.controlled.map(
+            (token: TokenPF2e) => token.actor?.system["details"].level.value
         );
 
         return data;
@@ -136,7 +137,7 @@ class NpcRoller extends Application {
     async #handleRollButtonClick(event): Promise<void> {
         const target = $(event.target);
         const rollName = target.data("rollname") as string;
-        const token = (canvas as Canvas).tokens?.controlled[0];
+        const token = (canvas as CanvasPF2e).tokens?.controlled[0];
         const formula = target.data("formula") as string | number | undefined;
         const secret = <boolean>game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
 
@@ -145,7 +146,7 @@ class NpcRoller extends Application {
 
             await new Roll(formulaString).toMessage(
                 {
-                    speaker: ChatMessage.getSpeaker({ token: token?.document }),
+                    speaker: ChatMessage.getSpeaker({ token: <any>token?.document }),
                     flavor: rollName,
                     whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
                 },

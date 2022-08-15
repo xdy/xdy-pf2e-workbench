@@ -222,9 +222,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             );
                         }
 
+                        const token: any = message.token;
                         await ChatMessage.create({
                             content: content,
-                            speaker: ChatMessage.getSpeaker({ token: message.token }),
+                            speaker: ChatMessage.getSpeaker({ token: token }),
                         });
                     }
                 }
@@ -284,7 +285,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
-        Hooks.on("renderChatMessage", (message: ChatMessagePF2e, html: JQuery) => {
+        Hooks.on("renderChatMessage", (message: ChatMessage<Actor>, html: JQuery) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
                 mangleChatMessage(message, html);
             }
@@ -461,7 +462,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "addGmRKButtonToNpc") ||
         game.settings.get(MODULENAME, "quickQuantities")
     ) {
-        Hooks.on("renderActorSheet", (sheet: ActorSheet<ActorPF2e, ItemPF2e>, $html: JQuery) => {
+        Hooks.on("renderActorSheet", (sheet: ActorSheet<Actor, Item>, $html: JQuery) => {
             if (game.settings.get(MODULENAME, "quickQuantities")) {
                 onQuantitiesHook(sheet, $html);
             }
@@ -507,7 +508,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 const b = `.gm-recall-knowledge-${skill}`;
                                 $html.find(b).on("click", async (e) => {
                                     const attr = <string>$(e.currentTarget).attr("data-token");
-                                    const token = game?.scenes?.active?.tokens?.get(attr);
+                                    const token: any = game?.scenes?.active?.tokens?.get(attr);
                                     const skill = $(e.currentTarget).attr("data-skill");
                                     const dcs = (<string>$(e.currentTarget).attr("data-dcs")).split("/") || [];
 

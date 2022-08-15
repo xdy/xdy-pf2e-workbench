@@ -156,7 +156,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
     }
 }
 
-export async function persistentDamage(message: ChatMessagePF2e) {
+export async function persistentDamage(message) {
     if (
         canvas.ready &&
         "persistent" in message.flags &&
@@ -179,7 +179,7 @@ export async function persistentDamage(message: ChatMessagePF2e) {
     }
 }
 
-export async function persistentHealing(message: ChatMessagePF2e) {
+export async function persistentHealing(message) {
     if (
         game.settings.get(MODULENAME, "applyPersistentHealing") &&
         canvas.ready &&

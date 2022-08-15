@@ -21,18 +21,19 @@ import {
     DefaultCreatureStatistics,
     Roadmap,
     ROADMAPS,
-    StatisticOptions,
+    StatisticOptions
 } from "./CreatureBuilderData";
 import { SCALE_APP_DATA } from "../NPCScaleData";
 import { ActorPF2e } from "@actor";
+import { ActorSheetPF2e } from "@actor/sheet/base";
 
 export const setupCreatureBuilder = () => Hooks.on("renderActorSheet", enableCreatureBuilderButton);
 
-function enableCreatureBuilderButton(sheet: ActorSheet, html: JQuery) {
+function enableCreatureBuilderButton(sheet: ActorSheetPF2e<ActorPF2e>, html: JQuery) {
     if (game.user?.isGM) {
         // Only inject the link if the actor is of type "character" and the user has permission to update it
         const actor: ActorPF2e = <ActorPF2e>sheet.actor;
-        if (!(actor.isOfType("npc") && actor.canUserModify(game.user, "update"))) {
+        if (!(actor.isOfType("npc") && actor.canUserModify(<any>game.user, "update"))) {
             return;
         }
 

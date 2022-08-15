@@ -68,7 +68,7 @@ export async function increaseDyingOnZeroHP(
                             { async: false }
                         )}.`
                     ),
-                    speaker: ChatMessage.getSpeaker({ actor: actor }),
+                    speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                     whisper:
                         game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                             ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
@@ -106,7 +106,7 @@ export async function increaseDyingOnZeroHP(
                         actor.token?.name ?? actor.name
                     } can <b>before gaining Dying</b> as a result of another creature's attack or ability, if that creature is within melee reach, make a melee Strike against the triggering creature.<br>Remove 'Deliberate Death Used' effect if it actually can't be used.`
                 ),
-                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
@@ -211,7 +211,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                         { async: false }
                     )}.`
                 ),
-                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
