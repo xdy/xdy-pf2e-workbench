@@ -6,7 +6,7 @@ declare global {
         constructor(document: TDocument);
 
         /** A reference to an animation that is currently in progress for this Token, if any */
-        protected _animation: Promise<unknown> | null;
+        _animation: Promise<unknown> | null;
 
         /**
          * An Object which records the Token's prior velocity dx and dy
@@ -430,7 +430,7 @@ declare global {
 
         override _onUpdate(
             changed: DeepPartial<TDocument["_source"]>,
-            options: DocumentModificationContext<TDocument>,
+            options: DocumentModificationContext,
             userId: string
         ): void;
 

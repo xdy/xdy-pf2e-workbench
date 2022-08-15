@@ -403,7 +403,7 @@ declare global {
 
         /** Configuration for dice rolling behaviors in the Foundry VTT client */
         Dice: {
-            types: Array<typeof Die | typeof DiceTerm>;
+            types: (typeof Die | typeof DiceTerm)[];
             rollModes: Record<RollMode, string>;
             rolls: ConstructorOf<Roll>[];
             termTypes: Record<string, ConstructorOf<RollTerm>>;
@@ -452,6 +452,14 @@ declare global {
 
         /** Maximum canvas zoom scale */
         maxCanvasZoom: number;
+
+        /** Custom enrichers for TextEditor.enrichHTML */
+        TextEditor: {
+            enrichers: {
+                pattern: RegExp;
+                enricher: (match: RegExpMatchArray, options: EnrichHTMLOptions) => Promise<HTMLElement | void>;
+            }[];
+        };
 
         /* -------------------------------------------- */
         /*  Integrations                                */
