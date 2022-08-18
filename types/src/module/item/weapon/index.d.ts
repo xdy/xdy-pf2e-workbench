@@ -1,4 +1,5 @@
 import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
+import { ItemSummaryData } from "@item/data";
 import { IdentificationStatus, MystifiedData } from "@item/physical/data";
 import { MaterialGradeData } from "@item/physical/materials";
 import { RuneValuationData } from "../runes";
@@ -34,7 +35,7 @@ declare class WeaponPF2e extends PhysicalItemPF2e {
     processMaterialAndRunes(): void;
     getRunesData(): RuneValuationData[];
     getMaterialData(): MaterialGradeData | null;
-    getChatData(this: Embedded<WeaponPF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;
+    getChatData(this: Embedded<WeaponPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
     /** Generate a weapon name base on precious-material composition and runes */
     generateMagicName(): string;
     getMystifiedData(status: IdentificationStatus, { source }?: {

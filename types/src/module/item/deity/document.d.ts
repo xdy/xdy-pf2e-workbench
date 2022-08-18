@@ -2,7 +2,6 @@ import { Alignment } from "@actor/creature/types";
 import { ItemPF2e } from "@item";
 import { BaseWeaponType } from "@item/weapon/types";
 import { DeityData } from "./data";
-import { DeitySheetPF2e } from "./sheet";
 declare class DeityPF2e extends ItemPF2e {
     get category(): "deity" | "pantheon" | "philosophy";
     get alignment(): Alignment | null;
@@ -14,6 +13,5 @@ declare class DeityPF2e extends ItemPF2e {
 }
 interface DeityPF2e extends ItemPF2e {
     readonly data: DeityData;
-    readonly _sheet: DeitySheetPF2e<this>;
 }
 export { DeityPF2e };

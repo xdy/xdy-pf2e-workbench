@@ -1,3 +1,4 @@
+import { CharacterPF2e, NPCPF2e } from "@actor";
 import { AbilityString } from "@actor/types";
 import { RollNotePF2e } from "@module/notes";
 import { DamageDieSize, DamageType } from "@system/damage";
@@ -18,7 +19,7 @@ declare const MODIFIER_TYPE: {
     readonly STATUS: "status";
     readonly UNTYPED: "untyped";
 };
-declare const MODIFIER_TYPES: Set<"item" | "status" | "untyped" | "potency" | "ability" | "circumstance" | "proficiency">;
+declare const MODIFIER_TYPES: Set<"item" | "status" | "untyped" | "ability" | "circumstance" | "potency" | "proficiency">;
 declare type ModifierType = SetElement<typeof MODIFIER_TYPES>;
 interface BaseRawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
@@ -137,30 +138,18 @@ declare type ModifierOrderedParams = [
     source?: string,
     notes?: string
 ];
-declare const AbilityModifier: {
-    /**
-     * Create a modifier from a given ability type and score.
-     * @param ability str = Strength, dex = Dexterity, con = Constitution, int = Intelligence, wis = Wisdom, cha = Charisma
-     * @param score The score of this ability.
-     * @returns The modifier provided by the given ability score.
-     */
-    fromScore: (ability: AbilityString, score: number) => ModifierPF2e;
-};
-declare const UNTRAINED: {
-    atLevel: (_level: number) => ModifierPF2e;
-};
-declare const TRAINED: {
-    atLevel: (level: number) => ModifierPF2e;
-};
-declare const EXPERT: {
-    atLevel: (level: number) => ModifierPF2e;
-};
-declare const MASTER: {
-    atLevel: (level: number) => ModifierPF2e;
-};
-declare const LEGENDARY: {
-    atLevel: (level: number) => ModifierPF2e;
-};
+/**
+ * Create a modifier from a given ability type and score.
+ * @param ability str = Strength, dex = Dexterity, con = Constitution, int = Intelligence, wis = Wisdom, cha = Charisma
+ * @param score The score of this ability.
+ * @returns The modifier provided by the given ability score.
+ */
+declare function createAbilityModifier({ actor, ability, domains }: CreateAbilityModifierParams): ModifierPF2e;
+interface CreateAbilityModifierParams {
+    actor: CharacterPF2e | NPCPF2e;
+    ability: AbilityString;
+    domains: string[];
+}
 declare const ProficiencyModifier: {
     /**
      * Create a modifier for a given proficiency level of some ability.
@@ -284,4 +273,4 @@ declare class DamageDicePF2e extends DiceModifierPF2e {
     constructor(params: DamageDiceParameters);
     clone(): DamageDicePF2e;
 }
-export { AbilityModifier, BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DeferredValue, DeferredValueParams, DiceModifierPF2e, EXPERT, LEGENDARY, MASTER, MODIFIER_TYPE, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, ProficiencyModifier, RawModifier, StatisticModifier, TRAINED, UNTRAINED, applyStackingRules, ensureProficiencyOption, };
+export { BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DeferredValue, DeferredValueParams, DiceModifierPF2e, MODIFIER_TYPE, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, ProficiencyModifier, RawModifier, StatisticModifier, applyStackingRules, createAbilityModifier, ensureProficiencyOption, };

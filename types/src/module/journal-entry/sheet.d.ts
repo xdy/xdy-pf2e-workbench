@@ -7,9 +7,11 @@ declare class JournalSheetPF2e<TJournalEntry extends JournalEntry = JournalEntry
     /** Use the system-themed styling only if the setting is enabled (on by default) */
     static get defaultOptions(): DocumentSheetOptions;
     activateListeners($html: JQuery): void;
-    activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): void;
 }
 declare class JournalSheetStyledPF2e extends JournalSheetPF2e {
     static get theme(): string;
 }
-export { JournalSheetPF2e, JournalSheetStyledPF2e };
+declare class JournalTextPageSheetPF2e extends JournalTextPageSheet {
+    activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): Promise<TinyMCE.Editor>;
+}
+export { JournalSheetPF2e, JournalSheetStyledPF2e, JournalTextPageSheetPF2e };

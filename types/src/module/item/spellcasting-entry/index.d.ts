@@ -42,7 +42,9 @@ declare class SpellcastingEntryPF2e extends ItemPF2e implements SpellcastingEntr
      * Adds a spell to this spellcasting entry, either moving it from another one if its the same actor,
      * or creating a new spell if its not.
      */
-    addSpell(spell: SpellPF2e, targetLevel?: number): Promise<SpellPF2e | null>;
+    addSpell(spell: SpellPF2e, options?: {
+        slotLevel?: number;
+    }): Promise<SpellPF2e | null>;
     /** Saves the prepared spell slot data to the spellcasting entry  */
     prepareSpell(spell: SpellPF2e, slotLevel: number, spellSlot: number): Promise<SpellcastingEntryPF2e>;
     /** Removes the spell slot and updates the spellcasting entry */
@@ -50,7 +52,7 @@ declare class SpellcastingEntryPF2e extends ItemPF2e implements SpellcastingEntr
     /** Sets the expended state of a spell slot and updates the spellcasting entry */
     setSlotExpendedState(slotLevel: number, spellSlot: number, isExpended: boolean): Promise<SpellcastingEntryPF2e>;
     /** Returns rendering data to display the spellcasting entry in the sheet */
-    getSpellData(): SpellcastingEntryListData;
+    getSpellData(): Promise<SpellcastingEntryListData>;
     private getSpellPrepList;
     getRollOptions(prefix?: string): string[];
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;

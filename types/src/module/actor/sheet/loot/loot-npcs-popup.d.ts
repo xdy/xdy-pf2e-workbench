@@ -1,10 +1,10 @@
 import { ActorPF2e } from "@actor/base";
 interface PopupData extends FormApplicationData<ActorPF2e> {
-    tokenInfo: Array<{
+    tokenInfo: {
         id: string;
         name: string;
         checked: boolean;
-    }>;
+    }[];
 }
 export declare class LootNPCsPopup extends FormApplication<ActorPF2e> {
     static get defaultOptions(): FormApplicationOptions;

@@ -8,6 +8,5 @@ export declare class MeleeSheetPF2e extends ItemSheetPF2e<MeleePF2e> {
 interface MeleeSheetData extends ItemSheetDataPF2e<MeleePF2e> {
     damageTypes: ConfigPF2e["PF2E"]["damageTypes"];
     attackEffects: SheetOptions;
-    traits: SheetOptions;
 }
 export {};

@@ -12,6 +12,6 @@ export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
     getData(): Promise<HazardSheetData>;
     private prepareActions;
     private prepareSaves;
-    prepareItems(sheetData: ActorSheetDataPF2e<HazardPF2e>): void;
+    prepareItems(sheetData: ActorSheetDataPF2e<HazardPF2e>): Promise<void>;
     activateListeners($html: JQuery): void;
 }

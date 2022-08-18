@@ -15,7 +15,7 @@ interface ItemConstructionContextPF2e extends DocumentConstructionContext<ItemPF
 /** Override and extend the basic :class:`Item` implementation */
 declare class ItemPF2e extends Item<ActorPF2e> {
     /** Has this item gone through at least one cycle of data preparation? */
-    private initialized;
+    private initialized?;
     /** Prepared rule elements from this item */
     rules: RuleElementPF2e[];
     constructor(data: PreCreate<ItemSourcePF2e>, context?: ItemConstructionContextPF2e);
@@ -46,6 +46,7 @@ declare class ItemPF2e extends Item<ActorPF2e> {
     }): Promise<ChatMessagePF2e | undefined>;
     /** A shortcut to `item.toMessage(..., { create: true })`, kept for backward compatibility */
     toChat(event?: JQuery.TriggeredEvent): Promise<ChatMessagePF2e | undefined>;
+    protected _initialize(): void;
     /** Refresh the Item Directory if this item isn't owned */
     prepareData(): void;
     /** Ensure the presence of the pf2e flag scope with default properties and values */
@@ -57,11 +58,8 @@ declare class ItemPF2e extends Item<ActorPF2e> {
      * Internal method that transforms data into something that can be used for chat.
      * Currently renders description text using enrichHTML.
      */
-    protected processChatData<T extends {
-        properties?: (string | number | null)[];
-        [key: string]: unknown;
-    }>(htmlOptions: EnrichHTMLOptionsPF2e | undefined, data: T): T;
-    getChatData(htmlOptions?: EnrichHTMLOptionsPF2e, _rollOptions?: Record<string, unknown>): ItemSummaryData;
+    protected processChatData(htmlOptions: EnrichHTMLOptionsPF2e | undefined, data: ItemSummaryData): Promise<ItemSummaryData>;
+    getChatData(htmlOptions?: EnrichHTMLOptionsPF2e, _rollOptions?: Record<string, unknown>): Promise<ItemSummaryData>;
     protected traitChatData(dictionary?: Record<string, string | undefined>): TraitChatData[];
     /**
      * Roll a NPC Attack

@@ -3,7 +3,7 @@ import { TokenPF2e } from "@module/canvas";
 import { ScenePF2e, TokenConfigPF2e } from "@module/scene";
 import { TokenDataPF2e } from "./data";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
-import { PrototypeTokenDataPF2e } from "@actor/data/base";
+import { PrototypeTokenPF2e } from "@actor/data/base";
 import { TokenAura } from "./aura";
 import { ActorSourcePF2e } from "@actor/data";
 declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
@@ -34,18 +34,21 @@ declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends To
     prepareBaseData(): void;
     prepareDerivedData(): void;
     /** Set a TokenData instance's dimensions from actor data. Static so actors can use for their prototypes */
-    static prepareSize(token: TokenDocumentPF2e | PrototypeTokenDataPF2e, actor: ActorPF2e | null): void;
+    static prepareSize(token: TokenDocumentPF2e | PrototypeTokenPF2e, actor: ActorPF2e | null): void;
     /** Set a token's initiative on the current encounter, creating a combatant if necessary */
     setInitiative({ initiative, sendMessage, }: {
         initiative: number;
         sendMessage?: boolean;
     }): Promise<void>;
-    /** Rerun token data preparation and possibly redraw token when the actor's embedded items change */
+    /**
+     * Since token properties may be changed during data preparation, rendering called by the parent method must be
+     * based on the diff between pre- and post-data-preparation.
+     */
     _onUpdateBaseActor(updates?: DeepPartial<ActorSourcePF2e>, options?: DocumentModificationContext<ActorPF2e>): void;
     /** Toggle token hiding if this token's actor is a loot actor */
     protected _onCreate(data: this["_source"], options: DocumentModificationContext<this>, userId: string): void;
-    /** Refresh the effects panel and encounter tracker */
-    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<this>, userId: string): void;
+    /** Handle ephemeral changes received by `TokenDocumentPF2e#_onUpdateBaseActor` */
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext, userId: string): void;
     /** Check area effects, removing any from this token's actor if the actor has no other tokens in the scene */
     protected _onDelete(options: DocumentModificationContext<this>, userId: string): void;
 }

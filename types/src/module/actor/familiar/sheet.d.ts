@@ -13,6 +13,6 @@ export declare class FamiliarSheetPF2e extends CreatureSheetPF2e<FamiliarPF2e> {
     static get defaultOptions(): ActorSheetOptions;
     get template(): string;
     getData(options?: ActorSheetOptions): Promise<FamiliarSheetData>;
-    protected prepareItems(_sheetData: ActorSheetDataPF2e<FamiliarPF2e>): void;
+    protected prepareItems(_sheetData: ActorSheetDataPF2e<FamiliarPF2e>): Promise<void>;
     activateListeners($html: JQuery): void;
 }

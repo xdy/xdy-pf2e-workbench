@@ -9,7 +9,6 @@ interface CollectionDiff<T extends foundry.data.ActiveEffectSource | ItemSourceP
 }
 export declare class MigrationRunnerBase {
     migrations: MigrationBase[];
-    lastPreMigrateSource?: ItemSourcePF2e;
     static LATEST_SCHEMA_VERSION: number;
     static MINIMUM_SAFE_VERSION: number;
     static RECOMMENDED_SAFE_VERSION: number;
@@ -18,10 +17,8 @@ export declare class MigrationRunnerBase {
     diffCollection<T extends foundry.data.ActiveEffectSource>(orig: T[], updated: T[]): CollectionDiff<T>;
     diffCollection<T extends ItemSourcePF2e>(orig: T[], updated: T[]): CollectionDiff<T>;
     diffCollection<T extends foundry.data.ActiveEffectSource | ItemSourcePF2e>(orig: T[], updated: T[]): CollectionDiff<T>;
-    getUpdatedItem(item: ItemSourcePF2e, migrations: MigrationBase[]): Promise<ItemSourcePF2e>;
     getUpdatedActor(actor: ActorSourcePF2e, migrations: MigrationBase[]): Promise<ActorSourcePF2e>;
-    /** Perform core data migration on embedded item sources */
-    private preMigrateEmbeddedSource;
+    getUpdatedItem(item: ItemSourcePF2e, migrations: MigrationBase[]): Promise<ItemSourcePF2e>;
     private updateSchemaRecord;
     getUpdatedMacro(macroSource: foundry.data.MacroSource, migrations: MigrationBase[]): Promise<foundry.data.MacroSource>;
     getUpdatedTable(tableSource: foundry.data.RollTableSource, migrations: MigrationBase[]): Promise<foundry.data.RollTableSource>;

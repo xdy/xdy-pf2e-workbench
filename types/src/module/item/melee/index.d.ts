@@ -1,4 +1,5 @@
 import { ItemPF2e } from "@item/base";
+import { ItemSummaryData } from "@item/data";
 import { WeaponDamage } from "@item/weapon/data";
 import { WeaponRangeIncrement } from "@item/weapon/types";
 import { MeleeData, NPCAttackTrait } from "./data";
@@ -22,7 +23,7 @@ export declare class MeleePF2e extends ItemPF2e {
     prepareActorData(): void;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
-    getChatData(this: Embedded<MeleePF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;
+    getChatData(this: Embedded<MeleePF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
 }
 export interface MeleePF2e {
     readonly data: MeleeData;

@@ -10,7 +10,7 @@ export declare class CompendiumDirectoryPF2e extends CompendiumDirectory {
     private get searchMode();
     /** Include ability to search and drag document search results */
     static get defaultOptions(): ApplicationOptions;
-    getData(options?: Partial<ApplicationOptions>): CompendiumDirectoryDataPF2e;
+    getData(options?: Partial<ApplicationOptions>): Promise<CompendiumDirectoryDataPF2e>;
     activateListeners($html: JQuery): void;
     /** Add a context menu for content search results */
     protected _contextMenu($html: JQuery): void;

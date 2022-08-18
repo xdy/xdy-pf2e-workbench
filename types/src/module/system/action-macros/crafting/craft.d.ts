@@ -7,5 +7,6 @@ interface CraftActionOptions extends SkillActionOptions {
     item?: PhysicalItemPF2e;
     quantity?: number;
     uuid?: string;
+    free?: boolean;
 }
 export {};

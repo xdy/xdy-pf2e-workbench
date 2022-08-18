@@ -2,7 +2,6 @@
 /// <reference types="tooltipster" />
 import { ActionItemPF2e } from "@item/action";
 import { ItemSheetDataPF2e } from "@item/sheet/data-types";
-import { SheetOptions } from "@module/sheet/helpers";
 import { ItemSheetPF2e } from "../sheet/base";
 export declare class ActionSheetPF2e extends ItemSheetPF2e<ActionItemPF2e> {
     getData(options?: Partial<DocumentSheetOptions>): Promise<ActionSheetData>;
@@ -16,6 +15,5 @@ interface ActionSheetData extends ItemSheetDataPF2e<ActionItemPF2e> {
     frequencies: ConfigPF2e["PF2E"]["frequencies"];
     skills: ConfigPF2e["PF2E"]["skillList"];
     proficiencies: ConfigPF2e["PF2E"]["proficiencyLevels"];
-    traits: SheetOptions;
 }
 export {};

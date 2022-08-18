@@ -20,7 +20,7 @@ declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
     get template(): string;
     getData(options?: ActorSheetOptions): Promise<CharacterSheetData>;
     /** Organize and classify Items for Character sheets */
-    protected prepareItems(sheetData: ActorSheetDataPF2e<CharacterPF2e>): void;
+    protected prepareItems(sheetData: ActorSheetDataPF2e<CharacterPF2e>): Promise<void>;
     protected prepareCraftingFormulas(): Promise<Record<number, CraftingFormula[]>>;
     protected prepareCraftingEntries(): Promise<CraftingEntriesSheetData>;
     private prepareFeats;

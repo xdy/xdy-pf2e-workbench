@@ -15,7 +15,7 @@ import { Statistic } from "@system/statistic";
 import type { CreaturePF2e } from "./creature";
 import { VisionLevel } from "./creature/data";
 import { ActorDataPF2e, ActorSourcePF2e, ActorType } from "./data";
-import { ActorFlagsPF2e, PrototypeTokenDataPF2e, RollOptionFlags } from "./data/base";
+import { ActorFlagsPF2e, PrototypeTokenPF2e, RollOptionFlags } from "./data/base";
 import { ActorInventory } from "./inventory";
 import { ActorSheetPF2e } from "./sheet/base";
 import { ActorSpellcasting } from "./spellcasting";
@@ -169,7 +169,7 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     transferItemToActor(targetActor: ActorPF2e, item: Embedded<ItemPF2e>, quantity: number, containerId?: string, newStack?: boolean): Promise<Embedded<PhysicalItemPF2e> | null>;
     addToInventory(itemSource: PhysicalItemSource, container?: Embedded<ContainerPF2e>, newStack?: boolean): Promise<Embedded<PhysicalItemPF2e> | null>;
     /** Find an item already owned by the actor that can stack with the to-be-transferred item */
-    findStackableItem(actor: ActorPF2e, itemData: ItemSourcePF2e): Embedded<PhysicalItemPF2e> | null;
+    findStackableItem(actor: ActorPF2e, itemSource: ItemSourcePF2e): Embedded<PhysicalItemPF2e> | null;
     /**
      * Moves an item into the inventory into or out of a container.
      * @param actor       Actor whose inventory should be edited.
@@ -217,7 +217,7 @@ declare class ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
 }
 interface ActorPF2e extends Actor<TokenDocumentPF2e, ItemTypeMap> {
     readonly data: ActorDataPF2e;
-    prototypeToken: PrototypeTokenDataPF2e;
+    prototypeToken: PrototypeTokenPF2e;
     flags: ActorFlagsPF2e;
     _sheet: ActorSheetPF2e<this> | ActorSheet<this, ItemPF2e> | null;
     get sheet(): ActorSheetPF2e<this> | ActorSheet<this, ItemPF2e>;

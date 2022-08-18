@@ -7,9 +7,11 @@ export declare class SpellCollection extends Collection<Embedded<SpellPF2e>> {
     get actor(): import("../../actor/base").ActorPF2e;
     /**
      * Adds a spell to this spellcasting entry, either moving it from another one if its the same actor,
-     * or creating a new spell if its not.
+     * or creating a new spell if its not. If given a level, it will heighten to that level if it can be.
      */
-    addSpell(spell: SpellPF2e, targetLevel?: number): Promise<SpellPF2e | null>;
+    addSpell(spell: SpellPF2e, options?: {
+        slotLevel?: number;
+    }): Promise<SpellPF2e | null>;
     /** Saves the prepared spell slot data to the spellcasting entry  */
     prepareSpell(spell: SpellPF2e, slotLevel: number, spellSlot: number): Promise<SpellcastingEntryPF2e>;
     /** Removes the spell slot and updates the spellcasting entry */

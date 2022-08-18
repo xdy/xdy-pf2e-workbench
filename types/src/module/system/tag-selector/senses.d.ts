@@ -1,24 +1,27 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor/index";
-import { TagSelectorBase } from "./base";
+import { ActorPF2e } from "@actor";
+import { BaseTagSelector } from "./base";
 import { SelectableTagField } from ".";
-export declare class SenseSelector extends TagSelectorBase<ActorPF2e> {
-    objectProperty: string;
-    static get defaultOptions(): import("./base").TagSelectorOptions & {
-        template: string;
-        title: string;
-    };
+export declare class SenseSelector<TActor extends ActorPF2e> extends BaseTagSelector<TActor> {
+    protected objectProperty: string;
+    static get defaultOptions(): FormApplicationOptions;
     protected get configTypes(): readonly SelectableTagField[];
-    getData(): any;
+    getData(): Promise<SenseSelectorData<TActor>>;
     activateListeners($html: JQuery): void;
     protected _updateObject(_event: Event, formData: SenseFormData): Promise<void>;
-    protected getUpdateData(formData: SenseFormData): SenseUpdateData[];
 }
-declare type SenseFormData = Record<string, [boolean, string, string?] | boolean>;
-interface SenseUpdateData {
-    type: string;
-    acuity?: string;
-    value?: number;
+interface SenseSelectorData<TActor extends ActorPF2e> extends FormApplicationData<TActor> {
+    hasExceptions: boolean;
+    choices: Record<string, SenseChoiceData>;
+    senseAcuity: Record<string, string>;
 }
+interface SenseChoiceData {
+    acuity: string;
+    disabled: string;
+    label: string;
+    selected: boolean;
+    value: string;
+}
+declare type SenseFormData = Record<string, [boolean, string, string | null] | boolean>;
 export {};

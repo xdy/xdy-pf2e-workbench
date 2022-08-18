@@ -19,7 +19,7 @@ declare class PredicatePF2e implements RawPredicate {
     static test(predicate: RawPredicate | undefined, options: string[]): boolean;
     constructor(param?: RawPredicate);
     /** Structurally validate the predicates */
-    static validate(raw: unknown): boolean;
+    static validate(raw: unknown): raw is RawPredicate;
     /** Test this predicate against a domain of discourse */
     test(options: string[] | Set<string>): boolean;
     /** Is the provided statement true? */

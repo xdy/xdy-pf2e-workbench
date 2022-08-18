@@ -33,10 +33,7 @@ interface ConsumableSystemSource extends PhysicalSystemSource, ActivatedEffectDa
         value: boolean;
         _deprecated: boolean;
     };
-    spell: {
-        data?: SpellSource | null;
-        heightenedLevel?: number | null;
-    };
+    spell: SpellSource | null;
 }
 declare type ConsumableSystemData = Omit<ConsumableSystemSource, "price"> & PhysicalSystemData & {
     equipped: {

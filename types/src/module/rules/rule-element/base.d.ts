@@ -96,7 +96,7 @@ declare namespace RuleElementPF2e {
     interface PreCreateParams<T extends RuleElementSource = RuleElementSource> {
         /** The source partial of the rule element's parent item to be created */
         itemSource: PreCreate<ItemSourcePF2e>;
-        /** The source of the rule in `itemSource`'s `data.rules` array */
+        /** The source of the rule in `itemSource`'s `system.rules` array */
         ruleSource: T;
         /** All items pending creation in a `ItemPF2e.createDocuments` call */
         pendingItems: PreCreate<ItemSourcePF2e>[];

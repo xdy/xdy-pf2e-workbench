@@ -1,6 +1,7 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { TabData, PackInfo, TabName, TabType } from "./data";
+import { TabData, PackInfo, TabName, BrowserTab } from "./data";
+import { InitialActionFilters, InitialBestiaryFilters, InitialEquipmentFilters, InitialFeatFilters, InitialHazardFilters, InitialSpellFilters } from "./tabs/data";
 import { SpellcastingEntryPF2e } from "@item";
 declare class PackLoader {
     loadedPacks: {
@@ -26,13 +27,12 @@ declare class PackLoader {
 declare class CompendiumBrowser extends Application {
     settings: CompendiumBrowserSettings;
     dataTabsList: readonly ["action", "bestiary", "equipment", "feat", "hazard", "spell"];
-    tabs: Record<Exclude<TabName, "settings">, TabType>;
+    tabs: Record<Exclude<TabName, "settings">, BrowserTab>;
     packLoader: PackLoader;
     activeTab: TabName;
     navigationTab: Tabs;
     /** An initial filter to be applied upon loading a tab */
     private initialFilter;
-    private initialMaxLevel;
     constructor(options?: {});
     get title(): string;
     static get defaultOptions(): ApplicationOptions & {
@@ -59,9 +59,17 @@ declare class CompendiumBrowser extends Application {
     private initCompendiumList;
     loadSettings(): void;
     hookTab(): void;
-    openTab(tab: TabName, filter?: string[], maxLevel?: number): Promise<void>;
+    openTab(tab: "action", filter?: InitialActionFilters): Promise<void>;
+    openTab(tab: "bestiary", filter?: InitialBestiaryFilters): Promise<void>;
+    openTab(tab: "equipment", filter?: InitialEquipmentFilters): Promise<void>;
+    openTab(tab: "feat", filter?: InitialFeatFilters): Promise<void>;
+    openTab(tab: "hazard", filter?: InitialHazardFilters): Promise<void>;
+    openTab(tab: "spell", filter?: InitialSpellFilters): Promise<void>;
+    openTab(tab: "settings"): Promise<void>;
     openSpellTab(entry: SpellcastingEntryPF2e, level?: number | null): Promise<void>;
     loadTab(tab: TabName): Promise<void>;
+    private processInitialFilters;
+    private isRange;
     loadedPacks(tab: TabName): string[];
     activateListeners($html: JQuery): void;
     /**

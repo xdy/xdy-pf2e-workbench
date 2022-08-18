@@ -1,7 +1,8 @@
-import { ConsumableData, ConsumableType } from "./data";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
+import { ItemSummaryData } from "@item/data";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
 import { ValueAndMax } from "@module/data";
+import { ConsumableData, ConsumableType } from "./data";
 declare class ConsumablePF2e extends PhysicalItemPF2e {
     get consumableType(): ConsumableType;
     get isAmmunition(): boolean;
@@ -9,7 +10,7 @@ declare class ConsumablePF2e extends PhysicalItemPF2e {
     /** Should this item be automatically destroyed upon use */
     get autoDestroy(): boolean;
     get embeddedSpell(): Embedded<SpellPF2e> | null;
-    getChatData(this: Embedded<ConsumablePF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;
+    getChatData(this: Embedded<ConsumablePF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;

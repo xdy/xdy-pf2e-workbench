@@ -1,8 +1,10 @@
+import { AbstractEffectPF2e } from "@item/abstract-effect";
+import { EffectBadge } from "@item/abstract-effect/data";
 import { UserPF2e } from "@module/user";
-import { ItemPF2e } from "../base";
 import { EffectData } from "./data";
-declare class EffectPF2e extends ItemPF2e {
+declare class EffectPF2e extends AbstractEffectPF2e {
     static DURATION_UNITS: Readonly<Record<string, number>>;
+    get badge(): EffectBadge | null;
     get level(): number;
     get isExpired(): boolean;
     get totalDuration(): number;
@@ -12,6 +14,10 @@ declare class EffectPF2e extends ItemPF2e {
     };
     /** Does this effect originate from an aura? */
     get fromAura(): boolean;
+    /** Increases if this is a counter effect, otherwise ignored outright */
+    increase(): Promise<void>;
+    /** Decreases if this is a counter effect, otherwise deletes entirely */
+    decrease(): Promise<void>;
     prepareBaseData(): void;
     /** Set a self roll option for this effect */
     prepareActorData(this: Embedded<EffectPF2e>): void;

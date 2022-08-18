@@ -16,7 +16,7 @@ export declare class NPCSheetPF2e<TActor extends NPCPF2e> extends CreatureSheetP
      * Prepares items in the actor for easier access during sheet rendering.
      * @param sheetData Data from the actor associated to this sheet.
      */
-    protected prepareItems(sheetData: NPCSheetData<TActor>): void;
+    protected prepareItems(sheetData: NPCSheetData<TActor>): Promise<void>;
     private getIdentifyCreatureData;
     getData(): Promise<NPCSheetData<TActor>>;
     activateListeners($html: JQuery): void;
@@ -26,7 +26,7 @@ export declare class NPCSheetPF2e<TActor extends NPCPF2e> extends CreatureSheetP
     private prepareSkills;
     private prepareSpeeds;
     private prepareSaves;
-    protected prepareSpellcasting(): NPCSpellcastingSheetData[];
+    protected prepareSpellcasting(): Promise<NPCSpellcastingSheetData[]>;
     /**
      * Prepares the actions list to be accessible from the sheet.
      * @param sheetData Data of the actor to be shown in the sheet.

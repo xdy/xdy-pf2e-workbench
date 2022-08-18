@@ -1,6 +1,6 @@
 /// <reference types="jquery" />
 import { ItemConstructionContextPF2e, ItemPF2e, SpellcastingEntryPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data";
+import { ItemSourcePF2e, ItemSummaryData } from "@item/data";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
 import { GhostTemplate } from "@module/canvas/ghost-measured-template";
 import { ChatMessagePF2e } from "@module/chat-message";
@@ -49,7 +49,7 @@ declare class SpellPF2e extends ItemPF2e {
     constructor(data: PreCreate<ItemSourcePF2e>, context?: SpellConstructionContext);
     private computeCastLevel;
     getRollData(rollOptions?: {
-        spellLvl?: number | string;
+        castLevel?: number | string;
     }): NonNullable<EnrichHTMLOptions["rollData"]>;
     /** Calculates the full damage formula for a specific spell level */
     private getDamageFormula;
@@ -71,8 +71,8 @@ declare class SpellPF2e extends ItemPF2e {
     getRollOptions(prefix?: string): string[];
     toMessage(event?: JQuery.TriggeredEvent, { create, data }?: ToMessageOptions): Promise<ChatMessagePF2e | undefined>;
     getChatData(htmlOptions?: EnrichHTMLOptionsPF2e, rollOptions?: {
-        spellLvl?: number | string;
-    }): Record<string, unknown>;
+        castLevel?: number | string;
+    }): Promise<Omit<ItemSummaryData, "traits">>;
     rollAttack(this: Embedded<SpellPF2e>, event: JQuery.ClickEvent, attackNumber?: number, context?: StatisticRollParameters): Promise<void>;
     rollDamage(this: Embedded<SpellPF2e>, event: JQuery.ClickEvent<unknown, unknown, HTMLElement>): Promise<void>;
     /**

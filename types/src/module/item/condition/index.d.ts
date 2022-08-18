@@ -1,11 +1,8 @@
+import { AbstractEffectPF2e, EffectBadge } from "@item/abstract-effect";
 import { UserPF2e } from "@module/user";
-import { ItemPF2e } from "../base";
 import { ConditionData, ConditionSlug } from "./data";
-declare class ConditionPF2e extends ItemPF2e {
-    /** Forthcoming universal "effect badge" */
-    get badge(): {
-        value: number;
-    } | null;
+declare class ConditionPF2e extends AbstractEffectPF2e {
+    get badge(): EffectBadge | null;
     get value(): number | null;
     get duration(): number | null;
     /** Is the condition currently active? */
@@ -14,6 +11,8 @@ declare class ConditionPF2e extends ItemPF2e {
     get fromSystem(): boolean;
     /** Is the condition found in the token HUD menu? */
     get isInHUD(): boolean;
+    increase(): Promise<void>;
+    decrease(): Promise<void>;
     /** Ensure value.isValued and value.value are in sync */
     prepareBaseData(): void;
     /** Set a self roll option for this condition */

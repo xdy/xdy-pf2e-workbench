@@ -6,6 +6,6 @@ export declare class VehicleSheetPF2e extends ActorSheetPF2e<VehiclePF2e> {
     static get defaultOptions(): ActorSheetOptions;
     get template(): string;
     getData(): Promise<any>;
-    protected prepareItems(sheetData: any): void;
+    protected prepareItems(sheetData: any): Promise<void>;
     activateListeners($html: JQuery): void;
 }

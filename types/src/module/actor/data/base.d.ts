@@ -19,7 +19,7 @@ interface BaseActorSourcePF2e<TType extends ActorType = ActorType, TSystemSource
 interface BaseActorDataPF2e<TActor extends ActorPF2e = ActorPF2e, TType extends ActorType = ActorType, TSystemData extends ActorSystemData = ActorSystemData, TSource extends BaseActorSourcePF2e<TType> = BaseActorSourcePF2e<TType>> extends Omit<BaseActorSourcePF2e<TType, ActorSystemSource>, "effects" | "items" | "prototypeToken">, foundry.data.ActorData<TActor, ActiveEffectPF2e, ItemPF2e> {
     readonly type: TType;
     readonly system: TSystemData;
-    token: PrototypeTokenDataPF2e;
+    token: PrototypeTokenPF2e;
     readonly _source: TSource;
 }
 interface ActorSystemSource {
@@ -241,19 +241,19 @@ interface Rollable {
     roll: RollFunction;
 }
 interface PrototypeTokenSourcePF2e extends foundry.data.PrototypeTokenSource {
-    flags: foundry.data.PrototypeTokenData["flags"] & {
+    flags: foundry.data.PrototypeToken["flags"] & {
         pf2e?: {
             linkToActorSize?: boolean;
             autoscale?: boolean;
         };
     };
 }
-interface PrototypeTokenDataPF2e extends foundry.data.PrototypeTokenData {
-    flags: foundry.data.PrototypeTokenData["flags"] & {
+interface PrototypeTokenPF2e extends foundry.data.PrototypeToken {
+    flags: foundry.data.PrototypeToken["flags"] & {
         pf2e: {
             linkToActorSize: boolean;
             autoscale: boolean;
         };
     };
 }
-export { AbilityBasedStatistic, ActorFlagsPF2e, ActorSystemData, ActorSystemSource, ArmorClassData, BaseActorAttributes, BaseActorDataPF2e, BaseActorSourcePF2e, BaseHitPointsData, BaseTraitsData, DexterityModifierCapData, GangUpCircumstance, InitiativeData, PerceptionData, PrototypeTokenDataPF2e, RollFunction, RollOptionFlags, RollToggle, Rollable, StrikeData, TraitViewData, };
+export { AbilityBasedStatistic, ActorFlagsPF2e, ActorSystemData, ActorSystemSource, ArmorClassData, BaseActorAttributes, BaseActorDataPF2e, BaseActorSourcePF2e, BaseHitPointsData, BaseTraitsData, DexterityModifierCapData, GangUpCircumstance, InitiativeData, PerceptionData, PrototypeTokenPF2e, RollFunction, RollOptionFlags, RollToggle, Rollable, StrikeData, TraitViewData, };

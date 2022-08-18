@@ -54,7 +54,6 @@ declare class CharacterPF2e extends CreaturePF2e {
     prepareDataFromItems(): void;
     prepareDerivedData(): void;
     private setAbilityScores;
-    private setAbilityModifiers;
     /** Set roll operations for ability scores, proficiency ranks, and number of hands free */
     protected setNumericRollOptions(): void;
     private prepareSaves;

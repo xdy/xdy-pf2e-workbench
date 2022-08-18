@@ -2,14 +2,24 @@
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
 import { SelectableTagField } from ".";
-import { TagSelectorBase } from "./base";
-export declare class ResistanceSelector extends TagSelectorBase<ActorPF2e> {
-    objectProperty: string;
+import { BaseTagSelector } from "./base";
+export declare class ResistanceSelector<TActor extends ActorPF2e> extends BaseTagSelector<TActor> {
+    protected objectProperty: string;
     static get defaultOptions(): FormApplicationOptions;
     private get actor();
     protected get configTypes(): readonly SelectableTagField[];
-    getData(): any;
+    getData(): Promise<ResistanceSelectorData<TActor>>;
     activateListeners($html: JQuery): void;
     protected _updateObject(_event: Event, formData: Record<string, unknown>): Promise<void>;
-    protected getUpdateData(formData: Record<string, unknown>): Record<string, unknown>[];
 }
+interface ResistanceSelectorData<TActor extends ActorPF2e> extends FormApplicationData<TActor> {
+    choices: Record<string, ChoiceData>;
+    hasExceptions: boolean;
+}
+interface ChoiceData {
+    label: string;
+    selected: boolean;
+    value: number;
+    exceptions: string;
+}
+export {};

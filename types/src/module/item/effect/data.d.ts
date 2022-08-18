@@ -1,5 +1,5 @@
+import { EffectBadge } from "@item/abstract-effect";
 import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemFlagsPF2e, ItemLevelData, ItemSystemData, ItemSystemSource } from "@item/data/base";
-import { OneToFour } from "@module/data";
 import { EffectPF2e } from ".";
 declare type EffectSource = BaseItemSourcePF2e<"effect", EffectSystemSource> & {
     flags: DeepPartial<EffectFlags>;
@@ -34,17 +34,10 @@ interface EffectSystemData extends EffectSystemSource, ItemSystemData {
     expired: boolean;
     remaining: string;
 }
-interface EffectBadge {
-    value: number | DiceExpression;
-    tickRule: EffectTickType;
-}
 declare type EffectExpiryType = "turn-start" | "turn-end";
-declare type EffectTickType = "turn-start";
-declare type DieFaceCount = 4 | 6 | 8 | 10 | 12 | 20;
-declare type DiceExpression = `${OneToFour | ""}d${DieFaceCount}`;
 interface EffectAuraData {
     slug: string;
     origin: ActorUUID | TokenDocumentUUID;
     removeOnExit: boolean;
 }
-export { DiceExpression, EffectBadge, EffectData, EffectExpiryType, EffectFlags, EffectSource, EffectSystemData, EffectTickType, };
+export { EffectData, EffectExpiryType, EffectFlags, EffectSource, EffectSystemData };

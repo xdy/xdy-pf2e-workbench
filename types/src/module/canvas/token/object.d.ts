@@ -62,8 +62,6 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     }): void;
     /** Refresh vision and the `EffectsPanel` */
     protected _onRelease(options?: Record<string, unknown>): void;
-    /** Work around Foundry bug in which unlinked token redrawing performed before data preparation completes */
-    _onUpdate(changed: DeepPartial<this["document"]["_source"]>, options: DocumentModificationContext<this["document"]>, userId: string): void;
     protected _onDragLeftStart(event: TokenInteractionEvent<this>): void;
     /** If a single token (this one) was dropped, re-establish the hover status */
     protected _onDragLeftDrop(event: TokenInteractionEvent<this>): Promise<this["document"][]>;

@@ -6,7 +6,7 @@ import { DeityPF2e } from "@item";
 import { ItemSheetPF2e } from "@item/sheet/base";
 import { ItemSheetDataPF2e } from "@item/sheet/data-types";
 import { SheetOptions } from "@module/sheet/helpers";
-export declare class DeitySheetPF2e<TItem extends DeityPF2e = DeityPF2e> extends ItemSheetPF2e<TItem> {
+export declare class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
     static get defaultOptions(): DocumentSheetOptions;
     getData(options?: Partial<DocumentSheetOptions>): Promise<DeitySheetData>;
     activateListeners($html: JQuery): void;

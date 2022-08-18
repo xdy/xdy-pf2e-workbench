@@ -17,7 +17,7 @@ export declare abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> ext
     /** A DocumentSheet class presenting additional, per-actor settings */
     protected abstract readonly actorConfigClass: ConstructorOf<CreatureConfig<CreaturePF2e>> | null;
     getData(options?: ActorSheetOptions): Promise<CreatureSheetData<TActor>>;
-    protected prepareSpellcasting(): SpellcastingSheetData[];
+    protected prepareSpellcasting(): Promise<SpellcastingSheetData[]>;
     /** Get the font-awesome icon used to display a certain level of skill proficiency */
     protected getProficiencyIcon(level: ZeroToFour): string;
     /** Preserve browser focus on unnamed input elements when updating */

@@ -12,9 +12,9 @@ export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TIt
     private editingRuleElementIndex;
     private ruleElementForms;
     get editingRuleElement(): RuleElementSource | null;
-    getData(options?: Partial<DocumentSheetOptions>): Promise<any>;
+    get validTraits(): Record<string, string> | null;
     /** An alternative to super.getData() for subclasses that don't need this class's `getData` */
-    protected getBaseData(options?: Partial<DocumentSheetOptions>): ItemSheetDataPF2e<TItem>;
+    getData(options?: Partial<DocumentSheetOptions>): Promise<ItemSheetDataPF2e<TItem>>;
     protected onTagSelector(event: JQuery.TriggeredEvent): void;
     /**
      * Get NPC attack effect options
@@ -27,7 +27,7 @@ export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TIt
     }): Promise<void>;
     activateListeners($html: JQuery): void;
     /** Ensure the source description is edited rather than a prepared one */
-    activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): void;
+    activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): Promise<TinyMCE.Editor>;
     protected _getSubmitData(updateData?: Record<string, unknown>): Record<string, unknown>;
     /** Hide the sheet-config button unless there is more than one sheet option. */
     protected _getHeaderButtons(): ApplicationHeaderButton[];
