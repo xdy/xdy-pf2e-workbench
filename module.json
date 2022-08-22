@@ -4,8 +4,8 @@
   "version": "4.0.0-beta.16",
   "id": "xdy-pf2e-workbench",
   "compatibility": {
-    "minimum": "10.277",
-    "verified": "10.277",
+    "minimum": "10.278",
+    "verified": "10.278",
     "maximum": "10"
   },
   "name": "xdy-pf2e-workbench",

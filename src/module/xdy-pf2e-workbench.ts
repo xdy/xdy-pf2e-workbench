@@ -585,7 +585,7 @@ async function migrateFeatures() {
                     await actor.deleteEmbeddedDocuments("Item", [item.id]);
                 }
                 if (filter?.length > 0) {
-                    await actor.createEmbeddedDocuments("Item", [flatcheckNotes.data]);
+                    await actor.createEmbeddedDocuments("Item", [flatcheckNotes.system]);
                 }
             }
 
@@ -601,7 +601,7 @@ async function migrateFeatures() {
                         await actor.deleteEmbeddedDocuments("Item", [item.id]);
                     }
                     if (filter?.length > 0) {
-                        await actor.createEmbeddedDocuments("Item", [flatcheckNotes.data]);
+                        await actor.createEmbeddedDocuments("Item", [flatcheckNotes.system]);
                     }
                 }
             }
