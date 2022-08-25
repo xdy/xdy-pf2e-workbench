@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-//    "allowSyntheticDefaultImports": true, //Do I need this?
+    //    "allowSyntheticDefaultImports": true, //Do I need this?
     "allowUnusedLabels": false,
     "baseUrl": ".",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
+      "esnext",
       "dom",
-      "esnext"
+      "dom.iterable"
     ],
     "module": "commonjs",
     "noEmit": true,
@@ -61,7 +62,8 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strictBindCallApply": true,
-    "strictFunctionTypes": false, //Gives tons of errors, take a look later.
+    "strictFunctionTypes": false,
+    //Gives tons of errors, take a look later.
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "target": "es2018",
