@@ -1,3 +1,10 @@
+# [4.0.0-beta.20](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.19...v4.0.0-beta.20) (2022-08-27)
+
+
+### Bug Fixes
+
+* Fixed settings text. ([c605552](https://github.com/xdy/xdy-pf2e-workbench/commit/c605552d4ef6d56543b541789c3ec8d38b0eb29d))
+
 # [4.0.0-beta.19](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.18...v4.0.0-beta.19) (2022-08-27)
 
 
