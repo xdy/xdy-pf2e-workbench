@@ -1,3 +1,10 @@
+# [4.0.0-beta.24](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.23...v4.0.0-beta.24) (2022-08-27)
+
+
+### Bug Fixes
+
+* Some documentation ([22837e9](https://github.com/xdy/xdy-pf2e-workbench/commit/22837e9e879dc25f770a88465f225e679eaf8ead))
+
 # [4.0.0-beta.23](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.22...v4.0.0-beta.23) (2022-08-27)
 
 
