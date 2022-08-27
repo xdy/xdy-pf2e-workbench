@@ -90,8 +90,8 @@ export function registerWorkbenchSettings() {
         default: "disabled",
         type: String,
         choices: {
-            bottom: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.bottom`),
             disabled: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.disabled`),
+            bottom: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.bottom`),
             top: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.top`),
         },
         onChange: () => debouncedReload(),
