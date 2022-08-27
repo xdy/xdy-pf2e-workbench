@@ -89,7 +89,10 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
             if (datum === null || datum === "null") {
                 datum = "";
             }
-            await game.settings.set(MODULENAME, key, datum);
+            // If statement handles bug in foundry
+            if (!["submit", "reset"].includes(key)) {
+                await game.settings.set(MODULENAME, key, datum);
+            }
         }
     }
 }
