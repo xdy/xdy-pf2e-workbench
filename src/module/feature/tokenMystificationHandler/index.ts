@@ -88,6 +88,13 @@ export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): b
     return tokenName !== actorName || false;
 }
 
+export async function doMystificationFromTokenId(tokenId: string, active: boolean) {
+    const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));
+    if (token) {
+        return doMystification(token, active);
+    }
+}
+
 export async function doMystification(token: TokenPF2e, active: boolean) {
     if (!token?.actor) {
         return;
@@ -127,7 +134,7 @@ export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
         const toggle = $(
             `<div class="control-icon ${
                 isTokenMystified(token) ? "active" : ""
-            }" > <i class="fas fa-eye-slash"  title=${title}></i></div>`
+            }" > <i class="fas fa-eye-slash"  title="${title}"></i></div>`
         );
         if (canMystify() && !token?.actor?.hasPlayerOwner) {
             toggle.on("click", async (e) => {

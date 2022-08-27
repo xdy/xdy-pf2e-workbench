@@ -295,7 +295,7 @@ function heroes() {
     );
 }
 
-async function resetHeroPoints(heropoints: number) {
+export async function resetHeroPoints(heropoints: number) {
     for (const actor of heroes()) {
         const value = Math.min(heropoints, <number>game.settings.get(MODULENAME, "maxHeroPoints"));
         await actor.update({
@@ -304,7 +304,7 @@ async function resetHeroPoints(heropoints: number) {
     }
 }
 
-async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
+export async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
     let actors;
     switch (actorId) {
         case "ALL":
@@ -319,7 +319,7 @@ async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
     }
 
     for (const actor of actors) {
-        const system = <CharacterSystemData>actor.data.system;
+        const system = <CharacterSystemData>actor.system;
         const value = Math.min(
             system.resources.heroPoints.value + heropoints,
             <number>game.settings.get(MODULENAME, "maxHeroPoints")

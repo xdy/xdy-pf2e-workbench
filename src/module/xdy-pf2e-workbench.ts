@@ -10,31 +10,29 @@
 // TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
 import { preloadTemplates } from "./preloadTemplates";
 import { registerWorkbenchSettings } from "./settings";
-import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
+import {
+    doMystificationFromTokenId,
+    mangleChatMessage,
+    renderNameHud,
+    tokenCreateMystification,
+} from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
-import { moveOnZeroHP } from "./feature/initiativeHandler";
+import { moveOnZeroHP, moveSelectedAheadOfCurrent } from "./feature/initiativeHandler";
 import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { toggleMenuSettings, toggleSettings } from "./feature/settingsHandler";
-import {
-    applyEncumbranceBasedOnBulk,
-    autoRemoveUnconsciousAtGreaterThanZeroHP,
-    giveUnconsciousIfDyingRemovedAt0HP,
-    giveWoundedWhenDyingRemoved,
-    increaseDyingOnZeroHP,
-    reduceFrightened,
-    removeDyingOnZeroHP,
-} from "./feature/conditionHandler";
 import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
 import {
+    addHeroPoints,
     calcRemainingMinutes,
     createRemainingTimeMessage,
     maxHeroPoints,
+    resetHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
-import { nth } from "./utils";
+import { isFirstGM, nth } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
@@ -52,6 +50,17 @@ import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { UserPF2e } from "@module/user";
 import { loadSkillActions, renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions";
+import { scaleNPCToLevelFromActorId } from "./feature/cr-scaler/NPCScaler";
+import { generateNameFromTraitsFromTokenId } from "./feature/tokenMystificationHandler/traits-name-generator";
+import {
+    applyEncumbranceBasedOnBulk,
+    autoRemoveUnconsciousAtGreaterThanZeroHP,
+    giveUnconsciousIfDyingRemovedAt0HP,
+    giveWoundedWhenDyingRemoved,
+    increaseDyingOnZeroHP,
+    reduceFrightened,
+    removeDyingOnZeroHP,
+} from "./feature/conditionHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -624,9 +633,25 @@ Hooks.once("ready", async () => {
 
     // Must be in ready
 
-    if (game.user?.isGM) {
+    if (isFirstGM()) {
         await migrateFeatures();
     }
+
+    if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
+        ui.notifications.error(
+            "The module pf2e-sheet-skill-actions is no longer maintained, all it's functions are part of the Workbench, please turn it off."
+        );
+    }
+
+    // Make some functions available for macros
+    game["PF2eWorkbench"] = {
+        resetHeroPoints: resetHeroPoints, // game.PF2eWorkbench.resetHeroPoints(1)
+        addHeroPoints: addHeroPoints, // game.PF2eWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
+        scaleNPCToLevelFromActorId: scaleNPCToLevelFromActorId, // await game.PF2eWorkbench.scaleNPCToLevelFromActorId(_token.actor.id, 24);
+        moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
+        doMystificationFromTokenId: doMystificationFromTokenId, // await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, false)
+        generateNameFromTraitsFromTokenId: generateNameFromTraitsFromTokenId, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
+    };
 
     if (game.settings.get(MODULENAME, "heroPointHandler")) {
         if (game.user?.isGM) {

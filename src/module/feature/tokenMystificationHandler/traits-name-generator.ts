@@ -113,6 +113,13 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     );
 }
 
+export async function generateNameFromTraitsFromTokenId(tokenId: string) {
+    const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));
+    if (token) {
+        return generateNameFromTraits(token);
+    }
+}
+
 export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2e) {
     let result: any;
     const data = token?.actor?.system;

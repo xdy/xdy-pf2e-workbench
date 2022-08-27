@@ -19,6 +19,13 @@ import { getActor, getFolder, getFolderInFolder } from "./Utilities";
 import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil";
 import { NPCPF2e } from "@actor";
 
+export async function scaleNPCToLevelFromActorId(actorId: string, newLevel: number) {
+    const actor = <NPCPF2e>game.actors.get(actorId);
+    if (actor) {
+        scaleNPCToLevel(actor, newLevel);
+    }
+}
+
 export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     const rootFolder = getFolder("cr-scaler");
 
@@ -185,7 +192,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     const DC_REGEXES = [/(data-pf2-dc=")(\d+)(")/g, /(@Check\[.*?type:.*?|dc:)(\d+)(.*?])/g];
     for (let regexNo = 0; regexNo < DC_REGEXES.length; regexNo++) {
         const regex = DC_REGEXES[regexNo];
-        for (const item of actor.data.items.filter(
+        for (const item of actor.items.filter(
             (item) => item.system.description.value.includes("DC") || item.system.description.value.includes("dc:")
         )) {
             const description = item.system.description.value;
