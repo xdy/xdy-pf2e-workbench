@@ -1,3 +1,10 @@
+# [4.0.0-beta.23](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.22...v4.0.0-beta.23) (2022-08-27)
+
+
+### Bug Fixes
+
+* Added a bunch of potentially useful macro functions (basically, make internal functions available pretty much as-is.) ([3a76cb7](https://github.com/xdy/xdy-pf2e-workbench/commit/3a76cb7702e6e4da87ecf3eaa5835a90c0b739c2)), closes [#310](https://github.com/xdy/xdy-pf2e-workbench/issues/310)
+
 # [4.0.0-beta.22](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.21...v4.0.0-beta.22) (2022-08-27)
 
 
