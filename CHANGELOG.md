@@ -1,3 +1,11 @@
+# [4.0.0-beta.22](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.21...v4.0.0-beta.22) (2022-08-27)
+
+
+### Bug Fixes
+
+* Added https://fontawesome.com/icons/eye-slash?s=solid to collapsed chat messages. ([b9c4ae2](https://github.com/xdy/xdy-pf2e-workbench/commit/b9c4ae2dddcf65ff27f0db26db392b16e1969c2a)), closes [#351](https://github.com/xdy/xdy-pf2e-workbench/issues/351)
+* Handle core foundry bug (or changed api, dunno.) ([2be031d](https://github.com/xdy/xdy-pf2e-workbench/commit/2be031d14d1a02e3ef0312083e5cda54e86421fd))
+
 # [4.0.0-beta.21](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.20...v4.0.0-beta.21) (2022-08-27)
 
 
