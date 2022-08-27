@@ -23,8 +23,9 @@
         "Position": {
           "name": "Skill Actions position",
           "hint": "Position in the skill page; Top : right after Strikes, Bottom : At the end",
-          "top": "Top",
-          "bottom": "Bottom"
+          "bottom": "Bottom",
+          "disabled": "Disabled",
+          "top": "Top"
         }
       },
       "UnequipAll": {
