@@ -1,3 +1,12 @@
+# [4.0.0-beta.19](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.18...v4.0.0-beta.19) (2022-08-27)
+
+
+### Bug Fixes
+
+* Actually set system dependency to 4.0.0 (which means I have to patch pf2e locally until that version is actually set there.) ([280c2f3](https://github.com/xdy/xdy-pf2e-workbench/commit/280c2f30f59cbb995edfbbb5fa0785126f9a3e39))
+* Added all functionality from PF2e Skill Sheet Actions (https://github.com/jamespdaily/pf2e-sheet-skill-actions) with permission of the original author. See https://discord.com/channels/880968862240239708/880969174661353484/1013074604727730307 ("Flash Granola: [@xdy](https://github.com/xdy) it would be an honor, honestly I learned a lot about module coding from you and your GitHub. I'll allow it to be relicensed and lovingly devoured by workbench") ([4ea2379](https://github.com/xdy/xdy-pf2e-workbench/commit/4ea237971ea7e6081c79ec4e21b54aba697db8e9))
+* Update to foundry v10 and pf2e v4 types. (And, patched in filepicker). ([9b4df01](https://github.com/xdy/xdy-pf2e-workbench/commit/9b4df01a2d5bdeca49eb47bb333b6bce6ed1dd72))
+
 # [4.0.0-beta.18](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.17...v4.0.0-beta.18) (2022-08-25)
 
 
