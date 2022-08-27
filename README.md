@@ -65,6 +65,17 @@ No section
 * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
 * Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, actions, etc). Can be configured to default to collapsed or expanded.
 * Option to either expand all damage cards, or only expand new cards. If the latter, on a refresh the last three messages are expanded if they are damage cards.
+* Option to add all skill actions to the character Actions page. (This feature has been taken over from the discontinued https://github.com/jamespdaily/pf2e-sheet-skill-actions/ module. Thanks James!)
+  * The module will hide any skill actions that you're currently not trained in.
+  * Actions that require a feat (e.g. Bon Mot) will not show up unless you actually have the feat.
+* A few potentially useful internal functions have been made available for macro use. Name and simple example of each below:
+```game.PF2eWorkbench.resetHeroPoints, // game.PF2EWorkbench.resetHeroPoints(1)
+game.PF2eWorkbench.addHeroPoints, // game.PF2EWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
+game.PF2eWorkbench.scaleNPCToLevelFromActorId: scaleNPCToLevelFromActorId, // await game.PF2eWorkbench.scaleNPCToLevelFromActorId(_token.actor.id, 24);
+game.PF2eWorkbench.moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
+game.PF2eWorkbench.doMystificationFromTokenId: doMystificationFromTokenId, // await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, false)
+game.PF2eWorkbench.generateNameFromTraitsFromTokenId: generateNameFromTraitsFromTokenId, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
+```
 
 New Keybinds in Configure Controls
 * Optional keybind to mystify a creature.
