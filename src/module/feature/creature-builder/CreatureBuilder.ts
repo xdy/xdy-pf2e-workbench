@@ -21,7 +21,7 @@ import {
     DefaultCreatureStatistics,
     Roadmap,
     ROADMAPS,
-    StatisticOptions
+    StatisticOptions,
 } from "./CreatureBuilderData";
 import { SCALE_APP_DATA } from "../NPCScaleData";
 import { ActorPF2e } from "@actor";

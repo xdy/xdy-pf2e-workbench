@@ -72,7 +72,7 @@ export async function setupNpcRoller() {
 
 function enableNpcRollerButton(_app, html: JQuery) {
     const button = $(
-        `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npc-roller.button-label`)}</button>`
+        `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}</button>`
     );
     button.on("click", () => {
         new NpcRoller().render(true);
@@ -95,7 +95,7 @@ class NpcRoller extends Application {
         const options = super.defaultOptions;
         return {
             ...options,
-            title: game.i18n.localize(`${MODULENAME}.npc-roller.title`),
+            title: game.i18n.localize(`${MODULENAME}.npcRoller.title`),
             template: `modules/${MODULENAME}/templates/feature/npc-roller/index.html`,
             tabs: [
                 {

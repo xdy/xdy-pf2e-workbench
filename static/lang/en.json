@@ -1,6 +1,6 @@
 {
   "xdy-pf2e-workbench": {
-    "npc-roller": {
+    "npcRoller": {
       "title": "NPC Roller",
       "button-label": "NPC Roller",
       "nav-labels": {
@@ -15,6 +15,20 @@
         "perception": "Perception",
         "abilityScore": "Ability Scores",
         "skill": "Skills"
+      }
+    },
+    "skillActions": {
+      "Title": "Skill Actions",
+      "Settings": {
+        "Position": {
+          "name": "Skill Actions position",
+          "hint": "Position in the skill page; Top : right after Strikes, Bottom : At the end",
+          "top": "Top",
+          "bottom": "Bottom"
+        }
+      },
+      "UnequipAll": {
+        "Tooltip": "Toggle hidden actions. Hold alt when clicking to make unequip/equip all skills."
       }
     },
     "spellCardNotFound": "The spell card could not be found. Casting {spell} at minimum level for that spell.",

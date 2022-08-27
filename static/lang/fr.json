@@ -139,6 +139,17 @@
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "Utilise le nom mystifié à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié. Cela va vraisemblablement ne pas être joli pour certaines capacités.",
         "name": "Utiliser les noms mystifiés dans les messages de la conversation."
+      },
+      "skillActions": {
+        "Title": "Actions de Compétence",
+        "Settings": {
+          "Position": {
+            "name": "Position des actions de compétence",
+            "hint": "Position dans la page des actions; Haut : juste après les frappes, Bas : en dernière position.",
+            "top": "Haut",
+            "bottom": "Bas"
+          }
+        }
       }
     }
   }

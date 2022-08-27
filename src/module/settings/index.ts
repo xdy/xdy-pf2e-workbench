@@ -82,6 +82,21 @@ export function registerWorkbenchSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "skillActions", {
+        name: `${MODULENAME}.SETTINGS.skillActions.name`,
+        hint: `${MODULENAME}.SETTINGS.skillActions.hint`,
+        scope: "client",
+        config: true,
+        default: "disabled",
+        type: String,
+        choices: {
+            disabled: game.i18n.localize(`${MODULENAME}.SETTINGS.skillActions.disabled`),
+            bottom: game.i18n.localize(`${MODULENAME}.SETTINGS.skillActions.bottom`),
+            top: game.i18n.localize(`${MODULENAME}.SETTINGS.skillActions.top`),
+        },
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "workbenchVersion", {
         name: `${MODULENAME}.SETTINGS.workbenchVersion.name`,
         hint: `${MODULENAME}.SETTINGS.workbenchVersion.hint`,

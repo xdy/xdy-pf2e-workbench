@@ -51,6 +51,7 @@ import { setupNpcRoller } from "./feature/npc-roller/NpcRoller";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { UserPF2e } from "@module/user";
+import { loadSkillActions, renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -460,7 +461,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "playerItemsRarityColour") ||
         game.settings.get(MODULENAME, "castPrivateSpell") ||
         game.settings.get(MODULENAME, "addGmRKButtonToNpc") ||
-        game.settings.get(MODULENAME, "quickQuantities")
+        game.settings.get(MODULENAME, "quickQuantities") ||
+        game.settings.get(MODULENAME, "skillActions") !== "disabled"
     ) {
         Hooks.on("renderActorSheet", (sheet: ActorSheet<Actor, Item>, $html: JQuery) => {
             if (game.settings.get(MODULENAME, "quickQuantities")) {
@@ -533,6 +535,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             }
                         });
                 });
+            }
+            if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+                renderSheetSkillActions(sheet, $html);
             }
         });
     }
@@ -636,5 +641,19 @@ Hooks.once("ready", async () => {
         }
     }
 
+    if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+        loadSkillActions();
+    }
+
+    // if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+    //     Hooks.once("babele.ready", async () => {
+    //         if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+    //             // Reload actions to have translated actions
+    //             await ActionsIndex.instance.loadCompendium("pf2e.feats-srd");
+    //             await ActionsIndex.instance.loadCompendium("pf2e.actionspf2e");
+    //         }
+    //     });
+    // }
+    //
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
