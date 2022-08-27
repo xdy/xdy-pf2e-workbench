@@ -1,3 +1,10 @@
+# [4.0.0-beta.21](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.20...v4.0.0-beta.21) (2022-08-27)
+
+
+### Bug Fixes
+
+* Move settings ([5c5b23d](https://github.com/xdy/xdy-pf2e-workbench/commit/5c5b23d4b77f927bc45aa81fe805d27f07b78a52))
+
 # [4.0.0-beta.20](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.19...v4.0.0-beta.20) (2022-08-27)
 
 
