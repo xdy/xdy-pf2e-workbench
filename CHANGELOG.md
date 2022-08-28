@@ -1,3 +1,11 @@
+# [4.0.0-beta.25](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.24...v4.0.0-beta.25) (2022-08-28)
+
+
+### Bug Fixes
+
+* Ignore a return value that is wrong ([1118400](https://github.com/xdy/xdy-pf2e-workbench/commit/111840005fb3e834b558f61ffc1e7137f8a5a82b))
+* Update to foundry v10 and pf2e v4 types. (And, patched in filepicker). ([4fc4d33](https://github.com/xdy/xdy-pf2e-workbench/commit/4fc4d33374cebece9c02df42378a21b631e3b681))
+
 # [4.0.0-beta.24](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.23...v4.0.0-beta.24) (2022-08-27)
 
 
