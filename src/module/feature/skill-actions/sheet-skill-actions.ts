@@ -6,6 +6,7 @@ import { Flag } from "./utils";
 let templates: Handlebars.TemplateDelegate[];
 
 export async function setupSkillActions() {
+    // @ts-ignore
     templates = await loadTemplates([`modules/${MODULENAME}/templates/feature/skill-actions/skill-actions.hbs`]);
 }
 
