@@ -1,3 +1,10 @@
+# [4.0.0-beta.27](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.26...v4.0.0-beta.27) (2022-08-28)
+
+
+### Bug Fixes
+
+* Typoes ([920f6f9](https://github.com/xdy/xdy-pf2e-workbench/commit/920f6f96515e41411cafd42fb0e5d49cad1239ad))
+
 # [4.0.0-beta.26](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.25...v4.0.0-beta.26) (2022-08-28)
 
 
