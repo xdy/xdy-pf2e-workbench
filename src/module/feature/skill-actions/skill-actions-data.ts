@@ -101,6 +101,17 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
             { proficiencyKey: "lore" },
         ],
     },
+    {
+        slug: "tap-ley-line",
+        compendiumId: "gxtq81VAhpmNvEgA",
+        actionType: "A",
+        variants: [
+            { proficiencyKey: "arc", requiredRank: 1},
+            { proficiencyKey: "nat", requiredRank: 1},
+            { proficiencyKey: "occ", requiredRank: 1},
+            { proficiencyKey: "rel", requiredRank: 1},
+        ],
+    },
     // Athletics
     {
         slug: "climb",
@@ -362,9 +373,136 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
     },
     // Feat based
     {
+        slug: "battle-medicine",
+        compendiumId: "wYerMk6F1RZb0Fwt",
+        variants: [{ proficiencyKey: "med", requiredRank: 1 }],
+    },
+    {
+        slug: "battle-prayer",
+        actionType: "A",
+        compendiumId: "nBlzWZnmYuFHrMyV",
+        variants: [{ proficiencyKey: "rel", requiredRank: 3 }],
+    },
+    {
         slug: "bon-mot",
         compendiumId: "0GF2j54roPFIDmXf",
-        icon: "hideous-laughter",
         variants: [{ proficiencyKey: "dip" }],
+    },
+    {
+        slug: "chromotherapy",
+        actionType: "D",
+        compendiumId: "RlFZ648UR0Q0YECL",
+        variants: [{ proficiencyKey: "med", requiredRank: 2 }],
+    },
+    {
+        slug: "diablic-certitude",
+        actionType: "F",
+        compendiumId: "hkSuxXOc9qBleJbd",
+        variants: [{ proficiencyKey: "rel", requiredRank: 1 }],
+    },
+    {
+        slug: "disturbing-knowledge",
+        actionType: "D",
+        compendiumId: "hkSuxXOc9qBleJbd",
+        variants: [{ proficiencyKey: "occ", requiredRank: 3 }],
+    },
+    {
+        slug: "encouraging-words",
+        actionType: "A",
+        compendiumId: "dUnT3HWMFD3d2eBJ",
+        variants: [{ proficiencyKey: "dip", requiredRank: 1 }],
+    },
+    {
+        slug: "evangelize",
+        actionType: "A",
+        compendiumId: "YgbcLfAEdi4xxvX5",
+        variants: [{ proficiencyKey: "dip", requiredRank: 3 }],
+    },
+    {
+        slug: "eye-for-numbers",
+        actionType: "A",
+        compendiumId: "0N8TtGSk5enoLBZ8",
+        variants: [{ proficiencyKey: "soc", requiredRank: 1 }],
+    },
+    {
+        slug: "juggle",
+        actionType: "A",
+        compendiumId: "AYb8PmGJ37HwIMwj",
+        variants: [{ proficiencyKey: "prf", requiredRank: 1 }],
+    },
+    {
+        slug: "legendary-negotiation",
+        compendiumId: "A0TNeMNvyY8QpmLz",
+        actionType: "T",
+        variants: [{ proficiencyKey: "dip", requiredRank: 4 }],
+    },
+    {
+        slug: "no-cause-for-alarm",
+        compendiumId: "6ON8DjFXSMITZleX",
+        actionType: "T",
+        variants: [{ proficiencyKey: "dip", requiredRank: 1 }],
+    },
+    {
+        slug: "quick-mount",
+        compendiumId: "G9l2g7sDpPVbZJza",
+        actionType: "A",
+        variants: [{ proficiencyKey: "nat", requiredRank: 2 }],
+    },
+    {
+        slug: "reveal-true-name",
+        compendiumId: "5s8FqK4YZTVOvP0v",
+        actionType: "D",
+        variants: [
+            { proficiencyKey: "arc", requiredRank: 1},
+            { proficiencyKey: "nat", requiredRank: 1},
+            { proficiencyKey: "occ", requiredRank: 1},
+            { proficiencyKey: "rel", requiredRank: 1},
+        ],
+    },
+    {
+        slug: "sacred-defense",
+        actionType: "A",
+        compendiumId: "gHBdjbEnIK8clK8u",
+        variants: [{ proficiencyKey: "rel", requiredRank: 3 }],
+    },
+    {
+        slug: "sanctify-water",
+        actionType: "A",
+        compendiumId: "P9dVBWB8nYZt4AFA",
+        variants: [{ proficiencyKey: "rel", requiredRank: 3 }],
+    },
+    {
+        slug: "scare-to-death",
+        compendiumId: "mZttsiWl1ql5NvrH",
+        actionType: "A",
+        variants: [{ proficiencyKey: "itm", requiredRank: 4 }],
+    },
+    {
+        slug: "treat-condition",
+        actionType: "D",
+        compendiumId: "rfnEcjxIFqwlJwJT",
+        variants: [{ proficiencyKey: "med" }],
+    },
+    {
+        slug: "trick-magic-item",
+        compendiumId: "uR62fVC9FyQAMCO1",
+        actionType: "A",
+        variants: [
+            { proficiencyKey: "arc", requiredRank: 1},
+            { proficiencyKey: "nat", requiredRank: 1},
+            { proficiencyKey: "occ", requiredRank: 1},
+            { proficiencyKey: "rel", requiredRank: 1},
+        ],
+    },
+    {
+        slug: "eye-of-the-arclords",
+        compendiumId: "OtV7esAwza1U6Kwr",
+        actionType: "A",
+        variants: [
+            { proficiencyKey: "arc", requiredRank: 1 },
+            { proficiencyKey: "nat", requiredRank: 1 },
+            { proficiencyKey: "occ", requiredRank: 1 },
+            { proficiencyKey: "rel", requiredRank: 1 },
+        ],
     },
 ];
