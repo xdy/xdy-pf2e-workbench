@@ -1,3 +1,11 @@
+# [4.0.0-beta.26](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.25...v4.0.0-beta.26) (2022-08-28)
+
+
+### Bug Fixes
+
+* Added a bunch of skill actions (mostly feat-based). ([dffe812](https://github.com/xdy/xdy-pf2e-workbench/commit/dffe8123aa273029f60681f9db7a1908f648a204))
+* Update dependencies. ([eb67386](https://github.com/xdy/xdy-pf2e-workbench/commit/eb673865fa391bebbd5aaeb3fcaf8a7cea323aea))
+
 # [4.0.0-beta.25](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.24...v4.0.0-beta.25) (2022-08-28)
 
 
