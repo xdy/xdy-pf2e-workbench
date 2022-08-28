@@ -395,9 +395,9 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         variants: [{ proficiencyKey: "med", requiredRank: 2 }],
     },
     {
-        slug: "diablic-certitude",
+        slug: "diabolic-certitude",
         actionType: "F",
-        compendiumId: "hkSuxXOc9qBleJbd",
+        compendiumId: "WxL8NMW9JQ5igu0C",
         variants: [{ proficiencyKey: "rel", requiredRank: 1 }],
     },
     {
