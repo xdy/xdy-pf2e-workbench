@@ -35,7 +35,7 @@
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.5",
+    "@semantic-release/github": "^8.0.6",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/css-minimizer-webpack-plugin": "^3.2.1",
@@ -98,7 +98,7 @@
     "jquery": "^3.6.1",
     "ky": "^0.31.1",
     "ky-universal": "^0.10.1",
-    "luxon": "^3.0.1",
+    "luxon": "^3.0.2",
     "minisearch": "^5.0.0",
     "nouislider": "^15.6.1",
     "sortablejs": "^1.15.0"
