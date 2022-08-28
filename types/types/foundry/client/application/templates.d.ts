@@ -1,4 +1,3 @@
-///<reference path="../../../../../node_modules/handlebars/types/index.d.ts"/>
 /**
  * Get a template from the server by fetch request and caching the retrieved result
  * @param path  The web-accessible HTML template URL
@@ -10,7 +9,7 @@ declare function getTemplate(path: string): Promise<string>;
  * Load and cache a set of templates by providing an Array of paths
  * @param paths
  */
-declare function loadTemplates(paths: string[]): Promise<Handlebars.TemplateDelegate[]>;
+declare function loadTemplates(paths: string[]): Promise<void>;
 
 /**
  * Get and render a template using provided data and handle the returned HTML
