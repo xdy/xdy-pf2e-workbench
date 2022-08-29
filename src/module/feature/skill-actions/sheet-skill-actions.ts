@@ -125,24 +125,28 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
 
     const skillActions = game.settings.get(MODULENAME, "skillActions");
     if (skillActions !== "disabled") {
-        const exploration = html.find('[data-tab="exploration"] .actions-list.item-list.directory-list');
-        const downtime = html.find('[data-tab="downtime"] .actions-list.item-list.directory-list');
         switch (skillActions) {
             case "top": {
-                const encounterTop = html.find(".actions-list.item-list.directory-list.strikes-list");
+                const explorationTop = html.find('[data-tab="exploration"] .actions-list.item-list.directory-list').prev();
+                const downtimeTop = html.find('[data-tab="downtime"] .actions-list.item-list.directory-list').prev();
+                const encounterTop = html.find(
+                    '[data-tab="encounter"] .actions-list.item-list.directory-list.strikes-list'
+                );
                 encounterTop.after($encounter);
-                exploration.before($exploration);
-                downtime.before($downtime);
+                explorationTop.before($exploration);
+                downtimeTop.before($downtime);
 
                 hideDuplicateActions(toHideActions);
 
                 break;
             }
             case "bottom": {
-                const encounterBottom = html.find(".actions-panel.active");
+                const encounterBottom = html.find('[data-tab="encounter"]  .actions-list.item-list.directory-list').last();
+                const explorationBottom = html.find('[data-tab="exploration"] .actions-list.item-list.directory-list');
+                const downtimeBottom = html.find('[data-tab="downtime"] .actions-list.item-list.directory-list');
                 encounterBottom.after($encounter);
-                exploration.after($exploration);
-                downtime.after($downtime);
+                explorationBottom.after($exploration);
+                downtimeBottom.after($downtime);
 
                 hideDuplicateActions(toHideActions);
 
