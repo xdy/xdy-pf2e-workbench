@@ -61,6 +61,36 @@ function renderActionsList(skillActions: SkillActionCollection, actor: Actor) {
     return $skillActions;
 }
 
+function hideDuplicateActions(toHideActions: string[]) {
+    const actionIds: string[] = [];
+    // if (game.settings.get(MODULENAME, "skillActionsHideDuplicates") !== "donothide") {
+    const list = Array.from(document.getElementsByClassName("item action"))
+        .filter((x) => x.getAttribute("data-item-id"))
+        .map((x) => x.getAttribute("data-item-id"));
+
+    for (const value of list) {
+        if (value) {
+            actionIds.push(value);
+        }
+    }
+
+    let intersection = actionIds.filter((element) => toHideActions.includes(element));
+    if (intersection.length > 0) {
+        for (const s of intersection) {
+            // if (game.settings.get(MODULENAME, "skillActionsHideDuplicates") === "hideActions") {
+            Array.from(document.getElementsByClassName("item action"))
+                // .filter((x) => x.getAttribute("data-item-id"))
+                .filter((x) => x.getAttribute("data-item-id") === s)[0]["style"].display = "none";
+            // } else {
+            //     Array.from(document.getElementsByClassName("item action"))
+            //         // .filter((x) => x.getAttribute("data-action-id"))
+            //         .filter((x) => x.getAttribute("data-action-id") === s)[0]["style"].display = "none";
+            // }
+        }
+    }
+    // }
+}
+
 export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElement>) {
     if (app.actor.type !== "character") {
         return;
@@ -69,6 +99,7 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
     const encounterActions = new SkillActionCollection();
     const explorationActions = new SkillActionCollection();
     const downtimeActions = new SkillActionCollection();
+    let toHideActions: string[] = [];
 
     SkillActionCollection.allActionsFor(app.actor).forEach(function (action) {
         if (action.hasTrait("downtime")) {
@@ -80,25 +111,42 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
                 encounterActions.add(action);
             }
         }
+        const action1 = app.actor.itemTypes.action;
+        // @ts-ignore
+        const item = action1.find((x) => x.system.slug === action.data.slug);
+        if (item) {
+            toHideActions.push(item.id);
+            //TODO Hide every normal action in toHideActions
+        }
     });
 
     const $encounter = renderActionsList(encounterActions, app.actor);
     const $exploration = renderActionsList(explorationActions, app.actor);
     const $downtime = renderActionsList(downtimeActions, app.actor);
 
-    const s = game.settings.get(MODULENAME, "skillActions");
-    switch (s) {
-        case "top": {
-            html.find(".actions-list.item-list.directory-list.strikes-list").after($encounter);
-            html.find('[data-tab="exploration"] .actions-list.item-list.directory-list').before($exploration);
-            html.find('[data-tab="downtime"] .actions-list.item-list.directory-list').before($downtime);
-            break;
-        }
-        case "bottom": {
-            html.find(".actions-panel.active").append($encounter);
-            html.find('[data-tab="exploration"] .actions-list.item-list.directory-list').after($exploration);
-            html.find('[data-tab="downtime"] .actions-list.item-list.directory-list').after($downtime);
-            break;
+    const skillActions = game.settings.get(MODULENAME, "skillActions");
+    if (skillActions !== "disabled") {
+        const exploration = html.find('[data-tab="exploration"] .actions-list.item-list.directory-list');
+        const downtime = html.find('[data-tab="downtime"] .actions-list.item-list.directory-list');
+        switch (skillActions) {
+            case "top": {
+                hideDuplicateActions(toHideActions);
+
+                const encounterTop = html.find(".actions-list.item-list.directory-list.strikes-list");
+                encounterTop.after($encounter);
+                exploration.before($exploration);
+                downtime.before($downtime);
+                break;
+            }
+            case "bottom": {
+                hideDuplicateActions(toHideActions);
+
+                const encounterBottom = html.find(".actions-panel.active");
+                encounterBottom.after($encounter);
+                exploration.after($exploration);
+                downtime.after($downtime);
+                break;
+            }
         }
     }
 }

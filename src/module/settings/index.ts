@@ -97,6 +97,25 @@ export function registerWorkbenchSettings() {
         onChange: () => debouncedReload(),
     });
 
+    // game.settings.register(MODULENAME, "skillActionsHideDuplicates", {
+    //     name: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.name`,
+    //     hint: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hint`,
+    //     scope: "client",
+    //     config: true,
+    //     default: "hideActions",
+    //     type: String,
+    //     choices: {
+    //         doNotHide: game.i18n.localize(`${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.doNotHide`),
+    //         hideActions: game.i18n.localize(
+    //             `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hideActions`
+    //         ),
+    //         hideSkillActions: game.i18n.localize(
+    //             `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hideSkillActions`
+    //         ),
+    //     },
+    //     onChange: () => debouncedReload(),
+    // });
+
     game.settings.register(MODULENAME, "workbenchVersion", {
         name: `${MODULENAME}.SETTINGS.workbenchVersion.name`,
         hint: `${MODULENAME}.SETTINGS.workbenchVersion.hint`,

@@ -26,6 +26,13 @@
           "bottom": "Bottom",
           "disabled": "Disabled",
           "top": "Top"
+        },
+        "hideDuplicates": {
+          "name": "Hide duplicate actions",
+          "hint": "Whether to hide duplicate actions in the action list or the skill action list",
+          "doNotHide": "Do not hide",
+          "hideActions": "Hide actions",
+          "hideSkillActions": "Hide skill actions"
         }
       },
       "UnequipAll": {
