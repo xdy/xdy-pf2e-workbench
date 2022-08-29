@@ -1,3 +1,10 @@
+# [4.0.0-beta.31](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.30...v4.0.0-beta.31) (2022-08-29)
+
+
+### Bug Fixes
+
+* Add new setting to select icon type, courtesy of thomascookandroid ([9e132c9](https://github.com/xdy/xdy-pf2e-workbench/commit/9e132c9e6e3c744408ba7257abe81b76cabccd67))
+
 # [4.0.0-beta.30](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.29...v4.0.0-beta.30) (2022-08-29)
 
 
