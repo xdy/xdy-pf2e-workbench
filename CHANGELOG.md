@@ -1,3 +1,10 @@
+# [4.0.0-beta.28](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.27...v4.0.0-beta.28) (2022-08-29)
+
+
+### Bug Fixes
+
+* Hide duplicate actions ([02e48da](https://github.com/xdy/xdy-pf2e-workbench/commit/02e48da7c4d7d2ef9ad723977a561abe108dd185))
+
 # [4.0.0-beta.27](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.26...v4.0.0-beta.27) (2022-08-28)
 
 
