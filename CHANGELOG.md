@@ -1,3 +1,10 @@
+# [4.0.0-beta.30](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.29...v4.0.0-beta.30) (2022-08-29)
+
+
+### Bug Fixes
+
+* More skill action display fixes. ([1f4ee52](https://github.com/xdy/xdy-pf2e-workbench/commit/1f4ee52599221002790438515f3a19a4045e3f63))
+
 # [4.0.0-beta.29](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.28...v4.0.0-beta.29) (2022-08-29)
 
 
