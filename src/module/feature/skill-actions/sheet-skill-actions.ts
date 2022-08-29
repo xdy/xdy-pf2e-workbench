@@ -116,7 +116,6 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
         const item = action1.find((x) => x.system.slug === action.data.slug);
         if (item) {
             toHideActions.push(item.id);
-            //TODO Hide every normal action in toHideActions
         }
     });
 
@@ -130,21 +129,23 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
         const downtime = html.find('[data-tab="downtime"] .actions-list.item-list.directory-list');
         switch (skillActions) {
             case "top": {
-                hideDuplicateActions(toHideActions);
-
                 const encounterTop = html.find(".actions-list.item-list.directory-list.strikes-list");
                 encounterTop.after($encounter);
                 exploration.before($exploration);
                 downtime.before($downtime);
+
+                hideDuplicateActions(toHideActions);
+
                 break;
             }
             case "bottom": {
-                hideDuplicateActions(toHideActions);
-
                 const encounterBottom = html.find(".actions-panel.active");
                 encounterBottom.after($encounter);
                 exploration.after($exploration);
                 downtime.after($downtime);
+
+                hideDuplicateActions(toHideActions);
+
                 break;
             }
         }

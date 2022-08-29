@@ -1,10 +1,11 @@
+<h3 class="header">
+    {{localize 'xdy-pf2e-workbench.skillActions.Title'}}
+    <button type="button" class="toggle-hidden-actions"
+            title="{{ localize 'xdy-pf2e-workbench.skillActions.UnequipAll.Tooltip' }}">
+        <i class="fa-solid fa-eye" {{#if allVisible}}style="color: rgba(0, 0, 0, 0.4);"{{/if}}></i>
+    </button>
+</h3>
 <ol class="actions-list item-list directory-list skill-action-list">
-    <h3 class="header">
-        {{localize 'xdy-pf2e-workbench.skillActions.Title'}}
-        <button type="button" class="toggle-hidden-actions" title="{{ localize 'xdy-pf2e-workbench.skillActions.UnequipAll.Tooltip' }}">
-            <i class="fa-solid fa-eye" {{#if allVisible}}style="color: rgba(0, 0, 0, 0.4);"{{/if}}></i>
-        </button>
-    </h3>
     {{#each skills}} {{#if enabled}}
         <li class="item action expandable ready" data-action-id="{{key}}"
             {{#unless displayed}}style="display:none"{{/unless}}>
