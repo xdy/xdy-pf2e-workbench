@@ -1,3 +1,10 @@
+# [4.0.0-beta.29](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.28...v4.0.0-beta.29) (2022-08-29)
+
+
+### Bug Fixes
+
+* Fix earn income (also needs fix in system), clean up duplicates. ([7c5d576](https://github.com/xdy/xdy-pf2e-workbench/commit/7c5d576e13c69eb7925ed680cf34e780942258c1))
+
 # [4.0.0-beta.28](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.27...v4.0.0-beta.28) (2022-08-29)
 
 
