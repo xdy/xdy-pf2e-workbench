@@ -17,7 +17,8 @@ profile followed by a brief and incomplete description of what this person has c
 * [Supe](https://github.com/CarlosFdez/) - Added setting menu support.
 * [Skulbuny](https://github.com/sean-clayton/) - Ported over the npc quick roller from the toolbox.
 * [stwlam](https://github.com/stwlam) - Added effects for Dread Marshal Stance and Inspiring Marshal Stance
-* [Flash Granola](https://github.com/jamespdaily) - Allowed me to take over the code and features from his pf2e-sheet-skill-actions module as he no longer has the time to maintain it. 
+* [Flash Granola](https://github.com/jamespdaily) - Allowed me to take over the code and features from his pf2e-sheet-skill-actions module as he no longer has the time to maintain it.
+* [thomascookandroid](https://github.com/thomascookandroid) - Made PR for skill action icons that I moved over to the Workbench.
 
 I've probably forgotten someone, if so, please tell me!
 

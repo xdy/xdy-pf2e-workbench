@@ -6,6 +6,7 @@ import { camelize, Flag } from "./utils";
 import { ActionType, SKILL_ACTIONS_DATA, SkillActionData, SkillActionDataParameters } from "./skill-actions-data";
 import { ItemConstructor } from "./globals";
 import { VariantsCollection } from "./variants";
+import { MODULENAME } from "../../xdy-pf2e-workbench";
 
 const ACTION_ICONS: Record<ActionType, string> = {
     A: "OneAction",
@@ -26,10 +27,19 @@ export class SkillAction {
     constructor(data: SkillActionDataParameters) {
         data.key ??= camelize(data.slug);
         data.actionType ??= "A";
-        if (data.icon) {
-            data.icon = "systems/pf2e/icons/spells/" + data.icon + ".webp";
-        } else {
-            data.icon = "systems/pf2e/icons/actions/" + ACTION_ICONS[data.actionType] + ".webp";
+
+        switch (game.settings.get(MODULENAME, "skillActionsIconStyle")) {
+            case "actionCostIcon": {
+                data.icon = `systems/pf2e/icons/actions/${ACTION_ICONS[data.actionType]}.webp`;
+                data.actionType = "";
+                break;
+            }
+            default: {
+                data.icon = data.icon
+                    ? `systems/pf2e/icons/spells/${data.icon}.webp`
+                    : `systems/pf2e/icons/actions/${ACTION_ICONS[data.actionType]}.webp`;
+                break;
+            }
         }
         this.data = data;
 

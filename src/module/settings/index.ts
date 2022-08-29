@@ -97,6 +97,19 @@ export function registerWorkbenchSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "skillActionsIconStyle", {
+        name: `${MODULENAME}.skillActions.Settings.IconStyle.name`,
+        hint: `${MODULENAME}.skillActions.Settings.IconStyle.hint`,
+        scope: "client",
+        config: true,
+        default: "skillIcon",
+        type: String,
+        choices: {
+            actionCostIcon: game.i18n.localize(`${MODULENAME}.skillActions.Settings.IconStyle.actionCostIcon`),
+            skillIcon: game.i18n.localize(`${MODULENAME}.skillActions.Settings.IconStyle.skillIcon`),
+        },
+    });
+
     // game.settings.register(MODULENAME, "skillActionsHideDuplicates", {
     //     name: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.name`,
     //     hint: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hint`,

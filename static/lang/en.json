@@ -28,11 +28,17 @@
           "top": "Top"
         },
         "hideDuplicates": {
-          "name": "Hide duplicate actions",
+          "name": "Skill Actions hide duplicate actions",
           "hint": "Whether to hide duplicate actions in the action list or the skill action list",
           "doNotHide": "Do not hide",
           "hideActions": "Hide actions",
           "hideSkillActions": "Hide skill actions"
+        },
+        "IconStyle": {
+          "name": "Skill Actions Icon Style",
+          "hint": "Icon style on the skill; Action Cost Icon: For the actions cost icon, Skill Icon: For the skills icon if it's available",
+          "actionCostIcon": "Action Cost Icon",
+          "skillIcon": "Skill Icon"
         }
       },
       "UnequipAll": {
