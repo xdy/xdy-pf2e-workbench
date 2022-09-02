@@ -1,3 +1,13 @@
+# [4.0.0-beta.32](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.31...v4.0.0-beta.32) (2022-09-02)
+
+
+### Bug Fixes
+
+* Npcscaler shouldn't scale physical items or flat checks. ([23723f6](https://github.com/xdy/xdy-pf2e-workbench/commit/23723f6302ca5012f1e5c9699dbe3e75a5a7740b))
+* Remove name field. It might work in v9, but, I don't want to support it. ([1e67ca2](https://github.com/xdy/xdy-pf2e-workbench/commit/1e67ca2aefed175006708350d6885801527a5399))
+* Set compatibility to 10.284 ([3bf962c](https://github.com/xdy/xdy-pf2e-workbench/commit/3bf962c42f8a194bf1da1f49679f2c796c7ff201))
+* Update to foundry v10 and pf2e v4 types. (And, patched in filepicker). ([6f996fc](https://github.com/xdy/xdy-pf2e-workbench/commit/6f996fce5f09ae30bc9d0f1456ce462429520362))
+
 # [4.0.0-beta.31](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.30...v4.0.0-beta.31) (2022-08-29)
 
 
