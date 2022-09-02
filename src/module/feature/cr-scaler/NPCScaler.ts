@@ -19,6 +19,10 @@ import { getActor, getFolder, getFolderInFolder } from "./Utilities";
 import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil";
 import { NPCPF2e } from "@actor";
 
+declare const PHYSICAL_ITEM_TYPES: Set<
+    "consumable" | "armor" | "backpack" | "book" | "equipment" | "treasure" | "weapon"
+>;
+
 export async function scaleNPCToLevelFromActorId(actorId: string, newLevel: number) {
     const actor = <NPCPF2e>game.actors.get(actorId);
     if (actor) {
@@ -192,9 +196,12 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     const DC_REGEXES = [/(data-pf2-dc=")(\d+)(")/g, /(@Check\[.*?type:.*?|dc:)(\d+)(.*?])/g];
     for (let regexNo = 0; regexNo < DC_REGEXES.length; regexNo++) {
         const regex = DC_REGEXES[regexNo];
-        for (const item of actor.items.filter(
-            (item) => item.system.description.value.includes("DC") || item.system.description.value.includes("dc:")
-        )) {
+        for (const item of actor.items
+            .filter(
+                (item) => item.system.description.value.includes("DC") || item.system.description.value.includes("dc:")
+            )
+            .filter((item) => (<string[]>Array.from(PHYSICAL_ITEM_TYPES)).includes(item.type)) //
+            .filter((item) => !item.system.description.value.includes("type:flat"))) {
             const description = item.system.description.value;
             let newDescription = description;
             let match: RegExpExecArray | null = regex.exec(description);
