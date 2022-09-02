@@ -1,14 +1,12 @@
-/// <reference types="jquery" />
-/// <reference types="tooltipster" />
 import { StatusEffectIconTheme } from "@scripts/config";
-import { ActorPF2e } from "@actor/base";
-/** Handle interaction with the TokenHUD */
+import { EncounterPF2e } from "@module/encounter";
+/** Handle interaction with the TokenHUD's status effects menu */
 export declare class StatusEffects {
     #private;
     /** Set the theme for condition icons on tokens */
     static setIconTheme(): void;
     /** Link status effect icons to conditions */
-    static init(): void;
+    static initialize(): void;
     static get conditions(): {
         group: {
             detection: string;
@@ -232,5 +230,7 @@ export declare class StatusEffects {
      * And migrate all statusEffect URLs of all Tokens
      */
     static migrateStatusEffectUrls(chosenSetting: StatusEffectIconTheme): Promise<void>;
-    static updateHUD(html: JQuery, actor: ActorPF2e): Promise<void>;
+    static onRenderTokenHUD(html: HTMLElement, tokenData: TokenHUDData): Promise<void>;
+    /** Called by `EncounterPF2e#_onUpdate` */
+    static onUpdateEncounter(encounter: EncounterPF2e): void;
 }

@@ -25,8 +25,8 @@ declare class AELikeRuleElement extends RuleElementPF2e {
     /** Apply the modifications at the conclusion of the actor's derived-data preparation */
     afterPrepareData(): void;
     /** Apply the modifications prior to a Check (roll) */
-    beforeRoll(_domains: string[], rollOptions: string[]): void;
-    protected applyAELike(rollOptions?: string[]): void;
+    beforeRoll(_domains: string[], rollOptions: Set<string>): void;
+    protected applyAELike(rollOptions?: Set<string>): void;
     protected getNewValue(current: number | undefined, change: number): number;
     protected getNewValue(current: string | number | undefined, change: string | number): string | number;
     protected getNewValue(current: unknown, change: unknown): unknown;

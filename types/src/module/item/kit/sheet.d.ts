@@ -34,19 +34,21 @@ export declare class KitSheetPF2e extends ItemSheetPF2e<KitPF2e> {
             unique: string;
         };
         traits: import("../../sheet/helpers").SheetOptions | null;
-        ruleLabels: {
-            label: string;
-            recognized: boolean;
-        }[];
-        ruleSelection: {
-            selected: string | null;
-            types: Record<string, string>;
+        rules: {
+            labels: {
+                label: string;
+                recognized: boolean;
+            }[];
+            selection: {
+                selected: string | null;
+                types: Record<string, string>;
+            };
+            elements: {
+                template: string;
+                index: number;
+                rule: import("../../rules/rule-element/data").RuleElementSource;
+            }[];
         };
-        ruleElements: {
-            template: string;
-            index: number;
-            rule: import("../../rules/rule-element/data").RuleElementSource;
-        }[];
         proficiencies: readonly ["PF2E.ProficiencyLevel0", "PF2E.ProficiencyLevel1", "PF2E.ProficiencyLevel2", "PF2E.ProficiencyLevel3", "PF2E.ProficiencyLevel4"];
         cssClass: string;
         editable: boolean;

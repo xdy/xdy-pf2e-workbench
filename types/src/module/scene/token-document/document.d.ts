@@ -10,6 +10,8 @@ declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends To
     /** Has this token gone through at least one cycle of data preparation? */
     private initialized?;
     auras: Map<string, TokenAura>;
+    /** Check actor for effects found in `CONFIG.specialStatusEffects` */
+    hasStatusEffect(statusId: string): boolean;
     /** Filter trackable attributes for relevance and avoidance of circular references */
     static getTrackedAttributes(data?: Record<string, unknown>, _path?: string[]): TokenAttributes;
     /** This should be in Foundry core, but ... */
@@ -17,6 +19,7 @@ declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends To
     protected _initialize(): void;
     /** Is this token emitting light with a negative value */
     get emitsDarkness(): boolean;
+    get rulesBasedVision(): boolean;
     /** Is rules-based vision enabled, and does this token's actor have low-light vision (inclusive of darkvision)? */
     get hasLowLightVision(): boolean;
     /** Is rules-based vision enabled, and does this token's actor have darkvision vision? */
@@ -32,6 +35,8 @@ declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends To
     get center(): Point;
     /** If rules-based vision is enabled, disable manually configured vision radii */
     prepareBaseData(): void;
+    /** Reset sight defaults if using rules-based vision */
+    protected _prepareDetectionModes(): void;
     prepareDerivedData(): void;
     /** Set a TokenData instance's dimensions from actor data. Static so actors can use for their prototypes */
     static prepareSize(token: TokenDocumentPF2e | PrototypeTokenPF2e, actor: ActorPF2e | null): void;
@@ -47,7 +52,6 @@ declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends To
     _onUpdateBaseActor(updates?: DeepPartial<ActorSourcePF2e>, options?: DocumentModificationContext<ActorPF2e>): void;
     /** Toggle token hiding if this token's actor is a loot actor */
     protected _onCreate(data: this["_source"], options: DocumentModificationContext<this>, userId: string): void;
-    /** Handle ephemeral changes received by `TokenDocumentPF2e#_onUpdateBaseActor` */
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext, userId: string): void;
     /** Check area effects, removing any from this token's actor if the actor has no other tokens in the scene */
     protected _onDelete(options: DocumentModificationContext<this>, userId: string): void;

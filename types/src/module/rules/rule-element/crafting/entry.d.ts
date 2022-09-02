@@ -26,6 +26,7 @@ interface CraftingEntryRuleData extends RuleElementData {
     maxItemLevel?: number;
     maxSlots?: number;
     craftableItems?: RawPredicate;
+    preparedFormulas?: PreparedFormulaData[];
 }
 interface CraftingEntryRuleSource extends RuleElementSource {
     name?: unknown;
@@ -35,5 +36,12 @@ interface CraftingEntryRuleSource extends RuleElementSource {
     maxItemLevel?: unknown;
     maxSlots?: unknown;
     craftableItems?: unknown;
+    preparedFormulas?: unknown;
+}
+interface PreparedFormulaData {
+    itemUUID: string;
+    quantity?: number;
+    expended?: boolean;
+    isSignatureItem?: boolean;
 }
 export { CraftingEntryRuleElement };

@@ -1183,6 +1183,9 @@ declare const featTraits: {
     undine: string;
 };
 declare const consumableTraits: {
+    additive1: string;
+    additive2: string;
+    additive3: string;
     alchemical: string;
     auditory: string;
     aura: string;
@@ -1371,6 +1374,9 @@ declare const actionTraits: {
     thaumaturge: string;
     witch: string;
     wizard: string;
+    additive1: string;
+    additive2: string;
+    additive3: string;
     alchemical: string;
     catalyst: string;
     clockwork: string;
@@ -1399,9 +1405,6 @@ declare const actionTraits: {
     trap: string;
     virulent: string;
     wand: string;
-    additive1: string;
-    additive2: string;
-    additive3: string;
     aftermath: string;
     archetype: string;
     class: string;

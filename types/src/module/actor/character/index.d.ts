@@ -79,7 +79,9 @@ declare class CharacterPF2e extends CreaturePF2e {
     protected getStrikeRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): StrikeRollContext<this, I>;
     /** Create attack-roll modifiers from weapon traits */
     getAttackRollContext<I extends AttackItem>(params: StrikeRollContextParams<I>): AttackRollContext<this, I>;
-    consumeAmmo(weapon: WeaponPF2e, args: RollParameters): boolean;
+    consumeAmmo({ weapon, ...params }: {
+        weapon: WeaponPF2e;
+    } & RollParameters): boolean;
     /** Prepare stored and synthetic martial proficiencies */
     prepareMartialProficiencies(): void;
     /** Toggle the invested state of an owned magical item */

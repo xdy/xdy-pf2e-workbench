@@ -10,6 +10,7 @@ declare class DeityPF2e extends ItemPF2e {
     prepareActorData(this: Embedded<DeityPF2e>): void;
     /** If applicable, set a trained proficiency with this deity's favored weapon */
     setFavoredWeaponRank(this: Embedded<DeityPF2e>): void;
+    getRollOptions(prefix?: string): string[];
 }
 interface DeityPF2e extends ItemPF2e {
     readonly data: DeityData;

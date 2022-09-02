@@ -3,15 +3,47 @@ import { CharacterPF2e, NPCPF2e, FamiliarPF2e, HazardPF2e, LootPF2e, VehiclePF2e
 import { ActorType } from "@actor/data";
 import { JournalSheetPF2e } from "@module/journal-entry/sheet";
 import { WeaponReloadTime } from "@item/weapon/types";
-export declare type StatusEffectIconTheme = "default" | "blackWhite" | "legacy";
+export declare type StatusEffectIconTheme = "default" | "blackWhite";
 export declare const PF2ECONFIG: {
     chatDamageButtonShieldToggle: boolean;
     statusEffects: {
-        lastIconType: StatusEffectIconTheme;
-        folder: string;
-        extension: string;
-        keepFoundryStatusEffects: boolean;
-        foundryStatusEffects: string[];
+        lastIconTheme: StatusEffectIconTheme;
+        iconDir: string;
+        conditions: {
+            blinded: string;
+            broken: string;
+            clumsy: string;
+            concealed: string;
+            confused: string;
+            controlled: string;
+            dazzled: string;
+            deafened: string;
+            doomed: string;
+            drained: string;
+            dying: string;
+            encumbered: string;
+            enfeebled: string;
+            fascinated: string;
+            fatigued: string;
+            "flat-footed": string;
+            fleeing: string;
+            frightened: string;
+            grabbed: string;
+            immobilized: string;
+            invisible: string;
+            paralyzed: string;
+            "persistent-damage": string;
+            petrified: string;
+            prone: string;
+            quickened: string;
+            restrained: string;
+            sickened: string;
+            slowed: string;
+            stunned: string;
+            stupefied: string;
+            unconscious: string;
+            wounded: string;
+        };
     };
     levels: {
         1: string;
@@ -293,10 +325,9 @@ export declare const PF2ECONFIG: {
         advanced: string;
         unarmed: string;
     };
-    weaponGroups: Record<"axe" | "brawling" | "club" | "flail" | "hammer" | "knife" | "pick" | "polearm" | "shield" | "spear" | "sword" | "bomb" | "bow" | "dart" | "firearm" | "sling", string>;
-    meleeWeaponGroups: Record<"axe" | "brawling" | "club" | "flail" | "hammer" | "knife" | "pick" | "polearm" | "shield" | "spear" | "sword", string>;
-    rangedWeaponGroups: Record<"bomb" | "bow" | "dart" | "firearm" | "sling", string>;
-    baseWeaponTypes: Record<"club" | "flail" | "pick" | "spear" | "dart" | "sling" | "adze" | "aklys" | "alchemical-bomb" | "alchemical-crossbow" | "aldori-dueling-sword" | "air-repeater" | "arquebus" | "axe-musket" | "asp-coil" | "bastard-sword" | "battle-axe" | "battle-lute" | "big-boom-gun" | "black-powder-knuckle-dusters" | "bladed-diabolo" | "bladed-hoop" | "bladed-scarf" | "blowgun-darts" | "blowgun" | "blunderbuss" | "bo-staff" | "boarding-axe" | "boarding-pike" | "bola" | "butchering-axe" | "butterfly-sword" | "buugeng" | "cane-pistol" | "chakram" | "clan-dagger" | "clan-pistol" | "claw" | "claw-blade" | "coat-pistol" | "combat-grapnel" | "composite-longbow" | "composite-shortbow" | "crossbow" | "dagger" | "dagger-pistol" | "daikyu" | "dogslicer" | "double-barreled-musket" | "double-barreled-pistol" | "dragon-mouth-pistol" | "dueling-pistol" | "dueling-spear" | "dwarven-scattergun" | "dwarven-war-axe" | "elven-branched-spear" | "elven-curve-blade" | "explosive-dogslicer" | "exquisite-sword-cane-sheath" | "exquisite-sword-cane" | "falchion" | "fangwire" | "fauchard" | "fighting-fan" | "fighting-stick" | "filchers-fork" | "fire-lance" | "fire-poi" | "fist" | "flingflenser" | "flintlock-musket" | "flintlock-pistol" | "forked-bipod" | "hand-cannon" | "harmona-gun" | "hook-sword" | "gaff" | "gauntlet" | "gill-hook" | "glaive" | "gnome-amalgam-musket" | "gnome-flickmace" | "gnome-hooked-hammer" | "greataxe" | "greatclub" | "greatpick" | "greatsword" | "griffon-cane" | "guisarme" | "gun-sword" | "halberd" | "halfling-sling-staff" | "hammer-gun" | "hand-adze" | "hand-crossbow" | "hatchet" | "heavy-crossbow" | "hongali-hornbow" | "horsechopper" | "javelin" | "jaws" | "jezail" | "juggling-club" | "kama" | "karambit" | "katana" | "katar" | "khakkara" | "khopesh" | "knuckle-duster" | "kukri" | "kusarigama" | "lance" | "leiomano" | "light-hammer" | "light-mace" | "light-pick" | "lion-scythe" | "long-air-repeater" | "longbow" | "longspear" | "longsword" | "mace" | "mace-multipistol" | "machete" | "main-gauche" | "mambele" | "maul" | "meteor-hammer" | "mithral-tree" | "monkeys-fist" | "morningstar" | "naginata" | "nightstick" | "nine-ring-sword" | "nunchaku" | "ogre-hook" | "orc-knuckle-dagger" | "orc-necksplitter" | "pepperbox" | "piercing-wind" | "piranha-kiss" | "poi" | "polytool" | "probing-cane" | "ranseur" | "rapier" | "rapier-pistol" | "repeating-crossbow" | "repeating-hand-crossbow" | "repeating-heavy-crossbow" | "rhoka-sword" | "rungu" | "sai" | "sap" | "sawtooth-saber" | "scimitar" | "scorpion-whip" | "scourge" | "scythe" | "shauth-lash" | "shears" | "shield-bash" | "shield-boss" | "shield-spikes" | "shobhad-longrifle" | "shortbow" | "shortsword" | "shuriken" | "sickle" | "sickle-saber" | "slide-pistol" | "sling-bullets" | "spiked-chain" | "spiked-gauntlet" | "spiral-rapier" | "spoon-gun" | "staff" | "starknife" | "stiletto-pen" | "sun-sling" | "switchscythe" | "sword-cane" | "tamchal-chakram" | "taw-launcher" | "tekko-kagi" | "temple-sword" | "tengu-gale-blade" | "three-peaked-tree" | "throwing-knife" | "thunder-sling" | "thundermace" | "tonfa" | "tri-bladed-katar" | "tricky-pick" | "trident" | "urumi" | "wakizashi" | "war-flail" | "war-razor" | "warhammer" | "whip" | "whip-claw" | "wind-and-fire-wheel" | "wish-blade" | "wish-knife" | "wooden-taws", string>;
+    weaponGroups: Record<"axe" | "dart" | "knife" | "brawling" | "club" | "flail" | "hammer" | "pick" | "polearm" | "shield" | "spear" | "sword" | "bomb" | "bow" | "firearm" | "sling", string>;
+    meleeWeaponGroups: Record<"axe" | "dart" | "knife" | "brawling" | "club" | "flail" | "hammer" | "pick" | "polearm" | "shield" | "spear" | "sword", string>;
+    baseWeaponTypes: Record<"dart" | "club" | "flail" | "pick" | "spear" | "sling" | "adze" | "aklys" | "alchemical-bomb" | "alchemical-crossbow" | "aldori-dueling-sword" | "air-repeater" | "arquebus" | "axe-musket" | "asp-coil" | "bastard-sword" | "battle-axe" | "battle-lute" | "big-boom-gun" | "black-powder-knuckle-dusters" | "bladed-diabolo" | "bladed-gauntlet" | "bladed-hoop" | "bladed-scarf" | "blowgun-darts" | "blowgun" | "blunderbuss" | "bo-staff" | "boarding-axe" | "boarding-pike" | "bola" | "butchering-axe" | "butterfly-sword" | "buugeng" | "cane-pistol" | "chakram" | "clan-dagger" | "clan-pistol" | "claw" | "claw-blade" | "coat-pistol" | "combat-grapnel" | "composite-longbow" | "composite-shortbow" | "crossbow" | "dagger" | "dagger-pistol" | "daikyu" | "dogslicer" | "double-barreled-musket" | "double-barreled-pistol" | "dragon-mouth-pistol" | "dueling-pistol" | "dueling-spear" | "dwarven-scattergun" | "dwarven-war-axe" | "elven-branched-spear" | "elven-curve-blade" | "explosive-dogslicer" | "exquisite-sword-cane-sheath" | "exquisite-sword-cane" | "falchion" | "fangwire" | "fauchard" | "fighting-fan" | "fighting-stick" | "filchers-fork" | "fire-lance" | "fire-poi" | "fist" | "flingflenser" | "flintlock-musket" | "flintlock-pistol" | "forked-bipod" | "hand-cannon" | "harmona-gun" | "hook-sword" | "gaff" | "gauntlet" | "gill-hook" | "glaive" | "gnome-amalgam-musket" | "gnome-flickmace" | "gnome-hooked-hammer" | "greataxe" | "greatclub" | "greatpick" | "greatsword" | "griffon-cane" | "guisarme" | "gun-sword" | "halberd" | "halfling-sling-staff" | "hammer-gun" | "hand-adze" | "hand-crossbow" | "hatchet" | "heavy-crossbow" | "hongali-hornbow" | "horsechopper" | "javelin" | "jaws" | "jezail" | "juggling-club" | "kama" | "karambit" | "katana" | "katar" | "khakkara" | "khopesh" | "knuckle-duster" | "kukri" | "kusarigama" | "lance" | "leiomano" | "light-hammer" | "light-mace" | "light-pick" | "lion-scythe" | "long-air-repeater" | "longbow" | "longspear" | "longsword" | "mace" | "mace-multipistol" | "machete" | "main-gauche" | "mambele" | "maul" | "meteor-hammer" | "mithral-tree" | "monkeys-fist" | "morningstar" | "naginata" | "nightstick" | "nine-ring-sword" | "nunchaku" | "ogre-hook" | "orc-knuckle-dagger" | "orc-necksplitter" | "pepperbox" | "piercing-wind" | "piranha-kiss" | "poi" | "polytool" | "probing-cane" | "ranseur" | "rapier" | "rapier-pistol" | "repeating-crossbow" | "repeating-hand-crossbow" | "repeating-heavy-crossbow" | "rhoka-sword" | "rungu" | "sai" | "sap" | "sawtooth-saber" | "scimitar" | "scorpion-whip" | "scourge" | "scythe" | "shauth-lash" | "shears" | "shield-bash" | "shield-boss" | "shield-spikes" | "shobhad-longrifle" | "shortbow" | "shortsword" | "shuriken" | "sickle" | "sickle-saber" | "slide-pistol" | "sling-bullets" | "spiked-chain" | "spiked-gauntlet" | "spiral-rapier" | "spoon-gun" | "staff" | "starknife" | "stiletto-pen" | "sun-sling" | "switchscythe" | "sword-cane" | "tamchal-chakram" | "taw-launcher" | "tekko-kagi" | "temple-sword" | "tengu-gale-blade" | "three-peaked-tree" | "throwing-knife" | "thunder-sling" | "thundermace" | "tonfa" | "tri-bladed-katar" | "tricky-pick" | "trident" | "urumi" | "wakizashi" | "war-flail" | "war-lance" | "war-razor" | "warhammer" | "whip" | "whip-claw" | "wind-and-fire-wheel" | "wish-blade" | "wish-knife" | "wooden-taws", string>;
     equivalentWeapons: {
         readonly "composite-longbow": "longbow";
         readonly "composite-shortbow": "shortbow";
@@ -1039,6 +1070,9 @@ export declare const PF2ECONFIG: {
         thaumaturge: string;
         witch: string;
         wizard: string;
+        additive1: string;
+        additive2: string;
+        additive3: string;
         alchemical: string;
         catalyst: string;
         clockwork: string;
@@ -1067,9 +1101,6 @@ export declare const PF2ECONFIG: {
         trap: string;
         virulent: string;
         wand: string;
-        additive1: string;
-        additive2: string;
-        additive3: string;
         aftermath: string;
         archetype: string;
         class: string;
@@ -1152,6 +1183,9 @@ export declare const PF2ECONFIG: {
         undine: string;
     };
     consumableTraits: {
+        additive1: string;
+        additive2: string;
+        additive3: string;
         alchemical: string;
         auditory: string;
         aura: string;
@@ -3616,6 +3650,9 @@ export declare const PF2ECONFIG: {
                 thaumaturge: string;
                 witch: string;
                 wizard: string;
+                additive1: string;
+                additive2: string;
+                additive3: string;
                 alchemical: string;
                 catalyst: string;
                 clockwork: string;
@@ -3644,9 +3681,6 @@ export declare const PF2ECONFIG: {
                 trap: string;
                 virulent: string;
                 wand: string;
-                additive1: string;
-                additive2: string;
-                additive3: string;
                 aftermath: string;
                 archetype: string;
                 class: string;
@@ -4202,6 +4236,9 @@ export declare const PF2ECONFIG: {
                 evil: string;
             };
             consumable: {
+                additive1: string;
+                additive2: string;
+                additive3: string;
                 alchemical: string;
                 auditory: string;
                 aura: string;

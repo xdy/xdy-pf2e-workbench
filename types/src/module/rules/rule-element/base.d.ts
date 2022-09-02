@@ -40,7 +40,7 @@ declare abstract class RuleElementPF2e {
     get ignored(): boolean;
     set ignored(value: boolean);
     /** Test this rule element's predicate, if present */
-    test(rollOptions?: string[]): boolean;
+    test(rollOptions?: string[] | Set<string>): boolean;
     /** Send a deferred warning to the console indicating that a rule element's validation failed */
     failValidation(...message: string[]): void;
     /**
@@ -115,7 +115,7 @@ declare namespace RuleElementPF2e {
         roll: Rolled<CheckRoll> | null;
         selectors: string[];
         domains: string[];
-        rollOptions: string[];
+        rollOptions: Set<string>;
     }
     type UserInput<T extends RuleElementData> = {
         [K in keyof T]?: unknown;
@@ -147,7 +147,7 @@ interface RuleElementPF2e {
      * @param domains Applicable predication domains for pending check
      * @param rollOptions Currently accumulated roll options for the pending check
      */
-    beforeRoll?(domains: string[], rollOptions: string[]): void;
+    beforeRoll?(domains: string[], rollOptions: Set<string>): void;
     /**
      * Run following a check roll, passing along roll options already accumulated
      * @param domains Applicable selectors for the pending check

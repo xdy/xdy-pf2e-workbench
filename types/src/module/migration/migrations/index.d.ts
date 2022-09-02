@@ -170,3 +170,9 @@ export { Migration769NoUniversalistFocusPool } from "./769-no-universalist-focus
 export { Migration770REDataToSystem } from "./770-re-data-to-system";
 export { Migration771SpellVariantsToSystem } from "./771-spell-variants-to-system";
 export { Migration772V10EmbeddedSpellData } from "./772-v10-embedded-spell-data";
+export { Migration773ReligiousSymbolUsage } from "./773-religious-symbol-usage";
+export { Migration774UnpersistCraftingEntries } from "./774-unpersist-crafting-entries";
+export { Migration775AgileFinesseRanged } from "./775-agile-finesse-ranged";
+export { Migration776SlugifyConditionOverrides } from "./776-sluggify-condition-overrides";
+export { Migration777HandOfTheApprentice } from "./777-hand-of-the-apprentice";
+export { Migration778RenameRetiredPackRefs } from "./778-rename-feature-effects-refs";

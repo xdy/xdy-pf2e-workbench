@@ -7,6 +7,6 @@ declare function extractModifiers(synthetics: Pick<RuleElementSynthetics, "modif
 declare function extractModifierAdjustments(adjustmentsRecord: Record<string, ModifierAdjustment[]>, selectors: string[], slug: string): ModifierAdjustment[];
 /** Extracts a list of all cloned notes across all given keys in a single list. */
 declare function extractNotes(rollNotes: Record<string, RollNotePF2e[]>, selectors: string[]): RollNotePF2e[];
-declare function extractRollTwice(rollTwices: Record<string, RollTwiceSynthetic[]>, selectors: string[], options: string[]): RollTwiceOption;
-declare function extractRollSubstitutions(substitutions: Record<string, RollSubstitution[]>, domains: string[], rollOptions: string[]): RollSubstitution[];
+declare function extractRollTwice(rollTwices: Record<string, RollTwiceSynthetic[]>, selectors: string[], options: Set<string>): RollTwiceOption;
+declare function extractRollSubstitutions(substitutions: Record<string, RollSubstitution[]>, domains: string[], rollOptions: Set<string>): RollSubstitution[];
 export { extractModifierAdjustments, extractModifiers, extractNotes, extractRollSubstitutions, extractRollTwice };

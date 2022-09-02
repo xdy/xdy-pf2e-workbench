@@ -27,7 +27,7 @@ export declare class ItemSummaryRendererPF2e<AType extends ActorPF2e> {
      * Called when an item summary is expanded and needs to be filled out.
      * @todo Move this to templates
      */
-    renderItemSummary($div: JQuery, item: Embedded<ItemPF2e>, chatData: ItemSummaryData): Promise<void>;
+    renderItemSummary($div: JQuery, item: ItemPF2e, chatData: ItemSummaryData): Promise<void>;
     /**
      * Executes a callback, performing a save and restore for all item summaries to maintain visual state.
      * Most restorations are driven by a data-item-id attribute, however data-item-summary-id with a custom string

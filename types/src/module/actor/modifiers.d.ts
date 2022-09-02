@@ -5,7 +5,7 @@ import { DamageDieSize, DamageType } from "@system/damage";
 import { DegreeOfSuccessAdjustment } from "@system/degree-of-success";
 import { PredicatePF2e, RawPredicate } from "@system/predication";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
-declare function ensureProficiencyOption(options: string[], rank: number): void;
+declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
 /**
  * The canonical pathfinder modifier types; modifiers of the same type do not stack (except for 'untyped' modifiers,
  * which fully stack).
@@ -76,7 +76,7 @@ interface DeferredValueParams {
     /** An object to merge into standard options for `RuleElementPF2e#resolveInjectedProperties` */
     injectables?: Record<string, unknown>;
     /** Roll Options to get against a predicate (if available) */
-    test?: string[];
+    test?: string[] | Set<string>;
 }
 declare type DeferredValue<T> = (options?: DeferredValueParams) => T;
 /** Represents a discrete modifier, bonus, or penalty, to a statistic or check. */
@@ -114,13 +114,13 @@ declare class ModifierPF2e implements RawModifier {
     constructor(...args: ModifierOrderedParams);
     /** Return a copy of this ModifierPF2e instance */
     clone(options?: {
-        test?: string[];
+        test?: Set<string> | string[];
     }): ModifierPF2e;
     /**
      * Get roll options for this modifier. The current data structure makes for occasional inability to distinguish
      * bonuses and penalties.
      */
-    getRollOptions(): string[];
+    getRollOptions(): Set<string>;
     /** Sets the ignored property after testing the predicate */
     test(options: string[] | Set<string>): void;
     toObject(): Required<RawModifier>;
@@ -191,7 +191,7 @@ declare class StatisticModifier {
      * @param modifiers All relevant modifiers for this statistic.
      * @param rollOptions Roll options used for initial total calculation
      */
-    constructor(name: string, modifiers?: ModifierPF2e[], rollOptions?: string[]);
+    constructor(name: string, modifiers?: ModifierPF2e[], rollOptions?: string[] | Set<string>);
     /** Get the list of all modifiers in this collection (as a read-only list). */
     get modifiers(): readonly ModifierPF2e[];
     /** Add a modifier to the end of this collection. */
@@ -201,7 +201,7 @@ declare class StatisticModifier {
     /** Delete a modifier from this collection by name or reference */
     delete(modifierName: string | ModifierPF2e): boolean;
     /** Obtain the total modifier, optionally retesting predicates, and finally applying stacking rules. */
-    calculateTotal(rollOptions?: string[]): void;
+    calculateTotal(rollOptions?: Set<string>): void;
     private applyAdjustments;
 }
 /**

@@ -11,6 +11,7 @@ declare class TextEditorPF2e extends TextEditor {
         async: true;
     }): Promise<string>;
     static enrichHTML(content?: string, options?: EnrichHTMLOptionsPF2e): string;
+    static processUserVisibility(content: string, options: EnrichHTMLOptionsPF2e): string;
     static enrichString(data: RegExpMatchArray, options?: EnrichHTMLOptionsPF2e): Promise<HTMLElement | null>;
     /**
      * Convert an XML node into an HTML span element with data-visibility, data-whose, and class attributes

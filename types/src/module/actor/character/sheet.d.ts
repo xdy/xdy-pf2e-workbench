@@ -30,7 +30,7 @@ declare class CharacterSheetPF2e extends CreatureSheetPF2e<CharacterPF2e> {
     enableInitiativeButton(): void;
     activateListeners($html: JQuery): void;
     /** Contextually search the feats tab of the Compendium Browser */
-    private onClickBrowseFeatCompendia;
+    private onClickBrowseFeats;
     /** Handle changing of proficiency-rank via dropdown */
     private onChangeAdjustStat;
     /** Handle clicking of proficiency-rank adjustment buttons */

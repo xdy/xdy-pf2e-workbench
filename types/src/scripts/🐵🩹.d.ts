@@ -1,1 +1,1 @@
-export declare function monkeyPatchTextEditor(): void;
+export declare function monkeyPatchFoundry(): void;

@@ -1,9 +1,11 @@
 import { CharacterPF2e } from "@actor";
+import { ItemPF2e } from "@item";
 import { PredicatePF2e } from "@system/predication";
 import { CraftingFormula } from "./formula";
 export declare class CraftingEntry implements CraftingEntryData {
     private parentActor;
-    preparedFormulas: CraftingFormula[];
+    preparedCraftingFormulas: PreparedCraftingFormula[];
+    preparedFormulaData: PreparedFormulaData[];
     name: string;
     selector: string;
     isAlchemical: boolean;
@@ -15,6 +17,7 @@ export declare class CraftingEntry implements CraftingEntryData {
     batchSize?: number;
     fieldDiscoveryBatchSize?: number;
     maxItemLevel: number;
+    parentItem: ItemPF2e;
     constructor(parentActor: CharacterPF2e, knownFormulas: CraftingFormula[], data: CraftingEntryData);
     get formulas(): (PreparedFormulaSheetData | null)[];
     get reagentCost(): number;
@@ -29,12 +32,12 @@ export declare class CraftingEntry implements CraftingEntryData {
     setFormulaQuantity(index: number, itemUUID: string, quantity: number): Promise<void>;
     toggleFormulaExpended(index: number, itemUUID: string): Promise<void>;
     toggleSignatureItem(itemUUID: string): Promise<void>;
-    updateActorEntryFormulas(): Promise<void>;
-    tidyUpSlotData(): void;
+    updateRE(): Promise<void>;
 }
 export interface CraftingEntryData {
     selector: string;
     name: string;
+    parentItem: ItemPF2e;
     isAlchemical?: boolean;
     isDailyPrep?: boolean;
     isPrepared?: boolean;
@@ -44,11 +47,23 @@ export interface CraftingEntryData {
     batchSize?: number;
     fieldDiscoveryBatchSize?: number;
     maxItemLevel?: number;
+    preparedFormulaData?: PreparedFormulaData[];
+}
+interface PreparedFormulaData {
+    itemUUID: string;
+    quantity?: number;
+    expended?: boolean;
+    isSignatureItem?: boolean;
+}
+interface PreparedCraftingFormula extends CraftingFormula {
+    quantity: number;
+    expended: boolean;
+    isSignatureItem: boolean;
 }
 interface PreparedFormulaSheetData {
     uuid: string;
     expended: boolean;
-    img: string;
+    img: ImagePath;
     name: string;
     quantity: number;
     isSignatureItem: boolean;

@@ -33,8 +33,6 @@ declare class ChatMessagePF2e extends ChatMessage<ActorPF2e> {
     showDetails(): Promise<void>;
     /** Get the token of the speaker if possible */
     get token(): Embedded<TokenDocumentPF2e> | null;
-    /** As of Foundry 9.251, players are able to delete their own messages, and GMs are unable to restrict it. */
-    protected static _canDelete(user: UserPF2e): boolean;
     getHTML(): Promise<JQuery>;
     private onHoverIn;
     private onHoverOut;

@@ -69,19 +69,20 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
             plate: string;
         };
         baseTypes: {
-            "explorers-clothing": string;
-            "padded-armor": string;
-            "leather-armor": string;
-            "studded-leather-armor": string;
-            "chain-shirt": string;
-            "hide-armor": string;
-            "scale-mail": string;
-            "chain-mail": string;
+            "armored-coat": string;
             breastplate: string;
-            "splint-mail": string;
-            "half-plate": string;
+            "chain-mail": string;
+            "chain-shirt": string;
+            "explorers-clothing": string;
             "full-plate": string;
+            "half-plate": string;
             "hellknight-plate": string;
+            "hide-armor": string;
+            "leather-armor": string;
+            "padded-armor": string;
+            "scale-mail": string;
+            "splint-mail": string;
+            "studded-leather-armor": string;
         };
         bulkTypes: {
             L: string;
@@ -136,8 +137,13 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
             49: string;
             50: string;
         };
-        preciousMaterials: Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "coldIron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sovereignSteel", string>;
-        preciousMaterialGrades: Record<"high" | "low" | "standard", string>;
+        preciousMaterials: {
+            value: string;
+            materials: Record<string, {
+                label: string;
+                grades: Partial<Record<"high" | "low" | "standard", import("@item/physical/materials").MaterialGradeData>>;
+            }>;
+        };
         isPhysical: true;
         basePriceString: string;
         priceString: string;
@@ -273,19 +279,21 @@ export declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
             unique: string;
         };
         traits: import("@module/sheet/helpers").SheetOptions | null;
-        ruleLabels: {
-            label: string;
-            recognized: boolean;
-        }[];
-        ruleSelection: {
-            selected: string | null;
-            types: Record<string, string>;
+        rules: {
+            labels: {
+                label: string;
+                recognized: boolean;
+            }[];
+            selection: {
+                selected: string | null;
+                types: Record<string, string>;
+            };
+            elements: {
+                template: string;
+                index: number;
+                rule: import("../../rules/rule-element/data").RuleElementSource;
+            }[];
         };
-        ruleElements: {
-            template: string;
-            index: number;
-            rule: import("../../rules/rule-element/data").RuleElementSource;
-        }[];
         proficiencies: readonly ["PF2E.ProficiencyLevel0", "PF2E.ProficiencyLevel1", "PF2E.ProficiencyLevel2", "PF2E.ProficiencyLevel3", "PF2E.ProficiencyLevel4"];
         cssClass: string;
         editable: boolean;

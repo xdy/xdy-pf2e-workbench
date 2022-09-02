@@ -5,6 +5,8 @@ import { BackgroundPF2e } from "@item/background";
 import { FeatPF2e } from "@item/feat";
 import { HeritagePF2e } from "@item/heritage";
 import { ItemActivation } from "@item/physical/data";
+import { MaterialGradeData } from "@item/physical/materials";
+import { PreciousMaterialGrade } from "@item/physical/types";
 import { Rarity } from "@module/data";
 import { RuleElementSource } from "@module/rules";
 import { SheetOptions } from "@module/sheet/helpers";
@@ -27,19 +29,21 @@ export interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData
     rarity: Rarity | null;
     rarities: ConfigPF2e["PF2E"]["rarityTraits"];
     traits: SheetOptions | null;
-    ruleLabels: {
-        label: string;
-        recognized: boolean;
-    }[];
-    ruleSelection: {
-        selected: string | null;
-        types: Record<string, string>;
+    rules: {
+        labels: {
+            label: string;
+            recognized: boolean;
+        }[];
+        selection: {
+            selected: string | null;
+            types: Record<string, string>;
+        };
+        elements: {
+            template: string;
+            index: number;
+            rule: RuleElementSource;
+        }[];
     };
-    ruleElements: {
-        template: string;
-        index: number;
-        rule: RuleElementSource;
-    }[];
     /** Lore only, will be removed later */
     proficiencies: ConfigPF2e["PF2E"]["proficiencyLevels"];
 }
@@ -91,3 +95,12 @@ export interface HeritageSheetData extends ItemSheetDataPF2e<HeritagePF2e> {
     ancestry: AncestryPF2e | null;
     ancestryRefBroken: boolean;
 }
+declare type MaterialSheetEntry = {
+    label: string;
+    grades: Partial<Record<PreciousMaterialGrade, MaterialGradeData>>;
+};
+export declare type MaterialSheetData = {
+    value: string;
+    materials: Record<string, MaterialSheetEntry>;
+};
+export {};

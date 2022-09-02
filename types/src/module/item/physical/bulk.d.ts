@@ -1,6 +1,5 @@
 import { Size } from "@module/data";
 import { Optional } from "@util";
-import { PhysicalItemPF2e } from ".";
 interface StackDefinition {
     size: number;
     lightBulk: number;
@@ -103,5 +102,4 @@ declare type BrokenBulk = Optional<string> | Optional<number>;
  * @param weight
  */
 export declare function normalizeWeight(weight: BrokenBulk): string | undefined;
-export declare function toBulkItem(item: PhysicalItemPF2e, nestedItems?: BulkItem[]): BulkItem;
 export {};

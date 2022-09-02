@@ -51,7 +51,7 @@ declare class ItemPF2e extends Item<ActorPF2e> {
     prepareData(): void;
     /** Ensure the presence of the pf2e flag scope with default properties and values */
     prepareBaseData(): void;
-    prepareRuleElements(this: Embedded<ItemPF2e>, options?: RuleElementOptions): RuleElementPF2e[];
+    prepareRuleElements(options?: RuleElementOptions): RuleElementPF2e[];
     /** Pull the latest system data from the source compendium and replace this item's with it */
     refreshFromCompendium(): Promise<void>;
     /**

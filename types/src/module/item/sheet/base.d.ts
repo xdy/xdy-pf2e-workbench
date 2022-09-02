@@ -20,8 +20,6 @@ export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TIt
      * Get NPC attack effect options
      */
     protected getAttackEffectOptions(): Record<string, string>;
-    private addDamageRoll;
-    private deleteDamageRoll;
     close(options?: {
         force?: boolean;
     }): Promise<void>;

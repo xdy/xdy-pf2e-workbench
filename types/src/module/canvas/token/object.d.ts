@@ -4,8 +4,6 @@ import { AuraRenderers } from "./aura";
 declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
-    /** Used to track conditions and other token effects by game.pf2e.StatusEffects */
-    statusEffectChanged: boolean;
     constructor(document: TokenDocumentPF2e);
     /** The promise returned by the last call to `Token#draw()` */
     private drawLock?;
@@ -33,6 +31,8 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     isFlanking(flankee: TokenPF2e, { reach }?: {
         reach?: number;
     }): boolean;
+    /** Overrides _drawBar() to also draw pf2e variants of normal resource bars (such as temp health) */
+    protected _drawBar(number: number, bar: PIXI.Graphics, data: TokenResourceData): void;
     /** Make the drawing promise accessible to `#redraw` */
     draw(): Promise<this>;
     /** Draw auras along with effect icons */

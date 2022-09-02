@@ -25,6 +25,7 @@ declare class PackLoader {
     private setModuleArt;
 }
 declare class CompendiumBrowser extends Application {
+    #private;
     settings: CompendiumBrowserSettings;
     dataTabsList: readonly ["action", "bestiary", "equipment", "feat", "hazard", "spell"];
     tabs: Record<Exclude<TabName, "settings">, BrowserTab>;
@@ -66,10 +67,9 @@ declare class CompendiumBrowser extends Application {
     openTab(tab: "hazard", filter?: InitialHazardFilters): Promise<void>;
     openTab(tab: "spell", filter?: InitialSpellFilters): Promise<void>;
     openTab(tab: "settings"): Promise<void>;
-    openSpellTab(entry: SpellcastingEntryPF2e, level?: number | null): Promise<void>;
+    openSpellTab(entry: SpellcastingEntryPF2e, level?: number): Promise<void>;
     loadTab(tab: TabName): Promise<void>;
     private processInitialFilters;
-    private isRange;
     loadedPacks(tab: TabName): string[];
     activateListeners($html: JQuery): void;
     /**
@@ -96,7 +96,7 @@ declare class CompendiumBrowser extends Application {
         scrollLimit?: undefined;
     } | {
         [x: string]: number | Active<import("../../user").UserPF2e> | {
-            filterData: import("./tabs/data").ActionFilters | import("./tabs/data").BestiaryFilters | import("./tabs/data").EquipmentFilters | import("./tabs/data").FeatFilters | import("./tabs/data").HazardFilters | import("./tabs/data").SpellFilters;
+            filterData: import("./tabs/data").EquipmentFilters | import("./tabs/data").ActionFilters | import("./tabs/data").FeatFilters | import("./tabs/data").HazardFilters | import("./tabs/data").SpellFilters | import("./tabs/data").BestiaryFilters;
         };
         user: Active<import("../../user").UserPF2e>;
         scrollLimit: number;

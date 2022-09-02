@@ -1,3 +1,4 @@
+import { FeatTrait } from "@item/feat/data";
 import { PhysicalItemTrait } from "@item/physical/data";
 import { CommonSortByOption, SortByOption, SortDirection } from "../data";
 declare type CheckboxOptions = Record<string, {
@@ -79,7 +80,8 @@ interface EquipmentFilters extends BaseFilterData {
     sliders: Record<"level", SliderData>;
 }
 interface FeatFilters extends BaseFilterData {
-    checkboxes: Record<"ancestry" | "classes" | "feattype" | "skills" | "rarity" | "source" | "traits", CheckboxData>;
+    checkboxes: Record<"feattype" | "skills" | "rarity" | "source", CheckboxData>;
+    multiselects: Record<"traits", MultiselectData<FeatTrait>>;
     sliders: Record<"level", SliderData>;
 }
 interface HazardFilters extends BaseFilterData {
@@ -132,7 +134,7 @@ interface InitialFeatFilters extends BaseInitialFilters {
     rarity?: string[];
     source?: string[];
     traits?: string[];
-    levelRange?: {
+    level?: {
         min?: number;
         max?: number;
     };
@@ -153,7 +155,7 @@ interface InitialSpellFilters extends BaseInitialFilters {
     timefilter?: string;
     category?: string[];
     classes?: string[];
-    level?: string[];
+    level?: number[];
     rarity?: string[];
     school?: string[];
     source?: string[];

@@ -9,9 +9,10 @@ declare type FeatSlotLevel = number | {
 interface FeatCategoryOptions {
     id: string;
     label: string;
-    featFilter?: string;
+    featFilter?: string | null;
     supported?: FeatType[];
-    levels?: FeatSlotLevel[];
+    slots?: FeatSlotLevel[];
+    level?: number;
 }
 declare class CharacterFeats extends Collection<FeatCategory> {
     private actor;
@@ -45,14 +46,14 @@ declare class FeatCategory {
     /** Whether the feats are slotted by level or free-form */
     slotted: boolean;
     /** Will move to sheet data later */
-    featFilter?: string;
+    featFilter: string | null;
     /** Feat Types that are supported */
     supported: FeatType[];
     /** Lookup for the slots themselves */
     slots: Record<string, SlottedFeat>;
-    constructor(options: FeatCategoryOptions);
+    constructor(actor: CharacterPF2e, options: FeatCategoryOptions);
     /** Is this category slotted and without any empty slots */
     get isFull(): boolean;
     isFeatValid(feat: FeatPF2e): boolean;
 }
-export { CharacterFeats, FeatCategory, FeatSlotLevel };
+export { CharacterFeats, FeatCategory, FeatCategoryOptions, FeatSlotLevel };

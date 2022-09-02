@@ -9,8 +9,8 @@ import { RollNotePF2e } from "@module/notes";
 import { DeferredModifier, PotencySynthetic, StrikeAdjustment, StrikingSynthetic } from "@module/rules/synthetics";
 import { DamageDieSize, DamageType } from ".";
 declare class WeaponDamagePF2e {
-    static calculateStrikeNPC(attack: MeleePF2e, actor: NPCPF2e, traits: TraitViewData[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, modifierAdjustments: Record<string, ModifierAdjustment[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: string[] | undefined, rollNotes: Record<string, RollNotePF2e[]>, strikeAdjustments: StrikeAdjustment[]): DamageTemplate | null;
-    static calculate(weapon: WeaponPF2e | MeleePF2e, actor: CharacterPF2e | NPCPF2e, traits: TraitViewData[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, modifierAdjustments: Record<string, ModifierAdjustment[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: string[] | undefined, rollNotes: Record<string, RollNotePF2e[]>, weaponPotency: PotencySynthetic | null, striking: Record<string, StrikingSynthetic[]>, strikeAdjustments: StrikeAdjustment[]): DamageTemplate | null;
+    static calculateStrikeNPC(attack: MeleePF2e, actor: NPCPF2e, traits: TraitViewData[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, modifierAdjustments: Record<string, ModifierAdjustment[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: Set<string> | undefined, rollNotes: Record<string, RollNotePF2e[]>, strikeAdjustments: StrikeAdjustment[]): DamageTemplate | null;
+    static calculate(weapon: WeaponPF2e | MeleePF2e, actor: CharacterPF2e | NPCPF2e, traits: TraitViewData[] | undefined, statisticsModifiers: Record<string, DeferredModifier[]>, modifierAdjustments: Record<string, ModifierAdjustment[]>, damageDice: Record<string, DamageDicePF2e[]>, proficiencyRank: number | undefined, options: Set<string> | undefined, rollNotes: Record<string, RollNotePF2e[]>, weaponPotency: PotencySynthetic | null, striking: Record<string, StrikingSynthetic[]>, strikeAdjustments: StrikeAdjustment[]): DamageTemplate | null;
     /** Convert the damage definition into a final formula, depending on whether the hit is a critical or not. */
     static getFormula(damage: Omit<DamageTemplate, "formula">, critical: boolean): DamageFormula;
     /** Add dice to the given damage pool */
@@ -31,6 +31,8 @@ declare class WeaponDamagePF2e {
     private static getSelectors;
     /** Parse damage formulas from melee items and construct `WeaponDamage` objects out of them */
     static npcDamageToWeaponDamage(instance: MeleeDamageRoll): WeaponDamage;
+    /** Determine whether the damage source is a strength-based statistic */
+    static strengthBasedDamage(weapon: WeaponPF2e | MeleePF2e): boolean;
     /** Determine whether a strike's damage includes the actor's strength modifier */
     static strengthModToDamage(weapon: WeaponPF2e | MeleePF2e): boolean;
 }

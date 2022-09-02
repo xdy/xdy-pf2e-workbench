@@ -16,12 +16,12 @@ declare class PredicatePF2e implements RawPredicate {
     /** Is the predicate data structurally valid? */
     isValid: boolean;
     /** Test if the given predicate passes for the given list of options. */
-    static test(predicate: RawPredicate | undefined, options: string[]): boolean;
+    static test(predicate: RawPredicate | undefined, options: Set<string> | string[]): boolean;
     constructor(param?: RawPredicate);
     /** Structurally validate the predicates */
     static validate(raw: unknown): raw is RawPredicate;
     /** Test this predicate against a domain of discourse */
-    test(options: string[] | Set<string>): boolean;
+    test(options: Set<string> | string[]): boolean;
     /** Is the provided statement true? */
     private isTrue;
     private testBinaryOp;

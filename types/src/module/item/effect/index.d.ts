@@ -19,8 +19,6 @@ declare class EffectPF2e extends AbstractEffectPF2e {
     /** Decreases if this is a counter effect, otherwise deletes entirely */
     decrease(): Promise<void>;
     prepareBaseData(): void;
-    /** Set a self roll option for this effect */
-    prepareActorData(this: Embedded<EffectPF2e>): void;
     /** Include a trimmed version of the "slug" roll option (e.g., effect:rage instead of effect:effect-rage) */
     getRollOptions(prefix?: string): string[];
     /** Set the start time and initiative roll of a newly created effect */

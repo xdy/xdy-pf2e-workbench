@@ -9,13 +9,10 @@ export declare class CraftingFormula implements CraftingFormulaData {
     batchSize: number;
     /** Whether or not this formula is saved directly on the actor and can be deleted */
     deletable: boolean;
-    /** Crafting entries that this formula is currently prepared in */
-    preparedData: CraftingFormulaEntryData;
-    constructor(item: PhysicalItemPF2e, { dc, batchSize, deletable, preparedData, }?: {
+    constructor(item: PhysicalItemPF2e, { dc, batchSize, deletable }?: {
         dc?: number;
         batchSize?: number;
         deletable?: boolean;
-        preparedData?: CraftingFormulaEntryData;
     });
     get uuid(): ItemUUID;
     get img(): ImagePath;
@@ -33,16 +30,4 @@ export interface CraftingFormulaData {
     dc?: number;
     batchSize?: number;
     deletable?: boolean;
-    preparedData?: CraftingFormulaEntryData;
-}
-export interface CraftingFormulaEntryData {
-    [key: string]: CraftingFormulaPreparedData;
-}
-export interface CraftingFormulaPreparedData {
-    isSignatureItem?: boolean;
-    slots?: {
-        quantity?: number;
-        expended?: boolean;
-        slot?: number;
-    }[];
 }
