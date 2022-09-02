@@ -1,3 +1,10 @@
+# [4.0.0-beta.35](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.34...v4.0.0-beta.35) (2022-09-02)
+
+
+### Bug Fixes
+
+* Switch to ghost's foundry-publish ([091a615](https://github.com/xdy/xdy-pf2e-workbench/commit/091a615c35aadcaeb5c91ba93358f7963b7e6e9f))
+
 # [4.0.0-beta.34](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.33...v4.0.0-beta.34) (2022-09-02)
 
 
