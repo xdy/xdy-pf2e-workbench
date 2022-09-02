@@ -18,6 +18,7 @@ export interface SkillActionData {
     actionType: ActionType;
     variants: VariantData[];
     actor: Actor;
+    translation?: string;
 }
 
 export type SkillActionDataParameters = PartialBy<SkillActionData, "key" | "actionType" | "icon" | "compendiumId">;
