@@ -51,7 +51,7 @@ import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { UserPF2e } from "@module/user";
 import { loadSkillActions, renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActorId } from "./feature/cr-scaler/NPCScaler";
-import { generateNameFromTraitsFromTokenId } from "./feature/tokenMystificationHandler/traits-name-generator";
+import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
 import {
     applyEncumbranceBasedOnBulk,
     autoRemoveUnconsciousAtGreaterThanZeroHP,
@@ -650,7 +650,7 @@ Hooks.once("ready", async () => {
         scaleNPCToLevelFromActorId: scaleNPCToLevelFromActorId, // await game.PF2eWorkbench.scaleNPCToLevelFromActorId(_token.actor.id, 24);
         moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
         doMystificationFromTokenId: doMystificationFromTokenId, // await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, false)
-        generateNameFromTraitsFromTokenId: generateNameFromTraitsFromTokenId, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
+        generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
     };
 
     if (game.settings.get(MODULENAME, "heroPointHandler")) {
