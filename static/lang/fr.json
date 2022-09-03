@@ -171,6 +171,20 @@
         "skill": "Compétences",
         "strike": "Frappes"
       }
+    },
+    "npc-roller": {
+      "nav-labels": {
+        "damage": "Dégâts",
+        "ac": "Classe d’Armure",
+        "save": "Jet de Sauvegarde",
+        "hp": "Points de Vie",
+        "spell": "Sort",
+        "areaDamage": "Dégâts de Zone",
+        "perception": "Perception",
+        "abilityScore": "Valeurs de Caractéristique",
+        "skill": "Compétences",
+        "strike": "Frappes"
+      }
     }
   }
 }
