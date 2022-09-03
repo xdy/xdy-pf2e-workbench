@@ -11,10 +11,10 @@
 import { preloadTemplates } from "./preloadTemplates";
 import { registerWorkbenchSettings } from "./settings";
 import {
-    doMystificationFromTokenId,
+    doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification,
+    tokenCreateMystification
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -50,7 +50,7 @@ import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { UserPF2e } from "@module/user";
 import { loadSkillActions, renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions";
-import { scaleNPCToLevelFromActorId } from "./feature/cr-scaler/NPCScaler";
+import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
 import {
     applyEncumbranceBasedOnBulk,
@@ -647,9 +647,9 @@ Hooks.once("ready", async () => {
     game["PF2eWorkbench"] = {
         resetHeroPoints: resetHeroPoints, // game.PF2eWorkbench.resetHeroPoints(1)
         addHeroPoints: addHeroPoints, // game.PF2eWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
-        scaleNPCToLevelFromActorId: scaleNPCToLevelFromActorId, // await game.PF2eWorkbench.scaleNPCToLevelFromActorId(_token.actor.id, 24);
+        scaleNPCToLevelFromActor: scaleNPCToLevelFromActor, // await game.PF2eWorkbench.scaleNPCToLevelFromActor(_token.actor.id, 24);
         moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
-        doMystificationFromTokenId: doMystificationFromTokenId, // await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, false)
+        doMystificationFromToken: doMystificationFromToken, // await game.PF2eWorkbench.doMystificationFromToken(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromToken(_token.id, false)
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
     };
 

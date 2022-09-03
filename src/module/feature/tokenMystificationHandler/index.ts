@@ -88,7 +88,7 @@ export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): b
     return tokenName !== actorName || false;
 }
 
-export async function doMystificationFromTokenId(tokenId: string, active: boolean) {
+export async function doMystificationFromToken(tokenId: string, active: boolean) {
     const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));
     if (token) {
         return doMystification(token, active);

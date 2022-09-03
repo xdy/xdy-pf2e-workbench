@@ -23,7 +23,7 @@ declare const PHYSICAL_ITEM_TYPES: Set<
     "consumable" | "armor" | "backpack" | "book" | "equipment" | "treasure" | "weapon"
 >;
 
-export async function scaleNPCToLevelFromActorId(actorId: string, newLevel: number) {
+export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number) {
     const actor = <NPCPF2e>game.actors.get(actorId);
     if (actor) {
         scaleNPCToLevel(actor, newLevel);
