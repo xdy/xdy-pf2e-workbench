@@ -69,12 +69,13 @@ No section
   * The module will hide any skill actions that you're currently not trained in.
   * Actions that require a feat (e.g. Bon Mot) will not show up unless you actually have the feat.
 * A few potentially useful internal functions have been made available for macro use. Name and simple example of each below:
-```game.PF2eWorkbench.resetHeroPoints, // game.PF2EWorkbench.resetHeroPoints(1)
-game.PF2eWorkbench.addHeroPoints, // game.PF2EWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
-game.PF2eWorkbench.scaleNPCToLevelFromActorId: scaleNPCToLevelFromActorId, // await game.PF2eWorkbench.scaleNPCToLevelFromActorId(_token.actor.id, 24);
-game.PF2eWorkbench.moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
-game.PF2eWorkbench.doMystificationFromTokenId: doMystificationFromTokenId, // await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, false)
-game.PF2eWorkbench.generateNameFromTraitsFromTokenId: generateNameFromTraitsFromTokenId, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
+```
+game.PF2eWorkbench.resetHeroPoints // game.PF2EWorkbench.resetHeroPoints(1)
+game.PF2eWorkbench.addHeroPoints // game.PF2EWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
+game.PF2eWorkbench.scaleNPCToLevelFromActorId scaleNPCToLevelFromActorId // await game.PF2eWorkbench.scaleNPCToLevelFromActorId(_token.actor.id, 24);
+game.PF2eWorkbench.moveSelectedAheadOfCurrent moveSelectedAheadOfCurrent // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
+game.PF2eWorkbench.doMystificationFromTokenId // await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, false)
+game.PF2eWorkbench.generateNameFromTraitsForToken // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
 ```
 
 New Keybinds in Configure Controls
