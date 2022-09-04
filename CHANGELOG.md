@@ -1,3 +1,10 @@
+# [4.0.0-beta.37](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.36...v4.0.0-beta.37) (2022-09-04)
+
+
+### Bug Fixes
+
+* Make breath weapon reminder work for more creatures with recharging abilities (e.g. Scalathrax). ([119903f](https://github.com/xdy/xdy-pf2e-workbench/commit/119903f9395b102e7395b425468ec8473eb5253e))
+
 # [4.0.0-beta.36](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.35...v4.0.0-beta.36) (2022-09-04)
 
 
