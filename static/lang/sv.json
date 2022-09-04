@@ -129,7 +129,24 @@
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "(Experimentellt) Använd mystifierat namn i chattmeddelanden genom att ersätta karaktärns namn med det mystifierade namnet. Kommer utan tvekan att se riktigt dåligt ut på vissa förmågor.",
         "name": "(Experimentell) Använd mystifierat namn i chattmeddelanden."
+      },
+      "workbenchVersion": {
+        "name": "Version för migrering av Workbench",
+        "hint": "Version som den senaste migreringen genomfördes med. Kan vara lägre än modulversionen. Ändra inte detta om du inte vet vad du gör."
+      },
+      "castPrivateSpellWithPublicMessage": {
+        "they": "De",
+        "firstPart": "{tokenName} har precis kastat en {vsmf} {type} av traditionen <strong>{traditionString}</strong>",
+        "components": "Komponenter:",
+        "secondPartRK": ".<br>Fråga din SL om du kände igen det automatiskt/med en reaktion. Om du inte gjorde det kan du spendera en handling på din runda för att försöka identifiera den: @Check[typ:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}"
       }
+    },
+    "npc-roller": {
+      "nav-labels": {
+        "damage": "Skador",
+        "save": "Räddningsslag"
+      },
+      "title": "SLP-rullare"
     }
   }
 }
