@@ -1,3 +1,13 @@
+# [4.0.0-beta.36](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.35...v4.0.0-beta.36) (2022-09-04)
+
+
+### Bug Fixes
+
+* Rename exported function. ([3982204](https://github.com/xdy/xdy-pf2e-workbench/commit/398220453a50715292412347ef572922ec1a11ca))
+* Rename exported function. ([8dcf47b](https://github.com/xdy/xdy-pf2e-workbench/commit/8dcf47bb13bdb18f76eb6096cab73baeb3bd19b6))
+* Rename exported function. ([2fc82f8](https://github.com/xdy/xdy-pf2e-workbench/commit/2fc82f8e38da17b034d0859bf038af8ff474e9d6))
+* Update to foundry v10 and pf2e v4 types. (And, patched in filepicker). ([30cfa1a](https://github.com/xdy/xdy-pf2e-workbench/commit/30cfa1a51d11bd2b5114e24add8b94ab0f879e20))
+
 # [4.0.0-beta.35](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.34...v4.0.0-beta.35) (2022-09-02)
 
 
