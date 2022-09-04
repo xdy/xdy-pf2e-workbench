@@ -74,7 +74,7 @@ function hideDuplicateActions(toHideActions: string[]) {
         }
     }
 
-    let intersection = actionIds.filter((element) => toHideActions.includes(element));
+    const intersection = actionIds.filter((element) => toHideActions.includes(element));
     if (intersection.length > 0) {
         for (const s of intersection) {
             // if (game.settings.get(MODULENAME, "skillActionsHideDuplicates") === "hideActions") {
@@ -99,7 +99,7 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
     const encounterActions = new SkillActionCollection();
     const explorationActions = new SkillActionCollection();
     const downtimeActions = new SkillActionCollection();
-    let toHideActions: string[] = [];
+    const toHideActions: string[] = [];
 
     SkillActionCollection.allActionsFor(app.actor).forEach(function (action) {
         if (action.hasTrait("downtime")) {
@@ -127,7 +127,9 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
     if (skillActions !== "disabled") {
         switch (skillActions) {
             case "top": {
-                const explorationTop = html.find('[data-tab="exploration"] .actions-list.item-list.directory-list').prev();
+                const explorationTop = html
+                    .find('[data-tab="exploration"] .actions-list.item-list.directory-list')
+                    .prev();
                 const downtimeTop = html.find('[data-tab="downtime"] .actions-list.item-list.directory-list').prev();
                 const encounterTop = html.find(
                     '[data-tab="encounter"] .actions-list.item-list.directory-list.strikes-list'
@@ -141,7 +143,9 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
                 break;
             }
             case "bottom": {
-                const encounterBottom = html.find('[data-tab="encounter"]  .actions-list.item-list.directory-list').last();
+                const encounterBottom = html
+                    .find('[data-tab="encounter"]  .actions-list.item-list.directory-list')
+                    .last();
                 const explorationBottom = html.find('[data-tab="exploration"] .actions-list.item-list.directory-list');
                 const downtimeBottom = html.find('[data-tab="downtime"] .actions-list.item-list.directory-list');
                 encounterBottom.after($encounter);

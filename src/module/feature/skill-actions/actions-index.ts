@@ -25,7 +25,7 @@ export class ActionsIndex extends Map<string, ItemPF2e> {
 
         const actions = <ActionItemPF2e[]>await pack.getDocuments({ _id: { $in: ACTION_IDS } });
         for (const action of actions) {
-            //It's weird that this is needed, but...
+            // It's weird that this is needed, but...
             const slug = action.slug ?? sluggify(action.name);
             if (slug) {
                 this.set(slug, action);
@@ -34,7 +34,7 @@ export class ActionsIndex extends Map<string, ItemPF2e> {
     }
 }
 
-//Webpack yells at me if I use the system sluggify. Not up to yelling back at it right now. Everything below this is from: https://github.com/xdy-forks/pf2e/blob/af99fccbf93fd8316f5aeeccdfab3646090a62bd/src/util/misc.ts
+// Webpack yells at me if I use the system sluggify. Not up to yelling back at it right now. Everything below this is from: https://github.com/xdy-forks/pf2e/blob/af99fccbf93fd8316f5aeeccdfab3646090a62bd/src/util/misc.ts
 
 const wordCharacter = String.raw`[\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
 const nonWordCharacter = String.raw`[^\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;

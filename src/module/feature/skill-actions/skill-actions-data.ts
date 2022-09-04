@@ -107,10 +107,10 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         compendiumId: "gxtq81VAhpmNvEgA",
         actionType: "A",
         variants: [
-            { proficiencyKey: "arc", requiredRank: 1},
-            { proficiencyKey: "nat", requiredRank: 1},
-            { proficiencyKey: "occ", requiredRank: 1},
-            { proficiencyKey: "rel", requiredRank: 1},
+            { proficiencyKey: "arc", requiredRank: 1 },
+            { proficiencyKey: "nat", requiredRank: 1 },
+            { proficiencyKey: "occ", requiredRank: 1 },
+            { proficiencyKey: "rel", requiredRank: 1 },
         ],
     },
     // Athletics
@@ -454,10 +454,10 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         compendiumId: "5s8FqK4YZTVOvP0v",
         actionType: "D",
         variants: [
-            { proficiencyKey: "arc", requiredRank: 1},
-            { proficiencyKey: "nat", requiredRank: 1},
-            { proficiencyKey: "occ", requiredRank: 1},
-            { proficiencyKey: "rel", requiredRank: 1},
+            { proficiencyKey: "arc", requiredRank: 1 },
+            { proficiencyKey: "nat", requiredRank: 1 },
+            { proficiencyKey: "occ", requiredRank: 1 },
+            { proficiencyKey: "rel", requiredRank: 1 },
         ],
     },
     {
@@ -489,10 +489,10 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         compendiumId: "uR62fVC9FyQAMCO1",
         actionType: "A",
         variants: [
-            { proficiencyKey: "arc", requiredRank: 1},
-            { proficiencyKey: "nat", requiredRank: 1},
-            { proficiencyKey: "occ", requiredRank: 1},
-            { proficiencyKey: "rel", requiredRank: 1},
+            { proficiencyKey: "arc", requiredRank: 1 },
+            { proficiencyKey: "nat", requiredRank: 1 },
+            { proficiencyKey: "occ", requiredRank: 1 },
+            { proficiencyKey: "rel", requiredRank: 1 },
         ],
     },
     {

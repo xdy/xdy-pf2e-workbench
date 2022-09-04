@@ -121,10 +121,10 @@ export class SkillAction {
                     // eslint-disable-next-line @typescript-eslint/await-thenable
                     await rollAction({ event, modifiers: variant.modifiers, actors: [this.actor], ...variant.extra });
                 } else {
-                    //Ugly earnIncome fix. Though currently the macro itself doesn't work in the pf2e system.
-                    let pack = game.packs.get("pf2e.pf2e-macros");
+                    // Ugly earnIncome fix. Though currently the macro itself doesn't work in the pf2e system.
+                    const pack = game.packs.get("pf2e.pf2e-macros");
                     await pack?.getIndex().then((index) => {
-                        let id = index.find((e) => e.name === "Earn Income")?._id;
+                        const id = index.find((e) => e.name === "Earn Income")?._id;
                         if (id) {
                             // @ts-ignore
                             (<Promise<Macro>>pack?.getDocument(id)).then((e) => e.execute());

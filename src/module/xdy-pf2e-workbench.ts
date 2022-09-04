@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification
+    tokenCreateMystification,
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
