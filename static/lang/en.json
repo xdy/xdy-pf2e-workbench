@@ -342,7 +342,7 @@
       "reminderBreathWeapon": {
         "hint": "Check to set reminder for breath weapon use.",
         "name": "Breath weapon reminder",
-        "prefix": "Recharge Breath Weapon",
+        "prefix": "Recharge",
         "defaultName": "Breath",
         "used": "Used ",
         "source": "Breath Weapon reminder created by PF2e Workbench"

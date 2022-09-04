@@ -8,18 +8,19 @@ import { SpellPF2e } from "@item";
 import { ActorPF2e, CreaturePF2e } from "@actor";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
-    if (isFirstGM() && message.content && game.combats && game.combats.active) {
+    let content = message.content;
+    if (isFirstGM() && content && game.combats && game.combats.active) {
         const token: TokenDocumentPF2e = <TokenDocumentPF2e>canvas?.scene?.tokens.get(<string>message.speaker.token);
 
         const actors = [token?.actor];
         for (const actor of actors) {
             const prefix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.prefix`);
-            const matcher = `(.*)(data-flavor.*${prefix})(.*)(data-formula.*1d([4|6]))`;
-            const match = message.content.match(matcher);
-            const matchString = match ? `1d${match[5]}` : "";
+            const matcher = `(.*)\\[\\[\\/br 1d([4|6]) \\#(${prefix}(.*?))\\]\\]`;
+            const match = content.match(matcher);
+            const matchString = match ? `1d${match[2]}` : "";
 
             if (matchString) {
-                const title = message.content.match(/.*title="(.*?)" width.*/);
+                const title = content.match(/.*title="(.*?)" width.*/);
                 const effect = {
                     type: "effect",
                     name:
