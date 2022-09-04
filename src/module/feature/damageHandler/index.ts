@@ -1,7 +1,5 @@
 import { degreeOfSuccessWithRerollHandling, shouldIHandleThisMessage } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { ActorPF2e } from "@actor";
-import { TokenDocumentPF2e } from "@scene";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
 import { SpellPF2e } from "@item";
@@ -57,10 +55,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const autoRollDamageForSpellNotAnAttack = <boolean>(
                 game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack")
             );
-            const messageActor: ActorPF2e = <ActorPF2e>game.actors?.get(<string>message.speaker.actor);
-            const messageToken: TokenDocumentPF2e = <TokenDocumentPF2e>(
-                canvas?.scene?.tokens.get(<string>message.speaker.token)
-            );
+            const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
+            const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
             const rollType = flags.context?.type;
 
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
@@ -75,7 +71,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 !origin?.traits.has("attack");
             const rollForAttackSpell = rollType === "spell-attack-roll" && autoRollDamageForSpellAttack;
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
-            if (messageActor && messageToken && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
+            if (actor && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
                 if (
                     rollForNonAttackSpell ||
                     (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
@@ -135,9 +131,9 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         }
                     }
                 } else if (rollForStrike) {
-                    const rollOptions = messageToken.actor?.getRollOptions(["all", "damage-roll"]);
+                    const rollOptions = actor?.getRollOptions(["all", "damage-roll"]);
                     // @ts-ignore
-                    const actions = messageActor?.system?.actions;
+                    const actions = actor?.system?.actions;
                     const actionIds = originUuid.match(/Item.(\w+)/);
                     if (actions && actionIds && actionIds[1]) {
                         const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
