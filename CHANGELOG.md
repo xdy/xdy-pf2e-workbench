@@ -1,3 +1,10 @@
+# [4.0.0-beta.38](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.37...v4.0.0-beta.38) (2022-09-04)
+
+
+### Bug Fixes
+
+* Might fix [#396](https://github.com/xdy/xdy-pf2e-workbench/issues/396), test again after next foundry version is out. ([8933b24](https://github.com/xdy/xdy-pf2e-workbench/commit/8933b247d7d1831dafe6b35d58eea6eb1a4b893e))
+
 # [4.0.0-beta.37](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.36...v4.0.0-beta.37) (2022-09-04)
 
 
