@@ -43,7 +43,7 @@
     "@types/jquery": "^3.5.14",
     "@types/luxon": "^3.0.0",
     "@types/mini-css-extract-plugin": "^2.5.1",
-    "@types/node": "^18.6.4",
+    "@types/node": "^18.7.15",
     "@types/sortablejs": "^1.13.0",
     "@types/tooltipster": "^0.0.31",
     "@types/webpack-env": "^1.17.0",
