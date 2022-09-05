@@ -94,7 +94,7 @@ jobs:
                 # Publish the release to FoundryVTT's package repository only if push on main
             -   name: Publish to Foundry Admin
                 if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
-                uses: Varriount/fvtt-autopublish@v1.0.6
+                uses: Varriount/fvtt-autopublish@v1.0.9
                 with:
                     username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
                     password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
