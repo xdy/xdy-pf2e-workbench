@@ -1,3 +1,10 @@
+# [4.0.0-beta.39](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.38...v4.0.0-beta.39) (2022-09-05)
+
+
+### Bug Fixes
+
+* Change compatibility ([4287bf6](https://github.com/xdy/xdy-pf2e-workbench/commit/4287bf6bc0ac17a532b4c02d3d39d1704b202f8f))
+
 # [4.0.0-beta.38](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.37...v4.0.0-beta.38) (2022-09-04)
 
 
