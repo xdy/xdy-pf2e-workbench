@@ -147,6 +147,10 @@
       "applyPersistentHealingSeparateMessage": {
         "hint": "Montrer séparément le message des soins persistants",
         "name": "Montrer séparément le message des soins persistants"
+      },
+      "mystificationSettings": {
+        "hint": "Autoriser et configurer la mystification des PNJ",
+        "label": "Régler les paramètres de mystification des PNJ"
       }
     },
     "npc-roller": {
@@ -160,7 +164,8 @@
         "perception": "Perception",
         "abilityScore": "Valeurs de Caractéristique",
         "skill": "Compétences",
-        "strike": "Frappes"
+        "strike": "Frappes",
+        "dc": "DD"
       }
     }
   }
