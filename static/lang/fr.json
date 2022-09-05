@@ -1,6 +1,42 @@
 {
   "xdy-pf2e-workbench": {
+    "npcRoller": {
+      "nav-labels": {
+        "damage": "Dégâts",
+        "ac": "Classe d’Armure",
+        "save": "Jet de Sauvegarde",
+        "hp": "Points de Vie",
+        "spell": "Sort",
+        "areaDamage": "Dégâts de Zone",
+        "perception": "Perception",
+        "abilityScore": "Valeurs de Caractéristique",
+        "skill": "Compétences",
+        "strike": "Frappes",
+        "dc": "DD"
+      }
+    },
+    "skillActions": {
+      "Title": "Actions de Compétence",
+      "Settings": {
+        "Position": {
+          "name": "Position des actions de compétence",
+          "hint": "Position dans la page des actions; Haut : juste après les frappes, Bas : en dernière position.",
+          "top": "Haut",
+          "bottom": "Bas"
+        },
+        "IconStyle": {
+          "name": "Style d'icône",
+          "hint": "Style d'icône sur la compétence; Icône Coût de l'action: pour l'icône du coût des actions, Icône de compétence: pour l'icône des compétences si elle est disponible",
+          "actionCostIcon": "Icône Coût de l'action",
+          "skillIcon": "Icône de compétence"
+        }
+      }
+    },
     "SETTINGS": {
+      "mystificationSettings": {
+        "hint": "Autoriser et configurer la mystification des PNJ",
+        "label": "Régler les paramètres de mystification des PNJ"
+      },
       "applyPersistentDamage": {
         "hint": "Applique automatiquement les dégâts persistants lancés par le module Persistent damage.",
         "name": "Applique automatiquement les dégâts persistants lancés par le module Persistent damage.",
@@ -139,51 +175,6 @@
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "Utilise le nom mystifié à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié. Cela va vraisemblablement ne pas être joli pour certaines capacités.",
         "name": "Utiliser les noms mystifiés dans les messages de la conversation."
-      },
-      "skillActions": {
-        "Title": "Actions de Compétence",
-        "Settings": {
-          "Position": {
-            "name": "Position des actions de compétence",
-            "hint": "Position dans la page des actions; Haut : juste après les frappes, Bas : en dernière position.",
-            "top": "Haut",
-            "bottom": "Bas"
-          },
-          "IconStyle": {
-            "name": "Style d'icône",
-            "hint": "Style d'icône sur la compétence; Icône Coût de l'action: pour l'icône du coût des actions, Icône de compétence: pour l'icône des compétences si elle est disponible",
-            "actionCostIcon": "Icône Coût de l'action",
-            "skillIcon": "Icône de compétence"
-          }
-        }
-      }
-    },
-    "npc-roller": {
-      "nav-labels": {
-        "damage": "Dégâts",
-        "ac": "Classe d’Armure",
-        "save": "Jet de Sauvegarde",
-        "hp": "Points de Vie",
-        "spell": "Sort",
-        "areaDamage": "Dégâts de Zone",
-        "perception": "Perception",
-        "abilityScore": "Valeurs de Caractéristique",
-        "skill": "Compétences",
-        "strike": "Frappes"
-      }
-    },
-    "npc-roller": {
-      "nav-labels": {
-        "damage": "Dégâts",
-        "ac": "Classe d’Armure",
-        "save": "Jet de Sauvegarde",
-        "hp": "Points de Vie",
-        "spell": "Sort",
-        "areaDamage": "Dégâts de Zone",
-        "perception": "Perception",
-        "abilityScore": "Valeurs de Caractéristique",
-        "skill": "Compétences",
-        "strike": "Frappes"
       }
     }
   }
