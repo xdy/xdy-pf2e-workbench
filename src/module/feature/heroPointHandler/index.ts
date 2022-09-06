@@ -147,20 +147,20 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     // TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
 
-    const characters =
+    const loggedIn =
         game?.actors
             ?.filter((x) => x.hasPlayerOwner)
             .filter((x) => x.isOfType("character"))
             .filter((x) => x.alliance === "party")
             ?.filter((actor) => !actor.system.traits.traits.value.toString().includes("minion"))
             ?.filter((actor) => !actor.system.traits.traits.value.toString().includes("eidolon"))
-            ?.filter(
-                (actor) =>
-                    !game.users
-                        .filter((user) => user.active)
-                        .map((user) => user.character?.id)
-                        .filter((x) => x !== null)
-                        .includes(actor.id)
+            .filter((x) =>
+                (
+                    game?.users
+                        ?.filter((user) => user.active)
+                        .map((user) => user.character)
+                        .filter((actor) => !!actor) || []
+                ).includes(x)
             ) || [];
 
     let checked: number;
@@ -169,7 +169,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
             checked = -1;
             break;
         case HPHState.Timeout:
-            checked = characters.length > 0 ? Math.floor(Math.random() * characters.length) : -1;
+            checked = loggedIn.length > 0 ? Math.floor(Math.random() * loggedIn.length) : -1;
             break;
         case HPHState.Check:
             checked = -1;
@@ -210,7 +210,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
       `${MODULENAME}.SETTINGS.heroPointHandler.thisMany`
   )}</label>
   <div class="col-md-4">
-    <input id="heropoints" name="heropoints" type="number" value=1 class="form-control input-md">
+    <input id="heropoints" name="heropoints" type="number" value="1" class="form-control input-md">
   </div>
 </div>
 
@@ -221,14 +221,14 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
   )}</label>
   <div class="col-md-4">`;
 
-    for (let i = 0; i < characters.length; i++) {
+    for (let i = 0; i < loggedIn.length; i++) {
         charactersContent += `
     <div class="radio">
         <label for="characters-${i}">
-          <input type="radio" name="characters" id="characters-${i}" value="${
-            characters?.filter((x) => x.isOfType("character"))[i]?.id
-        }" ${checked === i ? 'checked="checked"' : ""}>
-          ${characters?.filter((x) => x.isOfType("character"))[i]?.name}
+          <input type="radio" name="characters" id="characters-${i}" value="${loggedIn[i]?.id}" ${
+            checked === i ? 'checked="checked"' : ""
+        }>
+          ${loggedIn[i]?.name}
         </label>
     </div>`;
     }
