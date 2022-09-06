@@ -91,7 +91,7 @@ Assorted other features
   * Aura effects for Bane, Bless, Inspire Courage, Inspire Defense, Protective Ward that automatically apply the effect to tokens within the aura. (Technically these should not be auras, but, close enough...)
   * Stance effects for Dread Marshal and Inpiring Marshal that applies the effect to tokens within the aura. (Will be removed when the Stances are implemented in the system.)
   * Effect for Dirge of Doom that you can give to targets to not let the automated frightened removal reduce frightened below 1.
-  * (Deprecated, use the module https://foundryvtt.com/packages/pf2-flat-check instead) An 'Equipment' named "Workbench Flat Check Notes". This 'Equipment' holds several useful Note RE:s that when appropriate add notes about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your characters, it'll appear on the Deity Boons/Curses section of the Effects tab rather than on the feat list. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or dazzled. Self has Blind-Fight.
+  * (Deprecated, use the module https://foundryvtt.com/packages/pf2-flat-check instead) An 'Equipment' named "Workbench Flat Check Notes". This 'Equipment' holds several useful Note RE:s that when appropriate add notes about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your character. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or dazzled. Self has Blind-Fight.
 
 Experimental features:
 * None right now.
