@@ -135,8 +135,6 @@ export class SkillAction {
                 await this.toChat();
                 // @ts-ignore
                 await variant.skill.roll({ event, modifiers: variant.modifiers, options: [`action:${this.slug}`] });
-                // @ts-ignore
-                await variant.skill.roll({ event, modifiers: variant.modifiers, options: [`action:${this.slug}`] });
             }
         }
     }
