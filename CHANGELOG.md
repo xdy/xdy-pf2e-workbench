@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.1...v4.0.2) (2022-09-06)
+
+
+### Bug Fixes
+
+* Try ghost's publish again ([e668456](https://github.com/xdy/xdy-pf2e-workbench/commit/e668456eab6f88378f6c00193021772dfda057f6))
+
 ## [4.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0...v4.0.1) (2022-09-06)
 
 
