@@ -79,7 +79,7 @@
         "label": "Manage Reminders Settings"
       },
       "abpVariantAllowItemBonuses": {
-        "hint": "Do not disable item bonuses when using ABP.",
+        "hint": "Doesn't disable item bonuses when using Automatic Bonus Progression variant rule.",
         "name": "Do not disable item bonuses when using ABP."
       },
       "addGmRKButtonToNpc": {
@@ -222,7 +222,7 @@
         "name": "Minutes between Hero Point Handler opening."
       },
       "heroPointHandlerKey": {
-        "hint": "Keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder",
+        "hint": "Keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder.",
         "name": "Keybind to open the Hero Point handler dialog."
       },
       "heroPointHandlerStartTimerOnReady": {
