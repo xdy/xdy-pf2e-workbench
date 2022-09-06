@@ -1,1 +1,137 @@
-{}
+{
+  "xdy-pf2e-workbench": {
+    "SETTINGS": {
+      "automationClientSettings": {
+        "label": "Automatizações de Cliente",
+        "name": "Automatizações de Cliente",
+        "hint": "Habilitar e Configurar automação para jogadores"
+      },
+      "remindersSettings": {
+        "hint": "Configure vários lembretes.",
+        "name": "Lembretes",
+        "label": "Configurações de Lembretes"
+      },
+      "npcRoller": {
+        "name": "Rolador de NPC",
+        "hint": "Habilita o Rolador de NPC, que pode ser ativado na aba de Diários."
+      },
+      "heroPointHandler": {
+        "doWhat": "<b>Seção 1</b> - Escolha o que fazer com os Pontos de Heroísmo de <em>todos</em> os personagens com o seguinte valor",
+        "add": "Adicionar",
+        "addedFor": "1 Ponto de Heroísmo adicionado para {name}",
+        "addedToForAll": "{heroPoints} Ponto(s) de Heroísmo adicionado(s) para todos",
+        "addOne": "<b>Seção 2</b> - Adicionar um Ponto de Heroísmo para personagens selecionados dentre os que estão logados (o padrão é um personagem aleatório quando o temporizador expira)",
+        "all": "Todos",
+        "defaultTimeoutMinutes": 60,
+        "hint": "Habilita o gerenciador de Pontos de Heroísmo, que pode ser ativado por um atalho de teclado opcional.",
+        "ignore": "Fazer Nada",
+        "minutesLeft": "minutos restando no temporizador",
+        "name": "Habilitar Gerenciador de Pontos de Heroísmo.",
+        "none": "Sem personagem",
+        "noRunningTimer": "Nenhum temporizador atualmente",
+        "noTimerLabel": "Enviar <b>sem</b> temporizador. Irá <b>parar</b> qualquer temporizador atual.",
+        "resetTo": "Resetar para",
+        "resetToForAll": "Pontos de Heroísmo foram resetados para {heroPoints} para todos",
+        "showAfter": "Mostra o diálogo novamente após esta quantidade de minutos",
+        "startTimerLabel": "Enviar e iniciar/continuar o temporizador",
+        "thisMany": "Esta quantidade",
+        "timerStopped": "Temporizador de Pontos de Heroísmo foi parado.",
+        "timerValue": "Tempo do Temporizador (intervalo de 0 a 60)",
+        "title": "Gerenciador de Pontos de Heroísmo",
+        "willBeResetIn": "O Gerenciador de Pontos de Heroísmo retornará em {remainingMinutes} minutos ({time}).",
+        "instructions": "Note que o temporizador fica pausado enquanto este diálogo está aberto. Feche-o sem apertar os butões abaixo para despausar o temporizador."
+      },
+      "abpVariantAllowItemBonuses": {
+        "hint": "Não desabilita os bônus de item quando estiver usando a regra variante de Progressão Automática de Bônus.",
+        "name": "Não desabilitar bônus de item usando a PAB"
+      },
+      "applyPersistentAllow": {
+        "name": "Permissão: aplicar dano/cura persistente"
+      },
+      "mystificationSettings": {
+        "name": "Configurações de Mistificação de NPC",
+        "label": "Mistificação de NPCs",
+        "hint": "Habilitar e configurar mistificação de NPC"
+      },
+      "automationWorldSettings": {
+        "name": "Automatizações de Mundo",
+        "label": "Automatizações de Mundo",
+        "hint": "Configura automatizações para o MJ."
+      },
+      "qolWorldSettings": {
+        "hint": "Configurações de qualidade de vida para o MJ.",
+        "name": "Qualidade de Vida",
+        "label": "Qualidade de Vida"
+      },
+      "addGmRKButtonToNpc": {
+        "name": "Adicionar botão de Recordar Conhecimento para NPCs",
+        "hideNpcName": "Esconder nome de NPC em mensagens de Recordar Conhecimento"
+      },
+      "heroPointHandlerDefaultTimeoutMinutes": {
+        "hint": "Define quantos minutos até a próxima vez que o Gerenciador de Pontos de Heroísmo abrirá.",
+        "name": "Temporizador do Gerenciador de Pontos de Heroísmo"
+      },
+      "heroPointHandlerStartTimerOnReady": {
+        "name": "Iniciar o Gerenciador de Pontos de Heroísmo automaticamente",
+        "hint": "Marque para iniciar o temporizador do Gerenciador de Pontos de Heroísmo quando o jogo estiver pronto."
+      },
+      "heroPointHandlerKey": {
+        "name": "Gerenciador de Pontos de Heroísmo",
+        "hint": "Atalho de teclado para abrir o Gerenciador de Pontos de Heroísmo, que permite resetar ou adicionar Pontos de Heroísmo."
+      },
+      "maxHeroPoints": {
+        "hint": "Define o número máximo de Pontos de Heroísmo de personagens.",
+        "name": "Número máximo de Pontos de Heroísmo"
+      }
+    },
+    "npcRoller": {
+      "nav-labels": {
+        "strike": "Golpes",
+        "damage": "Dano",
+        "ac": "Classe de Armadura",
+        "spell": "Magia",
+        "areaDamage": "Dano em Área",
+        "abilityScore": "Atributos",
+        "skill": "Perícias",
+        "save": "Salvamentos",
+        "hp": "Pontos de Vida",
+        "dc": "CDs",
+        "perception": "Percepção"
+      },
+      "title": "Rolador de NPC",
+      "button-label": "Rolador de NPC"
+    },
+    "skillActions": {
+      "Title": "Ações de Perícia",
+      "Settings": {
+        "Position": {
+          "hint": "Posição na aba de perícias; Topo: após os Golpes, Fundo: No final",
+          "bottom": "Fundo",
+          "disabled": "Desabilitado",
+          "name": "Posição das Ações de Perícia",
+          "top": "Topo"
+        },
+        "hideDuplicates": {
+          "name": "Ações de Perícia ocultam ações duplicadas",
+          "hint": "Se esconde ações duplicadas na lista de ações ou na lista de ações de perícia",
+          "hideActions": "Esconder ações",
+          "doNotHide": "Não esconder",
+          "hideSkillActions": "Esconder ações de perícia"
+        },
+        "IconStyle": {
+          "name": "Estilo de Ícone de Ações de Perícia",
+          "hint": "Estilo de ícone da perícia; Ícone de custo da ação: Para o ícone de custo da ação, Ícone de habilidade: Para o ícone de habilidade, se estiver disponível",
+          "actionCostIcon": "Ícone de custo de ação",
+          "skillIcon": "Ícone de perícia"
+        }
+      },
+      "UnequipAll": {
+        "Tooltip": "Alternar ações ocultas. Segure ALT ao clicar para equipar/desequipar todas as perícias."
+      }
+    },
+    "spellCardNotFound": "A mensagem da magia não foi encontrada. Conjurando {spell} no nível mínimo da magia.",
+    "effects": {
+      "orcFerocityUsed": "Ferocidade de Orc utilizada"
+    }
+  }
+}
