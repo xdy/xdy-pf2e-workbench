@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.3...v4.0.4) (2022-09-06)
+
+
+### Bug Fixes
+
+* Double skill rolls removed. ([21f4e4d](https://github.com/xdy/xdy-pf2e-workbench/commit/21f4e4d8b8ba838e5943fc258fffaf6d477b475d))
+
 ## [4.0.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.2...v4.0.3) (2022-09-06)
 
 
