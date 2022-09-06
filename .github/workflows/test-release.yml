@@ -92,23 +92,23 @@ jobs:
         run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       # Publish the release to FoundryVTT's package repository only if push on main
-      - name: Publish to Foundry Admin
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
-        uses: Varriount/fvtt-autopublish@v1.0.9
-        with:
-          username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
-          password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
-          module-id: 1702
-          manifest-url: https://github.com/xdy/xdy-pf2e-workbench/releases/download/${{ env.WORKBENCH_VERSION }}/module.json
-          manifest-file: module.json
-
-#      - name: Publish to Foundry VTT Repo
-#        id: publish_foundry_repo
+#      - name: Publish to Foundry Admin
 #        if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
-#        run: npx @ghost-fvtt/foundry-publish
-#        env:
-#          FVTT_MANIFEST_PATH: 'module.json'
-#          FVTT_PACKAGE_ID: ${{ 1702 }}
-#          FVTT_USERNAME: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
-#          FVTT_PASSWORD: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
+#        uses: Varriount/fvtt-autopublish@v1.0.9
+#        with:
+#          username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
+#          password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
+#          module-id: 1702
+#          manifest-url: https://github.com/xdy/xdy-pf2e-workbench/releases/download/${{ env.WORKBENCH_VERSION }}/module.json
+#          manifest-file: module.json
 #
+      - name: Publish to Foundry VTT Repo
+        id: publish_foundry_repo
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
+        run: npx @ghost-fvtt/foundry-publish
+        env:
+          FVTT_MANIFEST_PATH: 'module.json'
+          FVTT_PACKAGE_ID: ${{ 1702 }}
+          FVTT_USERNAME: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
+          FVTT_PASSWORD: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
+
