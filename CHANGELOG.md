@@ -1,3 +1,10 @@
+## [4.0.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.2...v4.0.3) (2022-09-06)
+
+
+### Bug Fixes
+
+* add classes to fix skill action styling ([6a0fd6f](https://github.com/xdy/xdy-pf2e-workbench/commit/6a0fd6f6b2e8bd7eb50836cb8fcb346a140ee049))
+
 ## [4.0.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.1...v4.0.2) (2022-09-06)
 
 
