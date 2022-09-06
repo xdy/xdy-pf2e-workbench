@@ -24,7 +24,6 @@
     "main.bundle.js"
   ],
   "scripts": [
-    "./lib/tooltipster.bundle.min.js"
   ],
   "styles": [
     "styles/xdy-pf2e-workbench.css"
