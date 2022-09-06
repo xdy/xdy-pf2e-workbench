@@ -2,7 +2,7 @@ import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemSystemSource } from "@item/da
 import { PhysicalItemTraits, PartialPrice } from "@item/physical/data";
 import type { KitPF2e } from ".";
 declare type KitSource = BaseItemSourcePF2e<"kit", KitSystemSource>;
-declare type KitData = Omit<KitSource, "effects" | "flags"> & BaseItemDataPF2e<KitPF2e, "kit", KitSystemData, KitSource>;
+declare type KitData = Omit<KitSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<KitPF2e, "kit", KitSystemData, KitSource>;
 interface KitEntryData {
     pack?: string;
     id: string;

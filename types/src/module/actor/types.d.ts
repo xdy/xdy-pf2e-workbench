@@ -15,11 +15,12 @@ interface AuraData {
     slug: string;
     radius: number;
     effects: AuraEffectData[];
-    colors?: AuraColors;
+    colors: AuraColors | null;
     traits: ItemTrait[];
 }
 interface AuraEffectData {
     uuid: string;
+    level: number | null;
     affects: "allies" | "enemies" | "all";
     events: ("enter" | "turn-start" | "turn-end")[];
     save: {

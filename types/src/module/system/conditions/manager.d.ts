@@ -1,10 +1,9 @@
-import { ModifierPF2e } from "@actor/modifiers";
-import { ConditionData, ConditionSlug, ConditionSource } from "@item/condition/data";
+import { ConditionSlug, ConditionSource } from "@item/condition/data";
 import { ConditionPF2e } from "@item";
 import { ActorPF2e } from "@actor";
 import { TokenPF2e } from "@module/canvas";
 import { FlattenedCondition } from "./types";
-/** A helper class to manage PF2e Conditions. */
+/** A helper class to manage PF2e Conditions */
 export declare class ConditionManager {
     #private;
     static conditions: Map<ConditionSlug, ConditionPF2e>;
@@ -15,36 +14,8 @@ export declare class ConditionManager {
      * Get a condition using the condition name.
      * @param slug A condition slug
      */
-    static getCondition(slug: string, modifications?: DeepPartial<ConditionSource>): ConditionPF2e;
-    /**
-     * Takes a list of valued conditions with the same base and selects the highest value.
-     * @param sources A filtered list of conditions with the same base name.
-     * @param updates    A running list of updates to make to embedded items.
-     */
-    private static processValuedCondition;
-    /**
-     * Takes a list of toggle conditions with the same base and selects the first.
-     *
-     * @param sources A filtered list of conditions with the same base name.
-     * @param updates A running list of updates to make to embedded items.
-     */
-    private static processToggleCondition;
-    /**
-     * Clears any overrides from a condition.
-     *
-     * @param source The condition to check, and remove, any overrides.
-     * @param updates   A running list of updates to make to embedded items.
-     */
-    private static clearOverrides;
-    private static processOverride;
-    private static processConditions;
-    /**
-     * Gets a map of modifiers from a collection of conditions.
-     *
-     * @param conditions A collection of conditions to retrieve modifiers from.
-     * @return A map of PF2Modifiers from the conditions collection.
-     */
-    static getConditionModifiers(conditions: Iterable<ConditionData>): Map<string, Array<ModifierPF2e>>;
+    static getCondition(slug: ConditionSlug, modifications?: DeepPartial<ConditionSource>): ConditionPF2e;
+    static getCondition(slug: string, modifications?: DeepPartial<ConditionSource>): ConditionPF2e | null;
     /**
      * Adds a condition to a token.
      * @param name  A collection of conditions to retrieve modifiers from.
@@ -76,5 +47,5 @@ export declare class ConditionManager {
     static updateConditionValue(itemId: string, token: TokenPF2e, value: number): Promise<void>;
     static updateConditionValue(itemId: string, actorOrToken: ActorPF2e | TokenPF2e, value: number): Promise<void>;
     static getFlattenedConditions(items: ConditionPF2e[]): FlattenedCondition[];
-    private static sortCondition;
+    private static sortConditions;
 }

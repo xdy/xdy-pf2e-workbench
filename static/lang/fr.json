@@ -151,6 +151,23 @@
       "mystificationSettings": {
         "hint": "Autoriser et configurer la mystification des PNJ",
         "label": "Régler les paramètres de mystification des PNJ"
+      },
+      "skillActions": {
+        "Title": "Actions de Compétence",
+        "Settings": {
+          "Position": {
+            "name": "Position des actions de compétence",
+            "hint": "Position dans la page des actions; Haut : juste après les frappes, Bas : en dernière position.",
+            "top": "Haut",
+            "bottom": "Bas"
+          },
+          "IconStyle": {
+            "name": "Style d'icône",
+            "hint": "Style d'icône sur la compétence; Icône Coût de l'action: pour l'icône du coût des actions, Icône de compétence: pour l'icône des compétences si elle est disponible",
+            "actionCostIcon": "Icône Coût de l'action",
+            "skillIcon": "Icône de compétence"
+          }
+        }
       }
     },
     "npc-roller": {
@@ -165,7 +182,8 @@
         "abilityScore": "Valeurs de Caractéristique",
         "skill": "Compétences",
         "strike": "Frappes",
-        "dc": "DD"
+        "dc": "DD",
+        "strike": "Frappes"
       }
     }
   }

@@ -1,3 +1,4 @@
+import { ItemSummaryData } from "@item/data";
 import { PhysicalItemHitPoints } from "@item/physical/data";
 import { PhysicalItemPF2e } from "../physical";
 import { ArmorCategory, ArmorData, ArmorGroup, BaseArmorType } from "./data";
@@ -24,7 +25,7 @@ declare class ArmorPF2e extends PhysicalItemPF2e {
     prepareBaseData(): void;
     prepareDerivedData(): void;
     prepareActorData(): void;
-    getChatData(this: Embedded<ArmorPF2e>, htmlOptions?: EnrichHTMLOptions): Record<string, unknown>;
+    getChatData(this: Embedded<ArmorPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;

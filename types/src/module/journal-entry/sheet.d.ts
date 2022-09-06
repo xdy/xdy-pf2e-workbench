@@ -1,14 +1,13 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import type * as TinyMCE from "tinymce";
-import "../../styles/tinymce.scss";
 declare class JournalSheetPF2e<TJournalEntry extends JournalEntry = JournalEntry> extends JournalSheet<TJournalEntry> {
-    get template(): string;
-    activateListeners($html: JQuery): void;
-    activateEditor(name: string, options?: Partial<TinyMCE.EditorSettings>, initialContent?: string): void;
-}
-declare class JournalSheetStyledPF2e extends JournalSheetPF2e {
+    static get theme(): string | null;
     /** Use the system-themed styling only if the setting is enabled (on by default) */
     static get defaultOptions(): DocumentSheetOptions;
+    activateListeners($html: JQuery): void;
 }
-export { JournalSheetPF2e, JournalSheetStyledPF2e };
+declare class JournalTextTinyMCESheetPF2e extends JournalTextTinyMCESheet {
+    activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): Promise<TinyMCE.Editor>;
+}
+export { JournalSheetPF2e, JournalTextTinyMCESheetPF2e };

@@ -18,11 +18,13 @@ export declare abstract class CompendiumBrowserTab {
     scrollLimit: number;
     /** The name of this tab */
     tabName: Exclude<TabName, "settings">;
+    /** The path to the result list template of this tab */
+    abstract templatePath: string;
     constructor(browser: CompendiumBrowser, tabName: Exclude<TabName, "settings">);
     /** Initialize this this tab */
     init(): Promise<void>;
     /** Filter indexData and return slice based on current scrollLimit */
-    getIndexData(): CompendiumIndexData[];
+    getIndexData(start: number): CompendiumIndexData[];
     /** Reset all filters */
     resetFilters(): void;
     /** Load and prepare the compendium index and set filter options */
@@ -31,6 +33,7 @@ export declare abstract class CompendiumBrowserTab {
     protected prepareFilterData(): void;
     /** Filter indexData */
     protected filterIndexData(_entry: CompendiumIndexData): boolean;
+    renderResults(start: number): Promise<HTMLLIElement[]>;
     /** Sort result array by name, level or price */
     protected sortResult(result: CompendiumIndexData[]): CompendiumIndexData[];
     /** Return new range filter values based on input */

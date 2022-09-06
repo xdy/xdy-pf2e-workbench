@@ -18,4 +18,5 @@ export declare class ActionMacroHelpers {
     };
     private static getWeaponPotencyModifier;
     private static getApplicableEquippedWeapons;
+    private static getBasicUnarmedAttack;
 }

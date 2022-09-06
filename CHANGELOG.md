@@ -1,3 +1,34 @@
+# [4.0.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.44.3...v4.0.0) (2022-09-06)
+
+
+### Features
+
+* The PF2e Workbench now requires PF2e version 4.0.0 or later, and Foundry v10 or later. ([530c08d](https://github.com/xdy/xdy-pf2e-workbench/commit/530c08d3d70dfa3ed5b21b2866d9f97dee7dd09b))
+
+
+### BREAKING CHANGES
+
+* The PF2e Workbench now requires PF2e version 4.0.0 or later, and Foundry v10 or later.
+
+Additionally, these changes have been made:
+
+* The deprecated World Special Effects settings and features have been removed, instead use the equivalent functionality in  https://foundryvtt.com/packages/pf2e-jb2a-macros
+* Added all functionality from PF2e Skill Sheet Actions (https://github.com/jamespdaily/pf2e-sheet-skill-actions) with permission of the original author. See https://discord.com/channels/880968862240239708/880969174661353484/1013074604727730307 ("Flash Granola: @xdy it would be an honor, honestly I learned a lot about module coding from you and your GitHub. I'll allow it to be relicensed and lovingly devoured by workbench")
+Also fixed a couple of bugs/added features, see https://github.com/jamespdaily/pf2e-sheet-skill-actions/issues/61, https://github.com/jamespdaily/pf2e-sheet-skill-actions/issues/59. https://github.com/jamespdaily/pf2e-sheet-skill-actions/issues/55 Also added a bunch of skill actions (mostly feat-based). (These are still shown in the regular Actions section.) Add new setting to select icon type, courtesy of @thomascookandroid
+* Added https://fontawesome.com/icons/eye-slash?s=solid to collapsed chat messages
+* Always show mystified items on characters as default color
+* Npcscaler shouldn't scale physical items or flat checks.
+* Added a bunch of potentially useful macro functions (basically, made internal functions available pretty much as-is.)
+```
+game.PF2eWorkbench.resetHeroPoints // game.PF2EWorkbench.resetHeroPoints(1)
+game.PF2eWorkbench.addHeroPoints // game.PF2EWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
+game.PF2eWorkbench.scaleNPCToLevelFromActorId scaleNPCToLevelFromActorId // await game.PF2eWorkbench.scaleNPCToLevelFromActorId(_token.actor.id, 24);
+game.PF2eWorkbench.moveSelectedAheadOfCurrent moveSelectedAheadOfCurrent // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
+game.PF2eWorkbench.doMystificationFromTokenId // await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, false)
+game.PF2eWorkbench.generateNameFromTraitsForToken // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
+```
+* Make breath weapon reminder work for more creatures with recharging abilities (e.g. Scalathrax).
+
 ## [3.44.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.44.2...v3.44.3) (2022-08-14)
 
 

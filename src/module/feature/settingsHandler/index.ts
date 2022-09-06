@@ -4,7 +4,7 @@ import { PartialSettingsData, SettingsMenuPF2eWorkbench } from "../../settings/m
 export function toggleSettings(_html: JQuery) {
     const settings: [string, any][] = Array.from(game.settings.settings.entries());
     settings.forEach((_setting: [string, any]) => {
-        //None right now
+        // None right now
     });
 }
 
@@ -21,7 +21,7 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                 html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
             }
 
-            //Disable all dependent actionsReminder settings
+            // Disable all dependent actionsReminder settings
             if (settingName !== `actionsReminderAllow` && settingName.startsWith(`actionsReminder`)) {
                 const applyToggle = !(
                     game.settings.get(MODULENAME, "actionsReminderAllow") === "none" ||
@@ -32,7 +32,7 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                 html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
             }
 
-            //Disable all dependent npcMystifier settings
+            // Disable all dependent npcMystifier settings
             if (settingName !== `npcMystifier` && settingName.startsWith(`npcMystifier`)) {
                 const valueFunction = !game.settings.get(MODULENAME, "npcMystifier");
 
@@ -40,7 +40,7 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                 html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
             }
 
-            //Disable all dependent persistentDamage settings
+            // Disable all dependent persistentDamage settings
             if (settingName !== `applyPersistentAllow` && settingName.startsWith(`applyPersistent`)) {
                 const applyToggle = !(
                     game.settings.get(MODULENAME, "applyPersistentAllow") === "none" ||

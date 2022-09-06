@@ -1,5 +1,6 @@
 import { MODULENAME } from "../../../module/xdy-pf2e-workbench";
 import { SCALE_APP_DATA } from "../NPCScaleData";
+import { CanvasPF2e, TokenPF2e } from "@module/canvas";
 
 async function registerHandlebarsTemplates() {
     await loadTemplates([
@@ -69,9 +70,9 @@ export async function setupNpcRoller() {
     registerHandlebarsHelpers();
 }
 
-function enableNpcRollerButton(app: Application, html: JQuery) {
+function enableNpcRollerButton(_app, html: JQuery) {
     const button = $(
-        `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npc-roller.button-label`)}</button>`
+        `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}</button>`
     );
     button.on("click", () => {
         new NpcRoller().render(true);
@@ -90,11 +91,11 @@ class NpcRoller extends Application {
         Hooks.on("controlToken", this.#onControlToken.bind(this));
     }
 
-    static get defaultOptions(): ApplicationOptions {
+    static override get defaultOptions(): ApplicationOptions {
         const options = super.defaultOptions;
         return {
             ...options,
-            title: game.i18n.localize(`${MODULENAME}.npc-roller.title`),
+            title: game.i18n.localize(`${MODULENAME}.npcRoller.title`),
             template: `modules/${MODULENAME}/templates/feature/npc-roller/index.html`,
             tabs: [
                 {
@@ -109,21 +110,21 @@ class NpcRoller extends Application {
         };
     }
 
-    getData(options?: any): any {
+    override getData(options?: any): any {
         const data = super.getData(options);
 
         data["data"] = {
             levels: duplicate(SCALE_APP_DATA),
         };
 
-        data["data"]["selected"] = canvas.tokens?.controlled.map((token: Token) =>
-            parseInt(token.actor?.data.data["details"].level.value)
+        data["data"]["selected"] = canvas.tokens?.controlled.map(
+            (token: TokenPF2e) => token.actor?.system["details"].level.value
         );
 
         return data;
     }
 
-    activateListeners(html: JQuery<HTMLElement>): void {
+    override activateListeners(html: JQuery<HTMLElement>): void {
         super.activateListeners(html);
 
         html.find("button.rollable").on("click", this.#handleRollButtonClick);
@@ -136,7 +137,7 @@ class NpcRoller extends Application {
     async #handleRollButtonClick(event): Promise<void> {
         const target = $(event.target);
         const rollName = target.data("rollname") as string;
-        const token = (canvas as Canvas).tokens?.controlled[0];
+        const token = (canvas as CanvasPF2e).tokens?.controlled[0];
         const formula = target.data("formula") as string | number | undefined;
         const secret = <boolean>game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
 
@@ -145,7 +146,7 @@ class NpcRoller extends Application {
 
             await new Roll(formulaString).toMessage(
                 {
-                    speaker: ChatMessage.getSpeaker({ token: token?.document }),
+                    speaker: ChatMessage.getSpeaker({ token: <any>token?.document }),
                     flavor: rollName,
                     whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
                 },
@@ -157,7 +158,7 @@ class NpcRoller extends Application {
         }
     }
 
-    close(): Promise<void> {
+    override close(): Promise<void> {
         Hooks.off("controlToken", this.#onControlToken.bind(this));
 
         return super.close();

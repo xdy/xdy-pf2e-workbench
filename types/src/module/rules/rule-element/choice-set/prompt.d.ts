@@ -23,7 +23,7 @@ export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | 
     _canDragDrop(): boolean;
 }
 interface ChoiceSetPromptData extends PickAThingConstructorArgs<string | number | object> {
-    prompt?: string;
+    prompt: string;
     choices?: PickableThing[];
     containsUUIDs: boolean;
     allowedDrops: PredicatePF2e;

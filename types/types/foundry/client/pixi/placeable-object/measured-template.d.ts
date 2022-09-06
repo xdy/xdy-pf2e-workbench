@@ -40,7 +40,7 @@ declare class MeasuredTemplate<
     /*  Properties                                  */
     /* -------------------------------------------- */
 
-    override get bounds(): NormalizedRectangle;
+    override get bounds(): PIXI.Rectangle;
 
     /** A convenience accessor for the border color as a numeric hex code */
     get borderColor(): number;
@@ -112,7 +112,7 @@ declare class MeasuredTemplate<
     /* -------------------------------------------- */
 
     override _onUpdate(
-        changed: DeepPartial<TDocument["data"]["_source"]>,
+        changed: DeepPartial<TDocument["_source"]>,
         options: DocumentModificationContext<TDocument>,
         userId: string
     ): void;

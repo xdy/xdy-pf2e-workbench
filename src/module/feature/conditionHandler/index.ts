@@ -1,15 +1,15 @@
 import { CombatantPF2e } from "@module/encounter";
 import { isFirstGM, shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { ActorPF2e, CharacterPF2e } from "@actor";
+import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
     if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThis(combatant.actor))) {
         const actors = [combatant.actor];
-        actors.push(...getMinions(combatant.actor));
+        actors.push(...getMinionAndEidolons(combatant.actor));
         for (const actor of actors) {
-            const minimumFrightened = <number>actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
+            const minimumFrightened = <number>actor?.getFlag(MODULENAME, "excondition.frightened.min") ?? 0;
             const currentFrightened = actor?.getCondition("frightened")?.value ?? 0;
             if (currentFrightened - 1 >= minimumFrightened) {
                 await actor.decreaseCondition("frightened");
@@ -23,19 +23,19 @@ export async function increaseDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (shouldIHandleThis(actor) && hp > 0 && getProperty(update, "data.attributes.hp.value") <= 0) {
-        const orcFerocity = actor.data.items.find((feat) => feat.slug === "orc-ferocity");
-        const orcFerocityUsed: any = actor.data.items.find((effect) => effect.slug === "orc-ferocity-used");
-        const incredibleFerocity = actor.data.items.find((feat) => feat.slug === "incredible-ferocity");
-        const undyingFerocity = actor.data.items.find((feat) => feat.slug === "undying-ferocity");
-        const rampagingFerocity = actor.data.items.find((feat) => feat.slug === "rampaging-ferocity");
-        const deliberateDeath = actor.data.items.find((feat) => feat.slug === "deliberate-death");
-        const deliberateDeathUsed: any = actor.data.items.find((effect) => effect.slug === "deliberate-death-used");
+    if (shouldIHandleThis(actor) && hp > 0 && getProperty(update, "system.attributes.hp.value") <= 0) {
+        const orcFerocity = actor.items.find((feat) => feat.slug === "orc-ferocity");
+        const orcFerocityUsed: any = actor.items.find((effect) => effect.slug === "orc-ferocity-used");
+        const incredibleFerocity = actor.items.find((feat) => feat.slug === "incredible-ferocity");
+        const undyingFerocity = actor.items.find((feat) => feat.slug === "undying-ferocity");
+        const rampagingFerocity = actor.items.find((feat) => feat.slug === "rampaging-ferocity");
+        const deliberateDeath = actor.items.find((feat) => feat.slug === "deliberate-death");
+        const deliberateDeathUsed: any = actor.items.find((effect) => effect.slug === "deliberate-death-used");
 
         if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
-            setProperty(update, "data.attributes.hp.value", 1);
+            setProperty(update, "system.attributes.hp.value", 1);
             if (undyingFerocity) {
-                setProperty(update, "data.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
+                setProperty(update, "system.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
             }
             await actor.increaseCondition("wounded");
 
@@ -64,10 +64,11 @@ export async function increaseDyingOnZeroHP(
                         `${
                             actor.token?.name ?? actor.name
                         } has just used Orc Ferocity and can now use the free action: ${TextEditor.enrichHTML(
-                            `@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Rampaging Ferocity}`
+                            `@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Rampaging Ferocity}`,
+                            { async: false }
                         )}.`
                     ),
-                    speaker: ChatMessage.getSpeaker({ actor: actor }),
+                    speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                     whisper:
                         game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                             ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
@@ -105,7 +106,7 @@ export async function increaseDyingOnZeroHP(
                         actor.token?.name ?? actor.name
                     } can <b>before gaining Dying</b> as a result of another creature's attack or ability, if that creature is within melee reach, make a melee Strike against the triggering creature.<br>Remove 'Deliberate Death Used' effect if it actually can't be used.`
                 ),
-                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
@@ -115,7 +116,7 @@ export async function increaseDyingOnZeroHP(
 
         let value = 1;
         const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
-        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.data.type) : true) {
+        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
             if (option?.startsWith("addWoundedLevel")) {
                 value = (actor.getCondition("wounded")?.value ?? 0) + 1;
             }
@@ -132,10 +133,10 @@ export async function removeDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (shouldIHandleThis(actor) && hp <= 0 && getProperty(update, "data.attributes.hp.value") > 0) {
+    if (shouldIHandleThis(actor) && hp <= 0 && getProperty(update, "system.attributes.hp.value") > 0) {
         const value = actor.getCondition("dying")?.value || 0;
         const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
-        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.data.type) : true) {
+        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
             for (let i = 0; i < Math.max(1, value); i++) {
                 await actor.decreaseCondition("dying");
             }
@@ -152,34 +153,23 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     if (
         shouldIHandleThis(actor) &&
         hp <= 0 &&
-        getProperty(update, "data.attributes.hp.value") > 0 &&
+        getProperty(update, "system.attributes.hp.value") > 0 &&
         actor.hasCondition("unconscious")
     ) {
         await actor.decreaseCondition("unconscious", { forceRemove: true });
     }
 }
 
-function getMinions(actor: ActorPF2e): ActorPF2e[] {
+function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
     const actors: ActorPF2e[] = [];
     if (actor.isOfType("character")) {
-        if ((<CharacterPF2e>actor).familiar) {
-            actors.push(<ActorPF2e>(<CharacterPF2e>actor).familiar);
-        }
-        const eidolons = <ActorPF2e[]>game.scenes.current?.tokens
-            ?.filter(() => !isFirstGM())
+        const minionsAndEidolons = <ActorPF2e[]>game.scenes.current?.tokens
+            ?.filter(() => !game.user.isGM)
             ?.filter((token) => token.canUserModify(game.user, "update"))
             ?.map((token) => token.actor)
-            ?.filter((x) => x?.traits.has("eidolon"));
-        if (eidolons && eidolons.length > 0) {
-            actors.push(...(<ActorPF2e[]>eidolons));
-        }
-        const animalCompanions = game.scenes.current?.tokens
-            ?.filter(() => !isFirstGM())
-            ?.filter((token) => token.canUserModify(game.user, "update"))
-            ?.map((token) => token.actor)
-            ?.filter((chr: CharacterPF2e) => chr?.class?.name === "Animal Companion");
-        if (animalCompanions && animalCompanions.length > 0) {
-            actors.push(...(<ActorPF2e[]>animalCompanions));
+            ?.filter((x) => x?.traits.has("eidolon") || x?.traits.has("minion"));
+        if (minionsAndEidolons && minionsAndEidolons.length > 0) {
+            actors.push(...(<ActorPF2e[]>minionsAndEidolons));
         }
     }
     return actors;
@@ -187,11 +177,11 @@ function getMinions(actor: ActorPF2e): ActorPF2e[] {
 
 export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
     const actor = <ActorPF2e>item.parent;
-    const bounceBack = actor.data.items.find((feat) => feat.slug === "bounce-back"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1441
-    const bounceBackUsed: any = actor.data.items.find((effect) => effect.slug === "bounce-back-used") ?? false;
+    const bounceBack = actor.items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
+    const bounceBackUsed: any = actor.items.find((effect) => effect.slug === "bounce-back-used") ?? false;
 
-    const numbToDeath = actor.data.items.find((feat) => feat.slug === "numb-to-death"); //TODO https://2e.aonprd.com/Feats.aspx?ID=1182
-    const numbToDeathUsed: any = actor.data.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
+    const numbToDeath = actor.items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
+    const numbToDeathUsed: any = actor.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
     if (item.slug === "dying" && isFirstGM()) {
         if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
             const effect: any = {
@@ -217,10 +207,11 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                     `${
                         actor.token?.name ?? actor.name
                     } has just triggered Numb To Death and can now heal ${TextEditor.enrichHTML(
-                        `[[/r ${actor.level}]] points of damage.`
+                        `[[/r ${actor.level}]] points of damage.`,
+                        { async: false }
                     )}.`
                 ),
-                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
@@ -260,7 +251,7 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
         isFirstGM() &&
         item.slug === "dying" &&
         game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP") &&
-        actor.data.data.attributes?.hp?.value === 0 &&
+        actor.system.attributes?.hp?.value === 0 &&
         !actor.hasCondition("unconscious")
     ) {
         if (!actor.hasCondition("unconscious")) {

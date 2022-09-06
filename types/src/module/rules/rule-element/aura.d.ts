@@ -10,16 +10,16 @@ export declare class AuraRuleElement extends RuleElementPF2e {
     /** The radius of the order in feet, or a string that will resolve to one */
     radius: number | string;
     /** References to effects included in this aura */
-    effects: AuraEffectData[];
+    effects: AuraREEffectData[];
     /** Associated traits, including ones that determine transmission through walls ("visual", "auditory") */
     traits: ItemTrait[];
     /**
      * Custom border and fill colors for the aura: if omitted, the border color will be black, and the fill color the
      * user's assigned color
      */
-    colors?: AuraColors;
+    colors: AuraColors | null;
     constructor(data: AuraRuleElementSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
-    beforePrepareData(): void;
+    afterPrepareData(): void;
 }
 interface AuraRuleElementSource extends RuleElementSource {
     predicate?: RawPredicate;
@@ -27,5 +27,8 @@ interface AuraRuleElementSource extends RuleElementSource {
     effects?: unknown;
     traits?: unknown;
     colors?: unknown;
+}
+interface AuraREEffectData extends Omit<AuraEffectData, "level"> {
+    level?: string | number;
 }
 export {};

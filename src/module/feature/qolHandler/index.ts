@@ -1,8 +1,12 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
+    const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
     if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
         html.find(".card-content").hide();
+        $(html)
+            .find("h3")
+            .html($(html).find("h3").html() + eye);
     }
     html.on("click", "h3", (event: JQuery.ClickEvent) => {
         const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
@@ -11,6 +15,11 @@ export function chatCardDescriptionCollapse(html: JQuery) {
             content.style.display = content.style.display === "none" ? "block" : "none";
             if (content.style.display === "none") {
                 html.find(".card-content").hide();
+                $(event.currentTarget).html($(event.currentTarget).html() + eye);
+            } else {
+                if ($(event.currentTarget).html().includes(eye)) {
+                    $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
+                }
             }
         }
     });

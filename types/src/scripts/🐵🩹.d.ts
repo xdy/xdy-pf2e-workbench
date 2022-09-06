@@ -1,1 +1,1 @@
-export declare function patchTokenClasses(): void;
+export declare function monkeyPatchFoundry(): void;

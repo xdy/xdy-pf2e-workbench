@@ -11,7 +11,7 @@ declare class KitPF2e extends ItemPF2e {
         entries?: KitEntryData[];
         containerId?: string | null;
     }): Promise<PhysicalItemPF2e[]>;
-    protected _preUpdate(changed: DeepPartial<this["data"]["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     /** Inflate this kit and add its items to the provided actor */
     dumpContents({ actor, containerId, }: {
         actor: ActorPF2e;

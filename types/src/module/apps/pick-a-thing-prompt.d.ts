@@ -47,8 +47,6 @@ interface PickableThing<T = string | number | object> {
     img?: string;
     domain?: string[];
     predicate?: PredicatePF2e;
-    /** A numeric order by which to sort the choices */
-    sort?: number;
 }
 interface PromptTemplateData {
     choices: PickableThing[];

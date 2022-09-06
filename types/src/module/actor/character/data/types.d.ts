@@ -2,7 +2,7 @@ import { CraftingEntryData } from "@actor/character/crafting/entry";
 import { CraftingFormulaData } from "@actor/character/crafting/formula";
 import { AbilityData, BaseCreatureData, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureHitPoints, CreatureInitiative, CreatureSystemData, CreatureTraitsData, HeldShieldData, SaveData, SkillAbbreviation, SkillData } from "@actor/creature/data";
 import { CreatureSensePF2e } from "@actor/creature/sense";
-import { AbilityBasedStatistic, ActorFlagsPF2e, ArmorClassData, DexterityModifierCapData, PerceptionData, StrikeData } from "@actor/data/base";
+import { AbilityBasedStatistic, ActorFlagsPF2e, ArmorClassData, DexterityModifierCapData, PerceptionData, StrikeData, TraitViewData } from "@actor/data/base";
 import { StatisticModifier } from "@actor/modifiers";
 import { AbilityString, SaveType } from "@actor/types";
 import { FeatPF2e, WeaponPF2e } from "@item";
@@ -10,7 +10,6 @@ import { ArmorCategory } from "@item/armor/data";
 import { ProficiencyRank } from "@item/data";
 import { DeitySystemData } from "@item/deity/data";
 import { DeityDomain } from "@item/deity/types";
-import { FeatType } from "@item/feat/data";
 import { MagicTradition } from "@item/spell/types";
 import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/types";
 import { ZeroToFour } from "@module/data";
@@ -21,8 +20,7 @@ import { CharacterSheetTabVisibility } from "./sheet";
 interface CharacterSource extends BaseCreatureSource<"character", CharacterSystemData> {
     flags: DeepPartial<CharacterFlags>;
 }
-interface CharacterData extends Omit<CharacterSource, "data" | "effects" | "items" | "token" | "type">, BaseCreatureData<CharacterPF2e, "character", CharacterSystemData, CharacterSource> {
-    flags: CharacterFlags;
+interface CharacterData extends Omit<CharacterSource, "data" | "flags" | "effects" | "items" | "prototypeToken" | "system" | "type">, BaseCreatureData<CharacterPF2e, "character", CharacterSystemData, CharacterSource> {
 }
 declare type CharacterFlags = ActorFlagsPF2e & {
     pf2e: {
@@ -166,6 +164,7 @@ interface CharacterStrike extends StrikeData {
     adjustments?: DegreeOfSuccessAdjustment[];
     altUsages: CharacterStrike[];
     auxiliaryActions: AuxiliaryAction[];
+    weaponTraits: TraitViewData[];
 }
 interface AuxiliaryAction {
     label: string;
@@ -221,7 +220,7 @@ interface CharacterResources {
 interface CharacterPerception extends PerceptionData {
     rank: ZeroToFour;
 }
-declare type CharacterDetails = CreatureDetails & {
+declare type CharacterDetails = Omit<CreatureDetails, "creature"> & {
     /** The key ability which class saves (and other class-related things) scale off of. */
     keyability: {
         value: AbilityString;
@@ -311,10 +310,7 @@ interface CharacterDeities {
     };
 }
 declare type DeityDetails = Pick<DeitySystemData, "alignment" | "skill"> & {
-    weapons: {
-        option: string;
-        label: string;
-    }[];
+    weapons: BaseWeaponType[];
 };
 interface CharacterAttributes extends CreatureAttributes {
     /** The perception skill. */
@@ -400,12 +396,4 @@ interface BonusFeat {
     feat: FeatPF2e;
     grants: GrantedFeat[];
 }
-interface FeatSlot {
-    label: string;
-    feats: (SlottedFeat | BonusFeat)[];
-    /** Whether the feats are slotted by level or free-form */
-    slotted?: boolean;
-    featFilter?: string;
-    supported: FeatType[] | "all";
-}
-export { AuxiliaryAction, BaseWeaponProficiencyKey, BonusFeat, CategoryProficiencies, CharacterArmorClass, CharacterAttributes, CharacterData, CharacterDetails, CharacterProficiency, CharacterResources, CharacterSaves, CharacterSkillData, CharacterSource, CharacterStrike, CharacterSystemData, ClassDCData, FeatSlot, GrantedFeat, LinkedProficiency, MagicTraditionProficiencies, MartialProficiencies, MartialProficiency, MartialProficiencyKey, SlottedFeat, WeaponGroupProficiencyKey, };
+export { AuxiliaryAction, BaseWeaponProficiencyKey, BonusFeat, CategoryProficiencies, CharacterArmorClass, CharacterAttributes, CharacterData, CharacterDetails, CharacterFlags, CharacterProficiency, CharacterResources, CharacterSaves, CharacterSkillData, CharacterSource, CharacterStrike, CharacterSystemData, ClassDCData, GrantedFeat, LinkedProficiency, MagicTraditionProficiencies, MartialProficiencies, MartialProficiency, MartialProficiencyKey, SlottedFeat, WeaponGroupProficiencyKey, };

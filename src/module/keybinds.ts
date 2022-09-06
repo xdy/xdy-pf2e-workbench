@@ -6,7 +6,6 @@ import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/hero
 export function registerWorkbenchKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);
 
-    // @ts-ignore
     const keybindings = game.keybindings;
 
     keybindings.register(MODULENAME, "addUserTargets", {
@@ -36,11 +35,13 @@ export function registerWorkbenchKeybindings() {
                     addFor: {
                         icon: '<i class="fas fa-users"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
-                        callback: async (html: JQuery) => {
+                        callback: async (html) => {
                             const targets = Array.from(canvas.tokens?.controlled).concat(
                                 canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1)
                             );
-                            const user = game.users.find((u) => u.id === (html.find("#dialogUserId").val() as string));
+                            const user: any = game.users.find(
+                                (u) => u.id === (html.find("#dialogUserId").val() as string)
+                            );
                             if (game.user?.isGM && targets && user) {
                                 targets.forEach((t) => {
                                     t.setTarget(true, { user: user, releaseOthers: false });
@@ -53,7 +54,9 @@ export function registerWorkbenchKeybindings() {
                         icon: '<i class="fas fa-users-slash"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
                         callback: async (html: JQuery) => {
-                            const user = game.users.find((u) => u.id === (html.find("#dialogUserId").val() as string));
+                            const user: any = game.users.find(
+                                (u) => u.id === (html.find("#dialogUserId").val() as string)
+                            );
                             if (game.user?.isGM && user) {
                                 const targets = user.targets;
                                 targets.forEach((t) => {
@@ -75,42 +78,42 @@ export function registerWorkbenchKeybindings() {
         hint: `${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`,
         restricted: true,
         editable: [],
-        onDown: async () => {
+        onDown: () => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
-                await heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start);
+                heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start).then();
             }
             return true;
         },
     });
 
-    //Move combatant
+    // Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.name`,
         hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
         restricted: true,
         editable: [],
-        onDown: async () => {
+        onDown: () => {
             if (game.user?.isGM) {
                 const combatantByToken: any = game?.combat?.getCombatantByToken(
                     <string>canvas?.tokens?.controlled[0].id
                 );
-                await moveSelectedAheadOfCurrent(combatantByToken);
+                moveSelectedAheadOfCurrent(combatantByToken).then();
             }
             return true;
         },
     });
 
-    //Mystification
+    // Mystification
     keybindings.register(MODULENAME, "npcMystifierMystifyKey", {
         name: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.name`,
         hint: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.hint`,
         restricted: true,
         editable: [],
-        onDown: async () => {
+        onDown: () => {
             if (game.settings.get(MODULENAME, "npcMystifier")) {
                 if (canMystify()) {
                     for (const token of canvas?.tokens?.controlled.filter((x) => !x.actor?.hasPlayerOwner) || []) {
-                        await doMystification(token, isTokenMystified(token));
+                        doMystification(token, isTokenMystified(token)).then();
                     }
                 } else {
                     ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));
@@ -124,7 +127,7 @@ export function registerWorkbenchKeybindings() {
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
 
-    //Macro keybinds
+    // Macro keybinds
     for (let page = 1; page <= 5; page++) {
         for (let column = 1; column <= 10; column++) {
             keybindings.register(MODULENAME, `callHotbarPage${page}Macro${column}`, {

@@ -1,12 +1,11 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ScenePF2e } from "@scene";
-import { API as Slider } from "nouislider";
 import "nouislider/dist/nouislider.min.css";
 export declare class SceneDarknessAdjuster extends Application {
+    #private;
     static readonly instance: SceneDarknessAdjuster;
     private scene;
-    slider?: Slider;
     static get defaultOptions(): ApplicationOptions;
     get template(): string;
     render(force: boolean | undefined, options: RenderOptions & {

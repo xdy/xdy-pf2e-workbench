@@ -63,7 +63,7 @@ export declare class Statistic<T extends BaseStatisticData = StatisticData> {
         modifiers: ModifierPF2e[];
         notes: import("../../notes").RollNotePF2e[] | undefined;
     }>;
-    createRollOptions(domains: string[], args?: RollOptionParameters): string[];
+    createRollOptions(domains: string[], args?: RollOptionParameters): Set<string>;
     withRollOptions(options?: RollOptionParameters): Statistic<T>;
     /** Creates and returns an object that can be used to perform a check if this statistic has check data. */
     get check(): CheckValue<T>;
@@ -82,7 +82,7 @@ declare class StatisticCheck {
     modifiers: ModifierPF2e[];
     constructor(parent: Statistic<StatisticDataWithCheck>, options?: RollOptionParameters);
     get label(): string;
-    createRollOptions(args?: RollOptionParameters): string[];
+    createRollOptions(args?: RollOptionParameters): Set<string>;
     roll(args?: StatisticRollParameters): Promise<Rolled<CheckRoll> | null>;
     get breakdown(): string;
 }
@@ -92,6 +92,6 @@ declare class StatisticDifficultyClass {
     value: number;
     modifiers: ModifierPF2e[];
     constructor(parent: Statistic<StatisticDataWithDC>, options?: RollOptionParameters);
-    createRollOptions(args?: RollOptionParameters): string[];
+    createRollOptions(args?: RollOptionParameters): Set<string>;
     get breakdown(): string;
 }

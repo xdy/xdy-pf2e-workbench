@@ -17,8 +17,8 @@ export declare class MigrationRunnerBase {
     diffCollection<T extends foundry.data.ActiveEffectSource>(orig: T[], updated: T[]): CollectionDiff<T>;
     diffCollection<T extends ItemSourcePF2e>(orig: T[], updated: T[]): CollectionDiff<T>;
     diffCollection<T extends foundry.data.ActiveEffectSource | ItemSourcePF2e>(orig: T[], updated: T[]): CollectionDiff<T>;
-    getUpdatedItem(item: ItemSourcePF2e, migrations: MigrationBase[]): Promise<ItemSourcePF2e>;
     getUpdatedActor(actor: ActorSourcePF2e, migrations: MigrationBase[]): Promise<ActorSourcePF2e>;
+    getUpdatedItem(item: ItemSourcePF2e, migrations: MigrationBase[]): Promise<ItemSourcePF2e>;
     private updateSchemaRecord;
     getUpdatedMacro(macroSource: foundry.data.MacroSource, migrations: MigrationBase[]): Promise<foundry.data.MacroSource>;
     getUpdatedTable(tableSource: foundry.data.RollTableSource, migrations: MigrationBase[]): Promise<foundry.data.RollTableSource>;

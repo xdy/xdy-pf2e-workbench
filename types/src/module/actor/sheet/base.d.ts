@@ -1,11 +1,10 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { type ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
 import { Coins } from "@item/physical/data";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data";
-import { FolderPF2e } from "@module/folder";
 import { BasicConstructorOptions, TagSelectorOptions, TagSelectorType } from "@system/tag-selector";
 import { ActorSheetDataPF2e, CoinageSummary, SheetInventory } from "./data-types";
 import { ItemSummaryRendererPF2e } from "./item-summary-renderer";
@@ -21,7 +20,7 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     /** Can non-owning users loot items from this sheet? */
     get isLootSheet(): boolean;
     getData(options?: ActorSheetOptions): Promise<ActorSheetDataPF2e<TActor>>;
-    protected abstract prepareItems(sheetData: ActorSheetDataPF2e<TActor>): void;
+    protected abstract prepareItems(sheetData: ActorSheetDataPF2e<TActor>): Promise<void>;
     protected prepareInventory(): SheetInventory;
     protected static coinsToSheetData(coins: Coins): CoinageSummary;
     activateListeners($html: JQuery): void;
@@ -38,7 +37,7 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     onDropItem(data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
     /** Extend the base _onDropItem method to handle dragging spells onto spell slots. */
     protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
-    protected _onDropFolder(_event: ElementDragEvent, data: DropCanvasData<"Folder", FolderPF2e>): Promise<ItemPF2e[]>;
+    protected _onDropFolder(_event: ElementDragEvent, data: DropCanvasData<"Folder", Folder>): Promise<ItemPF2e[]>;
     /**
      * Moves an item between two actors' inventories.
      * @param event         Event that fired this method.

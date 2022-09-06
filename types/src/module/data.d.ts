@@ -1,9 +1,11 @@
+import { ActorPF2e } from "@actor";
+import { ItemPF2e } from "@item";
 /** The size property of creatures and equipment */
-export declare const SIZES: readonly ["tiny", "sm", "med", "lg", "huge", "grg"];
-export declare const SIZE_SLUGS: readonly ["tiny", "small", "medium", "large", "huge", "gargantuan"];
+declare const SIZES: readonly ["tiny", "sm", "med", "lg", "huge", "grg"];
+declare const SIZE_SLUGS: readonly ["tiny", "small", "medium", "large", "huge", "gargantuan"];
 declare type Size = typeof SIZES[number];
 /** The rarity trait of creatures, equipment, spells, etc. */
-export declare const RARITIES: readonly ["common", "uncommon", "rare", "unique"];
+declare const RARITIES: readonly ["common", "uncommon", "rare", "unique"];
 declare type Rarity = typeof RARITIES[number];
 interface ValuesList<T extends string = string> {
     value: T[];
@@ -39,7 +41,7 @@ interface ValueAndMaybeMax {
     max?: number;
 }
 declare type ValueAndMax = Required<ValueAndMaybeMax>;
-export declare function goesToEleven(value: number): value is ZeroToEleven;
+declare function goesToEleven(value: number): value is ZeroToEleven;
 /** The tracked schema data of actors and items */
 interface NewDocumentSchemaRecord {
     version: null;
@@ -59,4 +61,5 @@ interface MigratedDocumentSchemaRecord {
 declare type DocumentSchemaRecord = NewDocumentSchemaRecord | MigratedDocumentSchemaRecord;
 export declare const PROFICIENCY_RANKS: readonly ["untrained", "trained", "expert", "master", "legendary"];
 export declare const MATH_FUNCTION_NAMES: Set<MathFunctionName>;
-export { DocumentSchemaRecord, LabeledNumber, LabeledString, LabeledValue, Rarity, Size, ValueAndMax, ValueAndMaybeMax, ValuesList, ZeroToTwo, ZeroToThree, OneToThree, TwoToThree, ZeroToFour, OneToFour, ZeroToFive, OneToFive, ZeroToTen, OneToTen, ZeroToEleven, };
+declare type EnfolderableDocumentPF2e = ActorPF2e | ItemPF2e | Exclude<EnfolderableDocument, Actor | Item>;
+export { DocumentSchemaRecord, EnfolderableDocumentPF2e, LabeledNumber, LabeledString, LabeledValue, OneToFive, OneToFour, OneToTen, OneToThree, RARITIES, Rarity, SIZES, SIZE_SLUGS, Size, TwoToThree, ValueAndMax, ValueAndMaybeMax, ValuesList, ZeroToEleven, ZeroToFive, ZeroToFour, ZeroToTen, ZeroToThree, ZeroToTwo, goesToEleven, };

@@ -6,7 +6,6 @@ import { CheckRollContextFlag } from "@system/rolls";
 import { ChatMessagePF2e } from ".";
 interface ChatMessageDataPF2e<TChatMessage extends ChatMessagePF2e = ChatMessagePF2e> extends foundry.data.ChatMessageData<TChatMessage> {
     readonly _source: ChatMessageSourcePF2e;
-    flags: ChatMessageFlagsPF2e;
 }
 interface ChatMessageSourcePF2e extends foundry.data.ChatMessageSource {
     flags: ChatMessageFlagsPF2e;
@@ -21,6 +20,7 @@ declare type ChatMessageFlagsPF2e = foundry.data.ChatMessageFlags & {
         } | null;
         casting?: {
             id: string;
+            level: number;
             tradition: MagicTradition;
         } | null;
         modifierName?: string;

@@ -2,102 +2,113 @@ name: Test and release
 
 # Run the workflow when a Pull Request is opened or when changes are pushed to main on 'xdy/xdy-pf2e-workbench' (i.e. don't run on forks)
 on:
-    pull_request:
-    push:
-        branches: [ main, beta ]
+  pull_request:
+  push:
+    branches: [ main ]
 
 jobs:
-    test:
-        if: github.repository == 'xdy/xdy-pf2e-workbench'
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                # Run the steps below with the following versions of Node.js
-                node-version: [ 16.x ]
-        steps:
-            # Fetch the latest commit
-            -   name: Checkout
-                uses: actions/checkout@v3
-                with:
-                    submodules: 'true'
+  #    test:
+  #        if: github.repository == 'xdy/xdy-pf2e-workbench'
+  #        runs-on: ubuntu-latest
+  #        strategy:
+  #            matrix:
+  #                # Run the steps below with the following versions of Node.js
+  #                node-version: [ 16.x ]
+  #        steps:
+  #            # Fetch the latest commit
+  #            -   name: Checkout
+  #                uses: actions/checkout@v3
+  #                with:
+  #                    submodules: 'true'
+  #
+  #            # Setup Node.js using the appropriate version
+  #            -   name: Use Node.js ${{ matrix.node-version }}
+  #                uses: actions/setup-node@v3.4.1
+  #                with:
+  #                    node-version: ${{ matrix.node-version }}
+  #                    cache: 'npm'
+  #
+  #            # Install package dependencies
+  #            -   name: Install
+  #                run: npm install
+  #
+  #            # Lint the code
+  #            -   name: Lint
+  #                run: npm run lint
+  #
+  #            # Building is the only test right now (mainly tests if dependabot actually can update)
+  #            -   name: Build
+  #                run: npm run build
+  #
+  #            # Run tests
+  #            #- name: Test
+  #            #run: npm test
+  #
+  #            #
+  release:
+    # Only release on push to main on xdy/xdy-pf2e-workbench
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
+    runs-on: ubuntu-latest
+    # Waits for test jobs for each Node.js version to complete
+    #        needs: [ test ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'true'
 
-            # Setup Node.js using the appropriate version
-            -   name: Use Node.js ${{ matrix.node-version }}
-                uses: actions/setup-node@v3.4.1
-                with:
-                    node-version: ${{ matrix.node-version }}
-                    cache: 'npm'
+        # Not sure this is the right way to do it
+      - name: Pull & update submodules recursively
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
 
-            # Install package dependencies
-            -   name: Install
-                run: npm install
+      - uses: stefanzweifel/git-auto-commit-action@v4.14.1
+        with:
+          commit_message: "chore: Update submodules"
 
-            # Lint the code
-            -   name: Lint
-                run: npm run lint
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 16.x
+          cache: 'npm'
 
-            # Building is the only test right now (mainly tests if dependabot actually can update)
-            -   name: Build
-                run: npm run build
+      - name: Install
+        run: npm install
 
-            # Run tests
-            #- name: Test
-            #run: npm test
+      - name: Build packs
+        run: npm run build:packs
 
-            #
-    release:
-        # Only release on push to main or beta on xdy/xdy-pf2e-workbench
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta' ) && github.repository == 'xdy/xdy-pf2e-workbench'
-        runs-on: ubuntu-latest
-        # Waits for test jobs for each Node.js version to complete
-        needs: [ test ]
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v3
-                with:
-                    submodules: 'true'
+      - name: Build
+        run: npm run build
 
-                # Not sure this is the right way to do it
-            -   name: Pull & update submodules recursively
-                run: |
-                    git submodule update --init --recursive
-                    git submodule update --recursive --remote
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
 
-            - uses: stefanzweifel/git-auto-commit-action@v4.14.1
-              with:
-                  commit_message: "chore: Update submodules"
+      - name: Get tag
+        run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
-            -   name: Setup Node.js
-                uses: actions/setup-node@v3.4.1
-                with:
-                    node-version: 16.x
-                    cache: 'npm'
+      # Publish the release to FoundryVTT's package repository only if push on main
+      - name: Publish to Foundry Admin
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
+        uses: Varriount/fvtt-autopublish@v1.0.9
+        with:
+          username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
+          password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
+          module-id: 1702
+          manifest-url: https://github.com/xdy/xdy-pf2e-workbench/releases/download/${{ env.WORKBENCH_VERSION }}/module.json
+          manifest-file: module.json
 
-            -   name: Install
-                run: npm install
-
-            -   name: Build packs
-                run: npm run build:packs
-
-            -   name: Build
-                run: npm run build
-
-            -   name: Release
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                    NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-                run: npx semantic-release
-
-            -   name: Get tag
-                run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-
-                # Publish the release to FoundryVTT's package repository only if push on main
-            -   name: Publish to Foundry Admin
-                if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
-                uses: Varriount/fvtt-autopublish@v1.0.6
-                with:
-                    username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
-                    password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
-                    module-id: 1702
-                    manifest-url: https://github.com/xdy/xdy-pf2e-workbench/releases/download/${{ env.WORKBENCH_VERSION }}/module.json
-                    manifest-file: module.json
+#      - name: Publish to Foundry VTT Repo
+#        id: publish_foundry_repo
+#        if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
+#        run: npx @ghost-fvtt/foundry-publish
+#        env:
+#          FVTT_MANIFEST_PATH: 'module.json'
+#          FVTT_PACKAGE_ID: ${{ 1702 }}
+#          FVTT_USERNAME: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
+#          FVTT_PASSWORD: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
+#

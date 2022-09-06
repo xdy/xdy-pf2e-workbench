@@ -5,7 +5,7 @@ import { OneToTen, ValueAndMax, ValuesList } from "@module/data";
 import { DamageType } from "@system/damage";
 import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "../types";
 declare type SpellSource = BaseItemSourcePF2e<"spell", SpellSystemSource>;
-declare type SpellData = Omit<SpellSource, "effects" | "flags"> & BaseItemDataPF2e<SpellPF2e, "spell", SpellSystemData, SpellSource>;
+declare type SpellData = Omit<SpellSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<SpellPF2e, "spell", SpellSystemData, SpellSource>;
 export declare type SpellTraits = ItemTraits<SpellTrait>;
 declare type SpellDamageCategory = keyof ConfigPF2e["PF2E"]["damageCategories"];
 export interface SpellDamageType {
@@ -25,14 +25,18 @@ export interface SpellHeighteningInterval {
 }
 export interface SpellHeighteningFixed {
     type: "fixed";
-    levels: Record<OneToTen, Partial<SpellSystemData>>;
+    levels: Record<OneToTen, Partial<SpellSystemSource>>;
 }
 export interface SpellHeightenLayer {
     level: number;
-    data: Partial<SpellSystemData>;
+    system: Partial<SpellSystemData>;
 }
-interface SpellOverlayOverride extends Partial<SpellSource> {
+interface SpellOverlayOverride {
+    _id: string;
+    system: Partial<SpellSystemSource>;
+    name?: string;
     overlayType: "override";
+    sort: number;
 }
 /** Not implemented */
 interface SpellOverlayDamage {
@@ -112,4 +116,4 @@ interface SpellSystemSource extends ItemSystemSource, ItemLevelData {
 interface SpellSystemData extends SpellSystemSource, ItemSystemData {
     traits: SpellTraits;
 }
-export { SpellData, SpellSource, SpellSystemData, SpellSystemSource, SpellOverlay, SpellOverlayType };
+export { SpellData, SpellSource, SpellSystemData, SpellSystemSource, SpellOverlay, SpellOverlayOverride, SpellOverlayType, };

@@ -1,13 +1,13 @@
 import { CreatureSheetData, SpellcastingSheetData } from "@actor/creature/types";
 import { HitPointsData, PerceptionData } from "@actor/data/base";
 import { SaveType } from "@actor/types";
-import { ActionData, EffectData, ItemDataPF2e } from "@item/data";
+import { ActionItemData, EffectData, ItemDataPF2e } from "@item/data";
 import { IdentifyCreatureData } from "@module/recall-knowledge";
 import { NPCPF2e } from ".";
 import { NPCArmorClass, NPCAttributes, NPCSaveData, NPCSkillData, NPCStrike, NPCSystemData, NPCTraitsData } from "./data";
 interface ActionsDetails {
     label: string;
-    actions: NPCSheetItemData<RawObject<ActionData>>[];
+    actions: NPCSheetItemData<RawObject<ActionItemData>>[];
 }
 interface NPCActionSheetData {
     passive: ActionsDetails;
@@ -60,6 +60,16 @@ interface NPCSystemSheetData extends NPCSystemData {
         };
     };
 }
+interface NPCSpellcastingSheetData extends SpellcastingSheetData {
+    adjustedHigher?: {
+        dc: boolean;
+        mod: boolean;
+    };
+    adjustedLower?: {
+        dc: boolean;
+        mod: boolean;
+    };
+}
 /** Additional fields added in sheet data preparation */
 interface NPCSheetData<T extends NPCPF2e = NPCPF2e> extends CreatureSheetData<T> {
     actions: NPCActionSheetData;
@@ -91,7 +101,6 @@ interface NPCSheetData<T extends NPCPF2e = NPCPF2e> extends CreatureSheetData<T>
     hasShield?: boolean;
     hasHardness?: boolean;
     configLootableNpc?: boolean;
-    npcAttacksFromWeapons?: boolean;
 }
 declare type NPCSheetItemData<T extends ItemDataPF2e | RawObject<ItemDataPF2e> = ItemDataPF2e> = T & {
     glyph: string;
@@ -101,7 +110,7 @@ declare type NPCSheetItemData<T extends ItemDataPF2e | RawObject<ItemDataPF2e> =
         description?: string;
     }[];
     chatData?: unknown;
-    data: {
+    system: {
         bonus?: {
             value: number;
             total?: number;
@@ -115,4 +124,4 @@ declare type NPCSheetItemData<T extends ItemDataPF2e | RawObject<ItemDataPF2e> =
         weaponType?: string;
     };
 };
-export { NPCActionSheetData, NPCAttackSheetData, NPCSheetData, NPCSheetItemData, NPCSystemSheetData, VariantCloneParams, };
+export { NPCActionSheetData, NPCAttackSheetData, NPCSheetData, NPCSheetItemData, NPCSpellcastingSheetData, NPCSystemSheetData, VariantCloneParams, };

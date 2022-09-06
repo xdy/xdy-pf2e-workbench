@@ -1,6 +1,6 @@
 /// <reference types="jquery" />
 import { ItemConstructionContextPF2e, ItemPF2e, SpellcastingEntryPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data";
+import { ItemSourcePF2e, ItemSummaryData } from "@item/data";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
 import { GhostTemplate } from "@module/canvas/ghost-measured-template";
 import { ChatMessagePF2e } from "@module/chat-message";
@@ -11,6 +11,7 @@ import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
 import { SpellData, SpellHeightenLayer, SpellOverlayType, SpellSource } from "./data";
 import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "./types";
 import { SpellOverlayCollection } from "./overlay";
+import { ActionTrait } from "@item/action/data";
 interface SpellConstructionContext extends ItemConstructionContextPF2e {
     fromConsumable?: boolean;
 }
@@ -29,6 +30,8 @@ declare class SpellPF2e extends ItemPF2e {
      */
     get level(): number;
     get traits(): Set<SpellTrait>;
+    /** Action traits added when Casting this Spell */
+    get castingTraits(): ActionTrait[];
     get school(): MagicSchool;
     get traditions(): Set<MagicTradition>;
     get spellcasting(): SpellcastingEntryPF2e | undefined;
@@ -38,7 +41,7 @@ declare class SpellPF2e extends ItemPF2e {
     get components(): Record<SpellComponent, boolean> & {
         value: string;
     };
-    /** Returns true if this spell has unlimited uses, false otherwise. */
+    /** Whether this spell has unlimited uses */
     get unlimited(): boolean;
     get isVariant(): boolean;
     get hasVariants(): boolean;
@@ -46,10 +49,10 @@ declare class SpellPF2e extends ItemPF2e {
     constructor(data: PreCreate<ItemSourcePF2e>, context?: SpellConstructionContext);
     private computeCastLevel;
     getRollData(rollOptions?: {
-        spellLvl?: number | string;
+        castLevel?: number | string;
     }): NonNullable<EnrichHTMLOptions["rollData"]>;
     /** Calculates the full damage formula for a specific spell level */
-    getDamageFormula(castLevel?: number, rollData?: object): string;
+    private getDamageFormula;
     /**
      * Loads an alternative version of this spell, called a variant.
      * The variant is created via the application of one or more overlays based on parameters.
@@ -66,15 +69,12 @@ declare class SpellPF2e extends ItemPF2e {
     prepareBaseData(): void;
     prepareSiblingData(this: Embedded<SpellPF2e>): void;
     getRollOptions(prefix?: string): string[];
-    toMessage(event?: JQuery.TriggeredEvent, { create, data }?: {
-        create?: boolean | undefined;
-        data?: {} | undefined;
-    }): Promise<ChatMessagePF2e | undefined>;
+    toMessage(event?: JQuery.TriggeredEvent, { create, data }?: ToMessageOptions): Promise<ChatMessagePF2e | undefined>;
     getChatData(htmlOptions?: EnrichHTMLOptionsPF2e, rollOptions?: {
-        spellLvl?: number | string;
-    }): Record<string, unknown>;
+        castLevel?: number | string;
+    }): Promise<Omit<ItemSummaryData, "traits">>;
     rollAttack(this: Embedded<SpellPF2e>, event: JQuery.ClickEvent, attackNumber?: number, context?: StatisticRollParameters): Promise<void>;
-    rollDamage(this: Embedded<SpellPF2e>, event: JQuery.ClickEvent): Promise<void>;
+    rollDamage(this: Embedded<SpellPF2e>, event: JQuery.ClickEvent<unknown, unknown, HTMLElement>): Promise<void>;
     /**
      * Roll Counteract check
      * Rely upon the DicePF2e.d20Roll logic for the core implementation
@@ -86,5 +86,12 @@ declare class SpellPF2e extends ItemPF2e {
 interface SpellPF2e {
     readonly data: SpellData;
     overlays: SpellOverlayCollection;
+}
+interface ToMessageOptions {
+    create?: boolean;
+    data?: Record<string, unknown> & {
+        slotLevel?: number;
+        castLevel?: number;
+    };
 }
 export { SpellPF2e };

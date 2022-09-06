@@ -40,7 +40,7 @@ declare abstract class RuleElementPF2e {
     get ignored(): boolean;
     set ignored(value: boolean);
     /** Test this rule element's predicate, if present */
-    test(rollOptions?: string[]): boolean;
+    test(rollOptions?: string[] | Set<string>): boolean;
     /** Send a deferred warning to the console indicating that a rule element's validation failed */
     failValidation(...message: string[]): void;
     /**
@@ -96,7 +96,7 @@ declare namespace RuleElementPF2e {
     interface PreCreateParams<T extends RuleElementSource = RuleElementSource> {
         /** The source partial of the rule element's parent item to be created */
         itemSource: PreCreate<ItemSourcePF2e>;
-        /** The source of the rule in `itemSource`'s `data.rules` array */
+        /** The source of the rule in `itemSource`'s `system.rules` array */
         ruleSource: T;
         /** All items pending creation in a `ItemPF2e.createDocuments` call */
         pendingItems: PreCreate<ItemSourcePF2e>[];
@@ -115,7 +115,7 @@ declare namespace RuleElementPF2e {
         roll: Rolled<CheckRoll> | null;
         selectors: string[];
         domains: string[];
-        rollOptions: string[];
+        rollOptions: Set<string>;
     }
     type UserInput<T extends RuleElementData> = {
         [K in keyof T]?: unknown;
@@ -147,7 +147,7 @@ interface RuleElementPF2e {
      * @param domains Applicable predication domains for pending check
      * @param rollOptions Currently accumulated roll options for the pending check
      */
-    beforeRoll?(domains: string[], rollOptions: string[]): void;
+    beforeRoll?(domains: string[], rollOptions: Set<string>): void;
     /**
      * Run following a check roll, passing along roll options already accumulated
      * @param domains Applicable selectors for the pending check
@@ -169,6 +169,9 @@ interface RuleElementPF2e {
      * manner.
      */
     preDelete?({ pendingItems, context }: RuleElementPF2e.PreDeleteParams): Promise<void>;
+    /**
+     * Runs before this rules element's parent item is updated */
+    preUpdate?(changes: DeepPartial<ItemSourcePF2e>): Promise<void>;
     /**
      * Runs after an item holding this rule is added to an actor. If you modify or add the rule after the item
      * is already present on the actor, nothing will happen. Rules that add toggles won't work here since this method is

@@ -286,7 +286,7 @@ declare global {
          * @param _formula The raw formula to split
          * @returns An array of terms, split on arithmetic operators
          */
-        protected static _splitOperators(_formula: string): Array<string | OperatorTerm>;
+        protected static _splitOperators(_formula: string): (string | OperatorTerm)[];
 
         /**
          * Temporarily remove flavor text from a string formula allowing it to be accurately parsed.
@@ -360,7 +360,7 @@ declare global {
         toMessage(
             messageData?: PreCreate<foundry.data.ChatMessageSource>,
             { rollMode, create }?: { rollMode?: RollMode; create?: true }
-        ): Promise<foundry.data.ChatMessageData>;
+        ): Promise<ChatMessage>;
         toMessage(
             messageData?: PreCreate<foundry.data.ChatMessageSource>,
             { rollMode, create }?: { rollMode?: RollMode; create?: boolean }

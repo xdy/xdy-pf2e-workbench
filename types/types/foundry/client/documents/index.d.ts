@@ -2,6 +2,7 @@ import "./active-effect";
 import "./actor";
 import "./ambient-light-document";
 import "./ambient-sound-document";
+import "./cards";
 import "./chat-message";
 import "./combat";
 import "./combatant";
@@ -10,6 +11,7 @@ import "./fog-exploration";
 import "./folder";
 import "./item";
 import "./journal-entry";
+import "./journal-entry-page";
 import "./macro";
 import "./measured-template-document";
 import "./mixins/canvas-document-mixin";
@@ -29,6 +31,7 @@ import "./wall-document";
 declare global {
     type WorldDocument =
         | Actor
+        | Cards
         | ChatMessage
         | Combat
         | Folder

@@ -1,4 +1,4 @@
-//This file has been changed by me, the original copyright statement is given unchanged below. Original file can be found at https://github.com/Djphoenix719/FVTT-PF2EToolbox/blob/master/src/module/features/QuickQuantities.ts
+// This file has been changed by me, the original copyright statement is given unchanged below. Original file can be found at https://github.com/Djphoenix719/FVTT-PF2EToolbox/blob/master/src/module/features/QuickQuantities.ts
 
 /*
  * Copyright 2021 Andrew Cuccinello
@@ -36,7 +36,7 @@ export function onQuantitiesHook(app: ActorSheet, html: JQuery) {
         const itemId = $(event.currentTarget).parents(".item").attr("data-item-id") ?? "";
         const item = actor.items.get(itemId) as Item;
 
-        const quantity = Number(item.data.data["quantity"]) + getAmount(event) ?? 0;
+        const quantity = Number(item.system["quantity"]) + getAmount(event) ?? 0;
         await actor.updateEmbeddedDocuments("Item", [
             {
                 _id: itemId,
@@ -49,8 +49,8 @@ export function onQuantitiesHook(app: ActorSheet, html: JQuery) {
         const itemId = $(event.currentTarget).parents(".item").attr("data-item-id") ?? "";
         const item = actor.items.get(itemId) as Item;
 
-        if (Number(item.data.data["quantity"]) > 0) {
-            const quantity = Number(item.data.data["quantity"]) - getAmount(event) ?? 0;
+        if (Number(item.system["quantity"]) > 0) {
+            const quantity = Number(item.system["quantity"]) - getAmount(event) ?? 0;
             await actor.updateEmbeddedDocuments("Item", [
                 {
                     _id: itemId,
