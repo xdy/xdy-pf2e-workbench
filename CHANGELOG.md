@@ -1,3 +1,10 @@
+# [4.0.0-beta.41](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.40...v4.0.0-beta.41) (2022-09-06)
+
+
+### Bug Fixes
+
+* Remove unneeded script ([a6a2b65](https://github.com/xdy/xdy-pf2e-workbench/commit/a6a2b652a85d433dfeb8b2a8280c5647e7fb8ca0))
+
 # [4.0.0-beta.40](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.39...v4.0.0-beta.40) (2022-09-06)
 
 
