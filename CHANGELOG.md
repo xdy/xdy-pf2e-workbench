@@ -1,3 +1,10 @@
+# [4.0.0-beta.40](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.39...v4.0.0-beta.40) (2022-09-06)
+
+
+### Bug Fixes
+
+* Only show logged in characters in hero point handler ([eb7c348](https://github.com/xdy/xdy-pf2e-workbench/commit/eb7c348ea55213685e8203e533488d025202a68e))
+
 # [4.0.0-beta.39](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0-beta.38...v4.0.0-beta.39) (2022-09-05)
 
 
