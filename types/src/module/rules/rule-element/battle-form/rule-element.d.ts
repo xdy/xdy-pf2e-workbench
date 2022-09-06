@@ -8,13 +8,14 @@ export declare class BattleFormRuleElement extends RuleElementPF2e {
     overrides: this["data"]["overrides"];
     /** The label given to modifiers of AC, skills, and strikes */
     modifierLabel: string;
+    /** Whether the actor uses its own unarmed attacks while in battle form */
+    ownUnarmed: boolean;
     protected static validActorTypes: ActorType[];
     constructor(data: BattleFormSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     static defaultIcons: Record<string, ImagePath | undefined>;
     /** Fill in base override data */
     private initialize;
-    /** Pre-clear other rule elements on this item as being compatible with the battle form */
-    preCreate({ itemSource }: RuleElementPF2e.PreCreateParams): Promise<void>;
+    preCreate({ itemSource, ruleSource }: RuleElementPF2e.PreCreateParams): Promise<void>;
     /** Set temporary hit points */
     onCreate(actorUpdates: Record<string, unknown>): void;
     beforePrepareData(): void;
@@ -39,6 +40,8 @@ export declare class BattleFormRuleElement extends RuleElementPF2e {
     private suppressModifiers;
     private suppressNotes;
     applyDamageExclusion(weapon: WeaponPF2e, modifiers: (DiceModifierPF2e | ModifierPF2e)[]): void;
+    /** Process compendium query and construct full strike object using retrieved weapon */
+    private resolveStrikeQueries;
 }
 export interface BattleFormRuleElement extends RuleElementPF2e {
     get actor(): CharacterPF2e;

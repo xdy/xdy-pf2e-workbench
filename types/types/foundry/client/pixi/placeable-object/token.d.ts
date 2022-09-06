@@ -5,8 +5,8 @@ declare global {
     class Token<TDocument extends TokenDocument = TokenDocument> extends PlaceableObject<TDocument> {
         constructor(document: TDocument);
 
-        /** A Ray which represents the Token's current movement path */
-        protected _movement: Ray | null;
+        /** A reference to an animation that is currently in progress for this Token, if any */
+        _animation: Promise<unknown> | null;
 
         /**
          * An Object which records the Token's prior velocity dx and dy
@@ -71,7 +71,7 @@ declare global {
         effects?: PIXI.Container;
         target?: PIXI.Graphics;
 
-        override get bounds(): NormalizedRectangle;
+        override get bounds(): PIXI.Rectangle;
 
         /** Translate the token's grid width into a pixel width based on the canvas size */
         get w(): number;
@@ -289,10 +289,13 @@ declare global {
         protected _canViewMode(mode: TokenDisplayMode): boolean;
 
         /**
-         * Animate Token movement along a certain path which is defined by a Ray object
-         * @param ray The path along which to animate Token movement
+         * Animate changes to the appearance of the Token.
+         * Animations are performed over differences between the TokenDocument and the current Token and TokenMesh appearance.
+         * @param updateData A record of the differential data which changed, for reference only
+         * @param [options] Options which configure the animation behavior
+         * @returns A promise which resolves once the animation is complete
          */
-        animateMovement(ray: Ray): Promise<void>;
+        animate(updateData: Record<string, unknown>, options?: TokenAnimationOptions<this>): Promise<void>;
 
         /** Animate the continual revealing of Token vision during a movement animation */
         protected _onMovementFrame(
@@ -321,6 +324,13 @@ declare global {
          * @return A true/false indicator for whether the attempted movement caused a collision
          */
         checkCollision(destination: Point): boolean;
+
+        /**
+         * Handle changes to Token behavior when a significant status effect is applied
+         * @param statusId The status effect ID being applied, from CONFIG.specialStatusEffects
+         * @param active   Is the special status effect now active?
+         */
+        _onApplyStatusEffect(statusId: string, active: boolean): void;
 
         protected override _onControl(options?: { releaseOthers?: boolean; pan?: boolean }): void;
 
@@ -386,7 +396,7 @@ declare global {
          * @return Was the texture applied (true) or removed (false)
          */
         toggleEffect(
-            effect: ActiveEffect | ImagePath,
+            effect: StatusEffect | ImagePath,
             { active, overlay }?: { active?: boolean; overlay?: boolean }
         ): Promise<boolean>;
 
@@ -420,14 +430,14 @@ declare global {
         /* -------------------------------------------- */
 
         override _onCreate(
-            data: TDocument["data"]["_source"],
+            data: TDocument["_source"],
             options: DocumentModificationContext<TDocument>,
             userId: string
         ): void;
 
         override _onUpdate(
-            changed: DeepPartial<TDocument["data"]["_source"]>,
-            options: DocumentModificationContext<TDocument>,
+            changed: DeepPartial<TDocument["_source"]>,
+            options: DocumentModificationContext,
             userId: string
         ): void;
 
@@ -509,5 +519,10 @@ declare global {
         data: PIXI.InteractionData & {
             clones?: T[];
         };
+    }
+
+    interface TokenAnimationOptions<TObject extends Token> extends CanvasAnimationOptions<TObject> {
+        /** A desired token movement speed in grid spaces per second */
+        movementSpeed?: number;
     }
 }

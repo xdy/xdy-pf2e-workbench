@@ -18,7 +18,6 @@ declare global {
         TActors extends Actors<TActor> = Actors<TActor>,
         TChatMessage extends ChatMessage<TActor> = ChatMessage<TActor>,
         TCombat extends Combat = Combat,
-        TFolder extends Folder = Folder,
         TItem extends Item<TActor> = Item<TActor>,
         TMacro extends Macro = Macro,
         TScene extends Scene = Scene,
@@ -30,10 +29,13 @@ declare global {
          */
         view: string;
 
+        // Undocumented
+        _documentsReady?: boolean;
+
         /** The object of world data passed from the server */
         data: {
-            actors: TActor["data"]["_source"][];
-            items: TItem["data"]["_source"][];
+            actors: TActor["_source"][];
+            items: TItem["_source"][];
             macros: foundry.data.MacroSource[];
             messages: foundry.data.ChatMessageSource[];
             packs: CompendiumMetadata[];
@@ -57,10 +59,10 @@ declare global {
             {
                 id: string;
                 active: boolean;
+                flags: Record<string, Record<string, unknown>>;
+                title: string;
                 data: {
                     compatibleCoreVersion: string | undefined;
-                    flags: Record<string, Record<string, unknown>>;
-                    title: string;
                 };
             }
         >;
@@ -93,6 +95,9 @@ declare global {
 
         /** A singleton instance of the Video Helper class */
         video: VideoHelper;
+
+        /** The global document index. */
+        documentIndex: DocumentIndex;
 
         /** Whether the Game is running in debug mode */
         debug: boolean;
@@ -127,7 +132,7 @@ declare global {
         >;
 
         combats: CombatEncounters<TCombat>;
-        folders: Folders<TFolder>;
+        folders: Folders<Folder>;
         items: Items<TItem>;
         journal: Journal;
         macros: Macros<TMacro>;
@@ -195,8 +200,9 @@ declare global {
          */
         get system(): {
             id: string;
+            version: string;
+            gridUnits: string;
             data: {
-                author: string;
                 authors: string[];
                 availability: number;
                 bugs: string;
@@ -206,7 +212,6 @@ declare global {
                 download: string;
                 esmodules: string[];
                 gridDistance: number;
-                gridUnits: string;
                 initiative: string;
                 keywords: string[];
                 languages: {
@@ -235,7 +240,6 @@ declare global {
                 title: string;
                 unavailable: boolean;
                 url: string;
-                version: string;
             };
             documentTypes: {
                 Actor: string[];

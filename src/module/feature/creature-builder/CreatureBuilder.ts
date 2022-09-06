@@ -25,14 +25,15 @@ import {
 } from "./CreatureBuilderData";
 import { SCALE_APP_DATA } from "../NPCScaleData";
 import { ActorPF2e } from "@actor";
+import { ActorSheetPF2e } from "@actor/sheet/base";
 
 export const setupCreatureBuilder = () => Hooks.on("renderActorSheet", enableCreatureBuilderButton);
 
-function enableCreatureBuilderButton(sheet: ActorSheet, html: JQuery) {
+function enableCreatureBuilderButton(sheet: ActorSheetPF2e<ActorPF2e>, html: JQuery) {
     if (game.user?.isGM) {
         // Only inject the link if the actor is of type "character" and the user has permission to update it
         const actor: ActorPF2e = <ActorPF2e>sheet.actor;
-        if (!(actor.isOfType("npc") && actor.canUserModify(game.user, "update"))) {
+        if (!(actor.isOfType("npc") && actor.canUserModify(<any>game.user, "update"))) {
             return;
         }
 
@@ -59,7 +60,7 @@ class CreatureBuilder extends FormApplication {
         defaultValues: new Map(),
     };
 
-    static get defaultOptions() {
+    static override get defaultOptions() {
         const options = super.defaultOptions;
         options.title = "Creature Builder";
         options.template = `modules/xdy-pf2e-workbench/templates/feature/creature-builder/index.html`;
@@ -70,7 +71,7 @@ class CreatureBuilder extends FormApplication {
         return options;
     }
 
-    getData(options?: any): any {
+    override getData(options?: any): any {
         const renderData = super.getData(options);
 
         const statisticCategories = this.statisticCategories;
@@ -107,7 +108,7 @@ class CreatureBuilder extends FormApplication {
         return entry.name !== undefined ? entry.name : parentCategory.name;
     }
 
-    protected async _updateObject(event: Event | JQuery.Event, formData: any): Promise<any> {
+    protected async _updateObject(_event, formData: any): Promise<any> {
         const level = formData[CREATURE_LEVEL_FIELD];
 
         const newFormData = {};
@@ -294,7 +295,7 @@ class CreatureBuilder extends FormApplication {
         };
     }
 
-    activateListeners(html) {
+    override activateListeners(html) {
         super.activateListeners(html);
 
         html.find(".apply-road-map").on("click", (ev) => {

@@ -47,22 +47,22 @@ export enum StatisticOptions {
 export class CreatureStatisticEntry {
     name?: string; // Overrides values from the parent category
     descriptor?: string; // Overrides values from the parent category
-    actorField: string;
-    defaultValue: StatisticOptions;
+    actorField!: string;
+    defaultValue!: StatisticOptions;
 }
 
 export class CreatureStatisticCategory {
-    name: string;
-    descriptor: string;
-    availableOptions: StatisticOptions[];
-    statisticEntries: CreatureStatisticEntry[];
+    name!: string;
+    descriptor!: string;
+    availableOptions!: StatisticOptions[];
+    statisticEntries!: CreatureStatisticEntry[];
 }
 
 // See [aon](http://2e.aonprd.com/Rules.aspx?ID=995)
 export class Roadmap {
-    name: string;
-    tooltip: string;
-    defaultValues: Map<string, StatisticOptions>;
+    name!: string;
+    tooltip!: string;
+    defaultValues!: Map<string, StatisticOptions>;
 }
 
 export const DefaultCreatureStatistics: CreatureStatisticCategory[] = [

@@ -44,7 +44,7 @@ interface DamageRollContext extends BaseRollContext {
     outcome?: DegreeOfSuccessString;
     self?: StrikeSelf | null;
     target?: AttackTarget | null;
-    options: string[];
+    options: Set<string>;
     secret?: boolean;
 }
 export { BASE_DAMAGE_TYPES_TO_CATEGORIES, DAMAGE_DIE_FACES, DamageCategorization, DamageDieSize, DamageRollContext, nextDamageDieSize, };

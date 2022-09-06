@@ -5,7 +5,7 @@ import { StatisticModifier } from "@actor/modifiers";
 import { AbilityString } from "@actor/types";
 import type { FamiliarPF2e } from ".";
 declare type FamiliarSource = BaseCreatureSource<"familiar", FamiliarSystemSource>;
-interface FamiliarData extends Omit<FamiliarSource, "data" | "effects" | "flags" | "items" | "token" | "type">, BaseCreatureData<FamiliarPF2e, "familiar", FamiliarSystemData, FamiliarSource> {
+interface FamiliarData extends Omit<FamiliarSource, "data" | "system" | "effects" | "flags" | "items" | "prototypeToken" | "type">, BaseCreatureData<FamiliarPF2e, "familiar", FamiliarSystemData, FamiliarSource> {
 }
 interface FamiliarSystemSource extends Pick<CreatureSystemSource, "schema"> {
     details: {
@@ -22,6 +22,7 @@ interface FamiliarSystemSource extends Pick<CreatureSystemSource, "schema"> {
         id: string | null;
         ability: AbilityString | null;
     };
+    resources?: never;
 }
 /** The raw information contained within the actor data object for familiar actors. */
 interface FamiliarSystemData extends Omit<FamiliarSystemSource, "toggles" | "traits">, CreatureSystemData {

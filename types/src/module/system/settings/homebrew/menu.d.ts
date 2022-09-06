@@ -1,7 +1,7 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { BaseWeaponType } from "@item/weapon/types";
-import { MenuTemplateData, PartialSettingsData, SettingsMenuPF2e } from "../menu";
+import { PartialSettingsData, SettingsMenuPF2e } from "../menu";
 import "@yaireo/tagify/src/tagify.scss";
 export declare type ConfigPF2eHomebrewRecord = typeof HomebrewElements.SETTINGS[number];
 export declare type HomebrewSettingsKey = `homebrew.${ConfigPF2eHomebrewRecord}`;
@@ -27,10 +27,8 @@ export declare class HomebrewElements extends SettingsMenuPF2e {
         template: string;
     };
     protected static get settings(): Record<ConfigPF2eHomebrewRecord, PartialSettingsData>;
-    getData(): MenuTemplateData;
     activateListeners($form: JQuery<HTMLFormElement>): void;
-    /** Tagify sets an empty input field to "" instead of "[]", which later causes the JSON parse to throw an error */
-    protected _onSubmit(event: Event, { updateData, preventClose, preventRender }?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
+    protected _getSubmitData(updateData?: Record<string, unknown>): Record<string, unknown>;
     protected _updateObject(_event: Event, data: Record<ConfigPF2eHomebrewRecord, HomebrewTag[]>): Promise<void>;
     /** Prepare and run a migration for each set of tag deletions from a tag map */
     private processDeletions;

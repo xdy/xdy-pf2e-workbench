@@ -7,7 +7,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
-            //NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
+            // NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
             autoRollDamageForStrike: {
                 name: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.name`,
                 hint: `${MODULENAME}.SETTINGS.autoRollDamageForStrike.hint`,
@@ -52,14 +52,6 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
-            applyPersistentDamageSeparateMessage: {
-                name: `${MODULENAME}.SETTINGS.applyPersistentDamageSeparateMessage.name`,
-                hint: `${MODULENAME}.SETTINGS.applyPersistentDamageSeparateMessage.hint`,
-                scope: "client",
-                config: true,
-                default: false,
-                type: Boolean,
-            },
             applyPersistentHealing: {
                 name: `${MODULENAME}.SETTINGS.applyPersistentHealing.name`,
                 hint: `${MODULENAME}.SETTINGS.applyPersistentHealing.hint`,
@@ -68,14 +60,6 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-            },
-            applyPersistentHealingSeparateMessage: {
-                name: `${MODULENAME}.SETTINGS.applyPersistentHealingSeparateMessage.name`,
-                hint: `${MODULENAME}.SETTINGS.applyPersistentHealingSeparateMessage.hint`,
-                scope: "client",
-                config: true,
-                default: false,
-                type: Boolean,
             },
             decreaseFrightenedConditionEachTurn: {
                 name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,

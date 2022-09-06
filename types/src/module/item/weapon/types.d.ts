@@ -1,10 +1,9 @@
 import { PreciousMaterialType } from "@item/physical/types";
 import { LocalizePF2e } from "@system/localize";
-import { MELEE_WEAPON_GROUPS, RANGED_WEAPON_GROUPS, WEAPON_CATEGORIES, WEAPON_GROUPS, WEAPON_PROPERTY_RUNE_TYPES, WEAPON_RANGES } from "./values";
+import { MELEE_WEAPON_GROUPS, WEAPON_CATEGORIES, WEAPON_GROUPS, WEAPON_PROPERTY_RUNE_TYPES, WEAPON_RANGES } from "./values";
 declare type WeaponPropertyRuneType = SetElement<typeof WEAPON_PROPERTY_RUNE_TYPES>;
 declare type WeaponCategory = SetElement<typeof WEAPON_CATEGORIES>;
 declare type MeleeWeaponGroup = SetElement<typeof MELEE_WEAPON_GROUPS>;
-declare type RangedWeaponGroup = SetElement<typeof RANGED_WEAPON_GROUPS>;
 declare type WeaponGroup = SetElement<typeof WEAPON_GROUPS>;
 declare type BaseWeaponType = keyof typeof LocalizePF2e.translations.PF2E.Weapon.Base;
 declare type WeaponTrait = keyof ConfigPF2e["PF2E"]["weaponTraits"];
@@ -14,4 +13,4 @@ declare type WeaponReloadTime = "-" | "0" | "1" | "2" | "3" | "10";
 declare type StrikingRuneType = "striking" | "greaterStriking" | "majorStriking";
 declare type WeaponMaterialType = Exclude<PreciousMaterialType, "dragonhide" | "grisantian-pelt">;
 declare type WeaponMaterialEffect = Extract<WeaponMaterialType, "abysium" | "adamantine" | "coldIron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sovereignSteel">;
-export { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, RangedWeaponGroup, StrikingRuneType, WeaponCategory, WeaponGroup, WeaponMaterialEffect, WeaponMaterialType, WeaponPropertyRuneType, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait, };
+export { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, StrikingRuneType, WeaponCategory, WeaponGroup, WeaponMaterialEffect, WeaponMaterialType, WeaponPropertyRuneType, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait, };

@@ -23,7 +23,7 @@ interface SpellcastingEntry extends BaseSpellcastingEntry {
 }
 declare type SlotKey = `slot${ZeroToEleven}`;
 declare type SpellcastingEntrySource = BaseItemSourcePF2e<"spellcastingEntry", SpellcastingEntrySystemData>;
-declare type SpellcastingEntryData = Omit<SpellcastingEntrySource, "effects" | "flags"> & BaseItemDataPF2e<SpellcastingEntryPF2e, "spellcastingEntry", SpellcastingEntrySystemData, SpellcastingEntrySource>;
+declare type SpellcastingEntryData = Omit<SpellcastingEntrySource, "system" | "effects" | "flags"> & BaseItemDataPF2e<SpellcastingEntryPF2e, "spellcastingEntry", SpellcastingEntrySystemData, SpellcastingEntrySource>;
 interface SpellAttackRollModifier {
     breakdown: string;
     notes: RollNotePF2e[];

@@ -6,7 +6,7 @@ import { ItemPF2e } from "@item";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ZeroToThree } from "@module/data";
 import { RollNotePF2e } from "@module/notes";
-import { RollSubstitution } from "@module/rules/rule-element/data";
+import { RollSubstitution } from "@module/rules/synthetics";
 import { TokenDocumentPF2e } from "@scene";
 import { DamageRollContext, DamageTemplate } from "@system/damage";
 import { CheckModifier, ModifierPF2e } from "../actor/modifiers";
@@ -28,7 +28,7 @@ interface RollParameters {
     /** The triggering event */
     event?: JQuery.TriggeredEvent;
     /** Any options which should be used in the roll. */
-    options?: string[];
+    options?: string[] | Set<string>;
     /** Optional DC data for the roll */
     dc?: CheckDC | null;
     /** Callback called when the roll occurs. */
@@ -49,7 +49,7 @@ declare type AttackCheck = "attack-roll" | "spell-attack-roll";
 declare type CheckType = "check" | "counteract-check" | "initiative" | "skill-check" | "perception-check" | "saving-throw" | "flat-check" | AttackCheck;
 interface BaseRollContext {
     /** Any options which should be used in the roll. */
-    options?: string[];
+    options?: Set<string>;
     /** Any notes which should be shown for the roll. */
     notes?: RollNotePF2e[];
     /** If true, this is a secret roll which should only be seen by the GM. */
@@ -98,13 +98,14 @@ interface CheckTargetFlag {
     actor: ActorUUID | TokenDocumentUUID;
     token?: TokenDocumentUUID;
 }
-declare type ContextFlagOmission = "actor" | "token" | "item" | "target" | "altUsage" | "createMessage";
+declare type ContextFlagOmission = "actor" | "altUsage" | "createMessage" | "item" | "options" | "target" | "token";
 interface CheckRollContextFlag extends Required<Omit<CheckRollContext, ContextFlagOmission>> {
     actor: string | null;
     token: string | null;
     item?: undefined;
     target: CheckTargetFlag | null;
     altUsage?: "thrown" | "melee" | null;
+    options: string[];
 }
 interface RerollOptions {
     heroPoint?: boolean;

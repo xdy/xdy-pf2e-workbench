@@ -4,7 +4,6 @@ import { WorkbenchRemindersSettings } from "./reminders";
 import { WorkbenchWorldAutomationSettings } from "./automation-world";
 import { WorkbenchClientAutomationSettings } from "./automation-client";
 import { WorkbenchQolWorldSettings } from "./qol-world";
-import { WorkbenchSfxWorldSettings } from "./sfx-world";
 
 export { mystifyModifierKey } from "./mystification";
 
@@ -20,7 +19,6 @@ export function registerWorkbenchSettings() {
     WorkbenchMystificationSettings.registerSettingsAndCreateMenu("fas fa-eye-slash");
     WorkbenchRemindersSettings.registerSettingsAndCreateMenu("fas fa-bell");
     WorkbenchQolWorldSettings.registerSettingsAndCreateMenu("fas fa-smile");
-    WorkbenchSfxWorldSettings.registerSettingsAndCreateMenu("fas fa-hat-wizard");
     WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fas fa-robot");
     WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fas fa-magic", false);
 
@@ -84,15 +82,52 @@ export function registerWorkbenchSettings() {
         onChange: () => debouncedReload(),
     });
 
-    game.settings.register(MODULENAME, "toggleUndetectedWithVisibilityState", {
-        name: `${MODULENAME}.SETTINGS.toggleUndetectedWithVisibilityState.name`,
-        hint: `${MODULENAME}.SETTINGS.toggleUndetectedWithVisibilityState.hint`,
-        scope: "world",
+    game.settings.register(MODULENAME, "skillActions", {
+        name: `${MODULENAME}.skillActions.Settings.Position.name`,
+        hint: `${MODULENAME}.skillActions.Settings.Position.hint`,
+        scope: "client",
         config: true,
-        default: false,
-        type: Boolean,
+        default: "disabled",
+        type: String,
+        choices: {
+            disabled: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.disabled`),
+            bottom: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.bottom`),
+            top: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.top`),
+        },
         onChange: () => debouncedReload(),
     });
+
+    game.settings.register(MODULENAME, "skillActionsIconStyle", {
+        name: `${MODULENAME}.skillActions.Settings.IconStyle.name`,
+        hint: `${MODULENAME}.skillActions.Settings.IconStyle.hint`,
+        scope: "client",
+        config: true,
+        default: "skillIcon",
+        type: String,
+        choices: {
+            actionCostIcon: game.i18n.localize(`${MODULENAME}.skillActions.Settings.IconStyle.actionCostIcon`),
+            skillIcon: game.i18n.localize(`${MODULENAME}.skillActions.Settings.IconStyle.skillIcon`),
+        },
+    });
+
+    // game.settings.register(MODULENAME, "skillActionsHideDuplicates", {
+    //     name: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.name`,
+    //     hint: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hint`,
+    //     scope: "client",
+    //     config: true,
+    //     default: "hideActions",
+    //     type: String,
+    //     choices: {
+    //         doNotHide: game.i18n.localize(`${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.doNotHide`),
+    //         hideActions: game.i18n.localize(
+    //             `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hideActions`
+    //         ),
+    //         hideSkillActions: game.i18n.localize(
+    //             `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hideSkillActions`
+    //         ),
+    //     },
+    //     onChange: () => debouncedReload(),
+    // });
 
     game.settings.register(MODULENAME, "workbenchVersion", {
         name: `${MODULENAME}.SETTINGS.workbenchVersion.name`,

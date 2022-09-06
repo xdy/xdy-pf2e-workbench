@@ -72,4 +72,5 @@ export declare class ActorSizePF2e {
     decrement({ skipSmall }?: {
         skipSmall?: boolean | undefined;
     }): void;
+    toString(): string;
 }

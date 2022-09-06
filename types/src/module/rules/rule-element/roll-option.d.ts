@@ -22,19 +22,23 @@ declare class RollOptionRuleElement extends RuleElementPF2e {
     private disabledValue?;
     /** Whether this roll option is countable: it will have a numeric value counting how many rules added this option */
     private count?;
+    /** If the hosting item is an effect, remove or expire it after a matching roll is made */
+    private removeAfterRoll;
     constructor(data: RollOptionSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     private resolveOption;
     onApplyActiveEffects(): void;
-    /**
-     * Add or remove directly from/to a provided set of roll options. All RollOption REs, regardless of phase, are
-     * (re-)called here.
-     */
-    beforeRoll(domains: string[], rollOptions: string[]): void;
     /**
      * Toggle the provided roll option (swapping it from true to false or vice versa).
      * @returns the new value if successful or otherwise `null`
      */
     static toggleOption({ domain, option, actor, itemId, value, }: ToggleParameters): Promise<boolean | null>;
+    /**
+     * Add or remove directly from/to a provided set of roll options. All RollOption REs, regardless of phase, are
+     * (re-)called here.
+     */
+    beforeRoll(domains: string[], rollOptions: Set<string>): void;
+    /** Remove the parent effect if configured so */
+    afterRoll({ domains, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void>;
 }
 interface RollOptionSource extends RuleElementSource {
     domain?: unknown;
@@ -43,6 +47,7 @@ interface RollOptionSource extends RuleElementSource {
     disabledIf?: unknown;
     disabledValue?: unknown;
     count?: unknown;
+    removeAfterRoll?: unknown;
 }
 interface ToggleParameters {
     domain: string;

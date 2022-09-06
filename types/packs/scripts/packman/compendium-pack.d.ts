@@ -8,8 +8,9 @@ export interface PackMetadata {
     type: string;
 }
 export declare const PackError: (message: string) => never;
-/** A rule element, possibly a ChoiceSet or GrantItem */
-export interface REMaybeChoiceGrant extends RuleElementSource {
+/** A rule element, possibly an Aura, ChoiceSet, GrantItem */
+export interface REMaybeWithUUIDs extends RuleElementSource {
+    effects?: unknown[];
     choices?: Record<string, string | {
         value?: string;
     }>;
@@ -32,7 +33,7 @@ export declare class CompendiumPack {
     static loadJSON(dirPath: string): CompendiumPack;
     private finalize;
     private sourceIdOf;
-    /** Convert UUIDs in ChoiceSet/GrantItem REs to resemble links by name or back again */
+    /** Convert UUIDs in REs to resemble links by name or back again */
     static convertRuleUUIDs(source: ItemSourcePF2e, { to, map }: {
         to: "ids" | "names";
         map: Map<string, Map<string, string>>;

@@ -3,16 +3,18 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { SelectableTagField } from ".";
-export interface TagSelectorOptions extends FormApplicationOptions {
+interface TagSelectorOptions extends FormApplicationOptions {
     allowCustom?: boolean;
     /** Is the target data property a flat array rather than a values object? */
     flat?: boolean;
     customChoices?: Record<string, string>;
 }
-export declare abstract class TagSelectorBase<TDocument extends ActorPF2e | ItemPF2e = ActorPF2e | ItemPF2e> extends FormApplication<TDocument> {
+declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e = ActorPF2e | ItemPF2e> extends FormApplication<TDocument> {
     choices: Record<string, string>;
+    /** The object path to the property containing the tags */
+    protected abstract objectProperty: string;
+    /** Whether the tags are in an object containing a `value` array property or just an array by its lonesome */
     flat: boolean;
-    objectProperty: string;
     constructor(object: TDocument, options?: Partial<TagSelectorOptions>);
     protected abstract get configTypes(): readonly SelectableTagField[];
     static get defaultOptions(): TagSelectorOptions;
@@ -26,6 +28,7 @@ export declare abstract class TagSelectorBase<TDocument extends ActorPF2e | Item
     /** Localize and sort choices */
     protected sortChoices(choices: Record<string, string>): Record<string, string>;
 }
-export interface TagSelectorBase {
+interface BaseTagSelector {
     options: FormApplicationOptions;
 }
+export { BaseTagSelector, TagSelectorOptions };

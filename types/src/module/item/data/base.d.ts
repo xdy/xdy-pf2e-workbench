@@ -10,9 +10,9 @@ import { ActionTrait } from "@item/action/data";
 interface BaseItemSourcePF2e<TType extends ItemType = ItemType, TSystemSource extends ItemSystemSource = ItemSystemSource> extends foundry.data.ItemSource<TType, TSystemSource> {
     flags: ItemSourceFlagsPF2e;
 }
-interface BaseItemDataPF2e<TItem extends ItemPF2e = ItemPF2e, TType extends ItemType = ItemType, TSystemData extends ItemSystemData = ItemSystemData, TSource extends BaseItemSourcePF2e<TType> = BaseItemSourcePF2e<TType>> extends Omit<BaseItemSourcePF2e<TType, ItemSystemSource>, "effects">, foundry.data.ItemData<TItem, ActiveEffectPF2e> {
+interface BaseItemDataPF2e<TItem extends ItemPF2e = ItemPF2e, TType extends ItemType = ItemType, TSystemData extends ItemSystemData = ItemSystemData, TSource extends BaseItemSourcePF2e<TType> = BaseItemSourcePF2e<TType>> extends Omit<BaseItemSourcePF2e<TType, ItemSystemSource>, "system" | "effects">, foundry.data.ItemData<TItem, ActiveEffectPF2e> {
     readonly type: TType;
-    readonly data: TSystemData;
+    readonly system: TSystemData;
     flags: ItemFlagsPF2e;
     readonly _source: TSource;
 }
@@ -68,4 +68,13 @@ interface ItemSystemSource {
     schema: DocumentSchemaRecord;
 }
 declare type ItemSystemData = ItemSystemSource;
-export { ActionCost, ActionType, BaseItemDataPF2e, BaseItemSourcePF2e, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, };
+interface FrequencySource {
+    value?: number;
+    max: number;
+    /** Gap between recharges as an ISO8601 duration, or "day" for daily prep. */
+    per: keyof ConfigPF2e["PF2E"]["frequencies"];
+}
+interface Frequency extends FrequencySource {
+    value: number;
+}
+export { ActionCost, ActionType, BaseItemDataPF2e, BaseItemSourcePF2e, Frequency, FrequencySource, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, };

@@ -2,7 +2,7 @@ import { ActivatedEffectData, BasePhysicalItemData, BasePhysicalItemSource, Phys
 import { SpellSource } from "@item/spell/data";
 import type { ConsumablePF2e } from ".";
 declare type ConsumableSource = BasePhysicalItemSource<"consumable", ConsumableSystemSource>;
-declare type ConsumableData = Omit<ConsumableSource, "data" | "effects" | "flags"> & BasePhysicalItemData<ConsumablePF2e, "consumable", ConsumableSystemData, ConsumableSource>;
+declare type ConsumableData = Omit<ConsumableSource, "system" | "effects" | "flags"> & BasePhysicalItemData<ConsumablePF2e, "consumable", ConsumableSystemData, ConsumableSource>;
 declare type ConsumableType = keyof ConfigPF2e["PF2E"]["consumableTypes"];
 declare type ConsumableTrait = keyof ConfigPF2e["PF2E"]["consumableTraits"];
 declare type ConsumableTraits = PhysicalItemTraits<ConsumableTrait>;
@@ -33,10 +33,7 @@ interface ConsumableSystemSource extends PhysicalSystemSource, ActivatedEffectDa
         value: boolean;
         _deprecated: boolean;
     };
-    spell: {
-        data?: SpellSource | null;
-        heightenedLevel?: number | null;
-    };
+    spell: SpellSource | null;
 }
 declare type ConsumableSystemData = Omit<ConsumableSystemSource, "price"> & PhysicalSystemData & {
     equipped: {

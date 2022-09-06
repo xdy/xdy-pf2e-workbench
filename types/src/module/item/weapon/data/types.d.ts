@@ -9,7 +9,7 @@ import { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, StrikingRuneType, Wea
 declare type WeaponSource = BasePhysicalItemSource<"weapon", WeaponSystemSource> & {
     flags: DeepPartial<WeaponFlags>;
 };
-declare type WeaponData = Omit<WeaponSource, "data" | "effects" | "flags"> & BasePhysicalItemData<WeaponPF2e, "weapon", WeaponSystemData, WeaponSource> & {
+declare type WeaponData = Omit<WeaponSource, "system" | "effects" | "flags"> & BasePhysicalItemData<WeaponPF2e, "weapon", WeaponSystemData, WeaponSource> & {
     flags: WeaponFlags;
 };
 declare type WeaponFlags = ItemFlagsPF2e & {
@@ -22,9 +22,9 @@ interface WeaponSourceTraits extends PhysicalItemTraits<WeaponTrait> {
 }
 declare type WeaponTraits = Required<WeaponSourceTraits>;
 interface WeaponDamage {
-    value: string;
+    value?: string;
     dice: number;
-    die: DamageDieSize;
+    die: DamageDieSize | null;
     damageType: DamageType;
     modifier: number;
 }
@@ -57,11 +57,11 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
         value: number;
     };
     damage: WeaponDamage;
-    bonusDamage?: {
-        value: string;
+    bonusDamage: {
+        value: number;
     };
-    splashDamage?: {
-        value: string;
+    splashDamage: {
+        value: number;
     };
     range: WeaponRangeIncrement | null;
     maxRange?: number | null;
@@ -103,7 +103,7 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     };
     selectedAmmoId: string | null;
 }
-interface WeaponSystemData extends Omit<WeaponSystemSource, "price" | "temporary" | "usage">, Investable<PhysicalSystemData> {
+interface WeaponSystemData extends Omit<WeaponSystemSource, "price" | "temporary">, Investable<PhysicalSystemData> {
     baseItem: BaseWeaponType | null;
     traits: WeaponTraits;
     maxRange: number | null;

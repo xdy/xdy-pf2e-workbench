@@ -5,5 +5,6 @@ export interface MaterialGradeData {
     price: number;
     rarity: Rarity;
 }
-export declare type MaterialValuationData = Record<PreciousMaterialType | "", Record<PreciousMaterialGrade, MaterialGradeData | null>>;
-export declare const MATERIAL_VALUATION_DATA: MaterialValuationData;
+export declare type MaterialValuationData = Partial<Record<PreciousMaterialType | "", Record<PreciousMaterialGrade, MaterialGradeData | null>>>;
+export declare const WEAPON_MATERIAL_VALUATION_DATA: MaterialValuationData;
+export declare const ARMOR_MATERIAL_VALUATION_DATA: MaterialValuationData;

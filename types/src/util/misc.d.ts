@@ -56,6 +56,8 @@ declare function objectHasKey<O extends object>(obj: O, key: unknown): key is ke
 declare function tupleHasValue<A extends readonly unknown[]>(array: A, value: unknown): value is A[number];
 /** Check if an element is present in the provided set. Especially useful for checking against literal sets */
 declare function setHasElement<T extends Set<unknown>>(set: T, value: unknown): value is SetElement<T>;
+/** Returns a subset of an object with explicitly defined keys */
+declare function pick<T extends object, K extends keyof T>(obj: T, keys: K[]): Pick<T, K>;
 /**
  * The system's sluggification algorithm for labels and other terms.
  * @param [camel=null] The sluggification style to use: null is default, and there are otherwise two camel options.
@@ -96,4 +98,6 @@ declare function sortStringRecord<T extends Record<string, string>>(record: T): 
 /** JSON.stringify with recursive key sorting */
 declare function sortObjByKey(value: unknown): unknown;
 declare function sortedStringify(obj: object): string;
-export { ErrorPF2e, Fraction, Optional, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, groupBy, isBlank, isObject, localizeList, objectHasKey, ordinal, padArray, parseHTML, setHasElement, sluggify, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };
+/** Walk an object tree and replace any string values found according to a provided function */
+declare function recursiveReplaceString<T>(source: T, replace: (s: string) => string): T;
+export { ErrorPF2e, Fraction, Optional, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, groupBy, isBlank, isObject, localizeList, objectHasKey, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, sluggify, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };

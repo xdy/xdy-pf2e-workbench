@@ -6,7 +6,7 @@ export declare class Migration678SeparateNPCAttackTraits extends MigrationBase {
     updateItem(itemSource: ItemWithRarityObject): Promise<void>;
 }
 declare type ItemWithRarityObject = ItemSourcePF2e & {
-    data: {
+    system: {
         traits?: {
             rarity: string | {
                 value: string;

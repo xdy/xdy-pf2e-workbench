@@ -1,9 +1,10 @@
-//These usecases should be handled
+// These usecases should be handled
 // * Show a new handler, set timeout to 60, ignore on the first, none on the second
 // * Check on an existing timer, recalc timeout, ignore on the first, none on the second
 // * Timeout, recalc timeout, ignore on the first, random on the second
 
 import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { CharacterSystemData } from "@actor/character/data";
 
 export enum HPHState {
     Start,
@@ -140,16 +141,19 @@ export async function heroPointHandler(state: HPHState) {
 }
 
 async function buildHtml(remainingMinutes: number, state: HPHState) {
-    //TODO How to start using bootstrap? (I use bootstrap classes in the html).
-    //TODO Extract to a handlebars template
+    // TODO How to start using bootstrap? (I use bootstrap classes in the html).
+    // TODO Extract to a handlebars template
 
-    //TODO Get user name, add within parentheses after actor name
+    // TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
 
-    const characters =
+    const loggedIn =
         game?.actors
             ?.filter((x) => x.hasPlayerOwner)
             .filter((x) => x.isOfType("character"))
+            .filter((x) => x.alliance === "party")
+            ?.filter((actor) => !actor.system.traits.traits.value.toString().includes("minion"))
+            ?.filter((actor) => !actor.system.traits.traits.value.toString().includes("eidolon"))
             .filter((x) =>
                 (
                     game?.users
@@ -157,9 +161,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
                         .map((user) => user.character)
                         .filter((actor) => !!actor) || []
                 ).includes(x)
-            )
-            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("minion"))
-            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("eidolon")) || [];
+            ) || [];
 
     let checked: number;
     switch (state) {
@@ -167,7 +169,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
             checked = -1;
             break;
         case HPHState.Timeout:
-            checked = characters.length > 0 ? Math.floor(Math.random() * characters.length) : -1;
+            checked = loggedIn.length > 0 ? Math.floor(Math.random() * loggedIn.length) : -1;
             break;
         case HPHState.Check:
             checked = -1;
@@ -208,7 +210,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
       `${MODULENAME}.SETTINGS.heroPointHandler.thisMany`
   )}</label>
   <div class="col-md-4">
-    <input id="heropoints" name="heropoints" type="number" value=1 class="form-control input-md">
+    <input id="heropoints" name="heropoints" type="number" value="1" class="form-control input-md">
   </div>
 </div>
 
@@ -219,14 +221,14 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
   )}</label>
   <div class="col-md-4">`;
 
-    for (let i = 0; i < characters.length; i++) {
+    for (let i = 0; i < loggedIn.length; i++) {
         charactersContent += `
     <div class="radio">
         <label for="characters-${i}">
-          <input type="radio" name="characters" id="characters-${i}" value="${
-            characters?.filter((x) => x.isOfType("character"))[i]?.id
-        }" ${checked === i ? 'checked="checked"' : ""}>
-          ${characters?.filter((x) => x.isOfType("character"))[i]?.name}
+          <input type="radio" name="characters" id="characters-${i}" value="${loggedIn[i]?.id}" ${
+            checked === i ? 'checked="checked"' : ""
+        }>
+          ${loggedIn[i]?.name}
         </label>
     </div>`;
     }
@@ -288,26 +290,22 @@ function heroes() {
         game?.actors
             ?.filter((actor) => actor.hasPlayerOwner)
             .filter((actor) => actor.isOfType("character"))
-            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("minion"))
-            .filter((actor) => !actor.data.data.traits.traits.value.toString().includes("eidolon")) || []
+            .filter((actor) => !actor.system.traits?.traits.value.toString().includes("minion"))
+            .filter((actor) => !actor.system.traits?.traits.value.toString().includes("eidolon")) || []
     );
 }
 
-async function resetHeroPoints(heropoints: number) {
+export async function resetHeroPoints(heropoints: number) {
     for (const actor of heroes()) {
-        const value = Math.min(
-            heropoints,
-            // @ts-ignore
-            parseInt(actor.data.data.resources.heroPoints.max)
-        );
+        const value = Math.min(heropoints, <number>game.settings.get(MODULENAME, "maxHeroPoints"));
         await actor.update({
-            "data.resources.heroPoints.value": value,
+            "system.resources.heroPoints.value": value,
         });
     }
 }
 
-async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
-    let actors: any[];
+export async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
+    let actors;
     switch (actorId) {
         case "ALL":
             actors = heroes();
@@ -321,13 +319,13 @@ async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
     }
 
     for (const actor of actors) {
+        const system = <CharacterSystemData>actor.system;
         const value = Math.min(
-            parseInt(actor.data.data.resources.heroPoints.value) + heropoints,
-            parseInt(actor.data.data.resources.heroPoints.max)
+            system.resources.heroPoints.value + heropoints,
+            <number>game.settings.get(MODULENAME, "maxHeroPoints")
         );
         await actor.update({
-            // @ts-ignore
-            "data.resources.heroPoints.value": value,
+            "system.resources.heroPoints.value": value,
         });
     }
 }
@@ -414,7 +412,7 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
     renderData.data.resources.heroPoints.icon = icon;
 
     const actor: Actor = app["document"] as Actor;
-    const span = html.find('span[data-property="data.resources.heroPoints.value"]');
+    const span = html.find('span[data-property="system.resources.heroPoints.value"]');
     span.html(icon);
 
     span.off("click");
@@ -423,13 +421,13 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
     span.on("click", async (_e) => {
         if (value === max) return;
         await actor.update({
-            ["data.resources.heroPoints.value"]: value + 1,
+            ["system.resources.heroPoints.value"]: value + 1,
         });
     });
     span.on("contextmenu", async (_e) => {
         if (value === 0) return;
         await actor.update({
-            ["data.resources.heroPoints.value"]: value - 1,
+            ["system.resources.heroPoints.value"]: value - 1,
         });
     });
 }
