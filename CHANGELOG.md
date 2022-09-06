@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.0...v4.0.1) (2022-09-06)
+
+
+### Bug Fixes
+
+* Updates translation of French (thanks Rectulo and Bolt!). Fixes a few warnings. ([09ff410](https://github.com/xdy/xdy-pf2e-workbench/commit/09ff4103e957a5e55b05599cfa9b1823efc7f585))
+
 # [4.0.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v3.44.3...v4.0.0) (2022-09-06)
 
 
