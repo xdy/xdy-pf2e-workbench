@@ -139,6 +139,9 @@
         "firstPart": "{tokenName} har precis kastat en {vsmf} {type} av traditionen <strong>{traditionString}</strong>",
         "components": "Komponenter:",
         "secondPartRK": ".<br>Fråga din SL om du kände igen det automatiskt/med en reaktion. Om du inte gjorde det kan du spendera en handling på din runda för att försöka identifiera den: @Check[typ:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}"
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "traitPart": " med dessa egenskaper: <strong>{traits}</strong>"
       }
     },
     "npc-roller": {
