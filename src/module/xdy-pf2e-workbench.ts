@@ -95,7 +95,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 if (
                     game.settings.get(MODULENAME, "castPrivateSpell") &&
                     message.flags.pf2e?.casting?.id &&
-                    (!message.data.whisper || message.data.whisper.length === 0) &&
+                    (!message.whisper || message.whisper.length === 0) &&
                     game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) // TODO Doesn't work on mac?
                 ) {
                     data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
@@ -103,7 +103,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     if (!game.user.isGM) {
                         data.whisper.push(game.user.id);
                     }
-                    message.data.update(data);
+                    message.updateSource(data);
 
                     if (
                         game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessage") &&

@@ -106,7 +106,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     try {
                         originalRollMode = game.settings.get("core", "rollMode");
                         if (
-                            message.data.type === CONST.CHAT_MESSAGE_TYPES.WHISPER &&
+                            message.type === CONST.CHAT_MESSAGE_TYPES.WHISPER &&
                             originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE
                         ) {
                             game.settings.set("core", "rollMode", CONST.DICE_ROLL_MODES.PRIVATE);
