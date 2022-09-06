@@ -23,8 +23,7 @@
   "esmodules": [
     "main.bundle.js"
   ],
-  "scripts": [
-  ],
+  "scripts": [],
   "styles": [
     "styles/xdy-pf2e-workbench.css"
   ],
@@ -84,6 +83,11 @@
       "name": "Svenska",
       "path": "lang/sv.json",
       "flags": {}
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt_BR.json"
     }
   ],
   "authors": [
