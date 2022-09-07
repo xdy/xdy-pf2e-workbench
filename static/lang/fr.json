@@ -22,13 +22,17 @@
           "name": "Position des actions de compétence",
           "hint": "Position dans la page des actions; Haut : juste après les frappes, Bas : en dernière position.",
           "top": "Haut",
-          "bottom": "Bas"
+          "bottom": "Bas",
+          "disabled": "Désactivé"
         },
         "IconStyle": {
           "name": "Style d'icône",
           "hint": "Style d'icône sur la compétence; Icône Coût de l'action: pour l'icône du coût des actions, Icône de compétence: pour l'icône des compétences si elle est disponible",
           "actionCostIcon": "Icône Coût de l'action",
           "skillIcon": "Icône de compétence"
+        },
+        "hideDuplicates": {
+          "doNotHide": "Ne cache pas"
         }
       }
     },
