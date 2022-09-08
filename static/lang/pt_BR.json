@@ -50,8 +50,8 @@
       },
       "mystificationSettings": {
         "name": "Configurações de Mistificação de NPC",
-        "label": "Mistificação de NPCs",
-        "hint": "Habilitar e configurar mistificação de NPC"
+        "label": "Mistificação de PdMs",
+        "hint": "Habilitar e configurar mistificação de PdM"
       },
       "automationWorldSettings": {
         "name": "Automatizações de Mundo",
@@ -65,7 +65,9 @@
       },
       "addGmRKButtonToNpc": {
         "name": "Adicionar botão de Recordar Conhecimento para NPCs",
-        "hideNpcName": "Esconder nome de NPC em mensagens de Recordar Conhecimento"
+        "hideNpcName": "Esconder nome de NPC em mensagens de Recordar Conhecimento",
+        "hint": "Adiciona o botão de Recordar Conhecimento para PdMs. Atualmente apenas para perícias. Perícias de saber precisam ser resolvidas manualmente.",
+        "hideSkill": "Esconder o nome da perícia na mensagem de Recordar Conhecimento."
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
         "hint": "Define quantos minutos até a próxima vez que o Gerenciador de Pontos de Heroísmo abrirá.",
@@ -82,6 +84,93 @@
       "maxHeroPoints": {
         "hint": "Define o número máximo de Pontos de Heroísmo de personagens.",
         "name": "Número máximo de Pontos de Heroísmo"
+      },
+      "npcMystifierModifierKey": {
+        "name": "Tecla para mistificar ao arrastar à cena",
+        "hint": "Escolhe a tecla a ser pressionada para mistificar criaturas quando as arrastar para a cena ativa. Note que Alt também esconderá os PdMs, por padrão do Foundry."
+      },
+      "npcMystifierMystifyKey": {
+        "hint": "Mistifica tokens selecionados.",
+        "name": "Mistificar Tokens"
+      },
+      "npcMystifierPostfix": {
+        "name": "Sufixo: Palavra ou Tabela de Rolagem",
+        "hint": "Adiciona um sufixo ao novo nome. Se corresponder ao nome de uma tabela de rolagem, um resultado aleatório será usado como sufixo."
+      },
+      "npcMystifierPrefix": {
+        "hint": "Adiciona um prefixo ao novo nome. Se corresponder ao nome de uma tabela de rolagem, um resultado aleatório será usado como prefixo.",
+        "name": "Prefixo: Palavra ou Tabela de Rolagem"
+      },
+      "npcMystifierSkipRandomNumberForUnique": {
+        "name": "Não adicionar números a PdMs únicos",
+        "hint": "Não adiciona números aleatórios quando mistificar PdMs únicos."
+      },
+      "npcMystifierUseMystifiedNameInChat": {
+        "name": "(Experimental) Mistificar nome em mensagens de chat",
+        "hint": "Usa nome mistificado em mensagens de chat, substituindo o nome do ator pelo nome mistificado."
+      },
+      "npcMystifierUseSize": {
+        "hint": "Usa o tamanho do ator no nome mistificado.",
+        "name": "Usar tamanho do ator"
+      },
+      "npcScaler": {
+        "hint": "Permite ajustar o nível de PdMs.",
+        "name": "Ajustar nível de PdMs"
+      },
+      "decreaseFrightenedConditionEachTurn": {
+        "hint": "Automaticamente reduz a condição Assustado a cada turno para PJs, PdMs e familiares."
+      },
+      "npcMystifierNoMatch": {
+        "hint": "Texto para ser usado quando nenhum traço correspondente for encontrado e o nome ficaria vazio. Texto vazio se tornará \\\"...\\\".",
+        "name": "Texto para não-correspondência"
+      },
+      "npcMystifierUseEliteWeak": {
+        "hint": "Usa os termos de ajuste Elite ou Fraco no nome mistificado.",
+        "name": "Usar Elite ou Fraco"
+      },
+      "npcMystifierUseRaritiesReplacement": {
+        "hint": "Defina uma palavra para substituir raridades maiores que Comum. Caso fique vazio, não mudará a raridade exibida.",
+        "name": "Substituir raridades maiores que Comum"
+      },
+      "npcMystifierKeepNumberAtEndOfName": {
+        "name": "Manter numeração de token",
+        "hint": "Mantém a numeração de tokens (no mesmo formato como adicionado por este módulo) no fim do nome quando mistificar PdMs."
+      },
+      "npcMystifier": {
+        "hint": "Habilita o Mistificador de PdMs, renomeando tokens em cenas ativas baseado em seus traços se Ctrl (configurável) estiver pressionado ao adicioná-los à cena. Altere esta configuração para mostrar ou esconder opções adicionais.",
+        "name": "Habilitar Mistificador de PdMs"
+      },
+      "npcMystifierAddRandomNumber": {
+        "hint": "Adiciona número aleatórios quando mistificar.",
+        "name": "Adicionar números aleatórios ao nome"
+      },
+      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+        "hint": "A mistificação de tokens se baseará no mesmo ator.",
+        "name": "Desmistificar todos os tokens do ator"
+      },
+      "npcMystifierUseAlignmentTraits": {
+        "hint": "Usa traços do alinhamento no nome mistificado.",
+        "name": "Usar traços de alinhamento"
+      },
+      "npcMystifierBlacklist": {
+        "hint": "Adicione à esta lista de bloqueio, separada por vírgula, para filtrar conteúdo do nome mistificado.",
+        "name": "Lista de Bloqueio de Traços"
+      },
+      "npcMystifierUseCreatureTraits": {
+        "hint": "Use todos os traços de criatura como definidos pelo sistema pf2e no nome mistificado.",
+        "name": "Usar traços de criatura"
+      },
+      "npcMystifierUseCreatureTypesTraits": {
+        "hint": "Usar traços de tipo de criatura (ver https://2e.aonprd.com/Traits.aspx) no nome mistificado.",
+        "name": "Usar traços de tipo de criatura"
+      },
+      "npcMystifierUseOtherTraits": {
+        "name": "Usar outros traços",
+        "hint": "Usa todos os traços de PdM ainda não inclusos pelas configurações acima no nome mistificado."
+      },
+      "npcMystifierUseRarities": {
+        "hint": "Usa raridas no nome mistificado.",
+        "name": "Usar raridade"
       }
     },
     "npcRoller": {
@@ -98,8 +187,8 @@
         "dc": "CDs",
         "perception": "Percepção"
       },
-      "title": "Rolador de NPC",
-      "button-label": "Rolador de NPC"
+      "title": "Rolador de PdM",
+      "button-label": "Rolador de PdM"
     },
     "skillActions": {
       "Title": "Ações de Perícia",
