@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.4...v4.1.0) (2022-09-09)
+
+
+### Features
+
+* Adds Portuguese (Brazil) translation, courtesy of @Clemente ([3fd9eb6](https://github.com/xdy/xdy-pf2e-workbench/commit/3fd9eb65336cf5e51d563d884bdbc433688003e4)), closes [#408](https://github.com/xdy/xdy-pf2e-workbench/issues/408)
+
 ## [4.0.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.3...v4.0.4) (2022-09-06)
 
 
