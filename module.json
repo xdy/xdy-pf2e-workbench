@@ -4,8 +4,9 @@
   "version": "4.0.4",
   "id": "xdy-pf2e-workbench",
   "compatibility": {
-    "minimum": "10",
-    "verified": "10.284"
+    "minimum": "10.284",
+    "verified": "10.285",
+    "maximum": "10"
   },
   "relationship": {
     "systems": [

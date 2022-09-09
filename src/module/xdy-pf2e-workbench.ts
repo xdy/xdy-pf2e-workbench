@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification,
+    tokenCreateMystification
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -30,9 +30,9 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer,
+    startTimer
 } from "./feature/heroPointHandler";
-import { isFirstGM, nth } from "./utils";
+import { isFirstGM, nth, sluggify } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting,
+    reminderTargeting
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -59,7 +59,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP,
+    removeDyingOnZeroHP
 } from "./feature/conditionHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
@@ -128,7 +128,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             tokenName = message.token?.name ?? message.actor?.name ?? anonymous;
                         }
                         const type = message.flags?.pf2e.origin?.type ?? "spell";
-                        const traditionString = message.flags.pf2e.casting.tradition;
+                        const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
                         const origin: SpellPF2e | null = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
                         let content = "";
                         if (origin) {
@@ -223,16 +223,21 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         if (saveButtons.length === 1) {
                             const dataSave = saveButtons.attr("data-save") ?? "";
                             const dataDC = saveButtons.attr("data-dc") ?? "";
+                            const origin = <SpellPF2e>await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
                             content += game.i18n.format(
                                 `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`,
                                 {
                                     dataSave: dataSave,
                                     dataDC: dataDC,
+                                    traits: Object.values(origin.system.traits.value)
+                                        .map((trait) => sluggify(trait.valueOf()))
+                                        .sort()
+                                        .join(","),
                                 }
                             );
                         }
 
-                        const token: any = message.token;
+                        const token: any = message.token ? message.token : message.actor?.token;
                         await ChatMessage.create({
                             content: content,
                             speaker: ChatMessage.getSpeaker({ token: token }),

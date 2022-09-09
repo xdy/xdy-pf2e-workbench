@@ -19,7 +19,8 @@ profile followed by a brief and incomplete description of what this person has c
 * [stwlam](https://github.com/stwlam) - Added effects for Dread Marshal Stance and Inspiring Marshal Stance
 * [Flash Granola](https://github.com/jamespdaily) - Allowed me to take over the code and features from his pf2e-sheet-skill-actions module as he no longer has the time to maintain it.
 * [thomascookandroid](https://github.com/thomascookandroid) - Made PR for skill action icons that I moved over to the Workbench.
-* [bolt7](https://github.com/bolt7) - Added to the French translation
+* [bolt7](https://github.com/bolt7) - Added to the French translation.
+* [Clemente](https://github.com/mclemente) - Contributed the Portuguese (Brazil) translation.
 
 I've probably forgotten someone, if so, please tell me!
 

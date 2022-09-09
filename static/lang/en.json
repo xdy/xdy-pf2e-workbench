@@ -415,7 +415,7 @@
         "firstPart": "{tokenName} just cast a {vsmf} {type} of the <strong>{traditionString}</strong> tradition",
         "secondPartRK": ".<br>Ask your GM if you recognized it automatically/with a reaction. If you didn't, you can spend an action on your turn to attempt to identify it: @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
         "secondPartNoRk": ".<br>Ask your GM if you recognized it automatically/with a reaction. If you didn't, ask your GM for the Recall Knowledge DC if you wish to spend an action on your turn to attempt to identify it.",
-        "savePart": "<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}]"
+        "savePart": "<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]"
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "Show spell traits in the public message.",
