@@ -1,3 +1,10 @@
+## [4.1.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.1...v4.1.2) (2022-09-10)
+
+
+### Bug Fixes
+
+* Fix heropointhandler not appearing. Better fix for npc name mystification. Hide subsettings for hero point handler if not enabled. ([4779eca](https://github.com/xdy/xdy-pf2e-workbench/commit/4779eca9f219d0dd9bfcb2c5fe18e32df0a41ae0))
+
 ## [4.1.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.0...v4.1.1) (2022-09-10)
 
 
