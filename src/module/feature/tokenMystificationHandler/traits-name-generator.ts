@@ -129,51 +129,57 @@ export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2
         fillTraits();
     }
 
-    let traitsList = <string[]>traits?.traits?.value;
-    if (traitsList && traits) {
-        if (customTraits) {
-            traitsList = traitsList.concat(customTraits.trim().split(","));
-        }
-        const tokenRarities: any = traits.rarity;
-        if (tokenRarities) {
-            traitsList = traitsList.concat(tokenRarities);
-        }
+    if (traits) {
+        //I think the types are wrong currently, for now, try first the old way, then what seems to be the new way.
+        let traitsList = <string[]>traits.traits?.value ?? <string[]>traits["value"];
+        if (traitsList && traits) {
+            if (customTraits) {
+                traitsList = traitsList.concat(customTraits.trim().split(","));
+            }
+            const tokenRarities: any = traits.rarity;
+            if (tokenRarities) {
+                traitsList = traitsList.concat(tokenRarities);
+            }
 
-        const size = traits?.size?.value;
-        if (size) {
-            traitsList.push(size);
-        }
+            const size = traits?.size?.value;
+            if (size) {
+                traitsList.push(size);
+            }
 
-        const prefix = (await fixesPreAndPost("npcMystifierPrefix")) || "";
-        const postfix = (await fixesPreAndPost("npcMystifierPostfix")) || "";
-        traitsList = filterTraitList(traitsList, prefix, postfix);
+            const prefix = (await fixesPreAndPost("npcMystifierPrefix")) || "";
+            const postfix = (await fixesPreAndPost("npcMystifierPostfix")) || "";
+            traitsList = filterTraitList(traitsList, prefix, postfix);
 
-        result = traitsList
-            .map((trait: string) => trait.trim())
-            .filter((trait: string, index: number) => {
-                return traitsList.indexOf(trait) === index;
-            })
-            .filter((trait) => trait.trim().length > 0)
-            .map((trait: string) => {
-                return trait?.charAt(0).toLocaleUpperCase() + trait?.slice(1);
-            })
-            .map((trait: string) => {
-                const lowercaseTrait = trait.toLocaleLowerCase();
-                if (TRAITS.ELITE_WEAK.includes(lowercaseTrait)) {
-                    switch (lowercaseTrait) {
-                        case TRAITS.ELITE_WEAK[0]:
-                            return game.i18n.localize("PF2E.NPC.Adjustment.EliteLabel");
-                        case TRAITS.ELITE_WEAK[1]:
-                            return game.i18n.localize("PF2E.NPC.Adjustment.WeakLabel");
+            result = traitsList
+                .map((trait: string) => trait.trim())
+                .filter((trait: string, index: number) => {
+                    return traitsList.indexOf(trait) === index;
+                })
+                .filter((trait) => trait.trim().length > 0)
+                .map((trait: string) => {
+                    return trait?.charAt(0).toLocaleUpperCase() + trait?.slice(1);
+                })
+                .map((trait: string) => {
+                    const lowercaseTrait = trait.toLocaleLowerCase();
+                    if (TRAITS.ELITE_WEAK.includes(lowercaseTrait)) {
+                        switch (lowercaseTrait) {
+                            case TRAITS.ELITE_WEAK[0]:
+                                return game.i18n.localize("PF2E.NPC.Adjustment.EliteLabel");
+                            case TRAITS.ELITE_WEAK[1]:
+                                return game.i18n.localize("PF2E.NPC.Adjustment.WeakLabel");
+                        }
+                    } else if (TRAITS.SIZES.includes(lowercaseTrait)) {
+                        return game.i18n.localize(CONFIG.PF2E.actorSizes[lowercaseTrait]);
                     }
-                } else if (TRAITS.SIZES.includes(lowercaseTrait)) {
-                    return game.i18n.localize(CONFIG.PF2E.actorSizes[lowercaseTrait]);
-                }
 
-                const translations: any = game.i18n.translations.PF2E ?? {};
-                return (trait !== prefix && trait !== postfix ? translations[`Trait${trait}`] : trait) ?? trait;
-            })
-            .join(" ");
+                    const translations: any = game.i18n.translations.PF2E ?? {};
+                    return (trait !== prefix && trait !== postfix ? translations[`Trait${trait}`] : trait) ?? trait;
+                })
+                .join(" ");
+        }
+    } else {
+        //Shouldn't happen. But, just in case...
+        result = <string>game.settings.get(MODULENAME, "npcMystifierNoMatch");
     }
     return result;
 }
