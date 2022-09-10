@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification
+    tokenCreateMystification,
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -30,7 +30,7 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer
+    startTimer,
 } from "./feature/heroPointHandler";
 import { isFirstGM, nth, sluggify } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting
+    reminderTargeting,
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -59,7 +59,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP
+    removeDyingOnZeroHP,
 } from "./feature/conditionHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
@@ -658,16 +658,14 @@ Hooks.once("ready", async () => {
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
     };
 
-    if (game.settings.get(MODULENAME, "heroPointHandler")) {
-        if (game.user?.isGM) {
-            let remainingMinutes = calcRemainingMinutes(false);
-            if (remainingMinutes > 0 || game.settings.get(MODULENAME, "heroPointHandlerStartTimerOnReady")) {
-                remainingMinutes = calcRemainingMinutes(true);
-                startTimer(remainingMinutes).then(() => {
-                    createRemainingTimeMessage(remainingMinutes);
-                    console.log("Workbench tokenCreateMystification complete");
-                });
-            }
+    if (isFirstGM() && game.settings.get(MODULENAME, "heroPointHandler")) {
+        let remainingMinutes = calcRemainingMinutes(false);
+        if (remainingMinutes > 0 || game.settings.get(MODULENAME, "heroPointHandlerStartTimerOnReady")) {
+            remainingMinutes = calcRemainingMinutes(true);
+            startTimer(remainingMinutes).then(() => {
+                createRemainingTimeMessage(remainingMinutes);
+                console.log("Workbench tokenCreateMystification complete");
+            });
         }
     }
 

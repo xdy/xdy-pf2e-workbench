@@ -130,9 +130,8 @@ export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2
     }
 
     if (traits) {
-        //I think the types are wrong currently, for now, try first the old way, then what seems to be the new way.
-        let traitsList = <string[]>traits.traits?.value ?? <string[]>traits["value"];
-        if (traitsList && traits) {
+        let traitsList = <string[]>traits["value"];
+        if (traitsList) {
             if (customTraits) {
                 traitsList = traitsList.concat(customTraits.trim().split(","));
             }
@@ -178,7 +177,7 @@ export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2
                 .join(" ");
         }
     } else {
-        //Shouldn't happen. But, just in case...
+        // Shouldn't happen. But, just in case...
         result = <string>game.settings.get(MODULENAME, "npcMystifierNoMatch");
     }
     return result;

@@ -152,8 +152,10 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
             ?.filter((x) => x.hasPlayerOwner)
             .filter((x) => x.isOfType("character"))
             .filter((x) => x.alliance === "party")
-            ?.filter((actor) => !actor.system.traits.traits.value.toString().includes("minion"))
-            ?.filter((actor) => !actor.system.traits.traits.value.toString().includes("eidolon"))
+            ?.filter((actor) => {
+                return !actor.system.traits["value"].toString().includes("minion");
+            })
+            ?.filter((actor) => !actor.system.traits["value"].toString().includes("eidolon"))
             .filter((x) =>
                 (
                     game?.users
@@ -290,8 +292,8 @@ function heroes() {
         game?.actors
             ?.filter((actor) => actor.hasPlayerOwner)
             .filter((actor) => actor.isOfType("character"))
-            .filter((actor) => !actor.system.traits?.traits.value.toString().includes("minion"))
-            .filter((actor) => !actor.system.traits?.traits.value.toString().includes("eidolon")) || []
+            .filter((actor) => !actor.system.traits["value"].toString().includes("minion"))
+            .filter((actor) => !actor.system.traits["value"].toString().includes("eidolon")) || []
     );
 }
 

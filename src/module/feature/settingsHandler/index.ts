@@ -76,6 +76,13 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                 html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
                 html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
             }
+
+            if (settingName !== `heroPointHandler` && settingName.startsWith(`heroPointHandler`)) {
+                const valueFunction = !game.settings.get(MODULENAME, "heroPointHandler");
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+            }
         }
     }
 }
