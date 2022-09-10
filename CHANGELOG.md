@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.0...v4.1.1) (2022-09-10)
+
+
+### Bug Fixes
+
+* Make trait-based npc mystification a bit more robust. ([f59a341](https://github.com/xdy/xdy-pf2e-workbench/commit/f59a3418fa989c658ecebd9cb2098bdf29033424)), closes [#416](https://github.com/xdy/xdy-pf2e-workbench/issues/416)
+
 # [4.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.0.4...v4.1.0) (2022-09-09)
 
 
