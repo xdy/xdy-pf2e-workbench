@@ -32,14 +32,20 @@
           "skillIcon": "Icône de compétence"
         },
         "hideDuplicates": {
-          "doNotHide": "Ne cache pas"
+          "doNotHide": "Ne cache pas",
+          "hideActions": "Cacher les actions",
+          "hideSkillActions": "Cacher les actions de compétences"
         }
+      },
+      "UnequipAll": {
+        "Tooltip": "Activer les actions cachées : Appuyer sur Alt lorsque vous cliquez pour équiper ou ne pas équiper toutes les compétences"
       }
     },
     "SETTINGS": {
       "mystificationSettings": {
         "hint": "Autoriser et configurer la mystification des PNJ",
-        "label": "Régler les paramètres de mystification des PNJ"
+        "label": "Régler les paramètres de mystification des PNJ",
+        "name": "Réglages de la mystification des PNJ"
       },
       "applyPersistentDamage": {
         "hint": "Applique automatiquement les dégâts persistants lancés par le module Persistent damage.",
@@ -55,11 +61,14 @@
       },
       "autoCollapseItemChatCardContent": {
         "hint": "Réduit automatiquement le contenu de la carte d'équipement dans la conversation. Cliquer sur le titre de la carte pour l'étendre.",
-        "name": "Réduire automatiquement le contenu de la carte d'équipement dans la conversation."
+        "name": "Réduire automatiquement le contenu de la carte d'équipement dans la conversation.",
+        "noCollapse": "Ne jamais réduire",
+        "collapsedDefault": "Réduit par défaut. Cliquer sur le titre pour étendre.",
+        "nonCollapsedDefault": "Étendu par défaut. Cliquer sur le titre pour réduire."
       },
       "autoRollDamageForStrike": {
-        "hint": "Lance les dégâts automatiquement pour les frappes qui touchent.",
-        "name": "Lancer automatiquement les dégats des frappes qui touchent",
+        "hint": "Réglage du client pour lancer les dégâts automatiquement en cas de succès sur la Frappe. Notez que les coups critiques lancent les dégâts critiques.",
+        "name": "Lancer automatiquement les dégâts en cas de réussite des Frappes.",
         "result": "Résultat",
         "strike": "Frappe"
       },
@@ -179,7 +188,84 @@
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "Utilise le nom mystifié à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié. Cela va vraisemblablement ne pas être joli pour certaines capacités.",
         "name": "Utiliser les noms mystifiés dans les messages de la conversation."
+      },
+      "automationClientSettings": {
+        "hint": "Activer et configurer l'automatisation pour les joueurs",
+        "name": "Réglages de l'automatisation du client",
+        "label": "Régler l'automatisation du client"
+      },
+      "abpVariantAllowItemBonuses": {
+        "name": "Ne pas désactiver les bonus d'objet en utilisant PBA.",
+        "hint": "Ne pas désactiver les bonus d'objet en utilisant la variante de règle Progression des bonus automatique."
+      },
+      "addGmRKButtonToNpc": {
+        "name": "Ajouter le bouton Se souvenir aux PNJ.",
+        "hideNpcName": "Cacher le nom du PNJ sur le message Se souvenir.",
+        "hideSkill": "Cacher le nom de la compétence sur le message Se souvenir.",
+        "hint": "Test pour ajouter le bouton Se souvenir aux PNJ. Actuellement seulement pour les compétences. Les Connaissances ne sont pas prises en charge."
+      },
+      "applyPersistentAllow": {
+        "name": "Qui est autorisé à régler l'option pour appliquer automatiquement les dégâts/soins persistants.",
+        "none": "Aucun",
+        "all": "Tous",
+        "gm": "MJ",
+        "players": "Joueurs",
+        "hint": "Choisissez qui est autorisé à régler l'option pour appliquer automatiquement les dégâts/soins persistants. Sauvegarder les réglages pour montrer/cacher les options supplémentaires sur le menu des réglages de l'automatisation du client."
+      },
+      "autoRollDamageAllow": {
+        "all": "Tous",
+        "hint": "Choisissez qui est autorisé à régler l'option pour lancer les dégâts automatiquement. Sauvegarder les réglages pour montrer/cacher les options de réglage de l'automatisation sur le menu du client.",
+        "none": "Aucun",
+        "name": "Qui est autorisé à régler l'option pour lancer les dégâts automatiquement en cas de succès.",
+        "gm": "MJ",
+        "players": "Joueurs"
+      },
+      "qolWorldSettings": {
+        "hint": "Activer et configurer les réglages de la qualité de vie pour les MJ",
+        "name": "Régler la qualité de vie du monde",
+        "label": "Régler la qualité de vie du monde"
+      },
+      "remindersSettings": {
+        "name": "Réglages des pense-bêtes",
+        "label": "Régler les pense-bêtes",
+        "hint": "Activer et configurer des pense-bêtes divers"
+      },
+      "applyEncumbranceBasedOnBulk": {
+        "hint": "Appliquer automatiquement les règles d'Encombrement. (utilise le code du système 5 Encombrement et 9 L ne dépasse pas 5 Encombrement.)",
+        "name": "Appliquer automatiquement les règles de l'Encombrement."
+      },
+      "autoExpandDamageRolls": {
+        "hint": "Réglage du client pour automatiquement réduire les jets de dégâts (Foundry par défaut réduit les dégâts). Cliquer le jet de dé pour étendre/réduire.",
+        "expandedNew": "Les nouveaux jets de dégâts sont étendus. (étend aussi les trois derniers jets de dégâts en rafraichissant).",
+        "expandedNewest": "Nouveaux jets de dégâts sont étendus. (étend aussi le tout dernier jet de dégât en rafraichissant)",
+        "name": "Étendre automatiquement les jets de dégâts.",
+        "collapsedAll": "Tous les jets de dégâts sont réduits. (Foundry par défaut)",
+        "expandedAll": "Tous les jets de dégâts sont étendus."
+      },
+      "autoRollDamageForSpellAttack": {
+        "hint": "Réglage du client pour lancer automatiquement les dégâts pour les attaques de sort qui touchent. Notez que les coups critiques lancent toujours les dégâts normaux.",
+        "name": "Lancer automatiquement les dégâts en cas de succès d'une attaque de sort."
+      },
+      "automationWorldSettings": {
+        "hint": "Activer et configurer l'automatisation pour les MJ",
+        "name": "Réglages de l'automatisation du monde",
+        "label": "Régler l'automatisation du monde"
+      },
+      "autoRollDamageForSpellNotAnAttack": {
+        "hint": "Réglage du client pour \"toujours\" lancer les dégâts normaux pour les sorts \"non attaque\" lorsqu'ils sont lancés.",
+        "name": "Lancez automatiquement les dégâts pour les sorts lancés qui ne sont pas des attaques."
+      },
+      "autoRollDamageNotifyOnSpellCardNotFound": {
+        "hint": "Réglage du client pour notifier lorsqu'une attaque de sort est lancée et qu'aucune carte de sort n'a été trouvée pour lancer les dégâts.",
+        "name": "Notifier lorsqu'une attaque de sort est lancé et qu'aucune carte de sort n'est trouvée."
       }
-    }
+    },
+    "effects": {
+      "orcFerocityUsed": "Férocité orque utilisée",
+      "bounceBackUsed": "Rebondir utilisé",
+      "numbToDeathUsed": "Insensible à la mort utilisé",
+      "deliberateDeathUsed": "Mort délibérée utilisé"
+    },
+    "spellCardNotFound": "La carte de sort pourrait ne pas être trouver. Lancer {spell} au niveau minimal pour ce sort."
   }
 }
