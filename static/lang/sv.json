@@ -22,9 +22,9 @@
         "add": "Lägg till",
         "addedFor": "1 hjältepoäng tillagd för {name}",
         "addedToForAll": "Lagt till {heroPoints} hjältepoäng för alla",
-        "addOne": "Lägg till en hjältepoäng till utvald karaktär (default framslumpad)",
+        "addOne": "<b>Sektion 2</b> - Lägg till en hjältepoäng till utvald karaktär (default framslumpas när timer löper ut)",
         "all": "Alla",
-        "doWhat": "Gör vad med hjältepoängen för alla karaktärer?",
+        "doWhat": "<b>Sektion 1</b> - Välj vad som ska göras med hjältepoängen för <em>alla</em> karaktärer",
         "hint": "(Experimentell) Hjältepoängshanterare med en valfri keybind för att öppna en dialogruta som kan återställa eller lägga till hjältepoäng för alla karaktärer, lägg till en Hjältepoäng till en slumpmässig (eller vald) karaktär och, viktigast, starta en timer som gör att dialogrutan återkommer efter (som standard) 60 minuter.",
         "ignore": "Ignorera",
         "name": "(Experimentell) Hjältepoängshanterare som kan återställa och / eller lägga till hjältepoäng, med en timmes påminnelse.",
@@ -41,7 +41,7 @@
         "willBeResetIn": "Hjältepoäng kommer att återställas om {remainingMinutes} minuter."
       },
       "heroPointHandlerKey": {
-        "hint": "(Experimentell) Keybind för att öppna dialogrutan för hjältepoänghanterare som gör det möjligt att återställa och lägga till hjältepoäng med en påminnelse varje timme",
+        "hint": "Keybind för att öppna dialogrutan för hjältepoänghanterare som gör det möjligt att återställa och lägga till hjältepoäng med en påminnelse varje timme.",
         "name": "(Experimentell) Nyckelbindning för att öppna dialogrutan för hjältepoänghanterare."
       },
       "callHotbarMacro": {
@@ -52,7 +52,7 @@
         "name": "Flytta vald stridande före nuvarande stridande."
       },
       "moveBeforeCurrentCombatantKey": {
-        "hint": "Tangent för att flytta vald stridande före aktuell stridande, normalt eftersom aktuell stridande har dödat vald stridande... Pga avrundning kan flera stridande visa samma initiativ i listan. ",
+        "hint": "Tangent för att flytta vald stridande före aktuell stridande, normalt eftersom aktuell stridande har dödat vald stridande... Pga avrundning kan flera stridande visa samma initiativ i listan.",
         "name": "Tangent för att flytta vald stridande före aktuell stridande."
       },
       "notifications": {
@@ -64,11 +64,11 @@
       },
       "npcMystifierAddRandomNumber": {
         "hint": "Aktiverar att lägga till ett slumpmässigt nummer när man mystifierar npcs. Observera att om spelfigur eller karaktär redan har ett nummer som suffix kommer detta inte att fungera bra.",
-        "name": "Lägg till slumpmässigt nummer i namnet."
+        "name": "Lägg till slumpmässigt nummer i namnet"
       },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
         "hint": "Aktiverar att alla spelfigurer på den aktiva scenen som är baserade på samma varelse som den som avmystifieras också avmystifieras.",
-        "name": "Avmystifiera alla spelfigurer som är baserade på samma varelse."
+        "name": "Avmystifiera alla spelfigurer som är baserade på samma varelse"
       },
       "npcMystifierUseAlignmentTraits": {
         "hint": "Filtrera bort livåskådningar från det mystifierade namnet.",
@@ -76,7 +76,7 @@
       },
       "npcMystifierBlacklist": {
         "hint": "Filtrera bort alla ord i denna kommaseparerade svartlistan från det mystifierade namnet.",
-        "name": "Svartlista egenskaper så de aldrig läggs till namn."
+        "name": "Svartlista egenskaper så de aldrig läggs till namn"
       },
       "npcMystifierUseCreatureTraits": {
         "hint": "Filtrera bort varelsefamiljedrag (se https://2e.aonprd.com/MonsterFamilies.aspx?Type=M) från det mystifierade namnet.",
@@ -84,23 +84,23 @@
       },
       "npcMystifierUseCreatureTypesTraits": {
         "hint": "Filtrera bort egenskaper av varelsetyp (se https://2e.aonprd.com/Traits.aspx) från det mystifierade namnet.",
-        "name": "Inga npc-varelsetypegenskaper i namnet."
+        "name": "Visa npc-varelsetypegenskaper i namnet"
       },
       "npcMystifierUseEliteWeak": {
         "hint": "Filtrera bort elit/vek från det mystifierade namnet.",
-        "name": "Ingen npc-elit/vek status i namnet."
+        "name": "Visa elit/vek status i namnet"
       },
       "npcMystifierUseOtherTraits": {
         "hint": "Filtrera bort npc-egenskaper som inte finns med ovanstående egenskaper (se länkarna i ovanstående inställningsalternativ) från det mystifierade namnet.",
-        "name": "Inga npc-egenskaper som inte finns i ovanstående egenskapstyper."
+        "name": "Visa egenskaper som inte finns i ovanstående egenskapstyper"
       },
       "npcMystifierUseRarities": {
         "hint": "Filtrera bort sällsyntheter från det mystifierade namnet.",
-        "name": "Ingen npc-sällsynthet i namnet."
+        "name": "Visa sällsynthet"
       },
       "npcMystifierUseRaritiesReplacement": {
         "hint": "Ersätter sällsyntheter ovanligare än Common med (t.ex. 'Ovanlig'). Om det är tomt, ändra inte den visade sällsyntheten.",
-        "name": "Ord att ersätta sällsyntheter större än Vanligt med."
+        "name": "Ord att ersätta sällsyntheter större än Vanlig med"
       },
       "npcMystifierKeepNumberAtEndOfName": {
         "hint": "Behåll spelfigurnummer *i samma format som dom som läggs till av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs.",
@@ -108,7 +108,7 @@
       },
       "npcMystifierModifierKey": {
         "hint": "Håll denna tengent för att mystifiera varelse när den dras ut till den aktiva scenen. Observera att om du väljer Alt (inte standard) döljer den också npc:n.",
-        "name": "Modifieringstangent för att mystifiera när varelse dras ut till scenen."
+        "name": "Modifieringstangent för att mystifiera när varelse dras ut till scenen"
       },
       "npcMystifierMystifyKey": {
         "hint": "Välj spelfigurer och tryck denna knapp för att mystifiera dom.",
