@@ -77,8 +77,8 @@ export class SkillAction {
     }
 
     hasTrait(trait: string) {
-        const value: any = this.pf2eItem().system.traits?.value;
-        return value?.includes(trait);
+        const traits = this.pf2eItem().system.traits;
+        return traits ? (traits["value"] ? (<string[]>traits["value"]).includes(trait) : undefined) : false;
     }
 
     getData({ allVisible }: { allVisible: boolean }) {
