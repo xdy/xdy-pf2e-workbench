@@ -1,3 +1,10 @@
+## [4.1.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.2...v4.1.3) (2022-09-11)
+
+
+### Bug Fixes
+
+* Unbreak skill actions. Fixes [#417](https://github.com/xdy/xdy-pf2e-workbench/issues/417) ([2d58798](https://github.com/xdy/xdy-pf2e-workbench/commit/2d587980585ad4d0b2c542a75f8535b1f1d50472))
+
 ## [4.1.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.1...v4.1.2) (2022-09-10)
 
 
