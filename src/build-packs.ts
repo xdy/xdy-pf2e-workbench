@@ -14,7 +14,12 @@ function copyFolder(source: string, target: string) {
             // Log last part of path
             console.log(`Copied ${path.basename(targetPath)}`);
             // eslint-disable-next-line
-            fs.appendFileSync(targetPath, `\n//# source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(path.dirname(sourcePath))}/${file}" - Fetched on ${new Date().toISOString()}`);
+            fs.appendFileSync(
+                targetPath,
+                `\n//# source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(
+                    path.dirname(sourcePath)
+                )}/${file}" - Fetched on ${new Date().toISOString()}`
+            );
         });
 }
 
@@ -93,8 +98,9 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             map.set("Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp");
             map.set("Apply Conditions", "icons/svg/dice-target.svg");
             map.set("Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp");
+            map.set("Bane", "systems/pf2e/icons/spells/bane.webp");
             map.set("BattleMedicineImmunity", "icons/svg/dice-target.svg");
-            map.set("Update Aura Radius", "systems/pf2e/icons/spells/destructive-aura.webp");
+            map.set("Bless", "systems/pf2e/icons/spells/bless.webp");
             map.set("Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp");
             map.set("Conditions Manager", "systems/pf2e/icons/conditions/doomed.webp");
             map.set("Countdown-Cooldown", "icons/svg/dice-target.svg");
@@ -108,7 +114,7 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             map.set("Lingering Composition", "icons/svg/dice-target.svg");
             map.set("Lingering Heroics", "systems/pf2e/icons/spells/inspire-heroics.webp");
             map.set("Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp");
-            map.set("Magic Missile v2", "systems/pf2e/icons/spells/magic-missile.webp");
+            map.set("Magic Missile", "systems/pf2e/icons/spells/magic-missile.webp");
             map.set("Marshal Stances", "systems/pf2e/icons/features/feats/dread-marshal-stance.webp");
             map.set("Modded BM immunity tracker", "systems/pf2e/icons/features/feats/treat-wounds.webp");
             map.set("Modded Countdown Cooldown", "systems/pf2e/icons/spells/time-beacon.webp");
@@ -123,17 +129,22 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
                 "Spellsling",
                 "systems/pf2e/icons/equipment/consumables/ammunition/energized-cartridge-electricity.webp"
             );
-            map.set("SpellStrike", "systems/pf2e/icons/features/classes/spellstrike.webp");
+            map.set("Spellstrike", "systems/pf2e/icons/features/classes/spellstrike.webp");
             map.set("Treat Wounds and Battle Medicine", "systems/pf2e/icons/conditions/wounded.webp");
-            map.set("Versatile Performance", "systems/pf2e/icons/spells/summon-instrument.webp");
+            map.set("Update Aura Radius", "systems/pf2e/icons/spells/destructive-aura.webp");
             map.set("Use Scroll or Wand", "systems/pf2e/icons/equipment/wands/magic-wands/magic-wand.webp");
+            map.set("Versatile Performance", "systems/pf2e/icons/spells/summon-instrument.webp");
             const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
             // eslint-disable-next-line
-            let jsonInternal = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(contents)},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
+            let jsonInternal = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(
+                contents
+            )},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
             linesInternal.push(jsonInternal);
             // eslint-disable-next-line
-            let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(importMacro)},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
+            let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(
+                importMacro
+            )},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
             lines.push(json);
         } catch (err) {
             console.error(`Failed to read JSON file ${filePath}`, err);
