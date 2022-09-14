@@ -1,3 +1,10 @@
+## [4.1.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.5...v4.1.6) (2022-09-14)
+
+
+### Bug Fixes
+
+* Wrap sheet skill action traits. ([a16081f](https://github.com/xdy/xdy-pf2e-workbench/commit/a16081f280d014be6130dbc0cf90c8bea9c0f689)), closes [#420](https://github.com/xdy/xdy-pf2e-workbench/issues/420)
+
 ## [4.1.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.4...v4.1.5) (2022-09-13)
 
 
