@@ -1,3 +1,10 @@
+## [4.1.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.6...v4.1.7) (2022-09-15)
+
+
+### Bug Fixes
+
+* Minor cleanup and optimization of autoroll damage, expand damage rolls, interaction with pf2 flat rolls module, actions reminder. ([7a3488f](https://github.com/xdy/xdy-pf2e-workbench/commit/7a3488f8181369ac7a4d39aadc03f8d1c365b453))
+
 ## [4.1.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.5...v4.1.6) (2022-09-14)
 
 
