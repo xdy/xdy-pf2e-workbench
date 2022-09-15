@@ -72,10 +72,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     await preloadTemplates();
 
-    // Handlebars helpers
-    Handlebars.registerHelper("ifeq", function (v1, v2, options) {
-        return v1 === v2 ? options.fn(this) : options.inverse(this);
-    });
+    registerHandlebarsHelpers();
 
     // Hooks that always run
     Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
@@ -300,7 +297,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
-        Hooks.on("renderChatMessage", (message: ChatMessage<Actor>, html: JQuery) => {
+        Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
                 mangleChatMessage(message, html);
             }
@@ -476,7 +473,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "quickQuantities") ||
         game.settings.get(MODULENAME, "skillActions") !== "disabled"
     ) {
-        Hooks.on("renderActorSheet", (sheet: ActorSheet<Actor, Item>, $html: JQuery) => {
+        Hooks.on("renderActorSheet", (sheet: ActorSheet, $html: JQuery) => {
             if (game.settings.get(MODULENAME, "quickQuantities")) {
                 onQuantitiesHook(sheet, $html);
             }
@@ -683,3 +680,42 @@ Hooks.once("ready", async () => {
     //
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
+
+function registerHandlebarsHelpers() {
+    Handlebars.registerHelper("includes", function (array: any[], value: any, options: any) {
+        if (array.includes(value)) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    });
+    Handlebars.registerHelper("ifeq", function (v1, v2, options) {
+        if (v1 === v2) return options.fn(this);
+        else return options.inverse();
+    });
+    Handlebars.registerHelper("ifne", function (v1, v2, options) {
+        if (v1 !== v2) return options.fn(this);
+        else return options.inverse();
+    });
+
+    Handlebars.registerHelper("isNaN", function (context, options) {
+        if (isNaN(context) && !(typeof context === "string")) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    });
+
+    Handlebars.registerHelper("undefined", function () {
+        return undefined;
+    });
+
+    Handlebars.registerHelper("hasKey", function (context, key) {
+        for (const prop of context) {
+            if (Object.getOwnPropertyDescriptor(prop, key)) {
+                return true;
+            }
+        }
+        return false;
+    });
+}

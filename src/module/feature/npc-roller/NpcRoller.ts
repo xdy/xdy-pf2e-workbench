@@ -1,4 +1,4 @@
-import { MODULENAME } from "../../../module/xdy-pf2e-workbench";
+import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { SCALE_APP_DATA } from "../NPCScaleData";
 import { CanvasPF2e, TokenPF2e } from "@module/canvas";
 
@@ -13,61 +13,10 @@ async function registerHandlebarsTemplates() {
     Handlebars.registerPartial("rollAppCell", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/cell.html"}}`);
 }
 
-function registerHandlebarsHelpers() {
-    Handlebars.registerHelper("includes", function (array: any[], value: any, options: any) {
-        if (array.includes(value)) {
-            return options.fn(this);
-        } else {
-            return options.inverse(this);
-        }
-    });
-    Handlebars.registerHelper("ifeq", function (v1, v2, options) {
-        if (v1 === v2) return options.fn(this);
-        else return options.inverse(this);
-    });
-    Handlebars.registerHelper("ifne", function (v1, v2, options) {
-        if (v1 !== v2) return options.fn(this);
-        else return options.inverse(this);
-    });
-    Handlebars.registerHelper("ifgt", function (v1, v2, options) {
-        if (v1 > v2) return options.fn(this);
-        else return options.inverse(this);
-    });
-    Handlebars.registerHelper("iflt", function (v1, v2, options) {
-        if (v1 < v2) return options.fn(this);
-        else return options.inverse(this);
-    });
-
-    Handlebars.registerHelper("isNaN", function (context, options) {
-        if (isNaN(context) && !(typeof context === "string")) {
-            return options.fn(this);
-        } else {
-            return options.inverse(this);
-        }
-    });
-
-    Handlebars.registerHelper("undefined", function () {
-        return undefined;
-    });
-    Handlebars.registerHelper("commas", function (context) {
-        return context.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    });
-
-    Handlebars.registerHelper("hasKey", function (context, key) {
-        for (const prop of context) {
-            if (Object.getOwnPropertyDescriptor(prop, key)) {
-                return true;
-            }
-        }
-        return false;
-    });
-}
-
 export async function setupNpcRoller() {
     Hooks.on("renderJournalDirectory", enableNpcRollerButton);
 
     await registerHandlebarsTemplates();
-    registerHandlebarsHelpers();
 }
 
 function enableNpcRollerButton(_app, html: JQuery) {

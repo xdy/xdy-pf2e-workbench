@@ -3,7 +3,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
 import { CombatantPF2e } from "@module/encounter";
 import { ActorFlagsPF2e } from "@actor/data/base";
-import { ChatMessagePF2e } from "../../../../types/src/module/chat-message/index";
+import { ChatMessagePF2e } from "@module/chat-message";
 import { SpellPF2e } from "@item";
 import { ActorPF2e, CreaturePF2e } from "@actor";
 

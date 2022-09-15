@@ -26,7 +26,7 @@ export function chatCardDescriptionCollapse(html: JQuery) {
     });
 }
 
-export function damageCardExpand(message: ChatMessage<Actor>, html: JQuery) {
+export function damageCardExpand(message: ChatMessage, html: JQuery) {
     const expandDmg = <string>game.settings.get(MODULENAME, "autoExpandDamageRolls");
     if (expandDmg === "expandedAll") {
         html.find(".dice-tooltip").css("display", "block");

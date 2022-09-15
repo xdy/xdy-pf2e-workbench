@@ -16,7 +16,8 @@ async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolea
         if (actorFlat?.length > 0 || targetFlat?.length > 0) {
             const { token, actor } = message;
             let { item } = message;
-            if (!item && message.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/) && RegExp.$1 === "xxPF2ExUNARMEDxx") {
+            const match = message.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/);
+            if (!item && match && match[1] === "xxPF2ExUNARMEDxx") {
                 item = { type: "weapon", data: {} } as any;
             }
             if (token && item && actor) {
