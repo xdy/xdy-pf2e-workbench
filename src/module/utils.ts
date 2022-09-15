@@ -99,3 +99,11 @@ export function sluggify(str: string, { camel = null }: { camel?: "dromedary" | 
             throw Error("I don't think that's a real camel.");
     }
 }
+
+export function isActuallyDamageRoll(message) {
+    const b =
+        (["ancestry", "effect", "feat", "melee", "weapon"].includes(message.item?.type) &&
+            (!message.isRoll || message.isDamageRoll)) ||
+        (message.item?.type === "spell" && message.isRoll);
+    return b;
+}

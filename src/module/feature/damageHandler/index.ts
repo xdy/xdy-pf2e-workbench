@@ -1,4 +1,4 @@
-import { degreeOfSuccessWithRerollHandling, shouldIHandleThisMessage } from "../../utils";
+import { degreeOfSuccessWithRerollHandling, isActuallyDamageRoll, shouldIHandleThisMessage } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
@@ -7,31 +7,38 @@ import { SpellPF2e } from "@item";
 async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
     if (game.modules.get("pf2-flat-check")?.active) {
-        const { token, actor } = message;
-        let { item } = message;
-        if (!item && message.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/) && RegExp.$1 === "xxPF2ExUNARMEDxx") {
-            item = { type: "weapon", data: {} } as any;
-        }
-        if (token && item && actor) {
-            if (
-                // Reverse of the check in the pf2-flat-check module
-                (["ancestry", "effect", "feat", "melee", "weapon"].includes(item.type) &&
-                    message.isRoll &&
-                    !message.isDamageRoll) ||
-                (item.type === "spell" && !message.isRoll)
-            ) {
-                await new Promise((resolve) => setTimeout(resolve, 100)); // Sleep to wait for flat check message
-                const array = Array.from(game.messages);
-                const messageIndex = array.findIndex((msg) => msg.id === message.id);
-                if (messageIndex > -1) {
-                    rollDamage = !array
-                        .slice(messageIndex)
-                        .reverse()
-                        .find((msg) => {
-                            return msg.content.includes("dice-result flat-check-failure");
-                        });
+        const actorFlat =
+            message.actor?.itemTypes.condition.filter((x) => ["blinded", "dazzled"].includes(x.slug)) ?? [];
+        const targetFlat =
+            message.target?.actor.itemTypes.condition.filter((x) =>
+                ["concealed", "hidden", "invisible", "undetected"].includes(x.slug)
+            ) ?? [];
+        if (actorFlat?.length > 0 || targetFlat?.length > 0) {
+            const { token, actor } = message;
+            let { item } = message;
+            if (!item && message.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/) && RegExp.$1 === "xxPF2ExUNARMEDxx") {
+                item = { type: "weapon", data: {} } as any;
+            }
+            if (token && item && actor) {
+                if (
+                    // Reverse of the check in the pf2-flat-check module
+                    !isActuallyDamageRoll(message)
+                ) {
+                    await new Promise((resolve) => setTimeout(resolve, 100)); // Sleep to wait for flat check message
+                    const array = Array.from(game.messages);
+                    const messageIndex = array.findIndex((msg) => msg.id === message.id);
+                    if (messageIndex > -1) {
+                        rollDamage = !array
+                            .slice(messageIndex)
+                            .reverse()
+                            .find((msg) => {
+                                return msg.content.includes("dice-result flat-check-failure");
+                            });
+                    }
                 }
             }
+        } else {
+            return rollDamage;
         }
     }
     return rollDamage;

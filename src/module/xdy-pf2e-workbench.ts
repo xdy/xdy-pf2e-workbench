@@ -32,7 +32,7 @@ import {
     resetHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
-import { isFirstGM, nth, sluggify } from "./utils";
+import { isActuallyDamageRoll, isFirstGM, nth, sluggify } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
@@ -238,10 +238,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         }
 
                         const token: any = message.token ? message.token : message.actor?.token;
-                        await ChatMessage.create({
+                        ChatMessage.create({
                             content: content,
                             speaker: ChatMessage.getSpeaker({ token: token }),
-                        });
+                        }).then();
                     }
                 }
             }
@@ -268,7 +268,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 reminderTargeting(message);
             }
 
-            if (!message.isDamageRoll) {
+            if (!isActuallyDamageRoll(message)) {
                 if (
                     game.settings.get(MODULENAME, "autoRollDamageAllow") &&
                     (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
@@ -321,12 +321,12 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (
-                message.flags.pf2e.damageRoll &&
+                isActuallyDamageRoll(message) &&
                 (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
                     game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
                     game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest")
             ) {
-                damageCardExpand(html);
+                damageCardExpand(message, html);
             }
         });
     }
@@ -394,13 +394,11 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             if (game.settings.get(MODULENAME, "autoReduceStunned")) {
                 autoReduceStunned(combatant).then((reduction) => {
                     if (forWhom !== "none") {
-                        actionsReminder(combatant, reduction).then(() =>
-                            console.log("Workbench actionsReminderAllow complete")
-                        );
+                        actionsReminder(combatant, reduction);
                     }
                 });
             } else if (forWhom !== "none") {
-                actionsReminder(combatant, 0).then(() => console.log("Workbench actionsReminderAllow complete"));
+                actionsReminder(combatant, 0);
             }
         });
     }
@@ -541,10 +539,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                             ? `{Recall Knowledge} `
                                             : " ";
                                     }
-                                    await ChatMessage.create({
+                                    ChatMessage.create({
                                         content: TextEditor.enrichHTML(content, { async: false }),
                                         speaker: ChatMessage.getSpeaker({ token: token }),
-                                    });
+                                    }).then();
                                 });
                             }
                         });

@@ -1,4 +1,5 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { isActuallyDamageRoll } from "../../utils";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
     const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
@@ -25,19 +26,19 @@ export function chatCardDescriptionCollapse(html: JQuery) {
     });
 }
 
-export function damageCardExpand(html: JQuery) {
+export function damageCardExpand(message: ChatMessage<Actor>, html: JQuery) {
     const expandDmg = <string>game.settings.get(MODULENAME, "autoExpandDamageRolls");
     if (expandDmg === "expandedAll") {
         html.find(".dice-tooltip").css("display", "block");
     }
 
     if (expandDmg.startsWith("expandedNew")) {
-        const slice = game.messages.contents
-            .filter((m) => m.data.flags.pf2e.damageRoll)
-            .slice(-Math.min(expandDmg.endsWith("est") ? 1 : 3, game.messages.size));
-        const map = slice.map((m) => m.id);
-        const includes = map.includes(html.data("message-id"));
-        if (includes) {
+        if (
+            game.messages.contents
+                .filter(isActuallyDamageRoll)
+                .slice(-Math.min(expandDmg.endsWith("est") ? 1 : 3, game.messages.size))
+                .filter((m) => m.id === message.id).length > 0
+        ) {
             html.find(".dice-tooltip").css("display", "block");
         }
     }

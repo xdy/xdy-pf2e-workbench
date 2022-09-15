@@ -59,7 +59,7 @@ export async function increaseDyingOnZeroHP(
             await actor.createEmbeddedDocuments("Item", [effect]);
 
             if (rampagingFerocity) {
-                await ChatMessage.create({
+                ChatMessage.create({
                     flavor: game.i18n.format(
                         `${
                             actor.token?.name ?? actor.name
@@ -73,7 +73,7 @@ export async function increaseDyingOnZeroHP(
                         game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                             ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                             : [],
-                });
+                }).then();
             }
 
             await actor.update(update);
@@ -202,7 +202,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 },
             };
 
-            await ChatMessage.create({
+            ChatMessage.create({
                 flavor: game.i18n.format(
                     `${
                         actor.token?.name ?? actor.name
@@ -216,7 +216,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                         : [],
-            });
+            }).then();
 
             await actor.createEmbeddedDocuments("Item", [effect]);
         } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {

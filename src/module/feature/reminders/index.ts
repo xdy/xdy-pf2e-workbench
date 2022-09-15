@@ -54,7 +54,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     }
 }
 
-export async function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
+export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
     if (shouldIHandleThis(combatant.actor) && combatant && combatant.actor) {
         const showForPC =
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow")) &&
@@ -78,7 +78,7 @@ export async function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
                     ),
                 0
             )} actions remaining.`;
-            await ChatMessage.create(
+            ChatMessage.create(
                 {
                     flavor: actionsMessage,
                     whisper: !combatant.actor?.hasPlayerOwner
@@ -86,7 +86,7 @@ export async function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
                         : [],
                 },
                 {}
-            );
+            ).then();
         }
     }
 }
@@ -222,7 +222,7 @@ export async function reminderIWR(message: ChatMessagePF2e) {
                     );
                 }
                 if (output.length > 0) {
-                    await ChatMessage.create({
+                    ChatMessage.create({
                         content:
                             game.i18n.format(`${MODULENAME}.SETTINGS.reminderIWR.is`, {
                                 name: target?.actor?.token?.name || "",
@@ -231,7 +231,7 @@ export async function reminderIWR(message: ChatMessagePF2e) {
                             "<br><br>NOTE: Complex IWR such as All, Mental, Physical, etc, are not yet supported, check manually if you target might have such.",
                         whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
                         blind: true,
-                    });
+                    }).then();
                 }
             }
         }
