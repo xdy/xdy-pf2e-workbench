@@ -32,7 +32,7 @@ import {
     resetHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
-import { isActuallyDamageRoll, isFirstGM, nth, sluggify } from "./utils";
+import { isActuallyDamageRoll, isFirstGM, nth } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
@@ -227,7 +227,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                     dataSave: dataSave,
                                     dataDC: dataDC,
                                     traits: Object.values(origin.system.traits.value)
-                                        .map((trait) => sluggify(trait.valueOf()))
+                                        .map((trait) => game.pf2e.system.sluggify(trait.valueOf()))
                                         .sort()
                                         .join(","),
                                 }
