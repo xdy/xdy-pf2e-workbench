@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.7...v4.2.0) (2022-09-20)
+
+
+### Features
+
+* Added option to automatically apply and remove Clumsy based on whether the character is holding an oversized weapon. Improved automation of Orc Ferocity and Numb to Death. ([fb5ac74](https://github.com/xdy/xdy-pf2e-workbench/commit/fb5ac74399fa493fc197a1c380d8fd2bd6acb86d))
+
 ## [4.1.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.1.6...v4.1.7) (2022-09-15)
 
 
