@@ -2,7 +2,7 @@ import { CombatantPF2e } from "@module/encounter";
 import { isFirstGM, shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
+import { ItemPF2e, WeaponPF2e } from "@item";
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
     if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThis(combatant.actor))) {
@@ -60,14 +60,9 @@ export async function increaseDyingOnZeroHP(
 
             if (rampagingFerocity) {
                 ChatMessage.create({
-                    flavor: game.i18n.format(
-                        `${
-                            actor.token?.name ?? actor.name
-                        } has just used Orc Ferocity and can now use the free action: ${TextEditor.enrichHTML(
-                            `@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Rampaging Ferocity}`,
-                            { async: false }
-                        )}.`
-                    ),
+                    flavor: `${
+                        actor.token?.name ?? actor.name
+                    } has just used @Compendium[pf2e.feats-srd.PlhPpdwIV0rIAJ8K]{Orc Ferocity} and can now use the free action:@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Rampaging Ferocity}`,
                     speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                     whisper:
                         game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
@@ -203,14 +198,9 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
             };
 
             ChatMessage.create({
-                flavor: game.i18n.format(
-                    `${
-                        actor.token?.name ?? actor.name
-                    } has just triggered Numb To Death and can now heal ${TextEditor.enrichHTML(
-                        `[[/r ${actor.level}]] points of damage.`,
-                        { async: false }
-                    )}.`
-                ),
+                flavor: `${
+                    actor.token?.name ?? actor.name
+                } has just triggered @Compendium[pf2e.feats-srd.gfMP2aMs3YGONVeB]{Numb To Death}. Apply healing manually.`,
                 speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
@@ -260,16 +250,33 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
     }
 }
 
-export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
+export function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
     const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
     if (isFirstGM() && physicalTypes.includes(item.type) && item.actor) {
         if (item.actor.inventory.bulk.isEncumbered) {
             if (!item.actor.hasCondition("encumbered")) {
-                await item.actor.increaseCondition("encumbered");
+                item.actor.increaseCondition("encumbered").then();
             }
         } else {
             if (item.actor.hasCondition("encumbered")) {
-                await item.actor.decreaseCondition("encumbered", { forceRemove: true });
+                item.actor.decreaseCondition("encumbered", { forceRemove: true }).then();
+            }
+        }
+    }
+}
+
+export function applyClumsyIfWieldingLargerWeapon(item: ItemPF2e, _update: DocumentUpdateData) {
+    if (isFirstGM() && ["weapon"].includes(item.type) && item.actor) {
+        if (item.actor.system.traits.size.isSmallerThan((<WeaponPF2e>item).system.size)) {
+            const heldInHands = ((<WeaponPF2e>_update).system.equipped.handsHeld ?? 0) > 0;
+            if ((<WeaponPF2e>item).isEquipped && (heldInHands ?? true)) {
+                if (!item.actor.hasCondition("clumsy")) {
+                    item.actor.increaseCondition("clumsy", { min: 1, max: 1 }).then();
+                }
+            } else {
+                if (item.actor.getCondition("clumsy")?.value ?? 0 > 1) {
+                    item.actor.decreaseCondition("clumsy").then();
+                }
             }
         }
     }

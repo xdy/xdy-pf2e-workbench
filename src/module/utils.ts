@@ -17,6 +17,7 @@ export function nth(n) {
     return ["st", "nd", "rd"][((((n + 90) % 100) - 10) % 10) - 1] || "th";
 }
 
+// TODO Can this be reworked to not parse the message?
 export function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
     const flags = <ActorFlagsPF2e>message.flags.pf2e;
     let degreeOfSuccess = <string>flags.context?.outcome ?? "";

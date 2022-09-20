@@ -50,6 +50,15 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 },
                 onChange: () => debouncedReload(),
             },
+            applyClumsyIfWieldingLargerWeapon: {
+                name: `${MODULENAME}.SETTINGS.applyClumsyIfWieldingLargerWeapon.name`,
+                hint: `${MODULENAME}.SETTINGS.applyClumsyIfWieldingLargerWeapon.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
             applyEncumbranceBasedOnBulk: {
                 name: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.name`,
                 hint: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.hint`,

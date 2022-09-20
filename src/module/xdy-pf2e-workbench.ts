@@ -53,6 +53,7 @@ import { loadSkillActions, renderSheetSkillActions } from "./feature/skill-actio
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
 import {
+    applyClumsyIfWieldingLargerWeapon,
     applyEncumbranceBasedOnBulk,
     autoRemoveUnconsciousAtGreaterThanZeroHP,
     giveUnconsciousIfDyingRemovedAt0HP,
@@ -329,17 +330,23 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
 
     if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        Hooks.on("createItem", async (item: any, _options: any, _id: any) => {
+        Hooks.on("createItem", async (item: ItemPF2e, _options: {}, _id: any) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-                await applyEncumbranceBasedOnBulk(item);
+                applyEncumbranceBasedOnBulk(item);
             }
         });
     }
 
-    if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        Hooks.on("updateItem", async (item: any, _options: any, _id: any) => {
+    if (
+        game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
+        game.settings.get(MODULENAME, "applyClumsyIfWieldingLargerWeapon")
+    ) {
+        Hooks.on("updateItem", async (item: ItemPF2e, update: any) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-                await applyEncumbranceBasedOnBulk(item);
+                applyEncumbranceBasedOnBulk(item);
+            }
+            if (game.settings.get(MODULENAME, "applyClumsyIfWieldingLargerWeapon")) {
+                applyClumsyIfWieldingLargerWeapon(item, update);
             }
         });
     }
@@ -351,7 +358,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     ) {
         Hooks.on("deleteItem", async (item: ItemPF2e, _options: {}) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-                await applyEncumbranceBasedOnBulk(item);
+                applyEncumbranceBasedOnBulk(item);
             }
 
             if (

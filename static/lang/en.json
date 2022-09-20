@@ -108,6 +108,10 @@
         "RegenerationLabel": "Received Regeneration",
         "wasHealed": "{healing} healing was automatically applied."
       },
+      "applyClumsyIfWieldingLargerWeapon": {
+        "hint": "Automatically apply clumsy if wielding a weapon larger than the wielder.",
+        "name": "Automatically apply clumsy if wielding a weapon larger than the wielder."
+      },
       "applyEncumbranceBasedOnBulk": {
         "hint": "Automatically apply encumbrance based on bulk. (Uses system code which considers 5 bulk + 9 light to not exceed 5 bulk.)",
         "name": "Automatically apply encumbrance based on bulk."
