@@ -1,3 +1,10 @@
+## [4.2.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.2.1...v4.2.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* Make non-save spells autoroll damage. ([09f8d6b](https://github.com/xdy/xdy-pf2e-workbench/commit/09f8d6bbdeb3c7a6765c28b0806321ec17f6af01)), closes [#434](https://github.com/xdy/xdy-pf2e-workbench/issues/434)
+
 ## [4.2.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.2.0...v4.2.1) (2022-09-21)
 
 
