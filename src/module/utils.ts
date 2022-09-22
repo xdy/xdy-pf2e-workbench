@@ -56,9 +56,12 @@ export function randomID() {
 }
 
 export function isActuallyDamageRoll(message) {
+    const isPhysicalDamageroll =
+        ["ancestry", "effect", "feat", "melee", "weapon"].includes(message.item?.type) &&
+        (!message.isRoll || message.isDamageRoll);
+    const isSpellDamageRoll = message.item?.type === "spell" && message.isDamageRoll;
     return (
-        (["ancestry", "effect", "feat", "melee", "weapon"].includes(message.item?.type) &&
-            (!message.isRoll || message.isDamageRoll)) ||
-        (message.item?.type === "spell" && message.isRoll)
+        isPhysicalDamageroll || isSpellDamageRoll
+        // TODO (message.flags["xdy-pf2e-workbench"].autoRollDamage.actuallyCasting ?? true) && //TODO Add this (and setting the flag) to support not rolling damage when the chat button is clicked. For now, meh.
     );
 }
