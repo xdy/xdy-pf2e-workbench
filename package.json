@@ -71,7 +71,7 @@
     "pixi.js": "^6.5.3",
     "prettier": "^2.7.1",
     "raw-loader": "^4.0.2",
-    "sass": "^1.54.9",
+    "sass": "^1.55.0",
     "sass-loader": "^13.0.2",
     "semantic-release": "^19.0.5",
     "simple-progress-webpack-plugin": "^2.0.0",
