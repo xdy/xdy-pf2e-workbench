@@ -43,10 +43,10 @@ export function registerWorkbenchKeybindings() {
                                 (u) => u.id === (html.find("#dialogUserId").val() as string)
                             );
                             if (game.user?.isGM && targets && user) {
-                                targets.forEach((t) => {
+                                for (const t of targets) {
                                     t.setTarget(true, { user: user, releaseOthers: false });
                                     user.targets.add(t);
-                                });
+                                }
                             }
                         },
                     },
@@ -59,9 +59,9 @@ export function registerWorkbenchKeybindings() {
                             );
                             if (game.user?.isGM && user) {
                                 const targets = user.targets;
-                                targets.forEach((t) => {
+                                for (const t of targets) {
                                     t.setTarget(false, { user: user, releaseOthers: false });
-                                });
+                                }
                             }
                         },
                     },
