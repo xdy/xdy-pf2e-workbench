@@ -1,3 +1,10 @@
+## [4.2.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.2.4...v4.2.5) (2022-09-24)
+
+
+### Bug Fixes
+
+* Deprecate showing item names in rarity colour on actor sheets as that feature is in the syste from https://github.com/foundryvtt/pf2e/pull/3856 ([dff74b5](https://github.com/xdy/xdy-pf2e-workbench/commit/dff74b518f6c70e094320a75318a3e867fbada81))
+
 ## [4.2.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.2.3...v4.2.4) (2022-09-24)
 
 
