@@ -2,9 +2,11 @@
 
 <img title="Minimum foundry version" src="https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/module.json&label=Minimum%20Foundry%20version&query=minimumCoreVersion&style=flat-square&color=important" alt="Minimum foundry version"> <img  alt="Maximum foundry version" title="Maximum foundry version" src="https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/module.json&label=Maximum%20Foundry%20version&query=compatibleCoreVersion&style=flat-square&color=important"> 
 ![GitHub release](https://img.shields.io/github/release-date/xdy/xdy-pf2e-workbench) [![GitHub commits](https://img.shields.io/github/commits-since/xdy/xdy-pf2e-workbench/latest)](https://github.com/xdy/xdy-pf2e-workbench/commits/) ![the latest version zip](https://img.shields.io/github/downloads/xdy/xdy-pf2e-workbench/latest/xdy-pf2e-workbench.zip) ![Forge installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fxdy-pf2e-workbench) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Total alerts](https://img.shields.io/lgtm/alerts/g/xdy/xdy-pf2e-workbench.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xdy/xdy-pf2e-workbench/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/xdy/xdy-pf2e-workbench.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/xdy/xdy-pf2e-workbench/context:javascript)
-<a href="https://gitlocalize.com/repo/7104/fr?utm_source=badge"> <img src="https://gitlocalize.com/repo/7104/fr/badge.svg" alt="French translation percentage"/> </a>
-<a href="https://gitlocalize.com/repo/7104/sv?utm_source=badge"> <img src="https://gitlocalize.com/repo/7104/sv/badge.svg" alt="Swedish translation percentage"/> </a>
-<a href="https://weblate.foundryvtt-hub.com/engage/xdy-pf2e-workbench/"><img src="https://weblate.foundryvtt-hub.com/widgets/xdy-pf2e-workbench/-/glossary/svg-badge.svg" alt="Translation status" /></a>
+<a href="https://weblate.foundryvtt-hub.com/engage/xdy-pf2e-workbench/fr/"><img src="https://weblate.foundryvtt-hub.com/widgets/xdy-pf2e-workbench/fr/main/svg-badge.svg" alt="Translation status" /></a>
+<a href="https://weblate.foundryvtt-hub.com/engage/xdy-pf2e-workbench/pt_BR/"><img src="https://weblate.foundryvtt-hub.com/widgets/xdy-pf2e-workbench/pt_BR/main/svg-badge.svg" alt="Translation status" /></a>
+<a href="https://weblate.foundryvtt-hub.com/engage/xdy-pf2e-workbench/sv/">
+<img src="https://weblate.foundryvtt-hub.com/widgets/xdy-pf2e-workbench/sv/main/svg-badge.svg" alt="Translation status" />
+</a>
 
 This module is intended to hold a few features for the foundry vtt pf2e system that could well have been separate
 modules and may well be eaten by the system at some point.
