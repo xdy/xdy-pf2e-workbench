@@ -98,7 +98,7 @@
     "jquery": "^3.6.1",
     "ky": "^0.31.3",
     "ky-universal": "^0.10.1",
-    "luxon": "^3.0.3",
+    "luxon": "^3.0.4",
     "minisearch": "^5.0.0",
     "nouislider": "^15.6.1",
     "sortablejs": "^1.15.0"
