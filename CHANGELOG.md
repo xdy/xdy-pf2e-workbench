@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.2.6...v4.3.0) (2022-10-01)
+
+
+### Features
+
+* My attempt at ABP using Rule Elements (hosted on a 'Feat'). ([24a347f](https://github.com/xdy/xdy-pf2e-workbench/commit/24a347fb2cee1aee677d073725c5617a1851229f))
+
 ## [4.2.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.2.5...v4.2.6) (2022-09-28)
 
 
