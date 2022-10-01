@@ -85,7 +85,8 @@ New Keybinds in Configure Controls
 Assorted other features
 * The latest versions of all V10-compatible macros from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e are included in each Workbench release. They can be found in the asymonous-benefactor-macros compendium, with the express permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor. Attribution for the macros can normally be found inside each macro, and the source url for each macro is added at the end of each macro. Do not import the macros named like 'XDY DO_NOT_IMPORT', instead import the ones with proper names. Effects for the Lingering Heroics macro included with the above are now included in the asymonous-benefactor-effects compendium, import these to automatically get the proper duration effect sent to chat.
 * The xdy-pf2e-workbench-items compendium contains a few useful effects and items:
-  * Aura effects for Bane, Bless, Inspire Courage, Inspire Defense, Protective Ward that automatically apply the effect to tokens within the aura. (Technically these should not be auras, but, close enough...)
+  * Aura effects for Bless, Inspire Courage, Inspire Defense, Protective Ward that automatically apply the effect to tokens within the aura. (Technically these should not be auras, but, close enough...)
+  * Placeholder Aura effect for Bless. If/when the system supports auras that affect enemies this effect might automagically start automating.
   * Stance effects for Dread Marshal and Inpiring Marshal that applies the effect to tokens within the aura. (Will be removed when the Stances are implemented in the system.)
   * Effect for Dirge of Doom that you can give to targets to not let the automated frightened removal reduce frightened below 1.
   * Workbench ABP. My attempt at implementing the optional Automated Bonus Progression rules using Rule Elements hosted on a 'Bonus Feat'.
