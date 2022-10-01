@@ -88,6 +88,11 @@ Assorted other features
   * Aura effects for Bane, Bless, Inspire Courage, Inspire Defense, Protective Ward that automatically apply the effect to tokens within the aura. (Technically these should not be auras, but, close enough...)
   * Stance effects for Dread Marshal and Inpiring Marshal that applies the effect to tokens within the aura. (Will be removed when the Stances are implemented in the system.)
   * Effect for Dirge of Doom that you can give to targets to not let the automated frightened removal reduce frightened below 1.
+  * Workbench ABP. My attempt at implementing the optional Automated Bonus Progression rules using Rule Elements hosted on a 'Bonus Feat'.
+Not quite complete, but, useful enough. (My players decided against ABP so I won't use it in the near term, but figured it might be useful for someone else, so I'm putting it in the Workbench.)
+To use it, *do not* turn on ABP in Foundry, instead put this 'feat' in the Campaign Feats section on all characters you want to use these rules.)
+Only lightly tested, but you probably need to remove and readd this feat after you level up.
+Adjust the economy as much as you feel is needed. You don't need to remove runes from weapons and armor if you don't want to, these REs are implemented as Item Bonuses, so whichever of the rune and the character has the highest bonus is applied, *except* for Devastating Attacks which *does* stack with Striking Runes.
   * (Deprecated, use the module https://foundryvtt.com/packages/pf2-flat-check instead) An 'Equipment' named "Workbench Flat Check Notes". This 'Equipment' holds several useful Note RE:s that when appropriate add notes about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your character. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or dazzled. Self has Blind-Fight.
 
 Experimental features:
