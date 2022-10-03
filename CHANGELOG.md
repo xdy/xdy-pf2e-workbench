@@ -1,3 +1,10 @@
+## [4.3.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.2...v4.3.3) (2022-10-03)
+
+
+### Bug Fixes
+
+* The optional setting to automatically apply clumsy if wielding an oversized weapon now allow small characters to wield medium weapons with impunity. ([f9b88c0](https://github.com/xdy/xdy-pf2e-workbench/commit/f9b88c02631577793784cf165943fbaf5e467e90))
+
 ## [4.3.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.1...v4.3.2) (2022-10-02)
 
 
