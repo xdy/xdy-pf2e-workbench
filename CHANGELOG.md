@@ -1,3 +1,10 @@
+## [4.3.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.3...v4.3.4) (2022-10-03)
+
+
+### Bug Fixes
+
+* Handle edge cases around automation of dying and unconscious. ([7daa449](https://github.com/xdy/xdy-pf2e-workbench/commit/7daa449159be905fe579e06a0e75a219a0ef2e94))
+
 ## [4.3.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.2...v4.3.3) (2022-10-03)
 
 
