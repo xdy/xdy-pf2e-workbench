@@ -434,33 +434,46 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 moveOnZeroHP(actor, deepClone(update), hp).then(() => console.log("Workbench moveOnZeroHP complete"));
             }
 
-            if (
-                game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
-                game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none"
-            ) {
-                if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
-                    increaseDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
-                        console.log("Workbench increaseDyingOnZeroHP complete");
-                        if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-                            // Ugh.
-                            new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
-                                removeDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
-                                    console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete")
-                                );
+            if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
+                increaseDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
+                    console.log("Workbench increaseDyingOnZeroHP complete");
+                    if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
+                        // Ugh.
+                        new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
+                            removeDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
+                                console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
+                                if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                                    autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
+                                        console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
+                                    );
+                                }
                             });
+                        });
+                    } else {
+                        if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
+                                console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
+                            );
+                        }
+                    }
+                });
+            } else {
+                if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
+                    removeDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
+                        console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
+                        if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
+                                console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
+                            );
                         }
                     });
                 } else {
-                    removeDyingOnZeroHP(actor, deepClone(update), hp).then(() =>
-                        console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete")
-                    );
+                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
+                            console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
+                        );
+                    }
                 }
-            }
-
-            if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
-                    console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
-                );
             }
         });
     }
