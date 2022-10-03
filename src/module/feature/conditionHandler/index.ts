@@ -267,14 +267,16 @@ export function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
 
 export function applyClumsyIfWieldingLargerWeapon(item: ItemPF2e, _update: DocumentUpdateData) {
     if (isFirstGM() && ["weapon"].includes(item.type) && item.actor) {
-        if (item.actor.system.traits.size.isSmallerThan((<WeaponPF2e>item).system.size)) {
+        const actorSize = item.actor.system.traits.size;
+        const weaponSize = (<WeaponPF2e>item).system.size;
+        if (actorSize.isSmallerThan(weaponSize, { smallIsMedium: true })) {
             const heldInHands = ((<WeaponPF2e>_update).system.equipped.handsHeld ?? 0) > 0;
             if ((<WeaponPF2e>item).isEquipped && (heldInHands ?? true)) {
                 if (!item.actor.hasCondition("clumsy")) {
                     item.actor.increaseCondition("clumsy", { min: 1, max: 1 }).then();
                 }
             } else {
-                if (item.actor.getCondition("clumsy")?.value ?? 0 > 1) {
+                if ((item.actor.getCondition("clumsy")?.value ?? 0) === 1) {
                     item.actor.decreaseCondition("clumsy").then();
                 }
             }
