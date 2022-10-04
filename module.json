@@ -8,7 +8,7 @@
     "verified": "10.286",
     "maximum": "10"
   },
-  "relationship": {
+  "relationships": {
     "systems": [
       {
         "id": "pf2e",
