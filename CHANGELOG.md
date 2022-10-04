@@ -1,3 +1,10 @@
+## [4.3.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.4...v4.3.5) (2022-10-04)
+
+
+### Bug Fixes
+
+* Fix spelling error in module.json ([fda7f4b](https://github.com/xdy/xdy-pf2e-workbench/commit/fda7f4beb38ae0166aa1fb1291c9b7bcdbc1ab42))
+
 ## [4.3.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.3...v4.3.4) (2022-10-03)
 
 
