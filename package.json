@@ -72,7 +72,7 @@
     "prettier": "^2.7.1",
     "raw-loader": "^4.0.2",
     "sass": "^1.55.0",
-    "sass-loader": "^13.0.2",
+    "sass-loader": "^13.1.0",
     "semantic-release": "^19.0.5",
     "simple-progress-webpack-plugin": "^2.0.0",
     "socket.io": "^4.5.2",
