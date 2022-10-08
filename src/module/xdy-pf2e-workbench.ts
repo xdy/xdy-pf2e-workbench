@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification,
+    tokenCreateMystification
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -30,7 +30,7 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer,
+    startTimer
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM, nth } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting,
+    reminderTargeting
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -60,7 +60,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP,
+    removeDyingOnZeroHP
 } from "./feature/conditionHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
@@ -311,20 +311,21 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 persistentDamage(message).then();
             }
 
-            if (
-                game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
-                game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
-            ) {
-                chatCardDescriptionCollapse(html);
-            }
-
-            if (
-                isActuallyDamageRoll(message) &&
-                (game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
+            if (isActuallyDamageRoll(message)) {
+                if (
+                    game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
                     game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
-                    game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest")
-            ) {
-                damageCardExpand(message, html);
+                    game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest"
+                ) {
+                    damageCardExpand(message, html);
+                }
+            } else {
+                if (
+                    game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+                    game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
+                ) {
+                    chatCardDescriptionCollapse(html);
+                }
             }
         });
     }
