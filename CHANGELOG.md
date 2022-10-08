@@ -1,3 +1,10 @@
+## [4.3.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.5...v4.3.6) (2022-10-08)
+
+
+### Bug Fixes
+
+* The option to collapse item chat cards no longer affects damage cards. ([25d94e2](https://github.com/xdy/xdy-pf2e-workbench/commit/25d94e24b9d85bb51c0c5c34bea059b2b1c0913e))
+
 ## [4.3.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.4...v4.3.5) (2022-10-04)
 
 
