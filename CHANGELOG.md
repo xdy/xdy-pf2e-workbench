@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.6...v4.4.0) (2022-10-08)
+
+
+### Features
+
+* Localization support added in Skill actions and a couple of reminder messages. ([9a6551e](https://github.com/xdy/xdy-pf2e-workbench/commit/9a6551e53d11fc10bcbcc28a4d404a460ea5e189))
+
 ## [4.3.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.5...v4.3.6) (2022-10-08)
 
 
