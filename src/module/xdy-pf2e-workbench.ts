@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification
+    tokenCreateMystification,
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -30,7 +30,7 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer
+    startTimer,
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM, nth } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting
+    reminderTargeting,
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -49,7 +49,11 @@ import { setupNpcRoller } from "./feature/npc-roller/NpcRoller";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { UserPF2e } from "@module/user";
-import { loadSkillActions, renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions";
+import {
+    loadSkillActions,
+    loadSkillActionsBabele,
+    renderSheetSkillActions,
+} from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
 import {
@@ -60,7 +64,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP
+    removeDyingOnZeroHP,
 } from "./feature/conditionHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
@@ -85,6 +89,13 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     });
 
     // Hooks that only run if a setting that needs it has been enabled
+    if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+        Hooks.once("babele.ready", async () => {
+            if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+                loadSkillActionsBabele();
+            }
+        });
+    }
 
     if (game.settings.get(MODULENAME, "castPrivateSpell")) {
         Hooks.on(
@@ -207,7 +218,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 {
                                     skill: skill,
                                     dcRK: dcRK,
-                                    rk: "&#123;Recall Knowledge	&#125;", // Grr
+                                    rk: `&#123;${game.i18n.localize("PF2E.RecallKnowledge.Label")}\t&#125;`, // Grr
                                 }
                             );
                         } else {
@@ -273,15 +284,15 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
                         game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"))
                 ) {
-                    autoRollDamage(message).then(() => console.log("Workbench autoRollDamage complete"));
+                    autoRollDamage(message).then();
                 }
 
                 if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
-                    reminderBreathWeapon(message).then(() => console.log("Workbench reminderBreathWeapon complete"));
+                    reminderBreathWeapon(message).then();
                 }
             } else {
                 if (game.settings.get(MODULENAME, "reminderIWR")) {
-                    reminderIWR(message).then(() => console.log("Workbench reminderIWR complete"));
+                    reminderIWR(message).then();
                 }
             }
         });
@@ -432,7 +443,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
             const hp = actor.system.attributes.hp?.value || 0;
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
-                moveOnZeroHP(actor, deepClone(update), hp).then(() => console.log("Workbench moveOnZeroHP complete"));
+                moveOnZeroHP(actor, deepClone(update), hp).then();
             }
 
             if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
@@ -444,35 +455,26 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             removeDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
                                 console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
                                 if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                                    autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
-                                        console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
-                                    );
+                                    autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then();
                                 }
                             });
                         });
                     } else {
                         if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
-                                console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
-                            );
+                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then();
                         }
                     }
                 });
             } else {
                 if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
                     removeDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
-                        console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
                         if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
-                                console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
-                            );
+                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then();
                         }
                     });
                 } else {
                     if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then(() =>
-                            console.log("Workbench autoRemoveUnconsciousAtGreaterThanZeroHP complete")
-                        );
+                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then();
                     }
                 }
             }
@@ -482,7 +484,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     if (game.settings.get(MODULENAME, "npcMystifier")) {
         Hooks.on("createToken", async (token: any) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
-                tokenCreateMystification(token).then(() => console.log("Workbench tokenCreateMystification complete"));
+                tokenCreateMystification(token).then();
             }
         });
     }
@@ -659,9 +661,11 @@ Hooks.once("ready", async () => {
     }
 
     if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
-        ui.notifications.error(
-            "The module pf2e-sheet-skill-actions is no longer maintained, all it's functions are part of the Workbench, please turn it off."
-        );
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.SETTINGS.modules.pf2e-sheet-skill-actions`));
+    }
+
+    if (game.modules.get("pf2e-toolbox")?.active) {
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.SETTINGS.modules.pf2e-toolbox`));
     }
 
     // Make some functions available for macros
@@ -680,7 +684,6 @@ Hooks.once("ready", async () => {
             remainingMinutes = calcRemainingMinutes(true);
             startTimer(remainingMinutes).then(() => {
                 createRemainingTimeMessage(remainingMinutes);
-                console.log("Workbench tokenCreateMystification complete");
             });
         }
     }
@@ -689,16 +692,6 @@ Hooks.once("ready", async () => {
         loadSkillActions();
     }
 
-    // if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
-    //     Hooks.once("babele.ready", async () => {
-    //         if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
-    //             // Reload actions to have translated actions
-    //             await ActionsIndex.instance.loadCompendium("pf2e.feats-srd");
-    //             await ActionsIndex.instance.loadCompendium("pf2e.actionspf2e");
-    //         }
-    //     });
-    // }
-    //
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
 

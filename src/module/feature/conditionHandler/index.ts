@@ -9,7 +9,7 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
         const actors = [combatant.actor];
         actors.push(...getMinionAndEidolons(combatant.actor));
         for (const actor of actors) {
-            const minimumFrightened = <number>actor?.getFlag(MODULENAME, "excondition.frightened.min") ?? 0;
+            const minimumFrightened = <number>actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
             const currentFrightened = actor?.getCondition("frightened")?.value ?? 0;
             if (currentFrightened - 1 >= minimumFrightened) {
                 await actor.decreaseCondition("frightened");
@@ -31,6 +31,7 @@ export async function increaseDyingOnZeroHP(
         const rampagingFerocity = actor.items.find((feat) => feat.slug === "rampaging-ferocity");
         const deliberateDeath = actor.items.find((feat) => feat.slug === "deliberate-death");
         const deliberateDeathUsed: any = actor.items.find((effect) => effect.slug === "deliberate-death-used");
+        const name = `${actor.token?.name ?? actor.name}`;
 
         if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
             setProperty(update, "system.attributes.hp.value", 1);
@@ -60,9 +61,9 @@ export async function increaseDyingOnZeroHP(
 
             if (rampagingFerocity) {
                 ChatMessage.create({
-                    flavor: `${
-                        actor.token?.name ?? actor.name
-                    } has just used @Compendium[pf2e.feats-srd.PlhPpdwIV0rIAJ8K]{Orc Ferocity} and can now use the free action:@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Rampaging Ferocity}`,
+                    flavor: game.i18n.format(`$MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
+                        name: name,
+                    }),
                     speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                     whisper:
                         game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
@@ -96,11 +97,9 @@ export async function increaseDyingOnZeroHP(
             await actor.createEmbeddedDocuments("Item", [effect]);
 
             await ChatMessage.create({
-                flavor: game.i18n.format(
-                    `${
-                        actor.token?.name ?? actor.name
-                    } can <b>before gaining Dying</b> as a result of another creature's attack or ability, if that creature is within melee reach, make a melee Strike against the triggering creature.<br>Remove 'Deliberate Death Used' effect if it actually can't be used.`
-                ),
+                flaver: game.i18n.format(`$MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
+                    name: name,
+                }),
                 speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
@@ -177,6 +176,8 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
 
     const numbToDeath = actor.items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
     const numbToDeathUsed: any = actor.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
+    const name = `${actor.token?.name ?? actor.name}`;
+
     if (item.slug === "dying" && isFirstGM()) {
         if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
             const effect: any = {
@@ -198,9 +199,9 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
             };
 
             ChatMessage.create({
-                flavor: `${
-                    actor.token?.name ?? actor.name
-                } has just triggered @Compendium[pf2e.feats-srd.gfMP2aMs3YGONVeB]{Numb To Death}. Apply healing manually.`,
+                flavor: game.i18n.format(`$MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
+                    name: name,
+                }),
                 speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
                     game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner

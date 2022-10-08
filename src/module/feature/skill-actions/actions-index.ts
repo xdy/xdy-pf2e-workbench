@@ -25,10 +25,8 @@ export class ActionsIndex extends Map<string, ItemPF2e> {
 
         const actions = <ActionItemPF2e[]>await pack.getDocuments({ _id: { $in: ACTION_IDS } });
         for (const action of actions) {
-            // It's weird that this is needed, but...
-            const slug = action.slug ?? game.pf2e.system.sluggify(action.name);
-            if (slug) {
-                this.set(slug, action);
+            if (action.slug) {
+                this.set(action.slug, action);
             }
         }
     }

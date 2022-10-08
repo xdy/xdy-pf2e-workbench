@@ -57,14 +57,14 @@ export class SkillAction {
     }
 
     get label() {
-        return this.data.translation ? game.i18n.localize(this.data.translation) : this.pf2eItem().name;
+        return this.pf2eItem.name;
     }
 
     get visible() {
         return this.actorData?.visible ?? true;
     }
 
-    private pf2eItem(): ItemPF2e {
+    get pf2eItem(): ItemPF2e {
         return <ItemPF2e>ActionsIndex.instance.get(this.data.slug);
     }
 
@@ -77,12 +77,13 @@ export class SkillAction {
     }
 
     hasTrait(trait: string) {
-        const traits = this.pf2eItem().system.traits;
+        const traits = (<ItemPF2e>(<unknown>this.pf2eItem)).system.traits;
         return traits ? (traits["value"] ? (<string[]>traits["value"]).includes(trait) : undefined) : false;
     }
 
     getData({ allVisible }: { allVisible: boolean }) {
-        const enabled = this.variants.length > 0 && (this.pf2eItem().type !== "feat" || this.actorHasItem());
+        const enabled =
+            this.variants.length > 0 && ((<ItemPF2e>(<unknown>this.pf2eItem)).type !== "feat" || this.actorHasItem());
 
         return {
             ...this.data,
@@ -140,9 +141,9 @@ export class SkillAction {
     }
 
     async toChat(assurance?: number) {
-        const constructor = this.pf2eItem().constructor;
+        const constructor = this.pf2eItem.constructor;
         // @ts-ignore
-        const ownedItem = new constructor(this.pf2eItem().toJSON(), { parent: this.actor });
+        const ownedItem = new constructor(this.pf2eItem.toJSON(), { parent: this.actor });
         if (assurance) {
             ownedItem.system.description.value =
                 ownedItem.system.description.value + `<hr /> <p><strong>Assurance</strong> : ${assurance}</p>`;
@@ -157,7 +158,10 @@ export class SkillAction {
             $summary.slideUp(200, () => $summary.remove());
         } else {
             const $summary = $('<div class="item-summary">');
-            const chatData = await this.pf2eItem().getChatData({ secrets: this.actor.isOwner }, $li.data());
+            const chatData = await (<ItemPF2e>(<unknown>this.pf2eItem)).getChatData(
+                { secrets: this.actor.isOwner },
+                $li.data()
+            );
             // @ts-ignore
             this.renderItemSummary($summary, this.pf2eItem, chatData);
             $li.children(".item-name, .item-controls, .action-header").last().after($summary);

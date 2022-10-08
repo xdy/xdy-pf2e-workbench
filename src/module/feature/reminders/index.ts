@@ -228,7 +228,7 @@ export async function reminderIWR(message: ChatMessagePF2e) {
                                 name: target?.actor?.token?.name || "",
                             }) +
                             output +
-                            "<br><br>NOTE: Complex IWR such as All, Mental, Physical, etc, are not yet supported, check manually if you target might have such.",
+                            game.i18n.localize(`$MODULENAME}.SETTINGS.reminderIWR.notComplex`),
                         whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
                         blind: true,
                     }).then();

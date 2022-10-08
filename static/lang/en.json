@@ -52,6 +52,10 @@
       "numbToDeathUsed": "Numb To Death Used",
       "deliberateDeathUsed": "Deliberate Death Used"
     },
+    "modules": {
+      "pf2e-sheet-skill-actions": "The module pf2e-sheet-skill-actions is no longer maintained, all it's functions are part of the Workbench, please turn it off.",
+      "pf2e-toolbox": "The module pf2e-toolbox is no longer maintained, most of it's functions are part of the Workbench, please turn it off."
+    },
     "SETTINGS": {
       "mystificationSettings": {
         "hint": "Enable and configure NPC mystification",
@@ -163,7 +167,9 @@
         "addOne": "Add one",
         "addWoundedLevel": "Add 1 + Wounded level, for all",
         "addOneForCharacters": "Add one, for characters+familiars",
-        "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters+familiars"
+        "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters+familiars",
+        "orcFerocityMessage": "{name} has just used @Compendium[pf2e.feats-srd.PlhPpdwIV0rIAJ8K]{Orc Ferocity} and can now use the free action:@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Rampaging Ferocity}",
+        "deliberateDeathMessage": "{name} can <b>before gaining Dying</b> as a result of another creature's attack or ability, if that creature is within melee reach, make a melee Strike against the triggering creature.<br>Remove 'Deliberate Death Used' effect if it actually can't be used."
       },
       "giveUnconsciousIfDyingRemovedAt0HP": {
         "hint": "Setting to automatically give unconscious if Dying removed while at 0 HP.",
@@ -183,7 +189,8 @@
       },
       "giveWoundedWhenDyingRemoved": {
         "hint": "Setting to automatically give Wounded condition when Dying condition is removed.",
-        "name": "Automatically give Wounded when Dying is removed."
+        "name": "Automatically give Wounded when Dying is removed.",
+        "numbToDeathMessage": "{name} has just triggered @Compendium[pf2e.feats-srd.gfMP2aMs3YGONVeB]{Numb To Death}. Apply healing manually."
       },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn for characters, npcs and familiars.",
@@ -371,7 +378,8 @@
         "weakTo": " <strong>Weak</strong> to ",
         "resistantTo": " <strong>Resistant</strong> to ",
         "immuneTo": " <strong>Immune</strong> to ",
-        "is": "{name} is"
+        "is": "{name} is",
+        "notComplex": "<br><br>NOTE: Complex IWR such as All, Mental, Physical, etc, are not yet supported, check manually if you target might have such."
       },
       "reminderTargeting": {
         "hint": "Check to show reminder for targeting in combat.",

@@ -15,6 +15,11 @@ export async function loadSkillActions() {
     await ActionsIndex.instance.loadCompendium("pf2e.actionspf2e");
 }
 
+export async function loadSkillActionsBabele() {
+    await ActionsIndex.instance.loadCompendium("pf2e.feats-srd");
+    await ActionsIndex.instance.loadCompendium("pf2e.actionspf2e");
+}
+
 function renderActionsList(skillActions: SkillActionCollection, actor: Actor) {
     const skillData = skillActions
         .map((action) => action.getData({ allVisible: <boolean>Flag.get(actor, "allVisible") }))
