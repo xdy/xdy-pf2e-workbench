@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.4.0...v4.5.0) (2022-10-09)
+
+
+### Features
+
+* Add optional subsetting to always have npcs cast private spells if enabled. ([7532929](https://github.com/xdy/xdy-pf2e-workbench/commit/7532929a528a2eb7c807879c96042d4718542e34)), closes [#438](https://github.com/xdy/xdy-pf2e-workbench/issues/438)
+
 # [4.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.3.6...v4.4.0) (2022-10-08)
 
 
