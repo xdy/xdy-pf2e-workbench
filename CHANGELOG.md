@@ -1,3 +1,10 @@
+## [4.5.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.0...v4.5.1) (2022-10-09)
+
+
+### Bug Fixes
+
+* What do you mean I need to test *again* after doing only a *tiny* change that can't possibly affect anything? Bah. :) ([26e32d1](https://github.com/xdy/xdy-pf2e-workbench/commit/26e32d12321f6d723ed7f2c677d0797dd5e60e64))
+
 # [4.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.4.0...v4.5.0) (2022-10-09)
 
 
