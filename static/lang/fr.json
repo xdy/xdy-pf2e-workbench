@@ -291,7 +291,9 @@
         "no": "Non",
         "addOne": "Ajouter 1",
         "addWoundedLevel": "Ajouter 1 + niveau Blessé, pour tous",
-        "addOneForCharacters": "Ajouter 1, pour les personnages + familiers"
+        "addOneForCharacters": "Ajouter 1, pour les personnages + familiers",
+        "orcFerocityMessage": "{name} vient juste d'utiliser @Compendium[pf2e.feats-srd.PlhPpdwIV0rIAJ8K]{Férocité orque} et peut désormais utiliser l'action gratuite :@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Férocité déchainée}",
+        "deliberateDeathMessage": "{name} peut <b>avant d'être mourant en jeu</b> du fait d'une attaque ou d'une capacité d'une autre créature, si cette créature est à portée d'attaque au corps-à-corps, porter une Frappe au corps-à-corps contre la créature déclencheuse.<br>Supprimer l'effet 'Mort délivéré utilisée' si il ne peut pas être actuellement utilisé."
       },
       "autoRemoveDyingAtGreaterThanZeroHP": {
         "name": "Automatiquement retirer Mourant lorsque soigné au-dessus de 0 PV.",
@@ -431,6 +433,10 @@
       "numbToDeathUsed": "Insensible à la mort utilisé",
       "deliberateDeathUsed": "Mort délibérée utilisé"
     },
-    "spellCardNotFound": "La carte de sort pourrait ne pas être trouver. Lancer {spell} au niveau minimal pour ce sort."
+    "spellCardNotFound": "La carte de sort pourrait ne pas être trouver. Lancer {spell} au niveau minimal pour ce sort.",
+    "modules": {
+      "pf2e-sheet-skill-actions": "Le module pf2e-sheet-skill-actions n'est plus maintenu. Toutes ses fonctions sont intégrées au module Workbench. Svp, éteignez-le.",
+      "pf2e-toolbox": "Le module pf2e toolbox n'est plus maintenu. La plupart de ses fonctions sont intégrées dans le module workbench. SVP, éteignez -le."
+    }
   }
 }
