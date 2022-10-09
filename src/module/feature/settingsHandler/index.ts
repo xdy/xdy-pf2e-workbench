@@ -83,6 +83,13 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                 html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
                 html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
             }
+
+            if (settingName !== `castPrivateSpell` && settingName.startsWith(`castPrivateSpell`)) {
+                const valueFunction = !game.settings.get(MODULENAME, "castPrivateSpell");
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+            }
         }
     }
 }

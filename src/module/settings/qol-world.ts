@@ -61,6 +61,15 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
+            castPrivateSpellAlwaysForOpposition: {
+                name: `${MODULENAME}.SETTINGS.castPrivateSpellAlwaysForOpposition.name`,
+                hint: `${MODULENAME}.SETTINGS.castPrivateSpellAlwaysForNPC.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
             castPrivateSpellWithPublicMessage: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.name`,
                 hint: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.hint`,

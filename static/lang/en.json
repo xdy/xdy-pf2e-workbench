@@ -417,6 +417,10 @@
         "hint": "Check to enabling ctrl-clicking Cast on a spell casts it, but the message is whispered to caster and GM.",
         "name": "Ctrl-click Cast to cast in private."
       },
+      "castPrivateSpellAlwaysForNPC": {
+        "hint": "Check to always cast privately for npcs.",
+        "name": "Check to always cast privately for npcs."
+      },
       "castPrivateSpellWithPublicMessage": {
         "hint": "If casting privately, this setting also posts a public message that a spell has been cast UNLESS you hold SHIFT as well as CTRL while casting.",
         "name": "Post public message that a spell has been cast.",
