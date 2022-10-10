@@ -1,3 +1,10 @@
+## [4.5.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.1...v4.5.2) (2022-10-10)
+
+
+### Bug Fixes
+
+* Fix for system workaround borking wornbench macros. ([24147f2](https://github.com/xdy/xdy-pf2e-workbench/commit/24147f27d80f7c98c525694f4a9ad76f9f51ef75))
+
 ## [4.5.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.0...v4.5.1) (2022-10-09)
 
 
