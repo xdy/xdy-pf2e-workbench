@@ -16,9 +16,10 @@ function copyFolder(source: string, target: string) {
             // eslint-disable-next-line
             fs.appendFileSync(
                 targetPath,
-                `\n//# source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(
+                `\n/* # source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(
                     path.dirname(sourcePath)
-                )}/${file}" - Fetched on ${new Date().toISOString()}`
+                )}/${file}" - Fetched on ${new Date().toISOString()} */
+                `
             );
         });
 }
