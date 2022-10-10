@@ -89,7 +89,8 @@ async function _executeMacroByName(
 }
 _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
 
-//This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274; and modified by Mark Pearce https://discord.com/channels/880968862240239708/880969174661353484/972962446098702376`;
+/* This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274; and modified by Mark Pearce https://discord.com/channels/880968862240239708/880969174661353484/972962446098702376 */
+`;
             const contents = fs.readFileSync(filePath, { encoding: "utf8" });
             const map = new Map<string, string>();
             map.set("2-Action Harm", "systems/pf2e/icons/spells/harm.webp");
