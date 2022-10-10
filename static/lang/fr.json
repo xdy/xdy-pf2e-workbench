@@ -308,7 +308,8 @@
       },
       "giveWoundedWhenDyingRemoved": {
         "name": "Donner automatiquement Blessé lorsque Mourant est retiré.",
-        "hint": "Réglage pour donner l'état Blessé automatiquement lorsque Mourant est retiré."
+        "hint": "Réglage pour donner l'état Blessé automatiquement lorsque Mourant est retiré.",
+        "numbToDeathMessage": "{name} vient de déclencher @Compendium[pf2e.feats-srd.gfMP2aMs3YGONVeB]{Insensible à la mort}. Appliquer manuellement les soins."
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
         "name": "Minutes avant l'ouverture du Gestionnaire de Point d'Héroïsme.",
@@ -338,7 +339,8 @@
         "weakTo": " <strong>Faiblesse</strong> : ",
         "resistantTo": " <strong>Résistance</strong> : ",
         "immuneTo": " <strong>Immunité</strong> : ",
-        "is": "{name} est"
+        "is": "{name} est",
+        "notComplex": "<br><br>NOTE : Les Immunités Faiblesses Résistances complexes (comme Tous, mental, physique, etc...) ne sont pas encore prises en compte. Vérifiez manuellement si vos cibles pourraient en avoir de telles."
       },
       "quickQuantities": {
         "name": "Utiliser Shict+clic sur les quantités d'objet pour en ajouter 5, Ctrl+clic pour en ajouter 10.",
@@ -425,6 +427,10 @@
       "playerItemsRarityColour": {
         "hint": "(Déprécié) Réglage du client pour afficher les noms des objets de la couleur de la rareté sur les feuilles d'acteur.",
         "name": "(Déprécié) Montrer le nom des objets dans la couleur de la rareté sur les feuilles d'acteur."
+      },
+      "castPrivateSpellAlwaysForNPC": {
+        "name": "Cochez pour toujours lancer de manière privée pour les PNJ.",
+        "hint": "Cochez pour toujours lancer de manière privée pour les PNJ."
       }
     },
     "effects": {
