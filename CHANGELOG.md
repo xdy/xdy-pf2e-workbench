@@ -1,3 +1,10 @@
+## [4.5.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.3...v4.5.4) (2022-10-11)
+
+
+### Bug Fixes
+
+* Broken error messages for reminderIWR. Adds option to not show 'complex IWR types do not work' warning. Wait a bit longer for pf2-flat-check to complete. ([8dd3fd7](https://github.com/xdy/xdy-pf2e-workbench/commit/8dd3fd70d9c6959ace5608ff308cfc8aae784ce3)), closes [#471](https://github.com/xdy/xdy-pf2e-workbench/issues/471) [#472](https://github.com/xdy/xdy-pf2e-workbench/issues/472)
+
 ## [4.5.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.2...v4.5.3) (2022-10-10)
 
 
