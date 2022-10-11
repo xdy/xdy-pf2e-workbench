@@ -381,6 +381,10 @@
         "is": "{name} is",
         "notComplex": "<br><br>NOTE: Complex IWR such as All, Mental, Physical, etc, are not yet supported, check manually if you target might have such."
       },
+      "reminderIWRCaveat": {
+        "hint": "Check to show warning about complex IWR not being supported in each message.",
+        "name": "Check to show warning about complex IWR not being supported in each message."
+      },
       "reminderTargeting": {
         "hint": "Check to show reminder for targeting in combat.",
         "name": "Targeting reminder",

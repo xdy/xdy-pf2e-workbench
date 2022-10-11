@@ -34,6 +34,15 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
+            reminderIWRCaveat: {
+                name: `${MODULENAME}.SETTINGS.reminderIWRCaveat.name`,
+                hint: `${MODULENAME}.SETTINGS.reminderIWRCaveat.hint`,
+                scope: "world",
+                config: true,
+                default: true,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
             reminderTargeting: {
                 name: `${MODULENAME}.SETTINGS.reminderTargeting.name`,
                 hint: `${MODULENAME}.SETTINGS.reminderTargeting.hint`,

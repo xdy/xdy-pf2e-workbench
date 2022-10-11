@@ -25,7 +25,7 @@ async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolea
                     // Reverse of the check in the pf2-flat-check module
                     !isActuallyDamageRoll(message)
                 ) {
-                    await new Promise((resolve) => setTimeout(resolve, 100)); // Sleep to wait for flat check message
+                    await new Promise((resolve) => setTimeout(resolve, 150)); // Sleep to wait for flat check message
                     const array = Array.from(game.messages);
                     const messageIndex = array.findIndex((msg) => msg.id === message.id);
                     if (messageIndex > -1) {
@@ -69,6 +69,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
             const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
+            // TODO Add something like this to pf2-flat-check, i.e. it shouldn't check if not an attack spell.
             const rollForNonAttackSpell =
                 origin !== null &&
                 autoRollDamageForSpellNotAnAttack &&

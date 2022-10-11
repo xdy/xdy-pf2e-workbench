@@ -222,13 +222,17 @@ export async function reminderIWR(message: ChatMessagePF2e) {
                     );
                 }
                 if (output.length > 0) {
+                    let caveat = "";
+                    if (game.settings.get(MODULENAME, "reminderIWRCaveat")) {
+                        caveat = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderIWR.notComplex`);
+                    }
                     ChatMessage.create({
                         content:
                             game.i18n.format(`${MODULENAME}.SETTINGS.reminderIWR.is`, {
                                 name: target?.actor?.token?.name || "",
                             }) +
                             output +
-                            game.i18n.localize(`$MODULENAME}.SETTINGS.reminderIWR.notComplex`),
+                            caveat,
                         whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
                         blind: true,
                     }).then();
