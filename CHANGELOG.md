@@ -1,3 +1,10 @@
+## [4.5.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.4...v4.5.5) (2022-10-12)
+
+
+### Bug Fixes
+
+* Do not autoroll damage/healing for spells with variable casting time (the player probably has a choice to make.) ([9a17cdc](https://github.com/xdy/xdy-pf2e-workbench/commit/9a17cdc436a450e716001bd29221b3951c57833b))
+
 ## [4.5.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.3...v4.5.4) (2022-10-11)
 
 
