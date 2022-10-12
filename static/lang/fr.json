@@ -335,12 +335,12 @@
       },
       "reminderIWR": {
         "hint": "Activer pour montrer un rappel des résistances/faiblesses/immunités lorsque les dégâts sont appliqués. Ne prend en compte actuellement que les types de dégâts simples (ex : contondant ou feu, pas ceux comme 'tous' ou 'Physique')",
-        "name": "Rappel Faiblesse/Immunité/Résistance",
+        "name": "Rappel FIR",
         "weakTo": " <strong>Faiblesse</strong> : ",
         "resistantTo": " <strong>Résistance</strong> : ",
         "immuneTo": " <strong>Immunité</strong> : ",
         "is": "{name} est",
-        "notComplex": "<br><br>NOTE : Les Immunités Faiblesses Résistances complexes (comme Tous, mental, physique, etc...) ne sont pas encore prises en compte. Vérifiez manuellement si vos cibles pourraient en avoir de telles."
+        "notComplex": "<br><br>NOTE : Les Immunités/Faiblesses/Résistances complexes (comme Tous, mental, physique, etc...) ne sont pas encore prises en compte. Vérifiez manuellement si vos cibles pourraient en avoir de telles."
       },
       "quickQuantities": {
         "name": "Utiliser Shict+clic sur les quantités d'objet pour en ajouter 5, Ctrl+clic pour en ajouter 10.",
@@ -399,9 +399,9 @@
         "name": "Les eidolons peuvent attaquer alors qu'ils sont morts"
       },
       "reminderTargeting": {
-        "hint": "Cliquez pour montrer un rappel pour cibler en combat.",
-        "name": "Rappel qu'il faut cibler",
-        "note": "S'il vous plait, cibler avant d'attaquer."
+        "hint": "Cliquez pour afficher un rappel pour cibler en combat.",
+        "name": "Rappel de cibler",
+        "note": "S'il vous plait, ciblez avant d'attaquer."
       },
       "actionsReminderAllow": {
         "hint": "Cliquez pour rappeler le nombre d'actions restantes dans la conversation.",
@@ -431,6 +431,10 @@
       "castPrivateSpellAlwaysForNPC": {
         "name": "Cochez pour toujours lancer de manière privée pour les PNJ.",
         "hint": "Cochez pour toujours lancer de manière privée pour les PNJ."
+      },
+      "reminderIWRCaveat": {
+        "name": "Cliquez pour afficher un avertissement à propos des FIR complexes qui ne sont pas supportées dans chaque message.",
+        "hint": "Cliquez pour afficher un avertissement à propos des FIR complexes qui ne sont pas supportées dans chaque message."
       }
     },
     "effects": {
