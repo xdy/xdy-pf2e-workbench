@@ -1,3 +1,10 @@
+## [4.5.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.6...v4.5.7) (2022-10-13)
+
+
+### Bug Fixes
+
+* Unbreak autorolling damage for normal attacks. ([54693f0](https://github.com/xdy/xdy-pf2e-workbench/commit/54693f0c22617a2d3b193672f7baa17c41b8f793))
+
 ## [4.5.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.5...v4.5.6) (2022-10-13)
 
 
