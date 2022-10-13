@@ -108,7 +108,9 @@ Deprecated features (will be removed eventually):
 Install by either searching for xdy-pf2e-workbench in [FoundryVTT's](https://foundryvtt.com/) Module tab and clicking
 Install or by clicking the 'Install Module' button in that tab and entering the following as the Manifest
 URL: https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json
+
 If you want to install this module for foundry 0.89 or lower use this (unsupported) module.json link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v1.7.1/module.json
+
 If you want to install this module for foundry 9 use this (unsupported) module.json link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v3.44.3/module.json
 
 
