@@ -71,19 +71,18 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
             const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
 
+            const fixedTime = Number.isInteger(+(<SpellPF2e>message.item)?.system.time.value);
+
             // TODO Add something like this to pf2-flat-check, i.e. it shouldn't check if not an attack spell.
             const rollForNonAttackSpell =
                 origin !== null &&
                 autoRollDamageForSpellNotAnAttack &&
                 rollType === undefined &&
                 flags.casting !== null &&
-                (Number.isInteger(+(<SpellPF2e>message.item)?.system.time.value) ?? true) &&
+                fixedTime &&
                 Object.keys((<SpellPF2e>origin).system.damage?.value)?.length !== 0 &&
                 !origin?.traits.has("attack");
-            const rollForAttackSpell =
-                rollType === "spell-attack-roll" &&
-                autoRollDamageForSpellAttack &&
-                (Number.isInteger(+(<SpellPF2e>message.item)?.system.time.value) ?? true);
+            const rollForAttackSpell = rollType === "spell-attack-roll" && autoRollDamageForSpellAttack && fixedTime;
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             if (actor && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
                 if (
