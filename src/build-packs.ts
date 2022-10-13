@@ -139,14 +139,16 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
             // eslint-disable-next-line
-            let jsonInternal = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(
+            const internalMacroId = randomID();
+            const jsonInternal = `{"_id": "${internalMacroId}", "command": ${JSON.stringify(
                 contents
-            )},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
+            )},"flags":{"core":{"sourceId":"Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros.${internalMacroId}"}},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","scope":"global","type":"script","ownership":{"default":1},"folder":null,"sort":0}}`;
             linesInternal.push(jsonInternal);
+            const macroId = randomID();
             // eslint-disable-next-line
-            let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(
+            let json = `{"_id": "${macroId}", "author": "${macroId}", "command": ${JSON.stringify(
                 importMacro
-            )},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
+            )},"flags":{"core":{"sourceId":"Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros.${macroId}"}},"img":"${img}","name": "${macroName}","scope":"global","type":"script","ownership":{"default":1},"folder":null,"sort":0}`;
             lines.push(json);
         } catch (err) {
             console.error(`Failed to read JSON file ${filePath}`, err);
