@@ -90,7 +90,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     rollForNonAttackSpell ||
                     (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
                 ) {
-                    let spellLevel = (<SpellPF2e>origin)?.system.level;
+                    let slotLevel = (<SpellPF2e>origin)?.system.level;
                     let levelFromChatCard = false;
                     const chatLength = game.messages?.contents.length ?? 0;
                     for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
@@ -100,7 +100,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             if (level && level[1]) {
                                 levelFromChatCard = true;
                                 // @ts-ignore Wtf? How to make a number into a OneToTen?
-                                spellLevel = parseInt(level[1]);
+                                slotLevel = parseInt(level[1]);
                                 break;
                             }
                         }
@@ -133,9 +133,10 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             origin?.rollDamage({
                                 currentTarget: {
                                     closest: () => {
-                                        return { dataset: { spellLvl: spellLevel } };
+                                        return { dataset: { slotLevel: slotLevel } };
                                     },
                                 },
+                                spellLevel: slotLevel,
                             });
                         }
                     } finally {
