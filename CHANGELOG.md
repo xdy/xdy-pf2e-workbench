@@ -1,3 +1,10 @@
+## [4.5.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.8...v4.5.9) (2022-10-14)
+
+
+### Bug Fixes
+
+* Fixes autorolling damage for heightened spells. ([663d782](https://github.com/xdy/xdy-pf2e-workbench/commit/663d782623cba2fec3b2469000e48d953923d733)), closes [#478](https://github.com/xdy/xdy-pf2e-workbench/issues/478)
+
 ## [4.5.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.7...v4.5.8) (2022-10-13)
 
 
