@@ -1,3 +1,10 @@
+## [4.5.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.9...v4.5.10) (2022-10-14)
+
+
+### Bug Fixes
+
+* NPC scaling for actions (and probably more) was broken. All items except those of the following types should now scale: ([ef82459](https://github.com/xdy/xdy-pf2e-workbench/commit/ef824598654d37232041e5692ba7343f5619af07)), closes [#480](https://github.com/xdy/xdy-pf2e-workbench/issues/480)
+
 ## [4.5.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.8...v4.5.9) (2022-10-14)
 
 
