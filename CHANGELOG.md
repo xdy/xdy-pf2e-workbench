@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.12...v4.6.0) (2022-10-15)
+
+
+### Features
+
+* Use color (reddish=active, grey=inactive) and icon (eye=active, eye-slash=inactive) for action toggles on skill action list. ([3caccd1](https://github.com/xdy/xdy-pf2e-workbench/commit/3caccd108db22b540b8f00ca13f6cc59dce0a400)), closes [#449](https://github.com/xdy/xdy-pf2e-workbench/issues/449) [#433](https://github.com/xdy/xdy-pf2e-workbench/issues/433)
+
 ## [4.5.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.11...v4.5.12) (2022-10-15)
 
 
