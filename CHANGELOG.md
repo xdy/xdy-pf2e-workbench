@@ -1,3 +1,10 @@
+## [4.5.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.10...v4.5.11) (2022-10-15)
+
+
+### Bug Fixes
+
+* Switch to always use latest version in the manifest. ([80d3372](https://github.com/xdy/xdy-pf2e-workbench/commit/80d3372a60b8f91628680e802a81e5d730933a29)), closes [#451](https://github.com/xdy/xdy-pf2e-workbench/issues/451)
+
 ## [4.5.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.9...v4.5.10) (2022-10-14)
 
 
