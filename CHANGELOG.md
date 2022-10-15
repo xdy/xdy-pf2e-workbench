@@ -1,3 +1,10 @@
+## [4.5.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.11...v4.5.12) (2022-10-15)
+
+
+### Bug Fixes
+
+* TIL the download *should* be versioned. Thanks @MrVauxs! ([527e0c4](https://github.com/xdy/xdy-pf2e-workbench/commit/527e0c453f24a7435937c58d53ea4fb4399363d1))
+
 ## [4.5.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.5.10...v4.5.11) (2022-10-15)
 
 
