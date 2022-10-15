@@ -2,7 +2,8 @@
     {{localize 'xdy-pf2e-workbench.skillActions.Title'}}
     <button type="button" class="toggle-hidden-actions"
             title="{{ localize 'xdy-pf2e-workbench.skillActions.UnequipAll.Tooltip' }}">
-        <i class="fa-solid fa-eye" {{#if allVisible}}style="color: rgba(0, 0, 0, 0.4);"{{/if}}></i>
+        {{#if allVisible}}<i class="fa-solid fa-eye" style="color: #5e0000"></i>{{/if}}
+        {{#unless allVisible}}<i class="fa-solid fa-eye-slash" style="color: #000000;opacity: 50%"></i>{{/unless}}
     </button>
 </h3>
 <ol class="actions-list item-list directory-list strikes-list skill-action-list">
@@ -18,8 +19,9 @@
                         <h4>{{label}} <span class="activity-icon">{{actionType}}</span></h4>
                         <div class="action-options">
                             <a class="item-control item-toggle-equip" title="Toggle action visibility">
-                                <i class="fa-solid fa-eye"
-                                   {{#unless visible}}style="color: rgba(0, 0, 0, 0.4);"{{/unless}}></i>
+                                {{#if visible}}<i class="fa-solid fa-eye" style="color: #5e0000"></i>{{/if}}
+                                {{#unless visible}}
+                                    <i class="fa-solid fa-eye-slash" style="rgba(0 0 0 / 40%)"></i>{{/unless}}
                             </a>
                         </div>
                     </div>

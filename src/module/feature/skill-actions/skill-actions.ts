@@ -106,7 +106,7 @@ export class SkillAction {
     }
 
     async toggleVisibility(visible = !this.visible) {
-        await this.update({ visible: visible });
+        this.update({ visible: visible }).then();
     }
 
     async rollSkillAction(event) {
@@ -119,23 +119,32 @@ export class SkillAction {
             const rollAction = game.pf2e.actions[this.key];
             if (rollAction) {
                 if (this.key !== "earnIncome") {
-                    // eslint-disable-next-line @typescript-eslint/await-thenable
-                    await rollAction({ event, modifiers: variant.modifiers, actors: [this.actor], ...variant.extra });
+                    rollAction({ event, modifiers: variant.modifiers, actors: [this.actor], ...variant.extra }).then();
                 } else {
                     // Ugly earnIncome fix. Though currently the macro itself doesn't work in the pf2e system.
                     const pack = game.packs.get("pf2e.pf2e-macros");
-                    await pack?.getIndex().then((index) => {
-                        const id = index.find((e) => e.name === "Earn Income")?._id;
-                        if (id) {
-                            // @ts-ignore
-                            (<Promise<Macro>>pack?.getDocument(id)).then((e) => e.execute());
-                        }
-                    });
+                    pack?.getIndex()
+                        .then((index) => {
+                            const id = index.find((e) => e.name === "Earn Income")?._id;
+                            if (id) {
+                                // @ts-ignore
+                                (<Promise<Macro>>pack?.getDocument(id)).then((e) => e.execute());
+                            }
+                        })
+                        .then();
                 }
             } else {
-                await this.toChat();
-                // @ts-ignore
-                await variant.skill.roll({ event, modifiers: variant.modifiers, options: [`action:${this.slug}`] });
+                this.toChat().then(
+                    variant.skill
+                        // @ts-ignore
+                        .roll({
+                            event,
+                            modifiers: variant.modifiers,
+                            // @ts-ignore
+                            options: [`action:${this.slug}`],
+                        })
+                        .then()
+                );
             }
         }
     }
