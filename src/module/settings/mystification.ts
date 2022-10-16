@@ -2,6 +2,7 @@ import { MODULENAME } from "../xdy-pf2e-workbench";
 import { debouncedReload } from "./index";
 import { SettingsMenuPF2eWorkbench } from "./menu";
 
+export let mystifyRandomPropertyType: string;
 export let mystifyModifierKey: string;
 
 export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
@@ -23,6 +24,20 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 scope: "world",
                 default: true,
                 type: Boolean,
+            },
+            npcMystifierPrefix: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierPrefix.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierPrefix.hint`,
+                scope: "world",
+                type: String,
+                default: "",
+            },
+            npcMystifierPostfix: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierPostfix.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierPostfix.hint`,
+                scope: "world",
+                type: String,
+                default: "",
             },
             npcMystifierUseSize: {
                 name: `${MODULENAME}.SETTINGS.npcMystifierUseSize.name`,
@@ -101,40 +116,41 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                     }
                 },
             },
-            npcMystifierAddRandomNumber: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.hint`,
-                scope: "world",
-                default: true,
-                type: Boolean,
-            },
-            npcMystifierSkipRandomNumberForUnique: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomNumberForUnique.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomNumberForUnique.hint`,
-                scope: "world",
-                default: true,
-                type: Boolean,
-            },
-            npcMystifierKeepNumberAtEndOfName: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.hint`,
-                scope: "world",
-                default: true,
-                type: Boolean,
-            },
-            npcMystifierPrefix: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierPrefix.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierPrefix.hint`,
+            npcMystifierAddRandomProperty: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.hint`,
                 scope: "world",
                 type: String,
-                default: "",
+                choices: {
+                    NONE: "None",
+                    NUMBER: "Number",
+                    ADJECTIVE: "Adjective",
+                },
+                default: "NONE",
+                onChange: (key) => {
+                    mystifyRandomPropertyType = <string>key;
+                },
             },
-            npcMystifierPostfix: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierPostfix.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierPostfix.hint`,
+            npcMystifierRandomAdjectiveRollTable: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierAdjective.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierAdjective.hint`,
                 scope: "world",
-                type: String,
                 default: "",
+                type: String,
+            },
+            npcMystifierKeepRandomProperty: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierKeepRandomProperty.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierKeepRandomProperty.hint`,
+                scope: "world",
+                default: true,
+                type: Boolean,
+            },
+            npcMystifierSkipRandomPropertyForUnique: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomPropertyForUnique.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomPropertyForUnique.hint`,
+                scope: "world",
+                default: true,
+                type: Boolean,
             },
             npcMystifierModifierKey: {
                 name: `${MODULENAME}.SETTINGS.npcMystifierModifierKey.name`,
@@ -165,5 +181,6 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
     static override registerSettings(): void {
         super.registerSettings();
         mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");
+        mystifyRandomPropertyType = <string>game.settings.get(MODULENAME, "npcMystifierAddRandomProperty");
     }
 }

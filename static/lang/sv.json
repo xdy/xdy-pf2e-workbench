@@ -62,9 +62,9 @@
         "hint": "Slå på npcmystifierare, byt namn på spelfigur på den aktiva scenen baserat på deras egenskaper om Ctrl (konfigurerbar) klickas när du lägger till spelfiguren scenen.",
         "name": "Slå på npcmystifierare."
       },
-      "npcMystifierAddRandomNumber": {
-        "hint": "Aktiverar att lägga till ett slumpmässigt nummer när man mystifierar npcs. Observera att om spelfigur eller karaktär redan har ett nummer som suffix kommer detta inte att fungera bra.",
-        "name": "Lägg till slumpmässigt nummer i namnet"
+      "npcMystifierAddRandomProperty": {
+        "hint": "Aktiverar att lägga till ett slumpmässigt fastighet när man mystifierar npcs. Observera att om spelfigur eller karaktär redan har ett nummer som suffix kommer detta inte att fungera bra.",
+        "name": "Lägg till slumpmässigt fastighet i namnet"
       },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
         "hint": "Aktiverar att alla spelfigurer på den aktiva scenen som är baserade på samma varelse som den som avmystifieras också avmystifieras.",
@@ -102,7 +102,7 @@
         "hint": "Ersätter sällsyntheter ovanligare än Common med (t.ex. 'Ovanlig'). Om det är tomt, ändra inte den visade sällsyntheten.",
         "name": "Ord att ersätta sällsyntheter större än Vanlig med"
       },
-      "npcMystifierKeepNumberAtEndOfName": {
+      "npcMystifierKeepRandomProperty": {
         "hint": "Behåll spelfigurnummer *i samma format som dom som läggs till av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs.",
         "name": "Behåll spelfigurnummer när du mystifierar/avmystifierar."
       },
@@ -122,9 +122,13 @@
         "hint": "Vad ska det nya namnet prefixas med, default '' (exempel: 'Okänd'), om det är namnet på en slumptabell så används en textrad från den tabellen som prefix .",
         "name": "Ord eller slumptabell att prefixa nytt namn med"
       },
-      "npcMystifierSkipRandomNumberForUnique": {
-        "hint": "Låter bli att lägga till slumpmässigt nummer för unika npcs.",
-        "name": "Inget slumpmässigt nummer för unika npcs."
+      "npcMystifierSkipRandomPropertyForUnique": {
+        "hint": "Låter bli att lägga till slumpmässigt fastighet för unika npcs.",
+        "name": "Inget slumpmässigt fastighet för unika npcs."
+      },
+      "npcMystifierAdjective": {
+        "hint": "Adds a word from the rolltable as a prefix (Random property needs to be set to 'Adjective').",
+        "name": "Rollable table prefix"
       },
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "(Experimentellt) Använd mystifierat namn i chattmeddelanden genom att ersätta karaktärns namn med det mystifierade namnet. Kommer utan tvekan att se riktigt dåligt ut på vissa förmågor.",

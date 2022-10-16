@@ -5,7 +5,7 @@ import { WorkbenchWorldAutomationSettings } from "./automation-world";
 import { WorkbenchClientAutomationSettings } from "./automation-client";
 import { WorkbenchQolWorldSettings } from "./qol-world";
 
-export { mystifyModifierKey } from "./mystification";
+export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification";
 
 export function debouncedReload() {
     foundry.utils.debounce(() => {

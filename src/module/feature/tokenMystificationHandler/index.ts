@@ -1,15 +1,41 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
-import { mystifyModifierKey } from "../../settings";
+import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings";
 import { TokenDataPF2e } from "@scene/token-document";
 import { generateNameFromTraits } from "./traits-name-generator";
 import { TokenPF2e } from "@module/canvas";
 
-function shouldSkipRandomNumber(token: TokenPF2e | TokenDocumentPF2e) {
+function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (
-        game.settings.get(MODULENAME, "npcMystifierSkipRandomNumberForUnique") &&
+        game.settings.get(MODULENAME, "npcMystifierSkipRandomPropertyForUnique") &&
         token?.actor?.system?.traits?.rarity === "unique"
     );
+}
+
+function hasRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
+    switch (mystifyRandomPropertyType) {
+        case "NUMBER":
+        case "ADJECTIVE":
+            return token.name.split(" ").length !== (token.actor?.name.split(" ") ?? [""]).length;
+        default:
+            return false;
+    }
+}
+
+async function fetchRandomAdjective(): Promise<string> {
+    const fixSetting = game.settings.get(MODULENAME, "npcMystifierRandomAdjectiveRollTable");
+
+    // "null" check is due to a previous bug that may have left invalid data in text fields
+    if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
+        const draw = await game?.tables?.find((table) => table.name === fixSetting)?.draw({ displayChat: false });
+        if (draw && draw?.results[0]) {
+            return draw?.results[0].getChatText();
+        }
+    }
+
+    console.error(`Rolltable for ${fixSetting} setting not defined or not found.`);
+
+    return "";
 }
 
 export async function buildTokenName(
@@ -19,12 +45,21 @@ export async function buildTokenName(
     let tokenName = "";
     if (token && token.actor) {
         tokenName = token.name;
-        const keepNumber = game.settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName");
+        const keep = game.settings.get(MODULENAME, "npcMystifierKeepRandomProperty");
         if (isMystified) {
-            if (keepNumber) {
-                tokenName = `${token.actor.name} ${tokenName.match(/\d+$/)?.[0] ?? ""}`;
+            if (keep && !shouldSkipRandomProperty(token)) {
+                switch (mystifyRandomPropertyType) {
+                    case "NUMBER":
+                        tokenName = `${token.actor.name} ${tokenName.match(/\d+$/)?.[0] ?? ""}`.trim();
+                        break;
+                    case "ADJECTIVE":
+                        tokenName = `${(tokenName.match(/\b(\w+)\b/) ?? [""])[0]} ${token.actor.name}`.trim();
+                        break;
+                    default:
+                        tokenName = token.actor.name;
+                }
             } else {
-                tokenName = token.actor.name || "";
+                tokenName = token.actor.name;
             }
         } else {
             switch (game.settings.get(MODULENAME, "npcMystifierUseOtherTraits")) {
@@ -32,17 +67,34 @@ export async function buildTokenName(
                     tokenName = await generateNameFromTraits(token);
             }
 
-            const addRandom = game.settings.get(MODULENAME, "npcMystifierAddRandomNumber");
-            if (token.name.match(/ \d+$/)?.[0] && keepNumber && !shouldSkipRandomNumber(token)) {
-                tokenName = `${tokenName} ${token.name.match(/ \d+$/)?.[0] ?? ""}`;
+            if (hasRandomProperty(token) && keep && !shouldSkipRandomProperty(token)) {
+                switch (mystifyRandomPropertyType) {
+                    case "NUMBER":
+                        tokenName = `${tokenName} ${token.name.match(/\d+$/)?.[0] ?? ""}`.trim();
+                        break;
+                    case "ADJECTIVE":
+                        tokenName = `${(token.name.match(/\b(\w+)\b/) ?? [""])[0]} ${tokenName}`.trim();
+                        break;
+                    default:
+                        tokenName = token.actor.name;
+                }
             } else {
-                if (addRandom && !shouldSkipRandomNumber(token)) {
-                    let rolled = Math.floor(Math.random() * 100) + 1;
-                    // Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
-                    if (canvas?.scene?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
-                        rolled = Math.floor(Math.random() * 100) + 1;
+                if (!shouldSkipRandomProperty(token)) {
+                    let rolled = 0;
+
+                    switch (mystifyRandomPropertyType) {
+                        case "NUMBER":
+                            rolled = Math.floor(Math.random() * 100) + 1;
+                            // Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
+                            if (canvas?.scene?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
+                                rolled = Math.floor(Math.random() * 100) + 1;
+                            }
+                            tokenName += ` ${rolled}`;
+                            break;
+                        case "ADJECTIVE":
+                            tokenName = `${await fetchRandomAdjective()} ${tokenName}`.trim();
+                            break;
                     }
-                    tokenName += ` ${rolled}`;
                 }
             }
         }
@@ -80,12 +132,8 @@ export async function tokenCreateMystification(token: any) {
 export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): boolean {
     const tokenName = token?.name;
     const actorName = token?.actor?.name;
-    if (tokenName !== actorName && game.settings.get(MODULENAME, "npcMystifierKeepNumberAtEndOfName")) {
-        const tokenNameNoNumber = tokenName?.trim().replace(/\d+$/, "").trim();
-        const actorNameNoNumber = actorName?.replace(/\d+$/, "").trim();
-        return tokenNameNoNumber !== actorNameNoNumber;
-    }
-    return tokenName !== actorName || false;
+
+    return (tokenName?.indexOf(actorName ?? "") ?? -1) < 0;
 }
 
 export async function doMystificationFromToken(tokenId: string, active: boolean) {
