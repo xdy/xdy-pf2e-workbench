@@ -1,3 +1,10 @@
+# [4.7.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.6.1...v4.7.0) (2022-10-16)
+
+
+### Features
+
+* Adds option to add persistent adjective from rolltable as a prefix instead of a random number as a postfix. Courtesy of @Shyrik ([93246d6](https://github.com/xdy/xdy-pf2e-workbench/commit/93246d6974a3cabed3feea6e85f2de6f1dc70852))
+
 ## [4.6.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.6.0...v4.6.1) (2022-10-16)
 
 
