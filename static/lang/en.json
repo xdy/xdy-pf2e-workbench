@@ -262,9 +262,12 @@
         "hint": "Check to enable npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene. Save settings to show/hide additional options.",
         "name": "Enable npc mystifier."
       },
-      "npcMystifierAddRandomNumber": {
-        "hint": "Check to add a random number when mystifying npcs.",
-        "name": "Add random number to name"
+      "npcMystifierAddRandomProperty": {
+        "hint": "Select a type of random property to add when mystifying npcs that can optionally be kept.",
+        "name": "Add random property of chosen type to name",
+        "none": "None",
+        "numberPostfix": "Number as postfix",
+        "wordPrefix": "Word as prefix"
       },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
         "hint": "Check to make all mystification act on all tokens based on the same actor.",
@@ -306,29 +309,37 @@
         "hint": "Enter word to replace rarities greater than Common with (e.g. 'Unusual') in this text field. If empty, do not change the displayed rarity.",
         "name": "Replace rarities rarer than Common"
       },
-      "npcMystifierKeepNumberAtEndOfName": {
-        "hint": "Check to keep token number *in the same format as those added by this module* at end of name (if any) when mystifying/demystifying npcs.",
-        "name": "Keep token number when mystifying/demystifying."
+      "npcMystifierKeepRandomProperty": {
+        "hint": "Check to keep number postfix/word prefix *in the same format as currently configured in this module* (if any) as a postfix/prefix to the name when mystifying/demystifying npcs.",
+        "name": "Keep prefix/postfix when mystifying/demystifying."
       },
       "npcMystifierModifierKey": {
         "hint": "Select to enable setting which key to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
-        "name": "Key to mystify on drag to scene"
+        "name": "Key to mystify on drag to scene",
+        "always": "Always",
+        "disabled": "Disabled",
+        "alt": "Alt",
+        "control": "Control"
       },
       "npcMystifierMystifyKey": {
         "hint": "Set keybind to mystify selected tokens.",
         "name": "Keybind for mystifying selected tokens"
       },
       "npcMystifierPostfix": {
-        "hint": "Add text to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead.",
+        "hint": "Add text to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead. This will be added *before* any random property prefix (see previous option.)",
         "name": "Word or rollable table postfix"
       },
       "npcMystifierPrefix": {
-        "hint": "Add text to prefix new name with, defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead.",
+        "hint": "Add text to prefix new name with (infix if a random word property is chosen above), defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead.  This will be added *after* any random property postfix (see previous option.)",
         "name": "Word or rollable table prefix"
       },
-      "npcMystifierSkipRandomNumberForUnique": {
-        "hint": "Check to skip adding a random number when mystifying unique npcs.",
-        "name": "Skip random number for unique npcs."
+      "npcMystifierRandomPropertySkipForUnique": {
+        "hint": "Check to skip adding a random property when mystifying unique npcs. (I.e. it's kept when you demystify the npc.)",
+        "name": "Skip random persistent property for unique npcs."
+      },
+      "npcMystifierWordPrefix": {
+        "hint": "Adds a random word from the given roll table as a prefix if 'Word prefix' is chosen).",
+        "name": "Add random word from the given roll table"
       },
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "(Experimental) Check to use mystified name inside chat messages by replacing the actor name with the mystified name.",

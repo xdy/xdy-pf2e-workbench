@@ -62,10 +62,6 @@
         "hint": "Slå på npcmystifierare, byt namn på spelfigur på den aktiva scenen baserat på deras egenskaper om Ctrl (konfigurerbar) klickas när du lägger till spelfiguren scenen.",
         "name": "Slå på npcmystifierare."
       },
-      "npcMystifierAddRandomNumber": {
-        "hint": "Aktiverar att lägga till ett slumpmässigt nummer när man mystifierar npcs. Observera att om spelfigur eller karaktär redan har ett nummer som suffix kommer detta inte att fungera bra.",
-        "name": "Lägg till slumpmässigt nummer i namnet"
-      },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
         "hint": "Aktiverar att alla spelfigurer på den aktiva scenen som är baserade på samma varelse som den som avmystifieras också avmystifieras.",
         "name": "Avmystifiera alla spelfigurer som är baserade på samma varelse"
@@ -102,10 +98,6 @@
         "hint": "Ersätter sällsyntheter ovanligare än Common med (t.ex. 'Ovanlig'). Om det är tomt, ändra inte den visade sällsyntheten.",
         "name": "Ord att ersätta sällsyntheter större än Vanlig med"
       },
-      "npcMystifierKeepNumberAtEndOfName": {
-        "hint": "Behåll spelfigurnummer *i samma format som dom som läggs till av denna modul* i slutet av namnet (om något) när du mystifierar/avmystifierar npcs.",
-        "name": "Behåll spelfigurnummer när du mystifierar/avmystifierar."
-      },
       "npcMystifierModifierKey": {
         "hint": "Håll denna tengent för att mystifiera varelse när den dras ut till den aktiva scenen. Observera att om du väljer Alt (inte standard) döljer den också npc:n.",
         "name": "Modifieringstangent för att mystifiera när varelse dras ut till scenen"
@@ -121,10 +113,6 @@
       "npcMystifierPrefix": {
         "hint": "Vad ska det nya namnet prefixas med, default '' (exempel: 'Okänd'), om det är namnet på en slumptabell så används en textrad från den tabellen som prefix .",
         "name": "Ord eller slumptabell att prefixa nytt namn med"
-      },
-      "npcMystifierSkipRandomNumberForUnique": {
-        "hint": "Låter bli att lägga till slumpmässigt nummer för unika npcs.",
-        "name": "Inget slumpmässigt nummer för unika npcs."
       },
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "(Experimentellt) Använd mystifierat namn i chattmeddelanden genom att ersätta karaktärns namn med det mystifierade namnet. Kommer utan tvekan att se riktigt dåligt ut på vissa förmågor.",

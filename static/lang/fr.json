@@ -130,7 +130,7 @@
         "hint": "Activer la mystification des PNJ en renommant les jetons sur la scène active en fonction de leurs traits si vous appuyez sur Ctrl (configurable) lorsque vous ajoutez la scène. Sauvegardez pour montrer/cacher les options supplémentaires.",
         "name": "Activer la mystification des PNJ."
       },
-      "npcMystifierAddRandomNumber": {
+      "npcMystifierAddRandomProperty": {
         "hint": "Cliquez pour ajouter un nombre aléatoire lorsque vous mystifiez les PNJ.",
         "name": "Ajouter un nombre aléatoire au nom"
       },
@@ -170,9 +170,9 @@
         "hint": "Définir le mot pour remplacer les raretés supérieures à courante (ex. 'Inhabituelle') dans ce champ textuel. Si c'est vide, cela ne change pas la rareté affichée.",
         "name": "Remplacer les raretés supérieures à Courant"
       },
-      "npcMystifierKeepNumberAtEndOfName": {
-        "hint": "Cliquez pour conserver le numéro du jeton *dans le même format que celui ajouté par ce module* à la fin du nom (s'il y en a) lorsque vous mystifiez/démystifiez les PNJ.",
-        "name": "Garder le nombre du jeton lorsque vous mystifiez/démystifiez."
+      "npcMystifierKeepRandomProperty": {
+        "hint": "Cliquez pour conserver le propriété du jeton *dans le même format que celui ajouté par ce module* à la fin du nom (s'il y en a) lorsque vous mystifiez/démystifiez les PNJ.",
+        "name": "Garder le propriété du jeton lorsque vous mystifiez/démystifiez."
       },
       "npcMystifierModifierKey": {
         "hint": "Choisissez d'activer le choix de la touche à maintenir pressée pour mystifier la créature lorsqu'elle est glissée sur la scène active. Notez que si vous choisissez Alt (pas par défaut) cela cache aussi le PNJ.",
@@ -190,9 +190,9 @@
         "hint": "Ajouter le préfixe du nouveau nom avec, par défaut '' (exemple : 'Inconnu'), si cela correspond au nom d'une table aléatoire, un texte aléatoire provenant de cette table sera utilisé comme préfixe à la place.",
         "name": "Mot ou table aléatoire préfixe"
       },
-      "npcMystifierSkipRandomNumberForUnique": {
-        "hint": "Cliquez pour éviter d'accoler un numéro aléatoire lorsque vous mystifiez des PNJ uniques.",
-        "name": "Éviter le numéro aléatoire pour les PNJ uniques."
+      "npcMystifierSkipRandomPropertyForUnique": {
+        "hint": "Cliquez pour éviter d'accoler un propriété aléatoire lorsque vous mystifiez des PNJ uniques.",
+        "name": "Éviter le propriété aléatoire pour les PNJ uniques."
       },
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "(Expérimental) Cliquez pour utiliser le nom mystifié à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié.",

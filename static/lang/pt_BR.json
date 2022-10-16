@@ -106,9 +106,9 @@
         "hint": "Adiciona um prefixo ao novo nome. Se corresponder ao nome de uma tabela de rolagem, um resultado aleatório será usado como prefixo.",
         "name": "Prefixo: Palavra ou Tabela de Rolagem"
       },
-      "npcMystifierSkipRandomNumberForUnique": {
-        "name": "Não adicionar números a PdMs únicos",
-        "hint": "Não adiciona números aleatórios quando mistificar PdMs únicos."
+      "npcMystifierSkipRandomPropertyForUnique": {
+        "name": "Não adicionar propriedade a PdMs únicos",
+        "hint": "Não adiciona propriedade aleatórios quando mistificar PdMs únicos."
       },
       "npcMystifierUseMystifiedNameInChat": {
         "name": "(Experimental) Mistificar nome em mensagens de chat",
@@ -138,17 +138,17 @@
         "hint": "Defina uma palavra para substituir raridades maiores que Comum. Caso fique vazio, não mudará a raridade exibida.",
         "name": "Substituir raridades maiores que Comum"
       },
-      "npcMystifierKeepNumberAtEndOfName": {
-        "name": "Manter numeração de token",
-        "hint": "Mantém a numeração de tokens (no mesmo formato como adicionado por este módulo) no fim do nome quando mistificar PdMs."
+      "npcMystifierKeepRandomProperty": {
+        "name": "Manter propriedade de token",
+        "hint": "Mantém a propriedade de tokens (no mesmo formato como adicionado por este módulo) no fim do nome quando mistificar PdMs."
       },
       "npcMystifier": {
         "hint": "Habilita o Mistificador de PdMs, renomeando tokens em cenas ativas baseado em seus traços se Ctrl (configurável) estiver pressionado ao adicioná-los à cena. Altere esta configuração para mostrar ou esconder opções adicionais.",
         "name": "Habilitar Mistificador de PdMs"
       },
-      "npcMystifierAddRandomNumber": {
-        "hint": "Adiciona número aleatórios quando mistificar.",
-        "name": "Adicionar números aleatórios ao nome"
+      "npcMystifierAddRandomProperty": {
+        "hint": "Adiciona propriedade aleatórios quando mistificar.",
+        "name": "Adicionar propriedade aleatórios ao nome"
       },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
         "hint": "A mistificação de tokens se baseará no mesmo ator.",

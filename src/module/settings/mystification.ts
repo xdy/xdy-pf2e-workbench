@@ -2,6 +2,7 @@ import { MODULENAME } from "../xdy-pf2e-workbench";
 import { debouncedReload } from "./index";
 import { SettingsMenuPF2eWorkbench } from "./menu";
 
+export let mystifyRandomPropertyType: string;
 export let mystifyModifierKey: string;
 
 export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
@@ -23,6 +24,58 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 scope: "world",
                 default: true,
                 type: Boolean,
+            },
+            npcMystifierAddRandomProperty: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.hint`,
+                scope: "world",
+                type: String,
+                choices: {
+                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.none`),
+                    numberPostfix: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.numberPostfix`
+                    ),
+                    wordPrefix: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.wordPrefix`),
+                },
+                default: "none",
+                onChange: (key) => {
+                    mystifyRandomPropertyType = <string>key;
+                },
+            },
+            npcMystifierRandomWordPrefixRollTable: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierWordPrefix.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierWordPrefix.hint`,
+                scope: "world",
+                default: "",
+                type: String,
+            },
+            npcMystifierKeepRandomProperty: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierKeepRandomProperty.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierKeepRandomProperty.hint`,
+                scope: "world",
+                default: true,
+                type: Boolean,
+            },
+            npcMystifierRandomPropertySkipForUnique: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierRandomPropertySkipForUnique.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierRandomPropertySkipForUnique.hint`,
+                scope: "world",
+                default: true,
+                type: Boolean,
+            },
+            npcMystifierPrefix: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierPrefix.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierPrefix.hint`,
+                scope: "world",
+                type: String,
+                default: "",
+            },
+            npcMystifierPostfix: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierPostfix.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierPostfix.hint`,
+                scope: "world",
+                type: String,
+                default: "",
             },
             npcMystifierUseSize: {
                 name: `${MODULENAME}.SETTINGS.npcMystifierUseSize.name`,
@@ -101,51 +154,16 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                     }
                 },
             },
-            npcMystifierAddRandomNumber: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierAddRandomNumber.hint`,
-                scope: "world",
-                default: true,
-                type: Boolean,
-            },
-            npcMystifierSkipRandomNumberForUnique: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomNumberForUnique.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierSkipRandomNumberForUnique.hint`,
-                scope: "world",
-                default: true,
-                type: Boolean,
-            },
-            npcMystifierKeepNumberAtEndOfName: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierKeepNumberAtEndOfName.hint`,
-                scope: "world",
-                default: true,
-                type: Boolean,
-            },
-            npcMystifierPrefix: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierPrefix.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierPrefix.hint`,
-                scope: "world",
-                type: String,
-                default: "",
-            },
-            npcMystifierPostfix: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierPostfix.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierPostfix.hint`,
-                scope: "world",
-                type: String,
-                default: "",
-            },
             npcMystifierModifierKey: {
                 name: `${MODULENAME}.SETTINGS.npcMystifierModifierKey.name`,
                 hint: `${MODULENAME}.SETTINGS.npcMystifierModifierKey.hint`,
                 scope: "world",
                 type: String,
                 choices: {
-                    ALWAYS: "Always",
-                    DISABLED: "Disabled",
-                    ALT: "Alt",
-                    CONTROL: "Ctrl",
+                    ALWAYS: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierModifierKey.always`),
+                    DISABLED: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierModifierKey.disabled`),
+                    ALT: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierModifierKey.alt`),
+                    CONTROL: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierModifierKey.control`),
                 },
                 default: "CONTROL",
                 onChange: (key) => {
@@ -165,5 +183,6 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
     static override registerSettings(): void {
         super.registerSettings();
         mystifyModifierKey = <string>game.settings.get(MODULENAME, "npcMystifierModifierKey");
+        mystifyRandomPropertyType = <string>game.settings.get(MODULENAME, "npcMystifierAddRandomProperty");
     }
 }
