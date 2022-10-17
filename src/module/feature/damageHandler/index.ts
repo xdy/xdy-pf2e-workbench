@@ -77,13 +77,13 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 autoRollDamageForSpellNotAnAttack &&
                 rollType === undefined &&
                 flags.casting !== null &&
-                (Number.isInteger(+(<SpellPF2e>message.item)?.system.time.value) ?? true) &&
+                (Number.isInteger(+(<SpellPF2e>message.item)?.system?.time?.value) ?? true) &&
                 Object.keys((<SpellPF2e>origin).system.damage?.value)?.length !== 0 &&
                 !origin?.traits.has("attack");
             const rollForAttackSpell =
                 rollType === "spell-attack-roll" &&
                 autoRollDamageForSpellAttack &&
-                (Number.isInteger(+(<SpellPF2e>message.item)?.system.time.value) ?? true);
+                (Number.isInteger(+(<SpellPF2e>message.item)?.system?.time?.value) ?? true);
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             if (actor && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
                 if (
