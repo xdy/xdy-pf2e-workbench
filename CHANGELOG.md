@@ -1,3 +1,10 @@
+## [4.7.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.7.0...v4.7.1) (2022-10-17)
+
+
+### Bug Fixes
+
+* Error in the console when using some creature abilities. ([54d3bd0](https://github.com/xdy/xdy-pf2e-workbench/commit/54d3bd03039e2af5d7f4e3a1b3a567f81fb67cf6))
+
 # [4.7.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.6.1...v4.7.0) (2022-10-16)
 
 
