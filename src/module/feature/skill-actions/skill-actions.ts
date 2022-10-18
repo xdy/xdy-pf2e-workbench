@@ -223,34 +223,29 @@ export class SkillAction {
         }
     }
 
-    // @ts-ignore
-    private buildVariants(data) {
-        this.getSkills(data.proficiencyKey).forEach((skill) => {
+    buildVariants(data) {
+        this.getSkills(data.proficiencyKey).forEach((skill: any) => {
             const requiredRank = data.requiredRank ?? 0;
 
-            const skill2: any = skill;
-
             const hasRank =
-                skill2.rank >= requiredRank || (requiredRank === 1 && this.actorHasItem("clever-improviser"));
+                skill.rank >= requiredRank || (requiredRank === 1 && this.actorHasItem("clever-improviser"));
             if (!hasRank) {
                 return;
             }
 
-            this.variants.addBasicVariant(skill2, data.extra, data.label);
+            this.variants.addBasicVariant(skill, data.extra, data.label);
 
             if (this.hasTrait("attack")) {
-                this.variants.addMapVariant(skill2, data.extra, -5);
-                this.variants.addMapVariant(skill2, data.extra, -10);
+                this.variants.addMapVariant(skill, data.extra, -5);
+                this.variants.addMapVariant(skill, data.extra, -10);
             }
 
             if (
                 this.actor.items
-                    // @ts-ignore
-                    .filter((x) => x.slug === "assurance")
-                    // @ts-ignore
-                    .filter((x) => x.flags.pf2e.rulesSelections.assurance === skill2.name)?.length > 0
+                    .filter((x: any) => x.slug === "assurance")
+                    .filter((x: any) => x.flags.pf2e.rulesSelections.assurance === skill.name)?.length > 0
             ) {
-                this.variants.addAssuranceVariant(skill2, data.extra);
+                this.variants.addAssuranceVariant(skill, data.extra);
             }
         });
     }
