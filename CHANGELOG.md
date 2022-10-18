@@ -1,3 +1,10 @@
+## [4.7.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.7.1...v4.7.2) (2022-10-18)
+
+
+### Bug Fixes
+
+* Improve the private spell casting message. ([d446388](https://github.com/xdy/xdy-pf2e-workbench/commit/d4463886fc26f7d3a0bbb3936ac2005cf8c0047f)), closes [#485](https://github.com/xdy/xdy-pf2e-workbench/issues/485)
+
 ## [4.7.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.7.0...v4.7.1) (2022-10-17)
 
 
