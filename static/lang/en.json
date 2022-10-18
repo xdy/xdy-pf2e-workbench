@@ -444,8 +444,8 @@
         "spell": "Spell",
         "they": "They",
         "firstPart": "{tokenName} just cast a {vsmf} {type} of the <strong>{traditionString}</strong> tradition",
-        "secondPartRK": ".<br>Ask your GM if you recognized it automatically/with a reaction. If you didn't, you can spend an action on your turn to attempt to identify it: @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
-        "secondPartNoRk": ".<br>Ask your GM if you recognized it automatically/with a reaction. If you didn't, ask your GM for the Recall Knowledge DC if you wish to spend an action on your turn to attempt to identify it.",
+        "secondPartRK": ".<br>Ask your GM if you recognized it automatically, if not you can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Or, on your turn, spend an action to try to identify it with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
+        "secondPartNoRk": ".<br>Ask your GM if you recognized it automatically, if not you can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Or, on your turn, spend an action to try to identify it (ask your gm for details).",
         "savePart": "<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]"
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
