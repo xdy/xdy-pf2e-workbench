@@ -252,10 +252,10 @@
       },
       "autoExpandDamageRolls": {
         "hint": "Réglage du client pour automatiquement réduire les jets de dégâts (Foundry par défaut réduit les dégâts). Cliquer le jet de dé pour étendre/réduire.",
-        "expandedNew": "Les nouveaux jets de dégâts sont étendus. (étend aussi les trois derniers jets de dégâts en rafraichissant)",
-        "expandedNewest": "Les nouveaux jets de dégâts sont étendus. (étend aussi le tout dernier jet de dégât en rafraichissant)",
+        "expandedNew": "Les nouveaux jets de dégâts sont détaillés. (cela détaille aussi les trois derniers jets de dégâts en rafraichissant)",
+        "expandedNewest": "Les nouveaux jets de dégâts sont détaillés. (détaille aussi le tout dernier jet de dégât en rafraichissant)",
         "name": "Étendre automatiquement les jets de dégâts.",
-        "collapsedAll": "Tous les jets de dégâts sont réduits. (Foundry par défaut)",
+        "collapsedAll": "Tous les jets de dégâts ne sont pas détaillés (Foundry par défaut).",
         "expandedAll": "Tous les jets de dégâts sont étendus."
       },
       "autoRollDamageForSpellAttack": {
@@ -278,14 +278,14 @@
       "castPrivateSpellWithPublicMessage": {
         "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
         "firstPart": "{tokenName} vient de lancer un {type} {vsmf} de la tradition <strong>{traditionString}</strong>",
-        "secondPartRK": ".<br>Demandez à votre MJ si vous l'avez reconnu automatiquement avec une réaction. Si ce n'est pas le cas,vous pouvez utiliser une action lors de votre tour pour l'identifier : @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
+        "secondPartRK": ".<br>Demandez à votre MJ si vous l'avez reconnu automatiquement. Si ce n'est pas le cas, vous pouvez utiliser une @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou une @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Ou, lors de votre tour dépensez une action pour l'identifier avec @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{Se souvenir}",
         "hint": "S'il est lancé en privé, cela poste néanmoins un message public pour annoncer qu'un sort a été lancé À MOINS que vous ne pressiez également SHIFT ainsi que CTRL lorsque vous incantez.",
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
         "cantrip": "Tour de magie",
         "components": "Composants :",
         "spell": "Sort",
         "they": "Ils",
-        "secondPartNoRk": ".<br>Demandez à votre MJ si vous l'avez reconnu automatiquement avec une réaction. Si ce n'est pas le cas, demandez à votre MJ le DD du test pour Vous souvenir si vous souhaitez dépenser une action à votre tour pour tenter de l'identifier."
+        "secondPartNoRk": ".<br>Demandez à votre MJ si vous l'avez reconnu automatiquement. Si ce n'est pas le cas, vous pouvez essayer d'utiliser une @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou une @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Ou, lors de votre tour, dépensez une action pour l'identifier (demandez à votre MJ les détails)."
       },
       "applyClumsyIfWieldingLargerWeapon": {
         "hint": "Appliquer automatiquement Maladroit si vous maniez une arme plus grande que le porteur.",
