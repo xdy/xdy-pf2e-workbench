@@ -1,5 +1,5 @@
 import { CombatantPF2e } from "@module/encounter";
-import { isFirstGM, shouldIHandleThis } from "../../utils";
+import { shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
 import { ItemPF2e, WeaponPF2e } from "@item";
@@ -178,69 +178,65 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
     const numbToDeathUsed: any = actor.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
     const name = `${actor.token?.name ?? actor.name}`;
 
-    if (item.slug === "dying" && isFirstGM()) {
-        if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
-            const effect: any = {
-                type: "effect",
-                name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
-                img: "icons/magic/death/hand-dirt-undead-zombie.webp",
-                data: {
-                    slug: "numb-to-death-used",
-                    tokenIcon: {
-                        show: false,
-                    },
-                    duration: {
-                        value: 24,
-                        unit: "hours",
-                        sustained: false,
-                        expiry: "turn-start",
-                    },
+    if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
+        const effect: any = {
+            type: "effect",
+            name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
+            img: "icons/magic/death/hand-dirt-undead-zombie.webp",
+            data: {
+                slug: "numb-to-death-used",
+                tokenIcon: {
+                    show: false,
                 },
-            };
-
-            ChatMessage.create({
-                flavor: game.i18n.format(`$MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
-                    name: name,
-                }),
-                speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
-                whisper:
-                    game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
-                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                        : [],
-            }).then();
-
-            await actor.createEmbeddedDocuments("Item", [effect]);
-        } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
-            const effect: any = {
-                type: "effect",
-                name: game.i18n.localize(`${MODULENAME}.effects.bounceBackUsed`),
-                img: "icons/magic/life/ankh-gold-blue.webp",
-                data: {
-                    slug: "bounce-back-used",
-                    tokenIcon: {
-                        show: false,
-                    },
-                    duration: {
-                        value: 24,
-                        unit: "hours",
-                        sustained: false,
-                        expiry: "turn-start",
-                    },
+                duration: {
+                    value: 24,
+                    unit: "hours",
+                    sustained: false,
+                    expiry: "turn-start",
                 },
-            };
+            },
+        };
 
-            await actor.createEmbeddedDocuments("Item", [effect]);
-        } else {
-            await item.parent?.increaseCondition("wounded");
-        }
+        ChatMessage.create({
+            flavor: game.i18n.format(`$MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
+                name: name,
+            }),
+            speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
+            whisper:
+                game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
+                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                    : [],
+        }).then();
+
+        await actor.createEmbeddedDocuments("Item", [effect]);
+    } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
+        const effect: any = {
+            type: "effect",
+            name: game.i18n.localize(`${MODULENAME}.effects.bounceBackUsed`),
+            img: "icons/magic/life/ankh-gold-blue.webp",
+            data: {
+                slug: "bounce-back-used",
+                tokenIcon: {
+                    show: false,
+                },
+                duration: {
+                    value: 24,
+                    unit: "hours",
+                    sustained: false,
+                    expiry: "turn-start",
+                },
+            },
+        };
+
+        await actor.createEmbeddedDocuments("Item", [effect]);
+    } else {
+        await item.parent?.increaseCondition("wounded");
     }
 }
 
 export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
     const actor = <ActorPF2e>item.parent;
     if (
-        isFirstGM() &&
-        item.slug === "dying" &&
         game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP") &&
         actor.system.attributes?.hp?.value === 0 &&
         !actor.hasCondition("unconscious")
@@ -253,7 +249,7 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
 
 export function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
     const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
-    if (isFirstGM() && physicalTypes.includes(item.type) && item.actor) {
+    if (physicalTypes.includes(item.type) && item.actor) {
         if (item.actor.inventory.bulk.isEncumbered) {
             if (!item.actor.hasCondition("encumbered")) {
                 item.actor.increaseCondition("encumbered").then();
@@ -267,7 +263,7 @@ export function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
 }
 
 export function applyClumsyIfWieldingLargerWeapon(item: ItemPF2e, _update: DocumentUpdateData) {
-    if (isFirstGM() && ["weapon"].includes(item.type) && item.actor) {
+    if (["weapon"].includes(item.type) && item.actor) {
         const actorSize = item.actor.system.traits.size;
         const weaponSize = (<WeaponPF2e>item).system.size;
         if (actorSize.isSmallerThan(weaponSize, { smallIsMedium: true })) {
