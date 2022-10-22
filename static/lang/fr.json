@@ -448,8 +448,17 @@
         "note": "S'il vous plait, ciblez avant d'attaquer."
       },
       "workbenchVersion": {
-        "hint": "Version que le plus récente migration peut traiter. Peut être inférieure à la version du module. Ne modifiez pas cela à moins que vous ne sachiez ce que vous faites.",
+        "hint": "Version que la dernière migration utilise. Peut être inférieure à la version du module. Ne modifiez pas cela à moins que vous ne sachiez ce que vous faites.",
         "name": "Version de la migration de Workbench"
+      },
+      "variantRulesSettings": {
+        "hint": "Activer et configurer les variantes de règles diverses",
+        "label": "Gérer les réglages des variantes de règles",
+        "name": "Réglages des variantes de règles"
+      },
+      "tokenAnimationSpeed": {
+        "hint": "Changer pour modifier la vitesse d'animation du déplacement du jeton.",
+        "name": "Changer pour modifier la vitesse d'animation du déplacement du jeton."
       }
     },
     "effects": {
