@@ -1,3 +1,10 @@
+## [4.8.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.8.0...v4.8.1) (2022-10-22)
+
+
+### Bug Fixes
+
+* Cleaning up is hard to do... I.e. when 'cleaning up' I broke stuff. Uncleaning now. ([a0f7a44](https://github.com/xdy/xdy-pf2e-workbench/commit/a0f7a448897c55caede176c46f194969d0e192ae))
+
 # [4.8.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.7.2...v4.8.0) (2022-10-22)
 
 
