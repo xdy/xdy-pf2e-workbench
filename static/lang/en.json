@@ -457,6 +457,11 @@
         "hint": "Change to alter token movement animation speed.",
         "name": "Change to alter token movement animation speed."
       },
+      "variantRulesSettings": {
+        "hint": "Enable and configure various variant rules",
+        "label": "Manage Variant Rules Settings",
+        "name": "Variant Rules Settings"
+      },
       "workbenchVersion": {
         "hint": "Version that the latest migration ran on. Can be lower than the module version. Don't modify this unless you know what you are doing.",
         "name": "Workbench migration version"

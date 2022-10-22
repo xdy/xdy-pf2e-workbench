@@ -4,6 +4,7 @@ import { WorkbenchRemindersSettings } from "./reminders";
 import { WorkbenchWorldAutomationSettings } from "./automation-world";
 import { WorkbenchClientAutomationSettings } from "./automation-client";
 import { WorkbenchQolWorldSettings } from "./qol-world";
+import { WorkbenchVariantRulesSettings } from "./variantRules";
 
 export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification";
 
@@ -21,31 +22,7 @@ export function registerWorkbenchSettings() {
     WorkbenchQolWorldSettings.registerSettingsAndCreateMenu("fas fa-smile");
     WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fas fa-robot");
     WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fas fa-magic", false);
-
-    game.settings.register(MODULENAME, "maxHeroPoints", {
-        name: `${MODULENAME}.SETTINGS.maxHeroPoints.name`,
-        hint: `${MODULENAME}.SETTINGS.maxHeroPoints.hint`,
-        scope: "world",
-        config: true,
-        default: 3,
-        type: Number,
-        // @ts-ignore Shut up typescript, it works.
-        range: {
-            min: 0,
-            max: 10,
-            step: 1,
-        },
-    });
-
-    game.settings.register(MODULENAME, "abpVariantAllowItemBonuses", {
-        name: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.name`,
-        hint: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-        onChange: () => debouncedReload(),
-    });
+    WorkbenchVariantRulesSettings.registerSettingsAndCreateMenu("fas fa-alt");
 
     game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
         name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
