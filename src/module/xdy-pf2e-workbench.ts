@@ -104,7 +104,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 if (
                     game.settings.get(MODULENAME, "castPrivateSpell") &&
                     message.flags.pf2e?.casting?.id &&
-                    (!message.whisper || message.whisper.length === 0) &&
                     (game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) ||
                         (message.actor?.type === "npc" &&
                             game.settings.get(MODULENAME, "castPrivateSpellAlwaysForNPC")))
