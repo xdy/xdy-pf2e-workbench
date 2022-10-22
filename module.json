@@ -80,12 +80,6 @@
       "flags": {}
     },
     {
-      "lang": "sv",
-      "name": "Svenska",
-      "path": "lang/sv.json",
-      "flags": {}
-    },
-    {
       "lang": "pt-BR",
       "name": "Português (Brasil)",
       "path": "lang/pt-BR.json"

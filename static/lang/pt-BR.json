@@ -1,30 +1,188 @@
 {
   "xdy-pf2e-workbench": {
     "SETTINGS": {
+      "abpVariantAllowItemBonuses": {
+        "hint": "Não desabilita os bônus de item quando estiver usando a regra variante de Progressão Automática de Bônus.",
+        "name": "Não desabilitar bônus de item usando a PAB"
+      },
+      "actionsReminderAllow": {
+        "all": "Todos",
+        "gm": "MJ",
+        "hint": "Mostra um lembrete de número de ações como uma mensagem de chat para os usuários escolhidos.",
+        "name": "Lembrete de Número de Ações",
+        "none": "Ninguém",
+        "players": "Jogadores"
+      },
+      "addGmRKButtonToNpc": {
+        "hideNpcName": "Ocultar nome ao Recordar Conhecimento",
+        "hideSkill": "Oculta o nome da perícia na mensagem de Recordar Conhecimento.",
+        "hint": "Adiciona o botão de Recordar Conhecimento para PdMs. Atualmente só funciona para perícias, as perícias de saber precisam ser resolvidas manualmente.",
+        "name": "Botão de Recordar Conhecimento"
+      },
+      "addUserTargets": {
+        "addFor": "Adicionar",
+        "clearFor": "Remover",
+        "hint": "Marca os tokens selecionados e cujo mouse esteja em cima como alvos do usuário escolhido.",
+        "name": "Adicionar Alvos",
+        "title": "Selecione o usuário que marcará os alvos"
+      },
+      "applyEncumbranceBasedOnBulk": {
+        "hint": "Aplica Sobrecarga baseado no Volume. Usa código do sistema que, por exemplo, considera que um volume total de 5 Volumes + 9 Leves não excedem um limite de 5 Volumes.",
+        "name": "Aplicar Sobrecarga baseado no Volume"
+      },
+      "applyPersistentAllow": {
+        "all": "Todos",
+        "gm": "MJ",
+        "hint": "Selecione quem pode definir a opção de aplicar dano ou cura persistente automaticamente. Salve a configuração para mostrar/ocultar as opções nas Automatizações de Cliente.",
+        "name": "Permissão: aplicar dano/cura persistente",
+        "none": "Ninguém",
+        "players": "Jogadores"
+      },
+      "applyPersistentDamage": {
+        "hint": "Automaticamente aplica dano persistente.",
+        "name": "Aplicar dano persistente",
+        "wasDamaged": "{damage} de dano foi aplicado automaticamente"
+      },
+      "applyPersistentHealing": {
+        "FastHealingLabel": "Recebeu Cura Acelerada",
+        "hint": "Automaticamente aplica cura persistente. Salve a configuração para mostrar/ocultar opções adicionais.",
+        "name": "Aplicar cura persistente",
+        "RegenerationLabel": "Recebeu Regeneração",
+        "wasHealed": "{healing} de cura foi aplicado automaticamente."
+      },
+      "autoCollapseItemChatCardContent": {
+        "collapsedDefault": "Recolher por padrão, clicar no título para expandir",
+        "hint": "Recolhe automaticamente o conteúdo de cartões de chat.",
+        "name": "Recolher conteúdo de cartão de chat de itens",
+        "noCollapse": "Nunca recolher",
+        "nonCollapsedDefault": "Expandido por padrão, clicar no título para recolher"
+      },
+      "autoExpandDamageRolls": {
+        "collapsedAll": "Rolagens de dano recolhidas (padrão do Foundry)",
+        "expandedAll": "Rolagens de dano expandidas",
+        "expandedNew": "Novas rolagens de dano são expandidas, e expande as últimas 3 rolagens ao recarregar.",
+        "expandedNewest": "Novas rolagens de dano são expandidas, e expande a última rolagem ao recarregar.",
+        "hint": "Automaticamente expande ou recolhe rolagens de dano. Clique nas rolagens de dado para expandir ou recolher.",
+        "name": "Comportamento de Rolagens de Dano"
+      },
+      "autoGainDyingAtZeroHP": {
+        "addOne": "Adicionar 1",
+        "addOneForCharacters": "Adicionar 1, para personagens e familiares",
+        "addWoundedLevel": "Adicionar 1 + nível de Ferido, para todos",
+        "addWoundedLevelForCharacters": "Adicionar 1 + nível de Ferido, para personagens e familiares",
+        "hint": "Automaticamente aumenta a condição Morrendo quando chegar a 0 PV.",
+        "name": "Aumentar Morrendo em 0 PV",
+        "no": "Não"
+      },
       "automationClientSettings": {
+        "hint": "Habilitar e Configurar automação para jogadores",
         "label": "Automatizações de Cliente",
-        "name": "Automatizações de Cliente",
-        "hint": "Habilitar e Configurar automação para jogadores"
+        "name": "Automatizações de Cliente"
       },
-      "remindersSettings": {
-        "hint": "Configure vários lembretes.",
-        "name": "Lembretes",
-        "label": "Configurações de Lembretes"
+      "automationWorldSettings": {
+        "hint": "Configura automatizações para o MJ.",
+        "label": "Automatizações de Mundo",
+        "name": "Automatizações de Mundo"
       },
-      "npcRoller": {
-        "name": "Rolador de NPC",
-        "hint": "Habilita o Rolador de NPC, que pode ser ativado na aba de Diários."
+      "autoReduceStunned": {
+        "hint": "Automaticamente reduz a condição Atordoado no início do turno.",
+        "name": "Reduzir Atordoado no início do turno"
+      },
+      "autoRemoveDyingAtGreaterThanZeroHP": {
+        "hint": "Remove Morrendo automaticamente quando curado acima de 0 PV.",
+        "name": "Remover Morrendo se curado acima de 0 PV",
+        "no": "Não",
+        "removeDying": "Remover Morrendo para todos",
+        "removeDyingForCharacters": "Remover Morrendo para personagens e familiares"
+      },
+      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
+        "hint": "Automaticamente remove Inconsciente se curado acima de 0 PV.",
+        "name": "Remover Inconsciente se curado acima de 0 PV"
+      },
+      "autoRollDamageAllow": {
+        "all": "Todos",
+        "gm": "MJ",
+        "hint": "Selecione quem pode definir a opção de rolar dano em um acerto automaticamente. Salve a configuração para mostrar/ocultar as opções nas Automatizações de Cliente.",
+        "name": "Permissão: rolar dano em um acerto automaticamente",
+        "none": "Ninguém",
+        "players": "Jogadores"
+      },
+      "autoRollDamageForSpellAttack": {
+        "hint": "Rola dano automaticamente ao acertar ataques mágicos. Acertos críticos sempre rolarão dano normal.",
+        "name": "Rolar dano automaticamente para ataques mágicos"
+      },
+      "autoRollDamageForSpellNotAnAttack": {
+        "hint": "Rola dano normal automaticamente para magias que não são ataques.",
+        "name": "Rolar dano automaticamente para magias que não são ataques"
+      },
+      "autoRollDamageForStrike": {
+        "hint": "Rola dano automaticamente ao acertar Golpes. Acertos críticos rolarão dano crítico.",
+        "name": "Rolar dano automaticamente para Golpes",
+        "strike": "Golpe"
+      },
+      "autoRollDamageNotifyOnSpellCardNotFound": {
+        "hint": "Notifica quando uma magia de ataque é rolada e nenhum cartão de magia foi encontrado para rolar o dano.",
+        "name": "Notificar: magia de ataque sem cartão de magia"
+      },
+      "callHotbarMacro": {
+        "hint": "Ativa a macro da página {page} na posição {column}.",
+        "name": "Macro da página {page}, coluna {column}"
+      },
+      "castPrivateSpell": {
+        "hint": "Conjurar uma Magia enquanto pressiona Ctrl a conjura apenas como uma mensagem de sussurro para o conjurador e o MJ.",
+        "name": "Conjurar em segredo com Ctrl"
+      },
+      "castPrivateSpellWithPublicMessage": {
+        "cantrip": "Truque mágico",
+        "components": "Componentes:",
+        "firstPart": "{tokenName} acabou de conjurar um(a) {type} {vsmf} da tradição <strong>{traditionString}</strong>",
+        "hint": "Se conjurar em segredo, também posta uma mensagem pública informando que uma magia foi conjurada a não ser que você também esteja pressionando Shift.",
+        "name": "Publicar que uma magia foi conjurada",
+        "savePart": "<br>Salvamento para a magia desconhecida é: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
+        "secondPartNoRk": ".<br>Pergunte ao MJ se você a reconhece automaticamente ou com uma reação. Senão, pergunte ao MJ pelo CD de Recordar Conhecimento se você deseja gastar uma ação em seu turno para tentar identificá-la.",
+        "secondPartRK": ".<br>Pergunte ao MJ se você a reconhece automaticamente ou com uma reação. Senão, você pode gastar uma ação em seu turno para tentar identificá-la: @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
+        "spell": "Magia",
+        "they": "O personagem"
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "hint": "Mostra os traços da magia na mensagem pública.",
+        "name": "Mostrar traços da magia",
+        "traitPart": " com esses traços: <strong>{traits}</strong>"
+      },
+      "creatureBuilder": {
+        "hint": "Permite criar criaturas personalidas de acordo com as regras do Guia do Mestre.",
+        "name": "Criar criaturas personalizadas"
+      },
+      "decreaseFrightenedConditionEachTurn": {
+        "hint": "Automaticamente reduz a condição Assustado a cada turno para PJs, PdMs e familiares.",
+        "name": "Diminuir Assustado a cada turno"
+      },
+      "enableAutomaticMove": {
+        "hint": "Define quando a posição de iniciativa de um combatente fora de seu próprio turno é movida para imediatamente antes do turno atual (ex.: Nocauteado e Morrendo, Livro Básico pág. 459). Devido a arredondamentos, vários combatentes podem mostrar a mesma iniciativa na lista.",
+        "name": "Definir iniciativa para antes do combatente atual",
+        "noAutomation": "Nunca",
+        "reaching0HP": "Quando o combatente for reduzido a 0 PV"
+      },
+      "giveUnconsciousIfDyingRemovedAt0HP": {
+        "hint": "Automaticamente aplica a condição Inconsciente se Morrendo for removido enquanto estiver em 0 PV.",
+        "name": "Dar Inconsciente se Morrendo for removido",
+        "no": "Não"
+      },
+      "giveWoundedWhenDyingRemoved": {
+        "hint": "Automaticamente aplica a condição Ferido quando a condição Morrendo for removida.",
+        "name": "Aplicar Ferido quando Morrendo for removido"
       },
       "heroPointHandler": {
-        "doWhat": "<b>Seção 1</b> - Escolha o que fazer com os Pontos de Heroísmo de <em>todos</em> os personagens com o seguinte valor",
         "add": "Adicionar",
         "addedFor": "1 Ponto de Heroísmo adicionado para {name}",
         "addedToForAll": "{heroPoints} Ponto(s) de Heroísmo adicionado(s) para todos",
         "addOne": "<b>Seção 2</b> - Adicionar um Ponto de Heroísmo para personagens selecionados dentre os que estão logados (o padrão é um personagem aleatório quando o temporizador expira)",
         "all": "Todos",
         "defaultTimeoutMinutes": 60,
+        "doWhat": "<b>Seção 1</b> - Escolha o que fazer com os Pontos de Heroísmo de <em>todos</em> os personagens com o seguinte valor",
         "hint": "Habilita o gerenciador de Pontos de Heroísmo, que pode ser ativado por um atalho de teclado opcional.",
         "ignore": "Fazer Nada",
+        "instructions": "Note que o temporizador fica pausado enquanto este diálogo está aberto. Feche-o sem apertar os butões abaixo para despausar o temporizador.",
         "minutesLeft": "minutos restando no temporizador",
         "name": "Habilitar Gerenciador de Pontos de Heroísmo.",
         "none": "Sem personagem",
@@ -38,109 +196,38 @@
         "timerStopped": "Temporizador de Pontos de Heroísmo foi parado.",
         "timerValue": "Tempo do Temporizador (intervalo de 0 a 60)",
         "title": "Gerenciador de Pontos de Heroísmo",
-        "willBeResetIn": "O Gerenciador de Pontos de Heroísmo retornará em {remainingMinutes} minutos ({time}).",
-        "instructions": "Note que o temporizador fica pausado enquanto este diálogo está aberto. Feche-o sem apertar os butões abaixo para despausar o temporizador."
-      },
-      "abpVariantAllowItemBonuses": {
-        "hint": "Não desabilita os bônus de item quando estiver usando a regra variante de Progressão Automática de Bônus.",
-        "name": "Não desabilitar bônus de item usando a PAB"
-      },
-      "applyPersistentAllow": {
-        "name": "Permissão: aplicar dano/cura persistente",
-        "hint": "Selecione quem pode definir a opção de aplicar dano ou cura persistente automaticamente. Salve a configuração para mostrar/ocultar as opções nas Automatizações de Cliente.",
-        "none": "Ninguém",
-        "all": "Todos",
-        "gm": "MJ",
-        "players": "Jogadores"
-      },
-      "mystificationSettings": {
-        "name": "Configurações de Mistificação de NPC",
-        "label": "Mistificação de PdMs",
-        "hint": "Habilitar e configurar mistificação de PdM"
-      },
-      "automationWorldSettings": {
-        "name": "Automatizações de Mundo",
-        "label": "Automatizações de Mundo",
-        "hint": "Configura automatizações para o MJ."
-      },
-      "qolWorldSettings": {
-        "hint": "Configurações de qualidade de vida para o MJ.",
-        "name": "Qualidade de Vida",
-        "label": "Qualidade de Vida"
-      },
-      "addGmRKButtonToNpc": {
-        "name": "Botão de Recordar Conhecimento",
-        "hideNpcName": "Ocultar nome ao Recordar Conhecimento",
-        "hint": "Adiciona o botão de Recordar Conhecimento para PdMs. Atualmente só funciona para perícias, as perícias de saber precisam ser resolvidas manualmente.",
-        "hideSkill": "Oculta o nome da perícia na mensagem de Recordar Conhecimento."
+        "willBeResetIn": "O Gerenciador de Pontos de Heroísmo retornará em {remainingMinutes} minutos ({time})."
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
         "hint": "Define quantos minutos até a próxima vez que o Gerenciador de Pontos de Heroísmo abrirá.",
         "name": "Temporizador do Gerenciador de Pontos de Heroísmo"
       },
-      "heroPointHandlerStartTimerOnReady": {
-        "name": "Iniciar o Gerenciador de Pontos de Heroísmo automaticamente",
-        "hint": "Marque para iniciar o temporizador do Gerenciador de Pontos de Heroísmo quando o jogo estiver pronto."
-      },
       "heroPointHandlerKey": {
-        "name": "Gerenciador de Pontos de Heroísmo",
-        "hint": "Atalho de teclado para abrir o Gerenciador de Pontos de Heroísmo, que permite resetar ou adicionar Pontos de Heroísmo."
+        "hint": "Atalho de teclado para abrir o Gerenciador de Pontos de Heroísmo, que permite resetar ou adicionar Pontos de Heroísmo.",
+        "name": "Gerenciador de Pontos de Heroísmo"
+      },
+      "heroPointHandlerStartTimerOnReady": {
+        "hint": "Marque para iniciar o temporizador do Gerenciador de Pontos de Heroísmo quando o jogo estiver pronto.",
+        "name": "Iniciar o Gerenciador de Pontos de Heroísmo automaticamente"
       },
       "maxHeroPoints": {
         "hint": "Define o número máximo de Pontos de Heroísmo de personagens.",
         "name": "Número máximo de Pontos de Heroísmo"
       },
-      "npcMystifierModifierKey": {
-        "name": "Tecla para mistificar ao arrastar à cena",
-        "hint": "Escolhe a tecla a ser pressionada para mistificar criaturas quando as arrastar para a cena ativa. Note que Alt também esconderá os PdMs, por padrão do Foundry."
+      "moveBeforeCurrentCombatantContextMenu": {
+        "name": "Mover combatentes para antes do combatente atual"
       },
-      "npcMystifierMystifyKey": {
-        "hint": "Mistifica tokens selecionados.",
-        "name": "Mistificar Tokens"
+      "moveBeforeCurrentCombatantKey": {
+        "hint": "Move os combatentes selecionados para imediatamente antes do turno atual (ex.: Nocauteado e Morrendo, Livro Básico pág. 459). Devido a arredondamentos, vários combatentes podem mostrar a mesma iniciativa na lista.",
+        "name": "Mover combatentes para antes do combatente atual"
       },
-      "npcMystifierPostfix": {
-        "name": "Sufixo: Palavra ou Tabela de Rolagem",
-        "hint": "Adiciona um sufixo ao novo nome. Se corresponder ao nome de uma tabela de rolagem, um resultado aleatório será usado como sufixo."
+      "mystificationSettings": {
+        "hint": "Habilitar e configurar mistificação de PdM",
+        "label": "Mistificação de PdMs",
+        "name": "Configurações de Mistificação de NPC"
       },
-      "npcMystifierPrefix": {
-        "hint": "Adiciona um prefixo ao novo nome. Se corresponder ao nome de uma tabela de rolagem, um resultado aleatório será usado como prefixo.",
-        "name": "Prefixo: Palavra ou Tabela de Rolagem"
-      },
-      "npcMystifierSkipRandomPropertyForUnique": {
-        "name": "Não adicionar propriedade a PdMs únicos",
-        "hint": "Não adiciona propriedade aleatórios quando mistificar PdMs únicos."
-      },
-      "npcMystifierUseMystifiedNameInChat": {
-        "name": "(Experimental) Mistificar nome em mensagens de chat",
-        "hint": "Usa nome mistificado em mensagens de chat, substituindo o nome do ator pelo nome mistificado."
-      },
-      "npcMystifierUseSize": {
-        "hint": "Usa o tamanho do ator no nome mistificado.",
-        "name": "Usar tamanho do ator"
-      },
-      "npcScaler": {
-        "hint": "Permite ajustar o nível de PdMs.",
-        "name": "Ajustar nível de PdMs"
-      },
-      "decreaseFrightenedConditionEachTurn": {
-        "hint": "Automaticamente reduz a condição Assustado a cada turno para PJs, PdMs e familiares.",
-        "name": "Diminuir Assustado a cada turno"
-      },
-      "npcMystifierNoMatch": {
-        "hint": "Texto para ser usado quando nenhum traço correspondente for encontrado e o nome ficaria vazio. Texto vazio se tornará \\\"...\\\".",
-        "name": "Texto para não-correspondência"
-      },
-      "npcMystifierUseEliteWeak": {
-        "hint": "Usa os termos de ajuste Elite ou Fraco no nome mistificado.",
-        "name": "Usar Elite ou Fraco"
-      },
-      "npcMystifierUseRaritiesReplacement": {
-        "hint": "Defina uma palavra para substituir raridades maiores que Comum. Caso fique vazio, não mudará a raridade exibida.",
-        "name": "Substituir raridades maiores que Comum"
-      },
-      "npcMystifierKeepRandomProperty": {
-        "name": "Manter propriedade de token",
-        "hint": "Mantém a propriedade de tokens (no mesmo formato como adicionado por este módulo) no fim do nome quando mistificar PdMs."
+      "notifications": {
+        "cantMystify": "Você não pode mistificar este token. Ele está na cena ativa e você é o MJ?"
       },
       "npcMystifier": {
         "hint": "Habilita o Mistificador de PdMs, renomeando tokens em cenas ativas baseado em seus traços se Ctrl (configurável) estiver pressionado ao adicioná-los à cena. Altere esta configuração para mostrar ou esconder opções adicionais.",
@@ -150,17 +237,45 @@
         "hint": "Adiciona propriedade aleatórios quando mistificar.",
         "name": "Adicionar propriedade aleatórios ao nome"
       },
+      "npcMystifierBlacklist": {
+        "hint": "Adicione à esta lista de bloqueio, separada por vírgula, para filtrar conteúdo do nome mistificado.",
+        "name": "Lista de Bloqueio de Traços"
+      },
       "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
         "hint": "A mistificação de tokens se baseará no mesmo ator.",
         "name": "Desmistificar todos os tokens do ator"
       },
+      "npcMystifierKeepRandomProperty": {
+        "hint": "Mantém a propriedade de tokens (no mesmo formato como adicionado por este módulo) no fim do nome quando mistificar PdMs.",
+        "name": "Manter propriedade de token"
+      },
+      "npcMystifierModifierKey": {
+        "hint": "Escolhe a tecla a ser pressionada para mistificar criaturas quando as arrastar para a cena ativa. Note que Alt também esconderá os PdMs, por padrão do Foundry.",
+        "name": "Tecla para mistificar ao arrastar à cena"
+      },
+      "npcMystifierMystifyKey": {
+        "hint": "Mistifica tokens selecionados.",
+        "name": "Mistificar Tokens"
+      },
+      "npcMystifierNoMatch": {
+        "hint": "Texto para ser usado quando nenhum traço correspondente for encontrado e o nome ficaria vazio. Texto vazio se tornará \\\"...\\\".",
+        "name": "Texto para não-correspondência"
+      },
+      "npcMystifierPostfix": {
+        "hint": "Adiciona um sufixo ao novo nome. Se corresponder ao nome de uma tabela de rolagem, um resultado aleatório será usado como sufixo.",
+        "name": "Sufixo: Palavra ou Tabela de Rolagem"
+      },
+      "npcMystifierPrefix": {
+        "hint": "Adiciona um prefixo ao novo nome. Se corresponder ao nome de uma tabela de rolagem, um resultado aleatório será usado como prefixo.",
+        "name": "Prefixo: Palavra ou Tabela de Rolagem"
+      },
+      "npcMystifierSkipRandomPropertyForUnique": {
+        "hint": "Não adiciona propriedade aleatórios quando mistificar PdMs únicos.",
+        "name": "Não adicionar propriedade a PdMs únicos"
+      },
       "npcMystifierUseAlignmentTraits": {
         "hint": "Usa traços do alinhamento no nome mistificado.",
         "name": "Usar traços de alinhamento"
-      },
-      "npcMystifierBlacklist": {
-        "hint": "Adicione à esta lista de bloqueio, separada por vírgula, para filtrar conteúdo do nome mistificado.",
-        "name": "Lista de Bloqueio de Traços"
       },
       "npcMystifierUseCreatureTraits": {
         "hint": "Use todos os traços de criatura como definidos pelo sistema pf2e no nome mistificado.",
@@ -170,209 +285,94 @@
         "hint": "Usar traços de tipo de criatura (ver https://2e.aonprd.com/Traits.aspx) no nome mistificado.",
         "name": "Usar traços de tipo de criatura"
       },
+      "npcMystifierUseEliteWeak": {
+        "hint": "Usa os termos de ajuste Elite ou Fraco no nome mistificado.",
+        "name": "Usar Elite ou Fraco"
+      },
+      "npcMystifierUseMystifiedNameInChat": {
+        "hint": "Usa nome mistificado em mensagens de chat, substituindo o nome do ator pelo nome mistificado.",
+        "name": "(Experimental) Mistificar nome em mensagens de chat"
+      },
       "npcMystifierUseOtherTraits": {
-        "name": "Usar outros traços",
-        "hint": "Usa todos os traços de PdM ainda não inclusos pelas configurações acima no nome mistificado."
+        "hint": "Usa todos os traços de PdM ainda não inclusos pelas configurações acima no nome mistificado.",
+        "name": "Usar outros traços"
       },
       "npcMystifierUseRarities": {
         "hint": "Usa raridas no nome mistificado.",
         "name": "Usar raridade"
       },
-      "creatureBuilder": {
-        "name": "Criar criaturas personalizadas",
-        "hint": "Permite criar criaturas personalidas de acordo com as regras do Guia do Mestre."
+      "npcMystifierUseRaritiesReplacement": {
+        "hint": "Defina uma palavra para substituir raridades maiores que Comum. Caso fique vazio, não mudará a raridade exibida.",
+        "name": "Substituir raridades maiores que Comum"
+      },
+      "npcMystifierUseSize": {
+        "hint": "Usa o tamanho do ator no nome mistificado.",
+        "name": "Usar tamanho do ator"
+      },
+      "npcRoller": {
+        "hint": "Habilita o Rolador de NPC, que pode ser ativado na aba de Diários.",
+        "name": "Rolador de NPC"
+      },
+      "npcScaler": {
+        "hint": "Permite ajustar o nível de PdMs.",
+        "name": "Ajustar nível de PdMs"
+      },
+      "playerItemsRarityColour": {
+        "hint": "Colore o nome de itens na ficha de atores baseado em suas raridades.",
+        "name": "Colorir nome de itens"
+      },
+      "qolWorldSettings": {
+        "hint": "Configurações de qualidade de vida para o MJ.",
+        "label": "Qualidade de Vida",
+        "name": "Qualidade de Vida"
+      },
+      "quickQuantities": {
+        "hint": "Ao aumentar/diminuir a quantidade de itens, segurar Shift ao clicar altera a quantidade em 5 e Ctrl a altera em 10.",
+        "name": "Shift/Ctrl na Quantidades de Item"
       },
       "reminderBreathWeapon": {
+        "defaultName": "Sopro",
         "hint": "Cria um lembrete para o uso de sopros (como os de um dragão).",
         "name": "Sopros",
         "prefix": "Recarga",
-        "defaultName": "Sopro",
-        "used": "Usou ",
-        "source": "Lembrete de Sopro criado pelo PF2e Workbench"
+        "source": "Lembrete de Sopro criado pelo PF2e Workbench",
+        "used": "Usou "
       },
       "reminderCannotAttack": {
+        "dead": "está morto",
+        "defeated": "está marcado como derrotado",
+        "hasNoHp": "não tem PV",
         "hint": "Mostra um lembrete se atacar com um token que não pode atacar por algum motivo, como estar inconsciente, morto, sem PV, etc.",
         "name": "Atacando com token incapaz de atacar",
+        "note": "Tem certeza sobre este ataque? {actorName} {reason} e não deveria poder atacar normalmente.",
         "petrified": "está petrificado",
-        "unconscious": "está inconsciente",
-        "dead": "está morto",
-        "hasNoHp": "não tem PV",
-        "defeated": "está marcado como derrotado",
-        "note": "Tem certeza sobre este ataque? {actorName} {reason} e não deveria poder atacar normalmente."
+        "unconscious": "está inconsciente"
       },
       "reminderCannotAttackIgnoreDeadEidolon": {
         "hint": "Permite que Eidolons que estejam mortos ou sem PV possam atacar sem mostrar o lembrete.",
         "name": "Ignorar lembrete para Eidolons"
       },
       "reminderIWR": {
-        "name": "Imunidades, Fraquezas e Resistências",
-        "weakTo": " <strong>Fraco</strong> a ",
-        "resistantTo": " <strong>Resistente</strong> a ",
+        "hint": "Mostra lembrete para Imunidades, Fraquezas e Resistências quando dano é recebido. Atualmente só funciona com tipos \\\"simples\\\", como \\\"fogo\\\" e \\\"contundente\\\", mas não \\\"todo dano\\\" ou \\\"Físico\\\".",
         "immuneTo": " <strong>Imune</strong> a ",
         "is": "{name} é",
-        "hint": "Mostra lembrete para Imunidades, Fraquezas e Resistências quando dano é recebido. Atualmente só funciona com tipos \\\"simples\\\", como \\\"fogo\\\" e \\\"contundente\\\", mas não \\\"todo dano\\\" ou \\\"Físico\\\"."
+        "name": "Imunidades, Fraquezas e Resistências",
+        "resistantTo": " <strong>Resistente</strong> a ",
+        "weakTo": " <strong>Fraco</strong> a "
+      },
+      "remindersSettings": {
+        "hint": "Configure vários lembretes.",
+        "label": "Configurações de Lembretes",
+        "name": "Lembretes"
       },
       "reminderTargeting": {
         "hint": "Mostra um lembrete para marcar alvos em combate.",
         "name": "Marcar Alvos",
         "note": "Lembrete: Marque um alvo antes de atacar."
       },
-      "quickQuantities": {
-        "hint": "Ao aumentar/diminuir a quantidade de itens, segurar Shift ao clicar altera a quantidade em 5 e Ctrl a altera em 10.",
-        "name": "Shift/Ctrl na Quantidades de Item"
-      },
-      "actionsReminderAllow": {
-        "name": "Lembrete de Número de Ações",
-        "none": "Ninguém",
-        "all": "Todos",
-        "gm": "MJ",
-        "players": "Jogadores",
-        "hint": "Mostra um lembrete de número de ações como uma mensagem de chat para os usuários escolhidos."
-      },
-      "autoReduceStunned": {
-        "hint": "Automaticamente reduz a condição Atordoado no início do turno.",
-        "name": "Reduzir Atordoado no início do turno"
-      },
-      "addUserTargets": {
-        "hint": "Marca os tokens selecionados e cujo mouse esteja em cima como alvos do usuário escolhido.",
-        "name": "Adicionar Alvos",
-        "title": "Selecione o usuário que marcará os alvos",
-        "addFor": "Adicionar",
-        "clearFor": "Remover"
-      },
-      "playerItemsRarityColour": {
-        "name": "Colorir nome de itens",
-        "hint": "Colore o nome de itens na ficha de atores baseado em suas raridades."
-      },
-      "castPrivateSpell": {
-        "hint": "Conjurar uma Magia enquanto pressiona Ctrl a conjura apenas como uma mensagem de sussurro para o conjurador e o MJ.",
-        "name": "Conjurar em segredo com Ctrl"
-      },
-      "castPrivateSpellWithPublicMessage": {
-        "name": "Publicar que uma magia foi conjurada",
-        "cantrip": "Truque mágico",
-        "components": "Componentes:",
-        "spell": "Magia",
-        "they": "O personagem",
-        "secondPartNoRk": ".<br>Pergunte ao MJ se você a reconhece automaticamente ou com uma reação. Senão, pergunte ao MJ pelo CD de Recordar Conhecimento se você deseja gastar uma ação em seu turno para tentar identificá-la.",
-        "savePart": "<br>Salvamento para a magia desconhecida é: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
-        "hint": "Se conjurar em segredo, também posta uma mensagem pública informando que uma magia foi conjurada a não ser que você também esteja pressionando Shift.",
-        "firstPart": "{tokenName} acabou de conjurar um(a) {type} {vsmf} da tradição <strong>{traditionString}</strong>",
-        "secondPartRK": ".<br>Pergunte ao MJ se você a reconhece automaticamente ou com uma reação. Senão, você pode gastar uma ação em seu turno para tentar identificá-la: @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}"
-      },
-      "castPrivateSpellWithPublicMessageShowTraits": {
-        "hint": "Mostra os traços da magia na mensagem pública.",
-        "name": "Mostrar traços da magia",
-        "traitPart": " com esses traços: <strong>{traits}</strong>"
-      },
       "workbenchVersion": {
         "hint": "Versão em que a última migração foi executada. Pode ser menor que a versão do módulo. Não a modifique a não ser que você saiba o que está fazendo.",
         "name": "Versão de migração do Workbench"
-      },
-      "applyPersistentHealing": {
-        "hint": "Automaticamente aplica cura persistente. Salve a configuração para mostrar/ocultar opções adicionais.",
-        "name": "Aplicar cura persistente",
-        "FastHealingLabel": "Recebeu Cura Acelerada",
-        "RegenerationLabel": "Recebeu Regeneração",
-        "wasHealed": "{healing} de cura foi aplicado automaticamente."
-      },
-      "autoCollapseItemChatCardContent": {
-        "collapsedDefault": "Recolher por padrão, clicar no título para expandir",
-        "hint": "Recolhe automaticamente o conteúdo de cartões de chat.",
-        "name": "Recolher conteúdo de cartão de chat de itens",
-        "noCollapse": "Nunca recolher",
-        "nonCollapsedDefault": "Expandido por padrão, clicar no título para recolher"
-      },
-      "autoExpandDamageRolls": {
-        "name": "Comportamento de Rolagens de Dano",
-        "collapsedAll": "Rolagens de dano recolhidas (padrão do Foundry)",
-        "expandedNew": "Novas rolagens de dano são expandidas, e expande as últimas 3 rolagens ao recarregar.",
-        "hint": "Automaticamente expande ou recolhe rolagens de dano. Clique nas rolagens de dado para expandir ou recolher.",
-        "expandedAll": "Rolagens de dano expandidas",
-        "expandedNewest": "Novas rolagens de dano são expandidas, e expande a última rolagem ao recarregar."
-      },
-      "autoRollDamageAllow": {
-        "hint": "Selecione quem pode definir a opção de rolar dano em um acerto automaticamente. Salve a configuração para mostrar/ocultar as opções nas Automatizações de Cliente.",
-        "name": "Permissão: rolar dano em um acerto automaticamente",
-        "none": "Ninguém",
-        "all": "Todos",
-        "gm": "MJ",
-        "players": "Jogadores"
-      },
-      "autoRollDamageForSpellAttack": {
-        "hint": "Rola dano automaticamente ao acertar ataques mágicos. Acertos críticos sempre rolarão dano normal.",
-        "name": "Rolar dano automaticamente para ataques mágicos"
-      },
-      "autoGainDyingAtZeroHP": {
-        "hint": "Automaticamente aumenta a condição Morrendo quando chegar a 0 PV.",
-        "name": "Aumentar Morrendo em 0 PV",
-        "no": "Não",
-        "addOne": "Adicionar 1",
-        "addWoundedLevel": "Adicionar 1 + nível de Ferido, para todos",
-        "addOneForCharacters": "Adicionar 1, para personagens e familiares",
-        "addWoundedLevelForCharacters": "Adicionar 1 + nível de Ferido, para personagens e familiares"
-      },
-      "giveUnconsciousIfDyingRemovedAt0HP": {
-        "hint": "Automaticamente aplica a condição Inconsciente se Morrendo for removido enquanto estiver em 0 PV.",
-        "name": "Dar Inconsciente se Morrendo for removido",
-        "no": "Não"
-      },
-      "giveWoundedWhenDyingRemoved": {
-        "name": "Aplicar Ferido quando Morrendo for removido",
-        "hint": "Automaticamente aplica a condição Ferido quando a condição Morrendo for removida."
-      },
-      "enableAutomaticMove": {
-        "hint": "Define quando a posição de iniciativa de um combatente fora de seu próprio turno é movida para imediatamente antes do turno atual (ex.: Nocauteado e Morrendo, Livro Básico pág. 459). Devido a arredondamentos, vários combatentes podem mostrar a mesma iniciativa na lista.",
-        "name": "Definir iniciativa para antes do combatente atual",
-        "noAutomation": "Nunca",
-        "reaching0HP": "Quando o combatente for reduzido a 0 PV"
-      },
-      "moveBeforeCurrentCombatantKey": {
-        "hint": "Move os combatentes selecionados para imediatamente antes do turno atual (ex.: Nocauteado e Morrendo, Livro Básico pág. 459). Devido a arredondamentos, vários combatentes podem mostrar a mesma iniciativa na lista.",
-        "name": "Mover combatentes para antes do combatente atual"
-      },
-      "applyPersistentDamage": {
-        "hint": "Automaticamente aplica dano persistente.",
-        "name": "Aplicar dano persistente",
-        "wasDamaged": "{damage} de dano foi aplicado automaticamente"
-      },
-      "applyEncumbranceBasedOnBulk": {
-        "hint": "Aplica Sobrecarga baseado no Volume. Usa código do sistema que, por exemplo, considera que um volume total de 5 Volumes + 9 Leves não excedem um limite de 5 Volumes.",
-        "name": "Aplicar Sobrecarga baseado no Volume"
-      },
-      "autoRollDamageForStrike": {
-        "hint": "Rola dano automaticamente ao acertar Golpes. Acertos críticos rolarão dano crítico.",
-        "strike": "Golpe",
-        "name": "Rolar dano automaticamente para Golpes"
-      },
-      "autoRollDamageForSpellNotAnAttack": {
-        "hint": "Rola dano normal automaticamente para magias que não são ataques.",
-        "name": "Rolar dano automaticamente para magias que não são ataques"
-      },
-      "autoRollDamageNotifyOnSpellCardNotFound": {
-        "hint": "Notifica quando uma magia de ataque é rolada e nenhum cartão de magia foi encontrado para rolar o dano.",
-        "name": "Notificar: magia de ataque sem cartão de magia"
-      },
-      "autoRemoveDyingAtGreaterThanZeroHP": {
-        "hint": "Remove Morrendo automaticamente quando curado acima de 0 PV.",
-        "name": "Remover Morrendo se curado acima de 0 PV",
-        "no": "Não",
-        "removeDying": "Remover Morrendo para todos",
-        "removeDyingForCharacters": "Remover Morrendo para personagens e familiares"
-      },
-      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
-        "hint": "Automaticamente remove Inconsciente se curado acima de 0 PV.",
-        "name": "Remover Inconsciente se curado acima de 0 PV"
-      },
-      "callHotbarMacro": {
-        "hint": "Ativa a macro da página {page} na posição {column}.",
-        "name": "Macro da página {page}, coluna {column}"
-      },
-      "moveBeforeCurrentCombatantContextMenu": {
-        "name": "Mover combatentes para antes do combatente atual"
-      },
-      "notifications": {
-        "cantMystify": "Você não pode mistificar este token. Ele está na cena ativa e você é o MJ?"
       }
     },
     "npcRoller": {

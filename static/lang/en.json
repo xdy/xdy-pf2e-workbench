@@ -57,60 +57,30 @@
       "pf2e-toolbox": "The module pf2e-toolbox is no longer maintained, most of it's functions are part of the Workbench, please turn it off."
     },
     "SETTINGS": {
-      "mystificationSettings": {
-        "hint": "Enable and configure NPC mystification",
-        "name": "NPC Mystification Settings",
-        "label": "Manage NPC Mystification Settings"
-      },
-      "automationClientSettings": {
-        "hint": "Enable and configure automation for players",
-        "name": "Client Automation Settings",
-        "label": "Manage Client Automation Settings"
-      },
-      "automationWorldSettings": {
-        "hint": "Enable and configure automation for GMs",
-        "name": "World Automation Settings",
-        "label": "Manage World Automation Settings"
-      },
-      "qolWorldSettings": {
-        "hint": "Enable and configure quality of life settings for GMs",
-        "name": "World QoL Settings",
-        "label": "Manage World QoL Settings"
-      },
-      "remindersSettings": {
-        "hint": "Enable and configure various reminders",
-        "name": "Reminders Settings",
-        "label": "Manage Reminders Settings"
-      },
       "abpVariantAllowItemBonuses": {
         "hint": "Doesn't disable item bonuses when using Automatic Bonus Progression variant rule.",
         "name": "Do not disable item bonuses when using ABP."
       },
-      "addGmRKButtonToNpc": {
-        "hint": "Check to add Recall Knowlege button to NPCs. Currently only for the skill, lores will have to be handled manually.",
-        "name": "Add Recall Knowledge button to NPCs.",
-        "hideNpcName": "Hide NPC name on Recall Knowledge message.",
-        "hideSkill": "Hide skill name on Recall Knowledge message."
-      },
-      "applyPersistentAllow": {
-        "hint": "Select who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options on the client automation setting menu.",
-        "name": "Who is allowed to set the option to automatically apply persistent damage/healing.",
-        "none": "None",
+      "actionsReminderAllow": {
         "all": "All",
         "gm": "GM",
+        "hint": "Check to show number of actions reminder as chat message.",
+        "name": "Who gets an actions reminder",
+        "none": "None",
         "players": "Players"
       },
-      "applyPersistentDamage": {
-        "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
-        "name": "Automatically apply persistent damage rolled by the Persistent Damage module.",
-        "wasDamaged": "{damage} damage was automatically applied"
+      "addGmRKButtonToNpc": {
+        "hideNpcName": "Hide NPC name on Recall Knowledge message.",
+        "hideSkill": "Hide skill name on Recall Knowledge message.",
+        "hint": "Check to add Recall Knowlege button to NPCs. Currently only for the skill, lores will have to be handled manually.",
+        "name": "Add Recall Knowledge button to NPCs."
       },
-      "applyPersistentHealing": {
-        "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
-        "name": "Automatically apply persistent healing rolled by the system.",
-        "FastHealingLabel": "Received Fast Healing",
-        "RegenerationLabel": "Received Regeneration",
-        "wasHealed": "{healing} healing was automatically applied."
+      "addUserTargets": {
+        "addFor": "Add targets for",
+        "clearFor": "Clear targets for",
+        "hint": "Keybind to add selected and hovered tokens to the chosen user's targets.",
+        "name": "Add user targets",
+        "title": "Select user to add targets for"
       },
       "applyClumsyIfWieldingLargerWeapon": {
         "hint": "Automatically apply clumsy if wielding a weapon larger than the wielder.",
@@ -120,61 +90,65 @@
         "hint": "Automatically apply encumbrance based on bulk. (Uses system code which considers 5 bulk + 9 light to not exceed 5 bulk.)",
         "name": "Automatically apply encumbrance based on bulk."
       },
+      "applyPersistentAllow": {
+        "all": "All",
+        "gm": "GM",
+        "hint": "Select who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options on the client automation setting menu.",
+        "name": "Who is allowed to set the option to automatically apply persistent damage/healing.",
+        "none": "None",
+        "players": "Players"
+      },
+      "applyPersistentDamage": {
+        "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
+        "name": "Automatically apply persistent damage rolled by the Persistent Damage module.",
+        "wasDamaged": "{damage} damage was automatically applied"
+      },
+      "applyPersistentHealing": {
+        "FastHealingLabel": "Received Fast Healing",
+        "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
+        "name": "Automatically apply persistent healing rolled by the system.",
+        "RegenerationLabel": "Received Regeneration",
+        "wasHealed": "{healing} healing was automatically applied."
+      },
       "autoCollapseItemChatCardContent": {
+        "collapsedDefault": "Collapsed by default, click title to expand.",
         "hint": "Client setting to automatically collapse item chat card content.",
         "name": "Automatically collapse item chat card content.",
         "noCollapse": "Never collapse",
-        "collapsedDefault": "Collapsed by default, click title to expand.",
         "nonCollapsedDefault": "Expanded by default, click title to collapse."
       },
       "autoExpandDamageRolls": {
-        "hint": "Client setting to automatically expand damage rolls (foundry default is all damage rolls collapsed). Click dice roll to expand/collapse.",
-        "name": "Automatically expand damage rolls.",
         "collapsedAll": "All damage rolls collapse (default foundry).",
         "expandedAll": "All damage rolls expand.",
         "expandedNew": "New damage rolls expand (also expands last three damage rolls on refresh).",
-        "expandedNewest": "New damage rolls expand (also expands the very last damage roll on refresh)."
-      },
-      "autoRollDamageAllow": {
-        "hint": "Select who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options on the client automation setting menu.",
-        "name": "Who is allowed to set the option to Autoroll damage on a hit.",
-        "none": "None",
-        "all": "All",
-        "gm": "GM",
-        "players": "Players"
-      },
-      "autoRollDamageForStrike": {
-        "hint": "Client setting to autoroll damage for strikes that hit. Note that critical hits roll critical damage.",
-        "name": "Autoroll damage for strikes that hit.",
-        "strike": "Strike"
-      },
-      "autoRollDamageForSpellAttack": {
-        "hint": "Client setting to autoroll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
-        "name": "Autoroll damage for spell attacks that hit."
-      },
-      "autoRollDamageForSpellNotAnAttack": {
-        "hint": "Client setting to *always* autoroll normal damage for *non-attack* spells when they are cast.",
-        "name": "Autoroll damage for cast spells that are not attacks."
-      },
-      "autoRollDamageNotifyOnSpellCardNotFound": {
-        "hint": "Client setting to notify when a spell attack is rolled and no spell card was found to roll damage for.",
-        "name": "Notify when a spell attack is rolled and no spell card was found."
+        "expandedNewest": "New damage rolls expand (also expands the very last damage roll on refresh).",
+        "hint": "Client setting to automatically expand damage rolls (foundry default is all damage rolls collapsed). Click dice roll to expand/collapse.",
+        "name": "Automatically expand damage rolls."
       },
       "autoGainDyingAtZeroHP": {
+        "addOne": "Add one",
+        "addOneForCharacters": "Add one, for characters+familiars",
+        "addWoundedLevel": "Add 1 + Wounded level, for all",
+        "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters+familiars",
+        "deliberateDeathMessage": "{name} can <b>before gaining Dying</b> as a result of another creature's attack or ability, if that creature is within melee reach, make a melee Strike against the triggering creature.<br>Remove 'Deliberate Death Used' effect if it actually can't be used.",
         "hint": "Setting to automatically increase Dying at 0 HP.",
         "name": "Automatically increase Dying at 0 HP.",
         "no": "No",
-        "addOne": "Add one",
-        "addWoundedLevel": "Add 1 + Wounded level, for all",
-        "addOneForCharacters": "Add one, for characters+familiars",
-        "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters+familiars",
-        "orcFerocityMessage": "{name} has just used @Compendium[pf2e.feats-srd.PlhPpdwIV0rIAJ8K]{Orc Ferocity} and can now use the free action:@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Rampaging Ferocity}",
-        "deliberateDeathMessage": "{name} can <b>before gaining Dying</b> as a result of another creature's attack or ability, if that creature is within melee reach, make a melee Strike against the triggering creature.<br>Remove 'Deliberate Death Used' effect if it actually can't be used."
+        "orcFerocityMessage": "{name} has just used @Compendium[pf2e.feats-srd.PlhPpdwIV0rIAJ8K]{Orc Ferocity} and can now use the free action:@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Rampaging Ferocity}"
       },
-      "giveUnconsciousIfDyingRemovedAt0HP": {
-        "hint": "Setting to automatically give unconscious if Dying removed while at 0 HP.",
-        "name": "Automatically give unconscious if Dying removed at 0 HP.",
-        "no": "No"
+      "automationClientSettings": {
+        "hint": "Enable and configure automation for players",
+        "label": "Manage Client Automation Settings",
+        "name": "Client Automation Settings"
+      },
+      "automationWorldSettings": {
+        "hint": "Enable and configure automation for GMs",
+        "label": "Manage World Automation Settings",
+        "name": "World Automation Settings"
+      },
+      "autoReduceStunned": {
+        "hint": "Client setting to automatically reduce Stunned on turn start.",
+        "name": "Automatically reduce stunned on turn start"
       },
       "autoRemoveDyingAtGreaterThanZeroHP": {
         "hint": "Setting to automatically remove Dying when healed to above 0 HP.",
@@ -187,10 +161,63 @@
         "hint": "Setting to automatically remove unconscious if healed to greater than 0 HP.",
         "name": "Automatically remove unconscious if healed to greater than 0 HP."
       },
-      "giveWoundedWhenDyingRemoved": {
-        "hint": "Setting to automatically give Wounded condition when Dying condition is removed.",
-        "name": "Automatically give Wounded when Dying is removed.",
-        "numbToDeathMessage": "{name} has just triggered @Compendium[pf2e.feats-srd.gfMP2aMs3YGONVeB]{Numb To Death}. Apply healing manually."
+      "autoRollDamageAllow": {
+        "all": "All",
+        "gm": "GM",
+        "hint": "Select who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options on the client automation setting menu.",
+        "name": "Who is allowed to set the option to Autoroll damage on a hit.",
+        "none": "None",
+        "players": "Players"
+      },
+      "autoRollDamageForSpellAttack": {
+        "hint": "Client setting to autoroll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
+        "name": "Autoroll damage for spell attacks that hit."
+      },
+      "autoRollDamageForSpellNotAnAttack": {
+        "hint": "Client setting to *always* autoroll normal damage for *non-attack* spells when they are cast.",
+        "name": "Autoroll damage for cast spells that are not attacks."
+      },
+      "autoRollDamageForStrike": {
+        "hint": "Client setting to autoroll damage for strikes that hit. Note that critical hits roll critical damage.",
+        "name": "Autoroll damage for strikes that hit.",
+        "strike": "Strike"
+      },
+      "autoRollDamageNotifyOnSpellCardNotFound": {
+        "hint": "Client setting to notify when a spell attack is rolled and no spell card was found to roll damage for.",
+        "name": "Notify when a spell attack is rolled and no spell card was found."
+      },
+      "callHotbarMacro": {
+        "hint": "Call hotbar macro on page {page} position {column}",
+        "name": "Call hotbar macro on page {page} position {column}"
+      },
+      "castPrivateSpell": {
+        "hint": "Check to enabling ctrl-clicking Cast on a spell casts it, but the message is whispered to caster and GM.",
+        "name": "Ctrl-click Cast to cast in private."
+      },
+      "castPrivateSpellAlwaysForNPC": {
+        "hint": "Check to always cast privately for npcs.",
+        "name": "Check to always cast privately for npcs."
+      },
+      "castPrivateSpellWithPublicMessage": {
+        "cantrip": "Cantrip",
+        "components": "Components:",
+        "firstPart": "{tokenName} just cast a {vsmf} {type} of the <strong>{traditionString}</strong> tradition",
+        "hint": "If casting privately, this setting also posts a public message that a spell has been cast UNLESS you hold SHIFT as well as CTRL while casting.",
+        "name": "Post public message that a spell has been cast.",
+        "savePart": "<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
+        "secondPartNoRk": ".<br>Ask your GM if you recognized it automatically, if not you can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Or, on your turn, spend an action to try to identify it (ask your gm for details).",
+        "secondPartRK": ".<br>Ask your GM if you recognized it automatically, if not you can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Or, on your turn, spend an action to try to identify it with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
+        "spell": "Spell",
+        "they": "They"
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "hint": "Show spell traits in the public message.",
+        "name": "Show spell traits in the public message.",
+        "traitPart": " with these traits: <strong>{traits}</strong>"
+      },
+      "creatureBuilder": {
+        "hint": "Check to allow building custom creatures according to GMG rules.",
+        "name": "Allow building custom creatures."
       },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn for characters, npcs and familiars.",
@@ -201,6 +228,16 @@
         "name": "Setting initiative to just before the current combatant.",
         "noAutomation": "Never",
         "reaching0HP": "When combatant reaches 0 HP."
+      },
+      "giveUnconsciousIfDyingRemovedAt0HP": {
+        "hint": "Setting to automatically give unconscious if Dying removed while at 0 HP.",
+        "name": "Automatically give unconscious if Dying removed at 0 HP.",
+        "no": "No"
+      },
+      "giveWoundedWhenDyingRemoved": {
+        "hint": "Setting to automatically give Wounded condition when Dying condition is removed.",
+        "name": "Automatically give Wounded when Dying is removed.",
+        "numbToDeathMessage": "{name} has just triggered @Compendium[pf2e.feats-srd.gfMP2aMs3YGONVeB]{Numb To Death}. Apply healing manually."
       },
       "heroPointHandler": {
         "add": "Add",
@@ -240,10 +277,6 @@
         "hint": "Check to automatically start the Hero Point handler timer when the game is ready.",
         "name": "Automatically start Hero Point Handler."
       },
-      "callHotbarMacro": {
-        "hint": "Call hotbar macro on page {page} position {column}",
-        "name": "Call hotbar macro on page {page} position {column}"
-      },
       "maxHeroPoints": {
         "hint": "World setting for the maximum number of Hero Points for a character.",
         "name": "(World) maximum number of Hero Points."
@@ -254,6 +287,11 @@
       "moveBeforeCurrentCombatantKey": {
         "hint": "World keybind for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
         "name": "(World) keybind to move selected combatant before current combatant."
+      },
+      "mystificationSettings": {
+        "hint": "Enable and configure NPC mystification",
+        "label": "Manage NPC Mystification Settings",
+        "name": "NPC Mystification Settings"
       },
       "notifications": {
         "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
@@ -269,61 +307,33 @@
         "numberPostfix": "Number as postfix",
         "wordPrefix": "Word as prefix"
       },
-      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
-        "hint": "Check to make all mystification act on all tokens based on the same actor.",
-        "name": "Demystify all tokens of actor"
-      },
-      "npcMystifierUseAlignmentTraits": {
-        "hint": "Check to use alignment traits in the mystified name.",
-        "name": "Use npc alignment traits."
-      },
       "npcMystifierBlacklist": {
         "hint": "Add words to filter out contents of this comma-separated blocklist from the mystified name.",
         "name": "Blocklist traits to never add"
       },
-      "npcMystifierNoMatch": {
-        "hint": "Text to use when no matching trait is found, so name would be empty. (Empty string here will be set to '...')",
-        "name": "No match text"
-      },
-      "npcMystifierUseCreatureTraits": {
-        "hint": "Check to use all 'creature traits' as defined in the pf2e system in the mystified name.",
-        "name": "Use creature traits."
-      },
-      "npcMystifierUseCreatureTypesTraits": {
-        "hint": "Check to use creature type traits (see https://2e.aonprd.com/Traits.aspx) in the mystified name.",
-        "name": "Use creature type traits"
-      },
-      "npcMystifierUseEliteWeak": {
-        "hint": "Check to use elite/weak in the mystified name.",
-        "name": "Use elite/weak status"
-      },
-      "npcMystifierUseOtherTraits": {
-        "hint": "Check to use all npc traits not already included by any of the above settings in the mystified name.",
-        "name": "Use other traits"
-      },
-      "npcMystifierUseRarities": {
-        "hint": "Check to use rarities in the mystified name.",
-        "name": "Use rarity"
-      },
-      "npcMystifierUseRaritiesReplacement": {
-        "hint": "Enter word to replace rarities greater than Common with (e.g. 'Unusual') in this text field. If empty, do not change the displayed rarity.",
-        "name": "Replace rarities rarer than Common"
+      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+        "hint": "Check to make all mystification act on all tokens based on the same actor.",
+        "name": "Demystify all tokens of actor"
       },
       "npcMystifierKeepRandomProperty": {
         "hint": "Check to keep number postfix/word prefix *in the same format as currently configured in this module* (if any) as a postfix/prefix to the name when mystifying/demystifying npcs.",
         "name": "Keep prefix/postfix when mystifying/demystifying."
       },
       "npcMystifierModifierKey": {
-        "hint": "Select to enable setting which key to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
-        "name": "Key to mystify on drag to scene",
-        "always": "Always",
-        "disabled": "Disabled",
         "alt": "Alt",
-        "control": "Control"
+        "always": "Always",
+        "control": "Control",
+        "disabled": "Disabled",
+        "hint": "Select to enable setting which key to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
+        "name": "Key to mystify on drag to scene"
       },
       "npcMystifierMystifyKey": {
         "hint": "Set keybind to mystify selected tokens.",
         "name": "Keybind for mystifying selected tokens"
+      },
+      "npcMystifierNoMatch": {
+        "hint": "Text to use when no matching trait is found, so name would be empty. (Empty string here will be set to '...')",
+        "name": "No match text"
       },
       "npcMystifierPostfix": {
         "hint": "Add text to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead. This will be added *before* any random property prefix (see previous option.)",
@@ -337,47 +347,84 @@
         "hint": "Check to skip adding a random property when mystifying unique npcs. (I.e. it's kept when you demystify the npc.)",
         "name": "Skip random persistent property for unique npcs."
       },
-      "npcMystifierWordPrefix": {
-        "hint": "Adds a random word from the given roll table as a prefix if 'Word prefix' is chosen).",
-        "name": "Add random word from the given roll table"
+      "npcMystifierUseAlignmentTraits": {
+        "hint": "Check to use alignment traits in the mystified name.",
+        "name": "Use npc alignment traits."
+      },
+      "npcMystifierUseCreatureTraits": {
+        "hint": "Check to use all 'creature traits' as defined in the pf2e system in the mystified name.",
+        "name": "Use creature traits."
+      },
+      "npcMystifierUseCreatureTypesTraits": {
+        "hint": "Check to use creature type traits (see https://2e.aonprd.com/Traits.aspx) in the mystified name.",
+        "name": "Use creature type traits"
+      },
+      "npcMystifierUseEliteWeak": {
+        "hint": "Check to use elite/weak in the mystified name.",
+        "name": "Use elite/weak status"
       },
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "(Experimental) Check to use mystified name inside chat messages by replacing the actor name with the mystified name.",
         "name": "(Experimental) Mystify name in chat messages."
       },
+      "npcMystifierUseOtherTraits": {
+        "hint": "Check to use all npc traits not already included by any of the above settings in the mystified name.",
+        "name": "Use other traits"
+      },
+      "npcMystifierUseRarities": {
+        "hint": "Check to use rarities in the mystified name.",
+        "name": "Use rarity"
+      },
+      "npcMystifierUseRaritiesReplacement": {
+        "hint": "Enter word to replace rarities greater than Common with (e.g. 'Unusual') in this text field. If empty, do not change the displayed rarity.",
+        "name": "Replace rarities rarer than Common"
+      },
       "npcMystifierUseSize": {
         "hint": "Check to use the actor's size in the mystified name",
         "name": "Use actor size"
       },
-      "creatureBuilder": {
-        "hint": "Check to allow building custom creatures according to GMG rules.",
-        "name": "Allow building custom creatures."
-      },
-      "npcScaler": {
-        "hint": "Check to allow scaling NPCs",
-        "name": "Allow scaling NPCs"
+      "npcMystifierWordPrefix": {
+        "hint": "Adds a random word from the given roll table as a prefix if 'Word prefix' is chosen).",
+        "name": "Add random word from the given roll table"
       },
       "npcRoller": {
         "hint": "Check to enable the NPC quick roller utility.",
         "name": "Enable NPC roller utility"
       },
+      "npcScaler": {
+        "hint": "Check to allow scaling NPCs",
+        "name": "Allow scaling NPCs"
+      },
+      "playerItemsRarityColour": {
+        "hint": "(Deprecated) Client setting to show item names in rarity colour on actor sheets.",
+        "name": "(Deprecated) Show item names in rarity colour on actor sheets."
+      },
+      "qolWorldSettings": {
+        "hint": "Enable and configure quality of life settings for GMs",
+        "label": "Manage World QoL Settings",
+        "name": "World QoL Settings"
+      },
+      "quickQuantities": {
+        "hint": "Use shift-click on item quantities to add 5, ctrl-click to add 10.",
+        "name": "Use shift-click on item quantities to add 5, ctrl-click to add 10."
+      },
       "reminderBreathWeapon": {
+        "defaultName": "Breath",
         "hint": "Check to set reminder for breath weapon use.",
         "name": "Breath weapon reminder",
         "prefix": "Recharge",
-        "defaultName": "Breath",
-        "used": "Used ",
-        "source": "Breath Weapon reminder created by PF2e Workbench"
+        "source": "Breath Weapon reminder created by PF2e Workbench",
+        "used": "Used "
       },
       "reminderCannotAttack": {
-        "hint": "Check to show reminder if attacking with a token that cannot attack due to being unconscious/dead/defeated/no hp/etc.",
-        "name": "Reminder if attacking with token unable to attack",
-        "petrified": "is petrified",
-        "unconscious": "is unconscious",
         "dead": "is dead",
         "defeated": "is defeated",
         "hasNoHp": "has no hp",
-        "note": "Are you sure about this attack? {actorName} {reason}, and thus not likely to be able to attack..."
+        "hint": "Check to show reminder if attacking with a token that cannot attack due to being unconscious/dead/defeated/no hp/etc.",
+        "name": "Reminder if attacking with token unable to attack",
+        "note": "Are you sure about this attack? {actorName} {reason}, and thus not likely to be able to attack...",
+        "petrified": "is petrified",
+        "unconscious": "is unconscious"
       },
       "reminderCannotAttackIgnoreDeadEidolon": {
         "hint": "Check to allow eidolons that are dead/have no hp to attack without a reminder.",
@@ -385,73 +432,30 @@
       },
       "reminderIWR": {
         "hint": "Check to show reminder for IWR when damage is taken. Currently only handles 'simple' damage types (e.g. handles ones like 'Bludgeoning' or 'Fire', not ones like 'All' or 'Physical')",
-        "name": "IWR reminder",
-        "weakTo": " <strong>Weak</strong> to ",
-        "resistantTo": " <strong>Resistant</strong> to ",
         "immuneTo": " <strong>Immune</strong> to ",
         "is": "{name} is",
-        "notComplex": "<br><br>NOTE: Complex IWR such as All, Mental, Physical, etc, are not yet supported, check manually if you target might have such."
+        "name": "IWR reminder",
+        "notComplex": "<br><br>NOTE: Complex IWR such as All, Mental, Physical, etc, are not yet supported, check manually if you target might have such.",
+        "resistantTo": " <strong>Resistant</strong> to ",
+        "weakTo": " <strong>Weak</strong> to "
       },
       "reminderIWRCaveat": {
         "hint": "Check to show warning about complex IWR not being supported in each message.",
         "name": "Check to show warning about complex IWR not being supported in each message."
+      },
+      "remindersSettings": {
+        "hint": "Enable and configure various reminders",
+        "label": "Manage Reminders Settings",
+        "name": "Reminders Settings"
       },
       "reminderTargeting": {
         "hint": "Check to show reminder for targeting in combat.",
         "name": "Targeting reminder",
         "note": "Please target before you attack."
       },
-      "quickQuantities": {
-        "hint": "Use shift-click on item quantities to add 5, ctrl-click to add 10.",
-        "name": "Use shift-click on item quantities to add 5, ctrl-click to add 10."
-      },
-      "actionsReminderAllow": {
-        "hint": "Check to show number of actions reminder as chat message.",
-        "name": "Who gets an actions reminder",
-        "none": "None",
-        "all": "All",
-        "gm": "GM",
-        "players": "Players"
-      },
-      "autoReduceStunned": {
-        "hint": "Client setting to automatically reduce Stunned on turn start.",
-        "name": "Automatically reduce stunned on turn start"
-      },
-      "addUserTargets": {
-        "hint": "Keybind to add selected and hovered tokens to the chosen user's targets.",
-        "name": "Add user targets",
-        "title": "Select user to add targets for",
-        "addFor": "Add targets for",
-        "clearFor": "Clear targets for"
-      },
-      "playerItemsRarityColour": {
-        "hint": "(Deprecated) Client setting to show item names in rarity colour on actor sheets.",
-        "name": "(Deprecated) Show item names in rarity colour on actor sheets."
-      },
-      "castPrivateSpell": {
-        "hint": "Check to enabling ctrl-clicking Cast on a spell casts it, but the message is whispered to caster and GM.",
-        "name": "Ctrl-click Cast to cast in private."
-      },
-      "castPrivateSpellAlwaysForNPC": {
-        "hint": "Check to always cast privately for npcs.",
-        "name": "Check to always cast privately for npcs."
-      },
-      "castPrivateSpellWithPublicMessage": {
-        "hint": "If casting privately, this setting also posts a public message that a spell has been cast UNLESS you hold SHIFT as well as CTRL while casting.",
-        "name": "Post public message that a spell has been cast.",
-        "cantrip": "Cantrip",
-        "components": "Components:",
-        "spell": "Spell",
-        "they": "They",
-        "firstPart": "{tokenName} just cast a {vsmf} {type} of the <strong>{traditionString}</strong> tradition",
-        "secondPartRK": ".<br>Ask your GM if you recognized it automatically, if not you can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Or, on your turn, spend an action to try to identify it with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
-        "secondPartNoRk": ".<br>Ask your GM if you recognized it automatically, if not you can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Or, on your turn, spend an action to try to identify it (ask your gm for details).",
-        "savePart": "<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]"
-      },
-      "castPrivateSpellWithPublicMessageShowTraits": {
-        "hint": "Show spell traits in the public message.",
-        "name": "Show spell traits in the public message.",
-        "traitPart": " with these traits: <strong>{traits}</strong>"
+      "tokenAnimationSpeed": {
+        "hint": "Change to alter token movement animation speed.",
+        "name": "Change to alter token movement animation speed."
       },
       "workbenchVersion": {
         "hint": "Version that the latest migration ran on. Can be lower than the module version. Don't modify this unless you know what you are doing.",
