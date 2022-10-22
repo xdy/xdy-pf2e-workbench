@@ -1,3 +1,16 @@
+# [4.8.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.7.2...v4.8.0) (2022-10-22)
+
+
+### Bug Fixes
+
+* Allow private spellcasting regardless of gm default roll mode. (Click ctrl-shift to cast a spell privately without a public message even if you have that enabled.) ([f1a3986](https://github.com/xdy/xdy-pf2e-workbench/commit/f1a3986caafceec343f8286fae7c0e9fffbff909)), closes [#492](https://github.com/xdy/xdy-pf2e-workbench/issues/492)
+
+
+### Features
+
+* Add optional setting for token animation movement speed. Defaults to foundry setting, which I consider way too low. ([9d4f74a](https://github.com/xdy/xdy-pf2e-workbench/commit/9d4f74a1abe71290cd514f99f77a11825f8c2006))
+* Move options to change max hero points and allow item bonuses in ABP to a new settings submenu for variant rules. ([65b8d4a](https://github.com/xdy/xdy-pf2e-workbench/commit/65b8d4ab45f685a421fafa01773c393bb9c7936d))
+
 ## [4.7.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.7.1...v4.7.2) (2022-10-18)
 
 
