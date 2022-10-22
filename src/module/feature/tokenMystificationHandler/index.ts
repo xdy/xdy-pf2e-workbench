@@ -4,7 +4,7 @@ import { mystifyModifierKey } from "../../settings";
 import { TokenDataPF2e } from "@scene/token-document";
 import { generateNameFromTraits } from "./traits-name-generator";
 import { TokenPF2e } from "@module/canvas";
-import { mystifyRandomPropertyType } from "../../settings/mystification";
+import { mystifyRandomPropertyType } from "../../settings";
 
 function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (

@@ -56,6 +56,7 @@ export function randomID() {
 }
 
 export function isActuallyDamageRoll(message) {
+    // TODO Anything using this should probably hook into Hooks.call(`pf2e.damageRoll`, rollData) instead...
     const isPhysicalDamageroll =
         ["ancestry", "effect", "feat", "melee", "weapon"].includes(message.item?.type) &&
         (!message.isRoll || message.isDamageRoll);

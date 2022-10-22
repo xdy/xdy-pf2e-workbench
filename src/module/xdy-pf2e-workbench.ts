@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification,
+    tokenCreateMystification
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -30,7 +30,7 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer,
+    startTimer
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM, nth } from "./utils";
 import { ItemPF2e, SpellPF2e } from "@item";
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting,
+    reminderTargeting
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -52,7 +52,7 @@ import { UserPF2e } from "@module/user";
 import {
     loadSkillActions,
     loadSkillActionsBabele,
-    renderSheetSkillActions,
+    renderSheetSkillActions
 } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
@@ -64,7 +64,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP,
+    removeDyingOnZeroHP
 } from "./feature/conditionHandler";
 
 export const MODULENAME = "xdy-pf2e-workbench";
@@ -478,6 +478,16 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then();
                     }
                 }
+            }
+        });
+    }
+
+    if (game.settings.get(MODULENAME, "tokenAnimationSpeed") !== "6") {
+        Hooks.on("preUpdateToken", (_document, update, options, ..._args) => {
+            if (game.settings.get(MODULENAME, "tokenAnimationSpeed") !== "6" && (update.x || update.y)) {
+                setProperty(options, "animation", {
+                    movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
+                });
             }
         });
     }
