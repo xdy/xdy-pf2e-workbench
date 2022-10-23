@@ -388,8 +388,8 @@
         "name": "Add random word from the given roll table"
       },
       "npcMystifyAllPhysicalMagicalItems": {
-        "hint": "Automatically mystify any non-temporary physical items that are alchemical or magical when an npc is added to a scene.",
-        "name": "Mystify alchemical and magical items on npcs when added to scene."
+        "hint": "Automatically mystify any non-temporary physical items that are alchemical or magical when an npc is added to a scene, if the PF2e system setting 'NPCs are lootable' is enabled.",
+        "name": "Mystify alchemical and magical items on npcs, if the PF2e system setting 'NPCs are lootable' is enabled."
       },
       "npcRoller": {
         "hint": "Check to enable the NPC quick roller utility.",
