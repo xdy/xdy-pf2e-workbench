@@ -1,3 +1,10 @@
+# [4.9.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.8.1...v4.9.0) (2022-10-23)
+
+
+### Features
+
+* Adds optional setting (to mystification settings submenu) to automatically mystify any non-temporary physical items that are alchemical or magical when an npc is added to a scene. ([4f39d4b](https://github.com/xdy/xdy-pf2e-workbench/commit/4f39d4b79690251d8a409ed46ffd01299647ecec)), closes [#497](https://github.com/xdy/xdy-pf2e-workbench/issues/497)
+
 ## [4.8.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.8.0...v4.8.1) (2022-10-22)
 
 
