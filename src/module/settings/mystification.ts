@@ -10,6 +10,13 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
+            npcMystifyAllPhysicalMagicalItems: {
+                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.hint`,
+                scope: "world",
+                default: false,
+                type: Boolean,
+            },
             npcMystifier: {
                 name: `${MODULENAME}.SETTINGS.npcMystifier.name`,
                 hint: `${MODULENAME}.SETTINGS.npcMystifier.hint`,

@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification
+    tokenCreateMystification,
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -30,10 +30,10 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer
+    startTimer,
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM, nth } from "./utils";
-import { ItemPF2e, SpellPF2e } from "@item";
+import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
     actionsReminder,
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting
+    reminderTargeting,
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -52,7 +52,7 @@ import { UserPF2e } from "@module/user";
 import {
     loadSkillActions,
     loadSkillActionsBabele,
-    renderSheetSkillActions
+    renderSheetSkillActions,
 } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
@@ -64,8 +64,9 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP
+    removeDyingOnZeroHP,
 } from "./feature/conditionHandler";
+import { TokenDocumentPF2e } from "@scene";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -492,10 +493,44 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "npcMystifier")) {
-        Hooks.on("createToken", async (token: any) => {
+    if (
+        game.settings.get(MODULENAME, "npcMystifier") ||
+        (game.settings.get("pf2e", "automation.lootableNPCs") &&
+            game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems"))
+    ) {
+        Hooks.on("createToken", async (token: TokenDocumentPF2e, ..._args) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
                 tokenCreateMystification(token).then();
+            }
+
+            if (
+                game.user?.isGM &&
+                game.settings.get("pf2e", "automation.lootableNPCs") &&
+                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") &&
+                token.actor
+            ) {
+                const actor = token.actor;
+                const items = <PhysicalItemPF2e[]>Array.from(
+                    actor.items
+                        .filter((item) =>
+                            ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"].includes(
+                                item.type
+                            )
+                        )
+                        .map((item) => <PhysicalItemPF2e>item)
+                        .filter((item) => !item.isTemporary)
+                        .filter((item) => {
+                            return item.identificationStatus === "identified";
+                        })
+                        .filter((item) => item.isMagical || item.isAlchemical)
+                );
+
+                for (const item of items ?? []) {
+                    await actor?.items?.get(item.id)?.update({ "system.identification.status": "unidentified" });
+                    await actor?.items
+                        ?.get(item.id)
+                        ?.update({ "system.identification.unidentified": item.getMystifiedData("unidentified") });
+                }
             }
         });
     }
