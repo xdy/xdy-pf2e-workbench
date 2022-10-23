@@ -527,10 +527,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 );
 
                 for (const item of items ?? []) {
-                    await actor?.items?.get(item.id)?.update({ "system.identification.status": "unidentified" });
-                    await actor?.items
-                        ?.get(item.id)
-                        ?.update({ "system.identification.unidentified": item.getMystifiedData("unidentified") });
+                    await actor?.items?.get(item.id)?.update({
+                        "system.identification.status": "unidentified",
+                        "system.identification.unidentified": item.getMystifiedData("unidentified"),
+                    });
                 }
             }
         });
