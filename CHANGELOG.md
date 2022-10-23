@@ -1,3 +1,10 @@
+## [4.9.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.9.0...v4.9.1) (2022-10-23)
+
+
+### Bug Fixes
+
+* Only mystify *npc* items... ([0e56a79](https://github.com/xdy/xdy-pf2e-workbench/commit/0e56a79fd490898a22a02a25a1c9fe74accc6e80))
+
 # [4.9.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.8.1...v4.9.0) (2022-10-23)
 
 
