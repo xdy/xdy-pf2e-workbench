@@ -507,7 +507,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 game.user?.isGM &&
                 game.settings.get("pf2e", "automation.lootableNPCs") &&
                 game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") &&
-                token.actor
+                token.actor &&
+                token.actor.type === "npc"
             ) {
                 const actor = token.actor;
                 const items = <PhysicalItemPF2e[]>Array.from(
