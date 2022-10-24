@@ -109,8 +109,8 @@
       "autoExpandDamageRolls": {
         "collapsedAll": "Tous les jets de dégâts ne sont pas détaillés (Foundry par défaut).",
         "expandedAll": "Tous les jets de dégâts sont étendus.",
-        "expandedNew": "Les nouveaux jets de dégâts sont détaillés. (cela détaille aussi les trois derniers jets de dégâts en rafraichissant)",
-        "expandedNewest": "Les nouveaux jets de dégâts sont détaillés. (détaille aussi le tout dernier jet de dégât en rafraichissant)",
+        "expandedNew": "Les nouveaux jets de dégâts sont détaillés (cela détaille aussi les trois derniers jets de dégâts en rafraichissant).",
+        "expandedNewest": "Les nouveaux jets de dégâts sont détaillés (détaille aussi le tout dernier jet de dégât en rafraichissant).",
         "hint": "Réglage du client pour automatiquement réduire les jets de dégâts (Foundry par défaut réduit les dégâts). Cliquer le jet de dé pour étendre/réduire.",
         "name": "Étendre automatiquement les jets de dégâts."
       },
@@ -326,11 +326,11 @@
         "name": "Aucun texte ne correspond"
       },
       "npcMystifierPostfix": {
-        "hint": "Ajouter du texte pour un suffixe après le nouveau nom, par défaut '' (exemple: 'Créature'), si cela correspond au nom d'une table aléatoire, un texte aléatoire provenant de cette table sera utilisé comme suffixe à la place. Cela sera ajouté *avant* tout préfixe de propriété aléatoire (voir option précédente).",
+        "hint": "Ajouter du texte pour un suffixe après le nouveau nom, par défaut '' (exemple: 'Créature'), si cela correspond au nom d'une table aléatoire, un texte aléatoire provenant de cette table sera utilisé comme suffixe à la place. Cela sera ajouté *avant* tout préfixe de propriété aléatoire. (voir option précédente)",
         "name": "Mot ou table aléatoire suffixe"
       },
       "npcMystifierPrefix": {
-        "hint": "Ajouter du texte pour donner un préfixe du nouveau nom avec (infixe si une propriété de mot aléatoire est choisie ci-dessus), par défaut '' (exemple : 'Inconnu'), si cela correspond au nom d'une table aléatoire, un texte aléatoire résultant de cette table sera utilisé comme préfixe à la place. Cela sera ajouté *après* toute propriété aléatoire de postfixe (voir l'option précédente).",
+        "hint": "Ajouter du texte pour donner un préfixe du nouveau nom avec (infixe si une propriété de mot aléatoire est choisie ci-dessus), par défaut '' (exemple : 'Inconnu'), si cela correspond au nom d'une table aléatoire, un texte aléatoire résultant de cette table sera utilisé comme préfixe à la place. Cela sera ajouté *après* toute propriété aléatoire de postfixe. (voir l'option précédente)",
         "name": "Mot ou table aléatoire préfixe"
       },
       "npcMystifierRandomPropertySkipForUnique": {
@@ -382,8 +382,8 @@
         "name": "Ajouter un mot aléatoire d'une table aléatoire donnée"
       },
       "npcRoller": {
-        "hint": "Cliquez pour activer l'utilitaire lanceur rapide de PNJ.",
-        "name": "Activer l'utilitaire Lanceur rapide de PNJ"
+        "hint": "Cliquez pour activer l'utilitaire générateur rapide de PNJ.",
+        "name": "Activer le générateur rapide de PNJ"
       },
       "npcScaler": {
         "hint": "Cliquez pour permettre l'évolution des PNJ",
@@ -459,6 +459,10 @@
       "tokenAnimationSpeed": {
         "hint": "Changer pour modifier la vitesse d'animation du déplacement du jeton.",
         "name": "Changer pour modifier la vitesse d'animation du déplacement du jeton."
+      },
+      "npcMystifyAllPhysicalMagicalItems": {
+        "name": "Mystifier les objets alchimiques ou magiques sur les PNJ, si le réglage 'PNJ en butin' est activé dans le système PF2.",
+        "hint": "Mystifier automatiquement tous les objets physiques non temporaires qui sont alchimiques ou magiques lorsqu'un PNJ est ajouté à une scène, si le réglage du système PF2 \"PNJ en butin\" est activé."
       }
     },
     "effects": {
