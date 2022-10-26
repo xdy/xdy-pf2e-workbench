@@ -1,10 +1,9 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
-import { mystifyModifierKey } from "../../settings";
+import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings";
 import { TokenDataPF2e } from "@scene/token-document";
 import { generateNameFromTraits } from "./traits-name-generator";
 import { TokenPF2e } from "@module/canvas";
-import { mystifyRandomPropertyType } from "../../settings";
 
 function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (
@@ -54,7 +53,9 @@ export async function buildTokenName(
                         tokenName = `${token.actor.name} ${tokenName.match(/\d+$/)?.[0] ?? ""}`.trim();
                         break;
                     case "wordPrefix":
-                        tokenName = `${(tokenName.match(/\b(\w+)\b/) ?? [""])[0]} ${token.actor.name}`.trim();
+                        tokenName = `${(tokenName.match(/\b([a-zA-Z0-9_-]+)\b/) ?? [""])[0]} ${
+                            token.actor.name
+                        }`.trim();
                         break;
                     default:
                         tokenName = token.actor.name;
@@ -74,7 +75,7 @@ export async function buildTokenName(
                         tokenName = `${tokenName} ${token.name.match(/\d+$/)?.[0] ?? ""}`.trim();
                         break;
                     case "wordPrefix":
-                        tokenName = `${(token.name.match(/\b(\w+)\b/) ?? [""])[0]} ${tokenName}`.trim();
+                        tokenName = `${(token.name.match(/\b([a-zA-Z0-9_-]+)\b/) ?? [""])[0]} ${tokenName}`.trim();
                         break;
                     default:
                         tokenName = token.actor.name;
