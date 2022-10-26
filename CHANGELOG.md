@@ -1,3 +1,12 @@
+## [4.9.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.9.1...v4.9.2) (2022-10-26)
+
+
+### Bug Fixes
+
+* Allow hypen in prefix words. ([754e674](https://github.com/xdy/xdy-pf2e-workbench/commit/754e674fdee1073564d4fbbe2c0aca7fef391f01)), closes [#512](https://github.com/xdy/xdy-pf2e-workbench/issues/512)
+* Basic support for Escape action (only acrobatics and athletics and without MAP buttons.) ([279847a](https://github.com/xdy/xdy-pf2e-workbench/commit/279847a6eef2f0a3e2dae8d9bdbe6924d68f0c11))
+* Checking if pf2e-sheet-skill-actions or pf2e-toolbox is active printed an error message to the console, should be a notification now. ([eb7d102](https://github.com/xdy/xdy-pf2e-workbench/commit/eb7d1028c754a2b31bcb510940ff97d3361d9f74))
+
 ## [4.9.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.9.0...v4.9.1) (2022-10-23)
 
 
