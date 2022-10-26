@@ -710,11 +710,11 @@ Hooks.once("ready", async () => {
     }
 
     if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
-        ui.notifications.error(game.i18n.localize(`${MODULENAME}.SETTINGS.modules.pf2e-sheet-skill-actions`));
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-sheet-skill-actions`));
     }
 
     if (game.modules.get("pf2e-toolbox")?.active) {
-        ui.notifications.error(game.i18n.localize(`${MODULENAME}.SETTINGS.modules.pf2e-toolbox`));
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-toolbox`));
     }
 
     // Make some functions available for macros
