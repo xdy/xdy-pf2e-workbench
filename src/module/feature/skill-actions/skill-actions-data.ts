@@ -32,6 +32,12 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         variants: [{ proficiencyKey: "acr" }],
     },
     {
+        slug: "escape",
+        compendiumId: "SkZAQRkLLkmBQNB9",
+        icon: "agile-feet",
+        variants: [{ proficiencyKey: "acr" }, { proficiencyKey: "ath" }],
+    },
+    {
         slug: "squeeze",
         compendiumId: "kMcV8e5EZUxa6evt",
         actionType: "",
