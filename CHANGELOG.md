@@ -1,3 +1,10 @@
+# [4.10.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.9.2...v4.10.0) (2022-10-27)
+
+
+### Features
+
+* Make the noOrSuccessfulFlatcheck function available for macros. Fix potential null-pointer in reminderIWR. ([4d2a887](https://github.com/xdy/xdy-pf2e-workbench/commit/4d2a8873cac170a101fdda4656c19795df57f738))
+
 ## [4.9.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.9.1...v4.9.2) (2022-10-26)
 
 
