@@ -185,30 +185,33 @@ export async function reminderIWR(message: ChatMessagePF2e) {
             if (damageTypes.length > 0) {
                 const traits = target.actor?.system.traits;
                 // Filter traits that are in damageTypes
-                const diTypes =
-                    traits?.di?.value
-                        .filter((value: string) => {
-                            return damageTypes.includes(value);
-                        })
-                        .map((trait) => {
-                            return trait?.charAt(0).toLocaleUpperCase() + trait.slice(1);
-                        }) || [];
-                const dvTypes =
-                    traits?.dv
-                        .filter((trait) => damageTypes.includes(trait.type))
-                        .filter((trait) => trait.value)
-                        .map(
-                            (trait) =>
-                                trait?.type.charAt(0).toLocaleUpperCase() + trait.type?.slice(1) + ":" + trait.value
-                        ) || [];
-                const drTypes =
-                    traits?.dr
-                        .filter((trait) => damageTypes.includes(trait.type))
-                        .filter((trait) => trait.value)
-                        .map(
-                            (trait) =>
-                                trait?.type.charAt(0).toLocaleUpperCase() + trait.type?.slice(1) + ":" + trait.value
-                        ) || [];
+                const diTypes = traits?.di?.value
+                    ? traits?.di?.value
+                          ?.filter((value: string) => {
+                              return damageTypes.includes(value);
+                          })
+                          .map((trait) => {
+                              return trait?.charAt(0).toLocaleUpperCase() + trait.slice(1);
+                          })
+                    : [];
+                const dvTypes = traits?.dv
+                    ? traits?.dv
+                          .filter((trait) => damageTypes.includes(trait.type))
+                          .filter((trait) => trait.value)
+                          .map(
+                              (trait) =>
+                                  trait?.type.charAt(0).toLocaleUpperCase() + trait.type?.slice(1) + ":" + trait.value
+                          )
+                    : [];
+                const drTypes = traits?.dr
+                    ? traits?.dr
+                          .filter((trait) => damageTypes.includes(trait.type))
+                          .filter((trait) => trait.value)
+                          .map(
+                              (trait) =>
+                                  trait?.type.charAt(0).toLocaleUpperCase() + trait.type?.slice(1) + ":" + trait.value
+                          )
+                    : [];
 
                 if (diTypes.length > 0) {
                     output.push(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderIWR.immuneTo`) + diTypes.join(", "));

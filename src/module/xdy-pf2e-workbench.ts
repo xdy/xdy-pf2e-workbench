@@ -14,10 +14,10 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification,
+    tokenCreateMystification
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
-import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
+import { autoRollDamage, noOrSuccessfulFlatcheck, persistentDamage, persistentHealing } from "./feature/damageHandler";
 import { moveOnZeroHP, moveSelectedAheadOfCurrent } from "./feature/initiativeHandler";
 import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
@@ -30,7 +30,7 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer,
+    startTimer
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM, nth } from "./utils";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting,
+    reminderTargeting
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -52,7 +52,7 @@ import { UserPF2e } from "@module/user";
 import {
     loadSkillActions,
     loadSkillActionsBabele,
-    renderSheetSkillActions,
+    renderSheetSkillActions
 } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
@@ -64,7 +64,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP,
+    removeDyingOnZeroHP
 } from "./feature/conditionHandler";
 import { TokenDocumentPF2e } from "@scene";
 
@@ -725,6 +725,7 @@ Hooks.once("ready", async () => {
         moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
         doMystificationFromToken: doMystificationFromToken, // await game.PF2eWorkbench.doMystificationFromToken(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromToken(_token.id, false)
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
+        noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
     };
 
     if (isFirstGM() && game.settings.get(MODULENAME, "heroPointHandler")) {

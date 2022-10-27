@@ -4,7 +4,7 @@ import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
 import { SpellPF2e } from "@item";
 
-async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
+export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
     if (game.modules.get("pf2-flat-check")?.active) {
         const actorFlat =
