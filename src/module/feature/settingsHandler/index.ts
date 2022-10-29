@@ -97,6 +97,13 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                 html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
                 html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
             }
+
+            if (settingName !== `tokenAnimation` && settingName.startsWith(`tokenAnimation`)) {
+                const valueFunction = !game.settings.get(MODULENAME, "tokenAnimation");
+
+                html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+                html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
+            }
         }
     }
 }

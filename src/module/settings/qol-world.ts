@@ -115,6 +115,15 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
+            tokenAnimation: {
+                name: `${MODULENAME}.SETTINGS.tokenAnimation.name`,
+                hint: `${MODULENAME}.SETTINGS.tokenAnimation.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
             tokenAnimationSpeed: {
                 name: `${MODULENAME}.SETTINGS.tokenAnimationSpeed.name`,
                 hint: `${MODULENAME}.SETTINGS.tokenAnimationSpeed.hint`,

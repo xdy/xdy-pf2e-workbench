@@ -54,7 +54,8 @@
     },
     "modules": {
       "pf2e-sheet-skill-actions": "The module pf2e-sheet-skill-actions is no longer maintained, all it's functions are part of the Workbench, please turn it off.",
-      "pf2e-toolbox": "The module pf2e-toolbox is no longer maintained, most of it's functions are part of the Workbench, please turn it off."
+      "pf2e-toolbox": "The module pf2e-toolbox is no longer maintained, most of it's functions are part of the Workbench, please turn it off.",
+      "multilevel-tokens": "The module Multilevel Tokens (and probably other modules that teleport tokens) may have problems with teleporting as you have enabled the optional Workbench setting to change token animation."
     },
     "SETTINGS": {
       "abpVariantAllowItemBonuses": {
@@ -456,6 +457,10 @@
         "hint": "Check to show reminder for targeting in combat.",
         "name": "Targeting reminder",
         "note": "Please target before you attack."
+      },
+      "tokenAnimation": {
+        "hint": "Enable to alter token movement animation. This may cause problems with the module Multilevel Tokens.",
+        "name": "Enable to alter token movement animation."
       },
       "tokenAnimationSpeed": {
         "hint": "Change to alter token movement animation speed.",

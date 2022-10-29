@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification
+    tokenCreateMystification,
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, noOrSuccessfulFlatcheck, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -30,7 +30,7 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer
+    startTimer,
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM, nth } from "./utils";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting
+    reminderTargeting,
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -52,7 +52,7 @@ import { UserPF2e } from "@module/user";
 import {
     loadSkillActions,
     loadSkillActionsBabele,
-    renderSheetSkillActions
+    renderSheetSkillActions,
 } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
@@ -64,7 +64,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP
+    removeDyingOnZeroHP,
 } from "./feature/conditionHandler";
 import { TokenDocumentPF2e } from "@scene";
 
@@ -483,9 +483,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         });
     }
 
-    if (game.settings.get(MODULENAME, "tokenAnimationSpeed") !== "6") {
+    if (game.settings.get(MODULENAME, "tokenAnimation")) {
         Hooks.on("preUpdateToken", (_document, update, options, ..._args) => {
-            if (game.settings.get(MODULENAME, "tokenAnimationSpeed") !== "6" && (update.x || update.y)) {
+            if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x || update.y)) {
                 setProperty(options, "animation", {
                     movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
                 });
@@ -715,6 +715,10 @@ Hooks.once("ready", async () => {
 
     if (game.modules.get("pf2e-toolbox")?.active) {
         ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-toolbox`));
+    }
+
+    if (game.settings.get(MODULENAME, "tokenAnimation") && game.modules.get("multilevel-tokens")?.active) {
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.multilevel-tokens`));
     }
 
     // Make some functions available for macros
