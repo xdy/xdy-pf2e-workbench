@@ -1,3 +1,10 @@
+## [4.10.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.0...v4.10.1) (2022-10-29)
+
+
+### Bug Fixes
+
+* Disable the 'eye' hint on collapsed chat cards. It'll return once I figure out how to do it without breaking Dorako UI. ([67cb5c0](https://github.com/xdy/xdy-pf2e-workbench/commit/67cb5c0da1ecae603d6a2097d9370feeab00314d))
+
 # [4.10.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.9.2...v4.10.0) (2022-10-27)
 
 
