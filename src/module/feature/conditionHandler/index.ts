@@ -61,7 +61,7 @@ export async function increaseDyingOnZeroHP(
 
             if (rampagingFerocity) {
                 ChatMessage.create({
-                    flavor: game.i18n.format(`$MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
+                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
                         name: name,
                     }),
                     speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
@@ -97,7 +97,7 @@ export async function increaseDyingOnZeroHP(
             await actor.createEmbeddedDocuments("Item", [effect]);
 
             await ChatMessage.create({
-                flaver: game.i18n.format(`$MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
+                flaver: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
                     name: name,
                 }),
                 speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
@@ -199,7 +199,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
             };
 
             ChatMessage.create({
-                flavor: game.i18n.format(`$MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
+                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
                     name: name,
                 }),
                 speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
