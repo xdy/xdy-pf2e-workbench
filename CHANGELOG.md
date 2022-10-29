@@ -1,3 +1,11 @@
+## [4.10.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.1...v4.10.2) (2022-10-29)
+
+
+### Bug Fixes
+
+* Change how token animation speed setting is enabled, warn about problems with Multilevel Tokens module if that module is enabled. ([080a638](https://github.com/xdy/xdy-pf2e-workbench/commit/080a6389996ae4c32de9043e2723f665eaaeda43)), closes [#516](https://github.com/xdy/xdy-pf2e-workbench/issues/516)
+* Typoes in condition handler messages. ([e78315b](https://github.com/xdy/xdy-pf2e-workbench/commit/e78315be3d2bbbdbce146d6b9f7de669df3560e2))
+
 ## [4.10.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.0...v4.10.1) (2022-10-29)
 
 
