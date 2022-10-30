@@ -326,7 +326,7 @@
         "name": "Aucun texte ne correspond"
       },
       "npcMystifierPostfix": {
-        "hint": "Ajouter du texte pour un suffixe après le nouveau nom, par défaut '' (exemple: 'Créature'), si cela correspond au nom d'une table aléatoire, un texte aléatoire provenant de cette table sera utilisé comme suffixe à la place. Cela sera ajouté *avant* tout préfixe de propriété aléatoire. (voir option précédente)",
+        "hint": "Ajouter du texte pour un suffixe après le nouveau nom, par défaut '' (exemple: 'Créature'), si cela correspond au nom d'une table aléatoire, un texte aléatoire provenant de cette table sera utilisé comme suffixe à la place. Cela sera ajouté *avant* tout préfixe de propriété aléatoire (voir option précédente).",
         "name": "Mot ou table aléatoire suffixe"
       },
       "npcMystifierPrefix": {
@@ -463,6 +463,10 @@
       "npcMystifyAllPhysicalMagicalItems": {
         "name": "Mystifier les objets alchimiques ou magiques sur les PNJ, si le réglage 'PNJ en butin' est activé dans le système PF2.",
         "hint": "Mystifier automatiquement tous les objets physiques non temporaires qui sont alchimiques ou magiques lorsqu'un PNJ est ajouté à une scène, si le réglage du système PF2 \"PNJ en butin\" est activé."
+      },
+      "tokenAnimation": {
+        "name": "Activer la modification de l'animation du mouvement des jetons.",
+        "hint": "Activer pour modifier l'animation du mouvement des jetons. Cela peut causer des problèmes avec le module Multilevel Tokens."
       }
     },
     "effects": {
@@ -474,7 +478,8 @@
     "spellCardNotFound": "La carte de sort pourrait ne pas être trouver. Lancer {spell} au niveau minimal pour ce sort.",
     "modules": {
       "pf2e-sheet-skill-actions": "Le module pf2e-sheet-skill-actions n'est plus maintenu. Toutes ses fonctions sont intégrées au module Workbench. Svp, éteignez-le.",
-      "pf2e-toolbox": "Le module pf2e toolbox n'est plus maintenu. La plupart de ses fonctions sont intégrées dans le module workbench. SVP, éteignez -le."
+      "pf2e-toolbox": "Le module pf2e toolbox n'est plus maintenu. La plupart de ses fonctions sont intégrées dans le module workbench. SVP, éteignez -le.",
+      "multilevel-tokens": "Le module Multilevel tokens (et probablement d'autres modules qui téléportent des jetons) pourrait avoir des problèmes de téléportation si vous avez activé le paramètre optionnel du Workbench pour modifier l'animation des jetons."
     }
   }
 }
