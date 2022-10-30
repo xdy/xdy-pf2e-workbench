@@ -141,7 +141,7 @@ export class SkillAction {
                             event,
                             modifiers: variant.modifiers,
                             // @ts-ignore
-                            options: [`action:${this.slug}`],
+                            options: [`action:${this.data.slug}`],
                         })
                         .then()
                 );
