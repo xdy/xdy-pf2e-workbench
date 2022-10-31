@@ -68,7 +68,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "null-loader": "^4.0.1",
     "pixi-particles": "^4.3.1",
-    "pixi.js": "^6.5.8",
+    "pixi.js": "^7.0.0",
     "prettier": "^2.7.1",
     "raw-loader": "^4.0.2",
     "sass": "^1.55.0",
