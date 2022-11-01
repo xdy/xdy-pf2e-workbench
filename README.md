@@ -58,9 +58,11 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
   * Optional settings to (if the GM allows it) automatically applying persistent damage (from the awesome [Persistent Damage module](https://github.com/CarlosFdez/pf2e-persistent-damage)) as well as the PF2e system's fast healing and regeneration (with an optional extra debug chat message) inspired by @Jamz' code.
   * Option to automatically reduce the Frightened condition at the end of each turn. See the included effect 'Effect: Dirge of Doom' for how to set a minimum frightened level that the module won't reduce below.
 
-No section
+Variant Rules
 * Option to change the max number of hero points a character can have. (This feature has been taken over from the delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
 * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
+
+No section
 * Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells, feats, items, actions, etc). Can be configured to default to collapsed or expanded.
 * Option to either expand all damage cards, or only expand new cards. If the latter, on a refresh the last three messages are expanded if they are damage cards.
 * Option to add all skill actions to the character Actions page. (This feature has been taken over from the discontinued https://github.com/jamespdaily/pf2e-sheet-skill-actions/ module. Thanks James!)
