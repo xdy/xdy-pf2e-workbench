@@ -1,3 +1,10 @@
+## [4.10.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.2...v4.10.3) (2022-11-01)
+
+
+### Bug Fixes
+
+* Fix skill action slugs not being added along to rolls ([0c4fc75](https://github.com/xdy/xdy-pf2e-workbench/commit/0c4fc75714697a91437a3adec4270b34b47b55f7))
+
 ## [4.10.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.1...v4.10.2) (2022-10-29)
 
 
