@@ -96,7 +96,7 @@
     "@yaireo/tagify": "^4.16.4",
     "codemirror": "^6.0.1",
     "jquery": "^3.6.1",
-    "ky": "^0.31.4",
+    "ky": "^0.32.1",
     "ky-universal": "^0.11.0",
     "luxon": "^3.0.4",
     "minisearch": "^5.0.0",
