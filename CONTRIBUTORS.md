@@ -22,7 +22,8 @@ profile followed by a brief and incomplete description of what this person has c
 * [bolt7](https://github.com/bolt7) - Added to the French translation.
 * [Clemente](https://github.com/mclemente) - Contributed the Portuguese (Brazil) translation.
 * [Kuroni](https://github.com/AlphaStarguide) - Added auditory traits to bard aura effects, contributed the Chinese (Simplified) translation.
-* 
+
+
 I've probably forgotten someone, if so, please tell me!
 
 # I would like to join this list. How can I help the project?
