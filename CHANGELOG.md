@@ -1,3 +1,10 @@
+## [4.10.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.3...v4.10.4) (2022-11-03)
+
+
+### Bug Fixes
+
+* Add auditory trait to Inspire Courage aura and Inspire Defense aura ([#532](https://github.com/xdy/xdy-pf2e-workbench/issues/532)) ([b25eaba](https://github.com/xdy/xdy-pf2e-workbench/commit/b25eaba7e947526213f5315155e4bcd8733bf91d))
+
 ## [4.10.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.2...v4.10.3) (2022-11-01)
 
 
