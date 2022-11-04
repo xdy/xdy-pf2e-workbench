@@ -326,7 +326,7 @@
         "name": "Aucun texte ne correspond"
       },
       "npcMystifierPostfix": {
-        "hint": "Ajouter du texte pour un suffixe après le nouveau nom, par défaut '' (exemple: 'Créature'), si cela correspond au nom d'une table aléatoire, un texte aléatoire provenant de cette table sera utilisé comme suffixe à la place. Cela sera ajouté *avant* tout préfixe de propriété aléatoire (voir option précédente).",
+        "hint": "Ajouter du texte pour un suffixe après le nouveau nom, par défaut (exemple : 'Créature') si cela correspond au nom d'une table aléatoire, un texte aléatoire provenant de cette table sera utilisé comme suffixe à la place. Cela sera ajouté *avant* tout préfixe de propriété aléatoire (voir option précédente).",
         "name": "Mot ou table aléatoire suffixe"
       },
       "npcMystifierPrefix": {
