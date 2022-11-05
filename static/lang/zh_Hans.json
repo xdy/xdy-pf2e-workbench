@@ -1,1 +1,71 @@
-{}
+{
+  "xdy-pf2e-workbench": {
+    "npcRoller": {
+      "button-label": "NPC投骰",
+      "nav-labels": {
+        "strike": "攻击",
+        "ac": "AC",
+        "save": "豁免",
+        "hp": "生命值",
+        "dc": "DC",
+        "areaDamage": "范围伤害",
+        "perception": "察觉",
+        "skill": "技能",
+        "damage": "伤害",
+        "spell": "法术",
+        "abilityScore": "属性值"
+      },
+      "title": "NPC投骰"
+    },
+    "skillActions": {
+      "Title": "技能动作",
+      "Settings": {
+        "Position": {
+          "name": "技能动作位置",
+          "bottom": "底部",
+          "disabled": "禁用",
+          "hint": "在技能页面中的位置；顶部：“攻击”的右边，底部：最下面",
+          "top": "顶部"
+        },
+        "hideDuplicates": {
+          "hint": "是否在动作列表或技能动作列表中隐藏重复的动作",
+          "doNotHide": "不隐藏",
+          "hideSkillActions": "隐藏技能动作",
+          "name": "隐藏重复的技能动作",
+          "hideActions": "隐藏动作"
+        },
+        "IconStyle": {
+          "name": "技能动作图标风格",
+          "actionCostIcon": "动作成本图标",
+          "hint": "技能上的图标风格；动作成本图标：用于动作成本图标，技能图标：用于技能图标（如果有的话）",
+          "skillIcon": "技能图标"
+        }
+      },
+      "UnequipAll": {
+        "Tooltip": "切换隐藏动作。点击时按住alt键，可以使全部技能装备/不被装备。"
+      }
+    },
+    "effects": {
+      "orcFerocityUsed": "兽人凶猛已使用",
+      "bounceBackUsed": "强健复苏已使用",
+      "numbToDeathUsed": "无动于死已使用",
+      "deliberateDeathUsed": "凶杀致死已使用"
+    },
+    "SETTINGS": {
+      "abpVariantAllowItemBonuses": {
+        "name": "不要在使用自动成长加值可选规则时关闭物品加值。",
+        "hint": "不要在使用自动成长加值可选规则时关闭物品加值。"
+      },
+      "actionsReminderAllow": {
+        "all": "全部",
+        "gm": "GM"
+      }
+    },
+    "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
+    "modules": {
+      "pf2e-sheet-skill-actions": "pf2e-sheet-skill-actions模组已经不再被维护，它的功能也被集合到Workbench模组内了。请关闭它。",
+      "pf2e-toolbox": "pf2e-toolbox模组已经不再被维护，它的大部分功能也被集合到Workbench模组内了。请关闭它。",
+      "multilevel-tokens": "Multilevel Tokens模组（以及其他会使你的指示物传送的类似模组）可能在你开启Workbench的变更指示物动画选项后在传送时发生错误。"
+    }
+  }
+}
