@@ -46,7 +46,7 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
 }
 
 export async function autoRollDamage(message: ChatMessagePF2e) {
-    const numberOfMessagesToCheck = 5;
+    const numberOfMessagesToCheck = 10;
     if (
         shouldIHandleThisMessage(
             message,
@@ -90,18 +90,22 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     rollForNonAttackSpell ||
                     (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
                 ) {
-                    let slotLevel = (<SpellPF2e>origin)?.system.level;
-                    let levelFromChatCard = false;
-                    const chatLength = game.messages?.contents.length ?? 0;
-                    for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
-                        const msg = game.messages?.contents[chatLength - i];
-                        if (msg && (<ActorFlagsPF2e>msg.flags.pf2e).origin?.uuid === originUuid) {
-                            const level = msg.content.match(/data-slot-level="(\d+)"/);
-                            if (level && level[1]) {
-                                levelFromChatCard = true;
-                                // @ts-ignore Wtf? How to make a number into a OneToTen?
-                                slotLevel = parseInt(level[1]);
-                                break;
+                    let castLevel = flags.casting?.level ?? (<SpellPF2e>origin)?.system.level.value;
+                    // flags.casting?.level isn't always set, unfortunately
+                    let levelFromChatCard = flags.casting?.level ?? false;
+                    // Try getting from chat as a fallback
+                    if (!levelFromChatCard) {
+                        const chatLength = game.messages?.contents.length ?? 0;
+                        for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
+                            const msg = game.messages?.contents[chatLength - i];
+                            if (msg && (<ActorFlagsPF2e>msg.flags.pf2e).origin?.uuid === originUuid) {
+                                const level = msg.content.match(/data-cast-level="(\d+)"/);
+                                if (level && level[1]) {
+                                    levelFromChatCard = true;
+                                    // @ts-ignore Wtf? How to make a number into a OneToTen?
+                                    castLevel = parseInt(level[1]);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -133,10 +137,10 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             origin?.rollDamage({
                                 currentTarget: {
                                     closest: () => {
-                                        return { dataset: { slotLevel: slotLevel } };
+                                        return { dataset: { castLevel: castLevel } };
                                     },
                                 },
-                                spellLevel: slotLevel,
+                                spellLevel: castLevel,
                             });
                         }
                     } finally {
