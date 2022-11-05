@@ -1,3 +1,10 @@
+# [4.11.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.4...v4.11.0) (2022-11-05)
+
+
+### Features
+
+* More reliable way of finding heightened spell level when autorolling damage for spells. Requires pf2e 4.3.4 ([dc0a3f8](https://github.com/xdy/xdy-pf2e-workbench/commit/dc0a3f8bfd61c7ca180648b67d52c016b94650ce))
+
 ## [4.10.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.3...v4.10.4) (2022-11-03)
 
 
