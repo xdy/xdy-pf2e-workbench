@@ -1,3 +1,10 @@
+## [4.11.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.11.0...v4.11.1) (2022-11-06)
+
+
+### Bug Fixes
+
+* Removed error in the chat log when using some skill actions. Also removed console warnings when using quick quantity. ([07dc4d1](https://github.com/xdy/xdy-pf2e-workbench/commit/07dc4d194d22181ddf86f5bd0ca2e702423400a1))
+
 # [4.11.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.10.4...v4.11.0) (2022-11-05)
 
 
