@@ -1,3 +1,10 @@
+## [4.11.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.11.2...v4.11.3) (2022-11-06)
+
+
+### Bug Fixes
+
+* The "quick quantities" feature (ctrl/shift-click to add many items) works again. ([3ac6e8a](https://github.com/xdy/xdy-pf2e-workbench/commit/3ac6e8a1bab348b86720ef78704b890ce2086f73))
+
 ## [4.11.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.11.1...v4.11.2) (2022-11-06)
 
 
