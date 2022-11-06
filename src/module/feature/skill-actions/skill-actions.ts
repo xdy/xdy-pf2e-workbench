@@ -119,7 +119,7 @@ export class SkillAction {
             const rollAction = game.pf2e.actions[this.key];
             if (rollAction) {
                 if (this.key !== "earnIncome") {
-                    rollAction({ event, modifiers: variant.modifiers, actors: [this.actor], ...variant.extra }).then();
+                    rollAction({ event, modifiers: variant.modifiers, actors: [this.actor], ...variant.extra });
                 } else {
                     // Ugly earnIncome fix. Though currently the macro itself doesn't work in the pf2e system.
                     const pack = game.packs.get("pf2e.pf2e-macros");

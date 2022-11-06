@@ -27,12 +27,12 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
                 ) {
                     await new Promise((resolve) => setTimeout(resolve, 150)); // Sleep to wait for flat check message
                     const array = Array.from(game.messages);
-                    const messageIndex = array.findIndex((msg) => msg.id === message.id);
+                    const messageIndex = array.findIndex((msg: ChatMessage) => msg.id === message.id);
                     if (messageIndex > -1) {
                         rollDamage = !array
                             .slice(messageIndex)
                             .reverse()
-                            .find((msg) => {
+                            .find((msg: ChatMessage) => {
                                 return msg.content.includes("dice-result flat-check-failure");
                             });
                     }

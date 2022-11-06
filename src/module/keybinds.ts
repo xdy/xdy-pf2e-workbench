@@ -2,6 +2,7 @@ import { MODULENAME } from "./xdy-pf2e-workbench";
 import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler";
 import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler";
 import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler";
+import { TokenPF2e } from "@module/canvas";
 
 export function registerWorkbenchKeybindings() {
     console.log(`${MODULENAME} | registerKeybindings`);
@@ -36,8 +37,10 @@ export function registerWorkbenchKeybindings() {
                         icon: '<i class="fas fa-users"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
                         callback: async (html) => {
-                            const targets = Array.from(canvas.tokens?.controlled).concat(
-                                canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1)
+                            const targets: TokenPF2e[] = <TokenPF2e[]>(
+                                Array.from(canvas.tokens?.controlled).concat(
+                                    canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1)
+                                )
                             );
                             const user: any = game.users.find(
                                 (u) => u.id === (html.find("#dialogUserId").val() as string)

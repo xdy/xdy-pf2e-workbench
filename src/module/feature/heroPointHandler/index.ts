@@ -70,7 +70,7 @@ export function createRemainingTimeMessage(remainingMinutes: number) {
 
 export async function heroPointHandler(state: HPHState) {
     if (
-        Object.values(ui.windows).find((w) =>
+        Object.values(ui.windows).find((w: Application) =>
             w.title.includes(`${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.title`)}`)
         )
     ) {
