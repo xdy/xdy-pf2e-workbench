@@ -40,7 +40,7 @@ export function onQuantitiesHook(app: ActorSheet, html: JQuery) {
         await actor.updateEmbeddedDocuments("Item", [
             {
                 _id: itemId,
-                quantity: quantity > 0 ? quantity : 0,
+                "data.quantity": quantity > 0 ? quantity : 0,
             },
         ]);
     });
@@ -54,7 +54,7 @@ export function onQuantitiesHook(app: ActorSheet, html: JQuery) {
             await actor.updateEmbeddedDocuments("Item", [
                 {
                     _id: itemId,
-                    quantity: quantity > 0 ? quantity : 0,
+                    "data.quantity": quantity > 0 ? quantity : 0,
                 },
             ]);
         }
