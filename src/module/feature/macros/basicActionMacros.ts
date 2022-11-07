@@ -327,7 +327,7 @@ export function basicActionMacros() {
         {
             name: "Treat Wounds",
             skill: "Medicine",
-            action: "BO2iFo14pFYHEIGa",
+            action: "pfdZwXtrwLREGg6C",
             icon: "icons/magic/nature/root-vine-caduceus-healing.webp",
         },
         {
