@@ -1,3 +1,10 @@
+# [4.12.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.11.3...v4.12.0) (2022-11-07)
+
+
+### Features
+
+* Adds the 'Basic Action Macros' macro (shows a dialog with a button for most macros, with bonus and whether you're the best in the party at that action) courtesy of @ApoApostolov and me. To use it, import all macros from the compendium 'xdy-pf2e-workbench-macros' making sure to check 'Keep Document IDs' when importing. ([10b6e95](https://github.com/xdy/xdy-pf2e-workbench/commit/10b6e950e17e5e615afad06d13326948535447c1))
+
 ## [4.11.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.11.2...v4.11.3) (2022-11-06)
 
 
