@@ -444,14 +444,19 @@ ${actionList
                     const action = actionList[button.dataset.action];
                     const current = action.action;
                     if (typeof current === "string") {
-                        const macro = game.macros.get(current);
-                        if (!macro) {
-                            ui.notifications.error(
-                                "The GM must right click on the compendium xdy-pf2e-workbench-macros and select 'Import All Content' and make sure to check 'Keep Document IDs' when importing."
-                            );
-                            return;
+                        if (!current.includes("(")) {
+                            const macro = game.macros.get(current);
+                            if (!macro) {
+                                ui.notifications.error(
+                                    "The GM must right click on the compendium xdy-pf2e-workbench-macros and select 'Import All Content' and make sure to check 'Keep Document IDs' when importing."
+                                );
+                                return;
+                            }
+                            macro?.execute();
+                        } else {
+                            // Ugh
+                            eval(current);
                         }
-                        macro?.execute();
                     } else {
                         // @ts-ignore
                         action.action({ actors: [selectedActor] });
