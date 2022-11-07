@@ -1,3 +1,10 @@
+## [4.13.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.1...v4.13.2) (2022-11-07)
+
+
+### Bug Fixes
+
+* 'Create a Distraction' on the 'Basic Action Macros' dialog. ([f61b51a](https://github.com/xdy/xdy-pf2e-workbench/commit/f61b51a06a7496c4c7b39b30a2595830218914d3))
+
 ## [4.13.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.0...v4.13.1) (2022-11-07)
 
 
