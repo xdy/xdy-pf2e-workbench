@@ -64,7 +64,17 @@
       "type": "Item",
       "private": false,
       "flags": {}
+    },
+    {
+      "name": "xdy-pf2e-workbench-macros",
+      "label": "xdy-pf2e-workbench-macros",
+      "system": "pf2e",
+      "path": "packs/xdy-pf2e-workbench-macros.db",
+      "type": "Macro",
+      "private": false,
+      "flags": {}
     }
+
   ],
   "languages": [
     {

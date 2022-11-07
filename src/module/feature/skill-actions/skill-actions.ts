@@ -121,7 +121,7 @@ export class SkillAction {
                 if (this.key !== "earnIncome") {
                     rollAction({ event, modifiers: variant.modifiers, actors: [this.actor], ...variant.extra });
                 } else {
-                    // Ugly earnIncome fix. Though currently the macro itself doesn't work in the pf2e system.
+                    // Ugly earnIncome fix.
                     const pack = game.packs.get("pf2e.pf2e-macros");
                     pack?.getIndex()
                         .then((index) => {

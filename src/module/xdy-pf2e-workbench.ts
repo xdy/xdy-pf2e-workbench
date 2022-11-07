@@ -67,6 +67,7 @@ import {
     removeDyingOnZeroHP,
 } from "./feature/conditionHandler";
 import { TokenDocumentPF2e } from "@scene";
+import { basicActionMacros } from "./feature/macros/basicActionMacros";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -722,7 +723,8 @@ Hooks.once("ready", async () => {
     }
 
     // Make some functions available for macros
-    game["PF2eWorkbench"] = {
+    // @ts-ignore
+    game.PF2eWorkbench = {
         resetHeroPoints: resetHeroPoints, // game.PF2eWorkbench.resetHeroPoints(1)
         addHeroPoints: addHeroPoints, // game.PF2eWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
         scaleNPCToLevelFromActor: scaleNPCToLevelFromActor, // await game.PF2eWorkbench.scaleNPCToLevelFromActor(_token.actor.id, 24);
@@ -730,6 +732,7 @@ Hooks.once("ready", async () => {
         doMystificationFromToken: doMystificationFromToken, // await game.PF2eWorkbench.doMystificationFromToken(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromToken(_token.id, false)
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
+        basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
     };
 
     if (isFirstGM() && game.settings.get(MODULENAME, "heroPointHandler")) {
