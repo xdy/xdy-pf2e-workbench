@@ -1,3 +1,10 @@
+# [4.13.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.12.0...v4.13.0) (2022-11-07)
+
+
+### Features
+
+* 'Basic Action Macros' now works for non-party npcs and remembers which token you opened it for so you no longer need to have that token selected once the dialog is open. (Only one dialog can be open at a time.) ([c895b2f](https://github.com/xdy/xdy-pf2e-workbench/commit/c895b2febc28ffbd9ecfc048e70303e63a51eef8))
+
 # [4.12.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.11.3...v4.12.0) (2022-11-07)
 
 
