@@ -3,6 +3,8 @@
 
 // TODO Fix the ts-ignore and any in this.
 
+let selectedActor;
+
 function getActor() {
     return canvas?.tokens.controlled.length
         ? canvas?.tokens.controlled.map((token) => token.actor)[0]
@@ -21,11 +23,13 @@ function getBestBonuses(actorSkills, party, actionList) {
     }
 }
 
-function createMapOfSkillsPerActor(party) {
+function createMapOfSkillsPerActor(actors) {
     const map = new Map();
-    for (const actorId of party) {
-        const actor = game.actors.get(actorId);
-        map.set(actorId, getSkills(actor));
+    for (const actor of actors) {
+        const skills = getSkills(actor);
+        if (skills) {
+            map.set(actor.id, skills);
+        }
     }
     return map;
 }
@@ -53,7 +57,8 @@ function createButton(action, idx, actor, party, actorSkills) {
      * Default Icon to be given in case there is no icon parameter in an Action
      */
     const defaultIcon = "systems/pf2e/icons/actions/craft/unknown-item.webp";
-    const skill = actorSkills[action.skill?.toLowerCase()];
+    const skillName = action.skill?.toLowerCase();
+    const skill = skillName ? actorSkills[skillName] : null;
     const rank = skill?.rank ?? 0;
     const bonus = skill ? skill.check?.mod ?? skill.totalModifier : -1;
     const best = party.length && party.includes(actor.id) ? bonus >= (action.best ?? 0) : false;
@@ -345,21 +350,25 @@ export function basicActionMacros() {
         return actionDialog.close();
     }
 
-    const actor = getActor();
-    if (!actor) {
+    selectedActor = getActor();
+
+    if (!selectedActor) {
         return ui.notifications.warn("No character selected!");
     }
 
-    const party =
+    const actors =
+        game?.actors.filter((x) => x.isOfType("character") || x.isOfType("familiar") || x.isOfType("npc")) || [];
+
+    const partyIds =
         game?.actors
-            ?.filter((x) => x.hasPlayerOwner)
             .filter((x) => x.isOfType("character") || x.isOfType("familiar") || x.isOfType("npc"))
+            .filter((x) => x.hasPlayerOwner)
             .filter((x) => x.alliance === "party")
             .map((actor) => actor.id) || [];
 
-    const actorSkills = createMapOfSkillsPerActor(party);
+    const actorSkills = createMapOfSkillsPerActor(actors);
 
-    if (party.includes(actor.id)) getBestBonuses(actorSkills, party, actionList);
+    if (partyIds.includes(selectedActor.id)) getBestBonuses(actorSkills, partyIds, actionList);
 
     const columns = 1 + ~~((actionList.length - 1) / 14);
     const width = 264 * columns;
@@ -404,26 +413,24 @@ export function basicActionMacros() {
 @keyframes glow2 {
   0% {
       color: hsl(var(--color-glow2), 90%, 50%);
-      /*border: 1px solid hsl(var(--color-glow2), 100%, 50%);*/
-      /*background: hsla(var(--color-glow2), 70%, 30%, 50%);*/
       box-shadow: 0 0 2px 2px hsl(var(--color-glow2), 100%, 50%);
   }
   100% {
       color: hsl(var(--color-glow2), 90%, 50%);
-      /*border: 1px solid hsl(var(--color-glow2), 100%, 50%);*/
-      /*background: hsla(var(--color-glow2), 70%, 30%, 100%);*/
       box-shadow: 0 0 2px 2px hsl(var(--color-glow2), 100%, 50%);
   }
 }
 </style>
 <div class="action-list">
-${actionList.map((action, idx) => createButton(action, idx, actor, party, actorSkills.get(actor.id))).join("")}
+${actionList
+    .map((action, idx) => createButton(action, idx, selectedActor, partyIds, actorSkills.get(selectedActor.id)))
+    .join("")}
 </div>
 `;
     // @ts-ignore
     window.actionDialog = new Dialog(
         {
-            title: `Actions (${actor.name})`,
+            title: `Actions (${selectedActor.name})`,
             content,
             buttons: {
                 close: {
@@ -447,7 +454,7 @@ ${actionList.map((action, idx) => createButton(action, idx, actor, party, actorS
                         macro?.execute();
                     } else {
                         // @ts-ignore
-                        action.action({ actors: [actor] });
+                        action.action({ actors: [selectedActor] });
                     }
                 };
                 if ("querySelectorAll" in html) {
