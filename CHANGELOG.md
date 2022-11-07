@@ -1,3 +1,10 @@
+## [4.13.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.0...v4.13.1) (2022-11-07)
+
+
+### Bug Fixes
+
+* 'Treat Wounds' in 'Basic Action Macro' should work now. Both the 'Create a Diversion' buttons are still broken. ([a5fc4d6](https://github.com/xdy/xdy-pf2e-workbench/commit/a5fc4d6eb7a811076f7e2607cbeb9e91c50b531d))
+
 # [4.13.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.12.0...v4.13.0) (2022-11-07)
 
 
