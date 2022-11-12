@@ -1,3 +1,10 @@
+## [4.13.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.4...v4.13.5) (2022-11-12)
+
+
+### Bug Fixes
+
+* The Recall_Knowledge macro now also handles skills, removing the 'skills only' comment from the button in Basic Action Macros. ([c599ba9](https://github.com/xdy/xdy-pf2e-workbench/commit/c599ba9e8397aaaa992949e3dbd318071baec0b7))
+
 ## [4.13.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.3...v4.13.4) (2022-11-12)
 
 
