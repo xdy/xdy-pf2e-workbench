@@ -241,7 +241,7 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/actions/raise-a-shield.webp",
         },
         {
-            name: "Recall Knowledge (skills only)",
+            name: "Recall Knowledge",
             skill: "",
             action: "dN89Pky7SfULbGcQ",
             icon: "icons/skills/trades/academics-study-reading-book.webp",
@@ -360,8 +360,7 @@ export function basicActionMacros() {
         game?.actors.filter((x) => x.isOfType("character") || x.isOfType("familiar") || x.isOfType("npc")) || [];
 
     const partyIds =
-        game?.actors
-            .filter((x) => x.isOfType("character") || x.isOfType("familiar") || x.isOfType("npc"))
+        actors
             .filter((x) => x.hasPlayerOwner)
             .filter((x) => x.alliance === "party")
             .map((actor) => actor.id) || [];
