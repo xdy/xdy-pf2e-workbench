@@ -90,7 +90,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     ).total;
     updateData["system.attributes.perception.value"] = getLeveledData(
         "perception",
-        actor.system.attributes["perception"].value,
+        actor.system.attributes.perception.value,
         oldLevel,
         newLevel
     ).total;
@@ -108,7 +108,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     ).total;
     updateData["system.saves.will.value"] = getLeveledData(
         "savingThrow",
-        actor.system.saves.reflex.value ?? 0,
+        actor.system.saves.will.value ?? 0,
         oldLevel,
         newLevel
     ).total;
