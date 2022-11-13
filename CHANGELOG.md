@@ -1,3 +1,10 @@
+## [4.13.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.5...v4.13.6) (2022-11-13)
+
+
+### Bug Fixes
+
+* The Npc scaler accidentally set will save to equal the reflex save. ([42f3558](https://github.com/xdy/xdy-pf2e-workbench/commit/42f3558d445528912307e17fdabcecab1cfebdc0)), closes [#545](https://github.com/xdy/xdy-pf2e-workbench/issues/545)
+
 ## [4.13.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.4...v4.13.5) (2022-11-12)
 
 
