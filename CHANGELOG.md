@@ -1,3 +1,10 @@
+## [4.13.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.6...v4.13.7) (2022-11-14)
+
+
+### Bug Fixes
+
+* Gets rid of console warnings for *new* macros added from 'Symon-provided macros'. I.e. in an existing world you need to manually reimport the macros from that compendium to no longer get the warnings. ([2755b35](https://github.com/xdy/xdy-pf2e-workbench/commit/2755b350c591677ed5859e1d6d895ad47d211ec1)), closes [#547](https://github.com/xdy/xdy-pf2e-workbench/issues/547)
+
 ## [4.13.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.5...v4.13.6) (2022-11-13)
 
 
