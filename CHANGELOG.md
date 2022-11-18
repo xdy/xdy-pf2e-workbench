@@ -1,3 +1,10 @@
+# [4.14.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.7...v4.14.0) (2022-11-18)
+
+
+### Features
+
+* Changes to require PF2e version 4.4 or greater. Makes public message for privately cast spell work. ([d6fba18](https://github.com/xdy/xdy-pf2e-workbench/commit/d6fba18ac4343009d463aa91d7d408f0245c2fc4))
+
 ## [4.13.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.6...v4.13.7) (2022-11-14)
 
 
