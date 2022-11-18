@@ -96,7 +96,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         ],
     },
     {
-        slug: "recall-knowledge-lore",
+        slug: "recall-knowledge",
         compendiumId: "1OagaWtBpVXExToo",
         variants: [
             { proficiencyKey: "arc" },
