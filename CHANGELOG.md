@@ -1,3 +1,10 @@
+## [4.14.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.14.0...v4.14.1) (2022-11-18)
+
+
+### Bug Fixes
+
+* Skill actions errored out due to recall-knowledge-lore being renamed to recall-knowledge. ([1634b1e](https://github.com/xdy/xdy-pf2e-workbench/commit/1634b1ed6e4c37e0131183b5fe461b98a9e75243))
+
 # [4.14.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.13.7...v4.14.0) (2022-11-18)
 
 
