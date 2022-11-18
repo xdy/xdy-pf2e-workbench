@@ -134,7 +134,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         const anonymous = game.i18n.localize(
                             `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.they`
                         );
-                        if (<boolean>game.settings.get("pf2e", "metagame.tokenSetsNameVisibility")) {
+                        if (<boolean>game.settings.get("pf2e", "metagame_tokenSetsNameVisibility")) {
                             tokenName = anonymous;
                         } else {
                             tokenName = message.token?.name ?? message.actor?.name ?? anonymous;

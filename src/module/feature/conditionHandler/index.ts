@@ -66,7 +66,7 @@ export async function increaseDyingOnZeroHP(
                     }),
                     speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                     whisper:
-                        game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
+                        game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
                             ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                             : [],
                 }).then();
@@ -102,7 +102,7 @@ export async function increaseDyingOnZeroHP(
                 }),
                 speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
-                    game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
+                    game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                         : [],
             });
@@ -204,7 +204,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 }),
                 speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
-                    game.settings.get("pf2e", "metagame.secretDamage") && !actor?.hasPlayerOwner
+                    game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                         : [],
             }).then();
