@@ -125,5 +125,4 @@ export function registerWorkbenchSettings() {
         type: String,
         onChange: () => debouncedReload(),
     });
-
 }
