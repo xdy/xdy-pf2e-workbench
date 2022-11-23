@@ -1,3 +1,10 @@
+## [4.16.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.16.0...v4.16.1) (2022-11-23)
+
+
+### Bug Fixes
+
+* Enabled filepicker on the custom pause image setting, and moved it out of the qol menu into the main module settings as I couldn't get the filepicker to work in a submenu. ([e187dd4](https://github.com/xdy/xdy-pf2e-workbench/commit/e187dd4cb8481ce3dc8cef5f0a78ab205c24b5c6))
+
 # [4.16.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.15.0...v4.16.0) (2022-11-23)
 
 
