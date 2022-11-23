@@ -1,3 +1,11 @@
+:root {
+    --xdy-pf2e-workbench-pause: "";
+}
+
+#pause img {
+    content: var(--xdy-pf2e-workbench-pause);
+}
+
 /*Modified from the npc sheet*/
 .xdy-pf2e-workbench-rarity-common {
     border-color: #323232;

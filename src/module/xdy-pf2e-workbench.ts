@@ -86,6 +86,14 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     registerHandlebarsHelpers();
 
+    if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
+        // Set css variables for the module
+        document.documentElement.style.setProperty(
+            "--xdy-pf2e-workbench-pause",
+            "url(../../../" + <string>game.settings.get(MODULENAME, "customPauseImage") + ")"
+        );
+    }
+
     // Hooks that always run
     Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
         toggleMenuSettings(html, _settings);
