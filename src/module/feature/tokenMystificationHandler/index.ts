@@ -16,7 +16,7 @@ function hasRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     switch (mystifyRandomPropertyType) {
         case "numberPostfix":
         case "wordPrefix":
-            return token.name.split(" ").length !== (token.actor?.name.split(" ") ?? [""]).length;
+            return token.name.split(" ").length !== (token.actor?.prototypeToken.name.split(" ") ?? [""]).length;
         default:
             return false;
     }
@@ -50,18 +50,18 @@ export async function buildTokenName(
             if (keep && !shouldSkipRandomProperty(token)) {
                 switch (mystifyRandomPropertyType) {
                     case "numberPostfix":
-                        tokenName = `${token.actor.name} ${tokenName.match(/\d+$/)?.[0] ?? ""}`.trim();
+                        tokenName = `${token.actor.prototypeToken.name} ${tokenName.match(/\d+$/)?.[0] ?? ""}`.trim();
                         break;
                     case "wordPrefix":
                         tokenName = `${(tokenName.match(/\b([a-zA-Z0-9_-]+)\b/) ?? [""])[0]} ${
-                            token.actor.name
+                            token.actor.prototypeToken.name
                         }`.trim();
                         break;
                     default:
-                        tokenName = token.actor.name;
+                        tokenName = token.actor.prototypeToken.name;
                 }
             } else {
-                tokenName = token.actor.name;
+                tokenName = token.actor.prototypeToken.name;
             }
         } else {
             switch (game.settings.get(MODULENAME, "npcMystifierUseOtherTraits")) {
@@ -78,7 +78,7 @@ export async function buildTokenName(
                         tokenName = `${(token.name.match(/\b([a-zA-Z0-9_-]+)\b/) ?? [""])[0]} ${tokenName}`.trim();
                         break;
                     default:
-                        tokenName = token.actor.name;
+                        tokenName = token.actor.prototypeToken.name;
                 }
             } else {
                 if (!shouldSkipRandomProperty(token)) {
@@ -134,9 +134,9 @@ export async function tokenCreateMystification(token: any) {
 
 export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): boolean {
     const tokenName = token?.name;
-    const actorName = token?.actor?.name;
+    const prototypeTokenName = token?.actor?.prototypeToken.name;
 
-    return (tokenName?.indexOf(actorName ?? "") ?? -1) < 0;
+    return (tokenName?.indexOf(prototypeTokenName ?? "") ?? -1) < 0;
 }
 
 export async function doMystificationFromToken(tokenId: string, active: boolean) {
@@ -215,8 +215,15 @@ export function mangleChatMessage(message: ChatMessage, html: JQuery) {
     const tokenName = <string>canvas?.scene?.tokens?.find((t) => t?.id === tokenId)?.name;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 
-    if (tokenNameNoNumber && actor?.name?.trim() !== tokenNameNoNumber && jqueryContent && jqueryContent.html()) {
-        jqueryContent.html(jqueryContent.html().replace(new RegExp(<string>actor?.name, "gi"), tokenNameNoNumber));
+    if (
+        tokenNameNoNumber &&
+        actor?.prototypeToken.name?.trim() !== tokenNameNoNumber &&
+        jqueryContent &&
+        jqueryContent.html()
+    ) {
+        jqueryContent.html(
+            jqueryContent.html().replace(new RegExp(<string>actor?.prototypeToken.name, "gi"), tokenNameNoNumber)
+        );
     }
 }
 
