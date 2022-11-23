@@ -1,3 +1,10 @@
+# [4.16.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.15.0...v4.16.0) (2022-11-23)
+
+
+### Features
+
+* Adds setting to qol menu to set a custom pause image using a path relative to foundry's data folder, e.g. systems/pf2e/icons/deity/Pharasma.webp ([d251ff7](https://github.com/xdy/xdy-pf2e-workbench/commit/d251ff721d65cc2038c295d050bc74d394112751))
+
 # [4.15.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.14.2...v4.15.0) (2022-11-23)
 
 
