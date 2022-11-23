@@ -1,3 +1,10 @@
+## [4.14.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.14.1...v4.14.2) (2022-11-23)
+
+
+### Bug Fixes
+
+* Don't add Recall Knowledge button to npcs that aren't in the world. ([23b17a1](https://github.com/xdy/xdy-pf2e-workbench/commit/23b17a1e8fadb43d6a74494d2dd4be384cb52ff4)), closes [#560](https://github.com/xdy/xdy-pf2e-workbench/issues/560)
+
 ## [4.14.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.14.0...v4.14.1) (2022-11-18)
 
 
