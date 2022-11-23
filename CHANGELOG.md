@@ -1,3 +1,10 @@
+# [4.15.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.14.2...v4.15.0) (2022-11-23)
+
+
+### Features
+
+* Change mystification to use actor prototype token name rather than the actor name when demystifying. (Which defaults to to actor name.) ([7801585](https://github.com/xdy/xdy-pf2e-workbench/commit/7801585feb54dc050e4d4142db18caa1c29bc1ed)), closes [#551](https://github.com/xdy/xdy-pf2e-workbench/issues/551)
+
 ## [4.14.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.14.1...v4.14.2) (2022-11-23)
 
 
