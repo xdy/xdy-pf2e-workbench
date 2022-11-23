@@ -10,7 +10,9 @@ import { ActorPF2e, CreaturePF2e } from "@actor";
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     const content = message.content;
     if (isFirstGM() && content && game.combats && game.combats.active) {
-        const token: TokenDocumentPF2e = <TokenDocumentPF2e>canvas?.scene?.tokens.get(<string>message.speaker.token);
+        const token: TokenDocumentPF2e = <
+            TokenDocumentPF2e // @ts-ignore
+        >canvas?.scene?.tokens.get(<string>message.speaker.token);
 
         const actors = [token?.actor];
         for (const actor of actors) {
@@ -124,6 +126,7 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
     ) {
         let reason = "";
 
+        // @ts-ignore
         const token: TokenDocumentPF2e = <TokenDocumentPF2e>canvas?.scene?.tokens.get(<string>message.speaker.token);
 
         const actors = [token.actor];

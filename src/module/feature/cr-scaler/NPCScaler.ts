@@ -118,8 +118,9 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     updateData["system.attributes.hp.value"] = hp;
 
     let itemUpdates: IDataUpdates[] = [];
-    for (const itemId of actor.items.keys()) {
-        const item: any = actor.items.get(itemId);
+    const items: any = actor.items;
+    for (const itemId of items.keys()) {
+        const item: any = items.get(itemId);
 
         if ((item.type as IHandledItemType) === "lore") {
             const oldValue = parseInt(item.system.mod.value);
@@ -192,7 +193,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     const DC_REGEXES = [/(data-pf2-dc=")(\d+)(")/g, /(@Check\[.*?type:.*?|dc:)(\d+)(.*?])/g];
     for (let regexNo = 0; regexNo < DC_REGEXES.length; regexNo++) {
         const regex = DC_REGEXES[regexNo];
-        for (const item of actor.items
+        for (const item of items
             .filter(
                 (item) => item.system.description.value.includes("DC") || item.system.description.value.includes("dc:")
             )

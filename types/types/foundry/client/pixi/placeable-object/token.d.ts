@@ -20,6 +20,9 @@ declare global {
         /** Track the set of User entities which are currently targeting this Token */
         targeted: Set<User>;
 
+        /** A reference to the SpriteMesh which displays this Token in the PrimaryCanvasGroup. */
+        mesh: PIXI.DisplayObject & { refresh(): void };
+
         /** A reference to the PointSource object which defines this vision source area of effect */
         vision: VisionSource<this>;
 
@@ -110,7 +113,7 @@ declare global {
          *
          * @see {SightLayer#testVisibility}
          */
-        get isVisible(): boolean;
+        get isVisible(): boolean | undefined;
 
         /** The animation name used for Token movement */
         get movementAnimationName(): string;
@@ -248,7 +251,7 @@ declare global {
          * Refresh the display of Token attribute bars, rendering latest resource data
          * If the bar attribute is valid (has a value and max), draw the bar. Otherwise hide it.
          */
-        protected drawBars(): void;
+        drawBars(): void;
 
         /**
          * Draw a single resource bar, given provided data
@@ -320,10 +323,27 @@ declare global {
 
         /**
          * Check for collision when attempting a move to a new position
-         * @param destination The destination point of the attempted movement
-         * @return A true/false indicator for whether the attempted movement caused a collision
+         * @param destination  The central destination point of the attempted movement
+         * @param [options={}] Additional options forwarded to WallsLayer#checkCollision
+         * @returns The result of the WallsLayer#checkCollision test
          */
-        checkCollision(destination: Point): boolean;
+        checkCollision(
+            destination: Point,
+            { type, mode }: { type?: WallRestrictionType; mode: "closest" }
+        ): PolygonVertex;
+        checkCollision(destination: Point, { type, mode }: { type?: WallRestrictionType; mode: "any" }): boolean;
+        checkCollision(
+            destination: Point,
+            { type, mode }: { type?: WallRestrictionType; mode: "all" }
+        ): PolygonVertex[];
+        checkCollision(
+            destination: Point,
+            { type, mode }?: { type?: WallRestrictionType; mode?: undefined }
+        ): PolygonVertex[];
+        checkCollision(
+            destination: Point,
+            { type, mode }?: { type?: WallRestrictionType; mode?: WallMode }
+        ): boolean | PolygonVertex | PolygonVertex[];
 
         /**
          * Handle changes to Token behavior when a significant status effect is applied
@@ -441,6 +461,13 @@ declare global {
             userId: string
         ): void;
 
+        /** Control updates to the appearance of the Token and its linked TokenMesh when a data update occurs. */
+        protected _onUpdateAppearance(
+            data: DeepPartial<foundry.data.TokenSource>,
+            changed: Set<string>,
+            options: DocumentModificationContext
+        ): Promise<void>;
+
         /** Define additional steps taken when an existing placeable object of this type is deleted */
         override _onDelete(options: DocumentModificationContext<TDocument>, userId: string): void;
 
@@ -471,7 +498,13 @@ declare global {
 
         protected override _onDragLeftDrop(event: TokenInteractionEvent<this>): Promise<TDocument[]>;
 
-        protected override _onDragLeftMove(event: PIXI.InteractionEvent): void;
+        protected override _onDragLeftMove(event: TokenInteractionEvent<this>): void;
+
+        protected override _onDragLeftCancel(event: TokenInteractionEvent<this>): void;
+
+        protected override _onDragStart(): void;
+
+        protected override _onDragEnd(): void;
     }
 
     interface Token {

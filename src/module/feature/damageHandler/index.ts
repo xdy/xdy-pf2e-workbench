@@ -27,12 +27,12 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
                 ) {
                     await new Promise((resolve) => setTimeout(resolve, 150)); // Sleep to wait for flat check message
                     const array = Array.from(game.messages);
-                    const messageIndex = array.findIndex((msg: ChatMessage) => msg.id === message.id);
+                    const messageIndex = array.findIndex((msg) => msg.id === message.id);
                     if (messageIndex > -1) {
                         rollDamage = !array
                             .slice(messageIndex)
                             .reverse()
-                            .find((msg: ChatMessage) => {
+                            .find((msg) => {
                                 return msg.content.includes("dice-result flat-check-failure");
                             });
                     }
@@ -64,6 +64,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack")
             );
 
+            // @ts-ignore
             const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
             const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
             const rollType = flags.context?.type;

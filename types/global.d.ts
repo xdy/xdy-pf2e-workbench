@@ -8,7 +8,7 @@ import { ActiveEffectPF2e } from "@module/active-effect";
 import { CompendiumBrowser, CompendiumBrowserSettings } from "@module/apps/compendium-browser";
 import { EffectsPanel } from "@module/apps/effects-panel";
 import { LicenseViewer } from "@module/apps/license-viewer";
-import { ChatLogPF2e, CompendiumDirectoryPF2e, EncounterTrackerPF2e } from "@module/apps/ui";
+import { ActorDirectoryPF2e, ChatLogPF2e, CompendiumDirectoryPF2e, EncounterTrackerPF2e } from "@module/apps/ui";
 import { HotbarPF2e } from "@module/apps/ui/hotbar";
 import { WorldClock } from "@module/apps/world-clock";
 import { CanvasPF2e, EffectsCanvasGroupPF2e } from "@module/canvas";
@@ -27,16 +27,20 @@ import {
 import { UserPF2e } from "@module/user";
 import { PF2ECONFIG, StatusEffectIconTheme } from "@scripts/config";
 import { DicePF2e } from "@scripts/dice";
-import { rollActionMacro, rollItemMacro } from "@scripts/macros/hotbar";
-import { launchTravelSheet } from "@scripts/macros/travel/travel-speed-sheet";
-import { calculateXP } from "@scripts/macros/xp";
-import { ModuleArt } from "@scripts/register-module-art";
+import {
+    calculateXP,
+    launchTravelSheet,
+    perceptionForSelected,
+    rollActionMacro,
+    rollItemMacro,
+    stealthForSelected,
+} from "@scripts/macros";
+import { ModuleArt, registerModuleArt } from "@scripts/register-module-art";
 import { remigrate } from "@scripts/system/remigrate";
 import { UserVisibility } from "@scripts/ui/user-visibility";
 import { EffectTracker } from "@system/effect-tracker";
-import { ActorImporter } from "@system/importer/actor-importer";
-import { CheckPF2e } from "@system/rolls";
-import type { HomebrewSettingsKey, HomebrewTag } from "@system/settings/homebrew";
+import { CheckPF2e } from "@system/check";
+import { HomebrewSettingsKey, HomebrewTag } from "@system/settings/homebrew";
 import { TextEditorPF2e } from "@system/text-editor";
 import { sluggify } from "@util";
 import { CombatantPF2e, EncounterPF2e } from "./module/encounter";
@@ -56,14 +60,16 @@ declare global {
             gm: {
                 calculateXP: typeof calculateXP;
                 launchTravelSheet: typeof launchTravelSheet;
+                perceptionForSelected: typeof perceptionForSelected;
+                stealthForSelected: typeof stealthForSelected;
             };
             system: {
-                moduleArt: Map<ActorUUID, ModuleArt>;
+                moduleArt: {
+                    map: Map<ActorUUID, ModuleArt>;
+                    refresh: typeof registerModuleArt;
+                };
                 remigrate: typeof remigrate;
                 sluggify: typeof sluggify;
-            };
-            importer: {
-                actor: typeof ActorImporter;
             };
             variantRules: {
                 AutomaticBonusProgression: typeof AutomaticBonusProgression;
@@ -101,7 +107,7 @@ declare global {
         var game: Game<ActorPF2e, ActorsPF2e, ChatMessagePF2e, EncounterPF2e, ItemPF2e, MacroPF2e, ScenePF2e, UserPF2e>;
 
         // eslint-disable-next-line no-var
-        var ui: FoundryUI<ActorPF2e, ItemPF2e, ChatLogPF2e, CompendiumDirectoryPF2e>;
+        var ui: FoundryUI<ActorPF2e, ActorDirectoryPF2e<ActorPF2e>, ItemPF2e, ChatLogPF2e, CompendiumDirectoryPF2e>;
     }
 
     interface Window {
@@ -130,12 +136,12 @@ declare global {
         get(module: "pf2e", setting: "proficiencyMasterModifier"): number;
         get(module: "pf2e", setting: "proficiencyLegendaryModifier"): number;
 
-        get(module: "pf2e", setting: "metagame.partyVision"): boolean;
-        get(module: "pf2e", setting: "metagame.secretCondition"): boolean;
-        get(module: "pf2e", setting: "metagame.secretDamage"): boolean;
-        get(module: "pf2e", setting: "metagame.showDC"): UserVisibility;
-        get(module: "pf2e", setting: "metagame.showResults"): UserVisibility;
-        get(module: "pf2e", setting: "metagame.tokenSetsNameVisibility"): boolean;
+        get(module: "pf2e", setting: "metagame_partyVision"): boolean;
+        get(module: "pf2e", setting: "metagame_secretCondition"): boolean;
+        get(module: "pf2e", setting: "metagame_secretDamage"): boolean;
+        get(module: "pf2e", setting: "metagame_showDC"): boolean;
+        get(module: "pf2e", setting: "metagame_showResults"): boolean;
+        get(module: "pf2e", setting: "metagame_tokenSetsNameVisibility"): boolean;
 
         get(module: "pf2e", setting: "tokens.autoscale"): boolean;
 
@@ -157,9 +163,11 @@ declare global {
         get(module: "pf2e", setting: "deathIcon"): ImagePath;
         get(module: "pf2e", setting: "drawCritFumble"): boolean;
         get(module: "pf2e", setting: "enabledRulesUI"): boolean;
+        get(module: "pf2e", setting: "gmVision"): boolean;
         get(module: "pf2e", setting: "identifyMagicNotMatchingTraditionModifier"): 0 | 2 | 5 | 10;
         get(module: "pf2e", setting: "nathMode"): boolean;
         get(module: "pf2e", setting: "statusEffectType"): StatusEffectIconTheme;
+        get(module: "pf2e", setting: "totmToggles"): boolean;
         get(module: "pf2e", setting: "worldSchemaVersion"): number;
         get(module: "pf2e", setting: "worldSystemVersion"): string;
     }
@@ -185,6 +193,7 @@ type ConfiguredConfig = Config<
     AmbientLightDocumentPF2e,
     ActiveEffectPF2e,
     ActorPF2e,
+    ActorDirectoryPF2e,
     ChatLogPF2e,
     ChatMessagePF2e,
     EncounterPF2e,

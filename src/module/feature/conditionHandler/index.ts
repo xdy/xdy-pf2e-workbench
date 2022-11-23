@@ -23,14 +23,15 @@ export async function increaseDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (shouldIHandleThis(actor) && hp > 0 && getProperty(update, "system.attributes.hp.value") <= 0) {
-        const orcFerocity = actor.items.find((feat) => feat.slug === "orc-ferocity");
-        const orcFerocityUsed: any = actor.items.find((effect) => effect.slug === "orc-ferocity-used");
-        const incredibleFerocity = actor.items.find((feat) => feat.slug === "incredible-ferocity");
-        const undyingFerocity = actor.items.find((feat) => feat.slug === "undying-ferocity");
-        const rampagingFerocity = actor.items.find((feat) => feat.slug === "rampaging-ferocity");
-        const deliberateDeath = actor.items.find((feat) => feat.slug === "deliberate-death");
-        const deliberateDeathUsed: any = actor.items.find((effect) => effect.slug === "deliberate-death-used");
+    if (shouldIHandleThis(actor) && hp > 0 && <number>getProperty(update, "system.attributes.hp.value") <= 0) {
+        const items: any = actor.items;
+        const orcFerocity = items.find((feat) => feat.slug === "orc-ferocity");
+        const orcFerocityUsed: any = items.find((effect) => effect.slug === "orc-ferocity-used");
+        const incredibleFerocity = items.find((feat) => feat.slug === "incredible-ferocity");
+        const undyingFerocity = items.find((feat) => feat.slug === "undying-ferocity");
+        const rampagingFerocity = items.find((feat) => feat.slug === "rampaging-ferocity");
+        const deliberateDeath = items.find((feat) => feat.slug === "deliberate-death");
+        const deliberateDeathUsed: any = items.find((effect) => effect.slug === "deliberate-death-used");
         const name = `${actor.token?.name ?? actor.name}`;
 
         if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
@@ -127,7 +128,7 @@ export async function removeDyingOnZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<boolean> {
-    if (shouldIHandleThis(actor) && hp <= 0 && getProperty(update, "system.attributes.hp.value") > 0) {
+    if (shouldIHandleThis(actor) && hp <= 0 && <number>getProperty(update, "system.attributes.hp.value") > 0) {
         const value = actor.getCondition("dying")?.value || 0;
         const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
         if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
@@ -147,7 +148,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     if (
         shouldIHandleThis(actor) &&
         hp <= 0 &&
-        getProperty(update, "system.attributes.hp.value") > 0 &&
+        <number>getProperty(update, "system.attributes.hp.value") > 0 &&
         actor.hasCondition("unconscious")
     ) {
         await actor.decreaseCondition("unconscious", { forceRemove: true });
@@ -157,6 +158,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
 function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
     const actors: ActorPF2e[] = [];
     if (actor.isOfType("character")) {
+        // @ts-ignore
         const minionsAndEidolons = <ActorPF2e[]>game.scenes.current?.tokens
             ?.filter(() => !game.user.isGM)
             ?.filter((token) => token.canUserModify(game.user, "update"))
@@ -171,11 +173,12 @@ function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
 
 export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
     const actor = <ActorPF2e>item.parent;
-    const bounceBack = actor.items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
-    const bounceBackUsed: any = actor.items.find((effect) => effect.slug === "bounce-back-used") ?? false;
+    const items: any = actor.items;
+    const bounceBack = items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
+    const bounceBackUsed: any = items.find((effect) => effect.slug === "bounce-back-used") ?? false;
 
-    const numbToDeath = actor.items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
-    const numbToDeathUsed: any = actor.items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
+    const numbToDeath = items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
+    const numbToDeathUsed: any = items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
     const name = `${actor.token?.name ?? actor.name}`;
 
     if (item.slug === "dying" && isFirstGM()) {

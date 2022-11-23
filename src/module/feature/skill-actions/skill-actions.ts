@@ -184,7 +184,7 @@ export class SkillAction {
     /**
      * Called when an item summary is expanded and needs to be filled out.
      */
-    renderItemSummary($div: JQuery, _item: Embedded<ItemPF2e>, chatData: ItemSummaryData) {
+    renderItemSummary($div: JQuery, _item, chatData: ItemSummaryData) {
         // append traits (only style the tags if they contain description data)
         const traitTags = Array.isArray(chatData.traits)
             ? chatData.traits

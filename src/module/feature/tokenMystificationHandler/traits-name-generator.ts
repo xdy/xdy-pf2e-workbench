@@ -114,6 +114,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
 }
 
 export async function generateNameFromTraitsForToken(tokenId: string) {
+    // @ts-ignore
     const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));
     if (token) {
         return generateNameFromTraits(token);

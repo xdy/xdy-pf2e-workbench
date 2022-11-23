@@ -1,5 +1,5 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { TokenDocumentPF2e } from "@scene";
+import { ScenePF2e, TokenDocumentPF2e } from "@scene";
 import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings";
 import { TokenDataPF2e } from "@scene/token-document";
 import { generateNameFromTraits } from "./traits-name-generator";
@@ -88,6 +88,7 @@ export async function buildTokenName(
                         case "numberPostfix":
                             rolled = Math.floor(Math.random() * 100) + 1;
                             // Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
+                            // @ts-ignore
                             if (canvas?.scene?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
                                 rolled = Math.floor(Math.random() * 100) + 1;
                             }
@@ -139,6 +140,7 @@ export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): b
 }
 
 export async function doMystificationFromToken(tokenId: string, active: boolean) {
+    // @ts-ignore
     const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));
     if (token) {
         return doMystification(token, active);
@@ -158,12 +160,14 @@ export async function doMystification(token: TokenPF2e, active: boolean) {
         },
     ];
 
+    const scene: ScenePF2e | null = canvas?.scene;
     if (
         game.user?.isGM &&
         isTokenMystified(token) &&
         game.settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor")
     ) {
-        for (const sceneToken of canvas?.scene?.tokens
+        // @ts-ignore
+        for (const sceneToken of scene?.tokens
             ?.filter((t) => t.actor?.id === token?.actor?.id)
             ?.filter((x) => isTokenMystified(x)) || []) {
             updates.push({
@@ -172,7 +176,8 @@ export async function doMystification(token: TokenPF2e, active: boolean) {
             });
         }
     }
-    await canvas?.scene?.updateEmbeddedDocuments("Token", updates);
+    // @ts-ignore
+    await scene?.updateEmbeddedDocuments("Token", updates, {});
 }
 
 export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
@@ -206,6 +211,7 @@ export function mangleChatMessage(message: ChatMessage, html: JQuery) {
     const actor = game.actors?.get(actorId);
     const jqueryContent = html?.find(".action-card");
 
+    // @ts-ignore
     const tokenName = <string>canvas?.scene?.tokens?.find((t) => t?.id === tokenId)?.name;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 

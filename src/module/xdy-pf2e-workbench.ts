@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification,
+    tokenCreateMystification
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, noOrSuccessfulFlatcheck, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -30,7 +30,7 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer,
+    startTimer
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM, nth } from "./utils";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting,
+    reminderTargeting
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -52,7 +52,7 @@ import { UserPF2e } from "@module/user";
 import {
     loadSkillActions,
     loadSkillActionsBabele,
-    renderSheetSkillActions,
+    renderSheetSkillActions
 } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
@@ -64,7 +64,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP,
+    removeDyingOnZeroHP
 } from "./feature/conditionHandler";
 import { TokenDocumentPF2e } from "@scene";
 import { basicActionMacros } from "./feature/macros/basicActionMacros";
@@ -141,7 +141,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         }
                         const type = message.flags?.pf2e.origin?.type ?? "spell";
                         const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
-                        const origin: SpellPF2e | null = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
+                        const origin: SpellPF2e | null = <SpellPF2e | null>(
+                            await fromUuid(<string>message.flags?.pf2e.origin?.uuid)
+                        );
                         let content = "";
                         if (origin) {
                             content = game.i18n.localize(
@@ -512,14 +514,14 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 token.actor.type === "npc"
             ) {
                 const actor = token.actor;
-                const items = <PhysicalItemPF2e[]>Array.from(
+                const items: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
                     actor.items
                         .filter((item) =>
                             ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"].includes(
                                 item.type
                             )
                         )
-                        .map((item) => <PhysicalItemPF2e>item)
+                        .map((item) => <PhysicalItemPF2e>(<unknown>item))
                         .filter((item) => !item.isTemporary)
                         .filter((item) => {
                             return item.identificationStatus === "identified";
@@ -590,6 +592,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 const b = `.gm-recall-knowledge-${skill}`;
                                 $html.find(b).on("click", async (e) => {
                                     const attr = <string>$(e.currentTarget).attr("data-token");
+                                    // @ts-ignore
                                     const token: any = game?.scenes?.active?.tokens?.get(attr);
                                     const skill = $(e.currentTarget).attr("data-skill");
                                     const dcs = (<string>$(e.currentTarget).attr("data-dcs")).split("/") || [];
@@ -675,6 +678,7 @@ async function migrateFeatures() {
             }
 
             for (const s of game.scenes) {
+                // @ts-ignore
                 for (const t of s.tokens) {
                     const actor = t.actor;
                     if (!actor || t.isLinked) {

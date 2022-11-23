@@ -214,7 +214,7 @@ const config: Configuration = {
     output: {
         clean: true,
         path: outDir,
-        filename: "[name].bundle.js",
+        filename: "xdy-pf2e-workbench.bundle.js",
     },
 };
 

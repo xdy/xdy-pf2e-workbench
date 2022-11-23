@@ -46,6 +46,7 @@ import "./client/application/sidebar/sidebar-tab/sidebar-directory/item-director
 import "./client/application/sidebar/sidebar-tab/sidebar-directory/roll-table-directory";
 import "./client/application/templates";
 import "./client/apps/forms/fonts";
+import "./client/apps/sidebar";
 import "./client/collections/compendium-collection";
 import "./client/collections/document-collection";
 import "./client/collections/world-collection/actors";
@@ -84,7 +85,6 @@ import "./client/pixi/canvas-layer/grid-layer";
 import "./client/pixi/grid";
 import "./client/pixi/helpers";
 import "./client/pixi/helpers/point-source";
-import "./client/pixi/helpers/point-source-polygon";
 import "./client/pixi/mouse-interaction-manager";
 import "./client/pixi/placeable-object/ambient-light";
 import "./client/pixi/placeable-object/ambient-sound";

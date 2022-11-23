@@ -24,14 +24,15 @@ export async function moveOnZeroHP(actor: ActorPF2e, update: Record<string, stri
     const combatant = game.combat?.getCombatantByToken(
         actor.isToken
             ? <string>actor.token?.id
-            : <string>canvas?.scene?.tokens.find((t) => t.actor?.id === actor.id)?.id
+            : // @ts-ignore
+              <string>canvas?.scene?.tokens.find((t) => t.actor?.id === actor.id)?.id
     );
     if (
         shouldIHandleThis(actor) &&
         combatant &&
         combatant.id !== game.combat?.combatant?.id &&
         hp > 0 &&
-        getProperty(update, "system.attributes.hp.value") <= 0
+        <number>getProperty(update, "system.attributes.hp.value") <= 0
     ) {
         await moveSelectedAheadOfCurrent(combatant.id);
     }
