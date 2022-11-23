@@ -133,15 +133,6 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Number,
                 onChange: () => debouncedReload(),
             },
-            customPauseImage: {
-                name: `${MODULENAME}.SETTINGS.customPauseImage.name`,
-                hint: `${MODULENAME}.SETTINGS.customPauseImage.hint`,
-                scope: "world",
-                config: true,
-                default: "",
-                type: String,
-                onChange: () => debouncedReload(),
-            },
         };
     }
 }

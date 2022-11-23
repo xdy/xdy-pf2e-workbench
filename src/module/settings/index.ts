@@ -106,6 +106,16 @@ export function registerWorkbenchSettings() {
     //     onChange: () => debouncedReload(),
     // });
 
+    game.settings.register(MODULENAME, "customPauseImage", {
+        name: `${MODULENAME}.SETTINGS.customPauseImage.name`,
+        hint: `${MODULENAME}.SETTINGS.customPauseImage.hint`,
+        scope: "world",
+        config: true,
+        default: "",
+        type: String,
+        filePicker: "image",
+    });
+
     game.settings.register(MODULENAME, "workbenchVersion", {
         name: `${MODULENAME}.SETTINGS.workbenchVersion.name`,
         hint: `${MODULENAME}.SETTINGS.workbenchVersion.hint`,
@@ -115,4 +125,5 @@ export function registerWorkbenchSettings() {
         type: String,
         onChange: () => debouncedReload(),
     });
+
 }
