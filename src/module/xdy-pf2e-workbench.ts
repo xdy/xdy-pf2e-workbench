@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification
+    tokenCreateMystification,
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, noOrSuccessfulFlatcheck, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -23,16 +23,16 @@ import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { toggleMenuSettings, toggleSettings } from "./feature/settingsHandler";
-import { chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
+import { addGmRKButtonToNpc, chatCardDescriptionCollapse, damageCardExpand } from "./feature/qolHandler";
 import {
     addHeroPoints,
     calcRemainingMinutes,
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer
+    startTimer,
 } from "./feature/heroPointHandler";
-import { isActuallyDamageRoll, isFirstGM, nth } from "./utils";
+import { isActuallyDamageRoll, isFirstGM } from "./utils";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
@@ -41,7 +41,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting
+    reminderTargeting,
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -52,7 +52,7 @@ import { UserPF2e } from "@module/user";
 import {
     loadSkillActions,
     loadSkillActionsBabele,
-    renderSheetSkillActions
+    renderSheetSkillActions,
 } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
@@ -64,7 +64,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP
+    removeDyingOnZeroHP,
 } from "./feature/conditionHandler";
 import { TokenDocumentPF2e } from "@scene";
 import { basicActionMacros } from "./feature/macros/basicActionMacros";
@@ -571,53 +571,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (game.user?.isGM && game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
-                $html.find(".recall-knowledge").each((_i, e) => {
-                    const token = sheet.token;
-                    $(e)
-                        .find(".section-body")
-                        .each((_i, e) => {
-                            const $e = $(e);
-                            if ($e.find(".identification-skills").length === 0) {
-                                return;
-                            }
-                            for (const s of $e.find("ul").text().trim().split("\n")) {
-                                const skill = s.toLowerCase().trim();
-                                $e.append(
-                                    `<button class="gm-recall-knowledge-${skill}" data-skill="${skill}" data-dcs="${<
-                                        string
-                                    >$e.find(".identification-skills")[0].title}" data-token="${
-                                        token?.id
-                                    }">Recall Knowledge: ${skill}</button>`
-                                );
-                                const b = `.gm-recall-knowledge-${skill}`;
-                                $html.find(b).on("click", async (e) => {
-                                    const attr = <string>$(e.currentTarget).attr("data-token");
-                                    // @ts-ignore
-                                    const token: any = game?.scenes?.active?.tokens?.get(attr);
-                                    const skill = $(e.currentTarget).attr("data-skill");
-                                    const dcs = (<string>$(e.currentTarget).attr("data-dcs")).split("/") || [];
-
-                                    const name = game.settings.get(MODULENAME, "addGmRKButtonToNpcHideNpcName")
-                                        ? ""
-                                        : ` about ${token?.name}`;
-                                    let content = `To Recall Knowledge${name}, roll:`;
-
-                                    for (let i = 0; i < dcs.length; i++) {
-                                        content += `<br>${i + 1}${nth(i + 1)}: @Check[type:${skill}|dc:${
-                                            dcs[i]
-                                        }|traits:secret,action:recall-knowledge]`;
-                                        content += game.settings.get(MODULENAME, "addGmRKButtonToNpcHideSkill")
-                                            ? `{Recall Knowledge} `
-                                            : " ";
-                                    }
-                                    ChatMessage.create({
-                                        content: TextEditor.enrichHTML(content, { async: false }),
-                                        speaker: ChatMessage.getSpeaker({ token: token }),
-                                    }).then();
-                                });
-                            }
-                        });
-                });
+                addGmRKButtonToNpc($html, sheet);
             }
             if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
                 renderSheetSkillActions(sheet, $html);
