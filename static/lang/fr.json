@@ -467,6 +467,10 @@
       "tokenAnimation": {
         "name": "Activer la modification de l'animation du mouvement des jetons.",
         "hint": "Activer pour modifier l'animation du mouvement des jetons. Cela peut causer des problèmes avec le module Multilevel Tokens."
+      },
+      "customPauseImage": {
+        "name": "Image personnalisée à utiliser pour l'image de pause.",
+        "hint": "Image personnalisée à utiliser pour l'image de la pause. Laissez vide pour utiliser l'icône d'horloge par défaut."
       }
     },
     "effects": {
