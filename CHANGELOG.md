@@ -1,3 +1,10 @@
+# [4.17.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.16.1...v4.17.0) (2022-11-24)
+
+
+### Features
+
+* Adds Refocus macro to xdy-pf2e-workbench-macros compendium. Dialog with buttons to regain 1 focus point, or 2 if the character has any of the *-focus feats, or 3 if any of the *-wellspring feats (with admonition to only choose that button if one has indeed spent more than 2 or 3 focus points since the last refocus.) ([276e42d](https://github.com/xdy/xdy-pf2e-workbench/commit/276e42dc43f390580031149bca1750358e8e4b16))
+
 ## [4.16.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.16.0...v4.16.1) (2022-11-23)
 
 
