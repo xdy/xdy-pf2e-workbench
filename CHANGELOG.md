@@ -1,3 +1,10 @@
+# [4.18.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.17.2...v4.18.0) (2022-11-24)
+
+
+### Features
+
+* Add support for custom pause text (defaults to "Game Paused", no localization yet.) ([505e72e](https://github.com/xdy/xdy-pf2e-workbench/commit/505e72e8fbee9603620684a31db79583644db2dc))
+
 ## [4.17.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.17.1...v4.17.2) (2022-11-24)
 
 
