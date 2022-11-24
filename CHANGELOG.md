@@ -1,3 +1,10 @@
+## [4.17.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.17.0...v4.17.1) (2022-11-24)
+
+
+### Bug Fixes
+
+* Add support for Psychic to the Refocus macro. ([d9398af](https://github.com/xdy/xdy-pf2e-workbench/commit/d9398afafa35ba5dbcc084cc9edf01864b7f53c3))
+
 # [4.17.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.16.1...v4.17.0) (2022-11-24)
 
 
