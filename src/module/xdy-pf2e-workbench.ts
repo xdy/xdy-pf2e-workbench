@@ -447,14 +447,19 @@ Hooks.once("setup", async () => {
     console.log(`${MODULENAME} | Setting up`);
     // Do anything after initialization but before ready
 
-    // Set css variables for the module
-    document.documentElement.style.setProperty(
-        "--xdy-pf2e-workbench-pause",
-        "url(../../../" + <string>game.settings.get(MODULENAME, "customPauseImage") + ")"
-    );
-    // @ts-ignore
-    game.i18n.translations.GAME.Paused = game.settings.get(MODULENAME, "customPauseText");
+    if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
+        // Set css variables for the module
+        document.documentElement.style.setProperty(
+            "--xdy-pf2e-workbench-pause",
+            "url(../../../" + <string>game.settings.get(MODULENAME, "customPauseImage") + ")"
+        );
+    }
 
+    const text = game.settings.get(MODULENAME, "customPauseText");
+    if (text && text !== "") {
+        // @ts-ignore
+        game.i18n.translations.GAME.Paused = text;
+    }
     registerWorkbenchKeybindings();
 
     // General module setup
@@ -576,7 +581,7 @@ Hooks.once("ready", async () => {
     }
 
     // @ts-ignore
-    game.i18n.translations.GAME.Paused = game.settings.get(MODULENAME, "customPauseText");
+    // game.i18n.translations.GAME.Paused = game.settings.get(MODULENAME, "customPauseText");
 
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
