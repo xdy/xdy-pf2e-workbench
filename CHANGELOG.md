@@ -1,3 +1,10 @@
+## [4.17.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.17.1...v4.17.2) (2022-11-24)
+
+
+### Bug Fixes
+
+* Moved optional pause image to the center of the screen and the pause text above the image. ([a10bef4](https://github.com/xdy/xdy-pf2e-workbench/commit/a10bef4247520674b5f982ca47834deb76661094))
+
 ## [4.17.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.17.0...v4.17.1) (2022-11-24)
 
 
