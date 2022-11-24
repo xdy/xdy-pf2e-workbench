@@ -18,7 +18,8 @@ export async function refocus() {
 
     if (selected.length === 1) {
         const actor = canvas.tokens.controlled[0].actor;
-        let value = 1;
+        let regain = 1;
+        let isPsychic = false;
         if (actor) {
             // @ts-ignore
             const feats = actor.feats.map((x) => x.feats).flat();
@@ -38,7 +39,7 @@ export async function refocus() {
                     ].includes(i.feat?.system?.slug);
                 })
             ) {
-                value += 1;
+                regain += 1;
             }
             if (
                 feats?.find((i) => {
@@ -54,8 +55,20 @@ export async function refocus() {
                     ].includes(i.feat?.system?.slug);
                 })
             ) {
-                value += 1;
+                regain += 1;
             }
+            if (
+                feats?.find((i) => {
+                    return ["psychic-spellcasting"].includes(i.feat?.system?.slug);
+                })
+            ) {
+                regain = 2;
+                isPsychic = true;
+            }
+            const details = isPsychic
+                ? `spent Focus Points only to amp psi cantrips or fuel psychic abilities`
+                : `spent at least ${regain} focus points`;
+
             const dialog = new Dialog({
                 title: "Refocus",
                 buttons: {
@@ -65,9 +78,12 @@ export async function refocus() {
                     },
                     more: {
                         // @ts-ignore
-                        disabled: value === 1,
-                        label: `Regain ${value} focus points.<br/>Click <b>ONLY</b> if you have spent at least ${value} focus points since last Refocuse.`,
-                        callback: () => increaseFocusPoints(actor, value),
+                        disabled: regain === 1,
+                        label:
+                            regain === 1
+                                ? "Disabled due to no ability to regain more than 1 focus point."
+                                : `Regain ${regain} focus points.<br/>Click <b>ONLY</b> if you have ${details} since last Refocus.`,
+                        callback: () => increaseFocusPoints(actor, regain),
                     },
                 },
                 default: "one",
