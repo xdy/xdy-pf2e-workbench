@@ -116,6 +116,15 @@ export function registerWorkbenchSettings() {
         filePicker: "image",
     });
 
+    game.settings.register(MODULENAME, "customPauseText", {
+        name: `${MODULENAME}.SETTINGS.customPauseText.name`,
+        hint: `${MODULENAME}.SETTINGS.customPauseText.hint`,
+        scope: "world",
+        config: true,
+        default: "Game Paused",
+        type: String,
+    });
+
     game.settings.register(MODULENAME, "workbenchVersion", {
         name: `${MODULENAME}.SETTINGS.workbenchVersion.name`,
         hint: `${MODULENAME}.SETTINGS.workbenchVersion.hint`,

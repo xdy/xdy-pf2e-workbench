@@ -224,6 +224,10 @@
         "hint": "Custom image to use for the pause image. Leave empty to use the default clockwork icon.",
         "name": "Custom image to use for the pause image."
       },
+      "customPauseText": {
+        "hint": "Custom text to use for the pause text. Leave empty to use the default 'Game Paused'.",
+        "name": "Custom text to use for the pause text."
+      },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn for characters, npcs and familiars.",
         "name": "Automatically decrease the frightened condition each turn."

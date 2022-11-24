@@ -14,7 +14,7 @@ import {
     doMystificationFromToken,
     mangleChatMessage,
     renderNameHud,
-    tokenCreateMystification
+    tokenCreateMystification,
 } from "./feature/tokenMystificationHandler";
 import { registerWorkbenchKeybindings } from "./keybinds";
 import { autoRollDamage, noOrSuccessfulFlatcheck, persistentDamage, persistentHealing } from "./feature/damageHandler";
@@ -27,7 +27,7 @@ import {
     addGmRKButtonToNpc,
     castPrivateSpell,
     chatCardDescriptionCollapse,
-    damageCardExpand
+    damageCardExpand,
 } from "./feature/qolHandler";
 import {
     addHeroPoints,
@@ -35,7 +35,7 @@ import {
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
-    startTimer
+    startTimer,
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM } from "./utils";
 import { ItemPF2e, PhysicalItemPF2e } from "@item";
@@ -46,7 +46,7 @@ import {
     reminderBreathWeapon,
     reminderCannotAttack,
     reminderIWR,
-    reminderTargeting
+    reminderTargeting,
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
@@ -57,7 +57,7 @@ import { UserPF2e } from "@module/user";
 import {
     loadSkillActions,
     loadSkillActionsBabele,
-    renderSheetSkillActions
+    renderSheetSkillActions,
 } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
@@ -69,7 +69,7 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP
+    removeDyingOnZeroHP,
 } from "./feature/conditionHandler";
 import { TokenDocumentPF2e } from "@scene";
 import { basicActionMacros } from "./feature/macros/basicActionMacros";
@@ -86,14 +86,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     await preloadTemplates();
 
     registerHandlebarsHelpers();
-
-    if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
-        // Set css variables for the module
-        document.documentElement.style.setProperty(
-            "--xdy-pf2e-workbench-pause",
-            "url(../../../" + <string>game.settings.get(MODULENAME, "customPauseImage") + ")"
-        );
-    }
 
     // Hooks that always run
     Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
@@ -455,10 +447,17 @@ Hooks.once("setup", async () => {
     console.log(`${MODULENAME} | Setting up`);
     // Do anything after initialization but before ready
 
+    // Set css variables for the module
+    document.documentElement.style.setProperty(
+        "--xdy-pf2e-workbench-pause",
+        "url(../../../" + <string>game.settings.get(MODULENAME, "customPauseImage") + ")"
+    );
+    // @ts-ignore
+    game.i18n.translations.GAME.Paused = game.settings.get(MODULENAME, "customPauseText");
+
     registerWorkbenchKeybindings();
 
     // General module setup
-
     if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
         game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
             return false;
@@ -575,6 +574,9 @@ Hooks.once("ready", async () => {
     if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
         loadSkillActions();
     }
+
+    // @ts-ignore
+    game.i18n.translations.GAME.Paused = game.settings.get(MODULENAME, "customPauseText");
 
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
