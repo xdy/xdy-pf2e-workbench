@@ -2,6 +2,15 @@
     --xdy-pf2e-workbench-pause: "";
 }
 
+#pause {
+    bottom: calc(50% - 64px);
+    background: url("../ui/pausebg.png") no-repeat 50% 50% !important;
+}
+
+#pause figcaption {
+    top: -100%;
+}
+
 #pause img {
     content: var(--xdy-pf2e-workbench-pause);
 }
