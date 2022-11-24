@@ -130,6 +130,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
+        refocus: refocus, // await game.PF2eWorkbench.refocus()
 ```
 
 * New Keybinds in Configure Controls
