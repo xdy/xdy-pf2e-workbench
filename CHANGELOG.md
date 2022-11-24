@@ -1,3 +1,10 @@
+## [4.18.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.18.0...v4.18.1) (2022-11-24)
+
+
+### Bug Fixes
+
+* Fix a couple of bugs with pause text and image. ([4f17815](https://github.com/xdy/xdy-pf2e-workbench/commit/4f17815fb2077216f4ac42ad478503a4b908d9d2))
+
 # [4.18.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.17.2...v4.18.0) (2022-11-24)
 
 
