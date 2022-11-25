@@ -235,7 +235,9 @@
       },
       "npcMystifierAddRandomProperty": {
         "hint": "Adiciona propriedade aleatórios quando mistificar.",
-        "name": "Adicionar propriedade aleatórios ao nome"
+        "name": "Adicionar propriedade aleatórios ao nome",
+        "wordPrefix": "Palavra com prefixo",
+        "numberPostfix": "Número com sufixo"
       },
       "npcMystifierBlacklist": {
         "hint": "Adicione à esta lista de bloqueio, separada por vírgula, para filtrar conteúdo do nome mistificado.",
@@ -251,7 +253,11 @@
       },
       "npcMystifierModifierKey": {
         "hint": "Escolhe a tecla a ser pressionada para mistificar criaturas quando as arrastar para a cena ativa. Note que Alt também esconderá os PdMs, por padrão do Foundry.",
-        "name": "Tecla para mistificar ao arrastar à cena"
+        "name": "Tecla para mistificar ao arrastar à cena",
+        "disabled": "Desativado",
+        "always": "Sempre",
+        "alt": "Alt",
+        "control": "Control"
       },
       "npcMystifierMystifyKey": {
         "hint": "Mistifica tokens selecionados.",
@@ -358,7 +364,8 @@
         "is": "{name} é",
         "name": "Imunidades, Fraquezas e Resistências",
         "resistantTo": " <strong>Resistente</strong> a ",
-        "weakTo": " <strong>Fraco</strong> a "
+        "weakTo": " <strong>Fraco</strong> a ",
+        "notComplex": "<br><br>NOTA: \"A tudo\", mental, fisico e outras complexidades devem ser verificadas na ficha do alvo."
       },
       "remindersSettings": {
         "hint": "Configure vários lembretes.",
@@ -373,6 +380,27 @@
       "workbenchVersion": {
         "hint": "Versão em que a última migração foi executada. Pode ser menor que a versão do módulo. Não a modifique a não ser que você saiba o que está fazendo.",
         "name": "Versão de migração do Workbench"
+      },
+      "npcMystifyAllPhysicalMagicalItems": {
+        "name": "Mistificar itens magicos e alquimicos, se Npcs lotiaveis estiver ativado nas configurações do sistema PF2e"
+      },
+      "customPauseImage": {
+        "name": "Imagem customizada para usar na imagem de Pause."
+      },
+      "customPauseText": {
+        "name": "Texto customizado para usar no texto de Pause.",
+        "hint": "Texto customizado para usar no texto de Pause. Deixe vazio para utilizar o texto padrão 'Jogo Pausado'."
+      },
+      "reminderIWRCaveat": {
+        "name": "Mostrar Alerta de verificação de certas Fraquezas/Imunidades/Resistencias, não suportados em cada mensagem.",
+        "hint": "Mostrar Alerta de verificação de certas Fraquezas/Imunidades/Resistencias, não suportados em cada mensagem."
+      },
+      "applyClumsyIfWieldingLargerWeapon": {
+        "hint": "Automaticamente aplica Desajeitado se a Arma for maior de quem á estiver segurando.",
+        "name": "Automaticamente aplica Desajeitado se a Arma for maior de quem á estiver segurando."
+      },
+      "npcMystifierRandomPropertySkipForUnique": {
+        "name": "Pular propriedade persistente para Npcs únicos"
       }
     },
     "npcRoller": {
@@ -424,7 +452,13 @@
     "effects": {
       "orcFerocityUsed": "Ferocidade de Orc utilizada",
       "bounceBackUsed": "Recuperar-se usado",
-      "numbToDeathUsed": "Entorpecido pela Morte usado"
+      "numbToDeathUsed": "Entorpecido pela Morte usado",
+      "deliberateDeathUsed": "Morte Deliberada Usado"
+    },
+    "modules": {
+      "multilevel-tokens": "O módulo Multilevel Tokens( e provavelmente outros módulos de telporte de tokens) podem ocorrer problemas com o teleporte se você ativar a opção do Workbench para mudar a animação do token.",
+      "pf2e-sheet-skill-actions": "O módulo pf2e-sheet-skill-actions foi descontinuado, todas suas funções agora estão incluidas no Workbench, por favor desative este módulo.",
+      "pf2e-toolbox": "O módulo pf2e-toolbox foi descontinuado, todas suas funções agora estão incluidas no Workbench, por favor desative este módulo."
     }
   }
 }
