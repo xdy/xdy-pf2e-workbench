@@ -471,6 +471,10 @@
       "customPauseImage": {
         "name": "Image personnalisée à utiliser pour l'image de pause.",
         "hint": "Image personnalisée à utiliser pour l'image de la pause. Laissez vide pour utiliser l'icône d'horloge par défaut."
+      },
+      "customPauseText": {
+        "name": "Texte personnalisé à utiliser pour le message de pause.",
+        "hint": "Texte personnalisé à utiliser pour le message lorsque le jeu est en pause. Laissez le vide pour utiliser le texte par défaut \"Jeu en pause\"."
       }
     },
     "effects": {
