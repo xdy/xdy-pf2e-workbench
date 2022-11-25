@@ -475,6 +475,10 @@
       "customPauseText": {
         "name": "Texte personnalisé à utiliser pour le message de pause.",
         "hint": "Texte personnalisé à utiliser pour le message lorsque le jeu est en pause. Laissez le vide pour utiliser le texte par défaut \"Jeu en pause\"."
+      },
+      "customPauseRelocation": {
+        "hint": "Place l'image de pause au milieu de l'écran, avec le message au dessus.",
+        "name": "Centrer l'image de la pause avec le message au dessus."
       }
     },
     "effects": {
