@@ -1,3 +1,10 @@
+# [4.19.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.18.1...v4.19.0) (2022-11-25)
+
+
+### Features
+
+* Custom pause image and text now default to the original position, with an option to center them with the text above the image. ([70afd9c](https://github.com/xdy/xdy-pf2e-workbench/commit/70afd9c0e636fe2c774b5e583c5873b935830157)), closes [#565](https://github.com/xdy/xdy-pf2e-workbench/issues/565)
+
 ## [4.18.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.18.0...v4.18.1) (2022-11-24)
 
 
