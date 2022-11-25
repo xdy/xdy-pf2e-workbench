@@ -121,8 +121,17 @@ export function registerWorkbenchSettings() {
         hint: `${MODULENAME}.SETTINGS.customPauseText.hint`,
         scope: "world",
         config: true,
-        default: "Game Paused",
+        default: "",
         type: String,
+    });
+
+    game.settings.register(MODULENAME, "customPauseRelocation", {
+        name: `${MODULENAME}.SETTINGS.customPauseRelocation.name`,
+        hint: `${MODULENAME}.SETTINGS.customPauseRelocation.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
     });
 
     game.settings.register(MODULENAME, "workbenchVersion", {

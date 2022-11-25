@@ -1,14 +1,17 @@
 :root {
     --xdy-pf2e-workbench-pause: "";
+    --xdy-pf2e-workbench-pause-background: "initial";
+    --xdy-pf2e-workbench-pause-bottom: "";
+    --xdy-pf2e-workbench-pause-figcaption-top: "";
 }
 
 #pause {
-    bottom: calc(50% - 64px);
-    background: url("../ui/pausebg.png") no-repeat 50% 50% !important;
+    background: var(--xdy-pf2e-workbench-pause-background);
+    bottom: var(--xdy-pf2e-workbench-pause-bottom);
 }
 
 #pause figcaption {
-    top: -100%;
+    top: var(--xdy-pf2e-workbench-pause-figcaption-top);
 }
 
 #pause img {

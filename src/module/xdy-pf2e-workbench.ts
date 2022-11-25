@@ -455,11 +455,20 @@ Hooks.once("setup", async () => {
         );
     }
 
+    document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-bottom", "10%");
+    document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "0%");
+    if (game.settings.get(MODULENAME, "customPauseRelocation")) {
+        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-bottom", "calc(50% - 64px)");
+        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "-100%");
+        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-background", "");
+    }
+
     const text = game.settings.get(MODULENAME, "customPauseText");
     if (text && text !== "") {
         // @ts-ignore
         game.i18n.translations.GAME.Paused = text;
     }
+
     registerWorkbenchKeybindings();
 
     // General module setup

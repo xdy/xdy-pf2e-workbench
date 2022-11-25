@@ -228,6 +228,10 @@
         "hint": "Custom text to use for the pause text. Leave empty to use the default 'Game Paused'.",
         "name": "Custom text to use for the pause text."
       },
+      "customPauseRelocation": {
+        "hint": "Put the pause image in the middle of the screen, with the text above it.",
+        "name": "Center pause image with text above it."
+      },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Client setting to automatically decrease the frightened condition each turn for characters, npcs and familiars.",
         "name": "Automatically decrease the frightened condition each turn."
