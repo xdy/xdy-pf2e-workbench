@@ -1,3 +1,11 @@
+# [4.20.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.19.0...v4.20.0) (2022-11-27)
+
+
+### Features
+
+* Adds 'Build Npc Spellbook Journal' macro to xdy-pf2e-workbench-macros compendium. Originally from Avery (Velara) Avery[#9136](https://github.com/xdy/xdy-pf2e-workbench/issues/9136), modified by me. ([f0c4816](https://github.com/xdy/xdy-pf2e-workbench/commit/f0c4816f48f74f2210660238e4c2db559810b8a3))
+* Makes the function 'callHeroPointHandler' available for macros. It shows the hero point handler dialog with a random character selected and the time set to 60 minutes. ([8684c57](https://github.com/xdy/xdy-pf2e-workbench/commit/8684c57095fc90f53a3227a60263ddac6699d1d4)), closes [#568](https://github.com/xdy/xdy-pf2e-workbench/issues/568)
+
 # [4.19.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.18.1...v4.19.0) (2022-11-25)
 
 
