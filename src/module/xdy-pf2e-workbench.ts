@@ -32,6 +32,7 @@ import {
 import {
     addHeroPoints,
     calcRemainingMinutes,
+    callHeroPointHandler,
     createRemainingTimeMessage,
     maxHeroPoints,
     resetHeroPoints,
@@ -575,8 +576,11 @@ Hooks.once("ready", async () => {
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
         refocus: refocus, // await game.PF2eWorkbench.refocus()
         buildNpcSpellbookJournal: buildNpcSpellbookJournal, // await game.PF2eWorkbench.buildNpcSpellbookJournal()
+        callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.timeoutHeroPointHandler()
     };
 
+    // TODO Instead of opening immediately, add a handler that hooks onto the *first* unpause, and starts then.
+    // TODO Check if more than 'timer max' minutes have passed, if so assume new start and reset to 'timer max' minutes.
     if (isFirstGM() && game.settings.get(MODULENAME, "heroPointHandler")) {
         let remainingMinutes = calcRemainingMinutes(false);
         if (remainingMinutes > 0 || game.settings.get(MODULENAME, "heroPointHandlerStartTimerOnReady")) {

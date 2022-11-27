@@ -1,5 +1,5 @@
 // These usecases should be handled
-// * Show a new handler, set timeout to 60, ignore on the first, none on the second
+// * Show a new handle  r, set timeout to 60, ignore on the first, none on the second
 // * Check on an existing timer, recalc timeout, ignore on the first, none on the second
 // * Timeout, recalc timeout, ignore on the first, random on the second
 
@@ -66,6 +66,10 @@ export function createRemainingTimeMessage(remainingMinutes: number) {
         },
         {}
     );
+}
+
+export async function callHeroPointHandler() {
+    return heroPointHandler(HPHState.Timeout);
 }
 
 export async function heroPointHandler(state: HPHState) {
