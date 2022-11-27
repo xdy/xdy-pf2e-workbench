@@ -1,6 +1,7 @@
+// Originally from ApoApostolov#4622, modified by me. Included with permission.
+
 // noinspection CssUnresolvedCustomProperty
 /* eslint-disable no-undef */
-
 // TODO Fix the ts-ignore and any in this.
 
 let selectedActor;

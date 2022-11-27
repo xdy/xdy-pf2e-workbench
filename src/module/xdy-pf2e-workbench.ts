@@ -74,6 +74,7 @@ import {
 import { TokenDocumentPF2e } from "@scene";
 import { basicActionMacros } from "./feature/macros/basicActionMacros";
 import { refocus } from "./feature/macros/refocus";
+import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -573,6 +574,7 @@ Hooks.once("ready", async () => {
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
         refocus: refocus, // await game.PF2eWorkbench.refocus()
+        buildNpcSpellbookJournal: buildNpcSpellbookJournal, // await game.PF2eWorkbench.buildNpcSpellbookJournal()
     };
 
     if (isFirstGM() && game.settings.get(MODULENAME, "heroPointHandler")) {
