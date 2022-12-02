@@ -492,6 +492,29 @@
       "pf2e-sheet-skill-actions": "Le module pf2e-sheet-skill-actions n'est plus maintenu. Toutes ses fonctions sont intégrées au module Workbench. Svp, éteignez-le.",
       "pf2e-toolbox": "Le module pf2e toolbox n'est plus maintenu. La plupart de ses fonctions sont intégrées dans le module workbench. SVP, éteignez -le.",
       "multilevel-tokens": "Le module Multilevel tokens (et probablement d'autres modules qui téléportent des jetons) pourrait avoir des problèmes de téléportation si vous avez activé le paramètre optionnel du Workbench pour modifier l'animation des jetons."
+    },
+    "macros": {
+      "basicActionMacros": {
+        "title": "Actions ({name})",
+        "noActorSelected": "Aucun acteur sélectionné",
+        "cancel": "Annuler",
+        "gmMustImport": "Le MJ doit faire un clic droit sur le compendium xdy-pf2e-workbench-macros et sélectionner \"Importer tout le contenu\" et s'assurer de cocher \"Conserver les ID des documents\" lors de l'importation."
+      },
+      "buildNpcSpellbookJournal": {
+        "title": "Construire le grimoire de sorts du PNJ",
+        "generatedSpellbookFor": "Grimoire généré pour {name}",
+        "noSpellcastingEntry": "Vous devez avoir soit une feuille de PNJ ouverte et sélectionnée, soit un seul jeton PNJ sélectionné. De plus, ledit PNJ doit avoir une entrée pour l'incantation."
+      },
+      "refocus": {
+        "regains": "Regagne {focus} points de focalisation.",
+        "notPsychic": "a dépensé au moins {regain} points de focalisation",
+        "isPsychic": "a dépensé des Points de Focalisation uniquement pour amplifier les tours de magie psi ou alimenter les capacités psychiques",
+        "regainOne": "Récupère 1 point de focalisation.",
+        "disabled": "Désactivé en raison de l'absence de capacité pour regagner plus d'un point de focalisation.",
+        "one": "un",
+        "selectOneActor": "Vous devez sélectionner un acteur.",
+        "enabled": "Regagner {regain} des points de focalisation.<br/>Cliquez <b>UNIQUEMENT</b> si vous avez {details} depuis la dernière Refocalisation."
+      }
     }
   }
 }
