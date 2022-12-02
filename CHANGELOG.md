@@ -1,3 +1,10 @@
+# [4.21.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.20.0...v4.21.0) (2022-12-02)
+
+
+### Features
+
+* Localized macros. Added icon for Advanced Countdown macro. Set verified compatibility to latest version. Removed some stray asyncs. ([6319b54](https://github.com/xdy/xdy-pf2e-workbench/commit/6319b54fc992cdb7049dd0b882061696ee85bb6a))
+
 # [4.20.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.19.0...v4.20.0) (2022-11-27)
 
 
