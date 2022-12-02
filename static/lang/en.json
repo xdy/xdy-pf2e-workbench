@@ -52,6 +52,29 @@
       "numbToDeathUsed": "Numb To Death Used",
       "deliberateDeathUsed": "Deliberate Death Used"
     },
+    "macros": {
+      "basicActionMacros": {
+        "title": "Actions ({name})",
+        "noActorSelected": "No actor selected",
+        "gmMustImport": "The GM must right click on the compendium xdy-pf2e-workbench-macros and select 'Import All Content' and make sure to check 'Keep Document IDs' when importing.",
+        "cancel": "Cancel"
+      },
+      "buildNpcSpellbookJournal": {
+        "title": "Build NPC Spellbook Journal",
+        "noSpellcastingEntry": "You must have either an NPC character sheet open and selected, or a single NPC token selected. Also, said NPC must have a spellcasting entry.",
+        "generatedSpellbookFor": "Generated spellbook for {name}"
+      },
+      "refocus": {
+        "regains": "Regains {focus} focus points.",
+        "notPsychic": "spent at least {regain} focus points",
+        "isPsychic": "spent Focus Points only to amp psi cantrips or fuel psychic abilities",
+        "regainOne": "Regain 1 focus point.",
+        "disabled": "Disabled due to no ability to regain more than 1 focus point.",
+        "enabled": "Regain {regain} focus points.<br/>Click <b>ONLY</b> if you have {details} since last Refocus.",
+        "one": "one",
+        "selectOneActor": "You must select one actor."
+      }
+    },
     "modules": {
       "pf2e-sheet-skill-actions": "The module pf2e-sheet-skill-actions is no longer maintained, all it's functions are part of the Workbench, please turn it off.",
       "pf2e-toolbox": "The module pf2e-toolbox is no longer maintained, most of it's functions are part of the Workbench, please turn it off.",

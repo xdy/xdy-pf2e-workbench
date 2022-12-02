@@ -1,4 +1,6 @@
 // Originally from Avery (Velara) Avery#9136, modified by me. Included with permission.
+import { MODULENAME } from "../../xdy-pf2e-workbench";
+
 export async function buildNpcSpellbookJournal() {
     // @ts-ignore
     const activeWindow = ui.activeWindow;
@@ -15,9 +17,7 @@ export async function buildNpcSpellbookJournal() {
     const length = actor.spellcasting.contents.length;
 
     if (!actor || length === 0) {
-        ui.notifications.warn(
-            "You must have either an NPC character sheet open and selected, or a single NPC token selected. Also, said NPC must have a spellcasting entry."
-        );
+        ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noSpellcastingEntry`));
         return;
     }
 
@@ -30,7 +30,7 @@ export async function buildNpcSpellbookJournal() {
     }
 
     const updates = {
-        name: "Generated spellbook for " + actor.name,
+        name: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.generatedSpellbookFor`, { name: actor.name }),
         content: `<table class="pf2-table">
     <tr>
        <th>Entry</th>

@@ -4,6 +4,8 @@
 /* eslint-disable no-undef */
 // TODO Fix the ts-ignore and any in this.
 
+import { MODULENAME } from "../../xdy-pf2e-workbench";
+
 let selectedActor;
 
 function getActor() {
@@ -354,7 +356,7 @@ export function basicActionMacros() {
     selectedActor = getActor();
 
     if (!selectedActor) {
-        return ui.notifications.warn("No character selected!");
+        return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
     }
 
     const actors =
@@ -430,12 +432,14 @@ ${actionList
     // @ts-ignore
     window.actionDialog = new Dialog(
         {
-            title: `Actions (${selectedActor.name})`,
+            title: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.title`, {
+                name: selectedActor.name,
+            }),
             content,
             buttons: {
                 close: {
                     icon: `<i class="fas fa-times"></i>`,
-                    label: "Cancel",
+                    label: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.cancel`),
                 },
             },
             default: "close",
@@ -448,7 +452,7 @@ ${actionList
                             const macro = game.macros.get(current);
                             if (!macro) {
                                 ui.notifications.error(
-                                    "The GM must right click on the compendium xdy-pf2e-workbench-macros and select 'Import All Content' and make sure to check 'Keep Document IDs' when importing."
+                                    game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.gmMustImport`)
                                 );
                                 return;
                             }

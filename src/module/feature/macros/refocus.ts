@@ -1,3 +1,5 @@
+import { MODULENAME } from "../../xdy-pf2e-workbench";
+
 async function increaseFocusPoints(actor, value) {
     const focus = actor.system.resources.focus;
     const max = focus.max;
@@ -9,7 +11,7 @@ async function increaseFocusPoints(actor, value) {
         type: CONST.CHAT_MESSAGE_TYPES.EMOTE,
         speaker: ChatMessage.getSpeaker(actor),
         flavor: '<strong><img src="systems/pf2e/icons/actions/Passive.webp" width="10" height="10" style="border: 0; margin-right: 3px;" alt="Passive">Refocus</strong>',
-        content: `Regains ${result - current} focus points.`,
+        content: game.i18n.format(`${MODULENAME}.macros.refocus.regains`, { focus: result - current }),
     });
 }
 
@@ -66,14 +68,14 @@ export async function refocus() {
                 isPsychic = true;
             }
             const details = isPsychic
-                ? `spent Focus Points only to amp psi cantrips or fuel psychic abilities`
-                : `spent at least ${regain} focus points`;
+                ? game.i18n.localize(`${MODULENAME}.macros.refocus.isPsychic`)
+                : game.i18n.format(`${MODULENAME}.macros.refocus.notPsychic`, { regain: regain });
 
             const dialog = new Dialog({
                 title: "Refocus",
                 buttons: {
                     one: {
-                        label: "Regain 1 focus point.",
+                        label: game.i18n.localize(`${MODULENAME}.macros.refocus.regainOne`),
                         callback: () => increaseFocusPoints(actor, 1),
                     },
                     more: {
@@ -81,17 +83,20 @@ export async function refocus() {
                         disabled: regain === 1,
                         label:
                             regain === 1
-                                ? "Disabled due to no ability to regain more than 1 focus point."
-                                : `Regain ${regain} focus points.<br/>Click <b>ONLY</b> if you have ${details} since last Refocus.`,
+                                ? game.i18n.localize(`${MODULENAME}.macros.refocus.disabled`)
+                                : game.i18n.format(`${MODULENAME}.macros.refocus.enabled`, {
+                                      regain: regain,
+                                      details: details,
+                                  }),
                         callback: () => increaseFocusPoints(actor, regain),
                     },
                 },
-                default: "one",
+                default: game.i18n.localize(`${MODULENAME}.macros.refocus.one`),
             });
             dialog.render(true);
         }
     } else {
-        ui.notifications.warn("You must select one actor.");
+        ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.refocus.selectOneActor`));
     }
 }
 

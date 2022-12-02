@@ -98,6 +98,7 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             map.set("2-Action Heal v2", "systems/pf2e/icons/spells/heal.webp");
             map.set("Actions with Potency", "icons/svg/dice-target.svg");
             map.set("Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp");
+            map.set("Advanced Countdown", "systems/pf2e/icons/spells/time-beacon.webp");
             map.set("Apply Conditions", "icons/svg/dice-target.svg");
             map.set("Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp");
             map.set("Bane", "systems/pf2e/icons/spells/bane.webp");

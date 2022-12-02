@@ -5,7 +5,7 @@
   "id": "xdy-pf2e-workbench",
   "compatibility": {
     "minimum": "10.284",
-    "verified": "10.290",
+    "verified": "10.291",
     "maximum": "10"
   },
   "relationships": {
