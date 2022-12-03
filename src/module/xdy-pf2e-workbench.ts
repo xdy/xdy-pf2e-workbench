@@ -80,12 +80,12 @@ import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJour
 export const MODULENAME = "xdy-pf2e-workbench";
 
 // Initialize module
-Hooks.once("init", (_actor: ActorPF2e) => {
+Hooks.once("init", async (_actor: ActorPF2e) => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
 
     registerWorkbenchSettings();
 
-    preloadTemplates().then();
+    await preloadTemplates();
 
     registerHandlebarsHelpers();
 
@@ -100,9 +100,9 @@ Hooks.once("init", (_actor: ActorPF2e) => {
 
     // Hooks that only run if a setting that needs it has been enabled
     if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
-        Hooks.once("babele.ready", () => {
+        Hooks.once("babele.ready", async () => {
             if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
-                loadSkillActionsBabele().then();
+                loadSkillActionsBabele();
             }
         });
     }
@@ -110,7 +110,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
     if (game.settings.get(MODULENAME, "castPrivateSpell")) {
         Hooks.on(
             "preCreateChatMessage",
-            (message: ChatMessagePF2e, data: ChatMessageDataPF2e, _options, _user: UserPF2e) => {
+            async (message: ChatMessagePF2e, data: ChatMessageDataPF2e, _options, _user: UserPF2e) => {
                 if (
                     game.settings.get(MODULENAME, "castPrivateSpell") &&
                     message.flags.pf2e?.casting?.id &&
@@ -118,7 +118,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
                         (message.actor?.type === "npc" &&
                             game.settings.get(MODULENAME, "castPrivateSpellAlwaysForNPC")))
                 ) {
-                    castPrivateSpell(data, message).then();
+                    await castPrivateSpell(data, message);
                 }
             }
         );
@@ -209,7 +209,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
     }
 
     if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        Hooks.on("createItem", (item: ItemPF2e, _options: {}, _id: any) => {
+        Hooks.on("createItem", async (item: ItemPF2e, _options: {}, _id: any) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
                 applyEncumbranceBasedOnBulk(item);
             }
@@ -220,7 +220,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
         game.settings.get(MODULENAME, "applyClumsyIfWieldingLargerWeapon")
     ) {
-        Hooks.on("updateItem", (item: ItemPF2e, update: any) => {
+        Hooks.on("updateItem", async (item: ItemPF2e, update: any) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
                 applyEncumbranceBasedOnBulk(item);
             }
@@ -235,7 +235,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
         game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")
     ) {
-        Hooks.on("deleteItem", (item: ItemPF2e, _options: {}) => {
+        Hooks.on("deleteItem", async (item: ItemPF2e, _options: {}) => {
             if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
                 applyEncumbranceBasedOnBulk(item);
             }
@@ -254,7 +254,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
                         }
                     });
                 } else if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
-                    giveUnconsciousIfDyingRemovedAt0HP(item).then();
+                    await giveUnconsciousIfDyingRemovedAt0HP(item);
                 }
             }
         });
@@ -272,7 +272,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "actionsReminderAllow") !== "none" ||
         game.settings.get(MODULENAME, "autoReduceStunned")
     ) {
-        Hooks.on("pf2e.startTurn", (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
+        Hooks.on("pf2e.startTurn", async (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
             const forWhom = game.settings.get(MODULENAME, "actionsReminderAllow");
             if (game.settings.get(MODULENAME, "autoReduceStunned")) {
                 autoReduceStunned(combatant).then((reduction) => {
@@ -307,7 +307,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none" ||
         game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")
     ) {
-        Hooks.on("preUpdateActor", (actor: ActorPF2e, update: Record<string, string>) => {
+        Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
             const hp = actor.system.attributes.hp?.value || 0;
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
                 moveOnZeroHP(actor, deepClone(update), hp).then();
@@ -363,7 +363,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
         (game.settings.get("pf2e", "automation.lootableNPCs") &&
             game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems"))
     ) {
-        Hooks.on("createToken", (token: TokenDocumentPF2e, ..._args) => {
+        Hooks.on("createToken", async (token: TokenDocumentPF2e, ..._args) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
                 tokenCreateMystification(token).then();
             }
@@ -392,13 +392,10 @@ Hooks.once("init", (_actor: ActorPF2e) => {
                 );
 
                 for (const item of items ?? []) {
-                    actor?.items
-                        ?.get(item.id)
-                        ?.update({
-                            "system.identification.status": "unidentified",
-                            "system.identification.unidentified": item.getMystifiedData("unidentified"),
-                        })
-                        .then();
+                    await actor?.items?.get(item.id)?.update({
+                        "system.identification.status": "unidentified",
+                        "system.identification.unidentified": item.getMystifiedData("unidentified"),
+                    });
                 }
             }
         });
@@ -448,7 +445,7 @@ Hooks.once("init", (_actor: ActorPF2e) => {
 });
 
 // Setup module
-Hooks.once("setup", () => {
+Hooks.once("setup", async () => {
     console.log(`${MODULENAME} | Setting up`);
     // Do anything after initialization but before ready
 
@@ -492,7 +489,7 @@ Hooks.once("setup", () => {
     }
 
     if (game.settings.get(MODULENAME, "npcRoller")) {
-        setupNpcRoller().then();
+        await setupNpcRoller();
     }
 });
 
@@ -544,14 +541,14 @@ async function migrateFeatures() {
 }
 
 // When ready
-Hooks.once("ready", () => {
+Hooks.once("ready", async () => {
     // Do anything once the module is ready
     console.log(`${MODULENAME} | Ready`);
 
     // Must be in ready
 
     if (isFirstGM()) {
-        migrateFeatures().then();
+        await migrateFeatures();
     }
 
     if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
