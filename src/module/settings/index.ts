@@ -87,6 +87,15 @@ export function registerWorkbenchSettings() {
         },
     });
 
+    game.settings.register(MODULENAME, "skillActionsDescription", {
+        name: `${MODULENAME}.skillActions.Settings.Description.name`,
+        hint: `${MODULENAME}.skillActions.Settings.Description.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
     // game.settings.register(MODULENAME, "skillActionsHideDuplicates", {
     //     name: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.name`,
     //     hint: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hint`,
