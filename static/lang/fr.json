@@ -43,6 +43,13 @@
         "Description": {
           "name": "Description des actions de compétence",
           "hint": "Si vous voulez afficher la description des actions dans la description lorsque vous lancez les dés"
+        },
+        "variants": {
+          "createADiversion": {
+            "distractingWords": "Paroles de diversion",
+            "gesture": "Geste",
+            "trick": "Astuce"
+          }
         }
       },
       "UnequipAll": {
@@ -127,7 +134,7 @@
         "hint": "Réglage pour automatiquement augmenter mourant à 0 PV.",
         "name": "Automatiquement augmenter Mourant à 0 PV.",
         "no": "Non",
-        "orcFerocityMessage": "{name} vient juste d'utiliser @Compendium[pf2e.feats-srd.PlhPpdwIV0rIAJ8K]{Férocité orque} et peut désormais utiliser l'action gratuite :@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Férocité déchainée}"
+        "orcFerocityMessage": "{name} vient juste d'utiliser @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] et peut désormais utiliser l'action gratuite :@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]"
       },
       "automationClientSettings": {
         "hint": "Activer et configurer l'automatisation pour les joueurs",
@@ -231,7 +238,7 @@
       "giveWoundedWhenDyingRemoved": {
         "hint": "Réglage pour donner l'état Blessé automatiquement lorsque Mourant est retiré.",
         "name": "Donner automatiquement Blessé lorsque Mourant est retiré.",
-        "numbToDeathMessage": "{name} vient de déclencher @Compendium[pf2e.feats-srd.gfMP2aMs3YGONVeB]{Insensible à la mort}. Appliquer manuellement les soins."
+        "numbToDeathMessage": "{name} vient de déclencher @UUID[Compendium.pf2e.feats-srd.gfMP2aMs3YGONVeB]. Appliquer manuellement les soins."
       },
       "heroPointHandler": {
         "add": "Ajouter",
