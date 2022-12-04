@@ -32,15 +32,5 @@ export class WorkbenchVariantRulesSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => debouncedReload(),
             },
         };
-
-        game.settings.register(MODULENAME, "abpVariantAllowItemBonuses", {
-            name: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.name`,
-            hint: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.hint`,
-            scope: "world",
-            config: true,
-            default: false,
-            type: Boolean,
-            onChange: () => debouncedReload(),
-        });
     }
 }
