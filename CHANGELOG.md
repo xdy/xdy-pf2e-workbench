@@ -1,3 +1,10 @@
+## [4.22.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.22.0...v4.22.1) (2022-12-04)
+
+
+### Bug Fixes
+
+* Localization of skill action variant labels. ([50ab363](https://github.com/xdy/xdy-pf2e-workbench/commit/50ab36312964ab43b81c6add1f744604636ca174))
+
 # [4.22.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.21.0...v4.22.0) (2022-12-04)
 
 
