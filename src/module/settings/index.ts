@@ -92,7 +92,7 @@ export function registerWorkbenchSettings() {
         hint: `${MODULENAME}.skillActions.Settings.Description.hint`,
         scope: "client",
         config: true,
-        default: false,
+        default: true,
         type: Boolean,
     });
 

@@ -1,5 +1,6 @@
 import { PartialBy } from "./utils";
 import { Rank } from "./globals";
+import { MODULENAME } from "../../xdy-pf2e-workbench";
 
 export type ActionType = "A" | "D" | "T" | "F" | "R" | "";
 
@@ -210,9 +211,21 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         slug: "create-a-diversion",
         compendiumId: "GkmbTGfg8KcgynOA",
         variants: [
-            { label: "Distracting Words", proficiencyKey: "dec", extra: { variant: "distracting-words" } },
-            { label: "Gesture", proficiencyKey: "dec", extra: { variant: "gesture" } },
-            { label: "Trick", proficiencyKey: "dec", extra: { variant: "trick" } },
+            {
+                label: `${MODULENAME}.skillActions.Settings.variants.createADiversion.distractingWords`,
+                proficiencyKey: "dec",
+                extra: { variant: "distracting-words" },
+            },
+            {
+                label: `${MODULENAME}.skillActions.Settings.variants.createADiversion.gesture`,
+                proficiencyKey: "dec",
+                extra: { variant: "gesture" },
+            },
+            {
+                label: `${MODULENAME}.skillActions.Settings.variants.createADiversion.trick`,
+                proficiencyKey: "dec",
+                extra: { variant: "trick" },
+            },
         ],
     },
     {

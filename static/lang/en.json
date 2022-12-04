@@ -42,7 +42,14 @@
         },
         "Description": {
           "name": "Skill Actions Description",
-          "hint": "Wheter to show the actions description in the chat when rolling"
+          "hint": "Whether to show the actions description in the chat when rolling"
+        },
+        "variants": {
+          "createADiversion": {
+            "distractingWords": "Distracting Words",
+            "gesture": "Gesture",
+            "trick": "Trick"
+          }
         }
       },
       "UnequipAll": {
