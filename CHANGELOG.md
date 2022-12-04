@@ -1,3 +1,15 @@
+# [4.22.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.21.0...v4.22.0) (2022-12-04)
+
+
+### Bug Fixes
+
+* Reverted use of localization of skill action variants. ([48edb6a](https://github.com/xdy/xdy-pf2e-workbench/commit/48edb6a559c55870b6243af661cf4148afaafe99))
+
+
+### Features
+
+* Added setting for if skill actions should send the action description to chat when action macro is not used (courtesy of @Idle). Localized skill action variants. ([00a7df9](https://github.com/xdy/xdy-pf2e-workbench/commit/00a7df988a27908a8e6f43afcf027f847d1a1ab9))
+
 # [4.21.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.20.0...v4.21.0) (2022-12-02)
 
 
