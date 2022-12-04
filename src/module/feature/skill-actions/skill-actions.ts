@@ -134,17 +134,16 @@ export class SkillAction {
                         .then();
                 }
             } else {
-                this.toChat().then(
-                    variant.skill
+                if (game.settings.get(MODULENAME, "skillActionsDescription")) await this.toChat();
+                variant.skill
+                    // @ts-ignore
+                    .roll({
+                        event,
+                        modifiers: variant.modifiers,
                         // @ts-ignore
-                        .roll({
-                            event,
-                            modifiers: variant.modifiers,
-                            // @ts-ignore
-                            options: [`action:${this.data.slug}`],
-                        })
-                        .then()
-                );
+                        options: [`action:${this.data.slug}`],
+                    })
+                    .then();
             }
         }
     }

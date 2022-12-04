@@ -39,6 +39,10 @@
           "hint": "Icon style on the skill; Action Cost Icon: For the actions cost icon, Skill Icon: For the skills icon if it's available",
           "actionCostIcon": "Action Cost Icon",
           "skillIcon": "Skill Icon"
+        },
+        "Description": {
+          "name": "Skill Actions Description",
+          "hint": "Wheter to show the actions description in the chat when rolling"
         }
       },
       "UnequipAll": {
