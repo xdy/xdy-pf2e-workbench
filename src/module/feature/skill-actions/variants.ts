@@ -4,8 +4,7 @@ import { ModifierPF2e } from "./pf2e";
 export class VariantsCollection extends Array<Variant> {
     addBasicVariant(skill: CharacterSkillData, extra: Record<string, unknown> | undefined, label: string | undefined) {
         const modifier = (skill.value >= 0 ? " +" : " ") + skill.value;
-        label ??= skill.label ? game.i18n.localize(skill.label) : skill.name;
-
+        label = label ? game.i18n.localize(label) : skill.label ? game.i18n.localize(skill.label) : skill.name;
         this.push(new Variant(`${label}${modifier}`, skill, extra));
     }
 

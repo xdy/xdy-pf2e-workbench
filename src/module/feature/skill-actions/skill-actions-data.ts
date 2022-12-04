@@ -210,9 +210,21 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         slug: "create-a-diversion",
         compendiumId: "GkmbTGfg8KcgynOA",
         variants: [
-            { label: "Distracting Words", proficiencyKey: "dec", extra: { variant: "distracting-words" } },
-            { label: "Gesture", proficiencyKey: "dec", extra: { variant: "gesture" } },
-            { label: "Trick", proficiencyKey: "dec", extra: { variant: "trick" } },
+            {
+                label: "xdy-pf2e-workbench.skillActions.Settings.variants.createADiversion.distractingWords",
+                proficiencyKey: "dec",
+                extra: { variant: "distracting-words" },
+            },
+            {
+                label: "xdy-pf2e-workbench.skillActions.Settings.variants.createADiversion.gesture",
+                proficiencyKey: "dec",
+                extra: { variant: "gesture" },
+            },
+            {
+                label: "xdy-pf2e-workbench.skillActions.Settings.variants.createADiversion.trick",
+                proficiencyKey: "dec",
+                extra: { variant: "trick" },
+            },
         ],
     },
     {
