@@ -158,7 +158,7 @@
         "hint": "Setting to automatically increase Dying at 0 HP.",
         "name": "Automatically increase Dying at 0 HP.",
         "no": "No",
-        "orcFerocityMessage": "{name} has just used @Compendium[pf2e.feats-srd.PlhPpdwIV0rIAJ8K]{Orc Ferocity} and can now use the free action:@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]{Rampaging Ferocity}"
+        "orcFerocityMessage": "{name} has just used @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] and can now use the free action:@UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]"
       },
       "automationClientSettings": {
         "hint": "Enable and configure automation for players",
@@ -273,7 +273,7 @@
       "giveWoundedWhenDyingRemoved": {
         "hint": "Setting to automatically give Wounded condition when Dying condition is removed.",
         "name": "Automatically give Wounded when Dying is removed.",
-        "numbToDeathMessage": "{name} has just triggered @Compendium[pf2e.feats-srd.gfMP2aMs3YGONVeB]{Numb To Death}. Apply healing manually."
+        "numbToDeathMessage": "{name} has just triggered @UUID[Compendium.pf2e.feats-srd.gfMP2aMs3YGONVeB]. Apply healing manually."
       },
       "heroPointHandler": {
         "add": "Add",
