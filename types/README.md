@@ -1,4 +1,4 @@
-This directory contains types generated from the pathfinder 2 system by running this and the copying it into types:
+This directory contains types generated from the pathfinder 2 system by running this and then copying it into types:
 
 ```
 npm ci && npm run build && node_modules/.bin/tsc --declaration true --emitDeclarationOnly true --noemit false --outdir dist/types --newLine lf
