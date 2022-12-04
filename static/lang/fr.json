@@ -39,6 +39,9 @@
           "hideSkillActions": "Cacher les actions de compétences",
           "name": "Les actions de compétence cachent les actions dupliquées",
           "hint": "Si vous cachez les duplicatas des actions dans la liste des actions ou la liste des actions de compétence"
+        },
+        "Description": {
+          "name": "Description des actions de compétence"
         }
       },
       "UnequipAll": {
