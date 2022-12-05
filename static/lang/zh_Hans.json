@@ -39,6 +39,17 @@
           "actionCostIcon": "动作成本图标",
           "hint": "技能上的图标风格；动作成本图标：用于动作成本图标，技能图标：用于技能图标（如果有的话）",
           "skillIcon": "技能图标"
+        },
+        "Description": {
+          "name": "技能动作描述",
+          "hint": "是否在骰动作时在聊天栏里发布动作的描述"
+        },
+        "variants": {
+          "createADiversion": {
+            "gesture": "姿势分神",
+            "trick": "花招分神",
+            "distractingWords": "话术分神"
+          }
         }
       },
       "UnequipAll": {
@@ -58,7 +69,17 @@
       },
       "actionsReminderAllow": {
         "all": "全部",
-        "gm": "GM"
+        "gm": "GM",
+        "none": "无",
+        "hint": "选择以聊天消息的方式提醒所剩动作数。",
+        "name": "谁要被提醒动作",
+        "players": "玩家"
+      },
+      "addGmRKButtonToNpc": {
+        "hint": "选择后将为NPC添加回忆知识的按钮。目前只能为技能回忆知识，学识类的回忆知识需手动操作。",
+        "name": "为NPC增加回忆知识按钮。",
+        "hideSkill": "回想知识检定的聊天消息隐藏技能名。",
+        "hideNpcName": "回想知识检定的聊天消息隐藏NPC的姓名。"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
@@ -66,6 +87,29 @@
       "pf2e-sheet-skill-actions": "pf2e-sheet-skill-actions模组已经不再被维护，它的功能也被集合到Workbench模组内了。请关闭它。",
       "pf2e-toolbox": "pf2e-toolbox模组已经不再被维护，它的大部分功能也被集合到Workbench模组内了。请关闭它。",
       "multilevel-tokens": "Multilevel Tokens模组（以及其他会使你的指示物传送的类似模组）可能在你开启Workbench的变更指示物动画选项后在传送时发生错误。"
+    },
+    "macros": {
+      "basicActionMacros": {
+        "noActorSelected": "没有选择演员",
+        "title": "动作 ({name})",
+        "cancel": "取消",
+        "gmMustImport": "GM必须在合集包“xdy-pf2e-workbench-macros”上右键并选择“导入全部内容”并确保导入时选择了“保留文档ID？”。"
+      },
+      "buildNpcSpellbookJournal": {
+        "title": "建立NPC法术书日志",
+        "noSpellcastingEntry": "你须打开并选择一个NPC的人物卡，或者选中一个NPC的指示物。另外，该NPC必须有某种施法能力。",
+        "generatedSpellbookFor": "为{name}生成法术书"
+      },
+      "refocus": {
+        "regains": "恢复{focus}聚能点。",
+        "one": "1",
+        "selectOneActor": "你必须选择一个演员。",
+        "isPsychic": "仅因心能增幅或心能能力使用聚能点",
+        "notPsychic": "已消耗至少{regain}聚能点",
+        "regainOne": "回复1聚能点。",
+        "disabled": "不可用，因为没有能力能回复1点以上的聚能点。",
+        "enabled": "回复{regain}聚能点。<br/>仅<b>当</b>你上次再聚能后{details}的情况下才能点击。"
+      }
     }
   }
 }
