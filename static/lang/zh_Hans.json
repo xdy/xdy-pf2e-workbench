@@ -80,6 +80,10 @@
         "name": "为NPC增加回忆知识按钮。",
         "hideSkill": "回想知识检定的聊天消息隐藏技能名。",
         "hideNpcName": "回想知识检定的聊天消息隐藏NPC的姓名。"
+      },
+      "creatureBuilder": {
+        "hint": "选择以在NPC卡上添加一个按键来按照GMG规则建立NPC。",
+        "name": "允许建立自定义生物。"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
