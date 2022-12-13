@@ -5,6 +5,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ItemPF2e } from "@item";
 import { ActionsIndex } from "./actions-index";
 import { ItemSummaryData } from "@item/data";
+import { CharacterSkill } from "@actor/character/types";
 
 const ACTION_ICONS: Record<ActionType, string> = {
     A: "OneAction",
@@ -211,23 +212,22 @@ export class SkillAction {
         return !!this.actor.items.find((item) => item.slug === slug);
     }
 
-    private getSkills(proficiencyKey: string) {
+    private getSkills(proficiencyKey: string): CharacterSkill[] {
         // @ts-ignore
-        const skills = this.actor.system.skills;
+        const skills = this.actor.skills;
         if (proficiencyKey === "lore") {
             // @ts-ignore
             return Object.values(skills).filter((skill) => skill.lore);
         } else {
-            return [skills[proficiencyKey]];
+            return [skills[proficiencyKey]].filter((s): s is CharacterSkill => !!s);
         }
     }
 
     buildVariants(data) {
-        this.getSkills(data.proficiencyKey).forEach((skill: any) => {
+        for (const skill of this.getSkills(data.proficiencyKey)) {
             const requiredRank = data.requiredRank ?? 0;
-
-            const hasRank =
-                skill.rank >= requiredRank || (requiredRank === 1 && this.actorHasItem("clever-improviser"));
+            const rank = skill.rank;
+            const hasRank = rank >= requiredRank || (requiredRank === 1 && this.actorHasItem("clever-improviser"));
             if (!hasRank) {
                 return;
             }
@@ -245,11 +245,11 @@ export class SkillAction {
             if (
                 this.actor.items
                     .filter((x: any) => x.slug === "assurance")
-                    .filter((x: any) => x.flags.pf2e.rulesSelections.assurance === skill.name)?.length > 0
+                    .filter((x: any) => x.flags.pf2e.rulesSelections.assurance === skill.slug)?.length > 0
             ) {
                 this.variants.addAssuranceVariant(skill, data.extra);
             }
-        });
+        }
     }
 }
 
