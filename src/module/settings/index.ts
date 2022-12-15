@@ -96,6 +96,15 @@ export function registerWorkbenchSettings() {
         type: Boolean,
     });
 
+    game.settings.register(MODULENAME, "basicActionMacroShowBestBonus", {
+        name: `${MODULENAME}.macros.basicActionMacros.settings.showBestBonus.name`,
+        hint: `${MODULENAME}.macros.basicActionMacros.settings.showBestBonus.hint`,
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean,
+    });
+
     // game.settings.register(MODULENAME, "skillActionsHideDuplicates", {
     //     name: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.name`,
     //     hint: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hint`,

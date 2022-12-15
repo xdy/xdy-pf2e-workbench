@@ -68,7 +68,13 @@
         "title": "Actions ({name})",
         "noActorSelected": "No actor selected",
         "gmMustImport": "The GM must right click on the compendium xdy-pf2e-workbench-macros and select 'Import All Content' and make sure to check 'Keep Document IDs' when importing.",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "settings": {
+          "showBestBonus": {
+            "name": "Show if best in Basic Action Macros",
+            "hint": "Whether to show if the selected actor has the best bonus in the Basic Action Macros dialog"
+          }
+        }
       },
       "buildNpcSpellbookJournal": {
         "title": "Build NPC Spellbook Journal",

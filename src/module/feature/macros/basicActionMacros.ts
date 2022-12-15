@@ -64,7 +64,11 @@ function createButton(action, idx, actor, party, actorSkills) {
     const skill = skillName ? actorSkills[skillName] : null;
     const rank = skill?.rank ?? 0;
     const bonus = skill ? skill.check?.mod ?? skill.totalModifier : -1;
-    const best = party.length && party.includes(actor.id) ? bonus >= (action.best ?? 0) : false;
+    const best = game.settings.get(MODULENAME, "basicActionMacroShowBestBonus")
+        ? party.length && party.includes(actor.id)
+            ? bonus >= (action.best ?? 0)
+            : false
+        : false;
     return `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
         colorPalette[rank]
     }"
