@@ -1,3 +1,10 @@
+# [4.23.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.22.2...v4.23.0) (2022-12-15)
+
+
+### Features
+
+* Added setting for whether to show if the selected actor is the best at an action in the Basic Action Macros dialog. @Supe cleaned up a *ton* of console warnings for users of Skill Actions. ([7d24572](https://github.com/xdy/xdy-pf2e-workbench/commit/7d2457297278fcbd281115f1a915155d1a7c0194)), closes [#540](https://github.com/xdy/xdy-pf2e-workbench/issues/540)
+
 ## [4.22.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.22.1...v4.22.2) (2022-12-12)
 
 
