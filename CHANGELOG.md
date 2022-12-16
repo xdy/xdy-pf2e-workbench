@@ -1,3 +1,10 @@
+## [4.23.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.23.0...v4.23.1) (2022-12-16)
+
+
+### Bug Fixes
+
+* Fixes the attack bonus in Workbench ABP (used to be all attacks, is now melee and ranged attacks as I can't see how to do 'weapon' and 'unarmed' attacks. If you are using it you need to replace it manually on any actors using it.) Updates supported pf2e system version to 4.5.0. ([71c16a1](https://github.com/xdy/xdy-pf2e-workbench/commit/71c16a1d29599b0404287d1d1ef125eaf1045614))
+
 # [4.23.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.22.2...v4.23.0) (2022-12-15)
 
 
