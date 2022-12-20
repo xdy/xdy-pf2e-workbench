@@ -509,7 +509,13 @@
         "title": "Actions ({name})",
         "noActorSelected": "Aucun acteur sélectionné",
         "cancel": "Annuler",
-        "gmMustImport": "Le MJ doit faire un clic droit sur le compendium xdy-pf2e-workbench-macros et sélectionner \"Importer tout le contenu\" et s'assurer de cocher \"Conserver les ID des documents\" lors de l'importation."
+        "gmMustImport": "Le MJ doit faire un clic droit sur le compendium xdy-pf2e-workbench-macros et sélectionner \"Importer tout le contenu\" et s'assurer de cocher \"Conserver les ID des documents\" lors de l'importation.",
+        "settings": {
+          "showBestBonus": {
+            "name": "Montrer si c'est mieux dans les macros d'action de base",
+            "hint": "Indiquer si l'acteur sélectionné a le meilleur bonus dans la boîte de dialogue Macros d'action de base"
+          }
+        }
       },
       "buildNpcSpellbookJournal": {
         "title": "Construire le grimoire de sorts du PNJ",
