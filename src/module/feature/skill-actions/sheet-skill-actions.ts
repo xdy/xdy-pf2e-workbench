@@ -34,7 +34,7 @@ function renderActionsList(skillActions: SkillActionCollection, actor: Actor) {
         if (e.altKey) {
             skillActions.toggleVisibility();
         } else {
-            Flag.set(actor, "allVisible", !Flag.get(actor, "allVisible"));
+            Flag.set(actor, "allVisible", !Flag.get(actor, "allVisible")).then();
         }
     });
 

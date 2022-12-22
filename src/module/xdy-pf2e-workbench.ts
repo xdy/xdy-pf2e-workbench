@@ -22,7 +22,7 @@ import { moveOnZeroHP, moveSelectedAheadOfCurrent } from "./feature/initiativeHa
 import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
-import { toggleMenuSettings, toggleSettings } from "./feature/settingsHandler";
+import { toggleMenuSettings } from "./feature/settingsHandler";
 import {
     addGmRKButtonToNpc,
     castPrivateSpell,
@@ -94,15 +94,15 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         toggleMenuSettings(html, _settings);
     });
 
-    Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
-        toggleSettings(html);
-    });
+    // Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
+    //     toggleSettings(html);
+    // });
 
     // Hooks that only run if a setting that needs it has been enabled
     if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
         Hooks.once("babele.ready", async () => {
             if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
-                loadSkillActionsBabele();
+                loadSkillActionsBabele().then();
             }
         });
     }
@@ -541,14 +541,14 @@ async function migrateFeatures() {
 }
 
 // When ready
-Hooks.once("ready", async () => {
+Hooks.once("ready", () => {
     // Do anything once the module is ready
     console.log(`${MODULENAME} | Ready`);
 
     // Must be in ready
 
     if (isFirstGM()) {
-        await migrateFeatures();
+        migrateFeatures().then();
     }
 
     if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
@@ -564,11 +564,12 @@ Hooks.once("ready", async () => {
     }
 
     // Make some functions available for macros
+    // noinspection JSUnusedGlobalSymbols
     // @ts-ignore
     game.PF2eWorkbench = {
         resetHeroPoints: resetHeroPoints, // game.PF2eWorkbench.resetHeroPoints(1)
         addHeroPoints: addHeroPoints, // game.PF2eWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
-        scaleNPCToLevelFromActor: scaleNPCToLevelFromActor, // await game.PF2eWorkbench.scaleNPCToLevelFromActor(_token.actor.id, 24);
+        scaleNPCToLevelFromActor: scaleNPCToLevelFromActor, // game.PF2eWorkbench.scaleNPCToLevelFromActor(_token.actor.id, 24);
         moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
         doMystificationFromToken: doMystificationFromToken, // await game.PF2eWorkbench.doMystificationFromToken(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromToken(_token.id, false)
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
@@ -592,7 +593,7 @@ Hooks.once("ready", async () => {
     }
 
     if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
-        loadSkillActions();
+        loadSkillActions().then();
     }
 
     // @ts-ignore

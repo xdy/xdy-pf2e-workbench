@@ -1,12 +1,12 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { PartialSettingsData, SettingsMenuPF2eWorkbench } from "../../settings/menu";
 
-export function toggleSettings(_html: JQuery) {
-    // const settings: [string, any][] = Array.from(game.settings.settings.entries());
-    // settings.forEach((_setting: [string, any]) => {
-    //     // None right now
-    // });
-}
+// export function toggleSettings(_html: JQuery) {
+// const settings: [string, any][] = Array.from(game.settings.settings.entries());
+// settings.forEach((_setting: [string, any]) => {
+//     // None right now
+// });
+// }
 
 export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkbench) {
     for (const key in settings["settings"]) {

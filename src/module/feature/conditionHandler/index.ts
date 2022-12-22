@@ -174,11 +174,17 @@ function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
 export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
     const actor = <ActorPF2e>item.parent;
     const items: any = actor.items;
-    const bounceBack = items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
-    const bounceBackUsed: any = items.find((effect) => effect.slug === "bounce-back-used") ?? false;
+    let bounceBack: any = false,
+        bounceBackUsed: any = false,
+        numbToDeath: any = false,
+        numbToDeathUsed: any = false;
+    if (items) {
+        bounceBack = items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
+        bounceBackUsed = items.find((effect) => effect.slug === "bounce-back-used") ?? false;
 
-    const numbToDeath = items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
-    const numbToDeathUsed: any = items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
+        numbToDeath = items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
+        numbToDeathUsed = items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
+    }
     const name = `${actor.token?.name ?? actor.name}`;
 
     if (item.slug === "dying" && isFirstGM()) {

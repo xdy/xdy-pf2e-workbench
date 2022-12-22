@@ -170,6 +170,7 @@ export async function reminderTargeting(message: ChatMessagePF2e) {
     }
 }
 
+// Deprecated with next pf2e release (and broken, won't fix)
 export async function reminderIWR(message: ChatMessagePF2e) {
     if (game.user?.isGM && message.flags && message.user && message.user.targets && message.user.targets.size >= 1) {
         const targets = message.user.targets;

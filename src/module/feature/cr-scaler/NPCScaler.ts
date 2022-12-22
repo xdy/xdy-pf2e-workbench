@@ -22,7 +22,7 @@ import { NPCPF2e } from "@actor";
 export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number) {
     const actor = <NPCPF2e>game.actors.get(actorId);
     if (actor) {
-        scaleNPCToLevel(actor, newLevel);
+        await scaleNPCToLevel(actor, newLevel);
     }
 }
 

@@ -134,9 +134,10 @@ export async function tokenCreateMystification(token: any) {
 
 export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): boolean {
     const tokenName = token?.name;
-    const prototypeTokenName = token?.actor?.prototypeToken.name;
+    const prototypeTokenName = token?.actor?.prototypeToken.name ?? "";
 
-    return (tokenName?.indexOf(prototypeTokenName ?? "") ?? -1) < 0;
+    // TODO This needs improving. Basically, look at the various mystification settings and figure out what's been added, only check the non-added bits.
+    return (tokenName?.indexOf(prototypeTokenName) ?? -1) < 0;
 }
 
 export async function doMystificationFromToken(tokenId: string, active: boolean) {
