@@ -1,3 +1,10 @@
+## [4.23.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.23.1...v4.23.2) (2022-12-22)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. Also, note that with the next pf2e version, the IWR reminders will not only be obsolete, they will be broken (and thus removed). ([ced92e3](https://github.com/xdy/xdy-pf2e-workbench/commit/ced92e3b67aab344237b7bc0037d9f81ae65e81e))
+
 ## [4.23.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.23.0...v4.23.1) (2022-12-16)
 
 
