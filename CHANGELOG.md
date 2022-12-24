@@ -1,3 +1,10 @@
+## [4.23.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.23.2...v4.23.3) (2022-12-24)
+
+
+### Bug Fixes
+
+* Improve documentation a bit, remove some unused localization. ([c977f6e](https://github.com/xdy/xdy-pf2e-workbench/commit/c977f6e352c5cf65d61e83f9a3eb174c3499fd29))
+
 ## [4.23.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.23.1...v4.23.2) (2022-12-22)
 
 
