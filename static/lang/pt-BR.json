@@ -323,10 +323,6 @@
         "hint": "Permite ajustar o nível de PdMs.",
         "name": "Ajustar nível de PdMs"
       },
-      "playerItemsRarityColour": {
-        "hint": "Colore o nome de itens na ficha de atores baseado em suas raridades.",
-        "name": "Colorir nome de itens"
-      },
       "qolWorldSettings": {
         "hint": "Configurações de qualidade de vida para o MJ.",
         "label": "Qualidade de Vida",

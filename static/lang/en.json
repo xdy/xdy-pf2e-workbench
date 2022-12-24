@@ -232,7 +232,7 @@
         "name": "Call hotbar macro on page {page} position {column}"
       },
       "castPrivateSpell": {
-        "hint": "Check to enabling ctrl-clicking Cast on a spell casts it, but the message is whispered to caster and GM.",
+        "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM.",
         "name": "Ctrl-click Cast to cast in private."
       },
       "castPrivateSpellAlwaysForNPC": {
@@ -451,10 +451,6 @@
       "npcScaler": {
         "hint": "Check to allow scaling NPCs",
         "name": "Allow scaling NPCs"
-      },
-      "playerItemsRarityColour": {
-        "hint": "(Deprecated) Client setting to show item names in rarity colour on actor sheets.",
-        "name": "(Deprecated) Show item names in rarity colour on actor sheets."
       },
       "qolWorldSettings": {
         "hint": "Enable and configure quality of life settings for GMs",

@@ -400,10 +400,6 @@
         "hint": "Cliquez pour permettre l'évolution des PNJ",
         "name": "Permettre l'évolution des PNJ"
       },
-      "playerItemsRarityColour": {
-        "hint": "(Déprécié) Réglage du client pour afficher les noms des objets de la couleur de la rareté sur les feuilles d'acteur.",
-        "name": "(Déprécié) Montrer le nom des objets dans la couleur de la rareté sur les feuilles d'acteur."
-      },
       "qolWorldSettings": {
         "hint": "Activer et configurer les réglages de la qualité de vie pour les MJ",
         "label": "Régler la qualité de vie du monde",

@@ -29,15 +29,12 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to remind when attack is made by a token that probably can't attack (due to being unconscious / dead /
       defeated / has no hp / etc).
         * Option to allow Eidolons to attack even if they have 0 hp.
-    * Option to create an IWR (Immunity, Weakness, Resistance) reminder message after a damage roll against a target
-      with an IWR that matches damage types of the attacking weapon or spell. NOTE: Currently only handles 'simple' IWR,
-      it doesn't handle things like 'All', 'Physical', 'All (except force)', etc.
     * Option to remind when an attack is made without targeting.
     * Option to show reminder each turn that the number of actions is other than three. Handles Quickened, Slowed and
       Stunned.
     * Option to automatically add a reminder effect when breath weapons are used (i.e. sent to chat.) Breath weapon
-      description must match
-      ```"<p>.*can't use.*1d([46]) rounds.*</p>"``` or the localized equivalent for it to be recognized.
+      description must match ```"<p>.*can't use.*1d([46]) rounds.*</p>"``` or the localized equivalent for it to be
+      recognized.
     * Hero point handler. Gives option to (using Configure Controls) add a keybind to open a dialog that can reset or
       add hero points for all characters, add one hero point to a random (or selected) character (on new timers only)
       and, most importantly, start a timer to make the dialog reappear after (by default) 60 minutes. Timer now survives
@@ -118,6 +115,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       discontinued https://github.com/jamespdaily/pf2e-sheet-skill-actions/ module. Thanks James!)
         * The module will hide any skill actions that you're currently not trained in.
         * Actions that require a feat (e.g. Bon Mot) will not show up unless you actually have the feat.
+    * Option to set a custom pause text and image, as well as to move it's position to center of screen.
     * A few potentially useful internal functions have been made available for macro use. Name and simple example of
       each can be found below:
 
@@ -131,6 +129,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
         refocus: refocus, // await game.PF2eWorkbench.refocus()
+        callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
 ```
 
 * New Keybinds in Configure Controls
@@ -172,27 +171,32 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
           Adjust the economy as much as you feel is needed. You don't need to remove runes from weapons and armor if you
           don't want to, these REs are implemented as Item Bonuses, so whichever of the rune and the character has the
           highest bonus is applied, *except* for Devastating Attacks which *does* stack with Striking Runes.
-        * (Deprecated, use the module https://foundryvtt.com/packages/pf2-flat-check instead) An 'Equipment' named "
-          Workbench Flat Check Notes". This 'Equipment' holds several useful Note RE:s that when appropriate add notes
-          about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your
-          character. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or
-          dazzled. Self has Blind-Fight.
     * The xdy-pf2e-workbench-macros compendium now contains a couple of useful macros (along with some helper macros).
         * 'Basic Action Macros' shows a dialog with a button for most macros, with bonus and whether you're the best in
-          the party at that action. To use it, import all macros from the compendium '
-          xdy-pf2e-workbench-macros', making sure to check 'Keep Document IDs' when importing. (Thanks ApoAstolov).
+          the party at that action (a setting to turn this off exists). To use it, import all macros from the
+          compendium 'xdy-pf2e-workbench-macros', making sure to check 'Keep Document IDs' when importing. (
+          Thanks ApoAstolov).
         * 'Refocus' shows dialog with buttons to regain 1 focus point, or 2 if the character has any of the \*-focus
           feats, or 3 if any of the \*-wellspring feats, or 2 if is a psychic. With admonition to only choose that
-          button if one has indeed spent more than 2 or 3 focus points since the last refocus (or, for a psychic, only
-          spent on psychic abilities..
+          button if one has indeed spent more than 2 or 3 focus points since the last refocus (or, for a psychic,
+          only spent on psychic abilities.
+        * 'Build Npc Spellbook Journal' that builds a journal with the contents of an npc's spell list. Courtesy of
+          Avery (Velara).
 
 * Experimental features:
     * None right now.
 
 * Deprecated features (will be removed eventually):
-    * Option to colorize the items per rarity on the player sheet like on the npc sheet. (In the pf2e system
-      since https://github.com/foundryvtt/pf2e/pull/3856)
-    * See 'Assorted other features' above.
+    * (Deprecated, use the module https://foundryvtt.com/packages/pf2-flat-check instead) An 'Equipment' named "
+      Workbench Flat Check Notes". This 'Equipment' holds several useful Note RE:s that when appropriate add notes
+      about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your
+      character. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or
+      dazzled. Self has Blind-Fight.
+    * (Deprecated, will break with the next pf2e system release. You know the one that contains proper IWR handling
+      making this Workbench feature obsolete...) Option to create an IWR (Immunity, Weakness, Resistance) reminder
+      message after a damage roll against a target with an IWR that matches damage types of the attacking weapon or
+      spell. NOTE: Currently only handles 'simple' IWR, it doesn't handle things like 'All', 'Physical', 'All (except
+      force)', etc.
 
 ## Installation
 
