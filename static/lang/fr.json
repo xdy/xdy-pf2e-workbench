@@ -192,7 +192,7 @@
         "name": "Appeler la barre des macros sur la page {page} en {column}e position"
       },
       "castPrivateSpell": {
-        "hint": "Cliquez pour permettre que faire ctrl+clic sur un sort le Lance, mais que le message soit murmuré au lanceur et au MJ.",
+        "hint": "Cliquez pour qu'un ctrl+clic sur un sort le Lance, en envoyant un message au lanceur et au MJ.",
         "name": "Ctrl+clic pour Lancer un sort en privé."
       },
       "castPrivateSpellAlwaysForNPC": {
