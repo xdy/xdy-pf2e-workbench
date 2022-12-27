@@ -76,6 +76,7 @@ import { TokenDocumentPF2e } from "@scene";
 import { basicActionMacros } from "./feature/macros/basicActionMacros";
 import { refocus } from "./feature/macros/refocus";
 import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal";
+import { whirlwindStrike } from "./feature/macros/whirlwindStrike";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -577,6 +578,7 @@ Hooks.once("ready", () => {
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
         refocus: refocus, // await game.PF2eWorkbench.refocus()
         buildNpcSpellbookJournal: buildNpcSpellbookJournal, // await game.PF2eWorkbench.buildNpcSpellbookJournal()
+        whirlwindStrike: whirlwindStrike, // await game.PF2eWorkbench.whirlwindStrike(_token) OR await game.PF2eWorkbench.whirlwindStrike(_token, 2000)
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
     };
 
