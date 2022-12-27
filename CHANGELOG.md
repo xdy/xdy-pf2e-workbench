@@ -1,3 +1,10 @@
+# [4.24.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.23.3...v4.24.0) (2022-12-27)
+
+
+### Features
+
+* Adds basic macro for Whirlwind Strike to xdy-pf2e-workbench-macros. Requires that the selected token has the Whirlwind Strike feat, a reach weapon and the Reach 'aura' that can be found in xdy-pf2e-workbench-items. (Set the radius of the aura RE to the reach the actor has.) ([1d721e6](https://github.com/xdy/xdy-pf2e-workbench/commit/1d721e638d612dfcc182ee5e9da548a683f53699))
+
 ## [4.23.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.23.2...v4.23.3) (2022-12-24)
 
 
