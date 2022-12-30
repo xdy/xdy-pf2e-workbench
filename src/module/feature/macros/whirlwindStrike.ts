@@ -8,7 +8,7 @@ function validTarget(r1, r2) {
 // TODO Auto set the reach of the 'aura' to the reach of the weapon.
 // TODO Set cover as appropriate for all targets (and unset once the strike is over) Using a ray cast from _token I guess?
 // TODO Check if other feats should be covered by this, and if so, add them.
-// TODO Stop using the aura, just calculate the covered area and use that.
+// TODO Stop using the aura, just calculate the covered area and use that. (Or, make the aura dynamically if that's easier).
 
 export async function whirlwindStrike(_token, msToSleepBetweenAttacks = 1001) {
     const aura = _token.auras.get("xdy-workbench-reach-aura");
