@@ -98,9 +98,9 @@
         "none": "无"
       },
       "applyPersistentDamage": {
-        "name": "自动应用Persistent Damage模组骰出的持续伤害。",
-        "hint": "是否自动应用Persistent Damage模组骰出的持续伤害的客户端设置。",
-        "wasDamaged": "{damage}伤害已自动应用"
+        "name": "Persistent Damage模组骰出的持续伤害自动生效。",
+        "hint": "Persistent Damage模组骰出的持续伤害是否自动生效的客户端设置。",
+        "wasDamaged": "{damage}伤害已自动生效"
       },
       "addUserTargets": {
         "addFor": "添加目标",
@@ -110,11 +110,36 @@
         "name": "添加用户目标"
       },
       "applyPersistentHealing": {
-        "FastHealingLabel": "获得快速愈合"
+        "FastHealingLabel": "获得快速愈合",
+        "RegenerationLabel": "获得再生",
+        "wasHealed": "{healing}治疗已自动生效。",
+        "name": "系统掷出的持续治疗自动生效。",
+        "hint": "是否让系统掷出的持续治疗自动生效的客户端设置。保存设置以显示/隐藏其他选项。"
       },
       "applyClumsyIfWieldingLargerWeapon": {
         "hint": "若武器尺寸大于持有者体型，自动添加笨拙状态。",
         "name": "若武器尺寸大于持有者体型，自动添加笨拙状态。"
+      },
+      "autoCollapseItemChatCardContent": {
+        "nonCollapsedDefault": "默认展开，点击标题折叠。",
+        "collapsedDefault": "默认折叠，点击标题展开。",
+        "hint": "自动折叠道具卡片内容的客户端设置。",
+        "name": "自动折叠道具聊天卡片的内容。",
+        "noCollapse": "从不折叠"
+      },
+      "autoExpandDamageRolls": {
+        "collapsedAll": "折叠显示所有伤害掷骰（Foundry默认）。",
+        "expandedAll": "展开所有伤害掷骰。",
+        "name": "自动展开伤害掷骰。",
+        "hint": "自动展开伤害掷骰的客户端设置（Foundry默认为折叠所有伤害掷骰）。单击掷骰卡片以展开/折叠。",
+        "expandedNewest": "新伤害掷骰展开（刷新时展开最近一次伤害掷骰）。",
+        "expandedNew": "新伤害掷骰展开（刷新时展开最近3次伤害掷骰）。"
+      },
+      "autoGainDyingAtZeroHP": {
+        "addOne": "增加1",
+        "addOneForCharacters": "为玩家角色和魔宠增加1",
+        "addWoundedLevel": "为所有人增加1+受伤值",
+        "addWoundedLevelForCharacters": "为玩家角色和魔宠增加1+受伤值"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
