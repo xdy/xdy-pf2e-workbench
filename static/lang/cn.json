@@ -24,7 +24,7 @@
           "name": "技能动作位置",
           "bottom": "底部",
           "disabled": "禁用",
-          "hint": "在技能页面中的位置；顶部：“攻击”的右边，底部：最下面",
+          "hint": "注意！目前对大部分人来说开启技能动作会造成角色卡载入异常*缓慢*的现象。在技能页面中的位置；顶部：“攻击”的右边，底部：最下面",
           "top": "顶部"
         },
         "hideDuplicates": {
@@ -72,7 +72,7 @@
         "gm": "GM",
         "none": "无",
         "hint": "选择以聊天消息的方式提醒所剩动作数。",
-        "name": "谁要被提醒动作",
+        "name": "谁会被提醒动作",
         "players": "玩家"
       },
       "addGmRKButtonToNpc": {
@@ -99,14 +99,14 @@
       },
       "applyPersistentDamage": {
         "name": "Persistent Damage模组骰出的持续伤害自动生效。",
-        "hint": "Persistent Damage模组骰出的持续伤害是否自动生效的客户端设置。",
+        "hint": "设置Persistent Damage模组骰出的持续伤害是否自动生效。",
         "wasDamaged": "{damage}伤害已自动生效"
       },
       "addUserTargets": {
         "addFor": "添加目标",
         "clearFor": "清除目标",
         "title": "选择要为其添加目标的用户",
-        "hint": "快捷键：将已选择Token设定为选定用户的目标。",
+        "hint": "快捷键：用于将已选择Token设为选定用户的目标。",
         "name": "添加用户目标"
       },
       "applyPersistentHealing": {
@@ -139,7 +139,354 @@
         "addOne": "增加1",
         "addOneForCharacters": "为玩家角色和魔宠增加1",
         "addWoundedLevel": "为所有人增加1+受伤值",
-        "addWoundedLevelForCharacters": "为玩家角色和魔宠增加1+受伤值"
+        "addWoundedLevelForCharacters": "为玩家角色和魔宠增加1+受伤值",
+        "hint": "设置是否在0HP时自动增加濒死值。",
+        "name": "在0HP时自动增加濒死值。",
+        "orcFerocityMessage": "{name}刚刚使用了@UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K]，现在可以使用自由动作：@UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]",
+        "no": "否",
+        "deliberateDeathMessage": "如果该生物在近战触及范围内，{name}可以在因该生物的攻击或能力<b>陷入濒死状态前</b>对触发生物进行一次近战打击。<br>如果无法使用“凶杀致死(Deliberate Death)”，则移除“凶杀致死已使用”的效果。"
+      },
+      "automationClientSettings": {
+        "name": "客户端自动化设置",
+        "label": "管理客户端自动化设置",
+        "hint": "为玩家启用和配置自动化"
+      },
+      "automationWorldSettings": {
+        "hint": "为GM启用和配置自动化",
+        "label": "管理世界包自动化设置",
+        "name": "世界包自动化设置"
+      },
+      "enableAutomaticMove": {
+        "name": "将先攻位置移动到当前回合的参战者之前。",
+        "noAutomation": "永不",
+        "reaching0HP": "当参战者HP降为0时。",
+        "hint": "勾选此项，可在参战者回合外选中他，将其先攻位置移动到当回合的参战者之前，这通常是由于当回合的参战者杀死了他。由于四舍五入，数个参战者可能会在先攻列表中显示相同的先攻。"
+      },
+      "heroPointHandler": {
+        "thisMany": "这些",
+        "timerStopped": "英雄点计时器已停止。",
+        "timerValue": "时间（范围0-60）",
+        "title": "英雄点处理器",
+        "add": "增加",
+        "all": "所有",
+        "minutesLeft": "当前计时器剩余时间",
+        "addedFor": "{name}的英雄点增加1",
+        "addedToForAll": "所有人的英雄点增加了{heroPoints}",
+        "instructions": "注意，此对话框开启时计时器暂停。不要按任何这些按钮、关闭对话框后，计时器重新开始计时；或者按照按钮提示进行操作。",
+        "name": "启用英雄点处理器。",
+        "noTimerLabel": "在<b>无</b>计时器前提下提交更改。此操作将<b>终止</b>任何现存计时器。",
+        "resetTo": "重置为",
+        "resetToForAll": "将所有人的英雄点重置为{heroPoints}",
+        "showAfter": "经过多久再次显示对话框",
+        "startTimerLabel": "提交更改并开始/继续计时",
+        "willBeResetIn": "英雄点处理器将在{remainingMinutes}分钟后({time})恢复。",
+        "defaultTimeoutMinutes": 60,
+        "doWhat": "<b>第一部分</b> - 选择如何处理具有以下值的<em>所有</em>角色的英雄点",
+        "addOne": "<b>第二部分</b> - 从已登录的角色中为所选角色增加1英雄点（计时器到期时默认随机选择）",
+        "ignore": "无",
+        "noRunningTimer": "没有计时器在运行",
+        "none": "无角色",
+        "hint": "勾选以启用英雄点处理功能，可绑定快捷键开启对话框，该对话框可以重置或增加所有角色的英雄点，为随机（或选定角色）增加1英雄点，以及最重要的，开始计时，默认60分钟后该对话框将重新出现。"
+      },
+      "npcMystifierPrefix": {
+        "name": "单词或随机表前缀",
+        "hint": "添加文本为新名称前缀（如果在上面选择了随机词类型，则为中缀），默认为 ''（例如：'未知'），如果这与随机表的名称一致，将使用来自该表的随机文本结果作为前缀。 这将添加在任何随机词后缀*之后*（请参阅上一个选项。）"
+      },
+      "npcMystifierUseOtherTraits": {
+        "name": "使用其他特征",
+        "hint": "勾选此项，在神秘化名称中使用以上设置中未囊括的所有NPC特征。"
+      },
+      "npcMystifyAllPhysicalMagicalItems": {
+        "hint": "如果PF2e系统开启了“NPC可以被搜刮”功能，将NPC添加到场景时自动神秘化其持有的任何非临时的炼金或魔法物品。",
+        "name": "如果开启了PF2e系统“NPC可以被搜刮”功能，自动神秘化NPC持有炼金或魔法物品。"
+      },
+      "npcRoller": {
+        "hint": "勾选此项，启用NPC快速掷骰功能。",
+        "name": "启用NPC快速掷骰功能"
+      },
+      "qolWorldSettings": {
+        "name": "全局便捷设置",
+        "label": "管理全局便捷设置",
+        "hint": "启用并为GM配置便捷设置"
+      },
+      "reminderCannotAttackIgnoreDeadEidolon": {
+        "name": "死亡幻灵可以攻击",
+        "hint": "勾选此项，允许死亡/无HP的幻灵攻击，不进行提醒。"
+      },
+      "reminderTargeting": {
+        "hint": "勾选此项，在战斗中选择目标时进行提示。",
+        "name": "目标提示",
+        "note": "攻击前请先选择目标。"
+      },
+      "npcMystifierBlacklist": {
+        "hint": "添加黑名单词汇，以逗号分隔，它们将从神秘化名称列表中剔除。",
+        "name": "永不添加的黑名单词汇"
+      },
+      "npcMystifierModifierKey": {
+        "control": "Ctrl",
+        "alt": "Alt",
+        "always": "永远",
+        "disabled": "停用",
+        "hint": "勾选此项，设置拖动生物到激活场景中时按哪个按键来神秘化。注意如果你选择Alt键（非默认设置），NPC还会被隐藏。",
+        "name": "拖拽进场景时神秘化的快捷键"
+      },
+      "npcMystifierMystifyKey": {
+        "name": "神秘化所选Token的快捷键",
+        "hint": "设置神秘化所选Token的快捷键。"
+      },
+      "npcMystifierPostfix": {
+        "name": "单词或随机表后缀",
+        "hint": "添加文本到新名称后缀，默认为“”（例如：'Creature'），如果这与随机表的名称一致，则该表的随机文本结果将用作后缀。 这将在任何随机词前缀被添加*之前*生效（见前面的选项）"
+      },
+      "reminderIWR": {
+        "weakTo": " <strong>弱点</strong> ",
+        "is": "{name}是",
+        "immuneTo": " <strong>免疫</strong> ",
+        "name": "免疫/弱点/抗力提醒",
+        "resistantTo": " <strong>抗性</strong> ",
+        "hint": "勾选此项，受到伤害时提示免疫/弱点/抗力。目前只能处理“简单”伤害类型（如钝击或火焰，但“全部”或“物理”不行）",
+        "notComplex": "<br><br>注意：复杂的免疫、弱点和抗性比如全部、心灵、物理等暂不支持，如果目标拥有此类抗力/弱点，请手动处理。"
+      },
+      "customPauseImage": {
+        "hint": "自定义暂停图标。留空则使用系统默认的闹钟图标。",
+        "name": "自定义暂停图标。"
+      },
+      "giveUnconsciousIfDyingRemovedAt0HP": {
+        "hint": "设置是否在濒死状态被移除，但HP仍为0时自动赋予失去意识状态。",
+        "name": "濒死状态被移除，但HP仍为0时自动赋予失去意识状态。",
+        "no": "否"
+      },
+      "giveWoundedWhenDyingRemoved": {
+        "hint": "设置是否在濒死状态被移除时自动赋予受伤状态。",
+        "name": "濒死状态被移除时自动赋予受伤状态。",
+        "numbToDeathMessage": "{name}刚刚触发了@UUID[Compendium.pf2e.feats-srd.gfMP2aMs3YGONVeB]。请手动处理治疗。"
+      },
+      "reminderBreathWeapon": {
+        "used": "已使用 ",
+        "name": "吐息武器提醒",
+        "prefix": "再充能",
+        "defaultName": "吐息",
+        "hint": "勾选此项，设置吐息武器提醒。",
+        "source": "PF2e Workbench的吐息武器提醒"
+      },
+      "autoRollDamageAllow": {
+        "all": "所有",
+        "gm": "GM",
+        "name": "设置谁可以在打击命中时自动掷伤害骰。",
+        "players": "玩家",
+        "none": "无",
+        "hint": "设置谁可以在打击命中时自动掷伤害骰。保存设置以显示/隐藏客户端自动化设置菜单上的其他选项。"
+      },
+      "autoReduceStunned": {
+        "hint": "设置是否在回合开始时自动减少震慑状态值。",
+        "name": "回合开始时自动减少震慑状态值"
+      },
+      "autoRemoveDyingAtGreaterThanZeroHP": {
+        "name": "生命值恢复到0以上时自动移除濒死状态。",
+        "hint": "设置是否在生命值恢复到0以上时自动移除濒死状态。",
+        "no": "否",
+        "removeDying": "为所有人移除濒死状态",
+        "removeDyingForCharacters": "为玩家角色和魔宠移除濒死状态"
+      },
+      "decreaseFrightenedConditionEachTurn": {
+        "name": "每回合自动减少惊惧状态值。",
+        "hint": "设置是否在玩家角色、NPC和魔宠每回合结束时自动减少惊惧状态值。"
+      },
+      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
+        "hint": "设置当生命值恢复到0以上时是否自动移除失去意识状态。",
+        "name": "生命值恢复到0以上时自动移除失去意识状态。"
+      },
+      "autoRollDamageForSpellAttack": {
+        "name": "法术打击命中时自动掷伤害骰。",
+        "hint": "设置是否在法术打击命中时自动掷伤害骰。请注意，重击时永远只骰正常伤害。"
+      },
+      "autoRollDamageForSpellNotAnAttack": {
+        "hint": "设置是否在施放*无需攻击检定*的法术时自动掷正常伤害骰。",
+        "name": "施放*无需攻击检定*的法术时自动掷伤害骰。"
+      },
+      "autoRollDamageForStrike": {
+        "hint": "设置打击命中时是否自动掷伤害骰。注意，重击时掷重击骰。",
+        "name": "打击命中时自动掷伤害骰。",
+        "strike": "打击"
+      },
+      "autoRollDamageNotifyOnSpellCardNotFound": {
+        "name": "当法术进行攻击检定但无法找到法术卡时通知我。",
+        "hint": "设置当法术进行攻击检定但无法找到可掷伤害骰的法术卡时如何通知。"
+      },
+      "callHotbarMacro": {
+        "hint": "呼出快捷键页码{page}上第{column}个宏",
+        "name": "呼出快捷键页码{page}上第{column}个宏"
+      },
+      "castPrivateSpell": {
+        "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息。",
+        "name": "Ctrl+单击秘密施法。"
+      },
+      "castPrivateSpellAlwaysForNPC": {
+        "hint": "勾选此项，NPC施法永远为秘密施法。",
+        "name": "勾选此项，NPC施法永远为秘密施法。"
+      },
+      "castPrivateSpellWithPublicMessage": {
+        "cantrip": "戏法",
+        "components": "成分:",
+        "spell": "法术",
+        "name": "发布一条公开消息表明有法术被施放。",
+        "savePart": "<br>该未知法术的豁免为: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
+        "they": "他们",
+        "firstPart": "{tokenName}刚刚施放了<strong>{traditionString}</strong>根源中带有{vsmf} {type}特征的法术",
+        "hint": "秘密施法时，此设置还会发布一条公开消息表明有法术被施放，*除非*您在施法时同时按住 SHIFT 和 CTRL。",
+        "secondPartNoRk": ".<br>询问你的GM你是否能自动辨识该法术；如果不能，可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]。或者在你的回合中用一个动作来辨识它（更多细节请咨询你的GM）。",
+        "secondPartRK": ".<br>询问你的GM你是否能自动辨识该法术；如果不能，可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]。或者在你的回合中用一个动作使用@Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}来辨识它"
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "hint": "在公开消息中显示法术特征。",
+        "name": "在公开消息中显示法术特征。",
+        "traitPart": " 具有以下特征：<strong>{traits}</strong>"
+      },
+      "npcMystifierAddRandomProperty": {
+        "numberPostfix": "添加数字作为后缀",
+        "wordPrefix": "添加单词作为前缀",
+        "hint": "选择一种随机词类别，神秘化NPC时可选择性保留。",
+        "name": "名称上添加特定类别的随机词",
+        "none": "无"
+      },
+      "customPauseText": {
+        "name": "自定义暂停提示信息。",
+        "hint": "自定义暂停提示信息。留空则使用系统默认的“游戏暂停”。"
+      },
+      "npcMystifierUseRarities": {
+        "name": "使用稀有度",
+        "hint": "勾选此项，在神秘化名称中使用稀有度。"
+      },
+      "quickQuantities": {
+        "hint": "Shift+单击物品数量增加5，Ctrl+单击增加10。",
+        "name": "Shift+单击物品数量增加5，Ctrl+单击增加10。"
+      },
+      "heroPointHandlerDefaultTimeoutMinutes": {
+        "hint": "设置距离下次英雄点处理器开启的间隔。",
+        "name": "英雄点处理器开启的间隔。"
+      },
+      "heroPointHandlerKey": {
+        "name": "打开英雄点处理器对话框的快捷键。",
+        "hint": "设置打开英雄点对话框的快捷键，以在计时器帮助下重置或增加英雄点。"
+      },
+      "heroPointHandlerStartTimerOnReady": {
+        "hint": "勾选此项，游戏准备好时英雄点计时器自动开始计时。",
+        "name": "自动开始英雄点处理器。"
+      },
+      "moveBeforeCurrentCombatantContextMenu": {
+        "name": "将所选参战者的先攻移到当前参战者之前。"
+      },
+      "moveBeforeCurrentCombatantKey": {
+        "hint": "设置快捷键移动选定参战者的先攻位置到当前回合参战者之前，这通常是由于当前参战者杀死了他。由于四舍五入，先攻表中可能有多个参战者显示相同的先攻值。",
+        "name": "(世界) 设置快捷键将选定参战者的先攻位置移到当前参战者之前。"
+      },
+      "mystificationSettings": {
+        "label": "管理NPC神秘化设置",
+        "name": "NPC神秘化设置",
+        "hint": "启用并配置NPC神秘化功能"
+      },
+      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+        "hint": "勾选此项，该角色对应的所有Token神秘化。",
+        "name": "解除该角色所有Token的神秘化"
+      },
+      "npcMystifierKeepRandomProperty": {
+        "hint": "勾选此项，与*当前此模组的设置的格式相匹配（如果有）*的数字后缀/单词前缀在神秘化/解除神秘化时保持不变。",
+        "name": "神秘化/解除神秘化时保留前后缀。"
+      },
+      "npcMystifierNoMatch": {
+        "name": "未找到相符特征",
+        "hint": "未找到相符特征时使用的文本，名称将为空白。（此处的空字符串将设置为“...”）"
+      },
+      "npcMystifierRandomPropertySkipForUnique": {
+        "hint": "勾选此项，当神秘化独特NPC时不添加随机词汇。（即解除神秘化时保留原样）",
+        "name": "独特NPC不设置会持续保留的随机词。"
+      },
+      "npcMystifierUseAlignmentTraits": {
+        "hint": "勾选此项，在神秘化名称中使用阵营特征。",
+        "name": "使用NPC的阵营特征。"
+      },
+      "maxHeroPoints": {
+        "name": "（此世界中）英雄点最大值。",
+        "hint": "设置角色拥有的最大英雄点数量。"
+      },
+      "npcMystifierUseCreatureTraits": {
+        "hint": "勾选此项，神秘化名称中将使用所有PF2e系统已定义的生物特征。",
+        "name": "使用生物特征。"
+      },
+      "npcMystifier": {
+        "name": "启用NPC神秘化工具。",
+        "hint": "勾选此项开启NPC神秘化工具，开启后按Ctrl（按键可自定义）将NPC添加到已激活场景中时，将根据其特征重命名token。保存设置以显示/隐藏更多选项。"
+      },
+      "npcMystifierUseCreatureTypesTraits": {
+        "hint": "勾选此项，神秘化名称中将使用生物类别特征（详见https://2e.aonprd.com/Traits.aspx）。",
+        "name": "使用生物类别特征"
+      },
+      "npcMystifierUseRaritiesReplacement": {
+        "name": "替换常见以上的稀有度",
+        "hint": "在此处输入单词，替换常见以上的稀有度名称（比如“不常见”）。若留空，不要更改此处显示的稀有度。"
+      },
+      "npcMystifierUseSize": {
+        "name": "使用人物体型",
+        "hint": "勾选此项，在神秘化名称中使用人物体型"
+      },
+      "npcMystifierWordPrefix": {
+        "hint": "若选择“单词前缀”，从指定随机表中添加随机词。",
+        "name": "从指定随机表中添加随机词"
+      },
+      "npcScaler": {
+        "hint": "勾选此项允许调整NPC体型",
+        "name": "允许调整NPC体型"
+      },
+      "remindersSettings": {
+        "hint": "启用并配置多个提醒器",
+        "label": "管理提醒设置",
+        "name": "提醒设置"
+      },
+      "workbenchVersion": {
+        "name": "Workbench迁移版本",
+        "hint": "最新迁移运行的版本。可以低于模组版本。 除非您知道自己在做什么，否则不要修改它。"
+      },
+      "notifications": {
+        "cantMystify": "你无法神秘化此Token。它在已激活场景中，以及，你是GM吗？"
+      },
+      "npcMystifierUseEliteWeak": {
+        "name": "使用精英/弱化状态",
+        "hint": "勾选此项，神秘化名称使用精英/弱化。"
+      },
+      "npcMystifierUseMystifiedNameInChat": {
+        "hint": "(实验功能) 勾选此项，在聊天中用神秘化名称替换原本人名。",
+        "name": "(实验功能) 聊天信息使用神秘化名称。"
+      },
+      "customPauseRelocation": {
+        "hint": "将暂停图标放置在屏幕中央，提示信息放在图标上方。",
+        "name": "将暂停图标放置在屏幕中央，提示信息放在图标上方。"
+      },
+      "reminderCannotAttack": {
+        "dead": "已死亡",
+        "defeated": "已被击败",
+        "hasNoHp": "无HP",
+        "hint": "勾选此项，当使用因失去意识/死亡/被击败/无生命值/其他原因而无法攻击的token进行攻击时，进行提示。",
+        "name": "若Token无法攻击，进行提醒",
+        "note": "你确定要继续攻击吗？{actorName} {reason}，因此它不大有能力攻击……",
+        "petrified": "被石化",
+        "unconscious": "失去意识"
+      },
+      "reminderIWRCaveat": {
+        "hint": "勾选此项，在每条信息中提醒复杂抗力/弱点无法支持。",
+        "name": "勾选此项，在每条信息中提醒复杂抗力/弱点无法支持。"
+      },
+      "tokenAnimation": {
+        "hint": "启用此项更改token的移动动画。如有Multilevel Tokens模组，可能会引发问题。",
+        "name": "启用以更改token移动动画。"
+      },
+      "tokenAnimationSpeed": {
+        "hint": "更改此项，调整token移动动画速度。",
+        "name": "更改此项，调整token移动动画速度。"
+      },
+      "variantRulesSettings": {
+        "hint": "启用并配置多个可选规则",
+        "label": "管理可选规则设置",
+        "name": "可选规则设置"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
@@ -150,7 +497,7 @@
     },
     "macros": {
       "basicActionMacros": {
-        "noActorSelected": "没有选择演员",
+        "noActorSelected": "没有选择人物",
         "title": "动作 ({name})",
         "cancel": "取消",
         "gmMustImport": "GM必须在合集包“xdy-pf2e-workbench-macros”上右键并选择“导入全部内容”并确保导入时选择了“保留文档ID？”。",
@@ -169,8 +516,8 @@
       "refocus": {
         "regains": "恢复{focus}聚能点。",
         "one": "1",
-        "selectOneActor": "你必须选择一个演员。",
-        "isPsychic": "仅因心能增幅或心能能力使用聚能点",
+        "selectOneActor": "你必须选择一个人物。",
+        "isPsychic": "仅为增幅心能戏法或心能能力使用聚能点",
         "notPsychic": "已消耗至少{regain}聚能点",
         "regainOne": "回复1聚能点。",
         "disabled": "不可用，因为没有能力能回复1点以上的聚能点。",
