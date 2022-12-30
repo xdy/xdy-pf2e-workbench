@@ -1,3 +1,10 @@
+## [4.24.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.24.1...v4.24.2) (2022-12-30)
+
+
+### Bug Fixes
+
+* Add warning to the readme and settings hint for Skill Actions that they currently make character sheets *very* slow to load for most people. ([d164672](https://github.com/xdy/xdy-pf2e-workbench/commit/d164672a36a84991d9ed0c8757ce29d3561f0abd))
+
 ## [4.24.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.24.0...v4.24.1) (2022-12-30)
 
 
