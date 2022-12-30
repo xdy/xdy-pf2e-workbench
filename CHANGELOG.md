@@ -1,3 +1,10 @@
+## [4.24.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.24.0...v4.24.1) (2022-12-30)
+
+
+### Bug Fixes
+
+* Renames Chinese localization file to cn.json ([3a59a4d](https://github.com/xdy/xdy-pf2e-workbench/commit/3a59a4d995252e705b64645abc62e05469ee396c)), closes [#593](https://github.com/xdy/xdy-pf2e-workbench/issues/593)
+
 # [4.24.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.23.3...v4.24.0) (2022-12-27)
 
 
