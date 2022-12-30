@@ -22,7 +22,7 @@
       "Settings": {
         "Position": {
           "name": "Skill Actions position",
-          "hint": "Position in the skill page; Top : right after Strikes, Bottom : At the end",
+          "hint": "NOTE! Skill actions currently make character sheets *very* slow to load for most people. Position in the skill page; Top : right after Strikes, Bottom : At the end",
           "bottom": "Bottom",
           "disabled": "Disabled",
           "top": "Top"
