@@ -84,6 +84,37 @@
       "creatureBuilder": {
         "hint": "选择以在NPC卡上添加一个按键来按照GMG规则建立NPC。",
         "name": "允许建立自定义生物。"
+      },
+      "applyEncumbranceBasedOnBulk": {
+        "name": "根据负载自动赋予超载状态。",
+        "hint": "根据负载自动赋予超载状态。（跟随PF2e系统，并认为5B+9L不超过5B）"
+      },
+      "applyPersistentAllow": {
+        "all": "所有",
+        "players": "玩家",
+        "gm": "GM",
+        "hint": "谁可以变更是否自动应用持续伤害/治疗。保存设置以显示/隐藏客户端自动化设置菜单上的其他选项。",
+        "name": "谁可以变更是否自动应用持续伤害/治疗。",
+        "none": "无"
+      },
+      "applyPersistentDamage": {
+        "name": "自动应用Persistent Damage模组骰出的持续伤害。",
+        "hint": "是否自动应用Persistent Damage模组骰出的持续伤害的客户端设置。",
+        "wasDamaged": "{damage}伤害已自动应用"
+      },
+      "addUserTargets": {
+        "addFor": "添加目标",
+        "clearFor": "清除目标",
+        "title": "选择要为其添加目标的用户",
+        "hint": "快捷键：将已选择Token设定为选定用户的目标。",
+        "name": "添加用户目标"
+      },
+      "applyPersistentHealing": {
+        "FastHealingLabel": "获得快速愈合"
+      },
+      "applyClumsyIfWieldingLargerWeapon": {
+        "hint": "若武器尺寸大于持有者体型，自动添加笨拙状态。",
+        "name": "若武器尺寸大于持有者体型，自动添加笨拙状态。"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
@@ -97,7 +128,13 @@
         "noActorSelected": "没有选择演员",
         "title": "动作 ({name})",
         "cancel": "取消",
-        "gmMustImport": "GM必须在合集包“xdy-pf2e-workbench-macros”上右键并选择“导入全部内容”并确保导入时选择了“保留文档ID？”。"
+        "gmMustImport": "GM必须在合集包“xdy-pf2e-workbench-macros”上右键并选择“导入全部内容”并确保导入时选择了“保留文档ID？”。",
+        "settings": {
+          "showBestBonus": {
+            "name": "基本动作宏显示最高加值",
+            "hint": "若选中人物在基本动作宏对话中有更高加值，是否显示"
+          }
+        }
       },
       "buildNpcSpellbookJournal": {
         "title": "建立NPC法术书日志",
