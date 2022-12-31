@@ -234,13 +234,13 @@ export class SkillAction {
 
             this.variants.addBasicVariant(skill, data.extra, data.label);
 
-            if (
-                this.hasTrait("attack") &&
-                this.pf2eItem.slug !== "escape" // For some reason escape MAP doesn't work
-            ) {
-                this.variants.addMapVariant(skill, data.extra, -5);
-                this.variants.addMapVariant(skill, data.extra, -10);
-            }
+            // if (
+            //     this.hasTrait("attack") &&
+            //     this.pf2eItem.slug !== "escape" // For some reason escape MAP doesn't work
+            // ) {
+            //     this.variants.addMapVariant(skill, data.extra, -5);
+            //     this.variants.addMapVariant(skill, data.extra, -10);
+            // }
 
             if (
                 this.actor.items
