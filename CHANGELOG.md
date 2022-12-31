@@ -1,3 +1,10 @@
+# [4.25.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.24.3...v4.25.0) (2022-12-31)
+
+
+### Features
+
+* Adds support for shift-clicking to bring up, or skip, the roll dialog depending on user setting, and control-clicking to make roll secret in Basic Action Macros. With these caveats: For the buttons with names ending in '(toggle)' shift and control works as for effects, recall knowledge is *always* secret and the macro used does not currently support shift-clicking, for craft and repair neither works as the macro in question doesn't seem to support them. ([f8539b1](https://github.com/xdy/xdy-pf2e-workbench/commit/f8539b1f591e4bd7b2267876523911a934484b56))
+
 ## [4.24.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.24.2...v4.24.3) (2022-12-31)
 
 
