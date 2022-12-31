@@ -448,7 +448,7 @@ ${actionList
             },
             default: "close",
             render: (html) => {
-                const action = (button) => {
+                const action = (button, event) => {
                     const action = actionList[button.dataset.action];
                     const current = action.action;
                     if (typeof current === "string") {
@@ -467,12 +467,12 @@ ${actionList
                         }
                     } else {
                         // @ts-ignore
-                        action.action({ actors: [selectedActor] });
+                        action.action({ event: event, actors: [selectedActor] });
                     }
                 };
                 if ("querySelectorAll" in html) {
                     html.querySelectorAll(".action-list button").forEach((button) =>
-                        button.addEventListener("click", () => action(button))
+                        button.addEventListener("click", (event) => action(button, event))
                     );
                 }
             },
