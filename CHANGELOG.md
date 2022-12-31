@@ -1,3 +1,10 @@
+## [4.24.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.24.2...v4.24.3) (2022-12-31)
+
+
+### Bug Fixes
+
+* Removes support for MAP-5 and MAP-10 in Skill Actions, they broke at some point (and have never worked for escape anyway). ([db3804b](https://github.com/xdy/xdy-pf2e-workbench/commit/db3804bea616a00571a2036c42c13311757ce224))
+
 ## [4.24.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.24.1...v4.24.2) (2022-12-30)
 
 
