@@ -1,3 +1,10 @@
+## [4.26.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.26.0...v4.26.1) (2023-01-01)
+
+
+### Bug Fixes
+
+* Auto-applying persistent damage rolled by the persistent damage module now works, including IWR. So does auto-applying persistent healing. Note that for regeneration it *always* applies the healing as it doesn't know if the deactivation condition applies. ([979d389](https://github.com/xdy/xdy-pf2e-workbench/commit/979d3894d2fe7fdc21691f8e6ee11b9faa64ecd6))
+
 # [4.26.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.25.0...v4.26.0) (2023-01-01)
 
 
