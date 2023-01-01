@@ -175,7 +175,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 export async function persistentDamage(message) {
     if (
         canvas.ready &&
-        "persistent" in message.flags &&
+        message.flavor.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
         message.speaker.token &&
         message.flavor &&
         message.rolls &&
@@ -188,9 +188,10 @@ export async function persistentDamage(message) {
     ) {
         const token = canvas.tokens?.get(message.speaker.token);
         if (token && token.isOwner) {
-            const damage = message.rolls.reduce((sum, current) => sum + (current.total || 1), 0);
-
-            await token?.actor?.applyDamage(damage, token, false);
+            for (const r of message.rolls) {
+                // @ts-ignore
+                await token?.actor?.applyDamage({ damage: r, token: token });
+            }
         }
     }
 }
@@ -220,8 +221,7 @@ export async function persistentHealing(message) {
                 ].some((text) => message.flavor?.includes(text))
             ) {
                 const healing = message.rolls.reduce((sum, current) => sum + (current.total || 1), 0) * -1;
-
-                await token.actor?.applyDamage(healing, token.actor?.getActiveTokens()[0], false);
+                await token.actor?.applyDamage({ damage: healing, token: token.actor?.getActiveTokens()[0] });
             }
         }
     }
