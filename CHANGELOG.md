@@ -1,3 +1,10 @@
+## [4.26.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.26.1...v4.26.2) (2023-01-01)
+
+
+### Bug Fixes
+
+* Make the NPC Scaler work again. ([7e2dcea](https://github.com/xdy/xdy-pf2e-workbench/commit/7e2dceaf54e4f427d8ca8a483d47578bb4a3b7cb))
+
 ## [4.26.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.26.0...v4.26.1) (2023-01-01)
 
 
