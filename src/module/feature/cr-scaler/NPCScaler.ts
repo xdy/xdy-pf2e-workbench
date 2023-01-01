@@ -55,31 +55,35 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
 
     // parse resistances
     const drData: any[] = [];
-    for (let i = 0; i < actor.system.traits.dr.length; i++) {
-        const dr = actor.system.traits.dr[i];
+    // @ts-ignore
+    const resistances = actor.system.attributes.resistances;
+    for (let i = 0; i < resistances.length; i++) {
+        const resistance = resistances[i];
 
         drData.push({
-            label: dr.label,
-            type: dr.type,
-            exceptions: dr.exceptions ?? "",
-            value: getMinMaxData("resistance", dr.value, oldLevel, newLevel).toString(),
+            label: resistance.label,
+            type: resistance.type,
+            exceptions: resistance.exceptions ?? "",
+            value: getMinMaxData("resistance", resistance.value, oldLevel, newLevel).toString(),
         });
     }
-    updateData["system.traits.dr"] = drData;
+    updateData["system.attributes.resistances"] = drData;
 
-    // parse vulnerabilities
+    // parse weaknesses
     const dvData: any[] = [];
-    for (let i = 0; i < actor.system.traits.dv.length; i++) {
-        const dv = actor.system.traits.dv[i];
+    // @ts-ignore
+    const weaknesses = actor.system.attributes.weaknesses;
+    for (let i = 0; i < weaknesses.length; i++) {
+        const weakness = weaknesses[i];
 
         dvData.push({
-            label: dv.label,
-            type: dv.type,
-            exceptions: dv.exceptions ?? "",
-            value: getMinMaxData("weakness", dv.value, oldLevel, newLevel).toString(),
+            label: weakness.label,
+            type: weakness.type,
+            exceptions: weakness.exceptions ?? "",
+            value: getMinMaxData("weakness", weakness.value, oldLevel, newLevel).toString(),
         });
     }
-    updateData["system.traits.dv"] = dvData;
+    updateData["system.attributes.vulnerabilities"] = dvData;
 
     // parse simple modifiers
     updateData["system.attributes.ac.value"] = getLeveledData(
