@@ -104,10 +104,10 @@
         "wasDamaged": "{damage} dégâts ont été automatiquement appliqués"
       },
       "applyPersistentHealing": {
-        "FastHealingLabel": "reçu de Guérison accélérée",
+        "FastHealingLabel": "reçu de guérison accélérée",
         "hint": "Appliquer automatiquement les soins persistants lancés par le système.",
         "name": "Appliquer automatiquement les soins persistants lancés par le système.",
-        "RegenerationLabel": "Reçu de Régénération",
+        "RegenerationLabel": "Reçu de régénération",
         "wasHealed": "{healing} de soins ont été appliqués automatiquement."
       },
       "autoCollapseItemChatCardContent": {
