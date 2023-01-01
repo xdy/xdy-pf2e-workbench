@@ -1,3 +1,10 @@
+# [4.26.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.25.0...v4.26.0) (2023-01-01)
+
+
+### Features
+
+* Supports (and requires) the pf2e system version 2.6.0. Removes the deprecated IWR reminder feature as full support for IWR is now part of the system. Fully removes the partially removed player items rarity colorization feature as that too is part of the system. Updates types to match the latest pf2e version. ([bedf8f6](https://github.com/xdy/xdy-pf2e-workbench/commit/bedf8f62522bebe248714daf1345dbe4239e2900))
+
 # [4.25.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.24.3...v4.25.0) (2022-12-31)
 
 
