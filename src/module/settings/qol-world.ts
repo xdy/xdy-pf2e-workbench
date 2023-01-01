@@ -43,15 +43,6 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => debouncedReload(),
             },
-            playerItemsRarityColour: {
-                name: `${MODULENAME}.SETTINGS.playerItemsRarityColour.name`,
-                hint: `${MODULENAME}.SETTINGS.playerItemsRarityColour.hint`,
-                scope: "world",
-                config: true,
-                default: false,
-                type: Boolean,
-                onChange: () => debouncedReload(),
-            },
             castPrivateSpell: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpell.name`,
                 hint: `${MODULENAME}.SETTINGS.castPrivateSpell.hint`,

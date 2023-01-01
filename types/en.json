@@ -820,6 +820,12 @@
                     "Notification": "Generated NPC attack: {attack}"
                 }
             },
+            "IWREditor": {
+                "Title": "{actor}: {category}",
+                "Type": "Type",
+                "Exceptions": "Exceptions",
+                "DoubleVs": "Double Vs."
+            },
             "Plural": "Actors"
         },
         "ActorSizeGargantuan": "Gargantuan",
@@ -875,6 +881,7 @@
         "AreaSize50": "50 Foot",
         "AreaSize500": "500 Foot",
         "AreaSize60": "60 Foot",
+        "AreaSize65": "65 Foot",
         "AreaSize75": "75 Foot",
         "AreaSize80": "80 Foot",
         "AreaSize90": "90 Foot",
@@ -1126,8 +1133,8 @@
                         "criticalFailure": "Critical Failure"
                     }
                 },
-                "Label": "Result: <degree>{degree}</degree> <offset>by {offset}</offset>",
-                "AdjustedLabel": "Result: <degree>{degree}</degree> <offset>by {offset}</offset> ({adjustment})"
+                "Label": "Result: <unadjusted>{unadjusted}</unadjusted> <offset>by {offset}</offset>",
+                "AdjustedLabel": "Result: <unadjusted>{unadjusted}</unadjusted> <adjusted>{adjusted}</adjusted> <offset>by {offset}</offset>"
             },
             "Specific": {
                 "Perception": {
@@ -1320,7 +1327,162 @@
         "CurrentStaminaTitle": "The amount of stamina points you have",
         "Damage": {
             "Base": "Base",
-            "NoDamageFormulaLabel": "No damage"
+            "IWR": {
+                "ApplicationBreakdown": {
+                    "unaffected": "Unaffected by {type}: {adjustment}",
+                    "immunity": "Immune to {type}: {adjustment}",
+                    "weakness": "Weak to {type}: {adjustment}",
+                    "resistance": "Resistant to {type}: {adjustment}"
+                },
+                "CompositeLabel": {
+                    "Exceptions0DoubleVs0": "{type} {value}",
+                    "Exceptions0DoubleVs1": "{type} {value} (double resistance vs. {doubleVs1})",
+                    "Exceptions0DoubleVs2": "{type} {value} (double resistance vs. {doubleVs1} or {doubleVs2})",
+                    "Exceptions0DoubleVs3": "{type} {value} (double resistance vs. {doubleVs1}, {doubleVs2}, or {doubleVs3})",
+                    "Exceptions0DoubleVs4": "{type} {value} (double resistance vs. {doubleVs1}, {doubleVs2}, {doubleVs3}, or {doubleVs4})",
+                    "Exceptions1DoubleVs0": "{type} {value} (except {exception1})",
+                    "Exceptions1DoubleVs1": "{type} {value} (except {exception1}; double resistance vs. {doubleVs1})",
+                    "Exceptions1DoubleVs2": "{type} {value} (except {exception1}; double resistance vs. {doubleVs1} or {doubleVs2})",
+                    "Exceptions1DoubleVs3": "{type} {value} (except {exception1}; double resistance vs. {doubleVs1}, {doubleVs2}, or {doubleVs3})",
+                    "Exceptions1DoubleVs4": "{type} {value} (except {exception1}; double resistance vs. {doubleVs1}, {doubleVs2}, {doubleVs3}, or {doubleVs4})",
+                    "Exceptions2DoubleVs0": "{type} {value} (except {exception1} or {exception2})",
+                    "Exceptions2DoubleVs1": "{type} {value} (except {exception1} or {exception2}; double resistance vs. {doubleVs1})",
+                    "Exceptions2DoubleVs2": "{type} {value} (except {exception1} or {exception2}; double resistance vs. {doubleVs1} or {doubleVs2})",
+                    "Exceptions2DoubleVs3": "{type} {value} (except {exception1} or {exception2}; double resistance vs. {doubleVs1}, {doubleVs2}, or {doubleVs3})",
+                    "Exceptions2DoubleVs4": "{type} {value} (except {exception1} or {exception2}; double resistance vs. {doubleVs1}, {doubleVs2}, {doubleVs3}, or {doubleVs4})",
+                    "Exceptions3DoubleVs0": "{type} {value} (except {exception1}, {exception2}, or {exception3})",
+                    "Exceptions3DoubleVs1": "{type} {value} (except {exception1}, {exception2}, or {exception3}; double resistance vs. {doubleVs1})",
+                    "Exceptions3DoubleVs2": "{type} {value} (except {exception1}, {exception2}, or {exception3}; double resistance vs. {doubleVs1} or {doubleVs2})",
+                    "Exceptions3DoubleVs3": "{type} {value} (except {exception1}, {exception2}, or {exception3}; double resistance vs. {doubleVs1}, {doubleVs2}, or {doubleVs3})",
+                    "Exceptions3DoubleVs4": "{type} {value} (except {exception1}, {exception2}, or {exception3}; double resistance vs. {doubleVs1}, {doubleVs2}, {doubleVs3}, or {doubleVs4})",
+                    "Exceptions4DoubleVs0": "{type} {value} (except {exception1}, {exception2}, {exception3}, or {exception4})",
+                    "Exceptions4DoubleVs1": "{type} {value} (except {exception1}, {exception2}, {exception3}, or {exception4}; double resistance vs. {doubleVs1})",
+                    "Exceptions4DoubleVs2": "{type} {value} (except {exception1}, {exception2}, {exception3}, or {exception4}; double resistance vs. {doubleVs1} or {doubleVs2})",
+                    "Exceptions4DoubleVs3": "{type} {value} (except {exception1}, {exception2}, {exception3}, or {exception4}; double resistance vs. {doubleVs1}, {doubleVs2}, or {doubleVs3})",
+                    "Exceptions4DoubleVs4": "{type} {value} (except {exception1}, {exception2}, {exception3}, or {exception4}; double resistance vs. {doubleVs1}, {doubleVs2}, {doubleVs3}, or {doubleVs4})"
+                },
+                "Type": {
+                    "abjuration": "abjuration",
+                    "adamantine": "adamantine",
+                    "all-damage": "all damage",
+                    "area-damage": "area damage",
+                    "arrow-vulnerability": "arrow vulnerability",
+                    "auditory": "auditory",
+                    "axe-vulnerability": "axe vulnerability",
+                    "blinded": "blinded",
+                    "broken": "broken",
+                    "clumsy": "clumsy",
+                    "cold-iron": "cold iron",
+                    "confused": "confused",
+                    "conjuration": "conjuration",
+                    "controlled": "controlled",
+                    "critical-hits": "critical hits",
+                    "curse": "curse",
+                    "darkwood": "darkwood",
+                    "dazzled": "dazzled",
+                    "deafened": "deafened",
+                    "death-effects": "death effects",
+                    "disease": "disease",
+                    "divination": "divination",
+                    "doomed": "doomed",
+                    "drained": "drained",
+                    "emotion": "emotion",
+                    "enchantment": "enchantment",
+                    "energy": "energy",
+                    "enfeebled": "enfeebled",
+                    "evocation": "evocation",
+                    "fascinated": "fascinated",
+                    "fatigued": "fatigued",
+                    "fear-effects": "fear effects",
+                    "flat-footed": "flat-footed",
+                    "fleeing": "fleeing",
+                    "frightened": "frightened",
+                    "ghost-touch": "ghost touch",
+                    "grabbed": "grabbed",
+                    "healing": "healing",
+                    "hidden": "hidden",
+                    "illusion": "illusion",
+                    "immobilized": "immobilized",
+                    "inhaled": "inhaled",
+                    "light": "light",
+                    "magic": "magic",
+                    "magical": "magical",
+                    "misfortune-effects": "misfortune effects",
+                    "mithral": "mithral",
+                    "necromancy": "necromancy",
+                    "non-magical": "non-magical",
+                    "nonlethal": "nonlethal",
+                    "nonlethal-attacks": "nonlethal attacks",
+                    "object-immunities": "object immunities",
+                    "olfactory": "olfactory",
+                    "orichalcum": "orichalcum",
+                    "paralyzed": "paralyzed",
+                    "petrified": "petrified",
+                    "physical": "physical",
+                    "plant": "plant",
+                    "polymorph": "polymorph",
+                    "possession": "possession",
+                    "prone": "prone",
+                    "protean-anatomy": "protean anatomy",
+                    "radiation": "radiation",
+                    "restrained": "restrained",
+                    "salt": "salt",
+                    "salt-water": "salt water",
+                    "scrying": "scrying",
+                    "sickened": "sickened",
+                    "silver": "silver",
+                    "sleep": "sleep",
+                    "slowed": "slowed",
+                    "splash-damage": "splash damage",
+                    "spell-deflection": "spell deflection",
+                    "stunned": "stunned",
+                    "stupefied": "stupefied",
+                    "swarm-attacks": "swarm attacks",
+                    "swarm-mind": "swarm mind",
+                    "transmutation": "transmutation",
+                    "trip": "trip",
+                    "unarmed-attacks": "unarmed-attacks",
+                    "unconscious": "unconscious",
+                    "vampire-weaknesses": "vampire weaknesses",
+                    "visual": "visual",
+                    "vorpal": "vorpal",
+                    "vorpal-fear": "vorpal fear",
+                    "vulnerable-to-sunlight": "vulnerable to sunlight",
+                    "warpglass": "warpglass",
+                    "water": "water",
+                    "weapons": "weapons",
+                    "weapons-shedding-bright-light": "weapons shedding bright light"
+                }
+            },
+            "NoDamageFormulaLabel": "No damage",
+            "PersistentTooltip": "Persistent {damageType}",
+            "RollFlavor": {
+                "acid": "acid",
+                "air": "air",
+                "bleed": "bleed",
+                "bludgeoning": "bludgeoning",
+                "chaotic": "chaotic",
+                "cold": "cold",
+                "earth": "earth",
+                "electricity": "electricity",
+                "evil": "evil",
+                "fire": "fire",
+                "force": "force",
+                "good": "good",
+                "lawful": "lawful",
+                "mental": "mental",
+                "metal": "metal",
+                "negative": "negative",
+                "persistent": "persistent {damageType}",
+                "piercing": "piercing",
+                "poison": "poison",
+                "positive": "positive",
+                "precision": "precision",
+                "slashing": "slashing",
+                "sonic": "sonic",
+                "splash": "splash",
+                "untyped": "untyped"
+            }
         },
         "DamageCategoriesLabel": "Damage Categories",
         "DamageDieD10": "d10",
@@ -1349,6 +1511,7 @@
         "DeleteItemQuestion": "Are you sure you want to delete:",
         "DeleteItemTitle": "Delete Item",
         "DeleteShortLabel": "Delete",
+        "DeleteSpellcastEntryTitle": "Delete Spellcasting",
         "DeleteSpellcastEntryQuestion": "Are you sure you want to delete this spellcasting entry?",
         "DeleteSpellcastEntryWarning": "WARNING: All spells in this spellcasting entry will also be deleted.",
         "DenominationLabel": "Denomination",
@@ -1370,8 +1533,14 @@
                     "WasAt": " (was at {oldQuantity})"
                 },
                 "FastHealing": {
-                    "FastHealingLabel": "Received Fast Healing",
-                    "RegenerationLabel": "Received Regeneration",
+                    "fast-healing": {
+                        "Name": "Fast Healing",
+                        "ReceivedMessage": "Received fast healing"
+                    },
+                    "regeneration": {
+                        "Name": "Regeneration",
+                        "ReceivedMessage": "Received regeneration"
+                    },
                     "DeactivatedBy": "Deactivated by {types}"
                 }
             },
@@ -1636,6 +1805,15 @@
             },
             "CannotAddType": "{type} items cannot be added to this actor.",
             "Condition": {
+                "PersistentDamage": {
+                    "Name": "Persistent Damage ({formula})",
+                    "NameWithDC": "Persistent Damage ({formula} DC{dc})",
+                    "Dialog": {
+                        "Title": "Persistent Damage ({actor})",
+                        "Add": "Add Persistent Damage",
+                        "Remove": "Remove Persistent Damage"
+                    }
+                },
                 "Flanked": "Flat-Footed (Flanked)"
             },
             "CreationDialog": {
@@ -2094,6 +2272,10 @@
                     "spear": "The weapon pierces the target, weakening its attacks. The target is @UUID[Compendium.pf2e.conditionitems.i3OJZU2nk64Df3xm]{Clumsy 1} until the start of your next turn.",
                     "sword": "The target is made off-balance by your attack, becoming @UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{Flat-Footed} until the start of your next turn."
                 },
+                "Damage": {
+                    "DiceNumber": "Dice Number"
+                },
+                "FromABP": "Automatic bonus progression has adjusted this weapon's {property} to {value}.",
                 "FromMaterialAndRunes": "Precious materials and runes on this item have adjusted its {property} to {value}.",
                 "GeneratedName": {
                     "Hint": "This is the name of the base weapon. For most weapons, the base is used to generate a fuller name, taking into account the material composition and/or runes. Giving this weapon a custom name or marking it as \"specific\" will prevent the generated name from appearing.",
@@ -2455,10 +2637,6 @@
         "NoAmmoLabel": "No Ammo",
         "NoStackGroup": "Does not stack",
         "NoneOption": "None",
-        "OneDegreeBetter": "one degree better",
-        "OneDegreeWorse": "one degree worse",
-        "TwoDegreesBetter": "two degrees better",
-        "TwoDegreesWorse": "two degrees worse",
         "OpenActionBrowserTitle": "Open Action Browser",
         "OpenInventoryBrowser": "Open Inventory Browser",
         "OpenItemTitle": "Toggle Container Contents",
@@ -2664,11 +2842,11 @@
             },
             "critFumbleCards": {
                 "hint": "Automatically draw a critical hit or fumble card on appropriate rolls.",
-                "name": "Critical Hit and Fumble Cards"
+                "name": "Critical Hit & Fumble Cards"
             },
             "critFumbleCardButtons": {
                 "hint": "Show critical hit and fumble card draw buttons on attack rolls.",
-                "name": "Critical Hit and Fumble Card Buttons"
+                "name": "Critical Hit & Fumble Card Buttons"
             },
             "DeathIcon": {
                 "Name": "Death Icon",
@@ -2682,13 +2860,9 @@
                 "Name": "Theater of the Mind Toggles",
                 "Hint": "Include additional toggles on actor sheets to facilitate Theater of the Mind play. Such toggles will allow for enabling certain abilities without targeting in Foundry."
             },
-            "statusEffectKeepFoundry": {
-                "hint": "Determines if you want to show the Foundry Icon set below the Pathfinder 2E icon set. This will trigger a reload.",
-                "name": "Status Icon Foundry Set"
-            },
             "statusEffectShowCombatMessage": {
-                "hint": "Show the status effects of the current combatant in chat each turn. If your game has more than one GM this setting should only be enabled for one of them.",
-                "name": "Show Status Effects in Combat"
+                "hint": "Each turn of an encounter, send a chat message containing the conditions of the turn's participant.",
+                "name": "Show Conditions during Encounters"
             },
             "statusEffectType": {
                 "blackWhite": "Black & white",
@@ -2715,10 +2889,6 @@
             "WorldSchemaVersion": {
                 "Name": "World Schema Version",
                 "Hint": "Records the schema version for documents in the PF2e system (don't modify this unless you know what you are doing)."
-            },
-            "IgnoreCoinBulk": {
-                "Name": "Coins are weightless",
-                "Hint": "Toggle on to ignore currency weight."
             },
             "IdentifyMagicNotMatchingTraditionModifier": {
                 "Name": "Identify Magic Skill Modifier",
@@ -2756,6 +2926,10 @@
                     "Hint": "Apply vision mechanics consistent with Pathfinder 2e rules. Enabling this setting will remove the ability to configure Unrestricted Global Vision as well as Token Sight radii.",
                     "ManagedBy": "Managed by <rbv>rules-based vision</rbv>."
                 },
+                "IWR": {
+                    "Name": "Immunities, Weaknesses, & Resistances",
+                    "Hint": "When applying damage to an actor, adjust its value according to the actor's immunities, weaknesses, and resistances."
+                },
                 "EffectExpiration": {
                     "Name": "Effects auto-expire",
                     "Hint": "Effects automatically disable attached rule elements when the duration expires."
@@ -2786,6 +2960,10 @@
                 "Label": "Manage Homebrew Elements",
                 "Hint": "Add custom traits, languages, and other elements of a homebrew world.",
                 "Instructions": "These settings allow GMs to add traits, languages, and other elements to a homebrew world. To add such elements, simply type the desired terms in the appropriate fields, separated by commas or tab keystrokes. They will then appear in the appropriate places on actor and item sheets. To update a term, click it to make the desired changes.",
+                "Tabs": {
+                    "Traits": "Traits and Categories",
+                    "Damage": "Damage Types"
+                },
                 "ConfirmDelete": {
                     "Title": "Delete Homebrew Element?",
                     "Message": "Delete Homebrew element <strong>{element}</strong>?"
@@ -2829,6 +3007,10 @@
                 "EquipmentTraits": {
                     "Name": "Equipment Traits",
                     "Hint": "Traits applicable to equipment other than weapons"
+                },
+                "DamageTypes": {
+                    "name": "Custom Damage Types",
+                    "Hint": "Additional damage types for the system to recognize"
                 }
             },
             "Metagame": {
@@ -3165,6 +3347,7 @@
         "SpellLevelLabel": "Spell Level",
         "SpellLevelBase": "Base: {level}",
         "SpellLevelHeightened": "Heightened: +{heightened}",
+        "SpellNonCantripLabel": "Non-Cantrip",
         "SpellPreparedLabel": "Prepared",
         "SpellRangeLabel": "Range",
         "SpellRequirementsLabel": "Requirements",
@@ -3296,8 +3479,8 @@
                 "Label": "Size",
                 "Dimensions": "Dimensions",
                 "LinkToActorSize": {
-                    "Label": "Link to Actor Size",
-                    "Hint": "Keep this token's dimensions consistent with its actor's size category"
+                    "Link": "Link to Actor Size",
+                    "Unlink": "Unlink from Actor Size"
                 }
             }
         },
@@ -3335,7 +3518,6 @@
         "TraitAir": "Air",
         "TraitAlchemical": "Alchemical",
         "TraitAlchemist": "Alchemist",
-        "TraitAll": "All",
         "TraitAmphibious": "Amphibious",
         "TraitAmp": "Amp",
         "TraitAnadi": "Anadi",
@@ -3374,7 +3556,6 @@
         "TraitAuditory": "Auditory",
         "TraitAutomaton": "Automaton",
         "TraitAura": "Aura",
-        "TraitAxeVulnerability": "Axe Vulnerability",
         "TraitAzarketi": "Azarketi",
         "TraitAzata": "Azata",
         "TraitBackstabber": "Backstabber",
@@ -3391,6 +3572,7 @@
         "TraitBulwark": "Bulwark",
         "TraitCaligni": "Caligni",
         "TraitCantrip": "Cantrip",
+        "TraitCapacity": "Capacity",
         "TraitCapacity3": "Capacity 3",
         "TraitCapacity4": "Capacity 4",
         "TraitCapacity5": "Capacity 5",
@@ -3429,13 +3611,13 @@
         "TraitContract": "Contract",
         "TraitCouatl": "Couatl",
         "TraitCriticalFusion": "Critical Fusion",
-        "TraitCriticalHits": "Critical Hits",
         "TraitCurse": "Curse",
         "TraitCursed": "Cursed",
         "TraitCursebound": "Cursebound",
         "TraitDaemon": "Daemon",
         "TraitDarkness": "Darkness",
         "TraitDarvakka": "Darvakka",
+        "TraitDeadly": "Deadly",
         "TraitDeadlyD10": "Deadly d10",
         "TraitDeadlyD12": "Deadly d12",
         "TraitDeadlyD6": "Deadly d6",
@@ -3450,7 +3632,6 @@
         "TraitDeadly4D10": "Deadly 4d10",
         "TraitDeadly4D12": "Deadly 4d12",
         "TraitDeath": "Death",
-        "TraitDeathEffects": "Death Effects",
         "TraitDedication": "Dedication",
         "TraitDemon": "Demon",
         "TraitDero": "Dero",
@@ -3597,7 +3778,6 @@
         "TraitDescriptionIfrit": "A type of geniekin descended from a being from the Plane of Fire.",
         "TraitDescriptionIncarnate": "A spell with the incarnate trait is similar in theme to spells that summon creatures, but it doesn't conjure a minion with the summoned trait. Instead, when summoned, the incarnate creature takes its Arrive action when you finish Casting the Spell. At the end of your next turn, the incarnate creature can either Step, Stride, or take the action for another movement type it has (such as Climb or Burrow), and then takes its Depart action. The spell then ends. The names of specific Arrive and Depart actions are listed in italics after the word “Arrive” or “Depart” respectively, along with any traits. A creature summoned by an incarnate spell acts in your interests, directs its effects away from you and your allies as much as possible, and might listen to your requests, but ultimately makes its own decisions. If the spell indicates that the incarnate makes a decision, the GM determines what the incarnate would do. It might even become more inclined to do precisely as you wish over multiple summonings. The incarnate is not fully a creature. It can't take any other actions, nor can it be targeted or harmed by Strikes, spells, or other effects unless they would be able to target or end a spell effect (such as dispel magic). It has a size for the purposes of determining its placement for effects, but it doesn't block movement. If applicable, its effects use your spell DCs and spell attack roll modifier.",
         "TraitDescriptionIncapacitation": "An ability with this trait can take a character completely out of the fight or even kill them, and it's harder to use on a more powerful character. If a spell has the incapacitation trait, any creature of more than twice the spell's level treats the result of their check to prevent being incapacitated by the spell as one degree of success better, or the result of any check the spellcaster made to incapacitate them as one degree of success worse. If any other effect has the incapacitation trait, a creature of higher level than the item, creature, or hazard generating the effect gains the same benefits.",
-        "TraitDescriptionIncapacitationShort": "If the target level is higher than the ability level (or 2x spell level) treat the result as one degree better.",
         "TraitDescriptionIncorporeal": "An incorporeal creature or object has no physical form. It can pass through solid objects, including walls. When inside an object, an incorporeal creature can't perceive, attack, or interact with anything outside the object, and if it starts its turn in an object, it is slowed 1. Corporeal creatures can pass through an incorporeal creature, but they can't end their movement in its space. An incorporeal creature can't attempt Strength-based checks against physical creatures or objects-only against incorporeal ones-unless those objects have the ghost touch property rune. Likewise, a corporeal creature can't attempt Strength-based checks against incorporeal creatures or objects. Incorporeal creatures usually have immunity to effects or conditions that require a physical body, like disease, poison, and precision damage. They usually have resistance against all damage (except force damage and damage from Strikes with the ghost touch property rune), with double the resistance against non-magical damage.",
         "TraitDescriptionInfused": "You created an alchemical item with the infused trait using your infused reagents, and it has a limited time before it becomes inert. Any nonpermanent effects from your infused alchemical items, with the exception of afflictions such as slow-acting poisons, end when you make your daily preparations again.",
         "TraitDescriptionIngested": "This poison is delivered when drunk or eaten.",
@@ -3608,7 +3788,7 @@
         "TraitDescriptionInventor": "This indicates abilities from the inventor class.",
         "TraitDescriptionInvested": "A character can wear only 10 magical items that have the invested trait. None of the magical effects of the item apply if the character hasn't invested it, nor can it be activated, though the character still gains any normal benefits from wearing the physical item (like a hat keeping rain off their head).",
         "TraitDescriptionInvestigator": "This indicates abilities from the investigator class.",
-        "TraitDescriptionJoustingD6": "The weapon is suited for mounted combat with a harness or similar means. When mounted, if you moved at least 10 feet on the action before your attack, add a circumstance bonus to damage for that attack equal to the number of damage dice for the weapon. In addition, while mounted, you can wield the weapon in one hand, changing the damage die to the listed value.",
+        "TraitDescriptionJousting": "The weapon is suited for mounted combat with a harness or similar means. When mounted, if you moved at least 10 feet on the action before your attack, add a circumstance bonus to damage for that attack equal to the number of damage dice for the weapon. In addition, while mounted, you can wield the weapon in one hand, changing the damage die to the listed value.",
         "TraitDescriptionKashrishi": "A stout ancestry bearing distinctive crystal horns and inherent psychic abilities.",
         "TraitDescriptionKobold": "A creature with this trait is a member of the kobold ancestry.",
         "TraitDescriptionKickback": "A kickback weapon is extra powerful and difficult to use due to its high recoil. A kickback weapon deals 1 additional damage with all attacks. Firing a kickback weapon gives a -2 circumstance penalty to the attack roll, but characters with 14 or more Strength ignore the penalty. Attaching a kickback weapon to a deployed bipod, tripod, or other stabilizer can lower or negate this penalty.",
@@ -3631,7 +3811,7 @@
         "TraitDescriptionMinion": "Minions are creatures that directly serve another creature. A creature with this trait can use only 2 actions per turn, doesn't have reactions, and can't act when it's not your turn. Your minion acts on your turn in combat, once per turn, when you spend an action to issue it commands. For an animal companion, you Command an Animal; for a minion that's a spell or magic item effect, like a summoned minion, you Sustain a Spell or Sustain an Activation; if not otherwise specified, you issue a verbal command as a single action with the auditory and concentrate traits. If given no commands, minions use no actions except to defend themselves or to escape obvious harm. If left unattended for long enough, typically 1 minute, mindless minions usually don't act, animals follow their instincts, and sapient minions act how they please. A minion can't control other creatures.",
         "TraitDescriptionMisfortune": "A misfortune effect detrimentally alters how you roll your dice. You can never have more than one misfortune effect alter a single roll. If multiple misfortune effects would apply, the GM decides which is worse and applies it. If a fortune effect and a misfortune effect would apply to the same roll, the two cancel each other out, and you roll normally.",
         "TraitDescriptionModification": "A feat with this trait alters the construction of your innovation. If you have the reconfigure class feature, you can retrain such a feat more easily.",
-        "TraitDescriptionModular": "The weapon has multiple configurations that you can switch between using an Interact action. Typically, switching between configurations of a modular weapon allows it to deal different types of damage (listed in the trait, such as “modular B, P, or S”), though it's possible for a modular weapon's description to list more complicated configurations.",
+        "TraitDescriptionModular": "The weapon has multiple configurations that you can switch between using an Interact action. Typically, switching between configurations of a modular weapon allows it to deal different types of damage (listed in the trait, such as \"modular B, P, or S\"), though it's possible for a modular weapon's description to list more complicated configurations.",
         "TraitDescriptionMonk": "Abilities with this trait are from the monk class. A weapon with this trait is primarily used by monks.",
         "TraitDescriptionMonkWeapon": "Many monks learn to use these weapons.",
         "TraitDescriptionMorph": "Effects that slightly alter a creature's form have the morph trait. Any Strikes specifically granted by a morph effect are magical. You can be affected by multiple morph spells at once, but if you morph the same body part more than once, the second morph effect attempts to counteract the first (in the same manner as two polymorph effects, described in that trait). Your morph effects might also end if you are polymorphed and the polymorph effect invalidates or overrides your morph effect. The GM determines which morph effects can be used together and which can't.",
@@ -3641,7 +3821,7 @@
         "TraitDescriptionNagaji": "A traditionalist ancestry with reptilian features and serpentine heads.",
         "TraitDescriptionNecromancy": "Effects and magic items with this trait are associated with the necromancy school of magic, typically involving forces of life and death.",
         "TraitDescriptionNegative": "Effects with this trait heal undead creatures with negative energy, deal negative damage to living creatures, or manipulate negative energy.",
-        "TraitDescriptionNoisy": "This armor is loud and likely to alert others to your presence when you're using the Avoid Notice exploration activity.",
+        "TraitDescriptionNoisy": "This armor is loud and likely to alert others to your presence when you're using the Avoid Notice exploration activity. The armor's check penalty applies to Stealth checks even if you meet the required Strength score.",
         "TraitDescriptionNone": "This trait has no description.",
         "TraitDescriptionNonlethal": "Attacks with this weapon are nonlethal, and are used to knock creatures unconscious instead of kill them. You can use a nonlethal weapon to make a lethal attack with a -2 circumstance penalty.",
         "TraitDescriptionOath": "Oaths add an additional tenet to your code. You can usually have only one feat with this trait.",
@@ -3733,7 +3913,7 @@
         "TraitDescriptionVanara": "An inquisitive ancestry with primate-like features and prehensile tails.",
         "TraitDescriptionVersatile": "A versatile weapon can be used to deal a different type of damage than that listed in the Damage entry. This trait indicates the alternate damage type. For instance, a piercing weapon that is versatile S can be used to deal piercing or slashing damage. You choose the damage type each time you make an attack.",
         "TraitDescriptionVirulent": "Afflictions with the virulent trait are harder to remove. You must succeed at two consecutive saves to reduce a virulent affliction's stage by 1. A critical success reduces a virulent affliction's stage by only 1 instead of by 2.",
-        "TraitDescription": "An ancestry with snake-like features and powerful venom.",
+        "TraitDescriptionVishkanya": "An ancestry with snake-like features and powerful venom.",
         "TraitDescriptionVisual": "A visual effect can affect only creatures that can see it. This applies only to visible parts of the effect, as determined by the GM.",
         "TraitDescriptionVolley": "This ranged weapon is less effective at close distances. Your attacks against targets that are at a distance within the range listed take a -2 penalty.",
         "TraitDescriptionWater": "Effects with the water trait either manipulate or conjure water. Those that manipulate water have no effect in an area without water. Creatures with this trait consist primarily of water or have a magical connection to the element.",
@@ -3793,13 +3973,14 @@
         "TraitEvolution": "Evolution",
         "TraitExploration": "Exploration",
         "TraitExtradimensional": "Extradimensional",
+        "TraitFatalAim": "Fatal Aim",
         "TraitFatalAimD10": "Fatal Aim d10",
         "TraitFatalAimD12": "Fatal Aim d12",
+        "TraitFatal": "Fatal",
         "TraitFatalD10": "Fatal d10",
         "TraitFatalD12": "Fatal d12",
         "TraitFatalD8": "Fatal d8",
         "TraitFear": "Fear",
-        "TraitFearEffects": "Fear Effects",
         "TraitFetchling": "Fetchling",
         "TraitFey": "Fey",
         "TraitFiend": "Fiend",
@@ -3873,6 +4054,7 @@
         "TraitInventor": "Inventor",
         "TraitInvested": "Invested",
         "TraitInvestigator": "Investigator",
+        "TraitJousting": "Jousting",
         "TraitJoustingD6": "Jousting d6",
         "TraitKaiju": "Kaiju",
         "TraitKami": "Kami",
@@ -3921,11 +4103,8 @@
         "TraitNegative": "Negative",
         "TraitNoisy": "Noisy",
         "TraitNonlethal": "Nonlethal",
-        "TraitNonlethalAttacks": "Nonlethal Attacks",
-        "TraitNonmagicalAttacks": "Non-magical Attacks",
         "TraitNymph": "Nymph",
         "TraitOath": "Oath",
-        "TraitObjectImmunities": "Object Immunities",
         "TraitOccult": "Occult",
         "TraitOil": "Oil",
         "TraitOlfactory": "Olfactory",
@@ -3957,7 +4136,6 @@
         "TraitPrimal": "Primal",
         "TraitPropulsive": "Propulsive",
         "TraitProtean": "Protean",
-        "TraitProteanAnatomy": "Protean Anatomy",
         "TraitPsychopomp": "Psychopomp",
         "TraitPsyche": "Psyche",
         "TraitPsychic": "Psychic",
@@ -3965,6 +4143,7 @@
         "TraitRadiation": "Radiation",
         "TraitRage": "Rage",
         "TraitRakshasa": "Rakshasa",
+        "TraitRange": "Range",
         "TraitRange5": "Range 5 ft",
         "TraitRange10": "Range 10 ft",
         "TraitRange15": "Range 15 ft",
@@ -3978,9 +4157,15 @@
         "TraitRange80": "Range 80 ft",
         "TraitRange90": "Range 90 ft",
         "TraitRange100": "Range 100 ft",
+        "TraitRange110": "Range 110 ft",
         "TraitRange120": "Range 120 ft",
+        "TraitRange130": "Range 130 ft",
+        "TraitRange140": "Range 140 ft",
         "TraitRange150": "Range 150 ft",
+        "TraitRange160": "Range 160 ft",
+        "TraitRange170": "Range 170 ft",
         "TraitRange180": "Range 180 ft",
+        "TraitRange190": "Range 190 ft",
         "TraitRange200": "Range 200 ft",
         "TraitRange240": "Range 240 ft",
         "TraitRange300": "Range 300 ft",
@@ -4039,6 +4224,7 @@
         "TraitReach1000": "Reach 1,000 ft",
         "TraitReckless": "Reckless",
         "TraitReflection": "Reflection",
+        "TraitReload": "Reload",
         "TraitReload0": "Reload 0",
         "TraitReload1": "Reload 1",
         "TraitReload2": "Reload 2",
@@ -4049,9 +4235,8 @@
         "TraitRogue": "Rogue",
         "TraitSaggorak": "Saggorak",
         "TraitSahkil": "Sahkil",
-        "TraitSalt": "Salt",
-        "TraitSaltWater": "Salt Water",
         "TraitSamsaran": "Samsaran",
+        "TraitScatter": "Scatter",
         "TraitScatter5": "Scatter 5",
         "TraitScatter10": "Scatter 10",
         "TraitScatter15": "Scatter 15",
@@ -4080,12 +4265,10 @@
         "TraitSonic": "Sonic",
         "TraitSorcerer": "Sorcerer",
         "TraitSoulbound": "Soulbound",
-        "TraitSpellDeflection": "Spell Deflection",
         "TraitSpellheart": "Spellheart",
         "TraitSpellshot": "Spellshot",
         "TraitSpirit": "Spirit",
         "TraitSplash": "Splash",
-        "TraitSplashDamage": "Splash Damage",
         "TraitSplash10": "Splash 10 ft",
         "TraitSpriggan": "Spriggan",
         "TraitSprite": "Sprite",
@@ -4100,8 +4283,6 @@
         "TraitSummon": "Summon",
         "TraitSummoned": "Summoned",
         "TraitSummoner": "Summoner",
-        "TraitSwarmAttacks": "Swarm Attacks",
-        "TraitSwarmMind": "Swarm Mind",
         "TraitSwashbuckler": "Swashbuckler",
         "TraitSwarm": "Swarm",
         "TraitSweep": "Sweep",
@@ -4138,11 +4319,11 @@
         "TraitTroop": "Troop",
         "TraitTrueName": "True Name",
         "TraitTwin": "Twin",
+        "TraitTwoHand": "Two-Hand",
         "TraitTwoHandD10": "Two-Hand d10",
         "TraitTwoHandD12": "Two-Hand d12",
         "TraitTwoHandD6": "Two-Hand d6",
         "TraitTwoHandD8": "Two-Hand d8",
-        "TraitTwoHandedHelp": "This item can be wielded in two hands. To toggle the two-handed strike, click the two-handed trait in the strikes tab.",
         "TraitUnarmed": "Unarmed",
         "TraitUncommon": "Uncommon",
         "TraitUndead": "Undead",
@@ -4152,9 +4333,9 @@
         "TraitUntyped": "Untyped",
         "TraitUrdefhan": "Urdefhan",
         "TraitVampire": "Vampire",
-        "TraitVampireWeaknesses": "Vampire Weaknesses",
         "TraitVanara": "Vanara",
         "TraitVelstrac": "Velstrac",
+        "TraitVersatile": "Versatile",
         "TraitVersatileAcid": "Versatile Acid",
         "TraitVersatileB": "Versatile B",
         "TraitVersatileChaotic": "Versatile Chaotic",
@@ -4175,11 +4356,11 @@
         "TraitVirulent": "Virulent",
         "TraitVishkanya": "Vishkanya",
         "TraitVisual": "Visual",
+        "TraitVolley": "Volley",
         "TraitVolley20": "Volley 20 ft.",
         "TraitVolley30": "Volley 30 ft.",
         "TraitVolley50": "Volley 50 ft.",
         "TraitVorpalFear": "Vorpal Fear",
-        "TraitVulnerableToSunlight": "Vulnerable to Sunlight",
         "TraitWand": "Wand",
         "TraitWater": "Water",
         "TraitWayang": "Wayang",
@@ -4292,8 +4473,8 @@
             },
             "errorTargetToken": "Select at least one token.",
             "noDamageInfoForOutcome": "No damage information for outcome {outcome}.",
-            "shiftModifyDamageLabel": "Modifier:",
-            "shiftModifyDamageTitle": "Modify the rolled damage/healing"
+            "shiftModifyDamageLabel": "Adjust Damage/Healing",
+            "shiftModifyDamageTitle": "Adjust the rolled damage/healing"
         },
         "UnitPriceLabel": "Unit price",
         "UnprepareItemTitle": "Unprepare Item",
@@ -4660,10 +4841,7 @@
                 }
             },
             "flaming": {
-                "Name": "Flaming",
-                "Note": {
-                    "criticalSuccess": "When you critically succeed at a Strike with this weapon, you deal an additional [[/r {1d10}[persistent,fire]]] @UUID[Compendium.pf2e.conditionitems.lDVqvLKA6eF3Df60]{Persistent Fire Damage}."
-                }
+                "Name": "Flaming"
             },
             "frost": {
                 "Name": "Frost",
@@ -4708,7 +4886,7 @@
             "greaterDisrupting": {
                 "Name": "Greater Disrupting",
                 "Note": {
-                    "criticalSuccess": "On a critical hit, the undead creature must attempt a @Check[type:fortitude|dc:34|traits:incapacitation|name:Greater Disrupting Rune] save with the following effects. This is an incapacitation effect.<br /><br /><strong>Critical Success</strong> It's @UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{Enfeebled 1} until the end of your next turn.<br /><strong>Success</strong> It's @UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{Enfeebled 2} until the end of your next turn.<br /><strong>Failure</strong> It's @UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{Enfeebled 3} until the end of your next turn.<br /><strong>Critical Failure</strong> It's destroyed."
+                    "criticalSuccess": "On a critical hit, the undead creature must attempt a @Check[type:fortitude|dc:34|traits:incapacitation|name:Greater Disrupting Rune] save with the following effects. This is an incapacitation effect.<br /><strong>Critical Success</strong> It's @UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{Enfeebled 1} until the end of your next turn.<br /><strong>Success</strong> It's @UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{Enfeebled 2} until the end of your next turn.<br /><strong>Failure</strong> It's @UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{Enfeebled 3} until the end of your next turn.<br /><strong>Critical Failure</strong> It's destroyed."
                 }
             },
             "greaterExtending": {
@@ -4726,7 +4904,7 @@
             "greaterFlaming": {
                 "Name": "Greater Flaming",
                 "Note": {
-                    "criticalSuccess": "Fire damage dealt by this weapon (including the persistent fire damage) ignores the target's fire resistance. When you critically succeed at a Strike with this weapon, you deal an additional [[/r {2d10}[persistent,fire]]] @UUID[Compendium.pf2e.conditionitems.lDVqvLKA6eF3Df60]{Persistent Fire Damage}.",
+                    "criticalSuccess": "Fire damage dealt by this weapon (including the persistent fire damage) ignores the target's fire resistance. When you critically succeed at a Strike with this weapon, you deal an additional [[/r 2d10[persistent,fire]]].",
                     "success": "Fire damage dealt by this weapon ignores the target's fire resistance."
                 }
             },
@@ -4767,7 +4945,7 @@
                     "Bow": "<strong>Grievous Rune</strong> The Athletics check to pull the missile free is DC 20.",
                     "Brawling": "<strong>Grievous Rune</strong> The target takes a -4 circumstance penalty to its save.",
                     "Club": "<strong>Grievous Rune</strong> You can knock the target up to 15 feet away.",
-                    "Dart": "<strong>Grievous Rune</strong> The base persistent bleed damage increases to [[/r {2d6}[persistent,bleed]]] @UUID[Compendium.pf2e.conditionitems.lDVqvLKA6eF3Df60]{Persistent Bleed Damage}.",
+                    "Dart": "<strong>Grievous Rune</strong> The base persistent bleed damage increases to [[/r 2d6[persistent,bleed]]].",
                     "Flail": "<strong>Grievous Rune</strong> You move the target 5 feet. You can't move it away from you, but you can move it in another direction of your choice.",
                     "Hammer": "<strong>Grievous Rune</strong> You can also knock the target 5 feet away from you.",
                     "Knife": "<strong>Grievous Rune</strong> The target takes a -5-foot status penalty to its Speed while it has the @UUID[Compendium.pf2e.conditionitems.lDVqvLKA6eF3Df60]{Persistent Bleed Damage}.",
@@ -4785,7 +4963,7 @@
             "holy": {
                 "Name": "Holy",
                 "Note": {
-                    "criticalSuccess": "(<span class=\"pf2-icon\">R</span> command; once per day)<br /><br /><strong>Trigger</strong> You critically succeed at an attack roll against an evil creature with the weapon<br /><br /><strong>Effect</strong> You regain HP equal to double the evil creature's level. This is a good, positive, healing effect."
+                    "criticalSuccess": "(<span class=\"pf2-icon\">R</span> command; once per day)<br /><strong>Trigger</strong> You critically succeed at an attack roll against an evil creature with the weapon<br /><strong>Effect</strong> You regain HP equal to double the evil creature's level. This is a good, positive, healing effect."
                 }
             },
             "hopeful": {
@@ -4844,21 +5022,17 @@
             "unholy": {
                 "Name": "Unholy",
                 "Note": {
-                    "criticalSuccess": "(<span class=\"pf2-icon\">R</span> command; once per day)<br /><br /><strong>Trigger</strong> You critically succeed at an attack roll against a good creature with the weapon<br /><br /><strong>Effect</strong> The target takes @UUID[Compendium.pf2e.conditionitems.lDVqvLKA6eF3Df60]{Persistent Bleed Damage} equal to 1d8 per weapon damage die of the etched weapon."
+                    "criticalSuccess": "(<span class=\"pf2-icon\">R</span> command; once per day)<br /><strong>Trigger</strong> You critically succeed at an attack roll against a good creature with the weapon<br /><strong>Effect</strong> The target takes @UUID[Compendium.pf2e.conditionitems.lDVqvLKA6eF3Df60]{Persistent Bleed Damage} equal to 1d8 per weapon damage die of the etched weapon."
                 }
             },
             "vorpal": {
                 "Name": "Vorpal",
                 "Note": {
-                    "criticalSuccess": "(<span class=\"pf2-icon\">R</span> envision (death, incapacitation))<br /><br /><strong>Trigger</strong> You roll a natural 20 on a Strike with the weapon, critically succeed, and deal slashing damage. The target must have a head<br /><br /><strong>Effect</strong> The target must succeed at a @Check[type:fortitude|dc:37|traits:death,incapacitation]|name:Vorpal Rune] save or be decapitated. This kills any creature except ones that don't require a head to live. For creatures with multiple heads, this usually kills the creature only if you sever its last head."
+                    "criticalSuccess": "(<span class=\"pf2-icon\">R</span> envision (death, incapacitation))<br /><strong>Trigger</strong> You roll a natural 20 on a Strike with the weapon, critically succeed, and deal slashing damage. The target must have a head<br /><strong>Effect</strong> The target must succeed at a @Check[type:fortitude|dc:37|traits:death,incapacitation|name:Vorpal Rune] save or be decapitated. This kills any creature except ones that don't require a head to live. For creatures with multiple heads, this usually kills the creature only if you sever its last head."
                 }
             },
             "wounding": {
-                "Name": "Wounding",
-                "Note": {
-                    "criticalSuccess": "When you critically hit a creature with a wounding weapon, you deal an extra [[/r {1d6*2}[persistent,bleed]]] @UUID[Compendium.pf2e.conditionitems.lDVqvLKA6eF3Df60]{Persistent Bleed Damage}.",
-                    "success": "When you hit a creature with a wounding weapon, you deal an extra [[/r {1d6}[persistent,bleed]]] @UUID[Compendium.pf2e.conditionitems.lDVqvLKA6eF3Df60]{Persistent Bleed Damage}."
-                }
+                "Name": "Wounding"
             }
         },
         "WeaponPropertyStrikeDamageLabel": "Strike Damage",
@@ -5236,7 +5410,6 @@
         },
         "loot": {
             "EditLootLabel": "Configure Loot?",
-            "GMSettings": "GM Settings",
             "PermissionError": "A GM must be online in order to loot or stow an item.",
             "InsufficientCurrencyError": "Insufficient currency for purchase by {buyer}",
             "LootDescription": "Allows for distribution of coins across players",
@@ -5451,24 +5624,25 @@
             }
         },
         "DamageButton": {
-            "Full": "Apply full damage to selected tokens.",
+            "Full": "[Click] Apply full damage to selected tokens.",
             "FullContext": "Apply Damage",
             "FullShort": "Damage",
-            "Half": "Apply half damage to selected tokens.",
+            "Half": "[Click] Apply half damage to selected tokens.",
             "HalfContext": "Half Damage",
             "HalfShort": "Half",
-            "Double": "Apply double damage to selected tokens.",
+            "Double": "[Click] Apply double damage to selected tokens.",
             "DoubleContext": "Double Damage",
             "DoubleShort": "Double",
-            "Triple": "Apply triple damage to selected tokens.",
+            "Triple": "[Click] Apply triple damage to selected tokens.",
             "TripleContext": "Apply Triple Damage",
             "TripleShort": "Triple",
-            "ShieldBlock": "Toggle the shield block status of the selected tokens.",
+            "ShieldBlock": "[Click] Toggle the shield block status of the selected tokens before applying damage.",
             "ShieldBlockContext": "Shield Block",
             "ShieldBlockShort": "Block",
-            "Healing": "Apply full healing to selected tokens.",
+            "Healing": "[Click] Apply full healing to selected tokens.",
             "HealingContext": "Apply Healing",
-            "HealingShort": "Heal"
+            "HealingShort": "Heal",
+            "Adjust": "[Shift-Click] Adjust value before applying."
         }
     }
 }

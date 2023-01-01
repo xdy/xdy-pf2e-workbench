@@ -238,15 +238,6 @@
         "name": "单词或随机表后缀",
         "hint": "添加文本到新名称后缀，默认为“”（例如：'Creature'），如果这与随机表的名称一致，则该表的随机文本结果将用作后缀。 这将在任何随机词前缀被添加*之前*生效（见前面的选项）"
       },
-      "reminderIWR": {
-        "weakTo": " <strong>弱点</strong> ",
-        "is": "{name}是",
-        "immuneTo": " <strong>免疫</strong> ",
-        "name": "免疫/弱点/抗力提醒",
-        "resistantTo": " <strong>抗性</strong> ",
-        "hint": "勾选此项，受到伤害时提示免疫/弱点/抗力。目前只能处理“简单”伤害类型（如钝击或火焰，但“全部”或“物理”不行）",
-        "notComplex": "<br><br>注意：复杂的免疫、弱点和抗性比如全部、心灵、物理等暂不支持，如果目标拥有此类抗力/弱点，请手动处理。"
-      },
       "customPauseImage": {
         "hint": "自定义暂停图标。留空则使用系统默认的闹钟图标。",
         "name": "自定义暂停图标。"
@@ -470,10 +461,6 @@
         "note": "你确定要继续攻击吗？{actorName} {reason}，因此它不大有能力攻击……",
         "petrified": "被石化",
         "unconscious": "失去意识"
-      },
-      "reminderIWRCaveat": {
-        "hint": "勾选此项，在每条信息中提醒复杂抗力/弱点无法支持。",
-        "name": "勾选此项，在每条信息中提醒复杂抗力/弱点无法支持。"
       },
       "tokenAnimation": {
         "hint": "启用此项更改token的移动动画。如有Multilevel Tokens模组，可能会引发问题。",

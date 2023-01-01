@@ -4,7 +4,6 @@ import { TokenDocumentPF2e } from "@scene";
 import { CombatantPF2e } from "@module/encounter";
 import { ActorFlagsPF2e } from "@actor/data/base";
 import { ChatMessagePF2e } from "@module/chat-message";
-import { SpellPF2e } from "@item";
 import { ActorPF2e, CreaturePF2e } from "@actor";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
@@ -166,85 +165,6 @@ export async function reminderTargeting(message: ChatMessagePF2e) {
         const targets = message.user.targets;
         if (!targets || targets.size === 0) {
             ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderTargeting.note`));
-        }
-    }
-}
-
-// Deprecated with next pf2e release (and broken, won't fix)
-export async function reminderIWR(message: ChatMessagePF2e) {
-    if (game.user?.isGM && message.flags && message.user && message.user.targets && message.user.targets.size >= 1) {
-        const targets = message.user.targets;
-        const output: string[] = [];
-        for (const target of targets) {
-            let damageTypes: string[] = Object.keys(message.flags?.pf2e?.damageRoll?.types?.valueOf() || {}).flatMap(
-                (value, _index) => value
-            );
-            if (damageTypes.length === 0) {
-                const originUUID = message.flags?.pf2e?.origin?.uuid;
-                if (originUUID) {
-                    const origin: SpellPF2e | null = <SpellPF2e>await fromUuid(<string>originUUID);
-                    damageTypes = Object.values(origin.system.damage.value).map((x) => x.type.value);
-                }
-            }
-            if (damageTypes.length > 0) {
-                const traits = target.actor?.system.traits;
-                // Filter traits that are in damageTypes
-                const diTypes = traits?.di?.value
-                    ? traits?.di?.value
-                          ?.filter((value: string) => {
-                              return damageTypes.includes(value);
-                          })
-                          .map((trait) => {
-                              return trait?.charAt(0).toLocaleUpperCase() + trait.slice(1);
-                          })
-                    : [];
-                const dvTypes = traits?.dv
-                    ? traits?.dv
-                          .filter((trait) => damageTypes.includes(trait.type))
-                          .filter((trait) => trait.value)
-                          .map(
-                              (trait) =>
-                                  trait?.type.charAt(0).toLocaleUpperCase() + trait.type?.slice(1) + ":" + trait.value
-                          )
-                    : [];
-                const drTypes = traits?.dr
-                    ? traits?.dr
-                          .filter((trait) => damageTypes.includes(trait.type))
-                          .filter((trait) => trait.value)
-                          .map(
-                              (trait) =>
-                                  trait?.type.charAt(0).toLocaleUpperCase() + trait.type?.slice(1) + ":" + trait.value
-                          )
-                    : [];
-
-                if (diTypes.length > 0) {
-                    output.push(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderIWR.immuneTo`) + diTypes.join(", "));
-                }
-                if (dvTypes.length > 0) {
-                    output.push(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderIWR.weakTo`) + dvTypes.join(", "));
-                }
-                if (drTypes.length > 0) {
-                    output.push(
-                        game.i18n.localize(`${MODULENAME}.SETTINGS.reminderIWR.resistantTo`) + drTypes.join(", ")
-                    );
-                }
-                if (output.length > 0) {
-                    let caveat = "";
-                    if (game.settings.get(MODULENAME, "reminderIWRCaveat")) {
-                        caveat = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderIWR.notComplex`);
-                    }
-                    ChatMessage.create({
-                        content:
-                            game.i18n.format(`${MODULENAME}.SETTINGS.reminderIWR.is`, {
-                                name: target?.actor?.token?.name || "",
-                            }) +
-                            output +
-                            caveat,
-                        whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
-                        blind: true,
-                    }).then();
-                }
-            }
         }
     }
 }

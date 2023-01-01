@@ -46,7 +46,6 @@ import {
     autoReduceStunned,
     reminderBreathWeapon,
     reminderCannotAttack,
-    reminderIWR,
     reminderTargeting,
 } from "./feature/reminders";
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
@@ -133,7 +132,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "automatedAnimationOn") ||
         game.settings.get(MODULENAME, "reminderBreathWeapon") ||
         game.settings.get(MODULENAME, "reminderTargeting") ||
-        game.settings.get(MODULENAME, "reminderIWR") ||
         game.settings.get(MODULENAME, "reminderCannotAttack")
     ) {
         Hooks.on("createChatMessage", (message: ChatMessagePF2e) => {
@@ -157,10 +155,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
                 if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
                     reminderBreathWeapon(message).then();
-                }
-            } else {
-                if (game.settings.get(MODULENAME, "reminderIWR")) {
-                    reminderIWR(message).then();
                 }
             }
         });
@@ -403,7 +397,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
 
     if (
-        game.settings.get(MODULENAME, "playerItemsRarityColour") ||
         game.settings.get(MODULENAME, "castPrivateSpell") ||
         game.settings.get(MODULENAME, "addGmRKButtonToNpc") ||
         game.settings.get(MODULENAME, "quickQuantities") ||
@@ -418,18 +411,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 $html.find(".cast-spell").each((_i, e) => {
                     const $e = $(e);
                     $e.addClass(`xdy-pf2e-workbench-secret-spell`);
-                });
-            }
-
-            if (game.settings.get(MODULENAME, "playerItemsRarityColour")) {
-                $html.find(".item").each((_i, e) => {
-                    $(e).each((_i, e) => {
-                        const rarity = $(e).attr("data-item-rarity");
-                        const mystified = $(e).find("span").hasClass("gm-mystified-data");
-                        if (rarity && !mystified) {
-                            $(e).find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
-                        }
-                    });
                 });
             }
 

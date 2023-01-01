@@ -483,19 +483,6 @@
         "hint": "Check to allow eidolons that are dead/have no hp to attack without a reminder.",
         "name": "Eidolons can attack while dead"
       },
-      "reminderIWR": {
-        "hint": "Check to show reminder for IWR when damage is taken. Currently only handles 'simple' damage types (e.g. handles ones like 'Bludgeoning' or 'Fire', not ones like 'All' or 'Physical')",
-        "immuneTo": " <strong>Immune</strong> to ",
-        "is": "{name} is",
-        "name": "IWR reminder",
-        "notComplex": "<br><br>NOTE: Complex IWR such as All, Mental, Physical, etc, are not yet supported, check manually if you target might have such.",
-        "resistantTo": " <strong>Resistant</strong> to ",
-        "weakTo": " <strong>Weak</strong> to "
-      },
-      "reminderIWRCaveat": {
-        "hint": "Check to show warning about complex IWR not being supported in each message.",
-        "name": "Check to show warning about complex IWR not being supported in each message."
-      },
       "remindersSettings": {
         "hint": "Enable and configure various reminders",
         "label": "Manage Reminders Settings",

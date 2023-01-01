@@ -193,11 +193,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your
       character. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or
       dazzled. Self has Blind-Fight.
-    * (Deprecated, will break with the next pf2e system release. You know the one that contains proper IWR handling
-      making this Workbench feature obsolete...) Option to create an IWR (Immunity, Weakness, Resistance) reminder
-      message after a damage roll against a target with an IWR that matches damage types of the attacking weapon or
-      spell. NOTE: Currently only handles 'simple' IWR, it doesn't handle things like 'All', 'Physical', 'All (except
-      force)', etc.
 
 ## Installation
 

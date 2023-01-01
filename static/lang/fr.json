@@ -431,19 +431,6 @@
         "hint": "Cliquez pour permettre aux eidolons qui sont morts/n'ont plus de PV d'attaquer sans rappel.",
         "name": "Les eidolons peuvent attaquer alors qu'ils sont morts"
       },
-      "reminderIWR": {
-        "hint": "Activer pour montrer un rappel des résistances/faiblesses/immunités lorsque les dégâts sont appliqués. Ne prend en compte actuellement que les types de dégâts simples (ex : contondant ou feu, pas ceux comme 'tous' ou 'Physique')",
-        "immuneTo": " <strong>Immunité</strong> : ",
-        "is": "{name} est",
-        "name": "Rappel FIR",
-        "notComplex": "<br><br>NOTE : Les Immunités/Faiblesses/Résistances complexes (comme Tous, mental, physique, etc...) ne sont pas encore prises en compte. Vérifiez manuellement si vos cibles pourraient en avoir de telles.",
-        "resistantTo": " <strong>Résistance</strong> : ",
-        "weakTo": " <strong>Faiblesse</strong> : "
-      },
-      "reminderIWRCaveat": {
-        "hint": "Cliquez pour afficher un avertissement à propos des FIR complexes qui ne sont pas supportées dans chaque message.",
-        "name": "Cliquez pour afficher un avertissement à propos des FIR complexes qui ne sont pas supportées dans chaque message."
-      },
       "remindersSettings": {
         "hint": "Activer et configurer des pense-bêtes divers",
         "label": "Régler les pense-bêtes",

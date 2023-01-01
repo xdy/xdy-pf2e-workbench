@@ -354,15 +354,6 @@
         "hint": "Permite que Eidolons que estejam mortos ou sem PV possam atacar sem mostrar o lembrete.",
         "name": "Ignorar lembrete para Eidolons"
       },
-      "reminderIWR": {
-        "hint": "Mostra lembrete para Imunidades, Fraquezas e Resistências quando dano é recebido. Atualmente só funciona com tipos \\\"simples\\\", como \\\"fogo\\\" e \\\"contundente\\\", mas não \\\"todo dano\\\" ou \\\"Físico\\\".",
-        "immuneTo": " <strong>Imune</strong> a ",
-        "is": "{name} é",
-        "name": "Imunidades, Fraquezas e Resistências",
-        "resistantTo": " <strong>Resistente</strong> a ",
-        "weakTo": " <strong>Fraco</strong> a ",
-        "notComplex": "<br><br>NOTA: \"A tudo\", mental, fisico e outras complexidades devem ser verificadas na ficha do alvo."
-      },
       "remindersSettings": {
         "hint": "Configure vários lembretes.",
         "label": "Configurações de Lembretes",
@@ -386,10 +377,6 @@
       "customPauseText": {
         "name": "Texto customizado para usar no texto de Pause.",
         "hint": "Texto customizado para usar no texto de Pause. Deixe vazio para utilizar o texto padrão 'Jogo Pausado'."
-      },
-      "reminderIWRCaveat": {
-        "name": "Mostrar Alerta de verificação de certas Fraquezas/Imunidades/Resistencias, não suportados em cada mensagem.",
-        "hint": "Mostrar Alerta de verificação de certas Fraquezas/Imunidades/Resistencias, não suportados em cada mensagem."
       },
       "applyClumsyIfWieldingLargerWeapon": {
         "hint": "Automaticamente aplica Desajeitado se a Arma for maior de quem á estiver segurando.",
