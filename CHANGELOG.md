@@ -1,3 +1,10 @@
+# [4.27.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.26.3...v4.27.0) (2023-01-02)
+
+
+### Features
+
+* Localization for Whirlwind Strike macro. The macro also now uses the first equipped weapon if there are no reach weapons. ([8db55f0](https://github.com/xdy/xdy-pf2e-workbench/commit/8db55f00f1230e29dffaa5903e92071995f2c619))
+
 ## [4.26.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.26.2...v4.26.3) (2023-01-02)
 
 
