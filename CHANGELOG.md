@@ -1,3 +1,10 @@
+# [4.28.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.27.0...v4.28.0) (2023-01-02)
+
+
+### Features
+
+* Localization for Basic Action Macros. ([20b2ff8](https://github.com/xdy/xdy-pf2e-workbench/commit/20b2ff8087989a2d40fe68563e4cc5f3bf286554))
+
 # [4.27.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.26.3...v4.27.0) (2023-01-02)
 
 
