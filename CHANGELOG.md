@@ -1,3 +1,10 @@
+## [4.28.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.28.0...v4.28.1) (2023-01-02)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([29decdf](https://github.com/xdy/xdy-pf2e-workbench/commit/29decdffe783de6292b3293112d61ae12ad50712))
+
 # [4.28.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.27.0...v4.28.0) (2023-01-02)
 
 
