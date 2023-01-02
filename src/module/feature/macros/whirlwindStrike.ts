@@ -1,3 +1,5 @@
+import { MODULENAME } from "../../xdy-pf2e-workbench";
+
 function validTarget(r1, r2) {
     return (r1.right > r2.right ? r2.right : r1.right) <= (r1.left < r2.left ? r2.left : r1.left)
         ? false
@@ -19,23 +21,34 @@ export async function whirlwindStrike(_token, msToSleepBetweenAttacks = 1001) {
         _token.actor.items.find((feat) => feat.slug === "whirlwind-strike") &&
         aura;
     if (canWhirlwind) {
-        await ChatMessage.create({ content: _token.name + " Whirlwind Strike starts!" });
-        const reachWeapon = _token.actor?.system?.actions.find((w) => w.item.system?.traits.value.includes("reach"));
+        await ChatMessage.create({
+            content: game.i18n.format(`${MODULENAME}.macros.whirlwindStrike.starts`, { name: _token.name }),
+        });
+        const heldWeapons = _token.actor?.system?.actions
+            .filter((w) => w.item.type === "weapon")
+            .filter((w) => w.item.system.equipped);
+        const weapon = heldWeapons?.find((w) => w.item.system?.traits.value.includes("reach")) || heldWeapons.first;
         // @ts-ignore
-        for (const target of canvas.tokens.objects.children
+        const targets = canvas.tokens.objects.children
             .filter((t) => t.isVisible)
             .filter((token) => token.document.disposition === -1)
-            .filter((token) => validTarget(token.bounds, aura.bounds))) {
+            .filter((token) => validTarget(token.bounds, aura.bounds));
+        for (const target of targets) {
             game.user.targets.clear();
             game.user.targets.add(target);
-            await reachWeapon?.attack();
+            await weapon?.attack();
             if (msToSleepBetweenAttacks > 0) {
                 await new Promise((resolve) => setTimeout(resolve, msToSleepBetweenAttacks));
             }
         }
-        await ChatMessage.create({ content: _token.name + " Whirlwind strike ends!" });
+        await ChatMessage.create({
+            content: game.i18n.format(`${MODULENAME}.macros.whirlwindStrike.ends`, {
+                name: _token.name,
+                targets: targets.length,
+            }),
+        });
     } else {
-        ui.notifications.error("Select a token with Whirlwind Strike (and the reach 'aura')!");
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.macros.whirlwindStrike.error`));
     }
 }
 
