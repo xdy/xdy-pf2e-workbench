@@ -224,30 +224,18 @@ export class SkillAction {
     }
 
     buildVariants(data) {
+        const assurances = this.actor.items.filter((x: any) => x.slug === "assurance");
         for (const skill of this.getSkills(data.proficiencyKey)) {
-            const requiredRank = data.requiredRank ?? 0;
-            const rank = skill.rank;
-            const hasRank = rank >= requiredRank || (requiredRank === 1 && this.actorHasItem("clever-improviser"));
-            if (!hasRank) {
-                return;
-            }
-
-            this.variants.addBasicVariant(skill, data.extra, data.label);
-
-            // if (
-            //     this.hasTrait("attack") &&
-            //     this.pf2eItem.slug !== "escape" // For some reason escape MAP doesn't work
-            // ) {
-            //     this.variants.addMapVariant(skill, data.extra, -5);
-            //     this.variants.addMapVariant(skill, data.extra, -10);
-            // }
-
             if (
-                this.actor.items
-                    .filter((x: any) => x.slug === "assurance")
-                    .filter((x: any) => x.flags.pf2e.rulesSelections.assurance === skill.slug)?.length > 0
+                skill.rank >= (data.requiredRank ?? 0) ||
+                ((data.requiredRank ?? 0) === 1 && this.actorHasItem("clever-improviser"))
             ) {
-                this.variants.addAssuranceVariant(skill, data.extra);
+                this.variants.addBasicVariant(skill, data.extra, data.label);
+                if (assurances.filter((x: any) => x.flags.pf2e.rulesSelections.assurance === skill.slug)?.length > 0) {
+                    this.variants.addAssuranceVariant(skill, data.extra);
+                }
+            } else {
+                return;
             }
         }
     }

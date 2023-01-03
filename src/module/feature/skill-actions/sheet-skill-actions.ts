@@ -66,36 +66,6 @@ function renderActionsList(skillActions: SkillActionCollection, actor: Actor) {
     return $skillActions;
 }
 
-function hideDuplicateActions(toHideActions: string[]) {
-    const actionIds: string[] = [];
-    // if (game.settings.get(MODULENAME, "skillActionsHideDuplicates") !== "donothide") {
-    const list = Array.from(document.getElementsByClassName("item action"))
-        .filter((x) => x.getAttribute("data-item-id"))
-        .map((x) => x.getAttribute("data-item-id"));
-
-    for (const value of list) {
-        if (value) {
-            actionIds.push(value);
-        }
-    }
-
-    const intersection = actionIds.filter((element) => toHideActions.includes(element));
-    if (intersection.length > 0) {
-        for (const s of intersection) {
-            // if (game.settings.get(MODULENAME, "skillActionsHideDuplicates") === "hideActions") {
-            Array.from(document.getElementsByClassName("item action"))
-                // .filter((x) => x.getAttribute("data-item-id"))
-                .filter((x) => x.getAttribute("data-item-id") === s)[0]["style"].display = "none";
-            // } else {
-            //     Array.from(document.getElementsByClassName("item action"))
-            //         // .filter((x) => x.getAttribute("data-action-id"))
-            //         .filter((x) => x.getAttribute("data-action-id") === s)[0]["style"].display = "none";
-            // }
-        }
-    }
-    // }
-}
-
 export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElement>) {
     if (app.actor.type !== "character") {
         return;
@@ -104,7 +74,6 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
     const encounterActions = new SkillActionCollection();
     const explorationActions = new SkillActionCollection();
     const downtimeActions = new SkillActionCollection();
-    const toHideActions: string[] = [];
 
     SkillActionCollection.allActionsFor(app.actor).forEach(function (action) {
         if (action.hasTrait("downtime")) {
@@ -115,12 +84,6 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
             } else {
                 encounterActions.add(action);
             }
-        }
-        const action1 = app.actor.itemTypes.action;
-        // @ts-ignore
-        const item = action1.find((x) => x.system.slug === action.data.slug);
-        if (item) {
-            toHideActions.push(item.id);
         }
     });
 
@@ -143,8 +106,6 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
                 explorationTop.before($exploration);
                 downtimeTop.before($downtime);
 
-                hideDuplicateActions(toHideActions);
-
                 break;
             }
             case "bottom": {
@@ -156,8 +117,6 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
                 encounterBottom.after($encounter);
                 explorationBottom.after($exploration);
                 downtimeBottom.after($downtime);
-
-                hideDuplicateActions(toHideActions);
 
                 break;
             }
