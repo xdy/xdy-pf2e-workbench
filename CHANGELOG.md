@@ -1,3 +1,10 @@
+# [4.29.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.28.1...v4.29.0) (2023-01-03)
+
+
+### Features
+
+* Basic Action Macros buttons now sorted by localized action name. ([cb84862](https://github.com/xdy/xdy-pf2e-workbench/commit/cb84862680e58d8eec0d29868382f52e32a9056f))
+
 ## [4.28.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.28.0...v4.28.1) (2023-01-02)
 
 
