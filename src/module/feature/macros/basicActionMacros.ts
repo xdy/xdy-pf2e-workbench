@@ -1,10 +1,11 @@
 // Originally from ApoApostolov#4622, modified by me. Included with permission.
+// noinspection CssUnresolvedCustomProperty,CssUnknownTarget
 
-// noinspection CssUnresolvedCustomProperty
 /* eslint-disable no-undef */
 // TODO Fix the ts-ignore and any in this.
 
 import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { ActorPF2e } from "@actor";
 
 let selectedActor;
 
@@ -366,16 +367,19 @@ export function basicActionMacros() {
         return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
     }
 
-    const actors =
-        game?.actors.filter((x) => x.isOfType("character") || x.isOfType("familiar") || x.isOfType("npc")) || [];
+    const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.data.tokens
+            .map((x) => x.actor)
+            .filter((x) => x)
+            .filter((x) => x?.isOfType("character") || x?.isOfType("familiar") || x?.isOfType("npc")) || [];
 
     const party = actors.filter((x) => x.hasPlayerOwner).filter((x) => x.alliance === "party");
     const partyIds = party.map((actor) => actor.id) || [];
 
-    const actorSkills = createMapOfSkillsPerActor(party);
+    const actorSkills = createMapOfSkillsPerActor(actors);
 
     if (partyIds.includes(selectedActor.id)) {
-        getBestBonuses(actorSkills, partyIds, actionList);
+        const partySkills = createMapOfSkillsPerActor(party);
+        getBestBonuses(partySkills, partyIds, actionList);
     }
 
     const columns = 1 + ~~((actionList.length - 1) / 14);
