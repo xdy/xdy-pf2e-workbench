@@ -1,3 +1,10 @@
+## [4.29.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.1...v4.29.2) (2023-01-03)
+
+
+### Bug Fixes
+
+* Include latest translations. ([fa1b7d4](https://github.com/xdy/xdy-pf2e-workbench/commit/fa1b7d4bc3026cb1fa7a00a88520a129f48b99e8))
+
 ## [4.29.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.0...v4.29.1) (2023-01-03)
 
 
