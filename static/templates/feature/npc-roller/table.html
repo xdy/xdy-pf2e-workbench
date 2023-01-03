@@ -3,37 +3,37 @@
       {{#with (lookup data key) as |parent|}}
       <tr>
           <td>Level</td>
-          {{#if (hasKey parent "extreme")}}<td>Extreme</td>{{/if}}
-          {{#if (hasKey parent "high")}}<td>High</td>{{/if}}
-          {{#if (hasKey parent "moderate")}}<td>Moderate</td>{{/if}}
-          {{#if (hasKey parent "low")}}<td>Low</td>{{/if}}
-          {{#if (hasKey parent "terrible")}}<td>Terrible</td>{{/if}}
-          {{#if (hasKey parent "abysmal")}}<td>Abysmal</td>{{/if}}
-          {{#if (hasKey parent "limited")}}<td>Limited</td>{{/if}}
-          {{#if (hasKey parent "unlimited")}}<td>Unlimited</td>{{/if}}
+          {{#if (xdy_hasKey parent "extreme")}}<td>Extreme</td>{{/if}}
+          {{#if (xdy_hasKey parent "high")}}<td>High</td>{{/if}}
+          {{#if (xdy_hasKey parent "moderate")}}<td>Moderate</td>{{/if}}
+          {{#if (xdy_hasKey parent "low")}}<td>Low</td>{{/if}}
+          {{#if (xdy_hasKey parent "terrible")}}<td>Terrible</td>{{/if}}
+          {{#if (xdy_hasKey parent "abysmal")}}<td>Abysmal</td>{{/if}}
+          {{#if (xdy_hasKey parent "limited")}}<td>Limited</td>{{/if}}
+          {{#if (xdy_hasKey parent "unlimited")}}<td>Unlimited</td>{{/if}}
       </tr>
       {{/with}}
   </thead>
   <tbody>
       {{#each (lookup data key)}}
-      <tr {{#includes ../selected level}}class="selected"{{/includes}}>
+      <tr {{#xdy_includes ../selected level}}class="selected"{{/xdy_includes}}>
           <td>{{level}}</td>
 
-          {{#ifne extreme undefined}} {{> rollAppCell value=extreme formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+          {{#xdy_ifne extreme xdy_undefined}} {{> rollAppCell value=extreme formulaBase=../formulaBase rollName=../rollName}} {{/xdy_ifne}}
 
-          {{#ifne high undefined}} {{> rollAppCell value=high formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+          {{#xdy_ifne high xdy_undefined}} {{> rollAppCell value=high formulaBase=../formulaBase rollName=../rollName}} {{/xdy_ifne}}
 
-          {{#ifne moderate undefined}} {{> rollAppCell value=moderate formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+          {{#xdy_ifne moderate xdy_undefined}} {{> rollAppCell value=moderate formulaBase=../formulaBase rollName=../rollName}} {{/xdy_ifne}}
 
-          {{#ifne low undefined}} {{> rollAppCell value=low formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+          {{#xdy_ifne low xdy_undefined}} {{> rollAppCell value=low formulaBase=../formulaBase rollName=../rollName}} {{/xdy_ifne}}
 
-          {{#ifne terrible undefined}} {{> rollAppCell value=terrible formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+          {{#xdy_ifne terrible xdy_undefined}} {{> rollAppCell value=terrible formulaBase=../formulaBase rollName=../rollName}} {{/xdy_ifne}}
 
-          {{#ifne abysmal undefined}} {{> rollAppCell value=abysmal formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+          {{#xdy_ifne abysmal xdy_undefined}} {{> rollAppCell value=abysmal formulaBase=../formulaBase rollName=../rollName}} {{/xdy_ifne}}
 
-          {{#ifne limited undefined}} {{> rollAppCell value=limited formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+          {{#xdy_ifne limited xdy_undefined}} {{> rollAppCell value=limited formulaBase=../formulaBase rollName=../rollName}} {{/xdy_ifne}}
 
-          {{#ifne unlimited undefined}} {{> rollAppCell value=unlimited formulaBase=../formulaBase rollName=../rollName}} {{/ifne}}
+          {{#xdy_ifne unlimited xdy_undefined}} {{> rollAppCell value=unlimited formulaBase=../formulaBase rollName=../rollName}} {{/xdy_ifne}}
       </tr>
       {{/each}}
   </tbody>

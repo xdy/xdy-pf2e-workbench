@@ -34,7 +34,7 @@
                     {{#each category.availableOptions as |option|}}
                     <input type="radio"
                            name='{{#if entry.name}}{{entry.name}}{{else}}{{category.name}}{{/if}}'
-                           value='{{option}}' {{#ifeq option entry.defaultValue}} Checked {{/ifeq}}> {{option}}
+                           value='{{option}}' {{#xdy_ifeq option entry.defaultValue}} Checked {{/xdy_ifeq}}> {{option}}
                     {{/each}}
                 </div>
             </div>

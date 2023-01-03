@@ -579,30 +579,27 @@ Hooks.once("ready", () => {
         loadSkillActions().then();
     }
 
-    // @ts-ignore
-    // game.i18n.translations.GAME.Paused = game.settings.get(MODULENAME, "customPauseText");
-
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
 
 function registerHandlebarsHelpers() {
-    Handlebars.registerHelper("includes", function (array: any[], value: any, options: any) {
+    Handlebars.registerHelper("xdy_includes", function (array: any[], value: any, options: any) {
         if (array.includes(value)) {
             return options.fn(this);
         } else {
             return options.inverse(this);
         }
     });
-    Handlebars.registerHelper("ifeq", function (v1, v2, options) {
+    Handlebars.registerHelper("xdy_ifeq", function (v1, v2, options) {
         if (v1 === v2) return options.fn(this);
         else return options.inverse();
     });
-    Handlebars.registerHelper("ifne", function (v1, v2, options) {
+    Handlebars.registerHelper("xdy_ifne", function (v1, v2, options) {
         if (v1 !== v2) return options.fn(this);
         else return options.inverse();
     });
 
-    Handlebars.registerHelper("isNaN", function (context, options) {
+    Handlebars.registerHelper("xdy_isNaN", function (context, options) {
         if (isNaN(context) && !(typeof context === "string")) {
             return options.fn(this);
         } else {
@@ -610,11 +607,11 @@ function registerHandlebarsHelpers() {
         }
     });
 
-    Handlebars.registerHelper("undefined", function () {
+    Handlebars.registerHelper("xdy_undefined", function () {
         return undefined;
     });
 
-    Handlebars.registerHelper("hasKey", function (context, key) {
+    Handlebars.registerHelper("xdy_hasKey", function (context, key) {
         for (const prop of context) {
             if (Object.getOwnPropertyDescriptor(prop, key)) {
                 return true;
