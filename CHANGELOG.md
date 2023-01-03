@@ -1,3 +1,10 @@
+## [4.29.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.0...v4.29.1) (2023-01-03)
+
+
+### Bug Fixes
+
+* Basic Action Macros now only cares about actors on the current scene, and only checks if best among party members. ([7d88021](https://github.com/xdy/xdy-pf2e-workbench/commit/7d88021ed77944ed4e77e62caaa72b564be41fe9))
+
 # [4.29.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.28.1...v4.29.0) (2023-01-03)
 
 
