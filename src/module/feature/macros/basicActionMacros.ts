@@ -343,6 +343,17 @@ export function basicActionMacros() {
         },
     ];
 
+    // Sort actionList
+    actionList.sort((a, b) => {
+        if (a.name < b.name) {
+            return -1;
+        }
+        if (a.name > b.name) {
+            return 1;
+        }
+        return 0;
+    });
+
     // @ts-ignore
     const actionDialog = window.actionDialog;
     if (actionDialog?.rendered) {
