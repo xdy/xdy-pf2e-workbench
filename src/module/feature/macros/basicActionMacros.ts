@@ -345,15 +345,7 @@ export function basicActionMacros() {
     ];
 
     // Sort actionList
-    actionList.sort((a, b) => {
-        if (a.name < b.name) {
-            return -1;
-        }
-        if (a.name > b.name) {
-            return 1;
-        }
-        return 0;
-    });
+    actionList.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
     // @ts-ignore
     const actionDialog = window.actionDialog;
@@ -367,7 +359,8 @@ export function basicActionMacros() {
         return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
     }
 
-    const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.data.tokens
+    // @ts-ignore
+    const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
             .map((x) => x.actor)
             .filter((x) => x)
             .filter((x) => x?.isOfType("character") || x?.isOfType("familiar") || x?.isOfType("npc")) || [];
