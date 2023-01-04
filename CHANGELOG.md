@@ -1,3 +1,10 @@
+## [4.29.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.3...v4.29.4) (2023-01-04)
+
+
+### Bug Fixes
+
+* Better sort for Basic Action Macro. ([d84419d](https://github.com/xdy/xdy-pf2e-workbench/commit/d84419d07feab03f597be1ae651459aab1b2b083)), closes [#602](https://github.com/xdy/xdy-pf2e-workbench/issues/602)
+
 ## [4.29.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.2...v4.29.3) (2023-01-04)
 
 
