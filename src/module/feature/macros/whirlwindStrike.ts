@@ -1,4 +1,5 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { WeaponPF2e } from "@item";
 
 function validTarget(r1, r2) {
     return (r1.right > r2.right ? r2.right : r1.right) <= (r1.left < r2.left ? r2.left : r1.left)
@@ -14,26 +15,38 @@ function validTarget(r1, r2) {
 
 export async function whirlwindStrike(_token, msToSleepBetweenAttacks = 1001) {
     const aura = _token.auras.get("xdy-workbench-reach-aura");
+    const heldWeapons =
+        _token.actor?.system?.actions
+            .filter((w) => w.item.type === "weapon")
+            .filter((w) => !w.item.system.range)
+            .filter((w) => (<WeaponPF2e>w.item).isHeld) || [];
+
+    const weapon =
+        heldWeapons?.find((w) => w.item.system?.traits.value.includes("reach")) || heldWeapons.length > 0
+            ? heldWeapons[0]
+            : null;
+    // @ts-ignore
+    const targets = canvas.tokens.objects.children
+        .filter((t) => validTarget(t.bounds, aura.bounds))
+        .filter((t) => !t.actor.isDead)
+        .filter((t) => t.isVisible)
+        .filter((t) => t.document.disposition === -1)
+        .filter((t) => t.id !== _token.id);
     const canWhirlwind =
         _token &&
         _token.actor &&
         _token.actor.items &&
         _token.actor.items.find((feat) => feat.slug === "whirlwind-strike") &&
-        aura;
+        aura &&
+        weapon &&
+        targets &&
+        targets.length > 0;
     if (canWhirlwind) {
         await ChatMessage.create({
             content: game.i18n.format(`${MODULENAME}.macros.whirlwindStrike.starts`, { name: _token.name }),
         });
-        const heldWeapons = _token.actor?.system?.actions
-            .filter((w) => w.item.type === "weapon")
-            .filter((w) => w.item.system.equipped);
-        const weapon = heldWeapons?.find((w) => w.item.system?.traits.value.includes("reach")) || heldWeapons.first;
-        // @ts-ignore
-        const targets = canvas.tokens.objects.children
-            .filter((t) => t.isVisible)
-            .filter((token) => token.document.disposition === -1)
-            .filter((token) => validTarget(token.bounds, aura.bounds));
-        for (const target of targets) {
+        for (let atk = 0; atk < targets.length; atk++) {
+            const target = targets[atk];
             game.user.targets.clear();
             game.user.targets.add(target);
             await weapon?.attack();
