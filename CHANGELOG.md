@@ -1,3 +1,10 @@
+## [4.29.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.2...v4.29.3) (2023-01-04)
+
+
+### Bug Fixes
+
+* WhirlwindStrike macro now ignores dead potential targets and *actually* uses the first non-reach non-ranged weapon if no reach weapon is wielded. ([557e403](https://github.com/xdy/xdy-pf2e-workbench/commit/557e40361ee6ddd1166e76f5d4253c2ba91293e3))
+
 ## [4.29.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.1...v4.29.2) (2023-01-03)
 
 
