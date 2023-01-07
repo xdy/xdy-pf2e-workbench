@@ -88,6 +88,7 @@ export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
                 },
                 {}
             ).then();
+            ui.notifications.info(actionsMessage);
         }
     }
 }
