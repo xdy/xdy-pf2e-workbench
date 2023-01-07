@@ -1,3 +1,10 @@
+## [4.29.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.4...v4.29.5) (2023-01-07)
+
+
+### Bug Fixes
+
+* If the option to collapse chat cards is enabled, collapse more types of messages. Show remaining actions in a notification as well as in chat. ([14a6193](https://github.com/xdy/xdy-pf2e-workbench/commit/14a6193625dc25fc73c2d4f2762d77ae1caaf317))
+
 ## [4.29.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.3...v4.29.4) (2023-01-04)
 
 
