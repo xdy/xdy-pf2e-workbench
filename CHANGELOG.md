@@ -1,3 +1,10 @@
+# [4.30.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.5...v4.30.0) (2023-01-07)
+
+
+### Features
+
+* Updated Inspire Defense and Inspire Courage auras to set the level of the effect they grant, which means the resistances are now set correctly. Also gave them and the Bane and Bless auras a link to the source spell. ([37b990c](https://github.com/xdy/xdy-pf2e-workbench/commit/37b990cfc0c841fdd1d53bcce1a416cea4ebd782))
+
 ## [4.29.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.29.4...v4.29.5) (2023-01-07)
 
 
