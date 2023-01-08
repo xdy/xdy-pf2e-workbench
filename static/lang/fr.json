@@ -22,7 +22,7 @@
       "Settings": {
         "Position": {
           "name": "Position des actions de compétence",
-          "hint": "NOTE ! La présence des actions de compétence rend la Feuille de personnage très lourde à charger pour la plupart des gens. La position dans la page des compétences : Haut : juste après les Frappes, Bas : À la fin",
+          "hint": "La position sur la page des compétences : Haut : juste après les Frappes, Bas : À la fin",
           "top": "Haut",
           "bottom": "Bas",
           "disabled": "Désactivé"
