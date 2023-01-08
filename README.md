@@ -113,7 +113,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       messages are expanded if they are damage cards.
     * Option to add all skill actions to the character Actions page. (This feature has been taken over from the
       discontinued https://github.com/jamespdaily/pf2e-sheet-skill-actions/ module. Thanks James!)
-        * NOTE! Skill actions currently make character sheets *very* slow to load for most people.
         * The module will hide any skill actions that you're currently not trained in.
         * Actions that require a feat (e.g. Bon Mot) will not show up unless you actually have the feat.
     * Option to set a custom pause text and image, as well as to move it's position to center of screen.
