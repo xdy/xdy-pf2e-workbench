@@ -74,7 +74,6 @@
       "private": false,
       "flags": {}
     }
-
   ],
   "languages": [
     {
@@ -103,6 +102,11 @@
       "lang": "de",
       "name": "Deutsch",
       "path": "lang/de.json"
+    },
+    {
+      "lang": "zh-Hant",
+      "name": "漢語（正體字）",
+      "path": "lang/zh_Hant.json"
     }
   ],
   "authors": [
