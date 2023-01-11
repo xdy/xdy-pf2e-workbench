@@ -188,9 +188,9 @@ export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
 
         const title = isTokenMystified(token) ? "Unmystify" : "Mystify";
         const toggle = $(
-            `<div class="control-icon ${
+            `<div class="control-icon toggle ${
                 isTokenMystified(token) ? "active" : ""
-            }" > <i class="fas fa-eye-slash"  title="${title}"></i></div>`
+            }" data-action="mystify"> <i class="fas fa-eye-slash" title="${title}"></i></div>`
         );
         if (canMystify() && !token?.actor?.hasPlayerOwner) {
             toggle.on("click", async (e) => {
