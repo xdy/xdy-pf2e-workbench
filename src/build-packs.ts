@@ -111,8 +111,10 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
                 "Custom Saves and Skill Checks",
                 "systems/pf2e/icons/equipment/held-items/abadars-flawless-scale.webp"
             );
+            map.set("Double Slice", "systems/pf2e/icons/spells/echoing-weapon.webp");
             map.set("Dual Class", "systems/pf2e/icons/spells/guidance.webp");
             map.set("Eldritch Shot", "systems/pf2e/icons/equipment/consumables/ammunition/spellstrike-ammunition.webp");
+            map.set("Flurry of Blows", "systems/pf2e/icons/features/classes/flurry-of-blows.webp");
             map.set("Level Based DCs", "systems/pf2e/icons/equipment/held-items/radiant-spark.webp");
             map.set("Lingering Composition", "icons/svg/dice-target.svg");
             map.set("Lingering Heroics", "systems/pf2e/icons/spells/inspire-heroics.webp");
@@ -123,10 +125,12 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
             map.set("Modded Countdown Cooldown", "systems/pf2e/icons/spells/time-beacon.webp");
             map.set("One for All", "icons/svg/dice-target.svg");
             map.set("Overdrive", "icons/svg/dice-target.svg");
+            map.set("Ration Consumer", "systems/pf2e/icons/equipment/adventuring-gear/rations.webp");
             map.set("Post Save buttons to chat", "icons/svg/dice-target.svg");
             map.set("QuickSkillActions", "icons/svg/dice-target.svg");
             map.set("Recall Knowledge", "icons/skills/trades/academics-book-study-runes.webp");
             map.set("Scorching Ray", "systems/pf2e/icons/spells/scorching-ray.webp");
+            map.set("Simulate Falling", "systems/pf2e/icons/spells/seal-fate.webp");
             map.set("Spell DCs by Level", "systems/pf2e/icons/features/classes/conflux-spells.webp");
             map.set(
                 "Spellsling",
