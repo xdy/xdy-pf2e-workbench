@@ -1,3 +1,10 @@
+# [4.31.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.30.4...v4.31.0) (2023-01-15)
+
+
+### Features
+
+* Re-adds MAP-5 and MAP-10 to Skill Actions that have the attack trait. ([a84953b](https://github.com/xdy/xdy-pf2e-workbench/commit/a84953b322fc2562db9fba799badb51e0f2fa2ab))
+
 ## [4.30.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.30.3...v4.30.4) (2023-01-14)
 
 
