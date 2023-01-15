@@ -231,6 +231,12 @@ export class SkillAction {
                 ((data.requiredRank ?? 0) === 1 && this.actorHasItem("clever-improviser"))
             ) {
                 this.variants.addBasicVariant(skill, data.extra, data.label);
+
+                if (this.hasTrait("attack")) {
+                    this.variants.addMapVariant(skill, data.extra, -5);
+                    this.variants.addMapVariant(skill, data.extra, -10);
+                }
+
                 if (assurances.filter((x: any) => x.flags.pf2e.rulesSelections.assurance === skill.slug)?.length > 0) {
                     this.variants.addAssuranceVariant(skill, data.extra);
                 }
