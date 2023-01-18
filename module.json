@@ -107,6 +107,11 @@
       "lang": "zh-Hant",
       "name": "漢語（正體字）",
       "path": "lang/zh_Hant.json"
+    },
+    {
+      "lang": "zh-tw",
+      "name": "正體中文",
+      "path": "lang/zh_Hant.json"
     }
   ],
   "authors": [
