@@ -1,3 +1,10 @@
+# [4.32.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.31.5...v4.32.0) (2023-01-19)
+
+
+### Features
+
+* Add counters to auras, to increase radius ([003cb0a](https://github.com/xdy/xdy-pf2e-workbench/commit/003cb0a3ffb51daab344f3391af7f59f0f16f4a6))
+
 ## [4.31.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.31.4...v4.31.5) (2023-01-18)
 
 
