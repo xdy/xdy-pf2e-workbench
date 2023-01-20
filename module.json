@@ -57,6 +57,15 @@
       "flags": {}
     },
     {
+      "name": "xdy-customizable-macros",
+      "label": "xdy-customizable-macros",
+      "system": "pf2e",
+      "path": "packs/xdy-customizable-macros.db",
+      "type": "Macro",
+      "private": false,
+      "flags": {}
+    },
+    {
       "name": "xdy-pf2e-workbench-items",
       "label": "xdy-pf2e-workbench-items",
       "system": "pf2e",

@@ -61,25 +61,25 @@ class EmptyStaticFilesPlugin {
 type Optimization = Configuration["optimization"];
 const optimization: Optimization = isProductionBuild
     ? {
-          minimize: true,
-          minimizer: [
-              new TerserPlugin({ terserOptions: { mangle: false, module: true, keep_classnames: true } }),
-              new CssMinimizerPlugin(),
-          ],
-          splitChunks: {
-              chunks: "all",
-              cacheGroups: {
-                  default: {
-                      name: "xdy-pf2e-workbench",
-                      test: "src/module/xdy-pf2e-workbench.ts",
-                  },
-                  vendor: {
-                      name: "vendor",
-                      test: /node_modules/,
-                  },
-              },
-          },
-      }
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({ terserOptions: { mangle: false, module: true, keep_classnames: true } }),
+            new CssMinimizerPlugin(),
+        ],
+        splitChunks: {
+            chunks: "all",
+            cacheGroups: {
+                default: {
+                    name: "xdy-pf2e-workbench",
+                    test: "src/module/xdy-pf2e-workbench.ts",
+                },
+                vendor: {
+                    name: "vendor",
+                    test: /node_modules/,
+                },
+            },
+        },
+    }
     : undefined;
 
 const config: Configuration = {
@@ -92,13 +92,13 @@ const config: Configuration = {
         rules: [
             !isProductionBuild
                 ? {
-                      test: /\.html$/,
-                      loader: "raw-loader",
-                  }
+                    test: /\.html$/,
+                    loader: "raw-loader",
+                }
                 : {
-                      test: /\.html$/,
-                      loader: "null-loader",
-                  },
+                    test: /\.html$/,
+                    loader: "null-loader",
+                },
             {
                 test: /\.ts$/,
                 use: [
@@ -181,7 +181,7 @@ const config: Configuration = {
             patterns: [
                 { from: "module.json" },
                 {
-                    from: "packs/**",
+                    from: "packs/*.db",
                     noErrorOnMissing: true,
                 },
                 {

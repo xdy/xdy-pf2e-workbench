@@ -1,0 +1,436 @@
+/* eslint-disable */
+// noinspection JSAnnotator
+
+/**
+ * This macro opens a dialog containing a list of actions to be used by the selected Actor
+ * If no actor is selected, it selects the user's standard character.
+ * If there is no user character, it shows up a warning notification.
+ * See https://apoapostolov.notion.site/PF2-Basic-Actions-Macro-1255adc12ecf44e881e6cd87941f7858 for documentation.
+ */
+
+// List of actors, to evaluate the best skills in the party
+// const party = ["4bvLhJPGiHGq0F5I","RKgz8QKUIv6v47qA","RPYPiRPaCPCSluGs","qYr5UnQkPA3bOz24"];
+const party =
+    game?.actors
+        ?.filter((x) => x.hasPlayerOwner)
+        .filter((x) => x.isOfType("character"))
+        .filter((x) => x.alliance === "party")
+        .filter((actor) => {
+            return !actor.system.traits["value"].toString().includes("minion");
+        })
+        .filter((actor) => !actor.system.traits["value"].toString().includes("eidolon"))
+        .map((actor) => actor.id) || [];
+if (window.actionDialog?.rendered) {
+    // @ts-ignore
+    return window.actionDialog.close();
+}
+const getActor = () => {
+    return canvas.tokens.controlled.length
+        ? canvas.tokens.controlled.map((token) => token.actor)[0]
+        : game.user.character;
+};
+const actor = getActor();
+if (!actor) {
+    // @ts-ignore
+    return ui.notifications.warn("No character selected!");
+}
+/**
+ * Color pallete to use, representing the rank of skills
+ */
+const colorPallete = ["#424242", "#171f67", "#3c005e", "#664400", "#5e0000"];
+/**
+ * Default Icon to be given in case there is no icon parameter in an Action
+ */
+const defaultIcon = "systems/pf2e/icons/actions/craft/unknown-item.webp";
+/**
+ * This is the list of actions, wich can de edited
+ *
+ * Action Interface:
+ * @param   {string}            name    Name shown as the button text;
+ * @param   {string}            skill   Name of the skill, to get the bonus in parenthesis from;
+ * @param   {function|string}   action  Function or Macro ID (in case of a string) to call;
+ *                                      The call passes an {actors: [actor]} object as argument;
+ * @param   {string|undefined}  icon    The icon to be shown in the button. If undefined, will
+ *                                      return the defaultIcon;
+ */
+const actionList = [
+    {
+        name: "Aid",
+        skill: "",
+        action: "y1rDU9gTz6GVobwf",
+        icon: "systems/pf2e/icons/spells/efficient-apport.webp",
+    },
+    {
+        name: "Avoid Notice",
+        skill: "Stealth",
+        action: game.pf2e.actions.avoidNotice,
+        icon: "systems/pf2e/icons/features/classes/surprice-attack.webp",
+    },
+    {
+        name: "Balance",
+        skill: "Acrobatics",
+        action: game.pf2e.actions.balance,
+        icon: "https://i.imgur.com/q9zXci0.png",
+    },
+    {
+        name: "Climb",
+        skill: "Athletics",
+        action: game.pf2e.actions.climb,
+        icon: "icons/sundries/misc/ladder.webp",
+    },
+    {
+        name: "Coerce",
+        skill: "Intimidation",
+        action: game.pf2e.actions.coerce,
+        icon: "https://i.imgur.com/iIDYVQL.png",
+    },
+    {
+        name: "Command an Animal",
+        skill: "Nature",
+        action: game.pf2e.actions.commandAnAnimal,
+        icon: "https://i.imgur.com/5EqnTIS.png",
+    },
+    {
+        name: "Craft",
+        skill: "Crafting",
+        action: game.pf2e.actions.craft,
+        icon: "https://i.imgur.com/McuTUGb.png",
+    },
+    {
+        name: "Create a Diversion - Gesture",
+        skill: "Deception",
+        action: "game.pf2e.actions.createADiversion({ event: event, variant: 'gesture' });",
+        icon: "https://i.imgur.com/Rc9vnMX.png",
+    },
+    {
+        name: "Create a Diversion - Trick",
+        skill: "Deception",
+        action: "game.pf2e.actions.createADiversion({ event: event, variant: 'trick' });",
+        icon: "https://i.imgur.com/u9Pt7q1.png",
+    },
+    {
+        name: "Demoralize",
+        skill: "Intimidation",
+        action: game.pf2e.actions.demoralize,
+        icon: "icons/skills/social/intimidation-impressing.webp",
+    },
+    {
+        name: "Disarm",
+        skill: "Athletics",
+        action: game.pf2e.actions.disarm,
+        icon: "icons/skills/melee/sword-damaged-broken-glow-red.webp",
+    },
+    {
+        name: "Feint",
+        skill: "Deception",
+        action: game.pf2e.actions.feint,
+        icon: "https://i.imgur.com/EIRuIFp.png",
+    },
+    {
+        name: "Follow an Expert",
+        skill: "",
+        action: "eHtbauiO3n075GUu",
+        icon: "systems/pf2e/icons/spells/favorable-review.webp",
+    },
+    {
+        name: "Force Open",
+        skill: "Athletics",
+        action: game.pf2e.actions.forceOpen,
+        icon: "https://i.imgur.com/BkwG0cZ.png",
+    },
+    {
+        name: "Gather Information",
+        skill: "Diplomacy",
+        action: game.pf2e.actions.gatherInformation,
+        icon: "icons/skills/social/diplomacy-handshake.webp",
+    },
+    {
+        name: "Grapple",
+        skill: "Athletics",
+        action: game.pf2e.actions.grapple,
+        icon: "icons/skills/melee/unarmed-punch-fist.webp",
+    },
+    {
+        name: "Hide",
+        skill: "Stealth",
+        action: game.pf2e.actions.hide,
+        icon: "icons/magic/nature/stealth-hide-eyes-green.webp",
+    },
+    {
+        name: "Impersonate",
+        skill: "Deception",
+        action: game.pf2e.actions.impersonate,
+    },
+    {
+        name: "Jump - High",
+        skill: "Athletics",
+        action: game.pf2e.actions.highJump,
+        icon: "https://i.imgur.com/Ot4sbDt.png",
+    },
+    {
+        name: "Jump - Long",
+        skill: "Athletics",
+        action: game.pf2e.actions.longJump,
+        icon: "https://i.imgur.com/Ot4sbDt.png",
+    },
+    {
+        name: "Lie",
+        skill: "Deception",
+        action: game.pf2e.actions.lie,
+        icon: "icons/magic/control/mouth-smile-deception-purple.webp",
+    },
+    {
+        name: "Make an Impression",
+        skill: "Diplomacy",
+        action: game.pf2e.actions.makeAnImpression,
+        icon: "icons/environment/people/commoner.webp",
+    },
+    {
+        name: "Maneuver in Flight",
+        skill: "Acrobatics",
+        action: game.pf2e.actions.maneuverInFlight,
+        icon: "icons/commodities/biological/wing-bird-white.webp",
+    },
+    {
+        name: "Pick a Lock",
+        skill: "Thievery",
+        action: game.pf2e.actions.pickALock,
+        icon: "https://i.imgur.com/cb7ejb2.png",
+    },
+    {
+        name: "Raise a Shield",
+        skill: "",
+        action: game.pf2e.actions.raiseAShield,
+        icon: "systems/pf2e/icons/actions/raise-a-shield.webp",
+    },
+    {
+        name: "Recall Knowledge",
+        skill: "",
+        action: "EBdLzeLZyUju18Af",
+        icon: "systems/pf2e/icons/features/classes/imperial.webp",
+    },
+    {
+        name: "Repair",
+        skill: "Crafting",
+        action: game.pf2e.actions.repair,
+        icon: "https://i.imgur.com/McuTUGb.png",
+    },
+    {
+        name: "Request",
+        skill: "Diplomacy",
+        action: game.pf2e.actions.request,
+        icon: "icons/skills/social/thumbsup-approval-like.webp",
+    },
+    {
+        name: "Seek",
+        skill: "Perception",
+        action: game.pf2e.actions.seek,
+        icon: "https://i.imgur.com/7mTBOrS.png",
+    },
+    {
+        name: "Sense Direction",
+        skill: "Survival",
+        action: game.pf2e.actions.senseDirection,
+        icon: "icons/tools/navigation/compass-brass-blue-red.webp",
+    },
+    {
+        name: "Sense Motive",
+        skill: "Perception",
+        action: game.pf2e.actions.senseMotive,
+        icon: "https://i.imgur.com/7mTBOrS.png",
+    },
+    {
+        name: "Shove",
+        skill: "Athletics",
+        action: game.pf2e.actions.shove,
+        icon: "https://i.imgur.com/Expmoz8.png",
+    },
+    {
+        name: "Sneak",
+        skill: "Stealth",
+        action: game.pf2e.actions.sneak,
+        icon: "icons/magic/nature/stealth-hide-eyes-green.webp",
+    },
+    {
+        name: "Squeeze",
+        skill: "Acrobatics",
+        action: game.pf2e.actions.squeeze,
+        icon: "https://i.imgur.com/sQ6eUA4.png",
+    },
+    {
+        name: "Swim",
+        skill: "Athletics",
+        action: game.pf2e.actions.swim,
+        icon: "icons/creatures/fish/fish-shark-swimming.webp",
+    },
+    {
+        name: "Take Cover",
+        skill: "",
+        action: "PC0y5A6tHrtJhqVL",
+        icon: "https://i.imgur.com/5TgWEZF.png",
+    },
+    {
+        name: "Track",
+        skill: "Survival",
+        action: game.pf2e.actions.track,
+        icon: "https://i.imgur.com/RgHVtlC.png",
+    },
+    {
+        name: "Treat Disease",
+        skill: "Medicine",
+        action: game.pf2e.actions.treatDisease,
+        icon: "icons/magic/nature/root-vine-caduceus-healing.webp",
+    },
+    {
+        name: "Treat Poison",
+        skill: "Medicine",
+        action: game.pf2e.actions.treatPoison,
+        icon: "systems/pf2e/icons/effects/treat-poison.webp",
+    },
+    {
+        name: "Treat Wounds",
+        skill: "Medicine",
+        action: "BO2iFo14pFYHEIGa",
+        icon: "icons/magic/nature/root-vine-caduceus-healing.webp",
+    },
+    {
+        name: "Trip",
+        skill: "Athletics",
+        action: game.pf2e.actions.trip,
+        icon: "https://i.imgur.com/Sr2Gu19.png",
+    },
+    {
+        name: "Tumble Through",
+        skill: "Acrobatics",
+        action: game.pf2e.actions.tumbleThrough,
+        icon: "https://i.imgur.com/33UF9Ok.png",
+    },
+].sort((a, b) => -(a.name < b.name));
+const getSkills = (actor) => {
+    // @ts-ignore
+    return { perception: actor.attributes.perception, ...actor.skills };
+};
+const signedNumber = (n) => {
+    return n < 0 ? "" + n : "+" + n;
+};
+const tooltip = "You are among the best in your party";
+const getBestBonuses = () => {
+    for (const actorId of party) {
+        const actor = game.actors.get(actorId);
+        const skills = getSkills(actor);
+        for (const action of actionList) {
+            const skill = skills[action.skill?.toLowerCase()];
+            if (!skill) continue;
+            const bonus = skill.check?.mod ?? skill.totalModifier;
+            if (bonus > (action.best ?? -1)) action.best = bonus;
+        }
+    }
+};
+if (party.includes(actor.id)) getBestBonuses();
+const createButton = (action, idx) => {
+    // @ts-ignore
+    const skill = getSkills(actor)[action.skill?.toLowerCase()];
+    const rank = skill?.rank ?? 0;
+    const bonus = skill ? skill.check?.mod ?? skill.totalModifier : -1;
+    const best = party.length && party.includes(actor.id) ? bonus >= (action.best ?? 0) : false;
+    return `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
+        colorPallete[rank]
+    }"
+    ${best ? `data-tooltip="${tooltip}"` : ""}>
+    <img src="${action.icon ?? defaultIcon}" height="24"/>${action.name} ${
+        skill ? "(" + signedNumber(bonus) + ")" : ""
+    }</button>`;
+};
+const columns = 1 + ~~((actionList.length - 1) / 14);
+const width = 264 * columns;
+const height = 30 + ~~((32 * actionList.length + 1) / columns);
+const content = `
+<!--suppress ALL -->
+<style>
+  .pf2e-bg .window-content {
+    background: url(../systems/pf2e/assets/sheet/background.webp);
+  }
+
+  .action-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+    max-height: ${height}px;
+  }
+
+  .action-btn {
+    margin: 1px auto;
+    width: 250px;
+    height: fit-content;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
+    text-shadow: none;
+    border: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  .action-btn img {
+    margin-right: 5px;
+  }
+
+  .action-btn:hover {
+    text-shadow: 0 0 2px #fff;
+  }
+
+  .action-list button.glow {
+    --color-glow1: 35;
+    --color-glow2: 50;
+    animation: glow2 alternate infinite 2s;
+    z-index: 1;
+}
+
+@keyframes glow2 {
+  0% {
+      color: hsl(var(--color-glow2), 90%, 50%);
+      /*border: 1px solid hsl(var(--color-glow2), 100%, 50%);*/
+      /*background: hsla(var(--color-glow2), 70%, 30%, 50%);*/
+      box-shadow: 0 0 1px 1px hsl(var(--color-glow2), 100%, 50%);
+  }
+  100% {
+      color: hsl(var(--color-glow2), 90%, 50%);
+      /*border: 1px solid hsl(var(--color-glow2), 100%, 50%);*/
+      /*background: hsla(var(--color-glow2), 70%, 30%, 100%);*/
+      box-shadow: 0 0 1px 1px hsl(var(--color-glow2), 100%, 50%);
+  }
+}
+
+
+</style>
+<div class="action-list">
+${actionList.map((action, idx) => createButton(action, idx)).join("")}
+</div>
+`;
+window.actionDialog = new Dialog(
+    {
+        title: `Actions (${actor.name})`,
+        content,
+        buttons: {
+            close: {
+                icon: `<i class="fas fa-times"></i>`,
+                label: "Cancel",
+            },
+        },
+        default: "close",
+        render: (html) => {
+            const action = (button) => {
+                const idx = button.dataset.action;
+                const action = actionList[idx];
+                if (typeof action.action === "string") game.macros.get(action.action)?.execute();
+                else action.action({ actors: [actor] });
+            };
+            html.querySelectorAll(".action-list button").forEach((button) =>
+                button.addEventListener("click", () => action(button))
+            );
+        },
+    },
+    { jQuery: false, width, classes: ["pf2e-bg"] }
+).render(true);
