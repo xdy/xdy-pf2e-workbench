@@ -6,27 +6,58 @@ import { SpellPF2e } from "@item";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
     // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
-    if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
-        html.find(".card-content").hide();
-        // $(html)
-        //     .find("h3")
-        //     .html($(html).find("h3").html() + eye);
-    }
-    html.on("click", "h3", (event: JQuery.ClickEvent) => {
-        const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
-        if (content && content.style) {
-            event.preventDefault();
-            content.style.display = content.style.display === "none" ? "block" : "none";
-            if (content.style.display === "none") {
-                html.find(".card-content").hide();
-                // $(event.currentTarget).html($(event.currentTarget).html() + eye);
-            } else {
-                // if ($(event.currentTarget).html().includes(eye)) {
-                //     $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
-                // }
-            }
+    const cardContent = html.find(".card-content");
+    if (cardContent.length > 0) {
+        if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
+            cardContent.hide();
+            // $(html)
+            //     .find("h3")
+            //     .html($(html).find("h3").html() + eye);
         }
-    });
+        html.on("click", "h3", (event: JQuery.ClickEvent) => {
+            const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
+            if (content && content.style) {
+                event.preventDefault();
+                content.style.display = content.style.display === "none" ? "block" : "none";
+                if (content.style.display === "none") {
+                    cardContent.hide();
+                    // $(event.currentTarget).html($(event.currentTarget).html() + eye);
+                } else {
+                    // if ($(event.currentTarget).html().includes(eye)) {
+                    //     $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
+                    // }
+                }
+            }
+        });
+    } else {
+        const notes = html.find(".roll-note");
+        if (notes.length > 0) {
+            if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
+                for (const note of notes) {
+                    note.style.display = "none";
+                }
+                // $(html)
+                //     .find("h3")
+                //     .html($(html).find("h3").html() + eye);
+            }
+            html.on("click", "h4", (event: JQuery.ClickEvent) => {
+                event.preventDefault();
+                for (const note of notes) {
+                    note.style.display = note.style.display === "none" ? "block" : "none";
+                    if (note.style.display === "none") {
+                        for (const note of notes) {
+                            note.style.display = "note";
+                        }
+                        // $(event.currentTarget).html($(event.currentTarget).html() + eye);
+                    } else {
+                        // if ($(event.currentTarget).html().includes(eye)) {
+                        //     $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
+                        // }
+                    }
+                }
+            });
+        }
+    }
 }
 
 export function damageCardExpand(message: ChatMessage, html: JQuery) {
