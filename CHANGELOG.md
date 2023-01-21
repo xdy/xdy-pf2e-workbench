@@ -1,3 +1,10 @@
+# [4.33.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.32.0...v4.33.0) (2023-01-21)
+
+
+### Features
+
+* Add a couple of javascript versions of macros from ApoApostolov (made by Magus and changed a bit by me) to the new xdy-customizable-macros compendium. ([900c14f](https://github.com/xdy/xdy-pf2e-workbench/commit/900c14f83a3e318f095710ddfde7b8b808f2e8ae)), closes [#623](https://github.com/xdy/xdy-pf2e-workbench/issues/623)
+
 # [4.32.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.31.5...v4.32.0) (2023-01-19)
 
 
