@@ -1,3 +1,10 @@
+# [4.34.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.33.0...v4.34.0) (2023-01-21)
+
+
+### Features
+
+* Collapses Action chat cards if the setting to collapse item cards is enabled. Click the action title or the roll total to expand or collapse. ([9a48b2d](https://github.com/xdy/xdy-pf2e-workbench/commit/9a48b2dc624d0a11a1b046545fc2064c8feafac4)), closes [#622](https://github.com/xdy/xdy-pf2e-workbench/issues/622)
+
 # [4.33.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.32.0...v4.33.0) (2023-01-21)
 
 
