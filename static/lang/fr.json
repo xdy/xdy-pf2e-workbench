@@ -112,7 +112,7 @@
       },
       "autoCollapseItemChatCardContent": {
         "collapsedDefault": "Réduit par défaut. Cliquer sur le titre pour étendre.",
-        "hint": "Réduit automatiquement le contenu de la carte d'équipement dans la conversation.",
+        "hint": "Paramètre du client pour réduire automatiquement le contenu de la carte d'équipement dans la conversation (en excluant les cartes d'action et d'attaque, voir ci-dessous).",
         "name": "Réduire automatiquement le contenu de la carte d'équipement dans la conversation.",
         "noCollapse": "Ne jamais réduire",
         "nonCollapsedDefault": "Étendu par défaut. Cliquer sur le titre pour réduire."
@@ -473,6 +473,20 @@
       "customPauseRelocation": {
         "hint": "Place l'image de pause au milieu de l'écran, avec le message au dessus.",
         "name": "Centrer l'image de la pause avec le message au dessus."
+      },
+      "autoCollapseItemActionChatCardContent": {
+        "name": "Réduire automatiquement le contenu des cartes d'action de la conversation.",
+        "noCollapse": "Ne jamais réduire",
+        "nonCollapsedDefault": "Étendu par défaut. Cliquer sur le titre pour réduire.",
+        "collapsedDefault": "Réduit par défaut. Cliquer sur le titre pour étendre.",
+        "hint": "Paramètre du client permettant de réduire automatiquement le contenu des cartes de d'action de la conversation."
+      },
+      "autoCollapseItemAttackChatCardContent": {
+        "collapsedDefault": "Réduit par défaut. Cliquer sur le titre pour étendre.",
+        "name": "Réduire automatiquement le contenu des cartes d'attaque de la conversation.",
+        "noCollapse": "Ne jamais réduire",
+        "nonCollapsedDefault": "Étendu par défaut. Cliquer sur le titre pour réduire.",
+        "hint": "Paramètre du client permettant de réduire automatiquement le contenu des cartes d'attaque de la conversation."
       }
     },
     "effects": {
