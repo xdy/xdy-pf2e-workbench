@@ -1,3 +1,10 @@
+# [4.35.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.34.0...v4.35.0) (2023-01-22)
+
+
+### Features
+
+* Adds separate options for collapsing attack and action cards. Brings back the slashed eye icon to indicate a collapsed section. ([c37755a](https://github.com/xdy/xdy-pf2e-workbench/commit/c37755a090b20db57529b2e9f2976a68e77fca65))
+
 # [4.34.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.33.0...v4.34.0) (2023-01-21)
 
 
