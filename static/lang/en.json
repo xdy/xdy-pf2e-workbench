@@ -203,8 +203,22 @@
       },
       "autoCollapseItemChatCardContent": {
         "collapsedDefault": "Collapsed by default, click title to expand.",
-        "hint": "Client setting to automatically collapse item chat card content.",
+        "hint": "Client setting to automatically collapse item chat card content (excluding actions and attacks, see below for those).",
         "name": "Automatically collapse item chat card content.",
+        "noCollapse": "Never collapse",
+        "nonCollapsedDefault": "Expanded by default, click title to collapse."
+      },
+      "autoCollapseItemActionChatCardContent": {
+        "collapsedDefault": "Collapsed by default, click title to expand.",
+        "hint": "Client setting to automatically collapse action chat card content.",
+        "name": "Automatically collapse action chat card content.",
+        "noCollapse": "Never collapse",
+        "nonCollapsedDefault": "Expanded by default, click title to collapse."
+      },
+      "autoCollapseItemAttackChatCardContent": {
+        "collapsedDefault": "Collapsed by default, click title to expand.",
+        "hint": "Client setting to automatically collapse attack chat card content.",
+        "name": "Automatically collapse attack chat card content.",
         "noCollapse": "Never collapse",
         "nonCollapsedDefault": "Expanded by default, click title to collapse."
       },

@@ -43,6 +43,44 @@ export function registerWorkbenchSettings() {
         onChange: () => debouncedReload(),
     });
 
+    game.settings.register(MODULENAME, "autoCollapseItemActionChatCardContent", {
+        name: `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.name`,
+        hint: `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.hint`,
+        scope: "client",
+        config: true,
+        default: "noCollapse",
+        type: String,
+        choices: {
+            noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.noCollapse`),
+            collapsedDefault: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.collapsedDefault`
+            ),
+            nonCollapsedDefault: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.nonCollapsedDefault`
+            ),
+        },
+        onChange: () => debouncedReload(),
+    });
+
+    game.settings.register(MODULENAME, "autoCollapseItemAttackChatCardContent", {
+        name: `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.name`,
+        hint: `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.hint`,
+        scope: "client",
+        config: true,
+        default: "noCollapse",
+        type: String,
+        choices: {
+            noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.noCollapse`),
+            collapsedDefault: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.collapsedDefault`
+            ),
+            nonCollapsedDefault: game.i18n.localize(
+                `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.nonCollapsedDefault`
+            ),
+        },
+        onChange: () => debouncedReload(),
+    });
+
     game.settings.register(MODULENAME, "autoExpandDamageRolls", {
         name: `${MODULENAME}.SETTINGS.autoExpandDamageRolls.name`,
         hint: `${MODULENAME}.SETTINGS.autoExpandDamageRolls.hint`,

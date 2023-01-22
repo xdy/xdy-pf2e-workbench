@@ -5,14 +5,14 @@ import { ChatMessagePF2e } from "@module/chat-message";
 import { SpellPF2e } from "@item";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
-    // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
-    const cardContent = html.find(".card-content");
-    if (cardContent.length > 0) {
+    const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
+    const hasCardContent = html.find(".card-content");
+    if (hasCardContent.length > 0) {
         if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
-            cardContent.hide();
-            // $(html)
-            //     .find("h3")
-            //     .html($(html).find("h3").html() + eye);
+            hasCardContent.hide();
+            $(html)
+                .find("h3")
+                .html($(html).find("h3").html() + eye);
         }
         html.on("click", "h3", (event: JQuery.ClickEvent) => {
             const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
@@ -20,47 +20,76 @@ export function chatCardDescriptionCollapse(html: JQuery) {
                 event.preventDefault();
                 content.style.display = content.style.display === "none" ? "block" : "none";
                 if (content.style.display === "none") {
-                    cardContent.hide();
-                    // $(event.currentTarget).html($(event.currentTarget).html() + eye);
+                    hasCardContent.hide();
+                    $(html)
+                        .find("h3")
+                        .html($(html).find("h3").html() + eye);
                 } else {
-                    // if ($(event.currentTarget).html().includes(eye)) {
-                    //     $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
-                    // }
+                    if ($(event.currentTarget).html().includes(eye)) {
+                        $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
+                    }
                 }
             }
         });
+    }
+}
+
+function handleRollNoteToggling(html: JQuery, eye: string) {
+    let note;
+    for (note of html.find(".roll-note")) {
+        note.style.display = note.style.display === "none" ? "block" : "none";
+    }
+    if (note.style.display === "none") {
+        $(html)
+            .find("h4.action")
+            .html($(html).find("h4.action").html() + eye);
     } else {
-        const notes = html.find(".roll-note");
-        if (notes.length > 0) {
-            if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
-                for (const note of notes) {
+        if ($(html).find("h4.action").html().includes(eye)) {
+            $(html).find("h4.action").html($(html).find("h4.action").html().split(eye)[0]);
+        }
+    }
+}
+
+export function chatActionCardDescriptionCollapse(html: JQuery) {
+    const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
+    const hasAction = html.find(".action");
+    if (hasAction.length > 0) {
+        if (html.find(".roll-note").length > 0) {
+            if (game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault") {
+                for (const note of html.find(".roll-note")) {
                     note.style.display = "none";
                 }
-                // $(html)
-                //     .find("h3")
-                //     .html($(html).find("h3").html() + eye);
+                $(html)
+                    .find("h4.action")
+                    .html($(html).find("h4.action").html() + eye);
             }
-            html.on("click", "h4", (event: JQuery.ClickEvent) => {
+            html.on("click", "h4.action", (event: JQuery.ClickEvent) => {
                 event.preventDefault();
-                for (const note of notes) {
-                    note.style.display = note.style.display === "none" ? "block" : "none";
-                    if (note.style.display === "none") {
-                        for (const note of notes) {
-                            note.style.display = "note";
-                        }
-                        // $(event.currentTarget).html($(event.currentTarget).html() + eye);
-                    } else {
-                        // if ($(event.currentTarget).html().includes(eye)) {
-                        //     $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
-                        // }
-                    }
-                }
+                handleRollNoteToggling(html, eye);
             });
         }
     }
 }
 
-export function damageCardExpand(message: ChatMessage, html: JQuery) {
+export function chatAttackCardDescriptionCollapse(html: JQuery) {
+    const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
+    if (html.find(".roll-note").length > 0) {
+        if (game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault") {
+            for (const note of html.find(".roll-note")) {
+                note.style.display = "none";
+            }
+            $(html)
+                .find("h4.action")
+                .html($(html).find("h4.action").html() + eye);
+        }
+        html.on("click", "h4.action", (event: JQuery.ClickEvent) => {
+            event.preventDefault();
+            handleRollNoteToggling(html, eye);
+        });
+    }
+}
+
+export function damageCardExpand(message: ChatMessagePF2e, html: JQuery) {
     const expandDmg = <string>game.settings.get(MODULENAME, "autoExpandDamageRolls");
     if (expandDmg === "expandedAll") {
         html.find(".dice-tooltip").css("display", "block");

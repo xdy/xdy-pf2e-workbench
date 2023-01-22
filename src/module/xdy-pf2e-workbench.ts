@@ -26,6 +26,8 @@ import { toggleMenuSettings } from "./feature/settingsHandler";
 import {
     addGmRKButtonToNpc,
     castPrivateSpell,
+    chatActionCardDescriptionCollapse,
+    chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
     damageCardExpand,
 } from "./feature/qolHandler";
@@ -163,6 +165,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     if (
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
         game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
+        game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
+        game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault" ||
+        game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
+        game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault" ||
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
         game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
@@ -171,7 +177,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         (game.settings.get(MODULENAME, "npcMystifier") &&
             game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
     ) {
-        Hooks.on("renderChatMessage", (message: ChatMessage, html: JQuery) => {
+        Hooks.on("renderChatMessage", (message: ChatMessagePF2e, html: JQuery) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
                 mangleChatMessage(message, html);
             }
@@ -194,10 +200,27 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 }
             } else {
                 if (
-                    game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
-                    game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
+                    (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+                        game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault") &&
+                    message.item &&
+                    !message.isCheckRoll
                 ) {
                     chatCardDescriptionCollapse(html);
+                } else if (
+                    (game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
+                        game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") ===
+                            "nonCollapsedDefault") &&
+                    ["weapon", "melee", "spell"].includes(message.item?.type ?? "")
+                ) {
+                    chatAttackCardDescriptionCollapse(html);
+                } else if (
+                    ((game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
+                        game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") ===
+                            "nonCollapsedDefault") &&
+                        !message.item) ||
+                    message.item?.type === "action"
+                ) {
+                    chatActionCardDescriptionCollapse(html);
                 }
             }
         });

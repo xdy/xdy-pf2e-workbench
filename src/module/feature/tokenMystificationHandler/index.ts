@@ -4,6 +4,7 @@ import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings";
 import { TokenDataPF2e } from "@scene/token-document";
 import { generateNameFromTraits } from "./traits-name-generator";
 import { TokenPF2e } from "@module/canvas";
+import { ChatMessagePF2e } from "@module/chat-message";
 
 function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (
@@ -206,7 +207,7 @@ export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
     }
 }
 
-export function mangleChatMessage(message: ChatMessage, html: JQuery) {
+export function mangleChatMessage(message: ChatMessagePF2e, html: JQuery) {
     const actorId = <string>message?.speaker?.actor;
     const tokenId = message?.speaker?.token;
     const actor = game.actors?.get(actorId);
