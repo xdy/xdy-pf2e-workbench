@@ -5,14 +5,14 @@ import { ChatMessagePF2e } from "@module/chat-message";
 import { SpellPF2e } from "@item";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
-    const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
+    // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
     const hasCardContent = html.find(".card-content");
     if (hasCardContent.length > 0) {
         if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
             hasCardContent.hide();
-            $(html)
-                .find("h3")
-                .html($(html).find("h3").html() + eye);
+            // $(html)
+            //     .find("h3")
+            //     .html($(html).find("h3").html() + eye);
         }
         html.on("click", "h3", (event: JQuery.ClickEvent) => {
             const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
@@ -21,37 +21,37 @@ export function chatCardDescriptionCollapse(html: JQuery) {
                 content.style.display = content.style.display === "none" ? "block" : "none";
                 if (content.style.display === "none") {
                     hasCardContent.hide();
-                    $(html)
-                        .find("h3")
-                        .html($(html).find("h3").html() + eye);
+                    // $(html)
+                    //     .find("h3")
+                    //     .html($(html).find("h3").html() + eye);
                 } else {
-                    if ($(event.currentTarget).html().includes(eye)) {
-                        $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
-                    }
+                    // if ($(event.currentTarget).html().includes(eye)) {
+                    //     $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
+                    // }
                 }
             }
         });
     }
 }
 
-function handleRollNoteToggling(html: JQuery, eye: string) {
+function handleRollNoteToggling(html: JQuery) {
     let note;
     for (note of html.find(".roll-note")) {
         note.style.display = note.style.display === "none" ? "block" : "none";
     }
     if (note.style.display === "none") {
-        $(html)
-            .find("h4.action")
-            .html($(html).find("h4.action").html() + eye);
+        // $(html)
+        //     .find("h4.action")
+        //     .html($(html).find("h4.action").html() + eye);
     } else {
-        if ($(html).find("h4.action").html().includes(eye)) {
-            $(html).find("h4.action").html($(html).find("h4.action").html().split(eye)[0]);
-        }
+        // if ($(html).find("h4.action").html().includes(eye)) {
+        //     $(html).find("h4.action").html($(html).find("h4.action").html().split(eye)[0]);
+        // }
     }
 }
 
 export function chatActionCardDescriptionCollapse(html: JQuery) {
-    const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
+    // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
     const hasAction = html.find(".action");
     if (hasAction.length > 0) {
         if (html.find(".roll-note").length > 0) {
@@ -59,32 +59,32 @@ export function chatActionCardDescriptionCollapse(html: JQuery) {
                 for (const note of html.find(".roll-note")) {
                     note.style.display = "none";
                 }
-                $(html)
-                    .find("h4.action")
-                    .html($(html).find("h4.action").html() + eye);
+                // $(html)
+                //     .find("h4.action")
+                //     .html($(html).find("h4.action").html() + eye);
             }
             html.on("click", "h4.action", (event: JQuery.ClickEvent) => {
                 event.preventDefault();
-                handleRollNoteToggling(html, eye);
+                handleRollNoteToggling(html);
             });
         }
     }
 }
 
 export function chatAttackCardDescriptionCollapse(html: JQuery) {
-    const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
+    // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
     if (html.find(".roll-note").length > 0) {
         if (game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault") {
             for (const note of html.find(".roll-note")) {
                 note.style.display = "none";
             }
-            $(html)
-                .find("h4.action")
-                .html($(html).find("h4.action").html() + eye);
+            // $(html)
+            //     .find("h4.action")
+            //     .html($(html).find("h4.action").html() + eye);
         }
         html.on("click", "h4.action", (event: JQuery.ClickEvent) => {
             event.preventDefault();
-            handleRollNoteToggling(html, eye);
+            handleRollNoteToggling(html);
         });
     }
 }
