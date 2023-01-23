@@ -1,3 +1,10 @@
+## [4.35.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.35.0...v4.35.1) (2023-01-23)
+
+
+### Bug Fixes
+
+* Removed the 'eye' on collapsed chat cards again as that clashes with something else (that I apparently don't use as I don't get that problem). Click the title to expand for now. ([1227dad](https://github.com/xdy/xdy-pf2e-workbench/commit/1227dadc92322e32a6adfa8d121b5baa5bc1e8bc))
+
 # [4.35.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.34.0...v4.35.0) (2023-01-22)
 
 
