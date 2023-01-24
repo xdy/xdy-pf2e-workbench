@@ -73,7 +73,7 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
-    "semantic-release": "^19.0.5",
+    "semantic-release": "^20.0.4",
     "simple-progress-webpack-plugin": "^2.0.0",
     "socket.io": "^4.5.4",
     "socket.io-client": "^4.5.4",
