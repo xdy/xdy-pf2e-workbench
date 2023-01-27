@@ -9,10 +9,14 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
         const actors = [combatant.actor];
         actors.push(...getMinionAndEidolons(combatant.actor));
         for (const actor of actors) {
+            const items: any = actor.items;
             const minimumFrightened = <number>actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
             const currentFrightened = actor?.getCondition("frightened")?.value ?? 0;
-            if (currentFrightened - 1 >= minimumFrightened) {
-                await actor.decreaseCondition("frightened");
+            const amountToReduceBy = items.find((feat) => feat.slug === "dwarven-doughtiness") ? 2 : 1;
+            for (let i = 0; i < amountToReduceBy; i++) {
+                if (currentFrightened - 1 >= minimumFrightened) {
+                    await actor.decreaseCondition("frightened");
+                }
             }
         }
     }
