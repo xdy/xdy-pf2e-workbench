@@ -121,6 +121,11 @@
       "lang": "zh-tw",
       "name": "正體中文",
       "path": "lang/zh_Hant.json"
+    },
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "lang/es.json"
     }
   ],
   "authors": [
