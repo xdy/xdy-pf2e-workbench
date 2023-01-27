@@ -29,7 +29,7 @@
     "docs": "typedoc"
   },
   "devDependencies": {
-    "@pixi/graphics-smooth": "^0.0.30",
+    "@pixi/graphics-smooth": "^1.0.0",
     "@pixi/particle-emitter": "5.0.8",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/commit-analyzer": "^9.0.2",
