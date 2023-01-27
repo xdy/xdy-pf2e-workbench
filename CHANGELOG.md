@@ -1,3 +1,10 @@
+# [4.37.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.36.0...v4.37.0) (2023-01-27)
+
+
+### Features
+
+* "Effect: Change Focus Point Maximum" added to the compendium "xdy-pf2e-workbench-items" that one can add to characters that should have a different cap to Focus Points (change the counter value to change the cap.) ([ead8655](https://github.com/xdy/xdy-pf2e-workbench/commit/ead8655114b5bc829e32929a66bda161718cdc13)), closes [#630](https://github.com/xdy/xdy-pf2e-workbench/issues/630)
+
 # [4.36.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.35.1...v4.36.0) (2023-01-27)
 
 
