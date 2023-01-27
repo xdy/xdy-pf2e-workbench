@@ -124,6 +124,24 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Number,
                 onChange: () => debouncedReload(),
             },
+            playerFeatsRarityColour: {
+                name: `${MODULENAME}.SETTINGS.playerFeatsRarityColour.name`,
+                hint: `${MODULENAME}.SETTINGS.playerFeatsRarityColour.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
+            playerSpellsRarityColour: {
+                name: `${MODULENAME}.SETTINGS.playerSpellsRarityColour.name`,
+                hint: `${MODULENAME}.SETTINGS.playerSpellsRarityColour.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
         };
     }
 }

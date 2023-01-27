@@ -41,7 +41,7 @@ import {
     startTimer,
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM } from "./utils";
-import { ItemPF2e, PhysicalItemPF2e } from "@item";
+import { FeatPF2e, ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
     actionsReminder,
@@ -420,6 +420,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
 
     if (
+        game.settings.get(MODULENAME, "playerFeatsRarityColour") ||
+        game.settings.get(MODULENAME, "playerSpellsRarityColour") ||
         game.settings.get(MODULENAME, "castPrivateSpell") ||
         game.settings.get(MODULENAME, "addGmRKButtonToNpc") ||
         game.settings.get(MODULENAME, "quickQuantities") ||
@@ -442,6 +444,40 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
             if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
                 renderSheetSkillActions(sheet, $html);
+            }
+
+            if (game.settings.get(MODULENAME, "playerSpellsRarityColour")) {
+                // TODO
+                $html.find(".spell-list").each((_i, e) => {
+                    $(e)
+                        .find(".item.spell")
+                        .each((_n, e) => {
+                            const $e = $(e);
+                            const itemId: string = <string>$e.attr("data-item-id");
+                            const spell = <SpellPF2e>(<unknown>sheet.actor?.items?.get(itemId));
+                            const rarity = spell.system.traits.rarity;
+                            if (rarity) {
+                                $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
+                            }
+                        });
+                });
+            }
+
+            if (game.settings.get(MODULENAME, "playerFeatsRarityColour")) {
+                // TODO
+                $html.find(".feats-pane").each((_i, e) => {
+                    $(e)
+                        .find(".feat-item")
+                        .each((_n, e) => {
+                            const $e = $(e);
+                            const itemId: string = <string>$e.attr("data-item-id");
+                            const feat = <FeatPF2e>(<unknown>sheet.actor?.items?.get(itemId));
+                            const rarity = feat.system.traits.rarity;
+                            if (rarity) {
+                                $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
+                            }
+                        });
+                });
             }
         });
     }

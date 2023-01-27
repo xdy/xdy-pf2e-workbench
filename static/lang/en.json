@@ -295,6 +295,14 @@
         "hint": "Call hotbar macro on page {page} position {column}",
         "name": "Call hotbar macro on page {page} position {column}"
       },
+      "playerFeatsRarityColour": {
+        "hint": "Client setting to show feat names in rarity colour on actor sheets.",
+        "name": "Show feat names in rarity colour on actor sheets."
+      },
+      "playerSpellsRarityColour": {
+        "hint": "Client setting to show spell names in rarity colour on actor sheets.",
+        "name": "Show spell names in rarity colour on actor sheets."
+      },
       "castPrivateSpell": {
         "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM.",
         "name": "Ctrl-click Cast to cast in private."

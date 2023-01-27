@@ -120,3 +120,23 @@
 
 .roll-app .roll-app-table button.rollable {
 }
+
+.xdy-pf2e-workbench-rarity-common {
+    border-color: #323232;
+    color: #323232;
+}
+
+.xdy-pf2e-workbench-rarity-uncommon {
+    border-color: #98513d;
+    color: #98513d;
+}
+
+.xdy-pf2e-workbench-rarity-rare {
+    border-color: #002664;
+    color: #002664;
+}
+
+.xdy-pf2e-workbench-rarity-unique {
+    border-color: #54166e;
+    color: #54166e;
+}
