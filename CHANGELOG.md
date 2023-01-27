@@ -1,3 +1,10 @@
+# [4.38.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.37.0...v4.38.0) (2023-01-27)
+
+
+### Features
+
+* Adds options to show spells and/or feats in rarity colours (the same colours as for other items) on actor sheets. ([37e30fa](https://github.com/xdy/xdy-pf2e-workbench/commit/37e30fadbb18880c54a7f4b56c10aa42f178a789))
+
 # [4.37.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.36.0...v4.37.0) (2023-01-27)
 
 
