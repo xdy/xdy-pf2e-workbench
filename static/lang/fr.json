@@ -192,7 +192,7 @@
         "name": "Appeler la barre des macros sur la page {page} en {column}e position"
       },
       "castPrivateSpell": {
-        "hint": "Cliquez pour qu'un ctrl+clic sur un sort le Lance, en envoyant un message au lanceur et au MJ.",
+        "hint": "Cliquez pour permettre qu'un ctrl+clic sur un sort le Lance en envoyant un message au lanceur et au MJ.",
         "name": "Ctrl+clic pour Lancer un sort en privé."
       },
       "castPrivateSpellAlwaysForNPC": {
@@ -201,7 +201,7 @@
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Tour de magie",
-        "components": "Composants :",
+        "components": "Composantes :",
         "firstPart": "{tokenName} vient de lancer un {type} {vsmf} de la tradition <strong>{traditionString}</strong>",
         "hint": "S'il est lancé en privé, cela poste néanmoins un message public pour annoncer qu'un sort a été lancé À MOINS que vous ne pressiez également SHIFT ainsi que CTRL lorsque vous incantez.",
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
@@ -487,6 +487,14 @@
         "noCollapse": "Ne jamais réduire",
         "nonCollapsedDefault": "Étendu par défaut. Cliquer sur le titre pour réduire.",
         "hint": "Paramètre du client permettant de réduire automatiquement le contenu des cartes d'attaque de la conversation."
+      },
+      "playerFeatsRarityColour": {
+        "name": "Montrer les noms des dons dans la couleur de la rareté sur les feuilles d'acteurs.",
+        "hint": "Paramètre du client pour afficher la couleur de la rareté des dons sur les feuilles des acteurs."
+      },
+      "playerSpellsRarityColour": {
+        "hint": "Paramètre du client pour afficher la couleur de la rareté des sorts sur les feuilles des acteurs.",
+        "name": "Montrer les noms des sorts dans la couleur de la rareté sur les feuilles d'acteurs."
       }
     },
     "effects": {
