@@ -1,3 +1,10 @@
+# [4.36.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.35.1...v4.36.0) (2023-01-27)
+
+
+### Features
+
+* The option to automatically reduce Frightened at the end of the turn now supports Dwarven Doughtiness. ([69e9e39](https://github.com/xdy/xdy-pf2e-workbench/commit/69e9e397cce90e9fe6327b2229aefbca5704fc8c)), closes [#631](https://github.com/xdy/xdy-pf2e-workbench/issues/631)
+
 ## [4.35.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.35.0...v4.35.1) (2023-01-23)
 
 
