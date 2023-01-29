@@ -145,6 +145,30 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/spells/charming-words.webp",
         },
         {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingArcana`),
+            skill: "Arcana",
+            action: game.pf2e.actions.decipherWriting,
+            icon: "icons/skills/trades/academics-book-study-runes.webp",
+        },
+        {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingOccultism`),
+            skill: "Occultism",
+            action: game.pf2e.actions.decipherWriting,
+            icon: "icons/skills/trades/academics-book-study-purple.webp",
+        },
+        {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingReligion`),
+            skill: "Religion",
+            action: game.pf2e.actions.decipherWriting,
+            icon: "systems/pf2e/icons/equipment/other/spellbooks/thresholds-of-truth.webp",
+        },
+        {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingSociety`),
+            skill: "Society",
+            action: game.pf2e.actions.decipherWriting,
+            icon: "icons/skills/trades/academics-study-reading-book.webp",
+        },
+        {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Demoralize`),
             skill: "Intimidation",
             action: game.pf2e.actions.demoralize,
@@ -155,6 +179,12 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.disarm,
             icon: "icons/skills/melee/sword-damaged-broken-glow-red.webp",
+        },
+        {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DisableDevice`),
+            skill: "Thievery",
+            action: game.pf2e.actions.disableDevice,
+            icon: "systems/pf2e/icons/equipment/adventuring-gear/thieves-tools.webp",
         },
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Feint`),
@@ -229,6 +259,12 @@ export function basicActionMacros() {
             icon: "icons/commodities/biological/wing-bird-white.webp",
         },
         {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Perform`),
+            skill: "Performance",
+            action: game.pf2e.actions.perform,
+            icon: "icons/skills/trades/music-singing-voice-blue.webp",
+        },
+        {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.PickALock`),
             skill: "Thievery",
             action: game.pf2e.actions.pickALock,
@@ -293,6 +329,18 @@ export function basicActionMacros() {
             skill: "Acrobatics",
             action: game.pf2e.actions.squeeze,
             icon: "icons/commodities/tech/claw-mechanical.webp",
+        },
+        {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.SubsistSociety`),
+            skill: "Society",
+            action: game.pf2e.actions.subsist,
+            icon: "icons/environment/settlement/building-rubble.webp",
+        },
+        {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.SubsistSurvival`),
+            skill: "Survival",
+            action: game.pf2e.actions.subsist,
+            icon: "icons/environment/wilderness/camp-improvised.webp",
         },
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Swim`),
@@ -466,7 +514,11 @@ ${actionList
                         }
                     } else {
                         // @ts-ignore
-                        action.action({ event: event, actors: [selectedActor] });
+                        action.action({
+                            event: event,
+                            actors: [selectedActor],
+                            skill: action.skill.toLocaleLowerCase(),
+                        });
                     }
                 };
                 if ("querySelectorAll" in html) {
