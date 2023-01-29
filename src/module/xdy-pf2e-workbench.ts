@@ -421,6 +421,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     if (
         game.settings.get(MODULENAME, "playerFeatsRarityColour") ||
+        game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
         game.settings.get(MODULENAME, "playerSpellsRarityColour") ||
         game.settings.get(MODULENAME, "castPrivateSpell") ||
         game.settings.get(MODULENAME, "addGmRKButtonToNpc") ||
@@ -447,7 +448,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (game.settings.get(MODULENAME, "playerSpellsRarityColour")) {
-                // TODO
                 $html.find(".spell-list").each((_i, e) => {
                     $(e)
                         .find(".item.spell")
@@ -455,16 +455,17 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             const $e = $(e);
                             const itemId: string = <string>$e.attr("data-item-id");
                             const spell = <SpellPF2e>(<unknown>sheet.actor?.items?.get(itemId));
-                            const rarity = spell.system.traits.rarity;
-                            if (rarity) {
-                                $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
+                            if (spell) {
+                                const rarity = spell.system.traits.rarity;
+                                if (rarity) {
+                                    $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
+                                }
                             }
                         });
                 });
             }
 
             if (game.settings.get(MODULENAME, "playerFeatsRarityColour")) {
-                // TODO
                 $html.find(".feats-pane").each((_i, e) => {
                     $(e)
                         .find(".feat-item")
@@ -472,9 +473,29 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                             const $e = $(e);
                             const itemId: string = <string>$e.attr("data-item-id");
                             const feat = <FeatPF2e>(<unknown>sheet.actor?.items?.get(itemId));
-                            const rarity = feat.system.traits.rarity;
-                            if (rarity) {
-                                $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
+                            if (feat) {
+                                const rarity = feat.system.traits.rarity;
+                                if (rarity) {
+                                    $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
+                                }
+                            }
+                        });
+                });
+            }
+
+            if (game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint")) {
+                $html.find(".feats-pane").each((_i, e) => {
+                    $(e)
+                        .find(".feat-item")
+                        .each((_n, e) => {
+                            const $e = $(e);
+                            const itemId: string = <string>$e.attr("data-item-id");
+                            const feat = <FeatPF2e>(<unknown>sheet.actor?.items?.get(itemId));
+                            if (feat) {
+                                const prereqs = feat.system.prerequisites.value.length > 0;
+                                if (prereqs) {
+                                    $e.find("h4").append("*");
+                                }
                             }
                         });
                 });

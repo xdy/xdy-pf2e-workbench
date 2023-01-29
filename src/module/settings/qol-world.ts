@@ -124,6 +124,15 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Number,
                 onChange: () => debouncedReload(),
             },
+            playerFeatsPrerequisiteHint: {
+                name: `${MODULENAME}.SETTINGS.playerFeatsPrerequisiteHint.name`,
+                hint: `${MODULENAME}.SETTINGS.playerFeatsPrerequisiteHint.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => debouncedReload(),
+            },
             playerFeatsRarityColour: {
                 name: `${MODULENAME}.SETTINGS.playerFeatsRarityColour.name`,
                 hint: `${MODULENAME}.SETTINGS.playerFeatsRarityColour.hint`,

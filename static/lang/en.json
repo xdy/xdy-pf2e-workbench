@@ -303,6 +303,10 @@
         "hint": "Call hotbar macro on page {page} position {column}",
         "name": "Call hotbar macro on page {page} position {column}"
       },
+      "playerFeatsPrerequisiteHint": {
+        "hint": "Client setting to add an asterisk to the name for feats with a prerequisite set.",
+        "name": "Add an asterisk to the name for feats with a prerequisite."
+      },
       "playerFeatsRarityColour": {
         "hint": "Client setting to show feat names in rarity colour on actor sheets.",
         "name": "Show feat names in rarity colour on actor sheets."
