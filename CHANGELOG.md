@@ -1,3 +1,16 @@
+# [4.39.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.38.0...v4.39.0) (2023-01-29)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([14eeb75](https://github.com/xdy/xdy-pf2e-workbench/commit/14eeb757d17a46d4d1bcae6804cf9d78c836ac7a))
+
+
+### Features
+
+* Basic Action Macros adds support for the action macros for Decipher Writing, Disable Device, Perform and Subsist that will hopefully be in the next pf2e system release (i.e. if you try to use them now, they will fail.) ([e5c3952](https://github.com/xdy/xdy-pf2e-workbench/commit/e5c3952345e8a0a136acae9a709a1c63121c9815))
+* Optional setting to add an asterisk after a feat name on the character sheet if that feat has prerequisites. ([264938a](https://github.com/xdy/xdy-pf2e-workbench/commit/264938a491c376b756c630d961ab7d3ae492ff5f))
+
 # [4.38.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.37.0...v4.38.0) (2023-01-27)
 
 
