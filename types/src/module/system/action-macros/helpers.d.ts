@@ -1,8 +1,8 @@
 import { ActorPF2e } from "@actor";
 import { RollNotePF2e } from "@module/notes";
 import { DegreeOfSuccessString } from "@system/degree-of-success";
-import { CheckType } from "@system/rolls";
 import { SimpleRollActionCheckOptions } from "./types";
+import { CheckType } from "@system/check";
 export declare class ActionMacroHelpers {
     static resolveStat(stat: string): {
         checkType: CheckType;
@@ -18,5 +18,4 @@ export declare class ActionMacroHelpers {
     };
     private static getWeaponPotencyModifier;
     private static getApplicableEquippedWeapons;
-    private static getBasicUnarmedAttack;
 }

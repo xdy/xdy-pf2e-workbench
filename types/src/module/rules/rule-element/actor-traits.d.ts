@@ -1,21 +1,13 @@
 import { ItemPF2e } from "@item";
-import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from "./";
-/**
- * @category RuleElement
- */
-export declare class ActorTraitsRuleElement extends RuleElementPF2e {
+import { RuleElementPF2e, RuleElementSource, RuleElementOptions } from "./";
+declare class ActorTraitsRuleElement extends RuleElementPF2e {
+    add: string[];
+    remove: string[];
     constructor(data: ActorTraitsSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     beforePrepareData(): void;
 }
-export interface ActorTraitsRuleElement extends RuleElementPF2e {
-    data: ActorTraitsData;
-}
 interface ActorTraitsSource extends RuleElementSource {
-    add?: string[];
-    remove?: string[];
+    add?: unknown;
+    remove?: unknown;
 }
-interface ActorTraitsData extends RuleElementData {
-    add: string[];
-    remove: string[];
-}
-export {};
+export { ActorTraitsRuleElement };

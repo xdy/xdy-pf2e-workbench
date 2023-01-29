@@ -1,6 +1,7 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor/base";
+import { ActorPF2e } from "@actor";
 import { EffectPF2e } from "@item";
 import { FlattenedCondition } from "../system/conditions";
 export declare class EffectsPanel extends Application {
@@ -17,12 +18,14 @@ export declare class EffectsPanel extends Application {
     };
     getData(options?: ApplicationOptions): Promise<EffectsPanelData>;
     activateListeners($html: JQuery): void;
-    private static getParentConditionsBreakdown;
     private static getRemainingDurationLabel;
 }
 interface EffectsPanelData {
     conditions: FlattenedCondition[];
     effects: EffectPF2e[];
     actor: ActorPF2e | null;
+    user: {
+        isGM: boolean;
+    };
 }
 export {};

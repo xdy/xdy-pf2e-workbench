@@ -17,6 +17,7 @@ export declare class LoseHitPointsRuleElement extends RuleElementPF2e {
     preUpdate(changes: DeepPartial<ItemSourcePF2e>): Promise<void>;
 }
 interface LoseHitPointsSource extends RuleElementSource {
+    value?: unknown;
     reevaluateOnUpdate?: unknown;
 }
 export interface LoseHitPointsRuleElement extends RuleElementPF2e {

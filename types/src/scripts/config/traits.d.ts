@@ -1,7 +1,7 @@
 import { AlignmentTrait } from "@actor/creature/types";
 import { OtherArmorTag } from "@item/armor/types";
 import { ClassTrait } from "@item/class/data";
-import { OtherEquipmentTag } from "@item/equipment/types";
+import { OtherConsumableTag } from "@item/consumable/types";
 import { PreciousMaterialType } from "@item/physical/types";
 import { MagicSchool, MagicTradition } from "@item/spell/types";
 import { OtherWeaponTag } from "@item/weapon/types";
@@ -27,6 +27,7 @@ declare const ancestryTraits: {
     fleshwarp: string;
     ganzi: string;
     geniekin: string;
+    ghoran: string;
     gnoll: string;
     gnome: string;
     goblin: string;
@@ -36,10 +37,12 @@ declare const ancestryTraits: {
     hobgoblin: string;
     human: string;
     ifrit: string;
+    kashrishi: string;
     kitsune: string;
     kobold: string;
     leshy: string;
     lizardfolk: string;
+    nagaji: string;
     orc: string;
     oread: string;
     poppet: string;
@@ -54,6 +57,8 @@ declare const ancestryTraits: {
     tengu: string;
     tiefling: string;
     undine: string;
+    vanara: string;
+    vishkanya: string;
 };
 declare const ancestryItemTraits: {
     amphibious: string;
@@ -82,6 +87,7 @@ declare const ancestryItemTraits: {
     fleshwarp: string;
     ganzi: string;
     geniekin: string;
+    ghoran: string;
     gnoll: string;
     gnome: string;
     goblin: string;
@@ -91,10 +97,12 @@ declare const ancestryItemTraits: {
     hobgoblin: string;
     human: string;
     ifrit: string;
+    kashrishi: string;
     kitsune: string;
     kobold: string;
     leshy: string;
     lizardfolk: string;
+    nagaji: string;
     orc: string;
     oread: string;
     poppet: string;
@@ -109,11 +117,14 @@ declare const ancestryItemTraits: {
     tengu: string;
     tiefling: string;
     undine: string;
+    vanara: string;
+    vishkanya: string;
 };
 declare const elementalTraits: {
     air: string;
     earth: string;
     fire: string;
+    metal: string;
     water: string;
 };
 declare const energyDamageTypes: {
@@ -217,7 +228,7 @@ declare const creatureTraits: {
     reflection: string;
     sahkil: string;
     samsaran: string;
-    "sea devil": string;
+    "sea-devil": string;
     serpentfolk: string;
     seugathi: string;
     shabti: string;
@@ -251,6 +262,7 @@ declare const creatureTraits: {
     wayang: string;
     werecreature: string;
     wight: string;
+    "wild-hunt": string;
     wraith: string;
     wyrwood: string;
     xulgath: string;
@@ -269,6 +281,7 @@ declare const creatureTraits: {
     sonic: string;
     air: string;
     earth: string;
+    metal: string;
     water: string;
     amphibious: string;
     fey: string;
@@ -299,6 +312,7 @@ declare const creatureTraits: {
     halfling: string;
     hobgoblin: string;
     human: string;
+    kashrishi: string;
     kitsune: string;
     kobold: string;
     leshy: string;
@@ -387,11 +401,12 @@ declare const damageTraits: {
     sonic: string;
     air: string;
     earth: string;
+    metal: string;
     water: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const magicSchools: Record<MagicSchool, string>;
 declare const spellTraits: {
@@ -464,6 +479,7 @@ declare const spellTraits: {
     air: string;
     earth: string;
     fire: string;
+    metal: string;
     water: string;
     magical: string;
     mental: string;
@@ -476,9 +492,9 @@ declare const spellTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
     alchemist: string;
     barbarian: string;
     bard: string;
@@ -506,6 +522,7 @@ declare const weaponTraits: {
     alchemical: string;
     agile: string;
     artifact: string;
+    attached: string;
     "attached-to-shield": string;
     "attached-to-crossbow-or-firearm": string;
     auditory: string;
@@ -538,6 +555,7 @@ declare const weaponTraits: {
     "deadly-2d12": string;
     "deadly-3d12": string;
     "deadly-4d12": string;
+    death: string;
     disarm: string;
     disease: string;
     "double-barrel": string;
@@ -587,6 +605,7 @@ declare const weaponTraits: {
     splash: string;
     staff: string;
     sweep: string;
+    tech: string;
     teleportation: string;
     tethered: string;
     thrown: string;
@@ -598,6 +617,7 @@ declare const weaponTraits: {
     "thrown-60": string;
     "thrown-80": string;
     "thrown-100": string;
+    "thrown-200": string;
     trip: string;
     twin: string;
     "two-hand-d6": string;
@@ -645,6 +665,7 @@ declare const weaponTraits: {
     sonic: string;
     air: string;
     earth: string;
+    metal: string;
     water: string;
     "half-elf": string;
     "half-orc": string;
@@ -667,6 +688,7 @@ declare const weaponTraits: {
     fleshwarp: string;
     ganzi: string;
     geniekin: string;
+    ghoran: string;
     gnoll: string;
     gnome: string;
     goblin: string;
@@ -676,10 +698,12 @@ declare const weaponTraits: {
     hobgoblin: string;
     human: string;
     ifrit: string;
+    kashrishi: string;
     kitsune: string;
     kobold: string;
     leshy: string;
     lizardfolk: string;
+    nagaji: string;
     orc: string;
     oread: string;
     poppet: string;
@@ -694,14 +718,16 @@ declare const weaponTraits: {
     tengu: string;
     tiefling: string;
     undine: string;
+    vanara: string;
+    vishkanya: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const preciousMaterials: Record<PreciousMaterialType, string>;
 declare const otherArmorTags: Record<OtherArmorTag, string>;
-declare const otherEquipmentTags: Record<OtherEquipmentTag, string>;
+declare const otherConsumableTags: Record<OtherConsumableTag, string>;
 declare const otherWeaponTags: Record<OtherWeaponTag, string>;
 declare const npcAttackTraits: {
     curse: string;
@@ -733,17 +759,33 @@ declare const npcAttackTraits: {
     "range-80": string;
     "range-90": string;
     "range-100": string;
+    "range-110": string;
     "range-120": string;
+    "range-140": string;
     "range-150": string;
+    "range-160": string;
+    "range-170": string;
     "range-180": string;
+    "range-190": string;
     "range-200": string;
+    "range-210": string;
+    "range-220": string;
+    "range-230": string;
     "range-240": string;
+    "range-250": string;
+    "range-260": string;
+    "range-270": string;
+    "range-280": string;
+    "range-290": string;
     "range-300": string;
+    "range-310": string;
+    "range-320": string;
     "range-500": string;
     "range-increment-5": string;
     "range-increment-10": string;
     "range-increment-15": string;
     "range-increment-20": string;
+    "range-increment-25": string;
     "range-increment-30": string;
     "range-increment-40": string;
     "range-increment-50": string;
@@ -775,25 +817,28 @@ declare const npcAttackTraits: {
     "range-increment-300": string;
     "range-increment-310": string;
     "range-increment-320": string;
-    adamantine: string;
-    darkwood: string;
-    mithral: string;
-    orichalcum: string;
-    silver: string;
-    warpglass: string;
     abysium: string;
-    coldIron: string;
+    adamantine: string;
+    "cold-iron": string;
+    darkwood: string;
     djezet: string;
     dragonhide: string;
     "grisantian-pelt": string;
     inubrix: string;
+    mithral: string;
     noqual: string;
+    orichalcum: string;
     peachwood: string;
     siccatite: string;
-    sovereignSteel: string;
+    silver: string;
+    "sisterstone-dusk": string;
+    "sisterstone-scarlet": string;
+    "sovereign-steel": string;
+    warpglass: string;
     alchemical: string;
     agile: string;
     artifact: string;
+    attached: string;
     "attached-to-shield": string;
     "attached-to-crossbow-or-firearm": string;
     auditory: string;
@@ -826,6 +871,7 @@ declare const npcAttackTraits: {
     "deadly-2d12": string;
     "deadly-3d12": string;
     "deadly-4d12": string;
+    death: string;
     disarm: string;
     disease: string;
     "double-barrel": string;
@@ -875,6 +921,7 @@ declare const npcAttackTraits: {
     splash: string;
     staff: string;
     sweep: string;
+    tech: string;
     teleportation: string;
     tethered: string;
     thrown: string;
@@ -886,6 +933,7 @@ declare const npcAttackTraits: {
     "thrown-60": string;
     "thrown-80": string;
     "thrown-100": string;
+    "thrown-200": string;
     trip: string;
     twin: string;
     "two-hand-d6": string;
@@ -933,6 +981,7 @@ declare const npcAttackTraits: {
     sonic: string;
     air: string;
     earth: string;
+    metal: string;
     water: string;
     "half-elf": string;
     "half-orc": string;
@@ -955,6 +1004,7 @@ declare const npcAttackTraits: {
     fleshwarp: string;
     ganzi: string;
     geniekin: string;
+    ghoran: string;
     gnoll: string;
     gnome: string;
     goblin: string;
@@ -964,10 +1014,12 @@ declare const npcAttackTraits: {
     hobgoblin: string;
     human: string;
     ifrit: string;
+    kashrishi: string;
     kitsune: string;
     kobold: string;
     leshy: string;
     lizardfolk: string;
+    nagaji: string;
     orc: string;
     oread: string;
     poppet: string;
@@ -982,10 +1034,12 @@ declare const npcAttackTraits: {
     tengu: string;
     tiefling: string;
     undine: string;
+    vanara: string;
+    vishkanya: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const featTraits: {
     additive1: string;
@@ -1096,6 +1150,7 @@ declare const featTraits: {
     air: string;
     earth: string;
     fire: string;
+    metal: string;
     water: string;
     magical: string;
     mental: string;
@@ -1108,9 +1163,9 @@ declare const featTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
     alchemist: string;
     barbarian: string;
     bard: string;
@@ -1154,6 +1209,7 @@ declare const featTraits: {
     fleshwarp: string;
     ganzi: string;
     geniekin: string;
+    ghoran: string;
     gnoll: string;
     gnome: string;
     goblin: string;
@@ -1163,10 +1219,12 @@ declare const featTraits: {
     hobgoblin: string;
     human: string;
     ifrit: string;
+    kashrishi: string;
     kitsune: string;
     kobold: string;
     leshy: string;
     lizardfolk: string;
+    nagaji: string;
     orc: string;
     oread: string;
     poppet: string;
@@ -1181,6 +1239,8 @@ declare const featTraits: {
     tengu: string;
     tiefling: string;
     undine: string;
+    vanara: string;
+    vishkanya: string;
 };
 declare const consumableTraits: {
     additive1: string;
@@ -1248,6 +1308,7 @@ declare const consumableTraits: {
     air: string;
     earth: string;
     fire: string;
+    metal: string;
     water: string;
     mental: string;
     nonlethal: string;
@@ -1261,9 +1322,9 @@ declare const consumableTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const actionTraits: {
     circus: string;
@@ -1337,6 +1398,7 @@ declare const actionTraits: {
     air: string;
     earth: string;
     fire: string;
+    metal: string;
     water: string;
     magical: string;
     mental: string;
@@ -1349,9 +1411,9 @@ declare const actionTraits: {
     positive: string;
     sonic: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
     alchemist: string;
     barbarian: string;
     bard: string;
@@ -1459,6 +1521,7 @@ declare const actionTraits: {
     fleshwarp: string;
     ganzi: string;
     geniekin: string;
+    ghoran: string;
     gnoll: string;
     gnome: string;
     goblin: string;
@@ -1468,9 +1531,11 @@ declare const actionTraits: {
     hobgoblin: string;
     human: string;
     ifrit: string;
+    kashrishi: string;
     kitsune: string;
     leshy: string;
     lizardfolk: string;
+    nagaji: string;
     orc: string;
     oread: string;
     poppet: string;
@@ -1485,6 +1550,8 @@ declare const actionTraits: {
     tengu: string;
     tiefling: string;
     undine: string;
+    vanara: string;
+    vishkanya: string;
 };
 declare const hazardTraits: {
     alchemical: string;
@@ -1501,6 +1568,7 @@ declare const hazardTraits: {
     magical: string;
     mechanical: string;
     poison: string;
+    shadow: string;
     steam: string;
     summoned: string;
     technological: string;
@@ -1535,11 +1603,12 @@ declare const hazardTraits: {
     sonic: string;
     air: string;
     earth: string;
+    metal: string;
     water: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const vehicleTraits: {
     artifact: string;
@@ -1565,6 +1634,7 @@ declare const equipmentTraits: {
     clockwork: string;
     companion: string;
     contract: string;
+    consecration: string;
     cursed: string;
     darkness: string;
     death: string;
@@ -1586,6 +1656,7 @@ declare const equipmentTraits: {
     magical: string;
     mental: string;
     misfortune: string;
+    morph: string;
     mounted: string;
     nonlethal: string;
     plant: string;
@@ -1626,6 +1697,7 @@ declare const equipmentTraits: {
     sonic: string;
     air: string;
     earth: string;
+    metal: string;
     water: string;
     "half-elf": string;
     "half-orc": string;
@@ -1648,6 +1720,7 @@ declare const equipmentTraits: {
     fleshwarp: string;
     ganzi: string;
     geniekin: string;
+    ghoran: string;
     gnoll: string;
     gnome: string;
     goblin: string;
@@ -1657,10 +1730,12 @@ declare const equipmentTraits: {
     hobgoblin: string;
     human: string;
     ifrit: string;
+    kashrishi: string;
     kitsune: string;
     kobold: string;
     leshy: string;
     lizardfolk: string;
+    nagaji: string;
     orc: string;
     oread: string;
     poppet: string;
@@ -1675,10 +1750,12 @@ declare const equipmentTraits: {
     tengu: string;
     tiefling: string;
     undine: string;
+    vanara: string;
+    vishkanya: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
 declare const armorTraits: {
     apex: string;
@@ -1712,10 +1789,11 @@ declare const armorTraits: {
     air: string;
     earth: string;
     fire: string;
+    metal: string;
     water: string;
     chaotic: string;
-    lawful: string;
-    good: string;
     evil: string;
+    good: string;
+    lawful: string;
 };
-export { actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementalTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherEquipmentTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, vehicleTraits, weaponTraits, };
+export { actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementalTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherConsumableTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, vehicleTraits, weaponTraits, };

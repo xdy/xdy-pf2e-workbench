@@ -5,8 +5,8 @@ import { TokenDataPF2e } from "./data";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { PrototypeTokenPF2e } from "@actor/data/base";
 import { TokenAura } from "./aura";
-import { ActorSourcePF2e } from "@actor/data";
 declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
+    #private;
     /** Has this token gone through at least one cycle of data preparation? */
     private initialized?;
     auras: Map<string, TokenAura>;
@@ -45,16 +45,14 @@ declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends To
         initiative: number;
         sendMessage?: boolean;
     }): Promise<void>;
-    /**
-     * Since token properties may be changed during data preparation, rendering called by the parent method must be
-     * based on the diff between pre- and post-data-preparation.
-     */
-    _onUpdateBaseActor(updates?: DeepPartial<ActorSourcePF2e>, options?: DocumentModificationContext<ActorPF2e>): void;
     /** Toggle token hiding if this token's actor is a loot actor */
     protected _onCreate(data: this["_source"], options: DocumentModificationContext<this>, userId: string): void;
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext, userId: string): void;
-    /** Check area effects, removing any from this token's actor if the actor has no other tokens in the scene */
+    /** Reinitialize vision if the actor's senses were updated directly */
+    _onUpdateBaseActor(update?: Record<string, unknown>, options?: DocumentModificationContext<Actor>): void;
     protected _onDelete(options: DocumentModificationContext<this>, userId: string): void;
+    /** Re-render token placeable if REs have ephemerally changed any visuals of this token */
+    onActorEmbeddedItemChange(): void;
 }
 interface TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
     readonly data: TokenDataPF2e<this>;
@@ -64,6 +62,6 @@ interface TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenD
     get combatant(): CombatantPF2e<EncounterPF2e> | null;
     _sheet: TokenConfigPF2e<this> | null;
     get sheet(): TokenConfigPF2e<this>;
-    overlayEffect: ImagePath;
+    overlayEffect: ImageFilePath;
 }
 export { TokenDocumentPF2e };

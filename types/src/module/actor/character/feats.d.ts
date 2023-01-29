@@ -2,7 +2,7 @@ import { FeatPF2e, ItemPF2e } from "@item";
 import { FeatType } from "@item/feat/data";
 import { CharacterPF2e } from ".";
 import { BonusFeat, SlottedFeat } from "./data";
-declare type FeatSlotLevel = number | {
+type FeatSlotLevel = number | {
     id: string;
     label: string;
 };

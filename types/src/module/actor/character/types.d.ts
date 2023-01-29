@@ -8,11 +8,11 @@ interface CharacterHitPointsSummary extends HitPointsSummary {
     recoveryMultiplier: number;
     recoveryAddend: number;
 }
-declare type CharacterSkill = Statistic & {
+type CharacterSkill = Statistic & {
     rank: ZeroToFour;
     ability: AbilityString;
 };
-declare type CharacterSkills = Record<SkillAbbreviation, CharacterSkill> & Record<SkillLongForm, CharacterSkill> & Partial<Record<string, CharacterSkill>>;
+type CharacterSkills = Record<SkillAbbreviation, CharacterSkill> & Record<SkillLongForm, CharacterSkill> & Partial<Record<string, CharacterSkill>>;
 interface CreateAuxiliaryInteractParams {
     weapon: Embedded<WeaponPF2e>;
     action: "Interact";
@@ -25,5 +25,12 @@ interface CreateAuxiliaryReleaseParams {
     purpose: "Grip" | "Drop";
     hands: 0 | 1;
 }
-declare type CreateAuxiliaryParams = CreateAuxiliaryInteractParams | CreateAuxiliaryReleaseParams;
-export { CharacterHitPointsSummary, CharacterSkill, CharacterSkills, CreateAuxiliaryParams };
+type CreateAuxiliaryParams = CreateAuxiliaryInteractParams | CreateAuxiliaryReleaseParams;
+/** Single source of a Dexterity modifier cap to Armor Class, including the cap value itself. */
+interface DexterityModifierCapData {
+    /** The numeric value that constitutes the maximum Dexterity modifier. */
+    value: number;
+    /** The source of this Dex cap - usually the name of an armor, a monk stance, or a spell. */
+    source: string;
+}
+export { CharacterHitPointsSummary, CharacterSkill, CharacterSkills, CreateAuxiliaryParams, DexterityModifierCapData };

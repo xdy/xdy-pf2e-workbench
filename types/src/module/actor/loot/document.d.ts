@@ -15,6 +15,8 @@ declare class LootPF2e extends ActorPF2e {
     get canHostRuleElements(): boolean;
     /** It's a box. */
     get canAct(): false;
+    /** It's a sturdy box. */
+    isAffectedBy(): false;
     /** Anyone with Limited permission can update a loot actor */
     canUserModify(user: UserPF2e, action: UserAction): boolean;
     /** A user can see a loot actor in the actor directory only if they have at least Observer permission */

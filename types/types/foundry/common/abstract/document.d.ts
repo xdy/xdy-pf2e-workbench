@@ -134,7 +134,7 @@ declare global {
                  * @param user The User being tested
                  * @returns A numeric permission level from CONST.ENTITY_PERMISSIONS or null
                  */
-                getUserLevel(user: documents.BaseUser): PermissionLevel | null;
+                getUserLevel(user: documents.BaseUser): DocumentOwnershipLevel | null;
 
                 /**
                  * Test whether a certain User has a requested permission level (or greater) over the Document
@@ -146,7 +146,7 @@ declare global {
                  */
                 testUserPermission(
                     user: documents.BaseUser,
-                    permission: DocumentPermission | DocumentPermissionNumber,
+                    permission: DocumentOwnershipString | DocumentOwnershipLevel,
                     { exact }?: { exact?: boolean }
                 ): boolean;
 
@@ -602,7 +602,7 @@ declare global {
         /** Block the dispatch of preCreate hooks for this operation */
         noHook?: boolean;
         /** A Compendium pack identifier within which the Documents should be modified */
-        pack?: string;
+        pack?: string | null;
         /** Return an index of the Document collection, used only during a get operation. */
         index?: boolean;
         /** When performing a creation operation, keep the provided _id instead of clearing it. */

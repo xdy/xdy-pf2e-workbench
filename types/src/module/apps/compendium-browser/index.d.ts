@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { TabData, PackInfo, TabName, BrowserTab } from "./data";
 import { InitialActionFilters, InitialBestiaryFilters, InitialEquipmentFilters, InitialFeatFilters, InitialHazardFilters, InitialSpellFilters } from "./tabs/data";
@@ -57,8 +58,7 @@ declare class CompendiumBrowser extends Application {
     close(options?: {
         force?: boolean;
     }): Promise<void>;
-    private initCompendiumList;
-    loadSettings(): void;
+    initCompendiumList(): void;
     hookTab(): void;
     openTab(tab: "action", filter?: InitialActionFilters): Promise<void>;
     openTab(tab: "bestiary", filter?: InitialBestiaryFilters): Promise<void>;
@@ -74,9 +74,10 @@ declare class CompendiumBrowser extends Application {
     activateListeners($html: JQuery): void;
     /**
      * Append new results to the result list
-     * @param html The Compendium Browser app HTML
-     * @param list The result list HTML element
-     * @param start The index position to start from
+     * @param options Render options
+     * @param options.list The result list HTML element
+     * @param options.start The index position to start from
+     * @param options.replace Replace the current list with the new results?
      */
     private renderResultList;
     /** Activate click listeners on loaded actors and items */
@@ -91,23 +92,23 @@ declare class CompendiumBrowser extends Application {
     protected _onDragOver(event: ElementDragEvent): void;
     injectActorDirectory(): void;
     getData(): {
-        user: Active<import("../../user").UserPF2e>;
+        user: Active<import("../../user/document").UserPF2e>;
         settings: CompendiumBrowserSettings;
         scrollLimit?: undefined;
     } | {
-        [x: string]: number | Active<import("../../user").UserPF2e> | {
-            filterData: import("./tabs/data").EquipmentFilters | import("./tabs/data").ActionFilters | import("./tabs/data").FeatFilters | import("./tabs/data").HazardFilters | import("./tabs/data").SpellFilters | import("./tabs/data").BestiaryFilters;
+        [x: string]: number | Active<import("../../user/document").UserPF2e> | {
+            filterData: import("./tabs/data").ActionFilters | import("./tabs/data").BestiaryFilters | import("./tabs/data").EquipmentFilters | import("./tabs/data").FeatFilters | import("./tabs/data").HazardFilters | import("./tabs/data").SpellFilters;
         };
-        user: Active<import("../../user").UserPF2e>;
+        user: Active<import("../../user/document").UserPF2e>;
         scrollLimit: number;
         settings?: undefined;
     } | {
-        user: Active<import("../../user").UserPF2e>;
+        user: Active<import("../../user/document").UserPF2e>;
         settings?: undefined;
         scrollLimit?: undefined;
     };
     private resetFilters;
     private clearScrollLimit;
 }
-declare type CompendiumBrowserSettings = Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;
+type CompendiumBrowserSettings = Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;
 export { CompendiumBrowser, CompendiumBrowserSettings };

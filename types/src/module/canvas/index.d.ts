@@ -7,5 +7,5 @@ import { TokenPF2e } from "./token";
 import { TokenLayerPF2e } from "./layer/token";
 import { EffectsCanvasGroupPF2e } from "./group/effects";
 export * from "./helpers";
-export declare type CanvasPF2e = Canvas<ScenePF2e, AmbientLightPF2e, MeasuredTemplatePF2e, TokenPF2e, EffectsCanvasGroupPF2e>;
+export type CanvasPF2e = Canvas<ScenePF2e, AmbientLightPF2e, MeasuredTemplatePF2e, TokenPF2e, EffectsCanvasGroupPF2e>;
 export { AmbientLightPF2e, MeasuredTemplatePF2e, TokenPF2e, LightingLayerPF2e, TemplateLayerPF2e, TokenLayerPF2e, EffectsCanvasGroupPF2e, };

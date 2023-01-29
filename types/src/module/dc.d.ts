@@ -4,9 +4,9 @@
  */
 import { ProficiencyRank } from "@item/data";
 import { Rarity } from "./data";
-export declare type NegativeDCAdjustment = "incredibly easy" | "very easy" | "easy" | "normal";
-export declare type PositiveDCAdjustment = "normal" | "hard" | "very hard" | "incredibly hard";
-export declare type DCAdjustment = NegativeDCAdjustment | PositiveDCAdjustment;
+export type NegativeDCAdjustment = "incredibly easy" | "very easy" | "easy" | "normal";
+export type PositiveDCAdjustment = "normal" | "hard" | "very hard" | "incredibly hard";
+export type DCAdjustment = NegativeDCAdjustment | PositiveDCAdjustment;
 export declare function rarityToDCAdjustment(rarity?: Rarity): PositiveDCAdjustment;
 export declare function adjustDC(dc: number, adjustment?: DCAdjustment): number;
 export declare function adjustDCByRarity(dc: number, rarity?: Rarity): number;

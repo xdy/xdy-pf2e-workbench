@@ -6,7 +6,17 @@ export declare class Migration674StableHomebrewTagIDs extends MigrationBase {
     private homebrewKeys;
     private homebrewTags;
     private updateDocumentTags;
-    updateActor(actorSource: ActorSourcePF2e): Promise<void>;
+    updateActor(source: MaybeWithExtraNestedTraits): Promise<void>;
     updateItem(itemSource: ItemSourcePF2e): Promise<void>;
     migrate(): Promise<void>;
 }
+type MaybeWithExtraNestedTraits = ActorSourcePF2e & {
+    system: {
+        traits: {
+            traits?: {
+                value: string[];
+            };
+        };
+    };
+};
+export {};

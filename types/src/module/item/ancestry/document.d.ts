@@ -8,11 +8,10 @@ declare class AncestryPF2e extends ABCItemPF2e {
     get hitPoints(): number;
     get speed(): number;
     get size(): Size;
+    /** Returns all boosts enforced by this ancestry normally */
     get lockedBoosts(): AbilityString[];
     /** Include all ancestry features in addition to any with the expected location ID */
-    getLinkedFeatures(): Embedded<FeatPF2e>[];
-    /** Toggle between voluntary flaws being on or off */
-    toggleVoluntaryFlaw(): Promise<void>;
+    getLinkedItems(): Embedded<FeatPF2e>[];
     prepareBaseData(): void;
     /** Prepare a character's data derived from their ancestry */
     prepareActorData(this: Embedded<AncestryPF2e>): void;

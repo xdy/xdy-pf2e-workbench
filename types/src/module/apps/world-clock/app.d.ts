@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { DateTime } from "luxon";
 import { animateDarkness } from "./animate-darkness";
@@ -48,5 +49,7 @@ export declare class WorldClock extends Application {
     close(options?: {
         force?: boolean;
     }): Promise<void>;
+    /** Create a message informing the user that scene darkness is synced to world time */
+    static createSyncedMessage(): HTMLSpanElement;
 }
 export {};

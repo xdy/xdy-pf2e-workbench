@@ -22,20 +22,20 @@ import type { TreasureData, TreasureSource } from "@item/treasure/data";
 import type { WeaponData, WeaponSource } from "@item/weapon/data";
 import { PROFICIENCY_RANKS } from "@module/data";
 import { PhysicalItemTraits } from "../physical/data";
-export declare type ProficiencyRank = typeof PROFICIENCY_RANKS[number];
-export declare type NonPhysicalItemType = "action" | "ancestry" | "background" | "class" | "condition" | "deity" | "effect" | "feat" | "heritage" | "kit" | "lore" | "melee" | "spell" | "spellcastingEntry";
-export declare type ItemType = NonPhysicalItemType | PhysicalItemType;
+export type ProficiencyRank = typeof PROFICIENCY_RANKS[number];
+export type NonPhysicalItemType = "action" | "ancestry" | "background" | "class" | "condition" | "deity" | "effect" | "feat" | "heritage" | "kit" | "lore" | "melee" | "spell" | "spellcastingEntry";
+export type ItemType = NonPhysicalItemType | PhysicalItemType;
 /** Actual physical items which you carry (as opposed to feats, lore, proficiencies, statuses, etc). */
-export declare type PhysicalItemData = {
+export type PhysicalItemData = {
     system: {
         traits: PhysicalItemTraits;
     };
 } & (ArmorData | BookData | ConsumableData | ContainerData | EquipmentData | TreasureData | WeaponData);
-export declare type MagicItemData = Exclude<PhysicalItemData, ConsumableData | TreasureData>;
-export declare type MagicItemSource = Exclude<PhysicalItemSource, ConsumableSource | TreasureSource>;
-export declare type ItemDataPF2e = PhysicalItemData | ActionItemData | AncestryData | BackgroundData | ClassData | ConditionData | DeityData | EffectData | FeatData | HeritageData | KitData | LoreData | MeleeData | SpellcastingEntryData | SpellData;
-export declare type PhysicalItemSource = PhysicalItemData["_source"];
-export declare type ItemSourcePF2e = ItemDataPF2e["_source"];
+export type MagicItemData = Exclude<PhysicalItemData, ConsumableData | TreasureData>;
+export type MagicItemSource = Exclude<PhysicalItemSource, ConsumableSource | TreasureSource>;
+export type ItemDataPF2e = PhysicalItemData | ActionItemData | AncestryData | BackgroundData | ClassData | ConditionData | DeityData | EffectData | FeatData | HeritageData | KitData | LoreData | MeleeData | SpellcastingEntryData | SpellData;
+export type PhysicalItemSource = PhysicalItemData["_source"];
+export type ItemSourcePF2e = ItemDataPF2e["_source"];
 export interface ItemSummaryData {
     [key: string]: unknown;
     description?: {

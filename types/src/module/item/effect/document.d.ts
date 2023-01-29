@@ -13,6 +13,7 @@ declare class EffectPF2e extends AbstractEffectPF2e {
         expired: boolean;
         remaining: number;
     };
+    get unidentified(): boolean;
     /** Does this effect originate from an aura? */
     get fromAura(): boolean;
     prepareBaseData(): void;

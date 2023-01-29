@@ -4,5 +4,5 @@ import { ItemSourcePF2e } from "@item/data";
 export declare class Migration631FixSenseRuleElementSelector extends MigrationBase {
     static version: number;
     private readonly SENSE_SELECTOR_CONVERSION;
-    updateItem(itemData: ItemSourcePF2e): Promise<void>;
+    updateItem(source: ItemSourcePF2e): Promise<void>;
 }

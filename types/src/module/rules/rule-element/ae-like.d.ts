@@ -8,7 +8,16 @@ declare class AELikeRuleElement extends RuleElementPF2e {
     mode: AELikeChangeMode;
     path: string;
     phase: AELikeDataPrepPhase;
-    static CHANGE_MODES: readonly ["multiply", "add", "downgrade", "upgrade", "override"];
+    /** Change modes and their default priority orders */
+    static CHANGE_MODES: {
+        multiply: number;
+        add: number;
+        subtract: number;
+        remove: number;
+        downgrade: number;
+        upgrade: number;
+        override: number;
+    };
     static PHASES: readonly ["applyAEs", "beforeDerived", "afterDerived", "beforeRoll"];
     /**
      * Pattern to match system.skills.${longForm} paths for replacement
@@ -43,8 +52,8 @@ interface AutoChangeEntry {
 interface AELikeRuleElement extends RuleElementPF2e {
     data: AELikeData;
 }
-declare type AELikeChangeMode = "add" | "multiply" | "upgrade" | "downgrade" | "override";
-declare type AELikeDataPrepPhase = "applyAEs" | "beforeDerived" | "afterDerived" | "beforeRoll";
+type AELikeChangeMode = "add" | "subtract" | "remove" | "multiply" | "upgrade" | "downgrade" | "override";
+type AELikeDataPrepPhase = "applyAEs" | "beforeDerived" | "afterDerived" | "beforeRoll";
 interface AELikeData extends RuleElementData {
     path: string;
     value: RuleValue;

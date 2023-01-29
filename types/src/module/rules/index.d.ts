@@ -12,5 +12,5 @@ declare class RuleElements {
     };
     static fromOwnedItem(item: Embedded<ItemPF2e>, options?: RuleElementOptions): RuleElementPF2e[];
 }
-declare type RuleElementConstructor = new (data: RuleElementSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions) => RuleElementPF2e;
+type RuleElementConstructor = new (data: RuleElementSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions) => RuleElementPF2e;
 export { RuleElements, RuleElementPF2e, RuleElementSource, RuleElementData, RuleElementOptions };

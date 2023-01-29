@@ -6,6 +6,7 @@ import { ChoiceSetData, ChoiceSetSource } from "./data";
  * @category RuleElement
  */
 declare class ChoiceSetRuleElement extends RuleElementPF2e {
+    #private;
     /** The prompt to present in the ChoiceSet application window */
     private prompt;
     /** Should the parent item's name be adjusted to reflect the choice made? */
@@ -37,7 +38,6 @@ declare class ChoiceSetRuleElement extends RuleElementPF2e {
     private queryCompendium;
     /** If this rule element's parent item was granted with a pre-selected choice, the prompt is to be skipped */
     private getPreselection;
-    private setRollOption;
 }
 interface ChoiceSetRuleElement extends RuleElementPF2e {
     data: ChoiceSetData;

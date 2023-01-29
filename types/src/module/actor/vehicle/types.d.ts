@@ -1,2 +1,2 @@
-declare type VehicleTrait = keyof ConfigPF2e["PF2E"]["vehicleTraits"];
+type VehicleTrait = keyof ConfigPF2e["PF2E"]["vehicleTraits"];
 export { VehicleTrait };

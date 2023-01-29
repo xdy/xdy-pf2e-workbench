@@ -1,18 +1,24 @@
 import { ImmunityType, IWRType, ResistanceType, WeaknessType } from "@actor/types";
+import { PredicatePF2e, PredicateStatement } from "@system/predication";
 declare abstract class IWRData<TType extends IWRType> {
     readonly type: TType;
     readonly exceptions: TType[];
-    readonly source: string | null;
+    source: string | null;
     protected abstract readonly typeLabels: Record<TType, string>;
     constructor(data: IWRConstructorData<TType>);
     abstract get label(): string;
+    /** A label showing the type, exceptions, and doubleVs but no value (in case of weaknesses and resistances) */
+    get applicationLabel(): string;
     get typeLabel(): string;
+    protected describe(iwrType: TType): PredicateStatement[];
+    get predicate(): PredicatePF2e;
     toObject(): Readonly<IWRDisplayData<TType>>;
     /** Construct an object argument for Localization#format (see also PF2E.Actor.IWR.CompositeLabel in en.json) */
     protected createFormatData({ list, prefix }: {
         list: TType[];
         prefix: string;
     }): Record<string, string>;
+    test(statements: string[] | Set<string>): boolean;
 }
 type IWRConstructorData<TType extends IWRType> = {
     type: TType;
@@ -112,6 +118,7 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         visual: string;
         water: string;
     };
+    /** No value on immunities, so the full label is the same as the application label */
     get label(): string;
 }
 interface IWRSource<TType extends IWRType = IWRType> {
@@ -234,6 +241,7 @@ declare class ResistanceData extends IWRData<ResistanceType> implements Resistan
         sonic: string;
         "unarmed-attacks": string;
         vorpal: string;
+        "vorpal-adamantine": string;
         warpglass: string;
         water: string;
         weapons: string;
@@ -246,7 +254,10 @@ declare class ResistanceData extends IWRData<ResistanceType> implements Resistan
         doubleVs?: ResistanceType[];
     });
     get label(): string;
+    get applicationLabel(): string;
     toObject(): ResistanceDisplayData;
+    /** Get the doubled value of this resistance if present and applicable to a given instance of damage */
+    getDoubledValue(damageDescription: Set<string>): number;
 }
 type ResistanceDisplayData = IWRDisplayData<ResistanceType> & Pick<ResistanceData, "value" | "doubleVs">;
 interface ResistanceSource extends IWRSource<ResistanceType> {

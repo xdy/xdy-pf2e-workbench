@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor/index";
 import { ItemPF2e } from "@item/index";
@@ -8,7 +9,7 @@ export interface BasicSelectorOptions extends TagSelectorOptions {
     objectProperty: string;
     configTypes: SelectableTagField[];
 }
-export declare type BasicConstructorOptions = Partial<BasicSelectorOptions> & {
+export type BasicConstructorOptions = Partial<BasicSelectorOptions> & {
     objectProperty: string;
 };
 declare class TagSelectorBasic<TDocument extends ActorPF2e | ItemPF2e> extends BaseTagSelector<TDocument> {

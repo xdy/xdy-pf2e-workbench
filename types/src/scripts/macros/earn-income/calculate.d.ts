@@ -1,20 +1,19 @@
-import { ProficiencyRank } from "@item/data";
 import { CoinsPF2e } from "@item/physical/helpers";
+import { OneToFour } from "@module/data";
 import { calculateDC } from "@module/dc";
-import { DegreeIndex, RollBrief } from "@system/degree-of-success";
+import { DegreeOfSuccessIndex, RollBrief } from "@system/degree-of-success";
 /**
  * Implementation of Earn Income rules on https://2e.aonprd.com/Skills.aspx?ID=2&General=true
  */
-declare type TrainedProficiency = Exclude<ProficiencyRank, "untrained">;
-declare type Rewards = Record<TrainedProficiency, CoinsPF2e>;
-declare type IncomeForLevel = {
+type Rewards = Record<OneToFour, CoinsPF2e>;
+type IncomeForLevel = {
     failure: CoinsPF2e;
     rewards: Rewards;
 };
 declare function getIncomeForLevel(level: number): IncomeForLevel;
 interface PerDayEarnIncomeResult {
     rewards: CoinsPF2e;
-    degreeOfSuccess: DegreeIndex;
+    degreeOfSuccess: DegreeOfSuccessIndex;
 }
 interface EarnIncomeOptions {
     useLoreAsExperiencedProfessional: boolean;
@@ -32,7 +31,7 @@ interface EarnIncomeParams {
     level: number;
     days: number;
     rollBrief: RollBrief;
-    proficiency: TrainedProficiency;
+    proficiency: OneToFour;
     options: EarnIncomeOptions;
     dc: number;
 }
@@ -41,10 +40,10 @@ interface EarnIncomeResult {
         perDay: CoinsPF2e;
         combined: CoinsPF2e;
     };
-    degreeOfSuccess: DegreeIndex;
+    degreeOfSuccess: DegreeOfSuccessIndex;
     daysSpentWorking: number;
     level: number;
     dc: number;
     roll: number;
 }
-export { EarnIncomeOptions, EarnIncomeResult, PerDayEarnIncomeResult, TrainedProficiency, calculateDC, earnIncome, getIncomeForLevel, };
+export { EarnIncomeOptions, EarnIncomeResult, PerDayEarnIncomeResult, calculateDC, earnIncome, getIncomeForLevel };

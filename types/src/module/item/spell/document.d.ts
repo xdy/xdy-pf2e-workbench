@@ -1,4 +1,6 @@
 /// <reference types="jquery" />
+import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers";
+import { AbilityString } from "@actor/types";
 import { ItemConstructionContextPF2e, ItemPF2e, SpellcastingEntryPF2e } from "@item";
 import { ActionTrait } from "@item/action/data";
 import { ItemSourcePF2e, ItemSummaryData } from "@item/data";
@@ -7,18 +9,22 @@ import { GhostTemplate } from "@module/canvas/ghost-measured-template";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { OneToTen } from "@module/data";
 import { UserPF2e } from "@module/user";
+import { CheckRoll } from "@system/check";
 import { StatisticRollParameters } from "@system/statistic";
 import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
 import { SpellData, SpellHeightenLayer, SpellOverlayType, SpellSource } from "./data";
 import { SpellOverlayCollection } from "./overlay";
 import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "./types";
+import { DamageRoll } from "@system/damage/roll";
 interface SpellConstructionContext extends ItemConstructionContextPF2e {
     fromConsumable?: boolean;
 }
-interface SpellToMessageOptions extends ToMessageOptions {
-    data?: {
-        castLevel?: number;
-    };
+interface SpellDamage {
+    roll: DamageRoll;
+    domains: string[];
+    options: Set<string>;
+    modifiers: (ModifierPF2e | DamageDicePF2e)[];
+    breakdownTags: string[];
 }
 declare class SpellPF2e extends ItemPF2e {
     readonly isFromConsumable: boolean;
@@ -40,9 +46,11 @@ declare class SpellPF2e extends ItemPF2e {
     get school(): MagicSchool;
     get traditions(): Set<MagicTradition>;
     get spellcasting(): SpellcastingEntryPF2e | undefined;
+    get isAttack(): boolean;
     get isCantrip(): boolean;
     get isFocusSpell(): boolean;
     get isRitual(): boolean;
+    get ability(): AbilityString;
     get components(): Record<SpellComponent, boolean> & {
         value: string;
     };
@@ -57,8 +65,7 @@ declare class SpellPF2e extends ItemPF2e {
     getRollData(rollOptions?: {
         castLevel?: number | string;
     }): NonNullable<EnrichHTMLOptions["rollData"]>;
-    /** Calculates the full damage formula for a specific spell level */
-    private getDamageFormula;
+    get damage(): SpellDamage | null;
     /**
      * Loads an alternative version of this spell, called a variant.
      * The variant is created via the application of one or more overlays based on parameters.
@@ -75,17 +82,15 @@ declare class SpellPF2e extends ItemPF2e {
     prepareBaseData(): void;
     prepareSiblingData(this: Embedded<SpellPF2e>): void;
     getRollOptions(prefix?: string): string[];
-    toMessage(event?: JQuery.TriggeredEvent, { create, data }?: SpellToMessageOptions): Promise<ChatMessagePF2e | undefined>;
+    toMessage(event?: JQuery.TriggeredEvent, { create, data, rollMode }?: SpellToMessageOptions): Promise<ChatMessagePF2e | undefined>;
     getChatData(htmlOptions?: EnrichHTMLOptionsPF2e, rollOptions?: {
         castLevel?: number | string;
+        slotLevel?: number | string;
     }): Promise<Omit<ItemSummaryData, "traits">>;
     rollAttack(this: Embedded<SpellPF2e>, event: JQuery.ClickEvent, attackNumber?: number, context?: StatisticRollParameters): Promise<void>;
-    rollDamage(this: Embedded<SpellPF2e>, event: JQuery.ClickEvent<unknown, unknown, HTMLElement>): Promise<void>;
-    /**
-     * Roll Counteract check
-     * Rely upon the DicePF2e.d20Roll logic for the core implementation
-     */
-    rollCounteract(event: JQuery.ClickEvent): void;
+    rollDamage(this: Embedded<SpellPF2e>, event: JQuery.ClickEvent<unknown, unknown, HTMLElement>): Promise<Rolled<DamageRoll> | null>;
+    /** Roll counteract check */
+    rollCounteract(event: JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
     update(data: DocumentUpdateData<this>, options?: DocumentModificationContext<this>): Promise<this>;
     protected _preUpdate(changed: DeepPartial<SpellSource>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
 }
@@ -93,11 +98,11 @@ interface SpellPF2e {
     readonly data: SpellData;
     overlays: SpellOverlayCollection;
 }
-interface ToMessageOptions {
+interface SpellToMessageOptions {
     create?: boolean;
-    data?: Record<string, unknown> & {
-        slotLevel?: number;
+    rollMode?: RollMode;
+    data?: {
         castLevel?: number;
     };
 }
-export { SpellPF2e };
+export { SpellPF2e, SpellToMessageOptions };

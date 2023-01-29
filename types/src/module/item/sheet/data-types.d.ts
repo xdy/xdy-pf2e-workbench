@@ -1,20 +1,17 @@
-import { ItemPF2e, PhysicalItemPF2e } from "@item";
-import { ABCItemPF2e } from "@item/abc";
-import { AncestryPF2e } from "@item/ancestry";
-import { BackgroundPF2e } from "@item/background";
-import { FeatPF2e } from "@item/feat";
-import { HeritagePF2e } from "@item/heritage";
-import { ItemActivation } from "@item/physical/data";
-import { MaterialGradeData } from "@item/physical/materials";
-import { PreciousMaterialGrade } from "@item/physical/types";
+import { AncestryPF2e, FeatPF2e, HeritagePF2e, ItemPF2e } from "@item";
 import { Rarity } from "@module/data";
 import { RuleElementSource } from "@module/rules";
 import { SheetOptions } from "@module/sheet/helpers";
 export interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData<TItem> {
+    /** The item type label that shows at the top right (for example, "Feat" for "Feat 6") */
     itemType: string | null;
     showTraits: boolean;
+    /** Whether the sheet should have a sidebar at all */
     hasSidebar: boolean;
+    /** Whether the sheet should have a details tab (some item types don't have one) */
     hasDetails: boolean;
+    /** The sidebar's current title */
+    sidebarTitle: string;
     sidebarTemplate?: () => string;
     detailsTemplate?: () => string;
     item: TItem["data"];
@@ -29,6 +26,12 @@ export interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData
     rarity: Rarity | null;
     rarities: ConfigPF2e["PF2E"]["rarityTraits"];
     traits: SheetOptions | null;
+    /** Formerly slugs, now tagify tag objects */
+    traitSlugs: {
+        id: string;
+        value: string;
+        readonly: boolean;
+    }[];
     rules: {
         labels: {
             label: string;
@@ -47,38 +50,6 @@ export interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData
     /** Lore only, will be removed later */
     proficiencies: ConfigPF2e["PF2E"]["proficiencyLevels"];
 }
-export interface PhysicalItemSheetData<TItem extends PhysicalItemPF2e> extends ItemSheetDataPF2e<TItem> {
-    isPhysical: true;
-    basePriceString: string;
-    priceString: string;
-    actionTypes: ConfigPF2e["PF2E"]["actionTypes"];
-    actionsNumber: ConfigPF2e["PF2E"]["actionsNumber"];
-    bulkTypes: ConfigPF2e["PF2E"]["bulkTypes"];
-    frequencies: ConfigPF2e["PF2E"]["frequencies"];
-    sizes: ConfigPF2e["PF2E"]["actorSizes"];
-    stackGroups: ConfigPF2e["PF2E"]["stackGroups"];
-    usage: ConfigPF2e["PF2E"]["usageTraits"];
-    bulkDisabled: boolean;
-    activations: {
-        action: ItemActivation;
-        id: string;
-        base: string;
-    }[];
-}
-export interface ABCSheetData<TItem extends ABCItemPF2e> extends ItemSheetDataPF2e<TItem> {
-    hasDetails: true;
-}
-export interface AncestrySheetData extends ABCSheetData<AncestryPF2e> {
-    selectedBoosts: Record<string, Record<string, string>>;
-    selectedFlaws: Record<string, Record<string, string>>;
-    sizes: SheetOptions;
-    languages: SheetOptions;
-    additionalLanguages: SheetOptions;
-}
-export interface BackgroundSheetData extends ABCSheetData<BackgroundPF2e> {
-    trainedSkills: SheetOptions;
-    selectedBoosts: Record<string, Record<string, string>>;
-}
 export interface FeatSheetData extends ItemSheetDataPF2e<FeatPF2e> {
     featTypes: ConfigPF2e["PF2E"]["featTypes"];
     actionTypes: ConfigPF2e["PF2E"]["actionTypes"];
@@ -95,12 +66,3 @@ export interface HeritageSheetData extends ItemSheetDataPF2e<HeritagePF2e> {
     ancestry: AncestryPF2e | null;
     ancestryRefBroken: boolean;
 }
-declare type MaterialSheetEntry = {
-    label: string;
-    grades: Partial<Record<PreciousMaterialGrade, MaterialGradeData>>;
-};
-export declare type MaterialSheetData = {
-    value: string;
-    materials: Record<string, MaterialSheetEntry>;
-};
-export {};

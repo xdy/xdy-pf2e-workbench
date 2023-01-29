@@ -12,7 +12,7 @@ export declare class BattleFormRuleElement extends RuleElementPF2e {
     ownUnarmed: boolean;
     protected static validActorTypes: ActorType[];
     constructor(data: BattleFormSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
-    static defaultIcons: Record<string, ImagePath | undefined>;
+    static defaultIcons: Record<string, ImageFilePath | undefined>;
     /** Fill in base override data */
     private initialize;
     preCreate({ itemSource, ruleSource }: RuleElementPF2e.PreCreateParams): Promise<void>;
@@ -47,8 +47,8 @@ export interface BattleFormRuleElement extends RuleElementPF2e {
     get actor(): CharacterPF2e;
     data: BattleFormData;
 }
-declare type PickedProperties = "overrides" | "canCast" | "canSpeak" | "hasHands" | "ownUnarmed";
-declare type RequiredBattleFormSource = Required<Pick<BattleFormSource, PickedProperties>>;
+type PickedProperties = "overrides" | "canCast" | "canSpeak" | "hasHands" | "ownUnarmed";
+type RequiredBattleFormSource = Required<Pick<BattleFormSource, PickedProperties>>;
 interface BattleFormData extends RuleElementData, RequiredBattleFormSource {
     key: "BattleForm";
     overrides: Required<BattleFormOverrides> & {

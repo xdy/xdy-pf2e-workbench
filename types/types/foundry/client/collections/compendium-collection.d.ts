@@ -199,6 +199,8 @@ declare global {
         private?: string;
         module?: string;
         package?: string;
+        packageName: string;
+        packageType: "world" | "system" | "module";
         system: string;
     }
 
@@ -206,7 +208,7 @@ declare global {
         _id: string;
         type: string;
         name: string;
-        img: ImagePath;
+        img: ImageFilePath;
         pack?: string;
         [key: string]: any;
     }

@@ -1,11 +1,12 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
-import { RollDataPF2e } from "@system/rolls";
 import { ItemPF2e } from "@item";
 import { ChatMessageDataPF2e, ChatMessageFlagsPF2e, ChatMessageSourcePF2e } from "./data";
 import { TokenDocumentPF2e } from "@scene";
 import { UserPF2e } from "@module/user";
+import { StrikeData } from "@actor/data/base";
 declare class ChatMessagePF2e extends ChatMessage<ActorPF2e> {
     /** The chat log doesn't wait for data preparation before rendering, so set some data in the constructor */
     constructor(data?: DeepPartial<ChatMessageSourcePF2e>, context?: DocumentConstructionContext<ChatMessagePF2e>);
@@ -28,15 +29,18 @@ declare class ChatMessagePF2e extends ChatMessage<ActorPF2e> {
     get isRerollable(): boolean;
     /** Get the owned item associated with this chat message */
     get item(): Embedded<ItemPF2e> | null;
+    /** If this message was for a strike, return the strike. Strikes will change in a future release */
+    get _strike(): StrikeData | null;
     /** Get stringified item source from the DOM-rendering of this chat message */
     getItemFromDOM(): Embedded<ItemPF2e> | null;
     showDetails(): Promise<void>;
     /** Get the token of the speaker if possible */
     get token(): Embedded<TokenDocumentPF2e> | null;
+    getRollData(): Record<string, unknown>;
     getHTML(): Promise<JQuery>;
     private onHoverIn;
     private onHoverOut;
-    private onClick;
+    private onClickSender;
     protected _onCreate(data: foundry.data.ChatMessageSource, options: DocumentModificationContext, userId: string): void;
 }
 interface ChatMessagePF2e extends ChatMessage<ActorPF2e> {
@@ -45,7 +49,6 @@ interface ChatMessagePF2e extends ChatMessage<ActorPF2e> {
     blind: this["data"]["blind"];
     type: this["data"]["type"];
     whisper: this["data"]["whisper"];
-    get roll(): Rolled<Roll<RollDataPF2e>>;
     get user(): UserPF2e;
 }
 declare namespace ChatMessagePF2e {

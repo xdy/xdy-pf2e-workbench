@@ -14,7 +14,10 @@ declare class RollOptionRuleElement extends RuleElementPF2e {
      * If omitted, it defaults to `true` unless also `togglable`, in which case to `false`.
      */
     private value;
-    /** Whether this roll option can be toggled by the user on an actor sheet */
+    /**
+     * Whether this roll option can be toggled by the user on an actor sheet: "totm" indicates it will only be present
+     * if the Theather of the Mind Toggles setting is enabled
+     */
     private toggleable;
     /** An optional predicate to determine whether the toggle is interactable by the user */
     private disabledIf?;
@@ -27,6 +30,8 @@ declare class RollOptionRuleElement extends RuleElementPF2e {
     constructor(data: RollOptionSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     private resolveOption;
     onApplyActiveEffects(): void;
+    /** Force false totm toggleable roll options if the totmToggles setting is disabled */
+    resolveValue(value: string | boolean): boolean;
     /**
      * Toggle the provided roll option (swapping it from true to false or vice versa).
      * @returns the new value if successful or otherwise `null`

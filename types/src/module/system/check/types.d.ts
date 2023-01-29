@@ -1,13 +1,13 @@
 import { ActorPF2e } from "@actor";
-import { AttackTarget } from "@actor/creature/types";
+import { AttackTarget } from "@actor/types";
 import { ItemPF2e } from "@item";
 import { RollSubstitution } from "@module/rules/synthetics";
 import { TokenDocumentPF2e } from "@scene/token-document";
-import { CheckDC } from "@system/degree-of-success";
+import { CheckDC, DegreeOfSuccessAdjustment } from "@system/degree-of-success";
 import { BaseRollContext } from "@system/rolls";
-declare type RollTwiceOption = "keep-higher" | "keep-lower" | false;
-declare type AttackCheck = "attack-roll" | "spell-attack-roll";
-declare type CheckType = "check" | "counteract-check" | "initiative" | "skill-check" | "perception-check" | "saving-throw" | "flat-check" | AttackCheck;
+type RollTwiceOption = "keep-higher" | "keep-lower" | false;
+type AttackCheck = "attack-roll" | "spell-attack-roll";
+type CheckType = "check" | "counteract-check" | "initiative" | "skill-check" | "perception-check" | "saving-throw" | "flat-check" | AttackCheck;
 interface CheckRollContext extends BaseRollContext {
     /** The type of this roll, like 'perception-check' or 'saving-throw'. */
     type?: CheckType;
@@ -32,5 +32,7 @@ interface CheckRollContext extends BaseRollContext {
     substitutions?: RollSubstitution[];
     /** Is the weapon used in this attack roll an alternative usage? */
     altUsage?: "thrown" | "melee" | null;
+    /** Degree of success adjustments from synthetics and hard-coded sources */
+    dosAdjustments?: DegreeOfSuccessAdjustment[];
 }
 export { AttackCheck, CheckType, CheckRollContext, RollTwiceOption };

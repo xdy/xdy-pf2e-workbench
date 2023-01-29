@@ -36,10 +36,10 @@ import {
     rollItemMacro,
     stealthForSelected,
 } from "@scripts/macros";
-import { ModuleArt, registerModuleArt } from "@scripts/register-module-art";
 import { remigrate } from "@scripts/system/remigrate";
 import { CheckPF2e } from "@system/check";
 import { EffectTracker } from "@system/effect-tracker";
+import { ModuleArt } from "@system/module-art";
 import { CustomDamageData, HomebrewTag, HomebrewTraitSettingsKey } from "@system/settings/homebrew";
 import { TextEditorPF2e } from "@system/text-editor";
 import { sluggify } from "@util";
@@ -65,10 +65,7 @@ declare global {
                 editPersistent: typeof editPersistent;
             };
             system: {
-                moduleArt: {
-                    map: Map<ActorUUID, ModuleArt>;
-                    refresh: typeof registerModuleArt;
-                };
+                moduleArt: ModuleArt;
                 remigrate: typeof remigrate;
                 sluggify: typeof sluggify;
             };
@@ -163,7 +160,8 @@ declare global {
 
         get(module: "pf2e", setting: "compendiumBrowserPacks"): CompendiumBrowserSettings;
         get(module: "pf2e", setting: "critFumbleButtons"): boolean;
-        get(module: "pf2e", setting: "deathIcon"): ImagePath;
+        get(module: "pf2e", setting: "critRule"): "doubledamage" | "doubledice";
+        get(module: "pf2e", setting: "deathIcon"): ImageFilePath;
         get(module: "pf2e", setting: "drawCritFumble"): boolean;
         get(module: "pf2e", setting: "enabledRulesUI"): boolean;
         get(module: "pf2e", setting: "gmVision"): boolean;

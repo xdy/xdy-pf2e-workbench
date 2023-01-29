@@ -5,10 +5,10 @@ import type { HazardData, HazardSource } from "@actor/hazard/data";
 import type { LootData, LootSource } from "@actor/loot/data";
 import type { NPCData, NPCSource } from "@actor/npc/data";
 import type { VehicleData, VehicleSource } from "@actor/vehicle/data";
-declare type CreatureData = CharacterData | NPCData | FamiliarData;
-declare type ActorType = CreatureType | "hazard" | "loot" | "vehicle";
-declare type ActorDataPF2e = CreatureData | HazardData | LootData | VehicleData;
-declare type ActorSourcePF2e = ActorDataPF2e["_source"];
+type CreatureData = CharacterData | NPCData | FamiliarData;
+type ActorType = CreatureType | "hazard" | "loot" | "vehicle";
+type ActorDataPF2e = CreatureData | HazardData | LootData | VehicleData;
+type ActorSourcePF2e = ActorDataPF2e["_source"];
 interface RollInitiativeOptionsPF2e extends RollInitiativeOptions {
     secret?: boolean;
     skipDialog?: boolean;

@@ -22,7 +22,7 @@ interface CoinDisplayData {
     value: number;
     label: string;
 }
-export declare type CoinageSummary = {
+export type CoinageSummary = {
     [K in keyof Coins]?: CoinDisplayData;
 };
 interface SheetItemList {
@@ -50,8 +50,6 @@ export interface ActorSheetDataPF2e<TActor extends ActorPF2e> extends ActorSheet
     totalCoinageGold: string;
     totalWealth: Coins;
     totalWealthGold: string;
-    immunities: SheetOptions;
-    hasImmunities: boolean;
     inventory: SheetInventory;
     enrichedContent: Record<string, string>;
 }

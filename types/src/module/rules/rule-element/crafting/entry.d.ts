@@ -8,12 +8,10 @@ import { RawPredicate } from "@system/predication";
  */
 declare class CraftingEntryRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
-    name: string;
-    selector: string;
+    private name;
+    private selector;
     constructor(data: CraftingEntryRuleSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     beforePrepareData(): void;
-    /** Set a roll option to cue any subsequent max-item-level-increasing `ActiveEffectLike`s */
-    onApplyActiveEffects(): void;
 }
 interface CraftingEntryRuleElement extends RuleElementPF2e {
     data: CraftingEntryRuleData;
@@ -29,6 +27,7 @@ interface CraftingEntryRuleData extends RuleElementData {
     preparedFormulas?: PreparedFormulaData[];
 }
 interface CraftingEntryRuleSource extends RuleElementSource {
+    selector?: unknown;
     name?: unknown;
     isAlchemical?: unknown;
     isDailyPrep?: unknown;
@@ -44,4 +43,4 @@ interface PreparedFormulaData {
     expended?: boolean;
     isSignatureItem?: boolean;
 }
-export { CraftingEntryRuleElement };
+export { CraftingEntryRuleData, CraftingEntryRuleElement, CraftingEntryRuleSource };

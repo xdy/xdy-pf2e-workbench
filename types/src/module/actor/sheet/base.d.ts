@@ -1,31 +1,30 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import type { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
+import { StrikeData } from "@actor/data/base";
+import { Coins, ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
-import { Coins } from "@item/physical/data";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data";
 import { BasicConstructorOptions, TagSelectorOptions, TagSelectorType } from "@system/tag-selector";
 import { ActorSheetDataPF2e, CoinageSummary, SheetInventory } from "./data-types";
-import { ItemSummaryRendererPF2e } from "./item-summary-renderer";
+import { ItemSummaryRenderer } from "./item-summary-renderer";
 /**
  * Extend the basic ActorSheet class to do all the PF2e things!
  * This sheet is an Abstract layer which is not used.
  * @category Actor
  */
-export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorSheet<TActor, ItemPF2e> {
+declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorSheet<TActor, ItemPF2e> {
     static get defaultOptions(): ActorSheetOptions;
     /** Implementation used to handle the toggling and rendering of item summaries */
-    itemRenderer: ItemSummaryRendererPF2e<TActor>;
+    itemRenderer: ItemSummaryRenderer<TActor>;
     /** Can non-owning users loot items from this sheet? */
     get isLootSheet(): boolean;
     getData(options?: ActorSheetOptions): Promise<ActorSheetDataPF2e<TActor>>;
-    protected abstract prepareItems(sheetData: ActorSheetDataPF2e<TActor>): Promise<void>;
     protected prepareInventory(): SheetInventory;
     protected static coinsToSheetData(coins: Coins): CoinageSummary;
+    protected getStrikeFromDOM(target: HTMLElement): StrikeData | null;
     activateListeners($html: JQuery): void;
-    /** Opens the spell preparation sheet, but only if its a prepared entry */
-    openSpellPreparationSheet(entryId: string): void;
     onClickDeleteItem(event: JQuery.TriggeredEvent): Promise<void>;
     private onClickBrowseEquipmentCompendia;
     protected _canDragStart(selector: string): boolean;
@@ -34,9 +33,14 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     protected _onDragStart(event: ElementDragEvent): void;
     /** Handle a drop event for an existing Owned Item to sort that item */
     protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e[]>;
-    onDropItem(data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
-    /** Extend the base _onDropItem method to handle dragging spells onto spell slots. */
+    /** Emulate a sheet item drop from the canvas */
+    emulateItemDrop(data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
     protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
+    /**
+     * PF2e specific method called by _onDropItem() when this is a new item that needs to be dropped into the actor
+     * that isn't already on the actor or transferring to another actor.
+     */
+    protected _handleDroppedItem(event: ElementDragEvent, item: ItemPF2e, data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
     protected _onDropFolder(_event: ElementDragEvent, data: DropCanvasData<"Folder", Folder>): Promise<ItemPF2e[]>;
     /**
      * Moves an item between two actors' inventories.
@@ -54,13 +58,6 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     private toggleContainer;
     /** Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset */
     private onClickCreateItem;
-    /** Handle creating a new spellcasting entry for the actor */
-    private createSpellcastingEntry;
-    private editSpellcastingEntry;
-    /**
-     * Handle removing an existing spellcasting entry for the actor
-     */
-    private removeSpellcastingEntry;
     private onAddCoinsPopup;
     private onRemoveCoinsPopup;
     private onSellAllTreasure;
@@ -72,5 +69,13 @@ export declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends A
     protected _getHeaderButtons(): ApplicationHeaderButton[];
     /** Override of inner render function to maintain item summary state */
     protected _renderInner(data: Record<string, unknown>, options: RenderOptions): Promise<JQuery<HTMLElement>>;
+    /** Overriden _render to maintain focus on tagify elements */
+    protected _render(force?: boolean, options?: RenderOptions): Promise<void>;
+    /** Tagify sets an empty input field to "" instead of "[]", which later causes the JSON parse to throw an error */
+    protected _onSubmit(event: Event, { updateData, preventClose, preventRender }?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
     protected _getSubmitData(updateData?: DocumentUpdateData<TActor>): Record<string, unknown>;
 }
+interface ActorSheetPF2e<TActor extends ActorPF2e> extends ActorSheet<TActor, ItemPF2e> {
+    prepareItems?(sheetData: ActorSheetDataPF2e<TActor>): Promise<void>;
+}
+export { ActorSheetPF2e };

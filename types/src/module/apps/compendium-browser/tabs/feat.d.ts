@@ -1,11 +1,13 @@
 import { CompendiumBrowser } from "..";
 import { CompendiumBrowserTab } from "./base";
-import { FeatFilters } from "./data";
+import { CompendiumBrowserIndexData, FeatFilters } from "./data";
 export declare class CompendiumBrowserFeatTab extends CompendiumBrowserTab {
     filterData: FeatFilters;
     templatePath: string;
+    searchFields: string[];
+    storeFields: string[];
     constructor(browser: CompendiumBrowser);
-    protected prepareFilterData(): void;
     protected loadData(): Promise<void>;
-    protected filterIndexData(entry: CompendiumIndexData): boolean;
+    protected filterIndexData(entry: CompendiumBrowserIndexData): boolean;
+    protected prepareFilterData(): void;
 }

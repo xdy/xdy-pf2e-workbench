@@ -19,6 +19,7 @@ import { CreatureSensePF2e } from "./sense";
 import { Alignment, CreatureUpdateContext, GetReachParameters, IsFlatFootedParams } from "./types";
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 declare abstract class CreaturePF2e extends ActorPF2e {
+    protected _skills: CreatureSkills | null;
     /** Skill `Statistic`s for the creature */
     get skills(): CreatureSkills;
     /** The creature's position on the alignment axes */

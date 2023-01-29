@@ -19,9 +19,10 @@ interface AdjustModifierRuleElement extends AELikeRuleElement {
     data: AELikeData;
 }
 interface AdjustModifierSource extends Exclude<AELikeSource, "path"> {
+    selector?: unknown;
+    selectors?: unknown;
     relabel?: unknown;
     damageType?: unknown;
-    selectors?: unknown;
     suppress?: unknown;
 }
 export { AdjustModifierRuleElement };

@@ -1,6 +1,5 @@
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
-import { PredicatePF2e } from "@system/predication";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from ".";
 /** Substitute a pre-determined result for a check's D20 roll */
 declare class CritSpecRuleElement extends RuleElementPF2e {
@@ -12,9 +11,6 @@ declare class CritSpecRuleElement extends RuleElementPF2e {
     constructor(data: CritSpecSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     private isValid;
     beforePrepareData(): void;
-}
-interface CritSpecRuleElement extends RuleElementPF2e {
-    get predicate(): PredicatePF2e;
 }
 interface CritSpecSource extends RuleElementSource {
     alternate?: unknown;

@@ -16,11 +16,11 @@ export interface REMaybeWithUUIDs extends RuleElementSource {
     }>;
     uuid?: unknown;
 }
-declare type CompendiumSource = CompendiumDocument["data"]["_source"];
+type CompendiumSource = CompendiumDocument["data"]["_source"];
 export declare function isActorSource(docSource: CompendiumSource): docSource is ActorSourcePF2e;
 export declare function isItemSource(docSource: CompendiumSource): docSource is ItemSourcePF2e;
 export declare class CompendiumPack {
-    name: string;
+    packId: string;
     packDir: string;
     documentType: string;
     systemId: string;
@@ -28,7 +28,11 @@ export declare class CompendiumPack {
     static outDir: string;
     private static namesToIds;
     private static packsMetadata;
-    private static worldItemLinkPattern;
+    static LINK_PATTERNS: {
+        world: RegExp;
+        compendium: RegExp;
+        uuid: RegExp;
+    };
     constructor(packDir: string, parsedData: unknown[]);
     static loadJSON(dirPath: string): CompendiumPack;
     private finalize;

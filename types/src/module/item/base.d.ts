@@ -3,9 +3,9 @@ import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { UserPF2e } from "@module/user";
 import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
-import { RuleElementOptions, RuleElementPF2e } from "../rules";
+import { RuleElementOptions, RuleElementPF2e } from "@module/rules";
 import { ItemDataPF2e, ItemSourcePF2e, ItemSummaryData, ItemType, TraitChatData } from "./data";
-import type { PhysicalItemPF2e } from "./physical";
+import { PhysicalItemPF2e } from "./physical/document";
 import { ItemSheetPF2e } from "./sheet/base";
 interface ItemConstructionContextPF2e extends DocumentConstructionContext<ItemPF2e> {
     pf2e?: {
@@ -58,26 +58,16 @@ declare class ItemPF2e extends Item<ActorPF2e> {
      * Internal method that transforms data into something that can be used for chat.
      * Currently renders description text using enrichHTML.
      */
-    protected processChatData(htmlOptions: EnrichHTMLOptionsPF2e | undefined, data: ItemSummaryData): Promise<ItemSummaryData>;
+    protected processChatData<T extends ItemSummaryData>(htmlOptions: EnrichHTMLOptionsPF2e | undefined, data: T): Promise<T>;
     getChatData(htmlOptions?: EnrichHTMLOptionsPF2e, _rollOptions?: Record<string, unknown>): Promise<ItemSummaryData>;
     protected traitChatData(dictionary?: Record<string, string | undefined>): TraitChatData[];
-    /**
-     * Roll a NPC Attack
-     * Rely upon the DicePF2e.d20Roll logic for the core implementation
-     */
-    rollNPCAttack(this: Embedded<ItemPF2e>, event: JQuery.ClickEvent, multiAttackPenalty?: number): void;
-    /**
-     * Roll NPC Damage
-     * Rely upon the DicePF2e.damageRoll logic for the core implementation
-     */
-    rollNPCDamage(this: Embedded<ItemPF2e>, event: JQuery.ClickEvent, critical?: boolean): void;
     /** Don't allow the user to create a condition or spellcasting entry from the sidebar. */
     static createDialog(data?: {
         folder?: string;
     }, options?: Partial<FormApplicationOptions>): Promise<ItemPF2e | undefined>;
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
-    static createDocuments<T extends ConstructorOf<ItemPF2e>>(this: T, data?: PreCreate<InstanceType<T>["_source"]>[], context?: DocumentModificationContext<InstanceType<T>>): Promise<InstanceType<T>[]>;
+    static createDocuments<T extends foundry.abstract.Document>(this: ConstructorOf<T>, data?: PreCreate<T["_source"]>[], context?: DocumentModificationContext<T>): Promise<T[]>;
     static deleteDocuments<T extends ConstructorOf<ItemPF2e>>(this: T, ids?: string[], context?: DocumentModificationContext<InstanceType<T>>): Promise<InstanceType<T>[]>;
     protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
     /** Keep `TextEditor` and anything else up to no good from setting this item's description to `null` */
@@ -94,5 +84,9 @@ interface ItemPF2e {
     get sheet(): ItemSheetPF2e<this>;
     prepareSiblingData?(this: Embedded<ItemPF2e>): void;
     prepareActorData?(this: Embedded<ItemPF2e>): void;
+    /** Returns items that should also be added when this item is created */
+    createGrantedItems(): Promise<ItemPF2e[]>;
+    /** Returns items that should also be deleted should this item be deleted */
+    getLinkedItems?(): Embedded<ItemPF2e>[];
 }
 export { ItemPF2e, ItemConstructionContextPF2e };

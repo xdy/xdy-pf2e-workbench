@@ -4,7 +4,7 @@ import { Rollable } from "@actor/data/base";
 import { StatisticModifier } from "@actor/modifiers";
 import { AbilityString } from "@actor/types";
 import type { FamiliarPF2e } from ".";
-declare type FamiliarSource = BaseCreatureSource<"familiar", FamiliarSystemSource>;
+type FamiliarSource = BaseCreatureSource<"familiar", FamiliarSystemSource>;
 interface FamiliarData extends Omit<FamiliarSource, "data" | "system" | "effects" | "flags" | "items" | "prototypeToken" | "type">, BaseCreatureData<FamiliarPF2e, "familiar", FamiliarSystemData, FamiliarSource> {
 }
 interface FamiliarSystemSource extends Pick<CreatureSystemSource, "schema"> {
@@ -17,21 +17,26 @@ interface FamiliarSystemSource extends Pick<CreatureSystemSource, "schema"> {
         hp: {
             value: number;
         };
+        immunities?: never;
+        weaknesses?: never;
+        resistances?: never;
     };
     master: {
         id: string | null;
         ability: AbilityString | null;
     };
+    customModifiers?: never;
     resources?: never;
+    traits?: never;
 }
 /** The raw information contained within the actor data object for familiar actors. */
-interface FamiliarSystemData extends Omit<FamiliarSystemSource, "toggles" | "traits">, CreatureSystemData {
+interface FamiliarSystemData extends Omit<FamiliarSystemSource, "attributes" | "customModifiers" | "toggles" | "traits">, CreatureSystemData {
     details: CreatureSystemData["details"] & {
         creature: {
             value: string;
         };
     };
-    actions?: undefined;
+    actions?: never;
     attack: StatisticModifier & Rollable;
     attributes: FamiliarAttributes;
     skills: FamiliarSkills;
@@ -49,13 +54,15 @@ interface FamiliarAttributes extends CreatureAttributes {
     };
     perception: FamiliarPerception;
 }
-declare type FamiliarPerception = {
+type FamiliarPerception = {
     value: number;
 } & StatisticModifier & Rollable;
-declare type FamiliarSkill = StatisticModifier & Rollable & {
+type FamiliarSkill = StatisticModifier & Rollable & {
     value: number;
+    ability: AbilityString;
+    visible?: boolean;
 };
-declare type FamiliarSkills = Record<SkillAbbreviation, FamiliarSkill>;
+type FamiliarSkills = Record<SkillAbbreviation, FamiliarSkill>;
 interface FamiliarTraitsData extends CreatureTraitsData {
     senses: CreatureSensePF2e[];
 }

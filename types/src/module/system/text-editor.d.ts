@@ -4,13 +4,17 @@ import { UserVisibility } from "@scripts/ui/user-visibility";
 /** Censor enriched HTML according to metagame knowledge settings */
 declare class TextEditorPF2e extends TextEditor {
     #private;
-    static enrichHTML(content?: string, options?: EnrichHTMLOptionsPF2e & {
+    static enrichHTML(content: string | null, options?: EnrichHTMLOptionsPF2e & {
         async?: false;
     }): string;
-    static enrichHTML(content?: string, options?: EnrichHTMLOptionsPF2e & {
+    static enrichHTML(content: string | null, options?: EnrichHTMLOptionsPF2e & {
         async: true;
     }): Promise<string>;
-    static enrichHTML(content?: string, options?: EnrichHTMLOptionsPF2e): string;
+    static enrichHTML(content: string | null, options?: EnrichHTMLOptionsPF2e): string;
+    /** Replace core static method to conditionally handle parsing of inline damage rolls */
+    static _createInlineRoll(match: RegExpMatchArray, rollData: Record<string, unknown>, options?: EvaluateRollParams): Promise<HTMLAnchorElement | null>;
+    /** Replace core static method to conditionally handle inline damage roll clicks */
+    static _onClickInlineRoll(event: MouseEvent): Promise<ChatMessage>;
     static processUserVisibility(content: string, options: EnrichHTMLOptionsPF2e): string;
     static enrichString(data: RegExpMatchArray, options?: EnrichHTMLOptionsPF2e): Promise<HTMLElement | null>;
     /**
@@ -20,7 +24,7 @@ declare class TextEditorPF2e extends TextEditor {
      * @param options attributes to add to the generated span element
      * @returns The generated span element, or `null` if no `name` node was found
      */
-    static convertXMLNode(html: HTMLElement, name: string, { visibility, whose, classes }: ConvertXMLNodeOptions): HTMLElement | null;
+    static convertXMLNode(html: HTMLElement, name: string, { visible, visibility, whose, classes }: ConvertXMLNodeOptions): HTMLElement | null;
 }
 interface EnrichHTMLOptionsPF2e extends EnrichHTMLOptions {
     rollData?: {
@@ -33,6 +37,8 @@ interface EnrichHTMLOptionsPF2e extends EnrichHTMLOptions {
 interface ConvertXMLNodeOptions {
     /** The value of the data-visibility attribute to add to the span element */
     visibility?: UserVisibility | null;
+    /** Whether or not it should be visible or not, which maps to visibility (for this release) */
+    visible?: boolean;
     /**
      * Whether this piece of data belongs to the "self" actor or the target: used by UserVisibilityPF2e to
      * determine which actor's ownership to check

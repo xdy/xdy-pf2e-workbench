@@ -1,9 +1,9 @@
-import { CharacterPF2e } from "@actor";
+import { ActorPF2e, CharacterPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { PredicatePF2e } from "@system/predication";
 import { CraftingFormula } from "./formula";
-export declare class CraftingEntry implements CraftingEntryData {
-    private parentActor;
+export declare class CraftingEntry implements Omit<CraftingEntryData, "parentItem"> {
+    #private;
     preparedCraftingFormulas: PreparedCraftingFormula[];
     preparedFormulaData: PreparedFormulaData[];
     name: string;
@@ -17,11 +17,12 @@ export declare class CraftingEntry implements CraftingEntryData {
     batchSize?: number;
     fieldDiscoveryBatchSize?: number;
     maxItemLevel: number;
-    parentItem: ItemPF2e;
-    constructor(parentActor: CharacterPF2e, knownFormulas: CraftingFormula[], data: CraftingEntryData);
+    parentItem: Embedded<ItemPF2e>;
+    constructor(actor: CharacterPF2e, knownFormulas: CraftingFormula[], data: CraftingEntryData);
+    get actor(): ActorPF2e;
     get formulas(): (PreparedFormulaSheetData | null)[];
     get reagentCost(): number;
-    static isValid(data?: Partial<CraftingEntry>): data is CraftingEntry;
+    static isValid(data?: Partial<CraftingEntryData>): data is CraftingEntryData;
     prepareFormula(formula: CraftingFormula): Promise<void>;
     checkEntryRequirements(formula: CraftingFormula, { warn }?: {
         warn?: boolean | undefined;
@@ -32,12 +33,11 @@ export declare class CraftingEntry implements CraftingEntryData {
     setFormulaQuantity(index: number, itemUUID: string, quantity: number): Promise<void>;
     toggleFormulaExpended(index: number, itemUUID: string): Promise<void>;
     toggleSignatureItem(itemUUID: string): Promise<void>;
-    updateRE(): Promise<void>;
 }
 export interface CraftingEntryData {
     selector: string;
     name: string;
-    parentItem: ItemPF2e;
+    parentItem: string;
     isAlchemical?: boolean;
     isDailyPrep?: boolean;
     isPrepared?: boolean;
@@ -63,7 +63,7 @@ interface PreparedCraftingFormula extends CraftingFormula {
 interface PreparedFormulaSheetData {
     uuid: string;
     expended: boolean;
-    img: ImagePath;
+    img: ImageFilePath;
     name: string;
     quantity: number;
     isSignatureItem: boolean;

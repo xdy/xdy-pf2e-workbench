@@ -12,5 +12,5 @@ export declare class ScrollWandPopup extends FormApplication<ActorPF2e> {
         level: OneToTen;
     }): Promise<void>;
 }
-declare type ScrollWandCallback = (level: OneToTen, itemType: string, spell: SpellPF2e) => Promise<void>;
+type ScrollWandCallback = (level: OneToTen, itemType: string, spell: SpellPF2e) => Promise<void>;
 export {};

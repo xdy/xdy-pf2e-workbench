@@ -9,7 +9,7 @@ interface RefreshControlsMessage {
         layer?: string;
     };
 }
-export declare type SocketEventCallback = [
+export type SocketEventCallback = [
     message: TransferCallbackMessage | RefreshControlsMessage | {
         request?: never;
     },

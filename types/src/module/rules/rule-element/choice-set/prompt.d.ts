@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { PickableThing, PickAThingConstructorArgs, PickAThingPrompt, PromptTemplateData } from "@module/apps/pick-a-thing-prompt";
 import { PredicatePF2e } from "@system/predication";
@@ -9,7 +10,10 @@ export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | 
     /** The prompt statement to present the user in this application's window */
     prompt: string;
     /** A predicate validating a dragged & dropped item selection */
-    allowedDrops: PredicatePF2e;
+    allowedDrops: {
+        label: string | null;
+        predicate: PredicatePF2e;
+    };
     constructor(data: ChoiceSetPromptData);
     static get defaultOptions(): ApplicationOptions;
     get template(): string;
@@ -26,7 +30,10 @@ interface ChoiceSetPromptData extends PickAThingConstructorArgs<string | number 
     prompt: string;
     choices?: PickableThing[];
     containsUUIDs: boolean;
-    allowedDrops: PredicatePF2e;
+    allowedDrops: {
+        label: string | null;
+        predicate: PredicatePF2e;
+    };
 }
 interface ChoiceSetTemplateData extends PromptTemplateData {
     prompt: string;

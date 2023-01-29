@@ -1,8 +1,9 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
 import { RollSubstitution } from "@module/rules/synthetics";
-import { CheckRollContext } from "./rolls";
+import { CheckRollContext } from "./check/types";
 /**
  * Dialog for excluding certain modifiers before rolling a check.
  * @category Other
@@ -25,12 +26,13 @@ export declare class CheckModifiersDialog extends Application {
     close(options?: {
         force?: boolean;
     }): Promise<void>;
-    onAddModifier(event: JQuery.ClickEvent): Promise<void>;
     protected _getHeaderButtons(): ApplicationHeaderButton[];
+    /** Overriden to add some additional first-render behavior */
+    protected _injectHTML($html: JQuery<HTMLElement>): void;
 }
 interface CheckDialogData {
     appId: string;
-    modifiers: ModifierPF2e[];
+    modifiers: readonly ModifierPF2e[];
     totalModifier: number;
     rollModes: Record<RollMode, string>;
     rollMode: RollMode | undefined;

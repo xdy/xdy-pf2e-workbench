@@ -6,7 +6,7 @@
  * See https://www.youtube.com/watch?v=UtNS1vM7czM for interpretations
  */
 import { NPCPF2e } from "@actor";
-import { SkillAbbreviation } from "@actor/creature/data";
+import { SkillLongForm } from "@actor/types";
 import { DCAdjustment, DCOptions } from "./dc";
 export interface RecallKnowledgeDC {
     dc: number;
@@ -17,6 +17,6 @@ export interface IdentifyCreatureData {
     skill: RecallKnowledgeDC;
     specificLoreDC: RecallKnowledgeDC;
     unspecificLoreDC: RecallKnowledgeDC;
-    skills: Set<SkillAbbreviation>;
+    skills: Set<SkillLongForm>;
 }
 export declare function identifyCreature(creature: NPCPF2e, { proficiencyWithoutLevel }?: DCOptions): IdentifyCreatureData;

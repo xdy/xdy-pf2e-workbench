@@ -5,8 +5,8 @@ import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemSystemSource } from "@item/da
 import { BaseWeaponType } from "@item/weapon/types";
 import type { DeityPF2e } from "./document";
 import { DeityDomain } from "./types";
-declare type DeitySource = BaseItemSourcePF2e<"deity", DeitySystemSource>;
-declare type DeityData = Omit<DeitySource, "system" | "effects" | "flags"> & BaseItemDataPF2e<DeityPF2e, "deity", DeitySystemData, DeitySource>;
+type DeitySource = BaseItemSourcePF2e<"deity", DeitySystemSource>;
+type DeityData = Omit<DeitySource, "system" | "effects" | "flags"> & BaseItemDataPF2e<DeityPF2e, "deity", DeitySystemData, DeitySource>;
 interface DeitySystemSource extends ItemSystemSource {
     category: "deity" | "pantheon" | "philosophy";
     alignment: {
@@ -24,6 +24,6 @@ interface DeitySystemSource extends ItemSystemSource {
     spells: Record<number, ItemUUID>;
     traits?: never;
 }
-declare type DivineFonts = ["harm"] | ["heal"] | ["harm", "heal"] | never[];
-declare type DeitySystemData = DeitySystemSource;
+type DivineFonts = ["harm"] | ["heal"] | ["harm", "heal"] | never[];
+type DeitySystemData = DeitySystemSource;
 export { DeityData, DeitySource, DeitySystemData, DeitySystemSource };

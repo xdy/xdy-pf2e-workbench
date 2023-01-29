@@ -124,7 +124,7 @@ export async function generateNameFromTraitsForToken(tokenId: string) {
 export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2e) {
     let result: any;
     const data = token?.actor?.system;
-    const traits = data?.traits;
+    const traits: any = data?.traits;
     const customTraits: any = traits?.traits?.custom;
     if (!TRAITS) {
         fillTraits();

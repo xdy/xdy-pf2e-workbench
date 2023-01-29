@@ -3,6 +3,7 @@ import { RuleElementPF2e, RuleElementSource } from "./";
 import { RuleElementOptions } from "./base";
 export declare class RollNoteRuleElement extends RuleElementPF2e {
     #private;
+    private selector;
     /** An optional title prepended to the note */
     private title;
     /** The text of the note */
@@ -15,6 +16,7 @@ export declare class RollNoteRuleElement extends RuleElementPF2e {
     beforePrepareData(): void;
 }
 interface RollNoteSource extends RuleElementSource {
+    selector?: unknown;
     outcome?: unknown;
     title?: unknown;
     text?: unknown;

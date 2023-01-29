@@ -1,7 +1,6 @@
 import { AuraColors, AuraEffectData } from "@actor/types";
 import { ItemPF2e } from "@item";
 import { ItemTrait } from "@item/data/base";
-import { RawPredicate } from "@system/predication";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./";
 /** A Pathfinder 2e aura, capable of transmitting effects and with a visual representation on the canvas */
 export declare class AuraRuleElement extends RuleElementPF2e {
@@ -22,7 +21,6 @@ export declare class AuraRuleElement extends RuleElementPF2e {
     afterPrepareData(): void;
 }
 interface AuraRuleElementSource extends RuleElementSource {
-    predicate?: RawPredicate;
     radius?: unknown;
     effects?: unknown;
     traits?: unknown;

@@ -13,6 +13,7 @@ export declare class RollTwiceRuleElement extends RuleElementPF2e {
     afterRoll({ selectors, roll, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void>;
 }
 interface RollTwiceSource extends RuleElementSource {
+    selector?: unknown;
     keep?: unknown;
     removeAfterRoll?: unknown;
 }

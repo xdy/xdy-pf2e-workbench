@@ -16,6 +16,6 @@ export declare function createItemMacro(item: ItemSourcePF2e, slot: number): Pro
  */
 export declare function rollItemMacro(itemId: string): ReturnType<ItemPF2e["toChat"]> | void;
 export declare function createActionMacro(actionIndex: number, actorId: string, slot: number): Promise<void>;
-export declare function rollActionMacro(actorId: string, actionIndex: number, actionName: string): Promise<void>;
+export declare function rollActionMacro(actorId: string, _actionIndex: number, actionSlug: string): Promise<void>;
 export declare function createSkillMacro(skill: SkillAbbreviation, skillName: string, actorId: string, slot: number): Promise<void>;
 export declare function createToggleEffectMacro(effect: EffectPF2e, slot: number): Promise<void>;

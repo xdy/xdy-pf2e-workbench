@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { HeritagePF2e } from "@item";
 import { ItemSheetPF2e } from "@item/sheet/base";

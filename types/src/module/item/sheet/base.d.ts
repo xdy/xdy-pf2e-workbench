@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ItemPF2e } from "@item";
 import { RuleElementSource } from "@module/rules";
@@ -15,15 +16,17 @@ export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TIt
     get validTraits(): Record<string, string> | null;
     /** An alternative to super.getData() for subclasses that don't need this class's `getData` */
     getData(options?: Partial<DocumentSheetOptions>): Promise<ItemSheetDataPF2e<TItem>>;
-    protected onTagSelector(event: JQuery.TriggeredEvent): void;
-    /**
-     * Get NPC attack effect options
-     */
+    protected onTagSelector(anchor: HTMLAnchorElement): void;
+    /** Get NPC attack effect options */
     protected getAttackEffectOptions(): Record<string, string>;
     close(options?: {
         force?: boolean;
     }): Promise<void>;
     activateListeners($html: JQuery): void;
+    /** When tabs are changed, change visibility of elements such as the sidebar */
+    protected _onChangeTab(event: MouseEvent, tabs: Tabs, active: string): void;
+    /** Internal function to update the sidebar visibility based on the current tab */
+    private updateSidebarVisibility;
     /** Ensure the source description is edited rather than a prepared one */
     activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): Promise<TinyMCE.Editor>;
     protected _getSubmitData(updateData?: Record<string, unknown>): Record<string, unknown>;
@@ -33,4 +36,6 @@ export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TIt
     /** Tagify sets an empty input field to "" instead of "[]", which later causes the JSON parse to throw an error */
     protected _onSubmit(event: Event, { updateData, preventClose, preventRender }?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
+    /** Overriden _render to maintain focus on tagify elements */
+    protected _render(force?: boolean, options?: RenderOptions): Promise<void>;
 }

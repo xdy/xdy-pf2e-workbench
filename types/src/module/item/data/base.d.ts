@@ -2,7 +2,7 @@ import { CreatureTrait } from "@actor/creature/data";
 import type { ItemPF2e } from "@item/base";
 import type { ActiveEffectPF2e } from "@module/active-effect";
 import { RuleElementSource } from "@module/rules";
-import { DocumentSchemaRecord, OneToThree, Rarity, ValuesList } from "@module/data";
+import { DocumentSchemaRecord, OneToThree, TraitsWithRarity } from "@module/data";
 import { ItemType } from ".";
 import { PhysicalItemTrait } from "../physical/data";
 import { NPCAttackTrait } from "@item/melee/data";
@@ -16,19 +16,17 @@ interface BaseItemDataPF2e<TItem extends ItemPF2e = ItemPF2e, TType extends Item
     flags: ItemFlagsPF2e;
     readonly _source: TSource;
 }
-declare type ItemTrait = ActionTrait | CreatureTrait | PhysicalItemTrait | NPCAttackTrait;
-declare type ActionType = keyof ConfigPF2e["PF2E"]["actionTypes"];
+type ItemTrait = ActionTrait | CreatureTrait | PhysicalItemTrait | NPCAttackTrait;
+type ActionType = keyof ConfigPF2e["PF2E"]["actionTypes"];
 interface ActionCost {
-    type: ActionType;
+    type: Exclude<ActionType, "passive">;
     value: OneToThree | null;
 }
-interface ItemTraits<T extends ItemTrait = ItemTrait> extends ValuesList<T> {
-    rarity: Rarity;
-}
+type ItemTraits<T extends ItemTrait = ItemTrait> = TraitsWithRarity<T>;
 interface ItemFlagsPF2e extends foundry.data.ItemFlags {
     pf2e: {
         rulesSelections: Record<string, string | number | object>;
-        itemGrants: ItemGrantData[];
+        itemGrants: Record<string, ItemGrantData>;
         grantedBy: ItemGrantData | null;
         [key: string]: unknown;
     };
@@ -36,17 +34,17 @@ interface ItemFlagsPF2e extends foundry.data.ItemFlags {
 interface ItemSourceFlagsPF2e extends DeepPartial<foundry.data.ItemFlags> {
     pf2e?: {
         rulesSelections?: Record<string, string | number | object>;
-        itemGrants?: ItemGrantSource[];
+        itemGrants?: Record<string, ItemGrantSource>;
         grantedBy?: ItemGrantSource | null;
         [key: string]: unknown;
     };
 }
-declare type ItemGrantData = Required<ItemGrantSource>;
+type ItemGrantData = Required<ItemGrantSource>;
 interface ItemGrantSource {
     id: string;
     onDelete?: ItemGrantDeleteAction;
 }
-declare type ItemGrantDeleteAction = "cascade" | "detach" | "restrict";
+type ItemGrantDeleteAction = "cascade" | "detach" | "restrict";
 interface ItemLevelData {
     level: {
         value: number;
@@ -67,7 +65,7 @@ interface ItemSystemSource {
     slug: string | null;
     schema: DocumentSchemaRecord;
 }
-declare type ItemSystemData = ItemSystemSource;
+type ItemSystemData = ItemSystemSource;
 interface FrequencySource {
     value?: number;
     max: number;

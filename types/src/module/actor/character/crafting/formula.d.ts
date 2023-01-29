@@ -15,7 +15,7 @@ export declare class CraftingFormula implements CraftingFormulaData {
         deletable?: boolean;
     });
     get uuid(): ItemUUID;
-    get img(): ImagePath;
+    get img(): ImageFilePath;
     get name(): string;
     get level(): number;
     get rarity(): Rarity;

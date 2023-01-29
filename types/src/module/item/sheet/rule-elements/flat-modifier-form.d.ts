@@ -15,7 +15,26 @@ declare class FlatModifierForm extends RuleElementForm<FlatModifierSource> {
             cha: string;
         };
         types: ("item" | "status" | "untyped" | "ability" | "circumstance" | "potency" | "proficiency")[];
-        damageCategories: Pick<Record<"persistent" | "adamantine" | "cold-iron" | "darkwood" | "mithral" | "orichalcum" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "warpglass" | "precision" | "splash" | "alignment" | "energy" | "physical", string>, "persistent" | "precision" | "splash">;
+        damageCategories: Pick<{
+            alignment: string;
+            energy: string;
+            physical: string;
+            abysium: string;
+            adamantine: string;
+            "cold-iron": string;
+            djezet: string;
+            mithral: string;
+            noqual: string;
+            peachwood: string;
+            silver: string;
+            "sisterstone-dusk": string;
+            "sisterstone-scarlet": string;
+            "sovereign-steel": string;
+            warpglass: string;
+            persistent: string;
+            precision: string;
+            splash: string;
+        }, "persistent" | "precision" | "splash">;
         isDamage: boolean;
         value: {
             mode: string;

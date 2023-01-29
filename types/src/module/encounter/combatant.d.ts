@@ -10,6 +10,10 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
     hasHigherInitiative(this: RolledCombatant<NonNullable<TParent>>, { than }: {
         than: RolledCombatant<NonNullable<TParent>>;
     }): boolean;
+    startTurn(): Promise<void>;
+    endTurn(options: {
+        round: number;
+    }): Promise<void>;
     prepareBaseData(): void;
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
     toggleDefeated(): Promise<void>;
@@ -29,14 +33,15 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
 interface CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e | null, TActor extends ActorPF2e | null = ActorPF2e | null> extends Combatant<TParent, TActor> {
     flags: CombatantFlags;
 }
-declare type CombatantFlags = {
+type CombatantFlags = {
     pf2e: {
         roundOfLastTurn: number | null;
+        roundOfLastTurnEnd: number | null;
         overridePriority: Record<number, number | undefined>;
     };
     [key: string]: unknown;
 };
-declare type RolledCombatant<TEncounter extends EncounterPF2e> = CombatantPF2e<TEncounter> & {
+type RolledCombatant<TEncounter extends EncounterPF2e> = CombatantPF2e<TEncounter> & {
     get initiative(): number;
 };
 export { CombatantPF2e, RolledCombatant };

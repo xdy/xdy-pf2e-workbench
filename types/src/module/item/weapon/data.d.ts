@@ -1,17 +1,19 @@
 import { ItemFlagsPF2e } from "@item/data/base";
-import { BaseMaterial, BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, UsageDetails } from "@item/physical";
+import { BasePhysicalItemData, BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, UsageDetails } from "@item/physical";
 import { OneToFour, ZeroToThree } from "@module/data";
 import { DamageDieSize, DamageType } from "@system/damage";
 import { type WeaponPF2e } from "./document";
 import { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, StrikingRuneType, WeaponCategory, WeaponGroup, WeaponMaterialType, WeaponPropertyRuneType, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types";
-declare type WeaponSource = BasePhysicalItemSource<"weapon", WeaponSystemSource> & {
+type WeaponSource = BasePhysicalItemSource<"weapon", WeaponSystemSource> & {
     flags: DeepPartial<WeaponFlags>;
 };
-declare type WeaponData = Omit<WeaponSource, "system" | "effects" | "flags"> & BasePhysicalItemData<WeaponPF2e, "weapon", WeaponSystemData, WeaponSource> & {
+type WeaponData = Omit<WeaponSource, "system" | "effects" | "flags"> & BasePhysicalItemData<WeaponPF2e, "weapon", WeaponSystemData, WeaponSource> & {
     flags: WeaponFlags;
 };
-declare type WeaponFlags = ItemFlagsPF2e & {
+type WeaponFlags = ItemFlagsPF2e & {
     pf2e: {
+        /** Whether this attack is from a battle form */
+        battleForm?: boolean;
         comboMeleeUsage: boolean;
     };
 };
@@ -19,11 +21,20 @@ interface WeaponTraits extends PhysicalItemTraits<WeaponTrait> {
     otherTags: OtherWeaponTag[];
 }
 interface WeaponDamage {
-    value?: string;
     dice: number;
     die: DamageDieSize | null;
     damageType: DamageType;
     modifier: number;
+    /** Optional persistent damage */
+    persistent: WeaponPersistentDamage | null;
+}
+interface WeaponPersistentDamage {
+    /** A number of dice if `faces` is numeric, otherwise a constant */
+    number: number;
+    /** A number of die faces */
+    faces: 4 | 6 | 8 | 10 | 12 | null;
+    /** Usually the same as the weapon's own base damage type, but open for the user to change */
+    type: DamageType;
 }
 interface WeaponRuneData {
     potency: OneToFour | null;
@@ -31,14 +42,16 @@ interface WeaponRuneData {
     property: Record<OneToFour, WeaponPropertyRuneType | null>;
 }
 /** A weapon can either be unspecific or specific along with baseline material and runes */
-declare type SpecificWeaponData = {
+type SpecificWeaponData = {
     value: false;
 } | {
     value: true;
     price: string;
     material: {
-        type: WeaponMaterialType;
-        grade: PreciousMaterialGrade;
+        precious?: {
+            type: WeaponMaterialType;
+            grade: PreciousMaterialGrade;
+        };
     };
     runes: Omit<WeaponRuneData, "property">;
 };
@@ -91,12 +104,12 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     property1: {
         value: string;
         dice: number;
-        die: string;
-        damageType: string;
+        die: DamageDieSize;
+        damageType: DamageType | "";
         critDice: number;
-        critDie: string;
+        critDie: DamageDieSize;
         critDamage: string;
-        critDamageType: string;
+        critDamageType: DamageType | "";
     };
     selectedAmmoId: string | null;
 }
@@ -118,8 +131,6 @@ interface WeaponSystemData extends Omit<WeaponSystemSource, "identification" | "
     usage: UsageDetails & WeaponSystemSource["usage"];
 }
 interface WeaponMaterialData {
-    /** The "base material" or category: icon/steel (metal), wood, rope, etc. */
-    base: BaseMaterial[];
     /** The precious material of which this weapon is composed */
     precious: {
         type: WeaponMaterialType;
@@ -134,4 +145,4 @@ interface ComboWeaponMeleeUsage {
     group: MeleeWeaponGroup;
     traits: WeaponTrait[];
 }
-export { ComboWeaponMeleeUsage, WeaponDamage, WeaponData, WeaponMaterialData, WeaponPropertyRuneSlot, WeaponRuneData, WeaponSource, WeaponSystemData, WeaponSystemSource, };
+export { ComboWeaponMeleeUsage, WeaponDamage, WeaponData, WeaponMaterialData, WeaponPersistentDamage, WeaponPropertyRuneSlot, WeaponRuneData, WeaponSource, WeaponSystemData, WeaponSystemSource, };

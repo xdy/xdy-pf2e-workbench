@@ -1,6 +1,8 @@
 import { MAGIC_SCHOOLS, MAGIC_TRADITIONS, SPELL_COMPONENTS } from "./values";
-declare type MagicSchool = SetElement<typeof MAGIC_SCHOOLS>;
-declare type MagicTradition = SetElement<typeof MAGIC_TRADITIONS>;
-declare type SpellComponent = typeof SPELL_COMPONENTS[number];
-declare type SpellTrait = keyof ConfigPF2e["PF2E"]["spellTraits"] | MagicSchool | MagicTradition;
-export { MagicSchool, MagicTradition, SpellComponent, SpellTrait };
+type MagicSchool = SetElement<typeof MAGIC_SCHOOLS>;
+type MagicTradition = SetElement<typeof MAGIC_TRADITIONS>;
+type SpellComponent = typeof SPELL_COMPONENTS[number];
+type SpellTrait = keyof ConfigPF2e["PF2E"]["spellTraits"] | MagicSchool | MagicTradition;
+type EffectAreaSize = keyof ConfigPF2e["PF2E"]["areaSizes"];
+type EffectAreaType = keyof ConfigPF2e["PF2E"]["areaTypes"];
+export { EffectAreaSize, EffectAreaType, MagicSchool, MagicTradition, SpellComponent, SpellTrait };

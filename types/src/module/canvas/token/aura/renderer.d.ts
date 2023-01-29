@@ -26,7 +26,10 @@ declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     private get highlightId();
     /** The squares covered by this aura */
     get squares(): EffectAreaSquare[];
-    /** Whether this aura should be rendered to the user */
+    /**
+     * Whether this aura should be rendered to the user:
+     * The scene must be active, have an active combat, or a GM must be the only user logged in.
+     */
     get shouldRender(): boolean;
     /** Draw the aura's circular emanation */
     draw(): void;

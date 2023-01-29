@@ -3,17 +3,17 @@ import { AbilityString } from "@actor/types";
 import { SpellPF2e } from "@item";
 import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemSystemData } from "@item/data/base";
 import { MagicTradition } from "@item/spell/types";
-import { OneToFour, OneToTen, ZeroToEleven } from "@module/data";
+import { OneToTen, ZeroToEleven, ZeroToFour } from "@module/data";
 import { RollNotePF2e } from "@module/notes";
-import { Statistic, StatisticChatData } from "@system/statistic";
+import { Statistic } from "@system/statistic";
 import { SpellcastingEntryPF2e } from "..";
 interface BaseSpellcastingEntry {
     id: string;
     actor: ActorPF2e | null;
     ability: AbilityString;
-    tradition: MagicTradition;
+    tradition: MagicTradition | null;
     statistic: Statistic;
-    cast(spell: SpellPF2e, options: {}): Promise<void>;
+    cast(spell: SpellPF2e, options: CastOptions): Promise<void>;
 }
 interface SpellcastingEntry extends BaseSpellcastingEntry {
     isPrepared: boolean;
@@ -21,9 +21,19 @@ interface SpellcastingEntry extends BaseSpellcastingEntry {
     isInnate: boolean;
     isFocusPool: boolean;
 }
-declare type SlotKey = `slot${ZeroToEleven}`;
-declare type SpellcastingEntrySource = BaseItemSourcePF2e<"spellcastingEntry", SpellcastingEntrySystemData>;
-declare type SpellcastingEntryData = Omit<SpellcastingEntrySource, "system" | "effects" | "flags"> & BaseItemDataPF2e<SpellcastingEntryPF2e, "spellcastingEntry", SpellcastingEntrySystemData, SpellcastingEntrySource>;
+interface CastOptions {
+    message?: boolean;
+    rollMode?: RollMode;
+}
+interface SpellcastingEntryPF2eCastOptions extends CastOptions {
+    consume?: boolean;
+    /** The slot level to consume to cast the spell at */
+    level?: number;
+    slot?: number;
+}
+type SlotKey = `slot${ZeroToEleven}`;
+type SpellcastingEntrySource = BaseItemSourcePF2e<"spellcastingEntry", SpellcastingEntrySystemData>;
+type SpellcastingEntryData = Omit<SpellcastingEntrySource, "system" | "effects" | "flags"> & BaseItemDataPF2e<SpellcastingEntryPF2e, "spellcastingEntry", SpellcastingEntrySystemData, SpellcastingEntrySource>;
 interface SpellAttackRollModifier {
     breakdown: string;
     notes: RollNotePF2e[];
@@ -46,7 +56,7 @@ interface SpellSlotData {
     value: number;
     max: number;
 }
-declare type PreparationType = keyof ConfigPF2e["PF2E"]["preparationType"];
+type PreparationType = keyof ConfigPF2e["PF2E"]["preparationType"];
 interface SpellcastingEntrySystemData extends ItemSystemData {
     ability: {
         value: AbilityString | "";
@@ -54,25 +64,25 @@ interface SpellcastingEntrySystemData extends ItemSystemData {
     spelldc: {
         value: number;
         dc: number;
-        mod: number;
     };
-    statisticData?: StatisticChatData;
     tradition: {
         value: MagicTradition | "";
     };
     prepared: {
         value: PreparationType;
         flexible?: boolean;
+        validItems?: "scroll" | "";
     };
     showSlotlessLevels: {
         value: boolean;
     };
     proficiency: {
-        value: OneToFour;
+        slug: string;
+        value: ZeroToFour;
     };
     slots: Record<SlotKey, SpellSlotData>;
     autoHeightenLevel: {
         value: OneToTen | null;
     };
 }
-export { BaseSpellcastingEntry, PreparationType, SlotKey, SpellAttackRollModifier, SpellDifficultyClass, SpellcastingEntry, SpellcastingEntryData, SpellcastingEntrySource, SpellcastingEntrySystemData, };
+export { BaseSpellcastingEntry, CastOptions, PreparationType, SlotKey, SpellAttackRollModifier, SpellDifficultyClass, SpellcastingEntry, SpellcastingEntryData, SpellcastingEntryPF2eCastOptions, SpellcastingEntrySource, SpellcastingEntrySystemData, };

@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActionItemPF2e } from "@item/action";
 import { ItemSheetDataPF2e } from "@item/sheet/data-types";

@@ -10,6 +10,7 @@ export declare class MigrationRunner extends MigrationRunnerBase {
     private migrateWorldDocuments;
     private migrateWorldItem;
     private migrateWorldActor;
+    private migrateWorldJournalEntry;
     private migrateWorldMacro;
     private migrateWorldTable;
     private migrateSceneToken;

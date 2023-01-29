@@ -1,12 +1,15 @@
 import { TokenDocumentPF2e } from "@module/scene";
 import { TokenLayerPF2e } from "..";
+import { HearingSource } from "../perception/hearing-source";
 import { AuraRenderers } from "./aura";
 declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
+    /** The token's line hearing source */
+    hearing: HearingSource<this>;
     constructor(document: TokenDocumentPF2e);
-    /** The promise returned by the last call to `Token#draw()` */
-    private drawLock?;
+    /** Guarantee boolean return */
+    get isVisible(): boolean;
     /** Is this token currently animating? */
     get isAnimating(): boolean;
     /** Is this token emitting light with a negative value */
@@ -31,10 +34,8 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     isFlanking(flankee: TokenPF2e, { reach }?: {
         reach?: number;
     }): boolean;
-    /** Overrides _drawBar() to also draw pf2e variants of normal resource bars (such as temp health) */
+    /** Overrides _drawBar(k) to also draw pf2e variants of normal resource bars (such as temp health) */
     protected _drawBar(number: number, bar: PIXI.Graphics, data: TokenResourceData): void;
-    /** Make the drawing promise accessible to `#redraw` */
-    draw(): Promise<this>;
     /** Draw auras along with effect icons */
     drawEffects(): Promise<void>;
     emitHoverIn(): void;
@@ -44,7 +45,7 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     /** Include actor overrides in the clone if it is a preview */
     clone(): this;
     /** Emit floaty text from this tokens */
-    showFloatyText(params: number | ShowFloatyEffectParams): Promise<void>;
+    showFloatyText(params: ShowFloatyEffectParams): Promise<void>;
     /**
      * Measure the distance between this token and another object, in grid distance. We measure between the
      * centre of squares, and if either covers more than one square, we want the minimum distance between
@@ -55,6 +56,12 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     }): number;
     /** Add a callback for when a movement animation finishes */
     animate(updateData: Record<string, unknown>, options?: TokenAnimationOptions<this>): Promise<void>;
+    /** Hearing should be updated whenever vision is */
+    updateVisionSource({ defer, deleted }?: {
+        defer?: boolean | undefined;
+        deleted?: boolean | undefined;
+    }): void;
+    protected _destroy(): void;
     /** Refresh vision and the `EffectsPanel` */
     protected _onControl(options?: {
         releaseOthers?: boolean;
@@ -73,19 +80,21 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     _onDelete(options: DocumentModificationContext<TokenDocumentPF2e>, userId: string): void;
     /** A callback for when a movement animation for this token finishes */
     private onFinishAnimation;
+    /** Handle system-specific status effects (upstream handles invisible and blinded) */
+    _onApplyStatusEffect(statusId: string, active: boolean): void;
 }
 interface TokenPF2e extends Token<TokenDocumentPF2e> {
     get layer(): TokenLayerPF2e<this>;
     icon?: TokenImage;
 }
 interface TokenImage extends PIXI.Sprite {
-    src?: VideoPath;
+    src?: VideoFilePath;
 }
-declare type NumericFloatyEffect = {
+type NumericFloatyEffect = {
     name: string;
     value?: number | null;
 };
-declare type ShowFloatyEffectParams = number | {
+type ShowFloatyEffectParams = number | {
     create: NumericFloatyEffect;
 } | {
     update: NumericFloatyEffect;

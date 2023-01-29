@@ -5,9 +5,11 @@ import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
 import { ProficiencyRank } from "@item/data";
 import { WeaponCategory } from "@item/weapon/types";
-import { RawPredicate } from "@system/predication";
+import { PredicatePF2e, RawPredicate } from "@system/predication";
 declare class MartialProficiencyRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
+    /** Predication test for whether a weapon matches this proficiency */
+    definition: PredicatePF2e;
     constructor(data: MartialProficiencySource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     private validateData;
     onApplyActiveEffects(): void;

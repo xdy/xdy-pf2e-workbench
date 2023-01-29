@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActorSheetPF2e } from "../sheet/base";
 import { LootPF2e } from "@actor/loot";
@@ -11,7 +12,6 @@ export declare class LootSheetPF2e extends ActorSheetPF2e<LootPF2e> {
     get isLootSheet(): boolean;
     getData(): Promise<LootSheetDataPF2e>;
     activateListeners($html: JQuery): void;
-    protected prepareItems(): Promise<void>;
     private distributeCoins;
     private lootNPCs;
     protected _onDropItem(event: ElementDragEvent, itemData: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;

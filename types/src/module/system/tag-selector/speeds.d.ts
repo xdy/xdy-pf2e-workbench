@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
 import { SelectableTagField, TagSelectorOptions } from ".";
@@ -17,7 +18,8 @@ interface SpeedSelectorData<TActor extends ActorPF2e> extends FormApplicationDat
 }
 interface ChoiceData {
     selected: boolean;
+    disabled: boolean;
     label: string;
-    value: string;
+    value: number | string;
 }
 export {};

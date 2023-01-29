@@ -1,6 +1,5 @@
-import { TrickMagicItemDifficultyData } from "@item/consumable/spell-consumables";
-import type { ConsumablePF2e } from "@item";
 import { CharacterPF2e } from "@actor";
+import { ConsumablePF2e, TrickMagicItemDifficultyData } from "@item";
 import { TrickMagicItemSkill } from "@item/spellcasting-entry/trick";
 export declare class TrickMagicItemPopup {
     /** The wand or scroll being "tricked" */

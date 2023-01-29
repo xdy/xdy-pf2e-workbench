@@ -7,6 +7,8 @@ export declare abstract class AbstractEffectPF2e extends ItemPF2e {
     abstract get badge(): EffectBadge | null;
     abstract increase(): Promise<void>;
     abstract decrease(): Promise<void>;
+    /** If true, the AbstractEffect should be hidden from the user unless they are a GM */
+    get unidentified(): boolean;
     prepareBaseData(): void;
     /** Set a self roll option for this effect */
     prepareActorData(): void;

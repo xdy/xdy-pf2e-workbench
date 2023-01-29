@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 interface FormInputData extends Omit<SettingConfig, "config" | "namespace" | "scope"> {
     value: unknown;
@@ -20,7 +21,7 @@ interface UpdateData {
 }
 export declare class WorldClockSettings extends FormApplication {
     static get defaultOptions(): FormApplicationOptions;
-    getData(): TemplateData;
+    getData(): Promise<TemplateData>;
     /** Register World Clock settings */
     static registerSettings(): void;
     activateListeners($html: JQuery): void;

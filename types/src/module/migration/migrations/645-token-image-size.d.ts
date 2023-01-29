@@ -4,12 +4,12 @@ import { MigrationBase } from "../base";
 /** Restore saved token images and sizes from old versions of the respective rule elements */
 export declare class Migration645TokenImageSize extends MigrationBase {
     static version: number;
-    imageOverrides: Map<string, VideoPath>;
+    imageOverrides: Map<string, VideoFilePath>;
     sizeOverrides: Map<string, {
         height: number;
         width: number;
     }>;
-    isTokenImageFlag(flag: unknown): flag is VideoPath;
+    isTokenImageFlag(flag: unknown): flag is VideoFilePath;
     isTokenSizeFlag(flag: unknown): flag is {
         height: number;
         width: number;

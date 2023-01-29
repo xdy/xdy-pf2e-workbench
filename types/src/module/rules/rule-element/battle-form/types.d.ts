@@ -1,6 +1,6 @@
 import { CreatureTrait, MovementType, SkillAbbreviation } from "@actor/creature/data";
 import { SenseAcuity, SenseType } from "@actor/creature/sense";
-import { ImmunityType, ResistanceType, WeaknessType } from "@actor/data/base";
+import { ImmunityType, ResistanceType, WeaknessType } from "@actor/types";
 import { AbilityString } from "@actor/types";
 import { WeaponDamage } from "@item/weapon/data";
 import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponTrait } from "@item/weapon/types";
@@ -56,12 +56,12 @@ interface BattleFormSkill {
     modifier: string | number;
     ownIfHigher?: boolean;
 }
-declare type BattleFormSkills = {
+type BattleFormSkills = {
     [K in SkillAbbreviation]?: BattleFormSkill;
 };
 interface BattleFormStrike {
     label: string;
-    img?: ImagePath;
+    img?: ImageFilePath;
     ability: AbilityString;
     category: WeaponCategory;
     group: WeaponGroup | null;

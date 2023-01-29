@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { SkillAbbreviation } from "@actor/creature/data";
 import { Alignment } from "@actor/creature/types";
@@ -25,6 +26,6 @@ interface SpellBrief {
     uuid: ItemUUID;
     level: number;
     name: string;
-    img: ImagePath;
+    img: ImageFilePath;
 }
 export {};

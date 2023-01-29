@@ -1,8 +1,6 @@
 /// <reference types="jquery" />
+import { BaseRollContext } from "@system/rolls";
 /** Returns statistic dialog roll parameters based on held keys */
-interface ParamsFromEvent {
-    secret?: boolean;
-    skipDialog: boolean;
-}
+type ParamsFromEvent = Pick<BaseRollContext, "rollMode" | "skipDialog">;
 export declare function eventToRollParams(event: JQuery.TriggeredEvent | MouseEvent): ParamsFromEvent;
 export {};

@@ -1,11 +1,12 @@
 import { HazardPF2e } from "@actor";
+import { TraitViewData } from "@actor/data/base";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
 import { SaveType } from "@actor/types";
 import { ActionItemPF2e } from "@item";
 interface HazardSheetData extends ActorSheetDataPF2e<HazardPF2e> {
     actions: HazardActionSheetData;
     editing: boolean;
-    actorTraits: string[];
+    actorTraits: TraitViewData[];
     rarity: Record<string, string>;
     rarityLabel: string;
     brokenThreshold: number;
@@ -31,4 +32,5 @@ interface HazardSaveSheetData {
     type: SaveType;
     mod?: number;
 }
-export { HazardActionSheetData, HazardSaveSheetData, HazardSheetData };
+type HazardTrait = keyof ConfigPF2e["PF2E"]["hazardTraits"];
+export { HazardActionSheetData, HazardSaveSheetData, HazardSheetData, HazardTrait };

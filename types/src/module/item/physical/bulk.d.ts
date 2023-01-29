@@ -4,7 +4,7 @@ interface StackDefinition {
     size: number;
     lightBulk: number;
 }
-declare type StackDefinitions = Record<string, StackDefinition | undefined>;
+type StackDefinitions = Record<string, StackDefinition | undefined>;
 /**
  * hard coded for now but could be made configurable later on.
  * Describes each stack group by how much items belong in a stack
@@ -96,7 +96,7 @@ export declare class BulkItem {
  * @param weight if not parseable will return null or undefined
  */
 export declare function weightToBulk(weight: Optional<string | number>): Bulk | null;
-declare type BrokenBulk = Optional<string> | Optional<number>;
+type BrokenBulk = Optional<string> | Optional<number>;
 /**
  * Needed because some weight is either null, undefined, a number or a string :(
  * @param weight

@@ -2,9 +2,10 @@ import { CreatureSheetData, SpellcastingSheetData } from "@actor/creature/types"
 import { HitPointsData, PerceptionData } from "@actor/data/base";
 import { SaveType } from "@actor/types";
 import { ActionItemData, EffectData, ItemDataPF2e } from "@item/data";
+import { ZeroToFour } from "@module/data";
 import { IdentifyCreatureData } from "@module/recall-knowledge";
 import { NPCPF2e } from ".";
-import { NPCArmorClass, NPCAttributes, NPCSaveData, NPCSkillData, NPCStrike, NPCSystemData, NPCTraitsData } from "./data";
+import { NPCArmorClass, NPCAttributes, NPCSaveData, NPCSkillData, NPCSystemData, NPCTraitsData } from "./data";
 interface ActionsDetails {
     label: string;
     actions: NPCSheetItemData<RawObject<ActionItemData>>[];
@@ -15,14 +16,6 @@ interface NPCActionSheetData {
     reaction: ActionsDetails;
     action: ActionsDetails;
 }
-interface Attack {
-    attack: NPCStrike;
-    traits: {
-        label: string;
-        description: string;
-    }[];
-}
-declare type NPCAttackSheetData = Attack[];
 /** Highlight such a statistic if adjusted by data preparation */
 interface WithAdjustments {
     adjustedHigher?: boolean;
@@ -32,17 +25,22 @@ interface VariantCloneParams {
     name?: string;
     description?: string;
     img?: {
-        actor?: ImagePath;
-        token?: VideoPath;
+        actor?: ImageFilePath;
+        token?: VideoFilePath;
     };
     save?: boolean;
     keepId?: boolean;
 }
+type WithRank = {
+    icon?: string;
+    hover?: string;
+    rank: ZeroToFour;
+};
 interface NPCSystemSheetData extends NPCSystemData {
     attributes: NPCAttributes & {
         ac: NPCArmorClass & WithAdjustments;
         hp: HitPointsData & WithAdjustments;
-        perception: PerceptionData & WithAdjustments;
+        perception: PerceptionData & WithAdjustments & WithRank;
     };
     details: NPCSystemData["details"] & {
         level: NPCSystemData["details"]["level"] & WithAdjustments;
@@ -51,9 +49,10 @@ interface NPCSystemSheetData extends NPCSystemData {
         };
     };
     sortedSkills: Record<string, NPCSkillData & WithAdjustments>;
-    saves: Record<SaveType, NPCSaveData & WithAdjustments & {
+    saves: Record<SaveType, NPCSaveData & WithAdjustments & WithRank & {
         labelShort?: string;
     }>;
+    skills: Record<string, NPCSkillData & WithAdjustments & WithRank>;
     traits: NPCTraitsData & {
         size: {
             localizedName?: string;
@@ -73,7 +72,6 @@ interface NPCSpellcastingSheetData extends SpellcastingSheetData {
 /** Additional fields added in sheet data preparation */
 interface NPCSheetData<T extends NPCPF2e = NPCPF2e> extends CreatureSheetData<T> {
     actions: NPCActionSheetData;
-    attacks: NPCAttackSheetData;
     data: NPCSystemSheetData;
     items: NPCSheetItemData[];
     effectItems: EffectData[];
@@ -102,7 +100,7 @@ interface NPCSheetData<T extends NPCPF2e = NPCPF2e> extends CreatureSheetData<T>
     hasHardness?: boolean;
     configLootableNpc?: boolean;
 }
-declare type NPCSheetItemData<T extends ItemDataPF2e | RawObject<ItemDataPF2e> = ItemDataPF2e> = T & {
+type NPCSheetItemData<T extends ItemDataPF2e | RawObject<ItemDataPF2e> = ItemDataPF2e> = T & {
     glyph: string;
     imageUrl: string;
     traits: {
@@ -124,4 +122,4 @@ declare type NPCSheetItemData<T extends ItemDataPF2e | RawObject<ItemDataPF2e> =
         weaponType?: string;
     };
 };
-export { NPCActionSheetData, NPCAttackSheetData, NPCSheetData, NPCSheetItemData, NPCSpellcastingSheetData, NPCSystemSheetData, VariantCloneParams, };
+export { NPCActionSheetData, NPCSheetData, NPCSheetItemData, NPCSpellcastingSheetData, NPCSystemSheetData, VariantCloneParams, };

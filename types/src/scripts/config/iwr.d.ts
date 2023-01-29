@@ -191,6 +191,7 @@ declare const resistanceTypes: {
     sonic: string;
     "unarmed-attacks": string;
     vorpal: string;
+    "vorpal-adamantine": string;
     warpglass: string;
     water: string;
     weapons: string;

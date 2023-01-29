@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import type { NPCPF2e } from "@actor";
 import { NPCSkillData } from "@actor/npc/data";

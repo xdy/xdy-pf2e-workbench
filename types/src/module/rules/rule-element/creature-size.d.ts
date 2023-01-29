@@ -2,14 +2,19 @@ import { CreaturePF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ActorSizePF2e } from "@actor/data/size";
 import { ItemPF2e } from "@item";
-import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from "./";
+import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions, BracketedValue } from "./";
 /**
  * @category RuleElement
- * Increase the creature's size
+ * Change a creature's size
  */
-export declare class CreatureSizeRuleElement extends RuleElementPF2e {
+declare class CreatureSizeRuleElement extends RuleElementPF2e {
+    #private;
     protected static validActorTypes: ActorType[];
-    constructor(data: CreatureSizeConstructionData, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    value: string | number | BracketedValue;
+    /** An optional reach adjustment to accompany the size */
+    reach: ReachObject | null;
+    resizeEquipment: boolean;
+    constructor(data: CreatureSizeSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     private static wordToAbbreviation;
     private static incrementMap;
     private static decrementMap;
@@ -17,7 +22,15 @@ export declare class CreatureSizeRuleElement extends RuleElementPF2e {
     private decrementSize;
     beforePrepareData(): void;
 }
-export interface CreatureSizeRuleElement extends RuleElementPF2e {
+type ReachObject = {
+    add: ReachValue;
+} | {
+    upgrade: ReachValue;
+} | {
+    override: ReachValue;
+};
+type ReachValue = string | number | BracketedValue;
+interface CreatureSizeRuleElement extends RuleElementPF2e {
     get actor(): CreaturePF2e;
     data: CreatureSizeRuleElementData;
 }
@@ -26,7 +39,8 @@ interface CreatureSizeRuleElementData extends RuleElementData {
     minimumSize?: ActorSizePF2e;
     maximumSize?: ActorSizePF2e;
 }
-interface CreatureSizeConstructionData extends RuleElementSource {
-    resizeEquipment?: boolean;
+interface CreatureSizeSource extends RuleElementSource {
+    reach?: unknown;
+    resizeEquipment?: unknown;
 }
-export {};
+export { CreatureSizeRuleElement };

@@ -4,11 +4,10 @@ import { ModifierPF2e } from "@actor/modifiers";
 import { WeaponTrait } from "@item/weapon/types";
 import { RollNotePF2e } from "@module/notes";
 import { TokenDocumentPF2e } from "@scene";
-import { CheckRoll } from "@system/check/roll";
+import { CheckRoll, CheckType } from "@system/check";
 import { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success";
-import { CheckType } from "@system/rolls";
-import { Statistic, StatisticDataWithDC } from "@system/statistic";
-declare type ActionGlyph = "A" | "D" | "T" | "R" | "F" | "a" | "d" | "t" | "r" | "f" | 1 | 2 | 3 | "1" | "2" | "3";
+import { Statistic } from "@system/statistic";
+type ActionGlyph = "A" | "D" | "T" | "R" | "F" | "a" | "d" | "t" | "r" | "f" | 1 | 2 | 3 | "1" | "2" | "3";
 interface CheckResultCallback {
     actor: ActorPF2e;
     message?: ChatMessage;
@@ -29,7 +28,7 @@ interface SimpleRollActionCheckOptions {
     checkType: CheckType;
     event: JQuery.TriggeredEvent;
     difficultyClass?: CheckDC;
-    difficultyClassStatistic?: (creature: CreaturePF2e) => Statistic<StatisticDataWithDC>;
+    difficultyClassStatistic?: (creature: CreaturePF2e) => Statistic;
     extraNotes?: (selector: string) => RollNotePF2e[];
     callback?: (result: CheckResultCallback) => void;
     createMessage?: boolean;

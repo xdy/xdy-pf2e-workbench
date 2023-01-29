@@ -1,7 +1,8 @@
 import { FeatTrait } from "@item/feat/data";
 import { PhysicalItemTrait } from "@item/physical/data";
 import { CommonSortByOption, SortByOption, SortDirection } from "../data";
-declare type CheckboxOptions = Record<string, {
+import type { SearchResult } from "minisearch";
+type CheckboxOptions = Record<string, {
     label: string;
     selected: boolean;
 }>;
@@ -92,6 +93,12 @@ interface SpellFilters extends BaseFilterData {
     checkboxes: Record<"category" | "classes" | "level" | "rarity" | "school" | "source" | "traditions" | "traits", CheckboxData>;
     selects: Record<"timefilter", SelectData>;
 }
+type CompendiumBrowserIndexData = Omit<CompendiumIndexData, "_id"> & Partial<SearchResult>;
+interface RenderResultListOptions {
+    list?: HTMLUListElement;
+    start?: number;
+    replace?: boolean;
+}
 interface BaseInitialFilters {
     searchText?: string;
     orderBy?: SortByOption;
@@ -163,5 +170,5 @@ interface InitialSpellFilters extends BaseInitialFilters {
     traits?: string[];
     orderBy?: CommonSortByOption;
 }
-declare type InitialFilters = InitialActionFilters | InitialBestiaryFilters | InitialEquipmentFilters | InitialFeatFilters | InitialHazardFilters | InitialSpellFilters;
-export { ActionFilters, BaseFilterData, BestiaryFilters, CheckboxData, CheckboxOptions, EquipmentFilters, FeatFilters, HazardFilters, MultiselectData, RangesData, SpellFilters, InitialFilters, InitialActionFilters, InitialBestiaryFilters, InitialEquipmentFilters, InitialFeatFilters, InitialHazardFilters, InitialSpellFilters, };
+type InitialFilters = InitialActionFilters | InitialBestiaryFilters | InitialEquipmentFilters | InitialFeatFilters | InitialHazardFilters | InitialSpellFilters;
+export { ActionFilters, BaseFilterData, BestiaryFilters, CheckboxData, CheckboxOptions, CompendiumBrowserIndexData, EquipmentFilters, FeatFilters, HazardFilters, MultiselectData, RangesData, RenderResultListOptions, SpellFilters, InitialFilters, InitialActionFilters, InitialBestiaryFilters, InitialEquipmentFilters, InitialFeatFilters, InitialHazardFilters, InitialSpellFilters, };

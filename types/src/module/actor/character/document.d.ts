@@ -32,6 +32,7 @@ declare class CharacterPF2e extends CreaturePF2e {
     classDC: Statistic | null;
     /** All class DCs regardless of whether or not its the primary */
     classDCs: Record<string, Statistic>;
+    protected _skills: CharacterSkills | null;
     get allowedItemTypes(): (ItemType | "physical")[];
     get keyAbility(): AbilityString;
     /** This PC's ability scores */

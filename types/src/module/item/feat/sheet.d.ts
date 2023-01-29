@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { FeatPF2e } from "@item/feat";
 import { FeatSheetData } from "../sheet/data-types";

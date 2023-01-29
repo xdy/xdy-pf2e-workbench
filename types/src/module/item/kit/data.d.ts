@@ -1,12 +1,11 @@
 import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemSystemSource } from "@item/data/base";
 import { PhysicalItemTraits, PartialPrice } from "@item/physical/data";
 import type { KitPF2e } from ".";
-declare type KitSource = BaseItemSourcePF2e<"kit", KitSystemSource>;
-declare type KitData = Omit<KitSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<KitPF2e, "kit", KitSystemData, KitSource>;
+type KitSource = BaseItemSourcePF2e<"kit", KitSystemSource>;
+type KitData = Omit<KitSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<KitPF2e, "kit", KitSystemData, KitSource>;
 interface KitEntryData {
-    pack?: string;
-    id: string;
-    img: ImagePath;
+    uuid: ItemUUID;
+    img: ImageFilePath;
     quantity: number;
     name: string;
     isContainer: boolean;
@@ -17,5 +16,5 @@ interface KitSystemSource extends ItemSystemSource {
     items: Record<string, KitEntryData>;
     price: PartialPrice;
 }
-declare type KitSystemData = KitSystemSource;
+type KitSystemData = KitSystemSource;
 export { KitData, KitEntryData, KitSource, KitSystemData, KitSystemSource };

@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActorPF2e, CreaturePF2e } from "@actor";
 import { ItemPF2e } from "@item";
@@ -7,12 +8,12 @@ import { ItemSummaryData } from "@item/data";
  * Implementation used to populate item summaries, toggle visibility
  * of item summaries, and save expanded/collapsed state of item summaries.
  */
-export declare class ItemSummaryRendererPF2e<AType extends ActorPF2e> {
+export declare class ItemSummaryRenderer<TActor extends ActorPF2e> {
     protected sheet: Application & {
-        get actor(): AType;
+        get actor(): TActor;
     };
     constructor(sheet: Application & {
-        get actor(): AType;
+        get actor(): TActor;
     });
     activateListeners($html: JQuery): void;
     /**
@@ -35,6 +36,6 @@ export declare class ItemSummaryRendererPF2e<AType extends ActorPF2e> {
      */
     saveAndRestoreState(callback: () => Promise<JQuery<HTMLElement>>): Promise<JQuery<HTMLElement>>;
 }
-export declare class CreatureSheetItemRenderer<AType extends CreaturePF2e> extends ItemSummaryRendererPF2e<AType> {
+export declare class CreatureSheetItemRenderer<AType extends CreaturePF2e> extends ItemSummaryRenderer<AType> {
     renderItemSummary($div: JQuery, item: Embedded<ItemPF2e>, chatData: Record<string, unknown>): Promise<void>;
 }

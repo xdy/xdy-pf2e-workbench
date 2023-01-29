@@ -1,10 +1,13 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { SpellPF2e } from "@item/spell";
 import { ItemSheetPF2e } from "../sheet/base";
 import { ItemSheetDataPF2e } from "../sheet/data-types";
 import { SpellSystemData } from "./data";
+import { DamageCategoryUnique } from "@system/damage";
 export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
+    get id(): string;
     getData(options?: Partial<DocumentSheetOptions>): Promise<SpellSheetData>;
     static get defaultOptions(): DocumentSheetOptions;
     get title(): string;
@@ -78,6 +81,7 @@ export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
         air: string;
         earth: string;
         fire: string;
+        metal: string;
         water: string;
         magical: string;
         mental: string;
@@ -90,9 +94,9 @@ export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
         positive: string;
         sonic: string;
         chaotic: string;
-        lawful: string;
-        good: string;
         evil: string;
+        good: string;
+        lawful: string;
         alchemist: string;
         barbarian: string;
         bard: string;
@@ -142,7 +146,8 @@ interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
     spellTypes: ConfigPF2e["PF2E"]["spellTypes"];
     saves: ConfigPF2e["PF2E"]["saves"];
     damageCategories: ConfigPF2e["PF2E"]["damageCategories"];
-    damageSubtypes: ConfigPF2e["PF2E"]["damageSubtypes"];
+    damageTypes: Record<string, string>;
+    damageSubtypes: Pick<ConfigPF2e["PF2E"]["damageCategories"], DamageCategoryUnique>;
     spellComponents: string[];
     areaSizes: ConfigPF2e["PF2E"]["areaSizes"];
     areaTypes: ConfigPF2e["PF2E"]["areaTypes"];

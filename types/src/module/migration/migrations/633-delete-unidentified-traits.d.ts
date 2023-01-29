@@ -5,7 +5,7 @@ export declare class Migration633DeleteUnidentifiedTraits extends MigrationBase 
     static version: number;
     updateItem(itemData: ItemDataWithIdentification): Promise<void>;
 }
-declare type ItemDataWithIdentification = ItemSourcePF2e & {
+type ItemDataWithIdentification = ItemSourcePF2e & {
     "system.-=identification"?: null;
     "system.identification.unidentified.data.-=traits"?: null;
 };

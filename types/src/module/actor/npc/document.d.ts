@@ -21,9 +21,9 @@ declare class NPCPF2e extends CreaturePF2e {
     get visible(): boolean;
     get isLootable(): boolean;
     /** Grant all users at least limited permission on dead NPCs */
-    get permission(): PermissionLevel;
+    get permission(): DocumentOwnershipLevel;
     /** Grant players limited permission on dead NPCs */
-    testUserPermission(user: User, permission: DocumentPermission | DocumentPermissionNumber, options?: {
+    testUserPermission(user: User, permission: DocumentOwnershipString | DocumentOwnershipLevel, options?: {
         exact?: boolean;
     }): boolean;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */

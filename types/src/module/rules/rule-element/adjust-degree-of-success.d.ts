@@ -1,19 +1,27 @@
-import { RuleElementPF2e, RuleElementData } from "./";
 import { CharacterPF2e, NPCPF2e } from "@actor";
-import { SkillAbbreviation } from "@actor/creature/data";
-import { CheckDCModifiers } from "@system/degree-of-success";
+import { ItemPF2e } from "@item";
+import { DegreeOfSuccessString } from "@system/degree-of-success";
+import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./";
 /**
  * @category RuleElement
  */
 declare class AdjustDegreeOfSuccessRuleElement extends RuleElementPF2e {
-    afterPrepareData(): void;
-    skillAbbreviationFromString(skill: string): SkillAbbreviation | undefined;
-    isAdjustmentData(adjustment: CheckDCModifiers): boolean;
+    #private;
+    selector: string;
+    constructor(data: AdjustDegreeOfSuccessSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    beforePrepareData(): void;
 }
 interface AdjustDegreeOfSuccessRuleElement {
     data: RuleElementData & {
-        adjustment?: CheckDCModifiers;
+        adjustment?: DegreeAdjustmentsRuleRecord;
     };
     get actor(): CharacterPF2e | NPCPF2e;
+}
+type DegreeAdjustmentAmountString = "one-degree-better" | "one-degree-worse" | "two-degrees-better" | "two-degrees-worse";
+type DegreeAdjustmentsRuleRecord = {
+    [key in "all" | DegreeOfSuccessString]?: DegreeAdjustmentAmountString;
+};
+interface AdjustDegreeOfSuccessSource extends RuleElementSource {
+    selector?: unknown;
 }
 export { AdjustDegreeOfSuccessRuleElement };

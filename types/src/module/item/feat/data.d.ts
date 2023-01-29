@@ -2,11 +2,11 @@ import { ActionType, BaseItemDataPF2e, BaseItemSourcePF2e, Frequency, FrequencyS
 import { OneToThree } from "@module/data";
 import { FeatPF2e } from ".";
 import { FEAT_TYPES } from "./values";
-declare type FeatSource = BaseItemSourcePF2e<"feat", FeatSystemSource>;
-declare type FeatData = Omit<FeatSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<FeatPF2e, "feat", FeatSystemData, FeatSource>;
-export declare type FeatTrait = keyof ConfigPF2e["PF2E"]["featTraits"];
-export declare type FeatTraits = ItemTraits<FeatTrait>;
-export declare type FeatType = SetElement<typeof FEAT_TYPES>;
+type FeatSource = BaseItemSourcePF2e<"feat", FeatSystemSource>;
+type FeatData = Omit<FeatSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<FeatPF2e, "feat", FeatSystemData, FeatSource>;
+export type FeatTrait = keyof ConfigPF2e["PF2E"]["featTraits"];
+export type FeatTraits = ItemTraits<FeatTrait>;
+export type FeatType = SetElement<typeof FEAT_TYPES>;
 export interface PrerequisiteTagData {
     value: string;
 }
@@ -21,9 +21,6 @@ export interface FeatSystemSource extends ItemSystemSource, ItemLevelData {
     maxTakable: number | null;
     actionType: {
         value: ActionType;
-    };
-    actionCategory: {
-        value: string;
     };
     actions: {
         value: OneToThree | null;

@@ -10,7 +10,7 @@ declare class FastHealingRuleElement extends RuleElementPF2e {
     static validActorTypes: ActorType[];
     constructor(data: FastHealingSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     get details(): string | null;
-    /** Refresh the actor's temporary hit points at the start of its turn */
+    /** Send a message with a "healing" (damage) roll at the start of its turn */
     onTurnStart(): Promise<void>;
 }
 interface FastHealingRuleElement extends RuleElementPF2e {
@@ -26,4 +26,4 @@ interface FastHealingSource extends RuleElementSource {
     details?: string;
     deactivatedBy?: string[];
 }
-export { FastHealingRuleElement as HealingRuleElement };
+export { FastHealingRuleElement, FastHealingData, FastHealingSource };

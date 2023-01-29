@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
 import { BaseTagSelector } from "./base";
@@ -17,11 +18,11 @@ interface SenseSelectorData<TActor extends ActorPF2e> extends FormApplicationDat
     senseAcuity: Record<string, string>;
 }
 interface SenseChoiceData {
-    acuity: string;
-    disabled: string;
-    label: string;
     selected: boolean;
+    disabled: boolean;
+    acuity: string;
+    label: string;
     value: string;
 }
-declare type SenseFormData = Record<string, [boolean, string, string | null] | boolean>;
+type SenseFormData = Record<string, [boolean, string, string | null] | boolean>;
 export {};

@@ -1,7 +1,6 @@
 import { FeatSlotLevel } from "@actor/character/feats";
 import { SaveType } from "@actor/types";
 import { ABCItemPF2e, FeatPF2e } from "@item";
-import { FeatSource } from "@item/data";
 import { ZeroToFour } from "@module/data";
 import { ClassAttackProficiencies, ClassData, ClassDefenseProficiencies, ClassTrait } from "./data";
 declare class ClassPF2e extends ABCItemPF2e {
@@ -17,12 +16,12 @@ declare class ClassPF2e extends ABCItemPF2e {
         skill: number[];
         general: number[];
     };
-    /** Include all class features in addition to any with the expected location ID */
-    getLinkedFeatures(): Embedded<FeatPF2e>[];
+    /** Include all top-level class features in addition to any with the expected location ID */
+    getLinkedItems(): Embedded<FeatPF2e>[];
     /** Pulls the features that should be granted by this class, sorted by level and choice set */
-    getFeatures(options?: {
+    createGrantedItems(options?: {
         level?: number;
-    }): Promise<FeatSource[]>;
+    }): Promise<FeatPF2e[]>;
     prepareBaseData(): void;
     /** Prepare a character's data derived from their class */
     prepareActorData(this: Embedded<ClassPF2e>): void;

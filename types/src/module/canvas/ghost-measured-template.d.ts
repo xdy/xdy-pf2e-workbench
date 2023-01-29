@@ -1,4 +1,6 @@
-export declare class GhostTemplate extends MeasuredTemplate {
+import { MeasuredTemplatePF2e } from "./measured-template";
+export declare class GhostTemplate extends MeasuredTemplatePF2e {
+    #private;
     moveTime: number;
     private _onMouseMove;
     private _onLeftClick;

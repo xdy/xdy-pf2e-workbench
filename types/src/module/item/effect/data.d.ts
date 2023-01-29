@@ -1,13 +1,14 @@
 import { EffectBadge } from "@item/abstract-effect";
 import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemFlagsPF2e, ItemLevelData, ItemSystemData, ItemSystemSource } from "@item/data/base";
+import { CheckRoll } from "@system/check";
 import { EffectPF2e } from ".";
-declare type EffectSource = BaseItemSourcePF2e<"effect", EffectSystemSource> & {
+type EffectSource = BaseItemSourcePF2e<"effect", EffectSystemSource> & {
     flags: DeepPartial<EffectFlags>;
 };
-declare type EffectData = Omit<EffectSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<EffectPF2e, "effect", EffectSystemData, EffectSource> & {
+type EffectData = Omit<EffectSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<EffectPF2e, "effect", EffectSystemData, EffectSource> & {
     flags: EffectFlags;
 };
-declare type EffectFlags = ItemFlagsPF2e & {
+type EffectFlags = ItemFlagsPF2e & {
     pf2e: {
         aura?: EffectAuraData;
     };
@@ -26,18 +27,33 @@ interface EffectSystemSource extends ItemSystemSource, ItemLevelData {
     tokenIcon: {
         show: boolean;
     };
+    unidentified: boolean;
     target: string | null;
     expired?: boolean;
+    /** A numeric value or dice expression of some rules significance to the effect */
     badge: EffectBadge | null;
+    /** Origin, target, and roll context of the action that spawned this effect */
+    context: EffectContextData | null;
 }
 interface EffectSystemData extends EffectSystemSource, ItemSystemData {
     expired: boolean;
     remaining: string;
 }
-declare type EffectExpiryType = "turn-start" | "turn-end";
+type EffectExpiryType = "turn-start" | "turn-end";
 interface EffectAuraData {
     slug: string;
     origin: ActorUUID | TokenDocumentUUID;
     removeOnExit: boolean;
 }
-export { EffectData, EffectExpiryType, EffectFlags, EffectSource, EffectSystemData };
+interface EffectContextData {
+    origin: {
+        actor: ActorUUID | TokenDocumentUUID;
+        token: TokenDocumentUUID | null;
+    };
+    target: {
+        actor: ActorUUID | TokenDocumentUUID;
+        token: TokenDocumentUUID | null;
+    } | null;
+    roll: Pick<CheckRoll, "total" | "degreeOfSuccess"> | null;
+}
+export { EffectData, EffectExpiryType, EffectFlags, EffectContextData, EffectSource, EffectSystemData };

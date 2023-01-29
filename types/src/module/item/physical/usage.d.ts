@@ -10,7 +10,7 @@ interface WornUsage {
     where?: string | null;
     hands?: 0;
 }
-export declare type UsageDetails = HeldUsage | WornUsage;
+export type UsageDetails = HeldUsage | WornUsage;
 export declare function isEquipped(usage: UsageDetails, equipped: EquippedData): boolean;
 export declare function getUsageDetails(usage: string): UsageDetails;
 export {};

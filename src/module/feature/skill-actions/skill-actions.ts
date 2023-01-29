@@ -137,9 +137,9 @@ export class SkillAction {
             } else {
                 if (game.settings.get(MODULENAME, "skillActionsDescription")) await this.toChat();
                 variant.skill
-                    // @ts-ignore
                     .roll({
                         event,
+                        // @ts-ignore
                         modifiers: variant.modifiers,
                         // @ts-ignore
                         options: [`action:${this.data.slug}`],

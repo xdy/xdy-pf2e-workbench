@@ -1,12 +1,10 @@
-import { DiceModifierPF2e } from "@actor/modifiers";
+import { DamageDiceParameters, DamageDicePF2e } from "@actor/modifiers";
+import { ResistanceType } from "@actor/types";
 import { ArmorPF2e, WeaponPF2e } from "@item";
 import type { ResilientRuneType } from "@item/armor/types";
 import type { OtherWeaponTag, StrikingRuneType, WeaponPropertyRuneType, WeaponTrait } from "@item/weapon/types";
 import { OneToFour, Rarity, ZeroToFour, ZeroToThree } from "@module/data";
-import { DamageType } from "@system/damage";
-import { DamageDieSize } from "@system/damage/damage";
-import { DegreeOfSuccessString } from "@system/degree-of-success";
-import { RawPredicate } from "@system/predication";
+import { RollNoteSource } from "@module/notes";
 export declare function getPropertySlots(item: WeaponPF2e | ArmorPF2e): ZeroToFour;
 export declare function getPropertyRunes(item: WeaponPF2e | ArmorPF2e, slots: number): string[];
 export declare function getStrikingDice(itemData: {
@@ -19,23 +17,24 @@ export declare function getResiliencyBonus(itemData: {
         value: ResilientRuneType | null;
     };
 }): ZeroToThree;
-interface RollNoteData {
-    outcome?: DegreeOfSuccessString[];
-    predicate?: RawPredicate;
-    text: string;
-}
+type RuneDiceProperty = "damageType" | "category" | "diceNumber" | "dieSize" | "predicate" | "critical";
+type RuneDiceData = Partial<Pick<DamageDiceParameters, RuneDiceProperty>>;
 export interface WeaponPropertyRuneData {
     attack?: {
-        notes?: RollNoteData[];
+        notes?: RuneNoteData[];
     };
     damage?: {
-        dice?: {
-            damageType?: DamageType;
-            diceNumber?: number;
-            dieSize?: DamageDieSize;
-            predicate?: RawPredicate;
+        dice?: RuneDiceData[];
+        notes?: RuneNoteData[];
+        /**
+         * A list of resistances this weapon's damage will ignore--not limited to damage from the rune.
+         * If `max` is numeric, the resistance ignored will be equal to the lower of the provided maximum and the
+         * target's resistance.
+         */
+        ignoredResistances?: {
+            type: ResistanceType;
+            max: number | null;
         }[];
-        notes?: RollNoteData[];
     };
     level: number;
     name: string;
@@ -45,8 +44,13 @@ export interface WeaponPropertyRuneData {
     traits: WeaponTrait[];
     otherTags?: OtherWeaponTag[];
 }
+/** Title and text are mandatory for these notes */
+interface RuneNoteData extends Pick<RollNoteSource, "outcome" | "predicate" | "title" | "text"> {
+    title: string;
+    text: string;
+}
 export declare const WEAPON_PROPERTY_RUNES: Record<WeaponPropertyRuneType, WeaponPropertyRuneData>;
-export declare function getPropertyRuneModifiers(runes: WeaponPropertyRuneType[]): DiceModifierPF2e[];
+export declare function getPropertyRuneDice(runes: WeaponPropertyRuneType[]): DamageDicePF2e[];
 export interface RuneValuationData {
     level: number;
     price: number;

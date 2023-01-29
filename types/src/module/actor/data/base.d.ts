@@ -1,16 +1,17 @@
 import type { ActorPF2e } from "@actor/base";
+import { DexterityModifierCapData } from "@actor/character/types";
 import { SkillAbbreviation } from "@actor/creature/data";
 import { ActorSizePF2e } from "@actor/data/size";
 import { StatisticModifier } from "@actor/modifiers";
 import { AbilityString, ActorAlliance } from "@actor/types";
-import { IMMUNITY_TYPES, RESISTANCE_TYPES, WEAKNESS_TYPES } from "@actor/values";
 import { ConsumablePF2e, ItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
 import type { ActiveEffectPF2e } from "@module/active-effect";
-import { DocumentSchemaRecord, LabeledNumber, Rarity, Size, ValueAndMaybeMax, ValuesList } from "@module/data";
+import { DocumentSchemaRecord, Rarity, Size, ValueAndMaybeMax } from "@module/data";
 import { AutoChangeEntry } from "@module/rules/rule-element/ae-like";
 import { RollParameters, StrikeRollParams } from "@module/system/rolls";
 import { ActorType } from ".";
+import { ImmunityData, ImmunitySource, ResistanceData, ResistanceSource, WeaknessData, WeaknessSource } from "./iwr";
 /** Base interface for all actor data */
 interface BaseActorSourcePF2e<TType extends ActorType = ActorType, TSystemSource extends ActorSystemSource = ActorSystemSource> extends foundry.data.ActorSource<TType, TSystemSource, ItemSourcePF2e> {
     flags: DeepPartial<ActorFlagsPF2e>;
@@ -28,11 +29,10 @@ interface ActorSystemSource {
             value: number;
         };
         alliance?: ActorAlliance;
+        creature?: unknown;
     };
-    attributes: {
-        hp?: ValueAndMaybeMax;
-    };
-    traits?: BaseTraitsSource;
+    attributes: ActorAttributesSource;
+    traits?: ActorTraitsSource<string>;
     /** A record of this actor's current world schema version as well a log of the last migration to occur */
     schema: DocumentSchemaRecord;
 }
@@ -43,8 +43,9 @@ interface ActorSystemData extends ActorSystemSource {
         };
         alliance: ActorAlliance;
     };
-    attributes: BaseActorAttributes;
-    traits: BaseTraitsData;
+    actions?: StrikeData[];
+    attributes: ActorAttributes;
+    traits: ActorTraitsData<string>;
     /** Icons appearing in the Effects Tracker application */
     tokenEffects: TemporaryEffect[];
     /** An audit log of automatic, non-modifier changes applied to various actor data nodes */
@@ -72,8 +73,17 @@ interface BaseHitPointsData {
     /** Any details about hit points. */
     details: string;
 }
-interface BaseActorAttributes {
+interface ActorAttributesSource {
+    hp?: ValueAndMaybeMax;
+    immunities?: ImmunitySource[];
+    weaknesses?: WeaknessSource[];
+    resistances?: ResistanceSource[];
+}
+interface ActorAttributes extends ActorAttributesSource {
     hp?: Required<BaseHitPointsData>;
+    immunities: ImmunityData[];
+    weaknesses: WeaknessData[];
+    resistances: ResistanceData[];
     flanking: {
         /** Whether the actor can flank at all */
         canFlank: boolean;
@@ -85,46 +95,32 @@ interface BaseActorAttributes {
         flatFootable: FlatFootableCircumstance;
     };
 }
-declare type FlatFootableCircumstance = 
+type FlatFootableCircumstance = 
 /** Flat-footable in all flanking situations */
 true
 /** Flat-footable if the flanker's level is less than or equal to the actor's own */
  | number
 /** Never flat-footable */
  | false;
-declare type GangUpCircumstance = 
+type GangUpCircumstance = 
 /** Requires at least `number` allies within melee reach of the target */
 number
 /** Requires the actor's animal companion to be adjacent to the target */
  | "animal-companion";
 /** Data related to actor hitpoints. */
-export declare type HitPointsData = StatisticModifier & Required<BaseHitPointsData>;
-export declare type ImmunityType = SetElement<typeof IMMUNITY_TYPES>;
-export declare type WeaknessType = SetElement<typeof WEAKNESS_TYPES>;
-export interface LabeledWeakness extends LabeledNumber {
-    type: WeaknessType;
-}
-export declare type ResistanceType = SetElement<typeof RESISTANCE_TYPES>;
-export interface LabeledResistance extends LabeledNumber {
-    type: ResistanceType;
-}
-export interface BaseTraitsSource {
+type HitPointsData = StatisticModifier & Required<BaseHitPointsData>;
+interface ActorTraitsSource<TTrait extends string> {
+    /** Actual Pathfinder traits */
+    value: TTrait[];
     /** The rarity of the actor (common, uncommon, etc.) */
-    rarity: Rarity;
+    rarity?: Rarity;
     /** The character size (such as 'med'). */
-    size: {
+    size?: {
         value: Size;
     };
-    /** Actual Pathfinder traits */
-    traits: ValuesList;
-    /** Damage immunities this actor has. */
-    di: ValuesList<ImmunityType>;
-    /** Damage resistances that this actor has. */
-    dr: LabeledResistance[];
-    /** Damage vulnerabilities that this actor has. */
-    dv: LabeledWeakness[];
 }
-interface BaseTraitsData extends BaseTraitsSource {
+interface ActorTraitsData<TTrait extends string> extends ActorTraitsSource<TTrait> {
+    rarity: Rarity;
     size: ActorSizePF2e;
 }
 /** Basic skill and save data (not including custom modifiers). */
@@ -137,7 +133,7 @@ interface AbilityBasedStatistic {
     ability?: AbilityString;
 }
 /** A roll function which can be called to roll a given skill. */
-declare type RollFunction<T extends RollParameters = RollParameters> = (params: T) => Promise<Rolled<Roll> | null | string | void>;
+type RollFunction<T extends RollParameters = RollParameters> = (params: T) => Promise<Rolled<Roll> | null | string | void>;
 /** Basic initiative-relevant data. */
 interface InitiativeData {
     /** What skill or ability is currently being used to compute initiative. */
@@ -146,15 +142,8 @@ interface InitiativeData {
     label?: string;
 }
 /** The full data for character perception rolls (which behave similarly to skills). */
-declare type PerceptionData = StatisticModifier & AbilityBasedStatistic & Rollable;
+type PerceptionData = StatisticModifier & AbilityBasedStatistic & Rollable;
 /** The full data for character AC; includes the armor check penalty. */
-/** Single source of a Dexterity modifier cap to Armor Class, including the cap value itself. */
-interface DexterityModifierCapData {
-    /** The numeric value that constitutes the maximum Dexterity modifier. */
-    value: number;
-    /** The source of this Dex cap - usually the name of an armor, a monk stance, or a spell. */
-    source: string;
-}
 interface ArmorClassData {
     /** The actual AC value */
     value: number;
@@ -184,7 +173,7 @@ interface StrikeData extends StatisticModifier {
     /** The type of action; currently just 'strike'. */
     type: "strike";
     /** The image URL for this strike (shown on the UI). */
-    imageUrl: ImagePath;
+    imageUrl: ImageFilePath;
     /** The glyph for this strike (how many actions it takes, reaction, etc). */
     glyph: string;
     /** A description of this strike. */
@@ -207,6 +196,8 @@ interface StrikeData extends StatisticModifier {
     damage?: RollFunction<StrikeRollParams>;
     /** Roll critical damage for this weapon. */
     critical?: RollFunction<StrikeRollParams>;
+    /** Alternative usages of a strike weapon: thrown, combination-melee, etc. */
+    altUsages?: StrikeData[];
     /** A list of attack variants which apply the Multiple Attack Penalty. */
     variants: {
         label: string;
@@ -256,4 +247,4 @@ interface PrototypeTokenPF2e extends foundry.data.PrototypeToken {
         };
     };
 }
-export { AbilityBasedStatistic, ActorFlagsPF2e, ActorSystemData, ActorSystemSource, ArmorClassData, BaseActorAttributes, BaseActorDataPF2e, BaseActorSourcePF2e, BaseHitPointsData, BaseTraitsData, DexterityModifierCapData, GangUpCircumstance, InitiativeData, PerceptionData, PrototypeTokenPF2e, RollFunction, RollOptionFlags, RollToggle, Rollable, StrikeData, TraitViewData, };
+export { AbilityBasedStatistic, ActorAttributes, ActorAttributesSource, ActorFlagsPF2e, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, ArmorClassData, BaseActorDataPF2e, BaseActorSourcePF2e, BaseHitPointsData, GangUpCircumstance, HitPointsData, InitiativeData, PerceptionData, PrototypeTokenPF2e, RollFunction, RollOptionFlags, RollToggle, Rollable, StrikeData, TraitViewData, };

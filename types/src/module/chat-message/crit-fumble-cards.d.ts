@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ChatMessagePF2e } from ".";
 export declare class CriticalHitAndFumbleCards {

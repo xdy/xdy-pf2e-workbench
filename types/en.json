@@ -11,6 +11,7 @@
     },
     "ITEM": {
         "TypeAction": "Action",
+        "TypeAffliction": "Affliction",
         "TypeAncestry": "Ancestry",
         "TypeArmor": "Armor",
         "TypeBackground": "Background",
@@ -50,7 +51,8 @@
         "UnknownCombatant": "Unknown Participant"
     },
     "COMPENDIUM": {
-        "Search": "Search Compendiums"
+        "Search": "Search Compendiums",
+        "Migrate": "Migrate Compendium"
     },
     "CONTROLS": {
         "AdjustSceneDarkness": "Adjust Scene Darkness",
@@ -264,12 +266,32 @@
                 },
                 "Trick": "Create a Diversion - Trick"
             },
+            "DecipherWriting": {
+                "Notes": {
+                    "criticalSuccess": "<strong>Critical Success</strong> You understand the true meaning of the text.",
+                    "success": "<strong>Success</strong> You understand the true meaning of the text. If it was a coded document, you know the general meaning but might not have a word-for-word translation.",
+                    "failure": "<strong>Failure</strong> You can't understand the text and take a –2 circumstance penalty to further checks to decipher it.",
+                    "criticalFailure": "<strong>Critical Failure</strong> You believe you understand the text on that page, but you have in fact misconstrued its message."
+                },
+                "Title": "Decipher Writing",
+                "Warning": {
+                    "NoSkill": "The Decipher Writing action can be used with different skills, and no skill was specified. Arcana is typically used for writing about magic or science, Occultism for esoteric texts about mysteries and philosophy, Religion for scripture, and Society for coded messages or archaic documents."
+                }
+            },
             "Demoralize": {
                 "Notes": {
                     "criticalSuccess": "<strong>Critical Success</strong> The target becomes @UUID[Compendium.pf2e.conditionitems.TBSHQspnbcqxsmjL]{Frightened 2}.",
                     "success": "<strong>Success</strong> The target becomes @UUID[Compendium.pf2e.conditionitems.TBSHQspnbcqxsmjL]{Frightened 1}."
                 },
                 "Title": "Demoralize"
+            },
+            "DisableDevice": {
+                "Notes": {
+                    "criticalSuccess": "<strong>Critical Success</strong> You disable the device, or you achieve two successes toward disabling a complex device. You leave no trace of your tampering, and you can rearm the device later, if that type of device can be rearmed.",
+                    "success": "<strong>Success</strong> You disable the device, or you achieve one success toward disabling a complex device.",
+                    "criticalFailure": "<strong>Critical Failure</strong> You trigger the device."
+                },
+                "Title": "Disable Device"
             },
             "Disarm": {
                 "EffectLabel": "Using weapon with loose grip",
@@ -460,8 +482,8 @@
             },
             "Repair": {
                 "Chat": {
-                    "ItemRepaired": "{itemName} was repaired for {repairedDamage} points of damage for a total of {afterRepairHitPoints} out of {maximumHitPoints} Hit Points.",
-                    "ItemDamaged": "{itemName} was dealt {damageDealt} points of damage for a total of {afterDamageHitPoints} out of {maximumHitPoints} Hit Points."
+                    "ItemRepaired": "{itemName} was repaired for {repairedDamage} points of damage for a total of {afterRepairHitPoints} out of {maximumHitPoints} hit points.",
+                    "ItemDamaged": "{itemName} was dealt {damageDealt} points of damage for a total of {afterDamageHitPoints} out of {maximumHitPoints} hit points."
                 },
                 "Error": {
                     "ItemReferenceMismatch": "Only accepts physical items for Repair from an actor."
@@ -699,8 +721,9 @@
                     "Flaws": "Flaws",
                     "KeyIcon": "Key",
                     "VoluntaryFlaw": {
-                        "Title": "Voluntary Flaw",
-                        "Description": "Select two voluntary flaws to gain a free boost."
+                        "Title": "Voluntary Flaws",
+                        "Description": "You can take one or more additional penalties purely for roleplaying a highly flawed character.",
+                        "LegacyDescription": "This is the Voluntary Flaws feature that existed until the CRB's 4th printing. It is kept in place for older characters and as a continued option for Pathfinder Society play."
                     },
                     "BackgroundBoostDescription": "Two boosts: one must be {a} or {b}.",
                     "AbilityScoreMethod": {
@@ -717,6 +740,7 @@
                 "AncestryClass": "{ancestry} {class}",
                 "ClassDC": {
                     "Label": "Class DC",
+                    "LabelSpecific": "Class DC ({class})",
                     "Plural": "Class DCs"
                 },
                 "Configure": {
@@ -1022,6 +1046,7 @@
         "BiographyOrganizations": "Organizations",
         "BiographyOrganizationsTitle": "Your character's organizations",
         "BiographyPersonalityHeader": "Personality",
+        "Bonus": "Bonus",
         "BonusBulk": "Bonus Bulk Maximum",
         "BonusBulkTitle": "Add or subtract from your bulk limit",
         "BonusEncumbranceBulkLabel": "Add Encumbered Bulk",
@@ -1084,6 +1109,17 @@
             "worn-in-slot": "Worn (In Slot)",
             "stowed": "Stowed",
             "dropped": "Dropped"
+        },
+        "CastingItemCreateDialog": {
+            "10thLevelWand": "10th level wands don't exist",
+            "cantripDeck5": "Cantrip Deck (5-pack)",
+            "itemTypeLabel": "Item type: ",
+            "label": "Create a spellcasting item from the dropped spell",
+            "scroll": "Scroll",
+            "spellLevelLabel": "Heightened Level: ",
+            "submit": "Create item",
+            "title": "Create a spellcasting item",
+            "wand": "Wand"
         },
         "CastLabel": "Cast",
         "CharacterDetails": "Character Details",
@@ -1327,12 +1363,16 @@
         "CurrentStaminaTitle": "The amount of stamina points you have",
         "Damage": {
             "Base": "Base",
+            "IncreasedFrom": "Increased from {original} to minimum of 1",
             "IWR": {
+                "ActorIsImmune": "{actor} is immune to {effect}.",
+                "ActorIsUnaffected": "{actor} is unaffected by {effect}.",
                 "ApplicationBreakdown": {
                     "unaffected": "Unaffected by {type}: {adjustment}",
                     "immunity": "Immune to {type}: {adjustment}",
                     "weakness": "Weak to {type}: {adjustment}",
-                    "resistance": "Resistant to {type}: {adjustment}"
+                    "resistance": "Resistant to {type}: {adjustment}",
+                    "ignored": "Resistance to {type} ignored!"
                 },
                 "CompositeLabel": {
                     "Exceptions0DoubleVs0": "{type} {value}",
@@ -1378,6 +1418,7 @@
                     "controlled": "controlled",
                     "critical-hits": "critical hits",
                     "curse": "curse",
+                    "damage-from-spells": "damage from spells",
                     "darkwood": "darkwood",
                     "dazzled": "dazzled",
                     "deafened": "deafened",
@@ -1433,8 +1474,8 @@
                     "silver": "silver",
                     "sleep": "sleep",
                     "slowed": "slowed",
-                    "splash-damage": "splash damage",
                     "spell-deflection": "spell deflection",
+                    "splash-damage": "splash damage",
                     "stunned": "stunned",
                     "stupefied": "stupefied",
                     "swarm-attacks": "swarm attacks",
@@ -1446,6 +1487,7 @@
                     "vampire-weaknesses": "vampire weaknesses",
                     "visual": "visual",
                     "vorpal": "vorpal",
+                    "vorpal-adamantine": "vorpal adamantine",
                     "vorpal-fear": "vorpal fear",
                     "vulnerable-to-sunlight": "vulnerable to sunlight",
                     "warpglass": "warpglass",
@@ -1456,6 +1498,7 @@
             },
             "NoDamageFormulaLabel": "No damage",
             "PersistentTooltip": "Persistent {damageType}",
+            "Precision": "Precision",
             "RollFlavor": {
                 "acid": "acid",
                 "air": "air",
@@ -1482,7 +1525,8 @@
                 "sonic": "sonic",
                 "splash": "splash",
                 "untyped": "untyped"
-            }
+            },
+            "Scatter": "Scatter Damage"
         },
         "DamageCategoriesLabel": "Damage Categories",
         "DamageDieD10": "d10",
@@ -1584,10 +1628,9 @@
             "RevealName": "Reveal Name"
         },
         "Edit": "Edit",
-        "EditHazardLabel": "Edit Hazard?",
+        "EditHazardLabel": "Edit Hazard",
         "EditItemTitle": "Edit Item",
         "EditLabel": "Edit?",
-        "EditNPCLabel": "Edit NPC?",
         "EffectsLabel": "Effects",
         "EffectPanel": {
             "AppliedBy": "Applied by: {condition-list}",
@@ -1800,18 +1843,35 @@
                     "studded-leather-armor": "Studded Leather Armor"
                 }
             },
+            "Affliction": {
+                "AddStage": "Add Stage",
+                "Error": {
+                    "RestrictedStageItem": "Only effect items can be directly added to afflictions"
+                },
+                "SaveLabel": "Save DC",
+                "StageLabel": "Stage",
+                "Stage": "Stage {stage}",
+                "OnsetLabel": "Onset"
+            },
             "Backpack": {
                 "StowingLabel": "Is Stowing Container?"
             },
             "CannotAddType": "{type} items cannot be added to this actor.",
             "Condition": {
                 "PersistentDamage": {
-                    "Name": "Persistent Damage ({formula})",
+                    "Name": "Persistent Damage ({formula} {damageType})",
                     "NameWithDC": "Persistent Damage ({formula} DC{dc})",
+                    "Chat": {
+                        "Recover": "Roll Recovery Check",
+                        "RecoverLabel": "Recovery: {name}"
+                    },
                     "Dialog": {
                         "Title": "Persistent Damage ({actor})",
                         "Add": "Add Persistent Damage",
                         "Remove": "Remove Persistent Damage"
+                    },
+                    "Error": {
+                        "DoesNotExist": "No persistent {damageType} damage exists on the actor"
                     }
                 },
                 "Flanked": "Flat-Footed (Flanked)"
@@ -2178,7 +2238,8 @@
                 "Info": {
                     "Added": "{item} was added to {category}."
                 },
-                "LevelLabel": "Feat"
+                "LevelLabel": "Feat",
+                "LevelN": "Feat {level}"
             },
             "Heritage": {
                 "AncestryNotFound": "The referenced ancestry item was not found.",
@@ -2189,19 +2250,24 @@
             "IconLabel": "Icon",
             "NameLabel": "Name",
             "Physical": {
+                "Broken": "Broken",
+                "Destroyed": "Destroyed",
+                "FromSpell": {
+                    "CantripDeck5": "Cantrip Deck of {name} (5-pack)",
+                    "Scroll": "Scroll of {name} (Level {level})",
+                    "Wand": "Wand of {name} (Level {level})"
+                },
                 "LevelLabel": "Item {level}",
-                "PriceLabel": "Price: {price}",
                 "OtherTag": {
                     "Herbal": "Herbal",
                     "Improvised": "Improvised",
                     "Shoddy": "Shoddy"
                 },
                 "OtherTags": {
-                    "Label": "Other Tags",
-                    "Hint": "These are tags indicating classifications in 2nd Edition rules that lack explicit status/definition but are still yet heavily relied upon. Some may be automatically added when other properties are present."
+                    "Hint": "These are tags indicating classifications in 2nd Edition rules that lack explicit status/definition but are still yet heavily relied upon. Some may be automatically added when other properties are present.",
+                    "Label": "Other Tags"
                 },
-                "Broken": "Broken",
-                "Destroyed": "Destroyed",
+                "PriceLabel": "Price: {price}",
                 "Usage": {
                     "WornParenthetical": "Worn ({where})",
                     "WornSlot": {
@@ -2240,6 +2306,7 @@
             "RemovalPrevented": "Removal of {item} is prevented by {preventer}.",
             "SidebarSummary": "{type} Summary",
             "Spell": {
+                "LevelN": "Spell {level}",
                 "PlaceMeasuredTemplate": "Place {size}-{unit} {shape}",
                 "Variants": {
                     "DeleteDialogTitle": "Delete Spell Variant",
@@ -2250,7 +2317,8 @@
                     "SheetTitle": "{originalName} (Variant)"
                 },
                 "Warning": {
-                    "InvalidLevel": "Attempted to add spell {name} at {targetLevel}, but spell is {baseLevel}."
+                    "InvalidLevel": "Attempted to add spell {name} at {targetLevel}, but spell is {baseLevel}.",
+                    "WrongSpellType": "Cannot add {spellType} spell to this casting entry."
                 }
             },
             "Weapon": {
@@ -2425,6 +2493,7 @@
         "LanguageIblydan": "Iblydan",
         "LanguageIgnan": "Ignan",
         "LanguageIkeshti": "Ikeshti",
+        "LanguageImmolis": "Immolis",
         "LanguageInfernal": "Infernal",
         "LanguageIruxi": "Iruxi",
         "LanguageJistkan": "Jistkan",
@@ -2927,7 +2996,7 @@
                     "ManagedBy": "Managed by <rbv>rules-based vision</rbv>."
                 },
                 "IWR": {
-                    "Name": "Immunities, Weaknesses, & Resistances",
+                    "Name": "Immunities, weaknesses, & resistances",
                     "Hint": "When applying damage to an actor, adjust its value according to the actor's immunities, weaknesses, and resistances."
                 },
                 "EffectExpiration": {
@@ -3189,17 +3258,6 @@
         "SavesWillShort": "Will",
         "SavingThrowWithName": "{saveName} Saving Throw",
         "ScoreTitle": "Score",
-        "ScrollFromSpell": "Scroll of {name} (Level {level})",
-        "ScrollWandPopup": {
-            "10thLevelWand": "10th level wands don't exist",
-            "itemTypeLabel": "Consumable type: ",
-            "label": "Create a scroll or wand from the dropped spell",
-            "scroll": "Scroll",
-            "spellLevelLabel": "Heightened Level: ",
-            "submit": "Create item",
-            "title": "Create a scroll or wand",
-            "wand": "Wand"
-        },
         "SelectLabel": "Select",
         "SellAllTreasureTitle": "Sell All Treasure",
         "SellAllTreasureQuestion": "Convert all treasure items into coins",
@@ -3831,7 +3889,7 @@
         "TraitDescriptionOracle": "This indicates abilities from the oracle class.",
         "TraitDescriptionOread": "A type of geniekin descended from a being from the Plane of Earth.",
         "TraitDescriptionOrc": "A creature with this trait is a member of the orc ancestry. A weapon with this trait is a weapon which orcs craft and use.",
-        "TraitDescriptionParry": "This weapon can be used defensively to block attacks. While wielding this weapon, if your proficiency with it is trained or better, you can spend an Interact action to position your weapon defensively, gaining a +1 circumstance bonus to AC until the start of your next turn.",
+        "TraitDescriptionParry": "This weapon can be used defensively to block attacks. While wielding this weapon, if your proficiency with it is trained or better, you can spend a single action to position your weapon defensively, gaining a +1 circumstance bonus to AC until the start of your next turn.",
         "TraitDescriptionPeachwood": "Peachwood weapons have a particularly auburn tinge to them when under direct sunlight. Peachwood is treated as darkwood for any undead creatures' resistances or weaknesses related to darkwood (allowing a peachwood weapon to bypass a jiang-shi's resistance, for example). In addition, peachwood weapons bypass a small portion of the resistances of any undead creature. Strikes with a peachwood weapon treat an undead's resistances against physical damage as 2 lower for standard-grade peachwood, and 4 lower for high-grade.",
         "TraitDescriptionPlant": "Vegetable creatures have the plant trait. They are distinct from normal plants. Magical effects with this trait manipulate or conjure plants or plant matter in some way. Those that manipulate plants have no effect in an area with no plants.",
         "TraitDescriptionPoison": "An effect with this trait delivers a poison or deals poison damage. An item with this trait is poisonous and might cause an affliction.",
@@ -4130,7 +4188,6 @@
         "TraitPossession": "Possession",
         "TraitPotion": "Potion",
         "TraitPrecious": "Precious",
-        "TraitPrecision": "Precision",
         "TraitPrediction": "Prediction",
         "TraitPress": "Press",
         "TraitPrimal": "Primal",
@@ -4167,8 +4224,18 @@
         "TraitRange180": "Range 180 ft",
         "TraitRange190": "Range 190 ft",
         "TraitRange200": "Range 200 ft",
+        "TraitRange210": "Range 210 ft",
+        "TraitRange220": "Range 220 ft",
+        "TraitRange230": "Range 230 ft",
         "TraitRange240": "Range 240 ft",
+        "TraitRange250": "Range 250 ft",
+        "TraitRange260": "Range 260 ft",
+        "TraitRange270": "Range 270 ft",
+        "TraitRange280": "Range 280 ft",
+        "TraitRange290": "Range 290 ft",
         "TraitRange300": "Range 300 ft",
+        "TraitRange310": "Range 310 ft",
+        "TraitRange320": "Range 320 ft",
         "TraitRange500": "Range 500 ft",
         "TraitRangeIncrement10": "Range Increment 10 ft",
         "TraitRangeIncrement100": "Range Increment 100 ft",
@@ -4183,6 +4250,7 @@
         "TraitRangeIncrement180": "Range Increment 180 ft",
         "TraitRangeIncrement190": "Range Increment 190 ft",
         "TraitRangeIncrement20": "Range Increment 20 ft",
+        "TraitRangeIncrement25": "Range Increment 25 ft",
         "TraitRangeIncrement200": "Range Increment 200 ft",
         "TraitRangeIncrement210": "Range Increment 210 ft",
         "TraitRangeIncrement220": "Range Increment 220 ft",
@@ -4409,12 +4477,19 @@
         "TraitWornSaddle": "Worn Saddle",
         "TraitWornOrOneHand": "Worn or Held in One Hand",
         "TraitEtchedOntoArmor": "Etched onto Armor",
+        "TraitEtchedOntoLightArmor": "Etched onto Light Armor",
         "TraitEtchedOntoMedHeavyArmor": "Etched onto Medium or Heavy Armor",
+        "TraitEtchedOntoLightMedNMArmor": "Etched on L/M Nonmetal Armor",
         "TraitEtchedOntoAWeapon": "Etched onto a Weapon",
         "TraitEtchedOntoAThrownWeapon": "Etched on Thrown Weapon",
         "TraitEtchedOntoAMeleeWeapon": "Etched on Melee Weapon",
+        "TraitEtchedOntoASlashingMeleeWeapon": "Etched on Slashing Melee Weapon",
+        "TraitEtchedOntoAPiercingOrSlashingMeleeWeapon": "Etched on Piercing/Slashing Melee Weapon",
+        "TraitEtchedOntoAWeaponWOAxiomaticRune": "Etched on Weapon w/o Axiomatic Rune",
+        "TraitEtchedOntoAWeaponWOAnarchicRune": "Etched on Weapon w/o Anarchic Rune",
+        "TraitEtchedOntoAWeaponWOHolyRune": "Etched on Weapon w/o Holy Rune",
+        "TraitEtchedOntoAWeaponWOUnholyRune": "Etched on Weapon w/o Unholy Rune",
         "TraitEtchedOntoAClanDagger": "Etched on Clan Dagger",
-        "TraitEtchedOntoLightMedNMArmor": "Etched on L/M Nonmetal Armor",
         "TraitBonded": "Bonded",
         "TraitsLabel": "Traits",
         "Trap": "Trap",
@@ -4487,7 +4562,6 @@
             }
         },
         "ValueLabel": "Value",
-        "WandFromSpell": "Wand of {name} (Level {level})",
         "WeaknessesLabel": "Weaknesses",
         "Weapon": {
             "Base": {
@@ -4724,10 +4798,9 @@
         "WeaponBaseLabel": "Base",
         "WeaponBonusAttackLabel": "Bonus Attack",
         "WeaponBonusDamageLabel": "Bonus Damage",
-        "WeaponBaseDamageLabel": "Base Weapon Damage",
         "WeaponBaseDamageTitle": "This section configures the base damage for the weapon. Additional die from Striking runes should not be added here and instead configured in the Weapon Runes section above.",
         "WeaponCustomDamageLabel": "Additional Custom Damage",
-        "WeaponCustomDamageTitle": "This section adds any custom damage that is not covered by the Rune system. The Strike Effect and Critcal Effect attributes are not currently used in the system and are informational only.",
+        "WeaponCustomDamageTitle": "This section adds any custom damage that is not covered by the Rune system. The Strike Effect and Critical Effect attributes are not currently used in the system and are informational only.",
         "WeaponDamageLabel": "Base Damage",
         "WeaponGroups": "Weapon Groups",
         "WeaponGroupAxe": "Axe",
@@ -4841,7 +4914,10 @@
                 }
             },
             "flaming": {
-                "Name": "Flaming"
+                "Name": "Flaming",
+                "Note": {
+                    "criticalSuccess": "On a critical hit, you deal an additional [[/r 1d10[persistent,fire]]]."
+                }
             },
             "frost": {
                 "Name": "Frost",
@@ -4911,7 +4987,7 @@
             "greaterFrost": {
                 "Name": "Greater Frost",
                 "Note": {
-                    "criticalSuccess": "Cold damage dealt by this weapon ignores the target's cold resistance. On a critical hit, the target is also @UUID[Compendium.pf2e.conditionitems.xYTAsEpcJE1Ccni3]{Slowed 1} until the end of your next turn unless it succeeds at a @Check[type:fortitude|dc:34|name:Greater Thundering Rune] save.",
+                    "criticalSuccess": "Cold damage dealt by this weapon ignores the target's cold resistance. On a critical hit, the target is also @UUID[Compendium.pf2e.conditionitems.xYTAsEpcJE1Ccni3]{Slowed 1} until the end of your next turn unless it succeeds at a @Check[type:fortitude|dc:34|name:Greater Frost Rune] save.",
                     "success": "<strong>Greater Frost Rune</strong> Cold damage dealt by this weapon ignores the target's cold resistance."
                 }
             },
@@ -4945,7 +5021,7 @@
                     "Bow": "<strong>Grievous Rune</strong> The Athletics check to pull the missile free is DC 20.",
                     "Brawling": "<strong>Grievous Rune</strong> The target takes a -4 circumstance penalty to its save.",
                     "Club": "<strong>Grievous Rune</strong> You can knock the target up to 15 feet away.",
-                    "Dart": "<strong>Grievous Rune</strong> The base persistent bleed damage increases to [[/r 2d6[persistent,bleed]]].",
+                    "Dart": "<strong>Grievous Rune</strong> The base persistent bleed damage increases to [[/r 2d6[bleed]]].",
                     "Flail": "<strong>Grievous Rune</strong> You move the target 5 feet. You can't move it away from you, but you can move it in another direction of your choice.",
                     "Hammer": "<strong>Grievous Rune</strong> You can also knock the target 5 feet away from you.",
                     "Knife": "<strong>Grievous Rune</strong> The target takes a -5-foot status penalty to its Speed while it has the @UUID[Compendium.pf2e.conditionitems.lDVqvLKA6eF3Df60]{Persistent Bleed Damage}.",
@@ -5455,6 +5531,7 @@
             "VehicleString": "Vehicle",
             "NamePlaceholder": "Vehicle",
             "VehicleLevelLabel": "Vehicle",
+            "LevelN": "Vehicle {level}",
             "DescriptionHeading": "Description",
             "PilotingCheckLabel": "Piloting Check",
             "CrewLabel": "Crew",
@@ -5465,7 +5542,7 @@
             "SpaceWideLabel": "Width",
             "SpaceHighLabel": "Height",
             "BrokenThresholdShortLabel": "BT",
-            "CurrentHPTitel": "Current Hitpoints",
+            "CurrentHPTitle": "Current Hitpoints",
             "MaxHPTitle": "Maximum Hitpoints",
             "HardnessShortLabel": "Hard.",
             "HardnessLabel": "Hardness",

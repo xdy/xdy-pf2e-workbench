@@ -4,7 +4,7 @@ export declare class Migration604FixClassItem extends MigrationBase {
     static version: number;
     updateItem(item: MaybeWithAbilityBoosLevels): Promise<void>;
 }
-declare type MaybeWithAbilityBoosLevels = ClassSource & {
+type MaybeWithAbilityBoosLevels = ClassSource & {
     system: {
         abilityBoostLevels: unknown;
     };

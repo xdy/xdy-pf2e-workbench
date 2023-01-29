@@ -2,7 +2,7 @@ import { CharacterPF2e, NPCPF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
 import { WeaponDamage } from "@item/weapon/data";
-import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponTrait } from "@item/weapon/types";
+import { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponTrait } from "@item/weapon/types";
 import { RuleElementData, RuleElementPF2e, RuleElementSource } from "./";
 import { RuleElementOptions } from "./base";
 /**
@@ -16,10 +16,14 @@ declare class StrikeRuleElement extends RuleElementPF2e {
     category: WeaponCategory;
     group: WeaponGroup;
     baseType: BaseWeaponType | null;
+    traits: WeaponTrait[];
+    otherTags: OtherWeaponTag[];
     range: {
         increment: number;
         max: number | null;
     } | null;
+    /** Whether this attack is from a battle form */
+    battleForm: boolean;
     constructor(data: StrikeSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
     beforePrepareData(): void;
     /** Exclude other strikes if this rule element specifies that its strike replaces all others */
@@ -39,17 +43,18 @@ interface StrikeSource extends RuleElementSource {
     range?: unknown;
     maxRange?: unknown;
     traits?: unknown;
+    otherTags?: unknown;
     replaceAll?: unknown;
     replaceBasicUnarmed?: unknown;
+    battleForm?: unknown;
     options?: unknown;
 }
 interface StrikeData extends RuleElementData {
     slug?: string;
-    img?: ImagePath;
+    img?: ImageFilePath;
     damage?: {
         base?: WeaponDamage;
     };
-    traits: WeaponTrait[];
     replaceAll: boolean;
     replaceBasicUnarmed: boolean;
     options?: string[];
