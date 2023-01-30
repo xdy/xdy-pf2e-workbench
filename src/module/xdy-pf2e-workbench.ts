@@ -200,20 +200,20 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 }
             } else {
                 if (
-                    (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
-                        game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault") &&
-                    message.item &&
-                    !message.isCheckRoll
+                    game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+                    game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
                 ) {
                     chatCardDescriptionCollapse(html);
-                } else if (
+                }
+                if (
                     (game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
                         game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") ===
                             "nonCollapsedDefault") &&
                     ["weapon", "melee", "spell"].includes(message.item?.type ?? "")
                 ) {
                     chatAttackCardDescriptionCollapse(html);
-                } else if (
+                }
+                if (
                     ((game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
                         game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") ===
                             "nonCollapsedDefault") &&
