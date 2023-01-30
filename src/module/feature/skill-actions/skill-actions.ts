@@ -120,7 +120,13 @@ export class SkillAction {
             const rollAction = game.pf2e.actions[this.key];
             if (rollAction) {
                 if (this.key !== "earnIncome") {
-                    rollAction({ event, modifiers: variant.modifiers, actors: [this.actor], ...variant.extra });
+                    rollAction({
+                        event,
+                        modifiers: variant.modifiers,
+                        actors: [this.actor],
+                        ...variant.extra,
+                        skill: variant.skill.label.toLocaleLowerCase(),
+                    });
                 } else {
                     // Ugly earnIncome fix.
                     const pack = game.packs.get("pf2e.pf2e-macros");
