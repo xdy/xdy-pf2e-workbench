@@ -1,3 +1,11 @@
+# [4.40.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.39.0...v4.40.0) (2023-01-30)
+
+
+### Features
+
+* Collapse more variants of chat messages. ([3db4a89](https://github.com/xdy/xdy-pf2e-workbench/commit/3db4a897077aa2996d3f8636cccf5ec4a5134f49))
+* The Skill Actions feature now also supports the new action macros in the next pf2e system version. ([1733f94](https://github.com/xdy/xdy-pf2e-workbench/commit/1733f944a1c8a0b62e97a18e7fd2e2f49f234f0d))
+
 # [4.39.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.38.0...v4.39.0) (2023-01-29)
 
 
