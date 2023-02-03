@@ -11,11 +11,15 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
         for (const actor of actors) {
             const items: any = actor.items;
             const minimumFrightened = <number>actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
-            const currentFrightened = actor?.getCondition("frightened")?.value ?? 0;
-            const amountToReduceBy = items.find((feat) => feat.slug === "dwarven-doughtiness") ? 2 : 1;
-            for (let i = 0; i < amountToReduceBy; i++) {
-                if (currentFrightened - 1 >= minimumFrightened) {
-                    await actor.decreaseCondition("frightened");
+            let frightened = actor?.getCondition("frightened");
+            const currentFrightened = frightened?.value ?? 0;
+            if (frightened && currentFrightened > 0 && !frightened.isLocked) {
+                const amountToReduceBy = items.find((feat) => feat.slug === "dwarven-doughtiness") ? 2 : 1;
+                for (let i = 0; i < amountToReduceBy; i++) {
+                    frightened = actor?.getCondition("frightened");
+                    if (currentFrightened - 1 >= minimumFrightened && frightened && !frightened.isLocked) {
+                        await actor.decreaseCondition("frightened");
+                    }
                 }
             }
         }
@@ -133,11 +137,17 @@ export async function removeDyingOnZeroHP(
     hp: number
 ): Promise<boolean> {
     if (shouldIHandleThis(actor) && hp <= 0 && <number>getProperty(update, "system.attributes.hp.value") > 0) {
-        const value = actor.getCondition("dying")?.value || 0;
-        const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
-        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
-            for (let i = 0; i < Math.max(1, value); i++) {
-                await actor.decreaseCondition("dying");
+        let dying = actor.getCondition("dying");
+        const value = dying?.value || 0;
+        if (dying && value > 0 && !dying.isLocked) {
+            const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
+            if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
+                for (let i = 0; i < Math.max(1, value); i++) {
+                    dying = actor.getCondition("dying");
+                    if (dying && !dying.isLocked) {
+                        await actor.decreaseCondition("dying");
+                    }
+                }
             }
         }
     }
@@ -149,11 +159,13 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     update: Record<string, string>,
     hp: number
 ): Promise<void> {
+    const unconscious = actor.getCondition("unconscious");
     if (
         shouldIHandleThis(actor) &&
         hp <= 0 &&
         <number>getProperty(update, "system.attributes.hp.value") > 0 &&
-        actor.hasCondition("unconscious")
+        unconscious &&
+        !unconscious.isLocked
     ) {
         await actor.decreaseCondition("unconscious", { forceRemove: true });
     }
@@ -272,7 +284,8 @@ export function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
                 item.actor.increaseCondition("encumbered").then();
             }
         } else {
-            if (item.actor.hasCondition("encumbered")) {
+            const encumbered = item.actor.getCondition("encumbered");
+            if (encumbered && !encumbered.isLocked) {
                 item.actor.decreaseCondition("encumbered", { forceRemove: true }).then();
             }
         }
@@ -290,7 +303,8 @@ export function applyClumsyIfWieldingLargerWeapon(item: ItemPF2e, _update: Docum
                     item.actor.increaseCondition("clumsy", { min: 1, max: 1 }).then();
                 }
             } else {
-                if ((item.actor.getCondition("clumsy")?.value ?? 0) === 1) {
+                const clumsy = item.actor.getCondition("clumsy");
+                if (clumsy && !clumsy.isLocked && (clumsy?.value ?? 0) === 1) {
                     item.actor.decreaseCondition("clumsy").then();
                 }
             }
