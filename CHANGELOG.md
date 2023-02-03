@@ -1,3 +1,10 @@
+## [4.40.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.40.3...v4.40.4) (2023-02-03)
+
+
+### Bug Fixes
+
+* Make changing Workbench settings do an automatic refresh. ([ebde42a](https://github.com/xdy/xdy-pf2e-workbench/commit/ebde42a606d1d3ee17f577b84b90c7587912e674))
+
 ## [4.40.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.40.2...v4.40.3) (2023-02-03)
 
 
