@@ -1,3 +1,10 @@
+## [4.40.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.40.2...v4.40.3) (2023-02-03)
+
+
+### Bug Fixes
+
+* Always check isLocked before decreasing condition. ([f3eb964](https://github.com/xdy/xdy-pf2e-workbench/commit/f3eb964d5009dd096768ebec9e9820e453b70a5f)), closes [#637](https://github.com/xdy/xdy-pf2e-workbench/issues/637)
+
 ## [4.40.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.40.1...v4.40.2) (2023-02-03)
 
 
