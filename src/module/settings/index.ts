@@ -9,9 +9,8 @@ import { WorkbenchVariantRulesSettings } from "./variantRules";
 export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification";
 
 export function debouncedReload() {
-    foundry.utils.debounce(() => {
-        window.location.reload();
-    }, 100);
+    // @ts-ignore
+    foundry.utils.debouncedReload();
 }
 
 export function registerWorkbenchSettings() {
@@ -41,6 +40,7 @@ export function registerWorkbenchSettings() {
             ),
         },
         onChange: () => debouncedReload(),
+        requireReload: true,
     });
 
     game.settings.register(MODULENAME, "autoCollapseItemActionChatCardContent", {
@@ -60,6 +60,7 @@ export function registerWorkbenchSettings() {
             ),
         },
         onChange: () => debouncedReload(),
+        requireReload: true,
     });
 
     game.settings.register(MODULENAME, "autoCollapseItemAttackChatCardContent", {
@@ -79,6 +80,7 @@ export function registerWorkbenchSettings() {
             ),
         },
         onChange: () => debouncedReload(),
+        requireReload: true,
     });
 
     game.settings.register(MODULENAME, "autoExpandDamageRolls", {
@@ -95,6 +97,7 @@ export function registerWorkbenchSettings() {
             expandedNewest: game.i18n.localize(`${MODULENAME}.SETTINGS.autoExpandDamageRolls.expandedNewest`),
         },
         onChange: () => debouncedReload(),
+        requireReload: true,
     });
 
     game.settings.register(MODULENAME, "skillActions", {
@@ -110,6 +113,7 @@ export function registerWorkbenchSettings() {
             top: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.top`),
         },
         onChange: () => debouncedReload(),
+        requireReload: true,
     });
 
     game.settings.register(MODULENAME, "skillActionsIconStyle", {
@@ -198,5 +202,6 @@ export function registerWorkbenchSettings() {
         default: "3.34.0",
         type: String,
         onChange: () => debouncedReload(),
+        requireReload: true,
     });
 }

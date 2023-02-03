@@ -54,6 +54,7 @@ declare global {
         onChange?: (
             choice: TChoices extends Record<string, unknown> ? keyof TChoices : undefined
         ) => void | Promise<void>;
+        requireReload?: boolean;
     }
 
     interface SettingSubmenuConfig {

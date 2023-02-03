@@ -24,6 +24,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             npcMystifierDemystifyAllTokensBasedOnTheSameActor: {
                 name: `${MODULENAME}.SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.name`,

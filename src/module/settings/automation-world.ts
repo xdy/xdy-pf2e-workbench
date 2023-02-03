@@ -19,6 +19,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     reaching0HP: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HP`),
                 },
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             autoRollDamageAllow: {
                 name: `${MODULENAME}.SETTINGS.autoRollDamageAllow.name`,
@@ -34,6 +35,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     players: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.players`),
                 },
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             applyPersistentAllow: {
                 name: `${MODULENAME}.SETTINGS.applyPersistentAllow.name`,
@@ -49,6 +51,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     players: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentAllow.players`),
                 },
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             applyClumsyIfWieldingLargerWeapon: {
                 name: `${MODULENAME}.SETTINGS.applyClumsyIfWieldingLargerWeapon.name`,
@@ -58,6 +61,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             applyEncumbranceBasedOnBulk: {
                 name: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.name`,
@@ -67,6 +71,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             autoReduceStunned: {
                 name: `${MODULENAME}.SETTINGS.autoReduceStunned.name`,
@@ -76,6 +81,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             giveUnconsciousIfDyingRemovedAt0HP: {
                 name: `${MODULENAME}.SETTINGS.giveUnconsciousIfDyingRemovedAt0HP.name`,
@@ -85,6 +91,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             autoRemoveUnconsciousAtGreaterThanZeroHP: {
                 name: `${MODULENAME}.SETTINGS.autoRemoveUnconsciousAtGreaterThanZeroHP.name`,
@@ -94,6 +101,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             giveWoundedWhenDyingRemoved: {
                 name: `${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.name`,
@@ -103,6 +111,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             autoGainDyingAtZeroHP: {
                 name: `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.name`,
@@ -123,6 +132,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     ),
                 },
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
             autoRemoveDyingAtGreaterThanZeroHP: {
                 name: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.name`,
@@ -139,6 +149,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     ),
                 },
                 onChange: () => debouncedReload(),
+                requireReload: true,
             },
         };
     }
