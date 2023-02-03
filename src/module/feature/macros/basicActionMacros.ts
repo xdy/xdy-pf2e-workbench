@@ -59,7 +59,6 @@ function createButton(action, idx, actor, party, actorSkills) {
      * Color palette to use, representing the rank of skills
      */
     const colorPalette = ["#424242", "#171f67", "#3c005e", "#664400", "#5e0000"];
-    const tooltip = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.YouAreTheBestInYourParty`);
     /**
      * Default Icon to be given in case there is no icon parameter in an Action
      */
@@ -73,13 +72,16 @@ function createButton(action, idx, actor, party, actorSkills) {
             ? bonus >= (action.best ?? 0)
             : false
         : false;
+    const name = `${action.name} ${skill ? "(" + signedNumber(bonus) + ")" : ""}`;
+    const tooltip =
+        name +
+        " " +
+        (best ? game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.YouAreTheBestInYourParty`) : "");
     return `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
         colorPalette[rank]
     }"
-    ${best ? `data-tooltip="${tooltip}"` : ""}>
-    <img src="${action.icon ?? defaultIcon}" height="24" alt="${action.name}"/>${action.name} ${
-        skill ? "(" + signedNumber(bonus) + ")" : ""
-    }</button>`;
+    ${`data-tooltip="${tooltip}"`}>
+    <img src="${action.icon ?? defaultIcon}" height="24" alt="${name}"/>${name}</button>`;
 }
 
 export function basicActionMacros() {
@@ -450,6 +452,8 @@ export function basicActionMacros() {
     color: #fff;
     display: flex;
     align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
   }
   .action-btn img {
     margin-right: 5px;
