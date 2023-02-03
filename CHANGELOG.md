@@ -1,3 +1,10 @@
+## [4.40.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.40.4...v4.40.5) (2023-02-03)
+
+
+### Bug Fixes
+
+* Make Basic Action Macros handle an increased font size a little better. It now always shows a tooltip with the full button text, and cuts the overflow rather than wrap if the text does not fit inside the button. ([95d44a8](https://github.com/xdy/xdy-pf2e-workbench/commit/95d44a847fed5bd87d5dd2c61b1be03598b583d3))
+
 ## [4.40.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.40.3...v4.40.4) (2023-02-03)
 
 
