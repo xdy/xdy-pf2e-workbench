@@ -1,0 +1,32 @@
+import { DamageCategoryUnique, DamageType } from "@system/damage";
+declare const damageCategoriesUnique: Record<DamageCategoryUnique, string>;
+declare const materialDamageEffects: Pick<Record<"abysium" | "adamantine" | "cold-iron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "peachwood" | "siccatite" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass", string>, "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass">;
+declare const damageCategories: {
+    alignment: string;
+    energy: string;
+    physical: string;
+    abysium: string;
+    adamantine: string;
+    "cold-iron": string;
+    djezet: string;
+    mithral: string;
+    noqual: string;
+    peachwood: string;
+    silver: string;
+    "sisterstone-dusk": string;
+    "sisterstone-scarlet": string;
+    "sovereign-steel": string;
+    warpglass: string;
+    persistent: string;
+    precision: string;
+    splash: string;
+};
+declare const physicalDamageTypes: {
+    bleed: string;
+    bludgeoning: string;
+    piercing: string;
+    slashing: string;
+};
+declare const damageTypes: Record<DamageType, string>;
+declare const damageRollFlavors: Record<"force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped", string>;
+export { damageCategories, damageCategoriesUnique, damageRollFlavors, damageTypes, materialDamageEffects, physicalDamageTypes, };
