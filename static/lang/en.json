@@ -70,6 +70,8 @@
         "gmMustImport": "The GM must right click on the compendium xdy-pf2e-workbench-macros and select 'Import All Content' and make sure to check 'Keep Document IDs' when importing.",
         "cancel": "Cancel",
         "YouAreTheBestInYourParty": "You are the best in your party",
+        "second": "(-5)",
+        "third": "(-10)",
         "settings": {
           "showBestBonus": {
             "name": "Show if best in Basic Action Macros",

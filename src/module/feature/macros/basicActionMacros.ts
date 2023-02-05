@@ -6,6 +6,9 @@
 
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
+import { Variant } from "../skill-actions/variants";
+import { CharacterSkill } from "@actor/character/types";
+import { ModifierPF2e } from "../skill-actions/pf2e";
 
 let selectedActor;
 
@@ -33,7 +36,7 @@ function getBestBonuses(actorSkills, party, actionList) {
 function createMapOfSkillsPerActor(actors) {
     const map = new Map();
     for (const actor of actors) {
-        const skills = getSkills(actor);
+        const skills = fetchSkills(actor);
         if (skills) {
             map.set(actor.id, skills);
         }
@@ -41,7 +44,7 @@ function createMapOfSkillsPerActor(actors) {
     return map;
 }
 
-function getSkills(actor) {
+function fetchSkills(actor) {
     const a = { perception: actor.attributes.perception, ...actor.skills };
     Array.from(a).map((skill: any) => {
         a.check.mod = skill.check?.mod;
@@ -77,12 +80,35 @@ function createButton(action, idx, actor, party, actorSkills) {
         name +
         " " +
         (best ? game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.YouAreTheBestInYourParty`) : "");
-    return `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
-        colorPalette[rank]
-    }"
+    let button: string;
+    if (action.showMAP) {
+        const second = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.second`);
+        const third = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.third`);
+        button =
+            `<div class="map-wrapper">
+              <button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="0" style="background:${
+                colorPalette[rank]
+            }" ${`data-tooltip="${tooltip}"`}> <img src="${
+                action.icon ?? defaultIcon
+            }" height="24" width="24"   alt="${name}"/>${name}</button>` +
+            `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-5" style="background:${
+                colorPalette[rank]
+            }" ${`data-tooltip="${tooltip} + ${second}"`}>${second}</button>` +
+            `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-10" style="background:${
+                colorPalette[rank]
+            }" ${`data-tooltip="${tooltip} + ${third}"`}>${third}</button>
+              </div>`;
+    } else {
+        button = `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
+            colorPalette[rank]
+        }"
     ${`data-tooltip="${tooltip}"`}>
     <img src="${action.icon ?? defaultIcon}" height="24" alt="${name}"/>${name}</button>`;
+    }
+    return button;
 }
+
+type MacroAction = { skill: string; name: string; icon: string; action: string | Function; showMAP?: boolean };
 
 export function basicActionMacros() {
     /**
@@ -91,7 +117,7 @@ export function basicActionMacros() {
      * If there is no user character, it shows up a warning notification.
      */
 
-    const actionList = [
+    const actionList: MacroAction[] = [
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidToggle`),
             skill: "",
@@ -181,6 +207,7 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.disarm,
             icon: "icons/skills/melee/sword-damaged-broken-glow-red.webp",
+            showMAP: true,
         },
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DisableDevice`),
@@ -205,6 +232,7 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.forceOpen,
             icon: "icons/equipment/feet/boots-armored-steel.webp",
+            showMAP: true,
         },
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.GatherInformation`),
@@ -217,6 +245,7 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.grapple,
             icon: "icons/skills/melee/unarmed-punch-fist.webp",
+            showMAP: true,
         },
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Hide`),
@@ -319,6 +348,7 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.shove,
             icon: "systems/pf2e/icons/spells/hydraulic-push.webp",
+            showMAP: true,
         },
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Sneak`),
@@ -385,6 +415,7 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.trip,
             icon: "icons/skills/wounds/bone-broken-marrow-yellow.webp",
+            showMAP: true,
         },
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TumbleThrough`),
@@ -427,7 +458,14 @@ export function basicActionMacros() {
 
     const columns = 1 + ~~((actionList.length - 1) / 14);
     const width = 264 * columns;
-    const height = 30 + ~~((32 * actionList.length + 1) / columns);
+    const height =
+        30 +
+        ~~(
+            (32 * actionList.filter((x) => !x.showMAP).length +
+                1 +
+                (64 * actionList.filter((x) => x.showMAP).length + 1)) /
+            columns
+        );
     const content = `
 <style>
   .pf2e-bg .window-content {
@@ -437,7 +475,6 @@ export function basicActionMacros() {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     margin-bottom: 8px;
     max-height: ${height}px;
@@ -466,6 +503,18 @@ export function basicActionMacros() {
     --color-glow2: 50;
     animation: glow2 alternate infinite 2s;
     z-index: 1;
+}
+  .map-wrapper {
+    display: flex;
+    gap: 5px;
+    margin: 1px auto;
+    width: 250px;
+}
+  .map-wrapper button {
+    width: unset;
+}
+  .map-wrapper button:first-child {
+    flex: 1 1 160px;
 }
 @keyframes glow2 {
   0% {
@@ -517,12 +566,26 @@ ${actionList
                             eval(current);
                         }
                     } else {
-                        // @ts-ignore
-                        action.action({
-                            event: event,
-                            actors: [selectedActor],
-                            skill: action.skill.toLocaleLowerCase(),
-                        });
+                        const skills = getSkills(action.skill);
+                        const variant =
+                            button.dataset.map && button.dataset.map !== "0"
+                                ? getMapVariant(skills[0], {}, Number.parseInt(button.dataset.map))
+                                : null;
+                        if (variant) {
+                            (<Function>action.action)({
+                                event,
+                                actors: [selectedActor],
+                                modifiers: variant?.modifiers,
+                                ...variant?.extra,
+                            });
+                        } else {
+                            // @ts-ignore
+                            action.action({
+                                event: event,
+                                actors: [selectedActor],
+                                skill: action.skill.toLocaleLowerCase(),
+                            });
+                        }
                     }
                 };
                 if ("querySelectorAll" in html) {
@@ -535,6 +598,27 @@ ${actionList
         // @ts-ignore
         { jQuery: false, width, classes: ["pf2e-bg"] }
     ).render(true);
+}
+
+function getSkills(proficiencyKey: string): CharacterSkill[] {
+    // @ts-ignore
+    const skills = selectedActor.skills;
+    if (proficiencyKey === "lore") {
+        // @ts-ignore
+        return Object.values(skills).filter((skill) => skill.lore);
+    } else {
+        return [skills[proficiencyKey]].filter((s): s is CharacterSkill => !!s);
+    }
+}
+
+function getMapVariant(skill: CharacterSkill, extra: Record<string, unknown> | undefined, map: number): Variant {
+    const modifier = new ModifierPF2e({
+        label: game.i18n.localize("PF2E.MultipleAttackPenalty"),
+        modifier: map,
+        type: "untyped",
+    });
+    const label = game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: map });
+    return new Variant(label, skill, extra, [modifier]);
 }
 
 // basicActionsMacros();
