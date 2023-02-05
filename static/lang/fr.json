@@ -495,6 +495,10 @@
       "playerSpellsRarityColour": {
         "hint": "Paramètre du client pour afficher la couleur de la rareté des sorts sur les feuilles des acteurs.",
         "name": "Montrer les noms des sorts dans la couleur de la rareté sur les feuilles d'acteurs."
+      },
+      "playerFeatsPrerequisiteHint": {
+        "name": "Ajoute un astérisque au nom pour les dons avec un prérequis.",
+        "hint": "Réglage du client pour ajouter un astérisque au nom pour les dons avec un prérequis."
       }
     },
     "effects": {
@@ -564,8 +568,18 @@
           "CommandAnAnimal": "Diriger un animal",
           "CreateADiversionTrick": "Créer une diversion - astuce",
           "SenseDirection": "S'orienter",
-          "TumbleThrough": "Déplacement acrobatique"
-        }
+          "TumbleThrough": "Déplacement acrobatique",
+          "DecipherWritingArcana": "Déchiffrer un texte - Arcanes",
+          "DecipherWritingReligion": "Déchiffrer un texte - Religion",
+          "DecipherWritingSociety": "Déchiffrer un texte - Société",
+          "DisableDevice": "Désamorcer un dispositif",
+          "Perform": "Se produire",
+          "SubsistSociety": "Subsister - Société",
+          "SubsistSurvival": "Subsister - Survie",
+          "DecipherWritingOccultism": "Déchiffrer un texte - Occultisme"
+        },
+        "second": "(-5)",
+        "third": "(-10)"
       },
       "buildNpcSpellbookJournal": {
         "title": "Construire le grimoire de sorts du PNJ",
