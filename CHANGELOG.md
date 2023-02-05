@@ -1,3 +1,10 @@
+# [4.41.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.40.6...v4.41.0) (2023-02-05)
+
+
+### Features
+
+* Show MAP for relevant actions on Basic Action Macros. Thank you @Dorako for showing me the way out of css hell so I could focus on making it work... ([b1c0adf](https://github.com/xdy/xdy-pf2e-workbench/commit/b1c0adfcff48cb6251cbc4f86736f675ae6f380d))
+
 ## [4.40.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.40.5...v4.40.6) (2023-02-05)
 
 
