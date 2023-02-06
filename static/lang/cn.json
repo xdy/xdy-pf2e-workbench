@@ -24,7 +24,7 @@
           "name": "技能动作位置",
           "bottom": "底部",
           "disabled": "禁用",
-          "hint": "注意！目前对大部分人来说开启技能动作会造成角色卡载入异常*缓慢*的现象。在技能页面中的位置；顶部：“攻击”的右边，底部：最下面",
+          "hint": "在技能页面中的位置；顶部：“攻击”的下方，底部：最下面",
           "top": "顶部"
         },
         "hideDuplicates": {
@@ -123,7 +123,7 @@
       "autoCollapseItemChatCardContent": {
         "nonCollapsedDefault": "默认展开，点击标题折叠。",
         "collapsedDefault": "默认折叠，点击标题展开。",
-        "hint": "自动折叠道具卡片内容的客户端设置。",
+        "hint": "自动折叠道具卡片内容的客户端设置（除了动作和攻击，选项见下）。",
         "name": "自动折叠道具聊天卡片的内容。",
         "noCollapse": "从不折叠"
       },
@@ -474,6 +474,32 @@
         "hint": "启用并配置多个可选规则",
         "label": "管理可选规则设置",
         "name": "可选规则设置"
+      },
+      "autoCollapseItemActionChatCardContent": {
+        "nonCollapsedDefault": "默认展开，点击标题折叠。",
+        "noCollapse": "永不折叠",
+        "name": "自动折叠动作卡片内容。",
+        "collapsedDefault": "默认折叠，点击标题展开。",
+        "hint": "自动折叠动作卡片内容的客户端设置。"
+      },
+      "autoCollapseItemAttackChatCardContent": {
+        "collapsedDefault": "默认折叠，点击标题展开。",
+        "name": "自动折叠攻击卡片内容。",
+        "nonCollapsedDefault": "默认展开，点击标题折叠。",
+        "hint": "自动折叠攻击卡片内容的客户端设置。",
+        "noCollapse": "永不折叠"
+      },
+      "playerFeatsPrerequisiteHint": {
+        "hint": "是否要在拥有先决条件的专长名前标注星号。",
+        "name": "在拥有先决条件的专长名前标注星号。"
+      },
+      "playerFeatsRarityColour": {
+        "name": "在人物卡中用稀有度颜色显示专长名。",
+        "hint": "是否要在人物卡中用稀有度颜色显示专长名。"
+      },
+      "playerSpellsRarityColour": {
+        "hint": "是否要在人物卡中用稀有度颜色显示法术名。",
+        "name": "在人物卡中用稀有度颜色显示法术名。"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
@@ -537,8 +563,18 @@
           "Trip": "摔绊",
           "ForceOpen": "破拆",
           "Request": "提出请求",
-          "TumbleThrough": "翻滚"
-        }
+          "TumbleThrough": "翻滚",
+          "DecipherWritingReligion": "解译文书 - 宗教",
+          "DecipherWritingSociety": "解译文书 - 社群",
+          "Perform": "演出",
+          "SubsistSociety": "求生 - 社群",
+          "DecipherWritingArcana": "解译文书 - 奥法",
+          "DecipherWritingOccultism": "解译文书 - 神秘",
+          "SubsistSurvival": "求生 - 生存",
+          "DisableDevice": "解除装置"
+        },
+        "second": "(-5)",
+        "third": "(-10)"
       },
       "buildNpcSpellbookJournal": {
         "title": "建立NPC法术书日志",
@@ -554,6 +590,11 @@
         "regainOne": "回复1聚能点。",
         "disabled": "不可用，因为没有能力能回复1点以上的聚能点。",
         "enabled": "回复{regain}聚能点。<br/>仅<b>当</b>你上次再聚能后{details}的情况下才能点击。"
+      },
+      "whirlwindStrike": {
+        "starts": "{name} 开始旋风打击！",
+        "ends": "攻击{targets}后{name}的旋风打击结束！",
+        "error": "选择一个具备旋风打击能力的token，和触及范围内至少一个目标！"
       }
     }
   }
