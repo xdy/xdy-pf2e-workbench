@@ -1,1 +1,112 @@
-{}
+{
+  "xdy-pf2e-workbench": {
+    "npcRoller": {
+      "nav-labels": {
+        "save": "Rzuty Obronne",
+        "spell": "Czar",
+        "dc": "ST",
+        "abilityScore": "Wartość Atrybutów",
+        "skill": "Umiejętności",
+        "ac": "Klasa Pancerza",
+        "damage": "Obrażenia"
+      }
+    },
+    "skillActions": {
+      "Title": "Akcje Umiejętności",
+      "Settings": {
+        "Position": {
+          "bottom": "Dół",
+          "disabled": "Wyłączone",
+          "top": "Góra"
+        },
+        "hideDuplicates": {
+          "hint": "Ukryć powielone akcje na liście akcje czy liście Akcji Umiejętności",
+          "doNotHide": "Nie chować",
+          "hideActions": "Ukryj akcje",
+          "hideSkillActions": "Ukryj Akcje Umiejętności",
+          "name": "Akcje Umiejętności ukryj powielone akcje"
+        },
+        "IconStyle": {
+          "actionCostIcon": "Ikona Kosztu Akcji",
+          "skillIcon": "Ikona Umiejętności"
+        },
+        "Description": {
+          "name": "Opis Akcji Umiejętności"
+        },
+        "variants": {
+          "createADiversion": {
+            "gesture": "Gest",
+            "trick": "Sztuczka"
+          }
+        }
+      }
+    },
+    "macros": {
+      "basicActionMacros": {
+        "title": "Akcja ([name})",
+        "second": "(-5)",
+        "third": "(-10)",
+        "actions": {
+          "AidToggle": "Pomoc (przełącz)",
+          "AvoidNotice": "Unikanie Wykrycia",
+          "Balance": "Równowaga",
+          "Climb": "Wspinaczka",
+          "Coerce": "Przymuszenie",
+          "CommandAnAnimal": "Rozkaz Zwierzęciu",
+          "Craft": "Rzemiosło",
+          "CreateADiversionGesture": "Dywersja - Gest",
+          "CreateADiversionTrick": "Dywersja - Sztuczka",
+          "DecipherWritingOccultism": "Rozszyfrowanie pisma - Okultyzm",
+          "DecipherWritingReligion": "Rozszyfrowanie pisma - Religia",
+          "DecipherWritingSociety": "Rozszyfrowanie pisma - Społeczeństwo",
+          "Demoralize": "Złamanie Morale",
+          "DisableDevice": "Unieszkodliwienie Urządzenia",
+          "Disarm": "Rozbrojenie",
+          "Feint": "Finta",
+          "ForceOpen": "Wyważenie",
+          "GatherInformation": "Zbieranie Informacji",
+          "Grapple": "Chwyt",
+          "Hide": "Ukrycie",
+          "Impersonate": "Naśladowanie",
+          "JumpHigh": "Skok - Wzwyż",
+          "JumpLong": "Skok - W dal",
+          "Lie": "Kłamstwo",
+          "MakeAnImpression": "Wrażenie",
+          "ManeuverInFlight": "Manewr w Locie",
+          "Perform": "Występy",
+          "PickALock": "Otwieranie Zamka",
+          "RaiseAShieldToggle": "Podnieś Tarczę (aktywacja)",
+          "RecallKnowledge": "Wiedza",
+          "Repair": "Naprawa",
+          "Request": "Prośba",
+          "Seek": "Szukanie",
+          "SenseDirection": "Wyczucie Kierunku",
+          "SenseMotive": "Określenie Motywu",
+          "Shove": "Pchnięcie",
+          "Sneak": "Skradanie",
+          "Squeeze": "Przeciskanie",
+          "SubsistSociety": "Utrzymanie się - Społeczeństwo",
+          "SubsistSurvival": "Utrzymanie się - Sztuka Przetrwania",
+          "Swim": "Pływanie",
+          "Track": "Tropienie",
+          "TreatDisease": "Leczenie Choroby",
+          "TreatPoison": "Leczenie Trucizny",
+          "TreatWounds": "Leczenie Ran",
+          "Trip": "Podcięcie",
+          "DecipherWritingArcana": "Rozszyfrowanie pisma - Wiedza Tajemna",
+          "FollowTheExpertToggle": "Podążanie za ekspertem (aktywacja)",
+          "TakeCoverToggle": "Zasłona (aktywacja)",
+          "TumbleThrough": "Tratowanie"
+        },
+        "noActorSelected": "Nie wybrano żadnego aktora",
+        "cancel": "Anuluj",
+        "YouAreTheBestInYourParty": "Jesteś najlepszy/sza w drużynie",
+        "settings": {
+          "showBestBonus": {
+            "name": "Pokaż czy najlepszy/sza w Macro Akcji Podstawowych"
+          }
+        }
+      }
+    }
+  }
+}
