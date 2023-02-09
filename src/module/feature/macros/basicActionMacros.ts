@@ -108,7 +108,14 @@ function createButton(action, idx, actor, party, actorSkills) {
     return button;
 }
 
-type MacroAction = { skill: string; name: string; icon: string; action: string | Function; showMAP?: boolean };
+type MacroAction = {
+    skill: string;
+    name: string;
+    icon: string;
+    action: string | Function;
+    showMAP?: boolean;
+    extra?: string;
+};
 
 export function basicActionMacros() {
     /**
@@ -294,6 +301,7 @@ export function basicActionMacros() {
             skill: "Performance",
             action: game.pf2e.actions.perform,
             icon: "icons/skills/trades/music-singing-voice-blue.webp",
+            extra: "singing",
         },
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.PickALock`),
@@ -584,6 +592,7 @@ ${actionList
                                 event: event,
                                 actors: [selectedActor],
                                 skill: action.skill.toLocaleLowerCase(),
+                                variant: action.extra,
                             });
                         }
                     }
