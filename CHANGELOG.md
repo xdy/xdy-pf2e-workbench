@@ -1,3 +1,10 @@
+## [4.41.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.41.2...v4.41.3) (2023-02-09)
+
+
+### Bug Fixes
+
+* In Basic Action Macros, set Perform to always use singing. ([11555f2](https://github.com/xdy/xdy-pf2e-workbench/commit/11555f210875eac2226fbe699ae92291256e2941))
+
 ## [4.41.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.41.1...v4.41.2) (2023-02-07)
 
 
