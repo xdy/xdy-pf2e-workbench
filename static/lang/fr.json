@@ -576,7 +576,8 @@
           "Perform": "Se produire",
           "SubsistSociety": "Subsister - Société",
           "SubsistSurvival": "Subsister - Survie",
-          "DecipherWritingOccultism": "Déchiffrer un texte - Occultisme"
+          "DecipherWritingOccultism": "Déchiffrer un texte - Occultisme",
+          "ConcealAnObject": "Dissimuler un objet"
         },
         "second": "(-5)",
         "third": "(-10)"
