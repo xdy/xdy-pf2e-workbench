@@ -1,3 +1,10 @@
+# [4.42.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.41.5...v4.42.0) (2023-02-12)
+
+
+### Features
+
+* Add support for Conceal an Object, Palm an Object and Steal to Basic Action Macros. ([3a605a5](https://github.com/xdy/xdy-pf2e-workbench/commit/3a605a55e5b0c2d14eba5e36c6f8fa08b0bac7a6))
+
 ## [4.41.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.41.4...v4.41.5) (2023-02-12)
 
 
