@@ -162,6 +162,12 @@ export function basicActionMacros() {
             icon: "icons/environment/creatures/horse-white.webp",
         },
         {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.ConcealAnObject`),
+            skill: "Stealth",
+            action: game.pf2e.actions.concealAnObject,
+            icon: "systems/pf2e/icons/equipment/adventuring-gear/wax-key-blank.webp",
+        },
+        {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Craft`),
             skill: "Crafting",
             action: game.pf2e.actions.craft,
@@ -297,6 +303,12 @@ export function basicActionMacros() {
             icon: "icons/commodities/biological/wing-bird-white.webp",
         },
         {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.PalmAnObject`),
+            skill: "Thievery",
+            action: game.pf2e.actions.palmAnObject,
+            icon: "systems/pf2e/icons/spells/efficient-apport.webp",
+        },
+        {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Perform`),
             skill: "Performance",
             action: game.pf2e.actions.perform,
@@ -369,6 +381,12 @@ export function basicActionMacros() {
             skill: "Acrobatics",
             action: game.pf2e.actions.squeeze,
             icon: "icons/commodities/tech/claw-mechanical.webp",
+        },
+        {
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Steal`),
+            skill: "Thievery",
+            action: game.pf2e.actions.steal,
+            icon: "icons/containers/bags/coinpouch-gold-red.webp",
         },
         {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.SubsistSociety`),
