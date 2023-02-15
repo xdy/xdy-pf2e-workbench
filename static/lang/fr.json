@@ -577,7 +577,9 @@
           "SubsistSociety": "Subsister - Société",
           "SubsistSurvival": "Subsister - Survie",
           "DecipherWritingOccultism": "Déchiffrer un texte - Occultisme",
-          "ConcealAnObject": "Dissimuler un objet"
+          "ConcealAnObject": "Dissimuler un objet",
+          "PalmAnObject": "Escamoter un objet",
+          "Steal": "Voler"
         },
         "second": "(-5)",
         "third": "(-10)"
