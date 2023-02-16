@@ -43,7 +43,7 @@
     },
     "macros": {
       "basicActionMacros": {
-        "title": "Akcja ([name})",
+        "title": "Akcja ({name})",
         "second": "(-5)",
         "third": "(-10)",
         "actions": {
