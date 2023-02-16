@@ -7,7 +7,7 @@
         "ac": "Clase de Armadura",
         "damage": "Daño",
         "strike": "Golpes",
-        "save": "Salvada",
+        "save": "Salvación",
         "perception": "Percepción",
         "skill": "Habilidades",
         "hp": "Puntos de Golpe",
@@ -18,7 +18,7 @@
     "skillActions": {
       "Settings": {
         "hideDuplicates": {
-          "hideSkillActions": "Ocultar acciones de competencia",
+          "hideSkillActions": "Ocultar Acciones de Habilidad",
           "name": "Acciones de Habilidad ocultar acciones duplicadas",
           "doNotHide": "No ocultar",
           "hideActions": "Ocultar acciones"
@@ -37,9 +37,9 @@
         },
         "IconStyle": {
           "name": "Estilo de Icono de Acciones de Habilidad",
-          "actionCostIcon": "Icono de Costo de Acción",
+          "actionCostIcon": "Icono de Coste de Acción",
           "skillIcon": "Icono de Habilidad",
-          "hint": "Estilo de icono en la habilidad; Icono de Costo de Acción: Para el costo de acción, Icono de Habilidad: Para el icono de la habilidad si esta disponible"
+          "hint": "Estilo de icono en la habilidad; Icono de Coste de Acción: Para el coste de acción, Icono de Habilidad: Para el icono de habilidad si esta disponible"
         }
       },
       "Title": "Acciones de Habilidad"
