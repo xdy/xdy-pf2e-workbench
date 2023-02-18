@@ -582,7 +582,9 @@
           "Steal": "Voler"
         },
         "second": "(-5)",
-        "third": "(-10)"
+        "third": "(-10)",
+        "macroNotFound": "Macro {macroName} non trouvée",
+        "compendiumNotFound": "Compendium {compendiumName} non trouvé"
       },
       "buildNpcSpellbookJournal": {
         "title": "Construire le grimoire de sorts du PNJ",
