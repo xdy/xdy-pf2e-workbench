@@ -1,3 +1,10 @@
+# [4.43.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.42.2...v4.43.0) (2023-02-18)
+
+
+### Features
+
+* It's no longer necessary to import the entire xdy-pf2e-workbench-macros with 'Keep Document IDs' checked to use Basic Action Macros or the other macros there, instead just import the macros as you needs them. (Some internal utility macros have been moved to xdy-internal-utility-macros.) ([bbc1e6d](https://github.com/xdy/xdy-pf2e-workbench/commit/bbc1e6d897efb2a789a9a17d6dfc2c8e863f4619))
+
 ## [4.42.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.42.1...v4.42.2) (2023-02-16)
 
 
