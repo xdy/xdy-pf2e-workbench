@@ -144,14 +144,13 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 * Assorted other features
     * The latest versions of all V10-compatible macros
       from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e are included in each Workbench release.
-      They can be found in the asymonous-benefactor-macros compendium, with the express permission of said
+      They can be found in the compendium "Symon-provided macros (asymonous-benefactor-macros)", with the express
+      permission of said
       asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor. Attribution for the macros can normally be found
-      inside each macro, and the source url for each macro is added at the end of each macro. Do not import the macros
-      named like 'XDY DO_NOT_IMPORT', instead import the ones with proper names. Effects for the Lingering Heroics macro
-      included with the above are now included in the asymonous-benefactor-effects compendium, import these to
-      automatically get the proper duration effect sent to chat. If you have issues with these macros, report them
+      inside each macro, and the source url for each macro is added at the end of each macro. If you have issues with
+      these macros, report them
       here: https://gitlab.com/symonsch/my-foundryvtt-macros/-/issues
-    * The xdy-pf2e-workbench-items compendium contains a few useful effects and items:
+    * The compendium "PF2e Workbench Items (xdy-pf2e-workbench-items)" contains a few useful effects and items:
         * Aura effects for Bless, Inspire Courage, Inspire Defense, Protective Ward that automatically apply the effect
           to tokens within the aura. (Technically these should not be auras, but, close enough... Inspire Courage and
           Inspire Defense's effect can pass through walls that allow sound to pass)
@@ -171,11 +170,11 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
           Adjust the economy as much as you feel is needed. You don't need to remove runes from weapons and armor if you
           don't want to, these REs are implemented as Item Bonuses, so whichever of the rune and the character has the
           highest bonus is applied, *except* for Devastating Attacks which *does* stack with Striking Runes.
-    * The xdy-pf2e-workbench-macros compendium now contains a couple of useful macros (along with some helper macros).
+    * The compendium "PF2e Workbench Macros (xdy-pf2e-workbench-macros)" contains a few macros you might find useful.
         * 'Basic Action Macros' shows a dialog with a button for most macros, with bonus and whether you're the best in
-          the party at that action (a setting to turn this off exists). To use it, import all macros from the
-          compendium 'xdy-pf2e-workbench-macros', making sure to check 'Keep Document IDs' when importing. (
-          Thanks ApoAstolov). The five colors are denoting ranks, in order, grey=untrained, blue=trained, purple=expert, gold=master, red=legendary), with 'glow' meaning that you are the best in the party.
+          the party at that action (a setting to turn this off exists). (
+          Thanks ApoAstolov). The five colors are denoting ranks, in order, grey=untrained, blue=trained, purple=expert,
+          gold=master, red=legendary), with 'glow' meaning that you are the best in the party.
         * 'Refocus' shows dialog with buttons to regain 1 focus point, or 2 if the character has any of the \*-focus
           feats, or 3 if any of the \*-wellspring feats, or 2 if is a psychic. With admonition to only choose that
           button if one has indeed spent more than 2 or 3 focus points since the last refocus (or, for a psychic,
@@ -185,6 +184,21 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the Whirlwind Strike Feat,
           has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that the first weapon of
           any type.
+    * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
+      provided by ApoApostolov. They are *intended* to be customized by the user by changing the javascript code (such
+      as by adding/removing actions, setting what actors are part of the party, etc.) They are not really supported, so,
+      if your changes break them, you get to keep all the parts! :)
+        * Customizable Basic Action Macros. A variant of Basic Action Macros that you can customize for your own needs.
+          Add/remove actions, change party members, go wild!
+          See https://apoapostolov.notion.site/PF2-Basic-Actions-Macro-1255adc12ecf44e881e6cd87941f7858 for
+          documentation.
+        * Customizable Procedural Checks. A framework for running several macros at once, requires customization to be
+          useful. (At a minimum, change the actor id:s, this gets you a macro that can be used in exploration mode to
+          perform standard actions when the group is about to open a door.)
+          See https://apoapostolov.notion.site/PF2-Procedural-Checks-Macro-996bd20ace45411eb4b1f566686ecdb1 for
+          documentation.
+    * There are a few more compendiums included with this module with assorted utility macros and items that do not
+      need to be imported, as indicated by their labels all ending with 'do not import'
 
 * Experimental features:
     * None right now.

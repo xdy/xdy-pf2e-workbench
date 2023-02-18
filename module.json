@@ -15,8 +15,8 @@
         "type": "system",
         "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
         "compatibility": {
-          "minimum": "4.6.0",
-          "verified": "4.6.8"
+          "minimum": "4.7.4",
+          "verified": "4.7.4"
         }
       }
     ]
@@ -40,7 +40,7 @@
     },
     {
       "name": "asymonous-benefactor-macros-internal",
-      "label": "XDY Internal utility macros, do not import",
+      "label": "asymonous-benefactor-macros-internal, do not import",
       "system": "pf2e",
       "path": "packs/asymonous-benefactor-macros-internal.db",
       "private": true,
@@ -49,7 +49,7 @@
     },
     {
       "name": "asymonous-benefactor-effects",
-      "label": "asymonous-benefactor-effects",
+      "label": "asymonous-benefactor-effects, do not import",
       "system": "pf2e",
       "path": "packs/asymonous-benefactor-effects.db",
       "type": "Item",
@@ -58,7 +58,7 @@
     },
     {
       "name": "xdy-customizable-macros",
-      "label": "xdy-customizable-macros",
+      "label": "PF2e Workbench Customizable Macros (xdy-customizable-macros)",
       "system": "pf2e",
       "path": "packs/xdy-customizable-macros.db",
       "type": "Macro",
@@ -67,7 +67,7 @@
     },
     {
       "name": "xdy-pf2e-workbench-items",
-      "label": "xdy-pf2e-workbench-items",
+      "label": "PF2e Workbench Items (xdy-pf2e-workbench-items)",
       "system": "pf2e",
       "path": "packs/xdy-pf2e-workbench-items.db",
       "type": "Item",
@@ -76,9 +76,18 @@
     },
     {
       "name": "xdy-pf2e-workbench-macros",
-      "label": "xdy-pf2e-workbench-macros",
+      "label": "PF2e Workbench Macros (xdy-pf2e-workbench-macros)",
       "system": "pf2e",
       "path": "packs/xdy-pf2e-workbench-macros.db",
+      "type": "Macro",
+      "private": false,
+      "flags": {}
+    },
+    {
+      "name": "xdy-internal-utility-macros",
+      "label": "xdy-internal-utility-macros, do not import",
+      "system": "pf2e",
+      "path": "packs/xdy-internal-utility-macros.db",
       "type": "Macro",
       "private": false,
       "flags": {}

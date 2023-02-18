@@ -205,5 +205,38 @@ function buildCustomizableMacrosPack() {
     fs.writeFileSync(file1, lines.join("\n"), "utf8");
 }
 
+function buildInternalUtilityMacrosPack() {
+    const folderPath = "./packs/xdy-internal-utility-macros";
+    const lines: string[] = [];
+    const files = fs.readdirSync(folderPath);
+    for (const file of files) {
+        const filePath = path.join(folderPath, file);
+        if (!filePath.endsWith(".macro")) {
+            continue;
+        }
+
+        try {
+            const macroName = path.parse(file).name;
+            const contents = fs.readFileSync(filePath, { encoding: "utf8" });
+            const map = new Map<string, string>();
+            map.set("Macro: Effect: Aid", "systems/pf2e/icons/spells/efficient-apport.webp");
+            map.set("Macro: Effect: Cover", "systems/pf2e/icons/conditions-2/status_acup.webp");
+            map.set("Macro: Effect: Follow The Expert", "systems/pf2e/icons/spells/favorable-review.webp");
+            const img = map.get(macroName) || "icons/svg/dice-target.svg";
+
+            // eslint-disable-next-line
+            let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(
+                contents
+            )},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
+            lines.push(json);
+        } catch (err) {
+            console.error(`Failed to read JSON file ${filePath}`, err);
+        }
+    }
+    const file1 = path.resolve(outDir, folderPath + ".db");
+    fs.writeFileSync(file1, lines.join("\n"), "utf8");
+}
+
 buildAsymonousPack();
 buildCustomizableMacrosPack();
+buildInternalUtilityMacrosPack();

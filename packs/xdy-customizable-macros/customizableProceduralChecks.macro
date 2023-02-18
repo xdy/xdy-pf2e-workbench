@@ -7,14 +7,16 @@
 // Dialog's Title
 const title = "Door Checks";
 
-// List of actors you want to list in the Dropdown Menu
+// List of actors you want to list in the Dropdown Menu REPLACE WITH YOUR OWN ACTORS
 const party = ["5YCNP4CvPp6hw7WN", "8A5qtayUjkhqfoYi", "Cy3njyMAB5K3eUxm", "T9tSdOoarQBOsTz5"];
 
-// Actions you want to take
-const actions = [{ name: "Seek", default: "T9tSdOoarQBOsTz5" }, {
-    name: "Seek",
-    default: "5YCNP4CvPp6hw7WN"
-}, { name: "Pick a Lock", default: "8A5qtayUjkhqfoYi" }, { name: "Force Open", default: "Cy3njyMAB5K3eUxm" }];
+// Actions you want to take. REPLACE DEFAULTS WITH THE ABOVE ACTORS
+const actions = [
+    { name: "Seek", default: "T9tSdOoarQBOsTz5" },
+    { name: "Seek", default: "5YCNP4CvPp6hw7WN" },
+    { name: "Pick a Lock", default: "8A5qtayUjkhqfoYi" },
+    { name: "Force Open", default: "Cy3njyMAB5K3eUxm" }
+];
 
 const actors = party.map((a) => game.actors.get(a));
 

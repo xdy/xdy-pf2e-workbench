@@ -112,7 +112,7 @@ type MacroAction = {
     skill: string;
     name: string;
     icon: string;
-    action: string | Function;
+    action: string | Function | string[];
     showMAP?: boolean;
     extra?: string;
     actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
@@ -130,7 +130,7 @@ export function basicActionMacros() {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidToggle`),
             skill: "",
-            action: "NXCHCuMqYkbRPnaN",
+            action: ["macroEffectAid", "xdy-pf2e-workbench.xdy-internal-utility-macros"],
             icon: "systems/pf2e/icons/spells/efficient-apport.webp",
         },
         {
@@ -257,7 +257,7 @@ export function basicActionMacros() {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.FollowTheExpertToggle`),
             skill: "",
-            action: "P0hdu2AsXQUtQusb",
+            action: ["macroEffectFollowTheExpert", "xdy-pf2e-workbench.xdy-internal-utility-macros"],
             icon: "systems/pf2e/icons/spells/favorable-review.webp",
         },
         {
@@ -365,7 +365,7 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.RecallKnowledge`),
             skill: "",
-            action: "dN89Pky7SfULbGcQ",
+            action: ["XDY DO_NOT_IMPORT Recall_Knowledge", "xdy-pf2e-workbench.asymonous-benefactor-macros-internal"],
             icon: "icons/skills/trades/academics-study-reading-book.webp",
         },
         {
@@ -457,7 +457,7 @@ export function basicActionMacros() {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TakeCoverToggle`),
             skill: "",
-            action: "1maZWoOsus4OrO8Q",
+            action: ["macroEffectCover", "xdy-pf2e-workbench.xdy-internal-utility-macros"],
             icon: "systems/pf2e/icons/equipment/shields/tower-shield.webp",
         },
         {
@@ -485,7 +485,10 @@ export function basicActionMacros() {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TreatWounds`),
             skill: "Medicine",
-            action: "pfdZwXtrwLREGg6C",
+            action: [
+                "XDY DO_NOT_IMPORT Treat Wounds and Battle Medicine",
+                "xdy-pf2e-workbench.asymonous-benefactor-macros-internal",
+            ],
             icon: "icons/magic/nature/root-vine-caduceus-healing.webp",
         },
         {
@@ -644,6 +647,31 @@ ${actionList
                         } else {
                             // Ugh
                             eval(current);
+                        }
+                    } else if (Array.isArray(current)) {
+                        const macroName = current[0];
+                        const compendiumName = current[1];
+                        const pack = game.packs.get(compendiumName);
+                        if (pack) {
+                            pack.getDocuments().then((documents) => {
+                                const macro_data = documents.find((i) => i.name === macroName)?.toObject();
+                                if (macro_data) {
+                                    const temp_macro = new Macro(macro_data);
+                                    temp_macro.execute();
+                                } else {
+                                    ui.notifications.error(
+                                        game.i18n.format(`${MODULENAME}.macros.basicActionMacros.macroNotFound`, {
+                                            macroName,
+                                        })
+                                    );
+                                }
+                            });
+                        } else {
+                            ui.notifications.error(
+                                game.i18n.format(`${MODULENAME}.macros.basicActionMacros.compendiumNotFound`, {
+                                    compendiumName,
+                                })
+                            );
                         }
                     } else {
                         const skills = getSkills(action.skill);

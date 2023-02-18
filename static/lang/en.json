@@ -78,6 +78,8 @@
             "hint": "Whether to show if the selected actor has the best bonus in the Basic Action Macros dialog"
           }
         },
+        "macroNotFound": "Macro {macroName} not found",
+        "compendiumNotFound": "Compendium {compendiumName} not found",
         "actions": {
           "AidToggle": "Aid (toggle)",
           "AvoidNotice": "Avoid Notice",
