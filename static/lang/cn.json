@@ -571,10 +571,15 @@
           "DecipherWritingArcana": "解译文书 - 奥法",
           "DecipherWritingOccultism": "解译文书 - 神秘",
           "SubsistSurvival": "求生 - 生存",
-          "DisableDevice": "解除装置"
+          "DisableDevice": "解除装置",
+          "PalmAnObject": "手上功夫",
+          "Steal": "盗窃",
+          "ConcealAnObject": "隐藏物件"
         },
         "second": "(-5)",
-        "third": "(-10)"
+        "third": "(-10)",
+        "compendiumNotFound": "未找到合集包 {compendiumName}",
+        "macroNotFound": "未找到{macroName}宏"
       },
       "buildNpcSpellbookJournal": {
         "title": "建立NPC法术书日志",
