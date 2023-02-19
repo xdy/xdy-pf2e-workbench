@@ -1,3 +1,10 @@
+# [4.44.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.43.0...v4.44.0) (2023-02-19)
+
+
+### Features
+
+* Make Perform work properly for the Skill Actions feature. Clean up Skill Actions in preparation for more work. ([3cc4ce2](https://github.com/xdy/xdy-pf2e-workbench/commit/3cc4ce2925c6f7248dde410c61d42f97b338ece8))
+
 # [4.43.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.42.2...v4.43.0) (2023-02-18)
 
 
