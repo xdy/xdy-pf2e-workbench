@@ -49,12 +49,24 @@
             "distractingWords": "Paroles de diversion",
             "gesture": "Geste",
             "trick": "Astuce"
+          },
+          "perform": {
+            "comedy": "Jouer la comédie",
+            "dance": "Danser",
+            "keyboards": "Instrument à clavier",
+            "oratory": "Déclamer",
+            "percussion": "Instrument à percussion",
+            "singing": "Chanter",
+            "winds": "Instrument à vent",
+            "acting": "Faire du théatre",
+            "strings": "Instrument à cordes"
           }
         }
       },
       "UnequipAll": {
         "Tooltip": "Activer les actions cachées : Maintenir Alt lorsque vous cliquez pour ne pas déséquiper/équiper toutes les compétences."
-      }
+      },
+      "assuranceLabel": "Assurance"
     },
     "SETTINGS": {
       "abpVariantAllowItemBonuses": {
