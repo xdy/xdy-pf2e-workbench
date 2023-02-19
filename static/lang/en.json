@@ -19,6 +19,7 @@
     },
     "skillActions": {
       "Title": "Skill Actions",
+      "assuranceLabel": "Assurance",
       "Settings": {
         "Position": {
           "name": "Skill Actions position",
@@ -49,6 +50,17 @@
             "distractingWords": "Distracting Words",
             "gesture": "Gesture",
             "trick": "Trick"
+          },
+          "perform": {
+            "acting": "Acting",
+            "comedy": "Comedy",
+            "dance": "Dance",
+            "keyboards": "Keyboard instrument",
+            "oratory": "Oratory",
+            "percussion": "Percussion instrument",
+            "singing": "Singing",
+            "strings": "String instrument",
+            "winds": "Wind instrument"
           }
         }
       },

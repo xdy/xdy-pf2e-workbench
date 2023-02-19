@@ -25,7 +25,7 @@ export class SkillAction {
     variants: VariantsCollection;
 
     constructor(data: SkillActionDataParameters) {
-        data.key ??= camelize(data.slug);
+        data.actionKey ??= camelize(data.actionSlug);
         data.actionType ??= "A";
 
         switch (game.settings.get(MODULENAME, "skillActionsIconStyle")) {
@@ -54,7 +54,7 @@ export class SkillAction {
     }
 
     get key() {
-        return this.data.key;
+        return this.data.actionKey;
     }
 
     get label() {
@@ -66,7 +66,7 @@ export class SkillAction {
     }
 
     get pf2eItem(): ItemPF2e {
-        return <ItemPF2e>ActionsIndex.instance.get(this.data.slug);
+        return <ItemPF2e>ActionsIndex.instance.get(this.data.actionSlug);
     }
 
     isDisplayed(filter: string, allVisible: boolean) {
@@ -141,14 +141,16 @@ export class SkillAction {
                         .then();
                 }
             } else {
-                if (game.settings.get(MODULENAME, "skillActionsDescription")) await this.toChat();
+                if (game.settings.get(MODULENAME, "skillActionsDescription")) {
+                    await this.toChat();
+                }
                 variant.skill
                     .roll({
                         event,
                         // @ts-ignore
                         modifiers: variant.modifiers,
                         // @ts-ignore
-                        options: [`action:${this.data.slug}`],
+                        options: [`action:${this.data.actionSlug}`],
                     })
                     .then();
             }
@@ -160,10 +162,12 @@ export class SkillAction {
         // @ts-ignore
         const ownedItem = new constructor(this.pf2eItem.toJSON(), { parent: this.actor });
         if (assurance) {
+            const assuranceLabel = game.i18n.localize(`${MODULENAME}.skillActions.assuranceLabel`);
+            // ownedItem.name = `${ownedItem.name} (${assuranceLabel}: ${assurance})`;
             ownedItem.system.description.value =
-                ownedItem.system.description.value + `<hr /> <p><strong>Assurance</strong> : ${assurance}</p>`;
+                ownedItem.system.description.value + `<hr /> <p><strong>${assuranceLabel}</strong> : ${assurance}</p>`;
         }
-        await ownedItem.toChat();
+        await ownedItem.toMessage();
     }
 
     async toggleItemSummary($li: JQuery) {
@@ -213,7 +217,7 @@ export class SkillAction {
         $div.append($properties, `<div class="item-description">${chatData.description?.value}</div>`);
     }
 
-    private actorHasItem(slug = this.data.slug) {
+    private actorHasItem(slug = this.data.actionSlug) {
         // @ts-ignore
         return !!this.actor.items.find((item) => item.slug === slug);
     }
@@ -261,16 +265,16 @@ export class SkillActionCollection extends Collection<SkillAction> {
     }
 
     add(action: SkillAction) {
-        // @ts-ignore
+        if (!action.key) {
+            return;
+        }
         if (this.get(action.key)) {
             console.warn("Overwriting existing skill action", action.key);
         }
-        // @ts-ignore
         this.set(action.key, action);
     }
 
     fromElement(el: HTMLElement) {
-        // @ts-ignore
         return this.get(el.dataset.actionId, { strict: true });
     }
 

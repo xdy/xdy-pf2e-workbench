@@ -8,7 +8,7 @@
 </h3>
 <ol class="actions-list item-list directory-list strikes-list skill-action-list">
     {{#each skills}} {{#if enabled}}
-        <li class="item strike action expandable ready" data-action-id="{{key}}"
+        <li class="item strike action expandable ready" data-action-id="{{actionKey}}"
             {{#unless displayed}}style="display:none"{{/unless}}>
             <div class="item-name">
                 <div class="item-image variant-strike" style="background-image: url({{icon}})">
