@@ -152,6 +152,29 @@
         "ActionTypeReaction": "Reaction",
         "ActionWeaponLabel": "Associated Weapon",
         "Actions": {
+            "AdministerFirstAid": {
+                "Stabilize": {
+                    "DifficultyClass": {
+                        "Label": "Administer First Aid DC"
+                    },
+                    "Notes": {
+                        "criticalFailure": "<strong>Critical Failure</strong> The creature's dying value increases by 1.",
+                        "success": "<strong>Success</strong> The creature loses the dying condition (but remains unconscious)."
+                    },
+                    "Title": "Administer First Aid - Stabilize"
+                },
+                "StopBleeding": {
+                    "Notes": {
+                        "criticalFailure": "<strong>Critical Failure</strong> The creature immediately takes an amount of damage equal to its persistent bleed damage.",
+                        "success": "<strong>Success</strong> The creature attempts a flat check to end the bleeding."
+                    },
+                    "Title": "Administer First Aid - Stop Bleeding"
+                },
+                "Warning": {
+                    "TargetNotDying": "Targeted creature is not dying.",
+                    "UnknownVariant": "Unknown variant '{variant}' used for Administer First Aid, use either stabilize or stopBleeding."
+                }
+            },
             "ArcaneSlam": {
                 "Modifier": {
                     "SizeDifference": "Size Difference"
@@ -270,6 +293,23 @@
                     "failure": "<strong>Failure</strong> You don't divert the attention of any creatures whose Perception DC exceeds your result, and those creatures are aware you were trying to trick them."
                 },
                 "Trick": "Create a Diversion - Trick"
+            },
+            "CreateForgery": {
+                "ForgedDocument": {
+                    "Description": "<p>An observer who was fooled on a passive glance can still choose to closely scrutinize the documents on the lookout for a forgery, using different techniques and analysis methods beyond the surface elements you successfully forged with your original check. In that case, the observer can attempt a @Check[type:perception|dc:{societyDC}] or @Check[type:society|dc:{societyDC}] check against your Society DC (if they succeed, they know your document is a forgery).</p>",
+                    "FailureGmNote": "<p>The forgery has some obvious signs of being a fake, so the GM compares the result of {total} to each passive observer's Perception DC or Society DC, whichever is higher, using the success or failure results below. The same result is used against all passive observers' DCs no matter how many creatures passively observe that document.</p>\n<p>{success}</p>\n<p>{failure}</p>",
+                    "Name": "Forged Document",
+                    "SuccessGmNote": "<p>The forgery is of good enough quality that passive observers can't notice the fake. Only those who carefully examine the document and attempt a @Check[type:perception|dc:{societyDC}|showDC:gm] or @Check[type:society|dc:{societyDC}|showDC:gm] check against your Society DC can do so.</p>"
+                },
+                "ForgedDocumentCreatedNotification": "A forged document has been added to {name}'s inventory.",
+                "Notes": {
+                    "criticalSuccess": "<strong>Success</strong> The observer does not detect the forgery.",
+                    "success": "<strong>Success</strong> The observer does not detect the forgery.",
+                    "failure": "<strong>Failure</strong> The observer knows your document is a forgery.",
+                    "criticalFailure": "<strong>Failure</strong> The observer knows your document is a forgery."
+                },
+                "Title": "Create Forgery",
+                "UnspecificHandwriting": "Unspecific Handwriting"
             },
             "DecipherWriting": {
                 "Notes": {
@@ -642,7 +682,7 @@
                 "Notes": {
                     "criticalSuccess": "<strong>Critical Success</strong> Your tampering is incredibly effective. If you tampered with a weapon, the enemy takes a -2 circumstance penalty to attack rolls and damage rolls with that weapon. If you tampered with armor, the armor hampers the enemy's movement, making the enemy flat-footed and inflicting a -10-foot penalty to its Speeds. The effect lasts until the enemy Interacts to remove it, regardless of which one you used. @UUID[Compendium.pf2e.feat-effects.rzcpTJU9MvW1x1gz]{Effect: Armor Tampered With (Critical Success)} @UUID[Compendium.pf2e.feat-effects.o7qm13OmaYOMwgib]{Effect: Weapon Tampered With (Critical Success)}",
                     "success": "<strong>Success</strong> Your tampering is temporarily effective. As critical success, but the effect ends at the start of your next turn, even if the enemy doesn't Interact to end it. @UUID[Compendium.pf2e.feat-effects.IfRkgjyh0JzGalIy]{Effect: Armor Tampered With (Success)} @UUID[Compendium.pf2e.feat-effects.4QWayYR3JSL9bk2T]{Effect: Weapon Tampered With (Success)}",
-                    "criticalFailure": "<strong>Critical Failure</strong> Your tampering backfires dramatically, creating a small explosion from your own tools or gear. You take [[/r {@details.level.value}[fire] # Tamper Backfire]]{fire damage equal to your level}."
+                    "criticalFailure": "<strong>Critical Failure</strong> Your tampering backfires dramatically, creating a small explosion from your own tools or gear. You take [[/r (@actor.level)[fire] #Tamper Backfire]]{fire damage equal to your level}."
                 },
                 "Title": "Tamper"
             },
@@ -1122,6 +1162,10 @@
         "BrowserFilterCategory": "Feat Types",
         "BrowserFilterClass": "Classes",
         "BrowserFilterComplexity": "Hazard Complexities",
+        "BrowserFilterConjunction": {
+            "AndLabel": "All of above",
+            "OrLabel": "Any of above"
+        },
         "BrowserFilterConsumable": "Consumable Type",
         "BrowserFilterInventoryTypes": "Inventory Types",
         "BrowserFilterLevels": "Levels",
@@ -1710,6 +1754,7 @@
                 "ZeroRoundsExpireTurnStart": "0 rounds remaining, expires start of initiative {initiative}"
             },
             "RemoveToolTip": "[Right Click] Remove effect",
+            "RollDamageToolTip": "[Left Click] Roll damage",
             "Unidentified": "Unidentified",
             "Sustained": "Sustained?",
             "UnlimitedDuration": "Unlimited duration",
@@ -1918,6 +1963,7 @@
                 "PersistentDamage": {
                     "Name": "Persistent Damage ({formula} {damageType})",
                     "NameWithDC": "Persistent Damage ({formula} DC{dc})",
+                    "AssistedRecovery": "Roll Assisted Recovery",
                     "Chat": {
                         "Recover": "Roll Recovery Check",
                         "RecoverLabel": "Recovery: {name}"
@@ -2306,6 +2352,10 @@
                 "LevelLabel": "Feat",
                 "LevelN": "Feat {level}"
             },
+            "GMNotes": {
+                "Add": "Add GM Notes",
+                "Title": "GM Notes"
+            },
             "Heritage": {
                 "AncestryNotFound": "The referenced ancestry item was not found.",
                 "DragAncestryHere": "Drag an ancestry item here to set this heritage's prerequisite ancestry.",
@@ -2471,7 +2521,15 @@
             },
             "Rules": {
                 "Apply": "Apply",
-                "Close": "Close"
+                "Close": "Close",
+                "Hint": {
+                    "UUID": "A universally unique identifier for this item",
+                    "SourceId": "The UUID of the original compendium item",
+                    "Slug": "A stable, human-readable identifier: if set, it will remain in place even if the item is renamed."
+                },
+                "New": "New Rule Element",
+                "RegenerateSlug": "(Re)generate Slug",
+                "Tab": "Rules"
             },
             "WorldItemWarning": "This is a World Item and will not work if saved in a compendium"
         },
@@ -2483,19 +2541,16 @@
         "ItemBonusMinus2": "Shoddy (-2)",
         "ItemBonusShortLabel": "Item",
         "ItemDescription": "Description",
+        "ItemDescriptionHeader": "Description",
         "ItemDetails": "Details",
         "ItemLevel": "{type} {level}",
         "ItemMystified": "Mystified",
         "ItemMystification": "Mystification",
         "ItemNamePlaceholder": "Name",
         "ItemNotSupportedOnActor": "Item not supported on actor",
-        "ItemRules": "Rules",
-        "ItemNewRuleElement": "New Rule Element",
         "ItemNewSkillVariant": "New Skill Variant",
         "ItemRemoveRuleElement": "Remove Rule Element",
-        "ItemSourceIDLabel": "Source ID:",
         "ItemTitle": "Item",
-        "ItemUUIDLabel": "UUID:",
         "ItemsLabel": "Items",
         "KeyAbility": "Key Ability Score",
         "KeyAbilityLabel": "Key Ability",
@@ -3394,6 +3449,7 @@
         "SkillPotencyHeader": "Skill Potencies",
         "SkillFeatLevels": "Skill Feat Levels",
         "SkillIncreaseLevels": "Skill Increase Levels",
+        "Slug": "Slug",
         "Source": {
             "AuthorLabel": "Author",
             "AuthorPlaceholder": "Author",
@@ -4626,6 +4682,10 @@
                 "Hint": "Add a (usually monochrome) filter when viewing a scene through the sight of a creature with darkvision"
             }
         },
+        "UUID": {
+            "Label": "UUID",
+            "SourceId": "Source ID"
+        },
         "ValueLabel": "Value",
         "WeaknessesLabel": "Weaknesses",
         "Weapon": {
@@ -4942,7 +5002,7 @@
             "corrosive": {
                 "Name": "Corrosive",
                 "Note": {
-                    "criticalSuccess": "On a critical hit, the target's armor (if any) takes [[/r {3d6}[acid] #Corrosive Rune]]{3d6 acid} damage (before applying Hardness); if the target has a shield raised, the shield takes this damage instead."
+                    "criticalSuccess": "On a critical hit, the target's armor (if any) takes [[/r 3d6[acid] #Corrosive Rune]]{3d6 acid} damage (before applying Hardness); if the target has a shield raised, the shield takes this damage instead."
                 }
             },
             "crushing": {
@@ -5014,7 +5074,7 @@
             "greaterCorrosive": {
                 "Name": "Greater Corrosive",
                 "Note": {
-                    "criticalSuccess": "The acid damage dealt by this weapon ignores the target's acid resistance. On a critical hit, the target's armor (if any) takes [[/r {6d6}[acid]]]{6d6 acid} damage (before applying Hardness); if the target has a shield raised, the shield takes this damage instead.",
+                    "criticalSuccess": "The acid damage dealt by this weapon ignores the target's acid resistance. On a critical hit, the target's armor (if any) takes [[/r 6d6[acid]]]{6d6 acid} damage (before applying Hardness); if the target has a shield raised, the shield takes this damage instead.",
                     "success": "<strong>Greater Corrosive Rune</strong> The acid damage dealt by this weapon ignores the target's acid resistance."
                 }
             },
@@ -5645,7 +5705,7 @@
                     "AttackOfOpportunity": "<p><strong>Trigger</strong> A creature within the monster's reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using.</p>\n<hr />\n<p><strong>Effect</strong> The monster attempts a melee Strike against the triggering creature. If the attack is a critical hit and the trigger was a manipulate action, the monster disrupts that action. This Strike doesn't count toward the monster's multiple attack penalty, and its multiple attack penalty doesn't apply to this Strike.</p>",
                     "AtWillSpells": "<p>The monster can cast its at-will spells any number of times without using up spell slots.</p>",
                     "Aura": "<p>A monster's aura automatically affects everything within a specified emanation around that monster. The monster doesn't need to spend actions on the aura; rather, the aura's effects are applied at specific times, such as when a creature ends its turn in the aura or when creatures enter the aura.</p>\n<p>If an aura does nothing but deal damage, its entry lists only the radius, damage, and saving throw. Such auras deal this damage to a creature when the creature enters the aura and when a creature starts its turn in the aura. A creature can take damage from the aura only once per round.</p>\n<p>The GM might determine that a monster's aura doesn't affect its own allies. For example, a creature might be immune to a monster's frightful presence if they have been around each other for a long time.</p>",
-                    "Buck": "<hr />\n<p>Most monsters that serve as mounts can attempt to buck off unwanted or annoying riders, but most mounts will not use this reaction against a trusted creature unless the mounts are spooked or mistreated.</p>\n<p><strong>Trigger</strong> A creature @UUID[Compendium.pf2e.actionspf2e.PM5jvValFkbFH3TV]{Mounts} or uses the @UUID[Compendium.pf2e.actionspf2e.q9nbyIF0PEBqMtYe]{Command an Animal} action while riding the monster.</p>\n<hr />\n<p><strong>Effect</strong> The triggering creature must succeed at a Reflex saving throw against the listed DC or fall off the creature and land @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}. If the save is a critical failure, the triggering creature also takes [[/roll {1d6}[bludgeoning]]]{1d6 bludgeoning damage} in addition to the normal damage for the fall.</p>",
+                    "Buck": "<hr />\n<p>Most monsters that serve as mounts can attempt to buck off unwanted or annoying riders, but most mounts will not use this reaction against a trusted creature unless the mounts are spooked or mistreated.</p>\n<p><strong>Trigger</strong> A creature @UUID[Compendium.pf2e.actionspf2e.PM5jvValFkbFH3TV]{Mounts} or uses the @UUID[Compendium.pf2e.actionspf2e.q9nbyIF0PEBqMtYe]{Command an Animal} action while riding the monster.</p>\n<hr />\n<p><strong>Effect</strong> The triggering creature must succeed at a Reflex saving throw against the listed DC or fall off the creature and land @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}. If the save is a critical failure, the triggering creature also takes [[/roll 1d6[bludgeoning]]]{1d6 bludgeoning damage} in addition to the normal damage for the fall.</p>",
                     "CatchRock": "<p><strong>Requirements</strong> The monster must have a free hand but can @UUID[Compendium.pf2e.actionspf2e.wQYmDStjdjn0I26t]{Release} anything it's holding as part of this reaction.</p>\n<p><strong>Trigger</strong> The monster is targeted with a thrown rock Strike or a rock would fall on the monster.</p>\n<hr />\n<p><strong>Effect</strong> The monster gains a +4 circumstance bonus to its AC against the triggering attack or to any defense against the falling rock. If the attack misses or the monster successfully defends against the falling rock, the monster catches the rock, takes no damage, and is now holding the rock</p>",
                     "ChangeShape": "<p>The monster changes its shape indefinitely. It can use this action again to return to its natural shape or adopt a new shape. Unless otherwise noted, a monster cannot use Change Shape to appear as a specific individual. Using Change Shape counts as creating a disguise for the @UUID[Compendium.pf2e.actionspf2e.AJstokjdG6iDjVjE]{Impersonate} use of Deception. The monster's transformation automatically defeats Perception DCs to determine whether the creature is a member of the ancestry or creature type into which it transformed, and it gains a +4 status bonus to its Deception DC to prevent others from seeing through its disguise. Change Shape abilities specify what shapes the monster can adopt. The monster doesn't gain any special abilities of the new shape, only its physical form. For example, in each shape, it replaces its normal Speeds and Strikes, and might potentially change its senses or size. Any changes are listed in its stat block.</p>",
                     "ConstantSpells": "<p>A constant spell affects the monster without the monster needing to cast it, and its duration is unlimited. If a constant spell gets counteracted, the monster can reactivate it by spending the normal spellcasting actions the spell requires.</p>",
