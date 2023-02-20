@@ -42,7 +42,18 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         actionSlug: "administer-first-aid",
         actionType: "D",
         compendiumId: "MHLuKy4nQO2Z4Am1",
-        variants: [{ proficiencyKey: "medicine" }],
+        variants: [
+            {
+                extra: { variant: "stabilize" },
+                label: "xdy-pf2e-workbench.skillActions.Settings.variants.administerFirstAid.stabilize",
+                proficiencyKey: "medicine",
+            },
+            {
+                extra: { variant: "stopBleeding" },
+                label: "xdy-pf2e-workbench.skillActions.Settings.variants.administerFirstAid.stopBleeding",
+                proficiencyKey: "medicine",
+            },
+        ],
     },
     {
         actionSlug: "balance",

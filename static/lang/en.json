@@ -46,6 +46,10 @@
           "hint": "Whether to show the actions description in the chat when rolling"
         },
         "variants": {
+          "administerFirstAid": {
+            "stabilize": "Stabilize",
+            "stopBleeding": "Stop Bleeding"
+          },
           "createADiversion": {
             "distractingWords": "Distracting Words",
             "gesture": "Gesture",
@@ -93,6 +97,8 @@
         "macroNotFound": "Macro {macroName} not found",
         "compendiumNotFound": "Compendium {compendiumName} not found",
         "actions": {
+          "AdministerFirstAidStabilize": "Administer First Aid - Stabilize",
+          "AdministerFirstAidStopBleeding": "Administer First Aid - Stop Bleeding",
           "AidToggle": "Aid (toggle)",
           "AvoidNotice": "Avoid Notice",
           "Balance": "Balance",
@@ -103,6 +109,7 @@
           "Craft": "Craft",
           "CreateADiversionGesture": "Create a Diversion - Gesture",
           "CreateADiversionTrick": "Create a Diversion - Trick",
+          "CreateForgery": "Create Forgery",
           "DecipherWritingArcana": "Decipher writing - Arcana",
           "DecipherWritingOccultism": "Decipher writing - Occultism",
           "DecipherWritingReligion": "Decipher writing - Religion",

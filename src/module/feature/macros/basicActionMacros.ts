@@ -127,6 +127,20 @@ export function basicActionMacros() {
 
     const actionList: MacroAction[] = [
         {
+            actionType: "skill_untrained",
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStabilize`),
+            skill: "Medicine",
+            action: "game.pf2e.actions.administerFirstAid({ event: event, variant: 'stabilize' });",
+            icon: "systems/pf2e/icons/features/feats/treat-wounds.webp",
+        },
+        {
+            actionType: "skill_untrained",
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStopBleeding`),
+            skill: "Medicine",
+            action: "game.pf2e.actions.administerFirstAid({ event: event, variant: 'stopBleeding' });",
+            icon: "systems/pf2e/icons/conditions/persistent-damage.webp",
+        },
+        {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidToggle`),
             skill: "",
@@ -178,9 +192,16 @@ export function basicActionMacros() {
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Craft`),
-            skill: "Crafting",
+            skill: "Society",
             action: game.pf2e.actions.craft,
             icon: "icons/skills/trades/smithing-anvil-silver-red.webp",
+        },
+        {
+            actionType: "skill_trained",
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateForgery`),
+            skill: "Crafting",
+            action: game.pf2e.actions.createForgery,
+            icon: "systems/pf2e/icons/spells/transcribe-moment.webp",
         },
         {
             actionType: "skill_untrained",
