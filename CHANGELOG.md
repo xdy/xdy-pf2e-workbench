@@ -1,3 +1,10 @@
+# [4.45.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.44.1...v4.45.0) (2023-02-21)
+
+
+### Features
+
+* Add support for the upcoming Administer First Aid and Create Forgery action macros to both Skill Actions and Basic Action Macros. ([8d96699](https://github.com/xdy/xdy-pf2e-workbench/commit/8d9669906f2dabfbe6451f81e70f9bd352b69ceb))
+
 ## [4.44.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.44.0...v4.44.1) (2023-02-20)
 
 
