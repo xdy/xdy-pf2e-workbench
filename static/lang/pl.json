@@ -8,7 +8,11 @@
         "abilityScore": "Wartość Atrybutów",
         "skill": "Umiejętności",
         "ac": "Klasa Pancerza",
-        "damage": "Obrażenia"
+        "damage": "Obrażenia",
+        "hp": "HP",
+        "perception": "Percepcja",
+        "strike": "Uderzenia",
+        "areaDamage": "Obrażenia obszarowe"
       }
     },
     "skillActions": {
@@ -17,29 +21,50 @@
         "Position": {
           "bottom": "Dół",
           "disabled": "Wyłączone",
-          "top": "Góra"
+          "top": "Góra",
+          "name": "Pozycja Akcji Umiejętności",
+          "hint": "Pozycja na stronie umiejętności: na górze (zaraz za Uderzeniami), lub na samym końcu."
         },
         "hideDuplicates": {
-          "hint": "Ukryć powielone akcje na liście akcje czy liście Akcji Umiejętności",
-          "doNotHide": "Nie chować",
+          "hint": "Możliwość ukrycia zduplikowanych akcji na liście",
+          "doNotHide": "Nie ukrywaj",
           "hideActions": "Ukryj akcje",
           "hideSkillActions": "Ukryj Akcje Umiejętności",
-          "name": "Akcje Umiejętności ukryj powielone akcje"
+          "name": "Akcje Umiejętności ukrywają powielone akcje"
         },
         "IconStyle": {
           "actionCostIcon": "Ikona Kosztu Akcji",
-          "skillIcon": "Ikona Umiejętności"
+          "skillIcon": "Ikona Umiejętności",
+          "name": "Styl ikon Akcji Umiejętności",
+          "hint": "Styl ikony umiejętności. Wybierz, czy wyświetlać koszt danej akcji, czy ikonę umiejętności, jeśli jest dostępna"
         },
         "Description": {
-          "name": "Opis Akcji Umiejętności"
+          "name": "Opis Akcji Umiejętności",
+          "hint": "Pokazywanie opisu akcji na czacie w momencie jej użycia"
         },
         "variants": {
           "createADiversion": {
             "gesture": "Gest",
-            "trick": "Sztuczka"
+            "trick": "Sztuczka",
+            "distractingWords": "Rozpraszające słowa"
+          },
+          "perform": {
+            "acting": "Aktorstwo",
+            "comedy": "Komedia",
+            "dance": "Taniec",
+            "keyboards": "Instrument klawiszowy",
+            "oratory": "Elokwencja",
+            "percussion": "Instrument perkusyjny",
+            "singing": "Śpiew",
+            "strings": "Instrument strunowy",
+            "winds": "Instrument dęty"
           }
         }
-      }
+      },
+      "UnequipAll": {
+        "Tooltip": "Przełącz ukryte akcje. Przytrzymaj alt klikając, żeby włączyć/wyłączyć wszystkie umiejętności."
+      },
+      "assuranceLabel": "Pewność"
     },
     "macros": {
       "basicActionMacros": {
@@ -48,65 +73,78 @@
         "third": "(-10)",
         "actions": {
           "AidToggle": "Pomoc (przełącz)",
-          "AvoidNotice": "Unikanie Wykrycia",
-          "Balance": "Równowaga",
+          "AvoidNotice": "Unikanie wykrycia",
+          "Balance": "Balansowanie",
           "Climb": "Wspinaczka",
           "Coerce": "Przymuszenie",
-          "CommandAnAnimal": "Rozkaz Zwierzęciu",
+          "CommandAnAnimal": "Rozkaz zwierzęciu",
           "Craft": "Rzemiosło",
           "CreateADiversionGesture": "Dywersja - Gest",
-          "CreateADiversionTrick": "Dywersja - Sztuczka",
+          "CreateADiversionTrick": "Dywersja - Podstęp",
           "DecipherWritingOccultism": "Rozszyfrowanie pisma - Okultyzm",
           "DecipherWritingReligion": "Rozszyfrowanie pisma - Religia",
           "DecipherWritingSociety": "Rozszyfrowanie pisma - Społeczeństwo",
-          "Demoralize": "Złamanie Morale",
-          "DisableDevice": "Unieszkodliwienie Urządzenia",
+          "Demoralize": "Złamanie morale",
+          "DisableDevice": "Unieszkodliwienie urządzenia",
           "Disarm": "Rozbrojenie",
-          "Feint": "Finta",
-          "ForceOpen": "Wyważenie",
-          "GatherInformation": "Zbieranie Informacji",
+          "Feint": "Zmylenie przeciwnika",
+          "ForceOpen": "Otwarcie siłą",
+          "GatherInformation": "Zbieranie informacji",
           "Grapple": "Chwyt",
-          "Hide": "Ukrycie",
+          "Hide": "Ukrycie się",
           "Impersonate": "Naśladowanie",
-          "JumpHigh": "Skok - Wzwyż",
-          "JumpLong": "Skok - W dal",
+          "JumpHigh": "Skok wzwyż",
+          "JumpLong": "Skok w dal",
           "Lie": "Kłamstwo",
           "MakeAnImpression": "Wrażenie",
-          "ManeuverInFlight": "Manewr w Locie",
+          "ManeuverInFlight": "Manewr w locie",
           "Perform": "Występy",
-          "PickALock": "Otwieranie Zamka",
-          "RaiseAShieldToggle": "Podnieś Tarczę (aktywacja)",
+          "PickALock": "Otwieranie zamka",
+          "RaiseAShieldToggle": "Podnieś tarczę (przełącz)",
           "RecallKnowledge": "Wiedza",
           "Repair": "Naprawa",
           "Request": "Prośba",
           "Seek": "Szukanie",
-          "SenseDirection": "Wyczucie Kierunku",
-          "SenseMotive": "Określenie Motywu",
+          "SenseDirection": "Wyczucie kierunku",
+          "SenseMotive": "Określenie motywacji",
           "Shove": "Pchnięcie",
-          "Sneak": "Skradanie",
-          "Squeeze": "Przeciskanie",
-          "SubsistSociety": "Utrzymanie się - Społeczeństwo",
-          "SubsistSurvival": "Utrzymanie się - Sztuka Przetrwania",
+          "Sneak": "Skradanie się",
+          "Squeeze": "Przeciskanie się",
+          "SubsistSociety": "Przetrwanie w mieście",
+          "SubsistSurvival": "Przetrwanie w dziczy",
           "Swim": "Pływanie",
           "Track": "Tropienie",
-          "TreatDisease": "Leczenie Choroby",
-          "TreatPoison": "Leczenie Trucizny",
-          "TreatWounds": "Leczenie Ran",
+          "TreatDisease": "Leczenie choroby",
+          "TreatPoison": "Leczenie trucizny",
+          "TreatWounds": "Leczenie ran",
           "Trip": "Podcięcie",
-          "DecipherWritingArcana": "Rozszyfrowanie pisma - Wiedza Tajemna",
-          "FollowTheExpertToggle": "Podążanie za ekspertem (aktywacja)",
-          "TakeCoverToggle": "Zasłona (aktywacja)",
-          "TumbleThrough": "Tratowanie"
+          "DecipherWritingArcana": "Rozszyfrowanie pisma - Wiedza tajemna",
+          "FollowTheExpertToggle": "Podążanie za ekspertem (przełącz)",
+          "TakeCoverToggle": "Zasłona (przełącz)",
+          "TumbleThrough": "Przeturlanie się",
+          "ConcealAnObject": "Ukrycie przedmiotu",
+          "PalmAnObject": "Ukryj w dłoni",
+          "Steal": "Kradzież"
         },
         "noActorSelected": "Nie wybrano żadnego aktora",
         "cancel": "Anuluj",
-        "YouAreTheBestInYourParty": "Jesteś najlepszy/sza w drużynie",
+        "YouAreTheBestInYourParty": "Najwyższy wynik w drużynie",
         "settings": {
           "showBestBonus": {
-            "name": "Pokaż czy najlepszy/sza w Macro Akcji Podstawowych"
+            "name": "Pokazuj czy to najlepszy wynik w drużynie w Macro Akcji Podstawowych",
+            "hint": "Czy pokazywać w Macro Akcji Podstawowych, że wybrany aktor ma największy bonus do danej umiejętności?"
           }
-        }
+        },
+        "compendiumNotFound": "Kompendium {compendiumName} nie znalezione",
+        "macroNotFound": "Macro {macroName} nie znalezione"
+      },
+      "refocus": {
+        "notPsychic": "zużywa przynajmniej {regain} punktów skupienia",
+        "regains": "Odzyskuje {focus} punktów skupienia.",
+        "regainOne": "Odzyskaj 1 punkt skupienia.",
+        "isPsychic": "zużywa punkty skupienia wyłącznie by wzmocnić sztuczki psi lub zasilić psioniczne zdolności"
       }
-    }
+    },
+    "spellCardNotFound": "Nie odnaleziono karty czaru. Użyto {spell} na minimalnym poziomie tego czaru."
   }
 }
