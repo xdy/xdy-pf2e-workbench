@@ -13,7 +13,9 @@
         "perception": "Percepcja",
         "strike": "Uderzenia",
         "areaDamage": "Obrażenia obszarowe"
-      }
+      },
+      "title": "Tworzenie NPC",
+      "button-label": "Tworzenie NPC"
     },
     "skillActions": {
       "Title": "Akcje Umiejętności",
@@ -23,7 +25,7 @@
           "disabled": "Wyłączone",
           "top": "Góra",
           "name": "Pozycja Akcji Umiejętności",
-          "hint": "Pozycja na stronie umiejętności: na górze (zaraz za Uderzeniami), lub na samym końcu."
+          "hint": "Pozycja na stronie umiejętności: na górze (zaraz za Uderzeniami), lub na samym końcu"
         },
         "hideDuplicates": {
           "hint": "Możliwość ukrycia zduplikowanych akcji na liście",
@@ -58,6 +60,10 @@
             "singing": "Śpiew",
             "strings": "Instrument strunowy",
             "winds": "Instrument dęty"
+          },
+          "administerFirstAid": {
+            "stopBleeding": "Powstrzymaj krwawienie",
+            "stabilize": "Ustabilizuj"
           }
         }
       },
@@ -68,7 +74,7 @@
     },
     "macros": {
       "basicActionMacros": {
-        "title": "Akcja ({name})",
+        "title": "Akcje ({name})",
         "second": "(-5)",
         "third": "(-10)",
         "actions": {
@@ -100,7 +106,7 @@
           "ManeuverInFlight": "Manewr w locie",
           "Perform": "Występy",
           "PickALock": "Otwieranie zamka",
-          "RaiseAShieldToggle": "Podnieś tarczę (przełącz)",
+          "RaiseAShieldToggle": "Podniesienie tarczę (przełącz)",
           "RecallKnowledge": "Wiedza",
           "Repair": "Naprawa",
           "Request": "Prośba",
@@ -120,11 +126,14 @@
           "Trip": "Podcięcie",
           "DecipherWritingArcana": "Rozszyfrowanie pisma - Wiedza tajemna",
           "FollowTheExpertToggle": "Podążanie za ekspertem (przełącz)",
-          "TakeCoverToggle": "Zasłona (przełącz)",
+          "TakeCoverToggle": "Osłona (przełącz)",
           "TumbleThrough": "Przeturlanie się",
           "ConcealAnObject": "Ukrycie przedmiotu",
-          "PalmAnObject": "Ukryj w dłoni",
-          "Steal": "Kradzież"
+          "PalmAnObject": "Ukrycie w dłoni",
+          "Steal": "Kradzież",
+          "AdministerFirstAidStopBleeding": "Pierwsza pomoc – powstrzymaj krwawienie",
+          "AdministerFirstAidStabilize": "Pierwsza pomoc – ustabilizuj",
+          "CreateForgery": "Fałszerstwo"
         },
         "noActorSelected": "Nie wybrano żadnego aktora",
         "cancel": "Anuluj",
@@ -132,7 +141,7 @@
         "settings": {
           "showBestBonus": {
             "name": "Pokazuj czy to najlepszy wynik w drużynie w Macro Akcji Podstawowych",
-            "hint": "Czy pokazywać w Macro Akcji Podstawowych, że wybrany aktor ma największy bonus do danej umiejętności?"
+            "hint": "Zdecyduj, czy pokazywać w Macro Akcji Podstawowych, że wybrany aktor ma największy bonus do danej umiejętności"
           }
         },
         "compendiumNotFound": "Kompendium {compendiumName} nie znalezione",
@@ -145,6 +154,14 @@
         "isPsychic": "zużywa punkty skupienia wyłącznie by wzmocnić sztuczki psi lub zasilić psioniczne zdolności"
       }
     },
-    "spellCardNotFound": "Nie odnaleziono karty czaru. Użyto {spell} na minimalnym poziomie tego czaru."
+    "spellCardNotFound": "Nie odnaleziono karty czaru. Użyto {spell} na minimalnym poziomie tego czaru.",
+    "effects": {
+      "orcFerocityUsed": "Użyto Dzikości Orka"
+    },
+    "SETTINGS": {
+      "actionsReminderAllow": {
+        "gm": "GM"
+      }
+    }
   }
 }
