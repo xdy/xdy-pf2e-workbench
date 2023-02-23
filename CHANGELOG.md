@@ -1,3 +1,10 @@
+# [4.46.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.45.0...v4.46.0) (2023-02-23)
+
+
+### Features
+
+* Reworks setting to mystify npc magical and alchemical items so that it can happen on either npc being added to scene or on npc reaching 0 hp. Note that if you have enabled this setting previously you need to reenable it on the mystification settings submenu. ([07e85a9](https://github.com/xdy/xdy-pf2e-workbench/commit/07e85a96626e4298f895ef6a399ecfbf340f2ae0)), closes [#511](https://github.com/xdy/xdy-pf2e-workbench/issues/511)
+
 # [4.45.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.44.1...v4.45.0) (2023-02-21)
 
 
