@@ -18,9 +18,11 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Numerous subsettings, for instance: if mystified by dragging it from the sidebar while holding the configured
           modifier key, clicking the mystify button in the token hud or using the mystify keyboard shortcut (no default
           set). There are several options to filter out certain types of traits. A prefix or postfix can be added to the
-          mystified name (either a user-provided word, or one rolled on a user-provided rollable table). A random number
+          mystified name (either a user-provided word, or one rolled on a user-provided rollable table. A sample table
+          named "Workbench Adjectives" is included with the module and need not be imported into the world, just
+          enter "Workbench Adjectives" - without the quotes - in the appropriate textfield). A random number
           can also be added after the postfix, and optionally be kept when demystifying the creature. E.g. 'Skeletal
-          Champion' could become 'Jack the Mindless Undead Skeleton 23'. Note that player owned tokens are not
+          Champion' could become 'Jack the Mindless Undead Skeleton 23'. Note that player owned tokens will not be
           mystified.
     * Option to use the mystified name in chat messages created from that npc (actions/spells). Relies on the original
       actor name being present in the text.
@@ -286,3 +288,7 @@ asymonous-benefactor-macros:
   asymonous^H^H^H^H^H^H^H^H^Hanonymous benefactor, collected
   from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e at build time. Attribution for the macros can
   normally be found inside each macro, and the source url for each macro is added at the end of the file.
+
+"Workbench Adjectives" table is based on a list
+in [Unique Names Generator](https://github.com/andreasonny83/unique-names-generator/blob/main/src/dictionaries/adjectives.ts)
+and is provided under the [MIT license](https://github.com/andreasonny83/unique-names-generator/blob/main/LICENSE)

@@ -17,15 +17,32 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
 
     // "null" check is due to a previous bug that may have left invalid data in text fields
     if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
-        const draw = await game?.tables?.find((table) => table.name === fixSetting)?.draw({ displayChat: false });
-        if (draw && draw?.results[0]) {
-            return draw?.results[0].getChatText();
+        const table = game?.tables?.find((t) => t.name === fixSetting);
+        if (!table) {
+            const pack = game.packs.get("xdy-pf2e-workbench.xdy-internal-tables");
+            if (pack) {
+                const index = await pack.getIndex();
+                const id = index.find((e) => e.name.includes(<string>fixSetting))?._id;
+                if (id) {
+                    const document = await pack?.getDocument(id);
+                    const draw = await (<RollTable>document).draw({ displayChat: false });
+                    if (draw && draw?.results[0]) {
+                        return draw?.results[0].getChatText();
+                    } else {
+                        return <string>fixSetting;
+                    }
+                }
+            }
         } else {
-            return <string>fixSetting;
+            const draw = await table?.draw({ displayChat: false });
+            if (draw && draw?.results[0]) {
+                return draw?.results[0].getChatText();
+            } else {
+                return <string>fixSetting;
+            }
         }
-    } else {
-        return "";
     }
+    return "";
 }
 
 function fillTraits() {

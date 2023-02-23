@@ -91,6 +91,15 @@
       "type": "Macro",
       "private": false,
       "flags": {}
+    },
+    {
+      "name": "xdy-internal-tables",
+      "label": "xdy-internal-tables, do not import",
+      "system": "pf2e",
+      "path": "packs/xdy-tables.db",
+      "type": "RollTable",
+      "private": false,
+      "flags": {}
     }
   ],
   "languages": [

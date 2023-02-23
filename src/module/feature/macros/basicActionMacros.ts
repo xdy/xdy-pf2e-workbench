@@ -192,14 +192,14 @@ export function basicActionMacros() {
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Craft`),
-            skill: "Society",
+            skill: "Crafting",
             action: game.pf2e.actions.craft,
             icon: "icons/skills/trades/smithing-anvil-silver-red.webp",
         },
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateForgery`),
-            skill: "Crafting",
+            skill: "Society",
             action: game.pf2e.actions.createForgery,
             icon: "systems/pf2e/icons/spells/transcribe-moment.webp",
         },
