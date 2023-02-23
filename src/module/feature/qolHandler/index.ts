@@ -2,7 +2,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { isActuallyDamageRoll, nth } from "../../utils";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { ChatMessagePF2e } from "@module/chat-message";
-import { SpellPF2e } from "@item";
+import { PhysicalItemPF2e, SpellPF2e } from "@item";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
     // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
@@ -288,5 +288,27 @@ export async function castPrivateSpell(data: ChatMessageDataPF2e, message: ChatM
             content: content,
             speaker: ChatMessage.getSpeaker({ token: token }),
         }).then();
+    }
+}
+
+export async function mystifyNpcItems(items) {
+    const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
+        items
+            .filter((item) =>
+                ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"].includes(item.type)
+            )
+            .map((item) => <PhysicalItemPF2e>(<unknown>item))
+            .filter((item) => !item.isTemporary)
+            .filter((item) => {
+                return item.identificationStatus === "identified";
+            })
+            .filter((item) => item.isMagical || item.isAlchemical)
+    );
+
+    for (const item of relevantItems ?? []) {
+        await items.get(item.id)?.update({
+            "system.identification.status": "unidentified",
+            "system.identification.unidentified": item.getMystifiedData("unidentified"),
+        });
     }
 }

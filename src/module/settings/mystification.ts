@@ -14,8 +14,15 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.name`,
                 hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.hint`,
                 scope: "world",
-                default: false,
-                type: Boolean,
+                default: "no",
+                type: String,
+                choices: {
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.no`),
+                    onScene: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.onScene`),
+                    onZeroHp: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.onZeroHp`),
+                },
+                onChange: () => debouncedReload(),
+                requireReload: true,
             },
             npcMystifier: {
                 name: `${MODULENAME}.SETTINGS.npcMystifier.name`,

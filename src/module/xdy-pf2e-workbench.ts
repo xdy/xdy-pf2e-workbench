@@ -30,6 +30,7 @@ import {
     chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
     damageCardExpand,
+    mystifyNpcItems,
 } from "./feature/qolHandler";
 import {
     addHeroPoints,
@@ -41,7 +42,7 @@ import {
     startTimer,
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM } from "./utils";
-import { FeatPF2e, ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
+import { FeatPF2e, ItemPF2e, SpellPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
     actionsReminder,
@@ -323,7 +324,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" ||
         game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
         game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none" ||
-        game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")
+        game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
+        (game.settings.get("pf2e", "automation.lootableNPCs") &&
+            game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp")
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
             const hp = actor.system.attributes.hp?.value || 0;
@@ -363,6 +366,18 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     }
                 }
             }
+
+            if (
+                game.user?.isGM &&
+                game.settings.get("pf2e", "automation.lootableNPCs") &&
+                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp" &&
+                actor &&
+                actor.type === "npc" &&
+                actor.items &&
+                actor.items.size > 0
+            ) {
+                await mystifyNpcItems(actor.items);
+            }
         });
     }
 
@@ -379,7 +394,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     if (
         game.settings.get(MODULENAME, "npcMystifier") ||
         (game.settings.get("pf2e", "automation.lootableNPCs") &&
-            game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems"))
+            game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene")
     ) {
         Hooks.on("createToken", async (token: TokenDocumentPF2e, ..._args) => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
@@ -389,32 +404,13 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             if (
                 game.user?.isGM &&
                 game.settings.get("pf2e", "automation.lootableNPCs") &&
-                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") &&
+                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene" &&
                 token.actor &&
-                token.actor.type === "npc"
+                token.actor.type === "npc" &&
+                token.actor.items &&
+                token.actor.items.size > 0
             ) {
-                const actor = token.actor;
-                const items: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
-                    actor.items
-                        .filter((item) =>
-                            ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"].includes(
-                                item.type
-                            )
-                        )
-                        .map((item) => <PhysicalItemPF2e>(<unknown>item))
-                        .filter((item) => !item.isTemporary)
-                        .filter((item) => {
-                            return item.identificationStatus === "identified";
-                        })
-                        .filter((item) => item.isMagical || item.isAlchemical)
-                );
-
-                for (const item of items ?? []) {
-                    await actor?.items?.get(item.id)?.update({
-                        "system.identification.status": "unidentified",
-                        "system.identification.unidentified": item.getMystifiedData("unidentified"),
-                    });
-                }
+                await mystifyNpcItems(token.actor.items);
             }
         });
     }
