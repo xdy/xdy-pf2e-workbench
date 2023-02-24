@@ -1,3 +1,10 @@
+# [4.47.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.46.0...v4.47.0) (2023-02-24)
+
+
+### Features
+
+* A table of random adjectives for use with the NPC Mystification feature is now included. Enter "Workbench Adjectives" - without quotes - in any of the postfix/prefix settings to use it, you do not need to import the table into your world. ([3ddf19a](https://github.com/xdy/xdy-pf2e-workbench/commit/3ddf19a78f69f01caa90ed454e61ebdf7970c9f4))
+
 # [4.46.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.45.0...v4.46.0) (2023-02-23)
 
 
