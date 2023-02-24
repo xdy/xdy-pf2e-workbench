@@ -472,7 +472,10 @@
       },
       "npcMystifyAllPhysicalMagicalItems": {
         "name": "Mystifier les objets alchimiques ou magiques sur les PNJ, si le réglage 'PNJ en butin' est activé dans le système PF2.",
-        "hint": "Mystifier automatiquement tous les objets physiques non temporaires qui sont alchimiques ou magiques lorsqu'un PNJ est ajouté à une scène, si le réglage du système PF2 \"PNJ en butin\" est activé."
+        "hint": "Mystifier automatiquement tous les objets physiques non temporaires qui sont alchimiques ou magiques en fonction de ce qui est choisi lorsqu'on place le PNJ, si le réglage du système PF2 \"PNJ en butin\" est activé.",
+        "onScene": "Mystifier les objets lorsque les PNJ sont ajoutés à la scène",
+        "no": "Pas de mystification d'objet",
+        "onZeroHp": "Mystifier les objets lorsque les PNJ sont à 0 pv"
       },
       "tokenAnimation": {
         "name": "Activer la modification de l'animation du mouvement des jetons.",
