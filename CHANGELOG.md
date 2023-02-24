@@ -1,3 +1,10 @@
+## [4.47.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.47.0...v4.47.1) (2023-02-24)
+
+
+### Bug Fixes
+
+* "Workbench Adjectives" should work now. Entering the right path to the compendium helped. :) ([0545135](https://github.com/xdy/xdy-pf2e-workbench/commit/054513504c2ec08ab0e48637d93e08ad3f794fe7))
+
 # [4.47.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.46.0...v4.47.0) (2023-02-24)
 
 
