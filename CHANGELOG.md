@@ -1,3 +1,10 @@
+# [4.48.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.47.1...v4.48.0) (2023-02-26)
+
+
+### Features
+
+* Adds basic support for Natural Medicine and Chirurgeon to the Skill Actions feature. ([defdab3](https://github.com/xdy/xdy-pf2e-workbench/commit/defdab3adff66075bc7b3b1c258413e8151ab803)), closes [#665](https://github.com/xdy/xdy-pf2e-workbench/issues/665)
+
 ## [4.47.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.47.0...v4.47.1) (2023-02-24)
 
 
