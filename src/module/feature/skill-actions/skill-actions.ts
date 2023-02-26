@@ -237,7 +237,8 @@ export class SkillAction {
         const assurances = this.actor.items.filter((x: any) => x.slug === "assurance");
         for (const skill of this.getSkills(data.proficiencyKey)) {
             if (
-                skill.rank >= (data.requiredRank ?? 0) ||
+                (skill.rank >= (data.requiredRank ?? 0) && !data.requiredItem) ||
+                (skill.rank >= (data.requiredRank ?? 0) && this.actorHasItem(data.requiredItem)) ||
                 ((data.requiredRank ?? 0) === 1 && this.actorHasItem("clever-improviser"))
             ) {
                 this.variants.addBasicVariant(skill, data.extra, data.label);

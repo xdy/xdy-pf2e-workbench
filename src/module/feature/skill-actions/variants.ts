@@ -1,5 +1,6 @@
 import { CharacterSkill } from "@actor/character/types";
 import { ModifierPF2e } from "./pf2e";
+import { MODULENAME } from "../../xdy-pf2e-workbench";
 
 export class VariantsCollection extends Array<Variant> {
     addBasicVariant(skill: CharacterSkill, extra: Record<string, unknown> | undefined, label: string | undefined) {
@@ -21,8 +22,8 @@ export class VariantsCollection extends Array<Variant> {
     addAssuranceVariant(skill: CharacterSkill, extra: Record<string, unknown> | undefined) {
         const proficiency = skill.modifiers.find((m) => m.type === "proficiency");
         const assuranceTotal = 10 + (proficiency?.modifier || 0);
-        // Assurance has no i18n translation in system
-        this.push(new Variant("Assurance : " + assuranceTotal, skill, extra, [], assuranceTotal));
+        const assuranceLabel = game.i18n.localize(`${MODULENAME}.skillActions.assuranceLabel`);
+        this.push(new Variant(assuranceLabel + " : " + assuranceTotal, skill, extra, [], assuranceTotal));
     }
 
     matchFilter(filter: string) {

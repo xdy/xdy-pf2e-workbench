@@ -9,6 +9,7 @@ export interface VariantData {
     proficiencyKey: string;
     extra?: Record<string, unknown>;
     requiredRank?: Rank;
+    requiredItem?: string;
 }
 
 export interface SkillActionData {
@@ -53,6 +54,18 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
                 label: "xdy-pf2e-workbench.skillActions.Settings.variants.administerFirstAid.stopBleeding",
                 proficiencyKey: "medicine",
             },
+            {
+                extra: { variant: "stabilize" },
+                label: "xdy-pf2e-workbench.skillActions.Settings.variants.administerFirstAid.stabilizeChirurgeon",
+                proficiencyKey: "crafting",
+                requiredItem: "chirurgeon",
+            },
+            {
+                extra: { variant: "stopBleeding" },
+                label: "xdy-pf2e-workbench.skillActions.Settings.variants.administerFirstAid.stopBleedingChirurgeon",
+                proficiencyKey: "crafting",
+                requiredItem: "chirurgeon",
+            },
         ],
     },
     {
@@ -64,7 +77,10 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
     {
         actionSlug: "battle-medicine",
         compendiumId: "wYerMk6F1RZb0Fwt",
-        variants: [{ proficiencyKey: "medicine", requiredRank: 1 }],
+        variants: [
+            { proficiencyKey: "medicine", requiredRank: 1 },
+            { proficiencyKey: "crafting", requiredRank: 1, requiredItem: "chirurgeon" },
+        ],
     },
     {
         actionSlug: "battle-prayer",
@@ -87,7 +103,10 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         actionSlug: "chromotherapy",
         actionType: "D",
         compendiumId: "RlFZ648UR0Q0YECL",
-        variants: [{ proficiencyKey: "medicine", requiredRank: 2 }],
+        variants: [
+            { proficiencyKey: "medicine", requiredRank: 2 },
+            { proficiencyKey: "crafting", requiredRank: 2, requiredItem: "chirurgeon" },
+        ],
     },
     {
         actionSlug: "climb",
@@ -535,24 +554,34 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         actionSlug: "treat-condition",
         actionType: "D",
         compendiumId: "rfnEcjxIFqwlJwJT",
-        variants: [{ proficiencyKey: "medicine" }],
+        variants: [{ proficiencyKey: "medicine" }, { proficiencyKey: "crafting", requiredItem: "chirurgeon" }],
     },
     {
         actionSlug: "treat-disease",
         actionType: "",
         compendiumId: "TC7OcDa7JlWbqMaN",
-        variants: [{ proficiencyKey: "medicine", requiredRank: 1 }],
+        variants: [
+            { proficiencyKey: "medicine", requiredRank: 1 },
+            { proficiencyKey: "crafting", requiredRank: 1, requiredItem: "chirurgeon" },
+        ],
     },
     {
         actionSlug: "treat-poison",
         compendiumId: "KjoCEEmPGTeFE4hh",
-        variants: [{ proficiencyKey: "medicine", requiredRank: 1 }],
+        variants: [
+            { proficiencyKey: "medicine", requiredRank: 1 },
+            { proficiencyKey: "crafting", requiredRank: 1, requiredItem: "chirurgeon" },
+        ],
     },
     {
         actionSlug: "treat-wounds",
         actionType: "",
         compendiumId: "1kGNdIIhuglAjIp9",
-        variants: [{ proficiencyKey: "medicine", requiredRank: 1 }],
+        variants: [
+            { proficiencyKey: "medicine", requiredRank: 1 },
+            { proficiencyKey: "nature", requiredRank: 1, requiredItem: "natural-medicine" },
+            { proficiencyKey: "crafting", requiredRank: 1, requiredItem: "chirurgeon" },
+        ],
     },
     {
         actionSlug: "trick-magic-item",

@@ -48,7 +48,9 @@
         "variants": {
           "administerFirstAid": {
             "stabilize": "Stabilize",
-            "stopBleeding": "Stop Bleeding"
+            "stopBleeding": "Stop Bleeding",
+            "stabilizeChirurgeon": "Stabilize (Chirurgeon)",
+            "stopBleedingChirurgeon": "Stop Bleeding (Chirurgeon)"
           },
           "createADiversion": {
             "distractingWords": "Distracting Words",
