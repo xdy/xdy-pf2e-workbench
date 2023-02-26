@@ -63,7 +63,9 @@
           },
           "administerFirstAid": {
             "stabilize": "Stabiliser",
-            "stopBleeding": "Arrêter le saignement"
+            "stopBleeding": "Arrêter le saignement",
+            "stopBleedingChirurgeon": "Arrêter le saignement (Chirurgien)",
+            "stabilizeChirurgeon": "Stabiliser (Chirurgien)"
           }
         }
       },
