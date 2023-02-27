@@ -509,10 +509,9 @@ Hooks.once("setup", async () => {
 
     if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
         // Set css variables for the module
-        document.documentElement.style.setProperty(
-            "--xdy-pf2e-workbench-pause",
-            "url(../../../" + <string>game.settings.get(MODULENAME, "customPauseImage") + ")"
-        );
+        const path = <string>game.settings.get(MODULENAME, "customPauseImage");
+        const prefix = path.startsWith("http") ? "" : "../../../";
+        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause", "url(" + prefix + path + ")");
     }
 
     document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-bottom", "10%");
