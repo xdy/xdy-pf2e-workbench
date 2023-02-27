@@ -29,7 +29,8 @@ profile followed by a brief and incomplete description of what this person has c
 * sad - Contributed the Chinese (Traditional) translation.
 * alanlaredo - Contributed the Spanish translation.
 * sakusenerio - Added to the Chinese (Simplified) translation.
-* [Oskar]() - Contributed the Polish translation.
+* [Oskar]() - Contributed to the Polish translation, and contributed the icon for the Basic Action Macro.
+* [popy]() - Contributed to the Polish translation, and contributed the icon for the Basic Action Macro.
 
 I've probably forgotten someone, if so, please tell me!
 

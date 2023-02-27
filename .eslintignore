@@ -3,7 +3,7 @@
 .vs/
 *.iml
 /.vscode
-icons/\!dox/
+static/assets/icons/\!dox/
 /node_modules/
 .DS_Store
 **.env
