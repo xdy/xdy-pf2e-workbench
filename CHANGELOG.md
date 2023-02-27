@@ -1,3 +1,10 @@
+## [4.48.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.48.0...v4.48.1) (2023-02-27)
+
+
+### Bug Fixes
+
+* Handle pause image that is an url instead of a local file. ([77e2f94](https://github.com/xdy/xdy-pf2e-workbench/commit/77e2f9466d46001971eab2ce57f35fad65069a8d)), closes [#670](https://github.com/xdy/xdy-pf2e-workbench/issues/670)
+
 # [4.48.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.47.1...v4.48.0) (2023-02-26)
 
 
