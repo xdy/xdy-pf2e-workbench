@@ -1,3 +1,10 @@
+# [4.49.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.48.1...v4.49.0) (2023-02-27)
+
+
+### Features
+
+* Sweet new icon for Basic Action Macros, courtesy of @Oskar and [@popy](https://github.com/popy). (You'll have to delete the macro from your world and reimport it to get the new icon.) ([7850e6d](https://github.com/xdy/xdy-pf2e-workbench/commit/7850e6dedb085158c088de2070f431842b948d2e))
+
 ## [4.48.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.48.0...v4.48.1) (2023-02-27)
 
 
