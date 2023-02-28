@@ -276,17 +276,19 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
     }
 }
 
-export function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
+export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
     const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
     if (isFirstGM() && physicalTypes.includes(item.type) && item.actor) {
+        // Sleep 0.25s to handle race condition
+        await new Promise((resolve) => setTimeout(resolve, 250));
         if (item.actor.inventory.bulk.isEncumbered) {
             if (!item.actor.hasCondition("encumbered")) {
-                item.actor.increaseCondition("encumbered").then();
+                await item.actor.toggleCondition("encumbered");
             }
         } else {
             const encumbered = item.actor.getCondition("encumbered");
             if (encumbered && !encumbered.isLocked) {
-                item.actor.decreaseCondition("encumbered", { forceRemove: true }).then();
+                await item.actor.toggleCondition("encumbered");
             }
         }
     }
