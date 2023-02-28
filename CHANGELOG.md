@@ -1,3 +1,10 @@
+## [4.49.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.0...v4.49.1) (2023-02-28)
+
+
+### Bug Fixes
+
+* Fixes possible race condition when adding encumbered due to excess weight. ([8e435a8](https://github.com/xdy/xdy-pf2e-workbench/commit/8e435a8b147ffb80df9719b07e3026bd94d9f0b1))
+
 # [4.49.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.48.1...v4.49.0) (2023-02-27)
 
 
