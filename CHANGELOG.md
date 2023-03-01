@@ -1,3 +1,10 @@
+## [4.49.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.1...v4.49.2) (2023-03-01)
+
+
+### Bug Fixes
+
+* Fixes Skill Actions for languages other than English. ([81416bc](https://github.com/xdy/xdy-pf2e-workbench/commit/81416bc96e18b00f0a9a3e2a1442cd24fb369739)), closes [#671](https://github.com/xdy/xdy-pf2e-workbench/issues/671)
+
 ## [4.49.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.0...v4.49.1) (2023-02-28)
 
 
