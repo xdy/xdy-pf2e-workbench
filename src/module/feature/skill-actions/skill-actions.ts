@@ -125,7 +125,7 @@ export class SkillAction {
                         modifiers: variant.modifiers,
                         actors: [this.actor],
                         ...variant.extra,
-                        skill: variant.skill.label.toLocaleLowerCase(),
+                        skill: variant.skill.slug,
                     });
                 } else {
                     // Ugly earnIncome fix.
