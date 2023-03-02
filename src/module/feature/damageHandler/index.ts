@@ -76,13 +76,12 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const rollForNonAttackSpell =
                 origin !== null &&
                 autoRollDamageForSpellNotAnAttack &&
-                rollType === undefined &&
+                !origin?.traits.has("attack") &&
                 flags.casting !== null &&
                 (Number.isInteger(+(<SpellPF2e>message.item)?.system?.time?.value) ?? true) &&
-                Object.keys((<SpellPF2e>origin).system.damage?.value)?.length !== 0 &&
-                !origin?.traits.has("attack");
+                Object.keys((<SpellPF2e>origin).system.damage?.value)?.length !== 0;
             const rollForAttackSpell =
-                rollType === "spell-attack-roll" &&
+                origin?.traits.has("attack") &&
                 autoRollDamageForSpellAttack &&
                 (Number.isInteger(+(<SpellPF2e>message.item)?.system?.time?.value) ?? true);
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
@@ -95,12 +94,13 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     // flags.casting?.level isn't always set, unfortunately
                     let levelFromChatCard = flags.casting?.level ?? false;
                     // Try getting from chat as a fallback
+                    let spellMessage: any;
                     if (!levelFromChatCard) {
                         const chatLength = game.messages?.contents.length ?? 0;
                         for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
-                            const msg = game.messages?.contents[chatLength - i];
-                            if (msg && (<ActorFlagsPF2e>msg.flags.pf2e).origin?.uuid === originUuid) {
-                                const level = msg.content.match(/data-cast-level="(\d+)"/);
+                            spellMessage = game.messages?.contents[chatLength - i];
+                            if (spellMessage && (<ActorFlagsPF2e>spellMessage.flags.pf2e).origin?.uuid === originUuid) {
+                                const level = spellMessage.content.match(/data-cast-level="(\d+)"/);
                                 if (level && level[1]) {
                                     levelFromChatCard = true;
                                     // @ts-ignore Wtf? How to make a number into a OneToTen?
@@ -120,35 +120,30 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             })
                         );
                     }
-                    // Hack to make automatic damageRoll be private if the spell is private. Ain't globals fun?
+                    // Make automatic damageRoll be private if the spell is private.
                     let originalRollMode: any;
-                    try {
-                        originalRollMode = game.settings.get("core", "rollMode");
-                        if (
-                            message.type === CONST.CHAT_MESSAGE_TYPES.WHISPER &&
-                            originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE
-                        ) {
-                            game.settings.set("core", "rollMode", CONST.DICE_ROLL_MODES.PRIVATE);
-                        }
-                        const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
-                        if (rollDamage) {
-                            // Until spell level flags are added to attack rolls it is the best I could come up with.
-                            // fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
-                            // @ts-ignore
-                            origin?.rollDamage({
-                                currentTarget: {
-                                    closest: () => {
-                                        return { dataset: { castLevel: castLevel } };
-                                    },
+                    const blind =
+                        (message.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
+                            message.blind ||
+                            (message.whisper && message.whisper.length > 0) ||
+                            spellMessage.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
+                            spellMessage.blind ||
+                            (spellMessage.whisper && spellMessage.whisper.length > 0)) &&
+                        originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE;
+                    const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
+                    if (rollDamage) {
+                        // Until spell level flags are added to attack rolls it is the best I could come up with.
+                        // fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
+                        // @ts-ignore
+                        origin?.rollDamage({
+                            currentTarget: {
+                                closest: () => {
+                                    return { dataset: { castLevel: castLevel } };
                                 },
-                                spellLevel: castLevel,
-                            });
-                        }
-                    } finally {
-                        // Make sure to restore original roll mode
-                        if (originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) {
-                            game.settings.set("core", "rollMode", originalRollMode);
-                        }
+                            },
+                            spellLevel: castLevel,
+                            ctrlKey: blind,
+                        });
                     }
                 } else if (rollForStrike) {
                     const rollOptions = actor?.getRollOptions(["all", "damage-roll"]);
