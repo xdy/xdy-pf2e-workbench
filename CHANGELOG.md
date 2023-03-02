@@ -1,3 +1,10 @@
+## [4.49.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.3...v4.49.4) (2023-03-02)
+
+
+### Bug Fixes
+
+* If a spell is cast privately and damage would be automatically rolled, make the damage roll blind so as not to reveal the name of the privately cast spell. ([cc157f5](https://github.com/xdy/xdy-pf2e-workbench/commit/cc157f5f1dc0b295352b6fbd21279a198d310561))
+
 ## [4.49.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.2...v4.49.3) (2023-03-02)
 
 
