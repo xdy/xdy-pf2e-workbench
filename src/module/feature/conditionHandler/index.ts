@@ -188,75 +188,77 @@ function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
 }
 
 export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
-    const actor = <ActorPF2e>item.parent;
-    const items: any = actor.items;
-    let bounceBack: any = false,
-        bounceBackUsed: any = false,
-        numbToDeath: any = false,
-        numbToDeathUsed: any = false;
-    if (items) {
-        bounceBack = items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
-        bounceBackUsed = items.find((effect) => effect.slug === "bounce-back-used") ?? false;
+    const actor = item.parent;
+    if (actor) {
+        const items: any = actor.items;
+        let bounceBack: any = false,
+            bounceBackUsed: any = false,
+            numbToDeath: any = false,
+            numbToDeathUsed: any = false;
+        if (items) {
+            bounceBack = items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
+            bounceBackUsed = items.find((effect) => effect.slug === "bounce-back-used") ?? false;
 
-        numbToDeath = items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
-        numbToDeathUsed = items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
-    }
-    const name = `${actor.token?.name ?? actor.name}`;
+            numbToDeath = items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
+            numbToDeathUsed = items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
+        }
+        const name = `${actor.token?.name ?? actor.name}`;
 
-    if (item.slug === "dying" && isFirstGM()) {
-        if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
-            const effect: any = {
-                type: "effect",
-                name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
-                img: "icons/magic/death/hand-dirt-undead-zombie.webp",
-                data: {
-                    slug: "numb-to-death-used",
-                    tokenIcon: {
-                        show: false,
+        if (item.slug === "dying" && isFirstGM()) {
+            if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
+                const effect: any = {
+                    type: "effect",
+                    name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
+                    img: "icons/magic/death/hand-dirt-undead-zombie.webp",
+                    data: {
+                        slug: "numb-to-death-used",
+                        tokenIcon: {
+                            show: false,
+                        },
+                        duration: {
+                            value: 24,
+                            unit: "hours",
+                            sustained: false,
+                            expiry: "turn-start",
+                        },
                     },
-                    duration: {
-                        value: 24,
-                        unit: "hours",
-                        sustained: false,
-                        expiry: "turn-start",
-                    },
-                },
-            };
+                };
 
-            ChatMessage.create({
-                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
-                    name: name,
-                }),
-                speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
-                whisper:
-                    game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
-                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                        : [],
-            }).then();
+                ChatMessage.create({
+                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
+                        name: name,
+                    }),
+                    speaker: ChatMessage.getSpeaker({ actor: actor }),
+                    whisper:
+                        game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
+                            ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                            : [],
+                }).then();
 
-            await actor.createEmbeddedDocuments("Item", [effect]);
-        } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
-            const effect: any = {
-                type: "effect",
-                name: game.i18n.localize(`${MODULENAME}.effects.bounceBackUsed`),
-                img: "icons/magic/life/ankh-gold-blue.webp",
-                data: {
-                    slug: "bounce-back-used",
-                    tokenIcon: {
-                        show: false,
+                await actor.createEmbeddedDocuments("Item", [effect]);
+            } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
+                const effect: any = {
+                    type: "effect",
+                    name: game.i18n.localize(`${MODULENAME}.effects.bounceBackUsed`),
+                    img: "icons/magic/life/ankh-gold-blue.webp",
+                    data: {
+                        slug: "bounce-back-used",
+                        tokenIcon: {
+                            show: false,
+                        },
+                        duration: {
+                            value: 24,
+                            unit: "hours",
+                            sustained: false,
+                            expiry: "turn-start",
+                        },
                     },
-                    duration: {
-                        value: 24,
-                        unit: "hours",
-                        sustained: false,
-                        expiry: "turn-start",
-                    },
-                },
-            };
+                };
 
-            await actor.createEmbeddedDocuments("Item", [effect]);
-        } else {
-            await item.parent?.increaseCondition("wounded");
+                await actor.createEmbeddedDocuments("Item", [effect]);
+            } else {
+                await item.parent?.increaseCondition("wounded");
+            }
         }
     }
 }
