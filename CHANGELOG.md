@@ -1,3 +1,10 @@
+## [4.49.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.2...v4.49.3) (2023-03-02)
+
+
+### Bug Fixes
+
+* Fixes error when deleting items from sidebar. ([4e04f3e](https://github.com/xdy/xdy-pf2e-workbench/commit/4e04f3ec7c4016bdd2f9872dcd60c306c9a7c466)), closes [#676](https://github.com/xdy/xdy-pf2e-workbench/issues/676)
+
 ## [4.49.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.1...v4.49.2) (2023-03-01)
 
 
