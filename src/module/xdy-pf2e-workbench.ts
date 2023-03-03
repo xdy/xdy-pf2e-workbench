@@ -22,7 +22,6 @@ import { moveOnZeroHP, moveSelectedAheadOfCurrent } from "./feature/initiativeHa
 import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
-import { toggleMenuSettings } from "./feature/settingsHandler";
 import {
     addGmRKButtonToNpc,
     castPrivateSpell,
@@ -54,7 +53,6 @@ import {
 import { setupNPCScaler } from "./feature/cr-scaler/NPCScalerSetup";
 import { setupCreatureBuilder } from "./feature/creature-builder/CreatureBuilder";
 import { setupNpcRoller } from "./feature/npc-roller/NpcRoller";
-import { SettingsMenuPF2eWorkbench } from "./settings/menu";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { UserPF2e } from "@module/user";
 import {
@@ -94,9 +92,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     registerHandlebarsHelpers();
 
     // Hooks that always run
-    Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
-        toggleMenuSettings(html, _settings);
-    });
+    // Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
+    //     toggleMenuSettings(html, _settings);
+    // });
 
     // Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
     //     toggleSettings(html);
