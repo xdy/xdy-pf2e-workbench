@@ -3,6 +3,7 @@ import { isFirstGM, shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
 import { ItemPF2e, WeaponPF2e } from "@item";
+import { ActorSystemData } from "@actor/data/base";
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
     if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThis(combatant.actor))) {
@@ -269,7 +270,7 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
         isFirstGM() &&
         item.slug === "dying" &&
         game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP") &&
-        actor.system.attributes?.hp?.value === 0 &&
+        (<ActorSystemData>actor.system).attributes?.hp?.value === 0 &&
         !actor.hasCondition("unconscious")
     ) {
         if (!actor.hasCondition("unconscious")) {
@@ -298,7 +299,7 @@ export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
 
 export function applyClumsyIfWieldingLargerWeapon(item: ItemPF2e, _update: DocumentUpdateData) {
     if (isFirstGM() && ["weapon"].includes(item.type) && item.actor) {
-        const actorSize = item.actor.system.traits.size;
+        const actorSize = (<ActorSystemData>item.actor.system).traits.size;
         const weaponSize = (<WeaponPF2e>item).system.size;
         if (actorSize.isSmallerThan(weaponSize, { smallIsMedium: true })) {
             const heldInHands = ((<WeaponPF2e>_update).system.equipped.handsHeld ?? 0) > 0;

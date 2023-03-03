@@ -5,6 +5,7 @@
 
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { CharacterSystemData } from "@actor/character/data";
+import { ActorSystemData } from "@actor/data/base";
 
 export enum HPHState {
     Start,
@@ -157,9 +158,9 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
             .filter((x) => x.isOfType("character"))
             .filter((x) => x.alliance === "party")
             ?.filter((actor) => {
-                return !actor.system.traits["value"].toString().includes("minion");
+                return !(<ActorSystemData>actor.system).traits["value"].toString().includes("minion");
             })
-            ?.filter((actor) => !actor.system.traits["value"].toString().includes("eidolon"))
+            ?.filter((actor) => !(<ActorSystemData>actor.system).traits["value"].toString().includes("eidolon"))
             .filter((x) =>
                 (
                     game?.users
@@ -296,8 +297,8 @@ function heroes() {
         game?.actors
             ?.filter((actor) => actor.hasPlayerOwner)
             .filter((actor) => actor.isOfType("character"))
-            .filter((actor) => !actor.system.traits["value"].toString().includes("minion"))
-            .filter((actor) => !actor.system.traits["value"].toString().includes("eidolon")) || []
+            .filter((actor) => !(<ActorSystemData>actor.system).traits["value"].toString().includes("minion"))
+            .filter((actor) => !(<ActorSystemData>actor.system).traits["value"].toString().includes("eidolon")) || []
     );
 }
 

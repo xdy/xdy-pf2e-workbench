@@ -172,7 +172,7 @@
                 },
                 "Warning": {
                     "TargetNotDying": "Targeted creature is not dying.",
-                    "UnknownVariant": "Unknown variant '{variant}' used for Administer First Aid, use either stabilize or stopBleeding."
+                    "UnknownVariant": "Unknown variant {variant} used for Administer First Aid, use one of {variants}."
                 }
             },
             "ArcaneSlam": {
@@ -292,7 +292,10 @@
                     "success": "<strong>Success</strong> You become @UUID[Compendium.pf2e.conditionitems.iU0fEDdBp3rXpTMC]{Hidden} to each creature whose Perception DC is less than or equal to your result. (The hidden condition allows you to @UUID[Compendium.pf2e.actionspf2e.VMozDqMMuK5kpoX4]{Sneak} away.) This lasts until the end of your turn or until you do anything except Step or use the @UUID[Compendium.pf2e.actionspf2e.XMcnh4cSI32tljXa]{Hide} or the @UUID[Compendium.pf2e.actionspf2e.VMozDqMMuK5kpoX4]{Sneak} action of the Stealth skill. If you Strike a creature, the creature remains @UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{Flat-Footed} against that attack, and you then become @UUID[Compendium.pf2e.conditionitems.1wQY3JYyhMYeeV2G]{Observed}. If you do anything else, you become @UUID[Compendium.pf2e.conditionitems.1wQY3JYyhMYeeV2G]{Observed} just before you act unless the GM determines otherwise.",
                     "failure": "<strong>Failure</strong> You don't divert the attention of any creatures whose Perception DC exceeds your result, and those creatures are aware you were trying to trick them."
                 },
-                "Trick": "Create a Diversion - Trick"
+                "Trick": "Create a Diversion - Trick",
+                "Warning": {
+                    "UnknownVariant": "Unknown variant {variant} used for Create a Diversion, use one of {variants}."
+                }
             },
             "CreateForgery": {
                 "ForgedDocument": {
@@ -366,6 +369,14 @@
                 "Recovery": "Stamina Recovery",
                 "Damage": "Damage",
                 "Cancel": "Cancel"
+            },
+            "Escape": {
+                "Notes": {
+                    "criticalSuccess": "<strong>Critical Success</strong> You get free and remove the grabbed, immobilized, and restrained conditions imposed by your chosen target. You can then Stride up to 5 feet.",
+                    "success": "<strong>Success</strong> You get free and remove the grabbed, immobilized, and restrained conditions imposed by your chosen target.",
+                    "criticalFailure": "<strong>Critical Failure</strong> You don't get free, and you can't attempt to Escape again until your next turn."
+                },
+                "Title": "Escape"
             },
             "Feint": {
                 "Notes": {
@@ -775,11 +786,12 @@
             "society": "Society Check",
             "stealth": "Stealth Check",
             "survival": "Survival Check",
-            "thievery": "Thievery Check"
+            "thievery": "Thievery Check",
+            "unarmed": "Unarmed Attack Roll"
         },
         "ActionsWarning": {
-            "DeceptionUnknownVariant": "Unknown variant '{variant}' used for Deception, use either distracting words, gesture, or trick.",
-            "NoActor": "Select at least one token before rolling, or assign a default character."
+            "NoActor": "Select at least one token before rolling, or assign a default character.",
+            "NoStatistic": "Actor {name} ({id}) does not have a statistic for {statistic}."
         },
         "ActionsActionsHeader": "Actions",
         "ActionsFreeActionsHeader": "Free Actions",
@@ -3515,8 +3527,8 @@
         "SpellComponentShortV": "V",
         "SpellComponentsLabel": "Components",
         "SpellSlotEmpty": "Empty Slot (drag spell here)",
-        "SpellSlotNotEnoughError": "Cannot cast {name} at the {level}, not enough spell slots",
-        "SpellSlotExpendedError": "Cannot cast {name}, spell is already expended",
+        "SpellSlotNotEnoughError": "Cannot cast {name} at the {level}: not enough spell slots",
+        "SpellSlotExpendedError": "Cannot cast {name}: spell is already expended",
         "SpellPrimaryCheckLabel": "Primary Check",
         "SpellSecondaryChecksLabel": "Secondary Checks",
         "SpellSecondaryCasters": "Secondary Casters",
@@ -3709,6 +3721,7 @@
         "TraitAffixedToFirearm": "Affixed to Firearm",
         "TraitAffixedToFirearmWithAReloadOf1": "Affixed to a Firearm With a Reload of 1",
         "TraitAffixedToFirearmWithTheKickbackTrait": "Affixed to a Firearm With the Kickback Trait",
+        "TraitAffixedToGroundIn10FtRadius": "Affixed to the Ground in Four Spaces Along a Circle with a 10-foot Radius",
         "TraitAffixedToGroundIn20FtRadius": "Affixed to the Ground in Four Spaces Along a Circle with a 20-foot Radius",
         "TraitAffixedToHarness": "Affixed to Harness",
         "TraitAffixedToHeadgear": "Affixed to Headgear",
@@ -3881,6 +3894,7 @@
         "TraitDescriptionAndroid": "A synthetic humanoid ancestry created by artificial means. Most common in Numeria.",
         "TraitDescriptionAphorite": "A type of planar scion descended from a being from Axis, the Plane of Law.",
         "TraitDescriptionArcane": "This magic comes from the arcane tradition, which is built on logic and rationality. Anything with this trait is magical.",
+        "TraitDescriptionArtifact": "Items with this trait are artifacts. These magic items can't be crafted by normal means, and they can't be damaged by normal means. Artifacts are always rare or unique.",
         "TraitDescriptionAquadynamic": "This armor is designed for use underwater, with streamlined design and buoyant materials used in strategic places. You don't apply the armor's check penalty to Acrobatics or Athletics checks in water or similar liquids.",
         "TraitDescriptionArchetype": "This feat belongs to an archetype.",
         "TraitDescriptionAttached": "An attached weapon must be combined with another piece of gear to be used. The trait lists what type of item the weapon must be attached to. You must be wielding or wearing the item the weapon is attached to in order to attack with it. For example, shield spikes are attached to a shield, allowing you to attack with the spikes instead of a shield bash, but only if you're wielding the shield. An attached weapon is usually bolted onto or built into the item it's attached to, and typically an item can have only one weapon attached to it. An attached weapon can be affixed to an item with 10 minutes of work and a successful @Check[type:crafting|dc:10] check; this includes the time needed to remove the weapon from a previous item, if necessary. If an item is destroyed, its attached weapon can usually be salvaged.",
@@ -3904,7 +3918,7 @@
         "TraitDescriptionCatfolk": "A creature with this trait is a member of the catfolk ancestry.",
         "TraitDescriptionChampion": "This indicates abilities from the champion class.",
         "TraitDescriptionChangeling": "A creature with this trait is a member of the changeling ancestry.",
-        "TraitDescriptionChaotic": "Chaotic effects often manipulate energy from chaos-aligned Outer Planes and are anathema to lawful divine servants or divine servants of lawful deities. A creature with this trait is chaotic in alignment. An ability with this trait can be selected or used only by chaotic creatures.",
+        "TraitDescriptionChaotic": "Chaotic effects often manipulate energy from chaos-aligned Outer Planes and are anathema to lawful divine servants or divine servants of lawful deities. A creature with this trait is chaotic in alignment.",
         "TraitDescriptionClass": "Archetypes with the class trait fundamentally diverge from your class's specialties but still fit within the theme of your class. You can select a class archetype only if your class meets the criteria listed in the archetype's prerequisites. Class archetypes always alter or replace some of a class's static class features in addition to any new feats they offer. It might be possible to take a class archetype at 1st level if it alters or replaces some of the class's initial class features. The 1st-level ability is presented much like a class feature and includes the class archetype's prerequisites and rules on how it changes your class. If you select this ability, you must take that archetype's dedication feat at 2nd level, and you proceed normally afterward. You can never have more than one class archetype.",
         "TraitDescriptionCleric": "This indicates abilities from the cleric class.",
         "TraitDescriptionClockwork": "Clockworks are intricate, complex constructs that can be programmed to perform specific functions.",
@@ -3960,7 +3974,7 @@
         "TraitDescriptionEntrench": "You can position yourself in the armor or reposition its articulated pieces to better protect against some attacks. If you're trained in this armor, while wearing it you can spend a single action to gain a +1 circumstance bonus to AC against a certain type of attack until the start of your next turn. The entrench trait lists the type of attack this bonus applies against, typically entrench melee or entrench ranged.",
         "TraitDescriptionEnvironment": "A hazard with this trait is something dangerous that's part of the natural world, such as quicksand or harmful mold.",
         "TraitDescriptionEsoterica": "The esoterica trait is present in many thaumaturge feats and class features that incorporate the various talismans, supernatural trinkets, and other objects you carry with you. Abilities that have the esoterica trait require you to be in possession of your esoterica to use them. Normally, you're assumed to always have your esoterica with you, but in some rare circumstances, you might either not have them on hand or have your gear stripped from you.",
-        "TraitDescriptionEvil": "Evil effects often manipulate energy from evil-aligned Outer Planes and are antithetical to good divine servants or divine servants of good deities. A creature with this trait is evil in alignment. An ability with this trait can be selected or used only by evil creatures.",
+        "TraitDescriptionEvil": "Evil effects often manipulate energy from evil-aligned Outer Planes and are antithetical to good divine servants or divine servants of good deities. A creature with this trait is evil in alignment.",
         "TraitDescriptionEvocation": "Effects and magic items with this trait are associated with the evocation school of magic, typically involving energy and elemental forces.",
         "TraitDescriptionExpandable": "An item with the expandable trait increases to a specific size when activated. Unless otherwise noted, this space must be adjacent to you and on the ground, and the item needs to have enough open space to expand into or else the activation has no effect. When the effect ends, the expanded item disintegrates if it's a consumable or shrinks back to its normal size if it's not a consumable.",
         "TraitDescriptionExploration": "An activity with this trait takes more than a turn to use, and can usually be used only during exploration mode.",
@@ -3994,7 +4008,7 @@
         "TraitDescriptionGnome": "A creature with this trait is a member of the gnome ancestry. Gnomes are small people skilled at magic who seek out new experiences and usually have low-light vision. An ability with this trait can be used or selected only by gnomes. A weapon with this trait is created and used by gnomes.",
         "TraitDescriptionGoblin": "A creature with this trait can come from multiple tribes of creatures, including goblins, hobgoblins, and bugbears. Goblins tend to have darkvision. An ability with this trait can be used or chosen only by goblins. A weapon with this trait is created and used by goblins.",
         "TraitDescriptionGoloma": "Insular humanoids that bear countless eyes.",
-        "TraitDescriptionGood": "Good effects often manipulate energy from good-aligned Outer Planes and are antithetical to evil divine servants or divine servants of evil deities. A creature with this trait is good in alignment. An ability with this trait can be selected or used only by good creatures.",
+        "TraitDescriptionGood": "Good effects often manipulate energy from good-aligned Outer Planes and are antithetical to evil divine servants or divine servants of evil deities. A creature with this trait is good in alignment.",
         "TraitDescriptionGrapple": "You can use this weapon to Grapple with the Athletics skill even if you don't have a free hand. This uses the weapon's reach (if different from your own) and adds the weapon's item bonus to attack rolls as an item bonus to the Athletics check. If you critically fail a check to Grapple using the weapon, you can drop the weapon to take the effects of a failure instead of a critical failure.",
         "TraitDescriptionGrimoire": "Spellbooks are useful tools for any magic user to write down incantations and runes of power, but where most spellbooks are nothing more than ink on parchment, grimoires have absorbed the magic of the spells within—magic that knowledgeable spellcasters can use to augment their spells.",
         "TraitDescriptionGrippli": "Gripplis are a family of frog-like humanoids",
@@ -4035,7 +4049,7 @@
         "TraitDescriptionKitsune": "Shapeshifting humanoids whose true forms resemble foxes.",
         "TraitDescriptionLaminar": "The armor is made up of layered sections, so when it breaks, it isn't as much of a problem. The status penalty to AC if this armor is broken is –1 for broken medium armor, –2 for broken heavy armor, or no penalty for broken light armor.",
         "TraitDescriptionLaunching": "A mechanism within this shield can shoot projectiles, causing the shield to also function as a ranged weapon. The trait lists the type of weapon, such as \"launching dart.\" Striking with the launcher requires the same number of hands as normal, except that the hand holding the shield counts toward this total, so a one-handed ranged weapon would require only one hand. Reloading takes the normal number of Interact actions, to a minimum of 1 action, and you can't use the hand holding your shield to reload.",
-        "TraitDescriptionLawful": "Lawful effects often manipulate energy from law-aligned Outer Planes and are antithetical to chaotic divine servants or divine servants of chaotic deities. A creature with this trait is lawful in alignment. An ability with this trait can be selected or used by lawful creatures only.",
+        "TraitDescriptionLawful": "Lawful effects often manipulate energy from law-aligned Outer Planes and are antithetical to chaotic divine servants or divine servants of chaotic deities. A creature with this trait is lawful in alignment.",
         "TraitDescriptionLeshy": "A creature with this trait is a member of the leshy ancestry.",
         "TraitDescriptionLight": "Light effects overcome non-magical darkness in the area, and can counteract magical darkness. You must usually target darkness magic with your light magic directly to counteract the darkness, but some light spells automatically attempt to counteract darkness.",
         "TraitDescriptionLinguistic": "An effect with this trait depends on language comprehension. A linguistic effect that targets a creature works only if the target understands the language you are using.",
@@ -4089,6 +4103,7 @@
         "TraitDescriptionPrediction": "Effects with this trait determine what is likely to happen in the near future. Most predictions are divinations.",
         "TraitDescriptionPress": "Actions with this trait allow you to follow up earlier attacks. An action with the press trait can be used only if you are currently affected by a multiple attack penalty. You can't use a press action when it's not your turn, even if you use the Ready activity. Some actions with the press trait also grant an effect on a failure. The effects that are added on a failure don't apply on a critical failure. If your press action succeeds, you can choose to apply the failure effect instead. (For example, you may wish to do this when an attack deals no damage due to resistance.)",
         "TraitDescriptionPrimal": "This magic comes from the primal tradition, connecting to the natural world and instinct. Anything with this trait is magical.",
+        "TraitDescriptionProcessed": "An alchemical consumable with the processed trait can be created with Quick Alchemy but is too complex to create in a single action.",
         "TraitDescriptionPropulsive": "You add half your Strength modifier (if positive) to damage rolls with a propulsive ranged weapon. If you have a negative Strength modifier, you add your full Strength modifier instead.",
         "TraitDescriptionPsyche": "Your psyche must be unleashed to use abilities that have the psyche trait, and they end automatically when your unleashed psyche subsides.",
         "TraitDescriptionPsychic": "This indicates abilities from the psychic class.",
@@ -4308,7 +4323,10 @@
         "TraitInjection": "Injection",
         "TraitInjury": "Injury",
         "TraitInscribed": "Inscribed",
-        "TraitIntegrated": "Integrated",
+        "TraitIntegrated1d6B": "Integrated 1d6 B",
+        "TraitIntegrated1d6P": "Integrated 1d6 P",
+        "TraitIntegrated1d6S": "Integrated 1d6 S",
+        "TraitIntegrated1d6SVersatileP": "Integrated 1d6 S (Versatile P)",
         "TraitIntelligent": "Intelligent",
         "TraitInteract": "Interact",
         "TraitInventor": "Inventor",
@@ -4528,7 +4546,8 @@
         "TraitSerpentfolk": "Serpentfolk",
         "TraitShabti": "Shabti",
         "TraitShadow": "Shadow",
-        "TraitShieldThrow": "Shield Throw",
+        "TraitShieldThrow20": "Shield Throw 20 ft",
+        "TraitShieldThrow30": "Shield Throw 30 ft",
         "TraitShisk": "Shisk",
         "TraitShobhad": "Shobhad",
         "TraitShoony": "Shoony",
@@ -5158,6 +5177,9 @@
             },
             "dancing": {
                 "Name": "Dancing"
+            },
+            "demolishing": {
+                "Name": "Demolishing"
             },
             "disrupting": {
                 "Name": "Disrupting",

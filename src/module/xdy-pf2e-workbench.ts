@@ -79,6 +79,7 @@ import { basicActionMacros } from "./feature/macros/basicActionMacros";
 import { refocus } from "./feature/macros/refocus";
 import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal";
 import { whirlwindStrike } from "./feature/macros/whirlwindStrike";
+import { ActorSystemData } from "@actor/data/base";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 
@@ -329,7 +330,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp")
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
-            const hp = actor.system.attributes.hp?.value || 0;
+            const hp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
                 moveOnZeroHP(actor, deepClone(update), hp).then();
             }

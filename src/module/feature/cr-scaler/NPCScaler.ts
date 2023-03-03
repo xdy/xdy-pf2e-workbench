@@ -18,6 +18,7 @@ import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes";
 import { getActor, getFolder, getFolderInFolder } from "./Utilities";
 import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil";
 import { NPCPF2e } from "@actor";
+import { NPCSystemData } from "@actor/npc/data";
 
 export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number) {
     const actor = <NPCPF2e>game.actors.get(actorId);
@@ -38,14 +39,15 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
             parent: rootFolder ? rootFolder.id : "",
         }));
 
-    const oldLevel = actor.system.details.level.value;
+    const system: NPCSystemData = <NPCSystemData>actor.system;
+    const oldLevel = system.details.level.value;
     const updateData = {
         folder: folder.id,
         ["system.details.level.value"]: newLevel,
     };
 
     // parse attribute modifiers
-    for (const [key, attr] of Object.entries(actor.system.abilities)) {
+    for (const [key, attr] of Object.entries(system.abilities)) {
         const mod = getLeveledData("abilityScore", parseInt((attr as any).mod), oldLevel, newLevel).total;
         const value = 10 + mod * 2;
         const min = 3;
@@ -56,7 +58,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     // parse resistances
     const drData: any[] = [];
     // @ts-ignore
-    const resistances = actor.system.attributes.resistances;
+    const resistances = system.attributes.resistances;
     for (let i = 0; i < resistances.length; i++) {
         const resistance = resistances[i];
 
@@ -72,7 +74,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     // parse weaknesses
     const dvData: any[] = [];
     // @ts-ignore
-    const weaknesses = actor.system.attributes.weaknesses;
+    const weaknesses = system.attributes.weaknesses;
     for (let i = 0; i < weaknesses.length; i++) {
         const weakness = weaknesses[i];
 
@@ -88,36 +90,36 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     // parse simple modifiers
     updateData["system.attributes.ac.value"] = getLeveledData(
         "armorClass",
-        actor.system.attributes.ac?.value ?? 0,
+        system.attributes.ac?.value ?? 0,
         oldLevel,
         newLevel
     ).total;
     updateData["system.attributes.perception.value"] = getLeveledData(
         "perception",
-        actor.system.attributes.perception.value,
+        system.attributes.perception.value,
         oldLevel,
         newLevel
     ).total;
     updateData["system.saves.fortitude.value"] = getLeveledData(
         "savingThrow",
-        actor.system.saves.fortitude.value ?? 0,
+        system.saves.fortitude.value ?? 0,
         oldLevel,
         newLevel
     ).total;
     updateData["system.saves.reflex.value"] = getLeveledData(
         "savingThrow",
-        actor.system.saves.reflex.value ?? 0,
+        system.saves.reflex.value ?? 0,
         oldLevel,
         newLevel
     ).total;
     updateData["system.saves.will.value"] = getLeveledData(
         "savingThrow",
-        actor.system.saves.will.value ?? 0,
+        system.saves.will.value ?? 0,
         oldLevel,
         newLevel
     ).total;
 
-    const hp = getHPData(actor.system.attributes.hp?.max ?? 0, oldLevel, newLevel);
+    const hp = getHPData(system.attributes.hp?.max ?? 0, oldLevel, newLevel);
     updateData["system.attributes.hp.max"] = hp;
     updateData["system.attributes.hp.value"] = hp;
 

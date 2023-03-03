@@ -2,6 +2,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
 import { AON_CREATURE_TYPES, ELITE_WEAK } from "../../xdy-pf2e-constants";
 import { TokenPF2e } from "@module/canvas";
+import { ActorSystemData } from "@actor/data/base";
 
 let TRAITS: {
     SIZES: string[];
@@ -140,8 +141,7 @@ export async function generateNameFromTraitsForToken(tokenId: string) {
 
 export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2e) {
     let result: any;
-    const data = token?.actor?.system;
-    const traits: any = data?.traits;
+    const traits: any = (<ActorSystemData>token?.actor?.system)?.traits;
     const customTraits: any = traits?.traits?.custom;
     if (!TRAITS) {
         fillTraits();

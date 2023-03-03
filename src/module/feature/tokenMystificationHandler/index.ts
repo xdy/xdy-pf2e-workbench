@@ -5,11 +5,12 @@ import { TokenDataPF2e } from "@scene/token-document";
 import { generateNameFromTraits } from "./traits-name-generator";
 import { TokenPF2e } from "@module/canvas";
 import { ChatMessagePF2e } from "@module/chat-message";
+import { ActorSystemData } from "@actor/data/base";
 
 function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (
         game.settings.get(MODULENAME, "npcMystifierRandomPropertySkipForUnique") &&
-        token?.actor?.system?.traits?.rarity === "unique"
+        (<ActorSystemData>token?.actor?.system)?.traits?.rarity === "unique"
     );
 }
 
