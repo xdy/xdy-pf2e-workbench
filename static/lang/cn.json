@@ -49,12 +49,30 @@
             "gesture": "姿势分神",
             "trick": "花招分神",
             "distractingWords": "话术分神"
+          },
+          "administerFirstAid": {
+            "stabilizeChirurgeon": "稳定伤势（医学专家）",
+            "stabilize": "稳定伤势",
+            "stopBleeding": "止血",
+            "stopBleedingChirurgeon": "止血（医学专家）"
+          },
+          "perform": {
+            "percussion": "打击乐器",
+            "keyboards": "键盘乐器",
+            "oratory": "演说",
+            "acting": "戏剧",
+            "comedy": "喜剧",
+            "dance": "舞蹈",
+            "singing": "歌唱",
+            "strings": "弦乐器",
+            "winds": "管乐器"
           }
         }
       },
       "UnequipAll": {
         "Tooltip": "切换隐藏动作。点击时按住alt键，可以使全部技能装备/不被装备。"
-      }
+      },
+      "assuranceLabel": "驾轻就熟"
     },
     "effects": {
       "orcFerocityUsed": "兽人凶猛已使用",
@@ -198,7 +216,10 @@
       },
       "npcMystifyAllPhysicalMagicalItems": {
         "hint": "如果PF2e系统开启了“NPC可以被搜刮”功能，将NPC添加到场景时自动神秘化其持有的任何非临时的炼金或魔法物品。",
-        "name": "如果开启了PF2e系统“NPC可以被搜刮”功能，自动神秘化NPC持有炼金或魔法物品。"
+        "name": "如果开启了PF2e系统“NPC可以被搜刮”功能，自动神秘化NPC持有炼金或魔法物品。",
+        "no": "无物品神秘化",
+        "onScene": "当NPC被添加到场景时，神秘化其所持物",
+        "onZeroHp": "当NPC的生命值为0时神秘化其所持物"
       },
       "npcRoller": {
         "hint": "勾选此项，启用NPC快速掷骰功能。",
@@ -574,7 +595,10 @@
           "DisableDevice": "解除装置",
           "PalmAnObject": "手上功夫",
           "Steal": "盗窃",
-          "ConcealAnObject": "隐藏物件"
+          "ConcealAnObject": "隐藏物件",
+          "CreateForgery": "伪造文书",
+          "AdministerFirstAidStabilize": "进行急救 - 稳定伤势",
+          "AdministerFirstAidStopBleeding": "进行急救 - 止血"
         },
         "second": "(-5)",
         "third": "(-10)",
