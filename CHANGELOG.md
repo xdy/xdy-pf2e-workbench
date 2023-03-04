@@ -1,3 +1,11 @@
+## [4.49.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.4...v4.49.5) (2023-03-04)
+
+
+### Bug Fixes
+
+* Fix potential null pointer when casting spells. ([648c792](https://github.com/xdy/xdy-pf2e-workbench/commit/648c792693271abd6c0f15a02f51ee0dd5174ed0))
+* Turned off hiding settings that have no effect due to previous settings not being enabled. ([3bf9c9d](https://github.com/xdy/xdy-pf2e-workbench/commit/3bf9c9de8a657ae86041dc1e77914876acb5f7b8))
+
 ## [4.49.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.3...v4.49.4) (2023-03-02)
 
 
