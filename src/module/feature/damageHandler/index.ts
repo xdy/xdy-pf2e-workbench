@@ -121,15 +121,16 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         );
                     }
                     // Make automatic damageRoll be private if the spell is private.
-                    let originalRollMode: any;
+                    const originalRollMode = game.settings.get("core", "rollMode");
                     const blind =
-                        (message.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
-                            message.blind ||
-                            (message.whisper && message.whisper.length > 0) ||
-                            spellMessage.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
-                            spellMessage.blind ||
-                            (spellMessage.whisper && spellMessage.whisper.length > 0)) &&
-                        originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE;
+                        ((message?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
+                            message?.blind ||
+                            (message?.whisper && message?.whisper.length > 0) ||
+                            spellMessage?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
+                            spellMessage?.blind ||
+                            (spellMessage?.whisper && spellMessage?.whisper.length > 0)) &&
+                            originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) ??
+                        false;
                     const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
                     if (rollDamage) {
                         // Until spell level flags are added to attack rolls it is the best I could come up with.
