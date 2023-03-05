@@ -176,7 +176,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * 'Basic Action Macros' shows a dialog with a button for most macros, with bonus and whether you're the best in
           the party at that action (a setting to turn this off exists). (
           Thanks ApoAstolov). The five colors are denoting ranks, in order, grey=untrained, blue=trained, purple=expert,
-          gold=master, red=legendary), with 'glow' meaning that you are the best in the party.
+          gold=master, red=legendary, with 'glow' meaning that you are the best in the party.
         * 'Refocus' shows dialog with buttons to regain 1 focus point, or 2 if the character has any of the \*-focus
           feats, or 3 if any of the \*-wellspring feats, or 2 if is a psychic. With admonition to only choose that
           button if one has indeed spent more than 2 or 3 focus points since the last refocus (or, for a psychic,
