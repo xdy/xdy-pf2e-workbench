@@ -578,9 +578,9 @@
       },
       "reminderBreathWeapon": {
         "defaultName": "Breath",
+        "textUsedToCheckIfItIsABreathWeapon": "breath",
         "hint": "Check to set reminder for breath weapon use.",
         "name": "Breath weapon reminder",
-        "prefix": "Recharge",
         "source": "Breath Weapon reminder created by PF2e Workbench",
         "used": "Used "
       },

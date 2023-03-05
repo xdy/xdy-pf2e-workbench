@@ -15,12 +15,16 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
 
         const actors = [token?.actor];
         for (const actor of actors) {
-            const prefix = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.prefix`);
-            const matcher = `(.*)\\[\\[\\/br 1d([4|6]) \\#(${prefix}(.*?))\\]\\]`;
-            const match = content.match(matcher);
-            const matchString = match ? `1d${match[2]}` : "";
+            const breathWeapon = game.i18n
+                .localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.textUsedToCheckIfItIsABreathWeapon`)
+                .toLocaleLowerCase();
+            const breathWeaponMatch = content.toLocaleLowerCase().match(breathWeapon);
+            const formulaMatch = content
+                .toLocaleLowerCase()
+                .match("\\[\\[\\/(b|)r 1d([4|6])( .*?)((rounds|recharge|cooldown)).*?]]");
+            const dieSize = formulaMatch ? `1d${formulaMatch[2]}` : "";
 
-            if (matchString) {
+            if (breathWeaponMatch && dieSize) {
                 const title = content.match(/.*title="(.*?)" width.*/);
                 const effect = {
                     type: "effect",
@@ -33,7 +37,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                     data: {
                         tokenIcon: { show: true },
                         duration: {
-                            value: new Roll(matchString).roll({ async: false }).total + 1,
+                            value: new Roll(dieSize).roll({ async: false }).total + 1,
                             unit: "rounds",
                             sustained: false,
                             expiry: "turn-start",
