@@ -103,7 +103,6 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                                 const level = spellMessage.content.match(/data-cast-level="(\d+)"/);
                                 if (level && level[1]) {
                                     levelFromChatCard = true;
-                                    // @ts-ignore Wtf? How to make a number into a OneToTen?
                                     castLevel = parseInt(level[1]);
                                     break;
                                 }
@@ -133,15 +132,14 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         false;
                     const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
                     if (rollDamage) {
-                        // Until spell level flags are added to attack rolls it is the best I could come up with.
-                        // fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
-                        // @ts-ignore
+                        // Fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
+                        const currentTarget = document.createElement("div");
+                        currentTarget.dataset.castLevel = castLevel.toString();
+                        currentTarget.closest = () => {
+                            return { dataset: { castLevel: castLevel } };
+                        };
                         origin?.rollDamage({
-                            currentTarget: {
-                                closest: () => {
-                                    return { dataset: { castLevel: castLevel } };
-                                },
-                            },
+                            currentTarget: currentTarget,
                             spellLevel: castLevel,
                             ctrlKey: blind,
                         });
