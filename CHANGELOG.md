@@ -1,3 +1,10 @@
+# [4.50.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.7...v4.50.0) (2023-03-05)
+
+
+### Features
+
+* Enhanced Breath Weapon Reminder to catch more types of breath weapons. ([455cd49](https://github.com/xdy/xdy-pf2e-workbench/commit/455cd494d0f52f8444e3ff0f5af00bc27a6c33bb))
+
 ## [4.49.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.6...v4.49.7) (2023-03-05)
 
 
