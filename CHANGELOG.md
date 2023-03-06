@@ -1,3 +1,11 @@
+## [4.50.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.50.0...v4.50.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([b6d880a](https://github.com/xdy/xdy-pf2e-workbench/commit/b6d880aed6ea89f3d3ba045321a0d11efe5b9817))
+* Removes russian language support due to there apparently being several pathfinder translations with incompatible text. (Feel free to add translation to any of the russian translation modules instead, e.g. https://gitlab.com/gnuraco/pf2r/ or https://github.com/phenomen/foundry-vtt-ru) ([9e7a4dc](https://github.com/xdy/xdy-pf2e-workbench/commit/9e7a4dcba7c6e11a2457a9fed19c7ff89bc74da3)), closes [#688](https://github.com/xdy/xdy-pf2e-workbench/issues/688)
+
 # [4.50.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.49.7...v4.50.0) (2023-03-05)
 
 
