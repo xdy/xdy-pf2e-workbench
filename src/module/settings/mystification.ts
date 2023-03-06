@@ -24,6 +24,26 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => debouncedReload(),
                 requireReload: true,
             },
+            npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater: {
+                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater.hint`,
+                scope: "world",
+                default: -1,
+                type: Number,
+            },
+            npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater: {
+                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater.hint`,
+                scope: "world",
+                default: "common",
+                type: String,
+                choices: {
+                    common: game.i18n.localize("PF2E.TraitCommon"),
+                    uncommon: game.i18n.localize("PF2E.TraitUncommon"),
+                    rare: game.i18n.localize("PF2E.TraitRare"),
+                    unique: game.i18n.localize("PF2E.TraitUnique"),
+                },
+            },
             npcMystifier: {
                 name: `${MODULENAME}.SETTINGS.npcMystifier.name`,
                 hint: `${MODULENAME}.SETTINGS.npcMystifier.hint`,

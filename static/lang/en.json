@@ -559,6 +559,14 @@
         "onScene": "Mystify items when npc added to scene",
         "onZeroHp": "Mystify items on npc reaching 0 hp"
       },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
+        "hint": "Mystify items only if they are of this level or greater.",
+        "name": "Mystify items only if they are of this level or greater."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
+        "hint": "Mystify items only if they are of this rarity or greater.",
+        "name": "Mystify items only if they are of this rarity or greater."
+      },
       "npcRoller": {
         "hint": "Check to enable the NPC quick roller utility.",
         "name": "Enable NPC roller utility"

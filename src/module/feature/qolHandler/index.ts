@@ -292,6 +292,12 @@ export async function castPrivateSpell(data: ChatMessageDataPF2e, message: ChatM
 }
 
 export async function mystifyNpcItems(items) {
+    const minimumRarity = <string>(
+        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater")
+    );
+    const minimumLevel = Number.parseInt(
+        <string>game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")
+    );
     const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
         items
             .filter((item) =>
@@ -299,8 +305,13 @@ export async function mystifyNpcItems(items) {
             )
             .map((item) => <PhysicalItemPF2e>(<unknown>item))
             .filter((item) => !item.isTemporary)
+            .filter((item) => item.isIdentified)
+            .filter((item) => item.level >= minimumLevel)
             .filter((item) => {
-                return item.identificationStatus === "identified";
+                return (
+                    Object.keys(CONFIG.PF2E.rarityTraits).indexOf(item.rarity) >=
+                    Object.keys(CONFIG.PF2E.rarityTraits).indexOf(minimumRarity)
+                );
             })
             .filter((item) => item.isMagical || item.isAlchemical)
     );
