@@ -1,3 +1,10 @@
+# [4.51.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.50.1...v4.51.0) (2023-03-06)
+
+
+### Features
+
+* Added subsettings for minimum level and minimum rarity to the setting to mystify magical and alchemical items on npcs. ([9d89894](https://github.com/xdy/xdy-pf2e-workbench/commit/9d89894faf38ee227675272244479cd415f9cbe9))
+
 ## [4.50.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.50.0...v4.50.1) (2023-03-06)
 
 
