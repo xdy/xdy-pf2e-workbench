@@ -298,6 +298,7 @@ export async function mystifyNpcItems(items) {
     const minimumLevel = Number.parseInt(
         <string>game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")
     );
+    const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
     const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
         items
             .filter((item) =>
@@ -308,10 +309,7 @@ export async function mystifyNpcItems(items) {
             .filter((item) => item.isIdentified)
             .filter((item) => item.level >= minimumLevel)
             .filter((item) => {
-                return (
-                    Object.keys(CONFIG.PF2E.rarityTraits).indexOf(item.rarity) >=
-                    Object.keys(CONFIG.PF2E.rarityTraits).indexOf(minimumRarity)
-                );
+                return rarityKeys.indexOf(item.rarity) >= rarityKeys.indexOf(minimumRarity);
             })
             .filter((item) => item.isMagical || item.isAlchemical)
     );
