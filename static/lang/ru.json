@@ -1,1 +1,638 @@
-{}
+{
+  "xdy-pf2e-workbench": {
+    "npcRoller": {
+      "title": "",
+      "nav-labels": {
+        "strike": "",
+        "damage": "",
+        "ac": "",
+        "save": "",
+        "hp": "",
+        "spell": "",
+        "dc": "",
+        "areaDamage": "",
+        "perception": "",
+        "abilityScore": "",
+        "skill": ""
+      },
+      "button-label": ""
+    },
+    "macros": {
+      "refocus": {
+        "one": "",
+        "regains": "",
+        "notPsychic": "",
+        "isPsychic": "",
+        "regainOne": "",
+        "disabled": "",
+        "enabled": "",
+        "selectOneActor": ""
+      },
+      "basicActionMacros": {
+        "title": "",
+        "noActorSelected": "",
+        "gmMustImport": "",
+        "cancel": "",
+        "YouAreTheBestInYourParty": "",
+        "second": "",
+        "third": "",
+        "settings": {
+          "showBestBonus": {
+            "name": "",
+            "hint": ""
+          }
+        },
+        "macroNotFound": "",
+        "compendiumNotFound": "",
+        "actions": {
+          "AdministerFirstAidStabilize": "",
+          "AdministerFirstAidStopBleeding": "",
+          "AidToggle": "",
+          "AvoidNotice": "",
+          "Balance": "",
+          "Climb": "",
+          "Coerce": "",
+          "CommandAnAnimal": "",
+          "ConcealAnObject": "",
+          "Craft": "",
+          "CreateADiversionGesture": "",
+          "CreateADiversionTrick": "",
+          "CreateForgery": "",
+          "DecipherWritingArcana": "",
+          "DecipherWritingOccultism": "",
+          "DecipherWritingReligion": "",
+          "DecipherWritingSociety": "",
+          "Demoralize": "",
+          "DisableDevice": "",
+          "Disarm": "",
+          "Feint": "",
+          "FollowTheExpertToggle": "",
+          "ForceOpen": "",
+          "GatherInformation": "",
+          "Grapple": "",
+          "Hide": "",
+          "Impersonate": "",
+          "JumpHigh": "",
+          "JumpLong": "",
+          "Lie": "",
+          "MakeAnImpression": "",
+          "ManeuverInFlight": "",
+          "PalmAnObject": "",
+          "Perform": "",
+          "PickALock": "",
+          "RecallKnowledge": "",
+          "Repair": "",
+          "Request": "",
+          "Seek": "",
+          "SenseDirection": "",
+          "SenseMotive": "",
+          "Shove": "",
+          "Sneak": "",
+          "Squeeze": "",
+          "Steal": "",
+          "SubsistSociety": "",
+          "SubsistSurvival": "",
+          "Swim": "",
+          "TakeCoverToggle": "",
+          "Track": "",
+          "TreatDisease": "",
+          "TreatPoison": "",
+          "TreatWounds": "",
+          "Trip": "",
+          "TumbleThrough": "",
+          "RaiseAShieldToggle": ""
+        }
+      },
+      "buildNpcSpellbookJournal": {
+        "title": "",
+        "noSpellcastingEntry": "",
+        "generatedSpellbookFor": ""
+      },
+      "whirlwindStrike": {
+        "starts": "",
+        "ends": "",
+        "error": ""
+      }
+    },
+    "SETTINGS": {
+      "autoRollDamageForStrike": {
+        "strike": "",
+        "name": "",
+        "hint": ""
+      },
+      "customPauseImage": {
+        "name": "",
+        "hint": ""
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
+        "hint": "",
+        "name": ""
+      },
+      "reminderBreathWeapon": {
+        "textUsedToCheckIfItIsABreathWeapon": "",
+        "hint": "",
+        "name": "",
+        "source": "",
+        "used": "",
+        "defaultName": ""
+      },
+      "reminderCannotAttack": {
+        "dead": "",
+        "defeated": "",
+        "hasNoHp": "",
+        "petrified": "",
+        "hint": "",
+        "name": "",
+        "note": "",
+        "unconscious": ""
+      },
+      "abpVariantAllowItemBonuses": {
+        "hint": "",
+        "name": ""
+      },
+      "actionsReminderAllow": {
+        "all": "",
+        "gm": "",
+        "hint": "",
+        "name": "",
+        "none": "",
+        "players": ""
+      },
+      "addGmRKButtonToNpc": {
+        "hideNpcName": "",
+        "hideSkill": "",
+        "hint": "",
+        "name": ""
+      },
+      "addUserTargets": {
+        "addFor": "",
+        "clearFor": "",
+        "hint": "",
+        "name": "",
+        "title": ""
+      },
+      "applyClumsyIfWieldingLargerWeapon": {
+        "hint": "",
+        "name": ""
+      },
+      "applyEncumbranceBasedOnBulk": {
+        "hint": "",
+        "name": ""
+      },
+      "applyPersistentAllow": {
+        "all": "",
+        "gm": "",
+        "name": "",
+        "none": "",
+        "players": "",
+        "hint": ""
+      },
+      "applyPersistentDamage": {
+        "hint": "",
+        "name": "",
+        "wasDamaged": ""
+      },
+      "applyPersistentHealing": {
+        "FastHealingLabel": "",
+        "hint": "",
+        "name": "",
+        "RegenerationLabel": "",
+        "wasHealed": ""
+      },
+      "autoCollapseItemChatCardContent": {
+        "collapsedDefault": "",
+        "hint": "",
+        "name": "",
+        "noCollapse": "",
+        "nonCollapsedDefault": ""
+      },
+      "autoCollapseItemActionChatCardContent": {
+        "collapsedDefault": "",
+        "hint": "",
+        "name": "",
+        "noCollapse": "",
+        "nonCollapsedDefault": ""
+      },
+      "autoCollapseItemAttackChatCardContent": {
+        "hint": "",
+        "name": "",
+        "noCollapse": "",
+        "nonCollapsedDefault": "",
+        "collapsedDefault": ""
+      },
+      "autoExpandDamageRolls": {
+        "collapsedAll": "",
+        "expandedAll": "",
+        "expandedNew": "",
+        "expandedNewest": "",
+        "hint": "",
+        "name": ""
+      },
+      "autoGainDyingAtZeroHP": {
+        "addOne": "",
+        "addOneForCharacters": "",
+        "addWoundedLevel": "",
+        "addWoundedLevelForCharacters": "",
+        "deliberateDeathMessage": "",
+        "hint": "",
+        "name": "",
+        "no": "",
+        "orcFerocityMessage": ""
+      },
+      "automationClientSettings": {
+        "label": "",
+        "name": "",
+        "hint": ""
+      },
+      "automationWorldSettings": {
+        "hint": "",
+        "label": "",
+        "name": ""
+      },
+      "autoReduceStunned": {
+        "hint": "",
+        "name": ""
+      },
+      "autoRemoveDyingAtGreaterThanZeroHP": {
+        "hint": "",
+        "name": "",
+        "no": "",
+        "removeDying": "",
+        "removeDyingForCharacters": ""
+      },
+      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
+        "hint": "",
+        "name": ""
+      },
+      "autoRollDamageAllow": {
+        "all": "",
+        "gm": "",
+        "hint": "",
+        "name": "",
+        "none": "",
+        "players": ""
+      },
+      "autoRollDamageForSpellAttack": {
+        "hint": "",
+        "name": ""
+      },
+      "autoRollDamageForSpellNotAnAttack": {
+        "hint": "",
+        "name": ""
+      },
+      "autoRollDamageNotifyOnSpellCardNotFound": {
+        "hint": "",
+        "name": ""
+      },
+      "callHotbarMacro": {
+        "hint": "",
+        "name": ""
+      },
+      "playerFeatsPrerequisiteHint": {
+        "hint": "",
+        "name": ""
+      },
+      "playerFeatsRarityColour": {
+        "hint": "",
+        "name": ""
+      },
+      "playerSpellsRarityColour": {
+        "hint": "",
+        "name": ""
+      },
+      "castPrivateSpell": {
+        "hint": "",
+        "name": ""
+      },
+      "castPrivateSpellAlwaysForNPC": {
+        "hint": "",
+        "name": ""
+      },
+      "castPrivateSpellWithPublicMessage": {
+        "cantrip": "",
+        "components": "",
+        "firstPart": "",
+        "hint": "",
+        "name": "",
+        "savePart": "",
+        "secondPartRK": "",
+        "spell": "",
+        "they": "",
+        "secondPartNoRk": ""
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "hint": "",
+        "name": "",
+        "traitPart": ""
+      },
+      "creatureBuilder": {
+        "hint": "",
+        "name": ""
+      },
+      "customPauseText": {
+        "hint": "",
+        "name": ""
+      },
+      "customPauseRelocation": {
+        "hint": "",
+        "name": ""
+      },
+      "decreaseFrightenedConditionEachTurn": {
+        "hint": "",
+        "name": ""
+      },
+      "enableAutomaticMove": {
+        "hint": "",
+        "name": "",
+        "noAutomation": "",
+        "reaching0HP": ""
+      },
+      "giveUnconsciousIfDyingRemovedAt0HP": {
+        "hint": "",
+        "name": "",
+        "no": ""
+      },
+      "giveWoundedWhenDyingRemoved": {
+        "hint": "",
+        "name": "",
+        "numbToDeathMessage": ""
+      },
+      "heroPointHandler": {
+        "add": "",
+        "addedFor": "",
+        "addedToForAll": "",
+        "addOne": "",
+        "all": "",
+        "defaultTimeoutMinutes": "",
+        "doWhat": "",
+        "hint": "",
+        "ignore": "",
+        "instructions": "",
+        "minutesLeft": "",
+        "name": "",
+        "none": "",
+        "noRunningTimer": "",
+        "noTimerLabel": "",
+        "resetTo": "",
+        "resetToForAll": "",
+        "showAfter": "",
+        "startTimerLabel": "",
+        "thisMany": "",
+        "timerStopped": "",
+        "timerValue": "",
+        "title": "",
+        "willBeResetIn": ""
+      },
+      "heroPointHandlerDefaultTimeoutMinutes": {
+        "hint": "",
+        "name": ""
+      },
+      "heroPointHandlerKey": {
+        "hint": "",
+        "name": ""
+      },
+      "heroPointHandlerStartTimerOnReady": {
+        "hint": "",
+        "name": ""
+      },
+      "maxHeroPoints": {
+        "hint": "",
+        "name": ""
+      },
+      "moveBeforeCurrentCombatantContextMenu": {
+        "name": ""
+      },
+      "moveBeforeCurrentCombatantKey": {
+        "name": "",
+        "hint": ""
+      },
+      "mystificationSettings": {
+        "hint": "",
+        "label": "",
+        "name": ""
+      },
+      "notifications": {
+        "cantMystify": ""
+      },
+      "npcMystifier": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierAddRandomProperty": {
+        "hint": "",
+        "name": "",
+        "none": "",
+        "numberPostfix": "",
+        "wordPrefix": ""
+      },
+      "npcMystifierBlacklist": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierKeepRandomProperty": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierModifierKey": {
+        "alt": "",
+        "always": "",
+        "control": "",
+        "disabled": "",
+        "name": "",
+        "hint": ""
+      },
+      "npcMystifierMystifyKey": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierNoMatch": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierPostfix": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierPrefix": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierRandomPropertySkipForUnique": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierUseAlignmentTraits": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierUseCreatureTraits": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierUseCreatureTypesTraits": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierUseEliteWeak": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierUseMystifiedNameInChat": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierUseOtherTraits": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierUseRarities": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierUseRaritiesReplacement": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierUseSize": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifierWordPrefix": {
+        "hint": "",
+        "name": ""
+      },
+      "npcMystifyAllPhysicalMagicalItems": {
+        "hint": "",
+        "name": "",
+        "onScene": "",
+        "onZeroHp": "",
+        "no": ""
+      },
+      "npcRoller": {
+        "hint": "",
+        "name": ""
+      },
+      "npcScaler": {
+        "hint": "",
+        "name": ""
+      },
+      "qolWorldSettings": {
+        "hint": "",
+        "label": "",
+        "name": ""
+      },
+      "quickQuantities": {
+        "hint": "",
+        "name": ""
+      },
+      "reminderCannotAttackIgnoreDeadEidolon": {
+        "hint": "",
+        "name": ""
+      },
+      "remindersSettings": {
+        "hint": "",
+        "label": "",
+        "name": ""
+      },
+      "reminderTargeting": {
+        "hint": "",
+        "name": "",
+        "note": ""
+      },
+      "tokenAnimation": {
+        "hint": "",
+        "name": ""
+      },
+      "tokenAnimationSpeed": {
+        "hint": "",
+        "name": ""
+      },
+      "variantRulesSettings": {
+        "hint": "",
+        "label": "",
+        "name": ""
+      },
+      "workbenchVersion": {
+        "hint": "",
+        "name": ""
+      }
+    },
+    "skillActions": {
+      "Title": "",
+      "assuranceLabel": "",
+      "Settings": {
+        "Position": {
+          "name": "",
+          "hint": "",
+          "bottom": "",
+          "disabled": "",
+          "top": ""
+        },
+        "hideDuplicates": {
+          "name": "",
+          "hint": "",
+          "hideActions": "",
+          "hideSkillActions": "",
+          "doNotHide": ""
+        },
+        "IconStyle": {
+          "name": "",
+          "hint": "",
+          "actionCostIcon": "",
+          "skillIcon": ""
+        },
+        "Description": {
+          "name": "",
+          "hint": ""
+        },
+        "variants": {
+          "administerFirstAid": {
+            "stabilize": "",
+            "stopBleeding": "",
+            "stabilizeChirurgeon": "",
+            "stopBleedingChirurgeon": ""
+          },
+          "createADiversion": {
+            "gesture": "",
+            "trick": "",
+            "distractingWords": ""
+          },
+          "perform": {
+            "acting": "",
+            "comedy": "",
+            "dance": "",
+            "keyboards": "",
+            "oratory": "",
+            "percussion": "",
+            "singing": "",
+            "strings": "",
+            "winds": ""
+          }
+        }
+      },
+      "UnequipAll": {
+        "Tooltip": ""
+      }
+    },
+    "spellCardNotFound": "",
+    "effects": {
+      "orcFerocityUsed": "",
+      "bounceBackUsed": "",
+      "numbToDeathUsed": "",
+      "deliberateDeathUsed": ""
+    },
+    "modules": {
+      "pf2e-toolbox": "",
+      "multilevel-tokens": "",
+      "pf2e-sheet-skill-actions": ""
+    }
+  }
+}
