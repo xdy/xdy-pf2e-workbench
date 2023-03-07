@@ -149,6 +149,11 @@
       "lang": "pl",
       "name": "polski",
       "path": "lang/pl.json"
+    },
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "path": "lang/ru.json"
     }
   ],
   "authors": [
