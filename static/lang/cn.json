@@ -215,7 +215,7 @@
         "hint": "勾选此项，在神秘化名称中使用以上设置中未囊括的所有NPC特征。"
       },
       "npcMystifyAllPhysicalMagicalItems": {
-        "hint": "如果PF2e系统开启了“NPC可以被搜刮”功能，将NPC添加到场景时自动神秘化其持有的任何非临时的炼金或魔法物品。",
+        "hint": "如果PF2e系统开启了“NPC可以被搜刮”功能，取决于拖入场景时的选择，自动神秘化其持有的任何非临时的炼金或魔法物品。",
         "name": "如果开启了PF2e系统“NPC可以被搜刮”功能，自动神秘化NPC持有炼金或魔法物品。",
         "no": "无物品神秘化",
         "onScene": "当NPC被添加到场景时，神秘化其所持物",
@@ -279,7 +279,8 @@
         "prefix": "再充能",
         "defaultName": "吐息",
         "hint": "勾选此项，设置吐息武器提醒。",
-        "source": "PF2e Workbench的吐息武器提醒"
+        "source": "PF2e Workbench的吐息武器提醒",
+        "textUsedToCheckIfItIsABreathWeapon": "吐息"
       },
       "autoRollDamageAllow": {
         "all": "所有",
@@ -521,6 +522,14 @@
       "playerSpellsRarityColour": {
         "hint": "是否要在人物卡中用稀有度颜色显示法术名。",
         "name": "在人物卡中用稀有度颜色显示法术名。"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
+        "hint": "仅在物品等级不低于此数值时将其神秘化。",
+        "name": "仅在物品等级不低于此数值时将其神秘化。"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
+        "hint": "仅在物品不低于此稀有度时将其神秘化。",
+        "name": "仅在物品不低于此稀有度时将其神秘化。"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",

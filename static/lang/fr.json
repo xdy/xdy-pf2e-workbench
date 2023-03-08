@@ -521,6 +521,14 @@
       "playerFeatsPrerequisiteHint": {
         "name": "Ajoute un astérisque au nom pour les dons avec un prérequis.",
         "hint": "Réglage du client pour ajouter un astérisque au nom pour les dons avec un prérequis."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
+        "name": "Mystifiez les objets seulement s'ils sont de ce niveau ou supérieur.",
+        "hint": "Mystifiez les objets seulement s'ils sont de ce niveau ou supérieur."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
+        "hint": "Mystifiez les objets seulement s'ils sont de cette rareté ou supérieur.",
+        "name": "Mystifiez les objets seulement s'ils sont de cette rareté ou supérieur."
       }
     },
     "effects": {
