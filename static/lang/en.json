@@ -226,8 +226,8 @@
         "players": "Players"
       },
       "applyPersistentDamage": {
-        "hint": "Client setting to automatically apply persistent damage rolled by the Persistent Damage module.",
-        "name": "Automatically apply persistent damage rolled by the Persistent Damage module.",
+        "hint": "Client setting to automatically apply persistent damage.",
+        "name": "Automatically apply persistent damage.",
         "wasDamaged": "{damage} damage was automatically applied"
       },
       "applyPersistentHealing": {
