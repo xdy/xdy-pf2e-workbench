@@ -425,11 +425,40 @@
           "hint": "Estilo de ícone da perícia; Ícone de custo da ação: Para o ícone de custo da ação, Ícone de habilidade: Para o ícone de habilidade, se estiver disponível",
           "actionCostIcon": "Ícone de custo de ação",
           "skillIcon": "Ícone de perícia"
+        },
+        "Description": {
+          "name": "Descrição de Ações de Perícias",
+          "hint": "Mostrar a descrição das ações no chat ao rolar"
+        },
+        "variants": {
+          "createADiversion": {
+            "distractingWords": "Distrair com Palavras",
+            "gesture": "Gestos",
+            "trick": "Truque"
+          },
+          "administerFirstAid": {
+            "stabilize": "Estabilizar",
+            "stopBleeding": "Parar Sangramento",
+            "stabilizeChirurgeon": "Estabilizar (Cirurgião)",
+            "stopBleedingChirurgeon": "Parar Sangramento (Cirurgião)"
+          },
+          "perform": {
+            "strings": "Instrumento de Corda",
+            "acting": "Atuar",
+            "comedy": "Comédia",
+            "dance": "Dançar",
+            "keyboards": "Instrumento de Teclas",
+            "oratory": "Oratória",
+            "percussion": "Instrumento de Precursão",
+            "singing": "Cantar",
+            "winds": "Instrumento de Sopro"
+          }
         }
       },
       "UnequipAll": {
         "Tooltip": "Alternar ações ocultas. Segure ALT ao clicar para equipar/desequipar todas as perícias."
-      }
+      },
+      "assuranceLabel": "Certeza"
     },
     "spellCardNotFound": "A mensagem da magia não foi encontrada. Conjurando {spell} no nível mínimo da magia.",
     "effects": {
@@ -442,6 +471,98 @@
       "multilevel-tokens": "O módulo Multilevel Tokens( e provavelmente outros módulos de telporte de tokens) podem ocorrer problemas com o teleporte se você ativar a opção do Workbench para mudar a animação do token.",
       "pf2e-sheet-skill-actions": "O módulo pf2e-sheet-skill-actions foi descontinuado, todas suas funções agora estão incluidas no Workbench, por favor desative este módulo.",
       "pf2e-toolbox": "O módulo pf2e-toolbox foi descontinuado, todas suas funções agora estão incluidas no Workbench, por favor desative este módulo."
+    },
+    "macros": {
+      "basicActionMacros": {
+        "actions": {
+          "CreateADiversionGesture": "Criar uma Distração - Gesto",
+          "AidToggle": "Auxiliar",
+          "AvoidNotice": "Evitar Ser Percebido",
+          "Balance": "Equilibrar",
+          "Climb": "Escalar",
+          "Coerce": "Coagir",
+          "CommandAnAnimal": "Comandar um Animal",
+          "Craft": "Manufaturar",
+          "DecipherWritingOccultism": "Decifrar Escrita - Ocultismo",
+          "Demoralize": "Desmoralizar",
+          "Trip": "Derrubar",
+          "AdministerFirstAidStabilize": "Administrar Primeiros Socorros - Estabilizar",
+          "AdministerFirstAidStopBleeding": "Administrar Primeiros Socorros - Para Sangramento",
+          "ConcealAnObject": "Ocultar um Objeto",
+          "CreateADiversionTrick": "Criar uma Distração - Truque",
+          "CreateForgery": "Criar Falsificação",
+          "DecipherWritingArcana": "Decifrar Escrita - Arcana",
+          "DecipherWritingReligion": "Decifrar Escrita - Religião",
+          "DisableDevice": "Desabilitar Dispositivo",
+          "Disarm": "Desarmar",
+          "Feint": "Fintar",
+          "FollowTheExpertToggle": "Seguir o Especialista (LIG/DES)",
+          "ForceOpen": "Forçar",
+          "GatherInformation": "Obter Informação",
+          "Grapple": "Agarrar",
+          "Hide": "Esconder",
+          "Impersonate": "Personificar",
+          "JumpHigh": "Salto em Altura",
+          "JumpLong": "Salto em Distância",
+          "Lie": "Mentir",
+          "MakeAnImpression": "Impressionar",
+          "ManeuverInFlight": "Manobrar em Voo",
+          "PalmAnObject": "Empalmar um Objeto",
+          "Perform": "Performar",
+          "RaiseAShieldToggle": "Erguer um Escudo (Lig/Des)",
+          "RecallKnowledge": "Recordar Conhecimento",
+          "Repair": "Reparar",
+          "Request": "Pedir",
+          "Seek": "Buscar",
+          "SenseDirection": "Intuir Direção",
+          "SenseMotive": "Sentir Motivação",
+          "Shove": "Empurrar",
+          "Sneak": "Esgueirar",
+          "Squeeze": "Espremer-se",
+          "Steal": "Furtar",
+          "SubsistSociety": "Subsistir - Sociedade",
+          "SubsistSurvival": "Subsistir - Sobrevivência",
+          "Swim": "Nadar",
+          "Track": "Rastrear",
+          "TreatDisease": "Tratar Doenças",
+          "TreatPoison": "Tratar Venenos",
+          "TreatWounds": "Tratar Ferimentos",
+          "TumbleThrough": "Atravessar Acrobaticamente",
+          "DecipherWritingSociety": "Decifrar Escrita - Sociedade",
+          "PickALock": "Abrir uma Fechadura",
+          "TakeCoverToggle": "Obter Cobertura (Lig/Des)"
+        },
+        "macroNotFound": "Macro {macroName} não encontrado",
+        "compendiumNotFound": "Compendium {compendiumName} não encontrado",
+        "second": "(-5)",
+        "YouAreTheBestInYourParty": "Você é o Melhor do Grupo",
+        "noActorSelected": "Nenhum Ator selecionado",
+        "cancel": "Cancelar",
+        "third": "(-10)",
+        "settings": {
+          "showBestBonus": {
+            "name": "Mostrar se é melhor em macros de ação básicas",
+            "hint": "Mostrar se o ator selecionado tem o melhor bônus na caixa de diálogo Macros de ação básica"
+          }
+        },
+        "title": "Ações ({name})",
+        "gmMustImport": "O GM deve clicar com o botão direito do mouse no compêndio xdy-pf2e-workbench-macros e selecionar 'Importar Todo Conteudo' e certificar-se de marcar 'Manter IDs de documentos' ao importar."
+      },
+      "buildNpcSpellbookJournal": {
+        "generatedSpellbookFor": "Grimório gerado para {name}",
+        "noSpellcastingEntry": "Você deve ter uma ficha de personagem NPC aberta e selecionada ou um único token NPC selecionado. Além disso, o NPC referente deve ter uma entrada de conjuração.",
+        "title": "Criar um Jornal de Grmório"
+      },
+      "refocus": {
+        "regains": "Recuperou {focus} pontos de foco.",
+        "disabled": "Desativado devido a nenhuma capacidade de recuperar mais de 1 ponto de foco.",
+        "enabled": "Recupere {regain} pontos de foco.<br/>Clique em <b>APENAS</b> se você tiver {details} desde o último Refocar.",
+        "one": "Um",
+        "selectOneActor": "Você deve selecionar um ator.",
+        "notPsychic": "Gastou pelo menos {regain} pontos de foco",
+        "regainOne": "Recuperou 1 ponto de foco.",
+        "isPsychic": "Pontos de Foco gastos apenas para amplificar truques psi ou alimentar habilidades psíquicas"
+      }
     }
   }
 }
