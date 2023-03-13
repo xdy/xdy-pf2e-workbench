@@ -1,6 +1,5 @@
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
-import { ActorPF2e } from "@actor";
 
 export function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
     const userId = message.user.id;
@@ -30,7 +29,7 @@ export function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): str
     return degreeOfSuccess;
 }
 
-export function shouldIHandleThis(actor: ActorPF2e | null) {
+export function shouldIHandleThis(actor) {
     if (!actor) return null;
     const currentUser = game.users.get(game.user.id, { strict: true });
     const activeUsers = game.users.filter((u) => u.active);

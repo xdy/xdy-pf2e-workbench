@@ -4,6 +4,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { ActorSystemData } from "@actor/data/base";
+import BaseUser = foundry.documents.BaseUser;
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
     if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThis(combatant.actor))) {
@@ -178,7 +179,7 @@ function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
         // @ts-ignore
         const minionsAndEidolons = <ActorPF2e[]>game.scenes.current?.tokens
             ?.filter(() => !game.user.isGM)
-            ?.filter((token) => token.canUserModify(game.user, "update"))
+            ?.filter((token) => token.canUserModify(<BaseUser>game.user, "update"))
             ?.map((token) => token.actor)
             ?.filter((x) => x?.traits.has("eidolon") || x?.traits.has("minion"));
         if (minionsAndEidolons && minionsAndEidolons.length > 0) {
@@ -229,7 +230,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                     flavor: game.i18n.format(`${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
                         name: name,
                     }),
-                    speaker: ChatMessage.getSpeaker({ actor: actor }),
+                    speaker: ChatMessage.getSpeaker({ token: <any>actor.token }),
                     whisper:
                         game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
                             ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
@@ -297,12 +298,15 @@ export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
     }
 }
 
-export function applyClumsyIfWieldingLargerWeapon(item: ItemPF2e, _update: DocumentUpdateData) {
+export function applyClumsyIfWieldingLargerWeapon(
+    item: ItemPF2e,
+    _update: { system: { equipped: { handsHeld: any } } }
+) {
     if (isFirstGM() && ["weapon"].includes(item.type) && item.actor) {
         const actorSize = (<ActorSystemData>item.actor.system).traits.size;
-        const weaponSize = (<WeaponPF2e>item).system.size;
+        const weaponSize = (<WeaponPF2e>item).size;
         if (actorSize.isSmallerThan(weaponSize, { smallIsMedium: true })) {
-            const heldInHands = ((<WeaponPF2e>_update).system.equipped.handsHeld ?? 0) > 0;
+            const heldInHands = (_update.system.equipped.handsHeld ?? 0) > 0;
             if ((<WeaponPF2e>item).isEquipped && (heldInHands ?? true)) {
                 if (!item.actor.hasCondition("clumsy")) {
                     item.actor.increaseCondition("clumsy", { min: 1, max: 1 }).then();

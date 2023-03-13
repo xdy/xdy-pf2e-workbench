@@ -41,7 +41,7 @@ import {
     startTimer,
 } from "./feature/heroPointHandler";
 import { isActuallyDamageRoll, isFirstGM } from "./utils";
-import { FeatPF2e, ItemPF2e, SpellPF2e } from "@item";
+import { ItemPF2e } from "@item";
 import { onQuantitiesHook } from "./feature/quickQuantities";
 import {
     actionsReminder,
@@ -449,7 +449,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         .each((_n, e) => {
                             const $e = $(e);
                             const itemId: string = <string>$e.attr("data-item-id");
-                            const spell = <SpellPF2e>(<unknown>sheet.actor?.items?.get(itemId));
+                            const spell: any = sheet.actor?.items?.get(itemId);
                             if (spell) {
                                 const rarity = spell.system.traits.rarity;
                                 if (rarity) {
@@ -467,7 +467,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         .each((_n, e) => {
                             const $e = $(e);
                             const itemId: string = <string>$e.attr("data-item-id");
-                            const feat = <FeatPF2e>(<unknown>sheet.actor?.items?.get(itemId));
+                            const feat: any = sheet.actor?.items?.get(itemId);
                             if (feat) {
                                 const rarity = feat.system.traits.rarity;
                                 if (rarity) {
@@ -485,7 +485,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                         .each((_n, e) => {
                             const $e = $(e);
                             const itemId: string = <string>$e.attr("data-item-id");
-                            const feat = <FeatPF2e>(<unknown>sheet.actor?.items?.get(itemId));
+                            const feat: any = sheet.actor?.items?.get(itemId);
                             if (feat) {
                                 const prereqs = feat.system.prerequisites.value.length > 0;
                                 if (prereqs) {

@@ -2,7 +2,6 @@ import { degreeOfSuccessWithRerollHandling, isActuallyDamageRoll, shouldIHandleT
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
-import { SpellPF2e } from "@item";
 
 export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
@@ -78,19 +77,19 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 autoRollDamageForSpellNotAnAttack &&
                 !origin?.traits?.has("attack") &&
                 flags.casting !== null &&
-                (Number.isInteger(+(<SpellPF2e>message.item)?.system?.time?.value) ?? true) &&
-                Object.keys((<SpellPF2e>origin).system.damage?.value)?.length !== 0;
+                (Number.isInteger(+(<any>message.item?.system)?.time?.value) ?? true) &&
+                Object.keys((<any>origin).system.damage?.value)?.length !== 0;
             const rollForAttackSpell =
                 origin?.traits?.has("attack") &&
                 autoRollDamageForSpellAttack &&
-                (Number.isInteger(+(<SpellPF2e>message.item)?.system?.time?.value) ?? true);
+                (Number.isInteger(+(<any>message.item)?.system?.time?.value) ?? true);
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             if (actor && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
                 if (
                     rollForNonAttackSpell ||
                     (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
                 ) {
-                    let castLevel = flags.casting?.level ?? (<SpellPF2e>origin)?.system.level.value;
+                    let castLevel = flags.casting?.level ?? (<any>origin)?.system.level.value;
                     // flags.casting?.level isn't always set, unfortunately
                     let levelFromChatCard = flags.casting?.level ?? false;
                     // Try getting from chat as a fallback

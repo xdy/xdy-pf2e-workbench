@@ -2,7 +2,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { isActuallyDamageRoll, nth } from "../../utils";
 import { ChatMessageDataPF2e } from "@module/chat-message/data";
 import { ChatMessagePF2e } from "@module/chat-message";
-import { PhysicalItemPF2e, SpellPF2e } from "@item";
+import { PhysicalItemPF2e } from "@item";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
     // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
@@ -186,7 +186,7 @@ export async function castPrivateSpell(data: ChatMessageDataPF2e, message: ChatM
         }
         const type = message.flags?.pf2e.origin?.type ?? "spell";
         const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
-        const origin: SpellPF2e | null = <SpellPF2e | null>await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
+        const origin: any = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
         let content = "";
         if (origin) {
             content = game.i18n.localize(
@@ -202,7 +202,7 @@ export async function castPrivateSpell(data: ChatMessageDataPF2e, message: ChatM
                 content += game.i18n.localize(
                     game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.traitPart`, {
                         traits: Object.values(origin.system.traits.value)
-                            .map((trait) => trait.valueOf())
+                            .map((trait: any) => trait.valueOf())
                             .sort()
                             .join(", "),
                     })
@@ -272,12 +272,12 @@ export async function castPrivateSpell(data: ChatMessageDataPF2e, message: ChatM
         if (saveButtons.length === 1) {
             const dataSave = saveButtons.attr("data-save") ?? "";
             const dataDC = saveButtons.attr("data-dc") ?? "";
-            const origin = <SpellPF2e>await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
+            const origin: any = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
             content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`, {
                 dataSave: dataSave,
                 dataDC: dataDC,
                 traits: Object.values(origin.system.traits.value)
-                    .map((trait) => game.pf2e.system.sluggify(trait.valueOf()))
+                    .map((trait: any) => game.pf2e.system.sluggify(trait.valueOf()))
                     .sort()
                     .join(","),
             });

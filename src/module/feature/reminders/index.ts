@@ -4,7 +4,7 @@ import { TokenDocumentPF2e } from "@scene";
 import { CombatantPF2e } from "@module/encounter";
 import { ActorFlagsPF2e } from "@actor/data/base";
 import { ChatMessagePF2e } from "@module/chat-message";
-import { ActorPF2e, CreaturePF2e } from "@actor";
+import { ActorPF2e } from "@actor";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     const content = message.content;
@@ -135,7 +135,7 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
 
         const actors = [token.actor];
         for (const actor of actors) {
-            if ((<CreaturePF2e>actor).isDead && !ignoreDeadEidolon(actor)) {
+            if (actor?.isDead && !ignoreDeadEidolon(actor)) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.dead`);
             } else if ((actor?.hitPoints?.value ?? 0) <= 0 && !ignoreDeadEidolon(actor)) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.hasNoHp`);
