@@ -1,3 +1,10 @@
+## [4.52.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.0...v4.52.1) (2023-03-13)
+
+
+### Bug Fixes
+
+* Fix module.json language list... ([8f080f2](https://github.com/xdy/xdy-pf2e-workbench/commit/8f080f20c52ed51b36d5d9432bd657ab550c376c))
+
 # [4.52.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.51.2...v4.52.0) (2023-03-13)
 
 
