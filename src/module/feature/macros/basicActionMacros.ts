@@ -173,7 +173,7 @@ export function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Coerce`),
             skill: "Intimidation",
             action: game.pf2e.actions.coerce,
-            icon: "icons/skills/melee/unarmed-punch-fist.webp",
+            icon: "icons/skills/social/intimidation-impressing.webp",
         },
         {
             actionType: "skill_untrained",
@@ -268,6 +268,13 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/equipment/adventuring-gear/thieves-tools.webp",
         },
         {
+            actionType: "skill_untrained",
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Escape`),
+            skill: "",
+            action: ["Escape", "pf2e.action-macros"],
+            icon: "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
+        },
+        {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Feint`),
             skill: "Deception",
@@ -309,7 +316,7 @@ export function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Hide`),
             skill: "Stealth",
             action: game.pf2e.actions.hide,
-            icon: "icons/magic/nature/stealth-hide-eyes-green.webp",
+            icon: "systems/pf2e/icons/features/classes/wild.webp",
         },
         {
             actionType: "skill_untrained",
