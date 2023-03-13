@@ -1,3 +1,16 @@
+# [4.52.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.51.2...v4.52.0) (2023-03-13)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([1d7a963](https://github.com/xdy/xdy-pf2e-workbench/commit/1d7a9631eb679f58a6c7b78b73d7612c19e4e8ae))
+* Make Escape action work in Skill Actions again. (Real ugly fix, always chooses highest skill, removed MAP support. Might return later.) ([095d553](https://github.com/xdy/xdy-pf2e-workbench/commit/095d553272c9aca0694562bfdf1f74a9afca6fb7))
+
+
+### Features
+
+* Make Escape action work in Basic Action Macros. Always chooses highest skill, no MAP support. Might revisit later.) ([436b60e](https://github.com/xdy/xdy-pf2e-workbench/commit/436b60ebd6ee7288073366860bf266c65c0ef282))
+
 ## [4.51.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.51.1...v4.51.2) (2023-03-08)
 
 
