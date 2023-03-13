@@ -116,10 +116,9 @@ export class SkillAction {
         if (variant.assuranceTotal) {
             await this.toChat(variant.assuranceTotal);
         } else {
-            // @ts-ignore
-            const rollAction = game.pf2e.actions[this.key];
+            const rollAction = game.pf2e.actions[<string>this.key];
             if (rollAction) {
-                if (this.key !== "earnIncome") {
+                if (!["earnIncome", "escape"].includes(<string>this.key)) {
                     rollAction({
                         event,
                         modifiers: variant.modifiers,
@@ -127,14 +126,24 @@ export class SkillAction {
                         ...variant.extra,
                         skill: variant.skill.slug,
                     });
-                } else {
+                } else if (this.key === "earnIncome") {
                     // Ugly earnIncome fix.
-                    const pack = game.packs.get("pf2e.pf2e-macros");
+                    const pack: any = game.packs.get("pf2e.pf2e-macros");
                     pack?.getIndex()
                         .then((index) => {
-                            const id = index.find((e) => e.name === "Earn Income")?._id;
+                            const id: any = index.find((e) => e.name === "Earn Income")?._id;
                             if (id) {
-                                // @ts-ignore
+                                (<Promise<Macro>>pack?.getDocument(id)).then((e) => e.execute());
+                            }
+                        })
+                        .then();
+                } else if (this.key === "escape") {
+                    // Ugly escape fix.
+                    const pack: any = game.packs.get("pf2e.action-macros");
+                    pack?.getIndex()
+                        .then((index) => {
+                            const id: any = index.find((e) => e.name === "Escape")?._id;
+                            if (id) {
                                 (<Promise<Macro>>pack?.getDocument(id)).then((e) => e.execute());
                             }
                         })
@@ -225,6 +234,9 @@ export class SkillAction {
     private getSkills(proficiencyKey: string): CharacterSkill[] {
         // @ts-ignore
         const skills = this.actor.skills;
+        if (proficiencyKey === "highest") {
+            proficiencyKey = "acrobatics"; // TODO Actually figure out which is highest. For now, meh.
+        }
         if (proficiencyKey === "lore") {
             // @ts-ignore
             return Object.values(skills).filter((skill) => skill.lore);
@@ -241,9 +253,13 @@ export class SkillAction {
                 (skill.rank >= (data.requiredRank ?? 0) && this.actorHasItem(data.requiredItem)) ||
                 ((data.requiredRank ?? 0) === 1 && this.actorHasItem("clever-improviser"))
             ) {
-                this.variants.addBasicVariant(skill, data.extra, data.label);
+                this.variants.addBasicVariant(
+                    skill,
+                    data.extra,
+                    data.proficiencyKey === "highest" ? "highest" : data.label
+                );
 
-                if (this.hasTrait("attack")) {
+                if (this.hasTrait("attack") && this.key !== "escape") {
                     this.variants.addMapVariant(skill, data.extra, -5);
                     this.variants.addMapVariant(skill, data.extra, -10);
                 }

@@ -4,7 +4,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 
 export class VariantsCollection extends Array<Variant> {
     addBasicVariant(skill: CharacterSkill, extra: Record<string, unknown> | undefined, label: string | undefined) {
-        const modifier = (skill.check.mod >= 0 ? " +" : " ") + skill.check.mod;
+        const modifier = label === "highest" ? " ?" : (skill.check.mod >= 0 ? " +" : " ") + skill.check.mod;
         label = label ? game.i18n.localize(label) : skill.label;
         this.push(new Variant(`${label}${modifier}`, skill, extra));
     }
