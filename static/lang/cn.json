@@ -116,8 +116,8 @@
         "none": "无"
       },
       "applyPersistentDamage": {
-        "name": "Persistent Damage模组骰出的持续伤害自动生效。",
-        "hint": "设置Persistent Damage模组骰出的持续伤害是否自动生效。",
+        "name": "持续伤害自动生效。",
+        "hint": "设置持续伤害是否自动生效。",
         "wasDamaged": "{damage}伤害已自动生效"
       },
       "addUserTargets": {
@@ -607,7 +607,8 @@
           "ConcealAnObject": "隐藏物件",
           "CreateForgery": "伪造文书",
           "AdministerFirstAidStabilize": "进行急救 - 稳定伤势",
-          "AdministerFirstAidStopBleeding": "进行急救 - 止血"
+          "AdministerFirstAidStopBleeding": "进行急救 - 止血",
+          "Escape": "逃脱 - 最高加值 (??)"
         },
         "second": "(-5)",
         "third": "(-10)",
