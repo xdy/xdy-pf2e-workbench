@@ -117,8 +117,8 @@
         "players": "Joueurs"
       },
       "applyPersistentDamage": {
-        "hint": "Paramètre du client permettant d'appliquer automatiquement des dommages persistants.",
-        "name": "Appliquer automatiquement les dommages persistants.",
+        "hint": "Paramètre du client permettant d'appliquer automatiquement des dégâts persistants.",
+        "name": "Appliquer automatiquement les dégâts persistants.",
         "wasDamaged": "{damage} dégâts ont été automatiquement appliqués"
       },
       "applyPersistentHealing": {
@@ -613,7 +613,7 @@
           "AdministerFirstAidStabilize": "Administrer les premiers secours - Stabiliser",
           "AdministerFirstAidStopBleeding": "Administrer les premiers soins - Arrêter le saignement",
           "CreateForgery": "Créer une contrefaçon",
-          "Escape": "Evasion - le plus élevé ( ??)"
+          "Escape": "S'Échapper - le plus élevé (??)"
         },
         "second": "(-5)",
         "third": "(-10)",
