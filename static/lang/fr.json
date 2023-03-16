@@ -117,8 +117,8 @@
         "players": "Joueurs"
       },
       "applyPersistentDamage": {
-        "hint": "Applique automatiquement les dégâts persistants lancés par le module Persistent damage.",
-        "name": "Applique automatiquement les dégâts persistants lancés par le module Persistent damage.",
+        "hint": "Paramètre du client permettant d'appliquer automatiquement des dommages persistants.",
+        "name": "Appliquer automatiquement les dommages persistants.",
         "wasDamaged": "{damage} dégâts ont été automatiquement appliqués"
       },
       "applyPersistentHealing": {
@@ -612,7 +612,8 @@
           "Steal": "Voler",
           "AdministerFirstAidStabilize": "Administrer les premiers secours - Stabiliser",
           "AdministerFirstAidStopBleeding": "Administrer les premiers soins - Arrêter le saignement",
-          "CreateForgery": "Créer une contrefaçon"
+          "CreateForgery": "Créer une contrefaçon",
+          "Escape": "Evasion - le plus élevé ( ??)"
         },
         "second": "(-5)",
         "third": "(-10)",
