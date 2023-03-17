@@ -1,3 +1,10 @@
+## [4.52.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.1...v4.52.2) (2023-03-17)
+
+
+### Bug Fixes
+
+* Updated translations and macros. Set minimum pf2e version to 4.9.0 and verified 4.9.3 ([f41b24b](https://github.com/xdy/xdy-pf2e-workbench/commit/f41b24b01e510ee59ac2ae264ac47a244c98adc5))
+
 ## [4.52.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.0...v4.52.1) (2023-03-13)
 
 
