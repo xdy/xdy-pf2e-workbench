@@ -137,7 +137,7 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStopBleeding`),
             skill: "Medicine",
-            action: "game.pf2e.actions.administerFirstAid({ event: event, variant: 'stopBleeding' });",
+            action: "game.pf2e.actions.administerFirstAid({ event: event, variant: 'stop-bleeding' });",
             icon: "systems/pf2e/icons/conditions/persistent-damage.webp",
         },
         {
