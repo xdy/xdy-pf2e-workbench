@@ -1,3 +1,11 @@
+## [4.52.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.2...v4.52.3) (2023-03-19)
+
+
+### Bug Fixes
+
+* Orc Ferocity (and related feats) should now work properly together with the feature to increase dying when reaching 0 hp. ([8d30252](https://github.com/xdy/xdy-pf2e-workbench/commit/8d30252bde99a3c28074dd633e9c6de8af480986))
+* Stop Bleeding from Skill Actions was broken. ([607f0fd](https://github.com/xdy/xdy-pf2e-workbench/commit/607f0fdfe7104a5a96a233637084a778083209b8)), closes [#704](https://github.com/xdy/xdy-pf2e-workbench/issues/704)
+
 ## [4.52.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.1...v4.52.2) (2023-03-17)
 
 
