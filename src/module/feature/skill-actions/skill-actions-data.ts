@@ -50,7 +50,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
                 proficiencyKey: "medicine",
             },
             {
-                extra: { variant: "stopBleeding" },
+                extra: { variant: "stop-bleeding" },
                 label: "xdy-pf2e-workbench.skillActions.Settings.variants.administerFirstAid.stopBleeding",
                 proficiencyKey: "medicine",
             },
@@ -61,7 +61,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
                 requiredItem: "chirurgeon",
             },
             {
-                extra: { variant: "stopBleeding" },
+                extra: { variant: "stop-bleeding" },
                 label: "xdy-pf2e-workbench.skillActions.Settings.variants.administerFirstAid.stopBleedingChirurgeon",
                 proficiencyKey: "crafting",
                 requiredItem: "chirurgeon",
