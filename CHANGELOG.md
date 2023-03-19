@@ -1,3 +1,10 @@
+## [4.52.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.3...v4.52.4) (2023-03-19)
+
+
+### Bug Fixes
+
+* It is now possible to stop-bleeding using Basic Action Macros. ([637d751](https://github.com/xdy/xdy-pf2e-workbench/commit/637d75158e286be1328d3229e19933cba67a4659))
+
 ## [4.52.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.2...v4.52.3) (2023-03-19)
 
 
