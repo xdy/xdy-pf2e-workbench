@@ -11,13 +11,12 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
         const actors = [combatant.actor];
         actors.push(...getMinionAndEidolons(combatant.actor));
         for (const actor of actors) {
-            const items: any = actor.items;
             const minimumFrightened = <number>actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
             let frightened = actor?.getCondition("frightened");
             const currentFrightened = frightened?.value ?? 0;
             if (frightened && currentFrightened > 0 && !frightened.isLocked) {
-                const amountToReduceBy = items.find((feat) => feat.slug === "dwarven-doughtiness") ? 2 : 1;
-                for (let i = 0; i < amountToReduceBy; i++) {
+                const reduceBy = actor.itemTypes.feat.find((feat) => feat.slug === "dwarven-doughtiness") ? 2 : 1;
+                for (let i = 0; i < reduceBy; i++) {
                     frightened = actor?.getCondition("frightened");
                     if (currentFrightened - 1 >= minimumFrightened && frightened && !frightened.isLocked) {
                         await actor.decreaseCondition("frightened");
@@ -34,28 +33,34 @@ export async function increaseDyingOnZeroHP(
     hp: number
 ): Promise<boolean> {
     if (shouldIHandleThis(actor) && hp > 0 && <number>getProperty(update, "system.attributes.hp.value") <= 0) {
-        const items: any = actor.items;
-        const orcFerocity = items.find((feat) => feat.slug === "orc-ferocity");
-        const orcFerocityUsed: any = items.find((effect) => effect.slug === "orc-ferocity-used");
-        const incredibleFerocity = items.find((feat) => feat.slug === "incredible-ferocity");
-        const undyingFerocity = items.find((feat) => feat.slug === "undying-ferocity");
-        const rampagingFerocity = items.find((feat) => feat.slug === "rampaging-ferocity");
-        const deliberateDeath = items.find((feat) => feat.slug === "deliberate-death");
-        const deliberateDeathUsed: any = items.find((effect) => effect.slug === "deliberate-death-used");
+        const orcFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "orc-ferocity");
+        const orcFerocityUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "orc-ferocity-used");
+        const incredibleFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "incredible-ferocity");
+        const undyingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "undying-ferocity");
+        const rampagingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "rampaging-ferocity");
+        const deliberateDeath = actor.itemTypes.feat.find((feat) => feat.slug === "deliberate-death");
+        const deliberateDeathUsed: any = actor.itemTypes.effect.find(
+            (effect) => effect.slug === "deliberate-death-used"
+        );
         const name = `${actor.token?.name ?? actor.name}`;
+        let shouldIncreaseWounded = false;
+        let dyingCounter = 0;
+        let hpNowAboveZero = false;
+        const effectsToCreate: any[] = [];
 
         if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
             setProperty(update, "system.attributes.hp.value", 1);
             if (undyingFerocity) {
                 setProperty(update, "system.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
             }
-            await actor.increaseCondition("wounded");
+
+            shouldIncreaseWounded = true;
 
             const effect: any = {
                 type: "effect",
                 name: game.i18n.localize(`${MODULENAME}.effects.orcFerocityUsed`),
                 img: "systems/pf2e/icons/default-icons/alternatives/ancestries/orc.svg",
-                data: {
+                system: {
                     slug: "orc-ferocity-used",
                     tokenIcon: {
                         show: false,
@@ -68,7 +73,7 @@ export async function increaseDyingOnZeroHP(
                     },
                 },
             };
-            await actor.createEmbeddedDocuments("Item", [effect]);
+            effectsToCreate.push(effect);
 
             if (rampagingFerocity) {
                 ChatMessage.create({
@@ -83,8 +88,7 @@ export async function increaseDyingOnZeroHP(
                 }).then();
             }
 
-            await actor.update(update);
-            return false;
+            hpNowAboveZero = true;
         }
 
         if (deliberateDeath && (!deliberateDeathUsed || deliberateDeathUsed.isExpired)) {
@@ -92,7 +96,7 @@ export async function increaseDyingOnZeroHP(
                 type: "effect",
                 name: game.i18n.localize(`${MODULENAME}.effects.deliberateDeathUsed`),
                 img: "icons/skills/melee/strike-dagger-skull-white.webp",
-                data: {
+                system: {
                     slug: "deliberate-death-used",
                     tokenIcon: {
                         show: false,
@@ -105,9 +109,9 @@ export async function increaseDyingOnZeroHP(
                     },
                 },
             };
-            await actor.createEmbeddedDocuments("Item", [effect]);
+            effectsToCreate.push(effect);
 
-            await ChatMessage.create({
+            ChatMessage.create({
                 flaver: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
                     name: name,
                 }),
@@ -116,30 +120,38 @@ export async function increaseDyingOnZeroHP(
                     game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                         : [],
-            });
+            }).then();
         }
 
-        let value = 1;
         const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
-        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
+        if (
+            !hpNowAboveZero &&
+            (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
+        ) {
             if (option?.startsWith("addWoundedLevel")) {
-                value = (actor.getCondition("wounded")?.value ?? 0) + 1;
-            }
-            for (let i = 0; i < Math.max(1, value); i++) {
-                await actor.increaseCondition("dying");
+                dyingCounter = (actor.getCondition("wounded")?.value ?? 0) + 1;
             }
         }
+        if (hpNowAboveZero) {
+            actor.update(update).then();
+        }
+        if (effectsToCreate.length > 0) {
+            actor.createEmbeddedDocuments("Item", effectsToCreate).then();
+        }
+        if (shouldIncreaseWounded) {
+            actor.increaseCondition("wounded").then();
+        }
+        if (dyingCounter > 0) {
+            actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
+        }
+        return hpNowAboveZero;
     }
     return true;
 }
 
-export async function removeDyingOnZeroHP(
-    actor: ActorPF2e,
-    update: Record<string, string>,
-    hp: number
-): Promise<boolean> {
-    if (shouldIHandleThis(actor) && hp <= 0 && <number>getProperty(update, "system.attributes.hp.value") > 0) {
-        let dying = actor.getCondition("dying");
+export async function autoRemoveDyingAtGreaterThanZeroHp(actor: ActorPF2e, hpAboveZero: boolean): Promise<boolean> {
+    let dying = actor.getCondition("dying");
+    if (dying && !dying.isLocked && hpAboveZero && shouldIHandleThis(actor)) {
         const value = dying?.value || 0;
         if (dying && value > 0 && !dying.isLocked) {
             const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
@@ -158,17 +170,10 @@ export async function removeDyingOnZeroHP(
 
 export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     actor: ActorPF2e,
-    update: Record<string, string>,
-    hp: number
+    hpRaisedAboveZero: boolean
 ): Promise<void> {
     const unconscious = actor.getCondition("unconscious");
-    if (
-        shouldIHandleThis(actor) &&
-        hp <= 0 &&
-        <number>getProperty(update, "system.attributes.hp.value") > 0 &&
-        unconscious &&
-        !unconscious.isLocked
-    ) {
+    if (unconscious && !unconscious.isLocked && hpRaisedAboveZero && shouldIHandleThis(actor)) {
         await actor.decreaseCondition("unconscious", { forceRemove: true });
     }
 }
@@ -191,7 +196,7 @@ function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
 
 export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
     const actor = item.parent;
-    if (actor) {
+    if (isFirstGM() && item.slug === "dying" && actor) {
         const items: any = actor.items;
         let bounceBack: any = false,
             bounceBackUsed: any = false,
@@ -199,68 +204,66 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
             numbToDeathUsed: any = false;
         if (items) {
             bounceBack = items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
-            bounceBackUsed = items.find((effect) => effect.slug === "bounce-back-used") ?? false;
+            bounceBackUsed = actor.itemTypes.effect.find((effect) => effect.slug === "bounce-back-used") ?? false;
 
             numbToDeath = items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
-            numbToDeathUsed = items.find((effect) => effect.slug === "numb-to-death-used") ?? false;
+            numbToDeathUsed = actor.itemTypes.effect.find((effect) => effect.slug === "numb-to-death-used") ?? false;
         }
         const name = `${actor.token?.name ?? actor.name}`;
 
-        if (item.slug === "dying" && isFirstGM()) {
-            if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
-                const effect: any = {
-                    type: "effect",
-                    name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
-                    img: "icons/magic/death/hand-dirt-undead-zombie.webp",
-                    data: {
-                        slug: "numb-to-death-used",
-                        tokenIcon: {
-                            show: false,
-                        },
-                        duration: {
-                            value: 24,
-                            unit: "hours",
-                            sustained: false,
-                            expiry: "turn-start",
-                        },
+        if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
+            const effect: any = {
+                type: "effect",
+                name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
+                img: "icons/magic/death/hand-dirt-undead-zombie.webp",
+                system: {
+                    slug: "numb-to-death-used",
+                    tokenIcon: {
+                        show: false,
                     },
-                };
-
-                ChatMessage.create({
-                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
-                        name: name,
-                    }),
-                    speaker: ChatMessage.getSpeaker({ token: <any>actor.token }),
-                    whisper:
-                        game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
-                            ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                            : [],
-                }).then();
-
-                await actor.createEmbeddedDocuments("Item", [effect]);
-            } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
-                const effect: any = {
-                    type: "effect",
-                    name: game.i18n.localize(`${MODULENAME}.effects.bounceBackUsed`),
-                    img: "icons/magic/life/ankh-gold-blue.webp",
-                    data: {
-                        slug: "bounce-back-used",
-                        tokenIcon: {
-                            show: false,
-                        },
-                        duration: {
-                            value: 24,
-                            unit: "hours",
-                            sustained: false,
-                            expiry: "turn-start",
-                        },
+                    duration: {
+                        value: 24,
+                        unit: "hours",
+                        sustained: false,
+                        expiry: "turn-start",
                     },
-                };
+                },
+            };
 
-                await actor.createEmbeddedDocuments("Item", [effect]);
-            } else {
-                await item.parent?.increaseCondition("wounded");
-            }
+            ChatMessage.create({
+                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
+                    name: name,
+                }),
+                speaker: ChatMessage.getSpeaker({ token: <any>actor.token }),
+                whisper:
+                    game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
+                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                        : [],
+            }).then();
+
+            await actor.createEmbeddedDocuments("Item", [effect]);
+        } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
+            const effect: any = {
+                type: "effect",
+                name: game.i18n.localize(`${MODULENAME}.effects.bounceBackUsed`),
+                img: "icons/magic/life/ankh-gold-blue.webp",
+                system: {
+                    slug: "bounce-back-used",
+                    tokenIcon: {
+                        show: false,
+                    },
+                    duration: {
+                        value: 24,
+                        unit: "hours",
+                        sustained: false,
+                        expiry: "turn-start",
+                    },
+                },
+            };
+
+            await actor.createEmbeddedDocuments("Item", [effect]);
+        } else {
+            await item.parent?.increaseCondition("wounded");
         }
     }
 }
@@ -281,7 +284,8 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
 }
 
 export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
-    const physicalTypes = ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"];
+    // TODO Not sure if it should be backpack or container, so, adding both
+    const physicalTypes = ["armor", "backpack", "container", "book", "consumable", "equipment", "treasure", "weapon"];
     if (isFirstGM() && physicalTypes.includes(item.type) && item.actor) {
         // Sleep 0.25s to handle race condition
         await new Promise((resolve) => setTimeout(resolve, 250));

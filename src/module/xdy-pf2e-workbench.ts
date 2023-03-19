@@ -65,12 +65,12 @@ import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHand
 import {
     applyClumsyIfWieldingLargerWeapon,
     applyEncumbranceBasedOnBulk,
+    autoRemoveDyingAtGreaterThanZeroHp,
     autoRemoveUnconsciousAtGreaterThanZeroHP,
     giveUnconsciousIfDyingRemovedAt0HP,
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-    removeDyingOnZeroHP,
 } from "./feature/conditionHandler";
 import { TokenDocumentPF2e } from "@scene";
 import { basicActionMacros } from "./feature/macros/basicActionMacros";
@@ -264,10 +264,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             ) {
                 if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
                     giveWoundedWhenDyingRemoved(item).then(() => {
-                        console.log("Workbench giveWoundedWhenDyingRemoved complete");
+                        console.debug("Workbench giveWoundedWhenDyingRemoved complete");
                         if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
                             giveUnconsciousIfDyingRemovedAt0HP(item).then(() => {
-                                console.log("Workbench giveUnconsciousIfDyingRemovedAt0HP complete");
+                                console.debug("Workbench giveUnconsciousIfDyingRemovedAt0HP complete");
                             });
                         }
                     });
@@ -281,7 +281,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
         Hooks.on("pf2e.endTurn", (combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string) => {
             if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-                reduceFrightened(combatant, userId).then(() => console.log("Workbench reduceFrightened complete"));
+                reduceFrightened(combatant, userId).then(() => console.debug("Workbench reduceFrightened complete"));
             }
         });
     }
@@ -301,6 +301,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             } else if (forWhom !== "none") {
                 actionsReminder(combatant, 0);
             }
+
+            // TODO Handle removal of game.combats.active.combatant.defeated/unsetting of deathIcon (are those the same?) for combatants that are neither dying nor have 0 HP.
         });
     }
 
@@ -328,54 +330,60 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp")
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
-            const hp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
+            const actorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
+            const healingAboveZeroHp = <number>getProperty(update, "system.attributes.hp.value") > 0;
+            if (
+                game.user?.isGM &&
+                actor?.type === "npc" &&
+                actor?.items?.size > 0 &&
+                actorHp > 0 &&
+                !healingAboveZeroHp &&
+                game.settings.get("pf2e", "automation.lootableNPCs") &&
+                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"
+            ) {
+                await mystifyNpcItems(actor.items);
+            }
+
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
-                moveOnZeroHP(actor, deepClone(update), hp).then();
+                moveOnZeroHP(actor, deepClone(update), actorHp);
             }
 
             if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
-                increaseDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
+                increaseDyingOnZeroHP(actor, deepClone(update), actorHp).then((hpRaisedAbove0) => {
                     console.log("Workbench increaseDyingOnZeroHP complete");
-                    if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-                        // Ugh.
-                        new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
-                            removeDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
-                                console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
-                                if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                                    autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then();
-                                }
+                    if (hpRaisedAbove0) {
+                        if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
+                            // Ugh.
+                            new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
+                                autoRemoveDyingAtGreaterThanZeroHp(actor, actorHp <= 0 && hpRaisedAbove0).then(() => {
+                                    console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
+                                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                                        autoRemoveUnconsciousAtGreaterThanZeroHP(
+                                            actor,
+                                            actorHp <= 0 && hpRaisedAbove0
+                                        ).then();
+                                    }
+                                });
                             });
-                        });
-                    } else {
-                        if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then();
+                        } else {
+                            if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                                autoRemoveUnconsciousAtGreaterThanZeroHP(actor, actorHp <= 0 && hpRaisedAbove0).then();
+                            }
                         }
                     }
                 });
             } else {
                 if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-                    removeDyingOnZeroHP(actor, deepClone(update), hp).then(() => {
+                    autoRemoveDyingAtGreaterThanZeroHp(actor, actorHp <= 0 && healingAboveZeroHp).then(() => {
                         if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then();
+                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, actorHp <= 0 && healingAboveZeroHp).then();
                         }
                     });
                 } else {
                     if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, deepClone(update), hp).then();
+                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, actorHp <= 0 && healingAboveZeroHp).then();
                     }
                 }
-            }
-
-            if (
-                game.user?.isGM &&
-                game.settings.get("pf2e", "automation.lootableNPCs") &&
-                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp" &&
-                actor &&
-                actor.type === "npc" &&
-                actor.items &&
-                actor.items.size > 0
-            ) {
-                await mystifyNpcItems(actor.items);
             }
         });
     }

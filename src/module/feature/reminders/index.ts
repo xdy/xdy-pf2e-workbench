@@ -34,7 +34,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                             ? title[1]
                             : game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`)),
                     img: "systems/pf2e/icons/spells/dragon-breath.webp",
-                    data: {
+                    system: {
                         tokenIcon: { show: true },
                         duration: {
                             value: new Roll(dieSize).roll({ async: false }).total + 1,
@@ -48,7 +48,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                         source: {
                             value: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`),
                         },
-                        slug: `xdy-breath-weapon-reminder-${randomID()}`,
+                        slug: `xdy-breath-weapon-reminder-${randomID()}`, // Why did I add a random ID? I don't remember.
                     },
                 };
 
