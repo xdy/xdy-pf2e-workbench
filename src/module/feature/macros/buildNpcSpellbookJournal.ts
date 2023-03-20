@@ -8,7 +8,7 @@ export async function buildNpcSpellbookJournal() {
     if (activeWindow?.constructor.name === "NPCSheetPF2e") {
         actor = activeWindow.token?.actor || activeWindow.actor;
     } else {
-        const actors = canvas.tokens.controlled.map((a) => a.actor).filter((a) => a?.type === "npc");
+        const actors = canvas.tokens.controlled.map((a) => a.actor).filter((a) => a?.isOfType("npc"));
         if (actors?.length === 1) {
             actor = actors[0];
         }
@@ -17,7 +17,7 @@ export async function buildNpcSpellbookJournal() {
     const length = actor.spellcasting.contents.length;
 
     if (!actor || length === 0) {
-        ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noSpellcastingEntry`));
+        ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.buildNpcSpellbookJournal.noSpellcastingEntry`));
         return;
     }
 
@@ -30,7 +30,9 @@ export async function buildNpcSpellbookJournal() {
     }
 
     const updates = {
-        name: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.generatedSpellbookFor`, { name: actor.name }),
+        name: game.i18n.format(`${MODULENAME}.macros.buildNpcSpellbookJournal.generatedSpellbookFor`, {
+            name: actor.name,
+        }),
         content: `<table class="pf2-table">
     <tr>
        <th>Entry</th>

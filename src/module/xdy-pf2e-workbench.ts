@@ -228,7 +228,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 
     if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
         Hooks.on("createItem", async (item: ItemPF2e, _options: {}, _id: any) => {
-            if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
+            if (item.actor?.isOfType("character") && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
                 applyEncumbranceBasedOnBulk(item);
             }
         });
@@ -239,10 +239,13 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "applyClumsyIfWieldingLargerWeapon")
     ) {
         Hooks.on("updateItem", async (item: ItemPF2e, update: any) => {
-            if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
+            if (item.actor?.isOfType("character") && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
                 applyEncumbranceBasedOnBulk(item);
             }
-            if (game.settings.get(MODULENAME, "applyClumsyIfWieldingLargerWeapon")) {
+            if (
+                item.actor?.isOfType("character") &&
+                game.settings.get(MODULENAME, "applyClumsyIfWieldingLargerWeapon")
+            ) {
                 applyClumsyIfWieldingLargerWeapon(item, update);
             }
         });
@@ -254,7 +257,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
         game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")
     ) {
         Hooks.on("deleteItem", async (item: ItemPF2e, _options: {}) => {
-            if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
+            if (item.actor?.isOfType("character") && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
                 applyEncumbranceBasedOnBulk(item);
             }
 
@@ -413,7 +416,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 game.settings.get("pf2e", "automation.lootableNPCs") &&
                 game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene" &&
                 token.actor &&
-                token.actor.type === "npc" &&
+                token.actor.isOfType("npc") &&
                 token.actor.items &&
                 token.actor.items.size > 0
             ) {
@@ -443,14 +446,15 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 });
             }
 
-            if (game.user?.isGM && game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
+            if (game.user?.isGM && sheet.actor?.type === "npc" && game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
                 addGmRKButtonToNpc($html, sheet);
             }
-            if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
+
+            if (sheet.actor?.type === "character" && game.settings.get(MODULENAME, "skillActions") !== "disabled") {
                 renderSheetSkillActions(sheet, $html);
             }
 
-            if (game.settings.get(MODULENAME, "playerSpellsRarityColour")) {
+            if (sheet.actor?.type === "caracter" && game.settings.get(MODULENAME, "playerSpellsRarityColour")) {
                 $html.find(".spell-list").each((_i, e) => {
                     $(e)
                         .find(".item.spell")
@@ -468,7 +472,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 });
             }
 
-            if (game.settings.get(MODULENAME, "playerFeatsRarityColour")) {
+            if (sheet.actor?.type === "character" && game.settings.get(MODULENAME, "playerFeatsRarityColour")) {
                 $html.find(".feats-pane").each((_i, e) => {
                     $(e)
                         .find(".feat-item")
@@ -486,7 +490,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 });
             }
 
-            if (game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint")) {
+            if (sheet.actor?.type === "character" && game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint")) {
                 $html.find(".feats-pane").each((_i, e) => {
                     $(e)
                         .find(".feat-item")

@@ -17,7 +17,7 @@ export async function whirlwindStrike(_token, msToSleepBetweenAttacks = 1001) {
     const aura = _token.auras.get("xdy-workbench-reach-aura");
     const heldWeapons =
         _token.actor?.system?.actions
-            .filter((w) => w.item.type === "weapon")
+            .filter((w) => w.item.isOfType("weapon"))
             .filter((w) => !w.item.system.range)
             .filter((w) => (<WeaponPF2e>w.item).isHeld) || [];
 
