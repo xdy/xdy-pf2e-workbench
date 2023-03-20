@@ -135,7 +135,8 @@
           "Steal": "Kradzież",
           "AdministerFirstAidStopBleeding": "Pierwsza pomoc - Krwotok",
           "AdministerFirstAidStabilize": "Pierwsza pomoc - Stabilizacja",
-          "CreateForgery": "Fałszerstwo"
+          "CreateForgery": "Fałszerstwo",
+          "Escape": "Wyrwanie się"
         },
         "noActorSelected": "Nie wybrano żadnego aktora",
         "cancel": "Anuluj",
