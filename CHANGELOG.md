@@ -1,3 +1,10 @@
+## [4.52.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.4...v4.52.5) (2023-03-20)
+
+
+### Bug Fixes
+
+* Fixed several places where features where enabled for unsupported actor types. Fixed title of journal created when running buildNpcSpellbookJournal macro on an npc. ([d3b9eeb](https://github.com/xdy/xdy-pf2e-workbench/commit/d3b9eeb2a0d99b4da42c34cc2ba23bc7cfb9f005))
+
 ## [4.52.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.3...v4.52.4) (2023-03-19)
 
 
