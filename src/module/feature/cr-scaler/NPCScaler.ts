@@ -247,7 +247,8 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     await newActor.updateEmbeddedDocuments("Item", itemUpdates);
 
     itemUpdates = [];
-    for (const item of newActor.items.values()) {
+    // Ignore spell damage, that will have to be handled manually
+    for (const item of newActor.items.filter((item) => !item.isOfType("spell")).values()) {
         const DMG_REGEX = /\d+d\d+(\+\d*)?/g;
         const description = item.system["description"].value as string;
         let newDescription = description;
