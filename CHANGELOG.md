@@ -1,3 +1,10 @@
+## [4.52.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.5...v4.52.6) (2023-03-20)
+
+
+### Bug Fixes
+
+* CR Scaler showed scaled damage for spells, which it shouldn't, it should ignore spell damage as that needs to be handled manually (most likely by moving them to another spell slot). ([1bc46c4](https://github.com/xdy/xdy-pf2e-workbench/commit/1bc46c46ba3917d148b62da7c71cf060e354c58a)), closes [#705](https://github.com/xdy/xdy-pf2e-workbench/issues/705)
+
 ## [4.52.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.4...v4.52.5) (2023-03-20)
 
 
