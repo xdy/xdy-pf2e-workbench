@@ -20,7 +20,7 @@ export async function moveSelectedAheadOfCurrent(selectedCombatantId): Promise<v
     }
 }
 
-export function moveOnZeroHP(actor: ActorPF2e, update: Record<string, string>, hp: number): void {
+export function moveOnZeroHP(actor: ActorPF2e, actorHp: number, updateHp: number): void {
     const combatant = game.combat?.getCombatantByToken(
         actor.isToken
             ? <string>actor.token?.id
@@ -31,8 +31,8 @@ export function moveOnZeroHP(actor: ActorPF2e, update: Record<string, string>, h
         shouldIHandleThis(actor) &&
         combatant &&
         combatant.id !== game.combat?.combatant?.id &&
-        hp > 0 &&
-        <number>getProperty(update, "system.attributes.hp.value") <= 0
+        actorHp > 0 &&
+        updateHp <= 0
     ) {
         moveSelectedAheadOfCurrent(combatant.id).then();
     }

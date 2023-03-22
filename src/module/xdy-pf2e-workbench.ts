@@ -333,14 +333,14 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp")
     ) {
         Hooks.on("preUpdateActor", async (actor: ActorPF2e, update: Record<string, string>) => {
-            const actorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
-            const healingAboveZeroHp = <number>getProperty(update, "system.attributes.hp.value") > 0;
+            const currentActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
+            const updateHp = <number>getProperty(update, "system.attributes.hp.value");
             if (
                 game.user?.isGM &&
                 actor?.type === "npc" &&
                 actor?.items?.size > 0 &&
-                actorHp > 0 &&
-                !healingAboveZeroHp &&
+                currentActorHp > 0 &&
+                updateHp <= 0 &&
                 game.settings.get("pf2e", "automation.lootableNPCs") &&
                 game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"
             ) {
@@ -348,43 +348,48 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
             }
 
             if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
-                moveOnZeroHP(actor, deepClone(update), actorHp);
+                moveOnZeroHP(actor, currentActorHp, updateHp);
             }
 
             if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
-                increaseDyingOnZeroHP(actor, deepClone(update), actorHp).then((hpRaisedAbove0) => {
+                increaseDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
                     console.log("Workbench increaseDyingOnZeroHP complete");
                     if (hpRaisedAbove0) {
                         if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
                             // Ugh.
                             new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
-                                autoRemoveDyingAtGreaterThanZeroHp(actor, actorHp <= 0 && hpRaisedAbove0).then(() => {
-                                    console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
-                                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                                        autoRemoveUnconsciousAtGreaterThanZeroHP(
-                                            actor,
-                                            actorHp <= 0 && hpRaisedAbove0
-                                        ).then();
+                                autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0 && hpRaisedAbove0).then(
+                                    () => {
+                                        console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
+                                        if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                                            autoRemoveUnconsciousAtGreaterThanZeroHP(
+                                                actor,
+                                                currentActorHp <= 0 && hpRaisedAbove0
+                                            ).then();
+                                        }
                                     }
-                                });
+                                );
                             });
                         } else {
                             if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                                autoRemoveUnconsciousAtGreaterThanZeroHP(actor, actorHp <= 0 && hpRaisedAbove0).then();
+                                autoRemoveUnconsciousAtGreaterThanZeroHP(
+                                    actor,
+                                    currentActorHp <= 0 && hpRaisedAbove0
+                                ).then();
                             }
                         }
                     }
                 });
             } else {
                 if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-                    autoRemoveDyingAtGreaterThanZeroHp(actor, actorHp <= 0 && healingAboveZeroHp).then(() => {
+                    autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0 && updateHp > 0).then(() => {
                         if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, actorHp <= 0 && healingAboveZeroHp).then();
+                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0 && updateHp > 0).then();
                         }
                     });
                 } else {
                     if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, actorHp <= 0 && healingAboveZeroHp).then();
+                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0 && updateHp > 0).then();
                     }
                 }
             }

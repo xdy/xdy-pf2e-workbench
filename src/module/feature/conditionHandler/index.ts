@@ -30,9 +30,10 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
 export async function increaseDyingOnZeroHP(
     actor: ActorPF2e,
     update: Record<string, string>,
-    hp: number
+    hp: number,
+    updateHp: number
 ): Promise<boolean> {
-    if (shouldIHandleThis(actor) && hp > 0 && <number>getProperty(update, "system.attributes.hp.value") <= 0) {
+    if (shouldIHandleThis(actor) && hp > 0 && updateHp <= 0) {
         const orcFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "orc-ferocity");
         const orcFerocityUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "orc-ferocity-used");
         const incredibleFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "incredible-ferocity");
@@ -130,6 +131,8 @@ export async function increaseDyingOnZeroHP(
         ) {
             if (option?.startsWith("addWoundedLevel")) {
                 dyingCounter = (actor.getCondition("wounded")?.value ?? 0) + 1;
+            } else {
+                dyingCounter = 1;
             }
         }
         if (hpNowAboveZero) {
