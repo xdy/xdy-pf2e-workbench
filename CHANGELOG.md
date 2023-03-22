@@ -1,3 +1,10 @@
+## [4.52.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.8...v4.52.9) (2023-03-22)
+
+
+### Bug Fixes
+
+* Typo always disabled player spell rarity colors. ([bd837d0](https://github.com/xdy/xdy-pf2e-workbench/commit/bd837d030a4dce9b8ac52e1a4a7abf6c3ea2df0b))
+
 ## [4.52.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.7...v4.52.8) (2023-03-22)
 
 
