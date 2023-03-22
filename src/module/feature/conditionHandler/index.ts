@@ -149,7 +149,7 @@ export async function increaseDyingOnZeroHP(
         }
         return hpNowAboveZero;
     }
-    return true;
+    return updateHp > 0;
 }
 
 export async function autoRemoveDyingAtGreaterThanZeroHp(actor: ActorPF2e, hpAboveZero: boolean): Promise<boolean> {
