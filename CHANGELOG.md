@@ -1,3 +1,10 @@
+## [4.52.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.7...v4.52.8) (2023-03-22)
+
+
+### Bug Fixes
+
+* Another edge case around auto-removing and adding dying condition. ([6ed372d](https://github.com/xdy/xdy-pf2e-workbench/commit/6ed372d82689a42ad48ab24c0f6cb0fedc4c17a5))
+
 ## [4.52.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.6...v4.52.7) (2023-03-22)
 
 
