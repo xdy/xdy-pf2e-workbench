@@ -99,7 +99,7 @@
     "ky": "^0.33.3",
     "ky-universal": "^0.11.0",
     "luxon": "^3.3.0",
-    "minisearch": "^5.1.0",
+    "minisearch": "^6.0.1",
     "nouislider": "^15.7.0",
     "sortablejs": "^1.15.0"
   },
