@@ -393,7 +393,8 @@
         "hint": "Select to enable setting initiative of combatant outside it's own turn to just before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
         "name": "Setting initiative to just before the current combatant.",
         "noAutomation": "Never",
-        "reaching0HP": "When combatant reaches 0 HP."
+        "reaching0HP": "When character or npc combatant reaches 0 HP.",
+        "reaching0HPCharactersOnly": "When character combatant reaches 0 HP."
       },
       "giveUnconsciousIfDyingRemovedAt0HP": {
         "hint": "Setting to automatically give unconscious if Dying removed while at 0 HP.",

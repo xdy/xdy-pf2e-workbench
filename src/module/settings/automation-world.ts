@@ -17,6 +17,9 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 choices: {
                     noAutomation: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.noAutomation`),
                     reaching0HP: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HP`),
+                    reaching0HPCharactersOnly: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HPCharactersOnly`
+                    ),
                 },
                 onChange: () => debouncedReload(),
                 requireReload: true,

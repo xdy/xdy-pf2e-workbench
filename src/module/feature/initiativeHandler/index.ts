@@ -24,8 +24,7 @@ export function moveOnZeroHP(actor: ActorPF2e, actorHp: number, updateHp: number
     const combatant = game.combat?.getCombatantByToken(
         actor.isToken
             ? <string>actor.token?.id
-            : // @ts-ignore
-              <string>canvas?.scene?.tokens.find((t) => t.actor?.id === actor.id)?.id
+            : <string>canvas?.scene?.tokens?.find((t) => t.actor?.id === actor.id)?.id
     );
     if (
         shouldIHandleThis(actor) &&

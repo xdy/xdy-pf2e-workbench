@@ -327,7 +327,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
 
     if (
-        game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" ||
+        (<string>game.settings.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
         game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
         game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none" ||
         game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
@@ -349,10 +349,12 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                 await mystifyNpcItems(actor.items);
             }
 
-            if (game.combat && game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP") {
-                moveOnZeroHP(actor, currentActorHp, updateHp);
-            }
-
+            const automoveIfZeroHP =
+                game.combat &&
+                ((<string>game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HPCharactersOnly" &&
+                    actor.type === CHARACTER_TYPE) ||
+                    (<string>game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" &&
+                        [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
             if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
                 increaseDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
                     console.log("Workbench increaseDyingOnZeroHP complete");
@@ -380,6 +382,11 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                                 ).then();
                             }
                         }
+                    } else {
+                        if (automoveIfZeroHP) {
+                            const newActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
+                            moveOnZeroHP(actor, newActorHp, newActorHp !== currentActorHp ? updateHp : 0);
+                        }
                     }
                 });
             } else {
@@ -393,6 +400,11 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
                     if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
                         autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0 && updateHp > 0).then();
                     }
+                }
+
+                if (automoveIfZeroHP) {
+                    const newActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
+                    moveOnZeroHP(actor, newActorHp, updateHp);
                 }
             }
         });
