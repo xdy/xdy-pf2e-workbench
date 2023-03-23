@@ -1,3 +1,10 @@
+## [4.53.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.53.0...v4.53.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* Update dependencies. (And, in case a github problem broke the previous release, might as well do another one.) ([36f9a7f](https://github.com/xdy/xdy-pf2e-workbench/commit/36f9a7f51f9743020998a6aa4a87d45b09495af9))
+
 # [4.53.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.9...v4.53.0) (2023-03-23)
 
 
