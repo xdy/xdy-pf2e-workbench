@@ -1,3 +1,10 @@
+# [4.53.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.9...v4.53.0) (2023-03-23)
+
+
+### Features
+
+* Add option to only move dead characters (as opposed to characters and npcs) in initiative order on reaching 0 hp. Also fixes bug with Orc Ferocity-havers being moved in initiative even though they end up with 1 hp. ([de91dff](https://github.com/xdy/xdy-pf2e-workbench/commit/de91dff8a0d7e6f2d684899e81b6444351bf9162))
+
 ## [4.52.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.52.8...v4.52.9) (2023-03-22)
 
 
