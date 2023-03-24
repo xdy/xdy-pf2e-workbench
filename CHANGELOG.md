@@ -1,3 +1,16 @@
+# [4.54.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.53.1...v4.54.0) (2023-03-24)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([add9730](https://github.com/xdy/xdy-pf2e-workbench/commit/add9730cbc16f043d4285a4185e4532dc5e0a661))
+* Update dependencies. ([af451b3](https://github.com/xdy/xdy-pf2e-workbench/commit/af451b3a00c7fecf7f0bc73b67f0bbd71b7e09d4))
+
+
+### Features
+
+* Remember all those annoying reloads the Workbench used to require every time you touched a setting? No more. :) ([fa07651](https://github.com/xdy/xdy-pf2e-workbench/commit/fa0765137e5d7a494dbfa3edda0a23b87c8cd9b4))
+
 ## [4.53.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.53.0...v4.53.1) (2023-03-23)
 
 
