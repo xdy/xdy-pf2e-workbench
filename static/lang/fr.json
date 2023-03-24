@@ -246,7 +246,8 @@
         "hint": "Permettre de déplacer automatiquement l'initiative du combattant en dehors de son propre tour juste avant le combattant actuel, habituellement car le combattant actuel a tué le combattant sélectionné. Avec la règle d'arrondi, plusieurs combattants peuvent avoir la même initiative dans la liste.",
         "name": "Déplacer l'initiative juste avant le combattant actuel.",
         "noAutomation": "Jamais",
-        "reaching0HP": "Lorsque le combattant atteint 0 PV."
+        "reaching0HP": "Lorsque le combattant (personnage ou PNJ) atteint 0 PV.",
+        "reaching0HPCharactersOnly": "Lorsque le personnage combattant atteint 0 PV."
       },
       "giveUnconsciousIfDyingRemovedAt0HP": {
         "hint": "Réglages pour donner automatiquement Inconscient si Mourant retiré à 0 PV.",
