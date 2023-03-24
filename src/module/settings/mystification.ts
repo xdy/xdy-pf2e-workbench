@@ -1,5 +1,5 @@
 import { MODULENAME } from "../xdy-pf2e-workbench";
-import { debouncedReload } from "./index";
+import { reCreateHooks } from "./index";
 import { SettingsMenuPF2eWorkbench } from "./menu";
 
 export let mystifyRandomPropertyType: string;
@@ -21,7 +21,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                     onScene: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.onScene`),
                     onZeroHp: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.onZeroHp`),
                 },
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
             npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater: {
@@ -50,7 +50,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 scope: "world",
                 default: false,
                 type: Boolean,
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
             npcMystifierDemystifyAllTokensBasedOnTheSameActor: {

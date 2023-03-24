@@ -2,7 +2,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { SCALE_APP_DATA } from "../NPCScaleData";
 import { CanvasPF2e, TokenPF2e } from "@module/canvas";
 
-async function registerHandlebarsTemplates() {
+export async function registerNpcRollerHandlebarsTemplates() {
     await loadTemplates([
         `modules/${MODULENAME}/templates/feature/npc-roller/index.html`,
         `modules/${MODULENAME}/templates/feature/npc-roller/table.html`,
@@ -16,10 +16,10 @@ async function registerHandlebarsTemplates() {
 export async function setupNpcRoller() {
     Hooks.on("renderJournalDirectory", enableNpcRollerButton);
 
-    await registerHandlebarsTemplates();
+    await registerNpcRollerHandlebarsTemplates();
 }
 
-function enableNpcRollerButton(_app, html: JQuery) {
+export function enableNpcRollerButton(_app, html: JQuery) {
     const button = $(
         `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}</button>`
     );

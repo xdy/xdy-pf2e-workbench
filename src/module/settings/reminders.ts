@@ -1,5 +1,5 @@
 import { MODULENAME } from "../xdy-pf2e-workbench";
-import { debouncedReload } from "./index";
+import { reCreateHooks } from "./index";
 import { SettingsMenuPF2eWorkbench } from "./menu";
 
 export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
@@ -14,7 +14,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
             reminderCannotAttackIgnoreDeadEidolon: {
@@ -24,7 +24,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
             reminderTargeting: {
@@ -34,7 +34,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
             actionsReminderAllow: {
@@ -50,7 +50,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                     gm: game.i18n.localize(`${MODULENAME}.SETTINGS.actionsReminderAllow.gm`),
                     players: game.i18n.localize(`${MODULENAME}.SETTINGS.actionsReminderAllow.players`),
                 },
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
             reminderBreathWeapon: {
@@ -60,7 +60,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
             heroPointHandler: {
@@ -70,7 +70,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
             heroPointHandlerStartTimerOnReady: {
@@ -80,7 +80,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
             heroPointHandlerDefaultTimeoutMinutes: {
@@ -90,7 +90,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: 60,
                 type: Number,
-                onChange: () => debouncedReload(),
+                onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
         };

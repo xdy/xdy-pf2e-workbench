@@ -1,4 +1,4 @@
-import { MODULENAME } from "../xdy-pf2e-workbench";
+import { createHooks, MODULENAME } from "../xdy-pf2e-workbench";
 import { WorkbenchMystificationSettings } from "./mystification";
 import { WorkbenchRemindersSettings } from "./reminders";
 import { WorkbenchWorldAutomationSettings } from "./automation-world";
@@ -8,9 +8,8 @@ import { WorkbenchVariantRulesSettings } from "./variantRules";
 
 export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification";
 
-export function debouncedReload() {
-    // @ts-ignore
-    foundry.utils.debouncedReload();
+export function reCreateHooks() {
+    createHooks();
 }
 
 export function registerWorkbenchSettings() {
@@ -39,8 +38,7 @@ export function registerWorkbenchSettings() {
                 `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.nonCollapsedDefault`
             ),
         },
-        onChange: () => debouncedReload(),
-        requiresReload: true,
+        onChange: () => reCreateHooks(),
     });
 
     game.settings.register(MODULENAME, "autoCollapseItemActionChatCardContent", {
@@ -59,8 +57,7 @@ export function registerWorkbenchSettings() {
                 `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.nonCollapsedDefault`
             ),
         },
-        onChange: () => debouncedReload(),
-        requiresReload: true,
+        onChange: () => reCreateHooks(),
     });
 
     game.settings.register(MODULENAME, "autoCollapseItemAttackChatCardContent", {
@@ -79,8 +76,7 @@ export function registerWorkbenchSettings() {
                 `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.nonCollapsedDefault`
             ),
         },
-        onChange: () => debouncedReload(),
-        requiresReload: true,
+        onChange: () => reCreateHooks(),
     });
 
     game.settings.register(MODULENAME, "autoExpandDamageRolls", {
@@ -96,8 +92,7 @@ export function registerWorkbenchSettings() {
             expandedNew: game.i18n.localize(`${MODULENAME}.SETTINGS.autoExpandDamageRolls.expandedNew`),
             expandedNewest: game.i18n.localize(`${MODULENAME}.SETTINGS.autoExpandDamageRolls.expandedNewest`),
         },
-        onChange: () => debouncedReload(),
-        requiresReload: true,
+        onChange: () => reCreateHooks(),
     });
 
     game.settings.register(MODULENAME, "skillActions", {
@@ -112,8 +107,7 @@ export function registerWorkbenchSettings() {
             bottom: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.bottom`),
             top: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.top`),
         },
-        onChange: () => debouncedReload(),
-        requiresReload: true,
+        onChange: () => reCreateHooks(),
     });
 
     game.settings.register(MODULENAME, "skillActionsIconStyle", {
@@ -201,7 +195,6 @@ export function registerWorkbenchSettings() {
         config: true,
         default: "3.34.0",
         type: String,
-        onChange: () => debouncedReload(),
-        requiresReload: true,
+        onChange: () => reCreateHooks(),
     });
 }
