@@ -21,7 +21,7 @@ export class WorkbenchVariantRulesSettings extends SettingsMenuPF2eWorkbench {
                     step: 1,
                 },
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             abpVariantAllowItemBonuses: {
                 name: `${MODULENAME}.SETTINGS.abpVariantAllowItemBonuses.name`,
@@ -31,7 +31,7 @@ export class WorkbenchVariantRulesSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
         };
     }

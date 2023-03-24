@@ -15,7 +15,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             reminderCannotAttackIgnoreDeadEidolon: {
                 name: `${MODULENAME}.SETTINGS.reminderCannotAttackIgnoreDeadEidolon.name`,
@@ -25,7 +25,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             reminderTargeting: {
                 name: `${MODULENAME}.SETTINGS.reminderTargeting.name`,
@@ -35,7 +35,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             actionsReminderAllow: {
                 name: `${MODULENAME}.SETTINGS.actionsReminderAllow.name`,
@@ -51,7 +51,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                     players: game.i18n.localize(`${MODULENAME}.SETTINGS.actionsReminderAllow.players`),
                 },
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             reminderBreathWeapon: {
                 name: `${MODULENAME}.SETTINGS.reminderBreathWeapon.name`,
@@ -61,7 +61,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             heroPointHandler: {
                 name: `${MODULENAME}.SETTINGS.heroPointHandler.name`,
@@ -71,7 +71,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             heroPointHandlerStartTimerOnReady: {
                 name: `${MODULENAME}.SETTINGS.heroPointHandlerStartTimerOnReady.name`,
@@ -81,7 +81,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             heroPointHandlerDefaultTimeoutMinutes: {
                 name: `${MODULENAME}.SETTINGS.heroPointHandlerDefaultTimeoutMinutes.name`,
@@ -91,7 +91,7 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 default: 60,
                 type: Number,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
         };
     }

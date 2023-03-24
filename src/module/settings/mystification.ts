@@ -22,7 +22,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                     onZeroHp: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.onZeroHp`),
                 },
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater: {
                 name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater.name`,
@@ -51,7 +51,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             npcMystifierDemystifyAllTokensBasedOnTheSameActor: {
                 name: `${MODULENAME}.SETTINGS.npcMystifierDemystifyAllTokensBasedOnTheSameActor.name`,

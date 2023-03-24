@@ -15,7 +15,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             npcScaler: {
                 name: `${MODULENAME}.SETTINGS.npcScaler.name`,
@@ -25,7 +25,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             npcRoller: {
                 name: `${MODULENAME}.SETTINGS.npcRoller.name`,
@@ -35,7 +35,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             quickQuantities: {
                 name: `${MODULENAME}.SETTINGS.quickQuantities.name`,
@@ -45,7 +45,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             castPrivateSpell: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpell.name`,
@@ -55,7 +55,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             castPrivateSpellAlwaysForNPC: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpellAlwaysForNPC.name`,
@@ -65,7 +65,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             castPrivateSpellWithPublicMessage: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.name`,
@@ -75,7 +75,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             castPrivateSpellWithPublicMessageShowTraits: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.name`,
@@ -85,7 +85,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             addGmRKButtonToNpc: {
                 name: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.name`,
@@ -95,7 +95,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             addGmRKButtonToNpcHideNpcName: {
                 name: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.hideNpcName`,
@@ -105,7 +105,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             addGmRKButtonToNpcHideSkill: {
                 name: `${MODULENAME}.SETTINGS.addGmRKButtonToNpc.hideSkill`,
@@ -115,7 +115,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             tokenAnimation: {
                 name: `${MODULENAME}.SETTINGS.tokenAnimation.name`,
@@ -125,7 +125,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             tokenAnimationSpeed: {
                 name: `${MODULENAME}.SETTINGS.tokenAnimationSpeed.name`,
@@ -135,7 +135,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: 6,
                 type: Number,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             playerFeatsPrerequisiteHint: {
                 name: `${MODULENAME}.SETTINGS.playerFeatsPrerequisiteHint.name`,

@@ -54,7 +54,6 @@ declare global {
         onChange?: (
             choice: TChoices extends Record<string, unknown> ? keyof TChoices : undefined
         ) => void | Promise<void>;
-        requireReload?: boolean; //xdy add to pf2e
     }
 
     interface SettingSubmenuConfig {

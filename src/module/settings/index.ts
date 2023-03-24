@@ -40,7 +40,7 @@ export function registerWorkbenchSettings() {
             ),
         },
         onChange: () => debouncedReload(),
-        requireReload: true,
+        requiresReload: true,
     });
 
     game.settings.register(MODULENAME, "autoCollapseItemActionChatCardContent", {
@@ -60,7 +60,7 @@ export function registerWorkbenchSettings() {
             ),
         },
         onChange: () => debouncedReload(),
-        requireReload: true,
+        requiresReload: true,
     });
 
     game.settings.register(MODULENAME, "autoCollapseItemAttackChatCardContent", {
@@ -80,7 +80,7 @@ export function registerWorkbenchSettings() {
             ),
         },
         onChange: () => debouncedReload(),
-        requireReload: true,
+        requiresReload: true,
     });
 
     game.settings.register(MODULENAME, "autoExpandDamageRolls", {
@@ -97,7 +97,7 @@ export function registerWorkbenchSettings() {
             expandedNewest: game.i18n.localize(`${MODULENAME}.SETTINGS.autoExpandDamageRolls.expandedNewest`),
         },
         onChange: () => debouncedReload(),
-        requireReload: true,
+        requiresReload: true,
     });
 
     game.settings.register(MODULENAME, "skillActions", {
@@ -113,7 +113,7 @@ export function registerWorkbenchSettings() {
             top: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.top`),
         },
         onChange: () => debouncedReload(),
-        requireReload: true,
+        requiresReload: true,
     });
 
     game.settings.register(MODULENAME, "skillActionsIconStyle", {
@@ -202,6 +202,6 @@ export function registerWorkbenchSettings() {
         default: "3.34.0",
         type: String,
         onChange: () => debouncedReload(),
-        requireReload: true,
+        requiresReload: true,
     });
 }

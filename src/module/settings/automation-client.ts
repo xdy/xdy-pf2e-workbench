@@ -16,7 +16,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             autoRollDamageForSpellAttack: {
                 name: `${MODULENAME}.SETTINGS.autoRollDamageForSpellAttack.name`,
@@ -26,7 +26,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             autoRollDamageForSpellNotAnAttack: {
                 name: `${MODULENAME}.SETTINGS.autoRollDamageForSpellNotAnAttack.name`,
@@ -36,7 +36,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             autoRollDamageNotifyOnSpellCardNotFound: {
                 name: `${MODULENAME}.SETTINGS.autoRollDamageNotifyOnSpellCardNotFound.name`,
@@ -54,7 +54,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             applyPersistentHealing: {
                 name: `${MODULENAME}.SETTINGS.applyPersistentHealing.name`,
@@ -64,7 +64,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
             decreaseFrightenedConditionEachTurn: {
                 name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
@@ -74,7 +74,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 default: false,
                 type: Boolean,
                 onChange: () => debouncedReload(),
-                requireReload: true,
+                requiresReload: true,
             },
         };
     }
