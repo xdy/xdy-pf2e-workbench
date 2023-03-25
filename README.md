@@ -65,8 +65,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to alter the token animation speed. (Not compatible with Multi Level Tokens teleport functionality.)
 
 * World Automation section
-    * Options to automatically move combatant that goes to 0 hp to just before the current combatant. (Normally due to
-      the current combatant just having downed the target combatant.)
+    * Option to automatically move combatant that goes to 0 hp to just before the current combatant. (Normally due to
+      the current combatant just having downed the target combatant.) **NOTE: Buggy for some people. If actors start moving around in iniative for no good reason, you're one of the 'lucky' ones that get this problem and should disable it until I manage to fix it.**
     * Enable/disable the option to autoroll damage on a hit.
     * Enable/disable the option to automatically apply persistent healing.
     * Option to apply Encumbered condition automatically based on current bulk when bulk changes. Note: Uses the system
