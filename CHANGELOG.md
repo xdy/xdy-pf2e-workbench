@@ -1,3 +1,10 @@
+## [4.55.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.55.1...v4.55.2) (2023-03-26)
+
+
+### Bug Fixes
+
+* If a spell is cast privately, the damage roll for it replaces the spell name with the text "A spell". ([597c41c](https://github.com/xdy/xdy-pf2e-workbench/commit/597c41c649e3de370a9b595d2b583b46fc07521b)), closes [#702](https://github.com/xdy/xdy-pf2e-workbench/issues/702)
+
 ## [4.55.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.55.0...v4.55.1) (2023-03-26)
 
 
