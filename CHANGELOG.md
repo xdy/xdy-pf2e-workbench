@@ -1,3 +1,10 @@
+## [4.55.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.55.0...v4.55.1) (2023-03-26)
+
+
+### Bug Fixes
+
+* Mystifies message speaker in a few more cases. Supports tokens on other scenes. ([71bea2a](https://github.com/xdy/xdy-pf2e-workbench/commit/71bea2aa155d08190550eb5aff0aa956dcfcce99))
+
 # [4.55.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.54.1...v4.55.0) (2023-03-26)
 
 
