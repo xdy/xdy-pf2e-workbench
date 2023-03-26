@@ -201,71 +201,80 @@ export const renderCharacterSheetPF2eHook = (app: TokenHUD, html: JQuery, data: 
 };
 
 export const preUpdateActorHook = async (actor: ActorPF2e, update: Record<string, string>) => {
-    const currentActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
-    const updateHp = <number>getProperty(update, "system.attributes.hp.value");
-    if (
-        game.user?.isGM &&
-        actor?.type === NPC_TYPE &&
-        actor?.items?.size > 0 &&
-        currentActorHp > 0 &&
-        updateHp <= 0 &&
-        game.settings.get("pf2e", "automation.lootableNPCs") &&
-        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"
-    ) {
-        await mystifyNpcItems(actor.items);
-    }
+    const updateHp = getProperty(update, "system.attributes.hp.value");
 
-    const automoveIfZeroHP =
-        game.combat &&
-        ((<string>game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HPCharactersOnly" &&
-            actor.type === CHARACTER_TYPE) ||
-            (<string>game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" &&
-                [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
-    if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
-        increaseDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
-            console.log("Workbench increaseDyingOnZeroHP complete");
-            if (hpRaisedAbove0) {
-                if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-                    // Ugh.
-                    new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
-                        autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0 && hpRaisedAbove0).then(() => {
-                            console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
-                            if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                                autoRemoveUnconsciousAtGreaterThanZeroHP(
-                                    actor,
-                                    currentActorHp <= 0 && hpRaisedAbove0
-                                ).then();
-                            }
+    // All these are only relevant if hp has changed (it's undefined otherwise)
+    if (typeof updateHp === "number") {
+        const currentActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
+        if (
+            game.user?.isGM &&
+            actor?.type === NPC_TYPE &&
+            actor?.items?.size > 0 &&
+            currentActorHp > 0 &&
+            updateHp <= 0 &&
+            game.settings.get("pf2e", "automation.lootableNPCs") &&
+            game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"
+        ) {
+            await mystifyNpcItems(actor.items);
+        }
+
+        const automoveIfZeroHP =
+            game.combat &&
+            ((<string>game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HPCharactersOnly" &&
+                actor.type === CHARACTER_TYPE) ||
+                (<string>game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" &&
+                    [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
+        if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
+            increaseDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
+                console.log("Workbench increaseDyingOnZeroHP complete");
+                if (hpRaisedAbove0) {
+                    if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
+                        // Ugh.
+                        new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
+                            autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0 && hpRaisedAbove0).then(
+                                () => {
+                                    console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
+                                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                                        autoRemoveUnconsciousAtGreaterThanZeroHP(
+                                            actor,
+                                            currentActorHp <= 0 && hpRaisedAbove0
+                                        ).then();
+                                    }
+                                }
+                            );
                         });
-                    });
-                } else {
-                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0 && hpRaisedAbove0).then();
+                    } else {
+                        if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                            autoRemoveUnconsciousAtGreaterThanZeroHP(
+                                actor,
+                                currentActorHp <= 0 && hpRaisedAbove0
+                            ).then();
+                        }
                     }
-                }
-            } else {
-                if (automoveIfZeroHP) {
-                    const newActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
-                    moveOnZeroHP(actor, newActorHp, newActorHp !== currentActorHp ? updateHp : 0);
-                }
-            }
-        });
-    } else {
-        if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
-            autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0 && updateHp > 0).then(() => {
-                if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                    autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0 && updateHp > 0).then();
+                } else {
+                    if (automoveIfZeroHP) {
+                        const newActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
+                        moveOnZeroHP(actor, newActorHp, newActorHp !== currentActorHp ? updateHp : 0);
+                    }
                 }
             });
         } else {
-            if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0 && updateHp > 0).then();
+            if (updateHp > 0) {
+                if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
+                    autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0).then(() => {
+                        if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
+                        }
+                    });
+                } else {
+                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
+                    }
+                }
+            } else if (automoveIfZeroHP) {
+                const newActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
+                moveOnZeroHP(actor, newActorHp, updateHp);
             }
-        }
-
-        if (automoveIfZeroHP) {
-            const newActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
-            moveOnZeroHP(actor, newActorHp, updateHp);
         }
     }
 };

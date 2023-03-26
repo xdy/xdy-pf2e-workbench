@@ -128,7 +128,6 @@ export function addGmRKButtonToNpc($html: JQuery, sheet: ActorSheet) {
                         const b = `.gm-recall-knowledge-${skill}`;
                         $html.find(b).on("click", async (e) => {
                             const attr = <string>$(e.currentTarget).attr("data-token");
-                            // @ts-ignore
                             const token: any = game?.scenes?.active?.tokens?.get(attr);
                             const skill = $(e.currentTarget).attr("data-skill");
                             const dcs = (<string>$(e.currentTarget).attr("data-dcs")).split("/") || [];
