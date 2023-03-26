@@ -231,13 +231,15 @@ export function mangleChatMessage(message: ChatMessagePF2e, html: JQuery) {
     const actorId = <string>message?.speaker?.actor;
     const tokenId = message?.speaker?.token;
     const actor = game.actors?.get(actorId);
+    const tokens = game.scenes?.active?.tokens ?? game.scenes?.current?.tokens ?? canvas?.scene?.tokens;
+    const token = tokens?.get(<string>tokenId);
     const actionCard = html?.find(".action-card");
     const speaker = html?.find(".message-sender");
 
-    const tokenName = <string>canvas?.scene?.tokens?.find((t) => t?.id === tokenId)?.name;
+    const tokenName = token?.name || message.speaker.alias;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 
-    if (tokenNameNoNumber && actor?.prototypeToken.name?.trim() !== tokenNameNoNumber && actionCard) {
+    if (tokenNameNoNumber && actor?.prototypeToken.name?.trim() !== tokenNameNoNumber) {
         if (actionCard.html()) {
             actionCard.html(actionCard.html().replace(new RegExp(<string>actor?.prototypeToken.name, "gi"), tokenName));
         }
