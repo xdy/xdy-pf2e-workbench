@@ -290,31 +290,31 @@ export async function castPrivateSpell(data: ChatMessageDataPF2e, message: ChatM
     }
 }
 
-export function hideNameOfPrivateSpell(message: ChatMessagePF2e, html: JQuery) {
-    const find = game.messages.contents
-        .slice(-Math.min(10, game.messages.size))
-        .filter((m) => {
-            return m.flags?.pf2e?.origin?.uuid === message.flags?.pf2e?.origin?.uuid;
-        })
-        .filter((m) => (m.type = CONST.CHAT_MESSAGE_TYPES.WHISPER))
-        .find((m) => m.whisper?.includes(game.user?.id));
-    if (find) {
-        const flavor = html?.find(".flavor-text");
-        if (flavor.html()) {
-            fromUuid(<string>message.flags?.pf2e.origin?.uuid).then((origin) => {
-                flavor.html(
-                    flavor
-                        .html()
-                        .replace(
-                            origin?.name ?? "???",
-                            game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.aSpell`)
-                        )
-                );
-                console.log(flavor.html());
-            });
-        }
-    }
-}
+// export function hideNameOfPrivateSpell(message: ChatMessagePF2e, html: JQuery) {
+//     const find = game.messages.contents
+//         .slice(-Math.min(10, game.messages.size))
+//         .filter((m) => {
+//             return m.flags?.pf2e?.origin?.uuid === message.flags?.pf2e?.origin?.uuid;
+//         })
+//         .filter((m) => (m.type = CONST.CHAT_MESSAGE_TYPES.WHISPER))
+//         .find((m) => m.whisper?.includes(game.user?.id));
+//     if (find) {
+//         const flavor = html?.find(".flavor-text");
+//         if (flavor.html()) {
+//             fromUuid(<string>message.flags?.pf2e.origin?.uuid).then((origin) => {
+//                 flavor.html(
+//                     flavor
+//                         .html()
+//                         .replace(
+//                             origin?.name ?? "???",
+//                             game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.aSpell`)
+//                         )
+//                 );
+//                 console.log(flavor.html());
+//             });
+//         }
+//     }
+// }
 
 export async function mystifyNpcItems(items) {
     const minimumRarity = <string>(

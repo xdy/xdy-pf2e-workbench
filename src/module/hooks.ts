@@ -7,7 +7,6 @@ import {
     chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
     damageCardExpand,
-    hideNameOfPrivateSpell,
     mystifyNpcItems,
 } from "./feature/qolHandler";
 import {
@@ -84,13 +83,13 @@ export const createChatMessageHook = (message: ChatMessagePF2e) => {
 };
 
 export const renderChatMessageHook = (message: ChatMessagePF2e, html: JQuery) => {
-    if (
-        game.settings.get(MODULENAME, "castPrivateSpell") &&
-        message?.flags?.pf2e?.origin?.type === "spell" &&
-        isActuallyDamageRoll(message)
-    ) {
-        hideNameOfPrivateSpell(message, html);
-    }
+    // if (
+    //     game.settings.get(MODULENAME, "castPrivateSpell") &&
+    //     message?.flags?.pf2e?.origin?.type === "spell" &&
+    //     isActuallyDamageRoll(message)
+    // ) {
+    //     hideNameOfPrivateSpell(message, html);
+    // }
 
     if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
         mangleNamesInChatMessage(message, html);
