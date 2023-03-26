@@ -4,13 +4,13 @@ import { CanvasPF2e, TokenPF2e } from "@module/canvas";
 
 export async function registerNpcRollerHandlebarsTemplates() {
     await loadTemplates([
-        `modules/${MODULENAME}/templates/feature/npc-roller/index.html`,
-        `modules/${MODULENAME}/templates/feature/npc-roller/table.html`,
-        `modules/${MODULENAME}/templates/feature/npc-roller/cell.html`,
+        `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
+        `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
+        `modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs`,
     ]);
 
-    Handlebars.registerPartial("rollAppTable", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/table.html"}}`);
-    Handlebars.registerPartial("rollAppCell", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/cell.html"}}`);
+    Handlebars.registerPartial("rollAppTable", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/table.hbs"}}`);
+    Handlebars.registerPartial("rollAppCell", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs"}}`);
 }
 
 export async function setupNpcRoller() {
@@ -45,7 +45,7 @@ class NpcRoller extends Application {
         return {
             ...options,
             title: game.i18n.localize(`${MODULENAME}.npcRoller.title`),
-            template: `modules/${MODULENAME}/templates/feature/npc-roller/index.html`,
+            template: `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
             tabs: [
                 {
                     navSelector: `.roll-app-nav`,

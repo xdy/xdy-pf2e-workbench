@@ -62,7 +62,7 @@ class CreatureBuilder extends FormApplication {
     static override get defaultOptions() {
         const options = super.defaultOptions;
         options.title = "Creature Builder";
-        options.template = `modules/xdy-pf2e-workbench/templates/feature/creature-builder/index.html`;
+        options.template = `modules/xdy-pf2e-workbench/templates/feature/creature-builder/index.hbs`;
         options.classes = [...(options.classes ?? []), "creature-builder"];
         options.width = 800;
         options.height = "auto";

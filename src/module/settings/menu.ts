@@ -22,7 +22,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
         return mergeObject(options, {
             title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
             id: `${this.namespace}-settings`, // lgtm [js/mixed-static-instance-this-access]
-            template: `modules/xdy-pf2e-workbench/templates/menu.html`,
+            template: `modules/xdy-pf2e-workbench/templates/menu.hbs`,
             width: 650,
             height: "auto",
             closeOnSubmit: true,

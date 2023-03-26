@@ -1,13 +1,19 @@
 module.exports = {
     env: {
         browser: true,
-        es6: true
+        es6: true,
     },
-    extends: ["prettier", "plugin:import/errors", "eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    extends: [
+        "prettier",
+        "plugin:import/errors",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:json/recommended",
+    ],
     parserOptions: {
         ecmaVersion: 2021,
         sourceType: "module",
-        project: "./tsconfig.json"
+        project: "./tsconfig.json",
     },
     ignorePatterns: ["dist/"],
     rules: {
@@ -28,31 +34,32 @@ module.exports = {
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-unused-vars": "off" // Handled by tsconfig
+        "@typescript-eslint/no-unused-vars": "off", // Handled by tsconfig
+        "@typescript-eslint/array-type": ["error", { default: "array" }],
     },
     settings: {
         "import/resolver": {
             node: {
                 paths: ["src", "types", "", "dist"],
-                extensions: [".css", ".js", ".json", ".jsx", ".scss", ".ts", ".tsx"]
+                extensions: [".css", ".js", ".json", ".jsx", ".scss", ".ts", ".tsx"],
             },
             "eslint-import-resolver-typescript": true,
             typescript: {
-                alwaysTryTypes: true
-            }
+                alwaysTryTypes: true,
+            },
         },
         "import/parsers": {
-            "@typescript-eslint/parser": [".ts"]
-        }
+            "@typescript-eslint/parser": [".ts"],
+        },
     },
     plugins: ["prettier", "@typescript-eslint", "import"],
     overrides: [
         {
             files: "tests/**/*",
             rules: {
-                "global-require": "off"
-            }
-        }
+                "global-require": "off",
+            },
+        },
     ],
-    parser: "@typescript-eslint/parser"
+    parser: "@typescript-eslint/parser",
 };

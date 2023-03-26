@@ -30,8 +30,8 @@ interface Configuration extends Omit<webpack.Configuration, "devServer"> {
 
 const allTemplates = (): string => {
     return glob
-        .sync("**/*.html", { cwd: path.join(__dirname, "static/templates") })
-        .map((file: string) => `"systems/pf2e/templates/${file}"`)
+        .sync("**/*.hbs", { cwd: path.join(__dirname, "static/templates") })
+        .map((file: string) => `"modules/xdy-pf2e-workbench/templates/${file}"`)
         .join(", ");
 };
 
@@ -42,7 +42,7 @@ const [outDir, foundryUri] = ((): [string, string] => {
         config instanceof Object
             ? path.join(config.dataPath, "Data", "modules", config.systemName ?? "xdy-pf2e-workbench")
             : path.join(__dirname, "dist/");
-    const foundryUri = (config instanceof Object ? String(config.foundryUri) : "") ?? "http://localhost:30000";
+    const foundryUri = (config instanceof Object ? String(config.foundryUri ?? "") : null) || "http://localhost:30000";
     return [outDir, foundryUri];
 })();
 
@@ -51,7 +51,6 @@ class EmptyStaticFilesPlugin {
     apply(compiler: webpack.Compiler): void {
         compiler.hooks.afterEmit.tap("EmptyStaticFilesPlugin", (): void => {
             if (!isProductionBuild) {
-                fs.closeSync(fs.openSync(path.resolve(outDir, "styles/tinymce.css"), "w"));
                 fs.closeSync(fs.openSync(path.resolve(outDir, "vendor.bundle.js"), "w"));
             }
         });
@@ -61,25 +60,25 @@ class EmptyStaticFilesPlugin {
 type Optimization = Configuration["optimization"];
 const optimization: Optimization = isProductionBuild
     ? {
-        minimize: true,
-        minimizer: [
-            new TerserPlugin({ terserOptions: { mangle: false, module: true, keep_classnames: true } }),
-            new CssMinimizerPlugin(),
-        ],
-        splitChunks: {
-            chunks: "all",
-            cacheGroups: {
-                default: {
-                    name: "xdy-pf2e-workbench",
-                    test: "src/module/xdy-pf2e-workbench.ts",
-                },
-                vendor: {
-                    name: "vendor",
-                    test: /node_modules/,
-                },
-            },
-        },
-    }
+          minimize: true,
+          minimizer: [
+              new TerserPlugin({ terserOptions: { mangle: false, module: true, keep_classnames: true } }),
+              new CssMinimizerPlugin(),
+          ],
+          splitChunks: {
+              chunks: "all",
+              cacheGroups: {
+                  default: {
+                      name: "xdy-pf2e-workbench",
+                      test: "src/module/xdy-pf2e-workbench.ts",
+                  },
+                  vendor: {
+                      name: "vendor",
+                      test: /node_modules/,
+                  },
+              },
+          },
+      }
     : undefined;
 
 const config: Configuration = {
@@ -90,15 +89,7 @@ const config: Configuration = {
     },
     module: {
         rules: [
-            !isProductionBuild
-                ? {
-                    test: /\.html$/,
-                    loader: "raw-loader",
-                }
-                : {
-                    test: /\.html$/,
-                    loader: "null-loader",
-                },
+            !isProductionBuild ? { test: /\.hbs$/, loader: "raw-loader" } : { test: /\.hbs$/, loader: "null-loader" },
             {
                 test: /\.ts$/,
                 use: [
@@ -174,6 +165,7 @@ const config: Configuration = {
     },
     plugins: [
         new ForkTsCheckerWebpackPlugin(),
+        new webpack.WatchIgnorePlugin({ paths: ["node_modules/", "packs/", "static/packs/"] }),
         new webpack.DefinePlugin({
             BUILD_MODE: JSON.stringify(buildMode),
         }),
@@ -187,7 +179,7 @@ const config: Configuration = {
                 {
                     from: "static/",
                     transform(content: Buffer, absoluteFrom: string) {
-                        if (path.basename(absoluteFrom) === "en.json") {
+                        if (path.basename(absoluteFrom).endsWith("en.json")) {
                             return JSON.stringify(JSON.parse(content.toString()));
                         }
                         return content;
@@ -215,6 +207,7 @@ const config: Configuration = {
         clean: true,
         path: outDir,
         filename: "xdy-pf2e-workbench.bundle.js",
+        publicPath: "/modules/xdy-pf2e-workbench",
     },
 };
 

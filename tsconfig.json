@@ -6,11 +6,12 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
-      "esnext",
       "dom",
-      "dom.iterable"
+      "dom.iterable",
+      "esnext"
     ],
     "module": "commonjs",
+    "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
@@ -63,7 +64,6 @@
     "sourceMap": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": false,
-    //Gives tons of errors, take a look later.
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "target": "es2018",
@@ -82,5 +82,8 @@
   },
   "ts-node": {
     "files": true
+    },
+    "watchOptions": {
+        "excludeDirectories": ["packs/", "static/packs/"]
   }
 }
