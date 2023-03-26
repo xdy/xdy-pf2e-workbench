@@ -231,21 +231,20 @@ export function mangleChatMessage(message: ChatMessagePF2e, html: JQuery) {
     const actorId = <string>message?.speaker?.actor;
     const tokenId = message?.speaker?.token;
     const actor = game.actors?.get(actorId);
-    const jqueryContent = html?.find(".action-card");
+    const actionCard = html?.find(".action-card");
+    const speaker = html?.find(".message-sender");
 
-    // @ts-ignore
     const tokenName = <string>canvas?.scene?.tokens?.find((t) => t?.id === tokenId)?.name;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 
-    if (
-        tokenNameNoNumber &&
-        actor?.prototypeToken.name?.trim() !== tokenNameNoNumber &&
-        jqueryContent &&
-        jqueryContent.html()
-    ) {
-        jqueryContent.html(
-            jqueryContent.html().replace(new RegExp(<string>actor?.prototypeToken.name, "gi"), tokenNameNoNumber)
-        );
+    if (tokenNameNoNumber && actor?.prototypeToken.name?.trim() !== tokenNameNoNumber && actionCard) {
+        if (actionCard.html()) {
+            actionCard.html(actionCard.html().replace(new RegExp(<string>actor?.prototypeToken.name, "gi"), tokenName));
+        }
+        if (speaker.html()) {
+            speaker.html(speaker.html().replace(message.speaker.alias, tokenName));
+            message.speaker.alias = tokenName;
+        }
     }
 }
 

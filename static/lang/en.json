@@ -531,8 +531,8 @@
         "name": "Use elite/weak status"
       },
       "npcMystifierUseMystifiedNameInChat": {
-        "hint": "(Experimental) Check to use mystified name inside chat messages by replacing the actor name with the mystified name.",
-        "name": "(Experimental) Mystify name in chat messages."
+        "hint": "Check to try to use mystified name for speaker as well as inside chat messages by replacing the actor name with the mystified name. Note that if the text in the message does not use the same name as the actor or is misspelled, it won't be replaced.",
+        "name": "Try to mystify speaker and use of name in chat messages."
       },
       "npcMystifierUseOtherTraits": {
         "hint": "Check to use all npc traits not already included by any of the above settings in the mystified name.",

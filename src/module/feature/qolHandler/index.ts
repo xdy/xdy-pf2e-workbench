@@ -181,7 +181,7 @@ export async function castPrivateSpell(data: ChatMessageDataPF2e, message: ChatM
         if (<boolean>game.settings.get("pf2e", "metagame_tokenSetsNameVisibility")) {
             tokenName = anonymous;
         } else {
-            tokenName = message.token?.name ?? message.actor?.name ?? anonymous;
+            tokenName = message.alias ?? message.token?.name ?? message.actor?.name ?? anonymous;
         }
         const type = message.flags?.pf2e.origin?.type ?? "spell";
         const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
