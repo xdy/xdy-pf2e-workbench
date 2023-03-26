@@ -1,3 +1,10 @@
+## [4.54.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.54.0...v4.54.1) (2023-03-26)
+
+
+### Bug Fixes
+
+* Possible fix for the "setting initiative to just before the current combatant" feature changing initiatives when it shouldn't. ([7fed5f9](https://github.com/xdy/xdy-pf2e-workbench/commit/7fed5f9be219e2cf1bfe76351f0510c2fa717aed))
+
 # [4.54.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.53.1...v4.54.0) (2023-03-24)
 
 
