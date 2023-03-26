@@ -388,8 +388,8 @@
         "name": "Utiliser le statut élite/faible"
       },
       "npcMystifierUseMystifiedNameInChat": {
-        "hint": "(Expérimental) Cliquez pour utiliser le nom mystifié à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié.",
-        "name": "(Expérimental) mystifier le nom dans les messages de la conversation."
+        "hint": "Cliquez pour tenter d'utiliser le nom mystifié comme orateur et à l'intérieur des messages de la conversation en remplaçant le nom de l'acteur par le nom mystifié. Notez que si le texte dans le message n'utilise par le même nom que l'acteur ou est mal orthographié, il ne sera pas remplacé.",
+        "name": "Tentez de mystifier le nom de l'orateur et de l'utiliser dans les messages de la conversation."
       },
       "npcMystifierUseOtherTraits": {
         "hint": "Cliquez pour utiliser les traits des PNJ qui n'appartiennent pas aux types ci-dessus dans le nom mystifié.",
