@@ -1,3 +1,10 @@
+## [4.55.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.55.2...v4.55.3) (2023-03-26)
+
+
+### Bug Fixes
+
+* Turn off trying to hide spell names on damage roll for now as it breaks the chat message. ([a0f6241](https://github.com/xdy/xdy-pf2e-workbench/commit/a0f6241282cbe3df765b8ebe568e6de6bd0bff45))
+
 ## [4.55.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.55.1...v4.55.2) (2023-03-26)
 
 
