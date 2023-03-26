@@ -1,3 +1,10 @@
+# [4.55.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.54.1...v4.55.0) (2023-03-26)
+
+
+### Features
+
+* If the option to mystify actor names in chat messages is enabled it uses the token name for the speaker (and tries to replace the name inside the message itself.) ([6c3a3ff](https://github.com/xdy/xdy-pf2e-workbench/commit/6c3a3ff29b1d4109a42fd9a413b4c7b6c2f65763)), closes [#702](https://github.com/xdy/xdy-pf2e-workbench/issues/702)
+
 ## [4.54.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.54.0...v4.54.1) (2023-03-26)
 
 
