@@ -7,6 +7,7 @@ import {
     chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
     damageCardExpand,
+    hideNameOfPrivateSpell,
     mystifyNpcItems,
 } from "./feature/qolHandler";
 import {
@@ -18,7 +19,7 @@ import {
 } from "./feature/reminders";
 import { isActuallyDamageRoll } from "./utils";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
-import { mangleChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
+import { mangleNamesInChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
 import { ItemPF2e } from "@item";
 import {
     applyClumsyIfWieldingLargerWeapon,
@@ -83,8 +84,16 @@ export const createChatMessageHook = (message: ChatMessagePF2e) => {
 };
 
 export const renderChatMessageHook = (message: ChatMessagePF2e, html: JQuery) => {
+    if (
+        game.settings.get(MODULENAME, "castPrivateSpell") &&
+        message?.flags?.pf2e?.origin?.type === "spell" &&
+        isActuallyDamageRoll(message)
+    ) {
+        hideNameOfPrivateSpell(message, html);
+    }
+
     if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
-        mangleChatMessage(message, html);
+        mangleNamesInChatMessage(message, html);
     }
 
     if (game.settings.get(MODULENAME, "applyPersistentHealing")) {

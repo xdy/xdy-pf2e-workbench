@@ -227,7 +227,7 @@ export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
     }
 }
 
-export function mangleChatMessage(message: ChatMessagePF2e, html: JQuery) {
+export function mangleNamesInChatMessage(message: ChatMessagePF2e, html: JQuery) {
     const actorId = <string>message?.speaker?.actor;
     const tokenId = message?.speaker?.token;
     const actor = game.actors?.get(actorId);

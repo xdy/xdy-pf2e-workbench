@@ -346,7 +346,8 @@
       },
       "castPrivateSpell": {
         "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM.",
-        "name": "Ctrl-click Cast to cast in private."
+        "name": "Ctrl-click Cast to cast in private.",
+        "aSpell": "A spell"
       },
       "castPrivateSpellAlwaysForNPC": {
         "hint": "Check to always cast privately for npcs.",
