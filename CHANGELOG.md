@@ -1,3 +1,15 @@
+# [4.56.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.55.3...v4.56.0) (2023-03-27)
+
+
+### Bug Fixes
+
+* Simplified conditions for moving in iniative on zero hp a bit. Possibly making the problem with spurious initiative changes go away? (Still never happened for me, so not sure if this changes anything.) ([8db74ba](https://github.com/xdy/xdy-pf2e-workbench/commit/8db74bac818e48093c9c2615d704855857d6312b))
+
+
+### Features
+
+* Update combat tracker names when mystifiying/demystifying. ([6541a09](https://github.com/xdy/xdy-pf2e-workbench/commit/6541a09406372fa8687c27bb38c279eb2d90e1a6)), closes [#720](https://github.com/xdy/xdy-pf2e-workbench/issues/720)
+
 ## [4.55.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.55.2...v4.55.3) (2023-03-26)
 
 
