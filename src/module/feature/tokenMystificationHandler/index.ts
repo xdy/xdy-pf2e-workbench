@@ -183,12 +183,8 @@ export async function doMystification(token: TokenPF2e, active: boolean) {
     ];
 
     const scene: ScenePF2e | null = canvas?.scene;
-    if (
-        game.user?.isGM &&
-        isTokenMystified(token) &&
-        game.settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor")
-    ) {
-        // @ts-ignore
+    const allOfActor = game.settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor");
+    if (game.user?.isGM && isTokenMystified(token) && allOfActor) {
         for (const sceneToken of scene?.tokens
             ?.filter((t) => t.actor?.id === token?.actor?.id)
             ?.filter((x) => isTokenMystified(x)) || []) {
@@ -199,7 +195,16 @@ export async function doMystification(token: TokenPF2e, active: boolean) {
         }
     }
     // @ts-ignore
-    await scene?.updateEmbeddedDocuments("Token", updates, {});
+    scene?.updateEmbeddedDocuments("Token", updates, {}).then(() => {
+        if (game.combat) {
+            new Promise((resolve) => setTimeout(resolve, 50)).then(() => {
+                ui.combat?.render(true);
+                ui.combat.combats
+                    .filter((x) => x.combatants.filter((c) => c.actor?.id === token.actor?.id).length > 0)
+                    .forEach((c) => c.updateSource({}, { render: true }));
+            });
+        }
+    });
 }
 
 export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
