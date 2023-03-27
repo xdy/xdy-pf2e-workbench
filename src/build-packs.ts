@@ -16,23 +16,21 @@ const outDir = pf2eSystemPath ?? path.join(".");
 fs.mkdirsSync(path.resolve(outDir, "packs"));
 
 function copyFolder(source: string, target: string) {
-    fs.readdirSync(source)
-        .filter((file) => file.endsWith(".js"))
-        .forEach((file) => {
-            const sourcePath = decodeURIComponent(path.join(source, file));
-            const targetPath = decodeURIComponent(path.join(target, file));
-            fs.copyFileSync(sourcePath, targetPath);
-            // Log last part of path
-            console.log(`Copied ${path.basename(targetPath)}`);
-            // eslint-disable-next-line
-            fs.appendFileSync(
-                targetPath,
-                `\n/* # source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(
-                    path.dirname(sourcePath)
-                )}/${file}" - Fetched on ${new Date().toISOString()} */
+    for (const file of fs.readdirSync(source).filter((file) => file.endsWith(".js"))) {
+        const sourcePath = decodeURIComponent(path.join(source, file));
+        const targetPath = decodeURIComponent(path.join(target, file));
+        fs.copyFileSync(sourcePath, targetPath);
+        // Log last part of path
+        console.log(`Copied ${path.basename(targetPath)}`);
+        // eslint-disable-next-line
+        fs.appendFileSync(
+            targetPath,
+            `\n/* # source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(
+                path.dirname(sourcePath)
+            )}/${file}" - Fetched on ${new Date().toISOString()} */
                 `
-            );
-        });
+        );
+    }
 }
 
 function getFolders(dir: string, source: any = packsSource) {

@@ -75,7 +75,7 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
     const explorationActions = new SkillActionCollection();
     const downtimeActions = new SkillActionCollection();
 
-    SkillActionCollection.allActionsFor(app.actor).forEach(function (action) {
+    for (const action of SkillActionCollection.allActionsFor(app.actor)) {
         if (action.hasTrait("downtime")) {
             downtimeActions.add(action);
         } else {
@@ -85,7 +85,7 @@ export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElemen
                 encounterActions.add(action);
             }
         }
-    });
+    }
 
     const $encounter = renderActionsList(encounterActions, app.actor);
     const $exploration = renderActionsList(explorationActions, app.actor);

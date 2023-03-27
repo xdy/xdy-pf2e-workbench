@@ -726,9 +726,9 @@ ${actionList
                     }
                 };
                 if ("querySelectorAll" in html) {
-                    html.querySelectorAll(".action-list button").forEach((button) =>
-                        button.addEventListener("click", (event) => action(button, event))
-                    );
+                    for (const button of html.querySelectorAll(".action-list button")) {
+                        button.addEventListener("click", (event) => action(button, event));
+                    }
                 }
             },
         },
