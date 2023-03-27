@@ -260,14 +260,13 @@ export const preUpdateActorHook = async (actor: ActorPF2e, update: Record<string
                         }
                     }
                 } else {
-                    if (automoveIfZeroHP) {
-                        const newActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
-                        moveOnZeroHP(actor, newActorHp, newActorHp !== currentActorHp ? updateHp : 0);
+                    if (automoveIfZeroHP && currentActorHp > 0 && updateHp <= 0) {
+                        moveOnZeroHP(actor);
                     }
                 }
             });
         } else {
-            if (updateHp > 0) {
+            if (currentActorHp <= 0 && updateHp > 0) {
                 if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
                     autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0).then(() => {
                         if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
@@ -279,9 +278,8 @@ export const preUpdateActorHook = async (actor: ActorPF2e, update: Record<string
                         autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
                     }
                 }
-            } else if (automoveIfZeroHP) {
-                const newActorHp = (<ActorSystemData>actor.system).attributes.hp?.value || 0;
-                moveOnZeroHP(actor, newActorHp, updateHp);
+            } else if (automoveIfZeroHP && currentActorHp > 0 && updateHp <= 0) {
+                moveOnZeroHP(actor);
             }
         }
     }
