@@ -49,7 +49,7 @@
     "@types/tooltipster": "^0.0.31",
     "@types/webpack-env": "^1.18.0",
     "@types/yaireo__tagify": "^4.16.1",
-    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.56.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
