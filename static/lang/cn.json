@@ -333,7 +333,8 @@
       },
       "castPrivateSpell": {
         "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息。",
-        "name": "Ctrl+单击秘密施法。"
+        "name": "Ctrl+单击秘密施法。",
+        "aSpell": "法术"
       },
       "castPrivateSpellAlwaysForNPC": {
         "hint": "勾选此项，NPC施法永远为秘密施法。",
@@ -468,8 +469,8 @@
         "hint": "勾选此项，神秘化名称使用精英/弱化。"
       },
       "npcMystifierUseMystifiedNameInChat": {
-        "hint": "(实验功能) 勾选此项，在聊天中用神秘化名称替换原本人名。",
-        "name": "(实验功能) 聊天信息使用神秘化名称。"
+        "hint": "勾选此项，用神秘化名称替换Actor名称，以在聊天中使用神秘化名称发言。注意，如果消息文本中不使用与Actor完全一致的名称，或拼写错误，此功能不会生效。",
+        "name": "在聊天信息和发言者名称中使用神秘化名称"
       },
       "customPauseRelocation": {
         "hint": "将暂停图标放置在屏幕中央，提示信息放在图标上方。",
