@@ -211,7 +211,8 @@
       },
       "castPrivateSpell": {
         "hint": "Cliquez pour permettre qu'un ctrl+clic sur un sort le Lance en envoyant un message au lanceur et au MJ.",
-        "name": "Ctrl+clic pour Lancer un sort en privé."
+        "name": "Ctrl+clic pour Lancer un sort en privé.",
+        "aSpell": "Un sort"
       },
       "castPrivateSpellAlwaysForNPC": {
         "hint": "Cochez pour toujours lancer de manière privée pour les PNJ.",
