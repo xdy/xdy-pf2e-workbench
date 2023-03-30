@@ -21,7 +21,6 @@ import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/d
 import { mangleNamesInChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
 import { ItemPF2e } from "@item";
 import {
-    applyClumsyIfWieldingLargerWeapon,
     applyEncumbranceBasedOnBulk,
     autoRemoveDyingAtGreaterThanZeroHp,
     autoRemoveUnconsciousAtGreaterThanZeroHP,
@@ -142,12 +141,9 @@ export const createItemHook = async (item: ItemPF2e, _options: {}, _id: any) => 
     }
 };
 
-export const updateItemHook = async (item: ItemPF2e, update: any) => {
+export const updateItemHook = async (item: ItemPF2e, _update: any) => {
     if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
         applyEncumbranceBasedOnBulk(item);
-    }
-    if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyClumsyIfWieldingLargerWeapon")) {
-        applyClumsyIfWieldingLargerWeapon(item, update);
     }
 };
 

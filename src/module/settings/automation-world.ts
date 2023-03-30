@@ -56,16 +56,6 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 onChange: () => reCreateHooks(),
                 requiresReload: true,
             },
-            applyClumsyIfWieldingLargerWeapon: {
-                name: `${MODULENAME}.SETTINGS.applyClumsyIfWieldingLargerWeapon.name`,
-                hint: `${MODULENAME}.SETTINGS.applyClumsyIfWieldingLargerWeapon.hint`,
-                scope: "world",
-                config: true,
-                default: false,
-                type: Boolean,
-                onChange: () => reCreateHooks(),
-                requiresReload: true,
-            },
             applyEncumbranceBasedOnBulk: {
                 name: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.name`,
                 hint: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.hint`,

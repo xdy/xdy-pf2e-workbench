@@ -2,7 +2,7 @@ import { CombatantPF2e } from "@module/encounter";
 import { isFirstGM, shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
-import { ItemPF2e, WeaponPF2e } from "@item";
+import { ItemPF2e } from "@item";
 import { ActorSystemData } from "@actor/data/base";
 import BaseUser = foundry.documents.BaseUser;
 
@@ -300,29 +300,6 @@ export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
             const encumbered = item.actor.getCondition("encumbered");
             if (encumbered && !encumbered.isLocked) {
                 await item.actor.toggleCondition("encumbered");
-            }
-        }
-    }
-}
-
-export function applyClumsyIfWieldingLargerWeapon(
-    item: ItemPF2e,
-    _update: { system: { equipped: { handsHeld: any } } }
-) {
-    if (isFirstGM() && ["weapon"].includes(item.type) && item.actor) {
-        const actorSize = (<ActorSystemData>item.actor.system).traits.size;
-        const weaponSize = (<WeaponPF2e>item).size;
-        if (actorSize.isSmallerThan(weaponSize, { smallIsMedium: true })) {
-            const heldInHands = (_update.system.equipped.handsHeld ?? 0) > 0;
-            if ((<WeaponPF2e>item).isEquipped && (heldInHands ?? true)) {
-                if (!item.actor.hasCondition("clumsy")) {
-                    item.actor.increaseCondition("clumsy", { min: 1, max: 1 }).then();
-                }
-            } else {
-                const clumsy = item.actor.getCondition("clumsy");
-                if (clumsy && !clumsy.isLocked && (clumsy?.value ?? 0) === 1) {
-                    item.actor.decreaseCondition("clumsy").then();
-                }
             }
         }
     }

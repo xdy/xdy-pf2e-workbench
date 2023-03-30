@@ -134,10 +134,6 @@
         "name": "系统掷出的持续治疗自动生效。",
         "hint": "是否让系统掷出的持续治疗自动生效的客户端设置。保存设置以显示/隐藏其他选项。"
       },
-      "applyClumsyIfWieldingLargerWeapon": {
-        "hint": "若武器尺寸大于持有者体型，自动添加笨拙状态。",
-        "name": "若武器尺寸大于持有者体型，自动添加笨拙状态。"
-      },
       "autoCollapseItemChatCardContent": {
         "nonCollapsedDefault": "默认展开，点击标题折叠。",
         "collapsedDefault": "默认折叠，点击标题展开。",

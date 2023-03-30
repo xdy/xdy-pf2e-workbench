@@ -210,10 +210,6 @@
         "name": "Add user targets",
         "title": "Select user to add targets for"
       },
-      "applyClumsyIfWieldingLargerWeapon": {
-        "hint": "Automatically apply clumsy if wielding a weapon larger than the wielder.",
-        "name": "Automatically apply clumsy if wielding a weapon larger than the wielder."
-      },
       "applyEncumbranceBasedOnBulk": {
         "hint": "Automatically apply encumbrance based on bulk. (Uses system code which considers 5 bulk + 9 light to not exceed 5 bulk.)",
         "name": "Automatically apply encumbrance based on bulk."

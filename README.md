@@ -158,8 +158,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
           Inspire Defense's effect can pass through walls that allow sound to pass)
         * Placeholder Aura effect for Bless. If/when the system supports auras that affect enemies this effect might
           automagically start automating.
-        * Stance effects for Dread Marshal and Inpiring Marshal that applies the effect to tokens within the aura. (Will
-          be removed when the Stances are implemented in the system.)
         * Effect for Dirge of Doom that you can give to targets to not let the automated frightened removal reduce
           frightened below 1.
         * Workbench ABP. My attempt at implementing the optional Automated Bonus Progression rules using Rule Elements

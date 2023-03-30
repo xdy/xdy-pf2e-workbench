@@ -100,10 +100,6 @@
         "name": "Ajouter les cibles de l'utilisateur",
         "title": "Choisissez l'utilisateur pour lui ajouter les cibles"
       },
-      "applyClumsyIfWieldingLargerWeapon": {
-        "hint": "Appliquer automatiquement Maladroit si vous maniez une arme plus grande que le porteur.",
-        "name": "Appliquer automatiquement Maladroit si l'arme maniée est plus grande que le porteur."
-      },
       "applyEncumbranceBasedOnBulk": {
         "hint": "Appliquer automatiquement les règles d'Encombrement. (Utilise le code du système qui considère que 5 E et 9 L ne dépasse pas 5 E)",
         "name": "Appliquer automatiquement les règles de l'Encombrement."

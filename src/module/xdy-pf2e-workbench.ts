@@ -141,10 +141,7 @@ export function createHooks() {
     }
 
     if (!activeHooks.has("updateItem")) {
-        if (
-            game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
-            game.settings.get(MODULENAME, "applyClumsyIfWieldingLargerWeapon")
-        ) {
+        if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
             Hooks.on("updateItem", updateItemHook);
             activeHooks.add("updateItem");
         }
