@@ -1,3 +1,10 @@
+# [4.57.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.56.1...v4.57.0) (2023-03-30)
+
+
+### Features
+
+* Changes minimum supported pf2e version to 4.10.0, removes option to give clumsy to those wielding too large weapons as that is now part of the system, removes the stopgap Dread Marshal Stance and Inspiring Marshal Stance effects as those are now part of the system (which breaks the Marshal Stance macro until that is itself updated or removed.) ([d96fc6a](https://github.com/xdy/xdy-pf2e-workbench/commit/d96fc6a9b3689f07546b32d5e4df983efbcc507f))
+
 ## [4.56.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.56.0...v4.56.1) (2023-03-28)
 
 
