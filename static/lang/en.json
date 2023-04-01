@@ -341,7 +341,7 @@
         "name": "Show spell names in rarity colour on actor sheets."
       },
       "castPrivateSpell": {
-        "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM.",
+        "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM. Note that this feature is currently incompatible with the module Polyglot. (A PR has been submitted to polyglot to fix this.)",
         "name": "Ctrl-click Cast to cast in private.",
         "aSpell": "A spell"
       },
