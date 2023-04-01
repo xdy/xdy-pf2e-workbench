@@ -56,7 +56,7 @@ export const preCreateChatMessageHook = async (
     }
 };
 
-export const createChatMessageHook = (message: ChatMessagePF2e) => {
+export function createChatMessageHook(message: ChatMessagePF2e) {
     if (game.settings.get(MODULENAME, "reminderCannotAttack")) {
         reminderCannotAttack(message);
     }
@@ -79,9 +79,9 @@ export const createChatMessageHook = (message: ChatMessagePF2e) => {
             reminderBreathWeapon(message).then();
         }
     }
-};
+}
 
-export const renderChatMessageHook = (message: ChatMessagePF2e, html: JQuery) => {
+export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
     // if (
     //     game.settings.get(MODULENAME, "castPrivateSpell") &&
     //     message?.flags?.pf2e?.origin?.type === "spell" &&
@@ -133,21 +133,21 @@ export const renderChatMessageHook = (message: ChatMessagePF2e, html: JQuery) =>
             chatActionCardDescriptionCollapse(html);
         }
     }
-};
+}
 
-export const createItemHook = async (item: ItemPF2e, _options: {}, _id: any) => {
+export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
     if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
         applyEncumbranceBasedOnBulk(item);
     }
-};
+}
 
-export const updateItemHook = async (item: ItemPF2e, _update: any) => {
+export async function updateItemHook(item: ItemPF2e, _update: any) {
     if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
         applyEncumbranceBasedOnBulk(item);
     }
-};
+}
 
-export const deleteItemHook = async (item: ItemPF2e, _options: {}) => {
+export async function deleteItemHook(item: ItemPF2e, _options: {}) {
     if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
         applyEncumbranceBasedOnBulk(item);
     }
@@ -169,15 +169,15 @@ export const deleteItemHook = async (item: ItemPF2e, _options: {}) => {
             await giveUnconsciousIfDyingRemovedAt0HP(item);
         }
     }
-};
+}
 
-export const pf2eEndTurnHook = (combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string) => {
+export function pf2eEndTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string) {
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
         reduceFrightened(combatant, userId).then(() => console.debug("Workbench reduceFrightened complete"));
     }
-};
+}
 
-export const pf2eStartTurnHook = async (combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) => {
+export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) {
     const forWhom = game.settings.get(MODULENAME, "actionsReminderAllow");
     if (game.settings.get(MODULENAME, "autoReduceStunned")) {
         autoReduceStunned(combatant).then((reduction) => {
@@ -190,21 +190,21 @@ export const pf2eStartTurnHook = async (combatant: CombatantPF2e, _combat: Encou
     }
 
     // TODO Handle removal of game.combats.active.combatant.defeated/unsetting of deathIcon (are those the same?) for combatants that are neither dying nor have 0 HP.
-};
+}
 
-export const renderTokenHUDHook = (_app, html: JQuery, data: any) => {
+export function renderTokenHUDHook(_app, html: JQuery, data: any) {
     if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);
     }
-};
+}
 
-export const renderCharacterSheetPF2eHook = (app: TokenHUD, html: JQuery, data: any) => {
+export function renderCharacterSheetPF2eHook(app: TokenHUD, html: JQuery, data: any) {
     if (game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
         maxHeroPoints(app, html, data);
     }
-};
+}
 
-export const preUpdateActorHook = async (actor: ActorPF2e, update: Record<string, string>) => {
+export async function preUpdateActorHook(actor: ActorPF2e, update: Record<string, string>) {
     const updateHp = getProperty(update, "system.attributes.hp.value");
 
     // All these are only relevant if hp has changed (it's undefined otherwise)
@@ -279,16 +279,17 @@ export const preUpdateActorHook = async (actor: ActorPF2e, update: Record<string
             }
         }
     }
-};
-export const preUpdateTokenHook = (_document, update, options, ..._args) => {
+}
+
+export function preUpdateTokenHook(_document, update, options, ..._args) {
     if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x || update.y)) {
         setProperty(options, "animation", {
             movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
         });
     }
-};
+}
 
-export const createTokenHook = async (token: TokenDocumentPF2e, ..._args) => {
+export async function createTokenHook(token: TokenDocumentPF2e, ..._args) {
     if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
         tokenCreateMystification(token).then();
     }
@@ -304,9 +305,9 @@ export const createTokenHook = async (token: TokenDocumentPF2e, ..._args) => {
     ) {
         await mystifyNpcItems(token.actor.items);
     }
-};
+}
 
-export const renderActorSheetHook = (sheet: ActorSheet, $html: JQuery) => {
+export function renderActorSheetHook(sheet: ActorSheet, $html: JQuery) {
     if (game.settings.get(MODULENAME, "creatureBuilder")) {
         enableCreatureBuilderButton(sheet, $html);
     }
@@ -383,4 +384,5 @@ export const renderActorSheetHook = (sheet: ActorSheet, $html: JQuery) => {
                 });
         });
     }
-};
+}
+
