@@ -1,8 +1,10 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { isActuallyDamageRoll, nth } from "../../utils";
-import { ChatMessageDataPF2e } from "@module/chat-message/data";
+import { ChatMessageSourcePF2e } from "@module/chat-message/data";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { PhysicalItemPF2e } from "@item";
+import { ActorSheetPF2e } from "@actor/sheet/base";
+import { ActorPF2e } from "@actor";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
     // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
@@ -107,7 +109,7 @@ export function damageCardExpand(message: ChatMessagePF2e, html: JQuery) {
     }
 }
 
-export function addGmRKButtonToNpc($html: JQuery, sheet: ActorSheet) {
+export function addGmRKButtonToNpc($html: JQuery, sheet: ActorSheetPF2e<ActorPF2e>) {
     $html.find(".recall-knowledge").each((_i, e) => {
         const token = sheet.token;
         if (token) {
@@ -156,7 +158,7 @@ export function addGmRKButtonToNpc($html: JQuery, sheet: ActorSheet) {
     });
 }
 
-export async function castPrivateSpell(data: ChatMessageDataPF2e, message: ChatMessagePF2e) {
+export async function castPrivateSpell(data: ChatMessageSourcePF2e, message: ChatMessagePF2e) {
     data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
     data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
     if (!game.user.isGM) {

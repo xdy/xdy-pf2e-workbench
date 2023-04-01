@@ -17,7 +17,7 @@
 import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes";
 import { getActor, getFolder, getFolderInFolder } from "./Utilities";
 import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil";
-import { NPCPF2e } from "@actor";
+import { ActorPF2e, NPCPF2e } from "@actor";
 import { NPCSystemData } from "@actor/npc/data";
 
 export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number) {
@@ -190,7 +190,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
         await newActor.update(updateData);
     } else {
         newActor = actor.clone(updateData);
-        newActor = (await Actor.create(newActor?._source as any)) as Actor;
+        newActor = (await Actor.create(newActor?._source as any)) as ActorPF2e;
     }
 
     await newActor.updateEmbeddedDocuments("Item", itemUpdates);

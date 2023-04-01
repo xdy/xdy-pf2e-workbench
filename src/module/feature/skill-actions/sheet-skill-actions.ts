@@ -2,6 +2,8 @@ import { ActionsIndex } from "./actions-index";
 import { SkillActionCollection } from "./skill-actions";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { Flag } from "./utils";
+import { ActorPF2e } from "@actor";
+import { ActorSheetPF2e } from "@actor/sheet/base";
 
 let templates: Handlebars.TemplateDelegate[];
 
@@ -20,7 +22,7 @@ export async function loadSkillActionsBabele() {
     await ActionsIndex.instance.loadCompendium("pf2e.actionspf2e");
 }
 
-function renderActionsList(skillActions: SkillActionCollection, actor: Actor) {
+function renderActionsList(skillActions: SkillActionCollection, actor: ActorPF2e) {
     const skillData = skillActions
         .map((action) => action.getData({ allVisible: <boolean>Flag.get(actor, "allVisible") }))
         .sort((a, b) => {
@@ -66,7 +68,7 @@ function renderActionsList(skillActions: SkillActionCollection, actor: Actor) {
     return $skillActions;
 }
 
-export function renderSheetSkillActions(app: ActorSheet, html: JQuery<HTMLElement>) {
+export function renderSheetSkillActions(app: ActorSheetPF2e<ActorPF2e>, html: JQuery<HTMLElement>) {
     if (app.actor.type !== "character") {
         return;
     }

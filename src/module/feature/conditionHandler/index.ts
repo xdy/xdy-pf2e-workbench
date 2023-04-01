@@ -113,7 +113,7 @@ export async function increaseDyingOnZeroHP(
             effectsToCreate.push(effect);
 
             ChatMessage.create({
-                flaver: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
+                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
                     name: name,
                 }),
                 speaker: ChatMessage.getSpeaker({ actor: <any>actor }),

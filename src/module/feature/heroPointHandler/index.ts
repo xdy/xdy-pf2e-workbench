@@ -5,7 +5,7 @@
 
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { CharacterSystemData } from "@actor/character/data";
-import { ActorSystemData } from "@actor/data/base";
+import { ActorPF2e } from "@actor";
 
 export enum HPHState {
     Start,
@@ -158,9 +158,9 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
             .filter((x) => x.isOfType("character"))
             .filter((x) => x.alliance === "party")
             ?.filter((actor) => {
-                return !(<ActorSystemData>actor.system).traits["value"].toString().includes("minion");
+                return !actor.system.traits?.value.toString().includes("minion");
             })
-            ?.filter((actor) => !(<ActorSystemData>actor.system).traits["value"].toString().includes("eidolon"))
+            ?.filter((actor) => !actor.system.traits?.value.toString().includes("eidolon"))
             .filter((x) =>
                 (
                     game?.users
@@ -297,8 +297,8 @@ function heroes() {
         game?.actors
             ?.filter((actor) => actor.hasPlayerOwner)
             .filter((actor) => actor.isOfType("character"))
-            .filter((actor) => !(<ActorSystemData>actor.system).traits["value"].toString().includes("minion"))
-            .filter((actor) => !(<ActorSystemData>actor.system).traits["value"].toString().includes("eidolon")) || []
+            .filter((actor) => !actor.system.traits?.value.toString().includes("minion"))
+            .filter((actor) => !actor.system.traits?.value.toString().includes("eidolon")) || []
     );
 }
 
@@ -418,7 +418,7 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
 
     renderData.data.resources.heroPoints.icon = icon;
 
-    const actor: Actor = app["document"] as Actor;
+    const actor: ActorPF2e = app["document"] as ActorPF2e;
     const span = html.find('span[data-property="system.resources.heroPoints.value"]');
     span.html(icon);
 

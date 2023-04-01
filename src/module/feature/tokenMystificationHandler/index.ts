@@ -1,7 +1,6 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ScenePF2e, TokenDocumentPF2e } from "@scene";
 import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings";
-import { TokenDataPF2e } from "@scene/token-document";
 import { generateNameFromTraits } from "./traits-name-generator";
 import { TokenPF2e } from "@module/canvas";
 import { ChatMessagePF2e } from "@module/chat-message";
@@ -207,7 +206,7 @@ export async function doMystification(token: TokenPF2e, active: boolean) {
     });
 }
 
-export function renderNameHud(data: TokenDataPF2e, html: JQuery) {
+export function renderNameHud(data: TokenDocumentPF2e, html: JQuery) {
     let token: TokenPF2e | null;
     if (canvas && canvas.tokens) {
         token = canvas.tokens.get(<string>data._id) ?? null;

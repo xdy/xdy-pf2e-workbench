@@ -16,14 +16,18 @@
  * limitations under the License.
  */
 
-export function onQuantitiesHook(app: ActorSheet, html: JQuery) {
+import { ActorSheetPF2e } from "@actor/sheet/base";
+import { ActorPF2e } from "@actor";
+import { ItemPF2e } from "@item";
+
+export function onQuantitiesHook(app: ActorSheetPF2e<ActorPF2e>, html: JQuery) {
     const increaseQuantity = html.find(".item-increase-quantity");
     const decreaseQuantity = html.find(".item-decrease-quantity");
 
     increaseQuantity.off("click");
     decreaseQuantity.off("click");
 
-    const actor = app.actor as Actor;
+    const actor = app.actor as ActorPF2e;
 
     const getAmount = (event: JQuery.ClickEvent): number => {
         let amount = 1;
@@ -34,7 +38,7 @@ export function onQuantitiesHook(app: ActorSheet, html: JQuery) {
 
     increaseQuantity.on("click", async (event) => {
         const itemId = $(event.currentTarget).parents(".item").attr("data-item-id") ?? "";
-        const item = actor.items.get(itemId) as Item;
+        const item = actor.items.get(itemId) as ItemPF2e;
 
         const quantity = Number(item.system["quantity"]) + getAmount(event) ?? 0;
         await actor.updateEmbeddedDocuments("Item", [
@@ -47,7 +51,7 @@ export function onQuantitiesHook(app: ActorSheet, html: JQuery) {
 
     decreaseQuantity.on("click", async (event) => {
         const itemId = $(event.currentTarget).parents(".item").attr("data-item-id") ?? "";
-        const item = actor.items.get(itemId) as Item;
+        const item = actor.items.get(itemId) as ItemPF2e;
 
         if (Number(item.system["quantity"]) > 0) {
             const quantity = Number(item.system["quantity"]) - getAmount(event) ?? 0;

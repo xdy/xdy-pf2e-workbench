@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { ActorPF2e } from "@actor";
+
 export function getFolder(name: string) {
     return game.folders?.getName(name);
 }
@@ -28,6 +30,6 @@ export function getFolderInFolder(name: string, parentName?: string) {
     }
 }
 
-export function getActor(name: string, folder: string): Actor | undefined {
+export function getActor(name: string, folder: string): ActorPF2e | undefined {
     return game.actors?.find((a) => a.name === name && a.folder?.name === folder) as any;
 }

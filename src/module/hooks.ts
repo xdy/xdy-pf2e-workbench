@@ -1,4 +1,4 @@
-import { ChatMessageDataPF2e, ChatMessagePF2e } from "@module/chat-message";
+import { ChatMessagePF2e, ChatMessageSourcePF2e } from "@module/chat-message";
 import { UserPF2e } from "@module/user";
 import {
     addGmRKButtonToNpc,
@@ -39,10 +39,11 @@ import { onQuantitiesHook } from "./feature/quickQuantities";
 import { renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench";
 import { enableCreatureBuilderButton } from "./feature/creature-builder/CreatureBuilder";
+import { ActorSheetPF2e } from "@actor/sheet/base";
 
 export const preCreateChatMessageHook = async (
     message: ChatMessagePF2e,
-    data: ChatMessageDataPF2e,
+    data: ChatMessageSourcePF2e,
     _options,
     _user: UserPF2e
 ) => {
@@ -192,7 +193,7 @@ export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: Encou
     // TODO Handle removal of game.combats.active.combatant.defeated/unsetting of deathIcon (are those the same?) for combatants that are neither dying nor have 0 HP.
 }
 
-export function renderTokenHUDHook(_app, html: JQuery, data: any) {
+export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: JQuery, data: any) {
     if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);
     }
@@ -307,7 +308,7 @@ export async function createTokenHook(token: TokenDocumentPF2e, ..._args) {
     }
 }
 
-export function renderActorSheetHook(sheet: ActorSheet, $html: JQuery) {
+export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, $html: JQuery) {
     if (game.settings.get(MODULENAME, "creatureBuilder")) {
         enableCreatureBuilderButton(sheet, $html);
     }
@@ -385,4 +386,3 @@ export function renderActorSheetHook(sheet: ActorSheet, $html: JQuery) {
         });
     }
 }
-
