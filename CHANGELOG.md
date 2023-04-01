@@ -1,3 +1,10 @@
+# [4.58.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.57.0...v4.58.0) (2023-04-01)
+
+
+### Features
+
+* Re-enable hiding spell names when casting spells privately. NOTE: this feature is currently incompatible with the module Polyglot. A PR has been submitted to Polyglot to fix this. See https://github.com/mclemente/fvtt-module-polyglot/pull/285 ([90effd9](https://github.com/xdy/xdy-pf2e-workbench/commit/90effd9c9a15410b9956dcc461b50a866cf80878))
+
 # [4.57.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.56.1...v4.57.0) (2023-03-30)
 
 
