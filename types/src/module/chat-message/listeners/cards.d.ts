@@ -12,6 +12,6 @@ export declare const ChatCards: {
     rollActorSaves: ({ event, actor, item, }: {
         event: JQuery.ClickEvent<HTMLElement, undefined, HTMLElement>;
         actor: ActorPF2e;
-        item: Embedded<ItemPF2e>;
+        item: ItemPF2e<ActorPF2e>;
     }) => Promise<void>;
 };

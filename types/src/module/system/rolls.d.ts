@@ -5,6 +5,7 @@ import { RollNotePF2e, RollNoteSource } from "@module/notes";
 import { ModifierPF2e } from "../actor/modifiers";
 import { RollTwiceOption } from "./check";
 import { CheckDC, DEGREE_OF_SUCCESS_STRINGS } from "./degree-of-success";
+import { ZeroToTwo } from "@module/data";
 interface RollDataPF2e extends RollOptions {
     rollerId?: string;
     totalModifier?: number;
@@ -22,7 +23,7 @@ interface RollParameters {
     /** Additional modifiers */
     modifiers?: ModifierPF2e[];
 }
-interface StrikeRollParams extends RollParameters {
+interface AttackRollParams extends RollParameters {
     /** Retrieve the formula of the strike roll without following through to the end */
     getFormula?: true;
     /** Should this strike consume ammunition, if applicable? */
@@ -32,24 +33,27 @@ interface StrikeRollParams extends RollParameters {
     /** Should this roll be rolled twice? If so, should it keep highest or lowest? */
     rollTwice?: RollTwiceOption;
 }
+interface DamageRollParams extends Omit<AttackRollParams, "consumAmmo" | "rollTwice"> {
+    mapIncreases?: ZeroToTwo | null;
+}
 interface BaseRollContext {
     /** Any options which should be used in the roll. */
     options?: Set<string>;
     /** Any notes which should be shown for the roll. */
     notes?: (RollNotePF2e | RollNoteSource)[];
     /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
-    rollMode?: RollMode;
+    rollMode?: RollMode | "roll";
     /** If this is an attack, the target of that attack */
     target?: AttackTarget | null;
     /** Any traits for the check. */
     traits?: TraitViewData[];
     /** The outcome a roll (usually relevant only to rerolls) */
-    outcome?: typeof DEGREE_OF_SUCCESS_STRINGS[number] | null;
+    outcome?: (typeof DEGREE_OF_SUCCESS_STRINGS)[number] | null;
     /** The outcome prior to being changed by abilities raising or lowering degree of success */
-    unadjustedOutcome?: typeof DEGREE_OF_SUCCESS_STRINGS[number] | null;
+    unadjustedOutcome?: (typeof DEGREE_OF_SUCCESS_STRINGS)[number] | null;
     /** Should the roll be immediately created as a chat message? */
     createMessage?: boolean;
     /** Skip the roll dialog regardless of user setting  */
     skipDialog?: boolean;
 }
-export { BaseRollContext, RollDataPF2e, RollParameters, RollTwiceOption, StrikeRollParams };
+export { BaseRollContext, DamageRollParams, RollDataPF2e, RollParameters, RollTwiceOption, AttackRollParams };

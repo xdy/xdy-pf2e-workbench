@@ -1,4 +1,4 @@
-export declare class FakeScene {
+export declare class MockScene {
     data: Partial<foundry.data.SceneData> & {
         _id: string;
         name: string;

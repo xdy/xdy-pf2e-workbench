@@ -1,15 +1,21 @@
 import { SaveType } from "@actor/types";
-import { ABCSystemData } from "@item/abc/data";
-import { TimeUnit } from "@item/abstract-effect/data";
-import { ActionTraits } from "@item/action/data";
+import { EffectAuraData, EffectContextData, EffectTraits, TimeUnit } from "@item/abstract-effect";
 import { ConditionSlug } from "@item/condition";
-import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemSystemData, ItemSystemSource } from "@item/data/base";
+import { BaseItemSourcePF2e, ItemFlagsPF2e, ItemSystemData, ItemSystemSource } from "@item/data/base";
 import { DamageCategoryUnique, DamageType } from "@system/damage";
-import { AfflictionPF2e } from "./document";
-type AfflictionSource = BaseItemSourcePF2e<"affliction", AfflictionSystemSource>;
-type AfflictionData = Omit<AfflictionSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<AfflictionPF2e, "affliction", AfflictionSystemData, AfflictionSource>;
+type AfflictionSource = BaseItemSourcePF2e<"affliction", AfflictionSystemSource> & {
+    flags: DeepPartial<AfflictionFlags>;
+};
+type AfflictionFlags = ItemFlagsPF2e & {
+    pf2e: {
+        aura?: EffectAuraData;
+    };
+};
 interface AfflictionSystemSource extends ItemSystemSource {
-    traits: ActionTraits;
+    level: {
+        value: number;
+    };
+    traits: EffectTraits;
     save: {
         type: SaveType;
         value: number;
@@ -20,9 +26,12 @@ interface AfflictionSystemSource extends ItemSystemSource {
     duration: {
         value: number;
         unit: TimeUnit | "unlimited";
+        expiry?: null;
     };
+    /** Origin, target, and roll context of the action that spawned this effect */
+    context: EffectContextData | null;
 }
-interface AfflictionSystemData extends AfflictionSystemSource, Omit<ItemSystemData, "traits"> {
+interface AfflictionSystemData extends AfflictionSystemSource, Omit<ItemSystemData, "level" | "traits"> {
 }
 interface AfflictionOnset {
     value: number;
@@ -36,14 +45,15 @@ interface AfflictionDamage {
 interface AfflictionStageData {
     damage: Record<string, AfflictionDamage>;
     conditions: Record<string, AfflictionConditionData>;
-    effects: {
-        uuid: ItemUUID;
-    }[];
+    effects: AfflictionEffectData[];
 }
 interface AfflictionConditionData {
     slug: ConditionSlug;
     value?: number;
+    /** Whether the condition should disappear when the stage changes. Defaults to true */
+    linked?: boolean;
 }
-interface AfflictionSystemData extends Omit<AfflictionSystemSource, "items">, Omit<ABCSystemData, "traits"> {
+interface AfflictionEffectData {
+    uuid: ItemUUID;
 }
-export { AfflictionConditionData, AfflictionDamage, AfflictionData, AfflictionOnset, AfflictionSource, AfflictionStageData, AfflictionSystemData, };
+export { AfflictionConditionData, AfflictionDamage, AfflictionFlags, AfflictionOnset, AfflictionSource, AfflictionStageData, AfflictionSystemData, };

@@ -1,21 +1,21 @@
 /// <reference types="jquery" />
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
-import { CreaturePF2e } from "@actor";
-import { CreatureSheetItemRenderer } from "@actor/sheet/item-summary-renderer";
+import { ActorPF2e, CreaturePF2e } from "@actor";
 import { ItemPF2e } from "@item";
+import { SpellcastingSheetData } from "@item/spellcasting-entry";
 import { ItemSourcePF2e } from "@item/data";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data";
 import { ZeroToFour } from "@module/data";
 import { ActorSheetPF2e } from "../sheet/base";
 import { CreatureConfig } from "./config";
-import { CreatureSheetData, SpellcastingSheetData } from "./types";
+import { CreatureSheetData } from "./types";
 /**
  * Base class for NPC and character sheets
  * @category Actor
  */
 export declare abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends ActorSheetPF2e<TActor> {
-    itemRenderer: CreatureSheetItemRenderer<TActor>;
+    #private;
     /** A DocumentSheet class presenting additional, per-actor settings */
     protected abstract readonly actorConfigClass: ConstructorOf<CreatureConfig<CreaturePF2e>> | null;
     getData(options?: ActorSheetOptions): Promise<CreatureSheetData<TActor>>;
@@ -28,15 +28,11 @@ export declare abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> ext
     protected _render(force?: boolean, options?: RenderOptions): Promise<void>;
     activateListeners($html: JQuery): void;
     /** Adds support for moving spells between spell levels, spell collections, and spell preparation */
-    protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e[]>;
+    protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e<TActor>[]>;
     /** Handle dragging spells onto spell slots. */
-    protected _handleDroppedItem(event: ElementDragEvent, item: ItemPF2e, data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
+    protected _handleDroppedItem(event: ElementDragEvent, item: ItemPF2e<ActorPF2e | null>, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
     /** Replace sheet config with a special PC config form application */
     protected _getHeaderButtons(): ApplicationHeaderButton[];
-    /** Open actor configuration for this sheet's creature */
-    private onConfigureActor;
-    private onToggleSignatureSpell;
-    private onClickBrowseSpellCompendia;
     protected _onSubmit(event: Event, options?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
     /** Redirect an update to shield HP to the actual item */
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;

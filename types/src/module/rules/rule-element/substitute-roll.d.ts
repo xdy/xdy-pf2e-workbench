@@ -1,3 +1,4 @@
+import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { RuleElementSource } from ".";
 import { RuleElementOptions, RuleElementPF2e } from "./base";
@@ -9,7 +10,7 @@ declare class SubstituteRollRuleElement extends RuleElementPF2e {
     required: boolean;
     /** The effect type of this substitution */
     effectType: "fortune" | "misfortune";
-    constructor(data: SubstituteRollSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(data: SubstituteRollSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     beforePrepareData(): void;
 }
 interface SubstituteRollRuleElement extends RuleElementPF2e {

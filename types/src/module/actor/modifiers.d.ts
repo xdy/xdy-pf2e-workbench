@@ -81,6 +81,7 @@ interface DeferredValueParams {
     test?: string[] | Set<string>;
 }
 type DeferredValue<T> = (options?: DeferredValueParams) => T | null;
+type DeferredPromise<T> = (options?: DeferredValueParams) => Promise<T | null>;
 /** Represents a discrete modifier, bonus, or penalty, to a statistic or check. */
 declare class ModifierPF2e implements RawModifier {
     #private;
@@ -104,6 +105,11 @@ declare class ModifierPF2e implements RawModifier {
     notes: string;
     hideIfDisabled: boolean;
     /**
+     * The "category" of modifier (a misnomer since bonuses and penalties aren't modifiers):
+     * Recorded before adjustments in case of adjustment to zero
+     */
+    kind: "bonus" | "penalty" | "modifier";
+    /**
      * Create a new modifier.
      * Legacy parameters:
      * @param name The name for the modifier; should generally be a localization key.
@@ -115,8 +121,9 @@ declare class ModifierPF2e implements RawModifier {
      */
     constructor(args: ModifierObjectParams);
     constructor(...args: ModifierOrderedParams);
-    get category(): string | null;
+    get category(): this["damageCategory"];
     get value(): number;
+    get signedValue(): string;
     /** Return a copy of this ModifierPF2e instance */
     clone(options?: {
         test?: Set<string> | string[];
@@ -281,4 +288,4 @@ declare class DamageDicePF2e extends DiceModifierPF2e {
     constructor(params: DamageDiceParameters);
     clone(): DamageDicePF2e;
 }
-export { BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DamageDiceParameters, DeferredValue, DeferredValueParams, DiceModifierPF2e, MODIFIER_TYPE, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, RawModifier, StatisticModifier, adjustModifiers, applyStackingRules, createAbilityModifier, createProficiencyModifier, ensureProficiencyOption, };
+export { BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, DiceModifierPF2e, MODIFIER_TYPE, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, RawModifier, StatisticModifier, adjustModifiers, applyStackingRules, createAbilityModifier, createProficiencyModifier, ensureProficiencyOption, };

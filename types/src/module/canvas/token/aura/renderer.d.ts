@@ -3,7 +3,7 @@ import { TokenPF2e } from "..";
 import { EffectAreaSquare } from "../../effect-area-square";
 import { ItemTrait } from "@item/data/base";
 import { TokenAuraData } from "@scene/token-document/aura";
-/** Visual and statial facilities for auras emanated by a token's actor */
+/** Visual rendering of auras emanated by a token's actor */
 declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     #private;
     /** The token associated with this aura */
@@ -28,7 +28,8 @@ declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     get squares(): EffectAreaSquare[];
     /**
      * Whether this aura should be rendered to the user:
-     * The scene must be active, have an active combat, or a GM must be the only user logged in.
+     * The scene must be active, or a GM must be the only user logged in. If rendering for a player, the aura must
+     * emanate from an ally.
      */
     get shouldRender(): boolean;
     /** Draw the aura's circular emanation */

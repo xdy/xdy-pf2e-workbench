@@ -1,50 +1,60 @@
-import { ActorSystemData, ActorAttributes, BaseActorDataPF2e, BaseActorSourcePF2e, BaseHitPointsData, ActorTraitsData } from "@actor/data/base";
-import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
+import { ActorSystemData, ActorAttributes, BaseActorSourcePF2e, BaseHitPointsSource, ActorTraitsData, ActorSystemSource, ActorDetailsSource, ActorHitPoints } from "@actor/data/base";
 import { ActorSizePF2e } from "@actor/data/size";
 import { StatisticTraceData } from "@system/statistic";
-import { VehiclePF2e } from ".";
 import { VehicleTrait } from "./types";
 /** The stored source data of a vehicle actor */
-type VehicleSource = BaseActorSourcePF2e<"vehicle", VehicleSystemData>;
-type VehicleData = Omit<VehicleSource, "effects" | "flags" | "items" | "prototypeToken"> & BaseActorDataPF2e<VehiclePF2e, "vehicle", VehicleSystemData, VehicleSource>;
-interface VehicleHitPointsData extends Required<BaseHitPointsData> {
+type VehicleSource = BaseActorSourcePF2e<"vehicle", VehicleSystemSource>;
+interface VehicleHitPointsData extends Required<BaseHitPointsSource> {
     brokenThreshold: number;
     negativeHealing: false;
 }
-interface VehicleAttributes extends ActorAttributes {
+interface VehicleAttributesSource extends ActorAttributes {
     ac: {
         value: number;
-        check: number;
-        details: string;
     };
     hardness: number;
     hp: VehicleHitPointsData;
+    initiative?: never;
 }
-/** The system-level data of vehicle actors. */
-interface VehicleSystemData extends ActorSystemData {
-    attributes: VehicleAttributes;
-    details: {
-        description: string;
-        level: {
-            value: number;
-        };
-        alliance: null;
-        price: number;
-        space: {
-            long: number;
-            wide: number;
-            high: number;
-        };
-        crew: string;
-        passengers: string;
-        pilotingCheck: string;
-        AC: number;
-        speed: number;
-    };
+interface VehicleSystemSource extends ActorSystemSource {
+    attributes: VehicleAttributesSource;
+    details: VehicleDetailsSource;
     saves: {
         fortitude: VehicleFortitudeSaveData;
     };
     traits: VehicleTraitsData;
+}
+interface VehicleDetailsSource extends ActorDetailsSource {
+    description: string;
+    level: {
+        value: number;
+    };
+    alliance: null;
+    price: number;
+    space: {
+        long: number;
+        wide: number;
+        high: number;
+    };
+    crew: string;
+    passengers: string;
+    pilotingCheck: string;
+    AC: number;
+    speed: number;
+}
+/** The system-level data of vehicle actors. */
+interface VehicleSystemData extends VehicleSystemSource, Omit<ActorSystemData, "details" | "traits"> {
+    attributes: VehicleAttributes;
+}
+interface VehicleAttributes extends VehicleAttributesSource, ActorAttributes {
+    ac: StatisticTraceData;
+    hp: VehicleHitPoints;
+    initiative?: never;
+    shield?: never;
+}
+interface VehicleHitPoints extends ActorHitPoints {
+    negativeHealing: false;
+    brokenThreshold: number;
 }
 interface VehicleFortitudeSaveData extends StatisticTraceData {
     saveDetail: string;
@@ -57,13 +67,4 @@ interface TokenDimensions {
     width: number;
     height: number;
 }
-interface VehicleSheetData extends ActorSheetDataPF2e<VehiclePF2e> {
-    actorRarities: typeof CONFIG.PF2E.rarityTraits;
-    actorRarity: string;
-    actorSizes: typeof CONFIG.PF2E.actorSizes;
-    actorSize: string;
-    data: {
-        traits: VehicleTraitsData;
-    };
-}
-export { VehicleData, VehicleSheetData, VehicleSource, VehicleTrait, TokenDimensions };
+export { VehicleSource, VehicleSystemData, VehicleTrait, TokenDimensions };

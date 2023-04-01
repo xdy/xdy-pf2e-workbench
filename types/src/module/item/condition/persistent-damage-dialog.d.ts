@@ -2,7 +2,7 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
-import { DamageType } from "@system/damage";
+import { DamageType } from "@system/damage/types";
 declare class PersistentDamageDialog extends Application {
     #private;
     private actor;
@@ -13,6 +13,8 @@ declare class PersistentDamageDialog extends Application {
     get title(): string;
     getData(): Promise<PersistentDialogData>;
     activateListeners($html: JQuery<HTMLElement>): void;
+    /** Overriden to autofocus on first render behavior */
+    protected _injectHTML($html: JQuery<HTMLElement>): void;
 }
 interface PersistentDialogData {
     existing: DamageEntryData[];

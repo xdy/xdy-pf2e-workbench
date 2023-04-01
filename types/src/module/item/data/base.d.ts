@@ -1,20 +1,12 @@
-import { CreatureTrait } from "@actor/creature/data";
-import type { ItemPF2e } from "@item/base";
-import type { ActiveEffectPF2e } from "@module/active-effect";
+import { CreatureTrait } from "@actor/creature";
+import { ActionTrait } from "@item/action";
+import { NPCAttackTrait } from "@item/melee";
+import { DocumentSchemaRecord, OneToThree, Rarity } from "@module/data";
 import { RuleElementSource } from "@module/rules";
-import { DocumentSchemaRecord, OneToThree, TraitsWithRarity } from "@module/data";
 import { ItemType } from ".";
 import { PhysicalItemTrait } from "../physical/data";
-import { NPCAttackTrait } from "@item/melee/data";
-import { ActionTrait } from "@item/action/data";
-interface BaseItemSourcePF2e<TType extends ItemType = ItemType, TSystemSource extends ItemSystemSource = ItemSystemSource> extends foundry.data.ItemSource<TType, TSystemSource> {
+interface BaseItemSourcePF2e<TType extends ItemType, TSystemSource extends ItemSystemSource = ItemSystemSource> extends foundry.documents.ItemSource<TType, TSystemSource> {
     flags: ItemSourceFlagsPF2e;
-}
-interface BaseItemDataPF2e<TItem extends ItemPF2e = ItemPF2e, TType extends ItemType = ItemType, TSystemData extends ItemSystemData = ItemSystemData, TSource extends BaseItemSourcePF2e<TType> = BaseItemSourcePF2e<TType>> extends Omit<BaseItemSourcePF2e<TType, ItemSystemSource>, "system" | "effects">, foundry.data.ItemData<TItem, ActiveEffectPF2e> {
-    readonly type: TType;
-    readonly system: TSystemData;
-    flags: ItemFlagsPF2e;
-    readonly _source: TSource;
 }
 type ItemTrait = ActionTrait | CreatureTrait | PhysicalItemTrait | NPCAttackTrait;
 type ActionType = keyof ConfigPF2e["PF2E"]["actionTypes"];
@@ -22,8 +14,11 @@ interface ActionCost {
     type: Exclude<ActionType, "passive">;
     value: OneToThree | null;
 }
-type ItemTraits<T extends ItemTrait = ItemTrait> = TraitsWithRarity<T>;
-interface ItemFlagsPF2e extends foundry.data.ItemFlags {
+interface ItemTraits<T extends ItemTrait = ItemTrait> {
+    value: T[];
+    rarity?: Rarity;
+}
+interface ItemFlagsPF2e extends foundry.documents.ItemFlags {
     pf2e: {
         rulesSelections: Record<string, string | number | object>;
         itemGrants: Record<string, ItemGrantData>;
@@ -31,7 +26,7 @@ interface ItemFlagsPF2e extends foundry.data.ItemFlags {
         [key: string]: unknown;
     };
 }
-interface ItemSourceFlagsPF2e extends DeepPartial<foundry.data.ItemFlags> {
+interface ItemSourceFlagsPF2e extends DeepPartial<foundry.documents.ItemFlags> {
     pf2e?: {
         rulesSelections?: Record<string, string | number | object>;
         itemGrants?: Record<string, ItemGrantSource>;
@@ -45,13 +40,12 @@ interface ItemGrantSource {
     onDelete?: ItemGrantDeleteAction;
 }
 type ItemGrantDeleteAction = "cascade" | "detach" | "restrict";
-interface ItemLevelData {
-    level: {
+interface ItemSystemSource {
+    level?: {
         value: number;
     };
-}
-interface ItemSystemSource {
     description: {
+        gm: string;
         value: string;
     };
     source: {
@@ -75,4 +69,4 @@ interface FrequencySource {
 interface Frequency extends FrequencySource {
     value: number;
 }
-export { ActionCost, ActionType, BaseItemDataPF2e, BaseItemSourcePF2e, Frequency, FrequencySource, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemLevelData, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, };
+export { ActionCost, ActionType, BaseItemSourcePF2e, Frequency, FrequencySource, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, };

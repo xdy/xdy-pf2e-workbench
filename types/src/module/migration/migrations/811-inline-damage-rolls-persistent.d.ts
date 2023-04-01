@@ -7,5 +7,5 @@ export declare class Migration811InlineDamageRollsPersistent extends MigrationBa
     static version: number;
     updateActor(source: ActorSourcePF2e): Promise<void>;
     updateItem(source: ItemSourcePF2e): Promise<void>;
-    updateJournalEntry(source: foundry.data.JournalEntrySource): Promise<void>;
+    updateJournalEntry(source: foundry.documents.JournalEntrySource): Promise<void>;
 }

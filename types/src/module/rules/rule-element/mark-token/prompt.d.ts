@@ -6,7 +6,7 @@ declare class MarkTargetPrompt {
     prompt: string;
     requirements: TargetRequirements | null;
     constructor(params: PromptParameters);
-    resolveTarget(): Promise<TokenDocumentPF2e | null>;
+    resolveTarget(): Promise<Maybe<TokenDocumentPF2e | null>>;
     activateListeners(): void;
 }
 interface PromptParameters {

@@ -1,22 +1,37 @@
-import { RuleElementPF2e, RuleElementSource, RuleElementOptions } from "../";
+import { ActorPF2e } from "@actor";
+import { IWRSource, ImmunityData, ResistanceData, WeaknessData } from "@actor/data/iwr";
 import { ItemPF2e } from "@item";
-import { ImmunityData, ResistanceData, WeaknessData } from "@actor/data/iwr";
+import { ArrayField, BooleanField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "../";
+import { AELikeChangeMode } from "../ae-like";
 /** @category RuleElement */
-declare abstract class IWRRuleElement extends RuleElementPF2e {
-    type: string[];
-    exceptions: string[];
-    /** Whether to override an existing value even if it's higher */
-    override: boolean;
-    constructor(data: IWRRuleElementSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
-    protected abstract dictionary: Record<string, string | undefined>;
-    abstract get property(): unknown[];
-    validate(value: unknown): boolean;
+declare abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema> {
+    #private;
+    constructor(data: IWRRuleElementSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    static get dictionary(): Record<string, string | undefined>;
+    static defineSchema(): IWRRuleSchema;
+    protected _validateModel(source: SourceFromSchema<IWRRuleSchema>): void;
+    /** A reference to the pertinent property in actor system data */
+    abstract get property(): IWRSource[];
     abstract getIWR(value?: number): ImmunityData[] | WeaknessData[] | ResistanceData[];
     beforePrepareData(): void;
 }
+interface IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema>, Omit<ModelPropsFromSchema<IWRRuleSchema>, "exceptions"> {
+    constructor: typeof IWRRuleElement<TSchema>;
+    exceptions: string[];
+}
+type IWRRuleSchema = RuleElementSchema & {
+    /** Whether to add or remove an immunity, weakness, or resistance (default is "add") */
+    mode: StringField<IWRChangeMode, IWRChangeMode, true, false, true>;
+    type: ArrayField<StringField<string, string, true, false, false>>;
+    exceptions: ArrayField<StringField<string, string, true, false, false>>;
+    override: BooleanField;
+};
+type IWRChangeMode = Extract<AELikeChangeMode, "add" | "remove">;
 interface IWRRuleElementSource extends RuleElementSource {
+    mode?: unknown;
     type?: unknown;
     exceptions?: unknown;
     override?: unknown;
 }
-export { IWRRuleElement, IWRRuleElementSource };
+export { IWRRuleElement, IWRRuleSchema, IWRRuleElementSource };

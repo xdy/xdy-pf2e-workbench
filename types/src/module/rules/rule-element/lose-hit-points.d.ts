@@ -1,4 +1,4 @@
-import { CreaturePF2e } from "@actor";
+import { ActorPF2e, CreaturePF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
@@ -12,7 +12,7 @@ export declare class LoseHitPointsRuleElement extends RuleElementPF2e {
      * new and old values.
      */
     private reevaluateOnUpdate;
-    constructor(data: LoseHitPointsSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(data: LoseHitPointsSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     onCreate(actorUpdates: Record<string, unknown>): void;
     preUpdate(changes: DeepPartial<ItemSourcePF2e>): Promise<void>;
 }

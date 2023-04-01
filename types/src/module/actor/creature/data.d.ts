@@ -1,18 +1,13 @@
-import { AbilityBasedStatistic, ActorSystemData, ActorSystemSource, ActorAttributes, BaseActorDataPF2e, BaseActorSourcePF2e, ActorTraitsData, ActorTraitsSource, HitPointsData, InitiativeData, Rollable, StrikeData } from "@actor/data/base";
-import { CheckModifier, DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers";
+import { AbilityBasedStatistic, ActorSystemData, ActorSystemSource, ActorAttributes, BaseActorSourcePF2e, ActorTraitsData, ActorTraitsSource, HitPointsData, Rollable, StrikeData, RollFunction } from "@actor/data/base";
+import { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers";
 import { AbilityString, ActorAlliance, SaveType, SkillAbbreviation, SkillLongForm } from "@actor/types";
 import type { CREATURE_ACTOR_TYPES } from "@actor/values";
-import { LabeledNumber, Size, ValueAndMax, ValuesList, ZeroToThree, ZeroToTwo } from "@module/data";
-import { CombatantPF2e } from "@module/encounter";
-import { CheckRoll } from "@system/check";
+import { LabeledNumber, Size, ValueAndMax, ValuesList, ZeroToThree } from "@module/data";
 import { RollParameters } from "@system/rolls";
 import { Statistic, StatisticTraceData } from "@system/statistic";
-import type { CreaturePF2e } from ".";
 import { CreatureSensePF2e, SenseAcuity, SenseType } from "./sense";
-import { Alignment, AlignmentTrait } from "./types";
-type BaseCreatureSource<TType extends CreatureType = CreatureType, TSystemSource extends CreatureSystemSource = CreatureSystemSource> = BaseActorSourcePF2e<TType, TSystemSource>;
-interface BaseCreatureData<TItem extends CreaturePF2e = CreaturePF2e, TType extends CreatureType = CreatureType, TSystemData extends CreatureSystemData = CreatureSystemData, TSource extends BaseCreatureSource<TType> = BaseCreatureSource<TType>> extends Omit<BaseCreatureSource<TType>, "data" | "system" | "effects" | "flags" | "items" | "prototypeToken" | "type">, BaseActorDataPF2e<TItem, TType, TSystemData, TSource> {
-}
+import { Alignment, CreatureTrait } from "./types";
+type BaseCreatureSource<TType extends CreatureType, TSystemSource extends CreatureSystemSource> = BaseActorSourcePF2e<TType, TSystemSource>;
 /** Skill and Lore statistics for rolling. Both short and longform are supported, but eventually only long form will be */
 type CreatureSkills = Record<SkillAbbreviation, Statistic> & Record<SkillLongForm, Statistic> & Partial<Record<string, Statistic>>;
 interface CreatureSystemSource extends ActorSystemSource {
@@ -33,6 +28,7 @@ interface CreatureSystemSource extends ActorSystemSource {
         value?: number;
         mod?: number;
     }>;
+    resources?: CreatureResourcesSource;
 }
 type CreatureDetails = {
     /** The alignment this creature has */
@@ -46,7 +42,20 @@ type CreatureDetails = {
         value: number;
     };
 };
-interface CreatureSystemData extends CreatureSystemSource, ActorSystemData {
+interface CreatureTraitsSource extends ActorTraitsSource<CreatureTrait> {
+    /** Languages which this actor knows and can speak. */
+    languages: ValuesList<Language>;
+    size?: {
+        value: Size;
+    };
+}
+interface CreatureResourcesSource {
+    focus?: {
+        value: number;
+        max?: number;
+    };
+}
+interface CreatureSystemData extends Omit<CreatureSystemSource, "attributes">, ActorSystemData {
     abilities?: Abilities;
     details: CreatureDetails;
     /** Traits, languages, and other information. */
@@ -58,9 +67,11 @@ interface CreatureSystemData extends CreatureSystemSource, ActorSystemData {
     damageDice: Record<string, DamageDicePF2e[]>;
     /** Saving throw data */
     saves: CreatureSaves;
+    skills: Record<SkillAbbreviation, SkillData>;
     actions?: StrikeData[];
+    resources?: CreatureResources;
 }
-type CreatureType = typeof CREATURE_ACTOR_TYPES[number];
+type CreatureType = (typeof CREATURE_ACTOR_TYPES)[number];
 interface SenseData {
     type: SenseType;
     acuity?: SenseAcuity;
@@ -78,15 +89,8 @@ type Abilities = Record<AbilityString, AbilityData>;
 /** A type representing the possible ability strings. */
 type Language = keyof ConfigPF2e["PF2E"]["languages"];
 type Attitude = keyof ConfigPF2e["PF2E"]["attitude"];
-type CreatureTrait = keyof ConfigPF2e["PF2E"]["creatureTraits"] | AlignmentTrait;
-interface CreatureTraitsSource extends ActorTraitsSource<CreatureTrait> {
-    /** Languages which this actor knows and can speak. */
-    languages: ValuesList<Language>;
-    size?: {
-        value: Size;
-    };
-}
 interface CreatureTraitsData extends ActorTraitsData<CreatureTrait>, Omit<CreatureTraitsSource, "rarity" | "size"> {
+    senses?: unknown;
     /** Languages which this actor knows and can speak. */
     languages: ValuesList<Language>;
 }
@@ -108,9 +112,7 @@ interface CreatureAttributes extends ActorAttributes {
     hardness?: {
         value: number;
     };
-    perception: {
-        value: number;
-    };
+    perception: CreaturePerception;
     /** The creature's natural reach */
     reach: {
         /** The default reach for all actions requiring one */
@@ -133,6 +135,10 @@ interface CreatureAttributes extends ActorAttributes {
     /** Whether this creature emits sound */
     emitsSound: boolean;
 }
+interface CreaturePerception extends StatisticModifier {
+    value: number;
+    roll?: RollFunction<RollParameters>;
+}
 interface CreatureSpeeds extends StatisticModifier {
     /** The actor's primary speed (usually walking/stride speed). */
     value: number;
@@ -151,24 +157,19 @@ interface LabeledSpeed extends Omit<LabeledNumber, "exceptions"> {
 interface CreatureHitPoints extends HitPointsData {
     negativeHealing: boolean;
 }
-interface InitiativeRollParams extends RollParameters {
-    /** Whether the encounter tracker should be updated with the roll result */
-    updateTracker?: boolean;
-    skipDialog?: boolean;
-    rollMode?: RollMode;
+/** Creature initiative statistic */
+interface CreatureInitiativeSource {
+    /** What skill or ability is currently being used to compute initiative. */
+    statistic: SkillLongForm | "perception";
 }
-interface InitiativeRollResult {
-    combatant: CombatantPF2e;
-    roll: Rolled<CheckRoll>;
+interface CreatureResources extends CreatureResourcesSource {
+    /** The current number of focus points and pool size */
+    focus: {
+        value: number;
+        max: number;
+        cap: number;
+    };
 }
-type CreatureInitiative = InitiativeData & CheckModifier & {
-    roll: (parameters: InitiativeRollParams) => Promise<InitiativeRollResult | null>;
-    /**
-     * If a pair of initiative rolls are tied, the next resolution step is the tiebreak priority. A lower value
-     * constitutes a higher priority.
-     */
-    tiebreakPriority: ZeroToTwo;
-};
 declare enum VisionLevels {
     BLINDED = 0,
     NORMAL = 1,
@@ -199,4 +200,4 @@ interface HeldShieldData {
     /** An effect icon to use when the shield is raised */
     icon: ImageFilePath;
 }
-export { Abilities, AbilityData, Attitude, BaseCreatureData, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureHitPoints, CreatureInitiative, CreatureSaves, CreatureSkills, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTrait, CreatureTraitsData, CreatureTraitsSource, CreatureType, HeldShieldData, InitiativeRollParams, InitiativeRollResult, LabeledSpeed, Language, MovementType, SaveData, SenseData, SkillAbbreviation, SkillData, VisionLevel, VisionLevels, };
+export { Abilities, AbilityData, Attitude, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureHitPoints, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSaves, CreatureSkills, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, CreatureType, HeldShieldData, LabeledSpeed, Language, MovementType, SaveData, SenseData, SkillAbbreviation, SkillData, VisionLevel, VisionLevels, };

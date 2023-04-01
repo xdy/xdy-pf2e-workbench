@@ -5,5 +5,5 @@ import { MigrationBase } from "../base";
 export declare class Migration662LinkToActorSizeDefaults extends MigrationBase {
     static version: number;
     updateActor(actorSource: ActorSourcePF2e): Promise<void>;
-    updateToken(tokenSource: foundry.data.TokenSource, actor: ActorPF2e): Promise<void>;
+    updateToken(tokenSource: foundry.documents.TokenSource, actor: ActorPF2e): Promise<void>;
 }

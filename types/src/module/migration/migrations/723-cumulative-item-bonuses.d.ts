@@ -13,5 +13,5 @@ export declare class Migration723CumulativeItemBonuses extends MigrationBase {
     /** Update feat, effect, and equipment items */
     updateItem(source: ItemSourcePF2e): Promise<void>;
     /** Replace the retired toggle macro with a simple hotbar-drop effect macro */
-    updateMacro(source: foundry.data.MacroSource): Promise<void>;
+    updateMacro(source: foundry.documents.MacroSource): Promise<void>;
 }

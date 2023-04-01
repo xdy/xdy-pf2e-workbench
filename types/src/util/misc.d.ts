@@ -8,13 +8,15 @@ import { ActionCost } from "@item/data/base";
  * @return
  */
 declare function groupBy<T, R>(array: T[], criterion: (value: T) => R): Map<R, T[]>;
-/** Sorts an array given the natural sorting behavior of the result of a mapping function */
-declare function sortBy<T, J>(array: T[], mapping: (value: T) => J): T[];
+/** Creates a sorting comparator that sorts by the numerical result of a mapping function */
+declare function sortBy<T, J>(mapping: (value: T) => J): (a: T, b: T) => number;
 /**
  * Given an array, adds a certain amount of elements to it
  * until the desired length is being reached
  */
 declare function padArray<T>(array: T[], requiredLength: number, padWith: T): T[];
+/** Given an object, returns a new object with the same keys, but with each value converted by a function. */
+declare function mapValues<K extends string | number | symbol, V, R>(object: Record<K, V>, mapping: (value: V, key: K) => R): Record<K, R>;
 type Optional<T> = T | null | undefined;
 /**
  * Returns true if the string is null, undefined or only consists of 1..n spaces
@@ -61,15 +63,25 @@ declare function pick<T extends object, K extends keyof T>(obj: T, keys: Iterabl
 /** Returns a subset of an object with explicitly excluded keys */
 declare function omit<T extends object, K extends keyof T>(obj: T, keys: Iterable<K>): Omit<T, K>;
 /**
+ * Return an integer string of a number, always with sign (+/-)
+ * @param value The number to convert to a string
+ * @param [emptyStringZero] If the value is zero, return an empty string
+ */
+declare function signedInteger(value: number, { emptyStringZero }?: {
+    emptyStringZero?: boolean | undefined;
+}): string;
+/**
  * The system's sluggification algorithm for labels and other terms.
  * @param text The text to sluggify
  * @param [options.camel=null] The sluggification style to use
  */
 declare function sluggify(text: string, { camel }?: {
-    camel?: "dromedary" | "bactrian" | null;
+    camel?: SlugCamel;
 }): string;
+type SlugCamel = "dromedary" | "bactrian" | null;
 /** Parse a string containing html */
 declare function parseHTML(unparsed: string): HTMLElement;
+declare function getActionTypeLabel(type: Maybe<"action" | "free" | "reaction" | "passive">, cost: Maybe<number>): string | null;
 declare function getActionIcon(actionType: string | ActionCost | null, fallback: ImageFilePath): ImageFilePath;
 declare function getActionIcon(actionType: string | ActionCost | null, fallback: ImageFilePath | null): ImageFilePath | null;
 declare function getActionIcon(actionType: string | ActionCost | null): ImageFilePath;
@@ -85,7 +97,9 @@ declare function ErrorPF2e(message: string): Error;
 /** Returns the number in an ordinal format, like 1st, 2nd, 3rd, 4th, etc */
 declare function ordinal(value: number): string;
 /** Localizes a list of strings into a comma delimited list for the current language */
-declare function localizeList(items: string[]): string;
+declare function localizeList(items: string[], { conjunction }?: {
+    conjunction?: "and" | "or";
+}): string;
 /** Generate and return an HTML element for a FontAwesome icon */
 type FontAwesomeStyle = "solid" | "regular" | "duotone";
 declare function fontAwesomeIcon(glyph: string, { style, fixedWidth }?: {
@@ -101,10 +115,16 @@ declare function isObject<T extends string>(value: unknown): value is {
 declare function sortLabeledRecord<T extends Record<string, {
     label: string;
 }>>(record: T): T;
+/** Localize the values of a `Record<string, string>` and sort by those values */
 declare function sortStringRecord<T extends Record<string, string>>(record: T): T;
 /** JSON.stringify with recursive key sorting */
 declare function sortObjByKey(value: unknown): unknown;
 declare function sortedStringify(obj: object): string;
 /** Walk an object tree and replace any string values found according to a provided function */
 declare function recursiveReplaceString<T>(source: T, replace: (s: string) => string): T;
-export { ErrorPF2e, Fraction, Optional, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, groupBy, isBlank, isObject, localizeList, objectHasKey, omit, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };
+/** Does the parameter look like an image file path? */
+declare function isImageFilePath(path: unknown): path is ImageFilePath;
+/** Does the parameter look like a video file path? */
+declare function isVideoFilePath(path: unknown): path is ImageFilePath;
+declare function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath;
+export { ErrorPF2e, Fraction, Optional, SlugCamel, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, mapValues, objectHasKey, omit, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };

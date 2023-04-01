@@ -1,17 +1,17 @@
-import { ActorAttributes, ActorSystemData, ActorSystemSource, BaseActorDataPF2e, BaseActorSourcePF2e } from "@actor/data/base";
-import { PartyPF2e } from "./document";
+import { ActorAttributes, ActorAttributesSource, ActorDetails, ActorSystemData, ActorSystemSource, BaseActorSourcePF2e } from "@actor/data/base";
 type PartySource = BaseActorSourcePF2e<"party", PartySystemSource>;
-type PartyData = Omit<PartySource, "effects" | "flags" | "items" | "prototypeToken"> & BaseActorDataPF2e<PartyPF2e, "party", PartySystemData, PartySource>;
 interface PartySystemSource extends ActorSystemSource {
     attributes: PartyAttributesSource;
     details: PartyDetailsSource;
+    traits?: never;
 }
-interface PartyAttributesSource extends ActorAttributes {
+interface PartyAttributesSource extends ActorAttributesSource {
     hp?: never;
     ac?: never;
-    immunities: never[];
-    weaknesses: never[];
-    resistances: never[];
+    initiative?: never;
+    immunities?: never;
+    weaknesses?: never;
+    resistances?: never;
 }
 interface PartyDetailsSource {
     description: string;
@@ -20,5 +20,15 @@ interface PartyDetailsSource {
     };
     members: ActorUUID[];
 }
-type PartySystemData = PartySystemSource & ActorSystemData;
-export { PartyData };
+interface PartySystemData extends Omit<PartySystemSource, "attributes">, Omit<ActorSystemData, "traits"> {
+    attributes: PartyAttributes;
+    details: PartyDetails;
+}
+interface PartyAttributes extends Omit<PartyAttributesSource, "immunities" | "weaknesses" | "resistances">, Omit<ActorAttributes, "initiative" | "ac" | "hp"> {
+    immunities: never[];
+    weaknesses: never[];
+    resistances: never[];
+}
+interface PartyDetails extends PartyDetailsSource, ActorDetails {
+}
+export { PartySource, PartySystemData };

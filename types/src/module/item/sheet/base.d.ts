@@ -19,6 +19,7 @@ export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TIt
     protected onTagSelector(anchor: HTMLAnchorElement): void;
     /** Get NPC attack effect options */
     protected getAttackEffectOptions(): Record<string, string>;
+    activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): Promise<TinyMCE.Editor>;
     close(options?: {
         force?: boolean;
     }): Promise<void>;
@@ -27,8 +28,6 @@ export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TIt
     protected _onChangeTab(event: MouseEvent, tabs: Tabs, active: string): void;
     /** Internal function to update the sidebar visibility based on the current tab */
     private updateSidebarVisibility;
-    /** Ensure the source description is edited rather than a prepared one */
-    activateEditor(name: string, options?: Partial<TinyMCE.EditorOptions>, initialContent?: string): Promise<TinyMCE.Editor>;
     protected _getSubmitData(updateData?: Record<string, unknown>): Record<string, unknown>;
     /** Hide the sheet-config button unless there is more than one sheet option. */
     protected _getHeaderButtons(): ApplicationHeaderButton[];

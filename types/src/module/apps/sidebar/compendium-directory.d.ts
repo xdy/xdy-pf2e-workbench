@@ -11,6 +11,7 @@ export declare class CompendiumDirectoryPF2e extends CompendiumDirectory {
     static get defaultOptions(): ApplicationOptions;
     getData(options?: Partial<ApplicationOptions>): Promise<CompendiumDirectoryDataPF2e>;
     activateListeners($html: JQuery): void;
+    protected _getEntryContextOptions(): EntryContextOption[];
     /** Add a context menu for content search results */
     protected _contextMenu($html: JQuery): void;
     /** System compendium search */

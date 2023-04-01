@@ -14,11 +14,13 @@ export declare class ActorSizePF2e {
      * @param value A size category
      * @param [length] A length of a Pathfinder "space"
      * @param [width]  A width of a Pathfinder "space"
+     * @param [smallIsMedium] Treat small as medium
      */
-    constructor({ value, length, width }: {
-        value: Size;
+    constructor(params: {
+        value?: Size;
         length?: number;
         width?: number;
+        smallIsMedium?: boolean;
     });
     /**
      * Test for equality between this and another size, falling back to comparing areas in case of a category tie

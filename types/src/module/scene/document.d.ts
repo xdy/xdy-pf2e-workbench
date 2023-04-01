@@ -1,9 +1,7 @@
-import { SceneDataPF2e } from "./data";
+import { SceneFlagsPF2e } from "./data";
 import { SceneConfigPF2e } from "./sheet";
 import { AmbientLightDocumentPF2e, MeasuredTemplateDocumentPF2e, TileDocumentPF2e, TokenDocumentPF2e } from ".";
 declare class ScenePF2e extends Scene {
-    /** A promise to prevent concurrent executions of #checkAuras() */
-    auraCheckLock?: Promise<void>;
     /** Is the rules-based vision setting enabled? */
     get rulesBasedVision(): boolean;
     /** Is this scene's darkness value synced to the world time? */
@@ -13,28 +11,23 @@ declare class ScenePF2e extends Scene {
     get isDimlyLit(): boolean;
     get isDark(): boolean;
     get hasHexGrid(): boolean;
-    /** Check for auras containing newly-placed or moved tokens */
-    checkAuras(): Promise<void>;
+    /** Whether this scene is "in focus": the active scene, or the viewed scene if only a single GM is logged in */
+    get isInFocus(): boolean;
     prepareData(): void;
     /** Toggle Unrestricted Global Vision according to scene darkness level */
     prepareBaseData(): void;
     /** Redraw auras if the scene was activated while being viewed */
-    _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext, userId: string): void;
+    _onUpdate(changed: DeepPartial<this["_source"]>, options: SceneUpdateContext, userId: string): void;
 }
 interface ScenePF2e extends Scene {
+    flags: SceneFlagsPF2e;
+    /** Added as debounced method: check for auras containing newly-placed or moved tokens */
+    checkAuras(): void;
     _sheet: SceneConfigPF2e<this> | null;
-    readonly lights: foundry.abstract.EmbeddedCollection<AmbientLightDocumentPF2e>;
-    readonly templates: foundry.abstract.EmbeddedCollection<MeasuredTemplateDocumentPF2e>;
-    readonly tokens: foundry.abstract.EmbeddedCollection<TokenDocumentPF2e>;
-    readonly tiles: foundry.abstract.EmbeddedCollection<TileDocumentPF2e>;
-    flags: {
-        pf2e: {
-            [key: string]: unknown;
-            syncDarkness: "enabled" | "disabled" | "default";
-        };
-        [key: string]: Record<string, unknown>;
-    };
-    readonly data: SceneDataPF2e<this>;
+    readonly lights: foundry.abstract.EmbeddedCollection<AmbientLightDocumentPF2e<this>>;
+    readonly templates: foundry.abstract.EmbeddedCollection<MeasuredTemplateDocumentPF2e<this>>;
+    readonly tokens: foundry.abstract.EmbeddedCollection<TokenDocumentPF2e<this>>;
+    readonly tiles: foundry.abstract.EmbeddedCollection<TileDocumentPF2e<this>>;
     get sheet(): SceneConfigPF2e<this>;
 }
 export { ScenePF2e };

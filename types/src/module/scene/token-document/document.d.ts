@@ -1,11 +1,11 @@
 import { ActorPF2e } from "@actor";
 import { TokenPF2e } from "@module/canvas";
 import { ScenePF2e, TokenConfigPF2e } from "@module/scene";
-import { TokenDataPF2e } from "./data";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
 import { PrototypeTokenPF2e } from "@actor/data/base";
 import { TokenAura } from "./aura";
-declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
+import { TokenFlagsPF2e } from "./data";
+declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends TokenDocument<TParent> {
     #private;
     /** Has this token gone through at least one cycle of data preparation? */
     private initialized?;
@@ -46,21 +46,19 @@ declare class TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends To
         sendMessage?: boolean;
     }): Promise<void>;
     /** Toggle token hiding if this token's actor is a loot actor */
-    protected _onCreate(data: this["_source"], options: DocumentModificationContext<this>, userId: string): void;
-    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext, userId: string): void;
+    protected _onCreate(data: this["_source"], options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, userId: string): void;
     /** Reinitialize vision if the actor's senses were updated directly */
-    _onUpdateBaseActor(update?: Record<string, unknown>, options?: DocumentModificationContext<Actor>): void;
-    protected _onDelete(options: DocumentModificationContext<this>, userId: string): void;
+    _onUpdateBaseActor(update?: Record<string, unknown>, options?: DocumentModificationContext<null>): void;
+    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
     /** Re-render token placeable if REs have ephemerally changed any visuals of this token */
     onActorEmbeddedItemChange(): void;
 }
-interface TokenDocumentPF2e<TActor extends ActorPF2e = ActorPF2e> extends TokenDocument<TActor> {
-    readonly data: TokenDataPF2e<this>;
-    readonly _object: TokenPF2e | null;
-    get object(): TokenPF2e;
-    readonly parent: ScenePF2e | null;
-    get combatant(): CombatantPF2e<EncounterPF2e> | null;
-    _sheet: TokenConfigPF2e<this> | null;
+interface TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends TokenDocument<TParent> {
+    flags: TokenFlagsPF2e;
+    get actor(): ActorPF2e<this | null> | null;
+    get combatant(): CombatantPF2e<EncounterPF2e, this> | null;
+    get object(): TokenPF2e<this> | null;
     get sheet(): TokenConfigPF2e<this>;
     overlayEffect: ImageFilePath;
 }

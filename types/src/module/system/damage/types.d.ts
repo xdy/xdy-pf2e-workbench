@@ -1,5 +1,6 @@
 import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers";
 import { AttackTarget, ResistanceType, StrikeSelf } from "@actor/types";
+import { ZeroToTwo } from "@module/data";
 import { RollNotePF2e } from "@module/notes";
 import { DegreeOfSuccessString } from "@system/degree-of-success";
 import { BaseRollContext } from "@system/rolls";
@@ -35,7 +36,7 @@ interface DamageRollRenderData {
 }
 interface DamageRollContext extends BaseRollContext {
     type: "damage-roll";
-    sourceType: "attack" | "save";
+    sourceType: "attack" | "check" | "save";
     outcome?: DegreeOfSuccessString;
     self?: StrikeSelf | null;
     target?: AttackTarget | null;
@@ -43,6 +44,8 @@ interface DamageRollContext extends BaseRollContext {
     secret?: boolean;
     /** The domains this roll had, for reporting purposes */
     domains?: string[];
+    /** The number of MAP increases from the preceding check */
+    mapIncreases?: ZeroToTwo;
 }
 interface DamageFormulaData {
     base: BasicDamageData;
@@ -54,19 +57,15 @@ interface DamageFormulaData {
     }[];
 }
 interface ResolvedDamageFormulaData extends DamageFormulaData {
-    formula: {
-        criticalFailure: null;
-        failure: string | null;
-        success: string;
-        criticalSuccess: string;
-    };
+    formula: Record<DegreeOfSuccessString, string | null>;
+    breakdown: Record<DegreeOfSuccessString, string[]>;
 }
 interface BasicDamageData {
     damageType: DamageType;
     diceNumber: number;
     dieSize: DamageDieSize | null;
     modifier: number;
-    category: DamageCategory | null;
+    category: DamageCategoryUnique | null;
     materials?: MaterialDamageEffect[];
 }
 interface BaseDamageTemplate {

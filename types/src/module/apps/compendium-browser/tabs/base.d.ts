@@ -1,25 +1,25 @@
 import { CompendiumBrowser } from "..";
-import { BaseFilterData, CheckboxOptions, CompendiumBrowserIndexData, RangesData } from "./data";
-import { TabName } from "../data";
+import { BrowserFilter, CheckboxOptions, CompendiumBrowserIndexData, MultiselectData, RangesData } from "./data";
+import { BrowserTabs, ContentTabName } from "../data";
 import MiniSearch from "minisearch";
 export declare abstract class CompendiumBrowserTab {
     #private;
     /** A reference to the parent CompendiumBrowser */
     protected browser: CompendiumBrowser;
+    /** The filter schema for this tab; The tabs filters are rendered based on this.*/
+    abstract filterData: BrowserFilter;
     /** An unmodified copy of this.filterData */
-    defaultFilterData: BaseFilterData;
+    defaultFilterData: this["filterData"];
     /** The full CompendiumIndex of this tab */
     protected indexData: CompendiumBrowserIndexData[];
     /** Is this tab initialized? */
     isInitialized: boolean;
-    /** The filter schema for this tab; The tabs filters are rendered based on this.*/
-    filterData: BaseFilterData;
     /** The total count of items in the currently filtered index */
     totalItemCount: number;
     /** The initial display limit for this tab; Scrolling is currently hardcoded to +100 */
     scrollLimit: number;
     /** The name of this tab */
-    tabName: Exclude<TabName, "settings">;
+    abstract tabName: ContentTabName;
     /** The path to the result list template of this tab */
     abstract templatePath: string;
     /** Minisearch */
@@ -29,19 +29,28 @@ export declare abstract class CompendiumBrowserTab {
     /** Names of fields to store, so that search results would include them.
      *  By default none, so resuts would only contain the id field. */
     storeFields: string[];
-    constructor(browser: CompendiumBrowser, tabName: Exclude<TabName, "settings">);
+    constructor(browser: CompendiumBrowser);
     /** Initialize this this tab */
     init(): Promise<void>;
+    /** Open this tab
+     * @param filter An optional initial filter for this tab
+     */
+    open(filter?: BrowserFilter): Promise<void>;
     /** Filter indexData and return slice based on current scrollLimit */
     getIndexData(start: number): CompendiumBrowserIndexData[];
+    /** Returns a clean copy of the filterData for this tab. Initializes the tab if necessary. */
+    getFilterData(): Promise<this["filterData"]>;
     /** Reset all filters */
     resetFilters(): void;
+    /** Check this tabs type */
+    isOfType<T extends ContentTabName>(...types: T[]): this is BrowserTabs[T];
     /** Load and prepare the compendium index and set filter options */
-    protected loadData(): Promise<void>;
+    protected abstract loadData(): Promise<void>;
     /** Prepare the the filterData object of this tab */
-    protected prepareFilterData(): void;
+    protected abstract prepareFilterData(): this["filterData"];
     /** Filter indexData */
     protected filterIndexData(_entry: CompendiumBrowserIndexData): boolean;
+    protected filterTraits(traits: string[], selected: MultiselectData["selected"], condition: MultiselectData["conjunction"]): boolean;
     renderResults(start: number): Promise<HTMLLIElement[]>;
     /** Sort result array by name, level or price */
     protected sortResult(result: CompendiumBrowserIndexData[]): CompendiumBrowserIndexData[];
@@ -58,9 +67,7 @@ export declare abstract class CompendiumBrowserTab {
     /** Generates a sorted CheckBoxOptions object from a sources Set */
     protected generateSourceCheckboxOptions(sources: Set<string>): CheckboxOptions;
     /** Provide a best-effort sort of an object (e.g. CONFIG.PF2E.monsterTraits) */
-    protected sortedConfig(obj: Record<string, string>): {
-        [k: string]: string;
-    };
+    protected sortedConfig(obj: Record<string, string>): Record<string, string>;
     /** Ensure all index fields are present in the index data */
     protected hasAllIndexFields(data: CompendiumIndexData, indexFields: string[]): boolean;
 }

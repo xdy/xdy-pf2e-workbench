@@ -1,16 +1,16 @@
+import { ProficiencyRank } from "@item/data";
+import { Rarity } from "./data";
 /**
  * Implementation of Difficulty Classes https://2e.aonprd.com/Rules.aspx?ID=552
  * and variant rule Proficiency Without Level https://2e.aonprd.com/Rules.aspx?ID=1370
  */
-import { ProficiencyRank } from "@item/data";
-import { Rarity } from "./data";
-export type NegativeDCAdjustment = "incredibly easy" | "very easy" | "easy" | "normal";
-export type PositiveDCAdjustment = "normal" | "hard" | "very hard" | "incredibly hard";
-export type DCAdjustment = NegativeDCAdjustment | PositiveDCAdjustment;
-export declare function rarityToDCAdjustment(rarity?: Rarity): PositiveDCAdjustment;
-export declare function adjustDC(dc: number, adjustment?: DCAdjustment): number;
-export declare function adjustDCByRarity(dc: number, rarity?: Rarity): number;
-export interface DCOptions {
+type NegativeDCAdjustment = "incredibly easy" | "very easy" | "easy" | "normal";
+type PositiveDCAdjustment = "normal" | "hard" | "very hard" | "incredibly hard";
+type DCAdjustment = NegativeDCAdjustment | PositiveDCAdjustment;
+declare function rarityToDCAdjustment(rarity?: Rarity): PositiveDCAdjustment;
+declare function adjustDC(dc: number, adjustment?: DCAdjustment): number;
+declare function adjustDCByRarity(dc: number, rarity?: Rarity): number;
+interface DCOptions {
     proficiencyWithoutLevel?: boolean;
     rarity?: Rarity;
 }
@@ -19,9 +19,9 @@ export interface DCOptions {
  * @param level
  * @param proficiencyWithoutLevel
  */
-export declare function calculateDC(level: number, { proficiencyWithoutLevel, rarity }?: DCOptions): number;
-export declare function calculateSimpleDC(rank: ProficiencyRank, { proficiencyWithoutLevel }?: DCOptions): number;
-export declare function calculateSpellDC(spellLevel: number, { proficiencyWithoutLevel }?: DCOptions): number;
+declare function calculateDC(level: number, { proficiencyWithoutLevel, rarity }?: DCOptions): number;
+declare function calculateSimpleDC(rank: ProficiencyRank, { proficiencyWithoutLevel }?: DCOptions): number;
+declare function calculateSpellDC(spellLevel: number, { proficiencyWithoutLevel }?: DCOptions): number;
 /**
  * Used to shift DCs around the adjustment table Rarity increases
  * the adjustment while Lores reduce it.
@@ -31,10 +31,11 @@ export declare function calculateSpellDC(spellLevel: number, { proficiencyWithou
  * Important: this operation is not associative because
  * of the lower and upper bounds
  */
-export declare function combineDCAdjustments(first: DCAdjustment, second: DCAdjustment): DCAdjustment;
+declare function combineDCAdjustments(first: DCAdjustment, second: DCAdjustment): DCAdjustment;
 /**
  * Given a DC made starting at an adjustment create an array of
  * growing difficulties starting from the adjusted position in
  * the table at https://2e.aonprd.com/Rules.aspx?ID=555
  */
-export declare function createDifficultyScale(dc: number, startAt: DCAdjustment): number[];
+declare function createDifficultyScale(dc: number, startAt: DCAdjustment): number[];
+export { DCAdjustment, DCOptions, NegativeDCAdjustment, PositiveDCAdjustment, adjustDC, adjustDCByRarity, calculateDC, calculateSimpleDC, calculateSpellDC, combineDCAdjustments, createDifficultyScale, rarityToDCAdjustment, };

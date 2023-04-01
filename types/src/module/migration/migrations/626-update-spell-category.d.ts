@@ -1,4 +1,4 @@
-import type { ItemSourcePF2e } from "@item/data";
+import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "../base";
 /**
  * Makes spells use the category for focus/ritual spells instead

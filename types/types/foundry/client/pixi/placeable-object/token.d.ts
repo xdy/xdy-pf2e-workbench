@@ -2,7 +2,9 @@ export {};
 
 declare global {
     /** A Token is an implementation of PlaceableObject that represents an Actor within a viewed Scene on the game canvas. */
-    class Token<TDocument extends TokenDocument = TokenDocument> extends PlaceableObject<TDocument> {
+    class Token<
+        TDocument extends TokenDocument<Scene | null> = TokenDocument<Scene | null>
+    > extends PlaceableObject<TDocument> {
         constructor(document: TDocument);
 
         /** A reference to an animation that is currently in progress for this Token, if any */
@@ -221,6 +223,8 @@ declare global {
         /** Update display of the Token, pulling latest data and re-rendering the display of Token components */
         refresh(): this;
 
+        protected override _refresh(options: object): void;
+
         /** Draw the Token border, taking into consideration the grid type and border color */
         protected _refreshBorder(): void;
 
@@ -398,11 +402,17 @@ declare global {
         ): void;
 
         /**
-         * Add or remove the currently controlled Tokens from the active combat encounter
-         * @param [combat] A specific combat encounter to which this Token should be added
-         * @return The Token which initiated the toggle
+         * Add or remove the set of currently controlled Tokens from the active combat encounter
+         * @param [state]  The desired combat state which determines if each Token is added (true) or removed (false)
+         * @param [combat] A Combat encounter from which to add or remove the Token
+         * @param [token]  A specific Token which is the origin of the group toggle request
+         * @return The Combatants added or removed
          */
-        toggleCombat(combat: Combat): Promise<this>;
+        toggleCombat(
+            state?: boolean,
+            combat?: Combat | null,
+            { token }?: { token?: Token | null }
+        ): Promise<Combatant<Combat>[]>;
 
         /**
          * Toggle an active effect by its texture path.
@@ -447,27 +457,27 @@ declare global {
         /*  Event Listeners and Handlers                */
         /* -------------------------------------------- */
 
-        override _onCreate(
+        protected override _onCreate(
             data: TDocument["_source"],
-            options: DocumentModificationContext<TDocument>,
+            options: DocumentModificationContext<TDocument["parent"]>,
             userId: string
         ): void;
 
-        override _onUpdate(
+        protected override _onUpdate(
             changed: DeepPartial<TDocument["_source"]>,
-            options: DocumentModificationContext,
+            options: DocumentModificationContext<TDocument["parent"]>,
             userId: string
         ): void;
 
         /** Control updates to the appearance of the Token and its linked TokenMesh when a data update occurs. */
         protected _onUpdateAppearance(
-            data: DeepPartial<foundry.data.TokenSource>,
+            data: DeepPartial<TDocument["_source"]>,
             changed: Set<string>,
-            options: DocumentModificationContext
+            options: DocumentModificationContext<TDocument["parent"]>
         ): Promise<void>;
 
         /** Define additional steps taken when an existing placeable object of this type is deleted */
-        override _onDelete(options: DocumentModificationContext<TDocument>, userId: string): void;
+        protected override _onDelete(options: DocumentModificationContext<TDocument["parent"]>, userId: string): void;
 
         protected override _canControl(user: User, event?: PIXI.InteractionEvent): boolean;
 
@@ -505,7 +515,8 @@ declare global {
         protected override _onDragEnd(): void;
     }
 
-    interface Token<TDocument extends TokenDocument = TokenDocument> extends PlaceableObject<TDocument> {
+    interface Token<TDocument extends TokenDocument<Scene | null> = TokenDocument<Scene | null>>
+        extends PlaceableObject<TDocument> {
         get layer(): TokenLayer<this>;
     }
 

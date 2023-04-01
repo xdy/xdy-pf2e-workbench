@@ -9,13 +9,14 @@ interface DamageInstancePartial {
     tags: Set<string>;
     /** Tracks which modifiers added to this instance */
     modifiers: ModifierPF2e[];
+    dice: DamageDicePF2e[];
 }
-/** Apply damage dice to a spell's damage formulas: currently only support simple overrides */
-declare function applyDamageDice(formulas: DamageInstancePartial[], dice: DamageDicePF2e[]): void;
+/** Apply damage dice to a spell's damage formulas */
+declare function applyDamageDiceOverrides(formulas: DamageInstancePartial[], dice: DamageDicePF2e[]): void;
 interface FormulaAndTags {
     formula: string;
     breakdownTags: string[];
 }
 /** Creates the formula and the breakdown tags for the instance partial data */
 declare function createFormulaAndTagsForPartial(data: DamageInstancePartial, typeLabel?: string | null): FormulaAndTags;
-export { DamageInstancePartial as DamageInstanceData, applyDamageDice, createFormulaAndTagsForPartial };
+export { DamageInstancePartial, applyDamageDiceOverrides, createFormulaAndTagsForPartial };

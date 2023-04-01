@@ -5,15 +5,19 @@ import { ModifierPF2e } from "./modifiers";
 import { NPCStrike } from "./npc/data";
 import { AttackItem } from "./types";
 /** Reset and rerender a provided list of actors. Omit argument to reset all world and synthetic actors */
-declare function resetAndRerenderActors(actors?: Iterable<ActorPF2e>): Promise<void>;
+declare function resetActors(actors?: Iterable<ActorPF2e>, { rerender }?: {
+    rerender?: boolean | undefined;
+}): Promise<void>;
 declare function migrateActorSource(source: PreCreate<ActorSourcePF2e>): Promise<ActorSourcePF2e>;
+/** Review `removeOnExit` aura effects and remove any that no longer apply */
+declare function checkAreaEffects(this: ActorPF2e): Promise<void>;
 /** Find the lowest multiple attack penalty for an attack with a given item */
 declare function calculateMAPs(item: ItemPF2e, { domains, options }: {
     domains: string[];
     options: Set<string> | string[];
 }): MAPData;
 /** Create a strike statistic from a melee item: for use by NPCs and Hazards */
-declare function strikeFromMeleeItem(item: Embedded<MeleePF2e>): NPCStrike;
+declare function strikeFromMeleeItem(item: MeleePF2e<ActorPF2e>): NPCStrike;
 /** Get the range increment of a target for a given weapon */
 declare function getRangeIncrement(attackItem: AttackItem, distance: number | null): number | null;
 /** Determine range penalty for a ranged attack roll */
@@ -25,4 +29,4 @@ interface MAPData {
     map1: number;
     map2: number;
 }
-export { calculateMAPs, calculateRangePenalty, isReallyPC, getRangeIncrement, migrateActorSource, resetAndRerenderActors, strikeFromMeleeItem, };
+export { calculateMAPs, calculateRangePenalty, checkAreaEffects, getRangeIncrement, isReallyPC, migrateActorSource, resetActors, strikeFromMeleeItem, };

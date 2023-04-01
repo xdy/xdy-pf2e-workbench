@@ -3,7 +3,8 @@
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor/base";
 /** Extend ActorDirectory to show more information */
-export declare class ActorDirectoryPF2e<TDocument extends ActorPF2e> extends ActorDirectory<TDocument> {
+export declare class ActorDirectoryPF2e<TDocument extends ActorPF2e<null>> extends ActorDirectory<TDocument> {
+    #private;
     static get defaultOptions(): SidebarDirectoryOptions;
     getData(): Promise<object>;
     activateListeners($html: JQuery<HTMLElement>): void;

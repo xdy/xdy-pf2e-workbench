@@ -1,8 +1,8 @@
-import { RuleElementPF2e, RuleElementData, RuleElementSource } from "./";
-import { CharacterPF2e, FamiliarPF2e } from "@actor";
+import { ActorPF2e, CharacterPF2e, FamiliarPF2e } from "@actor";
+import { SenseAcuity } from "@actor/creature/sense";
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
-import { SenseAcuity } from "@actor/creature/sense";
+import { RuleElementData, RuleElementPF2e, RuleElementSource } from "./";
 import { RuleElementOptions } from "./base";
 /**
  * @category RuleElement
@@ -11,7 +11,7 @@ export declare class SenseRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
     private selector;
     private acuity;
-    constructor(data: SenseRuleElementSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(data: SenseRuleElementSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     beforePrepareData(): void;
 }
 export interface SenseRuleElement {

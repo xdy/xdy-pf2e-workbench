@@ -1,20 +1,29 @@
 import { ItemPF2e } from "@item";
-import { RuleElementPF2e, RuleElementSource } from "./";
-import { RuleElementOptions } from "./base";
-export declare class RollNoteRuleElement extends RuleElementPF2e {
+import { UserVisibility } from "@scripts/ui/user-visibility";
+import { DegreeOfSuccessString } from "@system/degree-of-success";
+import { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
+import { BracketedValue, RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./";
+import { ActorPF2e } from "@actor";
+declare class RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema> {
     #private;
-    private selector;
-    /** An optional title prepended to the note */
-    private title;
-    /** The text of the note */
-    private text;
-    /** Applicable degree-of-success outcomes for the note */
-    private outcomes;
-    /** An optional visibility setting for the note */
-    private visibility;
-    constructor(data: RollNoteSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    static defineSchema(): RollNoteSchema;
+    /** The main text of the note */
+    text: string | BracketedValue<string>;
+    constructor(source: RollNoteSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     beforePrepareData(): void;
 }
+interface RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema>, ModelPropsFromSchema<RollNoteSchema> {
+}
+type RollNoteSchema = RuleElementSchema & {
+    /** The statistic(s) slugs of the rolls for which this note will be appended */
+    selector: StringField<string, string, true, false, false>;
+    /** An optional title prepended to the note */
+    title: StringField<string, string, true, true, true>;
+    /** An optional limitation of the notes visibility to GMs */
+    visibility: StringField<UserVisibility, UserVisibility, true, true, true>;
+    /** Applicable degree-of-success outcomes for the note */
+    outcome: ArrayField<StringField<DegreeOfSuccessString, DegreeOfSuccessString, true, false, false>>;
+};
 interface RollNoteSource extends RuleElementSource {
     selector?: unknown;
     outcome?: unknown;
@@ -22,4 +31,4 @@ interface RollNoteSource extends RuleElementSource {
     text?: unknown;
     visibility?: unknown;
 }
-export {};
+export { RollNoteRuleElement };

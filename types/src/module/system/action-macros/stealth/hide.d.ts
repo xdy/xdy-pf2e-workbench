@@ -1,2 +1,5 @@
 import { SkillActionOptions } from "..";
-export declare function hide(options: SkillActionOptions): void;
+import { SingleCheckAction } from "@actor/actions";
+declare function hide(options: SkillActionOptions): void;
+declare const action: SingleCheckAction;
+export { hide as legacy, action };

@@ -1,11 +1,12 @@
+import { ActorPF2e } from "@actor";
 import { SpellPF2e } from "@item";
-import { SpellcastingEntryPF2e } from ".";
-import { SpellcastingSlotLevel, SpellPrepEntry } from "./data";
-export declare class SpellCollection extends Collection<Embedded<SpellPF2e>> {
-    entry: Embedded<SpellcastingEntryPF2e>;
-    constructor(entry: Embedded<SpellcastingEntryPF2e>);
+import { BaseSpellcastingEntry, SpellcastingSlotLevel, SpellPrepEntry } from "./types";
+declare class SpellCollection<TActor extends ActorPF2e, TEntry extends BaseSpellcastingEntry<TActor | null>> extends Collection<SpellPF2e<TActor>> {
+    #private;
+    readonly entry: TEntry;
+    readonly actor: TActor;
+    constructor(entry: TEntry);
     get id(): string;
-    get actor(): import("../../actor/base").ActorPF2e;
     get highestLevel(): number;
     /**
      * Adds a spell to this spellcasting entry, either moving it from another one if its the same actor,
@@ -13,20 +14,22 @@ export declare class SpellCollection extends Collection<Embedded<SpellPF2e>> {
      */
     addSpell(spell: SpellPF2e, options?: {
         slotLevel?: number;
-    }): Promise<SpellPF2e | null>;
+    }): Promise<SpellPF2e<TActor> | null>;
     /** Saves the prepared spell slot data to the spellcasting entry  */
-    prepareSpell(spell: SpellPF2e, slotLevel: number, spellSlot: number): Promise<SpellcastingEntryPF2e>;
+    prepareSpell(spell: SpellPF2e, slotLevel: number, spellSlot: number): Promise<TEntry>;
     /** Removes the spell slot and updates the spellcasting entry */
-    unprepareSpell(slotLevel: number, spellSlot: number): Promise<SpellcastingEntryPF2e>;
+    unprepareSpell(slotLevel: number, spellSlot: number): Promise<TEntry>;
     /** Sets the expended state of a spell slot and updates the spellcasting entry */
-    setSlotExpendedState(slotLevel: number, spellSlot: number, isExpended: boolean): Promise<SpellcastingEntryPF2e>;
-    getSpellData(): Promise<{
-        levels: SpellcastingSlotLevel[];
-        flexibleAvailable: {
-            value: number;
-            max: number;
-        } | undefined;
-        spellPrepList: Record<number, SpellPrepEntry[]> | null;
-    }>;
-    private getSpellPrepList;
+    setSlotExpendedState(slotLevel: number, spellSlot: number, isExpended: boolean): Promise<TEntry>;
+    getSpellData(): Promise<SpellCollectionData>;
+    protected getSpellPrepList(spells: SpellPF2e<TActor>[]): Record<number, SpellPrepEntry[]> | null;
 }
+interface SpellCollectionData {
+    levels: SpellcastingSlotLevel[];
+    flexibleAvailable?: {
+        value: number;
+        max: number;
+    } | null;
+    spellPrepList: Record<number, SpellPrepEntry[]> | null;
+}
+export { SpellCollection };

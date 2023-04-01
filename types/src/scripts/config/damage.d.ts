@@ -1,4 +1,4 @@
-import { DamageCategoryUnique, DamageType } from "@system/damage";
+import { DamageCategoryUnique, DamageType } from "@system/damage/types";
 declare const damageCategoriesUnique: Record<DamageCategoryUnique, string>;
 declare const materialDamageEffects: Pick<Record<"abysium" | "adamantine" | "cold-iron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "peachwood" | "siccatite" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass", string>, "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass">;
 declare const damageCategories: {

@@ -1,9 +1,10 @@
+import { ActorPF2e } from "@actor";
 import { AbstractEffectPF2e } from "@item/abstract-effect";
 import { EffectBadge } from "@item/abstract-effect/data";
 import { RuleElementOptions, RuleElementPF2e } from "@module/rules";
 import { UserPF2e } from "@module/user";
-import { EffectData } from "./data";
-declare class EffectPF2e extends AbstractEffectPF2e {
+import { EffectFlags, EffectSource, EffectSystemData } from "./data";
+declare class EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     static DURATION_UNITS: Readonly<Record<string, number>>;
     get badge(): EffectBadge | null;
     get level(): number;
@@ -13,7 +14,9 @@ declare class EffectPF2e extends AbstractEffectPF2e {
         expired: boolean;
         remaining: number;
     };
-    get unidentified(): boolean;
+    /** Whether this effect emits an aura */
+    get isAura(): boolean;
+    get isIdentified(): boolean;
     /** Does this effect originate from an aura? */
     get fromAura(): boolean;
     prepareBaseData(): void;
@@ -26,14 +29,13 @@ declare class EffectPF2e extends AbstractEffectPF2e {
     /** Include a trimmed version of the "slug" roll option (e.g., effect:rage instead of effect:effect-rage) */
     getRollOptions(prefix?: string): string[];
     /** Set the start time and initiative roll of a newly created effect */
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<this>, user: UserPF2e): Promise<void>;
-    /** Show floaty text when this effect is created on an actor */
-    protected _onCreate(data: this["_source"], options: DocumentModificationContext<this>, userId: string): void;
-    /** Show floaty text when this effect is deleted from an actor */
-    protected _onDelete(options: DocumentModificationContext, userId: string): void;
+    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
 }
-interface EffectPF2e {
-    readonly data: EffectData;
+interface EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
+    flags: EffectFlags;
+    readonly _source: EffectSource;
+    system: EffectSystemData;
 }
 export { EffectPF2e };

@@ -1,12 +1,13 @@
+import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { RuleElementPF2e, RuleElementData, RuleElementOptions } from "./";
+import { RuleElementData, RuleElementOptions, RuleElementPF2e } from "./";
 import { RuleElementSource } from "./data";
 /**
  * Add or change the light emitted by a token
  * @category RuleElement
  */
 declare class TokenLightRuleElement extends RuleElementPF2e {
-    constructor(data: RuleElementSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(data: RuleElementSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     validateData(): void;
     afterPrepareData(): void;
 }

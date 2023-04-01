@@ -63,43 +63,10 @@ export declare class Bulk {
      */
     convertToSize(itemSize: Size, actorSize: Size): Bulk;
 }
-export declare class BulkItem {
-    id: string;
-    bulk: Bulk;
-    size: Size;
-    quantity: number;
-    stackGroup: string | null;
-    isEquipped: boolean;
-    unequippedBulk?: Bulk | null;
-    equippedBulk?: Bulk | null;
-    holdsItems: BulkItem[];
-    negateBulk: Bulk;
-    extraDimensionalContainer: boolean;
-    constructor({ id, bulk, quantity, stackGroup, isEquipped, unequippedBulk, equippedBulk, holdsItems, negateBulk, extraDimensionalContainer, size, }?: {
-        id?: string;
-        bulk?: Bulk;
-        quantity?: number;
-        stackGroup?: string | null;
-        isEquipped?: boolean;
-        unequippedBulk?: Bulk | null;
-        equippedBulk?: Bulk | null;
-        holdsItems?: BulkItem[];
-        negateBulk?: Bulk;
-        extraDimensionalContainer?: boolean;
-        size?: Size;
-    });
-    get reducesBulk(): boolean;
-}
 /**
  * Accepted formats:
  * "l", "1", "L", "1; L", "2; 3L", "2;3L"
  * @param weight if not parseable will return null or undefined
  */
 export declare function weightToBulk(weight: Optional<string | number>): Bulk | null;
-type BrokenBulk = Optional<string> | Optional<number>;
-/**
- * Needed because some weight is either null, undefined, a number or a string :(
- * @param weight
- */
-export declare function normalizeWeight(weight: BrokenBulk): string | undefined;
 export {};

@@ -1,5 +1,5 @@
 import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from ".";
-import { CharacterPF2e } from "@actor";
+import { ActorPF2e, CharacterPF2e } from "@actor";
 import { MartialProficiency } from "@actor/character/data";
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
@@ -10,7 +10,7 @@ declare class MartialProficiencyRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
     /** Predication test for whether a weapon matches this proficiency */
     definition: PredicatePF2e;
-    constructor(data: MartialProficiencySource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(data: MartialProficiencySource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     private validateData;
     onApplyActiveEffects(): void;
     /** Set this martial proficiency as an AELike value  */
@@ -22,7 +22,7 @@ interface MartialProficiencyRuleElement extends RuleElementPF2e {
 }
 interface MartialProficiencyData extends RuleElementData {
     key: "MartialProficiency";
-    /** The key to be used for this proficiency in `CharacterPF2e#data#data#martial` */
+    /** The key to be used for this proficiency in `CharacterPF2e#system#martial` */
     slug: string;
     /** The criteria for matching qualifying weapons and other attacks */
     definition: RawPredicate;

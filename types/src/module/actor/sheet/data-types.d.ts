@@ -1,10 +1,10 @@
 import { ActorPF2e } from "@actor/base";
 import { ActorSizePF2e } from "@actor/data/size";
 import { InventoryBulk } from "@actor/inventory";
-import { LootPF2e } from "@actor/loot";
 import { PhysicalItemPF2e } from "@item";
 import { Coins } from "@item/physical/data";
 import { PhysicalItemType } from "@item/physical/types";
+import { RollOptionToggle } from "@module/rules/synthetics";
 import { SheetOptions } from "@module/sheet/helpers";
 export interface InventoryItem<TItem extends PhysicalItemPF2e = PhysicalItemPF2e> {
     item: TItem;
@@ -46,14 +46,12 @@ export interface ActorSheetDataPF2e<TActor extends ActorPF2e> extends ActorSheet
     user: {
         isGM: boolean;
     };
+    toggles: RollOptionToggle[];
     totalCoinage: CoinageSummary;
     totalCoinageGold: string;
     totalWealth: Coins;
     totalWealthGold: string;
     inventory: SheetInventory;
     enrichedContent: Record<string, string>;
-}
-export interface LootSheetDataPF2e extends ActorSheetDataPF2e<LootPF2e> {
-    isLoot: boolean;
 }
 export {};

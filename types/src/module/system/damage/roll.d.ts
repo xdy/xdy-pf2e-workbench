@@ -7,6 +7,8 @@ import Peggy from "peggy";
 import { InstancePool } from "./terms";
 import { DamageCategory, DamageTemplate, DamageType, MaterialDamageEffect } from "./types";
 declare abstract class AbstractDamageRoll extends Roll {
+    /** Ensure the presence and validity of the `critRule` option for this roll */
+    constructor(formula: string, data?: {}, options?: DamageInstanceData);
     static parser: Peggy.Parser;
     /** Strip out parentheses enclosing constants */
     static replaceFormulaData(formula: string, data: Record<string, unknown>, options?: {
@@ -58,7 +60,7 @@ declare class DamageInstance extends AbstractDamageRoll {
     type: DamageType;
     persistent: boolean;
     materials: MaterialDamageEffect[];
-    constructor(formula: string, data?: {}, options?: RollOptions);
+    constructor(formula: string, data?: {}, options?: DamageInstanceData);
     static parse(formula: string, data: Record<string, unknown>): RollTerm[];
     static fromData<TRoll extends Roll>(this: ConstructorOf<TRoll>, data: RollJSON): TRoll;
     /** Get the expected, minimum, or maximum value of a term */
@@ -80,25 +82,36 @@ declare class DamageInstance extends AbstractDamageRoll {
     get category(): DamageCategory | null;
     get typeLabel(): string;
     /** Get the total of this instance without any doubling or tripling from a critical hit */
-    get critImmuneTotal(): number | undefined;
+    get critImmuneTotal(): this["total"];
     componentTotal(component: "precision" | "splash"): number;
+    /**
+     * Set a "hidden" property for DsN! so that it doesn't simulate rolling deferred persistent damage.
+     * See https://gitlab.com/riccisi/foundryvtt-dice-so-nice/-/wikis/API/Roll#hiding-a-dice-from-a-roll-animation
+     */
+    protected _evaluate(params?: Omit<EvaluateRollParams, "async">): Promise<Rolled<this>>;
 }
 interface DamageInstance extends AbstractDamageRoll {
     options: DamageInstanceData;
 }
-interface DamageRollDataPF2e extends RollDataPF2e {
+type CriticalDoublingRule = "double-damage" | "double-dice";
+interface AbstractDamageRollData extends RollOptions {
+    evaluatePersistent?: boolean;
+    critRule?: CriticalDoublingRule;
+}
+interface DamageRollDataPF2e extends RollDataPF2e, AbstractDamageRollData {
+    /** Data used to construct the damage formula and options */
     damage?: DamageTemplate;
     result?: DamageRollFlag;
-    evaluatePersistent?: boolean;
     degreeOfSuccess?: DegreeOfSuccessIndex;
+    /** If the total was increased to 1, the original total */
     increasedFrom?: number;
+    /** Whether this roll is the splash damage from another roll */
     splashOnly?: boolean;
+    /** Resistance types to be ignored */
     ignoredResistances?: {
         type: ResistanceType;
         max: number | null;
     }[];
 }
-interface DamageInstanceData extends RollOptions {
-    evaluatePersistent?: boolean;
-}
-export { DamageRoll, DamageInstance };
+type DamageInstanceData = AbstractDamageRollData;
+export { DamageInstance, DamageRoll, DamageRollDataPF2e };

@@ -1,5 +1,5 @@
-export declare class FakeJournalEntry {
-    _source: foundry.data.JournalEntrySource;
+export declare class MockJournalEntry {
+    _source: foundry.documents.JournalEntrySource;
     readonly pages: object[];
-    constructor(source: foundry.data.JournalEntrySource);
+    constructor(source: foundry.documents.JournalEntrySource);
 }

@@ -3,10 +3,10 @@ import { ItemPF2e } from "@item";
 /** The size property of creatures and equipment */
 declare const SIZES: readonly ["tiny", "sm", "med", "lg", "huge", "grg"];
 declare const SIZE_SLUGS: readonly ["tiny", "small", "medium", "large", "huge", "gargantuan"];
-type Size = typeof SIZES[number];
+type Size = (typeof SIZES)[number];
 /** The rarity trait of creatures, equipment, spells, etc. */
 declare const RARITIES: readonly ["common", "uncommon", "rare", "unique"];
-type Rarity = typeof RARITIES[number];
+type Rarity = (typeof RARITIES)[number];
 interface ValuesList<T extends string = string> {
     value: T[];
     custom: string;
@@ -27,7 +27,8 @@ interface TypeAndValue<TType extends string> {
     type: TType;
     value: number;
 }
-interface TraitsWithRarity<T extends string> extends ValuesList<T> {
+interface TraitsWithRarity<T extends string> {
+    value: T[];
     rarity: Rarity;
 }
 /** Literal numeric types */
@@ -67,5 +68,5 @@ interface MigratedDocumentSchemaRecord {
 type DocumentSchemaRecord = NewDocumentSchemaRecord | MigratedDocumentSchemaRecord;
 export declare const PROFICIENCY_RANKS: readonly ["untrained", "trained", "expert", "master", "legendary"];
 export declare const MATH_FUNCTION_NAMES: Set<MathFunctionName>;
-type EnfolderableDocumentPF2e = ActorPF2e | ItemPF2e | Exclude<EnfolderableDocument, Actor | Item>;
+type EnfolderableDocumentPF2e = ActorPF2e<null> | ItemPF2e<null> | Exclude<EnfolderableDocument, Actor<null> | Item<null>>;
 export { DocumentSchemaRecord, EnfolderableDocumentPF2e, LabeledNumber, LabeledString, LabeledValue, OneToFive, OneToFour, OneToTen, OneToThree, RARITIES, Rarity, SIZES, SIZE_SLUGS, Size, TraitsWithRarity, TwoToThree, TypeAndValue, ValueAndMax, ValueAndMaybeMax, ValuesList, ZeroToEleven, ZeroToFive, ZeroToFour, ZeroToTen, ZeroToThree, ZeroToTwo, goesToEleven, };

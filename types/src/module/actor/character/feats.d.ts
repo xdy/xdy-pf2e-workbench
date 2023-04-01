@@ -1,5 +1,5 @@
 import { FeatPF2e, ItemPF2e } from "@item";
-import { FeatType } from "@item/feat/data";
+import { FeatCategory } from "@item/feat/types";
 import { CharacterPF2e } from ".";
 import { BonusFeat, SlottedFeat } from "./data";
 type FeatSlotLevel = number | {
@@ -10,36 +10,31 @@ interface FeatCategoryOptions {
     id: string;
     label: string;
     featFilter?: string | null;
-    supported?: FeatType[];
+    supported?: FeatCategory[];
     slots?: FeatSlotLevel[];
     level?: number;
 }
-declare class CharacterFeats extends Collection<FeatCategory> {
+declare class CharacterFeats<TActor extends CharacterPF2e> extends Collection<FeatGroup> {
+    #private;
     private actor;
     /** Feats with no actual category ("bonus feats" in rules text) */
     unorganized: BonusFeat[];
-    constructor(actor: CharacterPF2e);
-    createCategory(options: FeatCategoryOptions): void;
-    private combineGrants;
+    constructor(actor: TActor);
+    createGroup(options: FeatCategoryOptions): void;
     /** Inserts a feat into the character. If category is empty string, its a bonus feat */
     insertFeat(feat: FeatPF2e, options: {
         categoryId: string;
         slotId?: string;
-    }): Promise<ItemPF2e[]>;
+    }): Promise<ItemPF2e<TActor>[]>;
     /** If a drop target is omitted or turns out to be invalid, make a limited attempt to find an eligible slot */
     private findBestLocation;
     assignFeats(): void;
 }
-interface CharacterFeats {
-    get(key: "ancestryfeature"): FeatCategory;
-    get(key: "classfeature"): FeatCategory;
-    get(key: "ancestry"): FeatCategory;
-    get(key: "class"): FeatCategory;
-    get(key: "skill"): FeatCategory;
-    get(key: "general"): FeatCategory;
-    get(key: string): FeatCategory | undefined;
+interface CharacterFeats<TActor extends CharacterPF2e> extends Collection<FeatGroup> {
+    get(key: "ancestry" | "ancestryfeature" | "class" | "classfeature" | "general" | "skill"): FeatGroup;
+    get(key: string): FeatGroup | undefined;
 }
-declare class FeatCategory {
+declare class FeatGroup {
     id: string;
     label: string;
     feats: (SlottedFeat | BonusFeat)[];
@@ -48,7 +43,7 @@ declare class FeatCategory {
     /** Will move to sheet data later */
     featFilter: string | null;
     /** Feat Types that are supported */
-    supported: FeatType[];
+    supported: FeatCategory[];
     /** Lookup for the slots themselves */
     slots: Record<string, SlottedFeat>;
     constructor(actor: CharacterPF2e, options: FeatCategoryOptions);
@@ -56,4 +51,4 @@ declare class FeatCategory {
     get isFull(): boolean;
     isFeatValid(feat: FeatPF2e): boolean;
 }
-export { CharacterFeats, FeatCategory, FeatCategoryOptions, FeatSlotLevel };
+export { CharacterFeats, FeatGroup, FeatCategoryOptions, FeatSlotLevel };

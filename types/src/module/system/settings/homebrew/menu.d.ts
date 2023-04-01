@@ -2,8 +2,8 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { PartialSettingsData, SettingsMenuPF2e } from "../menu";
-import "@yaireo/tagify/src/tagify.scss";
 import { CustomDamageData, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey } from "./data";
+import "@yaireo/tagify/src/tagify.scss";
 declare class HomebrewElements extends SettingsMenuPF2e {
     #private;
     static readonly namespace = "homebrew";
@@ -26,7 +26,7 @@ declare class HomebrewElements extends SettingsMenuPF2e {
     } & {
         template: string;
     };
-    protected static get traitSettings(): Record<"languages" | "equipmentTraits" | "weaponTraits" | "creatureTraits" | "featTraits" | "magicSchools" | "spellTraits" | "weaponCategories" | "weaponGroups" | "baseWeapons", PartialSettingsData>;
+    protected static get traitSettings(): Record<"creatureTraits" | "equipmentTraits" | "weaponTraits" | "spellTraits" | "languages" | "featTraits" | "magicSchools" | "weaponCategories" | "weaponGroups" | "baseWeapons", PartialSettingsData>;
     protected static get settings(): Record<HomebrewKey, PartialSettingsData>;
     activateListeners($form: JQuery<HTMLFormElement>): void;
     getData(): Promise<HomebrewElementsSheetData>;
@@ -37,8 +37,6 @@ declare class HomebrewElements extends SettingsMenuPF2e {
     /** Prepare and run a migration for each set of tag deletions from a tag map */
     private processDeletions;
     onSetup(): void;
-    private getConfigRecord;
-    private updateConfigRecords;
 }
 type HomebrewSubmitData = {
     damageTypes: CustomDamageData[];

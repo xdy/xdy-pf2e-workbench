@@ -2,12 +2,15 @@
 /// <reference types="jquery" />
 /// <reference types="tooltipster" />
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
+import { TokenDocumentPF2e } from "@scene";
 import Sortable from "sortablejs";
 export declare class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> extends CombatTracker<TEncounter> {
     #private;
     sortable: Sortable;
     /** Make the combatants sortable */
     activateListeners($html: JQuery): void;
+    /** Refresh the list of users targeting a combatant's token as well as the active state of the target toggle */
+    refreshTargetDisplay(combatantOrToken: CombatantPF2e | TokenDocumentPF2e): void;
     /** Allow CTRL-clicking to make the rolls blind */
     protected _onCombatControl(event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>): Promise<void>;
     /** Allow CTRL-clicking to make the roll blind */

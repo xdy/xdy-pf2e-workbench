@@ -3,10 +3,11 @@ import { SaveType } from "@actor/types";
 import { ConditionPF2e } from "@item";
 import { ItemType } from "@item/data";
 import { Rarity } from "@module/data";
+import { TokenDocumentPF2e } from "@scene";
 import { DamageType } from "@system/damage";
 import { Statistic } from "@system/statistic";
-import { HazardData } from "./data";
-declare class HazardPF2e extends ActorPF2e {
+import { HazardSource, HazardSystemData } from "./data";
+declare class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     get allowedItemTypes(): (ItemType | "physical")[];
     get rarity(): Rarity;
     get isComplex(): boolean;
@@ -20,9 +21,12 @@ declare class HazardPF2e extends ActorPF2e {
     protected prepareSaves(): {
         [K in SaveType]?: Statistic;
     };
+    private prepareInitiative;
 }
-interface HazardPF2e {
-    readonly data: HazardData;
+interface HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
+    readonly _source: HazardSource;
+    readonly abilities?: never;
+    system: HazardSystemData;
     saves: {
         [K in SaveType]?: Statistic;
     };

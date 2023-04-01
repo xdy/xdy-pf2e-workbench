@@ -7,8 +7,9 @@ import { ZeroToFour } from "@module/data";
 import { CheckRoll, CheckRollCallback, CheckType, RollTwiceOption } from "@system/check";
 import { CheckDC } from "@system/degree-of-success";
 import { StatisticChatData, StatisticTraceData, StatisticData, StatisticCheckData } from "./data";
+import { RollNotePF2e, RollNoteSource } from "@module/notes";
 export * from "./data";
-export interface StatisticRollParameters {
+interface StatisticRollParameters {
     /** Which attack this is (for the purposes of multiple attack penalty) */
     attackNumber?: number;
     /** Optional target for the roll */
@@ -17,14 +18,18 @@ export interface StatisticRollParameters {
     origin?: ActorPF2e | null;
     /** Optional DC data for the roll */
     dc?: CheckDC | null;
+    /** Optional override for the check modifier label */
+    label?: string;
+    /** Any additional roll notes which should be used in the roll. */
+    extraRollNotes?: (RollNotePF2e | RollNoteSource)[];
     /** Any additional options which should be used in the roll. */
     extraRollOptions?: string[];
     /** Additional modifiers */
     modifiers?: ModifierPF2e[];
     /** The originating item of this attack, if any */
-    item?: Embedded<ItemPF2e> | null;
+    item?: ItemPF2e<ActorPF2e> | null;
     /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
-    rollMode?: RollMode;
+    rollMode?: RollMode | "roll";
     /** Should the dialog be skipped */
     skipDialog?: boolean;
     /** Should this roll be rolled twice? If so, should it keep highest or lowest? */
@@ -43,7 +48,7 @@ interface RollOptionParameters {
     target?: ActorPF2e | null;
 }
 /** Object used to perform checks or get dcs, or both. These are created from StatisticData which drives its behavior. */
-export declare class Statistic {
+declare class Statistic {
     #private;
     actor: ActorPF2e;
     options?: RollOptionParameters | undefined;
@@ -61,6 +66,8 @@ export declare class Statistic {
     constructor(actor: ActorPF2e, data: StatisticData, options?: RollOptionParameters | undefined);
     /** Compatibility function which creates a statistic from a StatisticModifier instead of from StatisticData. */
     static from(actor: ActorPF2e, stat: StatisticModifier, slug: string, label: string, type: CheckType, domains?: string[]): Statistic;
+    /** Convenience getter to the statistic's total modifier */
+    get mod(): number;
     createRollOptions(domains: string[], args?: RollOptionParameters): Set<string>;
     withRollOptions(options?: RollOptionParameters): Statistic;
     /**
@@ -97,8 +104,10 @@ declare class StatisticCheck {
 declare class StatisticDifficultyClass {
     domains: string[];
     value: number;
+    label?: string;
     modifiers: ModifierPF2e[];
     options: Set<string>;
     constructor(parent: Statistic, data: StatisticData, options?: RollOptionParameters);
     get breakdown(): string;
 }
+export { Statistic, StatisticCheck, StatisticDifficultyClass, StatisticRollParameters };

@@ -12,7 +12,7 @@ declare const DAMAGE_DIE_FACES_TUPLE: readonly ["d4", "d6", "d8", "d10", "d12"];
 declare const DAMAGE_DIE_FACES: Set<"d10" | "d12" | "d4" | "d6" | "d8">;
 declare const DAMAGE_TYPES: Set<"force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped">;
 /** Maps damage types to their damage category; these are the immutable base mappings used if there is no override. */
-declare const BASE_DAMAGE_TYPES_TO_CATEGORIES: Record<string, DamageCategory>;
+declare const BASE_DAMAGE_TYPES_TO_CATEGORIES: Record<DamageType, DamageCategory | null>;
 declare const DAMAGE_TYPE_ICONS: Record<DamageType, string | null>;
 /** Image map for conditions, currently placed here until we get a new set */
 declare const PERSISTENT_DAMAGE_IMAGES: Partial<Record<DamageType, ImageFilePath>>;

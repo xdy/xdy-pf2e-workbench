@@ -26,6 +26,32 @@ declare class PredicatePF2e extends Array<PredicateStatement> {
     /** Is the provided compound statement true? */
     private testCompound;
 }
+declare class StatementValidator {
+    static isStatement(statement: unknown): statement is PredicateStatement;
+    static isAtomic(statement: unknown): statement is Atom;
+    private static binaryOperators;
+    static isBinaryOp(statement: unknown): statement is BinaryOperation;
+    static isCompound(statement: unknown): statement is CompoundStatement;
+    static isAnd(statement: {
+        and?: unknown;
+    }): statement is Conjunction;
+    static isNand(statement: {
+        nand?: unknown;
+    }): statement is AlternativeDenial;
+    static isOr(statement: {
+        or?: unknown;
+    }): statement is Disjunction;
+    static isNor(statement: {
+        nor?: unknown;
+    }): statement is JointDenial;
+    static isNot(statement: {
+        not?: unknown;
+    }): statement is Negation;
+    static isIf(statement: {
+        if?: unknown;
+        then?: unknown;
+    }): statement is Conditional;
+}
 declare function convertLegacyData(predicate: OldRawPredicate): RawPredicate;
 interface OldRawPredicate {
     label?: unknown;
@@ -72,4 +98,4 @@ type Conditional = {
 type CompoundStatement = Conjunction | Disjunction | AlternativeDenial | JointDenial | Negation | Conditional;
 type PredicateStatement = Atom | CompoundStatement;
 type RawPredicate = PredicateStatement[];
-export { PredicatePF2e, PredicateStatement, RawPredicate, convertLegacyData };
+export { PredicatePF2e, PredicateStatement, RawPredicate, StatementValidator, convertLegacyData };

@@ -3,10 +3,10 @@ import { SpellPF2e } from "@item/spell";
 import { SpellCollection } from "./collection";
 import { BaseSpellcastingEntry, CastOptions, SpellcastingSheetData } from "./types";
 /** An in-memory spellcasting entry for rituals */
-export declare class RitualSpellcasting implements BaseSpellcastingEntry {
-    actor: ActorPF2e;
-    spells: SpellCollection;
-    constructor(actor: ActorPF2e, rituals: Embedded<SpellPF2e>[]);
+export declare class RitualSpellcasting<TActor extends ActorPF2e> implements BaseSpellcastingEntry<TActor> {
+    actor: TActor;
+    spells: SpellCollection<TActor, this>;
+    constructor(actor: TActor, rituals: SpellPF2e<TActor>[]);
     get id(): string;
     get name(): string;
     get sort(): number;

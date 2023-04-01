@@ -1,13 +1,18 @@
 import { CreaturePF2e } from "@actor";
 import { Abilities } from "@actor/creature/data";
+import { ActorInitiative } from "@actor/initiative";
 import { MeleePF2e } from "@item";
 import { ItemType } from "@item/data";
 import { RollNotePF2e } from "@module/notes";
-import { NPCData, NPCFlags } from "./data";
+import { TokenDocumentPF2e } from "@scene";
+import { NPCFlags, NPCSource, NPCSystemData } from "./data";
 import { NPCSheetPF2e } from "./sheet";
 import { VariantCloneParams } from "./types";
-declare class NPCPF2e extends CreaturePF2e {
+declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
+    initiative: ActorInitiative;
     get allowedItemTypes(): (ItemType | "physical")[];
+    /** The level of this creature without elite/weak adjustments */
+    get baseLevel(): number;
     /** This NPC's ability scores */
     get abilities(): Abilities;
     get description(): string;
@@ -28,16 +33,12 @@ declare class NPCPF2e extends CreaturePF2e {
     }): boolean;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */
     prepareBaseData(): void;
-    /** The NPC level needs to be known before the rest of the weak/elite adjustments */
-    prepareEmbeddedDocuments(): void;
     prepareDerivedData(): void;
-    prepareSaves(): void;
+    private prepareSaves;
     getAttackEffects(attack: MeleePF2e): Promise<RollNotePF2e[]>;
-    protected getHpAdjustment(level: number, adjustment: "elite" | "weak" | null): number;
+    private getHpAdjustment;
     /** Make the NPC elite, weak, or normal */
     applyAdjustment(adjustment: "elite" | "weak" | null): Promise<void>;
-    /** Returns the base level of a creature, as this gets modified on elite and weak adjustments */
-    getBaseLevel(): number;
     /** Create a variant clone of this NPC, adjusting any of name, description, and images */
     variantClone(params: VariantCloneParams & {
         save?: false;
@@ -47,10 +48,10 @@ declare class NPCPF2e extends CreaturePF2e {
     }): Promise<this>;
     variantClone(params: VariantCloneParams): this | Promise<this>;
 }
-interface NPCPF2e {
-    readonly data: NPCData;
+interface NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     flags: NPCFlags;
-    _sheet: NPCSheetPF2e<this> | null;
+    readonly _source: NPCSource;
+    system: NPCSystemData;
     get sheet(): NPCSheetPF2e<this>;
 }
 export { NPCPF2e };

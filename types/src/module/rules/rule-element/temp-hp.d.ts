@@ -1,13 +1,14 @@
+import { ActorPF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
-import { RuleElementPF2e, RuleElementData, RuleElementSource } from "./";
+import { RuleElementData, RuleElementPF2e, RuleElementSource } from "./";
 import { RuleElementOptions } from "./base";
 /**
  * @category RuleElement
  */
 declare class TempHPRuleElement extends RuleElementPF2e {
     static validActorTypes: ActorType[];
-    constructor(data: TempHPSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(data: TempHPSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     onCreate(actorUpdates: Record<string, unknown>): void;
     /** Refresh the actor's temporary hit points at the start of its turn */
     onTurnStart(actorUpdates: Record<string, unknown>): void;

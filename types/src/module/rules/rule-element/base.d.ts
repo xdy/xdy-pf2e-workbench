@@ -5,47 +5,40 @@ import { ItemPF2e, WeaponPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data";
 import { TokenDocumentPF2e } from "@scene";
 import { CheckRoll } from "@system/check";
-import { PredicatePF2e } from "@system/predication";
-import { BracketedValue, RuleElementData, RuleElementSource, RuleValue } from "./data";
+import { LaxSchemaField } from "@system/schema-data-fields";
+import { DataModelValidationOptions } from "types/foundry/common/abstract/module.mjs";
+import { BracketedValue, RuleElementData, RuleElementSchema, RuleElementSource, RuleValue } from "./data";
+declare const DataModel: typeof import("types/foundry/common/abstract/module.mjs").DataModel;
 /**
  * Rule Elements allow you to modify actorData and tokenData values when present on items. They can be configured
  * in the item's Rules tab which has to be enabled using the "Advanced Rule Element UI" system setting.
  *
  * @category RuleElement
  */
-declare abstract class RuleElementPF2e {
-    item: Embedded<ItemPF2e>;
+declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSchema> extends DataModel<null, TSchema> {
+    item: ItemPF2e<ActorPF2e>;
     data: RuleElementData;
-    key: string;
-    slug: string | null;
     sourceIndex: number | null;
     protected suppressWarnings: boolean;
-    /** Must the parent item be equipped for this rule element to apply (`null` for non-physical items)? */
-    requiresEquipped: boolean | null;
-    /** Must the parent item be invested for this rule element to apply (`null` unless an investable physical item)? */
-    requiresInvestment: boolean | null;
     /** A list of actor types on which this rule element can operate (all unless overridden) */
     protected static validActorTypes: ActorType[];
-    /** A test of whether the rules element is to be applied */
-    readonly predicate: PredicatePF2e;
     /**
-     * @param data unserialized JSON data from the actual rule input
+     * @param source unserialized JSON data from the actual rule input
      * @param item where the rule is persisted on
      */
-    constructor(data: RuleElementSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(source: RuleElementSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    static defineSchema(): RuleElementSchema;
+    /** Use a "lax" schema field that preserves properties not defined in the `DataSchema` */
+    static get schema(): LaxSchemaField<RuleElementSchema>;
     get actor(): ActorPF2e;
     /** Retrieves the token from the actor, or from the active tokens. */
     get token(): TokenDocumentPF2e | null;
-    get label(): string;
-    /** The place in order of application (ascending), among an actor's list of rule elements */
-    get priority(): number;
-    /** Globally ignore this rule element. */
-    get ignored(): boolean;
-    set ignored(value: boolean);
+    /** Disallow invalid data fallbacks */
+    validate(options?: DataModelValidationOptions): boolean;
     /** Test this rule element's predicate, if present */
-    test(rollOptions?: string[] | Set<string>): boolean;
+    protected test(rollOptions?: string[] | Set<string>): boolean;
     /** Send a deferred warning to the console indicating that a rule element's validation failed */
-    failValidation(...message: string[]): void;
+    protected failValidation(...message: string[]): void;
     /**
      * Callback used to parse and look up values when calculating rules. Parses strings that look like
      * {actor|x.y.z}, {item|x.y.z} or {rule|x.y.z} where x.y.z is the path on the current actor, item or rule.
@@ -87,43 +80,8 @@ declare abstract class RuleElementPF2e {
     }): number | string | boolean | object | null;
     protected isBracketedValue(value: unknown): value is BracketedValue;
 }
-declare namespace RuleElementPF2e {
-    interface PreCreateParams<T extends RuleElementSource = RuleElementSource> {
-        /** The source partial of the rule element's parent item to be created */
-        itemSource: PreCreate<ItemSourcePF2e>;
-        /** The source of the rule in `itemSource`'s `system.rules` array */
-        ruleSource: T;
-        /** All items pending creation in a `ItemPF2e.createDocuments` call */
-        pendingItems: PreCreate<ItemSourcePF2e>[];
-        /** The context object from the `ItemPF2e.createDocuments` call */
-        context: DocumentModificationContext<ItemPF2e>;
-        /** Whether this preCreate run is from a pre-update reevaluation */
-        reevaluation?: boolean;
-    }
-    interface PreDeleteParams {
-        /** All items pending deletion in a `ItemPF2e.deleteDocuments` call */
-        pendingItems: Embedded<ItemPF2e>[];
-        /** The context object from the `ItemPF2e.deleteDocuments` call */
-        context: DocumentModificationContext<ItemPF2e>;
-    }
-    interface AfterRollParams {
-        roll: Rolled<CheckRoll> | null;
-        selectors: string[];
-        domains: string[];
-        rollOptions: Set<string>;
-    }
-    type UserInput<T extends RuleElementData> = {
-        [K in keyof T]?: unknown;
-    } & RuleElementSource;
-}
-interface RuleElementOptions {
-    /** If created from an item, the index in the source data */
-    sourceIndex?: number;
-    /** If data validation fails for any reason, do not emit console warnings */
-    suppressWarnings?: boolean;
-}
-interface RuleElementPF2e {
-    constructor: typeof RuleElementPF2e;
+interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abstract.DataModel<null, TSchema>, foundry.data.fields.ModelPropsFromSchema<RuleElementSchema> {
+    constructor: typeof RuleElementPF2e<TSchema>;
     /**
      * Run between Actor#applyActiveEffects and Actor#prepareDerivedData. Generally limited to ActiveEffect-Like
      * elements
@@ -201,5 +159,41 @@ interface RuleElementPF2e {
     onDelete?(actorUpdates: Record<string, unknown>): void;
     /** An optional method for excluding damage modifiers and extra dice */
     applyDamageExclusion?(weapon: WeaponPF2e, modifiers: (DiceModifierPF2e | ModifierPF2e)[]): void;
+}
+declare namespace RuleElementPF2e {
+    let _schema: LaxSchemaField<RuleElementSchema> | undefined;
+    interface PreCreateParams<T extends RuleElementSource = RuleElementSource> {
+        /** The source partial of the rule element's parent item to be created */
+        itemSource: PreCreate<ItemSourcePF2e>;
+        /** The source of the rule in `itemSource`'s `system.rules` array */
+        ruleSource: T;
+        /** All items pending creation in a `ItemPF2e.createDocuments` call */
+        pendingItems: PreCreate<ItemSourcePF2e>[];
+        /** The context object from the `ItemPF2e.createDocuments` call */
+        context: DocumentModificationContext<ActorPF2e | null>;
+        /** Whether this preCreate run is from a pre-update reevaluation */
+        reevaluation?: boolean;
+    }
+    interface PreDeleteParams {
+        /** All items pending deletion in a `ItemPF2e.deleteDocuments` call */
+        pendingItems: ItemPF2e<ActorPF2e>[];
+        /** The context object from the `ItemPF2e.deleteDocuments` call */
+        context: DocumentModificationContext<ActorPF2e | null>;
+    }
+    interface AfterRollParams {
+        roll: Rolled<CheckRoll> | null;
+        selectors: string[];
+        domains: string[];
+        rollOptions: Set<string>;
+    }
+    type UserInput<T extends RuleElementData> = {
+        [K in keyof T]?: unknown;
+    } & RuleElementSource;
+}
+interface RuleElementOptions {
+    /** If created from an item, the index in the source data */
+    sourceIndex?: number;
+    /** If data validation fails for any reason, do not emit console warnings */
+    suppressWarnings?: boolean;
 }
 export { RuleElementPF2e, RuleElementOptions };

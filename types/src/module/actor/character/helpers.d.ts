@@ -6,7 +6,9 @@ declare class StrikeWeaponTraits {
     static adjustWeapon(weapon: WeaponPF2e): void;
     static createAttackModifiers(weapon: WeaponPF2e, domains: string[]): ModifierPF2e[];
 }
+/** Make a PC Clumsy 1 when wielding an oversized weapon */
+declare function imposeOversizedWeaponCondition(actor: CharacterPF2e): void;
 /** Create a penalty for attempting to Force Open without a crowbar or equivalent tool */
 declare function createForceOpenPenalty(actor: CharacterPF2e, domains: string[]): ModifierPF2e;
 declare function createShoddyPenalty(actor: CharacterPF2e, item: WeaponPF2e | ArmorPF2e, domains: string[]): ModifierPF2e | null;
-export { createForceOpenPenalty, createShoddyPenalty, StrikeWeaponTraits };
+export { createForceOpenPenalty, createShoddyPenalty, imposeOversizedWeaponCondition, StrikeWeaponTraits };

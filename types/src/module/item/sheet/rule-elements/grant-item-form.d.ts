@@ -4,12 +4,12 @@ import { RuleElementForm } from "./base";
 declare class GrantItemForm extends RuleElementForm<GrantItemSource> {
     template: string;
     getData(): Promise<{
-        granted: ClientDocument<foundry.abstract.Document> | null;
+        granted: ClientDocument | null;
         allowDuplicate: {};
-        item: import("../../base").ItemPF2e;
+        item: import("../../base").ItemPF2e<import("../../../actor/base").ActorPF2e<import("../../../scene/token-document/document").TokenDocumentPF2e<import("../../../scene/document").ScenePF2e | null> | null>>;
         index: number;
         rule: GrantItemSource;
-        object: import("../../../rules/rule-element/base").RuleElementPF2e | null;
+        object: import("../../../rules/rule-element/base").RuleElementPF2e<import("../../../rules/rule-element/data").RuleElementSchema> | null;
     }>;
     _updateObject(ruleData: DeepPartial<GrantItemSource>): void;
 }

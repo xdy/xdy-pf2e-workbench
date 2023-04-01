@@ -2,7 +2,8 @@ import { ActorSourcePF2e } from "@actor/data";
 import { ItemSourcePF2e } from "@item/data";
 import { MigrationBase } from "@module/migration/base";
 import { TokenDocumentPF2e } from "@module/scene/token-document";
-interface CollectionDiff<T extends foundry.data.ActiveEffectSource | ItemSourcePF2e> {
+import { ScenePF2e } from "@scene";
+interface CollectionDiff<T extends foundry.documents.ActiveEffectSource | ItemSourcePF2e> {
     inserted: T[];
     deleted: string[];
     updated: T[];
@@ -14,16 +15,16 @@ export declare class MigrationRunnerBase {
     static RECOMMENDED_SAFE_VERSION: number;
     constructor(migrations?: MigrationBase[]);
     needsMigration(currentVersion: number): boolean;
-    diffCollection<T extends foundry.data.ActiveEffectSource>(orig: T[], updated: T[]): CollectionDiff<T>;
+    diffCollection<T extends foundry.documents.ActiveEffectSource>(orig: T[], updated: T[]): CollectionDiff<T>;
     diffCollection<T extends ItemSourcePF2e>(orig: T[], updated: T[]): CollectionDiff<T>;
-    diffCollection<T extends foundry.data.ActiveEffectSource | ItemSourcePF2e>(orig: T[], updated: T[]): CollectionDiff<T>;
+    diffCollection<T extends foundry.documents.ActiveEffectSource | ItemSourcePF2e>(orig: T[], updated: T[]): CollectionDiff<T>;
     getUpdatedActor(actor: ActorSourcePF2e, migrations: MigrationBase[]): Promise<ActorSourcePF2e>;
     getUpdatedItem(item: ItemSourcePF2e, migrations: MigrationBase[]): Promise<ItemSourcePF2e>;
-    getUpdatedTable(tableSource: foundry.data.RollTableSource, migrations: MigrationBase[]): Promise<foundry.data.RollTableSource>;
-    getUpdatedMacro(macroSource: foundry.data.MacroSource, migrations: MigrationBase[]): Promise<foundry.data.MacroSource>;
-    getUpdatedJournalEntry(source: foundry.data.JournalEntrySource, migrations: MigrationBase[]): Promise<foundry.data.JournalEntrySource>;
-    getUpdatedToken(token: TokenDocumentPF2e, migrations: MigrationBase[]): Promise<foundry.data.TokenSource>;
-    getUpdatedUser(userData: foundry.data.UserSource, migrations: MigrationBase[]): Promise<foundry.data.UserSource>;
+    getUpdatedTable(tableSource: foundry.documents.RollTableSource, migrations: MigrationBase[]): Promise<foundry.documents.RollTableSource>;
+    getUpdatedMacro(macroSource: foundry.documents.MacroSource, migrations: MigrationBase[]): Promise<foundry.documents.MacroSource>;
+    getUpdatedJournalEntry(source: foundry.documents.JournalEntrySource, migrations: MigrationBase[]): Promise<foundry.documents.JournalEntrySource>;
+    getUpdatedToken(token: TokenDocumentPF2e<ScenePF2e>, migrations: MigrationBase[]): Promise<foundry.documents.TokenSource>;
+    getUpdatedUser(userData: foundry.documents.UserSource, migrations: MigrationBase[]): Promise<foundry.documents.UserSource>;
     private updateSchemaRecord;
 }
 export {};

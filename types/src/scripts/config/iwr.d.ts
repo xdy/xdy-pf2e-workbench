@@ -156,6 +156,7 @@ declare const resistanceTypes: {
     cold: string;
     "cold-iron": string;
     "critical-hits": string;
+    "damage-from-spells": string;
     darkwood: string;
     earth: string;
     electricity: string;

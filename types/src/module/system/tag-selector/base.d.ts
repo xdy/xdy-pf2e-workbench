@@ -10,7 +10,7 @@ interface TagSelectorOptions extends FormApplicationOptions {
     flat?: boolean;
     customChoices?: Record<string, string>;
 }
-declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e = ActorPF2e | ItemPF2e> extends FormApplication<TDocument> {
+declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e> extends FormApplication<TDocument> {
     choices: Record<string, string>;
     /** The object path to the property containing the tags */
     protected abstract objectProperty: string;
@@ -28,8 +28,5 @@ declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e = 
     private getChoices;
     /** Localize and sort choices */
     protected sortChoices(choices: Record<string, string>): Record<string, string>;
-}
-interface BaseTagSelector {
-    options: FormApplicationOptions;
 }
 export { BaseTagSelector, TagSelectorOptions };

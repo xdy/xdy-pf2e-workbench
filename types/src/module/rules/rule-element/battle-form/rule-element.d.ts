@@ -1,6 +1,6 @@
 import { RuleElementPF2e, RuleElementData, RuleElementOptions } from "../";
 import { BattleFormAC, BattleFormOverrides, BattleFormSource } from "./types";
-import { CharacterPF2e } from "@actor";
+import { ActorPF2e, CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { DiceModifierPF2e, ModifierPF2e } from "@actor/modifiers";
@@ -11,7 +11,7 @@ export declare class BattleFormRuleElement extends RuleElementPF2e {
     /** Whether the actor uses its own unarmed attacks while in battle form */
     ownUnarmed: boolean;
     protected static validActorTypes: ActorType[];
-    constructor(data: BattleFormSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(data: BattleFormSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     static defaultIcons: Record<string, ImageFilePath | undefined>;
     /** Fill in base override data */
     private initialize;
@@ -39,6 +39,7 @@ export declare class BattleFormRuleElement extends RuleElementPF2e {
     /** Disable ineligible check modifiers */
     private suppressModifiers;
     private suppressNotes;
+    /** Disable ineligible damage adjustments (modifiers, bonuses, additional damage) */
     applyDamageExclusion(weapon: WeaponPF2e, modifiers: (DiceModifierPF2e | ModifierPF2e)[]): void;
     /** Process compendium query and construct full strike object using retrieved weapon */
     private resolveStrikeQueries;

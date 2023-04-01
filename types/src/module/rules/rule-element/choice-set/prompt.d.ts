@@ -5,15 +5,15 @@ import { PickableThing, PickAThingConstructorArgs, PickAThingPrompt, PromptTempl
 import { PredicatePF2e } from "@system/predication";
 /** Prompt the user for a selection among a set of options */
 export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | object> {
-    /** Does this choice set contain UUIDs? If true, options are always buttons and an item-drop zone is added */
-    private containsUUIDs;
     /** The prompt statement to present the user in this application's window */
     prompt: string;
+    /** Does this choice set contain UUIDs? If true, options are always buttons and an item-drop zone may be added */
+    containsUUIDs: boolean;
     /** A predicate validating a dragged & dropped item selection */
     allowedDrops: {
         label: string | null;
         predicate: PredicatePF2e;
-    };
+    } | null;
     constructor(data: ChoiceSetPromptData);
     static get defaultOptions(): ApplicationOptions;
     get template(): string;
@@ -33,12 +33,12 @@ interface ChoiceSetPromptData extends PickAThingConstructorArgs<string | number 
     allowedDrops: {
         label: string | null;
         predicate: PredicatePF2e;
-    };
+    } | null;
 }
 interface ChoiceSetTemplateData extends PromptTemplateData {
     prompt: string;
     choices: PickableThing[];
-    containsUUIDs: boolean;
+    includeDropZone: boolean;
     allowNoSelection: boolean;
 }
 export {};

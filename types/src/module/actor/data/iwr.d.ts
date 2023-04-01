@@ -206,6 +206,7 @@ declare class ResistanceData extends IWRData<ResistanceType> implements Resistan
         cold: string;
         "cold-iron": string;
         "critical-hits": string;
+        "damage-from-spells": string;
         darkwood: string;
         earth: string;
         electricity: string;

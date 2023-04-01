@@ -3,9 +3,9 @@ import { PhysicalItemPF2e } from "@item";
 import { Coins } from "@item/physical/data";
 import { CoinsPF2e } from "@item/physical/helpers";
 import { InventoryBulk } from "./bulk";
-declare class ActorInventory extends Collection<Embedded<PhysicalItemPF2e>> {
-    readonly actor: ActorPF2e;
-    constructor(actor: ActorPF2e, entries?: Embedded<PhysicalItemPF2e>[]);
+declare class ActorInventory<TActor extends ActorPF2e> extends Collection<PhysicalItemPF2e<TActor>> {
+    readonly actor: TActor;
+    constructor(actor: TActor, entries?: PhysicalItemPF2e<TActor>[]);
     get coins(): CoinsPF2e;
     get totalWealth(): CoinsPF2e;
     get invested(): {

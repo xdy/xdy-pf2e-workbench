@@ -3,6 +3,11 @@ declare function createSheetOptions(options: Record<string, string>, selections?
     selected?: boolean | undefined;
 }): SheetOptions;
 declare function createSheetTags(options: Record<string, string>, selections: SheetSelections): SheetOptions;
+declare function createTagifyTraits(traits: Iterable<string>, { sourceTraits, record }: TagifyTraitOptions): {
+    id: string;
+    value: string;
+    readonly: boolean;
+}[];
 /**
  * Process tagify elements in a form, converting their data into something the pf2e system can handle.
  * This method is meant to be called in _getSubmitData().
@@ -21,4 +26,13 @@ type SheetSelections = {
 } | (string[] & {
     custom?: never;
 });
-export { createSheetOptions, createSheetTags, maintainTagifyFocusInRender, processTagifyInSubmitData, SheetOption, SheetOptions, };
+interface TagifyTraitOptions {
+    sourceTraits: Iterable<string>;
+    record: Record<string, string>;
+}
+interface TraitTagifyEntry {
+    id: string;
+    value: string;
+    readonly: boolean;
+}
+export { createSheetOptions, createSheetTags, createTagifyTraits, maintainTagifyFocusInRender, processTagifyInSubmitData, SheetOption, SheetOptions, TraitTagifyEntry, };

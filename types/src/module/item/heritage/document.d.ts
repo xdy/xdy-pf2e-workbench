@@ -1,16 +1,17 @@
-import { CharacterPF2e } from "@actor";
-import { CreatureTrait } from "@actor/creature/data";
+import { ActorPF2e } from "@actor";
+import { CreatureTrait } from "@actor/creature";
 import { ItemPF2e } from "@item";
 import { Rarity } from "@module/data";
-import { HeritageData } from "./data";
-declare class HeritagePF2e extends ItemPF2e {
+import { HeritageSource, HeritageSystemData } from "./data";
+declare class HeritagePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     get traits(): Set<CreatureTrait>;
     get rarity(): Rarity;
     /** Prepare a character's data derived from their heritage */
-    prepareActorData(this: Embedded<HeritagePF2e>): void;
+    prepareActorData(this: HeritagePF2e<ActorPF2e>): void;
+    getRollOptions(prefix?: string): string[];
 }
-interface HeritagePF2e extends ItemPF2e {
-    readonly parent: CharacterPF2e | null;
-    readonly data: HeritageData;
+interface HeritagePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
+    readonly _source: HeritageSource;
+    system: HeritageSystemData;
 }
 export { HeritagePF2e };

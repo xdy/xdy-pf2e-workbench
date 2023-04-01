@@ -1,31 +1,27 @@
-import { RuleElementPF2e, RuleElementOptions } from "../";
+import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { ChoiceSetData, ChoiceSetSource } from "./data";
+import { ModelPropsFromSchema } from "types/foundry/common/data/fields.mjs";
+import { RuleElementOptions, RuleElementPF2e } from "../";
+import { ChoiceSetData, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet } from "./data";
 /**
  * Present a set of options to the user and assign their selection to an injectable property
  * @category RuleElement
  */
-declare class ChoiceSetRuleElement extends RuleElementPF2e {
+declare class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
     #private;
-    /** The prompt to present in the ChoiceSet application window */
-    private prompt;
-    /** Should the parent item's name be adjusted to reflect the choice made? */
-    private adjustName;
-    /** Allow the user to make no selection without suppressing all other rule elements on the parent item */
-    private allowNoSelection;
-    /** A predicate to valide dropped item selections */
-    private allowedDrops;
-    /** If the choice set contains UUIDs, the item slug can be recorded instead of the selected UUID */
-    private recordSlug;
-    /** An optional roll option to be set from the selection */
-    private rollOption;
-    constructor(data: ChoiceSetSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    /** The choices one of various possible "uninflated" forms */
+    choices: UninflatedChoiceSet;
+    /** Whether this choice set contain UUIDs */
+    containsUUIDs: boolean;
+    /** The user's selection from among the options in `choices`, or otherwise `null` */
+    selection: string | number | object | null;
+    constructor(data: ChoiceSetSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    static defineSchema(): ChoiceSetSchema;
     /**
      * Adjust the effect's name and set the targetId from the user's selection, or set the entire rule element to be
      * ignored if no selection was made.
      */
-    preCreate({ ruleSource }: RuleElementPF2e.PreCreateParams<ChoiceSetSource>): Promise<void>;
-    private setDefaultFlag;
+    preCreate({ itemSource, ruleSource, }: RuleElementPF2e.PreCreateParams<ChoiceSetSource>): Promise<void>;
     /**
      * If an array was passed, localize & sort the labels and return. If a string, look it up in CONFIG.PF2E and
      * create an array of choices.
@@ -33,13 +29,14 @@ declare class ChoiceSetRuleElement extends RuleElementPF2e {
     private inflateChoices;
     private choicesFromPath;
     private choicesFromOwnedItems;
-    private choicesFromUnarmedAttacks;
+    private choicesFromAttacks;
     /** Perform an NeDB query against the system feats compendium (or a different one if specified) */
     private queryCompendium;
     /** If this rule element's parent item was granted with a pre-selected choice, the prompt is to be skipped */
     private getPreselection;
 }
-interface ChoiceSetRuleElement extends RuleElementPF2e {
+interface ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema>, ModelPropsFromSchema<ChoiceSetSchema> {
     data: ChoiceSetData;
+    flag: string;
 }
 export { ChoiceSetRuleElement };

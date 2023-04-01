@@ -1,27 +1,35 @@
 import { PredicatePF2e, PredicateStatement, RawPredicate } from "@system/predication";
+import { SlugCamel } from "@util";
 import { DataModel } from "types/foundry/common/abstract/data.mjs";
-import { ArrayFieldOptions, CleanFieldOptions, DataFieldOptions, DataSchema, StringFieldOptions } from "types/foundry/common/data/fields.mjs";
+import { ArrayFieldOptions, CleanFieldOptions, DataFieldOptions, DataSchema, MaybeSchemaProp, StringField, StringFieldOptions } from "types/foundry/common/data/fields.mjs";
 declare const fields: typeof import("types/foundry/common/data/fields.mjs");
 /** A `SchemaField` that preserves fields not declared in its `DataSchema` */
-declare class LaxSchemaField<TSourceProp extends DataSchema = DataSchema> extends fields.SchemaField<TSourceProp> {
-    protected _cleanType(data: Record<string, unknown>, options?: CleanFieldOptions): TSourceProp;
+declare class LaxSchemaField<TDataSchema extends DataSchema> extends fields.SchemaField<TDataSchema> {
+    protected _cleanType(data: Record<string, unknown>, options?: CleanFieldOptions): SourceFromSchema<TDataSchema>;
 }
 /** A sluggified string field */
-declare class SlugField<TNullable extends boolean = true> extends fields.StringField<string, string, TNullable> {
-    protected static get _defaults(): StringFieldOptions<string, boolean>;
-    protected _cleanType(value: Maybe<string>, options?: CleanFieldOptions): Maybe<string>;
+declare class SlugField<TRequired extends boolean = true, TNullable extends boolean = true, THasInitial extends boolean = true> extends fields.StringField<string, string, TRequired, TNullable, THasInitial> {
+    constructor(options?: SlugFieldOptions<TRequired, TNullable, THasInitial>);
+    protected static get _defaults(): SlugFieldOptions<boolean, boolean, boolean>;
+    protected _cleanType(value: Maybe<string>, options?: CleanFieldOptions): MaybeSchemaProp<string, TRequired, TNullable, THasInitial>;
 }
-declare class PredicateStatementField extends fields.DataField<PredicateStatement, PredicateStatement> {
+interface SlugField<TRequired extends boolean = true, TNullable extends boolean = true, THasInitial extends boolean = true> extends StringField<string, string, TRequired, TNullable, THasInitial> {
+    options: SlugFieldOptions<TRequired, TNullable, THasInitial>;
+}
+interface SlugFieldOptions<TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean> extends StringFieldOptions<string, TRequired, TNullable, THasInitial> {
+    camel?: SlugCamel;
+}
+declare class PredicateStatementField extends fields.DataField<PredicateStatement, PredicateStatement, true, false, false> {
     /** A `PredicateStatement` is always required (not `undefined`) and never nullable */
-    constructor(options?: DataFieldOptions<PredicateStatement, false>);
+    constructor(options?: DataFieldOptions<PredicateStatement, true, false, false>);
     protected _validateType(value: unknown): boolean;
     /** No casting is available for a predicate statement */
     protected _cast(value: unknown): unknown;
     protected _cleanType(value: PredicateStatement): PredicateStatement;
 }
-declare class PredicateField<TNullable extends boolean = false> extends fields.ArrayField<PredicateStatementField, RawPredicate, RawPredicate, TNullable> {
-    constructor(options?: Pick<ArrayFieldOptions<PredicateStatementField, TNullable>, "initial" | "nullable">);
+declare class PredicateField<TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ArrayField<PredicateStatementField, RawPredicate, PredicatePF2e, TRequired, TNullable, THasInitial> {
+    constructor(options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>);
     /** Construct a `PredicatePF2e` from the initialized `PredicateStatement[]` */
-    initialize(value: RawPredicate, model: ConstructorOf<DataModel>, options?: ArrayFieldOptions<PredicateStatementField, TNullable>): TNullable extends true ? PredicatePF2e | null : PredicatePF2e;
+    initialize(value: RawPredicate, model: ConstructorOf<DataModel>, options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>): MaybeSchemaProp<PredicatePF2e, TRequired, TNullable, THasInitial>;
 }
 export { LaxSchemaField, PredicateField, SlugField };

@@ -12,9 +12,6 @@ export declare class AbilityBuilderPopup extends Application {
     static get defaultOptions(): ApplicationOptions;
     get id(): string;
     getData(options?: Partial<FormApplicationOptions>): Promise<AbilityBuilderSheetData>;
-    private calculateAncestryBoosts;
-    private calculateBackgroundBoosts;
-    private calculatedLeveledBoosts;
     /** Remove this application from the actor's apps on close */
     close(options?: {
         force?: boolean;
@@ -26,9 +23,9 @@ interface AbilityBuilderSheetData {
     abilityScores: Abilities;
     manualKeyAbility: AbilityString;
     abilities: Record<AbilityString, string>;
-    ancestry: Embedded<AncestryPF2e> | null;
-    background: Embedded<BackgroundPF2e> | null;
-    class: Embedded<ClassPF2e> | null;
+    ancestry: AncestryPF2e<CharacterPF2e> | null;
+    background: BackgroundPF2e<CharacterPF2e> | null;
+    class: ClassPF2e<CharacterPF2e> | null;
     manual: boolean;
     ancestryBoosts: AncestryBoosts | null;
     backgroundBoosts: BackgroundBoosts | null;

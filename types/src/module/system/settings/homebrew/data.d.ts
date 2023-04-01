@@ -1,4 +1,4 @@
-import { BaseWeaponType } from "@item";
+import { BaseWeaponType } from "@item/weapon/types";
 import { MenuTemplateData, SettingsTemplateData } from "../menu";
 declare const HOMEBREW_TRAIT_KEYS: readonly ["creatureTraits", "featTraits", "languages", "magicSchools", "spellTraits", "weaponCategories", "weaponGroups", "baseWeapons", "weaponTraits", "equipmentTraits"];
 /** Homebrew elements from some of the above records are propagated to related records */
@@ -8,7 +8,7 @@ declare const SECONDARY_TRAIT_RECORDS: {
     readonly featTraits: readonly ["actionTraits"];
     readonly weaponTraits: readonly ["npcAttackTraits"];
 };
-type HomebrewTraitKey = typeof HOMEBREW_TRAIT_KEYS[number];
+type HomebrewTraitKey = (typeof HOMEBREW_TRAIT_KEYS)[number];
 type HomebrewKey = HomebrewTraitKey | "damageTypes";
 type HomebrewTraitSettingsKey = `homebrew.${HomebrewTraitKey}`;
 interface HomebrewTag<T extends HomebrewTraitKey = HomebrewTraitKey> {

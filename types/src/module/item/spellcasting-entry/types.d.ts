@@ -7,10 +7,10 @@ import { ZeroToTen } from "@module/data";
 import { Statistic, StatisticChatData } from "@system/statistic";
 import { SpellCollection } from "./collection";
 import { SpellcastingEntrySystemData } from "./data";
-interface BaseSpellcastingEntry {
+interface BaseSpellcastingEntry<TActor extends ActorPF2e | null = ActorPF2e | null> {
     id: string;
     name: string;
-    actor: ActorPF2e | null;
+    actor: TActor;
     sort: number;
     category: SpellcastingCategory;
     ability?: AbilityString;
@@ -22,7 +22,7 @@ interface BaseSpellcastingEntry {
     isSpontaneous: boolean;
     statistic?: Statistic | null;
     tradition: MagicTradition | null;
-    spells: SpellCollection | null;
+    spells: SpellCollection<NonNullable<TActor>, this> | null;
     system?: SpellcastingEntrySystemData;
     getSheetData(): Promise<SpellcastingSheetData>;
     canCast(spell: SpellPF2e, options?: {
@@ -30,7 +30,7 @@ interface BaseSpellcastingEntry {
     }): boolean;
     cast(spell: SpellPF2e, options: CastOptions): Promise<void>;
 }
-interface SpellcastingEntry extends BaseSpellcastingEntry {
+interface SpellcastingEntry<TActor extends ActorPF2e | null> extends BaseSpellcastingEntry<TActor> {
     ability: AbilityString;
     statistic: Statistic;
 }
@@ -48,8 +48,9 @@ interface SpellcastingEntryPF2eCastOptions extends CastOptions {
 type UnusedProperties = "actor" | "spells" | "getSheetData" | "cast" | "canCast";
 type OptionalProperties = "isFlexible" | "isFocusPool" | "isInnate" | "isPrepared" | "isRitual" | "isSpontaneous";
 /** Spell list render data for a `BaseSpellcastingEntry` */
-interface SpellcastingSheetData extends Omit<BaseSpellcastingEntry, "statistic" | OptionalProperties | UnusedProperties> {
+interface SpellcastingSheetData extends Omit<BaseSpellcastingEntry<ActorPF2e>, "statistic" | OptionalProperties | UnusedProperties> {
     statistic: StatisticChatData | null;
+    hasCollection: boolean;
     flexibleAvailable?: {
         value: number;
         max: number;
@@ -62,7 +63,7 @@ interface SpellcastingSheetData extends Omit<BaseSpellcastingEntry, "statistic" 
     isPrepared?: boolean;
     isRitual?: boolean;
     isSpontaneous?: boolean;
-    hasCollection: boolean;
+    showSlotlessLevels?: boolean;
 }
 interface SpellcastingSlotLevel {
     label: string;
@@ -80,12 +81,13 @@ interface SpellcastingSlotLevel {
     active: (ActiveSpell | null)[];
 }
 interface SpellPrepEntry {
-    spell: Embedded<SpellPF2e>;
+    spell: SpellPF2e<ActorPF2e>;
     signature?: boolean;
 }
 interface ActiveSpell {
-    spell: Embedded<SpellPF2e>;
-    chatData: Record<string, unknown>;
+    spell: SpellPF2e<ActorPF2e>;
+    /** The level at which a spell is cast (if prepared or automatically heighted) */
+    castLevel?: number;
     expended?: boolean;
     /** Is this spell marked as signature/collection */
     signature?: boolean;

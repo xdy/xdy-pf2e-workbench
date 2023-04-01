@@ -1,7 +1,9 @@
 import { CompendiumBrowser } from "..";
+import { ContentTabName } from "../data";
 import { CompendiumBrowserTab } from "./base";
 import { CompendiumBrowserIndexData, HazardFilters } from "./data";
 export declare class CompendiumBrowserHazardTab extends CompendiumBrowserTab {
+    tabName: ContentTabName;
     filterData: HazardFilters;
     templatePath: string;
     searchFields: string[];
@@ -10,5 +12,5 @@ export declare class CompendiumBrowserHazardTab extends CompendiumBrowserTab {
     constructor(browser: CompendiumBrowser);
     protected loadData(): Promise<void>;
     protected filterIndexData(entry: CompendiumBrowserIndexData): boolean;
-    protected prepareFilterData(): void;
+    protected prepareFilterData(): HazardFilters;
 }

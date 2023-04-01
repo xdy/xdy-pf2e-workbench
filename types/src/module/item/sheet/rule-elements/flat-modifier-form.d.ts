@@ -40,10 +40,10 @@ declare class FlatModifierForm extends RuleElementForm<FlatModifierSource> {
             mode: string;
             data: unknown;
         };
-        item: import("../../base").ItemPF2e;
+        item: import("../../base").ItemPF2e<import("../../../actor/base").ActorPF2e<import("../../../scene/token-document/document").TokenDocumentPF2e<import("../../../scene/document").ScenePF2e | null> | null>>;
         index: number;
         rule: FlatModifierSource;
-        object: import("../../../rules/rule-element/base").RuleElementPF2e | null;
+        object: import("../../../rules/rule-element/base").RuleElementPF2e<import("../../../rules/rule-element/data").RuleElementSchema> | null;
     }>;
     _updateObject(formData: Partial<FlatModifierSource>): void;
 }

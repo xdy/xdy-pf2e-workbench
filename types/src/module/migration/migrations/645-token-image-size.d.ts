@@ -15,5 +15,5 @@ export declare class Migration645TokenImageSize extends MigrationBase {
         width: number;
     };
     updateActor(actorSource: ActorSourcePF2e): Promise<void>;
-    updateToken(tokenSource: foundry.data.TokenSource, actor: Readonly<ActorPF2e | null>): Promise<void>;
+    updateToken(tokenSource: foundry.documents.TokenSource, actor: Readonly<ActorPF2e | null>): Promise<void>;
 }

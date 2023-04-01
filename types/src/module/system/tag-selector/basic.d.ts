@@ -13,10 +13,10 @@ export type BasicConstructorOptions = Partial<BasicSelectorOptions> & {
     objectProperty: string;
 };
 declare class TagSelectorBasic<TDocument extends ActorPF2e | ItemPF2e> extends BaseTagSelector<TDocument> {
+    #private;
     allowCustom: boolean;
     /** Search string for filtering */
     searchString: string;
-    private filterTimeout;
     protected objectProperty: string;
     constructor(object: TDocument, options: BasicConstructorOptions);
     protected get configTypes(): readonly SelectableTagField[];

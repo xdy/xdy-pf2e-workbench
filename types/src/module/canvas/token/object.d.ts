@@ -2,12 +2,13 @@ import { TokenDocumentPF2e } from "@module/scene";
 import { TokenLayerPF2e } from "..";
 import { HearingSource } from "../perception/hearing-source";
 import { AuraRenderers } from "./aura";
-declare class TokenPF2e extends Token<TokenDocumentPF2e> {
+import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
+declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
     /** The token's line hearing source */
     hearing: HearingSource<this>;
-    constructor(document: TokenDocumentPF2e);
+    constructor(document: TDocument);
     /** Guarantee boolean return */
     get isVisible(): boolean;
     /** Is this token currently animating? */
@@ -77,15 +78,18 @@ declare class TokenPF2e extends Token<TokenDocumentPF2e> {
     }): boolean;
     protected _onHoverOut(event: PIXI.InteractionEvent): boolean;
     /** Destroy auras before removing this token from the canvas */
-    _onDelete(options: DocumentModificationContext<TokenDocumentPF2e>, userId: string): void;
+    _onDelete(options: DocumentModificationContext<TDocument["parent"]>, userId: string): void;
     /** A callback for when a movement animation for this token finishes */
     private onFinishAnimation;
     /** Handle system-specific status effects (upstream handles invisible and blinded) */
     _onApplyStatusEffect(statusId: string, active: boolean): void;
 }
-interface TokenPF2e extends Token<TokenDocumentPF2e> {
+interface TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
     get layer(): TokenLayerPF2e<this>;
     icon?: TokenImage;
+    toggleCombat(state?: boolean, combat?: EncounterPF2e | null, options?: {
+        token?: TokenPF2e | null;
+    }): Promise<CombatantPF2e<EncounterPF2e>[]>;
 }
 interface TokenImage extends PIXI.Sprite {
     src?: VideoFilePath;
@@ -101,4 +105,4 @@ type ShowFloatyEffectParams = number | {
 } | {
     delete: NumericFloatyEffect;
 };
-export { TokenPF2e };
+export { ShowFloatyEffectParams, TokenPF2e };

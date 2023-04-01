@@ -1,10 +1,11 @@
 import { DamageInstance } from "./roll";
 declare class ArithmeticExpression extends RollTerm<ArithmeticExpressionData> {
     operator: ArithmeticOperator;
-    operands: RollTerm[];
+    operands: [RollTerm, RollTerm];
     constructor(termData: ArithmeticExpressionData);
     static SERIALIZE_ATTRIBUTES: string[];
     static fromData<TTerm extends RollTerm>(this: ConstructorOf<TTerm>, data: TermDataOf<TTerm>): TTerm;
+    static totalOf(operator: ArithmeticOperator, left: number, right: number): number;
     static totalOf(operator: ArithmeticOperator, left: number | undefined, right: number | undefined): number | undefined;
     get dice(): DiceTerm[];
     /**
@@ -15,7 +16,7 @@ declare class ArithmeticExpression extends RollTerm<ArithmeticExpressionData> {
     /** Preserve flavor of inner terms */
     get formula(): string;
     get total(): number | undefined;
-    get critImmuneTotal(): number | undefined;
+    get critImmuneTotal(): this["total"];
     get isDeterministic(): boolean;
     get minimumValue(): number;
     get expectedValue(): number;
@@ -27,6 +28,9 @@ declare class ArithmeticExpression extends RollTerm<ArithmeticExpressionData> {
         maximize?: boolean;
     }): Promise<Evaluated<this>>;
     toJSON(): ArithmeticExpressionData;
+}
+interface ArithmeticExpression extends RollTerm<ArithmeticExpressionData> {
+    constructor: typeof ArithmeticExpression;
 }
 interface ArithmeticExpressionData extends RollTermData {
     class?: "ArithmeticExpression";
@@ -41,6 +45,7 @@ declare class Grouping extends RollTerm<GroupingData> {
     static SERIALIZE_ATTRIBUTES: string[];
     static fromData<TTerm extends RollTerm>(this: ConstructorOf<TTerm>, data: TermDataOf<TTerm>): TTerm;
     get dice(): DiceTerm[];
+    /** Show a simplified expression if it is known that order of operations won't be lost */
     get expression(): string;
     /** Preserve flavor of inner terms */
     get formula(): string;

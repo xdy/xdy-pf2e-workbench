@@ -4,7 +4,7 @@
 import { ConditionPF2e } from "@item/condition";
 import { ItemSheetPF2e } from "@item/sheet";
 import { ItemSheetDataPF2e } from "@item/sheet/data-types";
-import { DamageCategoryUnique } from "@system/damage";
+import { DamageCategoryUnique } from "@system/damage/types";
 import { AfflictionConditionData, AfflictionStageData } from "./data";
 import { AfflictionPF2e } from "./document";
 declare class AfflictionSheetPF2e extends ItemSheetPF2e<AfflictionPF2e> {

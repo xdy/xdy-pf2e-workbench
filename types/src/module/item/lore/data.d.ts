@@ -1,8 +1,6 @@
-import { BaseItemDataPF2e, BaseItemSourcePF2e, ItemSystemSource } from "@item/data/base";
+import { BaseItemSourcePF2e, ItemSystemSource } from "@item/data/base";
 import { ZeroToFour } from "@module/data";
-import type { LorePF2e } from ".";
 type LoreSource = BaseItemSourcePF2e<"lore", LoreSystemSource>;
-type LoreData = Omit<LoreSource, "system" | "effects" | "flags"> & BaseItemDataPF2e<LorePF2e, "lore", LoreSystemData, LoreSource>;
 interface LoreSystemSource extends ItemSystemSource {
     mod: {
         value: number;
@@ -14,6 +12,8 @@ interface LoreSystemSource extends ItemSystemSource {
         label: string;
         options: string;
     }>;
+    level?: never;
+    traits?: never;
 }
 type LoreSystemData = LoreSystemSource;
-export { LoreData, LoreSource };
+export { LoreSource, LoreSystemData };

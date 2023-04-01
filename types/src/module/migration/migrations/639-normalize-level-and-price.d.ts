@@ -4,5 +4,5 @@ import { MigrationBase } from "../base";
 export declare class Migration639NormalizeLevelAndPrice extends MigrationBase {
     static version: number;
     private coinSlugs;
-    updateItem(itemData: ItemSourcePF2e): Promise<void>;
+    updateItem(source: ItemSourcePF2e): Promise<void>;
 }

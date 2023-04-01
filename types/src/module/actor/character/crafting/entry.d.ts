@@ -1,8 +1,8 @@
 import { ActorPF2e, CharacterPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { PredicatePF2e } from "@system/predication";
+import { PredicatePF2e, RawPredicate } from "@system/predication";
 import { CraftingFormula } from "./formula";
-export declare class CraftingEntry implements Omit<CraftingEntryData, "parentItem"> {
+declare class CraftingEntry implements Omit<CraftingEntryData, "parentItem"> {
     #private;
     preparedCraftingFormulas: PreparedCraftingFormula[];
     preparedFormulaData: PreparedFormulaData[];
@@ -13,11 +13,11 @@ export declare class CraftingEntry implements Omit<CraftingEntryData, "parentIte
     isPrepared: boolean;
     craftableItems: PredicatePF2e;
     maxSlots: number;
-    fieldDiscovery?: "bomb" | "elixir" | "mutagen" | "poison";
+    fieldDiscovery: PredicatePF2e | null;
     batchSize?: number;
     fieldDiscoveryBatchSize?: number;
     maxItemLevel: number;
-    parentItem: Embedded<ItemPF2e>;
+    parentItem: ItemPF2e<ActorPF2e>;
     constructor(actor: CharacterPF2e, knownFormulas: CraftingFormula[], data: CraftingEntryData);
     get actor(): ActorPF2e;
     get formulas(): (PreparedFormulaSheetData | null)[];
@@ -33,8 +33,9 @@ export declare class CraftingEntry implements Omit<CraftingEntryData, "parentIte
     setFormulaQuantity(index: number, itemUUID: string, quantity: number): Promise<void>;
     toggleFormulaExpended(index: number, itemUUID: string): Promise<void>;
     toggleSignatureItem(itemUUID: string): Promise<void>;
+    updateFormulas(formulas: PreparedFormulaData[]): Promise<void>;
 }
-export interface CraftingEntryData {
+interface CraftingEntryData {
     selector: string;
     name: string;
     parentItem: string;
@@ -42,8 +43,8 @@ export interface CraftingEntryData {
     isDailyPrep?: boolean;
     isPrepared?: boolean;
     maxSlots?: number;
-    craftableItems: PredicatePF2e;
-    fieldDiscovery?: "bomb" | "elixir" | "mutagen" | "poison";
+    craftableItems: RawPredicate;
+    fieldDiscovery?: RawPredicate | null;
     batchSize?: number;
     fieldDiscoveryBatchSize?: number;
     maxItemLevel?: number;
@@ -54,11 +55,13 @@ interface PreparedFormulaData {
     quantity?: number;
     expended?: boolean;
     isSignatureItem?: boolean;
+    sort?: number;
 }
 interface PreparedCraftingFormula extends CraftingFormula {
     quantity: number;
     expended: boolean;
     isSignatureItem: boolean;
+    sort: number;
 }
 interface PreparedFormulaSheetData {
     uuid: string;
@@ -68,4 +71,4 @@ interface PreparedFormulaSheetData {
     quantity: number;
     isSignatureItem: boolean;
 }
-export {};
+export { CraftingEntry, CraftingEntryData, PreparedFormulaData };

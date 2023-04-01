@@ -1,23 +1,20 @@
 import { DamageInstance, DamageRoll } from "./roll";
 import { ArithmeticExpression, Grouping } from "./terms";
-import { DamageCategory, DamageDieSize } from "./types";
+import { DamageCategory, DamageDieSize, DamageType } from "./types";
 declare function nextDamageDieSize(next: {
     upgrade: DamageDieSize;
 }): DamageDieSize;
 declare function nextDamageDieSize(next: {
     downgrade: DamageDieSize;
 }): DamageDieSize;
-/** Provides constants for typical damage categories, as well as a simple API for adding custom damage types and categories. */
+/** Provides constants for typical damage categories */
 declare const DamageCategorization: {
-    /**
-     * Map a damage type to it's corresponding damage category. If the type has no category, the type itself will be
-     * returned.
-     */
-    readonly fromDamageType: (damageType: string) => DamageCategory | null;
+    /** Map a damage type to its corresponding damage category, if any. */
+    readonly fromDamageType: (damageType: DamageType) => DamageCategory | null;
     /** Get a set of all damage categories (both base and custom). */
-    readonly allCategories: () => Set<"persistent" | "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "precision" | "splash" | "energy" | "physical" | "alignment">;
+    readonly allCategories: () => Set<"persistent" | "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "precision" | "splash" | "energy" | "physical" | "alignment" | null>;
     /** Get a set of all of the base rule damage types. */
-    readonly baseCategories: () => Set<"persistent" | "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "precision" | "splash" | "energy" | "physical" | "alignment">;
+    readonly baseCategories: () => Set<"persistent" | "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "precision" | "splash" | "energy" | "physical" | "alignment" | null>;
     /** Map a damage category to the set of damage types in it. */
     readonly toDamageTypes: (category: string) => Set<string>;
 };

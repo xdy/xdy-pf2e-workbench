@@ -1,2 +1,2 @@
-declare const FEAT_TYPES: Set<"ancestry" | "class" | "curse" | "ancestryfeature" | "classfeature" | "skill" | "general" | "archetype" | "bonus" | "pfsboon" | "deityboon">;
-export { FEAT_TYPES };
+declare const FEAT_CATEGORIES: Set<"class" | "curse" | "ancestry" | "ancestryfeature" | "classfeature" | "skill" | "general" | "bonus" | "pfsboon" | "deityboon">;
+export { FEAT_CATEGORIES };

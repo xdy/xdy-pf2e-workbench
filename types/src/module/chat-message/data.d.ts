@@ -2,17 +2,14 @@ import { ItemType } from "@item/data";
 import { MagicTradition } from "@item/spell/types";
 import { BaseRawModifier } from "@actor/modifiers";
 import { DegreeAdjustmentsRecord, DegreeOfSuccessString } from "@system/degree-of-success";
-import { ChatMessagePF2e } from ".";
 import { RollNoteSource } from "@module/notes";
 import { CheckRollContext } from "@system/check";
 import { DamageRollContext } from "@system/damage";
-interface ChatMessageDataPF2e<TChatMessage extends ChatMessagePF2e = ChatMessagePF2e> extends foundry.data.ChatMessageData<TChatMessage> {
-    readonly _source: ChatMessageSourcePF2e;
-}
-interface ChatMessageSourcePF2e extends foundry.data.ChatMessageSource {
+import { ZeroToTwo } from "@module/data";
+interface ChatMessageSourcePF2e extends foundry.documents.ChatMessageSource {
     flags: ChatMessageFlagsPF2e;
 }
-type ChatMessageFlagsPF2e = foundry.data.ChatMessageFlags & {
+type ChatMessageFlagsPF2e = foundry.documents.ChatMessageFlags & {
     pf2e: {
         damageRoll?: DamageRollFlag;
         context?: ChatContextFlag;
@@ -36,7 +33,7 @@ type ChatMessageFlagsPF2e = foundry.data.ChatMessageFlags & {
         strike?: StrikeLookupData | null;
         [key: string]: unknown;
     };
-    core: NonNullable<foundry.data.ChatMessageFlags["core"]>;
+    core: NonNullable<foundry.documents.ChatMessageFlags["core"]>;
 };
 type ChatContextFlag = CheckRollContextFlag | DamageRollContextFlag | SpellCastContextFlag;
 /** Data used to lookup a strike on an actor */
@@ -63,7 +60,7 @@ interface TargetFlag {
     actor: ActorUUID | TokenDocumentUUID;
     token?: TokenDocumentUUID;
 }
-type ContextFlagOmission = "actor" | "altUsage" | "createMessage" | "dosAdjustments" | "item" | "notes" | "options" | "target" | "token";
+type ContextFlagOmission = "actor" | "altUsage" | "createMessage" | "dosAdjustments" | "item" | "mapIncreases" | "notes" | "options" | "target" | "token";
 interface CheckRollContextFlag extends Required<Omit<CheckRollContext, ContextFlagOmission>> {
     actor: string | null;
     token: string | null;
@@ -78,6 +75,7 @@ interface DamageRollContextFlag extends Required<Omit<DamageRollContext, Context
     actor: string | null;
     token: string | null;
     item?: undefined;
+    mapIncreases?: ZeroToTwo;
     target: TargetFlag | null;
     notes: RollNoteSource[];
     options: string[];
@@ -89,4 +87,4 @@ interface SpellCastContextFlag {
     /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
     rollMode?: RollMode;
 }
-export { ChatContextFlag, ChatMessageDataPF2e, ChatMessageSourcePF2e, ChatMessageFlagsPF2e, CheckRollContextFlag, DamageRollFlag, DamageRollContextFlag, StrikeLookupData, TargetFlag, };
+export { ChatContextFlag, ChatMessageSourcePF2e, ChatMessageFlagsPF2e, CheckRollContextFlag, DamageRollFlag, DamageRollContextFlag, StrikeLookupData, TargetFlag, };

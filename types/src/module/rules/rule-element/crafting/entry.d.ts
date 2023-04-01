@@ -1,5 +1,5 @@
 import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from "..";
-import { CharacterPF2e } from "@actor";
+import { ActorPF2e, CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ItemPF2e } from "@item";
 import { RawPredicate } from "@system/predication";
@@ -8,9 +8,8 @@ import { RawPredicate } from "@system/predication";
  */
 declare class CraftingEntryRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
-    private name;
     private selector;
-    constructor(data: CraftingEntryRuleSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(data: CraftingEntryRuleSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     beforePrepareData(): void;
 }
 interface CraftingEntryRuleElement extends RuleElementPF2e {

@@ -8,12 +8,6 @@ export declare class StatusEffects {
     /** Link status effect icons to conditions */
     static initialize(): void;
     static get conditions(): {
-        group: {
-            detection: string;
-            attitudes: string;
-            senses: string;
-            death: string;
-        };
         blinded: {
             name: string;
             rules: string;
@@ -113,6 +107,12 @@ export declare class StatusEffects {
             name: string;
             rules: string;
             summary: string;
+        };
+        group: {
+            attitudes: string;
+            death: string;
+            detection: string;
+            senses: string;
         };
         helpful: {
             name: string;
@@ -233,4 +233,6 @@ export declare class StatusEffects {
     static onRenderTokenHUD(html: HTMLElement, tokenData: TokenHUDData): Promise<void>;
     /** Called by `EncounterPF2e#_onUpdate` */
     static onUpdateEncounter(encounter: EncounterPF2e): void;
+    /** Re-render the token HUD */
+    static refresh(): void;
 }

@@ -9,15 +9,16 @@ import "./tour";
 
 declare global {
     interface FoundryUI<
-        TActor extends Actor,
+        TActor extends Actor<null>,
         TActorDirectory extends ActorDirectory<TActor>,
-        TItem extends Item,
+        TItem extends Item<null>,
         TChatLog extends ChatLog,
-        TCompendiumDirectory extends CompendiumDirectory
+        TCompendiumDirectory extends CompendiumDirectory,
+        TCombatTracker extends CombatTracker<Combat | null>
     > {
         actors: TActorDirectory;
         chat: TChatLog;
-        combat: CombatTracker<Combat>;
+        combat: TCombatTracker;
         compendium: TCompendiumDirectory;
         controls: SceneControls;
         items: ItemDirectory<TItem>;

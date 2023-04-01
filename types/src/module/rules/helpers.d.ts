@@ -1,5 +1,7 @@
 import { ActorPF2e } from "@actor";
 import { DamageDicePF2e, DeferredValueParams, ModifierAdjustment, ModifierPF2e } from "@actor/modifiers";
+import { AttackItem } from "@actor/types";
+import { ConditionSource, EffectSource } from "@item/data";
 import { RollNotePF2e } from "@module/notes";
 import { DegreeOfSuccessAdjustment } from "@system/degree-of-success";
 import { RollTwiceOption } from "@system/rolls";
@@ -16,6 +18,15 @@ declare function extractModifierAdjustments(adjustmentsRecord: RuleElementSynthe
 /** Extracts a list of all cloned notes across all given keys in a single list. */
 declare function extractNotes(rollNotes: Record<string, RollNotePF2e[]>, selectors: string[]): RollNotePF2e[];
 declare function extractDamageDice(deferredDice: DamageDiceSynthetics, selectors: string[], options?: DeferredValueParams): DamageDicePF2e[];
+declare function extractEphemeralEffects({ affects, origin, target, item, domains, options, }: ExtractEphemeralEffectsParams): Promise<(ConditionSource | EffectSource)[]>;
+interface ExtractEphemeralEffectsParams {
+    affects: "target" | "origin";
+    origin: ActorPF2e;
+    target: Maybe<ActorPF2e>;
+    item: AttackItem | null;
+    domains: string[];
+    options: Set<string> | string[];
+}
 declare function extractRollTwice(rollTwices: Record<string, RollTwiceSynthetic[]>, selectors: string[], options: Set<string>): RollTwiceOption;
 declare function extractRollSubstitutions(substitutions: Record<string, RollSubstitution[]>, domains: string[], rollOptions: Set<string>): RollSubstitution[];
 declare function extractDegreeOfSuccessAdjustments(synthetics: Pick<RuleElementSynthetics, "degreeOfSuccessAdjustments">, selectors: string[]): DegreeOfSuccessAdjustment[];
@@ -23,4 +34,4 @@ declare function isBracketedValue(value: unknown): value is BracketedValue;
 declare function processPreUpdateActorHooks(changed: DocumentUpdateData<ActorPF2e>, { pack }: {
     pack: string | null;
 }): Promise<void>;
-export { extractDamageDice, extractDamageModifiers, extractDegreeOfSuccessAdjustments, extractModifierAdjustments, extractModifiers, extractNotes, extractRollSubstitutions, extractRollTwice, isBracketedValue, processPreUpdateActorHooks, };
+export { extractDamageDice, extractDamageModifiers, extractDegreeOfSuccessAdjustments, extractModifierAdjustments, extractModifiers, extractNotes, extractEphemeralEffects, extractRollSubstitutions, extractRollTwice, isBracketedValue, processPreUpdateActorHooks, };

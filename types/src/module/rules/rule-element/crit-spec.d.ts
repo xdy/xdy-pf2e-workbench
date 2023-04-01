@@ -1,19 +1,19 @@
 import { ActorType } from "@actor/data";
-import { ItemPF2e } from "@item";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from ".";
+import { BooleanField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
+import { RuleElementPF2e, RuleElementSchema } from ".";
 /** Substitute a pre-determined result for a check's D20 roll */
-declare class CritSpecRuleElement extends RuleElementPF2e {
+declare class CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema> {
+    #private;
     static validActorTypes: ActorType[];
-    /** Whether this critical specialization note substitutes for the standard one of a given weapon group */
-    private alternate;
-    /** Alternative note text: if not provided, the standard one for a given weapon group is used */
-    private text;
-    constructor(data: CritSpecSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
-    private isValid;
+    static defineSchema(): CritSpecRuleSchema;
     beforePrepareData(): void;
 }
-interface CritSpecSource extends RuleElementSource {
-    alternate?: unknown;
-    text?: unknown;
+interface CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema>, ModelPropsFromSchema<CritSpecRuleSchema> {
 }
+type CritSpecRuleSchema = RuleElementSchema & {
+    /** Whether this critical specialization note substitutes for the standard one of a given weapon group */
+    alternate: BooleanField;
+    /** Alternative note text: if not provided, the standard one for a given weapon group is used */
+    text: StringField<string, string, false, false, false>;
+};
 export { CritSpecRuleElement };

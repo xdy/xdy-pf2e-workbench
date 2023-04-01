@@ -1,13 +1,14 @@
+import { ActorPF2e } from "@actor";
 import type { EffectPF2e } from "@item/index";
 import { EncounterPF2e } from "@module/encounter";
 export declare class EffectTracker {
     #private;
-    effects: Embedded<EffectPF2e>[];
+    effects: EffectPF2e<ActorPF2e>[];
     /** A separate collection of aura effects, including ones with unlimited duration */
-    auraEffects: Collection<Embedded<EffectPF2e>>;
+    auraEffects: Collection<EffectPF2e<ActorPF2e>>;
     private insert;
-    register(effect: Embedded<EffectPF2e>): void;
-    unregister(toRemove: Embedded<EffectPF2e>): void;
+    register(effect: EffectPF2e<ActorPF2e>): void;
+    unregister(toRemove: EffectPF2e<ActorPF2e>): void;
     /**
      * Check for expired effects, removing or disabling as appropriate according to world settings
      * @param resetItemData Perform individual item data resets. This is only needed when the world time changes.

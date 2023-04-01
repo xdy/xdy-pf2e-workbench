@@ -1,4 +1,4 @@
-import { CreaturePF2e } from "@actor";
+import { ActorPF2e, CreaturePF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ActorSizePF2e } from "@actor/data/size";
 import { ItemPF2e } from "@item";
@@ -14,7 +14,7 @@ declare class CreatureSizeRuleElement extends RuleElementPF2e {
     /** An optional reach adjustment to accompany the size */
     reach: ReachObject | null;
     resizeEquipment: boolean;
-    constructor(data: CreatureSizeSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions);
+    constructor(data: CreatureSizeSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     private static wordToAbbreviation;
     private static incrementMap;
     private static decrementMap;

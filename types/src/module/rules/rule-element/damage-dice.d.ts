@@ -1,7 +1,7 @@
-import { CharacterPF2e, NPCPF2e } from "@actor";
+import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
 import { DamageDiceOverride } from "@actor/modifiers";
 import { ItemPF2e } from "@item";
-import { CriticalInclusion, DamageDieSize } from "@system/damage/types";
+import { CriticalInclusion } from "@system/damage/types";
 import { RuleElementData, RuleElementPF2e } from "./";
 import { BracketedValue, RuleElementSource } from "./data";
 declare class DamageDiceRuleElement extends RuleElementPF2e {
@@ -9,13 +9,13 @@ declare class DamageDiceRuleElement extends RuleElementPF2e {
     slug: string;
     selector: string;
     diceNumber: number | string;
-    dieSize: DamageDieSize | null;
+    dieSize: string | null;
     damageType: string | null;
     critical: CriticalInclusion;
-    category: "precision" | "persistent" | null;
+    category: "persistent" | "precision" | "splash" | null;
     brackets: BracketedValue | null;
     override: DamageDiceOverride | null;
-    constructor(data: DamageDiceSource, item: Embedded<ItemPF2e>);
+    constructor(data: DamageDiceSource, item: ItemPF2e<ActorPF2e>);
     beforePrepareData(): void;
 }
 interface DamageDiceRuleElement {

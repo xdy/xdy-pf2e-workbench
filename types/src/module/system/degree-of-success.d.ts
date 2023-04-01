@@ -1,7 +1,9 @@
+import { StatisticModifier } from "@actor/modifiers";
 import { DCSlug } from "@actor/types";
 import { ZeroToThree } from "@module/data";
 import { CheckRoll } from "./check";
 import { PredicatePF2e } from "./predication";
+import { StatisticDifficultyClass } from "./statistic";
 /** Get the degree of success from a roll and a difficulty class */
 declare class DegreeOfSuccess {
     #private;
@@ -36,7 +38,7 @@ declare const DEGREE_ADJUSTMENT_AMOUNTS: {
     readonly INCREASE: 1;
     readonly INCREASE_BY_TWO: 2;
 };
-type DegreeAdjustmentAmount = typeof DEGREE_ADJUSTMENT_AMOUNTS[keyof typeof DEGREE_ADJUSTMENT_AMOUNTS];
+type DegreeAdjustmentAmount = (typeof DEGREE_ADJUSTMENT_AMOUNTS)[keyof typeof DEGREE_ADJUSTMENT_AMOUNTS];
 type DegreeAdjustmentsRecord = {
     [key in "all" | DegreeOfSuccessString]?: {
         label: string;
@@ -49,6 +51,7 @@ interface DegreeOfSuccessAdjustment {
 }
 interface CheckDC {
     slug?: DCSlug;
+    statistic?: StatisticDifficultyClass | StatisticModifier | null;
     label?: string;
     scope?: "attack" | "check";
     value: number;
@@ -62,5 +65,5 @@ declare const DEGREE_OF_SUCCESS: {
 };
 type DegreeOfSuccessIndex = ZeroToThree;
 declare const DEGREE_OF_SUCCESS_STRINGS: readonly ["criticalFailure", "failure", "success", "criticalSuccess"];
-type DegreeOfSuccessString = typeof DEGREE_OF_SUCCESS_STRINGS[number];
+type DegreeOfSuccessString = (typeof DEGREE_OF_SUCCESS_STRINGS)[number];
 export { CheckDC, DEGREE_ADJUSTMENT_AMOUNTS, DEGREE_OF_SUCCESS, DEGREE_OF_SUCCESS_STRINGS, DegreeAdjustmentAmount, DegreeAdjustmentsRecord, DegreeOfSuccess, DegreeOfSuccessAdjustment, DegreeOfSuccessIndex, DegreeOfSuccessString, RollBrief, };
