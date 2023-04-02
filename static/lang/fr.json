@@ -206,7 +206,7 @@
         "name": "Appeler la barre des macros sur la page {page} en {column}e position"
       },
       "castPrivateSpell": {
-        "hint": "Cliquez pour permettre qu'un ctrl+clic sur un sort le Lance en envoyant un message au lanceur et au MJ.",
+        "hint": "Cliquez pour activer le Lancement du sort sur un Ctrl+clic en envoyant un message discret au lanceur et au MJ. Notez que cette capacité est actuellement incompatible avec le module polyglot (une demande de correctif a été soumise pour le réparer)",
         "name": "Ctrl+clic pour Lancer un sort en privé.",
         "aSpell": "Un sort"
       },
