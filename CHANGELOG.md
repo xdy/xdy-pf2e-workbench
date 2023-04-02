@@ -1,3 +1,10 @@
+## [4.58.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.0...v4.58.1) (2023-04-02)
+
+
+### Bug Fixes
+
+* When the gm changes settings, make players update which setting hooks are active. ([88e1f1c](https://github.com/xdy/xdy-pf2e-workbench/commit/88e1f1c630e3fd7854d5cb5abdcb01001b3709b3))
+
 # [4.58.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.57.0...v4.58.0) (2023-04-01)
 
 
