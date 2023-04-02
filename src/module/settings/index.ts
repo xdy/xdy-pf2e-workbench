@@ -1,4 +1,4 @@
-import { createHooks, MODULENAME } from "../xdy-pf2e-workbench";
+import { updateHooks, MODULENAME } from "../xdy-pf2e-workbench";
 import { WorkbenchMystificationSettings } from "./mystification";
 import { WorkbenchRemindersSettings } from "./reminders";
 import { WorkbenchWorldAutomationSettings } from "./automation-world";
@@ -9,7 +9,7 @@ import { WorkbenchVariantRulesSettings } from "./variantRules";
 export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification";
 
 export function reCreateHooks() {
-    createHooks();
+    updateHooks();
 }
 
 export function registerWorkbenchSettings() {

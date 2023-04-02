@@ -312,7 +312,6 @@ export function hideNameOfPrivateSpell(message: ChatMessagePF2e, html: JQuery) {
                             game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.aSpell`)
                         )
                 );
-                console.log(flavor.html());
             });
         }
     }

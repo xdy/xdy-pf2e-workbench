@@ -56,216 +56,120 @@ export const CHARACTER_TYPE = "character";
 
 const activeHooks = new Set();
 
-export function createHooks() {
-    if (!activeHooks.has("getActorDirectoryEntryContext")) {
-        if (game.settings.get(MODULENAME, "npcScaler")) {
-            Hooks.on("getActorDirectoryEntryContext", onScaleNPCContextHook);
-            activeHooks.add("getActorDirectoryEntryContext");
+function handle(hookName, shouldBeOn, hookFunction) {
+    if (!activeHooks.has(hookName)) {
+        if (shouldBeOn) {
+            Hooks.on(hookName, hookFunction);
+            activeHooks.add(hookName);
         }
     } else {
-        Hooks.off("getActorDirectoryEntryContext", onScaleNPCContextHook);
-        activeHooks.delete("getActorDirectoryEntryContext");
+        Hooks.off(hookName, hookFunction);
+        activeHooks.delete(hookName);
+    }
+}
+
+export function updateHooks(afterInit = true, cleanSlate = false) {
+    if (afterInit && game.user.isGM) {
+        game.socket.emit("module.xdy-pf2e-workbench", { operation: "updateHooks" });
+    }
+    if (cleanSlate) {
+        activeHooks.clear();
     }
 
-    if (!activeHooks.has("renderJournalDirectory")) {
-        if (game.settings.get(MODULENAME, "npcRoller")) {
-            Hooks.on("renderJournalDirectory", enableNpcRollerButton);
-            activeHooks.add("renderJournalDirectory");
-        }
-    } else {
-        Hooks.off("renderJournalDirectory", enableNpcRollerButton);
-        activeHooks.delete("renderJournalDirectory");
-    }
+    const gs = game.settings;
+    handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
+    handle("renderJournalDirectory", gs.get(MODULENAME, "npcRoller"), enableNpcRollerButton);
 
-    if (!activeHooks.has("preCreateChatMessage")) {
-        if (game.settings.get(MODULENAME, "castPrivateSpell")) {
-            Hooks.on("preCreateChatMessage", preCreateChatMessageHook);
-            activeHooks.add("preCreateChatMessage");
-        }
-    } else {
-        Hooks.off("preCreateChatMessage", preCreateChatMessageHook);
-        activeHooks.delete("preCreateChatMessage");
-    }
+    handle("preCreateChatMessage", gs.get(MODULENAME, "castPrivateSpell"), preCreateChatMessageHook);
 
-    if (!activeHooks.has("createChatMessage")) {
-        if (
-            game.settings.get(MODULENAME, "autoRollDamageAllow") ||
-            game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
-            game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
-            game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
-            game.settings.get(MODULENAME, "automatedAnimationOn") ||
-            game.settings.get(MODULENAME, "reminderBreathWeapon") ||
-            game.settings.get(MODULENAME, "reminderTargeting") ||
-            game.settings.get(MODULENAME, "reminderCannotAttack")
-        ) {
-            Hooks.on("createChatMessage", createChatMessageHook);
-            activeHooks.add("createChatMessage");
-        }
-    } else {
-        Hooks.off("createChatMessage", createChatMessageHook);
-        activeHooks.delete("createChatMessage");
-    }
+    handle(
+        "createChatMessage",
+        gs.get(MODULENAME, "autoRollDamageAllow") ||
+            gs.get(MODULENAME, "autoRollDamageForStrike") ||
+            gs.get(MODULENAME, "autoRollDamageForSpellAttack") ||
+            gs.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
+            gs.get(MODULENAME, "automatedAnimationOn") ||
+            gs.get(MODULENAME, "reminderBreathWeapon") ||
+            gs.get(MODULENAME, "reminderTargeting") ||
+            gs.get(MODULENAME, "reminderCannotAttack"),
+        createChatMessageHook
+    );
 
-    if (!activeHooks.has("renderChatMessage")) {
-        if (
-            game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
-            game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
-            game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
-            game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault" ||
-            game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
-            game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault" ||
-            game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
-            game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
-            game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
-            game.settings.get(MODULENAME, "applyPersistentHealing") ||
-            game.settings.get(MODULENAME, "applyPersistentDamage") ||
-            (game.settings.get(MODULENAME, "npcMystifier") &&
-                game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat"))
-        ) {
-            Hooks.on("renderChatMessage", renderChatMessageHook);
-            activeHooks.add("renderChatMessage");
-        }
-    } else {
-        Hooks.off("renderChatMessage", renderChatMessageHook);
-        activeHooks.delete("renderChatMessage");
-    }
+    handle(
+        "renderChatMessage",
+        game.settings.get(MODULENAME, "castPrivateSpell") ||
+            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault" ||
+            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
+            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
+            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
+            gs.get(MODULENAME, "applyPersistentHealing") ||
+            gs.get(MODULENAME, "applyPersistentDamage") ||
+            (gs.get(MODULENAME, "npcMystifier") && gs.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")),
+        renderChatMessageHook
+    );
 
-    if (!activeHooks.has("createItem")) {
-        if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-            Hooks.on("createItem", createItemHook);
-            activeHooks.add("createItem");
-        }
-    } else {
-        Hooks.off("createItem", createItemHook);
-        activeHooks.delete("createItem");
-    }
+    handle("createItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), createItemHook);
 
-    if (!activeHooks.has("updateItem")) {
-        if (game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-            Hooks.on("updateItem", updateItemHook);
-            activeHooks.add("updateItem");
-        }
-    } else {
-        Hooks.off("updateItem", updateItemHook);
-        activeHooks.delete("updateItem");
-    }
+    handle("updateItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), updateItemHook);
 
-    if (!activeHooks.has("deleteItem")) {
-        if (
-            game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
-            game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
-            game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")
-        ) {
-            Hooks.on("deleteItem", deleteItemHook);
-            activeHooks.add("deleteItem");
-        }
-    } else {
-        Hooks.off("deleteItem", deleteItemHook);
-        activeHooks.delete("deleteItem");
-    }
+    handle(
+        "deleteItem",
+        gs.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
+            gs.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
+            gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP"),
+        deleteItemHook
+    );
 
-    if (!activeHooks.has("pf2e.endTurn")) {
-        if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-            Hooks.on("pf2e.endTurn", pf2eEndTurnHook);
-            activeHooks.add("pf2e.endTurn");
-        }
-    } else {
-        Hooks.off("pf2e.endTurn", pf2eEndTurnHook);
-        activeHooks.delete("pf2e.endTurn");
-    }
+    handle("pf2e.endTurn", gs.get(MODULENAME, "decreaseFrightenedConditionEachTurn"), pf2eEndTurnHook);
 
-    if (!activeHooks.has("pf2e.startTurn")) {
-        if (
-            game.settings.get(MODULENAME, "actionsReminderAllow") !== "none" ||
-            game.settings.get(MODULENAME, "autoReduceStunned")
-        ) {
-            Hooks.on("pf2e.startTurn", pf2eStartTurnHook);
-            activeHooks.add("pf2e.startTurn");
-        }
-    } else {
-        Hooks.off("pf2e.startTurn", pf2eStartTurnHook);
-        activeHooks.delete("pf2e.startTurn");
-    }
+    handle(
+        "pf2e.startTurn",
+        gs.get(MODULENAME, "actionsReminderAllow") !== "none" || gs.get(MODULENAME, "autoReduceStunned"),
+        pf2eStartTurnHook
+    );
 
-    if (!activeHooks.has("renderTokenHUD")) {
-        if (game.settings.get(MODULENAME, "npcMystifier")) {
-            Hooks.on("renderTokenHUD", renderTokenHUDHook);
-            activeHooks.add("renderTokenHUD");
-        }
-    } else {
-        Hooks.off("renderTokenHUD", renderTokenHUDHook);
-        activeHooks.delete("renderTokenHUD");
-    }
+    handle("renderTokenHUD", gs.get(MODULENAME, "npcMystifier"), renderTokenHUDHook);
 
-    if (!activeHooks.has("renderCharacterSheetPF2e")) {
-        if (game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
-            Hooks.on("renderCharacterSheetPF2e", renderCharacterSheetPF2eHook);
-            activeHooks.add("renderCharacterSheetPF2e");
-        }
-    } else {
-        Hooks.off("renderCharacterSheetPF2e", renderCharacterSheetPF2eHook);
-        activeHooks.delete("renderCharacterSheetPF2e");
-    }
+    handle("renderCharacterSheetPF2e", gs.get(MODULENAME, "maxHeroPoints") !== 3, renderCharacterSheetPF2eHook);
 
-    if (!activeHooks.has("preUpdateActor")) {
-        if (
-            (<string>game.settings.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
-            game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
-            game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none" ||
-            game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
-            (game.settings.get("pf2e", "automation.lootableNPCs") &&
-                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp")
-        ) {
-            Hooks.on("preUpdateActor", preUpdateActorHook);
-            activeHooks.add("preUpdateActor");
-        }
-    } else {
-        Hooks.off("preUpdateActor", preUpdateActorHook);
-        activeHooks.delete("preUpdateActor");
-    }
+    handle(
+        "preUpdateActor",
+        (<string>gs.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
+            gs.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
+            gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none" ||
+            gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
+            (gs.get("pf2e", "automation.lootableNPCs") &&
+                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
+        preUpdateActorHook
+    );
 
-    if (!activeHooks.has("preUpdateToken")) {
-        if (game.settings.get(MODULENAME, "tokenAnimation")) {
-            Hooks.on("preUpdateToken", preUpdateTokenHook);
-            activeHooks.add("preUpdateToken");
-        }
-    } else {
-        Hooks.off("preUpdateToken", preUpdateTokenHook);
-        activeHooks.delete("preUpdateToken");
-    }
+    handle("preUpdateToken", gs.get(MODULENAME, "tokenAnimation"), preUpdateTokenHook);
 
-    if (!activeHooks.has("createToken")) {
-        if (
-            game.settings.get(MODULENAME, "npcMystifier") ||
-            (game.settings.get("pf2e", "automation.lootableNPCs") &&
-                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene")
-        ) {
-            Hooks.on("createToken", createTokenHook);
-            activeHooks.add("createToken");
-        }
-    } else {
-        Hooks.off("createToken", createTokenHook);
-        activeHooks.delete("createToken");
-    }
+    handle(
+        "createToken",
+        gs.get(MODULENAME, "npcMystifier") ||
+            (gs.get("pf2e", "automation.lootableNPCs") &&
+                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
+        createTokenHook
+    );
 
-    if (!activeHooks.has("renderActorSheet")) {
-        if (
-            game.settings.get(MODULENAME, "playerFeatsRarityColour") ||
-            game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
-            game.settings.get(MODULENAME, "playerSpellsRarityColour") ||
-            game.settings.get(MODULENAME, "castPrivateSpell") ||
-            game.settings.get(MODULENAME, "addGmRKButtonToNpc") ||
-            game.settings.get(MODULENAME, "quickQuantities") ||
-            game.settings.get(MODULENAME, "skillActions") !== "disabled" ||
-            game.settings.get(MODULENAME, "creatureBuilder")
-        ) {
-            Hooks.on("renderActorSheet", renderActorSheetHook);
-            activeHooks.add("renderActorSheet");
-        }
-    } else {
-        Hooks.off("renderActorSheet", renderActorSheetHook);
-        activeHooks.delete("renderActorSheet");
-    }
+    handle(
+        "renderActorSheet",
+        gs.get(MODULENAME, "playerFeatsRarityColour") ||
+            gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
+            gs.get(MODULENAME, "playerSpellsRarityColour") ||
+            gs.get(MODULENAME, "castPrivateSpell") ||
+            gs.get(MODULENAME, "addGmRKButtonToNpc") ||
+            gs.get(MODULENAME, "quickQuantities") ||
+            gs.get(MODULENAME, "skillActions") !== "disabled" ||
+            gs.get(MODULENAME, "creatureBuilder"),
+        renderActorSheetHook
+    );
 }
 
 // Initialize module
@@ -298,7 +202,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
 
     // Hooks that only run if a setting that needs it has been enabled
-    createHooks();
+    updateHooks(false);
 
     // Register custom sheets (if any)
 });
@@ -442,6 +346,16 @@ Hooks.once("ready", () => {
     if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
         loadSkillActions().then();
     }
+
+    game.socket.on("module.xdy-pf2e-workbench", (operation) => {
+        switch (operation) {
+            case "updateHooks":
+                if (!game.user.isGM) {
+                    updateHooks(true);
+                }
+                break;
+        }
+    });
 
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });

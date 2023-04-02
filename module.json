@@ -28,6 +28,7 @@
   "styles": [
     "styles/xdy-pf2e-workbench.css"
   ],
+  "socket": true,
   "packs": [
     {
       "name": "asymonous-benefactor-macros",
