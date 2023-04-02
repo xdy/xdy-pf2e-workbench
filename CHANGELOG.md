@@ -1,3 +1,10 @@
+## [4.58.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.1...v4.58.2) (2023-04-02)
+
+
+### Bug Fixes
+
+* Turn of renaming privately cast spells again as it keeps breaking in new and unexpected ways. ([47e6edf](https://github.com/xdy/xdy-pf2e-workbench/commit/47e6edf449e5b65c738e3f137dd88f80967ccf77))
+
 ## [4.58.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.0...v4.58.1) (2023-04-02)
 
 
