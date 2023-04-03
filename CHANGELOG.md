@@ -1,3 +1,11 @@
+## [4.58.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.3...v4.58.4) (2023-04-03)
+
+
+### Bug Fixes
+
+* Fix bug that made settings require a manual refresh. ([e3a3c7e](https://github.com/xdy/xdy-pf2e-workbench/commit/e3a3c7e99c2bac104c6ec5085e8dd183e926d6b1))
+* Make changing pause text and image take effect without reload. ([64802cf](https://github.com/xdy/xdy-pf2e-workbench/commit/64802cfd7ee07aacbe1800b2263d5e322918f505))
+
 ## [4.58.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.2...v4.58.3) (2023-04-02)
 
 
