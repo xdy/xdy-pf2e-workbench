@@ -63,8 +63,10 @@ function handle(hookName, shouldBeOn, hookFunction) {
             activeHooks.add(hookName);
         }
     } else {
-        Hooks.off(hookName, hookFunction);
-        activeHooks.delete(hookName);
+        if (!shouldBeOn) {
+            Hooks.off(hookName, hookFunction);
+            activeHooks.delete(hookName);
+        }
     }
 }
 
