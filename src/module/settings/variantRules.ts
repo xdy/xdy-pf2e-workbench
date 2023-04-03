@@ -1,5 +1,4 @@
-import { MODULENAME } from "../xdy-pf2e-workbench";
-import { reCreateHooks } from "./index";
+import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench";
 import { SettingsMenuPF2eWorkbench } from "./menu";
 
 export class WorkbenchVariantRulesSettings extends SettingsMenuPF2eWorkbench {
@@ -20,7 +19,7 @@ export class WorkbenchVariantRulesSettings extends SettingsMenuPF2eWorkbench {
                     max: 10,
                     step: 1,
                 },
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             abpVariantAllowItemBonuses: {
@@ -30,7 +29,7 @@ export class WorkbenchVariantRulesSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
         };

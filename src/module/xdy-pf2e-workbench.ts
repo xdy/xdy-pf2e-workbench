@@ -170,6 +170,8 @@ export function updateHooks(afterInit = true, cleanSlate = false) {
             gs.get(MODULENAME, "creatureBuilder"),
         renderActorSheetHook
     );
+
+    changePauseText(true);
 }
 
 // Initialize module
@@ -207,11 +209,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     // Register custom sheets (if any)
 });
 
-// Setup module
-Hooks.once("setup", async () => {
-    console.log(`${MODULENAME} | Setting up`);
-    // Do anything after initialization but before ready
-
+export function changePauseText(afterSetup: boolean) {
     if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
         // Set css variables for the module
         const path = <string>game.settings.get(MODULENAME, "customPauseImage");
@@ -232,6 +230,18 @@ Hooks.once("setup", async () => {
         // @ts-ignore
         game.i18n.translations.GAME.Paused = text;
     }
+    if (afterSetup) {
+        const paused = !game.paused;
+        game.togglePause(paused, true);
+        new Promise((resolve) => setTimeout(resolve, 25)).then(() => game.togglePause(!paused, true));
+    }
+}
+
+// Setup module
+Hooks.once("setup", async () => {
+    console.log(`${MODULENAME} | Setting up`);
+    // Do anything after initialization but before ready
+    changePauseText(false);
 
     registerWorkbenchKeybindings();
 

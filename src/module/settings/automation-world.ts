@@ -1,6 +1,5 @@
-import { MODULENAME } from "../xdy-pf2e-workbench";
+import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench";
 import { SettingsMenuPF2eWorkbench } from "./menu";
-import { reCreateHooks } from "./index";
 
 export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "automationWorldSettings";
@@ -21,7 +20,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                         `${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HPCharactersOnly`
                     ),
                 },
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             autoRollDamageAllow: {
@@ -37,7 +36,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     gm: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.gm`),
                     players: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageAllow.players`),
                 },
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             applyPersistentAllow: {
@@ -53,7 +52,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     gm: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentAllow.gm`),
                     players: game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentAllow.players`),
                 },
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             applyEncumbranceBasedOnBulk: {
@@ -63,7 +62,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             autoReduceStunned: {
@@ -73,7 +72,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             giveUnconsciousIfDyingRemovedAt0HP: {
@@ -83,7 +82,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             autoRemoveUnconsciousAtGreaterThanZeroHP: {
@@ -93,7 +92,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             giveWoundedWhenDyingRemoved: {
@@ -103,7 +102,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             autoGainDyingAtZeroHP: {
@@ -124,7 +123,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                         `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addWoundedLevelForCharacters`
                     ),
                 },
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             autoRemoveDyingAtGreaterThanZeroHP: {
@@ -141,7 +140,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                         `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.removeDyingForCharacters`
                     ),
                 },
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
         };

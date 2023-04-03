@@ -1,5 +1,4 @@
-import { MODULENAME } from "../xdy-pf2e-workbench";
-import { reCreateHooks } from "./index";
+import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench";
 import { SettingsMenuPF2eWorkbench } from "./menu";
 
 export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
@@ -14,7 +13,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             npcScaler: {
@@ -24,7 +23,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             npcRoller: {
@@ -34,7 +33,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             quickQuantities: {
@@ -44,7 +43,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             castPrivateSpell: {
@@ -54,7 +53,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             castPrivateSpellAlwaysForNPC: {
@@ -64,7 +63,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             castPrivateSpellWithPublicMessage: {
@@ -74,7 +73,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             castPrivateSpellWithPublicMessageShowTraits: {
@@ -84,7 +83,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             addGmRKButtonToNpc: {
@@ -94,7 +93,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             addGmRKButtonToNpcHideNpcName: {
@@ -104,7 +103,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             addGmRKButtonToNpcHideSkill: {
@@ -114,7 +113,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             tokenAnimation: {
@@ -124,7 +123,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             tokenAnimationSpeed: {
@@ -134,7 +133,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: 6,
                 type: Number,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             playerFeatsPrerequisiteHint: {
@@ -144,7 +143,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
             },
             playerFeatsRarityColour: {
                 name: `${MODULENAME}.SETTINGS.playerFeatsRarityColour.name`,
@@ -153,7 +152,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
             },
             playerSpellsRarityColour: {
                 name: `${MODULENAME}.SETTINGS.playerSpellsRarityColour.name`,
@@ -162,7 +161,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
             },
         };
     }

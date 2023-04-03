@@ -1,6 +1,5 @@
-import { MODULENAME } from "../xdy-pf2e-workbench";
+import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench";
 import { SettingsMenuPF2eWorkbench } from "./menu";
-import { reCreateHooks } from "./index";
 
 export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "automationClientSettings";
@@ -15,7 +14,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             autoRollDamageForSpellAttack: {
@@ -25,7 +24,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             autoRollDamageForSpellNotAnAttack: {
@@ -35,7 +34,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             autoRollDamageNotifyOnSpellCardNotFound: {
@@ -53,7 +52,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             applyPersistentHealing: {
@@ -63,7 +62,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
             decreaseFrightenedConditionEachTurn: {
@@ -73,7 +72,7 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 config: true,
                 default: false,
                 type: Boolean,
-                onChange: () => reCreateHooks(),
+                onChange: () => updateHooks(),
                 requiresReload: true,
             },
         };
