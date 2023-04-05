@@ -56,6 +56,17 @@ export const CHARACTER_TYPE = "character";
 
 const activeHooks = new Set();
 
+// Enum for phases
+export enum Phase {
+    DOWN = 0, // Before init, not sure if it has a name in foundry
+    INIT = 10,
+    SETUP = 20,
+    READY = 30,
+    ACTIVE = 40, // After ready, not sure if it has a name in foundry
+}
+
+let phase: Phase = Phase.DOWN;
+
 function handle(hookName, shouldBeOn, hookFunction) {
     if (!activeHooks.has(hookName)) {
         if (shouldBeOn) {
@@ -70,8 +81,8 @@ function handle(hookName, shouldBeOn, hookFunction) {
     }
 }
 
-export function updateHooks(afterInit = true, cleanSlate = false) {
-    if (afterInit && game.user.isGM) {
+export function updateHooks(cleanSlate = false) {
+    if (phase > Phase.SETUP && game.user.isGM) {
         game.socket.emit("module.xdy-pf2e-workbench", { operation: "updateHooks" });
     }
     if (cleanSlate) {
@@ -173,12 +184,13 @@ export function updateHooks(afterInit = true, cleanSlate = false) {
         renderActorSheetHook
     );
 
-    changePauseText(true);
+    changePauseText();
 }
 
 // Initialize module
 Hooks.once("init", async (_actor: ActorPF2e) => {
     console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
+    phase = Phase.INIT;
 
     registerWorkbenchSettings();
 
@@ -206,12 +218,12 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     }
 
     // Hooks that only run if a setting that needs it has been enabled
-    updateHooks(false);
+    updateHooks();
 
     // Register custom sheets (if any)
 });
 
-export function changePauseText(afterSetup: boolean) {
+export function changePauseText() {
     if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
         // Set css variables for the module
         const path = <string>game.settings.get(MODULENAME, "customPauseImage");
@@ -228,11 +240,11 @@ export function changePauseText(afterSetup: boolean) {
     }
 
     const text = game.settings.get(MODULENAME, "customPauseText");
-    if (text && text !== "") {
-        // @ts-ignore
-        game.i18n.translations.GAME.Paused = text;
-    }
-    if (afterSetup) {
+    if (phase >= Phase.READY) {
+        if (text && text !== "") {
+            // @ts-ignore
+            game.i18n.translations.GAME.Paused = text;
+        }
         const paused = !game.paused;
         game.togglePause(paused, true);
         new Promise((resolve) => setTimeout(resolve, 25)).then(() => game.togglePause(!paused, true));
@@ -242,8 +254,8 @@ export function changePauseText(afterSetup: boolean) {
 // Setup module
 Hooks.once("setup", async () => {
     console.log(`${MODULENAME} | Setting up`);
+    phase = Phase.SETUP;
     // Do anything after initialization but before ready
-    changePauseText(false);
 
     registerWorkbenchKeybindings();
 
@@ -306,6 +318,7 @@ async function migrateFeatures() {
 Hooks.once("ready", () => {
     // Do anything once the module is ready
     console.log(`${MODULENAME} | Ready`);
+    phase = Phase.READY;
 
     // Must be in ready
 
@@ -324,6 +337,8 @@ Hooks.once("ready", () => {
     if (game.settings.get(MODULENAME, "tokenAnimation") && game.modules.get("multilevel-tokens")?.active) {
         ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.multilevel-tokens`));
     }
+
+    updateHooks();
 
     // Make some functions available for macros
     // noinspection JSUnusedGlobalSymbols
@@ -363,12 +378,13 @@ Hooks.once("ready", () => {
         switch (operation) {
             case "updateHooks":
                 if (!game.user.isGM) {
-                    updateHooks(true);
+                    updateHooks();
                 }
                 break;
         }
     });
 
+    phase = Phase.ACTIVE;
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
 
