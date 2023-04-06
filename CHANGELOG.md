@@ -1,3 +1,10 @@
+## [4.58.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.4...v4.58.5) (2023-04-06)
+
+
+### Bug Fixes
+
+* Bug that made changing pause text error out on startup. ([ecfac7b](https://github.com/xdy/xdy-pf2e-workbench/commit/ecfac7b797732c90eaf1ee72f7401d9fb01e89ea))
+
 ## [4.58.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.3...v4.58.4) (2023-04-03)
 
 
