@@ -5,10 +5,10 @@ VERSION_MAIN_REPLACE="\1download/v$1\3"
 #For latest download
 LATEST_MAIN_REPLACE="\1latest/download\3"
 
-sed -i -e 's|\(.*"version"\): "\(.*\)",.*|\1: '"\"$1\",|" static/module.json &&
-sed -i -r s"~${MANIFEST_SEARCH_PATTERN}~${LATEST_MAIN_REPLACE}~" static/module.json &&
-sed -i -r s"~${DOWNLOAD_SEARCH_PATTERN}~${VERSION_MAIN_REPLACE}~" static/module.json &&
-cp static/module.json dist &&
+sed -i -e 's|\(.*"version"\): "\(.*\)",.*|\1: '"\"$1\",|" module.json &&
+sed -i -r s"~${MANIFEST_SEARCH_PATTERN}~${LATEST_MAIN_REPLACE}~" module.json &&
+sed -i -r s"~${DOWNLOAD_SEARCH_PATTERN}~${VERSION_MAIN_REPLACE}~" module.json &&
+cp module.json dist &&
 sed -i -e 's|\(.*"version"\): "\(.*\)",.*|\1: '"\"$1\",|" package.json &&
 npm install &&
 cd dist || exit &&

@@ -60,14 +60,13 @@
     },
     "removeComments": false,
     "resolveJsonModule": true,
-    "useDefineForClassFields": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": false,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "es2022",
+    "target": "es2018",
     "typeRoots": [
       "node_modules/@types",
       "node_modules/handlebars",
@@ -77,16 +76,14 @@
       "handlebars",
       "jquery",
       "node",
-      "tooltipster"
+      "tooltipster",
+      "webpack-env"
     ]
   },
   "ts-node": {
     "files": true
-  },
-  "watchOptions": {
-    "excludeDirectories": [
-      "packs/",
-      "static/packs/"
-    ]
+    },
+    "watchOptions": {
+        "excludeDirectories": ["packs/", "static/packs/"]
   }
 }

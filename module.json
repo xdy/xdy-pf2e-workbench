@@ -22,8 +22,7 @@
     ]
   },
   "esmodules": [
-    "vendor.mjs",
-    "xdy-pf2e-workbench.mjs"
+    "xdy-pf2e-workbench.bundle.js"
   ],
   "scripts": [],
   "styles": [
