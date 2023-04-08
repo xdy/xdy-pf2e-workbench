@@ -1,3 +1,10 @@
+## [4.59.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.1...v4.59.2) (2023-04-08)
+
+
+### Bug Fixes
+
+* Don't increase dying for actors you don't own. ([a6c9e42](https://github.com/xdy/xdy-pf2e-workbench/commit/a6c9e42cef7be360ae998d426b048dbc317dc39f))
+
 ## [4.59.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.0...v4.59.1) (2023-04-08)
 
 
