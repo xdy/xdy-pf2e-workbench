@@ -24,7 +24,7 @@ import {
     applyEncumbranceBasedOnBulk,
     autoRemoveDyingAtGreaterThanZeroHp,
     autoRemoveUnconsciousAtGreaterThanZeroHP,
-    checkIfCriticalHitDamageMessageExists,
+    checkIfLatestDamageMessageIsCriticalSuccess,
     giveUnconsciousIfDyingRemovedAt0HP,
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
@@ -84,25 +84,32 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
 
     if (game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")) {
         const actor = message.actor;
-        if (shouldIHandleThis(actor)) {
-            const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
-            const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
-            let dyingCounter = originalDyingCounter;
-            if (actor && option !== "no" && dyingCounter > 0) {
-                const wasCritical = checkIfCriticalHitDamageMessageExists(actor);
+        if (actor && shouldIHandleThis(actor)) {
+            const now = Date.now();
+            const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
+            // @ts-ignore
+            if (!flag?.between(now - 500, now)) {
+                const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
+                const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
+                let dyingCounter = originalDyingCounter;
+                if (option !== "no" && dyingCounter > 0) {
+                    const wasCritical = checkIfLatestDamageMessageIsCriticalSuccess(actor);
 
-                if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
-                    if (option?.startsWith("addWoundedLevel")) {
-                        dyingCounter = dyingCounter + (actor.getCondition("wounded")?.value ?? 0) + 1;
-                    } else {
+                    if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
+                        if (option?.startsWith("addWoundedLevel")) {
+                            dyingCounter = dyingCounter + (actor.getCondition("wounded")?.value ?? 0) + 1;
+                        } else {
+                            dyingCounter = dyingCounter + 1;
+                        }
+                    }
+                    if (wasCritical) {
                         dyingCounter = dyingCounter + 1;
                     }
-                }
-                if (wasCritical) {
-                    dyingCounter = dyingCounter + 1;
-                }
-                if (dyingCounter > originalDyingCounter) {
-                    actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
+
+                    if (dyingCounter > originalDyingCounter) {
+                        actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
+                        actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
+                    }
                 }
             }
         }

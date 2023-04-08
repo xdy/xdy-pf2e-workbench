@@ -27,38 +27,49 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
     }
 }
 
-export function checkIfCriticalHitDamageMessageExists(actor: ActorPF2e): boolean {
+export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e): boolean {
+    let isCriticalSuccess = false;
     if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHPIfCriticallyHitOneMore")) {
         const hp = actor.attributes.hp;
-        if (!hp || !hp.value) return false;
-        const reverse = game.messages.contents.slice(Math.min(10, game.messages.size - 1)).reverse();
-        const chatMessage = reverse
-            .filter((message) => message.target?.actor === actor)
-            .filter((message) => {
-                return message.actor?.isEnemyOf(<ActorPF2e>message.target?.actor);
-            })
-            .filter((message) => message.type === CONST.CHAT_MESSAGE_TYPES.ROLL)
+        if (hp === undefined || hp.value === undefined) {
+            return false;
+        }
+        const reverse = game.messages.contents.slice(-Math.min(10, game.messages.size)).reverse();
+        const rightActor = reverse.filter((message) => message.target?.actor.id === actor.id);
+        const isEnemy = rightActor.filter((message) => {
+            return message.actor?.isEnemyOf(<ActorPF2e>message.target?.actor);
+        });
+        const isRoll = isEnemy.filter((message) => message.type === CONST.CHAT_MESSAGE_TYPES.ROLL);
+        const isAttack = isRoll
             // @ts-ignore
-            .filter((message) => message.flags.pf2e.context?.sourceType === "attack")
+            .filter((message) => message.flags.pf2e.context?.sourceType === "attack");
+        const isDamageRoll = isAttack
             // @ts-ignore
-            .filter((message) => message.flags.pf2e.context?.type === "damage-roll")
+            .filter((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const isDamaging = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
+        const greaterThanHP = isDamaging.filter((message) => message.rolls?.[0]?.total >= hp.value);
+
+        // const greaterThanHp = isCritSuccess
+        //     // .filter((message) => {
+        //     //     if (game.modules.get("pf2e-target-damage")?.active) {
+        //     //         const filter6 = (<any[]>message.flags["pf2e-target-damage"]?.targets || []).filter(
+        //     //             (target) => target?.actorId === actor.id
+        //     //         );
+        //     //         const b = filter6.find((target) => target?.applied?.length === 0)?.length > 0;
+        //     //         return b;
+        //     //     }
+        //     //     return true;
+        //     // })
+        //     ;
+        // const chatMessage = greaterThanHp;
+        // return !!chatMessage;
+
+        greaterThanHP.forEach((message) => {
             // @ts-ignore
-            .filter((message) => message.flags.pf2e.context?.outcome === "criticalSuccess")
-            .filter((message) => message.flags.pf2e.strike?.damaging)
-            .filter((message) => {
-                if (game.modules.get("pf2e-target-damage")?.active) {
-                    return (
-                        (<any[]>message.flags["pf2e-target-damage"]?.targets || [])
-                            .filter((target) => target?.actorId === actor.id)
-                            .find((target) => target?.applied?.length === 0)?.length > 0
-                    );
-                }
-                return true;
-            })
-            .find((message) => message.rolls?.[0]?.total >= hp.value);
-        return !!chatMessage;
+            isCriticalSuccess = message.flags.pf2e.context?.outcome === "criticalSuccess";
+        });
     }
-    return false;
+    return isCriticalSuccess;
 }
 
 export async function increaseDyingOnZeroHP(
@@ -82,7 +93,7 @@ export async function increaseDyingOnZeroHP(
         let dyingCounter = 0;
         let hpNowAboveZero = false;
         const effectsToCreate: any[] = [];
-        const wasCritical = checkIfCriticalHitDamageMessageExists(actor);
+        const wasCritical = checkIfLatestDamageMessageIsCriticalSuccess(actor);
 
         if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
             setProperty(update, "system.attributes.hp.value", 1);
@@ -184,6 +195,7 @@ export async function increaseDyingOnZeroHP(
         }
         if (dyingCounter > 0) {
             actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
+            actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
         }
         return hpNowAboveZero;
     }
