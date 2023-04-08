@@ -25,12 +25,13 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
           Champion' could become 'Jack the Mindless Undead Skeleton 23'. Note that player owned tokens will not be
           mystified.
     * Option to use the mystified name in chat messages created from that npc (actions/spells). Relies on the original
-      actor name being present in the text.
+      actor name being present in the text. Only works if the original npc name is actually used and correctly spelled
+      in the message.
 
 * Reminder section
     * Option to remind when attack is made by a token that probably can't attack (due to being unconscious / dead /
       defeated / has no hp / etc).
-        * Option to allow Eidolons to attack even if they have 0 hp.
+        * Supoption to allow Eidolons to attack even if they have 0 hp.
     * Option to remind when an attack is made without targeting.
     * Option to show reminder each turn that the number of actions is other than three. Handles Quickened, Slowed and
       Stunned.
@@ -47,9 +48,10 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to add a creature builder button to npc character sheets, enabling building from scratch using the
       suggested values from the GMG (This feature has been taken over from the
       delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox#creature-builder module. Thanks DJ!)
+        * **NOTE: This feature is currently broken due to a change in the system.**
     * Option to add an npc scaler feature when right clicking on an npc (This feature has been taken over from the
-      delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox#npc-scaler module. Thanks DJ! At some point Avery will have the
-      time to add it to the system, until then I'll maintain it.)
+      delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox#npc-scaler module. Thanks DJ! At some point Avery will
+      have the time to add it to the system, until then I'll maintain it.)
     * Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc
       using the suggested values from the GMG (This feature has been taken over from the
       delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox#quick-roller module. Thanks DJ!)
@@ -60,13 +62,13 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       optional trait list, unless you hold CTRL+SHIFT to entirely skip this message.
     * Option to add a button to all npcs that sends the relevant Recall Knowledge checks to chat (for skills only, lores
       not handled yet).
-        * Options to hide the npc token name and/or the skill name on the chat card.
-        * Option to show spell traits in the chat card.
+        * Suboptions to hide the npc token name and/or the skill name on the chat card.
+        * Suboption to show spell traits in the chat card.
     * Option to alter the token animation speed. (Not compatible with Multi Level Tokens teleport functionality.)
 
 * World Automation section
     * Option to automatically move combatant that goes to 0 hp to just before the current combatant. (Normally due to
-      the current combatant just having downed the target combatant.) **NOTE: Buggy for some people. If actors start moving around in iniative for no good reason, you're one of the 'lucky' ones that get this problem and should disable it until I manage to fix it.**
+      the current combatant just having downed the target combatant.)
     * Enable/disable the option to autoroll damage on a hit.
     * Enable/disable the option to automatically apply persistent healing.
     * Option to apply Encumbered condition automatically based on current bulk when bulk changes. Note: Uses the system
@@ -84,6 +86,9 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       , [Incredible Ferocity](https://2e.aonprd.com/Feats.aspx?ID=90)
       , [Rampaging Ferocity](https://2e.aonprd.com/Feats.aspx?ID=1294) and partial handling
       of [Deliberate Death](https://2e.aonprd.com/Feats.aspx?ID=2355))
+        * Suboption to increase dying by one more when damaged by an enemy's targeted critical attack.
+        * Suboption to increase dying when taking damage while already dying (does not know about
+          immunities/weaknesses/resistance, so taking 0 damage will trigger it).
     * Option to automatically remove Dying when healed to above 0 hp.
 
 * Client Automation section
@@ -97,9 +102,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Non-attack spells that deal damage (rolled when spell is cast, before saves, so targets need to manually apply
           the correct amount of damage based on save.) On a critical success it rolls normal damage, use the 'double
           damage' button on the damage card.
-    * Optional settings to (if the GM allows it) automatically applying persistent damage (from the
-      awesome [Persistent Damage module](https://github.com/CarlosFdez/pf2e-persistent-damage)) as well as the PF2e
-      system's fast healing and regeneration (with an optional extra debug chat message) inspired by @Jamz' code.
+    * Optional settings to (if the GM allows it) automatically applying persistent damage, fast healing and
+      regeneration (with an optional extra debug chat message), inspired by @Jamz' code.
     * Option to automatically reduce the Frightened condition at the end of each turn. See the included effect 'Effect:
       Dirge of Doom' for how to set a minimum frightened level that the module won't reduce below.
 
@@ -269,7 +273,8 @@ Asset licenses:
 * The cover image is modified by me
   from [Picture taken at a garage exhibit at LACMA.](https://unsplash.com/photos/1UimDTf69ho)
   by [Elmer Mercanas](https://unsplash.com/@elmercanasjr) under the [Unsplash License](https://unsplash.com/license)
-* The icon for Basic Action Macros was made by Oskar and popy and is available under the [CC0 license](https://creativecommons.org/share-your-work/public-domain/cc0/)
+* The icon for Basic Action Macros was made by Oskar and popy and is available under
+  the [CC0 license](https://creativecommons.org/share-your-work/public-domain/cc0/)
 
 build-packs license:
 
