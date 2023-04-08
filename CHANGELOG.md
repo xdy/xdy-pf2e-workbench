@@ -1,3 +1,10 @@
+## [4.59.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.2...v4.59.3) (2023-04-08)
+
+
+### Bug Fixes
+
+* Various edge (and not so edge) cases around automatic gain of dying. No integration with pf2e-target-damage for now. ([a06143c](https://github.com/xdy/xdy-pf2e-workbench/commit/a06143cb4f2bde818aa456fed1b1bfb662b524f2))
+
 ## [4.59.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.1...v4.59.2) (2023-04-08)
 
 
