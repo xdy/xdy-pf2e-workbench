@@ -274,6 +274,10 @@
         "no": "No",
         "orcFerocityMessage": "{name} has just used @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] and can now use the free action:@UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]"
       },
+      "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
+        "hint": "If critically hit by a targeted damaging attack from an enemy actor, add one more level of Dying. Ignores damage rolls that pf2e-target-damage has marked as already applied",
+        "name": "Add one more dying if critically hit by an enemy."
+      },
       "automationClientSettings": {
         "hint": "Enable and configure automation for players",
         "label": "Manage Client Automation Settings",

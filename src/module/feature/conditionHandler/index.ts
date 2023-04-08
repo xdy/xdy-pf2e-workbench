@@ -27,6 +27,40 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
     }
 }
 
+function checkIfCritical(actor: ActorPF2e): boolean {
+    if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHPIfCriticallyHitOneMore")) {
+        const hp = actor.attributes.hp;
+        if (!hp || !hp.value) return false;
+        const reverse = game.messages.contents.slice(Math.min(10, game.messages.size - 1)).reverse();
+        const chatMessage = reverse
+            .filter((message) => message.target?.actor === actor)
+            .filter((message) => {
+                return message.actor?.isEnemyOf(<ActorPF2e>message.target?.actor);
+            })
+            .filter((message) => message.type === CONST.CHAT_MESSAGE_TYPES.ROLL)
+            // @ts-ignore
+            .filter((message) => message.flags.pf2e.context?.sourceType === "attack")
+            // @ts-ignore
+            .filter((message) => message.flags.pf2e.context?.type === "damage-roll")
+            // @ts-ignore
+            .filter((message) => message.flags.pf2e.context?.outcome === "criticalSuccess")
+            .filter((message) => message.flags.pf2e.strike?.damaging)
+            .filter((message) => {
+                if (game.modules.get("pf2e-target-damage")?.active) {
+                    return (
+                        (<any[]>message.flags["pf2e-target-damage"]?.targets || [])
+                            .filter((target) => target?.actorId === actor.id)
+                            .find((target) => target?.applied?.length === 0)?.length > 0
+                    );
+                }
+                return true;
+            })
+            .find((message) => message.rolls?.[0]?.total >= hp.value);
+        return !!chatMessage;
+    }
+    return false;
+}
+
 export async function increaseDyingOnZeroHP(
     actor: ActorPF2e,
     update: Record<string, string>,
@@ -48,6 +82,7 @@ export async function increaseDyingOnZeroHP(
         let dyingCounter = 0;
         let hpNowAboveZero = false;
         const effectsToCreate: any[] = [];
+        const wasCritical = checkIfCritical(actor);
 
         if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
             setProperty(update, "system.attributes.hp.value", 1);
@@ -134,6 +169,9 @@ export async function increaseDyingOnZeroHP(
             } else {
                 dyingCounter = 1;
             }
+        }
+        if (wasCritical) {
+            dyingCounter = dyingCounter + 1;
         }
         if (hpNowAboveZero) {
             actor.update(update).then();
