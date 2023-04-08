@@ -16,7 +16,7 @@ import {
     reminderCannotAttack,
     reminderTargeting,
 } from "./feature/reminders";
-import { isActuallyDamageRoll } from "./utils";
+import { isActuallyDamageRoll, shouldIHandleThis } from "./utils";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
 import { mangleNamesInChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
 import { ItemPF2e } from "@item";
@@ -83,25 +83,27 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
     }
 
     if (game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")) {
-        const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
         const actor = message.actor;
-        const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
-        let dyingCounter = originalDyingCounter;
-        if (actor && option !== "no" && dyingCounter > 0) {
-            const wasCritical = checkIfCriticalHitDamageMessageExists(actor);
+        if (shouldIHandleThis(actor)) {
+            const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
+            const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
+            let dyingCounter = originalDyingCounter;
+            if (actor && option !== "no" && dyingCounter > 0) {
+                const wasCritical = checkIfCriticalHitDamageMessageExists(actor);
 
-            if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
-                if (option?.startsWith("addWoundedLevel")) {
-                    dyingCounter = dyingCounter + (actor.getCondition("wounded")?.value ?? 0) + 1;
-                } else {
+                if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
+                    if (option?.startsWith("addWoundedLevel")) {
+                        dyingCounter = dyingCounter + (actor.getCondition("wounded")?.value ?? 0) + 1;
+                    } else {
+                        dyingCounter = dyingCounter + 1;
+                    }
+                }
+                if (wasCritical) {
                     dyingCounter = dyingCounter + 1;
                 }
-            }
-            if (wasCritical) {
-                dyingCounter = dyingCounter + 1;
-            }
-            if (dyingCounter > originalDyingCounter) {
-                actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
+                if (dyingCounter > originalDyingCounter) {
+                    actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
+                }
             }
         }
     }
