@@ -1,3 +1,10 @@
+## [4.59.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.0...v4.59.1) (2023-04-08)
+
+
+### Bug Fixes
+
+* Hopefully fixes updating foundry admin after switch from webpack to vite. ([e396d97](https://github.com/xdy/xdy-pf2e-workbench/commit/e396d9754812f81f6fd2cd260c3032d497a62992))
+
 # [4.59.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.5...v4.59.0) (2023-04-08)
 
 
