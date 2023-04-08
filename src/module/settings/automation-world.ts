@@ -134,6 +134,14 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: false,
                 type: Boolean,
             },
+            autoGainDyingIfTakingDamageWhenAlreadyDying: {
+                name: `${MODULENAME}.SETTINGS.autoGainDyingIfTakingDamageWhenAlreadyDying.name`,
+                hint: `${MODULENAME}.SETTINGS.autoGainDyingIfTakingDamageWhenAlreadyDying.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+            },
             autoRemoveDyingAtGreaterThanZeroHP: {
                 name: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.name`,
                 hint: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.hint`,

@@ -27,7 +27,7 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
     }
 }
 
-function checkIfCritical(actor: ActorPF2e): boolean {
+export function checkIfCriticalHitDamageMessageExists(actor: ActorPF2e): boolean {
     if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHPIfCriticallyHitOneMore")) {
         const hp = actor.attributes.hp;
         if (!hp || !hp.value) return false;
@@ -82,7 +82,7 @@ export async function increaseDyingOnZeroHP(
         let dyingCounter = 0;
         let hpNowAboveZero = false;
         const effectsToCreate: any[] = [];
-        const wasCritical = checkIfCritical(actor);
+        const wasCritical = checkIfCriticalHitDamageMessageExists(actor);
 
         if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
             setProperty(update, "system.attributes.hp.value", 1);

@@ -24,6 +24,7 @@ import {
     applyEncumbranceBasedOnBulk,
     autoRemoveDyingAtGreaterThanZeroHp,
     autoRemoveUnconsciousAtGreaterThanZeroHP,
+    checkIfCriticalHitDamageMessageExists,
     giveUnconsciousIfDyingRemovedAt0HP,
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
@@ -78,6 +79,30 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
 
         if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
             reminderBreathWeapon(message).then();
+        }
+    }
+
+    if (game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")) {
+        const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
+        const actor = message.actor;
+        const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
+        let dyingCounter = originalDyingCounter;
+        if (actor && option !== "no" && dyingCounter > 0) {
+            const wasCritical = checkIfCriticalHitDamageMessageExists(actor);
+
+            if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
+                if (option?.startsWith("addWoundedLevel")) {
+                    dyingCounter = dyingCounter + (actor.getCondition("wounded")?.value ?? 0) + 1;
+                } else {
+                    dyingCounter = dyingCounter + 1;
+                }
+            }
+            if (wasCritical) {
+                dyingCounter = dyingCounter + 1;
+            }
+            if (dyingCounter > originalDyingCounter) {
+                actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
+            }
         }
     }
 }

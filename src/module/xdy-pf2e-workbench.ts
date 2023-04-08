@@ -104,7 +104,8 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "automatedAnimationOn") ||
             gs.get(MODULENAME, "reminderBreathWeapon") ||
             gs.get(MODULENAME, "reminderTargeting") ||
-            gs.get(MODULENAME, "reminderCannotAttack"),
+            gs.get(MODULENAME, "reminderCannotAttack") ||
+            gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
         createChatMessageHook
     );
 
