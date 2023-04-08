@@ -1,3 +1,10 @@
+## [4.59.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.3...v4.59.4) (2023-04-08)
+
+
+### Bug Fixes
+
+* Potential (if not very good) fix for dying sometimes doubling if all the dying options are on. ([5058dd3](https://github.com/xdy/xdy-pf2e-workbench/commit/5058dd3a754ac72bbe18f73edaa7f50c87ec4e12))
+
 ## [4.59.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.2...v4.59.3) (2023-04-08)
 
 
