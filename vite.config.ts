@@ -52,7 +52,7 @@ const config = Vite.defineConfig(({ mode }): Vite.UserConfig => {
         build: {
             outDir,
             emptyOutDir: true,
-            minify: buildMode === "development",
+            minify: buildMode !== "development",
             sourcemap: buildMode === "development" ? "inline" : false,
             lib: {
                 name: "main",
