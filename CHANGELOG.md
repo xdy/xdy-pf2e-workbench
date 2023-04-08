@@ -1,3 +1,16 @@
+# [4.59.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.5...v4.59.0) (2023-04-08)
+
+
+### Bug Fixes
+
+* Hopefully fixes release script after switch from webpack to vite. ([3006ed1](https://github.com/xdy/xdy-pf2e-workbench/commit/3006ed109438a706d559ca75abd9653d63e10d7f))
+
+
+### Features
+
+* Adds a subsetting which, if the option to automatically add dying is also enabled, for an actor that is brought to 0 hp by damage from a targeted critically successful attack by an enemy, the dying level will be increased by one more than if not. (As long as that attack was within the last ten messages in the chat at the time the damage was applied, and, if pf2e-target-damage is installed, that damage roll has not already been used for that target.) ([d6a2e26](https://github.com/xdy/xdy-pf2e-workbench/commit/d6a2e263cf63025856029329c9c89d7ecc62c6e9)), closes [#615](https://github.com/xdy/xdy-pf2e-workbench/issues/615)
+* Adds a subsetting which, if the option to automatically add dying is also enabled, for an actor that takes damage when already dying, add another one or two levels of dying. NOTE that this implementation does *not* know about immunities and resistances. Even 0 damage will add a level of Dying. ([c2ccaff](https://github.com/xdy/xdy-pf2e-workbench/commit/c2ccaff148b84e301e8d18f097e5445592b00bcd))
+
 ## [4.58.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.58.4...v4.58.5) (2023-04-06)
 
 
