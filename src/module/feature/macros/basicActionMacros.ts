@@ -9,6 +9,7 @@ import { ActorPF2e } from "@actor";
 import { Variant } from "../skill-actions/variants";
 import { CharacterSkill } from "@actor/character/types";
 import { ModifierPF2e } from "../skill-actions/pf2e";
+import { Action } from "@actor/actions";
 
 let selectedActor;
 
@@ -112,10 +113,11 @@ type MacroAction = {
     skill: string;
     name: string;
     icon: string;
-    action: string | Function | string[];
+    action: string | Function | string[] | Action;
     showMAP?: boolean;
     extra?: string;
     actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
+    replacedWith?: string;
 };
 
 export function basicActionMacros() {
@@ -125,7 +127,7 @@ export function basicActionMacros() {
      * If there is no user character, it shows up a warning notification.
      */
 
-    const actionList: MacroAction[] = [
+    const originalActionList: MacroAction[] = [
         {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStabilize`),
@@ -312,6 +314,7 @@ export function basicActionMacros() {
             showMAP: true,
         },
         {
+            replacedWith: "hide",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Hide`),
             skill: "Stealth",
@@ -440,6 +443,7 @@ export function basicActionMacros() {
             showMAP: true,
         },
         {
+            replacedWith: "sneak",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Sneak`),
             skill: "Stealth",
@@ -520,6 +524,7 @@ export function basicActionMacros() {
             icon: "icons/magic/nature/root-vine-caduceus-healing.webp",
         },
         {
+            replacedWith: "trip",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Trip`),
             skill: "Athletics",
@@ -536,8 +541,31 @@ export function basicActionMacros() {
         },
     ];
 
+    let oldActionList = originalActionList.filter((x) => !x.replacedWith);
+    // @ts-ignore
+    const newActionList: any[] = Array.from(game.pf2e.actions).filter((x) =>
+        originalActionList.find((y) => y.replacedWith === x[0])
+    );
+
+    const actionList: MacroAction[] = newActionList.map((x) => {
+        // TODO Handle variants
+        return {
+            actionType: "other",
+            name: game.i18n.localize(x[1].name),
+            skill: x[1].statistic.charAt(0).toUpperCase() + x[1].statistic.slice(1),
+            icon:
+                x[1].img ??
+                originalActionList.find((y) => y.replacedWith === x[0])?.icon ??
+                "icons/skills/movement/feet-winged-sandals-tan.webp", // TODO
+            showMAP: x[1].traits?.includes("map") ?? false,
+            action: x[1],
+        };
+    });
+    console.log(actionList);
+    oldActionList = oldActionList.concat(actionList);
+
     // Sort actionList
-    actionList.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
+    oldActionList.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
     // @ts-ignore
     const actionDialog = window.actionDialog;
@@ -564,17 +592,17 @@ export function basicActionMacros() {
 
     if (partyIds.includes(selectedActor.id)) {
         const partySkills = createMapOfSkillsPerActor(party);
-        getBestBonuses(partySkills, partyIds, actionList);
+        getBestBonuses(partySkills, partyIds, oldActionList);
     }
 
-    const columns = 1 + ~~((actionList.length - 1) / 14);
+    const columns = 1 + ~~((oldActionList.length - 1) / 14);
     const width = 264 * columns;
     const height =
         30 +
         ~~(
-            (32 * actionList.filter((x) => !x.showMAP).length +
+            (32 * oldActionList.filter((x) => !x.showMAP).length +
                 1 +
-                (64 * actionList.filter((x) => x.showMAP).length + 1)) /
+                (64 * oldActionList.filter((x) => x.showMAP).length + 1)) /
             columns
         );
     const content = `
@@ -639,7 +667,7 @@ export function basicActionMacros() {
 }
 </style>
 <div class="action-list">
-${actionList
+${oldActionList
     .map((action, idx) => createButton(action, idx, selectedActor, partyIds, actorSkills.get(selectedActor.id)))
     .join("")}
 </div>
@@ -660,7 +688,7 @@ ${actionList
             default: "close",
             render: (html) => {
                 const action = (button, event) => {
-                    const action = actionList[button.dataset.action];
+                    const action = oldActionList[button.dataset.action];
                     const current = action.action;
                     if (typeof current === "string") {
                         if (!current.includes("(")) {
@@ -701,6 +729,9 @@ ${actionList
                                 })
                             );
                         }
+                    } else if (typeof current === "object") {
+                        // TODO Handle variants
+                        current.use();
                     } else {
                         const skills = getSkills(action.skill);
                         const variant =
