@@ -561,7 +561,6 @@ export function basicActionMacros() {
             action: x[1],
         };
     });
-    console.log(actionList);
     oldActionList = oldActionList.concat(actionList);
 
     // Sort actionList

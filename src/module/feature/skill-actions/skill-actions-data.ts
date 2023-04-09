@@ -29,6 +29,7 @@ export interface SkillActionData {
     variants: VariantData[];
     // Actor. TODO Not sure why this is stored here, but it is used in skill-actions.ts
     actor: CharacterPF2e;
+    replacedWith?: string;
 }
 
 export type SkillActionDataParameters = PartialBy<
@@ -284,6 +285,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         compendiumId: "XMcnh4cSI32tljXa",
         icon: "zealous-conviction",
         variants: [{ proficiencyKey: "stealth" }],
+        replacedWith: "hide",
     },
     {
         actionSlug: "high-jump",
@@ -509,6 +511,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         compendiumId: "VMozDqMMuK5kpoX4",
         icon: "invisibility",
         variants: [{ proficiencyKey: "stealth" }],
+        replacedWith: "sneak",
     },
     {
         actionSlug: "squeeze",
@@ -599,6 +602,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         compendiumId: "ge56Lu1xXVFYUnLP",
         icon: "natures-enmity",
         variants: [{ proficiencyKey: "athletics" }],
+        replacedWith: "trip",
     },
     {
         actionSlug: "tumble-through",

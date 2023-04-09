@@ -117,6 +117,22 @@ export class SkillAction {
             await this.toChat(variant.assuranceTotal);
         } else {
             const rollAction = game.pf2e.actions[<string>this.key];
+
+            // @ts-ignore
+            if (Array.from(game.pf2e.actions).filter((x) => x[0] === <string>this.key)) {
+                const action = game.pf2e.actions[<string>this.key];
+                if (action) {
+                    action({
+                        event,
+                        modifiers: variant.modifiers,
+                        actors: [this.actor],
+                        ...variant.extra,
+                        skill: variant.skill.slug,
+                    });
+                }
+                return;
+            }
+
             if (rollAction) {
                 if (!["earnIncome", "escape"].includes(<string>this.key)) {
                     rollAction({
@@ -276,7 +292,30 @@ export class SkillAction {
 
 export class SkillActionCollection extends Collection<SkillAction> {
     static allActionsFor(actor): SkillAction[] {
-        return deepClone(SKILL_ACTIONS_DATA).map((row) => {
+        const allActions = deepClone(SKILL_ACTIONS_DATA);
+        const actions = allActions.filter((x) => !x.replacedWith);
+
+        // @ts-ignore
+        const newActionList: any[] = Array.from(game.pf2e.actions).filter((x) =>
+            allActions.find((y) => y.replacedWith === x[0])
+        );
+
+        const actionList = newActionList.map((x) => {
+            return {
+                actionSlug: x[0],
+                icon:
+                    x[1].img ??
+                    allActions.find((y) => y.replacedWith === x[0])?.icon ??
+                    "systems/pf2e/icons/default-icons/mystery-man.webp",
+                variants: [{ proficiencyKey: x[1].statistic }], // TODO Handle variants in the action
+                actionType: <ActionType>(x[1].cost === 1 ? "A" : "D"), // TODO Handle all action costs
+            };
+        });
+
+        actions.push(...actionList);
+        actions.sort((a, b) => a.actionSlug.localeCompare(b.actionSlug, game.i18n.lang));
+
+        return actions.map((row) => {
             return new SkillAction({ ...row, actor: actor });
         });
     }
