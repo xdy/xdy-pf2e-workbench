@@ -328,7 +328,7 @@
         "name": "呼出快捷键页码{page}上第{column}个宏"
       },
       "castPrivateSpell": {
-        "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息。",
+        "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息。请注意，目前此特性无法与Polyglot共存。（已向Polyglot提交PR以修正bug）",
         "name": "Ctrl+单击秘密施法。",
         "aSpell": "法术"
       },
@@ -528,6 +528,14 @@
       "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
         "hint": "仅在物品不低于此稀有度时将其神秘化。",
         "name": "仅在物品不低于此稀有度时将其神秘化。"
+      },
+      "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
+        "name": "... 如果敌人造成重击伤害，濒死值额外增加1点。",
+        "hint": "(实验性) 如果被敌人角色选为目标并重击，濒死值额外增加1点。使用上方下拉列表中的设置。"
+      },
+      "autoGainDyingIfTakingDamageWhenAlreadyDying": {
+        "name": "... 如果在濒死状态下承受伤害，濒死值额外增加1点（重击时为2点）。",
+        "hint": "(实验性) 如果在已有濒死状态的情况下受到伤害，濒死值增加1点（若启用重击时额外增加濒死值，则为2点）。使用上方下拉列表中的设置。"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
