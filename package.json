@@ -65,7 +65,7 @@
     "fs-extra": "^11.1.1",
     "glob": "^9.3.4",
     "handlebars": "4.7.7",
-    "lint-staged": "^13.2.0",
+    "lint-staged": "^13.2.1",
     "mini-css-extract-plugin": "^2.7.5",
     "null-loader": "^4.0.1",
     "pixi-particles": "^4.3.1",
