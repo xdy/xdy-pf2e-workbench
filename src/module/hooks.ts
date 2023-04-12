@@ -87,9 +87,9 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
         if (actor && shouldIHandleThis(actor)) {
             const now = Date.now();
             const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
-            // Ignore this if it occurs within a second of the last time we applied dying
+            // Ignore this if it occurs within two seconds of the last time we applied dying
             // @ts-ignore
-            if (!flag?.between(now - 1000, now)) {
+            if (!flag?.between(now - 2000, now)) {
                 const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
                 const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
                 let dyingCounter = originalDyingCounter;
