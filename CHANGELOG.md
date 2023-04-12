@@ -1,3 +1,10 @@
+## [4.59.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.4...v4.59.5) (2023-04-12)
+
+
+### Bug Fixes
+
+* Debounce updating hooks. ([b94b569](https://github.com/xdy/xdy-pf2e-workbench/commit/b94b569865e111c09c24c88060f12ce69019633d))
+
 ## [4.59.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.3...v4.59.4) (2023-04-08)
 
 
