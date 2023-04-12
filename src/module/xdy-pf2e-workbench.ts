@@ -81,111 +81,128 @@ function handle(hookName, shouldBeOn, hookFunction) {
     }
 }
 
+let waiting = false;
+
 export function updateHooks(cleanSlate = false) {
-    if (phase > Phase.SETUP && game.user.isGM) {
-        game.socket.emit("module.xdy-pf2e-workbench", { operation: "updateHooks" });
+    function debounce(delay, func) {
+        return function (...args) {
+            if (!waiting) {
+                waiting = true;
+                setTimeout(() => {
+                    // eslint-disable-next-line prefer-spread
+                    func.apply(null, args);
+                    waiting = false;
+                }, delay);
+            }
+        };
     }
-    if (cleanSlate) {
-        activeHooks.clear();
-    }
 
-    const gs = game.settings;
-    handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
-    handle("renderJournalDirectory", gs.get(MODULENAME, "npcRoller"), enableNpcRollerButton);
+    debounce(1000, () => {
+        if (phase > Phase.SETUP && game.user.isGM) {
+            game.socket.emit("module.xdy-pf2e-workbench", { operation: "updateHooks" });
+        }
+        if (cleanSlate) {
+            activeHooks.clear();
+        }
 
-    handle("preCreateChatMessage", gs.get(MODULENAME, "castPrivateSpell"), preCreateChatMessageHook);
+        const gs = game.settings;
+        handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
+        handle("renderJournalDirectory", gs.get(MODULENAME, "npcRoller"), enableNpcRollerButton);
 
-    handle(
-        "createChatMessage",
-        gs.get(MODULENAME, "autoRollDamageAllow") ||
-            gs.get(MODULENAME, "autoRollDamageForStrike") ||
-            gs.get(MODULENAME, "autoRollDamageForSpellAttack") ||
-            gs.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
-            gs.get(MODULENAME, "automatedAnimationOn") ||
-            gs.get(MODULENAME, "reminderBreathWeapon") ||
-            gs.get(MODULENAME, "reminderTargeting") ||
-            gs.get(MODULENAME, "reminderCannotAttack") ||
-            gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
-        createChatMessageHook
-    );
+        handle("preCreateChatMessage", gs.get(MODULENAME, "castPrivateSpell"), preCreateChatMessageHook);
 
-    handle(
-        "renderChatMessage",
-        game.settings.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault" ||
-            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
-            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
-            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
-            gs.get(MODULENAME, "applyPersistentHealing") ||
-            gs.get(MODULENAME, "applyPersistentDamage") ||
-            (gs.get(MODULENAME, "npcMystifier") && gs.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")),
-        renderChatMessageHook
-    );
+        handle(
+            "createChatMessage",
+            gs.get(MODULENAME, "autoRollDamageAllow") ||
+                gs.get(MODULENAME, "autoRollDamageForStrike") ||
+                gs.get(MODULENAME, "autoRollDamageForSpellAttack") ||
+                gs.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
+                gs.get(MODULENAME, "automatedAnimationOn") ||
+                gs.get(MODULENAME, "reminderBreathWeapon") ||
+                gs.get(MODULENAME, "reminderTargeting") ||
+                gs.get(MODULENAME, "reminderCannotAttack") ||
+                gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
+            createChatMessageHook
+        );
 
-    handle("createItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), createItemHook);
+        handle(
+            "renderChatMessage",
+            game.settings.get(MODULENAME, "castPrivateSpell") ||
+                gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+                gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
+                gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
+                gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault" ||
+                gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
+                gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault" ||
+                gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
+                gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
+                gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
+                gs.get(MODULENAME, "applyPersistentHealing") ||
+                gs.get(MODULENAME, "applyPersistentDamage") ||
+                (gs.get(MODULENAME, "npcMystifier") && gs.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")),
+            renderChatMessageHook
+        );
 
-    handle("updateItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), updateItemHook);
+        handle("createItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), createItemHook);
 
-    handle(
-        "deleteItem",
-        gs.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
-            gs.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
-            gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP"),
-        deleteItemHook
-    );
+        handle("updateItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), updateItemHook);
 
-    handle("pf2e.endTurn", gs.get(MODULENAME, "decreaseFrightenedConditionEachTurn"), pf2eEndTurnHook);
+        handle(
+            "deleteItem",
+            gs.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
+                gs.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
+                gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP"),
+            deleteItemHook
+        );
 
-    handle(
-        "pf2e.startTurn",
-        gs.get(MODULENAME, "actionsReminderAllow") !== "none" || gs.get(MODULENAME, "autoReduceStunned"),
-        pf2eStartTurnHook
-    );
+        handle("pf2e.endTurn", gs.get(MODULENAME, "decreaseFrightenedConditionEachTurn"), pf2eEndTurnHook);
 
-    handle("renderTokenHUD", gs.get(MODULENAME, "npcMystifier"), renderTokenHUDHook);
+        handle(
+            "pf2e.startTurn",
+            gs.get(MODULENAME, "actionsReminderAllow") !== "none" || gs.get(MODULENAME, "autoReduceStunned"),
+            pf2eStartTurnHook
+        );
 
-    handle("renderCharacterSheetPF2e", gs.get(MODULENAME, "maxHeroPoints") !== 3, renderCharacterSheetPF2eHook);
+        handle("renderTokenHUD", gs.get(MODULENAME, "npcMystifier"), renderTokenHUDHook);
 
-    handle(
-        "preUpdateActor",
-        (<string>gs.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
-            gs.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
-            gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none" ||
-            gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
-            (gs.get("pf2e", "automation.lootableNPCs") &&
-                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
-        preUpdateActorHook
-    );
+        handle("renderCharacterSheetPF2e", gs.get(MODULENAME, "maxHeroPoints") !== 3, renderCharacterSheetPF2eHook);
 
-    handle("preUpdateToken", gs.get(MODULENAME, "tokenAnimation"), preUpdateTokenHook);
+        handle(
+            "preUpdateActor",
+            (<string>gs.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
+                gs.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
+                gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none" ||
+                gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
+                (gs.get("pf2e", "automation.lootableNPCs") &&
+                    gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
+            preUpdateActorHook
+        );
 
-    handle(
-        "createToken",
-        gs.get(MODULENAME, "npcMystifier") ||
-            (gs.get("pf2e", "automation.lootableNPCs") &&
-                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
-        createTokenHook
-    );
+        handle("preUpdateToken", gs.get(MODULENAME, "tokenAnimation"), preUpdateTokenHook);
 
-    handle(
-        "renderActorSheet",
-        gs.get(MODULENAME, "playerFeatsRarityColour") ||
-            gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
-            gs.get(MODULENAME, "playerSpellsRarityColour") ||
-            gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "addGmRKButtonToNpc") ||
-            gs.get(MODULENAME, "quickQuantities") ||
-            gs.get(MODULENAME, "skillActions") !== "disabled" ||
-            gs.get(MODULENAME, "creatureBuilder"),
-        renderActorSheetHook
-    );
+        handle(
+            "createToken",
+            gs.get(MODULENAME, "npcMystifier") ||
+                (gs.get("pf2e", "automation.lootableNPCs") &&
+                    gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
+            createTokenHook
+        );
 
-    changePauseText();
+        handle(
+            "renderActorSheet",
+            gs.get(MODULENAME, "playerFeatsRarityColour") ||
+                gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
+                gs.get(MODULENAME, "playerSpellsRarityColour") ||
+                gs.get(MODULENAME, "castPrivateSpell") ||
+                gs.get(MODULENAME, "addGmRKButtonToNpc") ||
+                gs.get(MODULENAME, "quickQuantities") ||
+                gs.get(MODULENAME, "skillActions") !== "disabled" ||
+                gs.get(MODULENAME, "creatureBuilder"),
+            renderActorSheetHook
+        );
+
+        changePauseText();
+    })();
 }
 
 // Initialize module
