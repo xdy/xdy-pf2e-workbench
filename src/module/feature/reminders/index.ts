@@ -124,6 +124,7 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
         message.actor &&
         shouldIHandleThis(message.actor) &&
         message.flags &&
+        game.combats.active &&
         message.user &&
         ["spell-attack-roll", "attack-roll"].includes(<string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type)
     ) {
@@ -138,7 +139,7 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.dead`);
             } else if ((actor?.hitPoints?.value ?? 0) <= 0 && !ignoreDeadEidolon(actor)) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.hasNoHp`);
-            } else if (game.combats.active?.combatant?.token === token && game.combats.active?.combatant?.defeated) {
+            } else if (game.combats.active?.combatant?.token === token && game.combats.active.combatant.defeated) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.defeated`);
             } else if (actor?.hasCondition("unconscious")) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.unconscious`);
