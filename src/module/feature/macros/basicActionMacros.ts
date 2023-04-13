@@ -251,7 +251,7 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Demoralize`),
             skill: "Intimidation",
-            action: game.pf2e.actions.demoralize,
+            action: ["XDY DO_NOT_IMPORT Demoralize", "xdy-pf2e-workbench.asymonous-benefactor-macros-internal"],
             icon: "icons/skills/social/intimidation-impressing.webp",
         },
         {
