@@ -1,3 +1,10 @@
+# [4.61.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.60.0...v4.61.0) (2023-04-13)
+
+
+### Features
+
+* Changes Basic Action Macros to use Darkim's fancy new Demoralize macro when you use Demoralize. ([12d521e](https://github.com/xdy/xdy-pf2e-workbench/commit/12d521eb896412238c7f274cf4b7949eb1536826))
+
 # [4.60.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.5...v4.60.0) (2023-04-13)
 
 
