@@ -1,3 +1,20 @@
+# [4.60.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.5...v4.60.0) (2023-04-13)
+
+
+### Bug Fixes
+
+* Typo in css... ([fdd96e5](https://github.com/xdy/xdy-pf2e-workbench/commit/fdd96e51a948324c7d873dfb8d221acf3e3be103))
+
+
+### Features
+
+* Adds support for macros setting a flag on a chat message that hides that message to those with too low a user role. ([d42fba3](https://github.com/xdy/xdy-pf2e-workbench/commit/d42fba3e33e222c38d79b4b0d942b115ebfe416e))
+
+
+### Reverts
+
+* Revert "fix: Debounce updating hooks." ([cf944bc](https://github.com/xdy/xdy-pf2e-workbench/commit/cf944bc1227e43d82a26318939db804189fe66de))
+
 ## [4.59.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.59.4...v4.59.5) (2023-04-12)
 
 
