@@ -140,3 +140,7 @@
     border-color: #54166e;
     color: #54166e;
 }
+
+.xdy-pf2e-workbench-hide {
+    display: none; !important;
+}

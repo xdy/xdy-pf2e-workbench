@@ -126,6 +126,11 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
     //     hideNameOfPrivateSpell(message, html);
     // }
 
+    const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
+    if (!isNaN(minimumUserRoleFlag) && minimumUserRoleFlag > game.user.role) {
+        html.addClass("xdy-pf2e-workbench-hide");
+    }
+
     if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
         mangleNamesInChatMessage(message, html);
     }

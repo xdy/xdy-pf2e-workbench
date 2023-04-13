@@ -111,19 +111,7 @@ export function updateHooks(cleanSlate = false) {
 
     handle(
         "renderChatMessage",
-        game.settings.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault" ||
-            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
-            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
-            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
-            gs.get(MODULENAME, "applyPersistentHealing") ||
-            gs.get(MODULENAME, "applyPersistentDamage") ||
-            (gs.get(MODULENAME, "npcMystifier") && gs.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")),
+        true, // Due to support for minimumUserRole, this hook is always on
         renderChatMessageHook
     );
 
