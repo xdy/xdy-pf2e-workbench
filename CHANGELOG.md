@@ -1,3 +1,10 @@
+# [4.62.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.61.1...v4.62.0) (2023-04-14)
+
+
+### Features
+
+* Made the options to automatically gain dying all have a dropdown with several choices (none, everyone, characters+familiars). Made the various dying options more independent. Fixed several bugs related to when they should or should not apply dying. ([5662841](https://github.com/xdy/xdy-pf2e-workbench/commit/5662841b78e961170874b5b3be5f3d829f952575))
+
 ## [4.61.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.61.0...v4.61.1) (2023-04-13)
 
 
