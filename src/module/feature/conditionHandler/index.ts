@@ -27,9 +27,13 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
     }
 }
 
-export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e): boolean {
+export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e, option: string): boolean {
     let isCriticalSuccess = false;
-    if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHPIfCriticallyHitOneMore")) {
+    if (
+        !option.startsWith("no") && option.endsWith("ForCharacters")
+            ? ["character", "familiar"].includes(actor.type)
+            : true
+    ) {
         const hp = actor.attributes.hp;
         if (hp === undefined || hp.value === undefined) {
             return false;
@@ -49,25 +53,10 @@ export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e): b
         const isDamaging = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
         const greaterThanHP = isDamaging.filter((message) => message.rolls?.[0]?.total >= hp.value);
 
-        // const greaterThanHp = isCritSuccess
-        //     // .filter((message) => {
-        //     //     if (game.modules.get("pf2e-target-damage")?.active) {
-        //     //         const filter6 = (<any[]>message.flags["pf2e-target-damage"]?.targets || []).filter(
-        //     //             (target) => target?.actorId === actor.id
-        //     //         );
-        //     //         const b = filter6.find((target) => target?.applied?.length === 0)?.length > 0;
-        //     //         return b;
-        //     //     }
-        //     //     return true;
-        //     // })
-        //     ;
-        // const chatMessage = greaterThanHp;
-        // return !!chatMessage;
-
-        greaterThanHP.forEach((message) => {
-            // @ts-ignore
-            isCriticalSuccess = message.flags.pf2e.context?.outcome === "criticalSuccess";
-        });
+        isCriticalSuccess =
+            greaterThanHP && greaterThanHP.length > 0
+                ? greaterThanHP?.[0].flags?.pf2e?.context?.["outcome"] === "criticalSuccess"
+                : false;
     }
     return isCriticalSuccess;
 }
@@ -93,8 +82,7 @@ export async function increaseDyingOnZeroHP(
         let dyingCounter = 0;
         let hpNowAboveZero = false;
         const effectsToCreate: any[] = [];
-        const wasCritical = checkIfLatestDamageMessageIsCriticalSuccess(actor);
-
+        const option = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));
         if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
             setProperty(update, "system.attributes.hp.value", 1);
             if (undyingFerocity) {
@@ -170,7 +158,6 @@ export async function increaseDyingOnZeroHP(
             }).then();
         }
 
-        const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
         if (
             !hpNowAboveZero &&
             (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
@@ -181,7 +168,7 @@ export async function increaseDyingOnZeroHP(
                 dyingCounter = 1;
             }
         }
-        if (wasCritical) {
+        if (checkIfLatestDamageMessageIsCriticalSuccess(actor, option)) {
             dyingCounter = dyingCounter + 1;
         }
         if (hpNowAboveZero) {

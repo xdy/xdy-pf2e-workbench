@@ -142,8 +142,8 @@ export function updateHooks(cleanSlate = false) {
     handle(
         "preUpdateActor",
         (<string>gs.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
-            gs.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none" ||
-            gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none" ||
+            !String(gs.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") ||
+            !String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no") ||
             gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
             (gs.get("pf2e", "automation.lootableNPCs") &&
                 gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),

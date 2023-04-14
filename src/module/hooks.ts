@@ -81,30 +81,26 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
             reminderBreathWeapon(message).then();
         }
     }
-
-    if (game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")) {
+    if (!String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no")) {
         const actor = message.actor;
         if (actor && shouldIHandleThis(actor)) {
             const now = Date.now();
             const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
-            // Ignore this if it occurs within two seconds of the last time we applied dying
+            // Ignore this if it occurs within last few seconds of the last time we applied dying
             // @ts-ignore
             if (!flag?.between(now - 4000, now)) {
-                const option = <string>game.settings.get(MODULENAME, "autoGainDyingAtZeroHP");
+                const option = String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"));
                 const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
                 let dyingCounter = originalDyingCounter;
-                if (option !== "no" && dyingCounter > 0) {
-                    const wasCritical = checkIfLatestDamageMessageIsCriticalSuccess(actor);
+                if (!option.startsWith("no") && dyingCounter > 0) {
+                    const wasCritical = checkIfLatestDamageMessageIsCriticalSuccess(actor, option);
 
                     if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
-                        if (option?.startsWith("addWoundedLevel")) {
-                            dyingCounter = dyingCounter + (actor.getCondition("wounded")?.value ?? 0) + 1;
-                        } else {
+                        dyingCounter = dyingCounter + 1;
+
+                        if (wasCritical) {
                             dyingCounter = dyingCounter + 1;
                         }
-                    }
-                    if (wasCritical) {
-                        dyingCounter = dyingCounter + 1;
                     }
 
                     if (dyingCounter > originalDyingCounter) {
@@ -269,11 +265,11 @@ export async function preUpdateActorHook(actor: ActorPF2e, update: Record<string
                 actor.type === CHARACTER_TYPE) ||
                 (<string>game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" &&
                     [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
-        if (game.settings.get(MODULENAME, "autoGainDyingAtZeroHP") !== "none") {
+        if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
             increaseDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
                 console.log("Workbench increaseDyingOnZeroHP complete");
                 if (hpRaisedAbove0) {
-                    if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
+                    if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {
                         // Ugh.
                         new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
                             autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0 && hpRaisedAbove0).then(
@@ -304,7 +300,7 @@ export async function preUpdateActorHook(actor: ActorPF2e, update: Record<string
             });
         } else {
             if (currentActorHp <= 0 && updateHp > 0) {
-                if (game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP") !== "none") {
+                if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {
                     autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0).then(() => {
                         if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
                             autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
