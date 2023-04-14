@@ -29,8 +29,6 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
                     const draw = await (<RollTable>document).draw({ displayChat: false });
                     if (draw && draw?.results[0]) {
                         return draw?.results[0].getChatText();
-                    } else {
-                        return <string>fixSetting;
                     }
                 }
             }
@@ -38,10 +36,9 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
             const draw = await table?.draw({ displayChat: false });
             if (draw && draw?.results[0]) {
                 return draw?.results[0].getChatText();
-            } else {
-                return <string>fixSetting;
             }
         }
+	return <string>fixSetting;
     }
     return "";
 }
