@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "xdy-pf2e-workbench",
-  "version": "4.62.1",
+  "version": "4.62.2",
   "description": "Random assortment of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
   "license": "./LICENSE",
   "homepage": "https://github.com/xdy/xdy-pf2e-workbench",

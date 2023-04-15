@@ -1,3 +1,10 @@
+## [4.62.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.62.1...v4.62.2) (2023-04-15)
+
+
+### Bug Fixes
+
+* Fix regression in NPC mystification pre/post ([d3ca1ec](https://github.com/xdy/xdy-pf2e-workbench/commit/d3ca1ec6f0f6d51ef3e3bad82a6d5dbd60a65d28))
+
 ## [4.62.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.62.0...v4.62.1) (2023-04-15)
 
 
