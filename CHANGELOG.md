@@ -1,3 +1,10 @@
+## [4.63.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.0...v4.63.1) (2023-04-15)
+
+
+### Bug Fixes
+
+* Clean up Basic Action Macros a bit, replace a few duplicate icons with others. ([97412c0](https://github.com/xdy/xdy-pf2e-workbench/commit/97412c096175ea0718127cc0840448bd694dd079))
+
 # [4.63.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.62.2...v4.63.0) (2023-04-15)
 
 
