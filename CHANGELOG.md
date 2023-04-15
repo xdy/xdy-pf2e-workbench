@@ -1,3 +1,15 @@
+# [4.63.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.62.2...v4.63.0) (2023-04-15)
+
+
+### Bug Fixes
+
+* Avoid applying persistent healing/damage for old messages. ([a242a4c](https://github.com/xdy/xdy-pf2e-workbench/commit/a242a4c728a70399d6c82771667fcb9f7b28c4e2))
+
+
+### Features
+
+* Add slashed eye when collapsing messages (toggling to unslashed eye when it's not collapsed). ([1d7d226](https://github.com/xdy/xdy-pf2e-workbench/commit/1d7d22663e7c5aa2339083ea3abf26b28ba1a3dc))
+
 ## [4.62.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.62.1...v4.62.2) (2023-04-15)
 
 
