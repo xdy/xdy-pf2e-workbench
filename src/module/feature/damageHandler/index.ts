@@ -172,6 +172,7 @@ export async function persistentDamage(message) {
         message.speaker.token &&
         message.flavor &&
         message.rolls &&
+        message.turn === game.combats.active.turn &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
@@ -199,6 +200,7 @@ export async function persistentHealing(message) {
         game.combats.active &&
         game.combats.active.combatant &&
         game.combats.active.combatant.actor &&
+        message.turn === game.combats.active.turn &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
