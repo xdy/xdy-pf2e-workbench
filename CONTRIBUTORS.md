@@ -27,10 +27,11 @@ profile followed by a brief and incomplete description of what this person has c
 * [Idle](https://github.com/reonZ/) - Added setting for if skill actions should post description to chat.
 * [ApoApostolov] - Contributed Basic Action Macros.
 * sad - Contributed the Chinese (Traditional) translation.
-* alanlaredo - Contributed the Spanish translation.
-* sakusenerio - Added to the Chinese (Simplified) translation.
+* [alanlaredo](https://github.com/AlanLaredo) - Contributed the Spanish translation.
+* [sakusenerio](https://github.com/sakusenerio) - Added to the Chinese (Simplified) translation.
 * [Oskar]() - Contributed to the Polish translation, and contributed the icon for the Basic Action Macro.
 * [popy]() - Contributed to the Polish translation, and contributed the icon for the Basic Action Macro.
+* [nomis80](https://github.com/simon-perreault) - Fixed a bug in mystified token names.
 
 I've probably forgotten someone, if so, please tell me!
 
