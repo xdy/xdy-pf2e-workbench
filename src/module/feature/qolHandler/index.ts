@@ -7,14 +7,11 @@ import { ActorSheetPF2e } from "@actor/sheet/base";
 import { ActorPF2e } from "@actor";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
-    // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
     const hasCardContent = html.find(".card-content");
     if (hasCardContent.length > 0) {
         if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
             hasCardContent.hide();
-            // $(html)
-            //     .find("h3")
-            //     .html($(html).find("h3").html() + eye);
+            hasCardContent.siblings()?.get(0)?.insertAdjacentHTML("beforeend", eye);
         }
         html.on("click", "h3", (event: JQuery.ClickEvent) => {
             const content = event.currentTarget.closest(".chat-message")?.querySelector(".card-content");
@@ -23,37 +20,36 @@ export function chatCardDescriptionCollapse(html: JQuery) {
                 content.style.display = content.style.display === "none" ? "block" : "none";
                 if (content.style.display === "none") {
                     hasCardContent.hide();
-                    // $(html)
-                    //     .find("h3")
-                    //     .html($(html).find("h3").html() + eye);
-                } else {
-                    // if ($(event.currentTarget).html().includes(eye)) {
-                    //     $(event.currentTarget).html($(event.currentTarget).html().split(eye)[0]);
-                    // }
                 }
+                toggleEyes(html);
             }
         });
     }
 }
 
-function handleRollNoteToggling(html: JQuery) {
-    let note;
-    for (note of html.find(".roll-note")) {
-        note.style.display = note.style.display === "none" ? "block" : "none";
+function toggleEyes(html: JQuery) {
+    const hasEye = html.find(".fa-eye");
+    const hasEyeSlash = html.find(".fa-eye-slash");
+    for (const eye of hasEye) {
+        eye.classList.toggle("fa-eye-slash");
+        eye.classList.toggle("fa-eye");
     }
-    if (note.style.display === "none") {
-        // $(html)
-        //     .find("h4.action")
-        //     .html($(html).find("h4.action").html() + eye);
-    } else {
-        // if ($(html).find("h4.action").html().includes(eye)) {
-        //     $(html).find("h4.action").html($(html).find("h4.action").html().split(eye)[0]);
-        // }
+    for (const eye of hasEyeSlash) {
+        eye.classList.toggle("fa-eye-slash");
+        eye.classList.toggle("fa-eye");
     }
 }
 
+function handleRollNoteToggling(html: JQuery) {
+    let note;
+    const hasNote = html.find(".roll-note");
+    for (note of hasNote) {
+        note.style.display = note.style.display === "none" ? "block" : "none";
+    }
+    toggleEyes(html);
+}
+
 export function chatActionCardDescriptionCollapse(html: JQuery) {
-    // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
     const hasAction = html.find(".action");
     if (hasAction.length > 0) {
         if (html.find(".roll-note").length > 0) {
@@ -61,9 +57,8 @@ export function chatActionCardDescriptionCollapse(html: JQuery) {
                 for (const note of html.find(".roll-note")) {
                     note.style.display = "none";
                 }
-                // $(html)
-                //     .find("h4.action")
-                //     .html($(html).find("h4.action").html() + eye);
+
+                hasAction.siblings()?.get(1)?.insertAdjacentHTML("beforeend", eye);
             }
             html.on("click", "h4.action", (event: JQuery.ClickEvent) => {
                 event.preventDefault();
@@ -73,16 +68,16 @@ export function chatActionCardDescriptionCollapse(html: JQuery) {
     }
 }
 
+const eye = ' <i style="font-size: small; max-width: min-content" class="fa-solid fa-eye-slash">';
+
 export function chatAttackCardDescriptionCollapse(html: JQuery) {
-    // const eye = ' <i style="font-size: small" class="fa-solid fa-eye-slash">';
-    if (html.find(".roll-note").length > 0) {
+    const hasRollNote = html.find(".roll-note");
+    if (hasRollNote.length > 0) {
         if (game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault") {
-            for (const note of html.find(".roll-note")) {
+            for (const note of hasRollNote) {
                 note.style.display = "none";
             }
-            // $(html)
-            //     .find("h4.action")
-            //     .html($(html).find("h4.action").html() + eye);
+            hasRollNote.siblings()?.get(0)?.insertAdjacentHTML("beforeend", eye);
         }
         html.on("click", "h4.action", (event: JQuery.ClickEvent) => {
             event.preventDefault();
