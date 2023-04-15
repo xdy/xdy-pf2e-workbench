@@ -234,9 +234,9 @@ function getActionFromMessage(actions: any, actionIds: RegExpMatchArray, message
         const s = `<h4 class="action">(.*?)${strike}: (.*?)<`;
         const strikeName = message.flavor?.match(s);
         if (strikeName && strikeName[2]) {
-            return strikes.find((a: { name: string }) => a.name === strikeName[2]);
+            return strikes.find((a: { label: string }) => a.label === strikeName[2]);
         } else {
-            // If we can't find the strike name, give up.
+            // If we can't find the strike label, give up.
             return null;
         }
     } else {
