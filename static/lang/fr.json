@@ -94,7 +94,7 @@
         "name": "Ajouter le bouton Se souvenir aux PNJ."
       },
       "addUserTargets": {
-        "addFor": "Ajouter les cibles à",
+        "addFor": "Ajouter les cibles pour",
         "clearFor": "Effacer les cibles pour",
         "hint": "Touche liée pour ajouter les jetons sélectionnés et survolés aux cibles choisies par l'utilisateur.",
         "name": "Ajouter les cibles de l'utilisateur",
@@ -118,10 +118,10 @@
         "wasDamaged": "{damage} dégâts ont été automatiquement appliqués"
       },
       "applyPersistentHealing": {
-        "FastHealingLabel": "reçu de guérison accélérée",
-        "hint": "Appliquer automatiquement les soins persistants lancés par le système.",
+        "FastHealingLabel": "a reçu guérison accélérée",
+        "hint": "Appliquer automatiquement les soins persistants lancés par le système. Sauvegarder les réglages pour afficher/cacher des options supplémentaires.",
         "name": "Appliquer automatiquement les soins persistants lancés par le système.",
-        "RegenerationLabel": "Reçu de régénération",
+        "RegenerationLabel": "A reçu régénération",
         "wasHealed": "{healing} de soins ont été appliqués automatiquement."
       },
       "autoCollapseItemChatCardContent": {
@@ -530,11 +530,17 @@
       },
       "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
         "name": "... et ajouter un degré mourant supplémentaire s'il est touché de manière critique par un ennemi.",
-        "hint": "(Expérimental) Si touché de manière critique par une attaque ciblée d'un acteur ennemi, ajoutez un niveau supplémentaire à Mourant. Utilise les paramètres du menu déroulant ci-dessus."
+        "hint": "(Expérimental) Si touché de manière critique par une attaque ciblée d'un acteur ennemi, ajoutez un niveau supplémentaire à Mourant. Utilise les paramètres du menu déroulant ci-dessus.",
+        "no": "Non",
+        "add": "Ajouter mourant",
+        "addForCharacters": "Ajouter mourant pour personnages et familiers"
       },
       "autoGainDyingIfTakingDamageWhenAlreadyDying": {
         "name": "... et ajoute un ou des degrés de Mourant s'il subit des dégâts alors qu'il est Mourant.",
-        "hint": "(Expérimental) s'il subit des dégâts alors qu'il est déjà mourant, ajoute un degré Mourant supplémentaire (ou possiblement deux si les dégâts supplémentaires sur un coup critique sont activés. Utilise le menu déroulant ci-dessus."
+        "hint": "(Expérimental) s'il subit des dégâts alors qu'il est déjà mourant, ajoute un degré Mourant supplémentaire (ou possiblement deux si les dégâts supplémentaires sur un coup critique sont activés. Utilise le menu déroulant ci-dessus.",
+        "no": "Non",
+        "add": "Ajouter mourant",
+        "addForCharacters": "Ajouter mourant pour personnages et familiers"
       }
     },
     "effects": {
@@ -617,7 +623,7 @@
           "PalmAnObject": "Escamoter un objet",
           "Steal": "Voler",
           "AdministerFirstAidStabilize": "Administrer les premiers secours - Stabiliser",
-          "AdministerFirstAidStopBleeding": "Administrer les premiers soins - Arrêter le saignement",
+          "AdministerFirstAidStopBleeding": "Administrer les premiers secours - Arrêter le saignement",
           "CreateForgery": "Créer une contrefaçon",
           "Escape": "S'Échapper - le plus élevé (??)"
         },
