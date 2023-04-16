@@ -554,7 +554,7 @@ export function basicActionMacros() {
                     x[1].img ??
                     bamActions.find((y) => y.replacedWith === x[0])?.icon ??
                     "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp",
-                showMAP: x[1].traits?.includes("map") ?? false,
+                showMAP: x[1].traits?.includes("attack") ?? false,
                 action: x[1],
             };
         });
