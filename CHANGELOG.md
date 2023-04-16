@@ -1,3 +1,10 @@
+## [4.63.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.1...v4.63.2) (2023-04-16)
+
+
+### Bug Fixes
+
+* Trip shows MAP again. ([cf79122](https://github.com/xdy/xdy-pf2e-workbench/commit/cf79122969a911abf71c1fc093f2d25df3c46b5c)), closes [#750](https://github.com/xdy/xdy-pf2e-workbench/issues/750)
+
 ## [4.63.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.0...v4.63.1) (2023-04-15)
 
 
