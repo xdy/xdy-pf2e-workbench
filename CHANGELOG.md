@@ -1,3 +1,10 @@
+## [4.63.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.2...v4.63.3) (2023-04-17)
+
+
+### Bug Fixes
+
+* If enabled, persistent damage and healing should again apply automatically. ([e3761d3](https://github.com/xdy/xdy-pf2e-workbench/commit/e3761d3662805f970360c806be03306137c02fd8))
+
 ## [4.63.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.1...v4.63.2) (2023-04-16)
 
 
