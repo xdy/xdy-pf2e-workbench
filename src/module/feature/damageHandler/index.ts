@@ -167,12 +167,11 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
 export async function persistentDamage(message) {
     if (
-        canvas.ready &&
         message.flavor.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
         message.speaker.token &&
         message.flavor &&
         message.rolls &&
-        message.turn === game.combats.active.turn &&
+        message.id === game.messages.contents[game.messages.contents.length - 1].id &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
@@ -184,7 +183,7 @@ export async function persistentDamage(message) {
         if (token && token.isOwner) {
             for (const r of message.rolls) {
                 // @ts-ignore
-                await token?.actor?.applyDamage({ damage: r, token: token });
+                await token?.actor?.applyDamage({ damage: r, token: token.document });
             }
         }
     }
@@ -193,14 +192,13 @@ export async function persistentDamage(message) {
 export async function persistentHealing(message) {
     if (
         game.settings.get(MODULENAME, "applyPersistentHealing") &&
-        canvas.ready &&
         message.flavor &&
         message.rolls &&
         game.combats &&
         game.combats.active &&
         game.combats.active.combatant &&
         game.combats.active.combatant.actor &&
-        message.turn === game.combats.active.turn &&
+        message.id === game.messages.contents[game.messages.contents.length - 1].id &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
@@ -216,7 +214,7 @@ export async function persistentHealing(message) {
                 ].some((text) => message.flavor?.includes(text))
             ) {
                 const healing = message.rolls.reduce((sum, current) => sum + (current.total || 1), 0) * -1;
-                await token.actor?.applyDamage({ damage: healing, token: token.actor?.getActiveTokens()[0] });
+                await token.actor?.applyDamage({ damage: healing, token: token.actor?.getActiveTokens()[0].document });
             }
         }
     }
