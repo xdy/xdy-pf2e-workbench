@@ -328,7 +328,7 @@
         "name": "呼出快捷键页码{page}上第{column}个宏"
       },
       "castPrivateSpell": {
-        "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息。请注意，目前此特性无法与Polyglot共存。（已向Polyglot提交PR以修正bug）",
+        "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息。",
         "name": "Ctrl+单击秘密施法。",
         "aSpell": "法术"
       },
