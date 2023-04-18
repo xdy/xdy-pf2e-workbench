@@ -7,6 +7,7 @@ import {
     chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
     damageCardExpand,
+    hideNameOfPrivateSpell,
     mystifyNpcItems,
 } from "./feature/qolHandler";
 import {
@@ -114,14 +115,6 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
 }
 
 export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
-    // if (
-    //     game.settings.get(MODULENAME, "castPrivateSpell") &&
-    //     message?.flags?.pf2e?.origin?.type === "spell" &&
-    //     isActuallyDamageRoll(message)
-    // ) {
-    //     hideNameOfPrivateSpell(message, html);
-    // }
-
     const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
     if (!isNaN(minimumUserRoleFlag) && minimumUserRoleFlag > game.user.role) {
         html.addClass("xdy-pf2e-workbench-hide");
@@ -169,6 +162,14 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
         ) {
             chatActionCardDescriptionCollapse(html);
         }
+    }
+
+    if (
+        game.settings.get(MODULENAME, "castPrivateSpell") &&
+        message?.flags?.pf2e?.origin?.type === "spell" &&
+        isActuallyDamageRoll(message)
+    ) {
+        hideNameOfPrivateSpell(message, html);
     }
 }
 
