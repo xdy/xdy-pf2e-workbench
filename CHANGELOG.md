@@ -1,3 +1,10 @@
+## [4.63.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.3...v4.63.4) (2023-04-18)
+
+
+### Bug Fixes
+
+* Names of privately cast spells are again mystified in damage rolls. ([423ecdd](https://github.com/xdy/xdy-pf2e-workbench/commit/423ecdd2430c06bcbc1be16d660819595e4becfd))
+
 ## [4.63.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.2...v4.63.3) (2023-04-17)
 
 
