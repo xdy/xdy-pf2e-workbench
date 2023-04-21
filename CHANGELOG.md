@@ -1,3 +1,10 @@
+## [4.63.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.4...v4.63.5) (2023-04-21)
+
+
+### Bug Fixes
+
+* Enables translation of Escape and Earn Income in skill actions feature. ([e93c46d](https://github.com/xdy/xdy-pf2e-workbench/commit/e93c46dcf111346ace062baca58b434bddbf4c78)), closes [#755](https://github.com/xdy/xdy-pf2e-workbench/issues/755)
+
 ## [4.63.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.3...v4.63.4) (2023-04-18)
 
 
