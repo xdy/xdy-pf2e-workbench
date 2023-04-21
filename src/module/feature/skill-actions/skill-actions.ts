@@ -121,16 +121,18 @@ export class SkillAction {
             // @ts-ignore
             if (Array.from(game.pf2e.actions).filter((x) => x[0] === <string>this.key)) {
                 const action = game.pf2e.actions[<string>this.key];
-                if (action) {
-                    action({
-                        event,
-                        modifiers: variant.modifiers,
-                        actors: [this.actor],
-                        ...variant.extra,
-                        skill: variant.skill.slug,
-                    });
+                if (!["earnIncome"].includes(<string>this.key)) {
+                    if (action) {
+                        action({
+                            event,
+                            modifiers: variant.modifiers,
+                            actors: [this.actor],
+                            ...variant.extra,
+                            skill: variant.skill.slug,
+                        });
+                    }
+                    return;
                 }
-                return;
             }
 
             if (rollAction) {
@@ -144,10 +146,10 @@ export class SkillAction {
                     });
                 } else if (this.key === "earnIncome") {
                     // Ugly earnIncome fix.
-                    const pack: any = game.packs.get("pf2e.pf2e-macros");
+                    const pack = game.packs.get("pf2e.pf2e-macros");
                     pack?.getIndex()
                         .then((index) => {
-                            const id: any = index.find((e) => e.name === "Earn Income")?._id;
+                            const id: any = index.find((e) => e.name.includes("Earn Income"))?._id;
                             if (id) {
                                 (<Promise<Macro>>pack?.getDocument(id)).then((e) => e.execute());
                             }
@@ -158,7 +160,7 @@ export class SkillAction {
                     const pack: any = game.packs.get("pf2e.action-macros");
                     pack?.getIndex()
                         .then((index) => {
-                            const id: any = index.find((e) => e.name === "Escape")?._id;
+                            const id = index.find((e) => e.name.includes("Escape"))?._id;
                             if (id) {
                                 (<Promise<Macro>>pack?.getDocument(id)).then((e) => e.execute());
                             }
