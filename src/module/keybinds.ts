@@ -3,9 +3,10 @@ import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler";
 import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler";
 import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler";
 import { TokenPF2e } from "@module/canvas";
+import { logInfo } from "./utils";
 
 export function registerWorkbenchKeybindings() {
-    console.log(`${MODULENAME} | registerKeybindings`);
+    logInfo(`${MODULENAME} | registerKeybindings`);
 
     const keybindings = game.keybindings;
 
@@ -25,7 +26,7 @@ export function registerWorkbenchKeybindings() {
         <label style="flex-grow: 1;" for="dialogUserId">User</label>
         <select style="height: 2rem;" id="dialogUserId">`;
             for (const { key, label } of map) {
-                content += `<option value=${key}>${label}</option>`;
+                content += `<option value="${key}">${label}</option>`;
             }
             content += `</div></select>`;
 

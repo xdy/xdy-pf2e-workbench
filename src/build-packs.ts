@@ -2,7 +2,13 @@
 
 import fs from "fs-extra";
 import path from "path";
-import { randomID } from "./module/utils";
+
+function randomID() {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    return Array.from(Array(16).keys())
+        .map(() => letters[Math.floor(Math.random() * letters.length)])
+        .join("");
+}
 
 const packsSource = "packs";
 

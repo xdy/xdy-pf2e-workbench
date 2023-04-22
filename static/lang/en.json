@@ -455,6 +455,16 @@
         "hint": "Check to automatically start the Hero Point handler timer when the game is ready.",
         "name": "Automatically start Hero Point Handler."
       },
+      "logLevel": {
+        "name": "Log level",
+        "hint": "Log level",
+        "trace": "Trace",
+        "debug": "Debug",
+        "info": "Info",
+        "warn": "Warn",
+        "error": "Error",
+        "off": "Off"
+      },
       "maxHeroPoints": {
         "hint": "World setting for the maximum number of Hero Points for a character.",
         "name": "(World) maximum number of Hero Points."

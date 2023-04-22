@@ -1,4 +1,4 @@
-import { isFirstGM, randomID, shouldIHandleThis } from "../../utils";
+import { isFirstGM, shouldIHandleThis } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
 import { CombatantPF2e } from "@module/encounter";
@@ -48,7 +48,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                         source: {
                             value: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`),
                         },
-                        slug: `xdy-breath-weapon-reminder-${randomID()}`, // Why did I add a random ID? I don't remember.
+                        slug: `xdy-breath-weapon-reminder-${foundry.utils.randomID()}`, // Why did I add a random ID? I don't remember.
                     },
                 };
 

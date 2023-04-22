@@ -17,7 +17,7 @@ import {
     reminderCannotAttack,
     reminderTargeting,
 } from "./feature/reminders";
-import { isActuallyDamageRoll, shouldIHandleThis } from "./utils";
+import { isActuallyDamageRoll, logDebug, shouldIHandleThis } from "./utils";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
 import { mangleNamesInChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
 import { ItemPF2e } from "@item";
@@ -196,10 +196,10 @@ export async function deleteItemHook(item: ItemPF2e, _options: {}) {
     ) {
         if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
             giveWoundedWhenDyingRemoved(item).then(() => {
-                console.debug("Workbench giveWoundedWhenDyingRemoved complete");
+                logDebug("Workbench giveWoundedWhenDyingRemoved complete");
                 if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
                     giveUnconsciousIfDyingRemovedAt0HP(item).then(() => {
-                        console.debug("Workbench giveUnconsciousIfDyingRemovedAt0HP complete");
+                        logDebug("Workbench giveUnconsciousIfDyingRemovedAt0HP complete");
                     });
                 }
             });
@@ -211,7 +211,7 @@ export async function deleteItemHook(item: ItemPF2e, _options: {}) {
 
 export function pf2eEndTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string) {
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-        reduceFrightened(combatant, userId).then(() => console.debug("Workbench reduceFrightened complete"));
+        reduceFrightened(combatant, userId).then(() => logDebug("Workbench reduceFrightened complete"));
     }
 }
 
@@ -268,14 +268,14 @@ export async function preUpdateActorHook(actor: ActorPF2e, update: Record<string
                     [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
         if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
             increaseDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
-                console.log("Workbench increaseDyingOnZeroHP complete");
+                logDebug("Workbench increaseDyingOnZeroHP complete");
                 if (hpRaisedAbove0) {
                     if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {
                         // Ugh.
                         new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
                             autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0 && hpRaisedAbove0).then(
                                 () => {
-                                    console.log("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
+                                    logDebug("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
                                     if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
                                         autoRemoveUnconsciousAtGreaterThanZeroHP(
                                             actor,

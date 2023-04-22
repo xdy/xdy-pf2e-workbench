@@ -23,7 +23,7 @@ import {
     resetHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
-import { isFirstGM } from "./utils";
+import { logInfo, isFirstGM } from "./utils";
 import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller";
 import { loadSkillActions, loadSkillActionsBabele } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
@@ -65,7 +65,7 @@ export enum Phase {
     ACTIVE = 40, // After ready, not sure if it has a name in foundry
 }
 
-let phase: Phase = Phase.DOWN;
+export let phase: Phase = Phase.DOWN;
 
 function handle(hookName, shouldBeOn, hookFunction) {
     if (!activeHooks.has(hookName)) {
@@ -178,7 +178,7 @@ export function updateHooks(cleanSlate = false) {
 
 // Initialize module
 Hooks.once("init", async (_actor: ActorPF2e) => {
-    console.log(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
+    logInfo(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
     phase = Phase.INIT;
 
     registerWorkbenchSettings();
@@ -242,7 +242,7 @@ export function changePauseText() {
 
 // Setup module
 Hooks.once("setup", async () => {
-    console.log(`${MODULENAME} | Setting up`);
+    logInfo(`${MODULENAME} | Setting up`);
     phase = Phase.SETUP;
     // Do anything after initialization but before ready
 
@@ -306,7 +306,7 @@ async function migrateFeatures() {
 // When ready
 Hooks.once("ready", () => {
     // Do anything once the module is ready
-    console.log(`${MODULENAME} | Ready`);
+    logInfo(`${MODULENAME} | Ready`);
     phase = Phase.READY;
 
     // Must be in ready

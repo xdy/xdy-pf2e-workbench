@@ -6,6 +6,7 @@ import { ItemPF2e } from "@item";
 import { ActionsIndex } from "./actions-index";
 import { ItemSummaryData } from "@item/data";
 import { CharacterSkill } from "@actor/character/types";
+import { logWarn } from "../../utils";
 
 const ACTION_ICONS: Record<ActionType, string> = {
     A: "OneAction",
@@ -292,7 +293,7 @@ export class SkillAction {
     }
 }
 
-export class SkillActionCollection extends Collection<SkillAction> {
+export class SkillActionCollection extends foundry.utils.Collection<SkillAction> {
     static allActionsFor(actor): SkillAction[] {
         const allActions = deepClone(SKILL_ACTIONS_DATA);
         const actions = allActions.filter((x) => !x.replacedWith);
@@ -327,7 +328,7 @@ export class SkillActionCollection extends Collection<SkillAction> {
             return;
         }
         if (this.get(action.key)) {
-            console.warn("Overwriting existing skill action", action.key);
+            logWarn("Overwriting existing skill action", action.key);
         }
         this.set(action.key, action);
     }

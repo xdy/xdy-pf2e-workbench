@@ -19,6 +19,7 @@ import { getActor, getFolder, getFolderInFolder } from "./Utilities";
 import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil";
 import { ActorPF2e, NPCPF2e } from "@actor";
 import { NPCSystemData } from "@actor/npc/data";
+import { logDebug } from "../../utils";
 
 export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number) {
     const actor = <NPCPF2e>(<unknown>game.actors.get(actorId));
@@ -183,7 +184,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
             itemUpdates.push(attackUpdate);
         }
     }
-    console.warn(itemUpdates);
+    logDebug(itemUpdates);
 
     let newActor = <any>getActor(actor.name as string, folder.name);
     if (newActor !== undefined) {

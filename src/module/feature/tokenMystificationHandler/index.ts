@@ -5,6 +5,7 @@ import { generateNameFromTraits } from "./traits-name-generator";
 import { TokenPF2e } from "@module/canvas";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorSystemData } from "@actor/data/base";
+import { logError } from "../../utils";
 
 function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (
@@ -53,7 +54,7 @@ async function fetchRandomWordPrefix(): Promise<string> {
         }
     }
 
-    console.error(`Rolltable for ${fixSetting} setting not defined or not found.`);
+    logError(`Rolltable for ${fixSetting} setting not defined or not found.`);
 
     return "";
 }

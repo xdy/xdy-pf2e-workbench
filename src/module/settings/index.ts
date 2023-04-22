@@ -5,11 +5,12 @@ import { WorkbenchWorldAutomationSettings } from "./automation-world";
 import { WorkbenchClientAutomationSettings } from "./automation-client";
 import { WorkbenchQolWorldSettings } from "./qol-world";
 import { WorkbenchVariantRulesSettings } from "./variantRules";
+import { logInfo } from "../utils";
 
 export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification";
 
 export function registerWorkbenchSettings() {
-    console.log(`${MODULENAME} | registerSettings`);
+    logInfo(`${MODULENAME} | registerSettings`);
 
     WorkbenchMystificationSettings.registerSettingsAndCreateMenu("fas fa-eye-slash");
     WorkbenchRemindersSettings.registerSettingsAndCreateMenu("fas fa-bell");
@@ -184,6 +185,24 @@ export function registerWorkbenchSettings() {
         config: true,
         default: false,
         type: Boolean,
+        onChange: () => updateHooks(),
+    });
+
+    game.settings.register(MODULENAME, "logLevel", {
+        name: `${MODULENAME}.SETTINGS.logLevel.name`,
+        hint: `${MODULENAME}.SETTINGS.logLevel.hint`,
+        scope: "client",
+        config: true,
+        default: 2,
+        type: Number,
+        choices: {
+            0: game.i18n.localize(`${MODULENAME}.SETTINGS.logLevel.trace`),
+            1: game.i18n.localize(`${MODULENAME}.SETTINGS.logLevel.debug`),
+            2: game.i18n.localize(`${MODULENAME}.SETTINGS.logLevel.info`),
+            3: game.i18n.localize(`${MODULENAME}.SETTINGS.logLevel.warn`),
+            4: game.i18n.localize(`${MODULENAME}.SETTINGS.logLevel.error`),
+            5: game.i18n.localize(`${MODULENAME}.SETTINGS.logLevel.off`),
+        },
         onChange: () => updateHooks(),
     });
 

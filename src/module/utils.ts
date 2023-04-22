@@ -1,5 +1,6 @@
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ActorFlagsPF2e } from "@actor/data/base";
+import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench";
 
 export function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
     const userId = message.user.id;
@@ -47,13 +48,6 @@ export function isFirstGM() {
     return game.user.id === game.users?.find((u) => u.isGM && u.active)?.id;
 }
 
-export function randomID() {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    return Array.from(Array(16).keys())
-        .map(() => letters[Math.floor(Math.random() * letters.length)])
-        .join("");
-}
-
 export function isActuallyDamageRoll(message) {
     // TODO Anything using this should probably hook into Hooks.call(`pf2e.damageRoll`, rollData) instead...
     const isPhysicalDamageroll =
@@ -65,4 +59,53 @@ export function isActuallyDamageRoll(message) {
         isPhysicalDamageroll || isSpellDamageRoll
         // TODO (message.flags["xdy-pf2e-workbench"].autoRollDamage.actuallyCasting ?? true) && //TODO Add this (and setting the flag) to support not rolling damage when the chat button is clicked. For now, meh.
     );
+}
+
+export function logTrace(...args) {
+    log(0, ...args);
+}
+
+export function logDebug(...args) {
+    log(1, ...args);
+}
+
+export function logInfo(...args) {
+    log(2, ...args);
+}
+
+export function logWarn(...args) {
+    log(3, ...args);
+}
+
+export function logError(...args) {
+    log(4, ...args);
+}
+
+function log(logLevel = 2, ...args) {
+    let number = 2;
+    if (phase >= Phase.READY) {
+        number = Number(game.settings.get(MODULENAME, "logLevel")) ?? 2;
+    }
+
+    if (logLevel >= number) {
+        switch (logLevel) {
+            case 0:
+                console.trace(...args);
+                break;
+            case 1:
+                console.debug(...args);
+                break;
+            case 2:
+                console.info(...args);
+                break;
+            case 3:
+                console.warn(...args);
+                break;
+            case 4:
+                console.error(...args);
+                break;
+            case 5:
+                break;
+        }
+    }
 }
