@@ -1,3 +1,10 @@
+## [4.64.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.64.1...v4.64.2) (2023-04-23)
+
+
+### Bug Fixes
+
+* Removes the option to add a recall knowledge button to npc sheets as a recent system update broke it beyond repair. ([374dea7](https://github.com/xdy/xdy-pf2e-workbench/commit/374dea74bf387539a5b68138c3d0c0483a123477))
+
 ## [4.64.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.64.0...v4.64.1) (2023-04-23)
 
 
