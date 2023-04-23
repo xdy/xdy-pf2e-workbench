@@ -1,3 +1,10 @@
+## [4.64.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.64.2...v4.64.3) (2023-04-23)
+
+
+### Bug Fixes
+
+* Now hides the name of a privately cast spell from *players* instead of GMs. :) ([db08784](https://github.com/xdy/xdy-pf2e-workbench/commit/db0878464b6104d08483f0276984133d9830f264))
+
 ## [4.64.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.64.1...v4.64.2) (2023-04-23)
 
 
