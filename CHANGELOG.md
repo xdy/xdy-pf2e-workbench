@@ -1,3 +1,15 @@
+# [4.64.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.5...v4.64.0) (2023-04-23)
+
+
+### Bug Fixes
+
+* Less chatty logging. ([5acb938](https://github.com/xdy/xdy-pf2e-workbench/commit/5acb938af0acf175856375592f92a4027ba77d38))
+
+
+### Features
+
+* Targeting reminder can now be set to require targeting (i.e. only targeted attacks will be rolled). ([453b6cf](https://github.com/xdy/xdy-pf2e-workbench/commit/453b6cf498ba11af1e7d2ccdbcf3abda6c30b58a))
+
 ## [4.63.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.4...v4.63.5) (2023-04-21)
 
 
