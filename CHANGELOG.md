@@ -1,3 +1,10 @@
+## [4.64.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.64.0...v4.64.1) (2023-04-23)
+
+
+### Bug Fixes
+
+* Move hide name of privately cast spell to it's own sub-setting. (It's flaky for some people, disable it if it doesn't work for you.) ([2e8bf12](https://github.com/xdy/xdy-pf2e-workbench/commit/2e8bf12de213487c721b9a6fafd1882c9dbc1011))
+
 # [4.64.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.63.5...v4.64.0) (2023-04-23)
 
 
