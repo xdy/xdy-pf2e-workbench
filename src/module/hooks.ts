@@ -1,7 +1,6 @@
 import { ChatMessagePF2e, ChatMessageSourcePF2e } from "@module/chat-message";
 import { UserPF2e } from "@module/user";
 import {
-    addGmRKButtonToNpc,
     castPrivateSpell,
     chatActionCardDescriptionCollapse,
     chatAttackCardDescriptionCollapse,
@@ -362,15 +361,12 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, $html: JQ
         onQuantitiesHook(sheet, $html);
     }
 
+    // TODO This is dead code, right?
     if (game.settings.get(MODULENAME, "castPrivateSpell")) {
         $html.find(".cast-spell").each((_i, e) => {
             const $e = $(e);
             $e.addClass(`xdy-pf2e-workbench-secret-spell`);
         });
-    }
-
-    if (game.user?.isGM && sheet.actor?.type === NPC_TYPE && game.settings.get(MODULENAME, "addGmRKButtonToNpc")) {
-        addGmRKButtonToNpc($html, sheet);
     }
 
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "skillActions") !== "disabled") {

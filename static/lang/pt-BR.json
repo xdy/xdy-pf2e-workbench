@@ -13,12 +13,6 @@
         "none": "Ninguém",
         "players": "Jogadores"
       },
-      "addGmRKButtonToNpc": {
-        "hideNpcName": "Ocultar nome ao Recordar Conhecimento",
-        "hideSkill": "Oculta o nome da perícia na mensagem de Recordar Conhecimento.",
-        "hint": "Adiciona o botão de Recordar Conhecimento para PdMs. Atualmente só funciona para perícias, as perícias de saber precisam ser resolvidas manualmente.",
-        "name": "Botão de Recordar Conhecimento"
-      },
       "addUserTargets": {
         "addFor": "Adicionar",
         "clearFor": "Remover",

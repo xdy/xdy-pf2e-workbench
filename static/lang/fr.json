@@ -87,12 +87,6 @@
         "none": "Personne",
         "players": "Joueurs"
       },
-      "addGmRKButtonToNpc": {
-        "hideNpcName": "Cacher le nom du PNJ sur le message Se souvenir.",
-        "hideSkill": "Cacher le nom de la compétence sur le message Se souvenir.",
-        "hint": "Test pour ajouter le bouton Se souvenir aux PNJ. Actuellement seulement pour les compétences. Les Connaissances ne sont pas prises en charge.",
-        "name": "Ajouter le bouton Se souvenir aux PNJ."
-      },
       "addUserTargets": {
         "addFor": "Ajouter les cibles pour",
         "clearFor": "Effacer les cibles pour",

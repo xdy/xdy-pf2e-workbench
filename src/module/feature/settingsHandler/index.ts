@@ -67,13 +67,6 @@
 //                 html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
 //             }
 //
-//             if (settingName !== `addGmRKButtonToNpc` && settingName.startsWith(`addGmRKButtonToNpc`)) {
-//                 const valueFunction = !game.settings.get(MODULENAME, "addGmRKButtonToNpc");
-//
-//                 html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-//                 html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-//             }
-//
 //             if (settingName !== `heroPointHandler` && settingName.startsWith(`heroPointHandler`)) {
 //                 const valueFunction = !game.settings.get(MODULENAME, "heroPointHandler");
 //

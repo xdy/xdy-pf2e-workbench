@@ -197,12 +197,6 @@
         "none": "None",
         "players": "Players"
       },
-      "addGmRKButtonToNpc": {
-        "hideNpcName": "Hide NPC name on Recall Knowledge message.",
-        "hideSkill": "Hide skill name on Recall Knowledge message.",
-        "hint": "Check to add Recall Knowlege button to NPCs. Currently only for the skill, lores will have to be handled manually.",
-        "name": "Add Recall Knowledge button to NPCs."
-      },
       "addUserTargets": {
         "addFor": "Add targets for",
         "clearFor": "Clear targets for",

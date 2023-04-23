@@ -177,12 +177,6 @@
         "none": "無",
         "players": "玩家"
       },
-      "addGmRKButtonToNpc": {
-        "hideSkill": "回想知識檢定的聊天訊息隱藏技能名。",
-        "hideNpcName": "回想知識檢定的聊天訊息隱藏NPC的姓名。",
-        "hint": "選擇后將為NPC新增回憶知識的按鈕。目前只能為技能回憶知識，學識類的回憶知識需手動操作。",
-        "name": "為NPC增加回憶知識按鈕。"
-      },
       "addUserTargets": {
         "addFor": "新增目標",
         "clearFor": "清除目標",
