@@ -43,20 +43,28 @@ import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench";
 import { enableCreatureBuilderButton } from "./feature/creature-builder/CreatureBuilder";
 import { ActorSheetPF2e } from "@actor/sheet/base";
 
-export const preCreateChatMessageHook = async (
+export const preCreateChatMessageHook = (
     message: ChatMessagePF2e,
     data: ChatMessageSourcePF2e,
     _options,
     _user: UserPF2e
 ) => {
+    let result;
+    if (game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget") {
+        result = reminderTargeting(message);
+    }
+
     if (
+        result &&
         game.settings.get(MODULENAME, "castPrivateSpell") &&
         message.flags.pf2e?.casting?.id &&
         (game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) ||
             (message.actor?.type === NPC_TYPE && game.settings.get(MODULENAME, "castPrivateSpellAlwaysForNPC")))
     ) {
-        await castPrivateSpell(data, message);
+        castPrivateSpell(data, message).then();
     }
+
+    return result;
 };
 
 export function createChatMessageHook(message: ChatMessagePF2e) {
@@ -64,7 +72,7 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
         reminderCannotAttack(message);
     }
 
-    if (game.settings.get(MODULENAME, "reminderTargeting")) {
+    if (["no", "reminder"].includes(String(game.settings.get(MODULENAME, "reminderTargeting")))) {
         reminderTargeting(message);
     }
 

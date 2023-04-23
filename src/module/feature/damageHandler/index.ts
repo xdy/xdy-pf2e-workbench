@@ -171,7 +171,7 @@ export async function persistentDamage(message) {
         message.speaker.token &&
         message.flavor &&
         message.rolls &&
-        message.id === game.messages.contents[game.messages.contents.length - 1].id &&
+        message.id === game.messages.contents.pop()?.id &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),

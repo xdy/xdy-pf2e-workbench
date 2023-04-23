@@ -637,7 +637,11 @@
       "reminderTargeting": {
         "hint": "Check to show reminder for targeting in combat.",
         "name": "Targeting reminder",
-        "note": "Please target before you attack."
+        "info": "Please target before you attack.",
+        "error": "You must target before you attack.",
+        "no": "No reminder",
+        "reminder": "Reminder",
+        "mustTarget": "Must target"
       },
       "tokenAnimation": {
         "hint": "Enable to alter token movement animation. This may cause problems with the module Multilevel Tokens.",

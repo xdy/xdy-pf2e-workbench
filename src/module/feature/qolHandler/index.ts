@@ -288,14 +288,12 @@ export async function castPrivateSpell(data: ChatMessageSourcePF2e, message: Cha
 }
 
 export function hideNameOfPrivateSpell(message: ChatMessagePF2e, html: JQuery) {
-    const find = game.messages.contents
-        .slice(-Math.min(10, game.messages.size))
-        .filter((m) => {
-            return m.flags?.pf2e?.origin?.uuid === message.flags?.pf2e?.origin?.uuid;
-        })
+    const msg = game.messages.contents
         .filter((m) => (m.type = CONST.CHAT_MESSAGE_TYPES.WHISPER))
-        .find((m) => m.whisper?.includes(game.user?.id));
-    if (find) {
+        .filter((m) => m.whisper?.includes(game.user?.id))
+        .filter((m) => m.flags?.pf2e?.origin?.uuid === message.flags?.pf2e?.origin?.uuid)
+        .pop();
+    if (msg) {
         const flavor = html?.find(".flavor-text");
         if (flavor.html()) {
             fromUuid(<string>message.flags?.pf2e.origin?.uuid).then((origin) => {

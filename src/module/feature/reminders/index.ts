@@ -159,7 +159,8 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
     }
 }
 
-export async function reminderTargeting(message: ChatMessagePF2e) {
+export function reminderTargeting(message: ChatMessagePF2e): boolean {
+    let result = true;
     if (
         message.actor &&
         shouldIHandleThis(message.actor) &&
@@ -169,7 +170,13 @@ export async function reminderTargeting(message: ChatMessagePF2e) {
     ) {
         const targets = message.user.targets;
         if (!targets || targets.size === 0) {
-            ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderTargeting.note`));
+            if (game.settings.get(MODULENAME, "reminderTargeting") === "reminder") {
+                ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderTargeting.info`));
+            } else if (game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget") {
+                ui.notifications.error(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderTargeting.error`));
+                result = false;
+            }
         }
     }
+    return result;
 }

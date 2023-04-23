@@ -23,7 +23,7 @@ import {
     resetHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
-import { logInfo, isFirstGM } from "./utils";
+import { isFirstGM, logInfo } from "./utils";
 import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller";
 import { loadSkillActions, loadSkillActionsBabele } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
@@ -93,7 +93,11 @@ export function updateHooks(cleanSlate = false) {
     handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
     handle("renderJournalDirectory", gs.get(MODULENAME, "npcRoller"), enableNpcRollerButton);
 
-    handle("preCreateChatMessage", gs.get(MODULENAME, "castPrivateSpell"), preCreateChatMessageHook);
+    handle(
+        "preCreateChatMessage",
+        gs.get(MODULENAME, "castPrivateSpell") || gs.get(MODULENAME, "reminderTargeting") !== "no",
+        preCreateChatMessageHook
+    );
 
     handle(
         "createChatMessage",
@@ -103,7 +107,6 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
             gs.get(MODULENAME, "automatedAnimationOn") ||
             gs.get(MODULENAME, "reminderBreathWeapon") ||
-            gs.get(MODULENAME, "reminderTargeting") ||
             gs.get(MODULENAME, "reminderCannotAttack") ||
             gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
         createChatMessageHook
