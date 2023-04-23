@@ -359,6 +359,10 @@
         "name": "Ctrl-click Cast to cast in private.",
         "aSpell": "A spell"
       },
+      "castPrivateSpellHideName": {
+        "hint": "(Experimental) Check to hide the name of a privately cast spell.",
+        "name": "Check to hide the name of a privately cast spell."
+      },
       "castPrivateSpellAlwaysForNPC": {
         "hint": "Check to always cast privately for npcs.",
         "name": "Check to always cast privately for npcs."

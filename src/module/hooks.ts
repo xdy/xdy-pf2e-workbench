@@ -173,7 +173,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
     }
 
     if (
-        game.settings.get(MODULENAME, "castPrivateSpell") &&
+        game.settings.get(MODULENAME, "castPrivateSpellHideName") &&
         message?.flags?.pf2e?.origin?.type === "spell" &&
         isActuallyDamageRoll(message)
     ) {
