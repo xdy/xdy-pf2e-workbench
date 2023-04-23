@@ -289,7 +289,7 @@
         "name": "Démarrer automatiquement le Gestionnaire de Point d'Héroïsme."
       },
       "maxHeroPoints": {
-        "hint": "Réglage du monde pour le nombre maximum de Points de Héros pour un personnage.",
+        "hint": "Réglage du monde pour le nombre maximum de Points d'héroïsme pour un personnage.",
         "name": "(Monde) Nombre maximum de points d'héroïsme."
       },
       "moveBeforeCurrentCombatantContextMenu": {
@@ -535,6 +535,16 @@
         "no": "Non",
         "add": "Ajouter mourant",
         "addForCharacters": "Ajouter mourant pour personnages et familiers"
+      },
+      "logLevel": {
+        "hint": "Niveau de journal",
+        "name": "Niveau de journal",
+        "trace": "Tracer",
+        "debug": "Débogage",
+        "info": "Info",
+        "warn": "Avertissement",
+        "error": "Erreur",
+        "off": "Désactivé"
       }
     },
     "effects": {
