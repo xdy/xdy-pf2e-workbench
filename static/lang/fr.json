@@ -450,7 +450,12 @@
       "reminderTargeting": {
         "hint": "Cliquez pour afficher un rappel pour cibler en combat.",
         "name": "Rappel de cibler",
-        "note": "S'il vous plait, ciblez avant d'attaquer."
+        "note": "S'il vous plait, ciblez avant d'attaquer.",
+        "error": "Vous devez cibler avant votre attaque.",
+        "mustTarget": "Doit cibler",
+        "no": "Pas de rappel",
+        "reminder": "Rappel",
+        "info": "Veuillez cibler avant votre attaque."
       },
       "workbenchVersion": {
         "hint": "Version que la dernière migration utilise. Peut être inférieure à la version du module. Ne modifiez pas cela à moins que vous ne sachiez ce que vous faites.",
@@ -545,6 +550,10 @@
         "warn": "Avertissement",
         "error": "Erreur",
         "off": "Désactivé"
+      },
+      "castPrivateSpellHideName": {
+        "name": "Cochez pour cacher le nom d'un sort lancé en privé.",
+        "hint": "(Expérimental) Cochez pour cacher le nom d'un sort lancé en privé."
       }
     },
     "effects": {
