@@ -228,7 +228,12 @@
       "reminderTargeting": {
         "hint": "勾选此项，在战斗中选择目标时进行提示。",
         "name": "目标提示",
-        "note": "攻击前请先选择目标。"
+        "note": "攻击前请先选择目标。",
+        "error": "你必须在攻击前选择一个目标。",
+        "no": "无提醒",
+        "reminder": "提醒",
+        "mustTarget": "必须选中目标",
+        "info": "请在攻击前先选定目标。"
       },
       "npcMystifierBlacklist": {
         "hint": "添加黑名单词汇，以逗号分隔，它们将从神秘化名称列表中剔除。",
@@ -536,6 +541,20 @@
         "no": "否",
         "add": "添加濒死",
         "addForCharacters": "为玩家角色和魔宠添加濒死"
+      },
+      "logLevel": {
+        "error": "错误",
+        "name": "日志等级",
+        "hint": "日志等级",
+        "trace": "追踪",
+        "debug": "排错",
+        "info": "信息",
+        "warn": "警告",
+        "off": "关闭"
+      },
+      "castPrivateSpellHideName": {
+        "name": "启用此项以隐藏被隐蔽施放法术的法术名。",
+        "hint": "(实验性功能)启用此项以隐藏被隐蔽施放法术的法术名。"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
