@@ -1,1 +1,326 @@
-{}
+{
+  "xdy-pf2e-workbench": {
+    "macros": {
+      "basicActionMacros": {
+        "gmMustImport": "Der SL muss mit der rechten Maustaste auf das Kompendium xdy-pf2e-workbench-macros klicken und 'Alle Inhalte importieren' wählen und darauf achten, dass er beim Importieren 'Dokument-IDs beibehalten' ankreuzt.",
+        "settings": {
+          "showBestBonus": {
+            "hint": "Ob im Dialog Grundlegende Aktionsmakros angezeigt werden soll, ob der ausgewählte Akteur den besten Bonus hat",
+            "name": "Anzeigen falls Bester im Basisaktions-Makro"
+          }
+        },
+        "actions": {
+          "ConcealAnObject": "Ein Objekt verstecken",
+          "Escape": "Entkommen - höchste (??)",
+          "GatherInformation": "Informationen sammeln",
+          "Hide": "Verstecken",
+          "PickALock": "Schloss knacken",
+          "SubsistSurvival": "Überleben - Wildnis",
+          "DecipherWritingArcana": "Schrift entziffern - Arkan",
+          "MakeAnImpression": "Beeindrucken",
+          "RecallKnowledge": "Wissen abrufen",
+          "CreateADiversionTrick": "Für Ablenkung sorgen - Trick",
+          "Demoralize": "Demoralisieren",
+          "AdministerFirstAidStabilize": "Erste Hilfe - Stabilisieren",
+          "AdministerFirstAidStopBleeding": "Erste Hilfe - Blutung stoppen",
+          "AidToggle": "Helfen (Schalter)",
+          "AvoidNotice": "Unbemerkt bleiben",
+          "Balance": "Balancieren",
+          "Climb": "Klettern",
+          "Coerce": "Bedrängen",
+          "CommandAnAnimal": "Tier anweisen",
+          "Craft": "Herstellen",
+          "CreateADiversionGesture": "Für Ablenkung sorgen - Geste",
+          "CreateForgery": "Fälschung erstellen",
+          "DecipherWritingOccultism": "Schrift entziffern - Okkult",
+          "DecipherWritingReligion": "Schrift entziffern - Religion",
+          "DecipherWritingSociety": "Schrift entziffern - Gesellschaftskunde",
+          "DisableDevice": "Mechanismus ausschalten",
+          "Disarm": "Entwaffen",
+          "Feint": "Finte",
+          "FollowTheExpertToggle": "Am Experten orientieren (Schalter)",
+          "ForceOpen": "Aufbrechen",
+          "Grapple": "Ergreifen",
+          "Impersonate": "Verkleiden",
+          "JumpHigh": "Hochsprung",
+          "JumpLong": "Weitsprung",
+          "Lie": "Lügen",
+          "ManeuverInFlight": "Im Flug manövrieren",
+          "PalmAnObject": "Gegenstand einstecken",
+          "Perform": "Auftreten",
+          "RaiseAShieldToggle": "Schild heben (Schalter)",
+          "Repair": "Reparieren",
+          "Request": "Erbitten",
+          "Seek": "Suchen",
+          "SenseDirection": "Richtung erkennen",
+          "SenseMotive": "Motiv erkennen",
+          "Shove": "Fortstoßen",
+          "Sneak": "Schleichen",
+          "Squeeze": "Hindurchzwängen",
+          "Steal": "Stehlen",
+          "SubsistSociety": "Überleben - Gesellschaft",
+          "Swim": "Schwimmen",
+          "TakeCoverToggle": "In Deckung gehen (Schalter)",
+          "Track": "Spuren folgen",
+          "TreatDisease": "Krankheit behandeln",
+          "TreatPoison": "Vergiftung behandeln",
+          "TreatWounds": "Wunden versorgen",
+          "Trip": "Zu-Fall-Bringen",
+          "TumbleThrough": "Hindurchturnen"
+        },
+        "macroNotFound": "Makro {macroName} nicht gefunden",
+        "title": "Aktionen ({name})",
+        "second": "(-5)",
+        "YouAreTheBestInYourParty": "Du bist der Beste in der Gruppe",
+        "noActorSelected": "Kein Akteur ausgewählt",
+        "cancel": "Abbruch",
+        "third": "(-10)",
+        "compendiumNotFound": "Kompendium {compendiumName} nicht gefunden"
+      },
+      "buildNpcSpellbookJournal": {
+        "noSpellcastingEntry": "Du musst entweder ein NSC-Charakterblatt geöffnet und ausgewählt haben oder ein einzelnes NSC-Token ausgewählt haben. Außerdem muss der NSC einen Eintrag für Zauberei haben.",
+        "title": "Erstelle NSC Zauberbuch",
+        "generatedSpellbookFor": "Generiere Zauberbuch für {name}"
+      },
+      "refocus": {
+        "enabled": "Erneuere {regain} Fokuspunkte.<br/><b>NUR</b> drücken falls du {details} seit dem letzen Mal Fokus erneuern.",
+        "one": "einen",
+        "regains": "Erneuert {focus} Fokuspunkte.",
+        "notPsychic": "mindestens {regain} Fokuspunkte verbraucht hast",
+        "isPsychic": "Fokuspunkte nur verbrauchst hast um PSI-Zaubertricks zu verstärken oder psychische Fähigkeiten anzutreiben",
+        "regainOne": "Erneuert 1 Fokuspunkt.",
+        "disabled": "Deaktiviert, da keine Fähigkeit gelernt wurde um mehr als 1 Fokuspunkt zu erneuern.",
+        "selectOneActor": "Es muss ein Akteur ausgewählt werden."
+      },
+      "whirlwindStrike": {
+        "starts": "{name} Wirbelnder Angriff startet!",
+        "ends": "{name} Wirbelnder Angriff endet nach {targets} Angriffen!",
+        "error": "Wähle ein Token mit Wirbelnder Angriff und mindestens einem Ziel in Reichweiter aus!"
+      }
+    },
+    "modules": {
+      "multilevel-tokens": "Das Modul 'Multilevel Tokens' (und wahrscheinlich auch andere Module, die Token teleportieren) können Probleme mit dem Teleportieren haben, wenn Sie die optionale Workbench-Einstellung zur Änderung der Token-Animation aktiviert haben.",
+      "pf2e-sheet-skill-actions": "Das Modul 'pf2e-sheet-skill-actions' wird nicht länger gewartet, aber alle Funktionen sind Teil des Workbench-Moduls, bitte deaktiviere es.",
+      "pf2e-toolbox": "Das Modul 'pf2e-toolbox' wird nicht länger gepflegt, aber die meisten Funktionen sind Teil des Workbench-Moduls, bitte deaktiviere es."
+    },
+    "SETTINGS": {
+      "autoCollapseItemAttackChatCardContent": {
+        "collapsedDefault": "Zusammengeklappt als Standard, Titel anklicken um auszuklappen.",
+        "hint": "Client-Einstellung zum automatischen Einklappen des Chat-Angriffskarteninhaltes.",
+        "noCollapse": "Nie zusammenklappen",
+        "name": "Automatisches Zusammenklappen des Chat-Angriffskarteninhaltes.",
+        "nonCollapsedDefault": "Ausgeklappt als Standard, Titel anklicken zum Zusammenklappen."
+      },
+      "autoCollapseItemActionChatCardContent": {
+        "hint": "Client-Einstellung zum automatischen Einklappen des Chat-Aktionskarteninhaltes.",
+        "collapsedDefault": "Zusammengeklappt als Standard, Titel anklicken um auszuklappen.",
+        "noCollapse": "Nie zusammenklappen",
+        "name": "Automatisches Zusammenklappen des Chat-Aktionskarteninhaltes.",
+        "nonCollapsedDefault": "Ausgeklappt als Standard, Titel anklicken zum Zusammenklappen."
+      },
+      "autoExpandDamageRolls": {
+        "expandedNewest": "Neue Schadenswürfe ausklappen (ebenfalls den letzten Wurf ausklappen bei einem Seitenrefresh).",
+        "collapsedAll": "Alle Schadenswürfe zusammenklappen (Foundry Standard).",
+        "expandedAll": "Alle Schadenswürfe ausklappen.",
+        "expandedNew": "Neue Schadenswürfe ausklappen (ebenfalls die letzten 3 Würfe ausklappen bei einem Seitenrefresh).",
+        "hint": "Client-Einstellung für das automatische Ausklappen von Schadenswürfen (Foundry Standard ist das zusammenklappen aller Schadenswürfe). Würfelwurf anklicken zum ein-/auszuklappen.",
+        "name": "Automatisches Ausklappen von Schadenswürfen."
+      },
+      "autoGainDyingAtZeroHP": {
+        "addWoundedLevelForCharacters": "Erhöhe um 1 + Verwundet-Stufe, für Charaktere + Vertraute",
+        "deliberateDeathMessage": "Falls {name} den Sterbend-Zustand als Ergebnis eines Angriffes oder Fähigkeit von einer Kreatur in Reichweite erhalten würde, kann er einen Nahkampf-Angriff gegen die auslösende Kreatur machen, <b>bevor er den Sterbend-Zustand erhält</b>.<br>Entferne den 'Freiwilliger Tod genutzt' Effekt falls es nicht genutzt werden kann.",
+        "addOneForCharacters": "Erhöhe um eins, für Charaktere + Vertraute",
+        "addOne": "Erhöhe um eins",
+        "addWoundedLevel": "Erhöhe um 1 + Verwundet-Stufe, für alle",
+        "hint": "Einstellung zur automatischen Erhöhung des Sterbend-Zustandes bei Erreichen von 0 TP.",
+        "name": "Erhöhung des Sterbend-Zustandes bei Erreichen von 0 TP.",
+        "no": "Nein",
+        "orcFerocityMessage": "{name} hat grade @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] genutzt und kann jetzt die folgende freie Aktion verwenden:@UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]"
+      },
+      "automationClientSettings": {
+        "label": "Verwalte die Client Automatisierungseinstellungen",
+        "name": "Client Automatisierungseinstellungen",
+        "hint": "Aktiviere und konfiguriere Automatisierung für die Spieler"
+      },
+      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
+        "name": "Automatisches Entfernen des Bewusstlos-Zustand, falls man über 0 TP geheilt wird.",
+        "hint": "Einstellung für das automatische Entfernen des Bewusstlos-Zustand, falls man über 0 TP geheilt wird."
+      },
+      "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
+        "no": "Nein",
+        "add": "Füge Sterbend hinzu",
+        "addForCharacters": "Füge Sterbend hinzu, für Charaktere + Vertraute",
+        "hint": "(Experimentell) Falls kritisch von einem gegnerischen Akteur verletzt, fügt er eine zusätzliche Stufe sterbend hinzu. Benutzt die Einstellung aus dem Dropdown-Menü.",
+        "name": "... und eine Stufe Sterbend extra falls kritisch durch einen Gegner getroffen."
+      },
+      "autoGainDyingIfTakingDamageWhenAlreadyDying": {
+        "no": "Nein",
+        "hint": "(Experimental) Falls Schaden im Zustand Sterbend erhalten wird, füge eine Stufe Sterbend hinzu (oder eventuell 2 falls Sterbend bei kritischen Treffern aktiviert ist). Benutzt die Einstellung aus dem Dropdown-Menü.",
+        "add": "Füge Sterbend hinzu",
+        "addForCharacters": "Füge Sterbend hinzu, für Charaktere + Vertraute",
+        "name": "... und fügt zusätzlich(e) Sterbend Stufe(n) hinzu, falls Schaden im Zustand Sterbend genommen wird."
+      },
+      "automationWorldSettings": {
+        "hint": "Aktiviere und konfiguriere Automatisierung für die SL",
+        "label": "Verwalte die Welt Automatisierungseinstellungen",
+        "name": "Welt Automatisierungseinstellungen"
+      },
+      "autoReduceStunned": {
+        "hint": "Client Einstellung zur automatischen Reduzierung von Betäubt am Start des Zuges.",
+        "name": "automatische Reduzierung von Betäubt am Start des Zuges"
+      },
+      "autoRemoveDyingAtGreaterThanZeroHP": {
+        "no": "Nein",
+        "hint": "Einstellung zur automatischen Entfernung des Sterbend-Status wenn man auf über 0 TP geheilt wird.",
+        "name": "Automatische Entfernung des Sterbend-Status wenn man auf über 0 TP geheilt wird.",
+        "removeDyingForCharacters": "Entferne Sterbend, für Charaktere + Vertraute",
+        "removeDying": "Entferne Sterbend für alle"
+      },
+      "autoRollDamageAllow": {
+        "all": "Alle",
+        "gm": "SL",
+        "none": "Keiner"
+      },
+      "giveUnconsciousIfDyingRemovedAt0HP": {
+        "no": "Nein"
+      },
+      "heroPointHandler": {
+        "all": "Alle"
+      },
+      "npcMystifierAddRandomProperty": {
+        "none": "Keiner"
+      },
+      "applyPersistentAllow": {
+        "none": "Keiner",
+        "gm": "SL",
+        "name": "Wer hat die Erlaubnis die Option zum automatischen anwenden von bleibenden Schaden/Heilung zu setzen.",
+        "players": "Spieler",
+        "all": "Alle",
+        "hint": "Auswählen wer die Erlaubnis hat um die Option zum automatischen anwenden von bleibenden Schaden/Heilung zu setzen. Speichern um die zusätzlichen Menüpunkte im Menü Client-Automatisierung ein- bzw. auszublenden."
+      },
+      "applyPersistentDamage": {
+        "name": "Automatisches anwenden von anhaltenden Schaden.",
+        "hint": "Client-Einstellung um automatisch anhaltenden Schaden anzuwenden.",
+        "wasDamaged": "{damage} Schaden wurde automatisch angewendet"
+      },
+      "autoCollapseItemChatCardContent": {
+        "hint": "Client-Einstellung zum automatischen einklappen des Chat-Gegenstandskarteninhaltes (ohne Aktionen und Angriffe, siehe unten).",
+        "name": "Automatisches Zusammenklappen des Chat-Gegenstandskarteninhaltes.",
+        "noCollapse": "Nie zusammenklappen",
+        "collapsedDefault": "Zusammengeklappt als Standard, Titel anklicken um auszuklappen.",
+        "nonCollapsedDefault": "Ausgeklappt als Standard, Titel anklicken zum Zusammenklappen."
+      },
+      "actionsReminderAllow": {
+        "gm": "SL",
+        "all": "Alle",
+        "hint": "Auswählen um die Anzahl an Aktionen Erinnerung als Chat Nachricht zu schicken.",
+        "name": "Wer erhält Aktions-Erinnungen",
+        "none": "Keiner",
+        "players": "Spieler"
+      },
+      "addUserTargets": {
+        "title": "Benutzer auswählen um Ziele für sie hinzufügen",
+        "addFor": "Ziele hinzufügen für",
+        "clearFor": "Ziele entfernen für",
+        "hint": "Tastenkürzel um ausgewählte und schwebende Ziele zu den gewählten Zielen des Benutzers hinzuzufügen.",
+        "name": "Ziele des Benutzers hinzufügen"
+      },
+      "abpVariantAllowItemBonuses": {
+        "hint": "Gegestandsboni nicht deaktivieren, obwohl die Variantenregel der Automatischen Bonus Progression genutzt wird.",
+        "name": "Gegenstandboni nicht deaktivieren, trotz Verwendung von ABP."
+      },
+      "applyPersistentHealing": {
+        "FastHealingLabel": "Schnelle Heilung erhalten",
+        "hint": "Client-Einstellung um anhaltende Heilung automatisch vom System anwenden zu lassen. Einstellungen speichern um zusätzliche Optionen ein- bzw. auszublenden.",
+        "name": "Automatisches anwenden von anhaltender Heilung, welche vom System ausgewürfelt wird.",
+        "RegenerationLabel": "Regeneration erhalten",
+        "wasHealed": "{healing} Heilung wurde automatisch angewendet."
+      },
+      "applyEncumbranceBasedOnBulk": {
+        "hint": "Automatisch belastet anhand der Last hinzufügen. (Der System Code sieht 9 Leichte Last nicht als überschreiten der Last um 1 an.)",
+        "name": "Automatisch belastet anhand der Last hinzufügen."
+      }
+    },
+    "skillActions": {
+      "assuranceLabel": "Routine",
+      "Settings": {
+        "Position": {
+          "disabled": "deaktiviert",
+          "hint": "Position auf der Fertigkeiten-Seite; Oben: direkt nach den Angriffen, Unten: Am Ende",
+          "bottom": "Unten",
+          "top": "Oben",
+          "name": "Position der Fertigkeitsaktivitäten"
+        },
+        "Description": {
+          "name": "Beschreibung der Fertigkeitsaktivität",
+          "hint": "Entscheidet ob die Aktionsbeschreibung im Chat angezeigt werden soll, sobald gewürfelt wird"
+        },
+        "variants": {
+          "createADiversion": {
+            "distractingWords": "Ablenkende Worte",
+            "trick": "Trick/Kniff",
+            "gesture": "Geste"
+          },
+          "administerFirstAid": {
+            "stabilize": "Stabilisieren",
+            "stopBleeding": "Blutung stoppen",
+            "stopBleedingChirurgeon": "Blutung stoppen (Chirurg)",
+            "stabilizeChirurgeon": "Stabilisieren (Chirurg)"
+          },
+          "perform": {
+            "dance": "Tanz",
+            "keyboards": "Tasteninstrument",
+            "oratory": "Redekunst",
+            "percussion": "Schlaginstrument",
+            "acting": "Schauspielkunst",
+            "comedy": "Komödie",
+            "singing": "Gesang",
+            "strings": "Streichinstrument",
+            "winds": "Blasinstrument"
+          }
+        },
+        "hideDuplicates": {
+          "hint": "Entscheidet ob doppelte Aktivitäten versteckt werden sollen, sowohl bei der Aktivitätenliste, als auch bei der Liste der Fertigkeitsaktivitäten",
+          "doNotHide": "Nicht verstecken",
+          "hideActions": "Verstecken",
+          "hideSkillActions": "Fertigkeitsaktivitäten verstecken",
+          "name": "Fertigkeitsaktivitäten: doppelte Aktivitäten verstecken"
+        },
+        "IconStyle": {
+          "actionCostIcon": "Aktionskosten-Symbol",
+          "skillIcon": "Fertikeitssymbol",
+          "name": "Fertigkeitsaktivitäten Symbolstyle",
+          "hint": "Symbolstyle bei den Fertigkeiten; Aktionskosten-Symbol: Für das Aktionkosten-Symbol, Fertigkeitssymbol: Für das Symbol der Fertigkeit, falls verfügbar"
+        }
+      },
+      "Title": "Fertigkeitsaktivitäten",
+      "UnequipAll": {
+        "Tooltip": "Versteckte Aktionen umschalten. Halte beim Klicken die Alt-Taste gedrückt, um alle Fertigkeiten abzu- / anzuwählen."
+      }
+    },
+    "npcRoller": {
+      "nav-labels": {
+        "dc": "SG",
+        "strike": "Angriffe",
+        "damage": "Schaden",
+        "ac": "Rüstungsklasse",
+        "save": "Rettungswürfe",
+        "hp": "Trefferpunkte",
+        "spell": "Zauber",
+        "areaDamage": "Flächenschaden",
+        "perception": "Wahrnehmung",
+        "abilityScore": "Attributswerte",
+        "skill": "Fertigkeiten"
+      },
+      "title": "NSC Roller",
+      "button-label": "NSC Roller"
+    },
+    "spellCardNotFound": "Die Karte für den Zauber konnte nicht gefunden werden. Zaubere den {spell} auf dem minimalen Zaubergrad für diesen Zauber.",
+    "effects": {
+      "orcFerocityUsed": "Orkische Wildheit genutzt",
+      "bounceBackUsed": "Dem Tod von der Schippe genutzt",
+      "numbToDeathUsed": "Abgestumpft genutzt",
+      "deliberateDeathUsed": "Freiwilliger Tod genutzt"
+    }
+  }
+}
