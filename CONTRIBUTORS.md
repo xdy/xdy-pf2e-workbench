@@ -32,6 +32,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [Oskar]() - Contributed to the Polish translation, and contributed the icon for the Basic Action Macro.
 * [popy]() - Contributed to the Polish translation, and contributed the icon for the Basic Action Macro.
 * [nomis80](https://github.com/simon-perreault) - Fixed a bug in mystified token names.
+* [Liathan] - Added the German translation.
 
 I've probably forgotten someone, if so, please tell me!
 
