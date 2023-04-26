@@ -1,3 +1,10 @@
+# [4.65.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.64.3...v4.65.0) (2023-04-26)
+
+
+### Features
+
+* Adds full German translation courtesy of @Liathan ([64bf4bc](https://github.com/xdy/xdy-pf2e-workbench/commit/64bf4bc3a3fce43a7348ba5b42ecaec039232c10))
+
 ## [4.64.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.64.2...v4.64.3) (2023-04-23)
 
 
