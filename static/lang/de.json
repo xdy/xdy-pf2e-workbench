@@ -179,16 +179,48 @@
       "autoRollDamageAllow": {
         "all": "Alle",
         "gm": "SL",
-        "none": "Keiner"
+        "none": "Keiner",
+        "name": "Auswählen wer die Erlaubnis besitzt automatische den Schaden bei einem Treffer zu würfeln.",
+        "hint": "Auswählen wer die Erlaubnis besitzt automatische den Schaden bei einem Treffer zu würfeln. Speichere die Einstellung um in den Client Einstellung zusätzliche Optionen einzu-/auszublenden.",
+        "players": "Spieler"
       },
       "giveUnconsciousIfDyingRemovedAt0HP": {
-        "no": "Nein"
+        "no": "Nein",
+        "hint": "Einstellung zur automatischen Verteilung des Bewusstlos-Status wenn Sterbend bei 0 TP entfernt wurde.",
+        "name": "Automatisch Bewusstlos-Status zuweisen wenn Sterbend bei 0 TP entfernt wurde."
       },
       "heroPointHandler": {
-        "all": "Alle"
+        "all": "Alle",
+        "hint": "Aktiviere das Heldenpunkt-Verwaltung Feature mit einem optionalen Tastenkürzel um einen Dialog zu öffnen in dem Heldenpunkte für alle Charaktere zurückgesetzt oder hinzugefügt werden können, ein Heldenpunkt einem zufälligen (oder ausgewählten) Charakter und, was am wichtigsten ist, einen Timer zu starten, welcher das Verwaltungsfenster wieder nach 60 Minuten (Standard) erneut öffnet.",
+        "instructions": "Beachte, dass der Timer pausiert ist solange dieses Dialogfenster offen ist. Schließe es ohne auf einen der Knöpfe zu drücken um den Timer weiterlaufen zu lassen oder drücke einen der Knöpfe um die entsprechende Handlung auszuführen.",
+        "addedToForAll": "{heroPoints} Heldenpunkt(e) hinzugefügt für alle",
+        "defaultTimeoutMinutes": 60,
+        "addOne": "<b>Abschnitt 2</b> - Füge einen Heldenpunkt dem ausgewählten Charakter aus den eingeloggten Spielern hinzu (Standardmäßig wird ein zufälliger Charakter ausgewählt wenn der Timer abläuft)",
+        "minutesLeft": "Minuten verbleibend auf dem aktuellen Timer",
+        "noTimerLabel": "Änderungen <b>ohne</b> Timer absenden. Dies <b>stoppt</b> jeglichen existierenden Timer.",
+        "willBeResetIn": "Heldenpunkt Verwalter wird in {remainingMinutes} Minuten ({time}) zurückkehren.",
+        "startTimerLabel": "Schicke die Änderungen ab und starte den Timer oder setze ihn fort",
+        "add": "Hinzufügen",
+        "addedFor": "1 Heldenpunkt für {name} hinzugefügt",
+        "doWhat": "<b>Abschnitt 1</b> - Wähle, was mit den Heldenpunkten <em>aller</em> Charaktere mit den folgenden Wert geschehen soll",
+        "ignore": "Nichts",
+        "name": "Aktiviere die Heldenpunkt-Verwaltung.",
+        "none": "Kein Charakter",
+        "noRunningTimer": "Es läuft kein Timer",
+        "resetTo": "Zurücksetzen auf",
+        "resetToForAll": "Heldenpunkte wurden auf {heroPoints} für alle zurückgesetzt",
+        "showAfter": "Zeige dieses Fenster wieder nach so vielen Minuten",
+        "thisMany": "So viele",
+        "timerStopped": "Heldenpunkt Timer wurde angehalten.",
+        "timerValue": "Timer-Zeit (Bereich 0-60)",
+        "title": "Heldenpunkt Verwaltung"
       },
       "npcMystifierAddRandomProperty": {
-        "none": "Keiner"
+        "none": "Keiner",
+        "hint": "Wähle eine Art von Zufallseigenschaft aus, welche bei der Verschleierung von NSC hinzugefügt werden soll und optional beibehalten werden kann.",
+        "name": "Für eine Zufallseigenschaft des gewählten Typs zum Namen hinzu",
+        "numberPostfix": "Zahl als Suffix",
+        "wordPrefix": "Wort als Präfix"
       },
       "applyPersistentAllow": {
         "none": "Keiner",
@@ -239,6 +271,311 @@
       "applyEncumbranceBasedOnBulk": {
         "hint": "Automatisch belastet anhand der Last hinzufügen. (Der System Code sieht 9 Leichte Last nicht als überschreiten der Last um 1 an.)",
         "name": "Automatisch belastet anhand der Last hinzufügen."
+      },
+      "customPauseImage": {
+        "hint": "Eigenes Bild für das Pausenbild benutzen. Leer lassen um das Standard Uhrwerk-Symbol zu nutzen.",
+        "name": "Eigenes Bild für das Pausenbild benutzen."
+      },
+      "customPauseText": {
+        "hint": "Eigenen Text für den Pausentext nutzen. Leer lassen um das Standard-Text 'Game Paused' zu nutzen.",
+        "name": "Eigenen Text für den Pausentext nutzen."
+      },
+      "customPauseRelocation": {
+        "hint": "Pausenbild in die Mitte des Bildschirm verschieben, mit dem Text darüber.",
+        "name": "Pausenbild zentrieren, mit dem Text darüber."
+      },
+      "autoRollDamageNotifyOnSpellCardNotFound": {
+        "name": "Benachrichtigen wenn ein Zauberangriff gewürfelt wird und keine Zauberkarte für den Schaden gefunden wurde.",
+        "hint": "Client Einstellung zum benachrichtigen wenn ein Zauberangriff gewürfelt wird und keine Zauberkarte für den Schaden gefunden wurde."
+      },
+      "playerFeatsPrerequisiteHint": {
+        "hint": "Client Einstellung um ein Sternchen zum Namen von Talenten mit einer Voraussetzung hinzufügen.",
+        "name": "Ein Sternchen zum Namen von Talenten mit einer Voraussetzung hinzufügen."
+      },
+      "castPrivateSpellWithPublicMessage": {
+        "secondPartRK": ".<br>Frage deinen SL ob du den Zauber automatisch erkennst, ansonsten kannst du versuchen einen hier von @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] oder davon @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] zu nutzen. Oder, während deines Zuges, kannst du eine Aktion verwenden um zu versuchen den Zauber mit @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk} zu identifizieren",
+        "name": "Schreibe eine Nachricht wenn ein Zauber gewirkt wurde.",
+        "savePart": "<br>Rettungswurf gegen den unbekannten Zauber ist: @Check[type:{dataSave}|SG:{dataDC}|traits:{traits}]",
+        "firstPart": "{tokenName} wirkte grade einen {vsmf} {type} der folgenden <strong>{traditionString}</strong> Tradition",
+        "they": "Sie",
+        "cantrip": "Zaubertrick",
+        "components": "Komponenten:",
+        "hint": "Falls Zauber wirken auf privat steht, wird einen Nachricht gepostet, welche besagt das ein Zauber gewirkt wird, AUßER wenn zusätzlich SHIFT und STRG beim Zaubern gehalten wird.",
+        "secondPartNoRk": ".<br>Frage deinen SL ob du den Zauber automatisch erkennst, ansonsten kannst du versuchen einen hier von @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] oder davon @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] zu nutzen. Oder, während deines Zuges, kannst du eine Aktion verwenden um zu versuchen den Zauber zu identifizieren (sprich mit den SL bezüglich der Details).",
+        "spell": "Zauber"
+      },
+      "npcMystifierBlacklist": {
+        "hint": "Füge Wörter hinzu, um den Inhalt dieser kommagetrennten Blockierliste aus dem verschleierten Namen herauszufiltern.",
+        "name": "Eigenschaften der Blockliste, welche nie hinzugefügt werden sollen"
+      },
+      "callHotbarMacro": {
+        "hint": "Rufe ein Hotbar-Makro von Seite {page} Position {column} auf",
+        "name": "Rufe ein Hotbar-Makro von Seite {page} Position {column} auf"
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "hint": "Zeige Zauberkategorien in der öffentlichen Nachricht.",
+        "traitPart": " mit diesen Kategorien: <strong>{traits}</strong>",
+        "name": "Zeige Zauberkategorien in der öffentlichen Nachricht."
+      },
+      "creatureBuilder": {
+        "name": "Die Erstellung eigener Kreaturen erlauben.",
+        "hint": "Auswählen um die Erstellung eigener Kreaturen anhand der Regeln im Spielleiterhandbuch zu erlauben."
+      },
+      "heroPointHandlerStartTimerOnReady": {
+        "hint": "Auswählen um die Heldenpunkt Verwaltung automatisch mit einem Timer zu starten, sobald das Spiel bereit ist.",
+        "name": "Heldenpunkt Verwaltung automatisch mit einem Timer zu starten."
+      },
+      "heroPointHandlerKey": {
+        "name": "Tastenkürzel, um den Heldenpunkt-Handler-Dialog zu öffnen.",
+        "hint": "Tastenkürzel, um den Heldenpunkt-Handler-Dialog zu öffnen, der das Zurücksetzen und Hinzufügen von Heldenpunkten mit einer stündlichen Erinnerung ermöglicht."
+      },
+      "mystificationSettings": {
+        "label": "Verwalte die NSC Verschleierungseinstellungen",
+        "name": "NSC Verschleierungseinstellungen",
+        "hint": "Aktiviere und konfiguriere die NSC-Verschleierung"
+      },
+      "maxHeroPoints": {
+        "name": "(Welt) maximale Anzahl an Heldenpunkten.",
+        "hint": "Welt-Einstellung für die maximale Anzahl an Heldenpunkten für einen Charakter."
+      },
+      "npcMystifierUseCreatureTypesTraits": {
+        "name": "Benutze Kreaturentyp Kategorien",
+        "hint": "Auswählen um Kreaturentyp Kategorien für den Verschleierten Namen zu nutzen (siehe https://2e.aonprd.com/Traits.aspx)."
+      },
+      "npcMystifyAllPhysicalMagicalItems": {
+        "onScene": "Verschleiere Gegenstände wenn NSC zur Szene hinzugefügt werden",
+        "onZeroHp": "Verschleiere Gegenstände auf NSC wenn diese 0 TP erreichen",
+        "name": "Verschleiere alchemistische und magische Gegenstände auf NSC, wenn die PF2e-Systemeinstellung 'NSC sind plünderbar' aktiviert ist.",
+        "hint": "Verschleiere automatisch alle nicht temporären physischen Gegenstände, die alchemistisch oder magisch sind, je nachdem, was im Dropdown-Menü ausgewählt wurde, wenn die PF2e-Systemeinstellung \"NSC sind plünderbar\" aktiviert ist.",
+        "no": "keine Verschleierung von Gegenständen"
+      },
+      "reminderCannotAttack": {
+        "defeated": "ist besiegt",
+        "note": "Bist du dir sicher mit dieser Attacke? {actorName} {reason}, und kann deswegen wahrscheinlich nicht angreifen...",
+        "hint": "Auswählen um eine Erinnerung zu erhalten, wenn eine Attacke mit dem Token nicht möglich ist, weil es bewusstlos/tot/besiegt/keine TP/etc. hat.",
+        "petrified": "ist versteinert",
+        "unconscious": "ist bewusstlos",
+        "dead": "ist tot",
+        "hasNoHp": "hat keine TP",
+        "name": "Erinnerung ob ein Angriff mit dem Token nicht möglich ist"
+      },
+      "castPrivateSpell": {
+        "aSpell": "Ein Zauber",
+        "hint": "Auswählen um zum aktivieren, dass Strg-Taste gedrückt halten beim Zauber wirken, den Zauber den SL und Zauberer zuflüstert.",
+        "name": "Strg-Taste gedrückt halten beim Zauber wirken damit die Anzeige privat wird."
+      },
+      "castPrivateSpellAlwaysForNPC": {
+        "hint": "Auswählen um Zauber für NSC immer privat zu wirken.",
+        "name": "Auswählen um Zauber für NSC immer privat zu wirken."
+      },
+      "decreaseFrightenedConditionEachTurn": {
+        "name": "Automatisch den Verängstigt-Status jeden Zug reduzieren.",
+        "hint": "Client-Einstellung um automatisch den Verängstigt-Status jeden Zug für Charaktere, NSC und Vertraute zu reduzieren."
+      },
+      "enableAutomaticMove": {
+        "hint": "Auswählen um die Initiative eines Kämpfers außerhalb des eigenen Zuges auf einen Wert kurz vor dem aktuellen Kämpfer zu setzen, normalerweise weil der aktuelle Kämpfer den ausgewählten Kämpfer getötet hat. Aufgrund von Rundungen können mehrere Kämpfer die gleiche Initiative in der Liste anzeigen.",
+        "name": "Setzen der Initiative auf kurz vor den aktuellen Kämpfer.",
+        "noAutomation": "Niemals",
+        "reaching0HP": "Wenn der Charakter oder NSC Kämpfer 0 TP erreicht.",
+        "reaching0HPCharactersOnly": "Wenn ein Charakter 0 TP erreicht."
+      },
+      "giveWoundedWhenDyingRemoved": {
+        "hint": "Einstellung zur automatischen Verteilung des Verwundet-Status wenn der Sterbend-Status entfernt wurde.",
+        "name": "Automatischen den Verwundet-Status setzen wenn der Sterbend-Status entfernt wurde.",
+        "numbToDeathMessage": "{name} hat grade @UUID[Compendium.pf2e.feats-srd.gfMP2aMs3YGONVeB] ausgelöst. Füge die Heilung manuell hinzu."
+      },
+      "moveBeforeCurrentCombatantContextMenu": {
+        "name": "Bewege den ausgewählten Kämpfer vor den aktuellen Kämpfer."
+      },
+      "moveBeforeCurrentCombatantKey": {
+        "hint": "Welt Tastenkürzel, um den ausgewählten Kämpfer vor den aktuellen Kämpfer zu verschieben, normalerweise weil der aktuelle Kämpfer den ausgewählten Kämpfer getötet hat. Aufgrund der Rundung können mehrere Kämpfer die gleiche Initiative in der Liste aufweisen.",
+        "name": "Welt Tastenkürzel, um den ausgewählten Kämpfer vor den aktuellen Kämpfer zu verschieben."
+      },
+      "npcMystifier": {
+        "name": "Aktiviert die NSC Verschleierung.",
+        "hint": "Aktivieren um die NSC Verschleierung zu aktivieren, umbenennen der Token auf der aktiven Szenen, basierend auf ihren Kategorien falls STRG (konfigurierbar) gedrückt wird wenn es zur Szene hinzugefügt wird. Speichere die Einstellung um weitere Optionen ein-/auszublenden."
+      },
+      "notifications": {
+        "cantMystify": "Du kannst dieses Token nicht verschleiern. Ist es auf der aktiven Szene und bist du ein SL?"
+      },
+      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+        "name": "Entschleiere alle Tokens des Akteurs",
+        "hint": "Auswählen um alle Mystifizierungen auf alle Token anzuwenden, die auf demselben Akteur basieren."
+      },
+      "npcMystifierKeepRandomProperty": {
+        "name": "Behalte Präfix/Suffixe bei der Ver-/Entschleierung von NSC.",
+        "hint": "Aktivieren, um Nummern-Suffix/Wort-Präfix *im gleichen Format wie derzeit in diesem Modul konfiguriert* (falls vorhanden) als Suffix/Präfix zum Namen zu behalten, wenn NSC ver-/entschleiert werden."
+      },
+      "npcMystifierModifierKey": {
+        "alt": "Alt",
+        "control": "Steuerung",
+        "disabled": "Deaktiviert",
+        "hint": "Wählen Sie diese Option, um festzulegen, welche Taste gedrückt werden soll, um die Kreatur zu verschleiern, wenn sie in die aktive Szene gezogen wird. Beachten Sie, dass, wenn Sie Alt wählen (nicht die Standardeinstellung), es ebenfalls die NSC versteckt .",
+        "name": "Taste zum verschleiern beim ziehen auf die Szene",
+        "always": "Immer"
+      },
+      "npcMystifierMystifyKey": {
+        "name": "Tastenkürzel zum Verschleiern ausgewählter Token",
+        "hint": "Setze das Tastenkürzel zum verschleiern der ausgewählten Token."
+      },
+      "npcMystifierNoMatch": {
+        "name": "Kein passender Text",
+        "hint": "Text welcher genutzt werden soll wenn keine passenden Kategorien gefunden werden können, damit der Name nicht leer bleibt. (Ein leerer Text hier wird zu '...' gesetzt)"
+      },
+      "npcMystifierPostfix": {
+        "name": "Wort oder Würfeltabellen Suffix",
+        "hint": "Fügt einen Text als Suffix für den neuen Namen hinzu, Standardwert ist '' (zum Beispiel: 'Kreatur'). Wenn dieser Text mit dem Namen einer Würfeltabelle übereinstimmt, wird stattdessen ein zufälliges Textergebnis aus dieser Tabelle als Suffix verwendet. Dies wird *vor* jedem zufälligen Eigenschaftspräfix hinzugefügt (siehe vorherige Option)"
+      },
+      "npcMystifierUseEliteWeak": {
+        "hint": "Auswählen um Elite/Schwach im verschleierten Namen zu benutzen.",
+        "name": "Nutze Elite/Schwach Status"
+      },
+      "npcMystifierUseMystifiedNameInChat": {
+        "name": "Versuche den Sprecher und die Namensnutzung in Chat-Nachrichten zu verschleiern.",
+        "hint": "Auswählen, um zu versuchen, den verschleierten Namen sowohl für den Sprecher als auch innerhalb von Chat-Nachrichten zu verwenden, indem Sie den Namen des Akteurs durch den verschleierten Namen ersetzen. Beachte dass der Text in der Nachricht nicht ersetzt wird, wenn er nicht den gleichen Namen wie der Akteur verwendet oder falsch geschrieben ist."
+      },
+      "reminderBreathWeapon": {
+        "name": "Odemwaffen Erinnerung",
+        "textUsedToCheckIfItIsABreathWeapon": "Odem",
+        "hint": "Auswählen um eine Erinnerung für die Nutzung von Odemwaffen zu erhalten.",
+        "defaultName": "Odem",
+        "source": "Odemwaffen Erinnerung erstellt von PF2e Workbench",
+        "used": "Benutzt "
+      },
+      "npcMystifierUseCreatureTraits": {
+        "hint": "Auswählen um alle 'Kreaturen Kategorien' für den Verschleierten Namen zu nutzen, wie sie im PF2 System definiert sind.",
+        "name": "Nutze Kreaturen Kategorien."
+      },
+      "npcMystifierUseRaritiesReplacement": {
+        "hint": "Gebe ein Wort in das Textfeld ein mit dem Seltenheiten welche seltener als gewöhnlich sind ersetzt werden sollen (z.B. 'Außergewöhnlich'). Wenn es leer ist, wird die angezeigte Seltenheit nicht geändert.",
+        "name": "Ersetze Seltenheiten welche seltener als Gewöhnlich sind"
+      },
+      "npcMystifierUseSize": {
+        "name": "Benutzer Akteur Größe",
+        "hint": "Auswählen um die Größe des Akteurs im verschleierten Namen zu nutzen"
+      },
+      "npcMystifierWordPrefix": {
+        "hint": "Fügt ein zufälliges Wort einer genannten Würfeltabelle als Präfix voran, falls 'Wort Präfix' ausgewählt wurde.",
+        "name": "Füge ein zufälliges Wort von der genannten Würfeltabelle hinzu"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
+        "hint": "Verschleiere Gegenstände nur wenn diese gleich oder höher vom folgender Seltenheit sind.",
+        "name": "Verschleiere Gegenstände nur wenn diese gleich oder höher vom folgender Seltenheit sind."
+      },
+      "npcRoller": {
+        "name": "NSC Roller Funktion aktivieren",
+        "hint": "Auswählen um den NSC Roller Funktion zu aktivieren."
+      },
+      "qolWorldSettings": {
+        "hint": "Aktiviere und Konfiguriere 'quality of life' Einstellungen für SL",
+        "label": "Verwalte die QoL Einstellungen für die Welt",
+        "name": "Welt QoL Einstellungen"
+      },
+      "reminderTargeting": {
+        "error": "Du musst ein Ziel auswählen bevor du angreifen darfst.",
+        "hint": "Auswählen um die Erinnerung für das Ziel auswählen im Kampf zu erhalten.",
+        "name": "Zielauswahl Erinnerung",
+        "info": "Bitte wähle ein Ziel aus bevor du angreifst.",
+        "no": "Keine Erinnerung",
+        "reminder": "Erinnerung",
+        "mustTarget": "Ziel muss ausgewählt werden"
+      },
+      "tokenAnimation": {
+        "hint": "Aktivieren um alternative Token Bewegungsanimation zu verwenden. Dies kann Probleme mit dem Modul Multilevel Tokens verursachen.",
+        "name": "Aktivieren um alternative Token Bewegungsanimation zu verwenden."
+      },
+      "workbenchVersion": {
+        "hint": "Version auf welcher die aktuellste Migration gelaufen ist. Kann niedriger als die Modul-Version sein. Modifiziere dies nicht, außer du weißt wirklich was du tust.",
+        "name": "Workbench Migrationsversion"
+      },
+      "quickQuantities": {
+        "hint": "Benutze Shift-Klick bei Gegenstandsmengen um 5 hunzufügen, STRG-Klick um 10 hinzufügen.",
+        "name": "Benutze Shift-Klick bei Gegenstandsmengen um 5 hunzufügen, STRG-Klick um 10 hinzufügen."
+      },
+      "playerFeatsRarityColour": {
+        "hint": "Client Einstellung um den Namen von Talenten in der Farbe der Seltenheit auf dem Charakterblatt anzuzeigen.",
+        "name": "Den Namen von Talenten in der Farbe der Seltenheit auf dem Charakterblatt anzeigen."
+      },
+      "playerSpellsRarityColour": {
+        "hint": "Client Einstellung um den Namen von Zaubern in der Farbe der Seltenheit auf dem Charakterblatt anzuzeigen.",
+        "name": "Den Namen von Zaubern in der Farbe der Seltenheit auf dem Charakterblatt anzeigen."
+      },
+      "heroPointHandlerDefaultTimeoutMinutes": {
+        "name": "Minuten zwischen der Öffnung der Heldenpunkt Verwaltung.",
+        "hint": "Auswählen wie viele Minuten vergehen soll bis der Heldenpunkt Verwalter das nächste Mal aufgerufen werden soll."
+      },
+      "npcMystifierPrefix": {
+        "hint": "Füge einen Text hinzu der den neuen Namen als Präfix hinzugefügt wird (dazwischen falls die Zufallsnamenoption oben gewählt wurde), Standardmäßig '' (zum Beispiel: 'Unbekannt'). Falls dies dem Namen eine Würfeltabelle entspricht wird stattdessen ein zufälliger Text aus der Tabelle als Präfix genutzt. Dieser wird *nach* dem Suffix einer zufälligen Eigenschaft eingefügt (siehe vorherige Option)",
+        "name": "Wort oder Würfeltabellen Präfix"
+      },
+      "npcMystifierRandomPropertySkipForUnique": {
+        "hint": "Auswählen, um das Hinzufügen einer zufälligen Eigenschaft zu überspringen wenn du einzigartige NSC verschleierst (d.h. sie wird beibehalten wenn den NSC entschleierst)",
+        "name": "Überspring die zufällige Eigenschaft für einzigartige NSC."
+      },
+      "npcMystifierUseAlignmentTraits": {
+        "hint": "Auswählen um Gesinnungskategorien in den verschleierten Namen zu nutzen.",
+        "name": "Benutze NSC Gesinnungskategorien."
+      },
+      "remindersSettings": {
+        "label": "Verwalte die Einstellungen für Erinnerungen",
+        "hint": "Aktiviere und konfiguriere verschiedene Erinnerungen",
+        "name": "Erinnerungseinstellungen"
+      },
+      "reminderCannotAttackIgnoreDeadEidolon": {
+        "hint": "Auswählen um zu erlauben, dass Eidolons, welche tot sind oder keine TP haben, angreifen können ohne eine Meldung zu erhalten.",
+        "name": "Eidolons dürfen angreifen während sie tot sind"
+      },
+      "autoRollDamageForSpellAttack": {
+        "hint": "Client Einstellung für das automatische Würfel von Schaden für Zauberangriffe welche Treffen. Beachte, dass kritische Treffer immer normalen Schaden würfeln.",
+        "name": "Automatisches Würfel von Schaden für Zauberangriffe welche Treffen."
+      },
+      "logLevel": {
+        "name": "Log Level",
+        "hint": "Log Level",
+        "trace": "Trace",
+        "debug": "Debuggen",
+        "info": "Info",
+        "warn": "Warnung",
+        "error": "Fehler",
+        "off": "Aus"
+      },
+      "castPrivateSpellHideName": {
+        "hint": "(Experimentell) Auswählen um den Namen eines privat gewirkten Zaubers zu verstecken.",
+        "name": "Auswählen um den Namen eines privat gewirkten Zaubers zu verstecken."
+      },
+      "autoRollDamageForSpellNotAnAttack": {
+        "hint": "Client Einstellung um *immer* normalen Schaden zur würfeln für *nicht-Angriffs* Zauber wenn diese gewirkt werden.",
+        "name": "Automatischer Schadenswurf für Zauber welche keine Angriffe sind."
+      },
+      "autoRollDamageForStrike": {
+        "hint": "Client Einstellung für den automatischen Schadenswurf bei Angriffen welche treffen. Beachte das kritische Treffer immer kritischen Schaden würfeln.",
+        "name": "Automatischer Schadenswurf bei Angriffen welche treffen.",
+        "strike": "Angriff"
+      },
+      "npcMystifierUseOtherTraits": {
+        "hint": "Auswählen, um alle NSC-Eigenschaften zu verwenden, die nicht bereits durch eine der oben genannten Einstellungen im verschleierten Namen enthalten sind.",
+        "name": "Andere Merkmale verwenden"
+      },
+      "npcMystifierUseRarities": {
+        "hint": "Auswählen, um Seltenheiten in den verschleierten Namen zu verwenden.",
+        "name": "Nutze Seltenheit"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
+        "hint": "Verschleiere Gegenstände nur wenn diese gleich oder höher vom folgenden Level sind.",
+        "name": "Verschleiere Gegenstände nur wenn diese gleich oder höher vom folgenden Level sind."
+      },
+      "npcScaler": {
+        "hint": "Auswählen um skalierende NSC zu erlauben",
+        "name": "Erlaube skalierende NSC"
+      },
+      "tokenAnimationSpeed": {
+        "hint": "Ändern um die Geschwindigkeit der Token Bewegungsanimation zu ändern.",
+        "name": "Ändern um die Geschwindigkeit der Token Bewegungsanimation zu ändern."
+      },
+      "variantRulesSettings": {
+        "hint": "Aktiviere und konfiguriere verschiedene Regel-Varianten",
+        "label": "Verwalte die Regel-Varianten-Einstellungen",
+        "name": "Regel-Varianten-Einstellungen"
       }
     },
     "skillActions": {
