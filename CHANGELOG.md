@@ -1,3 +1,13 @@
+## [4.65.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.65.2...v4.65.3) (2023-04-27)
+
+
+### Bug Fixes
+
+* Fixed bug that made skill actions that aren't in game.pf2e.actions not work. ([9eead0a](https://github.com/xdy/xdy-pf2e-workbench/commit/9eead0a4e745946abb322ab3f74ff178829e4eb3))
+* Keeping up with the Macro Faeries. ([ac69f94](https://github.com/xdy/xdy-pf2e-workbench/commit/ac69f94d17dbd1a5a31219a7d21a35ec7ef90999))
+* Turn off map in basic action macros until I have the time to fix it. ([00aa1ce](https://github.com/xdy/xdy-pf2e-workbench/commit/00aa1ce8e87ccd6420eabdc6e430d763ac024f7d))
+* Turn off map in skill actions until I have the time to fix it. ([332524e](https://github.com/xdy/xdy-pf2e-workbench/commit/332524e25af95983c95b05ab7450ee212deb41a3))
+
 ## [4.65.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.65.1...v4.65.2) (2023-04-27)
 
 
