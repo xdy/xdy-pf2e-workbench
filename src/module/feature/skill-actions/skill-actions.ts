@@ -278,10 +278,10 @@ export class SkillAction {
                     data.proficiencyKey === "highest" ? "highest" : data.label
                 );
 
-                if (this.hasTrait("attack") && this.key !== "escape") {
-                    this.variants.addMapVariant(skill, data.extra, -5);
-                    this.variants.addMapVariant(skill, data.extra, -10);
-                }
+                // if (this.hasTrait("attack") && this.key !== "escape") {
+                //     this.variants.addMapVariant(skill, data.extra, -5);
+                //     this.variants.addMapVariant(skill, data.extra, -10);
+                // }
 
                 if (assurances.filter((x: any) => x.flags.pf2e.rulesSelections.assurance === skill.slug)?.length > 0) {
                     this.variants.addAssuranceVariant(skill, data.extra);
