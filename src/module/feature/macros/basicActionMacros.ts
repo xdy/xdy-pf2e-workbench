@@ -81,31 +81,31 @@ function createButton(action, idx, actor, party, actorSkills) {
         name +
         " " +
         (best ? game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.YouAreTheBestInYourParty`) : "");
-    let button: string;
-    if (action.showMAP) {
-        const second = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.second`);
-        const third = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.third`);
-        button =
-            `<div class="map-wrapper">
-              <button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="0" style="background:${
-                colorPalette[rank]
-            }" ${`data-tooltip="${tooltip}"`}> <img src="${
-                action.icon ?? defaultIcon
-            }" height="24" width="24"   alt="${name}"/>${name}</button>` +
-            `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-5" style="background:${
-                colorPalette[rank]
-            }" ${`data-tooltip="${tooltip} + ${second}"`}>${second}</button>` +
-            `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-10" style="background:${
-                colorPalette[rank]
-            }" ${`data-tooltip="${tooltip} + ${third}"`}>${third}</button>
-              </div>`;
-    } else {
-        button = `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
-            colorPalette[rank]
-        }"
+    // let button: string;
+    // if (action.showMAP) {
+    //     const second = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.second`);
+    //     const third = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.third`);
+    //     button =
+    //         `<div class="map-wrapper">
+    //           <button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="0" style="background:${
+    //             colorPalette[rank]
+    //         }" ${`data-tooltip="${tooltip}"`}> <img src="${
+    //             action.icon ?? defaultIcon
+    //         }" height="24" width="24"   alt="${name}"/>${name}</button>` +
+    //         `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-5" style="background:${
+    //             colorPalette[rank]
+    //         }" ${`data-tooltip="${tooltip} + ${second}"`}>${second}</button>` +
+    //         `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-10" style="background:${
+    //             colorPalette[rank]
+    //         }" ${`data-tooltip="${tooltip} + ${third}"`}>${third}</button>
+    //           </div>`;
+    // } else {
+    const button = `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
+        colorPalette[rank]
+    }"
     ${`data-tooltip="${tooltip}"`}>
     <img src="${action.icon ?? defaultIcon}" height="24" alt="${name}"/>${name}</button>`;
-    }
+    // }
     return button;
 }
 
