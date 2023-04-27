@@ -157,6 +157,7 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/features/classes/surprice-attack.webp",
         },
         {
+            replacedWith: "balance",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Balance`),
             skill: "Acrobatics",
@@ -171,6 +172,7 @@ export function basicActionMacros() {
             icon: "icons/sundries/misc/ladder.webp",
         },
         {
+            replacedWith: "coerce",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Coerce`),
             skill: "Intimidation",
@@ -178,6 +180,7 @@ export function basicActionMacros() {
             icon: "icons/skills/social/intimidation-impressing.webp",
         },
         {
+            replacedWith: "command-an-animal",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CommandAnAnimal`),
             skill: "Nature",
@@ -185,6 +188,7 @@ export function basicActionMacros() {
             icon: "icons/environment/creatures/horse-white.webp",
         },
         {
+            replacedWith: "conceal-an-object",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.ConcealAnObject`),
             skill: "Stealth",
@@ -263,6 +267,7 @@ export function basicActionMacros() {
             showMAP: true,
         },
         {
+            replacedWith: "disable-device",
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DisableDevice`),
             skill: "Thievery",
@@ -357,6 +362,7 @@ export function basicActionMacros() {
             icon: "icons/environment/people/commoner.webp",
         },
         {
+            replacedWith: "maneuver-in-flight",
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.ManeuverInFlight`),
             skill: "Acrobatics",
@@ -364,6 +370,7 @@ export function basicActionMacros() {
             icon: "icons/commodities/biological/wing-bird-white.webp",
         },
         {
+            replacedWith: "palm-an-object",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.PalmAnObject`),
             skill: "Thievery",
@@ -379,6 +386,7 @@ export function basicActionMacros() {
             extra: "singing",
         },
         {
+            replacedWith: "pick-a-lock",
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.PickALock`),
             skill: "Thievery",
@@ -414,6 +422,7 @@ export function basicActionMacros() {
             icon: "icons/skills/social/thumbsup-approval-like.webp",
         },
         {
+            replacedWith: "seek",
             actionType: "basic",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Seek`),
             skill: "Perception",
@@ -428,6 +437,7 @@ export function basicActionMacros() {
             icon: "icons/tools/navigation/compass-brass-blue-red.webp",
         },
         {
+            replacedWith: "sense-motive",
             actionType: "basic",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.SenseMotive`),
             skill: "Perception",
@@ -451,6 +461,7 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/conditions/unnoticed.webp",
         },
         {
+            replacedWith: "squeeze",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Squeeze`),
             skill: "Acrobatics",
@@ -458,6 +469,7 @@ export function basicActionMacros() {
             icon: "icons/commodities/tech/claw-mechanical.webp",
         },
         {
+            replacedWith: "steal",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Steal`),
             skill: "Thievery",
@@ -500,6 +512,7 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/conditions/observed.webp",
         },
         {
+            replacedWith: "treat-disease",
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TreatDisease`),
             skill: "Medicine",
@@ -507,6 +520,7 @@ export function basicActionMacros() {
             icon: "icons/magic/nature/root-vine-caduceus-healing.webp",
         },
         {
+            replacedWith: "treat-poison",
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TreatPoison`),
             skill: "Medicine",
@@ -533,6 +547,7 @@ export function basicActionMacros() {
             showMAP: true,
         },
         {
+            replacedWith: "tumble-through",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TumbleThrough`),
             skill: "Acrobatics",
