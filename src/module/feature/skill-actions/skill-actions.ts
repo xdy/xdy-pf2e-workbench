@@ -131,8 +131,8 @@ export class SkillAction {
                             ...variant.extra,
                             skill: variant.skill.slug,
                         });
+                        return;
                     }
-                    return;
                 }
             }
 
