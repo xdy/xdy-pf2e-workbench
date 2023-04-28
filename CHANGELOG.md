@@ -1,3 +1,10 @@
+# [4.67.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.66.1...v4.67.0) (2023-04-28)
+
+
+### Features
+
+* When the option to have npcs always cast spells privately is enabled, you can now hold Ctrl to *not* cast a spell privately. ([5132d8f](https://github.com/xdy/xdy-pf2e-workbench/commit/5132d8f49b72f7fcafa3a3492185346a2e0ee903)), closes [#774](https://github.com/xdy/xdy-pf2e-workbench/issues/774)
+
 ## [4.66.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.66.0...v4.66.1) (2023-04-28)
 
 
