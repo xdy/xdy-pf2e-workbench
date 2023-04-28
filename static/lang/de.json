@@ -365,7 +365,7 @@
         "name": "Strg-Taste gedrückt halten beim Zauber wirken damit die Anzeige privat wird."
       },
       "castPrivateSpellAlwaysForNPC": {
-        "hint": "Auswählen um Zauber für NSC immer privat zu wirken.",
+        "hint": "Auswählen um Zauber für NSC immer privat zu wirken. (STRG-gedrückt halten um *NICHT* privat zu zaubern.)",
         "name": "Auswählen um Zauber für NSC immer privat zu wirken."
       },
       "decreaseFrightenedConditionEachTurn": {
@@ -532,7 +532,7 @@
       "logLevel": {
         "name": "Log Level",
         "hint": "Log Level",
-        "trace": "Trace",
+        "trace": "Spur/Trace",
         "debug": "Debuggen",
         "info": "Info",
         "warn": "Warnung",
