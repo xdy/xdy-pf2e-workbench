@@ -1,3 +1,10 @@
+## [4.66.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.66.0...v4.66.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* Don't kill unconscious creatures if hitting them with nonlethal weapons... ([7646cc8](https://github.com/xdy/xdy-pf2e-workbench/commit/7646cc85404af3ff2f6c8e9446e7f883cfcac6d5))
+
 # [4.66.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.65.3...v4.66.0) (2023-04-28)
 
 
