@@ -61,6 +61,37 @@ export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e, op
     return isCriticalSuccess;
 }
 
+export function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
+    let isNonlethal = false;
+    if (
+        !option.startsWith("no") && option.endsWith("ForCharacters")
+            ? ["character", "familiar"].includes(actor.type)
+            : true
+    ) {
+        const hp = actor.attributes.hp;
+        if (hp === undefined || hp.value === undefined) {
+            return false;
+        }
+        const reverse = game.messages.contents.slice(-Math.min(10, game.messages.size)).reverse();
+        const rightActor = reverse.filter((message) => message.target?.actor.id === actor.id);
+        const isRoll = rightActor.filter((message) => message.type === CONST.CHAT_MESSAGE_TYPES.ROLL);
+        const isAttack = isRoll
+            // @ts-ignore
+            .filter((message) => message.flags.pf2e.context?.sourceType === "attack");
+        const isDamageRoll = isAttack
+            // @ts-ignore
+            .filter((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const isDamaging = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
+        const greaterThanHP = isDamaging.filter((message) => message.rolls?.[0]?.total >= hp.value);
+
+        isNonlethal =
+            greaterThanHP && greaterThanHP.length > 0
+                ? greaterThanHP?.[0].item?.system?.traits?.value.includes("nonlethal") ?? false
+                : false;
+    }
+    return isNonlethal;
+}
+
 export async function increaseDyingOnZeroHP(
     actor: ActorPF2e,
     update: Record<string, string>,
@@ -180,6 +211,16 @@ export async function increaseDyingOnZeroHP(
         if (shouldIncreaseWounded) {
             actor.increaseCondition("wounded").then();
         }
+
+        if (
+            dyingCounter > 0 &&
+            checkIfLatestDamageMessageIsNonlethal(actor, option) &&
+            !actor.hasCondition("unconscious")
+        ) {
+            actor.toggleCondition("unconscious").then();
+            dyingCounter = 0;
+        }
+
         if (dyingCounter > 0) {
             actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
             actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
