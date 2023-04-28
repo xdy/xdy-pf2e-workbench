@@ -108,6 +108,7 @@ export async function castPrivateSpell(data: ChatMessageSourcePF2e, message: Cha
     if (!game.user.isGM) {
         data.whisper.push(game.user.id);
     }
+    message.setFlag(MODULENAME, "minimumUserRole", 4);
     message.updateSource(data);
 
     if (
