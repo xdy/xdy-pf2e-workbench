@@ -53,12 +53,15 @@ export const preCreateChatMessageHook = (
         result = reminderTargeting(message);
     }
 
+    const ctrlHeld = game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
     if (
         result &&
         game.settings.get(MODULENAME, "castPrivateSpell") &&
         message.flags.pf2e?.casting?.id &&
-        (game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL) ||
-            (message.actor?.type === NPC_TYPE && game.settings.get(MODULENAME, "castPrivateSpellAlwaysForNPC")))
+        ((ctrlHeld && message.actor?.type !== NPC_TYPE) ||
+            (!ctrlHeld &&
+                message.actor?.type === NPC_TYPE &&
+                game.settings.get(MODULENAME, "castPrivateSpellAlwaysForNPC")))
     ) {
         castPrivateSpell(data, message).then();
     }

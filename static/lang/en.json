@@ -358,7 +358,7 @@
         "name": "Check to hide the name of a privately cast spell."
       },
       "castPrivateSpellAlwaysForNPC": {
-        "hint": "Check to always cast privately for npcs.",
+        "hint": "Check to always cast privately for npcs. (Hold Ctrl to *not* cast privately.)",
         "name": "Check to always cast privately for npcs."
       },
       "castPrivateSpellWithPublicMessage": {
