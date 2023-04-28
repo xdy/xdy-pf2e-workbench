@@ -1,3 +1,10 @@
+# [4.66.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.65.3...v4.66.0) (2023-04-28)
+
+
+### Features
+
+* If the option to automatically gain dying is enabled, and the attack that brings a creature to 0 hp is Nonlethal, the creature becomes Unconscious rather than dying. ([39ba1a3](https://github.com/xdy/xdy-pf2e-workbench/commit/39ba1a3ec885e5e74edcf1682d28803badd5dd4f))
+
 ## [4.65.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.65.2...v4.65.3) (2023-04-27)
 
 
