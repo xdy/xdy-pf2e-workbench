@@ -1,3 +1,10 @@
+## [4.67.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.0...v4.67.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* Possible fix for those with problems casting spells privately. ([f704353](https://github.com/xdy/xdy-pf2e-workbench/commit/f7043532bd39fe703322263be40e102a02e2f910))
+
 # [4.67.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.66.1...v4.67.0) (2023-04-28)
 
 
