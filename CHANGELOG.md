@@ -1,3 +1,10 @@
+## [4.67.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.1...v4.67.2) (2023-04-30)
+
+
+### Bug Fixes
+
+* Translations of all actions in BAM should now work again. ([d123300](https://github.com/xdy/xdy-pf2e-workbench/commit/d12330079ea4b0b1ddb8fc07e7b2bfe5f9976948))
+
 ## [4.67.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.0...v4.67.1) (2023-04-28)
 
 
