@@ -70,6 +70,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         ],
     },
     {
+        replacedWith: "balance",
         actionSlug: "balance",
         compendiumId: "M76ycLAqHoAgbcej",
         icon: "freedom-of-movement",
@@ -116,17 +117,20 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         variants: [{ proficiencyKey: "athletics" }],
     },
     {
+        replacedWith: "coerce",
         actionSlug: "coerce",
         actionType: "",
         compendiumId: "tHCqgwjtQtzNqVvd",
         variants: [{ proficiencyKey: "intimidation" }],
     },
     {
+        replacedWith: "command-an-animal",
         actionSlug: "command-an-animal",
         compendiumId: "q9nbyIF0PEBqMtYe",
         variants: [{ proficiencyKey: "nature" }],
     },
     {
+        replacedWith: "conceal-an-object",
         actionSlug: "conceal-an-object",
         compendiumId: "qVNVSmsgpKFGk9hV",
         variants: [{ proficiencyKey: "stealth" }],
@@ -194,6 +198,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         variants: [{ proficiencyKey: "religion", requiredRank: 1 }],
     },
     {
+        replacedWith: "disable-device",
         actionSlug: "disable-device",
         actionType: "D",
         compendiumId: "cYdz2grcOcRt4jk6",
@@ -281,11 +286,11 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         variants: [{ proficiencyKey: "athletics" }],
     },
     {
+        replacedWith: "hide",
         actionSlug: "hide",
         compendiumId: "XMcnh4cSI32tljXa",
         icon: "zealous-conviction",
         variants: [{ proficiencyKey: "stealth" }],
-        replacedWith: "hide",
     },
     {
         actionSlug: "high-jump",
@@ -360,6 +365,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         variants: [{ proficiencyKey: "diplomacy" }],
     },
     {
+        replacedWith: "maneuver-in-flight",
         actionSlug: "maneuver-in-flight",
         compendiumId: "Qf1ylAbdVi1rkc8M",
         icon: "fleet-step",
@@ -372,6 +378,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         variants: [{ proficiencyKey: "diplomacy", requiredRank: 1 }],
     },
     {
+        replacedWith: "palm-an-object",
         actionSlug: "palm-an-object",
         compendiumId: "ijZ0DDFpMkWqaShd",
         variants: [{ proficiencyKey: "thievery" }],
@@ -428,6 +435,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         ],
     },
     {
+        replacedWith: "pick-a-lock",
         actionSlug: "pick-a-lock",
         actionType: "D",
         compendiumId: "2EE4aF4SZpYf0R6H",
@@ -507,19 +515,21 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         variants: [{ proficiencyKey: "athletics" }],
     },
     {
+        replacedWith: "sneak",
         actionSlug: "sneak",
         compendiumId: "VMozDqMMuK5kpoX4",
         icon: "invisibility",
         variants: [{ proficiencyKey: "stealth" }],
-        replacedWith: "sneak",
     },
     {
+        replacedWith: "squeeze",
         actionSlug: "squeeze",
         actionType: "",
         compendiumId: "kMcV8e5EZUxa6evt",
         variants: [{ proficiencyKey: "acrobatics", requiredRank: 1 }],
     },
     {
+        replacedWith: "steal",
         actionSlug: "steal",
         compendiumId: "RDXXE7wMrSPCLv5k",
         variants: [{ proficiencyKey: "thievery" }],
@@ -560,6 +570,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         variants: [{ proficiencyKey: "medicine" }, { proficiencyKey: "crafting", requiredItem: "chirurgeon" }],
     },
     {
+        replacedWith: "treat-disease",
         actionSlug: "treat-disease",
         actionType: "",
         compendiumId: "TC7OcDa7JlWbqMaN",
@@ -569,6 +580,7 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         ],
     },
     {
+        replacedWith: "treat-poison",
         actionSlug: "treat-poison",
         compendiumId: "KjoCEEmPGTeFE4hh",
         variants: [
@@ -598,13 +610,14 @@ export const SKILL_ACTIONS_DATA: Omit<SkillActionDataParameters, "actor">[] = [
         ],
     },
     {
+        replacedWith: "trip",
         actionSlug: "trip",
         compendiumId: "ge56Lu1xXVFYUnLP",
         icon: "natures-enmity",
         variants: [{ proficiencyKey: "athletics" }],
-        replacedWith: "trip",
     },
     {
+        replacedWith: "tumble-through",
         actionSlug: "tumble-through",
         compendiumId: "21WIfSu7Xd7uKqV8",
         icon: "unimpeded-stride",
