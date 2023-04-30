@@ -1,3 +1,10 @@
+## [4.67.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.2...v4.67.3) (2023-04-30)
+
+
+### Bug Fixes
+
+* Revert previous 'fix' to BAM translations. It made things worse. :) ([97e29a6](https://github.com/xdy/xdy-pf2e-workbench/commit/97e29a6f138c48f94df5b00b094cfad27a810891))
+
 ## [4.67.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.1...v4.67.2) (2023-04-30)
 
 
