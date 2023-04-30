@@ -563,7 +563,7 @@ export function basicActionMacros() {
             // TODO Handle variants
             return {
                 actionType: "other",
-                name: x[1].name,
+                name: game.i18n.localize(x[1].name),
                 skill: x[1].statistic.charAt(0).toUpperCase() + x[1].statistic.slice(1),
                 icon:
                     x[1].img ??
