@@ -15,16 +15,12 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
 
         const actors = [token?.actor];
         for (const actor of actors) {
-            const breathWeapon = game.i18n
-                .localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.textUsedToCheckIfItIsABreathWeapon`)
-                .toLocaleLowerCase();
-            const breathWeaponMatch = content.toLocaleLowerCase().match(breathWeapon);
             const formulaMatch = content
                 .toLocaleLowerCase()
                 .match("\\[\\[\\/(b|)r 1d([4|6])( .*?)((rounds|recharge|cooldown)).*?]]");
             const dieSize = formulaMatch ? `1d${formulaMatch[2]}` : "";
 
-            if (breathWeaponMatch && dieSize) {
+            if (dieSize) {
                 const title = content.match(/.*title="(.*?)" width.*/);
                 const effect = {
                     type: "effect",

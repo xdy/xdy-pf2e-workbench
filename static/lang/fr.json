@@ -425,8 +425,7 @@
         "name": "Rappel d'arme de souffle",
         "prefix": "Recharge",
         "source": "rappel d'arme de souffle du module PF2e Workbench",
-        "used": "Utilisé ",
-        "textUsedToCheckIfItIsABreathWeapon": "Souffle"
+        "used": "Utilisé "
       },
       "reminderCannotAttack": {
         "dead": "est mort(e)",

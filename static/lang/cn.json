@@ -275,8 +275,7 @@
         "prefix": "再充能",
         "defaultName": "吐息",
         "hint": "勾选此项，设置吐息武器提醒。",
-        "source": "PF2e Workbench的吐息武器提醒",
-        "textUsedToCheckIfItIsABreathWeapon": "吐息"
+        "source": "PF2e Workbench的吐息武器提醒"
       },
       "autoRollDamageAllow": {
         "all": "所有",

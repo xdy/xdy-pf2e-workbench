@@ -436,7 +436,6 @@
       },
       "reminderBreathWeapon": {
         "name": "Odemwaffen Erinnerung",
-        "textUsedToCheckIfItIsABreathWeapon": "Odem",
         "hint": "Auswählen um eine Erinnerung für die Nutzung von Odemwaffen zu erhalten.",
         "defaultName": "Odem",
         "source": "Odemwaffen Erinnerung erstellt von PF2e Workbench",
