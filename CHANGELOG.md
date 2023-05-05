@@ -1,3 +1,11 @@
+## [4.67.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.3...v4.67.4) (2023-05-05)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([8c9b99d](https://github.com/xdy/xdy-pf2e-workbench/commit/8c9b99d70162b88788b0395a9027ae153dba4918))
+* Make breath weapon reminder a bit more eager, don't filter on ability name any more. ([f907ae6](https://github.com/xdy/xdy-pf2e-workbench/commit/f907ae60da76ce6099b51e88511558a34c05dc44)), closes [#778](https://github.com/xdy/xdy-pf2e-workbench/issues/778)
+
 ## [4.67.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.2...v4.67.3) (2023-04-30)
 
 
