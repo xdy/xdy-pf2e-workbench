@@ -48,20 +48,31 @@ export const preCreateChatMessageHook = (
     _options,
     _user: UserPF2e
 ) => {
-    let result;
+    let result = true;
     if (game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget") {
         result = reminderTargeting(message);
     }
 
-    const ctrlHeld = game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
+    const downkeys = game?.keyboard.downKeys;
+    console.log("Downkeys: ", downkeys.size);
+    Array.of(downkeys.values())?.forEach((key) => {
+        logDebug(`downKeys: ${key}`);
+    });
+
+    let ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight"].some((key) => downkeys.has(key));
+    if (ctrlHeld === undefined) {
+        ctrlHeld = game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
+    }
+    const hasCastingId = message.flags.pf2e?.casting?.id;
+    const settingNpcAlways = game.settings.get(MODULENAME, "castPrivateSpellAlwaysForNPC");
+    const nonNpcCasting = ctrlHeld && message.actor?.type !== NPC_TYPE;
+    const npcCastingAlways = !ctrlHeld && message.actor?.type === NPC_TYPE && settingNpcAlways;
+    const npcCastingIfCtrl = ctrlHeld && message.actor?.type === NPC_TYPE && !settingNpcAlways;
     if (
         result &&
         game.settings.get(MODULENAME, "castPrivateSpell") &&
-        message.flags.pf2e?.casting?.id &&
-        ((ctrlHeld && message.actor?.type !== NPC_TYPE) ||
-            (!ctrlHeld &&
-                message.actor?.type === NPC_TYPE &&
-                game.settings.get(MODULENAME, "castPrivateSpellAlwaysForNPC")))
+        hasCastingId &&
+        (npcCastingAlways || npcCastingIfCtrl || nonNpcCasting)
     ) {
         castPrivateSpell(data, message).then();
     }
@@ -362,14 +373,6 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, $html: JQ
 
     if (game.settings.get(MODULENAME, "quickQuantities")) {
         onQuantitiesHook(sheet, $html);
-    }
-
-    // TODO This is dead code, right?
-    if (game.settings.get(MODULENAME, "castPrivateSpell")) {
-        $html.find(".cast-spell").each((_i, e) => {
-            const $e = $(e);
-            $e.addClass(`xdy-pf2e-workbench-secret-spell`);
-        });
     }
 
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "skillActions") !== "disabled") {
