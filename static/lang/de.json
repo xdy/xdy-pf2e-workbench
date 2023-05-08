@@ -436,7 +436,7 @@
       },
       "reminderBreathWeapon": {
         "name": "Odemwaffen Erinnerung",
-        "hint": "Auswählen um eine Erinnerung für die Nutzung von Odemwaffen zu erhalten.",
+        "hint": "Auswählen um eine Erinnerung für die Nutzung von Odemwaffen zu erhalten (eigentlich jede Fähigkeit mit einer korrekt formatierten Aufladung).",
         "defaultName": "Odem",
         "source": "Odemwaffen Erinnerung erstellt von PF2e Workbench",
         "used": "Benutzt "
