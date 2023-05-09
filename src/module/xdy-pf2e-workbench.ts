@@ -23,7 +23,7 @@ import {
     resetHeroPoints,
     startTimer,
 } from "./feature/heroPointHandler";
-import { isFirstGM, logInfo } from "./utils";
+import { debounce, isFirstGM, logInfo } from "./utils";
 import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller";
 import { loadSkillActions, loadSkillActionsBabele } from "./feature/skill-actions/sheet-skill-actions";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
@@ -118,7 +118,12 @@ export function updateHooks(cleanSlate = false) {
         renderChatMessageHook
     );
 
-    handle("createItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), createItemHook);
+    handle(
+        "createItem",
+        gs.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
+            game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"),
+        debounce(createItemHook, 10)
+    );
 
     handle("updateItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), updateItemHook);
 

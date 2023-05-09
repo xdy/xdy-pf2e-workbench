@@ -109,3 +109,13 @@ function log(logLevel = 2, ...args) {
         }
     }
 }
+
+export function debounce(callback, wait) {
+    let timeout;
+    return (...args) => {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        const context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => callback.apply(context, args), wait);
+    };
+}

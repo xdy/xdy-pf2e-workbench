@@ -173,6 +173,16 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            dropHeldItemsOnBecomingUnconscious: {
+                name: `${MODULENAME}.SETTINGS.dropHeldItemsOnBecomingUnconscious.name`,
+                hint: `${MODULENAME}.SETTINGS.dropHeldItemsOnBecomingUnconscious.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
         };
     }
 }

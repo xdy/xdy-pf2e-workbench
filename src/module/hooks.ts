@@ -194,9 +194,35 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
     }
 }
 
+function dropHeldItemsOnBecomingUnconscious(actor) {
+    const items = actor.items.filter((i) => {
+        return i.isHeld && i.handsHeld > 0 && i.system.equipped.carryType === "held";
+    });
+    for (const i of items) {
+        i.update({ "system.equipped.carryType": "dropped", "system.equipped.handsHeld": 0 });
+    }
+    if (items.length > 0) {
+        const message = game.i18n.format(`${MODULENAME}.SETTINGS.dropHeldItemsOnBecomingUnconscious.message`, {
+            name: game?.scenes?.current?.tokens?.find((t) => t.actor?.id === actor.id)?.name ?? actor.name,
+            items: items.map((i) => i.name).join(", "),
+        });
+        ChatMessage.create({
+            flavor: message,
+            speaker: ChatMessage.getSpeaker({ actor }),
+        });
+    }
+}
+
 export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
     if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
         applyEncumbranceBasedOnBulk(item);
+    }
+    if (
+        item.actor?.isOfType(CHARACTER_TYPE) &&
+        item.actor.hasCondition("unconscious") &&
+        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious")
+    ) {
+        dropHeldItemsOnBecomingUnconscious(item.actor);
     }
 }
 
