@@ -205,7 +205,7 @@
         "aSpell": "Un sort"
       },
       "castPrivateSpellAlwaysForNPC": {
-        "hint": "Cochez pour toujours lancer de manière privée pour les PNJ.",
+        "hint": "Cochez pour toujours lancer de manière privée pour les PNJ. (Tenir Ctrl pour ne pas lancer en privé)",
         "name": "Cochez pour toujours lancer de manière privée pour les PNJ."
       },
       "castPrivateSpellWithPublicMessage": {
@@ -421,7 +421,7 @@
       },
       "reminderBreathWeapon": {
         "defaultName": "Souffle",
-        "hint": "Cliquez pour activer le rappel d'utilisation de l'arme de souffle.",
+        "hint": "Cliquez pour activer le rappel d'utilisation de l'arme de souffle (actuellement toute capacité avec une recharge proprement formatée).",
         "name": "Rappel d'arme de souffle",
         "prefix": "Recharge",
         "source": "rappel d'arme de souffle du module PF2e Workbench",
@@ -553,6 +553,11 @@
       "castPrivateSpellHideName": {
         "name": "Cochez pour cacher le nom d'un sort lancé en privé.",
         "hint": "(Expérimental) Cochez pour cacher le nom d'un sort lancé en privé."
+      },
+      "dropHeldItemsOnBecomingUnconscious": {
+        "hint": "Les personnages lâchent automatiquement les objets tenus en devenant inconscient.",
+        "name": "Les personnages lâchent automatiquement les objets tenus en devenant inconscient.",
+        "message": "{name} a lâché : {items}"
       }
     },
     "effects": {
