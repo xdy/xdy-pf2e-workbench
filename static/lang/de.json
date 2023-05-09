@@ -575,6 +575,11 @@
         "hint": "Aktiviere und konfiguriere verschiedene Regel-Varianten",
         "label": "Verwalte die Regel-Varianten-Einstellungen",
         "name": "Regel-Varianten-Einstellungen"
+      },
+      "dropHeldItemsOnBecomingUnconscious": {
+        "name": "Charaktere lassen automatisch gehaltene Gegenstände fallen wenn sie ohnmächtig werden.",
+        "hint": "Charaktere lassen automatisch gehaltene Gegenstände fallen wenn sie ohnmächtig werden.",
+        "message": "{name} hat {items} fallen gelassen"
       }
     },
     "skillActions": {
