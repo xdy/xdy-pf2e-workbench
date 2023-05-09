@@ -1,3 +1,10 @@
+# [4.68.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.6...v4.68.0) (2023-05-09)
+
+
+### Features
+
+* Added world automation setting to automatically drop held items when becoming unconscious. ([dc620e1](https://github.com/xdy/xdy-pf2e-workbench/commit/dc620e10b3f085d04ca92ee10906c0a20bdfd407))
+
 ## [4.67.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.5...v4.67.6) (2023-05-07)
 
 
