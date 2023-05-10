@@ -558,6 +558,13 @@
         "hint": "Les personnages lâchent automatiquement les objets tenus en devenant inconscient.",
         "name": "Les personnages lâchent automatiquement les objets tenus en devenant inconscient.",
         "message": "{name} a lâché : {items}"
+      },
+      "nonLethalIsNotLethal": {
+        "unconsciousForCharacters": "Les dégâts non létaux ne tuent pas les PJ+familiers",
+        "name": "... si les derniers dégâts ne sont pas létaux.",
+        "no": "Les dégâts non létaux sont juste des dégâts",
+        "unconscious": "Les dégâts non létaux ne tuent pas",
+        "hint": "Si les derniers dégâts que vous subissez sont non létaux, vous n'êtes pas Mourant. À la place vous êtes inconscient à 0 PV."
       }
     },
     "effects": {
