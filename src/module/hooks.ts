@@ -16,7 +16,7 @@ import {
     reminderCannotAttack,
     reminderTargeting,
 } from "./feature/reminders";
-import { isActuallyDamageRoll, logDebug, shouldIHandleThis } from "./utils";
+import { isActuallyDamageRoll, logDebug } from "./utils";
 import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
 import { mangleNamesInChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
 import { ItemPF2e } from "@item";
@@ -105,7 +105,7 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
     }
     if (!String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no")) {
         const actor = message.actor;
-        if (actor && shouldIHandleThis(actor)) {
+        if (actor && game.user === actor?.primaryUpdater) {
             const now = Date.now();
             const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
             // Ignore this if it occurs within last few seconds of the last time we applied dying
@@ -220,7 +220,8 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
     if (
         item.actor?.isOfType(CHARACTER_TYPE) &&
         item.actor.hasCondition("unconscious") &&
-        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious")
+        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious") &&
+        game.user === item.actor?.primaryUpdater
     ) {
         dropHeldItemsOnBecomingUnconscious(item.actor);
     }

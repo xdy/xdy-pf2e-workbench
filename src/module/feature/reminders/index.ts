@@ -1,4 +1,4 @@
-import { isFirstGM, shouldIHandleThis } from "../../utils";
+import { isFirstGM } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
 import { CombatantPF2e } from "@module/encounter";
@@ -56,7 +56,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
 }
 
 export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
-    if (shouldIHandleThis(combatant.actor) && combatant && combatant.actor) {
+    if (game.user === combatant.actor?.primaryUpdater && combatant && combatant.actor) {
         const showForPC =
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow")) &&
             combatant.actor?.hasPlayerOwner;
@@ -118,7 +118,7 @@ function ignoreDeadEidolon(actor) {
 export async function reminderCannotAttack(message: ChatMessagePF2e) {
     if (
         message.actor &&
-        shouldIHandleThis(message.actor) &&
+        game.user === message.actor?.primaryUpdater &&
         message.flags &&
         game.combats.active &&
         message.user &&
@@ -159,7 +159,7 @@ export function reminderTargeting(message: ChatMessagePF2e): boolean {
     let result = true;
     if (
         message.actor &&
-        shouldIHandleThis(message.actor) &&
+        game.user === message.actor?.primaryUpdater &&
         message.flags &&
         message.user &&
         ["spell-attack-roll", "attack-roll"].includes(<string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type)

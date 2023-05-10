@@ -30,20 +30,6 @@ export function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): str
     return degreeOfSuccess;
 }
 
-export function shouldIHandleThis(actor) {
-    if (!actor) return null;
-    const currentUser = game.users.get(game.user.id, { strict: true });
-    const activeUsers = game.users.filter((u) => u.active);
-    const assignedUser = activeUsers.find((u) => u.character === actor);
-    const firstGM = activeUsers.find((u) => u.isGM);
-    const anyoneWithPermission = activeUsers.find((u) => actor.canUserModify(u, "update"));
-    const updater =
-        currentUser.active && actor.canUserModify(currentUser, "update")
-            ? currentUser
-            : assignedUser ?? firstGM ?? anyoneWithPermission ?? null;
-    return game.user.id === updater?.id;
-}
-
 export function isFirstGM() {
     return game.user.id === game.users?.find((u) => u.isGM && u.active)?.id;
 }

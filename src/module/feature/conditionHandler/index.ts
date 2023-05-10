@@ -1,5 +1,5 @@
 import { CombatantPF2e } from "@module/encounter";
-import { isFirstGM, shouldIHandleThis } from "../../utils";
+import { isFirstGM } from "../../utils";
 import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
@@ -7,7 +7,7 @@ import { ActorSystemData } from "@actor/data/base";
 import BaseUser = foundry.documents.BaseUser;
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
-    if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThis(combatant.actor))) {
+    if (combatant && combatant.actor && (userId === game.user.id || game.user === combatant.actor?.primaryUpdater)) {
         const actors = [combatant.actor];
         actors.push(...getMinionAndEidolons(combatant.actor));
         for (const actor of actors) {
@@ -98,7 +98,7 @@ export async function increaseDyingOnZeroHP(
     hp: number,
     updateHp: number
 ): Promise<boolean> {
-    if (shouldIHandleThis(actor) && hp > 0 && updateHp <= 0) {
+    if (game.user === actor?.primaryUpdater && hp > 0 && updateHp <= 0) {
         const orcFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "orc-ferocity");
         const orcFerocityUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "orc-ferocity-used");
         const incredibleFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "incredible-ferocity");
@@ -236,7 +236,7 @@ export async function increaseDyingOnZeroHP(
 
 export async function autoRemoveDyingAtGreaterThanZeroHp(actor: ActorPF2e, hpAboveZero: boolean): Promise<boolean> {
     let dying = actor.getCondition("dying");
-    if (dying && !dying.isLocked && hpAboveZero && shouldIHandleThis(actor)) {
+    if (dying && !dying.isLocked && hpAboveZero && game.user === actor?.primaryUpdater) {
         const value = dying?.value || 0;
         if (dying && value > 0 && !dying.isLocked) {
             const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
@@ -258,7 +258,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     hpRaisedAboveZero: boolean
 ): Promise<void> {
     const unconscious = actor.getCondition("unconscious");
-    if (unconscious && !unconscious.isLocked && hpRaisedAboveZero && shouldIHandleThis(actor)) {
+    if (unconscious && !unconscious.isLocked && hpRaisedAboveZero && game.user === actor?.primaryUpdater) {
         await actor.decreaseCondition("unconscious", { forceRemove: true });
     }
 }
