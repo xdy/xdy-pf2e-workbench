@@ -287,6 +287,13 @@
         "hint": "(Experimental) If taking damage while already Dying, add one more Dying (or possibly two if extra dying on critical hit is enabled). Uses settings from the dropdown above this.",
         "name": "... and add additional dying level(s) if taking damage when dying."
       },
+      "nonLethalIsNotLethal": {
+        "no": "Nonlethal damage is just damage",
+        "unconscious": "Nonlethal damage doesn't kill",
+        "unconsciousForCharacters": "Nonlethal doesn't kill characters+familiars",
+        "hint": "If the last damage you take is nonlethal, you don't become dying. Instead, you are unconscious with 0 HP.",
+        "name": "... depending on if last damage was nonlethal."
+      },
       "automationClientSettings": {
         "hint": "Enable and configure automation for players",
         "label": "Manage Client Automation Settings",

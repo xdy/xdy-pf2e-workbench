@@ -126,6 +126,23 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            nonLethalIsNotLethal: {
+                name: `${MODULENAME}.SETTINGS.nonLethalIsNotLethal.name`,
+                hint: `${MODULENAME}.SETTINGS.nonLethalIsNotLethal.hint`,
+                scope: "world",
+                config: true,
+                default: "no",
+                type: String,
+                choices: {
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.nonLethalIsNotLethal.no`),
+                    unconscious: game.i18n.localize(`${MODULENAME}.SETTINGS.nonLethalIsNotLethal.unconscious`),
+                    unconsciousForCharacters: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.nonLethalIsNotLethal.unconsciousForCharacters`
+                    ),
+                },
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             autoGainDyingAtZeroHPIfCriticallyHitOneMore: {
                 name: `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHPIfCriticallyHitOneMore.name`,
                 hint: `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHPIfCriticallyHitOneMore.hint`,

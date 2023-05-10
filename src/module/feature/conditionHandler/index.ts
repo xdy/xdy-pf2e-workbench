@@ -212,11 +212,17 @@ export async function increaseDyingOnZeroHP(
             actor.increaseCondition("wounded").then();
         }
 
-        if (dyingCounter > 0 && checkIfLatestDamageMessageIsNonlethal(actor, option)) {
-            if (!actor.hasCondition("unconscious")) {
-                actor.toggleCondition("unconscious").then();
+        if (
+            String(game.settings.get(MODULENAME, "nonLethalIsNotLethal")).endsWith("ForCharacters")
+                ? ["character", "familiar"].includes(actor.type)
+                : true
+        ) {
+            if (dyingCounter > 0 && checkIfLatestDamageMessageIsNonlethal(actor, option)) {
+                if (!actor.hasCondition("unconscious")) {
+                    actor.toggleCondition("unconscious").then();
+                }
+                dyingCounter = 0;
             }
-            dyingCounter = 0;
         }
 
         if (dyingCounter > 0) {
