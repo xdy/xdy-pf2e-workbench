@@ -580,6 +580,13 @@
         "name": "Charaktere lassen automatisch gehaltene Gegenstände fallen wenn sie ohnmächtig werden.",
         "hint": "Charaktere lassen automatisch gehaltene Gegenstände fallen wenn sie ohnmächtig werden.",
         "message": "{name} hat {items} fallen gelassen"
+      },
+      "nonLethalIsNotLethal": {
+        "no": "Nichttödlicher Schaden ist einfach Schaden",
+        "unconscious": "Nichttödlicher Schaden tötet nicht",
+        "unconsciousForCharacters": "Nichttödlicher Schaden tötet keine Charaktere + Vertraute",
+        "hint": "Falls der letzte Schaden welchen du erhälst nichttödlich ist, erhälst du keinen Sterbend Zustand, sondern wirst bewusstlos mit 0 TP.",
+        "name": "... abhängig davon ob der letzte Schaden nichttödlich war."
       }
     },
     "skillActions": {
