@@ -89,7 +89,9 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Suboption to increase dying by one more when damaged by an enemy's targeted critical attack.
         * Suboption to increase dying when taking damage while already dying (does not know about
           immunities/weaknesses/resistance, so taking 0 damage will trigger it).
+        * Suboption for how to handle if the final damage was nonlethal.
     * Option to automatically remove Dying when healed to above 0 hp.
+    * Option to drop all held items on becoming unconscious.
 
 * Client Automation section
     * Optional settings to (if the GM allows it) automatically roll damage on a hit for strikes and/or spell attacks.
