@@ -1,3 +1,15 @@
+# [4.69.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.68.0...v4.69.0) (2023-05-10)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([f777fd1](https://github.com/xdy/xdy-pf2e-workbench/commit/f777fd124bf0f66f1e2f4fcd74b489de467d6368))
+
+
+### Features
+
+* Turn how to handle nonlethal damage into a subsetting to how dying is handled. ([1addb8c](https://github.com/xdy/xdy-pf2e-workbench/commit/1addb8c50748006c48a29a7bbbc16760b1dae641))
+
 # [4.68.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.67.6...v4.68.0) (2023-05-09)
 
 
