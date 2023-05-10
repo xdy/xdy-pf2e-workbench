@@ -1,3 +1,11 @@
+## [4.69.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.69.0...v4.69.1) (2023-05-10)
+
+
+### Bug Fixes
+
+* Dropping items when unconscious shouldn't cause duplicate messages and update warnings. Also switched to using the system's primaryUpdater check. ([102dd17](https://github.com/xdy/xdy-pf2e-workbench/commit/102dd17f00da625ea516be49a25b2a8d7c486d09))
+* Dropping items when unconscious shouldn't cause duplicate messages and update warnings. Also switched to using the system's primaryUpdater check. ([8f5a2b6](https://github.com/xdy/xdy-pf2e-workbench/commit/8f5a2b6215784fd6d361d59f3e34a56b816ea7f5))
+
 # [4.69.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.68.0...v4.69.0) (2023-05-10)
 
 
