@@ -196,7 +196,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
 
 function dropHeldItemsOnBecomingUnconscious(actor) {
     const items = actor.items.filter((i) => {
-        return i.isHeld && i.handsHeld > 0 && i.system.equipped.carryType === "held";
+        return i.isHeld && i.handsHeld > 0 && i.system.equipped.carryType === "held" && i.slug !== "buckler";
     });
     for (const i of items) {
         i.update({ "system.equipped.carryType": "dropped", "system.equipped.handsHeld": 0 });
