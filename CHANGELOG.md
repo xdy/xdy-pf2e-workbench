@@ -1,3 +1,10 @@
+## [4.69.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.69.1...v4.69.2) (2023-05-11)
+
+
+### Bug Fixes
+
+* If the option to make characters drop items when becoming unconscious is enabled, don't drop bucklers as they're strapped on. ([09c93e8](https://github.com/xdy/xdy-pf2e-workbench/commit/09c93e84124c6093ac747a8a007230fd0a81e221)), closes [#794](https://github.com/xdy/xdy-pf2e-workbench/issues/794)
+
 ## [4.69.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.69.0...v4.69.1) (2023-05-10)
 
 
