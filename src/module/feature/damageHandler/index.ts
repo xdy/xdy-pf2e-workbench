@@ -167,16 +167,16 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
 export async function persistentDamage(message) {
     if (
-        message.flavor.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
-        message.speaker.token &&
-        message.flavor &&
-        message.rolls &&
-        message.id === game.messages.contents.pop()?.id &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
             ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
         ) &&
+        message.flavor.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
+        message.speaker.token &&
+        message.flavor &&
+        message.rolls &&
+        message.id === game.messages.contents.pop()?.id &&
         game.actors
     ) {
         const token = canvas.tokens?.get(message.speaker.token);
@@ -191,6 +191,11 @@ export async function persistentDamage(message) {
 
 export async function persistentHealing(message) {
     if (
+        shouldIHandleThisMessage(
+            message,
+            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
+            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
+        ) &&
         game.settings.get(MODULENAME, "applyPersistentHealing") &&
         message.flavor &&
         message.rolls &&
@@ -198,12 +203,7 @@ export async function persistentHealing(message) {
         game.combats.active &&
         game.combats.active.combatant &&
         game.combats.active.combatant.actor &&
-        message.id === game.messages.contents[game.messages.contents.length - 1].id &&
-        shouldIHandleThisMessage(
-            message,
-            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
-            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
-        )
+        message.id === game.messages.contents[game.messages.contents.length - 1].id
     ) {
         const token = game.combats.active.combatant.token;
         if (token && token.isOwner) {

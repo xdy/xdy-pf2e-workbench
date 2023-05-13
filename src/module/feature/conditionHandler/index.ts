@@ -61,7 +61,7 @@ export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e, op
     return isCriticalSuccess;
 }
 
-export function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
+function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
     let isNonlethal = false;
     if (
         !option.startsWith("no") && option.endsWith("ForCharacters")
@@ -236,7 +236,7 @@ export async function increaseDyingOnZeroHP(
 
 export async function autoRemoveDyingAtGreaterThanZeroHp(actor: ActorPF2e, hpAboveZero: boolean): Promise<boolean> {
     let dying = actor.getCondition("dying");
-    if (dying && !dying.isLocked && hpAboveZero && game.user === actor?.primaryUpdater) {
+    if (game.user === actor?.primaryUpdater && dying && !dying.isLocked && hpAboveZero) {
         const value = dying?.value || 0;
         if (dying && value > 0 && !dying.isLocked) {
             const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
@@ -258,7 +258,7 @@ export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     hpRaisedAboveZero: boolean
 ): Promise<void> {
     const unconscious = actor.getCondition("unconscious");
-    if (unconscious && !unconscious.isLocked && hpRaisedAboveZero && game.user === actor?.primaryUpdater) {
+    if (game.user === actor?.primaryUpdater && hpRaisedAboveZero && unconscious && !unconscious.isLocked) {
         await actor.decreaseCondition("unconscious", { forceRemove: true });
     }
 }
