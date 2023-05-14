@@ -2,7 +2,6 @@
 
 import fs from "fs-extra";
 import path from "path";
-import * as os from "os";
 
 function myRandomId() {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -11,9 +10,10 @@ function myRandomId() {
         .join("");
 }
 
-// const packsSource = "packs";
-
-const outDir = fs.mkdtempSync(path.join(os.tmpdir(), "myapp-"));
+const outDir = <string>fs.mkdirSync(path.resolve(".", "temporary"), { recursive: true });
+if (!outDir) {
+    throw new Error("Could not create output directory");
+}
 
 fs.mkdirsSync(path.resolve(outDir, "packs/data"));
 
@@ -248,3 +248,4 @@ fs.rmSync("./dist", { recursive: true, force: true });
 fs.mkdirSync(path.resolve("dist/packs/db"), { recursive: true });
 fs.copySync(outDir, "./dist");
 fs.copySync("./packs/db", "./dist/packs/db");
+fs.rmSync(outDir, { recursive: true, force: true });
