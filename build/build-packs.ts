@@ -10,6 +10,7 @@ function myRandomId() {
         .join("");
 }
 
+fs.rmSync("temporary", { recursive: true, force: true });
 const outDir = <string>fs.mkdirSync(path.resolve(".", "temporary"), { recursive: true });
 if (!outDir) {
     throw new Error("Could not create output directory");
@@ -63,11 +64,10 @@ function buildAsymonousPack() {
         .map((folder) => {
             return path.resolve(outDir, "packs/generated", folder);
         });
-    for (const folder of folders) {
+    for (const folderPath of folders) {
         const lines: string[] = [];
         const linesInternal: string[] = [];
 
-        const folderPath = path.join("./", folder);
         const files = fs.readdirSync(folderPath);
         for (const file of files) {
             const filePath = path.join(folderPath, file);
@@ -168,12 +168,12 @@ function buildAsymonousPack() {
                 console.error(`Failed to read JSON file ${filePath}`, err);
             }
         }
-        const dir = path.resolve(outDir, "static", "packs", folder + ".db");
+        const dir = path.resolve(outDir, "packs", "generated", path.basename(folderPath) + ".db");
         fs.writeFileSync(dir, lines.join("\n"), "utf8");
-        const dir2 = path.resolve(outDir, "static", "packs", folder + "-internal.db");
+        const dir2 = path.resolve(outDir, "packs", "generated", path.basename(folderPath) + "-internal.db");
         fs.writeFileSync(dir2, linesInternal.join("\n"), "utf8");
     }
-    fs.rmSync(path.resolve(outDir, "./packs/generated/asymonous-benefactor-macros"), { recursive: true });
+    fs.rmSync(path.resolve(outDir, "./packs/generated/asymonous-benefactor-macros/"), { recursive: true });
 }
 
 function buildCustomizableMacrosPack() {
