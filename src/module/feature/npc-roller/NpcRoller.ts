@@ -1,6 +1,6 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { SCALE_APP_DATA } from "../NPCScaleData.js";
-import { TokenPF2e } from "@module/canvas/index.js";
+import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { SCALE_APP_DATA } from "../NPCScaleData";
+import { CanvasPF2e, TokenPF2e } from "@module/canvas";
 
 export async function registerNpcRollerHandlebarsTemplates() {
     await loadTemplates([
@@ -86,7 +86,7 @@ class NpcRoller extends Application {
     async #handleRollButtonClick(event): Promise<void> {
         const target = $(event.target);
         const rollName = target.data("rollname") as string;
-        const token = canvas.tokens?.controlled[0];
+        const token = (canvas as CanvasPF2e).tokens?.controlled[0];
         const formula = target.data("formula") as string | number | undefined;
         const secret = <boolean>game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
 

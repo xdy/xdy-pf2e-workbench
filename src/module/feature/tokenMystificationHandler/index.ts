@@ -1,11 +1,11 @@
+import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ScenePF2e, TokenDocumentPF2e } from "@scene";
-import { TokenPF2e } from "@module/canvas/index.js";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { ActorSystemData } from "@actor/data/base.js";
-import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/index.js";
-import { generateNameFromTraits } from "./traits-name-generator.js";
-import { logError } from "../../utils.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
+import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings";
+import { generateNameFromTraits } from "./traits-name-generator";
+import { TokenPF2e } from "@module/canvas";
+import { ChatMessagePF2e } from "@module/chat-message";
+import { ActorSystemData } from "@actor/data/base";
+import { logError } from "../../utils";
 
 function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (
@@ -25,7 +25,7 @@ function hasRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
 }
 
 async function fetchRandomWordPrefix(): Promise<string> {
-    const fixSetting = String(game.settings.get(MODULENAME, "npcMystifierRandomWordPrefixRollTable"));
+    const fixSetting = game.settings.get(MODULENAME, "npcMystifierRandomWordPrefixRollTable");
 
     // "null" check is due to a previous bug that may have left invalid data in text fields
     if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
@@ -125,7 +125,7 @@ export async function buildTokenName(
     }
 
     // Never return an empty string
-    return tokenName === "" ? String(game.settings.get(MODULENAME, "npcMystifierNoMatch")) : tokenName;
+    return tokenName === "" ? <string>game.settings.get(MODULENAME, "npcMystifierNoMatch") : tokenName;
 }
 
 function isMystifyModifierKeyPressed() {
@@ -140,7 +140,7 @@ function isMystifyModifierKeyPressed() {
 }
 
 export async function tokenCreateMystification(token: any) {
-    const key = String(game.settings.get(MODULENAME, "npcMystifierModifierKey"));
+    const key = game.settings.get(MODULENAME, "npcMystifierModifierKey");
     if (
         game.user?.isGM &&
         token &&

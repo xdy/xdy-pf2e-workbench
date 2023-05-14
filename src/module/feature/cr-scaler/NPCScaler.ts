@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes.js";
-import { getActor, getFolder, getFolderInFolder } from "./Utilities.js";
-import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil.js";
+import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes";
+import { getActor, getFolder, getFolderInFolder } from "./Utilities";
+import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil";
 import { ActorPF2e, NPCPF2e } from "@actor";
-import { NPCSystemData } from "@actor/npc/data.js";
-import { logDebug } from "../../utils.js";
+import { NPCSystemData } from "@actor/npc/data";
+import { logDebug } from "../../utils";
 
 export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number) {
     const actor = <NPCPF2e>(<unknown>game.actors.get(actorId));
@@ -91,36 +91,36 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     // parse simple modifiers
     updateData["system.attributes.ac.value"] = getLeveledData(
         "armorClass",
-        system.attributes.ac?.base ?? 0,
+        system.attributes.ac?.value ?? 0,
         oldLevel,
         newLevel
     ).total;
     updateData["system.attributes.perception.value"] = getLeveledData(
         "perception",
-        system.attributes.perception.base ?? 0,
+        system.attributes.perception.value,
         oldLevel,
         newLevel
     ).total;
     updateData["system.saves.fortitude.value"] = getLeveledData(
         "savingThrow",
-        system.saves.fortitude.base ?? 0,
+        system.saves.fortitude.value ?? 0,
         oldLevel,
         newLevel
     ).total;
     updateData["system.saves.reflex.value"] = getLeveledData(
         "savingThrow",
-        system.saves.reflex.base ?? 0,
+        system.saves.reflex.value ?? 0,
         oldLevel,
         newLevel
     ).total;
     updateData["system.saves.will.value"] = getLeveledData(
         "savingThrow",
-        system.saves.will.base ?? 0,
+        system.saves.will.value ?? 0,
         oldLevel,
         newLevel
     ).total;
 
-    const hp = getHPData(system.attributes.hp?.base ?? 0, oldLevel, newLevel);
+    const hp = getHPData(system.attributes.hp?.max ?? 0, oldLevel, newLevel);
     updateData["system.attributes.hp.max"] = hp;
     updateData["system.attributes.hp.value"] = hp;
 

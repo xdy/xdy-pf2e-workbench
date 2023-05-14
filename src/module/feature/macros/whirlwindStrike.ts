@@ -1,5 +1,5 @@
+import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { WeaponPF2e } from "@item";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
 function validTarget(r1, r2) {
     return (r1.right > r2.right ? r2.right : r1.right) <= (r1.left < r2.left ? r2.left : r1.left)

@@ -1,8 +1,8 @@
-import { ActorFlagsPF2e } from "@actor/data/base.js";
-import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
+import { ChatMessagePF2e } from "@module/chat-message";
+import { ActorFlagsPF2e } from "@actor/data/base";
+import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench";
 
-function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
+export function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
     const userId = message.user.id;
     const amIMessageSender = userId === game.user?.id;
     if (!game.user?.isGM && playerCondition && amIMessageSender) {
@@ -13,12 +13,12 @@ function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = tr
     return false;
 }
 
-function nth(n) {
+export function nth(n) {
     return ["st", "nd", "rd"][((((n + 90) % 100) - 10) % 10) - 1] || "th";
 }
 
 // TODO Can this be reworked to not parse the message?
-function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
+export function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
     const flags = <ActorFlagsPF2e>message.flags.pf2e;
     let degreeOfSuccess = <string>flags.context?.outcome ?? "";
     if (flags?.context?.isReroll) {
@@ -30,18 +30,11 @@ function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
     return degreeOfSuccess;
 }
 
-function isFirstGM() {
+export function isFirstGM() {
     return game.user.id === game.users?.find((u) => u.isGM && u.active)?.id;
 }
 
-function myRandomId() {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    return Array.from(Array(16).keys())
-        .map(() => letters[Math.floor(Math.random() * letters.length)])
-        .join("");
-}
-
-function isActuallyDamageRoll(message) {
+export function isActuallyDamageRoll(message) {
     // TODO Anything using this should probably hook into Hooks.call(`pf2e.damageRoll`, rollData) instead...
     const isPhysicalDamageroll =
         message.rolls?.length !== 0 &&
@@ -53,15 +46,6 @@ function isActuallyDamageRoll(message) {
         // TODO (message.flags["xdy-pf2e-workbench"].autoRollDamage.actuallyCasting ?? true) && //TODO Add this (and setting the flag) to support not rolling damage when the chat button is clicked. For now, meh.
     );
 }
-
-export {
-    shouldIHandleThisMessage,
-    nth,
-    degreeOfSuccessWithRerollHandling,
-    isFirstGM,
-    myRandomId,
-    isActuallyDamageRoll,
-};
 
 export function logTrace(...args) {
     log(0, ...args);

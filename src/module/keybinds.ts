@@ -1,9 +1,9 @@
-import { logInfo } from "./utils.js";
-import { MODULENAME } from "./xdy-pf2e-workbench.js";
-import { TokenPF2e } from "@module/canvas/index.js";
-import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler/index.js";
-import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler/index.js";
-import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js";
+import { MODULENAME } from "./xdy-pf2e-workbench";
+import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler";
+import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler";
+import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler";
+import { TokenPF2e } from "@module/canvas";
+import { logInfo } from "./utils";
 
 export function registerWorkbenchKeybindings() {
     logInfo(`${MODULENAME} | registerKeybindings`);

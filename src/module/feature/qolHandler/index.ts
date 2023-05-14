@@ -1,12 +1,13 @@
+import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { isActuallyDamageRoll } from "../../utils";
+import { ChatMessageSourcePF2e } from "@module/chat-message/data";
+import { ChatMessagePF2e } from "@module/chat-message";
 import { PhysicalItemPF2e } from "@item";
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
-import { isActuallyDamageRoll } from "../../utils.js";
 
 export function chatCardDescriptionCollapse(html: JQuery) {
     const hasCardContent = html.find(".card-content");
     if (hasCardContent.length > 0) {
-        if (String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) === "collapsedDefault") {
+        if (game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault") {
             hasCardContent.hide();
             hasCardContent.siblings()?.get(0)?.insertAdjacentHTML("beforeend", eye);
         }
@@ -50,7 +51,7 @@ export function chatActionCardDescriptionCollapse(html: JQuery) {
     const hasAction = html.find(".action");
     if (hasAction.length > 0) {
         if (html.find(".roll-note").length > 0) {
-            if (String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) === "collapsedDefault") {
+            if (game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault") {
                 for (const note of html.find(".roll-note")) {
                     note.style.display = "none";
                 }
@@ -70,7 +71,7 @@ const eye = ' <i style="font-size: small; max-width: min-content" class="fa-soli
 export function chatAttackCardDescriptionCollapse(html: JQuery) {
     const hasRollNote = html.find(".roll-note");
     if (hasRollNote.length > 0) {
-        if (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault") {
+        if (game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault") {
             for (const note of hasRollNote) {
                 note.style.display = "none";
             }
@@ -84,7 +85,7 @@ export function chatAttackCardDescriptionCollapse(html: JQuery) {
 }
 
 export function damageCardExpand(message: ChatMessagePF2e, html: JQuery) {
-    const expandDmg = String(game.settings.get(MODULENAME, "autoExpandDamageRolls"));
+    const expandDmg = <string>game.settings.get(MODULENAME, "autoExpandDamageRolls");
     if (expandDmg === "expandedAll") {
         html.find(".dice-tooltip").css("display", "block");
     }
@@ -101,7 +102,7 @@ export function damageCardExpand(message: ChatMessagePF2e, html: JQuery) {
     }
 }
 
-export async function castPrivateSpell(data, message: ChatMessagePF2e) {
+export async function castPrivateSpell(data: ChatMessageSourcePF2e, message: ChatMessagePF2e) {
     data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
     data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
     if (!game.user.isGM) {
@@ -263,11 +264,11 @@ export function hideNameOfPrivateSpell(message: ChatMessagePF2e, html: JQuery) {
 }
 
 export async function mystifyNpcItems(items) {
-    const minimumRarity = String(
+    const minimumRarity = <string>(
         game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater")
     );
     const minimumLevel = Number.parseInt(
-        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater"))
+        <string>game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")
     );
     const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
     const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(

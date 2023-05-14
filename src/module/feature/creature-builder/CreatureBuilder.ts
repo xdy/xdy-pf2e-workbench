@@ -22,8 +22,8 @@ import {
     Roadmap,
     ROADMAPS,
     StatisticOptions,
-} from "./CreatureBuilderData.js";
-import { SCALE_APP_DATA } from "../NPCScaleData.js";
+} from "./CreatureBuilderData";
+import { SCALE_APP_DATA } from "../NPCScaleData";
 import { ActorPF2e } from "@actor";
 
 export const setupCreatureBuilder = () => Hooks.on("renderActorSheet", enableCreatureBuilderButton);

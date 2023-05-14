@@ -1,6 +1,6 @@
+import { PartialBy } from "./utils";
+import { Rank } from "./globals";
 import { CharacterPF2e } from "@actor";
-import { Rank } from "./globals.js";
-import { PartialBy } from "./utils.js";
 
 export type ActionType = "A" | "D" | "T" | "F" | "R" | "";
 

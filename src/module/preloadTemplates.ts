@@ -1,5 +1,5 @@
-import { MODULENAME } from "./xdy-pf2e-workbench.js";
-import { setupSkillActions } from "./feature/skill-actions/sheet-skill-actions.js";
+import { setupSkillActions } from "./feature/skill-actions/sheet-skill-actions";
+import { MODULENAME } from "./xdy-pf2e-workbench";
 
 export async function preloadTemplates(): Promise<void> {
     const templatePaths: string[] = [
@@ -9,7 +9,7 @@ export async function preloadTemplates(): Promise<void> {
     await loadTemplates(templatePaths);
 
     // TODO Improve this
-    if (String(game.settings.get(MODULENAME, "skillActions")) !== "disabled") {
+    if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
         await setupSkillActions();
     }
 }

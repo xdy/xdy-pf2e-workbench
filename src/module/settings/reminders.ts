@@ -1,5 +1,5 @@
-import { SettingsMenuPF2eWorkbench } from "./menu.js";
-import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
+import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench";
+import { SettingsMenuPF2eWorkbench } from "./menu";
 
 export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "remindersSettings";

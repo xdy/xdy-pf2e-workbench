@@ -1,20 +1,5 @@
-import { isActuallyDamageRoll, logDebug } from "./utils.js";
-import { ActorPF2e } from "@actor";
-import { ActorSystemData } from "@actor/data/base.js";
-import { TokenDocumentPF2e } from "@scene";
-import { renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions.js";
-import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
-import { enableCreatureBuilderButton } from "./feature/creature-builder/CreatureBuilder.js";
-import { ActorSheetPF2e } from "@actor/sheet/base.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
-import { UserPF2e } from "@module/user/index.js";
-import {
-    actionsReminder,
-    autoReduceStunned,
-    reminderBreathWeapon,
-    reminderCannotAttack,
-    reminderTargeting,
-} from "./feature/reminders/index.js";
+import { ChatMessagePF2e, ChatMessageSourcePF2e } from "@module/chat-message";
+import { UserPF2e } from "@module/user";
 import {
     castPrivateSpell,
     chatActionCardDescriptionCollapse,
@@ -23,8 +8,18 @@ import {
     damageCardExpand,
     hideNameOfPrivateSpell,
     mystifyNpcItems,
-} from "./feature/qolHandler/index.js";
-import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler/index.js";
+} from "./feature/qolHandler";
+import {
+    actionsReminder,
+    autoReduceStunned,
+    reminderBreathWeapon,
+    reminderCannotAttack,
+    reminderTargeting,
+} from "./feature/reminders";
+import { isActuallyDamageRoll, logDebug } from "./utils";
+import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler";
+import { mangleNamesInChatMessage, renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler";
+import { ItemPF2e } from "@item";
 import {
     applyEncumbranceBasedOnBulk,
     autoRemoveDyingAtGreaterThanZeroHp,
@@ -34,19 +29,25 @@ import {
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
     reduceFrightened,
-} from "./feature/conditionHandler/index.js";
-import {
-    mangleNamesInChatMessage,
-    renderNameHud,
-    tokenCreateMystification,
-} from "./feature/tokenMystificationHandler/index.js";
-import { ItemPF2e } from "@item/base.js";
-import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
-import { maxHeroPoints } from "./feature/heroPointHandler/index.js";
-import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
-import { onQuantitiesHook } from "./feature/quickQuantities/index.js";
+} from "./feature/conditionHandler";
+import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
+import { maxHeroPoints } from "./feature/heroPointHandler";
+import { ActorPF2e } from "@actor";
+import { ActorSystemData } from "@actor/data/base";
+import { moveOnZeroHP } from "./feature/initiativeHandler";
+import { TokenDocumentPF2e } from "@scene";
+import { onQuantitiesHook } from "./feature/quickQuantities";
+import { renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions";
+import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench";
+import { enableCreatureBuilderButton } from "./feature/creature-builder/CreatureBuilder";
+import { ActorSheetPF2e } from "@actor/sheet/base";
 
-export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
+export const preCreateChatMessageHook = (
+    message: ChatMessagePF2e,
+    data: ChatMessageSourcePF2e,
+    _options,
+    _user: UserPF2e
+) => {
     let result = true;
     if (game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget") {
         result = reminderTargeting(message);
@@ -154,31 +155,29 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
 
     if (isActuallyDamageRoll(message)) {
         if (
-            String(game.settings.get(MODULENAME, "autoExpandDamageRolls")) === "expandedAll" ||
-            String(game.settings.get(MODULENAME, "autoExpandDamageRolls")) === "expandedNew" ||
-            String(game.settings.get(MODULENAME, "autoExpandDamageRolls")) === "expandedNewest"
+            game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
+            game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
+            game.settings.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest"
         ) {
             damageCardExpand(message, html);
         }
     } else {
         if (
-            String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) === "collapsedDefault" ||
-            String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) === "nonCollapsedDefault"
+            game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+            game.settings.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault"
         ) {
             chatCardDescriptionCollapse(html);
         }
         if (
-            (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault" ||
-                String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) ===
-                    "nonCollapsedDefault") &&
+            (game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
+                game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault") &&
             ["weapon", "melee", "spell"].includes(message.item?.type ?? "")
         ) {
             chatAttackCardDescriptionCollapse(html);
         }
         if (
-            ((String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) === "collapsedDefault" ||
-                String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
-                    "nonCollapsedDefault") &&
+            ((game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
+                game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault") &&
                 !message.item) ||
             message.item?.type === "action"
         ) {
@@ -265,7 +264,7 @@ export function pf2eEndTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e
 }
 
 export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) {
-    const forWhom = String(game.settings.get(MODULENAME, "actionsReminderAllow"));
+    const forWhom = game.settings.get(MODULENAME, "actionsReminderAllow");
     if (game.settings.get(MODULENAME, "autoReduceStunned")) {
         autoReduceStunned(combatant).then((reduction) => {
             if (forWhom !== "none") {
@@ -286,7 +285,7 @@ export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: JQuery, data: 
 }
 
 export function renderCharacterSheetPF2eHook(app: TokenHUD, html: JQuery, data: any) {
-    if (Number(game.settings.get(MODULENAME, "maxHeroPoints")) !== 3) {
+    if (game.settings.get(MODULENAME, "maxHeroPoints") !== 3) {
         maxHeroPoints(app, html, data);
     }
 }
@@ -304,16 +303,16 @@ export async function preUpdateActorHook(actor: ActorPF2e, update: Record<string
             currentActorHp > 0 &&
             updateHp <= 0 &&
             game.settings.get("pf2e", "automation.lootableNPCs") &&
-            String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems")) === "onZeroHp"
+            game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"
         ) {
             await mystifyNpcItems(actor.items);
         }
 
         const automoveIfZeroHP =
             game.combat &&
-            ((String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HPCharactersOnly" &&
+            ((<string>game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HPCharactersOnly" &&
                 actor.type === CHARACTER_TYPE) ||
-                (String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HP" &&
+                (<string>game.settings.get(MODULENAME, "enableAutomaticMove") === "reaching0HP" &&
                     [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
         if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
             increaseDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
@@ -384,7 +383,7 @@ export async function createTokenHook(token: TokenDocumentPF2e, ..._args) {
     if (
         game.user?.isGM &&
         game.settings.get("pf2e", "automation.lootableNPCs") &&
-        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems")) === "onScene" &&
+        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene" &&
         token.actor &&
         token.actor.isOfType(NPC_TYPE) &&
         token.actor.items &&
@@ -403,7 +402,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, $html: JQ
         onQuantitiesHook(sheet, $html);
     }
 
-    if (sheet.actor?.type === CHARACTER_TYPE && String(game.settings.get(MODULENAME, "skillActions")) !== "disabled") {
+    if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "skillActions") !== "disabled") {
         renderSheetSkillActions(sheet, $html);
     }
 

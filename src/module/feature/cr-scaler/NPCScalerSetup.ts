@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { scaleNPCToLevel } from "./NPCScaler.js";
+import { scaleNPCToLevel } from "./NPCScaler";
 import { ActorPF2e } from "@actor";
 
 export function onScaleNPCContextHook(_html, buttons: any[]) {

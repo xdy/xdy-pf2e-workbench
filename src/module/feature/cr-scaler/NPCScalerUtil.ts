@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { IDicePool } from "./NPCScalerTypes.js";
-import { SCALE_APP_DATA } from "../NPCScaleData.js";
+import { IDicePool } from "./NPCScalerTypes";
+import { SCALE_APP_DATA } from "../NPCScaleData";
 
 export function parseDamage(value: string): IDicePool {
     const [diceString, bonusString] = value.split("+");

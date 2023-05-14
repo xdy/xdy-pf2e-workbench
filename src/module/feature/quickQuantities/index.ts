@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
+import { ActorSheetPF2e } from "@actor/sheet/base";
 import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item/base.js";
-import { ActorSheetPF2e } from "@actor/sheet/base.js";
+import { ItemPF2e } from "@item";
 
 export function onQuantitiesHook(app: ActorSheetPF2e<ActorPF2e>, html: JQuery) {
     const increaseQuantity = html.find(".item-increase-quantity");

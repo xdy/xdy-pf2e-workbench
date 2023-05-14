@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     //    "allowSyntheticDefaultImports": true, //Do I need this?
-    "allowImportingTsExtensions": true,
     "allowUnusedLabels": false,
     "baseUrl": ".",
     "esModuleInterop": true,
@@ -11,8 +10,8 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "esnext",
-    "moduleResolution": "node16",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
@@ -22,13 +21,13 @@
     "outDir": "dist",
     "paths": {
       "@actor": [
-        "types/src/module/actor/index.js"
+        "types/src/module/actor"
       ],
       "@actor/*": [
         "types/src/module/actor/*"
       ],
       "@item": [
-        "types/src/module/item/index.js"
+        "types/src/module/item"
       ],
       "@item/*": [
         "types/src/module/item/*"
@@ -37,7 +36,7 @@
         "types/src/module/*"
       ],
       "@scene": [
-        "types/src/module/scene/index.js"
+        "types/src/module/scene"
       ],
       "@scene/*": [
         "types/src/module/scene/*"
@@ -49,22 +48,25 @@
         "types/src/module/system/*"
       ],
       "@util": [
-        "types/src/util/index.js"
+        "types/src/util"
       ],
       "@util/*": [
         "types/src/util/*"
+      ],
+      // https://github.com/Hypercubed/mini-signals/issues/20
+      "mini-signals": [
+        "node_modules/resource-loader/typings/mini-signals.d.ts"
       ]
     },
     "removeComments": false,
     "resolveJsonModule": true,
-    "rootDir": ".",
     "skipLibCheck": true,
     "sourceMap": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": false,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "es2022",
+    "target": "es2018",
     "typeRoots": [
       "node_modules/@types",
       "node_modules/handlebars",
@@ -75,14 +77,13 @@
       "jquery",
       "node",
       "tooltipster",
-      "vite/client"
-    ],
-    "useDefineForClassFields": true
-  },
-  "watchOptions": {
-    "excludeDirectories": [
-            "packs/data/",
-      "static/packs/"
+      "webpack-env"
     ]
+  },
+  "ts-node": {
+    "files": true
+    },
+    "watchOptions": {
+        "excludeDirectories": ["packs/", "static/packs/"]
   }
 }
