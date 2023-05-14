@@ -22,7 +22,7 @@ function copyFolder(source: string, target: string) {
         const sourcePath = decodeURIComponent(path.join(source, file));
         const targetPath = decodeURIComponent(path.join(target, file));
         fs.copyFileSync(sourcePath, targetPath);
-        console.debug(`Copied ${path.basename(sourcePath)}`);
+        console.debug(`Copied ${path.normalize(sourcePath)} to ${path.normalize(targetPath)}`);
         // eslint-disable-next-line
         fs.appendFileSync(
             targetPath,
@@ -46,8 +46,8 @@ function buildAsymonousPack() {
         "submodules/my-foundryvtt-macros/PF2e/Contributions by others",
     ];
 
-    fs.mkdirsSync("../generated/asymonous-benefactor-macros");
-    fs.mkdirsSync(path.resolve(outDir, "packs/generated/asymonous-benefactor-macros"));
+    fs.ensureDirSync("../generated/asymonous-benefactor-macros");
+    fs.ensureDirSync(path.resolve(outDir, "packs/generated/asymonous-benefactor-macros"));
 
     copyFolder(
         path.resolve(".", asymonousSource[0]),
@@ -57,8 +57,6 @@ function buildAsymonousPack() {
         path.resolve(".", asymonousSource[1]),
         path.resolve(path.resolve(outDir, "packs/generated/asymonous-benefactor-macros"))
     );
-
-    // TODO Make a Function that fetch all folder names under "data" and then loop through them
 
     const folders = getFolders(path.resolve(outDir, "packs/generated"))
         .filter((folder) => folder.startsWith("asymonous-"))
@@ -245,7 +243,7 @@ buildCustomizableMacrosPack();
 buildInternalUtilityMacrosPack();
 buildAsymonousPack();
 fs.rmSync("./dist", { recursive: true, force: true });
-fs.mkdirSync(path.resolve("dist/packs/db"), { recursive: true });
+fs.mkdirsSync(path.resolve("dist/packs/db"));
 fs.copySync(outDir, "./dist");
 fs.copySync("./packs/db", "./dist/packs/db");
 fs.rmSync(outDir, { recursive: true, force: true });
