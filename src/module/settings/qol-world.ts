@@ -1,5 +1,5 @@
-import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench";
-import { SettingsMenuPF2eWorkbench } from "./menu";
+import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
+import { SettingsMenuPF2eWorkbench } from "./menu.js";
 
 export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "qolWorldSettings";

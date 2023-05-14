@@ -1,5 +1,5 @@
 // Originally from Avery (Velara) Avery#9136, modified by me. Included with permission.
-import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
 export async function buildNpcSpellbookJournal() {
     // @ts-ignore

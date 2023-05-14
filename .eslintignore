@@ -22,6 +22,6 @@ main.bundle.js
 #This project
 foundryconfig.json
 .eslintrc.js
-webpack.config.ts
+vite.config.ts
 types/
 

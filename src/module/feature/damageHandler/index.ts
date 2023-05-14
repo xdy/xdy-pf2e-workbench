@@ -1,7 +1,7 @@
-import { degreeOfSuccessWithRerollHandling, isActuallyDamageRoll, shouldIHandleThisMessage } from "../../utils";
-import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { ChatMessagePF2e } from "@module/chat-message";
-import { ActorFlagsPF2e } from "@actor/data/base";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { ActorFlagsPF2e } from "@actor/data/base.js";
+import { degreeOfSuccessWithRerollHandling, isActuallyDamageRoll, shouldIHandleThisMessage } from "../../utils.ts";
+import { ChatMessagePF2e } from "@module/chat-message/index.js";
 
 export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
@@ -49,8 +49,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
     if (
         shouldIHandleThisMessage(
             message,
-            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow")),
-            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "autoRollDamageAllow"))
+            ["all", "players"].includes(String(game.settings.get(MODULENAME, "autoRollDamageAllow"))),
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "autoRollDamageAllow")))
         )
     ) {
         const flags = <ActorFlagsPF2e>message.flags.pf2e;
@@ -59,7 +59,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
         if (originUuid) {
             const autoRollDamageForStrike = game.settings.get(MODULENAME, "autoRollDamageForStrike");
             const autoRollDamageForSpellAttack = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
-            const autoRollDamageForSpellNotAnAttack = <boolean>(
+            const autoRollDamageForSpellNotAnAttack = Boolean(
                 game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack")
             );
 
@@ -169,8 +169,8 @@ export async function persistentDamage(message) {
     if (
         shouldIHandleThisMessage(
             message,
-            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
-            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
+            ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow")))
         ) &&
         message.flavor.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
         message.speaker.token &&
@@ -193,8 +193,8 @@ export async function persistentHealing(message) {
     if (
         shouldIHandleThisMessage(
             message,
-            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow")),
-            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "applyPersistentAllow"))
+            ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow")))
         ) &&
         game.settings.get(MODULENAME, "applyPersistentHealing") &&
         message.flavor &&

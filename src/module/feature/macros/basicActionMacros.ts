@@ -4,12 +4,11 @@
 /* eslint-disable no-undef */
 // TODO Fix the ts-ignore and any in this.
 
-import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
-import { Variant } from "../skill-actions/variants";
-import { CharacterSkill } from "@actor/character/types";
-import { ModifierPF2e } from "../skill-actions/pf2e";
-import { Action } from "@actor/actions";
+import { Variant } from "../skill-actions/variants.js";
+import { CharacterSkill } from "@actor/character/types.js";
+import { Action } from "@actor/actions/types.js";
 
 let selectedActor;
 
@@ -792,10 +791,11 @@ function getSkills(proficiencyKey: string): CharacterSkill[] {
 }
 
 function getMapVariant(skill: CharacterSkill, extra: Record<string, unknown> | undefined, map: number): Variant {
-    const modifier = new ModifierPF2e({
+    const modifier = new game.pf2e.Modifier({
         label: game.i18n.localize("PF2E.MultipleAttackPenalty"),
         modifier: map,
         type: "untyped",
+        rollOptions: {},
     });
     const label = game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: map });
     return new Variant(label, skill, extra, [modifier]);

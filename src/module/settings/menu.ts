@@ -1,4 +1,4 @@
-import { MODULENAME } from "../xdy-pf2e-workbench";
+import { MODULENAME } from "../xdy-pf2e-workbench.js";
 
 export type PartialSettingsData = Omit<SettingRegistration, "scope" | "config">;
 

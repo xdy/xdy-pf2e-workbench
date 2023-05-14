@@ -22,7 +22,8 @@
     ]
   },
   "esmodules": [
-    "xdy-pf2e-workbench.bundle.js"
+    "vendor.mjs",
+    "xdy-pf2e-workbench.mjs"
   ],
   "scripts": [],
   "styles": [
@@ -34,7 +35,7 @@
       "name": "asymonous-benefactor-macros",
       "label": "Symon-provided macros (asymonous-benefactor-macros)",
       "system": "pf2e",
-      "path": "packs/asymonous-benefactor-macros.db",
+      "path": "packs/generated/asymonous-benefactor-macros.db",
       "type": "Macro",
       "private": false,
       "flags": {}
@@ -43,7 +44,7 @@
       "name": "asymonous-benefactor-macros-internal",
       "label": "asymonous-benefactor-macros-internal, do not import",
       "system": "pf2e",
-      "path": "packs/asymonous-benefactor-macros-internal.db",
+      "path": "packs/generated/asymonous-benefactor-macros-internal.db",
       "private": true,
       "type": "Macro",
       "flags": {}
@@ -52,7 +53,7 @@
       "name": "asymonous-benefactor-effects",
       "label": "asymonous-benefactor-effects, do not import",
       "system": "pf2e",
-      "path": "packs/asymonous-benefactor-effects.db",
+      "path": "packs/db/asymonous-benefactor-effects.db",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -61,7 +62,7 @@
       "name": "xdy-customizable-macros",
       "label": "PF2e Workbench Customizable Macros (xdy-customizable-macros)",
       "system": "pf2e",
-      "path": "packs/xdy-customizable-macros.db",
+      "path": "packs/data/xdy-customizable-macros.db",
       "type": "Macro",
       "private": false,
       "flags": {}
@@ -70,7 +71,7 @@
       "name": "xdy-pf2e-workbench-items",
       "label": "PF2e Workbench Items (xdy-pf2e-workbench-items)",
       "system": "pf2e",
-      "path": "packs/xdy-pf2e-workbench-items.db",
+      "path": "packs/db/xdy-pf2e-workbench-items.db",
       "type": "Item",
       "private": false,
       "flags": {}
@@ -79,7 +80,7 @@
       "name": "xdy-pf2e-workbench-macros",
       "label": "PF2e Workbench Macros (xdy-pf2e-workbench-macros)",
       "system": "pf2e",
-      "path": "packs/xdy-pf2e-workbench-macros.db",
+      "path": "packs/db/xdy-pf2e-workbench-macros.db",
       "type": "Macro",
       "private": false,
       "flags": {}
@@ -88,7 +89,7 @@
       "name": "xdy-internal-utility-macros",
       "label": "xdy-internal-utility-macros, do not import",
       "system": "pf2e",
-      "path": "packs/xdy-internal-utility-macros.db",
+      "path": "packs/data/xdy-internal-utility-macros.db",
       "type": "Macro",
       "private": false,
       "flags": {}
@@ -97,7 +98,7 @@
       "name": "xdy-internal-tables",
       "label": "xdy-internal-tables, do not import",
       "system": "pf2e",
-      "path": "packs/xdy-internal-tables.db",
+      "path": "packs/db/xdy-internal-tables.db",
       "type": "RollTable",
       "private": false,
       "flags": {}

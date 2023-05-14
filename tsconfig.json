@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     //    "allowSyntheticDefaultImports": true, //Do I need this?
+    "allowImportingTsExtensions": true,
     "allowUnusedLabels": false,
     "baseUrl": ".",
     "esModuleInterop": true,
@@ -10,8 +11,8 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "esnext",
+    "moduleResolution": "node16",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
@@ -21,13 +22,13 @@
     "outDir": "dist",
     "paths": {
       "@actor": [
-        "types/src/module/actor"
+        "types/src/module/actor/index.js"
       ],
       "@actor/*": [
         "types/src/module/actor/*"
       ],
       "@item": [
-        "types/src/module/item"
+        "types/src/module/item/index.js"
       ],
       "@item/*": [
         "types/src/module/item/*"
@@ -36,7 +37,7 @@
         "types/src/module/*"
       ],
       "@scene": [
-        "types/src/module/scene"
+        "types/src/module/scene/index.js"
       ],
       "@scene/*": [
         "types/src/module/scene/*"
@@ -48,25 +49,22 @@
         "types/src/module/system/*"
       ],
       "@util": [
-        "types/src/util"
+        "types/src/util/index.js"
       ],
       "@util/*": [
         "types/src/util/*"
-      ],
-      // https://github.com/Hypercubed/mini-signals/issues/20
-      "mini-signals": [
-        "node_modules/resource-loader/typings/mini-signals.d.ts"
       ]
     },
     "removeComments": false,
     "resolveJsonModule": true,
+    "rootDir": ".",
     "skipLibCheck": true,
     "sourceMap": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": false,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "es2018",
+    "target": "es2022",
     "typeRoots": [
       "node_modules/@types",
       "node_modules/handlebars",
@@ -77,13 +75,14 @@
       "jquery",
       "node",
       "tooltipster",
-      "webpack-env"
-    ]
+      "vite/client"
+    ],
+    "useDefineForClassFields": true
   },
-  "ts-node": {
-    "files": true
-    },
-    "watchOptions": {
-        "excludeDirectories": ["packs/", "static/packs/"]
+  "watchOptions": {
+    "excludeDirectories": [
+            "packs/data/",
+      "static/packs/"
+    ]
   }
 }

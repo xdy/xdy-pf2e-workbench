@@ -8,30 +8,19 @@
 // TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
 // TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
 // TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
-import { preloadTemplates } from "./preloadTemplates";
-import { registerWorkbenchSettings } from "./settings";
-import { doMystificationFromToken } from "./feature/tokenMystificationHandler";
-import { registerWorkbenchKeybindings } from "./keybinds";
-import { noOrSuccessfulFlatcheck } from "./feature/damageHandler";
-import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler";
+import { preloadTemplates } from "./preloadTemplates.js";
+import { registerWorkbenchKeybindings } from "./keybinds.js";
 import { ActorPF2e } from "@actor";
-import {
-    addHeroPoints,
-    calcRemainingMinutes,
-    callHeroPointHandler,
-    createRemainingTimeMessage,
-    resetHeroPoints,
-    startTimer,
-} from "./feature/heroPointHandler";
-import { debounce, isFirstGM, logInfo } from "./utils";
-import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller";
-import { loadSkillActions, loadSkillActionsBabele } from "./feature/skill-actions/sheet-skill-actions";
-import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler";
-import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator";
-import { basicActionMacros } from "./feature/macros/basicActionMacros";
-import { refocus } from "./feature/macros/refocus";
-import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal";
-import { whirlwindStrike } from "./feature/macros/whirlwindStrike";
+
+import { debounce, isFirstGM, logInfo } from "./utils.js";
+import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller.js";
+import { loadSkillActions, loadSkillActionsBabele } from "./feature/skill-actions/sheet-skill-actions.js";
+import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.js";
+import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.js";
+import { basicActionMacros } from "./feature/macros/basicActionMacros.js";
+import { refocus } from "./feature/macros/refocus.js";
+import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal.js";
+import { whirlwindStrike } from "./feature/macros/whirlwindStrike.js";
 import {
     createChatMessageHook,
     createItemHook,
@@ -47,8 +36,20 @@ import {
     renderChatMessageHook,
     renderTokenHUDHook,
     updateItemHook,
-} from "./hooks";
-import { onScaleNPCContextHook } from "./feature/cr-scaler/NPCScalerSetup";
+} from "./hooks.js";
+import { onScaleNPCContextHook } from "./feature/cr-scaler/NPCScalerSetup.js";
+import {
+    addHeroPoints,
+    calcRemainingMinutes,
+    callHeroPointHandler,
+    createRemainingTimeMessage,
+    resetHeroPoints,
+    startTimer,
+} from "./feature/heroPointHandler/index.js";
+import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js";
+import { doMystificationFromToken } from "./feature/tokenMystificationHandler/index.js";
+import { noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.js";
+import { registerWorkbenchSettings } from "./settings/index.js";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 export const NPC_TYPE = "npc";

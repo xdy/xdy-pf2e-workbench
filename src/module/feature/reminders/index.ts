@@ -1,10 +1,10 @@
-import { isFirstGM } from "../../utils";
-import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { TokenDocumentPF2e } from "@scene";
-import { CombatantPF2e } from "@module/encounter";
-import { ActorFlagsPF2e } from "@actor/data/base";
-import { ChatMessagePF2e } from "@module/chat-message";
-import { ActorPF2e } from "@actor";
+import { isFirstGM, myRandomId } from "../../utils.js";
+import { ChatMessagePF2e } from "@module/chat-message/index.js";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { TokenDocumentPF2e } from "@module/scene/index.js";
+import { CombatantPF2e } from "@module/encounter/index.js";
+import { ActorPF2e } from "@actor/base.js";
+import { ActorFlagsPF2e } from "@actor/data/base.js";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     const content = message.content;
@@ -44,7 +44,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                         source: {
                             value: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`),
                         },
-                        slug: `xdy-breath-weapon-reminder-${foundry.utils.randomID()}`, // Why did I add a random ID? I don't remember.
+                        slug: `xdy-breath-weapon-reminder-${myRandomId()}`, // Why did I add a random ID? I don't remember.
                     },
                 };
 
@@ -58,10 +58,10 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
 export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
     if (game.user === combatant.actor?.primaryUpdater && combatant && combatant.actor) {
         const showForPC =
-            ["all", "players"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow")) &&
+            ["all", "players"].includes(String(game.settings.get(MODULENAME, "actionsReminderAllow"))) &&
             combatant.actor?.hasPlayerOwner;
         const showForNPC =
-            ["all", "gm"].includes(<string>game.settings.get(MODULENAME, "actionsReminderAllow")) &&
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "actionsReminderAllow"))) &&
             !combatant.actor?.hasPlayerOwner;
         if (
             (showForPC || showForNPC) &&
@@ -166,9 +166,9 @@ export function reminderTargeting(message: ChatMessagePF2e): boolean {
     ) {
         const targets = message.user.targets;
         if (!targets || targets.size === 0) {
-            if (game.settings.get(MODULENAME, "reminderTargeting") === "reminder") {
+            if (String(game.settings.get(MODULENAME, "reminderTargeting")) === "reminder") {
                 ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderTargeting.info`));
-            } else if (game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget") {
+            } else if (String(game.settings.get(MODULENAME, "reminderTargeting")) === "mustTarget") {
                 ui.notifications.error(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderTargeting.error`));
                 result = false;
             }
