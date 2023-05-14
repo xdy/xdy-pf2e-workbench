@@ -1,3 +1,17 @@
+# [4.70.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.69.2...v4.70.0) (2023-05-14)
+
+
+### Bug Fixes
+
+* Another attempt at a fix. ([2e88d95](https://github.com/xdy/xdy-pf2e-workbench/commit/2e88d95cec9be90d6fb2d49dca0f4876c5de0cd4))
+* Another try, now with a yet another way to get a temp dir, that hopefully works on github as well. ([703f767](https://github.com/xdy/xdy-pf2e-workbench/commit/703f76752f82ca3dc57f0538a99715d1e66c455c))
+* Print out where the files end up. ([af69580](https://github.com/xdy/xdy-pf2e-workbench/commit/af6958090a64b2481fd76dcd869e53907338f3a6))
+
+
+### Features
+
+* Switch build to vite. General cleanup and minor bug fixes. ([03676d5](https://github.com/xdy/xdy-pf2e-workbench/commit/03676d5d1ced75c01feae2d922981f0e2afbe297))
+
 ## [4.69.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.69.1...v4.69.2) (2023-05-11)
 
 
