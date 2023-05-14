@@ -3,9 +3,8 @@
 // * Check on an existing timer, recalc timeout, ignore on the first, none on the second
 // * Timeout, recalc timeout, ignore on the first, random on the second
 
-import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { CharacterSystemData } from "@actor/character/data";
 import { ActorPF2e } from "@actor";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
 export enum HPHState {
     Start,
@@ -86,7 +85,7 @@ export async function heroPointHandler(state: HPHState) {
     switch (state) {
         case HPHState.Start:
             remainingMinutes = Number.parseInt(
-                <string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")
+                String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
             );
             break;
         case HPHState.Check:
@@ -94,7 +93,7 @@ export async function heroPointHandler(state: HPHState) {
             break;
         case HPHState.Timeout:
             remainingMinutes = Number.parseInt(
-                <string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")
+                String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
             );
             break;
     }
@@ -256,7 +255,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     const value = $(this).val();
     if ((value !== '') && (value.indexOf('.') === -1)) {
         $(this).val(Math.max(Math.min(value, ${Number.parseInt(
-            <string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")
+            String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
         )}), 0));
     }
 });</script>
@@ -266,7 +265,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
       <span class="input-group-addon">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`)}</span>
       <input id="timerTextId" name="timerText" class="form-control" value="${
           remainingMinutes ||
-          Number.parseInt(<string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
+          Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
       }" type="number">
     </div>
     <p class="help-block">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`)}</p>
@@ -283,10 +282,10 @@ export function calcRemainingMinutes(useDefault: boolean): number {
     const remainingMinutes: number = Math.clamped(
         savedMinutes ??
             (useDefault
-                ? Number.parseInt(<string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
+                ? Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
                 : 0),
         0,
-        Number.parseInt(<string>game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
+        Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
     );
     const passedMillis = game.time.serverTime - (savedTime ?? game.time.serverTime);
     return remainingMinutes - Math.floor(passedMillis / ONE_MINUTE_IN_MS);
@@ -304,7 +303,7 @@ function heroes() {
 
 export async function resetHeroPoints(heropoints: number) {
     for (const actor of heroes()) {
-        const value = Math.min(heropoints, <number>game.settings.get(MODULENAME, "maxHeroPoints"));
+        const value = Math.min(heropoints, Number(game.settings.get(MODULENAME, "maxHeroPoints")));
         await actor.update({
             "system.resources.heroPoints.value": value,
         });
@@ -326,10 +325,10 @@ export async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
     }
 
     for (const actor of actors) {
-        const system = <CharacterSystemData>actor.system;
+        const system = actor.system;
         const value = Math.min(
             system.resources.heroPoints.value + heropoints,
-            <number>game.settings.get(MODULENAME, "maxHeroPoints")
+            Number(game.settings.get(MODULENAME, "maxHeroPoints"))
         );
         await actor.update({
             "system.resources.heroPoints.value": value,
@@ -401,7 +400,7 @@ export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
      * limitations under the License.
      */
 
-    renderData.data.resources.heroPoints.max = <number>game.settings.get(MODULENAME, "maxHeroPoints");
+    renderData.data.resources.heroPoints.max = Number(game.settings.get(MODULENAME, "maxHeroPoints"));
 
     const { value, max }: { value: number; max: number } = renderData.data.resources.heroPoints;
 

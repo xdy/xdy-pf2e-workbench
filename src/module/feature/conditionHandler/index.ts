@@ -1,9 +1,9 @@
-import { CombatantPF2e } from "@module/encounter";
-import { isFirstGM } from "../../utils";
-import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
-import { ActorSystemData } from "@actor/data/base";
+import { isFirstGM } from "../../utils.js";
+import { CombatantPF2e } from "@module/encounter/index.js";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { ItemPF2e } from "@item/base.js";
+import { ActorSystemData } from "@actor/data/base.js";
 import BaseUser = foundry.documents.BaseUser;
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
@@ -239,7 +239,7 @@ export async function autoRemoveDyingAtGreaterThanZeroHp(actor: ActorPF2e, hpAbo
     if (game.user === actor?.primaryUpdater && dying && !dying.isLocked && hpAboveZero) {
         const value = dying?.value || 0;
         if (dying && value > 0 && !dying.isLocked) {
-            const option = <string>game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
+            const option = String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP"));
             if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
                 for (let i = 0; i < Math.max(1, value); i++) {
                     dying = actor.getCondition("dying");

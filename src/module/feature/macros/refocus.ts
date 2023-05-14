@@ -1,4 +1,4 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
 async function increaseFocusPoints(actor, value) {
     const focus = actor.system.resources.focus;

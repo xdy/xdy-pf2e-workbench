@@ -2,32 +2,27 @@
 
 import fs from "fs-extra";
 import path from "path";
+import * as os from "os";
 
-function randomID() {
+function myRandomId() {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     return Array.from(Array(16).keys())
         .map(() => letters[Math.floor(Math.random() * letters.length)])
         .join("");
 }
 
-const packsSource = "packs";
+// const packsSource = "packs";
 
-const pf2eSystemPath = (() => {
-    const configPath = path.resolve(process.cwd(), "foundryconfig.json");
-    const configData = fs.existsSync(configPath) ? fs.readJSONSync(configPath) : undefined;
-    return configData !== undefined ? path.join(configData.dataPath, "Data", "modules", configData.moduleName) : null;
-})();
-const outDir = pf2eSystemPath ?? path.join(".");
+const outDir = fs.mkdtempSync(path.join(os.tmpdir(), "myapp-"));
 
-fs.mkdirsSync(path.resolve(outDir, "packs"));
+fs.mkdirsSync(path.resolve(outDir, "packs/data"));
 
 function copyFolder(source: string, target: string) {
     for (const file of fs.readdirSync(source).filter((file) => file.endsWith(".js"))) {
         const sourcePath = decodeURIComponent(path.join(source, file));
         const targetPath = decodeURIComponent(path.join(target, file));
         fs.copyFileSync(sourcePath, targetPath);
-        // Log last part of path
-        console.log(`Copied ${path.basename(targetPath)}`);
+        console.debug(`Copied ${path.basename(sourcePath)}`);
         // eslint-disable-next-line
         fs.appendFileSync(
             targetPath,
@@ -39,40 +34,42 @@ function copyFolder(source: string, target: string) {
     }
 }
 
-function getFolders(dir: string, source: any = packsSource) {
-    const results: string[] = [];
-    const folders = fs.readdirSync(source);
-    for (const folder of folders) {
-        if (fs.statSync(path.join(dir, folder)).isDirectory()) {
-            results.push(folder);
-        }
-    }
-
-    return results;
+function getFolders(path) {
+    return fs.readdirSync(path).filter(function (file) {
+        return fs.statSync(path + "/" + file).isDirectory();
+    });
 }
 
 function buildAsymonousPack() {
     const asymonousSource = [
-        "./submodules/my-foundryvtt-macros/PF2e",
-        "./submodules/my-foundryvtt-macros/PF2e/Contributions by others",
+        "submodules/my-foundryvtt-macros/PF2e",
+        "submodules/my-foundryvtt-macros/PF2e/Contributions by others",
     ];
 
-    fs.mkdirsSync(outDir + "/" + packsSource + "/" + "asymonous-benefactor-macros");
+    fs.mkdirsSync("../generated/asymonous-benefactor-macros");
+    fs.mkdirsSync(path.resolve(outDir, "packs/generated/asymonous-benefactor-macros"));
 
     copyFolder(
         path.resolve(".", asymonousSource[0]),
-        path.resolve(outDir, packsSource + "/asymonous-benefactor-macros")
+        path.resolve(path.resolve(outDir, "packs/generated/asymonous-benefactor-macros"))
     );
     copyFolder(
         path.resolve(".", asymonousSource[1]),
-        path.resolve(outDir, packsSource + "/asymonous-benefactor-macros")
+        path.resolve(path.resolve(outDir, "packs/generated/asymonous-benefactor-macros"))
     );
 
-    const folders = getFolders(packsSource).filter((folder) => folder.startsWith("asymonous-"));
+    // TODO Make a Function that fetch all folder names under "data" and then loop through them
+
+    const folders = getFolders(path.resolve(outDir, "packs/generated"))
+        .filter((folder) => folder.startsWith("asymonous-"))
+        .map((folder) => {
+            return path.resolve(outDir, "packs/generated", folder);
+        });
     for (const folder of folders) {
         const lines: string[] = [];
         const linesInternal: string[] = [];
-        const folderPath = path.join(packsSource, folder);
+
+        const folderPath = path.join("./", folder);
         const files = fs.readdirSync(folderPath);
         for (const file of files) {
             const filePath = path.join(folderPath, file);
@@ -83,28 +80,28 @@ function buildAsymonousPack() {
             try {
                 const macroName = path.parse(file).name;
                 const importMacro = `/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
-async function _executeMacroByName(
-    macroName,
-    compendiumName = "xdy-pf2e-workbench.asymonous-benefactor-macros-internal"
-) {
-    const pack = game.packs.get(compendiumName);
-    if (pack) {
-        const macro_data = (await pack.getDocuments()).find((i) => i.name === macroName)?.toObject();
-        if (macro_data) {
-            const temp_macro = new Macro(macro_data);
-            temp_macro.permission.default = CONST.DOCUMENT_PERMISSION_LEVELS.OWNER;
-            temp_macro.execute();
+    async function _executeMacroByName(
+        macroName,
+        compendiumName = "xdy-pf2e-workbench.asymonous-benefactor-macros-internal"
+    ) {
+        const pack = game.packs.get(compendiumName);
+        if (pack) {
+            const macro_data = (await pack.getDocuments()).find((i) => i.name === macroName)?.toObject();
+            if (macro_data) {
+                const temp_macro = new Macro(macro_data);
+                temp_macro.permission.default = CONST.DOCUMENT_PERMISSION_LEVELS.OWNER;
+                temp_macro.execute();
+            } else {
+                ui.notifications.error("Macro " + macroName + " not found");
+            }
         } else {
-            ui.notifications.error("Macro " + macroName + " not found");
+            ui.notifications.error("Compendium " + compendiumName + " not found");
         }
-    } else {
-        ui.notifications.error("Compendium " + compendiumName + " not found");
     }
-}
-_executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
+    _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
 
-/* This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274; and modified by Mark Pearce https://discord.com/channels/880968862240239708/880969174661353484/972962446098702376 */
-`;
+    /* This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274; and modified by Mark Pearce https://discord.com/channels/880968862240239708/880969174661353484/972962446098702376 */
+    `;
                 const contents = fs.readFileSync(filePath, { encoding: "utf8" });
                 const map = new Map<string, string>();
                 map.set("2-Action Harm", "systems/pf2e/icons/spells/harm.webp");
@@ -160,12 +157,12 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
                 const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
                 // eslint-disable-next-line
-                let jsonInternal = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(
+                let jsonInternal = `{"_id": "${myRandomId()}", "actorIds": [], "author": "${myRandomId()}", "command": ${JSON.stringify(
                     contents
                 )},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
                 linesInternal.push(jsonInternal);
                 // eslint-disable-next-line
-                let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(
+                let json = `{"_id": "${myRandomId()}", "actorIds": [], "author": "${myRandomId()}", "command": ${JSON.stringify(
                     importMacro
                 )},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
                 lines.push(json);
@@ -173,14 +170,16 @@ _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
                 console.error(`Failed to read JSON file ${filePath}`, err);
             }
         }
-        fs.writeFileSync(path.resolve(outDir, "packs", folder + ".db"), lines.join("\n"), "utf8");
-        fs.writeFileSync(path.resolve(outDir, "packs", folder + "-internal.db"), linesInternal.join("\n"), "utf8");
+        const dir = path.resolve(outDir, "static", "packs", folder + ".db");
+        fs.writeFileSync(dir, lines.join("\n"), "utf8");
+        const dir2 = path.resolve(outDir, "static", "packs", folder + "-internal.db");
+        fs.writeFileSync(dir2, linesInternal.join("\n"), "utf8");
     }
-    fs.rmSync(path.resolve(outDir, packsSource + "/asymonous-benefactor-macros"), { recursive: true });
+    fs.rmSync(path.resolve(outDir, "./packs/generated/asymonous-benefactor-macros"), { recursive: true });
 }
 
 function buildCustomizableMacrosPack() {
-    const folderPath = "./packs/xdy-customizable-macros";
+    const folderPath = "./packs/data/xdy-customizable-macros";
     const lines: string[] = [];
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
@@ -197,7 +196,7 @@ function buildCustomizableMacrosPack() {
             const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
             // eslint-disable-next-line
-            let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(
+            let json = `{"_id": "${myRandomId()}", "actorIds": [], "author": "${myRandomId()}", "command": ${JSON.stringify(
                 contents
             )},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
             lines.push(json);
@@ -206,11 +205,12 @@ function buildCustomizableMacrosPack() {
         }
     }
     const file1 = path.resolve(outDir, folderPath + ".db");
+    console.log(file1);
     fs.writeFileSync(file1, lines.join("\n"), "utf8");
 }
 
 function buildInternalUtilityMacrosPack() {
-    const folderPath = "./packs/xdy-internal-utility-macros";
+    const folderPath = "./packs/data/xdy-internal-utility-macros";
     const lines: string[] = [];
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
@@ -229,7 +229,7 @@ function buildInternalUtilityMacrosPack() {
             const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
             // eslint-disable-next-line
-            let json = `{"_id": "${randomID()}", "actorIds": [], "author": "${randomID()}", "command": ${JSON.stringify(
+            let json = `{"_id": "${myRandomId()}", "actorIds": [], "author": "${myRandomId()}", "command": ${JSON.stringify(
                 contents
             )},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
             lines.push(json);
@@ -241,6 +241,10 @@ function buildInternalUtilityMacrosPack() {
     fs.writeFileSync(file1, lines.join("\n"), "utf8");
 }
 
-buildAsymonousPack();
 buildCustomizableMacrosPack();
 buildInternalUtilityMacrosPack();
+buildAsymonousPack();
+fs.rmSync("./dist", { recursive: true, force: true });
+fs.mkdirSync(path.resolve("dist/packs/db"), { recursive: true });
+fs.copySync(outDir, "./dist");
+fs.copySync("./packs/db", "./dist/packs/db");

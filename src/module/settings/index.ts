@@ -1,13 +1,13 @@
-import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench";
-import { WorkbenchMystificationSettings } from "./mystification";
-import { WorkbenchRemindersSettings } from "./reminders";
-import { WorkbenchWorldAutomationSettings } from "./automation-world";
-import { WorkbenchClientAutomationSettings } from "./automation-client";
-import { WorkbenchQolWorldSettings } from "./qol-world";
-import { WorkbenchVariantRulesSettings } from "./variantRules";
-import { logInfo } from "../utils";
+import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
+import { WorkbenchMystificationSettings } from "./mystification.js";
+import { WorkbenchRemindersSettings } from "./reminders.js";
+import { WorkbenchWorldAutomationSettings } from "./automation-world.js";
+import { WorkbenchClientAutomationSettings } from "./automation-client.js";
+import { WorkbenchQolWorldSettings } from "./qol-world.js";
+import { WorkbenchVariantRulesSettings } from "./variantRules.js";
+import { logInfo } from "../utils.js";
 
-export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification";
+export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification.js";
 
 export function registerWorkbenchSettings() {
     logInfo(`${MODULENAME} | registerSettings`);

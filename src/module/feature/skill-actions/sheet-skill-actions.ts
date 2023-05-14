@@ -1,9 +1,8 @@
-import { ActionsIndex } from "./actions-index";
-import { SkillActionCollection } from "./skill-actions";
-import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { Flag } from "./utils";
-import { ActorPF2e } from "@actor";
-import { ActorSheetPF2e } from "@actor/sheet/base";
+import { ActionsIndex } from "./actions-index.js";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { SkillActionCollection } from "./skill-actions.js";
+import { ActorPF2e } from "@actor/base.js";
+import { ActorSheetPF2e } from "@actor/sheet/base.js";
 
 let templates: Handlebars.TemplateDelegate[];
 
@@ -24,19 +23,21 @@ export async function loadSkillActionsBabele() {
 
 function renderActionsList(skillActions: SkillActionCollection, actor: ActorPF2e) {
     const skillData = skillActions
-        .map((action) => action.getData({ allVisible: <boolean>Flag.get(actor, "allVisible") }))
+        .map((action) => action.getData({ allVisible: Boolean(actor.getFlag(MODULENAME, "allVisible") ?? "true") }))
         .sort((a, b) => {
             return a.label > b.label ? 1 : -1;
         });
 
-    const $skillActions = $(templates[0]({ skills: skillData, allVisible: <boolean>Flag.get(actor, "allVisible") }));
+    const $skillActions = $(
+        templates[0]({ skills: skillData, allVisible: Boolean(actor.getFlag(MODULENAME, "allVisible") ?? "true") })
+    );
     const $items = $skillActions.find("li.item");
 
     $skillActions.on("click", ".toggle-hidden-actions", function (e) {
         if (e.altKey) {
             skillActions.toggleVisibility();
         } else {
-            Flag.set(actor, "allVisible", !Flag.get(actor, "allVisible")).then();
+            actor.setFlag(MODULENAME, "allVisible", !(actor.getFlag(MODULENAME, "allVisible") ?? "true")).then();
         }
     });
 
@@ -44,7 +45,7 @@ function renderActionsList(skillActions: SkillActionCollection, actor: ActorPF2e
         const filter = e.currentTarget.value.toLowerCase();
         $items.each(function () {
             const action = skillActions.fromElement(this);
-            $(this).toggle(action.isDisplayed(filter, <boolean>Flag.get(actor, "allVisible")));
+            $(this).toggle(action.isDisplayed(filter, Boolean(actor.getFlag(MODULENAME, "allVisible") ?? "true")));
         });
     });
 
@@ -93,7 +94,7 @@ export function renderSheetSkillActions(app: ActorSheetPF2e<ActorPF2e>, html: JQ
     const $exploration = renderActionsList(explorationActions, app.actor);
     const $downtime = renderActionsList(downtimeActions, app.actor);
 
-    const skillActions = game.settings.get(MODULENAME, "skillActions");
+    const skillActions = String(game.settings.get(MODULENAME, "skillActions"));
     if (skillActions !== "disabled") {
         switch (skillActions) {
             case "top": {

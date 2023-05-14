@@ -1,12 +1,12 @@
-import { camelize, Flag } from "./utils";
-import { ActionType, SKILL_ACTIONS_DATA, SkillActionData, SkillActionDataParameters } from "./skill-actions-data";
-import { VariantsCollection } from "./variants";
-import { MODULENAME } from "../../xdy-pf2e-workbench";
-import { ItemPF2e } from "@item";
-import { ActionsIndex } from "./actions-index";
-import { ItemSummaryData } from "@item/data";
-import { CharacterSkill } from "@actor/character/types";
-import { logWarn } from "../../utils";
+import { ActionType, SKILL_ACTIONS_DATA, SkillActionData, SkillActionDataParameters } from "./skill-actions-data.js";
+import { VariantsCollection } from "./variants.js";
+import { camelize } from "./utils.js";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { ActionsIndex } from "./actions-index.js";
+import { ItemPF2e } from "@item/base.js";
+import { ItemSummaryData } from "@item/data/index.js";
+import { CharacterSkill } from "@actor/character/types.js";
+import { logWarn } from "../../utils.js";
 
 const ACTION_ICONS: Record<ActionType, string> = {
     A: "OneAction",
@@ -29,7 +29,7 @@ export class SkillAction {
         data.actionKey ??= camelize(data.actionSlug);
         data.actionType ??= "A";
 
-        switch (game.settings.get(MODULENAME, "skillActionsIconStyle")) {
+        switch (String(game.settings.get(MODULENAME, "skillActionsIconStyle"))) {
             case "actionCostIcon": {
                 data.icon = `systems/pf2e/icons/actions/${ACTION_ICONS[data.actionType]}.webp`;
                 data.actionType = "";
@@ -98,13 +98,11 @@ export class SkillAction {
     }
 
     private get actorData(): ActorSkillAction | undefined {
-        // @ts-ignore
-        return <ActorSkillAction>Flag.get(this.actor, `actions.${this.key}`);
+        return this.actor.getFlag(MODULENAME, `actions.${this.key}`);
     }
 
     async update(data: ActorSkillAction) {
-        // @ts-ignore
-        await Flag.set(this.actor, `actions.${this.key}`, data);
+        await this.actor.setFlag(MODULENAME, `actions.${this.key}`, data);
     }
 
     async toggleVisibility(visible = !this.visible) {

@@ -19,5 +19,13 @@ foundry.js
 #Pathfinder bundle
 main.bundle.js
 
+# Dummy files for vite dev server
+/index.html
+/pf2e.css
+/pf2e.mjs
+/vendor.mjs
+
 #This project
+static/packs/
 foundryconfig.json
+

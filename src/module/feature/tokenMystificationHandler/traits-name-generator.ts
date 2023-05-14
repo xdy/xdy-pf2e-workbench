@@ -1,8 +1,7 @@
-import { MODULENAME } from "../../xdy-pf2e-workbench";
 import { TokenDocumentPF2e } from "@scene";
-import { AON_CREATURE_TYPES, ELITE_WEAK } from "../../xdy-pf2e-constants";
-import { TokenPF2e } from "@module/canvas";
-import { ActorSystemData } from "@actor/data/base";
+import { AON_CREATURE_TYPES, ELITE_WEAK } from "../../xdy-pf2e-constants.js";
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { TokenPF2e } from "@module/canvas/index.js";
 
 let TRAITS: {
     SIZES: string[];
@@ -14,7 +13,7 @@ let TRAITS: {
 };
 
 async function fixesPreAndPost(settingkey: string): Promise<string> {
-    const fixSetting = game.settings.get(MODULENAME, settingkey);
+    const fixSetting = String(game.settings.get(MODULENAME, settingkey));
 
     // "null" check is due to a previous bug that may have left invalid data in text fields
     if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
@@ -38,7 +37,7 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
                 return draw?.results[0].getChatText();
             }
         }
-	return <string>fixSetting;
+        return <string>fixSetting;
     }
     return "";
 }
@@ -57,7 +56,7 @@ function fillTraits() {
 function filterTraitList(traitsList: string[], prefix: string, postfix: string): string[] {
     if (game.settings.get(MODULENAME, "npcMystifierBlacklist")) {
         const blocklist =
-            (<string>game.settings.get(MODULENAME, "npcMystifierBlacklist")).toLocaleLowerCase().split(",") || null;
+            String(game.settings.get(MODULENAME, "npcMystifierBlacklist")).toLocaleLowerCase().split(",") || null;
         if (blocklist) {
             traitsList = traitsList.filter((trait: string) => {
                 return !blocklist.map((trait: string) => trait.trim()).includes(trait);
@@ -78,9 +77,9 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     let rarities: string[] = [];
     if (game.settings.get(MODULENAME, "npcMystifierUseRarities")) {
         rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
-        const replacement: string = (<string>(
+        const replacement: string = String(
             game.settings.get(MODULENAME, "npcMystifierUseRaritiesReplacement")
-        )).toLocaleLowerCase();
+        ).toLocaleLowerCase();
         if (replacement !== "") {
             rarities = rarities.map((trait: string) => (trait !== "common" ? replacement : trait));
         }
@@ -138,7 +137,7 @@ export async function generateNameFromTraitsForToken(tokenId: string) {
 
 export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2e) {
     let result: any;
-    const traits: any = (<ActorSystemData>token?.actor?.system)?.traits;
+    const traits = token?.actor?.system?.traits;
     const customTraits: any = traits?.traits?.custom;
     if (!TRAITS) {
         fillTraits();

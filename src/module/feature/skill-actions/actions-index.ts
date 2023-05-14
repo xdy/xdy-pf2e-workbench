@@ -1,5 +1,6 @@
-import { SKILL_ACTIONS_DATA } from "./skill-actions-data";
-import { ActionItemPF2e, ItemPF2e } from "@item";
+import { ItemPF2e } from "@item/base.js";
+import { SKILL_ACTIONS_DATA } from "./skill-actions-data.js";
+import { ActionItemPF2e } from "@item/action/index.js";
 
 const ACTION_IDS = SKILL_ACTIONS_DATA.map((row) => row.compendiumId);
 
