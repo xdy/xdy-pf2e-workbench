@@ -50,7 +50,7 @@
     "esno": "^0.16.3",
     "foundry-types": "file:types/types/foundry",
     "fs-extra": "^11.1.1",
-    "glob": "^9.3.5",
+    "glob": "^10.2.4",
     "gsap": "^3.11.5",
     "handlebars": "4.7.7",
     "jquery": "^3.7.0",
