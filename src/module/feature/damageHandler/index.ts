@@ -2,6 +2,9 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorFlagsPF2e } from "@actor/data/base.js";
 import { degreeOfSuccessWithRerollHandling, isActuallyDamageRoll, shouldIHandleThisMessage } from "../../utils.ts";
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
+import { TokenDocumentPF2e } from "@module/scene/index.js";
+import { ScenePF2e } from "@scene/document.js";
+import { handleDying } from "../../hooks.js";
 
 export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
@@ -160,6 +163,72 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+export function handleRecoveryRoll(message: ChatMessagePF2e) {
+    if (
+        shouldIHandleThisMessage(
+            message,
+            ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow")))
+        ) &&
+        (message.flavor.includes(game.i18n.localize("PF2E.Recovery.critFailure")) ||
+            message.flavor.includes(game.i18n.localize("PF2E.Recovery.critSuccess")) ||
+            message.flavor.includes(game.i18n.localize("PF2E.Recovery.failure")) ||
+            message.flavor.includes(game.i18n.localize("PF2E.Recovery.success"))) &&
+        message.id === game.messages.contents.pop()?.id &&
+        message.token &&
+        message.token.actor &&
+        message.token.isOwner
+    ) {
+        const outcome = message.flags.pf2e.context.outcome ?? "";
+
+        const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
+        const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
+
+        const token: TokenDocumentPF2e<ScenePF2e> = message.token;
+        if (token && token.isOwner) {
+            const originalDyingCounter = token.actor.getCondition("dying")?.value ?? 0;
+            let dyingCounter = 0;
+            let outcomeString = "";
+            switch (outcome) {
+                case "criticalFailure":
+                    dyingCounter = dyingCounter + 2;
+                    outcomeString = game.i18n.localize("PF2E.CritFailure");
+                    break;
+                case "criticalSuccess":
+                    dyingCounter = dyingCounter - 2;
+                    outcomeString = game.i18n.localize("PF2E.CritSuccess");
+                    break;
+                case "failure":
+                    dyingCounter = dyingCounter + 1;
+                    outcomeString = game.i18n.localize("PF2E.Failure");
+                    break;
+                case "success":
+                    outcomeString = game.i18n.localize("PF2E.Success");
+                    dyingCounter = dyingCounter - 1;
+                    break;
+            }
+            if (originalDyingCounter > 0 || dyingCounter !== 0) {
+                handleDying(dyingCounter, originalDyingCounter, actor);
+
+                const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
+                ChatMessage.create({
+                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleRecoveryRoll.handled`, {
+                        outcome: outcomeString,
+                        defeated: token.combatant?.defeated
+                            ? game.i18n.format(`${MODULENAME}.SETTINGS.handleRecoveryRoll.defeated`, {
+                                  name: token.actor.name,
+                              })
+                            : "",
+                        roll: total,
+                    }),
+                    speaker: message.speaker,
+                }).then();
+                message.delete({ render: false }).then();
             }
         }
     }

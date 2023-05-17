@@ -218,8 +218,7 @@
       },
       "applyPersistentDamage": {
         "hint": "Client setting to automatically apply persistent damage.",
-        "name": "Automatically apply persistent damage.",
-        "wasDamaged": "{damage} damage was automatically applied"
+        "name": "Automatically apply persistent damage."
       },
       "applyPersistentHealing": {
         "FastHealingLabel": "Received fast healing",
@@ -347,6 +346,20 @@
       "callHotbarMacro": {
         "hint": "Call hotbar macro on page {page} position {column}",
         "name": "Call hotbar macro on page {page} position {column}"
+      },
+      "handleRecoveryRollAllow": {
+        "all": "All",
+        "gm": "GM",
+        "hint": "Select who is allowed to set the option to automatically handle recovery roll results. Save settings to show/hide additional options on the client automation setting menu.",
+        "name": "Who is allowed to set the option to automatically automatically handle recovery roll results.",
+        "none": "None",
+        "players": "Players"
+      },
+      "handleRecoveryRoll": {
+        "hint": "Client setting to automatically handle recovery roll results.",
+        "name": "Automatically handle recovery roll results.",
+        "handled": "Recovery roll {roll} {outcome} handled automatically. {defeated}.",
+        "defeated": "{name} was defeated"
       },
       "playerFeatsPrerequisiteHint": {
         "hint": "Client setting to add an asterisk to the name for feats with a prerequisite set.",

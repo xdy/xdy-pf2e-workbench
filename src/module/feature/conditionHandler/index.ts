@@ -4,6 +4,7 @@ import { CombatantPF2e } from "@module/encounter/index.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ItemPF2e } from "@item/base.js";
 import { ActorSystemData } from "@actor/data/base.js";
+import { handleDying } from "../../hooks.js";
 import BaseUser = foundry.documents.BaseUser;
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
@@ -92,91 +93,47 @@ function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string)
     return isNonlethal;
 }
 
-export async function increaseDyingOnZeroHP(
+export function handleOrcFerocity(
     actor: ActorPF2e,
     update: Record<string, string>,
-    hp: number,
-    updateHp: number
-): Promise<boolean> {
-    if (game.user === actor?.primaryUpdater && hp > 0 && updateHp <= 0) {
-        const orcFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "orc-ferocity");
-        const orcFerocityUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "orc-ferocity-used");
-        const incredibleFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "incredible-ferocity");
-        const undyingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "undying-ferocity");
-        const rampagingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "rampaging-ferocity");
-        const deliberateDeath = actor.itemTypes.feat.find((feat) => feat.slug === "deliberate-death");
-        const deliberateDeathUsed: any = actor.itemTypes.effect.find(
-            (effect) => effect.slug === "deliberate-death-used"
-        );
-        const name = `${actor.token?.name ?? actor.name}`;
-        let shouldIncreaseWounded = false;
-        let dyingCounter = 0;
-        let hpNowAboveZero = false;
-        const effectsToCreate: any[] = [];
-        const option = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));
-        if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
-            setProperty(update, "system.attributes.hp.value", 1);
-            if (undyingFerocity) {
-                setProperty(update, "system.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
-            }
-
-            shouldIncreaseWounded = true;
-
-            const effect: any = {
-                type: "effect",
-                name: game.i18n.localize(`${MODULENAME}.effects.orcFerocityUsed`),
-                img: "systems/pf2e/icons/default-icons/alternatives/ancestries/orc.svg",
-                system: {
-                    slug: "orc-ferocity-used",
-                    tokenIcon: {
-                        show: false,
-                    },
-                    duration: {
-                        value: incredibleFerocity ? 1 : 24,
-                        unit: "hours",
-                        sustained: false,
-                        expiry: "turn-start",
-                    },
-                },
-            };
-            effectsToCreate.push(effect);
-
-            if (rampagingFerocity) {
-                ChatMessage.create({
-                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
-                        name: name,
-                    }),
-                    speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
-                    whisper:
-                        game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
-                            ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                            : [],
-                }).then();
-            }
-
-            hpNowAboveZero = true;
+    effectsToCreate: any[],
+    name: string,
+    shouldIncreaseWounded = true,
+    hpNowAboveZero = false
+) {
+    const orcFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "orc-ferocity");
+    const orcFerocityUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "orc-ferocity-used");
+    const incredibleFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "incredible-ferocity");
+    const undyingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "undying-ferocity");
+    const rampagingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "rampaging-ferocity");
+    if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
+        setProperty(update, "system.attributes.hp.value", 1);
+        if (undyingFerocity) {
+            setProperty(update, "system.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
         }
 
-        if (deliberateDeath && (!deliberateDeathUsed || deliberateDeathUsed.isExpired)) {
-            const effect: any = {
-                type: "effect",
-                name: game.i18n.localize(`${MODULENAME}.effects.deliberateDeathUsed`),
-                img: "icons/skills/melee/strike-dagger-skull-white.webp",
-                system: {
-                    slug: "deliberate-death-used",
-                    tokenIcon: {
-                        show: false,
-                    },
-                    duration: {
-                        value: 24,
-                        unit: "hours",
-                        sustained: false,
-                        expiry: "turn-start",
-                    },
-                },
-            };
-            effectsToCreate.push(effect);
+        shouldIncreaseWounded = true;
 
+        const effect: any = {
+            type: "effect",
+            name: game.i18n.localize(`${MODULENAME}.effects.orcFerocityUsed`),
+            img: "systems/pf2e/icons/default-icons/alternatives/ancestries/orc.svg",
+            system: {
+                slug: "orc-ferocity-used",
+                tokenIcon: {
+                    show: false,
+                },
+                duration: {
+                    value: incredibleFerocity ? 1 : 24,
+                    unit: "hours",
+                    sustained: false,
+                    expiry: "turn-start",
+                },
+            },
+        };
+        effectsToCreate.push(effect);
+
+        if (rampagingFerocity) {
             ChatMessage.create({
                 flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
                     name: name,
@@ -188,6 +145,66 @@ export async function increaseDyingOnZeroHP(
                         : [],
             }).then();
         }
+
+        hpNowAboveZero = true;
+    }
+    return { shouldIncreaseWounded, hpNowAboveZero };
+}
+
+export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], name: string) {
+    const deliberateDeath = actor.itemTypes.feat.find((feat) => feat.slug === "deliberate-death");
+    const deliberateDeathUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "deliberate-death-used");
+    if (deliberateDeath && (!deliberateDeathUsed || deliberateDeathUsed.isExpired)) {
+        const effect: any = {
+            type: "effect",
+            name: game.i18n.localize(`${MODULENAME}.effects.deliberateDeathUsed`),
+            img: "icons/skills/melee/strike-dagger-skull-white.webp",
+            system: {
+                slug: "deliberate-death-used",
+                tokenIcon: {
+                    show: false,
+                },
+                duration: {
+                    value: 24,
+                    unit: "hours",
+                    sustained: false,
+                    expiry: "turn-start",
+                },
+            },
+        };
+        effectsToCreate.push(effect);
+
+        ChatMessage.create({
+            flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.deliberateDeathMessage`, {
+                name: name,
+            }),
+            speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
+            whisper:
+                game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
+                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                    : [],
+        }).then();
+    }
+}
+
+export async function increaseDyingOnZeroHP(
+    actor: ActorPF2e,
+    update: Record<string, string>,
+    hp: number,
+    updateHp: number
+): Promise<boolean> {
+    if (game.user === actor?.primaryUpdater && hp > 0 && updateHp <= 0) {
+        const name = `${actor.token?.name ?? actor.name}`;
+        let shouldIncreaseWounded = false;
+        let dyingCounter = 0;
+        let hpNowAboveZero = false;
+        const effectsToCreate: any[] = [];
+        const option = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));
+
+        const __ret = handleOrcFerocity(actor, update, effectsToCreate, name, shouldIncreaseWounded, hpNowAboveZero);
+        shouldIncreaseWounded = __ret.shouldIncreaseWounded;
+        hpNowAboveZero = __ret.hpNowAboveZero;
+        handleDeliberateDeath(actor, effectsToCreate, name);
 
         if (
             !hpNowAboveZero &&
@@ -225,10 +242,7 @@ export async function increaseDyingOnZeroHP(
             }
         }
 
-        if (dyingCounter > 0) {
-            actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
-            actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
-        }
+        handleDying(dyingCounter, 0, actor);
         return hpNowAboveZero;
     }
     return updateHp > 0;

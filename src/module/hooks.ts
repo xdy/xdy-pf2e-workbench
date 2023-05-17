@@ -24,7 +24,12 @@ import {
     hideNameOfPrivateSpell,
     mystifyNpcItems,
 } from "./feature/qolHandler/index.js";
-import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler/index.js";
+import {
+    autoRollDamage,
+    handleRecoveryRoll,
+    persistentDamage,
+    persistentHealing,
+} from "./feature/damageHandler/index.js";
 import {
     applyEncumbranceBasedOnBulk,
     autoRemoveDyingAtGreaterThanZeroHp,
@@ -79,6 +84,25 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     return result;
 };
 
+export function handleDying(dyingCounter: number, originalDyingCounter: number, actor) {
+    // Can't await, so do the math.
+    if (originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !actor.combatant?.defeated) {
+        actor.combatant?.toggleDefeated().then();
+    }
+    if (originalDyingCounter + dyingCounter > 0) {
+        actor
+            .increaseCondition("dying", {
+                min: originalDyingCounter + dyingCounter,
+                max: originalDyingCounter + dyingCounter,
+            })
+            .then();
+        actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
+    } else {
+        actor.decreaseCondition("dying", { forceRemove: true }).then();
+        actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
+    }
+}
+
 export function createChatMessageHook(message: ChatMessagePF2e) {
     if (game.settings.get(MODULENAME, "reminderCannotAttack")) {
         reminderCannotAttack(message);
@@ -107,26 +131,25 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
         if (actor && game.user === actor?.primaryUpdater) {
             const now = Date.now();
             const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
-            // Ignore this if it occurs within last few seconds of the last time we applied dying
-            // @ts-ignore
-            if (!flag?.between(now - 4000, now)) {
-                const option = String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"));
-                const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
-                let dyingCounter = originalDyingCounter;
-                if (!option.startsWith("no") && dyingCounter > 0) {
-                    const wasCritical = checkIfLatestDamageMessageIsCriticalSuccess(actor, option);
 
-                    if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
-                        dyingCounter = dyingCounter + 1;
+            if (message.content?.includes("damage-taken")) {
+                // Ignore this if it occurs within last few seconds of the last time we applied dying
+                // @ts-ignore
+                if (!flag?.between(now - 4000, now)) {
+                    const option = String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"));
+                    const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
+                    let dyingCounter = 0;
+                    if (!option.startsWith("no") && originalDyingCounter > 0) {
+                        const wasCritical = checkIfLatestDamageMessageIsCriticalSuccess(actor, option);
 
-                        if (wasCritical) {
+                        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
                             dyingCounter = dyingCounter + 1;
-                        }
-                    }
 
-                    if (dyingCounter > originalDyingCounter) {
-                        actor.increaseCondition("dying", { min: dyingCounter, max: dyingCounter }).then();
-                        actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
+                            if (wasCritical) {
+                                dyingCounter = dyingCounter + 1;
+                            }
+                        }
+                        handleDying(dyingCounter, originalDyingCounter, actor);
                     }
                 }
             }
@@ -150,6 +173,10 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
 
     if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
         persistentDamage(message).then();
+    }
+
+    if (game.settings.get(MODULENAME, "handleRecoveryRoll")) {
+        handleRecoveryRoll(message);
     }
 
     if (isActuallyDamageRoll(message)) {

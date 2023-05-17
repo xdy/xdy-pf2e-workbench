@@ -55,6 +55,22 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            handleRecoveryRollAllow: {
+                name: `${MODULENAME}.SETTINGS.handleRecoveryRollAllow.name`,
+                hint: `${MODULENAME}.SETTINGS.handleRecoveryRollAllow.hint`,
+                scope: "world",
+                config: true,
+                default: "none",
+                type: String,
+                choices: {
+                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.handleRecoveryRollAllow.none`),
+                    all: game.i18n.localize(`${MODULENAME}.SETTINGS.handleRecoveryRollAllow.all`),
+                    gm: game.i18n.localize(`${MODULENAME}.SETTINGS.handleRecoveryRollAllow.gm`),
+                    players: game.i18n.localize(`${MODULENAME}.SETTINGS.handleRecoveryRollAllow.players`),
+                },
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             applyEncumbranceBasedOnBulk: {
                 name: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.name`,
                 hint: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.hint`,
