@@ -29,12 +29,15 @@ export async function refocus() {
                 feats?.find((i) => {
                     return [
                         "bloodline-focus",
+                        "bonded-focus",
                         "conflux-focus",
+                        "crimson-oath-devotion",
                         "devoted-focus",
                         "domain-focus",
                         "hex-focus",
                         "inspirational-focus",
                         "link-focus",
+                        "major-curse",
                         "meditative-focus",
                         "primal-focus",
                         "wardens-focus",
@@ -49,6 +52,7 @@ export async function refocus() {
                         "bloodline-wellspring",
                         "conflux-wellspring",
                         "domain-wellspring",
+                        "extreme-curse",
                         "hex-wellspring",
                         "link-wellspring",
                         "meditative-wellspring",
