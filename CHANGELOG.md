@@ -1,3 +1,11 @@
+# [4.71.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.70.0...v4.71.0) (2023-05-17)
+
+
+### Features
+
+* Add option to automate handling of recovery roll from Dying. If that option and/or the option to increase dying on going 0 hp and/or the option to increase dying if taking damage when already dying is enabled, mark combatant as defeated on reaching max dying. ([38079ff](https://github.com/xdy/xdy-pf2e-workbench/commit/38079ffb2460e4dd9b085d0356927799024b5cb1))
+* Added support for Bonded Focus, Crimson Oath Devotion, Extreme Curse and Major Curse to the Refocus macro. ([51b4d39](https://github.com/xdy/xdy-pf2e-workbench/commit/51b4d39af5a1a6aeb05204493ce0e6089aea3f85)), closes [#806](https://github.com/xdy/xdy-pf2e-workbench/issues/806)
+
 # [4.70.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.69.2...v4.70.0) (2023-05-14)
 
 
