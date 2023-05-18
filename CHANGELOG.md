@@ -1,3 +1,10 @@
+## [4.71.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.0...v4.71.1) (2023-05-18)
+
+
+### Bug Fixes
+
+* Fix a couple of recovery roll bugs. ([82ccc37](https://github.com/xdy/xdy-pf2e-workbench/commit/82ccc374c9900121cc2811b670b761d724710a70))
+
 # [4.71.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.70.0...v4.71.0) (2023-05-17)
 
 
