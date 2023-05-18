@@ -54,7 +54,7 @@
     "gsap": "^3.11.5",
     "handlebars": "4.7.7",
     "jquery": "^3.7.0",
-    "jsdom": "^21.1.2",
+    "jsdom": "^22.0.0",
     "lint-staged": "^13.2.2",
     "nedb-promises": "^6.2.1",
     "peggy": "^3.0.2",
