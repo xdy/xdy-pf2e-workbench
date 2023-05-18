@@ -565,6 +565,20 @@
         "no": "Les dégâts non létaux sont juste des dégâts",
         "unconscious": "Les dégâts non létaux ne tuent pas",
         "hint": "Si les derniers dégâts que vous subissez sont non létaux, vous n'êtes pas Mourant. À la place vous êtes inconscient à 0 PV."
+      },
+      "handleRecoveryRollAllow": {
+        "all": "Tous",
+        "gm": "MJ",
+        "name": "Qui est autorisé à définir l'option permettant de traiter automatiquement les résultats des jets de récupération.",
+        "none": "Personne",
+        "players": "Joueurs",
+        "hint": "Choisissez les personnes autorisées à définir l'option de traitement automatique des résultats du jet de récupération. Enregistrer les paramètres pour afficher/masquer des options supplémentaires des réglages de l'automatisation dans le menu du client."
+      },
+      "handleRecoveryRoll": {
+        "hint": "Paramètre du client permettant de traiter automatiquement les résultats des tests de récupération.",
+        "handled": "Jet de récupération {roll} {outcome} géré automatiquement. {défeated}.",
+        "defeated": "{name} a été vaincu",
+        "name": "Automatiser le traitement des tests de récupération."
       }
     },
     "effects": {
