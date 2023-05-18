@@ -168,11 +168,11 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
     }
 
     if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
-        persistentHealing(message).then();
+        persistentHealing(message);
     }
 
     if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-        persistentDamage(message).then();
+        persistentDamage(message);
     }
 
     if (game.settings.get(MODULENAME, "handleRecoveryRoll")) {

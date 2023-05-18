@@ -75,6 +75,16 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            rollPersistentDamageRecovery: {
+                name: `${MODULENAME}.SETTINGS.rollPersistentDamageRecovery.name`,
+                hint: `${MODULENAME}.SETTINGS.rollPersistentDamageRecovery.hint`,
+                scope: "client",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             decreaseFrightenedConditionEachTurn: {
                 name: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.name`,
                 hint: `${MODULENAME}.SETTINGS.decreaseFrightenedConditionEachTurn.hint`,

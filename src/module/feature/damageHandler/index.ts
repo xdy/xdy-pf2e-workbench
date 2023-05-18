@@ -5,6 +5,7 @@ import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { TokenDocumentPF2e } from "@module/scene/index.js";
 import { ScenePF2e } from "@scene/document.js";
 import { handleDying } from "../../hooks.js";
+import { ConditionPF2e } from "@module/item/index.js";
 
 export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
@@ -234,7 +235,7 @@ export function handleRecoveryRoll(message: ChatMessagePF2e) {
     }
 }
 
-export async function persistentDamage(message) {
+export function persistentDamage(message) {
     if (
         shouldIHandleThisMessage(
             message,
@@ -251,14 +252,23 @@ export async function persistentDamage(message) {
         const token = canvas.tokens?.get(message.speaker.token);
         if (token && token.isOwner) {
             for (const r of message.rolls) {
-                // @ts-ignore
-                await token?.actor?.applyDamage({ damage: r, token: token.document });
+                token?.actor?.applyDamage({ damage: r, token: token.document }).then();
+            }
+        }
+        const actor = game.actors?.get(message.speaker.actor);
+        if (actor && game.settings.get(MODULENAME, "rollPersistentDamageRecovery")) {
+            const condition: ConditionPF2e = actor.conditions
+                .filter((condition) => condition.slug === "persistent-damage")
+                .find((condition) => message.flavor.includes(condition.name));
+            if (condition) {
+                // TODO Update the message to remove the recovery roll button, instead include the result in the message (and remove the message the following line creates.)
+                condition.rollRecovery().then();
             }
         }
     }
 }
 
-export async function persistentHealing(message) {
+export function persistentHealing(message) {
     if (
         shouldIHandleThisMessage(
             message,
@@ -283,7 +293,7 @@ export async function persistentHealing(message) {
                 ].some((text) => message.flavor?.includes(text))
             ) {
                 const healing = message.rolls.reduce((sum, current) => sum + (current.total || 1), 0) * -1;
-                await token.actor?.applyDamage({ damage: healing, token: token.actor?.getActiveTokens()[0].document });
+                token.actor?.applyDamage({ damage: healing, token: token.actor?.getActiveTokens()[0].document }).then();
             }
         }
     }

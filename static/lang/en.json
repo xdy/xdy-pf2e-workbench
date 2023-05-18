@@ -220,6 +220,10 @@
         "hint": "Client setting to automatically apply persistent damage.",
         "name": "Automatically apply persistent damage."
       },
+      "rollPersistentDamageRecovery": {
+        "hint": "... and automatically roll recovery after that.",
+        "name": "... and automatically roll recovery after that."
+      },
       "applyPersistentHealing": {
         "FastHealingLabel": "Received fast healing",
         "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
