@@ -588,7 +588,7 @@
         "hint": "Falls der letzte Schaden welchen du erhälst nichttödlich ist, erhälst du keinen Sterbend Zustand, sondern wirst bewusstlos mit 0 TP.",
         "name": "... abhängig davon ob der letzte Schaden nichttödlich war."
       },
-      "handleRecoveryRollAllow": {
+      "handleDyingRecoveryRollAllow": {
         "all": "Alle",
         "gm": "SL",
         "name": "Auswählen wer die Erlaubnis hat die Option zu setzen um Erholungswürfe automatisch zu würfeln.",
@@ -596,7 +596,7 @@
         "players": "Spieler",
         "hint": "Auswählen wer die Erlaubnis hat die Option zu setzen um Erholungswürfe automatisch zu würfeln. Speichere die Einstellung um weitere Einstellung der Client-Automatisierung anzuzeigen/auszublenden."
       },
-      "handleRecoveryRoll": {
+      "handleDyingRecoveryRoll": {
         "hint": "Client Einstellung zum automatischen Würfeln von Erholungswürfen.",
         "name": "Automatisches Würfeln von Erholungswürfen.",
         "defeated": "{name} wurde besiegt",

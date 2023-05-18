@@ -169,12 +169,13 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
     }
 }
 
-export function handleRecoveryRoll(message: ChatMessagePF2e) {
+export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
     if (
+        game.settings.get(MODULENAME, "handleDyingRecoveryRoll") &&
         shouldIHandleThisMessage(
             message,
-            ["all", "players"].includes(String(game.settings.get(MODULENAME, "handleRecoveryRollAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "handleRecoveryRollAllow")))
+            ["all", "players"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow")))
         ) &&
         (message.flavor.includes(game.i18n.localize("PF2E.Recovery.critFailure")) ||
             message.flavor.includes(game.i18n.localize("PF2E.Recovery.critSuccess")) ||
@@ -218,10 +219,10 @@ export function handleRecoveryRoll(message: ChatMessagePF2e) {
 
                 const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
                 ChatMessage.create({
-                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleRecoveryRoll.handled`, {
+                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.handled`, {
                         outcome: outcomeString,
                         defeated: token.combatant?.defeated
-                            ? game.i18n.format(`${MODULENAME}.SETTINGS.handleRecoveryRoll.defeated`, {
+                            ? game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.defeated`, {
                                   name: token.actor.name,
                               })
                             : "",
@@ -256,7 +257,7 @@ export function persistentDamage(message) {
             }
         }
         const actor = game.actors?.get(message.speaker.actor);
-        if (actor && game.settings.get(MODULENAME, "rollPersistentDamageRecovery")) {
+        if (actor && game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
             const condition: ConditionPF2e = actor.conditions
                 .filter((condition) => condition.slug === "persistent-damage")
                 .find((condition) => message.flavor.includes(condition.name));

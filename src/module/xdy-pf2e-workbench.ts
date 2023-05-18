@@ -50,6 +50,8 @@ import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js
 import { doMystificationFromToken } from "./feature/tokenMystificationHandler/index.js";
 import { noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.js";
 import { registerWorkbenchSettings } from "./settings/index.js";
+import { SettingsMenuPF2eWorkbench } from "./settings/menu.js";
+import { toggleMenuSettings } from "./feature/settingsHandler/index.js";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 export const NPC_TYPE = "npc";
@@ -96,7 +98,9 @@ export function updateHooks(cleanSlate = false) {
 
     handle(
         "preCreateChatMessage",
-        gs.get(MODULENAME, "castPrivateSpell") || gs.get(MODULENAME, "reminderTargeting") !== "no",
+        gs.get(MODULENAME, "castPrivateSpell") ||
+            gs.get(MODULENAME, "reminderTargeting") !== "no" ||
+            gs.get(MODULENAME, "handleDyingRecoveryRoll"),
         preCreateChatMessageHook
     );
 
@@ -197,9 +201,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     registerHandlebarsHelpers();
 
     // Hooks that always run
-    // Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
-    //     toggleMenuSettings(html, _settings);
-    // });
+    Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
+        toggleMenuSettings(html, _settings);
+    });
 
     // Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
     //     toggleSettings(html);

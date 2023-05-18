@@ -26,7 +26,7 @@ import {
 } from "./feature/qolHandler/index.js";
 import {
     autoRollDamage,
-    handleRecoveryRoll,
+    handleDyingRecoveryRoll,
     persistentDamage,
     persistentHealing,
 } from "./feature/damageHandler/index.js";
@@ -175,8 +175,8 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
         persistentDamage(message);
     }
 
-    if (game.settings.get(MODULENAME, "handleRecoveryRoll")) {
-        handleRecoveryRoll(message);
+    if (game.settings.get(MODULENAME, "handleDyingRecoveryRoll")) {
+        handleDyingRecoveryRoll(message);
     }
 
     if (isActuallyDamageRoll(message)) {

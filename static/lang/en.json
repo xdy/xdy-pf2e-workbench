@@ -220,7 +220,7 @@
         "hint": "Client setting to automatically apply persistent damage.",
         "name": "Automatically apply persistent damage."
       },
-      "rollPersistentDamageRecovery": {
+      "applyPersistentDamageRecoveryRoll": {
         "hint": "... and automatically roll recovery after that.",
         "name": "... and automatically roll recovery after that."
       },
@@ -351,18 +351,18 @@
         "hint": "Call hotbar macro on page {page} position {column}",
         "name": "Call hotbar macro on page {page} position {column}"
       },
-      "handleRecoveryRollAllow": {
+      "handleDyingRecoveryRollAllow": {
         "all": "All",
         "gm": "GM",
-        "hint": "Select who is allowed to set the option to automatically handle recovery roll results. Save settings to show/hide additional options on the client automation setting menu.",
-        "name": "Who is allowed to set the option to automatically handle recovery roll results.",
+        "hint": "Select who is allowed to set the option to automatically handle dying recovery roll results. Save settings to show/hide additional options on the client automation setting menu.",
+        "name": "Who is allowed to set the option to automatically handle dying recovery roll results.",
         "none": "None",
         "players": "Players"
       },
-      "handleRecoveryRoll": {
-        "hint": "Client setting to automatically handle recovery roll results.",
-        "name": "Automatically handle recovery roll results.",
-        "handled": "Recovery roll {roll} {outcome} handled automatically. {defeated}.",
+      "handleDyingRecoveryRoll": {
+        "hint": "Client setting to automatically handle dying recovery roll results.",
+        "name": "Automatically handle dying recovery roll results.",
+        "handled": "Dying recovery roll {roll} {outcome} handled automatically. {defeated}.",
         "defeated": "{name} was defeated"
       },
       "playerFeatsPrerequisiteHint": {
