@@ -172,8 +172,8 @@ export function handleRecoveryRoll(message: ChatMessagePF2e) {
     if (
         shouldIHandleThisMessage(
             message,
-            ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow")))
+            ["all", "players"].includes(String(game.settings.get(MODULENAME, "handleRecoveryRollAllow"))),
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "handleRecoveryRollAllow")))
         ) &&
         (message.flavor.includes(game.i18n.localize("PF2E.Recovery.critFailure")) ||
             message.flavor.includes(game.i18n.localize("PF2E.Recovery.critSuccess")) ||

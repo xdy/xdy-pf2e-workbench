@@ -3,14 +3,10 @@ import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
 
 function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
-    const userId = message.user.id;
-    const amIMessageSender = userId === game.user?.id;
-    if (!game.user?.isGM && playerCondition && amIMessageSender) {
-        return true;
-    } else if (game.user?.isGM && gmCondition && amIMessageSender) {
-        return true;
-    }
-    return false;
+    return !!(
+        (!game.user?.isGM && playerCondition && game.user === message.actor?.primaryUpdater) ||
+        (game.user?.isGM && gmCondition && game.user === message.actor?.primaryUpdater)
+    );
 }
 
 function nth(n) {
