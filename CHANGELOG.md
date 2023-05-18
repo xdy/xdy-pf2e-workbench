@@ -1,3 +1,10 @@
+## [4.71.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.1...v4.71.2) (2023-05-18)
+
+
+### Bug Fixes
+
+* The department of redundancy department thanks it's vigilant vigilantes for their tirelessly unceasing work to remove excessive and redundant verbiage from the words included in this modular module. ([a875118](https://github.com/xdy/xdy-pf2e-workbench/commit/a875118cae285ae24f47abe6f6a720c97ee137c2))
+
 ## [4.71.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.0...v4.71.1) (2023-05-18)
 
 
