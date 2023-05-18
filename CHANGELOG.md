@@ -1,3 +1,10 @@
+## [4.72.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.72.0...v4.72.1) (2023-05-18)
+
+
+### Bug Fixes
+
+* All recovery roll settings have been reset to default values as part of bugfixes. Reintroduced hiding client settings the gm has made unavailable. Moved the suboption to roll persistent damage recovery to it's proper place. ([33c894a](https://github.com/xdy/xdy-pf2e-workbench/commit/33c894a265d21c8219eb3ba07d9af324a008f100))
+
 # [4.72.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.4...v4.72.0) (2023-05-18)
 
 
