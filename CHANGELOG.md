@@ -1,3 +1,10 @@
+## [4.71.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.2...v4.71.3) (2023-05-18)
+
+
+### Bug Fixes
+
+* Le service des redondances service remercie ses vigiles vigilants pour leur travail inlassable et incessant pour éliminer le verbiage excessif et redondant des mots inclus dans ce module modulaire. ([ba492f7](https://github.com/xdy/xdy-pf2e-workbench/commit/ba492f7832a8bf3464d1de412783869fc6cdd0cd))
+
 ## [4.71.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.1...v4.71.2) (2023-05-18)
 
 
