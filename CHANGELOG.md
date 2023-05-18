@@ -1,3 +1,10 @@
+## [4.71.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.3...v4.71.4) (2023-05-18)
+
+
+### Bug Fixes
+
+* This release, unlike the previous one, is not actually redundant. ([4d3c757](https://github.com/xdy/xdy-pf2e-workbench/commit/4d3c7577d0cd23baca863abbfa7560c693a22af2))
+
 ## [4.71.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.2...v4.71.3) (2023-05-18)
 
 
