@@ -1,3 +1,10 @@
+# [4.72.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.4...v4.72.0) (2023-05-18)
+
+
+### Features
+
+* Add suboption to the apply persistant damage that automatically rolls the persistent damage recovery. ([5bc70c2](https://github.com/xdy/xdy-pf2e-workbench/commit/5bc70c2609b60927803df1444ca9ffb8e56b7c8d))
+
 ## [4.71.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.71.3...v4.71.4) (2023-05-18)
 
 
