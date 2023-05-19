@@ -1,3 +1,10 @@
+# [4.73.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.72.1...v4.73.0) (2023-05-19)
+
+
+### Features
+
+* Change the whirlwindStrike macro so it warns if the aura effect is not present, and uses a counter on it to increase/decrease the reach. (Note that reach over 10 feet is not handled correctly, it covers too much area.) ([d698850](https://github.com/xdy/xdy-pf2e-workbench/commit/d69885097aac31599299eb81f28b0b1d5135c10f))
+
 ## [4.72.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.72.0...v4.72.1) (2023-05-18)
 
 
