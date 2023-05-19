@@ -1,3 +1,10 @@
+# [4.75.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.74.0...v4.75.0) (2023-05-19)
+
+
+### Features
+
+* Make it possible to change the setting to use Meta/⌘ (command)/⊞ (windows) to mystify creatures when dragging them onto a scene. *Might* make it possible for mac users to use command-v to paste and reroll the names of mystified creatures just like control-v works for windows users. ([0d95f04](https://github.com/xdy/xdy-pf2e-workbench/commit/0d95f0429a97163c3a9bebf48cdef8f6361e6e7f))
+
 # [4.74.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.5...v4.74.0) (2023-05-19)
 
 
