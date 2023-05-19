@@ -1,3 +1,15 @@
+# [4.74.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.5...v4.74.0) (2023-05-19)
+
+
+### Bug Fixes
+
+* A search and replace gone bad... If user automation/reminders has been wonky for you lately, try again with this version. ([468715d](https://github.com/xdy/xdy-pf2e-workbench/commit/468715d86cc481538071ca7d53ce92bb54ad3b8e))
+
+
+### Features
+
+* Make the Basic Action Macro dialog a *little* more configurable via a setting, and enable resizing it (it doesn't scale, so of limited use.) ([9fb85fb](https://github.com/xdy/xdy-pf2e-workbench/commit/9fb85fb966c02cb65e1ca5b4ae7c65606c2c439e)), closes [#799](https://github.com/xdy/xdy-pf2e-workbench/issues/799)
+
 ## [4.73.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.4...v4.73.5) (2023-05-19)
 
 
