@@ -1,3 +1,10 @@
+## [4.73.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.3...v4.73.4) (2023-05-19)
+
+
+### Bug Fixes
+
+* Improve the hint on the sub-settings a bit. Removes the experimental note from autoGainDyingAtZeroHPIfCriticallyHitOneMore and autoGainDyingIfTakingDamageWhenAlreadyDying. ([29cfae1](https://github.com/xdy/xdy-pf2e-workbench/commit/29cfae1b19664f13822513357777b69ff6787b19))
+
 ## [4.73.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.2...v4.73.3) (2023-05-19)
 
 
