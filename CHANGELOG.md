@@ -1,3 +1,10 @@
+## [4.73.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.0...v4.73.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* Whirlwind strike bug fixes. ([a38bf5f](https://github.com/xdy/xdy-pf2e-workbench/commit/a38bf5fe7c7173067c8dbe1be973783d8323e0b7))
+
 # [4.73.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.72.1...v4.73.0) (2023-05-19)
 
 
