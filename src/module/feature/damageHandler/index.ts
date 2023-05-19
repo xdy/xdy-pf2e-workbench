@@ -256,7 +256,7 @@ export function persistentDamage(message) {
                 token?.actor?.applyDamage({ damage: r, token: token.document }).then();
             }
         }
-        const actor = game.actors?.get(message.speaker.actor);
+        const actor = token.actor;
         if (actor && game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
             const condition: ConditionPF2e = actor.conditions
                 .filter((condition) => condition.slug === "persistent-damage")
