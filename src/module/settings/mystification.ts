@@ -198,6 +198,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                     DISABLED: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierModifierKey.disabled`),
                     ALT: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierModifierKey.alt`),
                     CONTROL: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierModifierKey.control`),
+                    META: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierModifierKey.meta`),
                 },
                 default: "CONTROL",
                 onChange: (key) => {

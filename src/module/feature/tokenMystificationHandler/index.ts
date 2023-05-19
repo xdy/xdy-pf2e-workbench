@@ -134,6 +134,8 @@ function isMystifyModifierKeyPressed() {
             return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
         case "CONTROL":
             return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
+        case "META":
+            return game?.keyboard?.downKeys.has("MetaLeft") || game?.keyboard?.downKeys.has("MetaRight");
         default:
             return false;
     }

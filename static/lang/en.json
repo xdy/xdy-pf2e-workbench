@@ -543,6 +543,7 @@
         "alt": "Alt",
         "always": "Always",
         "control": "Control",
+        "meta": "Meta/⌘ (command)/⊞ (windows)",
         "disabled": "Disabled",
         "hint": "Select to enable setting which key to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
         "name": "Key to mystify on drag to scene"
