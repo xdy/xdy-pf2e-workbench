@@ -1,3 +1,10 @@
+## [4.73.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.4...v4.73.5) (2023-05-19)
+
+
+### Bug Fixes
+
+* Make persistent damage recovery roll work for unlinked tokens (e.g. npcs). ([77d64eb](https://github.com/xdy/xdy-pf2e-workbench/commit/77d64eb5135ea821f40e22fd3589e1870b227c03))
+
 ## [4.73.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.3...v4.73.4) (2023-05-19)
 
 
