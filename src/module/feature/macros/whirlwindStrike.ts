@@ -15,6 +15,10 @@ function validTarget(r1, r2) {
 
 export async function whirlwindStrike(_token, msToSleepBetweenAttacks = 1001) {
     const aura = _token.auras.get("xdy-workbench-reach-aura");
+    if (!aura) {
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.macros.whirlwindStrike.reachAuraNotFound`));
+        return;
+    }
     const heldWeapons =
         _token.actor?.system?.actions
             .filter((w) => w.item.isOfType("weapon"))
