@@ -27,6 +27,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                               minifyIdentifiers: false,
                               minifySyntax: true,
                               minifyWhitespace: true,
+                              sourcemap: true,
                           })
                         : code;
                 },
