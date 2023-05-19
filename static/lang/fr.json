@@ -528,14 +528,14 @@
       },
       "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
         "name": "... et ajouter un degré mourant supplémentaire s'il est touché de manière critique par un ennemi.",
-        "hint": "(Expérimental) Si touché de manière critique par une attaque ciblée d'un acteur ennemi, ajoutez un niveau supplémentaire à Mourant. Utilise les paramètres du menu déroulant ci-dessus.",
+        "hint": "(Expérimental) Si touché de manière critique par une attaque ciblée d'un acteur ennemi, ajoutez un niveau supplémentaire à Mourant. Utilise les paramètres du menu déroulant ci-dessus. Nécessite que le réglage ci-dessus soit activé.",
         "no": "Non",
         "add": "Ajouter mourant",
         "addForCharacters": "Ajouter mourant pour personnages et familiers"
       },
       "autoGainDyingIfTakingDamageWhenAlreadyDying": {
         "name": "... et ajoute un ou des degrés de Mourant s'il subit des dégâts alors qu'il est Mourant.",
-        "hint": "(Expérimental) s'il subit des dégâts alors qu'il est déjà mourant, ajoute un degré Mourant supplémentaire (ou possiblement deux si les dégâts supplémentaires sur un coup critique sont activés. Utilise le menu déroulant ci-dessus.",
+        "hint": "(Expérimental) s'il subit des dégâts alors qu'il est déjà mourant, ajoute un degré Mourant supplémentaire (ou possiblement deux si les dégâts supplémentaires sur un coup critique sont activés. Utilise le menu déroulant ci-dessus. Nécessite que le réglage ci-dessus soit activé.",
         "no": "Non",
         "add": "Ajouter mourant",
         "addForCharacters": "Ajouter mourant pour personnages et familiers"
@@ -564,7 +564,7 @@
         "name": "... si les derniers dégâts ne sont pas létaux.",
         "no": "Les dégâts non létaux sont juste des dégâts",
         "unconscious": "Les dégâts non létaux ne tuent pas",
-        "hint": "Si les derniers dégâts que vous subissez sont non létaux, vous n'êtes pas Mourant. À la place vous êtes inconscient à 0 PV."
+        "hint": "Si les derniers dégâts que vous subissez sont non létaux, vous n'êtes pas Mourant. À la place vous êtes inconscient à 0 PV. Nécessite que le réglage ci-dessus soit activé."
       },
       "handleDyingRecoveryRollAllow": {
         "all": "Tous",
@@ -581,7 +581,7 @@
         "name": "Automatiser le traitement des tests de récupération."
       },
       "applyPersistentDamageRecoveryRoll": {
-        "hint": "... et lancez le test de récupération automatiquement après çà.",
+        "hint": "... et lancez le test de récupération automatiquement après çà. Nécessite que le réglage ci-dessus soit activé.",
         "name": "... et lancez le test de récupération automatiquement après çà."
       }
     },
