@@ -601,12 +601,13 @@ export function basicActionMacros() {
         getBestBonuses(partySkills, partyIds, actionsToUse);
     }
 
-    const columns = 1 + ~~((actionsToUse.length - 1) / 14);
-    const width = 264 * columns;
+    const columns =
+        1 + ~~((actionsToUse.length - 1) / Number(game.settings.get(MODULENAME, "bamActionsPerColumn")) ?? 14);
+    const width = 26 + columns * 250;
     const height =
         30 +
         ~~(
-            (32 * actionsToUse.filter((x) => !x.showMAP).length +
+            (30 * actionsToUse.filter((x) => !x.showMAP).length +
                 1 +
                 (64 * actionsToUse.filter((x) => x.showMAP).length + 1)) /
             columns
@@ -770,7 +771,7 @@ ${actionsToUse
             },
         },
         // @ts-ignore
-        { jQuery: false, width, classes: ["pf2e-bg"] }
+        { jQuery: false, width, classes: ["pf2e-bg"], popOut: true, resizable: true }
     ).render(true);
 }
 

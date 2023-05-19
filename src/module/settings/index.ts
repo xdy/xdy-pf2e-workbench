@@ -206,6 +206,16 @@ export function registerWorkbenchSettings() {
         onChange: () => updateHooks(),
     });
 
+    game.settings.register(MODULENAME, "bamActionsPerColumn", {
+        name: `${MODULENAME}.macros.basicActionMacros.bamActionsPerColumn.name`,
+        hint: `${MODULENAME}.macros.basicActionMacros.bamActionsPerColumn.hint`,
+        scope: "client",
+        config: true,
+        default: 14,
+        type: Number,
+        onChange: () => updateHooks(),
+    });
+
     game.settings.register(MODULENAME, "workbenchVersion", {
         name: `${MODULENAME}.SETTINGS.workbenchVersion.name`,
         hint: `${MODULENAME}.SETTINGS.workbenchVersion.hint`,
