@@ -1,3 +1,10 @@
+## [4.73.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.1...v4.73.2) (2023-05-19)
+
+
+### Bug Fixes
+
+* Basic Action Macros fails on some actors, this hopefully fixes that. ([e06772c](https://github.com/xdy/xdy-pf2e-workbench/commit/e06772cc138b302868ae3477577d3263c8a904ad))
+
 ## [4.73.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.0...v4.73.1) (2023-05-19)
 
 
