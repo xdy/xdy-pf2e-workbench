@@ -579,6 +579,10 @@
         "handled": "Jet de récupération {roll} {outcome} géré automatiquement. {défeated}.",
         "defeated": "{name} a été vaincu",
         "name": "Automatiser le traitement des tests de récupération."
+      },
+      "applyPersistentDamageRecoveryRoll": {
+        "hint": "... et lancez le test de récupération automatiquement après çà.",
+        "name": "... et lancez le test de récupération automatiquement après çà."
       }
     },
     "effects": {
@@ -688,7 +692,8 @@
       "whirlwindStrike": {
         "error": "Choisir un jeton avec Frappe tourbillonnante et au moins un cible à portée !",
         "starts": "Début de la Frappe tourbillonnante de {name} !",
-        "ends": "La Frappe tourbillonnante de {name} après {targets} attaques !"
+        "ends": "La Frappe tourbillonnante de {name} après {targets} attaques !",
+        "reachAuraNotFound": "Aucune zone trouvée, veuillez placer la Portée 'aura' trouvée dans le compendium des objets PF2e Workbench sur le jeton et ajustez la portée."
       }
     }
   }
