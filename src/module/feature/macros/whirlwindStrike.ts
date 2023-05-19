@@ -29,12 +29,14 @@ export async function whirlwindStrike(_token, msToSleepBetweenAttacks = 1001) {
         heldWeapons?.find((w) => w.item.system?.traits.value.includes("reach")) || heldWeapons.length > 0
             ? heldWeapons[0]
             : null;
+
     // @ts-ignore
     const targets = canvas.tokens.objects.children
         .filter((t) => validTarget(t.bounds, aura.bounds))
         .filter((t) => !t.actor.isDead)
         .filter((t) => t.isVisible)
-        .filter((t) => t.document.disposition === -1)
+        .filter((t) => ["character", "npc", "familiar"].includes(t.actor.type))
+        .filter((t) => t.actor.alliance !== "party")
         .filter((t) => t.id !== _token.id);
     const canWhirlwind =
         _token &&
