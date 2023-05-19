@@ -1,4 +1,4 @@
-import { isActuallyDamageRoll, logDebug } from "./utils.js";
+import { isActuallyDamageRoll, logDebug, shouldIHandleThis } from "./utils.js";
 import { ActorPF2e } from "@actor";
 import { ActorSystemData } from "@actor/data/base.js";
 import { TokenDocumentPF2e } from "@scene";
@@ -128,7 +128,7 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
     }
     if (!String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no")) {
         const actor = message.actor;
-        if (actor && game.user === actor?.primaryUpdater) {
+        if (actor && shouldIHandleThis(actor)) {
             const now = Date.now();
             const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
 
@@ -249,7 +249,7 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
         item.actor?.isOfType(CHARACTER_TYPE) &&
         item.actor.hasCondition("unconscious") &&
         game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious") &&
-        game.user === item.actor?.primaryUpdater
+        shouldIHandleThis(item.actor)
     ) {
         dropHeldItemsOnBecomingUnconscious(item.actor);
     }

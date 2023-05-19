@@ -1,4 +1,4 @@
-import { isFirstGM, myRandomId } from "../../utils.js";
+import { isFirstGM, myRandomId, shouldIHandleThis } from "../../utils.js";
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { TokenDocumentPF2e } from "@module/scene/index.js";
@@ -56,7 +56,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
 }
 
 export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
-    if (game.user === combatant.actor?.primaryUpdater && combatant && combatant.actor) {
+    if (shouldIHandleThis(combatant.actor) && combatant && combatant.actor) {
         const showForPC =
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "actionsReminderAllow"))) &&
             combatant.actor?.hasPlayerOwner;
@@ -118,7 +118,7 @@ function ignoreDeadEidolon(actor) {
 export async function reminderCannotAttack(message: ChatMessagePF2e) {
     if (
         message.actor &&
-        game.user === message.actor?.primaryUpdater &&
+        shouldIHandleThis(message.actor) &&
         message.flags &&
         game.combats.active &&
         message.user &&
@@ -159,7 +159,7 @@ export function reminderTargeting(message: ChatMessagePF2e): boolean {
     let result = true;
     if (
         message.actor &&
-        game.user === message.actor?.primaryUpdater &&
+        shouldIHandleThis(message.actor) &&
         message.flags &&
         message.user &&
         ["spell-attack-roll", "attack-roll"].includes(<string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type)

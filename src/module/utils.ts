@@ -116,3 +116,17 @@ export function debounce(callback, wait) {
         timeout = setTimeout(() => callback.apply(context, args), wait);
     };
 }
+
+export function shouldIHandleThis(actor) {
+    if (!actor) return null;
+    const currentUser = game.users.get(game.user.id, { strict: true });
+    const activeUsers = game.users.filter((u) => u.active);
+    const assignedUser = activeUsers.find((u) => u.character === actor);
+    const firstGM = activeUsers.find((u) => u.isGM);
+    const anyoneWithPermission = activeUsers.find((u) => actor.canUserModify(u, "update"));
+    const updater =
+        currentUser.active && actor.canUserModify(currentUser, "update")
+            ? currentUser
+            : assignedUser ?? firstGM ?? anyoneWithPermission ?? null;
+    return game.user.id === updater?.id;
+}
