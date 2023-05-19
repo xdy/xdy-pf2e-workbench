@@ -1,3 +1,11 @@
+## [4.73.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.2...v4.73.3) (2023-05-19)
+
+
+### Bug Fixes
+
+* Make minify create a sourcemap. ([8ed48b9](https://github.com/xdy/xdy-pf2e-workbench/commit/8ed48b95c8d547fa8157d4cee78169e51ddc8b16))
+* Try to fix problem with foundry-publish ([e3793f3](https://github.com/xdy/xdy-pf2e-workbench/commit/e3793f3693c9ede8c1ffbbc8b4c0ce3e052f3f3b))
+
 ## [4.73.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.73.1...v4.73.2) (2023-05-19)
 
 
