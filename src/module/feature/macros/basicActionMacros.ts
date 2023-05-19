@@ -45,12 +45,7 @@ function createMapOfSkillsPerActor(actors) {
 }
 
 function fetchSkills(actor) {
-    const a = { perception: actor.attributes.perception, ...actor.skills };
-    Array.from(a).map((skill: any) => {
-        a.check.mod = skill.check?.mod;
-        a.totalModifier = skill.to;
-    });
-    return a;
+    return { perception: actor.attributes.perception, ...actor.skills };
 }
 
 function signedNumber(n) {
