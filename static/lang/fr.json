@@ -336,7 +336,8 @@
         "control": "Control",
         "disabled": "Désactivé",
         "hint": "Choisissez d'activer le choix de la touche à maintenir pressée pour mystifier la créature lorsqu'elle est glissée sur la scène active. Notez que si vous choisissez Alt (pas par défaut) cela cache aussi le PNJ.",
-        "name": "Touche pour mystifier en glissant sur la scène"
+        "name": "Touche pour mystifier en glissant sur la scène",
+        "meta": "Meta/⌘ (commande)/⊞ (fenêtres)"
       },
       "npcMystifierMystifyKey": {
         "hint": "Choisissez la touche liée pour mystifier les jetons choisis.",
@@ -672,7 +673,11 @@
         "second": "(-5)",
         "third": "(-10)",
         "macroNotFound": "Macro {macroName} non trouvée",
-        "compendiumNotFound": "Compendium {compendiumName} non trouvé"
+        "compendiumNotFound": "Compendium {compendiumName} non trouvé",
+        "bamActionsPerColumn": {
+          "name": "Actions approximatives par ligne",
+          "hint": "Nombre approximatif d'actions par ligne dans la boîte de dialogue de Basic Action Macros. Le nombre réel d'actions par ligne sera le nombre d'actions par ligne le plus proche de la taille de la boîte de dialogue."
+        }
       },
       "buildNpcSpellbookJournal": {
         "title": "Construire le grimoire de sorts du PNJ",
