@@ -1,12 +1,14 @@
-import { ActorPF2e } from "@actor/base";
-import { Abilities, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureHitPoints, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, HeldShieldData, LabeledSpeed, SaveData, SkillData } from "@actor/creature/data";
-import { ActorAttributesSource, ActorFlagsPF2e, ArmorClassData, InitiativeData, PerceptionData, StrikeData } from "@actor/data/base";
-import { ActorSizePF2e } from "@actor/data/size";
-import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
-import { AbilityString, ActorAlliance, SaveType } from "@actor/types";
+import { ActorPF2e } from "@actor/base.ts";
+import { Abilities, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureHitPoints, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, HeldShieldData, LabeledSpeed, SaveData } from "@actor/creature/data.ts";
+import { ActorAttributesSource, ActorFlagsPF2e, PerceptionData, StrikeData } from "@actor/data/base.ts";
+import { ActorSizePF2e } from "@actor/data/size.ts";
+import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
+import { AbilityString, ActorAlliance, SaveType } from "@actor/types.ts";
 import { MeleePF2e } from "@item";
-import { Rarity, Size } from "@module/data";
-import { IdentifyCreatureData } from "@module/recall-knowledge";
+import { Rarity, Size } from "@module/data.ts";
+import { ArmorClassTraceData } from "@system/statistic/armor-class.ts";
+import { StatisticTraceData } from "@system/statistic/data.ts";
+import { InitiativeTraceData } from "@actor/initiative.ts";
 interface NPCSource extends BaseCreatureSource<"npc", NPCSystemSource> {
     flags: DeepPartial<NPCFlags>;
 }
@@ -118,11 +120,11 @@ interface NPCTraitsData extends Omit<CreatureTraitsData, "senses">, NPCTraitsSou
     size: ActorSizePF2e;
 }
 interface NPCAttributes extends Omit<NPCAttributesSource, "initiative" | "immunities" | "weaknesses" | "resistances">, CreatureAttributes {
-    ac: NPCArmorClass;
+    ac: ArmorClassTraceData;
     adjustment: "elite" | "weak" | null;
     hp: NPCHitPoints;
     perception: NPCPerception;
-    initiative: InitiativeData;
+    initiative: InitiativeTraceData;
     speed: NPCSpeeds;
     /**
      * Data related to the currently equipped shield. This is copied from the shield data itself, and exists to
@@ -150,7 +152,6 @@ interface NPCDetails extends NPCDetailsSource {
         base: number;
     };
     alliance: ActorAlliance;
-    identification: IdentifyCreatureData;
 }
 /** The full data for a NPC action (used primarily for strikes.) */
 interface NPCStrike extends StrikeData {
@@ -166,11 +167,6 @@ interface NPCStrike extends StrikeData {
     }[];
     /** A melee usage of a firearm: not available on NPC strikes */
     altUsages?: never;
-}
-/** AC data with an additional "base" value */
-interface NPCArmorClass extends StatisticModifier, ArmorClassData {
-    base?: number;
-    details: string;
 }
 /** Save data with an additional "base" value */
 interface NPCSaveData extends SaveData {
@@ -193,16 +189,18 @@ interface NPCPerception extends PerceptionData {
     base?: number;
 }
 /** Skill data with a "base" value and whether the skill should be rendered (visible) */
-interface NPCSkillData extends SkillData {
+interface NPCSkillData extends StatisticTraceData {
     base?: number;
     visible?: boolean;
     isLore?: boolean;
     itemID?: string;
     ability: AbilityString;
-    label: string;
-    expanded: string;
+    variants: {
+        label: string;
+        options: string;
+    }[];
 }
 interface NPCSpeeds extends CreatureSpeeds {
     details: string;
 }
-export { NPCArmorClass, NPCAttributes, NPCAttributesSource, NPCFlags, NPCHitPoints, NPCPerception, NPCSaveData, NPCSkillData, NPCSource, NPCStrike, NPCSystemData, NPCSystemSource, NPCTraitsData, NPCTraitsSource, };
+export { NPCAttributes, NPCAttributesSource, NPCFlags, NPCHitPoints, NPCPerception, NPCSaveData, NPCSkillData, NPCSource, NPCStrike, NPCSystemData, NPCSystemSource, NPCTraitsData, NPCTraitsSource, };

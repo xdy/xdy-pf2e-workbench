@@ -1,9 +1,8 @@
 import { CharacterPF2e, FamiliarPF2e, HazardPF2e, LootPF2e, NPCPF2e, PartyPF2e, VehiclePF2e } from "@actor";
-import { ActorType } from "@actor/data";
-import { ActionItemPF2e, AncestryPF2e, ArmorPF2e, BackgroundPF2e, BookPF2e, ClassPF2e, ConditionPF2e, ConsumablePF2e, ContainerPF2e, DeityPF2e, EffectPF2e, EquipmentPF2e, FeatPF2e, HeritagePF2e, KitPF2e, LorePF2e, MeleePF2e, SpellcastingEntryPF2e, SpellPF2e, TreasurePF2e, WeaponPF2e } from "@item";
-import { AfflictionPF2e } from "@item/affliction/document";
-import { WeaponReloadTime } from "@item/weapon/types";
-import { JournalSheetPF2e } from "@module/journal-entry/sheet";
+import { ActorType } from "@actor/data/index.ts";
+import { ActionItemPF2e, AfflictionPF2e, AncestryPF2e, ArmorPF2e, BackgroundPF2e, BookPF2e, ClassPF2e, ConditionPF2e, ConsumablePF2e, ContainerPF2e, DeityPF2e, EffectPF2e, EquipmentPF2e, FeatPF2e, HeritagePF2e, KitPF2e, LorePF2e, MeleePF2e, SpellcastingEntryPF2e, SpellPF2e, TreasurePF2e, WeaponPF2e } from "@item";
+import { WeaponReloadTime } from "@item/weapon/types.ts";
+import { JournalSheetPF2e } from "@module/journal-entry/sheet.ts";
 export type StatusEffectIconTheme = "default" | "blackWhite";
 export declare const PF2ECONFIG: {
     chatDamageButtonShieldToggle: boolean;
@@ -69,27 +68,39 @@ export declare const PF2ECONFIG: {
         19: string;
         20: string;
     };
-    abilities: {
-        str: string;
-        dex: string;
-        con: string;
-        int: string;
-        wis: string;
-        cha: string;
-    };
+    abilities: Record<"str" | "dex" | "con" | "int" | "wis" | "cha", string>;
     attributes: {
         perception: string;
         stealth: string;
         initiative: string;
     };
     dcAdjustments: {
-        "incredibly easy": string;
-        "very easy": string;
+        "incredibly-easy": string;
+        "very-easy": string;
         easy: string;
         normal: string;
         hard: string;
-        "very hard": string;
-        "incredibly hard": string;
+        "very-hard": string;
+        "incredibly-hard": string;
+    };
+    checkDCs: {
+        Label: {
+            AdjustedTarget: string;
+            NoChangeTarget: string;
+            NoTarget: string;
+            WithTarget: string;
+        };
+        Specific: {
+            ac: string;
+            athletics: string;
+            deception: string;
+            fortitude: string;
+            perception: string;
+            reflex: string;
+            stealth: string;
+            will: string;
+        };
+        Unspecific: string;
     };
     skills: {
         acr: string;
@@ -125,8 +136,8 @@ export declare const PF2ECONFIG: {
         sp: string;
         cp: string;
     };
-    preciousMaterialGrades: Record<"high" | "low" | "standard", string>;
-    preciousMaterials: Record<"abysium" | "adamantine" | "cold-iron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "peachwood" | "siccatite" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass", string>;
+    preciousMaterialGrades: Record<"low" | "standard" | "high", string>;
+    preciousMaterials: Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>;
     armorPotencyRunes: {
         "1": string;
         "2": string;
@@ -203,6 +214,7 @@ export declare const PF2ECONFIG: {
         majorStriking: string;
     };
     weaponPropertyRunes: {
+        vorpal: string;
         anarchic: string;
         ancestralEchoing: string;
         anchoring: string;
@@ -257,7 +269,6 @@ export declare const PF2ECONFIG: {
         spellStoring: string;
         thundering: string;
         unholy: string;
-        vorpal: string;
         wounding: string;
     };
     damageTraits: {
@@ -284,29 +295,31 @@ export declare const PF2ECONFIG: {
         good: string;
         lawful: string;
     };
-    damageTypes: Record<"force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped", string>;
-    damageRollFlavors: Record<"force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped", string>;
+    damageTypes: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "untyped", string>;
+    damageRollFlavors: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "untyped", string>;
     damageCategories: {
         alignment: string;
         energy: string;
         physical: string;
-        abysium: string;
         adamantine: string;
+        darkwood: string;
+        mithral: string;
+        orichalcum: string;
+        silver: string;
+        warpglass: string;
+        abysium: string;
         "cold-iron": string;
         djezet: string;
-        mithral: string;
         noqual: string;
         peachwood: string;
-        silver: string;
         "sisterstone-dusk": string;
         "sisterstone-scarlet": string;
         "sovereign-steel": string;
-        warpglass: string;
-        persistent: string;
         precision: string;
         splash: string;
+        persistent: string;
     };
-    materialDamageEffects: Pick<Record<"abysium" | "adamantine" | "cold-iron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "peachwood" | "siccatite" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass", string>, "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass">;
+    materialDamageEffects: Pick<Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>, "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel">;
     resistanceTypes: {
         acid: string;
         adamantine: string;
@@ -397,6 +410,7 @@ export declare const PF2ECONFIG: {
         fire: string;
         force: string;
         "ghost-touch": string;
+        glass: string;
         good: string;
         lawful: string;
         light: string;
@@ -448,6 +462,7 @@ export declare const PF2ECONFIG: {
     };
     weaponGroups: Record<"dart" | "knife" | "axe" | "brawling" | "club" | "flail" | "hammer" | "pick" | "polearm" | "shield" | "spear" | "sword" | "bomb" | "bow" | "firearm" | "sling", string>;
     meleeWeaponGroups: Record<"dart" | "knife" | "axe" | "brawling" | "club" | "flail" | "hammer" | "pick" | "polearm" | "shield" | "spear" | "sword", string>;
+    baseArmorTypes: Record<"armored-cloak" | "armored-coat" | "bastion-plate" | "breastplate" | "buckle-armor" | "ceramic-plate" | "chain-mail" | "chain-shirt" | "coral-armor" | "explorers-clothing" | "fortress-plate" | "full-plate" | "gi" | "half-plate" | "hellknight-breastplate" | "hellknight-half-plate" | "hellknight-plate" | "hide-armor" | "lamellar-breastplate" | "lattice-armor" | "leaf-weave" | "leather-armor" | "leather-lamellar" | "mantis-shell" | "niyahaat" | "o-yoroi" | "padded-armor" | "quilted-armor" | "sankeit" | "scale-mail" | "scroll-robes" | "splint-mail" | "studded-leather-armor" | "wooden-breastplate", string>;
     baseWeaponTypes: Record<"dart" | "club" | "flail" | "pick" | "spear" | "sling" | "adze" | "air-repeater" | "aklys" | "alchemical-bomb" | "alchemical-crossbow" | "aldori-dueling-sword" | "arquebus" | "asp-coil" | "atlatl" | "axe-musket" | "barricade-buster" | "bastard-sword" | "battle-axe" | "battle-lute" | "battle-saddle" | "bec-de-corbin" | "big-boom-gun" | "black-powder-knuckle-dusters" | "bladed-diabolo" | "bladed-gauntlet" | "bladed-hoop" | "bladed-scarf" | "blowgun" | "blowgun-darts" | "blunderbuss" | "bo-staff" | "boarding-axe" | "boarding-pike" | "bola" | "boomerang" | "bow-staff" | "breaching-pike" | "broadspear" | "butchering-axe" | "butterfly-sword" | "buugeng" | "cane-pistol" | "chain-sword" | "chakram" | "chakri" | "clan-dagger" | "clan-pistol" | "claw" | "claw-blade" | "coat-pistol" | "combat-grapnel" | "combat-lure" | "composite-longbow" | "composite-shortbow" | "corset-knife" | "crescent-cross" | "crossbow" | "dagger" | "dagger-pistol" | "daikyu" | "dancers-spear" | "dandpatta" | "dogslicer" | "donchak" | "double-barreled-musket" | "double-barreled-pistol" | "dragon-mouth-pistol" | "dueling-pistol" | "dueling-spear" | "dwarven-dorn-dergar" | "dwarven-scattergun" | "dwarven-war-axe" | "earthbreaker" | "elven-branched-spear" | "elven-curve-blade" | "explosive-dogslicer" | "exquisite-sword-cane" | "exquisite-sword-cane-sheath" | "falcata" | "falchion" | "fangwire" | "fauchard" | "feng-huo-lun" | "fighting-fan" | "fighting-stick" | "filchers-fork" | "fire-lance" | "fire-poi" | "fist" | "flingflenser" | "flintlock-musket" | "flintlock-pistol" | "flying-talon" | "flyssa" | "forked-bipod" | "frying-pan" | "gada" | "gaff" | "gakgung" | "gauntlet" | "gauntlet-bow" | "gill-hook" | "glaive" | "gnome-amalgam-musket" | "gnome-flickmace" | "gnome-hooked-hammer" | "greataxe" | "greatclub" | "greatpick" | "greatsword" | "griffon-cane" | "guisarme" | "gun-sword" | "halberd" | "halfling-sling-staff" | "hammer-gun" | "hand-adze" | "hand-cannon" | "hand-crossbow" | "harmona-gun" | "harpoon" | "hatchet" | "heavy-crossbow" | "hongali-hornbow" | "hook-sword" | "horsechopper" | "injection-spear" | "javelin" | "jaws" | "jezail" | "jiu-huan-dao" | "juggling-club" | "kalis" | "kama" | "karambit" | "katana" | "katar" | "khakkhara" | "khopesh" | "knuckle-duster" | "kris" | "kukri" | "kusarigama" | "lance" | "lancer" | "leiomano" | "light-hammer" | "light-mace" | "light-pick" | "lion-scythe" | "long-air-repeater" | "long-hammer" | "longbow" | "longspear" | "longsword" | "mace" | "mace-multipistol" | "machete" | "main-gauche" | "mambele" | "maul" | "meteor-hammer" | "mikazuki" | "mithral-tree" | "monkeys-fist" | "morningstar" | "naginata" | "nightstick" | "nine-ring-sword" | "nodachi" | "nunchaku" | "ogre-hook" | "orc-knuckle-dagger" | "orc-necksplitter" | "panabas" | "pepperbox" | "phalanx-piercer" | "piercing-wind" | "piranha-kiss" | "poi" | "polytool" | "probing-cane" | "ranseur" | "rapier" | "rapier-pistol" | "reinforced-wheels" | "repeating-crossbow" | "repeating-hand-crossbow" | "repeating-heavy-crossbow" | "rhoka-sword" | "rope-dart" | "rotary-bow" | "rungu" | "sai" | "sansetsukon" | "sap" | "sawtooth-saber" | "scimitar" | "scizore" | "scorpion-whip" | "scourge" | "scythe" | "shauth-lash" | "shears" | "shield-bash" | "shield-boss" | "shield-bow" | "shield-pistol" | "shield-spikes" | "shobhad-longrifle" | "shortbow" | "shortsword" | "shuriken" | "sickle" | "sickle-saber" | "slide-pistol" | "sling-bullets" | "spiked-chain" | "spiked-gauntlet" | "spiral-rapier" | "spoon-gun" | "spraysling" | "staff" | "starknife" | "stiletto-pen" | "sukgung" | "sun-sling" | "switchscythe" | "sword-cane" | "talwar" | "tamchal-chakram" | "taw-launcher" | "tekko-kagi" | "temple-sword" | "tengu-gale-blade" | "thorn-whip" | "three-peaked-tree" | "three-section-naginata" | "throwing-knife" | "thunder-sling" | "thundermace" | "tonfa" | "tri-bladed-katar" | "tricky-pick" | "trident" | "triggerbrand" | "urumi" | "visap" | "wakizashi" | "war-flail" | "war-lance" | "war-razor" | "warhammer" | "wheel-blades" | "wheel-spikes" | "whip" | "whip-claw" | "whip-staff" | "wish-blade" | "wish-knife" | "wooden-taws" | "wrecker" | "wrist-launcher" | "zulfikar", string>;
     equivalentWeapons: {
         readonly "composite-longbow": "longbow";
@@ -521,6 +536,7 @@ export declare const PF2ECONFIG: {
         "attached-to-firearm": string;
         "attached-to-firearm-scope": string;
         bonded: string;
+        carried: string;
         "each-rune-applied-to-a-separate-item-that-has-pockets": string;
         "etched-onto-a-weapon": string;
         "etched-onto-armor": string;
@@ -767,7 +783,7 @@ export declare const PF2ECONFIG: {
         vanara: string;
         vishkanya: string;
     };
-    deityDomains: Record<"time" | "change" | "family" | "void" | "darkness" | "cold" | "fire" | "healing" | "magic" | "water" | "air" | "earth" | "abomination" | "ambition" | "cities" | "confidence" | "creation" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "fate" | "freedom" | "glyph" | "indulgence" | "knowledge" | "lightning" | "luck" | "might" | "moon" | "naga" | "nature" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "wealth" | "wyrmkin" | "zeal" | "airapocryphal" | "ambitionapocryphal" | "confidenceapocryphal" | "darknessapocryphal" | "deathapocryphal" | "fateapocryphal" | "fireapocryphal" | "indulgenceapocryphal" | "knowledgeapocryphal" | "mightapocryphal" | "secrecyapocryphal" | "travelapocryphal" | "waterapocryphal", {
+    deityDomains: Record<"healing" | "magic" | "water" | "air" | "cold" | "earth" | "fire" | "wealth" | "abomination" | "ambition" | "change" | "cities" | "confidence" | "creation" | "darkness" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "family" | "fate" | "freedom" | "glyph" | "indulgence" | "introspection" | "knowledge" | "lightning" | "luck" | "might" | "moon" | "naga" | "nature" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "time" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "void" | "wyrmkin" | "zeal" | "airapocryphal" | "ambitionapocryphal" | "confidenceapocryphal" | "darknessapocryphal" | "deathapocryphal" | "fateapocryphal" | "fireapocryphal" | "indulgenceapocryphal" | "knowledgeapocryphal" | "mightapocryphal" | "secrecyapocryphal" | "travelapocryphal" | "waterapocryphal", {
         label: string;
         description: string;
     }>;
@@ -799,6 +815,7 @@ export declare const PF2ECONFIG: {
         consumable: string;
         "critical-fusion": string;
         cursed: string;
+        "deadly-d4": string;
         "deadly-d6": string;
         "deadly-d8": string;
         "deadly-2d8": string;
@@ -988,7 +1005,7 @@ export declare const PF2ECONFIG: {
         good: string;
         lawful: string;
     };
-    otherWeaponTags: Record<import("@item/weapon/types").OtherWeaponTag, string>;
+    otherWeaponTags: Record<import("@item/weapon/types.ts").OtherWeaponTag, string>;
     armorTraits: {
         adjusted: string;
         alchemical: string;
@@ -1087,6 +1104,7 @@ export declare const PF2ECONFIG: {
         fulu: string;
         gadget: string;
         grimoire: string;
+        "harrow-court": string;
         healing: string;
         incapacitation: string;
         incorporeal: string;
@@ -1107,6 +1125,7 @@ export declare const PF2ECONFIG: {
         portable: string;
         precious: string;
         prediction: string;
+        relic: string;
         revelation: string;
         saggorak: string;
         scrying: string;
@@ -1904,6 +1923,7 @@ export declare const PF2ECONFIG: {
         kami: string;
         kovintus: string;
         light: string;
+        lilu: string;
         locathah: string;
         mental: string;
         merfolk: string;
@@ -2094,6 +2114,7 @@ export declare const PF2ECONFIG: {
         kami: string;
         kovintus: string;
         light: string;
+        lilu: string;
         locathah: string;
         mental: string;
         merfolk: string;
@@ -2234,6 +2255,7 @@ export declare const PF2ECONFIG: {
         "reach-50": string;
         "reach-60": string;
         "reach-100": string;
+        "reach-200": string;
         "reach-1000": string;
         "reload-0": string;
         "reload-1": string;
@@ -2310,24 +2332,24 @@ export declare const PF2ECONFIG: {
         "range-increment-300": string;
         "range-increment-310": string;
         "range-increment-320": string;
-        abysium: string;
         adamantine: string;
-        "cold-iron": string;
         darkwood: string;
+        mithral: string;
+        orichalcum: string;
+        silver: string;
+        warpglass: string;
+        abysium: string;
+        "cold-iron": string;
         djezet: string;
         dragonhide: string;
         "grisantian-pelt": string;
         inubrix: string;
-        mithral: string;
         noqual: string;
-        orichalcum: string;
         peachwood: string;
         siccatite: string;
-        silver: string;
         "sisterstone-dusk": string;
         "sisterstone-scarlet": string;
         "sovereign-steel": string;
-        warpglass: string;
         adjusted: string;
         alchemical: string;
         agile: string;
@@ -2355,6 +2377,7 @@ export declare const PF2ECONFIG: {
         consumable: string;
         "critical-fusion": string;
         cursed: string;
+        "deadly-d4": string;
         "deadly-d6": string;
         "deadly-d8": string;
         "deadly-2d8": string;
@@ -2547,6 +2570,7 @@ export declare const PF2ECONFIG: {
     hazardTraits: {
         aberration: string;
         alchemical: string;
+        animal: string;
         aquatic: string;
         auditory: string;
         clockwork: string;
@@ -2645,6 +2669,7 @@ export declare const PF2ECONFIG: {
         "reach-1000": string;
         "reach-15": string;
         "reach-20": string;
+        "reach-200": string;
         "reach-25": string;
         "reach-30": string;
         "reach-40": string;
@@ -2700,6 +2725,7 @@ export declare const PF2ECONFIG: {
         sweep: string;
         sylph: string;
         talisman: string;
+        tandem: string;
         tattoo: string;
         tech: string;
         telepathy: string;
@@ -2930,6 +2956,7 @@ export declare const PF2ECONFIG: {
         "deadly-d12": string;
         "deadly-d6": string;
         "deadly-d8": string;
+        "deadly-d4": string;
         death: string;
         "deflecting-bludgeoning": string;
         "deflecting-physical-ranged": string;
@@ -2961,6 +2988,7 @@ export declare const PF2ECONFIG: {
         esoterica: string;
         evil: string;
         evocation: string;
+        evolution: string;
         expandable: string;
         exploration: string;
         extradimensional: string;
@@ -3173,6 +3201,130 @@ export declare const PF2ECONFIG: {
         tool: string;
         wand: string;
     };
+    identification: {
+        Identified: string;
+        Identify: string;
+        IdentifyAlchemyDCs: string;
+        IdentifyGenericDCs: string;
+        IdentifyMagicDCs: string;
+        IsIdentified: string;
+        MisidentifiedItem: string;
+        Misidentify: string;
+        MystificationStatus: string;
+        Mystify: string;
+        PostSkillsToChat: string;
+        PostSkillsToChatText: string;
+        TraitGMNote: string;
+        Unidentified: string;
+        UnidentifiedDescription: string;
+        UnidentifiedHint: string;
+        UnidentifiedItem: string;
+        UnidentifiedType: {
+            Amulet: string;
+            Anklets: string;
+            Armbands: string;
+            Backpack: string;
+            Belt: string;
+            Book: string;
+            Bracers: string;
+            Circlet: string;
+            Cloak: string;
+            Collar: string;
+            Epaulets: string;
+            Eyepiece: string;
+            Garment: string;
+            Gloves: string;
+            Headwear: string;
+            Horseshoes: string;
+            Liquid: string;
+            Mask: string;
+            Necklace: string;
+            Object: string;
+            Ring: string;
+            Saddle: string;
+            Shoes: string;
+            Substance: string;
+            Tool: string;
+        };
+    };
+    weaponGeneratedNames: {
+        FourProperties: string;
+        FourPropertiesMaterial: string;
+        Hint: string;
+        Material: string;
+        OneProperty: string;
+        OnePropertyMaterial: string;
+        Potency: string;
+        PotencyFourProperties: string;
+        PotencyFourPropertiesMaterial: string;
+        PotencyMaterial: string;
+        PotencyOneProperty: string;
+        PotencyOnePropertyMaterial: string;
+        PotencyStriking: string;
+        PotencyStrikingFourProperties: string;
+        PotencyStrikingFourPropertiesMaterial: string;
+        PotencyStrikingMaterial: string;
+        PotencyStrikingOneProperty: string;
+        PotencyStrikingOnePropertyMaterial: string;
+        PotencyStrikingThreeProperties: string;
+        PotencyStrikingThreePropertiesMaterial: string;
+        PotencyStrikingTwoProperties: string;
+        PotencyStrikingTwoPropertiesMaterial: string;
+        PotencyThreeProperties: string;
+        PotencyThreePropertiesMaterial: string;
+        PotencyTwoProperties: string;
+        PotencyTwoPropertiesMaterial: string;
+        Striking: string;
+        StrikingMaterial: string;
+        ThreeProperties: string;
+        ThreePropertiesMaterial: string;
+        TwoProperties: string;
+        TwoPropertiesMaterial: string;
+    };
+    ruleElement: {
+        ActiveEffectLike: string;
+        ActorTraits: string;
+        AdjustDegreeOfSuccess: string;
+        AdjustModifier: string;
+        AdjustStrike: string;
+        Aura: string;
+        BaseSpeed: string;
+        BattleForm: string;
+        ChoiceSet: string;
+        CraftingEntry: string;
+        CraftingFormula: string;
+        CreatureSize: string;
+        CriticalSpecialization: string;
+        DamageDice: string;
+        DexterityModifierCap: string;
+        EphemeralEffect: string;
+        FastHealing: string;
+        FixedProficiency: string;
+        FlatModifier: string;
+        GrantItem: string;
+        Immunity: string;
+        LoseHitPoints: string;
+        MarkToken: string;
+        MartialProficiency: string;
+        MultipleAttackPenalty: string;
+        Note: string;
+        Resistance: string;
+        RollOption: string;
+        RollTwice: string;
+        Sense: string;
+        Strike: string;
+        Striking: string;
+        SubstituteRoll: string;
+        TempHP: string;
+        TempHPShortLabel: string;
+        TokenEffectIcon: string;
+        TokenImage: string;
+        TokenLight: string;
+        TokenName: string;
+        Unrecognized: string;
+        Weakness: string;
+        WeaponPotency: string;
+    };
     preparationType: {
         prepared: string;
         spontaneous: string;
@@ -3212,7 +3364,7 @@ export declare const PF2ECONFIG: {
         1320: string;
         5280: string;
     };
-    alignments: Record<"LE" | "CE" | "LG" | "NG" | "CG" | "LN" | "N" | "CN" | "NE", string>;
+    alignments: Record<"CE" | "LG" | "NG" | "CG" | "LN" | "N" | "CN" | "LE" | "NE", string>;
     alignmentTraits: Record<"chaotic" | "evil" | "good" | "lawful", string>;
     attitude: {
         hostile: string;
@@ -3269,7 +3421,7 @@ export declare const PF2ECONFIG: {
         9: string;
         10: string;
     };
-    featCategories: Record<"class" | "curse" | "ancestry" | "ancestryfeature" | "classfeature" | "skill" | "general" | "bonus" | "pfsboon" | "deityboon", string>;
+    featCategories: Record<"curse" | "ancestry" | "ancestryfeature" | "class" | "classfeature" | "skill" | "general" | "bonus" | "pfsboon" | "deityboon", string>;
     actionTypes: {
         action: string;
         reaction: string;
@@ -3287,12 +3439,16 @@ export declare const PF2ECONFIG: {
         offensive: string;
     };
     frequencies: {
+        turn: string;
+        round: string;
         PT1M: string;
         PT10M: string;
         PT1H: string;
         PT24H: string;
         day: string;
         P1W: string;
+        P1M: string;
+        P1Y: string;
     };
     timeUnits: {
         rounds: string;
@@ -3318,7 +3474,7 @@ export declare const PF2ECONFIG: {
         prerequisite4: string;
         prerequisite5: string;
     };
-    senses: Record<"darkvision" | "echolocation" | "greaterDarkvision" | "lifesense" | "lowLightVision" | "motionsense" | "scent" | "seeInvisibility" | "spiritsense" | "tremorsense" | "wavesense", string>;
+    senses: Record<"darkvision" | "echolocation" | "greaterDarkvision" | "lifesense" | "lowLightVision" | "motionsense" | "scent" | "seeInvisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "wavesense", string>;
     senseAcuity: Record<string, string>;
     bulkTypes: {
         L: string;
@@ -3469,7 +3625,7 @@ export declare const PF2ECONFIG: {
         sonic: string;
         "spell-deflection": string;
         stunned: string;
-        stupefied: string;
+        stupefied: string; /** Non-detection- and attitude- related conditions added to the Token HUD */
         "swarm-attacks": string;
         "swarm-mind": string;
         transmutation: string;
@@ -3602,6 +3758,69 @@ export declare const PF2ECONFIG: {
         trip: string;
     };
     worldClock: {
+        AD: {
+            Era: string;
+        };
+        AR: {
+            Era: string;
+            Months: {
+                April: string;
+                August: string;
+                December: string;
+                February: string;
+                January: string;
+                July: string;
+                June: string;
+                March: string;
+                May: string;
+                November: string;
+                October: string;
+                September: string;
+            };
+            Weekdays: {
+                Friday: string;
+                Monday: string;
+                Saturday: string;
+                Sunday: string;
+                Thursday: string;
+                Tuesday: string;
+                Wednesday: string;
+            };
+        };
+        Button: {
+            AddOneDay: string;
+            AddOneHour: string;
+            AddOneMinute: string;
+            AddOneRound: string;
+            AddOneWeek: string;
+            AddTenMinutes: string;
+            Advance: string;
+            Retract: string;
+            TimeOfDay: {
+                Advance: {
+                    Dawn: string;
+                    Dusk: string;
+                    Midnight: string;
+                    Noon: string;
+                };
+                Retract: {
+                    Dawn: string;
+                    Dusk: string;
+                    Midnight: string;
+                    Noon: string;
+                };
+            };
+        };
+        CE: {
+            Era: string;
+        };
+        Date: string;
+        IC: {
+            Era: string;
+        };
+        Placeholder: string;
+        Title: string;
+    } & {
         AR: {
             yearOffset: number;
         };
@@ -3618,62 +3837,62 @@ export declare const PF2ECONFIG: {
     runes: {
         weapon: {
             property: {
-                anarchic: import("@item/physical/runes").WeaponPropertyRuneData;
-                ancestralEchoing: import("@item/physical/runes").WeaponPropertyRuneData;
-                anchoring: import("@item/physical/runes").WeaponPropertyRuneData;
-                axiomatic: import("@item/physical/runes").WeaponPropertyRuneData;
-                bane: import("@item/physical/runes").WeaponPropertyRuneData;
-                bloodbane: import("@item/physical/runes").WeaponPropertyRuneData;
-                bloodthirsty: import("@item/physical/runes").WeaponPropertyRuneData;
-                brilliant: import("@item/physical/runes").WeaponPropertyRuneData;
-                conducting: import("@item/physical/runes").WeaponPropertyRuneData;
-                corrosive: import("@item/physical/runes").WeaponPropertyRuneData;
-                crushing: import("@item/physical/runes").WeaponPropertyRuneData;
-                cunning: import("@item/physical/runes").WeaponPropertyRuneData;
-                dancing: import("@item/physical/runes").WeaponPropertyRuneData;
-                demolishing: import("@item/physical/runes").WeaponPropertyRuneData;
-                disrupting: import("@item/physical/runes").WeaponPropertyRuneData;
-                energizing: import("@item/physical/runes").WeaponPropertyRuneData;
-                extending: import("@item/physical/runes").WeaponPropertyRuneData;
-                fanged: import("@item/physical/runes").WeaponPropertyRuneData;
-                fearsome: import("@item/physical/runes").WeaponPropertyRuneData;
-                flaming: import("@item/physical/runes").WeaponPropertyRuneData;
-                frost: import("@item/physical/runes").WeaponPropertyRuneData;
-                ghostTouch: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterAnchoring: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterBloodbane: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterBrilliant: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterCorrosive: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterCrushing: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterDisrupting: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterExtending: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterFanged: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterFearsome: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterFlaming: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterFrost: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterHauling: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterImpactful: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterShock: import("@item/physical/runes").WeaponPropertyRuneData;
-                greaterThundering: import("@item/physical/runes").WeaponPropertyRuneData;
-                grievous: import("@item/physical/runes").WeaponPropertyRuneData;
-                hauling: import("@item/physical/runes").WeaponPropertyRuneData;
-                holy: import("@item/physical/runes").WeaponPropertyRuneData;
-                hopeful: import("@item/physical/runes").WeaponPropertyRuneData;
-                impactful: import("@item/physical/runes").WeaponPropertyRuneData;
-                keen: import("@item/physical/runes").WeaponPropertyRuneData;
-                kinWarding: import("@item/physical/runes").WeaponPropertyRuneData;
-                majorFanged: import("@item/physical/runes").WeaponPropertyRuneData;
-                pacifying: import("@item/physical/runes").WeaponPropertyRuneData;
-                returning: import("@item/physical/runes").WeaponPropertyRuneData;
-                serrating: import("@item/physical/runes").WeaponPropertyRuneData;
-                shifting: import("@item/physical/runes").WeaponPropertyRuneData;
-                shock: import("@item/physical/runes").WeaponPropertyRuneData;
-                speed: import("@item/physical/runes").WeaponPropertyRuneData;
-                spellStoring: import("@item/physical/runes").WeaponPropertyRuneData;
-                thundering: import("@item/physical/runes").WeaponPropertyRuneData;
-                unholy: import("@item/physical/runes").WeaponPropertyRuneData;
-                vorpal: import("@item/physical/runes").WeaponPropertyRuneData;
-                wounding: import("@item/physical/runes").WeaponPropertyRuneData;
+                vorpal: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                anarchic: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                ancestralEchoing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                anchoring: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                axiomatic: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                bane: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                bloodbane: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                bloodthirsty: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                brilliant: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                conducting: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                corrosive: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                crushing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                cunning: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                dancing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                demolishing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                disrupting: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                energizing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                extending: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                fanged: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                fearsome: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                flaming: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                frost: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                ghostTouch: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterAnchoring: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterBloodbane: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterBrilliant: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterCorrosive: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterCrushing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterDisrupting: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterExtending: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterFanged: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterFearsome: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterFlaming: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterFrost: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterHauling: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterImpactful: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterShock: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterThundering: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                grievous: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                hauling: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                holy: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                hopeful: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                impactful: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                keen: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                kinWarding: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                majorFanged: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                pacifying: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                returning: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                serrating: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                shifting: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                shock: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                speed: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                spellStoring: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                thundering: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                unholy: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                wounding: import("@item/physical/runes.ts").WeaponPropertyRuneData;
             };
         };
     };
@@ -4433,6 +4652,7 @@ export declare const PF2ECONFIG: {
                 kami: string;
                 kovintus: string;
                 light: string;
+                lilu: string;
                 locathah: string;
                 mental: string;
                 merfolk: string;
@@ -4590,6 +4810,7 @@ export declare const PF2ECONFIG: {
                 fulu: string;
                 gadget: string;
                 grimoire: string;
+                "harrow-court": string;
                 healing: string;
                 incapacitation: string;
                 incorporeal: string;
@@ -4610,6 +4831,7 @@ export declare const PF2ECONFIG: {
                 portable: string;
                 precious: string;
                 prediction: string;
+                relic: string;
                 revelation: string;
                 saggorak: string;
                 scrying: string;
@@ -4736,6 +4958,7 @@ export declare const PF2ECONFIG: {
                 fulu: string;
                 gadget: string;
                 grimoire: string;
+                "harrow-court": string;
                 healing: string;
                 incapacitation: string;
                 incorporeal: string;
@@ -4756,6 +4979,7 @@ export declare const PF2ECONFIG: {
                 portable: string;
                 precious: string;
                 prediction: string;
+                relic: string;
                 revelation: string;
                 saggorak: string;
                 scrying: string;
@@ -4975,6 +5199,7 @@ export declare const PF2ECONFIG: {
                 fulu: string;
                 gadget: string;
                 grimoire: string;
+                "harrow-court": string;
                 healing: string;
                 incapacitation: string;
                 incorporeal: string;
@@ -4995,6 +5220,7 @@ export declare const PF2ECONFIG: {
                 portable: string;
                 precious: string;
                 prediction: string;
+                relic: string;
                 revelation: string;
                 saggorak: string;
                 scrying: string;
@@ -5509,6 +5735,7 @@ export declare const PF2ECONFIG: {
                 "reach-50": string;
                 "reach-60": string;
                 "reach-100": string;
+                "reach-200": string;
                 "reach-1000": string;
                 "reload-0": string;
                 "reload-1": string;
@@ -5585,24 +5812,24 @@ export declare const PF2ECONFIG: {
                 "range-increment-300": string;
                 "range-increment-310": string;
                 "range-increment-320": string;
-                abysium: string;
                 adamantine: string;
-                "cold-iron": string;
                 darkwood: string;
+                mithral: string;
+                orichalcum: string;
+                silver: string;
+                warpglass: string;
+                abysium: string;
+                "cold-iron": string;
                 djezet: string;
                 dragonhide: string;
                 "grisantian-pelt": string;
                 inubrix: string;
-                mithral: string;
                 noqual: string;
-                orichalcum: string;
                 peachwood: string;
                 siccatite: string;
-                silver: string;
                 "sisterstone-dusk": string;
                 "sisterstone-scarlet": string;
                 "sovereign-steel": string;
-                warpglass: string;
                 adjusted: string;
                 alchemical: string;
                 agile: string;
@@ -5630,6 +5857,7 @@ export declare const PF2ECONFIG: {
                 consumable: string;
                 "critical-fusion": string;
                 cursed: string;
+                "deadly-d4": string;
                 "deadly-d6": string;
                 "deadly-d8": string;
                 "deadly-2d8": string;
@@ -5956,6 +6184,7 @@ export declare const PF2ECONFIG: {
                 consumable: string;
                 "critical-fusion": string;
                 cursed: string;
+                "deadly-d4": string;
                 "deadly-d6": string;
                 "deadly-d8": string;
                 "deadly-2d8": string;

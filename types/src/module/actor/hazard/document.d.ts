@@ -1,16 +1,21 @@
 import { ActorPF2e } from "@actor";
-import { SaveType } from "@actor/types";
+import { SaveType } from "@actor/types.ts";
 import { ConditionPF2e } from "@item";
-import { ItemType } from "@item/data";
-import { Rarity } from "@module/data";
-import { TokenDocumentPF2e } from "@scene";
-import { DamageType } from "@system/damage";
-import { Statistic } from "@system/statistic";
-import { HazardSource, HazardSystemData } from "./data";
+import { ItemType } from "@item/data/index.ts";
+import { Rarity } from "@module/data.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { DamageType } from "@system/damage/index.ts";
+import { Statistic } from "@system/statistic/index.ts";
+import { HazardSource, HazardSystemData } from "./data.ts";
 declare class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
+    skills: {
+        stealth: Statistic;
+    };
     get allowedItemTypes(): (ItemType | "physical")[];
     get rarity(): Rarity;
     get isComplex(): boolean;
+    get hardness(): number;
+    get hasDefenses(): boolean;
     /** Minimal check since the disabled status of a hazard isn't logged */
     get canAttack(): boolean;
     get emitsSound(): boolean;
@@ -21,7 +26,6 @@ declare class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumen
     protected prepareSaves(): {
         [K in SaveType]?: Statistic;
     };
-    private prepareInitiative;
 }
 interface HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: HazardSource;

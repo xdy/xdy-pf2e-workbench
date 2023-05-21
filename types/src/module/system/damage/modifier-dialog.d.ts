@@ -1,14 +1,15 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ModifierPF2e, DamageDicePF2e } from "@actor/modifiers";
-import { DamageCategoryUnique, DamageRollContext, DamageType } from "./types";
+import { ModifierPF2e, DamageDicePF2e } from "@actor/modifiers.ts";
+import { BaseDamageData, DamageCategoryUnique, DamageFormulaData, DamageRollContext, DamageType } from "./types.ts";
 /**
  * Dialog for excluding certain modifiers before rolling damage.
  * @category Other
  */
 declare class DamageModifierDialog extends Application {
     #private;
+    base: BaseDamageData[];
     /** The modifiers which are being edited. */
     modifiers: ModifierPF2e[];
     /** The damage dice which are being edited. */
@@ -35,9 +36,7 @@ declare class DamageModifierDialog extends Application {
     protected _injectHTML($html: JQuery<HTMLElement>): void;
 }
 interface DamageDialogParams {
-    modifiers: ModifierPF2e[];
-    dice: DamageDicePF2e[];
-    baseDamageType: DamageType;
+    damage: DamageFormulaData;
     context: Partial<DamageRollContext>;
 }
 interface BaseData {
@@ -71,5 +70,6 @@ interface DamageDialogData {
     damageSubtypes: Pick<ConfigPF2e["PF2E"]["damageCategories"], DamageCategoryUnique>;
     rollModes: Record<RollMode, string>;
     rollMode: RollMode | "roll" | undefined;
+    formula: string;
 }
 export { DamageModifierDialog };

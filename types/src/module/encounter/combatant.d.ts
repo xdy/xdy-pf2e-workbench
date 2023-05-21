@@ -1,6 +1,6 @@
-import { SkillLongForm } from "@actor/types";
-import { TokenDocumentPF2e } from "@scene";
-import { EncounterPF2e } from ".";
+import { SkillLongForm } from "@actor/types.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { EncounterPF2e } from "./index.ts";
 import { ActorPF2e } from "@actor";
 declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e | null, TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Combatant<TParent, TTokenDocument> {
     get encounter(): TParent;
@@ -13,14 +13,19 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
         than: RolledCombatant<NonNullable<TParent>>;
     }): boolean;
     /** Get the active Combatant for the given actor, creating one if necessary */
-    static fromActor(actor: ActorPF2e, render?: boolean): Promise<CombatantPF2e<EncounterPF2e> | null>;
+    static fromActor(actor: ActorPF2e, render?: boolean, options?: {
+        combat?: EncounterPF2e;
+    }): Promise<CombatantPF2e<EncounterPF2e> | null>;
+    static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], context?: DocumentModificationContext<TDocument["parent"]>): Promise<TDocument[]>;
     startTurn(): Promise<void>;
     endTurn(options: {
         round: number;
     }): Promise<void>;
     prepareBaseData(): void;
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
-    toggleDefeated(): Promise<void>;
+    toggleDefeated({ to }?: {
+        to?: boolean | undefined;
+    }): Promise<void>;
     /**
      * Hide the tracked resource if the combatant represents a non-player-owned actor
      * @todo Make this a configurable with a metagame-knowledge setting

@@ -1,9 +1,9 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { SelectableTagField } from ".";
+import { SelectableTagField } from "./index.ts";
 interface TagSelectorOptions extends FormApplicationOptions {
     allowCustom?: boolean;
     /** Is the target data property a flat array rather than a values object? */

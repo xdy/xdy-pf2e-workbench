@@ -1,5 +1,5 @@
-import { SpellOverlay, SpellOverlayType, SpellSource } from "./data";
-import { SpellPF2e } from ".";
+import { SpellOverlay, SpellOverlayType, SpellSource } from "./data.ts";
+import { SpellPF2e } from "./index.ts";
 import { ActorPF2e } from "@actor";
 declare class SpellOverlayCollection extends Collection<SpellOverlay> {
     readonly spell: SpellPF2e;

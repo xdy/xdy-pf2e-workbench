@@ -1,9 +1,9 @@
 import { ActorPF2e, CharacterPF2e } from "@actor";
-import { CreatureTrait } from "@actor/creature/types";
-import { AbilityString } from "@actor/types";
+import { CreatureTrait } from "@actor/creature/types.ts";
+import { AbilityString } from "@actor/types.ts";
 import { ABCItemPF2e, FeatPF2e } from "@item";
-import { Size } from "@module/data";
-import { AncestrySource, AncestrySystemData } from "./data";
+import { Size } from "@module/data.ts";
+import { AncestrySource, AncestrySystemData } from "./data.ts";
 declare class AncestryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ABCItemPF2e<TParent> {
     get traits(): Set<CreatureTrait>;
     get hitPoints(): number;

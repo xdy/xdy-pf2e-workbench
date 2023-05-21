@@ -1,7 +1,7 @@
 import { ActorPF2e } from "@actor";
-import { ItemSummaryData } from "@item/data";
-import { PhysicalItemHitPoints, PhysicalItemPF2e } from "@item/physical";
-import { ArmorCategory, ArmorGroup, ArmorSource, ArmorSystemData, BaseArmorType } from ".";
+import { ItemSummaryData } from "@item/data/index.ts";
+import { PhysicalItemHitPoints, PhysicalItemPF2e } from "@item/physical/index.ts";
+import { ArmorCategory, ArmorGroup, ArmorSource, ArmorSystemData, BaseArmorType } from "./index.ts";
 declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     isStackableWith(item: PhysicalItemPF2e<TParent>): boolean;
     get isShield(): boolean;

@@ -1,11 +1,13 @@
-import { ActorDimensions } from "@actor/types";
-import { ItemType } from "@item/data";
-import { UserPF2e } from "@module/user";
-import { TokenDocumentPF2e } from "@scene";
-import { Statistic } from "@system/statistic";
-import { ActorPF2e, HitPointsSummary } from "../base";
-import { TokenDimensions, VehicleSource, VehicleSystemData } from "./data";
+import { ActorDimensions } from "@actor/types.ts";
+import { ItemType } from "@item/data/index.ts";
+import { UserPF2e } from "@module/user/index.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { ArmorStatistic } from "@system/statistic/armor-class.ts";
+import { Statistic, StatisticDifficultyClass } from "@system/statistic/index.ts";
+import { ActorPF2e, HitPointsSummary } from "../base.ts";
+import { TokenDimensions, VehicleSource, VehicleSystemData } from "./data.ts";
 declare class VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
+    armorClass: StatisticDifficultyClass<ArmorStatistic>;
     get allowedItemTypes(): (ItemType | "physical")[];
     /** Vehicle dimensions are specified for all three axes and usually do not form cubes */
     get dimensions(): ActorDimensions;

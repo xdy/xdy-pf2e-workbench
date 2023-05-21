@@ -1,11 +1,11 @@
-import { DamageDiceParameters, DamageDicePF2e, ModifierAdjustment } from "@actor/modifiers";
-import { ResistanceType } from "@actor/types";
+import { DamageDiceParameters, DamageDicePF2e, ModifierAdjustment } from "@actor/modifiers.ts";
+import { ResistanceType } from "@actor/types.ts";
 import { ArmorPF2e, WeaponPF2e } from "@item";
-import type { ResilientRuneType } from "@item/armor/types";
-import type { OtherWeaponTag, StrikingRuneType, WeaponPropertyRuneType, WeaponTrait } from "@item/weapon/types";
-import { OneToFour, OneToThree, Rarity, ZeroToFour, ZeroToThree } from "@module/data";
-import { RollNoteSource } from "@module/notes";
-import { RawPredicate } from "@system/predication";
+import type { ResilientRuneType } from "@item/armor/types.ts";
+import type { OtherWeaponTag, StrikingRuneType, WeaponPropertyRuneType, WeaponTrait } from "@item/weapon/types.ts";
+import { OneToFour, OneToThree, Rarity, ZeroToFour, ZeroToThree } from "@module/data.ts";
+import { RollNoteSource } from "@module/notes.ts";
+import { RawPredicate } from "@system/predication.ts";
 declare function getPropertySlots(item: WeaponPF2e | ArmorPF2e): ZeroToFour;
 declare function getPropertyRunes(item: WeaponPF2e | ArmorPF2e, slots: number): string[];
 declare function getStrikingDice(itemData: {

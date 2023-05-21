@@ -1,8 +1,8 @@
 import { ItemPF2e } from "@item";
-import { UserVisibility } from "@scripts/ui/user-visibility";
-import { DegreeOfSuccessString } from "@system/degree-of-success";
-import { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
-import { BracketedValue, RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./";
+import { UserVisibility } from "@scripts/ui/user-visibility.ts";
+import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
+import type { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import { BracketedValue, RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 import { ActorPF2e } from "@actor";
 declare class RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema> {
     #private;

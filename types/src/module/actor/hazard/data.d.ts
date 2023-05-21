@@ -1,10 +1,11 @@
-import { SaveData } from "@actor/creature/data";
-import { ActorSystemData, ActorSystemSource, ActorAttributes, BaseActorSourcePF2e, ActorTraitsSource, ActorAttributesSource, ActorHitPoints, InitiativeData } from "@actor/data/base";
-import { ActorSizePF2e } from "@actor/data/size";
-import { NPCStrike } from "@actor/npc";
-import { SaveType } from "@actor/types";
-import { Rarity, Size } from "@module/data";
-import { HazardTrait } from "./types";
+import { SaveData } from "@actor/creature/data.ts";
+import { ActorSystemData, ActorSystemSource, ActorAttributes, BaseActorSourcePF2e, ActorTraitsSource, ActorAttributesSource, ActorHitPoints } from "@actor/data/base.ts";
+import { ActorSizePF2e } from "@actor/data/size.ts";
+import { NPCStrike } from "@actor/npc/index.ts";
+import { SaveType } from "@actor/types.ts";
+import { Rarity, Size } from "@module/data.ts";
+import { HazardTrait } from "./types.ts";
+import { InitiativeTraceData } from "@actor/initiative.ts";
 /** The stored source data of a hazard actor */
 type HazardSource = BaseActorSourcePF2e<"hazard", HazardSystemSource>;
 /** The raw information contained within the actor data object for hazards. */
@@ -57,7 +58,7 @@ interface HazardAttributes extends Omit<HazardAttributesSource, "initiative" | "
     hasHealth: boolean;
     hp: HazardHitPoints;
     hardness: number;
-    initiative?: HazardInitiativeData;
+    initiative?: InitiativeTraceData;
     stealth: {
         value: number | null;
         details: string;
@@ -69,9 +70,6 @@ interface HazardAttributes extends Omit<HazardAttributesSource, "initiative" | "
     emitsSound: boolean | "encounter";
     shield?: never;
 }
-interface HazardInitiativeData extends InitiativeData {
-    statistic: "stealth";
-}
 interface HazardDetailsSource {
     isComplex: boolean;
     level: {
@@ -81,6 +79,11 @@ interface HazardDetailsSource {
     description?: string;
     reset?: string;
     routine?: string;
+    /** Book source, along with author */
+    source: {
+        value: string;
+        author: string;
+    };
 }
 interface HazardDetails extends HazardDetailsSource {
     alliance: null;

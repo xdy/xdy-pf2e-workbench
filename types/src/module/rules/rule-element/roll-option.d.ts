@@ -1,19 +1,15 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { PredicateField } from "@system/schema-data-fields";
-import { ArrayField, BooleanField, ModelPropsFromSchema, SchemaField, StringField } from "types/foundry/common/data/fields.mjs";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from ".";
+import { PredicateField } from "@system/schema-data-fields.ts";
+import type { ArrayField, BooleanField, ModelPropsFromSchema, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import { ResolvableValueField } from "./data.ts";
 /**
  * Set a roll option at a specificed domain
  * @category RuleElement
  */
 declare class RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema> {
     #private;
-    /**
-     * The value of the roll option: either a boolean or a string resolves to a boolean
-     * If omitted, it defaults to `true` unless also `togglable`, in which case to `false`.
-     */
-    private value;
     /**
      * Whether this roll option can be toggled by the user on an actor sheet: "totm" indicates it will only be present
      * if the Theather of the Mind Toggles setting is enabled
@@ -24,7 +20,7 @@ declare class RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema> {
     protected _validateModel(source: SourceFromSchema<RollOptionSchema>): void;
     onApplyActiveEffects(): void;
     /** Force false totm toggleable roll options if the totmToggles setting is disabled */
-    resolveValue(): boolean;
+    protected resolveValue(): boolean;
     /**
      * Toggle the provided roll option (swapping it from true to false or vice versa).
      * @returns the new value if successful or otherwise `null`
@@ -39,6 +35,7 @@ declare class RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema> {
     afterRoll({ domains, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void>;
 }
 interface RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema>, ModelPropsFromSchema<RollOptionSchema> {
+    value: boolean | string;
 }
 type RollOptionSchema = RuleElementSchema & {
     scope: StringField<string, string, false, false, true>;
@@ -46,6 +43,11 @@ type RollOptionSchema = RuleElementSchema & {
     option: StringField<string, string, true, false, false>;
     /** Suboptions for a toggle, appended to the option string */
     suboptions: ArrayField<SchemaField<SuboptionData, SourceFromSchema<SuboptionData>, SourceFromSchema<SuboptionData>, true, false, true>>;
+    /**
+     * The value of the roll option: either a boolean or a string resolves to a boolean If omitted, it defaults to
+     * `true` unless also `togglable`, in which case to `false`.
+     */
+    value: ResolvableValueField<false, false, false>;
     /** An optional predicate to determine whether the toggle is interactable by the user */
     disabledIf: PredicateField<false, false, false>;
     /** The value of the roll option if its toggle is disabled: null indicates the pre-disabled value is preserved */

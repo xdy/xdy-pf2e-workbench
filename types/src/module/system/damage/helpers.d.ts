@@ -1,6 +1,6 @@
-import { DamageInstance, DamageRoll } from "./roll";
-import { ArithmeticExpression, Grouping } from "./terms";
-import { DamageCategory, DamageDieSize, DamageType } from "./types";
+import { DamageInstance, DamageRoll } from "./roll.ts";
+import { ArithmeticExpression, Grouping } from "./terms.ts";
+import { DamageCategory, DamageDieSize, DamageType } from "./types.ts";
 declare function nextDamageDieSize(next: {
     upgrade: DamageDieSize;
 }): DamageDieSize;
@@ -12,9 +12,9 @@ declare const DamageCategorization: {
     /** Map a damage type to its corresponding damage category, if any. */
     readonly fromDamageType: (damageType: DamageType) => DamageCategory | null;
     /** Get a set of all damage categories (both base and custom). */
-    readonly allCategories: () => Set<"persistent" | "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "precision" | "splash" | "energy" | "physical" | "alignment" | null>;
+    readonly allCategories: () => Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "warpglass" | "precision" | "splash" | "abysium" | "cold-iron" | "djezet" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "persistent" | "alignment" | null>;
     /** Get a set of all of the base rule damage types. */
-    readonly baseCategories: () => Set<"persistent" | "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "precision" | "splash" | "energy" | "physical" | "alignment" | null>;
+    readonly baseCategories: () => Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "warpglass" | "precision" | "splash" | "abysium" | "cold-iron" | "djezet" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "persistent" | "alignment" | null>;
     /** Map a damage category to the set of damage types in it. */
     readonly toDamageTypes: (category: string) => Set<string>;
 };
@@ -24,12 +24,12 @@ declare function isSystemDamageTerm(term: RollTerm): term is ArithmeticExpressio
 declare function deepFindTerms(term: RollTerm, { flavor }: {
     flavor: string;
 }): RollTerm[];
-/** A check for whether a string is a well-formed damage formula and most likely intended to be one */
-declare function looksLikeDamageFormula(formula: string): boolean;
+/** Check whether a roll has dice terms associated with a damage roll */
+declare function looksLikeDamageRoll(roll: Roll): boolean;
 /** Create a representative Font Awesome icon from a damage roll */
 declare function damageDiceIcon(roll: DamageRoll | DamageInstance, { fixedWidth }?: {
     fixedWidth?: boolean | undefined;
 }): HTMLElement;
 /** Indicate in a term's options that it was multiplied by 2 or 3 */
 declare function markAsCrit(term: RollTerm, multiplier: 2 | 3): void;
-export { DamageCategorization, damageDiceIcon, deepFindTerms, isSystemDamageTerm, looksLikeDamageFormula, markAsCrit, nextDamageDieSize, renderComponentDamage, };
+export { DamageCategorization, damageDiceIcon, deepFindTerms, isSystemDamageTerm, looksLikeDamageRoll, markAsCrit, nextDamageDieSize, renderComponentDamage, };

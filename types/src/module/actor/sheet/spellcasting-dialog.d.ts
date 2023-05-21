@@ -1,7 +1,7 @@
 import { ActorPF2e } from "@actor";
-import { ClassDCData } from "@actor/character/data";
+import { ClassDCData } from "@actor/character/data.ts";
 import { SpellcastingEntryPF2e } from "@item";
-import { SpellcastingEntrySystemSource } from "@item/spellcasting-entry/data";
+import { SpellcastingEntrySystemSource } from "@item/spellcasting-entry/data.ts";
 /** Dialog to create or edit spellcasting entries. It works on a clone of spellcasting entry, but will not persist unless the changes are accepted */
 declare class SpellcastingCreateAndEditDialog extends FormApplication<SpellcastingEntryPF2e<ActorPF2e>> {
     #private;

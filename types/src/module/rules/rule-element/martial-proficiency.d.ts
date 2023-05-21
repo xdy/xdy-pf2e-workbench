@@ -1,11 +1,11 @@
-import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from ".";
 import { ActorPF2e, CharacterPF2e } from "@actor";
-import { MartialProficiency } from "@actor/character/data";
-import { ActorType } from "@actor/data";
+import { MartialProficiency } from "@actor/character/data.ts";
+import { ActorType } from "@actor/data/index.ts";
 import { ItemPF2e } from "@item";
-import { ProficiencyRank } from "@item/data";
-import { WeaponCategory } from "@item/weapon/types";
-import { PredicatePF2e, RawPredicate } from "@system/predication";
+import { ProficiencyRank } from "@item/data/index.ts";
+import { WeaponCategory } from "@item/weapon/types.ts";
+import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
+import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
 declare class MartialProficiencyRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
     /** Predication test for whether a weapon matches this proficiency */

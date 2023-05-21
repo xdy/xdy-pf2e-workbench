@@ -1,4 +1,4 @@
-import { ClientBaseCards } from "./client-base-mixes.mjs";
+import type { ClientBaseCards } from "./client-base-mixes.d.ts";
 
 declare global {
     /**

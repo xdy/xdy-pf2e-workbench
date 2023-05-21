@@ -1,8 +1,7 @@
-import { TokenDocumentPF2e } from "@module/scene";
-import { TokenLayerPF2e } from "..";
-import { HearingSource } from "../perception/hearing-source";
-import { AuraRenderers } from "./aura";
-import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { TokenLayerPF2e } from "../index.ts";
+import { HearingSource } from "../perception/hearing-source.ts";
+import { AuraRenderers } from "./aura/index.ts";
 declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
@@ -86,13 +85,6 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
 }
 interface TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
     get layer(): TokenLayerPF2e<this>;
-    icon?: TokenImage;
-    toggleCombat(state?: boolean, combat?: EncounterPF2e | null, options?: {
-        token?: TokenPF2e | null;
-    }): Promise<CombatantPF2e<EncounterPF2e>[]>;
-}
-interface TokenImage extends PIXI.Sprite {
-    src?: VideoFilePath;
 }
 type NumericFloatyEffect = {
     name: string;

@@ -1,5 +1,4 @@
-import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
+import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
 /** The size property of creatures and equipment */
 declare const SIZES: readonly ["tiny", "sm", "med", "lg", "huge", "grg"];
 declare const SIZE_SLUGS: readonly ["tiny", "small", "medium", "large", "huge", "gargantuan"];
@@ -57,7 +56,7 @@ interface NewDocumentSchemaRecord {
 interface MigratedDocumentSchemaRecord {
     version: number;
     lastMigration: {
-        datetime: string;
+        datetime: string | null;
         version: {
             schema: number | null;
             system?: string;

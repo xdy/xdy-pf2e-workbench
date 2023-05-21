@@ -1,5 +1,5 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 export declare class VariantRulesSettings extends FormApplication {
     static get defaultOptions(): FormApplicationOptions;

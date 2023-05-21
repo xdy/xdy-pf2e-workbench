@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Convert object paths of weapon and spell resolvables with <V10 `data` properties to use `system` */
 export declare class Migration787ResolvablesToSystem extends MigrationBase {
     static version: number;

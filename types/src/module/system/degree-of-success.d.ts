@@ -1,9 +1,9 @@
-import { StatisticModifier } from "@actor/modifiers";
-import { DCSlug } from "@actor/types";
-import { ZeroToThree } from "@module/data";
-import { CheckRoll } from "./check";
-import { PredicatePF2e } from "./predication";
-import { StatisticDifficultyClass } from "./statistic";
+import { StatisticModifier } from "@actor/modifiers.ts";
+import { DCSlug } from "@actor/types.ts";
+import { ZeroToThree } from "@module/data.ts";
+import { CheckRoll } from "./check/roll.ts";
+import { PredicatePF2e } from "./predication.ts";
+import { StatisticDifficultyClass } from "./statistic/index.ts";
 /** Get the degree of success from a roll and a difficulty class */
 declare class DegreeOfSuccess {
     #private;
@@ -37,6 +37,10 @@ declare const DEGREE_ADJUSTMENT_AMOUNTS: {
     readonly LOWER: -1;
     readonly INCREASE: 1;
     readonly INCREASE_BY_TWO: 2;
+    readonly TO_CRITICAL_FAILURE: "criticalFailure";
+    readonly TO_FAILURE: "failure";
+    readonly TO_SUCCESS: "success";
+    readonly TO_CRITICAL_SUCCESS: "criticalSuccess";
 };
 type DegreeAdjustmentAmount = (typeof DEGREE_ADJUSTMENT_AMOUNTS)[keyof typeof DEGREE_ADJUSTMENT_AMOUNTS];
 type DegreeAdjustmentsRecord = {

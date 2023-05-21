@@ -1,6 +1,6 @@
-import { ArrayField, BooleanField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
-import { RuleElementPF2e, RuleElementSchema } from "./";
-import { ItemAlterationField } from "./alter-item";
+import type { ArrayField, BooleanField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import { ItemAlterationField } from "./alter-item/index.ts";
+import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
 /** An effect that applies ephemerally during a single action, such as a strike */
 declare class EphemeralEffectRuleElement extends RuleElementPF2e<EphemeralEffectSchema> {
     #private;

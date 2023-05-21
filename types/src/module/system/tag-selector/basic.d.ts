@@ -1,10 +1,10 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor/index";
-import { ItemPF2e } from "@item/index";
-import { BaseTagSelector } from "./base";
-import { SelectableTagField, TagSelectorOptions } from ".";
+import { ActorPF2e } from "@actor";
+import { ItemPF2e } from "@item";
+import { BaseTagSelector } from "./base.ts";
+import { SelectableTagField, TagSelectorOptions } from "./index.ts";
 export interface BasicSelectorOptions extends TagSelectorOptions {
     objectProperty: string;
     configTypes: SelectableTagField[];

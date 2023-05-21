@@ -1,10 +1,11 @@
 import { ActorPF2e } from "@actor";
+import { AbilityString } from "@actor/types.ts";
 import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
-import { ItemSummaryData } from "@item/data";
-import { CoinsPF2e, IdentificationStatus, MystifiedData } from "@item/physical";
-import { UserPF2e } from "@module/user";
-import { WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponSource, WeaponSystemData } from "./data";
-import { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types";
+import { ItemSummaryData } from "@item/data/index.ts";
+import { CoinsPF2e, IdentificationStatus, MystifiedData } from "@item/physical/index.ts";
+import { UserPF2e } from "@module/user/index.ts";
+import type { WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponSource, WeaponSystemData } from "./data.ts";
+import type { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types.ts";
 declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     /** Given this weapon is an alternative usage, whether it is melee or thrown */
     altUsageType: "melee" | "thrown" | null;
@@ -13,6 +14,8 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     get baseType(): BaseWeaponType | null;
     get group(): WeaponGroup | null;
     get category(): WeaponCategory;
+    /** The default ability used in attack rolls */
+    get defaultAbility(): AbilityString;
     get hands(): "0" | "1" | "1+" | "2";
     /** The range increment of this weapon, or null if a melee weapon */
     get rangeIncrement(): WeaponRangeIncrement | null;

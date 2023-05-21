@@ -1,4 +1,4 @@
-import { ClientBaseTableResult } from "./client-base-mixes.mjs";
+import type { ClientBaseTableResult } from "./client-base-mixes.d.ts";
 
 declare global {
     /**

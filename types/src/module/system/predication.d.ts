@@ -14,8 +14,6 @@ declare class PredicatePF2e extends Array<PredicateStatement> {
     static isArray(statements: unknown): statements is PredicateStatement[];
     /** Test if the given predicate passes for the given list of options. */
     static test(predicate: PredicateStatement[] | undefined, options: Set<string> | string[]): boolean;
-    /** Create a predicate from unknown data, with deprecation support for legacy objects */
-    static create(data: unknown, warn?: boolean): PredicatePF2e;
     /** Test this predicate against a domain of discourse */
     test(options: Set<string> | string[]): boolean;
     toObject(): RawPredicate;
@@ -51,13 +49,6 @@ declare class StatementValidator {
         if?: unknown;
         then?: unknown;
     }): statement is Conditional;
-}
-declare function convertLegacyData(predicate: OldRawPredicate): RawPredicate;
-interface OldRawPredicate {
-    label?: unknown;
-    all?: PredicateStatement[];
-    any?: PredicateStatement[];
-    not?: PredicateStatement[];
 }
 type EqualTo = {
     eq: [string, string | number];
@@ -98,4 +89,4 @@ type Conditional = {
 type CompoundStatement = Conjunction | Disjunction | AlternativeDenial | JointDenial | Negation | Conditional;
 type PredicateStatement = Atom | CompoundStatement;
 type RawPredicate = PredicateStatement[];
-export { PredicatePF2e, PredicateStatement, RawPredicate, StatementValidator, convertLegacyData };
+export { PredicatePF2e, PredicateStatement, RawPredicate, StatementValidator };

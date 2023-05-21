@@ -1,8 +1,8 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { FeatPF2e } from "@item/feat";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/sheet";
+import { FeatPF2e } from "@item/feat/document.ts";
+import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/sheet/index.ts";
 declare class FeatSheetPF2e extends ItemSheetPF2e<FeatPF2e> {
     get validTraits(): Record<string, string>;
     getData(options?: Partial<DocumentSheetOptions>): Promise<FeatSheetData>;
@@ -19,5 +19,6 @@ interface FeatSheetData extends ItemSheetDataPF2e<FeatPF2e> {
     isFeat: boolean;
     mandatoryTakeOnce: boolean;
     hasLineageTrait: boolean;
+    canHaveKeyOptions: boolean;
 }
 export { FeatSheetPF2e };

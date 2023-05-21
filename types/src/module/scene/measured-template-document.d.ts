@@ -1,5 +1,5 @@
-import { MeasuredTemplatePF2e } from "@module/canvas/measured-template";
-import { ScenePF2e } from "./document";
+import { MeasuredTemplatePF2e } from "@module/canvas/measured-template.ts";
+import { ScenePF2e } from "./document.ts";
 export declare class MeasuredTemplateDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends MeasuredTemplateDocument<TParent> {
 }
 export interface MeasuredTemplateDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends MeasuredTemplateDocument<TParent> {

@@ -1,20 +1,21 @@
 import { CreaturePF2e, FamiliarPF2e } from "@actor";
-import { Abilities, CreatureSpeeds, LabeledSpeed, MovementType } from "@actor/creature/data";
-import { CreatureUpdateContext } from "@actor/creature/types";
-import { ActorInitiative } from "@actor/initiative";
-import { StatisticModifier } from "@actor/modifiers";
-import { AbilityString, AttackItem, AttackRollContext, AttackRollContextParams, StrikeRollContext, StrikeRollContextParams } from "@actor/types";
+import { Abilities, CreatureSpeeds, LabeledSpeed } from "@actor/creature/data.ts";
+import { CreatureUpdateContext } from "@actor/creature/types.ts";
+import { StrikeData } from "@actor/data/base.ts";
+import { ActorInitiative } from "@actor/initiative.ts";
+import { StatisticModifier } from "@actor/modifiers.ts";
+import { AbilityString, AttackItem, CheckContext, CheckContextParams, MovementType, RollContext, RollContextParams, SaveType, SkillLongForm } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, WeaponPF2e } from "@item";
-import { ItemType } from "@item/data";
-import { MagicTradition } from "@item/spell/types";
-import { UserPF2e } from "@module/user";
-import { TokenDocumentPF2e } from "@scene";
-import { RollParameters } from "@system/rolls";
-import { Statistic, StatisticCheck } from "@system/statistic";
-import { CraftingEntry, CraftingFormula } from "./crafting";
-import { AuxiliaryAction, BaseWeaponProficiencyKey, CharacterFlags, CharacterSource, CharacterStrike, CharacterSystemData, ClassDCData, WeaponGroupProficiencyKey } from "./data";
-import { CharacterFeats } from "./feats";
-import { CharacterHitPointsSummary, CharacterSkills, CreateAuxiliaryParams } from "./types";
+import { ItemType } from "@item/data/index.ts";
+import { MagicTradition } from "@item/spell/types.ts";
+import { UserPF2e } from "@module/user/document.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { RollParameters } from "@system/rolls.ts";
+import { Statistic, StatisticCheck } from "@system/statistic/index.ts";
+import { CraftingEntry, CraftingFormula } from "./crafting/index.ts";
+import { BaseWeaponProficiencyKey, CharacterFlags, CharacterSource, CharacterStrike, CharacterSystemData, ClassDCData, WeaponGroupProficiencyKey } from "./data.ts";
+import { CharacterFeats } from "./feats.ts";
+import { CharacterHitPointsSummary, CharacterSkills } from "./types.ts";
 declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     /** Core singular embeds for PCs */
     ancestry: AncestryPF2e<this> | null;
@@ -31,24 +32,28 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     traditions: Record<MagicTradition, Statistic>;
     /** The primary class DC */
     classDC: Statistic | null;
-    /** All class DCs regardless of whether or not its the primary */
+    /** All class DCs, including the primary */
     classDCs: Record<string, Statistic>;
+    /** Skills for the character, built during data prep */
+    skills: CharacterSkills;
     initiative: ActorInitiative;
-    protected _skills: CharacterSkills | null;
     get allowedItemTypes(): (ItemType | "physical")[];
     get keyAbility(): AbilityString;
     /** This PC's ability scores */
     get abilities(): Abilities;
     get hitPoints(): CharacterHitPointsSummary;
-    get skills(): CharacterSkills;
     get heroPoints(): {
         value: number;
         max: number;
     };
+    /** Retrieve lore skills, class statistics, and spellcasting */
+    getStatistic(slug: SaveType | SkillLongForm | "perception" | "classDC" | MagicTradition): Statistic;
+    getStatistic(slug: string): Statistic | null;
     getCraftingFormulas(): Promise<CraftingFormula[]>;
     getCraftingEntries(): Promise<CraftingEntry[]>;
     getCraftingEntry(selector: string): Promise<CraftingEntry | null>;
     performDailyCrafting(): Promise<void>;
+    protected _initialize(): void;
     /** If one exists, prepare this character's familiar */
     prepareData(): void;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */
@@ -61,21 +66,17 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
      */
     prepareDataFromItems(): void;
     prepareDerivedData(): void;
-    /** Using a string, attempts to retrieve a statistic proficiency */
-    getProficiencyStatistic(slug: string): Statistic | null;
     private setAbilityScores;
     /** Set roll operations for ability scores, proficiency ranks, and number of hands free */
     protected setNumericRollOptions(): void;
-    private prepareArmorClass;
+    private createArmorStatistic;
     private prepareSaves;
     private prepareSkills;
     prepareSpeed(movementType: "land"): CreatureSpeeds;
     prepareSpeed(movementType: Exclude<MovementType, "land">): (LabeledSpeed & StatisticModifier) | null;
     prepareSpeed(movementType: MovementType): CreatureSpeeds | (LabeledSpeed & StatisticModifier) | null;
-    prepareFeats(): void;
+    private prepareFeats;
     prepareClassDC(slug: string, classDC: Pick<ClassDCData, "label" | "ability" | "rank" | "primary">): Statistic;
-    /** Create an "auxiliary" action, an Interact or Release action using a weapon */
-    createAuxAction({ weapon, action, purpose, hands }: CreateAuxiliaryParams): AuxiliaryAction;
     /** Prepare this character's strike actions */
     prepareStrikes({ includeBasicUnarmed }?: {
         includeBasicUnarmed?: boolean | undefined;
@@ -88,9 +89,9 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
         success: string;
     };
     /** Modify this weapon from AdjustStrike rule elements */
-    getRollContext<TStatistic extends StatisticModifier | StatisticCheck | null, TItem extends AttackItem | null>(params: StrikeRollContextParams<TStatistic, TItem>): Promise<StrikeRollContext<this, TStatistic, TItem>>;
+    getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     /** Create attack-roll modifiers from weapon traits */
-    getCheckRollContext<TStatistic extends StatisticCheck | StatisticModifier, TItem extends AttackItem | null>(params: AttackRollContextParams<TStatistic, TItem>): Promise<AttackRollContext<this, TStatistic, TItem>>;
+    getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends AttackItem | null>(params: CheckContextParams<TStatistic, TItem>): Promise<CheckContext<this, TStatistic, TItem>>;
     consumeAmmo(weapon: WeaponPF2e<this>, params: RollParameters): boolean;
     /** Prepare stored and synthetic martial proficiencies */
     prepareMartialProficiencies(): void;

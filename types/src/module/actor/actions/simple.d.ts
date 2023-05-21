@@ -1,6 +1,6 @@
-import { ActionCost, ActionUseOptions } from "./types";
+import { ActionCost, ActionUseOptions } from "./types.ts";
 import { ActorPF2e } from "@actor";
-import { BaseAction, BaseActionData, BaseActionVariant, BaseActionVariantData } from "./base";
+import { BaseAction, BaseActionData, BaseActionVariant, BaseActionVariantData } from "./base.ts";
 import { EffectPF2e } from "@item";
 interface SimpleActionVariantData extends BaseActionVariantData {
     effect?: string | EffectPF2e;
@@ -11,18 +11,23 @@ interface SimpleActionData extends BaseActionData<SimpleActionVariantData> {
 interface SimpleActionUseOptions extends ActionUseOptions {
     actors: ActorPF2e[];
     cost: ActionCost;
-    effect: string | EffectPF2e;
+    effect: string | EffectPF2e | false;
     traits: string[];
+}
+interface SimpleActionResult {
+    actor: ActorPF2e;
+    effect?: EffectPF2e;
+    message?: ChatMessage;
 }
 declare class SimpleActionVariant extends BaseActionVariant {
     #private;
     constructor(action: SimpleAction, data?: SimpleActionVariantData);
-    get effect(): string | EffectPF2e<ActorPF2e<import("../../scene/token-document/document").TokenDocumentPF2e<import("../../scene/document").ScenePF2e | null> | null> | null> | undefined;
-    use(options?: Partial<SimpleActionUseOptions>): Promise<void>;
+    get effect(): string | EffectPF2e | undefined;
+    use(options?: Partial<SimpleActionUseOptions>): Promise<SimpleActionResult[]>;
 }
 declare class SimpleAction extends BaseAction<SimpleActionVariantData, SimpleActionVariant> {
     readonly effect?: string | EffectPF2e;
     constructor(data: SimpleActionData);
     protected toActionVariant(data?: SimpleActionVariantData): SimpleActionVariant;
 }
-export { SimpleAction, SimpleActionVariantData };
+export { SimpleAction, SimpleActionResult, SimpleActionVariant, SimpleActionVariantData, SimpleActionUseOptions };

@@ -1,6 +1,6 @@
-import { SceneFlagsPF2e } from "./data";
-import { SceneConfigPF2e } from "./sheet";
-import { AmbientLightDocumentPF2e, MeasuredTemplateDocumentPF2e, TileDocumentPF2e, TokenDocumentPF2e } from ".";
+import { SceneFlagsPF2e } from "./data.ts";
+import { SceneConfigPF2e } from "./sheet.ts";
+import { AmbientLightDocumentPF2e, MeasuredTemplateDocumentPF2e, TileDocumentPF2e, TokenDocumentPF2e } from "./index.ts";
 declare class ScenePF2e extends Scene {
     /** Is the rules-based vision setting enabled? */
     get rulesBasedVision(): boolean;

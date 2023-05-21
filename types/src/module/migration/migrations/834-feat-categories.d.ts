@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Rename `featType.value` to `category`, remove "archetype" category */
 export declare class Migration834FeatCategories extends MigrationBase {
     #private;

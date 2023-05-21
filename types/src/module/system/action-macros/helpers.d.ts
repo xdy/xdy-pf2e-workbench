@@ -1,12 +1,12 @@
 import { ActorPF2e } from "@actor";
-import { ModifierPF2e } from "@actor/modifiers";
+import { ModifierPF2e } from "@actor/modifiers.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
-import { WeaponTrait } from "@item/weapon/types";
-import { RollNotePF2e } from "@module/notes";
-import { DegreeOfSuccessString } from "@system/degree-of-success";
-import { CheckContextOptions, CheckContext, SimpleRollActionCheckOptions, CheckContextData } from "./types";
-import { CheckType } from "@system/check";
-import { TokenDocumentPF2e } from "@scene";
+import { WeaponTrait } from "@item/weapon/types.ts";
+import { RollNotePF2e } from "@module/notes.ts";
+import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
+import { CheckContextOptions, CheckContext, SimpleRollActionCheckOptions, CheckContextData } from "./types.ts";
+import { CheckType } from "@system/check/index.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
 export declare class ActionMacroHelpers {
     static resolveStat(stat: string): {
         checkType: CheckType;

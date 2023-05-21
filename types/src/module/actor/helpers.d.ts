@@ -1,9 +1,9 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e, MeleePF2e } from "@item";
-import { ActorSourcePF2e } from "./data";
-import { ModifierPF2e } from "./modifiers";
-import { NPCStrike } from "./npc/data";
-import { AttackItem } from "./types";
+import { ActorSourcePF2e } from "./data/index.ts";
+import { ModifierPF2e } from "./modifiers.ts";
+import { NPCStrike } from "./npc/data.ts";
+import { AttackItem } from "./types.ts";
 /** Reset and rerender a provided list of actors. Omit argument to reset all world and synthetic actors */
 declare function resetActors(actors?: Iterable<ActorPF2e>, { rerender }?: {
     rerender?: boolean | undefined;

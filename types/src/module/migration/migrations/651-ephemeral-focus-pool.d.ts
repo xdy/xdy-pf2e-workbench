@@ -1,6 +1,6 @@
-import { ActorSourcePF2e } from "@actor/data";
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ActorSourcePF2e } from "@actor/data/index.ts";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Don't store the max value of the focus pool */
 export declare class Migration651EphemeralFocusPool extends MigrationBase {
     #private;

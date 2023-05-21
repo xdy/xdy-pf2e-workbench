@@ -1,11 +1,11 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { CreaturePF2e } from "@actor";
-import { ItemSummaryRenderer } from "@actor/sheet/item-summary-renderer";
+import { ItemSummaryRenderer } from "@actor/sheet/item-summary-renderer.ts";
 import { ItemPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data";
-import { SpellcastingSheetData, SpellcastingEntryPF2e } from "@item/spellcasting-entry";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { SpellcastingEntryPF2e, SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 /**
  * Sheet used to render the the spell list for prepared casting.
  * It overrides the actor sheet to inherit important drag/drop behavior for actor items (the spells).

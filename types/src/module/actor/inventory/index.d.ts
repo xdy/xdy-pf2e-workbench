@@ -1,8 +1,8 @@
 import { ActorPF2e } from "@actor";
 import { PhysicalItemPF2e } from "@item";
-import { Coins } from "@item/physical/data";
-import { CoinsPF2e } from "@item/physical/helpers";
-import { InventoryBulk } from "./bulk";
+import { Coins } from "@item/physical/data.ts";
+import { CoinsPF2e } from "@item/physical/helpers.ts";
+import { InventoryBulk } from "./bulk.ts";
 declare class ActorInventory<TActor extends ActorPF2e> extends Collection<PhysicalItemPF2e<TActor>> {
     readonly actor: TActor;
     constructor(actor: TActor, entries?: PhysicalItemPF2e<TActor>[]);

@@ -1,6 +1,6 @@
-import { PhysicalItemSheetData, PhysicalItemSheetPF2e } from "@item/physical";
-import { SheetOptions } from "@module/sheet/helpers";
-import { EquipmentPF2e } from ".";
+import { PhysicalItemSheetData, PhysicalItemSheetPF2e } from "@item/physical/index.ts";
+import { SheetOptions } from "@module/sheet/helpers.ts";
+import { EquipmentPF2e } from "./document.ts";
 export declare class EquipmentSheetPF2e extends PhysicalItemSheetPF2e<EquipmentPF2e> {
     getData(options?: Partial<DocumentSheetOptions>): Promise<EquipmentSheetData>;
 }

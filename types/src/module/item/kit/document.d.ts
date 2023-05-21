@@ -1,9 +1,9 @@
 import { ActorPF2e } from "@actor";
-import { ItemPF2e, PhysicalItemPF2e } from "@item/index";
-import { Price } from "@item/physical/data";
-import { UserPF2e } from "@module/user";
-import { KitEntryData, KitSource, KitSystemData } from "./data";
-import { Size } from "@module/data";
+import { ItemPF2e, PhysicalItemPF2e } from "@item";
+import { Price } from "@item/physical/data.ts";
+import { UserPF2e } from "@module/user/index.ts";
+import { KitEntryData, KitSource, KitSystemData } from "./data.ts";
+import { Size } from "@module/data.ts";
 declare class KitPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     get entries(): KitEntryData[];
     get price(): Price;

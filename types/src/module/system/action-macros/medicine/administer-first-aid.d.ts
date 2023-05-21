@@ -1,7 +1,13 @@
-import { SkillActionOptions } from "..";
+import { SkillActionOptions } from "../index.ts";
+import { SingleCheckAction, SingleCheckActionVariant, SingleCheckActionVariantData } from "@actor/actions/index.ts";
 declare const ADMINISTER_FIRST_AID_VARIANTS: readonly ["stabilize", "stop-bleeding"];
 type AdministerFirstAidVariant = (typeof ADMINISTER_FIRST_AID_VARIANTS)[number];
-export declare function administerFirstAid(options: {
+declare function administerFirstAid(options: {
     variant: AdministerFirstAidVariant;
 } & SkillActionOptions): void;
-export {};
+declare class AdministerFirstAidAction extends SingleCheckAction {
+    constructor();
+    protected toActionVariant(data?: SingleCheckActionVariantData): SingleCheckActionVariant;
+}
+declare const action: AdministerFirstAidAction;
+export { administerFirstAid as legacy, action };

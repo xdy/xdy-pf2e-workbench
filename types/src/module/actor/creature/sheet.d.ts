@@ -1,15 +1,15 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ActorPF2e, CreaturePF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { SpellcastingSheetData } from "@item/spellcasting-entry";
-import { ItemSourcePF2e } from "@item/data";
-import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data";
-import { ZeroToFour } from "@module/data";
-import { ActorSheetPF2e } from "../sheet/base";
-import { CreatureConfig } from "./config";
-import { CreatureSheetData } from "./types";
+import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
+import { ZeroToFour } from "@module/data.ts";
+import { ActorSheetPF2e } from "../sheet/base.ts";
+import { CreatureConfig } from "./config.ts";
+import { CreatureSheetData } from "./types.ts";
 /**
  * Base class for NPC and character sheets
  * @category Actor

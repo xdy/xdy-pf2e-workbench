@@ -1,5 +1,9 @@
-import * as browserTabs from "./tabs";
+import * as browserTabs from "./tabs/index.ts";
 interface PackInfo {
+    load: boolean;
+    name: string;
+}
+interface SourceInfo {
     load: boolean;
     name: string;
 }
@@ -18,4 +22,4 @@ type TabData<T> = Record<TabName, T | null>;
 type CommonSortByOption = "name" | "level";
 type SortByOption = CommonSortByOption | "price";
 type SortDirection = "asc" | "desc";
-export { BrowserTab, BrowserTabs, CommonSortByOption, ContentTabName, PackInfo, SortByOption, SortDirection, TabData, TabName, };
+export { BrowserTab, BrowserTabs, CommonSortByOption, ContentTabName, PackInfo, SortByOption, SortDirection, SourceInfo, TabData, TabName, };

@@ -1,5 +1,5 @@
-import { TokenDocumentPF2e } from "@scene";
-import { PredicatePF2e } from "@system/predication";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { PredicatePF2e } from "@system/predication.ts";
 /** Prompt the user to target a token */
 declare class MarkTargetPrompt {
     #private;

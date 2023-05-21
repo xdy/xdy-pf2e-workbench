@@ -1,7 +1,7 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ScenePF2e } from "@scene";
+import { ScenePF2e } from "@scene/index.ts";
 import "nouislider/dist/nouislider.min.css";
 export declare class SceneDarknessAdjuster extends Application {
     #private;

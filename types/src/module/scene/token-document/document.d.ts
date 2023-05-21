@@ -1,15 +1,17 @@
 import { ActorPF2e } from "@actor";
-import { TokenPF2e } from "@module/canvas";
-import { ScenePF2e, TokenConfigPF2e } from "@module/scene";
-import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
-import { PrototypeTokenPF2e } from "@actor/data/base";
-import { TokenAura } from "./aura";
-import { TokenFlagsPF2e } from "./data";
+import { PrototypeTokenPF2e } from "@actor/data/base.ts";
+import { TokenPF2e } from "@module/canvas/index.ts";
+import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
+import { ScenePF2e, TokenConfigPF2e } from "@scene/index.ts";
+import { TokenAura } from "./aura/index.ts";
+import { TokenFlagsPF2e } from "./data.ts";
 declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends TokenDocument<TParent> {
     #private;
     /** Has this token gone through at least one cycle of data preparation? */
-    private initialized?;
+    private constructed;
     auras: Map<string, TokenAura>;
+    /** Returns if the token is in combat, though some actors have different conditions */
+    get inCombat(): boolean;
     /** Check actor for effects found in `CONFIG.specialStatusEffects` */
     hasStatusEffect(statusId: string): boolean;
     /** Filter trackable attributes for relevance and avoidance of circular references */

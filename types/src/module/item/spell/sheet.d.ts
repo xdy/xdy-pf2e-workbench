@@ -1,11 +1,11 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { SpellPF2e } from "@item/spell";
-import { ItemSheetPF2e } from "../sheet/base";
-import { ItemSheetDataPF2e } from "../sheet/data-types";
-import { SpellSystemData } from "./data";
-import { DamageCategoryUnique } from "@system/damage/types";
+import { SpellPF2e } from "@item/spell/index.ts";
+import { ItemSheetPF2e } from "../sheet/base.ts";
+import { ItemSheetDataPF2e } from "../sheet/data-types.ts";
+import { SpellSystemData } from "./data.ts";
+import { DamageCategoryUnique } from "@system/damage/types.ts";
 export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
     get id(): string;
     getData(options?: Partial<DocumentSheetOptions>): Promise<SpellSheetData>;

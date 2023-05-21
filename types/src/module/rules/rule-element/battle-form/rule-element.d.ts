@@ -1,10 +1,11 @@
-import { RuleElementPF2e, RuleElementData, RuleElementOptions } from "../";
-import { BattleFormAC, BattleFormOverrides, BattleFormSource } from "./types";
 import { ActorPF2e, CharacterPF2e } from "@actor";
-import { ActorType } from "@actor/data";
+import { ActorType } from "@actor/data/index.ts";
+import { DiceModifierPF2e, ModifierPF2e } from "@actor/modifiers.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
-import { DiceModifierPF2e, ModifierPF2e } from "@actor/modifiers";
+import { RuleElementData, RuleElementOptions, RuleElementPF2e } from "../index.ts";
+import { BattleFormAC, BattleFormOverrides, BattleFormSource } from "./types.ts";
 export declare class BattleFormRuleElement extends RuleElementPF2e {
+    #private;
     overrides: this["data"]["overrides"];
     /** The label given to modifiers of AC, skills, and strikes */
     modifierLabel: string;
@@ -22,23 +23,6 @@ export declare class BattleFormRuleElement extends RuleElementPF2e {
     afterPrepareData(): void;
     /** Remove temporary hit points */
     onDelete(actorUpdates: Record<string, unknown>): void;
-    private setRollOptions;
-    /** Override the character's AC and ignore speed penalties if necessary */
-    private prepareAC;
-    /** Add new senses the character doesn't already have */
-    private prepareSenses;
-    /** Adjust the character's size category */
-    private prepareSize;
-    /** Add, replace and/or adjust non-land speeds */
-    private prepareSpeeds;
-    private prepareSkills;
-    /** Clear out existing strikes and replace them with the form's stipulated ones, if any */
-    private prepareStrikes;
-    /** Immunity, weakness, and resistance */
-    private prepareIWR;
-    /** Disable ineligible check modifiers */
-    private suppressModifiers;
-    private suppressNotes;
     /** Disable ineligible damage adjustments (modifiers, bonuses, additional damage) */
     applyDamageExclusion(weapon: WeaponPF2e, modifiers: (DiceModifierPF2e | ModifierPF2e)[]): void;
     /** Process compendium query and construct full strike object using retrieved weapon */

@@ -1,10 +1,9 @@
 import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item/base";
-import { ItemSummaryData } from "@item/data";
-import { WeaponPF2e } from "@item/weapon";
-import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement } from "@item/weapon/types";
-import { ConvertedNPCDamage } from "@system/damage/weapon";
-import { MeleeFlags, MeleeSource, MeleeSystemData, NPCAttackTrait } from "./data";
+import { ItemSummaryData } from "@item/data/index.ts";
+import { ItemPF2e, WeaponPF2e } from "@item";
+import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement } from "@item/weapon/types.ts";
+import { ConvertedNPCDamage } from "@system/damage/weapon.ts";
+import { MeleeFlags, MeleeSource, MeleeSystemData, NPCAttackTrait } from "./data.ts";
 declare class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     /** Set during data preparation if a linked weapon is found */
     category: WeaponCategory | null;

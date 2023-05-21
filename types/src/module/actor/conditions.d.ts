@@ -1,6 +1,6 @@
 import { ConditionPF2e } from "@item";
-import { ConditionSlug, PersistentDamagePF2e } from "@item/condition";
-import { ActorPF2e } from "./base";
+import { ConditionSlug, PersistentDamagePF2e } from "@item/condition/index.ts";
+import { ActorPF2e } from "./base.ts";
 /** A collection of conditions on an actor, filterable by whether they're active or stored/temporary */
 declare class ActorConditions<TActor extends ActorPF2e> extends Collection<ConditionPF2e<TActor>> {
     #private;
@@ -20,8 +20,14 @@ declare class ActorConditions<TActor extends ActorPF2e> extends Collection<Condi
     set(id: string, condition: ConditionPF2e<TActor>): this;
     /** No deletions: a new instance is created every data preparation cycle */
     delete(): false;
+    /**
+     * Get an array of conditions by slug
+     * The "dead" slug is permitted due to `StatusEffectsPF2e`'s usage of this class, though it will always return an
+     * empty array.
+     */
     bySlug(slug: "persistent-damage", options?: ConditionsBySlugOptions): PersistentDamagePF2e<TActor>[];
-    bySlug(slug: ConditionSlug, options?: ConditionsBySlugOptions): ConditionPF2e<TActor>[];
+    bySlug(slug: "dead", options?: ConditionsBySlugOptions): never[];
+    bySlug(slug: ConditionSlug | "dead", options?: ConditionsBySlugOptions): ConditionPF2e<TActor>[];
 }
 interface ConditionsGetOptions extends CollectionGetOptions {
     /** Filter by the active state of the condition: `null` will return one in either state */

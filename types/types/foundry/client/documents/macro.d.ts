@@ -1,4 +1,4 @@
-import { ClientBaseMacro } from "./client-base-mixes.mjs";
+import type { ClientBaseMacro } from "./client-base-mixes.d.ts";
 
 declare global {
     /**

@@ -1,16 +1,13 @@
-import { GrantItemSource } from "@module/rules/rule-element/grant-item/rule-element";
-import { RuleElementForm } from "./base";
+import { GrantItemRuleElement, GrantItemSource } from "@module/rules/rule-element/grant-item/rule-element.ts";
+import { RuleElementForm, RuleElementFormSheetData } from "./base.ts";
 /** Form handler for the GrantItem rule element */
-declare class GrantItemForm extends RuleElementForm<GrantItemSource> {
+declare class GrantItemForm extends RuleElementForm<GrantItemSource, GrantItemRuleElement> {
     template: string;
-    getData(): Promise<{
-        granted: ClientDocument | null;
-        allowDuplicate: {};
-        item: import("../../base").ItemPF2e<import("../../../actor/base").ActorPF2e<import("../../../scene/token-document/document").TokenDocumentPF2e<import("../../../scene/document").ScenePF2e | null> | null>>;
-        index: number;
-        rule: GrantItemSource;
-        object: import("../../../rules/rule-element/base").RuleElementPF2e<import("../../../rules/rule-element/data").RuleElementSchema> | null;
-    }>;
+    getData(): Promise<GrantItemFormSheetData>;
     _updateObject(ruleData: DeepPartial<GrantItemSource>): void;
+}
+interface GrantItemFormSheetData extends RuleElementFormSheetData<GrantItemSource, GrantItemRuleElement> {
+    granted: ClientDocument | null;
+    allowDuplicate: boolean;
 }
 export { GrantItemForm };

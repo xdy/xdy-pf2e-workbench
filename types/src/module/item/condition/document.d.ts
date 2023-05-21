@@ -1,10 +1,11 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { AbstractEffectPF2e, EffectBadge } from "@item/abstract-effect";
-import { RuleElementOptions, RuleElementPF2e } from "@module/rules";
-import { UserPF2e } from "@module/user";
-import { TokenDocumentPF2e } from "@scene";
-import { ConditionKey, ConditionSlug, ConditionSource, ConditionSystemData, PersistentDamageData } from "./data";
+import { AbstractEffectPF2e, EffectBadge } from "@item/abstract-effect/index.ts";
+import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
+import { UserPF2e } from "@module/user/index.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { ConditionSource, ConditionSystemData, PersistentDamageData } from "./data.ts";
+import { ConditionKey, ConditionSlug } from "./types.ts";
 declare class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     active: boolean;
     get badge(): EffectBadge | null;

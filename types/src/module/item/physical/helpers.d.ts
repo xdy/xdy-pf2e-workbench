@@ -1,5 +1,5 @@
-import { Coins, PartialPrice } from "@item/physical/data";
-import { Size } from "@module/data";
+import { Coins, PartialPrice } from "@item/physical/data.ts";
+import { Size } from "@module/data.ts";
 /** Coins class that exposes methods to perform operations on coins without side effects */
 declare class CoinsPF2e implements Coins {
     cp: number;
@@ -9,6 +9,7 @@ declare class CoinsPF2e implements Coins {
     constructor(data?: Coins | null);
     /** The total value of this coins in copper */
     get copperValue(): number;
+    get goldValue(): number;
     add(coins: Coins): CoinsPF2e;
     /** Multiply by a number and clean up result */
     scale(factor: number): CoinsPF2e;

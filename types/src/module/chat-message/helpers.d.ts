@@ -1,5 +1,5 @@
-import { ChatContextFlag, CheckRollContextFlag } from "./data";
-import { ChatMessagePF2e } from "./document";
+import { ChatContextFlag, CheckRollContextFlag } from "./data.ts";
+import { ChatMessagePF2e } from "./document.ts";
 declare function isCheckContextFlag(flag?: ChatContextFlag): flag is CheckRollContextFlag;
 declare function applyDamageFromMessage({ message, multiplier, addend, promptModifier, rollIndex, }: ApplyDamageFromMessageParams): Promise<void>;
 interface ApplyDamageFromMessageParams {

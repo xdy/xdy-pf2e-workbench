@@ -1,12 +1,13 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActionItemPF2e } from "@item/action";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types";
-import { ItemSheetPF2e } from "../sheet/base";
+import { ActionItemPF2e } from "@item/action/document.ts";
+import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { ItemSheetPF2e } from "../sheet/base.ts";
 export declare class ActionSheetPF2e extends ItemSheetPF2e<ActionItemPF2e> {
     getData(options?: Partial<DocumentSheetOptions>): Promise<ActionSheetData>;
     activateListeners($html: JQuery<HTMLElement>): void;
+    protected _getSubmitData(updateData?: Record<string, unknown>): Record<string, unknown>;
 }
 interface ActionSheetData extends ItemSheetDataPF2e<ActionItemPF2e> {
     categories: ConfigPF2e["PF2E"]["actionCategories"];

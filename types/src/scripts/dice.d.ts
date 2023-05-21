@@ -1,4 +1,4 @@
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 /**
@@ -48,5 +48,5 @@ declare class DicePF2e {
  * Combines dice and flat values together in a condensed expression. Also repairs any + - and "- 3" errors.
  * For example, 3d4 + 2d4 + 3d6 + 5 + 2 is combined into 5d4 + 3d6 + 7. - 4 is corrected to -4.
  */
-declare function combineTerms(formula: string): string;
-export { DicePF2e, combineTerms };
+declare function simplifyFormula(formula: string): string;
+export { DicePF2e, simplifyFormula };

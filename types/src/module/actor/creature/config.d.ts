@@ -1,5 +1,5 @@
-import { SheetOptions } from "@module/sheet/helpers";
-import { CreaturePF2e } from ".";
+import { SheetOptions } from "@module/sheet/helpers.ts";
+import { CreaturePF2e } from "./index.ts";
 /** A DocumentSheet presenting additional, per-actor settings */
 declare abstract class CreatureConfig<TActor extends CreaturePF2e> extends DocumentSheet<TActor> {
     get title(): string;

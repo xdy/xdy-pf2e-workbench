@@ -1,5 +1,5 @@
-import { BaseWeaponType } from "@item/weapon/types";
-import { MenuTemplateData, SettingsTemplateData } from "../menu";
+import { BaseWeaponType } from "@item/weapon/types.ts";
+import { MenuTemplateData, SettingsTemplateData } from "../menu.ts";
 declare const HOMEBREW_TRAIT_KEYS: readonly ["creatureTraits", "featTraits", "languages", "magicSchools", "spellTraits", "weaponCategories", "weaponGroups", "baseWeapons", "weaponTraits", "equipmentTraits"];
 /** Homebrew elements from some of the above records are propagated to related records */
 declare const SECONDARY_TRAIT_RECORDS: {

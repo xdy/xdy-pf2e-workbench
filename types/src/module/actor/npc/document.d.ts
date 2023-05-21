@@ -1,13 +1,14 @@
 import { CreaturePF2e } from "@actor";
-import { Abilities } from "@actor/creature/data";
-import { ActorInitiative } from "@actor/initiative";
+import { Abilities } from "@actor/creature/data.ts";
+import { ActorInitiative } from "@actor/initiative.ts";
 import { MeleePF2e } from "@item";
-import { ItemType } from "@item/data";
-import { RollNotePF2e } from "@module/notes";
-import { TokenDocumentPF2e } from "@scene";
-import { NPCFlags, NPCSource, NPCSystemData } from "./data";
-import { NPCSheetPF2e } from "./sheet";
-import { VariantCloneParams } from "./types";
+import { ItemType } from "@item/data/index.ts";
+import { RollNotePF2e } from "@module/notes.ts";
+import { CreatureIdentificationData } from "@module/recall-knowledge.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { NPCFlags, NPCSource, NPCSystemData } from "./data.ts";
+import { NPCSheetPF2e } from "./sheet.ts";
+import { VariantCloneParams } from "./types.ts";
 declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     initiative: ActorInitiative;
     get allowedItemTypes(): (ItemType | "physical")[];
@@ -16,10 +17,12 @@ declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF
     /** This NPC's ability scores */
     get abilities(): Abilities;
     get description(): string;
+    get hardness(): number;
     /** Does this NPC have the Elite adjustment? */
     get isElite(): boolean;
     /** Does this NPC have the Weak adjustment? */
     get isWeak(): boolean;
+    get identificationDCs(): CreatureIdentificationData;
     /** Users with limited permission can loot a dead NPC */
     canUserModify(user: User, action: UserAction): boolean;
     /** A user can see a synthetic NPC in the actor directory only if they have at least Observer permission */
@@ -35,6 +38,7 @@ declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF
     prepareBaseData(): void;
     prepareDerivedData(): void;
     private prepareSaves;
+    private prepareSkills;
     getAttackEffects(attack: MeleePF2e): Promise<RollNotePF2e[]>;
     private getHpAdjustment;
     /** Make the NPC elite, weak, or normal */

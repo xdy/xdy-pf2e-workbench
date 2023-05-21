@@ -1,6 +1,6 @@
-import { BasePhysicalItemSource, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource } from "@item/physical/data";
-import { SpellSource } from "@item/spell/data";
-import { ConsumableTrait, OtherConsumableTag } from "./types";
+import { BasePhysicalItemSource, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource } from "@item/physical/data.ts";
+import { SpellSource } from "@item/spell/data.ts";
+import type { ConsumableTrait, OtherConsumableTag } from "./types.ts";
 type ConsumableSource = BasePhysicalItemSource<"consumable", ConsumableSystemSource>;
 type ConsumableCategory = keyof ConfigPF2e["PF2E"]["consumableTypes"];
 interface ConsumableTraits extends PhysicalItemTraits<ConsumableTrait> {

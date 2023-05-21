@@ -1,5 +1,5 @@
 /** Utility functions from foundry.js */
 export declare const FoundryUtils: {
     randomID: (length?: number) => string;
-    duplicate: (data: object) => any;
+    duplicate: (data: object) => ReturnType<(typeof JSON)["parse"]>;
 };

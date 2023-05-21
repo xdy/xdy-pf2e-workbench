@@ -1,10 +1,10 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
 import { EffectPF2e } from "@item";
-import { AfflictionPF2e } from "@item/affliction";
-import { FlattenedCondition } from "../system/conditions";
+import { AfflictionPF2e } from "@item/affliction/document.ts";
+import { FlattenedCondition } from "../system/conditions/index.ts";
 export declare class EffectsPanel extends Application {
     #private;
     private get token();

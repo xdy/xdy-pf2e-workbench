@@ -1,5 +1,5 @@
-import { ImmunityType, IWRType, ResistanceType, WeaknessType } from "@actor/types";
-import { PredicatePF2e, PredicateStatement } from "@system/predication";
+import { ImmunityType, IWRType, ResistanceType, WeaknessType } from "@actor/types.ts";
+import { PredicatePF2e, PredicateStatement } from "@system/predication.ts";
 declare abstract class IWRData<TType extends IWRType> {
     readonly type: TType;
     readonly exceptions: TType[];
@@ -149,6 +149,7 @@ declare class WeaknessData extends IWRData<WeaknessType> implements WeaknessSour
         fire: string;
         force: string;
         "ghost-touch": string;
+        glass: string;
         good: string;
         lawful: string;
         light: string;

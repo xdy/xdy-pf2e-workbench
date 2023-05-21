@@ -1,11 +1,11 @@
 import { ActorPF2e } from "@actor";
-import { ActorType } from "@actor/data";
+import { ActorType } from "@actor/data/index.ts";
 import { ItemPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data";
-import { ItemGrantDeleteAction } from "@item/data/base";
-import { ModelPropsFromSchema } from "types/foundry/common/data/fields.mjs";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "../";
-import { GrantItemSchema } from "./schema";
+import { ItemGrantDeleteAction } from "@item/data/base.ts";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import type { ModelPropsFromSchema } from "types/foundry/common/data/fields.d.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "../index.ts";
+import { GrantItemSchema } from "./schema.ts";
 declare class GrantItemRuleElement extends RuleElementPF2e<GrantItemSchema> {
     #private;
     static validActorTypes: ActorType[];

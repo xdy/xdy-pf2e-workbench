@@ -1,6 +1,6 @@
 import { ActorPF2e } from "@actor";
-import type { EffectPF2e } from "@item/index";
-import { EncounterPF2e } from "@module/encounter";
+import type { EffectPF2e } from "@item";
+import { EncounterPF2e } from "@module/encounter/index.ts";
 export declare class EffectTracker {
     #private;
     effects: EffectPF2e<ActorPF2e>[];

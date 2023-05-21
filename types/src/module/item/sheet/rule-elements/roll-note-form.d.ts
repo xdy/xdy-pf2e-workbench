@@ -1,4 +1,4 @@
-import { RuleElementForm } from "./base";
+import { RuleElementForm } from "./base.ts";
 /** Form handler for the RollNote rule element */
 declare class RollNoteForm extends RuleElementForm {
     private html;

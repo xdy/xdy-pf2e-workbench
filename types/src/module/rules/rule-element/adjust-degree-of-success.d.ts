@@ -1,7 +1,7 @@
 import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { DegreeOfSuccessString } from "@system/degree-of-success";
-import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./";
+import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
+import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
 /**
  * @category RuleElement
  */
@@ -17,7 +17,8 @@ interface AdjustDegreeOfSuccessRuleElement extends RuleElementPF2e {
     };
     get actor(): CharacterPF2e | NPCPF2e;
 }
-type DegreeAdjustmentAmountString = "one-degree-better" | "one-degree-worse" | "two-degrees-better" | "two-degrees-worse";
+declare const degreeAdjustmentAmountString: readonly ["one-degree-better", "one-degree-worse", "two-degrees-better", "two-degrees-worse", "to-critical-failure", "to-failure", "to-success", "to-critical-success"];
+type DegreeAdjustmentAmountString = (typeof degreeAdjustmentAmountString)[number];
 type DegreeAdjustmentsRuleRecord = {
     [key in "all" | DegreeOfSuccessString]?: DegreeAdjustmentAmountString;
 };

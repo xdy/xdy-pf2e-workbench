@@ -1,11 +1,11 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { CoinsPF2e } from "@item/physical";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types";
-import { ItemSheetPF2e } from "../sheet/base";
-import { KitEntryData } from "./data";
-import { KitPF2e } from "./index";
+import { CoinsPF2e } from "@item/physical/index.ts";
+import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { ItemSheetPF2e } from "../sheet/base.ts";
+import { KitEntryData } from "./data.ts";
+import { KitPF2e } from "./document.ts";
 declare class KitSheetPF2e extends ItemSheetPF2e<KitPF2e> {
     static get defaultOptions(): DocumentSheetOptions;
     getData(options?: Partial<DocumentSheetOptions>): Promise<KitSheetData>;

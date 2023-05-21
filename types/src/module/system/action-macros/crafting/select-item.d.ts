@@ -1,5 +1,5 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { PhysicalItemPF2e } from "@item";
 declare class SelectItemDialog extends Application {

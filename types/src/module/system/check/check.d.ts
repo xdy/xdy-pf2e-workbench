@@ -1,9 +1,9 @@
-/// <reference types="jquery" />
-import { CheckModifier } from "@actor/modifiers";
-import { ChatMessagePF2e } from "@module/chat-message";
-import { DegreeOfSuccessString } from "../degree-of-success";
-import { CheckRoll } from "./roll";
-import { CheckRollContext } from "./types";
+/// <reference types="jquery" resolution-mode="require"/>
+import { CheckModifier } from "@actor/modifiers.ts";
+import { ChatMessagePF2e } from "@module/chat-message/index.ts";
+import { DegreeOfSuccessString } from "../degree-of-success.ts";
+import { CheckRoll } from "./roll.ts";
+import { CheckRollContext } from "./types.ts";
 interface RerollOptions {
     heroPoint?: boolean;
     keep?: "new" | "best" | "worst";

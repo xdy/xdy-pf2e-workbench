@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Push back embedded spell property one object-nesting level */
 export declare class Migration772V10EmbeddedSpellData extends MigrationBase {
     static version: number;

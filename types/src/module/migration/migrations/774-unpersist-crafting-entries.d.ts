@@ -1,8 +1,8 @@
-import { ActorSourcePF2e } from "@actor/data";
-import { ItemSourcePF2e } from "@item/data";
-import { PhysicalItemTrait } from "@item/physical/data";
-import { PredicateStatement } from "@system/predication";
-import { MigrationBase } from "../base";
+import { ActorSourcePF2e } from "@actor/data/index.ts";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { PhysicalItemTrait } from "@item/physical/data.ts";
+import { PredicateStatement } from "@system/predication.ts";
+import { MigrationBase } from "../base.ts";
 /** Convert crafting entry `requiredTrait` properties to be predicates */
 export declare class Migration774UnpersistCraftingEntries extends MigrationBase {
     static version: number;

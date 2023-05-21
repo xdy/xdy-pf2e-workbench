@@ -1,4 +1,4 @@
-import { ActorPF2e } from "../../base";
+import { ActorPF2e } from "@actor";
 interface PopupData extends FormApplicationData<ActorPF2e> {
     selection?: string[];
     actorInfo?: {

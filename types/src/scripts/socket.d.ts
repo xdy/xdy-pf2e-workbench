@@ -1,4 +1,4 @@
-import { ItemTransferData } from "@actor/item-transfer";
+import { ItemTransferData } from "@actor/item-transfer.ts";
 interface TransferCallbackMessage {
     request: "itemTransfer";
     data: ItemTransferData;

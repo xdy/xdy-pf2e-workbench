@@ -1,7 +1,7 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { TokenDocumentPF2e } from ".";
+import { TokenDocumentPF2e } from "./index.ts";
 declare class TokenConfigPF2e<TDocument extends TokenDocumentPF2e> extends TokenConfig<TDocument> {
     #private;
     get template(): string;

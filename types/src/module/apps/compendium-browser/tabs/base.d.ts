@@ -1,7 +1,7 @@
-import { CompendiumBrowser } from "..";
-import { BrowserFilter, CheckboxOptions, CompendiumBrowserIndexData, MultiselectData, RangesData } from "./data";
-import { BrowserTabs, ContentTabName } from "../data";
 import MiniSearch from "minisearch";
+import { BrowserTabs, ContentTabName } from "../data.ts";
+import { CompendiumBrowser } from "../index.ts";
+import { BrowserFilter, CheckboxOptions, CompendiumBrowserIndexData, MultiselectData, RangesData } from "./data.ts";
 export declare abstract class CompendiumBrowserTab {
     #private;
     /** A reference to the parent CompendiumBrowser */

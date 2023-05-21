@@ -1,7 +1,8 @@
-import { ResistanceData } from "@actor/data/iwr";
-import { ResistanceType } from "@actor/types";
-import { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
-import { IWRRuleElement, IWRRuleSchema } from "./base";
+import { ResistanceData } from "@actor/data/iwr.ts";
+import { ResistanceType } from "@actor/types.ts";
+import type { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import { IWRRuleElement, IWRRuleSchema } from "./base.ts";
+import { ResolvableValueField } from "../data.ts";
 /** @category RuleElement */
 declare class ResistanceRuleElement extends IWRRuleElement<ResistanceRuleSchema> {
     static defineSchema(): ResistanceRuleSchema;
@@ -14,6 +15,7 @@ interface ResistanceRuleElement extends IWRRuleElement<ResistanceRuleSchema>, Mo
     exceptions: ResistanceType[];
 }
 type ResistanceRuleSchema = Omit<IWRRuleSchema, "exceptions"> & {
+    value: ResolvableValueField<true, false, false>;
     exceptions: ArrayField<StringField<ResistanceType, ResistanceType, true, false, false>>;
     doubleVs: ArrayField<StringField<ResistanceType, ResistanceType, true, false, false>>;
 };

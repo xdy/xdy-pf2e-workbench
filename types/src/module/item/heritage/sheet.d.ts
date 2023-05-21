@@ -1,9 +1,9 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { AncestryPF2e, HeritagePF2e } from "@item";
-import { ItemSheetPF2e } from "@item/sheet/base";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types";
+import { ItemSheetPF2e } from "@item/sheet/base.ts";
+import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
 export declare class HeritageSheetPF2e extends ItemSheetPF2e<HeritagePF2e> {
     static get defaultOptions(): DocumentSheetOptions;
     getData(options?: Partial<DocumentSheetOptions>): Promise<HeritageSheetData>;

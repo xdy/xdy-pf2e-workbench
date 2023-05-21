@@ -1,84 +1,22 @@
-import { BaseRawModifier, DamageDicePF2e } from "@actor/modifiers";
-import { ChatMessagePF2e } from ".";
+import { BaseRawModifier, DamageDicePF2e } from "@actor/modifiers.ts";
+import { ChatContextFlag, ChatMessagePF2e } from "./index.ts";
+import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 declare class ChatRollDetails extends Application {
     private message;
     static get defaultOptions(): ApplicationOptions;
     constructor(message: ChatMessagePF2e, options?: Partial<ApplicationOptions>);
-    getData(): {
-        context: import("./data").ChatContextFlag | undefined;
-        domains: string[] | undefined;
-        modifiers: ({
-            value: string;
-            critical: string | null;
-            selector: string;
-            slug: string;
-            label: string;
-            diceNumber: number;
-            dieSize: "d10" | "d12" | "d4" | "d6" | "d8" | null;
-            category: "persistent" | "precision" | "splash" | null;
-            damageType: "force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | null;
-            override: import("@actor/modifiers").DamageDiceOverride | null;
-            ignored: boolean;
-            enabled: boolean;
-            custom: boolean;
-            predicate: import("../system/predication").PredicatePF2e;
-        } | {
-            value: string;
-            critical: string | null;
-            slug?: string | undefined;
-            label: string;
-            modifier?: number | undefined;
-            type?: "item" | "status" | "untyped" | "ability" | "circumstance" | "potency" | "proficiency" | undefined;
-            ability?: "con" | "dex" | "wis" | "str" | "int" | "cha" | null | undefined;
-            adjustments?: import("@actor/modifiers").ModifierAdjustment[] | undefined;
-            enabled?: boolean | undefined;
-            ignored?: boolean | undefined;
-            source?: string | null | undefined;
-            custom?: boolean | undefined;
-            damageType?: "force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | null | undefined;
-            damageCategory?: "persistent" | "precision" | "splash" | null | undefined;
-            predicate?: import("../system/predication").RawPredicate | undefined;
-            notes?: string | undefined;
-            traits?: string[] | undefined;
-            hideIfDisabled?: boolean | undefined;
-        })[];
-        rollOptions: string[];
-        hasModifiers: boolean;
-    };
-    protected prepareModifiers(modifiers: (BaseRawModifier | DamageDicePF2e)[]): ({
-        value: string;
-        critical: string | null;
-        selector: string;
-        slug: string;
-        label: string;
-        diceNumber: number;
-        dieSize: "d10" | "d12" | "d4" | "d6" | "d8" | null;
-        category: "persistent" | "precision" | "splash" | null;
-        damageType: "force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | null;
-        override: import("@actor/modifiers").DamageDiceOverride | null;
-        ignored: boolean;
-        enabled: boolean;
-        custom: boolean;
-        predicate: import("../system/predication").PredicatePF2e;
-    } | {
-        value: string;
-        critical: string | null;
-        slug?: string | undefined;
-        label: string;
-        modifier?: number | undefined;
-        type?: "item" | "status" | "untyped" | "ability" | "circumstance" | "potency" | "proficiency" | undefined;
-        ability?: "con" | "dex" | "wis" | "str" | "int" | "cha" | null | undefined;
-        adjustments?: import("@actor/modifiers").ModifierAdjustment[] | undefined;
-        enabled?: boolean | undefined;
-        ignored?: boolean | undefined;
-        source?: string | null | undefined;
-        custom?: boolean | undefined;
-        damageType?: "force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped" | null | undefined;
-        damageCategory?: "persistent" | "precision" | "splash" | null | undefined;
-        predicate?: import("../system/predication").RawPredicate | undefined;
-        notes?: string | undefined;
-        traits?: string[] | undefined;
-        hideIfDisabled?: boolean | undefined;
-    })[];
+    getData(): ChatRollDetailsData;
+    protected prepareModifiers(modifiers: (BaseRawModifier | DamageDicePF2e)[]): PreparedModifier[];
+}
+interface ChatRollDetailsData {
+    context?: ChatContextFlag;
+    domains?: string[];
+    modifiers: PreparedModifier[];
+    rollOptions: string[];
+    hasModifiers: boolean;
+}
+interface PreparedModifier extends Omit<Partial<DamageDicePF2e>, "critical" | "predicate"> {
+    critical: string | null;
+    predicate?: RawPredicate | PredicatePF2e;
 }
 export { ChatRollDetails };

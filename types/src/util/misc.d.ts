@@ -1,4 +1,4 @@
-import { ActionCost } from "@item/data/base";
+import { ActionCost } from "@item/data/base.ts";
 /**
  * Given an array and a key function, create a map where the key is the value that
  * gets returned when each item is pushed into the function. Accumulate
@@ -96,7 +96,7 @@ declare function getActionGlyph(action: string | number | null | {
 declare function ErrorPF2e(message: string): Error;
 /** Returns the number in an ordinal format, like 1st, 2nd, 3rd, 4th, etc */
 declare function ordinal(value: number): string;
-/** Localizes a list of strings into a comma delimited list for the current language */
+/** Localizes a list of strings into a (possibly comma-delimited) list for the current language */
 declare function localizeList(items: string[], { conjunction }?: {
     conjunction?: "and" | "or";
 }): string;
@@ -122,9 +122,13 @@ declare function sortObjByKey(value: unknown): unknown;
 declare function sortedStringify(obj: object): string;
 /** Walk an object tree and replace any string values found according to a provided function */
 declare function recursiveReplaceString<T>(source: T, replace: (s: string) => string): T;
+/** Create a localization function with a prefixed localization object path */
+declare function localizer(prefix: string): (...args: Parameters<Localization["format"]>) => string;
+/** Walk a localization object and recursively map the keys as localization strings starting with a given prefix */
+declare function configFromLocalization<T extends Record<string, TranslationDictionaryValue>>(localization: T, prefix: string): T;
 /** Does the parameter look like an image file path? */
 declare function isImageFilePath(path: unknown): path is ImageFilePath;
 /** Does the parameter look like a video file path? */
 declare function isVideoFilePath(path: unknown): path is ImageFilePath;
 declare function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath;
-export { ErrorPF2e, Fraction, Optional, SlugCamel, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, mapValues, objectHasKey, omit, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };
+export { configFromLocalization, ErrorPF2e, Fraction, Optional, SlugCamel, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, omit, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };

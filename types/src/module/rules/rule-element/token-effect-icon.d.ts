@@ -1,4 +1,4 @@
-import { RuleElementPF2e } from "./";
+import { RuleElementPF2e } from "./index.ts";
 /**
  * Add an effect icon to an actor's token
  * @category RuleElement

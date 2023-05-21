@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Correct the usage and misspelled icon filename for handwraps of mighty blows */
 export declare class Migration665HandwrapsCorrections extends MigrationBase {
     static version: number;

@@ -1,5 +1,5 @@
-import { DCOptions } from "../dc";
-import { PhysicalItemPF2e } from "./physical";
+import { DCOptions } from "../dc.ts";
+import { PhysicalItemPF2e } from "./physical/index.ts";
 export interface IdentifyMagicDCs {
     arc: number;
     nat: number;

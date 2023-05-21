@@ -1,4 +1,4 @@
-import { ClientBaseScene } from "./client-base-mixes.mjs";
+import type { ClientBaseScene } from "./client-base-mixes.d.ts";
 
 declare global {
     /**

@@ -1,23 +1,23 @@
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
 import { ActorPF2e } from "@actor";
-import { AbilityString } from "@actor/types";
+import { AbilityString } from "@actor/types.ts";
 import { ItemPF2e } from "@item";
-import { ActionTrait } from "@item/action/data";
-import { ItemSourcePF2e, ItemSummaryData } from "@item/data";
-import { BaseSpellcastingEntry } from "@item/spellcasting-entry";
-import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
-import { MeasuredTemplatePF2e } from "@module/canvas";
-import { ChatMessagePF2e } from "@module/chat-message";
-import { OneToTen, ZeroToTwo } from "@module/data";
-import { UserPF2e } from "@module/user";
-import { CheckRoll } from "@system/check";
-import { DamageRoll } from "@system/damage/roll";
-import { DamageRollContext, SpellDamageTemplate } from "@system/damage/types";
-import { StatisticRollParameters } from "@system/statistic";
-import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
-import { SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data";
-import { SpellOverlayCollection } from "./overlay";
-import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "./types";
+import { ActionTrait } from "@item/action/data.ts";
+import { ItemSourcePF2e, ItemSummaryData } from "@item/data/index.ts";
+import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
+import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
+import { MeasuredTemplatePF2e } from "@module/canvas/index.ts";
+import { ChatMessagePF2e } from "@module/chat-message/index.ts";
+import { OneToTen, ZeroToTwo } from "@module/data.ts";
+import { UserPF2e } from "@module/user/index.ts";
+import { CheckRoll } from "@system/check/index.ts";
+import { DamageRoll } from "@system/damage/roll.ts";
+import { DamageRollContext, SpellDamageTemplate } from "@system/damage/types.ts";
+import { StatisticRollParameters } from "@system/statistic/index.ts";
+import { EnrichHTMLOptionsPF2e } from "@system/text-editor.ts";
+import { SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data.ts";
+import { SpellOverlayCollection } from "./overlay.ts";
+import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "./types.ts";
 interface SpellConstructionContext<TParent extends ActorPF2e | null> extends DocumentConstructionContext<TParent> {
     fromConsumable?: boolean;
 }
@@ -78,7 +78,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     prepareBaseData(): void;
     prepareSiblingData(this: SpellPF2e<ActorPF2e>): void;
     getRollOptions(prefix?: string): string[];
-    toMessage(event?: JQuery.TriggeredEvent, { create, data, rollMode }?: SpellToMessageOptions): Promise<ChatMessagePF2e | undefined>;
+    toMessage(event?: MouseEvent | JQuery.TriggeredEvent, { create, data, rollMode }?: SpellToMessageOptions): Promise<ChatMessagePF2e | undefined>;
     getChatData(this: SpellPF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptionsPF2e, rollOptions?: {
         castLevel?: number | string;
         slotLevel?: number | string;

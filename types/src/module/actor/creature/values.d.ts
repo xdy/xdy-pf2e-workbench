@@ -1,4 +1,4 @@
-declare const ALIGNMENTS: Set<"LE" | "CE" | "LG" | "NG" | "CG" | "LN" | "N" | "CN" | "NE">;
+declare const ALIGNMENTS: Set<"CE" | "LG" | "NG" | "CG" | "LN" | "N" | "CN" | "LE" | "NE">;
 declare const ALIGNMENT_TRAITS: Set<"chaotic" | "evil" | "good" | "lawful">;
 declare const ALLIANCES: Set<"party" | "opposition" | null>;
 /** Use the lower end of CRB Table 9-1 ("Size and Reach"), allowing individual attacks to specify otherwise */

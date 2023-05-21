@@ -1,9 +1,9 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
-import { RollSubstitution } from "@module/rules/synthetics";
-import { CheckRollContext } from "./types";
+import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
+import { RollSubstitution } from "@module/rules/synthetics.ts";
+import { CheckRollContext } from "./types.ts";
 /**
  * Dialog for excluding certain modifiers before rolling a check.
  * @category Other

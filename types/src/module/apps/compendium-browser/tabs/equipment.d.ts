@@ -1,8 +1,9 @@
-import { CompendiumBrowser } from "..";
-import { ContentTabName } from "../data";
-import { CompendiumBrowserTab } from "./base";
-import { CompendiumBrowserIndexData, EquipmentFilters, RangesData } from "./data";
+import { CompendiumBrowser } from "../index.ts";
+import { ContentTabName } from "../data.ts";
+import { CompendiumBrowserTab } from "./base.ts";
+import { CompendiumBrowserIndexData, EquipmentFilters, RangesData } from "./data.ts";
 export declare class CompendiumBrowserEquipmentTab extends CompendiumBrowserTab {
+    #private;
     tabName: ContentTabName;
     filterData: EquipmentFilters;
     templatePath: string;

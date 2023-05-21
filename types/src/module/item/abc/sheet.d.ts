@@ -1,10 +1,10 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { AbilityString } from "@actor/types";
+import { AbilityString } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item";
-import { ABCFeatureEntryData } from "@item/abc/data";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/sheet";
+import { ABCFeatureEntryData } from "@item/abc/data.ts";
+import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/sheet/index.ts";
 declare abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> {
     #private;
     static get defaultOptions(): DocumentSheetOptions;

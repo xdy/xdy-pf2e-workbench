@@ -1,8 +1,9 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { ArrayField, BooleanField, ModelPropsFromSchema, NumberField, StringField } from "types/foundry/common/data/fields.mjs";
-import { RuleElementOptions } from "./";
-import { AELikeData, AELikeRuleElement, AELikeSchema, AELikeSource } from "./ae-like";
+import type { ArrayField, BooleanField, ModelPropsFromSchema, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { AELikeRuleElement, AELikeSchema, AELikeSource } from "./ae-like.ts";
+import { ResolvableValueField } from "./data.ts";
+import { RuleElementOptions } from "./index.ts";
 /** Adjust the value of a modifier, change its damage type (in case of damage modifiers) or suppress it entirely */
 declare class AdjustModifierRuleElement extends AELikeRuleElement<AdjustModifierSchema> {
     /** The number of times this adjustment has been applied */
@@ -14,11 +15,11 @@ declare class AdjustModifierRuleElement extends AELikeRuleElement<AdjustModifier
     applyAELike(): void;
 }
 interface AdjustModifierRuleElement extends AELikeRuleElement<AdjustModifierSchema>, ModelPropsFromSchema<AdjustModifierSchema> {
-    data: AELikeData;
     suppress: boolean;
     maxApplications: number;
 }
-type AdjustModifierSchema = AELikeSchema & {
+type AdjustModifierSchema = Omit<AELikeSchema, "value"> & {
+    value: ResolvableValueField<true, true, true>;
     /** An optional relabeling of the adjusted modifier */
     relabel: StringField<string, string, false, true, false>;
     selector: StringField<string, string, false, false, false>;

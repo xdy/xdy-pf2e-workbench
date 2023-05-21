@@ -1,12 +1,11 @@
-import { ActorPF2e } from "@actor";
-import { DamageDicePF2e, DeferredValueParams, ModifierAdjustment, ModifierPF2e } from "@actor/modifiers";
-import { AttackItem } from "@actor/types";
-import { ConditionSource, EffectSource } from "@item/data";
-import { RollNotePF2e } from "@module/notes";
-import { DegreeOfSuccessAdjustment } from "@system/degree-of-success";
-import { RollTwiceOption } from "@system/rolls";
-import { BracketedValue } from "./rule-element/data";
-import { DamageDiceSynthetics, RollSubstitution, RollTwiceSynthetic, RuleElementSynthetics } from "./synthetics";
+import { DamageDicePF2e, DeferredValueParams, ModifierAdjustment, ModifierPF2e } from "@actor/modifiers.ts";
+import { ConditionSource, EffectSource } from "@item/data/index.ts";
+import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
+import { RollNotePF2e } from "@module/notes.ts";
+import { DegreeOfSuccessAdjustment } from "@system/degree-of-success.ts";
+import { RollTwiceOption } from "@system/rolls.ts";
+import { BracketedValue } from "./rule-element/index.ts";
+import { DamageDiceSynthetics, RollSubstitution, RollTwiceSynthetic, RuleElementSynthetics } from "./synthetics.ts";
 /** Extracts a list of all cloned modifiers across all given keys in a single list. */
 declare function extractModifiers(synthetics: Pick<RuleElementSynthetics, "modifierAdjustments" | "statisticsModifiers">, selectors: string[], options?: DeferredValueParams): ModifierPF2e[];
 /** */
@@ -21,9 +20,9 @@ declare function extractDamageDice(deferredDice: DamageDiceSynthetics, selectors
 declare function extractEphemeralEffects({ affects, origin, target, item, domains, options, }: ExtractEphemeralEffectsParams): Promise<(ConditionSource | EffectSource)[]>;
 interface ExtractEphemeralEffectsParams {
     affects: "target" | "origin";
-    origin: ActorPF2e;
+    origin: ActorPF2e | null;
     target: Maybe<ActorPF2e>;
-    item: AttackItem | null;
+    item: ItemPF2e | null;
     domains: string[];
     options: Set<string> | string[];
 }

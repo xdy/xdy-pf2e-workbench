@@ -1,8 +1,8 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { PartialSettingsData, SettingsMenuPF2e } from "../menu";
-import { CustomDamageData, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey } from "./data";
+import { PartialSettingsData, SettingsMenuPF2e } from "../menu.ts";
+import { CustomDamageData, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey } from "./data.ts";
 import "@yaireo/tagify/src/tagify.scss";
 declare class HomebrewElements extends SettingsMenuPF2e {
     #private;
@@ -11,22 +11,8 @@ declare class HomebrewElements extends SettingsMenuPF2e {
     private initialRefresh;
     private damageManager;
     static get SETTINGS(): string[];
-    static get defaultOptions(): FormApplicationOptions & {
-        title: string;
-        id: string;
-        template: string;
-        width: number;
-        height: string;
-        tabs: {
-            navSelector: string;
-            contentSelector: string;
-        }[];
-        closeOnSubmit: boolean;
-        submitOnChange: boolean;
-    } & {
-        template: string;
-    };
-    protected static get traitSettings(): Record<"creatureTraits" | "equipmentTraits" | "weaponTraits" | "spellTraits" | "languages" | "featTraits" | "magicSchools" | "weaponCategories" | "weaponGroups" | "baseWeapons", PartialSettingsData>;
+    static get defaultOptions(): FormApplicationOptions;
+    protected static get traitSettings(): Record<HomebrewTraitKey, PartialSettingsData>;
     protected static get settings(): Record<HomebrewKey, PartialSettingsData>;
     activateListeners($form: JQuery<HTMLFormElement>): void;
     getData(): Promise<HomebrewElementsSheetData>;

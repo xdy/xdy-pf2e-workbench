@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Replace inline HTML in roll note text with separate title and visibility */
 export declare class Migration760SeparateNoteTitle extends MigrationBase {
     #private;

@@ -1,4 +1,4 @@
-import { ClientBaseActor } from "./client-base-mixes.mjs";
+import type { ClientBaseActor } from "./client-base-mixes.d.ts";
 
 declare global {
     /**

@@ -1,9 +1,9 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
-import { ImmunityData, IWRSource, ResistanceData, WeaknessData } from "@actor/data/iwr";
-import { ImmunityType, ResistanceType, WeaknessType } from "@actor/types";
+import { ImmunityData, IWRSource, ResistanceData, WeaknessData } from "@actor/data/iwr.ts";
+import { ImmunityType, ResistanceType, WeaknessType } from "@actor/types.ts";
 declare class IWREditor<TActor extends ActorPF2e> extends DocumentSheet<TActor, IWREditorOptions> {
     #private;
     category: ListCategory;

@@ -1,13 +1,13 @@
 import { ActorPF2e } from "@actor";
 import { ConsumablePF2e, SpellcastingEntryPF2e } from "@item";
-import { SpellcastingEntrySource } from "@item/spellcasting-entry";
-import { SpellCollection } from "@item/spellcasting-entry/collection";
-import { RitualSpellcasting } from "@item/spellcasting-entry/rituals";
-import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types";
+import { SpellcastingEntrySource } from "@item/spellcasting-entry/index.ts";
+import { SpellCollection } from "@item/spellcasting-entry/collection.ts";
+import { RitualSpellcasting } from "@item/spellcasting-entry/rituals.ts";
+import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
 export declare class ActorSpellcasting<TActor extends ActorPF2e> extends Collection<BaseSpellcastingEntry<TActor>> {
     readonly actor: TActor;
     /** All available spell lists on this actor */
-    collections: foundry.utils.Collection<SpellCollection<TActor, BaseSpellcastingEntry<TActor>>>;
+    collections: Collection<SpellCollection<TActor, BaseSpellcastingEntry<TActor>>>;
     constructor(actor: TActor, entries: BaseSpellcastingEntry<TActor>[]);
     /** Returns a list of entries pre-filtered to SpellcastingEntryPF2e */
     get regular(): SpellcastingEntryPF2e<TActor>[];

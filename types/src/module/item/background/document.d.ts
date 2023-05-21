@@ -1,6 +1,6 @@
 import { ActorPF2e, CharacterPF2e } from "@actor";
 import { ABCItemPF2e } from "@item";
-import { BackgroundSource, BackgroundSystemData } from "./data";
+import { BackgroundSource, BackgroundSystemData } from "./data.ts";
 declare class BackgroundPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ABCItemPF2e<TParent> {
     /** Set a skill feat granted by a GrantItem RE as one of this background's configured items */
     prepareSiblingData(this: BackgroundPF2e<ActorPF2e>): void;

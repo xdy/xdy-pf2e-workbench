@@ -1,6 +1,6 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
 declare class ActorTraitsRuleElement extends RuleElementPF2e {
     add: string[];
     remove: string[];

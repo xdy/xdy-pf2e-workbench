@@ -1,14 +1,14 @@
 import { ActorPF2e } from "@actor";
-import { ActorType } from "@actor/data";
-import { DiceModifierPF2e, ModifierPF2e } from "@actor/modifiers";
+import { ActorType } from "@actor/data/index.ts";
+import { DiceModifierPF2e, ModifierPF2e } from "@actor/modifiers.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data";
-import { TokenDocumentPF2e } from "@scene";
-import { CheckRoll } from "@system/check";
-import { LaxSchemaField } from "@system/schema-data-fields";
-import { DataModelValidationOptions } from "types/foundry/common/abstract/module.mjs";
-import { BracketedValue, RuleElementData, RuleElementSchema, RuleElementSource, RuleValue } from "./data";
-declare const DataModel: typeof import("types/foundry/common/abstract/module.mjs").DataModel;
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { CheckRoll } from "@system/check/index.ts";
+import { LaxSchemaField } from "@system/schema-data-fields.ts";
+import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
+import { BracketedValue, RuleElementData, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
+declare const DataModel: typeof import("types/foundry/common/abstract/data.d.ts").default;
 /**
  * Rule Elements allow you to modify actorData and tokenData values when present on items. They can be configured
  * in the item's Rules tab which has to be enabled using the "Advanced Rule Element UI" system setting.
@@ -33,6 +33,8 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
     get actor(): ActorPF2e;
     /** Retrieves the token from the actor, or from the active tokens. */
     get token(): TokenDocumentPF2e | null;
+    /** Generate a label without a leading title (such as "Effect:") */
+    protected getReducedLabel(label?: string): string;
     /** Disallow invalid data fallbacks */
     validate(options?: DataModelValidationOptions): boolean;
     /** Test this rule element's predicate, if present */
@@ -74,7 +76,7 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
      * @param defaultValue if no value is found, use that one
      * @return the evaluated value
      */
-    protected resolveValue(valueData?: RuleValue | BracketedValue<string | number | object> | undefined, defaultValue?: Exclude<RuleValue, BracketedValue>, { evaluate, resolvables }?: {
+    protected resolveValue(valueData?: RuleValue | undefined, defaultValue?: Exclude<RuleValue, BracketedValue>, { evaluate, resolvables }?: {
         evaluate?: boolean;
         resolvables?: Record<string, unknown>;
     }): number | string | boolean | object | null;

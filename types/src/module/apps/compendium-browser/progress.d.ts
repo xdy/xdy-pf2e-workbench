@@ -6,6 +6,7 @@
  * @category Other
  */
 export declare class Progress {
+    #private;
     private steps;
     private counter;
     private label;
@@ -14,5 +15,4 @@ export declare class Progress {
     });
     advance(label: string): void;
     close(label?: string): void;
-    private updateUI;
 }

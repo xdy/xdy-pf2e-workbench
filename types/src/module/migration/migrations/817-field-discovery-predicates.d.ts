@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Convert crafting-entry field discovery data to predicates */
 export declare class Migration817FieldDiscoveryPredicates extends MigrationBase {
     static version: number;

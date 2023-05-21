@@ -1,4 +1,4 @@
-import { ActorPF2e } from "@actor/base";
+import { ActorPF2e } from "@actor/base.ts";
 interface PopupData extends FormApplicationData<ActorPF2e> {
     tokenInfo: {
         id: string;

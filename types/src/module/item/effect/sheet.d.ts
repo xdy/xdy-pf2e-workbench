@@ -1,9 +1,9 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ItemSheetDataPF2e } from "@item/sheet/data-types";
-import { EffectPF2e } from ".";
-import { ItemSheetPF2e } from "../sheet/base";
+import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { ItemSheetPF2e } from "../sheet/base.ts";
+import { EffectPF2e } from "./document.ts";
 export declare class EffectSheetPF2e extends ItemSheetPF2e<EffectPF2e> {
     getData(options?: Partial<DocumentSheetOptions>): Promise<EffectSheetData>;
     activateListeners($html: JQuery<HTMLElement>): void;

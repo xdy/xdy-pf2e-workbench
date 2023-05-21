@@ -111,6 +111,7 @@ declare const weaknessTypes: {
     fire: string;
     force: string;
     "ghost-touch": string;
+    glass: string;
     good: string;
     lawful: string;
     light: string;

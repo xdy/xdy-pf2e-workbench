@@ -1,10 +1,10 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { CreatureSheetPF2e } from "@actor/creature/sheet";
-import { NPCPF2e } from "@actor/index";
-import { NPCConfig } from "./config";
-import { NPCSheetData, NPCSpellcastingSheetData } from "./types";
+import { NPCPF2e } from "@actor";
+import { CreatureSheetPF2e } from "@actor/creature/sheet.ts";
+import { NPCConfig } from "./config.ts";
+import { NPCSheetData, NPCSpellcastingSheetData } from "./types.ts";
 declare class NPCSheetPF2e<TActor extends NPCPF2e> extends CreatureSheetPF2e<TActor> {
     #private;
     protected readonly actorConfigClass: typeof NPCConfig;

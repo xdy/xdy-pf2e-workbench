@@ -1,6 +1,6 @@
-import { ActorType } from "@actor/data";
-import { BooleanField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
-import { RuleElementPF2e, RuleElementSchema } from ".";
+import { ActorType } from "@actor/data/index.ts";
+import type { BooleanField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
 /** Substitute a pre-determined result for a check's D20 roll */
 declare class CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema> {
     #private;

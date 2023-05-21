@@ -1,4 +1,4 @@
-import { TraitViewData } from "@actor/data/base";
+import { TraitViewData } from "@actor/data/base.ts";
 import Tagify from "@yaireo/tagify";
 type WhitelistData = string[] | Record<string, string | {
     label: string;

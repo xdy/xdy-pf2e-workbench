@@ -1,15 +1,16 @@
-import { IdentifyCreatureData } from "@module/recall-knowledge";
+import { CreatureIdentificationData } from "@module/recall-knowledge.ts";
 export declare class RecallKnowledgePopup extends Application {
-    private data;
+    #private;
+    constructor(options: Partial<ApplicationOptions>, data: CreatureIdentificationData);
     static get defaultOptions(): ApplicationOptions;
-    constructor(options: Partial<ApplicationOptions>, data: IdentifyCreatureData);
-    getData(): Promise<{
-        specificLoreAttempts: string[];
-        unspecificLoreAttempts: string[];
-        skills: {
-            name: string;
-            attempts: string[];
-        }[];
-    }>;
-    private padAttempts;
+    getData(): Promise<PopupData>;
 }
+interface PopupData {
+    standard: {
+        label: string;
+        attempts: string[];
+    };
+    loreEasy: string[];
+    loreVeryEasy: string[];
+}
+export {};

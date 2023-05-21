@@ -1,7 +1,7 @@
-import { RollInitiativeOptionsPF2e } from "@actor/data";
-import { SkillLongForm } from "@actor/types";
-import { ScenePF2e, TokenDocumentPF2e } from "@scene";
-import { CombatantPF2e, RolledCombatant } from "./combatant";
+import { RollInitiativeOptionsPF2e } from "@actor/data/index.ts";
+import { SkillLongForm } from "@actor/types.ts";
+import { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
+import { CombatantPF2e, RolledCombatant } from "./combatant.ts";
 declare class EncounterPF2e extends Combat {
     /** Sort combatants by initiative rolls, falling back to tiebreak priority and then finally combatant ID (random) */
     protected _sortCombatants(a: CombatantPF2e<this, TokenDocumentPF2e>, b: CombatantPF2e<this, TokenDocumentPF2e>): number;
@@ -27,7 +27,7 @@ declare class EncounterPF2e extends Combat {
     protected _onDelete(options: DocumentModificationContext<null>, userId: string): void;
 }
 interface EncounterPF2e extends Combat {
-    readonly combatants: foundry.abstract.EmbeddedCollection<CombatantPF2e<this, TokenDocumentPF2e>>;
+    readonly combatants: foundry.abstract.EmbeddedCollection<CombatantPF2e<this, TokenDocumentPF2e | null>>;
     rollNPC(options: RollInitiativeOptionsPF2e): Promise<this>;
 }
 interface SetInitiativeData {

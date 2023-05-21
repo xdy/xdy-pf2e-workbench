@@ -1,8 +1,8 @@
-import { AuraColors, AuraData } from "@actor/types";
-import { ItemTrait } from "@item/data/base";
-import { EffectAreaSquare } from "@module/canvas/effect-area-square";
-import { TokenDocumentPF2e } from "../document";
-import { TokenAuraData } from "./types";
+import { AuraColors, AuraData } from "@actor/types.ts";
+import { ItemTrait } from "@item/data/base.ts";
+import { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
+import { TokenDocumentPF2e } from "../document.ts";
+import type { TokenAuraData } from "./types.ts";
 declare class TokenAura implements TokenAuraData {
     #private;
     slug: string;

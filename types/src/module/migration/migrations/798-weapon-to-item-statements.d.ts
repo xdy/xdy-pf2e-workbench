@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Change all "weapon:*" predication statements to "item:*" ones  */
 export declare class Migration798WeaponToItemStatements extends MigrationBase {
     static version: number;

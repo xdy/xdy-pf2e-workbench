@@ -1,25 +1,27 @@
-import { DamageCategoryUnique, DamageType } from "@system/damage/types";
+import { DamageCategoryUnique, DamageType } from "@system/damage/types.ts";
 declare const damageCategoriesUnique: Record<DamageCategoryUnique, string>;
-declare const materialDamageEffects: Pick<Record<"abysium" | "adamantine" | "cold-iron" | "darkwood" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "peachwood" | "siccatite" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass", string>, "abysium" | "adamantine" | "cold-iron" | "djezet" | "mithral" | "noqual" | "peachwood" | "silver" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass">;
+declare const materialDamageEffects: Pick<Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>, "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel">;
 declare const damageCategories: {
     alignment: string;
     energy: string;
     physical: string;
-    abysium: string;
     adamantine: string;
+    darkwood: string;
+    mithral: string;
+    orichalcum: string;
+    silver: string;
+    warpglass: string;
+    abysium: string;
     "cold-iron": string;
     djezet: string;
-    mithral: string;
     noqual: string;
     peachwood: string;
-    silver: string;
     "sisterstone-dusk": string;
     "sisterstone-scarlet": string;
     "sovereign-steel": string;
-    warpglass: string;
-    persistent: string;
     precision: string;
     splash: string;
+    persistent: string;
 };
 declare const physicalDamageTypes: {
     bleed: string;
@@ -28,5 +30,5 @@ declare const physicalDamageTypes: {
     slashing: string;
 };
 declare const damageTypes: Record<DamageType, string>;
-declare const damageRollFlavors: Record<"force" | "chaotic" | "evil" | "good" | "lawful" | "bludgeoning" | "piercing" | "slashing" | "bleed" | "acid" | "cold" | "electricity" | "fire" | "sonic" | "positive" | "negative" | "mental" | "poison" | "untyped", string>;
+declare const damageRollFlavors: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "untyped", string>;
 export { damageCategories, damageCategoriesUnique, damageRollFlavors, damageTypes, materialDamageEffects, physicalDamageTypes, };

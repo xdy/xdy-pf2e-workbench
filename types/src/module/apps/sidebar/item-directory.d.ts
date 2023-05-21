@@ -1,5 +1,5 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ItemPF2e } from "@item";
 /** Extend ItemDirectory to show more information */

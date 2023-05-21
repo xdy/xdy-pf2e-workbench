@@ -1,4 +1,4 @@
-import { DamageInstance } from "./roll";
+import { DamageInstance } from "./roll.ts";
 declare class ArithmeticExpression extends RollTerm<ArithmeticExpressionData> {
     operator: ArithmeticOperator;
     operands: [RollTerm, RollTerm];

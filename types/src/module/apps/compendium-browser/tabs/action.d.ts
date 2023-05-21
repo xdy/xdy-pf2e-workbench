@@ -1,7 +1,7 @@
-import { CompendiumBrowser } from "..";
-import { ContentTabName } from "../data";
-import { CompendiumBrowserTab } from "./base";
-import { ActionFilters, CompendiumBrowserIndexData } from "./data";
+import { CompendiumBrowser } from "../index.ts";
+import { ContentTabName } from "../data.ts";
+import { CompendiumBrowserTab } from "./base.ts";
+import { ActionFilters, CompendiumBrowserIndexData } from "./data.ts";
 export declare class CompendiumBrowserActionTab extends CompendiumBrowserTab {
     tabName: ContentTabName;
     filterData: ActionFilters;

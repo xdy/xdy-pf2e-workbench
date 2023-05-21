@@ -1,4 +1,4 @@
-import { CanvasBaseAmbientLight } from "./client-base-mixes.mjs";
+import type { CanvasBaseAmbientLight } from "./client-base-mixes.d.ts";
 
 declare global {
     class AmbientLightDocument<TParent extends Scene | null> extends CanvasBaseAmbientLight<TParent> {

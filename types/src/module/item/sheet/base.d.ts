@@ -1,10 +1,10 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ItemPF2e } from "@item";
-import { RuleElementSource } from "@module/rules";
+import { RuleElementSource } from "@module/rules/index.ts";
 import type * as TinyMCE from "tinymce";
-import { ItemSheetDataPF2e } from "./data-types";
+import { ItemSheetDataPF2e } from "./data-types.ts";
 export declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
     static get defaultOptions(): DocumentSheetOptions;
     /** Maintain selected rule element at the sheet level (do not persist) */

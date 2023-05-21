@@ -1,22 +1,16 @@
-import { ActorPF2e } from "@actor/base";
+import { ActorPF2e } from "@actor/base.ts";
 declare class MoveLootPopup extends FormApplication<{}, MoveLootOptions> {
     onSubmitCallback: MoveLootCallback;
     constructor(object: ActorPF2e, options: Partial<MoveLootOptions>, callback: MoveLootCallback);
-    getData(): Promise<{
-        maxQuantity: number;
-        newStack: boolean;
-        lockStack: boolean;
-        prompt: string;
-        buttonLabel: string;
-        object?: object | {} | undefined;
-        options?: Partial<FormApplicationOptions> | undefined;
-        title?: string | undefined;
-    }>;
+    getData(): Promise<PopupData>;
     static get defaultOptions(): MoveLootOptions;
     _updateObject(_event: ElementDragEvent, formData: Record<string, unknown> & MoveLootFormData): Promise<void>;
 }
 interface MoveLootOptions extends FormApplicationOptions {
-    maxQuantity: number;
+    quantity: {
+        default: number;
+        max: number;
+    };
     newStack: boolean;
     lockStack: boolean;
     isPurchase: boolean;
@@ -24,6 +18,16 @@ interface MoveLootOptions extends FormApplicationOptions {
 interface MoveLootFormData extends FormData {
     quantity: number;
     newStack: boolean;
+}
+interface PopupData extends FormApplicationData {
+    quantity: {
+        default: number;
+        max: number;
+    };
+    newStack: boolean;
+    lockStack: boolean;
+    prompt: string;
+    buttonLabel: string;
 }
 type MoveLootCallback = (quantity: number, newStack: boolean) => void;
 export { MoveLootPopup };

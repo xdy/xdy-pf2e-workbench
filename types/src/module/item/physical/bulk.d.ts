@@ -1,4 +1,4 @@
-import { Size } from "@module/data";
+import { Size } from "@module/data.ts";
 import { Optional } from "@util";
 interface StackDefinition {
     size: number;

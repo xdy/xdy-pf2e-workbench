@@ -1,6 +1,6 @@
 import { PhysicalItemPF2e } from "@item";
-import { CheckDC } from "@system/degree-of-success";
-import { SkillActionOptions } from "../types";
+import { CheckDC } from "@system/degree-of-success.ts";
+import { SkillActionOptions } from "../types.ts";
 export declare function craft(options: CraftActionOptions): Promise<void>;
 interface CraftActionOptions extends SkillActionOptions {
     difficultyClass?: CheckDC;

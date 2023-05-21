@@ -1,11 +1,11 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ItemSheetPF2e } from "@item/sheet/base";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types";
-import { SheetOptions } from "@module/sheet/helpers";
-import { DamageCategoryUnique } from "@system/damage";
-import { MeleePF2e } from ".";
+import { ItemSheetPF2e } from "@item/sheet/base.ts";
+import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { SheetOptions } from "@module/sheet/helpers.ts";
+import { DamageCategoryUnique } from "@system/damage/types.ts";
+import { MeleePF2e } from "./index.ts";
 export declare class MeleeSheetPF2e extends ItemSheetPF2e<MeleePF2e> {
     getData(options?: Partial<DocumentSheetOptions>): Promise<MeleeSheetData>;
     activateListeners($html: JQuery<HTMLElement>): void;

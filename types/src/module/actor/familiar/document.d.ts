@@ -1,6 +1,6 @@
 import { CharacterPF2e, CreaturePF2e } from "@actor";
-import { TokenDocumentPF2e } from "@scene";
-import { FamiliarSource, FamiliarSystemData } from "./data";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { FamiliarSource, FamiliarSystemData } from "./data.ts";
 declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     /** The familiar's master, if selected */
     get master(): CharacterPF2e | null;

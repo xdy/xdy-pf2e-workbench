@@ -1,13 +1,13 @@
 import { ActorPF2e } from "@actor";
-import { AbilityString } from "@actor/types";
+import { AbilityString } from "@actor/types.ts";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
-import { MagicTradition } from "@item/spell/types";
-import { ZeroToFour } from "@module/data";
-import { UserPF2e } from "@module/user";
-import { Statistic } from "@system/statistic";
-import { SpellCollection } from "./collection";
-import { SpellcastingEntrySource, SpellcastingEntrySystemData } from "./data";
-import { SpellcastingCategory, SpellcastingEntry, SpellcastingEntryPF2eCastOptions, SpellcastingSheetData } from "./types";
+import { MagicTradition } from "@item/spell/types.ts";
+import { ZeroToFour } from "@module/data.ts";
+import { UserPF2e } from "@module/user/index.ts";
+import { Statistic } from "@system/statistic/index.ts";
+import { SpellCollection } from "./collection.ts";
+import { SpellcastingEntrySource, SpellcastingEntrySystemData } from "./data.ts";
+import { SpellcastingCategory, SpellcastingEntry, SpellcastingEntryPF2eCastOptions, SpellcastingSheetData } from "./types.ts";
 declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> implements SpellcastingEntry<TParent> {
     spells: SpellCollection<NonNullable<TParent>, this> | null;
     /** Spellcasting attack and dc data created during actor preparation */

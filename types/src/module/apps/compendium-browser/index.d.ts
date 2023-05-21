@@ -1,12 +1,14 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActionTrait } from "@item/action";
-import { ActionType } from "@item/data/base";
-import { BaseSpellcastingEntry } from "@item/spellcasting-entry";
-import { BrowserTabs, PackInfo, TabData, TabName } from "./data";
-import { ActionFilters, BestiaryFilters, EquipmentFilters, FeatFilters, HazardFilters, SpellFilters } from "./tabs/data";
+import { ActionTrait } from "@item/action/index.ts";
+import { ActionType } from "@item/data/base.ts";
+import { BaseSpellcastingEntry } from "@item/spellcasting-entry/index.ts";
+import { UserPF2e } from "@module/user/document.ts";
+import { BrowserTabs, PackInfo, SourceInfo, TabData, TabName } from "./data.ts";
+import { ActionFilters, BestiaryFilters, EquipmentFilters, FeatFilters, HazardFilters, SpellFilters } from "./tabs/data.ts";
 declare class PackLoader {
+    #private;
     loadedPacks: {
         Actor: Record<string, {
             pack: CompendiumCollection;
@@ -17,17 +19,19 @@ declare class PackLoader {
             index: CompendiumIndex;
         } | undefined>;
     };
+    loadedSources: string[];
+    sourcesSettings: CompendiumBrowserSources;
+    constructor();
     loadPacks(documentType: "Actor" | "Item", packs: string[], indexFields: string[]): AsyncGenerator<{
         pack: CompendiumCollection<CompendiumDocument>;
         index: CompendiumIndex;
-    } | {
-        pack: CompendiumCollection<CompendiumDocument>;
-        index: CompendiumIndex;
     }, void, unknown>;
-    /** Set art provided by a module if any is available */
-    private setModuleArt;
+    updateSources(packs: string[]): Promise<void>;
+    reset(): void;
+    hardReset(packs: string[]): Promise<void>;
 }
 declare class CompendiumBrowser extends Application {
+    #private;
     settings: CompendiumBrowserSettings;
     dataTabsList: readonly ["action", "bestiary", "equipment", "feat", "hazard", "spell"];
     navigationTab: Tabs;
@@ -54,43 +58,28 @@ declare class CompendiumBrowser extends Application {
     openSpellTab(entry: BaseSpellcastingEntry, maxLevel?: number): Promise<void>;
     loadTab(tabName: TabName): Promise<void>;
     loadedPacks(tab: TabName): string[];
+    loadedPacksAll(): string[];
     activateListeners($html: JQuery): void;
-    /**
-     * Append new results to the result list
-     * @param options Render options
-     * @param options.list The result list HTML element
-     * @param options.start The index position to start from
-     * @param options.replace Replace the current list with the new results?
-     */
-    private renderResultList;
-    /** Activate click listeners on loaded actors and items */
-    private activateResultListeners;
-    private takePhysicalItem;
-    private buyPhysicalItem;
-    private getPhysicalItem;
     protected _canDragStart(): boolean;
     protected _canDragDrop(): boolean;
     /** Set drag data and lower opacity of the application window to reveal any tokens */
     protected _onDragStart(event: ElementDragEvent): void;
     protected _onDragOver(event: ElementDragEvent): void;
     getData(): {
-        user: Active<import("../../user/document").UserPF2e>;
-        settings: CompendiumBrowserSettings;
-        scrollLimit?: undefined;
-    } | {
-        [x: string]: number | Active<import("../../user/document").UserPF2e> | {
-            filterData: EquipmentFilters | ActionFilters | BestiaryFilters | FeatFilters | HazardFilters | SpellFilters;
+        user: Active<UserPF2e>;
+        settings?: {
+            settings: CompendiumBrowserSettings;
+            sources: CompendiumBrowserSources;
         };
-        user: Active<import("../../user/document").UserPF2e>;
-        scrollLimit: number;
-        settings?: undefined;
-    } | {
-        user: Active<import("../../user/document").UserPF2e>;
-        settings?: undefined;
-        scrollLimit?: undefined;
+        scrollLimit?: number;
     };
-    private resetFilters;
-    private clearScrollLimit;
 }
 type CompendiumBrowserSettings = Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;
-export { CompendiumBrowser, CompendiumBrowserSettings };
+type CompendiumBrowserSourcesList = Record<string, SourceInfo | undefined>;
+interface CompendiumBrowserSources {
+    ignoreAsGM: boolean;
+    showEmptySources: boolean;
+    showUnknownSources: boolean;
+    sources: CompendiumBrowserSourcesList;
+}
+export { CompendiumBrowser, CompendiumBrowserSettings, CompendiumBrowserSources };

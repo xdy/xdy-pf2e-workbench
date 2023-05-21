@@ -1,8 +1,8 @@
 import { ActorPF2e, CreaturePF2e } from "@actor";
-import { ActorType } from "@actor/data";
-import { ActorSizePF2e } from "@actor/data/size";
+import { ActorType } from "@actor/data/index.ts";
+import { ActorSizePF2e } from "@actor/data/size.ts";
 import { ItemPF2e } from "@item";
-import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions, BracketedValue } from "./";
+import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions, BracketedValue } from "./index.ts";
 /**
  * @category RuleElement
  * Change a creature's size

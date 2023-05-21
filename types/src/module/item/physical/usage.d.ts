@@ -1,4 +1,4 @@
-import { EquippedData } from "./data";
+import { EquippedData } from "./data.ts";
 interface HeldUsage {
     value: string;
     type: "held";
@@ -10,7 +10,13 @@ interface WornUsage {
     where?: string | null;
     hands?: 0;
 }
-export type UsageDetails = HeldUsage | WornUsage;
-export declare function isEquipped(usage: UsageDetails, equipped: EquippedData): boolean;
-export declare function getUsageDetails(usage: string): UsageDetails;
-export {};
+interface CarriedUsage {
+    value: "carried";
+    type: "carried";
+    hands?: 0;
+}
+type UsageDetails = HeldUsage | WornUsage | CarriedUsage;
+type UsageType = UsageDetails["type"];
+declare function isEquipped(usage: UsageDetails, equipped: EquippedData): boolean;
+declare function getUsageDetails(usage: string): UsageDetails;
+export { UsageDetails, UsageType, getUsageDetails, isEquipped };

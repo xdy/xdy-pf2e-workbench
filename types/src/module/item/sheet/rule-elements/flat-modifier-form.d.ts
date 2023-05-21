@@ -1,50 +1,22 @@
-import { FlatModifierSource } from "@module/rules/rule-element/flat-modifier";
-import { RuleElementForm } from "./base";
+import { MODIFIER_TYPES } from "@actor/modifiers.ts";
+import { FlatModifierRuleElement, FlatModifierSource } from "@module/rules/rule-element/flat-modifier.ts";
+import { RuleElementForm, RuleElementFormSheetData } from "./base.ts";
 /** Form handler for the flat modifier rule element */
-declare class FlatModifierForm extends RuleElementForm<FlatModifierSource> {
+declare class FlatModifierForm extends RuleElementForm<FlatModifierSource, FlatModifierRuleElement> {
     template: string;
     activateListeners(html: HTMLElement): void;
-    getData(): Promise<{
-        selectorIsArray: boolean;
-        abilities: {
-            str: string;
-            dex: string;
-            con: string;
-            int: string;
-            wis: string;
-            cha: string;
-        };
-        types: ("item" | "status" | "untyped" | "ability" | "circumstance" | "potency" | "proficiency")[];
-        damageCategories: Pick<{
-            alignment: string;
-            energy: string;
-            physical: string;
-            abysium: string;
-            adamantine: string;
-            "cold-iron": string;
-            djezet: string;
-            mithral: string;
-            noqual: string;
-            peachwood: string;
-            silver: string;
-            "sisterstone-dusk": string;
-            "sisterstone-scarlet": string;
-            "sovereign-steel": string;
-            warpglass: string;
-            persistent: string;
-            precision: string;
-            splash: string;
-        }, "persistent" | "precision" | "splash">;
-        isDamage: boolean;
-        value: {
-            mode: string;
-            data: unknown;
-        };
-        item: import("../../base").ItemPF2e<import("../../../actor/base").ActorPF2e<import("../../../scene/token-document/document").TokenDocumentPF2e<import("../../../scene/document").ScenePF2e | null> | null>>;
-        index: number;
-        rule: FlatModifierSource;
-        object: import("../../../rules/rule-element/base").RuleElementPF2e<import("../../../rules/rule-element/data").RuleElementSchema> | null;
-    }>;
+    getData(): Promise<FlatModifierFormSheetData>;
     _updateObject(formData: Partial<FlatModifierSource>): void;
+}
+interface FlatModifierFormSheetData extends RuleElementFormSheetData<FlatModifierSource, FlatModifierRuleElement> {
+    selectorIsArray: boolean;
+    abilities: ConfigPF2e["PF2E"]["abilities"];
+    types: Omit<keyof typeof MODIFIER_TYPES, "untyped">[];
+    damageCategories: Pick<ConfigPF2e["PF2E"]["damageCategories"], "persistent" | "precision" | "splash">;
+    isDamage: boolean;
+    value: {
+        mode: "brackets" | "object" | "primitive";
+        data: unknown;
+    };
 }
 export { FlatModifierForm };

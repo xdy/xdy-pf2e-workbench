@@ -1,7 +1,7 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ChatMessagePF2e } from "@module/chat-message";
+import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 export declare class ChatLogPF2e extends ChatLog<ChatMessagePF2e> {
     #private;
     /** Replace parent method in order to use DamageRoll class as needed */

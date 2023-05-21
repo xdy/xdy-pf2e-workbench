@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Rename references to retired compendiums */
 export declare class Migration778RenameRetiredPackRefs extends MigrationBase {
     static version: number;

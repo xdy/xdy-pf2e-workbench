@@ -1,11 +1,11 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
-import { ItemSummaryData } from "@item/data";
-import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick";
-import { ValueAndMax } from "@module/data";
-import { RuleElementPF2e } from "@module/rules";
-import { ConsumableCategory, ConsumableSystemData, ConsumableSource } from "./data";
-import { OtherConsumableTag } from "./types";
+import { ItemSummaryData } from "@item/data/index.ts";
+import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
+import { ValueAndMax } from "@module/data.ts";
+import { RuleElementPF2e } from "@module/rules/index.ts";
+import { ConsumableCategory, ConsumableSystemData, ConsumableSource } from "./data.ts";
+import { OtherConsumableTag } from "./types.ts";
 declare class ConsumablePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     get otherTags(): Set<OtherConsumableTag>;
     get category(): ConsumableCategory;

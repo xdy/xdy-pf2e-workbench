@@ -1,21 +1,24 @@
 import { ActorPF2e } from "@actor";
-import { ModifierType } from "@actor/modifiers";
-import { AbilityString } from "@actor/types";
+import { ModifierType } from "@actor/modifiers.ts";
+import { AbilityString } from "@actor/types.ts";
 import { ItemPF2e } from "@item";
-import { DamageCategoryUnique } from "@system/damage/types";
-import { ArrayField, BooleanField, ModelPropsFromSchema, NumberField, StringField } from "types/foundry/common/data/fields.mjs";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./";
+import { DamageCategoryUnique } from "@system/damage/types.ts";
+import type { ArrayField, BooleanField, ModelPropsFromSchema, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { ResolvableValueField, RuleValue } from "./data.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 /**
  * Apply a constant modifier (or penalty/bonus) to a statistic or usage thereof
  * @category RuleElement
  */
 declare class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
     constructor(source: FlatModifierSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    protected _validateModel(data: SourceFromSchema<FlatModifierSchema>): void;
     static defineSchema(): FlatModifierSchema;
     get selectors(): string[];
     beforePrepareData(): void;
 }
 interface FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema>, ModelPropsFromSchema<FlatModifierSchema> {
+    value: RuleValue;
 }
 type FlatModifierSchema = RuleElementSchema & {
     /** All domains to add a modifier to */
@@ -38,6 +41,7 @@ type FlatModifierSchema = RuleElementSchema & {
     damageCategory: StringField<DamageCategoryUnique, DamageCategoryUnique, false, false, false>;
     /** If a damage modifier, whether it applies given the presence or absence of a critically successful attack roll */
     critical: BooleanField<boolean, boolean, false, true, false>;
+    value: ResolvableValueField<false, false, false>;
 };
 interface FlatModifierSource extends RuleElementSource {
     selector?: unknown;

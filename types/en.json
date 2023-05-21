@@ -133,21 +133,11 @@
                 "MeleeLabel": "Melee Strike: {weapon}",
                 "OutOfRange": "The target is out of range.",
                 "RangedLabel": "Ranged Strike: {weapon}"
-            },
-            "Type": {
-                "Activity": "Activity",
-                "Free": "Free Action",
-                "Single": "Single Action",
-                "Reaction": "Reaction"
             }
         },
         "ActionActionTypeLabel": "Action Type",
         "ActionActionsLabel": "Actions",
         "ActionBrowserSearchHint": "You can search for name or custom attributes. Possible searchable attributes are:<br> source, spellType, level, school, components, materials, target, range, time, duration, damage, damageType, save, concentration, ritual, ability and classes. <br>Example: 'fire, damage:d6' to show all spells that have fire in their name and a d6 in the damage",
-        "ActionCategoryDefensive": "Defensive",
-        "ActionCategoryInteraction": "Interaction",
-        "ActionCategoryLabel": "Action Category",
-        "ActionCategoryOffensive": "Offensive",
         "ActionDeathNoteLabel": "Death Note",
         "ActionNumber1": "One",
         "ActionNumber2": "Two",
@@ -219,6 +209,7 @@
                 }
             },
             "Creature": {
+                "AbilityModifiers": "Ability Modifiers",
                 "Alliance": {
                     "Default": "Ownership Default ({alliance})",
                     "Neutral": "Neutral",
@@ -253,6 +244,7 @@
                         "Scent": "Scent",
                         "SeeInvisibility": "See Invisibility",
                         "Spiritsense": "Spiritsense",
+                        "Thoughtsense": "Thoughtsense",
                         "Tremorsense": "Tremorsense",
                         "Wavesense": "Wavesense"
                     },
@@ -277,6 +269,14 @@
                 }
             },
             "Dead": "Dead",
+            "Familiar": {
+                "Master": {
+                    "Perception": "Master Perception"
+                }
+            },
+            "Hardness": {
+                "ShortLabel": "HRD"
+            },
             "Hazard": {
                 "EmitsSound": {
                     "Encounter": "During Encounters",
@@ -314,7 +314,31 @@
                     },
                     "Label": "Generate Attack",
                     "Notification": "Generated NPC attack: {attack}"
+                },
+                "Identification": {
+                    "Skills": {
+                        "Label": "{skills}: DC {dc} ({adjustment})",
+                        "Tooltip": "\"The skill used to identify a creature usually depends on that creature’s trait, as shown on Table 10–7, but you have leeway on which skills apply.\" – CRB pg. 506"
+                    },
+                    "Lore": {
+                        "Label": "Applicable Lore: DC {dc1} ({adjustment1}) or DC {dc2} ({adjustment2})",
+                        "Tooltip": "\"Using the applicable Lore usually has an easy or very easy DC (before adjusting for rarity).\" – CRB pg. 506"
+                    }
                 }
+            },
+            "Party": {
+                "BlankSlate": "This party doesn't have any members. Drag a creature from the actor sidebar to get started. ",
+                "Coin": "Coin",
+                "Languages": "Party Languages",
+                "MembersLabel": "Members: ",
+                "NoSpecialSenses": "No Special Senses",
+                "Tabs": {
+                    "Overview": "Overview",
+                    "Inventory": "Inventory",
+                    "Orphaned": "Orphaned Items"
+                },
+                "Total": "Party Total",
+                "Wealth": "Wealth"
             },
             "Plural": "Actors"
         },
@@ -562,6 +586,7 @@
         "BrowserFilterWeaponFilters": "Weapon Filters",
         "BrowserSearchPlaceholder": "Search Text",
         "BrowserSearchTitle": "Right click for guide",
+        "BrowserSettingsSaved": "Settings have been saved",
         "BrowserSortyByLabel": "Sort by",
         "BrowserSortyByLevelLabel": "Level",
         "BrowserSortyByNameLabel": "Name",
@@ -682,7 +707,7 @@
             "TabEquipment": "Equipment",
             "TabFeat": "Feats/Features",
             "TabHazard": "Hazards",
-            "TabSettings": "Load Packs",
+            "TabSettings": "Settings",
             "TabSpell": "Spells",
             "TakeLabel": "Take Item",
             "Title": "Compendium Browser"
@@ -842,7 +867,7 @@
         "DCAdjustmentHard": "hard",
         "DCAdjustmentIncrediblyEasy": "incredibly easy",
         "DCAdjustmentIncrediblyHard": "incredibly hard",
-        "DCAdjustmentNormal": "normal",
+        "DCAdjustmentNormal": "baseline",
         "DCAdjustmentVeryEasy": "very easy",
         "DCAdjustmentVeryHard": "very hard",
         "DCBase": "Base DC 10",
@@ -867,7 +892,8 @@
                     "immunity": "Immune to {type}: {adjustment}",
                     "resistance": "Resistant to {type}: {adjustment}",
                     "unaffected": "Unaffected by {type}: {adjustment}",
-                    "weakness": "Weak to {type}: {adjustment}"
+                    "weakness": "Weak to {type}: {adjustment}",
+                    "reduction": "Reduced by {type}: {adjustment}"
                 },
                 "CompositeLabel": {
                     "Exceptions0DoubleVs0": "{type} {value}",
@@ -934,6 +960,7 @@
                     "fleeing": "fleeing",
                     "frightened": "frightened",
                     "ghost-touch": "ghost touch",
+                    "glass": "glass",
                     "grabbed": "grabbed",
                     "healing": "healing",
                     "hidden": "hidden",
@@ -990,6 +1017,10 @@
                     "weapons": "weapons",
                     "weapons-shedding-bright-light": "weapons shedding bright light"
                 }
+            },
+            "Hardness": {
+                "Full": "hardness",
+                "Half": "half hardness"
             },
             "IncreasedFrom": "Increased from {original} to minimum of 1",
             "NoDamageFormulaLabel": "No damage",
@@ -1069,12 +1100,16 @@
         "DetailsHeading": "Details",
         "DragDropFeats": "Drag & Drop feats to add",
         "Duration": {
+            "P1M": "month",
             "P1W": "week",
+            "P1Y": "year",
             "PT10M": "10 minutes",
             "PT1H": "hour",
             "PT1M": "minute",
             "PT24H": "24 hours",
-            "day": "day"
+            "day": "day",
+            "round": "round",
+            "turn": "turn"
         },
         "Edit": "Edit",
         "EditHazardLabel": "Edit Hazard",
@@ -1217,10 +1252,7 @@
         "FeatBrowserSearchHint": "You can search for name or custom attributes. Possible searchable attributes are:<br> source, spellType, level, school, components, materials, target, range, time, duration, damage, damageType, save, concentration, ritual, ability and classes. <br>Example: 'fire, damage:d6' to show all spells that have fire in their name and a d6 in the damage",
         "FeatCampaignHeader": "Campaign Feats",
         "FeatClassHeader": "Class Feats",
-        "FeatCurseHeader": "Curses",
-        "FeatDeityBoonCursesHeader": "Deity Boons/Curses",
-        "FeatDeityBoonHeader": "Deity Boons",
-        "FeatDualClassHeader": "Dual Class Feats",
+        "FeatDeityBoonCursesHeader": "Divine Intercessions",
         "FeatGeneralHeader": "General Feats",
         "FeatLevelLabel": "Level",
         "FeatPFSBoonHeader": "Society Boons",
@@ -1231,7 +1263,7 @@
         "FeatTypeBonus": "Bonus Feat",
         "FeatTypeClass": "Class Feat",
         "FeatTypeClassfeature": "Class Feature",
-        "FeatTypeCurse": "Curse",
+        "FeatTypeCurse": "Deity Curse",
         "FeatTypeDeityboon": "Deity Boon",
         "FeatTypeGeneral": "General Feat",
         "FeatTypePfsboon": "Society Boon",
@@ -1332,6 +1364,21 @@
         "Item": {
             "ABC": {
                 "InvalidDrop": "{badType} cannot be dropped here (must be {goodType})"
+            },
+            "Action": {
+                "CategoryLabel": "Category",
+                "Category": {
+                    "None": "None",
+                    "Defensive": "Defensive",
+                    "Interaction": "Interaction",
+                    "Offensive": "Offensive"
+                },
+                "Type": {
+                    "Activity": "Activity",
+                    "Free": "Free Action",
+                    "Single": "Single Action",
+                    "Reaction": "Reaction"
+                }
             },
             "Activation": {
                 "Add": "Add Activation",
@@ -1588,6 +1635,10 @@
                         "Description": "You feast mightily and can shake off the effects of overindulging. Not all clerical traditions are taught among the orthodoxy. Some are whispered in secret, passed down from a priest to trusted acolytes or scribed in tomes left behind by splinter factions.",
                         "Label": "Indulgence (apocryphal)"
                     },
+                    "Introspection": {
+                        "Description": "You guide others in examining their lives, emotions, and motivations to ultimately become a truer version of themselves—a difficult and often painful process.",
+                        "Label": "Introspection"
+                    },
                     "Knowledge": {
                         "Description": "You receive divine insights.",
                         "Label": "Knowledge"
@@ -1783,6 +1834,10 @@
                 "Info": {
                     "Added": "{item} was added to {category}."
                 },
+                "KeyAbilityOptions": {
+                    "Label": "Key Ability Options",
+                    "Hint": "Key ability options in addition to this provided by a class"
+                },
                 "LevelLabel": "Feat",
                 "LevelN": "Feat {level}",
                 "OnlyLevel1": "Must be taken at level 1",
@@ -1859,7 +1914,7 @@
                         "horseshoes": "Horseshoes",
                         "mask": "Mask",
                         "necklace": "Necklace",
-                        "onbelt": "OnBelt",
+                        "onbelt": "On Belt",
                         "ring": "Ring",
                         "saddle": "Saddle",
                         "shoes": "Shoes",
@@ -1903,17 +1958,17 @@
                     "axe": "Choose one creature adjacent to the initial target and within reach. If its AC is lower than your attack roll result for the critical hit, you deal damage to that creature equal to the result of the weapon damage die you rolled (including extra dice for its potency rune, if any). This amount isn't doubled, and no bonuses or other additional dice apply to this damage.",
                     "bomb": "Increase the radius of the bomb's splash damage (if any) to 10 feet.",
                     "bow": "If the target of the critical hit is adjacent to a surface, it gets stuck to that surface by the missile. The target is @UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{Immobilized} and must spend an Interact action to attempt a @Check[type:athletics|dc:10|name:Pull the Missile Free|showDC:all] check to pull the missile free; it can't move from its space until it succeeds. The creature doesn't become stuck if it is incorporeal, is liquid (like a water elemental or some oozes), or could otherwise escape without effort",
-                    "brawling": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|basic:true|name:Brawling Critical Specialization|showDC:all] save or be @UUID[Compendium.pf2e.conditionitems.xYTAsEpcJE1Ccni3]{Slowed 1} until the end of your next turn.",
+                    "brawling": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Brawling Critical Specialization] save or be @UUID[Compendium.pf2e.conditionitems.xYTAsEpcJE1Ccni3]{Slowed 1} until the end of your next turn.",
                     "club": "You knock the target away from you up to 10 feet (you choose the distance). This is forced movement.",
                     "dart": "The target takes @Localize[PF2E.PersistentDamage.Bleed1d6.success]. You gain an item bonus to this bleed damage equal to the weapon's item bonus to attack rolls.",
-                    "firearm": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|basic:true|name:Firearm Critical Specialization|showDC:all] save or be @UUID[Compendium.pf2e.conditionitems.dfCMdR4wnpbYNTix]{Stunned 1}.",
+                    "firearm": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Firearm Critical Specialization] save or be @UUID[Compendium.pf2e.conditionitems.dfCMdR4wnpbYNTix]{Stunned 1}.",
                     "flail": "The target is knocked @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}.",
                     "hammer": "The target is knocked @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}.",
                     "knife": "The target takes @Localize[PF2E.PersistentDamage.Bleed1d6.success]. You gain an item bonus to this bleed damage equal to the weapon's item bonus to attack rolls.",
                     "pick": "The weapon viciously pierces the target, who takes 2 additional damage per weapon damage die.",
                     "polearm": "The target is moved 5 feet in a direction of your choice. This is forced movement.",
                     "shield": "You knock the target back from you 5 feet. This is forced movement.",
-                    "sling": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|basic:true|name:Sling Critical Specialization|showDC:all] save or be @UUID[Compendium.pf2e.conditionitems.dfCMdR4wnpbYNTix]{Stunned 1}.",
+                    "sling": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Sling Critical Specialization] save or be @UUID[Compendium.pf2e.conditionitems.dfCMdR4wnpbYNTix]{Stunned 1}.",
                     "spear": "The weapon pierces the target, weakening its attacks. The target is @UUID[Compendium.pf2e.conditionitems.i3OJZU2nk64Df3xm]{Clumsy 1} until the start of your next turn.",
                     "sword": "The target is made off-balance by your attack, becoming @UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{Flat-Footed} until the start of your next turn."
                 },
@@ -1972,7 +2027,10 @@
                     "Hint": "Ranged and thrown weapons have a range increment. Attacks with these weapons work normally up to that distance. Attack rolls beyond a weapon's range increment take a -2 penalty for each additional multiple of that increment between you and the target. Attacks beyond the sixth range increment are impossible.",
                     "Label": "Range Increment {range} ft."
                 },
-                "ReloadOneMinute": "1 min",
+                "Reload": {
+                    "LabelN": "Reload {value}",
+                    "OneMinute": "1 min"
+                },
                 "SpecificMagicWeapon": {
                     "Hint": "Marking this weapon as a <i>specific magic weapon</i> indicates that it does more than what its material composition and runes allow. The name, level, rarity, and price will no longer be overridden from a precious material or runes at the time of marking. Those material and runes will, however, serve as a baseline for level, rarity, and price adjustments from later upgrades.",
                     "Label": "Specific Magic Weapon"
@@ -2169,7 +2227,6 @@
         },
         "Lore": "Lore",
         "LoreProficiencyDisclaimer": "Informational only. Will not change the skill modifier.",
-        "LoreSkillFormat": "{name} Lore",
         "LoreSkillsHeader": "Lore Skills",
         "MAPAbbreviationLabel": "MAP {penalty}",
         "Macro": {
@@ -2535,12 +2592,12 @@
             "FourthAttempt": "4th DC",
             "Help": "You can attempt repeated Recall Knowledge actions to recall more information about a creature. These checks increase in difficulty as shown in the chart below. However, if you fail, or if no DC is listed, you can not attempt further Recall Knowledge checks against this creature.",
             "Label": "Recall Knowledge",
+            "LoreEasy": "Applicable Lore (Easy)",
+            "LoreVeryEasy": "Applicable Lore (Very Easy)",
             "SecondAttempt": "2nd DC",
             "SixthAttempt": "6th DC",
             "Skill": "Skill",
-            "SpecificLore": "Specific Lore",
-            "ThirdAttempt": "3rd DC",
-            "UnspecificLore": "Unspecific Lore"
+            "ThirdAttempt": "3rd DC"
         },
         "Recovery": {
             "critFailure": "Increase your dying value by 2.",
@@ -2581,6 +2638,11 @@
         "ResolvePointsShortLabel": "Resolve",
         "ResolveTitle": "The amount of resolve points you have",
         "RestoreSpellTitle": "Restore Spell",
+        "RevertDamage": {
+            "ButtonTooltip": "Undo",
+            "DamageMessage": "Damage applied to {actor} was reverted",
+            "HealingMessage": "Healing applied to {actor} was reverted"
+        },
         "Roll": {
             "Add": "Add",
             "CriticalHit": "Critical Hit",
@@ -2648,6 +2710,17 @@
             "CompendiumBrowserPacks": {
                 "Hint": "Settings to exclude packs from loading",
                 "Name": "Compendium Browser Packs"
+            },
+            "CompendiumBrowserSources": {
+                "DeleteAllInfo": "All compendium documents will become browseable, including those with empty sources.",
+                "DeleteAllQuestion": "Are you sure you want to reset all settings for included sources?",
+                "DeleteAllTitle": "Reset Settings",
+                "Hint": "Settings to display only entries with specified sources in the compendium browser.",
+                "IgnoreAsGM": "Let GMs ignore filtering and see all entries.",
+                "Name": "Included Sources",
+                "ShowEmptySources": "Do not filter entries with empty sources.",
+                "ShowUnknownSources": "Do not filter entries with unknown sources.",
+                "SourcesListHeader": "Specified Sources"
             },
             "CritRule": {
                 "Choices": {
@@ -3367,6 +3440,7 @@
         "TraitCapacity3": "Capacity 3",
         "TraitCapacity4": "Capacity 4",
         "TraitCapacity5": "Capacity 5",
+        "TraitCarried": "Carried",
         "TraitCatalyst": "Catalyst",
         "TraitCatfolk": "Catfolk",
         "TraitCelestial": "Celestial",
@@ -3420,6 +3494,7 @@
         "TraitDeadly4D8": "Deadly 4d8",
         "TraitDeadlyD10": "Deadly d10",
         "TraitDeadlyD12": "Deadly d12",
+        "TraitDeadlyD4": "Deadly d4",
         "TraitDeadlyD6": "Deadly d6",
         "TraitDeadlyD8": "Deadly d8",
         "TraitDeath": "Death",
@@ -3536,6 +3611,7 @@
         "TraitDescriptionEsoterica": "The esoterica trait is present in many thaumaturge feats and class features that incorporate the various talismans, supernatural trinkets, and other objects you carry with you. Abilities that have the esoterica trait require you to be in possession of your esoterica to use them. Normally, you're assumed to always have your esoterica with you, but in some rare circumstances, you might either not have them on hand or have your gear stripped from you.",
         "TraitDescriptionEvil": "Evil effects often manipulate energy from evil-aligned Outer Planes and are antithetical to good divine servants or divine servants of good deities. A creature with this trait is evil in alignment.",
         "TraitDescriptionEvocation": "Effects and magic items with this trait are associated with the evocation school of magic, typically involving energy and elemental forces.",
+        "TraitDescriptionEvolution": "Feats with this trait affect your eidolon instead of you, typically by granting it additional physical capabilities.",
         "TraitDescriptionExpandable": "An item with the expandable trait increases to a specific size when activated. Unless otherwise noted, this space must be adjacent to you and on the ground, and the item needs to have enough open space to expand into or else the activation has no effect. When the effect ends, the expanded item disintegrates if it's a consumable or shrinks back to its normal size if it's not a consumable.",
         "TraitDescriptionExploration": "An activity with this trait takes more than a turn to use, and can usually be used only during exploration mode.",
         "TraitDescriptionExtradimensional": "This effect or item creates an extradimensional space. An extradimensional effect placed inside another extradimensional space ceases to function until it is removed.",
@@ -3723,6 +3799,7 @@
         "TraitDescriptionSweep": "This weapon makes wide sweeping or spinning attacks, making it easier to attack multiple enemies. When you attack with this weapon, you gain a +1 circumstance bonus to your attack roll if you already attempted to attack a different target this turn using this weapon.",
         "TraitDescriptionSylph": "A type of geniekin descended from a being from the Plane of Air.",
         "TraitDescriptionTalisman": "A talisman is a small object affixed to armor, a shield, or a weapon (called the affixed item). You must be wielding or wearing an item to activate a talisman attached to it. Once activated, a talisman burns out permanently.",
+        "TraitDescriptionTandem": "Actions with this trait involve you and your eidolon acting in concert. You can't use a tandem action if either you or your eidolon can't act, if you haven't Manifested your Eidolon, or if you've Manifested your Eidolon in a way where it isn't a separate entity (such as with the Meld into Eidolon feat). Tandem actions often let both you and your eidolon take separate actions, but these must be actions taken separately by you and your eidolon; you can't use a tandem action to take another tandem action.",
         "TraitDescriptionTattoo": "A tattoo is a type of item that is drawn or cut into a creature's skin and usually takes the form of images or symbols.",
         "TraitDescriptionTech": "Items with this trait are associated with the technology of Numeria.",
         "TraitDescriptionTelepathy": "A creature with telepathy can communicate mentally with creatures. This doesn't give any special access to their thoughts, and communicates no more information than normal speech would.",
@@ -3872,6 +3949,7 @@
         "TraitHampering": "Hampering",
         "TraitHantu": "Hantu",
         "TraitHarnessed": "Harnessed",
+        "TraitHarrowCourt": "Harrow Court",
         "TraitHaunt": "Haunt",
         "TraitHealing": "Healing",
         "TraitHefty14": "Hefty 14",
@@ -3921,6 +3999,7 @@
         "TraitLawful": "Lawful",
         "TraitLeshy": "Leshy",
         "TraitLight": "Light",
+        "TraitLilu": "Lilu",
         "TraitLineage": "Lineage",
         "TraitLinguistic": "Linguistic",
         "TraitLitany": "Litany",
@@ -4088,6 +4167,7 @@
         "TraitReach1000": "Reach 1,000 ft",
         "TraitReach15": "Reach 15 ft",
         "TraitReach20": "Reach 20 ft",
+        "TraitReach200": "Reach 200 ft",
         "TraitReach25": "Reach 25 ft",
         "TraitReach30": "Reach 30 ft",
         "TraitReach40": "Reach 40 ft",
@@ -4096,6 +4176,7 @@
         "TraitReckless": "Reckless",
         "TraitRecovery": "Recovery",
         "TraitReflection": "Reflection",
+        "TraitRelic": "Relic",
         "TraitReload": "Reload",
         "TraitReload0": "Reload 0",
         "TraitReload1": "Reload 1",
@@ -4832,7 +4913,7 @@
             "greaterFlaming": {
                 "Name": "Greater Flaming",
                 "Note": {
-                    "criticalSuccess": "Fire damage dealt by this weapon (including the persistent fire damage) ignores the target's fire resistance. When you critically succeed at a Strike with this weapon, you deal an additional [[/r 2d10[persistent,fire]]].",
+                    "criticalSuccess": "Fire damage dealt by this weapon (including the persistent fire damage) ignores the target's fire resistance.",
                     "success": "Fire damage dealt by this weapon ignores the target's fire resistance."
                 }
             },

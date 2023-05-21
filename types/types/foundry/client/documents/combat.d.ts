@@ -1,4 +1,4 @@
-import { ClientBaseCombat } from "./client-base-mixes.mjs";
+import type { ClientBaseCombat } from "./client-base-mixes.d.ts";
 
 declare global {
     /**

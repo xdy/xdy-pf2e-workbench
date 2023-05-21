@@ -1,25 +1,13 @@
 import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
-import { AbilityString } from "@actor/types";
-import { RollNotePF2e } from "@module/notes";
-import { DamageCategoryUnique, DamageDieSize, DamageType } from "@system/damage/types";
-import { PredicatePF2e, RawPredicate } from "@system/predication";
-import { ZeroToFour } from "@module/data";
+import { AbilityString } from "@actor/types.ts";
+import type { ItemPF2e } from "@item";
+import { ZeroToFour } from "@module/data.ts";
+import { RollNotePF2e } from "@module/notes.ts";
+import { DamageCategoryUnique, DamageDieSize, DamageType } from "@system/damage/types.ts";
+import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
-/**
- * The canonical pathfinder modifier types; modifiers of the same type do not stack (except for 'untyped' modifiers,
- * which fully stack).
- */
-declare const MODIFIER_TYPE: {
-    readonly ABILITY: "ability";
-    readonly PROFICIENCY: "proficiency";
-    readonly CIRCUMSTANCE: "circumstance";
-    readonly ITEM: "item";
-    readonly POTENCY: "potency";
-    readonly STATUS: "status";
-    readonly UNTYPED: "untyped";
-};
-declare const MODIFIER_TYPES: Set<"item" | "status" | "untyped" | "ability" | "circumstance" | "potency" | "proficiency">;
+declare const MODIFIER_TYPES: Set<"untyped" | "item" | "potency" | "ability" | "circumstance" | "proficiency" | "status">;
 type ModifierType = SetElement<typeof MODIFIER_TYPES>;
 interface BaseRawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
@@ -95,6 +83,8 @@ declare class ModifierPF2e implements RawModifier {
     force: boolean;
     enabled: boolean;
     ignored: boolean;
+    /** An optional originating item of this modifier (typically from a rule element) */
+    item: ItemPF2e<ActorPF2e> | null;
     source: string | null;
     custom: boolean;
     damageType: DamageType | null;
@@ -138,9 +128,10 @@ declare class ModifierPF2e implements RawModifier {
     toObject(): Required<RawModifier>;
     toString(): string;
 }
-type ModifierObjectParams = RawModifier & {
+interface ModifierObjectParams extends RawModifier {
     name?: string;
-};
+    item?: ItemPF2e<ActorPF2e> | null;
+}
 type ModifierOrderedParams = [
     slug: string,
     modifier: number,
@@ -154,11 +145,13 @@ type ModifierOrderedParams = [
  * Create a modifier from a given ability type and score.
  * @returns The modifier provided by the given ability score.
  */
-declare function createAbilityModifier({ actor, ability, domains }: CreateAbilityModifierParams): ModifierPF2e;
+declare function createAbilityModifier({ actor, ability, domains, max }: CreateAbilityModifierParams): ModifierPF2e;
 interface CreateAbilityModifierParams {
     actor: CharacterPF2e | NPCPF2e;
     ability: AbilityString;
     domains: string[];
+    /** An optional maximum for this ability modifier */
+    max?: number;
 }
 /**
  * Create a modifier for a given proficiency level of some ability.
@@ -287,5 +280,7 @@ declare class DamageDicePF2e extends DiceModifierPF2e {
     selector: string;
     constructor(params: DamageDiceParameters);
     clone(): DamageDicePF2e;
+    toObject(): RawDamageDice;
 }
-export { BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, DiceModifierPF2e, MODIFIER_TYPE, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, RawModifier, StatisticModifier, adjustModifiers, applyStackingRules, createAbilityModifier, createProficiencyModifier, ensureProficiencyOption, };
+type RawDamageDice = Required<DamageDiceParameters>;
+export { BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, DiceModifierPF2e, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, RawModifier, StatisticModifier, adjustModifiers, applyStackingRules, createAbilityModifier, createProficiencyModifier, ensureProficiencyOption, };

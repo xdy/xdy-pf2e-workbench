@@ -1,14 +1,14 @@
-/// <reference types="jquery" />
-import { ActorPF2e } from "@actor";
-import { ChatMessagePF2e } from "@module/chat-message";
-import { RuleElementOptions, RuleElementPF2e } from "@module/rules";
-import { UserPF2e } from "@module/user";
-import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
-import { ItemSourcePF2e, ItemSummaryData, ItemType, TraitChatData } from "./data";
-import { PhysicalItemPF2e } from "./physical/document";
-import { ItemSheetPF2e } from "./sheet/base";
-import { ItemFlagsPF2e, ItemSystemData } from "./data/base";
-import { ItemInstances } from "./types";
+/// <reference types="jquery" resolution-mode="require"/>
+import { ActorPF2e } from "@actor/base.ts";
+import { ChatMessagePF2e } from "@module/chat-message/document.ts";
+import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
+import { UserPF2e } from "@module/user/document.ts";
+import { EnrichHTMLOptionsPF2e } from "@system/text-editor.ts";
+import { ItemSourcePF2e, ItemSummaryData, ItemType, TraitChatData } from "./data/index.ts";
+import { PhysicalItemPF2e } from "./physical/document.ts";
+import { ItemSheetPF2e } from "./sheet/base.ts";
+import { ItemFlagsPF2e, ItemSystemData } from "./data/base.ts";
+import { ItemInstances } from "./types.ts";
 /** Override and extend the basic :class:`Item` implementation */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     /** Prepared rule elements from this item */

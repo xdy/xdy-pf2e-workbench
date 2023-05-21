@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
 /** Set a slug in heritages' ancestry data */
 export declare class Migration823HeritageAncestrySlug extends MigrationBase {
     static version: number;

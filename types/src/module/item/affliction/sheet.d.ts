@@ -1,18 +1,18 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ConditionPF2e } from "@item/condition";
-import { ItemSheetPF2e } from "@item/sheet";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types";
-import { DamageCategoryUnique } from "@system/damage/types";
-import { AfflictionConditionData, AfflictionStageData } from "./data";
-import { AfflictionPF2e } from "./document";
+import { AfflictionPF2e, ConditionPF2e } from "@item";
+import { ItemSheetPF2e } from "@item/sheet/base.ts";
+import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { DamageCategoryUnique } from "@system/damage/types.ts";
+import { AfflictionConditionData, AfflictionStageData } from "./data.ts";
 declare class AfflictionSheetPF2e extends ItemSheetPF2e<AfflictionPF2e> {
     static get defaultOptions(): DocumentSheetOptions;
     getData(options?: Partial<DocumentSheetOptions>): Promise<AfflictionSheetData>;
     protected prepareStages(): Promise<Record<string, AfflictionStageSheetData>>;
     activateListeners($html: JQuery<HTMLElement>): void;
     _onDrop(event: ElementDragEvent): Promise<void>;
+    protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }
 interface AfflictionSheetData extends ItemSheetDataPF2e<AfflictionPF2e> {
     conditionTypes: Omit<ConfigPF2e["PF2E"]["conditionTypes"], "persistent-damage">;

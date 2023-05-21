@@ -1,7 +1,8 @@
-import { ActorPF2e } from "@actor";
+import { ActorPF2e } from "@actor/base.ts";
 import { ItemPF2e } from "@item";
-import { ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
-import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource, RuleValue } from "./";
+import type { ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import { ResolvableValueField } from "./data.ts";
 /**
  * Make a numeric modification to an arbitrary property in a similar way as `ActiveEffect`s
  * @category RuleElement
@@ -26,7 +27,6 @@ declare class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElemen
      */
     static SKILL_LONG_FORM_PATH: RegExp;
     protected validateData(): void;
-    get value(): RuleValue;
     /** Apply the modifications immediately after proper ActiveEffects are applied */
     onApplyActiveEffects(): void;
     /** Apply the modifications near the beginning of the actor's derived-data preparation */
@@ -44,7 +44,6 @@ declare class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElemen
     protected warn(property: string): void;
 }
 interface AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TSchema>, ModelPropsFromSchema<AELikeSchema> {
-    data: AELikeData;
 }
 interface AutoChangeEntry {
     source: string;
@@ -56,19 +55,13 @@ type AELikeSchema = RuleElementSchema & {
     mode: StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
     path: StringField<string, string, true, false, false>;
     phase: StringField<AELikeDataPrepPhase, AELikeDataPrepPhase, false, false, true>;
+    value: ResolvableValueField<true, boolean, boolean>;
 };
 type AELikeChangeMode = keyof (typeof AELikeRuleElement)["CHANGE_MODES"];
 type AELikeDataPrepPhase = (typeof AELikeRuleElement)["PHASES"][number];
-interface AELikeData extends RuleElementData {
-    path: string;
-    value: RuleValue;
-    mode: AELikeChangeMode;
-    priority: number;
-    phase: AELikeDataPrepPhase;
-}
 interface AELikeSource extends RuleElementSource {
     mode?: unknown;
     path?: unknown;
     phase?: unknown;
 }
-export { AELikeChangeMode, AELikeData, AELikeRuleElement, AELikeSchema, AELikeSource, AutoChangeEntry };
+export { AELikeChangeMode, AELikeRuleElement, AELikeSchema, AELikeSource, AutoChangeEntry };

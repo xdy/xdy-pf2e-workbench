@@ -1,11 +1,11 @@
-import { ProficiencyRank } from "@item/data";
-import { Rarity } from "./data";
+import { ProficiencyRank } from "@item/data/index.ts";
+import { Rarity } from "./data.ts";
 /**
  * Implementation of Difficulty Classes https://2e.aonprd.com/Rules.aspx?ID=552
  * and variant rule Proficiency Without Level https://2e.aonprd.com/Rules.aspx?ID=1370
  */
-type NegativeDCAdjustment = "incredibly easy" | "very easy" | "easy" | "normal";
-type PositiveDCAdjustment = "normal" | "hard" | "very hard" | "incredibly hard";
+type NegativeDCAdjustment = "incredibly-easy" | "very-easy" | "easy" | "normal";
+type PositiveDCAdjustment = "normal" | "hard" | "very-hard" | "incredibly-hard";
 type DCAdjustment = NegativeDCAdjustment | PositiveDCAdjustment;
 declare function rarityToDCAdjustment(rarity?: Rarity): PositiveDCAdjustment;
 declare function adjustDC(dc: number, adjustment?: DCAdjustment): number;

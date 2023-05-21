@@ -1,12 +1,12 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
-import { StrikeData } from "@actor/data/base";
+import { StrikeData } from "@actor/data/base.ts";
 import { ItemPF2e } from "@item";
-import { UserPF2e } from "@module/user";
-import { ScenePF2e, TokenDocumentPF2e } from "@scene";
-import { ChatMessageFlagsPF2e, ChatMessageSourcePF2e } from "./data";
+import { UserPF2e } from "@module/user/index.ts";
+import { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
+import { ChatMessageFlagsPF2e, ChatMessageSourcePF2e } from "./data.ts";
 declare class ChatMessagePF2e extends ChatMessage {
     /** The chat log doesn't wait for data preparation before rendering, so set some data in the constructor */
     constructor(data?: DeepPartial<ChatMessageSourcePF2e>, context?: DocumentConstructionContext<null>);

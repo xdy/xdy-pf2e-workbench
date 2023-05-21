@@ -1,6 +1,6 @@
-import { PredicateField, SlugField } from "@system/schema-data-fields";
-import { RawPredicate } from "@system/predication";
-import { BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.mjs";
+import { RawPredicate } from "@system/predication.ts";
+import { PredicateField, SlugField } from "@system/schema-data-fields.ts";
+import type { BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 type RuleElementSource = {
     key?: unknown;
     data?: unknown;
@@ -17,7 +17,7 @@ type RuleElementSource = {
 };
 interface RuleElementData extends RuleElementSource {
     key: string;
-    value?: RuleValue | BracketedValue;
+    value?: RuleValue;
     label: string;
     slug?: string | null;
     predicate?: RawPredicate;
@@ -25,7 +25,7 @@ interface RuleElementData extends RuleElementSource {
     ignored: boolean;
     removeUponCreate?: boolean;
 }
-type RuleValue = string | number | boolean | object | null;
+type RuleValue = string | number | boolean | object | BracketedValue | null;
 interface Bracket<T extends object | number | string> {
     start?: number;
     end?: number;
@@ -52,4 +52,10 @@ type RuleElementSchema = {
     /** Whether the rule element requires that the parent item (if physical) be invested */
     requiresInvestment: BooleanField<boolean, boolean, false, true, false>;
 };
-export { Bracket, BracketedValue, RuleElementData, RuleElementSchema, RuleElementSource, RuleValue };
+declare class ResolvableValueField<TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean = false> extends foundry.data.fields.DataField<RuleValue, RuleValue, TRequired, TNullable, THasInitial> {
+    protected _validateType(value: unknown): boolean;
+    /** No casting is applied to this value */
+    protected _cast(value: unknown): unknown;
+    protected _cleanType(value: RuleValue): RuleValue;
+}
+export { Bracket, BracketedValue, ResolvableValueField, RuleElementData, RuleElementSchema, RuleElementSource, RuleValue, };

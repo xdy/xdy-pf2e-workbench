@@ -1,8 +1,7 @@
-import { PredicatePF2e, PredicateStatement, RawPredicate } from "@system/predication";
+import { PredicatePF2e, PredicateStatement, RawPredicate } from "@system/predication.ts";
 import { SlugCamel } from "@util";
-import { DataModel } from "types/foundry/common/abstract/data.mjs";
-import { ArrayFieldOptions, CleanFieldOptions, DataFieldOptions, DataSchema, MaybeSchemaProp, StringField, StringFieldOptions } from "types/foundry/common/data/fields.mjs";
-declare const fields: typeof import("types/foundry/common/data/fields.mjs");
+import type { ArrayFieldOptions, CleanFieldOptions, DataFieldOptions, DataSchema, MaybeSchemaProp, StringField, StringFieldOptions } from "types/foundry/common/data/fields.d.ts";
+declare const fields: typeof import("types/foundry/common/data/fields.d.ts");
 /** A `SchemaField` that preserves fields not declared in its `DataSchema` */
 declare class LaxSchemaField<TDataSchema extends DataSchema> extends fields.SchemaField<TDataSchema> {
     protected _cleanType(data: Record<string, unknown>, options?: CleanFieldOptions): SourceFromSchema<TDataSchema>;
@@ -29,7 +28,9 @@ declare class PredicateStatementField extends fields.DataField<PredicateStatemen
 }
 declare class PredicateField<TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ArrayField<PredicateStatementField, RawPredicate, PredicatePF2e, TRequired, TNullable, THasInitial> {
     constructor(options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>);
+    /** Don't wrap a non-array in an array */
+    _cast(value: unknown): unknown;
     /** Construct a `PredicatePF2e` from the initialized `PredicateStatement[]` */
-    initialize(value: RawPredicate, model: ConstructorOf<DataModel>, options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>): MaybeSchemaProp<PredicatePF2e, TRequired, TNullable, THasInitial>;
+    initialize(value: RawPredicate, model: ConstructorOf<foundry.abstract.DataModel>, options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>): MaybeSchemaProp<PredicatePF2e, TRequired, TNullable, THasInitial>;
 }
 export { LaxSchemaField, PredicateField, SlugField };

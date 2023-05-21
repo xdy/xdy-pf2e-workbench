@@ -1,11 +1,11 @@
-import { ItemType } from "@item/data";
-import { MagicTradition } from "@item/spell/types";
-import { BaseRawModifier } from "@actor/modifiers";
-import { DegreeAdjustmentsRecord, DegreeOfSuccessString } from "@system/degree-of-success";
-import { RollNoteSource } from "@module/notes";
-import { CheckRollContext } from "@system/check";
-import { DamageRollContext } from "@system/damage";
-import { ZeroToTwo } from "@module/data";
+import { ItemType } from "@item/data/index.ts";
+import { MagicTradition } from "@item/spell/types.ts";
+import { BaseRawModifier } from "@actor/modifiers.ts";
+import { DegreeAdjustmentsRecord, DegreeOfSuccessString } from "@system/degree-of-success.ts";
+import { RollNoteSource } from "@module/notes.ts";
+import { CheckRollContext } from "@system/check/index.ts";
+import { ZeroToTwo } from "@module/data.ts";
+import { DamageRollContext } from "@system/damage/types.ts";
 interface ChatMessageSourcePF2e extends foundry.documents.ChatMessageSource {
     flags: ChatMessageFlagsPF2e;
 }
@@ -31,6 +31,7 @@ type ChatMessageFlagsPF2e = foundry.documents.ChatMessageFlags & {
             overlayIds: string[];
         };
         strike?: StrikeLookupData | null;
+        appliedDamage?: AppliedDamageFlag;
         [key: string]: unknown;
     };
     core: NonNullable<foundry.documents.ChatMessageFlags["core"]>;
@@ -87,4 +88,18 @@ interface SpellCastContextFlag {
     /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
     rollMode?: RollMode;
 }
-export { ChatContextFlag, ChatMessageSourcePF2e, ChatMessageFlagsPF2e, CheckRollContextFlag, DamageRollFlag, DamageRollContextFlag, StrikeLookupData, TargetFlag, };
+interface AppliedDamageFlag {
+    uuid: ActorUUID | TokenDocumentUUID;
+    isHealing: boolean;
+    isReverted?: boolean;
+    persistent: string[];
+    shield: {
+        id: string;
+        damage: number;
+    } | null;
+    updates: {
+        path: string;
+        value: number;
+    }[];
+}
+export { AppliedDamageFlag, ChatContextFlag, ChatMessageSourcePF2e, ChatMessageFlagsPF2e, CheckRollContextFlag, DamageRollFlag, DamageRollContextFlag, StrikeLookupData, TargetFlag, };

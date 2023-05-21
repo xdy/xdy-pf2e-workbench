@@ -1,4 +1,4 @@
-import { TokenPF2e } from "../token";
+import { TokenPF2e } from "../token/index.ts";
 /** A `PointSource` to track token hearing sense */
 declare class HearingSource<TObject extends TokenPF2e> extends PointSource<TObject> {
     static sourceType: string;

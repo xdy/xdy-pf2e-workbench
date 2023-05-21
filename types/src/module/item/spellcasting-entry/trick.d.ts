@@ -1,8 +1,9 @@
 import { ActorPF2e } from "@actor";
-import { AbilityString } from "@actor/types";
+import { AbilityString, SkillLongForm } from "@actor/types.ts";
 import { SpellPF2e } from "@item";
-import { Statistic } from "@system/statistic";
-import { CastOptions, SpellcastingEntry, SpellcastingSheetData } from "./types";
+import { Statistic } from "@system/statistic/index.ts";
+import { CastOptions, SpellcastingEntry, SpellcastingSheetData } from "./types.ts";
+import { MagicTradition } from "@item/spell/types.ts";
 declare const TRICK_MAGIC_SKILLS: readonly ["arcana", "nature", "occultism", "religion"];
 type TrickMagicItemSkill = (typeof TRICK_MAGIC_SKILLS)[number];
 declare const traditionSkills: {
@@ -13,12 +14,12 @@ declare const traditionSkills: {
 };
 /** A pseudo spellcasting entry used to trick magic item for a single skill */
 declare class TrickMagicItemEntry<TActor extends ActorPF2e = ActorPF2e> implements SpellcastingEntry<TActor> {
-    actor: TActor;
-    skill: TrickMagicItemSkill;
     readonly id: string;
+    actor: TActor;
+    skill: SkillLongForm;
     statistic: Statistic;
     ability: AbilityString;
-    tradition: "arcane" | "divine" | "occult" | "primal";
+    tradition: MagicTradition;
     constructor(actor: TActor, skill: TrickMagicItemSkill);
     get name(): string;
     /** Unused since a Trick Magic Item ability isn't displayed in an actor sheet */

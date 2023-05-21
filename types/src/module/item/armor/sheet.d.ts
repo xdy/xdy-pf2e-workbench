@@ -1,6 +1,6 @@
-import { CoinsPF2e, PhysicalItemSheetData, PhysicalItemSheetPF2e, PreparedMaterials } from "@item/physical";
-import { SheetOptions } from "@module/sheet/helpers";
-import { ArmorCategory, ArmorGroup, ArmorPF2e, BaseArmorType } from ".";
+import { CoinsPF2e, PhysicalItemSheetData, PhysicalItemSheetPF2e, PreparedMaterials } from "@item/physical/index.ts";
+import { SheetOptions } from "@module/sheet/helpers.ts";
+import { ArmorCategory, ArmorGroup, ArmorPF2e, BaseArmorType } from "./index.ts";
 declare class ArmorSheetPF2e extends PhysicalItemSheetPF2e<ArmorPF2e> {
     getData(options?: Partial<DocumentSheetOptions>): Promise<ArmorSheetData>;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;

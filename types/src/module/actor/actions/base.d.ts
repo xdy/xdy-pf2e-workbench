@@ -1,4 +1,5 @@
-import { Action, ActionCost, ActionUseOptions, ActionVariant, ActionVariantUseOptions } from "./types";
+import { ChatMessagePF2e } from "@module/chat-message/document.ts";
+import { Action, ActionCost, ActionMessageOptions, ActionUseOptions, ActionVariant, ActionVariantUseOptions } from "./types.ts";
 interface BaseActionVariantData {
     cost?: ActionCost;
     description?: string;
@@ -19,11 +20,12 @@ declare abstract class BaseActionVariant implements ActionVariant {
     #private;
     readonly name?: string;
     protected constructor(action: BaseAction<BaseActionVariantData, BaseActionVariant>, data?: BaseActionVariantData);
-    get cost(): 2 | 1 | 3 | "free" | "reaction" | undefined;
+    get cost(): ActionCost | undefined;
     get description(): string | undefined;
     get glyph(): string;
     get slug(): string;
     get traits(): string[];
+    toMessage(options?: Partial<ActionMessageOptions>): Promise<ChatMessagePF2e | undefined>;
     abstract use(options?: Partial<ActionVariantUseOptions>): Promise<unknown>;
 }
 declare abstract class BaseAction<TData extends BaseActionVariantData, TAction extends BaseActionVariant> implements Action {
@@ -36,7 +38,11 @@ declare abstract class BaseAction<TData extends BaseActionVariantData, TAction e
     readonly traits: string[];
     protected constructor(data: BaseActionData<TData>);
     get glyph(): string;
-    get variants(): foundry.utils.Collection<ActionVariant>;
+    get variants(): Collection<TAction>;
+    protected getDefaultVariant(options?: {
+        variant?: string;
+    }): Promise<TAction>;
+    toMessage(options?: Partial<ActionMessageOptions>): Promise<ChatMessagePF2e | undefined>;
     use(options?: Partial<ActionUseOptions>): Promise<unknown>;
     protected abstract toActionVariant(data?: TData): TAction;
 }

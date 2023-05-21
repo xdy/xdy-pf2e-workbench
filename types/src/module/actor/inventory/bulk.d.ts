@@ -1,7 +1,7 @@
 import { ActorPF2e } from "@actor";
 import { PhysicalItemPF2e } from "@item";
-import { Bulk } from "@item/physical/bulk";
-import { Size } from "@module/data";
+import { Bulk } from "@item/physical/bulk.ts";
+import { Size } from "@module/data.ts";
 export declare class InventoryBulk {
     /** The current bulk carried by the actor */
     value: Bulk;

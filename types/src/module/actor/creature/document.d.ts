@@ -1,29 +1,35 @@
-/// <reference types="jquery" />
-import { ActorPF2e } from "@actor";
-import { HitPointsSummary } from "@actor/base";
-import { CreatureSource } from "@actor/data";
-import { ModifierPF2e, StatisticModifier } from "@actor/modifiers";
-import { SaveType } from "@actor/types";
+/// <reference types="jquery" resolution-mode="require"/>
+import { ActorPF2e, PartyPF2e } from "@actor";
+import { HitPointsSummary } from "@actor/base.ts";
+import { CreatureSource } from "@actor/data/index.ts";
+import { StatisticModifier } from "@actor/modifiers.ts";
+import { MovementType, SaveType, SkillLongForm } from "@actor/types.ts";
 import { ArmorPF2e, ItemPF2e, PhysicalItemPF2e } from "@item";
-import { ItemType } from "@item/data";
-import { ItemCarryType } from "@item/physical/data";
-import { ActiveEffectPF2e } from "@module/active-effect";
-import { Rarity } from "@module/data";
-import { RuleElementSynthetics } from "@module/rules";
-import { UserPF2e } from "@module/user";
-import { TokenDocumentPF2e } from "@scene";
-import { CheckRoll } from "@system/check";
-import { DamageType } from "@system/damage/types";
-import { RawPredicate } from "@system/predication";
-import { Statistic } from "@system/statistic";
-import { CreatureSkills, CreatureSpeeds, CreatureSystemData, LabeledSpeed, MovementType, SenseData, VisionLevel } from "./data";
-import { CreatureSensePF2e } from "./sense";
-import { Alignment, CreatureTrait, CreatureUpdateContext, GetReachParameters, IsFlatFootedParams } from "./types";
+import { ItemType } from "@item/data/index.ts";
+import { ItemCarryType } from "@item/physical/data.ts";
+import { ActiveEffectPF2e } from "@module/active-effect.ts";
+import { Rarity } from "@module/data.ts";
+import { RuleElementSynthetics } from "@module/rules/index.ts";
+import { UserPF2e } from "@module/user/index.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { CheckRoll } from "@system/check/index.ts";
+import { DamageType } from "@system/damage/types.ts";
+import { RawPredicate } from "@system/predication.ts";
+import { Statistic, StatisticDifficultyClass } from "@system/statistic/index.ts";
+import { CreatureSkills, CreatureSpeeds, CreatureSystemData, LabeledSpeed, SenseData, VisionLevel } from "./data.ts";
+import { CreatureSensePF2e } from "./sense.ts";
+import { Alignment, CreatureTrait, CreatureUpdateContext, GetReachParameters, IsFlatFootedParams } from "./types.ts";
+import { ArmorStatistic } from "@system/statistic/armor-class.ts";
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
-    protected _skills: CreatureSkills | null;
-    /** Skill `Statistic`s for the creature */
-    get skills(): CreatureSkills;
+    parties: Set<PartyPF2e>;
+    /** A creature always has an AC */
+    armorClass: StatisticDifficultyClass<ArmorStatistic>;
+    /** Skill checks for the creature, built during data prep */
+    skills: CreatureSkills;
+    /** Saving throw rolls for the creature, built during data prep */
+    saves: Record<SaveType, Statistic>;
+    perception: Statistic;
     /** The creature's position on the alignment axes */
     get alignment(): Alignment;
     get rarity(): Rarity;
@@ -44,20 +50,20 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     /** Whether the creature emits sound: overridable by AE-like */
     get emitsSound(): boolean;
     get isSpellcaster(): boolean;
-    get perception(): Statistic;
     get wornArmor(): ArmorPF2e<this> | null;
     /** Get the held shield of most use to the wielder */
     get heldShield(): ArmorPF2e<this> | null;
     /** Whether the actor is flat-footed in the current scene context: currently only handles flanking */
     isFlatFooted({ dueTo }: IsFlatFootedParams): boolean;
+    getStatistic(slug: SaveType | SkillLongForm | "perception"): Statistic;
+    getStatistic(slug: string): Statistic | null;
+    protected _initialize(): void;
+    prepareData(): void;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */
     prepareBaseData(): void;
     prepareEmbeddedDocuments(): void;
     prepareDerivedData(): void;
-    protected prepareInitiative(): void;
     protected prepareSynthetics(): void;
-    /** Add a circumstance bonus if this creature has a raised shield */
-    protected getShieldBonus(): ModifierPF2e | null;
     /**
      * Changes the carry type of an item (held/worn/stowed/etc) and/or regrips/reslots
      * @param item       The item
@@ -88,8 +94,6 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
 interface CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: CreatureSource;
     system: CreatureSystemData;
-    /** Saving throw rolls for the creature, built during data prep */
-    saves: Record<SaveType, Statistic>;
     get traits(): Set<CreatureTrait>;
     get hitPoints(): HitPointsSummary;
     /** Expand DocumentModificationContext for creatures */

@@ -1,4 +1,4 @@
-import { ClientBaseActiveEffect } from "./client-base-mixes.mjs";
+import type { ClientBaseActiveEffect } from "./client-base-mixes.d.ts";
 
 declare global {
     /**

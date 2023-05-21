@@ -1,6 +1,6 @@
-import { ItemSourcePF2e } from "@item/data";
-import { MigrationBase } from "../base";
-import { ActorSourcePF2e } from "@actor/data";
+import { ItemSourcePF2e } from "@item/data/index.ts";
+import { MigrationBase } from "../base.ts";
+import { ActorSourcePF2e } from "@actor/data/index.ts";
 export declare class Migration657RemoveSetProperty extends MigrationBase {
     static version: number;
     updateActor(actorSource: ActorSourcePF2e): Promise<void>;

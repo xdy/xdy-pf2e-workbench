@@ -1,9 +1,11 @@
-import { ImmunityData } from "@actor/data/iwr";
-import { ImmunityType } from "@actor/types";
-import { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
-import { IWRRuleElement, IWRRuleSchema } from "./base";
+import { ImmunityData } from "@actor/data/iwr.ts";
+import { ImmunityType } from "@actor/types.ts";
+import type { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import { IWRRuleElement, IWRRuleSchema } from "./base.ts";
 /** @category RuleElement */
 declare class ImmunityRuleElement extends IWRRuleElement<ImmunityRuleSchema> {
+    /** Immunities don't take values */
+    readonly value: null;
     static defineSchema(): ImmunityRuleSchema;
     static get dictionary(): Record<ImmunityType, string>;
     get property(): ImmunityData[];

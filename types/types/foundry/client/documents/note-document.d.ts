@@ -1,4 +1,4 @@
-import { CanvasBaseNote } from "./client-base-mixes.mjs";
+import type { CanvasBaseNote } from "./client-base-mixes.d.ts";
 
 declare global {
     /**

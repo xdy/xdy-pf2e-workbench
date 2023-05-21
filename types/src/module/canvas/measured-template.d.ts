@@ -1,6 +1,6 @@
-import { MeasuredTemplateDocumentPF2e } from "@module/scene/measured-template-document";
-import { TemplateLayerPF2e } from ".";
-import { ScenePF2e } from "@scene";
+import { MeasuredTemplateDocumentPF2e } from "@scene/measured-template-document.ts";
+import { TemplateLayerPF2e } from "./index.ts";
+import { ScenePF2e } from "@scene/index.ts";
 declare class MeasuredTemplatePF2e<TDocument extends MeasuredTemplateDocumentPF2e<ScenePF2e | null> = MeasuredTemplateDocumentPF2e<ScenePF2e | null>> extends MeasuredTemplate<TDocument> {
     #private;
     get type(): MeasuredTemplateType;

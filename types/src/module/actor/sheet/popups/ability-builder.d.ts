@@ -1,9 +1,9 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { CharacterPF2e } from "@actor";
-import { Abilities } from "@actor/creature/data";
-import { AbilityString } from "@actor/types";
+import { Abilities } from "@actor/creature/data.ts";
+import { AbilityString } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item";
 export declare class AbilityBuilderPopup extends Application {
     #private;

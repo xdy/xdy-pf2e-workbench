@@ -1,4 +1,4 @@
-import { SkillActionOptions } from "..";
+import { SkillActionOptions } from "../index.ts";
 declare const PERFORM_VARIANT_TRAITS: {
     readonly acting: readonly ["auditory", "linguistic", "visual"];
     readonly comedy: readonly ["auditory", "linguistic", "visual"];

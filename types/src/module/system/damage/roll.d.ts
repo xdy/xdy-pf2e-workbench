@@ -1,11 +1,11 @@
-import { ResistanceType } from "@actor/types";
-import { DamageRollFlag } from "@module/chat-message";
-import { UserPF2e } from "@module/user";
-import { DegreeOfSuccessIndex } from "@system/degree-of-success";
-import { RollDataPF2e } from "@system/rolls";
-import Peggy from "peggy";
-import { InstancePool } from "./terms";
-import { DamageCategory, DamageTemplate, DamageType, MaterialDamageEffect } from "./types";
+import { ResistanceType } from "@actor/types.ts";
+import { DamageRollFlag } from "@module/chat-message/index.ts";
+import { UserPF2e } from "@module/user/index.ts";
+import { DegreeOfSuccessIndex } from "@system/degree-of-success.ts";
+import { RollDataPF2e } from "@system/rolls.ts";
+import type Peggy from "peggy";
+import { InstancePool } from "./terms.ts";
+import { DamageCategory, DamageTemplate, DamageType, MaterialDamageEffect } from "./types.ts";
 declare abstract class AbstractDamageRoll extends Roll {
     /** Ensure the presence and validity of the `critRule` option for this roll */
     constructor(formula: string, data?: {}, options?: DamageInstanceData);
@@ -102,7 +102,7 @@ interface DamageRollDataPF2e extends RollDataPF2e, AbstractDamageRollData {
     /** Data used to construct the damage formula and options */
     damage?: DamageTemplate;
     result?: DamageRollFlag;
-    degreeOfSuccess?: DegreeOfSuccessIndex;
+    degreeOfSuccess?: DegreeOfSuccessIndex | null;
     /** If the total was increased to 1, the original total */
     increasedFrom?: number;
     /** Whether this roll is the splash damage from another roll */

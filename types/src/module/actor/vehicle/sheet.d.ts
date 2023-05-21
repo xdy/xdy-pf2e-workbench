@@ -1,9 +1,9 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorSheetPF2e } from "../sheet/base";
-import { VehiclePF2e } from "@actor/vehicle";
-import { ActorSheetDataPF2e } from "@actor/sheet/data-types";
+import { ActorSheetPF2e } from "../sheet/base.ts";
+import { VehiclePF2e } from "@actor/vehicle/index.ts";
+import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
 export declare class VehicleSheetPF2e extends ActorSheetPF2e<VehiclePF2e> {
     static get defaultOptions(): ActorSheetOptions;
     getData(): Promise<VehicleSheetData>;

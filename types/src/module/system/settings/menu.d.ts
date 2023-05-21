@@ -1,5 +1,5 @@
-/// <reference types="jquery" />
-/// <reference types="jquery" />
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 export type PartialSettingsData = Omit<SettingRegistration, "scope" | "config">;
 interface SettingsTemplateData extends PartialSettingsData {
@@ -14,19 +14,7 @@ interface MenuTemplateData extends FormApplicationData {
 declare abstract class SettingsMenuPF2e extends FormApplication {
     static readonly namespace: string;
     cache: Record<string, unknown>;
-    static get defaultOptions(): FormApplicationOptions & {
-        title: string;
-        id: string;
-        template: string;
-        width: number;
-        height: string;
-        tabs: {
-            navSelector: string;
-            contentSelector: string;
-        }[];
-        closeOnSubmit: boolean;
-        submitOnChange: boolean;
-    };
+    static get defaultOptions(): FormApplicationOptions;
     static get prefix(): string;
     get namespace(): string;
     get prefix(): string;
