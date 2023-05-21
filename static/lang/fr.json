@@ -145,7 +145,7 @@
         "orcFerocityMessage": "{name} vient juste d'utiliser @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] et peut désormais utiliser l'action gratuite :@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]"
       },
       "automationClientSettings": {
-        "hint": "Activer et configurer l'automatisation pour les joueurs",
+        "hint": "Activer et configurer l'automatisation en local, c'est-à-dire, les réglages qui affecteront uniquement votre propre client.",
         "label": "Régler l'automatisation du client",
         "name": "Réglages de l'automatisation du client"
       },
