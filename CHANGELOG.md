@@ -1,3 +1,10 @@
+## [4.75.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.75.0...v4.75.1) (2023-05-21)
+
+
+### Bug Fixes
+
+* More problems with the gm client doing automation for the client where it shouldn't. I.e. if the client had turned off the settings for autorolling damage, handling persistent damage/healing and/or handling dying recovery rolls but the GM had them on, they would still be automated for clients. ([e5f4c12](https://github.com/xdy/xdy-pf2e-workbench/commit/e5f4c12fc154d6bc1a63475e401fde1a0e802943))
+
 # [4.75.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.74.0...v4.75.0) (2023-05-19)
 
 
