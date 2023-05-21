@@ -1,3 +1,10 @@
+# [4.76.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.75.1...v4.76.0) (2023-05-21)
+
+
+### Features
+
+* Update to require pf2e system version 4.12.0 or greater. Make Basic Action Macros work again for non-english languages. ([ea20290](https://github.com/xdy/xdy-pf2e-workbench/commit/ea20290e98d9dc0f4464a5e83ab0b1c585d0b309))
+
 ## [4.75.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.75.0...v4.75.1) (2023-05-21)
 
 
