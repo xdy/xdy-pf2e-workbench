@@ -5,8 +5,8 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActionsIndex } from "./actions-index.js";
 import { ItemPF2e } from "@item/base.js";
 import { ItemSummaryData } from "@item/data/index.js";
-import { CharacterSkill } from "@actor/character/types.js";
 import { logWarn } from "../../utils.js";
+import { CharacterSkill } from "@actor/character/types.js";
 
 const ACTION_ICONS: Record<ActionType, string> = {
     A: "OneAction",
@@ -98,6 +98,7 @@ export class SkillAction {
     }
 
     private get actorData(): ActorSkillAction | undefined {
+        // @ts-ignore
         return this.actor.getFlag(MODULENAME, `actions.${this.key}`);
     }
 
@@ -291,7 +292,7 @@ export class SkillAction {
     }
 }
 
-export class SkillActionCollection extends foundry.utils.Collection<SkillAction> {
+export class SkillActionCollection extends Collection<SkillAction> {
     static allActionsFor(actor): SkillAction[] {
         const allActions = deepClone(SKILL_ACTIONS_DATA);
         const actions = allActions.filter((x) => !x.replacedWith);

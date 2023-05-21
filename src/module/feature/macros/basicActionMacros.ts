@@ -7,8 +7,8 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
 import { Variant } from "../skill-actions/variants.js";
-import { CharacterSkill } from "@actor/character/types.js";
 import { Action } from "@actor/actions/types.js";
+import { CharacterSkill } from "@actor/character/types.js";
 
 let selectedActor;
 
@@ -791,7 +791,6 @@ function getMapVariant(skill: CharacterSkill, extra: Record<string, unknown> | u
         label: game.i18n.localize("PF2E.MultipleAttackPenalty"),
         modifier: map,
         type: "untyped",
-        rollOptions: {},
     });
     const label = game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: map });
     return new Variant(label, skill, extra, [modifier]);

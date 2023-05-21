@@ -1,10 +1,10 @@
 import { isFirstGM, myRandomId, shouldIHandleThis } from "../../utils.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { TokenDocumentPF2e } from "@module/scene/index.js";
 import { CombatantPF2e } from "@module/encounter/index.js";
 import { ActorPF2e } from "@actor/base.js";
 import { ActorFlagsPF2e } from "@actor/data/base.js";
+import { ChatMessagePF2e } from "@module/chat-message/document.js";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     const content = message.content;

@@ -1,11 +1,10 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorFlagsPF2e } from "@actor/data/base.js";
 import { degreeOfSuccessWithRerollHandling, isActuallyDamageRoll, shouldIHandleThisMessage } from "../../utils.ts";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { TokenDocumentPF2e } from "@module/scene/index.js";
 import { ScenePF2e } from "@scene/document.js";
 import { handleDying } from "../../hooks.js";
-import { ConditionPF2e } from "@module/item/index.js";
+import { ChatMessagePF2e } from "@module/chat-message/document.js";
 
 export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
@@ -186,14 +185,15 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
         message.token.actor &&
         message.token.isOwner
     ) {
-        const outcome = message.flags.pf2e.context.outcome ?? "";
+        // @ts-ignore
+        const outcome = message.flags.pf2e.context?.outcome ?? "";
 
         const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
         const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
 
         const token: TokenDocumentPF2e<ScenePF2e> = message.token;
         if (token && token.isOwner) {
-            const originalDyingCounter = token.actor.getCondition("dying")?.value ?? 0;
+            const originalDyingCounter = token.actor?.getCondition("dying")?.value ?? 0;
             let dyingCounter = 0;
             let outcomeString = "";
             switch (outcome) {
@@ -223,7 +223,7 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
                         outcome: outcomeString,
                         defeated: token.combatant?.defeated
                             ? game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.defeated`, {
-                                  name: token.actor.name,
+                                  name: token.actor?.name ?? "???",
                               })
                             : "",
                         roll: total,
@@ -256,9 +256,9 @@ export function persistentDamage(message) {
                 token?.actor?.applyDamage({ damage: r, token: token.document }).then();
             }
         }
-        const actor = token.actor;
+        const actor = token?.actor;
         if (actor && game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
-            const condition: ConditionPF2e = actor.conditions
+            const condition = actor.conditions
                 .filter((condition) => condition.slug === "persistent-damage")
                 .find((condition) => message.flavor.includes(condition.name));
             if (condition) {

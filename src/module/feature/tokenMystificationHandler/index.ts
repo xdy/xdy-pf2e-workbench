@@ -1,11 +1,11 @@
 import { ScenePF2e, TokenDocumentPF2e } from "@scene";
-import { TokenPF2e } from "@module/canvas/index.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorSystemData } from "@actor/data/base.js";
 import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/index.js";
 import { generateNameFromTraits } from "./traits-name-generator.js";
 import { logError } from "../../utils.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
+import { TokenPF2e } from "@module/canvas/token/object.js";
+import { ChatMessagePF2e } from "@module/chat-message/document.js";
 
 function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (

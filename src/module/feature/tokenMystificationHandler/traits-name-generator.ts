@@ -1,7 +1,7 @@
 import { TokenDocumentPF2e } from "@scene";
 import { AON_CREATURE_TYPES, ELITE_WEAK } from "../../xdy-pf2e-constants.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { TokenPF2e } from "@module/canvas/index.js";
+import { TokenPF2e } from "@module/canvas/token/object.js";
 
 let TRAITS: {
     SIZES: string[];
@@ -138,7 +138,6 @@ export async function generateNameFromTraitsForToken(tokenId: string) {
 export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2e) {
     let result: any;
     const traits = token?.actor?.system?.traits;
-    const customTraits: any = traits?.traits?.custom;
     if (!TRAITS) {
         fillTraits();
     }
@@ -146,9 +145,6 @@ export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2
     if (traits) {
         let traitsList = <string[]>traits["value"];
         if (traitsList) {
-            if (customTraits) {
-                traitsList = traitsList.concat(customTraits.trim().split(","));
-            }
             const tokenRarities: any = traits.rarity;
             if (tokenRarities) {
                 traitsList = traitsList.concat(tokenRarities);

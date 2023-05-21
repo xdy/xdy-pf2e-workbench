@@ -1,6 +1,6 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { SCALE_APP_DATA } from "../NPCScaleData.js";
-import { TokenPF2e } from "@module/canvas/index.js";
+import { TokenPF2e } from "@module/canvas/token/object.js";
 
 export async function registerNpcRollerHandlebarsTemplates() {
     await loadTemplates([

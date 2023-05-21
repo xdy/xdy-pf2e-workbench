@@ -1,6 +1,6 @@
 import { ActorFlagsPF2e } from "@actor/data/base.js";
 import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
+import { ChatMessagePF2e } from "@module/chat-message/document.js";
 
 function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
     const userId = message.user.id;

@@ -91,7 +91,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     // parse simple modifiers
     updateData["system.attributes.ac.value"] = getLeveledData(
         "armorClass",
-        system.attributes.ac?.base ?? 0,
+        system.attributes.ac?.value ?? 0,
         oldLevel,
         newLevel
     ).total;

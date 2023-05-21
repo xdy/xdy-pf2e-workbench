@@ -6,7 +6,6 @@ import { renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-act
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
 import { enableCreatureBuilderButton } from "./feature/creature-builder/CreatureBuilder.js";
 import { ActorSheetPF2e } from "@actor/sheet/base.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { UserPF2e } from "@module/user/index.js";
 import {
     actionsReminder,
@@ -50,6 +49,7 @@ import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
 import { maxHeroPoints } from "./feature/heroPointHandler/index.js";
 import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
 import { onQuantitiesHook } from "./feature/quickQuantities/index.js";
+import { ChatMessagePF2e } from "@module/chat-message/document.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let result = true;

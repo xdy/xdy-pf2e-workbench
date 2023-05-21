@@ -1,5 +1,5 @@
-import { CharacterSkill } from "@actor/character/types.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { CharacterSkill } from "@actor/character/types.js";
 
 export class VariantsCollection extends Array<Variant> {
     addBasicVariant(skill: CharacterSkill, extra: Record<string, unknown> | undefined, label: string | undefined) {
@@ -13,7 +13,7 @@ export class VariantsCollection extends Array<Variant> {
             label: game.i18n.localize("PF2E.MultipleAttackPenalty"),
             modifier: map,
             type: "untyped",
-            rollOptions: {},
+            // rollOptions: {},
         });
         const label = game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: map });
         this.push(new Variant(label, skill, extra, [modifier]));
@@ -42,7 +42,7 @@ export class Variant {
         label: string,
         skill: CharacterSkill,
         extra: Record<string, unknown> | undefined,
-        modifiers: (typeof game.pf2e.Modifier)[] = [],
+        modifiers: any[] = [], // ModifierPF2e[] = [],
         assuranceTotal = 0
     ) {
         this.label = label;
