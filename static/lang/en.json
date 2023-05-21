@@ -303,7 +303,7 @@
         "name": "... depending on if last damage was nonlethal."
       },
       "automationClientSettings": {
-        "hint": "Enable and configure automation for players",
+        "hint": "Enable and configure local automation settings, i.e. settings that only affect your own client.",
         "label": "Manage Client Automation Settings",
         "name": "Client Automation Settings"
       },
