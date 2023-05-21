@@ -323,24 +323,6 @@ Hooks.once("ready", () => {
 
     // Must be in ready
 
-    if (isFirstGM()) {
-        migrateFeatures().then();
-    }
-
-    if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
-        ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-sheet-skill-actions`));
-    }
-
-    if (game.modules.get("pf2e-toolbox")?.active) {
-        ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-toolbox`));
-    }
-
-    if (game.settings.get(MODULENAME, "tokenAnimation") && game.modules.get("multilevel-tokens")?.active) {
-        ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.multilevel-tokens`));
-    }
-
-    updateHooks();
-
     // Make some functions available for macros
     // noinspection JSUnusedGlobalSymbols
     // @ts-ignore
@@ -358,6 +340,33 @@ Hooks.once("ready", () => {
         whirlwindStrike: whirlwindStrike, // await game.PF2eWorkbench.whirlwindStrike(_token) OR await game.PF2eWorkbench.whirlwindStrike(_token, 2000)
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
     };
+
+    if (isFirstGM()) {
+        migrateFeatures().then();
+    }
+
+    if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-sheet-skill-actions`));
+    }
+
+    if (game.modules.get("pf2e-toolbox")?.active) {
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-toolbox`));
+    }
+
+    const ta = game.settings.get(MODULENAME, "tokenAnimation");
+    const mlt = game.modules.get("multilevel-tokens");
+    if (ta && mlt?.active) {
+        ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.multilevel-tokens`));
+    }
+
+    try {
+        updateHooks();
+    } catch (e) {
+        // Some kind of timing error that only happens when using another language than english, try again after 0.5 second
+        new Promise((resolve) => setTimeout(resolve, 500)).then(() => {
+            updateHooks();
+        });
+    }
 
     // TODO Instead of opening immediately, add a handler that hooks onto the *first* unpause, and starts then.
     // TODO Check if more than 'timer max' minutes have passed, if so assume new start and reset to 'timer max' minutes.
