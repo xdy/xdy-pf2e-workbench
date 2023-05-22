@@ -75,7 +75,11 @@
         "noActorSelected": "Kein Akteur ausgewählt",
         "cancel": "Abbruch",
         "third": "(-10)",
-        "compendiumNotFound": "Kompendium {compendiumName} nicht gefunden"
+        "compendiumNotFound": "Kompendium {compendiumName} nicht gefunden",
+        "bamActionsPerColumn": {
+          "name": "Ungefähre Anzahl an Aktionen pro Zeile",
+          "hint": "Ungefähre Anzahl an Aktionen pro Zeile im Basic Aktion Makro Dialog. Die genaue Anzahl an Aktionen wird davon bestimmt, wie viele Aktionen pro Zeile wirklich in den Dialog passen."
+        }
       },
       "buildNpcSpellbookJournal": {
         "noSpellcastingEntry": "Du musst entweder ein NSC-Charakterblatt geöffnet und ausgewählt haben oder ein einzelnes NSC-Token ausgewählt haben. Außerdem muss der NSC einen Eintrag für Zauberei haben.",
@@ -95,7 +99,8 @@
       "whirlwindStrike": {
         "starts": "{name} Wirbelnder Angriff startet!",
         "ends": "{name} Wirbelnder Angriff endet nach {targets} Angriffen!",
-        "error": "Wähle ein Token mit Wirbelnder Angriff und mindestens einem Ziel in Reichweiter aus!"
+        "error": "Wähle ein bewaffnetes Token mit Wirbelnder Angriff und mindestens einem sichtbaren Gegner in Reichweite aus!",
+        "reachAuraNotFound": "Keine Aura gefunden, bitte Reichweite 'Aura' im PF2 Workbench Gegenstandskompendium auf das Token ziehen und die Reichweite entsprechend anpassen."
       }
     },
     "modules": {
@@ -140,7 +145,7 @@
       "automationClientSettings": {
         "label": "Verwalte die Client Automatisierungseinstellungen",
         "name": "Client Automatisierungseinstellungen",
-        "hint": "Aktiviere und konfiguriere Automatisierung für die Spieler"
+        "hint": "Aktiviere und konfiguriere lokale Automatisierungseinstellung, z.B. Einstellung welche nur den eigenen Client betreffen."
       },
       "autoRemoveUnconsciousAtGreaterThanZeroHP": {
         "name": "Automatisches Entfernen des Bewusstlos-Zustand, falls man über 0 TP geheilt wird.",
@@ -150,12 +155,12 @@
         "no": "Nein",
         "add": "Füge Sterbend hinzu",
         "addForCharacters": "Füge Sterbend hinzu, für Charaktere + Vertraute",
-        "hint": "(Experimentell) Falls kritisch von einem gegnerischen Akteur verletzt, fügt er eine zusätzliche Stufe sterbend hinzu. Benutzt die Einstellung aus dem Dropdown-Menü.",
+        "hint": "Falls kritisch von einem gegnerischen Akteur verletzt, fügt er eine zusätzliche Stufe sterbend hinzu. Benutzt die Einstellung aus dem Dropdown-Menü. Benötigt dass die Einstellung darüber aktiv ist.",
         "name": "... und eine Stufe Sterbend extra falls kritisch durch einen Gegner getroffen."
       },
       "autoGainDyingIfTakingDamageWhenAlreadyDying": {
         "no": "Nein",
-        "hint": "(Experimental) Falls Schaden im Zustand Sterbend erhalten wird, füge eine Stufe Sterbend hinzu (oder eventuell 2 falls Sterbend bei kritischen Treffern aktiviert ist). Benutzt die Einstellung aus dem Dropdown-Menü.",
+        "hint": "Falls Schaden im Zustand Sterbend erhalten wird, füge eine Stufe Sterbend hinzu (oder eventuell 2 falls Sterbend bei kritischen Treffern aktiviert ist). Benutzt die Einstellung aus dem Dropdown-Menü. Benötigt dass die Einstellung darüber aktiv ist.",
         "add": "Füge Sterbend hinzu",
         "addForCharacters": "Füge Sterbend hinzu, für Charaktere + Vertraute",
         "name": "... und fügt zusätzlich(e) Sterbend Stufe(n) hinzu, falls Schaden im Zustand Sterbend genommen wird."
@@ -412,7 +417,8 @@
         "disabled": "Deaktiviert",
         "hint": "Wählen Sie diese Option, um festzulegen, welche Taste gedrückt werden soll, um die Kreatur zu verschleiern, wenn sie in die aktive Szene gezogen wird. Beachten Sie, dass, wenn Sie Alt wählen (nicht die Standardeinstellung), es ebenfalls die NSC versteckt .",
         "name": "Taste zum verschleiern beim ziehen auf die Szene",
-        "always": "Immer"
+        "always": "Immer",
+        "meta": "Meta/⌘ (command/Befehl)/⊞ (Windows-Taste)"
       },
       "npcMystifierMystifyKey": {
         "name": "Tastenkürzel zum Verschleiern ausgewählter Token",
@@ -585,7 +591,7 @@
         "no": "Nichttödlicher Schaden ist einfach Schaden",
         "unconscious": "Nichttödlicher Schaden tötet nicht",
         "unconsciousForCharacters": "Nichttödlicher Schaden tötet keine Charaktere + Vertraute",
-        "hint": "Falls der letzte Schaden welchen du erhälst nichttödlich ist, erhälst du keinen Sterbend Zustand, sondern wirst bewusstlos mit 0 TP.",
+        "hint": "Falls der letzte Schaden welchen du erhälst nichttödlich ist, erhälst du keinen Sterbend Zustand, sondern wirst bewusstlos mit 0 TP.Benötigt dass die Einstellung darüber aktiv ist.",
         "name": "... abhängig davon ob der letzte Schaden nichttödlich war."
       },
       "handleDyingRecoveryRollAllow": {
@@ -601,6 +607,10 @@
         "name": "Automatisches Würfeln von Erholungswürfen.",
         "defeated": "{name} wurde besiegt",
         "handled": "Erholungswurf {roll} {outcome} wurde automatisch abgehandelt. {defeated}."
+      },
+      "applyPersistentDamageRecoveryRoll": {
+        "hint": "... und automatisch für die Erholung danach würfeln. Benötigt dass die Einstellung darüber aktiv ist.",
+        "name": "... und automatisch danach für die Erholung würfeln."
       }
     },
     "skillActions": {
