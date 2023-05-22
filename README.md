@@ -31,7 +31,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 * Reminder section
     * Option to remind when attack is made by a token that probably can't attack (due to being unconscious / dead /
       defeated / has no hp / etc).
-        * Supoption to allow Eidolons to attack even if they have 0 hp.
+        * Suboption to allow Eidolons to attack even if they have 0 hp.
     * Option to remind when an attack is made without targeting.
     * Option to show reminder each turn that the number of actions is other than three. Handles Quickened, Slowed and
       Stunned.
