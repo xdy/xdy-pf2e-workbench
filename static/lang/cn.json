@@ -157,7 +157,7 @@
       "automationClientSettings": {
         "name": "客户端自动化设置",
         "label": "管理客户端自动化设置",
-        "hint": "为玩家启用和配置自动化"
+        "hint": "为本地启用和配置自动化设置。这些设置只会对你的客户端起效。"
       },
       "automationWorldSettings": {
         "hint": "为GM启用和配置自动化",
@@ -274,7 +274,7 @@
         "name": "吐息武器提醒",
         "prefix": "再充能",
         "defaultName": "吐息",
-        "hint": "勾选此项，设置吐息武器提醒。",
+        "hint": "勾选此项，为吐息武器设置提醒(事实上，对大多数写法规范的要充能的能力有效)。",
         "source": "PF2e Workbench的吐息武器提醒"
       },
       "autoRollDamageAllow": {
@@ -331,7 +331,7 @@
         "aSpell": "法术"
       },
       "castPrivateSpellAlwaysForNPC": {
-        "hint": "勾选此项，NPC施法永远为秘密施法。",
+        "hint": "勾选此项，NPC施法永远为秘密施法。(按住Ctrl则可公开施法)",
         "name": "勾选此项，NPC施法永远为秘密施法。"
       },
       "castPrivateSpellWithPublicMessage": {
@@ -529,14 +529,14 @@
       },
       "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
         "name": "... 如果敌人造成重击伤害，濒死值额外增加1点。",
-        "hint": "(实验性) 如果被敌人角色选为目标并重击，濒死值额外增加1点。使用上方下拉列表中的设置。",
+        "hint": "如果被敌人角色选为目标并被重击，濒死值额外增加1点。使用上方下拉列表中的设置。需要先启用上方的设置。",
         "no": "否",
         "add": "添加濒死",
         "addForCharacters": "为玩家角色和魔宠添加濒死"
       },
       "autoGainDyingIfTakingDamageWhenAlreadyDying": {
         "name": "... 如果在濒死状态下承受伤害，濒死值额外增加1点（重击时为2点）。",
-        "hint": "(实验性) 如果在已有濒死状态的情况下受到伤害，濒死值增加1点（若启用重击时额外增加濒死值，则为2点）。使用上方下拉列表中的设置。",
+        "hint": "如果在已有濒死状态的情况下受到伤害，濒死值增加1点（若启用重击时额外增加濒死值，则为2点）。使用上方下拉列表中的设置。需要先启用上方的设置。",
         "no": "否",
         "add": "添加濒死",
         "addForCharacters": "为玩家角色和魔宠添加濒死"
@@ -554,6 +554,26 @@
       "castPrivateSpellHideName": {
         "name": "启用此项以隐藏被隐蔽施放法术的法术名。",
         "hint": "(实验性功能)启用此项以隐藏被隐蔽施放法术的法术名。"
+      },
+      "nonLethalIsNotLethal": {
+        "unconscious": "非致命伤害不会致命",
+        "no": "非致命伤害变得跟正常伤害一样",
+        "unconsciousForCharacters": "非致命伤害不会杀死角色和魔宠",
+        "name": "... 取决于最后受到的伤害是否是非致命伤害。",
+        "hint": "如果你最后受到的伤害是非致命伤害，你不会陷入濒死。你变成0点HP且失去意识。需要先启用上方的设置。"
+      },
+      "handleDyingRecoveryRollAllow": {
+        "all": "所有人",
+        "gm": "GM"
+      },
+      "applyPersistentDamageRecoveryRoll": {
+        "hint": "...并在那之后自动骰恢复检定。需要先启用上面的设置。",
+        "name": "...并在那之后自动骰恢复检定。"
+      },
+      "dropHeldItemsOnBecomingUnconscious": {
+        "hint": "当失去意识时，角色手中的物品会自动掉落。",
+        "name": "当失去意识时，角色手中的物品会自动掉落。",
+        "message": "{name}掉落了：{items}"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
@@ -657,7 +677,7 @@
       "whirlwindStrike": {
         "starts": "{name} 开始旋风打击！",
         "ends": "攻击{targets}后{name}的旋风打击结束！",
-        "error": "选择一个具备旋风打击能力的token，和触及范围内至少一个目标！"
+        "error": "选择一个具备旋风打击能力的已武装的指示物，并保证触及范围内至少有一个可见的非盟友目标！"
       }
     }
   }
