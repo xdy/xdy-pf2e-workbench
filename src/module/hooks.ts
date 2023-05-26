@@ -58,10 +58,6 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     }
 
     const downkeys = game?.keyboard.downKeys;
-    console.log("Downkeys: ", downkeys.size);
-    Array.of(downkeys.values())?.forEach((key) => {
-        logDebug(`downKeys: ${key}`);
-    });
 
     let ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight"].some((key) => downkeys.has(key));
     if (ctrlHeld === undefined) {
