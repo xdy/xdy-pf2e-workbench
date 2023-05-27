@@ -75,31 +75,31 @@ function createButton(action, idx, actor, party, actorSkills) {
         name +
         " " +
         (best ? game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.YouAreTheBestInYourParty`) : "");
-    // let button: string;
-    // if (action.showMAP) {
-    //     const second = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.second`);
-    //     const third = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.third`);
-    //     button =
-    //         `<div class="map-wrapper">
-    //           <button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="0" style="background:${
-    //             colorPalette[rank]
-    //         }" ${`data-tooltip="${tooltip}"`}> <img src="${
-    //             action.icon ?? defaultIcon
-    //         }" height="24" width="24"   alt="${name}"/>${name}</button>` +
-    //         `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-5" style="background:${
-    //             colorPalette[rank]
-    //         }" ${`data-tooltip="${tooltip} + ${second}"`}>${second}</button>` +
-    //         `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-10" style="background:${
-    //             colorPalette[rank]
-    //         }" ${`data-tooltip="${tooltip} + ${third}"`}>${third}</button>
-    //           </div>`;
-    // } else {
-    const button = `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
-        colorPalette[rank]
-    }"
+    let button: string;
+    if (action.showMAP) {
+        const second = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.second`);
+        const third = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.third`);
+        button =
+            `<div class="map-wrapper">
+              <button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="0" style="background:${
+                colorPalette[rank]
+            }" ${`data-tooltip="${tooltip}"`}> <img src="${
+                action.icon ?? defaultIcon
+            }" height="24" width="24"   alt="${name}"/>${name}</button>` +
+            `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-5" style="background:${
+                colorPalette[rank]
+            }" ${`data-tooltip="${tooltip} + ${second}"`}>${second}</button>` +
+            `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-10" style="background:${
+                colorPalette[rank]
+            }" ${`data-tooltip="${tooltip} + ${third}"`}>${third}</button>
+              </div>`;
+    } else {
+        button = `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
+            colorPalette[rank]
+        }"
     ${`data-tooltip="${tooltip}"`}>
     <img src="${action.icon ?? defaultIcon}" height="24" alt="${name}"/>${name}</button>`;
-    // }
+    }
     return button;
 }
 
@@ -272,8 +272,9 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Escape`),
             skill: "",
-            action: ["Escape", "pf2e.action-macros"],
+            action: game.pf2e.actions.escape,
             icon: "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
+            showMAP: true,
         },
         {
             actionType: "skill_trained",
@@ -737,8 +738,12 @@ ${actionsToUse
                             );
                         }
                     } else if (typeof current === "object") {
-                        // TODO Handle variants
-                        current.use();
+                        // TODO Handle other variants than map
+                        const mapValue =
+                            button.dataset.map && button.dataset.map !== "0"
+                                ? -(Number.parseInt(button.dataset.map) / 5)
+                                : 0;
+                        current.use({ multipleAttackPenalty: mapValue }).then();
                     } else {
                         const skills = getSkills(action.skill);
                         const variant =
