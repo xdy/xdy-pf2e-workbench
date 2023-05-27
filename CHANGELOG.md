@@ -1,3 +1,10 @@
+## [4.76.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.76.3...v4.76.4) (2023-05-27)
+
+
+### Bug Fixes
+
+* Re-added MAP buttons for Basic Action Macros. NOTE: They might not work until pf2e 4.12.6 or greater. ([6eed5ae](https://github.com/xdy/xdy-pf2e-workbench/commit/6eed5aed4a8daa25fa715492f994ce492b159aa7))
+
 ## [4.76.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.76.2...v4.76.3) (2023-05-24)
 
 
