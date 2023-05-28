@@ -24,7 +24,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [Cerapter](https://github.com/Cerapter/) - Fixed skill action slugs not being added along to rolls.
 * [Kuroni](https://github.com/AlphaStarguide) - Added auditory traits to bard aura effects, contributed the Chinese (Simplified) translation.
 * [Avery](https://github.com/velara) - Made the macro that builds an npc spellbok journal.
-* [Idle](https://github.com/reonZ/) - Added setting for if skill actions should post description to chat.
+* [Idle#3251](https://github.com/reonZ/) - Added setting for if skill actions should post description to chat.
 * [ApoApostolov] - Contributed Basic Action Macros.
 * sad - Contributed the Chinese (Traditional) translation.
 * [alanlaredo](https://github.com/AlanLaredo) - Contributed the Spanish translation.
