@@ -1,3 +1,10 @@
+# [4.77.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.76.4...v4.77.0) (2023-05-28)
+
+
+### Features
+
+* Added client setting to automatically sort actions alphabetically on the character sheet. Courtesy of @Idle ([48bc9f8](https://github.com/xdy/xdy-pf2e-workbench/commit/48bc9f8a43d6121803416ff03167291c6e7dfe8a))
+
 ## [4.76.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.76.3...v4.76.4) (2023-05-27)
 
 
