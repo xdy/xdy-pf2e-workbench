@@ -394,6 +394,21 @@ Hooks.once("ready", () => {
         }
     });
 
+    if (game.settings.get(MODULENAME, "dirtySortActions") && !window["dirtySheetSorter"]) {
+        const proto = CONFIG.Actor.sheetClasses.character["pf2e.CharacterSheetPF2e"].cls.prototype;
+        const wrapped = proto.getData;
+        proto.getData = async function (options) {
+            const data = await wrapped.call(this, options);
+            const actions = data.actor.actions;
+            actions.action.actions.sort((a, b) => a.name.localeCompare(b.name));
+            actions.reaction.actions.sort((a, b) => a.name.localeCompare(b.name));
+            actions.free.actions.sort((a, b) => a.name.localeCompare(b.name));
+            return data;
+        };
+
+        window["dirtySheetSorter"] = true;
+        ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.dirtySortActions.info`));
+    }
     phase = Phase.ACTIVE;
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });

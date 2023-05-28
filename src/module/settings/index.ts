@@ -137,8 +137,8 @@ export function registerWorkbenchSettings() {
         default: true,
         type: Boolean,
     });
-
     // game.settings.register(MODULENAME, "skillActionsHideDuplicates", {
+
     //     name: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.name`,
     //     hint: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hint`,
     //     scope: "client",
@@ -156,7 +156,6 @@ export function registerWorkbenchSettings() {
     //     },
     //     onChange: () => debouncedReload(),
     // });
-
     game.settings.register(MODULENAME, "customPauseImage", {
         name: `${MODULENAME}.SETTINGS.customPauseImage.name`,
         hint: `${MODULENAME}.SETTINGS.customPauseImage.hint`,
@@ -214,6 +213,15 @@ export function registerWorkbenchSettings() {
         default: 14,
         type: Number,
         onChange: () => updateHooks(),
+    });
+
+    game.settings.register(MODULENAME, "dirtySortActions", {
+        name: `${MODULENAME}.SETTINGS.dirtySortActions.name`,
+        hint: `${MODULENAME}.SETTINGS.dirtySortActions.hint`,
+        scope: "client",
+        config: true,
+        default: true,
+        type: Boolean,
     });
 
     game.settings.register(MODULENAME, "workbenchVersion", {
