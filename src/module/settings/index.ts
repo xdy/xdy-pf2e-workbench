@@ -220,7 +220,7 @@ export function registerWorkbenchSettings() {
         hint: `${MODULENAME}.SETTINGS.dirtySortActions.hint`,
         scope: "client",
         config: true,
-        default: true,
+        default: false,
         type: Boolean,
     });
 
