@@ -1,3 +1,11 @@
+## [4.77.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.77.0...v4.77.1) (2023-05-29)
+
+
+### Bug Fixes
+
+* Fixes shift and ctrl clicking on items to increase by more than one. ([5ba6fe1](https://github.com/xdy/xdy-pf2e-workbench/commit/5ba6fe1b3dcfb68bb902af3953282e71459d6b9c))
+* Sorting actions should default to off. ([cbd9b25](https://github.com/xdy/xdy-pf2e-workbench/commit/cbd9b25c71ecd2ca06a02ad052ac4c2f579cf3e1))
+
 # [4.77.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.76.4...v4.77.0) (2023-05-28)
 
 
