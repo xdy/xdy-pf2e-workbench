@@ -37,6 +37,7 @@ export function onQuantitiesHook(app: ActorSheetPF2e<ActorPF2e>, html: JQuery) {
     };
 
     increaseQuantity.on("click", async (event) => {
+        event.stopImmediatePropagation();
         const itemId = $(event.currentTarget).parents(".item").attr("data-item-id") ?? "";
         const item = actor.items.get(itemId) as ItemPF2e;
 
@@ -50,6 +51,7 @@ export function onQuantitiesHook(app: ActorSheetPF2e<ActorPF2e>, html: JQuery) {
     });
 
     decreaseQuantity.on("click", async (event) => {
+        event.stopImmediatePropagation();
         const itemId = $(event.currentTarget).parents(".item").attr("data-item-id") ?? "";
         const item = actor.items.get(itemId) as ItemPF2e;
 
