@@ -642,8 +642,8 @@
         "name": "World QoL Settings"
       },
       "quickQuantities": {
-        "hint": "Use shift-click on item quantities to add 5, ctrl-click to add 10.",
-        "name": "Use shift-click on item quantities to add 5, ctrl-click to add 10."
+        "hint": "(Deprecated) Use shift-click on item quantities to add 5, ctrl-click to add 10.",
+        "name": "(Deprecated) Use shift-click on item quantities to add 5, ctrl-click to add 10."
       },
       "reminderBreathWeapon": {
         "defaultName": "Breath",
