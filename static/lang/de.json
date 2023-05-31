@@ -611,6 +611,11 @@
       "applyPersistentDamageRecoveryRoll": {
         "hint": "... und automatisch für die Erholung danach würfeln. Benötigt dass die Einstellung darüber aktiv ist.",
         "name": "... und automatisch danach für die Erholung würfeln."
+      },
+      "dirtySortActions": {
+        "name": "Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird.",
+        "info": "Aktionen im Charakterbogen sind nun sortiert.",
+        "hint": "Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird. Erfordert eine Aktualisierung (F5) nach der Änderung."
       }
     },
     "skillActions": {
