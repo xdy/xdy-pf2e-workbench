@@ -417,8 +417,8 @@
         "name": "Régler la qualité de vie du monde"
       },
       "quickQuantities": {
-        "hint": "Utilisez Shift+clic sur les quantités d'objet pour en ajouter 5, Ctrl+clic pour en ajouter 10.",
-        "name": "Utiliser Shict+clic sur les quantités d'objet pour en ajouter 5, Ctrl+clic pour en ajouter 10."
+        "hint": "(Déprécié) Utilisez Shift+clic sur les quantités d'objet pour en ajouter 5, Ctrl+clic pour en ajouter 10.",
+        "name": "(Déprécié) Utiliser Shift+clic sur les quantités d'objet pour en ajouter 5, Ctrl+clic pour en ajouter 10."
       },
       "reminderBreathWeapon": {
         "defaultName": "Souffle",
