@@ -322,10 +322,6 @@
         "label": "Qualidade de Vida",
         "name": "Qualidade de Vida"
       },
-      "quickQuantities": {
-        "hint": "Ao aumentar/diminuir a quantidade de itens, segurar Shift ao clicar altera a quantidade em 5 e Ctrl a altera em 10.",
-        "name": "Shift/Ctrl na Quantidades de Item"
-      },
       "reminderBreathWeapon": {
         "defaultName": "Sopro",
         "hint": "Cria um lembrete para o uso de sopros (como os de um dragão).",

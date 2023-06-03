@@ -366,10 +366,6 @@
         "name": "使用稀有度",
         "hint": "勾选此项，在神秘化名称中使用稀有度。"
       },
-      "quickQuantities": {
-        "hint": "Shift+单击物品数量增加5，Ctrl+单击增加10。",
-        "name": "Shift+单击物品数量增加5，Ctrl+单击增加10。"
-      },
       "heroPointHandlerDefaultTimeoutMinutes": {
         "hint": "设置距离下次英雄点处理器开启的间隔。",
         "name": "英雄点处理器开启的间隔。"

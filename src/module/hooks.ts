@@ -48,7 +48,6 @@ import { ItemPF2e } from "@item/base.js";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
 import { maxHeroPoints } from "./feature/heroPointHandler/index.js";
 import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
-import { onQuantitiesHook } from "./feature/quickQuantities/index.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
@@ -420,10 +419,6 @@ export async function createTokenHook(token: TokenDocumentPF2e, ..._args) {
 export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, $html: JQuery) {
     if (game.settings.get(MODULENAME, "creatureBuilder")) {
         enableCreatureBuilderButton(sheet, $html);
-    }
-
-    if (game.settings.get(MODULENAME, "quickQuantities")) {
-        onQuantitiesHook(sheet, $html);
     }
 
     if (sheet.actor?.type === CHARACTER_TYPE && String(game.settings.get(MODULENAME, "skillActions")) !== "disabled") {

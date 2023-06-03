@@ -429,10 +429,6 @@
         "label": "管理全域性便捷設定",
         "name": "全域性便捷設定"
       },
-      "quickQuantities": {
-        "hint": "Shift+單擊物品數量增加5，Ctrl+單擊增加10。",
-        "name": "Shift+單擊物品數量增加5，Ctrl+單擊增加10。"
-      },
       "reminderBreathWeapon": {
         "defaultName": "吐息",
         "hint": "勾選此項，設定吐息武器提醒。",

@@ -36,16 +36,6 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
-            quickQuantities: {
-                name: `${MODULENAME}.SETTINGS.quickQuantities.name`,
-                hint: `${MODULENAME}.SETTINGS.quickQuantities.hint`,
-                scope: "world",
-                config: true,
-                default: false,
-                type: Boolean,
-                onChange: () => updateHooks(),
-                requiresReload: true,
-            },
             castPrivateSpell: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpell.name`,
                 hint: `${MODULENAME}.SETTINGS.castPrivateSpell.hint`,

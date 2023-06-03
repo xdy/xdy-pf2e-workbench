@@ -493,10 +493,6 @@
         "hint": "Version auf welcher die aktuellste Migration gelaufen ist. Kann niedriger als die Modul-Version sein. Modifiziere dies nicht, außer du weißt wirklich was du tust.",
         "name": "Workbench Migrationsversion"
       },
-      "quickQuantities": {
-        "hint": "Benutze Shift-Klick bei Gegenstandsmengen um 5 hunzufügen, STRG-Klick um 10 hinzufügen.",
-        "name": "Benutze Shift-Klick bei Gegenstandsmengen um 5 hunzufügen, STRG-Klick um 10 hinzufügen."
-      },
       "playerFeatsRarityColour": {
         "hint": "Client Einstellung um den Namen von Talenten in der Farbe der Seltenheit auf dem Charakterblatt anzuzeigen.",
         "name": "Den Namen von Talenten in der Farbe der Seltenheit auf dem Charakterblatt anzeigen."

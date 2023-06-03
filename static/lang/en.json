@@ -641,10 +641,6 @@
         "label": "Manage World QoL Settings",
         "name": "World QoL Settings"
       },
-      "quickQuantities": {
-        "hint": "(Deprecated) Use shift-click on item quantities to add 5, ctrl-click to add 10.",
-        "name": "(Deprecated) Use shift-click on item quantities to add 5, ctrl-click to add 10."
-      },
       "reminderBreathWeapon": {
         "defaultName": "Breath",
         "hint": "Check to set reminder for breath weapon use (actually any ability with a properly formatted recharge).",

@@ -55,8 +55,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc
       using the suggested values from the GMG (This feature has been taken over from the
       delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox#quick-roller module. Thanks DJ!)
-    * Option to hold control or shift to quickly increase/decrease item quantities by 5 or 10 (
-      from https://github.com/Djphoenix719/FVTT-PF2EToolbox)
     * Option to hold CTRL while casting a spell to cast it as a whispered chat message. Separate option to output a
       separate public chat message with a Recall Knowledge button to recognize it, an optional save button and an
       optional trait list, unless you hold CTRL+SHIFT to entirely skip this message.

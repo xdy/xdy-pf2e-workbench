@@ -179,7 +179,6 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
             gs.get(MODULENAME, "playerSpellsRarityColour") ||
             gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "quickQuantities") ||
             gs.get(MODULENAME, "skillActions") !== "disabled" ||
             gs.get(MODULENAME, "creatureBuilder"),
         renderActorSheetHook
