@@ -1,3 +1,10 @@
+## [4.77.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.77.1...v4.77.2) (2023-06-03)
+
+
+### Bug Fixes
+
+* Remove Quick Quantities as it's now part of the system. Set minimum pf2e version to 4.12.7 ([598a816](https://github.com/xdy/xdy-pf2e-workbench/commit/598a816755007ad5abfade3fb2121a21e110c028))
+
 ## [4.77.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.77.0...v4.77.1) (2023-05-29)
 
 
