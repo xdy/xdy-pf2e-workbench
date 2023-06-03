@@ -431,6 +431,7 @@
                 }
             },
             "TallowBomb": {
+                "criticalSuccess": "On a critical hit, a living creature taking persistent fire damage from a tallow bomb is @UUID[Compendium.pf2e.conditionitems.fesd1n5eVhpCSS18]{Sickened 1} from the stench of burning fat and can't reduce its sickened value below 1 while the persistent fire damage lasts.",
                 "Greater": {
                     "criticalSuccess": "<strong>Effect</strong> The bomb also deals [[/r (2*3d4)[persistent,fire]]], [[/r (3[splash])[fire]]]{3 fire splash damage}, and the target is @UUID[Compendium.pf2e.conditionitems.fesd1n5eVhpCSS18]{Sickened 1} from the stench of burning fat. The creature can't reduce its sickened value below 1 while the persistent fire damage lasts.",
                     "success": "<strong>Effect</strong> The bomb also deals [[/r 3d4[persistent,fire]]] and [[/r (3[splash])[fire]]]{3 fire splash damage}."
@@ -450,7 +451,7 @@
             },
             "TanglefootBag": {
                 "Greater": {
-                    "criticalSuccess": "On hit,  @UUID[Compendium.pf2e.equipment-effects.csA4UAD2tQq7RjT8]{-15 ft Speed Penalty} for 1 minute. On critical hit, @UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{Immobilized} for 1 round.",
+                    "criticalSuccess": "On hit, @UUID[Compendium.pf2e.equipment-effects.csA4UAD2tQq7RjT8]{-15 ft Speed Penalty} for 1 minute. On critical hit, @UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{Immobilized} for 1 round.",
                     "success": "On hit, @UUID[Compendium.pf2e.equipment-effects.csA4UAD2tQq7RjT8]{-15 ft Speed Penalty} for 1 minute."
                 },
                 "Lesser": {
@@ -1051,9 +1052,9 @@
             "Climb": "To Climb",
             "ClimbHighJumpLongJumpOrDisarm": "To Climb, High Jump, Long Jump, or Disarm",
             "ClimbOrSwim": "To Climb or Swim",
-            "CommandAnAnimal": "To Command a Animal",
+            "CommandAnAnimal": "To Command an Animal",
             "CommandReptile": "To Command an Animal that is a Reptile",
-            "ConcealAnObject": "To Coneal an Object",
+            "ConcealAnObject": "To Conceal an Object",
             "CraftAlchemical": "To Craft Alchemical Items",
             "CraftAlchemicalOrMedicine": "To Craft Alchemical or Medicinal Items",
             "CraftBone": "Using Bone",
@@ -1087,7 +1088,7 @@
             "ForestsOrJungles": "In Forests or Jungles",
             "ForestsOrSnow": "In Forests or Snow",
             "ForestsOrSwamps": "In Forests or Swamps",
-            "ForestsOrUnderground": "In Forsts or Underground Areas",
+            "ForestsOrUnderground": "In Forests or Underground Areas",
             "FortuneTelling": "To Tell Fortunes",
             "GatherInformation": "to Gather Information",
             "Grapple": "To Grapple",
@@ -1205,11 +1206,9 @@
                 }
             },
             "AdoptedAncestry": {
-                "AllowedDrops": "ancestry other than your own",
                 "Prompt": "Select a common ancestry."
             },
             "AdvancedGeneralTraining": {
-                "AllowedDrops": "7th-level or lower general feat",
                 "Prompt": "Select a 7th-level or lower general feat."
             },
             "AerialPiledriver": {
@@ -1232,18 +1231,13 @@
                     "Prompt": "Select a research field."
                 }
             },
-            "AllowedDrops": {
-                "DeityOrPantheon": "deity or pantheon"
-            },
             "Anadi": {
                 "SpiderOrHybridForm": "In Spider or Hybrid Form"
             },
             "AncestralParagon": {
-                "AllowedDrops": "1st-level ancestry feat",
                 "Prompt": "Select a 1st-level ancestry feat."
             },
             "AncientElf": {
-                "AllowedDrops": "multiclass dedication feat",
                 "Prompt": "Select a multiclass dedication feat."
             },
             "AnimalSkin": {
@@ -1254,6 +1248,9 @@
             "AquaticCombat": {
                 "FireNote": "You can't cast fire spells or use actions with the fire trait underwater.",
                 "RangedNote": "Ranged attacks that deal bludgeoning or slashing damage automatically miss if the attacker or target is underwater, and piercing ranged attacks made by an underwater creature or against an underwater target have their range increments halved."
+            },
+            "ArtokussFire": {
+                "Note": "Your Alchemist's Fire deals an additional 1d4 persistent fire damage, and creatures must make two succesful flat checks to end the condition (or one check, if they had assisted recovery that reduces the flat check to DC 10). Your enhanced fire burns underwater, and water does not help to end the persistent damage."
             },
             "Automaton": {
                 "ArcaneLocomotion": {
@@ -1600,7 +1597,6 @@
             },
             "Elf": {
                 "Atavism": {
-                    "AllowedDrops": "elf heritage",
                     "Prompt": "Select an elf heritage."
                 },
                 "BrightnessSeeker": {
@@ -1658,6 +1654,13 @@
                 "PhantomShroud": {
                     "StrikeLabel": "Ghostly Hand"
                 }
+            },
+            "ExemplaryFinisher": {
+                "Battledancer": "You can Step as a free action immediately after the finisher.",
+                "Braggart": "If the foe was temporarily immune to your @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{Demoralize}, their temporary immunity ends.",
+                "Fencer": "The foe is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until your next turn.",
+                "Name": "Exemplary Finisher",
+                "Wit": "The foe takes a -2 circumstance penalty to attack rolls against you until the start of your next turn."
             },
             "FanesFourberie": {
                 "Prompt": "Treat Cards as darts or daggers?"
@@ -1736,7 +1739,6 @@
                 }
             },
             "GeneralTraining": {
-                "AllowedDrops": "1st-level general feat",
                 "Prompt": "Select a 1st-level general feat."
             },
             "Ghoul": {
@@ -1754,7 +1756,6 @@
             },
             "Goblin": {
                 "ChosenOfLamashtu": {
-                    "AllowedDrops": "goblin heritage",
                     "Prompt": "Select a goblin heritage."
                 },
                 "ExtraSquishy": {
@@ -1769,6 +1770,11 @@
                 "ScaldingSpit": {
                     "BoilingSpit": "Boiling Spit"
                 }
+            },
+            "GoldenBladeOfMzali": {
+                "ElementalFormLabel": "You have cast elemental form using the Golden Blade of Mzali",
+                "LitLabel": "Golden Blade of Mzali is lit",
+                "PersistentDamageNote": "Unlike normal when taking two types of persistent damage, a creature needs only a single successful flat check to remove both the fire and bleed damage."
             },
             "Gunslinger": {
                 "Way": {
@@ -1864,7 +1870,6 @@
                     },
                     "Prompt": "Select an innovation.",
                     "Weapon": {
-                        "AllowedDrops": "level 0 or 1 simple or martial weapon",
                         "Prompt": "Select a weapon innovation."
                     }
                 },
@@ -2068,7 +2073,6 @@
                 "MageArmor": "Mountain Stance w/ Mage Armor"
             },
             "Multitalented": {
-                "AllowedDrops": "2nd-level multiclass dedication feat",
                 "Prompt": "Select a multiclass dedication feat."
             },
             "Mummy": {
@@ -2231,7 +2235,6 @@
                 }
             },
             "SkillMastery": {
-                "AllowedDrops": "Skill Feats",
                 "ExpertPrompt": "Select a skill to become expert in.",
                 "MasterPrompt": "Select a skill to become master in."
             },
@@ -2471,7 +2474,7 @@
                 "CriticalSuccess": "You temporarily recover an expended spell slot of any level of your choice. The temporary spell slot lasts for 1 minute, and if you don't use it by then, you experience an immediate @UUID[Compendium.pf2e.rollable-tables.N0pDFNCffTe2Du39]{Wellspring Surge}.",
                 "Failure": "You generate a @UUID[Compendium.pf2e.rollable-tables.N0pDFNCffTe2Du39]{Wellspring Surge}, with a spell level chosen randomly among your top three levels of spell slots (or all your levels if you have fewer than three)",
                 "Initiative": "When you roll initiative for a non-trivial combat encounter, as well as in other high-stress situations of the GM's choice, magic wells up within you. Attempt a @Check[type:flat|dc:6|traits:wellspring-magic].",
-                "Success": "You temporarily recover an expended spell slot of a spell level chosen randomly among your top three levels of spell slots (or all your levels if you have fewer than three). The temporary spell slot lasts for 1 minute, and if you don't use it by then, you experience an immediate @UUID[Compendium.pf2e.rollable-tables.N0pDFNCffTe2Du39]{Wellspring Surge}."
+                "Success": "You temporarily recover an expended spell slot of a spell level chosen randomly among your top three levels of spell slots (or all your levels of spell slots if you have fewer than three). The slot lasts 3 rounds instead of 1 minute, otherwise you experience a @UUID[Compendium.pf2e.rollable-tables.N0pDFNCffTe2Du39]{Wellspring Surge}."
             },
             "WildMorph": {
                 "ElementalMatter": "Elemental Matter",

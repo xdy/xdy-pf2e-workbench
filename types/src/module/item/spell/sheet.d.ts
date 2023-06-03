@@ -1,12 +1,13 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { SpellPF2e } from "@item/spell/index.ts";
+import { SpellPF2e, SpellSystemSource } from "@item/spell/index.ts";
 import { ItemSheetPF2e } from "../sheet/base.ts";
 import { ItemSheetDataPF2e } from "../sheet/data-types.ts";
 import { SpellSystemData } from "./data.ts";
 import { DamageCategoryUnique } from "@system/damage/types.ts";
 export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
+    #private;
     get id(): string;
     getData(options?: Partial<DocumentSheetOptions>): Promise<SpellSheetData>;
     static get defaultOptions(): DocumentSheetOptions;
@@ -15,10 +16,8 @@ export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
     protected _onDragStart(event: ElementDragEvent): void;
     protected _onDrop(event: ElementDragEvent): Promise<void>;
-    private formatSpellComponents;
     private getAvailableHeightenLevels;
     private getOverlayFromEvent;
-    prepareHeighteningLevels(): SpellSheetOverlayData[];
 }
 interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
     isCantrip: boolean;
@@ -43,18 +42,23 @@ interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
     areaSizes: ConfigPF2e["PF2E"]["areaSizes"];
     areaTypes: ConfigPF2e["PF2E"]["areaTypes"];
     heightenIntervals: number[];
-    heightenOverlays: SpellSheetOverlayData[];
+    heightenOverlays: SpellSheetHeightenOverlayData[];
     canHeighten: boolean;
 }
 interface SpellSheetOverlayData {
     id: string | null;
+    /** Base path to the property that includes its siblings, dot delimited */
+    collectionPath: string;
     /** Base path to the property, dot delimited */
     base: string;
     /** Base path to the spell override data, dot delimited. Currently this is the same as base */
     dataPath: string;
-    level: number;
-    system: Partial<SpellSystemData>;
-    type: "heighten";
+    level: number | null;
+    type: "heighten" | "variant";
+    system: Partial<SpellSystemSource> | null;
+}
+interface SpellSheetHeightenOverlayData extends SpellSheetOverlayData {
+    system: Partial<SpellSystemSource>;
     heightenLevels: number[];
     missing: {
         key: keyof SpellSystemData;

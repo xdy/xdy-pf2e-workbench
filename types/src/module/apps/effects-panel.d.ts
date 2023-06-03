@@ -1,10 +1,8 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor";
-import { EffectPF2e } from "@item";
-import { AfflictionPF2e } from "@item/affliction/document.ts";
-import { FlattenedCondition } from "../system/conditions/index.ts";
+import { AfflictionPF2e, ConditionPF2e, EffectPF2e } from "@item";
+import { ActorPF2e } from "@module/documents.ts";
 export declare class EffectsPanel extends Application {
     #private;
     private get token();
@@ -19,13 +17,13 @@ export declare class EffectsPanel extends Application {
     activateListeners($html: JQuery): void;
 }
 interface EffectsDescriptionData {
-    afflictions: String[];
-    conditions: String[];
-    effects: String[];
+    afflictions: string[];
+    conditions: string[];
+    effects: string[];
 }
 interface EffectsPanelData {
     afflictions: AfflictionPF2e[];
-    conditions: FlattenedCondition[];
+    conditions: ConditionPF2e[];
     descriptions: EffectsDescriptionData;
     effects: EffectPF2e[];
     actor: ActorPF2e | null;

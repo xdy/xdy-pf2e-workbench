@@ -5,7 +5,7 @@ import { CharacterPF2e } from "@actor";
 import { Abilities } from "@actor/creature/data.ts";
 import { AbilityString } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item";
-export declare class AbilityBuilderPopup extends Application {
+declare class AbilityBuilderPopup extends Application {
     #private;
     private actor;
     constructor(actor: CharacterPF2e);
@@ -28,51 +28,42 @@ interface AbilityBuilderSheetData {
     class: ClassPF2e<CharacterPF2e> | null;
     manual: boolean;
     ancestryBoosts: AncestryBoosts | null;
+    voluntaryFlaws: VoluntaryFlaws | null;
     backgroundBoosts: BackgroundBoosts | null;
     keyOptions: AbilityString[] | null;
-    levelBoosts: Record<number, LevelBoostData>;
-    alternateAncestryBoosts: boolean;
+    levelBoosts: LevelBoostData[];
     legacyFlaws: boolean;
 }
 interface BoostFlawState {
-    lockedFlaw: boolean;
-    lockedBoost: boolean;
-    boosted: boolean;
-    available: boolean;
-    voluntary: {
-        /** How many times this flaw was applied. Some ancestries allow multiple legacy flaws on the same stat */
-        selected: number;
-        disabled: boolean;
-        /** Abilities with a locked boost can allow for 2 flaws with legacy flaws */
-        canDoubleFlaw: boolean;
-        secondFlawDisabled: boolean;
-        boosted: boolean;
-        boostDisabled: boolean;
-    };
+    ability: string;
+    flaw?: BuilderButton;
+    boost?: BuilderButton;
 }
-type BoostFlawRow = Record<AbilityString, BoostFlawState>;
-interface AncestryBoosts {
-    /** Whether or not the ancestry itself creates flaws */
-    hasLockedFlaws: boolean;
-    boosts: BoostFlawRow;
+interface BuilderButton {
+    selected?: boolean;
+    locked?: boolean;
+    disabled?: boolean;
+    second?: Omit<BuilderButton, "second">;
+}
+interface BoostFlawRow {
+    buttons: Record<AbilityString, BoostFlawState>;
     remaining: number;
+}
+interface AncestryBoosts extends BoostFlawRow {
+    alternate: boolean;
+    labels: string[];
+}
+interface VoluntaryFlaws extends BoostFlawRow {
     voluntaryBoostsRemaining: number;
     labels: string[];
-    flawLabels: string[];
 }
-interface BackgroundBoosts {
-    boosts: BoostFlawRow;
-    remaining: number;
+interface BackgroundBoosts extends BoostFlawRow {
     labels: string[];
     tooltip: string | null;
 }
-interface LevelBoostData {
-    boosts: {
-        ability: string;
-        taken: boolean;
-    }[];
-    full: boolean;
+interface LevelBoostData extends BoostFlawRow {
+    level: number;
     eligible: boolean;
-    remaining: number;
+    minLevel: number;
 }
-export {};
+export { AbilityBuilderPopup, BoostFlawState };

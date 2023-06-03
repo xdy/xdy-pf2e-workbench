@@ -4,9 +4,9 @@
   "version": "4.77.2",
   "id": "xdy-pf2e-workbench",
   "compatibility": {
-    "minimum": "10.291",
-    "verified": "10.291",
-    "maximum": "10"
+    "minimum": "11.301",
+    "verified": "11.301",
+    "maximum": "11"
   },
   "relationships": {
     "systems": [
@@ -15,8 +15,8 @@
         "type": "system",
         "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
         "compatibility": {
-          "minimum": "4.12.7",
-          "verified": "4.12.7"
+          "minimum": "5.0.0-beta2",
+          "verified": "5.0.0-beta2"
         }
       }
     ]
@@ -37,7 +37,6 @@
       "system": "pf2e",
       "path": "packs/generated/asymonous-benefactor-macros.db",
       "type": "Macro",
-      "private": false,
       "flags": {}
     },
     {
@@ -45,7 +44,10 @@
       "label": "asymonous-benefactor-macros-internal, do not import",
       "system": "pf2e",
       "path": "packs/generated/asymonous-benefactor-macros-internal.db",
-      "private": true,
+      "ownership": {
+          "PLAYER": "LIMITED",
+          "ASSISTANT": "OWNER"
+      },
       "type": "Macro",
       "flags": {}
     },
@@ -55,7 +57,6 @@
       "system": "pf2e",
       "path": "packs/db/asymonous-benefactor-effects.db",
       "type": "Item",
-      "private": false,
       "flags": {}
     },
     {
@@ -64,7 +65,6 @@
       "system": "pf2e",
       "path": "packs/data/xdy-customizable-macros.db",
       "type": "Macro",
-      "private": false,
       "flags": {}
     },
     {
@@ -73,7 +73,6 @@
       "system": "pf2e",
       "path": "packs/db/xdy-pf2e-workbench-items.db",
       "type": "Item",
-      "private": false,
       "flags": {}
     },
     {
@@ -82,7 +81,6 @@
       "system": "pf2e",
       "path": "packs/db/xdy-pf2e-workbench-macros.db",
       "type": "Macro",
-      "private": false,
       "flags": {}
     },
     {
@@ -91,7 +89,6 @@
       "system": "pf2e",
       "path": "packs/data/xdy-internal-utility-macros.db",
       "type": "Macro",
-      "private": false,
       "flags": {}
     },
     {
@@ -100,7 +97,6 @@
       "system": "pf2e",
       "path": "packs/db/xdy-internal-tables.db",
       "type": "RollTable",
-      "private": false,
       "flags": {}
     }
   ],

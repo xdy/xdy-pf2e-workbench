@@ -1,6 +1,6 @@
 import { ActorPF2e } from "@actor";
-import { ItemSummaryData } from "@item/data/index.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
+import { ItemSummaryData } from "@item/data/index.ts";
 import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement } from "@item/weapon/types.ts";
 import { ConvertedNPCDamage } from "@system/damage/weapon.ts";
 import { MeleeFlags, MeleeSource, MeleeSystemData, NPCAttackTrait } from "./data.ts";
@@ -28,7 +28,7 @@ declare class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get attackEffects(): string[];
     /** The linked inventory weapon, if this melee item was spawned from one */
     get linkedWeapon(): WeaponPF2e<ActorPF2e> | null;
-    protected _initialize(): void;
+    protected _initialize(options?: Record<string, unknown>): void;
     prepareBaseData(): void;
     /** Set weapon category, group, and base if that information is available */
     prepareSiblingData(): void;

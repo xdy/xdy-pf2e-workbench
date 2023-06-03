@@ -7,6 +7,53 @@ declare global {
     > extends PlaceableObject<TDocument> {
         constructor(document: TDocument);
 
+        static override embeddedName: "Token";
+
+        static override RENDER_FLAGS: {
+            redraw: { propagate: ["refresh"] };
+            redrawEffects: {};
+            refresh: {
+                propagate: [
+                    "refreshState",
+                    "refreshSize",
+                    "refreshPosition",
+                    "refreshElevation",
+                    "refreshBars",
+                    "refreshNameplate",
+                    "refreshBorder",
+                    "refreshShader"
+                ];
+                alias: true;
+            };
+            refreshState: { propagate: ["refreshVisibility", "refreshBorder"] };
+            refreshSize: {
+                propagate: [
+                    "refreshMesh",
+                    "refreshBorder",
+                    "refreshBars",
+                    "refreshPosition",
+                    "refreshTarget",
+                    "refreshEffects"
+                ];
+            };
+            refreshPosition: { propagate: ["refreshMesh", "refreshVisibility"] };
+            refreshElevation: { propagate: ["refreshMesh"] };
+            refreshVisibility: {};
+            refreshEffects: {};
+            refreshMesh: {};
+            refreshShader: {};
+            refreshBars: {};
+            refreshNameplate: {};
+            refreshBorder: {};
+            refreshTarget: {};
+        };
+
+        /** Defines the filter to use for detection. */
+        detectionFilter: PIXI.Filter | null;
+
+        /** A Graphics instance which renders the border frame for this Token inside the GridLayer. */
+        border: PIXI.Graphics;
+
         /** A reference to an animation that is currently in progress for this Token, if any */
         _animation: Promise<unknown> | null;
 
@@ -23,7 +70,11 @@ declare global {
         targeted: Set<User>;
 
         /** A reference to the SpriteMesh which displays this Token in the PrimaryCanvasGroup. */
-        mesh: PIXI.DisplayObject & { refresh(): void };
+        mesh: PIXI.DisplayObject & {
+            refresh(): void;
+            get sort(): number;
+            data: { sort: number };
+        };
 
         /** A reference to the PointSource object which defines this vision source area of effect */
         vision: VisionSource<this>;
@@ -33,8 +84,6 @@ declare global {
 
         /** Load token texture */
         texture: PIXI.Texture;
-
-        static embeddedName: "Token";
 
         /** A linked ObjectHUD element which is synchronized with the location and visibility of this Token */
         hud: ObjectHUD<this>;
@@ -68,7 +117,6 @@ declare global {
         /*  Rendering Attributes                        */
         /* -------------------------------------------- */
 
-        border?: PIXI.Graphics;
         icon?: PIXI.Sprite;
         bars?: PIXI.Container & { bar1: PIXI.Graphics; bar2: PIXI.Graphics };
         nameplate?: PIXI.Text;
@@ -457,7 +505,7 @@ declare global {
             userId: string
         ): void;
 
-        protected override _onUpdate(
+        override _onUpdate(
             changed: DeepPartial<TDocument["_source"]>,
             options: DocumentModificationContext<TDocument["parent"]>,
             userId: string
@@ -473,36 +521,38 @@ declare global {
         /** Define additional steps taken when an existing placeable object of this type is deleted */
         protected override _onDelete(options: DocumentModificationContext<TDocument["parent"]>, userId: string): void;
 
-        protected override _canControl(user: User, event?: PIXI.InteractionEvent): boolean;
+        protected override _canControl(user: User, event?: PIXI.FederatedEvent): boolean;
 
-        protected override _canHUD(user: User, event?: PIXI.InteractionEvent): boolean;
+        protected override _canHUD(user: User, event?: PIXI.FederatedEvent): boolean;
 
-        protected override _canConfigure(user: User, event?: PIXI.InteractionEvent): boolean;
+        protected override _canConfigure(user: User, event?: PIXI.FederatedEvent): boolean;
 
-        protected override _canHover(user: User, event?: PIXI.InteractionEvent): boolean;
+        protected override _canHover(user: User, event?: PIXI.FederatedEvent): boolean;
 
-        protected override _canView(user: User, event?: PIXI.InteractionEvent): boolean;
+        protected override _canView(user: User, event?: PIXI.FederatedEvent): boolean;
 
-        protected override _canDrag(user: User, event?: PIXI.InteractionEvent): boolean;
+        protected override _canDrag(user: User, event?: PIXI.FederatedEvent): boolean;
 
         protected override _onHoverIn(
-            event: PIXI.InteractionEvent,
+            event: PIXI.FederatedPointerEvent,
             { hoverOutOthers }?: { hoverOutOthers?: boolean }
         ): boolean | void;
 
-        protected override _onHoverOut(event: PIXI.InteractionEvent): boolean | void;
+        protected override _onHoverOut(event: PIXI.FederatedPointerEvent): boolean | void;
 
-        protected override _onClickLeft(event: PIXI.InteractionEvent): void;
+        protected override _onClickLeft(event: PIXI.FederatedPointerEvent): void;
 
-        protected override _onClickLeft2(event: PIXI.InteractionEvent): void;
+        protected override _propagateLeftClick(event: PIXI.FederatedPointerEvent): boolean;
 
-        protected override _onClickRight2(event: PIXI.InteractionEvent): void;
+        protected override _onClickLeft2(event: PIXI.FederatedPointerEvent): void;
 
-        protected override _onDragLeftDrop(event: TokenInteractionEvent<this>): Promise<TDocument[]>;
+        protected override _onClickRight2(event: PIXI.FederatedPointerEvent): void;
 
-        protected override _onDragLeftMove(event: TokenInteractionEvent<this>): void;
+        protected override _onDragLeftDrop(event: TokenPointerEvent<this>): Promise<TDocument[]>;
 
-        protected override _onDragLeftCancel(event: TokenInteractionEvent<this>): void;
+        protected override _onDragLeftMove(event: TokenPointerEvent<this>): void;
+
+        protected override _onDragLeftCancel(event: TokenPointerEvent<this>): void;
 
         protected override _onDragStart(): void;
 
@@ -551,8 +601,8 @@ declare global {
         editable: boolean;
     }
 
-    interface TokenInteractionEvent<T extends Token> extends PIXI.InteractionEvent {
-        data: PIXI.InteractionData & {
+    interface TokenPointerEvent<T extends Token> extends PIXI.FederatedPointerEvent {
+        interactionData: {
             clones?: T[];
         };
     }

@@ -11,6 +11,8 @@ declare class AncestryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> 
     get size(): Size;
     /** Returns all boosts enforced by this ancestry normally */
     get lockedBoosts(): AbilityString[];
+    /** Returns all flaws enforced by this ancestry normally */
+    get lockedFlaws(): AbilityString[];
     /** Include all ancestry features in addition to any with the expected location ID */
     getLinkedItems(): FeatPF2e<ActorPF2e>[];
     prepareBaseData(): void;

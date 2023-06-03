@@ -1,6 +1,8 @@
 import { ActorPF2e } from "@actor";
 import { ActorUpdateContext } from "@actor/base.ts";
 export declare class ActorsPF2e<TActor extends ActorPF2e<null>> extends Actors<TActor> {
+    /** Overrwriten to omit actors in parties, which are rendered separately */
+    _getVisibleTreeContents(): TActor[];
     /** Work around a bug as of Foundry V9.242 in which token default settings are ignored for compendium imports */
     fromCompendium(actor: TActor | TActor["_source"], options?: FromCompendiumOptions): TActor["_source"];
     /** Ditto */

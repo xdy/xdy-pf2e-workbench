@@ -1,5 +1,5 @@
-import { TraitViewData } from "@actor/data/base.ts";
 import { CharacterPF2e, HazardPF2e, NPCPF2e } from "@actor";
+import { TraitViewData } from "@actor/data/base.ts";
 import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
 import { MeleePF2e, WeaponPF2e } from "@item";
 import { NPCAttackDamage } from "@item/melee/data.ts";

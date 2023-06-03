@@ -1,15 +1,4 @@
 {
-    "ACTOR": {
-        "TypeAnimalCompanion": "Animal Companion",
-        "TypeCharacter": "Player Character",
-        "TypeEidolon": "Eidolon",
-        "TypeFamiliar": "Familiar",
-        "TypeHazard": "Hazard",
-        "TypeLoot": "Loot",
-        "TypeNpc": "NPC",
-        "TypeParty": "Party",
-        "TypeVehicle": "Vehicle"
-    },
     "COMBAT": {
         "Begin": "Begin Encounter",
         "CombatantNotInScene": "The participant {name} is not present in your currently viewed scene.",
@@ -43,30 +32,6 @@
     "DOCUMENT": {
         "Combat": "Encounter",
         "Combats": "Encounters"
-    },
-    "ITEM": {
-        "TypeAction": "Action",
-        "TypeAffliction": "Affliction",
-        "TypeAncestry": "Ancestry",
-        "TypeArmor": "Armor",
-        "TypeBackground": "Background",
-        "TypeBackpack": "Container",
-        "TypeBook": "Book",
-        "TypeClass": "Class",
-        "TypeCondition": "Condition",
-        "TypeConsumable": "Consumable",
-        "TypeDeity": "Deity",
-        "TypeEffect": "Effect",
-        "TypeEquipment": "Equipment",
-        "TypeFeat": "Feat/Feature",
-        "TypeHeritage": "Heritage",
-        "TypeKit": "Kit",
-        "TypeLore": "Lore Skill",
-        "TypeMelee": "NPC Attack",
-        "TypeSpell": "Spell",
-        "TypeSpellcastingentry": "Spellcasting Entry",
-        "TypeTreasure": "Treasure",
-        "TypeWeapon": "Weapon"
     },
     "PF2E": {
         "AbilityBoost": "Ability Boost",
@@ -174,6 +139,7 @@
                         "UseCustomLabel": "Use Custom"
                     },
                     "AncestryMissingHelp": "Choose an ancestry to select boosts.",
+                    "AlternateBoostsLabel": "Alternate Boosts",
                     "BackgroundBoostDescription": "Two boosts: one must be {a} or {b}.",
                     "BackgroundMissingHelp": "Choose a background to select boosts.",
                     "Boost": "Boost",
@@ -289,6 +255,20 @@
                 "Simple": "Simple",
                 "TitleEdit": "{name} (Edit Mode)"
             },
+            "Inventory": {
+                "ItemQuantity": {
+                    "Decrease": {
+                        "Click": "[Click] Decrease by 1",
+                        "ShiftClick": "[Shift-Click] Decrease by 5",
+                        "ControlClick": "[Control-Click] Decrease by 10"
+                    },
+                    "Increase": {
+                        "Click": "[Click] Increase by 1",
+                        "ShiftClick": "[Shift-Click] Increase by 5",
+                        "ControlClick": "[Control-Click] Increase by 10"
+                    }
+                }
+            },
             "IWREditor": {
                 "DoubleVs": "Double Vs.",
                 "Exceptions": "Exceptions",
@@ -324,9 +304,15 @@
                         "Label": "Applicable Lore: DC {dc1} ({adjustment1}) or DC {dc2} ({adjustment2})",
                         "Tooltip": "\"Using the applicable Lore usually has an easy or very easy DC (before adjusting for rarity).\" – CRB pg. 506"
                     }
-                }
+                },
+                "SimpleSheet": "Simple NPC Sheet"
             },
             "Party": {
+                "InvalidCampaign": {
+                    "Hint": "The campaign data is invalid",
+                    "Title": "Invalid Campaign ({party})",
+                    "Message": "This party has campaign data of type {current}, but the configured type is {configured}. Do you want to delete existing campaign data?"
+                },
                 "BlankSlate": "This party doesn't have any members. Drag a creature from the actor sidebar to get started. ",
                 "Coin": "Coin",
                 "Languages": "Party Languages",
@@ -640,7 +626,7 @@
                     "WithTarget": "<target>Target: {target}</target> <dc>({dcType} {dc})</dc>"
                 },
                 "Specific": {
-                    "ac": "AC",
+                    "armor": "AC",
                     "athletics": "Athletics DC",
                     "deception": "Deception DC",
                     "fortitude": "Fortitude DC",
@@ -698,9 +684,17 @@
             "FailedToBuyItemWithCharacter": "Could not purchase {item} with {character}.",
             "FailedToBuyItemWithSomeCharacters": "Could not purchase {item} with some of the selected actor(s).",
             "Hint": "Use the tabs above to select a compendium",
-            "ProgressBar": {
-                "LoadingComplete": "Loading complete",
-                "LoadingPack": "Loading {pack}"
+            "RollTable": {
+                "AddDialogText": "Add {count} result(s) to Roll Table?",
+                "AddLabel": "Add to Roll Table",
+                "CreateDialogText": "Create Roll Table with {count} result(s)?",
+                "CreateLabel": "Create Roll Table",
+                "SelectTableTitle": "Select Roll Table",
+                "WeightLabel": "Weight"
+            },
+            "Settings": {
+                "PacksLabel": "Packs",
+                "SourcesLabel": "Sources"
             },
             "TabAction": "Actions",
             "TabBestiary": "Bestiaries",
@@ -1227,6 +1221,7 @@
         "ExpendSpellTitle": "Expend Spell",
         "Failure": "<strong>Failure</strong>",
         "Familiar": {
+            "AbilitiesLabel": "Abilities",
             "ArmorClass": "Armor Class",
             "AttackRoll": "Attack Roll",
             "Creature": "Creature",
@@ -1253,6 +1248,7 @@
         "FeatCampaignHeader": "Campaign Feats",
         "FeatClassHeader": "Class Feats",
         "FeatDeityBoonCursesHeader": "Divine Intercessions",
+        "FeatDualClassHeader": "Dual Class Feats",
         "FeatGeneralHeader": "General Feats",
         "FeatLevelLabel": "Level",
         "FeatPFSBoonHeader": "Society Boons",
@@ -1343,7 +1339,9 @@
             "BasicWithSave": "Basic {save}",
             "DCWithName": "{name} DC",
             "Errors": {
-                "TypeMissing": "Error in @Check: type parameter is mandatory"
+                "TypeMissing": "Error in @Check: type parameter is mandatory",
+                "AdjustmentLengthMismatch": "Error in @Check: mismatch between number of type: and adjustment: params",
+                "NonIntegerAdjustment": "Error in @Check: adjustments must be integers"
             }
         },
         "InlineTemplateErrors": {
@@ -1371,7 +1369,8 @@
                     "None": "None",
                     "Defensive": "Defensive",
                     "Interaction": "Interaction",
-                    "Offensive": "Offensive"
+                    "Offensive": "Offensive",
+                    "Familiar": "Familiar Ability"
                 },
                 "Type": {
                     "Activity": "Activity",
@@ -2575,6 +2574,10 @@
         "ProficiencyLevel3": "Master",
         "ProficiencyLevel4": "Legendary",
         "ProficiencyRankLabel": "Prof",
+        "ProgressBar": {
+            "LoadingComplete": "Loading complete",
+            "LoadingPack": "Loading {pack}"
+        },
         "PropertyRuneLabel1": "Property Rune (1st)",
         "PropertyRuneLabel2": "Property Rune (2nd)",
         "PropertyRuneLabel3": "Property Rune (3rd)",
@@ -2706,6 +2709,14 @@
             "CampaignFeats": {
                 "Hint": "Adds a section to all player sheets for campaign specific feats.",
                 "Name": "Campaign Feats"
+            },
+            "CampaignType": {
+                "Hint": "Extended campaign rule type for parties",
+                "Name": "Campaign Type",
+                "Choices": {
+                    "none": "None",
+                    "kingmaker": "Kingmaker"
+                }
             },
             "CompendiumBrowserPacks": {
                 "Hint": "Settings to exclude packs from loading",
@@ -3867,10 +3878,12 @@
         "TraitEntrenchRanged": "Entrench Ranged",
         "TraitEnvironmental": "Environmental",
         "TraitEsoterica": "Esoterica",
+        "TraitEtchedOntoABludgeoningWeapon": "Etched on Bludgeoning Weapon",
         "TraitEtchedOntoAClanDagger": "Etched on Clan Dagger",
         "TraitEtchedOntoAMeleeWeapon": "Etched on Melee Weapon",
         "TraitEtchedOntoAMeleeWeaponMonk": "Etched onto a melee weapon with the monk trait",
         "TraitEtchedOntoAPiercingOrSlashingMeleeWeapon": "Etched on Piercing/Slashing Melee Weapon",
+        "TraitEtchedOntoAPiercingOrSlashingWeapon": "Etched on Piercing/Slashing Weapon",
         "TraitEtchedOntoASlashingMeleeWeapon": "Etched on Slashing Melee Weapon",
         "TraitEtchedOntoAThrownWeapon": "Etched on Thrown Weapon",
         "TraitEtchedOntoAWeapon": "Etched onto a Weapon",
@@ -4777,6 +4790,9 @@
                     "criticalSuccess": "If you critically hit a target with an anchoring weapon, the weapon casts <em>@UUID[Compendium.pf2e.spells-srd.ksLCg62cLOojw3gN]{Dimensional Anchor}</em> on the target (@Check[type:will|dc:27|name:Anchoring Rune], counteract modifier [[/r 1d20+17 # Anchoring Rune Counteract Check]]{+17})."
                 }
             },
+            "authorized": {
+                "Name": "Authorized"
+            },
             "axiomatic": {
                 "Name": "Axiomatic",
                 "Note": {
@@ -4830,6 +4846,9 @@
                 "Note": {
                     "criticalSuccess": "On a critical hit, the undead is also @UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{Enfeebled 1} until the end of your next turn."
                 }
+            },
+            "earthbinding": {
+                "Name": "Earthbinding"
             },
             "energizing": {
                 "Name": "Energizing"
@@ -5487,5 +5506,41 @@
     },
     "SIDEBAR": {
         "TabCombat": "Encounter Tracker"
+    },
+    "TYPES": {
+        "Actor": {
+            "character": "Player Character",
+            "eidolon": "Eidolon",
+            "familiar": "Familiar",
+            "hazard": "Hazard",
+            "loot": "Loot",
+            "npc": "NPC",
+            "party": "Party",
+            "vehicle": "Vehicle"
+        },
+        "Item": {
+            "action": "Action",
+            "affliction": "Affliction",
+            "ancestry": "Ancestry",
+            "armor": "Armor",
+            "background": "Background",
+            "backpack": "Container",
+            "book": "Book",
+            "class": "Class",
+            "condition": "Condition",
+            "consumable": "Consumable",
+            "deity": "Deity",
+            "effect": "Effect",
+            "equipment": "Equipment",
+            "feat": "Feat/Feature",
+            "heritage": "Heritage",
+            "kit": "Kit",
+            "lore": "Lore Skill",
+            "melee": "NPC Attack",
+            "spell": "Spell",
+            "spellcastingEntry": "Spellcasting Entry",
+            "treasure": "Treasure",
+            "weapon": "Weapon"
+        }
     }
 }

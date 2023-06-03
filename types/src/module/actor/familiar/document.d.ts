@@ -1,7 +1,9 @@
 import { CharacterPF2e, CreaturePF2e } from "@actor";
+import { ItemType } from "@item/data/index.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { FamiliarSource, FamiliarSystemData } from "./data.ts";
 declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
+    get allowedItemTypes(): (ItemType | "physical")[];
     /** The familiar's master, if selected */
     get master(): CharacterPF2e | null;
     get masterAbilityModifier(): number | null;

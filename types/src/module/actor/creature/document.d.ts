@@ -57,7 +57,7 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     isFlatFooted({ dueTo }: IsFlatFootedParams): boolean;
     getStatistic(slug: SaveType | SkillLongForm | "perception"): Statistic;
     getStatistic(slug: string): Statistic | null;
-    protected _initialize(): void;
+    protected _initialize(options?: Record<string, unknown>): void;
     prepareData(): void;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */
     prepareBaseData(): void;

@@ -28,7 +28,7 @@ declare class DicePF2e {
      * @param dialogOptions Modal dialog options
      */
     static d20Roll({ event, item, parts, data, template, title, speaker, flavor, onClose, dialogOptions, rollMode, rollType, }: {
-        event: JQuery.Event;
+        event: MouseEvent | JQuery.TriggeredEvent;
         item?: ItemPF2e<ActorPF2e> | null;
         parts: (string | number)[];
         actor?: ActorPF2e;

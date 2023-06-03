@@ -3,10 +3,10 @@ import { ModifierPF2e } from "@actor/modifiers.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { WeaponTrait } from "@item/weapon/types.ts";
 import { RollNotePF2e } from "@module/notes.ts";
-import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
-import { CheckContextOptions, CheckContext, SimpleRollActionCheckOptions, CheckContextData } from "./types.ts";
-import { CheckType } from "@system/check/index.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
+import { CheckType } from "@system/check/index.ts";
+import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
+import { CheckContext, CheckContextData, CheckContextOptions, SimpleRollActionCheckOptions } from "./types.ts";
 export declare class ActionMacroHelpers {
     static resolveStat(stat: string): {
         checkType: CheckType;

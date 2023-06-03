@@ -21,7 +21,7 @@ declare class GrantItemRuleElement extends RuleElementPF2e<GrantItemSchema> {
     constructor(data: GrantItemSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     static defineSchema(): GrantItemSchema;
     static ON_DELETE_ACTIONS: readonly ["cascade", "detach", "restrict"];
-    _validateModel(data: SourceFromSchema<GrantItemSchema>): void;
+    static validateJoint(data: SourceFromSchema<GrantItemSchema>): void;
     preCreate(args: RuleElementPF2e.PreCreateParams): Promise<void>;
     /** Grant an item if this rule element permits it and the predicate passes */
     preUpdateActor(): Promise<{

@@ -1,4 +1,4 @@
-import { DegreeOfSuccessIndex, DEGREE_OF_SUCCESS } from "@system/degree-of-success.ts";
+import { DEGREE_OF_SUCCESS, DegreeOfSuccessIndex } from "@system/degree-of-success.ts";
 import { DamageFormulaData, DamagePartialTerm } from "./types.ts";
 /** A compiled formula with its associated breakdown */
 interface AssembledFormula {

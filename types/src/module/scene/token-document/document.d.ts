@@ -15,10 +15,12 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
     /** Check actor for effects found in `CONFIG.specialStatusEffects` */
     hasStatusEffect(statusId: string): boolean;
     /** Filter trackable attributes for relevance and avoidance of circular references */
-    static getTrackedAttributes(data?: Record<string, unknown>, _path?: string[]): TokenAttributes;
+    static getTrackedAttributes(data?: Record<string, unknown>, _path?: string[]): TrackedAttributesDescription;
     /** This should be in Foundry core, but ... */
     get scene(): this["parent"];
-    protected _initialize(): void;
+    /** Workaround for https://github.com/foundryvtt/foundryvtt/issues/9467 */
+    protected _initializeSource(data: Record<string, unknown>, options?: DocumentConstructionContext<TParent>): this["_source"];
+    protected _initialize(options?: Record<string, unknown>): void;
     /** Is this token emitting light with a negative value */
     get emitsDarkness(): boolean;
     get rulesBasedVision(): boolean;

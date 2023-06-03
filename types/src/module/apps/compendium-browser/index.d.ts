@@ -1,7 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActionTrait } from "@item/action/index.ts";
+import { ActionCategory, ActionTrait } from "@item/action/index.ts";
 import { ActionType } from "@item/data/base.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/index.ts";
 import { UserPF2e } from "@module/user/document.ts";
@@ -54,7 +54,11 @@ declare class CompendiumBrowser extends Application {
     openTab(name: "hazard", filter?: HazardFilters): Promise<void>;
     openTab(name: "spell", filter?: SpellFilters): Promise<void>;
     openTab(name: "settings"): Promise<void>;
-    openActionTab(typeFilters: ActionType[], traitFilters: ActionTrait[]): Promise<void>;
+    openActionTab(options: {
+        types?: ActionType[];
+        categories?: ActionCategory[];
+        traits?: ActionTrait[];
+    }): Promise<void>;
     openSpellTab(entry: BaseSpellcastingEntry, maxLevel?: number): Promise<void>;
     loadTab(tabName: TabName): Promise<void>;
     loadedPacks(tab: TabName): string[];

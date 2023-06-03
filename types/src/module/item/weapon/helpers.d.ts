@@ -15,8 +15,11 @@ declare class WeaponTraitToggles {
         selection: DamageType | null;
     };
 }
-/**  Update a modular or versatile weapon to change its damage type */
-declare function toggleWeaponTrait({ weapon, trait, selection }: ToggleWeaponTraitParams): Promise<void>;
+/**
+ * Update a modular or versatile weapon to change its damage type
+ * @returns A promise indicating whether an update was made
+ */
+declare function toggleWeaponTrait({ weapon, trait, selection }: ToggleWeaponTraitParams): Promise<boolean>;
 interface ToggleWeaponTraitParams {
     weapon: WeaponPF2e<CharacterPF2e>;
     trait: "modular" | "versatile";

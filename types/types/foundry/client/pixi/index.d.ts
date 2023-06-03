@@ -2,26 +2,26 @@ import * as smooth from "@pixi/graphics-smooth";
 import * as particles from "@pixi/particle-emitter";
 import {
     AccessibilityManager,
+    AlphaFilter,
     Application,
-    Circle,
+    BLEND_MODES,
+    BlurFilter,
     CLEAR_MODES,
+    Circle,
     Container,
     DisplayObject,
     Ellipse,
     Extract,
+    FederatedEvent,
+    FederatedPointerEvent,
     Filter,
-    filters,
     FilterState,
     FilterSystem,
     Geometry,
     Graphics,
-    Graphics as LegacyGraphics,
     IDestroyOptions,
-    InteractionData,
-    InteractionEvent,
-    InteractionManager,
-    InteractivePointerEvent,
     ITextStyle,
+    Graphics as LegacyGraphics,
     Mesh,
     ParticleRenderer,
     Point,
@@ -29,8 +29,8 @@ import {
     Prepare,
     Program,
     Rectangle,
-    Renderer,
     RenderTexture,
+    Renderer,
     RoundedRectangle,
     Shader,
     Sprite,
@@ -44,22 +44,28 @@ import {
 } from "pixi.js";
 import "./core/index.d.ts";
 import "./groups/index.d.ts";
+import "./layers/controls/ruler.d.ts";
 import "./layers/effects/visibility.d.ts";
 import "./perception/index.d.ts";
+import "./sources/index.d.ts";
 import "./webgl/index.d.ts";
-import "./layers/controls/ruler.d.ts";
 
 declare global {
     module PIXI {
         export {
             AccessibilityManager,
+            AlphaFilter,
             Application,
+            BLEND_MODES,
+            BlurFilter,
             CLEAR_MODES,
             Circle,
             Container,
             DisplayObject,
             Ellipse,
             Extract,
+            FederatedEvent,
+            FederatedPointerEvent,
             Filter,
             FilterState,
             FilterSystem,
@@ -67,10 +73,6 @@ declare global {
             Graphics,
             IDestroyOptions,
             ITextStyle,
-            InteractionData,
-            InteractionEvent,
-            InteractionManager,
-            InteractivePointerEvent,
             LegacyGraphics,
             Mesh,
             ParticleRenderer,
@@ -90,7 +92,6 @@ declare global {
             TilingSpriteRenderer,
             Transform,
             UniformGroup,
-            filters,
             particles,
             smooth,
             utils,

@@ -72,21 +72,18 @@ interface DamagePartialTerm {
         faces: number;
     } | null;
 }
-interface WeaponBaseDamageData {
+interface BaseDamageData {
+    terms?: DamagePartialTerm[];
     damageType: DamageType;
-    diceNumber: number;
-    dieSize: DamageDieSize | null;
-    modifier: number;
+    diceNumber?: number;
+    dieSize?: DamageDieSize | null;
+    modifier?: number;
     category: DamageCategoryUnique | null;
     materials?: MaterialDamageEffect[];
 }
-interface DynamicBaseDamageData {
-    terms: DamagePartialTerm[];
-    damageType: DamageType;
-    category: DamageCategoryUnique | null;
-    materials?: MaterialDamageEffect[];
+interface WeaponBaseDamageData extends BaseDamageData {
+    terms?: never;
 }
-type BaseDamageData = WeaponBaseDamageData | DynamicBaseDamageData;
 interface BaseDamageTemplate {
     name: string;
     notes: RollNotePF2e[];
@@ -106,4 +103,4 @@ interface SpellDamageTemplate extends BaseDamageTemplate {
 }
 type AfflictionDamageTemplate = SpellDamageTemplate;
 type DamageTemplate = WeaponDamageTemplate | SpellDamageTemplate | AfflictionDamageTemplate;
-export { AfflictionDamageTemplate, BaseDamageData, CriticalInclusion, DamageCategory, DamageCategoryRenderData, DamageCategoryUnique, DamageDieSize, DamageFormulaData, DamagePartialTerm, DamageRollContext, DamageRollRenderData, DamageTemplate, DamageType, DamageTypeRenderData, DynamicBaseDamageData, MaterialDamageEffect, SpellDamageTemplate, WeaponBaseDamageData, WeaponDamageFormulaData, WeaponDamageTemplate, };
+export { AfflictionDamageTemplate, BaseDamageData, CriticalInclusion, DamageCategory, DamageCategoryRenderData, DamageCategoryUnique, DamageDieSize, DamageFormulaData, DamagePartialTerm, DamageRollContext, DamageRollRenderData, DamageTemplate, DamageType, DamageTypeRenderData, MaterialDamageEffect, SpellDamageTemplate, WeaponBaseDamageData, WeaponDamageFormulaData, WeaponDamageTemplate, };

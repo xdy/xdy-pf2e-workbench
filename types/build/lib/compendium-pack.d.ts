@@ -3,11 +3,12 @@ import { ItemSourcePF2e } from "@item/data/index.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import { PackError } from "./helpers.ts";
 import { PackEntry } from "./types.ts";
+import { DBFolder } from "./level-database.ts";
 interface PackMetadata {
     system: string;
     name: string;
     path: string;
-    type: string;
+    type: CompendiumDocumentType;
 }
 /** A rule element, possibly an Aura, ChoiceSet, GrantItem */
 interface REMaybeWithUUIDs extends RuleElementSource {
@@ -23,24 +24,23 @@ declare class CompendiumPack {
     #private;
     packId: string;
     packDir: string;
-    documentType: string;
+    documentType: CompendiumDocumentType;
     systemId: string;
     data: PackEntry[];
+    folders: DBFolder[];
     static outDir: string;
-    private static namesToIds;
-    private static packsMetadata;
     static LINK_PATTERNS: {
         world: RegExp;
         compendium: RegExp;
         uuid: RegExp;
     };
-    constructor(packDir: string, parsedData: unknown[]);
+    constructor(packDir: string, parsedData: unknown[], parsedFolders: unknown[]);
     static loadJSON(dirPath: string): CompendiumPack;
     /** Convert UUIDs in REs to resemble links by name or back again */
     static convertRuleUUIDs(source: ItemSourcePF2e, { to, map }: {
         to: "ids" | "names";
         map: Map<string, Map<string, string>>;
     }): void;
-    save(): number;
+    save(): Promise<number>;
 }
 export { CompendiumPack, PackError, PackMetadata, isItemSource, isActorSource, REMaybeWithUUIDs };

@@ -22,8 +22,8 @@
       "assuranceLabel": "Assurance",
       "Settings": {
         "Position": {
-          "name": "Skill Actions position",
-          "hint": "Position in the skill page; Top : right after Strikes, Bottom : At the end",
+          "name": "BROKEN IN 5.0 Skill Actions position",
+          "hint": "BROKEN IN 5.0 Position in the skill page; Top : right after Strikes, Bottom : At the end",
           "bottom": "Bottom",
           "disabled": "Disabled",
           "top": "Top"
@@ -433,8 +433,8 @@
         "name": "Automatically decrease the frightened condition each turn."
       },
       "dirtySortActions": {
-        "hint": "Client setting to sort actions by name when the actor sheet is opened. Requires refresh (f5) after changing.",
-        "name": "Sort actions by name when the actor sheet is opened.",
+        "hint": "BROKEN IN 5.0 Client setting to sort actions by name when the actor sheet is opened. Requires refresh (f5) after changing.",
+        "name": "BROKEN IN 5.0 Sort actions by name when the actor sheet is opened.",
         "info": "Character Sheet actions are now sorted."
       },
       "enableAutomaticMove": {

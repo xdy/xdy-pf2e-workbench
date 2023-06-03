@@ -421,6 +421,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, $html: JQ
         enableCreatureBuilderButton(sheet, $html);
     }
 
+    // TODO Broken
     if (sheet.actor?.type === CHARACTER_TYPE && String(game.settings.get(MODULENAME, "skillActions")) !== "disabled") {
         renderSheetSkillActions(sheet, $html);
     }

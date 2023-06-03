@@ -3,6 +3,7 @@ import { TokenLayerPF2e } from "../index.ts";
 import { HearingSource } from "../perception/hearing-source.ts";
 import { AuraRenderers } from "./aura/index.ts";
 declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
+    #private;
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
     /** The token's line hearing source */
@@ -38,7 +39,9 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     protected _drawBar(number: number, bar: PIXI.Graphics, data: TokenResourceData): void;
     /** Draw auras along with effect icons */
     drawEffects(): Promise<void>;
+    /** @fixme */
     emitHoverIn(): void;
+    /** @fixme */
     emitHoverOut(): void;
     /** If Party Vision is enabled, make all player-owned actors count as vision sources for non-GM users */
     protected _isVisionSource(): boolean;
@@ -69,17 +72,15 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     }): void;
     /** Refresh vision and the `EffectsPanel` */
     protected _onRelease(options?: Record<string, unknown>): void;
-    protected _onDragLeftStart(event: TokenInteractionEvent<this>): void;
+    protected _onDragLeftStart(event: TokenPointerEvent<this>): void;
     /** If a single token (this one) was dropped, re-establish the hover status */
-    protected _onDragLeftDrop(event: TokenInteractionEvent<this>): Promise<this["document"][]>;
-    protected _onHoverIn(event: PIXI.InteractionEvent, options?: {
+    protected _onDragLeftDrop(event: TokenPointerEvent<this>): Promise<this["document"][]>;
+    protected _onHoverIn(event: PIXI.FederatedPointerEvent, options?: {
         hoverOutOthers?: boolean;
     }): boolean;
-    protected _onHoverOut(event: PIXI.InteractionEvent): boolean;
+    protected _onHoverOut(event: PIXI.FederatedPointerEvent): boolean;
     /** Destroy auras before removing this token from the canvas */
     _onDelete(options: DocumentModificationContext<TDocument["parent"]>, userId: string): void;
-    /** A callback for when a movement animation for this token finishes */
-    private onFinishAnimation;
     /** Handle system-specific status effects (upstream handles invisible and blinded) */
     _onApplyStatusEffect(statusId: string, active: boolean): void;
 }

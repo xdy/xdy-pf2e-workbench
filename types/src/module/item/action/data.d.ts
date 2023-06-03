@@ -28,4 +28,4 @@ interface ActionSystemData extends ActionSystemSource, Omit<ItemSystemData, "lev
     frequency?: Frequency;
 }
 type ActionCategory = keyof ConfigPF2e["PF2E"]["actionCategories"];
-export { ActionItemSource, ActionSystemData, ActionTrait, ActionTraits };
+export { ActionCategory, ActionItemSource, ActionSystemData, ActionTrait, ActionTraits };

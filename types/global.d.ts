@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 import { ActorPF2e } from "@actor/base.ts";
 import { AutomaticBonusProgression } from "@actor/character/automatic-bonus-progression.ts";
 import { FeatGroupOptions } from "@actor/character/feats.ts";
@@ -139,6 +141,17 @@ declare global {
             CompendiumDirectoryPF2e,
             EncounterTrackerPF2e<EncounterPF2e | null>
         >;
+
+        // Add functions to the `Math` namespace for use in `Roll` formulas
+        interface Math {
+            eq: (a: number, b: number) => boolean;
+            gt: (a: number, b: number) => boolean;
+            gte: (a: number, b: number) => boolean;
+            lt: (a: number, b: number) => boolean;
+            lte: (a: number, b: number) => boolean;
+            ne: (a: number, b: number) => boolean;
+            ternary: (condition: boolean | number, ifTrue: number, ifFalse: number) => number;
+        }
     }
 
     interface Window {
@@ -186,6 +199,7 @@ declare global {
 
         get(module: "pf2e", setting: "campaignFeats"): boolean;
         get(module: "pf2e", setting: "campaignFeatSections"): FeatGroupOptions[];
+        get(module: "pf2e", setting: "campaignType"): string;
 
         get(module: "pf2e", setting: "homebrew.weaponCategories"): HomebrewTag<"weaponCategories">[];
         get(module: "pf2e", setting: HomebrewTraitSettingsKey): HomebrewTag[];
@@ -230,6 +244,7 @@ type ConfiguredConfig = Config<
     AmbientLightDocumentPF2e<ScenePF2e | null>,
     ActiveEffectPF2e<ActorPF2e | ItemPF2e | null>,
     ActorPF2e,
+    ActorDeltaPF2e,
     ChatLogPF2e,
     ChatMessagePF2e,
     EncounterPF2e,

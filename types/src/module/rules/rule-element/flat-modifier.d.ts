@@ -12,7 +12,7 @@ import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSour
  */
 declare class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
     constructor(source: FlatModifierSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
-    protected _validateModel(data: SourceFromSchema<FlatModifierSchema>): void;
+    static validateJoint(data: SourceFromSchema<FlatModifierSchema>): void;
     static defineSchema(): FlatModifierSchema;
     get selectors(): string[];
     beforePrepareData(): void;

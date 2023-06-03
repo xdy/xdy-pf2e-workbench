@@ -9,10 +9,8 @@ interface SimpleActionData extends BaseActionData<SimpleActionVariantData> {
     effect?: string | EffectPF2e;
 }
 interface SimpleActionUseOptions extends ActionUseOptions {
-    actors: ActorPF2e[];
     cost: ActionCost;
     effect: string | EffectPF2e | false;
-    traits: string[];
 }
 interface SimpleActionResult {
     actor: ActorPF2e;

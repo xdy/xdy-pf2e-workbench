@@ -29,7 +29,9 @@ declare class PredicateStatementField extends fields.DataField<PredicateStatemen
 declare class PredicateField<TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ArrayField<PredicateStatementField, RawPredicate, PredicatePF2e, TRequired, TNullable, THasInitial> {
     constructor(options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>);
     /** Don't wrap a non-array in an array */
-    _cast(value: unknown): unknown;
+    protected _cast(value: unknown): unknown;
+    /** Parent method assumes array-wrapping: pass through unchanged */
+    protected _cleanType(value: unknown): unknown;
     /** Construct a `PredicatePF2e` from the initialized `PredicateStatement[]` */
     initialize(value: RawPredicate, model: ConstructorOf<foundry.abstract.DataModel>, options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>): MaybeSchemaProp<PredicatePF2e, TRequired, TNullable, THasInitial>;
 }

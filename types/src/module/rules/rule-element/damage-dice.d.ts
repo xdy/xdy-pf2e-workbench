@@ -2,8 +2,8 @@ import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
 import { DamageDiceOverride } from "@actor/modifiers.ts";
 import { ItemPF2e } from "@item";
 import { CriticalInclusion } from "@system/damage/types.ts";
-import { RuleElementData, RuleElementPF2e } from "./index.ts";
 import { BracketedValue, RuleElementSource } from "./data.ts";
+import { RuleElementData, RuleElementPF2e } from "./index.ts";
 declare class DamageDiceRuleElement extends RuleElementPF2e {
     #private;
     slug: string;

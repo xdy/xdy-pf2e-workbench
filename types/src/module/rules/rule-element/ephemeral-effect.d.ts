@@ -5,7 +5,7 @@ import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
 declare class EphemeralEffectRuleElement extends RuleElementPF2e<EphemeralEffectSchema> {
     #private;
     static defineSchema(): EphemeralEffectSchema;
-    protected _validateModel(data: SourceFromSchema<EphemeralEffectSchema>): void;
+    static validateJoint(data: SourceFromSchema<EphemeralEffectSchema>): void;
     afterPrepareData(): void;
 }
 interface EphemeralEffectRuleElement extends RuleElementPF2e<EphemeralEffectSchema>, ModelPropsFromSchema<EphemeralEffectSchema> {

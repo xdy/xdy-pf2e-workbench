@@ -11,6 +11,8 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     campaign: PartyCampaign | null;
     get baseAllowedItemTypes(): (ItemType | "physical")[];
     get allowedItemTypes(): (ItemType | "physical")[];
+    /** Parties use the campaign's level as their own level, as they otherwise don't have a level */
+    get level(): number;
     /** Friendship lives in our hearts */
     get canAct(): false;
     /** Our bond is unbreakable */

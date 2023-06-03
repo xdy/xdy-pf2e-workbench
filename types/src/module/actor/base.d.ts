@@ -2,17 +2,18 @@
 import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AttackItem, AuraData, CheckContext, CheckContextParams, EmbeddedItemInstances, RollContext, RollContextParams, SaveType } from "@actor/types.ts";
 import { AbstractEffectPF2e, ArmorPF2e, ContainerPF2e, ItemPF2e, PhysicalItemPF2e } from "@item";
 import { ConditionKey, ConditionSlug, ConditionSource, type ConditionPF2e } from "@item/condition/index.ts";
-import { ActionType } from "@item/data/base.ts";
 import { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/data/index.ts";
 import { EffectSource } from "@item/effect/data.ts";
 import type { ActiveEffectPF2e } from "@module/active-effect.ts";
 import { TokenPF2e } from "@module/canvas/index.ts";
-import { OneToThree, Size } from "@module/data.ts";
+import { AppliedDamageFlag } from "@module/chat-message/index.ts";
+import { Size } from "@module/data.ts";
 import { ScenePF2e, TokenDocumentPF2e, UserPF2e } from "@module/documents.ts";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import { RuleElementSynthetics } from "@module/rules/index.ts";
 import { RuleElementPF2e } from "@module/rules/rule-element/base.ts";
 import { DamageType } from "@system/damage/types.ts";
+import { ArmorStatistic } from "@system/statistic/armor-class.ts";
 import { Statistic, StatisticCheck, StatisticDifficultyClass } from "@system/statistic/index.ts";
 import { ActorConditions } from "./conditions.ts";
 import { Abilities, CreatureSkills, VisionLevel } from "./creature/data.ts";
@@ -23,8 +24,6 @@ import { ActorInitiative } from "./initiative.ts";
 import { ActorInventory } from "./inventory/index.ts";
 import { ActorSheetPF2e } from "./sheet/base.ts";
 import { ActorSpellcasting } from "./spellcasting.ts";
-import { ArmorStatistic } from "@system/statistic/armor-class.ts";
-import { AppliedDamageFlag } from "@module/chat-message/index.ts";
 /**
  * Extend the base Actor class to implement additional logic specialized for PF2e.
  * @category Actor
@@ -135,7 +134,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      */
     static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], context?: DocumentModificationContext<TDocument["parent"]>): Promise<TDocument[]>;
     static updateDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, updates?: DocumentUpdateData<TDocument>[], context?: DocumentUpdateContext<TDocument["parent"]>): Promise<TDocument[]>;
-    protected _initialize(): void;
+    protected _initialize(options?: Record<string, unknown>): void;
     /** Set module art if available */
     protected _initializeSource(source: Record<string, unknown>, options?: DocumentConstructionContext<TParent>): this["_source"];
     /** Prepare token data derived from this actor, refresh Effects Panel */
@@ -166,7 +165,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      * Roll a Attribute Check
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
      */
-    rollAttribute(event: JQuery.Event, attributeName: string): void;
+    rollAttribute(event: JQuery.TriggeredEvent, attributeName: string): void;
     /** Toggle the provided roll option (swapping it from true to false or vice versa). */
     toggleRollOption(domain: string, option: string, value?: boolean): Promise<boolean | null>;
     toggleRollOption(domain: string, option: string, itemId?: string | null, value?: boolean, suboption?: string | null): Promise<boolean | null>;
@@ -190,7 +189,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      */
     applyDamage({ damage, token, item, rollOptions, skipIWR, shieldBlockRequest, }: ApplyDamageParams): Promise<this>;
     /** Revert applied actor damage based on the AppliedDamageFlag stored in a damage chat message */
-    revertDamage(appliedDamage: AppliedDamageFlag): Promise<void>;
+    undoDamage(appliedDamage: AppliedDamageFlag): Promise<void>;
     isLootableBy(user: UserPF2e): boolean;
     /**
      * Moves an item to another actor's inventory.
@@ -208,10 +207,6 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     stowOrUnstow(item: PhysicalItemPF2e<this>, container?: ContainerPF2e<this>): Promise<void>;
     /** Determine actor updates for applying damage/healing across temporary hit points, stamina, and then hit points */
     private calculateHealthDelta;
-    static getActionGraphics(type: ActionType, actionCount?: OneToThree): {
-        imageUrl: ImageFilePath;
-        actionGlyph: string;
-    };
     /**
      * Retrieve all roll option from the requested domains. Micro-optimized in an excessively verbose for-loop.
      * @param domains The domains of discourse from which to pull options. Always includes the "all" domain.
@@ -288,6 +283,7 @@ interface HitPointsSummary {
 }
 interface ActorUpdateContext<TParent extends TokenDocumentPF2e | null> extends DocumentUpdateContext<TParent> {
     damageTaken?: number;
+    damageUndo?: boolean;
 }
 /** A `Proxy` to to get Foundry to construct `ActorPF2e` subclasses */
 declare const ActorProxyPF2e: typeof ActorPF2e;

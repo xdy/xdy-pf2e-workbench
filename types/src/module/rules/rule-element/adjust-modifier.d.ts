@@ -10,7 +10,7 @@ declare class AdjustModifierRuleElement extends AELikeRuleElement<AdjustModifier
     applications: number;
     constructor(data: AdjustModifierSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     static defineSchema(): AdjustModifierSchema;
-    protected _validateModel(data: Record<string, unknown>): void;
+    static validateJoint(data: Record<string, unknown>): void;
     /** Instead of applying the change directly to a property path, defer it to a synthetic */
     applyAELike(): void;
 }

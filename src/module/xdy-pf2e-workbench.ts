@@ -393,6 +393,7 @@ Hooks.once("ready", () => {
         }
     });
 
+    // TODO Broken
     if (game.settings.get(MODULENAME, "dirtySortActions") && !window["dirtySheetSorter"]) {
         const proto = CONFIG.Actor.sheetClasses.character["pf2e.CharacterSheetPF2e"].cls.prototype;
         const wrapped = proto.getData;

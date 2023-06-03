@@ -91,7 +91,7 @@ export declare const PF2ECONFIG: {
             WithTarget: string;
         };
         Specific: {
-            ac: string;
+            armor: string;
             athletics: string;
             deception: string;
             fortitude: string;
@@ -218,6 +218,7 @@ export declare const PF2ECONFIG: {
         anarchic: string;
         ancestralEchoing: string;
         anchoring: string;
+        authorized: string;
         axiomatic: string;
         bane: string;
         bloodbane: string;
@@ -230,6 +231,7 @@ export declare const PF2ECONFIG: {
         dancing: string;
         demolishing: string;
         disrupting: string;
+        earthbinding: string;
         energizing: string;
         extending: string;
         fanged: string;
@@ -546,9 +548,11 @@ export declare const PF2ECONFIG: {
         "etched-onto-clan-dagger": string;
         "etched-onto-lm-nonmetal-armor": string;
         "etched-onto-med-heavy-armor": string;
+        "etched-onto-bludgeoning-weapon": string;
         "etched-onto-melee-weapon": string;
         "etched-onto-slashing-melee-weapon": string;
         "etched-onto-piercing-or-slashing-melee-weapon": string;
+        "etched-onto-piercing-or-slashing-weapon": string;
         "etched-onto-weapon-wo-anarchic-rune": string;
         "etched-onto-weapon-wo-axiomatic-rune": string;
         "etched-onto-weapon-wo-unholy-rune": string;
@@ -3437,6 +3441,7 @@ export declare const PF2ECONFIG: {
         interaction: string;
         defensive: string;
         offensive: string;
+        familiar: string;
     };
     frequencies: {
         turn: string;
@@ -3625,7 +3630,7 @@ export declare const PF2ECONFIG: {
         sonic: string;
         "spell-deflection": string;
         stunned: string;
-        stupefied: string; /** Non-detection- and attitude- related conditions added to the Token HUD */
+        stupefied: string;
         "swarm-attacks": string;
         "swarm-mind": string;
         transmutation: string;
@@ -3841,6 +3846,7 @@ export declare const PF2ECONFIG: {
                 anarchic: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 ancestralEchoing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 anchoring: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                authorized: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 axiomatic: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 bane: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 bloodbane: import("@item/physical/runes.ts").WeaponPropertyRuneData;
@@ -3853,6 +3859,7 @@ export declare const PF2ECONFIG: {
                 dancing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 demolishing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 disrupting: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                earthbinding: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 energizing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 extending: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 fanged: import("@item/physical/runes.ts").WeaponPropertyRuneData;

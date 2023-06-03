@@ -11,11 +11,11 @@ declare abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends Rul
     constructor(data: IWRRuleElementSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     static get dictionary(): Record<string, string | undefined>;
     static defineSchema(): IWRRuleSchema;
-    protected _validateModel(source: SourceFromSchema<IWRRuleSchema>): void;
+    static validateJoint(source: SourceFromSchema<IWRRuleSchema>): void;
     /** A reference to the pertinent property in actor system data */
     abstract get property(): IWRSource[];
     abstract getIWR(value?: number): ImmunityData[] | WeaknessData[] | ResistanceData[];
-    beforePrepareData(): void;
+    afterPrepareData(): void;
 }
 interface IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema>, Omit<ModelPropsFromSchema<IWRRuleSchema>, "exceptions"> {
     constructor: typeof IWRRuleElement<TSchema>;

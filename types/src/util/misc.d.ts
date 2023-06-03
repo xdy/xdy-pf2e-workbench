@@ -60,8 +60,6 @@ declare function tupleHasValue<A extends readonly unknown[]>(array: A, value: un
 declare function setHasElement<T extends Set<unknown>>(set: T, value: unknown): value is SetElement<T>;
 /** Returns a subset of an object with explicitly defined keys */
 declare function pick<T extends object, K extends keyof T>(obj: T, keys: Iterable<K>): Pick<T, K>;
-/** Returns a subset of an object with explicitly excluded keys */
-declare function omit<T extends object, K extends keyof T>(obj: T, keys: Iterable<K>): Omit<T, K>;
 /**
  * Return an integer string of a number, always with sign (+/-)
  * @param value The number to convert to a string
@@ -131,4 +129,4 @@ declare function isImageFilePath(path: unknown): path is ImageFilePath;
 /** Does the parameter look like a video file path? */
 declare function isVideoFilePath(path: unknown): path is ImageFilePath;
 declare function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath;
-export { configFromLocalization, ErrorPF2e, Fraction, Optional, SlugCamel, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, omit, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };
+export { configFromLocalization, ErrorPF2e, Fraction, Optional, SlugCamel, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };

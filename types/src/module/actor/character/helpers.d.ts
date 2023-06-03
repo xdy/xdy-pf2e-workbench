@@ -3,6 +3,7 @@ import { ModifierPF2e } from "@actor/modifiers.ts";
 import { ArmorPF2e, WeaponPF2e } from "@item";
 import { ItemCarryType } from "@item/physical/index.ts";
 import { ZeroToThree, ZeroToTwo } from "@module/data.ts";
+import { ActorPF2e } from "@module/documents.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import type { CharacterPF2e } from "./document.ts";
 /** Handle weapon traits that introduce modifiers or add other weapon traits */
@@ -51,7 +52,7 @@ interface CreateAttackModifiersParams {
 }
 /** Create a penalty for attempting to Force Open without a crowbar or equivalent tool */
 declare function createForceOpenPenalty(actor: CharacterPF2e, domains: string[]): ModifierPF2e;
-declare function createShoddyPenalty(actor: CharacterPF2e, item: WeaponPF2e | ArmorPF2e, domains: string[]): ModifierPF2e | null;
+declare function createShoddyPenalty(actor: ActorPF2e, item: WeaponPF2e | ArmorPF2e | null, domains: string[]): ModifierPF2e | null;
 /**
  * Create a penalty for wearing armor with the "ponderous" trait
  * "You take a –5 penalty to all your Speeds (to a minimum of a 5-foot Speed). This is separate from and in addition to

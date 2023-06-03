@@ -8,7 +8,6 @@ export declare class CompendiumBrowserActionTab extends CompendiumBrowserTab {
     templatePath: string;
     searchFields: string[];
     storeFields: string[];
-    protected index: string[];
     constructor(browser: CompendiumBrowser);
     protected loadData(): Promise<void>;
     protected filterIndexData(entry: CompendiumBrowserIndexData): boolean;

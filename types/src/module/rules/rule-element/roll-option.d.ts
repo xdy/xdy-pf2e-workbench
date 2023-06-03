@@ -17,7 +17,7 @@ declare class RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema> {
     toggleable: boolean | "totm";
     constructor(source: RollOptionSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
     static defineSchema(): RollOptionSchema;
-    protected _validateModel(source: SourceFromSchema<RollOptionSchema>): void;
+    static validateJoint(source: SourceFromSchema<RollOptionSchema>): void;
     onApplyActiveEffects(): void;
     /** Force false totm toggleable roll options if the totmToggles setting is disabled */
     protected resolveValue(): boolean;

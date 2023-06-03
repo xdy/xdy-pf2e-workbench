@@ -59,7 +59,6 @@ declare class Statistic extends SimpleStatistic {
     /** Returns data intended to be merged back into actor data. By default the value is the DC */
     getTraceData(options?: {
         value?: "dc" | "mod";
-        rollable?: [string, string];
     }): StatisticTraceData;
 }
 declare class StatisticCheck<TParent extends Statistic = Statistic> {

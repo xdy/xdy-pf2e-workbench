@@ -47,7 +47,7 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     })[];
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
-    protected _initialize(): void;
+    protected _initialize(options?: Record<string, unknown>): void;
     prepareBaseData(): void;
     /** Refresh certain derived properties in case of special data preparation from subclasses */
     prepareDerivedData(): void;

@@ -7,7 +7,7 @@ import { ItemSourcePF2e, ItemSummaryData } from "@item/data/index.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
 import { MeasuredTemplatePF2e } from "@module/canvas/index.ts";
-import { ChatMessagePF2e } from "@module/chat-message/index.ts";
+import { ChatMessagePF2e, ItemOriginFlag } from "@module/chat-message/index.ts";
 import { OneToTen, ZeroToTwo } from "@module/data.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { CheckRoll } from "@system/check/index.ts";
@@ -87,6 +87,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     rollDamage(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, mapIncreases?: ZeroToTwo): Promise<Rolled<DamageRoll> | null>;
     /** Roll counteract check */
     rollCounteract(event: JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
+    getOriginData(): ItemOriginFlag;
     update(data: DocumentUpdateData<this>, options?: DocumentUpdateContext<TParent>): Promise<this>;
     protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
     protected _preUpdate(changed: DeepPartial<SpellSource>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<void>;

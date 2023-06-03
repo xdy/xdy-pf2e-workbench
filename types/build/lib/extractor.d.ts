@@ -23,5 +23,6 @@ declare class PackExtractor {
     constructor(params: ExtractArgs);
     /** Extract one or all packs */
     run(): Promise<number>;
+    extractPack(filePath: string, packDirectory: string): Promise<number>;
 }
 export { ExtractArgs, PackExtractor };

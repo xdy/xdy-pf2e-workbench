@@ -50,10 +50,10 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     getStatistic(slug: SaveType | SkillLongForm | "perception" | "classDC" | MagicTradition): Statistic;
     getStatistic(slug: string): Statistic | null;
     getCraftingFormulas(): Promise<CraftingFormula[]>;
-    getCraftingEntries(): Promise<CraftingEntry[]>;
+    getCraftingEntries(formulas?: CraftingFormula[]): Promise<CraftingEntry[]>;
     getCraftingEntry(selector: string): Promise<CraftingEntry | null>;
     performDailyCrafting(): Promise<void>;
-    protected _initialize(): void;
+    protected _initialize(options?: Record<string, unknown>): void;
     /** If one exists, prepare this character's familiar */
     prepareData(): void;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */

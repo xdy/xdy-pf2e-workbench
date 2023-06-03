@@ -7,7 +7,7 @@ import { DamageCategoryUnique, DamageDieSize, DamageType } from "@system/damage/
 import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
-declare const MODIFIER_TYPES: Set<"untyped" | "item" | "potency" | "ability" | "circumstance" | "proficiency" | "status">;
+declare const MODIFIER_TYPES: Set<"untyped" | "item" | "ability" | "circumstance" | "potency" | "proficiency" | "status">;
 type ModifierType = SetElement<typeof MODIFIER_TYPES>;
 interface BaseRawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
@@ -196,13 +196,6 @@ declare class StatisticModifier {
      * @param rollOptions Roll options used for initial total calculation
      */
     constructor(slug: string, modifiers?: ModifierPF2e[], rollOptions?: string[] | Set<string>);
-    /** @deprecated */
-    get name(): string;
-    /**
-     * Do nothing
-     * @deprecated
-     */
-    set name(_value: string);
     /** Get the list of all modifiers in this collection (as a read-only list). */
     get modifiers(): readonly ModifierPF2e[];
     /** Add a modifier to the end of this collection. */
@@ -226,7 +219,7 @@ declare class CheckModifier extends StatisticModifier {
      * @param modifiers Additional modifiers to add to this check
      */
     constructor(slug: string, statistic: {
-        modifiers: readonly ModifierPF2e[];
+        modifiers: readonly (ModifierPF2e | RawModifier)[];
     }, modifiers?: ModifierPF2e[], rollOptions?: string[] | Set<string>);
 }
 interface DamageDiceOverride {

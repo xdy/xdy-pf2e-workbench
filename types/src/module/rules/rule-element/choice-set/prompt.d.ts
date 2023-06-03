@@ -19,6 +19,7 @@ export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | 
     get template(): string;
     getData(options?: Partial<ApplicationOptions>): Promise<ChoiceSetTemplateData>;
     protected getChoices(): PickableThing[];
+    setChoices(choices: PickableThing[]): void;
     activateListeners($html: JQuery): void;
     /** Return early if there is only one choice */
     resolveSelection(): Promise<PickableThing<string | number | object> | null>;

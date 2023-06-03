@@ -67,15 +67,12 @@
     "target": "es2022",
     "typeRoots": [
       "node_modules/@types",
-      "node_modules/handlebars",
       "types/types/foundry"
     ],
     "types": [
-      "handlebars",
       "jquery",
       "node",
       "tooltipster",
-      "vite/client"
     ],
     "useDefineForClassFields": true
   },

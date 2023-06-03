@@ -19,6 +19,13 @@ declare class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
     get isLocked(): boolean;
     /** Is the condition found in the token HUD menu? */
     get isInHUD(): boolean;
+    /** Create a textual breakdown of what applied this condition */
+    get breakdown(): string | null;
+    /**
+     * Whether this condition is in-memory rather than stored in an actor's `items` collection and cannot be updated or
+     * deleted
+     */
+    get readonly(): boolean;
     /** Include damage type and possibly category for persistent-damage conditions */
     getRollOptions(prefix?: string): string[];
     increase(this: ConditionPF2e<ActorPF2e>): Promise<void>;

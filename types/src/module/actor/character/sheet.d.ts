@@ -4,13 +4,14 @@
 import { CreatureSheetData } from "@actor/creature/index.ts";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
 import { SaveType } from "@actor/types.ts";
-import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, HeritagePF2e, ItemPF2e } from "@item";
+import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, ItemPF2e } from "@item";
+import { ActionCost, Frequency } from "@item/data/base.ts";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/types.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ActorPF2e } from "@module/documents.ts";
-import { FlattenedCondition } from "@system/conditions/types.ts";
+import { SheetOptions } from "@module/sheet/helpers.ts";
 import { CreatureSheetPF2e } from "../creature/sheet.ts";
 import { CharacterConfig } from "./config.ts";
 import { CraftingEntry, CraftingFormula } from "./crafting/index.ts";
@@ -30,8 +31,6 @@ declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureS
     getData(options?: ActorSheetOptions): Promise<CharacterSheetData<TActor>>;
     /** Organize and classify Items for Character sheets */
     prepareItems(sheetData: ActorSheetDataPF2e<CharacterPF2e>): Promise<void>;
-    protected prepareCraftingFormulas(): Promise<Record<number, CraftingFormula[]>>;
-    protected prepareCraftingEntries(): Promise<CraftingEntriesSheetData>;
     /** Disable the initiative button located on the sidebar */
     disableInitiativeButton(): void;
     /** Enable the initiative button located on the sidebar */
@@ -59,9 +58,6 @@ type CharacterSystemSheetData = CharacterSystemData & {
             value: keyof typeof CONFIG.PF2E.abilities;
             singleOption: boolean;
         };
-    };
-    effects: {
-        conditions?: FlattenedCondition[];
     };
     resources: {
         heroPoints: {
@@ -93,7 +89,7 @@ interface CraftingSheetData {
     entries: CraftingEntriesSheetData;
 }
 type CharacterSheetTabVisibility = Record<(typeof CHARACTER_SHEET_TABS)[number], boolean>;
-interface CharacterSheetData<TActor extends CharacterPF2e> extends CreatureSheetData<TActor> {
+interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> extends CreatureSheetData<TActor> {
     abpEnabled: boolean;
     ancestry: AncestryPF2e<CharacterPF2e> | null;
     heritage: HeritagePF2e<CharacterPF2e> | null;
@@ -120,7 +116,24 @@ interface CharacterSheetData<TActor extends CharacterPF2e> extends CreatureSheet
     showPFSTab: boolean;
     spellcastingEntries: SpellcastingSheetData[];
     tabVisibility: CharacterSheetTabVisibility;
+    actions: {
+        combat: Record<"action" | "reaction" | "free", {
+            label: string;
+            actions: ActionSheetData[];
+        }>;
+        exploration: ActionSheetData[];
+        downtime: ActionSheetData[];
+    };
     feats: FeatGroup[];
+}
+interface ActionSheetData {
+    id: string;
+    name: string;
+    img: string;
+    actionCost: ActionCost | null;
+    frequency: Frequency | null;
+    feat?: FeatPF2e;
+    traits: SheetOptions;
 }
 interface ClassDCSheetData extends ClassDCData {
     icon: string;

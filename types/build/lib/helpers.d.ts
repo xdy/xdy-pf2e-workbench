@@ -1,2 +1,3 @@
 declare const PackError: (message: string) => void;
-export { PackError };
+declare const getFilesRecursively: (directory: string, filePaths?: string[]) => string[];
+export { getFilesRecursively, PackError };

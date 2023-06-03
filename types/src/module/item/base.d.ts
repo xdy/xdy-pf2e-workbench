@@ -9,6 +9,7 @@ import { PhysicalItemPF2e } from "./physical/document.ts";
 import { ItemSheetPF2e } from "./sheet/base.ts";
 import { ItemFlagsPF2e, ItemSystemData } from "./data/base.ts";
 import { ItemInstances } from "./types.ts";
+import { ItemOriginFlag } from "@module/chat-message/data.ts";
 /** Override and extend the basic :class:`Item` implementation */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     /** Prepared rule elements from this item */
@@ -49,13 +50,14 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     }): Promise<ChatMessagePF2e | undefined>;
     /** A shortcut to `item.toMessage(..., { create: true })`, kept for backward compatibility */
     toChat(event?: JQuery.TriggeredEvent): Promise<ChatMessagePF2e | undefined>;
-    protected _initialize(): void;
+    protected _initialize(options?: Record<string, unknown>): void;
     prepareData(): void;
     /** Ensure the presence of the pf2e flag scope with default properties and values */
     prepareBaseData(): void;
     prepareRuleElements(this: ItemPF2e<ActorPF2e>, options?: RuleElementOptions): RuleElementPF2e[];
     /** Pull the latest system data from the source compendium and replace this item's with it */
     refreshFromCompendium(): Promise<void>;
+    getOriginData(): ItemOriginFlag;
     /**
      * Internal method that transforms data into something that can be used for chat.
      * Currently renders description text using enrichHTML.

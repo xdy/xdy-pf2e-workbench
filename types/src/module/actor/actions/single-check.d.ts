@@ -25,12 +25,11 @@ interface SingleCheckActionData extends BaseActionData<SingleCheckActionVariantD
     statistic: string;
 }
 interface SingleCheckActionUseOptions extends ActionUseOptions {
-    actors: ActorPF2e | ActorPF2e[];
     difficultyClass: CheckDC | string;
     modifiers: ModifierPF2e[];
     multipleAttackPenalty: number;
     notes: SingleCheckActionRollNoteData[];
-    rollOptions?: string[];
+    rollOptions: string[];
     statistic: string;
 }
 declare class SingleCheckActionVariant extends BaseActionVariant {

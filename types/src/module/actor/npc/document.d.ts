@@ -7,7 +7,7 @@ import { RollNotePF2e } from "@module/notes.ts";
 import { CreatureIdentificationData } from "@module/recall-knowledge.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { NPCFlags, NPCSource, NPCSystemData } from "./data.ts";
-import { NPCSheetPF2e } from "./sheet.ts";
+import { AbstractNPCSheet } from "./sheet.ts";
 import { VariantCloneParams } from "./types.ts";
 declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     initiative: ActorInitiative;
@@ -56,6 +56,6 @@ interface NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e |
     flags: NPCFlags;
     readonly _source: NPCSource;
     system: NPCSystemData;
-    get sheet(): NPCSheetPF2e<this>;
+    get sheet(): AbstractNPCSheet<this>;
 }
 export { NPCPF2e };

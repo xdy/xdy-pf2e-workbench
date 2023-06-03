@@ -3,7 +3,6 @@ import { ConditionPF2e } from "@item";
 import { ConditionSource } from "@item/condition/data.ts";
 import { ConditionSlug } from "@item/condition/types.ts";
 import { TokenPF2e } from "@module/canvas/index.ts";
-import { FlattenedCondition } from "./types.ts";
 /** A helper class to manage PF2e Conditions */
 export declare class ConditionManager {
     #private;
@@ -20,5 +19,4 @@ export declare class ConditionManager {
     static updateConditionValue(itemId: string, actor: ActorPF2e, value: number): Promise<void>;
     static updateConditionValue(itemId: string, token: TokenPF2e, value: number): Promise<void>;
     static updateConditionValue(itemId: string, actorOrToken: ActorPF2e | TokenPF2e, value: number): Promise<void>;
-    static getFlattenedConditions(actor: ActorPF2e): FlattenedCondition[];
 }

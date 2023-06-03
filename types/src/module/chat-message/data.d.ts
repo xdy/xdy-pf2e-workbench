@@ -9,17 +9,21 @@ import { DamageRollContext } from "@system/damage/types.ts";
 interface ChatMessageSourcePF2e extends foundry.documents.ChatMessageSource {
     flags: ChatMessageFlagsPF2e;
 }
+export interface ItemOriginFlag {
+    type: ItemType;
+    uuid: string;
+    castLevel?: number;
+    variant?: {
+        overlays: string[];
+    };
+}
 type ChatMessageFlagsPF2e = foundry.documents.ChatMessageFlags & {
     pf2e: {
         damageRoll?: DamageRollFlag;
         context?: ChatContextFlag;
-        origin?: {
-            type: ItemType;
-            uuid: string;
-        } | null;
+        origin?: ItemOriginFlag | null;
         casting?: {
             id: string;
-            level: number;
             tradition: MagicTradition;
         } | null;
         modifierName?: string;
@@ -27,11 +31,8 @@ type ChatMessageFlagsPF2e = foundry.documents.ChatMessageFlags & {
         preformatted?: "flavor" | "content" | "both";
         isFromConsumable?: boolean;
         journalEntry?: DocumentUUID;
-        spellVariant?: {
-            overlayIds: string[];
-        };
         strike?: StrikeLookupData | null;
-        appliedDamage?: AppliedDamageFlag;
+        appliedDamage?: AppliedDamageFlag | null;
         [key: string]: unknown;
     };
     core: NonNullable<foundry.documents.ChatMessageFlags["core"]>;
@@ -89,7 +90,7 @@ interface SpellCastContextFlag {
     rollMode?: RollMode;
 }
 interface AppliedDamageFlag {
-    uuid: ActorUUID | TokenDocumentUUID;
+    uuid: ActorUUID;
     isHealing: boolean;
     isReverted?: boolean;
     persistent: string[];
