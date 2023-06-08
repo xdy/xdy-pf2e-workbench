@@ -560,7 +560,11 @@
       },
       "handleDyingRecoveryRollAllow": {
         "all": "所有人",
-        "gm": "GM"
+        "gm": "GM",
+        "none": "无",
+        "name": "选择谁可以设置是否自动进行濒死复苏检定。",
+        "players": "玩家",
+        "hint": "选择谁可以设置是否自动进行濒死复苏检定。保存设置以显示/隐藏其他客户端自动化设置选项。"
       },
       "applyPersistentDamageRecoveryRoll": {
         "hint": "...并在那之后自动骰恢复检定。需要先启用上面的设置。",
@@ -570,6 +574,17 @@
         "hint": "当失去意识时，角色手中的物品会自动掉落。",
         "name": "当失去意识时，角色手中的物品会自动掉落。",
         "message": "{name}掉落了：{items}"
+      },
+      "dirtySortActions": {
+        "hint": "打开角色卡时是否按名称为动作排序。变更后需要刷新（F5）。",
+        "name": "打开角色卡时按名称为动作排序。",
+        "info": "角色卡动作已排序。"
+      },
+      "handleDyingRecoveryRoll": {
+        "handled": "已自动进行濒死复苏检定{roll} {outcome}。{defeated}。",
+        "hint": "自动进行濒死复苏检定的客户端自动化设置。",
+        "name": "自动进行濒死复苏检定。",
+        "defeated": "{name}被击败"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
@@ -653,7 +668,11 @@
         "second": "(-5)",
         "third": "(-10)",
         "compendiumNotFound": "未找到合集包 {compendiumName}",
-        "macroNotFound": "未找到{macroName}宏"
+        "macroNotFound": "未找到{macroName}宏",
+        "bamActionsPerColumn": {
+          "name": "每行显示的大致动作数量",
+          "hint": "基本动作宏对话框中，每行显示的大致动作数量。每行显示的动作数将为能填入对话框的最接近数字。"
+        }
       },
       "buildNpcSpellbookJournal": {
         "title": "建立NPC法术书日志",
@@ -673,7 +692,8 @@
       "whirlwindStrike": {
         "starts": "{name} 开始旋风打击！",
         "ends": "攻击{targets}后{name}的旋风打击结束！",
-        "error": "选择一个具备旋风打击能力的已武装的指示物，并保证触及范围内至少有一个可见的非盟友目标！"
+        "error": "选择一个具备旋风打击能力的已武装的指示物，并保证触及范围内至少有一个可见的非盟友目标！",
+        "reachAuraNotFound": "未找到灵光，请将PF2e Workbench Items合集包中的接触‘灵光’拖到指示物上，并根据需求调整半径。"
       }
     }
   }
