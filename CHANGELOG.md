@@ -1,3 +1,18 @@
+# [5.0.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.77.2...v5.0.0) (2023-06-13)
+
+
+### Features
+
+* The PF2e Workbench now requires PF2e version 5 or later, and Foundry v11 or later. ([73707f0](https://github.com/xdy/xdy-pf2e-workbench/commit/73707f07663b6d167b1f01b39db5a891f797e4ab))
+
+
+### BREAKING CHANGES
+
+* The PF2e Workbench now requires PF2e version 5 or later, and Foundry v11 or later.
+
+Skill Actions and character sheet action sorting are known to be broken.
+There is probably more breakage. Please make github issues when you find something that doesn't work, if there isn't already an issue. PR:s with fixes are even more welcome. :)
+
 ## [4.77.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.77.1...v4.77.2) (2023-06-03)
 
 
