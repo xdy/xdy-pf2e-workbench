@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.0...v5.0.1) (2023-06-14)
+
+
+### Bug Fixes
+
+* Add a thumbnail on the module installation page. ([f359154](https://github.com/xdy/xdy-pf2e-workbench/commit/f359154d8bae8ddf95099b2f451db62b80503631))
+
 # [5.0.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v4.77.2...v5.0.0) (2023-06-13)
 
 
