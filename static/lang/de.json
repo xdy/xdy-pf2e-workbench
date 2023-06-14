@@ -609,9 +609,9 @@
         "name": "... und automatisch danach für die Erholung würfeln."
       },
       "dirtySortActions": {
-        "name": "Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird.",
+        "name": "KAPUTT IN 5.0! Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird.",
         "info": "Aktionen im Charakterbogen sind nun sortiert.",
-        "hint": "Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird. Erfordert eine Aktualisierung (F5) nach der Änderung."
+        "hint": "KAPUTT IN 5.0! Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird. Erfordert eine Aktualisierung (F5) nach der Änderung."
       }
     },
     "skillActions": {
@@ -619,10 +619,10 @@
       "Settings": {
         "Position": {
           "disabled": "deaktiviert",
-          "hint": "Position auf der Fertigkeiten-Seite; Oben: direkt nach den Angriffen, Unten: Am Ende",
+          "hint": "KAPUTT IN 5.0! Position auf der Fertigkeiten-Seite; Oben: direkt nach den Angriffen, Unten: Am Ende",
           "bottom": "Unten",
           "top": "Oben",
-          "name": "Position der Fertigkeitsaktivitäten"
+          "name": "KAPUTT IN 5.0! Position der Fertigkeitsaktivitäten"
         },
         "Description": {
           "name": "Beschreibung der Fertigkeitsaktivität",
