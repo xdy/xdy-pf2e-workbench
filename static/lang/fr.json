@@ -21,8 +21,8 @@
       "Title": "Actions de Compétence",
       "Settings": {
         "Position": {
-          "name": "Position des actions de compétence",
-          "hint": "La position sur la page des compétences : Haut : juste après les Frappes, Bas : À la fin",
+          "name": "CASSÉ AVEC LA 5.0 Position des actions de compétence",
+          "hint": "CASSÉ AVEC LA 5.0 La position sur la page des compétences : Haut : juste après les Frappes, Bas : À la fin",
           "top": "Haut",
           "bottom": "Bas",
           "disabled": "Désactivé"
@@ -582,8 +582,8 @@
         "name": "... et lancez le test de récupération automatiquement après çà."
       },
       "dirtySortActions": {
-        "name": "Trier les actions par nom lorsque la feuille d'acteur est ouverte.",
-        "hint": "Réglage du client pour trier les actions par leur nom lorsque la feuille de l'acteur est ouverte. Nécessite un rafraichissement (f5) après changement.",
+        "name": "CASSÉ AVEC LA 5.0 Trier les actions par nom lorsque la feuille d'acteur est ouverte.",
+        "hint": "CASSÉ AVEC LA 5.0 Réglage du client pour trier les actions par leur nom lorsque la feuille de l'acteur est ouverte. Nécessite un rafraichissement (f5) après changement.",
         "info": "Les actions des feuilles de personnage sont désormais triées."
       }
     },
