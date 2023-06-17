@@ -399,10 +399,12 @@ Hooks.once("ready", () => {
         const wrapped = proto.getData;
         proto.getData = async function (options) {
             const data = await wrapped.call(this, options);
-            const actions = data.actor.actions;
-            actions.action.actions.sort((a, b) => a.name.localeCompare(b.name));
-            actions.reaction.actions.sort((a, b) => a.name.localeCompare(b.name));
-            actions.free.actions.sort((a, b) => a.name.localeCompare(b.name));
+            const actions = data["actions"];
+            actions.combat.action.actions.sort((a, b) => a.name.localeCompare(b.name));
+            actions.combat.reaction.actions.sort((a, b) => a.name.localeCompare(b.name));
+            actions.combat.free.actions.sort((a, b) => a.name.localeCompare(b.name));
+            actions.exploration.sort((a, b) => a.name.localeCompare(b.name));
+            actions.downtime.sort((a, b) => a.name.localeCompare(b.name));
             return data;
         };
 
