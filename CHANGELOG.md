@@ -1,3 +1,14 @@
+## [5.0.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.1...v5.0.2) (2023-06-17)
+
+
+### Bug Fixes
+
+* NPC Scaler initiative works again ([faf05bc](https://github.com/xdy/xdy-pf2e-workbench/commit/faf05bc539f59503766aa2cd4c52417825097f8c)), closes [#839](https://github.com/xdy/xdy-pf2e-workbench/issues/839)
+* NPC Scaler no longer removes doubled resistances. ([60ef24c](https://github.com/xdy/xdy-pf2e-workbench/commit/60ef24c553a02fdbbd9316dc236f74b91d9282e6)), closes [#845](https://github.com/xdy/xdy-pf2e-workbench/issues/845)
+* Remove warnings about broken featuers from the settings. ([90daaf4](https://github.com/xdy/xdy-pf2e-workbench/commit/90daaf483651e9d9907a87beb91069654d191964))
+* Skill Actions work again. ([3b72b13](https://github.com/xdy/xdy-pf2e-workbench/commit/3b72b1361577fb403f641f5983bd96d86b10d31f)), closes [#850](https://github.com/xdy/xdy-pf2e-workbench/issues/850)
+* The option to sort actions works again, and now sorts exploration and downtime actions as well. ([9a12a01](https://github.com/xdy/xdy-pf2e-workbench/commit/9a12a01465303e1bc6375c835e5d05136ba043aa))
+
 ## [5.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.0...v5.0.1) (2023-06-14)
 
 
