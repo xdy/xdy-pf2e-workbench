@@ -68,6 +68,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
             type: resistance.type,
             exceptions: resistance.exceptions ?? "",
             value: getMinMaxData("resistance", resistance.value, oldLevel, newLevel).toString(),
+            doubleVs: resistance.doubleVs ?? "",
         });
     }
     updateData["system.attributes.resistances"] = drData;
