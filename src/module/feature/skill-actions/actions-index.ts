@@ -24,7 +24,8 @@ export class ActionsIndex extends Map<string, ItemPF2e> {
             return;
         }
 
-        const actions = <ActionItemPF2e[]>await pack.getDocuments({ _id: { $in: ACTION_IDS } });
+        let actions = <ActionItemPF2e[]>await pack.getDocuments();
+        actions = actions.filter((a) => ACTION_IDS.includes(a.id));
         for (const action of actions.filter((a) => a.slug)) {
             this.set(<string>action.slug, action);
         }

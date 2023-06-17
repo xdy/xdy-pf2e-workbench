@@ -23,7 +23,9 @@ export async function loadSkillActionsBabele() {
 
 function renderActionsList(skillActions: SkillActionCollection, actor: ActorPF2e) {
     const skillData = skillActions
-        .map((action) => action.getData({ allVisible: Boolean(actor.getFlag(MODULENAME, "allVisible") ?? "true") }))
+        .map((action) => {
+            return action.getData({ allVisible: Boolean(actor.getFlag(MODULENAME, "allVisible") ?? "true") });
+        })
         .sort((a, b) => {
             return a.label > b.label ? 1 : -1;
         });
