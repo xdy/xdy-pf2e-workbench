@@ -30,6 +30,38 @@
     "styles/xdy-pf2e-workbench.css"
   ],
   "socket": true,
+  "packFolders": [
+    {
+      "name": "PF2E Workbench",
+      "sorting": "m",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "folders": [
+        {
+          "name": "Internal, do not import",
+          "sorting": "m",
+          "ownership": {
+            "PLAYER": "LIMITED",
+            "ASSISTANT": "OWNER"
+          },
+          "packs": [
+            "asymonous-benefactor-macros-internal",
+            "asymonous-benefactor-effects",
+            "xdy-internal-utility-macros",
+            "xdy-internal-tables"
+          ]
+        }
+      ],
+      "packs": [
+        "asymonous-benefactor-macros",
+        "xdy-customizable-macros",
+        "xdy-pf2e-workbench-items",
+        "xdy-pf2e-workbench-macros"
+      ]
+    }
+  ],
   "packs": [
     {
       "name": "asymonous-benefactor-macros",
@@ -37,7 +69,12 @@
       "system": "pf2e",
       "path": "packs/generated/asymonous-benefactor-macros.db",
       "type": "Macro",
-      "flags": {}
+      "flags": {},
+      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "asymonous-benefactor-macros-internal",
@@ -45,11 +82,12 @@
       "system": "pf2e",
       "path": "packs/generated/asymonous-benefactor-macros-internal.db",
       "ownership": {
-          "PLAYER": "LIMITED",
-          "ASSISTANT": "OWNER"
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
       },
       "type": "Macro",
-      "flags": {}
+      "flags": {},
+      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
     },
     {
       "name": "asymonous-benefactor-effects",
@@ -57,7 +95,12 @@
       "system": "pf2e",
       "path": "packs/db/asymonous-benefactor-effects.db",
       "type": "Item",
-      "flags": {}
+      "flags": {},
+      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "xdy-customizable-macros",
@@ -65,7 +108,12 @@
       "system": "pf2e",
       "path": "packs/data/xdy-customizable-macros.db",
       "type": "Macro",
-      "flags": {}
+      "flags": {},
+      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "xdy-pf2e-workbench-items",
@@ -73,7 +121,12 @@
       "system": "pf2e",
       "path": "packs/db/xdy-pf2e-workbench-items.db",
       "type": "Item",
-      "flags": {}
+      "flags": {},
+      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "xdy-pf2e-workbench-macros",
@@ -81,7 +134,12 @@
       "system": "pf2e",
       "path": "packs/db/xdy-pf2e-workbench-macros.db",
       "type": "Macro",
-      "flags": {}
+      "flags": {},
+      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "xdy-internal-utility-macros",
@@ -89,7 +147,12 @@
       "system": "pf2e",
       "path": "packs/data/xdy-internal-utility-macros.db",
       "type": "Macro",
-      "flags": {}
+      "flags": {},
+      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "xdy-internal-tables",
@@ -97,7 +160,12 @@
       "system": "pf2e",
       "path": "packs/db/xdy-internal-tables.db",
       "type": "RollTable",
-      "flags": {}
+      "flags": {},
+      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "languages": [
