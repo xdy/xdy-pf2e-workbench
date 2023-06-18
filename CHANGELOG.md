@@ -1,3 +1,10 @@
+## [5.0.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.2...v5.0.3) (2023-06-18)
+
+
+### Bug Fixes
+
+* Add folders with banners, set ownership on all packs and folders. ([7b60d95](https://github.com/xdy/xdy-pf2e-workbench/commit/7b60d95f17a64b82103650a581e6cc2aaf4c648f))
+
 ## [5.0.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.1...v5.0.2) (2023-06-17)
 
 
