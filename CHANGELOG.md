@@ -1,3 +1,10 @@
+## [5.0.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.3...v5.0.4) (2023-06-22)
+
+
+### Bug Fixes
+
+* Change the text for the private casting settings to hopefully make it more obvious that the first setting needs to be enabled for any of the others to work. ([aa022ff](https://github.com/xdy/xdy-pf2e-workbench/commit/aa022ff54b2ae5c01c62ffaa1a564be9ade8a043))
+
 ## [5.0.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.2...v5.0.3) (2023-06-18)
 
 
