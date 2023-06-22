@@ -144,6 +144,7 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/spells/efficient-apport.webp",
         },
         {
+            replacedWith: "avoid-notice",
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AvoidNotice`),
             skill: "Stealth",
@@ -197,6 +198,7 @@ export function basicActionMacros() {
             icon: "icons/skills/trades/smithing-anvil-silver-red.webp",
         },
         {
+            replacedWith: "create-forgery",
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateForgery`),
             skill: "Society",
@@ -269,6 +271,7 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/equipment/adventuring-gear/thieves-tools.webp",
         },
         {
+            replacedWith: "escape",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Escape`),
             skill: "",
@@ -493,10 +496,11 @@ export function basicActionMacros() {
             icon: "icons/creatures/fish/fish-shark-swimming.webp",
         },
         {
+            replacedWith: "take-cover",
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TakeCoverToggle`),
             skill: "",
-            action: ["macroEffectCover", "xdy-pf2e-workbench.xdy-internal-utility-macros"],
+            action: game.pf2e.actions.takeCover,
             icon: "systems/pf2e/icons/equipment/shields/tower-shield.webp",
         },
         {
@@ -559,7 +563,9 @@ export function basicActionMacros() {
             return {
                 actionType: "other",
                 name: game.i18n.localize(x[1].name),
-                skill: x[1].statistic.charAt(0).toUpperCase() + x[1].statistic.slice(1),
+                skill: x[1].statistic
+                    ? x[1].statistic.charAt(0).toUpperCase() + x[1].statistic.slice(1)
+                    : bamActions.find((y) => y.replacedWith === x[0])?.skill.toLocaleLowerCase(),
                 icon:
                     x[1].img ??
                     bamActions.find((y) => y.replacedWith === x[0])?.icon ??
