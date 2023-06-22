@@ -388,7 +388,7 @@
         "aSpell": "A spell"
       },
       "castPrivateSpellHideName": {
-        "hint": "(Experimental) Check to hide the name of a privately cast spell.",
+        "hint": "(REALLY EXPERIMENTAL) Check to hide the name of a privately cast spell. Can mess up your damage rolls in chat.",
         "name": "... and hide the name of a privately cast spell (Experimental)."
       },
       "castPrivateSpellAlwaysForNPC": {
