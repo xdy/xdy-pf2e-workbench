@@ -389,11 +389,11 @@
       },
       "castPrivateSpellHideName": {
         "hint": "(Experimental) Check to hide the name of a privately cast spell.",
-        "name": "Check to hide the name of a privately cast spell."
+        "name": "... and hide the name of a privately cast spell (Experimental)."
       },
       "castPrivateSpellAlwaysForNPC": {
         "hint": "Check to always cast privately for npcs. (Hold Ctrl to *not* cast privately.)",
-        "name": "Check to always cast privately for npcs."
+        "name": "... and always cast privately for npcs."
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Cantrip",
@@ -409,7 +409,7 @@
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "Show spell traits in the public message.",
-        "name": "Show spell traits in the public message.",
+        "name": "... and show spell traits in the public message.",
         "traitPart": " with these traits: <strong>{traits}</strong>"
       },
       "creatureBuilder": {
