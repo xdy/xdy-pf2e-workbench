@@ -481,8 +481,8 @@
         "willBeResetIn": "Hero Point Handler returns in {remainingMinutes} minutes ({time})."
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
-        "hint": "Set how many minutes till the next time the hero point handler opens.",
-        "name": "Minutes between Hero Point Handler opening."
+        "hint": "Set the default (and maximum) for how many minutes till the next time the hero point handler opens.",
+        "name": "Default minutes between Hero Point Handler opening."
       },
       "heroPointHandlerKey": {
         "hint": "Keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder.",
