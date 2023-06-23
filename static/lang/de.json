@@ -320,7 +320,7 @@
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "Zeige Zauberkategorien in der öffentlichen Nachricht.",
         "traitPart": " mit diesen Kategorien: <strong>{traits}</strong>",
-        "name": "Zeige Zauberkategorien in der öffentlichen Nachricht."
+        "name": "... und zeige Zauberkategorien in der öffentlichen Nachricht."
       },
       "creatureBuilder": {
         "name": "Die Erstellung eigener Kreaturen erlauben.",
@@ -371,7 +371,7 @@
       },
       "castPrivateSpellAlwaysForNPC": {
         "hint": "Auswählen um Zauber für NSC immer privat zu wirken. (STRG-gedrückt halten um *NICHT* privat zu zaubern.)",
-        "name": "Auswählen um Zauber für NSC immer privat zu wirken."
+        "name": "...und Zauber für NSC immer privat zu wirken."
       },
       "decreaseFrightenedConditionEachTurn": {
         "name": "Automatisch den Verängstigt-Status jeden Zug reduzieren.",
@@ -542,7 +542,7 @@
       },
       "castPrivateSpellHideName": {
         "hint": "(Experimentell) Auswählen um den Namen eines privat gewirkten Zaubers zu verstecken.",
-        "name": "Auswählen um den Namen eines privat gewirkten Zaubers zu verstecken."
+        "name": "... und verstecke den Namen des privat gewirkten Zaubers (Experimentell)."
       },
       "autoRollDamageForSpellNotAnAttack": {
         "hint": "Client Einstellung um *immer* normalen Schaden zur würfeln für *nicht-Angriffs* Zauber wenn diese gewirkt werden.",
@@ -609,9 +609,9 @@
         "name": "... und automatisch danach für die Erholung würfeln."
       },
       "dirtySortActions": {
-        "name": "KAPUTT IN 5.0! Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird.",
+        "name": "Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird.",
         "info": "Aktionen im Charakterbogen sind nun sortiert.",
-        "hint": "KAPUTT IN 5.0! Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird. Erfordert eine Aktualisierung (F5) nach der Änderung."
+        "hint": "Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird. Erfordert eine Aktualisierung (F5) nach der Änderung."
       }
     },
     "skillActions": {
@@ -619,10 +619,10 @@
       "Settings": {
         "Position": {
           "disabled": "deaktiviert",
-          "hint": "KAPUTT IN 5.0! Position auf der Fertigkeiten-Seite; Oben: direkt nach den Angriffen, Unten: Am Ende",
+          "hint": "Position auf der Fertigkeiten-Seite; Oben: direkt nach den Angriffen, Unten: Am Ende",
           "bottom": "Unten",
           "top": "Oben",
-          "name": "KAPUTT IN 5.0! Position der Fertigkeitsaktivitäten"
+          "name": "Position der Fertigkeitsaktivitäten"
         },
         "Description": {
           "name": "Beschreibung der Fertigkeitsaktivität",
