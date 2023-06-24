@@ -5,6 +5,6 @@
 *.db text
 
 # Definitively not text
-*.jpg binary
-*.png binary
+*.webp binary
 *.pdf binary
+packs/leveldb/** binary
