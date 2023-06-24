@@ -206,7 +206,7 @@
       },
       "castPrivateSpellAlwaysForNPC": {
         "hint": "Cochez pour toujours lancer de manière privée pour les PNJ. (Tenir Ctrl pour ne pas lancer en privé)",
-        "name": "Cochez pour toujours lancer de manière privée pour les PNJ."
+        "name": "... et lance toujours de manière privée pour les PNJ."
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Tour de magie",
@@ -222,7 +222,7 @@
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "Montrer les traits du sort dans le message public.",
-        "name": "Montre les traits du sort dans le message public.",
+        "name": "... et montre les traits du sort dans le message public.",
         "traitPart": " avec ces traits : <strong>{traits}</strong>"
       },
       "creatureBuilder": {
@@ -277,8 +277,8 @@
         "willBeResetIn": "Les points d'héroïsme seront réinitialisés dans {remainingMinutes} minutes ({time})."
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
-        "hint": "Montre combien il reste de minutes à courir avant l'ouverture du gestionnaire de point d'héroïsme.",
-        "name": "Minutes avant l'ouverture du Gestionnaire de Point d'Héroïsme."
+        "hint": "Fixe par défaut (et le maximum) pour savoir combien il reste de minutes à courir avant l'ouverture du gestionnaire de point d'héroïsme.",
+        "name": "Minutes par défaut avant l'ouverture du Gestionnaire de Point d'Héroïsme."
       },
       "heroPointHandlerKey": {
         "hint": "Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme qui permet de remettre à zéro et d'ajouter des points d'héroïsme avec un rappel automatique à chaque heure.",
@@ -548,8 +548,8 @@
         "off": "Désactivé"
       },
       "castPrivateSpellHideName": {
-        "name": "Cochez pour cacher le nom d'un sort lancé en privé.",
-        "hint": "(Expérimental) Cochez pour cacher le nom d'un sort lancé en privé."
+        "name": "... et cache le nom d'un sort lancé en privé. (Expérimental)",
+        "hint": "(Expérimental) Cochez pour cacher le nom d'un sort lancé en privé. Peut foutre le bocson dans la conversation."
       },
       "dropHeldItemsOnBecomingUnconscious": {
         "hint": "Les personnages lâchent automatiquement les objets tenus en devenant inconscient.",
