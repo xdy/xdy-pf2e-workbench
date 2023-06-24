@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.5...v5.1.0) (2023-06-24)
+
+
+### Features
+
+* Add a new effect 'Effect: Condition for 1 round (modifiable)' to the 'PF2e Workbench Items' compendium. Dragging this effect to a token pops up a choice of what condition to give that actor for one round. To give other durations, either modify the effect on the actor, or make a copy of the effect with the duration changed. ([b1afc04](https://github.com/xdy/xdy-pf2e-workbench/commit/b1afc04485210f2cc984d901189387995e325023))
+
 ## [5.0.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.4...v5.0.5) (2023-06-24)
 
 
