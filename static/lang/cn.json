@@ -368,7 +368,7 @@
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
         "hint": "设置距离下次英雄点处理器开启的间隔。",
-        "name": "英雄点处理器开启的间隔。"
+        "name": "默认英雄点处理器开启的间隔分钟数。"
       },
       "heroPointHandlerKey": {
         "name": "打开英雄点处理器对话框的快捷键。",
@@ -549,7 +549,7 @@
       },
       "castPrivateSpellHideName": {
         "name": "启用此项以隐藏被隐蔽施放法术的法术名。",
-        "hint": "(实验性功能)启用此项以隐藏被隐蔽施放法术的法术名。"
+        "hint": "(这真是个实验性功能)启用此项以隐藏被隐蔽施放法术的法术名。注意这可能会使你聊天栏的伤害骰出bug！"
       },
       "nonLethalIsNotLethal": {
         "unconscious": "非致命伤害不会致命",
