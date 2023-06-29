@@ -502,8 +502,8 @@
         "name": "Den Namen von Zaubern in der Farbe der Seltenheit auf dem Charakterblatt anzeigen."
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
-        "name": "Minuten zwischen der Öffnung der Heldenpunkt Verwaltung.",
-        "hint": "Auswählen wie viele Minuten vergehen soll bis der Heldenpunkt Verwalter das nächste Mal aufgerufen werden soll."
+        "name": "Minuten zwischen dem Öffnen der Heldenpunkt-Verwaltung.",
+        "hint": "Legen Sie den Standardwert (und den Höchstwert) für die Anzahl der Minuten bis zum nächsten Öffnen des Heldenpunkt-Verwaltung fest."
       },
       "npcMystifierPrefix": {
         "hint": "Füge einen Text hinzu der den neuen Namen als Präfix hinzugefügt wird (dazwischen falls die Zufallsnamenoption oben gewählt wurde), Standardmäßig '' (zum Beispiel: 'Unbekannt'). Falls dies dem Namen eine Würfeltabelle entspricht wird stattdessen ein zufälliger Text aus der Tabelle als Präfix genutzt. Dieser wird *nach* dem Suffix einer zufälligen Eigenschaft eingefügt (siehe vorherige Option)",
