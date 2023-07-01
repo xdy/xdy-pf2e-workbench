@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.2.0...v5.3.0) (2023-07-01)
+
+
+### Features
+
+* Adds two auras and one effect to the PF2e Workbench Items compendium. Specifically: ([f109220](https://github.com/xdy/xdy-pf2e-workbench/commit/f109220caad746ad51b222793f360e9896f3db08))
+
 # [5.2.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.1.0...v5.2.0) (2023-07-01)
 
 
