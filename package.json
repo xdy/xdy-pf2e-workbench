@@ -96,5 +96,5 @@
     "watch": "npm run build:packs && vite build --watch --mode development"
   },
   "type": "module",
-  "version": "5.3.0"
+  "version": "5.3.1"
 }
