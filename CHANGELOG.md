@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.1.0...v5.2.0) (2023-07-01)
+
+
+### Features
+
+* Hiding spell name on damage message when casting spells privately now works again. Also includes a bunch of updated macros from Symon as well as several updated localizations. ([1c798b2](https://github.com/xdy/xdy-pf2e-workbench/commit/1c798b20f346e15db9b909c9cee6c4e8fbde8eb7))
+
 # [5.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.0.5...v5.1.0) (2023-06-24)
 
 
