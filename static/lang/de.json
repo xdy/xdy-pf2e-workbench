@@ -541,8 +541,8 @@
         "off": "Aus"
       },
       "castPrivateSpellHideName": {
-        "hint": "(Experimentell) Auswählen um den Namen eines privat gewirkten Zaubers zu verstecken.",
-        "name": "... und verstecke den Namen des privat gewirkten Zaubers (Experimentell)."
+        "hint": "Auswählen um den Namen eines privat gewirkten Zaubers während des Schadenswurfes zu verstecken.",
+        "name": "... und verstecke den Namen des privat gewirkten Zaubers im Schadenswurf."
       },
       "autoRollDamageForSpellNotAnAttack": {
         "hint": "Client Einstellung um *immer* normalen Schaden zur würfeln für *nicht-Angriffs* Zauber wenn diese gewirkt werden.",
