@@ -1,14 +1,12 @@
-import { ActorPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ItemPF2e } from "@item";
 import { PredicateField } from "@system/schema-data-fields.ts";
-import type { ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeRuleElement, AELikeSchema, AELikeSource } from "./ae-like.ts";
 import { RuleElementOptions } from "./base.ts";
 import { ResolvableValueField } from "./data.ts";
 declare class AdjustStrikeRuleElement extends AELikeRuleElement<AdjustStrikeSchema> {
     protected static validActorTypes: ActorType[];
-    constructor(data: AdjustStrikeSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: AdjustStrikeSource, options: RuleElementOptions);
     static VALID_PROPERTIES: Set<"traits" | "materials" | "range-increment" | "weapon-traits" | "property-runes">;
     static defineSchema(): AdjustStrikeSchema;
     /** Instead of applying the change directly to a property path, defer it to a synthetic */

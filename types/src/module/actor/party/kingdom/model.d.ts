@@ -1,27 +1,31 @@
-import { KingdomCHG, KingdomGovernment, KingdomSchema, KingdomSource } from "./data.ts";
-import type { PartyPF2e } from "../document.ts";
-import { ModelPropsFromSchema } from "types/foundry/common/data/fields.js";
-import { PartyCampaign } from "../types.ts";
-import { ItemType } from "@item/data/index.ts";
 import { FeatGroup } from "@actor/character/feats.ts";
-import { PartyCampaignSource } from "../data.ts";
+import { ItemType } from "@item/data/index.ts";
+import { Statistic } from "@system/statistic/index.ts";
+import type { PartyPF2e } from "../document.ts";
+import { PartyCampaign } from "../types.ts";
+import { KingdomCHG, KingdomGovernment, KingdomSchema, KingdomSkill, KingdomSource } from "./data.ts";
 declare const DataModel: typeof import("../../../../../types/foundry/common/abstract/data.js").default;
 /** Model for the Kingmaker campaign data type, which represents a Kingdom */
-declare class KingdomModel extends DataModel<null, KingdomSchema> implements PartyCampaign {
-    #private;
-    private actor;
+declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements PartyCampaign {
     feats: FeatGroup<PartyPF2e>;
     bonusFeats: FeatGroup<PartyPF2e>;
+    skills: Record<KingdomSkill, Statistic>;
+    control: Statistic;
     static defineSchema(): KingdomSchema;
+    get actor(): PartyPF2e;
     get extraItemTypes(): ItemType[];
     get charter(): KingdomCHG | null;
     get heartland(): KingdomCHG | null;
     get government(): KingdomGovernment | null;
-    constructor(actor: PartyPF2e, source?: PartyCampaignSource);
+    _initialize(options?: Record<string, unknown>): void;
     /** Creates sidebar buttons to inject into the chat message sidebar */
     createSidebarButtons(): HTMLElement[];
     update(data: DeepPartial<KingdomSource> & Record<string, unknown>): Promise<void>;
+    private prepareAbilityScores;
+    private prepareStatistics;
+    private prepareFeats;
+    getStatistic(slug: string): Statistic | null;
 }
-interface KingdomModel extends ModelPropsFromSchema<KingdomSchema> {
+interface Kingdom extends ModelPropsFromSchema<KingdomSchema> {
 }
-export { KingdomModel };
+export { Kingdom };

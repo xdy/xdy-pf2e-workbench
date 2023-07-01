@@ -23,6 +23,8 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     get linkToActorSize(): boolean;
     /** The ID of the highlight layer for this token */
     get highlightId(): string;
+    /** Short-circuit calculation for long sight ranges */
+    get sightRange(): number;
     isAdjacentTo(token: TokenPF2e): boolean;
     /**
      * Determine whether this token can flank another—given that they have a flanking buddy on the opposite side
@@ -39,10 +41,10 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     protected _drawBar(number: number, bar: PIXI.Graphics, data: TokenResourceData): void;
     /** Draw auras along with effect icons */
     drawEffects(): Promise<void>;
-    /** @fixme */
-    emitHoverIn(): void;
-    /** @fixme */
-    emitHoverOut(): void;
+    /** Emulate a pointer hover ("pointerover") event */
+    emitHoverIn(nativeEvent: MouseEvent | PointerEvent): void;
+    /** Emulate a pointer hover ("pointerout") event */
+    emitHoverOut(nativeEvent: MouseEvent | PointerEvent): void;
     /** If Party Vision is enabled, make all player-owned actors count as vision sources for non-GM users */
     protected _isVisionSource(): boolean;
     /** Include actor overrides in the clone if it is a preview */
@@ -73,8 +75,6 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     /** Refresh vision and the `EffectsPanel` */
     protected _onRelease(options?: Record<string, unknown>): void;
     protected _onDragLeftStart(event: TokenPointerEvent<this>): void;
-    /** If a single token (this one) was dropped, re-establish the hover status */
-    protected _onDragLeftDrop(event: TokenPointerEvent<this>): Promise<this["document"][]>;
     protected _onHoverIn(event: PIXI.FederatedPointerEvent, options?: {
         hoverOutOthers?: boolean;
     }): boolean;

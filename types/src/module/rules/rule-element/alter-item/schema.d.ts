@@ -1,4 +1,4 @@
-import type { ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "../ae-like.ts";
 declare const fields: typeof import("types/foundry/common/data/fields.d.ts");
 declare class ItemAlterationField extends fields.SchemaField<ItemAlterationSchema, SourceFromSchema<ItemAlterationSchema>, ModelPropsFromSchema<ItemAlterationSchema>, true, false, false> {

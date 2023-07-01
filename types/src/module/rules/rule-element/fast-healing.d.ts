@@ -1,6 +1,4 @@
-import { ActorPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ItemPF2e } from "@item";
 import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
 /**
  * Rule element to implement fast healing and regeneration.
@@ -12,7 +10,7 @@ declare class FastHealingRuleElement extends RuleElementPF2e implements FastHeal
     static validActorTypes: ActorType[];
     type: "fast-healing" | "regeneration";
     deactivatedBy: string[];
-    constructor(data: FastHealingSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: FastHealingSource, options: RuleElementOptions);
     get details(): string | null;
     /** Send a message with a "healing" (damage) roll at the start of its turn */
     onTurnStart(): Promise<void>;

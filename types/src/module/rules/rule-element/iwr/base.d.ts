@@ -1,14 +1,12 @@
-import { ActorPF2e } from "@actor";
 import { IWRSource, ImmunityData, ResistanceData, WeaknessData } from "@actor/data/iwr.ts";
-import { ItemPF2e } from "@item";
-import type { ArrayField, BooleanField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "../ae-like.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource, RuleValue } from "../index.ts";
 /** @category RuleElement */
 declare abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema> {
     #private;
     abstract value: RuleValue;
-    constructor(data: IWRRuleElementSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: IWRRuleElementSource, options: RuleElementOptions);
     static get dictionary(): Record<string, string | undefined>;
     static defineSchema(): IWRRuleSchema;
     static validateJoint(source: SourceFromSchema<IWRRuleSchema>): void;
@@ -35,4 +33,4 @@ interface IWRRuleElementSource extends RuleElementSource {
     exceptions?: unknown;
     override?: unknown;
 }
-export { IWRRuleElement, IWRRuleSchema, IWRRuleElementSource };
+export { IWRRuleElement, IWRRuleElementSource, IWRRuleSchema };

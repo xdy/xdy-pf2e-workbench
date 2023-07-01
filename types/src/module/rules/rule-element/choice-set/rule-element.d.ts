@@ -1,7 +1,4 @@
-import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
-import type { ModelPropsFromSchema } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementOptions, RuleElementPF2e } from "../index.ts";
 import { ChoiceSetData, ChoiceSetPackQuery, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet } from "./data.ts";
 /**
@@ -16,7 +13,7 @@ declare class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
     containsItems: boolean;
     /** The user's selection from among the options in `choices`, or otherwise `null` */
     selection: string | number | object | null;
-    constructor(data: ChoiceSetSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: ChoiceSetSource, options: RuleElementOptions);
     static defineSchema(): ChoiceSetSchema;
     /**
      * Adjust the effect's name and set the targetId from the user's selection, or set the entire rule element to be

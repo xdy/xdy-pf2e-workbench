@@ -5,6 +5,7 @@ import type { ResilientRuneType } from "@item/armor/types.ts";
 import type { OtherWeaponTag, StrikingRuneType, WeaponPropertyRuneType, WeaponTrait } from "@item/weapon/types.ts";
 import { OneToFour, OneToThree, Rarity, ZeroToFour, ZeroToThree } from "@module/data.ts";
 import { RollNoteSource } from "@module/notes.ts";
+import { StrikeAdjustment } from "@module/rules/synthetics.ts";
 import { RawPredicate } from "@system/predication.ts";
 declare function getPropertySlots(item: WeaponPF2e | ArmorPF2e): ZeroToFour;
 declare function getPropertyRunes(item: WeaponPF2e | ArmorPF2e, slots: number): string[];
@@ -40,6 +41,7 @@ interface WeaponPropertyRuneData {
             max: number | null;
         }[];
     };
+    strikeAdjustments?: StrikeAdjustment[];
     level: number;
     name: string;
     price: number;
@@ -55,7 +57,8 @@ interface RuneNoteData extends Pick<RollNoteSource, "outcome" | "predicate" | "t
 }
 export declare const WEAPON_PROPERTY_RUNES: Record<WeaponPropertyRuneType, WeaponPropertyRuneData>;
 declare function getPropertyRuneDice(runes: WeaponPropertyRuneType[]): DamageDicePF2e[];
-declare function getPropertyRuneAdjustments(runes: WeaponPropertyRuneType[]): ModifierAdjustment[];
+declare function getPropertyRuneStrikeAdjustments(runes: WeaponPropertyRuneType[]): StrikeAdjustment[];
+declare function getPropertyRuneModifierAdjustments(runes: WeaponPropertyRuneType[]): ModifierAdjustment[];
 interface RuneValuationData {
     level: number;
     price: number;
@@ -72,4 +75,4 @@ interface WeaponValuationData {
     } & Record<OneToThree, RuneValuationData>;
 }
 declare const WEAPON_VALUATION_DATA: WeaponValuationData;
-export { RuneValuationData, WEAPON_VALUATION_DATA, WeaponPropertyRuneData, getPropertyRuneAdjustments, getPropertyRuneDice, getPropertyRunes, getPropertySlots, getResilientBonus, getStrikingDice, };
+export { getPropertyRuneDice, getPropertyRuneModifierAdjustments, getPropertyRunes, getPropertyRuneStrikeAdjustments, getPropertySlots, getResilientBonus, getStrikingDice, RuneValuationData, WEAPON_VALUATION_DATA, WeaponPropertyRuneData, };

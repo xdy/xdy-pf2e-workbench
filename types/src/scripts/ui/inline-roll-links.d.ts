@@ -9,4 +9,5 @@ export declare const InlineRollLinks: {
     repostAction: (target: HTMLElement, foundryDoc?: ActorPF2e | JournalEntry | JournalEntryPage<JournalEntry> | null) => void;
     /** Give inline damage-roll links from items flavor text of the item name */
     flavorDamageRolls(html: HTMLElement, actor?: ActorPF2e | null): void;
+    _documentFromDOM: (html: HTMLElement, foundryDoc?: ClientDocument) => ActorPF2e | JournalEntry | JournalEntryPage<JournalEntry> | null;
 };

@@ -1,9 +1,9 @@
 import { ActorSystemSource } from "@actor/data/base.ts";
+import { ItemSourcePF2e } from "@item/data/index.ts";
 import { TokenDocumentPF2e } from "./document.ts";
 declare class ActorDeltaPF2e<TParent extends TokenDocumentPF2e | null> extends ActorDelta<TParent> {
-    _initialize(options?: Record<string, unknown>): void;
     prepareData(): void;
-    /** Prevent data preparation of embedded documents shared with linked actor */
+    /** The delta has no business preparing its items */
     prepareEmbeddedDocuments(): void;
     /** Following synthetic actor  updates, send the `Token` a fake update notification to trigger redraws */
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, userId: string): void;
@@ -11,9 +11,10 @@ declare class ActorDeltaPF2e<TParent extends TokenDocumentPF2e | null> extends A
     _dispatchDescendantDocumentEvents(event: string, collection: string, args: [object[], ...unknown[]], parent: ClientDocument | undefined): void;
 }
 interface ActorDeltaPF2e<TParent extends TokenDocumentPF2e | null> extends ActorDelta<TParent> {
-    _source: {
-        name: string | null;
-        system: ActorSystemSource;
-    };
+    readonly _source: ActorDeltaSourcePF2e<TParent>;
 }
+type ActorDeltaSourcePF2e<TParent extends TokenDocumentPF2e | null> = ActorDelta<TParent>["_source"] & {
+    system: ActorSystemSource | null;
+    items: ItemSourcePF2e[] | null;
+};
 export { ActorDeltaPF2e };

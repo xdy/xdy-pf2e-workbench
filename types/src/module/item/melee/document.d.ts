@@ -26,6 +26,7 @@ declare class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get dealsDamage(): boolean;
     /** Additional effects that are part of this attack */
     get attackEffects(): string[];
+    get isMagical(): boolean;
     /** The linked inventory weapon, if this melee item was spawned from one */
     get linkedWeapon(): WeaponPF2e<ActorPF2e> | null;
     protected _initialize(options?: Record<string, unknown>): void;

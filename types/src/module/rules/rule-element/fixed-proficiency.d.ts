@@ -1,8 +1,7 @@
-import { ActorPF2e, CharacterPF2e } from "@actor";
+import { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ItemPF2e } from "@item";
-import { RuleElementPF2e, RuleElementSource } from "./index.ts";
 import { RuleElementOptions } from "./base.ts";
+import { RuleElementPF2e, RuleElementSource } from "./index.ts";
 /**
  * @category RuleElement
  */
@@ -11,7 +10,7 @@ declare class FixedProficiencyRuleElement extends RuleElementPF2e {
     slug: string;
     private selector;
     private ability;
-    constructor(data: FixedProficiencySource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: FixedProficiencySource, options: RuleElementOptions);
     beforePrepareData(): void;
     afterPrepareData(): void;
 }

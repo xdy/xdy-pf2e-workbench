@@ -11,6 +11,7 @@ declare class VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocume
     get allowedItemTypes(): (ItemType | "physical")[];
     /** Vehicle dimensions are specified for all three axes and usually do not form cubes */
     get dimensions(): ActorDimensions;
+    get hardness(): number;
     getTokenDimensions(dimensions?: Omit<ActorDimensions, "height">): TokenDimensions;
     prepareBaseData(): void;
     prepareEmbeddedDocuments(): void;

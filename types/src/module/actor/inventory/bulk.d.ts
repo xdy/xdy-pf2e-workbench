@@ -3,6 +3,7 @@ import { PhysicalItemPF2e } from "@item";
 import { Bulk } from "@item/physical/bulk.ts";
 import { Size } from "@module/data.ts";
 export declare class InventoryBulk {
+    #private;
     /** The current bulk carried by the actor */
     value: Bulk;
     /** The number of Bulk units the actor is encumbered at */
@@ -17,6 +18,4 @@ export declare class InventoryBulk {
     get isOverMax(): boolean;
     get bulk(): number;
     static computeTotalBulk(items: PhysicalItemPF2e[], actorSize: Size): Bulk;
-    /** Non-stowing containers are not "real" and thus shouldn't split stack groups */
-    private static flattenNonStowing;
 }

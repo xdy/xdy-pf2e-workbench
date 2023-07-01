@@ -242,15 +242,15 @@ interface Rollable {
     roll: RollFunction;
 }
 interface PrototypeTokenSourcePF2e extends foundry.data.PrototypeTokenSource {
-    flags: foundry.data.PrototypeToken["flags"] & {
+    flags: foundry.data.PrototypeToken<ActorPF2e>["flags"] & {
         pf2e?: {
             linkToActorSize?: boolean;
             autoscale?: boolean;
         };
     };
 }
-interface PrototypeTokenPF2e extends foundry.data.PrototypeToken {
-    flags: foundry.data.PrototypeToken["flags"] & {
+interface PrototypeTokenPF2e<TParent extends ActorPF2e | null> extends foundry.data.PrototypeToken<TParent> {
+    flags: foundry.data.PrototypeToken<NonNullable<TParent>>["flags"] & {
         pf2e: {
             linkToActorSize: boolean;
             autoscale: boolean;

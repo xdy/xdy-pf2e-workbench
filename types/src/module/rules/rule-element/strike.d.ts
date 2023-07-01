@@ -1,12 +1,11 @@
-import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
+import { CharacterPF2e, NPCPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ItemPF2e } from "@item";
+import { AbilityString } from "@actor/types.ts";
 import { NPCAttackTrait } from "@item/melee/data.ts";
 import { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
-import type { ArrayField, BooleanField, FilePathField, ModelPropsFromSchema, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, BooleanField, FilePathField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
-import { AbilityString } from "@actor/types.ts";
 /**
  * Create an ephemeral strike on an actor
  * @category RuleElement
@@ -14,7 +13,7 @@ import { AbilityString } from "@actor/types.ts";
 declare class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     #private;
     protected static validActorTypes: ActorType[];
-    constructor(source: StrikeSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(source: StrikeSource, options: RuleElementOptions);
     static defineSchema(): StrikeSchema;
     /** Allow shorthand `fist` StrikeRuleElement data to pass `DataModel` validation */
     validate(options?: {
@@ -26,7 +25,7 @@ declare class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
         joint?: boolean;
     }): boolean;
     /** Keep shorthand `fist` source data to its minimum form */
-    protected _initializeSource(source: object, options?: DataModelConstructionOptions<null>): this["_source"];
+    protected _initializeSource(source: object, options: RuleElementOptions): this["_source"];
     protected _initialize(options?: Record<string, unknown>): void;
     /** Temporary workaround until real migration */
     static migrateData<TSource extends {
@@ -65,6 +64,11 @@ type StrikeSchema = RuleElementSchema & {
         versatile: DamageType | null;
     }, true, false, true>;
     otherTags: ArrayField<StringField<OtherWeaponTag, OtherWeaponTag, true, false, false>, OtherWeaponTag[], OtherWeaponTag[], false, false, true>;
+    /**
+     * A fixed attack modifier: usable only if the strike is generated for an NPC
+     * Also causes the damage to not be recalculated when converting the resulting weapon to an NPC attack
+     */
+    attackModifier: NumberField<number, number, false, true, true>;
     range: SchemaField<{
         increment: NumberField<number, number, true, false, true>;
         max: NumberField<number, number, false, true, true>;

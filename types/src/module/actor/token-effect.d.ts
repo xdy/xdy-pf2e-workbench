@@ -1,10 +1,17 @@
+import { AbstractEffectPF2e } from "@item";
+import { ActorPF2e } from "./base.ts";
 export declare class TokenEffect implements TemporaryEffect {
-    disabled: boolean;
-    icon: ImageFilePath;
-    tint?: string;
-    statuses: Set<string>;
+    #private;
+    tint: HexColorString | null;
     readonly isTemporary = true;
-    readonly flags: Record<string, Record<string, string | boolean | undefined>>;
-    constructor(icon: ImageFilePath, overlay?: boolean, tint?: string | null | undefined);
-    getFlag(scope: string, flag: string): string | boolean | undefined;
+    constructor(effect: AbstractEffectPF2e<ActorPF2e>);
+    get parent(): ActorPF2e;
+    get name(): string;
+    get icon(): ImageFilePath;
+    get description(): string;
+    get flags(): DocumentFlags;
+    get statuses(): Set<string>;
+    get disabled(): boolean;
+    get duration(): PreparedEffectDurationData;
+    getFlag(scope: string, flag: string): unknown;
 }

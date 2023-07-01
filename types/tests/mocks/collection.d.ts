@@ -12,6 +12,7 @@ export declare class MockCollection<V> {
     find(predicate: (value: V) => boolean): V | undefined;
     some(predicate: (value: V) => boolean): boolean;
     filter(predicate: (value: V) => boolean): V[];
+    map<T>(callback: (value: V) => T): T[];
     delete(key: string): boolean;
     clear(): void;
 }

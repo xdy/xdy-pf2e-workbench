@@ -19,13 +19,9 @@ interface BattleFormOverrides {
     traits?: CreatureTrait[];
     armorClass?: BattleFormAC;
     tempHP?: number | null;
-    senses?: {
-        [K in SenseType]?: BattleFormSense;
-    };
+    senses?: BattleFormSenses;
     size?: Size | null;
-    speeds?: {
-        [K in MovementType]?: number;
-    };
+    speeds?: BattleFormSpeeds;
     skills?: BattleFormSkills;
     strikes?: Record<string, BattleFormStrike>;
     immunities?: Omit<ImmunityRuleElement["_source"], "key">[];
@@ -45,8 +41,14 @@ interface BattleFormSkill {
     modifier: string | number;
     ownIfHigher?: boolean;
 }
+type BattleFormSenses = {
+    [K in SenseType]?: BattleFormSense;
+};
 type BattleFormSkills = {
     [K in SkillAbbreviation]?: BattleFormSkill;
+};
+type BattleFormSpeeds = {
+    [K in MovementType]?: number;
 };
 interface BattleFormStrike {
     label: string;
@@ -68,4 +70,4 @@ interface BattleFormStrikeQuery {
     modifier: number;
     ownIfHigher: boolean;
 }
-export { BattleFormAC, BattleFormOverrides, BattleFormSkills, BattleFormSource, BattleFormStrike, BattleFormStrikeQuery, };
+export { BattleFormAC, BattleFormOverrides, BattleFormSenses, BattleFormSkills, BattleFormSource, BattleFormSpeeds, BattleFormStrike, BattleFormStrikeQuery, };

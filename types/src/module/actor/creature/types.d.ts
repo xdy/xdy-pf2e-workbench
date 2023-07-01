@@ -16,10 +16,6 @@ interface GetReachParameters {
     action?: "interact" | "attack";
     weapon?: WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e> | null;
 }
-interface IsFlatFootedParams {
-    /** The circumstance potentially imposing the flat-footed condition */
-    dueTo: "flanking" | "surprise" | "hidden" | "undetected";
-}
 interface CreatureUpdateContext<TParent extends TokenDocumentPF2e | null> extends ActorUpdateContext<TParent> {
     allowHPOverage?: boolean;
 }
@@ -56,4 +52,4 @@ interface CreatureSheetData<TActor extends CreaturePF2e> extends ActorSheetDataP
         remainingWounded: number;
     };
 }
-export { Alignment, AlignmentTrait, CreatureSheetData, CreatureTrait, CreatureUpdateContext, GetReachParameters, IsFlatFootedParams, ModeOfBeing, };
+export { Alignment, AlignmentTrait, CreatureSheetData, CreatureTrait, CreatureUpdateContext, GetReachParameters, ModeOfBeing, };

@@ -12,9 +12,9 @@ declare const DamageCategorization: {
     /** Map a damage type to its corresponding damage category, if any. */
     readonly fromDamageType: (damageType: DamageType) => DamageCategory | null;
     /** Get a set of all damage categories (both base and custom). */
-    readonly allCategories: () => Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "warpglass" | "precision" | "splash" | "abysium" | "cold-iron" | "djezet" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "persistent" | "alignment" | null>;
+    readonly allCategories: () => Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "warpglass" | "precision" | "splash" | "abysium" | "cold-iron" | "djezet" | "keep-stone" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "persistent" | "alignment" | null>;
     /** Get a set of all of the base rule damage types. */
-    readonly baseCategories: () => Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "warpglass" | "precision" | "splash" | "abysium" | "cold-iron" | "djezet" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "persistent" | "alignment" | null>;
+    readonly baseCategories: () => Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "warpglass" | "precision" | "splash" | "abysium" | "cold-iron" | "djezet" | "keep-stone" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "persistent" | "alignment" | null>;
     /** Map a damage category to the set of damage types in it. */
     readonly toDamageTypes: (category: string) => Set<string>;
 };

@@ -8,6 +8,7 @@ import { UserPF2e } from "@module/user/index.ts";
 import { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
 import { ChatMessageFlagsPF2e, ChatMessageSourcePF2e } from "./data.ts";
 declare class ChatMessagePF2e extends ChatMessage {
+    #private;
     /** The chat log doesn't wait for data preparation before rendering, so set some data in the constructor */
     constructor(data?: DeepPartial<ChatMessageSourcePF2e>, context?: DocumentConstructionContext<null>);
     /** Is this a damage (or a manually-inputed non-D20) roll? */
@@ -38,9 +39,6 @@ declare class ChatMessagePF2e extends ChatMessage {
     get token(): TokenDocumentPF2e<ScenePF2e> | null;
     getRollData(): Record<string, unknown>;
     getHTML(): Promise<JQuery>;
-    private onHoverIn;
-    private onHoverOut;
-    private onClickSender;
     protected _onCreate(data: this["_source"], options: DocumentModificationContext<null>, userId: string): void;
 }
 interface ChatMessagePF2e extends ChatMessage {

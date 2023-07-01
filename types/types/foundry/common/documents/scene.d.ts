@@ -1,5 +1,5 @@
 import type { Document, DocumentMetadata, EmbeddedCollection } from "../abstract/module.d.ts";
-import type { AmbientLightSource } from "./ambient-light.d.ts";
+import type { AmbientLightSchema } from "./ambient-light.d.ts";
 import type { AmbientSoundSource } from "./ambient-sound.d.ts";
 import type { DrawingSource } from "./drawing.d.ts";
 import type { MeasuredTemplateSource } from "./measured-template.d.ts";
@@ -26,6 +26,7 @@ import type { WallSource } from "./wall.d.ts";
  * @property data The constructed data object for the document.
  */
 export default class BaseScene extends Document<null> {
+    name: string;
     active: boolean;
     background: foundry.data.TextureData;
     grid: GridData;
@@ -129,7 +130,7 @@ export interface SceneSource {
     // Embedded Collections
     drawings: DrawingSource[];
     tokens: TokenSource[];
-    lights: AmbientLightSource[];
+    lights: SourceFromSchema<AmbientLightSchema>[];
     notes: NoteSource[];
     sounds: AmbientSoundSource[];
     templates: MeasuredTemplateSource[];
@@ -170,14 +171,14 @@ export interface SceneMetadata extends DocumentMetadata {
     label: "DOCUMENT.Scene";
     isPrimary: true;
     embedded: {
-        AmbientLight: typeof BaseAmbientLight;
-        AmbientSound: typeof BaseAmbientSound;
-        Drawing: typeof BaseDrawing;
-        MeasuredTemplate: typeof BaseMeasuredTemplate;
-        Note: typeof BaseNote;
-        Tile: typeof BaseTile;
-        Token: typeof BaseToken;
-        Wall: typeof BaseWall;
+        AmbientLight: "lights";
+        AmbientSound: "sounds";
+        Drawing: "drawings";
+        MeasuredTemplate: "templates";
+        Note: "notes";
+        Tile: "tiles";
+        Token: "tokens";
+        Wall: "walls";
     };
 }
 

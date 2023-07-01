@@ -22,7 +22,7 @@ interface PhysicalItemSheetData<TItem extends PhysicalItemPF2e> extends ItemShee
     frequencies: ConfigPF2e["PF2E"]["frequencies"];
     sizes: ConfigPF2e["PF2E"]["actorSizes"];
     stackGroups: ConfigPF2e["PF2E"]["stackGroups"];
-    usage: ConfigPF2e["PF2E"]["usageTraits"];
+    usages: ConfigPF2e["PF2E"]["usages"];
     bulkDisabled: boolean;
     activations: {
         action: ItemActivation;

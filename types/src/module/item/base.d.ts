@@ -54,7 +54,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     prepareData(): void;
     /** Ensure the presence of the pf2e flag scope with default properties and values */
     prepareBaseData(): void;
-    prepareRuleElements(this: ItemPF2e<ActorPF2e>, options?: RuleElementOptions): RuleElementPF2e[];
+    prepareRuleElements(this: ItemPF2e<ActorPF2e>, options?: Omit<RuleElementOptions, "parent">): RuleElementPF2e[];
     /** Pull the latest system data from the source compendium and replace this item's with it */
     refreshFromCompendium(): Promise<void>;
     getOriginData(): ItemOriginFlag;

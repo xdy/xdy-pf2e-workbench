@@ -1,9 +1,7 @@
-import { ActorPF2e } from "@actor";
 import { ModifierType } from "@actor/modifiers.ts";
 import { AbilityString } from "@actor/types.ts";
-import { ItemPF2e } from "@item";
 import { DamageCategoryUnique } from "@system/damage/types.ts";
-import type { ArrayField, BooleanField, ModelPropsFromSchema, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField, RuleValue } from "./data.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 /**
@@ -11,7 +9,7 @@ import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSour
  * @category RuleElement
  */
 declare class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
-    constructor(source: FlatModifierSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(source: FlatModifierSource, options: RuleElementOptions);
     static validateJoint(data: SourceFromSchema<FlatModifierSchema>): void;
     static defineSchema(): FlatModifierSchema;
     get selectors(): string[];

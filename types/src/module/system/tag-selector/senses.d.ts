@@ -8,7 +8,7 @@ export declare class SenseSelector<TActor extends ActorPF2e> extends BaseTagSele
     protected objectProperty: string;
     static get defaultOptions(): FormApplicationOptions;
     protected get configTypes(): readonly SelectableTagField[];
-    getData(): Promise<SenseSelectorData<TActor>>;
+    getData(options?: FormApplicationOptions): Promise<SenseSelectorData<TActor>>;
     activateListeners($html: JQuery): void;
     protected _updateObject(_event: Event, formData: SenseFormData): Promise<void>;
 }
@@ -21,6 +21,7 @@ interface SenseChoiceData {
     selected: boolean;
     disabled: boolean;
     acuity: string;
+    mandatoryAcuity: boolean;
     label: string;
     value: string;
 }

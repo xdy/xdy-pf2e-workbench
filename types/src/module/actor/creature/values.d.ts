@@ -10,4 +10,12 @@ declare const SIZE_TO_REACH: {
     huge: number;
     grg: number;
 };
-export { ALIGNMENTS, ALIGNMENT_TRAITS, ALLIANCES, SIZE_TO_REACH };
+/** Sense types associated with a particular acuities by definition */
+declare const SENSES_WITH_MANDATORY_ACUITIES: {
+    readonly darkvision: "precise";
+    readonly heatsight: "precise";
+    readonly greaterDarkvision: "precise";
+    readonly lowLightVision: "precise";
+    readonly seeInvisibility: "precise";
+};
+export { ALIGNMENTS, ALIGNMENT_TRAITS, ALLIANCES, SENSES_WITH_MANDATORY_ACUITIES, SIZE_TO_REACH };

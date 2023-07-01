@@ -11,14 +11,15 @@ interface TagSelectorOptions extends FormApplicationOptions {
     customChoices?: Record<string, string>;
 }
 declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e> extends FormApplication<TDocument> {
+    static get defaultOptions(): TagSelectorOptions;
     choices: Record<string, string>;
     /** The object path to the property containing the tags */
     protected abstract objectProperty: string;
     /** Whether the tags are in an object containing a `value` array property or just an array by its lonesome */
     flat: boolean;
     constructor(object: TDocument, options?: Partial<TagSelectorOptions>);
+    get id(): string;
     protected abstract get configTypes(): readonly SelectableTagField[];
-    static get defaultOptions(): TagSelectorOptions;
     protected abstract _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
     activateListeners($html: JQuery): void;
     /**

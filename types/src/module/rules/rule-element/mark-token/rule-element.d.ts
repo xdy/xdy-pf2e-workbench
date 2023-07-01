@@ -1,5 +1,3 @@
-import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "../index.ts";
 /** Remember a token for later referencing */
 declare class MarkTokenRuleElement extends RuleElementPF2e {
@@ -8,7 +6,7 @@ declare class MarkTokenRuleElement extends RuleElementPF2e {
     slug: string;
     /** The uuid of the token */
     tokenUUID: string | null;
-    constructor(data: MarkTokenSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: MarkTokenSource, options: RuleElementOptions);
     preCreate({ ruleSource, itemSource, pendingItems }: RuleElementPF2e.PreCreateParams): Promise<void>;
     beforePrepareData(): void;
 }

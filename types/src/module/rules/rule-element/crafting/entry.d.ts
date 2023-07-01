@@ -1,30 +1,43 @@
-import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from "../index.ts";
-import { ActorPF2e, CharacterPF2e } from "@actor";
+import { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ItemPF2e } from "@item";
-import { RawPredicate } from "@system/predication.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "../index.ts";
+import type { ArrayField, BooleanField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { PredicateField } from "@system/schema-data-fields.ts";
+import { ResolvableValueField } from "../data.ts";
 /**
  * @category RuleElement
  */
-declare class CraftingEntryRuleElement extends RuleElementPF2e {
+declare class CraftingEntryRuleElement extends RuleElementPF2e<CraftingEntryRuleSchema> {
     protected static validActorTypes: ActorType[];
-    private selector;
-    constructor(data: CraftingEntryRuleSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    static defineSchema(): CraftingEntryRuleSchema;
+    constructor(data: CraftingEntryRuleSource, options: RuleElementOptions);
     beforePrepareData(): void;
 }
-interface CraftingEntryRuleElement extends RuleElementPF2e {
-    data: CraftingEntryRuleData;
+interface CraftingEntryRuleElement extends RuleElementPF2e<CraftingEntryRuleSchema>, ModelPropsFromSchema<CraftingEntryRuleSchema> {
     get actor(): CharacterPF2e;
 }
-interface CraftingEntryRuleData extends RuleElementData {
-    isAlchemical?: boolean;
-    isDailyPrep?: boolean;
-    isPrepared?: boolean;
-    maxItemLevel?: number;
-    maxSlots?: number;
-    craftableItems?: RawPredicate;
-    preparedFormulas?: PreparedFormulaData[];
-}
+type CraftingEntryRuleSchema = RuleElementSchema & {
+    selector: StringField<string, string, true, false, false>;
+    isAlchemical: BooleanField<boolean, boolean, false, false, false>;
+    isDailyPrep: BooleanField<boolean, boolean, false, false, false>;
+    isPrepared: BooleanField<boolean, boolean, false, false, false>;
+    maxItemLevel: ResolvableValueField<false, false, true>;
+    maxSlots: NumberField<number, number, false, false, false>;
+    craftableItems: PredicateField<false, false, false>;
+    preparedFormulas: ArrayField<SchemaField<PreparedFormulaSchema>>;
+};
+type PreparedFormulaSchema = {
+    itemUUID: StringField<string, string, true, false, false>;
+    quantity: NumberField<number, number, false, false, false>;
+    sort: NumberField<number, number, false, false, false>;
+    expended: BooleanField<boolean, boolean, false, false, false>;
+    isSignatureItem: BooleanField<boolean, boolean, false, false, false>;
+};
+type CraftingEntryRuleData = Omit<SourceFromSchema<CraftingEntryRuleSchema>, "preparedFormulas"> & {
+    preparedFormulas: (Partial<SourceFromSchema<PreparedFormulaSchema>> & {
+        itemUUID: string;
+    })[];
+};
 interface CraftingEntryRuleSource extends RuleElementSource {
     selector?: unknown;
     name?: unknown;
@@ -35,11 +48,5 @@ interface CraftingEntryRuleSource extends RuleElementSource {
     maxSlots?: unknown;
     craftableItems?: unknown;
     preparedFormulas?: unknown;
-}
-interface PreparedFormulaData {
-    itemUUID: string;
-    quantity?: number;
-    expended?: boolean;
-    isSignatureItem?: boolean;
 }
 export { CraftingEntryRuleData, CraftingEntryRuleElement, CraftingEntryRuleSource };

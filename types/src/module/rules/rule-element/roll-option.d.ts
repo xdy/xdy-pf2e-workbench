@@ -1,9 +1,7 @@
-import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
 import { PredicateField } from "@system/schema-data-fields.ts";
-import type { ArrayField, BooleanField, ModelPropsFromSchema, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import type { ArrayField, BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField } from "./data.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 /**
  * Set a roll option at a specificed domain
  * @category RuleElement
@@ -15,7 +13,7 @@ declare class RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema> {
      * if the Theather of the Mind Toggles setting is enabled
      */
     toggleable: boolean | "totm";
-    constructor(source: RollOptionSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(source: RollOptionSource, options: RuleElementOptions);
     static defineSchema(): RollOptionSchema;
     static validateJoint(source: SourceFromSchema<RollOptionSchema>): void;
     onApplyActiveEffects(): void;

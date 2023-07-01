@@ -1,14 +1,12 @@
-import { ActorPF2e } from "@actor/base.ts";
-import { ItemPF2e } from "@item";
-import type { ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField } from "./data.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 /**
  * Make a numeric modification to an arbitrary property in a similar way as `ActiveEffect`s
  * @category RuleElement
  */
 declare class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TSchema> {
-    constructor(data: AELikeSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: AELikeSource, options: RuleElementOptions);
     static defineSchema(): AELikeSchema;
     /** Change modes and their default priority orders */
     static CHANGE_MODES: {

@@ -1,16 +1,7 @@
 import type { Document, DataModel } from "../abstract/module.d.ts";
 import type { BaseActor } from "../documents/module.d.ts";
 import type { TokenBarData, TokenSource } from "../documents/token.d.ts";
-import type {
-    AlphaField,
-    AngleField,
-    BooleanField,
-    ColorField,
-    ModelPropsFromSchema,
-    NumberField,
-    SchemaField,
-    StringField,
-} from "./fields.d.ts";
+import type * as fields from "./fields.d.ts";
 
 /**
  * An embedded data object which defines the properties of a light source animation
@@ -66,26 +57,26 @@ export interface LightData
 export type LightSource = SourceFromSchema<LightDataSchema>;
 
 type LightDataSchema = {
-    alpha: AlphaField;
-    angle: AngleField;
-    bright: NumberField<number, number, true, false, true>;
-    color: ColorField;
-    coloration: NumberField<number, number, true>;
-    dim: NumberField<number, number, true>;
-    attenuation: NumberField<number, number, true>;
-    luminosity: NumberField<number, number, true, false, true>;
-    saturation: NumberField<number, number, true, false, true>;
-    constrast: NumberField<number, number, true, false, true>;
-    shadows: NumberField<number, number, true, false, true>;
-    animation: SchemaField<{
-        type: StringField<string, string, true, true, true>;
-        speed: NumberField<number, number, true>;
-        intensity: NumberField<number, number, true>;
-        reverse: BooleanField;
+    alpha: fields.AlphaField;
+    angle: fields.AngleField;
+    bright: fields.NumberField<number, number, true, false, true>;
+    color: fields.ColorField;
+    coloration: fields.NumberField<number, number, true>;
+    dim: fields.NumberField<number, number, true>;
+    attenuation: fields.NumberField<number, number, true>;
+    luminosity: fields.NumberField<number, number, true, false, true>;
+    saturation: fields.NumberField<number, number, true, false, true>;
+    contrast: fields.NumberField<number, number, true, false, true>;
+    shadows: fields.NumberField<number, number, true, false, true>;
+    animation: fields.SchemaField<{
+        type: fields.StringField<string, string, true, true, true>;
+        speed: fields.NumberField<number, number, true>;
+        intensity: fields.NumberField<number, number, true>;
+        reverse: fields.BooleanField;
     }>;
-    darkness: SchemaField<{
-        min: AlphaField;
-        speed: AlphaField;
+    darkness: fields.SchemaField<{
+        min: fields.AlphaField;
+        speed: fields.AlphaField;
     }>;
 };
 
@@ -98,7 +89,9 @@ export interface PrototypeTokenSource
     randomImg: boolean;
 }
 
-export class PrototypeToken<TParent extends BaseActor = BaseActor> extends Document {
+export class PrototypeToken<TParent extends BaseActor | null> extends Document<TParent> {
+    get actor(): TParent;
+
     protected override _initialize(): void;
 
     override toJSON(): RawObject<this>;
@@ -110,7 +103,9 @@ export class PrototypeToken<TParent extends BaseActor = BaseActor> extends Docum
     bar2: TokenBarData;
 }
 
-export interface PrototypeToken extends Omit<PrototypeTokenSource, "bar1" | "bar2"> {
+export interface PrototypeToken<TParent extends BaseActor | null>
+    extends Document<TParent>,
+        Omit<PrototypeTokenSource, "bar1" | "bar2"> {
     readonly _source: PrototypeTokenSource;
 }
 

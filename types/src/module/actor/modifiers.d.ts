@@ -68,6 +68,9 @@ interface DeferredValueParams {
     /** Roll Options to get against a predicate (if available) */
     test?: string[] | Set<string>;
 }
+interface TestableDeferredValueParams extends DeferredValueParams {
+    test: Set<string>;
+}
 type DeferredValue<T> = (options?: DeferredValueParams) => T | null;
 type DeferredPromise<T> = (options?: DeferredValueParams) => Promise<T | null>;
 /** Represents a discrete modifier, bonus, or penalty, to a statistic or check. */
@@ -276,4 +279,4 @@ declare class DamageDicePF2e extends DiceModifierPF2e {
     toObject(): RawDamageDice;
 }
 type RawDamageDice = Required<DamageDiceParameters>;
-export { BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, DiceModifierPF2e, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, RawModifier, StatisticModifier, adjustModifiers, applyStackingRules, createAbilityModifier, createProficiencyModifier, ensureProficiencyOption, };
+export { BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, DiceModifierPF2e, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, RawModifier, StatisticModifier, TestableDeferredValueParams, adjustModifiers, applyStackingRules, createAbilityModifier, createProficiencyModifier, ensureProficiencyOption, };

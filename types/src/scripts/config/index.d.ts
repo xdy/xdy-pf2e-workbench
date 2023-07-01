@@ -137,7 +137,7 @@ export declare const PF2ECONFIG: {
         cp: string;
     };
     preciousMaterialGrades: Record<"low" | "standard" | "high", string>;
-    preciousMaterials: Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>;
+    preciousMaterials: Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "keep-stone" | "noqual" | "peachwood" | "siccatite" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>;
     armorPotencyRunes: {
         "1": string;
         "2": string;
@@ -218,12 +218,15 @@ export declare const PF2ECONFIG: {
         anarchic: string;
         ancestralEchoing: string;
         anchoring: string;
+        ashen: string;
         authorized: string;
         axiomatic: string;
         bane: string;
         bloodbane: string;
         bloodthirsty: string;
         brilliant: string;
+        called: string;
+        coating: string;
         conducting: string;
         corrosive: string;
         crushing: string;
@@ -237,9 +240,11 @@ export declare const PF2ECONFIG: {
         fanged: string;
         fearsome: string;
         flaming: string;
+        flurrying: string;
         frost: string;
         ghostTouch: string;
         greaterAnchoring: string;
+        greaterAshen: string;
         greaterBloodbane: string;
         greaterBrilliant: string;
         greaterCorrosive: string;
@@ -259,9 +264,11 @@ export declare const PF2ECONFIG: {
         holy: string;
         hopeful: string;
         impactful: string;
+        impossible: string;
         keen: string;
         kinWarding: string;
         majorFanged: string;
+        merciful: string;
         pacifying: string;
         returning: string;
         serrating: string;
@@ -269,6 +276,7 @@ export declare const PF2ECONFIG: {
         shock: string;
         speed: string;
         spellStoring: string;
+        swarming: string;
         thundering: string;
         unholy: string;
         wounding: string;
@@ -312,6 +320,7 @@ export declare const PF2ECONFIG: {
         abysium: string;
         "cold-iron": string;
         djezet: string;
+        "keep-stone": string;
         noqual: string;
         peachwood: string;
         "sisterstone-dusk": string;
@@ -321,7 +330,7 @@ export declare const PF2ECONFIG: {
         splash: string;
         persistent: string;
     };
-    materialDamageEffects: Pick<Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "noqual" | "peachwood" | "siccatite" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>, "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel">;
+    materialDamageEffects: Pick<Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "keep-stone" | "noqual" | "peachwood" | "siccatite" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>, "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "keep-stone" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel">;
     resistanceTypes: {
         acid: string;
         adamantine: string;
@@ -489,7 +498,7 @@ export declare const PF2ECONFIG: {
         sling: string;
         bomb: string;
     };
-    usageTraits: {
+    usages: {
         "affixed-to-a-creature": string;
         "affixed-to-a-magical-staff": string;
         "affixed-to-a-ranged-weapon": string;
@@ -881,6 +890,7 @@ export declare const PF2ECONFIG: {
         "scatter-5": string;
         "scatter-10": string;
         "scatter-15": string;
+        "scatter-20": string;
         scrying: string;
         shadow: string;
         shove: string;
@@ -1323,6 +1333,11 @@ export declare const PF2ECONFIG: {
     actionTraits: {
         circus: string;
         summon: string;
+        civic: string;
+        commerce: string;
+        leadership: string;
+        region: string;
+        upkeep: string;
         amp: string;
         attack: string;
         auditory: string;
@@ -2348,6 +2363,7 @@ export declare const PF2ECONFIG: {
         dragonhide: string;
         "grisantian-pelt": string;
         inubrix: string;
+        "keep-stone": string;
         noqual: string;
         peachwood: string;
         siccatite: string;
@@ -2443,6 +2459,7 @@ export declare const PF2ECONFIG: {
         "scatter-5": string;
         "scatter-10": string;
         "scatter-15": string;
+        "scatter-20": string;
         scrying: string;
         shadow: string;
         shove: string;
@@ -2693,6 +2710,7 @@ export declare const PF2ECONFIG: {
         saggorak: string;
         "scatter-10": string;
         "scatter-15": string;
+        "scatter-20": string;
         "scatter-5": string;
         scroll: string;
         scrying: string;
@@ -3069,6 +3087,7 @@ export declare const PF2ECONFIG: {
         invested: string;
         investigator: string;
         kashrishi: string;
+        "keep-stone": string;
         kickback: string;
         kitsune: string;
         kobold: string;
@@ -3479,8 +3498,8 @@ export declare const PF2ECONFIG: {
         prerequisite4: string;
         prerequisite5: string;
     };
-    senses: Record<"darkvision" | "echolocation" | "greaterDarkvision" | "lifesense" | "lowLightVision" | "motionsense" | "scent" | "seeInvisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "wavesense", string>;
-    senseAcuity: Record<string, string>;
+    senses: Record<"darkvision" | "echolocation" | "greaterDarkvision" | "heatsight" | "lifesense" | "lowLightVision" | "motionsense" | "scent" | "seeInvisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "wavesense", string>;
+    senseAcuity: Record<"precise" | "imprecise" | "vague", string>;
     bulkTypes: {
         L: string;
         1: string;
@@ -3846,12 +3865,15 @@ export declare const PF2ECONFIG: {
                 anarchic: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 ancestralEchoing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 anchoring: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                ashen: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 authorized: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 axiomatic: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 bane: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 bloodbane: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 bloodthirsty: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 brilliant: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                called: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                coating: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 conducting: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 corrosive: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 crushing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
@@ -3865,9 +3887,11 @@ export declare const PF2ECONFIG: {
                 fanged: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 fearsome: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 flaming: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                flurrying: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 frost: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 ghostTouch: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 greaterAnchoring: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                greaterAshen: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 greaterBloodbane: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 greaterBrilliant: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 greaterCorrosive: import("@item/physical/runes.ts").WeaponPropertyRuneData;
@@ -3887,9 +3911,11 @@ export declare const PF2ECONFIG: {
                 holy: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 hopeful: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 impactful: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                impossible: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 keen: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 kinWarding: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 majorFanged: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                merciful: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 pacifying: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 returning: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 serrating: import("@item/physical/runes.ts").WeaponPropertyRuneData;
@@ -3897,6 +3923,7 @@ export declare const PF2ECONFIG: {
                 shock: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 speed: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 spellStoring: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                swarming: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 thundering: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 unholy: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 wounding: import("@item/physical/runes.ts").WeaponPropertyRuneData;
@@ -4066,6 +4093,11 @@ export declare const PF2ECONFIG: {
             action: {
                 circus: string;
                 summon: string;
+                civic: string;
+                commerce: string;
+                leadership: string;
+                region: string;
+                upkeep: string;
                 amp: string;
                 attack: string;
                 auditory: string;
@@ -4299,6 +4331,11 @@ export declare const PF2ECONFIG: {
             affliction: {
                 circus: string;
                 summon: string;
+                civic: string;
+                commerce: string;
+                leadership: string;
+                region: string;
+                upkeep: string;
                 amp: string;
                 attack: string;
                 auditory: string;
@@ -5831,6 +5868,7 @@ export declare const PF2ECONFIG: {
                 dragonhide: string;
                 "grisantian-pelt": string;
                 inubrix: string;
+                "keep-stone": string;
                 noqual: string;
                 peachwood: string;
                 siccatite: string;
@@ -5926,6 +5964,7 @@ export declare const PF2ECONFIG: {
                 "scatter-5": string;
                 "scatter-10": string;
                 "scatter-15": string;
+                "scatter-20": string;
                 scrying: string;
                 shadow: string;
                 shove: string;
@@ -6253,6 +6292,7 @@ export declare const PF2ECONFIG: {
                 "scatter-5": string;
                 "scatter-10": string;
                 "scatter-15": string;
+                "scatter-20": string;
                 scrying: string;
                 shadow: string;
                 shove: string;

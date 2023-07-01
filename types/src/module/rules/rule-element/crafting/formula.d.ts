@@ -1,13 +1,12 @@
-import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions } from "../index.ts";
+import { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ActorPF2e, CharacterPF2e } from "@actor";
-import { ItemPF2e } from "@item";
+import { RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "../index.ts";
 /**
  * @category RuleElement
  */
 declare class CraftingFormulaRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
-    constructor(data: CraftingFormulaSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: CraftingFormulaSource, options: RuleElementOptions);
     beforePrepareData(): void;
 }
 interface CraftingFormulaRuleElement extends RuleElementPF2e {

@@ -12,6 +12,13 @@ declare const MetagameSettingsConfig: {
         default: boolean;
         type: BooleanConstructor;
     };
+    showPartyStats: {
+        name: string;
+        hint: string;
+        default: boolean;
+        type: BooleanConstructor;
+        onChange: () => void;
+    };
     tokenSetsNameVisibility: {
         name: string;
         hint: string;
@@ -41,7 +48,7 @@ declare const MetagameSettingsConfig: {
 };
 declare class MetagameSettings extends SettingsMenuPF2e {
     static namespace: string;
-    static get settings(): typeof MetagameSettingsConfig;
+    static get settings(): Omit<typeof MetagameSettingsConfig, "showPartyStats">;
     static get SETTINGS(): string[];
     static get prefix(): string;
 }

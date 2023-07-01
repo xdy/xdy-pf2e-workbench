@@ -1,7 +1,8 @@
-import { ClassicLevel, type DatabaseOptions } from "classic-level";
-import { PackEntry } from "./types.ts";
-import { JournalEntryPageSource, TableResultSource } from "types/foundry/common/documents/module.js";
 import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ClassicLevel, type DatabaseOptions } from "classic-level";
+import type { JournalEntryPageSchema } from "types/foundry/common/documents/journal-entry-page.d.ts";
+import type { TableResultSource } from "types/foundry/common/documents/module.d.ts";
+import { PackEntry } from "./types.ts";
 declare class LevelDatabase extends ClassicLevel<string, DBEntry> {
     #private;
     constructor(location: string, options: LevelDatabaseOptions<DBEntry>);
@@ -11,7 +12,7 @@ declare class LevelDatabase extends ClassicLevel<string, DBEntry> {
         folders: DBFolder[];
     }>;
 }
-type EmbeddedEntry = ItemSourcePF2e | JournalEntryPageSource | TableResultSource;
+type EmbeddedEntry = ItemSourcePF2e | SourceFromSchema<JournalEntryPageSchema> | TableResultSource;
 type DBEntry = Omit<PackEntry, "pages" | "items" | "results"> & {
     folder?: string | null;
     items?: (EmbeddedEntry | string)[];

@@ -41,6 +41,7 @@ declare class CompendiumPack {
         to: "ids" | "names";
         map: Map<string, Map<string, string>>;
     }): void;
-    save(): Promise<number>;
+    save(asJson?: boolean): Promise<number>;
+    saveAsJSON(): Promise<number>;
 }
 export { CompendiumPack, PackError, PackMetadata, isItemSource, isActorSource, REMaybeWithUUIDs };

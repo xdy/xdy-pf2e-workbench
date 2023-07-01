@@ -1,8 +1,7 @@
-import { ActorPF2e, CreaturePF2e } from "@actor";
+import { CreaturePF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
 import { ActorSizePF2e } from "@actor/data/size.ts";
-import { ItemPF2e } from "@item";
-import { RuleElementPF2e, RuleElementData, RuleElementSource, RuleElementOptions, BracketedValue } from "./index.ts";
+import { BracketedValue, RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
 /**
  * @category RuleElement
  * Change a creature's size
@@ -14,7 +13,7 @@ declare class CreatureSizeRuleElement extends RuleElementPF2e {
     /** An optional reach adjustment to accompany the size */
     reach: ReachObject | null;
     resizeEquipment: boolean;
-    constructor(data: CreatureSizeSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: CreatureSizeSource, options: RuleElementOptions);
     private static wordToAbbreviation;
     private static incrementMap;
     private static decrementMap;

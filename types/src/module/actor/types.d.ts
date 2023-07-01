@@ -121,6 +121,8 @@ interface ApplyDamageParams {
     /** Predicate statements from the damage roll */
     rollOptions?: Set<string>;
     shieldBlockRequest?: boolean;
+    breakdown?: string[];
+    notes?: string[];
 }
 type ImmunityType = keyof typeof immunityTypes;
 type WeaknessType = keyof typeof weaknessTypes;

@@ -1,15 +1,13 @@
-import { ActorPF2e } from "@actor";
 import { AuraColors, SaveType } from "@actor/types.ts";
-import { ItemPF2e } from "@item";
 import { EffectTrait } from "@item/abstract-effect/data.ts";
 import { PredicateField } from "@system/schema-data-fields.ts";
-import type { ArrayField, BooleanField, ColorField, ModelPropsFromSchema, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, BooleanField, ColorField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField, RuleElementSchema, RuleValue } from "./data.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
 /** A Pathfinder 2e aura, capable of transmitting effects and with a visual representation on the canvas */
 declare class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
     #private;
-    constructor(source: AuraRuleElementSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(source: AuraRuleElementSource, options: RuleElementOptions);
     static defineSchema(): AuraSchema;
     afterPrepareData(): void;
 }

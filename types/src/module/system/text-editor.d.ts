@@ -47,4 +47,4 @@ interface ConvertXMLNodeOptions {
     /** Any additional classes to add to the span element */
     classes?: string[];
 }
-export { TextEditorPF2e, EnrichHTMLOptionsPF2e };
+export { EnrichHTMLOptionsPF2e, TextEditorPF2e };

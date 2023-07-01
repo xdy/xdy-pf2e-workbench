@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { PhysicalItemPF2e } from "@item";
+import { KitPF2e, PhysicalItemPF2e } from "@item";
 import { Coins } from "@item/physical/data.ts";
 import { CoinsPF2e } from "@item/physical/helpers.ts";
 import { InventoryBulk } from "./bulk.ts";
@@ -20,5 +20,10 @@ declare class ActorInventory<TActor extends ActorPF2e> extends Collection<Physic
         byValue?: boolean;
     }): Promise<boolean>;
     sellAllTreasure(): Promise<void>;
+    /** Adds an item to this inventory without removing from its original location */
+    add(item: PhysicalItemPF2e | KitPF2e, options?: AddItemOptions): Promise<void>;
+}
+interface AddItemOptions {
+    stack?: boolean;
 }
 export { ActorInventory, InventoryBulk };

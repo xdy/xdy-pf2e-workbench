@@ -181,6 +181,7 @@ declare class WeaknessData extends IWRData<WeaknessType> implements WeaknessSour
         warpglass: string;
         water: string;
         weapons: string;
+        /** Construct an object argument for Localization#format (see also PF2E.Actor.IWR.CompositeLabel in en.json) */
         "weapons-shedding-bright-light": string;
     };
     value: number;

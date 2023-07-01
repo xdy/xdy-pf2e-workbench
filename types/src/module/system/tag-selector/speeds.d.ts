@@ -8,7 +8,7 @@ export declare class SpeedSelector<TActor extends ActorPF2e> extends BaseTagSele
     protected objectProperty: string;
     static get defaultOptions(): TagSelectorOptions;
     protected get configTypes(): readonly SelectableTagField[];
-    getData(): Promise<SpeedSelectorData<TActor>>;
+    getData(options?: Partial<FormApplicationOptions>): Promise<SpeedSelectorData<TActor>>;
     activateListeners($html: JQuery): void;
     protected _updateObject(_event: Event, formData: Record<string, unknown>): Promise<void>;
 }

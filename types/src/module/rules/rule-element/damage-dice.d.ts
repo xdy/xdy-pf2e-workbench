@@ -1,32 +1,12 @@
-import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
 import { DamageDiceOverride } from "@actor/modifiers.ts";
-import { ItemPF2e } from "@item";
-import { CriticalInclusion } from "@system/damage/types.ts";
-import { BracketedValue, RuleElementSource } from "./data.ts";
-import { RuleElementData, RuleElementPF2e } from "./index.ts";
-declare class DamageDiceRuleElement extends RuleElementPF2e {
+import type { BooleanField, ObjectField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
+import { RuleElementOptions, RuleElementPF2e } from "./index.ts";
+declare class DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema> {
     #private;
-    slug: string;
-    selector: string;
-    diceNumber: number | string;
-    dieSize: string | null;
-    damageType: string | null;
-    critical: CriticalInclusion;
-    category: "persistent" | "precision" | "splash" | null;
-    brackets: BracketedValue | null;
-    override: DamageDiceOverride | null;
-    constructor(data: DamageDiceSource, item: ItemPF2e<ActorPF2e>);
+    static defineSchema(): DamageDiceRuleSchema;
+    constructor(data: DamageDiceSource, options: RuleElementOptions);
     beforePrepareData(): void;
-}
-interface DamageDiceRuleElement {
-    data: DamageDiceData;
-    get actor(): CharacterPF2e | NPCPF2e;
-}
-interface DamageDiceData extends RuleElementData {
-    name?: string;
-    damageType?: string;
-    override?: DamageDiceOverride;
-    diceNumber?: number;
 }
 interface DamageDiceSource extends RuleElementSource {
     selector?: unknown;
@@ -39,4 +19,26 @@ interface DamageDiceSource extends RuleElementSource {
     category?: unknown;
     damageCategory?: unknown;
 }
+interface DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema>, ModelPropsFromSchema<DamageDiceRuleSchema> {
+}
+type DamageDiceRuleSchema = RuleElementSchema & {
+    /** All domains to add a modifier to */
+    selector: StringField<string, string, true, false, false>;
+    /** The number of dice to add */
+    diceNumber: ResolvableValueField<false, false, false>;
+    /** The damage die size */
+    dieSize: StringField<string, string, false, true, true>;
+    /** The damage type */
+    damageType: StringField<string, string, false, true, true>;
+    /** True means the dice are added to critical without doubling; false means the dice are never added to
+     *  critical damage; omitted means add to normal damage and double on critical damage.
+     */
+    critical: BooleanField<boolean, boolean, false, true, false>;
+    /** The damage category */
+    category: StringField<"persistent" | "precision" | "splash", "persistent" | "precision" | "splash", false, false, false>;
+    /** Resolvable bracket data */
+    brackets: ResolvableValueField<false, true, false>;
+    /** Damage dice override data */
+    override: ObjectField<DamageDiceOverride, DamageDiceOverride, false, true, false>;
+};
 export { DamageDiceRuleElement };

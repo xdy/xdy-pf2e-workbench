@@ -106,7 +106,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /** Whether this actor is an enemy of the provided actor */
     isEnemyOf(actor: ActorPF2e): boolean;
     /** Whether this actor is immune to an effect of a certain type */
-    isImmuneTo(effect: AbstractEffectPF2e | ConditionSource | EffectSource): boolean;
+    isImmuneTo(effect: AbstractEffectPF2e | ConditionSource | EffectSource | ConditionSlug): boolean;
     /** Whether this actor is affected by damage of a certain type despite lack of explicit immunity */
     isAffectedBy(damage: DamageType | ConditionPF2e): boolean;
     /** Get (almost) any statistic by slug: handling expands in `ActorPF2e` subclasses */
@@ -187,7 +187,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      * @param token The applicable token for this actor
      * @param shieldBlockRequest Whether the user has toggled the Shield Block button
      */
-    applyDamage({ damage, token, item, rollOptions, skipIWR, shieldBlockRequest, }: ApplyDamageParams): Promise<this>;
+    applyDamage({ damage, token, item, rollOptions, skipIWR, shieldBlockRequest, breakdown, notes, }: ApplyDamageParams): Promise<this>;
     /** Revert applied actor damage based on the AppliedDamageFlag stored in a damage chat message */
     undoDamage(appliedDamage: AppliedDamageFlag): Promise<void>;
     isLootableBy(user: UserPF2e): boolean;
@@ -258,7 +258,7 @@ interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
     readonly effects: foundry.abstract.EmbeddedCollection<ActiveEffectPF2e<this>>;
     readonly items: foundry.abstract.EmbeddedCollection<ItemPF2e<this>>;
     system: ActorSystemData;
-    prototypeToken: PrototypeTokenPF2e;
+    prototypeToken: PrototypeTokenPF2e<this>;
     get sheet(): ActorSheetPF2e<this>;
     update(data: DocumentUpdateData<this>, options?: ActorUpdateContext<TParent>): Promise<this>;
     /** See implementation in class */

@@ -124,7 +124,7 @@ declare global {
             userId: string
         ): void;
 
-        protected override _onCreateEmbeddedDocuments(
+        protected override _onCreateDescendantDocuments(
             embeddedName: "ActiveEffect" | "Item",
             documents: ActiveEffect<this>[] | Item<this>[],
             result: ActiveEffect<this>["_source"][] | Item<this>["_source"][],
@@ -132,7 +132,7 @@ declare global {
             userId: string
         ): void;
 
-        protected override _onUpdateEmbeddedDocuments(
+        protected override _onUpdateDescendantDocuments(
             embeddedName: "ActiveEffect" | "Item",
             documents: ActiveEffect<this>[] | Item<this>[],
             result: ActiveEffect<this>["_source"][] | Item<this>["_source"][],
@@ -140,7 +140,7 @@ declare global {
             userId: string
         ): void;
 
-        protected override _onDeleteEmbeddedDocuments(
+        protected override _onDeleteDescendantDocuments(
             embeddedName: "ActiveEffect" | "Item",
             documents: ActiveEffect<this>[] | Item<this>[],
             result: string[],
@@ -159,7 +159,7 @@ declare global {
         readonly effects: foundry.abstract.EmbeddedCollection<ActiveEffect<this>>;
         readonly items: foundry.abstract.EmbeddedCollection<Item<this>>;
 
-        prototypeToken: foundry.data.PrototypeToken;
+        prototypeToken: foundry.data.PrototypeToken<this>;
 
         _sheet: ActorSheet<this> | null;
 

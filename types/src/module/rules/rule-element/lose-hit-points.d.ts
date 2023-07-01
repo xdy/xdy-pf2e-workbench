@@ -1,9 +1,8 @@
-import { ActorPF2e, CreaturePF2e } from "@actor";
+import { CreaturePF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
-import { RuleElementPF2e, RuleElementSource } from "./index.ts";
 import { RuleElementOptions } from "./base.ts";
+import { RuleElementPF2e, RuleElementSource } from "./index.ts";
 /** Reduce current hit points without applying damage */
 export declare class LoseHitPointsRuleElement extends RuleElementPF2e {
     static validActorTypes: ActorType[];
@@ -12,7 +11,7 @@ export declare class LoseHitPointsRuleElement extends RuleElementPF2e {
      * new and old values.
      */
     private reevaluateOnUpdate;
-    constructor(data: LoseHitPointsSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: LoseHitPointsSource, options: RuleElementOptions);
     onCreate(actorUpdates: Record<string, unknown>): void;
     preUpdate(changes: DeepPartial<ItemSourcePF2e>): Promise<void>;
 }

@@ -1,7 +1,6 @@
-import { ActorPF2e, CharacterPF2e } from "@actor";
+import { CharacterPF2e } from "@actor";
 import { MartialProficiency } from "@actor/character/data.ts";
 import { ActorType } from "@actor/data/index.ts";
-import { ItemPF2e } from "@item";
 import { ProficiencyRank } from "@item/data/index.ts";
 import { WeaponCategory } from "@item/weapon/types.ts";
 import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
@@ -10,7 +9,7 @@ declare class MartialProficiencyRuleElement extends RuleElementPF2e {
     protected static validActorTypes: ActorType[];
     /** Predication test for whether a weapon matches this proficiency */
     definition: PredicatePF2e;
-    constructor(data: MartialProficiencySource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(data: MartialProficiencySource, options: RuleElementOptions);
     private validateData;
     onApplyActiveEffects(): void;
     /** Set this martial proficiency as an AELike value  */

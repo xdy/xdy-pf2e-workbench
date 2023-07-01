@@ -1,15 +1,13 @@
-import { ItemPF2e } from "@item";
 import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
-import type { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { BracketedValue, RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
-import { ActorPF2e } from "@actor";
 declare class RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema> {
     #private;
     static defineSchema(): RollNoteSchema;
     /** The main text of the note */
     text: string | BracketedValue<string>;
-    constructor(source: RollNoteSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(source: RollNoteSource, options: RuleElementOptions);
     beforePrepareData(): void;
 }
 interface RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema>, ModelPropsFromSchema<RollNoteSchema> {

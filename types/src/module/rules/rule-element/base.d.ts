@@ -15,8 +15,7 @@ declare const DataModel: typeof import("types/foundry/common/abstract/data.d.ts"
  *
  * @category RuleElement
  */
-declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSchema> extends DataModel<null, TSchema> {
-    item: ItemPF2e<ActorPF2e>;
+declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSchema> extends DataModel<ItemPF2e<ActorPF2e>, TSchema> {
     data: RuleElementData;
     sourceIndex: number | null;
     protected suppressWarnings: boolean;
@@ -26,10 +25,11 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
      * @param source unserialized JSON data from the actual rule input
      * @param item where the rule is persisted on
      */
-    constructor(source: RuleElementSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions);
+    constructor(source: RuleElementSource, options: RuleElementOptions);
     static defineSchema(): RuleElementSchema;
     /** Use a "lax" schema field that preserves properties not defined in the `DataSchema` */
     static get schema(): LaxSchemaField<RuleElementSchema>;
+    get item(): this["parent"];
     get actor(): ActorPF2e;
     /** Retrieves the token from the actor, or from the active tokens. */
     get token(): TokenDocumentPF2e | null;
@@ -57,10 +57,13 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
      *   }
      * }
      *
-     * @param source string that should be parsed
+     * @param source The string that is to be resolved
+     * @param options.warn Whether to warn on a failed resolution
      * @return the looked up value on the specific object
      */
-    resolveInjectedProperties<T extends string | number | object | null | undefined>(source: T): T;
+    resolveInjectedProperties<T extends string | number | object | null | undefined>(source: T, options?: {
+        warn?: boolean;
+    }): T;
     /**
      * Parses the value attribute on a rule.
      *
@@ -76,13 +79,10 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
      * @param defaultValue if no value is found, use that one
      * @return the evaluated value
      */
-    protected resolveValue(valueData?: RuleValue | undefined, defaultValue?: Exclude<RuleValue, BracketedValue>, { evaluate, resolvables }?: {
-        evaluate?: boolean;
-        resolvables?: Record<string, unknown>;
-    }): number | string | boolean | object | null;
+    protected resolveValue(valueData?: RuleValue | undefined, defaultValue?: Exclude<RuleValue, BracketedValue>, { evaluate, resolvables, warn }?: ResolveValueParams): number | string | boolean | object | null;
     protected isBracketedValue(value: unknown): value is BracketedValue;
 }
-interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abstract.DataModel<null, TSchema>, foundry.data.fields.ModelPropsFromSchema<RuleElementSchema> {
+interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abstract.DataModel<ItemPF2e<ActorPF2e>, TSchema>, ModelPropsFromSchema<RuleElementSchema> {
     constructor: typeof RuleElementPF2e<TSchema>;
     /**
      * Run between Actor#applyActiveEffects and Actor#prepareDerivedData. Generally limited to ActiveEffect-Like
@@ -192,10 +192,16 @@ declare namespace RuleElementPF2e {
         [K in keyof T]?: unknown;
     } & RuleElementSource;
 }
-interface RuleElementOptions {
+interface ResolveValueParams {
+    evaluate?: boolean;
+    resolvables?: Record<string, unknown>;
+    warn?: boolean;
+}
+type RuleElementOptions = {
+    parent: ItemPF2e<ActorPF2e>;
     /** If created from an item, the index in the source data */
     sourceIndex?: number;
     /** If data validation fails for any reason, do not emit console warnings */
     suppressWarnings?: boolean;
-}
-export { RuleElementPF2e, RuleElementOptions };
+};
+export { RuleElementOptions, RuleElementPF2e };

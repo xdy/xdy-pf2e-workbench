@@ -56,7 +56,6 @@ interface NewDocumentSchemaRecord {
 interface MigratedDocumentSchemaRecord {
     version: number;
     lastMigration: {
-        datetime: string | null;
         version: {
             schema: number | null;
             system?: string;

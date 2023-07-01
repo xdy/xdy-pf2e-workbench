@@ -614,6 +614,7 @@ declare const weaponTraits: {
     "scatter-5": string;
     "scatter-10": string;
     "scatter-15": string;
+    "scatter-20": string;
     scrying: string;
     shadow: string;
     shove: string;
@@ -848,6 +849,7 @@ declare const npcAttackTraits: {
     dragonhide: string;
     "grisantian-pelt": string;
     inubrix: string;
+    "keep-stone": string;
     noqual: string;
     peachwood: string;
     siccatite: string;
@@ -943,6 +945,7 @@ declare const npcAttackTraits: {
     "scatter-5": string;
     "scatter-10": string;
     "scatter-15": string;
+    "scatter-20": string;
     scrying: string;
     shadow: string;
     shove: string;
@@ -1369,6 +1372,11 @@ declare const consumableTraits: {
 declare const actionTraits: {
     circus: string;
     summon: string;
+    civic: string;
+    commerce: string;
+    leadership: string;
+    region: string;
+    upkeep: string;
     amp: string;
     attack: string;
     auditory: string;
@@ -1936,6 +1944,7 @@ declare const traitDescriptions: {
     saggorak: string;
     "scatter-10": string;
     "scatter-15": string;
+    "scatter-20": string;
     "scatter-5": string;
     scroll: string;
     scrying: string;
@@ -2312,6 +2321,7 @@ declare const traitDescriptions: {
     invested: string;
     investigator: string;
     kashrishi: string;
+    "keep-stone": string;
     kickback: string;
     kitsune: string;
     kobold: string;

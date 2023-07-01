@@ -29,8 +29,8 @@ declare class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     prepareDerivedData(): void;
     protected _onCreate(data: LootSource, options: DocumentModificationContext<TParent>, userId: string): void;
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, userId: string): void;
-    protected _onCreateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], result: foundry.documents.ActiveEffectSource[] | ItemSourcePF2e[], options: DocumentModificationContext<this>, userId: string): void;
-    protected _onDeleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], result: string[], options: DocumentModificationContext<this>, userId: string): void;
+    protected _onCreateDescendantDocuments(embeddedName: "ActiveEffect" | "Item", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], result: foundry.documents.ActiveEffectSource[] | ItemSourcePF2e[], options: DocumentModificationContext<this>, userId: string): void;
+    protected _onDeleteDescendantDocuments(embeddedName: "ActiveEffect" | "Item", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], result: string[], options: DocumentModificationContext<this>, userId: string): void;
 }
 interface LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: LootSource;

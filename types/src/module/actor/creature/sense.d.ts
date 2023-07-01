@@ -23,5 +23,5 @@ export declare class CreatureSensePF2e implements SenseData {
 }
 export type SenseAcuity = (typeof SENSE_ACUITIES)[number];
 export type SenseType = SetElement<typeof SENSE_TYPES>;
-export declare const SENSE_ACUITIES: string[];
-export declare const SENSE_TYPES: Set<"darkvision" | "echolocation" | "greaterDarkvision" | "lifesense" | "lowLightVision" | "motionsense" | "scent" | "seeInvisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "wavesense">;
+export declare const SENSE_ACUITIES: readonly ["precise", "imprecise", "vague"];
+export declare const SENSE_TYPES: Set<"darkvision" | "echolocation" | "greaterDarkvision" | "heatsight" | "lifesense" | "lowLightVision" | "motionsense" | "scent" | "seeInvisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "wavesense">;

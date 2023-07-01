@@ -8,7 +8,7 @@ import { ItemSourcePF2e } from "@item/data/index.ts";
 import { Coins } from "@item/physical/data.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { BasicConstructorOptions, TagSelectorOptions, TagSelectorType } from "@system/tag-selector/index.ts";
-import { ActorSheetDataPF2e, CoinageSummary, SheetInventory } from "./data-types.ts";
+import { ActorSheetDataPF2e, ActorSheetRenderOptionsPF2e, CoinageSummary, SheetInventory } from "./data-types.ts";
 import { ItemSummaryRenderer } from "./item-summary-renderer.ts";
 /**
  * Extend the basic ActorSheet class to do all the PF2e things!
@@ -53,7 +53,7 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
      * @param itemId           ID of the item to move between the two actors.
      */
     moveItemBetweenActors(event: ElementDragEvent, sourceActorId: string, sourceTokenId: string | null, targetActorId: string, targetTokenId: string | null, itemId: string): Promise<void>;
-    protected openTagSelector(event: JQuery.ClickEvent | MouseEvent): void;
+    protected openTagSelector(anchor: HTMLElement, options?: Partial<TagSelectorOptions>): void;
     /** Construct and render a tag selection menu */
     protected tagSelector(selectorType: Exclude<TagSelectorType, "basic">, options?: Partial<TagSelectorOptions>): void;
     protected tagSelector(selectorType: "basic", options: BasicConstructorOptions): void;
@@ -62,7 +62,7 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     /** Override of inner render function to maintain item summary state */
     protected _renderInner(data: Record<string, unknown>, options: RenderOptions): Promise<JQuery>;
     /** Overriden _render to maintain focus on tagify elements */
-    protected _render(force?: boolean, options?: RenderOptions): Promise<void>;
+    protected _render(force?: boolean, options?: ActorSheetRenderOptionsPF2e): Promise<void>;
     /** Tagify sets an empty input field to "" instead of "[]", which later causes the JSON parse to throw an error */
     protected _onSubmit(event: Event, { updateData, preventClose, preventRender }?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
     protected _getSubmitData(updateData?: DocumentUpdateData<TActor>): Record<string, unknown>;

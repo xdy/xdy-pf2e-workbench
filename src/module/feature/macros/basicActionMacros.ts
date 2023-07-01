@@ -724,7 +724,7 @@ ${actionsToUse
                         const pack = game.packs.get(compendiumName);
                         if (pack) {
                             pack.getDocuments().then((documents) => {
-                                const macro_data = documents.find((i) => i.name === macroName)?.toObject();
+                                const macro_data = documents.find((i) => i._source.name === macroName)?.toObject();
                                 if (macro_data) {
                                     const temp_macro = new Macro(macro_data);
                                     temp_macro.execute();
