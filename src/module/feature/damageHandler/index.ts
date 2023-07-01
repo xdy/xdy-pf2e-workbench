@@ -121,9 +121,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             })
                         );
                     }
-                    // Make automatic damageRoll be private if the spell is private.
                     const originalRollMode = game.settings.get("core", "rollMode");
-                    const blind =
+                    let blind =
                         ((message?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
                             message?.blind ||
                             (message?.whisper && message?.whisper.length > 0) ||
@@ -140,6 +139,10 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         currentTarget.closest = () => {
                             return { dataset: { castLevel: castLevel } };
                         };
+                        // Make automatic damageRoll be private if the spell is private, unless hideNameOfPrivateSpell is set.
+                        if (blind && game.settings.get(MODULENAME, "castPrivateSpellHideName")) {
+                            blind = false;
+                        }
                         origin?.rollDamage({
                             currentTarget: currentTarget,
                             spellLevel: castLevel,

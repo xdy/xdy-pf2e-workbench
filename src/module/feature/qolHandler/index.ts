@@ -236,10 +236,10 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
     }
 }
 
-export function hideNameOfPrivateSpell(message: ChatMessagePF2e, html: JQuery) {
+export function castPrivateSpellHideName(message: ChatMessagePF2e, html: JQuery) {
     const msg = game.messages.contents
         .reverse()
-        .filter((m) => (m.type = CONST.CHAT_MESSAGE_TYPES.WHISPER))
+        .filter((m) => m.type === CONST.CHAT_MESSAGE_TYPES.WHISPER)
         .filter((m) => m.flags?.pf2e?.casting)
         .filter((m) => m.flags?.pf2e?.origin?.uuid === message.flags?.pf2e?.origin?.uuid)
         .filter((m) => !m.whisper?.includes(game.user?.id))

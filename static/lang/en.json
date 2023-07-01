@@ -388,8 +388,8 @@
         "aSpell": "A spell"
       },
       "castPrivateSpellHideName": {
-        "hint": "(REALLY EXPERIMENTAL) Check to hide the name of a privately cast spell. Can mess up your damage rolls in chat.",
-        "name": "... and hide the name of a privately cast spell (Experimental)."
+        "hint": "Check to hide the name of a privately cast spell in the damage roll instead of hiding the damage roll.",
+        "name": "... and hide the name of a privately cast spell in damage roll."
       },
       "castPrivateSpellAlwaysForNPC": {
         "hint": "Check to always cast privately for npcs. (Hold Ctrl to *not* cast privately.)",

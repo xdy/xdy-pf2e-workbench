@@ -16,11 +16,11 @@ import {
 } from "./feature/reminders/index.js";
 import {
     castPrivateSpell,
+    castPrivateSpellHideName,
     chatActionCardDescriptionCollapse,
     chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
     damageCardExpand,
-    hideNameOfPrivateSpell,
     mystifyNpcItems,
 } from "./feature/qolHandler/index.js";
 import {
@@ -213,7 +213,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
         message?.flags?.pf2e?.origin?.type === "spell" &&
         isActuallyDamageRoll(message)
     ) {
-        hideNameOfPrivateSpell(message, html);
+        castPrivateSpellHideName(message, html);
     }
 }
 
