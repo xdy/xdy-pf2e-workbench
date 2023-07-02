@@ -548,8 +548,8 @@
         "off": "Désactivé"
       },
       "castPrivateSpellHideName": {
-        "name": "... et cache le nom d'un sort lancé en privé. (Expérimental)",
-        "hint": "(Expérimental) Cochez pour cacher le nom d'un sort lancé en privé. Peut foutre le bocson dans la conversation."
+        "name": "... et cache le nom d'un sort lancé en privé sur le jet de dégât.",
+        "hint": "Cochez pour cacher le nom d'un sort lancé en privé dans le jet de dégât au lieu de cacher le jet de dégâts."
       },
       "dropHeldItemsOnBecomingUnconscious": {
         "hint": "Les personnages lâchent automatiquement les objets tenus en devenant inconscient.",
