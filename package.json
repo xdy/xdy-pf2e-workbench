@@ -39,7 +39,7 @@
     "@types/tooltipster": "^0.0.32",
     "@types/yaireo__tagify": "^4.17.0",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
-    "@typescript-eslint/parser": "^5.60.1",
+    "@typescript-eslint/parser": "^5.61.0",
     "es-jest": "^2.1.0",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
