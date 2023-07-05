@@ -109,7 +109,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 hint: `${MODULENAME}.SETTINGS.npcMystifierPostfix.hint`,
                 scope: "world",
                 type: String,
-                default: "",
+                default: "Workbench Adjectives",
             },
             npcMystifierUseSize: {
                 name: `${MODULENAME}.SETTINGS.npcMystifierUseSize.name`,

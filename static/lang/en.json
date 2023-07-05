@@ -562,11 +562,11 @@
         "name": "No match text"
       },
       "npcMystifierPostfix": {
-        "hint": "Add text to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table a random text result from this table will be used as the postfix instead. This will be added *before* any random property prefix (see previous option.)",
+        "hint": "Add text to postfix new name with, defaults to '' (example: 'Creature'), if this matches the name of a rollable table (the default is the included table 'Workbench Adjectives') a random text result from this table will be used as the postfix instead. This will be added *before* any random property prefix (also see prefix option.)",
         "name": "Word or rollable table postfix"
       },
       "npcMystifierPrefix": {
-        "hint": "Add text to prefix new name with (infix if a random word property is chosen above), defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead.  This will be added *after* any random property postfix (see previous option.)",
+        "hint": "Add text to prefix new name with (infix if a random word property is chosen above), defaults to '' (example: 'Unknown'), if this matches the name of a rollable table a random text result from this table will be used as the prefix instead.  This will be added *after* any random property postfix (also see prefix option.)",
         "name": "Word or rollable table prefix"
       },
       "npcMystifierRandomPropertySkipForUnique": {
