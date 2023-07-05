@@ -1,3 +1,10 @@
+# [5.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.3.1...v5.4.0) (2023-07-05)
+
+
+### Features
+
+* Set the default for mystification postfix to the included table 'Workbench Adjectives'. ([edb6a6e](https://github.com/xdy/xdy-pf2e-workbench/commit/edb6a6e5bc5a4a511088894ed865d689fcb5b5a6))
+
 ## [5.3.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.3.0...v5.3.1) (2023-07-01)
 
 
