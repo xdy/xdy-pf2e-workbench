@@ -430,7 +430,7 @@
       },
       "npcMystifierPostfix": {
         "name": "Wort oder Würfeltabellen Suffix",
-        "hint": "Fügt einen Text als Suffix für den neuen Namen hinzu, Standardwert ist '' (zum Beispiel: 'Kreatur'). Wenn dieser Text mit dem Namen einer Würfeltabelle übereinstimmt, wird stattdessen ein zufälliges Textergebnis aus dieser Tabelle als Suffix verwendet. Dies wird *vor* jedem zufälligen Eigenschaftspräfix hinzugefügt (siehe vorherige Option)"
+        "hint": "Fügt einen Text als Suffix für den neuen Namen hinzu, Standardwert ist '' (zum Beispiel: 'Kreatur'). Wenn dieser Text mit dem Namen einer Würfeltabelle übereinstimmt (im Standard wird die Tabelle \"Workbench Adjektive\" inkludiert), wird stattdessen ein zufälliges Textergebnis aus dieser Tabelle als Suffix verwendet. Dies wird *vor* jedem zufälligen Eigenschaftspräfix hinzugefügt (siehe die Präfix Option)"
       },
       "npcMystifierUseEliteWeak": {
         "hint": "Auswählen um Elite/Schwach im verschleierten Namen zu benutzen.",
@@ -506,7 +506,7 @@
         "hint": "Legen Sie den Standardwert (und den Höchstwert) für die Anzahl der Minuten bis zum nächsten Öffnen des Heldenpunkt-Verwaltung fest."
       },
       "npcMystifierPrefix": {
-        "hint": "Füge einen Text hinzu der den neuen Namen als Präfix hinzugefügt wird (dazwischen falls die Zufallsnamenoption oben gewählt wurde), Standardmäßig '' (zum Beispiel: 'Unbekannt'). Falls dies dem Namen eine Würfeltabelle entspricht wird stattdessen ein zufälliger Text aus der Tabelle als Präfix genutzt. Dieser wird *nach* dem Suffix einer zufälligen Eigenschaft eingefügt (siehe vorherige Option)",
+        "hint": "Füge einen Text hinzu der den neuen Namen als Präfix hinzugefügt wird (dazwischen falls die Zufallsnamenoption oben gewählt wurde), Standardmäßig '' (zum Beispiel: 'Unbekannt'). Falls dies dem Namen eine Würfeltabelle entspricht wird stattdessen ein zufälliger Text aus der Tabelle als Präfix genutzt. Dieser wird *nach* dem Suffix einer zufälligen Eigenschaft eingefügt (siehe  dazu die Präfix-Option)",
         "name": "Wort oder Würfeltabellen Präfix"
       },
       "npcMystifierRandomPropertySkipForUnique": {
