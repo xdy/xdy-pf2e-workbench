@@ -1,3 +1,10 @@
+## [5.4.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.0...v5.4.1) (2023-07-05)
+
+
+### Bug Fixes
+
+* Change 'Effect: Minimum Frighetened' (which is used by 'Aura: Aura of Despair') so it does *not* actually give Frightened. ([6360dcd](https://github.com/xdy/xdy-pf2e-workbench/commit/6360dcd934ddbadedb84a78ecc5fd563b88dbab8))
+
 # [5.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.3.1...v5.4.0) (2023-07-05)
 
 
