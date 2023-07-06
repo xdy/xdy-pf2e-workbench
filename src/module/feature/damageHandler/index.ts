@@ -255,8 +255,9 @@ export function persistentDamage(message) {
     ) {
         const token = canvas.tokens?.get(message.speaker.token);
         if (token && token.isOwner) {
-            for (const r of message.rolls) {
-                token?.actor?.applyDamage({ damage: r, token: token.document }).then();
+            if (message.rolls && message.rolls.length > 0) {
+                // Should only be one roll, either way, only use the first.
+                token?.actor?.applyDamage({ damage: message.rolls.get(0), token: token.document }).then();
             }
         }
         const actor = token?.actor;
