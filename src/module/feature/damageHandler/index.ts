@@ -257,7 +257,7 @@ export function persistentDamage(message) {
         if (token && token.isOwner) {
             if (message.rolls && message.rolls.length > 0) {
                 // Should only be one roll, either way, only use the first.
-                token?.actor?.applyDamage({ damage: message.rolls.get(0), token: token.document }).then();
+                token?.actor?.applyDamage({ damage: message.rolls[0], token: token.document }).then();
             }
         }
         const actor = token?.actor;
