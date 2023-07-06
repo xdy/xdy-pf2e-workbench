@@ -1,3 +1,10 @@
+## [5.4.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.1...v5.4.2) (2023-07-06)
+
+
+### Bug Fixes
+
+* Only roll persistent damage once even if another roll somehow exists (happens if Simple Calendar is enabled). ([725fd4c](https://github.com/xdy/xdy-pf2e-workbench/commit/725fd4c412d3cef1396b016739f53f7d3a9aa94b)), closes [#868](https://github.com/xdy/xdy-pf2e-workbench/issues/868)
+
 ## [5.4.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.0...v5.4.1) (2023-07-05)
 
 
