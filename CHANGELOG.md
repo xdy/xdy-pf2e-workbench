@@ -1,3 +1,10 @@
+## [5.4.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.2...v5.4.3) (2023-07-06)
+
+
+### Bug Fixes
+
+* Persistent damage works again. Unless you use Simple Calendar. :( (In which case it still rolls twice.) ([01514c6](https://github.com/xdy/xdy-pf2e-workbench/commit/01514c6174399018bae972bd43e0fb656af9577b))
+
 ## [5.4.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.1...v5.4.2) (2023-07-06)
 
 
