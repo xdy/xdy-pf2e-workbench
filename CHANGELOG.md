@@ -1,3 +1,10 @@
+## [5.4.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.3...v5.4.4) (2023-07-07)
+
+
+### Bug Fixes
+
+* Sorting actions on the character sheet works again. ([66060ce](https://github.com/xdy/xdy-pf2e-workbench/commit/66060ce425efc667acf7e3144e7f389e3d295e8b))
+
 ## [5.4.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.2...v5.4.3) (2023-07-06)
 
 
