@@ -415,6 +415,17 @@ declare const damageTraits: {
     lawful: string;
 };
 declare const magicSchools: Record<MagicSchool, string>;
+declare const kingmakerTraits: {
+    army: string;
+    cavalry: string;
+    civic: string;
+    commerce: string;
+    infantry: string;
+    kingdom: string;
+    leadership: string;
+    region: string;
+    upkeep: string;
+};
 declare const spellTraits: {
     amp: string;
     attack: string;
@@ -1372,11 +1383,6 @@ declare const consumableTraits: {
 declare const actionTraits: {
     circus: string;
     summon: string;
-    civic: string;
-    commerce: string;
-    leadership: string;
-    region: string;
-    upkeep: string;
     amp: string;
     attack: string;
     auditory: string;
@@ -2388,4 +2394,4 @@ declare const traitDescriptions: {
     rage: string;
     ranger: string;
 };
-export { actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementalTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherConsumableTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, traitDescriptions, vehicleTraits, weaponTraits, };
+export { actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementalTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, kingmakerTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherConsumableTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, traitDescriptions, vehicleTraits, weaponTraits, };

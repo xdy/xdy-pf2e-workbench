@@ -35,7 +35,7 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
     get token(): TokenDocumentPF2e | null;
     /** Generate a label without a leading title (such as "Effect:") */
     protected getReducedLabel(label?: string): string;
-    /** Disallow invalid data fallbacks */
+    /** Include parent item's name and UUID in `DataModel` validation error messages */
     validate(options?: DataModelValidationOptions): boolean;
     /** Test this rule element's predicate, if present */
     protected test(rollOptions?: string[] | Set<string>): boolean;

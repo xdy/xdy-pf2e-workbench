@@ -16,25 +16,12 @@ declare class TagSelectorBasic<TDocument extends ActorPF2e | ItemPF2e> extends B
     #private;
     static get defaultOptions(): TagSelectorOptions;
     allowCustom: boolean;
-    /** Search string for filtering */
-    searchString: string;
     protected objectProperty: string;
     constructor(object: TDocument, options: BasicConstructorOptions);
     protected get configTypes(): readonly SelectableTagField[];
     getData(): Promise<TagSelectorBasicData<TDocument>>;
     activateListeners($html: JQuery): void;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
-    private getUpdateData;
-    /**
-     * Filter the potential traits to only show ones which match a provided search string
-     * @param searchString The search string to match
-     */
-    private search;
-    /**
-     * Handle trait filtering through search field
-     * Toggle the visibility of indexed trait entries by name match
-     */
-    private onFilterResults;
 }
 interface TagSelectorBasic<TDocument extends ActorPF2e | ItemPF2e> extends BaseTagSelector<TDocument> {
     options: BasicSelectorOptions;

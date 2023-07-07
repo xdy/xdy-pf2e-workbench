@@ -3,10 +3,10 @@ import { ItemType } from "@item/data/index.ts";
 import { UserPF2e } from "@module/documents.ts";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
+import { Statistic } from "@system/statistic/index.ts";
 import { DataModelValidationOptions } from "types/foundry/common/abstract/data.js";
 import { PartySource, PartySystemData } from "./data.ts";
 import { PartyCampaign, PartyUpdateContext } from "./types.ts";
-import { Statistic } from "@system/statistic/index.ts";
 declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     armorClass: null;
     members: CreaturePF2e[];
@@ -24,12 +24,14 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /** Override validation to defer certain properties to the campaign model */
     validate(options?: DataModelValidationOptions): boolean;
     prepareBaseData(): void;
+    prepareDerivedData(): void;
     addMembers(...newMembers: CreaturePF2e[]): Promise<void>;
     removeMembers(...remove: (ActorUUID | CreaturePF2e)[]): Promise<void>;
     /** Adds all members to combat */
     addToCombat(options?: {
         combat?: EncounterPF2e;
     }): Promise<CombatantPF2e<EncounterPF2e>[]>;
+    getRollData(): Record<string, unknown>;
     /** Re-render the sheet if data preparation is called from the familiar's master */
     reset({ actor }?: {
         actor?: boolean | undefined;

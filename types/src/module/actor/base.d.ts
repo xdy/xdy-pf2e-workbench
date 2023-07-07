@@ -15,6 +15,7 @@ import { RuleElementPF2e } from "@module/rules/rule-element/base.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { ArmorStatistic } from "@system/statistic/armor-class.ts";
 import { Statistic, StatisticCheck, StatisticDifficultyClass } from "@system/statistic/index.ts";
+import { EnrichHTMLOptionsPF2e } from "@system/text-editor.ts";
 import { ActorConditions } from "./conditions.ts";
 import { Abilities, CreatureSkills, VisionLevel } from "./creature/data.ts";
 import { GetReachParameters, ModeOfBeing } from "./creature/types.ts";
@@ -212,8 +213,8 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      * @param domains The domains of discourse from which to pull options. Always includes the "all" domain.
      */
     getRollOptions(domains?: string[]): string[];
-    /** This allows @actor.level and such to work for roll macros */
-    getRollData(): Record<string, unknown>;
+    /** This allows @actor.level and such to work for macros and inline rolls */
+    getRollData(): NonNullable<EnrichHTMLOptionsPF2e["rollData"]>;
     /** Gets an active condition on the actor or a list of conditions sorted by descending value. */
     getCondition(slugOrKey: ConditionKey, { all }: {
         all: true;
@@ -249,7 +250,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, userId: string): void;
     /** Unregister all effects possessed by this actor */
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
-    protected _onEmbeddedDocumentChange(embeddedName: "Item" | "ActiveEffect"): void;
+    protected _onEmbeddedDocumentChange(): void;
 }
 interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Actor<TParent> {
     flags: ActorFlagsPF2e;

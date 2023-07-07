@@ -8,6 +8,7 @@ import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { Bulk } from "@item/physical/index.ts";
 import { ValueAndMax, ZeroToFour } from "@module/data.ts";
+import { SheetOptions } from "@module/sheet/helpers.ts";
 import { PartyPF2e } from "./document.ts";
 interface PartySheetRenderOptions extends ActorSheetRenderOptionsPF2e {
     actors?: boolean;
@@ -34,6 +35,11 @@ interface PartySheetData extends ActorSheetDataPF2e<PartyPF2e> {
         totalWealth: number;
         totalBulk: Bulk;
     };
+    explorationSummary: {
+        speed: number;
+        activities: number;
+    };
+    explorationMembers: MemberExploration[];
     /** Unsupported items on the sheet, may occur due to disabled campaign data */
     orphaned: ItemPF2e[];
 }
@@ -55,6 +61,20 @@ interface MemberBreakdown {
     }[];
     /** If true, the current user is restricted from seeing meta details */
     restricted: boolean;
+}
+interface MemberExploration {
+    actor: ActorPF2e;
+    owner: boolean;
+    activities: {
+        img: string;
+        id: string;
+        name: string;
+        traits: SheetOptions;
+    }[];
+    choices: {
+        id: string;
+        name: string;
+    }[];
 }
 interface LanguageSheetData {
     slug: string;

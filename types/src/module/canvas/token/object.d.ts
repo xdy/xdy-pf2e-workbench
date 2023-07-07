@@ -2,6 +2,7 @@ import { TokenDocumentPF2e } from "@scene/index.ts";
 import { TokenLayerPF2e } from "../index.ts";
 import { HearingSource } from "../perception/hearing-source.ts";
 import { AuraRenderers } from "./aura/index.ts";
+import { Renderer } from "pixi.js";
 declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
     #private;
     /** Visual representation and proximity-detection facilities for auras */
@@ -9,7 +10,7 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     /** The token's line hearing source */
     hearing: HearingSource<this>;
     constructor(document: TDocument);
-    /** Guarantee boolean return */
+    /** Increase center-to-center point tolerance to be more compliant with 2e rules */
     get isVisible(): boolean;
     /** Is this token currently animating? */
     get isAnimating(): boolean;
@@ -66,6 +67,8 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
         defer?: boolean | undefined;
         deleted?: boolean | undefined;
     }): void;
+    /** Obscure the token's sprite if a hearing or tremorsense detection filter is applied to it */
+    render(renderer: Renderer): void;
     protected _destroy(): void;
     /** Refresh vision and the `EffectsPanel` */
     protected _onControl(options?: {

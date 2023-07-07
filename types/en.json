@@ -148,6 +148,7 @@
                     "Flaw": "Flaw",
                     "Flaws": "Flaws",
                     "KeyIcon": "Key",
+                    "LegacyFlaws": "Legacy Flaws",
                     "NotSelected": "Not Selected",
                     "Title": "Assign your boosts",
                     "VoluntaryFlaw": {
@@ -156,12 +157,15 @@
                         "Title": "Voluntary Flaws"
                     }
                 },
+                "Active": "Active",
+                "ActiveHeader": "Active Activities",
                 "AncestryClass": "{ancestry} {class}",
                 "ClassDC": {
                     "Label": "Class DC",
                     "LabelSpecific": "Class DC ({class})",
                     "Plural": "Class DCs"
                 },
+                "Clear": "Clear",
                 "Configure": {
                     "ShowBasicUnarmed": {
                         "Hint": "A PC always has available an unspecific unarmed attack using any part of their body. The attack may be hidden from view if the player never intends to use it.",
@@ -318,6 +322,10 @@
                 },
                 "BlankSlate": "This party doesn't have any members. Drag a creature from the actor sidebar to get started. ",
                 "Coin": "Coin",
+                "ClearActivities": {
+                    "Label": "Clear",
+                    "Complete": "Party exploration activities have been cleared"
+                },
                 "Languages": "Party Languages",
                 "MembersLabel": "Members: ",
                 "NoSpecialSenses": "No Special Senses",
@@ -325,9 +333,12 @@
                     "Title": "Remove Member",
                     "Content": "Remove member from party?"
                 },
+                "Rest": "Rest",
+                "SlotAvailable": "Slot Available",
                 "Tabs": {
                     "Overview": "Overview",
                     "Inventory": "Inventory",
+                    "Exploration": "Exploration",
                     "Orphaned": "Orphaned Items"
                 },
                 "Total": "Party Total",
@@ -2380,6 +2391,7 @@
             "AddConsumable": "Consumable",
             "AddEquipment": "Equipment",
             "AddItem": "Add Item",
+            "AddPassive": "Add Passive",
             "AddSkill": "Add Skill",
             "AddTrait": "Add Trait",
             "AddTreasure": "Treasure",
@@ -3431,6 +3443,7 @@
         "TraitArchetype": "Archetype",
         "TraitArchon": "Archon",
         "TraitAreaDamage": "Area Damage",
+        "TraitArmy": "Army",
         "TraitArtifact": "Artifact",
         "TraitAstral": "Astral",
         "TraitAsura": "Asura",
@@ -3474,6 +3487,7 @@
         "TraitCarried": "Carried",
         "TraitCatalyst": "Catalyst",
         "TraitCatfolk": "Catfolk",
+        "TraitCavalry": "Cavalry",
         "TraitCelestial": "Celestial",
         "TraitChampion": "Champion",
         "TraitChangeling": "Changeling",
@@ -4005,6 +4019,7 @@
         "TraitIncarnate": "Incarnate",
         "TraitIncorporeal": "Incorporeal",
         "TraitInevitable": "Inevitable",
+        "TraitInfantry": "Infantry",
         "TraitInfused": "Infused",
         "TraitIngested": "Ingested",
         "TraitInhaled": "Inhaled",
@@ -4026,6 +4041,7 @@
         "TraitKami": "Kami",
         "TraitKashrishi": "Kashrishi",
         "TraitKickback": "Kickback",
+        "TraitKingdom": "Kingdom",
         "TraitKitsune": "Kitsune",
         "TraitKobold": "Kobold",
         "TraitKovintus": "Kovintus",
@@ -4416,6 +4432,7 @@
         "TraitsLabel": "Traits",
         "Trap": "Trap",
         "TravelSpeed": {
+            "ActivitiesPerDay": "Activities per Day",
             "Days": "Days",
             "DetectBeforeRunningIntoIt": "Notice Everything in Advance",
             "DetectEverything": "Notice Everything",
@@ -4877,6 +4894,9 @@
             },
             "dancing": {
                 "Name": "Dancing"
+            },
+            "deathdrinking": {
+                "Name": "Deathdrinking"
             },
             "demolishing": {
                 "Name": "Demolishing"

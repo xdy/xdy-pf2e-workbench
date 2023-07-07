@@ -29,6 +29,7 @@ export declare const PF2ECONFIG: {
             fleeing: string;
             frightened: string;
             grabbed: string;
+            hidden: string;
             immobilized: string;
             invisible: string;
             paralyzed: string;
@@ -232,6 +233,7 @@ export declare const PF2ECONFIG: {
         crushing: string;
         cunning: string;
         dancing: string;
+        deathdrinking: string;
         demolishing: string;
         disrupting: string;
         earthbinding: string;
@@ -1333,11 +1335,6 @@ export declare const PF2ECONFIG: {
     actionTraits: {
         circus: string;
         summon: string;
-        civic: string;
-        commerce: string;
-        leadership: string;
-        region: string;
-        upkeep: string;
         amp: string;
         attack: string;
         auditory: string;
@@ -3858,6 +3855,14 @@ export declare const PF2ECONFIG: {
             yearOffset: number;
         };
     };
+    /** Max speed for number of hexploration activities */
+    hexplorationActivities: {
+        10: number;
+        25: number;
+        40: number;
+        55: number;
+        Infinity: number;
+    };
     runes: {
         weapon: {
             property: {
@@ -3879,6 +3884,7 @@ export declare const PF2ECONFIG: {
                 crushing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 cunning: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 dancing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                deathdrinking: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 demolishing: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 disrupting: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 earthbinding: import("@item/physical/runes.ts").WeaponPropertyRuneData;
@@ -4093,11 +4099,6 @@ export declare const PF2ECONFIG: {
             action: {
                 circus: string;
                 summon: string;
-                civic: string;
-                commerce: string;
-                leadership: string;
-                region: string;
-                upkeep: string;
                 amp: string;
                 attack: string;
                 auditory: string;
@@ -4331,11 +4332,6 @@ export declare const PF2ECONFIG: {
             affliction: {
                 circus: string;
                 summon: string;
-                civic: string;
-                commerce: string;
-                leadership: string;
-                region: string;
-                upkeep: string;
                 amp: string;
                 attack: string;
                 auditory: string;

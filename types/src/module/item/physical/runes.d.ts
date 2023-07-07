@@ -19,7 +19,7 @@ declare function getResilientBonus(itemData: {
         value: ResilientRuneType | null;
     };
 }): ZeroToThree;
-type RuneDiceProperty = "damageType" | "category" | "diceNumber" | "dieSize" | "predicate" | "critical";
+type RuneDiceProperty = "slug" | "damageType" | "category" | "diceNumber" | "dieSize" | "predicate" | "critical";
 type RuneDiceData = Partial<Pick<DamageDiceParameters, RuneDiceProperty>>;
 interface WeaponPropertyRuneData {
     attack?: {
@@ -56,7 +56,7 @@ interface RuneNoteData extends Pick<RollNoteSource, "outcome" | "predicate" | "t
     text: string;
 }
 export declare const WEAPON_PROPERTY_RUNES: Record<WeaponPropertyRuneType, WeaponPropertyRuneData>;
-declare function getPropertyRuneDice(runes: WeaponPropertyRuneType[]): DamageDicePF2e[];
+declare function getPropertyRuneDice(runes: WeaponPropertyRuneType[], options: Set<string>): DamageDicePF2e[];
 declare function getPropertyRuneStrikeAdjustments(runes: WeaponPropertyRuneType[]): StrikeAdjustment[];
 declare function getPropertyRuneModifierAdjustments(runes: WeaponPropertyRuneType[]): ModifierAdjustment[];
 interface RuneValuationData {

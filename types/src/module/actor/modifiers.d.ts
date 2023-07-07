@@ -275,6 +275,8 @@ declare class DamageDicePF2e extends DiceModifierPF2e {
     /** The selector used to determine when *has a stroke*  */
     selector: string;
     constructor(params: DamageDiceParameters);
+    /** Test the `predicate` against a set of roll options */
+    test(options: Set<string>): void;
     clone(): DamageDicePF2e;
     toObject(): RawDamageDice;
 }

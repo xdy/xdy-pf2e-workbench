@@ -3,10 +3,11 @@ import { ItemType } from "@item/data/index.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import type { PartyPF2e } from "../document.ts";
 import { PartyCampaign } from "../types.ts";
-import { KingdomCHG, KingdomGovernment, KingdomSchema, KingdomSkill, KingdomSource } from "./data.ts";
+import { KingdomCHG, KingdomGovernment, KingdomNationType, KingdomSchema, KingdomSkill, KingdomSource } from "./data.ts";
 declare const DataModel: typeof import("../../../../../types/foundry/common/abstract/data.js").default;
 /** Model for the Kingmaker campaign data type, which represents a Kingdom */
 declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements PartyCampaign {
+    nationType: KingdomNationType;
     feats: FeatGroup<PartyPF2e>;
     bonusFeats: FeatGroup<PartyPF2e>;
     skills: Record<KingdomSkill, Statistic>;
@@ -22,8 +23,9 @@ declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements Par
     createSidebarButtons(): HTMLElement[];
     update(data: DeepPartial<KingdomSource> & Record<string, unknown>): Promise<void>;
     private prepareAbilityScores;
-    private prepareStatistics;
+    private prepareData;
     private prepareFeats;
+    getRollData(): Record<string, unknown>;
     getStatistic(slug: string): Statistic | null;
 }
 interface Kingdom extends ModelPropsFromSchema<KingdomSchema> {

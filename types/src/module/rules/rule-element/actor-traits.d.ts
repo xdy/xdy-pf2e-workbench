@@ -1,12 +1,14 @@
-import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
-declare class ActorTraitsRuleElement extends RuleElementPF2e {
-    add: string[];
-    remove: string[];
-    constructor(data: ActorTraitsSource, options: RuleElementOptions);
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import type { ArrayField, StringField } from "types/foundry/common/data/fields.d.ts";
+declare class ActorTraitsRuleElement extends RuleElementPF2e<ActorTraitsRuleSchema> {
+    static defineSchema(): ActorTraitsRuleSchema;
+    constructor(data: RuleElementSource, options: RuleElementOptions);
     beforePrepareData(): void;
 }
-interface ActorTraitsSource extends RuleElementSource {
-    add?: unknown;
-    remove?: unknown;
+type ActorTraitsRuleSchema = RuleElementSchema & {
+    add: ArrayField<StringField<string, string, true, false, false>>;
+    remove: ArrayField<StringField<string, string, true, false, false>>;
+};
+interface ActorTraitsRuleElement extends RuleElementPF2e<ActorTraitsRuleSchema>, ModelPropsFromSchema<ActorTraitsRuleSchema> {
 }
 export { ActorTraitsRuleElement };

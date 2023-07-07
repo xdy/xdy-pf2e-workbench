@@ -1,10 +1,7 @@
-import { ActorPF2e } from "@actor";
-import { ActorUpdateContext } from "@actor/base.ts";
+import { ActorPF2e, PartyPF2e } from "@actor";
 export declare class ActorsPF2e<TActor extends ActorPF2e<null>> extends Actors<TActor> {
+    /** The world's active party, if one exists */
+    get party(): PartyPF2e<null> | null;
     /** Overrwriten to omit actors in parties, which are rendered separately */
     _getVisibleTreeContents(): TActor[];
-    /** Work around a bug as of Foundry V9.242 in which token default settings are ignored for compendium imports */
-    fromCompendium(actor: TActor | TActor["_source"], options?: FromCompendiumOptions): TActor["_source"];
-    /** Ditto */
-    importFromCompendium(pack: CompendiumCollection<TActor>, actorId: string, updateData?: DocumentUpdateData<TActor>, options?: ActorUpdateContext<null>): Promise<TActor | null>;
 }

@@ -42,6 +42,8 @@ declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureS
     protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e<TActor>[]>;
     /** Get the font-awesome icon used to display hero points */
     private getHeroPointsIcon;
+    /** Overriden to open sub-tabs if requested */
+    protected openTab(name: string): void;
 }
 interface CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e<TActor> {
     getStrikeFromDOM(target: HTMLElement): CharacterStrike | null;
@@ -121,7 +123,10 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
             label: string;
             actions: ActionSheetData[];
         }>;
-        exploration: ActionSheetData[];
+        exploration: {
+            active: ActionSheetData[];
+            other: ActionSheetData[];
+        };
         downtime: ActionSheetData[];
     };
     feats: FeatGroup[];
@@ -132,8 +137,11 @@ interface ActionSheetData {
     img: string;
     actionCost: ActionCost | null;
     frequency: Frequency | null;
-    feat?: FeatPF2e;
+    feat: FeatPF2e | null;
     traits: SheetOptions;
+    exploration?: {
+        active: boolean;
+    };
 }
 interface ClassDCSheetData extends ClassDCData {
     icon: string;

@@ -83,6 +83,7 @@ declare class StatisticDifficultyClass<TParent extends Statistic = Statistic> {
     constructor(parent: TParent, data: StatisticData, options?: RollOptionParameters);
     get value(): number;
     get breakdown(): string;
+    toString(): string;
 }
 interface StatisticRollParameters {
     /** What token to use for the roll itself. Defaults to the actor's token */

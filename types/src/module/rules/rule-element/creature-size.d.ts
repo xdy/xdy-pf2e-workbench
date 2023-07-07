@@ -1,19 +1,19 @@
 import { CreaturePF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ActorSizePF2e } from "@actor/data/size.ts";
-import { BracketedValue, RuleElementData, RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
+import { Size } from "@module/data.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { ResolvableValueField } from "./data.ts";
+import { RecordField } from "@system/schema-data-fields.ts";
 /**
  * @category RuleElement
  * Change a creature's size
  */
-declare class CreatureSizeRuleElement extends RuleElementPF2e {
+declare class CreatureSizeRuleElement extends RuleElementPF2e<CreatureSizeRuleSchema> {
     #private;
     protected static validActorTypes: ActorType[];
-    value: string | number | BracketedValue;
-    /** An optional reach adjustment to accompany the size */
-    reach: ReachObject | null;
-    resizeEquipment: boolean;
-    constructor(data: CreatureSizeSource, options: RuleElementOptions);
+    static defineSchema(): CreatureSizeRuleSchema;
+    constructor(data: RuleElementSource, options: RuleElementOptions);
     private static wordToAbbreviation;
     private static incrementMap;
     private static decrementMap;
@@ -21,25 +21,14 @@ declare class CreatureSizeRuleElement extends RuleElementPF2e {
     private decrementSize;
     beforePrepareData(): void;
 }
-type ReachObject = {
-    add: ReachValue;
-} | {
-    upgrade: ReachValue;
-} | {
-    override: ReachValue;
-};
-type ReachValue = string | number | BracketedValue;
-interface CreatureSizeRuleElement extends RuleElementPF2e {
+interface CreatureSizeRuleElement extends RuleElementPF2e<CreatureSizeRuleSchema>, ModelPropsFromSchema<CreatureSizeRuleSchema> {
     get actor(): CreaturePF2e;
-    data: CreatureSizeRuleElementData;
 }
-interface CreatureSizeRuleElementData extends RuleElementData {
-    resizeEquipment: boolean;
-    minimumSize?: ActorSizePF2e;
-    maximumSize?: ActorSizePF2e;
-}
-interface CreatureSizeSource extends RuleElementSource {
-    reach?: unknown;
-    resizeEquipment?: unknown;
-}
+type CreatureSizeRuleSchema = RuleElementSchema & {
+    value: ResolvableValueField<true, false, true>;
+    reach: RecordField<StringField<"add" | "upgrade" | "override", "add" | "upgrade" | "override", true, false, false>, ResolvableValueField<true, false, false>, false, false, false>;
+    resizeEquipment: BooleanField<boolean, boolean, false, false, false>;
+    minimumSize: StringField<Size, Size, false, false, false>;
+    maximumSize: StringField<Size, Size, false, false, false>;
+};
 export { CreatureSizeRuleElement };

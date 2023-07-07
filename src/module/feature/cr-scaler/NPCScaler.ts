@@ -192,6 +192,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
         await newActor.update(updateData);
     } else {
         newActor = actor.clone(updateData);
+        // @ts-ignore
         newActor = (await Actor.create(newActor?._source as any)) as ActorPF2e;
     }
 
