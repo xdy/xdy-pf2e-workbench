@@ -199,7 +199,7 @@
       },
       "npcMystifierPrefix": {
         "name": "单词或随机表前缀",
-        "hint": "添加文本为新名称前缀（如果在上面选择了随机词类型，则为中缀），默认为 ''（例如：'未知'），如果这与随机表的名称一致，将使用来自该表的随机文本结果作为前缀。 这将添加在任何随机词后缀*之后*（请参阅上一个选项。）"
+        "hint": "添加文本为新名称前缀（如果在上面选择了随机词类型，则为中缀），默认为 ''（例如：'未知'），如果这与随机表的名称一致，将使用来自该表的随机文本结果作为前缀。 这将添加在任何随机词后缀*之后*（参考上一个选项。）"
       },
       "npcMystifierUseOtherTraits": {
         "name": "使用其他特征",
@@ -245,7 +245,8 @@
         "always": "永远",
         "disabled": "停用",
         "hint": "勾选此项，设置拖动生物到激活场景中时按哪个按键来神秘化。注意如果你选择Alt键（非默认设置），NPC还会被隐藏。",
-        "name": "拖拽进场景时神秘化的快捷键"
+        "name": "拖拽进场景时神秘化的快捷键",
+        "meta": "Meta/⌘ (command)/⊞ (windows)"
       },
       "npcMystifierMystifyKey": {
         "name": "神秘化所选Token的快捷键",
@@ -253,7 +254,7 @@
       },
       "npcMystifierPostfix": {
         "name": "单词或随机表后缀",
-        "hint": "添加文本到新名称后缀，默认为“”（例如：'Creature'），如果这与随机表的名称一致，则该表的随机文本结果将用作后缀。 这将在任何随机词前缀被添加*之前*生效（见前面的选项）"
+        "hint": "添加文本到新名称后缀，默认为''（例如：'Creature'），如果这与随机表的名称一致（自带的可以参考'Workbench Adjectives'），则该表的随机文本结果将用作后缀。 这将在任何随机词前缀被添加*之前*生效（参考前面的选项）"
       },
       "customPauseImage": {
         "hint": "自定义暂停图标。留空则使用系统默认的闹钟图标。",
@@ -332,7 +333,7 @@
       },
       "castPrivateSpellAlwaysForNPC": {
         "hint": "勾选此项，NPC施法永远为秘密施法。(按住Ctrl则可公开施法)",
-        "name": "勾选此项，NPC施法永远为秘密施法。"
+        "name": "...并且NPC施法永远为秘密施法。"
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "戏法",
@@ -348,7 +349,7 @@
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "在公开消息中显示法术特征。",
-        "name": "在公开消息中显示法术特征。",
+        "name": "...并且在公开消息中显示法术特征。",
         "traitPart": " 具有以下特征：<strong>{traits}</strong>"
       },
       "npcMystifierAddRandomProperty": {
@@ -367,7 +368,7 @@
         "hint": "勾选此项，在神秘化名称中使用稀有度。"
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
-        "hint": "设置距离下次英雄点处理器开启的间隔。",
+        "hint": "设置距离下次英雄点处理器开启的默认（和最大）间隔分钟数。",
         "name": "默认英雄点处理器开启的间隔分钟数。"
       },
       "heroPointHandlerKey": {
@@ -548,8 +549,8 @@
         "off": "关闭"
       },
       "castPrivateSpellHideName": {
-        "name": "启用此项以隐藏被隐蔽施放法术的法术名。",
-        "hint": "(这真是个实验性功能)启用此项以隐藏被隐蔽施放法术的法术名。注意这可能会使你聊天栏的伤害骰出bug！"
+        "name": "启用此项以在伤害骰信息里隐藏被隐蔽着施放的法术的法术名。",
+        "hint": "启用此项以在伤害骰里隐藏被隐蔽着施放的法术的法术名，而不是隐藏整个伤害骰。"
       },
       "nonLethalIsNotLethal": {
         "unconscious": "非致命伤害不会致命",
