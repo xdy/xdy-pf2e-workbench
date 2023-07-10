@@ -218,13 +218,16 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
 }
 
 function dropHeldItemsOnBecomingUnconscious(actor) {
-    const items = actor.items.filter((i) => {
-        return i.isHeld && i.handsHeld > 0 && i.system.equipped.carryType === "held" && i.slug !== "buckler";
+    const items = actor.items.filter((item) => {
+        return (
+            // Buckler is excluded because it is strapped to the arm. Other things may also be strapped to an arm, but I have no way of knowing that.
+            item.isHeld && item.handsHeld > 0 && item.system.equipped.carryType === "held" && item.slug !== "buckler"
+        );
     });
-    for (const i of items) {
-        i.update({ "system.equipped.carryType": "dropped", "system.equipped.handsHeld": 0 });
-    }
     if (items.length > 0) {
+        for (const item of items) {
+            actor.adjustCarryType(item, "dropped", 0);
+        }
         const message = game.i18n.format(`${MODULENAME}.SETTINGS.dropHeldItemsOnBecomingUnconscious.message`, {
             name: game?.scenes?.current?.tokens?.find((t) => t.actor?.id === actor.id)?.name ?? actor.name,
             items: items.map((i) => i.name).join(", "),
@@ -232,14 +235,11 @@ function dropHeldItemsOnBecomingUnconscious(actor) {
         ChatMessage.create({
             flavor: message,
             speaker: ChatMessage.getSpeaker({ actor }),
-        });
+        }).then();
     }
 }
 
 export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
-    if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        applyEncumbranceBasedOnBulk(item);
-    }
     if (
         item.actor?.isOfType(CHARACTER_TYPE) &&
         item.actor.hasCondition("unconscious") &&
@@ -248,11 +248,15 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
     ) {
         dropHeldItemsOnBecomingUnconscious(item.actor);
     }
+
+    if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
+        applyEncumbranceBasedOnBulk(item).then();
+    }
 }
 
 export async function updateItemHook(item: ItemPF2e, _update: any) {
     if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        applyEncumbranceBasedOnBulk(item);
+        applyEncumbranceBasedOnBulk(item).then();
     }
 }
 
