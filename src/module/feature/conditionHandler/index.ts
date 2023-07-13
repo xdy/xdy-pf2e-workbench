@@ -64,11 +64,10 @@ export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e, op
 
 function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
     let isNonlethal = false;
-    if (
-        !option.startsWith("no") && option.endsWith("ForCharacters")
-            ? ["character", "familiar"].includes(actor.type)
-            : true
-    ) {
+    const handleNonlethal =
+        !option.startsWith("no") &&
+        (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true);
+    if (handleNonlethal) {
         const hp = actor.attributes.hp;
         if (hp === undefined || hp.value === undefined) {
             return false;
@@ -199,7 +198,8 @@ export async function increaseDyingOnZeroHP(
         let dyingCounter = 0;
         let hpNowAboveZero = false;
         const effectsToCreate: any[] = [];
-        const option = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));
+        const dyingOption = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));
+        const nonlethalOption = String(game.settings.get(MODULENAME, "nonLethalIsNotLethal"));
 
         const __ret = handleOrcFerocity(actor, update, effectsToCreate, name, shouldIncreaseWounded, hpNowAboveZero);
         shouldIncreaseWounded = __ret.shouldIncreaseWounded;
@@ -208,15 +208,15 @@ export async function increaseDyingOnZeroHP(
 
         if (
             !hpNowAboveZero &&
-            (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
+            (dyingOption.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
         ) {
-            if (option?.startsWith("addWoundedLevel")) {
+            if (dyingOption?.startsWith("addWoundedLevel")) {
                 dyingCounter = (actor.getCondition("wounded")?.value ?? 0) + 1;
             } else {
                 dyingCounter = 1;
             }
         }
-        if (checkIfLatestDamageMessageIsCriticalSuccess(actor, option)) {
+        if (checkIfLatestDamageMessageIsCriticalSuccess(actor, dyingOption)) {
             dyingCounter = dyingCounter + 1;
         }
         if (hpNowAboveZero) {
@@ -234,7 +234,7 @@ export async function increaseDyingOnZeroHP(
                 ? ["character", "familiar"].includes(actor.type)
                 : true
         ) {
-            if (dyingCounter > 0 && checkIfLatestDamageMessageIsNonlethal(actor, option)) {
+            if (!hpNowAboveZero && checkIfLatestDamageMessageIsNonlethal(actor, nonlethalOption)) {
                 if (!actor.hasCondition("unconscious")) {
                     actor.toggleCondition("unconscious").then();
                 }
