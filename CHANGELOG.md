@@ -1,3 +1,10 @@
+# [5.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.5...v5.5.0) (2023-07-13)
+
+
+### Features
+
+* Disconnect automating nonlethal damage from automating dying. ([595c5e9](https://github.com/xdy/xdy-pf2e-workbench/commit/595c5e936cd4df2888ae43e6a0f85b56924417c0))
+
 ## [5.4.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.4...v5.4.5) (2023-07-12)
 
 
