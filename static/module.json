@@ -4,7 +4,7 @@
   "version": "5.6.0",
   "id": "xdy-pf2e-workbench",
   "compatibility": {
-    "minimum": "11.304",
+    "minimum": "11.305",
     "verified": "11.305",
     "maximum": "11"
   },
@@ -15,8 +15,8 @@
         "type": "system",
         "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
         "compatibility": {
-          "minimum": "5.1.1",
-          "verified": "5.1.1"
+          "minimum": "5.1.2",
+          "verified": "5.1.2"
         }
       }
     ]
@@ -255,6 +255,40 @@
       }
     ],
     "manifestPlusVersion": "1.2.0",
-    "allowBugReporter": true
+    "allowBugReporter": true,
+    "xdy-pf2e-workbench": {
+      "pf2e-homebrew": {
+        "creatureTraits": {
+          "workbenched": {
+            "label": "Workbenched",
+            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+          }
+        },
+        "equipmentTraits": {
+          "workbenched": {
+            "label": "Workbenched",
+            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+          }
+        },
+        "featTraits": {
+          "workbenched": {
+            "label": "Workbenched",
+            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+          }
+        },
+        "spellTraits": {
+          "workbenched": {
+            "label": "Workbenched",
+            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+          }
+        },
+        "weaponTraits": {
+          "workbenched": {
+            "label": "Workbenched",
+            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+          }
+        }
+      }
+    }
   }
 }

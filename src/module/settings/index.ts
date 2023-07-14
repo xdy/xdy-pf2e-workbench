@@ -6,6 +6,7 @@ import { WorkbenchClientAutomationSettings } from "./automation-client.js";
 import { WorkbenchQolWorldSettings } from "./qol-world.js";
 import { WorkbenchVariantRulesSettings } from "./variantRules.js";
 import { logInfo } from "../utils.js";
+import { WorkbenchHouseRulesSettings } from "./houseRules.js";
 
 export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification.js";
 
@@ -18,6 +19,7 @@ export function registerWorkbenchSettings() {
     WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fas fa-robot");
     WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fas fa-magic", false);
     WorkbenchVariantRulesSettings.registerSettingsAndCreateMenu("fas fa-alt");
+    WorkbenchHouseRulesSettings.registerSettingsAndCreateMenu("fas fa-house");
 
     game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
         name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
@@ -218,15 +220,6 @@ export function registerWorkbenchSettings() {
     game.settings.register(MODULENAME, "dirtySortActions", {
         name: `${MODULENAME}.SETTINGS.dirtySortActions.name`,
         hint: `${MODULENAME}.SETTINGS.dirtySortActions.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "houseRulerI18n", {
-        name: `${MODULENAME}.SETTINGS.houseRulerI18n.name`,
-        hint: `${MODULENAME}.SETTINGS.houseRulerI18n.hint`,
         scope: "client",
         config: true,
         default: false,

@@ -499,6 +499,16 @@
         "flailCritical": "The target must succeed at a @Check[type:dexterity|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Flail Critical Specialization] save or be knocked @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}.",
         "hammerCritical": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Hammer Critical Specialization] save or be knocked @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}."
       },
+      "housepatcher": {
+        "hint": "(REALLY EXPERIMENTAL) Enter a json array to patch system compendiums. See housepatcher.md on the github for documentation.",
+        "name": "(REALLY EXPERIMENTAL) Housepatcher (patches in house rules). Requires refresh (f5) after changing.",
+        "notification": "Housepatcher: Applying {count} house rules to items in system compendiums."
+      },
+      "houseRulesSettings": {
+        "hint": "(Experimental) Enable and configure various house rules",
+        "label": "(Experimental) Manage House Rules Settings",
+        "name": "(Experimental) House Rules Settings"
+      },
       "logLevel": {
         "name": "Log level",
         "hint": "Log level",

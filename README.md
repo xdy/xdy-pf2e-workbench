@@ -1,4 +1,5 @@
 # xdy-pf2e-workbench
+
 ![](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Fxdy%2Fxdy-pf2e-workbench%2Fmain%2Fpackage.json&label=version&query=$.version&colorB=blue)
 ![GitHub release](https://img.shields.io/github/release-date/xdy/xdy-pf2e-workbench) [![GitHub commits](https://img.shields.io/github/commits-since/xdy/xdy-pf2e-workbench/latest)](https://github.com/xdy/xdy-pf2e-workbench/commits/)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) ![GitHub contributors](https://img.shields.io/github/contributors/xdy/xdy-pf2e-workbench)
 
@@ -211,7 +212,9 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       need to be imported, as indicated by their labels all ending with 'do not import'
 
 * Experimental features:
-    * None right now.
+    * If a feature name starts with mentioning that it's experimental, use with caution. It's probably barely tested and
+      may wreck your chat or brick your world. (No warranty expressed or implied. No user serviceable parts inside. Void
+      where prohibited. Ei saa peittää. Do not taunt happy fun ball: https://www.youtube.com/watch?v=GmqeZl8OI2M)
 
 * Deprecated features (will be removed eventually):
     * (Deprecated, use the module https://foundryvtt.com/packages/pf2-flat-check instead) An 'Equipment' named "

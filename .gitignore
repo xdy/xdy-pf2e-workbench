@@ -1,18 +1,25 @@
 # IDE
 .idea/
 .vs/
+.vscode
+icons/\!dox/
+coverage
+dist/
+foundryconfig.json
+node_modules/
+package/
+packs-temp/
+json-assets/
+types/foundry/node_modules/
+types/foundry/package-lock.json
 *.iml
 /.vscode
-icons/\!dox/
 /node_modules/
 .DS_Store
 **.env
 npm-debug.log
 coverage/
 debug/
-docs/
-node_modules/
-dist/
 
 #Foundry bundle
 foundry.js

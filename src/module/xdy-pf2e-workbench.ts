@@ -28,6 +28,7 @@ import {
     deleteItemHook,
     pf2eEndTurnHook,
     pf2eStartTurnHook,
+    pf2eSystemReadyHook,
     preCreateChatMessageHook,
     preUpdateActorHook,
     preUpdateTokenHook,
@@ -71,10 +72,14 @@ export enum Phase {
 
 export let phase: Phase = Phase.DOWN;
 
-function handle(hookName, shouldBeOn, hookFunction) {
+function handle(hookName, shouldBeOn, hookFunction, once = false) {
     if (!activeHooks.has(hookName)) {
         if (shouldBeOn) {
-            Hooks.on(hookName, hookFunction);
+            if (once) {
+                Hooks.once(hookName, hookFunction);
+            } else {
+                Hooks.on(hookName, hookFunction);
+            }
             activeHooks.add(hookName);
         }
     } else {
@@ -94,6 +99,7 @@ export function updateHooks(cleanSlate = false) {
     }
 
     const gs = game.settings;
+
     handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
     handle("renderJournalDirectory", gs.get(MODULENAME, "npcRoller"), enableNpcRollerButton);
 
@@ -140,6 +146,8 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP"),
         deleteItemHook
     );
+
+    handle("pf2e.systemReady", gs.get(MODULENAME, "housepatcher") !== "", pf2eSystemReadyHook, true);
 
     handle("pf2e.endTurn", gs.get(MODULENAME, "decreaseFrightenedConditionEachTurn"), pf2eEndTurnHook);
 
