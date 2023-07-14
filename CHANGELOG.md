@@ -1,3 +1,10 @@
+# [5.6.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.5.0...v5.6.0) (2023-07-14)
+
+
+### Features
+
+* I accidentally released a half-working house rules feature that added saves to hammer and flail critical specialization results that I had decided against releasing... Ah well. I have now added a settings toggle for it in case anyone decided they want to keep using it. ([eae6293](https://github.com/xdy/xdy-pf2e-workbench/commit/eae6293e35386338943611cc405db328cc4a7c21))
+
 # [5.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.4.5...v5.5.0) (2023-07-13)
 
 
