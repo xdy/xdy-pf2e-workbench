@@ -1,3 +1,10 @@
+# [5.7.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.6.0...v5.7.0) (2023-07-14)
+
+
+### Features
+
+* Moved the previous release's houserule-related feature to the '(Experimental) House Rules' settings menu. Also added an initial version of a *very* experimental and utterly unsupported misfeature that is probably a bad idea to the same menu. ([5520487](https://github.com/xdy/xdy-pf2e-workbench/commit/55204875a7d4c73faf3e3d9411e25ba0b4f59d59))
+
 # [5.6.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.5.0...v5.6.0) (2023-07-14)
 
 
