@@ -18,8 +18,8 @@ There is very little error handling. If you type the uuid wrong it just doesn't 
 depending on what mistake you made). It *might* complain about bad json and delete what you entered. Or it might brick
 your world. You *did* take a backup, right?
 
-The name and reason fields are optional and are not read by the patcher, it exists so you can document what the uuid
-points to.
+The name and reason fields are optional and are not read by the patcher, they exist so you can document what the uuid
+points to. (Actually, you can enter whatever fields you want other than "action", "uuid" and "data". Schema? Bah. We don't need no stinking schemas...)
 
 The array must start with a json that unlocks the compendium, then any number of jsons that update or delete entries, and
 finally a json that locks the compendium.
