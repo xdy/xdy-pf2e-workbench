@@ -2,21 +2,30 @@ This is a *really* experimental feature that's definitely a bad idea. It's a bit
 hack, but, hey, it Works On My Machine(tm). :)
 
 It allows you to patch the system's compendiums to update or delete items in them. Permanently.
+
 It runs every time the system is ready (i.e. with every refresh), so it'll keep patching compendiums until you disable
 it.
+
 To get rid of the changes it has made, disable the feature and reinstall pf2e. (Permanent change, remember?)
+
 It is *not* supported. At all. If anything breaks due to this, you get the keep all the pieces...
+
 Oh, and *do* TAKE A BACKUP before trying this. (Or, better yet, don't try it.)
 
 To use it, enter a json array like the following example in the text field in the settings, do *not* add extra newlines.
+
 There is very little error handling. If you type the uuid wrong it just doesn't update anything (or the wrong thing,
 depending on what mistake you made). It *might* complain about bad json and delete what you entered. Or it might brick
-your world. TAKE A BACKUP!
+your world. You *did* take a backup, right?
+
 The name and reason fields are optional and are not read by the patcher, it exists so you can document what the uuid
 points to.
-It must start with a json that unlocks the compendium, then any number of jsons that update or delete entries, and
+
+The array must start with a json that unlocks the compendium, then any number of jsons that update or delete entries, and
 finally a json that locks the compendium.
+
 You can change any number of compendiums, but you must unlock and lock each compendium individually.
+
 The example below is, not coincidentally, the relevant bits of my current houserules. :)
 
 ```json array
