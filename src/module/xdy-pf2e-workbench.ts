@@ -52,7 +52,7 @@ import { noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.js";
 import { registerWorkbenchSettings } from "./settings/index.js";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu.js";
 import { toggleMenuSettings } from "./feature/settingsHandler/index.js";
-import { patchFlail } from "./feature/houserules/index.js";
+import { patchI8nTexts } from "./feature/houserules/index.js";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 export const NPC_TYPE = "npc";
@@ -413,7 +413,9 @@ Hooks.once("ready", () => {
         ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.dirtySortActions.info`));
     }
 
-    patchFlail();
+    if (game.settings.get(MODULENAME, "houseRulerI18n")) {
+        patchI8nTexts();
+    }
     phase = Phase.ACTIVE;
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });

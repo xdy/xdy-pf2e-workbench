@@ -492,6 +492,13 @@
         "hint": "Check to automatically start the Hero Point handler timer when the game is ready.",
         "name": "Automatically start Hero Point Handler."
       },
+      "houseRulerI18n": {
+        "name": "House Rules",
+        "hint": "Patches in a few house rules xdy likes. Currently adds saves to prone for flail and hammer. Will become more flexible later.",
+        "info": "House Rules have been patched in (currently saves to prone for flail and hammer).",
+        "flailCritical": "The target must succeed at a @Check[type:dexterity|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Flail Critical Specialization] save or be knocked @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}.",
+        "hammerCritical": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Hammer Critical Specialization] save or be knocked @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}."
+      },
       "logLevel": {
         "name": "Log level",
         "hint": "Log level",

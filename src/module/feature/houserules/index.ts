@@ -1,8 +1,12 @@
-// Function that sets  game.i18n.translations.PF2E.Flail to "Flail" if it is undefined
+// TODO Possibly remove and replace with the more flexible version on the shelf?
+import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
-export function patchFlail() {
-    game.i18n.translations.PF2E["Item"].Weapon.CriticalSpecialization.flail =
-        "The target must succeed at a @Check[type:dexterity|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Flail Critical Specialization] save or be knocked @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}.";
-    game.i18n.translations.PF2E["Item"].Weapon.CriticalSpecialization.hammer =
-        "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Hammer Critical Specialization] save or be knocked @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}.";
+export function patchI8nTexts() {
+    game.i18n.translations.PF2E["Item"].Weapon.CriticalSpecialization.flail = game.i18n.localize(
+        `${MODULENAME}.SETTINGS.houseRulerI18n.flailCritical`
+    );
+    game.i18n.translations.PF2E["Item"].Weapon.CriticalSpecialization.hammer = game.i18n.localize(
+        `${MODULENAME}.SETTINGS.houseRulerI18n.hammerCritical`
+    );
+    ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.houseRulerI18n.info`));
 }

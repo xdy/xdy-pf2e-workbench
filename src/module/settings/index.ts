@@ -224,6 +224,15 @@ export function registerWorkbenchSettings() {
         type: Boolean,
     });
 
+    game.settings.register(MODULENAME, "houseRulerI18n", {
+        name: `${MODULENAME}.SETTINGS.houseRulerI18n.name`,
+        hint: `${MODULENAME}.SETTINGS.houseRulerI18n.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
     game.settings.register(MODULENAME, "workbenchVersion", {
         name: `${MODULENAME}.SETTINGS.workbenchVersion.name`,
         hint: `${MODULENAME}.SETTINGS.workbenchVersion.hint`,
