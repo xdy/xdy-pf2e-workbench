@@ -10,14 +10,6 @@ import { Variant } from "../skill-actions/variants.js";
 import { Action } from "@actor/actions/types.js";
 import { CharacterSkill } from "@actor/character/types.js";
 
-let selectedActor;
-
-function getActor() {
-    return canvas?.tokens.controlled.length
-        ? canvas?.tokens.controlled.map((token) => token.actor)[0]
-        : game.user.character;
-}
-
 function getBestBonuses(actorSkills, party, actionList) {
     for (const actorId of party) {
         const skills = actorSkills.get(actorId);
@@ -586,7 +578,9 @@ export function basicActionMacros() {
         return actionDialog.close();
     }
 
-    selectedActor = getActor();
+    const selectedTokenActor = canvas?.tokens?.controlled?.map((token) => token.actor);
+    const selectedActor =
+        selectedTokenActor && selectedTokenActor.length > 0 ? selectedTokenActor[0] : game.user.character;
 
     if (!selectedActor) {
         return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
