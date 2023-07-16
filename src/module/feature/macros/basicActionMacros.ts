@@ -578,24 +578,26 @@ export function basicActionMacros() {
         return actionDialog.close();
     }
 
-    const selectedTokenActor = canvas?.tokens?.controlled?.map((token) => token.actor);
-    const selectedActor =
-        selectedTokenActor && selectedTokenActor.length > 0 ? selectedTokenActor[0] : game.user.character;
+    const controlled = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
+    if (controlled.length === 0 && game.user.character) controlled.push(game.user.character);
+    const selectedActor = controlled[0];
 
-    if (!selectedActor) {
+    const supportedActorTypes = ["character", "npc", "familiar"];
+    if (!selectedActor || !supportedActorTypes.includes(selectedActor.type)) {
         return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
     }
 
     // @ts-ignore
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-            .map((x) => x.actor)
-            .filter((x) => x)
-            .filter((x) => x?.isOfType("character") || x?.isOfType("familiar") || x?.isOfType("npc")) || [];
+            .map((actor) => actor.actor)
+            .filter((actor) => {
+                return supportedActorTypes.includes(actor?.type ?? "unknown");
+            }) || [];
 
     const party = actors.filter((x) => x.hasPlayerOwner).filter((x) => x.alliance === "party");
     const partyIds = party.map((actor) => actor.id) || [];
 
-    const actorSkills = createMapOfSkillsPerActor(actors);
+    const allActorsSkills = createMapOfSkillsPerActor(actors);
 
     if (partyIds.includes(selectedActor.id)) {
         const partySkills = createMapOfSkillsPerActor(party);
@@ -613,6 +615,7 @@ export function basicActionMacros() {
                 (64 * actionsToUse.filter((x) => x.showMAP).length + 1)) /
             columns
         );
+    const selectedActorSkills = allActorsSkills.get(selectedActor.id) ?? {};
     const content = `
 <style>
   .pf2e-bg .window-content {
@@ -675,9 +678,7 @@ export function basicActionMacros() {
 }
 </style>
 <div class="action-list">
-${actionsToUse
-    .map((action, idx) => createButton(action, idx, selectedActor, partyIds, actorSkills.get(selectedActor.id)))
-    .join("")}
+${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, partyIds, selectedActorSkills)).join("")}
 </div>
 `;
     // @ts-ignore

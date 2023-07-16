@@ -88,7 +88,7 @@
           "name": "Approximate actions per row",
           "hint": "Approximate number of actions per row in the Basic Action Macros dialog. The actual number of actions per row will be the closest number of actions per row that will fit in the dialog."
         },
-        "noActorSelected": "No actor selected",
+        "noActorSelected": "No pc, npc or familiar actor is selected",
         "gmMustImport": "The GM must right click on the compendium xdy-pf2e-workbench-macros and select 'Import All Content' and make sure to check 'Keep Document IDs' when importing.",
         "cancel": "Cancel",
         "YouAreTheBestInYourParty": "You are the best in your party",
