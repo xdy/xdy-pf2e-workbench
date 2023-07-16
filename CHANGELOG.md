@@ -1,3 +1,10 @@
+## [5.7.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.1...v5.7.2) (2023-07-16)
+
+
+### Bug Fixes
+
+* More fixes to code to select user's character as fallback when starting BAM. ([3a8302e](https://github.com/xdy/xdy-pf2e-workbench/commit/3a8302e443f3dde8203f383d1dcb2f7ba6f9da9f))
+
 ## [5.7.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.0...v5.7.1) (2023-07-16)
 
 
