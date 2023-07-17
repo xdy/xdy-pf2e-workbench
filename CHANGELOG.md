@@ -1,3 +1,11 @@
+## [5.7.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.2...v5.7.3) (2023-07-17)
+
+
+### Bug Fixes
+
+* Css fix for BAM buttons with MAP, courtesy of [@apoapostolov](https://github.com/apoapostolov) ([c9d4736](https://github.com/xdy/xdy-pf2e-workbench/commit/c9d4736e6885ce4ced48491f57d6a3f381fd7303))
+* Ugly fix for some macros not working on Basic Action Macros. ([ec5eb41](https://github.com/xdy/xdy-pf2e-workbench/commit/ec5eb41f6b116d1196d00f1ccbca296efd053d1a))
+
 ## [5.7.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.1...v5.7.2) (2023-07-16)
 
 
