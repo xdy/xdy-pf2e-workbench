@@ -1,3 +1,10 @@
+## [5.7.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.3...v5.7.4) (2023-07-17)
+
+
+### Bug Fixes
+
+* Dexterity !=== reflex... ([fa647f9](https://github.com/xdy/xdy-pf2e-workbench/commit/fa647f97ef6b39fd6b91c934e31b5d1de7c04dbb))
+
 ## [5.7.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.2...v5.7.3) (2023-07-17)
 
 
