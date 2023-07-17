@@ -10,6 +10,9 @@ import { Variant } from "../skill-actions/variants.js";
 import { Action } from "@actor/actions/types.js";
 import { CharacterSkill } from "@actor/character/types.js";
 
+// Ugh. Make this not global...
+let selectedActor: any;
+
 function getBestBonuses(actorSkills, party, actionList) {
     for (const actorId of party) {
         const skills = actorSkills.get(actorId);
@@ -580,7 +583,7 @@ export function basicActionMacros() {
 
     const controlled = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
     if (controlled.length === 0 && game.user.character) controlled.push(game.user.character);
-    const selectedActor = controlled[0];
+    selectedActor = controlled[0];
 
     const supportedActorTypes = ["character", "npc", "familiar"];
     if (!selectedActor || !supportedActorTypes.includes(selectedActor.type)) {
