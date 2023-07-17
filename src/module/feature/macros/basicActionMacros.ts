@@ -657,7 +657,7 @@ export function basicActionMacros() {
   .map-wrapper {
     display: flex;
     gap: 5px;
-    margin: 1px auto;
+    margin: 0px;
     width: 250px;
 }
   .map-wrapper button {
