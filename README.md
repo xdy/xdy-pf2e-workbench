@@ -235,6 +235,38 @@ link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v1.7.1/module.
 If you want to install this module for foundry 9 use this (unsupported) module.json
 link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v3.44.3/module.json
 
+## Supported pf2e-specific QOL modules
+
+As in, I try to keep the Workbench compatible with these modules (as I use them myself). In general, if the module does
+something that the Workbench also does, I suggest disabling the Workbench equivalent.
+
+* [PF2e Action Support](https://github.com/reyzor1991/foundry-vtt-pf2e-action-support)
+* [PF2e Dailies](https://github.com/reonZ/pf2e-dailies)
+* [PF2e Dorako UI](https://github.com/Dorako/pf2e-dorako-ui)
+* [PF2e Extempore Effects](https://github.com/shemetz/pf2e-extempore-effects)
+* [PF2e Flat Check](https://github.com/jessev14/pf2-flat-check) (Has explicit support in the autoroll damage feature.)
+* [PF2e Giveth](https://github.com/reonZ/pf2e-giveth)
+* [PF2e Hands Management](https://github.com/reyzor1991/foundry-vtt-pf2e-notification)
+* [PF2e Hero Actions](https://github.com/reonZ/pf2e-hero-actions)
+* [PF2e Interactive Token Tooltip](https://github.com/reonZ/pf2e-token-hud)
+* [PF2e Keybind Menagerie](https://github.com/Drental/foundryvtt-pf2e-f-is-for-flatfooted)
+* [PF2e Modifiers Matter](https://github.com/shemetz/pf2e-modifiers-matter)
+* [PF2e Perception]() (not yet released)
+* [PF2e Ranged Combat](https://github.com/JDCalvert/FVTT-PF2e-Ranged-Combat)
+* [PF2e Reaction Checker](https://github.com/reyzor1991/foundry-vtt-pf2e-reaction)
+* [PF2e Spells Summary](https://github.com/reonZ/pf2e-spells-summary)
+* [PF2e Stances](https://github.com/reonZ/pf2e-stances)
+* [PF2e Staves](https://github.com/jessev14/pf2e-staves)
+* [PF2e Target Damage](https://github.com/MrVauxs/PF2e-Target-Damage)
+* [pf2e Utility Buttons](https://github.com/oWave/pf2e-flatcheck-helper)
+
+I do use other modules, and will try to avoid breaking even those I don't use, but they have lower priority.
+(My [current module list](docs/current_modules.txt))
+
+## NOT supported modules
+
+As in, these are broken/known to clash with the Workbench (not linking these): PF2e Sheet Skill Actions, PF2e Toolbox.
+
 ### Patch Notes:
 
 See [CHANGELOG.md](CHANGELOG.md)

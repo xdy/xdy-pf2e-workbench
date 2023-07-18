@@ -1,0 +1,85 @@
+### Active Modules
+Barbarians+ v1.1.1
+Battlezoo Ancestries: Dragons for Pathfinder 2e by Roll for Combat v1.4.1
+Battlezoo Ancestries: Dungeons for Pathfinder 2e by Roll for Combat v1.2
+Battlezoo Ancestries: Year of Monsters for Pathfinder 2e by Roll for Combat v7.0
+Battlezoo Bestiary for Pathfinder 2e by Roll For Combat v2.5
+Cautious Gamemaster's Pack v1.3.0
+Clerics+ v1.0.6
+Covered Token Rescue HUD v1.0.11
+DFreds Chat Pins v3.0.0 [Bugs URL](https://github.com/DFreds/dfreds-chat-pins/issues)
+Dice So Nice! v4.6.8 [Bugs URL](https://gitlab.com/riccisi/foundryvtt-dice-so-nice/-/issues)
+Disable Mouse Wheel Control for Sliders v2.0.0
+Drag Ruler v1.13.8 [Bugs URL](https://github.com/manuelVo/foundryvtt-drag-ruler/issues)
+PF2e Drag Ruler Integration v3.0.3
+Everything Shields - Shield Expansion Content v2.0.3
+Find the culprit v1.4.6 [Bugs URL](https://github.com/Moerill/fvtt-find-the-culprit/issues)
+Follow Me! v10.0.2
+Force Client Controls v1.0.4 [Bugs URL](https://gitlab.com/kimitsu_desu/force-client-controls/-/issues)
+Force Client Settings v2.3.2 [Bugs URL](https://gitlab.com/kimitsu_desu/force-client-settings/-/issues)
+GM-only tooltips for Notes v2.1.2
+Impossible Lands+ v1.0.0
+JB2A - Patreon Complete Collection v0.5.9
+👻 KASPER | Karma Assessment and Player Evaluation Resource v1.1.2 [Bugs URL](https://github.com/mouse0270/kasper/issues)
+CodeMirror v5.58.3-fvtt5
+Forien's Copy Environment vv2.1.9 [Bugs URL](https://github.com/League-of-Foundry-Developers/foundryvtt-forien-copy-environment/issues)
+libWrapper v1.12.12.1 [Bugs URL](https://github.com/ruipin/fvtt-lib-wrapper/issues)
+socketlib v1.0.13 [Bugs URL](https://github.com/manuelVo/foundryvtt-socketlib/issues)
+Limits v0.1.0 [Bugs URL](https://github.com/dev7355608/limits/issues)
+Macro Grid v1.0.3
+Manage Player Targets v1.1.2 [Bugs URL](https://github.com/dev7355608/manage-player-targets/issues)
+Mass Edit v1.43.8
+Module Management+ v2.2.3 [Bugs URL](https://github.com/mouse0270/module-credits/issues)
+Monk's Combat Details v11.03 [Bugs URL](https://github.com/ironmonk88/monks-combat-details/issues)
+Monk's Combat Marker v11.01 [Bugs URL](https://github.com/ironmonk88/monks-combat-marker/issues)
+Monk's TokenBar v11.01 [Bugs URL](https://github.com/ironmonk88/monks-tokenbar/issues)
+Multi Token Status v1.2.0
+Note Licker v0.1.1
+Oracles+ v1.1.0
+Ownership Viewer v11.1 [Bugs URL](https://github.com/mclemente/fvtt-module-permission-viewer/issues)
+Party Overview v2.16.1 [Bugs URL](http://github.com/mclemente/party-overview/issues)
+Pathfinder Token Pack: Bestiaries v1.0.6
+PDF to Foundry Importer v4.1.0 [Bugs URL](https://github.com/fryguy1013/pdftofoundry/issues)
+PF2e Action Support v0.0.18 [Bugs URL](https://github.com/reyzor1991/foundry-vtt-pf2e-action-support/issues)
+PF2e Companion Compendia v5.8
+PF2e Dailies v2.9.1 [Bugs URL](https://github.com/reonZ/pf2e-dailies/issues)
+PF2e Effect Description v1.5.0 [Bugs URL](https://github.com/reonZ/pf2e-effect-description/issues)
+PF2e Exploration Activities v1.2.1
+PF2E Exploration Effects v3.0.0
+pf2E Extempore Effects v1.7.1 [Bugs URL](https://github.com/shemetz/pf2e-extempore-effects/issues)
+PF2e Flat Check v1.7.0 [Bugs URL](https://github.com/jessev14/pf2-flat-check/issues)
+PF2e Giveth v1.4.0 [Bugs URL](https://github.com/reonZ/pf2e-giveth/issues)
+PF2e Hands Management (Reminder) v0.0.8 [Bugs URL](https://github.com/reyzor1991/foundry-vtt-pf2e-notification/issues)
+PF2e Hero Actions v2.7.0 [Bugs URL](https://github.com/reonZ/pf2e-hero-actions/issues)
+PF2e Interactive Token Tooltip v1.28.2 [Bugs URL](https://github.com/reonZ/pf2e-token-hud/issues)
+PF2e Keybind Menagerie v5.0.0
+Pf2E Modifiers Matter v1.7.7 [Bugs URL](https://github.com/shemetz/pf2e-modifiers-matter/issues)
+PF2e Perception v0.9.9 [Bugs URL](https://github.com/reonZ/pf2e-perception/issues)
+PF2e Ranged Combat v4.0.2 [Bugs URL](https://github.com/JDCalvert/FVTT-PF2e-Ranged-Combat/issues)
+PF2e Reaction Checker v0.2.20 [Bugs URL](https://github.com/reyzor1991/foundry-vtt-pf2e-reaction/issues)
+PF2e Rules-Based NPC Vision v2.0.1 [Bugs URL](https://github.com/JDCalvert/FVTT-PF2e-Rules-Based-NPC-Vision/issues)
+PF2e Spells Summary v1.6.0 [Bugs URL](https://github.com/reonZ/pf2e-spells-summary/issues)
+PF2e Stances v1.6.1 [Bugs URL](https://github.com/reonZ/pf2e-stances/issues)
+PF2e Staves v1.3.1
+PF2e Target Damage v2.4.13 [Bugs URL](https://github.com/MrVauxs/PF2e-Target-Damage/issues)
+PF2E Token Markers v2.3.4
+PF2e Tweaks by Ustin v0.7.2
+PF2e Unided v1.2.0 [Bugs URL](https://github.com/reonZ/pf2e-unided/issues)
+pf2e Utility Buttons v0.4.2
+PF2e Workbench v5.7.4 [Bugs URL](https://github.com/xdy/xdy-pf2e-workbench/issues)
+Pointers v0.0.5
+Polyglot v1.9.4 [Bugs URL](https://github.com/League-of-Foundry-Developers/fvtt-module-polyglot/issues)
+PopOut! v2.14 [Bugs URL](https://github.com/League-of-Foundry-Developers/fvtt-module-popout/issues)
+Portrait box v0.4.8
+Quick Insert - Search Widget v2.8.3 [Bugs URL](https://gitlab.com/fvtt-modules-lab/quick-insert/-/issues)
+Roll Tracker v1.8.2
+routinglib v1.1.0 [Bugs URL](https://github.com/manuelVo/foundryvtt-routinglib/issues)
+SoundFx Library v1.0.2
+Tokenizer v4.2.4
+Token Magic FX v0.6.4
+PF2e Dorako UI v2.2.5 [Bugs URL](https://github.com/Dorako/pf2e-dorako-ui/issues)
+User Latency v2.0.2 [Bugs URL](https://github.com/mawburn/foundry-user-latency/issues)
+Walled Templates v0.6.2
+Warp Gate v1.17.2
+Foundry Summons v1.5.0 [Bugs URL](https://github.com/mrvauxs/foundry-summons/issues)
+Witches+ v1.14
