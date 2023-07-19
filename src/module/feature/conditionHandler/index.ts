@@ -98,7 +98,7 @@ export function handleOrcFerocity(
     effectsToCreate: any[],
     name: string,
     shouldIncreaseWounded = true,
-    hpNowAboveZero = false
+    hpNowAboveZero = false,
 ) {
     const orcFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "orc-ferocity");
     const orcFerocityUsed: any = actor.itemTypes.effect.find((effect) => effect.slug === "orc-ferocity-used");
@@ -190,7 +190,7 @@ export async function increaseDyingOnZeroHP(
     actor: ActorPF2e,
     update: Record<string, string>,
     hp: number,
-    updateHp: number
+    updateHp: number,
 ): Promise<boolean> {
     if (shouldIHandleThis(actor) && hp > 0 && updateHp <= 0) {
         const name = `${actor.token?.name ?? actor.name}`;
@@ -220,13 +220,13 @@ export async function increaseDyingOnZeroHP(
             dyingCounter = dyingCounter + 1;
         }
         if (hpNowAboveZero) {
-            actor.update(update).then();
+            await actor.update(update);
         }
         if (effectsToCreate.length > 0) {
-            actor.createEmbeddedDocuments("Item", effectsToCreate).then();
+            await actor.createEmbeddedDocuments("Item", effectsToCreate);
         }
         if (shouldIncreaseWounded) {
-            actor.increaseCondition("wounded").then();
+            await actor.increaseCondition("wounded");
         }
 
         if (
@@ -236,7 +236,7 @@ export async function increaseDyingOnZeroHP(
         ) {
             if (!hpNowAboveZero && checkIfLatestDamageMessageIsNonlethal(actor, nonlethalOption)) {
                 if (!actor.hasCondition("unconscious")) {
-                    actor.toggleCondition("unconscious").then();
+                    await actor.toggleCondition("unconscious");
                 }
                 dyingCounter = 0;
             }
@@ -269,7 +269,7 @@ export async function autoRemoveDyingAtGreaterThanZeroHp(actor: ActorPF2e, hpAbo
 
 export async function autoRemoveUnconsciousAtGreaterThanZeroHP(
     actor: ActorPF2e,
-    hpRaisedAboveZero: boolean
+    hpRaisedAboveZero: boolean,
 ): Promise<void> {
     const unconscious = actor.getCondition("unconscious");
     if (shouldIHandleThis(actor) && hpRaisedAboveZero && unconscious && !unconscious.isLocked) {
