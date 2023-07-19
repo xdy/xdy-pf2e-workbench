@@ -1,3 +1,10 @@
+## [5.7.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.4...v5.7.5) (2023-07-19)
+
+
+### Bug Fixes
+
+* Possibly fix occasional race condition with dying/wounded. ([c8f5a20](https://github.com/xdy/xdy-pf2e-workbench/commit/c8f5a20c03a39050e934c0c3cbb4456c58dfdba1))
+
 ## [5.7.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.3...v5.7.4) (2023-07-17)
 
 
