@@ -1,3 +1,11 @@
+# [5.8.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.5...v5.8.0) (2023-07-20)
+
+
+### Features
+
+* Add "Effect: Condition for 1 hour (modifiable)", "Effect: Condition for 1 minute (modifiable)", "Effect: Condition for 1 round, end of turn (modifiable)" and "Effect: Condition for 10 minutes (modifiable)" to the PF2e Workbench Items compendium. ([77c94d5](https://github.com/xdy/xdy-pf2e-workbench/commit/77c94d58371e4dcd99d142cdc894eec5e48b93c4))
+* Add the option to handle Massive Damage to Manage World Automation Settings. ([2dcccf0](https://github.com/xdy/xdy-pf2e-workbench/commit/2dcccf04b51851541e16262e58f11bc370b686de))
+
 ## [5.7.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.4...v5.7.5) (2023-07-19)
 
 
