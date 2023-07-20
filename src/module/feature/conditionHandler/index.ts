@@ -29,17 +29,6 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
     }
 }
 
-function lastDamageMessage(actor: ActorPF2e) {
-    const reverse = game.messages.contents.slice(-Math.min(10, game.messages.size)).reverse();
-    const rightActor = reverse.filter((message) => message.target?.actor.id === actor.id);
-    const isRoll = rightActor.filter((message) => message.type === CONST.CHAT_MESSAGE_TYPES.ROLL);
-    // @ts-ignore
-    const isAttack = isRoll.filter((message) => message.flags.pf2e.context?.sourceType === "attack");
-    const isDamageRoll = isAttack.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
-    const isDamaging = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
-    return isDamaging;
-}
-
 export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e, option: string): boolean {
     let isCriticalSuccess = false;
     if (
@@ -84,8 +73,13 @@ export function checkIfLatestDamageMessageIsMassiveDamage(actor, option: string)
         ) {
             const hp = actor.attributes.hp;
             if (hp && hp.value && game.messages.contents.length > 0) {
-                const isDamaging = lastDamageMessage(actor);
-                isMassiveDamage = isDamaging.findLast((message) => message.rolls?.[0]?.total >= 2 * hp.max);
+                const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
+                const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
+                const isDamageRoll = rightActor
+                    // @ts-ignore
+                    .filter((message) => message.flags.pf2e.context?.type === "damage-roll");
+                const isLastDamaging = isDamageRoll.findLast((message) => message.flags.pf2e.strike?.damaging);
+                return (isLastDamaging?.rolls?.[0]?.total ?? 0) >= 2 * hp.max;
             }
         }
     }
