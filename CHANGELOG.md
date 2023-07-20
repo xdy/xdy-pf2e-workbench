@@ -1,3 +1,10 @@
+## [5.8.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.8.0...v5.8.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* Bug in Massive Damage handling. ([e80beb6](https://github.com/xdy/xdy-pf2e-workbench/commit/e80beb6b86de0aa632293f5d602bec1079cc3743))
+
 # [5.8.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.7.5...v5.8.0) (2023-07-20)
 
 
