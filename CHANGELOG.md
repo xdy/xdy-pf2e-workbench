@@ -1,3 +1,10 @@
+# [5.9.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.8.1...v5.9.0) (2023-07-20)
+
+
+### Features
+
+* Removes the creature builder as it no longer works, and a viable alternative exists: https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker ([5ca7d05](https://github.com/xdy/xdy-pf2e-workbench/commit/5ca7d05b59b4ac26bc425c1020086229594d4438))
+
 ## [5.8.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.8.0...v5.8.1) (2023-07-20)
 
 
