@@ -302,6 +302,14 @@
         "hint": "If the last damage you take is nonlethal, you don't become dying. Instead, you are unconscious with 0 HP. Requires the setting above to be enabled.",
         "name": "... depending on if last damage was nonlethal."
       },
+      "autoKillIfMassiveDamage": {
+        "yes": "Yes, for all",
+        "yesForCharacters": "Yes, for characters+familiars",
+        "yesForNpcs": "Yes, for npcs",
+        "hint": "Setting to automatically kill on taking Massive Damage.",
+        "name": "Automatically kill on taking Massive Damage.",
+        "no": "No"
+      },
       "automationClientSettings": {
         "hint": "Enable and configure local automation settings, i.e. settings that only affect your own client.",
         "label": "Manage Client Automation Settings",

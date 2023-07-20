@@ -189,6 +189,24 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     ),
                 },
             },
+            autoKillIfMassiveDamage: {
+                name: `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.name`,
+                hint: `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.hint`,
+                scope: "world",
+                config: true,
+                default: "no",
+                type: String,
+                choices: {
+                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.no`),
+                    yes: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yes`),
+                    yesForNpcs: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yesForNpcs`),
+                    yesForCharacters: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yesForCharacters`
+                    ),
+                },
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             autoRemoveDyingAtGreaterThanZeroHP: {
                 name: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.name`,
                 hint: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.hint`,

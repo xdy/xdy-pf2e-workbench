@@ -49,6 +49,7 @@ import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
 import { maxHeroPoints } from "./feature/heroPointHandler/index.js";
 import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
+import { CreaturePF2e } from "@actor/creature/document.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let result = true;
@@ -79,12 +80,18 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     return result;
 };
 
-export function handleDying(dyingCounter: number, originalDyingCounter: number, actor) {
+export function handleDying(dyingCounter: number, originalDyingCounter: number, actor, effectsToCreate: any[]) {
     // Can't await, so do the math.
     if (originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !actor.combatant?.defeated) {
         actor.combatant?.toggleDefeated().then();
-    }
-    if (originalDyingCounter + dyingCounter > 0) {
+        actor.setFlag(MODULENAME, "momentOfDeath", Date.now()).then();
+        // Dead, not dying, so clear the flag.
+        actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
+        const dead = CONFIG.statusEffects.find((x) => x.id === "dead");
+        if (dead) {
+            effectsToCreate.push([dead]);
+        }
+    } else if (originalDyingCounter + dyingCounter > 0) {
         actor
             .increaseCondition("dying", {
                 min: originalDyingCounter + dyingCounter,
@@ -144,7 +151,11 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
                                 dyingCounter = dyingCounter + 1;
                             }
                         }
-                        handleDying(dyingCounter, originalDyingCounter, actor);
+                        const effectsToCreate: any[] = [];
+                        handleDying(dyingCounter, originalDyingCounter, actor, effectsToCreate);
+                        if (effectsToCreate.length > 0) {
+                            actor.createEmbeddedDocuments("Item", effectsToCreate);
+                        }
                     }
                 }
             }
@@ -317,7 +328,7 @@ export function renderCharacterSheetPF2eHook(app: TokenHUD, html: JQuery, data: 
     }
 }
 
-export async function preUpdateActorHook(actor: ActorPF2e, update: Record<string, string>) {
+export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<string, string>) {
     const updateHp = getProperty(update, "system.attributes.hp.value");
 
     // All these are only relevant if hp has changed (it's undefined otherwise)
@@ -354,17 +365,17 @@ export async function preUpdateActorHook(actor: ActorPF2e, update: Record<string
                                     if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
                                         autoRemoveUnconsciousAtGreaterThanZeroHP(
                                             actor,
-                                            currentActorHp <= 0 && hpRaisedAbove0
+                                            currentActorHp <= 0 && hpRaisedAbove0,
                                         ).then();
                                     }
-                                }
+                                },
                             );
                         });
                     } else {
                         if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
                             autoRemoveUnconsciousAtGreaterThanZeroHP(
                                 actor,
-                                currentActorHp <= 0 && hpRaisedAbove0
+                                currentActorHp <= 0 && hpRaisedAbove0,
                             ).then();
                         }
                     }

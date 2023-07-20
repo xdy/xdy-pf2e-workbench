@@ -5,6 +5,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ItemPF2e } from "@item/base.js";
 import { ActorSystemData } from "@actor/data/base.js";
 import { handleDying } from "../../hooks.js";
+import { CreaturePF2e } from "@actor/creature/document.js";
 import BaseUser = foundry.documents.BaseUser;
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
@@ -26,6 +27,17 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
             }
         }
     }
+}
+
+function lastDamageMessage(actor: ActorPF2e) {
+    const reverse = game.messages.contents.slice(-Math.min(10, game.messages.size)).reverse();
+    const rightActor = reverse.filter((message) => message.target?.actor.id === actor.id);
+    const isRoll = rightActor.filter((message) => message.type === CONST.CHAT_MESSAGE_TYPES.ROLL);
+    // @ts-ignore
+    const isAttack = isRoll.filter((message) => message.flags.pf2e.context?.sourceType === "attack");
+    const isDamageRoll = isAttack.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
+    const isDamaging = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
+    return isDamaging;
 }
 
 export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e, option: string): boolean {
@@ -60,6 +72,24 @@ export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e, op
                 : false;
     }
     return isCriticalSuccess;
+}
+
+export function checkIfLatestDamageMessageIsMassiveDamage(actor, option: string): boolean {
+    let isMassiveDamage;
+    if (!option.startsWith("no")) {
+        if (
+            option === "yes" ||
+            (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : false) ||
+            (option.endsWith("ForNpcs") ? ["npc"].includes(actor.type) : false)
+        ) {
+            const hp = actor.attributes.hp;
+            if (hp && hp.value && game.messages.contents.length > 0) {
+                const isDamaging = lastDamageMessage(actor);
+                isMassiveDamage = isDamaging.findLast((message) => message.rolls?.[0]?.total >= 2 * hp.max);
+            }
+        }
+    }
+    return !!isMassiveDamage;
 }
 
 function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
@@ -187,7 +217,7 @@ export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], 
 }
 
 export async function increaseDyingOnZeroHP(
-    actor: ActorPF2e,
+    actor: CreaturePF2e,
     update: Record<string, string>,
     hp: number,
     updateHp: number,
@@ -204,6 +234,7 @@ export async function increaseDyingOnZeroHP(
         const __ret = handleOrcFerocity(actor, update, effectsToCreate, name, shouldIncreaseWounded, hpNowAboveZero);
         shouldIncreaseWounded = __ret.shouldIncreaseWounded;
         hpNowAboveZero = __ret.hpNowAboveZero;
+
         handleDeliberateDeath(actor, effectsToCreate, name);
 
         if (
@@ -216,17 +247,26 @@ export async function increaseDyingOnZeroHP(
                 dyingCounter = 1;
             }
         }
+
         if (checkIfLatestDamageMessageIsCriticalSuccess(actor, dyingOption)) {
             dyingCounter = dyingCounter + 1;
         }
+
         if (hpNowAboveZero) {
             await actor.update(update);
         }
-        if (effectsToCreate.length > 0) {
-            await actor.createEmbeddedDocuments("Item", effectsToCreate);
-        }
+
         if (shouldIncreaseWounded) {
             await actor.increaseCondition("wounded");
+        }
+
+        if (
+            checkIfLatestDamageMessageIsMassiveDamage(
+                actor,
+                String(game.settings.get(MODULENAME, "autoKillIfMassiveDamage")),
+            )
+        ) {
+            dyingCounter = actor.attributes.dying.max;
         }
 
         if (
@@ -242,7 +282,12 @@ export async function increaseDyingOnZeroHP(
             }
         }
 
-        handleDying(dyingCounter, 0, actor);
+        handleDying(dyingCounter, 0, actor, effectsToCreate);
+
+        if (effectsToCreate.length > 0) {
+            await actor.createEmbeddedDocuments("Item", effectsToCreate);
+        }
+
         return hpNowAboveZero;
     }
     return updateHp > 0;

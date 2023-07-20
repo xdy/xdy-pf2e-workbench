@@ -13,7 +13,7 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
             message.actor?.itemTypes.condition.filter((x) => ["blinded", "dazzled"].includes(x.slug)) ?? [];
         const targetFlat =
             message.target?.actor.itemTypes.condition.filter((x) =>
-                ["concealed", "hidden", "invisible", "undetected"].includes(x.slug)
+                ["concealed", "hidden", "invisible", "undetected"].includes(x.slug),
             ) ?? [];
         if (actorFlat?.length > 0 || targetFlat?.length > 0) {
             const { token, actor } = message;
@@ -53,7 +53,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "autoRollDamageAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "autoRollDamageAllow")))
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "autoRollDamageAllow"))),
         )
     ) {
         const flags = <ActorFlagsPF2e>message.flags.pf2e;
@@ -63,7 +63,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const autoRollDamageForStrike = game.settings.get(MODULENAME, "autoRollDamageForStrike");
             const autoRollDamageForSpellAttack = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
             const autoRollDamageForSpellNotAnAttack = Boolean(
-                game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack")
+                game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"),
             );
 
             // @ts-ignore
@@ -118,7 +118,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         ui.notifications.info(
                             game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
                                 spell: origin?.name,
-                            })
+                            }),
                         );
                     }
                     const originalRollMode = game.settings.get("core", "rollMode");
@@ -177,7 +177,7 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow")))
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),
         ) &&
         (message.flavor.includes(game.i18n.localize("PF2E.Recovery.critFailure")) ||
             message.flavor.includes(game.i18n.localize("PF2E.Recovery.critSuccess")) ||
@@ -218,7 +218,11 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
                     break;
             }
             if (originalDyingCounter > 0 || dyingCounter !== 0) {
-                handleDying(dyingCounter, originalDyingCounter, actor);
+                const effectsToCreate: any[] = [];
+                handleDying(dyingCounter, originalDyingCounter, actor, effectsToCreate);
+                if (actor && effectsToCreate.length > 0) {
+                    actor.createEmbeddedDocuments("Item", effectsToCreate);
+                }
 
                 const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
                 ChatMessage.create({
@@ -244,7 +248,7 @@ export function persistentDamage(message) {
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow")))
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
         ) &&
         message.flavor.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
         message.speaker.token &&
@@ -278,7 +282,7 @@ export function persistentHealing(message) {
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow")))
+            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
         ) &&
         game.settings.get(MODULENAME, "applyPersistentHealing") &&
         message.flavor &&
