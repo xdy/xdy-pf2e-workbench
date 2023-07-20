@@ -13,7 +13,7 @@ declare class KitPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exten
         containerId?: string;
         size?: Size;
     }): Promise<PhysicalItemPF2e<null>[]>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface KitPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly _source: KitSource;

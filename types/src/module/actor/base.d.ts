@@ -1,4 +1,3 @@
-/// <reference types="jquery" resolution-mode="require"/>
 import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AttackItem, AuraData, CheckContext, CheckContextParams, EmbeddedItemInstances, RollContext, RollContextParams, SaveType } from "@actor/types.ts";
 import { AbstractEffectPF2e, ArmorPF2e, ContainerPF2e, ItemPF2e, PhysicalItemPF2e } from "@item";
 import { ConditionKey, ConditionSlug, ConditionSource, type ConditionPF2e } from "@item/condition/index.ts";
@@ -162,11 +161,6 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      * but more can be added via the options.
      */
     getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends AttackItem | null>(params: CheckContextParams<TStatistic, TItem>): Promise<CheckContext<this, TStatistic, TItem>>;
-    /**
-     * Roll a Attribute Check
-     * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-     */
-    rollAttribute(event: JQuery.TriggeredEvent, attributeName: string): void;
     /** Toggle the provided roll option (swapping it from true to false or vice versa). */
     toggleRollOption(domain: string, option: string, value?: boolean): Promise<boolean | null>;
     toggleRollOption(domain: string, option: string, itemId?: string | null, value?: boolean, suboption?: string | null): Promise<boolean | null>;
@@ -245,9 +239,14 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     toggleCondition(conditionSlug: ConditionSlug): Promise<void>;
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, userId: string): void;
+    /**
+     * Work around upstream issue in which `TokenDocument#_onUpdateBaseActor` is only called for tokens in the viewed
+     * scene.
+     */
+    protected _updateDependentTokens(update?: Record<string, unknown>, options?: DocumentModificationContext<TParent>): void;
     /** Unregister all effects possessed by this actor */
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
     protected _onEmbeddedDocumentChange(): void;
@@ -280,6 +279,7 @@ interface HitPointsSummary {
     value: number;
     max: number;
     temp: number;
+    unrecoverable: number;
     negativeHealing: boolean;
 }
 interface ActorUpdateContext<TParent extends TokenDocumentPF2e | null> extends DocumentUpdateContext<TParent> {

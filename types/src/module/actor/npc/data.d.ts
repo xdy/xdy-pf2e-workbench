@@ -1,6 +1,6 @@
 import { ActorPF2e } from "@actor/base.ts";
-import { Abilities, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureHitPoints, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, HeldShieldData, LabeledSpeed, SaveData } from "@actor/creature/data.ts";
-import { ActorAttributesSource, ActorFlagsPF2e, PerceptionData, StrikeData } from "@actor/data/base.ts";
+import { Abilities, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, HeldShieldData, LabeledSpeed, SaveData } from "@actor/creature/data.ts";
+import { ActorAttributesSource, ActorFlagsPF2e, HitPointsStatistic, PerceptionData, StrikeData } from "@actor/data/base.ts";
 import { ActorSizePF2e } from "@actor/data/size.ts";
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
 import { AbilityString, ActorAlliance, SaveType } from "@actor/types.ts";
@@ -180,7 +180,7 @@ interface NPCSaves {
     reflex: NPCSaveData;
     will: NPCSaveData;
 }
-interface NPCHitPoints extends CreatureHitPoints {
+interface NPCHitPoints extends HitPointsStatistic {
     base?: number;
 }
 /** Perception data with an additional "base" value */

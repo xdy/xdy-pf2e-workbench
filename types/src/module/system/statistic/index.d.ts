@@ -70,6 +70,7 @@ declare class StatisticCheck<TParent extends Statistic = Statistic> {
     mod: number;
     modifiers: ModifierPF2e[];
     constructor(parent: TParent, data: StatisticData, options?: RollOptionParameters);
+    get actor(): ActorPF2e;
     createRollOptions(args?: RollOptionParameters): Set<string>;
     roll(args?: StatisticRollParameters): Promise<Rolled<CheckRoll> | null>;
     get breakdown(): string;
@@ -100,9 +101,9 @@ interface StatisticRollParameters {
     label?: string;
     /** Optional override for the dialog's title. Defaults to label */
     title?: string;
-    /** Any additional roll notes which should be used in the roll. */
+    /** Any additional roll notes that should be used in the roll. */
     extraRollNotes?: (RollNotePF2e | RollNoteSource)[];
-    /** Any additional options which should be used in the roll. */
+    /** Any additional options that should be used in the roll. */
     extraRollOptions?: string[];
     /** Additional modifiers */
     modifiers?: ModifierPF2e[];

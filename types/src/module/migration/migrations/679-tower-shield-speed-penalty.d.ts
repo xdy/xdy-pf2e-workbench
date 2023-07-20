@@ -4,5 +4,5 @@ import { MigrationBase } from "../base.ts";
 export declare class Migration679TowerShieldSpeedPenalty extends MigrationBase {
     static version: number;
     private towerShieldSlugs;
-    updateItem(itemSource: ItemSourcePF2e): Promise<void>;
+    updateItem(source: ItemSourcePF2e): Promise<void>;
 }

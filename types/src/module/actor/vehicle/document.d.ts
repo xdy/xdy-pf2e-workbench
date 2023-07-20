@@ -17,7 +17,7 @@ declare class VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocume
     prepareEmbeddedDocuments(): void;
     prepareDerivedData(): void;
     private prepareSaves;
-    protected _preUpdate(changed: DeepPartial<VehicleSource>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<VehicleSource>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: VehicleSource;

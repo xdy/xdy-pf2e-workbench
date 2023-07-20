@@ -4,7 +4,7 @@ type BookSource = BasePhysicalItemSource<"book", BookSystemSource>;
 type BookSystemSource = EquipmentSystemSource & {
     capacity: number;
 } & (FormulaBookData | SpellBookData);
-type BookSystemData = Omit<BookSystemSource, "price"> & EquipmentSystemData;
+type BookSystemData = Omit<BookSystemSource, "hp" | "price"> & EquipmentSystemData;
 interface FormulaBookData {
     subtype: "formula";
     item: ItemUUID[];

@@ -5,6 +5,7 @@
  * @category PF2
  */
 declare class PredicatePF2e extends Array<PredicateStatement> {
+    #private;
     /** Is the predicate data structurally valid? */
     readonly isValid: boolean;
     constructor(...statements: PredicateStatement[] | [PredicateStatement[]]);
@@ -18,16 +19,11 @@ declare class PredicatePF2e extends Array<PredicateStatement> {
     test(options: Set<string> | string[]): boolean;
     toObject(): RawPredicate;
     clone(): PredicatePF2e;
-    /** Is the provided statement true? */
-    private isTrue;
-    private testBinaryOp;
-    /** Is the provided compound statement true? */
-    private testCompound;
 }
 declare class StatementValidator {
+    #private;
     static isStatement(statement: unknown): statement is PredicateStatement;
     static isAtomic(statement: unknown): statement is Atom;
-    private static binaryOperators;
     static isBinaryOp(statement: unknown): statement is BinaryOperation;
     static isCompound(statement: unknown): statement is CompoundStatement;
     static isAnd(statement: {
@@ -39,6 +35,9 @@ declare class StatementValidator {
     static isOr(statement: {
         or?: unknown;
     }): statement is Disjunction;
+    static isXor(statement: {
+        xor?: unknown;
+    }): statement is ExclusiveDisjunction;
     static isNor(statement: {
         nor?: unknown;
     }): statement is JointDenial;
@@ -73,6 +72,9 @@ type Conjunction = {
 type Disjunction = {
     or: PredicateStatement[];
 };
+type ExclusiveDisjunction = {
+    xor: PredicateStatement[];
+};
 type Negation = {
     not: PredicateStatement;
 };
@@ -86,7 +88,7 @@ type Conditional = {
     if: PredicateStatement;
     then: PredicateStatement;
 };
-type CompoundStatement = Conjunction | Disjunction | AlternativeDenial | JointDenial | Negation | Conditional;
+type CompoundStatement = Conjunction | Disjunction | ExclusiveDisjunction | AlternativeDenial | JointDenial | Negation | Conditional;
 type PredicateStatement = Atom | CompoundStatement;
 type RawPredicate = PredicateStatement[];
 export { PredicatePF2e, PredicateStatement, RawPredicate, StatementValidator };

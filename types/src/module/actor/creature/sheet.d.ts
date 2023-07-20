@@ -3,8 +3,8 @@
 /// <reference types="tooltipster" />
 import { ActorPF2e, CreaturePF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import { ItemSourcePF2e } from "@item/data/index.ts";
+import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ZeroToFour } from "@module/data.ts";
 import { ActorSheetPF2e } from "../sheet/base.ts";
@@ -24,8 +24,6 @@ export declare abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> ext
     protected prepareSpellcasting(): Promise<SpellcastingSheetData[]>;
     /** Get the font-awesome icon used to display a certain level of skill proficiency */
     protected getProficiencyIcon(level: ZeroToFour): string;
-    /** Preserve browser focus on unnamed input elements when updating */
-    protected _render(force?: boolean, options?: RenderOptions): Promise<void>;
     activateListeners($html: JQuery): void;
     /** Adds support for moving spells between spell levels, spell collections, and spell preparation */
     protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e<TActor>[]>;
@@ -33,7 +31,6 @@ export declare abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> ext
     protected _handleDroppedItem(event: ElementDragEvent, item: ItemPF2e<ActorPF2e | null>, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
     /** Replace sheet config with a special PC config form application */
     protected _getHeaderButtons(): ApplicationHeaderButton[];
-    protected _onSubmit(event: Event, options?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
     /** Redirect an update to shield HP to the actual item */
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }

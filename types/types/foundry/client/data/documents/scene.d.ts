@@ -51,7 +51,7 @@ declare global {
             data: PreDocumentId<this["_source"]>,
             options: DocumentModificationContext<null>,
             user: User
-        ): Promise<void>;
+        ): Promise<boolean | void>;
 
         protected override _onCreate(
             data: this["_source"],
@@ -63,11 +63,11 @@ declare global {
             data: DocumentUpdateData<this>,
             options: SceneUpdateContext,
             user: User
-        ): Promise<void>;
+        ): Promise<boolean | void>;
 
         override _onUpdate(changed: DeepPartial<this["_source"]>, options: SceneUpdateContext, userId: string): void;
 
-        protected override _preDelete(options: DocumentModificationContext<null>, user: User): Promise<void>;
+        protected override _preDelete(options: DocumentModificationContext<null>, user: User): Promise<boolean | void>;
 
         protected override _onDelete(options: DocumentModificationContext<null>, userId: string): void;
 
@@ -78,63 +78,33 @@ declare global {
         protected _onActivate(active: boolean): Promise<this>;
 
         protected override _preCreateDescendantDocuments(
-            embeddedName: "Token",
-            result: foundry.documents.TokenSource[],
-            options: SceneEmbeddedModificationContext<this>,
-            userId: string
-        ): void;
-
-        protected override _onCreateDescendantDocuments(
-            embeddedName: "Token",
-            documents: TokenDocument<this>[],
-            result: foundry.documents.TokenSource[],
-            options: SceneEmbeddedModificationContext<this>,
-            userId: string
-        ): void;
-        protected override _onCreateDescendantDocuments(
-            embeddedName: string,
-            documents: foundry.abstract.Document<this>[],
-            result: object[],
-            options: SceneEmbeddedModificationContext<this>,
+            parent: this,
+            collection: "tokens",
+            data: foundry.documents.TokenSource[][],
+            options: DocumentModificationContext<this>,
             userId: string
         ): void;
 
         protected override _preUpdateDescendantDocuments(
-            embeddedName: "Token",
-            result: TokenDocument<this>["_source"][],
+            parent: this,
+            collection: string,
+            changes: object[],
             options: SceneEmbeddedModificationContext<this>,
             userId: string
         ): void;
 
         protected override _onUpdateDescendantDocuments(
-            embeddedName: "Token",
-            documents: TokenDocument<this>[],
-            result: TokenDocument<this>["_source"][],
+            parent: this,
+            collection: string,
+            documents: ClientDocument[],
+            changes: object[],
             options: SceneEmbeddedModificationContext<this>,
             userId: string
         ): void;
 
-        protected override _preDeleteDescendantDocuments(
-            embeddedName: "Token",
-            result: string[],
-            options: SceneEmbeddedModificationContext<this>,
-            userId: string
-        ): void;
-
-        protected override _onDeleteDescendantDocuments(
-            embeddedName: "Token",
-            documents: TokenDocument<this>[],
-            result: string[],
-            options: SceneEmbeddedModificationContext<this>,
-            userId: string
-        ): void;
-        protected override _onDeleteDescendantDocuments(
-            embeddedName: string,
-            documents: foundry.abstract.Document<this>[],
-            result: string[],
-            options: SceneEmbeddedModificationContext<this>,
-            userId: string
-        ): void;
+        /* -------------------------------------------- */
+        /*  Importing and Exporting                     */
+        /* -------------------------------------------- */
 
         override toCompendium(pack: CompendiumCollection<this>): this["_source"];
 

@@ -1,7 +1,7 @@
 import { FeatPF2e, ItemPF2e } from "@item";
 import { FeatCategory } from "@item/feat/types.ts";
 import { CharacterPF2e } from "./document.ts";
-import { BonusFeat, SlottedFeat } from "./data.ts";
+import { BonusFeat, FeatLike, SlottedFeat } from "./data.ts";
 import { ActorPF2e } from "@actor";
 type FeatSlotLevel = number | {
     id: string;
@@ -35,11 +35,11 @@ interface CharacterFeats<TActor extends CharacterPF2e> extends Collection<FeatGr
     get(key: "ancestry" | "ancestryfeature" | "class" | "classfeature" | "general" | "skill"): FeatGroup<TActor>;
     get(key: string): FeatGroup<TActor> | undefined;
 }
-declare class FeatGroup<TActor extends ActorPF2e = ActorPF2e> {
-    private actor;
+declare class FeatGroup<TActor extends ActorPF2e = ActorPF2e, TItem extends FeatLike = FeatPF2e> {
+    actor: TActor;
     id: string;
     label: string;
-    feats: (SlottedFeat | BonusFeat)[];
+    feats: (SlottedFeat<TItem> | BonusFeat<TItem>)[];
     /** Whether the feats are slotted by level or free-form */
     slotted: boolean;
     /** Will move to sheet data later */
@@ -47,15 +47,15 @@ declare class FeatGroup<TActor extends ActorPF2e = ActorPF2e> {
     /** Feat Types that are supported */
     supported: FeatCategory[];
     /** Lookup for the slots themselves */
-    slots: Record<string, SlottedFeat | undefined>;
+    slots: Record<string, SlottedFeat<TItem> | undefined>;
     constructor(actor: TActor, options: FeatGroupOptions);
     /** Assigns a feat to its correct slot during data preparation, returning true if successful */
-    assignFeat(feat: FeatPF2e): boolean;
+    assignFeat(feat: TItem): boolean;
     /** Is this category slotted and without any empty slots */
     get isFull(): boolean;
-    isFeatValid(feat: FeatPF2e): boolean;
+    isFeatValid(feat: TItem): boolean;
     /** Adds a new feat to the actor, or reorders an existing one, into the correct slot */
-    insertFeat(feat: FeatPF2e, { slotId }?: {
+    insertFeat(feat: TItem, { slotId }?: {
         slotId?: string | null;
     }): Promise<ItemPF2e<TActor>[]>;
 }

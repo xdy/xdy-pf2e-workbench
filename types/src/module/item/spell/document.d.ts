@@ -31,16 +31,21 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     trickMagicEntry: TrickMagicItemEntry<NonNullable<TParent>> | null;
     overlays: SpellOverlayCollection;
     constructor(data: PreCreate<ItemSourcePF2e>, context?: SpellConstructionContext<TParent>);
+    /** The spell's "base" rank; that is, before heightening */
+    get baseRank(): OneToTen;
+    /** Legacy getter, though not yet deprecated */
     get baseLevel(): OneToTen;
     /**
-     * Heightened level of the spell if heightened, otherwise base.
+     * Heightened rank of the spell if heightened, otherwise base.
      * This applies for spontaneous or innate spells usually, but not prepared ones.
      */
+    get rank(): number;
+    /** Legacy getter, though not yet deprecated */
     get level(): number;
     get traits(): Set<SpellTrait>;
     /** Action traits added when Casting this Spell */
     get castingTraits(): ActionTrait[];
-    get school(): MagicSchool;
+    get school(): MagicSchool | null;
     get traditions(): Set<MagicTradition>;
     get spellcasting(): BaseSpellcastingEntry<NonNullable<TParent>> | null;
     get isAttack(): boolean;
@@ -57,7 +62,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get hasVariants(): boolean;
     get uuid(): ItemUUID;
     /** Given a slot level, compute the actual level the spell will be cast at */
-    computeCastLevel(slotLevel?: number): number;
+    computeCastRank(slotRank?: number): number;
     getRollData(rollOptions?: {
         castLevel?: number | string;
     }): NonNullable<EnrichHTMLOptions["rollData"]>;
@@ -72,7 +77,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
         castLevel?: number;
         overlayIds?: string[];
     }): SpellPF2e<NonNullable<TParent>> | null;
-    getHeightenLayers(level?: number): SpellHeightenLayer[];
+    getHeightenLayers(rank?: number): SpellHeightenLayer[];
     createTemplate(): MeasuredTemplatePF2e;
     placeTemplate(): void;
     prepareBaseData(): void;
@@ -86,11 +91,11 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     rollAttack(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, attackNumber?: number, context?: StatisticRollParameters): Promise<void>;
     rollDamage(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, mapIncreases?: ZeroToTwo): Promise<Rolled<DamageRoll> | null>;
     /** Roll counteract check */
-    rollCounteract(event: JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
+    rollCounteract(event?: JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
     getOriginData(): ItemOriginFlag;
     update(data: DocumentUpdateData<this>, options?: DocumentUpdateContext<TParent>): Promise<this>;
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<SpellSource>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<SpellSource>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly _source: SpellSource;

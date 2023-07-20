@@ -1,3 +1,4 @@
+import { ActorPF2e } from "@actor/base.ts";
 import { DexterityModifierCapData } from "@actor/character/types.ts";
 import { Abilities } from "@actor/creature/data.ts";
 import { ActorSizePF2e } from "@actor/data/size.ts";
@@ -7,13 +8,12 @@ import { ConsumablePF2e, MeleePF2e, WeaponPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { DocumentSchemaRecord, Rarity, Size, ValueAndMaybeMax, ZeroToTwo } from "@module/data.ts";
 import { AutoChangeEntry } from "@module/rules/rule-element/ae-like.ts";
-import { RollParameters, AttackRollParams, DamageRollParams } from "@module/system/rolls.ts";
+import { AttackRollParams, DamageRollParams, RollParameters } from "@module/system/rolls.ts";
 import { CheckRoll } from "@system/check/roll.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
+import { StatisticTraceData } from "@system/statistic/data.ts";
 import { ActorType } from "./index.ts";
 import { ImmunityData, ImmunitySource, ResistanceData, ResistanceSource, WeaknessData, WeaknessSource } from "./iwr.ts";
-import { ActorPF2e } from "@actor/base.ts";
-import { StatisticTraceData } from "@system/statistic/data.ts";
 /** Base interface for all actor data */
 interface BaseActorSourcePF2e<TType extends ActorType, TSystemSource extends ActorSystemSource = ActorSystemSource> extends foundry.documents.ActorSource<TType, TSystemSource, ItemSourcePF2e> {
     flags: DeepPartial<ActorFlagsPF2e>;
@@ -59,8 +59,6 @@ interface ActorSystemData extends ActorSystemSource {
     actions?: StrikeData[];
     attributes: ActorAttributes;
     traits?: ActorTraitsData<string>;
-    /** Icons appearing in the Effects Tracker application */
-    tokenEffects: TemporaryEffect[];
     /** An audit log of automatic, non-modifier changes applied to various actor data nodes */
     autoChanges: Record<string, AutoChangeEntry[] | undefined>;
 }
@@ -89,6 +87,7 @@ interface ActorAttributes extends ActorAttributesSource {
     };
 }
 interface ActorHitPoints extends Required<BaseHitPointsSource> {
+    unrecoverable: number;
     negativeHealing: boolean;
 }
 interface ActorDetails extends ActorDetailsSource {
@@ -125,7 +124,7 @@ number
 /** Requires the actor's animal companion to be adjacent to the target */
  | "animal-companion";
 /** Data related to actor hitpoints. */
-type HitPointsData = StatisticModifier & Required<BaseHitPointsSource>;
+type HitPointsStatistic = StatisticModifier & ActorHitPoints;
 interface ActorTraitsSource<TTrait extends string> {
     /** Actual Pathfinder traits */
     value: TTrait[];
@@ -226,8 +225,8 @@ interface StrikeData extends StatisticModifier {
     }[];
     /** Ammunition choices and selected ammo if this is a ammo consuming weapon. */
     ammunition?: {
-        compatible: ConsumablePF2e[];
-        incompatible: ConsumablePF2e[];
+        compatible: (ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e>)[];
+        incompatible: (ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e>)[];
         selected: {
             id: string;
             compatible: boolean;
@@ -257,4 +256,4 @@ interface PrototypeTokenPF2e<TParent extends ActorPF2e | null> extends foundry.d
         };
     };
 }
-export { AbilityBasedStatistic, ActorAttributes, ActorAttributesSource, ActorDetails, ActorDetailsSource, ActorFlagsPF2e, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, ArmorClassData, BaseActorSourcePF2e, BaseHitPointsSource, DamageRollFunction, GangUpCircumstance, HitPointsData, InitiativeData, PerceptionData, PrototypeTokenPF2e, RollFunction, RollOptionFlags, Rollable, StrikeData, TraitViewData, };
+export { AbilityBasedStatistic, ActorAttributes, ActorAttributesSource, ActorDetails, ActorDetailsSource, ActorFlagsPF2e, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, ArmorClassData, BaseActorSourcePF2e, BaseHitPointsSource, DamageRollFunction, GangUpCircumstance, HitPointsStatistic, InitiativeData, PerceptionData, PrototypeTokenPF2e, RollFunction, RollOptionFlags, Rollable, StrikeData, TraitViewData, };

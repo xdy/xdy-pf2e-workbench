@@ -1,4 +1,4 @@
-import { DamageDiceParameters, DamageDicePF2e, ModifierAdjustment } from "@actor/modifiers.ts";
+import { DamageDicePF2e, DamageDiceParameters, ModifierAdjustment } from "@actor/modifiers.ts";
 import { ResistanceType } from "@actor/types.ts";
 import { ArmorPF2e, WeaponPF2e } from "@item";
 import type { ResilientRuneType } from "@item/armor/types.ts";
@@ -6,7 +6,6 @@ import type { OtherWeaponTag, StrikingRuneType, WeaponPropertyRuneType, WeaponTr
 import { OneToFour, OneToThree, Rarity, ZeroToFour, ZeroToThree } from "@module/data.ts";
 import { RollNoteSource } from "@module/notes.ts";
 import { StrikeAdjustment } from "@module/rules/synthetics.ts";
-import { RawPredicate } from "@system/predication.ts";
 declare function getPropertySlots(item: WeaponPF2e | ArmorPF2e): ZeroToFour;
 declare function getPropertyRunes(item: WeaponPF2e | ArmorPF2e, slots: number): string[];
 declare function getStrikingDice(itemData: {
@@ -28,9 +27,7 @@ interface WeaponPropertyRuneData {
     damage?: {
         dice?: RuneDiceData[];
         notes?: RuneNoteData[];
-        adjustments?: (Omit<ModifierAdjustment, "predicate"> & {
-            predicate?: RawPredicate;
-        })[];
+        adjustments?: ModifierAdjustment[];
         /**
          * A list of resistances this weapon's damage will ignore--not limited to damage from the rune.
          * If `max` is numeric, the resistance ignored will be equal to the lower of the provided maximum and the
@@ -75,4 +72,4 @@ interface WeaponValuationData {
     } & Record<OneToThree, RuneValuationData>;
 }
 declare const WEAPON_VALUATION_DATA: WeaponValuationData;
-export { getPropertyRuneDice, getPropertyRuneModifierAdjustments, getPropertyRunes, getPropertyRuneStrikeAdjustments, getPropertySlots, getResilientBonus, getStrikingDice, RuneValuationData, WEAPON_VALUATION_DATA, WeaponPropertyRuneData, };
+export { RuneValuationData, WEAPON_VALUATION_DATA, WeaponPropertyRuneData, getPropertyRuneDice, getPropertyRuneModifierAdjustments, getPropertyRuneStrikeAdjustments, getPropertyRunes, getPropertySlots, getResilientBonus, getStrikingDice, };

@@ -1,10 +1,10 @@
 import { CraftingEntryData } from "@actor/character/crafting/entry.ts";
 import { CraftingFormulaData } from "@actor/character/crafting/formula.ts";
-import { AbilityData, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureHitPoints, CreatureResources, CreatureSystemData, CreatureTraitsData, HeldShieldData, SaveData, SkillAbbreviation, SkillData } from "@actor/creature/data.ts";
+import { AbilityData, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureResources, CreatureSystemData, CreatureTraitsData, HeldShieldData, SaveData, SkillAbbreviation, SkillData } from "@actor/creature/data.ts";
 import { CreatureSensePF2e } from "@actor/creature/sense.ts";
-import { AbilityBasedStatistic, ActorFlagsPF2e, InitiativeData, PerceptionData, StrikeData, TraitViewData } from "@actor/data/base.ts";
+import { AbilityBasedStatistic, ActorFlagsPF2e, HitPointsStatistic, InitiativeData, PerceptionData, StrikeData, TraitViewData } from "@actor/data/base.ts";
 import { AbilityString, SaveType } from "@actor/types.ts";
-import { FeatPF2e, WeaponPF2e } from "@item";
+import { FeatPF2e, ItemPF2e, WeaponPF2e } from "@item";
 import { ArmorCategory } from "@item/armor/types.ts";
 import { ProficiencyRank } from "@item/data/index.ts";
 import { DeitySystemData } from "@item/deity/data.ts";
@@ -19,6 +19,9 @@ import { StatisticTraceData } from "@system/statistic/data.ts";
 import { CharacterPF2e } from "./document.ts";
 import { WeaponAuxiliaryAction } from "./helpers.ts";
 import { CharacterSheetTabVisibility } from "./sheet.ts";
+import { ItemSystemData } from "@item/data/base.ts";
+import { ActorPF2e } from "@actor";
+import { FeatGroup } from "./feats.ts";
 interface CharacterSource extends BaseCreatureSource<"character", CharacterSystemData> {
     flags: DeepPartial<CharacterFlags>;
 }
@@ -297,6 +300,10 @@ type CharacterDetails = Omit<CreatureDetails, "creature"> & {
     ancestry: {
         name: string;
         trait: string;
+        /** An "adopted" ancestry (typically gained through the Adopted Ancestry feat) */
+        adopted: string | null;
+        /** A versatile ancestry trait (such as "orc" for being a half-orc) */
+        versatile: string | null;
         /** All ancestries and versatile heritages the character "counts as" when selecting ancestry feats */
         countsAs: string[];
     } | null;
@@ -381,19 +388,29 @@ interface CharacterAttributes extends CreatureAttributes {
     /** Whether this actor is under a battle form polymorph effect */
     battleForm: boolean;
 }
-interface CharacterHitPoints extends CreatureHitPoints {
+interface CharacterHitPoints extends HitPointsStatistic {
     recoveryMultiplier: number;
     recoveryAddend: number;
 }
 interface CharacterTraitsData extends CreatureTraitsData {
     senses: CreatureSensePF2e[];
 }
-interface SlottedFeat {
+/** Any document that is similar enough to a feat/feature to be used as a feat for the purposes of feat groups */
+interface FeatLike<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
+    category: string;
+    group: FeatGroup<Exclude<TParent, null>, this> | null;
+    isFeat: boolean;
+    isFeature: boolean;
+    system: ItemSystemData & {
+        location: string | null;
+    };
+}
+interface SlottedFeat<T extends FeatLike = FeatPF2e> {
     id: string;
     level: number | string;
-    feat?: FeatPF2e;
+    feat?: T;
 }
-interface BonusFeat {
-    feat: FeatPF2e;
+interface BonusFeat<T extends FeatLike = FeatPF2e> {
+    feat: T;
 }
-export { BaseWeaponProficiencyKey, BonusFeat, CategoryProficiencies, CharacterAttributes, CharacterDetails, CharacterFlags, CharacterProficiency, CharacterResources, CharacterSaveData, CharacterSaves, CharacterSkillData, CharacterSource, CharacterStrike, CharacterSystemData, CharacterTraitsData, ClassDCData, LinkedProficiency, MagicTraditionProficiencies, MartialProficiencies, MartialProficiency, MartialProficiencyKey, SlottedFeat, WeaponGroupProficiencyKey, };
+export { BaseWeaponProficiencyKey, BonusFeat, CategoryProficiencies, CharacterAttributes, CharacterDetails, CharacterFlags, CharacterProficiency, CharacterResources, CharacterSaveData, CharacterSaves, CharacterSkillData, CharacterSource, CharacterStrike, CharacterSystemData, CharacterTraitsData, ClassDCData, FeatLike, LinkedProficiency, MagicTraditionProficiencies, MartialProficiencies, MartialProficiency, MartialProficiencyKey, SlottedFeat, WeaponGroupProficiencyKey, };

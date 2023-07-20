@@ -4,24 +4,14 @@ import { ArmorCategory, ArmorGroup, ArmorTrait, BaseArmorType, OtherArmorTag, Re
 type ArmorSource = BasePhysicalItemSource<"armor", ArmorSystemSource>;
 interface ArmorSystemSource extends Investable<PhysicalSystemSource> {
     traits: ArmorTraits;
-    armor: {
-        value: number;
-    };
     category: ArmorCategory;
     group: ArmorGroup | null;
     baseItem: BaseArmorType | null;
-    strength: {
-        value: number;
-    };
-    dex: {
-        value: number;
-    };
-    check: {
-        value: number;
-    };
-    speed: {
-        value: number;
-    };
+    acBonus: number;
+    strength: number | null;
+    dexCap: number;
+    checkPenalty: number | null;
+    speedPenalty: number | null;
     potencyRune: {
         value: OneToFour | null;
     };
@@ -41,7 +31,7 @@ interface ArmorSystemSource extends Investable<PhysicalSystemSource> {
         value: string;
     };
 }
-interface ArmorSystemData extends Omit<ArmorSystemSource, "identification" | "price" | "temporary" | "usage">, Omit<Investable<PhysicalSystemData>, "traits"> {
+interface ArmorSystemData extends Omit<ArmorSystemSource, "hp" | "identification" | "price" | "temporary" | "usage">, Omit<Investable<PhysicalSystemData>, "traits"> {
     baseItem: BaseArmorType;
     runes: {
         potency: number;

@@ -1,11 +1,11 @@
 import { ZeroToFour } from "@module/data.ts";
 import { ArrayField, StringField } from "types/foundry/common/data/fields.js";
-import { KingdomAbility } from "./data.ts";
+import { KingdomAbility } from "./types.ts";
 declare const KINGDOM_SCHEMA: {
     type: StringField<"kingmaker", "kingmaker", true, false, boolean>;
     name: StringField<string, string, true, false, boolean>;
     img: StringField<string, string, true, false, boolean>;
-    capital: StringField<"", "", true, boolean, boolean>;
+    capital: StringField<"", "", true, false, boolean>;
     size: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
     level: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
     xp: import("types/foundry/common/data/fields.js").SchemaField<{
@@ -220,19 +220,19 @@ declare const KINGDOM_SCHEMA: {
             boosts: ArrayField<StringField<KingdomAbility | "free", KingdomAbility | "free", true, false>>;
             flaw: StringField<KingdomAbility, KingdomAbility, true, true>;
         }>, true, true, true>;
-        skills: import("types/foundry/common/data/fields.js").SchemaField<Record<"magic" | "exploration" | "agriculture" | "arts" | "boating" | "defense" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
+        skills: import("types/foundry/common/data/fields.js").SchemaField<Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }, SourceFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }>, ModelPropsFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
-        }>, true, false, true>>, SourceFromSchema<Record<"magic" | "exploration" | "agriculture" | "arts" | "boating" | "defense" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
+        }>, true, false, true>>, SourceFromSchema<Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }, SourceFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }>, ModelPropsFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
-        }>, true, false, true>>>, ModelPropsFromSchema<Record<"magic" | "exploration" | "agriculture" | "arts" | "boating" | "defense" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
+        }>, true, false, true>>>, ModelPropsFromSchema<Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }, SourceFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
@@ -304,19 +304,19 @@ declare const KINGDOM_SCHEMA: {
             boosts: ArrayField<StringField<KingdomAbility | "free", KingdomAbility | "free", true, false>>;
             flaw: StringField<KingdomAbility, KingdomAbility, true, true>;
         }>, true, true, true>;
-        skills: import("types/foundry/common/data/fields.js").SchemaField<Record<"magic" | "exploration" | "agriculture" | "arts" | "boating" | "defense" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
+        skills: import("types/foundry/common/data/fields.js").SchemaField<Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }, SourceFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }>, ModelPropsFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
-        }>, true, false, true>>, SourceFromSchema<Record<"magic" | "exploration" | "agriculture" | "arts" | "boating" | "defense" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
+        }>, true, false, true>>, SourceFromSchema<Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }, SourceFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }>, ModelPropsFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
-        }>, true, false, true>>>, ModelPropsFromSchema<Record<"magic" | "exploration" | "agriculture" | "arts" | "boating" | "defense" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
+        }>, true, false, true>>>, ModelPropsFromSchema<Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }, SourceFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
@@ -388,19 +388,19 @@ declare const KINGDOM_SCHEMA: {
             boosts: ArrayField<StringField<KingdomAbility | "free", KingdomAbility | "free", true, false>>;
             flaw: StringField<KingdomAbility, KingdomAbility, true, true>;
         }>, true, true, true>;
-        skills: import("types/foundry/common/data/fields.js").SchemaField<Record<"magic" | "exploration" | "agriculture" | "arts" | "boating" | "defense" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
+        skills: import("types/foundry/common/data/fields.js").SchemaField<Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }, SourceFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }>, ModelPropsFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
-        }>, true, false, true>>, SourceFromSchema<Record<"magic" | "exploration" | "agriculture" | "arts" | "boating" | "defense" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
+        }>, true, false, true>>, SourceFromSchema<Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }, SourceFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }>, ModelPropsFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
-        }>, true, false, true>>>, ModelPropsFromSchema<Record<"magic" | "exploration" | "agriculture" | "arts" | "boating" | "defense" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
+        }>, true, false, true>>>, ModelPropsFromSchema<Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", import("types/foundry/common/data/fields.js").SchemaField<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;
         }, SourceFromSchema<{
             rank: import("types/foundry/common/data/fields.js").NumberField<ZeroToFour, ZeroToFour, true, false, true>;

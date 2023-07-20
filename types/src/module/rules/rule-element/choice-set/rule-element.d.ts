@@ -1,14 +1,18 @@
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { RuleElementOptions, RuleElementPF2e } from "../index.ts";
-import { ChoiceSetData, ChoiceSetPackQuery, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet } from "./data.ts";
+import { ChoiceSetPackQuery, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet } from "./data.ts";
 /**
  * Present a set of options to the user and assign their selection to an injectable property
  * @category RuleElement
  */
 declare class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
     #private;
-    /** The choices one of various possible "uninflated" forms */
+    /**
+     * The options from which the user can choose. If a string is provided, it is treated as a reference to a record in
+     * `CONFIG.PF2E`, and the `PromptChoice` array is composed from its entries.
+     */
     choices: UninflatedChoiceSet;
+    flag: string;
     /** Whether this choice set consists of items */
     containsItems: boolean;
     /** The user's selection from among the options in `choices`, or otherwise `null` */
@@ -29,7 +33,5 @@ declare class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
     queryCompendium(choices: ChoiceSetPackQuery, actorRollOptions: Set<string>): Promise<PickableThing<string>[]>;
 }
 interface ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema>, ModelPropsFromSchema<ChoiceSetSchema> {
-    data: ChoiceSetData;
-    flag: string;
 }
 export { ChoiceSetRuleElement };

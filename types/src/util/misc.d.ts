@@ -55,7 +55,7 @@ declare function applyNTimes<T>(func: (val: T) => T, times: number, start: T): T
  */
 declare function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O;
 /** Check if a value is present in the provided array. Especially useful for checking against literal tuples */
-declare function tupleHasValue<A extends readonly unknown[]>(array: A, value: unknown): value is A[number];
+declare function tupleHasValue<const A extends readonly unknown[]>(array: A, value: unknown): value is A[number];
 /** Check if an element is present in the provided set. Especially useful for checking against literal sets */
 declare function setHasElement<T extends Set<unknown>>(set: T, value: unknown): value is SetElement<T>;
 /** Returns a subset of an object with explicitly defined keys */
@@ -87,10 +87,7 @@ declare function getActionIcon(actionType: string | ActionCost | null): ImageFil
  * Returns a character that can be used with the Pathfinder action font
  * to display an icon. If null it returns empty string.
  */
-declare function getActionGlyph(action: string | number | null | {
-    type: string;
-    value: string | number | null;
-}): string;
+declare function getActionGlyph(action: string | number | null | ActionCost): string;
 declare function ErrorPF2e(message: string): Error;
 /** Returns the number in an ordinal format, like 1st, 2nd, 3rd, 4th, etc */
 declare function ordinal(value: number): string;

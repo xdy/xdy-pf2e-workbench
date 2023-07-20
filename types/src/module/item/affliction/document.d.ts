@@ -12,7 +12,7 @@ declare class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null
     /** Retrieves the damage for a specific stage */
     getStageDamage(stage: number): AfflictionDamage | null;
     createStageMessage(): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _onCreate(data: AfflictionSource, options: DocumentModificationContext<TParent>, userId: string): void;
     _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, userId: string): void;
 }

@@ -90,6 +90,7 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
         value: WeaponReloadTime | null;
     };
     usage: {
+        canBeAmmo?: boolean;
         value: "worngloves" | "held-in-one-hand" | "held-in-one-plus-hands" | "held-in-two-hands";
     };
     MAP: {
@@ -126,7 +127,7 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     };
     selectedAmmoId: string | null;
 }
-interface WeaponSystemData extends Omit<WeaponSystemSource, "identification" | "price" | "temporary">, Investable<PhysicalSystemData> {
+interface WeaponSystemData extends Omit<WeaponSystemSource, "hp" | "identification" | "price" | "temporary">, Investable<PhysicalSystemData> {
     traits: WeaponTraits;
     baseItem: BaseWeaponType | null;
     maxRange: number | null;
@@ -144,9 +145,10 @@ interface WeaponSystemData extends Omit<WeaponSystemSource, "identification" | "
         effects: [];
     };
     material: WeaponMaterialData;
-    usage: UsageDetails & WeaponSystemSource["usage"];
+    usage: WeaponUsageDetails;
     meleeUsage?: Required<ComboWeaponMeleeUsage>;
 }
+type WeaponUsageDetails = UsageDetails & Required<WeaponSystemSource["usage"]>;
 interface WeaponTraits extends WeaponTraitsSource {
     otherTags: OtherWeaponTag[];
     toggles: WeaponTraitToggles;

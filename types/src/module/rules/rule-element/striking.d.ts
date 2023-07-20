@@ -1,12 +1,16 @@
 import { ActorType } from "@actor/data/index.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
-export declare class StrikingRuleElement extends RuleElementPF2e {
+import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
+import type { StringField } from "types/foundry/common/data/fields.d.ts";
+import { ResolvableValueField } from "./data.ts";
+declare class StrikingRuleElement extends RuleElementPF2e<StrikingRuleSchema> {
     protected static validActorTypes: ActorType[];
-    selector: string;
-    constructor(data: StrikingSource, options: RuleElementOptions);
+    static defineSchema(): StrikingRuleSchema;
     beforePrepareData(): void;
 }
-interface StrikingSource extends RuleElementSource {
-    selector?: string;
+interface StrikingRuleElement extends RuleElementPF2e<StrikingRuleSchema>, ModelPropsFromSchema<StrikingRuleSchema> {
 }
-export {};
+type StrikingRuleSchema = RuleElementSchema & {
+    selector: StringField<string, string, true, false, false>;
+    value: ResolvableValueField<false, false, false>;
+};
+export { StrikingRuleElement };

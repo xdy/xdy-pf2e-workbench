@@ -7,6 +7,7 @@ declare const SECONDARY_TRAIT_RECORDS: {
     readonly equipmentTraits: readonly ["armorTraits", "consumableTraits"];
     readonly featTraits: readonly ["actionTraits"];
     readonly weaponTraits: readonly ["npcAttackTraits"];
+    readonly magicSchools: readonly ["spellTraits"];
 };
 type HomebrewTraitKey = (typeof HOMEBREW_TRAIT_KEYS)[number];
 type HomebrewKey = HomebrewTraitKey | "damageTypes";

@@ -55,7 +55,7 @@ interface SpellcastingSheetData extends Omit<BaseSpellcastingEntry<ActorPF2e>, "
         value: number;
         max: number;
     } | null;
-    levels: SpellcastingSlotLevel[];
+    levels: SpellcastingSlotRank[];
     spellPrepList: Record<number, SpellPrepEntry[]> | null;
     isFlexible?: boolean;
     isFocusPool?: boolean;
@@ -65,7 +65,7 @@ interface SpellcastingSheetData extends Omit<BaseSpellcastingEntry<ActorPF2e>, "
     isSpontaneous?: boolean;
     showSlotlessLevels?: boolean;
 }
-interface SpellcastingSlotLevel {
+interface SpellcastingSlotRank {
     label: string;
     level: ZeroToTen;
     isCantrip: boolean;
@@ -94,4 +94,4 @@ interface ActiveSpell {
     /** Is the spell not actually of this level? */
     virtual?: boolean;
 }
-export { ActiveSpell, BaseSpellcastingEntry, CastOptions, SpellPrepEntry, SpellcastingCategory, SpellcastingEntry, SpellcastingEntryPF2eCastOptions, SpellcastingSheetData, SpellcastingSlotLevel, };
+export { ActiveSpell, BaseSpellcastingEntry, CastOptions, SpellPrepEntry, SpellcastingCategory, SpellcastingEntry, SpellcastingEntryPF2eCastOptions, SpellcastingSheetData, SpellcastingSlotRank, };

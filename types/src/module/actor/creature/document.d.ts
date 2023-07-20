@@ -1,5 +1,5 @@
 /// <reference types="jquery" resolution-mode="require"/>
-import { ActorPF2e, PartyPF2e } from "@actor";
+import { ActorPF2e, type PartyPF2e } from "@actor";
 import { HitPointsSummary } from "@actor/base.ts";
 import { CreatureSource } from "@actor/data/index.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
@@ -11,8 +11,8 @@ import { ActiveEffectPF2e } from "@module/active-effect.ts";
 import { Rarity } from "@module/data.ts";
 import { RuleElementSynthetics } from "@module/rules/index.ts";
 import { UserPF2e } from "@module/user/index.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
-import { CheckRoll } from "@system/check/index.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
+import type { CheckRoll } from "@system/check/index.ts";
 import type { ArmorStatistic } from "@system/statistic/armor-class.ts";
 import { Statistic, StatisticDifficultyClass } from "@system/statistic/index.ts";
 import { CreatureSkills, CreatureSpeeds, CreatureSystemData, LabeledSpeed, SenseData, VisionLevel } from "./data.ts";
@@ -89,7 +89,9 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     prepareSpeed(movementType: "land"): this["system"]["attributes"]["speed"];
     prepareSpeed(movementType: Exclude<MovementType, "land">): (LabeledSpeed & StatisticModifier) | null;
     prepareSpeed(movementType: MovementType): CreatureSpeeds | (LabeledSpeed & StatisticModifier) | null;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: CreatureUpdateContext<TParent>, user: UserPF2e): Promise<void>;
+    /** Remove any features linked to a to-be-deleted ABC item */
+    deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: CreatureUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: CreatureSource;
@@ -102,8 +104,8 @@ interface CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData<ActiveEffectPF2e<this>>[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[]>;
     updateEmbeddedDocuments(embeddedName: "Item", updateData: EmbeddedDocumentUpdateData<ItemPF2e<this>>[], options?: DocumentUpdateContext<this>): Promise<ItemPF2e<this>[]>;
     updateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", updateData: EmbeddedDocumentUpdateData<ActiveEffectPF2e<this> | ItemPF2e<this>>[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
-    deleteEmbeddedDocuments(embeddedName: "ActiveEffect", ids: string[], context?: DocumentModificationContext<this>): Promise<CollectionValue<this["effects"]>[]>;
-    deleteEmbeddedDocuments(embeddedName: "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<CollectionValue<this["items"]>[]>;
-    deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<CollectionValue<this["effects"]>[] | CollectionValue<this["items"]>[]>;
+    deleteEmbeddedDocuments(embeddedName: "ActiveEffect", ids: string[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[]>;
+    deleteEmbeddedDocuments(embeddedName: "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<ItemPF2e<this>[]>;
+    deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
 }
 export { CreaturePF2e };

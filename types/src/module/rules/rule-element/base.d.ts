@@ -1,13 +1,13 @@
 import { ActorPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { DiceModifierPF2e, ModifierPF2e } from "@actor/modifiers.ts";
+import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { CheckRoll } from "@system/check/index.ts";
 import { LaxSchemaField } from "@system/schema-data-fields.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
-import { BracketedValue, RuleElementData, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
+import { BracketedValue, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
 declare const DataModel: typeof import("types/foundry/common/abstract/data.d.ts").default;
 /**
  * Rule Elements allow you to modify actorData and tokenData values when present on items. They can be configured
@@ -16,7 +16,7 @@ declare const DataModel: typeof import("types/foundry/common/abstract/data.d.ts"
  * @category RuleElement
  */
 declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSchema> extends DataModel<ItemPF2e<ActorPF2e>, TSchema> {
-    data: RuleElementData;
+    #private;
     sourceIndex: number | null;
     protected suppressWarnings: boolean;
     /** A list of actor types on which this rule element can operate (all unless overridden) */
@@ -79,7 +79,7 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
      * @param defaultValue if no value is found, use that one
      * @return the evaluated value
      */
-    protected resolveValue(valueData?: RuleValue | undefined, defaultValue?: Exclude<RuleValue, BracketedValue>, { evaluate, resolvables, warn }?: ResolveValueParams): number | string | boolean | object | null;
+    resolveValue(value: unknown, defaultValue?: Exclude<RuleValue, BracketedValue>, { evaluate, resolvables, warn }?: ResolveValueParams): number | string | boolean | object | null;
     protected isBracketedValue(value: unknown): value is BracketedValue;
 }
 interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abstract.DataModel<ItemPF2e<ActorPF2e>, TSchema>, ModelPropsFromSchema<RuleElementSchema> {
@@ -160,13 +160,13 @@ interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abs
      */
     onDelete?(actorUpdates: Record<string, unknown>): void;
     /** An optional method for excluding damage modifiers and extra dice */
-    applyDamageExclusion?(weapon: WeaponPF2e, modifiers: (DiceModifierPF2e | ModifierPF2e)[]): void;
+    applyDamageExclusion?(weapon: WeaponPF2e, modifiers: (DamageDicePF2e | ModifierPF2e)[]): void;
 }
 declare namespace RuleElementPF2e {
     let _schema: LaxSchemaField<RuleElementSchema> | undefined;
     interface PreCreateParams<T extends RuleElementSource = RuleElementSource> {
         /** The source partial of the rule element's parent item to be created */
-        itemSource: PreCreate<ItemSourcePF2e>;
+        itemSource: ItemSourcePF2e;
         /** The source of the rule in `itemSource`'s `system.rules` array */
         ruleSource: T;
         /** All items pending creation in a `ItemPF2e.createDocuments` call */
@@ -188,9 +188,6 @@ declare namespace RuleElementPF2e {
         domains: string[];
         rollOptions: Set<string>;
     }
-    type UserInput<T extends RuleElementData> = {
-        [K in keyof T]?: unknown;
-    } & RuleElementSource;
 }
 interface ResolveValueParams {
     evaluate?: boolean;

@@ -188,7 +188,7 @@
                 }
             },
             "BioluminescenceBomb": {
-                "success": "<p>Each creature within @Template[type:emanation|distance:10]{10 feet} of where the bomb exploded must succeed at a @Check[type:reflex|dc:17] save or be marked with dye that continues to glow for 24 hours. An affected creature must also attempt a @Check[type:fortitude|dc:17] saving throw against the overwhelming burst of light.</p><p><strong>Success</strong> The creature is unaffected.</p><p><strong>Failure</strong> The creature is @Compendium[pf2e.conditionitems.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round.</p><p><strong>Critical Failure</strong> The creature is @Compendium[pf2e.conditionitems.XgEqL1kFApUbl5Z2]{Blinded} for 1 round, then dazzled for 1 round.</p>"
+                "success": "<p>Each creature within @Template[type:emanation|distance:10]{10 feet} of where the bomb exploded must succeed at a @Check[type:reflex|dc:17] save or be marked with dye that continues to glow for 24 hours. An affected creature must also attempt a @Check[type:fortitude|dc:17] saving throw against the overwhelming burst of light.</p><p><strong>Success</strong> The creature is unaffected.</p><p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round.</p><p><strong>Critical Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for 1 round, then dazzled for 1 round.</p>"
             },
             "BlightBomb": {
                 "Greater": {
@@ -703,14 +703,18 @@
                     "MajorBattle": "Major Battle",
                     "MajorSkillful": "Major Skillful",
                     "MajorSpellcasting": "Major Spellcasting",
+                    "Martial": "Martial",
                     "MinorBattle": "Minor Battle",
                     "MinorSkillful": "Minor Skillful",
                     "MinorSpellcasting": "Minor Spellcasting",
                     "ModerateBattle": "Moderate Battle",
                     "ModerateSkillful": "Moderate Skillful",
-                    "ModerateSpellcasting": "Moderate Spellcasting"
+                    "ModerateSpellcasting": "Moderate Spellcasting",
+                    "Skillful": "Skillful",
+                    "Spellcasting": "Spellcasting"
                 },
                 "MajorFailure": "Your curse interferes with this action and you must make a @Check[type:flat|dc:8|showDC:owner] check.",
+                "MeddlingAncestor": "Meddling Ancestor",
                 "MinorFailure": "Your curse interferes with this action and you must make a @Check[type:flat|dc:4|showDC:owner] check.",
                 "ModerateFailure": "Your curse interferes with this action and you must make a @Check[type:flat|dc:6|showDC:owner] check."
             },
@@ -1041,6 +1045,7 @@
             "FlatModifier": "Flat Modifier",
             "GrantItem": "Grant Item",
             "Immunity": "Immunity",
+            "ItemAlteration": "Item Alteration",
             "LoseHitPoints": "Lose Hit Points",
             "MarkToken": "Mark Token",
             "MartialProficiency": "Martial Proficiency",
@@ -1115,6 +1120,7 @@
             "ForestsOrSwamps": "In Forests or Swamps",
             "ForestsOrUnderground": "In Forests or Underground Areas",
             "FortuneTelling": "To Tell Fortunes",
+            "FullMoon": "Full Moon",
             "GatherInformation": "to Gather Information",
             "Grapple": "To Grapple",
             "GrappleShove": "To Grapple or Shove",
@@ -1266,6 +1272,17 @@
             "AncientElf": {
                 "Prompt": "Select a multiclass dedication feat."
             },
+            "AnimalForm": {
+                "Ape": "Ape",
+                "Bear": "Bear",
+                "Bull": "Bull",
+                "Canine": "Canine",
+                "Cat": "Cat",
+                "Deer": "Deer",
+                "Frog": "Frog",
+                "Shark": "Shark",
+                "Snake": "Snake"
+            },
             "AnimalSkin": {
                 "BracersOfArmor": "Animal Skin w/ Bracers of Armor",
                 "ExplorersClothing": "Animal Skin w/ Explorer's Clothing",
@@ -1317,9 +1334,9 @@
                     "ArcaneLocomotionClimbSpeed": "Gain a climb speed",
                     "ArcaneLocomotionIncreaseSpeed": "Increase speeds",
                     "ArcaneLocomotionSwimSpeed": "Gain a swim speed",
-                    "AugmentationPrompt": "Select a feat to augment",
-                    "EnhancementPrompt": "Choose an enhancement",
-                    "MagicalResistanceAll": "Gain additional Resistances",
+                    "AugmentationPrompt": "Select a feat to augment.",
+                    "EnhancementPrompt": "Select an enhancement.",
+                    "MagicalResistanceAll": "Gain additional resistances",
                     "MagicalResistanceIncrease": "Enhance existing resistance"
                 },
                 "HunterAutomaton": {
@@ -1415,12 +1432,12 @@
                 "Lodovka": "Lodovka",
                 "Medvyed": "Medvyed",
                 "Orlovsky": "Orlovsky",
-                "Prompt": "Select your Brevic lineage",
+                "Prompt": "Select a Brevic lineage.",
                 "Surtova": "Surtova"
             },
             "CatharticMage": {
                 "EmotionalState": {
-                    "Prompt": "Select your Catharsis Emotion"
+                    "Prompt": "Select a catharsis emotion."
                 },
                 "Love": {
                     "Toggle": "You cast a spell to benefit your emotional focus"
@@ -1514,7 +1531,7 @@
             },
             "DeityAndCause": {
                 "AllowedDrops": "1st-level champion class feature",
-                "Prompt": "Select a champion's cause"
+                "Prompt": "Select a champion's cause."
             },
             "DeviantAbilities": {
                 "AwakenedPower": {
@@ -1550,7 +1567,7 @@
                     "StrikeLabel": "Bone Spike"
                 },
                 "Dragon": {
-                    "EnergyPrompt": "Select an energy associated with your dragon abilities"
+                    "EnergyPrompt": "Select an energy associated with your dragon abilities."
                 },
                 "TitanSwing": {
                     "NoteFifteenFeet": "The target is pushed back 15 feet.",
@@ -1594,7 +1611,7 @@
                     "Underworld": "Underworld Dragon",
                     "White": "White Dragon"
                 },
-                "Prompt": "Select a Dragon",
+                "Prompt": "Select a dragon.",
                 "ScalesOfTheDragon": {
                     "BracersOfArmor": "Scales of the Dragon w/ Bracers of Armor",
                     "ExplorersClothing": "Scales of the Dragon w/ Explorer's Clothing",
@@ -1619,7 +1636,7 @@
                     "Ironfist": "Clan Ironfist",
                     "Molgrade": "Clan Molgrade",
                     "Oriddus": "Clan Oriddus",
-                    "Prompt": "Select a Dwarven Clan",
+                    "Prompt": "Select a dwarven clan.",
                     "Runebinder": "Clan Runebinder",
                     "Stonefist": "Clan Stonefist",
                     "Tolorr": "Clan Tolorr",
@@ -1645,6 +1662,14 @@
                 },
                 "VengefulHatred": {
                     "Prompt": "Choose an ancestral foe."
+                }
+            },
+            "EldritchArcher": {
+                "ArrowOfDeath": {
+                    "Note": "On a critical hit, the target must also succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)|traits:death,incapacitation] saving throw, or be immediately slain."
+                },
+                "EnchantingArrow": {
+                    "Note": "On a critical hit, the target also becomes @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}."
                 }
             },
             "Elf": {
@@ -1687,7 +1712,7 @@
                 },
                 "DeckOfDestiny": {
                     "MatchingSuitPrompt": "Is the drawn card's suit related the check?",
-                    "WealOrWoePrompt": "Select Weal or Woe"
+                    "WealOrWoePrompt": "Select Weal or Woe."
                 },
                 "EagleEyeElixir": {
                     "Greater": {
@@ -1782,7 +1807,7 @@
                 },
                 "MutateWeapon": {
                     "Accuracy": "Gain +1 status bonus to attacks",
-                    "Bonus": "Select a bonus",
+                    "Bonus": "Select a bonus.",
                     "Reach": "Gain reach 10",
                     "Target": "Select one of your living weapons."
                 }
@@ -1817,6 +1842,9 @@
             "Goblin": {
                 "ChosenOfLamashtu": {
                     "Prompt": "Select a goblin heritage."
+                },
+                "CityScavenger": {
+                    "EarnIncome": "City Scavenger - Earn Income"
                 },
                 "ExtraSquishy": {
                     "Note": "If you roll a success to Squeeze, you get a critical success instead."
@@ -1881,7 +1909,7 @@
                     "Shields": "Shields",
                     "Stars": "Stars"
                 },
-                "Prompt": "Select a Harrow Suit"
+                "Prompt": "Select a harrow suit."
             },
             "Hobgoblin": {
                 "AgonizingRebuke": {
@@ -1961,6 +1989,30 @@
                 },
                 "PursueALead": {
                     "Label": "Investigating a designated subject with Pursue a Lead"
+                }
+            },
+            "Kineticist": {
+                "Impulse": {
+                    "Prompt": "Select an Impulse."
+                },
+                "KineticGate": {
+                    "DualGate": "Dual Gate",
+                    "ExpandThePortal": "Expand the Portal",
+                    "ForkThePath": "Fork the Path",
+                    "Junction": {
+                        "AuraJunction": "Aura Junction",
+                        "CriticalBlast": "Critical Blast",
+                        "ElementalResistance": "Elemental Resistance",
+                        "ImpulseJunction": "Impulse Junction",
+                        "SkillJunction": "Skill Junction"
+                    },
+                    "Prompt": {
+                        "Element": "Select an element.",
+                        "Gate": "Select a kinetic gate.",
+                        "Junction": "Select a gate junction.",
+                        "Threshold": "Select a gate's threshold."
+                    },
+                    "SingleGate": "Single Gate"
                 }
             },
             "Kobold": {
@@ -2162,7 +2214,7 @@
                     "Arctic": "Arctic",
                     "Desert": "Desert",
                     "Mountain": "Mountain",
-                    "Prompt": "Select your bound terrain",
+                    "Prompt": "Select a bound terrain.",
                     "Swamp": "Swamp"
                 }
             },
@@ -2220,33 +2272,33 @@
             },
             "Prompt": {
                 "AdvancedMulticlassFeat": "Select a class feat up to half your character level.",
-                "Alignment": "Select an Alignment",
+                "Alignment": "Select an alignment.",
                 "CantripOrNonCantrip": "Select cantrip or non-cantrip spell.",
                 "ClassDCAbilityScore": "Select the class DC's ability score.",
-                "ConsciousMind": "Select a Conscious Mind.",
+                "ConsciousMind": "Select a conscious mind.",
                 "CreatureSize": "Select a creature size.",
                 "DamageType": "Select a damage type.",
-                "DegreeOfSuccess": "Select the degree of success",
+                "DegreeOfSuccess": "Select the degree of success.",
                 "Deity": "Select a deity.",
                 "DeitysDomain": "Select a deity's domain.",
-                "DragonBreathWeapon": "Select a dragon's Breath Weapon.",
+                "DragonBreathWeapon": "Select a dragon's breath weapon.",
                 "Element": "Select an element.",
                 "EnergyType": "Select an energy type.",
-                "EvolutionFeat": "Select your first Evolution Feat.",
+                "EvolutionFeat": "Select a first evolution feat.",
                 "Feat": "Select a feat.",
-                "FirstImplement": "Select your first Implement.",
+                "FirstImplement": "Select a first implement.",
                 "Lesson": "Select a lesson.",
                 "LevelOneClassFeat": "Select a 1st-level class feat.",
                 "LevelOneOrTwoClassFeat": "Select a 1st or 2nd-level class feat.",
                 "Material": "Select a material.",
                 "PathToPerfection": "Select a path to perfection.",
                 "Rune": "Select a Rune.",
-                "SecondImplement": "Select your second Implement.",
+                "SecondImplement": "Select a second implement.",
                 "Shillelagh": "Select a club or staff.",
                 "Skill": "Select a skill.",
                 "SkillFeat": "Select a skill feat.",
-                "SubconsciousMind": "Select a Subconscious Mind.",
-                "ThirdImplement": "Select your third Implement.",
+                "SubconsciousMind": "Select a subconscious mind.",
+                "ThirdImplement": "Select a third implement.",
                 "VersatileTrait": "Select a versatile damage type.",
                 "UnarmedAttack": "Select an unarmed attack.",
                 "Weapon": "Select a weapon.",
@@ -2301,7 +2353,7 @@
                     "PhysicalAttackLabel": "Guarding Against a Physical Attack",
                     "ProtectionLabel": "Gain Resistance to Physical Attack"
                 },
-                "SpiritualFlurryNote": "Targets become @Compendium[pf2e.conditionitems.Flat-Footed]{Flat-Footed} until the end of your current turn."
+                "SpiritualFlurryNote": "Targets become @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until the end of your current turn."
             },
             "Shisk": {
                 "PiercingQuills": {
@@ -2361,7 +2413,7 @@
                 "Woodworking": "Woodworking"
             },
             "SpellEffectEvolutionSurge": {
-                "Prompt": "Choose an evolution",
+                "Prompt": "Select an evolution.",
                 "Sight": "Low-light vision and darkvision",
                 "Amphibious": "Swim Speed",
                 "Speed": "+20-foot status bonus to Speed",
@@ -2469,7 +2521,12 @@
                 }
             },
             "TerrainExpertise": {
-                "Prompt": "Select a terrain"
+                "Prompt": "Select a terrain."
+            },
+            "TerrainStalker": {
+                "Rubble": "Rubble",
+                "Snow": "Snow",
+                "Underbrush": "Underbrush"
             },
             "Thaumaturge": {
                 "Implement": {
@@ -2530,7 +2587,7 @@
                 "Keyboards": "Keyboards",
                 "Oratory": "Oratory",
                 "Percussion": "Percussion",
-                "Prompt": "Select a Performance Type",
+                "Prompt": "Select a type of performance.",
                 "Singing": "Singing",
                 "Strings": "Strings",
                 "Winds": "Winds"
@@ -2551,7 +2608,7 @@
                 "MediumArmor": "Trained in Medium Armor"
             },
             "WardingRune": {
-                "Prompt": "Choose a school of magic other than divination"
+                "Prompt": "Select a school of magic other than divination."
             },
             "WellspringMage": {
                 "CriticalSuccess": "You temporarily recover an expended spell slot of any level of your choice. The temporary spell slot lasts for 1 minute, and if you don't use it by then, you experience an immediate @UUID[Compendium.pf2e.rollable-tables.RollTable.N0pDFNCffTe2Du39]{Wellspring Surge}.",

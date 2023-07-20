@@ -54,7 +54,7 @@ interface DegreeOfSuccessAdjustment {
     predicate?: PredicatePF2e;
 }
 interface CheckDC {
-    slug?: DCSlug;
+    slug?: DCSlug | null;
     statistic?: StatisticDifficultyClass | StatisticModifier | null;
     label?: string;
     scope?: "attack" | "check";

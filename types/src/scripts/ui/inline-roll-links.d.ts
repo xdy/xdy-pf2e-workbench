@@ -3,11 +3,10 @@
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
 export declare const InlineRollLinks: {
-    injectRepostElement: (links: HTMLElement[], foundryDoc?: ClientDocument) => void;
-    listen: ($html: HTMLElement | JQuery, foundryDoc?: ClientDocument) => void;
+    injectRepostElement: (links: HTMLElement[], foundryDoc: ClientDocument | null) => void;
+    listen: ($html: HTMLElement | JQuery, foundryDoc?: ClientDocument | null) => void;
     makeRepostHtml: (target: HTMLElement, defaultVisibility: string) => string;
-    repostAction: (target: HTMLElement, foundryDoc?: ActorPF2e | JournalEntry | JournalEntryPage<JournalEntry> | null) => void;
+    repostAction: (target: HTMLElement, foundryDoc?: ClientDocument | null) => void;
     /** Give inline damage-roll links from items flavor text of the item name */
     flavorDamageRolls(html: HTMLElement, actor?: ActorPF2e | null): void;
-    _documentFromDOM: (html: HTMLElement, foundryDoc?: ClientDocument) => ActorPF2e | JournalEntry | JournalEntryPage<JournalEntry> | null;
 };

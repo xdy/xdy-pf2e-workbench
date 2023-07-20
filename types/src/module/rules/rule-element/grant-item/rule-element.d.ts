@@ -25,6 +25,8 @@ declare class GrantItemRuleElement extends RuleElementPF2e<GrantItemSchema> {
         create: ItemSourcePF2e[];
         delete: string[];
     }>;
+    /** Add an in-memory-only condition to the actor */
+    beforePrepareData(): void;
 }
 interface GrantItemRuleElement extends RuleElementPF2e<GrantItemSchema>, ModelPropsFromSchema<GrantItemSchema> {
 }
@@ -33,6 +35,7 @@ interface GrantItemSource extends RuleElementSource {
     replaceSelf?: unknown;
     preselectChoices?: unknown;
     reevaluateOnUpdate?: unknown;
+    inMemoryOnly?: unknown;
     allowDuplicate?: unknown;
     onDeleteActions?: unknown;
     flag?: unknown;

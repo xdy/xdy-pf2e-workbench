@@ -54,6 +54,8 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     /** Increase the price if it is larger than medium and not magical. */
     protected adjustPriceForSize(): CoinsPF2e;
     prepareSiblingData(): void;
+    /** After item alterations have occurred, ensure that this item's hit points are no higher than its maximum */
+    onPrepareSynthetics(this: PhysicalItemPF2e<ActorPF2e>): void;
     /** Can the provided item stack with this item? */
     isStackableWith(item: PhysicalItemPF2e): boolean;
     /** Combine this item with a target item if possible */
@@ -84,8 +86,8 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     /** Include mystification-related rendering instructions for views that will display this data. */
     protected traitChatData(dictionary: Record<string, string>): TraitChatData[];
     /** Set to unequipped upon acquiring */
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly _source: PhysicalItemSource;

@@ -1,8 +1,7 @@
 import { ActorPF2e } from "@actor";
 import { FeatGroup } from "@actor/character/feats.ts";
-import { Frequency } from "@item/data/base.ts";
+import { ActionCost, Frequency } from "@item/data/base.ts";
 import { ItemSummaryData } from "@item/data/index.ts";
-import { OneToThree } from "@module/data.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { HeritagePF2e, ItemPF2e } from "../index.ts";
 import { FeatSource, FeatSystemData } from "./data.ts";
@@ -13,10 +12,7 @@ declare class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     get category(): FeatCategory;
     get level(): number;
     get traits(): Set<FeatTrait>;
-    get actionCost(): {
-        type: "action" | "reaction" | "free";
-        value: OneToThree | null;
-    } | null;
+    get actionCost(): ActionCost | null;
     get frequency(): Frequency | null;
     get isFeature(): boolean;
     get isFeat(): boolean;
@@ -31,8 +27,8 @@ declare class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     getChatData(this: FeatPF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
-    protected _preCreate(data: PreDocumentId<FeatSource>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preCreate(data: PreDocumentId<FeatSource>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Warn the owning user(s) if this feat was taken despite some restriction */
     protected _onCreate(data: FeatSource, options: DocumentModificationContext<TParent>, userId: string): void;
 }

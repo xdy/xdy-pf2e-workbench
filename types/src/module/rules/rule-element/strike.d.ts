@@ -6,6 +6,7 @@ import { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup } from "@it
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import type { ArrayField, BooleanField, FilePathField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import { ResolvableValueField } from "./data.ts";
 /**
  * Create an ephemeral strike on an actor
  * @category RuleElement
@@ -82,7 +83,7 @@ type StrikeSchema = RuleElementSchema & {
     damage: SchemaField<{
         base: SchemaField<{
             damageType: StringField<string, string, true, false, true>;
-            dice: NumberField<number, number, true, false, true>;
+            dice: ResolvableValueField<true, false, true>;
             die: StringField<DamageDieSize, DamageDieSize, true, false, true>;
             modifier: NumberField<number, number, false, false, true>;
         }>;

@@ -1,4 +1,5 @@
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
+import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.d.ts";
 import { ResolvableValueField } from "./data.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 /**
@@ -6,10 +7,11 @@ import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSour
  * @category RuleElement
  */
 declare class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TSchema> {
-    constructor(data: AELikeSource, options: RuleElementOptions);
+    #private;
+    constructor(source: AELikeSource, options: RuleElementOptions);
     static defineSchema(): AELikeSchema;
-    /** Change modes and their default priority orders */
-    static CHANGE_MODES: {
+    static CHANGE_MODES: readonly ["multiply", "add", "subtract", "remove", "downgrade", "upgrade", "override"];
+    static CHANGE_MODE_DEFAULT_PRIORITIES: {
         multiply: number;
         add: number;
         subtract: number;
@@ -34,11 +36,7 @@ declare class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElemen
     /** Apply the modifications prior to a Check (roll) */
     beforeRoll(_domains: string[], rollOptions: Set<string>): void;
     protected applyAELike(rollOptions?: Set<string>): void;
-    protected getNewValue(current: number | undefined, change: number): number;
-    protected getNewValue(current: string | number | undefined, change: string | number): string | number;
-    protected getNewValue(current: unknown, change: unknown): unknown;
-    /** Log the numeric change of an actor data property */
-    private logChange;
+    static getNewValue<TCurrent>(mode: AELikeChangeMode, current: TCurrent, change: TCurrent extends (infer TValue)[] ? TValue : TCurrent): TCurrent | DataModelValidationFailure;
     protected warn(property: string): void;
 }
 interface AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TSchema>, ModelPropsFromSchema<AELikeSchema> {
@@ -55,8 +53,8 @@ type AELikeSchema = RuleElementSchema & {
     phase: StringField<AELikeDataPrepPhase, AELikeDataPrepPhase, false, false, true>;
     value: ResolvableValueField<true, boolean, boolean>;
 };
-type AELikeChangeMode = keyof (typeof AELikeRuleElement)["CHANGE_MODES"];
-type AELikeDataPrepPhase = (typeof AELikeRuleElement)["PHASES"][number];
+type AELikeChangeMode = (typeof AELikeRuleElement.CHANGE_MODES)[number];
+type AELikeDataPrepPhase = (typeof AELikeRuleElement.PHASES)[number];
 interface AELikeSource extends RuleElementSource {
     mode?: unknown;
     path?: unknown;

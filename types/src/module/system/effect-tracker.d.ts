@@ -1,6 +1,6 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import type { EffectPF2e } from "@item";
-import { EncounterPF2e } from "@module/encounter/index.ts";
+import type { EncounterPF2e } from "@module/encounter/index.ts";
 export declare class EffectTracker {
     #private;
     effects: EffectPF2e<ActorPF2e>[];
@@ -11,10 +11,11 @@ export declare class EffectTracker {
     unregister(toRemove: EffectPF2e<ActorPF2e>): void;
     /**
      * Check for expired effects, removing or disabling as appropriate according to world settings
-     * @param resetItemData Perform individual item data resets. This is only needed when the world time changes.
+     * @param [options.resetItemData] Perform individual item data resets. This is only needed when the world time
+     *                                changes.
      */
-    refresh({ resetItemData }?: {
-        resetItemData?: boolean | undefined;
+    refresh(options?: {
+        resetItemData?: boolean;
     }): Promise<void>;
     /** Expire or remove on-encounter-end effects */
     onEncounterEnd(encounter: EncounterPF2e): Promise<void>;

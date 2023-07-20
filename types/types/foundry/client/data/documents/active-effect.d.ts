@@ -1,4 +1,8 @@
-import type { ActiveEffectSource, EffectDurationData } from "../../../common/documents/active-effect.d.ts";
+import type {
+    ActiveEffectSchema,
+    ActiveEffectSource,
+    EffectDurationData,
+} from "../../../common/documents/active-effect.d.ts";
 import type { ClientBaseActiveEffect } from "./client-base-mixes.d.ts";
 
 declare global {
@@ -141,7 +145,7 @@ declare global {
             data: PreDocumentId<this["_source"]>,
             options: DocumentModificationContext<TParent>,
             user: User
-        ): Promise<void>;
+        ): Promise<boolean | void>;
     }
 
     interface ActiveEffect<
@@ -159,8 +163,8 @@ declare global {
         label?: string;
     }
 
-    type TemporaryEffect = Pick<
-        ActiveEffect<Actor<TokenDocument<Scene | null> | null>>,
-        "name" | "disabled" | "isTemporary" | "description" | "icon" | "statuses" | "duration" | "tint"
-    > & { duration: PreparedEffectDurationData };
+    interface TemporaryEffect extends ModelPropsFromSchema<ActiveEffectSchema> {
+        isTemporary: boolean;
+        duration: PreparedEffectDurationData;
+    }
 }

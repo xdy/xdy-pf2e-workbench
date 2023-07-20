@@ -1,4 +1,4 @@
-import { SettingsMenuPF2e } from "./menu.ts";
+import { MenuTemplateData, SettingsMenuPF2e } from "./menu.ts";
 declare const MetagameSettingsConfig: {
     showDC: {
         name: string;
@@ -48,8 +48,10 @@ declare const MetagameSettingsConfig: {
 };
 declare class MetagameSettings extends SettingsMenuPF2e {
     static namespace: string;
-    static get settings(): Omit<typeof MetagameSettingsConfig, "showPartyStats">;
+    static get settings(): typeof MetagameSettingsConfig;
     static get SETTINGS(): string[];
     static get prefix(): string;
+    /** Hide "metagame_showPartyStats" setting in production builds until party actor is released */
+    getData(): Promise<MenuTemplateData>;
 }
 export { MetagameSettings };

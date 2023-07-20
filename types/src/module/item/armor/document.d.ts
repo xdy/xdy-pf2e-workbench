@@ -1,7 +1,8 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { ItemSummaryData } from "@item/data/index.ts";
 import { PhysicalItemHitPoints, PhysicalItemPF2e } from "@item/physical/index.ts";
-import { ArmorCategory, ArmorGroup, ArmorSource, ArmorSystemData, BaseArmorType } from "./index.ts";
+import { ArmorSource, ArmorSystemData } from "./data.ts";
+import { ArmorCategory, ArmorGroup, BaseArmorType } from "./types.ts";
 declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     isStackableWith(item: PhysicalItemPF2e<TParent>): boolean;
     get isShield(): boolean;
@@ -13,7 +14,7 @@ declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get dexCap(): number | null;
     get strength(): number | null;
     get checkPenalty(): number | null;
-    get speedPenalty(): number;
+    get speedPenalty(): number | null;
     get acBonus(): number;
     get hitPoints(): PhysicalItemHitPoints;
     get hardness(): number;
@@ -26,6 +27,8 @@ declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     prepareBaseData(): void;
     prepareDerivedData(): void;
     prepareActorData(this: ArmorPF2e<ActorPF2e>): void;
+    onPrepareSynthetics(this: ArmorPF2e<ActorPF2e>): void;
+    private setActorShieldData;
     getChatData(this: ArmorPF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;

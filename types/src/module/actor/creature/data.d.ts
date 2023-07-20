@@ -1,4 +1,4 @@
-import { AbilityBasedStatistic, ActorSystemData, ActorSystemSource, ActorAttributes, BaseActorSourcePF2e, ActorTraitsData, ActorTraitsSource, HitPointsData, StrikeData } from "@actor/data/base.ts";
+import { AbilityBasedStatistic, ActorAttributes, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, BaseActorSourcePF2e, HitPointsStatistic, StrikeData } from "@actor/data/base.ts";
 import { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import type { AbilityString, ActorAlliance, MovementType, SaveType, SkillAbbreviation, SkillLongForm } from "@actor/types.ts";
 import type { CREATURE_ACTOR_TYPES } from "@actor/values.ts";
@@ -103,7 +103,7 @@ type SaveData = StatisticTraceData & AbilityBasedStatistic & {
 type CreatureSaves = Record<SaveType, SaveData>;
 /** Miscallenous but mechanically relevant creature attributes.  */
 interface CreatureAttributes extends ActorAttributes {
-    hp: CreatureHitPoints;
+    hp: HitPointsStatistic;
     ac: {
         value: number;
     };
@@ -121,6 +121,7 @@ interface CreatureAttributes extends ActorAttributes {
     senses: {
         value: string;
     } | CreatureSensePF2e[];
+    shield?: HeldShieldData;
     speed: CreatureSpeeds;
     /** The current dying level (and maximum) for this creature. */
     dying: ValueAndMax & {
@@ -147,9 +148,6 @@ interface LabeledSpeed extends Omit<LabeledNumber, "exceptions"> {
     source?: string;
     total?: number;
     derivedFromLand?: boolean;
-}
-interface CreatureHitPoints extends HitPointsData {
-    negativeHealing: boolean;
 }
 /** Creature initiative statistic */
 interface CreatureInitiativeSource {
@@ -194,4 +192,4 @@ interface HeldShieldData {
     /** An effect icon to use when the shield is raised */
     icon: ImageFilePath;
 }
-export { Abilities, AbilityData, Attitude, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureHitPoints, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSaves, CreatureSkills, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, CreatureType, HeldShieldData, LabeledSpeed, Language, SaveData, SenseData, SkillAbbreviation, SkillData, VisionLevel, VisionLevels, };
+export { Abilities, AbilityData, Attitude, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSaves, CreatureSkills, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, CreatureType, HeldShieldData, LabeledSpeed, Language, SaveData, SenseData, SkillAbbreviation, SkillData, VisionLevel, VisionLevels, };

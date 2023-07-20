@@ -1,14 +1,17 @@
-import { RuleElementSource } from "./data.ts";
-import { RuleElementOptions, RuleElementPF2e } from "./index.ts";
+import { ResolvableValueField, RuleElementSchema } from "./data.ts";
+import { RuleElementPF2e } from "./index.ts";
+import type { StringField } from "types/foundry/common/data/fields.d.ts";
 /**
  * @category RuleElement
  */
-export declare class MultipleAttackPenaltyRuleElement extends RuleElementPF2e {
-    private selector;
-    constructor(data: MAPSource, options: RuleElementOptions);
+declare class MultipleAttackPenaltyRuleElement extends RuleElementPF2e<MAPRuleSchema> {
+    static defineSchema(): MAPRuleSchema;
     beforePrepareData(): void;
 }
-interface MAPSource extends RuleElementSource {
-    selector?: unknown;
+interface MultipleAttackPenaltyRuleElement extends RuleElementPF2e<MAPRuleSchema>, ModelPropsFromSchema<MAPRuleSchema> {
 }
-export {};
+type MAPRuleSchema = RuleElementSchema & {
+    selector: StringField<string, string, true, false, false>;
+    value: ResolvableValueField<true, false, false>;
+};
+export { MultipleAttackPenaltyRuleElement };

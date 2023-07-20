@@ -6,8 +6,8 @@ export declare class InventoryBulk {
     #private;
     /** The current bulk carried by the actor */
     value: Bulk;
-    /** The number of Bulk units the actor is encumbered at */
-    encumberedAt: number;
+    /** The number of Bulk units the actor can carry before being encumbered */
+    encumberedAfter: number;
     /** The maximum bulk the actor can carry */
     max: number;
     constructor(actor: ActorPF2e);

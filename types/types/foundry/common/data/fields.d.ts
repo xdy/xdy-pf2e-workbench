@@ -1,6 +1,7 @@
-import type * as abstract from "../abstract/module.d.ts";
 import type { EmbeddedCollection } from "../abstract/embedded-collection.d.mts";
-import { DataModelValidationFailure } from "./validation-failure.js";
+import type * as abstract from "../abstract/module.d.ts";
+import type { TombstoneDataSchema } from "./data.d.ts";
+import type { DataModelValidationFailure } from "./validation-failure.d.ts";
 
 /* ---------------------------------------- */
 /*  Abstract Data Field                     */
@@ -323,8 +324,8 @@ export class SchemaField<
     ): MaybeSchemaProp<TSourceProp, TRequired, TNullable, THasInitial>;
 
     override initialize(
-        value: TSourceProp,
-        model: ConstructorOf<abstract.DataModel>
+        value: unknown,
+        model?: ConstructorOf<abstract.DataModel>
     ): MaybeSchemaProp<TModelProp, TRequired, TNullable, THasInitial>;
 
     protected override _validateType(
@@ -433,8 +434,8 @@ interface StringFieldOptions<
 export class StringField<
         TSourceProp extends string,
         TModelProp = TSourceProp,
-        TRequired extends boolean = boolean,
-        TNullable extends boolean = boolean,
+        TRequired extends boolean = false,
+        TNullable extends boolean = false,
         THasInitial extends boolean = boolean
     >
     extends DataField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial>
@@ -605,7 +606,7 @@ export class SetField<
         model: ConstructorOf<abstract.DataModel>
     ): MaybeSchemaProp<TModelProp, TRequired, TNullable, THasInitial>;
 
-    override toObject(value: TModelProp): MaybeSchemaProp<TSourceProp, TRequired, TNullable, THasInitial>;
+    override toObject(value: TModelProp): TSourceProp;
 }
 
 /** A subclass of `SchemaField` which embeds some other DataModel definition as an inner object. */
@@ -642,7 +643,7 @@ export class EmbeddedDataField<
     protected override _initialize(fields: DataSchema): DataSchema;
 
     override initialize(
-        value: SourceFromSchema<TModelProp["schema"]["fields"]>,
+        value: MaybeSchemaProp<TModelProp["schema"]["fields"], TRequired, TNullable, THasInitial>,
         model: ConstructorOf<abstract.DataModel>
     ): MaybeSchemaProp<TModelProp, TRequired, TNullable, THasInitial>;
 
@@ -657,18 +658,25 @@ export class EmbeddedDataField<
  */
 export class EmbeddedCollectionField<
     TDocument extends abstract.Document,
-    TSource extends object[] = SourceFromSchema<TDocument["schema"]["fields"]>[],
+    TSourceProp extends object[] = SourceFromSchema<TDocument["schema"]["fields"]>[],
     TRequired extends boolean = true,
     TNullable extends boolean = false,
     THasInitial extends boolean = true
-> extends ArrayField<TDocument["schema"], TSource, EmbeddedCollection<TDocument>, TRequired, TNullable, THasInitial> {
+> extends ArrayField<
+    TDocument["schema"],
+    TSourceProp,
+    EmbeddedCollection<TDocument>,
+    TRequired,
+    TNullable,
+    THasInitial
+> {
     /**
      * @param element The type of Document which belongs to this embedded collection
      * @param options Options which configure the behavior of the field
      */
     constructor(
         element: ConstructorOf<Document>,
-        options?: ArrayFieldOptions<TDocument["schema"]["fields"][], TRequired, TNullable, THasInitial>
+        options?: ArrayFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>
     );
 
     static override _validateElementType(element: unknown): Document;
@@ -682,18 +690,21 @@ export class EmbeddedCollectionField<
     protected override _cleanType(
         value: unknown,
         options?: CleanFieldOptions
-    ): MaybeSchemaProp<TDocument["schema"]["fields"][], TRequired, TNullable, THasInitial>;
+    ): MaybeSchemaProp<TSourceProp, TRequired, TNullable, THasInitial>;
 
     protected override _validateElements(
         value: unknown[],
         options?: Record<string, unknown>
     ): DataModelValidationFailure | void;
 
-    override initialize(_value: unknown, model: ConstructorOf<abstract.DataModel>): EmbeddedCollection<TDocument>;
+    override initialize(
+        _value: unknown,
+        model: ConstructorOf<abstract.DataModel>
+    ): MaybeSchemaProp<EmbeddedCollection<TDocument>, TRequired, TNullable, THasInitial>;
 
     override toObject(
         value: EmbeddedCollection<TDocument>
-    ): MaybeSchemaProp<TSource, TRequired, TNullable, THasInitial>;
+    ): MaybeSchemaProp<TSourceProp, TRequired, TNullable, THasInitial>;
 
     override apply(
         fn: string | ((field: this, value?: unknown, options?: Record<string, unknown>) => unknown),
@@ -708,20 +719,15 @@ export class EmbeddedCollectionField<
  * @todo: fill in
  */
 export class EmbeddedCollectionDeltaField<
-    TDocument extends abstract.Document,
-    TSource extends (SourceFromSchema<TDocument["schema"]["fields"]> | DeltaTombstone)[] = (
+    TDocument extends foundry.abstract.Document,
+    TSource extends (SourceFromSchema<TDocument["schema"]["fields"]> | TombstoneDataSchema)[] = (
         | SourceFromSchema<TDocument["schema"]["fields"]>
-        | DeltaTombstone
+        | TombstoneDataSchema
     )[],
     TRequired extends boolean = true,
-    TNullable extends boolean = true,
+    TNullable extends boolean = false,
     THasInitial extends boolean = true
 > extends EmbeddedCollectionField<TDocument, TSource, TRequired, TNullable, THasInitial> {}
-
-interface DeltaTombstone {
-    _id: string;
-    _tombstone: true;
-}
 
 /* -------------------------------------------- */
 /*  Special Field Types                         */

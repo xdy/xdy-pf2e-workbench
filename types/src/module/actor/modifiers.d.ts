@@ -1,8 +1,8 @@
 import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
 import { AbilityString } from "@actor/types.ts";
-import type { ItemPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import { RollNotePF2e } from "@module/notes.ts";
+import type { RuleElementPF2e } from "@module/rules/index.ts";
 import { DamageCategoryUnique, DamageDieSize, DamageType } from "@system/damage/types.ts";
 import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
@@ -48,7 +48,7 @@ interface BaseRawModifier {
 interface ModifierAdjustment {
     /** A slug for matching against modifiers: `null` will match against all modifiers within a selector */
     slug: string | null;
-    predicate: PredicatePF2e;
+    test: (options: string[] | Set<string>) => boolean;
     damageType?: DamageType;
     relabel?: string;
     suppress?: boolean;
@@ -86,8 +86,8 @@ declare class ModifierPF2e implements RawModifier {
     force: boolean;
     enabled: boolean;
     ignored: boolean;
-    /** An optional originating item of this modifier (typically from a rule element) */
-    item: ItemPF2e<ActorPF2e> | null;
+    /** The originating rule element of this modifier, if any: used to retrieve "parent" item roll options */
+    rule: RuleElementPF2e | null;
     source: string | null;
     custom: boolean;
     damageType: DamageType | null;
@@ -133,7 +133,7 @@ declare class ModifierPF2e implements RawModifier {
 }
 interface ModifierObjectParams extends RawModifier {
     name?: string;
-    item?: ItemPF2e<ActorPF2e> | null;
+    rule?: RuleElementPF2e | null;
 }
 type ModifierOrderedParams = [
     slug: string,
@@ -237,11 +237,13 @@ interface DamageDiceOverride {
     /** Override the number of damage dice */
     diceNumber?: number;
 }
-/**
- * Represents extra damage dice for one or more weapons or attack actions.
- * @category PF2
- */
-declare class DiceModifierPF2e implements BaseRawModifier {
+type PartialParameters = Partial<Omit<DamageDicePF2e, "predicate">> & Pick<DamageDicePF2e, "selector" | "slug">;
+interface DamageDiceParameters extends PartialParameters {
+    predicate?: RawPredicate;
+}
+declare class DamageDicePF2e {
+    /** A selector of an actor's associated damaging statistic  */
+    selector: string;
     slug: string;
     label: string;
     /** The number of dice to add. */
@@ -262,18 +264,6 @@ declare class DiceModifierPF2e implements BaseRawModifier {
     enabled: boolean;
     custom: boolean;
     predicate: PredicatePF2e;
-    constructor(params: Partial<Omit<DiceModifierPF2e, "predicate">> & {
-        slug?: string;
-        predicate?: RawPredicate;
-    });
-}
-type PartialParameters = Partial<Omit<DamageDicePF2e, "predicate">> & Pick<DamageDicePF2e, "selector" | "slug">;
-interface DamageDiceParameters extends PartialParameters {
-    predicate?: RawPredicate;
-}
-declare class DamageDicePF2e extends DiceModifierPF2e {
-    /** The selector used to determine when *has a stroke*  */
-    selector: string;
     constructor(params: DamageDiceParameters);
     /** Test the `predicate` against a set of roll options */
     test(options: Set<string>): void;
@@ -281,4 +271,4 @@ declare class DamageDicePF2e extends DiceModifierPF2e {
     toObject(): RawDamageDice;
 }
 type RawDamageDice = Required<DamageDiceParameters>;
-export { BaseRawModifier, CheckModifier, DamageDiceOverride, DamageDicePF2e, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, DiceModifierPF2e, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, RawModifier, StatisticModifier, TestableDeferredValueParams, adjustModifiers, applyStackingRules, createAbilityModifier, createProficiencyModifier, ensureProficiencyOption, };
+export { BaseRawModifier, CheckModifier, DamageDicePF2e, DamageDiceOverride, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, MODIFIER_TYPES, ModifierAdjustment, ModifierPF2e, ModifierType, PROFICIENCY_RANK_OPTION, RawModifier, StatisticModifier, TestableDeferredValueParams, adjustModifiers, applyStackingRules, createAbilityModifier, createProficiencyModifier, ensureProficiencyOption, };

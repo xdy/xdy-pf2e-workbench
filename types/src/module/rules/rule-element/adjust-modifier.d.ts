@@ -1,23 +1,23 @@
 import type { ArrayField, BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { AELikeRuleElement, AELikeSchema, AELikeSource } from "./ae-like.ts";
+import { AELikeChangeMode } from "./ae-like.ts";
 import { ResolvableValueField } from "./data.ts";
-import { RuleElementOptions } from "./index.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 /** Adjust the value of a modifier, change its damage type (in case of damage modifiers) or suppress it entirely */
-declare class AdjustModifierRuleElement extends AELikeRuleElement<AdjustModifierSchema> {
+declare class AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema> {
     /** The number of times this adjustment has been applied */
     applications: number;
-    constructor(data: AdjustModifierSource, options: RuleElementOptions);
+    constructor(source: AdjustModifierSource, options: RuleElementOptions);
     static defineSchema(): AdjustModifierSchema;
     static validateJoint(data: Record<string, unknown>): void;
     /** Instead of applying the change directly to a property path, defer it to a synthetic */
-    applyAELike(): void;
+    beforePrepareData(): void;
 }
-interface AdjustModifierRuleElement extends AELikeRuleElement<AdjustModifierSchema>, ModelPropsFromSchema<AdjustModifierSchema> {
+interface AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema>, ModelPropsFromSchema<AdjustModifierSchema> {
     suppress: boolean;
     maxApplications: number;
 }
-type AdjustModifierSchema = Omit<AELikeSchema, "value"> & {
-    value: ResolvableValueField<true, true, true>;
+type AdjustModifierSchema = RuleElementSchema & {
+    mode: StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
     /** An optional relabeling of the adjusted modifier */
     relabel: StringField<string, string, false, true, false>;
     selector: StringField<string, string, false, false, false>;
@@ -27,8 +27,10 @@ type AdjustModifierSchema = Omit<AELikeSchema, "value"> & {
     suppress: BooleanField<boolean, boolean, false, true, false>;
     /** The maximum number of times this adjustment can be applied */
     maxApplications: NumberField<number, number, false, true, false>;
+    value: ResolvableValueField<false, false, false>;
 };
-interface AdjustModifierSource extends Exclude<AELikeSource, "path"> {
+interface AdjustModifierSource extends RuleElementSource {
+    mode?: unknown;
     selector?: unknown;
     selectors?: unknown;
     relabel?: unknown;

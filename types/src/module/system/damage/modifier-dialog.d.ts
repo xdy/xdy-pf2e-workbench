@@ -1,7 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ModifierPF2e, DamageDicePF2e } from "@actor/modifiers.ts";
+import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
 import { BaseDamageData, DamageCategoryUnique, DamageFormulaData, DamageRollContext, DamageType } from "./types.ts";
 /**
  * Dialog for excluding certain modifiers before rolling damage.
@@ -12,7 +12,7 @@ declare class DamageModifierDialog extends Application {
     base: BaseDamageData[];
     /** The modifiers which are being edited. */
     modifiers: ModifierPF2e[];
-    /** The damage dice which are being edited. */
+    /** The damage dice that are being edited. */
     dice: DamageDicePF2e[];
     /** The base damage type of this damage roll */
     baseDamageType: DamageType;
@@ -51,7 +51,7 @@ interface BaseData {
     show: boolean;
     icon: string | null;
 }
-interface DamageDiceData extends BaseData {
+interface DialogDiceData extends BaseData {
     diceLabel: string;
 }
 interface ModifierData extends BaseData {
@@ -62,7 +62,7 @@ interface ModifierData extends BaseData {
 interface DamageDialogData {
     appId: string;
     modifiers: ModifierData[];
-    dice: DamageDiceData[];
+    dice: DialogDiceData[];
     isCritical: boolean;
     hasVisibleDice: boolean;
     hasVisibleModifiers: boolean;

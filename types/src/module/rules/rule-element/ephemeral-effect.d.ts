@@ -1,5 +1,5 @@
-import type { ArrayField, BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { ItemAlterationField } from "./alter-item/index.ts";
+import type { ArrayField, BooleanField, EmbeddedDataField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { ItemAlteration } from "./item-alteration/alteration.ts";
 import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
 /** An effect that applies ephemerally during a single action, such as a strike */
 declare class EphemeralEffectRuleElement extends RuleElementPF2e<EphemeralEffectSchema> {
@@ -15,6 +15,6 @@ type EphemeralEffectSchema = RuleElementSchema & {
     selectors: ArrayField<StringField<string, string, true, false, false>>;
     uuid: StringField<string, string, true, false, false>;
     adjustName: BooleanField<boolean, boolean, true, false, true>;
-    alterations: ArrayField<ItemAlterationField>;
+    alterations: ArrayField<EmbeddedDataField<ItemAlteration>>;
 };
 export { EphemeralEffectRuleElement };

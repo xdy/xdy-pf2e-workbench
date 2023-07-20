@@ -7,6 +7,11 @@ declare const fields: typeof import("types/foundry/common/data/fields.d.ts");
 declare class LaxSchemaField<TDataSchema extends DataSchema> extends fields.SchemaField<TDataSchema> {
     protected _cleanType(data: Record<string, unknown>, options?: CleanFieldOptions): SourceFromSchema<TDataSchema>;
 }
+/** A `SchemaField` that does not cast the source value to an object */
+declare class StrictSchemaField<TDataSchema extends DataSchema> extends fields.SchemaField<TDataSchema> {
+    protected _cast(value: unknown): SourceFromSchema<TDataSchema>;
+    protected _cleanType(data: object, options?: CleanFieldOptions): SourceFromSchema<TDataSchema>;
+}
 /** A sluggified string field */
 declare class SlugField<TRequired extends boolean = true, TNullable extends boolean = true, THasInitial extends boolean = true> extends fields.StringField<string, string, TRequired, TNullable, THasInitial> {
     constructor(options?: SlugFieldOptions<TRequired, TNullable, THasInitial>);
@@ -48,4 +53,4 @@ declare class RecordField<TKeyField extends StringField<string, string, true, fa
     protected _validateType(values: unknown, options?: DataFieldValidationOptions): boolean | DataModelValidationFailure | void;
     initialize(values: object | null | undefined, model: ConstructorOf<foundry.abstract.DataModel>, options?: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>): MaybeSchemaProp<RecordFieldModelProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>;
 }
-export { LaxSchemaField, PredicateField, RecordField, SlugField };
+export { LaxSchemaField, PredicateField, RecordField, SlugField, StrictSchemaField };

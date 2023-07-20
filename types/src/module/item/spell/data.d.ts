@@ -2,7 +2,7 @@ import { SaveType } from "@actor/types.ts";
 import { BaseItemSourcePF2e, ItemSystemData, ItemSystemSource } from "@item/data/base.ts";
 import { OneToTen, TraitsWithRarity, ValueAndMax } from "@module/data.ts";
 import { MaterialDamageEffect, DamageCategoryUnique, DamageType } from "@system/damage/index.ts";
-import { EffectAreaSize, EffectAreaType, MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "./types.ts";
+import { EffectAreaSize, EffectAreaType, MagicTradition, SpellComponent, SpellTrait } from "./types.ts";
 type SpellSource = BaseItemSourcePF2e<"spell", SpellSystemSource>;
 interface SpellSystemSource extends ItemSystemSource {
     traits: SpellTraits;
@@ -17,9 +17,6 @@ interface SpellSystemSource extends ItemSystemSource {
     };
     traditions: {
         value: MagicTradition[];
-    };
-    school: {
-        value: MagicSchool;
     };
     components: Record<SpellComponent, boolean>;
     materials: {

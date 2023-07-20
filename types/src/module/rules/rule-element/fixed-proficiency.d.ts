@@ -1,25 +1,25 @@
 import { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { RuleElementOptions } from "./base.ts";
-import { RuleElementPF2e, RuleElementSource } from "./index.ts";
+import { AbilityString } from "@actor/types.ts";
+import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
+import type { StringField } from "types/foundry/common/data/fields.d.ts";
+import { ResolvableValueField } from "./data.ts";
 /**
  * @category RuleElement
  */
-declare class FixedProficiencyRuleElement extends RuleElementPF2e {
+declare class FixedProficiencyRuleElement extends RuleElementPF2e<FixedProficiencyRuleSchema> {
     protected static validActorTypes: ActorType[];
-    slug: string;
-    private selector;
-    private ability;
-    constructor(data: FixedProficiencySource, options: RuleElementOptions);
+    static defineSchema(): FixedProficiencyRuleSchema;
+    static validateJoint(data: SourceFromSchema<FixedProficiencyRuleSchema>): void;
     beforePrepareData(): void;
     afterPrepareData(): void;
 }
-interface FixedProficiencyRuleElement {
+interface FixedProficiencyRuleElement extends RuleElementPF2e<FixedProficiencyRuleSchema>, ModelPropsFromSchema<FixedProficiencyRuleSchema> {
     get actor(): CharacterPF2e;
 }
-interface FixedProficiencySource extends RuleElementSource {
-    selector?: unknown;
-    ability?: unknown;
-    force?: unknown;
-}
+type FixedProficiencyRuleSchema = RuleElementSchema & {
+    selector: StringField<string, string, true, false, false>;
+    value: ResolvableValueField<true, false, false>;
+    ability: StringField<AbilityString, AbilityString, true, false, false>;
+};
 export { FixedProficiencyRuleElement };

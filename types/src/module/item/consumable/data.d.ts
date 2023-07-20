@@ -23,6 +23,6 @@ interface ConsumableSystemSource extends PhysicalSystemSource {
     };
     spell: SpellSource | null;
 }
-interface ConsumableSystemData extends Omit<ConsumableSystemSource, "identification" | "price" | "temporary" | "usage">, Omit<PhysicalSystemData, "traits"> {
+interface ConsumableSystemData extends Omit<ConsumableSystemSource, "hp" | "identification" | "price" | "temporary" | "usage">, Omit<PhysicalSystemData, "traits"> {
 }
 export { ConsumableCategory, ConsumableSource, ConsumableSystemData, ConsumableSystemSource, ConsumableTrait };

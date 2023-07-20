@@ -25,7 +25,10 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     get isSpecific(): boolean;
     get isMelee(): boolean;
     get isRanged(): boolean;
+    /** Whether the weapon in its current usage is thrown: a thrown-only weapon or a thrown usage of a melee weapon */
     get isThrown(): boolean;
+    /** Whether the weapon is _can be_ thrown: a thrown-only weapon or one that has a throwable usage */
+    get isThrowable(): boolean;
     get isOversized(): boolean;
     /** This weapon's damage before modification by creature abilities, effects, etc. */
     get baseDamage(): WeaponDamage;
@@ -34,14 +37,17 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     get material(): WeaponMaterialData;
     /** Does this weapon require ammunition in order to make a strike? */
     get requiresAmmo(): boolean;
-    get ammo(): ConsumablePF2e<NonNullable<TParent>> | null;
+    get ammo(): ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e> | null;
     get otherTags(): Set<OtherWeaponTag>;
+    /** Whether this weapon can serve as ammunition for another weapon */
+    isAmmoFor(weapon: WeaponPF2e): boolean;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
     prepareBaseData(): void;
     private prepareMaterialAndRunes;
     /** Set level, price, and rarity according to precious material and runes */
     private prepareLevelAndRarity;
+    prepareDerivedData(): void;
     /** Add the rule elements of this weapon's linked ammunition to its own list */
     prepareSiblingData(): void;
     computeAdjustedPrice(): CoinsPF2e | null;
@@ -77,7 +83,9 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     private toMeleeUsage;
     /** Generate a melee item from this weapon for use by NPCs */
     toNPCAttacks(this: WeaponPF2e<ActorPF2e>): MeleePF2e<ActorPF2e>[];
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<void>;
+    /** Consume a unit of ammunition used by this weapon */
+    consumeAmmo(): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Remove links to this weapon from NPC attacks */
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
 }

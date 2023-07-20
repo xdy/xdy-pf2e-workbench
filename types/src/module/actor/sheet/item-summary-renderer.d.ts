@@ -22,6 +22,7 @@ export declare class ItemSummaryRenderer<TActor extends ActorPF2e> {
      * Returns true if it the item is valid and it was toggled.
      */
     toggleSummary(element: HTMLElement, options?: {
+        visible?: boolean;
         instant?: boolean;
     }): Promise<void>;
     /**

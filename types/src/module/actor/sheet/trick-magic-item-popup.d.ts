@@ -9,5 +9,5 @@ export declare class TrickMagicItemPopup {
     readonly actor: CharacterPF2e;
     /** The skill DC of the action's check */
     readonly checkDC: TrickMagicItemDifficultyData;
-    constructor(item: ConsumablePF2e<ActorPF2e>);
+    constructor(item: ConsumablePF2e);
 }

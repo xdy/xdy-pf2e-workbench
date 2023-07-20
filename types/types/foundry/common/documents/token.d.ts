@@ -27,7 +27,7 @@ export default class BaseToken<TParent extends BaseScene | null = BaseScene | nu
     delta: BaseActorDelta<this> | null;
 
     texture: {
-        src: VideoFilePath;
+        src: ImageFilePath | VideoFilePath;
         scaleX: number;
         scaleY: number;
         offsetX: number;
@@ -53,6 +53,8 @@ export default class BaseToken<TParent extends BaseScene | null = BaseScene | nu
     elevation: number;
 
     effects: VideoFilePath[];
+
+    hidden: boolean;
 
     flags: DocumentFlags;
 

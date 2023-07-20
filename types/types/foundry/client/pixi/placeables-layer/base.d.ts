@@ -13,6 +13,8 @@ declare global {
         /** Keep track of history so that CTRL+Z can undo changes */
         history: CanvasHistory<TObject>[];
 
+        quadtree: CanvasQuadtree<TObject> | null;
+
         /** Track the PlaceableObject on this layer which is currently hovered upon. */
         get hover(): TObject | null;
 
@@ -108,7 +110,7 @@ declare global {
          * @param options   Additional options which customize the Object releasing behavior
          * @return          The number of PlaceableObject instances which were released
          */
-        releaseAll(options: Record<string, unknown>): number;
+        releaseAll(options?: Record<string, unknown>): number;
 
         /**
          * Simultaneously rotate multiple PlaceableObjects using a provided angle or incremental.

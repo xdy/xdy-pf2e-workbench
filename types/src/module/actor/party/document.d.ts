@@ -13,8 +13,6 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     campaign: PartyCampaign | null;
     get baseAllowedItemTypes(): (ItemType | "physical")[];
     get allowedItemTypes(): (ItemType | "physical")[];
-    /** Parties use the campaign's level as their own level, as they otherwise don't have a level */
-    get level(): number;
     /** Friendship lives in our hearts */
     get canAct(): false;
     /** Part members can add and remove items (though system socket shenanigans)  */
@@ -25,7 +23,7 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     validate(options?: DataModelValidationOptions): boolean;
     prepareBaseData(): void;
     prepareDerivedData(): void;
-    addMembers(...newMembers: CreaturePF2e[]): Promise<void>;
+    addMembers(...membersToAdd: CreaturePF2e[]): Promise<void>;
     removeMembers(...remove: (ActorUUID | CreaturePF2e)[]): Promise<void>;
     /** Adds all members to combat */
     addToCombat(options?: {
@@ -39,7 +37,7 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /** Include campaign statistics in party statistics */
     getStatistic(slug: string): Statistic | null;
     private _resetAndRerenderDebounced;
-    protected _preUpdate(changed: DeepPartial<PartySource>, options: PartyUpdateContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<PartySource>, options: PartyUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Override to inform creatures when they were booted from a party */
     protected _onUpdate(changed: DeepPartial<PartySource>, options: PartyUpdateContext<TParent>, userId: string): void;
     /** Overriden to inform creatures the party is defunct */

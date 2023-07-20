@@ -1,12 +1,13 @@
 import { ActorType } from "@actor/data/index.ts";
-import { RuleElementOptions } from "./base.ts";
-import { RuleElementData, RuleElementPF2e, RuleElementSource } from "./index.ts";
+import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
+import type { BooleanField, SchemaField } from "types/foundry/common/data/fields.d.ts";
+import { ResolvableValueField } from "./data.ts";
 /**
  * @category RuleElement
  */
-declare class TempHPRuleElement extends RuleElementPF2e {
+declare class TempHPRuleElement extends RuleElementPF2e<TempHPRuleSchema> {
     static validActorTypes: ActorType[];
-    constructor(data: TempHPSource, options: RuleElementOptions);
+    static defineSchema(): TempHPRuleSchema;
     onCreate(actorUpdates: Record<string, unknown>): void;
     /** Refresh the actor's temporary hit points at the start of its turn */
     onTurnStart(actorUpdates: Record<string, unknown>): void;
@@ -14,15 +15,16 @@ declare class TempHPRuleElement extends RuleElementPF2e {
     /** Send out a chat message notifying everyone that the actor gained temporary HP */
     broadcast(newQuantity: number, oldQuantity: number): void;
 }
-interface TempHPRuleElement extends RuleElementPF2e {
-    data: TempHPData;
+interface TempHPRuleElement extends RuleElementPF2e<TempHPRuleSchema>, ModelPropsFromSchema<TempHPRuleSchema> {
 }
-interface TempHPData extends RuleElementData {
-    onCreate: boolean;
-    onTurnStart: boolean;
-}
-interface TempHPSource extends RuleElementSource {
-    onCreate?: unknown;
-    onTurnStart?: unknown;
-}
+type TempHPEventsSchema = {
+    /** Whether the temporary hit points are immediately applied */
+    onCreate: BooleanField<boolean, boolean, false, false, false>;
+    /** Whether the temporary hit points renew each round */
+    onTurnStart: BooleanField<boolean, boolean, false, false, false>;
+};
+type TempHPRuleSchema = RuleElementSchema & {
+    value: ResolvableValueField<true, false, false>;
+    events: SchemaField<TempHPEventsSchema, SourceFromSchema<TempHPEventsSchema>, ModelPropsFromSchema<TempHPEventsSchema>, true, false, true>;
+};
 export { TempHPRuleElement };

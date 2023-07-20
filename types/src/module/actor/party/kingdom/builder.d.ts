@@ -3,7 +3,7 @@
 /// <reference types="tooltipster" />
 import { PartyPF2e } from "../document.ts";
 import { getKingdomABCData } from "./values.ts";
-import { KingdomAbility, KingdomCHG } from "./data.ts";
+import { KingdomAbility, KingdomCHG } from "./types.ts";
 import { Kingdom } from "./model.ts";
 import { BoostFlawState } from "@actor/sheet/popups/ability-builder.ts";
 declare const KINGDOM_BUILD_CATEGORIES: readonly ["charter", "heartland", "government"];

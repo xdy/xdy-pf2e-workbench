@@ -1,15 +1,15 @@
 /// <reference types="jquery" resolution-mode="require"/>
 import { ActorPF2e } from "@actor/base.ts";
+import { ItemOriginFlag } from "@module/chat-message/data.ts";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
 import { UserPF2e } from "@module/user/document.ts";
 import { EnrichHTMLOptionsPF2e } from "@system/text-editor.ts";
+import { ItemFlagsPF2e, ItemSystemData } from "./data/base.ts";
 import { ItemSourcePF2e, ItemSummaryData, ItemType, TraitChatData } from "./data/index.ts";
 import { PhysicalItemPF2e } from "./physical/document.ts";
 import { ItemSheetPF2e } from "./sheet/base.ts";
-import { ItemFlagsPF2e, ItemSystemData } from "./data/base.ts";
 import { ItemInstances } from "./types.ts";
-import { ItemOriginFlag } from "@module/chat-message/data.ts";
 /** Override and extend the basic :class:`Item` implementation */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     /** Prepared rule elements from this item */
@@ -80,9 +80,9 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     };
     static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], context?: DocumentModificationContext<TDocument["parent"]>): Promise<TDocument[]>;
     static deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]>): Promise<TDocument[]>;
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Keep `TextEditor` and anything else up to no good from setting this item's description to `null` */
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Call onCreate rule-element hooks */
     protected _onCreate(data: ItemSourcePF2e, options: DocumentModificationContext<TParent>, userId: string): void;
     /** Call onDelete rule-element hooks */
@@ -96,6 +96,8 @@ interface ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends 
     get sheet(): ItemSheetPF2e<this>;
     prepareSiblingData?(this: ItemPF2e<ActorPF2e>): void;
     prepareActorData?(this: ItemPF2e<ActorPF2e>): void;
+    /** Optional data-preparation callback executed after rule-element synthetics are prepared */
+    onPrepareSynthetics?(this: ItemPF2e<ActorPF2e>): void;
     /** Returns items that should also be added when this item is created */
     createGrantedItems(options?: object): Promise<ItemPF2e[]>;
     /** Returns items that should also be deleted should this item be deleted */

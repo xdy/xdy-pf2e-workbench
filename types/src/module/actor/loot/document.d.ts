@@ -1,4 +1,4 @@
-import { ItemSourcePF2e, ItemType } from "@item/data/index.ts";
+import { ItemType } from "@item/data/index.ts";
 import { PhysicalItemPF2e } from "@item/physical/document.ts";
 import { ActiveEffectPF2e } from "@module/active-effect.ts";
 import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
@@ -29,8 +29,8 @@ declare class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     prepareDerivedData(): void;
     protected _onCreate(data: LootSource, options: DocumentModificationContext<TParent>, userId: string): void;
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, userId: string): void;
-    protected _onCreateDescendantDocuments(embeddedName: "ActiveEffect" | "Item", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], result: foundry.documents.ActiveEffectSource[] | ItemSourcePF2e[], options: DocumentModificationContext<this>, userId: string): void;
-    protected _onDeleteDescendantDocuments(embeddedName: "ActiveEffect" | "Item", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], result: string[], options: DocumentModificationContext<this>, userId: string): void;
+    protected _onCreateDescendantDocuments(parent: this, collection: "effects" | "items", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], result: ActiveEffectPF2e<this>["_source"][] | ItemPF2e<this>["_source"][], options: DocumentModificationContext<this>, userId: string): void;
+    protected _onDeleteDescendantDocuments(parent: this, collection: "items" | "effects", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], ids: string[], options: DocumentModificationContext<this>, userId: string): void;
 }
 interface LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: LootSource;

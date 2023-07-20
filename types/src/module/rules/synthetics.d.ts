@@ -3,6 +3,7 @@ import { DexterityModifierCapData } from "@actor/character/types.ts";
 import { LabeledSpeed } from "@actor/creature/data.ts";
 import { CreatureSensePF2e } from "@actor/creature/sense.ts";
 import { DamageDicePF2e, DeferredPromise, DeferredValue, ModifierAdjustment, ModifierPF2e } from "@actor/modifiers.ts";
+import type { TokenEffect } from "@actor/token-effect.ts";
 import { MovementType } from "@actor/types.ts";
 import { MeleePF2e, WeaponPF2e } from "@item";
 import { ActionTrait } from "@item/action/index.ts";
@@ -42,6 +43,7 @@ interface RuleElementSynthetics {
     striking: Record<string, StrikingSynthetic[]>;
     targetMarks: Map<TokenDocumentUUID, string>;
     toggles: RollOptionToggle[];
+    tokenEffectIcons: TokenEffect[];
     tokenOverrides: DeepPartial<Pick<foundry.documents.TokenSource, "light" | "name" | "alpha">> & {
         texture?: {
             src: VideoFilePath;
@@ -113,6 +115,7 @@ interface RollOptionToggle {
         label: string;
         selected: boolean;
     }[];
+    alwaysActive: boolean;
     checked: boolean;
     enabled: boolean;
 }
@@ -144,4 +147,4 @@ interface PotencySynthetic {
     predicate: PredicatePF2e;
     property?: WeaponPropertyRuneType[];
 }
-export { BaseSpeedSynthetic, CritSpecEffect, DamageDiceSynthetics, DeferredDamageDice, DeferredModifier, DeferredMovementType, DeferredEphemeralEffect, MAPSynthetic, ModifierAdjustmentSynthetics, ModifierSynthetics, PotencySynthetic, RollOptionToggle, RollSubstitution, RollTwiceSynthetic, RuleElementSynthetics, SenseSynthetic, StrikeAdjustment, StrikingSynthetic, };
+export { BaseSpeedSynthetic, CritSpecEffect, DamageDiceSynthetics, DeferredDamageDice, DeferredEphemeralEffect, DeferredModifier, DeferredMovementType, MAPSynthetic, ModifierAdjustmentSynthetics, ModifierSynthetics, PotencySynthetic, RollOptionToggle, RollSubstitution, RollTwiceSynthetic, RuleElementSynthetics, SenseSynthetic, StrikeAdjustment, StrikingSynthetic, };

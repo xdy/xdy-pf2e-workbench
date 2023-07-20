@@ -5,9 +5,9 @@ import { StatusEffectIconTheme } from "@scripts/config/index.ts";
 export declare class StatusEffects {
     #private;
     /** Set the theme for condition icons on tokens */
-    static setIconTheme(): void;
-    /** Link status effect icons to conditions */
     static initialize(): void;
+    /** Update status icons and tokens due to certain potential changes */
+    static reset(): void;
     static get conditions(): Record<ConditionSlug, {
         name: string;
         rules: string;

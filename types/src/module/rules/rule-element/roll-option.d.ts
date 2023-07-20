@@ -18,7 +18,7 @@ declare class RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema> {
     static validateJoint(source: SourceFromSchema<RollOptionSchema>): void;
     onApplyActiveEffects(): void;
     /** Force false totm toggleable roll options if the totmToggles setting is disabled */
-    protected resolveValue(): boolean;
+    resolveValue(): boolean;
     /**
      * Toggle the provided roll option (swapping it from true to false or vice versa).
      * @returns the new value if successful or otherwise `null`
@@ -40,7 +40,7 @@ type RollOptionSchema = RuleElementSchema & {
     domain: StringField<string, string, true, false, true>;
     option: StringField<string, string, true, false, false>;
     /** Suboptions for a toggle, appended to the option string */
-    suboptions: ArrayField<SchemaField<SuboptionData, SourceFromSchema<SuboptionData>, SourceFromSchema<SuboptionData>, true, false, true>>;
+    suboptions: ArrayField<SchemaField<SuboptionData, SourceFromSchema<SuboptionData>, ModelPropsFromSchema<SuboptionData>, true, false, true>>;
     /**
      * The value of the roll option: either a boolean or a string resolves to a boolean If omitted, it defaults to
      * `true` unless also `togglable`, in which case to `false`.
@@ -50,6 +50,11 @@ type RollOptionSchema = RuleElementSchema & {
     disabledIf: PredicateField<false, false, false>;
     /** The value of the roll option if its toggle is disabled: null indicates the pre-disabled value is preserved */
     disabledValue: BooleanField<boolean, boolean, false, false, false>;
+    /**
+     * Whether this (toggleable and suboptions-containing) roll option always has a `value` of `true`, allowing only
+     * suboptions to be changed
+     */
+    alwaysActive: BooleanField<boolean, boolean, false, false, false>;
     /** Whether this roll option is countable: it will have a numeric value counting how many rules added this option */
     count: BooleanField<boolean, boolean, false, false, false>;
     /** If the hosting item is an effect, remove or expire it after a matching roll is made */
@@ -58,6 +63,7 @@ type RollOptionSchema = RuleElementSchema & {
 type SuboptionData = {
     label: StringField<string, string, true, false, false>;
     value: StringField<string, string, true, false, false>;
+    predicate: PredicateField;
     selected: BooleanField<boolean, boolean, true, false, true>;
 };
 interface RollOptionSource extends RuleElementSource {

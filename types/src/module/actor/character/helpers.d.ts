@@ -66,4 +66,4 @@ declare function createHinderingPenalty(actor: CharacterPF2e): ModifierPF2e | nu
  * score, this penalty increases to be equal to the armor's check penalty if it's worse."
  */
 declare function createPonderousPenalty(actor: CharacterPF2e): ModifierPF2e | null;
-export { createForceOpenPenalty, createHinderingPenalty, createPonderousPenalty, createShoddyPenalty, imposeOversizedWeaponCondition, PCStrikeAttackTraits, WeaponAuxiliaryAction, };
+export { PCStrikeAttackTraits, WeaponAuxiliaryAction, createForceOpenPenalty, createHinderingPenalty, createPonderousPenalty, createShoddyPenalty, imposeOversizedWeaponCondition, };

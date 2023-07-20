@@ -1,4 +1,4 @@
-import { ActorSourcePF2e } from "@actor/data/index.ts";
+import type { ActorSourcePF2e } from "@actor/data/index.ts";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import { PackError } from "./helpers.ts";
@@ -36,6 +36,7 @@ declare class CompendiumPack {
     };
     constructor(packDir: string, parsedData: unknown[], parsedFolders: unknown[]);
     static loadJSON(dirPath: string): CompendiumPack;
+    finalizeAll(): PackEntry[];
     /** Convert UUIDs in REs to resemble links by name or back again */
     static convertRuleUUIDs(source: ItemSourcePF2e, { to, map }: {
         to: "ids" | "names";

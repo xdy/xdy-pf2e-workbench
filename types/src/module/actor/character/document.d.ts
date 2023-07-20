@@ -99,7 +99,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     toggleInvested(itemId: string): Promise<boolean>;
     /** Add a proficiency in a weapon group or base weapon */
     addAttackProficiency(key: BaseWeaponProficiencyKey | WeaponGroupProficiencyKey): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<CharacterSource>, options: CreatureUpdateContext<TParent>, user: UserPF2e): Promise<void>;
+    protected _preUpdate(changed: DeepPartial<CharacterSource>, options: CreatureUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Toggle between boost-driven and manual management of ability scores */
     toggleAbilityManagement(): Promise<void>;
 }

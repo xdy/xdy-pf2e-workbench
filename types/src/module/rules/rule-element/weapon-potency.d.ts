@@ -1,16 +1,20 @@
 import { ActorType } from "@actor/data/index.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
+import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
+import type { StringField } from "types/foundry/common/data/fields.d.ts";
+import { ResolvableValueField } from "./data.ts";
 /**
  * Copies potency runes from the weapon its attached to, to another weapon based on a predicate.
  * @category RuleElement
  */
-export declare class WeaponPotencyRuleElement extends RuleElementPF2e {
+declare class WeaponPotencyRuleElement extends RuleElementPF2e<WeaponPotencyRuleSchema> {
     protected static validActorTypes: ActorType[];
-    selector: string;
-    constructor(data: WeaponPotencySource, options: RuleElementOptions);
+    static defineSchema(): WeaponPotencyRuleSchema;
     beforePrepareData(): void;
 }
-interface WeaponPotencySource extends RuleElementSource {
-    selector?: unknown;
+interface WeaponPotencyRuleElement extends RuleElementPF2e<WeaponPotencyRuleSchema>, ModelPropsFromSchema<WeaponPotencyRuleSchema> {
 }
-export {};
+type WeaponPotencyRuleSchema = RuleElementSchema & {
+    selector: StringField<string, string, true, false, false>;
+    value: ResolvableValueField<true, false, false>;
+};
+export { WeaponPotencyRuleElement };
