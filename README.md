@@ -97,6 +97,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to automatically remove Dying when healed to above 0 hp.
     * Option to drop all held items on becoming unconscious.
     * Option to automate the results of recovery rolls.
+    * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384)
 
 * Client Automation section
     * Optional settings to (if the GM allows it) automatically roll damage on a hit for strikes and/or spell attacks.
