@@ -108,7 +108,7 @@ export function updateHooks(cleanSlate = false) {
         gs.get(MODULENAME, "castPrivateSpell") ||
             gs.get(MODULENAME, "reminderTargeting") !== "no" ||
             gs.get(MODULENAME, "handleDyingRecoveryRoll"),
-        preCreateChatMessageHook
+        preCreateChatMessageHook,
     );
 
     handle(
@@ -121,20 +121,20 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "reminderBreathWeapon") ||
             gs.get(MODULENAME, "reminderCannotAttack") ||
             gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
-        createChatMessageHook
+        createChatMessageHook,
     );
 
     handle(
         "renderChatMessage",
         true, // Due to support for minimumUserRole, this hook is always on
-        renderChatMessageHook
+        renderChatMessageHook,
     );
 
     handle(
         "createItem",
         gs.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
             game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"),
-        debounce(createItemHook, 10)
+        debounce(createItemHook, 10),
     );
 
     handle("updateItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), updateItemHook);
@@ -144,7 +144,7 @@ export function updateHooks(cleanSlate = false) {
         gs.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
             gs.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
             gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP"),
-        deleteItemHook
+        deleteItemHook,
     );
 
     handle("pf2e.systemReady", gs.get(MODULENAME, "housepatcher") !== "", pf2eSystemReadyHook, true);
@@ -154,7 +154,7 @@ export function updateHooks(cleanSlate = false) {
     handle(
         "pf2e.startTurn",
         gs.get(MODULENAME, "actionsReminderAllow") !== "none" || gs.get(MODULENAME, "autoReduceStunned"),
-        pf2eStartTurnHook
+        pf2eStartTurnHook,
     );
 
     handle("renderTokenHUD", gs.get(MODULENAME, "npcMystifier"), renderTokenHUDHook);
@@ -170,7 +170,7 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
             (gs.get("pf2e", "automation.lootableNPCs") &&
                 gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
-        preUpdateActorHook
+        preUpdateActorHook,
     );
 
     handle("preUpdateToken", gs.get(MODULENAME, "tokenAnimation"), preUpdateTokenHook);
@@ -180,7 +180,7 @@ export function updateHooks(cleanSlate = false) {
         gs.get(MODULENAME, "npcMystifier") ||
             (gs.get("pf2e", "automation.lootableNPCs") &&
                 gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
-        createTokenHook
+        createTokenHook,
     );
 
     handle(
@@ -189,9 +189,8 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
             gs.get(MODULENAME, "playerSpellsRarityColour") ||
             gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "skillActions") !== "disabled" ||
-            gs.get(MODULENAME, "creatureBuilder"),
-        renderActorSheetHook
+            gs.get(MODULENAME, "skillActions") !== "disabled",
+        renderActorSheetHook,
     );
 
     changePauseText();

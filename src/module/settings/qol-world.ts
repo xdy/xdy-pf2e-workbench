@@ -6,16 +6,6 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
-            creatureBuilder: {
-                name: `${MODULENAME}.SETTINGS.creatureBuilder.name`,
-                hint: `${MODULENAME}.SETTINGS.creatureBuilder.hint`,
-                scope: "world",
-                config: true,
-                default: false,
-                type: Boolean,
-                onChange: () => updateHooks(),
-                requiresReload: true,
-            },
             npcScaler: {
                 name: `${MODULENAME}.SETTINGS.npcScaler.name`,
                 hint: `${MODULENAME}.SETTINGS.npcScaler.hint`,

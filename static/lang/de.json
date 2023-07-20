@@ -322,10 +322,6 @@
         "traitPart": " mit diesen Kategorien: <strong>{traits}</strong>",
         "name": "... und zeige Zauberkategorien in der öffentlichen Nachricht."
       },
-      "creatureBuilder": {
-        "name": "Die Erstellung eigener Kreaturen erlauben.",
-        "hint": "Auswählen um die Erstellung eigener Kreaturen anhand der Regeln im Spielleiterhandbuch zu erlauben."
-      },
       "heroPointHandlerStartTimerOnReady": {
         "hint": "Auswählen um die Heldenpunkt Verwaltung automatisch mit einem Timer zu starten, sobald das Spiel bereit ist.",
         "name": "Heldenpunkt Verwaltung automatisch mit einem Timer zu starten."

@@ -143,10 +143,6 @@
         "name": "Mostrar traços da magia",
         "traitPart": " com esses traços: <strong>{traits}</strong>"
       },
-      "creatureBuilder": {
-        "hint": "Permite criar criaturas personalidas de acordo com as regras do Guia do Mestre.",
-        "name": "Criar criaturas personalizadas"
-      },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Automaticamente reduz a condição Assustado a cada turno para PJs, PdMs e familiares.",
         "name": "Diminuir Assustado a cada turno"

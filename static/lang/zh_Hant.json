@@ -286,10 +286,6 @@
         "name": "在公開訊息中顯示法術特徵。",
         "traitPart": " 具有以下特徵：<strong>{traits}</strong>"
       },
-      "creatureBuilder": {
-        "hint": "選擇以在NPC卡上新增一個按鍵來按照GMG規則建立NPC。",
-        "name": "允許建立自定義生物。"
-      },
       "customPauseImage": {
         "hint": "自定義暫停圖示。留空則使用系統預設的鬧鐘圖示。",
         "name": "自定義暫停圖示。"

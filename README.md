@@ -51,10 +51,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Set number of minutes till the next time the dialog is shown.
 
 * Quality of Life section
-    * Option to add a creature builder button to npc character sheets, enabling building from scratch using the
-      suggested values from the GMG (This feature has been taken over from the
-      delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox#creature-builder module. Thanks DJ!)
-        * **NOTE: This feature is currently broken due to a change in the system.**
     * Option to add an npc scaler feature when right clicking on an npc (This feature has been taken over from the
       delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox#npc-scaler module. Thanks DJ! At some point Avery will
       have the time to add it to the system, until then I'll maintain it.)
@@ -223,6 +219,9 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your
       character. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or
       dazzled. Self has Blind-Fight.
+
+* Recently removed features:
+    * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
 
 ## Installation
 

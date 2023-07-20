@@ -225,10 +225,6 @@
         "name": "... et montre les traits du sort dans le message public.",
         "traitPart": " avec ces traits : <strong>{traits}</strong>"
       },
-      "creatureBuilder": {
-        "hint": "Cliquez pour permettre la construction de créatures personnalisées en utilisant les règles du GdM.",
-        "name": "Permettre la construction de créatures personnalisées."
-      },
       "decreaseFrightenedConditionEachTurn": {
         "hint": "Réglages pour automatiquement réduire l'état Effrayé à chaque round pour les personnages, pnj et familiers.",
         "name": "Réduire automatiquement la condition Effrayée chaque round."

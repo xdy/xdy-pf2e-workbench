@@ -420,10 +420,6 @@
         "name": "... and show spell traits in the public message.",
         "traitPart": " with these traits: <strong>{traits}</strong>"
       },
-      "creatureBuilder": {
-        "hint": "Check to allow building custom creatures according to GMG rules.",
-        "name": "Allow building custom creatures."
-      },
       "customPauseImage": {
         "hint": "Custom image to use for the pause image. Leave empty to use the default clockwork icon.",
         "name": "Custom image to use for the pause image."

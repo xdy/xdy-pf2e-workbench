@@ -93,10 +93,6 @@
         "name": "谁会被提醒动作",
         "players": "玩家"
       },
-      "creatureBuilder": {
-        "hint": "选择以在NPC卡上添加一个按键来按照GMG规则建立NPC。",
-        "name": "允许建立自定义生物。"
-      },
       "applyEncumbranceBasedOnBulk": {
         "name": "根据负载自动赋予超载状态。",
         "hint": "根据负载自动赋予超载状态。（跟随PF2e系统，并认为5B+9L不超过5B）"
