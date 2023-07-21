@@ -95,8 +95,8 @@
         "title": "Choisissez l'utilisateur pour lui ajouter les cibles"
       },
       "applyEncumbranceBasedOnBulk": {
-        "hint": "Appliquer automatiquement les règles d'Encombrement. (Utilise le code du système qui considère que 5 E et 9 L ne dépasse pas 5 E)",
-        "name": "Appliquer automatiquement les règles de l'Encombrement."
+        "hint": "(Déprécié, la capacité existe en PF2e 5.13) Appliquer automatiquement les règles d'Encombrement. (Utilise le code du système qui considère que 5 Enc. + 9 L ne dépassent pas 5 Enc.)",
+        "name": "(Déprécié) Appliquer automatiquement les règles basées sur l'Encombrement."
       },
       "applyPersistentAllow": {
         "all": "Tous",
@@ -409,8 +409,8 @@
       },
       "qolWorldSettings": {
         "hint": "Activer et configurer les réglages de la qualité de vie pour les MJ",
-        "label": "Régler la qualité de vie du monde",
-        "name": "Régler la qualité de vie du monde"
+        "label": "Réglages de World Qol",
+        "name": "Réglages World Qol"
       },
       "reminderBreathWeapon": {
         "defaultName": "Souffle",
@@ -541,7 +541,7 @@
         "info": "Info",
         "warn": "Avertissement",
         "error": "Erreur",
-        "off": "Désactivé"
+        "off": "Arrêt"
       },
       "castPrivateSpellHideName": {
         "name": "... et cache le nom d'un sort lancé en privé sur le jet de dégât.",
@@ -587,7 +587,7 @@
         "hint": "Correctifs de règles maison que xdy aime. Ajoute actuellement les jets pour À terre des fléaux et marteaux. Deviendra plus souple après.",
         "info": "Les règles maisons ont été corrigées (actuellement À terre pour les fléaux et les marteaux).",
         "hammerCritical": "La cible doit réussir un jet de @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Effet critique des marteaux] ou être @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{À terre}.",
-        "flailCritical": "La cible doit réussir un jet de @Check[type:dexterity|dc:resolve(@actor.attributes.classDC.value)|name:Effet critique des fléaux] ou se retrouver@UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{À terre}."
+        "flailCritical": "La cible doit réussir un jet de @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|name:Effet critique des fléaux] ou se retrouver@UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{À terre}."
       },
       "housepatcher": {
         "hint": "(VRAIMENT EXPÉRIMENTAL) Entrer une suite json pour patcher les compendiums du système. Voir housepatcher.md sur github pour la documentation.",
@@ -598,6 +598,14 @@
         "hint": "(Expérimental) Activer et configurer diverses règles maison",
         "label": "(Expérimental) Gérer réglages des règles maison",
         "name": "(Expérimental) Réglages des règles maison"
+      },
+      "autoKillIfMassiveDamage": {
+        "yes": "Oui, pour tous",
+        "yesForCharacters": "Oui, pour personnages+familiers",
+        "yesForNpcs": "Oui, pour PNJ",
+        "hint": "Réglages pour tuer automatiquement en subissant des dégâts massifs.",
+        "name": "Tué automatiquement en subissant des dégâts massifs.",
+        "no": "Non"
       }
     },
     "effects": {
@@ -615,7 +623,7 @@
     "macros": {
       "basicActionMacros": {
         "title": "Actions ({name})",
-        "noActorSelected": "Aucun acteur sélectionné",
+        "noActorSelected": "Aucun acteur PJ, PNJ, familier n'est sélectionné",
         "cancel": "Annuler",
         "gmMustImport": "Le MJ doit faire un clic droit sur le compendium xdy-pf2e-workbench-macros et sélectionner \"Importer tout le contenu\" et s'assurer de cocher \"Conserver les ID des documents\" lors de l'importation.",
         "settings": {
