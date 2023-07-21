@@ -71,8 +71,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       the current combatant just having downed the target combatant.)
     * Enable/disable the option to autoroll damage on a hit.
     * Enable/disable the option to automatically apply persistent healing.
-    * Option to apply Encumbered condition automatically based on current bulk when bulk changes. Note: Uses the system
-      code which considers 5 bulk + 9 light to not exceed 5 bulk.
     * Option to automatically reduce Stunned condition at the start of the turn hidden behind option to show actions
       reminder each turn, which handles Quickened, Slowed and Stunned.
     * Option automatically give Unconscious if Dying is removed when at 0 hp.
@@ -109,7 +107,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Optional settings to (if the GM allows it) automatically applying persistent damage, fast healing and
       regeneration (with an optional extra debug chat message), inspired by @Jamz' code.
     * Option to automatically reduce the Frightened condition at the end of each turn. See the included effect 'Effect:
-      Dirge of Doom' for how to set a minimum frightened level that the module won't reduce below.
+      Minimum Frightened' for how to set a minimum frightened level that the module won't reduce below.
 
 * Variant Rules
     * Option to change the max number of hero points a character can have. (This feature has been taken over from the
@@ -161,23 +159,16 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       these macros, report them
       here: https://gitlab.com/symonsch/my-foundryvtt-macros/-/issues
     * The compendium "PF2e Workbench Items (xdy-pf2e-workbench-items)" contains a few useful effects and items:
-        * Aura effects for Bless, Inspire Courage, Inspire Defense, Protective Ward that automatically apply the effect
-          to tokens within the aura. (Technically these should not be auras, but, close enough... Inspire Courage and
-          Inspire Defense's effect can pass through walls that allow sound to pass)
-        * Placeholder Aura effect for Bless. If/when the system supports auras that affect enemies this effect might
-          automagically start automating.
-        * Effect for Dirge of Doom that you can give to targets to not let the automated frightened removal reduce
+        * Aura effects for Aura of Despair, Bless, Inspire Courage, Inspire Defense, Protective Ward that automatically
+          apply the effect to tokens within the aura. (Technically these not all these should be auras, but, close
+          enough... Inspire Courage and Inspire Defense's effect can pass through walls that allow sound to pass)
+        * Effect for Dirge of Doom that you can give to targets to give them frightened and not let the automated
+          frightened removal reduce frightened below 1.
+        * Effect: Minium Frightened that you can give to targets to not let the automated frightened removal reduce
           frightened below 1.
-        * Workbench ABP. My attempt at implementing the optional Automated Bonus Progression rules using Rule Elements
-          hosted on a 'Bonus Feat'.
-          Not quite complete, but, useful enough. (My players decided against ABP so I won't use it in the near term,
-          but I figured it might be useful for someone else, so I'm putting it in the Workbench.)
-          To use it, *do not* turn on ABP in Foundry, instead put this 'feat' in the Campaign Feats section on all
-          characters you want to use these rules.)
-          Only lightly tested, but you probably need to remove and readd this feat after you level up.
-          Adjust the economy as much as you feel is needed. You don't need to remove runes from weapons and armor if you
-          don't want to, these REs are implemented as Item Bonuses, so whichever of the rune and the character has the
-          highest bonus is applied, *except* for Devastating Attacks which *does* stack with Striking Runes.
+        * Effect that you can use to change Focus Point Maximum of a character
+        * A set of effects that can be used to grant most conditions for a certain amount of time. They are named like "
+          Effect: Condition for 1 hour (modifiable)"
     * The compendium "PF2e Workbench Macros (xdy-pf2e-workbench-macros)" contains a few macros you might find useful.
         * 'Basic Action Macros' shows a dialog with a button for most macros, with bonus and whether you're the best in
           the party at that action (a setting to turn this off exists). (
@@ -214,14 +205,14 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       where prohibited. Ei saa peittää. Do not taunt happy fun ball: https://www.youtube.com/watch?v=GmqeZl8OI2M)
 
 * Deprecated features (will be removed eventually):
-    * (Deprecated, use the module https://foundryvtt.com/packages/pf2-flat-check instead) An 'Equipment' named "
-      Workbench Flat Check Notes". This 'Equipment' holds several useful Note RE:s that when appropriate add notes
-      about Flat Checks to rolls. It is far from complete, but it's a good start. To use it add it to your
-      character. It currently handles: Target is undetected, hidden, invisible or concealed. Self is blinded or
-      dazzled. Self has Blind-Fight.
+    * (Deprecated, is in the system from pf2e 5.13.0) Option to apply Encumbered condition automatically based on
+      current bulk when bulk changes. Note: Uses the system code which considers 5 bulk + 9 light to not exceed 5 bulk.
 
 * Recently removed features:
     * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
+    * Workbench Flat Check Notes. Use https://foundryvtt.com/packages/pf2-flat-check
+      or https://foundryvtt.com/packages/pf2e-flatcheck-helper instead.
+    * Workbench ABP. Use https://github.com/reonZ/pf2e-arp instead.
 
 ## Installation
 
@@ -234,6 +225,9 @@ link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v1.7.1/module.
 
 If you want to install this module for foundry 9 use this (unsupported) module.json
 link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v3.44.3/module.json
+
+If you want to install this module for foundry 10 use this (unsupported) module.json
+link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v4.77.2/module.json
 
 ## Supported pf2e-specific QOL modules
 

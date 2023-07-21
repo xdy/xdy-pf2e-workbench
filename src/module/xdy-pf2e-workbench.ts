@@ -276,53 +276,6 @@ Hooks.once("setup", async () => {
     }
 });
 
-async function migrateFeatures() {
-    // Currently only flat check notes
-    // @ts-ignore - no type definition for this yet
-    const moduleVersion = game.modules.get(MODULENAME)?.version;
-    const worldVersion = game.settings.get(MODULENAME, "workbenchVersion");
-    if (moduleVersion !== worldVersion) {
-        const pack = game.packs.find((p) => p.collection === `${MODULENAME}.xdy-pf2e-workbench-items`);
-        await pack?.getIndex();
-        const entry = pack?.index.find((e) => e.name.startsWith("Workbench Flat Check Notes"));
-        const flatcheckNotes: any = await pack?.getDocument(<string>entry?._id);
-        if (flatcheckNotes) {
-            for (const actor of game.actors) {
-                const filter = actor.items.filter((item) => item.name.startsWith("Workbench Flat Check Notes"));
-                for (const item of filter) {
-                    await actor.deleteEmbeddedDocuments("Item", [item.id]);
-                }
-                if (filter?.length > 0) {
-                    await actor.createEmbeddedDocuments("Item", [flatcheckNotes.system]);
-                }
-            }
-
-            for (const s of game.scenes) {
-                // @ts-ignore
-                for (const t of s.tokens) {
-                    const actor = t.actor;
-                    if (!actor || t.isLinked) {
-                        // Ignore tokens with no actor as well as linked tokens (they have been handled above).
-                        continue;
-                    }
-                    const filter = actor.items.filter((item) => item.name.startsWith("Workbench Flat Check Notes"));
-                    for (const item of filter) {
-                        await actor.deleteEmbeddedDocuments("Item", [item.id]);
-                    }
-                    if (filter?.length > 0) {
-                        await actor.createEmbeddedDocuments("Item", [flatcheckNotes.system]);
-                    }
-                }
-            }
-        }
-
-        // Set version so we don't migrate again.
-        game.settings.set(MODULENAME, "workbenchVersion", moduleVersion);
-    } else {
-        return;
-    }
-}
-
 // When ready
 Hooks.once("ready", () => {
     // Do anything once the module is ready
@@ -348,10 +301,6 @@ Hooks.once("ready", () => {
         whirlwindStrike: whirlwindStrike, // await game.PF2eWorkbench.whirlwindStrike(_token) OR await game.PF2eWorkbench.whirlwindStrike(_token, 2000)
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
     };
-
-    if (isFirstGM()) {
-        migrateFeatures().then();
-    }
 
     if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
         ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-sheet-skill-actions`));

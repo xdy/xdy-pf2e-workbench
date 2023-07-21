@@ -31,7 +31,7 @@ function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
 }
 
 function isFirstGM() {
-    return game.user.id === game.users?.find((u) => u.isGM && u.active)?.id;
+    return game.users.activeGM === game.user;
 }
 
 function myRandomId() {
