@@ -1,3 +1,10 @@
+## [5.9.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.9.0...v5.9.1) (2023-07-21)
+
+
+### Bug Fixes
+
+* Deprecates automated encumbrance as that will be part of the pf2e system from version 5.13. Removes the long-deprecated Workbench Flat Check Notes 'effect'. Removes the half-done Workbench ABP 'effect'. ([880f2d1](https://github.com/xdy/xdy-pf2e-workbench/commit/880f2d19f606d27d87b244583fdeeb0d800545c8))
+
 # [5.9.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.8.1...v5.9.0) (2023-07-20)
 
 
