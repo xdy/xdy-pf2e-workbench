@@ -210,8 +210,8 @@
         "title": "Select user to add targets for"
       },
       "applyEncumbranceBasedOnBulk": {
-        "hint": "Automatically apply encumbrance based on bulk. (Uses system code which considers 5 bulk + 9 light to not exceed 5 bulk.)",
-        "name": "Automatically apply encumbrance based on bulk."
+        "hint": "(Deprecated, feature exists in pf2e 5.13) Automatically apply encumbrance based on bulk. (Uses system code which considers 5 bulk + 9 light to not exceed 5 bulk.)",
+        "name": "(Deprecated) Automatically apply encumbrance based on bulk."
       },
       "applyPersistentAllow": {
         "all": "All",
