@@ -13,7 +13,7 @@
           "ConcealAnObject": "Ein Objekt verstecken",
           "Escape": "Entkommen - höchste (??)",
           "GatherInformation": "Informationen sammeln",
-          "Hide": "Verstecken",
+          "Hide": "Verstecke",
           "PickALock": "Schloss knacken",
           "SubsistSurvival": "Überleben - Wildnis",
           "DecipherWritingArcana": "Schrift entziffern - Arkan",
@@ -72,7 +72,7 @@
         "title": "Aktionen ({name})",
         "second": "(-5)",
         "YouAreTheBestInYourParty": "Du bist der Beste in der Gruppe",
-        "noActorSelected": "Kein Akteur ausgewählt",
+        "noActorSelected": "Kein SC, NSC oder Vertrauten Akteur ausgewählt",
         "cancel": "Abbruch",
         "third": "(-10)",
         "compendiumNotFound": "Kompendium {compendiumName} nicht gefunden",
@@ -274,8 +274,8 @@
         "wasHealed": "{healing} Heilung wurde automatisch angewendet."
       },
       "applyEncumbranceBasedOnBulk": {
-        "hint": "Automatisch belastet anhand der Last hinzufügen. (Der System Code sieht 9 Leichte Last nicht als überschreiten der Last um 1 an.)",
-        "name": "Automatisch belastet anhand der Last hinzufügen."
+        "hint": "(Veraltet, Feature existiert in pf2e 5.13) Automatisch belastet anhand der Last hinzufügen. (Der System Code sieht 9 Leichte Last nicht als überschreiten der Last um 1 an.)",
+        "name": "(Veraltet) Automatisch belastet anhand der Last hinzufügen."
       },
       "customPauseImage": {
         "hint": "Eigenes Bild für das Pausenbild benutzen. Leer lassen um das Standard Uhrwerk-Symbol zu nutzen.",
@@ -608,6 +608,31 @@
         "name": "Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird.",
         "info": "Aktionen im Charakterbogen sind nun sortiert.",
         "hint": "Client-Einstellung für die Sortierung der Aktionen anhand des Namens sobald der Charakterbogen geöffnet wird. Erfordert eine Aktualisierung (F5) nach der Änderung."
+      },
+      "houseRulerI18n": {
+        "name": "Hausregeln",
+        "info": "Hausregeln welche hineingepatcht wurden (fügt im Moment Rettungswürfe für das Niederschlagen von Flegeln und Hämmern hinzu).",
+        "hint": "Patches in einigen Hausregeln welche xdy mag. Fügt im Moment Rettungswürfe für das Niederschlagen von Flegeln und Hämmern hinzu. Wird später flexibler werden.",
+        "flailCritical": "Das Ziel muss einen Rettungswurf gegen @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|name:gehausregelte kritische Flegelspezialisierung] bestehen oder wird niedergeschlagen und gilt als @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{liegend}.",
+        "hammerCritical": "Das Ziel muss einen Rettungswurf gegen @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:gehausregelte kritische Hammerspezialisierung] bestehen oder wird niedergeschlagen und gilt als @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{liegend}."
+      },
+      "houseRulesSettings": {
+        "label": "(Experimentell) Verwalte Hausregel Einstellungen",
+        "hint": "(Experimentell) Aktiviere und konfiguriere verschiedene Hausregeln",
+        "name": "(Experimentell) Hausregel Einstellungen"
+      },
+      "autoKillIfMassiveDamage": {
+        "yes": "Ja, für alle",
+        "yesForCharacters": "Ja, für Charaktere+Vertraute",
+        "yesForNpcs": "Ja, für NSC",
+        "no": "Nein",
+        "hint": "Einstellung für das automatische Töten beim erhalten von massiven Schaden.",
+        "name": "Automatisches Töten beim erhalten von massiven Schaden."
+      },
+      "housepatcher": {
+        "name": "(SEHR EXPERIMENTELL) Hausregelpatches (Patches in Hausregeln). Benötigt eine Aktualisierung (F5) nach der Änderung.",
+        "notification": "Hauspatcher: Wende {count} Hausregeln auf Gegenstände in den Systemkompendien an.",
+        "hint": "(SEHR EXPERIMENTELL) Ein json-Array hinzufügen um die System-Kompendien zu patchen. Lies in der housepatcher.md Datei auf github für die Dokumentation."
       }
     },
     "skillActions": {
@@ -651,7 +676,7 @@
         "hideDuplicates": {
           "hint": "Entscheidet ob doppelte Aktivitäten versteckt werden sollen, sowohl bei der Aktivitätenliste, als auch bei der Liste der Fertigkeitsaktivitäten",
           "doNotHide": "Nicht verstecken",
-          "hideActions": "Verstecken",
+          "hideActions": "Verstecke Aktionen",
           "hideSkillActions": "Fertigkeitsaktivitäten verstecken",
           "name": "Fertigkeitsaktivitäten: doppelte Aktivitäten verstecken"
         },
