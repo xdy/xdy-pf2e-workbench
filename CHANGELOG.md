@@ -1,3 +1,10 @@
+## [5.9.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.9.1...v5.9.2) (2023-07-21)
+
+
+### Bug Fixes
+
+* Notes in the settings that automated encumbrance is deprecated. ([3153a5f](https://github.com/xdy/xdy-pf2e-workbench/commit/3153a5fa242ef66912c7a5f06eae46f93ff0f413))
+
 ## [5.9.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.9.0...v5.9.1) (2023-07-21)
 
 
