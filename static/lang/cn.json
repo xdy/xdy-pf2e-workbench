@@ -94,8 +94,8 @@
         "players": "玩家"
       },
       "applyEncumbranceBasedOnBulk": {
-        "name": "根据负载自动赋予超载状态。",
-        "hint": "根据负载自动赋予超载状态。（跟随PF2e系统，并认为5B+9L不超过5B）"
+        "name": "（已失效）根据负载自动赋予超载状态。",
+        "hint": "（已失效，本功能已集成入PF2e 5.13系统）根据负载自动赋予超载状态。（跟随PF2e系统，并认为5B+9L不超过5B）"
       },
       "applyPersistentAllow": {
         "all": "所有",
@@ -582,6 +582,31 @@
         "hint": "自动进行濒死复苏检定的客户端自动化设置。",
         "name": "自动进行濒死复苏检定。",
         "defeated": "{name}被击败"
+      },
+      "housepatcher": {
+        "name": "(超绝实验性功能) Housepatcher（一系列房规）。改动后需要刷新(f5)。",
+        "notification": "Housepatcher: 将 {count} 条房规应用于系统合集包中的道具。",
+        "hint": "(超绝实验性功能) 输入一系列json来打包系统合集包。详细说明请见github上的housepatcher.md。"
+      },
+      "houseRulesSettings": {
+        "hint": "(实验性) 启用并设置多种房规",
+        "label": "(实验性) 管理房规设置",
+        "name": "(实验性) 房规设置"
+      },
+      "houseRulerI18n": {
+        "flailCritical": "目标必须成功通过@Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|name:房规连枷重击专精]，否则@UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{倒地 Prone}。",
+        "info": "已添加房规（连枷和锤子重击专精效果造成倒地时豁免）。",
+        "name": "房规",
+        "hint": "一些维护者xdy喜欢的房规。目前加入了连枷和锤子重击专精效果造成倒地时豁免的功能。未来会更灵活一些。",
+        "hammerCritical": "目标必须成功通过@Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:房规锤重击专精]，否则@UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{倒地 Prone}。"
+      },
+      "autoKillIfMassiveDamage": {
+        "yes": "是的，所有角色",
+        "yesForCharacters": "是的，仅玩家角色+魔宠",
+        "yesForNpcs": "是的，仅NPC",
+        "hint": "设置是否要在受到巨创（Massive Damage）时自动杀死角色。",
+        "no": "否",
+        "name": "受到巨创时自动杀死角色。"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
@@ -592,7 +617,7 @@
     },
     "macros": {
       "basicActionMacros": {
-        "noActorSelected": "没有选择人物",
+        "noActorSelected": "没有玩家角色、NPC或魔宠被选中",
         "title": "动作 ({name})",
         "cancel": "取消",
         "gmMustImport": "GM必须在合集包“xdy-pf2e-workbench-macros”上右键并选择“导入全部内容”并确保导入时选择了“保留文档ID？”。",
