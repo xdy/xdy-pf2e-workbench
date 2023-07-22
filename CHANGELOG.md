@@ -1,3 +1,10 @@
+# [5.10.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.9.2...v5.10.0) (2023-07-22)
+
+
+### Features
+
+* Adds the original macro documentation (if any) to the top of the macros in the 'Symon-provided macros' compendium. You do need to reimport/readd to macro bar to get this. ([da96350](https://github.com/xdy/xdy-pf2e-workbench/commit/da96350126056b95b513385f22250e4dce66a735))
+
 ## [5.9.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.9.1...v5.9.2) (2023-07-21)
 
 
