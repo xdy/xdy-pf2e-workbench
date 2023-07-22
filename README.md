@@ -205,7 +205,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       where prohibited. Ei saa peittää. Do not taunt happy fun ball: https://www.youtube.com/watch?v=GmqeZl8OI2M)
 
 * Deprecated features (will be removed eventually):
-    * (Deprecated, is in the system from pf2e 5.13.0) Option to apply Encumbered condition automatically based on
+    * (Deprecated, is in the system from pf2e 5.2.0) Option to apply Encumbered condition automatically based on
       current bulk when bulk changes. Note: Uses the system code which considers 5 bulk + 9 light to not exceed 5 bulk.
 
 * Recently removed features:
