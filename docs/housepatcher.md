@@ -30,129 +30,154 @@ The example below is, not coincidentally, the relevant bits of my current houser
 
 ```json array
 [
-    {
-        "action": "unlock",
-        "uuid": "Compendium.pf2e.equipment-srd.YBKhjWqFuvgkArba"
-    },
-    {
-        "action": "unlock",
-        "uuid": "Compendium.pf2e.feats-srd.Item.aFygWxgSv82WyCsl"
-    },
-    {
-        "action": "unlock",
-        "uuid": "Compendium.pf2e.spells-srd.Item.TCk2MDwf5L5OYjFC"
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.equipment-srd.YBKhjWqFuvgkArba",
-        "name": "Cassisian Helmet",
-        "reason": "Too good, no reason to not buy one. And, I suspect it'll go away/be changed a lot in the remaster.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.equipment-srd.Item.7dkdtY9cTXM3gMon",
-        "name": "Phantasmal Doorknob (Greater)",
-        "reason": "Dazzled is fine, Blinded? Not so much.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.equipment-srd.Item.9BXiGLvOFxDBmQrQ",
-        "name": "Phantasmal Doorknob (Major)",
-        "reason": "Dazzled is fine, Blinded? Not so much.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.feats-srd.Item.aFygWxgSv82WyCsl",
-        "name": "Acrobat Dedication",
-        "reason": "It's beginning to irritate me.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.feats-srd.Item.49mBVNF4SK6iYdJm",
-        "name": "Unconventional Weaponry",
-        "reason": "Do humans that don't use flickmaces even exist?",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.equipment-srd.Item.XaHXxSpSCgLGYhbs",
-        "name": "Imp Shot",
-        "reason": "Flatfooted and a penalty for most/all of a combat? At level 5? Nope.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.equipment-srd.Item.T7o5nMvWS8YeJOst",
-        "name": "Black Tendril Shot (Lesser)",
-        "reason": "Multi-round Slow is just boring. And too easy to get with this.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.equipment-srd.Item.16INAWEN5mkuGTga",
-        "name": "Black Tendril Shot (Moderate)",
-        "reason": "Multi-round Slow is just boring. And too easy to get with this.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.equipment-srd.Item.NOPrIz6UNxof1M5d",
-        "name": "Black Tendril Shot (Greater)",
-        "reason": "Multi-round Slow is just boring. And too easy to get with this.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.equipment-srd.Item.0Tu55QMhTXAijFvl",
-        "name": "Saurian Spike (Major)",
-        "reason": "Precise scent is annoying.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "update",
-        "uuid": "Compendium.pf2e.spells-srd.Item.TCk2MDwf5L5OYjFC",
-        "name": "Cloak of Colors",
-        "reason": "Actually not sure about this one. Leaving it in for now.",
-        "data": {
-            "system.traits.rarity": "uncommon"
-        }
-    },
-    {
-        "action": "lock",
-        "uuid": "Compendium.pf2e.equipment-srd.YBKhjWqFuvgkArba"
-    },
-    {
-        "action": "lock",
-        "uuid": "Compendium.pf2e.feats-srd.Item.aFygWxgSv82WyCsl"
-    },
-    {
-        "action": "lock",
-        "uuid": "Compendium.pf2e.spells-srd.Item.TCk2MDwf5L5OYjFC"
+  {
+    "action": "unlock",
+    "uuid": "Compendium.pf2e.equipment-srd.YBKhjWqFuvgkArba"
+  },
+  {
+    "action": "unlock",
+    "uuid": "Compendium.pf2e.feats-srd.Item.aFygWxgSv82WyCsl"
+  },
+  {
+    "action": "unlock",
+    "uuid": "Compendium.pf2e.spells-srd.Item.TCk2MDwf5L5OYjFC"
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.YBKhjWqFuvgkArba",
+    "name": "Cassisian Helmet",
+    "reason": "Too good, no reason to not buy one. And, I suspect it'll go away/be changed a lot in the remaster.",
+    "data": {
+      "system.traits.rarity": "uncommon"
     }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.7dkdtY9cTXM3gMon",
+    "name": "Phantasmal Doorknob (Greater)",
+    "reason": "Dazzled is fine, Blinded? Not so much.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.9BXiGLvOFxDBmQrQ",
+    "name": "Phantasmal Doorknob (Major)",
+    "reason": "Dazzled is fine, Blinded? Not so much.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.feats-srd.Item.aFygWxgSv82WyCsl",
+    "name": "Acrobat Dedication",
+    "reason": "It's beginning to irritate me.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.feats-srd.Item.49mBVNF4SK6iYdJm",
+    "name": "Unconventional Weaponry",
+    "reason": "Do humans that don't use flickmaces even exist?",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.XaHXxSpSCgLGYhbs",
+    "name": "Imp Shot",
+    "reason": "Flatfooted and a penalty for most/all of a combat? At level 5? Nope.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.T7o5nMvWS8YeJOst",
+    "name": "Black Tendril Shot (Lesser)",
+    "reason": "Multi-round Slow is just boring. And too easy to get with this.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.16INAWEN5mkuGTga",
+    "name": "Black Tendril Shot (Moderate)",
+    "reason": "Multi-round Slow is just boring. And too easy to get with this.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.NOPrIz6UNxof1M5d",
+    "name": "Black Tendril Shot (Greater)",
+    "reason": "Multi-round Slow is just boring. And too easy to get with this.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.0Tu55QMhTXAijFvl",
+    "name": "Saurian Spike (Major)",
+    "reason": "Precise scent is annoying.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.spells-srd.Item.TCk2MDwf5L5OYjFC",
+    "name": "Cloak of Colors",
+    "reason": "Actually not sure about this one. Leaving it in for now.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.feats-srd.Item.y2XeMe1F18lIyo59",
+    "name": "Blind-Fight",
+    "reason": "Adds pf2e-perception support to Blind-Fight as per [Idle's post](https://discord.com/channels/880968862240239708/1131013663604625479/1132667090399142040) .",
+    "data": {
+      "system.rules": [
+        {
+          "key": "RollOption",
+          "domain": "all",
+          "option": "self:pf2perception:visibility:cancel:hidden"
+        },
+        {
+          "key": "RollOption",
+          "domain": "all",
+          "option": "self:pf2perception:concealed:dc:0"
+        },
+        {
+          "key": "RollOption",
+          "domain": "all",
+          "option": "self:pf2perception:hidden:dc:5"
+        }
+      ]
+    }
+  },
+  {
+    "action": "lock",
+    "uuid": "Compendium.pf2e.equipment-srd.YBKhjWqFuvgkArba"
+  },
+  {
+    "action": "lock",
+    "uuid": "Compendium.pf2e.feats-srd.Item.aFygWxgSv82WyCsl"
+  },
+  {
+    "action": "lock",
+    "uuid": "Compendium.pf2e.spells-srd.Item.TCk2MDwf5L5OYjFC"
+  }
 ]
 ```
 
