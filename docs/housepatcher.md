@@ -151,7 +151,7 @@ The example below is, not coincidentally, the relevant bits of my current houser
         {
           "key": "RollOption",
           "domain": "all",
-          "option": "self:pf2perception:visibility:cancel:hidden"
+          "option": "self:pf2perception:visibility:noflat-self:all"
         },
         {
           "key": "RollOption",
