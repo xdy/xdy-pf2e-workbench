@@ -19,7 +19,7 @@ depending on what mistake you made). It *might* complain about bad json and dele
 your world. You *did* take a backup, right?
 
 The name and reason fields are optional and are not read by the patcher, they exist so you can document what the uuid
-points to. (Actually, you can enter whatever fields you want other than "action", "uuid" and "data". Schema? Bah. We don't need no stinking schemas...)
+points to. (Actually, you can enter whatever fields you want other than "action", "uuid" and "data". Schemas? Bah. We don't need no stinking schemas...)
 
 The array must start with a json that unlocks the compendium, then any number of jsons that update or delete entries, and
 finally a json that locks the compendium.
