@@ -95,7 +95,7 @@
       },
       "applyEncumbranceBasedOnBulk": {
         "name": "（已失效）根据负载自动赋予超载状态。",
-        "hint": "（已失效，本功能已集成入PF2e 5.13系统）根据负载自动赋予超载状态。（跟随PF2e系统，并认为5B+9L不超过5B）"
+        "hint": "（已失效，本功能已集成入PF2e 5.2系统）根据负载自动赋予超载状态。（跟随PF2e系统，并认为5B+9L不超过5B）"
       },
       "applyPersistentAllow": {
         "all": "所有",

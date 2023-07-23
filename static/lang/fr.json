@@ -95,7 +95,7 @@
         "title": "Choisissez l'utilisateur pour lui ajouter les cibles"
       },
       "applyEncumbranceBasedOnBulk": {
-        "hint": "(Déprécié, la capacité existe en PF2e 5.13) Appliquer automatiquement les règles d'Encombrement. (Utilise le code du système qui considère que 5 Enc. + 9 L ne dépassent pas 5 Enc.)",
+        "hint": "(Déprécié, la capacité existe en PF2e 5.2) Appliquer automatiquement les règles d'Encombrement. (Utilise le code du système qui considère que 5 Enc. + 9 L ne dépassent pas 5 Enc.)",
         "name": "(Déprécié) Appliquer automatiquement les règles basées sur l'Encombrement."
       },
       "applyPersistentAllow": {
