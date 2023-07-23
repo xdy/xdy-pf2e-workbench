@@ -60,10 +60,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to hold CTRL while casting a spell to cast it as a whispered chat message. Separate option to output a
       separate public chat message with a Recall Knowledge button to recognize it, an optional save button and an
       optional trait list, unless you hold CTRL+SHIFT to entirely skip this message.
-    * Option to add a button to all npcs that sends the relevant Recall Knowledge checks to chat (for skills only, lores
-      not handled yet).
-        * Suboptions to hide the npc token name and/or the skill name on the chat card.
-        * Suboption to show spell traits in the chat card.
     * Option to alter the token animation speed. (Not compatible with Multi Level Tokens teleport functionality.)
 
 * World Automation section
@@ -153,10 +149,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * The latest versions of all V10-compatible macros
       from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e are included in each Workbench release.
       They can be found in the compendium "Symon-provided macros (asymonous-benefactor-macros)", with the express
-      permission of said
-      asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor. Attribution for the macros can normally be found
-      inside each macro, and the source url for each macro is added at the end of each macro. If you have issues with
-      these macros, report them
+      permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor. What documentation exists
+      can be found towards the start of the macro. If you have issues with these macros, report them
       here: https://gitlab.com/symonsch/my-foundryvtt-macros/-/issues
     * The compendium "PF2e Workbench Items (xdy-pf2e-workbench-items)" contains a few useful effects and items:
         * Aura effects for Aura of Despair, Bless, Inspire Courage, Inspire Defense, Protective Ward that automatically
