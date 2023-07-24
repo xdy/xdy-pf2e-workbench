@@ -174,6 +174,14 @@ The example below is, not coincidentally, the relevant bits of my current houser
     "data": {
       "system.rules": [
         {
+          "key": "Note",
+          "predicate": [
+            "target:condition:flat-footed"
+          ],
+          "selector": "strike-damage",
+          "text": "<span class='pf2-icon'>f</span> @UUID[Compendium.pf2e.feats-srd.Item.Methodical Debilitations]"
+        },
+        {
           "key": "RollOption",
           "domain": "all",
           "option": "self:pf2perception:lesser:dc-self:0"
