@@ -1,3 +1,10 @@
+## [5.10.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.10.0...v5.10.1) (2023-07-24)
+
+
+### Bug Fixes
+
+* Clean up handling of automated increase of dying on taking damage, possibly fixing a few bugs. Also updates housepatcher.md ([d85d88c](https://github.com/xdy/xdy-pf2e-workbench/commit/d85d88cd616ac8c0414b00793b18b15040076d77))
+
 # [5.10.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.9.2...v5.10.0) (2023-07-22)
 
 
