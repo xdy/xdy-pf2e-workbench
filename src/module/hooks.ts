@@ -32,7 +32,7 @@ import {
     applyEncumbranceBasedOnBulk,
     autoRemoveDyingAtGreaterThanZeroHp,
     autoRemoveUnconsciousAtGreaterThanZeroHP,
-    checkIfLatestDamageMessageIsCriticalSuccess,
+    checkIfLatestDamageMessageIsCriticalHitByEnemy,
     giveUnconsciousIfDyingRemovedAt0HP,
     giveWoundedWhenDyingRemoved,
     increaseDyingOnZeroHP,
@@ -79,17 +79,13 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     return result;
 };
 
-export function handleDying(dyingCounter: number, originalDyingCounter: number, actor, effectsToCreate: any[]) {
+export function handleDying(dyingCounter: number, originalDyingCounter: number, actor, _effectsToCreate) {
     // Can't await, so do the math.
     if (originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !actor.combatant?.defeated) {
         actor.combatant?.toggleDefeated().then();
         actor.setFlag(MODULENAME, "momentOfDeath", Date.now()).then();
         // Dead, not dying, so clear the flag.
         actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
-        const dead = CONFIG.statusEffects.find((x) => x.id === "dead");
-        if (dead) {
-            effectsToCreate.push([dead]);
-        }
     } else if (originalDyingCounter + dyingCounter > 0) {
         actor
             .increaseCondition("dying", {
@@ -141,7 +137,7 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
                     const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
                     let dyingCounter = 0;
                     if (!option.startsWith("no") && originalDyingCounter > 0) {
-                        const wasCritical = checkIfLatestDamageMessageIsCriticalSuccess(actor, option);
+                        const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, option);
 
                         if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
                             dyingCounter = dyingCounter + 1;

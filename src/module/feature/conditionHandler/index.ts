@@ -29,91 +29,66 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
     }
 }
 
-export function checkIfLatestDamageMessageIsCriticalSuccess(actor: ActorPF2e, option: string): boolean {
-    let isCriticalSuccess = false;
+export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e, option: string): boolean {
+    const hp = actor.attributes.hp;
     if (
-        !option.startsWith("no") && option.endsWith("ForCharacters")
+        hp &&
+        hp.value &&
+        game.messages.contents.length > 0 &&
+        (!option.startsWith("no") && option.endsWith("ForCharacters")
             ? ["character", "familiar"].includes(actor.type)
-            : true
+            : true)
     ) {
-        const hp = actor.attributes.hp;
-        if (hp === undefined || hp.value === undefined) {
-            return false;
-        }
-        const reverse = game.messages.contents.slice(-Math.min(10, game.messages.size)).reverse();
-        const rightActor = reverse.filter((message) => message.target?.actor.id === actor.id);
-        const isEnemy = rightActor.filter((message) => {
-            return message.actor?.isEnemyOf(<ActorPF2e>message.target?.actor);
-        });
-        const isRoll = isEnemy.filter((message) => message.type === CONST.CHAT_MESSAGE_TYPES.ROLL);
-        const isAttack = isRoll
-            // @ts-ignore
-            .filter((message) => message.flags.pf2e.context?.sourceType === "attack");
-        const isDamageRoll = isAttack
-            // @ts-ignore
-            .filter((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
+        const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
+        const isDamageRoll = rightActor.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
         const isDamaging = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
-        const greaterThanHP = isDamaging.filter((message) => message.rolls?.[0]?.total >= hp.value);
-
-        isCriticalSuccess =
-            greaterThanHP && greaterThanHP.length > 0
-                ? greaterThanHP?.[0].flags?.pf2e?.context?.["outcome"] === "criticalSuccess"
-                : false;
+        const attackerIsEnemy = isDamaging.filter(
+            (message) => message.target?.actor && message.actor?.isEnemyOf(message.target?.actor),
+        );
+        const greaterThanHP = attackerIsEnemy.findLast((message) => message.rolls?.[0]?.total >= hp.value);
+        return greaterThanHP?.flags?.pf2e?.context?.["outcome"] === "criticalSuccess";
     }
-    return isCriticalSuccess;
+    return false;
 }
 
 export function checkIfLatestDamageMessageIsMassiveDamage(actor, option: string): boolean {
-    let isMassiveDamage;
-    if (!option.startsWith("no")) {
-        if (
-            option === "yes" ||
+    const hp = actor.attributes.hp;
+    if (
+        hp &&
+        hp.value &&
+        game.messages.contents.length > 0 &&
+        !option.startsWith("no") &&
+        (option === "yes" ||
             (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : false) ||
-            (option.endsWith("ForNpcs") ? ["npc"].includes(actor.type) : false)
-        ) {
-            const hp = actor.attributes.hp;
-            if (hp && hp.value && game.messages.contents.length > 0) {
-                const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
-                const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
-                const isDamageRoll = rightActor
-                    // @ts-ignore
-                    .filter((message) => message.flags.pf2e.context?.type === "damage-roll");
-                const isLastDamaging = isDamageRoll.findLast((message) => message.flags.pf2e.strike?.damaging);
-                return (isLastDamaging?.rolls?.[0]?.total ?? 0) >= 2 * hp.max;
-            }
-        }
+            (option.endsWith("ForNpcs") ? ["npc"].includes(actor.type) : false))
+    ) {
+        const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
+        const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
+        const isDamageRoll = rightActor.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const isLastDamaging = isDamageRoll.findLast((message) => message.flags.pf2e.strike?.damaging);
+        return (isLastDamaging?.rolls?.[0]?.total ?? 0) >= 2 * hp.max;
     }
-    return !!isMassiveDamage;
+    return false;
 }
 
 function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
-    let isNonlethal = false;
-    const handleNonlethal =
+    const hp = actor.attributes.hp;
+    if (
+        hp &&
+        hp.value &&
+        game.messages.contents.length > 0 &&
         !option.startsWith("no") &&
-        (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true);
-    if (handleNonlethal) {
-        const hp = actor.attributes.hp;
-        if (hp === undefined || hp.value === undefined) {
-            return false;
-        }
-        const reverse = game.messages.contents.slice(-Math.min(10, game.messages.size)).reverse();
-        const rightActor = reverse.filter((message) => message.target?.actor.id === actor.id);
-        const isRoll = rightActor.filter((message) => message.type === CONST.CHAT_MESSAGE_TYPES.ROLL);
-        const isAttack = isRoll
-            // @ts-ignore
-            .filter((message) => message.flags.pf2e.context?.sourceType === "attack");
-        const isDamageRoll = isAttack
-            // @ts-ignore
-            .filter((message) => message.flags.pf2e.context?.type === "damage-roll");
+        (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
+    ) {
+        const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
+        const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
+        const isDamageRoll = rightActor.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
         const isDamaging = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
-        const greaterThanHP = isDamaging.filter((message) => message.rolls?.[0]?.total >= hp.value);
-
-        isNonlethal =
-            greaterThanHP && greaterThanHP.length > 0
-                ? greaterThanHP?.[0].item?.system?.traits?.value.includes("nonlethal") ?? false
-                : false;
+        const greaterThanHP = isDamaging.findLast((message) => message.rolls?.[0]?.total >= hp.value);
+        return greaterThanHP?.item?.system?.traits?.value.includes("nonlethal") ?? false;
     }
-    return isNonlethal;
+    return false;
 }
 
 export function handleOrcFerocity(
@@ -242,7 +217,7 @@ export async function increaseDyingOnZeroHP(
             }
         }
 
-        if (checkIfLatestDamageMessageIsCriticalSuccess(actor, dyingOption)) {
+        if (checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption)) {
             dyingCounter = dyingCounter + 1;
         }
 
