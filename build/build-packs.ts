@@ -196,7 +196,9 @@ function buildCustomizableMacrosPack() {
             const macroName = path.parse(file).name;
             const contents = fs.readFileSync(filePath, { encoding: "utf8" });
             const map = new Map<string, string>();
-            map.set("Customizable Basic Action Macros", "systems/pf2e/icons/spells/harm.webp");
+            map.set("customizableBasicActionMacros", "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp");
+            map.set("customizableProceduralChecks", "systems/pf2e/icons/default-icons/party.svg");
+            map.set("customizableRefocusPremaster", "icons/magic/perception/third-eye-blue-red.webp");
             const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
             // eslint-disable-next-line
@@ -209,7 +211,7 @@ function buildCustomizableMacrosPack() {
         }
     }
     const file1 = path.resolve(outDir, folderPath + ".db");
-    console.log(file1);
+    // console.log(file1);
     fs.writeFileSync(file1, lines.join("\n"), "utf8");
 }
 
