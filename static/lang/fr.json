@@ -210,8 +210,7 @@
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Tour de magie",
-        "components": "Composantes :",
-        "firstPart": "{tokenName} vient de lancer un {type} {vsmf} de la tradition <strong>{traditionString}</strong>",
+        "firstPart": "{tokenName} vient de lancer un {type} de la tradition <strong>{traditionString}</strong>",
         "hint": "S'il est lancé en privé, cela poste néanmoins un message public pour annoncer qu'un sort a été lancé À MOINS que vous ne pressiez également SHIFT ainsi que CTRL lorsque vous incantez.",
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
         "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",

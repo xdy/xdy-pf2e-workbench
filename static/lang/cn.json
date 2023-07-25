@@ -333,12 +333,11 @@
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "戏法",
-        "components": "成分:",
         "spell": "法术",
         "name": "发布一条公开消息表明有法术被施放。",
         "savePart": "<br>该未知法术的豁免为: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
         "they": "他们",
-        "firstPart": "{tokenName}刚刚施放了<strong>{traditionString}</strong>根源中带有{vsmf} {type}特征的法术",
+        "firstPart": "{tokenName}刚刚施放了<strong>{traditionString}</strong>根源中带有{type}特征的法术",
         "hint": "秘密施法时，此设置还会发布一条公开消息表明有法术被施放，*除非*您在施法时同时按住 SHIFT 和 CTRL。",
         "secondPartNoRk": ".<br>询问你的GM你是否能自动辨识该法术；如果不能，可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]。或者在你的回合中用一个动作来辨识它（更多细节请咨询你的GM）。",
         "secondPartRK": ".<br>询问你的GM你是否能自动辨识该法术；如果不能，可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]。或者在你的回合中用一个动作使用@Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}来辨识它"

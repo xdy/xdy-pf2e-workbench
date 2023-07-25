@@ -111,14 +111,6 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
         game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessage") &&
         !game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT) // TODO Doesn't work on mac?
     ) {
-        const vsmf = <string>(
-            message.content
-                .match(
-                    game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.components`) +
-                        " ([FVSM]+)",
-                )?.[1]
-                ?.toUpperCase()
-        );
         let tokenName: string;
         const anonymous = game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.they`);
         if (<boolean>game.settings.get("pf2e", "metagame_tokenSetsNameVisibility")) {
@@ -134,7 +126,6 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
             content = game.i18n.localize(
                 game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.firstPart`, {
                     tokenName: tokenName,
-                    vsmf: vsmf ? vsmf : "",
                     type: type,
                     traditionString: traditionString,
                 }),

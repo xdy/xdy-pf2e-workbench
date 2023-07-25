@@ -301,10 +301,9 @@
         "secondPartRK": ".<br>Frage deinen SL ob du den Zauber automatisch erkennst, ansonsten kannst du versuchen einen hier von @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] oder davon @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] zu nutzen. Oder, während deines Zuges, kannst du eine Aktion verwenden um zu versuchen den Zauber mit @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk} zu identifizieren",
         "name": "Schreibe eine Nachricht wenn ein Zauber gewirkt wurde.",
         "savePart": "<br>Rettungswurf gegen den unbekannten Zauber ist: @Check[type:{dataSave}|SG:{dataDC}|traits:{traits}]",
-        "firstPart": "{tokenName} wirkte grade einen {vsmf} {type} der folgenden <strong>{traditionString}</strong> Tradition",
+        "firstPart": "{tokenName} wirkte grade einen {type} der folgenden <strong>{traditionString}</strong> Tradition",
         "they": "Sie",
         "cantrip": "Zaubertrick",
-        "components": "Komponenten:",
         "hint": "Falls Zauber wirken auf privat steht, wird einen Nachricht gepostet, welche besagt das ein Zauber gewirkt wird, AUßER wenn zusätzlich SHIFT und STRG beim Zaubern gehalten wird.",
         "secondPartNoRk": ".<br>Frage deinen SL ob du den Zauber automatisch erkennst, ansonsten kannst du versuchen einen hier von @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] oder davon @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] zu nutzen. Oder, während deines Zuges, kannst du eine Aktion verwenden um zu versuchen den Zauber zu identifizieren (sprich mit den SL bezüglich der Details).",
         "spell": "Zauber"

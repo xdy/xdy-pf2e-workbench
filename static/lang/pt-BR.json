@@ -128,8 +128,7 @@
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Truque mágico",
-        "components": "Componentes:",
-        "firstPart": "{tokenName} acabou de conjurar um(a) {type} {vsmf} da tradição <strong>{traditionString}</strong>",
+        "firstPart": "{tokenName} acabou de conjurar um(a) {type} da tradição <strong>{traditionString}</strong>",
         "hint": "Se conjurar em segredo, também posta uma mensagem pública informando que uma magia foi conjurada a não ser que você também esteja pressionando Shift.",
         "name": "Publicar que uma magia foi conjurada",
         "savePart": "<br>Salvamento para a magia desconhecida é: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",

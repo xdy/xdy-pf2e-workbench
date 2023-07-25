@@ -98,8 +98,7 @@
       "castPrivateSpellWithPublicMessage": {
         "spell": "法術",
         "cantrip": "戲法",
-        "components": "成分:",
-        "firstPart": "{tokenName}剛剛施放了<strong>{traditionString}</strong>根源中帶有{vsmf} {type}特徵的法術",
+        "firstPart": "{tokenName}剛剛施放了<strong>{traditionString}</strong>根源中帶有{type}特徵的法術",
         "hint": "秘密施法時，此設定還會發布一條公開訊息表明有法術被施放，*除非*您在施法時同時按住 SHIFT 和 CTRL。",
         "name": "發佈一條公開訊息表明有法術被施放。",
         "savePart": "<br>該未知法術的豁免為: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
