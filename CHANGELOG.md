@@ -1,3 +1,10 @@
+## [5.12.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.12.0...v5.12.1) (2023-07-25)
+
+
+### Bug Fixes
+
+* Customizable Refocus (premaster) macro now actually works. Oops. ([305bbe7](https://github.com/xdy/xdy-pf2e-workbench/commit/305bbe746546e61e30b889568ae722a254419ca6))
+
 # [5.12.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.11.0...v5.12.0) (2023-07-25)
 
 
