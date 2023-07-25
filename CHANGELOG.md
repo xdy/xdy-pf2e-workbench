@@ -1,3 +1,11 @@
+# [5.11.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.10.3...v5.11.0) (2023-07-25)
+
+
+### Features
+
+* The message that you can configure to appear when casting spells privately now follows the Remastered rules and no longer show the VSMF of a spell. ([b612ac8](https://github.com/xdy/xdy-pf2e-workbench/commit/b612ac8f385168e5cc975f89c88d3d21b1c59554))
+* The Refocus macro now follows the Remastered rules, filling the pool if the user has any 'Focus' feat, and ignoring any 'Wellspring' feats. Note that I did not change how Psychic Spellcasting works. The macro no longer handles the focus-restoring parts of the Extreme Curse of Oracles. ([cf70170](https://github.com/xdy/xdy-pf2e-workbench/commit/cf70170030e5b15863b6022c988725fd5c05f10c))
+
 ## [5.10.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.10.2...v5.10.3) (2023-07-25)
 
 
