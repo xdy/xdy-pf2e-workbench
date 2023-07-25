@@ -87,17 +87,14 @@ export function damageCardExpand(message: ChatMessagePF2e, html: JQuery) {
     const expandDmg = String(game.settings.get(MODULENAME, "autoExpandDamageRolls"));
     if (expandDmg === "expandedAll") {
         html.find(".dice-tooltip").css("display", "block");
-    }
-
-    if (expandDmg.startsWith("expandedNew")) {
-        if (
-            game.messages.contents
-                .filter(isActuallyDamageRoll)
-                .slice(-Math.min(expandDmg.endsWith("est") ? 1 : 3, game.messages.size))
-                .filter((m) => m.id === message.id).length > 0
-        ) {
-            html.find(".dice-tooltip").css("display", "block");
-        }
+    } else if (
+        expandDmg.startsWith("expandedNew") &&
+        game.messages.contents
+            .filter(isActuallyDamageRoll)
+            .slice(-Math.min(expandDmg.endsWith("est") ? 1 : 3, game.messages.size))
+            .filter((m) => m.id === message.id).length > 0
+    ) {
+        html.find(".dice-tooltip").css("display", "block");
     }
 }
 
@@ -118,7 +115,7 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
             message.content
                 .match(
                     game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.components`) +
-                        " ([FVSM]+)"
+                        " ([FVSM]+)",
                 )?.[1]
                 ?.toUpperCase()
         );
@@ -140,7 +137,7 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
                     vsmf: vsmf ? vsmf : "",
                     type: type,
                     traditionString: traditionString,
-                })
+                }),
             );
 
             if (game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageShowTraits")) {
@@ -150,7 +147,7 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
                             .map((trait: any) => trait.valueOf())
                             .sort()
                             .join(", "),
-                    })
+                    }),
                 );
             }
 
@@ -254,8 +251,8 @@ export function castPrivateSpellHideName(message: ChatMessagePF2e, html: JQuery)
                         .html()
                         .replace(
                             origin?.name ?? "???",
-                            game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.aSpell`)
-                        )
+                            game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.aSpell`),
+                        ),
                 );
             });
         }
@@ -264,16 +261,16 @@ export function castPrivateSpellHideName(message: ChatMessagePF2e, html: JQuery)
 
 export async function mystifyNpcItems(items) {
     const minimumRarity = String(
-        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater")
+        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater"),
     );
     const minimumLevel = Number.parseInt(
-        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater"))
+        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")),
     );
     const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
     const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
         items
             .filter((item) =>
-                ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"].includes(item.type)
+                ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"].includes(item.type),
             )
             .map((item) => <PhysicalItemPF2e>(<unknown>item))
             .filter((item) => !item.isTemporary)
@@ -282,7 +279,7 @@ export async function mystifyNpcItems(items) {
             .filter((item) => {
                 return rarityKeys.indexOf(item.rarity) >= rarityKeys.indexOf(minimumRarity);
             })
-            .filter((item) => item.isMagical || item.isAlchemical)
+            .filter((item) => item.isMagical || item.isAlchemical),
     );
 
     for (const item of relevantItems ?? []) {

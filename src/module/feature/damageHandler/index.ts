@@ -291,7 +291,7 @@ export function persistentHealing(message) {
         game.combats.active &&
         game.combats.active.combatant &&
         game.combats.active.combatant.actor &&
-        message.id === game.messages.contents[game.messages.contents.length - 1].id
+        message.id === game.messages.contents.pop()?.id
     ) {
         const token = game.combats.active.combatant.token;
         if (token && token.isOwner) {

@@ -159,15 +159,7 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
 }
 
 export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
-    const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
-    if (!isNaN(minimumUserRoleFlag) && minimumUserRoleFlag > game.user.role) {
-        html.addClass("xdy-pf2e-workbench-hide");
-    }
-
-    if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
-        mangleNamesInChatMessage(message, html);
-    }
-
+    // Only acts on latest message, but can't be in createChatMessageHook as that doesn't get triggered for some reason.
     if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
         persistentHealing(message);
     }
@@ -178,6 +170,16 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
 
     if (game.settings.get(MODULENAME, "handleDyingRecoveryRoll")) {
         handleDyingRecoveryRoll(message);
+    }
+
+    // Affects all messages
+    const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
+    if (!isNaN(minimumUserRoleFlag) && minimumUserRoleFlag > game.user.role) {
+        html.addClass("xdy-pf2e-workbench-hide");
+    }
+
+    if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
+        mangleNamesInChatMessage(message, html);
     }
 
     if (isActuallyDamageRoll(message)) {
@@ -232,7 +234,7 @@ function dropHeldItemsOnBecomingUnconscious(actor) {
     });
     if (items.length > 0) {
         for (const item of items) {
-            actor.adjustCarryType(item, "dropped", 0);
+            actor.adjustCarryType(item, { carryType: "dropped", handsHeld: 0, inSlot: false });
         }
         const message = game.i18n.format(`${MODULENAME}.SETTINGS.dropHeldItemsOnBecomingUnconscious.message`, {
             name: game?.scenes?.current?.tokens?.find((t) => t.actor?.id === actor.id)?.name ?? actor.name,
