@@ -44,24 +44,7 @@ export async function refocus() {
                     ].includes(i.feat?.system?.slug);
                 })
             ) {
-                regain += 1;
-            }
-            if (
-                feats?.find((i) => {
-                    return [
-                        "bloodline-wellspring",
-                        "conflux-wellspring",
-                        "domain-wellspring",
-                        "extreme-curse",
-                        "hex-wellspring",
-                        "link-wellspring",
-                        "meditative-wellspring",
-                        "primal-wellspring",
-                        "wardens-wellspring",
-                    ].includes(i.feat?.system?.slug);
-                })
-            ) {
-                regain += 1;
+                regain = actor.system["resources"].focus.max;
             }
             if (
                 feats?.find((i) => {
