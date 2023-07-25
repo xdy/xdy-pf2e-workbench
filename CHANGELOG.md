@@ -1,3 +1,10 @@
+## [5.10.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.10.2...v5.10.3) (2023-07-25)
+
+
+### Bug Fixes
+
+* Dropping items when becoming unconscious should work properly again. ([144199c](https://github.com/xdy/xdy-pf2e-workbench/commit/144199cfe8ab8b8e441f077a62a35184127f647e))
+
 ## [5.10.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.10.1...v5.10.2) (2023-07-25)
 
 
