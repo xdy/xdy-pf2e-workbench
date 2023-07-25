@@ -1,3 +1,10 @@
+## [5.10.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.10.1...v5.10.2) (2023-07-25)
+
+
+### Bug Fixes
+
+* Changed so everyone sees the mystified name in chat if "Try to mystify speaker and use of name in chat" should replace the name. ([27d05c2](https://github.com/xdy/xdy-pf2e-workbench/commit/27d05c29d163e933ec1d807c29368d6be36a4812)), closes [#904](https://github.com/xdy/xdy-pf2e-workbench/issues/904)
+
 ## [5.10.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.10.0...v5.10.1) (2023-07-24)
 
 
