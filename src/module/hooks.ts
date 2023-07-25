@@ -164,7 +164,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
         html.addClass("xdy-pf2e-workbench-hide");
     }
 
-    if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
+    if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
         mangleNamesInChatMessage(message, html);
     }
 
