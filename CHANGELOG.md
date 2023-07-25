@@ -1,3 +1,10 @@
+# [5.12.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.11.0...v5.12.0) (2023-07-25)
+
+
+### Features
+
+* Add Customizable Refocus (premaster) macro to the "Customizable Macros" compendium. This macro works the way it did before the Pathfinder Remaster changes. ([414bad5](https://github.com/xdy/xdy-pf2e-workbench/commit/414bad59c5cdbd39c81ae2b714effff6cd95890b))
+
 # [5.11.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.10.3...v5.11.0) (2023-07-25)
 
 
