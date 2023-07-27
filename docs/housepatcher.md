@@ -205,6 +205,51 @@ The example below is, not coincidentally, the relevant bits of my current houser
     }
   },
   {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.fZxI5GkBFfAUUf1z",
+    "name": "Wrecker",
+    "reason": "Common combination weapon? Nope.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.oW9neeVcpHjEvjcN",
+    "name": "Mikazuki",
+    "reason": "Common combination weapon? Nope.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.cSGWhw4Wn6Z98tVK",
+    "name": "Lancer",
+    "reason": "Common combination weapon? Nope.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.KaYvuSNXZaOammij",
+    "name": "Crescent Cross",
+    "reason": "Common combination weapon? Nope.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.equipment-srd.Item.K9ndlHU5JRHj0ivP",
+    "name": "Bow Staff",
+    "reason": "Common combination weapon? Nope.",
+    "data": {
+      "system.traits.rarity": "uncommon"
+    }
+  },
+  {
     "action": "lock",
     "uuid": "Compendium.pf2e.equipment-srd.YBKhjWqFuvgkArba"
   },
