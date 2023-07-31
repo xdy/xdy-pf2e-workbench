@@ -1,3 +1,16 @@
+# [5.13.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.12.2...v5.13.0) (2023-07-31)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([25ed803](https://github.com/xdy/xdy-pf2e-workbench/commit/25ed8037df43b44fe0027294ab6ce6532fc0b0d8))
+
+
+### Features
+
+* Add setting to automatically kill on taking damage from a source with the Death trait. Changed massive damage support so it works for more than strikes. ([cb02adf](https://github.com/xdy/xdy-pf2e-workbench/commit/cb02adf0d77156aee360a3d0a1e212031ab7b69b)), closes [#898](https://github.com/xdy/xdy-pf2e-workbench/issues/898)
+* Adds setting to make dying/wounded automation work even if the damage is not applied to the proper target. ([b75277d](https://github.com/xdy/xdy-pf2e-workbench/commit/b75277debad2f0c965cc249487f10db1e47c12f7))
+
 ## [5.12.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.12.1...v5.12.2) (2023-07-29)
 
 
