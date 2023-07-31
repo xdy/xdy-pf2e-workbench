@@ -166,6 +166,7 @@ export function updateHooks(cleanSlate = false) {
         (<string>gs.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
             !String(gs.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") ||
             !String(gs.get(MODULENAME, "autoKillIfMassiveDamage")).startsWith("no") ||
+            !String(gs.get(MODULENAME, "autoKillIfDamageHasDeathTrait")).startsWith("no") ||
             !String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no") ||
             gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
             (gs.get("pf2e", "automation.lootableNPCs") &&

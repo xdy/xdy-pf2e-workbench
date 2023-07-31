@@ -42,8 +42,8 @@ export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e,
         const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
         const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
         const isDamageRoll = rightActor.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
-        const isDamaging = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
-        const attackerIsEnemy = isDamaging.filter(
+        const isDamagingStrike = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
+        const attackerIsEnemy = isDamagingStrike.filter(
             (message) => message.target?.actor && message.actor?.isEnemyOf(message.target?.actor),
         );
         const greaterThanHP = attackerIsEnemy.findLast((message) => message.rolls?.[0]?.total >= hp.value);
@@ -65,9 +65,27 @@ export function checkIfLatestDamageMessageIsMassiveDamage(actor, option: string)
     ) {
         const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
         const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
-        const isDamageRoll = rightActor.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
-        const isLastDamaging = isDamageRoll.findLast((message) => message.flags.pf2e.strike?.damaging);
-        return (isLastDamaging?.rolls?.[0]?.total ?? 0) >= 2 * hp.max;
+        const lastDamageRoll = rightActor.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
+        return (lastDamageRoll?.rolls?.[0]?.total ?? 0) >= 2 * hp.max;
+    }
+    return false;
+}
+
+export function checkIfLatestDamageMessageHasDeathTrait(actor, option: string): boolean {
+    const hp = actor.attributes.hp;
+    if (
+        hp &&
+        hp.value &&
+        game.messages.contents.length > 0 &&
+        !option.startsWith("no") &&
+        (option === "yes" ||
+            (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : false) ||
+            (option.endsWith("ForNpcs") ? ["npc"].includes(actor.type) : false))
+    ) {
+        const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
+        const lastDamageRoll = relevant.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const origin: any = fromUuidSync(<string>lastDamageRoll?.flags?.pf2e.origin?.uuid);
+        return (origin?.system?.traits?.value ?? []).includes("death");
     }
     return false;
 }
@@ -83,10 +101,9 @@ function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string)
     ) {
         const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
         const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
-        const isDamageRoll = rightActor.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
-        const isDamaging = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
-        const greaterThanHP = isDamaging.findLast((message) => message.rolls?.[0]?.total >= hp.value);
-        return greaterThanHP?.item?.system?.traits?.value.includes("nonlethal") ?? false;
+        const lastDamageRoll = rightActor.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const totalDamage = lastDamageRoll?.rolls?.[0]?.total ?? 0;
+        return (totalDamage >= hp.value && lastDamageRoll?.item?.system?.traits?.value.includes("nonlethal")) ?? false;
     }
     return false;
 }
@@ -185,7 +202,7 @@ export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], 
     }
 }
 
-export async function increaseDyingOnZeroHP(
+export async function handleDyingOnZeroHP(
     actor: CreaturePF2e,
     update: Record<string, string>,
     hp: number,
@@ -229,12 +246,11 @@ export async function increaseDyingOnZeroHP(
             await actor.increaseCondition("wounded");
         }
 
-        if (
-            checkIfLatestDamageMessageIsMassiveDamage(
-                actor,
-                String(game.settings.get(MODULENAME, "autoKillIfMassiveDamage")),
-            )
-        ) {
+        const optionMassive = String(game.settings.get(MODULENAME, "autoKillIfMassiveDamage"));
+        const isMassive = checkIfLatestDamageMessageIsMassiveDamage(actor, optionMassive);
+        const optionDeathTrait = String(game.settings.get(MODULENAME, "autoKillIfDamageHasDeathTrait"));
+        const isDeathDamage = checkIfLatestDamageMessageHasDeathTrait(actor, optionDeathTrait);
+        if (isMassive || isDeathDamage) {
             dyingCounter = actor.attributes.dying.max;
         }
 

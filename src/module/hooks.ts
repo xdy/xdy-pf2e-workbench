@@ -35,7 +35,7 @@ import {
     checkIfLatestDamageMessageIsCriticalHitByEnemy,
     giveUnconsciousIfDyingRemovedAt0HP,
     giveWoundedWhenDyingRemoved,
-    increaseDyingOnZeroHP,
+    handleDyingOnZeroHP,
     reduceFrightened,
 } from "./feature/conditionHandler/index.js";
 import {
@@ -350,7 +350,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
                 (String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HP" &&
                     [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
         if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
-            increaseDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
+            handleDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
                 logDebug("Workbench increaseDyingOnZeroHP complete");
                 if (hpRaisedAbove0) {
                     if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {

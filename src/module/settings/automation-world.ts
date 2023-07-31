@@ -17,7 +17,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     noAutomation: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.noAutomation`),
                     reaching0HP: game.i18n.localize(`${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HP`),
                     reaching0HPCharactersOnly: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HPCharactersOnly`
+                        `${MODULENAME}.SETTINGS.enableAutomaticMove.reaching0HPCharactersOnly`,
                     ),
                 },
                 onChange: () => updateHooks(),
@@ -129,14 +129,14 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: "no",
                 type: String,
                 choices: {
-                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.no`),
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.no`),
                     addOne: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addOne`),
                     addWoundedLevel: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addWoundedLevel`),
                     addOneForCharacters: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addOneForCharacters`
+                        `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addOneForCharacters`,
                     ),
                     addWoundedLevelForCharacters: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addWoundedLevelForCharacters`
+                        `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.addWoundedLevelForCharacters`,
                     ),
                 },
                 onChange: () => updateHooks(),
@@ -153,7 +153,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     no: game.i18n.localize(`${MODULENAME}.SETTINGS.nonLethalIsNotLethal.no`),
                     unconscious: game.i18n.localize(`${MODULENAME}.SETTINGS.nonLethalIsNotLethal.unconscious`),
                     unconsciousForCharacters: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.nonLethalIsNotLethal.unconsciousForCharacters`
+                        `${MODULENAME}.SETTINGS.nonLethalIsNotLethal.unconsciousForCharacters`,
                     ),
                 },
                 onChange: () => updateHooks(),
@@ -167,10 +167,10 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: "no",
                 type: String,
                 choices: {
-                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHPIfCriticallyHitOneMore.no`),
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHPIfCriticallyHitOneMore.no`),
                     add: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHPIfCriticallyHitOneMore.add`),
                     addForCharacters: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHPIfCriticallyHitOneMore.addForCharacters`
+                        `${MODULENAME}.SETTINGS.autoGainDyingAtZeroHPIfCriticallyHitOneMore.addForCharacters`,
                     ),
                 },
             },
@@ -182,10 +182,10 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: "no",
                 type: String,
                 choices: {
-                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingIfTakingDamageWhenAlreadyDying.no`),
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingIfTakingDamageWhenAlreadyDying.no`),
                     add: game.i18n.localize(`${MODULENAME}.SETTINGS.autoGainDyingIfTakingDamageWhenAlreadyDying.add`),
                     addForCharacters: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.autoGainDyingIfTakingDamageWhenAlreadyDying.addForCharacters`
+                        `${MODULENAME}.SETTINGS.autoGainDyingIfTakingDamageWhenAlreadyDying.addForCharacters`,
                     ),
                 },
             },
@@ -197,11 +197,29 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: "no",
                 type: String,
                 choices: {
-                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.no`),
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.no`),
                     yes: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yes`),
                     yesForNpcs: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yesForNpcs`),
                     yesForCharacters: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yesForCharacters`
+                        `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yesForCharacters`,
+                    ),
+                },
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
+            autoKillIfDamageHasDeathTrait: {
+                name: `${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.name`,
+                hint: `${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.hint`,
+                scope: "world",
+                config: true,
+                default: "no",
+                type: String,
+                choices: {
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.no`),
+                    yes: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.yes`),
+                    yesForNpcs: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.yesForNpcs`),
+                    yesForCharacters: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yesForCharacters`,
                     ),
                 },
                 onChange: () => updateHooks(),
@@ -215,10 +233,10 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 default: "no",
                 type: String,
                 choices: {
-                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.no`),
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.no`),
                     remove: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.removeDying`),
                     removeForCharacters: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.removeDyingForCharacters`
+                        `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.removeDyingForCharacters`,
                     ),
                 },
                 onChange: () => updateHooks(),

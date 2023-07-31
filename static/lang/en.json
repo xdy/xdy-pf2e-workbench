@@ -307,7 +307,15 @@
         "yesForCharacters": "Yes, for characters+familiars",
         "yesForNpcs": "Yes, for npcs",
         "hint": "Setting to automatically kill on taking Massive Damage.",
-        "name": "Automatically kill on taking Massive Damage.",
+        "name": "... but automatically kill on taking Massive Damage.",
+        "no": "No"
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "yes": "Yes, for all",
+        "yesForCharacters": "Yes, for characters+familiars",
+        "yesForNpcs": "Yes, for npcs",
+        "hint": "Setting to automatically kill on taking damage from a source with the Death trait.",
+        "name": "... but automatically kill on taking damage from a Death effect.",
         "no": "No"
       },
       "automationClientSettings": {
