@@ -168,44 +168,6 @@ The example below is, not coincidentally, the relevant bits of my current houser
   },
   {
     "action": "update",
-    "uuid": "Compendium.pf2e.feats-srd.Item.CkK7WwaWnrLXK9sW",
-    "name": "Methodical Debilitations",
-    "reason": "Adds pf2e-perception support to Methodical Deliberations as per https://github.com/reonZ/pf2e-perception/wiki/Roll-Options#methodical-debilitations",
-    "data": {
-      "system.rules": [
-        {
-          "key": "Note",
-          "predicate": [
-            "target:condition:flat-footed"
-          ],
-          "selector": "strike-damage",
-          "text": "<span class='pf2-icon'>f</span> @UUID[Compendium.pf2e.feats-srd.Item.Methodical Debilitations]"
-        },
-        {
-          "key": "RollOption",
-          "domain": "all",
-          "option": "self:pf2perception:lesser:dc-self:0"
-        },
-        {
-          "key": "RollOption",
-          "domain": "all",
-          "option": "self:pf2perception:standard:dc-self:0"
-        },
-        {
-          "key": "RollOption",
-          "domain": "all",
-          "option": "self:pf2perception:greater:dc-self:2"
-        },
-        {
-          "key": "RollOption",
-          "domain": "all",
-          "option": "self:pf2perception:greater-prone:dc-self:2"
-        }
-      ]
-    }
-  },
-  {
-    "action": "update",
     "uuid": "Compendium.pf2e.equipment-srd.Item.fZxI5GkBFfAUUf1z",
     "name": "Wrecker",
     "reason": "Common combination weapon? Nope.",
