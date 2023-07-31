@@ -1,3 +1,10 @@
+## [5.13.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.13.0...v5.13.1) (2023-07-31)
+
+
+### Bug Fixes
+
+* Add the ever so important word 'sufficient' damage to the setting name and hint... I.e. Death effects take one straight to dying if one is brought to 0 hp, not for *any* damage. ([1544445](https://github.com/xdy/xdy-pf2e-workbench/commit/1544445603734ce46c66bfdf2f1eb8e0c12eee2e))
+
 # [5.13.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.12.2...v5.13.0) (2023-07-31)
 
 
