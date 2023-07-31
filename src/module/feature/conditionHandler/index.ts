@@ -40,8 +40,10 @@ export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e,
             : true)
     ) {
         const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
-        const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
-        const isDamageRoll = rightActor.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const rightTarget = game.settings.get(MODULENAME, "autoGainDyingIgnoresTargeting")
+            ? relevant
+            : relevant.filter((message) => message.target?.actor.id === actor.id);
+        const isDamageRoll = rightTarget.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
         const isDamagingStrike = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
         const attackerIsEnemy = isDamagingStrike.filter(
             (message) => message.target?.actor && message.actor?.isEnemyOf(message.target?.actor),
@@ -64,8 +66,10 @@ export function checkIfLatestDamageMessageIsMassiveDamage(actor, option: string)
             (option.endsWith("ForNpcs") ? ["npc"].includes(actor.type) : false))
     ) {
         const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
-        const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
-        const lastDamageRoll = rightActor.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const rightTarget = game.settings.get(MODULENAME, "autoGainDyingIgnoresTargeting")
+            ? relevant
+            : relevant.filter((message) => message.target?.actor.id === actor.id);
+        const lastDamageRoll = rightTarget.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
         return (lastDamageRoll?.rolls?.[0]?.total ?? 0) >= 2 * hp.max;
     }
     return false;
@@ -100,8 +104,10 @@ function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string)
         (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
     ) {
         const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
-        const rightActor = relevant.filter((message) => message.target?.actor.id === actor.id);
-        const lastDamageRoll = rightActor.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const rightTarget = game.settings.get(MODULENAME, "autoGainDyingIgnoresTargeting")
+            ? relevant
+            : relevant.filter((message) => message.target?.actor.id === actor.id);
+        const lastDamageRoll = rightTarget.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
         const totalDamage = lastDamageRoll?.rolls?.[0]?.total ?? 0;
         return (totalDamage >= hp.value && lastDamageRoll?.item?.system?.traits?.value.includes("nonlethal")) ?? false;
     }

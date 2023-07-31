@@ -225,6 +225,16 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            autoGainDyingIgnoresTargeting: {
+                name: `${MODULENAME}.SETTINGS.autoGainDyingIgnoresTargeting.name`,
+                hint: `${MODULENAME}.SETTINGS.autoGainDyingIgnoresTargeting.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             autoRemoveDyingAtGreaterThanZeroHP: {
                 name: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.name`,
                 hint: `${MODULENAME}.SETTINGS.autoRemoveDyingAtGreaterThanZeroHP.hint`,

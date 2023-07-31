@@ -165,6 +165,7 @@ export function updateHooks(cleanSlate = false) {
         "preUpdateActor",
         (<string>gs.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
             !String(gs.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") ||
+            !String(gs.get(MODULENAME, "nonLethalIsNotLethal")).startsWith("no") ||
             !String(gs.get(MODULENAME, "autoKillIfMassiveDamage")).startsWith("no") ||
             !String(gs.get(MODULENAME, "autoKillIfDamageHasDeathTrait")).startsWith("no") ||
             !String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no") ||

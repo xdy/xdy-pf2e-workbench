@@ -318,6 +318,10 @@
         "name": "... but automatically kill on taking damage from a Death effect.",
         "no": "No"
       },
+      "autoGainDyingIgnoresTargeting": {
+        "name": "... whether or not damage was targeted at selected token.",
+        "hint": "Enable to apply the above settings whether or not the target matches the selected token. (Mostly useful if not using targeting/automation.)"
+      },
       "automationClientSettings": {
         "hint": "Enable and configure local automation settings, i.e. settings that only affect your own client.",
         "label": "Manage Client Automation Settings",
