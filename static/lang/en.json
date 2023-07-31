@@ -314,8 +314,8 @@
         "yes": "Yes, for all",
         "yesForCharacters": "Yes, for characters+familiars",
         "yesForNpcs": "Yes, for npcs",
-        "hint": "Setting to automatically kill on taking damage from a source with the Death trait.",
-        "name": "... but automatically kill on taking damage from a Death effect.",
+        "hint": "Setting to automatically kill on taking sufficient damage from a source with the Death trait.",
+        "name": "... but automatically kill on taking sufficient damage from a Death effect.",
         "no": "No"
       },
       "autoGainDyingIgnoresTargeting": {
