@@ -413,10 +413,10 @@
       },
       "reminderBreathWeapon": {
         "defaultName": "Souffle",
-        "hint": "Cliquez pour activer le rappel d'utilisation de l'arme de souffle (actuellement toute capacité avec une recharge proprement formatée).",
-        "name": "Rappel d'arme de souffle",
+        "hint": "Cliquez pour activer pour se rappeler de l'utilisation des capacités de recharge (ex : arme de souffle).",
+        "name": "Rappel de recharge (ex : arme de souffle)",
         "prefix": "Recharge",
-        "source": "rappel d'arme de souffle du module PF2e Workbench",
+        "source": "Rappel de recharge créé par PF2e Workbench",
         "used": "Utilisé "
       },
       "reminderCannotAttack": {
@@ -617,6 +617,10 @@
       "autoGainDyingIgnoresTargeting": {
         "name": "... que les dégâts aient ou non ciblé le jeton choisi.",
         "hint": "Permet d'appliquer les réglages ci-dessus, que la cible corresponde ou non au jeton sélectionné. (Surtout utile si l'on n'utilise pas le ciblage/l'automatisation)."
+      },
+      "reminderBreathWeaponHidden": {
+        "name": "... mais cache l'icône aux joueurs.",
+        "hint": "Cochez cette case pour cacher les rappels aux joueurs."
       }
     },
     "effects": {
