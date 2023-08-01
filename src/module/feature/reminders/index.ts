@@ -15,10 +15,8 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
 
         const actors = [token?.actor];
         for (const actor of actors) {
-            const formulaMatch = content
-                .toLocaleLowerCase()
-                .match("\\[\\[\\/(b|)r 1d([4|6])( .*?)((rounds|recharge|cooldown)).*?]]");
-            const dieSize = formulaMatch ? `1d${formulaMatch[2]}` : "";
+            const formulaMatch = content.match("1d(4|6) #Recharge");
+            const dieSize = formulaMatch ? `1d${formulaMatch[1]}` : "";
 
             if (dieSize) {
                 const title = content.match(/.*title="(.*?)" width.*/);
@@ -39,7 +37,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                             expiry: "turn-start",
                         },
                         description: {
-                            value: `<h2>Breath Weapon Reminder</h2>`,
+                            value: `<h2>${game.i18n.format(`${MODULENAME}.SETTINGS.reminderBreathWeapon.name`)}</h2>`,
                         },
                         source: {
                             value: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`),
@@ -75,9 +73,9 @@ export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
                     Math.max(
                         combatant.actor.getCondition("stunned")?.value ?? 0,
                         combatant.actor.getCondition("slowed")?.value ?? 0,
-                        reduction
+                        reduction,
                     ),
-                0
+                0,
             )} actions remaining.`;
             ChatMessage.create(
                 {
@@ -86,7 +84,7 @@ export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                         : [],
                 },
-                {}
+                {},
             ).then();
             ui.notifications.info(actionsMessage);
         }
@@ -148,7 +146,7 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
                     game.i18n.format(`${MODULENAME}.SETTINGS.reminderCannotAttack.note`, {
                         actorName: actor?.name || "(unknown)",
                         reason: reason,
-                    })
+                    }),
                 );
             }
         }
