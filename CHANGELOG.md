@@ -1,3 +1,11 @@
+# [5.14.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.13.1...v5.14.0) (2023-08-01)
+
+
+### Features
+
+* Change the way breath weapon/recharge abilities works to match pf2e 5.3, it only looks at #recharge in the ability text now. (It should still work with most 5.2/creatures imported into worlds during 5.2). ([3338c4c](https://github.com/xdy/xdy-pf2e-workbench/commit/3338c4c2aed6ad9b08983e014fe52876d6dc3243))
+* Renamed breath weapon reminder to recharge reminder. Adds option for recharge reminder icon to be hidden to players. ([fcffdc6](https://github.com/xdy/xdy-pf2e-workbench/commit/fcffdc6865af053a1b24a774c336ddb0d783c43c)), closes [#914](https://github.com/xdy/xdy-pf2e-workbench/issues/914)
+
 ## [5.13.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.13.0...v5.13.1) (2023-07-31)
 
 
