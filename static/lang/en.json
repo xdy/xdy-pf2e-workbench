@@ -675,10 +675,14 @@
       },
       "reminderBreathWeapon": {
         "defaultName": "Breath",
-        "hint": "Check to set reminder for breath weapon use (actually any ability with a properly formatted recharge).",
-        "name": "Breath weapon reminder",
-        "source": "Breath Weapon reminder created by PF2e Workbench",
+        "hint": "Check to set reminder for use of recharge abilities (e.g. breath weapons).",
+        "name": "Recharge reminder (e.g. breath weapons)",
+        "source": "Recharge reminder created by PF2e Workbench",
         "used": "Used "
+      },
+      "reminderBreathWeaponHidden": {
+        "hint": "Check to hide reminder from players.",
+        "name": "... but hide icon from players."
       },
       "reminderCannotAttack": {
         "dead": "is dead",

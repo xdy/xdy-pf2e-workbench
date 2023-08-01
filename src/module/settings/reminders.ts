@@ -67,6 +67,16 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            reminderBreathWeaponHidden: {
+                name: `${MODULENAME}.SETTINGS.reminderBreathWeaponHidden.name`,
+                hint: `${MODULENAME}.SETTINGS.reminderBreathWeaponHidden.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             heroPointHandler: {
                 name: `${MODULENAME}.SETTINGS.heroPointHandler.name`,
                 hint: `${MODULENAME}.SETTINGS.heroPointHandler.hint`,

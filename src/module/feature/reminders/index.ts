@@ -1,4 +1,4 @@
-import { isFirstGM, myRandomId, shouldIHandleThis } from "../../utils.js";
+import { isFirstGM, shouldIHandleThis } from "../../utils.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { TokenDocumentPF2e } from "@module/scene/index.js";
 import { CombatantPF2e } from "@module/encounter/index.js";
@@ -13,8 +13,8 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
             TokenDocumentPF2e // @ts-ignore
         >canvas?.scene?.tokens.get(<string>message.speaker.token);
 
-        const actors = [token?.actor];
-        for (const actor of actors) {
+        const actor = token?.actor;
+        if (actor) {
             const formulaMatch = content.match("1d(4|6) #Recharge");
             const dieSize = formulaMatch ? `1d${formulaMatch[1]}` : "";
 
@@ -42,7 +42,8 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                         source: {
                             value: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`),
                         },
-                        slug: `xdy-breath-weapon-reminder-${myRandomId()}`, // Why did I add a random ID? I don't remember.
+                        slug: `xdy-breath-weapon-reminder-${<string>message?.flags?.pf2e.origin?.uuid}`,
+                        unidentified: game.settings.get(MODULENAME, "reminderBreathWeaponHidden"),
                     },
                 };
 
