@@ -8,6 +8,7 @@ declare class ActionItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null
     get actionCost(): ActionCost | null;
     get frequency(): Frequency | null;
     prepareBaseData(): void;
+    getRollOptions(prefix?: string): string[];
     getChatData(this: ActionItemPF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
     protected _preCreate(data: PreDocumentId<ActionItemSource>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;

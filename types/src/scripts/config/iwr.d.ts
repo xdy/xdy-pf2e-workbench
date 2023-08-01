@@ -35,7 +35,6 @@ declare const immunityTypes: {
     fatigued: string;
     "fear-effects": string;
     fire: string;
-    "flat-footed": string;
     fleeing: string;
     force: string;
     frightened: string;
@@ -49,6 +48,7 @@ declare const immunityTypes: {
     light: string;
     magic: string;
     mental: string;
+    metal: string;
     "misfortune-effects": string;
     mithral: string;
     necromancy: string;
@@ -56,6 +56,7 @@ declare const immunityTypes: {
     "non-magical": string;
     "nonlethal-attacks": string;
     "object-immunities": string;
+    "off-guard": string;
     olfactory: string;
     orichalcum: string;
     paralyzed: string;
@@ -68,6 +69,7 @@ declare const immunityTypes: {
     possession: string;
     precision: string;
     prone: string;
+    radiation: string;
     restrained: string;
     "salt-water": string;
     scrying: string;
@@ -88,6 +90,7 @@ declare const immunityTypes: {
     unconscious: string;
     visual: string;
     water: string;
+    wood: string;
 };
 declare const weaknessTypes: {
     acid: string;
@@ -134,6 +137,7 @@ declare const weaknessTypes: {
     silver: string;
     slashing: string;
     sonic: string;
+    spells: string;
     "splash-damage": string;
     "unarmed-attacks": string;
     "vampire-weaknesses": string;
@@ -144,6 +148,7 @@ declare const weaknessTypes: {
     water: string;
     weapons: string;
     "weapons-shedding-bright-light": string;
+    wood: string;
 };
 declare const resistanceTypes: {
     acid: string;
@@ -191,6 +196,7 @@ declare const resistanceTypes: {
     silver: string;
     slashing: string;
     sonic: string;
+    spells: string;
     "unarmed-attacks": string;
     vorpal: string;
     "vorpal-adamantine": string;
@@ -198,5 +204,6 @@ declare const resistanceTypes: {
     water: string;
     weapons: string;
     "weapons-shedding-bright-light": string;
+    wood: string;
 };
-export { immunityTypes, weaknessTypes, resistanceTypes };
+export { immunityTypes, resistanceTypes, weaknessTypes };

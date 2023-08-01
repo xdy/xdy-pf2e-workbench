@@ -1,5 +1,4 @@
 import { Size } from "@module/data.ts";
-import { Optional } from "@util";
 interface StackDefinition {
     size: number;
     lightBulk: number;
@@ -68,5 +67,5 @@ export declare class Bulk {
  * "l", "1", "L", "1; L", "2; 3L", "2;3L"
  * @param weight if not parseable will return null or undefined
  */
-export declare function weightToBulk(weight: Optional<string | number>): Bulk | null;
+export declare function weightToBulk(weight: Maybe<string | number>): Bulk | null;
 export {};

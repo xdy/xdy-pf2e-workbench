@@ -2,7 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
-import { BaseDamageData, DamageCategoryUnique, DamageFormulaData, DamageRollContext, DamageType } from "./types.ts";
+import { BaseDamageData, DamageCategoryUnique, CreateDamageFormulaParams, DamageRollContext, DamageType } from "./types.ts";
 /**
  * Dialog for excluding certain modifiers before rolling damage.
  * @category Other
@@ -36,7 +36,7 @@ declare class DamageModifierDialog extends Application {
     protected _injectHTML($html: JQuery<HTMLElement>): void;
 }
 interface DamageDialogParams {
-    damage: DamageFormulaData;
+    damage: CreateDamageFormulaParams;
     context: Partial<DamageRollContext>;
 }
 interface BaseData {

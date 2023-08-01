@@ -64,7 +64,6 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         fatigued: string;
         "fear-effects": string;
         fire: string;
-        "flat-footed": string;
         fleeing: string;
         force: string;
         frightened: string;
@@ -78,6 +77,7 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         light: string;
         magic: string;
         mental: string;
+        metal: string;
         "misfortune-effects": string;
         mithral: string;
         necromancy: string;
@@ -85,6 +85,7 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         "non-magical": string;
         "nonlethal-attacks": string;
         "object-immunities": string;
+        "off-guard": string;
         olfactory: string;
         orichalcum: string;
         paralyzed: string;
@@ -97,6 +98,7 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         possession: string;
         precision: string;
         prone: string;
+        radiation: string;
         restrained: string;
         "salt-water": string;
         scrying: string;
@@ -117,6 +119,7 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         unconscious: string;
         visual: string;
         water: string;
+        wood: string;
     };
     /** No value on immunities, so the full label is the same as the application label */
     get label(): string;
@@ -172,6 +175,7 @@ declare class WeaknessData extends IWRData<WeaknessType> implements WeaknessSour
         silver: string;
         slashing: string;
         sonic: string;
+        spells: string;
         "splash-damage": string;
         "unarmed-attacks": string;
         "vampire-weaknesses": string;
@@ -181,8 +185,8 @@ declare class WeaknessData extends IWRData<WeaknessType> implements WeaknessSour
         warpglass: string;
         water: string;
         weapons: string;
-        /** Construct an object argument for Localization#format (see also PF2E.Actor.IWR.CompositeLabel in en.json) */
         "weapons-shedding-bright-light": string;
+        wood: string;
     };
     value: number;
     constructor(data: IWRConstructorData<WeaknessType> & {
@@ -242,6 +246,7 @@ declare class ResistanceData extends IWRData<ResistanceType> implements Resistan
         silver: string;
         slashing: string;
         sonic: string;
+        spells: string;
         "unarmed-attacks": string;
         vorpal: string;
         "vorpal-adamantine": string;
@@ -249,6 +254,7 @@ declare class ResistanceData extends IWRData<ResistanceType> implements Resistan
         water: string;
         weapons: string;
         "weapons-shedding-bright-light": string;
+        wood: string;
     };
     value: number;
     readonly doubleVs: ResistanceType[];
@@ -267,4 +273,6 @@ interface ResistanceSource extends IWRSource<ResistanceType> {
     value: number;
     doubleVs?: ResistanceType[];
 }
-export { IWRSource, ImmunityData, ImmunitySource, ResistanceData, ResistanceSource, WeaknessData, WeaknessSource };
+/** Weaknesses to things that "[don't] normally deal damage, such as water": applied separately as untyped damage */
+declare const NON_DAMAGE_WEAKNESSES: Set<IWRType>;
+export { ImmunityData, ImmunitySource, IWRSource, NON_DAMAGE_WEAKNESSES, ResistanceData, ResistanceSource, WeaknessData, WeaknessSource, };

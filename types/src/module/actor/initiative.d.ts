@@ -9,6 +9,7 @@ interface InitiativeRollResult {
     roll: Rolled<CheckRoll>;
 }
 interface InitiativeRollParams extends StatisticRollParameters {
+    combatant?: CombatantPF2e<EncounterPF2e>;
     /** Whether the encounter tracker should be updated with the roll result */
     updateTracker?: boolean;
 }
@@ -16,6 +17,8 @@ interface InitiativeRollParams extends StatisticRollParameters {
 declare class ActorInitiative {
     actor: ActorPF2e;
     statistic: Statistic;
+    get attribute(): AbilityString | null;
+    /** @deprecated */
     get ability(): AbilityString | null;
     constructor(actor: ActorPF2e);
     roll(args?: InitiativeRollParams): Promise<InitiativeRollResult | null>;

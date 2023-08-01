@@ -1,5 +1,6 @@
 import { CharacterPF2e, CreaturePF2e } from "@actor";
 import { ItemType } from "@item/data/index.ts";
+import { RuleElementPF2e } from "@module/rules/index.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { FamiliarSource, FamiliarSystemData } from "./data.ts";
 declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
@@ -13,6 +14,8 @@ declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocum
     }): void;
     /** Set base emphemeral data for later updating by derived-data preparation */
     prepareBaseData(): void;
+    /** Skip rule-element preparation if there is no master */
+    protected prepareRuleElements(): RuleElementPF2e[];
     prepareDerivedData(): void;
     /** Familiars cannot have item bonuses. Nor do they have ability mods nor proficiency (sans master level) */
     private stripInvalidModifiers;
@@ -21,7 +24,6 @@ declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocum
 }
 interface FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     readonly _source: FamiliarSource;
-    readonly abilities?: never;
     system: FamiliarSystemData;
 }
 export { FamiliarPF2e };

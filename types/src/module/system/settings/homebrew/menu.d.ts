@@ -7,9 +7,6 @@ import "@yaireo/tagify/src/tagify.scss";
 declare class HomebrewElements extends SettingsMenuPF2e {
     #private;
     static readonly namespace = "homebrew";
-    /** Whether this is the first time the homebrew tags will have been injected into CONFIG and actor derived data */
-    private initialRefresh;
-    private damageManager;
     static get SETTINGS(): string[];
     static get defaultOptions(): FormApplicationOptions;
     protected static get traitSettings(): Record<HomebrewTraitKey, PartialSettingsData>;
@@ -20,9 +17,7 @@ declare class HomebrewElements extends SettingsMenuPF2e {
     protected _onSubmit(event: Event, { updateData, preventClose, preventRender }?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
     protected _getSubmitData(updateData?: Record<string, unknown> | undefined): Record<string, unknown>;
     protected _updateObject(event: Event, data: Record<HomebrewTraitKey, HomebrewTag[]>): Promise<void>;
-    /** Prepare and run a migration for each set of tag deletions from a tag map */
-    private processDeletions;
-    onSetup(): void;
+    onInit(): void;
 }
 type HomebrewSubmitData = {
     damageTypes: CustomDamageData[];

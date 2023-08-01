@@ -7,6 +7,8 @@ import { Statistic } from "@system/statistic/index.ts";
 import { DataModelValidationOptions } from "types/foundry/common/abstract/data.js";
 import { PartySource, PartySystemData } from "./data.ts";
 import { PartyCampaign, PartyUpdateContext } from "./types.ts";
+import { RuleElementPF2e } from "@module/rules/index.ts";
+import { RuleElementSchema } from "@module/rules/rule-element/data.ts";
 declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     armorClass: null;
     members: CreaturePF2e[];
@@ -21,6 +23,8 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     isAffectedBy(): false;
     /** Override validation to defer certain properties to the campaign model */
     validate(options?: DataModelValidationOptions): boolean;
+    /** Only prepare rule elements for non-physical items (in case campaigin items exist) */
+    protected prepareRuleElements(): RuleElementPF2e<RuleElementSchema>[];
     prepareBaseData(): void;
     prepareDerivedData(): void;
     addMembers(...membersToAdd: CreaturePF2e[]): Promise<void>;
@@ -45,7 +49,6 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
 }
 interface PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: PartySource;
-    readonly abilities?: never;
     system: PartySystemData;
 }
 export { PartyPF2e };

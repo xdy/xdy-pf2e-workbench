@@ -14,7 +14,7 @@ declare function createTagifyTraits(traits: Iterable<string>, { sourceTraits, re
  */
 declare function processTagifyInSubmitData(form: HTMLFormElement, data: Record<string, unknown>): void;
 /** Override to refocus tagify elements in _render() to workaround handlebars full re-render */
-declare function maintainFocusInRender(sheet: DocumentSheet, renderLogic: () => Promise<void>): Promise<void>;
+declare function maintainFocusInRender(sheet: Application, renderLogic: () => Promise<void>): Promise<void>;
 interface SheetOption {
     value: string;
     label: string;

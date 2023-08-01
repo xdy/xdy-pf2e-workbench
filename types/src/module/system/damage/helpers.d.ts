@@ -1,6 +1,7 @@
 import { DamageInstance, DamageRoll } from "./roll.ts";
 import { ArithmeticExpression, Grouping } from "./terms.ts";
-import { DamageCategory, DamageDieSize, DamageType } from "./types.ts";
+import { BaseDamageData, DamageCategory, DamageDieSize, DamageType } from "./types.ts";
+import { DamageDicePF2e } from "@actor/modifiers.ts";
 declare function nextDamageDieSize(next: {
     upgrade: DamageDieSize;
 }): DamageDieSize;
@@ -18,6 +19,13 @@ declare const DamageCategorization: {
     /** Map a damage category to the set of damage types in it. */
     readonly toDamageTypes: (category: string) => Set<string>;
 };
+/** Apply damage dice overrides and upgrades to a non-weapon's damage formula */
+declare function applyDamageDiceOverrides(base: BaseDamageData[], dice: DamageDicePF2e[]): void;
+/**
+ * Given a DamageRoll, reverts it into base damage data to allow adding modifiers and damage dice.
+ * Throws an exception if it cannot be parsed
+ */
+declare function extractBaseDamage(roll: DamageRoll): BaseDamageData[];
 /** Create a span element for displaying splash damage */
 declare function renderComponentDamage(term: RollTerm): HTMLElement;
 declare function isSystemDamageTerm(term: RollTerm): term is ArithmeticExpression | Grouping;
@@ -32,4 +40,4 @@ declare function damageDiceIcon(roll: DamageRoll | DamageInstance, { fixedWidth 
 }): HTMLElement;
 /** Indicate in a term's options that it was multiplied by 2 or 3 */
 declare function markAsCrit(term: RollTerm, multiplier: 2 | 3): void;
-export { DamageCategorization, damageDiceIcon, deepFindTerms, isSystemDamageTerm, looksLikeDamageRoll, markAsCrit, nextDamageDieSize, renderComponentDamage, };
+export { DamageCategorization, applyDamageDiceOverrides, damageDiceIcon, deepFindTerms, extractBaseDamage, isSystemDamageTerm, looksLikeDamageRoll, markAsCrit, nextDamageDieSize, renderComponentDamage, };

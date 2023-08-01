@@ -25,10 +25,10 @@ interface HighlightGridParams {
     document: Readonly<{
         x: number;
         y: number;
-        distance: number;
+        distance: number | null;
         angle?: number;
         direction?: number;
-        width: number;
+        width: number | null;
     }>;
     collisionType?: WallRestrictionType;
     preview?: boolean;

@@ -23,6 +23,7 @@ declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements Par
     _initialize(options?: Record<string, unknown>): void;
     /** Creates sidebar buttons to inject into the chat message sidebar */
     createSidebarButtons(): HTMLElement[];
+    collect(): Promise<void>;
     update(data: DeepPartial<KingdomSource> & Record<string, unknown>): Promise<void>;
     private prepareAbilityScores;
     private prepareData;

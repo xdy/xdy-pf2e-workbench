@@ -5,5 +5,5 @@ export declare class Migration602UpdateDiehardFeat extends MigrationBase {
     static version: number;
     requiresFlush: boolean;
     constructor();
-    updateActor(actorData: ActorSourcePF2e): Promise<void>;
+    updateActor(source: ActorSourcePF2e): Promise<void>;
 }

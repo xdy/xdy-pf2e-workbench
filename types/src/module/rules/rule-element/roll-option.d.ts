@@ -1,5 +1,6 @@
 import { PredicateField } from "@system/schema-data-fields.ts";
 import type { ArrayField, BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { AELikeDataPrepPhase } from "./ae-like.ts";
 import { ResolvableValueField } from "./data.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 /**
@@ -17,6 +18,8 @@ declare class RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema> {
     static defineSchema(): RollOptionSchema;
     static validateJoint(source: SourceFromSchema<RollOptionSchema>): void;
     onApplyActiveEffects(): void;
+    beforePrepareData(): void;
+    afterPrepareData(): void;
     /** Force false totm toggleable roll options if the totmToggles setting is disabled */
     resolveValue(): boolean;
     /**
@@ -38,6 +41,7 @@ interface RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema>, Model
 type RollOptionSchema = RuleElementSchema & {
     scope: StringField<string, string, false, false, true>;
     domain: StringField<string, string, true, false, true>;
+    phase: StringField<AELikeDataPrepPhase, AELikeDataPrepPhase, false, false, true>;
     option: StringField<string, string, true, false, false>;
     /** Suboptions for a toggle, appended to the option string */
     suboptions: ArrayField<SchemaField<SuboptionData, SourceFromSchema<SuboptionData>, ModelPropsFromSchema<SuboptionData>, true, false, true>>;

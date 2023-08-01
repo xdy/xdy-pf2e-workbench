@@ -24,7 +24,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     /** The item that granted this item, if any */
     get grantedBy(): ItemPF2e<ActorPF2e> | null;
     /** Check whether this item is in-memory-only on an actor rather than being a world item or embedded and stored */
-    get isTemporary(): boolean;
+    get inMemoryOnly(): boolean;
     /**
      * Set a source ID on a dropped embedded item without a full data reset
      * This is currently necessary as of 10.291 due to system measures to prevent premature data preparation
@@ -85,6 +85,8 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Call onCreate rule-element hooks */
     protected _onCreate(data: ItemSourcePF2e, options: DocumentModificationContext<TParent>, userId: string): void;
+    /** Refresh the Item Directory if this item isn't embedded */
+    protected _onUpdate(data: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, userId: string): void;
     /** Call onDelete rule-element hooks */
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
 }

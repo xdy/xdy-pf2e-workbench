@@ -1,6 +1,7 @@
 import { AuraColors, AuraData } from "@actor/types.ts";
 import { ItemTrait } from "@item/data/base.ts";
 import { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
+import { ScenePF2e } from "@scene/document.ts";
 import { TokenDocumentPF2e } from "../document.ts";
 import type { TokenAuraData } from "./types.ts";
 declare class TokenAura implements TokenAuraData {
@@ -15,7 +16,7 @@ declare class TokenAura implements TokenAuraData {
     constructor(args: TokenAuraParams);
     /** The aura radius from the center in pixels */
     get radiusPixels(): number;
-    private get scene();
+    get scene(): ScenePF2e;
     get bounds(): PIXI.Rectangle;
     get center(): Point;
     /** The squares covered by this aura */

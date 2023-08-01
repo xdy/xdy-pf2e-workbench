@@ -15,10 +15,12 @@ interface PartySheetRenderOptions extends ActorSheetRenderOptionsPF2e {
 }
 declare class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     #private;
+    currentSummaryView: string;
     static get defaultOptions(): ActorSheetOptions;
     regionTemplates: Record<string, string>;
     get isLootSheet(): boolean;
     getData(options?: ActorSheetOptions): Promise<PartySheetData>;
+    protected setSummaryView(view: string): void;
     activateListeners($html: JQuery<HTMLElement>): void;
     /** Overriden to prevent inclusion of campaign-only item types. Those should get added to their own sheet */
     protected _onDropItemCreate(itemData: ItemSourcePF2e | ItemSourcePF2e[]): Promise<Item<PartyPF2e>[]>;
@@ -30,6 +32,7 @@ interface PartySheetData extends ActorSheetDataPF2e<PartyPF2e> {
     restricted: boolean;
     members: MemberBreakdown[];
     languages: LanguageSheetData[];
+    knowledge: SkillData[];
     inventorySummary: {
         totalCoins: number;
         totalWealth: number;
@@ -54,6 +57,10 @@ interface MemberBreakdown {
     heroPoints: ValueAndMax | null;
     hasBulk: boolean;
     bestSkills: SkillData[];
+    speeds: {
+        label: string;
+        value: number;
+    }[];
     senses: {
         label: string | null;
         labelFull: string;

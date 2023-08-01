@@ -51,6 +51,6 @@ interface CombatantFlags extends DocumentFlags {
     };
 }
 type RolledCombatant<TEncounter extends EncounterPF2e> = CombatantPF2e<TEncounter, TokenDocumentPF2e> & {
-    get initiative(): number;
+    initiative: number;
 };
 export { CombatantPF2e, CombatantFlags, RolledCombatant };

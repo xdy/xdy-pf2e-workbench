@@ -5,24 +5,26 @@ import { CharacterPF2e } from "@actor";
 import { Abilities } from "@actor/creature/data.ts";
 import { AbilityString } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item";
-declare class AbilityBuilderPopup extends Application {
+declare class AttributeBuilder extends Application {
     #private;
-    private actor;
+    actor: CharacterPF2e;
     constructor(actor: CharacterPF2e);
     static get defaultOptions(): ApplicationOptions;
     get id(): string;
-    getData(options?: Partial<FormApplicationOptions>): Promise<AbilityBuilderSheetData>;
+    getData(options?: Partial<FormApplicationOptions>): Promise<AttributeBuilderSheetData>;
+    /** Maintain focus on manual entry inputs */
+    protected _render(force?: boolean, options?: RenderOptions): Promise<void>;
     /** Remove this application from the actor's apps on close */
     close(options?: {
         force?: boolean;
     }): Promise<void>;
     activateListeners($html: JQuery): void;
 }
-interface AbilityBuilderSheetData {
+interface AttributeBuilderSheetData {
     actor: CharacterPF2e;
-    abilityScores: Abilities;
+    attributeModifiers: Abilities;
     manualKeyAbility: AbilityString;
-    abilities: Record<AbilityString, string>;
+    attributes: Record<AbilityString, string>;
     ancestry: AncestryPF2e<CharacterPF2e> | null;
     background: BackgroundPF2e<CharacterPF2e> | null;
     class: ClassPF2e<CharacterPF2e> | null;
@@ -43,6 +45,7 @@ interface BuilderButton {
     selected?: boolean;
     locked?: boolean;
     disabled?: boolean;
+    partial?: boolean;
     second?: Omit<BuilderButton, "second">;
 }
 interface BoostFlawRow {
@@ -66,4 +69,4 @@ interface LevelBoostData extends BoostFlawRow {
     eligible: boolean;
     minLevel: number;
 }
-export { AbilityBuilderPopup, BoostFlawState };
+export { AttributeBuilder, BoostFlawState };

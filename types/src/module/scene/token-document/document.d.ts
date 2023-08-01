@@ -66,6 +66,5 @@ interface TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null>
     get object(): TokenPF2e<this> | null;
     get sheet(): TokenConfigPF2e<this>;
     delta: ActorDeltaPF2e<this> | null;
-    overlayEffect: ImageFilePath;
 }
 export { TokenDocumentPF2e };

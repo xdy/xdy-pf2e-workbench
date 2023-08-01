@@ -8,6 +8,7 @@ import { AbilityString, AttackItem, CheckContext, CheckContextParams, MovementTy
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, WeaponPF2e } from "@item";
 import { ItemType } from "@item/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
+import { ZeroToTwo } from "@module/data.ts";
 import { UserPF2e } from "@module/user/document.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { RollParameters } from "@system/rolls.ts";
@@ -38,9 +39,14 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     skills: CharacterSkills;
     initiative: ActorInitiative;
     get allowedItemTypes(): (ItemType | "physical")[];
+    get keyAttribute(): AbilityString;
+    /** @deprecated */
     get keyAbility(): AbilityString;
     /** This PC's ability scores */
     get abilities(): Abilities;
+    get handsFree(): ZeroToTwo;
+    /** The number of hands this PC "really" has free: this is, ignoring allowances for the Free Hand trait */
+    get handsReallyFree(): ZeroToTwo;
     get hitPoints(): CharacterHitPointsSummary;
     get heroPoints(): {
         value: number;
@@ -66,7 +72,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
      */
     prepareDataFromItems(): void;
     prepareDerivedData(): void;
-    private setAbilityScores;
+    private setAttributeModifiers;
     /** Set roll operations for ability scores, proficiency ranks, and number of hands free */
     protected setNumericRollOptions(): void;
     private createArmorStatistic;

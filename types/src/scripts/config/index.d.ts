@@ -25,13 +25,13 @@ export declare const PF2ECONFIG: {
             enfeebled: string;
             fascinated: string;
             fatigued: string;
-            "flat-footed": string;
             fleeing: string;
             frightened: string;
             grabbed: string;
             hidden: string;
             immobilized: string;
             invisible: string;
+            "off-guard": string;
             paralyzed: string;
             "persistent-damage": string;
             petrified: string;
@@ -70,6 +70,11 @@ export declare const PF2ECONFIG: {
         20: string;
     };
     abilities: Record<"str" | "dex" | "con" | "int" | "wis" | "cha", string>;
+    attributes: {
+        readonly perception: string;
+        readonly stealth: string;
+        readonly initiative: string;
+    };
     dcAdjustments: {
         "incredibly-easy": string;
         "very-easy": string;
@@ -146,44 +151,45 @@ export declare const PF2ECONFIG: {
         majorResilient: string;
     };
     armorPropertyRunes: {
-        ready: string;
-        slick: string;
-        shadow: string;
-        glamered: string;
         acidResistant: string;
-        coldResistant: string;
-        electricityResistant: string;
-        fireResistant: string;
-        greaterSlick: string;
-        invisibility: string;
-        sinisterKnight: string;
-        greaterDread: string;
-        greaterReady: string;
-        greaterShadow: string;
-        greaterInvisibility: string;
-        greaterAcidResistant: string;
-        greaterColdResistant: string;
-        greaterElectricityResistant: string;
-        greaterFireResistant: string;
-        fortification: string;
-        winged: string;
-        rockBraced: string;
-        soaring: string;
         antimagic: string;
-        majorSlick: string;
-        ethereal: string;
-        majorShadow: string;
-        moderateDread: string;
-        greaterFortification: string;
-        greaterWinged: string;
+        assisting: string;
+        bitter: string;
+        coldResistant: string;
         deathless: string;
         dread: string;
-        bitter: string;
-        stanching: string;
+        electricityResistant: string;
+        ethereal: string;
+        fireResistant: string;
+        fortification: string;
+        glamered: string;
+        greaterAcidResistant: string;
+        greaterColdResistant: string;
+        greaterDread: string;
+        greaterElectricityResistant: string;
+        greaterFireResistant: string;
+        greaterFortification: string;
+        greaterInvisibility: string;
+        greaterReady: string;
+        greaterShadow: string;
+        greaterSlick: string;
         greaterStanching: string;
-        majorStanching: string;
-        trueStanching: string;
+        greaterWinged: string;
         implacable: string;
+        invisibility: string;
+        majorShadow: string;
+        majorSlick: string;
+        majorStanching: string;
+        moderateDread: string;
+        ready: string;
+        rockBraced: string;
+        shadow: string;
+        sinisterKnight: string;
+        slick: string;
+        soaring: string;
+        stanching: string;
+        trueStanching: string;
+        winged: string;
     };
     accessoryPropertyRunes: {
         called: string;
@@ -377,6 +383,7 @@ export declare const PF2ECONFIG: {
         silver: string;
         slashing: string;
         sonic: string;
+        spells: string;
         "unarmed-attacks": string;
         vorpal: string;
         "vorpal-adamantine": string;
@@ -384,6 +391,7 @@ export declare const PF2ECONFIG: {
         water: string;
         weapons: string;
         "weapons-shedding-bright-light": string;
+        wood: string;
     };
     stackGroups: {
         arrows: string;
@@ -444,6 +452,7 @@ export declare const PF2ECONFIG: {
         silver: string;
         slashing: string;
         sonic: string;
+        spells: string;
         "splash-damage": string;
         "unarmed-attacks": string;
         "vampire-weaknesses": string;
@@ -454,6 +463,7 @@ export declare const PF2ECONFIG: {
         water: string;
         weapons: string;
         "weapons-shedding-bright-light": string;
+        wood: string;
     };
     weaponDamage: {
         bludgeoning: string;
@@ -509,6 +519,7 @@ export declare const PF2ECONFIG: {
         "affixed-to-an-object-or-structure": string;
         "affixed-to-armor": string;
         "affixed-to-medium-heavy-armor": string;
+        "affixed-to-medium-heavy-metal-armor": string;
         "affixed-to-armor-or-a-weapon": string;
         "affixed-to-armor-or-travelers-clothing": string;
         "affixed-to-crossbow-or-firearm": string;
@@ -521,6 +532,7 @@ export declare const PF2ECONFIG: {
         "affixed-to-headgear": string;
         "affixed-to-instrument": string;
         "affixed-to-load-bearing-wall-or-pillar": string;
+        "affixed-to-melee-weapon": string;
         "affixed-to-object-structure-or-creature": string;
         "affixed-to-the-ground": string;
         "affixed-to-unarmored-defense-item": string;
@@ -546,6 +558,7 @@ export declare const PF2ECONFIG: {
         "attached-to-crossbow-or-firearm-scope": string;
         "attached-to-firearm": string;
         "attached-to-firearm-scope": string;
+        "attached-to-ships-bow": string;
         bonded: string;
         carried: string;
         "each-rune-applied-to-a-separate-item-that-has-pockets": string;
@@ -557,6 +570,7 @@ export declare const PF2ECONFIG: {
         "etched-onto-clan-dagger": string;
         "etched-onto-lm-nonmetal-armor": string;
         "etched-onto-med-heavy-armor": string;
+        "etched-onto-medium-heavy-metal-armor": string;
         "etched-onto-bludgeoning-weapon": string;
         "etched-onto-melee-weapon": string;
         "etched-onto-slashing-melee-weapon": string;
@@ -888,6 +902,7 @@ export declare const PF2ECONFIG: {
         razing: string;
         reach: string;
         recovery: string;
+        relic: string;
         repeating: string;
         resonant: string;
         saggorak: string;
@@ -1107,6 +1122,7 @@ export declare const PF2ECONFIG: {
         auditory: string;
         aura: string;
         barding: string;
+        censer: string;
         clockwork: string;
         coda: string;
         companion: string;
@@ -1121,6 +1137,7 @@ export declare const PF2ECONFIG: {
         expandable: string;
         extradimensional: string;
         fear: string;
+        figurehead: string;
         focused: string;
         fortune: string;
         fulu: string;
@@ -1255,6 +1272,7 @@ export declare const PF2ECONFIG: {
         attack: string;
         auditory: string;
         aura: string;
+        "bottled-breath": string;
         catalyst: string;
         clockwork: string;
         consumable: string;
@@ -1462,6 +1480,7 @@ export declare const PF2ECONFIG: {
         additive2: string;
         additive3: string;
         alchemical: string;
+        "bottled-breath": string;
         catalyst: string;
         clockwork: string;
         consumable: string;
@@ -2007,7 +2026,7 @@ export declare const PF2ECONFIG: {
         samsaran: string;
         "sea-devil": string;
         serpentfolk: string;
-        seugathi: string;
+        seugathi: string; /** Base weapon types that are considered equivalent for all rules purposes */
         shabti: string;
         shadow: string;
         shobhad: string;
@@ -2114,7 +2133,11 @@ export declare const PF2ECONFIG: {
         infantry: string;
         kingdom: string;
         leadership: string;
+        maneuver: string;
+        morale: string;
         region: string;
+        siege: string;
+        skirmisher: string;
         upkeep: string;
         circus: string;
         summon: string;
@@ -2233,6 +2256,7 @@ export declare const PF2ECONFIG: {
         additive2: string;
         additive3: string;
         alchemical: string;
+        "bottled-breath": string;
         catalyst: string;
         clockwork: string;
         consumable: string;
@@ -2453,7 +2477,7 @@ export declare const PF2ECONFIG: {
         samsaran: string;
         "sea-devil": string;
         serpentfolk: string;
-        seugathi: string;
+        seugathi: string; /** Base weapon types that are considered equivalent for all rules purposes */
         shabti: string;
         shadow: string;
         shobhad: string;
@@ -2555,6 +2579,7 @@ export declare const PF2ECONFIG: {
     npcAttackTraits: {
         curse: string;
         incorporeal: string;
+        radiation: string;
         "reach-0": string;
         "reach-10": string;
         "reach-15": string;
@@ -2745,6 +2770,7 @@ export declare const PF2ECONFIG: {
         razing: string;
         reach: string;
         recovery: string;
+        relic: string;
         repeating: string;
         resonant: string;
         saggorak: string;
@@ -2997,6 +3023,7 @@ export declare const PF2ECONFIG: {
         "reach-60": string;
         recovery: string;
         reflection: string;
+        relic: string;
         reload: string;
         "reload-0": string;
         "reload-1": string;
@@ -3227,6 +3254,7 @@ export declare const PF2ECONFIG: {
         bard: string;
         beastkin: string;
         bomb: string;
+        "bottled-breath": string;
         brace: string;
         brutal: string;
         bulwark: string;
@@ -3237,6 +3265,7 @@ export declare const PF2ECONFIG: {
         "capacity-5": string;
         catalyst: string;
         catfolk: string;
+        censer: string;
         champion: string;
         changeling: string;
         chaotic: string;
@@ -3328,6 +3357,7 @@ export declare const PF2ECONFIG: {
         fetchling: string;
         fey: string;
         fighter: string;
+        figurehead: string;
         finesse: string;
         finisher: string;
         fire: string;
@@ -3460,6 +3490,7 @@ export declare const PF2ECONFIG: {
         propulsive: string;
         psyche: string;
         psychic: string;
+        radiation: string;
         rage: string;
         ranger: string;
     };
@@ -3863,7 +3894,7 @@ export declare const PF2ECONFIG: {
         49: string;
         50: string;
     };
-    conditionTypes: Record<"blinded" | "broken" | "clumsy" | "confused" | "controlled" | "dazzled" | "deafened" | "doomed" | "drained" | "enfeebled" | "fascinated" | "fatigued" | "flat-footed" | "fleeing" | "frightened" | "grabbed" | "hidden" | "immobilized" | "paralyzed" | "petrified" | "prone" | "restrained" | "sickened" | "slowed" | "stunned" | "stupefied" | "unconscious" | "concealed" | "dying" | "encumbered" | "friendly" | "helpful" | "hostile" | "indifferent" | "invisible" | "observed" | "persistent-damage" | "quickened" | "undetected" | "unfriendly" | "unnoticed" | "wounded", string>;
+    conditionTypes: Record<"blinded" | "broken" | "clumsy" | "confused" | "controlled" | "dazzled" | "deafened" | "doomed" | "drained" | "enfeebled" | "fascinated" | "fatigued" | "fleeing" | "frightened" | "grabbed" | "hidden" | "immobilized" | "off-guard" | "paralyzed" | "petrified" | "prone" | "restrained" | "sickened" | "slowed" | "stunned" | "stupefied" | "unconscious" | "concealed" | "dying" | "encumbered" | "friendly" | "helpful" | "hostile" | "indifferent" | "invisible" | "observed" | "persistent-damage" | "quickened" | "undetected" | "unfriendly" | "unnoticed" | "wounded", string>;
     pfsFactions: {
         EA: string;
         GA: string;
@@ -3915,7 +3946,6 @@ export declare const PF2ECONFIG: {
         fatigued: string;
         "fear-effects": string;
         fire: string;
-        "flat-footed": string;
         fleeing: string;
         force: string;
         frightened: string;
@@ -3929,6 +3959,7 @@ export declare const PF2ECONFIG: {
         light: string;
         magic: string;
         mental: string;
+        metal: string;
         "misfortune-effects": string;
         mithral: string;
         necromancy: string;
@@ -3936,6 +3967,7 @@ export declare const PF2ECONFIG: {
         "non-magical": string;
         "nonlethal-attacks": string;
         "object-immunities": string;
+        "off-guard": string;
         olfactory: string;
         orichalcum: string;
         paralyzed: string;
@@ -3948,6 +3980,7 @@ export declare const PF2ECONFIG: {
         possession: string;
         precision: string;
         prone: string;
+        radiation: string;
         restrained: string;
         "salt-water": string;
         scrying: string;
@@ -3968,6 +4001,7 @@ export declare const PF2ECONFIG: {
         unconscious: string;
         visual: string;
         water: string;
+        wood: string;
     };
     languages: {
         common: string;
@@ -4006,7 +4040,9 @@ export declare const PF2ECONFIG: {
         dziriak: string;
         ekujae: string;
         "elder-thing": string;
+        empyrean: string;
         erutaki: string;
+        fey: string;
         formian: string;
         garundi: string;
         girtablilu: string;
@@ -4039,6 +4075,7 @@ export declare const PF2ECONFIG: {
         necril: string;
         ocotan: string;
         okaiyan: string;
+        orvian: string;
         osiriani: string;
         petran: string;
         protean: string;
@@ -4535,6 +4572,7 @@ export declare const PF2ECONFIG: {
                 additive2: string;
                 additive3: string;
                 alchemical: string;
+                "bottled-breath": string;
                 catalyst: string;
                 clockwork: string;
                 consumable: string;
@@ -4778,6 +4816,7 @@ export declare const PF2ECONFIG: {
                 additive2: string;
                 additive3: string;
                 alchemical: string;
+                "bottled-breath": string;
                 catalyst: string;
                 clockwork: string;
                 consumable: string;
@@ -5066,7 +5105,7 @@ export declare const PF2ECONFIG: {
                 samsaran: string;
                 "sea-devil": string;
                 serpentfolk: string;
-                seugathi: string;
+                seugathi: string; /** Base weapon types that are considered equivalent for all rules purposes */
                 shabti: string;
                 shadow: string;
                 shobhad: string;
@@ -5176,6 +5215,7 @@ export declare const PF2ECONFIG: {
                 auditory: string;
                 aura: string;
                 barding: string;
+                censer: string;
                 clockwork: string;
                 coda: string;
                 companion: string;
@@ -5190,6 +5230,7 @@ export declare const PF2ECONFIG: {
                 expandable: string;
                 extradimensional: string;
                 fear: string;
+                figurehead: string;
                 focused: string;
                 fortune: string;
                 fulu: string;
@@ -5327,6 +5368,7 @@ export declare const PF2ECONFIG: {
                 auditory: string;
                 aura: string;
                 barding: string;
+                censer: string;
                 clockwork: string;
                 coda: string;
                 companion: string;
@@ -5341,6 +5383,7 @@ export declare const PF2ECONFIG: {
                 expandable: string;
                 extradimensional: string;
                 fear: string;
+                figurehead: string;
                 focused: string;
                 fortune: string;
                 fulu: string;
@@ -5475,7 +5518,11 @@ export declare const PF2ECONFIG: {
                 infantry: string;
                 kingdom: string;
                 leadership: string;
+                maneuver: string;
+                morale: string;
                 region: string;
+                siege: string;
+                skirmisher: string;
                 upkeep: string;
                 circus: string;
                 summon: string;
@@ -5594,6 +5641,7 @@ export declare const PF2ECONFIG: {
                 additive2: string;
                 additive3: string;
                 alchemical: string;
+                "bottled-breath": string;
                 catalyst: string;
                 clockwork: string;
                 consumable: string;
@@ -5727,6 +5775,7 @@ export declare const PF2ECONFIG: {
                 attack: string;
                 auditory: string;
                 aura: string;
+                "bottled-breath": string;
                 catalyst: string;
                 clockwork: string;
                 consumable: string;
@@ -5826,6 +5875,7 @@ export declare const PF2ECONFIG: {
                 auditory: string;
                 aura: string;
                 barding: string;
+                censer: string;
                 clockwork: string;
                 coda: string;
                 companion: string;
@@ -5840,6 +5890,7 @@ export declare const PF2ECONFIG: {
                 expandable: string;
                 extradimensional: string;
                 fear: string;
+                figurehead: string;
                 focused: string;
                 fortune: string;
                 fulu: string;
@@ -6394,6 +6445,7 @@ export declare const PF2ECONFIG: {
             melee: {
                 curse: string;
                 incorporeal: string;
+                radiation: string;
                 "reach-0": string;
                 "reach-10": string;
                 "reach-15": string;
@@ -6584,6 +6636,7 @@ export declare const PF2ECONFIG: {
                 razing: string;
                 reach: string;
                 recovery: string;
+                relic: string;
                 repeating: string;
                 resonant: string;
                 saggorak: string;
@@ -6919,6 +6972,7 @@ export declare const PF2ECONFIG: {
                 razing: string;
                 reach: string;
                 recovery: string;
+                relic: string;
                 repeating: string;
                 resonant: string;
                 saggorak: string;

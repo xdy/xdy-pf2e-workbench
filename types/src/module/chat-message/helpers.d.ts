@@ -9,4 +9,9 @@ interface ApplyDamageFromMessageParams {
     promptModifier?: boolean;
     rollIndex?: number;
 }
-export { isCheckContextFlag, applyDamageFromMessage };
+/**
+ * Show or hide a clear-measured-template button on a message (applicable to spell cards with template-placed buttons).
+ * The button will be shown if templates are placed and the user has ownership; otherwise it will be hidden.
+ */
+declare function toggleClearTemplatesButton(message: ChatMessagePF2e | null): void;
+export { applyDamageFromMessage, isCheckContextFlag, toggleClearTemplatesButton };

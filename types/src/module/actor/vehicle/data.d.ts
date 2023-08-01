@@ -1,4 +1,4 @@
-import { ActorAttributes, ActorAttributesSource, ActorDetailsSource, ActorSystemData, ActorSystemSource, ActorTraitsData, BaseActorSourcePF2e, HitPointsStatistic } from "@actor/data/base.ts";
+import { ActorAttributes, ActorAttributesSource, ActorDetailsSource, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsData, BaseActorSourcePF2e } from "@actor/data/base.ts";
 import { ImmunitySource } from "@actor/data/iwr.ts";
 import { ActorSizePF2e } from "@actor/data/size.ts";
 import { ArmorClassTraceData } from "@system/statistic/armor-class.ts";
@@ -51,8 +51,7 @@ interface VehicleAttributes extends Omit<VehicleAttributesSource, AttributesSour
     shield?: never;
 }
 type AttributesSourceOmission = "immunities" | "weaknesses" | "resistances";
-interface VehicleHitPoints extends HitPointsStatistic {
-    negativeHealing: false;
+interface VehicleHitPoints extends ActorHitPoints {
     brokenThreshold: number;
 }
 interface VehicleFortitudeSaveData extends StatisticTraceData {

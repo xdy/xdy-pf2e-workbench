@@ -1,6 +1,7 @@
-import { ActionTrait } from "@item/action/index.ts";
+import { AbilityString } from "@actor/types.ts";
+import { ActionTrait } from "@item/action/types.ts";
 import { ItemSystemData, ItemSystemSource } from "@item/data/base.ts";
-import { SpellTrait } from "@item/spell/index.ts";
+import { MagicTradition, SpellTrait } from "@item/spell/index.ts";
 import { CheckRoll } from "@system/check/index.ts";
 interface AbstractEffectSystemSource extends ItemSystemSource {
     /** Whether this effect originated from a spell */
@@ -55,12 +56,20 @@ interface EffectContextData {
         actor: ActorUUID;
         token: TokenDocumentUUID | null;
         item: ItemUUID | null;
+        spellcasting: EffectContextSpellcastingData | null;
     };
     target: {
         actor: ActorUUID;
         token: TokenDocumentUUID | null;
     } | null;
     roll: Pick<CheckRoll, "total" | "degreeOfSuccess"> | null;
+}
+interface EffectContextSpellcastingData {
+    attribute: {
+        type: AbilityString;
+        mod: number;
+    };
+    tradition: MagicTradition | null;
 }
 interface EffectAuraData {
     slug: string;

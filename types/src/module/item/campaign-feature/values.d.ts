@@ -1,5 +1,16 @@
-import { KingmakerCategory } from "./types.ts";
+import { BehaviorType, KingmakerCategory } from "./types.ts";
+interface CategoryData {
+    behavior: BehaviorType;
+    levelLabel?: string;
+}
 declare const KINGDOM_CATEGORY_DATA: {
+    "army-tactic": {
+        behavior: "feat";
+        levelLabel: string;
+    };
+    "army-war-action": {
+        behavior: "activity";
+    };
     "kingdom-feat": {
         behavior: "feat";
     };
@@ -10,6 +21,6 @@ declare const KINGDOM_CATEGORY_DATA: {
         behavior: "activity";
     };
 };
-declare const KINGMAKER_CATEGORY_TYPES: ("kingdom-feat" | "kingdom-feature" | "kingdom-activity")[];
+declare const KINGMAKER_CATEGORY_TYPES: ("army-tactic" | "army-war-action" | "kingdom-feat" | "kingdom-feature" | "kingdom-activity")[];
 declare const KINGMAKER_CATEGORIES: Record<KingmakerCategory, string>;
-export { KINGMAKER_CATEGORIES, KINGMAKER_CATEGORY_TYPES, KINGDOM_CATEGORY_DATA };
+export { CategoryData, KINGMAKER_CATEGORIES, KINGMAKER_CATEGORY_TYPES, KINGDOM_CATEGORY_DATA };

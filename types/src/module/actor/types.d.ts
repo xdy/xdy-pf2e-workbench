@@ -7,7 +7,7 @@ import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { immunityTypes, resistanceTypes, weaknessTypes } from "@scripts/config/iwr.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
-import { CheckDC } from "@system/degree-of-success.ts";
+import { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import { PredicatePF2e } from "@system/predication.ts";
 import { StatisticCheck } from "@system/statistic/index.ts";
 import { StrikeData, TraitViewData } from "./data/base.ts";
@@ -109,6 +109,10 @@ interface RollContextParams<TStatistic extends StatisticCheck | StrikeData | nul
 interface CheckContextParams<TStatistic extends StatisticCheck | StrikeData = StatisticCheck | StrikeData, TItem extends AttackItem | null = AttackItem | null> extends RollContextParams<TStatistic, TItem> {
     targetedDC: DCSlug;
 }
+interface DamageRollContextParams<TStatistic extends StatisticCheck | StrikeData | null = StatisticCheck | StrikeData | null, TItem extends AttackItem | null = AttackItem | null> extends RollContextParams<TStatistic, TItem> {
+    /** An outcome of a preceding check roll */
+    outcome?: DegreeOfSuccessString | null;
+}
 interface CheckContext<TActor extends ActorPF2e, TStatistic extends StatisticCheck | StrikeData = StatisticCheck | StrikeData, TItem extends AttackItem | null = AttackItem | null> extends RollContext<TActor, TStatistic, TItem> {
     dc: CheckDC | null;
 }
@@ -130,4 +134,4 @@ type ResistanceType = keyof typeof resistanceTypes;
 /** Damage types a creature or hazard is possibly unaffected by, outside the IWR framework */
 type UnaffectedType = SetElement<typeof UNAFFECTED_TYPES>;
 type IWRType = ImmunityType | WeaknessType | ResistanceType;
-export { AbilityString, ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AttackItem, AuraColors, AuraData, AuraEffectData, CheckContext, CheckContextParams, DCSlug, EmbeddedItemInstances, IWRType, ImmunityType, MovementType, ResistanceType, RollContext, RollContextParams, RollTarget, SaveType, SkillAbbreviation, SkillLongForm, StrikeSelf, UnaffectedType, WeaknessType, };
+export { AbilityString, ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AttackItem, AuraColors, AuraData, AuraEffectData, CheckContext, CheckContextParams, DCSlug, DamageRollContextParams, EmbeddedItemInstances, IWRType, ImmunityType, MovementType, ResistanceType, RollContext, RollContextParams, RollTarget, SaveType, SkillAbbreviation, SkillLongForm, StrikeSelf, UnaffectedType, WeaknessType, };

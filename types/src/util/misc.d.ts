@@ -17,11 +17,10 @@ declare function sortBy<T, J>(mapping: (value: T) => J): (a: T, b: T) => number;
 declare function padArray<T>(array: T[], requiredLength: number, padWith: T): T[];
 /** Given an object, returns a new object with the same keys, but with each value converted by a function. */
 declare function mapValues<K extends string | number | symbol, V, R>(object: Record<K, V>, mapping: (value: V, key: K) => R): Record<K, R>;
-type Optional<T> = T | null | undefined;
 /**
  * Returns true if the string is null, undefined or only consists of 1..n spaces
  */
-declare function isBlank(text: Optional<string>): text is null | undefined | "";
+declare function isBlank(text: Maybe<string>): text is null | undefined | "";
 /** Returns a formatted number string with a preceding + if non-negative */
 declare function addSign(number: number): string;
 /**
@@ -126,4 +125,4 @@ declare function isImageFilePath(path: unknown): path is ImageFilePath;
 /** Does the parameter look like a video file path? */
 declare function isVideoFilePath(path: unknown): path is ImageFilePath;
 declare function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath;
-export { configFromLocalization, ErrorPF2e, Fraction, Optional, SlugCamel, addSign, applyNTimes, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };
+export { ErrorPF2e, Fraction, SlugCamel, addSign, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };

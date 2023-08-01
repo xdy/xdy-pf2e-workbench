@@ -22,10 +22,6 @@ import { CHARACTER_SHEET_TABS } from "./values.ts";
 declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e<TActor> {
     #private;
     protected readonly actorConfigClass: typeof CharacterConfig;
-    /** A cache of this PC's known formulas, for use by sheet callbacks */
-    private knownFormulas;
-    /** Non-persisted tweaks to formula data */
-    private formulaQuantities;
     static get defaultOptions(): ActorSheetOptions;
     get template(): string;
     getData(options?: ActorSheetOptions): Promise<CharacterSheetData<TActor>>;

@@ -18,7 +18,9 @@ declare class TrickMagicItemEntry<TActor extends ActorPF2e = ActorPF2e> implemen
     actor: TActor;
     skill: SkillLongForm;
     statistic: Statistic;
-    ability: AbilityString;
+    attribute: AbilityString;
+    /** @deprecated */
+    get ability(): AbilityString;
     tradition: MagicTradition;
     constructor(actor: TActor, skill: TrickMagicItemSkill);
     get name(): string;

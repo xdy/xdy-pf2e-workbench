@@ -1,11 +1,11 @@
 import { CreatureTrait } from "@actor/creature/types.ts";
-import { ActionTrait } from "@item/action/data.ts";
+import { ActionTrait } from "@item/action/types.ts";
+import { KingmakerTrait } from "@item/campaign-feature/types.ts";
 import { NPCAttackTrait } from "@item/melee/data.ts";
 import { PhysicalItemTrait } from "@item/physical/data.ts";
 import { DocumentSchemaRecord, OneToThree, Rarity } from "@module/data.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import { ItemType } from "./index.ts";
-import { KingmakerTrait } from "@item/campaign-feature/types.ts";
 interface BaseItemSourcePF2e<TType extends ItemType, TSystemSource extends ItemSystemSource = ItemSystemSource> extends foundry.documents.ItemSource<TType, TSystemSource> {
     flags: ItemSourceFlagsPF2e;
 }
@@ -37,7 +37,9 @@ interface ItemSourceFlagsPF2e extends DeepPartial<foundry.documents.ItemFlags> {
 }
 type ItemGrantData = Required<ItemGrantSource>;
 interface ItemGrantSource {
+    /** The ID of a granting or granted item */
     id: string;
+    /** The action taken when the user attempts to delete the item referenced by `id` */
     onDelete?: ItemGrantDeleteAction;
 }
 type ItemGrantDeleteAction = "cascade" | "detach" | "restrict";

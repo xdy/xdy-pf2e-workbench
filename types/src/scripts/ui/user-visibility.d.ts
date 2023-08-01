@@ -12,4 +12,4 @@ interface ProcessOptions {
     document?: ClientDocument | null;
     message?: ChatMessagePF2e;
 }
-export { UserVisibilityPF2e, UserVisibility };
+export { UserVisibility, UserVisibilityPF2e };

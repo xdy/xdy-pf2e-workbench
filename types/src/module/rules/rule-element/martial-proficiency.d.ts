@@ -8,12 +8,12 @@ import { PredicateField } from "@system/schema-data-fields.ts";
 import { ResolvableValueField } from "./data.ts";
 declare class MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySchema> {
     protected static validActorTypes: ActorType[];
-    slug: string;
     static defineSchema(): MartialProficiencySchema;
     constructor(data: RuleElementSource, options: RuleElementOptions);
     onApplyActiveEffects(): void;
 }
 interface MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySchema>, ModelPropsFromSchema<MartialProficiencySchema> {
+    slug: string;
     get actor(): CharacterPF2e;
 }
 type MartialProficiencySchema = RuleElementSchema & {

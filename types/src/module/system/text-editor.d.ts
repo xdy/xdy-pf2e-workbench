@@ -4,17 +4,17 @@ import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 /** Censor enriched HTML according to metagame knowledge settings */
 declare class TextEditorPF2e extends TextEditor {
     #private;
-    static enrichHTML(content: string | null, options?: EnrichHTMLOptionsPF2e & {
-        async?: false;
-    }): string;
-    static enrichHTML(content: string | null, options?: EnrichHTMLOptionsPF2e & {
+    static enrichHTML(content: string | null, options: EnrichHTMLOptionsPF2e & {
         async: true;
     }): Promise<string>;
-    static enrichHTML(content: string | null, options?: EnrichHTMLOptionsPF2e): string;
+    static enrichHTML(content: string | null, options: EnrichHTMLOptionsPF2e & {
+        async: false;
+    }): string;
+    static enrichHTML(content: string | null, options: EnrichHTMLOptionsPF2e): string | Promise<string>;
     /** Replace core static method to conditionally handle parsing of inline damage rolls */
     static _createInlineRoll(match: RegExpMatchArray, rollData: Record<string, unknown>, options?: EvaluateRollParams): Promise<HTMLAnchorElement | null>;
     /** Replace core static method to conditionally handle inline damage roll clicks */
-    static _onClickInlineRoll(event: MouseEvent): Promise<ChatMessage>;
+    static _onClickInlineRoll(event: MouseEvent): Promise<ChatMessage | void>;
     static processUserVisibility(content: string, options: EnrichHTMLOptionsPF2e): string;
     static enrichString(data: RegExpMatchArray, options?: EnrichHTMLOptionsPF2e): Promise<HTMLElement | null>;
     /**
@@ -27,12 +27,13 @@ declare class TextEditorPF2e extends TextEditor {
     static convertXMLNode(html: HTMLElement, name: string, { visible, visibility, whose, classes }: ConvertXMLNodeOptions): HTMLElement | null;
 }
 interface EnrichHTMLOptionsPF2e extends EnrichHTMLOptions {
-    rollData?: {
-        actor?: ActorPF2e | null;
-        item?: ItemPF2e | null;
-        mod?: number;
-        [key: string]: unknown;
-    };
+    rollData?: RollDataPF2e;
+}
+interface RollDataPF2e {
+    actor?: ActorPF2e | null;
+    item?: ItemPF2e | null;
+    mod?: number;
+    [key: string]: unknown;
 }
 interface ConvertXMLNodeOptions {
     /** The value of the data-visibility attribute to add to the span element */

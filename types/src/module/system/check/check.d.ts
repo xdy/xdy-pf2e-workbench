@@ -6,13 +6,13 @@ import { CheckRoll } from "./roll.ts";
 import { CheckRollContext } from "./types.ts";
 interface RerollOptions {
     heroPoint?: boolean;
-    keep?: "new" | "best" | "worst";
+    keep?: "new" | "higher" | "lower";
 }
 type CheckRollCallback = (roll: Rolled<CheckRoll>, outcome: DegreeOfSuccessString | null | undefined, message: ChatMessagePF2e, event: Event | null) => Promise<void> | void;
 declare class CheckPF2e {
+    #private;
     /** Roll the given statistic, optionally showing the check modifier dialog if 'Shift' is held down. */
     static roll(check: CheckModifier, context?: CheckRollContext, event?: JQuery.TriggeredEvent | Event | null, callback?: CheckRollCallback): Promise<Rolled<CheckRoll> | null>;
-    private static createTagFlavor;
     /** Reroll a rolled check given a chat message. */
     static rerollFromMessage(message: ChatMessagePF2e, { heroPoint, keep }?: RerollOptions): Promise<void>;
     /**
@@ -23,6 +23,5 @@ declare class CheckPF2e {
     static renderReroll(roll: Rolled<Roll>, { isOld }: {
         isOld: boolean;
     }): Promise<string>;
-    private static createResultFlavor;
 }
 export { CheckPF2e, CheckRollCallback };

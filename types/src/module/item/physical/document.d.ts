@@ -16,8 +16,12 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     get size(): Size;
     get isEquipped(): boolean;
     get carryType(): ItemCarryType;
-    get handsHeld(): number;
+    /** Whether the item is currently being held */
     get isHeld(): boolean;
+    /** The number of hands being used to hold this item */
+    get handsHeld(): number;
+    /** Whether the item is currently being worn */
+    get isWorn(): boolean;
     get price(): Price;
     /** The monetary value of the entire item stack */
     get assetValue(): CoinsPF2e;

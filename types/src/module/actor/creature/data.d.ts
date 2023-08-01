@@ -1,8 +1,8 @@
-import { AbilityBasedStatistic, ActorAttributes, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, BaseActorSourcePF2e, HitPointsStatistic, StrikeData } from "@actor/data/base.ts";
+import { AbilityBasedStatistic, ActorAttributes, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, BaseActorSourcePF2e, StrikeData } from "@actor/data/base.ts";
 import { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import type { AbilityString, ActorAlliance, MovementType, SaveType, SkillAbbreviation, SkillLongForm } from "@actor/types.ts";
 import type { CREATURE_ACTOR_TYPES } from "@actor/values.ts";
-import { LabeledNumber, Size, ValueAndMax, ValuesList, ZeroToThree } from "@module/data.ts";
+import { LabeledNumber, ValueAndMax, ValuesList, ZeroToThree } from "@module/data.ts";
 import { Statistic, StatisticTraceData } from "@system/statistic/index.ts";
 import { CreatureSensePF2e, SenseAcuity, SenseType } from "./sense.ts";
 import { Alignment, CreatureTrait } from "./types.ts";
@@ -23,10 +23,7 @@ interface CreatureSystemSource extends ActorSystemSource {
     /** Maps roll types -> a list of modifiers which should affect that roll type. */
     customModifiers?: Record<string, RawModifier[]>;
     /** Saving throw data */
-    saves?: Record<SaveType, {
-        value?: number;
-        mod?: number;
-    }>;
+    saves?: Record<SaveType, object | undefined>;
     resources?: CreatureResourcesSource;
 }
 type CreatureDetails = {
@@ -44,9 +41,9 @@ type CreatureDetails = {
 interface CreatureTraitsSource extends ActorTraitsSource<CreatureTrait> {
     /** Languages which this actor knows and can speak. */
     languages: ValuesList<Language>;
-    size?: {
-        value: Size;
-    };
+    senses?: {
+        value: string;
+    } | SenseData[];
 }
 interface CreatureResourcesSource {
     focus?: {
@@ -79,9 +76,7 @@ interface SenseData {
 }
 /** Data describing the value & modifier for a base ability score. */
 interface AbilityData {
-    /** The ability score: computed from the mod for npcs automatically. */
-    value: number;
-    /** The modifier for this ability; computed from the value for characters automatically. */
+    /** The modifier for this ability */
     mod: number;
 }
 type Abilities = Record<AbilityString, AbilityData>;
@@ -103,7 +98,7 @@ type SaveData = StatisticTraceData & AbilityBasedStatistic & {
 type CreatureSaves = Record<SaveType, SaveData>;
 /** Miscallenous but mechanically relevant creature attributes.  */
 interface CreatureAttributes extends ActorAttributes {
-    hp: HitPointsStatistic;
+    hp: ActorHitPoints;
     ac: {
         value: number;
     };
@@ -118,9 +113,6 @@ interface CreatureAttributes extends ActorAttributes {
         /** Its reach for the purpose of manipulate actions, usually the same as its base reach */
         manipulate: number;
     };
-    senses: {
-        value: string;
-    } | CreatureSensePF2e[];
     shield?: HeldShieldData;
     speed: CreatureSpeeds;
     /** The current dying level (and maximum) for this creature. */
@@ -144,7 +136,7 @@ interface CreatureSpeeds extends StatisticModifier {
     total: number;
 }
 interface LabeledSpeed extends Omit<LabeledNumber, "exceptions"> {
-    type: MovementType;
+    type: Exclude<MovementType, "land">;
     source?: string;
     total?: number;
     derivedFromLand?: boolean;

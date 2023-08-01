@@ -29,7 +29,6 @@ declare class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumen
 }
 interface HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: HazardSource;
-    readonly abilities?: never;
     system: HazardSystemData;
     saves: {
         [K in SaveType]?: Statistic;

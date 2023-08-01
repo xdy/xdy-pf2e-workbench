@@ -4,7 +4,7 @@ import { MigrationBase } from "../base.ts";
 export declare class Migration620RenameToWebp extends MigrationBase {
     #private;
     static version: number;
-    updateActor(actorData: ActorSourcePF2e): Promise<void>;
+    updateActor(source: ActorSourcePF2e): Promise<void>;
     updateItem(itemData: ItemSourcePF2e): Promise<void>;
     updateMacro(macroData: foundry.documents.MacroSource): Promise<void>;
     updateTable(tableData: foundry.documents.RollTableSource): Promise<void>;

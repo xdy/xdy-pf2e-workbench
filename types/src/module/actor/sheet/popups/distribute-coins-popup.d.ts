@@ -14,11 +14,16 @@ interface PopupFormData extends FormData {
 /**
  * @category Other
  */
-export declare class DistributeCoinsPopup extends FormApplication<ActorPF2e> {
+export declare class DistributeCoinsPopup extends FormApplication<ActorPF2e, DistributeCoinsOptions> {
+    constructor(actor: ActorPF2e, options?: Partial<DistributeCoinsOptions>);
     static get defaultOptions(): FormApplicationOptions;
+    getData(options?: Partial<DistributeCoinsOptions>): Promise<PopupData>;
     _updateObject(_event: Event, formData: Record<string, unknown> & PopupFormData): Promise<void>;
     /** Prevent Foundry from converting the actor IDs to boolean values */
     protected _onSubmit(event: Event, options?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
-    getData(): Promise<PopupData>;
+}
+interface DistributeCoinsOptions extends FormApplicationOptions {
+    /** An optional initial list of recipients to receive coins */
+    recipients?: ActorPF2e[];
 }
 export {};

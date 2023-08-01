@@ -48,7 +48,7 @@ declare const ITEM_ALTERATION_VALIDATORS: {
     }>;
     hardness: ItemAlterationValidator<{
         itemType: StringField<"armor" | "consumable" | "book" | "backpack" | "equipment" | "treasure" | "weapon", ItemType, true, false, false>;
-        mode: StringField<"override" | "upgrade" | "add" | "remove" | "subtract" | "downgrade", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
+        mode: StringField<"override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
         value: NumberField<number, unknown, true, false, boolean>;
     }>;
     "hp-max": ItemAlterationValidator<{

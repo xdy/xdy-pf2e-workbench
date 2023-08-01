@@ -210,16 +210,16 @@
             },
             "BottledLightning": {
                 "Greater": {
-                    "success": "<strong>Effect</strong> The bomb also deals [[/r (3[splash])[electricity]]]{3 electricity splash damage} and the target becomes @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until the start of your next turn."
+                    "success": "<strong>Effect</strong> The bomb also deals [[/r (3[splash])[electricity]]]{3 electricity splash damage} and the target becomes @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until the start of your next turn."
                 },
                 "Lesser": {
-                    "success": "<strong>Effect</strong> The bomb also deals [[/r (1[splash])[electricity]]]{1 electricity splash damage} and the target becomes @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until the start of your next turn."
+                    "success": "<strong>Effect</strong> The bomb also deals [[/r (1[splash])[electricity]]]{1 electricity splash damage} and the target becomes @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until the start of your next turn."
                 },
                 "Major": {
-                    "success": "<strong>Effect</strong> The bomb also deals [[/r (4[splash])[electricity]]]{4 electricity splash damage} and the target becomes @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until the start of your next turn."
+                    "success": "<strong>Effect</strong> The bomb also deals [[/r (4[splash])[electricity]]]{4 electricity splash damage} and the target becomes @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until the start of your next turn."
                 },
                 "Moderate": {
-                    "success": "<strong>Effect</strong> The bomb also deals [[/r (2[splash])[electricity]]]{2 electricity splash damage} and the target becomes @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until the start of your next turn."
+                    "success": "<strong>Effect</strong> The bomb also deals [[/r (2[splash])[electricity]]]{2 electricity splash damage} and the target becomes @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until the start of your next turn."
                 }
             },
             "CrystalShards": {
@@ -562,6 +562,9 @@
                 "BrokenArmor": "Broken Construct Armor",
                 "CriticalHit": "Construct Armor Broken by a Critical Hit"
             },
+            "CrumblingCarapace": {
+                "CriticalHit": "Carapace Broken by a Critical Hit"
+            },
             "CustomArmor": {
                 "BrokenArmor": "Broken Custom Armor",
                 "CriticalHit": "Custom Armor Broken by a Critical Hit"
@@ -647,7 +650,7 @@
                 "SingleTarget": "Single Target"
             },
             "PunishingStrike": {
-                "Note": "The reckless attack makes the user @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until the start of their next turn. If they hit, they can add @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.t6cx9FOODmeZQNYl]{Push} to the strike"
+                "Note": "The reckless attack makes the user @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until the start of their next turn. If they hit, they can add @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.t6cx9FOODmeZQNYl]{Push} to the strike"
             },
             "RaptorGuardWight": {
                 "TerrorMaster": "The Raptor Guard is wearing their dinosaur-skull helm."
@@ -658,6 +661,9 @@
             "SkyDragon": {
                 "DivineLightningGood": "Divine Lightning - Good Damage",
                 "DivineLightningPositive": "Divine Lightning - Positive Damage"
+            },
+            "SoulfiredPot": {
+                "CriticalHit": "Soulfired Pot Broken by a Critical Hit"
             },
             "SovereignDragon": {
                 "InspireEnvoyDragonAdult": "Adult Sovereign Dragon",
@@ -696,6 +702,7 @@
         },
         "OracleCurses": {
             "Ancestor": {
+                "AncestralInfluence": "Ancestral Influence",
                 "Label": {
                     "ExtremeBattle": "Extreme Battle",
                     "ExtremeSkillful": "Extreme Skillful",
@@ -713,10 +720,10 @@
                     "Skillful": "Skillful",
                     "Spellcasting": "Spellcasting"
                 },
-                "MajorFailure": "Your curse interferes with this action and you must make a @Check[type:flat|dc:8|showDC:owner] check.",
+                "MajorFailure": "Your curse interferes with this action, and you must succeed at a @Check[type:flat|dc:8|showDC:owner] or lose the action.",
                 "MeddlingAncestor": "Meddling Ancestor",
-                "MinorFailure": "Your curse interferes with this action and you must make a @Check[type:flat|dc:4|showDC:owner] check.",
-                "ModerateFailure": "Your curse interferes with this action and you must make a @Check[type:flat|dc:6|showDC:owner] check."
+                "MinorFailure": "Your curse interferes with this action, and you must succeed at a @Check[type:flat|dc:4|showDC:owner] or lose the action.",
+                "ModerateFailure": "Your curse interferes with this action, and you must succeed at a @Check[type:flat|dc:6|showDC:owner] or lose the action."
             },
             "Battle": {
                 "MadeAStrike": "You've made a strike this round",
@@ -1115,6 +1122,7 @@
             "Feint": "To Feint",
             "ForceOpenGrappleShoveOrTrip": "To Force Open, Grapple, Shove, or Trip",
             "Forests": "In Forests",
+            "ForestsOrGrasslands": "In Forests or Grasslands",
             "ForestsOrJungles": "In Forests or Jungles",
             "ForestsOrSnow": "In Forests or Snow",
             "ForestsOrSwamps": "In Forests or Swamps",
@@ -1139,6 +1147,7 @@
             "ImpersonateClothing": "To Impersonate Clothing",
             "ImpersonateHumanVersion": "To Impersonate a Human Version of Themselves",
             "ImpersonateInanimate": "To Impersonate an Inanimate Object",
+            "ImpersonateStumpOrLog": "To Impersonate a Stump or Log",
             "ImpersonateMound": "To Impersonate a Mound",
             "ImpersonatePastSelf": "To Impersonate a Past Self",
             "JumpOrClimb": "To Jump or Climb",
@@ -1274,14 +1283,18 @@
             },
             "AnimalForm": {
                 "Ape": "Ape",
+                "Bat": "Bat",
                 "Bear": "Bear",
                 "Bull": "Bull",
                 "Canine": "Canine",
                 "Cat": "Cat",
+                "Centipede": "Centipede",
                 "Deer": "Deer",
                 "Frog": "Frog",
                 "Shark": "Shark",
-                "Snake": "Snake"
+                "Snake": "Snake",
+                "Toad": "Toad",
+                "Wolf": "Wolf"
             },
             "AnimalSkin": {
                 "BracersOfArmor": "Animal Skin w/ Bracers of Armor",
@@ -1479,6 +1492,12 @@
                 "Doctrine": {
                     "AllowedDrops": "1st-level cleric class feature",
                     "Prompt": "Select a doctrine."
+                },
+                "ReplenishmentOfWar": {
+                    "Note": "When you damage a creature with a Strike using your deity's favored weapon, you gain a number of temporary Hit Points equal to half your level, or equal to your level if the Strike was a critical hit. @UUID[Compendium.pf2e.feat-effects.Item.BJc494USeyM011p3]{Effect: Replenishment of War}"
+                },
+                "SharedReplenishment": {
+                    "Note": "You can grant the temporary Hit Points from Replenishment of War to an ally within 10 feet instead of gaining them yourself."
                 }
             },
             "Conditions": {
@@ -1652,7 +1671,7 @@
                     "Note": "When you roll a success against a divine effect, you get a critical success instead."
                 },
                 "RockRunner": {
-                    "Note": "When you use the Acrobatics skill to Balance on narrow surfaces or uneven ground made of stone or earth, you aren't flat-footed, and when you roll a success at one of these Acrobatics checks, you get a critical success instead."
+                    "Note": "When you use the Acrobatics skill to Balance on narrow surfaces or uneven ground made of stone or earth, you aren't off-guard, and when you roll a success at one of these Acrobatics checks, you get a critical success instead."
                 },
                 "SparkFist": {
                     "Note": "Each time you succeed on a fist Strike, you take [[/r (1+@weapon.system.runes.striking)[fire]]]{fire damage}."
@@ -1743,7 +1762,7 @@
             "ExemplaryFinisher": {
                 "Battledancer": "You can Step as a free action immediately after the finisher.",
                 "Braggart": "If the foe was temporarily immune to your @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{Demoralize}, their temporary immunity ends.",
-                "Fencer": "The foe is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until your next turn.",
+                "Fencer": "The foe is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until your next turn.",
                 "Name": "Exemplary Finisher",
                 "Wit": "The foe takes a -2 circumstance penalty to attack rolls against you until the start of your next turn."
             },
@@ -1836,7 +1855,7 @@
             },
             "Gnome": {
                 "GrimInsight": {
-                    "SaveNote": "When you roll a success on a saving throw against a fear effect, you get a critical success instead, and the source of the fear effect is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} to you until the end of your next turn."
+                    "SaveNote": "When you roll a success on a saving throw against a fear effect, you get a critical success instead, and the source of the fear effect is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} to you until the end of your next turn."
                 }
             },
             "Goblin": {
@@ -1883,8 +1902,8 @@
                     "Label": "Seek Hidden or Undetected Creature Within 30 Feet"
                 },
                 "SureFeet": {
-                    "BalanceNote": "If you roll a success on an Acrobatics check to Balance, you get a critical success instead. You're not flat-footed when you attempt to Balance.",
-                    "ClimbNote": "If you roll a success on an Athletics check to Climb, you get a critical success instead. You're not flat-footed when you attempt to Climb."
+                    "BalanceNote": "If you roll a success on an Acrobatics check to Balance, you get a critical success instead. You're not off-guard when you attempt to Balance.",
+                    "ClimbNote": "If you roll a success on an Athletics check to Climb, you get a critical success instead. You're not off-guard when you attempt to Climb."
                 }
             },
             "HarrowChosen": {
@@ -2008,7 +2027,9 @@
                     },
                     "Prompt": {
                         "Element": "Select an element.",
+                        "ExpandElement": "Select an element to expand.",
                         "Gate": "Select a kinetic gate.",
+                        "Impulse": "Select an impulse feat.",
                         "Junction": "Select a gate junction.",
                         "Threshold": "Select a gate's threshold."
                     },
@@ -2329,9 +2350,15 @@
                     "Note": "When you Sense Direction, you get a result one degree of success better than you rolled."
                 }
             },
+            "RelicGift": {
+                "DivineRetribution": {
+                    "CriticalSuccess": "If the target is evil, it is also @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} until the start of your next turn on a critical hit.",
+                    "Success": "If the target is evil, it is also @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} until the start of your next turn on a hit."
+                }
+            },
             "Rogue": {
                 "DistractingFeint": {
-                    "Text": "While a creature is flat-footed by your Feint, it also takes a -2 circumstance penalty to Perception checks and Reflex saves. @UUID[Compendium.pf2e.feat-effects.Item.7hRgBo0fRQBxMK7g]{Effect: Distracting Feint}"
+                    "Text": "While a creature is off-guard by your Feint, it also takes a -2 circumstance penalty to Perception checks and Reflex saves. @UUID[Compendium.pf2e.feat-effects.Item.7hRgBo0fRQBxMK7g]{Effect: Distracting Feint}"
                 },
                 "EldritchTrickster": {
                     "Prompt": "Select a spellcasting multiclass archetype."
@@ -2353,7 +2380,7 @@
                     "PhysicalAttackLabel": "Guarding Against a Physical Attack",
                     "ProtectionLabel": "Gain Resistance to Physical Attack"
                 },
-                "SpiritualFlurryNote": "Targets become @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until the end of your current turn."
+                "SpiritualFlurryNote": "Targets become @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until the end of your current turn."
             },
             "Shisk": {
                 "PiercingQuills": {
@@ -2496,8 +2523,8 @@
             },
             "TOTMToggle": {
                 "FirstRangeIncrement": "Enable abilities that require a target within the first range increment.",
-                "FlatFooted": "Enable abilities that require a flat-footed target",
                 "Incorporeal": "Enable abilities that require an incorporeal target",
+                "OffGuard": "Enable abilities that require an off-guard target",
                 "Undead": "Enable abilities that require an undead target",
                 "Vampire": "Enable abilities that require a vampire target"
             },

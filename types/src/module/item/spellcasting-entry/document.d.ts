@@ -12,6 +12,8 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     spells: SpellCollection<NonNullable<TParent>, this> | null;
     /** Spellcasting attack and dc data created during actor preparation */
     statistic: Statistic;
+    get attribute(): AbilityString;
+    /** @deprecated */
     get ability(): AbilityString;
     /** This entry's magic tradition, null if the spell's tradition should be used instead */
     get tradition(): MagicTradition | null;

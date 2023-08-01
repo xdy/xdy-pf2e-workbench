@@ -13,6 +13,7 @@ export interface ItemOriginFlag {
     type: ItemType;
     uuid: string;
     castLevel?: number;
+    messageId?: string;
     variant?: {
         overlays: string[];
     };

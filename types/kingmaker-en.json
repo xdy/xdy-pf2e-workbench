@@ -51,7 +51,6 @@
                 "stone": "Stone"
             },
             "ControlDC": "Control DC",
-            "Corruption": "Corruption",
             "ImportDialog": {
                 "Title": "Import Activities",
                 "Content": "{added} activities will be added and {updated} activities will be updated, is this ok?"
@@ -83,6 +82,12 @@
                 "ResourceWorkSites": "Resource",
                 "WorkSites": "Work Sites"
             },
+            "Ruin": {
+                "corruption": "Corruption",
+                "crime": "Crime",
+                "decay": "Decay",
+                "strife": "Strife"
+            },
             "Size": "Size",
             "Tabs": {
                 "Main": "Main",
@@ -94,7 +99,7 @@
                 "counselor": "-1 to all Culture-based checks",
                 "general": "-4 to Warfare activities",
                 "emissary": "-1 to all Loyalty-based checks",
-                "magister": "-4 to Warefare activities",
+                "magister": "-4 to Warfare activities",
                 "treasurer": "-1 to all Economy-based checks",
                 "viceroy": "-1 to Stability-based checks",
                 "warden": "-4 to Region activities"
@@ -104,10 +109,13 @@
         },
         "Feature": {
             "Categories": {
+                "army-tactic": "Army Tactic",
+                "army-war-action": "Army War Action",
                 "kingdom-activity": "Kingdom Activity",
                 "kingdom-feat": "Kingdom Feat",
                 "kingdom-feature": "Kingdom Feature"
-            }
+            },
+            "Tactic": "Tactic"
         },
         "Penalty": "Penalty",
         "Skills": {
@@ -193,6 +201,21 @@
                 "Name": "Yeomanry",
                 "Description": "Your nation is decentralized and relies on local leaders and citizens to handle government issues, sending representatives to each other as needed to deal with issues that concern more than one locality."
             }
+        },
+        "Trait": {
+            "army": "Army",
+            "cavalry": "Cavalry",
+            "civic": "Civic",
+            "commerce": "Commerce",
+            "infantry": "Infantry",
+            "kingdom": "Kingdom",
+            "leadership": "Leadership",
+            "maneuver": "Maneuver",
+            "morale": "Morale",
+            "region": "Region",
+            "siege": "Siege",
+            "skirmisher": "Skirmisher",
+            "upkeep": "Upkeep"
         }
     }
 }

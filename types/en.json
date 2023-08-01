@@ -33,8 +33,8 @@
         "Combats": "Encounters"
     },
     "PF2E": {
-        "AbilityBoost": "Ability Boost",
-        "AbilityBoostLevels": "Ability Boost Levels",
+        "AbilityBoost": "Attribute Boost",
+        "AbilityBoostLevels": "Attribute Boost Levels",
         "AbilityCha": "Charisma",
         "AbilityCheck": {
             "cha": "Charisma Check",
@@ -57,8 +57,7 @@
             "wis": "Wis"
         },
         "AbilityInt": "Intelligence",
-        "AbilityModifierLabel": "Ability Modifier",
-        "AbilityScoresHeader": "Ability Scores",
+        "AbilityModifierLabel": "Attribute Modifier",
         "AbilityStr": "Strength",
         "AbilityTitle": "Ability",
         "AbilityWis": "Wisdom",
@@ -131,11 +130,11 @@
                 "TheTarget": "The target"
             },
             "Character": {
-                "AbilityBuilder": {
-                    "AbilityScoreMethod": {
-                        "Description": "Switching method resets your ability score distribution.",
-                        "Title": "Ability Score Method",
-                        "UseCustomLabel": "Use Custom"
+                "AttributeBuilder": {
+                    "InputMethod": {
+                        "Description": "Switching method resets your attribute modifier distribution.",
+                        "Manual": "Manual Entry",
+                        "Title": "Input Method"
                     },
                     "AncestryMissingHelp": "Choose an ancestry to select boosts.",
                     "AlternateBoostsLabel": "Alternate Boosts",
@@ -147,8 +146,10 @@
                     "Complete": "Complete",
                     "Flaw": "Flaw",
                     "Flaws": "Flaws",
+                    "HasPartial": "Has Partial Boost",
                     "KeyIcon": "Key",
                     "LegacyFlaws": "Legacy Flaws",
+                    "Partial": "Partial",
                     "NotSelected": "Not Selected",
                     "Title": "Assign your boosts",
                     "VoluntaryFlaw": {
@@ -178,13 +179,13 @@
                 }
             },
             "Creature": {
-                "AbilityModifiers": "Ability Modifiers",
                 "Alliance": {
                     "Default": "Ownership Default ({alliance})",
                     "Neutral": "Neutral",
                     "Opposition": "Opposition",
                     "Party": "Party"
                 },
+                "AttributeModifiers": "Attribute Modifiers",
                 "Configure": {
                     "Alliance": {
                         "Hint": "A creature can be in opposition to the party, allied with it, or neutral. This impacts some mechanics during an encounter, such as flanking.",
@@ -263,6 +264,7 @@
                 "Unrecoverable": "{value} hit points are currently unrecoverable."
             },
             "Inventory": {
+                "DistributeCoins": "Distribute Coins",
                 "ItemQuantity": {
                     "Decrease": {
                         "Click": "[Click] Decrease by 1",
@@ -328,6 +330,10 @@
                 "ClearActivities": {
                     "Label": "Clear",
                     "Complete": "Party exploration activities have been cleared"
+                },
+                "ClownCar": {
+                    "Deposit": "Deposit PC Tokens",
+                    "Retrieve": "Retrieve PC Tokens"
                 },
                 "Languages": "Party Languages",
                 "MembersLabel": "Members: ",
@@ -441,6 +447,7 @@
         "ArmorPotencyRune4": "Armor Potency (+4)",
         "ArmorPropertyRuneAcidResistant": "Acid-Resistant",
         "ArmorPropertyRuneAntimagic": "Antimagic",
+        "ArmorPropertyRuneAssisting": "Assisting",
         "ArmorPropertyRuneBitter": "Bitter",
         "ArmorPropertyRuneColdResistant": "Cold-Resistant",
         "ArmorPropertyRuneDeathless": "Deathless",
@@ -754,7 +761,7 @@
         "ConditionTypeEnfeebled": "Enfeebled",
         "ConditionTypeFascinated": "Fascinated",
         "ConditionTypeFatigued": "Fatigued",
-        "ConditionTypeFlatFooted": "Flat-Footed",
+        "ConditionTypeFlatFooted": "Off-Guard",
         "ConditionTypeFleeing": "Fleeing",
         "ConditionTypeFriendly": "Friendly",
         "ConditionTypeFrightened": "Frightened",
@@ -766,6 +773,7 @@
         "ConditionTypeIndifferent": "Indifferent",
         "ConditionTypeInvisible": "Invisible",
         "ConditionTypeObserved": "Observed",
+        "ConditionTypeOffGuard": "Off-Guard",
         "ConditionTypeParalyzed": "Paralyzed",
         "ConditionTypePersistent": "Persistent Damage",
         "ConditionTypePersistentShort": "Persistent",
@@ -964,7 +972,6 @@
                     "fascinated": "fascinated",
                     "fatigued": "fatigued",
                     "fear-effects": "fear effects",
-                    "flat-footed": "flat-footed",
                     "fleeing": "fleeing",
                     "frightened": "frightened",
                     "ghost-touch": "ghost touch",
@@ -978,6 +985,7 @@
                     "light": "light",
                     "magic": "magic",
                     "magical": "magical",
+                    "metal": "metal",
                     "misfortune-effects": "misfortune effects",
                     "mithral": "mithral",
                     "necromancy": "necromancy",
@@ -985,6 +993,7 @@
                     "nonlethal": "nonlethal",
                     "nonlethal-attacks": "nonlethal attacks",
                     "object-immunities": "object immunities",
+                    "off-guard": "off-guard",
                     "olfactory": "olfactory",
                     "orichalcum": "orichalcum",
                     "paralyzed": "paralyzed",
@@ -1005,6 +1014,7 @@
                     "sleep": "sleep",
                     "slowed": "slowed",
                     "spell-deflection": "spell deflection",
+                    "spells": "spells",
                     "splash-damage": "splash damage",
                     "stunned": "stunned",
                     "stupefied": "stupefied",
@@ -1023,7 +1033,8 @@
                     "warpglass": "warpglass",
                     "water": "water",
                     "weapons": "weapons",
-                    "weapons-shedding-bright-light": "weapons shedding bright light"
+                    "weapons-shedding-bright-light": "weapons shedding bright light",
+                    "wood": "wood"
                 }
             },
             "Hardness": {
@@ -1976,7 +1987,10 @@
                     "success": "Counteract the target if its counteract rank is {rank} or less."
                 },
                 "LevelN": "Spell {level}",
-                "PlaceMeasuredTemplate": "Place {size}-{unit} {shape}",
+                "MeasuredTemplate": {
+                    "Clear": "Clear Placed Templates",
+                    "Place": "Place {size}-{unit} {shape}"
+                },
                 "Variants": {
                     "DeleteDialogText": "Are you sure you want to delete '{variantName}'?",
                     "DeleteDialogTitle": "Delete Spell Variant",
@@ -2011,7 +2025,7 @@
                     "shield": "You knock the target back from you 5 feet. This is forced movement.",
                     "sling": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Sling Critical Specialization] save or be @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}.",
                     "spear": "The weapon pierces the target, weakening its attacks. The target is @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1} until the start of your next turn.",
-                    "sword": "The target is made off-balance by your attack, becoming @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} until the start of your next turn."
+                    "sword": "The target is made off-balance by your attack, becoming @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until the start of your next turn."
                 },
                 "Damage": {
                     "DiceNumber": "Dice Number"
@@ -2101,8 +2115,8 @@
         "ItemRemoveRuleElement": "Remove Rule Element",
         "ItemTitle": "Item",
         "ItemsLabel": "Items",
-        "KeyAbility": "Key Ability Score",
-        "KeyAbilityLabel": "Key Ability",
+        "KeyAbility": "Key Attribute",
+        "KeyAbilityLabel": "Key Attribute",
         "Keybinding": {
             "CycleTokenStack": {
                 "Hint": "Cycle the Z indices of a mouse-hovered stack of tokens, pushing the top to the bottom.",
@@ -2147,7 +2161,9 @@
         "LanguageEkujae": "Ekujae shape-script",
         "LanguageElderThing": "Elder Thing",
         "LanguageElven": "Elven",
+        "LanguageEmpyrean": "Empyrean",
         "LanguageErutaki": "Erutaki",
+        "LanguageFey": "Fey",
         "LanguageFormian": "Formian",
         "LanguageGarundi": "Garundi",
         "LanguageGirtablilu": "Girtablilu",
@@ -2189,6 +2205,7 @@
         "LanguageOcotan": "Ocotan",
         "LanguageOkaiyan": "Okaiyan",
         "LanguageOrcish": "Orcish",
+        "LanguageOrvian": "Orvian",
         "LanguageOsiriani": "Osiriani",
         "LanguagePetran": "Petran",
         "LanguageProtean": "Protean",
@@ -2279,6 +2296,11 @@
         "MAPAbbreviationLabel": "MAP {penalty}",
         "MAPAbbreviationValueLabel": "{value} (MAP {penalty})",
         "Macro": {
+            "OptionToggle": {
+                "Notification": "{toggle} has been toggled {state}.",
+                "Off": "OFF",
+                "On": "ON"
+            },
             "Plural": "Macros"
         },
         "MacroActionNoActionError": "This action no longer exists!",
@@ -2304,7 +2326,6 @@
         },
         "MasterArmorClass": "Master Armor Class {base}",
         "MasterLevel": "Master Level",
-        "MasterLevelHP": "Master Level",
         "MasterSavingThrow": {
             "fortitude": "Master Fortitude",
             "reflex": "Master Reflex",
@@ -2338,7 +2359,7 @@
         "ModifierNamePlaceholder": "Name",
         "ModifierTitle": "Modifier",
         "ModifierType": {
-            "ability": "Ability",
+            "ability": "Attribute",
             "circumstance": "Circumstance",
             "item": "Item",
             "potency": "Potency",
@@ -2354,7 +2375,7 @@
             "Abilities": {
                 "Glossary": {
                     "AllAroundVision": "<p>This monster can see in all directions simultaneously, and therefore can't be flanked.</p>",
-                    "AquaticAmbush": "<p><strong>Requirements</strong> The monster is hiding in water and a creature that hasn't detected it is within the listed number of feet.</p>\n<hr />\n<p><strong>Effect</strong> The monster moves up to its swim Speed + 10 feet toward the triggering creature, traveling on water and on land. Once the creature is in reach, the monster makes a Strike against it. The creature is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} against this Strike.</p>",
+                    "AquaticAmbush": "<p><strong>Requirements</strong> The monster is hiding in water and a creature that hasn't detected it is within the listed number of feet.</p>\n<hr />\n<p><strong>Effect</strong> The monster moves up to its swim Speed + 10 feet toward the triggering creature, traveling on water and on land. Once the creature is in reach, the monster makes a Strike against it. The creature is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} against this Strike.</p>",
                     "AtWillSpells": "<p>The monster can cast its at-will spells any number of times without using up spell slots.</p>",
                     "AttackOfOpportunity": "<p><strong>Trigger</strong> A creature within the monster's reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using.</p>\n<hr />\n<p><strong>Effect</strong> The monster attempts a melee Strike against the triggering creature. If the attack is a critical hit and the trigger was a manipulate action, the monster disrupts that action. This Strike doesn't count toward the monster's multiple attack penalty, and its multiple attack penalty doesn't apply to this Strike.</p>",
                     "Aura": "<p>A monster's aura automatically affects everything within a specified emanation around that monster. The monster doesn't need to spend actions on the aura; rather, the aura's effects are applied at specific times, such as when a creature ends its turn in the aura or when creatures enter the aura.</p>\n<p>If an aura does nothing but deal damage, its entry lists only the radius, damage, and saving throw. Such auras deal this damage to a creature when the creature enters the aura and when a creature starts its turn in the aura. A creature can take damage from the aura only once per round.</p>\n<p>The GM might determine that a monster's aura doesn't affect its own allies. For example, a creature might be immune to a monster's frightful presence if they have been around each other for a long time.</p>",
@@ -2366,7 +2387,7 @@
                     "Coven": "<p>This monster can form a coven with two or more other creatures who also have the coven ability. This involves performing an 8-hour ceremony with all prospective coven members. After the coven is formed, each of its members gains elite adjustments, adjusting their levels accordingly. Coven members can sense other members' locations and conditions by spending a single action, which has the concentrate trait, and can sense what another coven member is sensing as a two-action activity, which has the concentrate trait as well.</p>\n<p>Covens also grant spells and rituals to their members, but these can be cast only in cooperation between three coven members who are all within 30 feet of one another. A coven member can contribute to a coven spell with a single-action spellcasting activity that has a single verbal component. If two coven members have contributed these actions within the last round, a third member can cast a coven spell on her turn by spending the normal spellcasting actions. A coven can cast its coven spells an unlimited number of times but can cast only one coven spell each round. All covens grant the 8th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.dN8QBNuTiaBHCKUe]{Baleful Polymorph}</em> spell and all the following spells, which the coven can cast at any level up to 5th: <em>@UUID[Compendium.pf2e.spells-srd.Item.41TZEjhO6D1nWw2X]{Augury}</em>, <em>@UUID[Compendium.pf2e.spells-srd.Item.vLA0q0WOK2YPuJs6]{Charm}</em>, <em>@UUID[Compendium.pf2e.spells-srd.Item.HXhWYJviWalN5tQ2]{Clairaudience}</em>, <em>@UUID[Compendium.pf2e.spells-srd.Item.zvKWclOZ7A53DObE]{Clairvoyance}</em>, <em>@UUID[Compendium.pf2e.spells-srd.Item.yM3KTTSAIHhyuP14]{Dream Message}</em>, <em>@UUID[Compendium.pf2e.spells-srd.Item.i35dpZFI7jZcRoBo]{Illusory Disguise}</em>, <em>@UUID[Compendium.pf2e.spells-srd.Item.Ucf8eynbZMfUucjE]{Illusory Scene}</em>, <em>@UUID[Compendium.pf2e.spells-srd.Item.Ek5XI0aEdZhBgm21]{Prying Eye}</em>, and <em>@UUID[Compendium.pf2e.spells-srd.Item.FM3SmEW8N1FCRjqt]{Talking Corpse}</em>. Individual creatures with the coven ability also grant additional spells to any coven they join. A coven can also cast the <em>@UUID[Compendium.pf2e.spells-srd.Item.XkDCzMIyc0YOjw05]{Control Weather}</em> ritual, with a DC of 23 instead of the standard DC.</p>\n<p>If a coven member leaving the coven or the death of a coven member brings the coven below three members, the remaining members keep their elite adjustments for 24 hours, but without enough members to contribute the necessary actions, they can't cast coven spells.</p>",
                     "Darkvision": "<p>A monster with darkvision can see perfectly well in areas of darkness and dim light, though such vision is in black and white only. Some forms of magical darkness, such as a 4th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.4GE2ZdODgIQtg51c]{Darkness}</em> spell, block normal darkvision. A monster with @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.4Ho2xMPEC05aSxzr]{Greater Darkvision}, however, can see through even these forms of magical darkness.</p>",
                     "Disease": "<p>When a creature is exposed to a monster's disease, it attempts a Fortitude save or succumbs to the disease. The level of a disease is the level of the monster inflicting the disease. The disease follows the rules for afflictions.</p>",
-                    "Engulf": "<p>The monster Strides up to double its Speed and can move through the spaces of any creatures in its path. Any creature of the monster's size or smaller whose space the monster moves through can attempt a Reflex save with the listed DC to avoid being engulfed. A creature unable to act automatically critically fails this save. If a creature succeeds at its save, it can choose to be either pushed aside (out of the monster's path) or pushed in front of the monster to the end of the monster's movement. The monster can attempt to Engulf the same creature only once in a single use of Engulf. The monster can contain as many creatures as can fit in its space.</p>\n<p>A creature that fails its save is pulled into the monster's body. It is @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}, and has to hold its breath or start suffocating. The creature takes the listed amount of damage when first engulfed and at the end of each of its turns while it's engulfed. An engulfed creature can get free by @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escaping} against the listed escape DC. An engulfed creature can attack the monster engulfing it, but only with unarmed attacks or with weapons of light Bulk or less. The engulfing creature is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} against the attack. If the monster takes piercing or slashing damage equaling or exceeding the listed Rupture value from a single attack or spell, the engulfed creature cuts itself free. A creature that gets free by either method can immediately breathe and exits the swallowing monster's space.</p>\n<p>If the monster dies, all creatures it has engulfed are automatically released as the monster's form loses cohesion.</p>",
+                    "Engulf": "<p>The monster Strides up to double its Speed and can move through the spaces of any creatures in its path. Any creature of the monster's size or smaller whose space the monster moves through can attempt a Reflex save with the listed DC to avoid being engulfed. A creature unable to act automatically critically fails this save. If a creature succeeds at its save, it can choose to be either pushed aside (out of the monster's path) or pushed in front of the monster to the end of the monster's movement. The monster can attempt to Engulf the same creature only once in a single use of Engulf. The monster can contain as many creatures as can fit in its space.</p>\n<p>A creature that fails its save is pulled into the monster's body. It is @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}, and has to hold its breath or start suffocating. The creature takes the listed amount of damage when first engulfed and at the end of each of its turns while it's engulfed. An engulfed creature can get free by @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escaping} against the listed escape DC. An engulfed creature can attack the monster engulfing it, but only with unarmed attacks or with weapons of light Bulk or less. The engulfing creature is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} against the attack. If the monster takes piercing or slashing damage equaling or exceeding the listed Rupture value from a single attack or spell, the engulfed creature cuts itself free. A creature that gets free by either method can immediately breathe and exits the swallowing monster's space.</p>\n<p>If the monster dies, all creatures it has engulfed are automatically released as the monster's form loses cohesion.</p>",
                     "FastHealing": "<p>A monster with this ability regains the given number of Hit Points each round at the beginning of its turn.</p>",
                     "Ferocity": "<p><strong>Trigger</strong> The monster is reduced to 0 HP.</p>\n<hr />\n<p><strong>Effect</strong> The monster avoids being knocked out and remains at 1 HP, but its @UUID[Compendium.pf2e.conditionitems.Item.Yl48xTdMh3aeQYL2]{Wounded} value increases by 1. When it is Wounded 3, it can no longer use this ability</p>",
                     "FormUp": "<p>The troop chooses one of the squares it currently occupies and redistributes its squares to any configuration in which all squares are contiguous and within 15 feet of the chosen square. The troop can't share its space with other creatures.</p>",
@@ -2390,8 +2411,8 @@
                     "RetributiveStrike": "<p><strong>Trigger</strong> An enemy damages the monster's ally, and both are within 15 feet of the monster.</p>\n<hr />\n<p><strong>Effect</strong> The ally gains resistance to all damage against the triggering damage equal to 2 + the monster's level. If the foe is within reach, the monster makes a melee Strike against it.</p>",
                     "Scent": "<p>Scent involves sensing creatures or objects by smell, and is usually a vague sense. The range is listed in the ability, and it functions only if the creature or object being detected emits an aroma (for instance, incorporeal creatures usually do not exude an aroma).</p>\n<p>If a creature emits a heavy aroma or is upwind, the GM can double or even triple the range of scent abilities used to detect that creature, and the GM can reduce the range if a creature is downwind.</p>",
                     "ShieldBlock": "<p><strong>Trigger</strong> The monster has its shield raised and takes damage from a physical attack.</p>\n<hr />\n<p><strong>Effect</strong> The monster snaps its shield into place to deflect a blow. The shield prevents the monster from taking an amount of damage up to the shield's Hardness. The monster and the shield each take any remaining damage, possibly breaking or destroying the shield.</p>",
-                    "SneakAttack": "<p>When the monster Strikes a creature that has the @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} condition with an agile or finesse melee weapon, an agile or finesse unarmed attack, or a ranged weapon attack, it also deals the listed precision damage. For a ranged attack with a thrown weapon, that weapon must also be an agile or finesse weapon.</p>",
-                    "SwallowWhole": "<p>The monster attempts to swallow a creature of the listed size or smaller that it has grabbed in its jaws or mouth. If a swallowed creature is of the maximum size listed, the monster can't use Swallow Whole again. If the creature is smaller than the maximum, the monster can usually swallow more creatures; the GM determines the maximum. The monster attempts an Athletics check opposed by the grabbed creature's Reflex DC. If it succeeds, it swallows the creature. The monster's mouth or jaws no longer grab a creature it has swallowed, so the monster is free to use them to Strike or Grab once again. The monster can't attack creatures it has swallowed.</p>\n<p>A swallowed creature is @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}, and has to hold its breath or start suffocating. The swallowed creature takes the listed amount of damage when first swallowed and at the end of each of its turns while it's swallowed. If the victim @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escapes} this ability's grabbed condition, it exits through the monster's mouth. This frees any other creature grabbed in the monster's mouth or jaws. A swallowed creature can attack the monster that has swallowed it, but only with unarmed attacks or with weapons of light Bulk or less. The swallowing creature is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Flat-Footed} against the attack. If the monster takes piercing or slashing damage equaling or exceeding the listed Rupture value from a single attack or spell, the swallowed creature cuts itself free. A creature that gets free by either Escaping or cutting itself free can immediately breathe and exits the swallowing monster's space.</p>\n<p>If the monster dies, a swallowed creature can be freed by creatures adjacent to the corpse if they spend a combined total of 3 actions cutting the monster open with a weapon or unarmed attack that deals piercing or slashing damage.</p>",
+                    "SneakAttack": "<p>When the monster Strikes a creature that has the @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} condition with an agile or finesse melee weapon, an agile or finesse unarmed attack, or a ranged weapon attack, it also deals the listed precision damage. For a ranged attack with a thrown weapon, that weapon must also be an agile or finesse weapon.</p>",
+                    "SwallowWhole": "<p>The monster attempts to swallow a creature of the listed size or smaller that it has grabbed in its jaws or mouth. If a swallowed creature is of the maximum size listed, the monster can't use Swallow Whole again. If the creature is smaller than the maximum, the monster can usually swallow more creatures; the GM determines the maximum. The monster attempts an @Check[type:athletics|defense:reflex] check opposed by the grabbed creature's Reflex DC. If it succeeds, it swallows the creature. The monster's mouth or jaws no longer grab a creature it has swallowed, so the monster is free to use them to Strike or Grab once again. The monster can't attack creatures it has swallowed.</p>\n<p>A swallowed creature is @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}, and has to hold its breath or start suffocating. The swallowed creature takes the listed amount of damage when first swallowed and at the end of each of its turns while it's swallowed. If the victim @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escapes} this ability's grabbed condition, it exits through the monster's mouth. This frees any other creature grabbed in the monster's mouth or jaws. A swallowed creature can attack the monster that has swallowed it, but only with unarmed attacks or with weapons of light Bulk or less. The swallowing creature is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} against the attack. If the monster takes piercing or slashing damage equaling or exceeding the listed Rupture value from a single attack or spell, the swallowed creature cuts itself free. A creature that gets free by either Escaping or cutting itself free can immediately breathe and exits the swallowing monster's space.</p>\n<p>If the monster dies, a swallowed creature can be freed by creatures adjacent to the corpse if they spend a combined total of 3 actions cutting the monster open with a weapon or unarmed attack that deals piercing or slashing damage.</p>",
                     "SwarmMind": "<p>This monster doesn't have a single mind (typically because it's a swarm of smaller creatures), and is immune to mental effects that target only a specific number of creatures. It is still subject to mental effects that affect all creatures in an area.</p>",
                     "Telepathy": "<p>A monster with telepathy can communicate mentally with any creatures within the listed radius, as long as they share a language. This doesn't give any special access to their thoughts, and communicates no more information than normal speech would.</p>",
                     "Thoughtsense": "<p>Thoughtsense allows a monster to sense all non-mindless creatures at the listed range.</p>",
@@ -2673,14 +2694,14 @@
             "ErrorCantDelete": "You are unable to delete the original roll.",
             "ErrorNoActor": "No actor is associated to the roll",
             "HeroPoint": "Reroll using a Hero Point",
-            "KeepBest": "Reroll and keep the better result",
+            "KeepHigher": "Reroll and keep the higher result",
             "KeepNew": "Reroll and keep the new result",
-            "KeepWorst": "Reroll and keep the worse result",
+            "KeepLower": "Reroll and keep the lower result",
             "MessageHeroPoint": "Rerolled using a Hero Point",
             "MessageKeep": {
-                "best": "Rerolled and kept the better result",
+                "higher": "Rerolled and kept the higher result",
                 "new": "Rerolled and kept the new result",
-                "worst": "Rerolled and kept the worse result"
+                "lower": "Rerolled and kept the lower result"
             },
             "WarnNoHeroPoint": "{name} has no Hero Points"
         },
@@ -2726,6 +2747,10 @@
                     "Name": "NPCs dead at 0 HP",
                     "Neither": "No",
                     "PCsOnly": "PCs only"
+                },
+                "Encumbrance": {
+                    "Hint": "Automatically apply the Encumbered condition to creatures carrying more than their respective limits.",
+                    "Name": "Encumbrance"
                 },
                 "EffectExpiration": {
                     "Hint": "Effects automatically disable attached rule elements when the duration expires.",
@@ -2939,10 +2964,10 @@
             "Variant": {
                 "AbilityScore": {
                     "GradualBoosts": {
-                        "Hint": "Spread out ability score boosts across multiple levels. Players gain a boost every level except 6, 11, and 16.",
-                        "Name": "Gradual Ability Boosts"
+                        "Hint": "Spread out attribute boosts across multiple levels. Players gain a boost every level except 6, 11, and 16.",
+                        "Name": "Gradual Attribute Boosts"
                     },
-                    "Title": "Ability Score Variants"
+                    "Title": "Attribute Variants"
                 },
                 "AncestryParagon": {
                     "Hint": "Grant additional feat slots for the ancestry paragon variant from Gamemastery Guide pg 194",
@@ -3194,7 +3219,7 @@
         "SpeedTypesLand": "Land",
         "SpeedTypesSwim": "Swim",
         "SpeedTypesTitle": "Alternative movement types",
-        "SpellAbilityLabel": "Spell Ability",
+        "SpellAbilityLabel": "Key Attribute",
         "SpellAbilityModLabel": "+ Mod",
         "SpellArea": "Area: {areaSize} {areaUnit} {areaType}",
         "SpellAttackLabel": "Spell Attack",
@@ -3424,6 +3449,8 @@
         "TraitAffixedToLoadBearingWallOrPillar": "Affixed to a Load-Bearing Wall or Pillar",
         "TraitAffixedToMagicalStaff": "Affixed to a Magical Staff",
         "TraitAffixedToMediumHeavyArmor": "Affixed to Medium or Heavy Armor",
+        "TraitAffixedToMediumHeavyMetalArmor": "Affixed to Medium or Heavy Metal Armor",
+        "TraitAffixedToMeleeWeapon": "Affixed to a Melee Weapon",
         "TraitAffixedToObjectOrStructure": "Affixed to an Object or Structure",
         "TraitAffixedToStructureObjectOrCreature": "Affixed to Structure, Object, or Creature",
         "TraitAffixedToThrownWeapon": "Affixed to a Thrown Weapon",
@@ -3466,7 +3493,6 @@
         "TraitArchon": "Archon",
         "TraitArdande": "Ardande",
         "TraitAreaDamage": "Area Damage",
-        "TraitArmy": "Army",
         "TraitArtifact": "Artifact",
         "TraitAstral": "Astral",
         "TraitAsura": "Asura",
@@ -3479,6 +3505,7 @@
         "TraitAttachedToFirearmFiringMechanism": "Attached To Firearm (Firing Mechanism)",
         "TraitAttachedToFirearmScope": "Attached To Firearm (Scope)",
         "TraitAttachedToShield": "Attached to Shield",
+        "TraitAttachedToShipsBow": "Attached to a Ship's Bow",
         "TraitAttack": "Attack",
         "TraitAuditory": "Auditory",
         "TraitAura": "Aura",
@@ -3497,6 +3524,7 @@
         "TraitBoggard": "Boggard",
         "TraitBomb": "Bomb",
         "TraitBonded": "Bonded",
+        "TraitBottledBreath": "Bottled Breath",
         "TraitBrace": "Brace",
         "TraitBrutal": "Brutal",
         "TraitBulwark": "Bulwark",
@@ -3510,14 +3538,12 @@
         "TraitCarried": "Carried",
         "TraitCatalyst": "Catalyst",
         "TraitCatfolk": "Catfolk",
-        "TraitCavalry": "Cavalry",
         "TraitCelestial": "Celestial",
         "TraitChampion": "Champion",
         "TraitChangeling": "Changeling",
         "TraitChaotic": "Chaotic",
         "TraitCharauKa": "Charau-ka",
         "TraitCircus": "Circus",
-        "TraitCivic": "Civic",
         "TraitCleric": "Cleric",
         "TraitClimbing": "Climbing",
         "TraitClockwork": "Clockwork",
@@ -3527,7 +3553,6 @@
         "TraitColdiron": "Cold Iron",
         "TraitCombination": "Combination",
         "TraitComfort": "Comfort",
-        "TraitCommerce": "Commerce",
         "TraitCommon": "Common",
         "TraitCompanion": "Companion",
         "TraitComplex": "Complex",
@@ -3594,7 +3619,7 @@
         "TraitDescriptionAmphibious": "An amphibious creature can breathe in water and in air, even outside of its preferred environment, usually indefinitely but at least for hours. These creatures often have a swim Speed. Their bludgeoning and slashing unarmed Strikes don't take the usual -2 penalty for being underwater.",
         "TraitDescriptionAnadi": "A reclusive people from Garund who resemble spiders and can assume human forms.",
         "TraitDescriptionAndroid": "A synthetic humanoid ancestry created by artificial means. Most common in Numeria.",
-        "TraitDescriptionApex": "When you Invest an Item that has the apex trait, it improves one of your ability scores, either increasing it by 2 or to a total of 18, whichever grants the higher score. This gives you all the benefits of the new ability score until the investiture ends. An apex item grants this benefit only the first time it's invested within a 24-hour period, and you can benefit from only one apex item at a time. If you attempt to invest an apex item when you already have one invested, you don't gain the ability score increase, though you do gain any other effects of Investing the Item.",
+        "TraitDescriptionApex": "When you Invest an Item that has the apex trait, it improves one of your attribute modifiers, either increasing it by 1 or to a total of +4, whichever grants the higher modifier. This gives you all the benefits of the new attribute modifier until the investiture ends. An apex item grants this benefit only the first time it's invested within a 24-hour period, and you can benefit from only one apex item at a time. If you attempt to invest an apex item when you already have one invested, you don't gain the attribute modifier increase, though you do gain any other effects of Investing the Item.",
         "TraitDescriptionAphorite": "A type of planar scion descended from a being from Axis, the Plane of Law.",
         "TraitDescriptionAquadynamic": "This armor is designed for use underwater, with streamlined design and buoyant materials used in strategic places. You don't apply the armor's check penalty to Acrobatics or Athletics checks in water or similar liquids.",
         "TraitDescriptionArcane": "This magic comes from the arcane tradition, which is built on logic and rationality. Anything with this trait is magical.",
@@ -3607,13 +3632,14 @@
         "TraitDescriptionAura": "An aura is an emanation that continually ebbs out from you, af ecting creatures within a certain radius. Aura can also refer to the magical signature of an item or a creature with a strong alignment.",
         "TraitDescriptionAutomaton": "A creature with this trait is a member of the automaton ancestry.",
         "TraitDescriptionAzarketi": "Amphibious humanoids who live among the seas of the Inner Sea region, said to have descended from the people of Azlant. Sometimes known as gillmen or Low Azlanti.",
-        "TraitDescriptionBackstabber": "When you hit a flat-footed creature, this weapon deals 1 precision damage in addition to its normal damage. The precision damage increases to 2 if the weapon is a +3 weapon.",
+        "TraitDescriptionBackstabber": "When you hit an off-guard creature, this weapon deals 1 precision damage in addition to its normal damage. The precision damage increases to 2 if the weapon is a +3 weapon.",
         "TraitDescriptionBackswing": "You can use the momentum from a missed attack with this weapon to lead into your next attack. After missing with this weapon on your turn, you gain a +1 circumstance bonus to your next attack with this weapon before the end of your turn.",
         "TraitDescriptionBarbarian": "This indicates abilities from the barbarian class.",
         "TraitDescriptionBard": "This indicates abilities from the bard class.",
         "TraitDescriptionBarding": "You can purchase special armor for animals, called barding. All animals have a trained proficiency rank in light barding, and combat-trained animals are trained in heavy barding. Barding uses the same rules as armor except for the following. The Price and Bulk of barding depend on the animal's size. Unlike for a suit of armor, barding's Strength entry is listed as a modifier, not a score. Barding can't be etched with magic runes, though special magical barding might be available.",
         "TraitDescriptionBeastkin": "Humanoids that can partially or fully transform into animal forms.",
         "TraitDescriptionBomb": "An alchemical bomb combines volatile alchemical components that explode when the bomb hits a creature or object. Most alchemical bombs deal damage, though some produce other effects.",
+        "TraitDescriptionBottledBreath": "Bottles of breath are enchanted bottles of cloud and mist, first developed by the denizens of the Plane of Air. You can Activate an item with the bottled breath trait as you inhale it or cause another creature to inhale it.",
         "TraitDescriptionBrace": "A brace weapon is effective at damaging moving opponents. When you Ready to Strike an opponent that moves within your reach, until the start of your next turn Strikes with the brace weapon deal an additional 2 precision damage for each weapon damage die it has.",
         "TraitDescriptionBrutal": "A ranged attack with this trait uses its Strength modifier instead of Dexterity on the attack roll.",
         "TraitDescriptionBulwark": "The armor covers you so completely that it provides benefits against some damaging effects. On Reflex saves to avoid a damaging effect, such as a fireball, you add a +3 modifier instead of your Dexterity modifier.",
@@ -3621,6 +3647,7 @@
         "TraitDescriptionCapacity": "Weapons that have the capacity trait typically have multiple barrels or chambers capable of containing a round of ammunition. Capacity is always accompanied by a number indicating the number of barrels or chambers. After a capacity weapon is fired, you can select the next loaded barrel or chamber as an Interact action that doesn't require a free hand. Each barrel or chamber can be reloaded after it's fired as a separate Interact action.",
         "TraitDescriptionCatalyst": "Items with the catalyst trait are consumable material spell components that alter or magnify specific spells. Activating a catalyst is part of Casting the Spell. The catalyst might increase the number of actions required to Cast the Spell, as indicated in the catalyst's Activate entry. Additionally, the spell gains material components if it didn't have them already or adds the catalyst to its existing components. Because the catalyst becomes part of the material components, you can draw the catalyst as part of Casting the Spell.",
         "TraitDescriptionCatfolk": "A creature with this trait is a member of the catfolk ancestry.",
+        "TraitDescriptionCenser": "Censers are decorative containers, often metal or ceramic, in which incense is burned. An item with the censer trait must be filled with incense to Activate it, which ignites the incense and causes the censer to exude a cloud of smoke.",
         "TraitDescriptionChampion": "This indicates abilities from the champion class.",
         "TraitDescriptionChangeling": "A creature with this trait is a member of the changeling ancestry.",
         "TraitDescriptionChaotic": "Chaotic effects often manipulate energy from chaos-aligned Outer Planes and are anathema to lawful divine servants or divine servants of lawful deities. A creature with this trait is chaotic in alignment.",
@@ -3694,6 +3721,7 @@
         "TraitDescriptionFetchling": "A creature with this trait is a member of the fetchling ancestry. Fetchlings were once human, but generations of life on the Shadow Plane have transformed them.",
         "TraitDescriptionFey": "Creatures of the First World are called the fey.",
         "TraitDescriptionFighter": "This indicates abilities from the fighter class.",
+        "TraitDescriptionFigurehead": "While many ships are adorned with decorative carvings, daring crews sometimes procure magical figureheads for their vessels.",
         "TraitDescriptionFinesse": "You can use your Dexterity modifier instead of your Strength modifier on attack rolls using this melee weapon. You still use your Strength modifier when calculating damage.",
         "TraitDescriptionFinisher": " Finishers are spectacular finishing moves. You can use a finisher only if you have panache, and you lose your panache immediately after performing a finisher. Once you use a finisher, you can't use actions that have the attack trait for the rest of your turn. Some finisher actions also grant an effect on a failure. If your finisher succeeds, you can choose to apply the failure effect instead.",
         "TraitDescriptionFinite": "Planes with this trait consist of a limited amount of space.",
@@ -3777,7 +3805,7 @@
         "TraitDescriptionMental": "A mental effect can alter the target's mind. It has no effect on an object or a mindless creature.",
         "TraitDescriptionMetal": "Effects with the metal trait either manipulate or conjure metal. Those that manipulate metal have no effect in an area without metal. Creatures with this trait consist primarily of metal or have a magical connection to that element.",
         "TraitDescriptionMetamagic": "Actions with the metamagic trait, usually from metamagic feats, tweak the properties of your spells. You must use a metamagic action directly before Casting the Spell you want to alter. If you use any action (including free actions and reactions) other than Cast a Spell directly after, you waste the benefits of the metamagic action. Any additional effects added by a metamagic action are part of the spell's effect, not of the metamagic action itself.",
-        "TraitDescriptionMindless": "A mindless creature has either programmed or rudimentary mental attributes. Most, if not all, of their mental ability modifiers are -5. They are immune to all mental effects.",
+        "TraitDescriptionMindless": "A mindless creature has either programmed or rudimentary mental attributes. Most, if not all, of their mental attribute modifiers are -5. They are immune to all mental effects.",
         "TraitDescriptionMindshift": "An action with this trait can always be altered to use the raw power of your mind. When you take this action, you can choose to replace any damage it deals with mental damage, give it the mental trait, and replace any save it requires with a Will save. The action loses any traits matching damage types it no longer deals.",
         "TraitDescriptionMinion": "Minions are creatures that directly serve another creature. A creature with this trait can use only 2 actions per turn, doesn't have reactions, and can't act when it's not your turn. Your minion acts on your turn in combat, once per turn, when you spend an action to issue it commands. For an animal companion, you Command an Animal; for a minion that's a spell or magic item effect, like a summoned minion, you Sustain a Spell or Sustain an Activation; if not otherwise specified, you issue a verbal command as a single action with the auditory and concentrate traits. If given no commands, minions use no actions except to defend themselves or to escape obvious harm. If left unattended for long enough, typically 1 minute, mindless minions usually don't act, animals follow their instincts, and sapient minions act how they please. A minion can't control other creatures.",
         "TraitDescriptionMisfortune": "A misfortune effect detrimentally alters how you roll your dice. You can never have more than one misfortune effect alter a single roll. If multiple misfortune effects would apply, the GM decides which is worse and applies it. If a fortune effect and a misfortune effect would apply to the same roll, the two cancel each other out, and you roll normally.",
@@ -3825,6 +3853,7 @@
         "TraitDescriptionPropulsive": "You add half your Strength modifier (if positive) to damage rolls with a propulsive ranged weapon. If you have a negative Strength modifier, you add your full Strength modifier instead.",
         "TraitDescriptionPsyche": "Your psyche must be unleashed to use abilities that have the psyche trait, and they end automatically when your unleashed psyche subsides.",
         "TraitDescriptionPsychic": "This indicates abilities from the psychic class.",
+        "TraitDescriptionRadiation": "A dangerous, typically poisonous emission typically originating from radioactive minerals.",
         "TraitDescriptionRage": "You must be raging to use abilities with the rage trait, and they end automatically when you stop raging.",
         "TraitDescriptionRange": "These attacks will either list a finite range or a range increment, which follows the normal rules for range increments.",
         "TraitDescriptionRangedTrip": "This weapon can be used to Trip with the Athletics skill at a distance up to the weapon's first range increment. The skill check takes a -2 circumstance penalty. You can add the weapon's item bonus to attack rolls as a bonus to the check. As with using a melee weapon to trip, a ranged trip doesn't deal any damage when used to Trip.",
@@ -3836,6 +3865,7 @@
         "TraitDescriptionReckless": "Actions with the reckless trait run the risk of the pilot losing control of a vehicle. When performing a reckless action, the pilot must first attempt an appropriate piloting check to keep control of the vehicle.",
         "TraitDescriptionRecovery": "Recovery weapons are thrown weapons designed to return to the thrower when they miss the target. When you make an unsuccessful thrown Strike with this weapon, it flies back to your hand after the Strike is complete, allowing you to try again. If your hands are full when the weapon returns, it falls to the ground in your space.",
         "TraitDescriptionReflection": "A creature with this trait has the reflection versatile heritage. Reflections are beings who are copies of living people, whether through cloning, planar duplication, or another mechanism. An ability with this trait can be used or selected only by reflections.",
+        "TraitDescriptionRelic": "An item with the relic trait grows in power with its wielder.",
         "TraitDescriptionReload": "While all weapons need some amount of time to get into position, many ranged weapons also need to be loaded and reloaded. This entry indicates how many Interact actions it takes to reload such weapons. This can be 0 if drawing ammunition and firing the weapon are part of the same action. If an item takes 2 or more actions to reload, the GM determines whether they must be performed together as an activity, or you can spend some of those actions during one turn and the rest during your next turn.",
         "TraitDescriptionRepeating": "A repeating weapon is typically a type of crossbow that has a shorter reload time. These weapons can't be loaded with individual bolts like other crossbows; instead, they require a magazine of specialized ammunition to be loaded into a special slot. Once that magazine is in place, the ammunition is automatically loaded each time the weapon is cocked to fire, reducing its reload to the value in its reload entry (typically 0). When the ammunition runs out, a new magazine must be loaded, which requires a free hand and 3 Interact actions (to remove the old magazine, retrieve the new magazine, and slot the new magazine in place). These actions don't need to be consecutive.",
         "TraitDescriptionResonant": "This weapon can channel energy damage. You gain the Conduct Energy free action while wielding a resonant weapon.",
@@ -3913,7 +3943,8 @@
         "TraitDescriptionWildHunt": "Creatures with the wild hunt trait are never below 14th level. They possess greater darkvision, greensight, planar acclimation, wild gaze, instinctive cooperation, weakness to cold iron, the ability to speak with plants and animals, and their own specific wild hunt link.",
         "TraitDescriptionWitch": "This indicates abilities from the witch class.",
         "TraitDescriptionWizard": "This indicates abilities from the wizard class.",
-        "TraitDescriptionWood": " Effects with the metal trait conjure or manipulate wood. Those that manipulate wood have no effectin an area without wood. Creatures with this trait consist primarily of wood or have a connection to magical wood.",
+        "TraitDescriptionWood": "Effects with the wood trait conjure or manipulate wood. Those that manipulate wood have no effect in an area without wood. Creatures with this trait consist primarily of wood or have a connection to magical wood.",
+        "TraitCenser": "Censer",
         "TraitDetection": "Detection",
         "TraitDeviant": "Deviant",
         "TraitDevil": "Devil",
@@ -3966,6 +3997,7 @@
         "TraitEtchedOntoLightArmor": "Etched onto Light Armor",
         "TraitEtchedOntoLightMedNMArmor": "Etched on L/M Nonmetal Armor",
         "TraitEtchedOntoMedHeavyArmor": "Etched onto Medium or Heavy Armor",
+        "TraitEtchedOntoMediumHeavyMetalArmor": "Etched onto Medium or Heavy Metal Armor",
         "TraitEtchedOntoMetalArmor": "Etched onto Metal Armor",
         "TraitEthereal": "Ethereal",
         "TraitEvil": "Evil",
@@ -3986,6 +4018,7 @@
         "TraitFey": "Fey",
         "TraitFiend": "Fiend",
         "TraitFighter": "Fighter",
+        "TraitFigurehead": "Figurehead",
         "TraitFinesse": "Finesse",
         "TraitFinisher": "Finisher",
         "TraitFinite": "Finite",
@@ -4054,7 +4087,6 @@
         "TraitIncarnate": "Incarnate",
         "TraitIncorporeal": "Incorporeal",
         "TraitInevitable": "Inevitable",
-        "TraitInfantry": "Infantry",
         "TraitInfused": "Infused",
         "TraitInfusion": "Infusion",
         "TraitIngested": "Ingested",
@@ -4078,14 +4110,12 @@
         "TraitKashrishi": "Kashrishi",
         "TraitKickback": "Kickback",
         "TraitKineticist": "Kineticist",
-        "TraitKingdom": "Kingdom",
         "TraitKitsune": "Kitsune",
         "TraitKobold": "Kobold",
         "TraitKovintus": "Kovintus",
         "TraitLaminar": "Laminar",
         "TraitLaunching": "Launching",
         "TraitLawful": "Lawful",
-        "TraitLeadership": "Leadership",
         "TraitLeshy": "Leshy",
         "TraitLight": "Light",
         "TraitLilu": "Lilu",
@@ -4267,7 +4297,6 @@
         "TraitReckless": "Reckless",
         "TraitRecovery": "Recovery",
         "TraitReflection": "Reflection",
-        "TraitRegion": "Region",
         "TraitRelic": "Relic",
         "TraitReload": "Reload",
         "TraitReload0": "Reload 0",
@@ -4386,7 +4415,6 @@
         "TraitUnique": "Unique",
         "TraitUnstable": "Unstable",
         "TraitUntyped": "Untyped",
-        "TraitUpkeep": "Upkeep",
         "TraitUrdefhan": "Urdefhan",
         "TraitVampire": "Vampire",
         "TraitVanara": "Vanara",
@@ -5094,7 +5122,7 @@
                     "Shield": "You can knock the target up to 10 feet away.",
                     "Sling": "The target also takes a -10-foot status penalty to its Speed for 1 round if it fails the save.",
                     "Spear": "The clumsy condition lasts for 2 rounds.",
-                    "Sword": "The target is flat-footed until the end of your next turn."
+                    "Sword": "The target is off-guard until the end of your next turn."
                 }
             },
             "hauling": {
@@ -5306,7 +5334,7 @@
             },
             "confused": {
                 "name": "Confused",
-                "rules": "<p>You don't have your wits about you, and you attack wildly. You are flat-footed, you don't treat anyone as your ally (though they might still treat you as theirs), and you can't Delay, Ready, or use reactions.<p></p>You use all your actions to Strike or cast offensive cantrips, though the GM can have you use other actions to facilitate attack, such as draw a weapon, move so that a target is in reach, and so forth. Your targets are determined randomly by the GM. If you have no other viable targets, you target yourself, automatically hitting but not scoring a critical hit. If it's impossible for you to attack or cast spells, you babble incoherently, wasting your actions.</p>\n<p>Each time you take damage from an attack or spell, you can attempt a @Check[type:flat|dc:11] to recover from your confusion and end the condition.</p>",
+                "rules": "<p>You don't have your wits about you, and you attack wildly. You are off-guard, you don't treat anyone as your ally (though they might still treat you as theirs), and you can't Delay, Ready, or use reactions.<p></p>You use all your actions to Strike or cast offensive cantrips, though the GM can have you use other actions to facilitate attack, such as draw a weapon, move so that a target is in reach, and so forth. Your targets are determined randomly by the GM. If you have no other viable targets, you target yourself, automatically hitting but not scoring a critical hit. If it's impossible for you to attack or cast spells, you babble incoherently, wasting your actions.</p>\n<p>Each time you take damage from an attack or spell, you can attempt a @Check[type:flat|dc:11] to recover from your confusion and end the condition.</p>",
                 "summary": "You attack indiscriminately."
             },
             "controlled": {
@@ -5359,9 +5387,9 @@
                 "rules": "<p>You're tired and can't summon much energy. You take a -1 status penalty to AC and saving throws. While exploring, you can't choose an exploration activity.</p>\n<p>You recover from fatigue after a full night's rest.</p>",
                 "summary": "Your defenses are lower and you can't focus while exploring."
             },
-            "flat-footed": {
-                "name": "Flat-Footed",
-                "rules": "<p>You're distracted or otherwise unable to focus your full attention on defense. You take a -2 circumstance penalty to AC. Some effects give you the flat-footed condition only to certain creatures or against certain attacks. Others- especially conditions-can make you universally flatfooted against everything. If a rule doesn't specify that the condition applies only to certain circumstances, it applies to all of them; for example, many effects simply say \"The target is flat-footed.\"</p>",
+            "off-guard": {
+                "name": "Off-Guard",
+                "rules": "<p>You're distracted or otherwise unable to focus your full attention on defense. You take a -2 circumstance penalty to AC. Some effects give you the off-guard condition only to certain creatures or against certain attacks. Others- especially conditions-can make you universally flatfooted against everything. If a rule doesn't specify that the condition applies only to certain circumstances, it applies to all of them; for example, many effects simply say \"The target is off-guard.\"</p>",
                 "summary": "You're unable to defend yourself to your full capability."
             },
             "fleeing": {
@@ -5381,7 +5409,7 @@
             },
             "grabbed": {
                 "name": "Grabbed",
-                "rules": "<p>You're held in place by another creature, giving you the flat-footed and immobilized conditions. If you attempt a manipulate action while grabbed, you must succeed at a @Check[type:flat|dc:5] or it is lost; roll the check after spending the action, but before any effects are applied.</p>",
+                "rules": "<p>You're held in place by another creature, giving you the off-guard and immobilized conditions. If you attempt a manipulate action while grabbed, you must succeed at a @Check[type:flat|dc:5] or it is lost; roll the check after spending the action, but before any effects are applied.</p>",
                 "summary": "A creature, object, or magic holds you in place."
             },
             "group": {
@@ -5397,7 +5425,7 @@
             },
             "hidden": {
                 "name": "Hidden",
-                "rules": "<p>While you're hidden from a creature, that creature knows the space you're in but can't tell precisely where you are. You typically become hidden by using Stealth to Hide. When Seeking a creature using only imprecise senses, it remains hidden, rather than observed. A creature you're hidden from is flat-footed to you, and it must succeed at a @Check[type:flat|dc:11] when targeting you with an attack, spell, or other effect or it fails affect you. Area effects aren't subject to this flat check.</p>\n<p>A creature might be able to use the Seek action to try to observe you.</p>",
+                "rules": "<p>While you're hidden from a creature, that creature knows the space you're in but can't tell precisely where you are. You typically become hidden by using Stealth to Hide. When Seeking a creature using only imprecise senses, it remains hidden, rather than observed. A creature you're hidden from is off-guard to you, and it must succeed at a @Check[type:flat|dc:11] when targeting you with an attack, spell, or other effect or it fails affect you. Area effects aren't subject to this flat check.</p>\n<p>A creature might be able to use the Seek action to try to observe you.</p>",
                 "summary": "A creature you're hidden from knows your location but can't see you."
             },
             "hostile": {
@@ -5427,7 +5455,7 @@
             },
             "paralyzed": {
                 "name": "Paralyzed",
-                "rules": "<p>Your body is frozen in place. You have the flat-footed condition and can't act except to Recall Knowledge and use actions that require only the use of your mind (as determined by the GM). Your senses still function, but only in the areas you can perceive without moving your body, so you can't Seek while paralyzed.</p>",
+                "rules": "<p>Your body is frozen in place. You have the off-guard condition and can't act except to Recall Knowledge and use actions that require only the use of your mind (as determined by the GM). Your senses still function, but only in the areas you can perceive without moving your body, so you can't Seek while paralyzed.</p>",
                 "summary": "Your body is frozen in place."
             },
             "persistent-damage": {
@@ -5442,7 +5470,7 @@
             },
             "prone": {
                 "name": "Prone",
-                "rules": "<p>You're lying on the ground. You are flat-footed and take a -2 circumstance penalty to attack rolls. The only move actions you can use while you're prone are Crawl and Stand. Standing up ends the prone condition. You can Take Cover while prone to hunker down and gain cover against ranged attacks, even if you don't have an object to get behind, gaining a +4 circumstance bonus to AC against ranged attacks (but you remain flat-footed).</p>\n<p>If you would be knocked prone while you're Climbing or Flying, you fall. You can't be knocked prone when Swimming.</p>",
+                "rules": "<p>You're lying on the ground. You are off-guard and take a -2 circumstance penalty to attack rolls. The only move actions you can use while you're prone are Crawl and Stand. Standing up ends the prone condition. You can Take Cover while prone to hunker down and gain cover against ranged attacks, even if you don't have an object to get behind, gaining a +4 circumstance bonus to AC against ranged attacks (but you remain off-guard).</p>\n<p>If you would be knocked prone while you're Climbing or Flying, you fall. You can't be knocked prone when Swimming.</p>",
                 "summary": "You're lying on the ground and are easier to attack."
             },
             "quickened": {
@@ -5452,7 +5480,7 @@
             },
             "restrained": {
                 "name": "Restrained",
-                "rules": "<p>You're tied up and can barely move, or a creature has you pinned. You have the flat-footed and immobilized conditions, and you can't use any actions with the attack or manipulate traits except to attempt to Escape or Force Open your bonds. Restrained overrides grabbed.</p>",
+                "rules": "<p>You're tied up and can barely move, or a creature has you pinned. You have the off-guard and immobilized conditions, and you can't use any actions with the attack or manipulate traits except to attempt to Escape or Force Open your bonds. Restrained overrides grabbed.</p>",
                 "summary": "You're tied up and can't move, or a grappling creature has you pinned."
             },
             "sickened": {
@@ -5472,17 +5500,17 @@
             },
             "stupefied": {
                 "name": "Stupefied",
-                "rules": "<p>Your thoughts and instincts are clouded. Stupefied always includes a value. You take a status penalty equal to this value on Intelligence-, Wisdom-, and Charisma-based checks and DCs, including Will saving throws, spell attack rolls, spell DCs, and skill checks that use these ability scores. Any time you attempt to Cast a Spell while stupefied, the spell is disrupted unless you succeed at a flat check with a DC equal to 5 + your stupefied value.</p>",
+                "rules": "<p>Your thoughts and instincts are clouded. Stupefied always includes a value. You take a status penalty equal to this value on Intelligence-, Wisdom-, and Charisma-based checks and DCs, including Will saving throws, spell attack rolls, spell DCs, and skill checks that use these attribute modifiers. Any time you attempt to Cast a Spell while stupefied, the spell is disrupted unless you succeed at a flat check with a DC equal to 5 + your stupefied value.</p>",
                 "summary": "You can't access your full mental faculties, and you have trouble casting spells."
             },
             "unconscious": {
                 "name": "Unconscious",
-                "rules": "<p>You're sleeping, or you've been knocked out. You can't act. You take a -4 status penalty to AC, Perception, and Reflex saves, and you have the blinded and flat-footed conditions. When you gain this condition, you fall prone and drop items you are wielding or holding unless the effect states otherwise or the GM determines you're in a position in which you wouldn't.</p>\n<p>If you're unconscious because you're dying, you can't wake up while you have 0 Hit Points. If you are restored to 1 Hit Point or more via healing, you lose the dying and unconscious conditions and can act normally on your next turn.</p>\n<p>If you are unconscious and at 0 Hit Points, but not dying, you naturally return to 1 Hit Point and awaken after sufficient time passes. The GM determines how long you remain unconscious, from a minimum of 10 minutes to several hours. If you receive healing during this time, you lose the unconscious condition and can act normally on your next turn.</p>\n<p>If you're unconscious and have more than 1 Hit Point (typically because you are asleep or unconscious due to an effect), you wake up in one of the following ways. Each causes you to lose the unconscious condition.</p><ul><li>You take damage, provided the damage doesn't reduce you to 0 Hit Points. If the damage reduces you to 0 Hit Points, you remain unconscious and gain the dying condition as normal.</li><li>You receive healing, other than the natural healing you get from resting.</li><li>Someone shakes you awake with an Interact action.</li><li>There's loud noise going on around you-though this isn't automatic. At the start of your turn, you automatically attempt a Perception check against the noise's DC (or the lowest DC if there is more than one noise), waking up if you succeed. If creatures are attempting to stay quiet around you, this Perception check uses their Stealth DCs. Some magical effects make you sleep so deeply that they don't allow you to attempt this Perception check.</li><li>If you are simply asleep, the GM decides you wake up either because you have had a restful night's sleep or something disrupted that rest.</ul>",
+                "rules": "<p>You're sleeping, or you've been knocked out. You can't act. You take a -4 status penalty to AC, Perception, and Reflex saves, and you have the blinded and off-guard conditions. When you gain this condition, you fall prone and drop items you are wielding or holding unless the effect states otherwise or the GM determines you're in a position in which you wouldn't.</p>\n<p>If you're unconscious because you're dying, you can't wake up while you have 0 Hit Points. If you are restored to 1 Hit Point or more via healing, you lose the dying and unconscious conditions and can act normally on your next turn.</p>\n<p>If you are unconscious and at 0 Hit Points, but not dying, you naturally return to 1 Hit Point and awaken after sufficient time passes. The GM determines how long you remain unconscious, from a minimum of 10 minutes to several hours. If you receive healing during this time, you lose the unconscious condition and can act normally on your next turn.</p>\n<p>If you're unconscious and have more than 1 Hit Point (typically because you are asleep or unconscious due to an effect), you wake up in one of the following ways. Each causes you to lose the unconscious condition.</p><ul><li>You take damage, provided the damage doesn't reduce you to 0 Hit Points. If the damage reduces you to 0 Hit Points, you remain unconscious and gain the dying condition as normal.</li><li>You receive healing, other than the natural healing you get from resting.</li><li>Someone shakes you awake with an Interact action.</li><li>There's loud noise going on around you-though this isn't automatic. At the start of your turn, you automatically attempt a Perception check against the noise's DC (or the lowest DC if there is more than one noise), waking up if you succeed. If creatures are attempting to stay quiet around you, this Perception check uses their Stealth DCs. Some magical effects make you sleep so deeply that they don't allow you to attempt this Perception check.</li><li>If you are simply asleep, the GM decides you wake up either because you have had a restful night's sleep or something disrupted that rest.</ul>",
                 "summary": "You're asleep or knocked out."
             },
             "undetected": {
                 "name": "Undetected",
-                "rules": "<p>When you are undetected by a creature, that creature cannot see you at all, has no idea what space you occupy, and can't target you, though you still can be affected by abilities that target an area. When you're undetected by a creature, that creature is flat-footed to you.</p>\n<p>A creature you're undetected by can guess which square you're in to try targeting you. It must pick a square and attempt an attack. This works like targeting a hidden creature (requiring a @Check[type:flat|dc:11]), but the flat check and attack roll are rolled in secret by the GM, who doesn't reveal whether the attack missed due to failing the flat check, failing the attack roll, or choosing the wrong square.</p>\n<p>A creature can use the Seek action to try to find you.</p>",
+                "rules": "<p>When you are undetected by a creature, that creature cannot see you at all, has no idea what space you occupy, and can't target you, though you still can be affected by abilities that target an area. When you're undetected by a creature, that creature is off-guard to you.</p>\n<p>A creature you're undetected by can guess which square you're in to try targeting you. It must pick a square and attempt an attack. This works like targeting a hidden creature (requiring a @Check[type:flat|dc:11]), but the flat check and attack roll are rolled in secret by the GM, who doesn't reveal whether the attack missed due to failing the flat check, failing the attack roll, or choosing the wrong square.</p>\n<p>A creature can use the Seek action to try to find you.</p>",
                 "summary": "A creature you're undetected by doesn't know where you are."
             },
             "unfriendly": {

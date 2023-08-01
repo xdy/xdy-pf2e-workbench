@@ -34,7 +34,6 @@ declare class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
 }
 interface LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: LootSource;
-    readonly abilities?: never;
     system: LootSystemData;
     readonly saves?: never;
     get hitPoints(): null;

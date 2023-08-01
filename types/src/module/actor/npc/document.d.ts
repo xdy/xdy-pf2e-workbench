@@ -14,7 +14,7 @@ declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF
     get allowedItemTypes(): (ItemType | "physical")[];
     /** The level of this creature without elite/weak adjustments */
     get baseLevel(): number;
-    /** This NPC's ability scores */
+    /** This NPC's attribute modifiers */
     get abilities(): Abilities;
     get description(): string;
     get hardness(): number;

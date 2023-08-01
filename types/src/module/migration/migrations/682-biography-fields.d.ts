@@ -1,7 +1,7 @@
-import { CharacterSystemData } from "@actor/character/data.ts";
+import { CharacterSystemData, CharacterSystemSource } from "@actor/character/data.ts";
 import { ActorSourcePF2e } from "@actor/data/index.ts";
 import { MigrationBase } from "../base.ts";
-interface CharacterSystemDataOld extends CharacterSystemData {
+interface CharacterSystemDataOld extends CharacterSystemSource {
     details: CharacterSystemData["details"] & {
         biography: CharacterSystemData["details"]["biography"] & {
             public?: string | null;
@@ -16,6 +16,6 @@ export declare class Migration682BiographyFields extends MigrationBase {
     static version: number;
     /** Fix Biography migration. Correctly migrate fields and then remove them*/
     replaceBiographyData(old: CharacterSystemDataOld): void;
-    updateActor(actorSource: ActorSourcePF2e): Promise<void>;
+    updateActor(source: ActorSourcePF2e): Promise<void>;
 }
 export {};

@@ -1,9 +1,10 @@
 import { ActorPF2e } from "@actor";
 import { AbstractEffectPF2e, EffectBadge } from "@item/abstract-effect/index.ts";
 import { UserPF2e } from "@module/user/index.ts";
-import { AfflictionFlags, AfflictionSource, AfflictionSystemData } from "./data.ts";
 import { AfflictionDamageTemplate, DamageRollContext } from "@system/damage/index.ts";
+import { AfflictionFlags, AfflictionSource, AfflictionSystemData } from "./data.ts";
 declare class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
+    constructor(source: object, context?: DocumentConstructionContext<TParent>);
     get badge(): EffectBadge;
     get stage(): number;
     increase(): Promise<void>;

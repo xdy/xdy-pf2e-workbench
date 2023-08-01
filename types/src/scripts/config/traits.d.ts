@@ -623,6 +623,7 @@ declare const weaponTraits: {
     razing: string;
     reach: string;
     recovery: string;
+    relic: string;
     repeating: string;
     resonant: string;
     saggorak: string;
@@ -768,6 +769,7 @@ declare const otherWeaponTags: Record<OtherWeaponTag, string>;
 declare const npcAttackTraits: {
     curse: string;
     incorporeal: string;
+    radiation: string;
     "reach-0": string;
     "reach-10": string;
     "reach-15": string;
@@ -958,6 +960,7 @@ declare const npcAttackTraits: {
     razing: string;
     reach: string;
     recovery: string;
+    relic: string;
     repeating: string;
     resonant: string;
     saggorak: string;
@@ -1316,6 +1319,7 @@ declare const consumableTraits: {
     attack: string;
     auditory: string;
     aura: string;
+    "bottled-breath": string;
     catalyst: string;
     clockwork: string;
     consumable: string;
@@ -1522,6 +1526,7 @@ declare const actionTraits: {
     additive2: string;
     additive3: string;
     alchemical: string;
+    "bottled-breath": string;
     catalyst: string;
     clockwork: string;
     consumable: string;
@@ -1734,6 +1739,7 @@ declare const equipmentTraits: {
     auditory: string;
     aura: string;
     barding: string;
+    censer: string;
     clockwork: string;
     coda: string;
     companion: string;
@@ -1748,6 +1754,7 @@ declare const equipmentTraits: {
     expandable: string;
     extradimensional: string;
     fear: string;
+    figurehead: string;
     focused: string;
     fortune: string;
     fulu: string;
@@ -1980,6 +1987,7 @@ declare const traitDescriptions: {
     "reach-60": string;
     recovery: string;
     reflection: string;
+    relic: string;
     reload: string;
     "reload-0": string;
     "reload-1": string;
@@ -2210,6 +2218,7 @@ declare const traitDescriptions: {
     bard: string;
     beastkin: string;
     bomb: string;
+    "bottled-breath": string;
     brace: string;
     brutal: string;
     bulwark: string;
@@ -2220,6 +2229,7 @@ declare const traitDescriptions: {
     "capacity-5": string;
     catalyst: string;
     catfolk: string;
+    censer: string;
     champion: string;
     changeling: string;
     chaotic: string;
@@ -2311,6 +2321,7 @@ declare const traitDescriptions: {
     fetchling: string;
     fey: string;
     fighter: string;
+    figurehead: string;
     finesse: string;
     finisher: string;
     fire: string;
@@ -2443,6 +2454,7 @@ declare const traitDescriptions: {
     propulsive: string;
     psyche: string;
     psychic: string;
+    radiation: string;
     rage: string;
     ranger: string;
 };
@@ -2454,7 +2466,11 @@ declare const kingmakerTraits: {
     infantry: string;
     kingdom: string;
     leadership: string;
+    maneuver: string;
+    morale: string;
     region: string;
+    siege: string;
+    skirmisher: string;
     upkeep: string;
     circus: string;
     summon: string;
@@ -2573,6 +2589,7 @@ declare const kingmakerTraits: {
     additive2: string;
     additive3: string;
     alchemical: string;
+    "bottled-breath": string;
     catalyst: string;
     clockwork: string;
     consumable: string;

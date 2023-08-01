@@ -2,7 +2,7 @@
 import { ActorPF2e } from "@actor";
 import { AbilityString } from "@actor/types.ts";
 import { ItemPF2e } from "@item";
-import { ActionTrait } from "@item/action/data.ts";
+import { ActionTrait } from "@item/action/types.ts";
 import { ItemSourcePF2e, ItemSummaryData } from "@item/data/index.ts";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
@@ -52,6 +52,8 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get isCantrip(): boolean;
     get isFocusSpell(): boolean;
     get isRitual(): boolean;
+    get attribute(): AbilityString;
+    /** @deprecated */
     get ability(): AbilityString;
     get components(): Record<SpellComponent, boolean> & {
         value: string;
@@ -78,8 +80,8 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
         overlayIds?: string[];
     }): SpellPF2e<NonNullable<TParent>> | null;
     getHeightenLayers(rank?: number): SpellHeightenLayer[];
-    createTemplate(): MeasuredTemplatePF2e;
-    placeTemplate(): void;
+    createTemplate(message?: ChatMessagePF2e): MeasuredTemplatePF2e;
+    placeTemplate(message?: ChatMessagePF2e): void;
     prepareBaseData(): void;
     prepareSiblingData(this: SpellPF2e<ActorPF2e>): void;
     getRollOptions(prefix?: string): string[];
@@ -91,7 +93,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     rollAttack(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, attackNumber?: number, context?: StatisticRollParameters): Promise<void>;
     rollDamage(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, mapIncreases?: ZeroToTwo): Promise<Rolled<DamageRoll> | null>;
     /** Roll counteract check */
-    rollCounteract(event?: JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
+    rollCounteract(event?: MouseEvent | JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
     getOriginData(): ItemOriginFlag;
     update(data: DocumentUpdateData<this>, options?: DocumentUpdateContext<TParent>): Promise<this>;
     protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;

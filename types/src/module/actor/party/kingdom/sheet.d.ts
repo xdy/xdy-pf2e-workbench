@@ -39,11 +39,12 @@ interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
     abilities: (KingdomAbilityData & {
         slug: string;
         label: string;
+        ruinLabel: string;
     })[];
     leadership: (KingdomLeadershipData & {
         actor: ActorPF2e | null;
         img: string;
-        role: string;
+        slug: string;
         label: string;
     })[];
     actions: {

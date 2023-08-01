@@ -8,8 +8,10 @@ import { CoinsPF2e, ItemActivation, MaterialGradeData, MaterialValuationData, Ph
 declare class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e> extends ItemSheetPF2e<TItem> {
     /** Show the identified data for editing purposes */
     getData(options?: Partial<DocumentSheetOptions>): Promise<PhysicalItemSheetData<TItem>>;
-    activateListeners($html: JQuery): void;
+    /** If the item is unidentified, prevent players from opening this sheet. */
+    render(force?: boolean, options?: RenderOptions): this | Promise<this>;
     protected prepareMaterials(valuationData: MaterialValuationData): PreparedMaterials;
+    activateListeners($html: JQuery): void;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }
 interface PhysicalItemSheetData<TItem extends PhysicalItemPF2e> extends ItemSheetDataPF2e<TItem> {

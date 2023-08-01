@@ -16,8 +16,10 @@ declare function calculateMAPs(item: ItemPF2e, { domains, options }: {
     domains: string[];
     options: Set<string> | string[];
 }): MAPData;
+/** Create roll options pertaining to the active encounter and the actor's participant */
+declare function createEncounterRollOptions(actor: ActorPF2e): Record<string, boolean>;
 /** Whether flanking puts this actor off-guard */
-declare function isOffGuardFromFlanking(actor: ActorPF2e): boolean;
+declare function isOffGuardFromFlanking(target: ActorPF2e, origin: ActorPF2e): boolean;
 /** Create a strike statistic from a melee item: for use by NPCs and Hazards */
 declare function strikeFromMeleeItem(item: MeleePF2e<ActorPF2e>): NPCStrike;
 /** Get the range increment of a target for a given weapon */
@@ -31,4 +33,4 @@ interface MAPData {
     map1: number;
     map2: number;
 }
-export { calculateMAPs, calculateRangePenalty, checkAreaEffects, getRangeIncrement, isOffGuardFromFlanking, isReallyPC, migrateActorSource, resetActors, strikeFromMeleeItem, };
+export { calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, getRangeIncrement, isOffGuardFromFlanking, isReallyPC, migrateActorSource, resetActors, strikeFromMeleeItem, };

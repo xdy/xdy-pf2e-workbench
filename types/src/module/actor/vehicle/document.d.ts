@@ -21,7 +21,6 @@ declare class VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocume
 }
 interface VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: VehicleSource;
-    readonly abilities?: never;
     system: VehicleSystemData;
     get hitPoints(): HitPointsSummary;
     saves: {

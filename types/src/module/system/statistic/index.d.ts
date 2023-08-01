@@ -8,11 +8,9 @@ import { RollNotePF2e, RollNoteSource } from "@module/notes.ts";
 import { TokenDocumentPF2e } from "@scene";
 import { CheckRoll, CheckRollCallback, CheckType, RollTwiceOption } from "@system/check/index.ts";
 import { CheckDC } from "@system/degree-of-success.ts";
-import { StatisticChatData, StatisticCheckData, StatisticData, StatisticTraceData } from "./data.ts";
-export * from "./data.ts";
-export { RollOptionParameters, Statistic, StatisticCheck, StatisticDifficultyClass, StatisticRollParameters };
+import { BaseStatisticData, BaseStatisticTraceData, StatisticChatData, StatisticCheckData, StatisticData, StatisticDifficultyClassData, StatisticTraceData } from "./data.ts";
 /** Basic data forming any Pathfinder statistic */
-declare abstract class SimpleStatistic {
+declare abstract class BaseStatistic {
     /** The actor to which this statistic belongs */
     actor: ActorPF2e;
     /** A stable but human-readable identifier */
@@ -25,37 +23,43 @@ declare abstract class SimpleStatistic {
     modifiers: ModifierPF2e[];
     /** String category identifiers: used to retrieve modifiers and other synthetics as well as create roll options  */
     domains: string[];
-    constructor(actor: ActorPF2e, data: StatisticData);
+    constructor(actor: ActorPF2e, data: BaseStatisticData);
     createRollOptions(domains?: string[]): Set<string>;
+    abstract getTraceData(): BaseStatisticTraceData;
 }
-/** A Pathfinder statistic used to perform checks or get dcs */
-declare class Statistic extends SimpleStatistic {
+/** A Pathfinder statistic used to perform checks and calculate DCs */
+declare class Statistic extends BaseStatistic {
     #private;
     ability: AbilityString | null;
-    abilityModifier: ModifierPF2e | null;
     rank: ZeroToFour | null;
     proficient: boolean;
+    /** The `Statistic` from which this one was derived (set by `Statistic#extend`), or otherwise `null`. */
+    base: Statistic | null;
     /** If this is a skill, returns whether it is a lore skill or not */
     lore?: boolean;
-    options: RollOptionParameters;
-    constructor(actor: ActorPF2e, data: StatisticData, options?: RollOptionParameters);
+    config: RollOptionConfig;
+    constructor(actor: ActorPF2e, data: StatisticData, config?: RollOptionConfig);
+    /** Get the ability modifier used with this statistic. Since NPC statistics are contrived, create a new one. */
+    get attributeModifier(): ModifierPF2e | null;
     get check(): StatisticCheck<this>;
     get dc(): StatisticDifficultyClass<this>;
     /** Convenience getter to the statistic's total modifier */
     get mod(): number;
-    createRollOptions(domains?: string[], args?: RollOptionParameters): Set<string>;
-    withRollOptions(options?: RollOptionParameters): Statistic;
+    createRollOptions(domains?: string[], args?: RollOptionConfig): Set<string>;
+    withRollOptions(options?: RollOptionConfig): Statistic;
     /**
      * Extend this statistic into a new cloned statistic with additional data.
      * Combines all domains and modifier lists.
      */
-    extend(data: Omit<DeepPartial<StatisticData>, "check"> & {
+    extend(data: Omit<DeepPartial<StatisticData>, "check" | "dc" | "modifiers"> & {
+        dc?: Partial<StatisticDifficultyClassData>;
         check?: Partial<StatisticCheckData>;
+        modifiers?: ModifierPF2e[];
     }): Statistic;
     /** Shortcut to `this#check#roll` */
     roll(args?: StatisticRollParameters): Promise<Rolled<CheckRoll> | null>;
     /** Creates view data for sheets and chat messages */
-    getChatData(options?: RollOptionParameters): StatisticChatData;
+    getChatData(options?: RollOptionConfig): StatisticChatData;
     /** Returns data intended to be merged back into actor data. By default the value is the DC */
     getTraceData(options?: {
         value?: "dc" | "mod";
@@ -69,9 +73,9 @@ declare class StatisticCheck<TParent extends Statistic = Statistic> {
     domains: string[];
     mod: number;
     modifiers: ModifierPF2e[];
-    constructor(parent: TParent, data: StatisticData, options?: RollOptionParameters);
+    constructor(parent: TParent, data: StatisticData, config?: RollOptionConfig);
     get actor(): ActorPF2e;
-    createRollOptions(args?: RollOptionParameters): Set<string>;
+    createRollOptions(args?: RollOptionConfig): Set<string>;
     roll(args?: StatisticRollParameters): Promise<Rolled<CheckRoll> | null>;
     get breakdown(): string;
 }
@@ -81,7 +85,7 @@ declare class StatisticDifficultyClass<TParent extends Statistic = Statistic> {
     label?: string;
     modifiers: ModifierPF2e[];
     options: Set<string>;
-    constructor(parent: TParent, data: StatisticData, options?: RollOptionParameters);
+    constructor(parent: TParent, data: StatisticData, options?: RollOptionConfig);
     get value(): number;
     get breakdown(): string;
     toString(): string;
@@ -122,9 +126,11 @@ interface StatisticRollParameters {
     /** Callback called when the roll occurs. */
     callback?: CheckRollCallback;
 }
-interface RollOptionParameters {
+interface RollOptionConfig {
     extraRollOptions?: string[];
     item?: ItemPF2e | null;
     origin?: ActorPF2e | null;
     target?: ActorPF2e | null;
 }
+export * from "./data.ts";
+export { BaseStatistic, RollOptionConfig, Statistic, StatisticCheck, StatisticDifficultyClass, StatisticRollParameters, };

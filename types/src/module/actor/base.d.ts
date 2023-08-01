@@ -1,4 +1,4 @@
-import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AttackItem, AuraData, CheckContext, CheckContextParams, EmbeddedItemInstances, RollContext, RollContextParams, SaveType } from "@actor/types.ts";
+import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AttackItem, AuraData, CheckContext, CheckContextParams, DamageRollContextParams, EmbeddedItemInstances, RollContext, RollContextParams, SaveType } from "@actor/types.ts";
 import { AbstractEffectPF2e, ArmorPF2e, ContainerPF2e, ItemPF2e, PhysicalItemPF2e } from "@item";
 import { ConditionKey, ConditionSlug, ConditionSource, type ConditionPF2e } from "@item/condition/index.ts";
 import { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/data/index.ts";
@@ -30,7 +30,7 @@ import { ActorSpellcasting } from "./spellcasting.ts";
  */
 declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Actor<TParent> {
     /** Has this actor completed construction? */
-    private constructed;
+    constructed: boolean;
     /** Handles rolling initiative for the current actor */
     initiative: ActorInitiative | null;
     /** A separate collection of owned physical items for convenient access */
@@ -63,6 +63,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     get schemaVersion(): number | null;
     /** Get an active GM or, failing that, a player who can update this actor */
     get primaryUpdater(): UserPF2e | null;
+    get abilities(): Abilities | null;
     /** Shortcut to system-data attributes */
     get attributes(): this["system"]["attributes"];
     get hitPoints(): HitPointsSummary | null;
@@ -152,15 +153,11 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     prepareDerivedData(): void;
     /** Set defaults for this actor's prototype token */
     private preparePrototypeToken;
-    /** If there is an active encounter, set roll options for it and this actor's participant */
-    setEncounterRollOptions(): void;
     getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
-    /**
-     * Calculates attack roll target data including the target's DC.
-     * All attack rolls have the "all" and "attack-roll" domains and the "attack" trait,
-     * but more can be added via the options.
-     */
+    /** Calculate attack roll targeting data, including the target's DC. */
     getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends AttackItem | null>(params: CheckContextParams<TStatistic, TItem>): Promise<CheckContext<this, TStatistic, TItem>>;
+    /** Acquire additional data for a damage roll. */
+    getDamageRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: DamageRollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     /** Toggle the provided roll option (swapping it from true to false or vice versa). */
     toggleRollOption(domain: string, option: string, value?: boolean): Promise<boolean | null>;
     toggleRollOption(domain: string, option: string, itemId?: string | null, value?: boolean, suboption?: string | null): Promise<boolean | null>;
@@ -237,6 +234,13 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     }): Promise<ConditionPF2e<this> | null>;
     /** Toggle a condition as present or absent. If a valued condition is toggled on, it will be set to a value of 1. */
     toggleCondition(conditionSlug: ConditionSlug): Promise<void>;
+    /**
+     * Work around upstream issue in which drag previews are included in the return array
+     * https://github.com/foundryvtt/foundryvtt/issues/9817
+     */
+    getActiveTokens(linked: boolean | undefined, document: true): TokenDocumentPF2e<ScenePF2e>[];
+    getActiveTokens(linked?: boolean | undefined, document?: undefined): TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
+    getActiveTokens(linked?: boolean, document?: boolean): TokenDocumentPF2e<ScenePF2e>[] | TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
     protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
@@ -254,7 +258,6 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
 interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Actor<TParent> {
     flags: ActorFlagsPF2e;
     readonly _source: ActorSourcePF2e;
-    readonly abilities?: Abilities;
     readonly effects: foundry.abstract.EmbeddedCollection<ActiveEffectPF2e<this>>;
     readonly items: foundry.abstract.EmbeddedCollection<ItemPF2e<this>>;
     system: ActorSystemData;
@@ -269,9 +272,6 @@ interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
     updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData<ActiveEffectPF2e<this>>[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[]>;
     updateEmbeddedDocuments(embeddedName: "Item", updateData: EmbeddedDocumentUpdateData<ItemPF2e<this>>[], options?: DocumentUpdateContext<this>): Promise<ItemPF2e<this>[]>;
     updateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", updateData: EmbeddedDocumentUpdateData<ActiveEffectPF2e<this> | ItemPF2e<this>>[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
-    getActiveTokens(linked: boolean | undefined, document: true): TokenDocumentPF2e<ScenePF2e>[];
-    getActiveTokens(linked?: undefined, document?: undefined): TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
-    getActiveTokens(linked?: boolean, document?: boolean): TokenDocumentPF2e<ScenePF2e>[] | TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
     /** Added as debounced method */
     checkAreaEffects(): void;
 }

@@ -16,4 +16,4 @@ interface TrickMagicItemDifficultyData {
     nature?: number;
 }
 declare function calculateTrickMagicItemCheckDC(item: ConsumablePF2e, options?: DCOptions): TrickMagicItemDifficultyData;
-export { calculateTrickMagicItemCheckDC, createConsumableFromSpell, isSpellConsumable, SpellConsumableItemType, TrickMagicItemDifficultyData, };
+export { SpellConsumableItemType, TrickMagicItemDifficultyData, calculateTrickMagicItemCheckDC, createConsumableFromSpell, isSpellConsumable, };
