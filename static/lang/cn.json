@@ -268,11 +268,11 @@
       },
       "reminderBreathWeapon": {
         "used": "已使用 ",
-        "name": "吐息武器提醒",
+        "name": "再充能提醒（比如吐息武器）",
         "prefix": "再充能",
         "defaultName": "吐息",
-        "hint": "勾选此项，为吐息武器设置提醒(事实上，对大多数写法规范的要充能的能力有效)。",
-        "source": "PF2e Workbench的吐息武器提醒"
+        "hint": "勾选此项，为再充能武器设置提醒(比如吐息武器)。",
+        "source": "PF2e Workbench的再充能提醒"
       },
       "autoRollDamageAllow": {
         "all": "所有",
@@ -605,7 +605,23 @@
         "yesForNpcs": "是的，仅NPC",
         "hint": "设置是否要在受到巨创（Massive Damage）时自动杀死角色。",
         "no": "否",
-        "name": "受到巨创时自动杀死角色。"
+        "name": "……但受到巨创时自动杀死角色。"
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "yes": "是的，所有",
+        "yesForCharacters": "是的，所有玩家角色+魔宠",
+        "yesForNpcs": "是的，所有NPC",
+        "hint": "设置是否在受到具有死亡特征的伤害时自动杀死目标。",
+        "name": "……但自动在受到死亡特征效果的伤害时杀死目标。",
+        "no": "否"
+      },
+      "autoGainDyingIgnoresTargeting": {
+        "hint": "启用以上设置，不管目标是否为选定指示物。（大部分时候有效，除非使用了目标/自动化）",
+        "name": "……不论伤害的目标是否为选定指示物。"
+      },
+      "reminderBreathWeaponHidden": {
+        "hint": "勾选此项，对玩家隐藏提醒器。",
+        "name": "……对玩家隐藏图标。"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
