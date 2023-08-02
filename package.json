@@ -50,7 +50,7 @@
     "foundry-types": "file:types/types/foundry",
     "fs-extra": "^11.1.1",
     "gsap": "^3.12.2",
-    "handlebars": "4.7.7",
+    "handlebars": "4.7.8",
     "jquery": "^3.7.0",
     "jsdom": "^22.1.0",
     "peggy": "^3.0.2",
