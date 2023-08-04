@@ -36,8 +36,6 @@ declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureS
     protected _onDrop(event: ElementDragEvent): Promise<boolean | void>;
     /** Handle a drop event for an existing Owned Item to sort that item */
     protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e<TActor>[]>;
-    /** Get the font-awesome icon used to display hero points */
-    private getHeroPointsIcon;
     /** Overriden to open sub-tabs if requested */
     protected openTab(name: string): void;
 }

@@ -76,7 +76,6 @@ declare class IntermediateDie extends RollTerm<IntermediateDieData> {
     get expression(): string;
     get total(): number | undefined;
     get dice(): [Evaluated<Die>] | never[];
-    /** `MathTerm` incorrectly reports as being deterministic, so consider them to always not be so */
     get isDeterministic(): boolean;
     get minimumValue(): number;
     /** Not able to get an expected value from a Math term */

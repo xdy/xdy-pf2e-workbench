@@ -8,7 +8,6 @@ import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { Bulk } from "@item/physical/index.ts";
 import { ValueAndMax, ZeroToFour } from "@module/data.ts";
-import { SheetOptions } from "@module/sheet/helpers.ts";
 import { PartyPF2e } from "./document.ts";
 interface PartySheetRenderOptions extends ActorSheetRenderOptionsPF2e {
     actors?: boolean;
@@ -24,6 +23,8 @@ declare class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     activateListeners($html: JQuery<HTMLElement>): void;
     /** Overriden to prevent inclusion of campaign-only item types. Those should get added to their own sheet */
     protected _onDropItemCreate(itemData: ItemSourcePF2e | ItemSourcePF2e[]): Promise<Item<PartyPF2e>[]>;
+    /** Override to not auto-disable fields on a thing meant to be used by players */
+    protected _disableFields(_form: HTMLElement): void;
     render(force?: boolean, options?: PartySheetRenderOptions): Promise<this>;
     protected _renderInner(data: Record<string, unknown>, options: RenderOptions): Promise<JQuery<HTMLElement>>;
     protected _onDropActor(event: ElementDragEvent, data: DropCanvasData<"Actor", PartyPF2e>): Promise<false | void>;
@@ -42,7 +43,6 @@ interface PartySheetData extends ActorSheetDataPF2e<PartyPF2e> {
         speed: number;
         activities: number;
     };
-    explorationMembers: MemberExploration[];
     /** Unsupported items on the sheet, may occur due to disabled campaign data */
     orphaned: ItemPF2e[];
 }
@@ -57,6 +57,12 @@ interface MemberBreakdown {
     heroPoints: ValueAndMax | null;
     hasBulk: boolean;
     bestSkills: SkillData[];
+    /** If the actor is owned by the current user */
+    owner: boolean;
+    /** If the actor has observer or greater permission */
+    observer: boolean;
+    /** If the actor has limited or greater permission */
+    limited: boolean;
     speeds: {
         label: string;
         value: number;
@@ -66,22 +72,14 @@ interface MemberBreakdown {
         labelFull: string;
         acuity?: string;
     }[];
+    hp: {
+        showValue: boolean;
+        temp: number;
+        value: number;
+        max: number;
+    };
     /** If true, the current user is restricted from seeing meta details */
     restricted: boolean;
-}
-interface MemberExploration {
-    actor: ActorPF2e;
-    owner: boolean;
-    activities: {
-        img: string;
-        id: string;
-        name: string;
-        traits: SheetOptions;
-    }[];
-    choices: {
-        id: string;
-        name: string;
-    }[];
 }
 interface LanguageSheetData {
     slug: string;

@@ -19,8 +19,6 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
     static getTrackedAttributes(data?: Record<string, unknown>, _path?: string[]): TrackedAttributesDescription;
     /** This should be in Foundry core, but ... */
     get scene(): this["parent"];
-    /** Workaround for https://github.com/foundryvtt/foundryvtt/issues/9467 */
-    protected _initializeSource(data: Record<string, unknown>, options?: DocumentConstructionContext<TParent>): this["_source"];
     protected _initialize(options?: Record<string, unknown>): void;
     /** Is this token emitting light with a negative value */
     get emitsDarkness(): boolean;

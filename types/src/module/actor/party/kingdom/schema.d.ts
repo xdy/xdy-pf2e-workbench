@@ -1,6 +1,7 @@
 import { ZeroToFour } from "@module/data.ts";
-import { ArrayField, StringField } from "types/foundry/common/data/fields.js";
+import type { ArrayField, StringField } from "types/foundry/common/data/fields.js";
 import { KingdomAbility } from "./types.ts";
+import { RawModifier } from "@actor/modifiers.ts";
 declare const KINGDOM_SCHEMA: {
     type: StringField<"kingmaker", "kingmaker", true, false, boolean>;
     name: StringField<string, string, true, false, boolean>;
@@ -119,43 +120,6 @@ declare const KINGDOM_SCHEMA: {
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-    }>, true, false, true>>>, true, false, true>;
-    leadership: import("types/foundry/common/data/fields.js").SchemaField<Record<"general" | "ruler" | "counselor" | "emissary" | "magister" | "treasurer" | "viceroy" | "warden", import("types/foundry/common/data/fields.js").SchemaField<{
-        uuid: StringField<string, string, false, true, boolean>;
-        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
-        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
-    }, SourceFromSchema<{
-        uuid: StringField<string, string, false, true, boolean>;
-        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
-        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
-    }>, ModelPropsFromSchema<{
-        uuid: StringField<string, string, false, true, boolean>;
-        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
-        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
-    }>, true, false, true>>, SourceFromSchema<Record<"general" | "ruler" | "counselor" | "emissary" | "magister" | "treasurer" | "viceroy" | "warden", import("types/foundry/common/data/fields.js").SchemaField<{
-        uuid: StringField<string, string, false, true, boolean>;
-        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
-        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
-    }, SourceFromSchema<{
-        uuid: StringField<string, string, false, true, boolean>;
-        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
-        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
-    }>, ModelPropsFromSchema<{
-        uuid: StringField<string, string, false, true, boolean>;
-        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
-        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
-    }>, true, false, true>>>, ModelPropsFromSchema<Record<"general" | "ruler" | "counselor" | "emissary" | "magister" | "treasurer" | "viceroy" | "warden", import("types/foundry/common/data/fields.js").SchemaField<{
-        uuid: StringField<string, string, false, true, boolean>;
-        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
-        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
-    }, SourceFromSchema<{
-        uuid: StringField<string, string, false, true, boolean>;
-        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
-        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
-    }>, ModelPropsFromSchema<{
-        uuid: StringField<string, string, false, true, boolean>;
-        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
-        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
     }>, true, false, true>>>, true, false, true>;
     build: import("types/foundry/common/data/fields.js").SchemaField<{
         /** Determines if the ability scores are manually set or automatically determined. */
@@ -410,6 +374,44 @@ declare const KINGDOM_SCHEMA: {
         /** Boost selections made by the user, both during the build process and levelling */
         boosts: import("types/foundry/common/data/fields.js").SchemaField<Record<"1" | "5" | "10" | "15" | "20" | "charter" | "heartland" | "government", ArrayField<StringField<"culture" | "economy" | "loyalty" | "stability", "culture" | "economy" | "loyalty" | "stability", true, false, boolean>, ("culture" | "economy" | "loyalty" | "stability")[], ("culture" | "economy" | "loyalty" | "stability")[], false, false, true>>, SourceFromSchema<Record<"1" | "5" | "10" | "15" | "20" | "charter" | "heartland" | "government", ArrayField<StringField<"culture" | "economy" | "loyalty" | "stability", "culture" | "economy" | "loyalty" | "stability", true, false, boolean>, ("culture" | "economy" | "loyalty" | "stability")[], ("culture" | "economy" | "loyalty" | "stability")[], false, false, true>>>, ModelPropsFromSchema<Record<"1" | "5" | "10" | "15" | "20" | "charter" | "heartland" | "government", ArrayField<StringField<"culture" | "economy" | "loyalty" | "stability", "culture" | "economy" | "loyalty" | "stability", true, false, boolean>, ("culture" | "economy" | "loyalty" | "stability")[], ("culture" | "economy" | "loyalty" | "stability")[], false, false, true>>>, true, false, true>;
     }>, true, false, true>;
+    customModifiers: import("types/foundry/common/data/fields.js").ObjectField<Record<string, RawModifier[]>, Record<string, RawModifier[]>, true, false, true>;
+    leadership: import("types/foundry/common/data/fields.js").SchemaField<Record<"general" | "ruler" | "counselor" | "emissary" | "magister" | "treasurer" | "viceroy" | "warden", import("types/foundry/common/data/fields.js").SchemaField<{
+        uuid: StringField<string, string, false, true, boolean>;
+        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
+    }, SourceFromSchema<{
+        uuid: StringField<string, string, false, true, boolean>;
+        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
+    }>, ModelPropsFromSchema<{
+        uuid: StringField<string, string, false, true, boolean>;
+        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
+    }>, true, false, true>>, SourceFromSchema<Record<"general" | "ruler" | "counselor" | "emissary" | "magister" | "treasurer" | "viceroy" | "warden", import("types/foundry/common/data/fields.js").SchemaField<{
+        uuid: StringField<string, string, false, true, boolean>;
+        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
+    }, SourceFromSchema<{
+        uuid: StringField<string, string, false, true, boolean>;
+        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
+    }>, ModelPropsFromSchema<{
+        uuid: StringField<string, string, false, true, boolean>;
+        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
+    }>, true, false, true>>>, ModelPropsFromSchema<Record<"general" | "ruler" | "counselor" | "emissary" | "magister" | "treasurer" | "viceroy" | "warden", import("types/foundry/common/data/fields.js").SchemaField<{
+        uuid: StringField<string, string, false, true, boolean>;
+        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
+    }, SourceFromSchema<{
+        uuid: StringField<string, string, false, true, boolean>;
+        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
+    }>, ModelPropsFromSchema<{
+        uuid: StringField<string, string, false, true, boolean>;
+        vacant: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        invested: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, false, false, true>;
+    }>, true, false, true>>>, true, false, true>;
     resources: import("types/foundry/common/data/fields.js").SchemaField<{
         dice: import("types/foundry/common/data/fields.js").SchemaField<{
             number: import("types/foundry/common/data/fields.js").NumberField<number, number, false, true, true>;

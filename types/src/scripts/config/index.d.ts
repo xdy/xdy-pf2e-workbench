@@ -2036,6 +2036,7 @@ export declare const PF2ECONFIG: {
         skulk: string;
         soulbound: string;
         spirit: string;
+        sporeborn: string;
         spriggan: string;
         stheno: string;
         summoned: string;
@@ -2487,6 +2488,7 @@ export declare const PF2ECONFIG: {
         skulk: string;
         soulbound: string;
         spirit: string;
+        sporeborn: string;
         spriggan: string;
         stheno: string;
         summoned: string;
@@ -4013,7 +4015,6 @@ export declare const PF2ECONFIG: {
         halfling: string;
         jotun: string;
         orcish: string;
-        sylvan: string;
         undercommon: string;
         ysoki: string;
         abyssal: string;
@@ -4026,9 +4027,7 @@ export declare const PF2ECONFIG: {
         "ancient-osiriani": string;
         anugobu: string;
         arcadian: string;
-        aquan: string;
         arboreal: string;
-        auran: string;
         boggard: string;
         calda: string;
         caligni: string;
@@ -4052,7 +4051,6 @@ export declare const PF2ECONFIG: {
         hallit: string;
         hwan: string;
         iblydan: string;
-        ignan: string;
         ikeshti: string;
         immolis: string;
         infernal: string;
@@ -4095,12 +4093,11 @@ export declare const PF2ECONFIG: {
         skald: string;
         sphinx: string;
         strix: string;
-        susurran: string;
+        sussuran: string;
         taldane: string;
         talican: string;
         tekritanin: string;
         tengu: string;
-        terran: string;
         thalassic: string;
         thassilonian: string;
         tien: string;
@@ -5115,6 +5112,7 @@ export declare const PF2ECONFIG: {
                 skulk: string;
                 soulbound: string;
                 spirit: string;
+                sporeborn: string;
                 spriggan: string;
                 stheno: string;
                 summoned: string;

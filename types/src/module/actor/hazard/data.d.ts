@@ -46,6 +46,7 @@ interface HazardTraitsSource extends ActorTraitsSource<HazardTrait> {
         value: Size;
     };
     rarity: Rarity;
+    languages?: never;
 }
 interface HazardTraitsData extends HazardTraitsSource {
     size: ActorSizePF2e;

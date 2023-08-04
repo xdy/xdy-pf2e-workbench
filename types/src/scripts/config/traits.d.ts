@@ -251,6 +251,7 @@ declare const creatureTraits: {
     skulk: string;
     soulbound: string;
     spirit: string;
+    sporeborn: string;
     spriggan: string;
     stheno: string;
     summoned: string;
