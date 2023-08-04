@@ -1,3 +1,10 @@
+# [5.15.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.14.0...v5.15.0) (2023-08-04)
+
+
+### Features
+
+* Add option to send notification to all players when heropoints are handed out. ([1bc9fd0](https://github.com/xdy/xdy-pf2e-workbench/commit/1bc9fd09070ca277ef53e6fe8c0d9e977c2859f2)), closes [#923](https://github.com/xdy/xdy-pf2e-workbench/issues/923)
+
 # [5.14.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.13.1...v5.14.0) (2023-08-01)
 
 
