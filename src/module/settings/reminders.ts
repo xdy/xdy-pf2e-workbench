@@ -107,6 +107,16 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            heropointHandlerNotification: {
+                name: `${MODULENAME}.SETTINGS.heropointHandlerNotification.name`,
+                hint: `${MODULENAME}.SETTINGS.heropointHandlerNotification.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
         };
     }
 }

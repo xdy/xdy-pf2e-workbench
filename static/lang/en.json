@@ -497,15 +497,19 @@
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
         "hint": "Set the default (and maximum) for how many minutes till the next time the hero point handler opens.",
-        "name": "Default minutes between Hero Point Handler opening."
+        "name": "... with this many minutes until the Hero Point Handler dialog opens."
       },
       "heroPointHandlerKey": {
         "hint": "Keybind to open the Hero Point handler dialog that enables resetting and adding Hero Points with an hourly reminder.",
         "name": "Keybind to open the Hero Point handler dialog."
       },
+      "heropointHandlerNotification": {
+        "name": "... and post notification when a Hero Point is handed out.",
+        "hint": "Check to automatically post a notification when the Hero Point handler has handed out a Hero Point."
+      },
       "heroPointHandlerStartTimerOnReady": {
         "hint": "Check to automatically start the Hero Point handler timer when the game is ready.",
-        "name": "Automatically start Hero Point Handler."
+        "name": "... and automatically start Hero Point Handler."
       },
       "houseRulerI18n": {
         "name": "House Rules",

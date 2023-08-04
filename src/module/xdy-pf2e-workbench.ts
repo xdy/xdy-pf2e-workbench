@@ -92,7 +92,7 @@ function handle(hookName, shouldBeOn, hookFunction, once = false) {
 
 export function updateHooks(cleanSlate = false) {
     if (phase > Phase.SETUP && game.user.isGM) {
-        game.socket.emit("module.xdy-pf2e-workbench", { operation: "updateHooks" });
+        game.socket.emit("module." + MODULENAME, { operation: "updateHooks" });
     }
     if (cleanSlate) {
         activeHooks.clear();
@@ -343,12 +343,21 @@ Hooks.once("ready", () => {
         loadSkillActions().then();
     }
 
-    game.socket.on("module.xdy-pf2e-workbench", (operation) => {
-        switch (operation) {
+    game.socket.on("module." + MODULENAME, (operation) => {
+        switch (operation?.operation) {
             case "updateHooks":
                 if (!game.user.isGM) {
                     updateHooks();
                 }
+                break;
+            case "notification":
+                if (!game.user.isGM) {
+                    const type = operation.args[0];
+                    const message = operation.args[1];
+                    ui.notifications.notify(message, type);
+                }
+                break;
+            default:
                 break;
         }
     });

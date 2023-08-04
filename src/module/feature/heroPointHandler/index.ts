@@ -5,6 +5,7 @@
 
 import { ActorPF2e } from "@actor";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { pushNotification } from "../../utils.js";
 
 export enum HPHState {
     Start,
@@ -64,7 +65,7 @@ export function createRemainingTimeMessage(remainingMinutes: number) {
             flavor: message,
             whisper: [game.user?.id as string],
         },
-        {}
+        {},
     );
 }
 
@@ -75,7 +76,7 @@ export async function callHeroPointHandler() {
 export async function heroPointHandler(state: HPHState) {
     if (
         Object.values(ui.windows).find((w: Application) =>
-            w.title.includes(`${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.title`)}`)
+            w.title.includes(`${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.title`)}`),
         )
     ) {
         return;
@@ -85,7 +86,7 @@ export async function heroPointHandler(state: HPHState) {
     switch (state) {
         case HPHState.Start:
             remainingMinutes = Number.parseInt(
-                String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
+                String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")),
             );
             break;
         case HPHState.Check:
@@ -93,7 +94,7 @@ export async function heroPointHandler(state: HPHState) {
             break;
         case HPHState.Timeout:
             remainingMinutes = Number.parseInt(
-                String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
+                String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")),
             );
             break;
     }
@@ -166,7 +167,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
                         ?.filter((user) => user.active)
                         .map((user) => user.character)
                         .filter((actor) => !!actor) || []
-                ).includes(x)
+                ).includes(x),
             ) || [];
 
     let checked: number;
@@ -187,7 +188,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 <div>${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.instructions`)}</div>
 <hr>
   <label class="col-md-4 control-label" for="radios">${game.i18n.localize(
-      `${MODULENAME}.SETTINGS.heroPointHandler.doWhat`
+      `${MODULENAME}.SETTINGS.heroPointHandler.doWhat`,
   )}</label>
   <div class="col-md-4">
       <div class="radio">
@@ -213,7 +214,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="heropoints">${game.i18n.localize(
-      `${MODULENAME}.SETTINGS.heroPointHandler.thisMany`
+      `${MODULENAME}.SETTINGS.heroPointHandler.thisMany`,
   )}</label>
   <div class="col-md-4">
     <input id="heropoints" name="heropoints" type="number" value="1" class="form-control input-md">
@@ -223,7 +224,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 <hr>
 <div class="form-group">
   <label class="col-md-4 control-label" for="characters">${game.i18n.localize(
-      `${MODULENAME}.SETTINGS.heroPointHandler.addOne`
+      `${MODULENAME}.SETTINGS.heroPointHandler.addOne`,
   )}</label>
   <div class="col-md-4">`;
 
@@ -232,8 +233,8 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     <div class="radio">
         <label for="characters-${i}">
           <input type="radio" name="characters" id="characters-${i}" value="${loggedIn[i]?.id}" ${
-            checked === i ? 'checked="checked"' : ""
-        }>
+              checked === i ? 'checked="checked"' : ""
+          }>
           ${loggedIn[i]?.name}
         </label>
     </div>`;
@@ -255,7 +256,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     const value = $(this).val();
     if ((value !== '') && (value.indexOf('.') === -1)) {
         $(this).val(Math.max(Math.min(value, ${Number.parseInt(
-            String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))
+            String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")),
         )}), 0));
     }
 });</script>
@@ -285,7 +286,7 @@ export function calcRemainingMinutes(useDefault: boolean): number {
                 ? Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
                 : 0),
         0,
-        Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
+        Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))),
     );
     const passedMillis = game.time.serverTime - (savedTime ?? game.time.serverTime);
     return remainingMinutes - Math.floor(passedMillis / ONE_MINUTE_IN_MS);
@@ -328,7 +329,7 @@ export async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
         const system = actor.system;
         const value = Math.min(
             system.resources.heroPoints.value + heropoints,
-            Number(game.settings.get(MODULENAME, "maxHeroPoints"))
+            Number(game.settings.get(MODULENAME, "maxHeroPoints")),
         );
         await actor.update({
             "system.resources.heroPoints.value": value,
@@ -336,19 +337,24 @@ export async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
     }
 }
 
-function addOneToSelectedCharacter(actorId: string): void {
+function addOneToSelectedCharacterIfAny(actorId: string): void {
     addHeroPoints(1, actorId).then(() => {
         const name = game?.actors?.find((actor) => actor.id === actorId)?.name;
+        let message: any;
         if (actorId === "ALL") {
-            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
+            message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
                 heroPoints: 1,
             });
-            ChatMessage.create({ flavor: message }, {}).then();
         } else if (name) {
-            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedFor`, {
+            message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedFor`, {
                 name: name,
             });
+        }
+        if (message) {
             ChatMessage.create({ flavor: message }, {}).then();
+            if (game.settings.get(MODULENAME, "heropointHandlerNotification")) {
+                pushNotification(message);
+            }
         }
     });
 }
@@ -361,23 +367,23 @@ function handleDialogResponse(html: any) {
 
     if (sessionStart === "RESET") {
         resetHeroPoints(heroPoints).then(() => {
-            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.resetToForAll`, {
+            const resetMessage = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.resetToForAll`, {
                 heroPoints: heroPoints,
             });
-            ChatMessage.create({ flavor: message }, {}).then();
-            addOneToSelectedCharacter(actorId);
+            ChatMessage.create({ flavor: resetMessage }, {}).then();
+            addOneToSelectedCharacterIfAny(actorId);
         });
     } else if (sessionStart === "ADD") {
         addHeroPoints(heroPoints).then(() => {
-            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
+            const addMessage = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
                 heroPoints: heroPoints,
             });
 
-            ChatMessage.create({ flavor: message }, {}).then();
-            addOneToSelectedCharacter(actorId);
+            ChatMessage.create({ flavor: addMessage }, {}).then();
+            addOneToSelectedCharacterIfAny(actorId);
         });
     } else if (sessionStart === "IGNORE") {
-        addOneToSelectedCharacter(actorId);
+        addOneToSelectedCharacterIfAny(actorId);
     }
 
     return remainingMinutes;

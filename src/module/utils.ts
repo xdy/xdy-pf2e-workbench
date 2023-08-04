@@ -134,3 +134,7 @@ export function shouldIHandleThis(actor) {
             : assignedUser ?? game.users.activeGM ?? anyoneWithPermission ?? null;
     return game.user.id === updater?.id;
 }
+
+export function pushNotification(message: any, type: string = "info") {
+    game.socket.emit("module." + MODULENAME, { operation: "notification", args: [type, message] });
+}
