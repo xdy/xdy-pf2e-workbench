@@ -201,7 +201,7 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
         }
 
         const buttons = $(data.content).find("button");
-        const saveButtons = buttons.filter((i) => buttons[i].getAttribute("data-action") === "save");
+        const saveButtons = buttons.filter((i) => buttons[i].getAttribute("data-action") === "spell-save");
         if (saveButtons.length === 1) {
             const dataSave = saveButtons.attr("data-save") ?? "";
             const dataDC = saveButtons.attr("data-dc") ?? "";
