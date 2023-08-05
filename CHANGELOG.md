@@ -1,3 +1,10 @@
+## [5.15.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.15.0...v5.15.1) (2023-08-05)
+
+
+### Bug Fixes
+
+* Casting spells with saves privately can now include a save button in the public message again. ([4e4506c](https://github.com/xdy/xdy-pf2e-workbench/commit/4e4506cb53d523f9b8874d16875f07aa7a9632c0))
+
 # [5.15.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.14.0...v5.15.0) (2023-08-04)
 
 
