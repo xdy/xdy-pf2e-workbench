@@ -385,21 +385,25 @@ Hooks.once("ready", () => {
     const legacyVariantRuleDualClass = game.settings.get(MODULENAME, "legacyVariantRuleDualClass");
     if (legacyVariantRuleDualClass || legacyVariantRuleAncestryParagon) {
         if (legacyVariantRuleAncestryParagon) {
-            campaignFeatSections.push({
-                id: "xdy_ancestryparagon",
-                label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.title`),
-                supported: ["ancestry"],
-                slots: [1, 3, 7, 11, 15, 19],
-            });
+            if (!campaignFeatSections.find((section) => section.id === "xdy_ancestryparagon")) {
+                campaignFeatSections.push({
+                    id: "xdy_ancestryparagon",
+                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.title`),
+                    supported: ["ancestry"],
+                    slots: [1, 3, 7, 11, 15, 19],
+                });
+            }
         }
 
         if (legacyVariantRuleDualClass) {
-            campaignFeatSections.push({
-                id: "xdy_dualclass",
-                label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleDualClass.title`),
-                supported: ["class"],
-                slots: [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
-            });
+            if (!campaignFeatSections.find((section) => section.id === "xdy_dualclass")) {
+                campaignFeatSections.push({
+                    id: "xdy_dualclass",
+                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleDualClass.title`),
+                    supported: ["class"],
+                    slots: [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+                });
+            }
         }
 
         game.settings.set("pf2e", "campaignFeatSections", campaignFeatSections);
