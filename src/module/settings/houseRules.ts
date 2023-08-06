@@ -9,7 +9,7 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
             houseRulerI18n: {
                 name: `${MODULENAME}.SETTINGS.houseRulerI18n.name`,
                 hint: `${MODULENAME}.SETTINGS.houseRulerI18n.hint`,
-                scope: "client",
+                scope: "world",
                 config: true,
                 default: false,
                 type: Boolean,
@@ -21,6 +21,22 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: "",
                 type: String,
+            },
+            legacyVariantRuleAncestryParagon: {
+                name: `${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.name`,
+                hint: `${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.hint`,
+                scope: "client",
+                config: true,
+                default: false,
+                type: Boolean,
+            },
+            legacyVariantRuleDualClass: {
+                name: `${MODULENAME}.SETTINGS.legacyVariantRuleDualClass.name`,
+                hint: `${MODULENAME}.SETTINGS.legacyVariantRuleDualClass.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
             },
         };
     }

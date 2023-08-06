@@ -528,6 +528,16 @@
         "label": "(Experimental) Manage House Rules Settings",
         "name": "(Experimental) House Rules Settings"
       },
+      "legacyVariantRuleAncestryParagon": {
+        "hint": "(Not needed as long as the system retains support for the premaster Ancestry Paragon Variant Rule.) This adds a campaign feats section for Ancestry Paragon.",
+        "name": "Adds Ancestry Paragon feat slots. Requires refresh (f5) after changing.",
+        "title": "Ancestry Paragon Feats"
+      },
+      "legacyVariantRuleDualClass": {
+        "hint": "(Not needed as long as the system retains support for the premaster Dual Class Variant Rule.) This adds a campaign feats section for Dual Class, you also need to use the Dual Class macro to create the class for the character to use.",
+        "name": "Adds Dual Class feat slots. Requires refresh (f5) after changing.",
+        "title": "Dual Class Feats"
+      },
       "logLevel": {
         "name": "Log level",
         "hint": "Log level",

@@ -53,7 +53,6 @@ import { noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.js";
 import { registerWorkbenchSettings } from "./settings/index.js";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu.js";
 import { toggleMenuSettings } from "./feature/settingsHandler/index.js";
-import { patchI8nTexts } from "./feature/houserules/index.js";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 export const NPC_TYPE = "npc";
@@ -381,9 +380,31 @@ Hooks.once("ready", () => {
         ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.dirtySortActions.info`));
     }
 
-    if (game.settings.get(MODULENAME, "houseRulerI18n")) {
-        patchI8nTexts();
+    const campaignFeatSections = game.settings.get("pf2e", "campaignFeatSections");
+    const legacyVariantRuleAncestryParagon = game.settings.get(MODULENAME, "legacyVariantRuleAncestryParagon");
+    const legacyVariantRuleDualClass = game.settings.get(MODULENAME, "legacyVariantRuleDualClass");
+    if (legacyVariantRuleDualClass || legacyVariantRuleAncestryParagon) {
+        if (legacyVariantRuleAncestryParagon) {
+            campaignFeatSections.push({
+                id: "xdy_ancestryparagon",
+                label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.title`),
+                supported: ["ancestry"],
+                slots: [1, 3, 7, 11, 15, 19],
+            });
+        }
+
+        if (legacyVariantRuleDualClass) {
+            campaignFeatSections.push({
+                id: "xdy_dualclass",
+                label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleDualClass.title`),
+                supported: ["class"],
+                slots: [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+            });
+        }
+
+        game.settings.set("pf2e", "campaignFeatSections", campaignFeatSections);
     }
+
     phase = Phase.ACTIVE;
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
