@@ -380,10 +380,10 @@ Hooks.once("ready", () => {
         ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.dirtySortActions.info`));
     }
 
-    const campaignFeatSections = game.settings.get("pf2e", "campaignFeatSections");
     const legacyVariantRuleAncestryParagon = game.settings.get(MODULENAME, "legacyVariantRuleAncestryParagon");
     const legacyVariantRuleDualClass = game.settings.get(MODULENAME, "legacyVariantRuleDualClass");
     if (legacyVariantRuleDualClass || legacyVariantRuleAncestryParagon) {
+        const campaignFeatSections = game.settings.get("pf2e", "campaignFeatSections");
         if (legacyVariantRuleAncestryParagon) {
             if (!campaignFeatSections.find((section) => section.id === "xdy_ancestryparagon")) {
                 campaignFeatSections.push({
