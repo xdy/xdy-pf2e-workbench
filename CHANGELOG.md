@@ -1,3 +1,10 @@
+## [5.16.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.16.0...v5.16.1) (2023-08-06)
+
+
+### Bug Fixes
+
+* Don't create several campaign feat sections with the same name... ([938bcd7](https://github.com/xdy/xdy-pf2e-workbench/commit/938bcd7e20090b516a0fa85a926dc460872f79ec))
+
 # [5.16.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.15.1...v5.16.0) (2023-08-06)
 
 
