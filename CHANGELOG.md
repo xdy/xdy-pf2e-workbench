@@ -1,3 +1,10 @@
+# [5.16.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.15.1...v5.16.0) (2023-08-06)
+
+
+### Features
+
+* Under the assumption that the system will eventually remove support for the non-remaster (premaster?) Ancestry Paragon and Dual Class variant rules, support for these future legacy variant rules have been pre-added to the House Rules section. Do not enable both this and the system variant rules. Thanks @Supe! ([bca2cc0](https://github.com/xdy/xdy-pf2e-workbench/commit/bca2cc0c5626183b62323a1f8213adb5893a9aed))
+
 ## [5.15.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.15.0...v5.15.1) (2023-08-05)
 
 
