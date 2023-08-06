@@ -1,4 +1,4 @@
-import { isFirstGM, shouldIHandleThis } from "../../utils.js";
+import { isFirstGM, myRandomId, shouldIHandleThis } from "../../utils.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { TokenDocumentPF2e } from "@module/scene/index.js";
 import { CombatantPF2e } from "@module/encounter/index.js";
@@ -42,8 +42,17 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                         source: {
                             value: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`),
                         },
-                        slug: `xdy-breath-weapon-reminder-${<string>message?.flags?.pf2e.origin?.uuid}`,
+                        rules: [],
+                        slug: `xdy-breath-weapon-reminder-${myRandomId()}`,
                         unidentified: game.settings.get(MODULENAME, "reminderBreathWeaponHidden"),
+                        traits: {
+                            value: [],
+                        },
+                        level: {
+                            value: actor.level ?? 0,
+                        },
+                        badge: null,
+                        context: null,
                     },
                 };
 
