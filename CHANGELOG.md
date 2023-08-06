@@ -1,3 +1,10 @@
+## [5.16.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.16.1...v5.16.2) (2023-08-06)
+
+
+### Bug Fixes
+
+* The breath weapon reminder effect caused errors when attacking, changed so it no longer does that... ([dc66a07](https://github.com/xdy/xdy-pf2e-workbench/commit/dc66a07434da77b4e0f40af4e4e719555637576e))
+
 ## [5.16.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.16.0...v5.16.1) (2023-08-06)
 
 
