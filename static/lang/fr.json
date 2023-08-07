@@ -273,7 +273,7 @@
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
         "hint": "Fixe par défaut (et le maximum) pour savoir combien il reste de minutes à courir avant l'ouverture du gestionnaire de point d'héroïsme.",
-        "name": "Minutes par défaut avant l'ouverture du Gestionnaire de Point d'Héroïsme."
+        "name": "... avec ce nombre de minutes avant l'ouverture de la fenêtre du Gestionnaire de Point d'Héroïsme."
       },
       "heroPointHandlerKey": {
         "hint": "Touche liée pour ouvrir le dialogue du gestionnaire de point d'héroïsme qui permet de remettre à zéro et d'ajouter des points d'héroïsme avec un rappel automatique à chaque heure.",
@@ -281,7 +281,7 @@
       },
       "heroPointHandlerStartTimerOnReady": {
         "hint": "Cliquez pour démarrer automatiquement le Gestionnaire de Point d'Héroïsme lorsque la partie est prête.",
-        "name": "Démarrer automatiquement le Gestionnaire de Point d'Héroïsme."
+        "name": "... et démarre automatiquement le Gestionnaire de Point d'héroïsme."
       },
       "maxHeroPoints": {
         "hint": "Réglage du monde pour le nombre maximum de Points d'héroïsme pour un personnage.",
@@ -621,6 +621,20 @@
       "reminderBreathWeaponHidden": {
         "name": "... mais cache l'icône aux joueurs.",
         "hint": "Cochez cette case pour cacher les rappels aux joueurs."
+      },
+      "heropointHandlerNotification": {
+        "name": "... et afficher une notification lorsqu'un point d'héroïsme est distribué.",
+        "hint": "Cochez pour afficher automatiquement une notification lorsque le gestionnaire de points d'héroïsme a distribué un point de héros."
+      },
+      "legacyVariantRuleAncestryParagon": {
+        "name": "Ajoute des emplacements de dons Parangon ancestral. Nécessite un rafraîchissement (f5) après modification.",
+        "title": "Dons de Parangon ancestral",
+        "hint": "(Inutile tant que le système prend en charge la variante de règles Parangon ancestral du GMG avant le remaster). Ceci ajoute une section dons de campagne pour Parangon ancestral."
+      },
+      "legacyVariantRuleDualClass": {
+        "name": "Ajoute des emplacements pour les dons de Double classe. Nécessite une actualisation (f5) après modification.",
+        "title": "Dons de Double classe",
+        "hint": "(Pas nécessaire tant que le système conserve le support de la variante de règle de double classe du GMG avant remaster). Ceci ajoute une section de dons de campagne pour la Double classe. Vous devez également utiliser la macro de Double Classe pour créer la classe à utiliser par le personnage."
       }
     },
     "effects": {
