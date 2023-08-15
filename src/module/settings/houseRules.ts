@@ -38,6 +38,14 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
             },
+            keeleysHeroPointRule: {
+                name: `${MODULENAME}.SETTINGS.keeleysHeroPointRule.name`,
+                hint: `${MODULENAME}.SETTINGS.keeleysHeroPointRule.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+            },
         };
     }
 }

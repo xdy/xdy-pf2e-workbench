@@ -49,6 +49,7 @@ import { maxHeroPoints } from "./feature/heroPointHandler/index.js";
 import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import { CreaturePF2e } from "@actor/creature/document.js";
+import { CheckRoll } from "@module/system/check/roll.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let result = true;
@@ -222,6 +223,36 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
         isActuallyDamageRoll(message)
     ) {
         castPrivateSpellHideName(message, html);
+    }
+
+    // Alert everyone that Keeley's hero point rule was invoked
+    const lastRoll = message.rolls.at(-1);
+    if (lastRoll?.options.keeleyAdd10) {
+        const element = html[0];
+
+        const tags = Array.from(element.querySelectorAll(".flavor-text > .tags")).at(-1);
+        const formulaElem = element.querySelector<HTMLElement>(".pf2e-reroll-discard .dice-formula");
+        const newTotalElem = element.querySelector<HTMLElement>(".pf2e-reroll-second .dice-total");
+        if (tags && formulaElem && newTotalElem) {
+            // Add a tag to the list of modifiers
+            const newTag = document.createElement("span");
+            newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
+            newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.keeleysHeroPointRule.bonusTag`);
+            tags.append(newTag);
+
+            // Show +10 in the formula
+            const span = document.createElement("span");
+            span.className = "keeley-add-10";
+            span.innerText = " + 10";
+            formulaElem?.append(span);
+
+            // Make the total purple
+            newTotalElem.classList.add("keeley-add-10");
+            newTotalElem.dataset.tooltip = game.i18n.format(
+                `${MODULENAME}.SETTINGS.keeleysHeroPointRule.messageTooltip`,
+                { result: Number(lastRoll.dice.find((d) => d.results.at(0)?.active)?.total) },
+            );
+        }
     }
 }
 
@@ -425,6 +456,27 @@ export async function createTokenHook(token: TokenDocumentPF2e, ..._args) {
         token.actor.items.size > 0
     ) {
         await mystifyNpcItems(token.actor.items);
+    }
+}
+
+/** Keeley's Hero Point Rule */
+export function pf2eRerollHook(
+    _oldRoll: Rolled<CheckRoll>,
+    newRoll: Rolled<CheckRoll>,
+    heroPoint: boolean,
+    keep: "new" | "higher" | "lower",
+) {
+    if (!heroPoint || keep !== "new") return;
+
+    const die = newRoll.dice.find((d) => d instanceof Die && d.number === 1 && d.faces === 20);
+    const result = die?.results.find((r) => r.active && r.result <= 10);
+    if (die && result) {
+        newRoll.terms.push(
+            OperatorTerm.fromData({ class: "OperatorTerm", operator: "+", evaluated: true }),
+            NumericTerm.fromData({ class: "NumericTerm", number: 10, evaluated: true }),
+        );
+        newRoll._total += 10;
+        newRoll.options.keeleyAdd10 = true;
     }
 }
 

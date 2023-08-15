@@ -39,6 +39,13 @@
     color: #54166e;
 }
 
+/** Keeley's Hero Point Rule */
+.chat-message .tag.keeley-add-10,
+.chat-message .dice-total.keeley-add-10,
+.chat-message .dice-formula > .keeley-add-10 {
+    color: purple;
+}
+
 /* NPC Roller */
 
 .roll-app {

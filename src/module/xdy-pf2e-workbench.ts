@@ -27,6 +27,7 @@ import {
     createTokenHook,
     deleteItemHook,
     pf2eEndTurnHook,
+    pf2eRerollHook,
     pf2eStartTurnHook,
     pf2eSystemReadyHook,
     preCreateChatMessageHook,
@@ -155,6 +156,8 @@ export function updateHooks(cleanSlate = false) {
         gs.get(MODULENAME, "actionsReminderAllow") !== "none" || gs.get(MODULENAME, "autoReduceStunned"),
         pf2eStartTurnHook,
     );
+
+    handle("pf2e.reroll", gs.get(MODULENAME, "keeleysHeroPointRule"), pf2eRerollHook);
 
     handle("renderTokenHUD", gs.get(MODULENAME, "npcMystifier"), renderTokenHUDHook);
 
