@@ -525,8 +525,13 @@
       },
       "houseRulesSettings": {
         "hint": "(Experimental) Enable and configure various house rules",
-        "label": "(Experimental) Manage House Rules Settings",
+        "label": "Manage House Rules Settings",
         "name": "(Experimental) House Rules Settings"
+      },
+      "keeleysHeroPointRule": {
+        "hint": "A house rule favored by a certain Paizo staffer: if the natural result of a hero-point reroll is under 10, a bonus of 10 is applied after the fact.",
+        "name": "Keeley's Hero Point Rule",
+        "bonusTag": "Low Reroll +10"
       },
       "legacyVariantRuleAncestryParagon": {
         "hint": "(Not needed as long as the system retains support for the premaster Ancestry Paragon Variant Rule.) This adds a campaign feats section for Ancestry Paragon.",
