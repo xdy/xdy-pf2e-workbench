@@ -6,6 +6,14 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
+            keeleysHeroPointRule: {
+                name: `${MODULENAME}.SETTINGS.keeleysHeroPointRule.name`,
+                hint: `${MODULENAME}.SETTINGS.keeleysHeroPointRule.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+            },
             houseRulerI18n: {
                 name: `${MODULENAME}.SETTINGS.houseRulerI18n.name`,
                 hint: `${MODULENAME}.SETTINGS.houseRulerI18n.hint`,
@@ -13,14 +21,6 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
                 config: true,
                 default: false,
                 type: Boolean,
-            },
-            housepatcher: {
-                name: `${MODULENAME}.SETTINGS.housepatcher.name`,
-                hint: `${MODULENAME}.SETTINGS.housepatcher.hint`,
-                scope: "world",
-                config: true,
-                default: "",
-                type: String,
             },
             legacyVariantRuleAncestryParagon: {
                 name: `${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.name`,
@@ -38,13 +38,13 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
             },
-            keeleysHeroPointRule: {
-                name: `${MODULENAME}.SETTINGS.keeleysHeroPointRule.name`,
-                hint: `${MODULENAME}.SETTINGS.keeleysHeroPointRule.hint`,
+            housepatcher: {
+                name: `${MODULENAME}.SETTINGS.housepatcher.name`,
+                hint: `${MODULENAME}.SETTINGS.housepatcher.hint`,
                 scope: "world",
                 config: true,
-                default: false,
-                type: Boolean,
+                default: "",
+                type: String,
             },
         };
     }

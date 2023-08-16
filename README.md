@@ -110,6 +110,13 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
     * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
 
+* House Rules
+  * Option to enable Keeley's Hero Point Rule (if reroll die is 10 or less, get a +10 bonus). Courtesy of stwlam
+  * Option to enable my personal house rules (currently adds saves to crit spec for flail and hamer)
+  * Not yet needed option to add Ancestry Paragon feat slots (don't enable until if/when the system removes them due to not being in the remaster rules)
+  * Not yet needed option to add Dual Class feat slots (don't enable until if/when the system removes them due to not being in the remaster rules)
+  * REALLY experimental option to use json to potentially brick your world. (Or, see [docs/housepatcher.md](docs/housepatcher.md) for more details.)
+
 * No section
     * Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells,
       feats, items, actions, etc). Can be configured to default to collapsed or expanded.
