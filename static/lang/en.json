@@ -529,7 +529,7 @@
         "name": "(Experimental) House Rules Settings"
       },
       "keeleysHeroPointRule": {
-        "hint": "A house rule favored by a certain Paizo staffer: if the natural result of a hero-point reroll is under 10, a bonus of 10 is applied after the fact.",
+        "hint": "A house rule favored by a certain Paizo developer: if the natural result of a hero-point reroll is 10 or less, a bonus of 10 is applied after the fact.",
         "name": "Keeley's Hero Point Rule",
         "bonusTag": "Low Reroll +10"
       },
