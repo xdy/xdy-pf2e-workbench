@@ -595,7 +595,7 @@
       },
       "houseRulesSettings": {
         "hint": "(Expérimental) Activer et configurer diverses règles maison",
-        "label": "(Expérimental) Gérer réglages des règles maison",
+        "label": "Paramétrer les règles maison",
         "name": "(Expérimental) Réglages des règles maison"
       },
       "autoKillIfMassiveDamage": {
@@ -635,6 +635,11 @@
         "name": "Ajoute des emplacements pour les dons de Double classe. Nécessite une actualisation (f5) après modification.",
         "title": "Dons de Double classe",
         "hint": "(Pas nécessaire tant que le système conserve le support de la variante de règle de double classe du GMG avant remaster). Ceci ajoute une section de dons de campagne pour la Double classe. Vous devez également utiliser la macro de Double Classe pour créer la classe à utiliser par le personnage."
+      },
+      "keeleysHeroPointRule": {
+        "name": "Règle de point d'héroïsme de Keeley",
+        "bonusTag": "Relance faible +10",
+        "hint": "Une règle maison favorisée par un certain employé de Paizo : si le résultat naturel de la relance du point d'héroïsme est inférieur à 10, un bonus de 10 est appliqué après coup."
       }
     },
     "effects": {
