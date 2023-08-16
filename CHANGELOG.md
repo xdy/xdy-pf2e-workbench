@@ -1,3 +1,10 @@
+# [5.17.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.16.2...v5.17.0) (2023-08-16)
+
+
+### Features
+
+* Option to enable Keeley's House Rules added to the House Rules section, courtesy of @Stwlam ([9e69a81](https://github.com/xdy/xdy-pf2e-workbench/commit/9e69a81e6ab315a19ba3c44fa1a575736a1dfe6f))
+
 ## [5.16.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.16.1...v5.16.2) (2023-08-06)
 
 
