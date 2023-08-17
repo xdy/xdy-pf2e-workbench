@@ -248,10 +248,6 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
 
             // Make the total purple
             newTotalElem.classList.add("keeley-add-10");
-            newTotalElem.dataset.tooltip = game.i18n.format(
-                `${MODULENAME}.SETTINGS.keeleysHeroPointRule.messageTooltip`,
-                { result: Number(lastRoll.dice.find((d) => d.results.at(0)?.active)?.total) },
-            );
         }
     }
 }
