@@ -31,10 +31,10 @@ export function registerWorkbenchSettings() {
         choices: {
             noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.noCollapse`),
             collapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.collapsedDefault`
+                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.collapsedDefault`,
             ),
             nonCollapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.nonCollapsedDefault`
+                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.nonCollapsedDefault`,
             ),
         },
         onChange: () => updateHooks(),
@@ -50,10 +50,10 @@ export function registerWorkbenchSettings() {
         choices: {
             noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.noCollapse`),
             collapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.collapsedDefault`
+                `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.collapsedDefault`,
             ),
             nonCollapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.nonCollapsedDefault`
+                `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.nonCollapsedDefault`,
             ),
         },
         onChange: () => updateHooks(),
@@ -69,10 +69,10 @@ export function registerWorkbenchSettings() {
         choices: {
             noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.noCollapse`),
             collapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.collapsedDefault`
+                `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.collapsedDefault`,
             ),
             nonCollapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.nonCollapsedDefault`
+                `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.nonCollapsedDefault`,
             ),
         },
         onChange: () => updateHooks(),
@@ -215,15 +215,6 @@ export function registerWorkbenchSettings() {
         default: 14,
         type: Number,
         onChange: () => updateHooks(),
-    });
-
-    game.settings.register(MODULENAME, "dirtySortActions", {
-        name: `${MODULENAME}.SETTINGS.dirtySortActions.name`,
-        hint: `${MODULENAME}.SETTINGS.dirtySortActions.hint`,
-        scope: "client",
-        config: true,
-        default: false,
-        type: Boolean,
     });
 
     game.settings.register(MODULENAME, "workbenchVersion", {

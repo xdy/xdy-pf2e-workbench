@@ -571,11 +571,6 @@
         "name": "当失去意识时，角色手中的物品会自动掉落。",
         "message": "{name}掉落了：{items}"
       },
-      "dirtySortActions": {
-        "hint": "打开角色卡时是否按名称为动作排序。变更后需要刷新（F5）。",
-        "name": "打开角色卡时按名称为动作排序。",
-        "info": "角色卡动作已排序。"
-      },
       "handleDyingRecoveryRoll": {
         "handled": "已自动进行濒死复苏检定{roll} {outcome}。{defeated}。",
         "hint": "自动进行濒死复苏检定的客户端自动化设置。",

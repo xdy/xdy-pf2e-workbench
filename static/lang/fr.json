@@ -576,11 +576,6 @@
         "hint": "... et lancez le test de récupération automatiquement après çà. Nécessite que le réglage ci-dessus soit activé.",
         "name": "... et lancez le test de récupération automatiquement après çà."
       },
-      "dirtySortActions": {
-        "name": "Trier les actions par nom lorsque la feuille d'acteur est ouverte.",
-        "hint": "Réglage du client pour trier les actions par leur nom lorsque la feuille de l'acteur est ouverte. Nécessite un rafraichissement (f5) après changement.",
-        "info": "Les actions des feuilles de personnage sont désormais triées."
-      },
       "houseRulerI18n": {
         "name": "Règles maison",
         "hint": "Correctifs de règles maison que xdy aime. Ajoute actuellement les jets pour À terre des fléaux et marteaux. Deviendra plus souple après.",

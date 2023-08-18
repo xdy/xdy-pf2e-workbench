@@ -364,25 +364,6 @@ Hooks.once("ready", () => {
         }
     });
 
-    if (game.settings.get(MODULENAME, "dirtySortActions") && !window["dirtySheetSorter"]) {
-        const proto = CONFIG.Actor.sheetClasses.character["pf2e.CharacterSheetPF2e"].cls.prototype;
-        const wrapped = proto.getData;
-        proto.getData = async function (options) {
-            const data = await wrapped.call(this, options);
-            const actions = data["actions"];
-            actions.combat.action.actions?.sort((a, b) => a.name.localeCompare(b.name));
-            actions.combat.reaction.actions?.sort((a, b) => a.name.localeCompare(b.name));
-            actions.combat.free.actions?.sort((a, b) => a.name.localeCompare(b.name));
-            actions.exploration.active?.sort((a, b) => a.name.localeCompare(b.name));
-            actions.exploration.other?.sort((a, b) => a.name.localeCompare(b.name));
-            actions.downtime?.sort((a, b) => a.name.localeCompare(b.name));
-            return data;
-        };
-
-        window["dirtySheetSorter"] = true;
-        ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.dirtySortActions.info`));
-    }
-
     const legacyVariantRuleAncestryParagon = game.settings.get(MODULENAME, "legacyVariantRuleAncestryParagon");
     const legacyVariantRuleDualClass = game.settings.get(MODULENAME, "legacyVariantRuleDualClass");
     if (legacyVariantRuleDualClass || legacyVariantRuleAncestryParagon) {
