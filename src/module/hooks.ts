@@ -471,6 +471,7 @@ export function pf2eRerollHook(
             OperatorTerm.fromData({ class: "OperatorTerm", operator: "+", evaluated: true }),
             NumericTerm.fromData({ class: "NumericTerm", number: 10, evaluated: true }),
         );
+        // @ts-ignore It's protected. Meh.
         newRoll._total += 10;
         newRoll.options.keeleyAdd10 = true;
     }
