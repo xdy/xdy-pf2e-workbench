@@ -1,3 +1,12 @@
+## [5.17.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.17.0...v5.17.1) (2023-08-18)
+
+
+### Bug Fixes
+
+* In houserules Ancestry Paragon was a client setting, but should be a world setting. ([47fd438](https://github.com/xdy/xdy-pf2e-workbench/commit/47fd4388191355aebe7bc53b69120fd0ce1c66f4))
+* Remove dirtySortActions due to the system sorting actions in the next release. ([b153a6e](https://github.com/xdy/xdy-pf2e-workbench/commit/b153a6ef728e4b21d46afdea7388a822a3266c7e))
+* Update the housepatcher example with the latest blind fight support for pf2e perception from https://github.com/reonZ/pf2e-perception/wiki#blind-fight ([67816ba](https://github.com/xdy/xdy-pf2e-workbench/commit/67816ba1b9830e778137dc6d69310d3932879e1e))
+
 # [5.17.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.16.2...v5.17.0) (2023-08-16)
 
 
