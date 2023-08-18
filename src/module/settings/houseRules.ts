@@ -25,7 +25,7 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
             legacyVariantRuleAncestryParagon: {
                 name: `${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.name`,
                 hint: `${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.hint`,
-                scope: "client",
+                scope: "world",
                 config: true,
                 default: false,
                 type: Boolean,
