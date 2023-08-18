@@ -634,7 +634,7 @@
       "keeleysHeroPointRule": {
         "name": "Règle de point d'héroïsme de Keeley",
         "bonusTag": "Relance faible +10",
-        "hint": "Une règle maison favorisée par un certain employé de Paizo : si le résultat naturel de la relance du point d'héroïsme est inférieur à 10, un bonus de 10 est appliqué après coup."
+        "hint": "Une règle maison favorisée par un certain développeur de Paizo : si le résultat naturel de la relance du point d'héroïsme est inférieur ou égal à 10, un bonus de 10 est appliqué après coup."
       }
     },
     "effects": {
