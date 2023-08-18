@@ -145,23 +145,60 @@ The example below is, not coincidentally, the relevant bits of my current houser
     "action": "update",
     "uuid": "Compendium.pf2e.feats-srd.Item.y2XeMe1F18lIyo59",
     "name": "Blind-Fight",
-    "reason": "Adds pf2e-perception support to Blind-Fight as per https://github.com/reonZ/pf2e-perception/wiki/Roll-Options#blind-fight",
+    "reason": "Adds pf2e-perception support to Blind-Fight as per https://github.com/reonZ/pf2e-perception/wiki#blind-fight",
     "data": {
       "system.rules": [
         {
-          "key": "RollOption",
-          "domain": "all",
-          "option": "self:pf2perception:visibility:noff-self:all"
+          "key": "PF2ePerception",
+          "type": "visibility",
+          "selector": "noff"
         },
         {
-          "key": "RollOption",
-          "domain": "all",
-          "option": "self:pf2perception:concealed:dc:0"
+          "key": "PF2ePerception",
+          "type": "visibility",
+          "affects": "other",
+          "selector": "dc",
+          "targets": "concealed",
+          "value": 0
         },
         {
-          "key": "RollOption",
-          "domain": "all",
-          "option": "self:pf2perception:hidden:dc:5"
+          "key": "PF2ePerception",
+          "type": "visibility",
+          "affects": "other",
+          "selector": "dc",
+          "targets": "hidden",
+          "value": 5
+        },
+        {
+          "key": "PF2ePerception",
+          "type": "visibility",
+          "affects": "other",
+          "selector": "reduce",
+          "targets": "undetected",
+          "predicate": [
+            {
+              "or": [
+                "target:distance:5",
+                "origin:distance:5"
+              ]
+            },
+            {
+              "or": [
+                {
+                  "gte": [
+                    "self:level",
+                    "target:level"
+                  ]
+                },
+                {
+                  "gte": [
+                    "self:level",
+                    "origin:level"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }
