@@ -33,7 +33,7 @@ interface PartyAttributes extends Omit<PartyAttributesSource, "immunities" | "we
     weaknesses: never[];
     resistances: never[];
     speed: {
-        value: number;
+        total: number;
     };
 }
 interface PartyDetails extends PartyDetailsSource, ActorDetails {

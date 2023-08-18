@@ -3,7 +3,7 @@
 /// <reference types="tooltipster" />
 import { CharacterPF2e } from "@actor";
 import { Abilities } from "@actor/creature/data.ts";
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item";
 declare class AttributeBuilder extends Application {
     #private;
@@ -23,8 +23,8 @@ declare class AttributeBuilder extends Application {
 interface AttributeBuilderSheetData {
     actor: CharacterPF2e;
     attributeModifiers: Abilities;
-    manualKeyAbility: AbilityString;
-    attributes: Record<AbilityString, string>;
+    manualKeyAbility: AttributeString;
+    attributes: Record<AttributeString, string>;
     ancestry: AncestryPF2e<CharacterPF2e> | null;
     background: BackgroundPF2e<CharacterPF2e> | null;
     class: ClassPF2e<CharacterPF2e> | null;
@@ -32,7 +32,7 @@ interface AttributeBuilderSheetData {
     ancestryBoosts: AncestryBoosts | null;
     voluntaryFlaws: VoluntaryFlaws | null;
     backgroundBoosts: BackgroundBoosts | null;
-    keyOptions: AbilityString[] | null;
+    keyOptions: AttributeString[] | null;
     levelBoosts: LevelBoostData[];
     legacyFlaws: boolean;
 }
@@ -49,8 +49,9 @@ interface BuilderButton {
     second?: Omit<BuilderButton, "second">;
 }
 interface BoostFlawRow {
-    buttons: Record<AbilityString, BoostFlawState>;
+    buttons: Record<AttributeString, BoostFlawState>;
     remaining: number;
+    isApex?: boolean;
 }
 interface AncestryBoosts extends BoostFlawRow {
     alternate: boolean;

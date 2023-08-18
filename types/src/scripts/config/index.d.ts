@@ -1,6 +1,6 @@
 import { CharacterPF2e, FamiliarPF2e, HazardPF2e, LootPF2e, NPCPF2e, PartyPF2e, VehiclePF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ActionItemPF2e, AfflictionPF2e, AncestryPF2e, ArmorPF2e, BackgroundPF2e, BookPF2e, CampaignFeaturePF2e, ClassPF2e, ConditionPF2e, ConsumablePF2e, ContainerPF2e, DeityPF2e, EffectPF2e, EquipmentPF2e, FeatPF2e, HeritagePF2e, KitPF2e, LorePF2e, MeleePF2e, SpellcastingEntryPF2e, SpellPF2e, TreasurePF2e, WeaponPF2e } from "@item";
+import { AbilityItemPF2e, AfflictionPF2e, AncestryPF2e, ArmorPF2e, BackgroundPF2e, BookPF2e, CampaignFeaturePF2e, ClassPF2e, ConditionPF2e, ConsumablePF2e, ContainerPF2e, DeityPF2e, EffectPF2e, EquipmentPF2e, FeatPF2e, HeritagePF2e, KitPF2e, LorePF2e, MeleePF2e, SpellPF2e, SpellcastingEntryPF2e, TreasurePF2e, WeaponPF2e } from "@item";
 import { WeaponReloadTime } from "@item/weapon/types.ts";
 import { JournalSheetPF2e } from "@module/journal-entry/sheet.ts";
 export type StatusEffectIconTheme = "default" | "blackWhite";
@@ -174,12 +174,14 @@ export declare const PF2ECONFIG: {
         greaterShadow: string;
         greaterSlick: string;
         greaterStanching: string;
+        greaterSwallowSpike: string;
         greaterWinged: string;
         implacable: string;
         invisibility: string;
         majorShadow: string;
         majorSlick: string;
         majorStanching: string;
+        majorSwallowSpike: string;
         moderateDread: string;
         ready: string;
         rockBraced: string;
@@ -188,6 +190,7 @@ export declare const PF2ECONFIG: {
         slick: string;
         soaring: string;
         stanching: string;
+        swallowSpike: string;
         trueStanching: string;
         winged: string;
     };
@@ -281,6 +284,7 @@ export declare const PF2ECONFIG: {
         spellStoring: string;
         swarming: string;
         thundering: string;
+        underwater: string;
         unholy: string;
         wounding: string;
     };
@@ -814,7 +818,7 @@ export declare const PF2ECONFIG: {
         vanara: string;
         vishkanya: string;
     };
-    deityDomains: Record<"time" | "healing" | "magic" | "water" | "air" | "cold" | "earth" | "fire" | "wealth" | "abomination" | "ambition" | "change" | "cities" | "confidence" | "creation" | "darkness" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "family" | "fate" | "freedom" | "glyph" | "indulgence" | "introspection" | "knowledge" | "lightning" | "luck" | "might" | "moon" | "naga" | "nature" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "void" | "wyrmkin" | "zeal" | "airapocryphal" | "ambitionapocryphal" | "confidenceapocryphal" | "darknessapocryphal" | "deathapocryphal" | "fateapocryphal" | "fireapocryphal" | "indulgenceapocryphal" | "knowledgeapocryphal" | "mightapocryphal" | "secrecyapocryphal" | "travelapocryphal" | "waterapocryphal", {
+    deityDomains: Record<"healing" | "magic" | "water" | "air" | "cold" | "earth" | "fire" | "wealth" | "abomination" | "ambition" | "change" | "cities" | "confidence" | "creation" | "darkness" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "family" | "fate" | "freedom" | "glyph" | "indulgence" | "introspection" | "knowledge" | "lightning" | "luck" | "might" | "moon" | "naga" | "nature" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "time" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "void" | "wyrmkin" | "zeal" | "airapocryphal" | "ambitionapocryphal" | "confidenceapocryphal" | "darknessapocryphal" | "deathapocryphal" | "fateapocryphal" | "fireapocryphal" | "indulgenceapocryphal" | "knowledgeapocryphal" | "mightapocryphal" | "secrecyapocryphal" | "travelapocryphal" | "waterapocryphal", {
         label: string;
         description: string;
     }>;
@@ -950,6 +954,7 @@ export declare const PF2ECONFIG: {
         "versatile-lawful": string;
         "versatile-negative": string;
         "versatile-p": string;
+        "versatile-poison": string;
         "versatile-positive": string;
         "versatile-s": string;
         "versatile-sonic": string;
@@ -2026,7 +2031,7 @@ export declare const PF2ECONFIG: {
         samsaran: string;
         "sea-devil": string;
         serpentfolk: string;
-        seugathi: string; /** Base weapon types that are considered equivalent for all rules purposes */
+        seugathi: string;
         shabti: string;
         shadow: string;
         shobhad: string;
@@ -2478,7 +2483,7 @@ export declare const PF2ECONFIG: {
         samsaran: string;
         "sea-devil": string;
         serpentfolk: string;
-        seugathi: string; /** Base weapon types that are considered equivalent for all rules purposes */
+        seugathi: string;
         shabti: string;
         shadow: string;
         shobhad: string;
@@ -2820,6 +2825,7 @@ export declare const PF2ECONFIG: {
         "versatile-lawful": string;
         "versatile-negative": string;
         "versatile-p": string;
+        "versatile-poison": string;
         "versatile-positive": string;
         "versatile-s": string;
         "versatile-sonic": string;
@@ -3128,6 +3134,7 @@ export declare const PF2ECONFIG: {
         "versatile-lawful": string;
         "versatile-negative": string;
         "versatile-p": string;
+        "versatile-poison": string;
         "versatile-positive": string;
         "versatile-s": string;
         "versatile-sonic": string;
@@ -3431,7 +3438,7 @@ export declare const PF2ECONFIG: {
         kineticist: string;
         kitsune: string;
         kobold: string;
-        laminar: string;
+        laminar: string; /** Max speed for number of hexploration activities */
         "launching-dart": string;
         lawful: string;
         leshy: string;
@@ -3678,6 +3685,7 @@ export declare const PF2ECONFIG: {
         RollOption: string;
         RollTwice: string;
         Sense: string;
+        Statistic: string;
         Strike: string;
         Striking: string;
         SubstituteRoll: string;
@@ -4090,6 +4098,7 @@ export declare const PF2ECONFIG: {
         shisk: string;
         shoanti: string;
         shoony: string;
+        shory: string;
         skald: string;
         sphinx: string;
         strix: string;
@@ -4285,6 +4294,7 @@ export declare const PF2ECONFIG: {
                 spellStoring: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 swarming: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 thundering: import("@item/physical/runes.ts").WeaponPropertyRuneData;
+                underwater: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 unholy: import("@item/physical/runes.ts").WeaponPropertyRuneData;
                 wounding: import("@item/physical/runes.ts").WeaponPropertyRuneData;
             };
@@ -4426,7 +4436,7 @@ export declare const PF2ECONFIG: {
     };
     Item: {
         documentClasses: {
-            action: typeof ActionItemPF2e;
+            action: typeof AbilityItemPF2e;
             affliction: typeof AfflictionPF2e;
             ancestry: typeof AncestryPF2e;
             armor: typeof ArmorPF2e;
@@ -5102,7 +5112,7 @@ export declare const PF2ECONFIG: {
                 samsaran: string;
                 "sea-devil": string;
                 serpentfolk: string;
-                seugathi: string; /** Base weapon types that are considered equivalent for all rules purposes */
+                seugathi: string;
                 shabti: string;
                 shadow: string;
                 shobhad: string;
@@ -6682,6 +6692,7 @@ export declare const PF2ECONFIG: {
                 "versatile-lawful": string;
                 "versatile-negative": string;
                 "versatile-p": string;
+                "versatile-poison": string;
                 "versatile-positive": string;
                 "versatile-s": string;
                 "versatile-sonic": string;
@@ -7018,6 +7029,7 @@ export declare const PF2ECONFIG: {
                 "versatile-lawful": string;
                 "versatile-negative": string;
                 "versatile-p": string;
+                "versatile-poison": string;
                 "versatile-positive": string;
                 "versatile-s": string;
                 "versatile-sonic": string;

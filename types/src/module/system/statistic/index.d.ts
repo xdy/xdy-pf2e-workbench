@@ -1,7 +1,7 @@
 import { ActorPF2e } from "@actor";
 import { TraitViewData } from "@actor/data/base.ts";
 import { ModifierPF2e } from "@actor/modifiers.ts";
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
 import { ItemPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import { RollNotePF2e, RollNoteSource } from "@module/notes.ts";
@@ -19,10 +19,10 @@ declare abstract class BaseStatistic {
     label: string;
     /** Original construction arguments */
     protected data: StatisticData;
-    /** Penalties, bonuses, and actual modifiers comprising a total modifier value */
-    modifiers: ModifierPF2e[];
     /** String category identifiers: used to retrieve modifiers and other synthetics as well as create roll options  */
     domains: string[];
+    /** Penalties, bonuses, and actual modifiers comprising a total modifier value */
+    modifiers: ModifierPF2e[];
     constructor(actor: ActorPF2e, data: BaseStatisticData);
     createRollOptions(domains?: string[]): Set<string>;
     abstract getTraceData(): BaseStatisticTraceData;
@@ -30,7 +30,7 @@ declare abstract class BaseStatistic {
 /** A Pathfinder statistic used to perform checks and calculate DCs */
 declare class Statistic extends BaseStatistic {
     #private;
-    ability: AbilityString | null;
+    ability: AttributeString | null;
     rank: ZeroToFour | null;
     proficient: boolean;
     /** The `Statistic` from which this one was derived (set by `Statistic#extend`), or otherwise `null`. */
@@ -90,6 +90,9 @@ declare class StatisticDifficultyClass<TParent extends Statistic = Statistic> {
     get breakdown(): string;
     toString(): string;
 }
+interface CheckDCReference {
+    slug: string;
+}
 interface StatisticRollParameters {
     /** What token to use for the roll itself. Defaults to the actor's token */
     token?: TokenDocumentPF2e;
@@ -100,7 +103,7 @@ interface StatisticRollParameters {
     /** Optional origin for the roll: only one of target and origin may be provided */
     origin?: ActorPF2e | null;
     /** Optional DC data for the roll */
-    dc?: CheckDC | null;
+    dc?: CheckDC | CheckDCReference | null;
     /** Optional override for the check modifier label */
     label?: string;
     /** Optional override for the dialog's title. Defaults to label */
@@ -133,4 +136,4 @@ interface RollOptionConfig {
     target?: ActorPF2e | null;
 }
 export * from "./data.ts";
-export { BaseStatistic, RollOptionConfig, Statistic, StatisticCheck, StatisticDifficultyClass, StatisticRollParameters, };
+export { BaseStatistic, CheckDCReference, RollOptionConfig, Statistic, StatisticCheck, StatisticDifficultyClass, StatisticRollParameters, };

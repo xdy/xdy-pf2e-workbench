@@ -1,6 +1,6 @@
 import { ActorPF2e, ActorUpdateContext } from "@actor/base.ts";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
-import { AbilityString, SaveType } from "@actor/types.ts";
+import { AttributeString, SaveType } from "@actor/types.ts";
 import { MeleePF2e, WeaponPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
@@ -26,7 +26,7 @@ type WithRank = {
 };
 interface CreatureSheetData<TActor extends CreaturePF2e> extends ActorSheetDataPF2e<TActor> {
     data: CreatureSystemData & {
-        abilities: Record<AbilityString, AbilityData & {
+        abilities: Record<AttributeString, AbilityData & {
             label?: string;
         }>;
         attributes: {

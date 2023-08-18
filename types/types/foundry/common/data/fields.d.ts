@@ -368,7 +368,7 @@ export class BooleanField<
 > extends DataField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
     protected static override get _defaults(): BooleanFieldOptions<boolean, boolean, boolean, boolean>;
 
-    protected override _cast(value: unknown): boolean;
+    protected override _cast(value: unknown): unknown;
 
     protected override _validateType(value: unknown): value is boolean;
 }
@@ -451,7 +451,7 @@ export class StringField<
         options?: CleanFieldOptions
     ): MaybeSchemaProp<TSourceProp, TRequired, TNullable, THasInitial>;
 
-    protected override _cast(value: unknown): TSourceProp;
+    protected override _cast(value: unknown): unknown;
 
     protected override _validateSpecial(value: unknown): boolean | void;
 

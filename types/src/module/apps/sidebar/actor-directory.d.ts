@@ -1,15 +1,13 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor/base.ts";
+import { ActorPF2e } from "@actor";
 /** Extend ActorDirectory to show more information */
 declare class ActorDirectoryPF2e extends ActorDirectory<ActorPF2e<null>> {
     #private;
     static entryPartial: string;
     /** Any additional "folder like" elements (such as parties) that are maintained separately */
     extraFolders: Record<string, boolean>;
-    /** If we are currently dragging a party. Needed because dragenter/dragover doesn't contain the drag source. */
-    draggingParty: boolean;
     static get defaultOptions(): SidebarDirectoryOptions;
     getData(): Promise<object>;
     activateListeners($html: JQuery<HTMLElement>): void;
@@ -25,6 +23,7 @@ declare class ActorDirectoryPF2e extends ActorDirectory<ActorPF2e<null>> {
     protected _render(force?: boolean, context?: SidebarDirectoryRenderOptions): Promise<void>;
     protected _contextMenu($html: JQuery<HTMLElement>): void;
     protected _getEntryContextOptions(): EntryContextOption[];
+    protected _getPartyContextOptions(): EntryContextOption[];
 }
 interface ActorSidebarDropData extends DropCanvasData<"actor", ActorPF2e> {
     fromParty?: string;

@@ -59,7 +59,7 @@
         "AbilityInt": "Intelligence",
         "AbilityModifierLabel": "Attribute Modifier",
         "AbilityStr": "Strength",
-        "AbilityTitle": "Ability",
+        "AbilityTitle": "Attribute",
         "AbilityWis": "Wisdom",
         "AccessoryPropertyRuneCalled": "Called",
         "AccessoryPropertyRuneDragonsBreath": "Dragon's Breath",
@@ -130,6 +130,10 @@
                 "TheTarget": "The target"
             },
             "Character": {
+                "Attribute": {
+                    "Apex": "Apex Attribute",
+                    "Key": "Key Attribute"
+                },
                 "AttributeBuilder": {
                     "InputMethod": {
                         "Description": "Switching method resets your attribute modifier distribution.",
@@ -147,6 +151,7 @@
                     "Flaw": "Flaw",
                     "Flaws": "Flaws",
                     "HasPartial": "Has Partial Boost",
+                    "Increase": "Increase",
                     "KeyIcon": "Key",
                     "LegacyFlaws": "Legacy Flaws",
                     "Partial": "Partial",
@@ -343,6 +348,15 @@
                     "Content": "Remove member from party?"
                 },
                 "Rest": "Rest",
+                "Sidebar": {
+                    "ActivateParty": "Activate Party",
+                    "CreateMember": "Create New Member",
+                    "CreateParty": "Create New Party",
+                    "RemoveMember": "Remove Member",
+                    "OpenSheet": "Open Sheet",
+                    "OtherParties": "Other Parties"
+                },
+                "Skills": "Party Skills",
                 "SlotAvailable": "Slot Available",
                 "Tabs": {
                     "Overview": "Overview",
@@ -468,12 +482,14 @@
         "ArmorPropertyRuneGreaterShadow": "Greater Shadow",
         "ArmorPropertyRuneGreaterSlick": "Greater Slick",
         "ArmorPropertyRuneGreaterStanching": "Greater Stanching",
+        "ArmorPropertyRuneGreaterSwallowSpike": "Greater Swallow-Spike",
         "ArmorPropertyRuneGreaterWinged": "Greater Winged",
         "ArmorPropertyRuneImplacable": "Implacable",
         "ArmorPropertyRuneInvisibility": "Invisibility",
         "ArmorPropertyRuneMajorShadow": "Major Shadow",
         "ArmorPropertyRuneMajorSlick": "Major Slick",
         "ArmorPropertyRuneMajorStanching": "Major Stanching",
+        "ArmorPropertyRuneMajorSwallowSpike": "Major Swallow-Spike",
         "ArmorPropertyRuneModerateDread": "Moderate Dread",
         "ArmorPropertyRuneReady": "Ready",
         "ArmorPropertyRuneRockBraced": "Rock-Braced",
@@ -482,6 +498,7 @@
         "ArmorPropertyRuneSlick": "Slick",
         "ArmorPropertyRuneSoaring": "Soaring",
         "ArmorPropertyRuneStanching": "Stanching",
+        "ArmorPropertyRuneSwallowSpike": "Swallow-Spike",
         "ArmorPropertyRuneTrueStanching": "True Stanching",
         "ArmorPropertyRuneWinged": "Winged",
         "ArmorResilientRune": "Resilient",
@@ -1164,6 +1181,7 @@
         "EffectsLabel": "Effects",
         "EmptySlot": "Empty Slot",
         "Encounter": {
+            "AlreadyRolled": "{actor} has already rolled initiative.",
             "Broadcast": {
                 "FastHealing": {
                     "DeactivatedBy": "Deactivated by {types}",
@@ -1391,6 +1409,11 @@
                 "InvalidDrop": "{badType} cannot be dropped here (must be {goodType})"
             },
             "Action": {
+                "SelfAppliedEffect": {
+                    "Delete": "Delete Effect",
+                    "Label": "Self-Applied Effect",
+                    "Hint": "A single effect item to be applied to the actor that performs this action"
+                },
                 "CategoryLabel": "Category",
                 "Category": {
                     "None": "None",
@@ -1526,8 +1549,8 @@
                     "Label": "Cleric Spells"
                 },
                 "DivineAbility": {
-                    "Hint": "If choosing the Raised by Belief background, its ability boost options come from a deity.",
-                    "Label": "Divine Ability"
+                    "Hint": "If choosing the Raised by Belief background, its attribute boost options come from a deity.",
+                    "Label": "Divine Attribute"
                 },
                 "DivineFont": {
                     "Harm": "Harm",
@@ -1868,8 +1891,8 @@
                     "Added": "{item} was added to {category}."
                 },
                 "KeyAbilityOptions": {
-                    "Label": "Key Ability Options",
-                    "Hint": "Key ability options in addition to this provided by a class"
+                    "Label": "Key Attribute Options",
+                    "Hint": "Key attribute options in addition to this provided by a class"
                 },
                 "LevelLabel": "Feat",
                 "LevelN": "Feat {level}",
@@ -2115,8 +2138,6 @@
         "ItemRemoveRuleElement": "Remove Rule Element",
         "ItemTitle": "Item",
         "ItemsLabel": "Items",
-        "KeyAbility": "Key Attribute",
-        "KeyAbilityLabel": "Key Attribute",
         "Keybinding": {
             "CycleTokenStack": {
                 "Hint": "Cycle the Z indices of a mouse-hovered stack of tokens, pushing the top to the bottom.",
@@ -2222,6 +2243,7 @@
         "LanguageShoanti": "Shoanti",
         "LanguageShobhad": "Shobhad",
         "LanguageShoony": "Shoony",
+        "LanguageShory": "Shory",
         "LanguageSkald": "Skald",
         "LanguageSphinx": "Sphinx",
         "LanguageStrix": "Strix",
@@ -2567,7 +2589,7 @@
             }
         },
         "PenaltyLabel": {
-            "ability": "Ability Penalty",
+            "ability": "Attribute Penalty",
             "circumstance": "Circumstance Penalty",
             "item": "Item Penalty",
             "proficiency": "Proficiency Penalty",
@@ -2934,6 +2956,7 @@
             "Sidebar": {
                 "Changelog": "Changelog",
                 "Discord": "Discord",
+                "Remaster": "Remaster Changes",
                 "Wiki": "Wiki"
             },
             "TOTMToggles": {
@@ -4431,6 +4454,7 @@
         "TraitVersatileLawful": "Versatile Lawful",
         "TraitVersatileNegative": "Versatile Negative",
         "TraitVersatileP": "Versatile P",
+        "TraitVersatilePoison": "Versatile Poison",
         "TraitVersatilePositive": "Versatile Positive",
         "TraitVersatileS": "Versatile S",
         "TraitVersatileSonic": "Versatile Sonic",
@@ -5193,6 +5217,9 @@
                     "criticalSuccess": "On a critical hit, the target has to succeed at a @Check[type:fortitude|dc:24|name:Thundering Rune] save or be @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{Deafened} for 1 minute (or 1 hour on a critical failure)."
                 }
             },
+            "underwater": {
+                "Name": "Underwater"
+            },
             "unholy": {
                 "Name": "Unholy",
                 "Note": {
@@ -5666,7 +5693,7 @@
             "vehicle": "Vehicle"
         },
         "Item": {
-            "action": "Action",
+            "action": "Ability",
             "affliction": "Affliction",
             "ancestry": "Ancestry",
             "armor": "Armor",

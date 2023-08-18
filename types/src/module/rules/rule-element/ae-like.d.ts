@@ -21,12 +21,6 @@ declare class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElemen
         override: number;
     };
     static PHASES: readonly ["applyAEs", "beforeDerived", "afterDerived", "beforeRoll"];
-    /**
-     * Pattern to match system.skills.${longForm} paths for replacement
-     * Temporary solution until skill data is represented in long form
-     */
-    static SKILL_LONG_FORM_PATH: RegExp;
-    protected validateData(): void;
     /** Apply the modifications immediately after proper ActiveEffects are applied */
     onApplyActiveEffects(): void;
     /** Apply the modifications near the beginning of the actor's derived-data preparation */
@@ -37,7 +31,6 @@ declare class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElemen
     beforeRoll(_domains: string[], rollOptions: Set<string>): void;
     protected applyAELike(rollOptions?: Set<string>): void;
     static getNewValue<TCurrent>(mode: AELikeChangeMode, current: TCurrent, change: TCurrent extends (infer TValue)[] ? TValue : TCurrent): TCurrent | DataModelValidationFailure;
-    protected warn(property: string): void;
 }
 interface AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TSchema>, ModelPropsFromSchema<AELikeSchema> {
 }

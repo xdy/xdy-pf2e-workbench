@@ -12,7 +12,7 @@ import { PredicatePF2e } from "@system/predication.ts";
 import { StatisticCheck } from "@system/statistic/index.ts";
 import { StrikeData, TraitViewData } from "./data/base.ts";
 import { ModifierPF2e } from "./modifiers.ts";
-import { ABILITY_ABBREVIATIONS, DC_SLUGS, MOVEMENT_TYPES, SAVE_TYPES, SKILL_ABBREVIATIONS, SKILL_LONG_FORMS, UNAFFECTED_TYPES } from "./values.ts";
+import { ATTRIBUTE_ABBREVIATIONS, DC_SLUGS, MOVEMENT_TYPES, SAVE_TYPES, SKILL_ABBREVIATIONS, SKILL_LONG_FORMS, UNAFFECTED_TYPES } from "./values.ts";
 /** Used exclusively to resolve `ActorPF2e#isOfType` */
 interface ActorInstances<TParent extends TokenDocumentPF2e | null> {
     character: ActorInstance.CharacterPF2e<TParent>;
@@ -27,7 +27,7 @@ interface ActorInstances<TParent extends TokenDocumentPF2e | null> {
 type EmbeddedItemInstances<TParent extends ActorPF2e> = {
     [K in keyof ItemInstances<TParent>]: ItemInstances<TParent>[K][];
 };
-type AbilityString = SetElement<typeof ABILITY_ABBREVIATIONS>;
+type AttributeString = SetElement<typeof ATTRIBUTE_ABBREVIATIONS>;
 interface ActorDimensions {
     length: number;
     width: number;
@@ -49,7 +49,6 @@ interface AuraData {
 }
 interface AuraEffectData {
     uuid: string;
-    level: number | null;
     affects: "allies" | "enemies" | "all";
     events: ("enter" | "turn-start" | "turn-end")[];
     save: {
@@ -107,7 +106,7 @@ interface RollContextParams<TStatistic extends StatisticCheck | StrikeData | nul
     viewOnly?: boolean;
 }
 interface CheckContextParams<TStatistic extends StatisticCheck | StrikeData = StatisticCheck | StrikeData, TItem extends AttackItem | null = AttackItem | null> extends RollContextParams<TStatistic, TItem> {
-    targetedDC: DCSlug;
+    targetedDC: string;
 }
 interface DamageRollContextParams<TStatistic extends StatisticCheck | StrikeData | null = StatisticCheck | StrikeData | null, TItem extends AttackItem | null = AttackItem | null> extends RollContextParams<TStatistic, TItem> {
     /** An outcome of a preceding check roll */
@@ -134,4 +133,4 @@ type ResistanceType = keyof typeof resistanceTypes;
 /** Damage types a creature or hazard is possibly unaffected by, outside the IWR framework */
 type UnaffectedType = SetElement<typeof UNAFFECTED_TYPES>;
 type IWRType = ImmunityType | WeaknessType | ResistanceType;
-export { AbilityString, ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AttackItem, AuraColors, AuraData, AuraEffectData, CheckContext, CheckContextParams, DCSlug, DamageRollContextParams, EmbeddedItemInstances, IWRType, ImmunityType, MovementType, ResistanceType, RollContext, RollContextParams, RollTarget, SaveType, SkillAbbreviation, SkillLongForm, StrikeSelf, UnaffectedType, WeaknessType, };
+export { AttributeString, ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AttackItem, AuraColors, AuraData, AuraEffectData, CheckContext, CheckContextParams, DCSlug, DamageRollContextParams, EmbeddedItemInstances, IWRType, ImmunityType, MovementType, ResistanceType, RollContext, RollContextParams, RollTarget, SaveType, SkillAbbreviation, SkillLongForm, StrikeSelf, UnaffectedType, WeaknessType, };

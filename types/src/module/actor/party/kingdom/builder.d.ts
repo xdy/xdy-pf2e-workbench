@@ -19,6 +19,7 @@ declare class KingdomBuilder extends FormApplication<Kingdom> {
     get kingdom(): Kingdom;
     get actor(): PartyPF2e;
     get isEditable(): boolean;
+    protected _getHeaderButtons(): ApplicationHeaderButton[];
     getData(): Promise<KingdomBuilderSheetData>;
     activateListeners($html: JQuery<HTMLElement>): void;
     protected _updateObject(_event: Event, formData: Record<string, unknown>): Promise<unknown>;

@@ -1,3 +1,4 @@
+import { ItemSourcePF2e } from "@item/data/index.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { RuleElementOptions, RuleElementPF2e } from "../index.ts";
 import { ChoiceSetPackQuery, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet } from "./data.ts";
@@ -23,14 +24,17 @@ declare class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
      * Adjust the effect's name and set the targetId from the user's selection, or set the entire rule element to be
      * ignored if no selection was made.
      */
-    preCreate({ itemSource, ruleSource, }: RuleElementPF2e.PreCreateParams<ChoiceSetSource>): Promise<void>;
+    preCreate({ itemSource, ruleSource, pendingItems, }: RuleElementPF2e.PreCreateParams<ChoiceSetSource>): Promise<void>;
     /**
      * If an array was passed, localize & sort the labels and return. If a string, look it up in CONFIG.PF2E and
      * create an array of choices.
+     * @param rollOptions  A set of actor roll options to for use in predicate testing
+     * @param pendingItems Items passed to #queryCompendium for checking max takability of feats
+     * @returns The array of choices to present to the user
      */
-    inflateChoices(rollOptions: Set<string>): Promise<PickableThing[]>;
-    /** Perform an NeDB query against the system feats compendium (or a different one if specified) */
-    queryCompendium(choices: ChoiceSetPackQuery, actorRollOptions: Set<string>): Promise<PickableThing<string>[]>;
+    inflateChoices(rollOptions: Set<string>, pendingItems: PreCreate<ItemSourcePF2e>[]): Promise<PickableThing[]>;
+    /** Perform a query via predicate testing against compendium items */
+    queryCompendium(choices: ChoiceSetPackQuery, actorRollOptions: Set<string>, pendingItems: PreCreate<ItemSourcePF2e>[]): Promise<PickableThing<string>[]>;
 }
 interface ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema>, ModelPropsFromSchema<ChoiceSetSchema> {
 }

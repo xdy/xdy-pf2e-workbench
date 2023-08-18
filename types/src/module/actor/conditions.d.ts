@@ -1,15 +1,27 @@
 import { ConditionPF2e } from "@item";
 import { ConditionSlug, PersistentDamagePF2e } from "@item/condition/index.ts";
 import { ActorPF2e } from "./base.ts";
-/** A collection of conditions on an actor, filterable by whether they're active or stored/temporary */
-declare class ActorConditions<TActor extends ActorPF2e> extends Collection<ConditionPF2e<TActor>> {
+/** A wrapper for collections of conditions on an actor, filterable by whether they're active or stored/temporary */
+declare class ActorConditions<TActor extends ActorPF2e> {
     #private;
     /** Return an array of only active conditions */
     get active(): ConditionPF2e<TActor>[];
     /** Return an array of only stored conditions */
     get stored(): ConditionPF2e<TActor>[];
-    /** Start empty */
-    constructor();
+    /** Convenience getters for active badged conditions, especially for use by @actor resolvables in rule elements */
+    get clumsy(): ConditionPF2e<TActor> | null;
+    get doomed(): ConditionPF2e<TActor> | null;
+    get drained(): ConditionPF2e<TActor> | null;
+    get dying(): ConditionPF2e<TActor> | null;
+    get enfeebled(): ConditionPF2e<TActor> | null;
+    get frightened(): ConditionPF2e<TActor> | null;
+    get sickened(): ConditionPF2e<TActor> | null;
+    get slowed(): ConditionPF2e<TActor> | null;
+    get stunned(): ConditionPF2e<TActor> | null;
+    get stupefied(): ConditionPF2e<TActor> | null;
+    get wounded(): ConditionPF2e<TActor> | null;
+    /** Iterate over the values of `#idMap` */
+    [Symbol.iterator](): IterableIterator<ConditionPF2e<TActor>>;
     /** Provide additional options for retrieving a condition */
     get(key: Maybe<string>, options: {
         strict: true;
@@ -17,7 +29,13 @@ declare class ActorConditions<TActor extends ActorPF2e> extends Collection<Condi
         temporary?: boolean | null;
     }): ConditionPF2e<TActor>;
     get(key: string, options?: ConditionsGetOptions): ConditionPF2e<TActor> | undefined;
+    has(id: string): boolean;
     set(id: string, condition: ConditionPF2e<TActor>): this;
+    filter(condition: (value: ConditionPF2e<TActor>) => boolean): ConditionPF2e<TActor>[];
+    some(condition: (value: ConditionPF2e<TActor>) => boolean): boolean;
+    every(condition: (value: ConditionPF2e<TActor>) => boolean): boolean;
+    map<T>(transformer: (value: ConditionPF2e<TActor>) => T): T[];
+    flatMap<T>(transformer: (value: ConditionPF2e<TActor>) => T | T[] | never[]): T[];
     /** No deletions: a new instance is created every data preparation cycle */
     delete(): false;
     /**

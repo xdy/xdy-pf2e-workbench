@@ -20,7 +20,7 @@ declare class ContainerPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
     prepareSiblingData(this: ContainerPF2e<ActorPF2e>): void;
     /** Move the contents of this container into the next-higher container or otherwise the main actor inventory */
     ejectContents(): Promise<void>;
-    getChatData(this: ContainerPF2e<TParent>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
+    getChatData(this: ContainerPF2e<TParent>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;
 }
 interface ContainerPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     readonly _source: ContainerSource;

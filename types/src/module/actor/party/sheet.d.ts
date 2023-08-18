@@ -18,6 +18,7 @@ declare class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     static get defaultOptions(): ActorSheetOptions;
     regionTemplates: Record<string, string>;
     get isLootSheet(): boolean;
+    protected _getHeaderButtons(): ApplicationHeaderButton[];
     getData(options?: ActorSheetOptions): Promise<PartySheetData>;
     protected setSummaryView(view: string): void;
     activateListeners($html: JQuery<HTMLElement>): void;
@@ -32,8 +33,14 @@ declare class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
 interface PartySheetData extends ActorSheetDataPF2e<PartyPF2e> {
     restricted: boolean;
     members: MemberBreakdown[];
-    languages: LanguageSheetData[];
-    knowledge: SkillData[];
+    overviewSummary: {
+        languages: LanguageSheetData[];
+        skills: SkillData[];
+        knowledge: {
+            regular: SkillData[];
+            lore: SkillData[];
+        };
+    } | null;
     inventorySummary: {
         totalCoins: number;
         totalWealth: number;

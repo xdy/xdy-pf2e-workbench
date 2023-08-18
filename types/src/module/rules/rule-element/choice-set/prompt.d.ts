@@ -16,7 +16,6 @@ export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | 
     } | null;
     constructor(data: ChoiceSetPromptData);
     static get defaultOptions(): ApplicationOptions;
-    get template(): string;
     getData(options?: Partial<ApplicationOptions>): Promise<ChoiceSetTemplateData>;
     protected getChoices(): PickableThing[];
     setChoices(choices: PickableThing[]): void;

@@ -1,7 +1,7 @@
+import { DamageDicePF2e } from "@actor/modifiers.ts";
 import { DamageInstance, DamageRoll } from "./roll.ts";
 import { ArithmeticExpression, Grouping } from "./terms.ts";
 import { BaseDamageData, DamageCategory, DamageDieSize, DamageType } from "./types.ts";
-import { DamageDicePF2e } from "@actor/modifiers.ts";
 declare function nextDamageDieSize(next: {
     upgrade: DamageDieSize;
 }): DamageDieSize;
@@ -32,6 +32,11 @@ declare function isSystemDamageTerm(term: RollTerm): term is ArithmeticExpressio
 declare function deepFindTerms(term: RollTerm, { flavor }: {
     flavor: string;
 }): RollTerm[];
+/**
+ * Create or retrieve a simplified term from a more-complex one, given that it can be done without information loss.
+ * @returns A simplified term, if possible, or otherwise the original
+ */
+declare function simplifyTerm<T extends RollTerm>(term: T): T | Die | NumericTerm;
 /** Check whether a roll has dice terms associated with a damage roll */
 declare function looksLikeDamageRoll(roll: Roll): boolean;
 /** Create a representative Font Awesome icon from a damage roll */
@@ -40,4 +45,4 @@ declare function damageDiceIcon(roll: DamageRoll | DamageInstance, { fixedWidth 
 }): HTMLElement;
 /** Indicate in a term's options that it was multiplied by 2 or 3 */
 declare function markAsCrit(term: RollTerm, multiplier: 2 | 3): void;
-export { DamageCategorization, applyDamageDiceOverrides, damageDiceIcon, deepFindTerms, extractBaseDamage, isSystemDamageTerm, looksLikeDamageRoll, markAsCrit, nextDamageDieSize, renderComponentDamage, };
+export { DamageCategorization, applyDamageDiceOverrides, damageDiceIcon, deepFindTerms, extractBaseDamage, isSystemDamageTerm, looksLikeDamageRoll, markAsCrit, nextDamageDieSize, renderComponentDamage, simplifyTerm, };

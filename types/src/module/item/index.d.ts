@@ -14,7 +14,7 @@ export { ABCItemPF2e } from "./abc/document.ts";
 export { AncestryPF2e } from "./ancestry/document.ts";
 export { BackgroundPF2e } from "./background/document.ts";
 export { ClassPF2e } from "./class/document.ts";
-export { ActionItemPF2e } from "./action/document.ts";
+export { AbilityItemPF2e } from "./ability/document.ts";
 export { ConsumablePF2e } from "./consumable/document.ts";
 export { DeityPF2e } from "./deity/document.ts";
 export { FeatPF2e } from "./feat/document.ts";

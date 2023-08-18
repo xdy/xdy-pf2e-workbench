@@ -1,6 +1,6 @@
 import { CreatureTrait, SkillAbbreviation } from "@actor/creature/index.ts";
 import { SenseAcuity, SenseType } from "@actor/creature/sense.ts";
-import { AbilityString, MovementType } from "@actor/types.ts";
+import { AttributeString, MovementType } from "@actor/types.ts";
 import { WeaponDamage } from "@item/weapon/data.ts";
 import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponTrait } from "@item/weapon/types.ts";
 import { Size } from "@module/data.ts";
@@ -53,7 +53,7 @@ type BattleFormSpeeds = {
 interface BattleFormStrike {
     label: string;
     img?: ImageFilePath;
-    ability?: AbilityString;
+    ability?: AttributeString;
     category: WeaponCategory;
     group: WeaponGroup | null;
     baseType?: BaseWeaponType | null;

@@ -1,15 +1,16 @@
 import { FeatGroup } from "@actor/character/feats.ts";
 import { RawModifier } from "@actor/modifiers.ts";
+import { CampaignFeaturePF2e } from "@item";
 import { ItemType } from "@item/data/index.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import type { PartyPF2e } from "../document.ts";
 import { PartyCampaign } from "../types.ts";
 import { KingdomCHG, KingdomGovernment, KingdomNationType, KingdomSchema, KingdomSkill, KingdomSource } from "./types.ts";
-import { CampaignFeaturePF2e } from "@item";
 declare const DataModel: typeof import("../../../../../types/foundry/common/abstract/data.js").default;
 /** Model for the Kingmaker campaign data type, which represents a Kingdom */
 declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements PartyCampaign {
     nationType: KingdomNationType;
+    features: FeatGroup<PartyPF2e, CampaignFeaturePF2e>;
     feats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>;
     bonusFeats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>;
     skills: Record<KingdomSkill, Statistic>;
@@ -33,14 +34,18 @@ declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements Par
     /** Removes a custom modifier by slug */
     removeCustomModifier(stat: string, slug: string): Promise<void>;
     update(data: DeepPartial<KingdomSource> & Record<string, unknown>): Promise<void>;
-    private prepareAbilityScores;
-    private prepareData;
-    private prepareFeats;
+    prepareData(): void;
     getRollData(): Record<string, unknown>;
     importActivities({ skipDialog }?: {
         skipDialog?: boolean;
     }): Promise<void>;
+    /** Adds/removes kingdom features as appropriate. Private instead of # because # explodes */
+    private updateFeatures;
     getStatistic(slug: string): Statistic | null;
+    renderSheet(options?: {
+        tab?: string;
+        type?: "builder" | null;
+    }): void;
 }
 interface Kingdom extends ModelPropsFromSchema<KingdomSchema> {
 }

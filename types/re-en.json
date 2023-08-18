@@ -1062,6 +1062,7 @@
             "RollOption": "Roll Option",
             "RollTwice": "Roll Twice",
             "Sense": "Sense",
+            "Statistic": "Statistic",
             "Strike": "Strike",
             "Striking": "Striking",
             "SubstituteRoll": "Substitute Roll",
@@ -1372,6 +1373,9 @@
                     "Snake": "Snake",
                     "Wolf": "Wolf"
                 },
+                "Elemental": {
+                    "ElementalEvolutionLabel": "Elemental Rage Damage"
+                },
                 "Dragon": {
                     "NormalRageDamage": "Deal normal rage damage",
                     "ToggleLabel": "Draconic Rage",
@@ -1588,6 +1592,7 @@
                 "Dragon": {
                     "EnergyPrompt": "Select an energy associated with your dragon abilities."
                 },
+                "Label": "Deviant Ability",
                 "TitanSwing": {
                     "NoteFifteenFeet": "The target is pushed back 15 feet.",
                     "NoteFiveFeet": "The target is pushed back 5 feet.",
@@ -1775,6 +1780,9 @@
                 }
             },
             "Fighter": {
+                "DazingBlow": {
+                    "Note": "If the Strike hits, the creature must attempt a @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|traits:incapacitation] save against your class DC; this is an incapacitation effect.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 2}.</p>\n<p><strong>Critical Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 3}."
+                },
                 "DoubleSlice": {
                     "SecondAttackLabel": "Double Slice Second Attack"
                 }
@@ -2026,6 +2034,7 @@
                         "SkillJunction": "Skill Junction"
                     },
                     "Prompt": {
+                        "AuraSize": "Select a radius for your kinetic aura.",
                         "Element": "Select an element.",
                         "ExpandElement": "Select an element to expand.",
                         "Gate": "Select a kinetic gate.",

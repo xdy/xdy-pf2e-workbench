@@ -1,6 +1,6 @@
 import { AbilityBasedStatistic, ActorAttributes, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, BaseActorSourcePF2e, StrikeData } from "@actor/data/base.ts";
 import { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
-import type { AbilityString, ActorAlliance, MovementType, SaveType, SkillAbbreviation, SkillLongForm } from "@actor/types.ts";
+import type { ActorAlliance, AttributeString, MovementType, SaveType, SkillAbbreviation, SkillLongForm } from "@actor/types.ts";
 import type { CREATURE_ACTOR_TYPES } from "@actor/values.ts";
 import { LabeledNumber, ValueAndMax, ValuesList, ZeroToThree } from "@module/data.ts";
 import { Statistic, StatisticTraceData } from "@system/statistic/index.ts";
@@ -79,7 +79,7 @@ interface AbilityData {
     /** The modifier for this ability */
     mod: number;
 }
-type Abilities = Record<AbilityString, AbilityData>;
+type Abilities = Record<AttributeString, AbilityData>;
 /** A type representing the possible ability strings. */
 type Language = keyof ConfigPF2e["PF2E"]["languages"];
 type Attitude = keyof ConfigPF2e["PF2E"]["attitude"];

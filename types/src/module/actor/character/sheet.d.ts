@@ -3,7 +3,7 @@
 /// <reference types="tooltipster" />
 import { CreatureSheetData } from "@actor/creature/index.ts";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
-import { SaveType } from "@actor/types.ts";
+import { AttributeString, SaveType } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, ItemPF2e } from "@item";
 import { ActionCost, Frequency } from "@item/data/base.ts";
 import { ItemSourcePF2e } from "@item/data/index.ts";
@@ -27,11 +27,9 @@ declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureS
     getData(options?: ActorSheetOptions): Promise<CharacterSheetData<TActor>>;
     /** Organize and classify Items for Character sheets */
     prepareItems(sheetData: ActorSheetDataPF2e<CharacterPF2e>): Promise<void>;
-    /** Disable the initiative button located on the sidebar */
-    disableInitiativeButton(): void;
-    /** Enable the initiative button located on the sidebar */
-    enableInitiativeButton(): void;
     activateListeners($html: JQuery): void;
+    /** Toggle availability of the roll-initiative link on the sidebar */
+    toggleInitiativeLink(link?: HTMLElement | null): void;
     protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
     protected _onDrop(event: ElementDragEvent): Promise<boolean | void>;
     /** Handle a drop event for an existing Owned Item to sort that item */
@@ -92,6 +90,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     background: BackgroundPF2e<CharacterPF2e> | null;
     adjustedBonusEncumbranceBulk: boolean;
     adjustedBonusLimitBulk: boolean;
+    attributeBoostsAllocated: boolean;
     class: ClassPF2e<CharacterPF2e> | null;
     classDCs: {
         dcs: ClassDCSheetData[];
@@ -100,6 +99,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
         /** Show class label and individual modifier lists for each class DC */
         perDCDetails: boolean;
     };
+    apexAttributeOptions: AttributeString[];
     crafting: CraftingSheetData;
     data: CharacterSystemSheetData;
     deity: DeityPF2e<CharacterPF2e> | null;
@@ -113,7 +113,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     spellcastingEntries: SpellcastingSheetData[];
     tabVisibility: CharacterSheetTabVisibility;
     actions: {
-        combat: Record<"action" | "reaction" | "free", {
+        encounter: Record<"action" | "reaction" | "free", {
             label: string;
             actions: ActionSheetData[];
         }>;
@@ -129,6 +129,7 @@ interface ActionSheetData {
     id: string;
     name: string;
     img: string;
+    glyph: string | null;
     actionCost: ActionCost | null;
     frequency: Frequency | null;
     feat: FeatPF2e | null;
@@ -136,6 +137,7 @@ interface ActionSheetData {
     exploration?: {
         active: boolean;
     };
+    hasEffect: boolean;
 }
 interface ClassDCSheetData extends ClassDCData {
     icon: string;

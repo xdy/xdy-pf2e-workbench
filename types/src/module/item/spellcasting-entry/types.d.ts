@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
 import { PhysicalItemPF2e } from "@item/physical/index.ts";
 import { SpellPF2e } from "@item/spell/document.ts";
 import { MagicTradition } from "@item/spell/types.ts";
@@ -13,7 +13,7 @@ interface BaseSpellcastingEntry<TActor extends ActorPF2e | null = ActorPF2e | nu
     actor: TActor;
     sort: number;
     category: SpellcastingCategory;
-    attribute?: AbilityString;
+    attribute?: AttributeString;
     isFlexible: boolean;
     isFocusPool: boolean;
     isInnate: boolean;
@@ -31,7 +31,7 @@ interface BaseSpellcastingEntry<TActor extends ActorPF2e | null = ActorPF2e | nu
     cast(spell: SpellPF2e, options: CastOptions): Promise<void>;
 }
 interface SpellcastingEntry<TActor extends ActorPF2e | null> extends BaseSpellcastingEntry<TActor> {
-    attribute: AbilityString;
+    attribute: AttributeString;
     statistic: Statistic;
 }
 type SpellcastingCategory = keyof ConfigPF2e["PF2E"]["preparationType"];

@@ -12,13 +12,27 @@ declare class StrictSchemaField<TDataSchema extends DataSchema> extends fields.S
     protected _cast(value: unknown): SourceFromSchema<TDataSchema>;
     protected _cleanType(data: object, options?: CleanFieldOptions): SourceFromSchema<TDataSchema>;
 }
+/** A `StringField` that does not cast the source value */
+declare class StrictStringField<TSourceProp extends string, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = boolean> extends fields.StringField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+    protected _cast(value: unknown): unknown;
+}
+/** A `BooleanField` that does not cast the source value */
+declare class StrictBooleanField<TSourceProp extends boolean = boolean, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.BooleanField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+    protected _cast(value: unknown): unknown;
+}
+declare class DataUnionField<TField extends StrictBooleanField<boolean, boolean> | StrictStringField<string, string> | PredicateField<boolean, boolean, boolean>, TRequired extends boolean = boolean, TNullable extends boolean = boolean, THasInitial extends boolean = boolean> extends fields.DataField<TField extends DataField<infer TSourceProp> ? TSourceProp : never, TField extends DataField<infer _TSourceProp, infer TModelProp> ? TModelProp : never, TRequired, TNullable, THasInitial> {
+    fields: TField[];
+    constructor(fields: TField[], options: DataFieldOptions<TField extends DataField<infer TSourceProp> ? TSourceProp : never, TRequired, TNullable, THasInitial>);
+    protected _cast(value?: unknown): unknown;
+    validate(value: unknown, options?: DataFieldValidationOptions | undefined): void | DataModelValidationFailure;
+}
 /** A sluggified string field */
-declare class SlugField<TRequired extends boolean = true, TNullable extends boolean = true, THasInitial extends boolean = true> extends fields.StringField<string, string, TRequired, TNullable, THasInitial> {
+declare class SlugField<TRequired extends boolean = true, TNullable extends boolean = boolean, THasInitial extends boolean = boolean> extends StrictStringField<string, string, TRequired, TNullable, THasInitial> {
     constructor(options?: SlugFieldOptions<TRequired, TNullable, THasInitial>);
     protected static get _defaults(): SlugFieldOptions<boolean, boolean, boolean>;
     protected _cleanType(value: Maybe<string>, options?: CleanFieldOptions): MaybeSchemaProp<string, TRequired, TNullable, THasInitial>;
 }
-interface SlugField<TRequired extends boolean = true, TNullable extends boolean = true, THasInitial extends boolean = true> extends StringField<string, string, TRequired, TNullable, THasInitial> {
+interface SlugField<TRequired extends boolean = true, TNullable extends boolean = boolean, THasInitial extends boolean = boolean> extends StrictStringField<string, string, TRequired, TNullable, THasInitial> {
     options: SlugFieldOptions<TRequired, TNullable, THasInitial>;
 }
 interface SlugFieldOptions<TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean> extends StringFieldOptions<string, TRequired, TNullable, THasInitial> {
@@ -53,4 +67,4 @@ declare class RecordField<TKeyField extends StringField<string, string, true, fa
     protected _validateType(values: unknown, options?: DataFieldValidationOptions): boolean | DataModelValidationFailure | void;
     initialize(values: object | null | undefined, model: ConstructorOf<foundry.abstract.DataModel>, options?: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>): MaybeSchemaProp<RecordFieldModelProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>;
 }
-export { LaxSchemaField, PredicateField, RecordField, SlugField, StrictSchemaField };
+export { DataUnionField, LaxSchemaField, PredicateField, RecordField, SlugField, StrictBooleanField, StrictSchemaField, StrictStringField, };

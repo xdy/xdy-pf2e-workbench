@@ -7,8 +7,8 @@ import { PredicatePF2e } from "@system/predication.ts";
 import Tagify from "@yaireo/tagify";
 /** Prompt the user to pick from a number of options */
 declare abstract class PickAThingPrompt<T> extends Application {
+    #private;
     protected item: ItemPF2e<ActorPF2e>;
-    private resolve?;
     protected selection: PickableThing<T> | null;
     protected choices: PickableThing<T>[];
     /** If the number of choices is beyond a certain length, a select menu is presented instead of a list of buttons */
@@ -24,14 +24,13 @@ declare abstract class PickAThingPrompt<T> extends Application {
     /** Collect all options within the specified scope and then eliminate any that fail the predicate test */
     protected getChoices(): PickableThing<T>[];
     protected getSelection(event: MouseEvent): PickableThing<T> | null;
-    abstract get template(): string;
     /** Return a promise containing the user's item selection, or `null` if no selection was made */
     resolveSelection(): Promise<PickableThing<T> | null>;
     getData(options?: Partial<ApplicationOptions>): Promise<PromptTemplateData>;
     activateListeners($html: JQuery): void;
     /** Close the dialog, applying the effect with configured target or warning the user that something went wrong. */
-    close({ force }?: {
-        force?: boolean | undefined;
+    close(options?: {
+        force?: boolean;
     }): Promise<void>;
 }
 interface PickAThingConstructorArgs<T> {

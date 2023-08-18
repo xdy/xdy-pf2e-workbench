@@ -13,6 +13,7 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     armorClass: null;
     members: CreaturePF2e[];
     campaign: PartyCampaign | null;
+    get active(): boolean;
     get baseAllowedItemTypes(): (ItemType | "physical")[];
     get allowedItemTypes(): (ItemType | "physical")[];
     /** Friendship lives in our hearts */

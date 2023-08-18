@@ -71,6 +71,16 @@ declare const ITEM_ALTERATION_VALIDATORS: {
         mode: StringField<"override", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
         value: StringField<"rare" | "uncommon" | "unique" | "common", unknown, true, false, boolean>;
     }>;
+    "frequency-max": ItemAlterationValidator<{
+        itemType: StringField<"action" | "feat", ItemType, true, false, false>;
+        mode: StringField<"override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
+        value: NumberField<number, unknown, true, false, boolean>;
+    }>;
+    "frequency-per": ItemAlterationValidator<{
+        itemType: StringField<"action" | "feat", ItemType, true, false, false>;
+        mode: StringField<"override" | "upgrade" | "downgrade", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
+        value: StringField<string, unknown, true, false, boolean>;
+    }>;
 };
 interface AlterationFieldOptions<TSourceProp extends SourceFromSchema<AlterationSchema>> extends DataFieldOptions<TSourceProp, true, false, false> {
     validateForItem?: (item: ItemPF2e | ItemSourcePF2e) => asserts item is InstanceType<ConfigPF2e["PF2E"]["Item"]["documentClasses"][TSourceProp["itemType"]]> | InstanceType<ConfigPF2e["PF2E"]["Item"]["documentClasses"][TSourceProp["itemType"]]>["_source"];

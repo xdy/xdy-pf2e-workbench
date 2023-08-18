@@ -23,7 +23,7 @@ declare class EncounterPF2e extends Combat {
     protected _onCreate(data: this["_source"], options: DocumentModificationContext<null>, userId: string): void;
     /** Call onTurnStart for each rule element on the new turn's actor */
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<null>, userId: string): void;
-    /** Disable the initiative button on PC sheets if this was the only encounter */
+    /** Disable the initiative link on PC sheets if this was the only encounter */
     protected _onDelete(options: DocumentModificationContext<null>, userId: string): void;
     /**
      * Work around upstream issue present in versions 11.304-11.306

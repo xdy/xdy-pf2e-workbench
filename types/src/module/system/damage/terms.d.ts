@@ -67,27 +67,31 @@ interface GroupingData extends RollTermData {
     class?: "Grouping";
     term: RollTermData;
 }
+/**
+ * A `Die` surrogate where the `number` or `faces` were not resolvable to numbers at parse time: serializes itself as a
+ * `Die` as soon it is able (guaranteed after evaluation)
+ */
 declare class IntermediateDie extends RollTerm<IntermediateDieData> {
-    number: NumericTerm | MathTerm | Grouping;
-    faces: NumericTerm | MathTerm | Grouping;
-    die: Evaluated<Die> | null;
+    number: number | MathTerm | Grouping;
+    faces: number | MathTerm | Grouping;
+    die: Die | null;
     constructor(data: IntermediateDieData);
     static SERIALIZE_ATTRIBUTES: string[];
     get expression(): string;
     get total(): number | undefined;
-    get dice(): [Evaluated<Die>] | never[];
+    get dice(): Die[];
     get isDeterministic(): boolean;
     get minimumValue(): number;
     /** Not able to get an expected value from a Math term */
     get expectedValue(): number;
     get maximumValue(): number;
     protected _evaluate(): Promise<Evaluated<this>>;
-    toJSON(): IntermediateDieData;
+    toJSON(): DieData | IntermediateDieData;
 }
 interface IntermediateDieData extends RollTermData {
-    class?: "IntermediateDie";
-    number: NumericTermData | MathTermData | GroupingData;
-    faces: NumericTermData | MathTermData | GroupingData;
+    class?: string;
+    number: number | NumericTermData | MathTermData | GroupingData;
+    faces: number | NumericTermData | MathTermData | GroupingData;
     die?: DieData | null;
 }
 declare class InstancePool extends PoolTerm {

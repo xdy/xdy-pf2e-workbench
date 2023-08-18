@@ -8,11 +8,12 @@ import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
 import { CampaignFeaturePF2e, ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
+import { ValueAndMax } from "@module/data.ts";
+import { SheetOptions } from "@module/sheet/helpers.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { PartyPF2e } from "../document.ts";
-import { KingdomAbilityData, KingdomCommodityData, KingdomData, KingdomLeadershipData } from "./types.ts";
 import { Kingdom } from "./model.ts";
-import { SheetOptions } from "@module/sheet/helpers.ts";
+import { KingdomAbilityData, KingdomData, KingdomLeadershipData } from "./types.ts";
 declare const KINGDOM_TRAITS: string[];
 type KingdomTrait = (typeof KINGDOM_TRAITS)[number];
 declare class KingdomSheetPF2e extends ActorSheetPF2e<PartyPF2e> {
@@ -22,6 +23,7 @@ declare class KingdomSheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     get kingdom(): Kingdom;
     get title(): string;
     static get defaultOptions(): ActorSheetOptions;
+    protected _getHeaderButtons(): ApplicationHeaderButton[];
     getData(options?: ActorSheetOptions): Promise<KingdomSheetData>;
     activateListeners($html: JQuery<HTMLElement>): void;
     protected filterActions(trait: string | null, options?: {
@@ -41,6 +43,10 @@ interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
         label: string;
         ruinLabel: string;
     })[];
+    commodities: CommoditySheetData[];
+    resourceDice: KingdomData["resources"]["dice"] & {
+        icon: string;
+    };
     leadership: (KingdomLeadershipData & {
         actor: ActorPF2e | null;
         img: string;
@@ -53,15 +59,12 @@ interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
     }[];
     skills: Statistic[];
     feats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>[];
-    resources: {
-        dice: KingdomData["resources"]["dice"] & {
-            icon: string;
-        };
-        commodities: (KingdomCommodityData & {
-            type: string;
-            label: string;
-        })[];
-    };
     actionFilterChoices: SheetOptions;
+}
+interface CommoditySheetData extends ValueAndMax {
+    type: string;
+    label: string;
+    /** Worksite data (if it exists for the commodity type) */
+    workSites: Kingdom["resources"]["workSites"]["ore"] | null;
 }
 export { KingdomSheetPF2e };

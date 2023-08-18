@@ -51,6 +51,7 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     get wornArmor(): ArmorPF2e<this> | null;
     /** Get the held shield of most use to the wielder */
     get heldShield(): ArmorPF2e<this> | null;
+    /** Retrieve percpetion and spellcasting statistics */
     getStatistic(slug: SaveType | SkillLongForm | "perception"): Statistic;
     getStatistic(slug: string): Statistic | null;
     protected _initialize(options?: Record<string, unknown>): void;

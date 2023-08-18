@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
 import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
 import { ItemSummaryData } from "@item/data/index.ts";
 import { CoinsPF2e, IdentificationStatus, MystifiedData } from "@item/physical/index.ts";
@@ -15,7 +15,7 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     get group(): WeaponGroup | null;
     get category(): WeaponCategory;
     /** The default ability used in attack rolls */
-    get defaultAbility(): AbilityString;
+    get defaultAbility(): AttributeString;
     get hands(): "0" | "1" | "1+" | "2";
     /** The range increment of this weapon, or null if a melee weapon */
     get rangeIncrement(): WeaponRangeIncrement | null;
@@ -53,7 +53,7 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     computeAdjustedPrice(): CoinsPF2e | null;
     private getRunesValuationData;
     private getMaterialValuationData;
-    getChatData(this: WeaponPF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
+    getChatData(this: WeaponPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;
     /** Generate a weapon name base on precious-material composition and runes */
     generateMagicName(): string;
     getMystifiedData(status: IdentificationStatus, { source }?: {

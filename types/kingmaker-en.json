@@ -8,26 +8,32 @@
         },
         "AbilityScores": "Ability Scores",
         "KingdomBuilder": {
-            "Builder": "Builder",
             "Aspiration": "Aspiration",
+            "AssignBoostsHeader": "Assign your boosts",
+            "Boost": "Boost",
             "BoostsLabel": "Ability Boosts",
+            "Builder": "Builder",
+            "Complete": "Complete",
             "FinalizeHeader": "Finalize Kingdom",
+            "Flaw": "Flaw",
             "FlawLabel": "Ability Flaw",
             "Free": "Free",
             "ManualToggle": "Use Manual Modifiers",
             "Missing": {
                 "Charter": "Choose a charter to select boosts.",
                 "Heartland": "Choose a heartland to select boosts.",
-                "Government": "Choose a government to select boosts"
+                "Government": "Choose a government to select boosts."
             },
             "None": "None",
+            "NotSelected": "Not Selected",
             "SaveAndContinue": "Save & Continue",
             "Tabs": {
                 "Charter": "Charter",
                 "Heartland": "Heartland",
                 "Government": "Government",
                 "AbilityScores": "Ability Scores"
-            }
+            },
+            "Title": "Build your Kingdom"
         },
         "Kingdom": {
             "Activities": "Kingdom Activities",
@@ -53,7 +59,7 @@
             "ControlDC": "Control DC",
             "ImportDialog": {
                 "Title": "Import Activities",
-                "Content": "{added} activities will be added and {updated} activities will be updated, is this ok?"
+                "Content": "{added} activities will be added and {updated} activities will be updated: is this ok?"
             },
             "Leaders": "Leaders",
             "LeaderMissing": "None (Drag a new actor)",

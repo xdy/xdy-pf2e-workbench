@@ -1,11 +1,12 @@
 import { ActorPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
+import { DamageDicePF2e, ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { CheckRoll } from "@system/check/index.ts";
 import { LaxSchemaField } from "@system/schema-data-fields.ts";
+import type { Statistic } from "@system/statistic/index.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { BracketedValue, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
 declare const DataModel: typeof import("types/foundry/common/abstract/data.d.ts").default;
@@ -17,6 +18,7 @@ declare const DataModel: typeof import("types/foundry/common/abstract/data.d.ts"
  */
 declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSchema> extends DataModel<ItemPF2e<ActorPF2e>, TSchema> {
     #private;
+    protected static _schema: LaxSchemaField<RuleElementSchema> | undefined;
     sourceIndex: number | null;
     protected suppressWarnings: boolean;
     /** A list of actor types on which this rule element can operate (all unless overridden) */
@@ -163,7 +165,6 @@ interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abs
     applyDamageExclusion?(weapon: WeaponPF2e, modifiers: (DamageDicePF2e | ModifierPF2e)[]): void;
 }
 declare namespace RuleElementPF2e {
-    let _schema: LaxSchemaField<RuleElementSchema> | undefined;
     interface PreCreateParams<T extends RuleElementSource = RuleElementSource> {
         /** The source partial of the rule element's parent item to be created */
         itemSource: ItemSourcePF2e;
@@ -185,6 +186,7 @@ declare namespace RuleElementPF2e {
     interface AfterRollParams {
         roll: Rolled<CheckRoll> | null;
         selectors: string[];
+        statistic: Statistic | StatisticModifier;
         domains: string[];
         rollOptions: Set<string>;
     }

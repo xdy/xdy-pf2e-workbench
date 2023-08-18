@@ -18,6 +18,8 @@ interface AuraRuleElement extends RuleElementPF2e<AuraSchema>, ModelPropsFromSch
 type AuraSchema = RuleElementSchema & {
     /** The radius of the order in feet, or a string that will resolve to one */
     radius: ResolvableValueField<true, false, false>;
+    /** An optional level for the aura, to be used to set the level of the effects it transmits */
+    level: ResolvableValueField<false, true, true>;
     /** Associated traits, including ones that determine transmission through walls ("visual", "auditory") */
     traits: ArrayField<StringField<EffectTrait, EffectTrait, true, false, false>, EffectTrait[], EffectTrait[], true, false, true>;
     /** References to effects included in this aura */
@@ -27,9 +29,14 @@ type AuraSchema = RuleElementSchema & {
      * user's assigned color
      */
     colors: SchemaField<{
-        border: ColorField<false, true, true>;
-        fill: ColorField<false, true, true>;
+        border: ColorField;
+        fill: ColorField;
     }, AuraColors, AuraColors, false, true, true>;
+    /**
+     * If another aura with the same slug is already being emitted, merge this aura's data in with the other's,
+     * combining traits and effects as well as merging `colors` data.
+     */
+    mergeExisting: BooleanField<boolean, boolean, false, false, true>;
 };
 type AuraEffectSchema = {
     uuid: StringField<string, string, true, false, false>;

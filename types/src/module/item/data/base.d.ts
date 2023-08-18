@@ -1,5 +1,5 @@
 import { CreatureTrait } from "@actor/creature/types.ts";
-import { ActionTrait } from "@item/action/types.ts";
+import { ActionTrait } from "@item/ability/types.ts";
 import { KingmakerTrait } from "@item/campaign-feature/types.ts";
 import { NPCAttackTrait } from "@item/melee/data.ts";
 import { PhysicalItemTrait } from "@item/physical/data.ts";
@@ -63,13 +63,14 @@ interface ItemSystemSource {
     schema: DocumentSchemaRecord;
 }
 type ItemSystemData = ItemSystemSource;
+type FrequencyInterval = keyof ConfigPF2e["PF2E"]["frequencies"];
 interface FrequencySource {
     value?: number;
     max: number;
     /** Gap between recharges as an ISO8601 duration, or "day" for daily prep. */
-    per: keyof ConfigPF2e["PF2E"]["frequencies"];
+    per: FrequencyInterval;
 }
 interface Frequency extends FrequencySource {
     value: number;
 }
-export { ActionCost, ActionType, BaseItemSourcePF2e, Frequency, FrequencySource, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, };
+export { ActionCost, ActionType, BaseItemSourcePF2e, Frequency, FrequencyInterval, FrequencySource, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, };

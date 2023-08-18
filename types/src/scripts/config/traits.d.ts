@@ -672,6 +672,7 @@ declare const weaponTraits: {
     "versatile-lawful": string;
     "versatile-negative": string;
     "versatile-p": string;
+    "versatile-poison": string;
     "versatile-positive": string;
     "versatile-s": string;
     "versatile-sonic": string;
@@ -1009,6 +1010,7 @@ declare const npcAttackTraits: {
     "versatile-lawful": string;
     "versatile-negative": string;
     "versatile-p": string;
+    "versatile-poison": string;
     "versatile-positive": string;
     "versatile-s": string;
     "versatile-sonic": string;
@@ -2091,6 +2093,7 @@ declare const traitDescriptions: {
     "versatile-lawful": string;
     "versatile-negative": string;
     "versatile-p": string;
+    "versatile-poison": string;
     "versatile-positive": string;
     "versatile-s": string;
     "versatile-sonic": string;

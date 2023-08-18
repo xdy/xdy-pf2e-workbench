@@ -18,7 +18,7 @@ declare class ConsumablePF2e<TParent extends ActorPF2e | null = ActorPF2e | null
     prepareBaseData(): void;
     /** Rule elements cannot be executed from consumable items, but they can be used to generate effects */
     prepareRuleElements(): RuleElementPF2e[];
-    getChatData(this: ConsumablePF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptions, rollOptions?: Record<string, unknown>): Promise<ItemSummaryData>;
+    getChatData(this: ConsumablePF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions, rollOptions?: Record<string, unknown>): Promise<ItemSummaryData>;
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;

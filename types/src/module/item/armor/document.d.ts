@@ -29,7 +29,7 @@ declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     prepareActorData(this: ArmorPF2e<ActorPF2e>): void;
     onPrepareSynthetics(this: ArmorPF2e<ActorPF2e>): void;
     private setActorShieldData;
-    getChatData(this: ArmorPF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
+    getChatData(this: ArmorPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;

@@ -4,7 +4,7 @@ import { ItemOriginFlag } from "@module/chat-message/data.ts";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
 import { UserPF2e } from "@module/user/document.ts";
-import { EnrichHTMLOptionsPF2e } from "@system/text-editor.ts";
+import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ItemFlagsPF2e, ItemSystemData } from "./data/base.ts";
 import { ItemSourcePF2e, ItemSummaryData, ItemType, TraitChatData } from "./data/index.ts";
 import { PhysicalItemPF2e } from "./physical/document.ts";
@@ -12,6 +12,9 @@ import { ItemSheetPF2e } from "./sheet/base.ts";
 import { ItemInstances } from "./types.ts";
 /** Override and extend the basic :class:`Item` implementation */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
+    static getDefaultArtwork(itemData: foundry.documents.ItemSource): {
+        img: ImageFilePath;
+    };
     /** Prepared rule elements from this item */
     rules: RuleElementPF2e[];
     /** The sluggified name of the item **/
@@ -38,7 +41,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     delete(context?: DocumentModificationContext<TParent>): Promise<this>;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
-    getRollData(): NonNullable<EnrichHTMLOptionsPF2e["rollData"]>;
+    getRollData(): NonNullable<EnrichmentOptionsPF2e["rollData"]>;
     /**
      * Create a chat card for this item and either return the message or send it to the chat log. Many cards contain
      * follow-up options for attack rolls, effect application, etc.
@@ -62,8 +65,8 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
      * Internal method that transforms data into something that can be used for chat.
      * Currently renders description text using enrichHTML.
      */
-    protected processChatData<T extends ItemSummaryData>(htmlOptions: EnrichHTMLOptionsPF2e | undefined, data: T): Promise<T>;
-    getChatData(htmlOptions?: EnrichHTMLOptionsPF2e, _rollOptions?: Record<string, unknown>): Promise<ItemSummaryData>;
+    protected processChatData<T extends ItemSummaryData>(htmlOptions: EnrichmentOptionsPF2e | undefined, data: T): Promise<T>;
+    getChatData(htmlOptions?: EnrichmentOptionsPF2e, _rollOptions?: Record<string, unknown>): Promise<ItemSummaryData>;
     protected traitChatData(dictionary?: Record<string, string | undefined>): TraitChatData[];
     /** Don't allow the user to create a condition or spellcasting entry from the sidebar. */
     static createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: {

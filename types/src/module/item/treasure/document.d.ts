@@ -10,7 +10,7 @@ declare class TreasurePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> 
     prepareBaseData(): void;
     /** Don't adjust the price of treasure for size */
     protected adjustPriceForSize(): CoinsPF2e;
-    getChatData(this: TreasurePF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData>;
+    getChatData(this: TreasurePF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;
 }
 interface TreasurePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     readonly _source: TreasureSource;

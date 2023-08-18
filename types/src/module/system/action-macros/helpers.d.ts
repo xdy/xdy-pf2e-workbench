@@ -8,6 +8,7 @@ import { CheckType } from "@system/check/index.ts";
 import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import { CheckContext, CheckContextData, CheckContextOptions, SimpleRollActionCheckOptions } from "./types.ts";
 export declare class ActionMacroHelpers {
+    #private;
     static resolveStat(stat: string): {
         checkType: CheckType;
         property: string;

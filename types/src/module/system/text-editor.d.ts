@@ -4,19 +4,25 @@ import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 /** Censor enriched HTML according to metagame knowledge settings */
 declare class TextEditorPF2e extends TextEditor {
     #private;
-    static enrichHTML(content: string | null, options: EnrichHTMLOptionsPF2e & {
+    static enrichHTML(content: string | null, options: EnrichmentOptionsPF2e & {
         async: true;
     }): Promise<string>;
-    static enrichHTML(content: string | null, options: EnrichHTMLOptionsPF2e & {
+    static enrichHTML(content: string | null, options: EnrichmentOptionsPF2e & {
         async: false;
     }): string;
-    static enrichHTML(content: string | null, options: EnrichHTMLOptionsPF2e): string | Promise<string>;
+    static enrichHTML(content: string | null, options: EnrichmentOptionsPF2e): string | Promise<string>;
+    /**
+     * Upstream retrieves documents from UUID links sequentially, which has a noticable load time with text containing
+     * many links: retrieve every linked document at once beforehand with the faster `UUIDUtils.fromUUIDs` system helper
+     * so that subsequent calls to `fromUuid` finds all documents in caches.
+     */
+    static _enrichContentLinks(text: Text[], options?: EnrichmentOptions): boolean | Promise<boolean>;
     /** Replace core static method to conditionally handle parsing of inline damage rolls */
     static _createInlineRoll(match: RegExpMatchArray, rollData: Record<string, unknown>, options?: EvaluateRollParams): Promise<HTMLAnchorElement | null>;
     /** Replace core static method to conditionally handle inline damage roll clicks */
     static _onClickInlineRoll(event: MouseEvent): Promise<ChatMessage | void>;
-    static processUserVisibility(content: string, options: EnrichHTMLOptionsPF2e): string;
-    static enrichString(data: RegExpMatchArray, options?: EnrichHTMLOptionsPF2e): Promise<HTMLElement | null>;
+    static processUserVisibility(content: string, options: EnrichmentOptionsPF2e): string;
+    static enrichString(data: RegExpMatchArray, options?: EnrichmentOptionsPF2e): Promise<HTMLElement | null>;
     /**
      * Convert an XML node into an HTML span element with data-visibility, data-whose, and class attributes
      * @param html    The HTML element containing the XML node: mutated by this method as part of node replacement
@@ -26,7 +32,7 @@ declare class TextEditorPF2e extends TextEditor {
      */
     static convertXMLNode(html: HTMLElement, name: string, { visible, visibility, whose, classes }: ConvertXMLNodeOptions): HTMLElement | null;
 }
-interface EnrichHTMLOptionsPF2e extends EnrichHTMLOptions {
+interface EnrichmentOptionsPF2e extends EnrichmentOptions {
     rollData?: RollDataPF2e;
 }
 interface RollDataPF2e {
@@ -48,4 +54,4 @@ interface ConvertXMLNodeOptions {
     /** Any additional classes to add to the span element */
     classes?: string[];
 }
-export { EnrichHTMLOptionsPF2e, TextEditorPF2e };
+export { EnrichmentOptionsPF2e, TextEditorPF2e };

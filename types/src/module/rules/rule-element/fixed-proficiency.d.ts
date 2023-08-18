@@ -1,6 +1,6 @@
 import { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
 import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField } from "./data.ts";
@@ -20,6 +20,6 @@ interface FixedProficiencyRuleElement extends RuleElementPF2e<FixedProficiencyRu
 type FixedProficiencyRuleSchema = RuleElementSchema & {
     selector: StringField<string, string, true, false, false>;
     value: ResolvableValueField<true, false, false>;
-    ability: StringField<AbilityString, AbilityString, true, false, false>;
+    ability: StringField<AttributeString, AttributeString, true, false, false>;
 };
 export { FixedProficiencyRuleElement };

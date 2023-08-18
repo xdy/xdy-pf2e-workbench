@@ -20,6 +20,5 @@ type KingdomSource = SourceFromSchema<typeof KINGDOM_SCHEMA>;
 type KingdomData = ModelPropsFromSchema<typeof KINGDOM_SCHEMA>;
 type KingdomAbilityData = KingdomData["abilities"][KingdomAbility];
 type KingdomLeadershipData = KingdomData["leadership"][KingdomLeadershipRole];
-type KingdomCommodityData = KingdomData["resources"]["commodities"][KingdomCommodity];
 type FameType = "fame" | "infamy";
-export { KingdomAbility, KingdomAbilityData, KingdomCommodity, KingdomCommodityData, KingdomCHG, KingdomData, KingdomGovernment, KingdomLeadershipData, KingdomLeadershipRole, KingdomNationType, KingdomSchema, KingdomSkill, KingdomSource, FameType, };
+export { KingdomAbility, KingdomAbilityData, KingdomCommodity, KingdomCHG, KingdomData, KingdomGovernment, KingdomLeadershipData, KingdomLeadershipRole, KingdomNationType, KingdomSchema, KingdomSkill, KingdomSource, FameType, };

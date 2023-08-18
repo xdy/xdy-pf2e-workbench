@@ -5,7 +5,7 @@ import { AbilityData, BaseCreatureSource, CreatureAttributes, CreatureDetails, C
 import { Alignment, CreatureInitiativeSource, CreatureSpeeds, CreatureTraitsSource, SenseData } from "@actor/creature/index.ts";
 import { CreatureSensePF2e } from "@actor/creature/sense.ts";
 import { AbilityBasedStatistic, ActorAttributesSource, ActorFlagsPF2e, HitPointsStatistic, InitiativeData, PerceptionData, StrikeData, TraitViewData } from "@actor/data/base.ts";
-import { AbilityString, MovementType, SaveType } from "@actor/types.ts";
+import { AttributeString, MovementType, SaveType } from "@actor/types.ts";
 import { FeatPF2e, ItemPF2e, WeaponPF2e } from "@item";
 import { ArmorCategory } from "@item/armor/types.ts";
 import { ItemSystemData } from "@item/data/base.ts";
@@ -45,7 +45,7 @@ type CharacterFlags = ActorFlagsPF2e & {
     };
 };
 interface CharacterSystemSource extends CreatureSystemSource {
-    abilities?: Record<AbilityString, {
+    abilities?: Record<AttributeString, {
         mod: number;
     }>;
     attributes: CharacterAttributesSource;
@@ -102,7 +102,7 @@ interface CharacterDetailsSource {
     };
     /** The key ability which class saves (and other class-related things) scale off of. */
     keyability: {
-        value: AbilityString;
+        value: AttributeString;
     };
     /** How old the character is (user-provided field). */
     age: {
@@ -174,12 +174,14 @@ interface AttributeBoostsSource {
     /** Whether this PC's ability scores are being manually entered (aka custom) */
     manual: boolean;
     boosts: {
-        1: AbilityString[];
-        5: AbilityString[];
-        10: AbilityString[];
-        15: AbilityString[];
-        20: AbilityString[];
+        1?: AttributeString[];
+        5?: AttributeString[];
+        10?: AttributeString[];
+        15?: AttributeString[];
+        20?: AttributeString[];
     };
+    /** Attribute Apex increase from Automatic Bonus Progression */
+    apex?: AttributeString | null;
 }
 interface CharacterResourcesSource {
     heroPoints: ValueAndMax;
@@ -224,7 +226,7 @@ interface CharacterSystemData extends Omit<CharacterSystemSource, "customModifie
     exploration: string[];
 }
 interface CharacterSkillData extends SkillData {
-    ability: AbilityString;
+    ability: AttributeString;
     /** The proficiency rank ("TEML") */
     rank: ZeroToFour;
     /** Whether this skill is subject to an armor check penalty */
@@ -246,11 +248,11 @@ interface CharacterBuildData {
  */
 interface AttributeBoosts extends AttributeBoostsSource {
     /** Key ability score options drawn from class and class features */
-    keyOptions: AbilityString[];
-    boosts: AttributeBoostsSource["boosts"] & {
-        ancestry: AbilityString[];
-        background: AbilityString[];
-        class: AbilityString | null;
+    keyOptions: AttributeString[];
+    boosts: Required<AttributeBoostsSource["boosts"]> & {
+        ancestry: AttributeString[];
+        background: AttributeString[];
+        class: AttributeString | null;
     };
     /** Number of remaining allowed boosts (UI and gradual ability boosts only) */
     allowedBoosts: {
@@ -261,12 +263,13 @@ interface AttributeBoosts extends AttributeBoostsSource {
         20: number;
     };
     flaws: {
-        ancestry: AbilityString[];
+        ancestry: AttributeString[];
     };
+    apex: AttributeString | null;
 }
-type CharacterAbilities = Record<AbilityString, CharacterAbilityData>;
+type CharacterAbilities = Record<AttributeString, CharacterAbilityData>;
 interface CharacterSaveData extends SaveData {
-    ability: AbilityString;
+    ability: AttributeString;
     /** The proficiency rank ("TEML") */
     rank: ZeroToFour;
 }
@@ -467,4 +470,4 @@ interface SlottedFeat<T extends FeatLike = FeatPF2e> {
 interface BonusFeat<T extends FeatLike = FeatPF2e> {
     feat: T;
 }
-export { BaseWeaponProficiencyKey, BonusFeat, CategoryProficiencies, CharacterAttributes, CharacterAttributesSource, CharacterDetails, CharacterDetailsSource, CharacterFlags, CharacterProficiency, CharacterResources, CharacterSaveData, CharacterSaves, CharacterSkillData, CharacterSource, CharacterStrike, CharacterSystemData, CharacterSystemSource, CharacterTraitsData, CharacterTraitsSource, ClassDCData, FeatLike, LinkedProficiency, MagicTraditionProficiencies, MartialProficiencies, MartialProficiency, MartialProficiencyKey, SlottedFeat, WeaponGroupProficiencyKey, };
+export { BaseWeaponProficiencyKey, BonusFeat, CategoryProficiencies, CharacterAbilities, CharacterAttributes, CharacterAttributesSource, CharacterDetails, CharacterDetailsSource, CharacterFlags, CharacterProficiency, CharacterResources, CharacterSaveData, CharacterSaves, CharacterSkillData, CharacterSource, CharacterStrike, CharacterSystemData, CharacterSystemSource, CharacterTraitsData, CharacterTraitsSource, ClassDCData, FeatLike, LinkedProficiency, MagicTraditionProficiencies, MartialProficiencies, MartialProficiency, MartialProficiencyKey, SlottedFeat, WeaponGroupProficiencyKey, };

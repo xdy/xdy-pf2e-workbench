@@ -1,8 +1,8 @@
 import { ActorPF2e, PartyPF2e } from "@actor";
 import { FeatGroup } from "@actor/character/feats.ts";
+import { ItemPF2e } from "@item";
 import { ActionCost, Frequency } from "@item/data/base.ts";
 import { UserPF2e } from "@module/user/index.ts";
-import { ItemPF2e } from "../index.ts";
 import { CampaignFeatureSource, CampaignFeatureSystemData } from "./data.ts";
 import { BehaviorType, KingmakerCategory, KingmakerTrait } from "./types.ts";
 declare class CampaignFeaturePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {

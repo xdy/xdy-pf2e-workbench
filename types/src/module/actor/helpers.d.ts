@@ -11,6 +11,8 @@ declare function resetActors(actors?: Iterable<ActorPF2e>, { rerender }?: {
 declare function migrateActorSource(source: PreCreate<ActorSourcePF2e>): Promise<ActorSourcePF2e>;
 /** Review `removeOnExit` aura effects and remove any that no longer apply */
 declare function checkAreaEffects(this: ActorPF2e): Promise<void>;
+/**  Set a roll option for HP remaining and percentage remaining */
+declare function setHitPointsRollOptions(actor: ActorPF2e): void;
 /** Find the lowest multiple attack penalty for an attack with a given item */
 declare function calculateMAPs(item: ItemPF2e, { domains, options }: {
     domains: string[];
@@ -29,8 +31,9 @@ declare function calculateRangePenalty(actor: ActorPF2e, increment: number | nul
 /** Whether this actor is of a the "character" type, excluding those from the PF2E Companion Compendia module */
 declare function isReallyPC(actor: ActorPF2e): boolean;
 interface MAPData {
+    slug: "multiple-attack-penalty";
     label: string;
     map1: number;
     map2: number;
 }
-export { calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, getRangeIncrement, isOffGuardFromFlanking, isReallyPC, migrateActorSource, resetActors, strikeFromMeleeItem, };
+export { calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, getRangeIncrement, isOffGuardFromFlanking, isReallyPC, migrateActorSource, resetActors, setHitPointsRollOptions, strikeFromMeleeItem, };

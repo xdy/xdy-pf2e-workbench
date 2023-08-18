@@ -1,5 +1,6 @@
 import { HitPointsSummary } from "@actor/base.ts";
-import { AbilityString, SkillLongForm } from "@actor/types.ts";
+import { AttributeString, SaveType, SkillLongForm } from "@actor/types.ts";
+import { MagicTradition } from "@item/spell/types.ts";
 import { ZeroToFour } from "@module/data.ts";
 import { Statistic } from "@system/statistic/index.ts";
 interface CharacterHitPointsSummary extends HitPointsSummary {
@@ -8,7 +9,7 @@ interface CharacterHitPointsSummary extends HitPointsSummary {
 }
 type CharacterSkill = Statistic & {
     rank: ZeroToFour;
-    ability: AbilityString;
+    ability: AttributeString;
 };
 type CharacterSkills = Record<SkillLongForm, CharacterSkill> & Partial<Record<string, CharacterSkill>>;
 /** Single source of a Dexterity modifier cap to Armor Class, including the cap value itself. */
@@ -18,4 +19,6 @@ interface DexterityModifierCapData {
     /** The source of this Dex cap - usually the name of an armor, a monk stance, or a spell. */
     source: string;
 }
-export { CharacterHitPointsSummary, CharacterSkill, CharacterSkills, DexterityModifierCapData };
+/** Slugs guaranteed to return a `Statistic` when passed to `CharacterPF2e#getStatistic` */
+type GuaranteedGetStatisticSlug = SaveType | SkillLongForm | "perception" | "class-spell" | "class" | "class-dc" | "classDC" | MagicTradition;
+export { CharacterHitPointsSummary, CharacterSkill, CharacterSkills, DexterityModifierCapData, GuaranteedGetStatisticSlug, };

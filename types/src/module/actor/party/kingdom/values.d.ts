@@ -10,7 +10,7 @@ declare const KINGDOM_RUIN_LABELS: {
     loyalty: string;
 };
 declare const KINGDOM_LEADERSHIP: readonly ["ruler", "counselor", "general", "emissary", "magister", "treasurer", "viceroy", "warden"];
-declare const KINGDOM_COMMODITIES: readonly ["food", "lumber", "luxuries", "ore", "stone"];
+declare const KINGDOM_COMMODITIES: readonly ["food", "luxuries", "lumber", "ore", "stone"];
 declare const KINGDOM_SKILLS: readonly ["agriculture", "arts", "boating", "defense", "engineering", "exploration", "folklore", "industry", "intrigue", "magic", "politics", "scholarship", "statecraft", "trade", "warfare", "wilderness"];
 declare const KINGDOM_SKILL_LABELS: Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", string>;
 declare const KINGDOM_SKILL_ABILITIES: Record<KingdomSkill, KingdomAbility>;

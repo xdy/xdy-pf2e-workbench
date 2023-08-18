@@ -1,8 +1,8 @@
 /// <reference types="jquery" resolution-mode="require"/>
 import { ActorPF2e } from "@actor";
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
 import { ItemPF2e } from "@item";
-import { ActionTrait } from "@item/action/types.ts";
+import { ActionTrait } from "@item/ability/types.ts";
 import { ItemSourcePF2e, ItemSummaryData } from "@item/data/index.ts";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
@@ -14,7 +14,7 @@ import { CheckRoll } from "@system/check/index.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
 import { DamageRollContext, SpellDamageTemplate } from "@system/damage/types.ts";
 import { StatisticRollParameters } from "@system/statistic/index.ts";
-import { EnrichHTMLOptionsPF2e } from "@system/text-editor.ts";
+import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data.ts";
 import { SpellOverlayCollection } from "./overlay.ts";
 import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "./types.ts";
@@ -52,9 +52,9 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get isCantrip(): boolean;
     get isFocusSpell(): boolean;
     get isRitual(): boolean;
-    get attribute(): AbilityString;
+    get attribute(): AttributeString;
     /** @deprecated */
-    get ability(): AbilityString;
+    get ability(): AttributeString;
     get components(): Record<SpellComponent, boolean> & {
         value: string;
     };
@@ -67,7 +67,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     computeCastRank(slotRank?: number): number;
     getRollData(rollOptions?: {
         castLevel?: number | string;
-    }): NonNullable<EnrichHTMLOptions["rollData"]>;
+    }): NonNullable<EnrichmentOptions["rollData"]>;
     getDamage(damageOptions?: SpellDamageOptions): Promise<SpellDamage | null>;
     /**
      * Loads an alternative version of this spell, called a variant.
@@ -86,7 +86,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     prepareSiblingData(this: SpellPF2e<ActorPF2e>): void;
     getRollOptions(prefix?: string): string[];
     toMessage(event?: MouseEvent | JQuery.TriggeredEvent, { create, data, rollMode }?: SpellToMessageOptions): Promise<ChatMessagePF2e | undefined>;
-    getChatData(this: SpellPF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptionsPF2e, rollOptions?: {
+    getChatData(this: SpellPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptionsPF2e, rollOptions?: {
         castLevel?: number | string;
         slotLevel?: number | string;
     }): Promise<Omit<ItemSummaryData, "traits">>;

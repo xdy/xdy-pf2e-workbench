@@ -1,4 +1,4 @@
-import type { ActionItemSource } from "@item/action/data.ts";
+import type { AbilityItemSource } from "@item/ability/data.ts";
 import type { AfflictionSource } from "@item/affliction/data.ts";
 import type { AncestrySource } from "@item/ancestry/data.ts";
 import type { ArmorSource } from "@item/armor/data.ts";
@@ -28,7 +28,7 @@ type ProficiencyRank = (typeof PROFICIENCY_RANKS)[number];
 type NonPhysicalItemType = "action" | "affliction" | "ancestry" | "background" | "campaignFeature" | "class" | "condition" | "deity" | "effect" | "feat" | "heritage" | "kit" | "lore" | "melee" | "spell" | "spellcastingEntry";
 type ItemType = NonPhysicalItemType | PhysicalItemType;
 type PhysicalItemSource = ArmorSource | BookSource | ConsumableSource | ContainerSource | EquipmentSource | TreasureSource | WeaponSource;
-type ItemSourcePF2e = PhysicalItemSource | ActionItemSource | AfflictionSource | AncestrySource | BackgroundSource | CampaignFeatureSource | ClassSource | ConditionSource | DeitySource | EffectSource | FeatSource | HeritageSource | KitSource | LoreSource | MeleeSource | SpellSource | SpellcastingEntrySource;
+type ItemSourcePF2e = PhysicalItemSource | AbilityItemSource | AfflictionSource | AncestrySource | BackgroundSource | CampaignFeatureSource | ClassSource | ConditionSource | DeitySource | EffectSource | FeatSource | HeritageSource | KitSource | LoreSource | MeleeSource | SpellSource | SpellcastingEntrySource;
 type MagicItemSource = Exclude<PhysicalItemSource, ConsumableSource | TreasureSource>;
 interface ItemSummaryData {
     [key: string]: unknown;
@@ -45,4 +45,4 @@ interface TraitChatData {
     mystified?: boolean;
     excluded?: boolean;
 }
-export { ActionItemSource, AncestrySource, ArmorSource, BackgroundSource, BookSource, ClassSource, ConditionSource, ConsumableSource, ContainerSource, DeitySource, EffectSource, EquipmentSource, FeatSource, ItemSourcePF2e, ItemSummaryData, ItemType, KitSource, LoreSource, MagicItemSource, MeleeSource, NonPhysicalItemType, PhysicalItemSource, ProficiencyRank, SpellSource, SpellcastingEntrySource, TraitChatData, TreasureSource, WeaponSource, };
+export { AbilityItemSource, AncestrySource, ArmorSource, BackgroundSource, BookSource, ClassSource, ConditionSource, ConsumableSource, ContainerSource, DeitySource, EffectSource, EquipmentSource, FeatSource, ItemSourcePF2e, ItemSummaryData, ItemType, KitSource, LoreSource, MagicItemSource, MeleeSource, NonPhysicalItemType, PhysicalItemSource, ProficiencyRank, SpellSource, SpellcastingEntrySource, TraitChatData, TreasureSource, WeaponSource, };

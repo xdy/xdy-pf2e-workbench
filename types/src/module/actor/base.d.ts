@@ -14,7 +14,7 @@ import { RuleElementPF2e } from "@module/rules/rule-element/base.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { ArmorStatistic } from "@system/statistic/armor-class.ts";
 import { Statistic, StatisticCheck, StatisticDifficultyClass } from "@system/statistic/index.ts";
-import { EnrichHTMLOptionsPF2e } from "@system/text-editor.ts";
+import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ActorConditions } from "./conditions.ts";
 import { Abilities, CreatureSkills, VisionLevel } from "./creature/data.ts";
 import { GetReachParameters, ModeOfBeing } from "./creature/types.ts";
@@ -49,11 +49,18 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     auras: Map<string, AuraData>;
     /** A collection of this actor's conditions */
     conditions: ActorConditions<this>;
+    perception?: Statistic;
     /** Skill checks for the actor if supported by the actor type */
     skills?: Partial<CreatureSkills>;
     /** A cached copy of `Actor#itemTypes`, lazily regenerated every data preparation cycle */
     private _itemTypes;
     constructor(data: PreCreate<ActorSourcePF2e>, context?: DocumentConstructionContext<TParent>);
+    static getDefaultArtwork(actorData: foundry.documents.ActorSource | PreDocumentId<foundry.documents.ActorSource>): {
+        img: ImageFilePath;
+        texture: {
+            src: ImageFilePath | VideoFilePath;
+        };
+    };
     /** Cache the return data before passing it to the caller */
     get itemTypes(): EmbeddedItemInstances<this>;
     get allowedItemTypes(): (ItemType | "physical")[];
@@ -205,7 +212,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      */
     getRollOptions(domains?: string[]): string[];
     /** This allows @actor.level and such to work for macros and inline rolls */
-    getRollData(): NonNullable<EnrichHTMLOptionsPF2e["rollData"]>;
+    getRollData(): NonNullable<EnrichmentOptionsPF2e["rollData"]>;
     /** Gets an active condition on the actor or a list of conditions sorted by descending value. */
     getCondition(slugOrKey: ConditionKey, { all }: {
         all: true;
@@ -236,7 +243,9 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     toggleCondition(conditionSlug: ConditionSlug): Promise<void>;
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _applyDefaultTokenSettings(data: PreDocumentId<this["_source"]>, options?: {
+        fromCompendium?: boolean;
+    }): DeepPartial<this["_source"]>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, userId: string): void;
     /**
@@ -260,6 +269,7 @@ interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
     getActiveTokens(linked: boolean | undefined, document: true): TokenDocumentPF2e<ScenePF2e>[];
     getActiveTokens(linked?: boolean | undefined, document?: undefined): TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
     getActiveTokens(linked?: boolean, document?: boolean): TokenDocumentPF2e<ScenePF2e>[] | TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
+    _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** See implementation in class */
     createEmbeddedDocuments(embeddedName: "ActiveEffect", data: PreCreate<foundry.documents.ActiveEffectSource>[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[]>;
     createEmbeddedDocuments(embeddedName: "Item", data: PreCreate<ItemSourcePF2e>[], context?: DocumentModificationContext<this>): Promise<ItemPF2e<this>[]>;

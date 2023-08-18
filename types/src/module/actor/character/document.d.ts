@@ -1,10 +1,10 @@
 import { CreaturePF2e, FamiliarPF2e } from "@actor";
-import { Abilities, CreatureSpeeds, LabeledSpeed } from "@actor/creature/data.ts";
+import { CreatureSpeeds, LabeledSpeed } from "@actor/creature/data.ts";
 import { CreatureUpdateContext } from "@actor/creature/types.ts";
 import { StrikeData } from "@actor/data/base.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
-import { AbilityString, AttackItem, CheckContext, CheckContextParams, MovementType, RollContext, RollContextParams, SaveType, SkillLongForm } from "@actor/types.ts";
+import { AttackItem, AttributeString, MovementType, RollContext, RollContextParams } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, WeaponPF2e } from "@item";
 import { ItemType } from "@item/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
@@ -14,9 +14,9 @@ import { TokenDocumentPF2e } from "@scene/index.ts";
 import { RollParameters } from "@system/rolls.ts";
 import { Statistic, StatisticCheck } from "@system/statistic/index.ts";
 import { CraftingEntry, CraftingFormula } from "./crafting/index.ts";
-import { BaseWeaponProficiencyKey, CharacterFlags, CharacterSource, CharacterStrike, CharacterSystemData, ClassDCData, WeaponGroupProficiencyKey } from "./data.ts";
+import { BaseWeaponProficiencyKey, CharacterAbilities, CharacterFlags, CharacterSource, CharacterStrike, CharacterSystemData, ClassDCData, WeaponGroupProficiencyKey } from "./data.ts";
 import { CharacterFeats } from "./feats.ts";
-import { CharacterHitPointsSummary, CharacterSkills } from "./types.ts";
+import { CharacterHitPointsSummary, CharacterSkills, GuaranteedGetStatisticSlug } from "./types.ts";
 declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     /** Core singular embeds for PCs */
     ancestry: AncestryPF2e<this> | null;
@@ -39,11 +39,11 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     skills: CharacterSkills;
     initiative: ActorInitiative;
     get allowedItemTypes(): (ItemType | "physical")[];
-    get keyAttribute(): AbilityString;
+    get keyAttribute(): AttributeString;
     /** @deprecated */
-    get keyAbility(): AbilityString;
+    get keyAbility(): AttributeString;
     /** This PC's ability scores */
-    get abilities(): Abilities;
+    get abilities(): CharacterAbilities;
     get handsFree(): ZeroToTwo;
     /** The number of hands this PC "really" has free: this is, ignoring allowances for the Free Hand trait */
     get handsReallyFree(): ZeroToTwo;
@@ -52,8 +52,8 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
         value: number;
         max: number;
     };
-    /** Retrieve lore skills, class statistics, and spellcasting */
-    getStatistic(slug: SaveType | SkillLongForm | "perception" | "classDC" | MagicTradition): Statistic;
+    /** Retrieve lore skills, class statistics, and tradition-specific spellcasting */
+    getStatistic(slug: GuaranteedGetStatisticSlug): Statistic;
     getStatistic(slug: string): Statistic | null;
     getCraftingFormulas(): Promise<CraftingFormula[]>;
     getCraftingEntries(formulas?: CraftingFormula[]): Promise<CraftingEntry[]>;
@@ -67,8 +67,8 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     /** After AE-likes have been applied, set numeric roll options */
     prepareEmbeddedDocuments(): void;
     /**
-     * Immediately after boosts from this PC's ancestry, background, and class have been acquired, set ability scores
-     * according to them.
+     * Immediately after boosts from this PC's ancestry, background, and class have been acquired, set attribute
+     * modifiers according to them.
      */
     prepareDataFromItems(): void;
     prepareDerivedData(): void;
@@ -96,8 +96,6 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     };
     /** Modify this weapon from AdjustStrike rule elements */
     getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
-    /** Create attack-roll modifiers from weapon traits */
-    getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends AttackItem | null>(params: CheckContextParams<TStatistic, TItem>): Promise<CheckContext<this, TStatistic, TItem>>;
     consumeAmmo(weapon: WeaponPF2e<this>, params: RollParameters): boolean;
     /** Prepare stored and synthetic martial proficiencies */
     prepareMartialProficiencies(): void;
@@ -107,7 +105,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     addAttackProficiency(key: BaseWeaponProficiencyKey | WeaponGroupProficiencyKey): Promise<void>;
     protected _preUpdate(changed: DeepPartial<CharacterSource>, options: CreatureUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Toggle between boost-driven and manual management of ability scores */
-    toggleAbilityManagement(): Promise<void>;
+    toggleAttributeManagement(): Promise<void>;
 }
 interface CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     flags: CharacterFlags;

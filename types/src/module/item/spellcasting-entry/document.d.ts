@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
 import { ItemPF2e, PhysicalItemPF2e, SpellPF2e } from "@item";
 import { MagicTradition } from "@item/spell/types.ts";
 import { ZeroToFour } from "@module/data.ts";
@@ -12,9 +12,9 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     spells: SpellCollection<NonNullable<TParent>, this> | null;
     /** Spellcasting attack and dc data created during actor preparation */
     statistic: Statistic;
-    get attribute(): AbilityString;
+    get attribute(): AttributeString;
     /** @deprecated */
-    get ability(): AbilityString;
+    get ability(): AttributeString;
     /** This entry's magic tradition, null if the spell's tradition should be used instead */
     get tradition(): MagicTradition | null;
     get category(): SpellcastingCategory;
@@ -35,6 +35,8 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     prepareBaseData(): void;
     prepareSiblingData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
     prepareActorData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
+    /** Prepares the statistic for this spellcasting entry */
+    prepareStatistic(): void;
     /** All spells associated with this spellcasting entry on the actor that should also be deleted */
     getLinkedItems(): SpellPF2e<ActorPF2e>[];
     /** Returns if the spell is valid to cast by this spellcasting entry */

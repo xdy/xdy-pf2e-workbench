@@ -2,10 +2,10 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { CharacterPF2e } from "@actor";
+import { CreatureSheetData } from "@actor/creature/index.ts";
 import { CreatureSheetPF2e } from "@actor/creature/sheet.ts";
 import { FamiliarPF2e } from "@actor/familiar/index.ts";
-import { ActionItemPF2e } from "@item";
-import { CreatureSheetData } from "@actor/creature/index.ts";
+import { AbilityItemPF2e } from "@item";
 /**
  * @category Actor
  */
@@ -24,7 +24,7 @@ interface FamiliarSheetData<TActor extends FamiliarPF2e> extends CreatureSheetDa
     size: string;
     familiarAbilities: {
         value: number;
-        items: ActionItemPF2e[];
+        items: AbilityItemPF2e[];
     };
 }
 export {};

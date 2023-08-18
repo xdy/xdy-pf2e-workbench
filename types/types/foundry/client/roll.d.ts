@@ -168,6 +168,9 @@ declare global {
          */
         static create(formula: string, data?: Record<string, unknown>, options?: RollOptions): Roll;
 
+        /** Get the default configured Roll class. */
+        static get defaultImplementation(): typeof Roll;
+
         /**
          * Transform an array of RollTerm objects into a cleaned string formula representation.
          * @param terms An array of terms to represent as a formula
@@ -229,7 +232,7 @@ declare global {
         static replaceFormulaData(
             formula: string,
             data: Record<string, unknown>,
-            { missing, warn }?: { missing?: string; warn?: boolean },
+            { missing, warn }?: { missing?: string; warn?: boolean }
         ): string;
 
         /**
@@ -276,7 +279,7 @@ declare global {
                 openSymbol?: string;
                 closeSymbol?: string;
                 onClose?: () => void | Promise<void>;
-            },
+            }
         ): string[];
 
         /**
@@ -319,7 +322,7 @@ declare global {
                 intermediate,
                 prior,
                 next,
-            }?: { intermediate?: boolean; prior?: RollTerm | string; next?: RollTerm | string },
+            }?: { intermediate?: boolean; prior?: RollTerm | string; next?: RollTerm | string }
         ): RollTerm;
 
         /* -------------------------------------------- */
@@ -356,15 +359,15 @@ declare global {
          */
         toMessage(
             messageData: PreCreate<foundry.documents.ChatMessageSource> | undefined,
-            { rollMode, create }: { rollMode?: RollMode | "roll"; create: false },
+            { rollMode, create }: { rollMode?: RollMode | "roll"; create: false }
         ): Promise<foundry.documents.ChatMessageSource>;
         toMessage(
             messageData?: PreCreate<foundry.documents.ChatMessageSource>,
-            { rollMode, create }?: { rollMode?: RollMode | "roll"; create?: true },
+            { rollMode, create }?: { rollMode?: RollMode | "roll"; create?: true }
         ): Promise<ChatMessage>;
         toMessage(
             messageData?: PreCreate<foundry.documents.ChatMessageSource>,
-            { rollMode, create }?: { rollMode?: RollMode | "roll"; create?: boolean },
+            { rollMode, create }?: { rollMode?: RollMode | "roll"; create?: boolean }
         ): Promise<ChatMessage | foundry.documents.ChatMessageSource>;
 
         /* -------------------------------------------- */
@@ -452,7 +455,6 @@ declare global {
     type Rolled<T extends Roll> = T & {
         readonly result: string;
         readonly total: number;
-        _total: number;
         _evaluated: true;
         terms: RollTerm[];
     };

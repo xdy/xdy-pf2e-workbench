@@ -35,7 +35,7 @@ declare class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     prepareSiblingData(): void;
     prepareActorData(): void;
     getRollOptions(prefix?: string): string[];
-    getChatData(this: MeleePF2e<ActorPF2e>, htmlOptions?: EnrichHTMLOptions): Promise<ItemSummaryData & {
+    getChatData(this: MeleePF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData & {
         map2: string;
         map3: string;
     } & Omit<MeleeSystemData, "traits">>;

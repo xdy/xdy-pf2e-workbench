@@ -4,7 +4,7 @@ import { ActorAttributesSource, ActorFlagsPF2e, HitPointsStatistic, PerceptionDa
 import { ActorSizePF2e } from "@actor/data/size.ts";
 import { InitiativeTraceData } from "@actor/initiative.ts";
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
-import { AbilityString, ActorAlliance, SaveType } from "@actor/types.ts";
+import { ActorAlliance, AttributeString, SaveType } from "@actor/types.ts";
 import { MeleePF2e } from "@item";
 import { Rarity, Size } from "@module/data.ts";
 import { ArmorClassTraceData } from "@system/statistic/armor-class.ts";
@@ -140,6 +140,10 @@ interface NPCAttributes extends Omit<NPCAttributesSource, "initiative" | "immuni
     classDC: {
         value: number;
     };
+    /** The best spell DC */
+    spellDC: {
+        value: number;
+    } | null;
     /** And a fake class-or-spell DC to go along with it */
     classOrSpellDC: {
         value: number;
@@ -173,7 +177,7 @@ interface NPCStrike extends StrikeData {
 }
 /** Save data with an additional "base" value */
 interface NPCSaveData extends SaveData {
-    ability: AbilityString;
+    ability: AttributeString;
     base?: number;
     saveDetail: string;
 }
@@ -197,7 +201,7 @@ interface NPCSkillData extends StatisticTraceData {
     visible?: boolean;
     isLore?: boolean;
     itemID?: string;
-    ability: AbilityString;
+    ability: AttributeString;
     variants: {
         label: string;
         options: string;
