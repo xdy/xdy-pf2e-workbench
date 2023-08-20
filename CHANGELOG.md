@@ -1,3 +1,10 @@
+## [5.17.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.17.1...v5.17.2) (2023-08-20)
+
+
+### Bug Fixes
+
+* Actually remove the feat sections that the houserule legacy variant rules Ancestry Paragon and Dual Class appear in when they are disabled in module settings. Any feats in such a section will automatically be moved to Bonus Feats. ([0537f7c](https://github.com/xdy/xdy-pf2e-workbench/commit/0537f7c4ed33ba1d9d95663e65eb98b14e6ff790))
+
 ## [5.17.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.17.0...v5.17.1) (2023-08-18)
 
 
