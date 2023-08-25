@@ -58,7 +58,7 @@
     "prettier": "^3.0.2",
     "prompts": "^2.4.2",
     "sass": "^1.66.0",
-    "semantic-release": "^21.0.7",
+    "semantic-release": "^21.1.1",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
     "tinymce": "^6.6.2",
