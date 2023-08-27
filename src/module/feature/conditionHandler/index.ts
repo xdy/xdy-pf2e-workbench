@@ -6,27 +6,55 @@ import { ItemPF2e } from "@item/base.js";
 import { ActorSystemData } from "@actor/data/base.js";
 import { handleDying } from "../../hooks.js";
 import { CreaturePF2e } from "@actor/creature/document.js";
+import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import BaseUser = foundry.documents.BaseUser;
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
-    if (combatant && combatant.actor && (userId === game.user.id || shouldIHandleThis(combatant.actor))) {
-        const actors = [combatant.actor];
-        actors.push(...getMinionAndEidolons(combatant.actor));
-        for (const actor of actors) {
-            const minimumFrightened = <number>actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0;
-            let frightened = actor?.getCondition("frightened");
-            const currentFrightened = frightened?.value ?? 0;
-            if (frightened && currentFrightened > 0 && !frightened.isLocked) {
-                const reduceBy = actor.itemTypes.feat.find((feat) => feat.slug === "dwarven-doughtiness") ? 2 : 1;
-                for (let i = 0; i < reduceBy; i++) {
-                    frightened = actor?.getCondition("frightened");
-                    if (currentFrightened - 1 >= minimumFrightened && frightened && !frightened.isLocked) {
-                        await actor.decreaseCondition("frightened");
-                    }
-                }
+    if (!combatant || !combatant.actor || (userId !== game.user.id && !shouldIHandleThis(combatant.actor))) {
+        return;
+    }
+
+    const actors: ActorPF2e[] = [combatant.actor, ...getMinionAndEidolons(combatant.actor)];
+
+    for (const actor of actors) {
+        const minimumFrightened = Number(actor.getFlag(MODULENAME, "condition.frightened.min")) ?? 0;
+        const frightened = actor.getCondition("frightened");
+        const currentFrightened = frightened?.value ?? 0;
+
+        if (frightened && currentFrightened > 0 && !frightened.isLocked) {
+            const reduceBy = actor.itemTypes.feat.some((feat) => feat.slug === "dwarven-doughtiness") ? 2 : 1;
+
+            for (let i = 0; i < reduceBy && currentFrightened - i >= minimumFrightened; i++) {
+                await actor.decreaseCondition("frightened");
             }
         }
     }
+}
+
+function getRelevantMessages(actor: ActorPF2e): ChatMessagePF2e[] {
+    const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
+    return game.settings.get(MODULENAME, "autoGainDyingIgnoresTargeting")
+        ? relevant
+        : relevant.filter((message) => message.target?.actor.id === actor.id);
+}
+
+function filterMessagesByContextType(messages: ChatMessagePF2e[], contextType: string): ChatMessagePF2e[] {
+    return messages.filter((message) => message.flags.pf2e.context?.type === contextType);
+}
+
+function filterMessagesByStrikeDamaging(messages: ChatMessagePF2e[]): ChatMessagePF2e[] {
+    return messages.filter((message) => message.flags.pf2e.strike?.damaging);
+}
+
+function filterMessagesByActorEnemy(messages: ChatMessagePF2e[]): ChatMessagePF2e[] {
+    return messages.filter((message) => message.target?.actor && message.actor?.isEnemyOf(message.target?.actor));
+}
+
+function findLastMessageWithTotalGreaterOrEqual(
+    messages: ChatMessagePF2e[],
+    total: number,
+): ChatMessagePF2e | undefined {
+    return messages.findLast((message) => message.rolls?.[0]?.total >= total);
 }
 
 export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e, option: string): boolean {
@@ -39,62 +67,17 @@ export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e,
             ? ["character", "familiar"].includes(actor.type)
             : true)
     ) {
-        const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
-        const rightTarget = game.settings.get(MODULENAME, "autoGainDyingIgnoresTargeting")
-            ? relevant
-            : relevant.filter((message) => message.target?.actor.id === actor.id);
-        const isDamageRoll = rightTarget.filter((message) => message.flags.pf2e.context?.type === "damage-roll");
-        const isDamagingStrike = isDamageRoll.filter((message) => message.flags.pf2e.strike?.damaging);
-        const attackerIsEnemy = isDamagingStrike.filter(
-            (message) => message.target?.actor && message.actor?.isEnemyOf(message.target?.actor),
-        );
-        const greaterThanHP = attackerIsEnemy.findLast((message) => message.rolls?.[0]?.total >= hp.value);
-        return greaterThanHP?.flags?.pf2e?.context?.["outcome"] === "criticalSuccess";
+        const relevant = getRelevantMessages(actor);
+        const isDamageRoll = filterMessagesByContextType(relevant, "damage-roll");
+        const isDamagingStrike = filterMessagesByStrikeDamaging(isDamageRoll);
+        const attackerIsEnemy = filterMessagesByActorEnemy(isDamagingStrike);
+        const criticalSuccess = filterMessagesByCriticalSuccess(attackerIsEnemy);
+        return !!findLastMessageWithTotalGreaterOrEqual(criticalSuccess, hp.value);
     }
     return false;
 }
 
-export function checkIfLatestDamageMessageIsMassiveDamage(actor, option: string): boolean {
-    const hp = actor.attributes.hp;
-    if (
-        hp &&
-        hp.value &&
-        game.messages.contents.length > 0 &&
-        !option.startsWith("no") &&
-        (option === "yes" ||
-            (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : false) ||
-            (option.endsWith("ForNpcs") ? ["npc"].includes(actor.type) : false))
-    ) {
-        const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
-        const rightTarget = game.settings.get(MODULENAME, "autoGainDyingIgnoresTargeting")
-            ? relevant
-            : relevant.filter((message) => message.target?.actor.id === actor.id);
-        const lastDamageRoll = rightTarget.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
-        return (lastDamageRoll?.rolls?.[0]?.total ?? 0) >= 2 * hp.max;
-    }
-    return false;
-}
-
-export function checkIfLatestDamageMessageHasDeathTrait(actor, option: string): boolean {
-    const hp = actor.attributes.hp;
-    if (
-        hp &&
-        hp.value &&
-        game.messages.contents.length > 0 &&
-        !option.startsWith("no") &&
-        (option === "yes" ||
-            (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : false) ||
-            (option.endsWith("ForNpcs") ? ["npc"].includes(actor.type) : false))
-    ) {
-        const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
-        const lastDamageRoll = relevant.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
-        const origin: any = fromUuidSync(<string>lastDamageRoll?.flags?.pf2e.origin?.uuid);
-        return (origin?.system?.traits?.value ?? []).includes("death");
-    }
-    return false;
-}
-
-function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
+export function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string): boolean {
     const hp = actor.attributes.hp;
     if (
         hp &&
@@ -103,13 +86,54 @@ function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: string)
         !option.startsWith("no") &&
         (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
     ) {
-        const relevant = game.messages.contents.slice(-Math.min(10, game.messages.size));
-        const rightTarget = game.settings.get(MODULENAME, "autoGainDyingIgnoresTargeting")
-            ? relevant
-            : relevant.filter((message) => message.target?.actor.id === actor.id);
-        const lastDamageRoll = rightTarget.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const relevant = getRelevantMessages(actor);
+        const lastDamageRoll = relevant.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
         const totalDamage = lastDamageRoll?.rolls?.[0]?.total ?? 0;
         return (totalDamage >= hp.value && lastDamageRoll?.item?.system?.traits?.value.includes("nonlethal")) ?? false;
+    }
+    return false;
+}
+
+function filterMessagesByCriticalSuccess(messages: ChatMessagePF2e[]): ChatMessagePF2e[] {
+    return messages.filter((message) => message.flags.pf2e.context?.outcome === "criticalSuccess");
+}
+
+export function checkIfLatestDamageMessageIsMassiveDamage(actor: ActorPF2e, option: string): boolean {
+    const hp = actor.attributes.hp;
+    if (
+        hp &&
+        hp.value &&
+        game.messages.contents.length > 0 &&
+        !option.startsWith("no") &&
+        (option === "yes" || (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true))
+    ) {
+        const relevant = getRelevantMessages(actor);
+        const isDamageRoll = filterMessagesByContextType(relevant, "damage-roll");
+        const isDamagingStrike = filterMessagesByStrikeDamaging(isDamageRoll);
+        const attackerIsEnemy = filterMessagesByActorEnemy(isDamagingStrike);
+        const criticalSuccessMessages = filterMessagesByCriticalSuccess(attackerIsEnemy);
+        const lastCriticalSuccessMessage = criticalSuccessMessages[criticalSuccessMessages.length - 1];
+        const damageTotal = lastCriticalSuccessMessage?.rolls?.[0]?.total ?? 0;
+        return damageTotal >= hp.value * 2;
+    }
+    return false;
+}
+
+export function checkIfLatestDamageMessageHasDeathTrait(actor: ActorPF2e, option: string): boolean {
+    const hp = actor.attributes.hp;
+    if (
+        hp &&
+        hp.value &&
+        game.messages.contents.length > 0 &&
+        !option.startsWith("no") &&
+        (option === "yes" || (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true))
+    ) {
+        const relevant = getRelevantMessages(actor);
+        const damageRollMessages = filterMessagesByContextType(relevant, "damage-roll");
+        const lastDamageRollMessage = damageRollMessages[damageRollMessages.length - 1];
+        const isDeathTrait = lastDamageRollMessage?.item?.system?.traits?.value.includes("death") ?? false;
+        const damageTotal = lastDamageRollMessage?.rolls?.[0]?.total ?? 0;
+        return isDeathTrait && damageTotal >= hp.value;
     }
     return false;
 }
@@ -214,74 +238,73 @@ export async function handleDyingOnZeroHP(
     hp: number,
     updateHp: number,
 ): Promise<boolean> {
-    if (shouldIHandleThis(actor) && hp > 0 && updateHp <= 0) {
-        const name = `${actor.token?.name ?? actor.name}`;
-        let shouldIncreaseWounded = false;
-        let dyingCounter = 0;
-        let hpNowAboveZero = false;
-        const effectsToCreate: any[] = [];
-        const dyingOption = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));
-        const nonlethalOption = String(game.settings.get(MODULENAME, "nonLethalIsNotLethal"));
-
-        const __ret = handleOrcFerocity(actor, update, effectsToCreate, name, shouldIncreaseWounded, hpNowAboveZero);
-        shouldIncreaseWounded = __ret.shouldIncreaseWounded;
-        hpNowAboveZero = __ret.hpNowAboveZero;
-
-        handleDeliberateDeath(actor, effectsToCreate, name);
-
-        if (
-            !hpNowAboveZero &&
-            (dyingOption.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
-        ) {
-            if (dyingOption?.startsWith("addWoundedLevel")) {
-                dyingCounter = (actor.getCondition("wounded")?.value ?? 0) + 1;
-            } else {
-                dyingCounter = 1;
-            }
-        }
-
-        if (checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption)) {
-            dyingCounter = dyingCounter + 1;
-        }
-
-        if (hpNowAboveZero) {
-            await actor.update(update);
-        }
-
-        if (shouldIncreaseWounded) {
-            await actor.increaseCondition("wounded");
-        }
-
-        const optionMassive = String(game.settings.get(MODULENAME, "autoKillIfMassiveDamage"));
-        const isMassive = checkIfLatestDamageMessageIsMassiveDamage(actor, optionMassive);
-        const optionDeathTrait = String(game.settings.get(MODULENAME, "autoKillIfDamageHasDeathTrait"));
-        const isDeathDamage = checkIfLatestDamageMessageHasDeathTrait(actor, optionDeathTrait);
-        if (isMassive || isDeathDamage) {
-            dyingCounter = actor.attributes.dying.max;
-        }
-
-        if (
-            String(game.settings.get(MODULENAME, "nonLethalIsNotLethal")).endsWith("ForCharacters")
-                ? ["character", "familiar"].includes(actor.type)
-                : true
-        ) {
-            if (!hpNowAboveZero && checkIfLatestDamageMessageIsNonlethal(actor, nonlethalOption)) {
-                if (!actor.hasCondition("unconscious")) {
-                    await actor.toggleCondition("unconscious");
-                }
-                dyingCounter = 0;
-            }
-        }
-
-        handleDying(dyingCounter, 0, actor, effectsToCreate);
-
-        if (effectsToCreate.length > 0) {
-            await actor.createEmbeddedDocuments("Item", effectsToCreate);
-        }
-
-        return hpNowAboveZero;
+    if (!shouldIHandleThis(actor) || hp <= 0 || updateHp > 0) {
+        return updateHp > 0;
     }
-    return updateHp > 0;
+
+    const name = `${actor.token?.name ?? actor.name}`;
+    let shouldIncreaseWounded = false;
+    let dyingCounter = 0;
+    let hpNowAboveZero = false;
+    const effectsToCreate: any[] = [];
+    const dyingOption = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));
+    const nonlethalOption = String(game.settings.get(MODULENAME, "nonLethalIsNotLethal"));
+
+    const __ret = handleOrcFerocity(actor, update, effectsToCreate, name, shouldIncreaseWounded, hpNowAboveZero);
+    shouldIncreaseWounded = __ret.shouldIncreaseWounded;
+    hpNowAboveZero = __ret.hpNowAboveZero;
+
+    handleDeliberateDeath(actor, effectsToCreate, name);
+
+    if (
+        !hpNowAboveZero &&
+        (dyingOption.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
+    ) {
+        dyingCounter = dyingOption?.startsWith("addWoundedLevel")
+            ? (actor.getCondition("wounded")?.value ?? 0) + 1 ?? 0
+            : 1;
+    }
+
+    if (checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption)) {
+        dyingCounter += 1;
+    }
+
+    if (hpNowAboveZero) {
+        await actor.update(update);
+    }
+
+    if (shouldIncreaseWounded) {
+        await actor.increaseCondition("wounded");
+    }
+
+    const optionMassive = String(game.settings.get(MODULENAME, "autoKillIfMassiveDamage"));
+    const isMassive = checkIfLatestDamageMessageIsMassiveDamage(actor, optionMassive);
+    const optionDeathTrait = String(game.settings.get(MODULENAME, "autoKillIfDamageHasDeathTrait"));
+    const isDeathDamage = checkIfLatestDamageMessageHasDeathTrait(actor, optionDeathTrait);
+    if (isMassive || isDeathDamage) {
+        dyingCounter = actor.attributes.dying.max;
+    }
+
+    if (
+        String(game.settings.get(MODULENAME, "nonLethalIsNotLethal")).endsWith("ForCharacters")
+            ? ["character", "familiar"].includes(actor.type)
+            : true
+    ) {
+        if (!hpNowAboveZero && checkIfLatestDamageMessageIsNonlethal(actor, nonlethalOption)) {
+            if (!actor.hasCondition("unconscious")) {
+                await actor.toggleCondition("unconscious");
+            }
+            dyingCounter = 0;
+        }
+    }
+
+    handleDying(dyingCounter, 0, actor, effectsToCreate);
+
+    if (effectsToCreate.length > 0) {
+        await actor.createEmbeddedDocuments("Item", effectsToCreate);
+    }
+
+    return hpNowAboveZero;
 }
 
 export async function autoRemoveDyingAtGreaterThanZeroHp(actor: ActorPF2e, hpAboveZero: boolean): Promise<boolean> {

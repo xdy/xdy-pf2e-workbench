@@ -11,8 +11,8 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "esnext",
-    "moduleResolution": "node16",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
