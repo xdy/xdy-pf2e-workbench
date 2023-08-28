@@ -584,7 +584,7 @@
       },
       "houseRulesSettings": {
         "hint": "(实验性) 启用并设置多种房规",
-        "label": "(实验性) 管理房规设置",
+        "label": "管理房规设置",
         "name": "(实验性) 房规设置"
       },
       "houseRulerI18n": {
@@ -617,6 +617,25 @@
       "reminderBreathWeaponHidden": {
         "hint": "勾选此项，对玩家隐藏提醒器。",
         "name": "……对玩家隐藏图标。"
+      },
+      "keeleysHeroPointRule": {
+        "name": "Keeley 的英雄点规则",
+        "bonusTag": "较低的重骰结果 +10",
+        "hint": "某位 Paizo 开发者喜欢的房规：若用英雄点重掷的掷骰结果为 10 或更少，则会给掷骰结果一个 +10 的加值。"
+      },
+      "heropointHandlerNotification": {
+        "hint": "当英雄点处理期将一个英雄点分发出去时，将自动弹出一条提示消息。",
+        "name": "当一个英雄点被分配出去时，弹出对应提示。"
+      },
+      "legacyVariantRuleAncestryParagon": {
+        "hint": "（只要系统仍然支持 \"族裔典范变体规则\"，该项就无需启动）这将会为族裔典范添加一列额外的专长槽。",
+        "name": "增加族裔典范专长槽。在启用改动后，需要按 F5 刷新。",
+        "title": "族裔典范专长"
+      },
+      "legacyVariantRuleDualClass": {
+        "hint": "（只要系统仍支持 \"双职业变体规则\"，此项就无需启动）。这将为双职业变体添加一个额外的专长槽位，此外，你还需要使用'双职业变体'(Dual Class)宏来为角色创造所需的职业。",
+        "name": "添加双职业专长槽。启用改动后，需要按 F5 刷新。",
+        "title": "双职业专长"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
