@@ -17,7 +17,7 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
     const actors: ActorPF2e[] = [combatant.actor, ...getMinionAndEidolons(combatant.actor)];
 
     for (const actor of actors) {
-        const minimumFrightened = Number(actor.getFlag(MODULENAME, "condition.frightened.min")) ?? 0;
+        const minimumFrightened = <number>(actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0);
         const frightened = actor.getCondition("frightened");
         const currentFrightened = frightened?.value ?? 0;
 
