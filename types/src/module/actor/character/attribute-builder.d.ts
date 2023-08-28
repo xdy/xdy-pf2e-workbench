@@ -2,7 +2,6 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { CharacterPF2e } from "@actor";
-import { Abilities } from "@actor/creature/data.ts";
 import { AttributeString } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item";
 declare class AttributeBuilder extends Application {
@@ -22,8 +21,11 @@ declare class AttributeBuilder extends Application {
 }
 interface AttributeBuilderSheetData {
     actor: CharacterPF2e;
-    attributeModifiers: Abilities;
-    manualKeyAbility: AttributeString;
+    attributeModifiers: Record<AttributeString, {
+        label: string;
+        mod: string;
+    }>;
+    manualKeyAttribute: AttributeString;
     attributes: Record<AttributeString, string>;
     ancestry: AncestryPF2e<CharacterPF2e> | null;
     background: BackgroundPF2e<CharacterPF2e> | null;

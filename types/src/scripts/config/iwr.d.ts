@@ -63,6 +63,7 @@ declare const immunityTypes: {
     petrified: string;
     physical: string;
     piercing: string;
+    plant: string;
     poison: string;
     polymorph: string;
     positive: string;
@@ -80,6 +81,7 @@ declare const immunityTypes: {
     slowed: string;
     sonic: string;
     "spell-deflection": string;
+    spirit: string;
     stunned: string;
     stupefied: string;
     "swarm-attacks": string;
@@ -128,6 +130,7 @@ declare const weaknessTypes: {
     orichalcum: string;
     physical: string;
     piercing: string;
+    plant: string;
     poison: string;
     positive: string;
     precision: string;
@@ -138,6 +141,7 @@ declare const weaknessTypes: {
     slashing: string;
     sonic: string;
     spells: string;
+    spirit: string;
     "splash-damage": string;
     "unarmed-attacks": string;
     "vampire-weaknesses": string;
@@ -197,6 +201,7 @@ declare const resistanceTypes: {
     slashing: string;
     sonic: string;
     spells: string;
+    spirit: string;
     "unarmed-attacks": string;
     vorpal: string;
     "vorpal-adamantine": string;

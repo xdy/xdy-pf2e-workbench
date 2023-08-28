@@ -4,13 +4,13 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { SelectableTagField } from "./index.ts";
-interface TagSelectorOptions extends FormApplicationOptions {
+interface TagSelectorOptions extends DocumentSheetOptions {
     allowCustom?: boolean;
     /** Is the target data property a flat array rather than a values object? */
     flat?: boolean;
     customChoices?: Record<string, string>;
 }
-declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e> extends FormApplication<TDocument, TagSelectorOptions> {
+declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e> extends DocumentSheet<TDocument, TagSelectorOptions> {
     #private;
     static get defaultOptions(): TagSelectorOptions;
     choices: Record<string, string>;
@@ -18,12 +18,16 @@ declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e> e
     protected abstract objectProperty: string;
     /** Whether the tags are in an object containing a `value` array property or just an array by its lonesome */
     flat: boolean;
-    constructor(object: TDocument, options?: Partial<TagSelectorOptions>);
+    constructor(document: TDocument, options?: Partial<TagSelectorOptions>);
     get id(): string;
+    get title(): string;
     protected abstract get configTypes(): readonly SelectableTagField[];
-    protected abstract _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
+    getData(options?: Partial<TagSelectorOptions> | undefined): Promise<TagSelectorData<TDocument>>;
     activateListeners($html: JQuery): void;
     /** Localize and sort choices */
     protected sortChoices(choices: Record<string, string>): Record<string, string>;
 }
-export { BaseTagSelector, TagSelectorOptions };
+interface TagSelectorData<TDocument extends ActorPF2e | ItemPF2e> extends DocumentSheetData<TDocument> {
+    documentType: string;
+}
+export { BaseTagSelector, TagSelectorData, TagSelectorOptions };

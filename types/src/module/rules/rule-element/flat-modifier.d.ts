@@ -16,7 +16,7 @@ declare class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema
     get selectors(): string[];
     beforePrepareData(): void;
     /** Remove this rule element's parent item after a roll */
-    afterRoll({ statistic, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void>;
+    afterRoll({ check, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void>;
 }
 interface FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema>, ModelPropsFromSchema<FlatModifierSchema> {
     value: RuleValue;

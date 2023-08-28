@@ -38,11 +38,16 @@ declare class CompendiumPack {
     static loadJSON(dirPath: string): CompendiumPack;
     finalizeAll(): PackEntry[];
     /** Convert UUIDs in REs to resemble links by name or back again */
-    static convertRuleUUIDs(source: ItemSourcePF2e, { to, map }: {
+    static convertUUIDs(source: ItemSourcePF2e, { to, map }: {
         to: "ids" | "names";
         map: Map<string, Map<string, string>>;
     }): void;
+    static convertUUID<TUUID extends string>(uuid: TUUID, { to, map }: ConvertUUIDOptions): TUUID;
     save(asJson?: boolean): Promise<number>;
     saveAsJSON(): Promise<number>;
+}
+interface ConvertUUIDOptions {
+    to: "id" | "name";
+    map: Map<string, Map<string, string>>;
 }
 export { CompendiumPack, PackError, PackMetadata, isItemSource, isActorSource, REMaybeWithUUIDs };

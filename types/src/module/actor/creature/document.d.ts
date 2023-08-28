@@ -93,6 +93,8 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     /** Remove any features linked to a to-be-deleted ABC item */
     deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: CreatureUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    /** Overriden to notify the party that an update is required */
+    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
 }
 interface CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: CreatureSource;

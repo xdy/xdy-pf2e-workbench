@@ -36,9 +36,12 @@ interface KingdomBuilderSheetData {
     finished: boolean;
 }
 interface CategorySheetData {
+    /** The active build entry slug (the one that's been saved) */
+    active: string | null;
     /** Selected refers to the one the user is viewing. Can be null for custom ones */
     selected: string | null;
-    active?: KingdomCHG;
+    /** The build entry currently being viewed (aka selected) */
+    buildEntry?: KingdomCHG;
     stale: boolean;
 }
 interface KingdomAbilityBuilderData {

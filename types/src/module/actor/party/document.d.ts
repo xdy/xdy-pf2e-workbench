@@ -27,6 +27,8 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /** Only prepare rule elements for non-physical items (in case campaigin items exist) */
     protected prepareRuleElements(): RuleElementPF2e<RuleElementSchema>[];
     prepareBaseData(): void;
+    /** Run rule elements (which may occur if it contains a kingdom) */
+    prepareEmbeddedDocuments(): void;
     prepareDerivedData(): void;
     addMembers(...membersToAdd: CreaturePF2e[]): Promise<void>;
     removeMembers(...remove: (ActorUUID | CreaturePF2e)[]): Promise<void>;

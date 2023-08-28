@@ -94,14 +94,18 @@ interface CheckDCReference {
     slug: string;
 }
 interface StatisticRollParameters {
+    /** A string of some kind to identify the roll: will be included in `CheckRoll#options` */
+    identifier?: string;
+    /** The slug of an action of which this check is a constituent roll */
+    action?: string;
     /** What token to use for the roll itself. Defaults to the actor's token */
-    token?: TokenDocumentPF2e;
+    token?: Maybe<TokenDocumentPF2e>;
     /** Which attack this is (for the purposes of multiple attack penalty) */
     attackNumber?: number;
     /** Optional target for the roll */
-    target?: ActorPF2e | null;
+    target?: Maybe<ActorPF2e>;
     /** Optional origin for the roll: only one of target and origin may be provided */
-    origin?: ActorPF2e | null;
+    origin?: Maybe<ActorPF2e>;
     /** Optional DC data for the roll */
     dc?: CheckDC | CheckDCReference | null;
     /** Optional override for the check modifier label */
@@ -124,6 +128,15 @@ interface StatisticRollParameters {
     rollTwice?: RollTwiceOption;
     /** Any traits for the check */
     traits?: (TraitViewData | string)[];
+    /** Whether the check is part of a damaging action */
+    damaging?: boolean;
+    /** Indication that the check is associated with a melee action */
+    melee?: boolean;
+    /** A range that restricts or penalizes a targeted check */
+    range?: Maybe<{
+        increment?: Maybe<number>;
+        max?: number;
+    }>;
     /** Whether to create a chat message using the roll (defaults true) */
     createMessage?: boolean;
     /** Callback called when the roll occurs. */

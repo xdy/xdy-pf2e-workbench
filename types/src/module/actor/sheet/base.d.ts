@@ -3,12 +3,12 @@
 /// <reference types="tooltipster" />
 import type { ActorPF2e } from "@actor";
 import { StrikeData } from "@actor/data/base.ts";
-import { ItemPF2e } from "@item";
+import { ItemPF2e, PhysicalItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { Coins } from "@item/physical/data.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { BasicConstructorOptions, TagSelectorOptions, TagSelectorType } from "@system/tag-selector/index.ts";
-import { ActorSheetDataPF2e, ActorSheetRenderOptionsPF2e, CoinageSummary, SheetInventory } from "./data-types.ts";
+import { ActorSheetDataPF2e, ActorSheetRenderOptionsPF2e, CoinageSummary, InventoryItem, SheetInventory } from "./data-types.ts";
 import { ItemSummaryRenderer } from "./item-summary-renderer.ts";
 /**
  * Extend the basic ActorSheet class to do all the PF2e things!
@@ -24,9 +24,12 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     get isLootSheet(): boolean;
     getData(options?: ActorSheetOptions): Promise<ActorSheetDataPF2e<TActor>>;
     protected prepareInventory(): SheetInventory;
+    protected prepareInventoryItem(item: PhysicalItemPF2e): InventoryItem;
     protected static coinsToSheetData(coins: Coins): CoinageSummary;
-    protected getStrikeFromDOM(target: HTMLElement): StrikeData | null;
+    protected getStrikeFromDOM(button: HTMLElement): StrikeData | null;
     activateListeners($html: JQuery): void;
+    /** DOM listeners for inventory panel */
+    protected activateInventoryListeners(panel: HTMLElement | null): void;
     protected deleteItem(element: HTMLElement, item: ItemPF2e, event?: MouseEvent): Promise<void>;
     protected _canDragStart(selector: string): boolean;
     protected _canDragDrop(selector: string): boolean;

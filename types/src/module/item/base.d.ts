@@ -59,7 +59,9 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     prepareBaseData(): void;
     prepareRuleElements(this: ItemPF2e<ActorPF2e>, options?: Omit<RuleElementOptions, "parent">): RuleElementPF2e[];
     /** Pull the latest system data from the source compendium and replace this item's with it */
-    refreshFromCompendium(): Promise<void>;
+    refreshFromCompendium(options?: {
+        name?: boolean;
+    }): Promise<void>;
     getOriginData(): ItemOriginFlag;
     /**
      * Internal method that transforms data into something that can be used for chat.

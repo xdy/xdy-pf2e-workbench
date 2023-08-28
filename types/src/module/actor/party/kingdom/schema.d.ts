@@ -430,14 +430,14 @@ declare const KINGDOM_SCHEMA: {
             penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, true, false, true>;
         fame: import("types/foundry/common/data/fields.js").SchemaField<{
-            value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
-            max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }, SourceFromSchema<{
-            value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
-            max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, ModelPropsFromSchema<{
-            value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
-            max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, true, false, true>;
         commodities: import("types/foundry/common/data/fields.js").SchemaField<Record<"stone" | "food" | "luxuries" | "lumber" | "ore", import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -532,14 +532,14 @@ declare const KINGDOM_SCHEMA: {
             penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, true, false, true>;
         fame: import("types/foundry/common/data/fields.js").SchemaField<{
-            value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
-            max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }, SourceFromSchema<{
-            value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
-            max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, ModelPropsFromSchema<{
-            value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
-            max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, true, false, true>;
         commodities: import("types/foundry/common/data/fields.js").SchemaField<Record<"stone" | "food" | "luxuries" | "lumber" | "ore", import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -634,14 +634,14 @@ declare const KINGDOM_SCHEMA: {
             penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, true, false, true>;
         fame: import("types/foundry/common/data/fields.js").SchemaField<{
-            value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
-            max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }, SourceFromSchema<{
-            value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
-            max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, ModelPropsFromSchema<{
-            value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
-            max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, true, false, true>;
         commodities: import("types/foundry/common/data/fields.js").SchemaField<Record<"stone" | "food" | "luxuries" | "lumber" | "ore", import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;

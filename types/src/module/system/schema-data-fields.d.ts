@@ -1,5 +1,6 @@
 import { PredicatePF2e, PredicateStatement, RawPredicate } from "@system/predication.ts";
 import { SlugCamel } from "@util";
+import DataModel, { _DataModel } from "types/foundry/common/abstract/data.js";
 import type { ArrayFieldOptions, CleanFieldOptions, DataField, DataFieldOptions, DataFieldValidationOptions, DataSchema, MaybeSchemaProp, ModelPropFromDataField, NumberField, ObjectFieldOptions, SourcePropFromDataField, StringField, StringFieldOptions } from "types/foundry/common/data/fields.d.ts";
 import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.d.ts";
 declare const fields: typeof import("types/foundry/common/data/fields.d.ts");
@@ -20,12 +21,21 @@ declare class StrictStringField<TSourceProp extends string, TModelProp = TSource
 declare class StrictBooleanField<TSourceProp extends boolean = boolean, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.BooleanField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;
 }
-declare class DataUnionField<TField extends StrictBooleanField<boolean, boolean> | StrictStringField<string, string> | PredicateField<boolean, boolean, boolean>, TRequired extends boolean = boolean, TNullable extends boolean = boolean, THasInitial extends boolean = boolean> extends fields.DataField<TField extends DataField<infer TSourceProp> ? TSourceProp : never, TField extends DataField<infer _TSourceProp, infer TModelProp> ? TModelProp : never, TRequired, TNullable, THasInitial> {
+declare class StrictArrayField<TElementField extends DataField, TSourceProp extends Partial<SourcePropFromDataField<TElementField>>[] = SourcePropFromDataField<TElementField>[], TModelProp extends object = ModelPropFromDataField<TElementField>[], TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ArrayField<TElementField, TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+    /** Don't wrap a non-array in an array */
+    protected _cast(value: unknown): unknown;
+    /** Parent method assumes array-wrapping: pass through unchanged */
+    protected _cleanType(value: unknown): unknown;
+}
+declare class DataUnionField<TField extends DataField, TRequired extends boolean = boolean, TNullable extends boolean = boolean, THasInitial extends boolean = boolean> extends fields.DataField<TField extends DataField<infer TSourceProp> ? TSourceProp : never, TField extends DataField<infer _TSourceProp, infer TModelProp> ? TModelProp : never, TRequired, TNullable, THasInitial> {
     fields: TField[];
     constructor(fields: TField[], options: DataFieldOptions<TField extends DataField<infer TSourceProp> ? TSourceProp : never, TRequired, TNullable, THasInitial>);
     protected _cast(value?: unknown): unknown;
+    clean(value: unknown, options?: CleanFieldOptions | undefined): MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial>;
     validate(value: unknown, options?: DataFieldValidationOptions | undefined): void | DataModelValidationFailure;
+    initialize(value: unknown, model?: ConstructorOf<DataModel<_DataModel | null, DataSchema>> | undefined, options?: object | undefined): MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial>;
 }
+type MaybeUnionSchemaProp<TField extends DataField, TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean> = MaybeSchemaProp<TField extends DataField<infer _TSourceProp, infer TModelProp, boolean, boolean, boolean> ? TModelProp : never, TRequired, TNullable, THasInitial>;
 /** A sluggified string field */
 declare class SlugField<TRequired extends boolean = true, TNullable extends boolean = boolean, THasInitial extends boolean = boolean> extends StrictStringField<string, string, TRequired, TNullable, THasInitial> {
     constructor(options?: SlugFieldOptions<TRequired, TNullable, THasInitial>);
@@ -46,12 +56,8 @@ declare class PredicateStatementField extends fields.DataField<PredicateStatemen
     protected _cast(value: unknown): unknown;
     protected _cleanType(value: PredicateStatement): PredicateStatement;
 }
-declare class PredicateField<TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ArrayField<PredicateStatementField, RawPredicate, PredicatePF2e, TRequired, TNullable, THasInitial> {
+declare class PredicateField<TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends StrictArrayField<PredicateStatementField, RawPredicate, PredicatePF2e, TRequired, TNullable, THasInitial> {
     constructor(options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>);
-    /** Don't wrap a non-array in an array */
-    protected _cast(value: unknown): unknown;
-    /** Parent method assumes array-wrapping: pass through unchanged */
-    protected _cleanType(value: unknown): unknown;
     /** Construct a `PredicatePF2e` from the initialized `PredicateStatement[]` */
     initialize(value: RawPredicate, model: ConstructorOf<foundry.abstract.DataModel>, options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>): MaybeSchemaProp<PredicatePF2e, TRequired, TNullable, THasInitial>;
 }
@@ -67,4 +73,4 @@ declare class RecordField<TKeyField extends StringField<string, string, true, fa
     protected _validateType(values: unknown, options?: DataFieldValidationOptions): boolean | DataModelValidationFailure | void;
     initialize(values: object | null | undefined, model: ConstructorOf<foundry.abstract.DataModel>, options?: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>): MaybeSchemaProp<RecordFieldModelProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>;
 }
-export { DataUnionField, LaxSchemaField, PredicateField, RecordField, SlugField, StrictBooleanField, StrictSchemaField, StrictStringField, };
+export { DataUnionField, LaxSchemaField, PredicateField, RecordField, SlugField, StrictArrayField, StrictBooleanField, StrictSchemaField, StrictStringField, };

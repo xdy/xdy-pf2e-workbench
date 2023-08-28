@@ -24,5 +24,7 @@ interface PartyCampaign extends DataModel<PartyPF2e, {}> {
         tab?: string;
         type?: string | null;
     }): void;
+    /** Optional callback (for the actor's prepareDerivedData phase) */
+    prepareDerivedData?(): void;
 }
 export { PartyCampaign, PartyUpdateContext };

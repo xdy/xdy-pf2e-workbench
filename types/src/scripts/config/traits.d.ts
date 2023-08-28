@@ -127,7 +127,7 @@ declare const ancestryItemTraits: {
     vanara: string;
     vishkanya: string;
 };
-declare const elementalTraits: {
+declare const elementTraits: {
     air: string;
     earth: string;
     fire: string;
@@ -135,6 +135,7 @@ declare const elementalTraits: {
     water: string;
     wood: string;
 };
+type ElementTrait = keyof typeof elementTraits;
 declare const energyDamageTypes: {
     acid: string;
     cold: string;
@@ -1414,6 +1415,16 @@ declare const consumableTraits: {
 declare const actionTraits: {
     circus: string;
     summon: string;
+    agile: string;
+    propulsive: string;
+    backswing: string;
+    forceful: string;
+    reach: string;
+    sweep: string;
+    thrown: string;
+    "volley-20": string;
+    "volley-30": string;
+    "volley-50": string;
     amp: string;
     attack: string;
     auditory: string;
@@ -2478,6 +2489,16 @@ declare const kingmakerTraits: {
     upkeep: string;
     circus: string;
     summon: string;
+    agile: string;
+    propulsive: string;
+    backswing: string;
+    forceful: string;
+    reach: string;
+    sweep: string;
+    thrown: string;
+    "volley-20": string;
+    "volley-30": string;
+    "volley-50": string;
     amp: string;
     attack: string;
     auditory: string;
@@ -2719,4 +2740,4 @@ declare const kingmakerTraits: {
     vanara: string;
     vishkanya: string;
 };
-export { actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementalTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, kingmakerTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherConsumableTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, traitDescriptions, vehicleTraits, weaponTraits, };
+export { ElementTrait, actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, kingmakerTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherConsumableTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, traitDescriptions, vehicleTraits, weaponTraits, };

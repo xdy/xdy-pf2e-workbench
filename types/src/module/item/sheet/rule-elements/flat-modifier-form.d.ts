@@ -6,7 +6,7 @@ declare class FlatModifierForm extends RuleElementForm<FlatModifierSource, FlatM
     template: string;
     activateListeners(html: HTMLElement): void;
     getData(): Promise<FlatModifierFormSheetData>;
-    _updateObject(formData: Partial<FlatModifierSource>): void;
+    updateObject(formData: Partial<FlatModifierSource>): void;
 }
 interface FlatModifierFormSheetData extends RuleElementFormSheetData<FlatModifierSource, FlatModifierRuleElement> {
     selectorIsArray: boolean;

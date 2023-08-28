@@ -104,9 +104,11 @@ interface RollContextParams<TStatistic extends StatisticCheck | StrikeData | nul
     options: Set<string>;
     /** Whether the request is for display in a sheet view. If so, targets are not considered */
     viewOnly?: boolean;
+    /** A direct way of informing a check is part of a melee action: it is otherwise inferred from the attack item */
+    melee?: boolean;
 }
 interface CheckContextParams<TStatistic extends StatisticCheck | StrikeData = StatisticCheck | StrikeData, TItem extends AttackItem | null = AttackItem | null> extends RollContextParams<TStatistic, TItem> {
-    targetedDC: string;
+    defense: string;
 }
 interface DamageRollContextParams<TStatistic extends StatisticCheck | StrikeData | null = StatisticCheck | StrikeData | null, TItem extends AttackItem | null = AttackItem | null> extends RollContextParams<TStatistic, TItem> {
     /** An outcome of a preceding check roll */

@@ -1,3 +1,3 @@
 import * as Vite from "vite";
-declare const config: Vite.UserConfigExport;
+declare const config: Vite.UserConfigFnObject;
 export default config;

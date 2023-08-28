@@ -4,7 +4,7 @@ declare class FastHealingForm extends RuleElementForm<FastHealingSource, FastHea
     template: string;
     activateListeners(html: HTMLElement): void;
     getData(): Promise<FastHealingSheetData>;
-    _updateObject(formData: Partial<FastHealingSource>): void;
+    updateObject(formData: Partial<FastHealingSource>): void;
 }
 interface FastHealingSheetData extends RuleElementFormSheetData<FastHealingSource, FastHealingRuleElement> {
     types: Record<FastHealingType, string>;

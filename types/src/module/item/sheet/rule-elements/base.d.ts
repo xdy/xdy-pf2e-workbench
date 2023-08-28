@@ -25,8 +25,8 @@ declare class RuleElementForm<TSource extends RuleElementSource = RuleElementSou
      * This function exists because array updates in foundry are currently clunky
      */
     updateItem(updates: Partial<TSource>): void;
-    activateListeners(_html: HTMLElement): void;
-    _updateObject(_formData: Partial<Record<string, unknown>>): void;
+    activateListeners(html: HTMLElement): void;
+    updateObject(_formData: Record<string, unknown>): void;
 }
 type RuleElementFormSheetData<TSource extends RuleElementSource, TObject extends RuleElementPF2e> = RuleElementFormOptions<TSource, TObject>;
 export { RuleElementForm, RuleElementFormSheetData, coerceNumber };

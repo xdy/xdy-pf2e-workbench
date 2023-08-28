@@ -1,22 +1,27 @@
-import { BaseRawModifier, DamageDicePF2e } from "@actor/modifiers.ts";
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="tooltipster" />
+import { DamageDicePF2e } from "@actor/modifiers.ts";
 import { ChatContextFlag, ChatMessagePF2e } from "./index.ts";
 import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
-declare class ChatRollDetails extends Application {
+declare class ChatInspectRoll extends Application {
+    #private;
     private message;
     static get defaultOptions(): ApplicationOptions;
     constructor(message: ChatMessagePF2e, options?: Partial<ApplicationOptions>);
     getData(): ChatRollDetailsData;
-    protected prepareModifiers(modifiers: (BaseRawModifier | DamageDicePF2e)[]): PreparedModifier[];
+    protected prepareModifiers(): PreparedModifier[] | null;
+    activateListeners($html: JQuery<HTMLElement>): void;
+    filterOptions(filter: string): void;
 }
 interface ChatRollDetailsData {
     context?: ChatContextFlag;
     domains?: string[];
     modifiers: PreparedModifier[];
-    rollOptions: string[];
     hasModifiers: boolean;
 }
 interface PreparedModifier extends Omit<Partial<DamageDicePF2e>, "critical" | "predicate"> {
     critical: string | null;
     predicate?: RawPredicate | PredicatePF2e;
 }
-export { ChatRollDetails };
+export { ChatInspectRoll };

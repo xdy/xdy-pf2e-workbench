@@ -35,6 +35,7 @@ declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements Par
     removeCustomModifier(stat: string, slug: string): Promise<void>;
     update(data: DeepPartial<KingdomSource> & Record<string, unknown>): Promise<void>;
     prepareData(): void;
+    prepareDerivedData(): void;
     getRollData(): Record<string, unknown>;
     importActivities({ skipDialog }?: {
         skipDialog?: boolean;

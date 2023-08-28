@@ -47,12 +47,7 @@ interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
     resourceDice: KingdomData["resources"]["dice"] & {
         icon: string;
     };
-    leadership: (KingdomLeadershipData & {
-        actor: ActorPF2e | null;
-        img: string;
-        slug: string;
-        label: string;
-    })[];
+    leadership: LeaderSheetData[];
     actions: {
         item: CampaignFeaturePF2e;
         traits: SheetOptions;
@@ -60,6 +55,13 @@ interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
     skills: Statistic[];
     feats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>[];
     actionFilterChoices: SheetOptions;
+}
+interface LeaderSheetData extends KingdomLeadershipData {
+    actor: ActorPF2e | null;
+    img: string;
+    slug: string;
+    label: string;
+    abilityLabel: string;
 }
 interface CommoditySheetData extends ValueAndMax {
     type: string;

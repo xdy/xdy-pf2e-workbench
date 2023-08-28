@@ -7,7 +7,7 @@ declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocum
     get allowedItemTypes(): (ItemType | "physical")[];
     /** The familiar's master, if selected */
     get master(): CharacterPF2e | null;
-    get masterAbilityModifier(): number | null;
+    get masterAttributeModifier(): number;
     /** Re-render the sheet if data preparation is called from the familiar's master */
     reset({ fromMaster }?: {
         fromMaster?: boolean | undefined;
@@ -17,8 +17,6 @@ declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocum
     /** Skip rule-element preparation if there is no master */
     protected prepareRuleElements(): RuleElementPF2e[];
     prepareDerivedData(): void;
-    /** Familiars cannot have item bonuses. Nor do they have ability mods nor proficiency (sans master level) */
-    private stripInvalidModifiers;
     /** Remove the master's reference to this familiar */
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
 }

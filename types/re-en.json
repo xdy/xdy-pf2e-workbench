@@ -1062,7 +1062,7 @@
             "RollOption": "Roll Option",
             "RollTwice": "Roll Twice",
             "Sense": "Sense",
-            "Statistic": "Statistic",
+            "SpecialStatistic": "Special Statistic",
             "Strike": "Strike",
             "Striking": "Striking",
             "SubstituteRoll": "Substitute Roll",
@@ -1850,6 +1850,14 @@
                     "SaveNote": "When you roll a success on a save against an emotion or fear effect, you get a critical success instead."
                 }
             },
+            "Genie": {
+                "Faydhaan": "Faydhaan",
+                "Ifrit": "Ifrit",
+                "Jaathoom": "Jaathoom",
+                "Jabali": "Jabali",
+                "Janni": "Janni",
+                "Prompt": "Select a Genie."
+            },
             "GeneralTraining": {
                 "Prompt": "Select a 1st-level general feat."
             },
@@ -1922,6 +1930,10 @@
                 "Unmatched": "Unmatched"
             },
             "HarrowCourt": {
+                "BrassDwarf": {
+                    "ResistanceLabel": "Brass Dwarf Resistance",
+                    "WeaknessLabel": "Brass Dwarf Weakness"
+                },
                 "Fiend": {
                     "ToggleLabel": "Repeating a non-strike action"
                 },
@@ -2008,6 +2020,16 @@
                     "NonlethalBluntShot": "Nonlethal Blunt Shot",
                     "NonlethalModularHead": "Nonlethal Modular Head",
                     "NonlethalPacificationTools": "Nonlethal Pacification Tools"
+                },
+                "OffensiveBoost": {
+                    "Chill": "Chill (Cold)",
+                    "Ignition": "Ignition (Fire)",
+                    "Jolt": "Jolt (Electricity)",
+                    "Momentum": "Momentum (Bludgeoning)",
+                    "Prompt": "Select an offensive boost.",
+                    "Saws": "Saws (Slashing)",
+                    "Spike": "Spike (Piercing)",
+                    "Vitriol": "Vitriol (Acid)"
                 }
             },
             "Investigator": {
@@ -2020,9 +2042,32 @@
             },
             "Kineticist": {
                 "Impulse": {
+                    "ElementalBlast": {
+                        "Label": {
+                            "Air": "Elemental Blast (Air)",
+                            "Earth": "Elemental Blast (Earth)",
+                            "Fire": "Elemental Blast (Fire)",
+                            "Metal": "Elemental Blast (Metal)",
+                            "Water": "Elemental Blast (Water)",
+                            "Wood": "Elemental Blast (Wood)"
+                        },
+                        "OneAction": "One Action",
+                        "ShortLabel": "Blast",
+                        "TwoActions": "Two Actions",
+                        "TwoActionBonus": "Two-Action Blast"
+                    },
+                    "ImpulseJunction": {
+                        "Air": "Before or after the other effects of the impulse, you can either Stride up to half your Speed or Step. If you have a fly Speed, you can Fly up to half your fly Speed instead.",
+                        "Earth": "Fragments of stone float around you, granting you a +1 circumstance bonus to AC until the start of your next turn. @UUID[Compendium.pf2e.feat-effects.Item.09oP0FBBAhXOS4JW]{Effect: Earth Impulse Junction}",
+                        "Metal": "Choose acid, electricity, or piercing. Until the start of your next turn, each time a creature touches you or damages you with an unarmed melee attack or nonreach melee weapon, it takes damage of the chosen type equal to half your level (minimum 1 damage).",
+                        "Title": "Impulse Junction",
+                        "Water": "After the impulse's other effects, you can move one creature targeted by the impulse or in its area 5 feet in any direction, or 10 feet if it's in a body of water. This can't move the creature into the air. You can choose only a creature that's willing to be moved, that failed its save against the impulse, or that you succeeded at an impulse attack roll against.",
+                        "Wood": "You gain temporary Hit Points equal to your level that last until the start of your next turn. @UUID[Compendium.pf2e.feat-effects.Item.rCsmv66TzQhte4Gp]{Effect: Wood Impulse Junction}"
+                    },
                     "Prompt": "Select an Impulse."
                 },
                 "KineticGate": {
+                    "AllowedDropsLabel": "Kineticist class feat",
                     "DualGate": "Dual Gate",
                     "ExpandThePortal": "Expand the Portal",
                     "ForkThePath": "Fork the Path",
@@ -2525,6 +2570,20 @@
                 }
             },
             "Swashbuckler": {
+                "Finisher": {
+                    "Basic": "Basic",
+                    "Bleeding": "Bleeding",
+                    "Confident": "Confident",
+                    "Dual": "Dual",
+                    "Impaling": "Impaling",
+                    "Label": "Finisher",
+                    "Lethal": "Lethal",
+                    "Mobile": "Mobile",
+                    "Perfect": "Perfect",
+                    "Stunning": "Stunning",
+                    "Targeting": "Targeting",
+                    "Unbalancing": "Unbalancing"
+                },
                 "Panache": "You gain @UUID[Compendium.pf2e.feat-effects.Item.uBJsxCzNhje8m8jj]{Panache}.",
                 "Style": {
                     "Prompt": "Select a style."
@@ -2554,6 +2613,12 @@
                     "Normal": {
                         "InForestLabel": "Wildwood Ink (In Forest)"
                     }
+                }
+            },
+            "Tengu": {
+                "WeaponFamiliarity": {
+                    "Prompt1": "Select a weapon from the sword group.",
+                    "Prompt2": "Select a second weapon from the sword group."
                 }
             },
             "TerrainExpertise": {

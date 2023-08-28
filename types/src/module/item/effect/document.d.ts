@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { EffectBadge } from "@item/abstract-effect/data.ts";
+import { EffectBadge, EffectTrait } from "@item/abstract-effect/data.ts";
 import { AbstractEffectPF2e } from "@item/abstract-effect/index.ts";
 import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
 import { UserPF2e } from "@module/user/index.ts";
@@ -7,6 +7,7 @@ import { EffectFlags, EffectSource, EffectSystemData } from "./data.ts";
 declare class EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     get badge(): EffectBadge | null;
     get level(): number;
+    get traits(): Set<EffectTrait>;
     get isExpired(): boolean;
     get totalDuration(): number;
     get remainingDuration(): {
@@ -37,7 +38,7 @@ declare class EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
     /** If applicable, reevaluate this effect's badge */
-    onTurnStart(): Promise<void>;
+    onTurnStartEnd(event: "start" | "end"): Promise<void>;
 }
 interface EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     flags: EffectFlags;

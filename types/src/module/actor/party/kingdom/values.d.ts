@@ -10,6 +10,7 @@ declare const KINGDOM_RUIN_LABELS: {
     loyalty: string;
 };
 declare const KINGDOM_LEADERSHIP: readonly ["ruler", "counselor", "general", "emissary", "magister", "treasurer", "viceroy", "warden"];
+declare const KINGDOM_LEADERSHIP_ABILITIES: Record<KingdomLeadershipRole, KingdomAbility>;
 declare const KINGDOM_COMMODITIES: readonly ["food", "luxuries", "lumber", "ore", "stone"];
 declare const KINGDOM_SKILLS: readonly ["agriculture", "arts", "boating", "defense", "engineering", "exploration", "folklore", "industry", "intrigue", "magic", "politics", "scholarship", "statecraft", "trade", "warfare", "wilderness"];
 declare const KINGDOM_SKILL_LABELS: Record<"magic" | "exploration" | "defense" | "agriculture" | "arts" | "boating" | "engineering" | "folklore" | "industry" | "intrigue" | "politics" | "scholarship" | "statecraft" | "trade" | "warfare" | "wilderness", string>;
@@ -57,4 +58,4 @@ declare function getKingdomABCData(): {
     heartland: Record<string, KingdomCHG | undefined>;
     government: Record<string, KingdomGovernment | undefined>;
 };
-export { CONTROL_DC_BY_LEVEL, KINGDOM_ABILITIES, KINGDOM_ABILITY_LABELS, KINGDOM_COMMODITIES, KINGDOM_SIZE_DATA, KINGDOM_SKILLS, KINGDOM_SKILL_ABILITIES, KINGDOM_SKILL_LABELS, KINGDOM_LEADERSHIP, KINGDOM_RUIN_LABELS, VACANCY_PENALTIES, getKingdomABCData, };
+export { CONTROL_DC_BY_LEVEL, KINGDOM_ABILITIES, KINGDOM_ABILITY_LABELS, KINGDOM_COMMODITIES, KINGDOM_SIZE_DATA, KINGDOM_SKILLS, KINGDOM_SKILL_ABILITIES, KINGDOM_SKILL_LABELS, KINGDOM_LEADERSHIP, KINGDOM_LEADERSHIP_ABILITIES, KINGDOM_RUIN_LABELS, VACANCY_PENALTIES, getKingdomABCData, };

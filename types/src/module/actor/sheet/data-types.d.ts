@@ -17,6 +17,7 @@ export interface InventoryItem<TItem extends PhysicalItemPF2e = PhysicalItemPF2e
     isSellable: boolean;
     hasCharges: boolean;
     heldItems?: InventoryItem[];
+    notifyInvestment?: boolean;
 }
 interface CoinDisplayData {
     value: number;

@@ -6,6 +6,7 @@ import { CreatureSheetData } from "@actor/creature/index.ts";
 import { CreatureSheetPF2e } from "@actor/creature/sheet.ts";
 import { FamiliarPF2e } from "@actor/familiar/index.ts";
 import { AbilityItemPF2e } from "@item";
+import { StatisticTraceData } from "@system/statistic/data.ts";
 /**
  * @category Actor
  */
@@ -22,6 +23,7 @@ interface FamiliarSheetData<TActor extends FamiliarPF2e> extends CreatureSheetDa
     masters: CharacterPF2e[];
     abilities: ConfigPF2e["PF2E"]["abilities"];
     size: string;
+    skills: StatisticTraceData[];
     familiarAbilities: {
         value: number;
         items: AbilityItemPF2e[];

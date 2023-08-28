@@ -95,7 +95,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
         success: string;
     };
     /** Modify this weapon from AdjustStrike rule elements */
-    getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
+    protected getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     consumeAmmo(weapon: WeaponPF2e<this>, params: RollParameters): boolean;
     /** Prepare stored and synthetic martial proficiencies */
     prepareMartialProficiencies(): void;

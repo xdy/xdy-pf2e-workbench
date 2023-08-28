@@ -8,6 +8,7 @@ import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { Bulk } from "@item/physical/index.ts";
 import { ValueAndMax, ZeroToFour } from "@module/data.ts";
+import { SheetOptions } from "@module/sheet/helpers.ts";
 import { PartyPF2e } from "./document.ts";
 interface PartySheetRenderOptions extends ActorSheetRenderOptionsPF2e {
     actors?: boolean;
@@ -85,6 +86,12 @@ interface MemberBreakdown {
         value: number;
         max: number;
     };
+    activities: {
+        uuid: string;
+        name: string;
+        img: string;
+        traits: SheetOptions;
+    }[];
     /** If true, the current user is restricted from seeing meta details */
     restricted: boolean;
 }

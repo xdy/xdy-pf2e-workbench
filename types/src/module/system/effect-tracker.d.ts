@@ -6,7 +6,6 @@ export declare class EffectTracker {
     effects: EffectPF2e<ActorPF2e>[];
     /** A separate collection of aura effects, including ones with unlimited duration */
     auraEffects: Collection<EffectPF2e<ActorPF2e>>;
-    private insert;
     register(effect: EffectPF2e<ActorPF2e>): void;
     unregister(toRemove: EffectPF2e<ActorPF2e>): void;
     /**

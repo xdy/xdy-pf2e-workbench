@@ -92,6 +92,7 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         petrified: string;
         physical: string;
         piercing: string;
+        plant: string;
         poison: string;
         polymorph: string;
         positive: string;
@@ -109,6 +110,7 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         slowed: string;
         sonic: string;
         "spell-deflection": string;
+        spirit: string;
         stunned: string;
         stupefied: string;
         "swarm-attacks": string;
@@ -166,6 +168,7 @@ declare class WeaknessData extends IWRData<WeaknessType> implements WeaknessSour
         orichalcum: string;
         physical: string;
         piercing: string;
+        plant: string;
         poison: string;
         positive: string;
         precision: string;
@@ -176,6 +179,7 @@ declare class WeaknessData extends IWRData<WeaknessType> implements WeaknessSour
         slashing: string;
         sonic: string;
         spells: string;
+        spirit: string;
         "splash-damage": string;
         "unarmed-attacks": string;
         "vampire-weaknesses": string;
@@ -247,6 +251,7 @@ declare class ResistanceData extends IWRData<ResistanceType> implements Resistan
         slashing: string;
         sonic: string;
         spells: string;
+        spirit: string;
         "unarmed-attacks": string;
         vorpal: string;
         "vorpal-adamantine": string;
@@ -274,5 +279,5 @@ interface ResistanceSource extends IWRSource<ResistanceType> {
     doubleVs?: ResistanceType[];
 }
 /** Weaknesses to things that "[don't] normally deal damage, such as water": applied separately as untyped damage */
-declare const NON_DAMAGE_WEAKNESSES: Set<IWRType>;
+declare const NON_DAMAGE_WEAKNESSES: Set<WeaknessType>;
 export { ImmunityData, ImmunitySource, IWRSource, NON_DAMAGE_WEAKNESSES, ResistanceData, ResistanceSource, WeaknessData, WeaknessSource, };

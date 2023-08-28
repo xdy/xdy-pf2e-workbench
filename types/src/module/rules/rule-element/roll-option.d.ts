@@ -1,4 +1,4 @@
-import { PredicateField } from "@system/schema-data-fields.ts";
+import { DataUnionField, PredicateField, StrictBooleanField, StrictStringField } from "@system/schema-data-fields.ts";
 import type { ArrayField, BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeDataPrepPhase } from "./ae-like.ts";
 import { ResolvableValueField } from "./data.ts";
@@ -39,7 +39,6 @@ interface RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema>, Model
     value: boolean | string;
 }
 type RollOptionSchema = RuleElementSchema & {
-    scope: StringField<string, string, false, false, true>;
     domain: StringField<string, string, true, false, true>;
     phase: StringField<AELikeDataPrepPhase, AELikeDataPrepPhase, false, false, true>;
     option: StringField<string, string, true, false, false>;
@@ -50,6 +49,10 @@ type RollOptionSchema = RuleElementSchema & {
      * `true` unless also `togglable`, in which case to `false`.
      */
     value: ResolvableValueField<false, false, false>;
+    /** Whether the roll option is toggleable: a checkbox will appear in interfaces (usually actor sheets) */
+    toggleable: DataUnionField<StrictStringField<"totm"> | StrictBooleanField, false, false, false>;
+    /** If toggleable, the location to be found in an interface */
+    placement: StringField<string, string, false, false, true>;
     /** An optional predicate to determine whether the toggle is interactable by the user */
     disabledIf: PredicateField<false, false, false>;
     /** The value of the roll option if its toggle is disabled: null indicates the pre-disabled value is preserved */
@@ -71,7 +74,6 @@ type SuboptionData = {
     selected: BooleanField<boolean, boolean, true, false, true>;
 };
 interface RollOptionSource extends RuleElementSource {
-    scope?: unknown;
     domain?: unknown;
     option?: unknown;
     toggleable?: unknown;

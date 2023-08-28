@@ -99,6 +99,6 @@ interface SpellDamageTemplate extends BaseDamageTemplate {
     };
 }
 type AfflictionDamageTemplate = SpellDamageTemplate;
-type InlineDamageTemplate = SpellDamageTemplate;
-type DamageTemplate = WeaponDamageTemplate | SpellDamageTemplate | AfflictionDamageTemplate | InlineDamageTemplate;
-export { AfflictionDamageTemplate, BaseDamageData, CreateDamageFormulaParams, CriticalInclusion, DamageCategory, DamageCategoryRenderData, DamageCategoryUnique, DamageDieSize, DamagePartialTerm, DamageRollContext, DamageRollRenderData, DamageTemplate, DamageType, DamageTypeRenderData, InlineDamageTemplate, MaterialDamageEffect, SpellDamageTemplate, WeaponBaseDamageData, WeaponDamageTemplate, };
+type SimpleDamageTemplate = SpellDamageTemplate;
+type DamageTemplate = WeaponDamageTemplate | SpellDamageTemplate | AfflictionDamageTemplate | SimpleDamageTemplate;
+export { AfflictionDamageTemplate, BaseDamageData, CreateDamageFormulaParams, CriticalInclusion, DamageCategory, DamageCategoryRenderData, DamageCategoryUnique, DamageDieSize, DamagePartialTerm, DamageRollContext, DamageRollRenderData, DamageTemplate, DamageType, DamageTypeRenderData, MaterialDamageEffect, SimpleDamageTemplate, SpellDamageTemplate, WeaponBaseDamageData, WeaponDamageTemplate, };

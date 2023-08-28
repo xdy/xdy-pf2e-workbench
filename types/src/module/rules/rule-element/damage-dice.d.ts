@@ -1,5 +1,5 @@
 import { DamageDiceOverride } from "@actor/modifiers.ts";
-import type { BooleanField, ObjectField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, BooleanField, ObjectField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 import { RuleElementOptions, RuleElementPF2e } from "./index.ts";
 declare class DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema> {
@@ -23,7 +23,7 @@ interface DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema>, M
 }
 type DamageDiceRuleSchema = RuleElementSchema & {
     /** All domains to add a modifier to */
-    selector: StringField<string, string, true, false, false>;
+    selector: ArrayField<StringField<string, string, true, false, false>>;
     /** The number of dice to add */
     diceNumber: ResolvableValueField<false, false, false>;
     /** The damage die size */

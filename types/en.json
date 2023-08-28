@@ -129,9 +129,11 @@
                 "TakesNoDamage": "<actor>{actor}</actor> takes no damage.",
                 "TheTarget": "The target"
             },
+            "Attacks": "Attacks",
             "Character": {
                 "Attribute": {
                     "Apex": "Apex Attribute",
+                    "Boosts": "Attribute Boosts",
                     "Key": "Key Attribute"
                 },
                 "AttributeBuilder": {
@@ -150,7 +152,6 @@
                     "Complete": "Complete",
                     "Flaw": "Flaw",
                     "Flaws": "Flaws",
-                    "HasPartial": "Has Partial Boost",
                     "Increase": "Increase",
                     "KeyIcon": "Key",
                     "LegacyFlaws": "Legacy Flaws",
@@ -247,6 +248,7 @@
             "Dead": "Dead",
             "Familiar": {
                 "Master": {
+                    "ArmorClass": "Master Armor Class",
                     "Perception": "Master Perception"
                 }
             },
@@ -322,14 +324,6 @@
                 "SimpleSheet": "Simple NPC Sheet"
             },
             "Party": {
-                "InvalidCampaign": {
-                    "Hint": "The campaign data is invalid",
-                    "Title": "Invalid Campaign ({party})",
-                    "Message": {
-                        "mismatch": "This party has campaign data of type {current}, but the configured type is {campaignType}. Do you want to delete existing campaign data?",
-                        "error": "This party's campaign data ({current}) is corrupt and failed data preparation. Do you want to delete existing campaign data?"
-                    }
-                },
                 "BlankSlate": "This party doesn't have any members. Drag a creature from the actor sidebar to get started. ",
                 "Coin": "Coin",
                 "ClearActivities": {
@@ -339,6 +333,15 @@
                 "ClownCar": {
                     "Deposit": "Deposit PC Tokens",
                     "Retrieve": "Retrieve PC Tokens"
+                },
+                "DefaultName": "The Party",
+                "InvalidCampaign": {
+                    "Hint": "The campaign data is invalid",
+                    "Title": "Invalid Campaign ({party})",
+                    "Message": {
+                        "mismatch": "This party has campaign data of type {current}, but the configured type is {campaignType}. Do you want to delete existing campaign data?",
+                        "error": "This party's campaign data ({current}) is corrupt and failed data preparation. Do you want to delete existing campaign data?"
+                    }
                 },
                 "Languages": "Party Languages",
                 "MembersLabel": "Members: ",
@@ -360,9 +363,9 @@
                 "SlotAvailable": "Slot Available",
                 "Tabs": {
                     "Overview": "Overview",
-                    "Inventory": "Inventory",
                     "Exploration": "Exploration",
-                    "Orphaned": "Orphaned Items"
+                    "Orphaned": "Orphaned Items",
+                    "Stash": "Stash"
                 },
                 "Total": "Party Total",
                 "Wealth": "Wealth"
@@ -1086,6 +1089,7 @@
                 "precision": "precision",
                 "slashing": "slashing",
                 "sonic": "sonic",
+                "spirit": "spirit",
                 "splash": "splash",
                 "untyped": "untyped"
             },
@@ -1248,6 +1252,7 @@
             "CantImportTooHighVersion": "Unable to import {sourceName}: its schema version ({sourceSchemaVersion}) is higher than this world's ({worldSchemaVersion}).",
             "CantMoveItemDestination": "You are not allowed to move items to this character.",
             "CantMoveItemSource": "You are not allowed to move items from this character.",
+            "ItemNotFoundByUUID": "Item with UUID of \"{uuid}\" not found.",
             "MinimumProfLevelSetByFeatures": "The selected proficiency is below proficiency set by features.",
             "NoCreatureTokenSelected": "Select at least one token associated with a creature.",
             "NoPCTokenSelected": "Select at least one token associated with a PC.",
@@ -1410,9 +1415,11 @@
             },
             "Action": {
                 "SelfAppliedEffect": {
-                    "Delete": "Delete Effect",
+                    "Applied": "{effect} was applied.",
+                    "Delete": "Delete Reference",
+                    "Drop": "Drop Effect",
                     "Label": "Self-Applied Effect",
-                    "Hint": "A single effect item to be applied to the actor that performs this action"
+                    "Hint": "A single effect item to be applied to the actor that uses this action"
                 },
                 "CategoryLabel": "Category",
                 "Category": {
@@ -1875,7 +1882,12 @@
                         "Hint": "The values of a badge can be given descriptive labels. They should be short enough to fit in the effects panel. Labels also serve as a natural maximum value for a badge.",
                         "Placeholder": "New Label"
                     },
-                    "ReevaluateFormula": "Reevaluate every turn?",
+                    "ReevaluateFormula": {
+                        "Label": "Reevaluate?",
+                        "Never": "Never",
+                        "TurnEnd": "On Turn End",
+                        "TurnStart": "On Turn Start"
+                    },
                     "Type": {
                         "counter": "Counter",
                         "formula": "Formula",
@@ -2108,6 +2120,9 @@
                 "Reload": {
                     "LabelN": "Reload {value}",
                     "OneMinute": "1 min"
+                },
+                "Rune": {
+                    "Potency": "Weapon Potency"
                 },
                 "SpecificMagicWeapon": {
                     "Hint": "Marking this weapon as a <i>specific magic weapon</i> indicates that it does more than what its material composition and runes allow. The name, level, rarity, and price will no longer be overridden from a precious material or runes at the time of marking. Those material and runes will, however, serve as a baseline for level, rarity, and price adjustments from later upgrades.",
@@ -3910,6 +3925,7 @@
         "TraitDescriptionSpellheart": "Spellhearts are permanent items that work similarly to talismans. You affix a spellheart using the Affix a Spellheart activity, which is otherwise identical to Affix a Talisman. The limit of one talisman per item remains—an item can have one spellheart or one talisman, not both. When casting a cantrip from a spellheart, you can use your own spell attack roll or spell DC if it's higher. Crafting a spellheart requires the spells the spellheart can cast. For example, a major five-feather wreath requires air walk, gale blast, and wall of wind.",
         "TraitDescriptionSplash": "When you use a thrown weapon with the splash trait, you don't add your Strength modifier to the damage roll. If an attack with a splash weapon fails, succeeds, or critically succeeds, all creatures within 5 feet of the target (including the target) take the listed splash damage. On a failure (but not a critical failure), the target of the attack still takes the splash damage. Add splash damage together with the initial damage against the target before applying the target's weaknesses or resistances. You don't multiply splash damage on a critical hit.",
         "TraitDescriptionSplash10": "When you use a thrown weapon with the splash trait, you don't add your Strength modifier to the damage roll. If an attack with a splash weapon fails, succeeds, or critically succeeds, all creatures within 10 feet of the target (including the target) take the listed splash damage. On a failure (but not a critical failure), the target of the attack still takes the splash damage. Add splash damage together with the initial damage against the target before applying the target's weaknesses or resistances. You don't multiply splash damage on a critical hit.",
+        "TraitDescriptionSpirit": "Effects with this trait can affect creatures with spiritual essence and might deal spirit damage. A creature with this trait is defined by its spiritual essence. Spirit creatures often lack a material form.",
         "TraitDescriptionSprite": "A family of diminutive winged fey with a strong connection to primal magic.",
         "TraitDescriptionStaff": "This magic item holds spells of a particular theme and allows a spellcaster to cast additional spells by preparing the staff.",
         "TraitDescriptionStance": "A stance is a general combat strategy that you enter by using an action with the stance trait, and that you remain in for some time. A stance lasts until you get knocked out, until its requirements (if any) are violated, until the encounter ends, or until you enter a new stance, whichever comes first. After you use an action with the stance trait, you can't use another one for 1 round. You can enter or be in a stance only in encounter mode.",
@@ -4594,7 +4610,6 @@
             "Title": "Announcement: United Paizo Workers"
         },
         "UnprepareItemTitle": "Unprepare Item",
-        "UpdateActorLabel": "Update Actor",
         "UpdateLabelUniversal": "Update",
         "Usage": "Usage",
         "UserSettings": {

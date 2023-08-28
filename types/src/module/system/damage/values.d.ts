@@ -10,7 +10,7 @@ declare const DAMAGE_CATEGORIES: Set<"adamantine" | "darkwood" | "energy" | "mit
 /** The standard damage die sizes */
 declare const DAMAGE_DIE_FACES_TUPLE: readonly ["d4", "d6", "d8", "d10", "d12"];
 declare const DAMAGE_DIE_FACES: Set<"d10" | "d12" | "d4" | "d6" | "d8">;
-declare const DAMAGE_TYPES: Set<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "untyped">;
+declare const DAMAGE_TYPES: Set<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "spirit" | "untyped">;
 /** Maps damage types to their damage category; these are the immutable base mappings used if there is no override. */
 declare const BASE_DAMAGE_TYPES_TO_CATEGORIES: Record<DamageType, DamageCategory | null>;
 declare const DAMAGE_TYPE_ICONS: Record<DamageType, string | null>;

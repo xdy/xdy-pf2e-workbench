@@ -9,8 +9,6 @@ declare class ChatLogPF2e extends ChatLog<ChatMessagePF2e> {
     activateClickListener(html: HTMLElement): void;
     /** Replace parent method in order to use DamageRoll class as needed */
     protected _processDiceCommand(command: string, matches: RegExpMatchArray[], chatData: DeepPartial<foundry.documents.ChatMessageSource>, createOptions: ChatMessageModificationContext): Promise<void>;
-    /** Upstream method sometimes fails to recognize the top of the chat log as being the highest scroll position. */
-    protected _onScrollLog(event: JQuery.TriggeredEvent): void;
     protected _getEntryContextOptions(): EntryContextOption[];
 }
 export { ChatLogPF2e };

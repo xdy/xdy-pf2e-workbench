@@ -315,8 +315,8 @@ export declare const PF2ECONFIG: {
         good: string;
         lawful: string;
     };
-    damageTypes: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "untyped", string>;
-    damageRollFlavors: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "untyped", string>;
+    damageTypes: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "spirit" | "untyped", string>;
+    damageRollFlavors: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "spirit" | "untyped", string>;
     damageCategories: {
         alignment: string;
         energy: string;
@@ -339,6 +339,14 @@ export declare const PF2ECONFIG: {
         precision: string;
         splash: string;
         persistent: string;
+    };
+    elementTraits: {
+        air: string;
+        earth: string;
+        fire: string;
+        metal: string;
+        water: string;
+        wood: string;
     };
     materialDamageEffects: Pick<Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "keep-stone" | "noqual" | "peachwood" | "siccatite" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>, "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "keep-stone" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel">;
     resistanceTypes: {
@@ -388,6 +396,7 @@ export declare const PF2ECONFIG: {
         slashing: string;
         sonic: string;
         spells: string;
+        spirit: string;
         "unarmed-attacks": string;
         vorpal: string;
         "vorpal-adamantine": string;
@@ -447,6 +456,7 @@ export declare const PF2ECONFIG: {
         orichalcum: string;
         physical: string;
         piercing: string;
+        plant: string;
         poison: string;
         positive: string;
         precision: string;
@@ -457,6 +467,7 @@ export declare const PF2ECONFIG: {
         slashing: string;
         sonic: string;
         spells: string;
+        spirit: string;
         "splash-damage": string;
         "unarmed-attacks": string;
         "vampire-weaknesses": string;
@@ -1370,6 +1381,16 @@ export declare const PF2ECONFIG: {
     actionTraits: {
         circus: string;
         summon: string;
+        agile: string;
+        propulsive: string;
+        backswing: string;
+        forceful: string;
+        reach: string;
+        sweep: string;
+        thrown: string;
+        "volley-20": string;
+        "volley-30": string;
+        "volley-50": string;
         amp: string;
         attack: string;
         auditory: string;
@@ -2147,6 +2168,16 @@ export declare const PF2ECONFIG: {
         upkeep: string;
         circus: string;
         summon: string;
+        agile: string;
+        propulsive: string;
+        backswing: string;
+        forceful: string;
+        reach: string;
+        sweep: string;
+        thrown: string;
+        "volley-20": string;
+        "volley-30": string;
+        "volley-50": string;
         amp: string;
         attack: string;
         auditory: string;
@@ -3438,7 +3469,7 @@ export declare const PF2ECONFIG: {
         kineticist: string;
         kitsune: string;
         kobold: string;
-        laminar: string; /** Max speed for number of hexploration activities */
+        laminar: string;
         "launching-dart": string;
         lawful: string;
         leshy: string;
@@ -3685,7 +3716,7 @@ export declare const PF2ECONFIG: {
         RollOption: string;
         RollTwice: string;
         Sense: string;
-        Statistic: string;
+        SpecialStatistic: string;
         Strike: string;
         Striking: string;
         SubstituteRoll: string;
@@ -3984,6 +4015,7 @@ export declare const PF2ECONFIG: {
         petrified: string;
         physical: string;
         piercing: string;
+        plant: string;
         poison: string;
         polymorph: string;
         positive: string;
@@ -4001,6 +4033,7 @@ export declare const PF2ECONFIG: {
         slowed: string;
         sonic: string;
         "spell-deflection": string;
+        spirit: string;
         stunned: string;
         stupefied: string;
         "swarm-attacks": string;
@@ -4464,6 +4497,16 @@ export declare const PF2ECONFIG: {
             action: {
                 circus: string;
                 summon: string;
+                agile: string;
+                propulsive: string;
+                backswing: string;
+                forceful: string;
+                reach: string;
+                sweep: string;
+                thrown: string;
+                "volley-20": string;
+                "volley-30": string;
+                "volley-50": string;
                 amp: string;
                 attack: string;
                 auditory: string;
@@ -4708,6 +4751,16 @@ export declare const PF2ECONFIG: {
             affliction: {
                 circus: string;
                 summon: string;
+                agile: string;
+                propulsive: string;
+                backswing: string;
+                forceful: string;
+                reach: string;
+                sweep: string;
+                thrown: string;
+                "volley-20": string;
+                "volley-30": string;
+                "volley-50": string;
                 amp: string;
                 attack: string;
                 auditory: string;
@@ -5534,6 +5587,16 @@ export declare const PF2ECONFIG: {
                 upkeep: string;
                 circus: string;
                 summon: string;
+                agile: string;
+                propulsive: string;
+                backswing: string;
+                forceful: string;
+                reach: string;
+                sweep: string;
+                thrown: string;
+                "volley-20": string;
+                "volley-30": string;
+                "volley-50": string;
                 amp: string;
                 attack: string;
                 auditory: string;

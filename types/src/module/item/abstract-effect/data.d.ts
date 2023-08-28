@@ -37,7 +37,7 @@ interface EffectBadgeValueSource extends EffectBadgeBaseSource {
     value: number;
     reevaluate?: {
         formula: string;
-        event: "turn-start";
+        event: "turn-start" | "turn-end";
     } | null;
 }
 interface EffectBadgeValue extends EffectBadgeValueSource, EffectBadgeBase {
@@ -47,7 +47,7 @@ interface EffectBadgeFormulaSource extends EffectBadgeBaseSource {
     type: "formula";
     value: string;
     evaluate?: boolean;
-    reevaluate?: "turn-start" | null;
+    reevaluate?: "turn-start" | "turn-end" | null;
 }
 interface EffectBadgeFormula extends EffectBadgeFormulaSource, EffectBadgeBase {
 }

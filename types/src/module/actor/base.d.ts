@@ -160,7 +160,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     prepareDerivedData(): void;
     /** Set defaults for this actor's prototype token */
     private preparePrototypeToken;
-    getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
+    protected getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     /** Calculate attack roll targeting data, including the target's DC. */
     getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends AttackItem | null>(params: CheckContextParams<TStatistic, TItem>): Promise<CheckContext<this, TStatistic, TItem>>;
     /** Acquire additional data for a damage roll. */
@@ -267,7 +267,7 @@ interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
     get sheet(): ActorSheetPF2e<this>;
     update(data: DocumentUpdateData<this>, options?: ActorUpdateContext<TParent>): Promise<this>;
     getActiveTokens(linked: boolean | undefined, document: true): TokenDocumentPF2e<ScenePF2e>[];
-    getActiveTokens(linked?: boolean | undefined, document?: undefined): TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
+    getActiveTokens(linked?: boolean | undefined, document?: false): TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
     getActiveTokens(linked?: boolean, document?: boolean): TokenDocumentPF2e<ScenePF2e>[] | TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
     _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** See implementation in class */

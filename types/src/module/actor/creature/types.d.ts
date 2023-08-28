@@ -14,7 +14,7 @@ type CreatureTrait = keyof ConfigPF2e["PF2E"]["creatureTraits"] | AlignmentTrait
 type ModeOfBeing = "living" | "undead" | "construct" | "object";
 interface GetReachParameters {
     action?: "interact" | "attack";
-    weapon?: WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e> | null;
+    weapon?: Maybe<WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e>>;
 }
 interface CreatureUpdateContext<TParent extends TokenDocumentPF2e | null> extends ActorUpdateContext<TParent> {
     allowHPOverage?: boolean;
@@ -37,7 +37,6 @@ interface CreatureSheetData<TActor extends CreaturePF2e> extends ActorSheetDataP
     };
     languages: SheetOptions;
     abilities: ConfigPF2e["PF2E"]["abilities"];
-    skills: ConfigPF2e["PF2E"]["skills"];
     actorSizes: ConfigPF2e["PF2E"]["actorSizes"];
     alignments: {
         [K in Alignment]?: string;
