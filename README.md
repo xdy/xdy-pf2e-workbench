@@ -86,7 +86,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Suboption for how to handle if the final damage was nonlethal.
     * Option to automatically remove Dying when healed to above 0 hp.
     * Option to drop all held items on becoming unconscious.
-    * Option to automate the results of recovery rolls.
+    * Option to automate the results of the dying recovery roll button being clicked. (I.e. it does not automatically roll to try recover the dying character.)
     * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384)
 
 * Client Automation section

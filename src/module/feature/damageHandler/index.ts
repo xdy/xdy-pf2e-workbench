@@ -1,8 +1,6 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorFlagsPF2e } from "@actor/data/base.js";
 import { degreeOfSuccessWithRerollHandling, isActuallyDamageRoll, shouldIHandleThisMessage } from "../../utils.ts";
-import { TokenDocumentPF2e } from "@module/scene/index.js";
-import { ScenePF2e } from "@scene/document.js";
 import { handleDying } from "../../hooks.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
 
@@ -172,6 +170,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 }
 
 export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
+    const flavor = message.flavor;
+    const token = message.token;
     if (
         game.settings.get(MODULENAME, "handleDyingRecoveryRoll") &&
         shouldIHandleThisMessage(
@@ -179,14 +179,14 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),
             ["all", "gm"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),
         ) &&
-        (message.flavor.includes(game.i18n.localize("PF2E.Recovery.critFailure")) ||
-            message.flavor.includes(game.i18n.localize("PF2E.Recovery.critSuccess")) ||
-            message.flavor.includes(game.i18n.localize("PF2E.Recovery.failure")) ||
-            message.flavor.includes(game.i18n.localize("PF2E.Recovery.success"))) &&
+        (flavor.includes(game.i18n.localize("PF2E.Recovery.critFailure")) ||
+            flavor.includes(game.i18n.localize("PF2E.Recovery.critSuccess")) ||
+            flavor.includes(game.i18n.localize("PF2E.Recovery.failure")) ||
+            flavor.includes(game.i18n.localize("PF2E.Recovery.success"))) &&
         message.id === game.messages.contents.pop()?.id &&
-        message.token &&
-        message.token.actor &&
-        message.token.isOwner
+        token &&
+        token.actor &&
+        token.isOwner
     ) {
         // @ts-ignore
         const outcome = message.flags.pf2e.context?.outcome ?? "";
@@ -194,81 +194,78 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
         const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
         const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
 
-        const token: TokenDocumentPF2e<ScenePF2e> = message.token;
-        if (token && token.isOwner) {
-            const originalDyingCounter = token.actor?.getCondition("dying")?.value ?? 0;
-            let dyingCounter = 0;
-            let outcomeString = "";
-            switch (outcome) {
-                case "criticalFailure":
-                    dyingCounter = dyingCounter + 2;
-                    outcomeString = game.i18n.localize("PF2E.CritFailure");
-                    break;
-                case "criticalSuccess":
-                    dyingCounter = dyingCounter - 2;
-                    outcomeString = game.i18n.localize("PF2E.CritSuccess");
-                    break;
-                case "failure":
-                    dyingCounter = dyingCounter + 1;
-                    outcomeString = game.i18n.localize("PF2E.Failure");
-                    break;
-                case "success":
-                    outcomeString = game.i18n.localize("PF2E.Success");
-                    dyingCounter = dyingCounter - 1;
-                    break;
+        const originalDyingCounter = token.actor?.getCondition("dying")?.value ?? 0;
+        let dyingCounter = 0;
+        let outcomeString = "";
+        switch (outcome) {
+            case "criticalFailure":
+                dyingCounter = dyingCounter + 2;
+                outcomeString = game.i18n.localize("PF2E.CritFailure");
+                break;
+            case "criticalSuccess":
+                dyingCounter = dyingCounter - 2;
+                outcomeString = game.i18n.localize("PF2E.CritSuccess");
+                break;
+            case "failure":
+                dyingCounter = dyingCounter + 1;
+                outcomeString = game.i18n.localize("PF2E.Failure");
+                break;
+            case "success":
+                outcomeString = game.i18n.localize("PF2E.Success");
+                dyingCounter = dyingCounter - 1;
+                break;
+        }
+        if (originalDyingCounter > 0 || dyingCounter !== 0) {
+            const effectsToCreate: any[] = [];
+            handleDying(dyingCounter, originalDyingCounter, actor, effectsToCreate);
+            if (actor && effectsToCreate.length > 0) {
+                actor.createEmbeddedDocuments("Item", effectsToCreate);
             }
-            if (originalDyingCounter > 0 || dyingCounter !== 0) {
-                const effectsToCreate: any[] = [];
-                handleDying(dyingCounter, originalDyingCounter, actor, effectsToCreate);
-                if (actor && effectsToCreate.length > 0) {
-                    actor.createEmbeddedDocuments("Item", effectsToCreate);
-                }
 
-                const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
-                ChatMessage.create({
-                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.handled`, {
-                        outcome: outcomeString,
-                        defeated: token.combatant?.defeated
-                            ? game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.defeated`, {
-                                  name: token.actor?.name ?? "???",
-                              })
-                            : "",
-                        roll: total,
-                    }),
-                    speaker: message.speaker,
-                }).then();
-                message.delete({ render: false }).then();
-            }
+            const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
+            ChatMessage.create({
+                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.handled`, {
+                    outcome: outcomeString,
+                    defeated: token.combatant?.defeated
+                        ? game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.defeated`, {
+                              name: token.actor?.name ?? "???",
+                          })
+                        : "",
+                    roll: total,
+                }),
+                speaker: message.speaker,
+            }).then();
+            message.delete({ render: false }).then();
         }
     }
 }
 
 export function persistentDamage(message) {
+    const flavor = message.flavor;
     if (
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
             ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
         ) &&
-        message.flavor.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
+        flavor.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
         message.speaker.token &&
-        message.flavor &&
+        flavor &&
         message.rolls &&
+        message.rolls.length > 0 &&
         message.id === game.messages.contents.pop()?.id &&
         game.actors
     ) {
         const token = canvas.tokens?.get(message.speaker.token);
         if (token && token.isOwner) {
-            if (message.rolls && message.rolls.length > 0) {
-                // Should only be one roll, either way, only use the first.
-                token?.actor?.applyDamage({ damage: message.rolls[0], token: token.document }).then();
-            }
+            // Should only be one roll, either way, only use the first.
+            token?.actor?.applyDamage({ damage: message.rolls[0], token: token.document }).then();
         }
         const actor = token?.actor;
         if (actor && game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
             const condition = actor.conditions
                 .filter((condition) => condition.slug === "persistent-damage")
-                .find((condition) => message.flavor.includes(condition.name));
+                .find((condition) => flavor.includes(condition.name));
             if (condition) {
                 // TODO Update the message to remove the recovery roll button, instead include the result in the message (and remove the message the following line creates.)
                 condition.rollRecovery().then();

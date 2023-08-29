@@ -105,9 +105,7 @@ export function updateHooks(cleanSlate = false) {
 
     handle(
         "preCreateChatMessage",
-        gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "reminderTargeting") !== "no" ||
-            gs.get(MODULENAME, "handleDyingRecoveryRoll"),
+        gs.get(MODULENAME, "castPrivateSpell") || gs.get(MODULENAME, "reminderTargeting") !== "no",
         preCreateChatMessageHook,
     );
 

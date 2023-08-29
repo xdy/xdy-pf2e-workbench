@@ -379,14 +379,14 @@
       "handleDyingRecoveryRollAllow": {
         "all": "All",
         "gm": "GM",
-        "hint": "Select who is allowed to set the option to automatically handle dying recovery roll results. Save settings to show/hide additional options on the client automation setting menu.",
-        "name": "Who is allowed to set the option to automatically handle dying recovery roll results.",
+        "hint": "Select who is allowed to set the option to automatically handle dying recovery roll results after the owner has clicked the recovery button the character sheet. Save settings to show/hide additional options on the client automation setting menu.",
+        "name": "Who is allowed to set the option to automatically handle dying recovery roll results after clicking recovery button.",
         "none": "None",
         "players": "Players"
       },
       "handleDyingRecoveryRoll": {
-        "hint": "Client setting to automatically handle dying recovery roll results.",
-        "name": "Automatically handle dying recovery roll results.",
+        "hint": "Client setting to automatically handle dying recovery roll results after clicking the recovery button.",
+        "name": "Automatically handle dying recovery roll results after clicking recovery button.",
         "handled": "Dying recovery roll {roll} {outcome} handled automatically. {defeated}.",
         "defeated": "{name} was defeated"
       },
