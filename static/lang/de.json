@@ -436,10 +436,10 @@
         "hint": "Auswählen, um zu versuchen, den verschleierten Namen sowohl für den Sprecher als auch innerhalb von Chat-Nachrichten zu verwenden, indem Sie den Namen des Akteurs durch den verschleierten Namen ersetzen. Beachte dass der Text in der Nachricht nicht ersetzt wird, wenn er nicht den gleichen Namen wie der Akteur verwendet oder falsch geschrieben ist."
       },
       "reminderBreathWeapon": {
-        "name": "Odemwaffen Erinnerung",
-        "hint": "Auswählen um eine Erinnerung für die Nutzung von Odemwaffen zu erhalten (eigentlich jede Fähigkeit mit einer korrekt formatierten Aufladung).",
+        "name": "Wiederaufladungserninnerung (z.B. Odemwaffen)",
+        "hint": "Auswählen um eine Erinnerung für die Nutzung von Fähigkeiten, mit einer Aufladezeit, zu erhalten (z.B. Odemwaffen).",
         "defaultName": "Odem",
-        "source": "Odemwaffen Erinnerung erstellt von PF2e Workbench",
+        "source": "Aufladungserinnerung erstellt von PF2e Workbench",
         "used": "Benutzt "
       },
       "npcMystifierUseCreatureTraits": {
@@ -611,7 +611,7 @@
         "hammerCritical": "Das Ziel muss einen Rettungswurf gegen @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:gehausregelte kritische Hammerspezialisierung] bestehen oder wird niedergeschlagen und gilt als @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{liegend}."
       },
       "houseRulesSettings": {
-        "label": "(Experimentell) Verwalte Hausregel Einstellungen",
+        "label": "Verwalte Hausregel Einstellungen",
         "hint": "(Experimentell) Aktiviere und konfiguriere verschiedene Hausregeln",
         "name": "(Experimentell) Hausregel Einstellungen"
       },
@@ -627,6 +627,41 @@
         "name": "(SEHR EXPERIMENTELL) Hausregelpatches (Patches in Hausregeln). Benötigt eine Aktualisierung (F5) nach der Änderung.",
         "notification": "Hauspatcher: Wende {count} Hausregeln auf Gegenstände in den Systemkompendien an.",
         "hint": "(SEHR EXPERIMENTELL) Ein json-Array hinzufügen um die System-Kompendien zu patchen. Lies in der housepatcher.md Datei auf github für die Dokumentation."
+      },
+      "keeleysHeroPointRule": {
+        "bonusTag": "Niedriger Neuwurf + 10",
+        "name": "Keeley's Heldenpunkteregel",
+        "hint": "Eine Hausregel favorisiert jmd. bestimmten im Paizo-Entwicklungsteam. Falls das natürliche Ergebnis eines Heldenpunkt Neuwurfs 10 oder niedriger ist, dann füge ein Bonus von 10 nach dem Wurf hinzu."
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "yesForCharacters": "Ja, für Charaktere + Vertraute",
+        "yesForNpcs": "Ja, für NSC",
+        "yes": "Ja, für alle",
+        "hint": "Einstellung zur automatischen Tötung, wenn man ausreichend Schaden von einer Quelle mit der \"Tod\" Eigenschaft nimmt.",
+        "name": "... automatischee Tötung, wenn man ausreichend Schaden von einer Quelle mit der \"Tod\" Eigenschaft nimmt.",
+        "no": "Nein"
+      },
+      "autoGainDyingIgnoresTargeting": {
+        "name": "... abhängig davon, der Schaden für das ausgewählte Token ist oder nicht.",
+        "hint": "Diese Einstellung aktivieren, um abhängig davon, ob das Token ausgewählt wurde oder nicht, die Einstellung anzuwenden. (Hauptsächlich sinnvoll, wenn nicht gezielt oder automatisiert wird.)"
+      },
+      "reminderBreathWeaponHidden": {
+        "hint": "Auswählen um die Erinnerung vor Spielern zu verbergen.",
+        "name": "... Zeichen vor Spielern verstecken."
+      },
+      "heropointHandlerNotification": {
+        "hint": "Auswählen um eine automatische Benachrichtigung zu versenden, wenn ein Heldenpunkt ausgegeben wurde.",
+        "name": "... eine Benachrichtigung senden wenn ein Heldenpunkt ausgegeben wurde."
+      },
+      "legacyVariantRuleDualClass": {
+        "hint": "(Wird nicht benötigt solange das System Unterstützung für die ursprüngliche Doppelklassen Regelvariante hat.) Dies fügt ein Kampagnentalentbereich für die Doppelklassen ein, außerdem muss noch das Dual Class Marco genutzt werden um die Klasse für den Charakter zu erstellen.",
+        "name": "Fügt Doppelklassen Talentplätze ein. Benötigt Neuladen (F5) nach der Änderung.",
+        "title": "Doppelklassentalente"
+      },
+      "legacyVariantRuleAncestryParagon": {
+        "name": "Fügt ein Herkunftsparagon Talentplatz ein. Benötigt ein Neuladen (F5) nach dem Ändern.",
+        "title": "Herkunftsparagon Talente",
+        "hint": "(Wird nicht benötigt solange das System Unterstützung für die ursprüngliche Herkunftsparagon Regelvariante hat.) Dies fügt ein Kampagnentalentsektion für den Herkunftsparagon ein."
       }
     },
     "skillActions": {
