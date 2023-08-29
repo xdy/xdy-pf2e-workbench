@@ -1,3 +1,15 @@
+# [5.18.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.17.2...v5.18.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* Handling the results of clicking the dying recovery roll button on the character sheet was on the wrong hook. Clarified the documentation and help. Cleaned up the code. ([06f3366](https://github.com/xdy/xdy-pf2e-workbench/commit/06f3366df8b91b7d61c36e5977954090b051a3bd)), closes [#915](https://github.com/xdy/xdy-pf2e-workbench/issues/915)
+
+
+### Features
+
+* Verified to work in pf2e 5.4.0, set the minimum foundry version to 3.0.8 and pf2e to 5.4.0. ([8315cb5](https://github.com/xdy/xdy-pf2e-workbench/commit/8315cb5404532e1fd9db86c17e6f24290fb58cb2))
+
 ## [5.17.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.17.1...v5.17.2) (2023-08-20)
 
 
