@@ -561,16 +561,16 @@
       "handleDyingRecoveryRollAllow": {
         "all": "Tous",
         "gm": "MJ",
-        "name": "Qui est autorisé à définir l'option permettant de traiter automatiquement les résultats des jets de récupération.",
+        "name": "Qui est autorisé à définir l'option permettant de traiter automatiquement les résultats des jets de récupération après avoir appuyé sur le bouton récupération.",
         "none": "Personne",
         "players": "Joueurs",
-        "hint": "Choisissez les personnes autorisées à définir l'option de traitement automatique des résultats du jet de récupération. Enregistrer les paramètres pour afficher/masquer des options supplémentaires des réglages de l'automatisation dans le menu du client."
+        "hint": "Choisissez les personnes autorisées à régler l'option pour le traitement automatique des résultats du jet de récupération pour les mourants lorsque le propriétaire a cliqué sur le bouton de la feuille de personnage. Enregistrer les paramètres pour afficher/masquer des options supplémentaires des réglages de l'automatisation dans le menu du client."
       },
       "handleDyingRecoveryRoll": {
-        "hint": "Paramètre du client permettant de traiter automatiquement les résultats des tests de récupération.",
+        "hint": "Paramètre du client permettant de traiter automatiquement les résultats des tests de récupération après avoir cliqué sur le bouton de récupération.",
         "handled": "Jet de récupération {roll} {outcome} géré automatiquement. {défeated}.",
         "defeated": "{name} a été vaincu",
-        "name": "Automatiser le traitement des tests de récupération."
+        "name": "Automatiser le traitement des tests de récupération après avoir cliqué sur le bouton récupération."
       },
       "applyPersistentDamageRecoveryRoll": {
         "hint": "... et lancez le test de récupération automatiquement après çà. Nécessite que le réglage ci-dessus soit activé.",
