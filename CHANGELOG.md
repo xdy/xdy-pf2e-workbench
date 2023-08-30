@@ -1,3 +1,10 @@
+## [5.18.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.0...v5.18.1) (2023-08-30)
+
+
+### Bug Fixes
+
+* Skill Actions now look good again, courtesy of @Stwlam ([ed7160d](https://github.com/xdy/xdy-pf2e-workbench/commit/ed7160dbc956df02f0ff1008cf52f6bb97d51b09)), closes [#967](https://github.com/xdy/xdy-pf2e-workbench/issues/967)
+
 # [5.18.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.17.2...v5.18.0) (2023-08-29)
 
 
