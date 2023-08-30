@@ -52,11 +52,11 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 
 * Quality of Life section
     * Option to add an npc scaler feature when right clicking on an npc (This feature has been taken over from the
-      delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox#npc-scaler module. Thanks DJ! At some point Avery will
+      delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox#npc-scaler) module. Thanks DJ! At some point Avery will
       have the time to add it to the system, until then I'll maintain it.)
     * Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc
       using the suggested values from the GMG (This feature has been taken over from the
-      delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox#quick-roller module. Thanks DJ!)
+      delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox#quick-roller) module. Thanks DJ!)
     * Option to hold CTRL while casting a spell to cast it as a whispered chat message. Separate option to output a
       separate public chat message with a Recall Knowledge button to recognize it, an optional save button and an
       optional trait list, unless you hold CTRL+SHIFT to entirely skip this message.
@@ -107,7 +107,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 
 * Variant Rules
     * Option to change the max number of hero points a character can have. (This feature has been taken over from the
-      delisted https://github.com/Djphoenix719/FVTT-PF2EToolbox module. Thanks DJ!)
+      delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox) module. Thanks DJ!)
     * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
 
 * House Rules
