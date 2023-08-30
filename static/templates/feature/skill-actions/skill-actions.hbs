@@ -10,13 +10,13 @@
     {{#each skills}} {{#if enabled}}
         <li class="item strike action expandable ready" data-action-id="{{actionKey}}"
             {{#unless displayed}}style="display:none"{{/unless}}>
-            <div class="item-name">
+            <div class="item-name" style="grid-column: span 4">
                 <div class="item-image variant-strike" style="background-image: url({{icon}})">
                     <i class="fas fa-comment-alt"></i>
                 </div>
                 <div class="actions-title">
                     <div class="action-name" style="justify-content: space-between">
-                        <h4>{{label}} <span class="activity-icon">{{actionType}}</span></h4>
+                        <h4>{{label}} <span class="action-glyph">{{actionType}}</span></h4>
                         <div class="action-options">
                             <a class="item-control item-toggle-equip" title="Toggle action visibility">
                                 {{#if visible}}<i class="fa-solid fa-eye" style="color: #5e0000"></i>{{/if}}
@@ -28,7 +28,6 @@
                     <div class="button-group tags" style="flex-wrap: wrap;">
                         {{#each variants}}
                             <button type="button" class="skill-action tag variant-strike"
-                                    style="width: auto; border: none; cursor: pointer"
                                     data-variant="{{@index}}">{{label}}</button>
                         {{/each}}
                     </div>
