@@ -364,7 +364,7 @@
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
         "hint": "设置距离下次英雄点处理器开启的默认（和最大）间隔分钟数。",
-        "name": "默认英雄点处理器开启的间隔分钟数。"
+        "name": "……默认每隔以上分钟开启一次英雄点处理器。"
       },
       "heroPointHandlerKey": {
         "name": "打开英雄点处理器对话框的快捷键。",
@@ -372,7 +372,7 @@
       },
       "heroPointHandlerStartTimerOnReady": {
         "hint": "勾选此项，游戏准备好时英雄点计时器自动开始计时。",
-        "name": "自动开始英雄点处理器。"
+        "name": "…并自动启动英雄点处理器。"
       },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "将所选参战者的先攻移到当前参战者之前。"
@@ -558,9 +558,9 @@
         "all": "所有人",
         "gm": "GM",
         "none": "无",
-        "name": "选择谁可以设置是否自动进行濒死复苏检定。",
+        "name": "选择谁可以设置是否在点击角色卡中的复苏按钮后自动进行濒死复苏检定。",
         "players": "玩家",
-        "hint": "选择谁可以设置是否自动进行濒死复苏检定。保存设置以显示/隐藏其他客户端自动化设置选项。"
+        "hint": "选择谁可以设置是否在拥有者点击角色卡中的复苏按钮后自动进行濒死复苏检定。保存设置以显示/隐藏其他客户端自动化设置选项。"
       },
       "applyPersistentDamageRecoveryRoll": {
         "hint": "...并在那之后自动骰恢复检定。需要先启用上面的设置。",
@@ -573,8 +573,8 @@
       },
       "handleDyingRecoveryRoll": {
         "handled": "已自动进行濒死复苏检定{roll} {outcome}。{defeated}。",
-        "hint": "自动进行濒死复苏检定的客户端自动化设置。",
-        "name": "自动进行濒死复苏检定。",
+        "hint": "在点击角色卡中的复苏按钮后自动进行濒死复苏检定的客户端自动化设置。",
+        "name": "在点击角色卡中的复苏按钮后自动进行濒死复苏检定。",
         "defeated": "{name}被击败"
       },
       "housepatcher": {
