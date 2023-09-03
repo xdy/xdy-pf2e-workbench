@@ -1,3 +1,10 @@
+## [5.18.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.1...v5.18.2) (2023-09-03)
+
+
+### Bug Fixes
+
+* Removes broken 'change hero point max' feature. ([30eb137](https://github.com/xdy/xdy-pf2e-workbench/commit/30eb1370e547e3af5847d2b21135bc6bd040f311)), closes [#919](https://github.com/xdy/xdy-pf2e-workbench/issues/919)
+
 ## [5.18.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.0...v5.18.1) (2023-08-30)
 
 
