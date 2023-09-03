@@ -45,7 +45,6 @@ import {
 } from "./feature/tokenMystificationHandler/index.js";
 import { ItemPF2e } from "@item/base.js";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
-import { maxHeroPoints } from "./feature/heroPointHandler/index.js";
 import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import { CreaturePF2e } from "@actor/creature/document.js";
@@ -343,12 +342,6 @@ export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: Encou
 export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: JQuery, data: any) {
     if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);
-    }
-}
-
-export function renderCharacterSheetPF2eHook(app: TokenHUD, html: JQuery, data: any) {
-    if (Number(game.settings.get(MODULENAME, "maxHeroPoints")) !== 3) {
-        maxHeroPoints(app, html, data);
     }
 }
 

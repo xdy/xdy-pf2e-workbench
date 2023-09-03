@@ -34,7 +34,6 @@ import {
     preUpdateActorHook,
     preUpdateTokenHook,
     renderActorSheetHook,
-    renderCharacterSheetPF2eHook,
     renderChatMessageHook,
     renderTokenHUDHook,
     updateItemHook,
@@ -158,8 +157,6 @@ export function updateHooks(cleanSlate = false) {
     handle("pf2e.reroll", gs.get(MODULENAME, "keeleysHeroPointRule"), pf2eRerollHook);
 
     handle("renderTokenHUD", gs.get(MODULENAME, "npcMystifier"), renderTokenHUDHook);
-
-    handle("renderCharacterSheetPF2e", gs.get(MODULENAME, "maxHeroPoints") !== 3, renderCharacterSheetPF2eHook);
 
     handle(
         "preUpdateActor",

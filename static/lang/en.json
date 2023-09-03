@@ -548,10 +548,6 @@
         "error": "Error",
         "off": "Off"
       },
-      "maxHeroPoints": {
-        "hint": "World setting for the maximum number of Hero Points for a character.",
-        "name": "(World) maximum number of Hero Points."
-      },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Move selected combatant before the current combatant."
       },

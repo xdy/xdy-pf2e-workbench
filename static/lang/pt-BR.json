@@ -199,10 +199,6 @@
         "hint": "Marque para iniciar o temporizador do Gerenciador de Pontos de Heroísmo quando o jogo estiver pronto.",
         "name": "Iniciar o Gerenciador de Pontos de Heroísmo automaticamente"
       },
-      "maxHeroPoints": {
-        "hint": "Define o número máximo de Pontos de Heroísmo de personagens.",
-        "name": "Número máximo de Pontos de Heroísmo"
-      },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Mover combatentes para antes do combatente atual"
       },

@@ -334,10 +334,6 @@
         "name": "NSC Verschleierungseinstellungen",
         "hint": "Aktiviere und konfiguriere die NSC-Verschleierung"
       },
-      "maxHeroPoints": {
-        "name": "(Welt) maximale Anzahl an Heldenpunkten.",
-        "hint": "Welt-Einstellung für die maximale Anzahl an Heldenpunkten für einen Charakter."
-      },
       "npcMystifierUseCreatureTypesTraits": {
         "name": "Benutze Kreaturentyp Kategorien",
         "hint": "Auswählen um Kreaturentyp Kategorien für den Verschleierten Namen zu nutzen (siehe https://2e.aonprd.com/Traits.aspx)."

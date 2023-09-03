@@ -3,7 +3,6 @@
 // * Check on an existing timer, recalc timeout, ignore on the first, none on the second
 // * Timeout, recalc timeout, ignore on the first, random on the second
 
-import { ActorPF2e } from "@actor";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { pushNotification } from "../../utils.js";
 
@@ -304,9 +303,9 @@ function heroes() {
 
 export async function resetHeroPoints(heropoints: number) {
     for (const actor of heroes()) {
-        const value = Math.min(heropoints, Number(game.settings.get(MODULENAME, "maxHeroPoints")));
         await actor.update({
-            "system.resources.heroPoints.value": value,
+            // TODO Fix type.
+            "system.resources.heroPoints.value": Math.min(heropoints, (<any>actor).system.resources.heroPoints.max),
         });
     }
 }
@@ -329,7 +328,7 @@ export async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
         const system = actor.system;
         const value = Math.min(
             system.resources.heroPoints.value + heropoints,
-            Number(game.settings.get(MODULENAME, "maxHeroPoints")),
+            (<any>actor).system.resources.heroPoints.max,
         );
         await actor.update({
             "system.resources.heroPoints.value": value,
@@ -387,59 +386,4 @@ function handleDialogResponse(html: any) {
     }
 
     return remainingMinutes;
-}
-
-export function maxHeroPoints(app: Application, html: JQuery, renderData: any) {
-    /*
-     * Copyright 2021 Andrew Cuccinello, 2022 Jonas Karlsson
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     *
-     * You may obtain a copy of the License at
-     *
-     *     http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
-     */
-
-    renderData.data.resources.heroPoints.max = Number(game.settings.get(MODULENAME, "maxHeroPoints"));
-
-    const { value, max }: { value: number; max: number } = renderData.data.resources.heroPoints;
-
-    const iconFilled = '<i class="fas fa-hospital-symbol"></i>';
-    const iconEmpty = '<i class="far fa-circle"></i>';
-
-    let icon = "";
-    for (let i = 0; i < value; i++) {
-        icon += iconFilled;
-    }
-    for (let i = value; i < max; i++) {
-        icon += iconEmpty;
-    }
-
-    renderData.data.resources.heroPoints.icon = icon;
-
-    const actor: ActorPF2e = app["document"] as ActorPF2e;
-    const span = html.find('span[data-property="system.resources.heroPoints.value"]');
-    span.html(icon);
-
-    span.off("click");
-    span.off("contextmenu");
-
-    span.on("click", async (_e) => {
-        if (value === max) return;
-        await actor.update({
-            ["system.resources.heroPoints.value"]: value + 1,
-        });
-    });
-    span.on("contextmenu", async (_e) => {
-        if (value === 0) return;
-        await actor.update({
-            ["system.resources.heroPoints.value"]: value - 1,
-        });
-    });
 }

@@ -329,10 +329,6 @@
         "hint": "勾選此項，遊戲準備好時英雄點計時器自動開始計時。",
         "name": "自動開始英雄點處理器。"
       },
-      "maxHeroPoints": {
-        "hint": "設定角色擁有的最大英雄點數量。",
-        "name": "（此世界中）英雄點最大值。"
-      },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "將所選參戰者的先攻移到目前參戰者之前。"
       },

@@ -283,10 +283,6 @@
         "hint": "Cliquez pour démarrer automatiquement le Gestionnaire de Point d'Héroïsme lorsque la partie est prête.",
         "name": "... et démarre automatiquement le Gestionnaire de Point d'héroïsme."
       },
-      "maxHeroPoints": {
-        "hint": "Réglage du monde pour le nombre maximum de Points d'héroïsme pour un personnage.",
-        "name": "(Monde) Nombre maximum de points d'héroïsme."
-      },
       "moveBeforeCurrentCombatantContextMenu": {
         "name": "Déplacer les combattants sélectionnés avant le combattant actuel."
       },

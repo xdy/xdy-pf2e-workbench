@@ -406,10 +406,6 @@
         "hint": "勾选此项，在神秘化名称中使用阵营特征。",
         "name": "使用NPC的阵营特征。"
       },
-      "maxHeroPoints": {
-        "name": "（此世界中）英雄点最大值。",
-        "hint": "设置角色拥有的最大英雄点数量。"
-      },
       "npcMystifierUseCreatureTraits": {
         "hint": "勾选此项，神秘化名称中将使用所有PF2e系统已定义的生物特征。",
         "name": "使用生物特征。"
