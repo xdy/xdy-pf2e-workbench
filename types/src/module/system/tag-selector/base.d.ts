@@ -30,4 +30,5 @@ declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e> e
 interface TagSelectorData<TDocument extends ActorPF2e | ItemPF2e> extends DocumentSheetData<TDocument> {
     documentType: string;
 }
-export { BaseTagSelector, TagSelectorData, TagSelectorOptions };
+export { BaseTagSelector };
+export type { TagSelectorData, TagSelectorOptions };

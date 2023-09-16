@@ -1,4 +1,5 @@
-import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
+import type { ActorPF2e } from "@actor";
+import type { ItemPF2e } from "@item";
 /** In Foundry this is actually a subclass of Map, but it incompatibly extends it at several points. */
 export declare class MockCollection<V> {
     #private;

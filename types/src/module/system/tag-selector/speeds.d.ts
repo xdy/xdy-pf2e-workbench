@@ -1,10 +1,10 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { BaseTagSelector, TagSelectorData } from "./base.ts";
 import { SelectableTagField, TagSelectorOptions } from "./index.ts";
-export declare class SpeedSelector<TActor extends ActorPF2e> extends BaseTagSelector<TActor> {
+declare class SpeedSelector<TActor extends ActorPF2e> extends BaseTagSelector<TActor> {
     protected objectProperty: string;
     static get defaultOptions(): TagSelectorOptions;
     protected get configTypes(): readonly SelectableTagField[];
@@ -22,4 +22,4 @@ interface ChoiceData {
     label: string;
     value: number | string;
 }
-export {};
+export { SpeedSelector };

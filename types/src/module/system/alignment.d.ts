@@ -1,5 +1,6 @@
 import { Alignment } from "@actor/creature/types.ts";
-export declare function isEvil(alignment: Alignment): boolean;
-export declare function isGood(alignment: Alignment): boolean;
-export declare function isLawful(alignment: Alignment): boolean;
-export declare function isChaotic(alignment: Alignment): boolean;
+declare function isEvil(alignment: Alignment): boolean;
+declare function isGood(alignment: Alignment): boolean;
+declare function isLawful(alignment: Alignment): boolean;
+declare function isChaotic(alignment: Alignment): boolean;
+export { isChaotic, isEvil, isGood, isLawful };

@@ -9,4 +9,4 @@ type CoinDenomination = "pp" | "gp" | "sp" | "cp";
 type PhysicalItemType = SetElement<typeof PHYSICAL_ITEM_TYPES>;
 type PreciousMaterialType = SetElement<typeof PRECIOUS_MATERIAL_TYPES>;
 type PreciousMaterialGrade = SetElement<typeof PRECIOUS_MATERIAL_GRADES>;
-export { BaseMaterial, CoinDenomination, PhysicalItemType, PreciousMaterialGrade, PreciousMaterialType };
+export type { BaseMaterial, CoinDenomination, PhysicalItemType, PreciousMaterialGrade, PreciousMaterialType };

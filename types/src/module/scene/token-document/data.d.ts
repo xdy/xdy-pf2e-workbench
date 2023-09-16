@@ -6,4 +6,4 @@ interface TokenFlagsPF2e extends DocumentFlags {
     };
     [key: string]: Record<string, unknown>;
 }
-export { TokenFlagsPF2e };
+export type { TokenFlagsPF2e };

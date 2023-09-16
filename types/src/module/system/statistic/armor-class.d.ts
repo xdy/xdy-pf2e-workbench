@@ -1,5 +1,5 @@
-import { ActorPF2e } from "@actor";
-import { ArmorPF2e } from "@item";
+import type { ActorPF2e } from "@actor";
+import type { ArmorPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import { Statistic, StatisticData, StatisticTraceData } from "./index.ts";
 declare class ArmorStatistic extends Statistic {
@@ -16,4 +16,4 @@ interface ArmorStatisticData extends StatisticData {
 interface ArmorClassTraceData extends StatisticTraceData {
     details: string;
 }
-export { ArmorClassTraceData, ArmorStatistic };
+export { ArmorStatistic, type ArmorClassTraceData };

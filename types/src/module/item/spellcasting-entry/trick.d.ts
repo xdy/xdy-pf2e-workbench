@@ -39,4 +39,5 @@ declare class TrickMagicItemEntry<TActor extends ActorPF2e = ActorPF2e> implemen
     cast(spell: SpellPF2e, options?: CastOptions): Promise<void>;
     getSheetData(): Promise<SpellcastingSheetData>;
 }
-export { TRICK_MAGIC_SKILLS, TrickMagicItemEntry, TrickMagicItemSkill, traditionSkills };
+export { TRICK_MAGIC_SKILLS, TrickMagicItemEntry, traditionSkills };
+export type { TrickMagicItemSkill };

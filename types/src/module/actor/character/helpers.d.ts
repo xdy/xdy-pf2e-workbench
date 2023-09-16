@@ -1,15 +1,15 @@
-import { StrikeAttackTraits } from "@actor/creature/helpers.ts";
+import type { ActorPF2e } from "@actor";
+import { AttackTraitHelpers } from "@actor/creature/helpers.ts";
 import { ModifierPF2e } from "@actor/modifiers.ts";
-import { ArmorPF2e, WeaponPF2e } from "@item";
+import { AbilityItemPF2e, ArmorPF2e, WeaponPF2e } from "@item";
 import { ItemCarryType } from "@item/physical/index.ts";
 import { ZeroToThree, ZeroToTwo } from "@module/data.ts";
-import { ActorPF2e } from "@module/documents.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import type { CharacterPF2e } from "./document.ts";
 /** Handle weapon traits that introduce modifiers or add other weapon traits */
-declare class PCStrikeAttackTraits extends StrikeAttackTraits {
+declare class PCAttackTraitHelpers extends AttackTraitHelpers {
     static adjustWeapon(weapon: WeaponPF2e): void;
-    static createAttackModifiers({ weapon, domains }: CreateAttackModifiersParams): ModifierPF2e[];
+    static createAttackModifiers({ item, domains }: CreateAttackModifiersParams): ModifierPF2e[];
 }
 interface AuxiliaryInteractParams {
     weapon: WeaponPF2e<CharacterPF2e>;
@@ -47,7 +47,7 @@ declare class WeaponAuxiliaryAction {
 /** Make a PC Clumsy 1 when wielding an oversized weapon */
 declare function imposeOversizedWeaponCondition(actor: CharacterPF2e): void;
 interface CreateAttackModifiersParams {
-    weapon: WeaponPF2e;
+    item: AbilityItemPF2e<CharacterPF2e> | WeaponPF2e<CharacterPF2e>;
     domains: string[];
 }
 /** Create a penalty for attempting to Force Open without a crowbar or equivalent tool */
@@ -66,4 +66,4 @@ declare function createHinderingPenalty(actor: CharacterPF2e): ModifierPF2e | nu
  * score, this penalty increases to be equal to the armor's check penalty if it's worse."
  */
 declare function createPonderousPenalty(actor: CharacterPF2e): ModifierPF2e | null;
-export { PCStrikeAttackTraits, WeaponAuxiliaryAction, createForceOpenPenalty, createHinderingPenalty, createPonderousPenalty, createShoddyPenalty, imposeOversizedWeaponCondition, };
+export { PCAttackTraitHelpers, WeaponAuxiliaryAction, createForceOpenPenalty, createHinderingPenalty, createPonderousPenalty, createShoddyPenalty, imposeOversizedWeaponCondition, };

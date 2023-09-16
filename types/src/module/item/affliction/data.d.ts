@@ -62,4 +62,4 @@ interface AfflictionEffectData {
     uuid: ItemUUID;
 }
 type AfflictionExpiryType = "turn-end";
-export { AfflictionExpiryType, AfflictionDuration, AfflictionConditionData, AfflictionDamage, AfflictionFlags, AfflictionOnset, AfflictionSource, AfflictionStageData, AfflictionSystemData, };
+export type { AfflictionExpiryType, AfflictionDuration, AfflictionConditionData, AfflictionDamage, AfflictionFlags, AfflictionOnset, AfflictionSource, AfflictionStageData, AfflictionSystemData, };

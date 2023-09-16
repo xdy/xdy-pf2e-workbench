@@ -23,4 +23,4 @@ interface ShowSheetMessage {
 type SocketMessage = TransferCallbackMessage | RefreshControlsMessage | ShowSheetMessage | {
     request?: never;
 };
-export { activateSocketListener, SocketMessage };
+export { activateSocketListener, type SocketMessage };

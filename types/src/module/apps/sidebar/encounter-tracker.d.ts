@@ -1,12 +1,14 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
+import type { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
 import Sortable from "sortablejs";
 export declare class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> extends CombatTracker<TEncounter> {
     #private;
     sortable: Sortable;
+    /** Show encounter analysis data if obtainable */
+    protected _renderInner(data: object, options: RenderOptions): Promise<JQuery>;
     /** Make the combatants sortable */
     activateListeners($html: JQuery): void;
     /** Refresh the list of users targeting a combatant's token as well as the active state of the target toggle */

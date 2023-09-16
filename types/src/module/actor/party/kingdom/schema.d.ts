@@ -1,11 +1,38 @@
 import { ZeroToFour } from "@module/data.ts";
-import type { ArrayField, StringField } from "types/foundry/common/data/fields.js";
+import { type ArrayField, type StringField } from "types/foundry/common/data/fields.js";
 import { KingdomAbility } from "./types.ts";
 import { RawModifier } from "@actor/modifiers.ts";
+import { RecordField } from "@system/schema-data-fields.ts";
+declare const KINGDOM_SETTLEMENT_SCHEMA: {
+    name: StringField<string, string, true, false, true>;
+    type: StringField<"village" | "town" | "city" | "metropolis", "village" | "town" | "city" | "metropolis", false, false, true>;
+    level: import("types/foundry/common/data/fields.js").NumberField<1, 1, false, false, true>;
+    overcrowded: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+    description: StringField<string, string, false, false, true>;
+    sort: import("types/foundry/common/data/fields.js").IntegerSortField<true, false, true>;
+    consumption: import("types/foundry/common/data/fields.js").SchemaField<{
+        base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        /** Some settlements reduce consumption, this is the number of reductions that may exist */
+        reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+    }, SourceFromSchema<{
+        base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        /** Some settlements reduce consumption, this is the number of reductions that may exist */
+        reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+    }>, ModelPropsFromSchema<{
+        base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        /** Some settlements reduce consumption, this is the number of reductions that may exist */
+        reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+    }>, true, false, true>;
+    storage: import("types/foundry/common/data/fields.js").SchemaField<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>, SourceFromSchema<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>>, ModelPropsFromSchema<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>>, true, false, true>;
+};
 declare const KINGDOM_SCHEMA: {
     type: StringField<"kingmaker", "kingmaker", true, false, boolean>;
+    active: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
     name: StringField<string, string, true, false, boolean>;
-    img: import("types/foundry/common/data/fields.js").FilePathField<`${string}.svg` | `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.tiff` | `${string}.webp`, `${string}.svg` | `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.tiff` | `${string}.webp`, true, false, true>;
+    img: import("types/foundry/common/data/fields.js").FilePathField<`${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.svg` | `${string}.tiff` | `${string}.webp`, `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.svg` | `${string}.tiff` | `${string}.webp`, true, false, true>;
     capital: StringField<"", "", true, false, boolean>;
     size: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
     level: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -19,11 +46,10 @@ declare const KINGDOM_SCHEMA: {
         value: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
         max: import("types/foundry/common/data/fields.js").NumberField<number, unknown, boolean, boolean, boolean>;
     }>, true, false, true>;
-    active: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
     aspiration: StringField<"fame" | "infamy", "fame" | "infamy", true, false, boolean>;
     abilities: import("types/foundry/common/data/fields.js").SchemaField<Record<"culture" | "economy" | "loyalty" | "stability", import("types/foundry/common/data/fields.js").SchemaField<{
-        value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         ruin: import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -31,10 +57,10 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
-        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
     }, SourceFromSchema<{
-        value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         ruin: import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -42,10 +68,10 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
-        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
     }>, ModelPropsFromSchema<{
-        value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         ruin: import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -53,10 +79,10 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
-        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
     }>, true, false, true>>, SourceFromSchema<Record<"culture" | "economy" | "loyalty" | "stability", import("types/foundry/common/data/fields.js").SchemaField<{
-        value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         ruin: import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -64,10 +90,10 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
-        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
     }, SourceFromSchema<{
-        value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         ruin: import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -75,10 +101,10 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
-        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
     }>, ModelPropsFromSchema<{
-        value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         ruin: import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -86,10 +112,10 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
-        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
     }>, true, false, true>>>, ModelPropsFromSchema<Record<"culture" | "economy" | "loyalty" | "stability", import("types/foundry/common/data/fields.js").SchemaField<{
-        value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         ruin: import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -97,10 +123,10 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
-        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
     }, SourceFromSchema<{
-        value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         ruin: import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -108,10 +134,10 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
-        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
     }>, ModelPropsFromSchema<{
-        value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        mod: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         ruin: import("types/foundry/common/data/fields.js").SchemaField<{
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
@@ -119,7 +145,7 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, unknown, boolean, boolean, boolean>;
-        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+        penalty: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
     }>, true, false, true>>>, true, false, true>;
     build: import("types/foundry/common/data/fields.js").SchemaField<{
         /** Determines if the ability scores are manually set or automatically determined. */
@@ -467,52 +493,53 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, true, false, true>>>, true, false, true>;
+        points: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         /** Worksites by commodity type, for the commodities that can have work sites */
         workSites: import("types/foundry/common/data/fields.js").SchemaField<Record<string, import("types/foundry/common/data/fields.js").SchemaField<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }, SourceFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, ModelPropsFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, true, false, true>>, SourceFromSchema<Record<string, import("types/foundry/common/data/fields.js").SchemaField<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }, SourceFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, ModelPropsFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, true, false, true>>>, ModelPropsFromSchema<Record<string, import("types/foundry/common/data/fields.js").SchemaField<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }, SourceFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, ModelPropsFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, true, false, true>>>, true, false, true>;
     }, SourceFromSchema<{
         dice: import("types/foundry/common/data/fields.js").SchemaField<{
@@ -569,52 +596,53 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, true, false, true>>>, true, false, true>;
+        points: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         /** Worksites by commodity type, for the commodities that can have work sites */
         workSites: import("types/foundry/common/data/fields.js").SchemaField<Record<string, import("types/foundry/common/data/fields.js").SchemaField<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }, SourceFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, ModelPropsFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, true, false, true>>, SourceFromSchema<Record<string, import("types/foundry/common/data/fields.js").SchemaField<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }, SourceFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, ModelPropsFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, true, false, true>>>, ModelPropsFromSchema<Record<string, import("types/foundry/common/data/fields.js").SchemaField<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }, SourceFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, ModelPropsFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, true, false, true>>>, true, false, true>;
     }>, ModelPropsFromSchema<{
         dice: import("types/foundry/common/data/fields.js").SchemaField<{
@@ -671,53 +699,165 @@ declare const KINGDOM_SCHEMA: {
             value: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
         }>, true, false, true>>>, true, false, true>;
+        points: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         /** Worksites by commodity type, for the commodities that can have work sites */
         workSites: import("types/foundry/common/data/fields.js").SchemaField<Record<string, import("types/foundry/common/data/fields.js").SchemaField<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }, SourceFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, ModelPropsFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, true, false, true>>, SourceFromSchema<Record<string, import("types/foundry/common/data/fields.js").SchemaField<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }, SourceFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, ModelPropsFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, true, false, true>>>, ModelPropsFromSchema<Record<string, import("types/foundry/common/data/fields.js").SchemaField<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }, SourceFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, ModelPropsFromSchema<{
             /** The number of regular non-resource work sites */
-            regular: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
-            /** The number of worksites that are on resource hexes (these) */
-            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, true, false, true>;
+            value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** The number of worksites that are on resource hexes (these grant double) */
+            resource: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
         }>, true, false, true>>>, true, false, true>;
     }>, true, false, true>;
+    settlements: RecordField<StringField<string, string, true, false, boolean>, import("types/foundry/common/data/fields.js").SchemaField<{
+        name: StringField<string, string, true, false, true>;
+        type: StringField<"village" | "town" | "city" | "metropolis", "village" | "town" | "city" | "metropolis", false, false, true>;
+        level: import("types/foundry/common/data/fields.js").NumberField<1, 1, false, false, true>;
+        overcrowded: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        description: StringField<string, string, false, false, true>;
+        sort: import("types/foundry/common/data/fields.js").IntegerSortField<true, false, true>;
+        consumption: import("types/foundry/common/data/fields.js").SchemaField<{
+            base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** Some settlements reduce consumption, this is the number of reductions that may exist */
+            reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        }, SourceFromSchema<{
+            base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** Some settlements reduce consumption, this is the number of reductions that may exist */
+            reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        }>, ModelPropsFromSchema<{
+            base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** Some settlements reduce consumption, this is the number of reductions that may exist */
+            reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        }>, true, false, true>;
+        storage: import("types/foundry/common/data/fields.js").SchemaField<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>, SourceFromSchema<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>>, ModelPropsFromSchema<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>>, true, false, true>;
+    }, SourceFromSchema<{
+        name: StringField<string, string, true, false, true>;
+        type: StringField<"village" | "town" | "city" | "metropolis", "village" | "town" | "city" | "metropolis", false, false, true>;
+        level: import("types/foundry/common/data/fields.js").NumberField<1, 1, false, false, true>;
+        overcrowded: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        description: StringField<string, string, false, false, true>;
+        sort: import("types/foundry/common/data/fields.js").IntegerSortField<true, false, true>;
+        consumption: import("types/foundry/common/data/fields.js").SchemaField<{
+            base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** Some settlements reduce consumption, this is the number of reductions that may exist */
+            reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        }, SourceFromSchema<{
+            base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** Some settlements reduce consumption, this is the number of reductions that may exist */
+            reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        }>, ModelPropsFromSchema<{
+            base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** Some settlements reduce consumption, this is the number of reductions that may exist */
+            reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        }>, true, false, true>;
+        storage: import("types/foundry/common/data/fields.js").SchemaField<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>, SourceFromSchema<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>>, ModelPropsFromSchema<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>>, true, false, true>;
+    }>, ModelPropsFromSchema<{
+        name: StringField<string, string, true, false, true>;
+        type: StringField<"village" | "town" | "city" | "metropolis", "village" | "town" | "city" | "metropolis", false, false, true>;
+        level: import("types/foundry/common/data/fields.js").NumberField<1, 1, false, false, true>;
+        overcrowded: import("types/foundry/common/data/fields.js").BooleanField<boolean, boolean, true, false, true>;
+        description: StringField<string, string, false, false, true>;
+        sort: import("types/foundry/common/data/fields.js").IntegerSortField<true, false, true>;
+        consumption: import("types/foundry/common/data/fields.js").SchemaField<{
+            base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** Some settlements reduce consumption, this is the number of reductions that may exist */
+            reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        }, SourceFromSchema<{
+            base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** Some settlements reduce consumption, this is the number of reductions that may exist */
+            reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        }>, ModelPropsFromSchema<{
+            base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            /** Some settlements reduce consumption, this is the number of reductions that may exist */
+            reduction: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+            total: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        }>, true, false, true>;
+        storage: import("types/foundry/common/data/fields.js").SchemaField<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>, SourceFromSchema<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>>, ModelPropsFromSchema<Record<string, import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>>>, true, false, true>;
+    }>, boolean, false, true>, false, false, true>;
+    consumption: import("types/foundry/common/data/fields.js").SchemaField<{
+        base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        settlement: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        army: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+    }, SourceFromSchema<{
+        base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        settlement: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        army: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+    }>, ModelPropsFromSchema<{
+        base: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        settlement: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        army: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+    }>, true, false, true>;
+    unrest: import("types/foundry/common/data/fields.js").SchemaField<{
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        anarchyThreshold: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+    }, SourceFromSchema<{
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        anarchyThreshold: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+    }>, ModelPropsFromSchema<{
+        value: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        anarchyThreshold: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+    }>, true, false, true>;
+    event: import("types/foundry/common/data/fields.js").SchemaField<{
+        dc: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        text: StringField<string, string, false, false, true>;
+    }, SourceFromSchema<{
+        dc: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        text: StringField<string, string, false, false, true>;
+    }>, ModelPropsFromSchema<{
+        dc: import("types/foundry/common/data/fields.js").NumberField<number, number, false, false, true>;
+        text: StringField<string, string, false, false, true>;
+    }>, true, false, true>;
+    /** Any kingmaker specific module configuration and tweaks. Not used otherwise */
+    module: import("types/foundry/common/data/fields.js").ObjectField<{}, {}, false, false, true>;
 };
-export { KINGDOM_SCHEMA };
+export { KINGDOM_SCHEMA, KINGDOM_SETTLEMENT_SCHEMA };

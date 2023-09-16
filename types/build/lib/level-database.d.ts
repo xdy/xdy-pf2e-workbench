@@ -41,4 +41,4 @@ interface LevelDatabaseOptions<T> {
     packName: string;
     dbOptions?: DatabaseOptions<string, T>;
 }
-export { DBFolder, LevelDatabase };
+export { type DBFolder, LevelDatabase };

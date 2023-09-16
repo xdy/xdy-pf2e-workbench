@@ -24,4 +24,5 @@ declare class CheckPF2e {
         isOld: boolean;
     }): Promise<string>;
 }
-export { CheckPF2e, CheckRollCallback };
+export { CheckPF2e };
+export type { CheckRollCallback };

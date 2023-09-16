@@ -1,23 +1,16 @@
-import { AbilityBasedStatistic, ActorAttributes, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, BaseActorSourcePF2e, StrikeData } from "@actor/data/base.ts";
-import { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
+import { ActorAttributes, ActorDetailsSource, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, AttributeBasedTraceData, BaseActorSourcePF2e, StrikeData } from "@actor/data/base.ts";
+import type { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import type { ActorAlliance, AttributeString, MovementType, SaveType, SkillAbbreviation, SkillLongForm } from "@actor/types.ts";
 import type { CREATURE_ACTOR_TYPES } from "@actor/values.ts";
 import { LabeledNumber, ValueAndMax, ValuesList, ZeroToThree } from "@module/data.ts";
-import { Statistic, StatisticTraceData } from "@system/statistic/index.ts";
-import { CreatureSensePF2e, SenseAcuity, SenseType } from "./sense.ts";
+import type { Statistic, StatisticTraceData } from "@system/statistic/index.ts";
+import type { CreatureSensePF2e, SenseAcuity, SenseType } from "./sense.ts";
 import { Alignment, CreatureTrait } from "./types.ts";
 type BaseCreatureSource<TType extends CreatureType, TSystemSource extends CreatureSystemSource> = BaseActorSourcePF2e<TType, TSystemSource>;
 /** Skill and Lore statistics for rolling. */
 type CreatureSkills = Record<SkillLongForm, Statistic> & Partial<Record<string, Statistic>>;
 interface CreatureSystemSource extends ActorSystemSource {
-    details?: {
-        level?: {
-            value: number;
-        };
-        alliance?: ActorAlliance;
-        /** Present on familiars */
-        creature?: unknown;
-    };
+    details?: CreatureDetailsSource;
     /** Traits, languages, and other information. */
     traits?: CreatureTraitsSource;
     /** Maps roll types -> a list of modifiers which should affect that roll type. */
@@ -26,6 +19,7 @@ interface CreatureSystemSource extends ActorSystemSource {
     saves?: Record<SaveType, object | undefined>;
     resources?: CreatureResourcesSource;
 }
+type CreatureDetailsSource = ActorDetailsSource;
 type CreatureDetails = {
     /** The alignment this creature has */
     alignment: {
@@ -90,11 +84,11 @@ interface CreatureTraitsData extends ActorTraitsData<CreatureTrait>, Omit<Creatu
     /** Languages which this actor knows and can speak. */
     languages: ValuesList<Language>;
 }
-type SkillData = StatisticTraceData & AbilityBasedStatistic;
+type SkillData = AttributeBasedTraceData;
 /** The full save data for a character; including its modifiers and other details */
-type SaveData = StatisticTraceData & AbilityBasedStatistic & {
+interface SaveData extends AttributeBasedTraceData {
     saveDetail?: string;
-};
+}
 type CreatureSaves = Record<SaveType, SaveData>;
 /** Miscallenous but mechanically relevant creature attributes.  */
 interface CreatureAttributes extends ActorAttributes {
@@ -184,4 +178,5 @@ interface HeldShieldData {
     /** An effect icon to use when the shield is raised */
     icon: ImageFilePath;
 }
-export { Abilities, AbilityData, Attitude, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSaves, CreatureSkills, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, CreatureType, HeldShieldData, LabeledSpeed, Language, SaveData, SenseData, SkillAbbreviation, SkillData, VisionLevel, VisionLevels, };
+export { VisionLevels };
+export type { Abilities, AbilityData, Attitude, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSaves, CreatureSkills, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, CreatureType, HeldShieldData, LabeledSpeed, Language, SaveData, SenseData, SkillAbbreviation, SkillData, VisionLevel, };

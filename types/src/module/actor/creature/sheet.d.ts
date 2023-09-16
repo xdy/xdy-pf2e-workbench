@@ -26,9 +26,9 @@ export declare abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> ext
     protected getProficiencyIcon(level: ZeroToFour): string;
     activateListeners($html: JQuery): void;
     /** Adds support for moving spells between spell levels, spell collections, and spell preparation */
-    protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e<TActor>[]>;
+    protected _onSortItem(event: DragEvent, itemSource: ItemSourcePF2e): Promise<CollectionValue<TActor["items"]>[]>;
     /** Handle dragging spells onto spell slots. */
-    protected _handleDroppedItem(event: ElementDragEvent, item: ItemPF2e<ActorPF2e | null>, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
+    protected _handleDroppedItem(event: DragEvent, item: ItemPF2e<ActorPF2e | null>, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
     /** Replace sheet config with a special PC config form application */
     protected _getHeaderButtons(): ApplicationHeaderButton[];
     /** Redirect an update to shield HP to the actual item */

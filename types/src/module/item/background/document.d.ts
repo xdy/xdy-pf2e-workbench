@@ -1,4 +1,4 @@
-import { ActorPF2e, CharacterPF2e } from "@actor";
+import type { ActorPF2e, CharacterPF2e } from "@actor";
 import { ABCItemPF2e } from "@item";
 import { BackgroundSource, BackgroundSystemData } from "./data.ts";
 declare class BackgroundPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ABCItemPF2e<TParent> {

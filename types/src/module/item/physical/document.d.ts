@@ -1,12 +1,11 @@
-import { ActorPF2e } from "@actor";
+import { type ActorPF2e } from "@actor";
 import { ItemPF2e, type ContainerPF2e } from "@item";
 import { ItemSummaryData, PhysicalItemSource, TraitChatData } from "@item/data/index.ts";
-import { CoinsPF2e } from "@item/physical/helpers.ts";
 import { Rarity, Size } from "@module/data.ts";
-import { UserPF2e } from "@module/user/document.ts";
+import type { UserPF2e } from "@module/user/document.ts";
 import { Bulk } from "./bulk.ts";
-import { IdentificationStatus, ItemActivation, ItemCarryType, MystifiedData, PhysicalItemTrait, PhysicalSystemData, Price } from "./data.ts";
-import { PreciousMaterialGrade, PreciousMaterialType } from "./types.ts";
+import { IdentificationStatus, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PhysicalItemTrait, PhysicalSystemData, Price } from "./data.ts";
+import { CoinsPF2e } from "./helpers.ts";
 declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     private _container;
     get level(): number;
@@ -34,12 +33,9 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     get isTemporary(): boolean;
     get isShoddy(): boolean;
     get isDamaged(): boolean;
-    get material(): {
-        precious: {
-            type: PreciousMaterialType;
-            grade: PreciousMaterialGrade;
-        } | null;
-    };
+    get material(): ItemMaterialData;
+    /** Whether this is a specific magic item: applicable to armor, shields, and weapons */
+    get isSpecific(): boolean;
     get isInContainer(): boolean;
     get isStowed(): boolean;
     /** Get this item's container, returning null if it is not in a container */
@@ -55,8 +51,6 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     prepareBaseData(): void;
     /** Refresh certain derived properties in case of special data preparation from subclasses */
     prepareDerivedData(): void;
-    /** Increase the price if it is larger than medium and not magical. */
-    protected adjustPriceForSize(): CoinsPF2e;
     prepareSiblingData(): void;
     /** After item alterations have occurred, ensure that this item's hit points are no higher than its maximum */
     onPrepareSynthetics(this: PhysicalItemPF2e<ActorPF2e>): void;
@@ -96,6 +90,5 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
 interface PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly _source: PhysicalItemSource;
     system: PhysicalSystemData;
-    computeAdjustedPrice?(): CoinsPF2e | null;
 }
 export { PhysicalItemPF2e };

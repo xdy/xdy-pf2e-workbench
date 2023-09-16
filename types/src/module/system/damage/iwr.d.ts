@@ -1,4 +1,4 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { DamageInstance, DamageRoll } from "./roll.ts";
 /** Apply an actor's IWR applications to an evaluated damage roll's instances */
 declare function applyIWR(actor: ActorPF2e, roll: Rolled<DamageRoll>, rollOptions: Set<string>): IWRApplicationData;
@@ -35,4 +35,5 @@ interface DamageReductionApplication {
     adjustment: number;
 }
 type IWRApplication = UnaffectedApplication | ImmunityApplication | WeaknessApplication | ResistanceApplication | DamageReductionApplication;
-export { IWRApplication, IWRApplicationData, applyIWR };
+export { applyIWR };
+export type { IWRApplication, IWRApplicationData };

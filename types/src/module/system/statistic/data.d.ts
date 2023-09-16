@@ -13,7 +13,7 @@ interface BaseStatisticData {
 }
 /** Used to build the actual statistic object */
 interface StatisticData extends BaseStatisticData {
-    ability?: AttributeString | null;
+    attribute?: AttributeString | null;
     rank?: ZeroToFour | "untrained-level";
     /** If the actor is proficient with this statistic (rather than deriving from rank) */
     proficient?: boolean;
@@ -70,11 +70,9 @@ interface BaseStatisticTraceData {
 }
 /** Data intended to be merged back into actor data (usually for token attribute/RE purposes) */
 interface StatisticTraceData extends BaseStatisticTraceData {
-    slug: string;
-    label: string;
     /** Either the totalModifier or the dc depending on what the data is for */
     value: number;
     totalModifier: number;
     dc: number;
 }
-export { BaseStatisticData, BaseStatisticTraceData, StatisticChatData, StatisticCheckData, StatisticData, StatisticDifficultyClassData, StatisticTraceData, };
+export type { BaseStatisticData, BaseStatisticTraceData, StatisticChatData, StatisticCheckData, StatisticData, StatisticDifficultyClassData, StatisticTraceData, };

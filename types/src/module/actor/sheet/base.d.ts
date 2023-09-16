@@ -4,7 +4,6 @@
 import type { ActorPF2e } from "@actor";
 import { StrikeData } from "@actor/data/base.ts";
 import { ItemPF2e, PhysicalItemPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data/index.ts";
 import { Coins } from "@item/physical/data.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { BasicConstructorOptions, TagSelectorOptions, TagSelectorType } from "@system/tag-selector/index.ts";
@@ -34,20 +33,18 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     protected _canDragStart(selector: string): boolean;
     protected _canDragDrop(selector: string): boolean;
     /** Add support for dropping actions and toggles */
-    protected _onDragStart(event: ElementDragEvent): void;
-    /** Handle a drop event for an existing Owned Item to sort that item */
-    protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e<TActor>[]>;
+    protected _onDragStart(event: DragEvent): void;
     /** Emulate a sheet item drop from the canvas */
     emulateItemDrop(data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
-    protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e & {
+    protected _onDropItem(event: DragEvent, data: DropCanvasItemDataPF2e & {
         fromInventory?: boolean;
     }): Promise<ItemPF2e<ActorPF2e | null>[]>;
     /**
      * PF2e specific method called by _onDropItem() when this is a new item that needs to be dropped into the actor
      * that isn't already on the actor or transferring to another actor.
      */
-    protected _handleDroppedItem(event: ElementDragEvent, item: ItemPF2e<ActorPF2e | null>, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
-    protected _onDropFolder(_event: ElementDragEvent, data: DropCanvasData<"Folder", Folder>): Promise<ItemPF2e<TActor>[]>;
+    protected _handleDroppedItem(event: DragEvent, item: ItemPF2e<ActorPF2e | null>, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
+    protected _onDropFolder(_event: DragEvent, data: DropCanvasData<"Folder", Folder>): Promise<ItemPF2e<TActor>[]>;
     /**
      * Moves an item between two actors' inventories.
      * @param event         Event that fired this method.
@@ -55,7 +52,7 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
      * @param targetActorId ID of the actor where the item will be stored.
      * @param itemId           ID of the item to move between the two actors.
      */
-    moveItemBetweenActors(event: ElementDragEvent, sourceActorId: string, sourceTokenId: string | null, targetActorId: string, targetTokenId: string | null, itemId: string): Promise<void>;
+    moveItemBetweenActors(event: DragEvent, sourceActorId: string, sourceTokenId: string | null, targetActorId: string, targetTokenId: string | null, itemId: string): Promise<void>;
     protected openTagSelector(anchor: HTMLElement, options?: Partial<TagSelectorOptions>): void;
     /** Construct and render a tag selection menu */
     protected tagSelector(selectorType: Exclude<TagSelectorType, "basic">, options?: Partial<TagSelectorOptions>): void;

@@ -1,12 +1,18 @@
 import { RollInitiativeOptionsPF2e } from "@actor/data/index.ts";
 import { SkillLongForm } from "@actor/types.ts";
-import { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
-import { CombatantPF2e, RolledCombatant } from "./combatant.ts";
+import type { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
+import { ThreatRating } from "@scripts/macros/xp/index.ts";
+import { RolledCombatant, type CombatantPF2e } from "./combatant.ts";
 declare class EncounterPF2e extends Combat {
     /** Sort combatants by initiative rolls, falling back to tiebreak priority and then finally combatant ID (random) */
     protected _sortCombatants(a: CombatantPF2e<this, TokenDocumentPF2e>, b: CombatantPF2e<this, TokenDocumentPF2e>): number;
     /** A public method to access _sortCombatants in order to get the combatant with the higher initiative */
     getCombatantWithHigherInit(a: RolledCombatant<this>, b: RolledCombatant<this>): RolledCombatant<this> | null;
+    /** Determine threat rating and XP award for this encounter */
+    analyze(): {
+        threat: ThreatRating;
+        xp: number;
+    } | null;
     /** Exclude orphaned, loot-actor, and minion tokens from combat */
     createEmbeddedDocuments(embeddedName: "Combatant", data: PreCreate<foundry.documents.CombatantSource>[], context?: DocumentModificationContext<this>): Promise<CombatantPF2e<this, TokenDocumentPF2e<ScenePF2e>>[]>;
     /** Roll initiative for PCs and NPCs using their prepared roll methods */

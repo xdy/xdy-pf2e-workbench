@@ -3,6 +3,7 @@
 /// <reference types="tooltipster" />
 import { NPCPF2e } from "@actor";
 import { CreatureSheetPF2e } from "@actor/creature/sheet.ts";
+import { UserPF2e } from "@module/user/document.ts";
 import { NPCConfig } from "./config.ts";
 import { NPCSheetData, NPCSpellcastingSheetData } from "./types.ts";
 declare abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends CreatureSheetPF2e<TActor> {
@@ -15,6 +16,8 @@ declare abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends Creature
      */
     prepareItems(sheetData: NPCSheetData<TActor>): Promise<void>;
     getData(): Promise<NPCSheetData<TActor>>;
+    /** Players can view the sheets of lootable NPCs. */
+    protected _canUserView(user: UserPF2e): boolean;
     activateListeners($html: JQuery<HTMLElement>): void;
 }
 declare class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {

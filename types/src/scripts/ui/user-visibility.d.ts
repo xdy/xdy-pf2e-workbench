@@ -1,15 +1,13 @@
-/// <reference types="jquery" resolution-mode="require"/>
-/// <reference types="jquery" resolution-mode="require"/>
-/// <reference types="tooltipster" />
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 declare class UserVisibilityPF2e {
     /** Edits HTML live based on permission settings. Used to hide certain blocks and values */
-    static process($html: HTMLElement | JQuery, options?: ProcessOptions): void;
+    static process(html: HTMLElement, options?: ProcessOptions): void;
     static processMessageSender(message: ChatMessagePF2e, html: HTMLElement): void;
 }
-type UserVisibility = "all" | "owner" | "gm" | "none";
+declare const USER_VISIBILITIES: Set<"all" | "owner" | "gm" | "none">;
+type UserVisibility = SetElement<typeof USER_VISIBILITIES>;
 interface ProcessOptions {
     document?: ClientDocument | null;
-    message?: ChatMessagePF2e;
+    message?: ChatMessagePF2e | null;
 }
-export { UserVisibility, UserVisibilityPF2e };
+export { USER_VISIBILITIES, type UserVisibility, UserVisibilityPF2e };

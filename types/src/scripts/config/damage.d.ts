@@ -1,6 +1,6 @@
 import { DamageCategoryUnique, DamageType } from "@system/damage/types.ts";
 declare const damageCategoriesUnique: Record<DamageCategoryUnique, string>;
-declare const materialDamageEffects: Pick<Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "keep-stone" | "noqual" | "peachwood" | "siccatite" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>, "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "keep-stone" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel">;
+declare const materialDamageEffects: Pick<Record<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "keep-stone" | "noqual" | "peachwood" | "siccatite" | "sisterstone" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", string>, "adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "keep-stone" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel">;
 declare const damageCategories: {
     alignment: string;
     energy: string;

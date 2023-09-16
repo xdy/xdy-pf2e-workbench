@@ -91,4 +91,5 @@ interface SkillActionOptions extends ActionDefaultOptions {
     skill?: string;
     difficultyClass?: CheckDC;
 }
-export { ActionDefaultOptions, ActionGlyph, CheckContext, CheckContextData, CheckContextError, CheckContextOptions, CheckResultCallback, SimpleRollActionCheckOptions, SkillActionOptions, UnresolvedCheckDC, };
+export { CheckContextError };
+export type { ActionDefaultOptions, ActionGlyph, CheckContext, CheckContextData, CheckContextOptions, CheckResultCallback, SimpleRollActionCheckOptions, SkillActionOptions, UnresolvedCheckDC, };

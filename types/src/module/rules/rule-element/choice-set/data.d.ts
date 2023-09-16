@@ -1,10 +1,15 @@
 import { ItemType } from "@item/data/index.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { RawPredicate } from "@system/predication.ts";
-import { PredicateField } from "@system/schema-data-fields.ts";
+import type { DataUnionField, PredicateField, StrictArrayField, StrictObjectField, StrictStringField } from "@system/schema-data-fields.ts";
 import type { BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementSchema, RuleElementSource } from "../index.ts";
 type ChoiceSetSchema = RuleElementSchema & {
+    /**
+     * The options from which the user can choose. If a string is provided, it is treated as a reference to a record in
+     * `CONFIG.PF2E`, and the `PromptChoice` array is composed from its entries.
+     */
+    choices: DataUnionField<StrictArrayField<StrictObjectField<PickableThing>, PickableThing[], PickableThing[], true, false, false> | StrictObjectField<ChoiceSetObject> | StrictStringField<string, string, true, false, false>, true, false, true>;
     /** The prompt to present in the ChoiceSet application window */
     prompt: StringField<string, string, true, false, true>;
     /** Whether the parent item's name should be adjusted to reflect the choice made */
@@ -17,17 +22,18 @@ type ChoiceSetSchema = RuleElementSchema & {
     /** An optional roll option to be set from the selection */
     rollOption: StringField<string, string, false, true, true>;
     /** A predicate indicating valid dropped item selections */
-    allowedDrops: SchemaField<AllowedDropsData, SourceFromSchema<AllowedDropsData>, ModelPropsFromSchema<AllowedDropsData>, false, true, true>;
+    allowedDrops: SchemaField<AllowedDropsSchema, SourceFromSchema<AllowedDropsSchema>, ModelPropsFromSchema<AllowedDropsSchema>, false, true, false>;
     /** Allow the user to make no selection without suppressing all other rule elements on the parent item */
-    allowNoSelection: BooleanField<boolean, boolean, false, false, true>;
+    allowNoSelection: BooleanField<boolean, boolean, false, false, false>;
 };
-type AllowedDropsData = {
+type AllowedDropsSchema = {
     label: StringField<string, string, true, true, true>;
     predicate: PredicateField;
 };
-type UninflatedChoiceSet = string | PickableThing<string | number>[] | ChoiceSetOwnedItems | ChoiceSetAttacks | ChoiceSetPackQuery;
+type AllowedDropsData = ModelPropsFromSchema<AllowedDropsSchema>;
+type ChoiceSetObject = ChoiceSetOwnedItems | ChoiceSetAttacks | ChoiceSetPackQuery;
+type UninflatedChoiceSet = string | PickableThing[] | ChoiceSetObject;
 interface ChoiceSetSource extends RuleElementSource {
-    choices?: UninflatedChoiceSet;
     flag?: unknown;
     prompt?: unknown;
     selection?: unknown;
@@ -70,4 +76,4 @@ interface ChoiceSetPackQuery {
     attacks?: never;
     unarmedAttacks?: never;
 }
-export { ChoiceSetAttacks, ChoiceSetOwnedItems, ChoiceSetPackQuery, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet, };
+export type { AllowedDropsData, ChoiceSetAttacks, ChoiceSetObject, ChoiceSetOwnedItems, ChoiceSetPackQuery, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet, };

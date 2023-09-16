@@ -1,11 +1,11 @@
 import { SaveData } from "@actor/creature/data.ts";
-import { ActorSystemData, ActorSystemSource, ActorAttributes, BaseActorSourcePF2e, ActorTraitsSource, ActorAttributesSource, ActorHitPoints } from "@actor/data/base.ts";
-import { ActorSizePF2e } from "@actor/data/size.ts";
+import { ActorAttributes, ActorAttributesSource, ActorDetails, ActorDetailsSource, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsSource, BaseActorSourcePF2e } from "@actor/data/base.ts";
+import type { ActorSizePF2e } from "@actor/data/size.ts";
+import { InitiativeTraceData } from "@actor/initiative.ts";
 import { NPCStrike } from "@actor/npc/index.ts";
 import { SaveType } from "@actor/types.ts";
 import { Rarity, Size } from "@module/data.ts";
 import { HazardTrait } from "./types.ts";
-import { InitiativeTraceData } from "@actor/initiative.ts";
 /** The stored source data of a hazard actor */
 type HazardSource = BaseActorSourcePF2e<"hazard", HazardSystemSource>;
 /** The raw information contained within the actor data object for hazards. */
@@ -35,7 +35,23 @@ interface HazardAttributesSource extends ActorAttributesSource {
     };
     emitsSound: boolean | "encounter";
 }
-interface HazardSystemData extends Omit<HazardSystemSource, "attributes">, Omit<ActorSystemData, "traits"> {
+interface HazardDetailsSource extends ActorDetailsSource {
+    isComplex: boolean;
+    level: {
+        value: number;
+    };
+    disable?: string;
+    description?: string;
+    reset?: string;
+    routine?: string;
+    /** Book source, along with author */
+    source: {
+        value: string;
+        author: string;
+    };
+    readonly alliance?: never;
+}
+interface HazardSystemData extends Omit<HazardSystemSource, "attributes" | "details">, Omit<ActorSystemData, "traits"> {
     attributes: HazardAttributes;
     details: HazardDetails;
     traits: HazardTraitsData;
@@ -71,26 +87,12 @@ interface HazardAttributes extends Omit<HazardAttributesSource, "initiative" | "
     emitsSound: boolean | "encounter";
     shield?: never;
 }
-interface HazardDetailsSource {
-    isComplex: boolean;
-    level: {
-        value: number;
-    };
-    disable?: string;
-    description?: string;
-    reset?: string;
-    routine?: string;
-    /** Book source, along with author */
-    source: {
-        value: string;
-        author: string;
-    };
-}
-interface HazardDetails extends HazardDetailsSource {
+interface HazardDetails extends Omit<HazardDetailsSource, "alliance">, ActorDetails {
     alliance: null;
 }
 interface HazardHitPoints extends ActorHitPoints {
     brokenThreshold: number;
 }
-type HazardSaves = Record<SaveType, SaveData>;
-export { HazardSource, HazardSystemData };
+type HazardSaveData = Omit<SaveData, "attribute">;
+type HazardSaves = Record<SaveType, HazardSaveData>;
+export type { HazardSource, HazardSystemData };

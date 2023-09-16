@@ -9,4 +9,4 @@ interface ABCSystemSource extends ItemSystemSource {
     items: Record<string, ABCFeatureEntryData>;
 }
 type ABCSystemData = ABCSystemSource;
-export { ABCFeatureEntryData, ABCSystemData, ABCSystemSource };
+export type { ABCFeatureEntryData, ABCSystemData, ABCSystemSource };

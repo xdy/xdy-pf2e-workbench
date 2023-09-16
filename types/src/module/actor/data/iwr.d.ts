@@ -280,4 +280,5 @@ interface ResistanceSource extends IWRSource<ResistanceType> {
 }
 /** Weaknesses to things that "[don't] normally deal damage, such as water": applied separately as untyped damage */
 declare const NON_DAMAGE_WEAKNESSES: Set<WeaknessType>;
-export { ImmunityData, ImmunitySource, IWRSource, NON_DAMAGE_WEAKNESSES, ResistanceData, ResistanceSource, WeaknessData, WeaknessSource, };
+export { ImmunityData, NON_DAMAGE_WEAKNESSES, ResistanceData, WeaknessData };
+export type { ImmunitySource, IWRSource, ResistanceSource, WeaknessSource };

@@ -1,7 +1,6 @@
+import type { CharacterPF2e } from "@actor";
 import type { DamageType } from "@system/damage/types.ts";
 import { WeaponPF2e } from "./document.ts";
-import { WeaponPropertyRuneType } from "./types.ts";
-import { CharacterPF2e } from "@actor";
 /** A helper class to handle toggleable weapon traits */
 declare class WeaponTraitToggles {
     #private;
@@ -25,6 +24,4 @@ interface ToggleWeaponTraitParams {
     trait: "modular" | "versatile";
     selection: DamageType | null;
 }
-/** Remove duplicate and lesser versions from an array of property runes */
-declare function prunePropertyRunes(runes: WeaponPropertyRuneType[]): WeaponPropertyRuneType[];
-export { WeaponTraitToggles, prunePropertyRunes, toggleWeaponTrait };
+export { WeaponTraitToggles, toggleWeaponTrait };

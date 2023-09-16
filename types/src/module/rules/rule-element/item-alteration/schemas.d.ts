@@ -1,5 +1,5 @@
+import { ItemPF2e } from "@item";
 import type { ItemSourcePF2e, ItemType } from "@item/data/index.ts";
-import { ItemPF2e } from "@module/documents.ts";
 import type { DamageType } from "@system/damage/types.ts";
 import type { DataField, DataFieldOptions, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { AELikeChangeMode } from "../ae-like.ts";
@@ -44,7 +44,7 @@ declare const ITEM_ALTERATION_VALIDATORS: {
     category: ItemAlterationValidator<{
         itemType: StringField<"armor", ItemType, true, false, false>;
         mode: StringField<"override", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
-        value: StringField<"light" | "medium" | "heavy", unknown, true, false, boolean>;
+        value: StringField<"medium" | "light" | "heavy", unknown, true, false, boolean>;
     }>;
     hardness: ItemAlterationValidator<{
         itemType: StringField<"armor" | "consumable" | "book" | "backpack" | "equipment" | "treasure" | "weapon", ItemType, true, false, false>;
@@ -55,6 +55,11 @@ declare const ITEM_ALTERATION_VALIDATORS: {
         itemType: StringField<"armor" | "consumable" | "book" | "backpack" | "equipment" | "treasure" | "weapon", ItemType, true, false, false>;
         mode: StringField<"override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
         value: NumberField<number, unknown, true, false, boolean>;
+    }>;
+    "material-type": ItemAlterationValidator<{
+        itemType: StringField<"armor" | "consumable" | "book" | "backpack" | "equipment" | "treasure" | "weapon", ItemType, true, false, false>;
+        mode: StringField<"override", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
+        value: StringField<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "abysium" | "cold-iron" | "djezet" | "dragonhide" | "grisantian-pelt" | "inubrix" | "keep-stone" | "noqual" | "peachwood" | "siccatite" | "sisterstone" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel", unknown, true, false, boolean>;
     }>;
     "pd-recovery-dc": ItemAlterationValidator<{
         itemType: StringField<"condition", ItemType, true, false, false>;
@@ -69,7 +74,7 @@ declare const ITEM_ALTERATION_VALIDATORS: {
     rarity: ItemAlterationValidator<{
         itemType: StringField<"armor" | "consumable" | "book" | "backpack" | "equipment" | "treasure" | "weapon", ItemType, true, false, false>;
         mode: StringField<"override", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
-        value: StringField<"rare" | "uncommon" | "unique" | "common", unknown, true, false, boolean>;
+        value: StringField<"common" | "uncommon" | "rare" | "unique", unknown, true, false, boolean>;
     }>;
     "frequency-max": ItemAlterationValidator<{
         itemType: StringField<"action" | "feat", ItemType, true, false, false>;

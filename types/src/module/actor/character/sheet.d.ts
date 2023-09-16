@@ -1,6 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
+import type { ActorPF2e } from "@actor";
 import { CreatureSheetData } from "@actor/creature/index.ts";
 import { ActorSheetDataPF2e, InventoryItem } from "@actor/sheet/data-types.ts";
 import { AttributeString, SaveType } from "@actor/types.ts";
@@ -10,13 +11,12 @@ import { ItemSourcePF2e } from "@item/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/types.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
-import { ActorPF2e } from "@module/documents.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { CreatureSheetPF2e } from "../creature/sheet.ts";
 import { CharacterConfig } from "./config.ts";
 import { CraftingEntry, CraftingFormula } from "./crafting/index.ts";
-import { CharacterSaveData, CharacterStrike, CharacterSystemData, ClassDCData } from "./data.ts";
+import { CharacterBiography, CharacterSaveData, CharacterStrike, CharacterSystemData, ClassDCData } from "./data.ts";
 import { CharacterPF2e } from "./document.ts";
 import { ElementalBlastConfig } from "./elemental-blast.ts";
 import { FeatGroup } from "./feats.ts";
@@ -37,7 +37,7 @@ declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureS
     protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
     protected _onDrop(event: ElementDragEvent): Promise<boolean | void>;
     /** Handle a drop event for an existing Owned Item to sort that item */
-    protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e<TActor>[]>;
+    protected _onSortItem(event: DragEvent, itemSource: ItemSourcePF2e): Promise<CollectionValue<TActor["items"]>[]>;
     /** Overriden to open sub-tabs if requested */
     protected openTab(name: string): void;
 }
@@ -95,6 +95,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     adjustedBonusEncumbranceBulk: boolean;
     adjustedBonusLimitBulk: boolean;
     attributeBoostsAllocated: boolean;
+    biography: CharacterBiography;
     class: ClassPF2e<CharacterPF2e> | null;
     classDCs: {
         dcs: ClassDCSheetData[];
@@ -154,13 +155,13 @@ interface ElementalBlastSheetConfig extends ElementalBlastConfig {
     damageType: DamageType;
     formula: {
         ranged: {
-            damage: string;
-            critical: string;
+            damage: string | null;
+            critical: string | null;
         };
         melee: {
-            damage: string;
-            critical: string;
+            damage: string | null;
+            critical: string | null;
         };
     };
 }
-export { CharacterSheetPF2e, CharacterSheetTabVisibility };
+export { CharacterSheetPF2e, type CharacterSheetTabVisibility };

@@ -2,7 +2,7 @@ import { AttributeString } from "@actor/types.ts";
 import { ActionTrait } from "@item/ability/types.ts";
 import { ItemSystemData, ItemSystemSource } from "@item/data/base.ts";
 import { MagicTradition, SpellTrait } from "@item/spell/index.ts";
-import { CheckRoll } from "@system/check/index.ts";
+import type { CheckRoll } from "@system/check/index.ts";
 interface AbstractEffectSystemSource extends ItemSystemSource {
     /** Whether this effect originated from a spell */
     fromSpell?: boolean;
@@ -79,4 +79,4 @@ interface EffectAuraData {
 type EffectBadgeSource = EffectBadgeCounterSource | EffectBadgeValueSource | EffectBadgeFormulaSource;
 type EffectBadge = EffectBadgeCounter | EffectBadgeValue | EffectBadgeFormula;
 type TimeUnit = "rounds" | "minutes" | "hours" | "days";
-export { AbstractEffectSystemData, AbstractEffectSystemSource, EffectAuraData, EffectBadge, EffectBadgeFormulaSource, EffectBadgeSource, EffectBadgeValueSource, EffectContextData, EffectTrait, EffectTraits, TimeUnit, };
+export type { AbstractEffectSystemData, AbstractEffectSystemSource, EffectAuraData, EffectBadge, EffectBadgeFormulaSource, EffectBadgeSource, EffectBadgeValueSource, EffectContextData, EffectTrait, EffectTraits, TimeUnit, };

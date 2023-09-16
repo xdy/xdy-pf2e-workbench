@@ -12,4 +12,4 @@ interface CreatureIdentificationData {
     standard: RecallKnowledgeDC;
     lore: [RecallKnowledgeDC, RecallKnowledgeDC];
 }
-export { CreatureIdentificationData, creatureIdentificationDCs };
+export { creatureIdentificationDCs, type CreatureIdentificationData };

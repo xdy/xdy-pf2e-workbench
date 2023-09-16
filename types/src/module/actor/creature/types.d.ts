@@ -1,20 +1,20 @@
-import { ActorPF2e, ActorUpdateContext } from "@actor/base.ts";
+import type { ActorPF2e, ActorUpdateContext } from "@actor/base.ts";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
 import { AttributeString, SaveType } from "@actor/types.ts";
-import { MeleePF2e, WeaponPF2e } from "@item";
+import { AbilityItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { AbilityData, CreatureSystemData, SaveData, SkillData } from "./data.ts";
-import { CreaturePF2e } from "./document.ts";
-import { ALIGNMENTS, ALIGNMENT_TRAITS } from "./values.ts";
+import type { CreaturePF2e } from "./document.ts";
+import type { ALIGNMENTS, ALIGNMENT_TRAITS } from "./values.ts";
 type Alignment = SetElement<typeof ALIGNMENTS>;
 type AlignmentTrait = SetElement<typeof ALIGNMENT_TRAITS>;
 type CreatureTrait = keyof ConfigPF2e["PF2E"]["creatureTraits"] | AlignmentTrait;
 type ModeOfBeing = "living" | "undead" | "construct" | "object";
 interface GetReachParameters {
     action?: "interact" | "attack";
-    weapon?: Maybe<WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e>>;
+    weapon?: Maybe<AbilityItemPF2e<ActorPF2e> | WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e>>;
 }
 interface CreatureUpdateContext<TParent extends TokenDocumentPF2e | null> extends ActorUpdateContext<TParent> {
     allowHPOverage?: boolean;
@@ -51,4 +51,4 @@ interface CreatureSheetData<TActor extends CreaturePF2e> extends ActorSheetDataP
         remainingWounded: number;
     };
 }
-export { Alignment, AlignmentTrait, CreatureSheetData, CreatureTrait, CreatureUpdateContext, GetReachParameters, ModeOfBeing, };
+export type { Alignment, AlignmentTrait, CreatureSheetData, CreatureTrait, CreatureUpdateContext, GetReachParameters, ModeOfBeing, };

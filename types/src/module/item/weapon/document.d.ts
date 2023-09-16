@@ -2,10 +2,11 @@ import { ActorPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
 import { ItemSummaryData } from "@item/data/index.ts";
-import { CoinsPF2e, IdentificationStatus, MystifiedData } from "@item/physical/index.ts";
+import { IdentificationStatus, MystifiedData } from "@item/physical/index.ts";
+import { RangeData } from "@item/types.ts";
 import { UserPF2e } from "@module/user/index.ts";
-import type { WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponSource, WeaponSystemData } from "./data.ts";
-import type { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types.ts";
+import type { WeaponDamage, WeaponFlags, WeaponSource, WeaponSystemData } from "./data.ts";
+import type { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponReloadTime, WeaponTrait } from "./types.ts";
 declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     /** Given this weapon is an alternative usage, whether it is melee or thrown */
     altUsageType: "melee" | "thrown" | null;
@@ -17,10 +18,10 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     /** The default ability used in attack rolls */
     get defaultAbility(): AttributeString;
     get hands(): "0" | "1" | "1+" | "2";
-    /** The range increment of this weapon, or null if a melee weapon */
-    get rangeIncrement(): WeaponRangeIncrement | null;
     /** The maximum range of this weapon: `null` if melee, and usually 6 * range increment if ranged */
     get maxRange(): number | null;
+    /** A single object containing range increment and maximum */
+    get range(): RangeData | null;
     get reload(): WeaponReloadTime | null;
     get isSpecific(): boolean;
     get isMelee(): boolean;
@@ -34,7 +35,6 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     get baseDamage(): WeaponDamage;
     /** Does this weapon deal damage? */
     get dealsDamage(): boolean;
-    get material(): WeaponMaterialData;
     /** Does this weapon require ammunition in order to make a strike? */
     get requiresAmmo(): boolean;
     get ammo(): ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e> | null;
@@ -44,18 +44,11 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
     prepareBaseData(): void;
-    private prepareMaterialAndRunes;
-    /** Set level, price, and rarity according to precious material and runes */
-    private prepareLevelAndRarity;
+    private prepareRunes;
     prepareDerivedData(): void;
     /** Add the rule elements of this weapon's linked ammunition to its own list */
     prepareSiblingData(): void;
-    computeAdjustedPrice(): CoinsPF2e | null;
-    private getRunesValuationData;
-    private getMaterialValuationData;
     getChatData(this: WeaponPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;
-    /** Generate a weapon name base on precious-material composition and runes */
-    generateMagicName(): string;
     getMystifiedData(status: IdentificationStatus, { source }?: {
         source?: boolean | undefined;
     }): MystifiedData;

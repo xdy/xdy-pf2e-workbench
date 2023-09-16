@@ -35,4 +35,5 @@ interface TraitTagifyEntry {
     value: string;
     readonly: boolean;
 }
-export { SheetOption, SheetOptions, TraitTagifyEntry, createSheetOptions, createSheetTags, createTagifyTraits, maintainFocusInRender, processTagifyInSubmitData, };
+export { createSheetOptions, createSheetTags, createTagifyTraits, maintainFocusInRender, processTagifyInSubmitData };
+export type { SheetOption, SheetOptions, TraitTagifyEntry };

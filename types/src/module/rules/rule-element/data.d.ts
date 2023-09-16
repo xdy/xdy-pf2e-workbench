@@ -47,4 +47,5 @@ declare class ResolvableValueField<TRequired extends boolean, TNullable extends 
     protected _cast(value: unknown): unknown;
     protected _cleanType(value: RuleValue): RuleValue;
 }
-export { Bracket, BracketedValue, ResolvableValueField, RuleElementSchema, RuleElementSource, RuleValue };
+export { ResolvableValueField };
+export type { Bracket, BracketedValue, RuleElementSchema, RuleElementSource, RuleValue };

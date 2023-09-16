@@ -17,6 +17,10 @@ declare class StrictSchemaField<TDataSchema extends DataSchema> extends fields.S
 declare class StrictStringField<TSourceProp extends string, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = boolean> extends fields.StringField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;
 }
+/** A `NumberField` that does not cast the source value */
+declare class StrictNumberField<TSourceProp extends number, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = true, THasInitial extends boolean = true> extends fields.NumberField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+    protected _cast(value: unknown): unknown;
+}
 /** A `BooleanField` that does not cast the source value */
 declare class StrictBooleanField<TSourceProp extends boolean = boolean, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.BooleanField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;
@@ -26,6 +30,9 @@ declare class StrictArrayField<TElementField extends DataField, TSourceProp exte
     protected _cast(value: unknown): unknown;
     /** Parent method assumes array-wrapping: pass through unchanged */
     protected _cleanType(value: unknown): unknown;
+}
+declare class StrictObjectField<TSourceProp extends object, TModelProp = TSourceProp, TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ObjectField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+    protected _cast(value: unknown): unknown;
 }
 declare class DataUnionField<TField extends DataField, TRequired extends boolean = boolean, TNullable extends boolean = boolean, THasInitial extends boolean = boolean> extends fields.DataField<TField extends DataField<infer TSourceProp> ? TSourceProp : never, TField extends DataField<infer _TSourceProp, infer TModelProp> ? TModelProp : never, TRequired, TNullable, THasInitial> {
     fields: TField[];
@@ -70,7 +77,8 @@ declare class RecordField<TKeyField extends StringField<string, string, true, fa
     constructor(keyField: TKeyField, valueField: TValueField, options: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>);
     protected _isValidKeyFieldType(keyField: unknown): keyField is StringField<string, string, true, false, false> | NumberField<number, number, true, false, false>;
     protected _validateValues(values: Record<string, unknown>, options?: DataFieldValidationOptions): DataModelValidationFailure | void;
+    protected _cleanType(values: Record<string, unknown>, options?: CleanFieldOptions | undefined): Record<string, unknown>;
     protected _validateType(values: unknown, options?: DataFieldValidationOptions): boolean | DataModelValidationFailure | void;
     initialize(values: object | null | undefined, model: ConstructorOf<foundry.abstract.DataModel>, options?: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>): MaybeSchemaProp<RecordFieldModelProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>;
 }
-export { DataUnionField, LaxSchemaField, PredicateField, RecordField, SlugField, StrictArrayField, StrictBooleanField, StrictSchemaField, StrictStringField, };
+export { DataUnionField, LaxSchemaField, PredicateField, RecordField, SlugField, StrictArrayField, StrictBooleanField, StrictNumberField, StrictObjectField, StrictSchemaField, StrictStringField, };

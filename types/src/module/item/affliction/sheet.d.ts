@@ -2,8 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { AfflictionPF2e, ConditionPF2e } from "@item";
-import { ItemSheetPF2e } from "@item/sheet/base.ts";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/sheet/base.ts";
 import { DamageCategoryUnique } from "@system/damage/types.ts";
 import { AfflictionConditionData, AfflictionStageData } from "./data.ts";
 declare class AfflictionSheetPF2e extends ItemSheetPF2e<AfflictionPF2e> {

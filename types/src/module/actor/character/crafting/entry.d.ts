@@ -1,5 +1,5 @@
-import { ActorPF2e, CharacterPF2e } from "@actor";
-import { ItemPF2e } from "@item";
+import type { ActorPF2e, CharacterPF2e } from "@actor";
+import type { ItemPF2e } from "@item";
 import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 import { CraftingFormula } from "./formula.ts";
 declare class CraftingEntry implements Omit<CraftingEntryData, "parentItem"> {
@@ -71,4 +71,5 @@ interface PreparedFormulaSheetData {
     quantity: number;
     isSignatureItem: boolean;
 }
-export { CraftingEntry, CraftingEntryData, PreparedFormulaData };
+export { CraftingEntry };
+export type { CraftingEntryData, PreparedFormulaData };

@@ -1,7 +1,7 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { ModifierPF2e, RawModifier } from "@actor/modifiers.ts";
 import { DCSlug } from "@actor/types.ts";
-import { ItemPF2e } from "@item";
+import type { ItemPF2e } from "@item";
 import { RollNoteSource } from "@module/notes.ts";
 import { CheckContext, CheckContextData, CheckContextOptions, CheckResultCallback } from "@system/action-macros/types.ts";
 import { CheckDC } from "@system/degree-of-success.ts";
@@ -52,4 +52,5 @@ declare class SingleCheckAction extends BaseAction<SingleCheckActionVariantData,
     constructor(data: SingleCheckActionData);
     protected toActionVariant(data?: SingleCheckActionVariantData): SingleCheckActionVariant;
 }
-export { SingleCheckAction, SingleCheckActionUseOptions, SingleCheckActionVariant, SingleCheckActionVariantData };
+export { SingleCheckAction, SingleCheckActionVariant };
+export type { SingleCheckActionUseOptions, SingleCheckActionVariantData };

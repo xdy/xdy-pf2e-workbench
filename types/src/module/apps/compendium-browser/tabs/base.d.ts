@@ -1,7 +1,7 @@
 import MiniSearch from "minisearch";
 import { BrowserTabs, ContentTabName } from "../data.ts";
 import { CompendiumBrowser } from "../index.ts";
-import { BrowserFilter, CheckboxOptions, CompendiumBrowserIndexData, MultiselectData, RangesData } from "./data.ts";
+import { BrowserFilter, CheckboxOptions, CompendiumBrowserIndexData, MultiselectData, RangesInputData } from "./data.ts";
 export declare abstract class CompendiumBrowserTab {
     #private;
     /** A reference to the parent CompendiumBrowser */
@@ -57,7 +57,7 @@ export declare abstract class CompendiumBrowserTab {
     /** Sort result array by name, level or price */
     protected sortResult(result: CompendiumBrowserIndexData[]): CompendiumBrowserIndexData[];
     /** Return new range filter values based on input */
-    parseRangeFilterInput(_name: string, lower: string, upper: string): RangesData["values"];
+    parseRangeFilterInput(_name: string, lower: string, upper: string): RangesInputData["values"];
     /** Check if an array includes any keys of another array */
     protected arrayIncludes(array: string[], other: string[]): boolean;
     /** Generates a localized and sorted CheckBoxOptions object from config data */

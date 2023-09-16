@@ -31,7 +31,7 @@ declare class SpellPreparationSheet<TActor extends CreaturePF2e> extends ActorSh
     /** Allow adding new spells to the shortlist by dragging directly into the window */
     protected _onDropItemCreate(itemSource: ItemSourcePF2e | ItemSourcePF2e[]): Promise<ItemPF2e<TActor>[]>;
     /** Allow transferring spells between open windows */
-    protected _onSortItem(event: ElementDragEvent, itemData: ItemSourcePF2e): Promise<ItemPF2e<TActor>[]>;
+    protected _onSortItem(event: DragEvent, itemData: ItemSourcePF2e): Promise<CollectionValue<TActor["items"]>[]>;
     /** Override of inner render function to maintain item summary state */
     protected _renderInner(data: Record<string, unknown>, options: RenderOptions): Promise<JQuery>;
 }

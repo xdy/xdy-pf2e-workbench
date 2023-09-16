@@ -45,4 +45,4 @@ interface OnDeleteActions {
     granter: ItemGrantDeleteAction;
     grantee: ItemGrantDeleteAction;
 }
-export { GrantItemRuleElement, GrantItemSource };
+export { GrantItemRuleElement, type GrantItemSource };

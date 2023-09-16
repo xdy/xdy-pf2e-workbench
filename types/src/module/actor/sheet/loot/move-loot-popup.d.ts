@@ -4,7 +4,7 @@ declare class MoveLootPopup extends FormApplication<{}, MoveLootOptions> {
     constructor(object: ActorPF2e, options: Partial<MoveLootOptions>, callback: MoveLootCallback);
     getData(): Promise<PopupData>;
     static get defaultOptions(): MoveLootOptions;
-    _updateObject(_event: ElementDragEvent, formData: Record<string, unknown> & MoveLootFormData): Promise<void>;
+    _updateObject(_event: DragEvent, formData: Record<string, unknown> & MoveLootFormData): Promise<void>;
 }
 interface MoveLootOptions extends FormApplicationOptions {
     quantity: {

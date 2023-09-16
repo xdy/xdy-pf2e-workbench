@@ -19,6 +19,7 @@ declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get acBonus(): number;
     get hitPoints(): PhysicalItemHitPoints;
     get hardness(): number;
+    get isSpecific(): boolean;
     get isBroken(): boolean;
     get isDestroyed(): boolean;
     /** Given this is a shield, is it raised? */
@@ -27,6 +28,7 @@ declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     getRollOptions(prefix?: string): string[];
     prepareBaseData(): void;
     prepareDerivedData(): void;
+    private prepareRunes;
     prepareActorData(this: ArmorPF2e<ActorPF2e>): void;
     onPrepareSynthetics(this: ArmorPF2e<ActorPF2e>): void;
     private setActorShieldData;

@@ -12,13 +12,6 @@ declare const MetagameSettingsConfig: {
         default: boolean;
         type: BooleanConstructor;
     };
-    showPartyStats: {
-        name: string;
-        hint: string;
-        default: boolean;
-        type: BooleanConstructor;
-        onChange: () => void;
-    };
     tokenSetsNameVisibility: {
         name: string;
         hint: string;
@@ -37,6 +30,13 @@ declare const MetagameSettingsConfig: {
         hint: string;
         default: boolean;
         type: BooleanConstructor;
+    };
+    showPartyStats: {
+        name: string;
+        hint: string;
+        default: boolean;
+        type: BooleanConstructor;
+        onChange: () => void;
     };
     partyVision: {
         name: string;

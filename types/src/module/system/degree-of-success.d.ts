@@ -1,7 +1,7 @@
 import { ZeroToThree } from "@module/data.ts";
-import { CheckRoll } from "./check/roll.ts";
-import { PredicatePF2e } from "./predication.ts";
-import { StatisticDifficultyClass } from "./statistic/index.ts";
+import type { CheckRoll } from "./check/roll.ts";
+import type { PredicatePF2e } from "./predication.ts";
+import type { StatisticDifficultyClass } from "./statistic/index.ts";
 /** Get the degree of success from a roll and a difficulty class */
 declare class DegreeOfSuccess {
     #private;
@@ -68,4 +68,5 @@ declare const DEGREE_OF_SUCCESS: {
 type DegreeOfSuccessIndex = ZeroToThree;
 declare const DEGREE_OF_SUCCESS_STRINGS: readonly ["criticalFailure", "failure", "success", "criticalSuccess"];
 type DegreeOfSuccessString = (typeof DEGREE_OF_SUCCESS_STRINGS)[number];
-export { CheckDC, DEGREE_ADJUSTMENT_AMOUNTS, DEGREE_OF_SUCCESS, DEGREE_OF_SUCCESS_STRINGS, DegreeAdjustmentAmount, DegreeAdjustmentsRecord, DegreeOfSuccess, DegreeOfSuccessAdjustment, DegreeOfSuccessIndex, DegreeOfSuccessString, RollBrief, };
+export { DEGREE_ADJUSTMENT_AMOUNTS, DEGREE_OF_SUCCESS, DEGREE_OF_SUCCESS_STRINGS, DegreeOfSuccess };
+export type { CheckDC, DegreeAdjustmentAmount, DegreeAdjustmentsRecord, DegreeOfSuccessAdjustment, DegreeOfSuccessIndex, DegreeOfSuccessString, RollBrief, };

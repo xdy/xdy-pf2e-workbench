@@ -5,6 +5,7 @@ import MiniSearch from "minisearch";
 /** Extend CompendiumDirectory to support a search bar */
 declare class CompendiumDirectoryPF2e extends CompendiumDirectory {
     #private;
+    static readonly STOP_WORDS: Set<string>;
     static readonly searchEngine: MiniSearch<CompendiumIndexData>;
     /** Include ability to search and drag document search results */
     static get defaultOptions(): ApplicationOptions;

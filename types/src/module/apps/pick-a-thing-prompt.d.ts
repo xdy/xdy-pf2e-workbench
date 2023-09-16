@@ -1,12 +1,12 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
+import type { ActorPF2e } from "@actor";
+import type { ItemPF2e } from "@item";
 import { PredicatePF2e } from "@system/predication.ts";
 import Tagify from "@yaireo/tagify";
 /** Prompt the user to pick from a number of options */
-declare abstract class PickAThingPrompt<T> extends Application {
+declare abstract class PickAThingPrompt<T extends string | number | object> extends Application {
     #private;
     protected item: ItemPF2e<ActorPF2e>;
     protected selection: PickableThing<T> | null;
@@ -33,7 +33,7 @@ declare abstract class PickAThingPrompt<T> extends Application {
         force?: boolean;
     }): Promise<void>;
 }
-interface PickAThingConstructorArgs<T> {
+interface PickAThingConstructorArgs<T extends string | number | object> {
     title?: string;
     prompt?: string;
     choices?: PickableThing<T>[];
@@ -41,7 +41,7 @@ interface PickAThingConstructorArgs<T> {
     predicate?: PredicatePF2e;
     allowNoSelection?: boolean;
 }
-interface PickableThing<T = string | number | object> {
+interface PickableThing<T extends string | number | object = string | number | object> {
     value: T;
     label: string;
     img?: string;
@@ -53,4 +53,5 @@ interface PromptTemplateData {
     /** Whether to use a select menu instead of a column of buttons */
     selectMenu: boolean;
 }
-export { PickAThingConstructorArgs, PickAThingPrompt, PickableThing, PromptTemplateData };
+export { PickAThingPrompt };
+export type { PickAThingConstructorArgs, PickableThing, PromptTemplateData };

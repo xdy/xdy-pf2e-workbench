@@ -33,4 +33,4 @@ interface NPCStrikeCalculateParams {
     proficiencyRank: number;
     context: DamageRollContext;
 }
-export { ConvertedNPCDamage, WeaponDamagePF2e };
+export { WeaponDamagePF2e, type ConvertedNPCDamage };

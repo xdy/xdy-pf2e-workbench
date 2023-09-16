@@ -1,9 +1,8 @@
 import { ActorAttributes, ActorAttributesSource, ActorDetailsSource, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsSource, BaseActorSourcePF2e } from "@actor/data/base.ts";
 import { ImmunitySource } from "@actor/data/iwr.ts";
-import { ActorSizePF2e } from "@actor/data/size.ts";
+import type { ActorSizePF2e } from "@actor/data/size.ts";
 import { Rarity, Size } from "@module/data.ts";
-import { ArmorClassTraceData } from "@system/statistic/armor-class.ts";
-import { StatisticTraceData } from "@system/statistic/index.ts";
+import type { ArmorClassTraceData, StatisticTraceData } from "@system/statistic/index.ts";
 import { VehicleTrait } from "./types.ts";
 /** The stored source data of a vehicle actor */
 type VehicleSource = BaseActorSourcePF2e<"vehicle", VehicleSystemSource>;
@@ -73,4 +72,4 @@ interface TokenDimensions {
     width: number;
     height: number;
 }
-export { TokenDimensions, VehicleSource, VehicleSystemData, VehicleTrait };
+export type { TokenDimensions, VehicleSource, VehicleSystemData, VehicleTrait };

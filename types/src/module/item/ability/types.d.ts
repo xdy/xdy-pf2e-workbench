@@ -1,3 +1,3 @@
 type ActionCategory = keyof ConfigPF2e["PF2E"]["actionCategories"];
 type ActionTrait = keyof ConfigPF2e["PF2E"]["actionTraits"];
-export { ActionCategory, ActionTrait };
+export type { ActionCategory, ActionTrait };

@@ -10,6 +10,7 @@ declare class ActorDirectoryPF2e extends ActorDirectory<ActorPF2e<null>> {
     extraFolders: Record<string, boolean>;
     static get defaultOptions(): SidebarDirectoryOptions;
     getData(): Promise<object>;
+    saveActivePartyFolderState(): void;
     activateListeners($html: JQuery<HTMLElement>): void;
     /** Overriden so matched actors in a party reveal their party "folder" as well */
     protected _onSearchFilter(event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement): void;

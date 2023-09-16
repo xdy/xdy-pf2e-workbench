@@ -41,7 +41,7 @@ type FlatModifierSchema = RuleElementSchema & {
     /** If a damage modifier, a special category */
     damageCategory: StringField<DamageCategoryUnique, DamageCategoryUnique, false, false, false>;
     /** If a damage modifier, whether it applies given the presence or absence of a critically successful attack roll */
-    critical: BooleanField<boolean, boolean, false, true, false>;
+    critical: BooleanField<boolean, boolean, false, true, true>;
     /** The numeric value of the modifier */
     value: ResolvableValueField<false, false, false>;
     /**
@@ -62,4 +62,4 @@ interface FlatModifierSource extends RuleElementSource {
     critical?: unknown;
     hideIfDisabled?: unknown;
 }
-export { FlatModifierRuleElement, FlatModifierSource };
+export { FlatModifierRuleElement, type FlatModifierSource };

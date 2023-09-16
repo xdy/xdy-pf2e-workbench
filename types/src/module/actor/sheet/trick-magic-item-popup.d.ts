@@ -1,5 +1,5 @@
-import { ActorPF2e, CharacterPF2e } from "@actor";
-import { ConsumablePF2e } from "@item";
+import type { ActorPF2e, CharacterPF2e } from "@actor";
+import type { ConsumablePF2e } from "@item";
 import { TrickMagicItemDifficultyData } from "@item/consumable/spell-consumables.ts";
 export declare class TrickMagicItemPopup {
     #private;

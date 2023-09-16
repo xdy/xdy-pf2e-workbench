@@ -1,7 +1,7 @@
-import { ActionCost, ActionUseOptions } from "./types.ts";
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
+import type { EffectPF2e } from "@item";
 import { BaseAction, BaseActionData, BaseActionVariant, BaseActionVariantData } from "./base.ts";
-import { EffectPF2e } from "@item";
+import { ActionCost, ActionUseOptions } from "./types.ts";
 interface SimpleActionVariantData extends BaseActionVariantData {
     effect?: string | EffectPF2e;
 }
@@ -28,4 +28,5 @@ declare class SimpleAction extends BaseAction<SimpleActionVariantData, SimpleAct
     constructor(data: SimpleActionData);
     protected toActionVariant(data?: SimpleActionVariantData): SimpleActionVariant;
 }
-export { SimpleAction, SimpleActionResult, SimpleActionVariant, SimpleActionVariantData, SimpleActionUseOptions };
+export { SimpleAction, SimpleActionVariant };
+export type { SimpleActionResult, SimpleActionUseOptions, SimpleActionVariantData };

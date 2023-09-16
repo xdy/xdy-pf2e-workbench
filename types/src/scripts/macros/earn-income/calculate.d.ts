@@ -1,4 +1,4 @@
-import { CoinsPF2e } from "@item/physical/helpers.ts";
+import { CoinsPF2e } from "@item/physical/coins.ts";
 import { OneToFour } from "@module/data.ts";
 import { calculateDC } from "@module/dc.ts";
 import { DegreeOfSuccessIndex, RollBrief } from "@system/degree-of-success.ts";
@@ -46,4 +46,5 @@ interface EarnIncomeResult {
     dc: number;
     roll: number;
 }
-export { EarnIncomeOptions, EarnIncomeResult, PerDayEarnIncomeResult, calculateDC, earnIncome, getIncomeForLevel };
+export { calculateDC, earnIncome, getIncomeForLevel };
+export type { EarnIncomeOptions, EarnIncomeResult, PerDayEarnIncomeResult };

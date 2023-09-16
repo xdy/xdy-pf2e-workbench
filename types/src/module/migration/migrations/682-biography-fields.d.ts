@@ -4,6 +4,7 @@ import { MigrationBase } from "../base.ts";
 interface CharacterSystemDataOld extends CharacterSystemSource {
     details: CharacterSystemData["details"] & {
         biography: CharacterSystemData["details"]["biography"] & {
+            organaizations?: string;
             public?: string | null;
             "-=public"?: string | null;
             value?: string | null;

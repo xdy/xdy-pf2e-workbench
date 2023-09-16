@@ -1,7 +1,9 @@
-import { ActorPF2e } from "@actor";
+/// <reference types="jquery" resolution-mode="require"/>
+import type { ActorPF2e } from "@actor";
 import { ItemPF2e, WeaponPF2e } from "@item";
-import { ItemSummaryData } from "@item/data/index.ts";
-import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement } from "@item/weapon/types.ts";
+import { RangeData } from "@item/types.ts";
+import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
+import type { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import { ConvertedNPCDamage } from "@system/damage/weapon.ts";
 import { MeleeFlags, MeleeSource, MeleeSystemData, NPCAttackTrait } from "./data.ts";
 declare class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
@@ -17,10 +19,8 @@ declare class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get ability(): "str" | "dex";
     get attackModifier(): number;
     get reach(): number | null;
-    /** The range increment of this attack, or null if a melee attack */
-    get rangeIncrement(): WeaponRangeIncrement | null;
-    /** Get the maximum range of the attack */
-    get maxRange(): number | null;
+    /** The range maximum and possibly also increment if a ranged attack; otherwise null */
+    get range(): RangeData | null;
     /** The first of this attack's damage instances */
     get baseDamage(): ConvertedNPCDamage;
     get dealsDamage(): boolean;
@@ -35,10 +35,10 @@ declare class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     prepareSiblingData(): void;
     prepareActorData(): void;
     getRollOptions(prefix?: string): string[];
-    getChatData(this: MeleePF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData & {
-        map2: string;
-        map3: string;
-    } & Omit<MeleeSystemData, "traits">>;
+    /** Treat this item like a strike in this context and post it as one */
+    toMessage(_event?: MouseEvent | JQuery.TriggeredEvent, { create }?: {
+        create?: boolean;
+    }): Promise<ChatMessagePF2e | undefined>;
 }
 interface MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     flags: MeleeFlags;

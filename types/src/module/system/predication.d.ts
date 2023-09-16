@@ -91,4 +91,5 @@ type Conditional = {
 type CompoundStatement = Conjunction | Disjunction | ExclusiveDisjunction | AlternativeDenial | JointDenial | Negation | Conditional;
 type PredicateStatement = Atom | CompoundStatement;
 type RawPredicate = PredicateStatement[];
-export { PredicatePF2e, PredicateStatement, RawPredicate, StatementValidator };
+export { PredicatePF2e, StatementValidator };
+export type { PredicateStatement, RawPredicate };

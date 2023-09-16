@@ -1,6 +1,7 @@
-import { ActorPF2e, ChatMessagePF2e } from "@module/documents.ts";
-declare const ACTION_COST: readonly ["free", "reaction", 1, 2, 3];
-type ActionCost = (typeof ACTION_COST)[number];
+import type { ActorPF2e } from "@actor";
+import type { ChatMessagePF2e } from "@module/chat-message/document.ts";
+declare const ACTION_COSTS: readonly ["free", "reaction", 1, 2, 3];
+type ActionCost = (typeof ACTION_COSTS)[number];
 interface ActionMessageOptions {
     blind: boolean;
     variant: string;
@@ -37,4 +38,4 @@ interface Action {
     /** Uses the default variant for this action, which will usually be the first one in the collection. */
     use(options?: Partial<ActionUseOptions>): Promise<unknown>;
 }
-export { ACTION_COST, Action, ActionCost, ActionMessageOptions, ActionUseOptions, ActionVariant, ActionVariantUseOptions, };
+export type { Action, ActionCost, ActionMessageOptions, ActionUseOptions, ActionVariant, ActionVariantUseOptions };

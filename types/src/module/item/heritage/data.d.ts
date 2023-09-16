@@ -11,4 +11,4 @@ interface HeritageSystemSource extends ItemSystemData {
     level?: never;
 }
 export type HeritageSystemData = HeritageSystemSource;
-export { HeritageSource, HeritageSystemSource };
+export type { HeritageSource, HeritageSystemSource };

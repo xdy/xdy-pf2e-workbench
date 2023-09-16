@@ -48,6 +48,7 @@ declare const ancestryTraits: {
     oread: string;
     poppet: string;
     ratfolk: string;
+    reflection: string;
     shisk: string;
     shoony: string;
     skeleton: string;
@@ -113,6 +114,7 @@ declare const ancestryItemTraits: {
     oread: string;
     poppet: string;
     ratfolk: string;
+    reflection: string;
     shisk: string;
     shoony: string;
     skeleton: string;
@@ -201,6 +203,7 @@ declare const creatureTraits: {
     hag: string;
     hantu: string;
     herald: string;
+    hryngar: string;
     humanoid: string;
     ifrit: string;
     ikeshti: string;
@@ -747,6 +750,7 @@ declare const weaponTraits: {
     oread: string;
     poppet: string;
     ratfolk: string;
+    reflection: string;
     shisk: string;
     shoony: string;
     skeleton: string;
@@ -877,6 +881,7 @@ declare const npcAttackTraits: {
     noqual: string;
     peachwood: string;
     siccatite: string;
+    sisterstone: string;
     "sisterstone-dusk": string;
     "sisterstone-scarlet": string;
     "sovereign-steel": string;
@@ -1085,6 +1090,7 @@ declare const npcAttackTraits: {
     oread: string;
     poppet: string;
     ratfolk: string;
+    reflection: string;
     shisk: string;
     shoony: string;
     skeleton: string;
@@ -1672,6 +1678,7 @@ declare const hazardTraits: {
     animal: string;
     aquatic: string;
     auditory: string;
+    beast: string;
     clockwork: string;
     consumable: string;
     curse: string;
@@ -1683,6 +1690,7 @@ declare const hazardTraits: {
     magical: string;
     mechanical: string;
     poison: string;
+    polymorph: string;
     shadow: string;
     steam: string;
     summoned: string;
@@ -1877,6 +1885,7 @@ declare const equipmentTraits: {
     oread: string;
     poppet: string;
     ratfolk: string;
+    reflection: string;
     shisk: string;
     shoony: string;
     skeleton: string;
@@ -1977,6 +1986,7 @@ declare const traitDescriptions: {
     orichalcum: string;
     siccatite: string;
     silver: string;
+    sisterstone: string;
     "sisterstone-dusk": string;
     "sisterstone-scarlet": string;
     "sovereign-steel": string;
@@ -2740,4 +2750,4 @@ declare const kingmakerTraits: {
     vanara: string;
     vishkanya: string;
 };
-export { ElementTrait, actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, kingmakerTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherConsumableTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, traitDescriptions, vehicleTraits, weaponTraits, };
+export { type ElementTrait, actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, kingmakerTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherConsumableTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, traitDescriptions, vehicleTraits, weaponTraits, };

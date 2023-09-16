@@ -72,4 +72,4 @@ interface LevelBoostData extends BoostFlawRow {
     eligible: boolean;
     minLevel: number;
 }
-export { AttributeBuilder, BoostFlawState };
+export { AttributeBuilder, type BoostFlawState };

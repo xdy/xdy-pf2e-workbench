@@ -1,10 +1,10 @@
-import { TokenDocumentPF2e } from "@scene/index.ts";
-import { TokenLayerPF2e } from "../index.ts";
+import type { UserPF2e } from "@module/user/document.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
+import type { Renderer } from "pixi.js";
+import { type TokenLayerPF2e } from "../index.ts";
 import { HearingSource } from "../perception/hearing-source.ts";
 import { AuraRenderers } from "./aura/index.ts";
-import { Renderer } from "pixi.js";
 declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
-    #private;
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
     /** The token's line hearing source */
@@ -38,6 +38,15 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     isFlanking(flankee: TokenPF2e, { reach }?: {
         reach?: number;
     }): boolean;
+    /** Draw auras if certain conditions are met */
+    protected _refreshVisibility(): void;
+    /**
+     * Use border color corresponding with disposition even when the token's actor is player-owned.
+     * @see https://github.com/foundryvtt/foundryvtt/issues/9993
+     */
+    protected _getBorderColor(options?: {
+        hover?: boolean;
+    }): number | null;
     /** Overrides _drawBar(k) to also draw pf2e variants of normal resource bars (such as temp health) */
     protected _drawBar(number: number, bar: PIXI.Graphics, data: TokenResourceData): void;
     /** Draw auras along with effect icons */
@@ -60,8 +69,7 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     distanceTo(target: TokenPF2e, { reach }?: {
         reach?: number | null;
     }): number;
-    /** Add a callback for when a movement animation finishes */
-    animate(updateData: Record<string, unknown>, options?: TokenAnimationOptions<this>): Promise<void>;
+    animate(updateData: Record<string, unknown>, options?: TokenAnimationOptionsPF2e<this>): Promise<void>;
     /** Hearing should be updated whenever vision is */
     updateVisionSource({ defer, deleted }?: {
         defer?: boolean | undefined;
@@ -70,6 +78,8 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     /** Obscure the token's sprite if a hearing or tremorsense detection filter is applied to it */
     render(renderer: Renderer): void;
     protected _destroy(): void;
+    /** Players can view the sheets of lootable NPCs */
+    protected _canView(user: UserPF2e, event: PIXI.FederatedPointerEvent): boolean;
     /** Refresh vision and the `EffectsPanel` */
     protected _onControl(options?: {
         releaseOthers?: boolean;
@@ -77,13 +87,6 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     }): void;
     /** Refresh vision and the `EffectsPanel` */
     protected _onRelease(options?: Record<string, unknown>): void;
-    protected _onDragLeftStart(event: TokenPointerEvent<this>): void;
-    protected _onHoverIn(event: PIXI.FederatedPointerEvent, options?: {
-        hoverOutOthers?: boolean;
-    }): boolean;
-    protected _onHoverOut(event: PIXI.FederatedPointerEvent): boolean;
-    /** Destroy auras before removing this token from the canvas */
-    _onDelete(options: DocumentModificationContext<TDocument["parent"]>, userId: string): void;
     /** Handle system-specific status effects (upstream handles invisible and blinded) */
     _onApplyStatusEffect(statusId: string, active: boolean): void;
 }
@@ -101,4 +104,8 @@ type ShowFloatyEffectParams = number | {
 } | {
     delete: NumericFloatyEffect;
 };
-export { ShowFloatyEffectParams, TokenPF2e };
+interface TokenAnimationOptionsPF2e<TObject extends TokenPF2e = TokenPF2e> extends TokenAnimationOptions<TObject> {
+    spin?: boolean;
+}
+export { TokenPF2e };
+export type { ShowFloatyEffectParams, TokenAnimationOptionsPF2e };

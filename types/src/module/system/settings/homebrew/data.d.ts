@@ -27,4 +27,5 @@ interface HomebrewElementsSheetData extends MenuTemplateData {
     damageCategories: Record<MainDamageCategories, string>;
     customDamageTypes: CustomDamageData[];
 }
-export { CustomDamageData, HOMEBREW_TRAIT_KEYS, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey, HomebrewTraitSettingsKey, SECONDARY_TRAIT_RECORDS, };
+export { HOMEBREW_TRAIT_KEYS, SECONDARY_TRAIT_RECORDS };
+export type { CustomDamageData, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey, HomebrewTraitSettingsKey, };

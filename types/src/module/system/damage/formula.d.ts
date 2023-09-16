@@ -23,4 +23,5 @@ declare function createSimpleFormula(terms: DamagePartialTerm[], { doubleDice }?
 declare function parseTermsFromSimpleFormula(formula: string | Roll, options?: {
     rollData: Record<string, unknown>;
 }): DamagePartialTerm[];
-export { AssembledFormula, combinePartialTerms, createSimpleFormula, createDamageFormula, parseTermsFromSimpleFormula };
+export { combinePartialTerms, createDamageFormula, createSimpleFormula, parseTermsFromSimpleFormula };
+export type { AssembledFormula };

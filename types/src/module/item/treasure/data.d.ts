@@ -6,4 +6,4 @@ type TreasureSystemData = PhysicalSystemData & {
         invested?: never;
     };
 };
-export { TreasureSource, TreasureSystemData, TreasureSystemSource };
+export type { TreasureSource, TreasureSystemData, TreasureSystemSource };

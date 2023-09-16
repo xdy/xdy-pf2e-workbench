@@ -6,6 +6,7 @@ import { ActionTrait } from "@item/ability/types.ts";
 import { ItemSourcePF2e, ItemSummaryData } from "@item/data/index.ts";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
+import { RangeData } from "@item/types.ts";
 import { MeasuredTemplatePF2e } from "@module/canvas/index.ts";
 import { ChatMessagePF2e, ItemOriginFlag } from "@module/chat-message/index.ts";
 import { OneToTen, ZeroToTwo } from "@module/data.ts";
@@ -62,6 +63,8 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get unlimited(): boolean;
     get isVariant(): boolean;
     get hasVariants(): boolean;
+    /** Dummy getter for interface alignment with weapons and actions */
+    get range(): RangeData | null;
     get uuid(): ItemUUID;
     /** Given a slot level, compute the actual level the spell will be cast at */
     computeCastRank(slotRank?: number): number;
@@ -119,4 +122,4 @@ interface SpellDamageOptions {
     skipDialog?: boolean;
     target?: ActorPF2e | null;
 }
-export { SpellPF2e, SpellToMessageOptions };
+export { SpellPF2e, type SpellToMessageOptions };

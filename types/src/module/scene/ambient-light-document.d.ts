@@ -1,5 +1,5 @@
-import { AmbientLightPF2e } from "@module/canvas/index.ts";
-import { ScenePF2e } from "./index.ts";
+import type { AmbientLightPF2e } from "@module/canvas/index.ts";
+import type { ScenePF2e } from "./index.ts";
 declare class AmbientLightDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends AmbientLightDocument<TParent> {
     /** Is this light actually a source of darkness? */
     get isDarkness(): boolean;

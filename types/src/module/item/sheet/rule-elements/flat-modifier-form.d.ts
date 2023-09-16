@@ -4,6 +4,7 @@ import { RuleElementForm, RuleElementFormSheetData } from "./base.ts";
 /** Form handler for the flat modifier rule element */
 declare class FlatModifierForm extends RuleElementForm<FlatModifierSource, FlatModifierRuleElement> {
     template: string;
+    get isDamage(): boolean;
     activateListeners(html: HTMLElement): void;
     getData(): Promise<FlatModifierFormSheetData>;
     updateObject(formData: Partial<FlatModifierSource>): void;
@@ -14,9 +15,5 @@ interface FlatModifierFormSheetData extends RuleElementFormSheetData<FlatModifie
     types: Omit<keyof typeof MODIFIER_TYPES, "untyped">[];
     damageCategories: Pick<ConfigPF2e["PF2E"]["damageCategories"], "persistent" | "precision" | "splash">;
     isDamage: boolean;
-    value: {
-        mode: "brackets" | "object" | "primitive";
-        data: unknown;
-    };
 }
 export { FlatModifierForm };

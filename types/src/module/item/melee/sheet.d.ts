@@ -1,8 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ItemSheetPF2e } from "@item/sheet/base.ts";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/sheet/base.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { DamageCategoryUnique } from "@system/damage/types.ts";
 import { MeleePF2e } from "./index.ts";

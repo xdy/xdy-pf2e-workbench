@@ -2,8 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { AbilityItemPF2e } from "@item/ability/document.ts";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
-import { ItemSheetPF2e } from "../sheet/base.ts";
+import { ItemSheetDataPF2e, ItemSheetPF2e } from "../sheet/base.ts";
 import { SelfEffectReference } from "./index.ts";
 export declare class ActionSheetPF2e extends ItemSheetPF2e<AbilityItemPF2e> {
     static get defaultOptions(): DocumentSheetOptions;

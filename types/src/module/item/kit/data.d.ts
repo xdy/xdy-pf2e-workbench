@@ -16,4 +16,4 @@ interface KitSystemSource extends ItemSystemSource {
     level?: never;
 }
 type KitSystemData = KitSystemSource;
-export { KitEntryData, KitSource, KitSystemData, KitSystemSource };
+export type { KitEntryData, KitSource, KitSystemData, KitSystemSource };

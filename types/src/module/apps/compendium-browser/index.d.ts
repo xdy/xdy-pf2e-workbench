@@ -4,36 +4,14 @@
 import { ActionCategory, ActionTrait } from "@item/ability/index.ts";
 import { ActionType } from "@item/data/base.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/index.ts";
-import { UserPF2e } from "@module/user/document.ts";
+import type { UserPF2e } from "@module/user/document.ts";
 import { BrowserTabs, PackInfo, SourceInfo, TabData, TabName } from "./data.ts";
 import { ActionFilters, BestiaryFilters, EquipmentFilters, FeatFilters, HazardFilters, SpellFilters } from "./tabs/data.ts";
-declare class PackLoader {
-    #private;
-    loadedPacks: {
-        Actor: Record<string, {
-            pack: CompendiumCollection;
-            index: CompendiumIndex;
-        } | undefined>;
-        Item: Record<string, {
-            pack: CompendiumCollection;
-            index: CompendiumIndex;
-        } | undefined>;
-    };
-    loadedSources: string[];
-    sourcesSettings: CompendiumBrowserSources;
-    constructor();
-    loadPacks(documentType: "Actor" | "Item", packs: string[], indexFields: string[]): AsyncGenerator<{
-        pack: CompendiumCollection<CompendiumDocument>;
-        index: CompendiumIndex;
-    }, void, unknown>;
-    updateSources(packs: string[]): Promise<void>;
-    reset(): void;
-    hardReset(packs: string[]): Promise<void>;
-}
+import { PackLoader } from "./loader.ts";
 declare class CompendiumBrowser extends Application {
     #private;
     settings: CompendiumBrowserSettings;
-    dataTabsList: readonly ["action", "bestiary", "equipment", "feat", "hazard", "spell"];
+    dataTabsList: readonly ["action", "bestiary", "campaignFeature", "equipment", "feat", "hazard", "spell"];
     navigationTab: Tabs;
     tabs: BrowserTabs;
     packLoader: PackLoader;
@@ -69,14 +47,7 @@ declare class CompendiumBrowser extends Application {
     /** Set drag data and lower opacity of the application window to reveal any tokens */
     protected _onDragStart(event: ElementDragEvent): void;
     protected _onDragOver(event: ElementDragEvent): void;
-    getData(): {
-        user: Active<UserPF2e>;
-        settings?: {
-            settings: CompendiumBrowserSettings;
-            sources: CompendiumBrowserSources;
-        };
-        scrollLimit?: number;
-    };
+    getData(): CompendiumBrowserSheetData;
 }
 type CompendiumBrowserSettings = Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;
 type CompendiumBrowserSourcesList = Record<string, SourceInfo | undefined>;
@@ -86,4 +57,14 @@ interface CompendiumBrowserSources {
     showUnknownSources: boolean;
     sources: CompendiumBrowserSourcesList;
 }
-export { CompendiumBrowser, CompendiumBrowserSettings, CompendiumBrowserSources };
+interface CompendiumBrowserSheetData {
+    user: Active<UserPF2e>;
+    settings?: {
+        settings: CompendiumBrowserSettings;
+        sources: CompendiumBrowserSources;
+    };
+    scrollLimit?: number;
+    showCampaign: boolean;
+}
+export { CompendiumBrowser };
+export type { CompendiumBrowserSettings, CompendiumBrowserSources };

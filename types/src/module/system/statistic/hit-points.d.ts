@@ -1,5 +1,6 @@
-import { CreaturePF2e, HazardPF2e, VehiclePF2e } from "@actor";
-import { BaseStatistic, BaseStatisticTraceData } from "./index.ts";
+import type { CreaturePF2e, HazardPF2e, VehiclePF2e } from "@actor";
+import { BaseStatistic } from "./base.ts";
+import { BaseStatisticTraceData } from "./data.ts";
 declare class HitPointsStatistic extends BaseStatistic {
     #private;
     /** The actor's current hit points */

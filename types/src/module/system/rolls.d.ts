@@ -50,11 +50,6 @@ interface BaseRollContext {
     target?: RollTarget | null;
     /** Any traits for the check. */
     traits?: TraitViewData[];
-    /** Range data related to the check: if not provided, it is acquired from a weapon or melee item (if any) */
-    range?: Maybe<{
-        increment?: Maybe<number>;
-        max?: number;
-    }>;
     /** The outcome a roll (usually relevant only to rerolls) */
     outcome?: (typeof DEGREE_OF_SUCCESS_STRINGS)[number] | null;
     /** The outcome prior to being changed by abilities raising or lowering degree of success */
@@ -64,4 +59,4 @@ interface BaseRollContext {
     /** Skip the roll dialog regardless of user setting  */
     skipDialog?: boolean;
 }
-export { AttackRollParams, BaseRollContext, DamageRollParams, RollDataPF2e, RollParameters, RollTwiceOption };
+export type { AttackRollParams, BaseRollContext, DamageRollParams, RollDataPF2e, RollParameters, RollTwiceOption };

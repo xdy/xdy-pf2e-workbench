@@ -38,7 +38,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     isOfType(type: "physical"): this is PhysicalItemPF2e<TParent>;
     isOfType<T extends "physical" | ItemType>(...types: T[]): this is T extends "physical" ? PhysicalItemPF2e<TParent> : T extends ItemType ? ItemInstances<TParent>[T] : never;
     /** Redirect the deletion of any owned items to ActorPF2e#deleteEmbeddedDocuments for a single workflow */
-    delete(context?: DocumentModificationContext<TParent>): Promise<this>;
+    delete(context?: DocumentModificationContext<TParent>): Promise<this | undefined>;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
     getRollData(): NonNullable<EnrichmentOptionsPF2e["rollData"]>;
@@ -54,6 +54,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     /** A shortcut to `item.toMessage(..., { create: true })`, kept for backward compatibility */
     toChat(event?: JQuery.TriggeredEvent): Promise<ChatMessagePF2e | undefined>;
     protected _initialize(options?: Record<string, unknown>): void;
+    /** If embedded, don't prepare data if the parent's data model hasn't initialized all its properties */
     prepareData(): void;
     /** Ensure the presence of the pf2e flag scope with default properties and values */
     prepareBaseData(): void;

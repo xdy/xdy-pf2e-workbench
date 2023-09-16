@@ -39,4 +39,4 @@ interface EffectSystemData extends Omit<EffectSystemSource, "fromSpell">, Omit<A
     remaining: string;
 }
 type EffectExpiryType = "turn-start" | "turn-end";
-export { EffectExpiryType, EffectFlags, EffectSource, EffectSystemData };
+export type { EffectExpiryType, EffectFlags, EffectSource, EffectSystemData };

@@ -1,5 +1,5 @@
-import { ItemSourcePF2e, MagicItemSource, PhysicalItemSource } from "./index.ts";
 import { ItemSystemData } from "./base.ts";
+import { ItemSourcePF2e, MagicItemSource, PhysicalItemSource } from "./index.ts";
 declare function isItemSystemData(data: unknown): data is ItemSystemData;
 /** Checks if the given item data is a physical item with a quantity and other physical fields. */
 declare function isPhysicalData(source: ItemSourcePF2e): source is PhysicalItemSource;

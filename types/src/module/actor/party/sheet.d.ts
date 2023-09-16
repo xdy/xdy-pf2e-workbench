@@ -2,6 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
+import { HitPointsSummary } from "@actor/base.ts";
 import { ActorSheetPF2e } from "@actor/sheet/base.ts";
 import { ActorSheetDataPF2e, ActorSheetRenderOptionsPF2e } from "@actor/sheet/data-types.ts";
 import { ItemPF2e } from "@item";
@@ -10,6 +11,7 @@ import { Bulk } from "@item/physical/index.ts";
 import { ValueAndMax, ZeroToFour } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { PartyPF2e } from "./document.ts";
+import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 interface PartySheetRenderOptions extends ActorSheetRenderOptionsPF2e {
     actors?: boolean;
 }
@@ -25,13 +27,20 @@ declare class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     activateListeners($html: JQuery<HTMLElement>): void;
     /** Overriden to prevent inclusion of campaign-only item types. Those should get added to their own sheet */
     protected _onDropItemCreate(itemData: ItemSourcePF2e | ItemSourcePF2e[]): Promise<Item<PartyPF2e>[]>;
+    /** Override to allow divvying/outward transfer of items via party member blocks in inventory members sidebar. */
+    protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e & {
+        fromInventory?: boolean;
+    }): Promise<ItemPF2e<ActorPF2e | null>[]>;
     /** Override to not auto-disable fields on a thing meant to be used by players */
     protected _disableFields(_form: HTMLElement): void;
     render(force?: boolean, options?: PartySheetRenderOptions): Promise<this>;
     protected _renderInner(data: Record<string, unknown>, options: RenderOptions): Promise<JQuery<HTMLElement>>;
-    protected _onDropActor(event: ElementDragEvent, data: DropCanvasData<"Actor", PartyPF2e>): Promise<false | void>;
+    protected _onDropActor(event: DragEvent, data: DropCanvasData<"Actor", PartyPF2e>): Promise<false | void>;
 }
 interface PartySheetData extends ActorSheetDataPF2e<PartyPF2e> {
+    /** Is the sheet restricted to players? */
+    playerRestricted: boolean;
+    /** Is the sheet restricted to the current user? */
     restricted: boolean;
     members: MemberBreakdown[];
     overviewSummary: {
@@ -62,6 +71,8 @@ interface SkillData {
 }
 interface MemberBreakdown {
     actor: ActorPF2e;
+    genderPronouns: string | null;
+    blurb: string | null;
     heroPoints: ValueAndMax | null;
     hasBulk: boolean;
     bestSkills: SkillData[];
@@ -80,12 +91,7 @@ interface MemberBreakdown {
         labelFull: string;
         acuity?: string;
     }[];
-    hp: {
-        showValue: boolean;
-        temp: number;
-        value: number;
-        max: number;
-    };
+    hp: HitPointsSummary;
     activities: {
         uuid: string;
         name: string;
@@ -100,4 +106,4 @@ interface LanguageSheetData {
     label: string;
     actors: ActorPF2e[];
 }
-export { PartySheetPF2e, PartySheetRenderOptions };
+export { PartySheetPF2e, type PartySheetRenderOptions };

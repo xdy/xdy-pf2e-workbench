@@ -1,13 +1,13 @@
 import { CreatureSheetData } from "@actor/creature/types.ts";
 import { HitPointsStatistic, PerceptionData } from "@actor/data/base.ts";
 import { MovementType, SaveType, SkillAbbreviation } from "@actor/types.ts";
-import { AbilityItemPF2e, EffectPF2e, ItemPF2e } from "@item";
+import type { AbilityItemPF2e, EffectPF2e, ItemPF2e } from "@item";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import { ZeroToFour } from "@module/data.ts";
 import { TraitTagifyEntry } from "@module/sheet/helpers.ts";
-import { ArmorClassTraceData } from "@system/statistic/armor-class.ts";
+import type { ArmorClassTraceData } from "@system/statistic/index.ts";
 import { NPCAttributes, NPCSaveData, NPCSkillData, NPCSystemData } from "./data.ts";
-import { NPCPF2e, NPCStrike } from "./index.ts";
+import type { NPCPF2e, NPCStrike } from "./index.ts";
 interface ActionsDetails {
     label: string;
     actions: NPCSheetItemData<AbilityItemPF2e<NPCPF2e>>[];
@@ -130,4 +130,4 @@ interface NPCIdentificationSheetData {
     standard: string | null;
     lore: string;
 }
-export { NPCActionSheetData, NPCIdentificationSheetData, NPCSheetData, NPCSheetItemData, NPCSkillSheetData, NPCSpeedSheetData, NPCSpellcastingSheetData, NPCStrikeSheetData, NPCSystemSheetData, VariantCloneParams, };
+export type { NPCActionSheetData, NPCIdentificationSheetData, NPCSheetData, NPCSheetItemData, NPCSkillSheetData, NPCSpeedSheetData, NPCSpellcastingSheetData, NPCStrikeSheetData, NPCSystemSheetData, VariantCloneParams, };

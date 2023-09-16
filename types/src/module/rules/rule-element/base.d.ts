@@ -202,4 +202,4 @@ type RuleElementOptions = {
     /** If data validation fails for any reason, do not emit console warnings */
     suppressWarnings?: boolean;
 };
-export { RuleElementOptions, RuleElementPF2e };
+export { RuleElementPF2e, type RuleElementOptions };

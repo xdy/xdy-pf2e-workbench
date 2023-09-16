@@ -1,11 +1,12 @@
-import { AuraData } from "@actor/types.ts";
-import { TokenPF2e } from "../index.ts";
-import { EffectAreaSquare } from "../../effect-area-square.ts";
+import { AuraAppearanceData, AuraData } from "@actor/types.ts";
 import { ItemTrait } from "@item/data/base.ts";
 import { TokenAuraData } from "@scene/token-document/aura/index.ts";
+import type { EffectAreaSquare } from "../../effect-area-square.ts";
+import type { TokenPF2e } from "../index.ts";
 /** Visual rendering of auras emanated by a token's actor */
 declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     #private;
+    slug: string;
     /** The token associated with this aura */
     token: TokenPF2e;
     /** The radius of the aura in feet */
@@ -14,35 +15,28 @@ declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     radiusPixels: number;
     /** Traits associated with this aura: used to configure collision detection */
     traits: Set<ItemTrait>;
-    /** Border and fill colors in hexadecimal */
-    private colors;
+    /** Border, highlight, and texture data */
+    appearance: AuraAppearanceData;
     /** Standard line thickness for circle shape and label markers */
     static readonly LINE_THICKNESS = 3;
+    border: import("pixi.js").Graphics;
+    texture: PIXI.Texture | null;
     constructor(params: AuraRendererParams);
     get bounds(): PIXI.Rectangle;
-    /** The center of an aura is the center of its originating token */
-    get center(): Point;
     /** ID of `GridHighlight` container for this aura's token */
-    private get highlightId();
+    get highlightLayer(): GridHighlight | null;
     /** The squares covered by this aura */
     get squares(): EffectAreaSquare[];
-    /**
-     * Whether this aura should be rendered to the user:
-     * The scene must be active, or a GM must be the only user logged in. If rendering for a player, the aura must
-     * emanate from an ally.
-     */
-    get shouldRender(): boolean;
-    /** Draw the aura's circular emanation */
-    draw(): void;
+    /** Whether this aura's parent token is in an active encounter */
+    get inEncounter(): boolean;
+    /** Draw the aura's border and texture */
+    draw(showBorder: boolean): Promise<void>;
     /** Highlight the affected grid squares of this aura and indicate the radius */
     highlight(): void;
 }
-interface TokenAuraColors {
-    border: number;
-    fill: number;
-}
 interface AuraRendererParams extends Omit<AuraData, "effects" | "traits"> {
+    slug: string;
     token: TokenPF2e;
     traits: Set<ItemTrait>;
 }
-export { AuraRenderer, TokenAuraColors };
+export { AuraRenderer };

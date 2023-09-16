@@ -1,9 +1,9 @@
-import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
+import type { ActorPF2e } from "@actor";
+import type { ItemPF2e } from "@item";
 import { AbstractEffectPF2e, EffectBadge } from "@item/abstract-effect/index.ts";
 import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
-import { UserPF2e } from "@module/user/index.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
+import type { UserPF2e } from "@module/user/index.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { ConditionSource, ConditionSystemData, PersistentDamageData } from "./data.ts";
 import { ConditionKey, ConditionSlug } from "./types.ts";
 declare class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
@@ -58,4 +58,5 @@ interface PersistentDamagePF2e<TParent extends ActorPF2e | null> extends Conditi
 interface ConditionModificationContext<TParent extends ActorPF2e | null> extends DocumentModificationContext<TParent> {
     conditionValue?: number | null;
 }
-export { ConditionModificationContext, ConditionPF2e, PersistentDamagePF2e };
+export { ConditionPF2e };
+export type { ConditionModificationContext, PersistentDamagePF2e };

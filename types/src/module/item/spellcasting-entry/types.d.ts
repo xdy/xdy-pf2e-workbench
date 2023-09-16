@@ -95,4 +95,4 @@ interface ActiveSpell {
     /** Is the spell not actually of this level? */
     virtual?: boolean;
 }
-export { ActiveSpell, BaseSpellcastingEntry, CastOptions, SpellPrepEntry, SpellcastingCategory, SpellcastingEntry, SpellcastingEntryPF2eCastOptions, SpellcastingSheetData, SpellcastingSlotRank, };
+export type { ActiveSpell, BaseSpellcastingEntry, CastOptions, SpellPrepEntry, SpellcastingCategory, SpellcastingEntry, SpellcastingEntryPF2eCastOptions, SpellcastingSheetData, SpellcastingSlotRank, };

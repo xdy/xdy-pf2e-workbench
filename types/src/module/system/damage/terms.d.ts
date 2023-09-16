@@ -101,4 +101,5 @@ declare class InstancePool extends PoolTerm {
 interface InstancePool extends PoolTerm {
     rolls: DamageInstance[];
 }
-export { ArithmeticExpression, Grouping, GroupingData, InstancePool, IntermediateDie };
+export { ArithmeticExpression, Grouping, InstancePool, IntermediateDie };
+export type { GroupingData };

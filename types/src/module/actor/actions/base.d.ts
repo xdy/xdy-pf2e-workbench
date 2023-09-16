@@ -46,4 +46,5 @@ declare abstract class BaseAction<TData extends BaseActionVariantData, TAction e
     use(options?: Partial<ActionUseOptions>): Promise<unknown>;
     protected abstract toActionVariant(data?: TData): TAction;
 }
-export { BaseAction, BaseActionData, BaseActionVariant, BaseActionVariantData };
+export { BaseAction, BaseActionVariant };
+export type { BaseActionData, BaseActionVariantData };

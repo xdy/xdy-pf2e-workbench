@@ -4,7 +4,7 @@
 import { PickableThing, PickAThingConstructorArgs, PickAThingPrompt, PromptTemplateData } from "@module/apps/pick-a-thing-prompt.ts";
 import { PredicatePF2e } from "@system/predication.ts";
 /** Prompt the user for a selection among a set of options */
-export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | object> {
+declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | object> {
     /** The prompt statement to present the user in this application's window */
     prompt: string;
     /** Does this choice set contain items? If true, an item-drop zone may be added */
@@ -26,6 +26,9 @@ export declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | 
     protected _onDrop(event: ElementDragEvent): Promise<void>;
     protected _canDragDrop(): boolean;
 }
+interface ChoiceSetPrompt extends PickAThingPrompt<string | number | object> {
+    getSelection: (event: MouseEvent) => ChoiceSetChoice | null;
+}
 interface ChoiceSetPromptData extends PickAThingConstructorArgs<string | number | object> {
     prompt: string;
     choices?: PickableThing[];
@@ -35,10 +38,14 @@ interface ChoiceSetPromptData extends PickAThingConstructorArgs<string | number 
         predicate: PredicatePF2e;
     } | null;
 }
+interface ChoiceSetChoice extends PickableThing {
+    hasUUID: boolean;
+}
 interface ChoiceSetTemplateData extends PromptTemplateData {
     prompt: string;
-    choices: PickableThing[];
+    choices: ChoiceSetChoice[];
     includeDropZone: boolean;
     allowNoSelection: boolean;
+    containsItems: boolean;
 }
-export {};
+export { ChoiceSetPrompt };

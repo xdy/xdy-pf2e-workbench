@@ -6,7 +6,7 @@ import { WeaponTrait } from "@item/weapon/types.ts";
 import { Size, TraitsWithRarity, ValuesList } from "@module/data.ts";
 import { ActionCost, BaseItemSourcePF2e, Frequency, ItemSystemData, ItemSystemSource } from "../data/base.ts";
 import type { ITEM_CARRY_TYPES } from "../data/values.ts";
-import { CoinsPF2e } from "./helpers.ts";
+import type { CoinsPF2e } from "./helpers.ts";
 import { PhysicalItemType, PreciousMaterialGrade, PreciousMaterialType } from "./types.ts";
 import { UsageDetails } from "./usage.ts";
 type ItemCarryType = SetElement<typeof ITEM_CARRY_TYPES>;
@@ -38,12 +38,7 @@ interface PhysicalSystemSource extends ItemSystemSource {
         value: string;
     };
     containerId: string | null;
-    preciousMaterial: {
-        value: Exclude<PreciousMaterialType, "dragonhide" | "grisantian-pelt"> | null;
-    };
-    preciousMaterialGrade: {
-        value: PreciousMaterialGrade | null;
-    };
+    material: ItemMaterialData;
     size: Size;
     usage: {
         value: string;
@@ -55,6 +50,7 @@ interface PhysicalSystemData extends PhysicalSystemSource, Omit<ItemSystemData, 
     hp: PhysicalItemHitPoints;
     price: Price;
     bulk: BulkData;
+    material: ItemMaterialData;
     traits: PhysicalItemTraits;
     temporary: boolean;
     identification: IdentificationData;
@@ -105,6 +101,10 @@ type PhysicalItemTrait = ArmorTrait | ConsumableTrait | EquipmentTrait | WeaponT
 interface PhysicalItemTraits<T extends PhysicalItemTrait = PhysicalItemTrait> extends TraitsWithRarity<T> {
     otherTags: string[];
 }
+interface ItemMaterialData {
+    grade: PreciousMaterialGrade | null;
+    type: PreciousMaterialType | null;
+}
 interface ItemActivation {
     id: string;
     description: {
@@ -141,4 +141,4 @@ interface Price extends PartialPrice {
     value: CoinsPF2e;
     per: number;
 }
-export { BasePhysicalItemSource, Coins, EquippedData, IdentificationData, IdentificationStatus, IdentifiedData, Investable, ItemActivation, ItemCarryType, MystifiedData, PartialPrice, PhysicalItemHPSource, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, Price, };
+export type { BasePhysicalItemSource, Coins, EquippedData, IdentificationData, IdentificationStatus, IdentifiedData, Investable, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PartialPrice, PhysicalItemHPSource, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, Price, };

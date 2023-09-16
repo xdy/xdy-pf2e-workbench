@@ -4,5 +4,16 @@ import { MigrationBase } from "../base.ts";
 export declare class Migration813NormalizeColdIron extends MigrationBase {
     #private;
     static version: number;
-    updateItem(source: ItemSourcePF2e): Promise<void>;
+    updateItem(source: MaybeWithOldMaterialData): Promise<void>;
 }
+type MaybeWithOldMaterialData = ItemSourcePF2e & {
+    system: {
+        preciousMaterial?: {
+            value?: unknown;
+        };
+        preciousMaterialGrade?: {
+            value?: unknown;
+        };
+    };
+};
+export {};

@@ -30,4 +30,4 @@ interface CampaignFeatureSystemData extends CampaignFeatureSystemSource {
     frequency?: Frequency;
 }
 type KingmakerTraits = TraitsWithRarity<KingmakerTrait>;
-export { CampaignFeatureSource, CampaignFeatureSystemData, CampaignFeatureSystemSource, KingmakerTraits, PrerequisiteTagData, };
+export type { CampaignFeatureSource, CampaignFeatureSystemData, CampaignFeatureSystemSource, KingmakerTraits, PrerequisiteTagData, };

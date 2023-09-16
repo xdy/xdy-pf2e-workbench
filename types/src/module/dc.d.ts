@@ -38,4 +38,5 @@ declare function combineDCAdjustments(first: DCAdjustment, second: DCAdjustment)
  * the table at https://2e.aonprd.com/Rules.aspx?ID=555
  */
 declare function createDifficultyScale(dc: number, startAt: DCAdjustment): number[];
-export { DCAdjustment, DCOptions, NegativeDCAdjustment, PositiveDCAdjustment, adjustDC, adjustDCByRarity, calculateDC, calculateSimpleDC, calculateSpellDC, combineDCAdjustments, createDifficultyScale, rarityToDCAdjustment, };
+export { adjustDC, adjustDCByRarity, calculateDC, calculateSimpleDC, calculateSpellDC, combineDCAdjustments, createDifficultyScale, rarityToDCAdjustment, };
+export type { DCAdjustment, DCOptions, NegativeDCAdjustment, PositiveDCAdjustment };

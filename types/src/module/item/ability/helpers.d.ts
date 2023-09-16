@@ -1,5 +1,6 @@
 import { ItemPF2e } from "@item";
 import type { FeatSheetPF2e } from "@item/feat/sheet.ts";
+import { RangeData } from "@item/types.ts";
 import { AbilitySystemData, SelfEffectReference } from "./data.ts";
 import type { ActionSheetPF2e } from "./sheet.ts";
 interface SourceWithActionData {
@@ -26,4 +27,5 @@ interface SelfEffectSheetReference extends SelfEffectReference {
 }
 /** Save data from an effect item dropped on an ability or feat sheet. */
 declare function handleSelfEffectDrop(sheet: ActionSheetPF2e | FeatSheetPF2e, event: ElementDragEvent): Promise<void>;
-export { activateActionSheetListeners, createSelfEffectSheetData, handleSelfEffectDrop, normalizeActionChangeData };
+declare function createActionRangeLabel(range: Maybe<RangeData>): string | null;
+export { activateActionSheetListeners, createActionRangeLabel, createSelfEffectSheetData, handleSelfEffectDrop, normalizeActionChangeData, };

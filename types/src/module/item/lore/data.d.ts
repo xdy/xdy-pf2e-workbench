@@ -16,4 +16,4 @@ interface LoreSystemSource extends ItemSystemSource {
     traits?: never;
 }
 type LoreSystemData = LoreSystemSource;
-export { LoreSource, LoreSystemData };
+export type { LoreSource, LoreSystemData };

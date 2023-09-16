@@ -1,6 +1,6 @@
 import { ResistanceType } from "@actor/types.ts";
 import { DamageRollFlag } from "@module/chat-message/index.ts";
-import { UserPF2e } from "@module/user/index.ts";
+import type { UserPF2e } from "@module/user/index.ts";
 import { DegreeOfSuccessIndex } from "@system/degree-of-success.ts";
 import { RollDataPF2e } from "@system/rolls.ts";
 import type Peggy from "peggy";
@@ -114,4 +114,4 @@ interface DamageRollDataPF2e extends RollDataPF2e, AbstractDamageRollData {
     }[];
 }
 type DamageInstanceData = AbstractDamageRollData;
-export { DamageInstance, DamageRoll, DamageRollDataPF2e };
+export { DamageInstance, DamageRoll, type DamageRollDataPF2e };

@@ -1,24 +1,22 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor";
+import { ActorPF2e, type PartyPF2e } from "@actor";
 import { FeatGroup } from "@actor/character/feats.ts";
 import { ActorSheetPF2e } from "@actor/sheet/base.ts";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
-import { CampaignFeaturePF2e, ItemPF2e } from "@item";
+import { type CampaignFeaturePF2e, ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ValueAndMax } from "@module/data.ts";
-import { SheetOptions } from "@module/sheet/helpers.ts";
+import { SheetOption, SheetOptions } from "@module/sheet/helpers.ts";
 import { Statistic } from "@system/statistic/index.ts";
-import { PartyPF2e } from "../document.ts";
 import { Kingdom } from "./model.ts";
-import { KingdomAbilityData, KingdomData, KingdomLeadershipData } from "./types.ts";
-declare const KINGDOM_TRAITS: string[];
-type KingdomTrait = (typeof KINGDOM_TRAITS)[number];
+import { KingdomAbilityData, KingdomData, KingdomLeadershipData, KingdomSettlementData } from "./types.ts";
 declare class KingdomSheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     #private;
-    protected selectedFilter: KingdomTrait | null;
+    /** The current selected activity filter, which doubles as an active kingdom phase */
+    protected selectedFilter: string | null;
     constructor(actor: PartyPF2e, options?: Partial<ActorSheetOptions>);
     get kingdom(): Kingdom;
     get title(): string;
@@ -54,7 +52,10 @@ interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
     }[];
     skills: Statistic[];
     feats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>[];
-    actionFilterChoices: SheetOptions;
+    actionFilterChoices: SheetOption[];
+    settlementTypes: Record<string, string>;
+    settlements: SettlementSheetData[];
+    eventText: string;
 }
 interface LeaderSheetData extends KingdomLeadershipData {
     actor: ActorPF2e | null;
@@ -62,11 +63,31 @@ interface LeaderSheetData extends KingdomLeadershipData {
     slug: string;
     label: string;
     abilityLabel: string;
+    penaltyLabel: string;
 }
 interface CommoditySheetData extends ValueAndMax {
     type: string;
     label: string;
     /** Worksite data (if it exists for the commodity type) */
-    workSites: Kingdom["resources"]["workSites"]["ore"] | null;
+    workSites: {
+        label: string;
+        description: string;
+        hasResource: boolean;
+        value: number;
+        resource?: number;
+    };
 }
+type SettlementSheetData = Omit<KingdomSettlementData, "storage"> & {
+    id: string;
+    editing: boolean;
+    blocks: number | string;
+    levelRange: string;
+    populationRange: string;
+    typeLabel: string;
+    storage: {
+        type: string;
+        label: string;
+        value: number;
+    }[];
+};
 export { KingdomSheetPF2e };

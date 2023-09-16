@@ -1,6 +1,5 @@
 import { BaseItemSourcePF2e, ItemFlagsPF2e, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/data/base.ts";
-import { PreciousMaterialGrade } from "@item/physical/types.ts";
-import { WeaponMaterialType } from "@item/weapon/types.ts";
+import { WeaponMaterialData } from "@item/weapon/data.ts";
 import { DamageType } from "@system/damage/types.ts";
 type MeleeSource = BaseItemSourcePF2e<"melee", MeleeSystemSource> & {
     flags: DeepPartial<MeleeFlags>;
@@ -28,12 +27,7 @@ interface MeleeSystemSource extends ItemSystemSource {
     };
 }
 interface MeleeSystemData extends MeleeSystemSource, Omit<ItemSystemData, "level" | "traits"> {
-    material: {
-        precious: {
-            type: WeaponMaterialType;
-            grade: PreciousMaterialGrade;
-        } | null;
-    };
+    material: WeaponMaterialData;
 }
 interface NPCAttackDamageSource {
     damage: string;
@@ -43,4 +37,4 @@ interface NPCAttackDamageSource {
 type NPCAttackDamage = Required<NPCAttackDamageSource>;
 export type NPCAttackTrait = keyof ConfigPF2e["PF2E"]["npcAttackTraits"];
 export type NPCAttackTraits = ItemTraits<NPCAttackTrait>;
-export { NPCAttackDamage, MeleeFlags, MeleeSource, MeleeSystemData, MeleeSystemSource };
+export type { MeleeFlags, MeleeSource, MeleeSystemData, MeleeSystemSource, NPCAttackDamage };

@@ -1,11 +1,11 @@
-import { CreaturePF2e, FamiliarPF2e } from "@actor";
+import { ActorPF2e, CreaturePF2e, FamiliarPF2e } from "@actor";
 import { CreatureSpeeds, LabeledSpeed } from "@actor/creature/data.ts";
 import { CreatureUpdateContext } from "@actor/creature/types.ts";
 import { StrikeData } from "@actor/data/base.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
-import { AttackItem, AttributeString, MovementType, RollContext, RollContextParams } from "@actor/types.ts";
-import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, WeaponPF2e } from "@item";
+import { AttributeString, MovementType, RollContext, RollContextParams } from "@actor/types.ts";
+import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, ItemPF2e, WeaponPF2e } from "@item";
 import { ItemType } from "@item/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { ZeroToTwo } from "@module/data.ts";
@@ -95,7 +95,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
         success: string;
     };
     /** Modify this weapon from AdjustStrike rule elements */
-    protected getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
+    protected getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends ItemPF2e<ActorPF2e> | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     consumeAmmo(weapon: WeaponPF2e<this>, params: RollParameters): boolean;
     /** Prepare stored and synthetic martial proficiencies */
     prepareMartialProficiencies(): void;

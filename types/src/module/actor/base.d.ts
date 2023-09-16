@@ -1,19 +1,20 @@
-import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AttackItem, AuraData, CheckContext, CheckContextParams, DamageRollContextParams, EmbeddedItemInstances, RollContext, RollContextParams, SaveType } from "@actor/types.ts";
+import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AuraData, CheckContext, CheckContextParams, DamageRollContextParams, EmbeddedItemInstances, RollContext, RollContextParams, SaveType } from "@actor/types.ts";
 import { AbstractEffectPF2e, ArmorPF2e, ContainerPF2e, ItemPF2e, PhysicalItemPF2e } from "@item";
 import { ConditionKey, ConditionSlug, ConditionSource, type ConditionPF2e } from "@item/condition/index.ts";
 import { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/data/index.ts";
 import { EffectSource } from "@item/effect/data.ts";
 import type { ActiveEffectPF2e } from "@module/active-effect.ts";
-import { TokenPF2e } from "@module/canvas/index.ts";
+import type { TokenPF2e } from "@module/canvas/index.ts";
 import { AppliedDamageFlag } from "@module/chat-message/index.ts";
 import { Size } from "@module/data.ts";
-import { ScenePF2e, TokenDocumentPF2e, UserPF2e } from "@module/documents.ts";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import { RuleElementSynthetics } from "@module/rules/index.ts";
 import { RuleElementPF2e } from "@module/rules/rule-element/base.ts";
+import type { UserPF2e } from "@module/user/document.ts";
+import type { ScenePF2e } from "@scene/document.ts";
+import { TokenDocumentPF2e } from "@scene/token-document/document.ts";
 import { DamageType } from "@system/damage/types.ts";
-import { ArmorStatistic } from "@system/statistic/armor-class.ts";
-import { Statistic, StatisticCheck, StatisticDifficultyClass } from "@system/statistic/index.ts";
+import type { ArmorStatistic, Statistic, StatisticCheck, StatisticDifficultyClass } from "@system/statistic/index.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ActorConditions } from "./conditions.ts";
 import { Abilities, CreatureSkills, VisionLevel } from "./creature/data.ts";
@@ -160,11 +161,11 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     prepareDerivedData(): void;
     /** Set defaults for this actor's prototype token */
     private preparePrototypeToken;
-    protected getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
+    protected getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends ItemPF2e<ActorPF2e> | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     /** Calculate attack roll targeting data, including the target's DC. */
-    getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends AttackItem | null>(params: CheckContextParams<TStatistic, TItem>): Promise<CheckContext<this, TStatistic, TItem>>;
+    getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends ItemPF2e<ActorPF2e> | null>(params: CheckContextParams<TStatistic, TItem>): Promise<CheckContext<this, TStatistic, TItem>>;
     /** Acquire additional data for a damage roll. */
-    getDamageRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(params: DamageRollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
+    getDamageRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends ItemPF2e<ActorPF2e> | null>(params: DamageRollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     /** Toggle the provided roll option (swapping it from true to false or vice versa). */
     toggleRollOption(domain: string, option: string, value?: boolean): Promise<boolean | null>;
     toggleRollOption(domain: string, option: string, itemId?: string | null, value?: boolean, suboption?: string | null): Promise<boolean | null>;
@@ -294,4 +295,5 @@ interface ActorUpdateContext<TParent extends TokenDocumentPF2e | null> extends D
 }
 /** A `Proxy` to to get Foundry to construct `ActorPF2e` subclasses */
 declare const ActorProxyPF2e: typeof ActorPF2e;
-export { ActorPF2e, ActorProxyPF2e, ActorUpdateContext, HitPointsSummary };
+export { ActorPF2e, ActorProxyPF2e };
+export type { ActorUpdateContext, HitPointsSummary };

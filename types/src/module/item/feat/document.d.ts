@@ -37,5 +37,7 @@ declare class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
 interface FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly _source: FeatSource;
     system: FeatSystemData;
+    /** Interface alignment with other "attack items" */
+    readonly range?: never;
 }
 export { FeatPF2e };

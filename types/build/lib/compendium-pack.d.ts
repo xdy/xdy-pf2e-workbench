@@ -2,8 +2,8 @@ import type { ActorSourcePF2e } from "@actor/data/index.ts";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import { PackError } from "./helpers.ts";
-import { PackEntry } from "./types.ts";
 import { DBFolder } from "./level-database.ts";
+import { PackEntry } from "./types.ts";
 interface PackMetadata {
     system: string;
     name: string;
@@ -50,4 +50,5 @@ interface ConvertUUIDOptions {
     to: "id" | "name";
     map: Map<string, Map<string, string>>;
 }
-export { CompendiumPack, PackError, PackMetadata, isItemSource, isActorSource, REMaybeWithUUIDs };
+export { CompendiumPack, PackError, isActorSource, isItemSource };
+export type { PackMetadata, REMaybeWithUUIDs };

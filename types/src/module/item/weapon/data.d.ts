@@ -1,6 +1,6 @@
 import { AttributeString } from "@actor/types.ts";
 import { ItemFlagsPF2e } from "@item/data/base.ts";
-import { BasePhysicalItemSource, Investable, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, UsageDetails } from "@item/physical/index.ts";
+import { BasePhysicalItemSource, Investable, ItemMaterialData, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, UsageDetails } from "@item/physical/index.ts";
 import { OneToFour, ZeroToFour, ZeroToThree } from "@module/data.ts";
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import { WeaponTraitToggles } from "./helpers.ts";
@@ -47,11 +47,6 @@ interface WeaponPersistentDamage {
     /** Usually the same as the weapon's own base damage type, but open for the user to change */
     type: DamageType;
 }
-interface WeaponRuneData {
-    potency: OneToFour | null;
-    striking: StrikingRuneType | null;
-    property: Record<OneToFour, WeaponPropertyRuneType | null>;
-}
 /** A weapon can either be unspecific or specific along with baseline material and runes */
 type SpecificWeaponData = {
     value: false;
@@ -64,7 +59,10 @@ type SpecificWeaponData = {
             grade: PreciousMaterialGrade;
         };
     };
-    runes: Omit<WeaponRuneData, "property">;
+    runes: {
+        potency: ZeroToFour;
+        striking: StrikingRuneType | null;
+    };
 };
 interface WeaponPropertyRuneSlot {
     value: WeaponPropertyRuneType | null;
@@ -112,9 +110,7 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     propertyRune2: WeaponPropertyRuneSlot;
     propertyRune3: WeaponPropertyRuneSlot;
     propertyRune4: WeaponPropertyRuneSlot;
-    preciousMaterial: {
-        value: WeaponMaterialType | null;
-    };
+    material: WeaponMaterialData;
     property1: {
         value: string;
         dice: number;
@@ -127,7 +123,10 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     };
     selectedAmmoId: string | null;
 }
-interface WeaponSystemData extends Omit<WeaponSystemSource, "hp" | "identification" | "price" | "temporary">, Investable<PhysicalSystemData> {
+interface WeaponMaterialData extends ItemMaterialData {
+    type: WeaponMaterialType | null;
+}
+interface WeaponSystemData extends Omit<WeaponSystemSource, "hp" | "identification" | "price" | "temporary">, Omit<Investable<PhysicalSystemData>, "material"> {
     traits: WeaponTraits;
     baseItem: BaseWeaponType | null;
     maxRange: number | null;
@@ -138,13 +137,7 @@ interface WeaponSystemData extends Omit<WeaponSystemSource, "hp" | "identificati
         /** A display label for use in any view */
         label: string | null;
     };
-    runes: {
-        potency: ZeroToFour;
-        striking: ZeroToThree;
-        property: WeaponPropertyRuneType[];
-        effects: [];
-    };
-    material: WeaponMaterialData;
+    runes: WeaponRuneData;
     usage: WeaponUsageDetails;
     meleeUsage?: Required<ComboWeaponMeleeUsage>;
 }
@@ -153,12 +146,11 @@ interface WeaponTraits extends WeaponTraitsSource {
     otherTags: OtherWeaponTag[];
     toggles: WeaponTraitToggles;
 }
-interface WeaponMaterialData {
-    /** The precious material of which this weapon is composed */
-    precious: {
-        type: WeaponMaterialType;
-        grade: PreciousMaterialGrade;
-    } | null;
+interface WeaponRuneData {
+    potency: ZeroToFour;
+    striking: ZeroToThree;
+    property: WeaponPropertyRuneType[];
+    effects: WeaponPropertyRuneType[];
 }
 interface ComboWeaponMeleeUsage {
     damage: {
@@ -172,4 +164,4 @@ interface ComboWeaponMeleeUsage {
         versatile: DamageType | null;
     };
 }
-export { ComboWeaponMeleeUsage, WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponPersistentDamage, WeaponPropertyRuneSlot, WeaponRuneData, WeaponSource, WeaponSystemData, WeaponSystemSource, };
+export type { ComboWeaponMeleeUsage, WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponPersistentDamage, WeaponPropertyRuneSlot, WeaponRuneData, WeaponSource, WeaponSystemData, WeaponSystemSource, };

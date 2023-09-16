@@ -11,4 +11,4 @@ type WeaponRangeIncrement = SetElement<typeof WEAPON_RANGES>;
 type WeaponReloadTime = "-" | "0" | "1" | "2" | "3" | "10";
 type StrikingRuneType = "striking" | "greaterStriking" | "majorStriking";
 type WeaponMaterialType = Exclude<PreciousMaterialType, "dragonhide" | "grisantian-pelt">;
-export { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, StrikingRuneType, WeaponCategory, WeaponGroup, WeaponMaterialType, WeaponPropertyRuneType, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait, };
+export type { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, StrikingRuneType, WeaponCategory, WeaponGroup, WeaponMaterialType, WeaponPropertyRuneType, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait, };

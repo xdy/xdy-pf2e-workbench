@@ -34,6 +34,8 @@ declare class TextEditorPF2e extends TextEditor {
 }
 interface EnrichmentOptionsPF2e extends EnrichmentOptions {
     rollData?: RollDataPF2e;
+    /** Whether to run the enriched string through `UserVisiblity.process` */
+    processVisibility?: boolean;
 }
 interface RollDataPF2e {
     actor?: ActorPF2e | null;
@@ -54,4 +56,4 @@ interface ConvertXMLNodeOptions {
     /** Any additional classes to add to the span element */
     classes?: string[];
 }
-export { EnrichmentOptionsPF2e, TextEditorPF2e };
+export { TextEditorPF2e, type EnrichmentOptionsPF2e };

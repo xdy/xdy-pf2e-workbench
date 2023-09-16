@@ -1,7 +1,7 @@
-import { SkillLongForm } from "@actor/types.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
-import { EncounterPF2e } from "./index.ts";
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
+import type { SkillLongForm } from "@actor/types.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
+import type { EncounterPF2e } from "./index.ts";
 declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e | null, TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Combatant<TParent, TTokenDocument> {
     get encounter(): TParent;
     /** The round this combatant last had a turn */
@@ -53,4 +53,5 @@ interface CombatantFlags extends DocumentFlags {
 type RolledCombatant<TEncounter extends EncounterPF2e> = CombatantPF2e<TEncounter, TokenDocumentPF2e> & {
     initiative: number;
 };
-export { CombatantPF2e, CombatantFlags, RolledCombatant };
+export { CombatantPF2e };
+export type { CombatantFlags, RolledCombatant };

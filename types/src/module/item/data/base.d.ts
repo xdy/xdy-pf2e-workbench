@@ -73,4 +73,4 @@ interface FrequencySource {
 interface Frequency extends FrequencySource {
     value: number;
 }
-export { ActionCost, ActionType, BaseItemSourcePF2e, Frequency, FrequencyInterval, FrequencySource, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, };
+export type { ActionCost, ActionType, BaseItemSourcePF2e, Frequency, FrequencyInterval, FrequencySource, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, };

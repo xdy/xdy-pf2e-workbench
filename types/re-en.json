@@ -49,6 +49,25 @@
                     "Title": "Meteor Shot"
                 }
             },
+            "OozeAmmunition": {
+                "CriticalHitText": "On a critical hit, the creature is @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} for 1 round in addition to the other effects.",
+                "Greater": {
+                    "Text": "The creature takes a -10-foot penalty to Speed and @Damage[3d4[persistent,acid]] damage until it ends the effects. The target can end the effects by @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escaping} (DC 29) the sticky foam. Other creatures can provide the actions, although doing so deals half the ammunition's persistent acid damage to the assisting creature. A creature that ends the effect still takes the persistent damage that turn. @UUID[Compendium.pf2e.equipment-effects.Item.6Pwdim01PH447CeS]{Effect: Ooze Ammunition (Greater)}",
+                    "Title": "Ooze Ammunition (Greater)"
+                },
+                "Lesser": {
+                    "Text": "The creature takes a -5-foot penalty to Speed and @Damage[1d4[persistent,acid]] damage until it ends the effects. The target can end the effects by @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escaping} (DC 16) the sticky foam. Other creatures can provide the actions, although doing so deals half the ammunition's persistent acid damage to the assisting creature. A creature that ends the effect still takes the persistent damage that turn. @UUID[Compendium.pf2e.equipment-effects.Item.FPvMbKX8sXM9fGJT]{Effect: Ooze Ammunition (Lesser)}",
+                    "Title": "Ooze Ammunition (Lesser)"
+                },
+                "Major": {
+                    "Text": "The creature takes a -15-foot penalty to Speed and @Damage[4d4[persistent,acid]] damage until it ends the effects. The target can end the effects by @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escaping} (DC 38) the sticky foam. Other creatures can provide the actions, although doing so deals half the ammunition's persistent acid damage to the assisting creature. A creature that ends the effect still takes the persistent damage that turn. @UUID[Compendium.pf2e.equipment-effects.Item.UjAJUFMfH0OWWwQS]{Effect: Ooze Ammunition (Major)}",
+                    "Title": "Ooze Ammunition (Major)"
+                },
+                "Moderate": {
+                    "Text": "The creature takes a -10-foot penalty to Speed and @Damage[2d4[persistent,acid]] damage until it ends the effects. The target can end the effects by @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escaping} (DC 20) the sticky foam. Other creatures can provide the actions, although doing so deals half the ammunition's persistent acid damage to the assisting creature. A creature that ends the effect still takes the persistent damage that turn. @UUID[Compendium.pf2e.equipment-effects.Item.6c4o7ypWWnZKPy5b]{Effect: Ooze Ammunition (Moderate)}",
+                    "Title": "Ooze Ammunition (Moderate)"
+                }
+            },
             "ShiningAmmunition": {
                 "Text": "The ammunition sheds bright light in a 20-foot radius (and dim light to the next 20 feet) for 10 minutes. If it hits a target, it sticks, causing the target to shed light in the same radius. @UUID[Compendium.pf2e.equipment-effects.Item.Sf6UO6vgCeicggOK]{Effect: Shining Ammunition}",
                 "Title": "Shining Ammunition"
@@ -551,6 +570,14 @@
                 "SixfoldFlurry": "Strikes not taken?",
                 "SuspendedAnimationEnter": "Enter Suspended Animation",
                 "SuspendedAnimationExit": "Exit Suspended Animation"
+            },
+            "Capritellix": {
+                "ShiftMood": {
+                    "Angry": "Angry",
+                    "Gregarious": "Gregarious",
+                    "Serene": "Serene",
+                    "Sly": "Sly"
+                }
             },
             "Charge": {
                 "AtLeastTen": "Moved at Least 10 feet"
@@ -1243,8 +1270,18 @@
                 "TwoActions": "Two Actions"
             },
             "AdjustDegreeOfSuccess": {
+                "Athletics": {
+                    "Climb": {
+                        "SuccessBetter": "If you roll a success on an Athletics check to Climb you get a critical success instead."
+                    }
+                },
                 "Squeeze": {
                     "CriticalFailureSuccessBetter": "When you roll a critical failure on a check to Squeeze, you get a failure instead, and when you roll a success, you get a critical success instead."
+                },
+                "Survival": {
+                    "SenseDirection": {
+                        "SuccessBetter": "If you roll a success on an Survival check to Sense Direction you get a critical success instead."
+                    }
                 }
             },
             "AdoptedAncestry": {
@@ -1734,6 +1771,12 @@
                         "FearLabel": "Moderate Bravo's Brew (Vs. Fear)"
                     }
                 },
+                "BroadleafShield": {
+                    "Void": "Pink (Void)",
+                    "Fire": "Green (Fire)",
+                    "Poison": "Orange (Poison)",
+                    "Cold": "Brown (Cold)"
+                },
                 "DeckOfDestiny": {
                     "MatchingSuitPrompt": "Is the drawn card's suit related the check?",
                     "WealOrWoePrompt": "Select Weal or Woe."
@@ -2030,6 +2073,9 @@
                     "Saws": "Saws (Slashing)",
                     "Spike": "Spike (Piercing)",
                     "Vitriol": "Vitriol (Acid)"
+                },
+                "Overdrive": {
+                    "DamageTypePrompt": "Deal fire damage with overdrive?"
                 }
             },
             "Investigator": {
@@ -2041,6 +2087,7 @@
                 }
             },
             "Kineticist": {
+                "GateAttenuator": "Gate Attenuator",
                 "Impulse": {
                     "ElementalBlast": {
                         "Label": {
@@ -2107,7 +2154,8 @@
                 "Exit": "Exit",
                 "ResistanceType": "Resistance Type",
                 "SecondAttempt": "Second Attempt",
-                "ThirdAttempt": "Third Attempt"
+                "ThirdAttempt": "Third Attempt",
+                "WeaknessType": "Weakness Type"
             },
             "Leshy": {
                 "Seedpod": {
@@ -2122,9 +2170,11 @@
                     "Note": "The creature is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} until the end of your next turn unless it succeeds at a @Check[type:fortitude|dc:resolve(@actor.attributes.spellDC.value)] save against your spell DC."
                 }
             },
+            "LitAlicornLance": "Alicorn Lance is lit",
             "LitCandle": "Candle is lit",
             "LitCandlecap": "Candlecap is lit",
             "LitFirePoi": "Fire Poi is lit",
+            "LitFulminatingSpear": "Fulminating Spear is lit",
             "LitTorch": "Torch is lit",
             "Lizardfolk": {
                 "GuidedByTheStars": {
@@ -2263,7 +2313,7 @@
                     "Prompt": "Choose your aligned damage."
                 },
                 "StunningFist": {
-                    "Note": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.system.proficiencies.classDCs.monk.value)|traits:incapacitation|overrideTraits:true] save against your class DC or be @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1} (or @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 3} on a critical failure)."
+                    "Note": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.system.proficiencies.classDCs.monk.value)|name:Monk|traits:incapacitation|overrideTraits:true] save against your class DC or be @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1} (or @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 3} on a critical failure)."
                 },
                 "WolfDrag": {
                     "Note": "If the attack succeeds, you knock the target @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}."
@@ -2363,12 +2413,14 @@
                 "Feat": "Select a feat.",
                 "FirstImplement": "Select a first implement.",
                 "Lesson": "Select a lesson.",
+                "LevelOneAncestryFeat": "Select a 1st-level ancestry feat.",
                 "LevelOneClassFeat": "Select a 1st-level class feat.",
                 "LevelOneOrTwoClassFeat": "Select a 1st or 2nd-level class feat.",
                 "Material": "Select a material.",
                 "PathToPerfection": "Select a path to perfection.",
                 "Rune": "Select a Rune.",
                 "SecondImplement": "Select a second implement.",
+                "Shield": "Select a shield.",
                 "Shillelagh": "Select a club or staff.",
                 "Skill": "Select a skill.",
                 "SkillFeat": "Select a skill feat.",
@@ -2504,6 +2556,13 @@
             "SpellEffectProtection": {
                 "Prompt": "Choose which alignment trait you are protecting against."
             },
+            "SpellEffectThermalRemedy": {
+                "BonusVsDisease": "Bonus vs. Disease",
+                "FireResistance": "Fire Resistance",
+                "Prompt": "Select a benefit.",
+                "PromptTwo": "Select a 2nd benefit.",
+                "TempHP": "Temporary Hit Points"
+            },
             "Spellheart": {
                 "BeastmastersSigil": {
                     "AdjacentLabel": "Target adjacent to beastmaster's sigil summon"
@@ -2540,6 +2599,7 @@
                     "ShadowGrasp": "Shadow Grasp",
                     "SkywardSlash": "Skyward Slash",
                     "StingingLash": "Stinging Lash",
+                    "Stonestrike": "Stonestrike",
                     "StumblingSwing": "Stumbling Swing",
                     "TigerClaw": "Tiger Claw",
                     "WindCrash": "Wind Crash",
@@ -2600,7 +2660,8 @@
                 "AgainstDemons": "Against Demons",
                 "AgainstDevils": "Against Devils",
                 "AgainstHumanoids": "Against Humanoids",
-                "Necromancer": "Target is a necromancer"
+                "Necromancer": "Target is a necromancer",
+                "Metal": "Target is wearing metal armor or is made of metal"
             },
             "Tattoo": {
                 "WildwoodInk": {
@@ -2711,6 +2772,10 @@
             "WardingRune": {
                 "Prompt": "Select a school of magic other than divination."
             },
+            "WeaponInfusion": {
+                "Melee": "Melee Infusion",
+                "Ranged": "Ranged Infusion"
+            },
             "WellspringMage": {
                 "CriticalSuccess": "You temporarily recover an expended spell slot of any level of your choice. The temporary spell slot lasts for 1 minute, and if you don't use it by then, you experience an immediate @UUID[Compendium.pf2e.rollable-tables.RollTable.N0pDFNCffTe2Du39]{Wellspring Surge}.",
                 "Failure": "You generate a @UUID[Compendium.pf2e.rollable-tables.RollTable.N0pDFNCffTe2Du39]{Wellspring Surge}, with a spell level chosen randomly among your top three levels of spell slots (or all your levels if you have fewer than three)",
@@ -2762,8 +2827,12 @@
             "RuleElements": {
                 "ChoiceSet": {
                     "Decline": "Decline",
-                    "DragHomebrewItem": "Drag a homebrew item here if using one instead of the above options",
+                    "DragHomebrewItem": "Drag a homebrew item here if using one instead of the above options.",
                     "HomebrewItem": "Homebrew Item",
+                    "ViewItem": {
+                        "Tooltip": "View Item",
+                        "Disabled": "Selected choice has no item sheet"
+                    },
                     "NoLabel": "No",
                     "Prompt": "Make a selection.",
                     "SaveLabel": "Save",

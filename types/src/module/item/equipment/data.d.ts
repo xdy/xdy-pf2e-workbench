@@ -22,4 +22,4 @@ interface EquipmentSystemData extends Omit<EquipmentSystemSource, "hp" | "identi
 interface EquipmentTraits extends PhysicalItemTraits<EquipmentTrait> {
     otherTags: OtherEquipmentTag[];
 }
-export { EquipmentSource, EquipmentSystemData, EquipmentSystemSource, EquipmentTrait };
+export type { EquipmentSource, EquipmentSystemData, EquipmentSystemSource, EquipmentTrait };

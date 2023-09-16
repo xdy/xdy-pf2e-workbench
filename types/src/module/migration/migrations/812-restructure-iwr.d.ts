@@ -7,5 +7,16 @@ export declare class Migration812RestructureIWR extends MigrationBase {
     static version: number;
     updateActor(source: ActorSourcePF2e): Promise<void>;
     /** Sluggify precious material types, normalize precious material grades */
-    updateItem(source: ItemSourcePF2e): Promise<void>;
+    updateItem(source: MaybeWithOldMaterialData): Promise<void>;
 }
+type MaybeWithOldMaterialData = ItemSourcePF2e & {
+    system: {
+        preciousMaterial?: {
+            value?: unknown;
+        };
+        preciousMaterialGrade?: {
+            value?: unknown;
+        };
+    };
+};
+export {};

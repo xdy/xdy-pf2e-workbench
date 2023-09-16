@@ -1,4 +1,4 @@
-import { BaseRawModifier, DamageDicePF2e } from "@actor/modifiers.ts";
+import type { BaseRawModifier, DamageDicePF2e } from "@actor/modifiers.ts";
 import { ItemType } from "@item/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { ZeroToTwo } from "@module/data.ts";
@@ -33,21 +33,12 @@ type ChatMessageFlagsPF2e = ChatMessageFlags & {
         preformatted?: "flavor" | "content" | "both";
         isFromConsumable?: boolean;
         journalEntry?: DocumentUUID;
-        strike?: StrikeLookupData | null;
         appliedDamage?: AppliedDamageFlag | null;
         [key: string]: unknown;
     };
     core: NonNullable<ChatMessageFlags["core"]>;
 };
 type ChatContextFlag = CheckRollContextFlag | DamageRollContextFlag | SpellCastContextFlag | SelfEffectContextFlag;
-/** Data used to lookup a strike on an actor */
-interface StrikeLookupData {
-    actor: ActorUUID | TokenDocumentUUID;
-    index: number;
-    damaging: boolean;
-    name: string;
-    altUsage?: "thrown" | "melee" | null;
-}
 interface DamageRollFlag {
     outcome: DegreeOfSuccessString;
     total: number;
@@ -64,7 +55,7 @@ interface TargetFlag {
     actor: ActorUUID | TokenDocumentUUID;
     token?: TokenDocumentUUID;
 }
-type ContextFlagOmission = "actor" | "altUsage" | "createMessage" | "damaging" | "dosAdjustments" | "item" | "mapIncreases" | "notes" | "options" | "range" | "target" | "token";
+type ContextFlagOmission = "actor" | "action" | "altUsage" | "createMessage" | "damaging" | "dosAdjustments" | "item" | "mapIncreases" | "notes" | "options" | "range" | "target" | "token";
 interface CheckRollContextFlag extends Required<Omit<CheckRollContext, ContextFlagOmission>> {
     actor: string | null;
     token: string | null;
@@ -113,4 +104,4 @@ interface AppliedDamageFlag {
         value: number;
     }[];
 }
-export { AppliedDamageFlag, ChatContextFlag, ChatMessageFlagsPF2e, ChatMessageSourcePF2e, CheckRollContextFlag, DamageRollContextFlag, DamageRollFlag, StrikeLookupData, TargetFlag, };
+export type { AppliedDamageFlag, ChatContextFlag, ChatMessageFlagsPF2e, ChatMessageSourcePF2e, CheckRollContextFlag, DamageRollContextFlag, DamageRollFlag, TargetFlag, };

@@ -9,10 +9,6 @@ import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSour
  */
 declare class RollOptionRuleElement extends RuleElementPF2e<RollOptionSchema> {
     #private;
-    /**
-     * Whether this roll option can be toggled by the user on an actor sheet: "totm" indicates it will only be present
-     * if the Theather of the Mind Toggles setting is enabled
-     */
     toggleable: boolean | "totm";
     constructor(source: RollOptionSource, options: RuleElementOptions);
     static defineSchema(): RollOptionSchema;
@@ -52,7 +48,7 @@ type RollOptionSchema = RuleElementSchema & {
     /** Whether the roll option is toggleable: a checkbox will appear in interfaces (usually actor sheets) */
     toggleable: DataUnionField<StrictStringField<"totm"> | StrictBooleanField, false, false, false>;
     /** If toggleable, the location to be found in an interface */
-    placement: StringField<string, string, false, false, true>;
+    placement: StringField<string, string, false, false, false>;
     /** An optional predicate to determine whether the toggle is interactable by the user */
     disabledIf: PredicateField<false, false, false>;
     /** The value of the roll option if its toggle is disabled: null indicates the pre-disabled value is preserved */

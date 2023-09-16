@@ -1,6 +1,6 @@
 /// <reference types="jquery" resolution-mode="require"/>
-import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
+import type { ActorPF2e } from "@actor";
+import type { ItemPF2e } from "@item";
 /**
  * @category Other
  */

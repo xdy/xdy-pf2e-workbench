@@ -36,4 +36,4 @@ type BattleFormRuleSchema = RuleElementSchema & {
     /** Whether the actor uses its own unarmed attacks while in battle form */
     ownUnarmed: BooleanField<boolean, boolean, false, false, true>;
 };
-export { BattleFormRuleSchema, BattleFormRuleOverrideSchema };
+export type { BattleFormRuleSchema, BattleFormRuleOverrideSchema };

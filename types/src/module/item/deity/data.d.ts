@@ -25,4 +25,4 @@ interface DeitySystemSource extends ItemSystemSource {
 }
 type DivineFonts = ["harm"] | ["heal"] | ["harm", "heal"] | never[];
 type DeitySystemData = DeitySystemSource;
-export { DeitySource, DeitySystemData, DeitySystemSource };
+export type { DeitySource, DeitySystemData, DeitySystemSource };

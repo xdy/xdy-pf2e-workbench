@@ -19,4 +19,5 @@ type UsageDetails = HeldUsage | WornUsage | CarriedUsage;
 type UsageType = UsageDetails["type"];
 declare function isEquipped(usage: UsageDetails, equipped: EquippedData): boolean;
 declare function getUsageDetails(usage: string): UsageDetails;
-export { UsageDetails, UsageType, getUsageDetails, isEquipped };
+export { getUsageDetails, isEquipped };
+export type { UsageDetails, UsageType };

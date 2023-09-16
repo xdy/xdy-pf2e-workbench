@@ -33,4 +33,5 @@ interface IWRRuleElementSource extends RuleElementSource {
     exceptions?: unknown;
     override?: unknown;
 }
-export { IWRRuleElement, IWRRuleElementSource, IWRRuleSchema };
+export { IWRRuleElement };
+export type { IWRRuleElementSource, IWRRuleSchema };

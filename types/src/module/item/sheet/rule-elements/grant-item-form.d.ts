@@ -8,6 +8,5 @@ declare class GrantItemForm extends RuleElementForm<GrantItemSource, GrantItemRu
 }
 interface GrantItemFormSheetData extends RuleElementFormSheetData<GrantItemSource, GrantItemRuleElement> {
     granted: ClientDocument | null;
-    allowDuplicate: boolean;
 }
 export { GrantItemForm };

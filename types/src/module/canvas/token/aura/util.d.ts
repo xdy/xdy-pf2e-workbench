@@ -1,3 +1,11 @@
 import { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
-import { TokenAuraData } from "@scene/token-document/aura/types.ts";
-export declare function getAreaSquares(aura: TokenAuraData): EffectAreaSquare[];
+import { TokenDocumentPF2e } from "@scene";
+import { TokenPF2e } from "../index.ts";
+export declare function getAreaSquares(data: GetAreaSquaresParams): EffectAreaSquare[];
+interface GetAreaSquaresParams {
+    bounds: PIXI.Rectangle;
+    radius: number;
+    token: TokenPF2e | TokenDocumentPF2e;
+    traits?: Set<string>;
+}
+export {};

@@ -1,14 +1,14 @@
-import { ActorPF2e, CreaturePF2e } from "@actor";
+import { ActorPF2e, type CreaturePF2e } from "@actor";
 import { ItemType } from "@item/data/index.ts";
-import { UserPF2e } from "@module/documents.ts";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
-import { Statistic } from "@system/statistic/index.ts";
+import { RuleElementPF2e } from "@module/rules/index.ts";
+import { RuleElementSchema } from "@module/rules/rule-element/data.ts";
+import type { UserPF2e } from "@module/user/document.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
+import type { Statistic } from "@system/statistic/index.ts";
 import { DataModelValidationOptions } from "types/foundry/common/abstract/data.js";
 import { PartySource, PartySystemData } from "./data.ts";
 import { PartyCampaign, PartyUpdateContext } from "./types.ts";
-import { RuleElementPF2e } from "@module/rules/index.ts";
-import { RuleElementSchema } from "@module/rules/rule-element/data.ts";
 declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     armorClass: null;
     members: CreaturePF2e[];
@@ -24,8 +24,11 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     isAffectedBy(): false;
     /** Override validation to defer certain properties to the campaign model */
     validate(options?: DataModelValidationOptions): boolean;
+    updateSource(data?: DocumentUpdateData<PartyPF2e>, options?: DocumentSourceUpdateContext): DeepPartial<this["_source"]>;
     /** Only prepare rule elements for non-physical items (in case campaigin items exist) */
     protected prepareRuleElements(): RuleElementPF2e<RuleElementSchema>[];
+    /** Make `system.campaign` non-enumerable to prevent `TokenDocument.getTrackedAttributes` from recursing into it. */
+    protected _initialize(options?: Record<string, unknown> | undefined): void;
     prepareBaseData(): void;
     /** Run rule elements (which may occur if it contains a kingdom) */
     prepareEmbeddedDocuments(): void;
@@ -36,6 +39,7 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     addToCombat(options?: {
         combat?: EncounterPF2e;
     }): Promise<CombatantPF2e<EncounterPF2e>[]>;
+    getRollOptions(domains?: string[]): string[];
     getRollData(): Record<string, unknown>;
     /** Re-render the sheet if data preparation is called from the familiar's master */
     reset({ actor }?: {

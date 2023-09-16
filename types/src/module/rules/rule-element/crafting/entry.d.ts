@@ -1,9 +1,9 @@
-import { CharacterPF2e } from "@actor";
+import type { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "../index.ts";
-import type { ArrayField, BooleanField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { PredicateField } from "@system/schema-data-fields.ts";
+import type { ArrayField, BooleanField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField } from "../data.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "../index.ts";
 /**
  * @category RuleElement
  */
@@ -49,4 +49,5 @@ interface CraftingEntryRuleSource extends RuleElementSource {
     craftableItems?: unknown;
     preparedFormulas?: unknown;
 }
-export { CraftingEntryRuleData, CraftingEntryRuleElement, CraftingEntryRuleSource };
+export { CraftingEntryRuleElement };
+export type { CraftingEntryRuleData, CraftingEntryRuleSource };

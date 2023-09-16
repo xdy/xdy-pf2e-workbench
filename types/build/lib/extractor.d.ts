@@ -25,4 +25,4 @@ declare class PackExtractor {
     run(): Promise<number>;
     extractPack(filePath: string, packDirectory: string): Promise<number>;
 }
-export { ExtractArgs, PackExtractor };
+export { type ExtractArgs, PackExtractor };
