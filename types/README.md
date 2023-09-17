@@ -1,7 +1,7 @@
 This directory contains types generated from the pathfinder 2 system by running this after building pf2e and then copying it into types:
 
 ```
-node_modules/.bin/tsc --declaration true --emitDeclarationOnly true --noemit false --outdir dist/types --newLine lf 
+npm run clean && npm ci && npm run build && node_modules/.bin/tsc --declaration true --emitDeclarationOnly true --noemit false --outdir dist/types --newLine lf > ~/t.txt
 ```
 
 It also has these files and directories taken as-is from the pf2e system:
