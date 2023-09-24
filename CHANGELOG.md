@@ -1,3 +1,10 @@
+## [5.18.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.2...v5.18.3) (2023-09-24)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. Also sets minimum Foundry version 3.09 and miniumum pf2e version to 5.5.3 ([cbc603f](https://github.com/xdy/xdy-pf2e-workbench/commit/cbc603fc82422dbe211bb6902a96085c99b1ed44))
+
 ## [5.18.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.1...v5.18.2) (2023-09-03)
 
 
