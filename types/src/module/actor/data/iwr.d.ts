@@ -81,6 +81,7 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         "misfortune-effects": string;
         mithral: string;
         necromancy: string;
+        negative: string;
         "non-magical": string;
         "nonlethal-attacks": string;
         "object-immunities": string;
@@ -94,6 +95,7 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         plant: string;
         poison: string;
         polymorph: string;
+        positive: string;
         possession: string;
         precision: string;
         prone: string;
@@ -118,8 +120,6 @@ declare class ImmunityData extends IWRData<ImmunityType> implements ImmunitySour
         "unarmed-attacks": string;
         unconscious: string;
         visual: string;
-        vitality: string;
-        void: string;
         water: string;
         wood: string;
     };
@@ -162,6 +162,7 @@ declare class WeaknessData extends IWRData<WeaknessType> implements WeaknessSour
         mental: string;
         metal: string;
         mithral: string;
+        negative: string;
         "non-magical": string;
         "nonlethal-attacks": string;
         orichalcum: string;
@@ -169,6 +170,7 @@ declare class WeaknessData extends IWRData<WeaknessType> implements WeaknessSour
         piercing: string;
         plant: string;
         poison: string;
+        positive: string;
         precision: string;
         radiation: string;
         salt: string;
@@ -181,8 +183,6 @@ declare class WeaknessData extends IWRData<WeaknessType> implements WeaknessSour
         "splash-damage": string;
         "unarmed-attacks": string;
         "vampire-weaknesses": string;
-        vitality: string;
-        void: string;
         vorpal: string;
         "vorpal-fear": string;
         "vulnerable-to-sunlight": string;
@@ -232,6 +232,7 @@ declare class ResistanceData extends IWRData<ResistanceType> implements Resistan
         mental: string;
         metal: string;
         mithral: string;
+        negative: string;
         "non-magical": string;
         nonlethal: string;
         "nonlethal-attacks": string;
@@ -240,6 +241,7 @@ declare class ResistanceData extends IWRData<ResistanceType> implements Resistan
         piercing: string;
         plant: string;
         poison: string;
+        positive: string;
         precision: string;
         "protean-anatomy": string;
         radiation: string;
@@ -251,8 +253,6 @@ declare class ResistanceData extends IWRData<ResistanceType> implements Resistan
         spells: string;
         spirit: string;
         "unarmed-attacks": string;
-        vitality: string;
-        void: string;
         vorpal: string;
         "vorpal-adamantine": string;
         warpglass: string;

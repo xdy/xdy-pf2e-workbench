@@ -1,7 +1,7 @@
 import { SkillAbbreviation } from "@actor/creature/data.ts";
 import { Alignment } from "@actor/creature/types.ts";
 import { AttributeString } from "@actor/types.ts";
-import { BaseItemSourcePF2e, ItemSystemSource, OtherTagsOnly } from "@item/data/base.ts";
+import { BaseItemSourcePF2e, ItemSystemSource } from "@item/data/base.ts";
 import { BaseWeaponType } from "@item/weapon/types.ts";
 import { DeityDomain } from "./types.ts";
 type DeitySource = BaseItemSourcePF2e<"deity", DeitySystemSource>;
@@ -21,7 +21,7 @@ interface DeitySystemSource extends ItemSystemSource {
     weapons: BaseWeaponType[];
     spells: Record<number, ItemUUID>;
     level?: never;
-    traits: OtherTagsOnly;
+    traits?: never;
 }
 type DivineFonts = ["harm"] | ["heal"] | ["harm", "heal"] | never[];
 type DeitySystemData = DeitySystemSource;

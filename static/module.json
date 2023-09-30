@@ -4,8 +4,8 @@
   "version": "5.18.4",
   "id": "xdy-pf2e-workbench",
   "compatibility": {
-    "minimum": "11.311",
-    "verified": "11.311",
+    "minimum": "11.309",
+    "verified": "11.309",
     "maximum": "11"
   },
   "relationships": {
@@ -15,8 +15,8 @@
         "type": "system",
         "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
         "compatibility": {
-          "minimum": "5.6.2",
-          "verified": "5.6.2"
+          "minimum": "5.5.3",
+          "verified": "5.5.3"
         }
       }
     ]
@@ -227,7 +227,7 @@
   ],
   "url": "https://github.com/xdy/xdy-pf2e-workbench/",
   "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json",
-  "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/download/v5.18.4/xdy-pf2e-workbench.zip",
+  "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/download/v5.18.3/xdy-pf2e-workbench.zip",
   "license": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/LICENSE.md",
   "readme": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/README.md",
   "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",

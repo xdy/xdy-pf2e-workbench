@@ -5,7 +5,7 @@ import { BoostFlawState } from "@actor/character/attribute-builder.ts";
 import { PartyPF2e } from "../document.ts";
 import { Kingdom } from "./model.ts";
 import { KingdomAbility, KingdomCHG } from "./types.ts";
-import { KingdomCHGData } from "./values.ts";
+import { getKingdomABCData } from "./values.ts";
 declare const KINGDOM_BUILD_CATEGORIES: readonly ["charter", "heartland", "government"];
 type KingdomBuildCategory = (typeof KINGDOM_BUILD_CATEGORIES)[number];
 type CurrentSelections = Record<KingdomBuildCategory, string | null>;
@@ -14,10 +14,6 @@ declare class KingdomBuilder extends FormApplication<Kingdom> {
     #private;
     selected: CurrentSelections;
     static get defaultOptions(): FormApplicationOptions;
-    static showToPlayers(options: {
-        uuid: string;
-        tab?: string;
-    }): void;
     constructor(kingdom: Kingdom);
     get id(): string;
     get kingdom(): Kingdom;
@@ -27,23 +23,15 @@ declare class KingdomBuilder extends FormApplication<Kingdom> {
     getData(): Promise<KingdomBuilderSheetData>;
     activateListeners($html: JQuery<HTMLElement>): void;
     protected _updateObject(_event: Event, formData: Record<string, unknown>): Promise<unknown>;
-    protected _render(force?: boolean, options?: KingdomBuilderRenderOptions): Promise<void>;
-}
-interface KingdomBuilder extends FormApplication<Kingdom> {
-    render(force?: boolean, options?: KingdomBuilderRenderOptions): this | Promise<this>;
-}
-interface KingdomBuilderRenderOptions extends RenderOptions {
-    tab?: string | null;
 }
 interface KingdomBuilderSheetData {
     options: {
         editable: boolean;
     };
     kingdom: Kingdom;
-    database: KingdomCHGData;
+    database: ReturnType<typeof getKingdomABCData>;
     categories: Record<KingdomBuildCategory, CategorySheetData>;
-    abilityLabels: Record<string, string>;
-    skillLabels: Record<string, string>;
+    abilities: Record<string, string>;
     build: KingdomAbilityBuilderData;
     finished: boolean;
 }
@@ -54,8 +42,6 @@ interface CategorySheetData {
     selected: string | null;
     /** The build entry currently being viewed (aka selected) */
     buildEntry?: KingdomCHG;
-    /** The feat item the selected build entry will grant */
-    featLink: string | null;
     stale: boolean;
 }
 interface KingdomAbilityBuilderData {

@@ -5,7 +5,6 @@ declare global {
         classes: string[];
         template: string;
         viewPermission: number;
-        sheetConfig: boolean;
     }
 
     interface DocumentSheetData<TDocument extends foundry.abstract.Document = foundry.abstract.Document> {

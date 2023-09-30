@@ -1,4 +1,4 @@
-import { BaseItemSourcePF2e, ItemFlagsPF2e, ItemSystemData, ItemSystemSource, ItemTraitsNoRarity } from "@item/data/base.ts";
+import { BaseItemSourcePF2e, ItemFlagsPF2e, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/data/base.ts";
 import { WeaponMaterialData } from "@item/weapon/data.ts";
 import { DamageType } from "@system/damage/types.ts";
 type MeleeSource = BaseItemSourcePF2e<"melee", MeleeSystemSource> & {
@@ -36,5 +36,5 @@ interface NPCAttackDamageSource {
 }
 type NPCAttackDamage = Required<NPCAttackDamageSource>;
 export type NPCAttackTrait = keyof ConfigPF2e["PF2E"]["npcAttackTraits"];
-export type NPCAttackTraits = ItemTraitsNoRarity<NPCAttackTrait>;
+export type NPCAttackTraits = ItemTraits<NPCAttackTrait>;
 export type { MeleeFlags, MeleeSource, MeleeSystemData, MeleeSystemSource, NPCAttackDamage };

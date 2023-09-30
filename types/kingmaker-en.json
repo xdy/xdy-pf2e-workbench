@@ -7,31 +7,22 @@
             "stability": "Stability"
         },
         "AbilityScores": "Ability Scores",
-        "Confirm": "Confirm",
         "Consumption": {
-            "Base": "Base",
+            "Base": "Base Consumption",
             "Label": "Consumption",
-            "Reduction": "Reduction"
-        },
-        "Event": {
-            "Details": "Ongoing Event Details",
-            "Random": "Random Event"
+            "Reduced": "Consumption Reduction"
         },
         "KingdomBuilder": {
-            "ActivationMessage": "Begin the Kingdom Creation process? Make sure your players are ready before proceeding.",
             "Aspiration": "Aspiration",
             "AssignBoostsHeader": "Assign your boosts",
             "Boost": "Boost",
             "BoostsLabel": "Ability Boosts",
             "Builder": "Builder",
-            "CancelCreation": "Cancel Creation",
             "Complete": "Complete",
-            "Feat": "Kingdom Feat",
             "FinalizeHeader": "Finalize Kingdom",
             "Flaw": "Flaw",
             "FlawLabel": "Ability Flaw",
             "Free": "Free",
-            "Skills": "Kingdom Skills",
             "ManualToggle": "Use Manual Modifiers",
             "Missing": {
                 "Charter": "Choose a charter to select boosts.",
@@ -67,7 +58,7 @@
                 "Title": "Collect Resources",
                 "Header": "Upkeep: Resource Collection",
                 "Description": "Roll {dice} resource dice and generate the following?",
-                "Disclaimer": "This will replace your current resource points (which should have been converted into experience points). Excess commodities will be lost. Only the game master can collect resources."
+                "Disclaimer": "NOTE: This will replace your current resource points (which should have been converted into experience points). Excess commodities will be lost."
             },
             "Commodity": {
                 "food": "Food",
@@ -143,7 +134,6 @@
                 "strife": "Strife"
             },
             "Size": "Size",
-            "Storage": "Storage",
             "Tabs": {
                 "Main": "Main",
                 "Activities": "Activities",
@@ -178,12 +168,8 @@
         "Penalty": "Penalty",
         "Settlement": {
             "Blocks": "Blocks",
-            "Details": "Settlement Details",
-            "Header": "Kingdom Settlements",
-            "LevelRange": "Level Range",
             "Name": "Settlement Name",
-            "Overcrowded": "Overcrowded",
-            "Population": "Population",
+            "Header": "Kingdom Settlements",
             "Type": {
                 "village": "Village",
                 "town": "Town",
@@ -289,11 +275,11 @@
             },
             "republic": {
                 "Name": "Republic",
-                "Description": "Your nation draws its leadership from its own citizens. Elected representatives meet in parliamentary bodies to guide the nation."
+                "Description": "Your nation draws its leadership from its own citizens. Elected representatives meet in parliamentary bodies to guide the nation. "
             },
             "thaumocracy": {
                 "Name": "Thaumocracy",
-                "Description": "Your nation is governed by those most skilled in magic, using their knowledge and power to determine the best ways to rule. While the type of magic wielded by the nation's rulers can adjust its themes (or even its name—a thaumocracy run by divine spellcasters would be a theocracy, for example), the details below remain the same whether it's arcane, divine, occult, primal, or any combination of the four."
+                "Description": "Your nation is governed by those most skilled in magic, using their knowledge and power to determine the best ways to rule. While the type of magic wielded by the nation's rulers can adjust its themes (or even its name—a thaumocracy run by divine spellcasters would be a theocracy, for example), the details below remain the same whether it's arcane, divine, occult, primal, or any combination of the four. "
             },
             "yeomanry": {
                 "Name": "Yeomanry",

@@ -22,6 +22,7 @@ declare class SpellPreparationSheet<TActor extends CreaturePF2e> extends ActorSh
     /**
      * This being an actor sheet saves us from most drag and drop re-implementation,
      * but we still have a gotcha in the form of the header buttons.
+     * Reimplement to avoid sheet configuration and token options.
      */
     protected _getHeaderButtons(): ApplicationHeaderButton[];
     getData(): Promise<SpellPreparationSheetData<TActor>>;

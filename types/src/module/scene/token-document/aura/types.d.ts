@@ -13,6 +13,6 @@ interface TokenAuraData {
     radiusPixels: number;
     appearance: AuraAppearanceData;
     /** Traits (especially "visual" and "auditory") associated with this aura */
-    traits: ItemTrait[];
+    traits: Set<ItemTrait>;
 }
 export type { TokenAuraData };

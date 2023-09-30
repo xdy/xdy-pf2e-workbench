@@ -43,9 +43,9 @@ interface RuleElementSynthetics {
     strikeAdjustments: StrikeAdjustment[];
     strikes: Map<string, WeaponPF2e<ActorPF2e>>;
     striking: Record<string, StrikingSynthetic[]>;
+    targetMarks: Map<TokenDocumentUUID, string>;
     toggles: RollOptionToggle[];
     tokenEffectIcons: TokenEffect[];
-    tokenMarks: Map<TokenDocumentUUID, string>;
     tokenOverrides: DeepPartial<Pick<foundry.documents.TokenSource, "light" | "name" | "alpha">> & {
         texture?: {
             src: VideoFilePath;
@@ -101,10 +101,9 @@ interface MAPSynthetic {
 interface RollSubstitution {
     slug: string;
     label: string;
-    predicate: PredicatePF2e;
+    predicate: PredicatePF2e | null;
     value: number;
-    required: boolean;
-    selected: boolean;
+    ignored: boolean;
     effectType: "fortune" | "misfortune";
 }
 interface RollOptionToggle {

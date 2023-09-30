@@ -19,15 +19,15 @@ interface AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema
 type AdjustModifierSchema = RuleElementSchema & {
     mode: StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
     /** An optional relabeling of the adjusted modifier */
-    relabel: StringField<string, string, false, true, true>;
+    relabel: StringField<string, string, false, true, false>;
     selector: StringField<string, string, false, false, false>;
     selectors: ArrayField<StringField<string, string, true, false, false>>;
     damageType: StringField<string, string, false, true, true>;
     /** Rather than changing a modifier's value, ignore it entirely */
-    suppress: BooleanField<boolean, boolean, false, false, true>;
+    suppress: BooleanField<boolean, boolean, false, true, false>;
     /** The maximum number of times this adjustment can be applied */
-    maxApplications: NumberField<number, number, false, true, true>;
-    value: ResolvableValueField<false, true, true>;
+    maxApplications: NumberField<number, number, false, true, false>;
+    value: ResolvableValueField<false, false, false>;
 };
 interface AdjustModifierSource extends RuleElementSource {
     mode?: unknown;

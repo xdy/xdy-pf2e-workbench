@@ -9,7 +9,7 @@ import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
 import { RangeData } from "@item/types.ts";
 import { MeasuredTemplatePF2e } from "@module/canvas/index.ts";
 import { ChatMessagePF2e, ItemOriginFlag } from "@module/chat-message/index.ts";
-import { OneToTen, Rarity, ZeroToTwo } from "@module/data.ts";
+import { OneToTen, ZeroToTwo } from "@module/data.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { CheckRoll } from "@system/check/index.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
@@ -44,7 +44,6 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     /** Legacy getter, though not yet deprecated */
     get level(): number;
     get traits(): Set<SpellTrait>;
-    get rarity(): Rarity;
     /** Action traits added when Casting this Spell */
     get castingTraits(): ActionTrait[];
     get school(): MagicSchool | null;

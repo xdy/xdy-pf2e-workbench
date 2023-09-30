@@ -52,6 +52,7 @@ declare const immunityTypes: {
     "misfortune-effects": string;
     mithral: string;
     necromancy: string;
+    negative: string;
     "non-magical": string;
     "nonlethal-attacks": string;
     "object-immunities": string;
@@ -65,6 +66,7 @@ declare const immunityTypes: {
     plant: string;
     poison: string;
     polymorph: string;
+    positive: string;
     possession: string;
     precision: string;
     prone: string;
@@ -89,8 +91,6 @@ declare const immunityTypes: {
     "unarmed-attacks": string;
     unconscious: string;
     visual: string;
-    vitality: string;
-    void: string;
     water: string;
     wood: string;
 };
@@ -124,6 +124,7 @@ declare const weaknessTypes: {
     mental: string;
     metal: string;
     mithral: string;
+    negative: string;
     "non-magical": string;
     "nonlethal-attacks": string;
     orichalcum: string;
@@ -131,6 +132,7 @@ declare const weaknessTypes: {
     piercing: string;
     plant: string;
     poison: string;
+    positive: string;
     precision: string;
     radiation: string;
     salt: string;
@@ -143,8 +145,6 @@ declare const weaknessTypes: {
     "splash-damage": string;
     "unarmed-attacks": string;
     "vampire-weaknesses": string;
-    vitality: string;
-    void: string;
     vorpal: string;
     "vorpal-fear": string;
     "vulnerable-to-sunlight": string;
@@ -182,6 +182,7 @@ declare const resistanceTypes: {
     mental: string;
     metal: string;
     mithral: string;
+    negative: string;
     "non-magical": string;
     nonlethal: string;
     "nonlethal-attacks": string;
@@ -190,6 +191,7 @@ declare const resistanceTypes: {
     piercing: string;
     plant: string;
     poison: string;
+    positive: string;
     precision: string;
     "protean-anatomy": string;
     radiation: string;
@@ -201,8 +203,6 @@ declare const resistanceTypes: {
     spells: string;
     spirit: string;
     "unarmed-attacks": string;
-    vitality: string;
-    void: string;
     vorpal: string;
     "vorpal-adamantine": string;
     warpglass: string;

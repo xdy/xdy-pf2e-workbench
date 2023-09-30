@@ -31,5 +31,5 @@ declare const physicalDamageTypes: {
     slashing: string;
 };
 declare const damageTypes: Record<DamageType, string>;
-declare const damageRollFlavors: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "piercing" | "poison" | "slashing" | "sonic" | "spirit" | "vitality" | "void" | "untyped", string>;
+declare const damageRollFlavors: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "spirit" | "untyped", string>;
 export { damageCategories, damageCategoriesUnique, damageRollFlavors, damageTypes, materialDamageEffects, physicalDamageTypes, };

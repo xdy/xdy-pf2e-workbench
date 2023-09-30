@@ -1,10 +1,3 @@
-## [5.18.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.3...v5.18.4) (2023-09-30)
-
-
-### Bug Fixes
-
-* Keeping up with the Macro Faeries. Also: Update types. Update dependencies. Increase minimum pf2e version to 5.6.2 and minimum foundry version to 11.311 ([85917a8](https://github.com/xdy/xdy-pf2e-workbench/commit/85917a8898151d95dd37f908ee927dfc39b1eeb1))
-
 ## [5.18.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.2...v5.18.3) (2023-09-24)
 
 

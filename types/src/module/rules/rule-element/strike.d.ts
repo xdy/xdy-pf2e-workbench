@@ -5,8 +5,8 @@ import { NPCAttackTrait } from "@item/melee/data.ts";
 import { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import type { ArrayField, BooleanField, FilePathField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField } from "./data.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import { ResolvableValueField } from "./data.ts";
 /**
  * Create an ephemeral strike on an actor
  * @category RuleElement
@@ -28,6 +28,11 @@ declare class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     /** Keep shorthand `fist` source data to its minimum form */
     protected _initializeSource(source: object, options: RuleElementOptions): this["_source"];
     protected _initialize(options?: Record<string, unknown>): void;
+    /** Temporary workaround until real migration */
+    static migrateData<TSource extends {
+        range?: unknown;
+        maxRange?: unknown;
+    }>(source: TSource): TSource;
     beforePrepareData(): void;
     /** Exclude other strikes if this rule element specifies that its strike replaces all others */
     afterPrepareData(): void;
@@ -66,13 +71,13 @@ type StrikeSchema = RuleElementSchema & {
      */
     attackModifier: NumberField<number, number, false, true, true>;
     range: SchemaField<{
-        increment: NumberField<number, number, false, true, true>;
+        increment: NumberField<number, number, true, false, true>;
         max: NumberField<number, number, false, true, true>;
     }, {
-        increment: number | null;
+        increment: number;
         max: number | null;
     }, {
-        increment: number | null;
+        increment: number;
         max: number | null;
     } | null, false, true, true>;
     damage: SchemaField<{

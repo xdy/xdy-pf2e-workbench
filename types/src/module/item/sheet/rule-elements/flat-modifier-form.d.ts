@@ -1,5 +1,5 @@
-import { ModifierType } from "@actor/modifiers.ts";
-import type { FlatModifierRuleElement, FlatModifierSource } from "@module/rules/rule-element/flat-modifier.ts";
+import { MODIFIER_TYPES } from "@actor/modifiers.ts";
+import { FlatModifierRuleElement, FlatModifierSource } from "@module/rules/rule-element/flat-modifier.ts";
 import { RuleElementForm, RuleElementFormSheetData } from "./base.ts";
 /** Form handler for the flat modifier rule element */
 declare class FlatModifierForm extends RuleElementForm<FlatModifierSource, FlatModifierRuleElement> {
@@ -12,7 +12,7 @@ declare class FlatModifierForm extends RuleElementForm<FlatModifierSource, FlatM
 interface FlatModifierFormSheetData extends RuleElementFormSheetData<FlatModifierSource, FlatModifierRuleElement> {
     selectorIsArray: boolean;
     abilities: ConfigPF2e["PF2E"]["abilities"];
-    types: Record<ModifierType, string>;
+    types: Omit<keyof typeof MODIFIER_TYPES, "untyped">[];
     damageCategories: Pick<ConfigPF2e["PF2E"]["damageCategories"], "persistent" | "precision" | "splash">;
     isDamage: boolean;
 }

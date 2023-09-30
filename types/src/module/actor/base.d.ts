@@ -201,6 +201,8 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      */
     transferItemToActor(targetActor: ActorPF2e, item: ItemPF2e<ActorPF2e>, quantity: number, containerId?: string, newStack?: boolean): Promise<PhysicalItemPF2e<ActorPF2e> | null>;
     addToInventory(itemSource: PhysicalItemSource, container?: ContainerPF2e<this>, newStack?: boolean): Promise<PhysicalItemPF2e<this> | null>;
+    /** Find an item already owned by the actor that can stack with the to-be-transferred item */
+    findStackableItem<TActor extends this>(actor: TActor, itemSource: ItemSourcePF2e): PhysicalItemPF2e<TActor> | null;
     /** Move an item into the inventory into or out of a container */
     stowOrUnstow(item: PhysicalItemPF2e<this>, container?: ContainerPF2e<this>): Promise<void>;
     /** Determine actor updates for applying damage/healing across temporary hit points, stamina, and then hit points */

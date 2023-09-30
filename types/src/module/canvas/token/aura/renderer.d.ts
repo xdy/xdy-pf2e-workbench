@@ -14,7 +14,7 @@ declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     /** The aura radius from the center in pixels */
     radiusPixels: number;
     /** Traits associated with this aura: used to configure collision detection */
-    traits: ItemTrait[];
+    traits: Set<ItemTrait>;
     /** Border, highlight, and texture data */
     appearance: AuraAppearanceData;
     /** Standard line thickness for circle shape and label markers */
@@ -27,6 +27,8 @@ declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     get highlightLayer(): GridHighlight | null;
     /** The squares covered by this aura */
     get squares(): EffectAreaSquare[];
+    /** Whether this aura's parent token is in an active encounter */
+    get inEncounter(): boolean;
     /** Draw the aura's border and texture */
     draw(showBorder: boolean): Promise<void>;
     /** Highlight the affected grid squares of this aura and indicate the radius */
@@ -35,6 +37,6 @@ declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
 interface AuraRendererParams extends Omit<AuraData, "effects" | "traits"> {
     slug: string;
     token: TokenPF2e;
-    traits: ItemTrait[];
+    traits: Set<ItemTrait>;
 }
 export { AuraRenderer };

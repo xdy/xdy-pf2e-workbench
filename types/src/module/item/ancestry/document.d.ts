@@ -6,6 +6,7 @@ import { Size } from "@module/data.ts";
 import { AncestrySource, AncestrySystemData } from "./data.ts";
 declare class AncestryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ABCItemPF2e<TParent> {
     get traits(): Set<CreatureTrait>;
+    get rarity(): string;
     get hitPoints(): number;
     get speed(): number;
     get size(): Size;

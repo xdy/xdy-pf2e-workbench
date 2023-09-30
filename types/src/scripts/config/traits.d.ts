@@ -1,7 +1,6 @@
 import { AlignmentTrait } from "@actor/creature/types.ts";
 import { OtherArmorTag } from "@item/armor/types.ts";
-import { BackgroundTrait } from "@item/background/types.ts";
-import { ClassTrait } from "@item/class/types.ts";
+import { ClassTrait } from "@item/class/data.ts";
 import { OtherConsumableTag } from "@item/consumable/types.ts";
 import { PreciousMaterialType } from "@item/physical/types.ts";
 import { MagicSchool, MagicTradition } from "@item/spell/types.ts";
@@ -145,9 +144,9 @@ declare const energyDamageTypes: {
     electricity: string;
     fire: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
-    vitality: string;
-    void: string;
 };
 declare const magicTraditions: Record<MagicTradition, string>;
 declare const creatureTraits: {
@@ -293,9 +292,9 @@ declare const creatureTraits: {
     electricity: string;
     fire: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
-    vitality: string;
-    void: string;
     air: string;
     earth: string;
     metal: string;
@@ -346,7 +345,6 @@ declare const creatureTraits: {
     talos: string;
     tiefling: string;
 };
-declare const backgroundTraits: Record<BackgroundTrait, string>;
 declare const classTraits: Record<ClassTrait, string>;
 declare const spellOtherTraits: {
     amp: string;
@@ -419,6 +417,8 @@ declare const damageTraits: {
     electricity: string;
     fire: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
     air: string;
     earth: string;
@@ -513,6 +513,8 @@ declare const spellTraits: {
     cold: string;
     electricity: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
     chaotic: string;
     evil: string;
@@ -672,12 +674,12 @@ declare const weaponTraits: {
     "versatile-force": string;
     "versatile-good": string;
     "versatile-lawful": string;
+    "versatile-negative": string;
     "versatile-p": string;
     "versatile-poison": string;
+    "versatile-positive": string;
     "versatile-s": string;
     "versatile-sonic": string;
-    "versatile-vitality": string;
-    "versatile-void": string;
     "volley-20": string;
     "volley-30": string;
     "volley-50": string;
@@ -698,9 +700,9 @@ declare const weaponTraits: {
     electricity: string;
     fire: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
-    vitality: string;
-    void: string;
     air: string;
     earth: string;
     metal: string;
@@ -1012,12 +1014,12 @@ declare const npcAttackTraits: {
     "versatile-force": string;
     "versatile-good": string;
     "versatile-lawful": string;
+    "versatile-negative": string;
     "versatile-p": string;
     "versatile-poison": string;
+    "versatile-positive": string;
     "versatile-s": string;
     "versatile-sonic": string;
-    "versatile-vitality": string;
-    "versatile-void": string;
     "volley-20": string;
     "volley-30": string;
     "volley-50": string;
@@ -1038,9 +1040,9 @@ declare const npcAttackTraits: {
     electricity: string;
     fire: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
-    vitality: string;
-    void: string;
     air: string;
     earth: string;
     metal: string;
@@ -1233,6 +1235,8 @@ declare const featTraits: {
     cold: string;
     electricity: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
     chaotic: string;
     evil: string;
@@ -1406,6 +1410,8 @@ declare const consumableTraits: {
     cold: string;
     electricity: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
     chaotic: string;
     evil: string;
@@ -1506,6 +1512,8 @@ declare const actionTraits: {
     cold: string;
     electricity: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
     chaotic: string;
     evil: string;
@@ -1715,6 +1723,8 @@ declare const hazardTraits: {
     electricity: string;
     fire: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
     air: string;
     earth: string;
@@ -1825,9 +1835,9 @@ declare const equipmentTraits: {
     electricity: string;
     fire: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
-    vitality: string;
-    void: string;
     air: string;
     earth: string;
     metal: string;
@@ -2102,12 +2112,12 @@ declare const traitDescriptions: {
     "versatile-force": string;
     "versatile-good": string;
     "versatile-lawful": string;
+    "versatile-negative": string;
     "versatile-p": string;
     "versatile-poison": string;
+    "versatile-positive": string;
     "versatile-s": string;
     "versatile-sonic": string;
-    "versatile-vitality": string;
-    "versatile-void": string;
     virulent: string;
     visual: string;
     vitality: string;
@@ -2439,6 +2449,7 @@ declare const traitDescriptions: {
     mutagen: string;
     nagaji: string;
     necromancy: string;
+    negative: string;
     noisy: string;
     nonlethal: string;
     oath: string;
@@ -2458,6 +2469,7 @@ declare const traitDescriptions: {
     ponderous: string;
     poppet: string;
     portable: string;
+    positive: string;
     possession: string;
     potion: string;
     precious: string;
@@ -2578,6 +2590,8 @@ declare const kingmakerTraits: {
     cold: string;
     electricity: string;
     force: string;
+    negative: string;
+    positive: string;
     sonic: string;
     chaotic: string;
     evil: string;
@@ -2736,4 +2750,4 @@ declare const kingmakerTraits: {
     vanara: string;
     vishkanya: string;
 };
-export { actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, backgroundTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, kingmakerTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherConsumableTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, traitDescriptions, vehicleTraits, weaponTraits, type ElementTrait, };
+export { type ElementTrait, actionTraits, alignmentTraits, ancestryItemTraits, ancestryTraits, armorTraits, classTraits, consumableTraits, creatureTraits, damageTraits, elementTraits, energyDamageTypes, equipmentTraits, featTraits, hazardTraits, kingmakerTraits, magicSchools, magicTraditions, npcAttackTraits, otherArmorTags, otherConsumableTags, otherWeaponTags, preciousMaterials, spellOtherTraits, spellTraits, traitDescriptions, vehicleTraits, weaponTraits, };

@@ -1,7 +1,6 @@
 import { ItemPF2e } from "@item";
 import type { ItemSourcePF2e, ItemType } from "@item/data/index.ts";
 import type { DamageType } from "@system/damage/types.ts";
-import { SlugField } from "@system/schema-data-fields.ts";
 import type { DataField, DataFieldOptions, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { AELikeChangeMode } from "../ae-like.ts";
 declare const fields: typeof import("types/foundry/common/data/fields.d.ts");
@@ -86,11 +85,6 @@ declare const ITEM_ALTERATION_VALIDATORS: {
         itemType: StringField<"action" | "feat", ItemType, true, false, false>;
         mode: StringField<"override" | "upgrade" | "downgrade", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
         value: StringField<string, unknown, true, false, boolean>;
-    }>;
-    "other-tags": ItemAlterationValidator<{
-        itemType: StringField<"background" | "armor" | "consumable" | "ancestry" | "class" | "action" | "book" | "backpack" | "equipment" | "treasure" | "weapon" | "affliction" | "effect" | "melee" | "campaignFeature" | "condition" | "deity" | "feat" | "heritage" | "kit" | "lore" | "spell" | "spellcastingEntry", ItemType, true, false, false>;
-        mode: StringField<"add" | "remove" | "subtract", "override" | "upgrade" | "add" | "remove" | "multiply" | "subtract" | "downgrade", true, false, false>;
-        value: SlugField<true, false, boolean>;
     }>;
 };
 interface AlterationFieldOptions<TSourceProp extends SourceFromSchema<AlterationSchema>> extends DataFieldOptions<TSourceProp, true, false, false> {

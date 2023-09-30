@@ -8,9 +8,7 @@ declare class ChatLogPF2e extends ChatLog<ChatMessagePF2e> {
     /** Separate public method so as to be accessible from renderChatPopout hook */
     activateClickListener(html: HTMLElement): void;
     /** Replace parent method in order to use DamageRoll class as needed */
-    protected _processDiceCommand(command: string, matches: RegExpMatchArray[], chatData: PreCreate<Omit<ChatMessagePF2e["_source"], "rolls"> & {
-        rolls: (string | RollJSON)[];
-    }>, createOptions: ChatMessageModificationContext): Promise<void>;
+    protected _processDiceCommand(command: string, matches: RegExpMatchArray[], chatData: DeepPartial<foundry.documents.ChatMessageSource>, createOptions: ChatMessageModificationContext): Promise<void>;
     protected _getEntryContextOptions(): EntryContextOption[];
 }
 export { ChatLogPF2e };

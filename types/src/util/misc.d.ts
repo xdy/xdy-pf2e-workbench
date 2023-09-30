@@ -1,5 +1,4 @@
 import { ActionCost } from "@item/data/base.ts";
-import Sortable from "sortablejs";
 /**
  * Given an array and a key function, create a map where the key is the value that
  * gets returned when each item is pushed into the function. Accumulate
@@ -114,6 +113,7 @@ declare function sortLabeledRecord<T extends Record<string, {
 declare function sortStringRecord<T extends Record<string, string>>(record: T): T;
 /** JSON.stringify with recursive key sorting */
 declare function sortObjByKey(value: unknown): unknown;
+declare function sortedStringify(obj: object): string;
 /** Walk an object tree and replace any string values found according to a provided function */
 declare function recursiveReplaceString<T>(source: T, replace: (s: string) => string): T;
 /** Create a localization function with a prefixed localization object path */
@@ -125,5 +125,4 @@ declare function isImageFilePath(path: unknown): path is ImageFilePath;
 /** Does the parameter look like a video file path? */
 declare function isVideoFilePath(path: unknown): path is ImageFilePath;
 declare function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath;
-declare const SORTABLE_DEFAULTS: Sortable.Options;
-export { ErrorPF2e, SORTABLE_DEFAULTS, addSign, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sum, tupleHasValue, zip, type Fraction, type SlugCamel, };
+export { ErrorPF2e, type Fraction, type SlugCamel, addSign, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sortedStringify, sum, tupleHasValue, zip, };

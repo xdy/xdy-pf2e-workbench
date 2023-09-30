@@ -5,15 +5,10 @@ interface KingdomCHG {
     img: ImageFilePath;
     description: string;
     boosts: (KingdomAbility | "free")[];
-    flaw?: KingdomAbility | null;
-    feat?: CompendiumUUID | null;
-}
-interface KingdomCharter extends KingdomCHG {
     flaw: KingdomAbility | null;
 }
 interface KingdomGovernment extends KingdomCHG {
-    skills: KingdomSkill[];
-    feat: CompendiumUUID | null;
+    skills: string[];
 }
 type KingdomAbility = (typeof KINGDOM_ABILITIES)[number];
 type KingdomSkill = (typeof KINGDOM_SKILLS)[number];
@@ -28,4 +23,4 @@ type KingdomAbilityData = KingdomData["abilities"][KingdomAbility];
 type KingdomLeadershipData = KingdomData["leadership"][KingdomLeadershipRole];
 type KingdomSettlementData = ModelPropsFromSchema<typeof KINGDOM_SETTLEMENT_SCHEMA>;
 type FameType = "fame" | "infamy";
-export type { KingdomAbility, KingdomAbilityData, KingdomCommodity, KingdomCHG, KingdomCharter, KingdomData, KingdomGovernment, KingdomLeadershipData, KingdomLeadershipRole, KingdomNationType, KingdomSchema, KingdomSettlementData, KingdomSettlementType, KingdomSkill, KingdomSource, FameType, };
+export type { KingdomAbility, KingdomAbilityData, KingdomCommodity, KingdomCHG, KingdomData, KingdomGovernment, KingdomLeadershipData, KingdomLeadershipRole, KingdomNationType, KingdomSchema, KingdomSettlementData, KingdomSettlementType, KingdomSkill, KingdomSource, FameType, };
