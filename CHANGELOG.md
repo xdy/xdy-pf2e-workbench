@@ -1,3 +1,10 @@
+## [5.18.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.4...v5.18.5) (2023-09-30)
+
+
+### Bug Fixes
+
+* Reverted everything but the macros for now. It broke the settings menu. :( ([56a7e46](https://github.com/xdy/xdy-pf2e-workbench/commit/56a7e460e8049d7c2527b041370acefec3a7dc78))
+
 ## [5.18.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.2...v5.18.3) (2023-09-24)
 
 
