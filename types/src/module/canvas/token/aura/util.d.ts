@@ -6,6 +6,6 @@ interface GetAreaSquaresParams {
     bounds: PIXI.Rectangle;
     radius: number;
     token: TokenPF2e | TokenDocumentPF2e;
-    traits?: Set<string>;
+    traits?: string[];
 }
 export {};

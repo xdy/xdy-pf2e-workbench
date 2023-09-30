@@ -59,8 +59,6 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     protected tagSelector(selectorType: "basic", options: BasicConstructorOptions): void;
     /** Opens a sheet tab by name. May be overriden to handle sub-tabs */
     protected openTab(name: string): void;
-    /** Hide the sheet-config button unless there is more than one sheet option. */
-    protected _getHeaderButtons(): ApplicationHeaderButton[];
     /** Override of inner render function to maintain item summary state */
     protected _renderInner(data: Record<string, unknown>, options: RenderOptions): Promise<JQuery>;
     /** Overriden _render to maintain focus on tagify elements */

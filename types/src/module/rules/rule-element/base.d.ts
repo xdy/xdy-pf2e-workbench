@@ -4,7 +4,7 @@ import { CheckModifier, DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
-import { CheckRoll } from "@system/check/index.ts";
+import { CheckRoll, CheckRollContext } from "@system/check/index.ts";
 import { LaxSchemaField } from "@system/schema-data-fields.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { BracketedValue, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
@@ -85,6 +85,7 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
 }
 interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abstract.DataModel<ItemPF2e<ActorPF2e>, TSchema>, ModelPropsFromSchema<RuleElementSchema> {
     constructor: typeof RuleElementPF2e<TSchema>;
+    get schema(): LaxSchemaField<TSchema>;
     /**
      * Run between Actor#applyActiveEffects and Actor#prepareDerivedData. Generally limited to ActiveEffect-Like
      * elements
@@ -183,9 +184,9 @@ declare namespace RuleElementPF2e {
         context: DocumentModificationContext<ActorPF2e | null>;
     }
     interface AfterRollParams {
-        roll: Rolled<CheckRoll> | null;
-        selectors: string[];
+        roll: Rolled<CheckRoll>;
         check: CheckModifier;
+        context: CheckRollContext;
         domains: string[];
         rollOptions: Set<string>;
     }

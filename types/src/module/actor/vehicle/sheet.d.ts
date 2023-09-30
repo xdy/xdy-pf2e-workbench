@@ -6,14 +6,11 @@ import { VehiclePF2e } from "@actor/vehicle/index.ts";
 import { AbilityItemPF2e } from "@item";
 import { ActionCost, Frequency } from "@item/data/base.ts";
 import { ActorSheetPF2e } from "../sheet/base.ts";
+import { AdjustedValue } from "@module/sheet/helpers.ts";
 export declare class VehicleSheetPF2e extends ActorSheetPF2e<VehiclePF2e> {
     static get defaultOptions(): ActorSheetOptions;
     getData(): Promise<VehicleSheetData>;
     activateListeners($html: JQuery): void;
-}
-interface AdjustedValue {
-    value: number;
-    adjustmentClass: "adjusted-higher" | "adjusted-lower" | null;
 }
 interface VehicleSheetData extends ActorSheetDataPF2e<VehiclePF2e> {
     actions: ActionsSheetData;

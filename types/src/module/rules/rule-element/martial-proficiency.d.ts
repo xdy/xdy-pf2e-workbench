@@ -2,10 +2,10 @@ import { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
 import { ProficiencyRank } from "@item/data/index.ts";
 import { WeaponCategory } from "@item/weapon/types.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
-import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { PredicateField } from "@system/schema-data-fields.ts";
+import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField } from "./data.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 declare class MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySchema> {
     protected static validActorTypes: ActorType[];
     static defineSchema(): MartialProficiencySchema;

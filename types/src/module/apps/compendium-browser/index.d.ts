@@ -6,8 +6,8 @@ import { ActionType } from "@item/data/base.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/index.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { BrowserTabs, PackInfo, SourceInfo, TabData, TabName } from "./data.ts";
-import { ActionFilters, BestiaryFilters, EquipmentFilters, FeatFilters, HazardFilters, SpellFilters } from "./tabs/data.ts";
 import { PackLoader } from "./loader.ts";
+import { ActionFilters, BestiaryFilters, EquipmentFilters, FeatFilters, HazardFilters, SpellFilters } from "./tabs/data.ts";
 declare class CompendiumBrowser extends Application {
     #private;
     settings: CompendiumBrowserSettings;

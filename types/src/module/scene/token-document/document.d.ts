@@ -34,6 +34,8 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
     get playersCanSeeName(): boolean;
     /** The pixel-coordinate definition of this token's space */
     get bounds(): PIXI.Rectangle;
+    /** Bounds used for mechanics, such as flanking and drawing auras */
+    get mechanicalBounds(): PIXI.Rectangle;
     /** The pixel-coordinate pair constituting this token's center */
     get center(): Point;
     protected _initialize(options?: Record<string, unknown>): void;

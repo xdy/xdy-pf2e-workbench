@@ -8,7 +8,6 @@ interface ClassSheetData extends ABCSheetData<ClassPF2e> {
     skills: typeof CONFIG.PF2E.skills;
     proficiencyChoices: typeof CONFIG.PF2E.proficiencyLevels;
     selectedKeyAbility: Record<string, string>;
-    ancestryTraits: SheetOptions;
     trainedSkills: SheetOptions;
     ancestryFeatLevels: SheetOptions;
     classFeatLevels: SheetOptions;

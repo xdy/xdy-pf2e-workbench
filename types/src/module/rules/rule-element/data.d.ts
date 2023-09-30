@@ -42,6 +42,7 @@ type RuleElementSchema = {
     requiresInvestment: BooleanField<boolean, boolean, false, true, false>;
 };
 declare class ResolvableValueField<TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean = false> extends foundry.data.fields.DataField<RuleValue, RuleValue, TRequired, TNullable, THasInitial> {
+    #private;
     protected _validateType(value: unknown): boolean;
     /** No casting is applied to this value */
     protected _cast(value: unknown): unknown;

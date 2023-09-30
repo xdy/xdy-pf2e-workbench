@@ -22,7 +22,7 @@ declare class StrictNumberField<TSourceProp extends number, TModelProp = TSource
     protected _cast(value: unknown): unknown;
 }
 /** A `BooleanField` that does not cast the source value */
-declare class StrictBooleanField<TSourceProp extends boolean = boolean, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.BooleanField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+declare class StrictBooleanField<TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.BooleanField<boolean, boolean, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;
 }
 declare class StrictArrayField<TElementField extends DataField, TSourceProp extends Partial<SourcePropFromDataField<TElementField>>[] = SourcePropFromDataField<TElementField>[], TModelProp extends object = ModelPropFromDataField<TElementField>[], TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ArrayField<TElementField, TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {

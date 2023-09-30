@@ -32,6 +32,7 @@ declare class DamageModifierDialog extends Application {
     close(options?: {
         force?: boolean;
     }): Promise<void>;
+    protected _getHeaderButtons(): ApplicationHeaderButton[];
     /** Overriden to add some additional first-render behavior */
     protected _injectHTML($html: JQuery<HTMLElement>): void;
 }
@@ -47,9 +48,8 @@ interface BaseData {
     damageType: string | null;
     typeLabel: string | null;
     category: DamageCategoryUnique | string | null;
-    categoryIcon: string | null;
     show: boolean;
-    icon: string | null;
+    icon: string;
 }
 interface DialogDiceData extends BaseData {
     diceLabel: string;
@@ -70,6 +70,7 @@ interface DamageDialogData {
     damageSubtypes: Pick<ConfigPF2e["PF2E"]["damageCategories"], DamageCategoryUnique>;
     rollModes: Record<RollMode, string>;
     rollMode: RollMode | "roll" | undefined;
+    showRollDialogs: boolean;
     formula: string;
 }
 export { DamageModifierDialog };

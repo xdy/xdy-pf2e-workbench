@@ -5,7 +5,7 @@ import type { BooleanField, StringField } from "types/foundry/common/data/fields
 declare class RollTwiceRuleElement extends RuleElementPF2e<RollTwiceRuleSchema> {
     static defineSchema(): RollTwiceRuleSchema;
     beforePrepareData(): void;
-    afterRoll({ selectors, roll, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void>;
+    afterRoll({ domains, roll, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void>;
 }
 interface RollTwiceRuleElement extends RuleElementPF2e<RollTwiceRuleSchema>, ModelPropsFromSchema<RollTwiceRuleSchema> {
 }

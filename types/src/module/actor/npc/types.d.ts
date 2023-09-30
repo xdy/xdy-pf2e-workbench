@@ -14,9 +14,7 @@ interface ActionsDetails {
 }
 interface NPCActionSheetData {
     passive: ActionsDetails;
-    free: ActionsDetails;
-    reaction: ActionsDetails;
-    action: ActionsDetails;
+    active: ActionsDetails;
 }
 /** Highlight such a statistic if adjusted by data preparation */
 interface WithAdjustments {

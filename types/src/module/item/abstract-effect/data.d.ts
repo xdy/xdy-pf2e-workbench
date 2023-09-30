@@ -1,6 +1,6 @@
 import { AttributeString } from "@actor/types.ts";
 import { ActionTrait } from "@item/ability/types.ts";
-import { ItemSystemData, ItemSystemSource } from "@item/data/base.ts";
+import { ItemSystemData, ItemSystemSource, ItemTraitsNoRarity } from "@item/data/base.ts";
 import { MagicTradition, SpellTrait } from "@item/spell/index.ts";
 import type { CheckRoll } from "@system/check/index.ts";
 interface AbstractEffectSystemSource extends ItemSystemSource {
@@ -8,6 +8,7 @@ interface AbstractEffectSystemSource extends ItemSystemSource {
     fromSpell?: boolean;
 }
 interface AbstractEffectSystemData extends ItemSystemData {
+    traits: EffectTraits;
     /** Whether this effect originated from a spell */
     fromSpell: boolean;
 }
@@ -25,10 +26,7 @@ interface EffectBadgeCounterSource extends EffectBadgeBaseSource {
 interface EffectBadgeCounter extends EffectBadgeCounterSource, EffectBadgeBase {
     max: number;
 }
-interface EffectTraits {
-    value: EffectTrait[];
-    rarity?: never;
-    custom?: never;
+interface EffectTraits extends ItemTraitsNoRarity<EffectTrait> {
 }
 type EffectTrait = ActionTrait | SpellTrait;
 /** A static value, including the result of a formula badge */

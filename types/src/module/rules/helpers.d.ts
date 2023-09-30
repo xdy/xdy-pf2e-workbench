@@ -3,6 +3,7 @@ import { DamageDicePF2e, DeferredValueParams, ModifierAdjustment, ModifierPF2e, 
 import { ItemPF2e } from "@item";
 import { ConditionSource, EffectSource } from "@item/data/index.ts";
 import { RollNotePF2e } from "@module/notes.ts";
+import { BaseDamageData } from "@system/damage/index.ts";
 import { DegreeOfSuccessAdjustment } from "@system/degree-of-success.ts";
 import { RollTwiceOption } from "@system/rolls.ts";
 import { BracketedValue } from "./rule-element/index.ts";
@@ -13,7 +14,7 @@ declare function extractModifierAdjustments(adjustmentsRecord: RuleElementSynthe
 /** Extracts a list of all cloned notes across all given keys in a single list. */
 declare function extractNotes(rollNotes: Record<string, RollNotePF2e[]>, selectors: string[]): RollNotePF2e[];
 declare function extractDamageDice(deferredDice: DamageDiceSynthetics, selectors: string[], options: TestableDeferredValueParams): DamageDicePF2e[];
-declare function extractDamageSynthetics(actor: ActorPF2e, selectors: string[], options: TestableDeferredValueParams & {
+declare function extractDamageSynthetics(actor: ActorPF2e, base: BaseDamageData[], selectors: string[], options: TestableDeferredValueParams & {
     extraModifiers?: ModifierPF2e[];
 }): {
     modifiers: ModifierPF2e[];

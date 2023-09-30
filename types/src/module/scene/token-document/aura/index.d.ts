@@ -1,4 +1,4 @@
-import { AuraAppearanceData, AuraData } from "@actor/types.ts";
+import { AuraAppearanceData, AuraData, AuraEffectData } from "@actor/types.ts";
 import { ItemTrait } from "@item/data/base.ts";
 import { EffectAreaSquare } from "@module/canvas/effect-area-square.ts";
 import { ScenePF2e } from "@scene/document.ts";
@@ -11,7 +11,8 @@ declare class TokenAura implements TokenAuraData {
     level: number | null;
     /** The radius of the aura in feet */
     radius: number;
-    traits: Set<ItemTrait>;
+    traits: ItemTrait[];
+    effects: AuraEffectData[];
     appearance: AuraAppearanceData;
     constructor(params: TokenAuraParams);
     /** The aura radius from the center in pixels */
@@ -31,6 +32,7 @@ interface TokenAuraParams extends Omit<AuraData, "effects" | "traits"> {
     level: number | null;
     radius: number;
     token: TokenDocumentPF2e;
-    traits: Set<ItemTrait>;
+    traits: ItemTrait[];
+    effects: AuraEffectData[];
 }
 export { TokenAura, TokenAuraData };

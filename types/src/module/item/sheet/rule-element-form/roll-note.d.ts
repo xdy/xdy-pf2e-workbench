@@ -1,4 +1,4 @@
-import { RollNoteRuleElement, RollNoteSource } from "@module/rules/rule-element/roll-note.ts";
+import type { RollNoteRuleElement, RollNoteSource } from "@module/rules/rule-element/roll-note.ts";
 import { RuleElementForm, RuleElementFormSheetData } from "./base.ts";
 /** Form handler for the RollNote rule element */
 declare class RollNoteForm extends RuleElementForm<RollNoteSource, RollNoteRuleElement> {

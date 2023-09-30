@@ -17,7 +17,21 @@ interface ActionCost {
 }
 interface ItemTraits<T extends ItemTrait = ItemTrait> {
     value: T[];
-    rarity?: Rarity;
+    rarity: Rarity;
+    otherTags: string[];
+}
+interface ItemTraitsNoRarity<T extends ItemTrait = ItemTrait> extends Omit<ItemTraits<T>, "rarity"> {
+    rarity?: never;
+}
+interface RarityTraitAndOtherTags {
+    readonly value?: never;
+    rarity: Rarity;
+    otherTags: string[];
+}
+interface OtherTagsOnly {
+    readonly value?: never;
+    rarity?: never;
+    otherTags: string[];
 }
 interface ItemFlagsPF2e extends foundry.documents.ItemFlags {
     pf2e: {
@@ -54,7 +68,7 @@ interface ItemSystemSource {
     source: {
         value: string;
     };
-    traits?: ItemTraits;
+    traits: ItemTraits | ItemTraitsNoRarity | RarityTraitAndOtherTags | OtherTagsOnly;
     options?: {
         value: string[];
     };
@@ -73,4 +87,4 @@ interface FrequencySource {
 interface Frequency extends FrequencySource {
     value: number;
 }
-export type { ActionCost, ActionType, BaseItemSourcePF2e, Frequency, FrequencyInterval, FrequencySource, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, };
+export type { ActionCost, ActionType, BaseItemSourcePF2e, Frequency, FrequencyInterval, FrequencySource, ItemFlagsPF2e, ItemGrantData, ItemGrantDeleteAction, ItemGrantSource, ItemSystemData, ItemSystemSource, ItemTrait, ItemTraits, ItemTraitsNoRarity, OtherTagsOnly, RarityTraitAndOtherTags, };

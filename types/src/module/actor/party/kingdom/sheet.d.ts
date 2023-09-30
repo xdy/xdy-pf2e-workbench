@@ -17,6 +17,8 @@ declare class KingdomSheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     #private;
     /** The current selected activity filter, which doubles as an active kingdom phase */
     protected selectedFilter: string | null;
+    /** HTML element to focus on a re-render, such as when new elements are added */
+    protected focusElement: string | null;
     constructor(actor: PartyPF2e, options?: Partial<ActorSheetOptions>);
     get kingdom(): Kingdom;
     get title(): string;
@@ -31,6 +33,8 @@ declare class KingdomSheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     /** Handle a drop event for an existing Owned Item to sort that item */
     protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e<PartyPF2e>[]>;
     protected _onDropActor(event: ElementDragEvent, data: DropCanvasData<"Actor", PartyPF2e>): Promise<false | void>;
+    /** Override to not auto-disable fields on a thing meant to be used by players */
+    protected _disableFields(form: HTMLElement): void;
     protected _updateObject(_event: Event, formData: Record<string, unknown>): Promise<void>;
 }
 interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
@@ -44,6 +48,8 @@ interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
     commodities: CommoditySheetData[];
     resourceDice: KingdomData["resources"]["dice"] & {
         icon: string;
+        bonusAdjustment: string | null;
+        penaltyAdjustment: string | null;
     };
     leadership: LeaderSheetData[];
     actions: {
@@ -53,9 +59,11 @@ interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
     skills: Statistic[];
     feats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>[];
     actionFilterChoices: SheetOption[];
-    settlementTypes: Record<string, string>;
     settlements: SettlementSheetData[];
     eventText: string;
+    settlementTypes: Record<string, string>;
+    abilityLabels: Record<string, string>;
+    skillLabels: Record<string, string>;
 }
 interface LeaderSheetData extends KingdomLeadershipData {
     actor: ActorPF2e | null;

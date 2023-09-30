@@ -167,8 +167,6 @@ export declare const PF2ECONFIG: {
         electricity: string;
         fire: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
         air: string;
         earth: string;
@@ -180,8 +178,8 @@ export declare const PF2ECONFIG: {
         good: string;
         lawful: string;
     };
-    damageTypes: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "spirit" | "untyped", string>;
-    damageRollFlavors: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "spirit" | "untyped", string>;
+    damageTypes: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "piercing" | "poison" | "slashing" | "sonic" | "spirit" | "vitality" | "void" | "untyped", string>;
+    damageRollFlavors: Record<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "piercing" | "poison" | "slashing" | "sonic" | "spirit" | "vitality" | "void" | "untyped", string>;
     damageCategories: {
         alignment: string;
         energy: string;
@@ -242,7 +240,6 @@ export declare const PF2ECONFIG: {
         mental: string;
         metal: string;
         mithral: string;
-        negative: string;
         "non-magical": string;
         nonlethal: string;
         "nonlethal-attacks": string;
@@ -251,7 +248,6 @@ export declare const PF2ECONFIG: {
         piercing: string;
         plant: string;
         poison: string;
-        positive: string;
         precision: string;
         "protean-anatomy": string;
         radiation: string;
@@ -263,6 +259,8 @@ export declare const PF2ECONFIG: {
         spells: string;
         spirit: string;
         "unarmed-attacks": string;
+        vitality: string;
+        void: string;
         vorpal: string;
         "vorpal-adamantine": string;
         warpglass: string;
@@ -315,7 +313,6 @@ export declare const PF2ECONFIG: {
         mental: string;
         metal: string;
         mithral: string;
-        negative: string;
         "non-magical": string;
         "nonlethal-attacks": string;
         orichalcum: string;
@@ -323,7 +320,6 @@ export declare const PF2ECONFIG: {
         piercing: string;
         plant: string;
         poison: string;
-        positive: string;
         precision: string;
         radiation: string;
         salt: string;
@@ -336,6 +332,8 @@ export declare const PF2ECONFIG: {
         "splash-damage": string;
         "unarmed-attacks": string;
         "vampire-weaknesses": string;
+        vitality: string;
+        void: string;
         vorpal: string;
         "vorpal-fear": string;
         "vulnerable-to-sunlight": string;
@@ -686,7 +684,7 @@ export declare const PF2ECONFIG: {
         vanara: string;
         vishkanya: string;
     };
-    deityDomains: Record<"darkness" | "healing" | "magic" | "water" | "air" | "cold" | "earth" | "fire" | "wealth" | "abomination" | "ambition" | "change" | "cities" | "confidence" | "creation" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "family" | "fate" | "freedom" | "glyph" | "indulgence" | "introspection" | "knowledge" | "lightning" | "luck" | "might" | "moon" | "naga" | "nature" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "time" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "void" | "wyrmkin" | "zeal" | "airapocryphal" | "ambitionapocryphal" | "confidenceapocryphal" | "darknessapocryphal" | "deathapocryphal" | "fateapocryphal" | "fireapocryphal" | "indulgenceapocryphal" | "knowledgeapocryphal" | "mightapocryphal" | "secrecyapocryphal" | "travelapocryphal" | "waterapocryphal", {
+    deityDomains: Record<"darkness" | "healing" | "magic" | "water" | "air" | "cold" | "earth" | "fire" | "void" | "wealth" | "abomination" | "ambition" | "change" | "cities" | "confidence" | "creation" | "death" | "decay" | "delirium" | "destruction" | "dreams" | "dust" | "duty" | "family" | "fate" | "freedom" | "glyph" | "indulgence" | "introspection" | "knowledge" | "lightning" | "luck" | "might" | "moon" | "naga" | "nature" | "nightmares" | "pain" | "passion" | "perfection" | "plague" | "protection" | "repose" | "secrecy" | "sorrow" | "soul" | "star" | "sun" | "swarm" | "time" | "toil" | "travel" | "trickery" | "truth" | "tyranny" | "undeath" | "vigil" | "wyrmkin" | "zeal" | "airapocryphal" | "ambitionapocryphal" | "confidenceapocryphal" | "darknessapocryphal" | "deathapocryphal" | "fateapocryphal" | "fireapocryphal" | "indulgenceapocryphal" | "knowledgeapocryphal" | "mightapocryphal" | "secrecyapocryphal" | "travelapocryphal" | "waterapocryphal", {
         label: string;
         description: string;
     }>;
@@ -820,12 +818,12 @@ export declare const PF2ECONFIG: {
         "versatile-force": string;
         "versatile-good": string;
         "versatile-lawful": string;
-        "versatile-negative": string;
         "versatile-p": string;
         "versatile-poison": string;
-        "versatile-positive": string;
         "versatile-s": string;
         "versatile-sonic": string;
+        "versatile-vitality": string;
+        "versatile-void": string;
         "volley-20": string;
         "volley-30": string;
         "volley-50": string;
@@ -846,9 +844,9 @@ export declare const PF2ECONFIG: {
         electricity: string;
         fire: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
+        vitality: string;
+        void: string;
         air: string;
         earth: string;
         metal: string;
@@ -1070,9 +1068,9 @@ export declare const PF2ECONFIG: {
         electricity: string;
         fire: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
+        vitality: string;
+        void: string;
         air: string;
         earth: string;
         metal: string;
@@ -1228,8 +1226,6 @@ export declare const PF2ECONFIG: {
         cold: string;
         electricity: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
         chaotic: string;
         evil: string;
@@ -1331,8 +1327,6 @@ export declare const PF2ECONFIG: {
         cold: string;
         electricity: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
         chaotic: string;
         evil: string;
@@ -1573,8 +1567,6 @@ export declare const PF2ECONFIG: {
         cold: string;
         electricity: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
         chaotic: string;
         evil: string;
@@ -1730,8 +1722,6 @@ export declare const PF2ECONFIG: {
         cold: string;
         electricity: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
         chaotic: string;
         evil: string;
@@ -1959,9 +1949,9 @@ export declare const PF2ECONFIG: {
         electricity: string;
         fire: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
+        vitality: string;
+        void: string;
         air: string;
         earth: string;
         metal: string;
@@ -2119,8 +2109,6 @@ export declare const PF2ECONFIG: {
         cold: string;
         electricity: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
         chaotic: string;
         evil: string;
@@ -2422,9 +2410,9 @@ export declare const PF2ECONFIG: {
         electricity: string;
         fire: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
+        vitality: string;
+        void: string;
         air: string;
         earth: string;
         metal: string;
@@ -2716,12 +2704,12 @@ export declare const PF2ECONFIG: {
         "versatile-force": string;
         "versatile-good": string;
         "versatile-lawful": string;
-        "versatile-negative": string;
         "versatile-p": string;
         "versatile-poison": string;
-        "versatile-positive": string;
         "versatile-s": string;
         "versatile-sonic": string;
+        "versatile-vitality": string;
+        "versatile-void": string;
         "volley-20": string;
         "volley-30": string;
         "volley-50": string;
@@ -2742,9 +2730,9 @@ export declare const PF2ECONFIG: {
         electricity: string;
         fire: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
+        vitality: string;
+        void: string;
         air: string;
         earth: string;
         metal: string;
@@ -2862,8 +2850,6 @@ export declare const PF2ECONFIG: {
         electricity: string;
         fire: string;
         force: string;
-        negative: string;
-        positive: string;
         sonic: string;
         air: string;
         earth: string;
@@ -3029,12 +3015,12 @@ export declare const PF2ECONFIG: {
         "versatile-force": string;
         "versatile-good": string;
         "versatile-lawful": string;
-        "versatile-negative": string;
         "versatile-p": string;
         "versatile-poison": string;
-        "versatile-positive": string;
         "versatile-s": string;
         "versatile-sonic": string;
+        "versatile-vitality": string;
+        "versatile-void": string;
         virulent: string;
         visual: string;
         vitality: string;
@@ -3366,7 +3352,6 @@ export declare const PF2ECONFIG: {
         mutagen: string;
         nagaji: string;
         necromancy: string;
-        negative: string;
         noisy: string;
         nonlethal: string;
         oath: string;
@@ -3386,7 +3371,6 @@ export declare const PF2ECONFIG: {
         ponderous: string;
         poppet: string;
         portable: string;
-        positive: string;
         possession: string;
         potion: string;
         precious: string;
@@ -3540,7 +3524,6 @@ export declare const PF2ECONFIG: {
         Immunity: string;
         ItemAlteration: string;
         LoseHitPoints: string;
-        MarkToken: string;
         MartialProficiency: string;
         MultipleAttackPenalty: string;
         Note: string;
@@ -3557,6 +3540,7 @@ export declare const PF2ECONFIG: {
         TokenEffectIcon: string;
         TokenImage: string;
         TokenLight: string;
+        TokenMark: string;
         TokenName: string;
         Unrecognized: string;
         Weakness: string;
@@ -3836,7 +3820,6 @@ export declare const PF2ECONFIG: {
         "misfortune-effects": string;
         mithral: string;
         necromancy: string;
-        negative: string;
         "non-magical": string;
         "nonlethal-attacks": string;
         "object-immunities": string;
@@ -3850,7 +3833,6 @@ export declare const PF2ECONFIG: {
         plant: string;
         poison: string;
         polymorph: string;
-        positive: string;
         possession: string;
         precision: string;
         prone: string;
@@ -3875,6 +3857,8 @@ export declare const PF2ECONFIG: {
         "unarmed-attacks": string;
         unconscious: string;
         visual: string;
+        vitality: string;
+        void: string;
         water: string;
         wood: string;
     };
@@ -4346,8 +4330,6 @@ export declare const PF2ECONFIG: {
                 cold: string;
                 electricity: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
                 chaotic: string;
                 evil: string;
@@ -4600,8 +4582,6 @@ export declare const PF2ECONFIG: {
                 cold: string;
                 electricity: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
                 chaotic: string;
                 evil: string;
@@ -4971,9 +4951,9 @@ export declare const PF2ECONFIG: {
                 electricity: string;
                 fire: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
+                vitality: string;
+                void: string;
                 air: string;
                 earth: string;
                 metal: string;
@@ -5024,6 +5004,7 @@ export declare const PF2ECONFIG: {
                 talos: string;
                 tiefling: string;
             };
+            background: Record<"pervasive-magic", string>;
             backpack: {
                 additive0: string;
                 additive1: string;
@@ -5109,9 +5090,9 @@ export declare const PF2ECONFIG: {
                 electricity: string;
                 fire: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
+                vitality: string;
+                void: string;
                 air: string;
                 earth: string;
                 metal: string;
@@ -5263,9 +5244,9 @@ export declare const PF2ECONFIG: {
                 electricity: string;
                 fire: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
+                vitality: string;
+                void: string;
                 air: string;
                 earth: string;
                 metal: string;
@@ -5439,8 +5420,6 @@ export declare const PF2ECONFIG: {
                 cold: string;
                 electricity: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
                 chaotic: string;
                 evil: string;
@@ -5688,8 +5667,6 @@ export declare const PF2ECONFIG: {
                 cold: string;
                 electricity: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
                 chaotic: string;
                 evil: string;
@@ -5781,9 +5758,9 @@ export declare const PF2ECONFIG: {
                 electricity: string;
                 fire: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
+                vitality: string;
+                void: string;
                 air: string;
                 earth: string;
                 metal: string;
@@ -5976,8 +5953,6 @@ export declare const PF2ECONFIG: {
                 cold: string;
                 electricity: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
                 chaotic: string;
                 evil: string;
@@ -6188,8 +6163,6 @@ export declare const PF2ECONFIG: {
                 cold: string;
                 electricity: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
                 chaotic: string;
                 evil: string;
@@ -6516,12 +6489,12 @@ export declare const PF2ECONFIG: {
                 "versatile-force": string;
                 "versatile-good": string;
                 "versatile-lawful": string;
-                "versatile-negative": string;
                 "versatile-p": string;
                 "versatile-poison": string;
-                "versatile-positive": string;
                 "versatile-s": string;
                 "versatile-sonic": string;
+                "versatile-vitality": string;
+                "versatile-void": string;
                 "volley-20": string;
                 "volley-30": string;
                 "volley-50": string;
@@ -6542,9 +6515,9 @@ export declare const PF2ECONFIG: {
                 electricity: string;
                 fire: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
+                vitality: string;
+                void: string;
                 air: string;
                 earth: string;
                 metal: string;
@@ -6693,8 +6666,6 @@ export declare const PF2ECONFIG: {
                 cold: string;
                 electricity: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
                 chaotic: string;
                 evil: string;
@@ -6854,12 +6825,12 @@ export declare const PF2ECONFIG: {
                 "versatile-force": string;
                 "versatile-good": string;
                 "versatile-lawful": string;
-                "versatile-negative": string;
                 "versatile-p": string;
                 "versatile-poison": string;
-                "versatile-positive": string;
                 "versatile-s": string;
                 "versatile-sonic": string;
+                "versatile-vitality": string;
+                "versatile-void": string;
                 "volley-20": string;
                 "volley-30": string;
                 "volley-50": string;
@@ -6880,9 +6851,9 @@ export declare const PF2ECONFIG: {
                 electricity: string;
                 fire: string;
                 force: string;
-                negative: string;
-                positive: string;
                 sonic: string;
+                vitality: string;
+                void: string;
                 air: string;
                 earth: string;
                 metal: string;

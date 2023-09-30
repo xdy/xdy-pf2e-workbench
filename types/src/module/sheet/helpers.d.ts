@@ -13,6 +13,13 @@ declare function createTagifyTraits(traits: Iterable<string>, { sourceTraits, re
  * This method is meant to be called in _getSubmitData().
  */
 declare function processTagifyInSubmitData(form: HTMLFormElement, data: Record<string, unknown>): void;
+declare function getAdjustment(value: number, reference: number): AdjustedValue;
+interface AdjustedValue {
+    value: number;
+    adjustedHigher: boolean;
+    adjustedLower: boolean;
+    adjustmentClass: "adjusted-higher" | "adjusted-lower" | null;
+}
 /** Override to refocus tagify elements in _render() to workaround handlebars full re-render */
 declare function maintainFocusInRender(sheet: Application, renderLogic: () => Promise<void>): Promise<void>;
 interface SheetOption {
@@ -35,5 +42,5 @@ interface TraitTagifyEntry {
     value: string;
     readonly: boolean;
 }
-export { createSheetOptions, createSheetTags, createTagifyTraits, maintainFocusInRender, processTagifyInSubmitData };
-export type { SheetOption, SheetOptions, TraitTagifyEntry };
+export { createSheetOptions, createSheetTags, createTagifyTraits, getAdjustment, maintainFocusInRender, processTagifyInSubmitData, };
+export type { AdjustedValue, SheetOption, SheetOptions, TraitTagifyEntry };

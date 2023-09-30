@@ -9,14 +9,13 @@ import { CheckRollContext } from "./types.ts";
  * @category Other
  */
 export declare class CheckModifiersDialog extends Application {
+    #private;
     /** The check which is being edited. */
     check: StatisticModifier;
     /** Relevant context for this roll, like roll options. */
     context: CheckRollContext;
     /** A Promise resolve method */
     resolve: (value: boolean) => void;
-    /** Pre-determined D20 roll results */
-    substitutions: RollSubstitution[];
     /** Has the promise been resolved? */
     isResolved: boolean;
     constructor(check: StatisticModifier, resolve: (value: boolean) => void, context?: CheckRollContext);
@@ -37,9 +36,12 @@ interface CheckDialogData {
     rollModes: Record<RollMode, string>;
     rollMode: RollMode | "roll" | undefined;
     showRollDialogs: boolean;
-    substitutions: RollSubstitution[];
+    substitutions: RollSubstitutionDialogData[];
     fortune: boolean;
     none: boolean;
     misfortune: boolean;
+}
+interface RollSubstitutionDialogData extends RollSubstitution {
+    toggleable: boolean;
 }
 export {};
