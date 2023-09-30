@@ -34,7 +34,7 @@
     "@types/node": "^18.18.3",
     "@types/prompts": "^2.4.5",
     "@types/sortablejs": "^1.15.3",
-    "@types/tooltipster": "^0.0.32",
+    "@types/tooltipster": "^0.0.33",
     "@types/yaireo__tagify": "^4.17.3",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
