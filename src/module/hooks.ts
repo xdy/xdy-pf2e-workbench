@@ -29,7 +29,6 @@ import {
     persistentHealing,
 } from "./feature/damageHandler/index.js";
 import {
-    applyEncumbranceBasedOnBulk,
     autoRemoveDyingAtGreaterThanZeroHp,
     autoRemoveUnconsciousAtGreaterThanZeroHP,
     checkIfLatestDamageMessageIsCriticalHitByEnemy,
@@ -282,23 +281,11 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
     ) {
         dropHeldItemsOnBecomingUnconscious(item.actor);
     }
-
-    if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        applyEncumbranceBasedOnBulk(item).then();
-    }
 }
 
-export async function updateItemHook(item: ItemPF2e, _update: any) {
-    if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        applyEncumbranceBasedOnBulk(item).then();
-    }
-}
+export async function updateItemHook(item: ItemPF2e, _update: any) {}
 
 export async function deleteItemHook(item: ItemPF2e, _options: {}) {
-    if (item.actor?.isOfType(CHARACTER_TYPE) && game.settings.get(MODULENAME, "applyEncumbranceBasedOnBulk")) {
-        applyEncumbranceBasedOnBulk(item);
-    }
-
     if (
         game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
         game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")

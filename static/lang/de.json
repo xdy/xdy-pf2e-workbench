@@ -273,10 +273,6 @@
         "RegenerationLabel": "Regeneration erhalten",
         "wasHealed": "{healing} Heilung wurde automatisch angewendet."
       },
-      "applyEncumbranceBasedOnBulk": {
-        "hint": "(Veraltet, Feature existiert in pf2e 5.2) Automatisch belastet anhand der Last hinzufügen. (Der System Code sieht 9 Leichte Last nicht als überschreiten der Last um 1 an.)",
-        "name": "(Veraltet) Automatisch belastet anhand der Last hinzufügen."
-      },
       "customPauseImage": {
         "hint": "Eigenes Bild für das Pausenbild benutzen. Leer lassen um das Standard Uhrwerk-Symbol zu nutzen.",
         "name": "Eigenes Bild für das Pausenbild benutzen."

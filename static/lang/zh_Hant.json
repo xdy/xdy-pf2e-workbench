@@ -183,10 +183,6 @@
         "name": "新增使用者目標",
         "title": "選擇要為其新增目標的使用者"
       },
-      "applyEncumbranceBasedOnBulk": {
-        "hint": "根據負載自動賦予超載狀態。（跟隨PF2e系統，並認為5B+9L不超過5B）",
-        "name": "根據負載自動賦予超載狀態。"
-      },
       "applyPersistentAllow": {
         "all": "所有",
         "gm": "GM",

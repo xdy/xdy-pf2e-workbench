@@ -20,10 +20,6 @@
         "name": "Adicionar Alvos",
         "title": "Selecione o usuário que marcará os alvos"
       },
-      "applyEncumbranceBasedOnBulk": {
-        "hint": "Aplica Sobrecarga baseado no Volume. Usa código do sistema que, por exemplo, considera que um volume total de 5 Volumes + 9 Leves não excedem um limite de 5 Volumes.",
-        "name": "Aplicar Sobrecarga baseado no Volume"
-      },
       "applyPersistentAllow": {
         "all": "Todos",
         "gm": "MJ",

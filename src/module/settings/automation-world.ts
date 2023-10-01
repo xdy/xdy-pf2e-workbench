@@ -71,16 +71,6 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
-            applyEncumbranceBasedOnBulk: {
-                name: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.name`,
-                hint: `${MODULENAME}.SETTINGS.applyEncumbranceBasedOnBulk.hint`,
-                scope: "world",
-                config: true,
-                default: false,
-                type: Boolean,
-                onChange: () => updateHooks(),
-                requiresReload: true,
-            },
             autoReduceStunned: {
                 name: `${MODULENAME}.SETTINGS.autoReduceStunned.name`,
                 hint: `${MODULENAME}.SETTINGS.autoReduceStunned.hint`,

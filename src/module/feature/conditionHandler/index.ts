@@ -440,22 +440,3 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
         }
     }
 }
-
-export async function applyEncumbranceBasedOnBulk(item: ItemPF2e) {
-    // TODO Not sure if it should be backpack or container, so, adding both
-    const physicalTypes = ["armor", "backpack", "container", "book", "consumable", "equipment", "treasure", "weapon"];
-    if (isFirstGM() && physicalTypes.includes(item.type) && item.actor) {
-        // Sleep 0.25s to handle race condition
-        await new Promise((resolve) => setTimeout(resolve, 250));
-        if (item.actor.inventory.bulk.isEncumbered) {
-            if (!item.actor.hasCondition("encumbered")) {
-                await item.actor.toggleCondition("encumbered");
-            }
-        } else {
-            const encumbered = item.actor.getCondition("encumbered");
-            if (encumbered && !encumbered.isLocked) {
-                await item.actor.toggleCondition("encumbered");
-            }
-        }
-    }
-}

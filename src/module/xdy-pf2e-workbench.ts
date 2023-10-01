@@ -129,18 +129,15 @@ export function updateHooks(cleanSlate = false) {
 
     handle(
         "createItem",
-        gs.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
-            game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"),
+        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"),
         debounce(createItemHook, 10),
     );
 
-    handle("updateItem", gs.get(MODULENAME, "applyEncumbranceBasedOnBulk"), updateItemHook);
+    handle("updateItem", false, updateItemHook);
 
     handle(
         "deleteItem",
-        gs.get(MODULENAME, "applyEncumbranceBasedOnBulk") ||
-            gs.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
-            gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP"),
+        gs.get(MODULENAME, "giveWoundedWhenDyingRemoved") || gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP"),
         deleteItemHook,
     );
 

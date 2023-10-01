@@ -52,7 +52,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 
 * Quality of Life section
     * Option to add an npc scaler feature when right clicking on an npc (This feature has been taken over from the
-      delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox#npc-scaler) module. Thanks DJ! At some point Avery will
+      delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox#npc-scaler) module. Thanks DJ! At some
+      point Avery will
       have the time to add it to the system, until then I'll maintain it.)
     * Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc
       using the suggested values from the GMG (This feature has been taken over from the
@@ -86,7 +87,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Suboption for how to handle if the final damage was nonlethal.
     * Option to automatically remove Dying when healed to above 0 hp.
     * Option to drop all held items on becoming unconscious.
-    * Option to automate the results of the dying recovery roll button being clicked. (I.e. it does not automatically roll to try recover the dying character.)
+    * Option to automate the results of the dying recovery roll button being clicked. (I.e. it does not automatically
+      roll to try recover the dying character.)
     * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384)
 
 * Client Automation section
@@ -108,14 +110,17 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 * Variant Rules
     * Option to change the max number of hero points a character can have. (This feature has been taken over from the
       delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox) module. Thanks DJ!)
-    * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
+    * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357). (Currently broken)
 
 * House Rules
-  * Option to enable Keeley's Hero Point Rule (if reroll die is 10 or less, get a +10 bonus). Courtesy of stwlam
-  * Option to enable my personal house rules (currently adds saves to crit spec for flail and hamer)
-  * Not yet needed option to add Ancestry Paragon feat slots (don't enable until if/when the system removes them due to not being in the remaster rules)
-  * Not yet needed option to add Dual Class feat slots (don't enable until if/when the system removes them due to not being in the remaster rules)
-  * REALLY experimental option to use json to potentially brick your world. (Or, see [docs/housepatcher.md](docs/housepatcher.md) for more details.)
+    * Option to enable Keeley's Hero Point Rule (if reroll die is 10 or less, get a +10 bonus). Courtesy of stwlam
+    * Option to enable my personal house rules (currently adds saves to crit spec for flail and hamer)
+    * Not yet needed option to add Ancestry Paragon feat slots (don't enable until if/when the system removes them due
+      to not being in the remaster rules)
+    * Not yet needed option to add Dual Class feat slots (don't enable until if/when the system removes them due to not
+      being in the remaster rules)
+    * REALLY experimental option to use json to potentially brick your world. (Or,
+      see [docs/housepatcher.md](docs/housepatcher.md) for more details.)
 
 * No section
     * Optional setting to automatically collapse chat cards with an h3 header (intended for item cards like spells,
@@ -168,8 +173,11 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Effect: Minium Frightened that you can give to targets to not let the automated frightened removal reduce
           frightened below 1.
         * Effect that you can use to change Focus Point Maximum of a character
-        * A set of effects that can be used to grant most conditions for a certain amount of time. They are named like "
-          Effect: Condition for 1 hour (modifiable)"
+        * Effect that you can use to implement ABP, "Another Alternative Bonus Progression" (by @crackjackflood) and an
+          accompanying 'Feat' to add it to a character.
+        * (Deprecated) A set of effects that can be used to grant most conditions for a certain amount of time. They are
+          named like "Effect: Condition for 1 hour (modifiable)" (Use the "Condition Manager" macro from the "
+          Symon-provided macros" compendium instead.)
     * The compendium "PF2e Workbench Macros (xdy-pf2e-workbench-macros)" contains a few macros you might find useful.
         * 'Basic Action Macros' shows a dialog with a button for most macros, with bonus and whether you're the best in
           the party at that action (a setting to turn this off exists). (
@@ -206,14 +214,15 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       where prohibited. Ei saa peittää. Do not taunt happy fun ball: https://www.youtube.com/watch?v=GmqeZl8OI2M)
 
 * Deprecated features (will be removed eventually):
-    * (Deprecated, is in the system from pf2e 5.2.0) Option to apply Encumbered condition automatically based on
-      current bulk when bulk changes. Note: Uses the system code which considers 5 bulk + 9 light to not exceed 5 bulk.
 
 * Recently removed features:
     * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
     * Workbench Flat Check Notes. Use https://foundryvtt.com/packages/pf2-flat-check
       or https://foundryvtt.com/packages/pf2e-flatcheck-helper instead.
-    * Workbench ABP. Use https://github.com/reonZ/pf2e-arp instead.
+    * Workbench ABP. Use https://github.com/reonZ/pf2e-arp or the "Effect: Another Alternate Bonus Progression" from
+      the "PF2e Workbench Items" compendium instead.
+    * Option to apply Encumbered condition automatically based on current bulk when bulk changes. Note: Uses the system
+      code which considers 5 bulk + 9 light to not exceed 5 bulk.
 
 ## Installation
 
@@ -311,6 +320,7 @@ Asset licenses:
   by [Elmer Mercanas](https://unsplash.com/@elmercanasjr) under the [Unsplash License](https://unsplash.com/license)
 * The icon for Basic Action Macros was made by Oskar and popy and is available under
   the [CC0 license](https://creativecommons.org/share-your-work/public-domain/cc0/)
+* The icon for Another Alternative Bonus Progression is from "Font Awesome by Dave Gandy - http://fontawesome.io".
 
 build-packs license:
 
