@@ -1,3 +1,11 @@
+# [5.19.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.5...v5.19.0) (2023-10-01)
+
+
+### Features
+
+* Adds "Another Alternative Bonus Progression" by [@crackjackflood](https://github.com/crackjackflood) (see the effect in the "PF2e Workbench Items" compendium for a description). Also removes the deprecated feature that set encumbrance based on bulk as that option now exists in the pf2e system itself. ([b1e8d51](https://github.com/xdy/xdy-pf2e-workbench/commit/b1e8d51a7407f810e74136d8265816526c9468b3))
+* Adds "Another Alternative Bonus Progression" by [@crackjackflood](https://github.com/crackjackflood) (see the effect in the "PF2e Workbench Items" compendium for a description). Also removes the deprecated feature that set encumbrance based on bulk as that option now exists in the pf2e system itself. ([bb7b11d](https://github.com/xdy/xdy-pf2e-workbench/commit/bb7b11dde5bcb554732e0ac14e18a4e949c9cc3e))
+
 ## [5.18.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.4...v5.18.5) (2023-09-30)
 
 
