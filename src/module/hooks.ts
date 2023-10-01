@@ -283,7 +283,7 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
     }
 }
 
-export async function updateItemHook(item: ItemPF2e, _update: any) {}
+export async function updateItemHook(_item: ItemPF2e, _update: any) {}
 
 export async function deleteItemHook(item: ItemPF2e, _options: {}) {
     if (
