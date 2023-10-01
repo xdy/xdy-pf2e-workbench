@@ -9,7 +9,7 @@
         "skill": "Umiejętności",
         "ac": "Klasa Pancerza",
         "damage": "Obrażenia",
-        "hp": "HP",
+        "hp": "Punkty Wytrzymałości",
         "perception": "Percepcja",
         "strike": "Uderzenia",
         "areaDamage": "Obrażenia obszarowe"
@@ -109,7 +109,7 @@
           "Perform": "Występy",
           "PickALock": "Otwieranie zamka",
           "RaiseAShieldToggle": "Podniesienie tarczy (aktywuj)",
-          "RecallKnowledge": "Wiedza",
+          "RecallKnowledge": "Przywołanie Wiedzy",
           "Repair": "Naprawa",
           "Request": "Prośba",
           "Seek": "Szukanie",
@@ -144,27 +144,73 @@
         "settings": {
           "showBestBonus": {
             "name": "Pokazuj czy to najlepszy wynik w drużynie w Macro Akcji Podstawowych",
-            "hint": "Zdecyduj, czy pokazywać w Macro Akcji Podstawowych, że wybrany aktor ma największy bonus do danej umiejętności"
+            "hint": "Wyświetlanie informacji o tym, czy wybrany aktor ma najlepszy wynik w oknie dialogowym Makra akcji podstawowych"
           }
         },
         "compendiumNotFound": "Kompendium {compendiumName} nie znalezione",
-        "macroNotFound": "Macro {macroName} nie znalezione"
+        "macroNotFound": "Macro {macroName} nie znalezione",
+        "bamActionsPerColumn": {
+          "name": "Przybliżone akcje na wiersz",
+          "hint": "Przybliżona liczba akcji na wiersz w oknie dialogowym Makra akcji podstawowych. Rzeczywista liczba akcji na wiersz będzie najbliższą liczbą akcji na wiersz, która zmieści się w oknie dialogowym."
+        },
+        "gmMustImport": "GM musi kliknąć prawym przyciskiem myszy na kompendium xdy-pf2e-workbench-macros i wybrać opcję \"Importuj całą zawartość\" i upewnić się, że podczas importowania zaznaczona jest opcja \"Zachowaj identyfikatory dokumentów\"."
       },
       "refocus": {
         "notPsychic": "zużywa przynajmniej {regain} punktów skupienia",
         "regains": "Odzyskuje {focus} punktów skupienia.",
         "regainOne": "Odzyskaj 1 punkt skupienia.",
-        "isPsychic": "zużywa punkty skupienia wyłącznie by wzmocnić sztuczki psi lub zasilić psioniczne zdolności"
+        "isPsychic": "zużywa punkty skupienia wyłącznie by wzmocnić sztuczki psi lub zasilić psioniczne zdolności",
+        "selectOneActor": "Musisz wybrać jednego aktora.",
+        "disabled": "Wyłączona z powodu braku możliwości odzyskania więcej niż 1 punktu skupienia.",
+        "one": "jeden",
+        "enabled": "Odzyskaj {regain} punktów skupienia. <br/>Kliknij<b>TYLKO</b> jeśli masz {details} od ostatniego Refocusa."
+      },
+      "buildNpcSpellbookJournal": {
+        "title": "Tworzenie dziennika zaklęć NPC",
+        "noSpellcastingEntry": "Musisz mieć otwartą i wybraną kartę postaci NPC lub wybrany pojedynczy token NPC. Ponadto wspomniany NPC musi mieć wpis dotyczący rzucania zaklęć.",
+        "generatedSpellbookFor": "Wygenerowano księgę zaklęć dla {name}"
+      },
+      "whirlwindStrike": {
+        "starts": "{name} rozpoczyna Atak Wichru!",
+        "ends": "{name} Atak Wichru kończy się po {targets} atakach!",
+        "reachAuraNotFound": "Nie znaleziono aury, nałóż na token \"aurę\" zasięgu z kompendium przedmiotów z warsztatu PF2e i odpowiednio dostosuj zasięg.",
+        "error": "Wybierz uzbrojony token z Uderzeniem Wichru i co najmniej jednym widocznym celem spoza drużyny w zasięgu!"
       }
     },
     "spellCardNotFound": "Nie odnaleziono karty czaru. Użyto {spell} na minimalnym poziomie tego czaru.",
     "effects": {
-      "orcFerocityUsed": "Użyto Dzikości Orka"
+      "orcFerocityUsed": "Użyto Dzikości Orka",
+      "deliberateDeathUsed": "Użyto Umyślna śmierć"
     },
     "SETTINGS": {
       "actionsReminderAllow": {
+        "gm": "GM",
+        "players": "Gracze",
+        "all": "Wszystko",
+        "hint": "Zaznacz, aby wyświetlić liczbę przypomnień o działaniach jako wiadomość czatu.",
+        "name": "Kto otrzymuje przypomnienie o działaniach",
+        "none": "Nikt"
+      },
+      "abpVariantAllowItemBonuses": {
+        "name": "Nie wyłączaj premii do przedmiotów podczas korzystania z ABP.",
+        "hint": "Nie wyłącza premii do przedmiotów podczas korzystania z reguły wariantu automatycznej progresji premii."
+      },
+      "addUserTargets": {
+        "addFor": "Dodaj cele dla",
+        "name": "Dodaj cele użytkownika",
+        "title": "Wybierz użytkownika, dla którego chcesz dodać cele",
+        "clearFor": "Wyczyść cele dla",
+        "hint": "Powiązanie klawiszy w celu dodania wybranych i najechanych tokenów do celów wybranego użytkownika."
+      },
+      "applyPersistentAllow": {
+        "all": "Wszyscy",
         "gm": "GM"
       }
+    },
+    "modules": {
+      "pf2e-sheet-skill-actions": "Moduł pf2e-sheet-skill-actions nie jest już utrzymywany, wszystkie jego funkcje są częścią Workbencha, prosimy o jego wyłączenie.",
+      "pf2e-toolbox": "Moduł pf2e-toolbox nie jest już utrzymywany, większość jego funkcji jest częścią Workbencha, prosimy o jego wyłączenie.",
+      "multilevel-tokens": "Moduł Multilevel Tokens (i prawdopodobnie inne moduły, które teleportują tokeny) mogą mieć problemy z teleportacją, ponieważ włączono opcjonalne ustawienie Workbench, aby zmienić animację tokenów."
     }
   }
 }
