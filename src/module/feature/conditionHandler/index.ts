@@ -24,7 +24,7 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
         if (frightened && currentFrightened > 0 && !frightened.isLocked) {
             const reduceBy = actor.itemTypes.feat.some((feat) => feat.slug === "dwarven-doughtiness") ? 2 : 1;
 
-            for (let i = 0; i < reduceBy && currentFrightened - i >= minimumFrightened; i++) {
+            for (let i = 0; i < reduceBy && currentFrightened - i > minimumFrightened; i++) {
                 await actor.decreaseCondition("frightened");
             }
         }
