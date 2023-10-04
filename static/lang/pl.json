@@ -204,7 +204,229 @@
       },
       "applyPersistentAllow": {
         "all": "Wszyscy",
-        "gm": "GM"
+        "gm": "GM",
+        "name": "Kto może ustawić opcję automatycznego stosowania trwałych obrażeń/leczenia.",
+        "hint": "Wybierz, kto może ustawić opcję automatycznego stosowania trwałych obrażeń/leczenia. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta.",
+        "none": "Nikt",
+        "players": "Gracze"
+      },
+      "nonLethalIsNotLethal": {
+        "unconscious": "Nieśmiercionośne obrażenia nie zabijają",
+        "no": "Obrażenia nieśmiercionośne to po prostu obrażenia",
+        "name": "... w zależności od tego, czy ostatnie obrażenia nie były śmiertelne.",
+        "unconsciousForCharacters": "Zabójstwa atakami nieśmiercionośnymi nie zabijają postaci + towarzyszy",
+        "hint": "Jeśli ostatnie otrzymane obrażenia nie są śmiertelne, gracz nie umiera. Zamiast tego jest nieprzytomny z 0 PŻ. Wymaga włączenia powyższego ustawienia."
+      },
+      "autoRollDamageAllow": {
+        "players": "Gracze",
+        "all": "Wszyscy",
+        "gm": "GM",
+        "name": "Kto może ustawić opcję automatycznego naliczania obrażeń przy trafieniu.",
+        "none": "Nikt",
+        "hint": "Wybierz, kto może ustawić opcję automatycznego naliczania obrażeń przy trafieniu. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta."
+      },
+      "applyPersistentHealing": {
+        "RegenerationLabel": "Otrzymana regeneracja",
+        "wasHealed": "Leczenie {healing} zostało zastosowane automatycznie.",
+        "name": "Automatycznie zastosuj trwałe leczenie używane przez system.",
+        "hint": "Ustawienie klienta w celu automatycznego stosowania trwałego leczenia przez system. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje.",
+        "FastHealingLabel": "Otrzymał szybkie uzdrowienie"
+      },
+      "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
+        "no": "Nie",
+        "name": "... i dodać jeszcze jeden poziom umierania, jeśli otrzyma obrażenia krytyczne przez wroga.",
+        "hint": "Jeśli zostanie trafiony krytycznie celnym atakiem zadającym obrażenia przez wrogiego bohatera, dodaje jeden poziom Umierania więcej. Używa ustawień z listy rozwijanej powyżej. Wymaga włączenia powyższego ustawienia.",
+        "add": "Dodaj umieranie",
+        "addForCharacters": "Dodaj umieranie dla postaci + towarzyszy"
+      },
+      "playerSpellsRarityColour": {
+        "name": "Pokaż nazwy zaklęć w kolorze rzadkości na kartach aktorów.",
+        "hint": "Ustawienie klienta, aby nazwy zaklęć były wyświetlane w kolorze rzadkości na arkuszach aktorów."
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "hint": "Pokaż cechy zaklęcia w wiadomości publicznej.",
+        "traitPart": " z tymi cechami: <strong>{traits}</strong>",
+        "name": "... i pokazać cechy zaklęcia w wiadomości publicznej."
+      },
+      "customPauseImage": {
+        "hint": "Niestandardowy obraz używany jako obraz pauzy. Pozostaw puste, aby użyć domyślnej ikony zegara.",
+        "name": "Niestandardowy obraz używany jako obraz pauzy."
+      },
+      "castPrivateSpell": {
+        "aSpell": "Zaklęcie",
+        "name": "Kliknij z wciśniętym klawiszem Ctrl, aby rzucać prywatnie.",
+        "hint": "Zaznacz, aby kliknięcie z wciśniętym klawiszem Ctrl na zaklęciu rzucało je jako szept dla rzucającego zaklęcie i GM-a."
+      },
+      "castPrivateSpellWithPublicMessage": {
+        "spell": "Zaklęcie",
+        "they": "Oni",
+        "cantrip": "Sztuczka",
+        "savePart": "<br>Rzut obronny dla nieznanego zaklęcia to: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
+        "hint": "W przypadku rzucania zaklęć prywatnie, ustawienie to wysyła również publiczną wiadomość o rzuceniu zaklęcia, chyba że podczas rzucania zaklęcia przytrzymasz klawisze SHIFT i CTRL.",
+        "name": "Publikuje wiadomość o rzuceniu zaklęcia.",
+        "secondPartNoRk": ".<br>Zapytaj swojego GM, czy rozpoznałeś go automatycznie, jeśli nie, możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego GM).",
+        "firstPart": "{tokenName} właśnie rzucił {type} tradycji <strong>{traditionString}</strong>",
+        "secondPartRK": ".<br>Zapytaj swojego GM, czy rozpoznałeś go automatycznie, jeśli nie, możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Lub, w swojej turze, wydać akcję, aby spróbować zidentyfikować go z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}"
+      },
+      "applyPersistentDamageRecoveryRoll": {
+        "hint": "... a następnie automatycznie przywróci ustawienia fabryczne. Wymaga włączenia powyższego ustawienia.",
+        "name": "... a następnie automatycznie przywrócić ustawienia fabryczne."
+      },
+      "handleDyingRecoveryRollAllow": {
+        "all": "Wszyscy",
+        "name": "Kto może ustawić opcję automatycznej obsługi rzutów odzyskiwania po kliknięciu przycisku odzyskiwania.",
+        "none": "Nikt",
+        "players": "Gracze",
+        "gm": "GM",
+        "hint": "Wybierz, kto może ustawić opcję automatycznej obsługi rzutów regeneracji umierających postaci po kliknięciu przez właściciela przycisku odzyskiwania na karcie postaci. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta."
+      },
+      "autoRollDamageForStrike": {
+        "name": "Automatyczne rzucanie obrażeń za trafione ataki.",
+        "strike": "Ataki",
+        "hint": "Ustawienie klienta do automatycznego naliczania obrażeń dla ataków. Należy pamiętać, że trafienia krytyczne zadają obrażenia krytyczne."
+      },
+      "autoRollDamageNotifyOnSpellCardNotFound": {
+        "hint": "Ustawienie klienta informujące o rzuceniu ataku zaklęciem, dla którego nie znaleziono karty zaklęcia do rzucenia obrażeń.",
+        "name": "Powiadamia, gdy rzucono atak zaklęciem i nie znaleziono żadnej karty zaklęcia."
+      },
+      "autoCollapseItemAttackChatCardContent": {
+        "noCollapse": "Nigdy się nie zwijaj",
+        "name": "Automatycznie zwijaj zawartość karty czatu ataku.",
+        "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
+        "hint": "Ustawienie klienta, aby automatycznie zwijać zawartość karty czatu ataku.",
+        "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
+      },
+      "autoGainDyingAtZeroHP": {
+        "no": "Nie",
+        "orcFerocityMessage": "{name} właśnie użył @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] i może teraz użyć darmowej akcji:@UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]",
+        "addOne": "Dodaj jeden",
+        "addOneForCharacters": "Dodaj jeden, dla postaci + chowańców",
+        "addWoundedLevelForCharacters": "Dodaj +1 poziomu zranienia dla postaci + towarzyszy",
+        "deliberateDeathMessage": "{name} może <b>przed uzyskaniem Umierania</b> w wyniku ataku lub zdolności innej istoty, jeśli ta istota znajduje się w zasięgu walki wręcz, wykonać Atak w walce wręcz przeciwko wywołującej go istocie.<br>Usuń efekt \"Użyto celowej śmierci\", jeśli faktycznie nie można go użyć.",
+        "hint": "Ustaw automatycznie zwiększenie poziomu Umierania przy 0 PŻ.",
+        "name": "Automatycznie zwiększenie poziomu Umierania przy 0 PŻ.",
+        "addWoundedLevel": "Dodaj +1 poziomu zranienia, dla wszystkich"
+      },
+      "autoGainDyingIfTakingDamageWhenAlreadyDying": {
+        "no": "Nie",
+        "hint": "Jeśli otrzymujesz obrażenia, gdy już umierasz, dodaj jeszcze jedno umieranie (lub ewentualnie dwa, jeśli włączone jest dodatkowe umieranie przy trafieniu krytycznym). Używa ustawień z listy rozwijanej powyżej. Wymaga włączenia powyższego ustawienia.",
+        "add": "Dodaj umieranie",
+        "name": "... i dodać dodatkowe poziomy umierania, jeśli otrzymujesz obrażenia podczas umierania.",
+        "addForCharacters": "Dodaj umieranie dla postaci + towarzyszy"
+      },
+      "autoRemoveDyingAtGreaterThanZeroHP": {
+        "name": "Automatycznie usuwa Umieranie po uzdrowieniu powyżej 0 PŻ.",
+        "hint": "Ustawienie automatycznie usuwające umieranie po wyleczeniu powyżej 0 PŻ.",
+        "no": "Nie",
+        "removeDying": "Usuń stan Umierania dla wszystkich",
+        "removeDyingForCharacters": "Usunięcie stanu Umierania dla postaci + towarzyszy"
+      },
+      "dropHeldItemsOnBecomingUnconscious": {
+        "hint": "Postacie automatycznie upuszczają trzymane przedmioty po utracie przytomności.",
+        "name": "Postacie automatycznie upuszczają trzymane przedmioty po utracie przytomności.",
+        "message": "{name} upuszcza: {items}"
+      },
+      "autoExpandDamageRolls": {
+        "collapsedAll": "Wszystkie rzuty na obrażenia zwinięte (domyślne Foundry).",
+        "expandedAll": "Wszystkie rzuty na obrażenia rozszerzają się.",
+        "expandedNew": "Nowe rzuty obrażeń rozszerzają się (rozszerzają się również trzy ostatnie rzuty obrażeń przy odświeżaniu).",
+        "expandedNewest": "Nowe rzuty na obrażenia rozszerzają się (rozszerza się również ostatni rzut na obrażenia przy odświeżaniu).",
+        "name": "Automatycznie rozszerzaj rzuty na obrażenia.",
+        "hint": "Ustawienie klienta do automatycznego rozwijania rzutów obrażeń (domyślnie wszystkie rzuty obrażeń są zwinięte). Kliknij rzut kością, aby rozwinąć/zwinąć."
+      },
+      "castPrivateSpellHideName": {
+        "name": "... i ukryć nazwę prywatnie rzuconego zaklęcia w rzucie na obrażenia.",
+        "hint": "Zaznacz, aby ukryć nazwę prywatnie rzuconego zaklęcia w rzucie na obrażenia zamiast ukrywać rzut na obrażenia."
+      },
+      "castPrivateSpellAlwaysForNPC": {
+        "name": "... i zawsze rzucać prywatnie dla npc.",
+        "hint": "Zaznacz, aby zawsze rzucać prywatnie dla npc (przytrzymaj Ctrl, aby *nie* rzucać prywatnie)"
+      },
+      "autoCollapseItemActionChatCardContent": {
+        "hint": "Ustawienie klienta, aby automatycznie zwijać zawartość karty czatu akcji.",
+        "name": "Automatycznie zwijaj zawartość karty czatu akcji.",
+        "noCollapse": "Nigdy się nie zwijaj",
+        "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
+        "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "no": "Nie",
+        "hint": "Ustawienie automatycznego zabijania po otrzymaniu wystarczających obrażeń od źródła z cechą Śmierć.",
+        "name": "... ale automatycznie zabija po otrzymaniu wystarczających obrażeń od efektu Śmierci.",
+        "yes": "Tak, dla wszystkich",
+        "yesForCharacters": "Tak, dla postaci + towarzyszy",
+        "yesForNpcs": "Tak, dla npc"
+      },
+      "autoGainDyingIgnoresTargeting": {
+        "name": "... niezależnie od tego, czy obrażenia zostały wycelowane w wybrany token.",
+        "hint": "Włącz, aby zastosować powyższe ustawienia niezależnie od tego, czy cel pasuje do wybranego tokena. (Najbardziej przydatne, jeśli nie używasz targetowania/automatyzacji)"
+      },
+      "automationClientSettings": {
+        "hint": "Włącz i skonfiguruj lokalne ustawienia automatyzacji, tj. ustawienia, które mają wpływ tylko na Twojego klienta.",
+        "label": "Zarządzanie ustawieniami automatyzacji klienta",
+        "name": "Ustawienia automatyzacji klienta"
+      },
+      "automationWorldSettings": {
+        "hint": "Włączanie i konfigurowanie automatyzacji dla GM",
+        "label": "Zarządzanie ustawieniami automatyzacji świata",
+        "name": "Ustawienia automatyzacji świata"
+      },
+      "autoReduceStunned": {
+        "name": "Automatyczna redukcja ogłuszenia przy starcie tury",
+        "hint": "Ustawienie klienta, aby automatycznie redukować ogłuszenie przy rozpoczęciu tury."
+      },
+      "autoRollDamageForSpellAttack": {
+        "hint": "Ustawienie klienta do automatycznego rzucania obrażeń dla trafionych ataków zaklęć. Należy pamiętać, że trafienia krytyczne zawsze zadają normalne obrażenia.",
+        "name": "Automatyczne rzucanie obrażeń za trafione ataki zaklęciami."
+      },
+      "autoRollDamageForSpellNotAnAttack": {
+        "name": "Obrażenia zadawane automatycznie przy rzucaniu zaklęć, które nie są atakami.",
+        "hint": "Ustawienie klienta, aby *zawsze* automatycznie rzucać normalne obrażenia dla zaklęć *nieatakujących* podczas ich rzucania."
+      },
+      "callHotbarMacro": {
+        "hint": "Wywołanie makra paska skrótów na stronie {page} pozycja {column}",
+        "name": "Wywołanie makra paska skrótów na stronie {page} pozycja {column}"
+      },
+      "playerFeatsRarityColour": {
+        "hint": "Ustawienie klienta, aby nazwy atutów były wyświetlane w kolorze rzadkości na arkuszach aktorów.",
+        "name": "Pokazuj nazwy atutów w kolorze rzadkości na kartach aktorów."
+      },
+      "applyPersistentDamage": {
+        "hint": "Ustawienie klienta, aby automatycznie stosować trwałe obrażenia.",
+        "name": "Automatycznie stosuj trwałe obrażenia."
+      },
+      "autoCollapseItemChatCardContent": {
+        "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
+        "hint": "Ustawienie klienta, aby automatycznie zwijać zawartość karty czatu przedmiotu (z wyjątkiem akcji i ataków, patrz poniżej).",
+        "name": "Automatycznie zwijaj zawartość karty czatu elementu.",
+        "noCollapse": "Nigdy się nie zwijaj",
+        "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
+      },
+      "autoKillIfMassiveDamage": {
+        "name": "... ale automatycznie zabija po otrzymaniu Masywnych Obrażeń.",
+        "yes": "Tak, dla wszystkich",
+        "yesForCharacters": "Tak, dla postaci + towarzyszy",
+        "yesForNpcs": "Tak, dla npc",
+        "hint": "Ustawienie automatycznego zabijania po otrzymaniu ogromnych obrażeń.",
+        "no": "Nie"
+      },
+      "handleDyingRecoveryRoll": {
+        "hint": "Ustawienie klienta, aby automatycznie obsługiwać rzuty odzyskiwania po kliknięciu przycisku odzyskiwania.",
+        "handled": "Rzut odzyskiwania {roll} {outcome} wykonany automatycznie. {defeated}.",
+        "defeated": "{name} został pokonany",
+        "name": "Automatycznie obsługuje rzuty odzyskiwania po kliknięciu przycisku odzyskiwania."
+      },
+      "playerFeatsPrerequisiteHint": {
+        "hint": "Ustawienie klienta dodające gwiazdkę do nazwy atutów z ustawionym warunkiem wstępnym.",
+        "name": "Dodaj gwiazdkę do nazwy atutów z warunkiem wstępnym."
+      },
+      "customPauseText": {
+        "hint": "Niestandardowy tekst używany jako tekst pauzy. Pozostaw pusty, aby użyć domyślnego \"Gra wstrzymana\".",
+        "name": "Niestandardowy tekst używany jako tekst pauzy."
+      },
+      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
+        "hint": "Ustawienie automatycznego usuwania nieprzytomności w przypadku wyleczenia do ponad 0 PŻ.",
+        "name": "Automatycznie usuwa nieprzytomność, jeśli zostanie wyleczona do poziomu wyższego niż 0 PŻ."
       }
     },
     "modules": {
