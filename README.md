@@ -173,7 +173,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Effect: Minium Frightened that you can give to targets to not let the automated frightened removal reduce
           frightened below 1.
         * Effect that you can use to change Focus Point Maximum of a character
-        * Effect that you can use to implement ABP, "Another Alternative Bonus Progression" (by @crackjackflood) and an
+        * Effects that you can use to implement ABP, "Another Alternative Bonus Progression" (by @crackjackflood) and an
           accompanying 'Feat' to add it to a character.
     * The compendium "PF2e Workbench Macros (xdy-pf2e-workbench-macros)" contains a few macros you might find useful.
         * 'Basic Action Macros' shows a dialog with a button for most macros, with bonus and whether you're the best in
@@ -317,7 +317,7 @@ Asset licenses:
   by [Elmer Mercanas](https://unsplash.com/@elmercanasjr) under the [Unsplash License](https://unsplash.com/license)
 * The icon for Basic Action Macros was made by Oskar and popy and is available under
   the [CC0 license](https://creativecommons.org/share-your-work/public-domain/cc0/)
-* The icon for Another Alternative Bonus Progression is from "Font Awesome by Dave Gandy - http://fontawesome.io".
+* The icon for Another Alternative Bonus Progression is made by @CrackJackFlood and are "made by me no license free for public use".
 
 build-packs license:
 
