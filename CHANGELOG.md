@@ -1,3 +1,10 @@
+## [5.20.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.20.0...v5.20.1) (2023-10-06)
+
+
+### Bug Fixes
+
+* Add the icons from @CrackJackFlood, add to README.md and CONTRIBUTORS.md ([88d6b7e](https://github.com/xdy/xdy-pf2e-workbench/commit/88d6b7e81068aaca9e8304cafd321d68863e5af2))
+
 # [5.20.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.19.1...v5.20.0) (2023-10-06)
 
 
