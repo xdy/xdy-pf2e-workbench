@@ -1,3 +1,10 @@
+# [5.20.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.19.1...v5.20.0) (2023-10-06)
+
+
+### Features
+
+* Adds a new version of "Another Alternative Bonus Progression" by [@crackjackflood](https://github.com/crackjackflood) (see the feat and effects in the "PF2e Workbench Items" compendium for a description, as well as https://github.com/CrackJackFlood/pf2e-aabp/blob/main/README.md). ([82bdd89](https://github.com/xdy/xdy-pf2e-workbench/commit/82bdd8919c3d79b2cd7b75265ee8be67529e971e))
+
 ## [5.19.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.19.0...v5.19.1) (2023-10-06)
 
 
