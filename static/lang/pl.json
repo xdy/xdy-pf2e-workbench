@@ -427,6 +427,305 @@
       "autoRemoveUnconsciousAtGreaterThanZeroHP": {
         "hint": "Ustawienie automatycznego usuwania nieprzytomności w przypadku wyleczenia do ponad 0 PŻ.",
         "name": "Automatycznie usuwa nieprzytomność, jeśli zostanie wyleczona do poziomu wyższego niż 0 PŻ."
+      },
+      "houseRulerI18n": {
+        "hint": "Poprawia kilka zasad domowych, które xdy lubi. Obecnie dodaje rzuty obronne dla cepa i młota. Później będzie bardziej elastyczny.",
+        "name": "Zasady Domowe",
+        "hammerCritical": "Cel musi wykonać @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Hammer Critical Specialization] lub zostanie powalony @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}.",
+        "info": "Zasady domowe zostały poprawione (obecnie otrzymuje rzuty na powalenie dla cepa i młota).",
+        "flailCritical": "Cel musi wykonać @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Flail Critical Specialization] lub zostanie powalony @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}."
+      },
+      "npcMystifierUseAlignmentTraits": {
+        "name": "Użyj cech charakteru npc.",
+        "hint": "Zaznacz, aby użyć cech charakteru w utajnionej nazwie."
+      },
+      "npcMystifier": {
+        "hint": "Zaznacz, aby włączyć utajnienie npc, zmieniając nazwy tokenów na aktywnej scenie w oparciu o ich cechy, jeśli podczas dodawania do sceny zostanie kliknięty klawisz Ctrl (konfigurowalny). Zapisz ustawienia, aby pokazać/ukryć dodatkowe opcje.",
+        "name": "Włącz utajnienie npc."
+      },
+      "npcMystifierAddRandomProperty": {
+        "none": "Brak",
+        "hint": "Wybierz typ losowej właściwości dodawanej podczas utajniania npc, którą można opcjonalnie zachować.",
+        "name": "Dodaj losową właściwość wybranego typu do nazwy",
+        "numberPostfix": "Liczba jako przedrostek",
+        "wordPrefix": "Słowo jako przedrostek"
+      },
+      "npcMystifierModifierKey": {
+        "hint": "Wybierz, aby włączyć ustawienie klawisza, który należy przytrzymać, aby mistyfikacja stworzenia została przeciągnięta do aktywnej sceny. Zauważ, że jeśli wybierzesz Alt (nie domyślnie), ukryje to również npc.",
+        "name": "Klucz do utajniania podczas przeciągania do sceny",
+        "always": "Zawsze",
+        "disabled": "Wyłączony",
+        "alt": "Alt",
+        "control": "Control",
+        "meta": "⌘ (Mac)/⊞ (windows)"
+      },
+      "npcMystifierMystifyKey": {
+        "hint": "Ustawienie powiązania klawiszy w celu utajniania wybranych tokenów.",
+        "name": "Skrót do utajniania wybranych tokenów"
+      },
+      "npcMystifierNoMatch": {
+        "hint": "Tekst do użycia, gdy nie znaleziono pasującej cechy, więc nazwa byłaby pusta (pusty ciąg zostanie ustawiony na \"...\")",
+        "name": "Brak pasującego tekstu"
+      },
+      "npcMystifierUseEliteWeak": {
+        "hint": "Zaznacz, aby użyć nazwy elitarny/słaby w nazwie mistyfikatora.",
+        "name": "Użyj statusu elitarny/słaby"
+      },
+      "npcMystifierUseMystifiedNameInChat": {
+        "name": "Próba zmylenia rozmówcy i użycie utajnionej nazwy imienia w wiadomościach na czacie.",
+        "hint": "Zaznacz, aby spróbować użyć utajnionej nazwy dla mówcy, a także w wiadomościach czatu, zastępując nazwę aktora utajnioną nazwą. Zwróć uwagę, że jeśli tekst w wiadomości nie używa tej samej nazwy co aktor lub jest błędnie napisany, nie zostanie zastąpiony."
+      },
+      "npcMystifierUseRaritiesReplacement": {
+        "hint": "W tym polu tekstowym wprowadź słowo, którym chcesz zastąpić rzadkości większe niż Common (np. \"Unusual\"). Jeśli pole jest puste, nie zmienia wyświetlanej rzadkości.",
+        "name": "Zastąp rzadkości rzadsze niż pospolite"
+      },
+      "reminderBreathWeapon": {
+        "hint": "Zaznacz, aby ustawić przypomnienie o użyciu umiejętności doładowania (np. broni oddechowej).",
+        "source": "Przypomnienie o doładowaniu utworzone przez PF2e Workbench",
+        "defaultName": "Zionięcie",
+        "name": "Przypomnienie o doładowaniu (np. broni oddechowej)",
+        "used": "Użyty "
+      },
+      "reminderCannotAttack": {
+        "defeated": "jest pokonany",
+        "hasNoHp": "nie ma PW",
+        "note": "Czy jesteś pewien tego ataku? {actorName} {reason}, a więc prawdopodobnie nie będzie w stanie zaatakować...",
+        "petrified": "jest skamieniały",
+        "unconscious": "jest nieprzytomny",
+        "name": "Przypomnienie, jeśli atakowanie tokenem nie jest możliwe",
+        "hint": "Zaznacz aby pokazać przypomnienie jeśli atakujesz tokenem, który nie może atakować z powodu bycia nieprzytomnym/martwym/pokonanym/brak PŻ/etc.",
+        "dead": "nie żyje"
+      },
+      "reminderCannotAttackIgnoreDeadEidolon": {
+        "hint": "Zaznacz, aby eidolony, które są martwe/nie mają PW, mogły atakować bez przypomnienia.",
+        "name": "Eidolony mogą atakować, gdy są martwe"
+      },
+      "remindersSettings": {
+        "label": "Zarządzanie ustawieniami przypomnień",
+        "name": "Ustawienia przypomnień",
+        "hint": "Włączanie i konfigurowanie różnych przypomnień"
+      },
+      "reminderTargeting": {
+        "hint": "Zaznacz, aby wyświetlić przypomnienie o celowaniu w walce.",
+        "name": "Przypomnienie o celowaniu",
+        "info": "Wyceluj, zanim zaatakujesz.",
+        "mustTarget": "Musi celować",
+        "no": "Brak przypomnienia",
+        "reminder": "Przypomnienie",
+        "error": "Musisz wycelować przed atakiem."
+      },
+      "tokenAnimation": {
+        "hint": "Włącz, aby zmienić animację ruchu tokenów. Może to powodować problemy z modułem Multilevel Tokens.",
+        "name": "Włącz, aby zmienić animację ruchu tokena."
+      },
+      "qolWorldSettings": {
+        "name": "Ustawienia QoL Świata",
+        "hint": "Włączanie i konfigurowanie ustawień Quality of Life dla GMów",
+        "label": "Zarządzanie ustawieniami QoL dla Świata"
+      },
+      "npcMystifierPrefix": {
+        "name": "Prefiks słowa lub tabeli rzutu",
+        "hint": "Dodaje tekst do prefiksu nowej nazwy (infix, jeśli powyżej wybrano losową właściwość słowa), domyślnie '' (przykład: 'Unknown'), jeśli pasuje do nazwy tabeli rzutu, losowy wynik tekstowy z tej tabeli zostanie użyty jako prefiks.  Zostanie on dodany *po* dowolnym postfiksie właściwości losowej (patrz również opcja prefiksu)"
+      },
+      "npcMystifyAllPhysicalMagicalItems": {
+        "onZeroHp": "Utajnianie przedmiotów na npc osiągającym 0 hp",
+        "no": "Brak mistyfikacji przedmiotów",
+        "name": "Utajnia alchemiczne i magiczne przedmioty na npc, jeśli ustawienie systemu PF2e \"NPC są łupem\" jest włączone.",
+        "hint": "Automatycznie utajnia wszelkie nietrwałe przedmioty fizyczne, które są alchemiczne lub magiczne, zgodnie z tym, co wybrano w rozwijanym menu, jeśli włączone jest ustawienie systemu PF2e \"NPC są łupem\".",
+        "onScene": "Utajnianie przedmiotów po dodaniu npc do sceny"
+      },
+      "mystificationSettings": {
+        "label": "Zarządzanie ustawieniami utajniania NPC",
+        "hint": "Włącz i skonfiguruj utajnianie NPC",
+        "name": "Ustawienia utajniania postaci niezależnych"
+      },
+      "npcMystifierWordPrefix": {
+        "hint": "Dodaje losowe słowo z podanej tabeli rzutów jako prefiks, jeśli wybrano opcję \"Prefiks słowa\").",
+        "name": "Dodaj losowe słowo z podanej tabeli rzutów"
+      },
+      "heroPointHandler": {
+        "ignore": "Nic",
+        "all": "Wszyscy",
+        "none": "Brak postaci",
+        "addedFor": "Dodano 1 punkt bohatera dla {name}",
+        "timerValue": "Wartość timera (zakres 0-60)",
+        "add": "Dodaj",
+        "addedToForAll": "{heroPoints} Punktów bohatera dodane dla wszystkich",
+        "addOne": "<b>Sekcja 2</b> - Dodaje jeden punkt bohatera wybranej postaci spośród zalogowanych (domyślnie losowej postaci po wygaśnięciu licznika czasu)",
+        "defaultTimeoutMinutes": 60,
+        "doWhat": "<b>Sekcja 1</b> - Wybierz, co zrobić z punktami bohatera <em>wszystkich postaci</em> o następującej wartości",
+        "hint": "Opcja obsługi punktów bohatera z opcjonalnym powiązaniem klawiszy, aby otworzyć okno dialogowe, które może zresetować lub dodać punkty bohatera dla wszystkich postaci, dodać jeden punkt bohatera do losowej (lub wybranej) postaci i, co najważniejsze, uruchomić licznik czasu, aby okno dialogowe pojawiło się ponownie po (domyślnie) 60 minutach.",
+        "instructions": "Należy pamiętać, że licznik czasu jest wstrzymany, gdy to okno dialogowe jest otwarte. Zamknij to okno dialogowe bez naciskania żadnego z tych przycisków, aby wyłączyć wstrzymanie licznika czasu, lub naciśnij odpowiedni przycisk, aby wykonać jego polecenie.",
+        "minutesLeft": "minut pozostałych na bieżącym liczniku",
+        "name": "Włącz obsługę Punktów Bohaterstwa.",
+        "resetToForAll": "Punkty bohatera zresetowane do {heroPoints} dla wszystkich",
+        "showAfter": "Pokaż okno dialogowe ponownie po tylu minutach",
+        "startTimerLabel": "Zapisywanie zmian i uruchamianie/kontynuowanie odliczania czasu",
+        "thisMany": "Tak wielu",
+        "timerStopped": "Licznik punktów bohatera został zatrzymany.",
+        "title": "Obsługa Punktów Bohatera",
+        "willBeResetIn": "Obsługa Punktów Bohatera powraca za {remainingMinutes} minut ({time}).",
+        "resetTo": "Reset do",
+        "noRunningTimer": "Brak uruchomionego licznika",
+        "noTimerLabel": "Prześlij zmiany z <b>bez</b> timera. Zatrzyma <b></b> każdy istniejący licznik czasu."
+      },
+      "houseRulesSettings": {
+        "label": "Zarządzanie ustawieniami Zasad Domowych",
+        "hint": "(Eksperymentalne) Włączanie i konfigurowanie różnych zasad domowych",
+        "name": "(Eksperymentalne) Ustawienia zasad domowych"
+      },
+      "logLevel": {
+        "info": "Info",
+        "name": "Poziom logów",
+        "trace": "Trasa",
+        "debug": "Debugowanie",
+        "off": "Wyłączony",
+        "hint": "Poziom logów",
+        "error": "Błąd",
+        "warn": "Ostrzeżenie"
+      },
+      "npcMystifierRandomPropertySkipForUnique": {
+        "hint": "Zaznacz, aby pominąć dodawanie losowej właściwości podczas utajniania unikalnych npc (tj. jest ona zachowywana podczas okrywania npc)",
+        "name": "Pomiń losową właściwość trwałą dla unikalnych npc."
+      },
+      "npcMystifierUseRarities": {
+        "hint": "Zaznacz, aby używać rzadkości w utajnionej nazwie.",
+        "name": "Użyj rzadkości"
+      },
+      "tokenAnimationSpeed": {
+        "name": "Zmiana prędkości animacji ruchu tokena.",
+        "hint": "Zmiana prędkości animacji ruchu tokena."
+      },
+      "variantRulesSettings": {
+        "name": "Ustawienia reguł wariantów",
+        "hint": "Włączanie i konfigurowanie różnych reguł wariantów",
+        "label": "Zarządzanie ustawieniami reguł wariantów"
+      },
+      "keeleysHeroPointRule": {
+        "hint": "Zasada domowa preferowana przez pewnego dewelopera Paizo: jeśli naturalny wynik ponownego rzutu na punkty bohatera wynosi 10 lub mniej, po fakcie stosowana jest premia w wysokości 10.",
+        "name": "Reguła punktów bohatera Keeleya"
+      },
+      "enableAutomaticMove": {
+        "hint": "Wybierz, aby umożliwić ustawienie inicjatywy walczącego poza własną turą tuż przed bieżącym walczącym, zazwyczaj dlatego, że bieżący walczący zabił wybranego uczestnika. Ze względu na zaokrąglanie kilku uczestników może mieć taką samą inicjatywę na liście.",
+        "name": "Ustawia inicjatywę tuż przed aktualnym walczącym.",
+        "noAutomation": "Nigdy",
+        "reaching0HP": "Gdy postać lub npc osiągnie 0 PŻ.",
+        "reaching0HPCharactersOnly": "Gdy postać walcząca osiągnie 0 PŻ."
+      },
+      "legacyVariantRuleAncestryParagon": {
+        "title": "Atuty Ancestry Paragon",
+        "hint": "(Niepotrzebne, o ile system zachowuje wsparcie dla premastera Ancestry Paragon Variant Rule). Dodaje to sekcję atutów w kampanii dla Ancestry Paragon.",
+        "name": "Dodaje sloty na atuty Ancestry Paragon. Wymaga odświeżenia (f5) po zmianie."
+      },
+      "moveBeforeCurrentCombatantContextMenu": {
+        "name": "Przesunięcie wybranego tokena przed bieżącego tokena."
+      },
+      "notifications": {
+        "cantMystify": "Nie możesz utajnić tego tokena. Czy jest na aktywnej scenie i czy jesteś GMem?"
+      },
+      "npcMystifierBlacklist": {
+        "hint": "Dodaj słowa, aby odfiltrować zawartość tej oddzielonej przecinkami listy bloków z utajnianej nazwy.",
+        "name": "Lista blokowanych cech, których nigdy nie należy dodawać"
+      },
+      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+        "hint": "Sprawdź, czy wszystkie utajnienia działają na wszystkie tokeny oparte na tym samym aktorze.",
+        "name": "Odkrywanie wszystkich tokenów aktora"
+      },
+      "npcMystifierKeepRandomProperty": {
+        "name": "Zachowaj prefiks/postfiks podczas utajniania/odkrywania.",
+        "hint": "Zaznacz, aby zachować postfiks/prefiks słowa numeru *w tym samym formacie, co obecnie skonfigurowany w tym module* (jeśli istnieje) jako postfiks/przedrostek do nazwy podczas utajniania/odkrywania npc."
+      },
+      "npcMystifierPostfix": {
+        "name": "Postfiks słowa lub tabeli rzutu",
+        "hint": "Dodaje tekst do postfiksu nowej nazwy, domyślnie '' (przykład: 'Creature'), jeśli pasuje do nazwy tabeli rzutów (domyślnie jest to dołączona tabela 'Workbench Adjectives'), losowy wynik tekstowy z tej tabeli zostanie użyty jako postfiks. Zostanie on dodany *przed* dowolnym losowym prefiksem właściwości (patrz również opcja prefiksu)"
+      },
+      "npcMystifierUseOtherTraits": {
+        "hint": "Zaznacz, aby użyć wszystkich cech npc, które nie zostały jeszcze uwzględnione w żadnym z powyższych ustawień w utajnionej nazwie.",
+        "name": "Użyj innych cech"
+      },
+      "heroPointHandlerKey": {
+        "hint": "Naciśnięcie klawisza otwiera okno dialogowe obsługi punktów bohatera, które umożliwia resetowanie i dodawanie punktów bohatera z cogodzinnym przypomnieniem.",
+        "name": "Przycisk otwiera okno dialogowe obsługi punktu bohatera."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
+        "hint": "Utajniaj przedmioty tylko wtedy, gdy są tego poziomu lub wyższego.",
+        "name": "Utajniaj przedmioty tylko wtedy, gdy są tego poziomu lub wyższego."
+      },
+      "decreaseFrightenedConditionEachTurn": {
+        "name": "Automatycznie zmniejsza stan przerażenia co turę.",
+        "hint": "Ustawienie klienta automatycznie zmniejszające stan przerażenia co turę dla postaci, NPC i postaci rodzinnych."
+      },
+      "giveUnconsciousIfDyingRemovedAt0HP": {
+        "hint": "Ustawienie automatycznej utraty przytomności w przypadku usunięcia stanu Umierania przy 0 PŻ.",
+        "name": "Automatycznie ustawia stan Nieprzytomny w przypadku usunięcia stanu Śmierci przy 0 PŻ.",
+        "no": "Nie"
+      },
+      "giveWoundedWhenDyingRemoved": {
+        "hint": "Ustawienie automatycznego zwiększenia stanu Ranny po usunięciu stanu Umierający.",
+        "name": "Automatycznie ustawia stan Ranny po usunięciu Umierania.",
+        "numbToDeathMessage": "{name} właśnie uruchomił @UUID[Compendium.pf2e.feats-srd.gfMP2aMs3YGONVeB]. Zastosuj leczenie ręcznie."
+      },
+      "heroPointHandlerStartTimerOnReady": {
+        "hint": "Zaznacz, aby automatycznie uruchomić licznik czasu obsługi Punktów Bohaterów, gdy gra będzie gotowa.",
+        "name": "... i automatycznie uruchomi Obsługę Punktów Bohatera."
+      },
+      "housepatcher": {
+        "hint": "(NAPRAWDĘ EKSPERYMENTALNE) Wprowadź tablicę json, aby załatać kompendia systemowe. Dokumentacja znajduje się w housepatcher.md na githubie.",
+        "name": "(NAPRAWDĘ EKSPERYMENTALNE) Housepatcher (poprawki w zasadach domowych). Wymaga odświeżenia (f5) po zmianie.",
+        "notification": "Housepatcher: Stosowanie {count} zasad domowych do przedmiotów w kompendiach systemowych."
+      },
+      "legacyVariantRuleDualClass": {
+        "hint": "(Niepotrzebne, o ile system zachowuje wsparcie dla premaster Dual Class Variant Rule). Dodaje to sekcję atutów kampanii dla podwójnej klasy, musisz także użyć makra podwójnej klasy, aby utworzyć klasę dla postaci.",
+        "name": "Dodaje miejsca na atuty dwóch klas. Wymaga odświeżenia (f5) po zmianie.",
+        "title": "Atuty Dwóch Klas"
+      },
+      "moveBeforeCurrentCombatantKey": {
+        "hint": "Powiązanie klawiszy świata do przeniesienia wybranego wojownika przed bieżącego wojownika, zwykle dlatego, że bieżący wojownik zabił wybranego wojownika. Ze względu na zaokrąglanie, kilku walczących może wykazywać tę samą inicjatywę na liście.",
+        "name": "(Świat), aby przesunąć wybranego wojownika przed bieżącego wojownika."
+      },
+      "npcMystifierUseCreatureTraits": {
+        "hint": "Zaznacz, aby użyć wszystkich \"cech stworzenia\" zdefiniowanych w systemie pf2e w utajnianej nazwie.",
+        "name": "Używaj cech stworzeń."
+      },
+      "npcMystifierUseCreatureTypesTraits": {
+        "hint": "Zaznacz, aby użyć cech typu stworzenia (patrz https://2e.aonprd.com/Traits.aspx) w utajnianej nazwie.",
+        "name": "Używanie cech typu stworzenia"
+      },
+      "npcMystifierUseSize": {
+        "hint": "Zaznacz, aby użyć rozmiaru aktora w utajnionej nazwie",
+        "name": "Użyj rozmiaru aktora"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
+        "name": "Utajniaj przedmioty tylko wtedy, gdy są tej lub wyższej rzadkości.",
+        "hint": "Utajniaj przedmioty tylko wtedy, gdy są tej lub wyższej rzadkości."
+      },
+      "npcRoller": {
+        "hint": "Zaznacz, aby włączyć narzędzie NPC do szybkiego rzutu.",
+        "name": "Włącz narzędzie NPC do szybkiego rzutu"
+      },
+      "npcScaler": {
+        "name": "Zezwól na skalowanie postaci niezależnych",
+        "hint": "Zaznacz, aby zezwolić na skalowanie postaci niezależnych"
+      },
+      "workbenchVersion": {
+        "hint": "Wersja, na której przeprowadzono ostatnią migrację. Może być niższa niż wersja modułu. Nie modyfikuj tego, chyba że wiesz, co robisz.",
+        "name": "Wersja migracyjna Workbench"
+      },
+      "reminderBreathWeaponHidden": {
+        "hint": "Zaznacz, aby ukryć przypomnienie przed graczami.",
+        "name": "... ale ukryć ikonę przed graczami."
+      },
+      "customPauseRelocation": {
+        "hint": "Umieść obraz pauzy na środku ekranu, a nad nim tekst.",
+        "name": "Wyśrodkuj obraz pauzy z tekstem nad nim."
+      },
+      "heroPointHandlerDefaultTimeoutMinutes": {
+        "name": "... przez tyle minut, aż otworzy się okno dialogowe Obsługi Punktów Bohatera.",
+        "hint": "Ustaw domyślną (i maksymalną) liczbę minut do następnego otwarcia obsługi Punktów Bohatera."
+      },
+      "heropointHandlerNotification": {
+        "name": "... i wysłać powiadomienie o przyznaniu Punktu Bohatera.",
+        "hint": "Zaznacz, aby automatycznie wysyłać powiadomienie, gdy osoba otrzyma Punkt Bohatera."
       }
     },
     "modules": {
