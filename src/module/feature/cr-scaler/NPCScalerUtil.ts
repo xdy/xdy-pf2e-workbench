@@ -155,7 +155,7 @@ export function constructRelativeDamage(oldDmg: IDicePool, stdDmg: IDicePool, ne
             diceCount: count,
             diceSize: size,
             bonus,
-        })
+        }),
     );
 }
 

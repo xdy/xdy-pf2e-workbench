@@ -21,7 +21,7 @@ export async function setupNpcRoller() {
 
 export function enableNpcRollerButton(_app, html: JQuery) {
     const button = $(
-        `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}</button>`
+        `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}</button>`,
     );
     button.on("click", () => {
         new NpcRoller().render(true);
@@ -67,7 +67,7 @@ class NpcRoller extends Application {
         };
 
         data["data"]["selected"] = canvas.tokens?.controlled.map(
-            (token: TokenPF2e) => token.actor?.system["details"].level.value
+            (token: TokenPF2e) => token.actor?.system["details"].level.value,
         );
 
         return data;
@@ -102,7 +102,7 @@ class NpcRoller extends Application {
                 {
                     rollMode: secret ? CONST.DICE_ROLL_MODES.PRIVATE : game.settings.get("core", "rollMode"),
                     create: true,
-                }
+                },
             );
         }
     }

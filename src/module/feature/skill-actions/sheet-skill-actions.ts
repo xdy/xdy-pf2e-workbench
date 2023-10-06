@@ -31,7 +31,7 @@ function renderActionsList(skillActions: SkillActionCollection, actor: ActorPF2e
         });
 
     const $skillActions = $(
-        templates[0]({ skills: skillData, allVisible: Boolean(actor.getFlag(MODULENAME, "allVisible") ?? "true") })
+        templates[0]({ skills: skillData, allVisible: Boolean(actor.getFlag(MODULENAME, "allVisible") ?? "true") }),
     );
     const $items = $skillActions.find("li.item");
 
@@ -105,7 +105,7 @@ export function renderSheetSkillActions(app: ActorSheetPF2e<ActorPF2e>, html: JQ
                     .prev();
                 const downtimeTop = html.find('[data-tab="downtime"] .actions-list.item-list.directory-list').prev();
                 const encounterTop = html.find(
-                    '[data-tab="encounter"] .actions-list.item-list.directory-list.strikes-list'
+                    '[data-tab="encounter"] .actions-list.item-list.directory-list.strikes-list',
                 );
                 encounterTop.after($encounter);
                 explorationTop.before($exploration);

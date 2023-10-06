@@ -24,7 +24,7 @@ export function moveOnZeroHP(actor: ActorPF2e): void {
     const combatant = game.combat?.getCombatantByToken(
         actor.isToken
             ? <string>actor.token?.id
-            : <string>canvas?.scene?.tokens?.find((t) => t.actor?.id === actor.id)?.id
+            : <string>canvas?.scene?.tokens?.find((t) => t.actor?.id === actor.id)?.id,
     );
     if (shouldIHandleThis(actor) && combatant && combatant.id !== game.combat?.combatant?.id) {
         moveSelectedAheadOfCurrent(combatant.id).then();

@@ -94,31 +94,31 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
         "armorClass",
         system.attributes.ac?.value ?? 0,
         oldLevel,
-        newLevel
+        newLevel,
     ).total;
     updateData["system.attributes.perception.value"] = getLeveledData(
         "perception",
         system.attributes.perception.value ?? 0,
         oldLevel,
-        newLevel
+        newLevel,
     ).total;
     updateData["system.saves.fortitude.value"] = getLeveledData(
         "savingThrow",
         system.saves.fortitude.value ?? 0,
         oldLevel,
-        newLevel
+        newLevel,
     ).total;
     updateData["system.saves.reflex.value"] = getLeveledData(
         "savingThrow",
         system.saves.reflex.value ?? 0,
         oldLevel,
-        newLevel
+        newLevel,
     ).total;
     updateData["system.saves.will.value"] = getLeveledData(
         "savingThrow",
         system.saves.will.value ?? 0,
         oldLevel,
-        newLevel
+        newLevel,
     ).total;
 
     const hp = getHPData(system.attributes.hp?.value ?? 0, oldLevel, newLevel);
@@ -166,7 +166,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
                     attackUpdate[`system.damageRolls.${i}.damage`] = getDamageData(
                         damage[i].damage,
                         oldLevel,
-                        newLevel
+                        newLevel,
                     );
                     attackUpdate[`system.damageRolls.${i}.damageType`] = damage[i].damageType;
                 }
@@ -176,7 +176,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
                     attackUpdate[`system.damageRolls.${key}.damage`] = getDamageData(
                         damage[key].damage,
                         oldLevel,
-                        newLevel
+                        newLevel,
                     );
                     attackUpdate[`system.damageRolls.${key}.damageType`] = damage[key].damageType;
                 }
@@ -204,13 +204,13 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
         const regex = DC_REGEXES[regexNo];
         for (const item of items
             .filter(
-                (item) => item.system.description.value.includes("DC") || item.system.description.value.includes("dc:")
+                (item) => item.system.description.value.includes("DC") || item.system.description.value.includes("dc:"),
             )
             .filter(
                 (item) =>
                     !(<string[]>(
                         Array.of("consumable", "armor", "backpack", "book", "equipment", "treasure", "weapon")
-                    )).includes(item.type)
+                    )).includes(item.type),
             ) //
             .filter((item) => !item.system.description.value.includes("type:flat"))) {
             const description = item.system.description.value;

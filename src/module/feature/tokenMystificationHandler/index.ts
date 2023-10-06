@@ -61,7 +61,7 @@ async function fetchRandomWordPrefix(): Promise<string> {
 
 export async function buildTokenName(
     token: TokenPF2e | TokenDocumentPF2e | null,
-    isMystified: boolean
+    isMystified: boolean,
 ): Promise<string> {
     let tokenName = "";
     if (token && token.actor) {
@@ -218,7 +218,7 @@ export function renderNameHud(data: TokenDocumentPF2e, html: JQuery) {
         const toggle = $(
             `<div class="control-icon toggle ${
                 isTokenMystified(token) ? "active" : ""
-            }" data-action="mystify"> <i class="fas fa-eye-slash" title="${title}"></i></div>`
+            }" data-action="mystify"> <i class="fas fa-eye-slash" title="${title}"></i></div>`,
         );
         if (canMystify() && !token?.actor?.hasPlayerOwner) {
             toggle.on("click", async (e) => {

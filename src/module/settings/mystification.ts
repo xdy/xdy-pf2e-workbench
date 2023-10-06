@@ -67,7 +67,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 choices: {
                     none: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.none`),
                     numberPostfix: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.numberPostfix`
+                        `${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.numberPostfix`,
                     ),
                     wordPrefix: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifierAddRandomProperty.wordPrefix`),
                 },

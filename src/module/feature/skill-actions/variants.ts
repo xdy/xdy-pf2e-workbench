@@ -43,7 +43,7 @@ export class Variant {
         skill: CharacterSkill,
         extra: Record<string, unknown> | undefined,
         modifiers: any[] = [], // ModifierPF2e[] = [],
-        assuranceTotal = 0
+        assuranceTotal = 0,
     ) {
         this.label = label;
         this.skill = skill;

@@ -40,11 +40,11 @@ export function registerWorkbenchKeybindings() {
                         callback: async (html) => {
                             const targets: TokenPF2e[] = <TokenPF2e[]>(
                                 Array.from(canvas.tokens?.controlled).concat(
-                                    canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1)
+                                    canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1),
                                 )
                             );
                             const user: any = game.users.find(
-                                (u) => u.id === (html.find("#dialogUserId").val() as string)
+                                (u) => u.id === (html.find("#dialogUserId").val() as string),
                             );
                             if (game.user?.isGM && targets && user) {
                                 for (const t of targets) {
@@ -59,7 +59,7 @@ export function registerWorkbenchKeybindings() {
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
                         callback: async (html: JQuery) => {
                             const user: any = game.users.find(
-                                (u) => u.id === (html.find("#dialogUserId").val() as string)
+                                (u) => u.id === (html.find("#dialogUserId").val() as string),
                             );
                             if (game.user?.isGM && user) {
                                 const targets = user.targets;
@@ -99,7 +99,7 @@ export function registerWorkbenchKeybindings() {
         onDown: () => {
             if (game.user?.isGM) {
                 const combatantByToken: any = game?.combat?.getCombatantByToken(
-                    <string>canvas?.tokens?.controlled[0].id
+                    <string>canvas?.tokens?.controlled[0].id,
                 );
                 moveSelectedAheadOfCurrent(combatantByToken).then();
             }

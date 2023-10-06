@@ -78,7 +78,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     if (game.settings.get(MODULENAME, "npcMystifierUseRarities")) {
         rarities = traitsList.filter((trait: string) => TRAITS.RARITIES.includes(trait));
         const replacement: string = String(
-            game.settings.get(MODULENAME, "npcMystifierUseRaritiesReplacement")
+            game.settings.get(MODULENAME, "npcMystifierUseRaritiesReplacement"),
         ).toLocaleLowerCase();
         if (replacement !== "") {
             rarities = rarities.map((trait: string) => (trait !== "common" ? replacement : trait));
@@ -122,8 +122,8 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
                 .concat(others)
                 .concat(aonCreatureTypes)
                 .concat(pf2eCreatureTraits)
-                .concat([postfix])
-        ).values()
+                .concat([postfix]),
+        ).values(),
     );
 }
 

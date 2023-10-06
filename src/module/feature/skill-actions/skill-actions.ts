@@ -147,7 +147,8 @@ export class SkillAction {
                 } else if (this.key === "earnIncome") {
                     // Ugly earnIncome fix.
                     const pack = game.packs.get("pf2e.pf2e-macros");
-                    pack?.getIndex()
+                    pack
+                        ?.getIndex()
                         .then((index) => {
                             const id: any = index.find((e) => e.name.includes("Earn Income"))?._id;
                             if (id) {
@@ -158,7 +159,8 @@ export class SkillAction {
                 } else if (this.key === "escape") {
                     // Ugly escape fix.
                     const pack: any = game.packs.get("pf2e.action-macros");
-                    pack?.getIndex()
+                    pack
+                        ?.getIndex()
                         .then((index) => {
                             const id = index.find((e) => e.name.includes("Escape"))?._id;
                             if (id) {
@@ -206,7 +208,7 @@ export class SkillAction {
             const $summary = $('<div class="item-summary">');
             const chatData = await (<ItemPF2e>(<unknown>this.pf2eItem)).getChatData(
                 { secrets: this.actor.isOwner },
-                $li.data()
+                $li.data(),
             );
             // @ts-ignore
             this.renderItemSummary($summary, this.pf2eItem, chatData);
@@ -274,7 +276,7 @@ export class SkillAction {
                 this.variants.addBasicVariant(
                     skill,
                     data.extra,
-                    data.proficiencyKey === "highest" ? "highest" : data.label
+                    data.proficiencyKey === "highest" ? "highest" : data.label,
                 );
 
                 // if (this.hasTrait("attack") && this.key !== "escape") {
@@ -299,7 +301,7 @@ export class SkillActionCollection extends Collection<SkillAction> {
 
         // @ts-ignore
         const newActionList: any[] = Array.from(game.pf2e.actions).filter((x) =>
-            allActions.find((y) => y.replacedWith === x[0])
+            allActions.find((y) => y.replacedWith === x[0]),
         );
 
         const actionList = newActionList.map((x) => {

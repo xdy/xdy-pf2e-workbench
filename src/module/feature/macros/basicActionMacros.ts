@@ -77,10 +77,10 @@ function createButton(action, idx, actor, party, actorSkills) {
         button =
             `<div class="map-wrapper">
               <button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="0" style="background:${
-                colorPalette[rank]
-            }" ${`data-tooltip="${tooltip}"`}> <img src="${
-                action.icon ?? defaultIcon
-            }" height="24" width="24"   alt="${name}"/>${name}</button>` +
+                  colorPalette[rank]
+              }" ${`data-tooltip="${tooltip}"`}> <img src="${
+                  action.icon ?? defaultIcon
+              }" height="24" width="24"   alt="${name}"/>${name}</button>` +
             `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-5" style="background:${
                 colorPalette[rank]
             }" ${`data-tooltip="${tooltip} + ${second}"`}>${second}</button>` +
@@ -707,7 +707,7 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                             const macro = game.macros.get(current);
                             if (!macro) {
                                 ui.notifications.error(
-                                    game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.gmMustImport`)
+                                    game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.gmMustImport`),
                                 );
                                 return;
                             }
@@ -730,7 +730,7 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                                     ui.notifications.error(
                                         game.i18n.format(`${MODULENAME}.macros.basicActionMacros.macroNotFound`, {
                                             macroName,
-                                        })
+                                        }),
                                     );
                                 }
                             });
@@ -738,7 +738,7 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                             ui.notifications.error(
                                 game.i18n.format(`${MODULENAME}.macros.basicActionMacros.compendiumNotFound`, {
                                     compendiumName,
-                                })
+                                }),
                             );
                         }
                     } else if (typeof current === "object") {
@@ -780,7 +780,7 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
             },
         },
         // @ts-ignore
-        { jQuery: false, width, classes: ["pf2e-bg"], popOut: true, resizable: true }
+        { jQuery: false, width, classes: ["pf2e-bg"], popOut: true, resizable: true },
     ).render(true);
 }
 
