@@ -175,9 +175,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Effect that you can use to change Focus Point Maximum of a character
         * Effect that you can use to implement ABP, "Another Alternative Bonus Progression" (by @crackjackflood) and an
           accompanying 'Feat' to add it to a character.
-        * (Deprecated) A set of effects that can be used to grant most conditions for a certain amount of time. They are
-          named like "Effect: Condition for 1 hour (modifiable)" (Use the "Condition Manager" macro from the "
-          Symon-provided macros" compendium instead.)
     * The compendium "PF2e Workbench Macros (xdy-pf2e-workbench-macros)" contains a few macros you might find useful.
         * 'Basic Action Macros' shows a dialog with a button for most macros, with bonus and whether you're the best in
           the party at that action (a setting to turn this off exists). (
