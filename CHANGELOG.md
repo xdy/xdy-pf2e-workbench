@@ -1,3 +1,10 @@
+## [5.19.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.19.0...v5.19.1) (2023-10-06)
+
+
+### Bug Fixes
+
+* Minimum frightened was off by one ([b7506ee](https://github.com/xdy/xdy-pf2e-workbench/commit/b7506ee48cd6e6e4ae52a2999b76ed98a2239a37))
+
 # [5.19.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.18.5...v5.19.0) (2023-10-01)
 
 
