@@ -146,6 +146,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
         refocus: refocus, // await game.PF2eWorkbench.refocus()
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
+        mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
 ```
 
 * New Keybinds in Configure Controls

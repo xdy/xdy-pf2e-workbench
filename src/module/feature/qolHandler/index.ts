@@ -250,15 +250,32 @@ export function castPrivateSpellHideName(message: ChatMessagePF2e, html: JQuery)
     }
 }
 
-export async function mystifyNpcItems(items) {
-    // Kind of ugly, but, feeling lazy...
-    const minimumRarity = String(
+/**
+ * Mystify NPC items.
+ *
+ * @param {Array} items - The items to mystify.
+ * @param {string} minimumRarity - The minimum rarity of items to mystify. Default is obtained from a game setting.
+ * @param {any} usingPartyLevel - Whether to use the party level to determine the minimum level of items to mystify. Default is obtained from a game setting.
+ * @param {number} minimumLevel - The minimum level of items to mystify. Default is obtained from a game setting.
+ * @param {number} multiplier - The multiplier to apply to the minimum level. Default is obtained from a game setting.
+ */
+export async function mystifyNpcItems(
+    items,
+    minimumRarity: string = String(
         game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater"),
-    );
-    const usingPartyLevel = game.settings.get(
+    ),
+    usingPartyLevel: any = game.settings.get(
         MODULENAME,
         "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel",
-    );
+    ),
+    minimumLevel: number = Number.parseInt(
+        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")),
+    ) ?? -1,
+    multiplier: number = Number.parseFloat(
+        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier")),
+    ),
+) {
+    // Kind of ugly, but, feeling lazy...
     if (usingPartyLevel) {
         game.settings.set(
             MODULENAME,
@@ -267,13 +284,6 @@ export async function mystifyNpcItems(items) {
                 game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater"),
         );
     }
-    let minimumLevel =
-        Number.parseInt(
-            String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")),
-        ) ?? -1;
-    const multiplier = Number.parseFloat(
-        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier")),
-    );
     if (multiplier !== 1 && minimumLevel !== -1) {
         minimumLevel = minimumLevel * multiplier;
     }

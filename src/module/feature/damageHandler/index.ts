@@ -4,6 +4,13 @@ import { degreeOfSuccessWithRerollHandling, isActuallyDamageRoll, shouldIHandleT
 import { handleDying } from "../../hooks.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
 
+/**
+ * Checks if the given message satisfies the conditions to perform a flat check,
+ * and returns whether the damage should be rolled or not.
+ *
+ * @param {ChatMessagePF2e} message - The chat message to check.
+ * @return {Promise<boolean>} - A boolean indicating whether to roll the damage.
+ */
 export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
     if (game.modules.get("pf2-flat-check")?.active) {

@@ -1,6 +1,12 @@
 import { ActorPF2e } from "@actor";
 import { shouldIHandleThis } from "../../utils.js";
 
+/**
+ * Moves the selected combatant ahead of the current combatant.
+ *
+ * @param {type} selectedCombatantId - The ID of the selected combatant.
+ * @return {Promise<void>} A promise that resolves when the selected combatant has been moved.
+ */
 export async function moveSelectedAheadOfCurrent(selectedCombatantId): Promise<void> {
     // TODO Ugly hack, might want to do a PR to expose the code in encounter-tracker#setInitiativeFromDrop?
     // TODO Handle moving several tokens at once? For now, just take the first selected token.

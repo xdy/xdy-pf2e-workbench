@@ -127,6 +127,12 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
     );
 }
 
+/**
+ * Generates a name from traits using the current mystification settings for a given token ID.
+ *
+ * @param {string} tokenId - The ID of the token.
+ * @returns {Promise<void>} A promise that resolves with the generated name from traits.
+ */
 export async function generateNameFromTraitsForToken(tokenId: string) {
     // @ts-ignore
     const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));

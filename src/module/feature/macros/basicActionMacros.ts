@@ -109,13 +109,12 @@ type MacroAction = {
     replacedWith?: string;
 };
 
+/**
+ * This macro opens a dialog containing a list of actions to be used by the selected Actor
+ * If no actor is selected, it selects the user's standard character.
+ * If there is no user character, it shows up a warning notification.
+ */
 export function basicActionMacros() {
-    /**
-     * This macro opens a dialog containing a list of actions to be used by the selected Actor
-     * If no actor is selected, it selects the user's standard character.
-     * If there is no user character, it shows up a warning notification.
-     */
-
     const bamActions: MacroAction[] = [
         {
             actionType: "skill_untrained",

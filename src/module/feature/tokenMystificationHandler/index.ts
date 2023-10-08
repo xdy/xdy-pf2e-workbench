@@ -163,6 +163,13 @@ export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): b
     return (tokenName?.indexOf(prototypeTokenName) ?? -1) < 0;
 }
 
+/**
+ * Takes a token ID and a boolean value to perform a mystification.
+ *
+ * @param {string} tokenId - The ID of the token.
+ * @param {boolean} active - Whether the mystification should be active or not.
+ * @return {Promise<void>} A promise that resolves when the mystification is complete.
+ */
 export async function doMystificationFromToken(tokenId: string, active: boolean) {
     // @ts-ignore
     const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));

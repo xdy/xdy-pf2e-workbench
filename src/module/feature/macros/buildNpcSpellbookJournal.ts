@@ -1,6 +1,11 @@
 // Originally from Avery (Velara) Avery#9136, modified by me. Included with permission.
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
+/**
+ * Builds the NPC Spellbook Journal.
+ *
+ * @return {Promise<void>} Returns a promise that resolves when the journal is created.
+ */
 export async function buildNpcSpellbookJournal() {
     // @ts-ignore
     const activeWindow = ui.activeWindow;

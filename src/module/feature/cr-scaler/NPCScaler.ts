@@ -21,6 +21,13 @@ import { ActorPF2e, NPCPF2e } from "@actor";
 import { NPCSystemData } from "@actor/npc/data.js";
 import { logDebug } from "../../utils.js";
 
+/**
+ * Scales an NPC to a specified level based on an actor ID.
+ *
+ * @param {string} actorId - The ID of the actor.
+ * @param {number} newLevel - The new level to scale the NPC to.
+ * @return {Promise<void>} A promise that resolves when the scaling is complete.
+ */
 export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number) {
     const actor = <NPCPF2e>(<unknown>game.actors.get(actorId));
     if (actor) {

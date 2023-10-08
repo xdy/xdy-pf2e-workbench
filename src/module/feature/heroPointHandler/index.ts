@@ -68,6 +68,11 @@ export function createRemainingTimeMessage(remainingMinutes: number) {
     );
 }
 
+/**
+ * Calls the heroPointHandler function with the HPHState.Timeout parameter.
+ *
+ * @return {Promise<any>} The result of the heroPointHandler function.
+ */
 export async function callHeroPointHandler() {
     return heroPointHandler(HPHState.Timeout);
 }
@@ -301,6 +306,12 @@ function heroes() {
     );
 }
 
+/**
+ * Resets the hero points for all heroes in the game.
+ *
+ * @param {number} heropoints - The number of hero points to set for each hero.
+ * @return {Promise<void>} - A promise that resolves when all hero points have been updated.
+ */
 export async function resetHeroPoints(heropoints: number) {
     for (const actor of heroes()) {
         await actor.update({
@@ -310,6 +321,13 @@ export async function resetHeroPoints(heropoints: number) {
     }
 }
 
+/**
+ * Adds hero points to the specified actor or all actors.
+ *
+ * @param {number} heropoints - The number of hero points to add.
+ * @param {any} [actorId="ALL"] - The ID of the actor to add hero points to. If "ALL" is specified, hero points will be added to all actors.
+ * @return {Promise<void>} - A promise that resolves when the hero points have been added.
+ */
 export async function addHeroPoints(heropoints: number, actorId: any = "ALL") {
     let actors;
     switch (actorId) {

@@ -15,6 +15,11 @@ async function increaseFocusPoints(actor, value) {
     });
 }
 
+/**
+ * Executes the "refocus" action.
+ *
+ * @return {Promise<void>} - A promise that resolves when the action is complete.
+ */
 export async function refocus() {
     const selected = canvas.tokens.controlled.map((token) => token.actor) ?? [];
 
