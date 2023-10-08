@@ -1,3 +1,10 @@
+# [5.21.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.20.1...v5.21.0) (2023-10-08)
+
+
+### Features
+
+* Support using party level (optionally modified by a float multiplier) rather than a hardcoded level value for npc item mystification. ([881e8ca](https://github.com/xdy/xdy-pf2e-workbench/commit/881e8cac6f673bd6aee26f1979ddc4084f0ac732))
+
 ## [5.20.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.20.0...v5.20.1) (2023-10-06)
 
 
