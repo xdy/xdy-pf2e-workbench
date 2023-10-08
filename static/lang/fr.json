@@ -633,8 +633,8 @@
         "name": "...modifié par ce multiplicateur"
       },
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
-        "hint": "Mystifier les objets de niveau supérieur au niveau du groupe. Prend le pas sur l'entrée manuelle.",
-        "name": "Mystifie seulement les objets de niveau supérieur au niveau groupe."
+        "hint": "Mystifier les objets de niveau égal ou supérieur au niveau du groupe. Prend le pas sur l'entrée manuelle.",
+        "name": "Mystifie seulement les objets de niveau égal ou supérieur au niveau groupe."
       }
     },
     "effects": {
