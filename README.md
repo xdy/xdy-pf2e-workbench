@@ -181,10 +181,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
           the party at that action (a setting to turn this off exists). (
           Thanks ApoAstolov). The five colors are denoting ranks, in order, grey=untrained, blue=trained, purple=expert,
           gold=master, red=legendary, with 'glow' meaning that you are the best in the party.
-        * 'Refocus' shows dialog with buttons to regain 1 focus point, or 2 if the character has any of the \*-focus
-          feats, or 3 if any of the \*-wellspring feats, or 2 if is a psychic. With admonition to only choose that
-          button if one has indeed spent more than 2 or 3 focus points since the last refocus (or, for a psychic,
-          only spent on psychic abilities.
         * 'Build Npc Spellbook Journal' that builds a journal with the contents of an npc's spell list. Courtesy of
           Avery (Velara).
         * 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the Whirlwind Strike Feat,
@@ -212,6 +208,10 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       where prohibited. Ei saa peittää. Do not taunt happy fun ball: https://www.youtube.com/watch?v=GmqeZl8OI2M)
 
 * Deprecated features (will be removed eventually):
+    * The macro 'Refocus' shows dialog with buttons to regain 1 focus point, or 2 if the character has any of the \*-focus
+      feats, or 3 if any of the \*-wellspring feats, or 2 if is a psychic. With admonition to only choose that
+      button if one has indeed spent more than 2 or 3 focus points since the last refocus (or, for a psychic,
+      only spent on psychic abilities. (Post remaster use ```canvas.tokens.controlled.forEach(x=>x.actor.spellcasting.refocus({all:true}))``` instead to regain all focus at once.)
 
 * Recently removed features:
     * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
@@ -221,6 +221,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       the "PF2e Workbench Items" compendium instead.
     * Option to apply Encumbered condition automatically based on current bulk when bulk changes. Note: Uses the system
       code which considers 5 bulk + 9 light to not exceed 5 bulk.
+    * Several deprecated 'Condition for (n) (timeperiod)s' effects as that is better handled by the Condition Manager macro
+      found in the 'Symon-provided Macros' compendium.
 
 ## Installation
 
