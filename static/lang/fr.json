@@ -627,6 +627,14 @@
         "name": "Règle de point d'héroïsme de Keeley",
         "bonusTag": "Relance faible +10",
         "hint": "Une règle maison favorisée par un certain développeur de Paizo : si le résultat naturel de la relance du point d'héroïsme est inférieur ou égal à 10, un bonus de 10 est appliqué après coup."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
+        "hint": "...modifié par ce multiplicateur (ouaip, je sais, je devrais montrer la valeur finale)",
+        "name": "...modifié par ce multiplicateur"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
+        "hint": "Mystifier les objets de niveau supérieur au niveau du groupe. Prend le pas sur l'entrée manuelle.",
+        "name": "Mystifie seulement les objets de niveau supérieur au niveau groupe."
       }
     },
     "effects": {
