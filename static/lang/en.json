@@ -662,6 +662,14 @@
         "hint": "Mystify items only if they are of this level or greater.",
         "name": "Mystify items only if they are of this level or greater."
       },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
+        "hint": "Mystify items only if greater than party level. Overrides manual entry.",
+        "name": "Mystify items only if greater than party level."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
+        "hint": "...as modified by this multiplier (yeah, I know, I should show the final value)",
+        "name": "...as modified by this multiplier"
+      },
       "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
         "hint": "Mystify items only if they are of this rarity or greater.",
         "name": "Mystify items only if they are of this rarity or greater."

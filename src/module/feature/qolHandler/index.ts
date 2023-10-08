@@ -251,12 +251,32 @@ export function castPrivateSpellHideName(message: ChatMessagePF2e, html: JQuery)
 }
 
 export async function mystifyNpcItems(items) {
+    // Kind of ugly, but, feeling lazy...
     const minimumRarity = String(
         game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater"),
     );
-    const minimumLevel = Number.parseInt(
-        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")),
+    const usingPartyLevel = game.settings.get(
+        MODULENAME,
+        "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel",
     );
+    if (usingPartyLevel) {
+        game.settings.set(
+            MODULENAME,
+            "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater",
+            game?.actors?.party?.level ??
+                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater"),
+        );
+    }
+    let minimumLevel =
+        Number.parseInt(
+            String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")),
+        ) ?? -1;
+    const multiplier = Number.parseFloat(
+        String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier")),
+    );
+    if (multiplier !== 1 && minimumLevel !== -1) {
+        minimumLevel = minimumLevel * multiplier;
+    }
     const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
     const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
         items

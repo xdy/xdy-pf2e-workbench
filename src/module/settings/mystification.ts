@@ -30,6 +30,20 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 default: -1,
                 type: Number,
             },
+            npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel: {
+                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel.hint`,
+                scope: "world",
+                default: false,
+                type: Boolean,
+            },
+            npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier: {
+                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier.hint`,
+                scope: "world",
+                default: "1.0",
+                type: String,
+            },
             npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater: {
                 name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater.name`,
                 hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater.hint`,
