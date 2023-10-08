@@ -1,3 +1,10 @@
+# [5.22.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.21.1...v5.22.0) (2023-10-08)
+
+
+### Features
+
+* Expose the function mystifyNpcItems so it can be used by macros. I leave actually writing that macro as an exercise for the reader. :) ([374b6fd](https://github.com/xdy/xdy-pf2e-workbench/commit/374b6fdf424c518ddbee16b2eb3f1e430d499c12))
+
 ## [5.21.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.21.0...v5.21.1) (2023-10-08)
 
 
