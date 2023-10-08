@@ -1,3 +1,10 @@
+## [5.21.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.21.0...v5.21.1) (2023-10-08)
+
+
+### Bug Fixes
+
+* > !== >= :) ([e95c176](https://github.com/xdy/xdy-pf2e-workbench/commit/e95c176b8b917ae4121a65704a5bae8d902e0542))
+
 # [5.21.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.20.1...v5.21.0) (2023-10-08)
 
 
