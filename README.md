@@ -108,8 +108,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       Minimum Frightened' for how to set a minimum frightened level that the module won't reduce below.
 
 * Variant Rules
-    * Option to change the max number of hero points a character can have. (This feature has been taken over from the
-      delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox) module. Thanks DJ!)
     * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357). (Currently broken)
 
 * House Rules
@@ -219,6 +217,15 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       or https://foundryvtt.com/packages/pf2e-flatcheck-helper instead.
     * Workbench ABP. Use https://github.com/reonZ/pf2e-arp or the "Effect: Another Alternate Bonus Progression" from
       the "PF2e Workbench Items" compendium instead.
+    * Option to change the max number of hero points a character can have. (It was broken, I suggest people use this Rules Element solution instead (i.e. add this RE to a permanent item on each character after changing 20 to whatever value you want to use for max hero points):
+```json
+{
+"key": "ActiveEffectLike",
+"mode": "override",
+"path": "system.resources.heroPoints.max",
+"value": 20
+}
+```
     * Option to apply Encumbered condition automatically based on current bulk when bulk changes. Note: Uses the system
       code which considers 5 bulk + 9 light to not exceed 5 bulk.
     * Several deprecated 'Condition for (n) (timeperiod)s' effects as that is better handled by the Condition Manager macro
