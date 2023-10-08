@@ -726,6 +726,14 @@
       "heropointHandlerNotification": {
         "name": "... i wysłać powiadomienie o przyznaniu Punktu Bohatera.",
         "hint": "Zaznacz, aby automatycznie wysyłać powiadomienie, gdy osoba otrzyma Punkt Bohatera."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
+        "hint": "...zmodyfikowany przez ten mnożnik (tak, wiem, powinienem pokazać ostateczną wartość)",
+        "name": "...zmodyfikowany przez ten mnożnik"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
+        "hint": "Utajniaj przedmioty tylko wtedy, gdy są równe lub wyższe niż poziom drużyny. Zastępuje ręczne wprowadzanie.",
+        "name": "Utajniaj przedmioty tylko wtedy, gdy ich poziom jest równy lub wyższy od poziomu drużyny."
       }
     },
     "modules": {
