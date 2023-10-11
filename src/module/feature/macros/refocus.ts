@@ -20,11 +20,10 @@ async function increaseFocusPoints(actor, value) {
  *
  * @return {Promise<void>} - A promise that resolves when the action is complete.
  */
-export async function refocus() {
-    const selected = canvas.tokens.controlled.map((token) => token.actor) ?? [];
-
-    if (selected.length === 1) {
+export async function refocus(actors: any = canvas.tokens.controlled.map((token) => token.actor) ?? []) {
+    if (actors.length === 1) {
         const actor = canvas.tokens.controlled[0].actor;
+        actor?.spellcasting.refocus();
         let regain = 1;
         let isPsychic = false;
         if (actor) {

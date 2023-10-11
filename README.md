@@ -145,6 +145,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         refocus: refocus, // await game.PF2eWorkbench.refocus()
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
+        isSpellAvailable: isSpellAvailable, // game.PF2eWorkbench.isSpellAvailable(_token.actor, "Breathe Fire", { spellRank: 1, spellcastingEntry: 'Arcane Prepared Spells'})
 ```
 
 * New Keybinds in Configure Controls
@@ -320,7 +321,8 @@ Asset licenses:
   by [Elmer Mercanas](https://unsplash.com/@elmercanasjr) under the [Unsplash License](https://unsplash.com/license)
 * The icon for Basic Action Macros was made by Oskar and popy and is available under
   the [CC0 license](https://creativecommons.org/share-your-work/public-domain/cc0/)
-* The icon for Another Alternative Bonus Progression is made by @CrackJackFlood and are "made by me no license free for public use".
+* The icon for Another Alternative Bonus Progression is made by @CrackJackFlood and are "made by me no license free for
+  public use".
 
 build-packs license:
 
