@@ -34,6 +34,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [nomis80](https://github.com/simon-perreault) - Fixed a bug in mystified token names.
 * [Liathan] - Added the German translation.
 * [CrackJackFlood](https://github.com/CrackJackFlood) - Added the Another Alternate Bonus Progression feat and effects
+* [esheyw]() - Added the the isSpellAvailable macro utility function.
 
 I've probably forgotten someone, if so, please tell me!
 
