@@ -1,3 +1,16 @@
+# [5.23.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.22.0...v5.23.0) (2023-10-11)
+
+
+### Bug Fixes
+
+* Update CONTRIBUTORS.md ([3aff1f0](https://github.com/xdy/xdy-pf2e-workbench/commit/3aff1f08ad3149c0ca8531554ea9d9a1113ba607))
+* Updated links in the AABP feat. ([e9e8b84](https://github.com/xdy/xdy-pf2e-workbench/commit/e9e8b8417a1fab7c4bf5f85bfcbe590aa768720c))
+
+
+### Features
+
+* Added the utility function isSpellAvailable courtesy of [@esheyw](https://github.com/esheyw) ([4e9ec9a](https://github.com/xdy/xdy-pf2e-workbench/commit/4e9ec9ad836564a9c9f898d9dff6d668336c55a7))
+
 # [5.22.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.21.1...v5.22.0) (2023-10-08)
 
 
