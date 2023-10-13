@@ -142,7 +142,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
-        refocus: refocus, // await game.PF2eWorkbench.refocus()
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
         isSpellAvailable: isSpellAvailable, // game.PF2eWorkbench.isSpellAvailable(_token.actor, "Breathe Fire", { spellRank: 1, spellcastingEntry: 'Arcane Prepared Spells'})
@@ -185,21 +184,26 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the Whirlwind Strike Feat,
           has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that the first weapon of
           any type.
-    * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
-      provided by ApoApostolov. They are *intended* to be customized by the user by changing the javascript code (such
-      as by adding/removing actions, setting what actors are part of the party, etc.) They are not really supported, so,
-      if your changes break them, you get to keep all the parts! :)
-        * Customizable Basic Action Macros. A variant of Basic Action Macros that you can customize for your own needs.
-          Add/remove actions, change party members, go wild!
-          See https://apoapostolov.notion.site/PF2-Basic-Actions-Macro-1255adc12ecf44e881e6cd87941f7858 for
-          documentation.
-        * Customizable Procedural Checks. A framework for running several macros at once, requires customization to be
-          useful. (At a minimum, change the actor id:s, this gets you a macro that can be used in exploration mode to
-          perform standard actions when the group is about to open a door.)
-          See https://apoapostolov.notion.site/PF2-Procedural-Checks-Macro-996bd20ace45411eb4b1f566686ecdb1 for
-          documentation.
-    * There are a few more compendiums included with this module with assorted utility macros and items that do not
-      need to be imported, as indicated by their labels all ending with 'do not import'
+        * 'isSpellAvailable' checks if a spell is available for the selected token. Sample use:
+          ```game.PF2eWorkbench.isSpellAvailable(_token.actor, "Breathe Fire", { spellRank: 1, spellcastingEntry: 'Arcane Prepared Spells', readyToCast: false})```
+* The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
+  provided by ApoApostolov. They are *intended* to be customized by the user by changing the javascript code (such
+  as by adding/removing actions, setting what actors are part of the party, etc.) They are not really supported, so,
+  if your changes break them, you get to keep all the parts! :)
+* Customizable Basic Action Macros. A variant of Basic Action Macros that you can customize for your own needs.
+  Add/remove actions, change party members, go wild!
+  See https://apoapostolov.notion.site/PF2-Basic-Actions-Macro-1255adc12ecf44e881e6cd87941f7858 for
+  documentation.
+* Customizable Procedural Checks. A framework for running several macros at once, requires customization to be
+  useful. (At a minimum, change the actor id:s, this gets you a macro that can be used in exploration mode to
+  perform standard actions when the group is about to open a door.)
+  See https://apoapostolov.notion.site/PF2-Procedural-Checks-Macro-996bd20ace45411eb4b1f566686ecdb1 for
+  documentation.
+* Customizable Refocus. This macro works the way it did before the Pathfinder Remaster changes.
+  Like the other macros in this compendium it will most likely never be updated. If it does get updated you will
+  need to reimport it manually.
+* There are a few more compendiums included with this module with assorted utility macros and items that do not
+  need to be imported, as indicated by their labels all ending with 'do not import'
 
 * Experimental features:
     * If a feature name starts with mentioning that it's experimental, use with caution. It's probably barely tested and
@@ -207,10 +211,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       where prohibited. Ei saa peittää. Do not taunt happy fun ball: https://www.youtube.com/watch?v=GmqeZl8OI2M)
 
 * Deprecated features (will be removed eventually):
-    * The macro 'Refocus' shows dialog with buttons to regain 1 focus point, or 2 if the character has any of the \*-focus
-      feats, or 3 if any of the \*-wellspring feats, or 2 if is a psychic. With admonition to only choose that
-      button if one has indeed spent more than 2 or 3 focus points since the last refocus (or, for a psychic,
-      only spent on psychic abilities. (Post remaster use ```canvas.tokens.controlled.forEach(x=>x.actor.spellcasting.refocus({all:true}))``` instead to regain all focus at once.)
+    * None currently.
 
 * Recently removed features:
     * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
@@ -218,12 +219,17 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       or https://foundryvtt.com/packages/pf2e-flatcheck-helper instead.
     * Workbench ABP. Use https://github.com/reonZ/pf2e-arp or the "Effect: Another Alternate Bonus Progression" from
       the "PF2e Workbench Items" compendium instead.
-    * Option to change the max number of hero points a character can have. (It was long broken, instead add an ActiveEffectLike
-      RE that overrides system.resources.heroPoints.max to whatever value you want to use.)
-    * Option to apply Encumbered condition automatically based on current bulk when bulk changes. Note: Uses the system
-      code which considers 5 bulk + 9 light to not exceed 5 bulk.
-    * Several deprecated 'Condition for (n) (timeperiod)s' effects as that is better handled by the Condition Manager macro
-      found in the 'Symon-provided Macros' compendium.
+    * Option to change the max number of hero points a character can have. (It was long broken, instead add an
+      ActiveEffectLike RE that overrides system.resources.heroPoints.max to whatever value you want to use.)
+    * Option to apply Encumbered condition automatically based on current bulk when bulk changes as it's now part of the
+      pf2e system.
+    * Several deprecated 'Condition for (n) (timeperiod)s' effects as that is better handled by the Condition Manager
+      macro found in the 'Symon-provided Macros' compendium.
+    * Refocus macro (it broke with a recent system update). The customizableRefocusPremaster macro in the '
+      xdy-customizable-macros' compendium apparently still works, so I'll keep that around until it too breaks, but
+      won't get any further updates.) Post remaster
+      use ```canvas.tokens.controlled.forEach(x=>x.actor.spellcasting.refocus({all:true}))``` instead to regain all
+      focus at once for the selected tokens.
 
 ## Installation
 
@@ -283,11 +289,13 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and [CONTRIBUTORS.md](CONTRIBUTORS.md)
 ## The Programmer's Mantra
 
 ```
+
 It is by caffeine alone I set my mind in motion
 It is by the beans of Java that thoughts acquire speed
 The hands acquire shakes
 The shakes become a warning
 It is by caffeine alone I set my mind in motion
+
 ```
 
 * Help xdy stay awake long enough to add more

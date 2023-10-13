@@ -18,7 +18,6 @@ import { loadSkillActions, loadSkillActionsBabele } from "./feature/skill-action
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.js";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.js";
 import { basicActionMacros } from "./feature/macros/basicActionMacros.js";
-import { refocus } from "./feature/macros/refocus.js";
 import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal.js";
 import { whirlwindStrike } from "./feature/macros/whirlwindStrike.js";
 import {
@@ -354,7 +353,6 @@ Hooks.once("ready", () => {
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
-        refocus: refocus, // await game.PF2eWorkbench.refocus()
         buildNpcSpellbookJournal: buildNpcSpellbookJournal, // await game.PF2eWorkbench.buildNpcSpellbookJournal()
         whirlwindStrike: whirlwindStrike, // await game.PF2eWorkbench.whirlwindStrike(_token) OR await game.PF2eWorkbench.whirlwindStrike(_token, 2000)
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
