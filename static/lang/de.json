@@ -580,14 +580,14 @@
       "handleDyingRecoveryRollAllow": {
         "all": "Alle",
         "gm": "SL",
-        "name": "Auswählen wer die Erlaubnis hat die Option zu setzen um Erholungswürfe automatisch zu würfeln.",
+        "name": "Auswählen wer die Erlaubnis hat die Option zu setzen, um Erholungswürfe automatisch zu würfeln, nachdem der Eigentümer auf dem Charakterbogen den Erholungsknopf gedrückt hat.",
         "none": "Keiner",
         "players": "Spieler",
-        "hint": "Auswählen wer die Erlaubnis hat die Option zu setzen um Erholungswürfe automatisch zu würfeln. Speichere die Einstellung um weitere Einstellung der Client-Automatisierung anzuzeigen/auszublenden."
+        "hint": "Auswählen wer die Erlaubnis hat die Option zu setzen, um Erholungswürfe automatisch zu würfeln, nachdem der Eigentümer auf dem Charakterbogen den Erholungsknopf gedrückt hat. Speichere die Einstellung, um weitere Einstellung der Client-Automatisierung anzuzeigen/auszublenden."
       },
       "handleDyingRecoveryRoll": {
-        "hint": "Client Einstellung zum automatischen Würfeln von Erholungswürfen.",
-        "name": "Automatisches Würfeln von Erholungswürfen.",
+        "hint": "Client Einstellung zum automatischen Würfeln von Erholungswürfen, nachdem der Eigentümer auf dem Charakterbogen den Erholungsknopf gedrückt hat.",
+        "name": "Automatisches Würfeln von Erholungswürfen, nachdem der Eigentümer auf dem Charakterbogen den Erholungsknopf gedrückt hat.",
         "defeated": "{name} wurde besiegt",
         "handled": "Erholungswurf {roll} {outcome} wurde automatisch abgehandelt. {defeated}."
       },
@@ -654,6 +654,14 @@
         "name": "Fügt ein Herkunftsparagon Talentplatz ein. Benötigt ein Neuladen (F5) nach dem Ändern.",
         "title": "Herkunftsparagon Talente",
         "hint": "(Wird nicht benötigt solange das System Unterstützung für die ursprüngliche Herkunftsparagon Regelvariante hat.) Dies fügt ein Kampagnentalentsektion für den Herkunftsparagon ein."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
+        "hint": "Verschleiere Gegenstände nur falls deren Level gleich oder höher dem Party-Level ist. Überschreibt manuelle Einträge.",
+        "name": "Verschleiere Gegenstände nur falls deren Level gleich oder höher dem Party-Level ist."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
+        "name": "...wie modifiziert bei diesem Multiplikator",
+        "hint": "...wie modifiziert bei diesem Multiplikator (ja, ich weiß, ich sollte den finalen Wert anzeigen)"
       }
     },
     "skillActions": {
