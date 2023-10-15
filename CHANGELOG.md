@@ -1,3 +1,10 @@
+## [5.23.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.1...v5.23.2) (2023-10-15)
+
+
+### Bug Fixes
+
+* Elite/weak works again for npc mystification. ([4013c86](https://github.com/xdy/xdy-pf2e-workbench/commit/4013c86e49eb108021ba34cced01cb0559a38c75)), closes [#1030](https://github.com/xdy/xdy-pf2e-workbench/issues/1030)
+
 ## [5.23.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.0...v5.23.1) (2023-10-13)
 
 
