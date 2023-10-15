@@ -161,6 +161,11 @@ export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2
                 traitsList.push(size);
             }
 
+            const actor: any = token.actor;
+            if (actor.system?.attributes?.adjustment) {
+                traitsList.push(actor.system?.attributes?.adjustment);
+            }
+
             const prefix = (await fixesPreAndPost("npcMystifierPrefix")) || "";
             const postfix = (await fixesPreAndPost("npcMystifierPostfix")) || "";
             traitsList = filterTraitList(traitsList, prefix, postfix);
