@@ -159,9 +159,9 @@
       "enableAutomaticMove": {
         "name": "将先攻位置移动到当前回合的参战者之前。",
         "noAutomation": "永不",
-        "reaching0HP": "当玩家角色或NPC的HP降为0时",
+        "reaching0HP": "当玩家角色或NPC的HP降为0时。",
         "hint": "勾选此项，可在参战者回合外选中他，将其先攻位置移动到当回合的参战者之前，这通常是由于当回合的参战者杀死了他。由于四舍五入，数个参战者可能会在先攻列表中显示相同的先攻。",
-        "reaching0HPCharactersOnly": "当玩家角色的HP降为0时"
+        "reaching0HPCharactersOnly": "当玩家角色的HP降为0时。"
       },
       "heroPointHandler": {
         "thisMany": "这些",
@@ -448,7 +448,7 @@
       },
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "勾选此项，用神秘化名称替换Actor名称，以在聊天中使用神秘化名称发言。注意，如果消息文本中不使用与Actor完全一致的名称，或拼写错误，此功能不会生效。",
-        "name": "在聊天信息和发言者名称中使用神秘化名称"
+        "name": "在聊天信息和发言者名称中使用神秘化名称。"
       },
       "customPauseRelocation": {
         "hint": "将暂停图标放置在屏幕中央，提示信息放在图标上方。",
@@ -628,6 +628,14 @@
         "hint": "（只要系统仍支持 \"双职业变体规则\"，此项就无需启动）。这将为双职业变体添加一个额外的专长槽位，此外，你还需要使用'双职业变体'(Dual Class)宏来为角色创造所需的职业。",
         "name": "添加双职业专长槽。启用改动后，需要按 F5 刷新。",
         "title": "双职业专长"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
+        "hint": "仅在物品等级等于或大于队伍等级时才会使物品神秘化。覆盖手动设置。",
+        "name": "仅在物品等级等于或大于队伍等级时才会使物品神秘化。"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
+        "hint": "......根据这个乘数修改（好吧，我知道，我应该显示最终值）",
+        "name": "......根据这个乘数修改"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
