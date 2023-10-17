@@ -184,8 +184,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the Whirlwind Strike Feat,
           has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that the first weapon of
           any type.
-        * 'isSpellAvailable' checks if a spell is available for the selected token. Sample use:
-          ```game.PF2eWorkbench.isSpellAvailable(_token.actor, "Breathe Fire", { spellRank: 1, spellcastingEntry: 'Arcane Prepared Spells', readyToCast: false})```
 * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
   provided by ApoApostolov. They are *intended* to be customized by the user by changing the javascript code (such
   as by adding/removing actions, setting what actors are part of the party, etc.) They are not really supported, so,
