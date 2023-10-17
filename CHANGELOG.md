@@ -1,3 +1,10 @@
+## [5.23.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.3...v5.23.4) (2023-10-17)
+
+
+### Bug Fixes
+
+* Actually remove the Refocus macro from the 'PF2e Workbench Macros' compendium. (The code was deleted in 5.23.1) ([4e2aad2](https://github.com/xdy/xdy-pf2e-workbench/commit/4e2aad2fdb24dbd49db349597ae9563fd745c3c5))
+
 ## [5.23.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.2...v5.23.3) (2023-10-17)
 
 
