@@ -1,3 +1,10 @@
+## [5.23.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.4...v5.23.5) (2023-10-18)
+
+
+### Bug Fixes
+
+* Removes the broken houserule that added the remaster crit rules for hammers and flails. Instead, just wait for ([aff158b](https://github.com/xdy/xdy-pf2e-workbench/commit/aff158bb3a0dffc644d28439240374b95d5889f6)), closes [#1018](https://github.com/xdy/xdy-pf2e-workbench/issues/1018)
+
 ## [5.23.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.3...v5.23.4) (2023-10-17)
 
 
