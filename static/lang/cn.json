@@ -579,13 +579,6 @@
         "label": "管理房规设置",
         "name": "(实验性) 房规设置"
       },
-      "houseRulerI18n": {
-        "flailCritical": "目标必须成功通过@Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|name:房规连枷重击专精]，否则@UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{倒地 Prone}。",
-        "info": "已添加房规（连枷和锤子重击专精效果造成倒地时豁免）。",
-        "name": "房规",
-        "hint": "一些维护者xdy喜欢的房规。目前加入了连枷和锤子重击专精效果造成倒地时豁免的功能。未来会更灵活一些。",
-        "hammerCritical": "目标必须成功通过@Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:房规锤重击专精]，否则@UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{倒地 Prone}。"
-      },
       "autoKillIfMassiveDamage": {
         "yes": "是的，所有角色",
         "yesForCharacters": "是的，仅玩家角色+魔宠",

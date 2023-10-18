@@ -14,14 +14,6 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
             },
-            houseRulerI18n: {
-                name: `${MODULENAME}.SETTINGS.houseRulerI18n.name`,
-                hint: `${MODULENAME}.SETTINGS.houseRulerI18n.hint`,
-                scope: "world",
-                config: true,
-                default: false,
-                type: Boolean,
-            },
             legacyVariantRuleAncestryParagon: {
                 name: `${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.name`,
                 hint: `${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.hint`,

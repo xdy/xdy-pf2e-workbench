@@ -595,13 +595,6 @@
         "hint": "... und automatisch für die Erholung danach würfeln. Benötigt dass die Einstellung darüber aktiv ist.",
         "name": "... und automatisch danach für die Erholung würfeln."
       },
-      "houseRulerI18n": {
-        "name": "Hausregeln",
-        "info": "Hausregeln welche hineingepatcht wurden (fügt im Moment Rettungswürfe für das Niederschlagen von Flegeln und Hämmern hinzu).",
-        "hint": "Patches in einigen Hausregeln welche xdy mag. Fügt im Moment Rettungswürfe für das Niederschlagen von Flegeln und Hämmern hinzu. Wird später flexibler werden.",
-        "flailCritical": "Das Ziel muss einen Rettungswurf gegen @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|name:gehausregelte kritische Flegelspezialisierung] bestehen oder wird niedergeschlagen und gilt als @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{liegend}.",
-        "hammerCritical": "Das Ziel muss einen Rettungswurf gegen @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:gehausregelte kritische Hammerspezialisierung] bestehen oder wird niedergeschlagen und gilt als @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{liegend}."
-      },
       "houseRulesSettings": {
         "label": "Verwalte Hausregel Einstellungen",
         "hint": "(Experimentell) Aktiviere und konfiguriere verschiedene Hausregeln",

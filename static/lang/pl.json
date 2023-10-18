@@ -428,13 +428,6 @@
         "hint": "Ustawienie automatycznego usuwania nieprzytomności w przypadku wyleczenia do ponad 0 PŻ.",
         "name": "Automatycznie usuwa nieprzytomność, jeśli zostanie wyleczona do poziomu wyższego niż 0 PŻ."
       },
-      "houseRulerI18n": {
-        "hint": "Poprawia kilka zasad domowych, które xdy lubi. Obecnie dodaje rzuty obronne dla cepa i młota. Później będzie bardziej elastyczny.",
-        "name": "Zasady Domowe",
-        "hammerCritical": "Cel musi wykonać @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Hammer Critical Specialization] lub zostanie powalony @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}.",
-        "info": "Zasady domowe zostały poprawione (obecnie otrzymuje rzuty na powalenie dla cepa i młota).",
-        "flailCritical": "Cel musi wykonać @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|name:Houseruled Flail Critical Specialization] lub zostanie powalony @UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{Prone}."
-      },
       "npcMystifierUseAlignmentTraits": {
         "name": "Użyj cech charakteru npc.",
         "hint": "Zaznacz, aby użyć cech charakteru w utajnionej nazwie."
