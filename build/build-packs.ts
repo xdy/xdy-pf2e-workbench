@@ -155,6 +155,7 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
                 );
                 map.set("Spellstrike", "systems/pf2e/icons/features/classes/spellstrike.webp");
                 map.set("Treat Wounds and Battle Medicine", "systems/pf2e/icons/conditions/wounded.webp");
+                map.set("Target tokens within a template", "icons/skills/targeting/crosshair-bars-yellow.webp");
                 map.set("Update Aura Radius", "systems/pf2e/icons/spells/destructive-aura.webp");
                 map.set("Use Scroll or Wand", "systems/pf2e/icons/equipment/wands/magic-wands/magic-wand.webp");
                 map.set("Versatile Performance", "systems/pf2e/icons/spells/summon-instrument.webp");
