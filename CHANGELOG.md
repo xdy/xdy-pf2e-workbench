@@ -1,3 +1,10 @@
+## [5.23.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.6...v5.23.7) (2023-10-19)
+
+
+### Bug Fixes
+
+* Removed "Aura: Bless" and "Aura: Protective Ward" as they are now part of the pf2e system. ([476e632](https://github.com/xdy/xdy-pf2e-workbench/commit/476e632813e6f854c614e2a0c8e16174bd46b204))
+
 ## [5.23.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.5...v5.23.6) (2023-10-19)
 
 
