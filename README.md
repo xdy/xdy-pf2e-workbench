@@ -157,14 +157,14 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       to help players having problems with targeting.
 
 * Assorted other features
-    * The latest versions of all V10-compatible macros
+    * The latest versions of all V11-compatible macros
       from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e are included in each Workbench release.
       They can be found in the compendium "Symon-provided macros (asymonous-benefactor-macros)", with the express
       permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor. What documentation exists
       can be found towards the start of the macro. If you have issues with these macros, report them
       here: https://gitlab.com/symonsch/my-foundryvtt-macros/-/issues
     * The compendium "PF2e Workbench Items (xdy-pf2e-workbench-items)" contains a few useful effects and items:
-        * Aura effects for Aura of Despair, Bless, Inspire Courage, Inspire Defense, Protective Ward that automatically
+        * Aura effects for Aura of Despair, Inspire Courage and Inspire Defense that automatically
           apply the effect to tokens within the aura. (Technically these not all these should be auras, but, close
           enough... Inspire Courage and Inspire Defense's effect can pass through walls that allow sound to pass)
         * Effect for Dirge of Doom that you can give to targets to give them frightened and not let the automated
@@ -188,18 +188,18 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
   provided by ApoApostolov. They are *intended* to be customized by the user by changing the javascript code (such
   as by adding/removing actions, setting what actors are part of the party, etc.) They are not really supported, so,
   if your changes break them, you get to keep all the parts! :)
-* Customizable Basic Action Macros. A variant of Basic Action Macros that you can customize for your own needs.
-  Add/remove actions, change party members, go wild!
-  See https://apoapostolov.notion.site/PF2-Basic-Actions-Macro-1255adc12ecf44e881e6cd87941f7858 for
-  documentation.
-* Customizable Procedural Checks. A framework for running several macros at once, requires customization to be
-  useful. (At a minimum, change the actor id:s, this gets you a macro that can be used in exploration mode to
-  perform standard actions when the group is about to open a door.)
-  See https://apoapostolov.notion.site/PF2-Procedural-Checks-Macro-996bd20ace45411eb4b1f566686ecdb1 for
-  documentation.
-* Customizable Refocus. This macro works the way it did before the Pathfinder Remaster changes.
-  Like the other macros in this compendium it will most likely never be updated. If it does get updated you will
-  need to reimport it manually.
+  * Customizable Basic Action Macros. A variant of Basic Action Macros that you can customize for your own needs.
+    Add/remove actions, change party members, go wild!
+    See https://apoapostolov.notion.site/PF2-Basic-Actions-Macro-1255adc12ecf44e881e6cd87941f7858 for
+    documentation.
+  * Customizable Procedural Checks. A framework for running several macros at once, requires customization to be
+    useful. (At a minimum, change the actor id:s, this gets you a macro that can be used in exploration mode to
+    perform standard actions when the group is about to open a door.)
+    See https://apoapostolov.notion.site/PF2-Procedural-Checks-Macro-996bd20ace45411eb4b1f566686ecdb1 for
+    documentation.
+  * Customizable Refocus. This macro works the way it did before the Pathfinder Remaster changes.
+    Like the other macros in this compendium it will most likely never be updated. If it does get updated you will
+    need to reimport it manually.
 * There are a few more compendiums included with this module with assorted utility macros and items that do not
   need to be imported, as indicated by their labels all ending with 'do not import'
 
@@ -228,6 +228,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       won't get any further updates.) Post remaster
       use ```canvas.tokens.controlled.forEach(x=>x.actor.spellcasting.refocus({all:true}))``` instead to regain all
       focus at once for the selected tokens.
+    * "Aura: Bless" and "Aura: Protective Ward" as they are now part of the pf2e system.
 
 ## Installation
 
