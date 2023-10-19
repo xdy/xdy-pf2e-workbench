@@ -9,12 +9,12 @@
         "pathfinder"
     ],
     "devDependencies": {
-        "@types/jquery": "^3.5.23",
+        "@types/jquery": "^3.5.24",
         "@types/node": "^18.18.6",
         "pixi.js": "6.5.2",
         "socket.io": "^4.7.2",
         "socket.io-client": "^4.7.2",
-        "tinymce": "^6.7.0",
+        "tinymce": "^6.7.1",
         "typescript": "^4.9.4"
     },
     "author": "the pf2e system developers",
