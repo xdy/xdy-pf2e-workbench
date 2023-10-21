@@ -596,7 +596,8 @@
       },
       "keeleysHeroPointRule": {
         "hint": "Zasada domowa preferowana przez pewnego dewelopera Paizo: jeśli naturalny wynik ponownego rzutu na punkty bohatera wynosi 10 lub mniej, po fakcie stosowana jest premia w wysokości 10.",
-        "name": "Reguła punktów bohatera Keeleya"
+        "name": "Reguła punktów bohatera Keeleya",
+        "bonusTag": "Niższy wynik przerzutu +10"
       },
       "enableAutomaticMove": {
         "hint": "Wybierz, aby umożliwić ustawienie inicjatywy walczącego poza własną turą tuż przed bieżącym walczącym, zazwyczaj dlatego, że bieżący walczący zabił wybranego uczestnika. Ze względu na zaokrąglanie kilku uczestników może mieć taką samą inicjatywę na liście.",
