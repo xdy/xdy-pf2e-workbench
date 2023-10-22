@@ -35,6 +35,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [Liathan] - Added the German translation.
 * [CrackJackFlood](https://github.com/CrackJackFlood) - Added the Another Alternate Bonus Progression feat and effects
 * [esheyw]() - Added the the isSpellAvailable macro utility function.
+* [Friz](https://github.com/fraserstanton) - Added support for Discordant Voice to Aura: Inspire Courage.
 
 I've probably forgotten someone, if so, please tell me!
 

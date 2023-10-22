@@ -1,16 +1,15 @@
-2023/10/19-22:24:45.115 14bc Recovering log #110
-2023/10/19-22:24:45.120 14bc Delete type=0 #100
-2023/10/19-22:24:45.120 14bc Delete type=0 #110
-2023/10/19-22:24:45.120 14bc Delete type=3 #108
-2023/10/19-22:28:24.098 264c Level-0 table #115: started
-2023/10/19-22:28:24.104 264c Level-0 table #115: 1230 bytes OK
-2023/10/19-22:28:24.105 264c Delete type=0 #113
-2023/10/19-22:28:24.118 264c Manual compaction at level-0 from '!items!89T07EBAgn78RBbJ' @ 72057594037927935 : 1 .. '!items!wOcAf3pf04cTM4Uk' @ 0 : 0; will stop at (end)
-2023/10/19-22:28:24.118 264c Manual compaction at level-1 from '!items!89T07EBAgn78RBbJ' @ 72057594037927935 : 1 .. '!items!wOcAf3pf04cTM4Uk' @ 0 : 0; will stop at '!items!rHzX3Yg2I1Umcc4q' @ 151 : 0
-2023/10/19-22:28:24.118 264c Compacting 1@1 + 1@2 files
-2023/10/19-22:28:24.123 264c Generated table #116@1: 14 keys, 19597 bytes
-2023/10/19-22:28:24.123 264c Compacted 1@1 + 1@2 files => 19597 bytes
-2023/10/19-22:28:24.125 264c compacted to: files[ 0 0 1 0 0 0 0 ]
-2023/10/19-22:28:24.125 264c Delete type=2 #107
-2023/10/19-22:28:24.125 264c Delete type=2 #115
-2023/10/19-22:28:24.128 264c Manual compaction at level-1 from '!items!rHzX3Yg2I1Umcc4q' @ 151 : 0 .. '!items!wOcAf3pf04cTM4Uk' @ 0 : 0; will stop at (end)
+2023/10/22-09:49:19.365 6148 Recovering log #114
+2023/10/22-09:49:19.374 6148 Delete type=0 #114
+2023/10/22-09:49:19.374 6148 Delete type=3 #112
+2023/10/22-09:56:08.063 20c Level-0 table #120: started
+2023/10/22-09:56:08.080 20c Level-0 table #120: 1763 bytes OK
+2023/10/22-09:56:08.081 20c Delete type=0 #118
+2023/10/22-09:56:08.081 20c Manual compaction at level-0 from '!items!89T07EBAgn78RBbJ' @ 72057594037927935 : 1 .. '!items!wOcAf3pf04cTM4Uk' @ 0 : 0; will stop at (end)
+2023/10/22-09:56:08.081 20c Manual compaction at level-1 from '!items!89T07EBAgn78RBbJ' @ 72057594037927935 : 1 .. '!items!wOcAf3pf04cTM4Uk' @ 0 : 0; will stop at '!items!MRmGlGAFd3tSJioo' @ 153 : 1
+2023/10/22-09:56:08.081 20c Compacting 1@1 + 1@2 files
+2023/10/22-09:56:08.087 20c Generated table #121@1: 14 keys, 19684 bytes
+2023/10/22-09:56:08.087 20c Compacted 1@1 + 1@2 files => 19684 bytes
+2023/10/22-09:56:08.088 20c compacted to: files[ 0 0 1 0 0 0 0 ]
+2023/10/22-09:56:08.088 20c Delete type=2 #116
+2023/10/22-09:56:08.088 20c Delete type=2 #120
+2023/10/22-09:56:08.104 20c Manual compaction at level-1 from '!items!MRmGlGAFd3tSJioo' @ 153 : 1 .. '!items!wOcAf3pf04cTM4Uk' @ 0 : 0; will stop at (end)
