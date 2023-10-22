@@ -1,3 +1,4 @@
+//ApoApostolov asked for this, I'll keep it around until someone says it has broken.
 /* eslint-disable */
 // noinspection JSAnnotator
 
@@ -58,253 +59,253 @@ const actionList = [
         name: "Aid",
         skill: "",
         action: "y1rDU9gTz6GVobwf",
-        icon: "systems/pf2e/icons/spells/efficient-apport.webp",
+        icon: "systems/pf2e/icons/spells/efficient-apport.webp"
     },
     {
         name: "Avoid Notice",
         skill: "Stealth",
         action: game.pf2e.actions.avoidNotice,
-        icon: "systems/pf2e/icons/features/classes/surprice-attack.webp",
+        icon: "systems/pf2e/icons/features/classes/surprice-attack.webp"
     },
     {
         name: "Balance",
         skill: "Acrobatics",
         action: game.pf2e.actions.balance,
-        icon: "https://i.imgur.com/q9zXci0.png",
+        icon: "https://i.imgur.com/q9zXci0.png"
     },
     {
         name: "Climb",
         skill: "Athletics",
         action: game.pf2e.actions.climb,
-        icon: "icons/sundries/misc/ladder.webp",
+        icon: "icons/sundries/misc/ladder.webp"
     },
     {
         name: "Coerce",
         skill: "Intimidation",
         action: game.pf2e.actions.coerce,
-        icon: "https://i.imgur.com/iIDYVQL.png",
+        icon: "https://i.imgur.com/iIDYVQL.png"
     },
     {
         name: "Command an Animal",
         skill: "Nature",
         action: game.pf2e.actions.commandAnAnimal,
-        icon: "https://i.imgur.com/5EqnTIS.png",
+        icon: "https://i.imgur.com/5EqnTIS.png"
     },
     {
         name: "Craft",
         skill: "Crafting",
         action: game.pf2e.actions.craft,
-        icon: "https://i.imgur.com/McuTUGb.png",
+        icon: "https://i.imgur.com/McuTUGb.png"
     },
     {
         name: "Create a Diversion - Gesture",
         skill: "Deception",
         action: "game.pf2e.actions.createADiversion({ event: event, variant: 'gesture' });",
-        icon: "https://i.imgur.com/Rc9vnMX.png",
+        icon: "https://i.imgur.com/Rc9vnMX.png"
     },
     {
         name: "Create a Diversion - Trick",
         skill: "Deception",
         action: "game.pf2e.actions.createADiversion({ event: event, variant: 'trick' });",
-        icon: "https://i.imgur.com/u9Pt7q1.png",
+        icon: "https://i.imgur.com/u9Pt7q1.png"
     },
     {
         name: "Demoralize",
         skill: "Intimidation",
         action: game.pf2e.actions.demoralize,
-        icon: "icons/skills/social/intimidation-impressing.webp",
+        icon: "icons/skills/social/intimidation-impressing.webp"
     },
     {
         name: "Disarm",
         skill: "Athletics",
         action: game.pf2e.actions.disarm,
-        icon: "icons/skills/melee/sword-damaged-broken-glow-red.webp",
+        icon: "icons/skills/melee/sword-damaged-broken-glow-red.webp"
     },
     {
         name: "Feint",
         skill: "Deception",
         action: game.pf2e.actions.feint,
-        icon: "https://i.imgur.com/EIRuIFp.png",
+        icon: "https://i.imgur.com/EIRuIFp.png"
     },
     {
         name: "Follow an Expert",
         skill: "",
         action: "eHtbauiO3n075GUu",
-        icon: "systems/pf2e/icons/spells/favorable-review.webp",
+        icon: "systems/pf2e/icons/spells/favorable-review.webp"
     },
     {
         name: "Force Open",
         skill: "Athletics",
         action: game.pf2e.actions.forceOpen,
-        icon: "https://i.imgur.com/BkwG0cZ.png",
+        icon: "https://i.imgur.com/BkwG0cZ.png"
     },
     {
         name: "Gather Information",
         skill: "Diplomacy",
         action: game.pf2e.actions.gatherInformation,
-        icon: "icons/skills/social/diplomacy-handshake.webp",
+        icon: "icons/skills/social/diplomacy-handshake.webp"
     },
     {
         name: "Grapple",
         skill: "Athletics",
         action: game.pf2e.actions.grapple,
-        icon: "icons/skills/melee/unarmed-punch-fist.webp",
+        icon: "icons/skills/melee/unarmed-punch-fist.webp"
     },
     {
         name: "Hide",
         skill: "Stealth",
         action: game.pf2e.actions.hide,
-        icon: "icons/magic/nature/stealth-hide-eyes-green.webp",
+        icon: "icons/magic/nature/stealth-hide-eyes-green.webp"
     },
     {
         name: "Impersonate",
         skill: "Deception",
-        action: game.pf2e.actions.impersonate,
+        action: game.pf2e.actions.impersonate
     },
     {
         name: "Jump - High",
         skill: "Athletics",
         action: game.pf2e.actions.highJump,
-        icon: "https://i.imgur.com/Ot4sbDt.png",
+        icon: "https://i.imgur.com/Ot4sbDt.png"
     },
     {
         name: "Jump - Long",
         skill: "Athletics",
         action: game.pf2e.actions.longJump,
-        icon: "https://i.imgur.com/Ot4sbDt.png",
+        icon: "https://i.imgur.com/Ot4sbDt.png"
     },
     {
         name: "Lie",
         skill: "Deception",
         action: game.pf2e.actions.lie,
-        icon: "icons/magic/control/mouth-smile-deception-purple.webp",
+        icon: "icons/magic/control/mouth-smile-deception-purple.webp"
     },
     {
         name: "Make an Impression",
         skill: "Diplomacy",
         action: game.pf2e.actions.makeAnImpression,
-        icon: "icons/environment/people/commoner.webp",
+        icon: "icons/environment/people/commoner.webp"
     },
     {
         name: "Maneuver in Flight",
         skill: "Acrobatics",
         action: game.pf2e.actions.maneuverInFlight,
-        icon: "icons/commodities/biological/wing-bird-white.webp",
+        icon: "icons/commodities/biological/wing-bird-white.webp"
     },
     {
         name: "Pick a Lock",
         skill: "Thievery",
         action: game.pf2e.actions.pickALock,
-        icon: "https://i.imgur.com/cb7ejb2.png",
+        icon: "https://i.imgur.com/cb7ejb2.png"
     },
     {
         name: "Raise a Shield",
         skill: "",
         action: game.pf2e.actions.raiseAShield,
-        icon: "systems/pf2e/icons/actions/raise-a-shield.webp",
+        icon: "systems/pf2e/icons/actions/raise-a-shield.webp"
     },
     {
         name: "Recall Knowledge",
         skill: "",
         action: "EBdLzeLZyUju18Af",
-        icon: "systems/pf2e/icons/features/classes/imperial.webp",
+        icon: "systems/pf2e/icons/features/classes/imperial.webp"
     },
     {
         name: "Repair",
         skill: "Crafting",
         action: game.pf2e.actions.repair,
-        icon: "https://i.imgur.com/McuTUGb.png",
+        icon: "https://i.imgur.com/McuTUGb.png"
     },
     {
         name: "Request",
         skill: "Diplomacy",
         action: game.pf2e.actions.request,
-        icon: "icons/skills/social/thumbsup-approval-like.webp",
+        icon: "icons/skills/social/thumbsup-approval-like.webp"
     },
     {
         name: "Seek",
         skill: "Perception",
         action: game.pf2e.actions.seek,
-        icon: "https://i.imgur.com/7mTBOrS.png",
+        icon: "https://i.imgur.com/7mTBOrS.png"
     },
     {
         name: "Sense Direction",
         skill: "Survival",
         action: game.pf2e.actions.senseDirection,
-        icon: "icons/tools/navigation/compass-brass-blue-red.webp",
+        icon: "icons/tools/navigation/compass-brass-blue-red.webp"
     },
     {
         name: "Sense Motive",
         skill: "Perception",
         action: game.pf2e.actions.senseMotive,
-        icon: "https://i.imgur.com/7mTBOrS.png",
+        icon: "https://i.imgur.com/7mTBOrS.png"
     },
     {
         name: "Shove",
         skill: "Athletics",
         action: game.pf2e.actions.shove,
-        icon: "https://i.imgur.com/Expmoz8.png",
+        icon: "https://i.imgur.com/Expmoz8.png"
     },
     {
         name: "Sneak",
         skill: "Stealth",
         action: game.pf2e.actions.sneak,
-        icon: "icons/magic/nature/stealth-hide-eyes-green.webp",
+        icon: "icons/magic/nature/stealth-hide-eyes-green.webp"
     },
     {
         name: "Squeeze",
         skill: "Acrobatics",
         action: game.pf2e.actions.squeeze,
-        icon: "https://i.imgur.com/sQ6eUA4.png",
+        icon: "https://i.imgur.com/sQ6eUA4.png"
     },
     {
         name: "Swim",
         skill: "Athletics",
         action: game.pf2e.actions.swim,
-        icon: "icons/creatures/fish/fish-shark-swimming.webp",
+        icon: "icons/creatures/fish/fish-shark-swimming.webp"
     },
     {
         name: "Take Cover",
         skill: "",
         action: "PC0y5A6tHrtJhqVL",
-        icon: "https://i.imgur.com/5TgWEZF.png",
+        icon: "https://i.imgur.com/5TgWEZF.png"
     },
     {
         name: "Track",
         skill: "Survival",
         action: game.pf2e.actions.track,
-        icon: "https://i.imgur.com/RgHVtlC.png",
+        icon: "https://i.imgur.com/RgHVtlC.png"
     },
     {
         name: "Treat Disease",
         skill: "Medicine",
         action: game.pf2e.actions.treatDisease,
-        icon: "icons/magic/nature/root-vine-caduceus-healing.webp",
+        icon: "icons/magic/nature/root-vine-caduceus-healing.webp"
     },
     {
         name: "Treat Poison",
         skill: "Medicine",
         action: game.pf2e.actions.treatPoison,
-        icon: "systems/pf2e/icons/effects/treat-poison.webp",
+        icon: "systems/pf2e/icons/effects/treat-poison.webp"
     },
     {
         name: "Treat Wounds",
         skill: "Medicine",
         action: "BO2iFo14pFYHEIGa",
-        icon: "icons/magic/nature/root-vine-caduceus-healing.webp",
+        icon: "icons/magic/nature/root-vine-caduceus-healing.webp"
     },
     {
         name: "Trip",
         skill: "Athletics",
         action: game.pf2e.actions.trip,
-        icon: "https://i.imgur.com/Sr2Gu19.png",
+        icon: "https://i.imgur.com/Sr2Gu19.png"
     },
     {
         name: "Tumble Through",
         skill: "Acrobatics",
         action: game.pf2e.actions.tumbleThrough,
-        icon: "https://i.imgur.com/33UF9Ok.png",
-    },
+        icon: "https://i.imgur.com/33UF9Ok.png"
+    }
 ].sort((a, b) => -(a.name < b.name));
 const getSkills = (actor) => {
     // @ts-ignore
@@ -416,8 +417,8 @@ window.actionDialog = new Dialog(
         buttons: {
             close: {
                 icon: `<i class="fas fa-times"></i>`,
-                label: "Cancel",
-            },
+                label: "Cancel"
+            }
         },
         default: "close",
         render: (html) => {
@@ -430,7 +431,7 @@ window.actionDialog = new Dialog(
             html.querySelectorAll(".action-list button").forEach((button) =>
                 button.addEventListener("click", () => action(button))
             );
-        },
+        }
     },
     { jQuery: false, width, classes: ["pf2e-bg"] }
 ).render(true);

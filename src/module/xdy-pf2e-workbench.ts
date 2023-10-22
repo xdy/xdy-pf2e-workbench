@@ -53,7 +53,6 @@ import { registerWorkbenchSettings } from "./settings/index.js";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu.js";
 import { toggleMenuSettings } from "./feature/settingsHandler/index.js";
 import { mystifyNpcItems } from "./feature/qolHandler/index.js";
-import { isSpellAvailable } from "./feature/macros/isSpellAvailable.js";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 export const NPC_TYPE = "npc";
@@ -357,7 +356,6 @@ Hooks.once("ready", () => {
         whirlwindStrike: whirlwindStrike, // await game.PF2eWorkbench.whirlwindStrike(_token) OR await game.PF2eWorkbench.whirlwindStrike(_token, 2000)
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
-        isSpellAvailable: isSpellAvailable, // game.PF2eWorkbench.isSpellAvailable(_token.actor, "Breathe Fire", { spellRank: 1, spellcastingEntry: 'Arcane Prepared Spells'})
     };
 
     if (game.modules.get("pf2e-sheet-skill-actions")?.active) {

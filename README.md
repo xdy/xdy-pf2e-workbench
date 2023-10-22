@@ -185,21 +185,23 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
           has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that the first weapon of
           any type.
 * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
-  provided by ApoApostolov. They are *intended* to be customized by the user by changing the javascript code (such
-  as by adding/removing actions, setting what actors are part of the party, etc.) They are not really supported, so,
-  if your changes break them, you get to keep all the parts! :)
-  * Customizable Basic Action Macros. A variant of Basic Action Macros that you can customize for your own needs.
-    Add/remove actions, change party members, go wild!
-    See https://apoapostolov.notion.site/PF2-Basic-Actions-Macro-1255adc12ecf44e881e6cd87941f7858 for
-    documentation.
-  * Customizable Procedural Checks. A framework for running several macros at once, requires customization to be
-    useful. (At a minimum, change the actor id:s, this gets you a macro that can be used in exploration mode to
-    perform standard actions when the group is about to open a door.)
-    See https://apoapostolov.notion.site/PF2-Procedural-Checks-Macro-996bd20ace45411eb4b1f566686ecdb1 for
-    documentation.
-  * Customizable Refocus. This macro works the way it did before the Pathfinder Remaster changes.
-    Like the other macros in this compendium it will most likely never be updated. If it does get updated you will
-    need to reimport it manually.
+  provided by ApoApostolov and esheyw. They are *intended* to be customized by the user by changing the javascript
+  code (such as by adding/removing actions, setting what actors are part of the party, etc.) They are not really
+  supported by me, so, if your changes break them, you get to keep all the parts! :) (Or, ping the original author.)
+    * Customizable Basic Action Macros. A variant of Basic Action Macros that you can customize for your own needs.
+      Add/remove actions, change party members, go wild!
+      See https://apoapostolov.notion.site/PF2-Basic-Actions-Macro-1255adc12ecf44e881e6cd87941f7858 for
+      documentation.
+    * Customizable Procedural Checks. A framework for running several macros at once, requires customization to be
+      useful. (At a minimum, change the actor id:s, this gets you a macro that can be used in exploration mode to
+      perform standard actions when the group is about to open a door.)
+      See https://apoapostolov.notion.site/PF2-Procedural-Checks-Macro-996bd20ace45411eb4b1f566686ecdb1 for
+      documentation.
+    * Customizable Refocus. This macro works the way it did before the Pathfinder Remaster changes.
+      Like the other macros in this compendium it will most likely never be updated. If it does get updated you will
+      need to reimport it manually.
+    * Customizable isSpellAvailable. This macro can be used to check if a spell is available for an actor. See https://discord.com/channels/880968862240239708/880969304365994034/1161188968424018020
+    * Customizable getAllFromAllowedPacks. This macro can be used to get all items from allowed packs. See https://discord.com/channels/880968862240239708/1116034857907273832/1164695510158946305
 * There are a few more compendiums included with this module with assorted utility macros and items that do not
   need to be imported, as indicated by their labels all ending with 'do not import'
 
@@ -229,6 +231,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       use ```canvas.tokens.controlled.forEach(x=>x.actor.spellcasting.refocus({all:true}))``` instead to regain all
       focus at once for the selected tokens.
     * "Aura: Bless" and "Aura: Protective Ward" as they are now part of the pf2e system.
+    * isSpellAvaiable was removed from the api and added to the "PF2e Workbench Customizable Macros" compendium.
 
 ## Installation
 
