@@ -1,3 +1,16 @@
+# [5.24.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.7...v5.24.0) (2023-10-22)
+
+
+### Bug Fixes
+
+* Support breath weapon cooldown for abilities like Mountain Quake that use #rounds rather than #Recharge. ([7409e0a](https://github.com/xdy/xdy-pf2e-workbench/commit/7409e0a528187fc3856c035a06e7d8e73bd66456)), closes [#1045](https://github.com/xdy/xdy-pf2e-workbench/issues/1045)
+
+
+### Features
+
+* Add support for "Discordant Voice" to "Aura: Inspire Courage", courtesy of @Friz ([361f184](https://github.com/xdy/xdy-pf2e-workbench/commit/361f1847d1134fe43a1c29b515e32a72262e2e86)), closes [#1046](https://github.com/xdy/xdy-pf2e-workbench/issues/1046)
+* Added getAllFromAllowedPacks to the 'PF2e Workbench Customizable Macros' compendium, courtesy of [@esheyw](https://github.com/esheyw) ([0e13a62](https://github.com/xdy/xdy-pf2e-workbench/commit/0e13a62d687ba8c67c494ebfdd497e86d8438244))
+
 ## [5.23.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.6...v5.23.7) (2023-10-19)
 
 
