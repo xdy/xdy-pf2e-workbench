@@ -57,7 +57,9 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
 
     const downkeys = game?.keyboard.downKeys;
 
-    let ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight"].some((key) => downkeys.has(key));
+    let ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some((key) =>
+        downkeys.has(key),
+    );
     if (ctrlHeld === undefined) {
         ctrlHeld = game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
     }
