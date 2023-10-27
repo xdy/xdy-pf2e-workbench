@@ -1,3 +1,11 @@
+## [5.24.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.24.0...v5.24.1) (2023-10-27)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([eb957ce](https://github.com/xdy/xdy-pf2e-workbench/commit/eb957cefcc27a6da1f5e505d6bf434be7e73568a))
+* Maybe fix it so one can cast private spells on mac. Don't own a mac so can't check, but foundry seems to also check "Meta", "OsLeft", "OsRight", so I added those to the keys I check. ([8129b48](https://github.com/xdy/xdy-pf2e-workbench/commit/8129b48bf3dea105c83504a7bd9057283b77f11e)), closes [#1054](https://github.com/xdy/xdy-pf2e-workbench/issues/1054)
+
 # [5.24.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.23.7...v5.24.0) (2023-10-22)
 
 
