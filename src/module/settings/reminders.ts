@@ -12,7 +12,12 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 scope: "world",
                 config: true,
                 default: false,
-                type: Boolean,
+                type: String,
+                choices: {
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.no`),
+                    reminder: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.reminder`),
+                    cancelAttack: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.cancelAttack`),
+                },
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },

@@ -123,23 +123,29 @@ function ignoreDeadEidolon(actor) {
     return actor?.traits.has("eidolon") && game.settings.get(MODULENAME, "reminderCannotAttackIgnoreDeadEidolon");
 }
 
-export async function reminderCannotAttack(message: ChatMessagePF2e) {
+export function reminderCannotAttack(message: ChatMessagePF2e, cancelAttack: boolean): boolean {
+    let reason = "";
+    const context = message?.flags?.pf2e?.context;
+    const traits = context?.traits;
+
+    // Check if the traits array has a row with an object with the field "name" that has the value "attack"
     if (
         message.actor &&
         shouldIHandleThis(message.actor) &&
         message.flags &&
         game.combats.active &&
         message.user &&
-        ["spell-attack-roll", "attack-roll"].includes(<string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type) &&
-        ["spell-attack-roll", "attack-roll"].includes(<string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type)
+        ["spell-attack-roll", "attack-roll", "skill-check"].includes(
+            <string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type,
+        ) &&
+        traits?.some((t) => t.name === "attack")
     ) {
-        let reason = "";
-
-        // @ts-ignore
         const token: TokenDocumentPF2e = <TokenDocumentPF2e>canvas?.scene?.tokens.get(<string>message.speaker.token);
+        const actions = message.flags.pf2e?.context.options.filter((o) => o.startsWith("action:"));
 
         const actors = [token.actor];
         for (const actor of actors) {
+            // If actor conditions include restrained, don't roll damage
             if (actor?.isDead && !ignoreDeadEidolon(actor)) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.dead`);
             } else if ((actor?.hitPoints?.value ?? 0) <= 0 && !ignoreDeadEidolon(actor)) {
@@ -150,18 +156,37 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.unconscious`);
             } else if (actor?.hasCondition("petrified")) {
                 reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.petrified`);
+            } else if (
+                actor?.hasCondition("restrained") &&
+                !["action:escape", "action:force-open"].some((a) => actions.includes(a))
+            ) {
+                reason = game.i18n.localize(`${MODULENAME}.SETTINGS.reminderCannotAttack.restrained`);
             }
 
             if (reason.length > 0) {
-                ui.notifications.info(
-                    game.i18n.format(`${MODULENAME}.SETTINGS.reminderCannotAttack.note`, {
-                        actorName: actor?.name || "(unknown)",
-                        reason: reason,
-                    }),
-                );
+                const actorName = actor?.name || "(unknown)";
+                const title = context?.title;
+                if (cancelAttack) {
+                    ui.notifications.error(
+                        game.i18n.format(`${MODULENAME}.SETTINGS.reminderCannotAttack.error`, {
+                            title,
+                            actorName,
+                            reason,
+                        }),
+                    );
+                } else {
+                    ui.notifications.info(
+                        game.i18n.format(`${MODULENAME}.SETTINGS.reminderCannotAttack.info`, {
+                            title,
+                            actorName,
+                            reason,
+                        }),
+                    );
+                }
             }
         }
     }
+    return reason.length === 0;
 }
 
 export function reminderTargeting(message: ChatMessagePF2e): boolean {
@@ -175,10 +200,19 @@ export function reminderTargeting(message: ChatMessagePF2e): boolean {
     ) {
         const targets = message.user.targets;
         if (!targets || targets.size === 0) {
+            const title = message?.flags?.pf2e?.context.title;
             if (String(game.settings.get(MODULENAME, "reminderTargeting")) === "reminder") {
-                ui.notifications.info(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderTargeting.info`));
+                ui.notifications.info(
+                    game.i18n.format(`${MODULENAME}.SETTINGS.reminderTargeting.info`, {
+                        title,
+                    }),
+                );
             } else if (String(game.settings.get(MODULENAME, "reminderTargeting")) === "mustTarget") {
-                ui.notifications.error(game.i18n.localize(`${MODULENAME}.SETTINGS.reminderTargeting.error`));
+                ui.notifications.error(
+                    game.i18n.format(`${MODULENAME}.SETTINGS.reminderTargeting.error`, {
+                        title,
+                    }),
+                );
                 result = false;
             }
         }

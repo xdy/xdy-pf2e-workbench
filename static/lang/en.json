@@ -697,9 +697,14 @@
         "hasNoHp": "has no hp",
         "hint": "Check to show reminder if attacking with a token that cannot attack due to being unconscious/dead/defeated/no hp/etc.",
         "name": "Reminder if attacking with token unable to attack",
-        "note": "Are you sure about this attack? {actorName} {reason}, and thus not likely to be able to attack...",
+        "info": "Are you sure about this {title}? {actorName} {reason}, and thus not likely to be able to attack...",
+        "error": "{title} canceled as {actorName} {reason}.",
         "petrified": "is petrified",
-        "unconscious": "is unconscious"
+        "restrained": "is restrained",
+        "unconscious": "is unconscious",
+        "no": "No reminder",
+        "reminder": "Reminder",
+        "cancelAttack": "Cancel attack if unable to attack"
       },
       "reminderCannotAttackIgnoreDeadEidolon": {
         "hint": "Check to allow eidolons that are dead/have no hp to attack without a reminder.",
@@ -714,10 +719,10 @@
         "hint": "Check to show reminder for targeting in combat.",
         "name": "Targeting reminder",
         "info": "Please target before you attack.",
-        "error": "You must target before you attack.",
+        "error": "{title} canceled as you must target before you attack.",
         "no": "No reminder",
         "reminder": "Reminder",
-        "mustTarget": "Must target"
+        "mustTarget": "Cancel untargeted attack"
       },
       "tokenAnimation": {
         "hint": "Enable to alter token movement animation. This may cause problems with the module Multilevel Tokens.",

@@ -50,11 +50,29 @@ import { CreaturePF2e } from "@actor/creature/document.js";
 import { CheckRoll } from "@module/system/check/roll.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
-    let result = true;
+    let proceed = true;
     if (game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget") {
-        result = reminderTargeting(message);
+        proceed = reminderTargeting(message);
     }
 
+    if (String(game.settings.get(MODULENAME, "reminderCannotAttack") !== "no")) {
+        proceed = reminderCannotAttack(message, true);
+    }
+
+    const { hasCastingId, nonNpcCasting, npcCastingAlways, npcCastingIfCtrl } = collectPrivateCastingValues(message);
+    if (
+        proceed &&
+        game.settings.get(MODULENAME, "castPrivateSpell") &&
+        hasCastingId &&
+        (npcCastingAlways || npcCastingIfCtrl || nonNpcCasting)
+    ) {
+        castPrivateSpell(data, message).then();
+    }
+
+    return proceed;
+};
+
+function collectPrivateCastingValues(message: ChatMessagePF2e) {
     const downkeys = game?.keyboard.downKeys;
 
     let ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some((key) =>
@@ -68,17 +86,8 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     const nonNpcCasting = ctrlHeld && message.actor?.type !== NPC_TYPE;
     const npcCastingAlways = !ctrlHeld && message.actor?.type === NPC_TYPE && settingNpcAlways;
     const npcCastingIfCtrl = ctrlHeld && message.actor?.type === NPC_TYPE && !settingNpcAlways;
-    if (
-        result &&
-        game.settings.get(MODULENAME, "castPrivateSpell") &&
-        hasCastingId &&
-        (npcCastingAlways || npcCastingIfCtrl || nonNpcCasting)
-    ) {
-        castPrivateSpell(data, message).then();
-    }
-
-    return result;
-};
+    return { hasCastingId, nonNpcCasting, npcCastingAlways, npcCastingIfCtrl };
+}
 
 export function handleDying(dyingCounter: number, originalDyingCounter: number, actor, _effectsToCreate) {
     // Can't await, so do the math.
@@ -102,8 +111,8 @@ export function handleDying(dyingCounter: number, originalDyingCounter: number, 
 }
 
 export function createChatMessageHook(message: ChatMessagePF2e) {
-    if (game.settings.get(MODULENAME, "reminderCannotAttack")) {
-        reminderCannotAttack(message);
+    if (String(game.settings.get(MODULENAME, "reminderCannotAttack") !== "no")) {
+        reminderCannotAttack(message, true);
     }
 
     if (["no", "reminder"].includes(String(game.settings.get(MODULENAME, "reminderTargeting")))) {

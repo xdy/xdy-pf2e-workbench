@@ -104,7 +104,9 @@ export function updateHooks(cleanSlate = false) {
 
     handle(
         "preCreateChatMessage",
-        gs.get(MODULENAME, "castPrivateSpell") || gs.get(MODULENAME, "reminderTargeting") !== "no",
+        gs.get(MODULENAME, "castPrivateSpell") ||
+            gs.get(MODULENAME, "reminderTargeting") !== "no" ||
+            gs.get(MODULENAME, "reminderCannotAttack") === "cancelAttack",
         preCreateChatMessageHook,
     );
 
@@ -116,7 +118,7 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
             gs.get(MODULENAME, "automatedAnimationOn") ||
             gs.get(MODULENAME, "reminderBreathWeapon") ||
-            gs.get(MODULENAME, "reminderCannotAttack") ||
+            gs.get(MODULENAME, "reminderCannotAttack") === "reminder" ||
             gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
         createChatMessageHook,
     );
