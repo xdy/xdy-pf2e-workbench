@@ -1,3 +1,10 @@
+## [5.25.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.0...v5.25.1) (2023-10-29)
+
+
+### Bug Fixes
+
+* Reminders bugfixes and cleanup. ([db52f46](https://github.com/xdy/xdy-pf2e-workbench/commit/db52f464cbb8d37236bb10713a7ff97383dc9bba))
+
 # [5.25.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.24.1...v5.25.0) (2023-10-29)
 
 
