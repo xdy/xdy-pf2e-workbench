@@ -419,7 +419,13 @@
         "name": "Rappel si vous attaquez avec un jeton qui est incapable d'attaquer",
         "note": "Êtes vous certain de cette attaque ? {actorName} {reason} et est en principe incapable d'attaquer...",
         "petrified": "est pétrifié(e)",
-        "unconscious": "est inconscient(e)"
+        "unconscious": "est inconscient(e)",
+        "error": "{title} annulé car {actorName} {reason}.",
+        "no": "Pas de rappel",
+        "info": "Êtes-vous sûr de {title} ? {actorName} {reason} et ne pourra donc pas attaquer...",
+        "restrained": "est entravé",
+        "reminder": "Rappel",
+        "cancelAttack": "Annuler l'attaque si incapable d'attaquer"
       },
       "reminderCannotAttackIgnoreDeadEidolon": {
         "hint": "Cliquez pour permettre aux eidolons qui sont morts/n'ont plus de PV d'attaquer sans rappel.",
@@ -434,8 +440,8 @@
         "hint": "Cliquez pour afficher un rappel pour cibler en combat.",
         "name": "Rappel de cibler",
         "note": "S'il vous plait, ciblez avant d'attaquer.",
-        "error": "Vous devez cibler avant votre attaque.",
-        "mustTarget": "Doit cibler",
+        "error": "{title} annulée car vous devez cibler avant d'attaquer.",
+        "mustTarget": "Annule l'attaque non ciblée",
         "no": "Pas de rappel",
         "reminder": "Rappel",
         "info": "Veuillez cibler avant votre attaque."
