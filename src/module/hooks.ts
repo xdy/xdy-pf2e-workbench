@@ -55,7 +55,7 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
         proceed = reminderTargeting(message);
     }
 
-    if (String(game.settings.get(MODULENAME, "reminderCannotAttack") !== "no")) {
+    if (String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "cancelAttack") {
         proceed = reminderCannotAttack(message, true);
     }
 
@@ -111,8 +111,8 @@ export function handleDying(dyingCounter: number, originalDyingCounter: number, 
 }
 
 export function createChatMessageHook(message: ChatMessagePF2e) {
-    if (String(game.settings.get(MODULENAME, "reminderCannotAttack") !== "no")) {
-        reminderCannotAttack(message, true);
+    if (String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "reminder") {
+        reminderCannotAttack(message, false);
     }
 
     if (["no", "reminder"].includes(String(game.settings.get(MODULENAME, "reminderTargeting")))) {

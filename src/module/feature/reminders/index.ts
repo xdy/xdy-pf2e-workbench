@@ -125,7 +125,7 @@ function ignoreDeadEidolon(actor) {
 
 export function reminderCannotAttack(message: ChatMessagePF2e, cancelAttack: boolean): boolean {
     let reason = "";
-    const context = message?.flags?.pf2e?.context;
+    const context = message?.flags?.pf2e?.context ?? {};
     const traits = context?.traits;
 
     // Check if the traits array has a row with an object with the field "name" that has the value "attack"
@@ -141,7 +141,7 @@ export function reminderCannotAttack(message: ChatMessagePF2e, cancelAttack: boo
         traits?.some((t) => t.name === "attack")
     ) {
         const token: TokenDocumentPF2e = <TokenDocumentPF2e>canvas?.scene?.tokens.get(<string>message.speaker.token);
-        const actions = message.flags.pf2e?.context.options.filter((o) => o.startsWith("action:"));
+        const actions = context.options.filter((o) => o.startsWith("action:"));
 
         const actors = [token.actor];
         for (const actor of actors) {
@@ -165,7 +165,7 @@ export function reminderCannotAttack(message: ChatMessagePF2e, cancelAttack: boo
 
             if (reason.length > 0) {
                 const actorName = actor?.name || "(unknown)";
-                const title = context?.title;
+                const title = context.title;
                 if (cancelAttack) {
                     ui.notifications.error(
                         game.i18n.format(`${MODULENAME}.SETTINGS.reminderCannotAttack.error`, {
@@ -191,16 +191,17 @@ export function reminderCannotAttack(message: ChatMessagePF2e, cancelAttack: boo
 
 export function reminderTargeting(message: ChatMessagePF2e): boolean {
     let result = true;
+    const context = message?.flags?.pf2e?.context ?? {};
     if (
         message.actor &&
         shouldIHandleThis(message.actor) &&
         message.flags &&
         message.user &&
-        ["spell-attack-roll", "attack-roll"].includes(<string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type)
+        ["spell-attack-roll", "attack-roll"].includes(<string>context.type)
     ) {
         const targets = message.user.targets;
         if (!targets || targets.size === 0) {
-            const title = message?.flags?.pf2e?.context.title;
+            const title = context.title;
             if (String(game.settings.get(MODULENAME, "reminderTargeting")) === "reminder") {
                 ui.notifications.info(
                     game.i18n.format(`${MODULENAME}.SETTINGS.reminderTargeting.info`, {

@@ -195,8 +195,7 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
         token.actor &&
         token.isOwner
     ) {
-        // @ts-ignore
-        const outcome = message.flags.pf2e.context?.outcome ?? "";
+        const outcome = message.flags?.pf2e?.context?.outcome ?? "";
 
         const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
         const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
