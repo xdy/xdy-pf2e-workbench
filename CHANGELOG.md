@@ -1,3 +1,10 @@
+# [5.25.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.24.1...v5.25.0) (2023-10-29)
+
+
+### Features
+
+* "Reminder cannot attack" changed from a boolean to a choice of "No", "Reminder" or "Cancel Attack" (users need to reenable by selecting one of those options). Adds support for the Restrained condition. Improved the messages of both attack and targeting reminders. ([acb5cd4](https://github.com/xdy/xdy-pf2e-workbench/commit/acb5cd4c55e4cbbb479f2ae55cfc679bd24c7d21))
+
 ## [5.24.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.24.0...v5.24.1) (2023-10-27)
 
 
