@@ -130,6 +130,7 @@ export async function reminderCannotAttack(message: ChatMessagePF2e) {
         message.flags &&
         game.combats.active &&
         message.user &&
+        ["spell-attack-roll", "attack-roll"].includes(<string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type) &&
         ["spell-attack-roll", "attack-roll"].includes(<string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type)
     ) {
         let reason = "";
