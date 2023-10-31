@@ -1,3 +1,11 @@
+## [5.25.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.1...v5.25.2) (2023-10-31)
+
+
+### Bug Fixes
+
+* Dying automation, handling of critical hits by enemies should work again. ([c14893e](https://github.com/xdy/xdy-pf2e-workbench/commit/c14893eabff6dc32b50c7f53127c2d38808b9caf))
+* Make Aura: Dirge of Doom grant [Effect] Dirge of Doom. ([8b0ff34](https://github.com/xdy/xdy-pf2e-workbench/commit/8b0ff34742df9f4d2bb002a41ae6b8434b29c1ae))
+
 ## [5.25.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.0...v5.25.1) (2023-10-29)
 
 
