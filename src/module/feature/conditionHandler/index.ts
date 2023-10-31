@@ -72,7 +72,8 @@ export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e,
         const isDamagingStrike = filterMessagesByStrikeDamaging(isDamageRoll);
         const attackerIsEnemy = filterMessagesByActorEnemy(isDamagingStrike);
         const criticalSuccess = filterMessagesByCriticalSuccess(attackerIsEnemy);
-        return !!findLastMessageWithTotalGreaterOrEqual(criticalSuccess, hp.value);
+        const chatMessagePF2e = findLastMessageWithTotalGreaterOrEqual(criticalSuccess, hp.value);
+        return chatMessagePF2e !== null && chatMessagePF2e !== undefined;
     }
     return false;
 }
@@ -260,9 +261,11 @@ export async function handleDyingOnZeroHP(
         !hpNowAboveZero &&
         (dyingOption.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
     ) {
-        dyingCounter = dyingOption?.startsWith("addWoundedLevel")
-            ? (actor.getCondition("wounded")?.value ?? 0) + 1 ?? 0
-            : 1;
+        if (dyingOption?.startsWith("addWoundedLevel")) {
+            dyingCounter = (actor.getCondition("wounded")?.value ?? 0) + 1 ?? 0;
+        } else {
+            dyingCounter = 1;
+        }
     }
 
     if (checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption)) {

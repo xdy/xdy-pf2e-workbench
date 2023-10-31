@@ -143,15 +143,24 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
                 // Ignore this if it occurs within last few seconds of the last time we applied dying
                 // @ts-ignore
                 if (!flag?.between(now - 4000, now)) {
-                    const option = String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"));
+                    const dyingOption = String(
+                        game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
+                    );
                     const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
                     let dyingCounter = 0;
-                    if (!option.startsWith("no") && originalDyingCounter > 0) {
-                        const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, option);
+                    if (!dyingOption.startsWith("no") && originalDyingCounter > 0) {
+                        const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption);
 
-                        if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
-                            dyingCounter = dyingCounter + 1;
-
+                        if (
+                            dyingOption.endsWith("ForCharacters")
+                                ? ["character", "familiar"].includes(actor.type)
+                                : true
+                        ) {
+                            if (dyingOption?.startsWith("addWoundedLevel")) {
+                                dyingCounter = dyingCounter + (actor.getCondition("wounded")?.value ?? 0) + 1 ?? 0;
+                            } else {
+                                dyingCounter = dyingCounter + 1;
+                            }
                             if (wasCritical) {
                                 dyingCounter = dyingCounter + 1;
                             }

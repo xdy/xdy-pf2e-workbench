@@ -10,7 +10,7 @@
     ],
     "devDependencies": {
         "@types/jquery": "^3.5.25",
-        "@types/node": "^18.18.7",
+        "@types/node": "^18.18.8",
         "pixi.js": "6.5.2",
         "socket.io": "^4.7.2",
         "socket.io-client": "^4.7.2",
