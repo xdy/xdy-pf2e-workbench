@@ -16,7 +16,7 @@
           {
             "uuid": "Compendium.xdy-pf2e-workbench.xdy-pf2e-workbench-items.Item.Z2RXTsLcFQEU5Qaj",
             "affects": "enemies",
-            "includesSelf": true
+            "includesSelf": false
           }
         ]
       }
