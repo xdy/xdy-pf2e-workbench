@@ -1,0 +1,85 @@
+{
+  "name": "Aura: Dirge of Doom",
+  "type": "effect",
+  "effects": [],
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>A 'good enough' aura for @Compendium[pf2e.spells-srd.1xLVcA8Y1onw7toT]{Dirge of Doom} (technically not an aura, but, meh...)</p>\n<p>It inflicts @Compendium[xdy-pf2e-workbench.xdy-pf2e-workbench-items.Er8NTtocbKcUpBAa]{Effect: Minimum Frightened}</p>"
+    },
+    "rules": [
+      {
+        "key": "Aura",
+        "radius": 30,
+        "slug": "aura-dirge-of-doom",
+        "effects": [
+          {
+            "uuid": "Compendium.xdy-pf2e-workbench.xdy-pf2e-workbench-items.Item.Z2RXTsLcFQEU5Qaj",
+            "affects": "enemies",
+            "includesSelf": true
+          }
+        ]
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.878,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.845,
+        "foundry": "11.313",
+        "system": "5.7.2"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": []
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "level": {
+      "value": 1
+    },
+    "duration": {
+      "value": -1,
+      "unit": "unlimited",
+      "expiry": null,
+      "sustained": false
+    },
+    "start": {
+      "value": 0,
+      "initiative": null
+    },
+    "tokenIcon": {
+      "show": true
+    },
+    "badge": null,
+    "context": null,
+    "target": null,
+    "unidentified": false
+  },
+  "img": "systems/pf2e/icons/spells/dirge-of-doom.webp",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "CDcnMrFoRGrkHShM": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.7.4",
+    "coreVersion": "11.313",
+    "createdTime": 1688213276995,
+    "modifiedTime": 1698865865109,
+    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+  },
+  "_id": "wOcAf3pf04cTM4Uk",
+  "sort": 1100000,
+  "_key": "!items!wOcAf3pf04cTM4Uk"
+}

@@ -1,0 +1,87 @@
+{
+  "_id": "Z2RXTsLcFQEU5Qaj",
+  "name": "[Effect] Dirge Of Doom",
+  "type": "effect",
+  "img": "systems/pf2e/icons/spells/dirge-of-doom.webp",
+  "effects": [],
+  "folder": null,
+  "sort": 1800000,
+  "flags": {
+    "core": {
+      "sourceId": "Item.7rD5LtJVU6ZVEzqB"
+    }
+  },
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p><span style=\"color:#191813;font-family:Roboto, sans-serif;font-size:13px\">Creatures with this effect </span><span style=\"color:#191813;font-family:Roboto, sans-serif;font-size:13px\">won't automatically reduce their @Compendium[pf2e.conditionitems.TBSHQspnbcqxsmjL]{Frightened} value below 1.</span></p>"
+    },
+    "rules": [
+      {
+        "key": "ActiveEffectLike",
+        "mode": "add",
+        "path": "flags.xdy-pf2e-workbench.condition.frightened.min",
+        "value": 1
+      },
+      {
+        "key": "GrantItem",
+        "uuid": "Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL",
+        "allowDuplicate": false
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.878,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.794,
+        "foundry": "11.313",
+        "system": "5.7.2"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": [],
+      "rarity": "common"
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "level": {
+      "value": 1
+    },
+    "duration": {
+      "value": -1,
+      "unit": "unlimited",
+      "expiry": null,
+      "sustained": false
+    },
+    "start": {
+      "value": 0,
+      "initiative": null
+    },
+    "tokenIcon": {
+      "show": true
+    },
+    "badge": null,
+    "context": null,
+    "target": null,
+    "unidentified": false
+  },
+  "ownership": {
+    "default": 0,
+    "4PfYOttbS0OMIfVw": 3
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.7.4",
+    "coreVersion": "11.313",
+    "createdTime": 1665671947295,
+    "modifiedTime": 1698777398352,
+    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+  },
+  "_key": "!items!Z2RXTsLcFQEU5Qaj"
+}

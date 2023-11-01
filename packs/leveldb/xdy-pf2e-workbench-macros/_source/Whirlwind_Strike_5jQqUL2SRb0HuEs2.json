@@ -1,0 +1,34 @@
+{
+  "name": "Whirlwind Strike",
+  "type": "script",
+  "scope": "global",
+  "author": "BDz4vlBRU6fubpEv",
+  "img": "systems/pf2e/icons/spells/whirlwind.webp",
+  "command": "await game.PF2eWorkbench.whirlwindStrike(token);",
+  "ownership": {
+    "default": 0,
+    "BDz4vlBRU6fubpEv": 3
+  },
+  "flags": {
+    "advanced-macros": {
+      "runAsGM": false,
+      "runForEveryone": false,
+      "runForSpecificUser": ""
+    },
+    "core": {
+      "sourceId": "Macro.QByKVXOpDJrrKxPM"
+    }
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "4.5.1",
+    "coreVersion": "10.291",
+    "createdTime": 1672140453398,
+    "modifiedTime": 1672144590861,
+    "lastModifiedBy": "BDz4vlBRU6fubpEv"
+  },
+  "folder": null,
+  "sort": 0,
+  "_id": "5jQqUL2SRb0HuEs2",
+  "_key": "!macros!5jQqUL2SRb0HuEs2"
+}

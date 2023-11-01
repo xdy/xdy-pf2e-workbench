@@ -1,0 +1,82 @@
+{
+  "name": "Effect: Minimum Frightened",
+  "type": "effect",
+  "effects": [],
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>Creatures with this effect won't be able to reduce their @Compendium[pf2e.conditionitems.TBSHQspnbcqxsmjL]{Frightened} value below this effect's badge value.</p>\n<p>Does <em>not</em> give the Frightened status.</p>"
+    },
+    "rules": [
+      {
+        "key": "ActiveEffectLike",
+        "mode": "add",
+        "path": "flags.xdy-pf2e-workbench.condition.frightened.min",
+        "value": "@item.badge.value"
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.878,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.845,
+        "foundry": "11.313",
+        "system": "5.7.2"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": []
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "level": {
+      "value": 1
+    },
+    "duration": {
+      "value": -1,
+      "unit": "unlimited",
+      "expiry": null,
+      "sustained": false
+    },
+    "start": {
+      "value": 0,
+      "initiative": null
+    },
+    "tokenIcon": {
+      "show": true
+    },
+    "badge": {
+      "type": "counter",
+      "value": 1
+    },
+    "context": null,
+    "target": null,
+    "unidentified": false
+  },
+  "img": "systems/pf2e/icons/spells/dread-aura.webp",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "CDcnMrFoRGrkHShM": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.7.2",
+    "coreVersion": "11.313",
+    "createdTime": 1688212985690,
+    "modifiedTime": 1697626667418,
+    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+  },
+  "_id": "Er8NTtocbKcUpBAa",
+  "sort": 2200000,
+  "_key": "!items!Er8NTtocbKcUpBAa"
+}

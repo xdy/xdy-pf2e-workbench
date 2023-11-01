@@ -1,0 +1,90 @@
+{
+  "name": "Reach 'aura'",
+  "type": "effect",
+  "img": "systems/pf2e/icons/default-icons/effect.svg",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Item.HCpc5kQRtAvc9FOC"
+    },
+    "exportSource": {
+      "world": "ec",
+      "system": "pf2e",
+      "coreVersion": "10.291",
+      "systemVersion": "4.5.1"
+    }
+  },
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>Reach 'aura', adjust radius using the counter as suits your equipped weapon.</p>"
+    },
+    "rules": [
+      {
+        "key": "Aura",
+        "radius": "@item.badge.value*5",
+        "slug": "xdy-workbench-reach-aura"
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.878,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.808,
+        "foundry": "11.313",
+        "system": "5.7.2"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": [],
+      "rarity": "common"
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "level": {
+      "value": 1
+    },
+    "duration": {
+      "value": -1,
+      "unit": "unlimited",
+      "expiry": null,
+      "sustained": false
+    },
+    "start": {
+      "value": 0,
+      "initiative": null
+    },
+    "tokenIcon": {
+      "show": false
+    },
+    "badge": {
+      "type": "counter",
+      "value": 1
+    },
+    "context": null,
+    "target": null,
+    "unidentified": false
+  },
+  "ownership": {
+    "default": 0,
+    "BDz4vlBRU6fubpEv": 3
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.7.2",
+    "coreVersion": "11.313",
+    "createdTime": 1664728812060,
+    "modifiedTime": 1697626667418,
+    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+  },
+  "folder": null,
+  "sort": 1900000,
+  "_id": "h2XiENIchx7VWY8V",
+  "_key": "!items!h2XiENIchx7VWY8V"
+}

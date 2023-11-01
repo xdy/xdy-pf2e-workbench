@@ -1,0 +1,100 @@
+{
+  "_id": "YcyN7BDbL0Nt3CFN",
+  "name": "Aura: Bane",
+  "type": "effect",
+  "img": "systems/pf2e/icons/spells/bane.webp",
+  "effects": [],
+  "folder": null,
+  "sort": 1700000,
+  "flags": {
+    "core": {
+      "sourceId": "Item.QRgj7jrEnit1ROJw"
+    },
+    "exportSource": {
+      "world": "_pf2beginners",
+      "system": "pf2e",
+      "coreVersion": "9.269",
+      "systemVersion": "3.13.1"
+    }
+  },
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>A 'good enough' aura for @Compendium[pf2e.spells-srd.7ZinJNzxq0XF0oMx]{Bane} (technically not an aura, but, meh...)</p>\n<p>This effect has an aura of 5 feet, if you increase the size, you'll need to edit the rule manually.</p>"
+    },
+    "rules": [
+      {
+        "effects": [
+          {
+            "affects": "enemies",
+            "events": [
+              "enter"
+            ],
+            "uuid": "Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso",
+            "level": "ceil(@actor.level/2)"
+          }
+        ],
+        "key": "Aura",
+        "radius": "@item.badge.value*5",
+        "slug": "aura-effect-bane"
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.878,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.794,
+        "foundry": "11.313",
+        "system": "5.7.2"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": [],
+      "rarity": "common"
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "level": {
+      "value": 1
+    },
+    "duration": {
+      "value": 1,
+      "unit": "minutes",
+      "expiry": "turn-start",
+      "sustained": true
+    },
+    "start": {
+      "value": 0,
+      "initiative": null
+    },
+    "tokenIcon": {
+      "show": true
+    },
+    "badge": {
+      "type": "counter",
+      "value": 1
+    },
+    "context": null,
+    "target": null,
+    "unidentified": false
+  },
+  "ownership": {
+    "default": 0,
+    "T3daHvrK0qISk4mb": 3
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.7.2",
+    "coreVersion": "11.313",
+    "createdTime": 1665671947294,
+    "modifiedTime": 1697626667418,
+    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+  },
+  "_key": "!items!YcyN7BDbL0Nt3CFN"
+}

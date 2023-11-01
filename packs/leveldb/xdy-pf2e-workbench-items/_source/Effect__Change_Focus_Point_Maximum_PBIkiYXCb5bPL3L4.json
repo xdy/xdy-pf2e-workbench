@@ -1,0 +1,85 @@
+{
+  "name": "Effect: Change Focus Point Maximum",
+  "type": "effect",
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>Add this to any characters that should have a cap on Focus Points other than 3, then change the counter to the required value.</p>"
+    },
+    "rules": [
+      {
+        "key": "ActiveEffectLike",
+        "mode": "upgrade",
+        "path": "system.resources.focus.cap",
+        "value": "@item.badge.value"
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.878,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.815,
+        "foundry": "11.313",
+        "system": "5.7.2"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": [],
+      "rarity": "common"
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "level": {
+      "value": 1
+    },
+    "duration": {
+      "value": -1,
+      "unit": "unlimited",
+      "expiry": null,
+      "sustained": false
+    },
+    "start": {
+      "value": 0,
+      "initiative": null
+    },
+    "tokenIcon": {
+      "show": true
+    },
+    "badge": {
+      "type": "counter",
+      "value": 3
+    },
+    "context": null,
+    "target": null,
+    "unidentified": false
+  },
+  "img": "systems/pf2e/icons/spells/focusing-hum.webp",
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "8jCKxrmBbYW7KdHc": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Item.2j1WB6yeEidT6AuN"
+    }
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.7.2",
+    "coreVersion": "11.313",
+    "createdTime": 1674831898385,
+    "modifiedTime": 1697747296265,
+    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+  },
+  "folder": null,
+  "sort": 1600000,
+  "_id": "PBIkiYXCb5bPL3L4",
+  "_key": "!items!PBIkiYXCb5bPL3L4"
+}
