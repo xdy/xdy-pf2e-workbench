@@ -1,6 +1,6 @@
-import type { DataModel, Document } from "../abstract/module.d.ts";
-import type { BaseActor, BaseActorDelta, BaseScene, BaseToken } from "../documents/module.d.ts";
-import type { TokenSource } from "../documents/token.d.ts";
+import type DataModel from "../abstract/data.d.ts";
+import type * as documents from "../documents/module.d.ts";
+import type { TokenSchema } from "../documents/token.d.ts";
 import type * as fields from "./fields.d.ts";
 
 /**
@@ -79,7 +79,7 @@ type LightDataSchema = {
 };
 
 /** A data model intended to be used as an inner EmbeddedDataField which defines a geometric shape. */
-export class ShapeData<TParent extends DataModel | Document | null> extends DataModel<TParent, ShapeDataSchema> {
+export class ShapeData<TParent extends DataModel | null> extends DataModel<TParent, ShapeDataSchema> {
     static override defineSchema(): ShapeDataSchema;
 
     /** The primitive shape types which are supported */
@@ -91,7 +91,7 @@ export class ShapeData<TParent extends DataModel | Document | null> extends Data
     };
 }
 
-export interface ShapeData<TParent extends DataModel | Document | null>
+export interface ShapeData<TParent extends DataModel | null>
     extends DataModel<TParent, ShapeDataSchema>,
         ModelPropsFromSchema<ShapeDataSchema> {}
 
@@ -116,8 +116,8 @@ type ShapeDataSchema = {
 /** A {@link fields.SchemaField} subclass used to represent texture data. */
 export class TextureData extends fields.SchemaField<TextureDataSchema> {
     /**
-     * @param {DataFieldOptions} options          Options which are forwarded to the SchemaField constructor
-     * @param {FilePathFieldOptions} srcOptions   Additional options for the src field
+     * @param options    Options which are forwarded to the SchemaField constructor
+     * @param srcOptions Additional options for the src field
      */
     constructor(
         options?: fields.DataFieldOptions<SourceFromSchema<TextureDataSchema>, true, false, true>,
@@ -126,7 +126,7 @@ export class TextureData extends fields.SchemaField<TextureDataSchema> {
             initial?: "IMAGE" | "VIDEO" | null;
             wildcard?: boolean;
             label?: string;
-        }
+        },
     );
 }
 
@@ -147,34 +147,34 @@ type TextureDataSchema = {
     tint: fields.ColorField;
 };
 
-export interface PrototypeTokenSource
-    extends Omit<
-        TokenSource,
-        "_id" | "actorId" | "actorData" | "x" | "y" | "elevation" | "effects" | "overlayEffect" | "hidden"
-    > {
-    name: string;
-    randomImg: boolean;
-}
+export class PrototypeToken<TParent extends documents.BaseActor | null> extends DataModel<
+    TParent,
+    PrototypeTokenSchema
+> {
+    constructor(data: DeepPartial<PrototypeTokenSource>, options?: DataModelConstructionOptions<TParent>);
 
-export class PrototypeToken<TParent extends BaseActor | null> extends Document<TParent> {
+    static override defineSchema(): PrototypeTokenSchema;
+
     get actor(): TParent;
 
     protected override _initialize(): void;
 
-    override toJSON(): RawObject<this>;
-
-    lightAnimation: AnimationData;
-
-    bar1: BaseToken["bar1"];
-
-    bar2: BaseToken["bar1"];
+    override toJSON(): this["_source"];
 }
 
-export interface PrototypeToken<TParent extends BaseActor | null>
-    extends Document<TParent>,
-        Omit<PrototypeTokenSource, "bar1" | "bar2"> {
-    readonly _source: PrototypeTokenSource;
-}
+export interface PrototypeToken<TParent extends documents.BaseActor | null>
+    extends DataModel<TParent, PrototypeTokenSchema>,
+        ModelPropsFromSchema<PrototypeTokenSchema> {}
+
+type PrototypeTokenSchema = Omit<
+    TokenSchema,
+    "_id" | "name" | "actorId" | "delta" | "x" | "y" | "elevation" | "effects" | "overlayEffect" | "hidden"
+> & {
+    name: fields.StringField<string, string, true, false, true>;
+    randomImg: fields.BooleanField;
+};
+
+export type PrototypeTokenSource = SourceFromSchema<PrototypeTokenSchema>;
 
 /**
  * A minimal data model used to represent a tombstone entry inside an {@link EmbeddedCollectionDelta}.
@@ -184,18 +184,25 @@ export interface PrototypeToken<TParent extends BaseActor | null>
  * @property _tombstone A property that identifies this entry as a tombstone.
  * @property [_stats]   An object of creation and access information.
  */
-export class TombstoneData<TParent extends BaseActorDelta<BaseToken<BaseScene | null> | null> | null> extends DataModel<
-    TParent,
-    TombstoneDataSchema
-> {
+export class TombstoneData<
+    TParent extends documents.BaseActorDelta<documents.BaseToken<documents.BaseScene | null> | null> | null,
+> extends DataModel<TParent, TombstoneDataSchema> {
     static override defineSchema(): TombstoneDataSchema;
 }
 
-export interface TombstoneData<TParent extends BaseActorDelta<BaseToken<BaseScene | null> | null> | null>
-    extends DataModel<TParent, TombstoneDataSchema>,
-        SourceFromSchema<TombstoneDataSchema> {}
+export interface TombstoneData<
+    TParent extends documents.BaseActorDelta<documents.BaseToken<documents.BaseScene | null> | null> | null,
+> extends DataModel<TParent, TombstoneDataSchema>,
+        SourceFromSchema<TombstoneDataSchema> {
+    readonly _source: TombstoneSource;
+}
 
-export type TombstoneSource = SourceFromSchema<TombstoneDataSchema>;
+export type TombstoneSource<TDocumentId extends string | null = string | null> = Omit<
+    SourceFromSchema<TombstoneDataSchema>,
+    "_id"
+> & {
+    _id: TDocumentId;
+};
 
 export type TombstoneDataSchema = {
     _id: fields.DocumentIdField;

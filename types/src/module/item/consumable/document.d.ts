@@ -1,6 +1,6 @@
 import { ActorPF2e } from "@actor";
 import { PhysicalItemPF2e, SpellPF2e, WeaponPF2e } from "@item";
-import { ItemSummaryData } from "@item/data/index.ts";
+import { ItemSummaryData } from "@item/base/data/index.ts";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
 import { ValueAndMax } from "@module/data.ts";
 import { RuleElementPF2e } from "@module/rules/index.ts";

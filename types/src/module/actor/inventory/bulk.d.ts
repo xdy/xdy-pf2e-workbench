@@ -4,13 +4,15 @@ import { Bulk } from "@item/physical/bulk.ts";
 import { Size } from "@module/data.ts";
 export declare class InventoryBulk {
     #private;
-    /** The current bulk carried by the actor */
-    value: Bulk;
-    /** The number of Bulk units the actor can carry before being encumbered */
-    encumberedAfter: number;
-    /** The maximum bulk the actor can carry */
-    max: number;
+    actor: ActorPF2e;
+    encumberedAfterAddend: number;
+    maxAddend: number;
     constructor(actor: ActorPF2e);
+    get encumberedAfter(): number;
+    get encumberedAfterBreakdown(): string;
+    get max(): number;
+    get maxBreakdown(): string;
+    get value(): Bulk;
     get encumberedPercentage(): number;
     get maxPercentage(): number;
     get maxPercentageInteger(): number;

@@ -1,5 +1,5 @@
 import { ActorUpdateContext } from "@actor/base.ts";
-import { ItemType } from "@item/data/index.ts";
+import { ItemType } from "@item/base/data/index.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import type { Statistic } from "@system/statistic/index.ts";
 import type DataModel from "types/foundry/common/abstract/data.d.ts";
@@ -30,5 +30,6 @@ interface PartyCampaign extends DataModel<PartyPF2e, {}> {
     prepareBaseData?(): void;
     /** Executed during the actor's prepareDerivedData phase */
     prepareDerivedData?(): void;
+    _preUpdate?(changed: Record<string, unknown>): void;
 }
 export type { PartyCampaign, PartyUpdateContext };

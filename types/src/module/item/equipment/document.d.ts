@@ -1,5 +1,5 @@
 import type { ActorPF2e } from "@actor";
-import { ItemSummaryData } from "@item/data/index.ts";
+import { ItemSummaryData } from "@item/base/data/index.ts";
 import { PhysicalItemPF2e } from "@item/physical/index.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { EquipmentSource, EquipmentSystemData, EquipmentTrait } from "./data.ts";
@@ -13,7 +13,7 @@ declare class EquipmentPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface EquipmentPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {

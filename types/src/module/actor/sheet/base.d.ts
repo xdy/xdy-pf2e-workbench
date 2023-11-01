@@ -21,11 +21,11 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     itemRenderer: ItemSummaryRenderer<TActor>;
     /** Can non-owning users loot items from this sheet? */
     get isLootSheet(): boolean;
-    getData(options?: ActorSheetOptions): Promise<ActorSheetDataPF2e<TActor>>;
+    getData(options?: Partial<ActorSheetOptions>): Promise<ActorSheetDataPF2e<TActor>>;
     protected prepareInventory(): SheetInventory;
     protected prepareInventoryItem(item: PhysicalItemPF2e): InventoryItem;
     protected static coinsToSheetData(coins: Coins): CoinageSummary;
-    protected getStrikeFromDOM(button: HTMLElement): StrikeData | null;
+    protected getStrikeFromDOM(button: HTMLElement, readyOnly?: boolean): StrikeData | null;
     activateListeners($html: JQuery): void;
     /** DOM listeners for inventory panel */
     protected activateInventoryListeners(panel: HTMLElement | null): void;
@@ -59,15 +59,13 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     protected tagSelector(selectorType: "basic", options: BasicConstructorOptions): void;
     /** Opens a sheet tab by name. May be overriden to handle sub-tabs */
     protected openTab(name: string): void;
-    /** Hide the sheet-config button unless there is more than one sheet option. */
-    protected _getHeaderButtons(): ApplicationHeaderButton[];
     /** Override of inner render function to maintain item summary state */
     protected _renderInner(data: Record<string, unknown>, options: RenderOptions): Promise<JQuery>;
     /** Overriden _render to maintain focus on tagify elements */
     protected _render(force?: boolean, options?: ActorSheetRenderOptionsPF2e): Promise<void>;
     /** Tagify sets an empty input field to "" instead of "[]", which later causes the JSON parse to throw an error */
     protected _onSubmit(event: Event, { updateData, preventClose, preventRender }?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
-    protected _getSubmitData(updateData?: DocumentUpdateData<TActor>): Record<string, unknown>;
+    protected _getSubmitData(updateData?: Record<string, unknown>): Record<string, unknown>;
 }
 interface ActorSheetPF2e<TActor extends ActorPF2e> extends ActorSheet<TActor, ItemPF2e> {
     prepareItems?(sheetData: ActorSheetDataPF2e<TActor>): Promise<void>;

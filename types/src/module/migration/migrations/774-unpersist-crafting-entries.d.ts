@@ -1,5 +1,5 @@
 import { ActorSourcePF2e } from "@actor/data/index.ts";
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { PhysicalItemTrait } from "@item/physical/data.ts";
 import { PredicateStatement } from "@system/predication.ts";
 import { MigrationBase } from "../base.ts";

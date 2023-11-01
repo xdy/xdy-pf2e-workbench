@@ -1,30 +1,48 @@
-import { IWRSource, ImmunityData, ResistanceData, WeaknessData } from "@actor/data/iwr.ts";
-import type { ArrayField, BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { IWRSource, Immunity, Resistance, Weakness } from "@actor/data/iwr.ts";
+import { IWRType } from "@actor/types.ts";
+import type { PredicatePF2e } from "@system/predication.ts";
+import { DataUnionField, PredicateField, StrictArrayField, StrictStringField } from "@system/schema-data-fields.ts";
+import type { ArrayField, BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "../ae-like.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource, RuleValue } from "../index.ts";
+import { RuleElementPF2e, RuleElementSchema, RuleElementSource, RuleValue } from "../index.ts";
 /** @category RuleElement */
 declare abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema> {
     #private;
     abstract value: RuleValue;
-    constructor(data: IWRRuleElementSource, options: RuleElementOptions);
     static get dictionary(): Record<string, string | undefined>;
     static defineSchema(): IWRRuleSchema;
+    protected static createExceptionsField<TType extends string>(types?: Record<TType, string>): StrictArrayField<IWRExceptionField<TType>>;
     static validateJoint(source: SourceFromSchema<IWRRuleSchema>): void;
     /** A reference to the pertinent property in actor system data */
     abstract get property(): IWRSource[];
-    abstract getIWR(value?: number): ImmunityData[] | WeaknessData[] | ResistanceData[];
+    abstract getIWR(value?: number): Immunity[] | Weakness[] | Resistance[];
     afterPrepareData(): void;
 }
-interface IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema>, Omit<ModelPropsFromSchema<IWRRuleSchema>, "exceptions"> {
+interface IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema>, ModelPropsFromSchema<IWRRuleSchema> {
     constructor: typeof IWRRuleElement<TSchema>;
-    exceptions: string[];
 }
 type IWRRuleSchema = RuleElementSchema & {
     /** Whether to add or remove an immunity, weakness, or resistance (default is "add") */
     mode: StringField<IWRChangeMode, IWRChangeMode, true, false, true>;
+    /** One or more IWR types: "custom" is also an acceptable value, but it must be used in isolation. */
     type: ArrayField<StringField<string, string, true, false, false>>;
-    exceptions: ArrayField<StringField<string, string, true, false, false>>;
+    /**
+     * A list of exceptions, which may include string values corresponding with the IWR type or objects defining custom
+     * exceptions
+     */
+    exceptions: StrictArrayField<IWRExceptionField>;
+    /** A definition for a "custom"-type IWR */
+    definition: PredicateField<false, false, false>;
+    /** Whether to override an existing IWR of the same type, even if it's higher */
     override: BooleanField;
+};
+type IWRExceptionField<TType extends string = string> = DataUnionField<StrictStringField<TType, TType, true, false, false> | SchemaField<{
+    definition: PredicateField<true, false, false>;
+    label: StrictStringField<string, string, true, false, false>;
+}>, true, false, false>;
+type IWRException<TType extends IWRType = IWRType> = TType | {
+    definition: PredicatePF2e;
+    label: string;
 };
 type IWRChangeMode = Extract<AELikeChangeMode, "add" | "remove">;
 interface IWRRuleElementSource extends RuleElementSource {
@@ -34,4 +52,4 @@ interface IWRRuleElementSource extends RuleElementSource {
     override?: unknown;
 }
 export { IWRRuleElement };
-export type { IWRRuleElementSource, IWRRuleSchema };
+export type { IWRException, IWRExceptionField, IWRRuleElementSource, IWRRuleSchema };

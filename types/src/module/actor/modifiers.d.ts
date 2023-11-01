@@ -7,7 +7,7 @@ import { DamageCategoryUnique, DamageDieSize, DamageType } from "@system/damage/
 import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
-declare const MODIFIER_TYPES: Set<"untyped" | "item" | "ability" | "circumstance" | "potency" | "proficiency" | "status">;
+declare const MODIFIER_TYPES: Set<"untyped" | "ability" | "circumstance" | "item" | "potency" | "proficiency" | "status">;
 type ModifierType = SetElement<typeof MODIFIER_TYPES>;
 interface BaseRawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
@@ -38,8 +38,6 @@ interface BaseRawModifier {
     predicate?: RawPredicate;
     /** If true, this modifier is only active on a critical hit. */
     critical?: boolean | null;
-    /** Any notes about this modifier. */
-    notes?: string;
     /** The list of traits that this modifier gives to the underlying attack, if any. */
     traits?: string[];
     /** Hide this modifier in UIs if it is disabled */
@@ -95,7 +93,6 @@ declare class ModifierPF2e implements RawModifier {
     predicate: PredicatePF2e;
     critical: boolean | null;
     traits: string[];
-    notes: string;
     hideIfDisabled: boolean;
     /**
      * The "category" of modifier (a misnomer since bonuses and penalties aren't modifiers):

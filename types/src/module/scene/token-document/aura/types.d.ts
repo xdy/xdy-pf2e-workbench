@@ -1,5 +1,5 @@
 import { AuraAppearanceData } from "@actor/types.ts";
-import { ItemTrait } from "@item/data/base.ts";
+import { ItemTrait } from "@item/base/data/system.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { TokenDocumentPF2e } from "../index.ts";
 interface TokenAuraData {
@@ -13,6 +13,6 @@ interface TokenAuraData {
     radiusPixels: number;
     appearance: AuraAppearanceData;
     /** Traits (especially "visual" and "auditory") associated with this aura */
-    traits: Set<ItemTrait>;
+    traits: ItemTrait[];
 }
 export type { TokenAuraData };

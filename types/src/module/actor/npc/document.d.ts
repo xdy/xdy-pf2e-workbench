@@ -2,7 +2,7 @@ import { CreaturePF2e } from "@actor";
 import { Abilities } from "@actor/creature/data.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import { MeleePF2e } from "@item";
-import { ItemType } from "@item/data/index.ts";
+import { ItemType } from "@item/base/data/index.ts";
 import { RollNotePF2e } from "@module/notes.ts";
 import { CreatureIdentificationData } from "@module/recall-knowledge.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";

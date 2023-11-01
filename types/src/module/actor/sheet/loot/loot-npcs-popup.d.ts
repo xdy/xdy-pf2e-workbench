@@ -1,4 +1,5 @@
-import { ActorPF2e } from "@actor/base.ts";
+import type { ActorPF2e } from "@actor";
+import type { ScenePF2e, TokenDocumentPF2e } from "@scene";
 interface PopupData extends FormApplicationData<ActorPF2e> {
     tokenInfo: {
         id: string;
@@ -6,11 +7,14 @@ interface PopupData extends FormApplicationData<ActorPF2e> {
         checked: boolean;
     }[];
 }
-export declare class LootNPCsPopup extends FormApplication<ActorPF2e> {
+declare class LootNPCsPopup extends FormApplication<ActorPF2e> {
     static get defaultOptions(): FormApplicationOptions;
     _updateObject(_event: Event, formData: Record<string, unknown> & {
         selection?: boolean;
     }): Promise<void>;
     getData(): Promise<PopupData>;
 }
-export {};
+interface LootNPCsPopup extends FormApplication<ActorPF2e> {
+    object: ActorPF2e<TokenDocumentPF2e<ScenePF2e> | null>;
+}
+export { LootNPCsPopup };

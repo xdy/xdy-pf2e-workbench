@@ -3,7 +3,6 @@ import { PrototypeTokenPF2e } from "@actor/data/base.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import type { ScenePF2e } from "../document.ts";
-import type { ActorDeltaPF2e } from "./actor-delta.ts";
 import { TokenAura } from "./aura/index.ts";
 import { TokenFlagsPF2e } from "./data.ts";
 import type { TokenConfigPF2e } from "./sheet.ts";
@@ -18,6 +17,11 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
     hasStatusEffect(statusId: string): boolean;
     /** Filter trackable attributes for relevance and avoidance of circular references */
     static getTrackedAttributes(data?: Record<string, unknown>, _path?: string[]): TrackedAttributesDescription;
+    static getTrackedAttributeChoices(attributes: TrackedAttributesDescription): TrackedAttributesDescription;
+    /** Make stamina and resolve editable despite not being present in template.json */
+    getBarAttribute(barName: string, options?: {
+        alternative?: string;
+    }): TokenResourceData | null;
     /** This should be in Foundry core, but ... */
     get scene(): this["parent"];
     /** Is this token emitting light with a negative value */
@@ -34,6 +38,8 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
     get playersCanSeeName(): boolean;
     /** The pixel-coordinate definition of this token's space */
     get bounds(): PIXI.Rectangle;
+    /** Bounds used for mechanics, such as flanking and drawing auras */
+    get mechanicalBounds(): PIXI.Rectangle;
     /** The pixel-coordinate pair constituting this token's center */
     get center(): Point;
     protected _initialize(options?: Record<string, unknown>): void;
@@ -65,6 +71,5 @@ interface TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null>
     get combatant(): CombatantPF2e<EncounterPF2e, this> | null;
     get object(): TokenPF2e<this> | null;
     get sheet(): TokenConfigPF2e<this>;
-    delta: ActorDeltaPF2e<this> | null;
 }
 export { TokenDocumentPF2e };

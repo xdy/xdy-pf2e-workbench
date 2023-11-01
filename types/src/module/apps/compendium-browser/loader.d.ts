@@ -1,16 +1,6 @@
 import { CompendiumBrowserSources } from "./index.ts";
 declare class PackLoader {
     #private;
-    loadedPacks: {
-        Actor: Record<string, {
-            pack: CompendiumCollection;
-            index: CompendiumIndex;
-        } | undefined>;
-        Item: Record<string, {
-            pack: CompendiumCollection;
-            index: CompendiumIndex;
-        } | undefined>;
-    };
     loadedSources: string[];
     sourcesSettings: CompendiumBrowserSources;
     constructor();

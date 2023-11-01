@@ -1,5 +1,5 @@
 import { ConsumablePF2e, type SpellPF2e } from "@item";
-import { ConsumableSource } from "@item/data/index.ts";
+import { ConsumableSource } from "@item/base/data/index.ts";
 import { DCOptions } from "@module/dc.ts";
 declare const SPELL_CONSUMABLE_ITEM_TYPE: Set<"scroll" | "wand" | "cantripDeck5">;
 type SpellConsumableItemType = SetElement<typeof SPELL_CONSUMABLE_ITEM_TYPE>;

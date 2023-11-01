@@ -3,17 +3,17 @@ import { ActorPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import { ItemPF2e } from "@item";
 import { ActionTrait } from "@item/ability/types.ts";
-import { ItemSourcePF2e, ItemSummaryData } from "@item/data/index.ts";
+import { ItemSourcePF2e, ItemSummaryData } from "@item/base/data/index.ts";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
 import { RangeData } from "@item/types.ts";
 import { MeasuredTemplatePF2e } from "@module/canvas/index.ts";
 import { ChatMessagePF2e, ItemOriginFlag } from "@module/chat-message/index.ts";
-import { OneToTen, ZeroToTwo } from "@module/data.ts";
+import { OneToTen, Rarity, ZeroToTwo } from "@module/data.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { CheckRoll } from "@system/check/index.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
-import { DamageRollContext, SpellDamageTemplate } from "@system/damage/types.ts";
+import { DamageKind, DamageRollContext, SpellDamageTemplate } from "@system/damage/types.ts";
 import { StatisticRollParameters } from "@system/statistic/index.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data.ts";
@@ -44,6 +44,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     /** Legacy getter, though not yet deprecated */
     get level(): number;
     get traits(): Set<SpellTrait>;
+    get rarity(): Rarity;
     /** Action traits added when Casting this Spell */
     get castingTraits(): ActionTrait[];
     get school(): MagicSchool | null;
@@ -65,6 +66,8 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get hasVariants(): boolean;
     /** Dummy getter for interface alignment with weapons and actions */
     get range(): RangeData | null;
+    /** Whether the "damage" roll of this spell deals damage or heals (or both, depending on the target) */
+    get damageKinds(): Set<DamageKind>;
     get uuid(): ItemUUID;
     /** Given a slot level, compute the actual level the spell will be cast at */
     computeCastRank(slotRank?: number): number;
@@ -98,8 +101,8 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     /** Roll counteract check */
     rollCounteract(event?: MouseEvent | JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
     getOriginData(): ItemOriginFlag;
-    update(data: DocumentUpdateData<this>, options?: DocumentUpdateContext<TParent>): Promise<this>;
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    update(data: Record<string, unknown>, options?: DocumentUpdateContext<TParent>): Promise<this>;
+    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<SpellSource>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {

@@ -78,6 +78,9 @@
     "luxon": "^3.4.3",
     "minisearch": "^6.2.0",
     "nouislider": "^15.7.1",
+    "prosemirror-state": "^1.4.3",
+    "prosemirror-transform": "^1.8.0",
+    "prosemirror-view": "^1.32.3",
     "remeda": "^1.28.0",
     "sortablejs": "^1.15.0"
   },

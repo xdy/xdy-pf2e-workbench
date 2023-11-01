@@ -9,11 +9,6 @@ declare class EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     get level(): number;
     get traits(): Set<EffectTrait>;
     get isExpired(): boolean;
-    get totalDuration(): number;
-    get remainingDuration(): {
-        expired: boolean;
-        remaining: number;
-    };
     /** Whether this effect emits an aura */
     get isAura(): boolean;
     get isIdentified(): boolean;
@@ -34,7 +29,7 @@ declare class EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
      */
     private evaluateFormulaBadge;
     /** Set the start time and initiative roll of a newly created effect */
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
     /** If applicable, reevaluate this effect's badge */

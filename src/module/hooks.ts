@@ -42,7 +42,7 @@ import {
     renderNameHud,
     tokenCreateMystification,
 } from "./feature/tokenMystificationHandler/index.js";
-import { ItemPF2e } from "@item/base.js";
+import { ItemPF2e } from "@item/base/document.js";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
 import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";

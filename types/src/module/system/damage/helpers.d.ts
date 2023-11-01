@@ -13,14 +13,17 @@ declare const DamageCategorization: {
     /** Map a damage type to its corresponding damage category, if any. */
     readonly fromDamageType: (damageType: DamageType) => DamageCategory | null;
     /** Get a set of all damage categories (both base and custom). */
-    readonly allCategories: () => Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "warpglass" | "precision" | "splash" | "abysium" | "cold-iron" | "djezet" | "keep-stone" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "persistent" | "alignment" | null>;
+    readonly allCategories: () => Set<"abysium" | "adamantine" | "darkwood" | "djezet" | "energy" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "physical" | "siccatite" | "silver" | "precision" | "splash" | "cold-iron" | "keep-stone" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "persistent" | "alignment" | null>;
     /** Get a set of all of the base rule damage types. */
-    readonly baseCategories: () => Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "warpglass" | "precision" | "splash" | "abysium" | "cold-iron" | "djezet" | "keep-stone" | "noqual" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "persistent" | "alignment" | null>;
+    readonly baseCategories: () => Set<"abysium" | "adamantine" | "darkwood" | "djezet" | "energy" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "physical" | "siccatite" | "silver" | "precision" | "splash" | "cold-iron" | "keep-stone" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "persistent" | "alignment" | null>;
     /** Map a damage category to the set of damage types in it. */
     readonly toDamageTypes: (category: string) => Set<string>;
 };
 /** Apply damage dice overrides and upgrades to a non-weapon's damage formula */
-declare function applyDamageDiceOverrides(base: BaseDamageData[], dice: DamageDicePF2e[]): void;
+declare function applyDamageDiceOverrides(baseEntries: BaseDamageData[], dice: DamageDicePF2e[], options?: {
+    critical?: boolean;
+    maxIncreases?: number;
+}): void;
 /**
  * Given a DamageRoll, reverts it into base damage data to allow adding modifiers and damage dice.
  * Throws an exception if it cannot be parsed

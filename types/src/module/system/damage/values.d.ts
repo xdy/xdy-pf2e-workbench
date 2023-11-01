@@ -1,16 +1,16 @@
 import { DamageCategory, DamageType } from "./types.ts";
 declare const PHYSICAL_DAMAGE_TYPES: readonly ["bludgeoning", "piercing", "slashing", "bleed"];
-declare const ENERGY_DAMAGE_TYPES: readonly ["acid", "cold", "electricity", "fire", "sonic", "force", "positive", "negative"];
+declare const ENERGY_DAMAGE_TYPES: readonly ["acid", "cold", "electricity", "fire", "sonic", "force", "vitality", "void"];
 declare const ALIGNMENT_DAMAGE_TYPES: readonly ["chaotic", "lawful", "good", "evil"];
 /** A set of mutually exclusive damage categories */
 declare const DAMAGE_CATEGORIES_UNIQUE: Set<"precision" | "splash" | "persistent">;
 /** All damage modifications that only affect IWR (like materials) */
-declare const MATERIAL_DAMAGE_EFFECTS: Set<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "warpglass" | "cold-iron" | "sisterstone-dusk" | "sisterstone-scarlet">;
-declare const DAMAGE_CATEGORIES: Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "warpglass" | "precision" | "splash" | "cold-iron" | "sisterstone-dusk" | "sisterstone-scarlet" | "persistent" | "alignment">;
+declare const MATERIAL_DAMAGE_EFFECTS: Set<"adamantine" | "darkwood" | "mithral" | "orichalcum" | "silver" | "cold-iron" | "sisterstone-dusk" | "sisterstone-scarlet" | "warpglass">;
+declare const DAMAGE_CATEGORIES: Set<"adamantine" | "darkwood" | "energy" | "mithral" | "orichalcum" | "physical" | "silver" | "precision" | "splash" | "cold-iron" | "sisterstone-dusk" | "sisterstone-scarlet" | "warpglass" | "persistent" | "alignment">;
 /** The standard damage die sizes */
 declare const DAMAGE_DIE_FACES_TUPLE: readonly ["d4", "d6", "d8", "d10", "d12"];
 declare const DAMAGE_DIE_FACES: Set<"d10" | "d12" | "d4" | "d6" | "d8">;
-declare const DAMAGE_TYPES: Set<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "negative" | "piercing" | "poison" | "positive" | "slashing" | "sonic" | "spirit" | "untyped">;
+declare const DAMAGE_TYPES: Set<"acid" | "bleed" | "bludgeoning" | "chaotic" | "cold" | "electricity" | "evil" | "fire" | "force" | "good" | "lawful" | "mental" | "piercing" | "poison" | "slashing" | "sonic" | "spirit" | "vitality" | "void" | "untyped">;
 /** Maps damage types to their damage category; these are the immutable base mappings used if there is no override. */
 declare const BASE_DAMAGE_TYPES_TO_CATEGORIES: Record<DamageType, DamageCategory | null>;
 declare const DAMAGE_TYPE_ICONS: Record<DamageType, string | null>;

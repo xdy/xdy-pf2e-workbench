@@ -2,11 +2,11 @@ import { ActorPF2e } from "@actor";
 import { isFirstGM, shouldIHandleThis } from "../../utils.js";
 import { CombatantPF2e } from "@module/encounter/index.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { ItemPF2e } from "@item/base.js";
 import { ActorSystemData } from "@actor/data/base.js";
 import { handleDying } from "../../hooks.js";
 import { CreaturePF2e } from "@actor/creature/document.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
+import { ItemPF2e } from "@item/base/document.js";
 import BaseUser = foundry.documents.BaseUser;
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
@@ -90,7 +90,7 @@ export function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: 
         const relevant = getRelevantMessages(actor);
         const lastDamageRoll = relevant.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
         const totalDamage = lastDamageRoll?.rolls?.[0]?.total ?? 0;
-        return (totalDamage >= hp.value && lastDamageRoll?.item?.system?.traits?.value.includes("nonlethal")) ?? false;
+        return (totalDamage >= hp.value && lastDamageRoll?.item?.system?.traits?.value?.includes("nonlethal")) ?? false;
     }
     return false;
 }
@@ -132,7 +132,7 @@ export function checkIfLatestDamageMessageHasDeathTrait(actor: ActorPF2e, option
         const relevant = getRelevantMessages(actor);
         const damageRollMessages = filterMessagesByContextType(relevant, "damage-roll");
         const lastDamageRollMessage = damageRollMessages[damageRollMessages.length - 1];
-        const isDeathTrait = lastDamageRollMessage?.item?.system?.traits?.value.includes("death") ?? false;
+        const isDeathTrait = lastDamageRollMessage?.item?.system?.traits?.value?.includes("death") ?? false;
         const damageTotal = lastDamageRollMessage?.rolls?.[0]?.total ?? 0;
         return isDeathTrait && damageTotal >= hp.value;
     }

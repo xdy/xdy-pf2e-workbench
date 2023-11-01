@@ -1,4 +1,4 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /** Set focus pool for druids */
 export declare class Migration656OtherFocusPoolSources extends MigrationBase {

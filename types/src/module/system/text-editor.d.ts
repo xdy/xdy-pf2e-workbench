@@ -30,11 +30,11 @@ declare class TextEditorPF2e extends TextEditor {
      * @param options attributes to add to the generated span element
      * @returns The generated span element, or `null` if no `name` node was found
      */
-    static convertXMLNode(html: HTMLElement, name: string, { visible, visibility, whose, classes }: ConvertXMLNodeOptions): HTMLElement | null;
+    static convertXMLNode(html: HTMLElement, name: string, { visible, visibility, whose, tooltip, classes }: ConvertXMLNodeOptions): HTMLElement | null;
 }
 interface EnrichmentOptionsPF2e extends EnrichmentOptions {
     rollData?: RollDataPF2e;
-    /** Whether to run the enriched string through `UserVisiblity.process` */
+    /** Whether to run the enriched string through `UserVisibility.process` */
     processVisibility?: boolean;
 }
 interface RollDataPF2e {
@@ -55,5 +55,7 @@ interface ConvertXMLNodeOptions {
     whose?: "self" | "target" | null;
     /** Any additional classes to add to the span element */
     classes?: string[];
+    /** An optional tooltip to apply to the converted node */
+    tooltip?: string;
 }
 export { TextEditorPF2e, type EnrichmentOptionsPF2e };

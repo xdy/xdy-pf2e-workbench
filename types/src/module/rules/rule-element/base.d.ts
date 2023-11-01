@@ -1,21 +1,21 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { CheckModifier, DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
-import { ItemPF2e, WeaponPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data/index.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
-import { CheckRoll } from "@system/check/index.ts";
+import type { CheckModifier, DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
+import { ItemPF2e, type WeaponPF2e } from "@item";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
+import { CheckRoll, CheckRollContext } from "@system/check/index.ts";
 import { LaxSchemaField } from "@system/schema-data-fields.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { BracketedValue, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
-declare const DataModel: typeof import("types/foundry/common/abstract/data.d.ts").default;
 /**
  * Rule Elements allow you to modify actorData and tokenData values when present on items. They can be configured
  * in the item's Rules tab which has to be enabled using the "Advanced Rule Element UI" system setting.
  *
  * @category RuleElement
  */
-declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSchema> extends DataModel<ItemPF2e<ActorPF2e>, TSchema> {
+declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSchema> extends foundry.abstract
+    .DataModel<ItemPF2e<ActorPF2e>, TSchema> {
     #private;
     protected static _schema: LaxSchemaField<RuleElementSchema> | undefined;
     sourceIndex: number | null;
@@ -85,6 +85,7 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
 }
 interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abstract.DataModel<ItemPF2e<ActorPF2e>, TSchema>, ModelPropsFromSchema<RuleElementSchema> {
     constructor: typeof RuleElementPF2e<TSchema>;
+    get schema(): LaxSchemaField<TSchema>;
     /**
      * Run between Actor#applyActiveEffects and Actor#prepareDerivedData. Generally limited to ActiveEffect-Like
      * elements
@@ -170,7 +171,9 @@ declare namespace RuleElementPF2e {
         /** The source of the rule in `itemSource`'s `system.rules` array */
         ruleSource: T;
         /** All items pending creation in a `ItemPF2e.createDocuments` call */
-        pendingItems: PreCreate<ItemSourcePF2e>[];
+        pendingItems: ItemSourcePF2e[];
+        /** Items temporarily constructed from pending item source */
+        tempItems: ItemPF2e<ActorPF2e>[];
         /** The context object from the `ItemPF2e.createDocuments` call */
         context: DocumentModificationContext<ActorPF2e | null>;
         /** Whether this preCreate run is from a pre-update reevaluation */
@@ -183,9 +186,9 @@ declare namespace RuleElementPF2e {
         context: DocumentModificationContext<ActorPF2e | null>;
     }
     interface AfterRollParams {
-        roll: Rolled<CheckRoll> | null;
-        selectors: string[];
+        roll: Rolled<CheckRoll>;
         check: CheckModifier;
+        context: CheckRollContext;
         domains: string[];
         rollOptions: Set<string>;
     }
@@ -197,6 +200,7 @@ interface ResolveValueParams {
 }
 type RuleElementOptions = {
     parent: ItemPF2e<ActorPF2e>;
+    strict?: boolean;
     /** If created from an item, the index in the source data */
     sourceIndex?: number;
     /** If data validation fails for any reason, do not emit console warnings */

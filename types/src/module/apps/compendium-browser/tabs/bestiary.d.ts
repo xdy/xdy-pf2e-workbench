@@ -1,5 +1,5 @@
-import { CompendiumBrowser } from "../index.ts";
 import { ContentTabName } from "../data.ts";
+import { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
 import { BestiaryFilters, CompendiumBrowserIndexData } from "./data.ts";
 export declare class CompendiumBrowserBestiaryTab extends CompendiumBrowserTab {

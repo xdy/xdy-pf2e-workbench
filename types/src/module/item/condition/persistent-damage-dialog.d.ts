@@ -3,10 +3,10 @@
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
 import { DamageType } from "@system/damage/types.ts";
-declare class PersistentDamageDialog extends Application {
+declare class PersistentDamageDialog extends Application<PersistentDamageDialogOptions> {
     #private;
     private actor;
-    constructor(actor: ActorPF2e, options?: Partial<ApplicationOptions>);
+    constructor(actor: ActorPF2e, options?: Partial<PersistentDamageDialogOptions>);
     static get defaultOptions(): ApplicationOptions;
     /** Override to guarantee one persistent damage dialog per actor */
     get id(): string;
@@ -15,6 +15,9 @@ declare class PersistentDamageDialog extends Application {
     activateListeners($html: JQuery<HTMLElement>): void;
     /** Overriden to autofocus on first render behavior */
     protected _injectHTML($html: JQuery<HTMLElement>): void;
+}
+interface PersistentDamageDialogOptions extends ApplicationOptions {
+    editing?: string;
 }
 interface PersistentDialogData {
     existing: DamageEntryData[];

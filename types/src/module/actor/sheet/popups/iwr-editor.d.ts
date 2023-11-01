@@ -2,7 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
-import { ImmunityData, IWRSource, ResistanceData, WeaknessData } from "@actor/data/iwr.ts";
+import { Immunity, IWRSource, Resistance, Weakness } from "@actor/data/iwr.ts";
 import { ImmunityType, ResistanceType, WeaknessType } from "@actor/types.ts";
 declare class IWREditor<TActor extends ActorPF2e> extends DocumentSheet<TActor, IWREditorOptions> {
     #private;
@@ -32,7 +32,7 @@ interface IWREditorConstructorOptions extends Partial<DocumentSheetOptions> {
 interface IWREditorData<TActor extends ActorPF2e> extends DocumentSheetData<TActor> {
     header: string;
     category: ListCategory;
-    list: ImmunityData[] | WeaknessData[] | ResistanceData[];
+    list: Immunity[] | Weakness[] | Resistance[];
     sourceData: IWRSource<ImmunityType | WeaknessType | ResistanceType>[];
     types: Record<string, string>;
 }

@@ -95,7 +95,7 @@ export const DOCUMENT_TYPES: [
     "Playlist",
     "RollTable",
     "Scene",
-    "User"
+    "User",
 ];
 
 /** The allowed Document types which may exist within a Compendium pack. */
@@ -108,7 +108,7 @@ export const COMPENDIUM_DOCUMENT_TYPES: [
     "Playlist",
     "RollTable",
     "Scene",
-    "Adventure"
+    "Adventure",
 ];
 
 /**
@@ -139,7 +139,7 @@ export const DOCUMENT_LINK_TYPES: [
     "JournalEntry",
     "Macro",
     "RollTable",
-    "PlaylistSound"
+    "PlaylistSound",
 ];
 
 /** The supported dice roll visibility modes */
@@ -173,7 +173,7 @@ export const FOLDER_DOCUMENT_TYPES: [
     "Playlist",
     "RollTable",
     "Cards",
-    "Macro"
+    "Macro",
 ];
 
 /** The maximum allowed level of depth for Folder nesting */
@@ -380,6 +380,12 @@ export const USER_PERMISSIONS: {
         hint: "PERMISSION.BroadcastVideoHint";
         disableGM: true;
         defaultRole: typeof USER_ROLES.TRUSTED;
+    };
+    CARDS_CREATE: {
+        label: "PERMISSION.CardsCreate";
+        hint: "PERMISSION.CardsCreateHint";
+        disableGM: false;
+        defaultRole: typeof USER_ROLES.ASSISTANT;
     };
     DRAWING_CREATE: {
         label: "PERMISSION.DrawingCreate";
@@ -686,6 +692,7 @@ declare global {
     type MacroScope = (typeof MACRO_SCOPES)[number];
     type MacroType = (typeof MACRO_TYPES)[keyof typeof MACRO_TYPES];
     type MeasuredTemplateType = (typeof MEASURED_TEMPLATE_TYPES)[keyof typeof MEASURED_TEMPLATE_TYPES];
+    type PackageAvailabilityCode = (typeof PACKAGE_AVAILABILITY_CODES)[keyof typeof PACKAGE_AVAILABILITY_CODES];
     type PackageType = (typeof PACKAGE_TYPES)[number];
     type PlaylistMode = (typeof PLAYLIST_MODES)[keyof typeof PLAYLIST_MODES];
     type PlaylistSortMode = (typeof PLAYLIST_SORT_MODES)[keyof typeof PLAYLIST_SORT_MODES];

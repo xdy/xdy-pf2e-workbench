@@ -1,5 +1,5 @@
 import type { ActorPF2e } from "@actor";
-import { ItemSummaryData } from "@item/data/index.ts";
+import { ItemSummaryData } from "@item/base/data/index.ts";
 import { PhysicalItemHitPoints, PhysicalItemPF2e } from "@item/physical/index.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { ArmorSource, ArmorSystemData } from "./data.ts";
@@ -37,7 +37,7 @@ declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
         typeOnly?: boolean;
     }): string;
     /** Ensure correct shield/actual-armor usage */
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Ensure correct shield/actual-armor usage */
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }

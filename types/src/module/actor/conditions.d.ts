@@ -1,8 +1,9 @@
 import { ConditionPF2e } from "@item";
 import { ConditionSlug, PersistentDamagePF2e } from "@item/condition/index.ts";
 import { ActorPF2e } from "./base.ts";
+import { DelegatedCollection } from "@util";
 /** A wrapper for collections of conditions on an actor, filterable by whether they're active or stored/temporary */
-declare class ActorConditions<TActor extends ActorPF2e> {
+declare class ActorConditions<TActor extends ActorPF2e> extends DelegatedCollection<ConditionPF2e<TActor>> {
     #private;
     /** Return an array of only active conditions */
     get active(): ConditionPF2e<TActor>[];
@@ -20,8 +21,6 @@ declare class ActorConditions<TActor extends ActorPF2e> {
     get stunned(): ConditionPF2e<TActor> | null;
     get stupefied(): ConditionPF2e<TActor> | null;
     get wounded(): ConditionPF2e<TActor> | null;
-    /** Iterate over the values of `#idMap` */
-    [Symbol.iterator](): IterableIterator<ConditionPF2e<TActor>>;
     /** Provide additional options for retrieving a condition */
     get(key: Maybe<string>, options: {
         strict: true;
@@ -29,12 +28,8 @@ declare class ActorConditions<TActor extends ActorPF2e> {
         temporary?: boolean | null;
     }): ConditionPF2e<TActor>;
     get(key: string, options?: ConditionsGetOptions): ConditionPF2e<TActor> | undefined;
-    has(id: string): boolean;
     set(id: string, condition: ConditionPF2e<TActor>): this;
-    filter(condition: (value: ConditionPF2e<TActor>) => boolean): ConditionPF2e<TActor>[];
-    some(condition: (value: ConditionPF2e<TActor>) => boolean): boolean;
     every(condition: (value: ConditionPF2e<TActor>) => boolean): boolean;
-    map<T>(transformer: (value: ConditionPF2e<TActor>) => T): T[];
     flatMap<T>(transformer: (value: ConditionPF2e<TActor>) => T | T[] | never[]): T[];
     /** No deletions: a new instance is created every data preparation cycle */
     delete(): false;

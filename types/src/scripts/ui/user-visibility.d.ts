@@ -4,7 +4,7 @@ declare class UserVisibilityPF2e {
     static process(html: HTMLElement, options?: ProcessOptions): void;
     static processMessageSender(message: ChatMessagePF2e, html: HTMLElement): void;
 }
-declare const USER_VISIBILITIES: Set<"all" | "owner" | "gm" | "none">;
+declare const USER_VISIBILITIES: Set<"all" | "none" | "gm" | "owner">;
 type UserVisibility = SetElement<typeof USER_VISIBILITIES>;
 interface ProcessOptions {
     document?: ClientDocument | null;

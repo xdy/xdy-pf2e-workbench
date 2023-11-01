@@ -1,4 +1,4 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 import { ActorSourcePF2e } from "@actor/data/index.ts";
 export declare class Migration657RemoveSetProperty extends MigrationBase {

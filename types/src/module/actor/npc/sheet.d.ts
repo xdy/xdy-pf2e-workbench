@@ -15,7 +15,7 @@ declare abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends Creature
      * @param sheetData Data from the actor associated to this sheet.
      */
     prepareItems(sheetData: NPCSheetData<TActor>): Promise<void>;
-    getData(): Promise<NPCSheetData<TActor>>;
+    getData(options?: Partial<ActorSheetOptions>): Promise<NPCSheetData<TActor>>;
     /** Players can view the sheets of lootable NPCs. */
     protected _canUserView(user: UserPF2e): boolean;
     activateListeners($html: JQuery<HTMLElement>): void;
@@ -28,7 +28,7 @@ declare class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
     /** Use the token name as the title if showing a lootable NPC sheet */
     get title(): string;
     get isLootSheet(): boolean;
-    getData(): Promise<NPCSheetData>;
+    getData(options?: Partial<ActorSheetOptions>): Promise<NPCSheetData>;
     prepareItems(sheetData: NPCSheetData): Promise<void>;
     protected prepareSpellcasting(): Promise<NPCSpellcastingSheetData[]>;
     activateListeners($html: JQuery): void;

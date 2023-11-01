@@ -53,7 +53,9 @@ export interface ActorSheetDataPF2e<TActor extends ActorPF2e> extends ActorSheet
     totalCoinageGold: string;
     totalWealth: Coins;
     totalWealthGold: string;
-    canDistributeCoins?: boolean;
+    canDistributeCoins?: {
+        enabled: boolean;
+    } | null;
     inventory: SheetInventory;
     enrichedContent: Record<string, string>;
 }

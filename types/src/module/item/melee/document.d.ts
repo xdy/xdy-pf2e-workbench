@@ -15,8 +15,8 @@ declare class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get isMelee(): boolean;
     get isRanged(): boolean;
     get isThrown(): boolean;
-    /** The ability score this attack is based on: determines which of the Clumsy and Enfeebled conditions apply */
-    get ability(): "str" | "dex";
+    /** The attribute this attack is based on: determines which of the Clumsy and Enfeebled conditions apply */
+    get defaultAttribute(): "str" | "dex";
     get attackModifier(): number;
     get reach(): number | null;
     /** The range maximum and possibly also increment if a ranged attack; otherwise null */

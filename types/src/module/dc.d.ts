@@ -1,4 +1,4 @@
-import { ProficiencyRank } from "@item/data/index.ts";
+import { ProficiencyRank } from "@item/base/data/index.ts";
 import { Rarity } from "./data.ts";
 /**
  * Implementation of Difficulty Classes https://2e.aonprd.com/Rules.aspx?ID=552
@@ -14,11 +14,7 @@ interface DCOptions {
     proficiencyWithoutLevel?: boolean;
     rarity?: Rarity;
 }
-/**
- * Normal Level Based DCs
- * @param level
- * @param proficiencyWithoutLevel
- */
+/** Level-based DCs */
 declare function calculateDC(level: number, { proficiencyWithoutLevel, rarity }?: DCOptions): number;
 declare function calculateSimpleDC(rank: ProficiencyRank, { proficiencyWithoutLevel }?: DCOptions): number;
 declare function calculateSpellDC(spellLevel: number, { proficiencyWithoutLevel }?: DCOptions): number;

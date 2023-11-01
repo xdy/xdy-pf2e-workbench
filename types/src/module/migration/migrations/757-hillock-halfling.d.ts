@@ -1,4 +1,4 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /** Add recovery bonus to Hillock Halfling heritage */
 export declare class Migration757HillockHalfling extends MigrationBase {

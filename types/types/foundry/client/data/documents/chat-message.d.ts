@@ -10,8 +10,6 @@ declare global {
     class ChatMessage extends ClientBaseChatMessage {
         constructor(data: PreCreate<foundry.documents.ChatMessageSource>, context?: DocumentConstructionContext<null>);
 
-        flavor: string;
-
         _rollExpanded: boolean;
 
         /**
@@ -38,9 +36,6 @@ declare global {
          * Messages may not be visible if they are private whispers.
          */
         override get visible(): boolean;
-
-        /** The User who created the chat message. */
-        get user(): User | undefined;
 
         override prepareData(): void;
 
@@ -75,8 +70,8 @@ declare global {
             alias,
         }?: {
             scene?: Scene | null;
-            actor?: Actor<TokenDocument<Scene | null> | null> | null;
-            token?: TokenDocument<Scene | null> | null;
+            actor?: Actor | null;
+            token?: TokenDocument | null;
             alias?: string;
         }): foundry.documents.ChatSpeakerData;
 
@@ -97,7 +92,7 @@ declare global {
             alias,
         }: {
             scene?: Scene;
-            actor: Actor<TokenDocument<Scene | null> | null>;
+            actor: Actor;
             alias?: string;
         }): {
             scene: string | null;
@@ -126,9 +121,7 @@ declare global {
          * Obtain an Actor instance which represents the speaker of this message (if any)
          * @param speaker The speaker data object
          */
-        static getSpeakerActor(
-            speaker: DeepPartial<foundry.documents.ChatSpeakerData>
-        ): Actor<TokenDocument<Scene | null> | null> | null;
+        static getSpeakerActor(speaker: DeepPartial<foundry.documents.ChatSpeakerData>): Actor | null;
 
         /** Obtain a data object used to evaluate any dice rolls associated with this particular chat message */
         getRollData(): object;
@@ -152,19 +145,19 @@ declare global {
         protected override _preUpdate(
             changed: DeepPartial<this["_source"]>,
             options: DocumentModificationContext<null>,
-            user: User
+            user: User,
         ): Promise<boolean | void>;
 
         protected override _onCreate(
             data: this["_source"],
             options: DocumentModificationContext<null>,
-            userId: string
+            userId: string,
         ): void;
 
         protected override _onUpdate(
             changed: DeepPartial<this["_source"]>,
             options: DocumentModificationContext<null>,
-            userId: string
+            userId: string,
         ): void;
 
         protected override _onDelete(options: DocumentModificationContext<null>, userId: string): void;
@@ -173,21 +166,27 @@ declare global {
         export(): string;
     }
 
+    interface ChatMessage extends ClientBaseChatMessage {
+        user: User;
+    }
+
     namespace ChatMessage {
         function create<TDocument extends ChatMessage>(
             this: ConstructorOf<TDocument>,
-            data: PreCreate<TDocument["_source"]>[],
-            context?: ChatMessageModificationContext
+            data: DeepPartial<Omit<TDocument["_source"], "rolls"> & { rolls: (string | RollJSON)[] }>[],
+            context?: ChatMessageModificationContext,
         ): Promise<TDocument[]>;
         function create<T extends ChatMessage>(
             this: ConstructorOf<T>,
-            data: PreCreate<T["_source"]>,
-            context?: ChatMessageModificationContext
+            data: DeepPartial<Omit<T["_source"], "rolls"> & { rolls: (string | RollJSON)[] }>,
+            context?: ChatMessageModificationContext,
         ): Promise<T | undefined>;
         function create<T extends ChatMessage>(
             this: ConstructorOf<T>,
-            data: PreCreate<T["_source"]>[] | PreCreate<T["_source"]>,
-            context?: ChatMessageModificationContext
+            data:
+                | DeepPartial<Omit<T["_source"], "rolls"> & { rolls: (string | RollJSON)[] }>[]
+                | DeepPartial<Omit<T["_source"], "rolls"> & { rolls: (string | RollJSON)[] }>,
+            context?: ChatMessageModificationContext,
         ): Promise<T[] | T | undefined>;
     }
 

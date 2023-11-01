@@ -1,12 +1,14 @@
 import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
-import type { Renderer } from "pixi.js";
 import { type TokenLayerPF2e } from "../index.ts";
 import { HearingSource } from "../perception/hearing-source.ts";
 import { AuraRenderers } from "./aura/index.ts";
+import { FlankingHighlightRenderer } from "./flanking-highlight/renderer.ts";
 declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
+    /** Visual rendering of lines from token to flanking buddy tokens on highlight */
+    readonly flankingHighlight: FlankingHighlightRenderer;
     /** The token's line hearing source */
     hearing: HearingSource<this>;
     constructor(document: TDocument);
@@ -24,21 +26,49 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     get linkToActorSize(): boolean;
     /** The ID of the highlight layer for this token */
     get highlightId(): string;
+    /** Bounds used for mechanics, such as flanking and drawing auras */
+    get mechanicalBounds(): PIXI.Rectangle;
     /** Short-circuit calculation for long sight ranges */
     get sightRange(): number;
     isAdjacentTo(token: TokenPF2e): boolean;
     /**
      * Determine whether this token can flank another—given that they have a flanking buddy on the opposite side
-     * @param flankee       The potentially flanked token
-     * @param context.reach An optional reach distance specific to this measurement */
+     * @param flankee                  The potentially flanked token
+     * @param context.reach           An optional reach distance specific to this measurement
+     * @param context.ignoreFlankable Optionally ignore flankable (for flanking highlight) */
     canFlank(flankee: TokenPF2e, context?: {
         reach?: number;
+        ignoreFlankable?: boolean;
     }): boolean;
-    /** Determine whether this token is in fact flanking another */
-    isFlanking(flankee: TokenPF2e, { reach }?: {
+    /**
+     * Determine whether two potential flankers are on opposite sides of flankee
+     * @param flankerA  First of two potential flankers
+     * @param flankerB  Second of two potential flankers
+     * @param flankee   Potentially flanked token
+     */
+    protected onOppositeSides(flankerA: TokenPF2e, flankerB: TokenPF2e, flankee: TokenPF2e): boolean;
+    /**
+     * Determine whether this token is in fact flanking another
+     * @param flankee                  The potentially flanked token
+     * @param context.reach           An optional reach distance specific to this measurement
+     * @param context.ignoreFlankable Optionally ignore flankable (for flanking position indicator) */
+    isFlanking(flankee: TokenPF2e, context?: {
         reach?: number;
+        ignoreFlankable?: boolean;
     }): boolean;
-    /** Draw auras if certain conditions are met */
+    /**
+     * Find other tokens that are in fact flanking a flankee with this token.
+     * Only detects tokens on opposite sides of flankee, does not support Gang Up or Side By Side.
+     * @param flankee                  The potentially flanked token
+     * @param context.reach           An optional reach distance specific to this measurement
+     * @param context.ignoreFlankable Optionally ignore flankable (for flanking position indicator) */
+    buddiesFlanking(flankee: TokenPF2e, context?: {
+        reach?: number;
+        ignoreFlankable?: boolean;
+    }): TokenPF2e[];
+    /** Reposition aura textures after this token has moved. */
+    protected _applyRenderFlags(flags: Record<string, boolean>): void;
+    /** Draw auras and flanking highlight lines if certain conditions are met */
     protected _refreshVisibility(): void;
     /**
      * Use border color corresponding with disposition even when the token's actor is player-owned.
@@ -76,7 +106,7 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
         deleted?: boolean | undefined;
     }): void;
     /** Obscure the token's sprite if a hearing or tremorsense detection filter is applied to it */
-    render(renderer: Renderer): void;
+    render(renderer: PIXI.Renderer): void;
     protected _destroy(): void;
     /** Players can view the sheets of lootable NPCs */
     protected _canView(user: UserPF2e, event: PIXI.FederatedPointerEvent): boolean;
@@ -89,6 +119,8 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     protected _onRelease(options?: Record<string, unknown>): void;
     /** Handle system-specific status effects (upstream handles invisible and blinded) */
     _onApplyStatusEffect(statusId: string, active: boolean): void;
+    /** Reset aura renders when token size changes. */
+    _onUpdate(changed: DeepPartial<TDocument["_source"]>, options: DocumentModificationContext<TDocument["parent"]>, userId: string): void;
 }
 interface TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
     get layer(): TokenLayerPF2e<this>;

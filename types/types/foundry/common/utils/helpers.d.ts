@@ -58,9 +58,9 @@ export function duplicate<T>(original: T): T;
  */
 export function mergeObject<T extends object, U extends object = T>(
     original: T,
-    other: U,
-    { insertKeys, insertValues, overwrite, inplace, enforceTypes, performDeletions }?: MergeObjectOptions,
-    _d?: number
+    other?: U,
+    options?: MergeObjectOptions,
+    _d?: number,
 ): T & U;
 
 /**
@@ -127,7 +127,7 @@ export function isObjectEmpty(obj: object): boolean;
  */
 export function diffObject<T extends Record<string, unknown> = Record<string, unknown>>(
     original: object,
-    other: object
+    other: object,
 ): T;
 
 /**
@@ -280,7 +280,7 @@ export function logCompatibilityWarning(
         until?: number | string;
         details?: string;
         stack?: boolean;
-    }
+    },
 ): void;
 
 declare global {
@@ -288,6 +288,7 @@ declare global {
         insertKeys?: boolean;
         insertValues?: boolean;
         overwrite?: boolean;
+        recursive?: boolean;
         inplace?: boolean;
         enforceTypes?: boolean;
         performDeletions?: boolean;
@@ -315,7 +316,7 @@ declare global {
          */
         function loadTexture(
             src: string,
-            { fallback }?: { fallback?: ImageFilePath }
+            { fallback }?: { fallback?: ImageFilePath },
         ): Promise<PIXI.Texture | PIXI.Spritesheet | null>;
     }
 }

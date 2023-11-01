@@ -1,6 +1,6 @@
 import { type ActorPF2e } from "@actor";
 import { ItemPF2e, type ContainerPF2e } from "@item";
-import { ItemSummaryData, PhysicalItemSource, TraitChatData } from "@item/data/index.ts";
+import { ItemSummaryData, PhysicalItemSource, TraitChatData } from "@item/base/data/index.ts";
 import { Rarity, Size } from "@module/data.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { Bulk } from "./bulk.ts";
@@ -53,7 +53,7 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     prepareDerivedData(): void;
     prepareSiblingData(): void;
     /** After item alterations have occurred, ensure that this item's hit points are no higher than its maximum */
-    onPrepareSynthetics(this: PhysicalItemPF2e<ActorPF2e>): void;
+    onPrepareSynthetics(): void;
     /** Can the provided item stack with this item? */
     isStackableWith(item: PhysicalItemPF2e): boolean;
     /** Combine this item with a target item if possible */
@@ -84,7 +84,7 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     /** Include mystification-related rendering instructions for views that will display this data. */
     protected traitChatData(dictionary: Record<string, string>): TraitChatData[];
     /** Set to unequipped upon acquiring */
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {

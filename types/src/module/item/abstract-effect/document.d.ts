@@ -3,8 +3,8 @@ import { ItemPF2e } from "@item";
 import { AfflictionSource, AfflictionSystemData } from "@item/affliction/data.ts";
 import { ConditionSource, ConditionSystemData } from "@item/condition/data.ts";
 import { EffectSource, EffectSystemData } from "@item/effect/data.ts";
-import { EffectBadge } from "./data.ts";
 import type { UserPF2e } from "@module/user/document.ts";
+import { EffectBadge } from "./data.ts";
 /** Base effect type for all PF2e effects including conditions and afflictions */
 declare abstract class AbstractEffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     /** A normalized version of the slug that shows in roll options, removing certain prefixes */
@@ -19,12 +19,17 @@ declare abstract class AbstractEffectPF2e<TParent extends ActorPF2e | null = Act
     get isLocked(): boolean;
     /** Whether this effect originated from a spell */
     get fromSpell(): boolean;
+    get totalDuration(): number;
+    get remainingDuration(): {
+        expired: boolean;
+        remaining: number;
+    };
     getRollOptions(prefix?: string): string[];
     prepareBaseData(): void;
     /** Set a self roll option for this effect */
     prepareActorData(): void;
     /** Log whether this effect originated from a spell */
-    protected _preCreate(data: PreDocumentId<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _onCreate(data: this["_source"], options: DocumentModificationContext<TParent>, userId: string): void;
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
     /** Attempts to show floaty text and update condition automation, depending on settings */

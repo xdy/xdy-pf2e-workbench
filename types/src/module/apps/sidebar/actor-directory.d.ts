@@ -6,8 +6,6 @@ import { ActorPF2e } from "@actor";
 declare class ActorDirectoryPF2e extends ActorDirectory<ActorPF2e<null>> {
     #private;
     static entryPartial: string;
-    /** Any additional "folder like" elements (such as parties) that are maintained separately */
-    extraFolders: Record<string, boolean>;
     static get defaultOptions(): SidebarDirectoryOptions;
     getData(): Promise<object>;
     saveActivePartyFolderState(): void;

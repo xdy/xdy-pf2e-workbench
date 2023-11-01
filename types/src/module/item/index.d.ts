@@ -1,4 +1,4 @@
-export * from "./base.ts";
+export * from "./base/document.ts";
 export { AbstractEffectPF2e } from "./abstract-effect/document.ts";
 export { AfflictionPF2e } from "./affliction/document.ts";
 export { ConditionPF2e } from "./condition/document.ts";
@@ -25,4 +25,4 @@ export { LorePF2e } from "./lore/index.ts";
 export { MeleePF2e } from "./melee/document.ts";
 export { SpellPF2e } from "./spell/document.ts";
 export { SpellcastingEntryPF2e } from "./spellcasting-entry/document.ts";
-export * from "./sheet/index.ts";
+export * from "./base/sheet/index.ts";

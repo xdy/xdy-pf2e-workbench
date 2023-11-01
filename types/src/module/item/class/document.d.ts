@@ -1,9 +1,10 @@
 import type { ActorPF2e, CharacterPF2e } from "@actor";
-import { FeatSlotLevel } from "@actor/character/feats.ts";
+import { FeatSlotCreationData } from "@actor/character/feats.ts";
 import { SaveType } from "@actor/types.ts";
 import { ABCItemPF2e, FeatPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
-import { ClassAttackProficiencies, ClassDefenseProficiencies, ClassSource, ClassSystemData, ClassTrait } from "./data.ts";
+import { ClassAttackProficiencies, ClassDefenseProficiencies, ClassSource, ClassSystemData } from "./data.ts";
+import { ClassTrait } from "./types.ts";
 declare class ClassPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ABCItemPF2e<TParent> {
     get attacks(): ClassAttackProficiencies;
     get defenses(): ClassDefenseProficiencies;
@@ -11,12 +12,7 @@ declare class ClassPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get hpPerLevel(): number;
     get perception(): ZeroToFour;
     get savingThrows(): Record<SaveType, ZeroToFour>;
-    get grantedFeatSlots(): {
-        ancestry: FeatSlotLevel[];
-        class: number[];
-        skill: number[];
-        general: number[];
-    };
+    get grantedFeatSlots(): Record<"ancestry" | "class" | "skill" | "general", (number | FeatSlotCreationData)[]>;
     /** Include all top-level class features in addition to any with the expected location ID */
     getLinkedItems(): FeatPF2e<ActorPF2e>[];
     /** Pulls the features that should be granted by this class, sorted by level and choice set */

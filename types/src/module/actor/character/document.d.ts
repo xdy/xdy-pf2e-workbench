@@ -1,12 +1,13 @@
-import { ActorPF2e, CreaturePF2e, FamiliarPF2e } from "@actor";
+import { ActorPF2e, CreaturePF2e, type FamiliarPF2e } from "@actor";
 import { CreatureSpeeds, LabeledSpeed } from "@actor/creature/data.ts";
 import { CreatureUpdateContext } from "@actor/creature/types.ts";
 import { StrikeData } from "@actor/data/base.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
 import { AttributeString, MovementType, RollContext, RollContextParams } from "@actor/types.ts";
-import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, ItemPF2e, WeaponPF2e } from "@item";
-import { ItemType } from "@item/data/index.ts";
+import type { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e } from "@item";
+import { ItemPF2e, WeaponPF2e } from "@item";
+import { ItemType } from "@item/base/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { ZeroToTwo } from "@module/data.ts";
 import { UserPF2e } from "@module/user/document.ts";

@@ -1,12 +1,11 @@
 import { ActorAttributes, ActorDetailsSource, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, AttributeBasedTraceData, BaseActorSourcePF2e, StrikeData } from "@actor/data/base.ts";
 import type { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import type { ActorAlliance, AttributeString, MovementType, SaveType, SkillAbbreviation, SkillLongForm } from "@actor/types.ts";
-import type { CREATURE_ACTOR_TYPES } from "@actor/values.ts";
 import { LabeledNumber, ValueAndMax, ValuesList, ZeroToThree } from "@module/data.ts";
 import type { Statistic, StatisticTraceData } from "@system/statistic/index.ts";
 import type { CreatureSensePF2e, SenseAcuity, SenseType } from "./sense.ts";
-import { Alignment, CreatureTrait } from "./types.ts";
-type BaseCreatureSource<TType extends CreatureType, TSystemSource extends CreatureSystemSource> = BaseActorSourcePF2e<TType, TSystemSource>;
+import { Alignment, CreatureActorType, CreatureTrait } from "./types.ts";
+type BaseCreatureSource<TType extends CreatureActorType, TSystemSource extends CreatureSystemSource> = BaseActorSourcePF2e<TType, TSystemSource>;
 /** Skill and Lore statistics for rolling. */
 type CreatureSkills = Record<SkillLongForm, Statistic> & Partial<Record<string, Statistic>>;
 interface CreatureSystemSource extends ActorSystemSource {
@@ -61,7 +60,6 @@ interface CreatureSystemData extends Omit<CreatureSystemSource, "attributes">, A
     actions?: StrikeData[];
     resources?: CreatureResources;
 }
-type CreatureType = (typeof CREATURE_ACTOR_TYPES)[number];
 interface SenseData {
     type: SenseType;
     acuity?: SenseAcuity;
@@ -179,4 +177,4 @@ interface HeldShieldData {
     icon: ImageFilePath;
 }
 export { VisionLevels };
-export type { Abilities, AbilityData, Attitude, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSaves, CreatureSkills, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, CreatureType, HeldShieldData, LabeledSpeed, Language, SaveData, SenseData, SkillAbbreviation, SkillData, VisionLevel, };
+export type { Abilities, AbilityData, Attitude, BaseCreatureSource, CreatureActorType, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureInitiativeSource, CreatureResources, CreatureResourcesSource, CreatureSaves, CreatureSkills, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsData, CreatureTraitsSource, HeldShieldData, LabeledSpeed, Language, SaveData, SenseData, SkillAbbreviation, SkillData, VisionLevel, };

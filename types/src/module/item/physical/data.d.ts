@@ -4,8 +4,8 @@ import { ConsumableTrait } from "@item/consumable/data.ts";
 import { EquipmentTrait } from "@item/equipment/data.ts";
 import { WeaponTrait } from "@item/weapon/types.ts";
 import { Size, TraitsWithRarity, ValuesList } from "@module/data.ts";
-import { ActionCost, BaseItemSourcePF2e, Frequency, ItemSystemData, ItemSystemSource } from "../data/base.ts";
-import type { ITEM_CARRY_TYPES } from "../data/values.ts";
+import { ActionCost, BaseItemSourcePF2e, Frequency, ItemSystemData, ItemSystemSource } from "../base/data/system.ts";
+import type { ITEM_CARRY_TYPES } from "../base/data/values.ts";
 import type { CoinsPF2e } from "./helpers.ts";
 import { PhysicalItemType, PreciousMaterialGrade, PreciousMaterialType } from "./types.ts";
 import { UsageDetails } from "./usage.ts";
@@ -141,4 +141,4 @@ interface Price extends PartialPrice {
     value: CoinsPF2e;
     per: number;
 }
-export type { BasePhysicalItemSource, Coins, EquippedData, IdentificationData, IdentificationStatus, IdentifiedData, Investable, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PartialPrice, PhysicalItemHPSource, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, Price, };
+export type { BasePhysicalItemSource, BulkData, Coins, EquippedData, IdentificationData, IdentificationStatus, IdentifiedData, Investable, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PartialPrice, PhysicalItemHPSource, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, Price, };

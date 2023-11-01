@@ -4,7 +4,7 @@ import type { ActorSizePF2e } from "@actor/data/size.ts";
 import { InitiativeTraceData } from "@actor/initiative.ts";
 import { NPCStrike } from "@actor/npc/index.ts";
 import { SaveType } from "@actor/types.ts";
-import { Rarity, Size } from "@module/data.ts";
+import { PublicationData, Rarity, Size } from "@module/data.ts";
 import { HazardTrait } from "./types.ts";
 /** The stored source data of a hazard actor */
 type HazardSource = BaseActorSourcePF2e<"hazard", HazardSystemSource>;
@@ -44,11 +44,8 @@ interface HazardDetailsSource extends ActorDetailsSource {
     description?: string;
     reset?: string;
     routine?: string;
-    /** Book source, along with author */
-    source: {
-        value: string;
-        author: string;
-    };
+    /** Information concerning the publication from which this actor originates */
+    publication: PublicationData;
     readonly alliance?: never;
 }
 interface HazardSystemData extends Omit<HazardSystemSource, "attributes" | "details">, Omit<ActorSystemData, "traits"> {

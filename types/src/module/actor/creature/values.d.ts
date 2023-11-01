@@ -8,12 +8,12 @@ declare const SAVING_THROW_DEFAULT_ATTRIBUTES: {
 };
 /** Use the lower end of CRB Table 9-1 ("Size and Reach"), allowing individual attacks to specify otherwise */
 declare const SIZE_TO_REACH: {
-    tiny: number;
-    sm: number;
-    med: number;
-    lg: number;
-    huge: number;
-    grg: number;
+    readonly tiny: 0;
+    readonly sm: 5;
+    readonly med: 5;
+    readonly lg: 5;
+    readonly huge: 10;
+    readonly grg: 15;
 };
 /** Sense types associated with a particular acuities by definition */
 declare const SENSES_WITH_MANDATORY_ACUITIES: {

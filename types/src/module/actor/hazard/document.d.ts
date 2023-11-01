@@ -1,7 +1,7 @@
 import { ActorPF2e } from "@actor";
 import { SaveType } from "@actor/types.ts";
 import { ConditionPF2e } from "@item";
-import { ItemType } from "@item/data/index.ts";
+import { ItemType } from "@item/base/data/index.ts";
 import { Rarity } from "@module/data.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { DamageType } from "@system/damage/index.ts";
@@ -19,10 +19,14 @@ declare class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumen
     /** Minimal check since the disabled status of a hazard isn't logged */
     get canAttack(): boolean;
     get emitsSound(): boolean;
-    /** Hazards without hit points are unaffected by damage */
     isAffectedBy(effect: DamageType | ConditionPF2e): boolean;
     prepareBaseData(): void;
     prepareDerivedData(): void;
+    /**
+     * Some hazards have an implicit immunity exception to certain damage types despite having object immunities: use a
+     * weakness or resistance as indication.
+     */
+    prepareData(): void;
     protected prepareSaves(): {
         [K in SaveType]?: Statistic;
     };

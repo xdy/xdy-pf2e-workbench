@@ -1,5 +1,5 @@
 /// <reference types="jquery" resolution-mode="require"/>
-import { CheckModifier } from "@actor/modifiers.ts";
+import type { CheckModifier } from "@actor/modifiers.ts";
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { DegreeOfSuccessString } from "../degree-of-success.ts";
 import { CheckRoll } from "./roll.ts";

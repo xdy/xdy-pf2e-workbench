@@ -2,7 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { SheetOptions } from "@module/sheet/helpers.ts";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "../sheet/base.ts";
+import { ItemSheetDataPF2e, ItemSheetPF2e } from "../base/sheet/base.ts";
 import { CoinsPF2e, ItemActivation, MaterialValuationData, PhysicalItemPF2e, PreciousMaterialGrade } from "./index.ts";
 declare class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e> extends ItemSheetPF2e<TItem> {
     /** Show the identified data for editing purposes */

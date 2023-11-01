@@ -1,7 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
+import { RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import { RollSubstitution } from "@module/rules/synthetics.ts";
 import { CheckRollContext } from "./types.ts";
 /**
@@ -9,14 +9,13 @@ import { CheckRollContext } from "./types.ts";
  * @category Other
  */
 export declare class CheckModifiersDialog extends Application {
+    #private;
     /** The check which is being edited. */
     check: StatisticModifier;
     /** Relevant context for this roll, like roll options. */
     context: CheckRollContext;
     /** A Promise resolve method */
     resolve: (value: boolean) => void;
-    /** Pre-determined D20 roll results */
-    substitutions: RollSubstitution[];
     /** Has the promise been resolved? */
     isResolved: boolean;
     constructor(check: StatisticModifier, resolve: (value: boolean) => void, context?: CheckRollContext);
@@ -32,14 +31,17 @@ export declare class CheckModifiersDialog extends Application {
 }
 interface CheckDialogData {
     appId: string;
-    modifiers: readonly ModifierPF2e[];
+    modifiers: RawModifier[];
     totalModifier: number;
     rollModes: Record<RollMode, string>;
     rollMode: RollMode | "roll" | undefined;
     showRollDialogs: boolean;
-    substitutions: RollSubstitution[];
+    substitutions: RollSubstitutionDialogData[];
     fortune: boolean;
     none: boolean;
     misfortune: boolean;
+}
+interface RollSubstitutionDialogData extends RollSubstitution {
+    toggleable: boolean;
 }
 export {};

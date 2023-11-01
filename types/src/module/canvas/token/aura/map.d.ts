@@ -11,6 +11,8 @@ export declare class AuraRenderers extends Map<string, AuraRenderer> {
      * @param [slugs] A specific list of slugs to limit which auras are cleared
      */
     reset(slugs?: string[]): Promise<void>;
+    /** Reposition aura textures after the token moves. */
+    refreshPositions(): void;
     /** Toggle visibility of aura rings and reset highlights */
     draw(): Promise<void>;
     /** Deallocate the aura's GPU memory before removing from map */

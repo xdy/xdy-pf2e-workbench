@@ -1,7 +1,7 @@
 import { ActorPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
-import { ItemSummaryData } from "@item/data/index.ts";
+import { ItemSummaryData } from "@item/base/data/index.ts";
 import { IdentificationStatus, MystifiedData } from "@item/physical/index.ts";
 import { RangeData } from "@item/types.ts";
 import { UserPF2e } from "@module/user/index.ts";
@@ -15,8 +15,8 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     get baseType(): BaseWeaponType | null;
     get group(): WeaponGroup | null;
     get category(): WeaponCategory;
-    /** The default ability used in attack rolls */
-    get defaultAbility(): AttributeString;
+    /** The default attribute used in attack rolls */
+    get defaultAttribute(): AttributeString;
     get hands(): "0" | "1" | "1+" | "2";
     /** The maximum range of this weapon: `null` if melee, and usually 6 * range increment if ranged */
     get maxRange(): number | null;
@@ -63,19 +63,21 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     getAltUsages(options?: {
         recurse?: boolean;
     }): this[];
-    clone(data: DocumentUpdateData<this> | undefined, options: Omit<WeaponCloneOptions, "save"> & {
+    clone(data: Record<string, unknown> | undefined, context: Omit<WeaponCloneContext, "save"> & {
         save: true;
     }): Promise<this>;
-    clone(data?: DocumentUpdateData<this>, options?: Omit<WeaponCloneOptions, "save"> & {
+    clone(data?: Record<string, unknown>, context?: Omit<WeaponCloneContext, "save"> & {
         save?: false;
     }): this;
-    clone(data?: DocumentUpdateData<this>, options?: WeaponCloneOptions): this | Promise<this>;
+    clone(data?: Record<string, unknown>, context?: WeaponCloneContext): this | Promise<this>;
     /** Generate a clone of this thrown melee weapon with its thrown usage overlain, or `null` if not applicable */
     private toThrownUsage;
     /** Generate a clone of this combination weapon with its melee usage overlain, or `null` if not applicable */
     private toMeleeUsage;
     /** Generate a melee item from this weapon for use by NPCs */
-    toNPCAttacks(this: WeaponPF2e<ActorPF2e>): MeleePF2e<ActorPF2e>[];
+    toNPCAttacks(this: WeaponPF2e<ActorPF2e>, { keepId }?: {
+        keepId?: boolean | undefined;
+    }): MeleePF2e<ActorPF2e>[];
     /** Consume a unit of ammunition used by this weapon */
     consumeAmmo(): Promise<void>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
@@ -88,7 +90,7 @@ interface WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extend
     system: WeaponSystemData;
     get traits(): Set<WeaponTrait>;
 }
-interface WeaponCloneOptions extends DocumentCloneOptions {
+interface WeaponCloneContext extends DocumentCloneContext {
     /** If this clone is an alternative usage, the type */
     altUsage?: "melee" | "thrown";
 }

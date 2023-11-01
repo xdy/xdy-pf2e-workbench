@@ -1,10 +1,8 @@
-import { ActionType, BaseItemSourcePF2e, Frequency, FrequencySource, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/data/base.ts";
+import { ActionType, BaseItemSourcePF2e, Frequency, FrequencySource, ItemSystemData, ItemSystemSource, ItemTraitsNoRarity } from "@item/base/data/system.ts";
 import { OneToThree } from "@module/data.ts";
 import { ActionCategory, ActionTrait } from "./types.ts";
 type AbilityItemSource = BaseItemSourcePF2e<"action", AbilitySystemSource>;
-interface AbilityTraits extends ItemTraits<ActionTrait> {
-    rarity?: never;
-    otherTags?: never;
+interface AbilityTraits extends ItemTraitsNoRarity<ActionTrait> {
 }
 interface AbilitySystemSource extends ItemSystemSource {
     traits: AbilityTraits;

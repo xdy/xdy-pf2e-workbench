@@ -3,10 +3,11 @@ import { VariantsCollection } from "./variants.js";
 import { camelize } from "./utils.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActionsIndex } from "./actions-index.js";
-import { ItemPF2e } from "@item/base.js";
-import { ItemSummaryData } from "@item/data/index.js";
+import { ItemPF2e } from "@item/base/document.js";
+
 import { logWarn } from "../../utils.js";
 import { CharacterSkill } from "@actor/character/types.js";
+import { ItemSummaryData } from "@item/base/data/index.js";
 
 const ACTION_ICONS: Record<ActionType, string> = {
     A: "OneAction",

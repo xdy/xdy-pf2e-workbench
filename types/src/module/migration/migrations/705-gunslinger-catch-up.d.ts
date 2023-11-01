@@ -1,4 +1,4 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /** Catch up Gunslinger class features with newly-included REs */
 export declare class Migration705GunslingerCatchUp extends MigrationBase {

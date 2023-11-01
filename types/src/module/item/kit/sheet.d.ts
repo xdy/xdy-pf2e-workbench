@@ -2,7 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { CoinsPF2e } from "@item/physical/index.ts";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "../sheet/base.ts";
+import { ItemSheetDataPF2e, ItemSheetPF2e } from "../base/sheet/base.ts";
 import { KitEntryData } from "./data.ts";
 import { KitPF2e } from "./document.ts";
 declare class KitSheetPF2e extends ItemSheetPF2e<KitPF2e> {

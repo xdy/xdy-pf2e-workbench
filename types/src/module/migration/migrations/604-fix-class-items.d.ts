@@ -1,4 +1,4 @@
-import { ClassSource } from "@item/data/index.ts";
+import { ClassSource } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 export declare class Migration604FixClassItem extends MigrationBase {
     static version: number;

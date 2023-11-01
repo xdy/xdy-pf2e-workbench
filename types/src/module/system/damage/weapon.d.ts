@@ -8,8 +8,8 @@ import { PotencySynthetic } from "@module/rules/synthetics.ts";
 import { DamageCategoryUnique, DamageRollContext, WeaponDamageTemplate } from "./types.ts";
 declare class WeaponDamagePF2e {
     #private;
-    static fromNPCAttack({ attack, actor, actionTraits, proficiencyRank, context, }: NPCStrikeCalculateParams): Promise<WeaponDamageTemplate | null>;
-    static calculate({ weapon, actor, damageDice, modifiers, actionTraits, proficiencyRank, weaponPotency, context, }: WeaponDamageCalculateParams): Promise<WeaponDamageTemplate | null>;
+    static fromNPCAttack({ attack, actor, actionTraits, context, }: NPCStrikeCalculateParams): Promise<WeaponDamageTemplate | null>;
+    static calculate({ weapon, actor, damageDice, modifiers, actionTraits, weaponPotency, context, }: WeaponDamageCalculateParams): Promise<WeaponDamageTemplate | null>;
     /** Parse damage formulas from melee items and construct `WeaponDamage` objects out of them */
     static npcDamageToWeaponDamage(instance: NPCAttackDamage): ConvertedNPCDamage;
 }
@@ -20,7 +20,6 @@ interface WeaponDamageCalculateParams {
     weapon: WeaponPF2e | MeleePF2e;
     actor: CharacterPF2e | NPCPF2e | HazardPF2e;
     actionTraits: TraitViewData[];
-    proficiencyRank: number;
     weaponPotency?: PotencySynthetic | null;
     damageDice?: DamageDicePF2e[];
     modifiers?: ModifierPF2e[];
@@ -30,7 +29,6 @@ interface NPCStrikeCalculateParams {
     attack: MeleePF2e;
     actor: NPCPF2e | HazardPF2e;
     actionTraits: TraitViewData[];
-    proficiencyRank: number;
     context: DamageRollContext;
 }
 export { WeaponDamagePF2e, type ConvertedNPCDamage };

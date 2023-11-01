@@ -1,4 +1,4 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /** The types choices was never enforced when it only worked for weapons */
 export declare class Migration765ChoiceOwnedItemTypes extends MigrationBase {

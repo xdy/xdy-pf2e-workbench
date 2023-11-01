@@ -1,5 +1,5 @@
 import type { BaseRawModifier, DamageDicePF2e } from "@actor/modifiers.ts";
-import { ItemType } from "@item/data/index.ts";
+import { ItemType } from "@item/base/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { ZeroToTwo } from "@module/data.ts";
 import { RollNoteSource } from "@module/notes.ts";
@@ -7,9 +7,9 @@ import { CheckRollContext } from "@system/check/index.ts";
 import { DamageRollContext } from "@system/damage/types.ts";
 import { DegreeAdjustmentsRecord, DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import type { ChatMessageFlags } from "types/foundry/common/documents/chat-message.d.ts";
-interface ChatMessageSourcePF2e extends foundry.documents.ChatMessageSource {
+type ChatMessageSourcePF2e = foundry.documents.ChatMessageSource & {
     flags: ChatMessageFlagsPF2e;
-}
+};
 export interface ItemOriginFlag {
     type: ItemType;
     uuid: string;

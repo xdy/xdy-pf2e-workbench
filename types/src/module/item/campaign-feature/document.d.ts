@@ -1,7 +1,7 @@
 import { ActorPF2e, PartyPF2e } from "@actor";
 import { FeatGroup } from "@actor/character/feats.ts";
 import { ItemPF2e } from "@item";
-import { ActionCost, Frequency } from "@item/data/base.ts";
+import { ActionCost, Frequency } from "@item/base/data/index.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { CampaignFeatureSource, CampaignFeatureSystemData } from "./data.ts";
 import { BehaviorType, KingmakerCategory, KingmakerTrait } from "./types.ts";
@@ -25,7 +25,7 @@ declare class CampaignFeaturePF2e<TParent extends ActorPF2e | null = ActorPF2e |
     prepareSiblingData(): void;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string | null): string[];
-    protected _preCreate(data: PreDocumentId<CampaignFeatureSource>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<CampaignFeatureSource>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface CampaignFeaturePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {

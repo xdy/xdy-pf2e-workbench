@@ -1,4 +1,4 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { ClassicLevel, type DatabaseOptions } from "classic-level";
 import type { JournalEntryPageSchema } from "types/foundry/common/documents/journal-entry-page.d.ts";
 import type { TableResultSource } from "types/foundry/common/documents/module.d.ts";

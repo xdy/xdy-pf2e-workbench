@@ -1,6 +1,6 @@
 import { PredicatePF2e, PredicateStatement, RawPredicate } from "@system/predication.ts";
 import { SlugCamel } from "@util";
-import DataModel, { _DataModel } from "types/foundry/common/abstract/data.js";
+import type DataModel from "types/foundry/common/abstract/data.d.ts";
 import type { ArrayFieldOptions, CleanFieldOptions, DataField, DataFieldOptions, DataFieldValidationOptions, DataSchema, MaybeSchemaProp, ModelPropFromDataField, NumberField, ObjectFieldOptions, SourcePropFromDataField, StringField, StringFieldOptions } from "types/foundry/common/data/fields.d.ts";
 import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.d.ts";
 declare const fields: typeof import("types/foundry/common/data/fields.d.ts");
@@ -22,7 +22,7 @@ declare class StrictNumberField<TSourceProp extends number, TModelProp = TSource
     protected _cast(value: unknown): unknown;
 }
 /** A `BooleanField` that does not cast the source value */
-declare class StrictBooleanField<TSourceProp extends boolean = boolean, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.BooleanField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+declare class StrictBooleanField<TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.BooleanField<boolean, boolean, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;
 }
 declare class StrictArrayField<TElementField extends DataField, TSourceProp extends Partial<SourcePropFromDataField<TElementField>>[] = SourcePropFromDataField<TElementField>[], TModelProp extends object = ModelPropFromDataField<TElementField>[], TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ArrayField<TElementField, TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
@@ -40,7 +40,7 @@ declare class DataUnionField<TField extends DataField, TRequired extends boolean
     protected _cast(value?: unknown): unknown;
     clean(value: unknown, options?: CleanFieldOptions | undefined): MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial>;
     validate(value: unknown, options?: DataFieldValidationOptions | undefined): void | DataModelValidationFailure;
-    initialize(value: unknown, model?: ConstructorOf<DataModel<_DataModel | null, DataSchema>> | undefined, options?: object | undefined): MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial>;
+    initialize(value: unknown, model?: ConstructorOf<DataModel> | undefined, options?: object | undefined): MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial>;
 }
 type MaybeUnionSchemaProp<TField extends DataField, TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean> = MaybeSchemaProp<TField extends DataField<infer _TSourceProp, infer TModelProp, boolean, boolean, boolean> ? TModelProp : never, TRequired, TNullable, THasInitial>;
 /** A sluggified string field */

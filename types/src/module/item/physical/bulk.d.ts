@@ -11,8 +11,8 @@ type StackDefinitions = Record<string, StackDefinition | undefined>;
  * included because coins don't add light bulk below 1000, just 1
  * bulk per 1000 coins
  */
-export declare const stackDefinitions: StackDefinitions;
-export declare class Bulk {
+declare const STACK_DEFINITIONS: StackDefinitions;
+declare class Bulk {
     normal: number;
     light: number;
     constructor({ normal, light }?: {
@@ -67,5 +67,5 @@ export declare class Bulk {
  * "l", "1", "L", "1; L", "2; 3L", "2;3L"
  * @param weight if not parseable will return null or undefined
  */
-export declare function weightToBulk(weight: Maybe<string | number>): Bulk | null;
-export {};
+declare function weightToBulk(weight: Maybe<string | number>): Bulk | null;
+export { Bulk, STACK_DEFINITIONS, weightToBulk };

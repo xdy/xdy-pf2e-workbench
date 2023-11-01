@@ -47,26 +47,31 @@ interface ValueAndMaybeMax {
     value: number;
     max?: number;
 }
-type ValueAndMax = Required<ValueAndMaybeMax>;
+interface ValueAndMax extends Required<ValueAndMaybeMax> {
+}
 declare function goesToEleven(value: number): value is ZeroToEleven;
 /** The tracked schema data of actors and items */
-interface NewDocumentSchemaRecord {
+interface NewDocumentMigrationRecord {
     version: null;
-    lastMigration: null;
+    previous: null;
 }
-interface MigratedDocumentSchemaRecord {
+interface MigratedDocumentMigrationRecord {
     version: number;
-    lastMigration: {
-        version: {
-            schema: number | null;
-            system?: string;
-            foundry?: string;
-        };
+    previous: {
+        schema: number | null;
+        system?: string;
+        foundry?: string;
     } | null;
 }
-type DocumentSchemaRecord = NewDocumentSchemaRecord | MigratedDocumentSchemaRecord;
+type MigrationRecord = NewDocumentMigrationRecord | MigratedDocumentMigrationRecord;
+interface PublicationData {
+    title: string;
+    authors: string;
+    license: "ORC" | "OGL";
+    remaster: boolean;
+}
 export declare const PROFICIENCY_RANKS: readonly ["untrained", "trained", "expert", "master", "legendary"];
 export declare const MATH_FUNCTION_NAMES: Set<MathFunctionName>;
 type EnfolderableDocumentPF2e = ActorPF2e<null> | ItemPF2e<null> | Exclude<EnfolderableDocument, Actor<null> | Item<null>>;
 export { RARITIES, SIZES, SIZE_SLUGS, goesToEleven };
-export type { DocumentSchemaRecord, EnfolderableDocumentPF2e, LabeledNumber, LabeledString, LabeledValue, OneToFive, OneToFour, OneToTen, OneToThree, Rarity, Size, TraitsWithRarity, TwoToThree, TypeAndValue, ValueAndMax, ValueAndMaybeMax, ValuesList, ZeroToEleven, ZeroToFive, ZeroToFour, ZeroToTen, ZeroToThree, ZeroToTwo, };
+export type { EnfolderableDocumentPF2e, LabeledNumber, LabeledString, LabeledValue, MigrationRecord, OneToFive, OneToFour, OneToTen, OneToThree, PublicationData, Rarity, Size, TraitsWithRarity, TwoToThree, TypeAndValue, ValueAndMax, ValueAndMaybeMax, ValuesList, ZeroToEleven, ZeroToFive, ZeroToFour, ZeroToTen, ZeroToThree, ZeroToTwo, };

@@ -1,11 +1,10 @@
 import { AttributeString, SaveType } from "@actor/types.ts";
 import { ABCSystemSource } from "@item/abc/data.ts";
-import { BaseItemSourcePF2e, ItemTraits } from "@item/data/base.ts";
+import { BaseItemSourcePF2e, RarityTraitAndOtherTags } from "@item/base/data/system.ts";
 import { ZeroToFour } from "@module/data.ts";
-import type { CLASS_TRAITS } from "./values.ts";
 type ClassSource = BaseItemSourcePF2e<"class", ClassSystemSource>;
 interface ClassSystemSource extends ABCSystemSource {
-    traits: ItemTraits;
+    traits: RarityTraitAndOtherTags;
     keyAbility: {
         value: AttributeString[];
         selected: AttributeString | null;
@@ -54,5 +53,4 @@ interface ClassDefenseProficiencies {
     medium: ZeroToFour;
     heavy: ZeroToFour;
 }
-type ClassTrait = SetElement<typeof CLASS_TRAITS>;
-export type { ClassAttackProficiencies, ClassDefenseProficiencies, ClassSource, ClassSystemData, ClassTrait };
+export type { ClassAttackProficiencies, ClassDefenseProficiencies, ClassSource, ClassSystemData };

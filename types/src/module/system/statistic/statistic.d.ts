@@ -5,7 +5,7 @@ import { AttributeString } from "@actor/types.ts";
 import type { ItemPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import { RollNotePF2e, RollNoteSource } from "@module/notes.ts";
-import { TokenDocumentPF2e } from "@scene";
+import type { TokenDocumentPF2e } from "@scene";
 import { CheckRollCallback } from "@system/check/check.ts";
 import type { CheckRoll } from "@system/check/index.ts";
 import { CheckType, RollTwiceOption } from "@system/check/types.ts";

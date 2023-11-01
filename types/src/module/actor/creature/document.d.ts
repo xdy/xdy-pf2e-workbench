@@ -5,18 +5,18 @@ import { CreatureSource } from "@actor/data/index.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
 import { MovementType, SaveType, SkillLongForm } from "@actor/types.ts";
 import { ArmorPF2e, ItemPF2e, type PhysicalItemPF2e } from "@item";
-import { ItemType } from "@item/data/index.ts";
+import { ItemType } from "@item/base/data/index.ts";
 import { ItemCarryType } from "@item/physical/data.ts";
-import { ActiveEffectPF2e } from "@module/active-effect.ts";
+import type { ActiveEffectPF2e } from "@module/active-effect.ts";
 import { Rarity } from "@module/data.ts";
 import { RuleElementSynthetics } from "@module/rules/index.ts";
-import { UserPF2e } from "@module/user/index.ts";
+import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { CheckRoll } from "@system/check/index.ts";
 import { Statistic, StatisticDifficultyClass, type ArmorStatistic } from "@system/statistic/index.ts";
 import { CreatureSkills, CreatureSpeeds, CreatureSystemData, LabeledSpeed, SenseData, VisionLevel } from "./data.ts";
 import { CreatureSensePF2e } from "./sense.ts";
-import { Alignment, CreatureTrait, CreatureUpdateContext, GetReachParameters } from "./types.ts";
+import { Alignment, CreatureTrait, CreatureType, CreatureUpdateContext, GetReachParameters } from "./types.ts";
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     parties: Set<PartyPF2e>;
@@ -27,6 +27,8 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     /** Saving throw rolls for the creature, built during data prep */
     saves: Record<SaveType, Statistic>;
     perception: Statistic;
+    /** Types of creatures (as provided by bestiaries 1-3) of which this creature is a member */
+    get creatureTypes(): CreatureType[];
     /** The creature's position on the alignment axes */
     get alignment(): Alignment;
     get rarity(): Rarity;
@@ -101,11 +103,11 @@ interface CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     get traits(): Set<CreatureTrait>;
     get hitPoints(): HitPointsSummary;
     /** Expand DocumentModificationContext for creatures */
-    update(data: DocumentUpdateData<this>, options?: CreatureUpdateContext<TParent>): Promise<this>;
+    update(data: Record<string, unknown>, options?: CreatureUpdateContext<TParent>): Promise<this>;
     /** See implementation in class */
-    updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData<ActiveEffectPF2e<this>>[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[]>;
-    updateEmbeddedDocuments(embeddedName: "Item", updateData: EmbeddedDocumentUpdateData<ItemPF2e<this>>[], options?: DocumentUpdateContext<this>): Promise<ItemPF2e<this>[]>;
-    updateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", updateData: EmbeddedDocumentUpdateData<ActiveEffectPF2e<this> | ItemPF2e<this>>[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
+    updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[]>;
+    updateEmbeddedDocuments(embeddedName: "Item", updateData: EmbeddedDocumentUpdateData[], options?: DocumentUpdateContext<this>): Promise<ItemPF2e<this>[]>;
+    updateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", updateData: EmbeddedDocumentUpdateData[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
     deleteEmbeddedDocuments(embeddedName: "ActiveEffect", ids: string[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[]>;
     deleteEmbeddedDocuments(embeddedName: "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<ItemPF2e<this>[]>;
     deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;

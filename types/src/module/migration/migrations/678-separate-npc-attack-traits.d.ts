@@ -1,4 +1,4 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /** Remove exclusive NPC attack traits from weapons */
 export declare class Migration678SeparateNPCAttackTraits extends MigrationBase {

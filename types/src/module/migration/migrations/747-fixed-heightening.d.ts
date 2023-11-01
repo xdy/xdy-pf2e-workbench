@@ -1,5 +1,5 @@
 import { SpellPF2e } from "@item";
-import { ItemSourcePF2e, SpellSource } from "@item/data/index.ts";
+import { ItemSourcePF2e, SpellSource } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /** Handle spells gaining fixed level heightening */
 export declare class Migration747FixedHeightening extends MigrationBase {

@@ -1,14 +1,13 @@
-import { ItemType } from "@item/data/index.ts";
+import { ItemType } from "@item/base/data/index.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "../index.ts";
+import { RuleElementPF2e, RuleElementSchema } from "../index.ts";
 import { ItemAlterationSchema } from "./alteration.ts";
 declare class ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSchema> {
-    constructor(source: RuleElementSource, options: RuleElementOptions);
+    #private;
     static defineSchema(): ItemAlterationRuleSchema;
     static validateJoint(data: SourceFromSchema<ItemAlterationRuleSchema>): void;
-    beforePrepareData(): void;
-    /** If this RE alters max HP, proportionally adjust current HP of items it would match against */
-    preCreate(): Promise<void>;
+    onApplyActiveEffects(): void;
+    preCreate({ tempItems }: RuleElementPF2e.PreCreateParams): Promise<void>;
 }
 interface ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSchema>, ModelPropsFromSchema<ItemAlterationRuleSchema> {
 }

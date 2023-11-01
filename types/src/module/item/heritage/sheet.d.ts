@@ -2,7 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { AncestryPF2e, HeritagePF2e } from "@item";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/sheet/base.ts";
+import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/base/sheet/base.ts";
 export declare class HeritageSheetPF2e extends ItemSheetPF2e<HeritagePF2e> {
     static get defaultOptions(): DocumentSheetOptions;
     getData(options?: Partial<DocumentSheetOptions>): Promise<HeritageSheetData>;

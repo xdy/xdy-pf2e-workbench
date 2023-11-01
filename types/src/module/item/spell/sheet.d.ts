@@ -2,7 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { SpellPF2e, SpellSystemSource } from "@item/spell/index.ts";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "../sheet/base.ts";
+import { ItemSheetDataPF2e, ItemSheetPF2e } from "../base/sheet/base.ts";
 import { SpellSystemData } from "./data.ts";
 import { DamageCategoryUnique } from "@system/damage/types.ts";
 export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
@@ -16,7 +16,6 @@ export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
     protected _onDragStart(event: ElementDragEvent): void;
     protected _onDrop(event: ElementDragEvent): Promise<void>;
     private getAvailableHeightenLevels;
-    private getOverlayFromEvent;
 }
 interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
     isCantrip: boolean;

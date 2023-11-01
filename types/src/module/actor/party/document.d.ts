@@ -1,12 +1,12 @@
 import { ActorPF2e, type CreaturePF2e } from "@actor";
-import { ItemType } from "@item/data/index.ts";
+import { ItemType } from "@item/base/data/index.ts";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import { RuleElementPF2e } from "@module/rules/index.ts";
 import { RuleElementSchema } from "@module/rules/rule-element/data.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { Statistic } from "@system/statistic/index.ts";
-import { DataModelValidationOptions } from "types/foundry/common/abstract/data.js";
+import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { PartySource, PartySystemData } from "./data.ts";
 import { PartyCampaign, PartyUpdateContext } from "./types.ts";
 declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
@@ -24,7 +24,7 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     isAffectedBy(): false;
     /** Override validation to defer certain properties to the campaign model */
     validate(options?: DataModelValidationOptions): boolean;
-    updateSource(data?: DocumentUpdateData<PartyPF2e>, options?: DocumentSourceUpdateContext): DeepPartial<this["_source"]>;
+    updateSource(data?: Record<string, unknown>, options?: DocumentSourceUpdateContext): DeepPartial<this["_source"]>;
     /** Only prepare rule elements for non-physical items (in case campaigin items exist) */
     protected prepareRuleElements(): RuleElementPF2e<RuleElementSchema>[];
     /** Make `system.campaign` non-enumerable to prevent `TokenDocument.getTrackedAttributes` from recursing into it. */

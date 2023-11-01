@@ -1,4 +1,4 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /**
  * Several classes have their own ad-hoc "weapon specialization" that injected a roll option to trick the system, which were

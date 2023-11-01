@@ -9,8 +9,6 @@ declare global {
     class Combat extends ClientBaseCombat {
         constructor(data: PreCreate<foundry.documents.CombatSource>, context?: DocumentConstructionContext<null>);
 
-        active: boolean;
-
         /** Track the sorted turn order of this combat encounter */
         turns: CollectionValue<this["combatants"]>[];
 
@@ -30,20 +28,11 @@ declare global {
         /** Get the Combatant who has the current turn. */
         get combatant(): CollectionValue<this["combatants"]> | undefined;
 
-        /** The numeric round of the Combat encounter */
-        get round(): number;
-
-        /** A reference to the Scene document within which this Combat encounter occurs */
-        get scene(): NonNullable<NonNullable<CollectionValue<this["combatants"]>["actor"]>["parent"]>["parent"];
-
         /** Return the object of settings which modify the Combat Tracker behavior */
         get settings(): Record<string, unknown>;
 
         /** Has this combat encounter been started? */
         get started(): boolean;
-
-        /** The numeric turn of the combat round in the Combat encounter */
-        get turn(): number;
 
         override get visible(): true;
 
@@ -146,13 +135,13 @@ declare global {
         protected override _onCreate(
             data: this["_source"],
             options: DocumentModificationContext<null>,
-            userId: string
+            userId: string,
         ): void;
 
         protected override _onUpdate(
             changed: DeepPartial<this["_source"]>,
             options: DocumentModificationContext<null>,
-            userId: string
+            userId: string,
         ): void;
 
         protected override _onDelete(options: DocumentModificationContext<null>, userId: string): void;
@@ -163,7 +152,7 @@ declare global {
             documents: Combatant<this>[],
             data: Combatant<this>["_source"][],
             options: DocumentModificationContext<this>,
-            userId: string
+            userId: string,
         ): void;
 
         protected override _onUpdateDescendantDocuments(
@@ -172,7 +161,7 @@ declare global {
             documents: Combatant<this>[],
             changes: DeepPartial<Combatant<this>["_source"]>[],
             options: DocumentModificationContext<this>,
-            userId: string
+            userId: string,
         ): void;
 
         protected override _onDeleteDescendantDocuments(
@@ -181,7 +170,7 @@ declare global {
             documents: Combatant<this>[],
             ids: string[],
             options: DocumentModificationContext<this>,
-            userId: string
+            userId: string,
         ): void;
 
         /* -------------------------------------------- */

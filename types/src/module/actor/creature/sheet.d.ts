@@ -3,7 +3,7 @@
 /// <reference types="tooltipster" />
 import { ActorPF2e, CreaturePF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ZeroToFour } from "@module/data.ts";
@@ -18,7 +18,7 @@ export declare abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> ext
     #private;
     /** A DocumentSheet class presenting additional, per-actor settings */
     protected abstract readonly actorConfigClass: ConstructorOf<CreatureConfig<CreaturePF2e>> | null;
-    getData(options?: ActorSheetOptions): Promise<CreatureSheetData<TActor>>;
+    getData(options?: Partial<ActorSheetOptions>): Promise<CreatureSheetData<TActor>>;
     /** Opens the spell preparation sheet, but only if its a prepared entry */
     protected openSpellPreparationSheet(entryId: string): void;
     protected prepareSpellcasting(): Promise<SpellcastingSheetData[]>;

@@ -1,8 +1,9 @@
 import { AuraAppearanceData, AuraData } from "@actor/types.ts";
-import { ItemTrait } from "@item/data/base.ts";
+import { ItemTrait } from "@item/base/data/system.ts";
 import { TokenAuraData } from "@scene/token-document/aura/index.ts";
 import type { EffectAreaSquare } from "../../effect-area-square.ts";
 import type { TokenPF2e } from "../index.ts";
+import { IDestroyOptions } from "pixi.js";
 /** Visual rendering of auras emanated by a token's actor */
 declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     #private;
@@ -14,29 +15,30 @@ declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     /** The aura radius from the center in pixels */
     radiusPixels: number;
     /** Traits associated with this aura: used to configure collision detection */
-    traits: Set<ItemTrait>;
+    traits: ItemTrait[];
     /** Border, highlight, and texture data */
     appearance: AuraAppearanceData;
     /** Standard line thickness for circle shape and label markers */
     static readonly LINE_THICKNESS = 3;
     border: import("pixi.js").Graphics;
-    texture: PIXI.Texture | null;
+    textureContainer: PIXI.Graphics | null;
     constructor(params: AuraRendererParams);
     get bounds(): PIXI.Rectangle;
     /** ID of `GridHighlight` container for this aura's token */
     get highlightLayer(): GridHighlight | null;
     /** The squares covered by this aura */
     get squares(): EffectAreaSquare[];
-    /** Whether this aura's parent token is in an active encounter */
-    get inEncounter(): boolean;
     /** Draw the aura's border and texture */
     draw(showBorder: boolean): Promise<void>;
+    /** Reposition this aura's texture after the token has moved. */
+    repositionTexture(): void;
     /** Highlight the affected grid squares of this aura and indicate the radius */
     highlight(): void;
+    destroy(options?: boolean | IDestroyOptions): void;
 }
 interface AuraRendererParams extends Omit<AuraData, "effects" | "traits"> {
     slug: string;
     token: TokenPF2e;
-    traits: Set<ItemTrait>;
+    traits: ItemTrait[];
 }
 export { AuraRenderer };

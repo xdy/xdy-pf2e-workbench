@@ -7,8 +7,7 @@ type RuleElementSource = {
     label?: unknown;
     slug?: unknown;
     predicate?: unknown;
-    /** The place in order of application (ascending), among an actor's list of rule elements */
-    priority?: number;
+    priority?: unknown;
     ignored?: unknown;
     requiresInvestment?: unknown;
     requiresEquipped?: unknown;
@@ -31,7 +30,7 @@ type RuleElementSchema = {
     /** A label for use by any rule element for display in an interface */
     label: StringField<string, string, true, false, false>;
     /** The place in order of application (ascending), among an actor's list of rule elements */
-    priority: NumberField<number, number, false, false, true>;
+    priority: NumberField<number, number, true, false, true>;
     /** A test of whether the rules element is to be applied */
     predicate: PredicateField;
     /** Whether the rule element is ignored and deactivated */
@@ -42,6 +41,7 @@ type RuleElementSchema = {
     requiresInvestment: BooleanField<boolean, boolean, false, true, false>;
 };
 declare class ResolvableValueField<TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean = false> extends foundry.data.fields.DataField<RuleValue, RuleValue, TRequired, TNullable, THasInitial> {
+    #private;
     protected _validateType(value: unknown): boolean;
     /** No casting is applied to this value */
     protected _cast(value: unknown): unknown;

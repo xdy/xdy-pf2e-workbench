@@ -41,6 +41,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     const folderName = `Level ${newLevel}`;
     const folder =
         getFolderInFolder(folderName, rootFolder?.name as string) ??
+        // @ts-ignore
         (await Folder.create({
             name: folderName,
             type: "Actor",

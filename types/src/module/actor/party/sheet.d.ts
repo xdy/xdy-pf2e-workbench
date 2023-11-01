@@ -6,7 +6,7 @@ import { HitPointsSummary } from "@actor/base.ts";
 import { ActorSheetPF2e } from "@actor/sheet/base.ts";
 import { ActorSheetDataPF2e, ActorSheetRenderOptionsPF2e } from "@actor/sheet/data-types.ts";
 import { ItemPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { Bulk } from "@item/physical/index.ts";
 import { ValueAndMax, ZeroToFour } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";

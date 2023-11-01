@@ -1,5 +1,5 @@
 import { AttributeString } from "@actor/types.ts";
-import { ItemFlagsPF2e } from "@item/data/base.ts";
+import { ItemFlagsPF2e } from "@item/base/data/system.ts";
 import { BasePhysicalItemSource, Investable, ItemMaterialData, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, UsageDetails } from "@item/physical/index.ts";
 import { OneToFour, ZeroToFour, ZeroToThree } from "@module/data.ts";
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
@@ -18,6 +18,8 @@ type WeaponFlags = ItemFlagsPF2e & {
          * modifier, and damage will also not be recalculated.
          */
         fixedAttack?: number | null;
+        /** A logging of this weapon's attack item bonus, whatever the source (rune, bomb innate item bonus, etc.) */
+        attackItemBonus: number;
     };
 };
 interface WeaponTraitsSource extends PhysicalItemTraits<WeaponTrait> {
@@ -91,11 +93,8 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
         canBeAmmo?: boolean;
         value: "worngloves" | "held-in-one-hand" | "held-in-one-plus-hands" | "held-in-two-hands";
     };
-    MAP: {
-        value: string;
-    };
     /** An optional override of the default ability modifier used in attack rolls with this weapon  */
-    ability?: AttributeString | null;
+    attribute?: AttributeString | null;
     /** A combination weapon's melee usage */
     meleeUsage?: ComboWeaponMeleeUsage;
     /** Whether the weapon is a "specific magic weapon" */
@@ -111,6 +110,8 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     propertyRune3: WeaponPropertyRuneSlot;
     propertyRune4: WeaponPropertyRuneSlot;
     material: WeaponMaterialData;
+    /** Whether this is an unarmed attack that is a grasping appendage, requiring a free hand for use */
+    graspingAppendage?: boolean;
     property1: {
         value: string;
         dice: number;
@@ -139,6 +140,7 @@ interface WeaponSystemData extends Omit<WeaponSystemSource, "hp" | "identificati
     };
     runes: WeaponRuneData;
     usage: WeaponUsageDetails;
+    graspingAppendage: boolean;
     meleeUsage?: Required<ComboWeaponMeleeUsage>;
 }
 type WeaponUsageDetails = UsageDetails & Required<WeaponSystemSource["usage"]>;

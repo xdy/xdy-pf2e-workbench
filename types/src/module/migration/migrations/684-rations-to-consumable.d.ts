@@ -1,5 +1,5 @@
 import { ActorSourcePF2e } from "@actor/data/index.ts";
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /** Convert rations to a consumable with seven uses */
 export declare class Migration684RationsToConsumable extends MigrationBase {

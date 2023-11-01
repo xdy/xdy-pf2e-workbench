@@ -1,7 +1,7 @@
 import { ActorAttributes, ActorAttributesSource, ActorDetailsSource, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsSource, BaseActorSourcePF2e } from "@actor/data/base.ts";
 import { ImmunitySource } from "@actor/data/iwr.ts";
 import type { ActorSizePF2e } from "@actor/data/size.ts";
-import { Rarity, Size } from "@module/data.ts";
+import { PublicationData, Rarity, Size } from "@module/data.ts";
 import type { ArmorClassTraceData, StatisticTraceData } from "@system/statistic/index.ts";
 import { VehicleTrait } from "./types.ts";
 /** The stored source data of a vehicle actor */
@@ -39,6 +39,8 @@ interface VehicleDetailsSource extends ActorDetailsSource {
     pilotingCheck: string;
     AC: number;
     speed: number;
+    /** Information concerning the publication from which this actor originates */
+    publication: PublicationData;
 }
 interface VehicleTraitsSource extends ActorTraitsSource<VehicleTrait> {
     rarity: Rarity;

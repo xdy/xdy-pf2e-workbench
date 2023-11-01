@@ -1,4 +1,4 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /** Convert `LinkedProficiency` rules elements to `MartialProficiency` ones, apply to gunslinger class */
 export declare class Migration704MartialProficiencyRE extends MigrationBase {
