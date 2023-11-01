@@ -1,3 +1,10 @@
+## [5.25.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.2...v5.25.3) (2023-11-01)
+
+
+### Bug Fixes
+
+* The Aura for Dirge of Doom should have includesSelf: false ([a1cbc15](https://github.com/xdy/xdy-pf2e-workbench/commit/a1cbc156970e1418a49dc8396e27279b17da7ec7))
+
 ## [5.25.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.1...v5.25.2) (2023-10-31)
 
 
