@@ -1,3 +1,10 @@
+## [5.25.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.3...v5.25.4) (2023-11-01)
+
+
+### Bug Fixes
+
+* Remove AABP on the request of @CrackJackFlood ([840e7e4](https://github.com/xdy/xdy-pf2e-workbench/commit/840e7e4e9516d456e89ea19b501bb642817cbc13))
+
 ## [5.25.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.2...v5.25.3) (2023-11-01)
 
 
