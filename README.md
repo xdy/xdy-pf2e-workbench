@@ -172,8 +172,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Effect: Minium Frightened that you can give to targets to not let the automated frightened removal reduce
           frightened below 1.
         * Effect that you can use to change Focus Point Maximum of a character
-        * Effects that you can use to implement ABP, "Another Alternative Bonus Progression" (by @crackjackflood) and an
-          accompanying 'Feat' to add it to a character.
     * The compendium "PF2e Workbench Macros (xdy-pf2e-workbench-macros)" contains a few macros you might find useful.
         * 'Basic Action Macros' shows a dialog with a button for most macros, with bonus and whether you're the best in
           the party at that action (a setting to turn this off exists). (
@@ -200,8 +198,10 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Customizable Refocus. This macro works the way it did before the Pathfinder Remaster changes.
       Like the other macros in this compendium it will most likely never be updated. If it does get updated you will
       need to reimport it manually.
-    * Customizable isSpellAvailable. This macro can be used to check if a spell is available for an actor. See https://discord.com/channels/880968862240239708/880969304365994034/1161188968424018020
-    * Customizable getAllFromAllowedPacks. This macro can be used to get all items from allowed packs. See https://discord.com/channels/880968862240239708/1116034857907273832/1164695510158946305
+    * Customizable isSpellAvailable. This macro can be used to check if a spell is available for an actor.
+      See https://discord.com/channels/880968862240239708/880969304365994034/1161188968424018020
+    * Customizable getAllFromAllowedPacks. This macro can be used to get all items from allowed packs.
+      See https://discord.com/channels/880968862240239708/1116034857907273832/1164695510158946305
 * There are a few more compendiums included with this module with assorted utility macros and items that do not
   need to be imported, as indicated by their labels all ending with 'do not import'
 
@@ -217,8 +217,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
     * Workbench Flat Check Notes. Use https://foundryvtt.com/packages/pf2-flat-check
       or https://foundryvtt.com/packages/pf2e-flatcheck-helper instead.
-    * Workbench ABP. Use https://github.com/reonZ/pf2e-arp or the "Effect: Another Alternate Bonus Progression" from
-      the "PF2e Workbench Items" compendium instead.
+    * Workbench ABP. Use https://github.com/reonZ/pf2e-arp instead.
     * Option to change the max number of hero points a character can have. (It was long broken, instead add an
       ActiveEffectLike RE that overrides system.resources.heroPoints.max to whatever value you want to use.)
     * Option to apply Encumbered condition automatically based on current bulk when bulk changes as it's now part of the
@@ -232,6 +231,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       focus at once for the selected tokens.
     * "Aura: Bless" and "Aura: Protective Ward" as they are now part of the pf2e system.
     * isSpellAvaiable was removed from the api and added to the "PF2e Workbench Customizable Macros" compendium.
+    * Effects that you can use to implement ABP, "Another Alternative Bonus Progression" (by @crackjackflood) and an
+      accompanying 'Feat' to add it to a character.
 
 ## Installation
 
