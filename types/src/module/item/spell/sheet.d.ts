@@ -45,8 +45,6 @@ interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
 }
 interface SpellSheetOverlayData {
     id: string | null;
-    /** Base path to the property that includes its siblings, dot delimited */
-    collectionPath: string;
     /** Base path to the property, dot delimited */
     base: string;
     /** Base path to the spell override data, dot delimited. Currently this is the same as base */

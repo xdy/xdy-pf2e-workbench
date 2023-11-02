@@ -1,17 +1,17 @@
 import { PredicateField, SlugField } from "@system/schema-data-fields.ts";
 import type { BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 type RuleElementSource = {
-    key?: unknown;
-    data?: unknown;
-    value?: unknown;
-    label?: unknown;
-    slug?: unknown;
-    predicate?: unknown;
-    priority?: unknown;
-    ignored?: unknown;
-    requiresInvestment?: unknown;
-    requiresEquipped?: unknown;
-    removeUponCreate?: unknown;
+    key?: JSONValue;
+    data?: JSONValue;
+    value?: JSONValue;
+    label?: JSONValue;
+    slug?: JSONValue;
+    predicate?: JSONValue;
+    priority?: JSONValue;
+    ignored?: JSONValue;
+    requiresInvestment?: JSONValue;
+    requiresEquipped?: JSONValue;
+    removeUponCreate?: JSONValue;
 };
 type RuleValue = string | number | boolean | object | BracketedValue | null;
 interface Bracket<T extends object | number | string> {

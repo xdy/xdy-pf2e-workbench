@@ -8,7 +8,7 @@ declare class AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSc
     applications: number;
     constructor(source: AdjustModifierSource, options: RuleElementOptions);
     static defineSchema(): AdjustModifierSchema;
-    static validateJoint(data: Record<string, unknown>): void;
+    static validateJoint(data: SourceFromSchema<AdjustModifierSchema>): void;
     /** Instead of applying the change directly to a property path, defer it to a synthetic */
     beforePrepareData(): void;
 }

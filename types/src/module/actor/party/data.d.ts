@@ -44,5 +44,5 @@ interface PartyDetails extends Omit<PartyDetailsSource, "alliance" | "level">, A
 }
 type PartyCampaignSource = {
     type: string;
-} & Record<string, unknown>;
+} & Record<string, JSONValue>;
 export type { MemberData, PartyCampaignSource, PartySource, PartySystemData };
