@@ -302,16 +302,16 @@
         "yes": "Yes, for all",
         "yesForCharacters": "Yes, for characters+familiars",
         "yesForNpcs": "Yes, for npcs",
-        "hint": "Setting to automatically kill on taking Massive Damage.",
-        "name": "... but automatically kill on taking Massive Damage.",
+        "hint": "(Deprecated) Setting to automatically kill on taking Massive Damage.",
+        "name": "... but automatically kill on taking Massive Damage. (Deprecated)",
         "no": "No"
       },
       "autoKillIfDamageHasDeathTrait": {
         "yes": "Yes, for all",
         "yesForCharacters": "Yes, for characters+familiars",
         "yesForNpcs": "Yes, for npcs",
-        "hint": "Setting to automatically kill on taking sufficient damage from a source with the Death trait.",
-        "name": "... but automatically kill on taking sufficient damage from a Death effect.",
+        "hint": "(Deprecated) Setting to automatically kill on taking sufficient damage from a source with the Death trait.",
+        "name": "... but automatically kill on taking sufficient damage from a Death effect. (Deprecated)",
         "no": "No"
       },
       "autoGainDyingIgnoresTargeting": {

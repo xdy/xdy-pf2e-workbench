@@ -89,7 +89,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to drop all held items on becoming unconscious.
     * Option to automate the results of the dying recovery roll button being clicked. (I.e. it does not automatically
       roll to try recover the dying character.)
-    * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384)
 
 * Client Automation section
     * Optional settings to (if the GM allows it) automatically roll damage on a hit for strikes and/or spell attacks.
@@ -211,7 +210,9 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       where prohibited. Ei saa peittää. Do not taunt happy fun ball: https://www.youtube.com/watch?v=GmqeZl8OI2M)
 
 * Deprecated features (will be removed eventually):
-    * None currently.
+    * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384) as well as automatic
+      handling of [Death effects](https://2e.aonprd.com/Rules.aspx?ID=383) will be removed from the Workbench once
+      they're handled by the pf2e system.
 
 * Recently removed features:
     * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
