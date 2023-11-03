@@ -1,4 +1,5 @@
 // This script has been dreadfully hacked from the original at https://github.com/CarlosFdez/pf2e-persistent-damage/blob/master/build-packs.ts and is, like the original, provided under the [ISC license](https://www.isc.org/licenses/)
+// TODO Handle macros by creating jsons in this script, then calling fvtt pack on the jsons, then deleting the jsons
 
 import fs from "fs-extra";
 import path from "path";
@@ -184,7 +185,7 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
 }
 
 function buildCustomizableMacrosPack() {
-    const folderPath = "./packs/data/xdy-customizable-macros";
+    const folderPath = "./src/packs/data/xdy-customizable-macros";
     const lines: string[] = [];
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
@@ -211,13 +212,13 @@ function buildCustomizableMacrosPack() {
             console.error(`Failed to read JSON file ${filePath}`, err);
         }
     }
-    const file1 = path.resolve(outDir, folderPath + ".db");
+    const file1 = path.resolve(outDir, "./packs/data/xdy-customizable-macros" + ".db");
     // console.log(file1);
     fs.writeFileSync(file1, lines.join("\n"), "utf8");
 }
 
 function buildInternalUtilityMacrosPack() {
-    const folderPath = "./packs/data/xdy-internal-utility-macros";
+    const folderPath = "./src/packs/data/xdy-internal-utility-macros";
     const lines: string[] = [];
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
@@ -244,7 +245,7 @@ function buildInternalUtilityMacrosPack() {
             console.error(`Failed to read JSON file ${filePath}`, err);
         }
     }
-    const file1 = path.resolve(outDir, folderPath + ".db");
+    const file1 = path.resolve(outDir, "./packs/data/xdy-internal-utility-macros" + ".db");
     fs.writeFileSync(file1, lines.join("\n"), "utf8");
 }
 
@@ -254,5 +255,4 @@ buildAsymonousPack();
 fs.rmSync("./dist", { recursive: true, force: true });
 fs.mkdirsSync(path.resolve("dist/packs"));
 fs.copySync(outDir, "./dist");
-fs.copySync("./packs/leveldb", "./dist/packs");
 fs.rmSync(outDir, { recursive: true, force: true });

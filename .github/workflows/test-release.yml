@@ -7,57 +7,18 @@ on:
     branches: [ main ]
 
 jobs:
-  #    test:
-  #        if: github.repository == 'xdy/xdy-pf2e-workbench'
-  #        runs-on: ubuntu-latest
-  #        strategy:
-  #            matrix:
-  #                # Run the steps below with the following versions of Node.js
-  #                node-version: [ 16.x ]
-  #        steps:
-  #            # Fetch the latest commit
-  #            -   name: Checkout
-  #                uses: actions/checkout@v4
-  #                with:
-  #                    submodules: 'true'
-  #
-  #            # Setup Node.js using the appropriate version
-  #            -   name: Use Node.js ${{ matrix.node-version }}
-  #                uses: actions/setup-node@v3.5.1
-  #                with:
-  #                    node-version: ${{ matrix.node-version }}
-  #                    cache: 'npm'
-  #
-  #            # Install package dependencies
-  #            -   name: Install
-  #                run: npm install
-  #
-  #            # Lint the code
-  #            -   name: Lint
-  #                run: npm run lint
-  #
-  #            # Building is the only test right now (mainly tests if dependabot actually can update)
-  #            -   name: Build
-  #                run: npm run build
-  #
-  #            # Run tests
-  #            #- name: Test
-  #            #run: npm test
-  #
-  #            #
   release:
     # Only release on push to main on xdy/xdy-pf2e-workbench
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
     runs-on: ubuntu-latest
-    # Waits for test jobs for each Node.js version to complete
-    #        needs: [ test ]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: 'true'
 
-        # Not sure this is the right way to do it
+        # Not sure this is the right way to do it, but, eh, it works.
       - name: Pull & update submodules recursively
         run: |
           git submodule update --init --recursive
@@ -76,6 +37,10 @@ jobs:
       - name: Install
         run: npm install
 
+      - name: install fvtt cli
+        id: fvtt-install
+        run: npm install -g @foundryvtt/foundryvtt-cli
+
       - name: Build packs
         run: npm run build:packs
 
@@ -91,17 +56,6 @@ jobs:
       - name: Get tag
         run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
-      # Publish the release to FoundryVTT's package repository only if push on main
-#      - name: Publish to Foundry Admin
-#        if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
-#        uses: Varriount/fvtt-autopublish@v1.0.9
-#        with:
-#          username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
-#          password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
-#          module-id: 1702
-#          manifest-url: https://github.com/xdy/xdy-pf2e-workbench/releases/download/${{ env.WORKBENCH_VERSION }}/module.json
-#          manifest-file: module.json
-#
       - name: Install playwright
         run: npx playwright install
 
