@@ -1,3 +1,10 @@
+## [5.25.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.5...v5.25.6) (2023-11-03)
+
+
+### Bug Fixes
+
+* Removed last remnant of AABP. ([6f5ec65](https://github.com/xdy/xdy-pf2e-workbench/commit/6f5ec65a543c1bdacd2982ba754877799f515ed9))
+
 ## [5.25.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.4...v5.25.5) (2023-11-03)
 
 
