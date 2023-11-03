@@ -584,22 +584,6 @@
         "label": "Paramétrer les règles maison",
         "name": "(Expérimental) Réglages des règles maison"
       },
-      "autoKillIfMassiveDamage": {
-        "yes": "Oui, pour tous",
-        "yesForCharacters": "Oui, pour personnages+familiers",
-        "yesForNpcs": "Oui, pour PNJ",
-        "hint": "Réglages pour tuer automatiquement en subissant des dégâts massifs.",
-        "name": "...mais tue automatiquement en subissant des dégâts massifs.",
-        "no": "Non"
-      },
-      "autoKillIfDamageHasDeathTrait": {
-        "yes": "Oui, pour tous",
-        "yesForCharacters": "Oui, pour les personnages/familiers",
-        "yesForNpcs": "Oui, pour les Pnj",
-        "no": "Non",
-        "hint": "Réglage pour appliquer automatiquement la mort en subissant suffisamment de dégâts d'une source avec le trait mort.",
-        "name": "... mais tue automatiquement en subissant suffisamment de dégâts d'un effet de mort."
-      },
       "autoGainDyingIgnoresTargeting": {
         "name": "... que les dégâts aient ou non ciblé le jeton choisi.",
         "hint": "Permet d'appliquer les réglages ci-dessus, que la cible corresponde ou non au jeton sélectionné. (Surtout utile si l'on n'utilise pas le ciblage/l'automatisation)."

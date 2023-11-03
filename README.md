@@ -210,9 +210,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       where prohibited. Ei saa peittää. Do not taunt happy fun ball: https://www.youtube.com/watch?v=GmqeZl8OI2M)
 
 * Deprecated features (will be removed eventually):
-    * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384) as well as automatic
-      handling of [Death effects](https://2e.aonprd.com/Rules.aspx?ID=383) will be removed from the Workbench once
-      they're handled by the pf2e system.
+  *  None currently.
 
 * Recently removed features:
     * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
@@ -234,6 +232,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * isSpellAvaiable was removed from the api and added to the "PF2e Workbench Customizable Macros" compendium.
     * Effects that you can use to implement ABP, "Another Alternative Bonus Progression" (by @crackjackflood) and an
       accompanying 'Feat' to add it to a character.
+    * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384) as well as automatic
+      handling of [Death effects](https://2e.aonprd.com/Rules.aspx?ID=383) as they're handled by the pf2e system.
 
 ## Installation
 

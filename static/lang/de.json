@@ -600,14 +600,6 @@
         "hint": "(Experimentell) Aktiviere und konfiguriere verschiedene Hausregeln",
         "name": "(Experimentell) Hausregel Einstellungen"
       },
-      "autoKillIfMassiveDamage": {
-        "yes": "Ja, für alle",
-        "yesForCharacters": "Ja, für Charaktere+Vertraute",
-        "yesForNpcs": "Ja, für NSC",
-        "no": "Nein",
-        "hint": "Einstellung für das automatische Töten beim erhalten von massiven Schaden.",
-        "name": "Automatisches Töten beim erhalten von massiven Schaden."
-      },
       "housepatcher": {
         "name": "(SEHR EXPERIMENTELL) Hausregelpatches (Patches in Hausregeln). Benötigt eine Aktualisierung (F5) nach der Änderung.",
         "notification": "Hauspatcher: Wende {count} Hausregeln auf Gegenstände in den Systemkompendien an.",
@@ -617,14 +609,6 @@
         "bonusTag": "Niedriger Neuwurf + 10",
         "name": "Keeley's Heldenpunkteregel",
         "hint": "Eine Hausregel favorisiert jmd. bestimmten im Paizo-Entwicklungsteam. Falls das natürliche Ergebnis eines Heldenpunkt Neuwurfs 10 oder niedriger ist, dann füge ein Bonus von 10 nach dem Wurf hinzu."
-      },
-      "autoKillIfDamageHasDeathTrait": {
-        "yesForCharacters": "Ja, für Charaktere + Vertraute",
-        "yesForNpcs": "Ja, für NSC",
-        "yes": "Ja, für alle",
-        "hint": "Einstellung zur automatischen Tötung, wenn man ausreichend Schaden von einer Quelle mit der \"Tod\" Eigenschaft nimmt.",
-        "name": "... automatischee Tötung, wenn man ausreichend Schaden von einer Quelle mit der \"Tod\" Eigenschaft nimmt.",
-        "no": "Nein"
       },
       "autoGainDyingIgnoresTargeting": {
         "name": "... abhängig davon, der Schaden für das ausgewählte Token ist oder nicht.",

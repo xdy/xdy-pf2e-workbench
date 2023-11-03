@@ -179,42 +179,6 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                     ),
                 },
             },
-            autoKillIfMassiveDamage: {
-                name: `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.name`,
-                hint: `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.hint`,
-                scope: "world",
-                config: true,
-                default: "no",
-                type: String,
-                choices: {
-                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.no`),
-                    yes: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yes`),
-                    yesForNpcs: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yesForNpcs`),
-                    yesForCharacters: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yesForCharacters`,
-                    ),
-                },
-                onChange: () => updateHooks(),
-                requiresReload: true,
-            },
-            autoKillIfDamageHasDeathTrait: {
-                name: `${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.name`,
-                hint: `${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.hint`,
-                scope: "world",
-                config: true,
-                default: "no",
-                type: String,
-                choices: {
-                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.no`),
-                    yes: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.yes`),
-                    yesForNpcs: game.i18n.localize(`${MODULENAME}.SETTINGS.autoKillIfDamageHasDeathTrait.yesForNpcs`),
-                    yesForCharacters: game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.autoKillIfMassiveDamage.yesForCharacters`,
-                    ),
-                },
-                onChange: () => updateHooks(),
-                requiresReload: true,
-            },
             autoGainDyingIgnoresTargeting: {
                 name: `${MODULENAME}.SETTINGS.autoGainDyingIgnoresTargeting.name`,
                 hint: `${MODULENAME}.SETTINGS.autoGainDyingIgnoresTargeting.hint`,

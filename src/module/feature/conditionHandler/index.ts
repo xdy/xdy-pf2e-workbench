@@ -99,46 +99,6 @@ function filterMessagesByCriticalSuccess(messages: ChatMessagePF2e[]): ChatMessa
     return messages.filter((message) => message.flags.pf2e.context?.outcome === "criticalSuccess");
 }
 
-export function checkIfLatestDamageMessageIsMassiveDamage(actor: ActorPF2e, option: string): boolean {
-    const hp = actor.attributes.hp;
-    if (
-        hp &&
-        hp.value &&
-        game.messages.contents.length > 0 &&
-        !option.startsWith("no") &&
-        (option === "yes" || (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true))
-    ) {
-        const relevant = getRelevantMessages(actor);
-        const isDamageRoll = filterMessagesByContextType(relevant, "damage-roll");
-        const isDamagingStrike = filterMessagesByStrikeDamaging(isDamageRoll);
-        const attackerIsEnemy = filterMessagesByActorEnemy(isDamagingStrike);
-        const criticalSuccessMessages = filterMessagesByCriticalSuccess(attackerIsEnemy);
-        const lastCriticalSuccessMessage = criticalSuccessMessages[criticalSuccessMessages.length - 1];
-        const damageTotal = lastCriticalSuccessMessage?.rolls?.[0]?.total ?? 0;
-        return damageTotal >= hp.value * 2;
-    }
-    return false;
-}
-
-export function checkIfLatestDamageMessageHasDeathTrait(actor: ActorPF2e, option: string): boolean {
-    const hp = actor.attributes.hp;
-    if (
-        hp &&
-        hp.value &&
-        game.messages.contents.length > 0 &&
-        !option.startsWith("no") &&
-        (option === "yes" || (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true))
-    ) {
-        const relevant = getRelevantMessages(actor);
-        const damageRollMessages = filterMessagesByContextType(relevant, "damage-roll");
-        const lastDamageRollMessage = damageRollMessages[damageRollMessages.length - 1];
-        const isDeathTrait = lastDamageRollMessage?.item?.system?.traits?.value?.includes("death") ?? false;
-        const damageTotal = lastDamageRollMessage?.rolls?.[0]?.total ?? 0;
-        return isDeathTrait && damageTotal >= hp.value;
-    }
-    return false;
-}
-
 export function handleOrcFerocity(
     actor: ActorPF2e,
     update: Record<string, string>,
@@ -278,14 +238,6 @@ export async function handleDyingOnZeroHP(
 
     if (shouldIncreaseWounded) {
         await actor.increaseCondition("wounded");
-    }
-
-    const optionMassive = String(game.settings.get(MODULENAME, "autoKillIfMassiveDamage"));
-    const isMassive = checkIfLatestDamageMessageIsMassiveDamage(actor, optionMassive);
-    const optionDeathTrait = String(game.settings.get(MODULENAME, "autoKillIfDamageHasDeathTrait"));
-    const isDeathDamage = checkIfLatestDamageMessageHasDeathTrait(actor, optionDeathTrait);
-    if (isMassive || isDeathDamage) {
-        dyingCounter = actor.attributes.dying.max;
     }
 
     if (

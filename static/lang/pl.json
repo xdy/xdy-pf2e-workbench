@@ -349,14 +349,6 @@
         "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
         "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
       },
-      "autoKillIfDamageHasDeathTrait": {
-        "no": "Nie",
-        "hint": "Ustawienie automatycznego zabijania po otrzymaniu wystarczających obrażeń od źródła z cechą Śmierć.",
-        "name": "... ale automatycznie zabija po otrzymaniu wystarczających obrażeń od efektu Śmierci.",
-        "yes": "Tak, dla wszystkich",
-        "yesForCharacters": "Tak, dla postaci + towarzyszy",
-        "yesForNpcs": "Tak, dla npc"
-      },
       "autoGainDyingIgnoresTargeting": {
         "name": "... niezależnie od tego, czy obrażenia zostały wycelowane w wybrany token.",
         "hint": "Włącz, aby zastosować powyższe ustawienia niezależnie od tego, czy cel pasuje do wybranego tokena. (Najbardziej przydatne, jeśli nie używasz targetowania/automatyzacji)"
@@ -401,14 +393,6 @@
         "name": "Automatycznie zwijaj zawartość karty czatu elementu.",
         "noCollapse": "Nigdy się nie zwijaj",
         "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
-      },
-      "autoKillIfMassiveDamage": {
-        "name": "... ale automatycznie zabija po otrzymaniu Masywnych Obrażeń.",
-        "yes": "Tak, dla wszystkich",
-        "yesForCharacters": "Tak, dla postaci + towarzyszy",
-        "yesForNpcs": "Tak, dla npc",
-        "hint": "Ustawienie automatycznego zabijania po otrzymaniu ogromnych obrażeń.",
-        "no": "Nie"
       },
       "handleDyingRecoveryRoll": {
         "hint": "Ustawienie klienta, aby automatycznie obsługiwać rzuty odzyskiwania po kliknięciu przycisku odzyskiwania.",
