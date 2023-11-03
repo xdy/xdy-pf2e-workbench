@@ -156,11 +156,8 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
                                 ? ["character", "familiar"].includes(actor.type)
                                 : true
                         ) {
-                            if (dyingOption?.startsWith("addWoundedLevel")) {
-                                dyingCounter = dyingCounter + (actor.getCondition("wounded")?.value ?? 0) + 1 ?? 0;
-                            } else {
-                                dyingCounter = dyingCounter + 1;
-                            }
+                            dyingCounter = dyingCounter + 1;
+
                             if (wasCritical) {
                                 dyingCounter = dyingCounter + 1;
                             }
