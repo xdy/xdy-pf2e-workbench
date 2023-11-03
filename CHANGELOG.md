@@ -1,3 +1,10 @@
+# [5.26.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.6...v5.26.0) (2023-11-03)
+
+
+### Features
+
+* Remove support for massive damage and the Death trait as both are now part of the pf2e system. Sets minimum pf2e version to 5.8.2 ([7fd00c1](https://github.com/xdy/xdy-pf2e-workbench/commit/7fd00c18d9141f445d008e259bcf60e84933802c))
+
 ## [5.25.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.5...v5.25.6) (2023-11-03)
 
 
