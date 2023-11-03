@@ -1,3 +1,10 @@
+## [5.25.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.4...v5.25.5) (2023-11-03)
+
+
+### Bug Fixes
+
+* Revert latest attempt at handling critical hit for dying/wounded option. ([25fba33](https://github.com/xdy/xdy-pf2e-workbench/commit/25fba3365cd98269b86c7561c9b082560e031d75))
+
 ## [5.25.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.3...v5.25.4) (2023-11-01)
 
 
