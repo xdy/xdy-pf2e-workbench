@@ -1,3 +1,10 @@
+# [5.27.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.26.0...v5.27.0) (2023-11-04)
+
+
+### Features
+
+* Added several Adjustments for making undead, courtesy of @ElvisLiving (everything but the zombie) and @Tikael (zombie). ([ef5f6fe](https://github.com/xdy/xdy-pf2e-workbench/commit/ef5f6feb7ebb63372d65edc03737f513e3cb2d8e))
+
 # [5.26.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.25.6...v5.26.0) (2023-11-03)
 
 
