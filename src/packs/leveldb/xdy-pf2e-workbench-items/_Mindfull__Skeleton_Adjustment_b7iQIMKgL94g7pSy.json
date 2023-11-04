@@ -1,0 +1,126 @@
+{
+  "name": "(Mindfull) Skeleton Adjustment",
+  "type": "action",
+  "effects": [],
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>Most skeletons are mindless and follow either the basic instincts they had in life or orders given by their creator.</p>\n<ul>\n<li>Add the skeleton, mindless  and undead traits, and zombie traits.</li>\n<li>Increase the creature's HP based on its level.</li>\n<li>Add the following immunities: death effects, disease, mental, @Compendium[pf2e.conditionitems.Paralyzed]{Paralyzed}, poison, @Compendium[pf2e.conditionitems.Unconscious]{Unconscious}. </li>\n<li>Add the following resistances, with a value based on its level: cold, electricity, fire, piercing, slashing.</li>\n<li>Add the following abilities.</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{Negative Healing}</li>\n</ul>\n</ul>"
+    },
+    "rules": [
+      {
+        "key": "GrantItem",
+        "allowDuplicate": false,
+        "uuid": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
+      },
+      {
+        "key": "ActorTraits",
+        "add": [
+          "undead",
+          "skeleton"
+        ]
+      },
+      {
+        "key": "GrantItem",
+        "allowDuplicate": false,
+        "uuid": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.TTCw5NusiSSkJU1x"
+      },
+      {
+        "key": "Immunity",
+        "type": [
+          "death-effects",
+          "disease",
+          "paralyzed",
+          "poison",
+          "unconscious"
+        ]
+      },
+      {
+        "key": "Resistance",
+        "type": [
+          "cold",
+          "electricity",
+          "fire",
+          "piercing",
+          "slashing"
+        ],
+        "value": "ternary( gte(@actor.level,11), 10, ternary( gte(@actor.level,6), 5, ternary( gte(@actor.level,2), 3, ternary( gte(@actor.level,0), 2, 2))))"
+      },
+      {
+        "key": "FlatModifier",
+        "selector": "hp",
+        "value": "ternary( gte(@actor.level,11), -40, ternary( gte(@actor.level,6), -20, ternary( gte(@actor.level,2), -10, ternary( gte(@actor.level,0), -4, -2))))"
+      },
+      {
+        "key": "ActiveEffectLike",
+        "mode": "add",
+        "path": "system.traits.languages.value",
+        "value": "necril"
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.879,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.878,
+        "foundry": "11.313",
+        "system": "5.8.0"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": []
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "actionType": {
+      "value": "passive"
+    },
+    "category": "offensive",
+    "actions": {
+      "value": null
+    },
+    "requirements": {
+      "value": ""
+    },
+    "trigger": {
+      "value": ""
+    },
+    "deathNote": false
+  },
+  "img": "systems/pf2e/icons/default-icons/action.svg",
+  "folder": "gb7DDfzvB7w2cK7C",
+  "ownership": {
+    "default": 0,
+    "HShcH53gfTrrSBR1": 3
+  },
+  "flags": {
+    "core": {},
+    "exportSource": {
+      "world": "pf2e-test",
+      "system": "pf2e",
+      "coreVersion": "11.314",
+      "systemVersion": "5.8.2"
+    },
+    "scene-packer": {
+      "hash": "4ea58cf270aa90189260c2ee8f012d90af3d4331",
+      "sourceId": "Item.VZcsyZCPok9qL04y"
+    }
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
+    "createdTime": 1682735407923,
+    "modifiedTime": 1699130397152,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
+  },
+  "_id": "b7iQIMKgL94g7pSy",
+  "sort": 500000,
+  "_key": "!items!b7iQIMKgL94g7pSy"
+}

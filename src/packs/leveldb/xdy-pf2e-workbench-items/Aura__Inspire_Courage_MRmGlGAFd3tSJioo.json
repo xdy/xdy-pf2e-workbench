@@ -4,8 +4,8 @@
   "type": "effect",
   "img": "systems/pf2e/icons/spells/inspire-courage.webp",
   "effects": [],
-  "folder": null,
-  "sort": 1500000,
+  "folder": "YTpgfVBBSf6gGvub",
+  "sort": 400000,
   "flags": {
     "core": {
       "sourceId": "Item.QRgj7jrEnit1ROJw"
@@ -100,11 +100,11 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.7.3",
-    "coreVersion": "11.313",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
     "createdTime": 1665671947293,
-    "modifiedTime": 1697961267179,
-    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+    "modifiedTime": 1699130355104,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
   },
   "_key": "!items!MRmGlGAFd3tSJioo"
 }

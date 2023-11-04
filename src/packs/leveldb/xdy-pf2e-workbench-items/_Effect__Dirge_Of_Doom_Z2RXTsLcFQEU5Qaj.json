@@ -4,8 +4,8 @@
   "type": "effect",
   "img": "systems/pf2e/icons/spells/dirge-of-doom.webp",
   "effects": [],
-  "folder": null,
-  "sort": 1800000,
+  "folder": "lM5gCDa9eEdyImSn",
+  "sort": 100000,
   "flags": {
     "core": {
       "sourceId": "Item.7rD5LtJVU6ZVEzqB"
@@ -77,11 +77,11 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.7.4",
-    "coreVersion": "11.313",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
     "createdTime": 1665671947295,
-    "modifiedTime": 1698777398352,
-    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+    "modifiedTime": 1699130349790,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
   },
   "_key": "!items!Z2RXTsLcFQEU5Qaj"
 }

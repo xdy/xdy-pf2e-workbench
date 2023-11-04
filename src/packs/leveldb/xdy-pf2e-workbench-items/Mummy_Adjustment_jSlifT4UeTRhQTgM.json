@@ -1,0 +1,116 @@
+{
+  "name": "Mummy Adjustment",
+  "type": "action",
+  "effects": [],
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>All types of creatures can have their corpses preserved and rise as mummies.</p>\n<ul>\n<li>Add the mummy and undead traits.</li>\n<li>Add the Necril language.</li>\n<li>Add the following immunities: death effects, disease, @Compendium[pf2e.conditionitems.Paralyzed]{Paralyzed}, poison, @Compendium[pf2e.conditionitems.Unconscious]{Unconscious}.</li>\n<li>Add weakness to fire, with a value depending on the creature's level.</li>\n<li style=\"font-weight:bold\">Add the following abilities.</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{Negative Healing}</li>\n<li><strong>MANUALLY ADD: </strong>Lesser Despair (aura, divine, emotion, enchantment, fear, mental) 30 feet. Living creatures of the mummy creature's level or lower are frightened 1 while in its despair aura. They can't naturally recover from this fear while in the area but recover instantly once they leave.</li>\n</ul>\n</ul>"
+    },
+    "rules": [
+      {
+        "key": "GrantItem",
+        "allowDuplicate": false,
+        "uuid": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
+      },
+      {
+        "key": "ActorTraits",
+        "add": [
+          "mummy, undead"
+        ]
+      },
+      {
+        "key": "GrantItem",
+        "allowDuplicate": false,
+        "uuid": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.TTCw5NusiSSkJU1x"
+      },
+      {
+        "key": "Immunity",
+        "type": [
+          "death-effects",
+          "disease",
+          "paralyzed",
+          "poison",
+          "unconscious"
+        ]
+      },
+      {
+        "key": "ActiveEffectLike",
+        "mode": "add",
+        "path": "system.traits.languages.value",
+        "value": "necril"
+      },
+      {
+        "key": "Weakness",
+        "type": [
+          "fire"
+        ],
+        "value": "ternary( gte(@actor.level,14), 15, ternary( gte(@actor.level,9), 10, ternary( gte(@actor.level,4), 5, 3)))"
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.879,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.878,
+        "foundry": "11.313",
+        "system": "5.8.0"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": []
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "actionType": {
+      "value": "passive"
+    },
+    "category": "offensive",
+    "actions": {
+      "value": null
+    },
+    "requirements": {
+      "value": ""
+    },
+    "trigger": {
+      "value": ""
+    },
+    "deathNote": false
+  },
+  "img": "systems/pf2e/icons/default-icons/action.svg",
+  "folder": "gb7DDfzvB7w2cK7C",
+  "ownership": {
+    "default": 0,
+    "HShcH53gfTrrSBR1": 3
+  },
+  "flags": {
+    "core": {},
+    "exportSource": {
+      "world": "pf2e-test",
+      "system": "pf2e",
+      "coreVersion": "11.314",
+      "systemVersion": "5.8.2"
+    },
+    "scene-packer": {
+      "hash": "ed644f5e04dd9e7015cf9ea9956eca30a5fcd32d",
+      "sourceId": "Item.4kSro32Wwdk0ISDr"
+    }
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
+    "createdTime": 1682735407923,
+    "modifiedTime": 1699130389896,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
+  },
+  "_id": "jSlifT4UeTRhQTgM",
+  "sort": 300000,
+  "_key": "!items!jSlifT4UeTRhQTgM"
+}

@@ -1,0 +1,121 @@
+{
+  "name": "Ghost Adjustment",
+  "type": "action",
+  "effects": [],
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>The ephemeral form of a ghostly creature lets it pass through solid objects and float in the air. For simplicity, a creature with these adjustments isn't truly incorporeal, nor does it necessarily return after being destroyed.</p>\n<ul>\n<li>Add the ghost, spirit, and undead traits.<br />Add the Necril language.</li>\n<li>Add the following immunities: death effects, disease, mental, @Compendium[pf2e.conditionitems.Paralyzed]{Paralyzed}, poison, @Compendium[pf2e.conditionitems.Unconscious]{Unconscious}.</li>\n<li>Add the following weaknesses, with a value based on the creature's level: force, ghost touch, positive.</li>\n<li>If the creature can't fly, change its highest Speed to a fly Speed. Remove all other Speeds.<br />The damage of the creature's physical Strikes changes to negative damage, and those Strikes are magical.</li>\n<li>Add the following abilities.</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{Negative Healing}</li>\n<li style=\"font-weight:bold\"><strong>MANUALLY ADD Ghostly Passage [one-action] The creature Flies and, during this movement, can pass through walls, creatures, and other material obstacles as though incorporeal. It must begin and end its movement outside of any physical obstacles, and passing through solid material is difficult terrain.</strong></li>\n</ul>\n</ul>"
+    },
+    "rules": [
+      {
+        "key": "GrantItem",
+        "allowDuplicate": false,
+        "uuid": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
+      },
+      {
+        "key": "ActorTraits",
+        "add": [
+          "ghost",
+          "undead",
+          "spirit"
+        ]
+      },
+      {
+        "key": "GrantItem",
+        "allowDuplicate": false,
+        "uuid": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.TTCw5NusiSSkJU1x"
+      },
+      {
+        "key": "Immunity",
+        "type": [
+          "death-effects",
+          "disease",
+          "precision",
+          "paralyzed",
+          "poison",
+          "unconscious"
+        ]
+      },
+      {
+        "key": "Weakness",
+        "type": [
+          "force",
+          "vitality",
+          "ghost-touch"
+        ],
+        "value": "ternary( gte(@actor.level,14), 15, ternary( gte(@actor.level,9), 10, ternary( gte(@actor.level,4), 5, 3)))"
+      },
+      {
+        "key": "ActiveEffectLike",
+        "mode": "add",
+        "path": "system.traits.languages.value",
+        "value": "necril"
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.879,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.878,
+        "foundry": "11.313",
+        "system": "5.8.0"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": []
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "actionType": {
+      "value": "passive"
+    },
+    "category": "offensive",
+    "actions": {
+      "value": ""
+    },
+    "requirements": {
+      "value": ""
+    },
+    "trigger": {
+      "value": ""
+    },
+    "deathNote": false
+  },
+  "img": "systems/pf2e/icons/default-icons/action.svg",
+  "folder": "gb7DDfzvB7w2cK7C",
+  "ownership": {
+    "default": 0,
+    "HShcH53gfTrrSBR1": 3
+  },
+  "flags": {
+    "core": {},
+    "exportSource": {
+      "world": "pf2e-test",
+      "system": "pf2e",
+      "coreVersion": "11.314",
+      "systemVersion": "5.8.2"
+    },
+    "scene-packer": {
+      "hash": "cfc34524b51fca5cb680bee779c9600d6b03c869",
+      "sourceId": "Item.onsWUNqcDEYyJwko"
+    }
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
+    "createdTime": 1682735407923,
+    "modifiedTime": 1699130389896,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
+  },
+  "_id": "TLvTX1bk7uUJSpZG",
+  "sort": 400000,
+  "_key": "!items!TLvTX1bk7uUJSpZG"
+}

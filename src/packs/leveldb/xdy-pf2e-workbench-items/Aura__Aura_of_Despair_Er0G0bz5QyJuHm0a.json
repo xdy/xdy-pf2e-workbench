@@ -72,7 +72,7 @@
     "unidentified": false
   },
   "img": "systems/pf2e/icons/spells/destructive-aura.webp",
-  "folder": null,
+  "folder": "YTpgfVBBSf6gGvub",
   "ownership": {
     "default": 0,
     "CDcnMrFoRGrkHShM": 3
@@ -82,13 +82,13 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.7.2",
-    "coreVersion": "11.313",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
     "createdTime": 1688213276995,
-    "modifiedTime": 1697626667418,
-    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+    "modifiedTime": 1699130351103,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
   },
   "_id": "Er0G0bz5QyJuHm0a",
-  "sort": 1400000,
+  "sort": 100000,
   "_key": "!items!Er0G0bz5QyJuHm0a"
 }

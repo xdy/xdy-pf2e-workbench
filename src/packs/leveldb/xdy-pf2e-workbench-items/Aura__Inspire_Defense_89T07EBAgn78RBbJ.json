@@ -4,8 +4,8 @@
   "type": "effect",
   "img": "systems/pf2e/icons/spells/inspire-defense.webp",
   "effects": [],
-  "folder": null,
-  "sort": 1200000,
+  "folder": "YTpgfVBBSf6gGvub",
+  "sort": 500000,
   "flags": {
     "core": {
       "sourceId": "Item.QRgj7jrEnit1ROJw"
@@ -90,11 +90,11 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.7.2",
-    "coreVersion": "11.313",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
     "createdTime": 1665671947292,
-    "modifiedTime": 1697626667418,
-    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+    "modifiedTime": 1699130356310,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
   },
   "_key": "!items!89T07EBAgn78RBbJ"
 }

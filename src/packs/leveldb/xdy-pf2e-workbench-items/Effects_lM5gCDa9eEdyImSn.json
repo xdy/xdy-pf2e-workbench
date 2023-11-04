@@ -1,0 +1,19 @@
+{
+  "name": "Effects",
+  "sorting": "a",
+  "folder": null,
+  "type": "Item",
+  "_id": "lM5gCDa9eEdyImSn",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
+    "createdTime": 1699130339790,
+    "modifiedTime": 1699130339790,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
+  },
+  "_key": "!folders!lM5gCDa9eEdyImSn"
+}
