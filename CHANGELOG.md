@@ -1,3 +1,10 @@
+## [5.27.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.2...v5.27.3) (2023-11-05)
+
+
+### Bug Fixes
+
+* Several updates to the various adjustments found in 'xdy-pf2e-workbench-items' compendium, courtesy of @ElvisLiving ([c5be18b](https://github.com/xdy/xdy-pf2e-workbench/commit/c5be18b7ed4e0bf7cec813aba30bfdb318012d83))
+
 ## [5.27.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.1...v5.27.2) (2023-11-05)
 
 
