@@ -91,12 +91,14 @@ function collectPrivateCastingValues(message: ChatMessagePF2e) {
 
 export function handleDying(dyingCounter: number, originalDyingCounter: number, actor, _effectsToCreate) {
     // Can't await, so do the math.
-    if (originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !actor.combatant?.defeated) {
+    const defeated = actor.combatant?.defeated;
+    const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !defeated;
+    const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !defeated;
+    if (shouldDie) {
         actor.combatant?.toggleDefeated().then();
-        actor.setFlag(MODULENAME, "momentOfDeath", Date.now()).then();
         // Dead, not dying, so clear the flag.
         actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
-    } else if (originalDyingCounter + dyingCounter > 0) {
+    } else if (shouldBecomeDying) {
         actor
             .increaseCondition("dying", {
                 min: originalDyingCounter + dyingCounter,
@@ -142,7 +144,8 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
             if (message.content?.includes("damage-taken")) {
                 // Ignore this if it occurs within last few seconds of the last time we applied dying
                 // @ts-ignore
-                if (!flag?.between(now - 4000, now)) {
+                const notTooSoon = !flag?.between(now - 4000, now);
+                if (notTooSoon) {
                     const dyingOption = String(
                         game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
                     );

@@ -72,7 +72,8 @@ export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e,
         const isDamagingStrike = filterMessagesByStrikeDamaging(isDamageRoll);
         const attackerIsEnemy = filterMessagesByActorEnemy(isDamagingStrike);
         const criticalSuccess = filterMessagesByCriticalSuccess(attackerIsEnemy);
-        const chatMessagePF2e = findLastMessageWithTotalGreaterOrEqual(criticalSuccess, hp.value);
+        const bigEnough = findLastMessageWithTotalGreaterOrEqual(criticalSuccess, hp.value);
+        const chatMessagePF2e = bigEnough === isDamageRoll?.reverse()[0] ? bigEnough : null;
         return chatMessagePF2e !== null && chatMessagePF2e !== undefined;
     }
     return false;

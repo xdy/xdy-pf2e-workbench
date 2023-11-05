@@ -33,7 +33,7 @@ export async function whirlwindStrike(_token, msToSleepBetweenAttacks = 1001) {
     // @ts-ignore
     const targets = canvas.tokens.objects.children
         .filter((t) => validTarget(t.bounds, aura.bounds))
-        .filter((t) => !t.actor.isDead)
+        .filter((t) => !t.actor?.isDead)
         .filter((t) => t.isVisible)
         .filter((t) => ["character", "npc", "familiar"].includes(t.actor.type))
         .filter((t) => t.actor.alliance !== "party")
