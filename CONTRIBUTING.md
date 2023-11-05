@@ -87,17 +87,17 @@ whether directly supported in your IDE, or run manually on the command line befo
 
 ## If you're changing items in jsons:
 If you have cloned the git repo, and done an install and config of [fvtt-cli](https://github.com/foundryvtt/foundryvtt-cli) (example for workbench items below, replace with the appropriate pack name):
-Start a world in Foundry with the Workbench active
-Edit the items in the compendium
-Exit the world (stop Foundry if you're paranoid)
-Run 
-fvtt package unpack "xdy-pf2e-workbench-items" -v
-Copy the json files from 
-$FOUNDRYDATAPATH\modules\xdy-pf2e-workbench\packs\xdy-pf2e-workbench-items\_source
+* Start a world in Foundry with the Workbench active
+* Edit the items in the compendium
+* Exit the world (stop Foundry if you're paranoid)
+* Run 
+```fvtt package unpack "xdy-pf2e-workbench-items" -v```
+* Copy the json files from 
+```$FOUNDRYDATAPATH\modules\xdy-pf2e-workbench\packs\xdy-pf2e-workbench-items\_source```
  to the appropriate directory in your git repo
-Grumble at the changing ids.. 🙂
-Make a new branch for the PR (or do it on main, you do you, but you'll suffer later...)
-Commit the files
-Push
-Wait for me to merge the PR
-PROFIT! 🙂
+* Make a new branch for the PR (or do it on main, you do you, but you'll suffer later...)
+* Commit the files
+* Push
+* Wait for me to merge the PR
+* PROFIT! 🙂
+
