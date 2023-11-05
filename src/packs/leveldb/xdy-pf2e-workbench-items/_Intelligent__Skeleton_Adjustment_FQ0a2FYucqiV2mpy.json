@@ -1,5 +1,5 @@
 {
-  "name": "(Mindfull) Skeleton Adjustment",
+  "name": "(Intelligent) Skeleton Adjustment",
   "type": "action",
   "effects": [],
   "system": {
@@ -117,10 +117,10 @@
     "systemVersion": "5.8.2",
     "coreVersion": "11.314",
     "createdTime": 1682735407923,
-    "modifiedTime": 1699130397152,
+    "modifiedTime": 1699192284024,
     "lastModifiedBy": "HShcH53gfTrrSBR1"
   },
-  "_id": "b7iQIMKgL94g7pSy",
+  "_id": "FQ0a2FYucqiV2mpy",
   "sort": 500000,
-  "_key": "!items!b7iQIMKgL94g7pSy"
+  "_key": "!items!FQ0a2FYucqiV2mpy"
 }

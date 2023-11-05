@@ -1,0 +1,102 @@
+{
+  "name": "Lesser Despair",
+  "type": "action",
+  "effects": [],
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>30 feet. Living creatures of the mummy creature's level or lower are frightened 1 while in its despair aura. They can't naturally recover from this fear while in the area but recover instantly once they leave.</p>"
+    },
+    "rules": [
+      {
+        "key": "Aura",
+        "radius": 30,
+        "effects": [
+          {
+            "uuid": "Item.t8ztwT0lMeUdJn1v",
+            "affects": "enemies"
+          }
+        ],
+        "appearance": {
+          "border": {
+            "alpha": 0.7
+          }
+        },
+        "traits": [
+          "aura",
+          "mental",
+          "divine",
+          "emotion",
+          "enchantment",
+          "fear"
+        ]
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.879,
+      "lastMigration": null
+    },
+    "traits": {
+      "otherTags": [],
+      "value": [
+        "aura",
+        "divine",
+        "emotion",
+        "enchantment",
+        "fear",
+        "mental"
+      ]
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "actionType": {
+      "value": "passive"
+    },
+    "category": "offensive",
+    "actions": {
+      "value": null
+    },
+    "requirements": {
+      "value": ""
+    },
+    "trigger": {
+      "value": ""
+    },
+    "deathNote": false
+  },
+  "img": "systems/pf2e/icons/default-icons/action.svg",
+  "folder": "Cb1rA7RiXqSvVP3P",
+  "ownership": {
+    "default": 0,
+    "HShcH53gfTrrSBR1": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "e17070b0f3ad9e6dcf93923b48a7146daad6847b",
+      "sourceId": "Item.7MvZ4caOu1wUS11z"
+    },
+    "core": {},
+    "exportSource": {
+      "world": "pf2e-test",
+      "system": "pf2e",
+      "coreVersion": "11.314",
+      "systemVersion": "5.8.2"
+    }
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
+    "createdTime": 1699187595754,
+    "modifiedTime": 1699192826196,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
+  },
+  "_id": "E4PkAKqJYCyHrY3U",
+  "sort": 200000,
+  "_key": "!items!E4PkAKqJYCyHrY3U"
+}

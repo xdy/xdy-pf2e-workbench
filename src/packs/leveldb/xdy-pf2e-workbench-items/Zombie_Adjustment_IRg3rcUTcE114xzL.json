@@ -1,11 +1,11 @@
 {
-  "name": "Mummy Adjustment",
+  "name": "Zombie Adjustment",
   "type": "action",
   "effects": [],
   "system": {
     "description": {
       "gm": "",
-      "value": "<p>All types of creatures can have their corpses preserved and rise as mummies.</p>\n<ul>\n<li>Add the mummy and undead traits.</li>\n<li>Add the Necril language.</li>\n<li>Add the following immunities: death effects, disease, @Compendium[pf2e.conditionitems.Paralyzed]{Paralyzed}, poison, @Compendium[pf2e.conditionitems.Unconscious]{Unconscious}.</li>\n<li>Add weakness to fire, with a value depending on the creature's level.</li>\n<li style=\"font-weight:bold\">Add the following abilities.</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{Negative Healing}</li>\n<li><strong>MANUALLY ADD: </strong>Lesser Despair (aura, divine, emotion, enchantment, fear, mental) 30 feet. Living creatures of the mummy creature's level or lower are frightened 1 while in its despair aura. They can't naturally recover from this fear while in the area but recover instantly once they leave.</li>\n</ul>\n</ul>"
+      "value": "<p>A zombified creature is a mindless, rotting corpse that attacks everything it perceives.</p>\n<ul>\n<li>Add the mindless, undead, and zombie traits.</li>\n<li>Increase the creature's HP based on its level.</li>\n<li>Add the following immunities: death effects, disease, mental, @Compendium[pf2e.conditionitems.Paralyzed]{Paralyzed}, poison, @Compendium[pf2e.conditionitems.Unconscious]{Unconscious}.</li>\n<li>Add the following weaknesses, with a value based on its level: positive, slashing.</li>\n<li>Add the following abilities.</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{Negative Healing}</li>\n<li>Slow A zombie is permanently @Compendium[pf2e.conditionitems.Slowed]{Slowed 1} and can't use reactions.</li>\n</ul>\n</ul>"
     },
     "rules": [
       {
@@ -16,7 +16,9 @@
       {
         "key": "ActorTraits",
         "add": [
-          "mummy, undead"
+          "mindless",
+          "undead",
+          "zombie"
         ]
       },
       {
@@ -29,23 +31,29 @@
         "type": [
           "death-effects",
           "disease",
+          "mental",
           "paralyzed",
           "poison",
           "unconscious"
         ]
       },
       {
-        "key": "ActiveEffectLike",
-        "mode": "add",
-        "path": "system.traits.languages.value",
-        "value": "necril"
-      },
-      {
         "key": "Weakness",
         "type": [
-          "fire"
+          "vitality",
+          "slashing"
         ],
-        "value": "ternary( gte(@actor.level,14), 15, ternary( gte(@actor.level,9), 10, ternary( gte(@actor.level,4), 5, 3)))"
+        "value": "ternary( gte(@actor.level,20), 25, ternary( gte(@actor.level,16), 20, ternary( gte(@actor.level,11), 15, ternary( gte(@actor.level,6), 10, 5))))"
+      },
+      {
+        "key": "FlatModifier",
+        "selector": "hp",
+        "value": "ternary( gte(@actor.level,20), 150, ternary( gte(@actor.level,16), 100, ternary( gte(@actor.level,11), 75, ternary( gte(@actor.level,6), 50, ternary( gte(@actor.level,2), 20, 10)))))"
+      },
+      {
+        "key": "GrantItem",
+        "allowDuplicate": false,
+        "uuid": "Actor.gu5f7JPVjxoSCg24.Item.eulyI60JHNUYs39w"
       }
     ],
     "slug": null,
@@ -98,8 +106,7 @@
       "systemVersion": "5.8.2"
     },
     "scene-packer": {
-      "hash": "ed644f5e04dd9e7015cf9ea9956eca30a5fcd32d",
-      "sourceId": "Item.4kSro32Wwdk0ISDr"
+      "sourceId": "Item.e9dBJBq2Bh4RStKy"
     }
   },
   "_stats": {
@@ -107,10 +114,10 @@
     "systemVersion": "5.8.2",
     "coreVersion": "11.314",
     "createdTime": 1682735407923,
-    "modifiedTime": 1699130389896,
+    "modifiedTime": 1699192396213,
     "lastModifiedBy": "HShcH53gfTrrSBR1"
   },
-  "_id": "jSlifT4UeTRhQTgM",
-  "sort": 300000,
-  "_key": "!items!jSlifT4UeTRhQTgM"
+  "_id": "IRg3rcUTcE114xzL",
+  "sort": 0,
+  "_key": "!items!IRg3rcUTcE114xzL"
 }

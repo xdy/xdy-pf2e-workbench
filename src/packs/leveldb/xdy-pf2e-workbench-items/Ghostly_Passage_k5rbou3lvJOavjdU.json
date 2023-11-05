@@ -1,0 +1,71 @@
+{
+  "name": "Ghostly Passage",
+  "type": "action",
+  "effects": [],
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>The creature Flies and, during this movement, can pass through walls, creatures, and other material obstacles as though incorporeal. It must begin and end its movement outside of any physical obstacles, and passing through solid material is difficult terrain.</p>"
+    },
+    "rules": [],
+    "slug": null,
+    "_migration": {
+      "version": 0.879,
+      "lastMigration": null
+    },
+    "traits": {
+      "otherTags": [],
+      "value": []
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "actionType": {
+      "value": "action"
+    },
+    "category": null,
+    "actions": {
+      "value": 1
+    },
+    "requirements": {
+      "value": ""
+    },
+    "trigger": {
+      "value": ""
+    },
+    "deathNote": false
+  },
+  "img": "systems/pf2e/icons/default-icons/action.svg",
+  "folder": "Cb1rA7RiXqSvVP3P",
+  "ownership": {
+    "default": 0,
+    "HShcH53gfTrrSBR1": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "ac9b48d1ce08345be27bb350426a6cb9ce1fa1ac",
+      "sourceId": "Item.o5Nxg7NrPxzJa62O"
+    },
+    "exportSource": {
+      "world": "pf2e-test",
+      "system": "pf2e",
+      "coreVersion": "11.314",
+      "systemVersion": "5.8.2"
+    },
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.8.2",
+    "coreVersion": "11.314",
+    "createdTime": 1699180445824,
+    "modifiedTime": 1699192450746,
+    "lastModifiedBy": "HShcH53gfTrrSBR1"
+  },
+  "_id": "k5rbou3lvJOavjdU",
+  "sort": 100000,
+  "_key": "!items!k5rbou3lvJOavjdU"
+}
