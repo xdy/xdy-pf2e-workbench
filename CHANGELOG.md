@@ -1,3 +1,10 @@
+## [5.27.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.0...v5.27.1) (2023-11-05)
+
+
+### Bug Fixes
+
+* A couple of bugs related to handling dying. These are the test cases I did, which all 'work on my machine' after these fixes. ([485a1cf](https://github.com/xdy/xdy-pf2e-workbench/commit/485a1cf5a583a7a2ef6cacf7eb31e85ceae26c9d)), closes [#1063](https://github.com/xdy/xdy-pf2e-workbench/issues/1063) [#1059](https://github.com/xdy/xdy-pf2e-workbench/issues/1059)
+
 # [5.27.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.26.0...v5.27.0) (2023-11-04)
 
 
