@@ -26,12 +26,8 @@
       {
         "effects": [
           {
-            "affects": "allies",
-            "events": [
-              "enter"
-            ],
             "uuid": "Compendium.pf2e.spell-effects.Item.DLwTvjjnqs2sNGuG",
-            "level": "ceil(@actor.level/2)"
+            "affects": "allies"
           }
         ],
         "key": "Aura",
@@ -39,7 +35,8 @@
           "auditory"
         ],
         "radius": 60,
-        "slug": "aura-effect-inspire-defense"
+        "slug": "aura-effect-inspire-defense",
+        "level": "@actor.level"
       }
     ],
     "slug": null,
@@ -93,7 +90,7 @@
     "systemVersion": "5.8.2",
     "coreVersion": "11.314",
     "createdTime": 1665671947292,
-    "modifiedTime": 1699130356310,
+    "modifiedTime": 1699186813059,
     "lastModifiedBy": "HShcH53gfTrrSBR1"
   },
   "_key": "!items!89T07EBAgn78RBbJ"
