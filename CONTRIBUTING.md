@@ -85,8 +85,10 @@ whether directly supported in your IDE, or run manually on the command line befo
 * If your Pull Request completes an issue, include a line like 'Fixes #nnn' in the description, replacing nnn with the
   actual issue number.
 
-## If you're changing items in jsons:
-If you have cloned the git repo, and done an install and config of [fvtt-cli](https://github.com/foundryvtt/foundryvtt-cli) (example for workbench items below, replace with the appropriate pack name):
+## If you're changing items in compendiums
+Example for 'xdy-pf2e-workbench-items' below, replace with the appropriate pack name.
+
+If you have cloned the git repo, and done an install and config of [fvtt-cli](https://github.com/foundryvtt/foundryvtt-cli):
 * Start a world in Foundry with the Workbench active
 * Edit the items in the compendium
 * Exit the world (stop Foundry if you're paranoid)
