@@ -1,3 +1,10 @@
+## [5.27.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.1...v5.27.2) (2023-11-05)
+
+
+### Bug Fixes
+
+* Change 'Aura Inspire Courage' and 'Aura Inspire Defense' so they give effects of the proper level (rather than always level 1). ([260b4eb](https://github.com/xdy/xdy-pf2e-workbench/commit/260b4ebb4598efbb86dd51b51d80d5658b567d9b))
+
 ## [5.27.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.0...v5.27.1) (2023-11-05)
 
 
