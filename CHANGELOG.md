@@ -1,3 +1,10 @@
+## [5.27.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.3...v5.27.4) (2023-11-06)
+
+
+### Bug Fixes
+
+* Update README.md ([1e003f3](https://github.com/xdy/xdy-pf2e-workbench/commit/1e003f33e9734893c4f169eb91912e646f06b9e2))
+
 ## [5.27.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.2...v5.27.3) (2023-11-05)
 
 
