@@ -36,13 +36,13 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 
 * Reminder section
     * Option to remind when attack is made by a token that probably can't attack (due to being unconscious / dead /
-      defeated / has no hp / etc).
+      defeated / has no hp / is restrained / etc), and option to cancel impossible attacks.
         * Suboption to allow Eidolons to attack even if they have 0 hp.
-    * Option to remind when an attack is made without targeting.
+    * Option to remind when an attack is made without targeting, and option to cancel untargeted attacks.
     * Option to show reminder each turn that the number of actions is other than three. Handles Quickened, Slowed and
       Stunned.
     * Option to automatically add a reminder effect when breath weapons are used (i.e. sent to chat.) Breath weapon
-      description must match ```"<p>.*can't use.*1d([46]) rounds.*</p>"``` or the localized equivalent for it to be
+      description must match ```"1d(4|6) #(rounds|Rounds|recharge|Recharge)"``` for it to be
       recognized.
     * Hero point handler. Gives option to (using Configure Controls) add a keybind to open a dialog that can reset or
       add hero points for all characters, add one hero point to a random (or selected) character (on new timers only)
@@ -111,7 +111,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 
 * House Rules
     * Option to enable Keeley's Hero Point Rule (if reroll die is 10 or less, get a +10 bonus). Courtesy of stwlam
-    * Option to enable my personal house rules (currently adds saves to crit spec for flail and hamer)
     * Not yet needed option to add Ancestry Paragon feat slots (don't enable until if/when the system removes them due
       to not being in the remaster rules)
     * Not yet needed option to add Dual Class feat slots (don't enable until if/when the system removes them due to not
@@ -180,9 +179,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
           gold=master, red=legendary, with 'glow' meaning that you are the best in the party.
         * 'Build Npc Spellbook Journal' that builds a journal with the contents of an npc's spell list. Courtesy of
           Avery (Velara).
-        * (Experimental) 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the Whirlwind Strike Feat,
-          has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that the first weapon of
-          any type.
+        * (Experimental) 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the Whirlwind Strike Feat, has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that the first weapon of any type.
 * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
   provided by ApoApostolov and esheyw. They are *intended* to be customized by the user by changing the javascript
   code (such as by adding/removing actions, setting what actors are part of the party, etc.) They are not really
