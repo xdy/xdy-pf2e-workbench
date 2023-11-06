@@ -1,3 +1,10 @@
+## [5.27.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.5...v5.27.6) (2023-11-06)
+
+
+### Bug Fixes
+
+* Revert use of foundry-publish to old admin interface for now, got timeouts. ([247cb0f](https://github.com/xdy/xdy-pf2e-workbench/commit/247cb0f8e742d6ae4a941cf6d2eeed9654145193))
+
 ## [5.27.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.4...v5.27.5) (2023-11-06)
 
 
