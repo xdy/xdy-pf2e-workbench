@@ -35,7 +35,7 @@
     "@types/fs-extra": "^11.0.3",
     "@types/glob": "^8.1.0",
     "@types/jquery": "^3.5.25",
-    "@types/jsdom": "^21.1.4",
+    "@types/jsdom": "^21.1.5",
     "@types/luxon": "^3.3.3",
     "@types/node": "^18.18.8",
     "@types/prompts": "^2.4.7",
