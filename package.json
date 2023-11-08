@@ -39,7 +39,7 @@
     "@types/luxon": "^3.3.3",
     "@types/node": "^18.18.8",
     "@types/prompts": "^2.4.7",
-    "@types/sortablejs": "^1.15.4",
+    "@types/sortablejs": "^1.15.5",
     "@types/tooltipster": "^0.0.34",
     "@types/yaireo__tagify": "^4.17.4",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
