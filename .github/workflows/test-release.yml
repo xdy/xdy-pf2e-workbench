@@ -66,11 +66,9 @@ jobs:
         id: publish_foundry_repo
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
         run: foundry-publish --useNewPackageAdministrationInterface
-        #run: foundry-publish
         env:
           FVTT_MANIFEST_PATH: 'static/module.json'
-          FVTT_PACKAGE_ID: 'xdy-pf2e-workbench'
-          #FVTT_PACKAGE_ID: ${{ 1702 }}
+          FVTT_PACKAGE_ID: ${{ secrets.FOUNDRY_ADMIN_PACKAGE_ID }}
           FVTT_USERNAME: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
           FVTT_PASSWORD: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
 
