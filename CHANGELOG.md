@@ -1,3 +1,10 @@
+## [5.27.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.9...v5.27.10) (2023-11-10)
+
+
+### Bug Fixes
+
+* Another try at making critical hits apply the right number of dying. ([ce0bf1b](https://github.com/xdy/xdy-pf2e-workbench/commit/ce0bf1bf3802a4f0f16fead626162d9e756a78c2))
+
 ## [5.27.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.8...v5.27.9) (2023-11-10)
 
 
