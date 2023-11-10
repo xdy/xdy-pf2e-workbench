@@ -71,7 +71,6 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"),
             );
 
-            // @ts-ignore
             const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
             const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
             const rollType = flags.context?.type;
@@ -79,14 +78,13 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
             const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
 
-            // TODO Add something like this to pf2-flat-check, i.e. it shouldn't check if not an attack spell.
             const rollForNonAttackSpell =
                 origin !== null &&
                 autoRollDamageForSpellNotAnAttack &&
                 !origin?.traits?.has("attack") &&
                 flags.casting !== null &&
                 (Number.isInteger(+(<any>message.item?.system)?.time?.value) ?? true) &&
-                Object.keys((<any>origin).system.damage?.value)?.length !== 0;
+                origin?.system?.damage;
             const rollForAttackSpell =
                 origin?.traits?.has("attack") &&
                 autoRollDamageForSpellAttack &&
