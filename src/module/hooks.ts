@@ -101,8 +101,7 @@ export function handleDying(dyingCounter: number, originalDyingCounter: number, 
     } else if (shouldBecomeDying) {
         actor
             .increaseCondition("dying", {
-                min: originalDyingCounter + dyingCounter,
-                max: originalDyingCounter + dyingCounter,
+                value: originalDyingCounter + dyingCounter,
             })
             .then();
         actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
