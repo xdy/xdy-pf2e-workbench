@@ -104,7 +104,6 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
     if (!game.user.isGM) {
         data.whisper.push(game.user.id);
     }
-    // message.setFlag(MODULENAME, "minimumUserRole", 4);
     message.updateSource(data);
 
     if (
@@ -216,10 +215,19 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
             });
         }
 
+        const flags = {
+            "xdy-pf2e-workbench": {
+                privateSpell: {
+                    originUuid: message.flags?.pf2e.origin?.uuid,
+                },
+            },
+        };
+
         const token: any = message.token ? message.token : message.actor?.token;
         ChatMessage.create({
-            content: content,
             speaker: ChatMessage.getSpeaker({ token: token }),
+            content: content,
+            flags,
         }).then();
     }
 }
