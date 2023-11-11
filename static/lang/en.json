@@ -351,9 +351,13 @@
         "hint": "Client setting to autoroll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
         "name": "Autoroll damage for spell attacks that hit."
       },
-      "autoRollDamageForSpellNotAnAttack": {
-        "hint": "Client setting to *always* autoroll normal damage for *non-attack* spells when they are cast.",
-        "name": "Autoroll damage for cast spells that are not attacks."
+      "autoRollDamageForSpellWhenNotAnAttack": {
+        "hint": "Client setting to autoroll normal damage for *non-attack* spells when they are cast. Note that the damage roll will happen before a save (if any) is rolled.",
+        "name": "Autoroll damage for cast spells that are not attacks.",
+        "no": "No",
+        "anySpell": "For any non-attack spell",
+        "saveSpell": "For a non-attack save spell",
+        "nonSaveSpell": "For a non-attack non-save spell"
       },
       "autoRollDamageForStrike": {
         "hint": "Client setting to autoroll damage for strikes that hit. Note that critical hits roll critical damage.",

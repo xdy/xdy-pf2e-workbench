@@ -115,7 +115,7 @@ export function updateHooks(cleanSlate = false) {
         gs.get(MODULENAME, "autoRollDamageAllow") ||
             gs.get(MODULENAME, "autoRollDamageForStrike") ||
             gs.get(MODULENAME, "autoRollDamageForSpellAttack") ||
-            gs.get(MODULENAME, "autoRollDamageForSpellNotAnAttack") ||
+            gs.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") !== "no" ||
             gs.get(MODULENAME, "automatedAnimationOn") ||
             gs.get(MODULENAME, "reminderBreathWeapon") ||
             gs.get(MODULENAME, "reminderCannotAttack") === "reminder" ||

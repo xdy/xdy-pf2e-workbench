@@ -251,7 +251,7 @@
         "hint": "設定是否在法術打擊命中時自動擲傷害骰。請注意，重擊時永遠只骰正常傷害。",
         "name": "法術打擊命中時自動擲傷害骰。"
       },
-      "autoRollDamageForSpellNotAnAttack": {
+      "autoRollDamageForSpellWhenNotAnAttack": {
         "hint": "設定是否在施放*無需攻擊檢定*的法術時自動擲正常傷害骰。",
         "name": "施放*無需攻擊檢定*的法術時自動擲傷害骰。"
       },

@@ -125,7 +125,7 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
             game.settings.get(MODULENAME, "autoRollDamageAllow") &&
             (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
                 game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
-                game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"))
+                game.settings.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") !== "no")
         ) {
             autoRollDamage(message).then();
         }

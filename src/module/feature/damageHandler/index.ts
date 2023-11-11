@@ -67,8 +67,9 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
         if (originUuid) {
             const autoRollDamageForStrike = game.settings.get(MODULENAME, "autoRollDamageForStrike");
             const autoRollDamageForSpellAttack = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
-            const autoRollDamageForSpellNotAnAttack = Boolean(
-                game.settings.get(MODULENAME, "autoRollDamageForSpellNotAnAttack"),
+            const autoRollDamageForSpellWhenNotAnAttack = game.settings.get(
+                MODULENAME,
+                "autoRollDamageForSpellWhenNotAnAttack",
             );
 
             const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
@@ -78,13 +79,26 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
             const rollForNonSpellAttack = rollType === "attack-roll" && autoRollDamageForStrike;
 
+            const isSaveSpell = origin?.system?.defense?.save ?? false;
+
             const rollForNonAttackSpell =
                 origin !== null &&
-                autoRollDamageForSpellNotAnAttack &&
                 !origin?.traits?.has("attack") &&
                 flags.casting !== null &&
                 (Number.isInteger(+(<any>message.item?.system)?.time?.value) ?? true) &&
                 origin?.system?.damage;
+
+            const rollForNonAttackSaveSpell =
+                isSaveSpell &&
+                rollForNonAttackSpell &&
+                (autoRollDamageForSpellWhenNotAnAttack === "saveSpell" ||
+                    autoRollDamageForSpellWhenNotAnAttack === "anySpell");
+            const rollForNonAttackNonSaveSpell =
+                !isSaveSpell &&
+                rollForNonAttackSpell &&
+                (autoRollDamageForSpellWhenNotAnAttack === "nonSaveSpell" ||
+                    autoRollDamageForSpellWhenNotAnAttack === "anySpell");
+            console.log(rollForNonAttackSaveSpell + " " + rollForNonAttackNonSaveSpell);
             const rollForAttackSpell =
                 origin?.traits?.has("attack") &&
                 autoRollDamageForSpellAttack &&
@@ -92,7 +106,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             if (actor && (rollForNonAttackSpell || rollForNonSpellAttack || rollForAttackSpell)) {
                 if (
-                    rollForNonAttackSpell ||
+                    rollForNonAttackSaveSpell ||
+                    rollForNonAttackNonSaveSpell ||
                     (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
                 ) {
                     let castLevel = flags.casting?.level ?? (<any>origin)?.system.level.value;

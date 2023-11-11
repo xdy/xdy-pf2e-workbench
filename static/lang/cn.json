@@ -297,7 +297,7 @@
         "name": "法术打击命中时自动掷伤害骰。",
         "hint": "设置是否在法术打击命中时自动掷伤害骰。请注意，重击时永远只骰正常伤害。"
       },
-      "autoRollDamageForSpellNotAnAttack": {
+      "autoRollDamageForSpellWhenNotAnAttack": {
         "hint": "设置是否在施放*无需攻击检定*的法术时自动掷正常伤害骰。",
         "name": "施放*无需攻击检定*的法术时自动掷伤害骰。"
       },

@@ -27,13 +27,25 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
-            autoRollDamageForSpellNotAnAttack: {
-                name: `${MODULENAME}.SETTINGS.autoRollDamageForSpellNotAnAttack.name`,
-                hint: `${MODULENAME}.SETTINGS.autoRollDamageForSpellNotAnAttack.hint`,
+            autoRollDamageForSpellWhenNotAnAttack: {
+                name: `${MODULENAME}.SETTINGS.autoRollDamageForSpellWhenNotAnAttack.name`,
+                hint: `${MODULENAME}.SETTINGS.autoRollDamageForSpellWhenNotAnAttack.hint`,
                 scope: "client",
                 config: true,
                 default: false,
-                type: Boolean,
+                type: String,
+                choices: {
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageForSpellWhenNotAnAttack.no`),
+                    anySpell: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.autoRollDamageForSpellWhenNotAnAttack.anySpell`,
+                    ),
+                    saveSpell: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.autoRollDamageForSpellWhenNotAnAttack.saveSpell`,
+                    ),
+                    nonSaveSpell: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.autoRollDamageForSpellWhenNotAnAttack.nonSaveSpell`,
+                    ),
+                },
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },

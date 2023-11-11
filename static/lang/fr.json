@@ -173,7 +173,7 @@
         "hint": "Réglage du client pour lancer automatiquement les dégâts pour les attaques de sort qui touchent. Notez que les coups critiques lancent toujours les dégâts normaux.",
         "name": "Lancer automatiquement les dégâts en cas de succès d'une attaque de sort."
       },
-      "autoRollDamageForSpellNotAnAttack": {
+      "autoRollDamageForSpellWhenNotAnAttack": {
         "hint": "Réglage du client pour \"toujours\" lancer les dégâts normaux pour les sorts \"non attaque\" lorsqu'ils sont lancés.",
         "name": "Lancez automatiquement les dégâts pour les sorts lancés qui ne sont pas des attaques."
       },

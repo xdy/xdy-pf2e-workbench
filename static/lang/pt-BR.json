@@ -101,7 +101,7 @@
         "hint": "Rola dano automaticamente ao acertar ataques mágicos. Acertos críticos sempre rolarão dano normal.",
         "name": "Rolar dano automaticamente para ataques mágicos"
       },
-      "autoRollDamageForSpellNotAnAttack": {
+      "autoRollDamageForSpellWhenNotAnAttack": {
         "hint": "Rola dano normal automaticamente para magias que não são ataques.",
         "name": "Rolar dano automaticamente para magias que não são ataques"
       },

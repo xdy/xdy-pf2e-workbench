@@ -367,7 +367,7 @@
         "hint": "Ustawienie klienta do automatycznego rzucania obrażeń dla trafionych ataków zaklęć. Należy pamiętać, że trafienia krytyczne zawsze zadają normalne obrażenia.",
         "name": "Automatyczne rzucanie obrażeń za trafione ataki zaklęciami."
       },
-      "autoRollDamageForSpellNotAnAttack": {
+      "autoRollDamageForSpellWhenNotAnAttack": {
         "name": "Obrażenia zadawane automatycznie przy rzucaniu zaklęć, które nie są atakami.",
         "hint": "Ustawienie klienta, aby *zawsze* automatycznie rzucać normalne obrażenia dla zaklęć *nieatakujących* podczas ich rzucania."
       },
