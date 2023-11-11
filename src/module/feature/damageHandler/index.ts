@@ -76,7 +76,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const rollType = flags.context?.type;
 
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
-            const rollForStrike = rollType === "attack-roll" && autoRollDamageForStrike;
+            const rollForNonSpellAttack = rollType === "attack-roll" && autoRollDamageForStrike;
 
             const rollForNonAttackSpell =
                 origin !== null &&
@@ -90,7 +90,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 autoRollDamageForSpellAttack &&
                 (Number.isInteger(+(<any>message.item)?.system?.time?.value) ?? true);
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
-            if (actor && (rollForNonAttackSpell || rollForStrike || rollForAttackSpell)) {
+            if (actor && (rollForNonAttackSpell || rollForNonSpellAttack || rollForAttackSpell)) {
                 if (
                     rollForNonAttackSpell ||
                     (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
@@ -152,19 +152,23 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             ctrlKey: blind,
                         });
                     }
-                } else if (rollForStrike) {
+                } else if (rollForNonSpellAttack) {
                     const rollOptions = actor?.getRollOptions(["all", "damage-roll"]);
                     // @ts-ignore
-                    const actions = actor?.system?.actions;
-                    const actionIds = originUuid.match(/Item.(\w+)/);
-                    if (actions && actionIds && actionIds[1]) {
+                    const actions = actor?.itemTypes?.action;
+                    if (actions && actions.length > 0) {
                         const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
                         if (rollDamage) {
-                            const action = getActionFromMessage(actions, actionIds, message);
-                            if (degreeOfSuccess === "success") {
-                                action?.damage({ options: rollOptions });
-                            } else if (degreeOfSuccess === "criticalSuccess") {
-                                action?.critical({ options: rollOptions });
+                            const toRoll = getActionFromMessage(actions, message);
+                            if (toRoll) {
+                                if (toRoll.type === "strike") {
+                                    // TODO Handle other things than strikes
+                                    if (degreeOfSuccess === "success") {
+                                        toRoll?.damage({ options: rollOptions });
+                                    } else if (degreeOfSuccess === "criticalSuccess") {
+                                        toRoll?.critical({ options: rollOptions });
+                                    }
+                                }
                             }
                         }
                     }
@@ -309,21 +313,39 @@ export function persistentHealing(message) {
     }
 }
 
-function getActionFromMessage(actions: any, actionIds: RegExpMatchArray, message: ChatMessagePF2e) {
-    const strikes = actions.filter((atk: { type: string }) => {
-        return atk?.type === "strike";
-    });
-    const itemStrikes = strikes.filter((a: { item: { id: any } }) => a.item.id === actionIds[1]);
-    if (itemStrikes.length === 1) {
+function getActionFromMessage(actions, message: ChatMessagePF2e) {
+    const attackAbilities = actions
+        .filter((atk) => {
+            return atk?.system?.traits.value.includes("attack");
+        })
+        .filter((atk) => {
+            return atk.id === message.item?.id;
+        });
+
+    const strikes = message.actor?.system?.actions
+        ?.filter((atk: { type: string }) => {
+            return atk?.type === "strike";
+        })
+        .filter((atk) => {
+            return atk?.item?.id === message.item?.id;
+        });
+
+    const allAttacks = attackAbilities.concat(strikes);
+
+    if (allAttacks.length === 1) {
         // Normal case
-        return itemStrikes[0];
-    } else if (itemStrikes.length > 1) {
+        return allAttacks[0];
+    } else if (allAttacks.length > 1 && strikes && strikes?.length > 1) {
         // The strike is most likely based on an RE which means that all actions get the same item id (e.g. animal form), try to regex it out of the message instead
         const strike = game.i18n.localize(`${MODULENAME}.SETTINGS.autoRollDamageForStrike.strike`);
         const s = `<h4 class="action">(.*?)${strike}: (.*?)<`;
         const strikeName = message.flavor?.match(s);
         if (strikeName && strikeName[2]) {
-            return strikes.find((a: { label: string }) => a.label === strikeName[2]);
+            return actions
+                .filter((atk) => {
+                    return atk?.system?.traits.value.includes("attack");
+                })
+                .find((a: { label: string }) => a.label === strikeName[2]);
         } else {
             // If we can't find the strike label, give up.
             return null;
