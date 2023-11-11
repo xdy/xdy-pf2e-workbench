@@ -1,7 +1,7 @@
 {
   "xdy-pf2e-workbench": {
     "SETTINGS": {
-      "abpVariantAllowItemBonuses": {
+      "": {
         "hint": "Não desabilita os bônus de item quando estiver usando a regra variante de Progressão Automática de Bônus.",
         "name": "Não desabilitar bônus de item usando a PAB"
       },

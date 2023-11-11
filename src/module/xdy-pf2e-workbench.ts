@@ -266,11 +266,6 @@ Hooks.once("setup", async () => {
     registerWorkbenchKeybindings();
 
     // General module setup
-    if (game.settings.get(MODULENAME, "abpVariantAllowItemBonuses")) {
-        game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement = function suppressRuleElement(): boolean {
-            return false;
-        };
-    }
 });
 
 function handleCampaignFeatSection() {

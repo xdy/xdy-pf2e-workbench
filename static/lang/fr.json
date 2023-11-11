@@ -75,10 +75,6 @@
       "assuranceLabel": "Assurance"
     },
     "SETTINGS": {
-      "abpVariantAllowItemBonuses": {
-        "hint": "Ne pas désactiver les bonus d'objet en utilisant la variante de règle Progression des bonus automatique.",
-        "name": "Ne pas désactiver les bonus d'objet en utilisant PBA."
-      },
       "actionsReminderAllow": {
         "all": "Tous",
         "gm": "MJ",
@@ -449,11 +445,6 @@
       "workbenchVersion": {
         "hint": "Version que la dernière migration utilise. Peut être inférieure à la version du module. Ne modifiez pas cela à moins que vous ne sachiez ce que vous faites.",
         "name": "Version de la migration de Workbench"
-      },
-      "variantRulesSettings": {
-        "hint": "Activer et configurer les variantes de règles diverses",
-        "label": "Gérer les réglages des variantes de règles",
-        "name": "Réglages des variantes de règles"
       },
       "tokenAnimationSpeed": {
         "hint": "Changer pour modifier la vitesse d'animation du déplacement du jeton.",

@@ -262,10 +262,6 @@
         "hint": "Tastenkürzel um ausgewählte und schwebende Ziele zu den gewählten Zielen des Benutzers hinzuzufügen.",
         "name": "Ziele des Benutzers hinzufügen"
       },
-      "abpVariantAllowItemBonuses": {
-        "hint": "Gegestandsboni nicht deaktivieren, obwohl die Variantenregel der Automatischen Bonus Progression genutzt wird.",
-        "name": "Gegenstandboni nicht deaktivieren, trotz Verwendung von ABP."
-      },
       "applyPersistentHealing": {
         "FastHealingLabel": "Schnelle Heilung erhalten",
         "hint": "Client-Einstellung um anhaltende Heilung automatisch vom System anwenden zu lassen. Einstellungen speichern um zusätzliche Optionen ein- bzw. auszublenden.",
@@ -559,11 +555,6 @@
       "tokenAnimationSpeed": {
         "hint": "Ändern um die Geschwindigkeit der Token Bewegungsanimation zu ändern.",
         "name": "Ändern um die Geschwindigkeit der Token Bewegungsanimation zu ändern."
-      },
-      "variantRulesSettings": {
-        "hint": "Aktiviere und konfiguriere verschiedene Regel-Varianten",
-        "label": "Verwalte die Regel-Varianten-Einstellungen",
-        "name": "Regel-Varianten-Einstellungen"
       },
       "dropHeldItemsOnBecomingUnconscious": {
         "name": "Charaktere lassen automatisch gehaltene Gegenstände fallen wenn sie ohnmächtig werden.",

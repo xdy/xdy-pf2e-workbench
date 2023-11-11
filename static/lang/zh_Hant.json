@@ -164,10 +164,6 @@
         "name": "啟用NPC快速擲骰功能",
         "hint": "勾選此項，啟用NPC快速擲骰功能。"
       },
-      "abpVariantAllowItemBonuses": {
-        "hint": "不要在使用自動成長加值可選規則時關閉物品加值。",
-        "name": "不要在使用自動成長加值可選規則時關閉物品加值。"
-      },
       "actionsReminderAllow": {
         "all": "全部",
         "gm": "GM",
@@ -455,11 +451,6 @@
       "tokenAnimationSpeed": {
         "hint": "更改此項，調整token移動動畫速度。",
         "name": "更改此項，調整token移動動畫速度。"
-      },
-      "variantRulesSettings": {
-        "hint": "啟用並配置多個可選規則",
-        "label": "管理可選規則設定",
-        "name": "可選規則設定"
       },
       "workbenchVersion": {
         "hint": "最新遷移執行的版本。可以低於模組版本。 除非您知道自己在做什麼，否則不要修改它。",

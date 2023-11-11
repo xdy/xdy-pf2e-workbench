@@ -4,7 +4,6 @@ import { WorkbenchRemindersSettings } from "./reminders.js";
 import { WorkbenchWorldAutomationSettings } from "./automation-world.js";
 import { WorkbenchClientAutomationSettings } from "./automation-client.js";
 import { WorkbenchQolWorldSettings } from "./qol-world.js";
-import { WorkbenchVariantRulesSettings } from "./variantRules.js";
 import { logInfo } from "../utils.js";
 import { WorkbenchHouseRulesSettings } from "./houseRules.js";
 
@@ -18,7 +17,6 @@ export function registerWorkbenchSettings() {
     WorkbenchQolWorldSettings.registerSettingsAndCreateMenu("fas fa-smile");
     WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fas fa-robot");
     WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fas fa-magic", false);
-    WorkbenchVariantRulesSettings.registerSettingsAndCreateMenu("fas fa-alt");
     WorkbenchHouseRulesSettings.registerSettingsAndCreateMenu("fas fa-house");
 
     game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {

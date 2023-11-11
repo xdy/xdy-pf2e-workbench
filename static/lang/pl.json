@@ -191,10 +191,6 @@
         "name": "Kto otrzymuje przypomnienie o działaniach",
         "none": "Nikt"
       },
-      "abpVariantAllowItemBonuses": {
-        "name": "Nie wyłączaj premii do przedmiotów podczas korzystania z ABP.",
-        "hint": "Nie wyłącza premii do przedmiotów podczas korzystania z reguły wariantu automatycznej progresji premii."
-      },
       "addUserTargets": {
         "addFor": "Dodaj cele dla",
         "name": "Dodaj cele użytkownika",
@@ -572,11 +568,6 @@
       "tokenAnimationSpeed": {
         "name": "Zmiana prędkości animacji ruchu tokena.",
         "hint": "Zmiana prędkości animacji ruchu tokena."
-      },
-      "variantRulesSettings": {
-        "name": "Ustawienia reguł wariantów",
-        "hint": "Włączanie i konfigurowanie różnych reguł wariantów",
-        "label": "Zarządzanie ustawieniami reguł wariantów"
       },
       "keeleysHeroPointRule": {
         "hint": "Zasada domowa preferowana przez pewnego dewelopera Paizo: jeśli naturalny wynik ponownego rzutu na punkty bohatera wynosi 10 lub mniej, po fakcie stosowana jest premia w wysokości 10.",

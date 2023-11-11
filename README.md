@@ -106,9 +106,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to automatically reduce the Frightened condition at the end of each turn. See the included effect 'Effect:
       Minimum Frightened' for how to set a minimum frightened level that the module won't reduce below.
 
-* Variant Rules
-    * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357). (Currently broken)
-
 * House Rules
     * Option to enable Keeley's Hero Point Rule (if reroll die is 10 or less, get a +10 bonus). Courtesy of stwlam
     * Not yet needed option to add Ancestry Paragon feat slots (don't enable until if/when the system removes them due
@@ -233,6 +230,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       accompanying 'Feat' to add it to a character.
     * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384) as well as automatic
       handling of [Death effects](https://2e.aonprd.com/Rules.aspx?ID=383) as they're handled by the pf2e system.
+    * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
 
 ## Installation
 

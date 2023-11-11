@@ -81,10 +81,6 @@
       "deliberateDeathUsed": "凶杀致死已使用"
     },
     "SETTINGS": {
-      "abpVariantAllowItemBonuses": {
-        "name": "不要在使用自动成长加值可选规则时关闭物品加值。",
-        "hint": "不要在使用自动成长加值可选规则时关闭物品加值。"
-      },
       "actionsReminderAllow": {
         "all": "全部",
         "gm": "GM",
@@ -471,11 +467,6 @@
       "tokenAnimationSpeed": {
         "hint": "更改此项，调整token移动动画速度。",
         "name": "更改此项，调整token移动动画速度。"
-      },
-      "variantRulesSettings": {
-        "hint": "启用并配置多个可选规则",
-        "label": "管理可选规则设置",
-        "name": "可选规则设置"
       },
       "autoCollapseItemActionChatCardContent": {
         "nonCollapsedDefault": "默认展开，点击标题折叠。",
