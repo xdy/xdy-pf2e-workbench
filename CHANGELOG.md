@@ -1,3 +1,10 @@
+## [5.27.15](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.14...v5.27.15) (2023-11-11)
+
+
+### Bug Fixes
+
+* Removes support for 'Allow Item Bonuses' APB setting as it has long been broken and I can't figure out how to fix it. ([b32ce2f](https://github.com/xdy/xdy-pf2e-workbench/commit/b32ce2ffa6306d431305f2fbb3688eeb0616fd6b))
+
 ## [5.27.14](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.13...v5.27.14) (2023-11-11)
 
 
