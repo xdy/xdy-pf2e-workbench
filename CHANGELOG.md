@@ -1,3 +1,10 @@
+# [5.28.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.15...v5.28.0) (2023-11-11)
+
+
+### Features
+
+* Changes 'autoroll damage for non-attack spells' to a choice setting that splits save and non-save spells. You need to choose again if you had this enabled. ([04be4a9](https://github.com/xdy/xdy-pf2e-workbench/commit/04be4a9013571118a3876f51919df7c04ae7625d)), closes [#982](https://github.com/xdy/xdy-pf2e-workbench/issues/982)
+
 ## [5.27.15](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.14...v5.27.15) (2023-11-11)
 
 
