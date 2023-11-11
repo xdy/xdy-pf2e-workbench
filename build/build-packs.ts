@@ -160,6 +160,10 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
                 map.set("Update Aura Radius", "systems/pf2e/icons/spells/destructive-aura.webp");
                 map.set("Use Scroll or Wand", "systems/pf2e/icons/equipment/wands/magic-wands/magic-wand.webp");
                 map.set("Versatile Performance", "systems/pf2e/icons/spells/summon-instrument.webp");
+                map.set(
+                    "Wand and Scroll Generator",
+                    "systems/pf2e/icons/equipment/wands/specialty-wands/wand-of-continuation.webp",
+                );
                 const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
                 // eslint-disable-next-line
