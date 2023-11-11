@@ -1,3 +1,10 @@
+## [5.27.14](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.13...v5.27.14) (2023-11-11)
+
+
+### Bug Fixes
+
+* Add flag to privately cast spell message to allow other modules to find what it refers to. ([d2dacc9](https://github.com/xdy/xdy-pf2e-workbench/commit/d2dacc95d0d764bd019da5dc8c4ba3c5d5daacad))
+
 ## [5.27.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.27.12...v5.27.13) (2023-11-11)
 
 
