@@ -180,7 +180,8 @@
     "spellCardNotFound": "Nie odnaleziono karty czaru. Użyto {spell} na minimalnym poziomie tego czaru.",
     "effects": {
       "orcFerocityUsed": "Użyto Dzikości Orka",
-      "deliberateDeathUsed": "Użyto Umyślna śmierć"
+      "deliberateDeathUsed": "Użyto Umyślna śmierć",
+      "bounceBackUsed": "Użyto Odbij Się"
     },
     "SETTINGS": {
       "actionsReminderAllow": {
