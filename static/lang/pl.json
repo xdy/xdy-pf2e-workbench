@@ -232,7 +232,7 @@
       "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
         "no": "Nie",
         "name": "... i dodać jeszcze jeden poziom umierania, jeśli otrzyma obrażenia krytyczne przez wroga.",
-        "hint": "Jeśli zostanie trafiony krytycznie celnym atakiem zadającym obrażenia przez wrogiego bohatera, dodaje jeden poziom Umierania więcej. Używa ustawień z listy rozwijanej powyżej. Wymaga włączenia powyższego ustawienia.",
+        "hint": "Jeśli zostanie trafiony krytycznie celnym atakiem zadającym obrażenia przez wrogiego bohatera, dodaje jeden poziom Umierania więcej. Używa ustawień \"ranny\" z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
         "add": "Dodaj umieranie",
         "addForCharacters": "Dodaj umieranie dla postaci + towarzyszy"
       },
@@ -306,7 +306,7 @@
       },
       "autoGainDyingIfTakingDamageWhenAlreadyDying": {
         "no": "Nie",
-        "hint": "Jeśli otrzymujesz obrażenia, gdy już umierasz, dodaj jeszcze jedno umieranie (lub ewentualnie dwa, jeśli włączone jest dodatkowe umieranie przy trafieniu krytycznym). Używa ustawień z listy rozwijanej powyżej. Wymaga włączenia powyższego ustawienia.",
+        "hint": "Jeśli otrzymujesz obrażenia, gdy już umierasz, dodaj jeszcze jedno umieranie (lub ewentualnie dwa, jeśli włączone jest dodatkowe umieranie przy trafieniu krytycznym). Używa ustawień \"ranny\" z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
         "add": "Dodaj umieranie",
         "name": "... i dodać dodatkowe poziomy umierania, jeśli otrzymujesz obrażenia podczas umierania.",
         "addForCharacters": "Dodaj umieranie dla postaci + towarzyszy"
@@ -370,7 +370,11 @@
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
         "name": "Obrażenia zadawane automatycznie przy rzucaniu zaklęć, które nie są atakami.",
-        "hint": "Ustawienie klienta, aby *zawsze* automatycznie rzucać normalne obrażenia dla zaklęć *nieatakujących* podczas ich rzucania."
+        "hint": "Ustawienie klienta, aby *zawsze* automatycznie rzucać normalne obrażenia dla zaklęć *nieatakujących* podczas ich rzucania.",
+        "no": "Nie",
+        "anySpell": "Dla każdego zaklęcia niebędącego atakiem",
+        "nonSaveSpell": "Dla zaklęcia niewymagającego rzutu obronnego, niebędącego atakiem",
+        "saveSpell": "Dla zaklęcia wymagającego rzutu obronnego, niebędącego atakiem"
       },
       "callHotbarMacro": {
         "hint": "Wywołanie makra paska skrótów na stronie {page} pozycja {column}",
@@ -468,7 +472,13 @@
         "unconscious": "jest nieprzytomny",
         "name": "Przypomnienie, jeśli atakowanie tokenem nie jest możliwe",
         "hint": "Zaznacz aby pokazać przypomnienie jeśli atakujesz tokenem, który nie może atakować z powodu bycia nieprzytomnym/martwym/pokonanym/brak PŻ/etc.",
-        "dead": "nie żyje"
+        "dead": "nie żyje",
+        "error": "{title} anulowany przez {actorName} z powodu {reason}.",
+        "info": "Czy jesteś pewien tego {title}? {actorName} {reason}, a więc raczej nie będzie w stanie zaatakować...",
+        "restrained": "jest ograniczony",
+        "cancelAttack": "Anuluj atak, jeśli nie możesz zaatakować",
+        "reminder": "Przypomnienie",
+        "no": "Nie przypominaj"
       },
       "reminderCannotAttackIgnoreDeadEidolon": {
         "hint": "Zaznacz, aby eidolony, które są martwe/nie mają PW, mogły atakować bez przypomnienia.",
@@ -483,10 +493,10 @@
         "hint": "Zaznacz, aby wyświetlić przypomnienie o celowaniu w walce.",
         "name": "Przypomnienie o celowaniu",
         "info": "Wyceluj, zanim zaatakujesz.",
-        "mustTarget": "Musi celować",
+        "mustTarget": "Anulowanie nieukierunkowanego ataku",
         "no": "Brak przypomnienia",
         "reminder": "Przypomnienie",
-        "error": "Musisz wycelować przed atakiem."
+        "error": "{title} anulowane, ponieważ musisz namierzyć cel przed atakiem."
       },
       "tokenAnimation": {
         "hint": "Włącz, aby zmienić animację ruchu tokenów. Może to powodować problemy z modułem Multilevel Tokens.",
@@ -584,7 +594,7 @@
       },
       "legacyVariantRuleAncestryParagon": {
         "title": "Atuty Ancestry Paragon",
-        "hint": "(Niepotrzebne, o ile system zachowuje wsparcie dla premastera Ancestry Paragon Variant Rule). Dodaje to sekcję atutów w kampanii dla Ancestry Paragon.",
+        "hint": "(Nie dotyczy do wersji systemu pf2e 5.9.0, wymaga włączenia ustawienia systemowego \"Campaign Feats\") Dodaje sekcję Campaign Feats dla Ancestry Paragon, ale *nie* automatycznie przenosi wyczynów z poprzedniej sekcji lub Bonus Feats.",
         "name": "Dodaje sloty na atuty Ancestry Paragon. Wymaga odświeżenia (f5) po zmianie."
       },
       "moveBeforeCurrentCombatantContextMenu": {
@@ -645,7 +655,7 @@
         "notification": "Housepatcher: Stosowanie {count} zasad domowych do przedmiotów w kompendiach systemowych."
       },
       "legacyVariantRuleDualClass": {
-        "hint": "(Niepotrzebne, o ile system zachowuje wsparcie dla premaster Dual Class Variant Rule). Dodaje to sekcję atutów kampanii dla podwójnej klasy, musisz także użyć makra podwójnej klasy, aby utworzyć klasę dla postaci.",
+        "hint": "(Nie dotyczy do wersji systemu pf2e 5.9.0, wymaga włączenia ustawienia systemowego \"Campaign Feats\") Dodaje sekcję Campaign Feats dla Dual Class, ale *nie* automatycznie przenosi wyczynów z poprzedniej sekcji lub Bonus Feats, musisz także użyć makra Dual Class, aby utworzyć klasę dla postaci.",
         "name": "Dodaje miejsca na atuty dwóch klas. Wymaga odświeżenia (f5) po zmianie.",
         "title": "Atuty Dwóch Klas"
       },
@@ -704,6 +714,22 @@
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
         "hint": "Utajniaj przedmioty tylko wtedy, gdy są równe lub wyższe niż poziom drużyny. Zastępuje ręczne wprowadzanie.",
         "name": "Utajniaj przedmioty tylko wtedy, gdy ich poziom jest równy lub wyższy od poziomu drużyny."
+      },
+      "autoKillIfMassiveDamage": {
+        "name": "... ale automatycznie zabija po otrzymaniu Ogromnych Obrażeń. (Przestarzałe)",
+        "yes": "Tak, dla wszystkich",
+        "yesForCharacters": "Tak, dla postaci + towarzyszy",
+        "yesForNpcs": "Tak, dla npc",
+        "no": "Nie",
+        "hint": "(Przestarzałe) Ustawienie automatycznego zabijania po otrzymaniu ogromnych obrażeń."
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "name": "... ale automatycznie zabija po otrzymaniu wystarczających obrażeń od efektu Śmierci. (Przestarzałe)",
+        "hint": "(Przestarzałe) Ustawienie automatycznego zabijania po otrzymaniu wystarczających obrażeń od źródła z cechą Śmierć.",
+        "no": "Nie",
+        "yesForCharacters": "Tak, dla postaci + towarzyszy",
+        "yesForNpcs": "Tak, dla npc",
+        "yes": "Tak, dla wszystkich"
       }
     },
     "modules": {
