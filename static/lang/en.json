@@ -518,12 +518,12 @@
         "bonusTag": "Low Reroll +10"
       },
       "legacyVariantRuleAncestryParagon": {
-        "hint": "(Not relevant until pf2e system version 5.9.0, requires the system setting 'Campaign Feats' to be enabled) Adds a Campaign Feats section for Ancestry Paragon but does *not* automatically migrate feats from the previous section or Bonus Feats.",
+        "hint": "Requires the system setting 'Campaign Feats' to be enabled. Adds a Campaign Feats section for Ancestry Paragon but does *not* automatically migrate feats from the previous section or Bonus Feats.",
         "name": "Adds Ancestry Paragon feat slots. Refresh (f5) after changing.",
         "title": "Ancestry Paragon Feats"
       },
       "legacyVariantRuleDualClass": {
-        "hint": "(Not relevant until pf2e system version 5.9.0, requires the system setting 'Campaign Feats' to be enabled) Adds a Campaign Feats section for Dual Class but does *not* automatically migrate feats from the previous section or Bonus Feats, you also need to use the Dual Class macro to create the class for the character to use.",
+        "hint": "Requires the system setting 'Campaign Feats' to be enabled. Adds a Campaign Feats section for Dual Class but does *not* automatically migrate feats from the previous section or Bonus Feats, you also need to use the Dual Class macro to create the class for the character to use.",
         "name": "Adds Dual Class feat slots. Refresh (f5) after changing.",
         "title": "Dual Class Feats"
       },

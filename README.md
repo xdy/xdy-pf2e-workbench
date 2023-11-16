@@ -108,10 +108,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 
 * House Rules
     * Option to enable Keeley's Hero Point Rule (if reroll die is 10 or less, get a +10 bonus). Courtesy of stwlam
-    * Not yet needed option to add Ancestry Paragon feat slots (don't enable until if/when the system removes them due
-      to not being in the remaster rules)
-    * Not yet needed option to add Dual Class feat slots (don't enable until if/when the system removes them due to not
-      being in the remaster rules)
+    * Option to add Ancestry Paragon feat slots  as campaign feat slots (i.e. requires campaign feats to enabled.)
+    * Option to add Dual Class feat slots as campaign feat slots (i.e. requires campaign feats to enabled.)
     * REALLY experimental option to use json to potentially brick your world. (Or,
       see [docs/housepatcher.md](docs/housepatcher.md) for more details.)
 
