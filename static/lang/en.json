@@ -18,31 +18,31 @@
       }
     },
     "skillActions": {
-      "Title": "Skill Actions",
+      "Title": "(Broken) Skill Actions",
       "assuranceLabel": "Assurance",
       "Settings": {
         "Position": {
           "name": "Skill Actions position",
           "hint": "Position in the skill page; Top : right after Strikes, Bottom : At the end",
-          "bottom": "Bottom",
+          "bottom": "Disabled as it's currently broken. Bottom",
           "disabled": "Disabled",
-          "top": "Top"
+          "top": "Disabled as it's currently broken. Top"
         },
         "hideDuplicates": {
-          "name": "Skill Actions hide duplicate actions",
+          "name": "(Broken) Skill Actions hide duplicate actions",
           "hint": "Whether to hide duplicate actions in the action list or the skill action list",
           "doNotHide": "Do not hide",
           "hideActions": "Hide actions",
           "hideSkillActions": "Hide skill actions"
         },
         "IconStyle": {
-          "name": "Skill Actions Icon Style",
+          "name": "(Broken) Skill Actions Icon Style",
           "hint": "Icon style on the skill; Action Cost Icon: For the actions cost icon, Skill Icon: For the skills icon if it's available",
           "actionCostIcon": "Action Cost Icon",
           "skillIcon": "Skill Icon"
         },
         "Description": {
-          "name": "Skill Actions Description",
+          "name": "(Broken) Skill Actions Description",
           "hint": "Whether to show the actions description in the chat when rolling"
         },
         "variants": {

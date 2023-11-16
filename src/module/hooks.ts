@@ -2,7 +2,6 @@ import { isActuallyDamageRoll, logDebug, logInfo, shouldIHandleThis } from "./ut
 import { ActorPF2e } from "@actor";
 import { ActorSystemData } from "@actor/data/base.js";
 import { TokenDocumentPF2e } from "@scene";
-import { renderSheetSkillActions } from "./feature/skill-actions/sheet-skill-actions.js";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
 import { ActorSheetPF2e } from "@actor/sheet/base.js";
 import { UserPF2e } from "@module/user/index.js";
@@ -556,9 +555,9 @@ export async function pf2eSystemReadyHook() {
 }
 
 export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, $html: JQuery) {
-    if (sheet.actor?.type === CHARACTER_TYPE && String(game.settings.get(MODULENAME, "skillActions")) !== "disabled") {
-        renderSheetSkillActions(sheet, $html);
-    }
+    // if (sheet.actor?.type === CHARACTER_TYPE && String(game.settings.get(MODULENAME, "skillActions")) !== "disabled") {
+    //     renderSheetSkillActions(sheet, $html);
+    // }
 
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerSpellsRarityColour")) {
         $html.find(".spell-list").each((_i, e) => {
