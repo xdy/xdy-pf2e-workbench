@@ -265,24 +265,31 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
 
 export function persistentDamage(message) {
     const flavor = message.flavor;
+    const persistentFlavor = flavor?.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent"));
     if (
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
             ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
         ) &&
-        flavor.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
-        message.speaker.token &&
         flavor &&
+        persistentFlavor &&
+        message.speaker.token &&
         message.rolls &&
         message.rolls.length > 0 &&
         message.id === game.messages.contents.pop()?.id &&
-        game.actors
+        game.actors &&
+        (message.getFlag(MODULENAME, "persistentHandled") ?? true)
     ) {
         const token = canvas.tokens?.get(message.speaker.token);
         if (token && token.isOwner) {
             // Should only be one roll, either way, only use the first.
-            token?.actor?.applyDamage({ damage: message.rolls[0], token: token.document }).then();
+            token?.actor
+                ?.applyDamage({
+                    damage: message.rolls[0],
+                    token: token.document,
+                })
+                .then(() => message.setFlag(MODULENAME, "persistentHandled", true).then());
         }
         const actor = token?.actor;
         if (actor && game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
@@ -311,18 +318,25 @@ export function persistentHealing(message) {
         game.combats.active &&
         game.combats.active.combatant &&
         game.combats.active.combatant.actor &&
-        message.id === game.messages.contents.pop()?.id
+        message.id === game.messages.contents.pop()?.id &&
+        (message.getFlag(MODULENAME, "persistentHandled") ?? true)
     ) {
         const token = game.combats.active.combatant.token;
         if (token && token.isOwner) {
-            if (
-                [
-                    game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentHealing.FastHealingLabel`),
-                    game.i18n.localize(`${MODULENAME}.SETTINGS.applyPersistentHealing.RegenerationLabel`),
-                ].some((text) => message.flavor?.includes(text))
-            ) {
+            const fastHealingLabel = game.i18n.localize(
+                `${MODULENAME}.SETTINGS.applyPersistentHealing.FastHealingLabel`,
+            );
+            const regenerationLabel = game.i18n.localize(
+                `${MODULENAME}.SETTINGS.applyPersistentHealing.RegenerationLabel`,
+            );
+            if ([fastHealingLabel, regenerationLabel].some((text) => message.flavor?.includes(text))) {
                 const healing = message.rolls.reduce((sum, current) => sum + (current.total || 1), 0) * -1;
-                token.actor?.applyDamage({ damage: healing, token: token.actor?.getActiveTokens()[0].document }).then();
+                token.actor
+                    ?.applyDamage({
+                        damage: healing,
+                        token: token.actor?.getActiveTokens()[0].document,
+                    })
+                    .then(() => message.setFlag(MODULENAME, "persistentHandled", true).then());
             }
         }
     }
