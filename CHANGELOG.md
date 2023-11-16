@@ -1,3 +1,18 @@
+# [5.29.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.28.1...v5.29.0) (2023-11-16)
+
+
+### Bug Fixes
+
+* Attack reminder works again. ([f829df4](https://github.com/xdy/xdy-pf2e-workbench/commit/f829df48f5ff1cb8d8c6544b340640f63af9b253))
+* Mark Skill Actions as broken, and always disabled. This feature has been on life support, and *may* just have hit the end of it's already prolonged life. ([e5f73b7](https://github.com/xdy/xdy-pf2e-workbench/commit/e5f73b741908125caeee5688e49cfb7dc721cfe7))
+* Remove note about requiring 5.9.0 from ancestry paragon and dual class options. ([f39a070](https://github.com/xdy/xdy-pf2e-workbench/commit/f39a07008ae6ee579d6f4eaa9168d655ff675955))
+* Stop double-applying persistent damage and healing. ([7a94559](https://github.com/xdy/xdy-pf2e-workbench/commit/7a945599177e97398364ba437d97b4f64569a83f))
+
+
+### Features
+
+* Removing support for alignment from mystification as it has been removed from the system. ([776a8e9](https://github.com/xdy/xdy-pf2e-workbench/commit/776a8e998d1d9c90e8f4d11fee65b59e7b6b603c))
+
 ## [5.28.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.28.0...v5.28.1) (2023-11-13)
 
 
