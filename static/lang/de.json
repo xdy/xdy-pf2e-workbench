@@ -496,10 +496,6 @@
         "hint": "Auswählen, um das Hinzufügen einer zufälligen Eigenschaft zu überspringen wenn du einzigartige NSC verschleierst (d.h. sie wird beibehalten wenn den NSC entschleierst)",
         "name": "Überspring die zufällige Eigenschaft für einzigartige NSC."
       },
-      "npcMystifierUseAlignmentTraits": {
-        "hint": "Auswählen um Gesinnungskategorien in den verschleierten Namen zu nutzen.",
-        "name": "Benutze NSC Gesinnungskategorien."
-      },
       "remindersSettings": {
         "label": "Verwalte die Einstellungen für Erinnerungen",
         "hint": "Aktiviere und konfiguriere verschiedene Erinnerungen",

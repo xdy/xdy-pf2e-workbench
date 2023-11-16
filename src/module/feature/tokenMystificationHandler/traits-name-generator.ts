@@ -9,7 +9,6 @@ let TRAITS: {
     PF2E_CREATURE_TRAITS: string[];
     AON_CREATURE_TYPES: string[];
     ELITE_WEAK: string[];
-    ALIGNMENTS: string[];
 };
 
 async function fixesPreAndPost(settingkey: string): Promise<string> {
@@ -49,7 +48,6 @@ function fillTraits() {
         AON_CREATURE_TYPES: AON_CREATURE_TYPES,
         PF2E_CREATURE_TRAITS: Object.keys(CONFIG.PF2E.creatureTraits),
         ELITE_WEAK: ELITE_WEAK,
-        ALIGNMENTS: Object.keys(CONFIG.PF2E.alignmentTraits),
     };
 }
 
@@ -95,11 +93,6 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
         pf2eCreatureTraits = traitsList.filter((trait: string) => TRAITS.PF2E_CREATURE_TRAITS.includes(trait));
     }
 
-    let alignments: string[] = [];
-    if (game.settings.get(MODULENAME, "npcMystifierUseAlignmentTraits")) {
-        alignments = traitsList.filter((trait: string) => TRAITS.ALIGNMENTS.includes(trait));
-    }
-
     let others: string[] = [];
     if (game.settings.get(MODULENAME, "npcMystifierUseOtherTraits")) {
         others = traitsList
@@ -107,8 +100,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
             .filter((trait: string) => !TRAITS.SIZES.includes(trait))
             .filter((trait: string) => !TRAITS.RARITIES.includes(trait))
             .filter((trait: string) => !TRAITS.AON_CREATURE_TYPES.includes(trait))
-            .filter((trait: string) => !TRAITS.PF2E_CREATURE_TRAITS.includes(trait))
-            .filter((trait: string) => !TRAITS.ALIGNMENTS.includes(trait));
+            .filter((trait: string) => !TRAITS.PF2E_CREATURE_TRAITS.includes(trait));
     }
 
     // Deduplicate using set
@@ -117,7 +109,6 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
             [prefix]
                 .concat(size)
                 .concat(eliteWeak)
-                .concat(alignments)
                 .concat(rarities)
                 .concat(others)
                 .concat(aonCreatureTypes)

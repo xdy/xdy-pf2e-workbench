@@ -260,10 +260,6 @@
         "hint": "Não adiciona propriedade aleatórios quando mistificar PdMs únicos.",
         "name": "Não adicionar propriedade a PdMs únicos"
       },
-      "npcMystifierUseAlignmentTraits": {
-        "hint": "Usa traços do alinhamento no nome mistificado.",
-        "name": "Usar traços de alinhamento"
-      },
       "npcMystifierUseCreatureTraits": {
         "hint": "Use todos os traços de criatura como definidos pelo sistema pf2e no nome mistificado.",
         "name": "Usar traços de criatura"

@@ -413,10 +413,6 @@
         "hint": "Ustawienie automatycznego usuwania nieprzytomności w przypadku wyleczenia do ponad 0 PŻ.",
         "name": "Automatycznie usuwa nieprzytomność, jeśli zostanie wyleczona do poziomu wyższego niż 0 PŻ."
       },
-      "npcMystifierUseAlignmentTraits": {
-        "name": "Użyj cech charakteru npc.",
-        "hint": "Zaznacz, aby użyć cech charakteru w utajnionej nazwie."
-      },
       "npcMystifier": {
         "hint": "Zaznacz, aby włączyć utajnienie npc, zmieniając nazwy tokenów na aktywnej scenie w oparciu o ich cechy, jeśli podczas dodawania do sceny zostanie kliknięty klawisz Ctrl (konfigurowalny). Zapisz ustawienia, aby pokazać/ukryć dodatkowe opcje.",
         "name": "Włącz utajnienie npc."

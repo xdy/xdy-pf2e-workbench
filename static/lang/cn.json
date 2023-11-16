@@ -394,10 +394,6 @@
         "hint": "勾选此项，当神秘化独特NPC时不添加随机词汇。（即解除神秘化时保留原样）",
         "name": "独特NPC不设置会持续保留的随机词。"
       },
-      "npcMystifierUseAlignmentTraits": {
-        "hint": "勾选此项，在神秘化名称中使用阵营特征。",
-        "name": "使用NPC的阵营特征。"
-      },
       "npcMystifierUseCreatureTraits": {
         "hint": "勾选此项，神秘化名称中将使用所有PF2e系统已定义的生物特征。",
         "name": "使用生物特征。"

@@ -346,10 +346,6 @@
         "hint": "Cliquez pour éviter d'accoler un propriété aléatoire lorsque vous mystifiez des PNJ uniques.",
         "name": "Éviter le propriété aléatoire pour les PNJ uniques."
       },
-      "npcMystifierUseAlignmentTraits": {
-        "hint": "Cliquez pour utiliser les traits d'alignement dans le nom mystifié.",
-        "name": "Utiliser les traits d'alignement des PNJ."
-      },
       "npcMystifierUseCreatureTraits": {
         "hint": "Cliquez pour utiliser tous les 'traits de créature' comme indiqué dans le système PF2e dans le nom mystifié.",
         "name": "Utiliser les traits de créature."

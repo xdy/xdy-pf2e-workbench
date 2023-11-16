@@ -604,10 +604,6 @@
         "hint": "Check to skip adding a random property when mystifying unique npcs. (I.e. it's kept when you demystify the npc.)",
         "name": "Skip random persistent property for unique npcs."
       },
-      "npcMystifierUseAlignmentTraits": {
-        "hint": "Check to use alignment traits in the mystified name.",
-        "name": "Use npc alignment traits."
-      },
       "npcMystifierUseCreatureTraits": {
         "hint": "Check to use all 'creature traits' as defined in the pf2e system in the mystified name.",
         "name": "Use creature traits."
