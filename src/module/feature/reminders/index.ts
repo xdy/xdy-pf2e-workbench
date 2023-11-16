@@ -138,7 +138,7 @@ export function reminderCannotAttack(message: ChatMessagePF2e, cancelAttack: boo
         ["spell-attack-roll", "attack-roll", "skill-check"].includes(
             <string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type,
         ) &&
-        traits?.some((t) => t.name === "attack")
+        traits?.some((t) => t === "attack")
     ) {
         const token: TokenDocumentPF2e = <TokenDocumentPF2e>canvas?.scene?.tokens.get(<string>message.speaker.token);
         const actions = context.options.filter((o) => o.startsWith("action:"));
