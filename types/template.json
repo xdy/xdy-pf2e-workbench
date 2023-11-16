@@ -7,7 +7,8 @@
             "loot",
             "familiar",
             "party",
-            "vehicle"
+            "vehicle",
+            "army"
         ],
         "templates": {
             "common": {
@@ -25,9 +26,6 @@
                     }
                 },
                 "details": {
-                    "alignment": {
-                        "value": "N"
-                    },
                     "level": {
                         "value": 1
                     }
@@ -62,7 +60,7 @@
             "templates": [
                 "common"
             ],
-            "exploration": [],
+            "abilities": null,
             "details": {
                 "biography": {
                     "appearance": "",
@@ -182,7 +180,8 @@
                     "RO": null,
                     "VW": null
                 }
-            }
+            },
+            "exploration": []
         },
         "npc": {
             "templates": [
@@ -434,6 +433,63 @@
             "_migration": {
                 "version": null,
                 "previous": null
+            }
+        },
+        "army": {
+            "templates": [],
+            "attributes": {
+                "ac": {
+                    "value": 10,
+                    "details": "",
+                    "potency": 0
+                },
+                "hp": {
+                    "value": 10,
+                    "max": 10,
+                    "details": ""
+                }
+            },
+            "details": {
+                "level": {
+                    "value": 1
+                },
+                "alignment": "Neutral",
+                "description": "",
+                "blurb": "",
+                "strongSave": "morale",
+                "editLock": true
+            },
+            "traits": {
+                "rarity": "common",
+                "type": "infantry",
+                "size": {
+                    "value": "med"
+                },
+                "value": []
+            },
+            "consumption": 1,
+            "weapons": {
+                "bonus": 0,
+                "melee": {
+                    "name": "Melee Strike",
+                    "unlocked": true,
+                    "potency": 0
+                },
+                "ranged": {
+                    "name": "Ranged Strike",
+                    "unlocked": false,
+                    "potency": 0
+                }
+            },
+            "resources": {
+                "potions": {
+                    "value": 0,
+                    "max": 0
+                },
+                "ammunition": {
+                    "value": 5,
+                    "max": 5
+                }
             }
         }
     },
@@ -889,7 +945,6 @@
                 "medium": 0,
                 "heavy": 0
             },
-            "classDC": 0,
             "ancestryFeatLevels": {
                 "value": [
                     1,
@@ -1020,24 +1075,10 @@
             "level": {
                 "value": 1
             },
-            "spellType": {
-                "value": "attack"
+            "traits": {
+                "traditions": []
             },
-            "category": {
-                "value": "spell"
-            },
-            "traditions": {
-                "value": []
-            },
-            "components": {
-                "focus": false,
-                "material": false,
-                "somatic": false,
-                "verbal": false
-            },
-            "materials": {
-                "value": ""
-            },
+            "requirements": "",
             "target": {
                 "value": ""
             },
@@ -1049,27 +1090,18 @@
                 "value": "2"
             },
             "duration": {
-                "value": ""
-            },
-            "damage": {
-                "value": {}
-            },
-            "save": {
                 "value": "",
-                "basic": ""
+                "sustained": false
             },
-            "sustained": {
-                "value": false
-            },
+            "damage": {},
+            "defense": null,
             "cost": {
                 "value": ""
             },
             "location": {
                 "value": null
             },
-            "hasCounteractCheck": {
-                "value": false
-            }
+            "counteraction": false
         },
         "spellcastingEntry": {
             "templates": [
@@ -1225,10 +1257,11 @@
                 "common"
             ],
             "category": "deity",
-            "alignment": {
-                "own": "N",
-                "follower": [
-                    "N"
+            "sanctification": {
+                "modal": "can",
+                "what": [
+                    "holy",
+                    "unholy"
                 ]
             },
             "domains": {
@@ -1239,7 +1272,7 @@
                 "harm",
                 "heal"
             ],
-            "ability": [],
+            "attribute": [],
             "skill": null,
             "weapons": [],
             "spells": {}

@@ -1,5 +1,5 @@
-import { CompendiumBrowser } from "../index.ts";
 import { ContentTabName } from "../data.ts";
+import { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
 import { CompendiumBrowserIndexData, SpellFilters } from "./data.ts";
 export declare class CompendiumBrowserSpellTab extends CompendiumBrowserTab {
@@ -10,6 +10,6 @@ export declare class CompendiumBrowserSpellTab extends CompendiumBrowserTab {
     storeFields: string[];
     constructor(browser: CompendiumBrowser);
     protected loadData(): Promise<void>;
-    protected filterIndexData(entry: CompendiumBrowserIndexData): boolean;
+    protected filterIndexData(indexData: CompendiumBrowserIndexData): boolean;
     protected prepareFilterData(): SpellFilters;
 }

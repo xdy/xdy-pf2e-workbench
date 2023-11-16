@@ -1,6 +1,6 @@
 import { ActorPF2e } from "@actor";
 import { SpellPF2e } from "@item";
-import { BaseSpellcastingEntry, SpellcastingSlotRank, SpellPrepEntry } from "./types.ts";
+import { BaseSpellcastingEntry, SpellPrepEntry, SpellcastingSlotRank } from "./types.ts";
 declare class SpellCollection<TActor extends ActorPF2e, TEntry extends BaseSpellcastingEntry<TActor | null>> extends Collection<SpellPF2e<TActor>> {
     #private;
     readonly entry: TEntry;
@@ -16,11 +16,11 @@ declare class SpellCollection<TActor extends ActorPF2e, TEntry extends BaseSpell
         slotLevel?: number;
     }): Promise<SpellPF2e<TActor> | null>;
     /** Saves the prepared spell slot data to the spellcasting entry  */
-    prepareSpell(spell: SpellPF2e, slotRank: number, spellSlot: number): Promise<TEntry>;
+    prepareSpell(spell: SpellPF2e, slotRank: number, spellSlot: number): Promise<TEntry | undefined>;
     /** Removes the spell slot and updates the spellcasting entry */
-    unprepareSpell(slotRank: number, spellSlot: number): Promise<TEntry>;
+    unprepareSpell(slotRank: number, spellSlot: number): Promise<TEntry | undefined>;
     /** Sets the expended state of a spell slot and updates the spellcasting entry */
-    setSlotExpendedState(slotRank: number, spellSlot: number, isExpended: boolean): Promise<TEntry>;
+    setSlotExpendedState(slotRank: number, spellSlot: number, isExpended: boolean): Promise<TEntry | undefined>;
     getSpellData(): Promise<SpellCollectionData>;
     protected getSpellPrepList(spells: SpellPF2e<TActor>[]): Record<number, SpellPrepEntry[]> | null;
 }

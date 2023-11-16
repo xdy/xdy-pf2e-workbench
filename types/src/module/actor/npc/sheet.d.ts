@@ -1,9 +1,9 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { NPCPF2e } from "@actor";
+import type { NPCPF2e } from "@actor";
 import { CreatureSheetPF2e } from "@actor/creature/sheet.ts";
-import { UserPF2e } from "@module/user/document.ts";
+import type { UserPF2e } from "@module/user/document.ts";
 import { NPCConfig } from "./config.ts";
 import { NPCSheetData, NPCSpellcastingSheetData } from "./types.ts";
 declare abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends CreatureSheetPF2e<TActor> {

@@ -1,19 +1,19 @@
 import { ItemType } from "@item/base/data/index.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { RawPredicate } from "@system/predication.ts";
-import type { DataUnionField, PredicateField, StrictArrayField, StrictObjectField, StrictStringField } from "@system/schema-data-fields.ts";
-import type { BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { DataUnionField, PredicateField, StrictArrayField, StrictBooleanField, StrictObjectField, StrictStringField } from "@system/schema-data-fields.ts";
+import type { SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementSchema, RuleElementSource } from "../index.ts";
 type ChoiceSetSchema = RuleElementSchema & {
     /**
      * The options from which the user can choose. If a string is provided, it is treated as a reference to a record in
      * `CONFIG.PF2E`, and the `PromptChoice` array is composed from its entries.
      */
-    choices: DataUnionField<StrictArrayField<StrictObjectField<PickableThing>, PickableThing[], PickableThing[], true, false, false> | StrictObjectField<ChoiceSetObject> | StrictStringField<string, string, true, false, false>, true, false, true>;
+    choices: DataUnionField<StrictArrayField<StrictObjectField<PickableThing>, PickableThing[], PickableThing[], true, false, false> | StrictObjectField<ChoiceSetObject> | StrictStringField<string, string, true, false, false>, true, false, false>;
     /** The prompt to present in the ChoiceSet application window */
-    prompt: StringField<string, string, true, false, true>;
+    prompt: StringField<string, string, false, false, true>;
     /** Whether the parent item's name should be adjusted to reflect the choice made */
-    adjustName: BooleanField<boolean, boolean, true, false, true>;
+    adjustName: StrictBooleanField<true, false, true>;
     /**
      * The name of the flag that will contain the user's selection. If not set, it defaults to the camel-casing of the
      * parent item's slug, falling back to name.
@@ -24,7 +24,7 @@ type ChoiceSetSchema = RuleElementSchema & {
     /** A predicate indicating valid dropped item selections */
     allowedDrops: SchemaField<AllowedDropsSchema, SourceFromSchema<AllowedDropsSchema>, ModelPropsFromSchema<AllowedDropsSchema>, false, true, false>;
     /** Allow the user to make no selection without suppressing all other rule elements on the parent item */
-    allowNoSelection: BooleanField<boolean, boolean, false, false, false>;
+    allowNoSelection: StrictBooleanField<false, false, false>;
 };
 type AllowedDropsSchema = {
     label: StringField<string, string, true, true, true>;

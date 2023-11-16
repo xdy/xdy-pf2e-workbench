@@ -16,7 +16,7 @@ import type { CheckRoll } from "@system/check/index.ts";
 import { Statistic, StatisticDifficultyClass, type ArmorStatistic } from "@system/statistic/index.ts";
 import { CreatureSkills, CreatureSpeeds, CreatureSystemData, LabeledSpeed, SenseData, VisionLevel } from "./data.ts";
 import { CreatureSensePF2e } from "./sense.ts";
-import { Alignment, CreatureTrait, CreatureType, CreatureUpdateContext, GetReachParameters } from "./types.ts";
+import { CreatureTrait, CreatureType, CreatureUpdateContext, GetReachParameters } from "./types.ts";
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     parties: Set<PartyPF2e>;
@@ -27,12 +27,11 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     /** Saving throw rolls for the creature, built during data prep */
     saves: Record<SaveType, Statistic>;
     perception: Statistic;
+    get allowedItemTypes(): (ItemType | "physical")[];
     /** Types of creatures (as provided by bestiaries 1-3) of which this creature is a member */
     get creatureTypes(): CreatureType[];
-    /** The creature's position on the alignment axes */
-    get alignment(): Alignment;
     get rarity(): Rarity;
-    get allowedItemTypes(): (ItemType | "physical")[];
+    get hardness(): number;
     /**
      * A currently naive measurement of this creature's reach
      * @param [context.action] The action context of the reach measurement. Interact actions don't consider weapons.

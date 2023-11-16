@@ -20,7 +20,7 @@ export declare class DistributeCoinsPopup extends FormApplication<ActorPF2e, Dis
     getData(options?: Partial<DistributeCoinsOptions>): Promise<PopupData>;
     _updateObject(_event: Event, formData: Record<string, unknown> & PopupFormData): Promise<void>;
     /** Prevent Foundry from converting the actor IDs to boolean values */
-    protected _onSubmit(event: Event, options?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
+    protected _onSubmit(event: Event, options?: OnSubmitFormOptions): Promise<Record<string, unknown> | false>;
 }
 interface DistributeCoinsOptions extends FormApplicationOptions {
     /** An optional initial list of recipients to receive coins */

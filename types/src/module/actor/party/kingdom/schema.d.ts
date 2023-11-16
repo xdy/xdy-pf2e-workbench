@@ -32,7 +32,7 @@ declare const KINGDOM_SCHEMA: {
     type: StringField<"kingmaker", "kingmaker", true, false, true>;
     active: DataUnionField<StrictStringField<"building", "building", false, false, boolean> | StrictBooleanField<boolean, boolean, true>, false, false, boolean>;
     name: StringField<string, string, true, false, true>;
-    img: import("types/foundry/common/data/fields.d.ts").FilePathField<`${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.svg` | `${string}.tiff` | `${string}.webp`, `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.svg` | `${string}.tiff` | `${string}.webp`, true, false, true>;
+    img: import("types/foundry/common/data/fields.d.ts").FilePathField<`${string}.svg` | `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.tiff` | `${string}.webp`, `${string}.svg` | `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.tiff` | `${string}.webp`, true, false, true>;
     capital: StringField<"", "", true, false, true>;
     size: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
     level: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;

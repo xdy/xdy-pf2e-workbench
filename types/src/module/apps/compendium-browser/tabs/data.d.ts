@@ -1,11 +1,11 @@
 import { CreatureTrait } from "@actor/creature/types.ts";
 import { HazardTrait } from "@actor/hazard/types.ts";
 import { ActionTrait } from "@item/ability/index.ts";
+import { KingmakerTrait } from "@item/campaign-feature/types.ts";
 import { FeatTrait } from "@item/feat/types.ts";
 import { PhysicalItemTrait } from "@item/physical/data.ts";
 import type { SearchResult } from "minisearch";
 import { SortDirection } from "../data.ts";
-import { KingmakerTrait } from "@item/campaign-feature/types.ts";
 type CheckboxOptions = Record<string, {
     label: string;
     selected: boolean;
@@ -80,7 +80,6 @@ interface ActionFilters extends BaseFilterData {
 }
 interface BestiaryFilters extends BaseFilterData {
     checkboxes: {
-        alignments: CheckboxData;
         rarity: CheckboxData;
         sizes: CheckboxData;
         source: CheckboxData;
@@ -144,7 +143,7 @@ interface HazardFilters extends BaseFilterData {
 interface SpellFilters extends BaseFilterData {
     checkboxes: {
         category: CheckboxData;
-        level: CheckboxData;
+        rank: CheckboxData;
         rarity: CheckboxData;
         source: CheckboxData;
         traditions: CheckboxData;

@@ -58,7 +58,7 @@ interface ItemGrantSource {
     onDelete?: ItemGrantDeleteAction;
 }
 type ItemGrantDeleteAction = "cascade" | "detach" | "restrict";
-interface ItemSystemSource {
+type ItemSystemSource = {
     level?: {
         value: number;
     };
@@ -81,7 +81,7 @@ interface ItemSystemSource {
         version: number | null;
         lastMigration: object | null;
     }>;
-}
+};
 type ItemSystemData = ItemSystemSource;
 type FrequencyInterval = keyof ConfigPF2e["PF2E"]["frequencies"];
 interface FrequencySource {

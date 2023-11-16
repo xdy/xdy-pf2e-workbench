@@ -8,7 +8,6 @@ import { AttributeString, MovementType, RollContext, RollContextParams } from "@
 import type { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e } from "@item";
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { ItemType } from "@item/base/data/index.ts";
-import { MagicTradition } from "@item/spell/types.ts";
 import { ZeroToTwo } from "@module/data.ts";
 import { UserPF2e } from "@module/user/document.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
@@ -30,8 +29,6 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     feats: CharacterFeats<this>;
     pfsBoons: FeatPF2e<this>[];
     deityBoonsCurses: FeatPF2e<this>[];
-    /** All base casting tradition proficiences, which spellcasting build off of */
-    traditions: Record<MagicTradition, Statistic>;
     /** The primary class DC */
     classDC: Statistic | null;
     /** All class DCs, including the primary */
@@ -105,8 +102,6 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     /** Add a proficiency in a weapon group or base weapon */
     addAttackProficiency(key: BaseWeaponProficiencyKey | WeaponGroupProficiencyKey): Promise<void>;
     protected _preUpdate(changed: DeepPartial<CharacterSource>, options: CreatureUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
-    /** Toggle between boost-driven and manual management of ability scores */
-    toggleAttributeManagement(): Promise<void>;
 }
 interface CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     flags: CharacterFlags;

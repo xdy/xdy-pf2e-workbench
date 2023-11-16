@@ -7,15 +7,15 @@ import { DamageCategoryUnique, DamageDieSize, DamageType } from "@system/damage/
 import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
-declare const MODIFIER_TYPES: Set<"untyped" | "ability" | "circumstance" | "item" | "potency" | "proficiency" | "status">;
+declare const MODIFIER_TYPES: Set<"untyped" | "item" | "potency" | "ability" | "circumstance" | "proficiency" | "status">;
 type ModifierType = SetElement<typeof MODIFIER_TYPES>;
-interface BaseRawModifier {
+interface RawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
     slug?: string;
     /** The display name of this modifier; can be a localization key (see en.json). */
     label: string;
     /** The actual numeric benefit/penalty that this modifier provides. */
-    modifier?: number;
+    modifier: number;
     /** The type of this modifier - modifiers of the same type do not stack (except for `untyped` modifiers). */
     type?: ModifierType;
     /** If the type is "ability", this should be set to a particular ability */
@@ -42,6 +42,8 @@ interface BaseRawModifier {
     traits?: string[];
     /** Hide this modifier in UIs if it is disabled */
     hideIfDisabled?: boolean;
+    /** Whether to use this bonus/penalty/modifier even if it isn't the greatest magnitude */
+    force?: boolean;
 }
 interface ModifierAdjustment {
     /** A slug for matching against modifiers: `null` will match against all modifiers within a selector */
@@ -52,11 +54,6 @@ interface ModifierAdjustment {
     suppress?: boolean;
     getNewValue?: (current: number) => number;
     getDamageType?: (current: DamageType | null) => DamageType | null;
-}
-interface RawModifier extends BaseRawModifier {
-    modifier: number;
-    /** Whether to use this bonus/penalty/modifier even if it isn't the greatest magnitude */
-    force?: boolean;
 }
 interface DeferredValueParams {
     /** An object to merge into roll data for `Roll.replaceFormulaData` */
@@ -269,6 +266,7 @@ declare class DamageDicePF2e {
     clone(): DamageDicePF2e;
     toObject(): RawDamageDice;
 }
-type RawDamageDice = Required<DamageDiceParameters>;
+interface RawDamageDice extends Required<DamageDiceParameters> {
+}
 export { CheckModifier, DamageDicePF2e, MODIFIER_TYPES, ModifierPF2e, PROFICIENCY_RANK_OPTION, StatisticModifier, adjustModifiers, applyStackingRules, createAttributeModifier, createProficiencyModifier, ensureProficiencyOption, };
-export type { BaseRawModifier, DamageDiceOverride, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierType, RawModifier, TestableDeferredValueParams, };
+export type { DamageDiceOverride, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierType, RawDamageDice, RawModifier, TestableDeferredValueParams, };

@@ -1,6 +1,6 @@
 import { ActorType } from "@actor/data/index.ts";
-import { ItemGrantDeleteAction } from "@item/base/data/system.ts";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
+import { ItemGrantDeleteAction } from "@item/base/data/system.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "../index.ts";
 import { GrantItemSchema } from "./schema.ts";
 declare class GrantItemRuleElement extends RuleElementPF2e<GrantItemSchema> {

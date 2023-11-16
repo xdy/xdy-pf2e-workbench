@@ -9,7 +9,7 @@ declare class KitSheetPF2e extends ItemSheetPF2e<KitPF2e> {
     static get defaultOptions(): DocumentSheetOptions;
     getData(options?: Partial<DocumentSheetOptions>): Promise<KitSheetData>;
     protected _onDrop(event: ElementDragEvent): Promise<void>;
-    removeItem(event: MouseEvent): Promise<KitPF2e>;
+    removeItem(event: MouseEvent): Promise<KitPF2e | null>;
     activateListeners($html: JQuery): void;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }

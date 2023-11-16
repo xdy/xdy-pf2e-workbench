@@ -32,6 +32,8 @@ import { ActorSpellcasting } from "./spellcasting.ts";
 declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Actor<TParent> {
     /** Has this actor completed construction? */
     constructed: boolean;
+    /** A UUIDv5 hash digest of the foundry UUID */
+    signature: string;
     /** Handles rolling initiative for the current actor */
     initiative: ActorInitiative | null;
     /** A separate collection of owned physical items for convenient access */
@@ -233,9 +235,8 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
         forceRemove: boolean;
     }): Promise<void>;
     /** Increase a valued condition, or create a new one if not present */
-    increaseCondition(conditionSlug: ConditionSlug | ConditionPF2e<this>, { min, max, value, }?: {
-        min?: number | null;
-        max?: number | null;
+    increaseCondition(conditionSlug: ConditionSlug | ConditionPF2e<this>, { max, value }?: {
+        max?: number;
         value?: number | null;
     }): Promise<ConditionPF2e<this> | null>;
     /** Toggle a condition as present or absent. If a valued condition is toggled on, it will be set to a value of 1. */
@@ -264,7 +265,7 @@ interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
     system: ActorSystemData;
     prototypeToken: PrototypeTokenPF2e<this>;
     get sheet(): ActorSheetPF2e<ActorPF2e>;
-    update(data: Record<string, unknown>, options?: ActorUpdateContext<TParent>): Promise<this>;
+    update(data: Record<string, unknown>, options?: ActorUpdateContext<TParent>): Promise<this | undefined>;
     getActiveTokens(linked: boolean | undefined, document: true): TokenDocumentPF2e<ScenePF2e>[];
     getActiveTokens(linked?: boolean | undefined, document?: false): TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
     getActiveTokens(linked?: boolean, document?: boolean): TokenDocumentPF2e<ScenePF2e>[] | TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];

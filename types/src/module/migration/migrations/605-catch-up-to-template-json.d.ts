@@ -5,6 +5,12 @@ import { ActorSourcePF2e } from "@actor/data/index.ts";
 export declare class Migration605CatchUpToTemplateJSON extends MigrationBase {
     static version: number;
     private addEffects;
-    updateActor(actorData: ActorSourcePF2e): Promise<void>;
-    updateItem(itemData: ItemSourcePF2e, actorData: ActorSourcePF2e): Promise<void>;
+    updateActor(source: ActorSourcePF2e): Promise<void>;
+    updateItem(source: MaybeWithCounteractCheckObject, actorSource: ActorSourcePF2e): Promise<void>;
 }
+type MaybeWithCounteractCheckObject = ItemSourcePF2e & {
+    system: {
+        hasCounteractCheck?: object;
+    };
+};
+export {};

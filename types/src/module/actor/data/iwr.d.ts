@@ -46,7 +46,6 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         clumsy: string;
         cold: string;
         confused: string;
-        conjuration: string;
         controlled: string;
         "critical-hits": string;
         curse: string;
@@ -61,11 +60,9 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         earth: string;
         electricity: string;
         emotion: string;
-        enchantment: string;
         energy: string;
         enfeebled: string;
         evil: string;
-        evocation: string;
         fascinated: string;
         fatigued: string;
         "fear-effects": string;
@@ -85,7 +82,6 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         mental: string;
         metal: string;
         "misfortune-effects": string;
-        necromancy: string;
         "non-magical": string;
         "nonlethal-attacks": string;
         "object-immunities": string;
@@ -117,7 +113,6 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         stupefied: string;
         "swarm-attacks": string;
         "swarm-mind": string;
-        transmutation: string;
         trip: string;
         "unarmed-attacks": string;
         unconscious: string;
@@ -127,6 +122,8 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         water: string;
         wood: string;
         wounded: string;
+        holy: string;
+        unholy: string;
         abysium: string;
         adamantine: string;
         djezet: string;
@@ -200,6 +197,8 @@ declare class Weakness extends IWR<WeaknessType> implements WeaknessSource {
         weapons: string;
         "weapons-shedding-bright-light": string;
         wood: string;
+        holy: string;
+        unholy: string;
         abysium: string;
         adamantine: string;
         darkwood: string;
@@ -274,6 +273,8 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         weapons: string;
         "weapons-shedding-bright-light": string;
         wood: string;
+        holy: string;
+        unholy: string;
         abysium: string;
         adamantine: string;
         darkwood: string;

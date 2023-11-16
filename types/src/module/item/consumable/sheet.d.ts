@@ -6,6 +6,7 @@ export declare class ConsumableSheetPF2e extends PhysicalItemSheetPF2e<Consumabl
 }
 interface ConsumableSheetData extends PhysicalItemSheetData<ConsumablePF2e> {
     consumableTypes: ConfigPF2e["PF2E"]["consumableTypes"];
+    materialEffects: SheetOptions;
     otherTags: SheetOptions;
 }
 export {};

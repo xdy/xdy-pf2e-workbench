@@ -2,7 +2,6 @@ import { PredicateField, SlugField } from "@system/schema-data-fields.ts";
 import type { BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 type RuleElementSource = {
     key?: JSONValue;
-    data?: JSONValue;
     value?: JSONValue;
     label?: JSONValue;
     slug?: JSONValue;

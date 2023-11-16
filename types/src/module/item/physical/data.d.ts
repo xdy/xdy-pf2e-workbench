@@ -4,6 +4,7 @@ import { ConsumableTrait } from "@item/consumable/data.ts";
 import { EquipmentTrait } from "@item/equipment/data.ts";
 import { WeaponTrait } from "@item/weapon/types.ts";
 import { Size, TraitsWithRarity, ValuesList } from "@module/data.ts";
+import { MaterialDamageEffect } from "@system/damage/types.ts";
 import { ActionCost, BaseItemSourcePF2e, Frequency, ItemSystemData, ItemSystemSource } from "../base/data/system.ts";
 import type { ITEM_CARRY_TYPES } from "../base/data/values.ts";
 import type { CoinsPF2e } from "./helpers.ts";
@@ -38,13 +39,23 @@ interface PhysicalSystemSource extends ItemSystemSource {
         value: string;
     };
     containerId: string | null;
-    material: ItemMaterialData;
+    material: ItemMaterialSource;
     size: Size;
     usage: {
         value: string;
     };
     activations?: Record<string, ItemActivation>;
     temporary?: boolean;
+}
+interface IdentificationSource {
+    status: IdentificationStatus;
+    unidentified: MystifiedData;
+    misidentified: object;
+}
+interface ItemMaterialSource {
+    grade: PreciousMaterialGrade | null;
+    type: PreciousMaterialType | null;
+    effects?: MaterialDamageEffect[];
 }
 interface PhysicalSystemData extends PhysicalSystemSource, Omit<ItemSystemData, "level"> {
     hp: PhysicalItemHitPoints;
@@ -82,12 +93,9 @@ interface MystifiedData {
         };
     };
 }
-type IdentifiedData = DeepPartial<MystifiedData>;
-interface IdentificationSource {
-    status: IdentificationStatus;
-    unidentified: MystifiedData;
-    misidentified: object;
+interface ItemMaterialData extends Required<ItemMaterialSource> {
 }
+type IdentifiedData = DeepPartial<MystifiedData>;
 interface IdentificationData extends IdentificationSource {
     identified: MystifiedData;
 }
@@ -100,10 +108,6 @@ type EquippedData = {
 type PhysicalItemTrait = ArmorTrait | ConsumableTrait | EquipmentTrait | WeaponTrait;
 interface PhysicalItemTraits<T extends PhysicalItemTrait = PhysicalItemTrait> extends TraitsWithRarity<T> {
     otherTags: string[];
-}
-interface ItemMaterialData {
-    grade: PreciousMaterialGrade | null;
-    type: PreciousMaterialType | null;
 }
 interface ItemActivation {
     id: string;
@@ -141,4 +145,4 @@ interface Price extends PartialPrice {
     value: CoinsPF2e;
     per: number;
 }
-export type { BasePhysicalItemSource, BulkData, Coins, EquippedData, IdentificationData, IdentificationStatus, IdentifiedData, Investable, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PartialPrice, PhysicalItemHPSource, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, Price, };
+export type { BasePhysicalItemSource, BulkData, Coins, EquippedData, IdentificationData, IdentificationStatus, IdentifiedData, Investable, ItemActivation, ItemCarryType, ItemMaterialData, ItemMaterialSource, MystifiedData, PartialPrice, PhysicalItemHPSource, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, Price, };

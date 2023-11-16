@@ -30,6 +30,7 @@ declare class StrictArrayField<TElementField extends DataField, TSourceProp exte
     protected _cast(value: unknown): unknown;
     /** Parent method assumes array-wrapping: pass through unchanged */
     protected _cleanType(value: unknown): unknown;
+    initialize(value: JSONValue, model: ConstructorOf<DataModel>, options: ArrayFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>): MaybeSchemaProp<TModelProp, TRequired, TNullable, THasInitial>;
 }
 declare class StrictObjectField<TSourceProp extends object, TModelProp = TSourceProp, TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ObjectField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;

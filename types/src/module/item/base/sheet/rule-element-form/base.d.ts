@@ -51,6 +51,7 @@ interface RuleElementFormSheetData<TSource extends RuleElementSource, TObject ex
     fields: RuleElementSchema | undefined;
     /** A collection of additional handlebars functions */
     form: Record<string, unknown>;
+    validationFailures: string[];
 }
 interface RuleElementFormTabData {
     /** Valid tab names for this form */

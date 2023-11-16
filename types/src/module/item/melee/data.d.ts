@@ -39,6 +39,6 @@ interface NPCAttackDamageSource {
     category?: "persistent" | "precision" | "splash" | null;
 }
 type NPCAttackDamage = Required<NPCAttackDamageSource>;
-export type NPCAttackTrait = keyof ConfigPF2e["PF2E"]["npcAttackTraits"];
+export type NPCAttackTrait = keyof typeof CONFIG.PF2E.npcAttackTraits;
 export type NPCAttackTraits = ItemTraitsNoRarity<NPCAttackTrait>;
-export type { MeleeFlags, MeleeSource, MeleeSystemData, MeleeSystemSource, NPCAttackDamage };
+export type { MeleeFlags, MeleeSource, MeleeSystemData, MeleeSystemSource, NPCAttackDamage, NPCAttackDamageSource };

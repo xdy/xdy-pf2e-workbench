@@ -4,8 +4,12 @@ import { SpellCollection } from "@item/spellcasting-entry/collection.ts";
 import { SpellcastingEntrySource } from "@item/spellcasting-entry/index.ts";
 import { RitualSpellcasting } from "@item/spellcasting-entry/rituals.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
-export declare class ActorSpellcasting<TActor extends ActorPF2e> extends Collection<BaseSpellcastingEntry<TActor>> {
+import { Statistic } from "@system/statistic/statistic.ts";
+import { DelegatedCollection } from "@util";
+export declare class ActorSpellcasting<TActor extends ActorPF2e> extends DelegatedCollection<BaseSpellcastingEntry<TActor>> {
     readonly actor: TActor;
+    /** The base casting proficiency, which spellcasting build off of */
+    base: Statistic;
     /** All available spell lists on this actor */
     collections: Collection<SpellCollection<TActor, BaseSpellcastingEntry<TActor>>>;
     constructor(actor: TActor, entries: BaseSpellcastingEntry<TActor>[]);

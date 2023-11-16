@@ -34,7 +34,7 @@ type SheetSelections = {
     custom?: never;
 });
 interface TagifyTraitOptions {
-    sourceTraits: Iterable<string>;
+    sourceTraits?: Iterable<string>;
     record: Record<string, string>;
 }
 interface TraitTagifyEntry {

@@ -7,7 +7,6 @@ import { RollNotePF2e } from "@module/notes.ts";
 import { CreatureIdentificationData } from "@module/recall-knowledge.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { NPCFlags, NPCSource, NPCSystemData } from "./data.ts";
-import { AbstractNPCSheet } from "./sheet.ts";
 import { VariantCloneParams } from "./types.ts";
 declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     initiative: ActorInitiative;
@@ -17,7 +16,6 @@ declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF
     /** This NPC's attribute modifiers */
     get abilities(): Abilities;
     get description(): string;
-    get hardness(): number;
     /** Does this NPC have the Elite adjustment? */
     get isElite(): boolean;
     /** Does this NPC have the Weak adjustment? */
@@ -50,6 +48,5 @@ interface NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e |
     flags: NPCFlags;
     readonly _source: NPCSource;
     system: NPCSystemData;
-    get sheet(): AbstractNPCSheet<this>;
 }
 export { NPCPF2e };

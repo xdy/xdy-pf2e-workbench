@@ -89,8 +89,8 @@ declare function getActionIcon(actionType: string | ActionCost | null): ImageFil
  */
 declare function getActionGlyph(action: string | number | null | ActionCost): string;
 declare function ErrorPF2e(message: string): Error;
-/** Returns the number in an ordinal format, like 1st, 2nd, 3rd, 4th, etc */
-declare function ordinal(value: number): string;
+/** Returns the number in an ordinal format, like 1st, 2nd, 3rd, 4th, etc. */
+declare function ordinalString(value: number): string;
 /** Localizes a list of strings into a (possibly comma-delimited) list for the current language */
 declare function localizeList(items: string[], { conjunction }?: {
     conjunction?: "and" | "or";
@@ -126,4 +126,4 @@ declare function isImageFilePath(path: unknown): path is ImageFilePath;
 declare function isVideoFilePath(path: unknown): path is ImageFilePath;
 declare function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath;
 declare const SORTABLE_DEFAULTS: Sortable.Options;
-export { ErrorPF2e, SORTABLE_DEFAULTS, addSign, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinal, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sum, tupleHasValue, zip, type Fraction, type SlugCamel, };
+export { ErrorPF2e, SORTABLE_DEFAULTS, addSign, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinalString, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sum, tupleHasValue, zip, type Fraction, type SlugCamel, };

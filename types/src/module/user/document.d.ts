@@ -18,7 +18,8 @@ interface UserPF2e extends User<ActorPF2e<null>> {
 }
 interface UserSettingsPF2e {
     showEffectPanel: boolean;
-    showRollDialogs: boolean;
+    showCheckDialogs: boolean;
+    showDamageDialogs: boolean;
     monochromeDarkvision: boolean;
     searchPackContents: boolean;
 }

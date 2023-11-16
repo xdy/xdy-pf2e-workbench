@@ -10,7 +10,6 @@ declare const immunityTypes: {
     clumsy: string;
     cold: string;
     confused: string;
-    conjuration: string;
     controlled: string;
     "critical-hits": string;
     curse: string;
@@ -25,11 +24,9 @@ declare const immunityTypes: {
     earth: string;
     electricity: string;
     emotion: string;
-    enchantment: string;
     energy: string;
     enfeebled: string;
     evil: string;
-    evocation: string;
     fascinated: string;
     fatigued: string;
     "fear-effects": string;
@@ -49,7 +46,6 @@ declare const immunityTypes: {
     mental: string;
     metal: string;
     "misfortune-effects": string;
-    necromancy: string;
     "non-magical": string;
     "nonlethal-attacks": string;
     "object-immunities": string;
@@ -81,7 +77,6 @@ declare const immunityTypes: {
     stupefied: string;
     "swarm-attacks": string;
     "swarm-mind": string;
-    transmutation: string;
     trip: string;
     "unarmed-attacks": string;
     unconscious: string;
@@ -91,6 +86,8 @@ declare const immunityTypes: {
     water: string;
     wood: string;
     wounded: string;
+    holy: string;
+    unholy: string;
     abysium: string;
     adamantine: string;
     djezet: string;
@@ -155,6 +152,8 @@ declare const weaknessTypes: {
     weapons: string;
     "weapons-shedding-bright-light": string;
     wood: string;
+    holy: string;
+    unholy: string;
     abysium: string;
     adamantine: string;
     darkwood: string;
@@ -217,6 +216,8 @@ declare const resistanceTypes: {
     weapons: string;
     "weapons-shedding-bright-light": string;
     wood: string;
+    holy: string;
+    unholy: string;
     abysium: string;
     adamantine: string;
     darkwood: string;

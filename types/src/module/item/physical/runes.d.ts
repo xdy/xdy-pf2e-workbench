@@ -70,7 +70,7 @@ interface WeaponPropertyRuneData<TSlug extends WeaponPropertyRuneType> extends P
             max: number | null;
         }[];
     };
-    strikeAdjustments?: Pick<StrikeAdjustment, "adjustWeapon">[];
+    strikeAdjustments?: Pick<StrikeAdjustment, "adjustTraits" | "adjustWeapon">[];
 }
 /** Title and text are mandatory for these notes */
 interface RuneNoteData extends Pick<RollNoteSource, "outcome" | "predicate" | "title" | "text"> {
@@ -145,13 +145,13 @@ declare const RUNE_DATA: {
     };
     weapon: {
         property: {
+            holy: WeaponPropertyRuneData<"holy">;
+            unholy: WeaponPropertyRuneData<"unholy">;
             vorpal: WeaponPropertyRuneData<"vorpal">;
-            anarchic: WeaponPropertyRuneData<"anarchic">;
             ancestralEchoing: WeaponPropertyRuneData<"ancestralEchoing">;
             anchoring: WeaponPropertyRuneData<"anchoring">;
             ashen: WeaponPropertyRuneData<"ashen">;
             authorized: WeaponPropertyRuneData<"authorized">;
-            axiomatic: WeaponPropertyRuneData<"axiomatic">;
             bane: WeaponPropertyRuneData<"bane">;
             bloodbane: WeaponPropertyRuneData<"bloodbane">;
             bloodthirsty: WeaponPropertyRuneData<"bloodthirsty">;
@@ -196,7 +196,6 @@ declare const RUNE_DATA: {
             greaterThundering: WeaponPropertyRuneData<"greaterThundering">;
             grievous: WeaponPropertyRuneData<"grievous">;
             hauling: WeaponPropertyRuneData<"hauling">;
-            holy: WeaponPropertyRuneData<"holy">;
             hopeful: WeaponPropertyRuneData<"hopeful">;
             hooked: WeaponPropertyRuneData<"hooked">;
             impactful: WeaponPropertyRuneData<"impactful">;
@@ -218,7 +217,6 @@ declare const RUNE_DATA: {
             thundering: WeaponPropertyRuneData<"thundering">;
             trueRooting: WeaponPropertyRuneData<"trueRooting">;
             underwater: WeaponPropertyRuneData<"underwater">;
-            unholy: WeaponPropertyRuneData<"unholy">;
             wounding: WeaponPropertyRuneData<"wounding">;
         };
         potency: Record<ZeroToFour, PotencyRuneData | null>;

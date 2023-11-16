@@ -96,11 +96,13 @@
                 "Beak": "Beak",
                 "Beard": "Beard",
                 "Bite": "Bite",
+                "Blade": "Blade",
                 "Body": "Body",
                 "BoneDart": "Bone Dart",
                 "BoneShard": "Bone Shard",
                 "BoneSpike": "Bone Spike",
                 "Boot": "Boot",
+                "Boulder": "Boulder",
                 "Branch": "Branch",
                 "Claw": "Claw",
                 "CubeFace": "Cube Face",
@@ -118,12 +120,14 @@
                 "Leg": "Leg",
                 "LightningLash": "Lightning Lash",
                 "Mandibles": "Mandibles",
+                "MetalShard": "Metal Shard",
                 "Moonbeam": "Moonbeam",
                 "PiercingHymn": "Piercing Hymn",
                 "Pincer": "Pincer",
                 "Pseudopod": "Pseudopod",
                 "Quill": "Quill",
                 "Rock": "Rock",
+                "Seed": "Seed",
                 "Spikes": "Spikes",
                 "Spine": "Spine",
                 "Stinger": "Stinger",
@@ -562,6 +566,7 @@
                 "AllDamageFromUndead": "all damage from undead",
                 "AllMagicalDamage": "all magical damage",
                 "AllNonMagicalDamage": "all non-magical damage",
+                "AttacksWaterCreatures": "attacks by water creatures",
                 "ColdIronBludgeoning": "cold iron bludgeoning",
                 "ImpulseFireFrom": "impulse fire from {origin}",
                 "MagicalBludgeoning": "magical bludgeoning",
@@ -1635,7 +1640,7 @@
                 "DivineSmite": {
                     "Label": "Divine Smite"
                 },
-                "EvilDamage": "Evil Damage",
+                "EvilDamage": "Spirit Damage",
                 "NegativeDamage": "Void Damage",
                 "TargetReaction": "Target triggered your champion reaction"
             },
@@ -1907,6 +1912,10 @@
                     "Poison": "Orange (Poison)",
                     "Cold": "Brown (Cold)"
                 },
+                "ChaplainsCudgel": {
+                    "BowToAHigherPowerLabel": "Chaplain's Cudgel — Bow to a Higher Power",
+                    "CastTwoActionSpellLabel": "Cast a divine spell that takes two or more actions"
+                },
                 "DeckOfDestiny": {
                     "MatchingSuitPrompt": "Is the drawn card's suit related the check?",
                     "WealOrWoePrompt": "Select Weal or Woe."
@@ -1925,6 +1934,15 @@
                         "SecretLabel": "Moderate Eagle Eye Elixir (To Find Secret Doors or Traps)"
                     }
                 },
+                "FightersFork": {
+                    "FluidLengthLabel": "Fighter's Fork — Fluid Length"
+                },
+                "HolyWater": {
+                    "Note": "Can damage only creatures with the unholy trait."
+                },
+                "HumbugPocket": {
+                    "ConcealAnObjectLabel": "Humbug Pocket (Conceal an Object in the Pocket)"
+                },
                 "NosoiCharm": {
                     "PerformanceLabel": "Nosoi Charm (Play an instrument, orate or sing)",
                     "RequestLabel": "Nosoi Charm (Request)"
@@ -1935,6 +1953,13 @@
                 "ScapularOfShields": {
                     "CriticalImmunityLabel": "Activate Scapular of Shields to gain critical immunity.",
                     "ResistAllLabel": "Activate Scapular of Shields to gain resistance to all damage."
+                },
+                "Sparkler": {
+                    "CriticalHitNote": "On a critical hit, you cause the target to become @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round.",
+                    "StrikeLabel": "Sparkler"
+                },
+                "UnholyWater": {
+                    "Note": "Can damage only creatures with the holy trait."
                 }
             },
             "ExemplaryFinisher": {
@@ -2170,6 +2195,9 @@
                     "MagmaSpikeCriticalSpecialization": "Instead of the normal critical specialization effect, the target takes [[/r 1d6[persistent,fire]]] damage; you gain a bonus on this persistent damage equal to your item bonus to attack rolls on unarmed attacks."
                 }
             },
+            "InCombat": {
+                "ToggleLabel": "In Combat"
+            },
             "Inventor": {
                 "Innovation": {
                     "Armor": {
@@ -2302,6 +2330,7 @@
                 "DamageType": "Damage Type",
                 "Enter": "Enter",
                 "Exit": "Exit",
+                "NonCantrip": "Non-Cantrip",
                 "ResistanceType": "Resistance Type",
                 "SecondAttempt": "Second Attempt",
                 "ThirdAttempt": "Third Attempt",
@@ -2459,9 +2488,6 @@
                     "ThreeActionLabel": "One Inch Punch (Three Actions)",
                     "TwoActionLabel": "One Inch Punch (Two Actions)"
                 },
-                "SacredKi": {
-                    "Prompt": "Choose your aligned damage."
-                },
                 "StunningFist": {
                     "Note": "The target must succeed at a @Check[type:fortitude|dc:resolve(@actor.system.proficiencies.classDCs.monk.value)|name:Monk|traits:incapacitation|overrideTraits:true] save against your class DC or be @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1} (or @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 3} on a critical failure)."
                 },
@@ -2515,7 +2541,11 @@
             "Orc": {
                 "HoldMark": {
                     "Axe": "Axe (Axe or Pick).",
-                    "Prompt": "Choose the shape of your hold mark.",
+                    "BurningSun": "Burning Sun",
+                    "DeathsHead": "Death's Head",
+                    "DefiledCorpse": "Defiled Corpse",
+                    "EmptyHand": "Empty Hand",
+                    "Prompt": "Choose your hold mark emblem.",
                     "Shield": "Shield (Hammer or Shield).",
                     "Torch": "Torch (Bomb or Knife)."
                 },
@@ -2549,7 +2579,7 @@
                 "AdvancedMulticlassFeat": "Select a class feat up to half your character level.",
                 "Alignment": "Select an alignment.",
                 "CantripOrNonCantrip": "Select cantrip or non-cantrip spell.",
-                "ClassDCAbilityScore": "Select the class DC's ability score.",
+                "ClassDCAbilityScore": "Select the class DC's key attribute.",
                 "ConsciousMind": "Select a conscious mind.",
                 "CreatureSize": "Select a creature size.",
                 "DamageType": "Select a damage type.",
@@ -2569,6 +2599,7 @@
                 "Material": "Select a material.",
                 "PathToPerfection": "Select a path to perfection.",
                 "Rune": "Select a Rune.",
+                "Sanctification": "Select a sanctification.",
                 "SecondImplement": "Select a second implement.",
                 "Shield": "Select a shield.",
                 "Shillelagh": "Select a club or staff.",
@@ -2733,6 +2764,12 @@
             "SpellEffectProtection": {
                 "Prompt": "Choose which alignment trait you are protecting against."
             },
+            "SpellEffectSweetDream": {
+                "Glamor": "Dream of Glamor",
+                "Insight": "Dream of Insight",
+                "Prompt": "Select a dream.",
+                "Voyaging": "Dream of Voyaging"
+            },
             "SpellEffectThermalRemedy": {
                 "BonusVsDisease": "Bonus vs. Disease",
                 "FireResistance": "Fire Resistance",
@@ -2791,7 +2828,11 @@
                 "AutomaticPower": "Automatic Power Driver Dynamo",
                 "Label": "Sterling Dynamo",
                 "ManualPercussive": "Manual Percussive Striker Dynamo",
-                "ManualPower": "Manual Power Driver Dynamo"
+                "ManualPower": "Manual Power Driver Dynamo",
+                "StasianSmash": {
+                    "CriticalFailureText": "If you critically fail your dynamo Strike, you take @Damage[1d12[electricity]] damage.",
+                    "SuccessText": "On a success, the Strike deals an additional 1d12 electricity damage to the target, as well as @Damage[(ternary(gte(@actor.level,18),2,1))d4[electricity]] damage to up to two other foes within 10 feet as sparks leap across the gaps."
+                }
             },
             "SubstituteRoll": {
                 "Assurance": "Assurance",
@@ -2949,6 +2990,9 @@
             },
             "WardingRune": {
                 "Prompt": "Select a school of magic other than divination."
+            },
+            "Weapon": {
+                "Metal": "Using a metal weapon"
             },
             "WeaponInfusion": {
                 "Melee": "Melee Infusion",

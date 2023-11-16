@@ -1,8 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import { ItemPF2e } from "@item";
-import { ActionTrait } from "@item/ability/types.ts";
 import { ItemSourcePF2e, ItemSummaryData } from "@item/base/data/index.ts";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
@@ -10,15 +9,16 @@ import { RangeData } from "@item/types.ts";
 import { MeasuredTemplatePF2e } from "@module/canvas/index.ts";
 import { ChatMessagePF2e, ItemOriginFlag } from "@module/chat-message/index.ts";
 import { OneToTen, Rarity, ZeroToTwo } from "@module/data.ts";
-import { UserPF2e } from "@module/user/index.ts";
+import type { UserPF2e } from "@module/user/index.ts";
+import { type TokenDocumentPF2e } from "@scene/index.ts";
 import { CheckRoll } from "@system/check/index.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
 import { DamageKind, DamageRollContext, SpellDamageTemplate } from "@system/damage/types.ts";
 import { StatisticRollParameters } from "@system/statistic/index.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
-import { SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data.ts";
+import { SpellArea, SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data.ts";
 import { SpellOverlayCollection } from "./overlay.ts";
-import { MagicSchool, MagicTradition, SpellComponent, SpellTrait } from "./types.ts";
+import { MagicTradition, SpellTrait } from "./types.ts";
 interface SpellConstructionContext<TParent extends ActorPF2e | null> extends DocumentConstructionContext<TParent> {
     fromConsumable?: boolean;
 }
@@ -45,9 +45,6 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get level(): number;
     get traits(): Set<SpellTrait>;
     get rarity(): Rarity;
-    /** Action traits added when Casting this Spell */
-    get castingTraits(): ActionTrait[];
-    get school(): MagicSchool | null;
     get traditions(): Set<MagicTradition>;
     get spellcasting(): BaseSpellcastingEntry<NonNullable<TParent>> | null;
     get isAttack(): boolean;
@@ -57,13 +54,13 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get attribute(): AttributeString;
     /** @deprecated */
     get ability(): AttributeString;
-    get components(): Record<SpellComponent, boolean> & {
-        value: string;
-    };
     /** Whether this spell has unlimited uses */
     get unlimited(): boolean;
     get isVariant(): boolean;
     get hasVariants(): boolean;
+    get area(): (SpellArea & {
+        label: string;
+    }) | null;
     /** Dummy getter for interface alignment with weapons and actions */
     get range(): RangeData | null;
     /** Whether the "damage" roll of this spell deals damage or heals (or both, depending on the target) */
@@ -74,7 +71,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     getRollData(rollOptions?: {
         castLevel?: number | string;
     }): NonNullable<EnrichmentOptions["rollData"]>;
-    getDamage(damageOptions?: SpellDamageOptions): Promise<SpellDamage | null>;
+    getDamage(params?: SpellDamageOptions): Promise<SpellDamage | null>;
     /**
      * Loads an alternative version of this spell, called a variant.
      * The variant is created via the application of one or more overlays based on parameters.
@@ -90,6 +87,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     placeTemplate(message?: ChatMessagePF2e): void;
     prepareBaseData(): void;
     prepareSiblingData(this: SpellPF2e<ActorPF2e>): void;
+    prepareActorData(): void;
     getRollOptions(prefix?: string): string[];
     toMessage(event?: MouseEvent | JQuery.TriggeredEvent, { create, data, rollMode }?: SpellToMessageOptions): Promise<ChatMessagePF2e | undefined>;
     getChatData(this: SpellPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptionsPF2e, rollOptions?: {
@@ -101,7 +99,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     /** Roll counteract check */
     rollCounteract(event?: MouseEvent | JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
     getOriginData(): ItemOriginFlag;
-    update(data: Record<string, unknown>, options?: DocumentUpdateContext<TParent>): Promise<this>;
+    update(data: Record<string, unknown>, options?: DocumentUpdateContext<TParent>): Promise<this | undefined>;
     protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<SpellSource>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
@@ -123,6 +121,6 @@ interface SpellToMessageOptions {
 interface SpellDamageOptions {
     rollMode?: RollMode | "roll";
     skipDialog?: boolean;
-    target?: ActorPF2e | null;
+    target?: Maybe<TokenDocumentPF2e>;
 }
 export { SpellPF2e, type SpellToMessageOptions };

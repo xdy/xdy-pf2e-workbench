@@ -9,6 +9,7 @@ import { forceOpen } from "./athletics/force-open.ts";
 import { grapple } from "./athletics/grapple.ts";
 import { highJump } from "./athletics/high-jump.ts";
 import { longJump } from "./athletics/long-jump.ts";
+import * as reposition from "./athletics/reposition.ts";
 import { shove } from "./athletics/shove.ts";
 import { swim } from "./athletics/swim.ts";
 import * as trip from "./athletics/trip.ts";
@@ -68,6 +69,7 @@ export declare const ActionMacros: {
     grapple: typeof grapple;
     highJump: typeof highJump;
     longJump: typeof longJump;
+    reposition: typeof reposition.legacy;
     shove: typeof shove;
     swim: typeof swim;
     trip: typeof trip.legacy;

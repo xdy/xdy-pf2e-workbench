@@ -18,7 +18,6 @@ interface ClassSystemSource extends ABCSystemSource {
         value: string[];
         additional: number;
     };
-    classDC: ZeroToFour;
     ancestryFeatLevels: {
         value: number[];
     };

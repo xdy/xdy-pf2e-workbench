@@ -6,9 +6,9 @@ import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
 import { UserPF2e } from "@module/user/document.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import type { PhysicalItemPF2e } from "../physical/document.ts";
-import { ItemSheetPF2e } from "./sheet/base.ts";
 import { ItemInstances } from "../types.ts";
 import type { ItemFlagsPF2e, ItemSourcePF2e, ItemSummaryData, ItemSystemData, ItemType, TraitChatData } from "./data/index.ts";
+import { ItemSheetPF2e } from "./sheet/base.ts";
 /** The basic `Item` subclass for the system */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     static getDefaultArtwork(itemData: foundry.documents.ItemSource): {

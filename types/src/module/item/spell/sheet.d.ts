@@ -1,10 +1,10 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { SpellPF2e, SpellSystemSource } from "@item/spell/index.ts";
+import { TraitTagifyEntry } from "@module/sheet/helpers.ts";
+import { DamageCategoryUnique, DamageType } from "@system/damage/types.ts";
 import { ItemSheetDataPF2e, ItemSheetPF2e } from "../base/sheet/base.ts";
-import { SpellSystemData } from "./data.ts";
-import { DamageCategoryUnique } from "@system/damage/types.ts";
+import type { SpellPF2e, SpellSystemData, SpellSystemSource } from "./index.ts";
 export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
     #private;
     get id(): string;
@@ -21,6 +21,7 @@ interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
     isCantrip: boolean;
     isFocusSpell: boolean;
     isRitual: boolean;
+    passiveDefense: string | null;
     isVariant: boolean;
     variants: {
         name: string;
@@ -28,17 +29,11 @@ interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
         sort: number;
         actions: string;
     }[];
-    magicSchools: ConfigPF2e["PF2E"]["magicSchools"];
-    spellCategories: ConfigPF2e["PF2E"]["spellCategories"];
-    spellLevels: ConfigPF2e["PF2E"]["spellLevels"];
-    spellTypes: ConfigPF2e["PF2E"]["spellTypes"];
-    saves: ConfigPF2e["PF2E"]["saves"];
-    damageCategories: ConfigPF2e["PF2E"]["damageCategories"];
-    damageTypes: Record<string, string>;
-    damageSubtypes: Pick<ConfigPF2e["PF2E"]["damageCategories"], DamageCategoryUnique>;
-    spellComponents: string[];
-    areaSizes: ConfigPF2e["PF2E"]["areaSizes"];
-    areaTypes: ConfigPF2e["PF2E"]["areaTypes"];
+    materials: typeof CONFIG.PF2E.materialDamageEffects;
+    damageTypes: Record<DamageType, string>;
+    damageSubtypes: Pick<typeof CONFIG.PF2E.damageCategories, DamageCategoryUnique>;
+    areaSizes: typeof CONFIG.PF2E.areaSizes;
+    areaTypes: typeof CONFIG.PF2E.areaTypes;
     heightenIntervals: number[];
     heightenOverlays: SpellSheetHeightenOverlayData[];
     canHeighten: boolean;
@@ -60,5 +55,6 @@ interface SpellSheetHeightenOverlayData extends SpellSheetOverlayData {
         key: keyof SpellSystemData;
         label: string;
     }[];
+    traits?: TraitTagifyEntry[] | null;
 }
 export {};

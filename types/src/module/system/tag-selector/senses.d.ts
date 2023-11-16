@@ -11,7 +11,7 @@ declare class SenseSelector<TActor extends ActorPF2e> extends BaseTagSelector<TA
     getData(options?: Partial<TagSelectorOptions>): Promise<SenseSelectorData<TActor>>;
     activateListeners($html: JQuery): void;
     /** Clear checkboxes with empty range inputs */
-    protected _onSubmit(event: Event, options?: OnSubmitFormOptions | undefined): Promise<Record<string, unknown>>;
+    protected _onSubmit(event: Event, options?: OnSubmitFormOptions | undefined): Promise<Record<string, unknown> | false>;
     protected _updateObject(event: Event, formData: SenseFormData): Promise<void>;
 }
 interface SenseSelectorData<TActor extends ActorPF2e> extends TagSelectorData<TActor> {

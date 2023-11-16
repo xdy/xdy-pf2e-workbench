@@ -34,7 +34,6 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     get showSlotlessLevels(): boolean;
     prepareBaseData(): void;
     prepareSiblingData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
-    prepareActorData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
     /** Prepares the statistic for this spellcasting entry */
     prepareStatistic(): void;
     /** All spells associated with this spellcasting entry on the actor that should also be deleted */
@@ -54,11 +53,11 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
         slotLevel?: number;
     }): Promise<SpellPF2e<NonNullable<TParent>> | null>;
     /** Saves the prepared spell slot data to the spellcasting entry  */
-    prepareSpell(spell: SpellPF2e, slotRank: number, spellSlot: number): Promise<this | null>;
+    prepareSpell(spell: SpellPF2e, slotRank: number, spellSlot: number): Promise<Maybe<this>>;
     /** Removes the spell slot and updates the spellcasting entry */
-    unprepareSpell(spellLevel: number, slotRank: number): Promise<this | null>;
+    unprepareSpell(spellLevel: number, slotRank: number): Promise<Maybe<this>>;
     /** Sets the expended state of a spell slot and updates the spellcasting entry */
-    setSlotExpendedState(slotRank: number, spellSlot: number, isExpended: boolean): Promise<this | null>;
+    setSlotExpendedState(slotRank: number, spellSlot: number, isExpended: boolean): Promise<Maybe<this>>;
     /** Returns rendering data to display the spellcasting entry in the sheet */
     getSheetData(): Promise<SpellcastingSheetData>;
     getRollOptions(prefix?: string): string[];

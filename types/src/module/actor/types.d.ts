@@ -1,6 +1,7 @@
 import type * as ActorInstance from "@actor";
 import type { ActorPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
+import { ActionTrait } from "@item/ability/types.ts";
 import { EffectTrait } from "@item/abstract-effect/index.ts";
 import { ItemInstances } from "@item/types.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
@@ -12,11 +13,12 @@ import type { DamageRoll } from "@system/damage/roll.ts";
 import { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import type { PredicatePF2e } from "@system/predication.ts";
 import type { StatisticCheck } from "@system/statistic/index.ts";
-import { StrikeData, TraitViewData } from "./data/base.ts";
+import { StrikeData } from "./data/base.ts";
 import type { ModifierPF2e } from "./modifiers.ts";
 import type { ATTRIBUTE_ABBREVIATIONS, DC_SLUGS, MOVEMENT_TYPES, SAVE_TYPES, SKILL_ABBREVIATIONS, SKILL_LONG_FORMS, UNAFFECTED_TYPES } from "./values.ts";
 /** Used exclusively to resolve `ActorPF2e#isOfType` */
 interface ActorInstances<TParent extends TokenDocumentPF2e | null> {
+    army: ActorInstance.ArmyPF2e<TParent>;
     character: ActorInstance.CharacterPF2e<TParent>;
     creature: ActorInstance.CreaturePF2e<TParent>;
     familiar: ActorInstance.FamiliarPF2e<TParent>;
@@ -105,7 +107,7 @@ interface RollContext<TActor extends ActorPF2e, TStatistic extends StatisticChec
     options: Set<string>;
     self: StrikeSelf<TActor, TStatistic, TItem>;
     target: RollTarget | null;
-    traits: TraitViewData[];
+    traits: ActionTrait[];
 }
 interface RollContextParams<TStatistic extends StatisticCheck | StrikeData | null = StatisticCheck | StrikeData | null, TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null> {
     /** The statistic used for the roll */
@@ -123,8 +125,10 @@ interface RollContextParams<TStatistic extends StatisticCheck | StrikeData | nul
     options: Set<string>;
     /** Whether the request is for display in a sheet view. If so, targets are not considered */
     viewOnly?: boolean;
-    /** A direct way of informing a check is part of a melee action: it is otherwise inferred from the attack item */
+    /** A direct way of informing a roll is part of a melee action: it is otherwise inferred from the attack item */
     melee?: boolean;
+    /** Action traits associated with the roll */
+    traits?: ActionTrait[];
 }
 interface CheckContextParams<TStatistic extends StatisticCheck | StrikeData = StatisticCheck | StrikeData, TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null> extends RollContextParams<TStatistic, TItem> {
     defense: string;

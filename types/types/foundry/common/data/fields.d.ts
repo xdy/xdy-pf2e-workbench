@@ -33,12 +33,12 @@ export interface DataFieldOptions<
               | ((data: Record<string, unknown>) => MaybeSchemaProp<TSourceProp, TRequired, TNullable, THasInitial>)
               | null
         : THasInitial extends false
-        ? undefined
-        :
-              | TSourceProp
-              | ((data: Record<string, unknown>) => MaybeSchemaProp<TSourceProp, TRequired, TNullable, THasInitial>)
-              | null
-              | undefined;
+          ? undefined
+          :
+                | TSourceProp
+                | ((data: Record<string, unknown>) => MaybeSchemaProp<TSourceProp, TRequired, TNullable, THasInitial>)
+                | null
+                | undefined;
     validate?: (value: unknown) => DataModelValidationFailure | boolean | void;
     choices?: readonly TSourceProp[] | Record<string, string> | Function;
     readonly?: boolean;
@@ -560,7 +560,7 @@ export class ArrayField<
     protected _validateElements(value: unknown[], options?: Record<string, unknown>): DataModelValidationFailure | void;
 
     override initialize(
-        value: TSourceProp,
+        value: JSONValue,
         model: ConstructorOf<abstract.DataModel>,
         options: ArrayFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>,
     ): MaybeSchemaProp<TModelProp, TRequired, TNullable, THasInitial>;
@@ -1079,12 +1079,12 @@ export type MaybeSchemaProp<
         ? TProp | null
         : TProp
     : TNullable extends true
-    ? THasInitial extends true
-        ? TProp | null
-        : TProp | null | undefined
-    : THasInitial extends true
-    ? TProp
-    : TProp | undefined;
+      ? THasInitial extends true
+          ? TProp | null
+          : TProp | null | undefined
+      : THasInitial extends true
+        ? TProp
+        : TProp | undefined;
 
 declare global {
     type ModelPropsFromSchema<TDataSchema extends DataSchema> = {
@@ -1100,8 +1100,8 @@ declare global {
             ? THasId extends true
                 ? string
                 : THasId extends false
-                ? null
-                : string | null
+                  ? null
+                  : string | null
             : SourcePropFromDataField<TDataSchema[K]>;
     };
 

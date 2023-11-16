@@ -4,5 +4,7 @@ type ParamsFromEvent = {
     skipDialog: boolean;
     rollMode?: RollMode | "roll";
 };
-declare function eventToRollParams(event?: JQuery.TriggeredEvent | Event | null): ParamsFromEvent;
+declare function eventToRollParams(event: Maybe<JQuery.TriggeredEvent | Event>, rollType: {
+    type: "check" | "damage";
+}): ParamsFromEvent;
 export { eventToRollParams };

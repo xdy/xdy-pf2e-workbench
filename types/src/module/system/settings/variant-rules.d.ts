@@ -9,6 +9,5 @@ export declare class VariantRulesSettings extends FormApplication {
     }>>;
     static registerSettings(): void;
     activateListeners($html: JQuery): void;
-    protected _onSubmit(event: Event, options?: OnSubmitFormOptions): Promise<Record<string, unknown>>;
     protected _updateObject(_event: Event, data: Record<string, unknown>): Promise<void>;
 }

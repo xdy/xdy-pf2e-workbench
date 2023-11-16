@@ -8,7 +8,6 @@ import { ClassTrait } from "./types.ts";
 declare class ClassPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ABCItemPF2e<TParent> {
     get attacks(): ClassAttackProficiencies;
     get defenses(): ClassDefenseProficiencies;
-    get classDC(): ZeroToFour;
     get hpPerLevel(): number;
     get perception(): ZeroToFour;
     get savingThrows(): Record<SaveType, ZeroToFour>;

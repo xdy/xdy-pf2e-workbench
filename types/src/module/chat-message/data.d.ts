@@ -1,4 +1,4 @@
-import type { BaseRawModifier, DamageDicePF2e } from "@actor/modifiers.ts";
+import type { RawDamageDice, RawModifier } from "@actor/modifiers.ts";
 import { ItemType } from "@item/base/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { ZeroToTwo } from "@module/data.ts";
@@ -28,8 +28,8 @@ type ChatMessageFlagsPF2e = ChatMessageFlags & {
             id: string;
             tradition: MagicTradition;
         } | null;
-        modifierName?: string;
-        modifiers?: (BaseRawModifier | DamageDicePF2e)[];
+        modifiers?: RawModifier[];
+        dice?: RawDamageDice[];
         preformatted?: "flavor" | "content" | "both";
         isFromConsumable?: boolean;
         journalEntry?: DocumentUUID;

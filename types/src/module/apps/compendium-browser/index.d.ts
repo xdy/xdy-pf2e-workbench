@@ -37,7 +37,7 @@ declare class CompendiumBrowser extends Application {
         categories?: ActionCategory[];
         traits?: ActionTrait[];
     }): Promise<void>;
-    openSpellTab(entry: BaseSpellcastingEntry, maxLevel?: number): Promise<void>;
+    openSpellTab(entry: BaseSpellcastingEntry, maxRank?: number, category?: string | null): Promise<void>;
     loadTab(tabName: TabName): Promise<void>;
     loadedPacks(tab: TabName): string[];
     loadedPacksAll(): string[];

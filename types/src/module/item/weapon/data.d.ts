@@ -1,6 +1,6 @@
 import { AttributeString } from "@actor/types.ts";
 import { ItemFlagsPF2e } from "@item/base/data/system.ts";
-import { BasePhysicalItemSource, Investable, ItemMaterialData, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, UsageDetails } from "@item/physical/index.ts";
+import { BasePhysicalItemSource, Investable, ItemMaterialData, ItemMaterialSource, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, PreciousMaterialGrade, UsageDetails } from "@item/physical/index.ts";
 import { OneToFour, ZeroToFour, ZeroToThree } from "@module/data.ts";
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import { WeaponTraitToggles } from "./helpers.ts";
@@ -109,7 +109,7 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     propertyRune2: WeaponPropertyRuneSlot;
     propertyRune3: WeaponPropertyRuneSlot;
     propertyRune4: WeaponPropertyRuneSlot;
-    material: WeaponMaterialData;
+    material: WeaponMaterialSource;
     /** Whether this is an unarmed attack that is a grasping appendage, requiring a free hand for use */
     graspingAppendage?: boolean;
     property1: {
@@ -124,12 +124,13 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     };
     selectedAmmoId: string | null;
 }
-interface WeaponMaterialData extends ItemMaterialData {
+interface WeaponMaterialSource extends ItemMaterialSource {
     type: WeaponMaterialType | null;
 }
 interface WeaponSystemData extends Omit<WeaponSystemSource, "hp" | "identification" | "price" | "temporary">, Omit<Investable<PhysicalSystemData>, "material"> {
     traits: WeaponTraits;
     baseItem: BaseWeaponType | null;
+    material: WeaponMaterialData;
     maxRange: number | null;
     reload: {
         value: WeaponReloadTime | null;
@@ -147,6 +148,9 @@ type WeaponUsageDetails = UsageDetails & Required<WeaponSystemSource["usage"]>;
 interface WeaponTraits extends WeaponTraitsSource {
     otherTags: OtherWeaponTag[];
     toggles: WeaponTraitToggles;
+}
+interface WeaponMaterialData extends ItemMaterialData {
+    type: WeaponMaterialType | null;
 }
 interface WeaponRuneData {
     potency: ZeroToFour;
