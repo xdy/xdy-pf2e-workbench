@@ -18,17 +18,17 @@
       "button-label": "PNJ aléatoire"
     },
     "skillActions": {
-      "Title": "Actions de Compétence",
+      "Title": "Actions de Compétence (Cassé)",
       "Settings": {
         "Position": {
           "name": "Position des actions de compétence",
           "hint": "La position sur la page des compétences : Haut : juste après les Frappes, Bas : À la fin",
-          "top": "Haut",
-          "bottom": "Bas",
+          "top": "Désactivé car c'est actuellement cassé. Haut",
+          "bottom": "Désactivé car c'est actuellement cassé. Bas",
           "disabled": "Désactivé"
         },
         "IconStyle": {
-          "name": "Style d'icône",
+          "name": "(Cassé) Style d'icône des actions de compétence",
           "hint": "Style d'icône sur la compétence ; Icône de coût de l'action : pour l'icône du coût des actions, Icône de compétence : pour l'icône des compétences si elle est disponible",
           "actionCostIcon": "Icône Coût de l'action",
           "skillIcon": "Icône de compétence"
@@ -37,11 +37,11 @@
           "doNotHide": "Ne cache pas",
           "hideActions": "Cacher les actions",
           "hideSkillActions": "Cacher les actions de compétences",
-          "name": "Les actions de compétence cachent les actions dupliquées",
+          "name": "(Cassé) Les actions de compétence cachent les actions dupliquées",
           "hint": "Si vous cachez les duplicatas des actions dans la liste des actions ou la liste des actions de compétence"
         },
         "Description": {
-          "name": "Description des actions de compétence",
+          "name": "(Cassé) Description des actions de compétence",
           "hint": "Si vous voulez afficher la description des actions dans la description lorsque vous lancez les dés"
         },
         "variants": {
@@ -175,7 +175,11 @@
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
         "hint": "Réglage du client pour \"toujours\" lancer les dégâts normaux pour les sorts \"non attaque\" lorsqu'ils sont lancés.",
-        "name": "Lancez automatiquement les dégâts pour les sorts lancés qui ne sont pas des attaques."
+        "name": "Lancez automatiquement les dégâts pour les sorts lancés qui ne sont pas des attaques.",
+        "no": "Non",
+        "anySpell": "Pour tout sort qui n'est pas une attaque",
+        "nonSaveSpell": "Pour tout sort qui n'est pas une attaque et n'a pas de jet de sauvegarde",
+        "saveSpell": "Pour tout sort avec un jet de sauvegarde qui n'est pas une attaque"
       },
       "autoRollDamageForStrike": {
         "hint": "Réglage du client pour lancer les dégâts automatiquement en cas de succès sur la Frappe. Notez que les coups critiques lancent les dégâts critiques.",
@@ -584,14 +588,14 @@
         "hint": "Cochez pour afficher automatiquement une notification lorsque le gestionnaire de points d'héroïsme a distribué un point de héros."
       },
       "legacyVariantRuleAncestryParagon": {
-        "name": "Ajoute des emplacements de dons Parangon ancestral. Nécessite un rafraîchissement (f5) après modification.",
+        "name": "Ajoute des emplacements de dons Parangon ancestral. Actualisez(f5) après avoir modifié.",
         "title": "Dons de Parangon ancestral",
-        "hint": "(Inutile tant que le système prend en charge la variante de règles Parangon ancestral du GMG avant le remaster). Ceci ajoute une section dons de campagne pour Parangon ancestral."
+        "hint": "Nécessite d'activer le réglage du système 'Dons de campagne'. Ajoute une section dons de campagne pour Parangon ancestral mais *ne migre pas* automatiquement les dons provenant de la section précédente ou des dons bonus."
       },
       "legacyVariantRuleDualClass": {
-        "name": "Ajoute des emplacements pour les dons de Double classe. Nécessite une actualisation (f5) après modification.",
+        "name": "Ajoute des emplacements pour les dons de Double classe. Actualisez (f5) après modification.",
         "title": "Dons de Double classe",
-        "hint": "(Pas nécessaire tant que le système conserve le support de la variante de règle de double classe du GMG avant remaster). Ceci ajoute une section de dons de campagne pour la Double classe. Vous devez également utiliser la macro de Double Classe pour créer la classe à utiliser par le personnage."
+        "hint": "Nécessite l'activation du réglage du système 'Dons de campagne'. Ajoute une section dons de campagne pour la Double classe mais *ne migre pas* automatiquement les dons de la section précédente ou des dons bonus. Vous devez également utiliser la macro Double Classe pour créer la classe à utiliser par le personnage."
       },
       "keeleysHeroPointRule": {
         "name": "Règle de point d'héroïsme de Keeley",
@@ -605,6 +609,22 @@
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
         "hint": "Mystifier les objets de niveau égal ou supérieur au niveau du groupe. Prend le pas sur l'entrée manuelle.",
         "name": "Mystifie seulement les objets de niveau égal ou supérieur au niveau groupe."
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "yes": "Oui, pour tous",
+        "no": "Non",
+        "hint": "(Déprécié) réglages pour tuer automatiquement en subissant assez de dégâts d'une source ayant le trait mort.",
+        "yesForCharacters": "Oui, pour personnages+familiers",
+        "yesForNpcs": "Oui, pour les PNJ",
+        "name": "... mais automatiquement tué en subissant suffisamment de dégâts d'un effet de mort. (Déprécié)"
+      },
+      "autoKillIfMassiveDamage": {
+        "yesForCharacters": "Oui, pour les personnages+familiers",
+        "yes": "Oui, pour tous",
+        "yesForNpcs": "Oui, pour les PNJ",
+        "hint": "(Déprécié) Réglages pour tuer automatiquement en cas de dégâts massifs.",
+        "no": "Non",
+        "name": "... mais automatiquement tué en cas de dégâts massifs. (Déprécié)"
       }
     },
     "effects": {
