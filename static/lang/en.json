@@ -418,7 +418,7 @@
         "name": "Post public message that a spell has been cast.",
         "savePart": "<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
         "secondPartNoRk": ".<br>Ask your GM if you recognized it automatically, if not you can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Or, on your turn, spend an action to try to identify it (ask your gm for details).",
-        "secondPartRK": ".<br>Ask your GM if you recognized it automatically, if not you can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Or, on your turn, spend an action to try to identify it with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
+        "secondPartRK": ".<br>Ask your GM if you recognized it automatically, if not you can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Or, on your turn, spend an action to try to identify it with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (or 10 minutes with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
         "spell": "Spell",
         "they": "They"
       },
