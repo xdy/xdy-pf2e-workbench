@@ -1,3 +1,15 @@
+# [5.30.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.29.0...v5.30.0) (2023-11-17)
+
+
+### Bug Fixes
+
+* Adds text about Identify Magic to the public message when casting spells privately. ([06dde77](https://github.com/xdy/xdy-pf2e-workbench/commit/06dde776d5f660780cbea006718ef8126149e889)), closes [#1092](https://github.com/xdy/xdy-pf2e-workbench/issues/1092)
+
+
+### Features
+
+* Add the Reposition action macro to BAM. ([520988d](https://github.com/xdy/xdy-pf2e-workbench/commit/520988df68a046afc534da74519ada8ddd2a2aab)), closes [#1090](https://github.com/xdy/xdy-pf2e-workbench/issues/1090)
+
 # [5.29.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.28.1...v5.29.0) (2023-11-16)
 
 
