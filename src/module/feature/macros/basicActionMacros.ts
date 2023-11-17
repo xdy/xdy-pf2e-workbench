@@ -407,6 +407,14 @@ export function basicActionMacros() {
             icon: "icons/tools/smithing/anvil.webp",
         },
         {
+            replacedWith: "reposition",
+            actionType: "skill_untrained",
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Reposition`),
+            skill: "Athletics",
+            action: game.pf2e.actions.reposition,
+            icon: "icons/sundries/gaming/chess-pawn-white-pink.webp",
+        },
+        {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Request`),
             skill: "Diplomacy",
