@@ -1,3 +1,10 @@
+## [5.32.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.3...v5.32.4) (2023-11-18)
+
+
+### Bug Fixes
+
+* Add auras for Courageous Anthem and Rallying Anthem. (Not technically auras, but, eh, good enough.) Didn't remove the auras for Inspire Courage and Inspire Defense in case macros point to those. Both grant the same effects. ([34e9593](https://github.com/xdy/xdy-pf2e-workbench/commit/34e9593896a2fda059894912e4abde758a063a3e))
+
 ## [5.32.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.2...v5.32.3) (2023-11-18)
 
 
