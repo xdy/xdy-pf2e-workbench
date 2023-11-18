@@ -14,7 +14,6 @@ import { ActorPF2e } from "@actor";
 
 import { debounce, isFirstGM, logInfo } from "./utils.js";
 import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller.js";
-import { loadSkillActions, loadSkillActionsBabele } from "./feature/skill-actions/sheet-skill-actions.js";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.js";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.js";
 import { basicActionMacros } from "./feature/macros/basicActionMacros.js";
@@ -185,7 +184,6 @@ export function updateHooks(cleanSlate = false) {
         //     gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
         //     gs.get(MODULENAME, "playerSpellsRarityColour") ||
         //     gs.get(MODULENAME, "castPrivateSpell") ||
-        //     gs.get(MODULENAME, "skillActions") !== "disabled",
         true, // Due to legacy variant rules this hook is always on
         renderActorSheetHook,
     );
@@ -215,13 +213,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     // });
 
     // Hooks that run once, if a setting is enabled. Manual refresh will still be needed for these.
-    if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
-        Hooks.once("babele.ready", async () => {
-            if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
-                loadSkillActionsBabele().then();
-            }
-        });
-    }
 
     // Hooks that only run if a setting that needs it has been enabled
     updateHooks();
@@ -386,10 +377,6 @@ Hooks.once("ready", () => {
                 createRemainingTimeMessage(remainingMinutes);
             });
         }
-    }
-
-    if (game.settings.get(MODULENAME, "skillActions") !== "disabled") {
-        loadSkillActions().then();
     }
 
     game.socket.on("module." + MODULENAME, (operation) => {

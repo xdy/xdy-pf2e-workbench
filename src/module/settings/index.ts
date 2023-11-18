@@ -92,43 +92,6 @@ export function registerWorkbenchSettings() {
         onChange: () => updateHooks(),
     });
 
-    game.settings.register(MODULENAME, "skillActions", {
-        name: `${MODULENAME}.skillActions.Settings.Position.name`,
-        hint: `${MODULENAME}.skillActions.Settings.Position.hint`,
-        scope: "client",
-        config: true,
-        default: "disabled",
-        type: String,
-        choices: {
-            disabled: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.disabled`),
-            bottom: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.bottom`),
-            top: game.i18n.localize(`${MODULENAME}.skillActions.Settings.Position.top`),
-        },
-        onChange: () => updateHooks(),
-    });
-
-    game.settings.register(MODULENAME, "skillActionsIconStyle", {
-        name: `${MODULENAME}.skillActions.Settings.IconStyle.name`,
-        hint: `${MODULENAME}.skillActions.Settings.IconStyle.hint`,
-        scope: "client",
-        config: true,
-        default: "skillIcon",
-        type: String,
-        choices: {
-            actionCostIcon: game.i18n.localize(`${MODULENAME}.skillActions.Settings.IconStyle.actionCostIcon`),
-            skillIcon: game.i18n.localize(`${MODULENAME}.skillActions.Settings.IconStyle.skillIcon`),
-        },
-    });
-
-    game.settings.register(MODULENAME, "skillActionsDescription", {
-        name: `${MODULENAME}.skillActions.Settings.Description.name`,
-        hint: `${MODULENAME}.skillActions.Settings.Description.hint`,
-        scope: "client",
-        config: true,
-        default: true,
-        type: Boolean,
-    });
-
     game.settings.register(MODULENAME, "basicActionMacroShowBestBonus", {
         name: `${MODULENAME}.macros.basicActionMacros.settings.showBestBonus.name`,
         hint: `${MODULENAME}.macros.basicActionMacros.settings.showBestBonus.hint`,
@@ -158,25 +121,6 @@ export function registerWorkbenchSettings() {
         onChange: () => updateHooks(),
     });
 
-    // game.settings.register(MODULENAME, "skillActionsHideDuplicates", {
-
-    //     name: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.name`,
-    //     hint: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hint`,
-    //     scope: "client",
-    //     config: true,
-    //     default: "hideActions",
-    //     type: String,
-    //     choices: {
-    //         doNotHide: game.i18n.localize(`${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.doNotHide`),
-    //         hideActions: game.i18n.localize(
-    //             `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hideActions`
-    //         ),
-    //         hideSkillActions: game.i18n.localize(
-    //             `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.hideSkillActions`
-    //         ),
-    //     },
-    //     onChange: () => debouncedReload(),
-    // });
     game.settings.register(MODULENAME, "customPauseImage", {
         name: `${MODULENAME}.SETTINGS.customPauseImage.name`,
         hint: `${MODULENAME}.SETTINGS.customPauseImage.hint`,

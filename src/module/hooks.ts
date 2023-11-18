@@ -555,10 +555,6 @@ export async function pf2eSystemReadyHook() {
 }
 
 export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, $html: JQuery) {
-    // if (sheet.actor?.type === CHARACTER_TYPE && String(game.settings.get(MODULENAME, "skillActions")) !== "disabled") {
-    //     renderSheetSkillActions(sheet, $html);
-    // }
-
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerSpellsRarityColour")) {
         $html.find(".spell-list").each((_i, e) => {
             $(e)

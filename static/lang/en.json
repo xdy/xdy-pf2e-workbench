@@ -17,63 +17,6 @@
         "skill": "Skills"
       }
     },
-    "skillActions": {
-      "Title": "(Broken) Skill Actions",
-      "assuranceLabel": "Assurance",
-      "Settings": {
-        "Position": {
-          "name": "Skill Actions position",
-          "hint": "Position in the skill page; Top : right after Strikes, Bottom : At the end",
-          "bottom": "Disabled as it's currently broken. Bottom",
-          "disabled": "Disabled",
-          "top": "Disabled as it's currently broken. Top"
-        },
-        "hideDuplicates": {
-          "name": "(Broken) Skill Actions hide duplicate actions",
-          "hint": "Whether to hide duplicate actions in the action list or the skill action list",
-          "doNotHide": "Do not hide",
-          "hideActions": "Hide actions",
-          "hideSkillActions": "Hide skill actions"
-        },
-        "IconStyle": {
-          "name": "(Broken) Skill Actions Icon Style",
-          "hint": "Icon style on the skill; Action Cost Icon: For the actions cost icon, Skill Icon: For the skills icon if it's available",
-          "actionCostIcon": "Action Cost Icon",
-          "skillIcon": "Skill Icon"
-        },
-        "Description": {
-          "name": "(Broken) Skill Actions Description",
-          "hint": "Whether to show the actions description in the chat when rolling"
-        },
-        "variants": {
-          "administerFirstAid": {
-            "stabilize": "Stabilize",
-            "stopBleeding": "Stop Bleeding",
-            "stabilizeChirurgeon": "Stabilize (Chirurgeon)",
-            "stopBleedingChirurgeon": "Stop Bleeding (Chirurgeon)"
-          },
-          "createADiversion": {
-            "distractingWords": "Distracting Words",
-            "gesture": "Gesture",
-            "trick": "Trick"
-          },
-          "perform": {
-            "acting": "Acting",
-            "comedy": "Comedy",
-            "dance": "Dance",
-            "keyboards": "Keyboard instrument",
-            "oratory": "Oratory",
-            "percussion": "Percussion instrument",
-            "singing": "Singing",
-            "strings": "String instrument",
-            "winds": "Wind instrument"
-          }
-        }
-      },
-      "UnequipAll": {
-        "Tooltip": "Toggle hidden actions. Hold alt when clicking to make unequip/equip all skills."
-      }
-    },
     "spellCardNotFound": "The spell card could not be found. Casting {spell} at minimum level for that spell.",
     "effects": {
       "orcFerocityUsed": "Orc Ferocity Used",

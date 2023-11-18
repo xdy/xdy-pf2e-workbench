@@ -628,63 +628,6 @@
         "hint": "...wie modifiziert bei diesem Multiplikator (ja, ich weiß, ich sollte den finalen Wert anzeigen)"
       }
     },
-    "skillActions": {
-      "assuranceLabel": "Routine",
-      "Settings": {
-        "Position": {
-          "disabled": "deaktiviert",
-          "hint": "Position auf der Fertigkeiten-Seite; Oben: direkt nach den Angriffen, Unten: Am Ende",
-          "bottom": "Unten",
-          "top": "Oben",
-          "name": "Position der Fertigkeitsaktivitäten"
-        },
-        "Description": {
-          "name": "Beschreibung der Fertigkeitsaktivität",
-          "hint": "Entscheidet ob die Aktionsbeschreibung im Chat angezeigt werden soll, sobald gewürfelt wird"
-        },
-        "variants": {
-          "createADiversion": {
-            "distractingWords": "Ablenkende Worte",
-            "trick": "Trick/Kniff",
-            "gesture": "Geste"
-          },
-          "administerFirstAid": {
-            "stabilize": "Stabilisieren",
-            "stopBleeding": "Blutung stoppen",
-            "stopBleedingChirurgeon": "Blutung stoppen (Chirurg)",
-            "stabilizeChirurgeon": "Stabilisieren (Chirurg)"
-          },
-          "perform": {
-            "dance": "Tanz",
-            "keyboards": "Tasteninstrument",
-            "oratory": "Redekunst",
-            "percussion": "Schlaginstrument",
-            "acting": "Schauspielkunst",
-            "comedy": "Komödie",
-            "singing": "Gesang",
-            "strings": "Streichinstrument",
-            "winds": "Blasinstrument"
-          }
-        },
-        "hideDuplicates": {
-          "hint": "Entscheidet ob doppelte Aktivitäten versteckt werden sollen, sowohl bei der Aktivitätenliste, als auch bei der Liste der Fertigkeitsaktivitäten",
-          "doNotHide": "Nicht verstecken",
-          "hideActions": "Verstecke Aktionen",
-          "hideSkillActions": "Fertigkeitsaktivitäten verstecken",
-          "name": "Fertigkeitsaktivitäten: doppelte Aktivitäten verstecken"
-        },
-        "IconStyle": {
-          "actionCostIcon": "Aktionskosten-Symbol",
-          "skillIcon": "Fertikeitssymbol",
-          "name": "Fertigkeitsaktivitäten Symbolstyle",
-          "hint": "Symbolstyle bei den Fertigkeiten; Aktionskosten-Symbol: Für das Aktionkosten-Symbol, Fertigkeitssymbol: Für das Symbol der Fertigkeit, falls verfügbar"
-        }
-      },
-      "Title": "Fertigkeitsaktivitäten",
-      "UnequipAll": {
-        "Tooltip": "Versteckte Aktionen umschalten. Halte beim Klicken die Alt-Taste gedrückt, um alle Fertigkeiten abzu- / anzuwählen."
-      }
-    },
     "npcRoller": {
       "nav-labels": {
         "dc": "SG",

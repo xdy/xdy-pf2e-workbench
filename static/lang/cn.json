@@ -17,63 +17,6 @@
       },
       "title": "NPC投骰"
     },
-    "skillActions": {
-      "Title": "技能动作",
-      "Settings": {
-        "Position": {
-          "name": "技能动作位置",
-          "bottom": "底部",
-          "disabled": "禁用",
-          "hint": "在技能页面中的位置；顶部：“攻击”的下方，底部：最下面",
-          "top": "顶部"
-        },
-        "hideDuplicates": {
-          "hint": "是否在动作列表或技能动作列表中隐藏重复的动作",
-          "doNotHide": "不隐藏",
-          "hideSkillActions": "隐藏技能动作",
-          "name": "隐藏重复的技能动作",
-          "hideActions": "隐藏动作"
-        },
-        "IconStyle": {
-          "name": "技能动作图标风格",
-          "actionCostIcon": "动作成本图标",
-          "hint": "技能上的图标风格；动作成本图标：用于动作成本图标，技能图标：用于技能图标（如果有的话）",
-          "skillIcon": "技能图标"
-        },
-        "Description": {
-          "name": "技能动作描述",
-          "hint": "是否在骰动作时在聊天栏里发布动作的描述"
-        },
-        "variants": {
-          "createADiversion": {
-            "gesture": "姿势分神",
-            "trick": "花招分神",
-            "distractingWords": "话术分神"
-          },
-          "administerFirstAid": {
-            "stabilizeChirurgeon": "稳定伤势（医学专家）",
-            "stabilize": "稳定伤势",
-            "stopBleeding": "止血",
-            "stopBleedingChirurgeon": "止血（医学专家）"
-          },
-          "perform": {
-            "percussion": "打击乐器",
-            "keyboards": "键盘乐器",
-            "oratory": "演说",
-            "acting": "戏剧",
-            "comedy": "喜剧",
-            "dance": "舞蹈",
-            "singing": "歌唱",
-            "strings": "弦乐器",
-            "winds": "管乐器"
-          }
-        }
-      },
-      "UnequipAll": {
-        "Tooltip": "切换隐藏动作。点击时按住alt键，可以使全部技能装备/不被装备。"
-      },
-      "assuranceLabel": "驾轻就熟"
-    },
     "effects": {
       "orcFerocityUsed": "兽人凶猛已使用",
       "bounceBackUsed": "强健复苏已使用",

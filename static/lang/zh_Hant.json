@@ -470,45 +470,6 @@
         "skill": "技能"
       }
     },
-    "skillActions": {
-      "Title": "技能動作",
-      "Settings": {
-        "Position": {
-          "name": "技能動作位置",
-          "hint": "注意！目前對大部分人來說開啟技能動作會造成角色卡載入異常*緩慢*的現象。在技能頁面中的位置；頂部：「攻擊」的右邊，底部：最下面",
-          "bottom": "底部",
-          "disabled": "禁用",
-          "top": "頂部"
-        },
-        "hideDuplicates": {
-          "name": "隱藏重複的技能動作",
-          "hint": "是否在動作列表或技能動作列表中隱藏重複的動作",
-          "doNotHide": "不隱藏",
-          "hideActions": "隱藏動作",
-          "hideSkillActions": "隱藏技能動作"
-        },
-        "IconStyle": {
-          "name": "技能動作圖示風格",
-          "hint": "技能上的圖示風格；動作成本圖示：用於動作成本圖示，技能圖示：用於技能圖示（如果有的話）",
-          "actionCostIcon": "動作成本圖示",
-          "skillIcon": "技能圖示"
-        },
-        "Description": {
-          "name": "技能動作描述",
-          "hint": "是否在骰動作時在聊天欄里發佈動作的描述"
-        },
-        "variants": {
-          "createADiversion": {
-            "distractingWords": "話術分神",
-            "gesture": "姿勢分神",
-            "trick": "花招分神"
-          }
-        }
-      },
-      "UnequipAll": {
-        "Tooltip": "切換隱藏動作。點選時按住alt鍵，可以使全部技能裝備/不被裝備。"
-      }
-    },
     "spellCardNotFound": "找不到法術卡。在{spell}的最低環位施放該法術。",
     "effects": {
       "orcFerocityUsed": "獸人兇猛已使用",

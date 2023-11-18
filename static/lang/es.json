@@ -15,35 +15,6 @@
         "abilityScore": "Puntuaciones de Característica"
       }
     },
-    "skillActions": {
-      "Settings": {
-        "hideDuplicates": {
-          "hideSkillActions": "Ocultar Acciones de Habilidad",
-          "name": "Acciones de Habilidad ocultar acciones duplicadas",
-          "doNotHide": "No ocultar",
-          "hideActions": "Ocultar acciones"
-        },
-        "Position": {
-          "name": "posición de las Acciones de Habilidad",
-          "disabled": "Deshabilitado"
-        },
-        "Description": {
-          "name": "Descripción de Acciones de Habilidad"
-        },
-        "variants": {
-          "createADiversion": {
-            "gesture": "Gesto"
-          }
-        },
-        "IconStyle": {
-          "name": "Estilo de Icono de Acciones de Habilidad",
-          "actionCostIcon": "Icono de Coste de Acción",
-          "skillIcon": "Icono de Habilidad",
-          "hint": "Estilo de icono en la habilidad; Icono de Coste de Acción: Para el coste de acción, Icono de Habilidad: Para el icono de habilidad si esta disponible"
-        }
-      },
-      "Title": "Acciones de Habilidad"
-    },
     "macros": {
       "basicActionMacros": {
         "noActorSelected": "Ningún actor seleccionado",

@@ -376,63 +376,6 @@
       "title": "Rolador de PdM",
       "button-label": "Rolador de PdM"
     },
-    "skillActions": {
-      "Title": "Ações de Perícia",
-      "Settings": {
-        "Position": {
-          "hint": "Posição na aba de perícias; Topo: após os Golpes, Fundo: No final",
-          "bottom": "Fundo",
-          "disabled": "Desabilitado",
-          "name": "Posição das Ações de Perícia",
-          "top": "Topo"
-        },
-        "hideDuplicates": {
-          "name": "Ações de Perícia ocultam ações duplicadas",
-          "hint": "Se esconde ações duplicadas na lista de ações ou na lista de ações de perícia",
-          "hideActions": "Esconder ações",
-          "doNotHide": "Não esconder",
-          "hideSkillActions": "Esconder ações de perícia"
-        },
-        "IconStyle": {
-          "name": "Estilo de Ícone de Ações de Perícia",
-          "hint": "Estilo de ícone da perícia; Ícone de custo da ação: Para o ícone de custo da ação, Ícone de habilidade: Para o ícone de habilidade, se estiver disponível",
-          "actionCostIcon": "Ícone de custo de ação",
-          "skillIcon": "Ícone de perícia"
-        },
-        "Description": {
-          "name": "Descrição de Ações de Perícias",
-          "hint": "Mostrar a descrição das ações no chat ao rolar"
-        },
-        "variants": {
-          "createADiversion": {
-            "distractingWords": "Distrair com Palavras",
-            "gesture": "Gestos",
-            "trick": "Truque"
-          },
-          "administerFirstAid": {
-            "stabilize": "Estabilizar",
-            "stopBleeding": "Parar Sangramento",
-            "stabilizeChirurgeon": "Estabilizar (Cirurgião)",
-            "stopBleedingChirurgeon": "Parar Sangramento (Cirurgião)"
-          },
-          "perform": {
-            "strings": "Instrumento de Corda",
-            "acting": "Atuar",
-            "comedy": "Comédia",
-            "dance": "Dançar",
-            "keyboards": "Instrumento de Teclas",
-            "oratory": "Oratória",
-            "percussion": "Instrumento de Precursão",
-            "singing": "Cantar",
-            "winds": "Instrumento de Sopro"
-          }
-        }
-      },
-      "UnequipAll": {
-        "Tooltip": "Alternar ações ocultas. Segure ALT ao clicar para equipar/desequipar todas as perícias."
-      },
-      "assuranceLabel": "Certeza"
-    },
     "spellCardNotFound": "A mensagem da magia não foi encontrada. Conjurando {spell} no nível mínimo da magia.",
     "effects": {
       "orcFerocityUsed": "Ferocidade de Orc utilizada",

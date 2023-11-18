@@ -6,7 +6,6 @@
 
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
-import { Variant } from "../skill-actions/variants.js";
 import { Action } from "@actor/actions/types.js";
 import { CharacterSkill } from "@actor/character/types.js";
 
@@ -824,6 +823,28 @@ function getMapVariant(skill: CharacterSkill, extra: Record<string, unknown> | u
     });
     const label = game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: map });
     return new Variant(label, skill, extra, [modifier]);
+}
+
+export class Variant {
+    label: string;
+    skill: CharacterSkill;
+    extra?: Record<string, unknown>;
+    modifiers: (typeof game.pf2e.Modifier)[];
+    assuranceTotal: number;
+
+    constructor(
+        label: string,
+        skill: CharacterSkill,
+        extra: Record<string, unknown> | undefined,
+        modifiers: any[] = [], // ModifierPF2e[] = [],
+        assuranceTotal = 0,
+    ) {
+        this.label = label;
+        this.skill = skill;
+        this.extra = extra;
+        this.modifiers = modifiers;
+        this.assuranceTotal = assuranceTotal;
+    }
 }
 
 // basicActionsMacros();

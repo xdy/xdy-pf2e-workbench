@@ -17,63 +17,6 @@
       "title": "Tworzenie NPC",
       "button-label": "Tworzenie NPC"
     },
-    "skillActions": {
-      "Title": "Akcje Umiejętności",
-      "Settings": {
-        "Position": {
-          "bottom": "Dół",
-          "disabled": "Wyłączone",
-          "top": "Góra",
-          "name": "Pozycja Akcji Umiejętności",
-          "hint": "Pozycja na stronie umiejętności: na górze (zaraz za Uderzeniami), lub na samym końcu"
-        },
-        "hideDuplicates": {
-          "hint": "Możliwość ukrycia zduplikowanych akcji na liście",
-          "doNotHide": "Nie ukrywaj",
-          "hideActions": "Ukryj akcje",
-          "hideSkillActions": "Ukryj Akcje Umiejętności",
-          "name": "Akcje Umiejętności ukrywają powielone akcje"
-        },
-        "IconStyle": {
-          "actionCostIcon": "Ikona Kosztu Akcji",
-          "skillIcon": "Ikona Umiejętności",
-          "name": "Styl ikon Akcji Umiejętności",
-          "hint": "Styl ikony umiejętności. Wybierz, czy wyświetlać koszt danej akcji, czy ikonę umiejętności, jeśli jest dostępna"
-        },
-        "Description": {
-          "name": "Opis Akcji Umiejętności",
-          "hint": "Pokazywanie opisu akcji na czacie w momencie jej użycia"
-        },
-        "variants": {
-          "createADiversion": {
-            "gesture": "Gest",
-            "trick": "Sztuczka",
-            "distractingWords": "Rozpraszające słowa"
-          },
-          "perform": {
-            "acting": "Aktorstwo",
-            "comedy": "Komedia",
-            "dance": "Taniec",
-            "keyboards": "Instrument klawiszowy",
-            "oratory": "Elokwencja",
-            "percussion": "Instrument perkusyjny",
-            "singing": "Śpiew",
-            "strings": "Instrument strunowy",
-            "winds": "Instrument dęty"
-          },
-          "administerFirstAid": {
-            "stopBleeding": "Zatrzymaj krwotok",
-            "stabilize": "Stabilizuj",
-            "stopBleedingChirurgeon": "Zatrzymaj krwotok (Chirurg)",
-            "stabilizeChirurgeon": "Stabilizuj (Chirurgia)"
-          }
-        }
-      },
-      "UnequipAll": {
-        "Tooltip": "Przełącz ukryte akcje. Przytrzymaj alt klikając, żeby włączyć/wyłączyć wszystkie umiejętności."
-      },
-      "assuranceLabel": "Pewność"
-    },
     "macros": {
       "basicActionMacros": {
         "title": "Akcje ({name})",

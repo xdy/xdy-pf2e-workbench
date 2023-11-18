@@ -108,7 +108,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
 
 * House Rules
     * Option to enable Keeley's Hero Point Rule (if reroll die is 10 or less, get a +10 bonus). Courtesy of stwlam
-    * Option to add Ancestry Paragon feat slots  as campaign feat slots (i.e. requires campaign feats to enabled.)
+    * Option to add Ancestry Paragon feat slots as campaign feat slots (i.e. requires campaign feats to enabled.)
     * Option to add Dual Class feat slots as campaign feat slots (i.e. requires campaign feats to enabled.)
     * REALLY experimental option to use json to potentially brick your world. (Or,
       see [docs/housepatcher.md](docs/housepatcher.md) for more details.)
@@ -118,10 +118,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       feats, items, actions, etc). Can be configured to default to collapsed or expanded.
     * Option to either expand all damage cards, or only expand new cards. If the latter, on a refresh the last three
       messages are expanded if they are damage cards.
-    * Option to add all skill actions to the character Actions page. (This feature has been taken over from the
-      discontinued https://github.com/jamespdaily/pf2e-sheet-skill-actions/ module. Thanks James!)
-        * The module will hide any skill actions that you're currently not trained in.
-        * Actions that require a feat (e.g. Bon Mot) will not show up unless you actually have the feat.
     * Option to set a custom pause text and image, as well as to move it's position to center of screen.
     * A few potentially useful internal functions have been made available for macro use. Name and simple example of
       each can be found below:
@@ -165,16 +161,20 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Effect: Minium Frightened that you can give to targets to not let the automated frightened removal reduce
           frightened below 1.
         * Effect that you can use to change Focus Point Maximum of a character.
-        * Adjustments for making undead, courtesy of @ElvisLiving (everything but the zombie) and @Tikael (He/Him) (zombie).
+        * Adjustments for making undead, courtesy of @ElvisLiving (everything but the zombie) and @Tikael (He/Him) (
+          zombie).
         * A Reach 'aura' used by the (experimental) 'Whirlwind Strike' macro.
     * The compendium "PF2e Workbench Macros (xdy-pf2e-workbench-macros)" contains a few macros you might find useful.
-        * 'Basic Action Macros' shows a dialog with a button for most macros, with bonus and whether you're the best in
-          the party at that action (a setting to turn this off exists). (
-          Thanks ApoAstolov). The five colors are denoting ranks, in order, grey=untrained, blue=trained, purple=expert,
+        * 'Basic Action Macros' (aka BAM) shows a dialog with a button for the most commonly used action, with bonus and
+          whether you're the best in the party at that action (a setting to turn this off exists). It defaults to not
+          show actions you cannot use due to trained requirement (with an option to always show). (Thanks ApoAstolov).
+          The button colors in the dialog show ranks, in order, grey=untrained, blue=trained, purple=expert,
           gold=master, red=legendary, with 'glow' meaning that you are the best in the party.
         * 'Build Npc Spellbook Journal' that builds a journal with the contents of an npc's spell list. Courtesy of
           Avery (Velara).
-        * (Experimental) 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the Whirlwind Strike Feat, has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that the first weapon of any type.
+        * (Experimental) 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the
+          Whirlwind Strike Feat, has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that
+          the first weapon of any type.
 * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
   provided by ApoApostolov and esheyw. They are *intended* to be customized by the user by changing the javascript
   code (such as by adding/removing actions, setting what actors are part of the party, etc.) They are not really
@@ -204,7 +204,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       where prohibited. Ei saa peittää. Do not taunt happy fun ball: https://www.youtube.com/watch?v=GmqeZl8OI2M)
 
 * Deprecated features (will be removed eventually):
-  *  None currently.
+    * None currently.
 
 * Recently removed features:
     * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
@@ -229,6 +229,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384) as well as automatic
       handling of [Death effects](https://2e.aonprd.com/Rules.aspx?ID=383) as they're handled by the pf2e system.
     * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
+    * Option to add all skill actions to the character Actions page.
 
 ## Installation
 

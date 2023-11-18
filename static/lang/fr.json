@@ -17,63 +17,6 @@
       "title": "PNJ aléatoire",
       "button-label": "PNJ aléatoire"
     },
-    "skillActions": {
-      "Title": "Actions de Compétence (Cassé)",
-      "Settings": {
-        "Position": {
-          "name": "Position des actions de compétence",
-          "hint": "La position sur la page des compétences : Haut : juste après les Frappes, Bas : À la fin",
-          "top": "Désactivé car c'est actuellement cassé. Haut",
-          "bottom": "Désactivé car c'est actuellement cassé. Bas",
-          "disabled": "Désactivé"
-        },
-        "IconStyle": {
-          "name": "(Cassé) Style d'icône des actions de compétence",
-          "hint": "Style d'icône sur la compétence ; Icône de coût de l'action : pour l'icône du coût des actions, Icône de compétence : pour l'icône des compétences si elle est disponible",
-          "actionCostIcon": "Icône Coût de l'action",
-          "skillIcon": "Icône de compétence"
-        },
-        "hideDuplicates": {
-          "doNotHide": "Ne cache pas",
-          "hideActions": "Cacher les actions",
-          "hideSkillActions": "Cacher les actions de compétences",
-          "name": "(Cassé) Les actions de compétence cachent les actions dupliquées",
-          "hint": "Si vous cachez les duplicatas des actions dans la liste des actions ou la liste des actions de compétence"
-        },
-        "Description": {
-          "name": "(Cassé) Description des actions de compétence",
-          "hint": "Si vous voulez afficher la description des actions dans la description lorsque vous lancez les dés"
-        },
-        "variants": {
-          "createADiversion": {
-            "distractingWords": "Paroles de diversion",
-            "gesture": "Geste",
-            "trick": "Astuce"
-          },
-          "perform": {
-            "comedy": "Jouer la comédie",
-            "dance": "Danser",
-            "keyboards": "Instrument à clavier",
-            "oratory": "Déclamer",
-            "percussion": "Instrument à percussion",
-            "singing": "Chanter",
-            "winds": "Instrument à vent",
-            "acting": "Faire du théatre",
-            "strings": "Instrument à cordes"
-          },
-          "administerFirstAid": {
-            "stabilize": "Stabiliser",
-            "stopBleeding": "Arrêter le saignement",
-            "stopBleedingChirurgeon": "Arrêter le saignement (Chirurgien)",
-            "stabilizeChirurgeon": "Stabiliser (Chirurgien)"
-          }
-        }
-      },
-      "UnequipAll": {
-        "Tooltip": "Activer les actions cachées : Maintenir Alt lorsque vous cliquez pour ne pas déséquiper/équiper toutes les compétences."
-      },
-      "assuranceLabel": "Assurance"
-    },
     "SETTINGS": {
       "actionsReminderAllow": {
         "all": "Tous",
