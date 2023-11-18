@@ -86,14 +86,14 @@
         "YouAreTheBestInYourParty": "Najwyższy wynik w drużynie",
         "settings": {
           "showBestBonus": {
-            "name": "Pokazuj czy to najlepszy wynik w drużynie w Macro Akcji Podstawowych",
+            "name": "BAM: Pokazuj czy to najlepszy wynik w drużynie w Basic Action Macros",
             "hint": "Wyświetlanie informacji o tym, czy wybrany aktor ma najlepszy wynik w oknie dialogowym Makra akcji podstawowych"
           }
         },
         "compendiumNotFound": "Kompendium {compendiumName} nie znalezione",
         "macroNotFound": "Macro {macroName} nie znalezione",
         "bamActionsPerColumn": {
-          "name": "Przybliżone akcje na wiersz",
+          "name": "BAM: Przybliżone akcje na wiersz",
           "hint": "Przybliżona liczba akcji na wiersz w oknie dialogowym Makra akcji podstawowych. Rzeczywista liczba akcji na wiersz będzie najbliższą liczbą akcji na wiersz, która zmieści się w oknie dialogowym."
         },
         "gmMustImport": "GM musi kliknąć prawym przyciskiem myszy na kompendium xdy-pf2e-workbench-macros i wybrać opcję \"Importuj całą zawartość\" i upewnić się, że podczas importowania zaznaczona jest opcja \"Zachowaj identyfikatory dokumentów\".",
@@ -128,7 +128,8 @@
     "effects": {
       "orcFerocityUsed": "Użyto Dzikości Orka",
       "deliberateDeathUsed": "Użyto Umyślna śmierć",
-      "bounceBackUsed": "Użyto Odbij Się"
+      "bounceBackUsed": "Użyto Odbij Się",
+      "numbToDeathUsed": "Użyto Odrętwiały na Śmierć"
     },
     "SETTINGS": {
       "actionsReminderAllow": {
@@ -475,7 +476,7 @@
         "all": "Wszyscy",
         "none": "Brak postaci",
         "addedFor": "Dodano 1 punkt bohatera dla {name}",
-        "timerValue": "Wartość timera (zakres 0-60)",
+        "timerValue": "Wartość timera (zakres 0 - {maxMinutes})",
         "add": "Dodaj",
         "addedToForAll": "{heroPoints} Punktów bohatera dodane dla wszystkich",
         "addOne": "<b>Sekcja 2</b> - Dodaje jeden punkt bohatera wybranej postaci spośród zalogowanych (domyślnie losowej postaci po wygaśnięciu licznika czasu)",
