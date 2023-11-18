@@ -211,7 +211,7 @@
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
         "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
         "secondPartNoRk": ".<br>Demandez à votre MJ si vous l'avez reconnu automatiquement. Si ce n'est pas le cas, vous pouvez essayer d'utiliser une @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou une @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Ou, lors de votre tour, dépensez une action pour l'identifier (demandez à votre MJ les détails).",
-        "secondPartRK": ".<br>Demandez à votre MJ si vous l'avez reconnu automatiquement. Si ce n'est pas le cas, vous pouvez utiliser une @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou une @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Ou, lors de votre tour dépensez une action pour l'identifier avec @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{Se souvenir}",
+        "secondPartRK": ".<br>Demandez à votre MJ si vous l'avez reconnu automatiquement. Si ce n'est pas le cas, vous pouvez utiliser soit @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] soit @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Ou, lors de votre tour, dépensez une action pour l'identifier avec @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{Se souvenir} @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (ou 10 minutes avec @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
         "spell": "Sort",
         "they": "Ils"
       },
