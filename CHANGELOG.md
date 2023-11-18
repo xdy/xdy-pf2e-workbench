@@ -1,3 +1,10 @@
+## [5.32.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.0...v5.32.1) (2023-11-18)
+
+
+### Bug Fixes
+
+* BAM now considers npcs and familiars to be trained for the purpose of whether to show actions. ([a60ebd2](https://github.com/xdy/xdy-pf2e-workbench/commit/a60ebd26aa4ea09115a2ce84048eda9c20a1ade4))
+
 # [5.32.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.31.0...v5.32.0) (2023-11-18)
 
 
