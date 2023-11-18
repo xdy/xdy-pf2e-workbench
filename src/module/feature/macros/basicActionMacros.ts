@@ -429,6 +429,7 @@ export function basicActionMacros() {
             icon: "icons/tools/scribal/magnifying-glass.webp",
         },
         {
+            replacedWith: "sense-direction",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.SenseDirection`),
             skill: "Survival",
@@ -505,6 +506,7 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/equipment/shields/tower-shield.webp",
         },
         {
+            replacedWith: "track",
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Track`),
             skill: "Survival",
