@@ -119,6 +119,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to either expand all damage cards, or only expand new cards. If the latter, on a refresh the last three
       messages are expanded if they are damage cards.
     * Option to set a custom pause text and image, as well as to move it's position to center of screen.
+    * Options for the macro 'Basic Action Macros' (aka BAM)
     * A few potentially useful internal functions have been made available for macro use. Name and simple example of
       each can be found below:
 
@@ -133,7 +134,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
-        isSpellAvailable: isSpellAvailable, // game.PF2eWorkbench.isSpellAvailable(_token.actor, "Breathe Fire", { spellRank: 1, spellcastingEntry: 'Arcane Prepared Spells'})
 ```
 
 * New Keybinds in Configure Controls
@@ -207,25 +207,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * None currently.
 
 * Recently removed features:
-    * Creature Builder. Use https://github.com/miki4920/fvtt-module-pf2e-MonsterMaker instead.
-    * Workbench Flat Check Notes. Use https://foundryvtt.com/packages/pf2-flat-check
-      or https://foundryvtt.com/packages/pf2e-flatcheck-helper instead.
-    * Workbench ABP. Use https://github.com/reonZ/pf2e-arp instead.
-    * Option to change the max number of hero points a character can have. (It was long broken, instead add an
-      ActiveEffectLike RE that overrides system.resources.heroPoints.max to whatever value you want to use.)
-    * Option to apply Encumbered condition automatically based on current bulk when bulk changes as it's now part of the
-      pf2e system.
-    * Several deprecated 'Condition for (n) (timeperiod)s' effects as that is better handled by the Condition Manager
-      macro found in the 'Symon-provided Macros' compendium.
-    * Refocus macro (it broke with a recent system update). The customizableRefocusPremaster macro in the '
-      xdy-customizable-macros' compendium apparently still works, so I'll keep that around until it too breaks, but
-      won't get any further updates.) Post remaster
-      use ```canvas.tokens.controlled.forEach(x=>x.actor.spellcasting.refocus({all:true}))``` instead to regain all
-      focus at once for the selected tokens.
-    * "Aura: Bless" and "Aura: Protective Ward" as they are now part of the pf2e system.
-    * isSpellAvaiable was removed from the api and added to the "PF2e Workbench Customizable Macros" compendium.
-    * Effects that you can use to implement ABP, "Another Alternative Bonus Progression" (by @crackjackflood) and an
-      accompanying 'Feat' to add it to a character.
     * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384) as well as automatic
       handling of [Death effects](https://2e.aonprd.com/Rules.aspx?ID=383) as they're handled by the pf2e system.
     * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
@@ -348,4 +329,3 @@ asymonous-benefactor-macros:
 "Workbench Adjectives" table is based on a list
 in [Unique Names Generator](https://github.com/andreasonny83/unique-names-generator/blob/main/src/dictionaries/adjectives.ts)
 and is provided under the [MIT license](https://github.com/andreasonny83/unique-names-generator/blob/main/LICENSE)
-
