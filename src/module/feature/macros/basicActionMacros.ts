@@ -591,23 +591,18 @@ export function basicActionMacros() {
         return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
     }
 
-    function isTrained(selectedActor: ActorPF2e, skill: string) {
-        const rank = selectedActor.skills?.[skill]?.rank;
-        return rank ?? 0 > 0;
-    }
-
     const showUnusable = game.settings.get(MODULENAME, "bamShowUnusable");
     const actionsToUse = bamActions
         .filter((x) => !x.replacedWith)
         .concat(newStyleActions)
-        .filter((x) => {
-            return (
+        .filter(
+            (x) =>
+                showUnusable ||
                 x.actionType !== "skill_trained" ||
-                (showUnusable &&
-                    x.actionType === "skill_trained" &&
-                    !isTrained(selectedActor, x.skill.toLocaleLowerCase()))
-            );
-        })
+                (x.actionType === "skill_trained" &&
+                    (["npc", "familiar"].includes(selectedActor.type) ||
+                        (selectedActor.skills?.[x.skill.toLocaleLowerCase()]?.rank ?? 0 > 0))),
+        )
         .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
     // @ts-ignore
