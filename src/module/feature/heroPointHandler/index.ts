@@ -244,6 +244,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     </div>`;
     }
 
+    const maxMinutes = Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")));
     const remainingContent = `
   <div class="radio">
     <label for="characters-NONE">
@@ -256,9 +257,9 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 </div>
 
 <hr>
-<script>$('#timerTextId').on('input', function () {
+<script>$("#timerTextId").on("input", function () {
     const value = $(this).val();
-    if ((value !== '') && (value.indexOf('.') === -1)) {
+    if ((value !== "") && (value.indexOf(".") === -1)) {
         $(this).val(Math.max(Math.min(value, ${Number.parseInt(
             String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")),
         )}), 0));
@@ -267,10 +268,11 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 <div class="form-group">
   <div class="col-md-4">
     <div class="input-group">
-      <span class="input-group-addon">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`)}</span>
+      <span class="input-group-addon">${game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`, {
+          maxMinutes: maxMinutes,
+      })}</span>
       <input id="timerTextId" name="timerText" class="form-control" value="${
-          remainingMinutes ||
-          Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
+          remainingMinutes || maxMinutes
       }" type="number">
     </div>
     <p class="help-block">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`)}</p>
