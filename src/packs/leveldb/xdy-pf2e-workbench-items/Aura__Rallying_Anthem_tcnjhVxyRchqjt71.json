@@ -1,15 +1,11 @@
 {
-  "_id": "MRmGlGAFd3tSJioo",
-  "name": "Aura: Inspire Courage",
+  "name": "Aura: Rallying Anthem",
   "type": "effect",
-  "img": "systems/pf2e/icons/spells/inspire-courage.webp",
+  "img": "systems/pf2e/icons/spells/inspire-defense.webp",
   "effects": [],
   "folder": "YTpgfVBBSf6gGvub",
-  "sort": 400000,
   "flags": {
-    "core": {
-      "sourceId": "Item.QRgj7jrEnit1ROJw"
-    },
+    "core": {},
     "exportSource": {
       "world": "_pf2beginners",
       "system": "pf2e",
@@ -20,21 +16,14 @@
   "system": {
     "description": {
       "gm": "",
-      "value": "<p>A 'good enough' aura for @Compendium[pf2e.spells-srd.IAjvwqgiDr3qGYxY]{Inspire Courage} (technically not an aura, but, meh...)</p>\n<p>Made it as a 1 round effect, with sustained. Reapply every round, use Symon's Lingering Heroics macro or shift-click effect to edit in the proper duration (if you have the Extempore Effects module, which you should...).</p>"
+      "value": "<p>A 'good enough' aura for @UUID[Compendium.pf2e.spells-srd.Item.bH0kPuf7UKxRvi2P]{Rallying Anthem} (technically not an aura, but, meh...)</p>\n<p>Made it as a 1 round effect, with sustained. Reapply every round, use Symon's Lingering Heroics macro or shift-click effect to edit in the proper duration (if you have the Extempore Effects module, which you should...).</p>"
     },
     "rules": [
       {
         "effects": [
           {
-            "uuid": "Compendium.pf2e.spell-effects.Item.beReeFroAx24hj83",
+            "uuid": "Compendium.pf2e.spell-effects.Item.DLwTvjjnqs2sNGuG",
             "affects": "allies"
-          },
-          {
-            "uuid": "Compendium.pf2e.feat-effects.Item.oXG7eX26FmePmwUF",
-            "affects": "allies",
-            "predicate": [
-              "feat:discordant-voice"
-            ]
           }
         ],
         "key": "Aura",
@@ -42,18 +31,18 @@
           "auditory"
         ],
         "radius": 60,
-        "slug": "aura-effect-inspire-courage",
+        "slug": "aura-effect-inspire-defense",
         "level": "@actor.level"
       }
     ],
     "slug": null,
     "_migration": {
-      "version": 0.878,
+      "version": 0.894,
       "lastMigration": null,
       "previous": {
-        "schema": 0.794,
-        "foundry": "11.313",
-        "system": "5.7.2"
+        "schema": 0.878,
+        "foundry": "11.315",
+        "system": "5.9.3"
       }
     },
     "traits": {
@@ -90,15 +79,17 @@
   },
   "ownership": {
     "default": 0,
-    "T3daHvrK0qISk4mb": 3
+    "pkVBUO4Y1VpgZhqS": 3
   },
   "_stats": {
     "systemId": "pf2e",
     "systemVersion": "5.9.3",
     "coreVersion": "11.315",
-    "createdTime": 1665671947293,
-    "modifiedTime": 1700330802358,
+    "createdTime": 1665671947292,
+    "modifiedTime": 1700330987001,
     "lastModifiedBy": "pkVBUO4Y1VpgZhqS"
   },
-  "_key": "!items!MRmGlGAFd3tSJioo"
+  "_id": "tcnjhVxyRchqjt71",
+  "sort": 0,
+  "_key": "!items!tcnjhVxyRchqjt71"
 }
