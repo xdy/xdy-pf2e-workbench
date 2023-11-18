@@ -1,3 +1,10 @@
+# [5.32.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.31.0...v5.32.0) (2023-11-18)
+
+
+### Features
+
+* The Skill Action feature quietly passed away today after a long time on life support. It is survived by its close friend and roommate BAM (aka Basic Action Macros) as well as valued colleague ITT (aka PF2e Interactive Token Tooltip) who - while they are certainly not a replacement for the dearly departed feature - are sure to provide some comfort. No service will be held. Memorial contributions may be made to Extra Life (https://www.extra-life.org/index.cfm?fuseaction=donorDrive.team&teamID=63664#roster) ([ff0fcfb](https://github.com/xdy/xdy-pf2e-workbench/commit/ff0fcfbcd63b8fe9c3ba4ef8f3b8e5badc8de35a)), closes [#1104](https://github.com/xdy/xdy-pf2e-workbench/issues/1104) [#1062](https://github.com/xdy/xdy-pf2e-workbench/issues/1062) [#1060](https://github.com/xdy/xdy-pf2e-workbench/issues/1060) [#1002](https://github.com/xdy/xdy-pf2e-workbench/issues/1002) [#984](https://github.com/xdy/xdy-pf2e-workbench/issues/984) [#983](https://github.com/xdy/xdy-pf2e-workbench/issues/983)
+
 # [5.31.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.30.0...v5.31.0) (2023-11-18)
 
 
