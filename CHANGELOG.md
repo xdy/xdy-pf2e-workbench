@@ -1,3 +1,10 @@
+## [5.32.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.2...v5.32.3) (2023-11-18)
+
+
+### Bug Fixes
+
+* Show the correct max value for minutes till next heropoint. ([13e769b](https://github.com/xdy/xdy-pf2e-workbench/commit/13e769b6287ec3ea3bc08d8c87c5db39a0f35d0e))
+
 ## [5.32.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.1...v5.32.2) (2023-11-18)
 
 
