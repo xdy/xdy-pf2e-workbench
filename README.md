@@ -218,20 +218,15 @@ Install by either searching for xdy-pf2e-workbench in [FoundryVTT's](https://fou
 Install or by clicking the 'Install Module' button in that tab and entering the following as the Manifest
 URL: https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json
 
-If you want to install this module for foundry 0.89 or lower use this (unsupported) module.json
-link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v1.7.1/module.json
+If you want to install this module for older versions, download xdy-pf2e-workbench.zip from one of the following links
+and unzip it into your modules/xdy-pf2e-workbench folder. Make sure to lock the module version, and remember that these
+versions are not supported. (They probably work, but if they don't, you're on your own.)
 
-If you want to install this module for foundry 9 use this (unsupported) module.json
-link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v3.44.3/module.json
-
-If you want to install this module for foundry 10 use this (unsupported) module.json
-link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v4.77.2/module.json
-
-If you want to install this module for use with pf2e 5.2.3 (the last release with *no* remaster content) use this (
-unsupported) module.json link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v5.15.1/module.json
-
-If you want to install this module for use with pf2e 5.8.3 (the last release before fully switching to remaster) use
-this (unsupported) module.json link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v5.27.9/module.json
+* Use with Foundry 0.89 or older: https://github.com/xdy/xdy-pf2e-workbench/releases/v1.7.1
+* Use with Foundry 9: https://github.com/xdy/xdy-pf2e-workbench/releases/v3.44.3
+* Use with Foundry 10: https://github.com/xdy/xdy-pf2e-workbench/releases/v4.77.2
+* Use with pf2e 5.2.3 (*no* remaster): https://github.com/xdy/xdy-pf2e-workbench/releases/v5.15.1
+* Use with pf2e 5.8.3 (just before *only* remaster): https://github.com/xdy/xdy-pf2e-workbench/releases/v5.27.9
 
 ## Supported pf2e-specific QOL modules
 
