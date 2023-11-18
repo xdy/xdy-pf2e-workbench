@@ -119,8 +119,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to either expand all damage cards, or only expand new cards. If the latter, on a refresh the last three
       messages are expanded if they are damage cards.
     * Option to set a custom pause text and image, as well as to move it's position to center of screen.
-    * Options for the macro 'Basic Action Macros' (aka BAM)
-    * A few potentially useful internal functions have been made available for macro use. Name and simple example of
+    * Several options for the macro 'Basic Action Macros' (aka BAM)
+    * A few potentially useful internal functions have been made available for macro use. Name and a simple example of
       each can be found below:
 
 ```
@@ -167,9 +167,9 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * The compendium "PF2e Workbench Macros (xdy-pf2e-workbench-macros)" contains a few macros you might find useful.
         * 'Basic Action Macros' (aka BAM) shows a dialog with a button for the most commonly used action, with bonus and
           whether you're the best in the party at that action (a setting to turn this off exists). It defaults to not
-          show actions you cannot use due to trained requirement (with an option to always show). (Thanks ApoAstolov).
-          The button colors in the dialog show ranks, in order, grey=untrained, blue=trained, purple=expert,
-          gold=master, red=legendary, with 'glow' meaning that you are the best in the party.
+          show actions you cannot use due to trained requirement (with an option to always show). The button colors in
+          the dialog show ranks, in order, grey=untrained, blue=trained, purple=expert, gold=master, red=legendary,
+          with 'glow' meaning that you are the best in the party. (Thanks ApoAstolov).
         * 'Build Npc Spellbook Journal' that builds a journal with the contents of an npc's spell list. Courtesy of
           Avery (Velara).
         * (Experimental) 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the
@@ -195,7 +195,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       See https://discord.com/channels/880968862240239708/880969304365994034/1161188968424018020
     * Customizable getAllFromAllowedPacks. This macro can be used to get all items from allowed packs.
       See https://discord.com/channels/880968862240239708/1116034857907273832/1164695510158946305
-* There are a few more compendiums included with this module with assorted utility macros and items that do not
+* There are a few more compendiums included with this module with assorted internal utility macros and items that do not
   need to be imported, as indicated by their labels all ending with 'do not import'
 
 * Experimental features:
@@ -227,6 +227,12 @@ link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v3.44.3/module
 If you want to install this module for foundry 10 use this (unsupported) module.json
 link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v4.77.2/module.json
 
+If you want to install this module for use with pf2e 5.2.3 (the last release with *no* remaster content) use this (
+unsupported) module.json link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v5.15.1/module.json
+
+If you want to install this module for use with pf2e 5.8.3 (the last release before fully switching to remaster) use
+this (unsupported) module.json link: https://github.com/xdy/xdy-pf2e-workbench/releases/download/v5.27.9/module.json
+
 ## Supported pf2e-specific QOL modules
 
 As in, I try to keep the Workbench compatible with these modules (as I use them myself). In general, if the module does
@@ -236,18 +242,15 @@ something that the Workbench also does, I suggest disabling the Workbench equiva
 * [PF2e Dailies](https://github.com/reonZ/pf2e-dailies)
 * [PF2e Dorako UI](https://github.com/Dorako/pf2e-dorako-ui)
 * [PF2e Extempore Effects](https://github.com/shemetz/pf2e-extempore-effects)
-* [PF2e Flat Check](https://github.com/jessev14/pf2-flat-check) (Has explicit support in the autoroll damage feature.)
-* [PF2e Giveth](https://github.com/reonZ/pf2e-giveth)
+* [PF2e Flat Check](https://github.com/jessev14/pf2-flat-check) (The autoroll damage feature uses it if installed.)
 * [PF2e Hands Management](https://github.com/reyzor1991/foundry-vtt-pf2e-notification)
-* [PF2e Hero Actions](https://github.com/reonZ/pf2e-hero-actions)
 * [PF2e Interactive Token Tooltip](https://github.com/reonZ/pf2e-token-hud)
 * [PF2e Keybind Menagerie](https://github.com/Drental/foundryvtt-pf2e-f-is-for-flatfooted)
 * [PF2e Modifiers Matter](https://github.com/shemetz/pf2e-modifiers-matter)
-* [PF2e Perception]() (not yet released)
+* [PF2e Perception]() (not yet released by Idle)
 * [PF2e Ranged Combat](https://github.com/JDCalvert/FVTT-PF2e-Ranged-Combat)
 * [PF2e Reaction Checker](https://github.com/reyzor1991/foundry-vtt-pf2e-reaction)
-* [PF2e Spells Summary](https://github.com/reonZ/pf2e-spells-summary)
-* [PF2e Stances](https://github.com/reonZ/pf2e-stances)
+* [PF2e Toolbelt](https://github.com/reonZ/pf2e-toolbelt)
 * [PF2e Staves](https://github.com/jessev14/pf2e-staves)
 * [PF2e Target Damage](https://github.com/MrVauxs/PF2e-Target-Damage)
 * [pf2e Utility Buttons](https://github.com/oWave/pf2e-flatcheck-helper)
