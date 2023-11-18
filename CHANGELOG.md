@@ -1,3 +1,15 @@
+# [5.31.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.30.0...v5.31.0) (2023-11-18)
+
+
+### Bug Fixes
+
+* Revert vite update. ([b95072e](https://github.com/xdy/xdy-pf2e-workbench/commit/b95072e82d619f6d935d09da6cb7eba402c072e9))
+
+
+### Features
+
+* Make BAM (Basic Action Macros) by default hide actions that cannot be used due to trained requirement. ([1919a64](https://github.com/xdy/xdy-pf2e-workbench/commit/1919a6400f93d7cf32457fafdd2a93c2a4d8ccf1))
+
 # [5.30.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.29.0...v5.30.0) (2023-11-17)
 
 
