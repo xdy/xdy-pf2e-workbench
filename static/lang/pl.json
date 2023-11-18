@@ -96,7 +96,11 @@
           "name": "Przybliżone akcje na wiersz",
           "hint": "Przybliżona liczba akcji na wiersz w oknie dialogowym Makra akcji podstawowych. Rzeczywista liczba akcji na wiersz będzie najbliższą liczbą akcji na wiersz, która zmieści się w oknie dialogowym."
         },
-        "gmMustImport": "GM musi kliknąć prawym przyciskiem myszy na kompendium xdy-pf2e-workbench-macros i wybrać opcję \"Importuj całą zawartość\" i upewnić się, że podczas importowania zaznaczona jest opcja \"Zachowaj identyfikatory dokumentów\"."
+        "gmMustImport": "GM musi kliknąć prawym przyciskiem myszy na kompendium xdy-pf2e-workbench-macros i wybrać opcję \"Importuj całą zawartość\" i upewnić się, że podczas importowania zaznaczona jest opcja \"Zachowaj identyfikatory dokumentów\".",
+        "bamShowUnusable": {
+          "name": "BAM: Pokaż akcje, których nie można użyć.",
+          "hint": "Czy pokazywać akcje, których nie można użyć, ponieważ postać nie jest wyszkolona."
+        }
       },
       "refocus": {
         "notPsychic": "zużywa przynajmniej {regain} punktów skupienia",
@@ -206,7 +210,7 @@
         "name": "Publikuje wiadomość o rzuceniu zaklęcia.",
         "secondPartNoRk": ".<br>Zapytaj swojego GM, czy rozpoznałeś go automatycznie, jeśli nie, możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego GM).",
         "firstPart": "{tokenName} właśnie rzucił {type} tradycji <strong>{traditionString}</strong>",
-        "secondPartRK": ".<br>Zapytaj swojego GM, czy rozpoznałeś go automatycznie, jeśli nie, możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Lub, w swojej turze, wydać akcję, aby spróbować zidentyfikować go z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}"
+        "secondPartRK": "Zapytaj swojego GMa, czy rozpoznałeś go automatycznie, jeśli nie, możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Lub, w swojej turze, poświęć akcję na próbę zidentyfikowania go za pomocą @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G])"
       },
       "applyPersistentDamageRecoveryRoll": {
         "hint": "... a następnie automatycznie przywróci ustawienia fabryczne. Wymaga włączenia powyższego ustawienia.",
@@ -533,7 +537,7 @@
       },
       "legacyVariantRuleAncestryParagon": {
         "title": "Atuty Ancestry Paragon",
-        "hint": "(Nie dotyczy do wersji systemu pf2e 5.9.0, wymaga włączenia ustawienia systemowego \"Campaign Feats\") Dodaje sekcję Campaign Feats dla Ancestry Paragon, ale *nie* automatycznie przenosi wyczynów z poprzedniej sekcji lub Bonus Feats.",
+        "hint": "Wymaga włączenia ustawienia systemowego \"Campaign Feats\". Dodaje sekcję \"Atuty Kampanii\" dla Ancestry Paragon, ale *nie* automatycznie przenosi zdolności z poprzedniej sekcji lub Bonusowych Atutów.",
         "name": "Dodaje sloty na atuty Ancestry Paragon. Wymaga odświeżenia (f5) po zmianie."
       },
       "moveBeforeCurrentCombatantContextMenu": {
@@ -594,7 +598,7 @@
         "notification": "Housepatcher: Stosowanie {count} zasad domowych do przedmiotów w kompendiach systemowych."
       },
       "legacyVariantRuleDualClass": {
-        "hint": "(Nie dotyczy do wersji systemu pf2e 5.9.0, wymaga włączenia ustawienia systemowego \"Campaign Feats\") Dodaje sekcję Campaign Feats dla Dual Class, ale *nie* automatycznie przenosi wyczynów z poprzedniej sekcji lub Bonus Feats, musisz także użyć makra Dual Class, aby utworzyć klasę dla postaci.",
+        "hint": "Wymaga włączenia ustawienia systemowego \"Campaign Feats\". Dodaje sekcję Campaign Feats dla Dual Class, ale *nie* automatycznie przenosi wyczynów z poprzedniej sekcji lub Bonus Feats, musisz także użyć makra Dual Class, aby utworzyć klasę dla postaci.",
         "name": "Dodaje miejsca na atuty dwóch klas. Wymaga odświeżenia (f5) po zmianie.",
         "title": "Atuty Dwóch Klas"
       },
