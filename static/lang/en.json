@@ -85,8 +85,12 @@
       "basicActionMacros": {
         "title": "Actions ({name})",
         "bamActionsPerColumn": {
-          "name": "Approximate actions per row",
+          "name": "BAM: Approximate actions per row",
           "hint": "Approximate number of actions per row in the Basic Action Macros dialog. The actual number of actions per row will be the closest number of actions per row that will fit in the dialog."
+        },
+        "bamShowUnusable": {
+          "name": "BAM: Show actions that cannot be used.",
+          "hint": "Whether to show actions that cannot be used as the character is not trained."
         },
         "noActorSelected": "No pc, npc or familiar actor is selected",
         "gmMustImport": "The GM must right click on the compendium xdy-pf2e-workbench-macros and select 'Import All Content' and make sure to check 'Keep Document IDs' when importing.",
@@ -96,7 +100,7 @@
         "third": "(-10)",
         "settings": {
           "showBestBonus": {
-            "name": "Show if best in Basic Action Macros",
+            "name": "BAM: Show if best in Basic Action Macros",
             "hint": "Whether to show if the selected actor has the best bonus in the Basic Action Macros dialog"
           }
         },

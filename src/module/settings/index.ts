@@ -137,6 +137,27 @@ export function registerWorkbenchSettings() {
         default: true,
         type: Boolean,
     });
+
+    game.settings.register(MODULENAME, "bamShowUnusable", {
+        name: `${MODULENAME}.macros.basicActionMacros.bamShowUnusable.name`,
+        hint: `${MODULENAME}.macros.basicActionMacros.bamShowUnusable.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => updateHooks(),
+    });
+
+    game.settings.register(MODULENAME, "bamActionsPerColumn", {
+        name: `${MODULENAME}.macros.basicActionMacros.bamActionsPerColumn.name`,
+        hint: `${MODULENAME}.macros.basicActionMacros.bamActionsPerColumn.hint`,
+        scope: "client",
+        config: true,
+        default: 14,
+        type: Number,
+        onChange: () => updateHooks(),
+    });
+
     // game.settings.register(MODULENAME, "skillActionsHideDuplicates", {
 
     //     name: `${MODULENAME}.skillActionsHideDuplicates.Settings.hideDuplicates.name`,
@@ -202,16 +223,6 @@ export function registerWorkbenchSettings() {
             4: game.i18n.localize(`${MODULENAME}.SETTINGS.logLevel.error`),
             5: game.i18n.localize(`${MODULENAME}.SETTINGS.logLevel.off`),
         },
-        onChange: () => updateHooks(),
-    });
-
-    game.settings.register(MODULENAME, "bamActionsPerColumn", {
-        name: `${MODULENAME}.macros.basicActionMacros.bamActionsPerColumn.name`,
-        hint: `${MODULENAME}.macros.basicActionMacros.bamActionsPerColumn.hint`,
-        scope: "client",
-        config: true,
-        default: 14,
-        type: Number,
         onChange: () => updateHooks(),
     });
 

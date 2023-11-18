@@ -563,7 +563,7 @@ export function basicActionMacros() {
         .map((x) => {
             // TODO Handle variants
             return {
-                actionType: "other",
+                actionType: bamActions.find((y) => y.replacedWith === x[0])?.actionType,
                 name: game.i18n.localize(x[1].name),
                 skill: x[1].statistic
                     ? x[1].statistic.charAt(0).toUpperCase() + x[1].statistic.slice(1)
@@ -576,11 +576,6 @@ export function basicActionMacros() {
                 action: x[1],
             };
         });
-
-    const actionsToUse = bamActions
-        .filter((x) => !x.replacedWith)
-        .concat(newStyleActions)
-        .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
     // @ts-ignore
     const actionDialog = window.actionDialog;
@@ -596,6 +591,25 @@ export function basicActionMacros() {
     if (!selectedActor || !supportedActorTypes.includes(selectedActor.type)) {
         return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
     }
+
+    function isTrained(selectedActor: ActorPF2e, skill: string) {
+        const rank = selectedActor.skills?.[skill]?.rank;
+        return rank ?? 0 > 0;
+    }
+
+    const showUnusable = game.settings.get(MODULENAME, "bamShowUnusable");
+    const actionsToUse = bamActions
+        .filter((x) => !x.replacedWith)
+        .concat(newStyleActions)
+        .filter((x) => {
+            return (
+                x.actionType !== "skill_trained" ||
+                (showUnusable &&
+                    x.actionType === "skill_trained" &&
+                    !isTrained(selectedActor, x.skill.toLocaleLowerCase()))
+            );
+        })
+        .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
     // @ts-ignore
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
