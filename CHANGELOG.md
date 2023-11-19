@@ -1,3 +1,10 @@
+## [5.32.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.5...v5.32.6) (2023-11-19)
+
+
+### Bug Fixes
+
+* BAM: Make shift and ctrl-clicking a button work for attack actions (by passing along the event here too.) ([b12cde3](https://github.com/xdy/xdy-pf2e-workbench/commit/b12cde3392d8587b9d8f5261519813dc6b1a5d5e))
+
 ## [5.32.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.4...v5.32.5) (2023-11-19)
 
 
