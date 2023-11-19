@@ -88,13 +88,23 @@ function createButton(action, idx, actor, party, actorSkills) {
             }" ${`data-tooltip="${tooltip} + ${third}"`}>${third}</button>
               </div>`;
     } else {
+        let tooltipPrefix: string;
+        tooltipPrefix = action.showExploration
+            ? `(${game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.exploration`)}) `
+            : (tooltipPrefix = action.showDowntime
+                  ? `(${game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.downtime`)}) `
+                  : "");
+        let prefix: string;
+        prefix = action.showExploration
+            ? `(${game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.explorationShort`)}) `
+            : (prefix = action.showDowntime
+                  ? `(${game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.downtimeShort`)}) `
+                  : "");
         button = `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
             colorPalette[rank]
         }"
-    ${`data-tooltip="${action.showExploration ? "(Exploration) " : ""}${tooltip}"`}>
-    <img src="${action.icon ?? defaultIcon}" height="24" alt="${name}"/>${
-        action.showExploration ? "(E) " : ""
-    }${name}</button>`;
+    ${`data-tooltip="${tooltipPrefix}${tooltip}"`}>
+    <img src="${action.icon ?? defaultIcon}" height="24" alt="${name}"/>${prefix}${name}</button>`;
     }
     return button;
 }
@@ -588,6 +598,7 @@ export function basicActionMacros() {
                     "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp",
                 showMAP: x[1].traits?.includes("attack") ?? false,
                 showExploration: x[1].traits?.includes("exploration") ?? false,
+                showDowntime: x[1].traits?.includes("downtime") ?? false,
                 action: x[1],
             };
         });
