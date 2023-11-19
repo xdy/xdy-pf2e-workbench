@@ -764,7 +764,13 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                             button.dataset.map && button.dataset.map !== "0"
                                 ? -(Number.parseInt(button.dataset.map) / 5)
                                 : 0;
-                        current.use({ multipleAttackPenalty: mapValue }).then();
+                        current
+                            .use({
+                                event,
+                                multipleAttackPenalty: mapValue,
+                                skipDialog: event.skipDialog,
+                            })
+                            .then();
                     } else {
                         const skills = getSkills(action.skill);
                         const variant =
@@ -781,7 +787,7 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                         } else {
                             // @ts-ignore
                             action.action({
-                                event: event,
+                                event,
                                 actors: [selectedActor],
                                 skill: action.skill.toLocaleLowerCase(),
                                 variant: action.extra,
