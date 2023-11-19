@@ -1,3 +1,10 @@
+# [5.34.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.33.0...v5.34.0) (2023-11-19)
+
+
+### Features
+
+* BAM: Add (D) before actions that are Downtime actions, and add (Downtime) to their tooltip. ([9b85ea8](https://github.com/xdy/xdy-pf2e-workbench/commit/9b85ea88d3fed82f73853791b77419a2febff9f1)), closes [#1113](https://github.com/xdy/xdy-pf2e-workbench/issues/1113)
+
 # [5.33.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.6...v5.33.0) (2023-11-19)
 
 
