@@ -104,6 +104,9 @@ type MacroAction = {
     name: string;
     icon: string;
     action: string | Function | string[] | Action;
+    module?: string;
+    best?: number;
+    whoIsBest?: string;
     showMAP?: boolean;
     extra?: string;
     actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
@@ -136,6 +139,14 @@ export function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidToggle`),
             skill: "",
             action: ["macroEffectAid", "xdy-pf2e-workbench.xdy-internal-utility-macros"],
+            icon: "systems/pf2e/icons/spells/efficient-apport.webp",
+        },
+        {
+            actionType: "other",
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidASE`),
+            skill: "",
+            action: ["Aid", "pf2e-action-support-engine-macros.action-support-engine-macros"],
+            module: "pf2e-action-support-engine",
             icon: "systems/pf2e/icons/spells/efficient-apport.webp",
         },
         {
@@ -608,6 +619,9 @@ export function basicActionMacros() {
                     (["npc", "familiar"].includes(selectedActor.type) ||
                         (selectedActor.skills?.[x.skill.toLocaleLowerCase()]?.rank ?? 0 > 0))),
         )
+        .filter((m) => {
+            return m.module ? game.modules.get(m.module)?.active : true;
+        })
         .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
     // @ts-ignore
