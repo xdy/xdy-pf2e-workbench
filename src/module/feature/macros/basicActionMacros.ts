@@ -91,8 +91,10 @@ function createButton(action, idx, actor, party, actorSkills) {
         button = `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
             colorPalette[rank]
         }"
-    ${`data-tooltip="${tooltip}"`}>
-    <img src="${action.icon ?? defaultIcon}" height="24" alt="${name}"/>${name}</button>`;
+    ${`data-tooltip="${action.showExploration ? "(Exploration) " : ""}${tooltip}"`}>
+    <img src="${action.icon ?? defaultIcon}" height="24" alt="${name}"/>${
+        action.showExploration ? "(E) " : ""
+    }${name}</button>`;
     }
     return button;
 }
@@ -574,6 +576,7 @@ export function basicActionMacros() {
                     bamActions.find((y) => y.replacedWith === x[0])?.icon ??
                     "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp",
                 showMAP: x[1].traits?.includes("attack") ?? false,
+                showExploration: x[1].traits?.includes("exploration") ?? false,
                 action: x[1],
             };
         });
