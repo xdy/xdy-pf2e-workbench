@@ -20,22 +20,18 @@
   "system": {
     "description": {
       "gm": "",
-      "value": "<p>A 'good enough' aura for @Compendium[pf2e.spells-srd.7ZinJNzxq0XF0oMx]{Bane} (technically not an aura, but, meh...)</p>\n<p>This effect has an aura of 5 feet, if you increase the size, you'll need to edit the rule manually.</p>"
+      "value": "<p>A 'good enough' aura for @Compendium[pf2e.spells-srd.7ZinJNzxq0XF0oMx]{Bane} (technically not an aura, but, meh...)</p>\n<p>This effect has an aura of 10 feet, if you increase the size, you'll need to edit the rule manually.</p>"
     },
     "rules": [
       {
         "effects": [
           {
-            "affects": "enemies",
-            "events": [
-              "enter"
-            ],
             "uuid": "Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso",
-            "level": "ceil(@actor.level/2)"
+            "affects": "enemies"
           }
         ],
         "key": "Aura",
-        "radius": "@item.badge.value*5",
+        "radius": "@item.badge.value*10",
         "slug": "aura-effect-bane"
       }
     ],
@@ -90,11 +86,11 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.8.2",
-    "coreVersion": "11.314",
+    "systemVersion": "5.9.3",
+    "coreVersion": "11.315",
     "createdTime": 1665671947294,
-    "modifiedTime": 1699130352511,
-    "lastModifiedBy": "HShcH53gfTrrSBR1"
+    "modifiedTime": 1700393836305,
+    "lastModifiedBy": "pkVBUO4Y1VpgZhqS"
   },
   "_key": "!items!YcyN7BDbL0Nt3CFN"
 }
