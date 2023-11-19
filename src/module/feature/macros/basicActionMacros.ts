@@ -462,7 +462,7 @@ export function basicActionMacros() {
         },
         {
             replacedWith: "squeeze",
-            actionType: "skill_untrained",
+            actionType: "skill_trained", // Technically not, but... See https://discord.com/channels/613968515677814784/738122137943932958/1175650650575605870
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Squeeze`),
             skill: "Acrobatics",
             action: game.pf2e.actions.squeeze,
