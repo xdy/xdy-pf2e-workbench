@@ -1,3 +1,10 @@
+## [5.32.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.4...v5.32.5) (2023-11-19)
+
+
+### Bug Fixes
+
+* Changing 'Aura: Bane' to be 10 feet (remaster change). ([6e5c0e7](https://github.com/xdy/xdy-pf2e-workbench/commit/6e5c0e781263e7f296c892adeface803d0d71c49))
+
 ## [5.32.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.3...v5.32.4) (2023-11-18)
 
 
