@@ -1,3 +1,16 @@
+# [5.33.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.6...v5.33.0) (2023-11-19)
+
+
+### Bug Fixes
+
+* BAM: Make Squeeze require trained. ([ef6611d](https://github.com/xdy/xdy-pf2e-workbench/commit/ef6611d1fd631083e9f473e74a8e388900f99a97))
+
+
+### Features
+
+* BAM: Add (E) before actions that are Exploration actions, and add (Exploration) to their tooltip. ([11bdffa](https://github.com/xdy/xdy-pf2e-workbench/commit/11bdffa3ed9c24142dd1e95ed82c2abcd593e88f)), closes [#1107](https://github.com/xdy/xdy-pf2e-workbench/issues/1107)
+* BAM: Adds support for calling the Aid macro from the Action Support Engine (ASE) if that module is active. ([ba1afb5](https://github.com/xdy/xdy-pf2e-workbench/commit/ba1afb5ed76e0cc09b8af6553ebfa2309a49d307))
+
 ## [5.32.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.32.5...v5.32.6) (2023-11-19)
 
 
