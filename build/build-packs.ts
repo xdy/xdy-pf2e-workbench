@@ -109,54 +109,39 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
     /* This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274; and modified by Mark Pearce https://discord.com/channels/880968862240239708/880969174661353484/972962446098702376 */
     `;
                 const map = new Map<string, string>();
-                map.set("2-Action Harm", "systems/pf2e/icons/spells/harm.webp");
-                map.set("2-Action Heal v2", "systems/pf2e/icons/spells/heal.webp");
-                map.set("Actions with Potency", "icons/svg/dice-target.svg");
                 map.set("Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp");
                 map.set("Advanced Countdown", "systems/pf2e/icons/spells/time-beacon.webp");
-                map.set("Apply Conditions", "icons/svg/dice-target.svg");
                 map.set("Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp");
-                map.set("Bane", "systems/pf2e/icons/spells/bane.webp");
-                map.set("BattleMedicineImmunity", "icons/svg/dice-target.svg");
                 map.set("Bless", "systems/pf2e/icons/spells/bless.webp");
                 map.set("Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp");
                 map.set("Conditions Manager", "systems/pf2e/icons/conditions/doomed.webp");
-                map.set("Countdown-Cooldown", "icons/svg/dice-target.svg");
                 map.set(
                     "Custom Saves and Skill Checks",
                     "systems/pf2e/icons/equipment/held-items/abadars-flawless-scale.webp",
                 );
-                map.set("Double Slice", "systems/pf2e/icons/spells/echoing-weapon.webp");
                 map.set("Dual Class", "systems/pf2e/icons/spells/guidance.webp");
                 map.set(
                     "Eldritch Shot",
                     "systems/pf2e/icons/equipment/consumables/ammunition/spellstrike-ammunition.webp",
                 );
                 map.set("Flurry of Blows", "systems/pf2e/icons/features/classes/flurry-of-blows.webp");
+                map.set("Force Barrage", "systems/pf2e/icons/spells/magic-missile.webp");
                 map.set("Level Based DCs", "systems/pf2e/icons/equipment/held-items/radiant-spark.webp");
-                map.set("Lingering Composition", "icons/svg/dice-target.svg");
-                map.set("Lingering Heroics", "systems/pf2e/icons/spells/inspire-heroics.webp");
+                map.set("Lingering Fortissimo", "systems/pf2e/icons/spells/inspire-heroics.webp");
                 map.set("Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp");
-                map.set("Magic Missile", "systems/pf2e/icons/spells/magic-missile.webp");
                 map.set("Marshal Stances", "systems/pf2e/icons/features/feats/dread-marshal-stance.webp");
-                map.set("Modded BM immunity tracker", "systems/pf2e/icons/features/feats/treat-wounds.webp");
                 map.set("Modded Countdown Cooldown", "systems/pf2e/icons/spells/time-beacon.webp");
-                map.set("One for All", "icons/svg/dice-target.svg");
-                map.set("Overdrive", "icons/svg/dice-target.svg");
                 map.set("Ration Consumer", "systems/pf2e/icons/equipment/adventuring-gear/rations.webp");
-                map.set("Post Save buttons to chat", "icons/svg/dice-target.svg");
-                map.set("QuickSkillActions", "icons/svg/dice-target.svg");
                 map.set("Recall Knowledge", "icons/skills/trades/academics-book-study-runes.webp");
-                map.set("Scorching Ray", "systems/pf2e/icons/spells/scorching-ray.webp");
                 map.set("Simulate Falling", "systems/pf2e/icons/spells/seal-fate.webp");
-                map.set("Spell DCs by Level", "systems/pf2e/icons/features/classes/conflux-spells.webp");
+                map.set("Spell DCs by Rank", "systems/pf2e/icons/features/classes/conflux-spells.webp");
                 map.set(
                     "Spellsling",
                     "systems/pf2e/icons/equipment/consumables/ammunition/energized-cartridge-electricity.webp",
                 );
                 map.set("Spellstrike", "systems/pf2e/icons/features/classes/spellstrike.webp");
-                map.set("Treat Wounds and Battle Medicine", "systems/pf2e/icons/conditions/wounded.webp");
                 map.set("Target tokens within a template", "icons/skills/targeting/crosshair-bars-yellow.webp");
+                map.set("Treat Wounds and Battle Medicine", "systems/pf2e/icons/conditions/wounded.webp");
                 map.set("Update Aura Radius", "systems/pf2e/icons/spells/destructive-aura.webp");
                 map.set("Use Scroll or Wand", "systems/pf2e/icons/equipment/wands/magic-wands/magic-wand.webp");
                 map.set("Versatile Performance", "systems/pf2e/icons/spells/summon-instrument.webp");
