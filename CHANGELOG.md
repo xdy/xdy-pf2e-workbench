@@ -1,3 +1,10 @@
+## [5.34.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.34.1...v5.34.2) (2023-11-20)
+
+
+### Bug Fixes
+
+* Update pack build script so renamed macros get the same icon as before. Clean up old and unused macro-> icon mappings. ([b27076a](https://github.com/xdy/xdy-pf2e-workbench/commit/b27076a36623cd0d4541dfe31f77134d44bfcfe2))
+
 ## [5.34.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.34.0...v5.34.1) (2023-11-20)
 
 
