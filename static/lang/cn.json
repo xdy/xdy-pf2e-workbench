@@ -105,7 +105,7 @@
       "heroPointHandler": {
         "thisMany": "这些",
         "timerStopped": "英雄点计时器已停止。",
-        "timerValue": "时间（范围0-60）",
+        "timerValue": "时间（范围0-{maxMinutes}）",
         "title": "英雄点处理器",
         "add": "增加",
         "all": "所有",
@@ -160,10 +160,10 @@
         "hint": "勾选此项，在战斗中选择目标时进行提示。",
         "name": "目标提示",
         "note": "攻击前请先选择目标。",
-        "error": "你必须在攻击前选择一个目标。",
+        "error": "{title}已取消，你必须在攻击前选择一个目标。",
         "no": "无提醒",
         "reminder": "提醒",
-        "mustTarget": "必须选中目标",
+        "mustTarget": "取消未选择目标的攻击",
         "info": "请在攻击前先选定目标。"
       },
       "npcMystifierBlacklist": {
@@ -242,7 +242,11 @@
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
         "hint": "设置是否在施放*无需攻击检定*的法术时自动掷正常伤害骰。",
-        "name": "施放*无需攻击检定*的法术时自动掷伤害骰。"
+        "name": "施放*无需攻击检定*的法术时自动掷伤害骰。",
+        "nonSaveSpell": "所有非攻击非豁免法术",
+        "saveSpell": "所有非攻击的豁免法术",
+        "no": "否",
+        "anySpell": "所有非攻击法术"
       },
       "autoRollDamageForStrike": {
         "hint": "设置打击命中时是否自动掷伤害骰。注意，重击时掷重击骰。",
@@ -275,7 +279,7 @@
         "firstPart": "{tokenName}刚刚施放了<strong>{traditionString}</strong>根源中带有{type}特征的法术",
         "hint": "秘密施法时，此设置还会发布一条公开消息表明有法术被施放，*除非*您在施法时同时按住 SHIFT 和 CTRL。",
         "secondPartNoRk": ".<br>询问你的GM你是否能自动辨识该法术；如果不能，可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]。或者在你的回合中用一个动作来辨识它（更多细节请咨询你的GM）。",
-        "secondPartRK": ".<br>询问你的GM你是否能自动辨识该法术；如果不能，可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]。或者在你的回合中用一个动作使用@Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}来辨识它"
+        "secondPartRK": ".<br>询问你的GM你是否能自动辨识该法术；如果不能，可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]。或者在你的回合中用一个动作使用@Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]（或花费10分钟使用@Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]）来辨识它"
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "在公开消息中显示法术特征。",
@@ -397,7 +401,13 @@
         "name": "若Token无法攻击，进行提醒",
         "note": "你确定要继续攻击吗？{actorName} {reason}，因此它不大有能力攻击……",
         "petrified": "被石化",
-        "unconscious": "失去意识"
+        "unconscious": "失去意识",
+        "error": "由于{actorName} {reason}，{title}已取消。",
+        "restrained": "被束缚",
+        "info": "你确定要{title}吗？{actorName} {reason}，因此没有能力攻击……",
+        "no": "无需提醒",
+        "reminder": "提醒",
+        "cancelAttack": "角色无法攻击时取消攻击"
       },
       "tokenAnimation": {
         "hint": "启用此项更改token的移动动画。如有Multilevel Tokens模组，可能会引发问题。",
@@ -443,14 +453,14 @@
       },
       "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
         "name": "... 如果敌人造成重击伤害，濒死值额外增加1点。",
-        "hint": "如果被敌人角色选为目标并被重击，濒死值额外增加1点。使用上方下拉列表中的设置。需要先启用上方的设置。",
+        "hint": "如果被敌人角色选为目标并被重击，濒死值额外增加1点。使用上方“受伤”选项中的设置，需要先启用“受伤”设置。",
         "no": "否",
         "add": "添加濒死",
         "addForCharacters": "为玩家角色和魔宠添加濒死"
       },
       "autoGainDyingIfTakingDamageWhenAlreadyDying": {
         "name": "... 如果在濒死状态下承受伤害，濒死值额外增加1点（重击时为2点）。",
-        "hint": "如果在已有濒死状态的情况下受到伤害，濒死值增加1点（若启用重击时额外增加濒死值，则为2点）。使用上方下拉列表中的设置。需要先启用上方的设置。",
+        "hint": "如果在已有濒死状态的情况下受到伤害，濒死值增加1点（若启用重击时额外增加濒死值，则为2点）。使用上方“受伤”设置，需要先启用“受伤”设置。",
         "no": "否",
         "add": "添加濒死",
         "addForCharacters": "为玩家角色和魔宠添加濒死"
@@ -527,13 +537,13 @@
         "name": "当一个英雄点被分配出去时，弹出对应提示。"
       },
       "legacyVariantRuleAncestryParagon": {
-        "hint": "（只要系统仍然支持 \"族裔典范变体规则\"，该项就无需启动）这将会为族裔典范添加一列额外的专长槽。",
+        "hint": "需要在系统设置中启用“战役专长”设置。为“族裔典范”增加战役专长区域，但这*不会*自动将之前的额外专长移动到战役专长区。",
         "name": "增加族裔典范专长槽。在启用改动后，需要按 F5 刷新。",
         "title": "族裔典范专长"
       },
       "legacyVariantRuleDualClass": {
-        "hint": "（只要系统仍支持 \"双职业变体规则\"，此项就无需启动）。这将为双职业变体添加一个额外的专长槽位，此外，你还需要使用'双职业变体'(Dual Class)宏来为角色创造所需的职业。",
-        "name": "添加双职业专长槽。启用改动后，需要按 F5 刷新。",
+        "hint": "需要在系统设置中启用“战役专长”设置。为“双职业变体”增加战役专长区域，但这*不会*自动将之前的额外专长移动到战役专长区，此外，你还需要使用“双职业（Dual Class）”宏来为角色创建所使用的职业。",
+        "name": "添加双职业专长槽。启用改动后按 F5 刷新。",
         "title": "双职业专长"
       },
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
@@ -543,6 +553,22 @@
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
         "hint": "......根据这个乘数修改（好吧，我知道，我应该显示最终值）",
         "name": "......根据这个乘数修改"
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "yes": "是，所有角色",
+        "yesForCharacters": "是，所有玩家角色+魔宠",
+        "yesForNpcs": "是，所有NPC",
+        "no": "否",
+        "hint": "(不建议) 从带有死亡特征的来源处受到足够伤害时自动杀死角色的设置。",
+        "name": "…从死亡效果中受到足够伤害时自动杀死角色。(不建议)"
+      },
+      "autoKillIfMassiveDamage": {
+        "yes": "是，所有角色",
+        "yesForCharacters": "是，仅玩家角色+魔宠",
+        "yesForNpcs": "是，仅NPC",
+        "hint": "(不建议) 在遭受重创时自动杀死角色的设置。",
+        "no": "否",
+        "name": "…遭受重创时自动杀死角色。(不建议)"
       }
     },
     "spellCardNotFound": "找不到法术卡。在{spell}的最低环位施放该法术。",
@@ -559,7 +585,7 @@
         "gmMustImport": "GM必须在合集包“xdy-pf2e-workbench-macros”上右键并选择“导入全部内容”并确保导入时选择了“保留文档ID？”。",
         "settings": {
           "showBestBonus": {
-            "name": "基本动作宏显示最高加值",
+            "name": "基本动作宏：显示最高加值",
             "hint": "若选中人物在基本动作宏对话中有更高加值，是否显示"
           }
         },
@@ -621,16 +647,23 @@
           "CreateForgery": "伪造文书",
           "AdministerFirstAidStabilize": "进行急救 - 稳定伤势",
           "AdministerFirstAidStopBleeding": "进行急救 - 止血",
-          "Escape": "逃脱 - 最高加值 (??)"
+          "Escape": "逃脱 - 最高加值 (??)",
+          "AidASE": "协助（ASE宏）"
         },
         "second": "(-5)",
         "third": "(-10)",
         "compendiumNotFound": "未找到合集包 {compendiumName}",
         "macroNotFound": "未找到{macroName}宏",
         "bamActionsPerColumn": {
-          "name": "每行显示的大致动作数量",
+          "name": "基本动作宏: 每行显示的大致动作数量",
           "hint": "基本动作宏对话框中，每行显示的大致动作数量。每行显示的动作数将为能填入对话框的最接近数字。"
-        }
+        },
+        "downtime": "休整期",
+        "bamShowUnusable": {
+          "name": "基本动作宏: 显示无法使用的动作。",
+          "hint": "是否要显示由于未受训而无法使用的动作。"
+        },
+        "exploration": "探索期"
       },
       "buildNpcSpellbookJournal": {
         "title": "建立NPC法术书日志",
