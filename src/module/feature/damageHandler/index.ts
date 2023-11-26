@@ -169,8 +169,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     }
                 } else if (rollForNonSpellAttack) {
                     const rollOptions = actor?.getRollOptions(["all", "damage-roll"]);
-                    // @ts-ignore
-                    const actions = actor?.itemTypes?.action;
+                    const actions = actor?.system?.actions;
                     if (actions && actions.length > 0) {
                         const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
                         if (rollDamage) {
