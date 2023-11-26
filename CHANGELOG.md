@@ -1,3 +1,10 @@
+## [5.34.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.34.2...v5.34.3) (2023-11-26)
+
+
+### Bug Fixes
+
+* Autorolling damage for non-spell attacks should work again. Sets minumum and verified pf2e versions to 5.9.5 ([cd11ba5](https://github.com/xdy/xdy-pf2e-workbench/commit/cd11ba5f4b576276ac1007aee664be30289a6dd6))
+
 ## [5.34.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.34.1...v5.34.2) (2023-11-20)
 
 
