@@ -252,9 +252,18 @@ The example below is, not coincidentally, the relevant bits of my current houser
     "action": "update",
     "uuid": "Compendium.pf2e.feats-srd.Item.xn6EaAbQlAB5ZGe6",
     "name": "Winter Sleet",
-    "reason": "*That* much Prone? Nope.",
+    "reason": "*That* much Prone? Nope. Rewritten. (Not too sure about Slowed. Leaving it in for now.)",
     "data": {
       "system.description.value": "<p>Bone-chilling, swirling sleet surrounds you, cruel as deepest winter. Surfaces in your kinetic aura are coated in slippery ice. A creature that moves on the surface must make a @Check[type:reflex|dc:resolve(@actor.attributes.classOrSpellDC.value)]{Reflex save} or @Check[type:acrobatics|dc:resolve(@actor.attributes.classOrSpellDC.value)]{Acrobatics check}, becoming @Compendium[pf2e.conditionitems.Off-Guard]{Off-Guard} on a failure and falling @Compendium[pf2e.conditionitems.Prone]{Prone} on a Critical Failure. You're immune to these effects.<br>If a creature on the ice is critically hit by one of your water impulses or critically fails at a save against one, that creature is @Compendium[pf2e.conditionitems.Slowed]{Slowed 1} until the end of it's next turn.</p>"
+    }
+  },
+  {
+    "action": "update",
+    "uuid": "Compendium.pf2e.feats-srd.Item.g0fyway0FkdSo7ZE",
+    "name": "Quick Spring",
+    "reason": "Eh. Nope. Rewritten.",
+    "data": {
+      "system.description.value": "<p>Ishii Bunji is a skilled tumbler, and learning his technique allows you to propel yourself across the battlefield faster than your enemies can react. The first time you successfully @UUID[Compendium.pf2e.actionspf2e.Item.Tumble Through] an enemy's space your speed increases by 30 feet until the end of the round.</p>"
     }
   },
   {
