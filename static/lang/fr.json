@@ -206,7 +206,7 @@
         "startTimerLabel": "Soumettre les changements et démarrer/reprendre la minuterie",
         "thisMany": "Ce montant",
         "timerStopped": "La minuterie des points d'héroïsme est arrêtée.",
-        "timerValue": "Valeur de la minuterie (entre 0-60)",
+        "timerValue": "Valeur de la minuterie (entre 0 - {maxMinutes})",
         "title": "Gestionnaire de Point d'Héroïsme",
         "willBeResetIn": "Les points d'héroïsme seront réinitialisés dans {remainingMinutes} minutes ({time})."
       },
@@ -590,7 +590,7 @@
         "gmMustImport": "Le MJ doit faire un clic droit sur le compendium xdy-pf2e-workbench-macros et sélectionner \"Importer tout le contenu\" et s'assurer de cocher \"Conserver les ID des documents\" lors de l'importation.",
         "settings": {
           "showBestBonus": {
-            "name": "Montrer si c'est mieux dans les macros d'action de base",
+            "name": "BAM : Afficher si c'est mieux dans Basic Action Macros",
             "hint": "Indiquer si l'acteur sélectionné a le meilleur bonus dans la boîte de dialogue Macros d'action de base"
           }
         },
@@ -652,16 +652,25 @@
           "AdministerFirstAidStabilize": "Administrer les premiers secours - Stabiliser",
           "AdministerFirstAidStopBleeding": "Administrer les premiers secours - Arrêter le saignement",
           "CreateForgery": "Créer une contrefaçon",
-          "Escape": "S'Échapper - le plus élevé (??)"
+          "Escape": "S'Échapper - le plus élevé (??)",
+          "AidASE": "AID (ASE Macro)"
         },
         "second": "(-5)",
         "third": "(-10)",
         "macroNotFound": "Macro {macroName} non trouvée",
         "compendiumNotFound": "Compendium {compendiumName} non trouvé",
         "bamActionsPerColumn": {
-          "name": "Actions approximatives par ligne",
+          "name": "BAM : Actions approximatives par ligne",
           "hint": "Nombre approximatif d'actions par ligne dans la boîte de dialogue de Basic Action Macros. Le nombre réel d'actions par ligne sera le nombre d'actions par ligne le plus proche de la taille de la boîte de dialogue."
-        }
+        },
+        "explorationShort": "E",
+        "bamShowUnusable": {
+          "name": "BAM : Montrer les actions qui ne peuvent pas être utilisées.",
+          "hint": "Si vous souhaitez afficher les actions qui ne peuvent pas être utilisées car le personnage n'est pas qualifié."
+        },
+        "exploration": "Exploration",
+        "downtime": "Intermède",
+        "downtimeShort": "I"
       },
       "buildNpcSpellbookJournal": {
         "title": "Construire le grimoire de sorts du PNJ",
