@@ -53,7 +53,7 @@
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "foundry-types": "file:types/types/foundry",
-    "fs-extra": "^11.1.1",
+    "fs-extra": "^11.2.0",
     "gsap": "^3.12.2",
     "handlebars": "4.7.8",
     "jquery": "^3.7.1",
