@@ -54,7 +54,7 @@
     "eslint-plugin-prettier": "^5.0.1",
     "foundry-types": "file:types/types/foundry",
     "fs-extra": "^11.2.0",
-    "gsap": "^3.12.2",
+    "gsap": "^3.12.3",
     "handlebars": "4.7.8",
     "jquery": "^3.7.1",
     "jsdom": "^22.1.0",
