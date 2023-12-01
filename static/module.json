@@ -243,7 +243,7 @@
     {
       "type": "setup",
       "caption": "PF2e Workbench",
-      "thumbnail": "/modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
+      "thumbnail": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
     }
   ],
   "flags": {
