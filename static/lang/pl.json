@@ -79,7 +79,8 @@
           "AdministerFirstAidStopBleeding": "Pierwsza pomoc - Krwotok",
           "AdministerFirstAidStabilize": "Pierwsza pomoc - Stabilizacja",
           "CreateForgery": "Fałszerstwo",
-          "Escape": "Wyrwanie się"
+          "Escape": "Wyrwanie się",
+          "AidASE": "Wsparcie (makro ASE)"
         },
         "noActorSelected": "Nie wybrano żadnego aktora",
         "cancel": "Anuluj",
@@ -100,7 +101,11 @@
         "bamShowUnusable": {
           "name": "BAM: Pokaż akcje, których nie można użyć.",
           "hint": "Czy pokazywać akcje, których nie można użyć, ponieważ postać nie jest wyszkolona."
-        }
+        },
+        "exploration": "Eksploracja",
+        "downtime": "Przestój",
+        "explorationShort": "E",
+        "downtimeShort": "D"
       },
       "refocus": {
         "notPsychic": "zużywa przynajmniej {regain} punktów skupienia",
