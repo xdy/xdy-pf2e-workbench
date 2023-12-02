@@ -223,7 +223,7 @@ export async function handleDyingOnZeroHP(
         (dyingOption.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
     ) {
         if (dyingOption?.startsWith("addWoundedLevel")) {
-            dyingCounter = (actor.getCondition("wounded")?.value ?? 0) + 1 ?? 0;
+            dyingCounter = (actor.getCondition("wounded")?.value ?? 0) + 1;
         } else {
             dyingCounter = 1;
         }

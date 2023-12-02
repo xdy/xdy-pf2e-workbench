@@ -652,8 +652,7 @@ export function basicActionMacros() {
         getBestBonuses(partySkills, partyIds, actionsToUse);
     }
 
-    const columns =
-        1 + ~~((actionsToUse.length - 1) / Number(game.settings.get(MODULENAME, "bamActionsPerColumn")) ?? 14);
+    const columns = 1 + ~~((actionsToUse.length - 1) / Number(game.settings.get(MODULENAME, "bamActionsPerColumn")));
     const width = 26 + columns * 250;
     const height =
         30 +
