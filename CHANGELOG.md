@@ -1,3 +1,10 @@
+# [5.35.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.34.3...v5.35.0) (2023-12-02)
+
+
+### Features
+
+* Set minimum and verified pf2e system version to 5.10.1 ([fc7956e](https://github.com/xdy/xdy-pf2e-workbench/commit/fc7956e95650059518606128548fc6cfa2aec3d6))
+
 ## [5.34.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.34.2...v5.34.3) (2023-11-26)
 
 
