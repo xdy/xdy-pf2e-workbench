@@ -13,7 +13,7 @@ interface EquipmentSystemSource extends Investable<PhysicalSystemSource> {
         selected?: boolean;
     };
 }
-interface EquipmentSystemData extends Omit<EquipmentSystemSource, "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<Investable<PhysicalSystemData>, "traits"> {
+interface EquipmentSystemData extends Omit<EquipmentSystemSource, "bulk" | "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<Investable<PhysicalSystemData>, "traits"> {
     apex?: {
         attribute: AttributeString;
         selected: boolean;

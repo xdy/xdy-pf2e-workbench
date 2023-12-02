@@ -40,6 +40,8 @@ type ZeroToFour = ZeroToThree | 4;
 type OneToFour = Exclude<ZeroToFour, 0>;
 type ZeroToFive = ZeroToFour | 5;
 type OneToFive = OneToThree | Extract<ZeroToFive, 4 | 5>;
+type ZeroToSix = ZeroToFive | 6;
+type OneToSix = Exclude<ZeroToSix, 0>;
 type ZeroToTen = ZeroToFive | 6 | 7 | 8 | 9 | 10;
 type OneToTen = Exclude<ZeroToTen, 0>;
 type ZeroToEleven = ZeroToTen | 11;
@@ -74,4 +76,4 @@ export declare const PROFICIENCY_RANKS: readonly ["untrained", "trained", "exper
 export declare const MATH_FUNCTION_NAMES: Set<MathFunctionName>;
 type EnfolderableDocumentPF2e = ActorPF2e<null> | ItemPF2e<null> | Exclude<EnfolderableDocument, Actor<null> | Item<null>>;
 export { RARITIES, SIZES, SIZE_SLUGS, goesToEleven };
-export type { EnfolderableDocumentPF2e, LabeledNumber, LabeledString, LabeledValue, MigrationRecord, OneToFive, OneToFour, OneToTen, OneToThree, PublicationData, Rarity, Size, TraitsWithRarity, TwoToThree, TypeAndValue, ValueAndMax, ValueAndMaybeMax, ValuesList, ZeroToEleven, ZeroToFive, ZeroToFour, ZeroToTen, ZeroToThree, ZeroToTwo, };
+export type { EnfolderableDocumentPF2e, LabeledNumber, LabeledString, LabeledValue, MigrationRecord, OneToFive, OneToFour, OneToSix, OneToTen, OneToThree, PublicationData, Rarity, Size, TraitsWithRarity, TwoToThree, TypeAndValue, ValueAndMax, ValueAndMaybeMax, ValuesList, ZeroToEleven, ZeroToFive, ZeroToFour, ZeroToSix, ZeroToTen, ZeroToThree, ZeroToTwo, };

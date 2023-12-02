@@ -1,15 +1,21 @@
-import { ActorPF2e } from "@actor";
-import { ItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
+import { type ActorPF2e } from "@actor";
+import type { ItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
 import { CheckRollContextFlag } from "@module/chat-message/index.ts";
 import { ZeroToFour } from "@module/data.ts";
 import { ActorSourcePF2e } from "./data/index.ts";
 import { ModifierPF2e } from "./modifiers.ts";
 import { NPCStrike } from "./npc/data.ts";
 import { AuraEffectData, DamageRollContextParams } from "./types.ts";
-/** Reset and rerender a provided list of actors. Omit argument to reset all world and synthetic actors */
-declare function resetActors(actors?: Iterable<ActorPF2e>, { rerender }?: {
-    rerender?: boolean | undefined;
-}): Promise<void>;
+/**
+ * Reset and rerender a provided list of actors. Omit argument to reset all world and synthetic actors
+ * @param [actors] A list of actors to refresh: if none are provided, all world and synthetic actors are retrieved
+ * @param [options] Render options for actor sheets and tokens
+ */
+declare function resetActors(actors?: Iterable<ActorPF2e>, options?: ResetActorsRenderOptions): Promise<void>;
+interface ResetActorsRenderOptions {
+    sheets?: boolean;
+    tokens?: boolean;
+}
 /** Get the user color most appropriate for a provided actor */
 declare function userColorForActor(actor: ActorPF2e): HexColorString;
 declare function migrateActorSource(source: PreCreate<ActorSourcePF2e>): Promise<ActorSourcePF2e>;

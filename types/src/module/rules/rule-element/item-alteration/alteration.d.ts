@@ -7,7 +7,7 @@ import type { RuleElementPF2e } from "../base.ts";
 import { ResolvableValueField } from "../data.ts";
 declare class ItemAlteration extends foundry.abstract.DataModel<RuleElementPF2e, ItemAlterationSchema> {
     #private;
-    static VALID_PROPERTIES: readonly ["ac-bonus", "badge-max", "badge-value", "bulk-held-or-stowed", "bulk-worn", "category", "check-penalty", "dex-cap", "hardness", "hp-max", "material-type", "pd-recovery-dc", "persistent-damage", "rarity", "frequency-max", "frequency-per", "other-tags", "speed-penalty", "strength", "traits"];
+    static VALID_PROPERTIES: readonly ["ac-bonus", "badge-max", "badge-value", "bulk", "category", "check-penalty", "dex-cap", "hardness", "hp-max", "material-type", "pd-recovery-dc", "persistent-damage", "rarity", "frequency-max", "frequency-per", "other-tags", "speed-penalty", "strength", "traits"];
     static defineSchema(): ItemAlterationSchema;
     get actor(): ActorPF2e;
     /** Convenience access to the parent rule element's `resolveValue` method */

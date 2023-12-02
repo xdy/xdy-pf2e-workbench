@@ -1,6 +1,6 @@
+import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField, RuleElementSchema } from "./data.ts";
 import { RuleElementPF2e } from "./index.ts";
-import type { StringField } from "types/foundry/common/data/fields.d.ts";
 /**
  * @category RuleElement
  */

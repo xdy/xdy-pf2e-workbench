@@ -6,7 +6,6 @@ declare const immunityTypes: {
     bleed: string;
     blinded: string;
     bludgeoning: string;
-    chaotic: string;
     clumsy: string;
     cold: string;
     confused: string;
@@ -14,7 +13,6 @@ declare const immunityTypes: {
     "critical-hits": string;
     curse: string;
     custom: string;
-    darkwood: string;
     dazzled: string;
     deafened: string;
     "death-effects": string;
@@ -26,7 +24,6 @@ declare const immunityTypes: {
     emotion: string;
     energy: string;
     enfeebled: string;
-    evil: string;
     fascinated: string;
     fatigued: string;
     "fear-effects": string;
@@ -34,13 +31,11 @@ declare const immunityTypes: {
     fleeing: string;
     force: string;
     frightened: string;
-    good: string;
     grabbed: string;
     healing: string;
     illusion: string;
     immobilized: string;
     inhaled: string;
-    lawful: string;
     light: string;
     magic: string;
     mental: string;
@@ -90,9 +85,10 @@ declare const immunityTypes: {
     unholy: string;
     abysium: string;
     adamantine: string;
+    dawnsilver: string;
     djezet: string;
+    duskwood: string;
     inubrix: string;
-    mithral: string;
     noqual: string;
     orichalcum: string;
     siccatite: string;
@@ -107,7 +103,6 @@ declare const weaknessTypes: {
     "axe-vulnerability": string;
     bleed: string;
     bludgeoning: string;
-    chaotic: string;
     cold: string;
     "critical-hits": string;
     custom: string;
@@ -115,13 +110,10 @@ declare const weaknessTypes: {
     electricity: string;
     emotion: string;
     energy: string;
-    evil: string;
     fire: string;
     force: string;
     "ghost-touch": string;
     glass: string;
-    good: string;
-    lawful: string;
     light: string;
     magical: string;
     mental: string;
@@ -156,10 +148,10 @@ declare const weaknessTypes: {
     unholy: string;
     abysium: string;
     adamantine: string;
-    darkwood: string;
+    dawnsilver: string;
     djezet: string;
+    duskwood: string;
     inubrix: string;
-    mithral: string;
     noqual: string;
     orichalcum: string;
     siccatite: string;
@@ -173,7 +165,6 @@ declare const resistanceTypes: {
     "area-damage": string;
     bleed: string;
     bludgeoning: string;
-    chaotic: string;
     cold: string;
     "critical-hits": string;
     custom: string;
@@ -181,12 +172,9 @@ declare const resistanceTypes: {
     earth: string;
     electricity: string;
     energy: string;
-    evil: string;
     fire: string;
     force: string;
     "ghost-touch": string;
-    good: string;
-    lawful: string;
     light: string;
     magical: string;
     mental: string;
@@ -220,10 +208,10 @@ declare const resistanceTypes: {
     unholy: string;
     abysium: string;
     adamantine: string;
-    darkwood: string;
+    dawnsilver: string;
     djezet: string;
+    duskwood: string;
     inubrix: string;
-    mithral: string;
     noqual: string;
     orichalcum: string;
     siccatite: string;

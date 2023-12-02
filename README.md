@@ -163,7 +163,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Effect that you can use to change Focus Point Maximum of a character.
         * Adjustments for making undead, courtesy of @ElvisLiving (everything but the zombie) and @Tikael (He/Him) (
           zombie).
-        * A Reach 'aura' used by the (experimental) 'Whirlwind Strike' macro.
     * The compendium "PF2e Workbench Macros (xdy-pf2e-workbench-macros)" contains a few macros you might find useful.
         * 'Basic Action Macros' (aka BAM) shows a dialog with a button for the most commonly used action, with bonus and
           whether you're the best in the party at that action (a setting to turn this off exists). It defaults to not
@@ -172,9 +171,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
           with 'glow' meaning that you are the best in the party. (Thanks ApoAstolov).
         * 'Build Npc Spellbook Journal' that builds a journal with the contents of an npc's spell list. Courtesy of
           Avery (Velara).
-        * (Experimental) 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the
-          Whirlwind Strike Feat, has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that
-          the first weapon of any type.
 * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
   provided by ApoApostolov and esheyw. They are *intended* to be customized by the user by changing the javascript
   code (such as by adding/removing actions, setting what actors are part of the party, etc.) They are not really
@@ -211,6 +207,11 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       handling of [Death effects](https://2e.aonprd.com/Rules.aspx?ID=383) as they're handled by the pf2e system.
     * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
     * Option to add all skill actions to the character Actions page.
+    * (Experimental) 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the
+      Whirlwind Strike Feat, has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that
+      the first weapon of any type.
+    * A Reach 'aura' used by the (experimental) 'Whirlwind Strike' macro.
+
 
 ## Installation
 

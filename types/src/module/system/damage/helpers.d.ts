@@ -13,9 +13,9 @@ declare const DamageCategorization: {
     /** Map a damage type to its corresponding damage category, if any. */
     readonly fromDamageType: (damageType: DamageType) => DamageCategory | null;
     /** Get a set of all damage categories (both base and custom). */
-    readonly allCategories: () => Set<"abysium" | "adamantine" | "darkwood" | "djezet" | "energy" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "physical" | "siccatite" | "silver" | "precision" | "splash" | "cold-iron" | "keep-stone" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "persistent" | "alignment" | null>;
+    readonly allCategories: () => Set<"abysium" | "adamantine" | "dawnsilver" | "djezet" | "duskwood" | "energy" | "inubrix" | "noqual" | "orichalcum" | "physical" | "siccatite" | "silver" | "precision" | "splash" | "cold-iron" | "keep-stone" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "persistent" | "alignment" | null>;
     /** Get a set of all of the base rule damage types. */
-    readonly baseCategories: () => Set<"abysium" | "adamantine" | "darkwood" | "djezet" | "energy" | "inubrix" | "mithral" | "noqual" | "orichalcum" | "physical" | "siccatite" | "silver" | "precision" | "splash" | "cold-iron" | "keep-stone" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "persistent" | "alignment" | null>;
+    readonly baseCategories: () => Set<"abysium" | "adamantine" | "dawnsilver" | "djezet" | "duskwood" | "energy" | "inubrix" | "noqual" | "orichalcum" | "physical" | "siccatite" | "silver" | "precision" | "splash" | "cold-iron" | "keep-stone" | "peachwood" | "sisterstone-dusk" | "sisterstone-scarlet" | "sovereign-steel" | "warpglass" | "persistent" | "alignment" | null>;
     /** Map a damage category to the set of damage types in it. */
     readonly toDamageTypes: (category: string) => Set<string>;
 };

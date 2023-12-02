@@ -16,13 +16,13 @@ interface ConsumableSystemSource extends PhysicalSystemSource {
         max: number;
     };
     consume: {
-        value: string;
+        value: string | null;
     };
     autoDestroy: {
         value: boolean;
     };
     spell: SpellSource | null;
 }
-interface ConsumableSystemData extends Omit<ConsumableSystemSource, "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<PhysicalSystemData, "traits"> {
+interface ConsumableSystemData extends Omit<ConsumableSystemSource, "bulk" | "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<PhysicalSystemData, "traits"> {
 }
 export type { ConsumableCategory, ConsumableSource, ConsumableSystemData, ConsumableSystemSource, ConsumableTrait };

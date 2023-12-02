@@ -1,5 +1,5 @@
-import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
+import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
 /**
  * Add an effect icon to an actor's token
  * @category RuleElement

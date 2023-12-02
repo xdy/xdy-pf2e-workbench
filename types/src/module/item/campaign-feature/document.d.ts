@@ -10,6 +10,8 @@ declare class CampaignFeaturePF2e<TParent extends ActorPF2e | null = ActorPF2e |
     grants: CampaignFeaturePF2e[];
     behavior: BehaviorType;
     levelLabel: string;
+    /** The item that granted this feature */
+    granter: CampaignFeaturePF2e | null;
     get category(): KingmakerCategory;
     /** Returns the level if the feature type supports it */
     get level(): number | null;

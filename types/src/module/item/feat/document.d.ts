@@ -25,6 +25,7 @@ declare class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     /** Set a self roll option for this feat(ure) */
     prepareActorData(this: FeatPF2e<ActorPF2e>): void;
     prepareSiblingData(): void;
+    onPrepareSynthetics(this: FeatPF2e<ActorPF2e>): void;
     getChatData(this: FeatPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];

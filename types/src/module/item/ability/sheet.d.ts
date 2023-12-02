@@ -1,12 +1,12 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { AbilityItemPF2e } from "@item/ability/document.ts";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "../base/sheet/base.ts";
-import { SelfEffectReference } from "./index.ts";
-export declare class ActionSheetPF2e extends ItemSheetPF2e<AbilityItemPF2e> {
-    static get defaultOptions(): DocumentSheetOptions;
-    getData(options?: Partial<DocumentSheetOptions>): Promise<ActionSheetData>;
+import type { AbilityItemPF2e } from "@item/ability/document.ts";
+import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
+import { SelfEffectReference } from "./data.ts";
+declare class AbilitySheetPF2e extends ItemSheetPF2e<AbilityItemPF2e> {
+    static get defaultOptions(): ItemSheetOptions;
+    getData(options?: Partial<ItemSheetOptions>): Promise<ActionSheetData>;
     activateListeners($html: JQuery<HTMLElement>): void;
     _onDrop(event: ElementDragEvent): Promise<void>;
 }
@@ -20,4 +20,4 @@ interface ActionSheetData extends ItemSheetDataPF2e<AbilityItemPF2e> {
     proficiencies: ConfigPF2e["PF2E"]["proficiencyLevels"];
     selfEffect: SelfEffectReference | null;
 }
-export {};
+export { AbilitySheetPF2e };

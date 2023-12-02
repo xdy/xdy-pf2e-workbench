@@ -1,8 +1,9 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { ItemSummaryData } from "@item/base/data/index.ts";
 import { EquipmentTrait } from "@item/equipment/data.ts";
-import { PhysicalItemPF2e } from "@item/physical/index.ts";
 import { Bulk } from "@item/physical/bulk.ts";
+import { PhysicalItemPF2e } from "@item/physical/document.ts";
+import type { UserPF2e } from "@module/user/index.ts";
 import { ContainerSource, ContainerSystemData } from "./data.ts";
 declare class ContainerPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     /** This container's contents, reloaded every data preparation cycle */
@@ -21,6 +22,8 @@ declare class ContainerPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
     /** Move the contents of this container into the next-higher container or otherwise the main actor inventory */
     ejectContents(): Promise<void>;
     getChatData(this: ContainerPF2e<TParent>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;
+    /** Coerce changes to container bulk data into validity */
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface ContainerPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     readonly _source: ContainerSource;

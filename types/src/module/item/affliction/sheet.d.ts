@@ -1,13 +1,13 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { AfflictionPF2e, ConditionPF2e } from "@item";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/base/sheet/base.ts";
+import { type AfflictionPF2e, type ConditionPF2e } from "@item";
+import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import { DamageCategoryUnique } from "@system/damage/types.ts";
 import { AfflictionConditionData, AfflictionStageData } from "./data.ts";
 declare class AfflictionSheetPF2e extends ItemSheetPF2e<AfflictionPF2e> {
-    static get defaultOptions(): DocumentSheetOptions;
-    getData(options?: Partial<DocumentSheetOptions>): Promise<AfflictionSheetData>;
+    static get defaultOptions(): ItemSheetOptions;
+    getData(options?: Partial<ItemSheetOptions>): Promise<AfflictionSheetData>;
     protected prepareStages(): Promise<Record<string, AfflictionStageSheetData>>;
     activateListeners($html: JQuery<HTMLElement>): void;
     _onDrop(event: ElementDragEvent): Promise<void>;

@@ -1,8 +1,10 @@
+import type { ActorPF2e } from "@actor";
+import type { AbilityItemPF2e, FeatPF2e, SpellPF2e } from "@item";
 import { ItemPF2e } from "@item";
 import type { FeatSheetPF2e } from "@item/feat/sheet.ts";
 import { RangeData } from "@item/types.ts";
 import { AbilitySystemData, SelfEffectReference } from "./data.ts";
-import type { ActionSheetPF2e } from "./sheet.ts";
+import type { AbilitySheetPF2e } from "./sheet.ts";
 interface SourceWithActionData {
     system: {
         actionType: AbilitySystemData["actionType"];
@@ -26,6 +28,8 @@ interface SelfEffectSheetReference extends SelfEffectReference {
     pack: string | null;
 }
 /** Save data from an effect item dropped on an ability or feat sheet. */
-declare function handleSelfEffectDrop(sheet: ActionSheetPF2e | FeatSheetPF2e, event: ElementDragEvent): Promise<void>;
+declare function handleSelfEffectDrop(sheet: AbilitySheetPF2e | FeatSheetPF2e, event: ElementDragEvent): Promise<void>;
 declare function createActionRangeLabel(range: Maybe<RangeData>): string | null;
-export { activateActionSheetListeners, createActionRangeLabel, createSelfEffectSheetData, handleSelfEffectDrop, normalizeActionChangeData, };
+/**  Add the holy/unholy trait to sanctified actions and spells if the owning actor is also holy/unholy */
+declare function processSanctification(item: AbilityItemPF2e<ActorPF2e> | FeatPF2e<ActorPF2e> | SpellPF2e<ActorPF2e>): void;
+export { activateActionSheetListeners, createActionRangeLabel, createSelfEffectSheetData, handleSelfEffectDrop, normalizeActionChangeData, processSanctification, };

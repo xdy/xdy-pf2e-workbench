@@ -1,11 +1,6 @@
 {
   "xdy-pf2e-workbench": {
     "macros": {
-      "whirlwindStrike": {
-        "starts": "{name} 旋風擊開始！",
-        "ends": "{name} 旋風擊在 {targets} 次攻擊後結束！",
-        "error": "選擇一個有旋風擊的Token，並且至少有一個目標在觸及範圍內！"
-      },
       "basicActionMacros": {
         "title": "動作 ({name})",
         "noActorSelected": "沒有選擇人物",

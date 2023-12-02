@@ -11,6 +11,7 @@ declare class AbilityItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | nul
     get actionCost(): ActionCost | null;
     get frequency(): Frequency | null;
     prepareBaseData(): void;
+    onPrepareSynthetics(this: AbilityItemPF2e<ActorPF2e>): void;
     getRollOptions(prefix?: string): string[];
     getChatData(this: AbilityItemPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;
     protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;

@@ -1,10 +1,10 @@
 import { type ActorPF2e } from "@actor";
 import { ItemPF2e, type ContainerPF2e } from "@item";
 import { ItemSummaryData, PhysicalItemSource, TraitChatData } from "@item/base/data/index.ts";
-import { Rarity, Size } from "@module/data.ts";
+import { Rarity, Size, ZeroToTwo } from "@module/data.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { Bulk } from "./bulk.ts";
-import { IdentificationStatus, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PhysicalItemTrait, PhysicalSystemData, Price } from "./data.ts";
+import { IdentificationStatus, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalSystemData, Price } from "./data.ts";
 import { CoinsPF2e } from "./helpers.ts";
 declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     private _container;
@@ -13,12 +13,14 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     get traits(): Set<PhysicalItemTrait>;
     get quantity(): number;
     get size(): Size;
+    get hitPoints(): PhysicalItemHitPoints;
+    get hardness(): number;
     get isEquipped(): boolean;
     get carryType(): ItemCarryType;
     /** Whether the item is currently being held */
     get isHeld(): boolean;
     /** The number of hands being used to hold this item */
-    get handsHeld(): number;
+    get handsHeld(): ZeroToTwo;
     /** Whether the item is currently being worn */
     get isWorn(): boolean;
     get price(): Price;
@@ -33,6 +35,8 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     get isTemporary(): boolean;
     get isShoddy(): boolean;
     get isDamaged(): boolean;
+    get isBroken(): boolean;
+    get isDestroyed(): boolean;
     get material(): ItemMaterialData;
     /** Whether this is a specific magic item: applicable to armor, shields, and weapons */
     get isSpecific(): boolean;

@@ -96,12 +96,6 @@
         "disabled": "Deaktiviert, da keine Fähigkeit gelernt wurde um mehr als 1 Fokuspunkt zu erneuern.",
         "selectOneActor": "Es muss ein Akteur ausgewählt werden."
       },
-      "whirlwindStrike": {
-        "starts": "{name} Wirbelnder Angriff startet!",
-        "ends": "{name} Wirbelnder Angriff endet nach {targets} Angriffen!",
-        "error": "Wähle ein bewaffnetes Token mit Wirbelnder Angriff und mindestens einem sichtbaren Gegner in Reichweite aus!",
-        "reachAuraNotFound": "Keine Aura gefunden, bitte Reichweite 'Aura' im PF2 Workbench Gegenstandskompendium auf das Token ziehen und die Reichweite entsprechend anpassen."
-      }
     },
     "modules": {
       "multilevel-tokens": "Das Modul 'Multilevel Tokens' (und wahrscheinlich auch andere Module, die Token teleportieren) können Probleme mit dem Teleportieren haben, wenn Sie die optionale Workbench-Einstellung zur Änderung der Token-Animation aktiviert haben.",

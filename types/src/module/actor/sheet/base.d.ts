@@ -27,6 +27,8 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     protected static coinsToSheetData(coins: Coins): CoinageSummary;
     protected getStrikeFromDOM(button: HTMLElement, readyOnly?: boolean): StrikeData | null;
     activateListeners($html: JQuery): void;
+    /** Sheet-wide click listeners for elements selectable as `a[data-action]` */
+    protected activateClickListeners(html: HTMLElement): void;
     /** DOM listeners for inventory panel */
     protected activateInventoryListeners(panel: HTMLElement | null): void;
     protected deleteItem(element: HTMLElement, item: ItemPF2e, event?: MouseEvent): Promise<void>;

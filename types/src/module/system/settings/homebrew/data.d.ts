@@ -18,7 +18,7 @@ interface HomebrewTag<T extends HomebrewTraitKey = HomebrewTraitKey> {
 type MainDamageCategories = "physical" | "energy";
 interface CustomDamageData {
     label: string;
-    category: MainDamageCategories | null;
+    category?: MainDamageCategories | null;
     icon: string | null;
 }
 interface HomebrewElementsSheetData extends MenuTemplateData {

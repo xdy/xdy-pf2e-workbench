@@ -42,7 +42,6 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         bleed: string;
         blinded: string;
         bludgeoning: string;
-        chaotic: string;
         clumsy: string;
         cold: string;
         confused: string;
@@ -50,7 +49,6 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         "critical-hits": string;
         curse: string;
         custom: string;
-        darkwood: string;
         dazzled: string;
         deafened: string;
         "death-effects": string;
@@ -62,7 +60,6 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         emotion: string;
         energy: string;
         enfeebled: string;
-        evil: string;
         fascinated: string;
         fatigued: string;
         "fear-effects": string;
@@ -70,13 +67,11 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         fleeing: string;
         force: string;
         frightened: string;
-        good: string;
         grabbed: string;
         healing: string;
         illusion: string;
         immobilized: string;
         inhaled: string;
-        lawful: string;
         light: string;
         magic: string;
         mental: string;
@@ -126,9 +121,10 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         unholy: string;
         abysium: string;
         adamantine: string;
+        dawnsilver: string;
         djezet: string;
+        duskwood: string;
         inubrix: string;
-        mithral: string;
         noqual: string;
         orichalcum: string;
         siccatite: string;
@@ -152,7 +148,6 @@ declare class Weakness extends IWR<WeaknessType> implements WeaknessSource {
         "axe-vulnerability": string;
         bleed: string;
         bludgeoning: string;
-        chaotic: string;
         cold: string;
         "critical-hits": string;
         custom: string;
@@ -160,13 +155,10 @@ declare class Weakness extends IWR<WeaknessType> implements WeaknessSource {
         electricity: string;
         emotion: string;
         energy: string;
-        evil: string;
         fire: string;
         force: string;
         "ghost-touch": string;
         glass: string;
-        good: string;
-        lawful: string;
         light: string;
         magical: string;
         mental: string;
@@ -201,10 +193,10 @@ declare class Weakness extends IWR<WeaknessType> implements WeaknessSource {
         unholy: string;
         abysium: string;
         adamantine: string;
-        darkwood: string;
+        dawnsilver: string;
         djezet: string;
+        duskwood: string;
         inubrix: string;
-        mithral: string;
         noqual: string;
         orichalcum: string;
         siccatite: string;
@@ -230,7 +222,6 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         "area-damage": string;
         bleed: string;
         bludgeoning: string;
-        chaotic: string;
         cold: string;
         "critical-hits": string;
         custom: string;
@@ -238,12 +229,9 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         earth: string;
         electricity: string;
         energy: string;
-        evil: string;
         fire: string;
         force: string;
         "ghost-touch": string;
-        good: string;
-        lawful: string;
         light: string;
         magical: string;
         mental: string;
@@ -277,10 +265,10 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         unholy: string;
         abysium: string;
         adamantine: string;
-        darkwood: string;
+        dawnsilver: string;
         djezet: string;
+        duskwood: string;
         inubrix: string;
-        mithral: string;
         noqual: string;
         orichalcum: string;
         siccatite: string;

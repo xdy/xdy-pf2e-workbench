@@ -5,7 +5,7 @@ import type { ArmorPF2e, PhysicalItemPF2e, WeaponPF2e } from "@item";
 import { ArmorPropertyRuneType, ResilientRuneType } from "@item/armor/types.ts";
 import { SpellTrait } from "@item/spell/types.ts";
 import { StrikingRuneType, WeaponPropertyRuneType } from "@item/weapon/types.ts";
-import { OneToFour, Rarity, ZeroToFour, ZeroToThree } from "@module/data.ts";
+import { OneToFour, Rarity, ZeroToFour, ZeroToSix, ZeroToThree } from "@module/data.ts";
 import { RollNoteSource } from "@module/notes.ts";
 import { StrikeAdjustment } from "@module/rules/synthetics.ts";
 import { DegreeOfSuccessAdjustment } from "@system/degree-of-success.ts";
@@ -42,9 +42,22 @@ interface RuneData {
 interface PotencyRuneData extends RuneData {
     value: OneToFour;
 }
-interface SecondaryFundamentalRuneData extends RuneData {
-    slug: string;
+interface SecondaryFundamentalRuneData<TSlug extends string> extends RuneData {
+    slug: TSlug;
 }
+interface ReinforcingRuneData extends RuneData {
+    hardness: {
+        increase: number;
+        max: number;
+    };
+    maxHP: {
+        increase: number;
+        max: number;
+    };
+}
+type FundamentalShieldRuneData = {
+    reinforcing: Record<ZeroToSix, ReinforcingRuneData | null>;
+};
 interface PropertyRuneData<TSlug extends string> extends RuneData {
     slug: TSlug;
 }
@@ -141,13 +154,15 @@ declare const RUNE_DATA: {
             winged: ArmorPropertyRuneData<"winged">;
         };
         potency: Record<ZeroToFour, PotencyRuneData | null>;
-        resilient: Record<ZeroToThree, SecondaryFundamentalRuneData | null>;
+        resilient: Record<ZeroToThree, SecondaryFundamentalRuneData<ResilientRuneType> | null>;
     };
+    shield: FundamentalShieldRuneData;
     weapon: {
         property: {
             holy: WeaponPropertyRuneData<"holy">;
             unholy: WeaponPropertyRuneData<"unholy">;
             vorpal: WeaponPropertyRuneData<"vorpal">;
+            astral: WeaponPropertyRuneData<"astral">;
             ancestralEchoing: WeaponPropertyRuneData<"ancestralEchoing">;
             anchoring: WeaponPropertyRuneData<"anchoring">;
             ashen: WeaponPropertyRuneData<"ashen">;
@@ -179,6 +194,7 @@ declare const RUNE_DATA: {
             greaterGiantKilling: WeaponPropertyRuneData<"greaterGiantKilling">;
             greaterAnchoring: WeaponPropertyRuneData<"greaterAnchoring">;
             greaterAshen: WeaponPropertyRuneData<"greaterAshen">;
+            greaterAstral: WeaponPropertyRuneData<"greaterAstral">;
             greaterBloodbane: WeaponPropertyRuneData<"greaterBloodbane">;
             greaterBrilliant: WeaponPropertyRuneData<"greaterBrilliant">;
             greaterCorrosive: WeaponPropertyRuneData<"greaterCorrosive">;
@@ -220,7 +236,7 @@ declare const RUNE_DATA: {
             wounding: WeaponPropertyRuneData<"wounding">;
         };
         potency: Record<ZeroToFour, PotencyRuneData | null>;
-        striking: Record<ZeroToThree, SecondaryFundamentalRuneData | null>;
+        striking: Record<ZeroToThree, SecondaryFundamentalRuneData<StrikingRuneType> | null>;
     };
 };
 export { RUNE_DATA, getPropertyRuneDegreeAdjustments, getPropertyRuneDice, getPropertyRuneModifierAdjustments, getPropertyRuneStrikeAdjustments, getPropertyRunes, getPropertySlots, getResilientBonus, getRuneValuationData, getStrikingDice, prunePropertyRunes, resilientRuneValues, };

@@ -2,7 +2,6 @@ import type { RollNoteRuleElement, RollNoteSource } from "@module/rules/rule-ele
 import { RuleElementForm, RuleElementFormSheetData } from "./base.ts";
 /** Form handler for the RollNote rule element */
 declare class RollNoteForm extends RuleElementForm<RollNoteSource, RollNoteRuleElement> {
-    private html;
     template: string;
     getData(): Promise<RollNoteFormSheetData>;
     activateListeners(html: HTMLElement): void;

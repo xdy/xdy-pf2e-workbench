@@ -18,7 +18,6 @@ import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.js";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.js";
 import { basicActionMacros } from "./feature/macros/basicActionMacros.js";
 import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal.js";
-import { whirlwindStrike } from "./feature/macros/whirlwindStrike.js";
 import {
     createChatMessageHook,
     createItemHook,
@@ -340,7 +339,6 @@ Hooks.once("ready", () => {
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
         buildNpcSpellbookJournal: buildNpcSpellbookJournal, // await game.PF2eWorkbench.buildNpcSpellbookJournal()
-        whirlwindStrike: whirlwindStrike, // await game.PF2eWorkbench.whirlwindStrike(_token) OR await game.PF2eWorkbench.whirlwindStrike(_token, 2000)
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
         getAllFromAllowedPacks: getAllFromAllowedPacks, // await game.PF2eWorkbench.getAllFromAllowedPacks()

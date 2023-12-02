@@ -1,11 +1,10 @@
-import type { ActorPF2e } from "@actor";
+import type { ActorPF2e, CharacterPF2e } from "@actor";
 import { AttackTraitHelpers } from "@actor/creature/helpers.ts";
 import { ModifierPF2e } from "@actor/modifiers.ts";
-import { AbilityItemPF2e, ArmorPF2e, WeaponPF2e } from "@item";
+import type { AbilityItemPF2e, ArmorPF2e, WeaponPF2e } from "@item";
 import { ItemCarryType } from "@item/physical/index.ts";
 import { ZeroToThree, ZeroToTwo } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
-import type { CharacterPF2e } from "./document.ts";
 /** Handle weapon traits that introduce modifiers or add other weapon traits */
 declare class PCAttackTraitHelpers extends AttackTraitHelpers {
     static adjustWeapon(weapon: WeaponPF2e): void;
@@ -13,29 +12,36 @@ declare class PCAttackTraitHelpers extends AttackTraitHelpers {
 }
 interface AuxiliaryInteractParams {
     weapon: WeaponPF2e<CharacterPF2e>;
-    action: "Interact";
-    purpose: "Draw" | "Grip" | "Modular" | "PickUp" | "Retrieve" | "Sheathe";
+    action: "interact";
+    annotation: "draw" | "grip" | "modular" | "pick-up" | "retrieve" | "sheathe";
     hands?: ZeroToTwo;
+}
+interface AuxiliaryShieldParams {
+    weapon: WeaponPF2e<CharacterPF2e>;
+    action: "end-cover" | "raise-a-shield" | "take-cover";
+    annotation?: "tower-shield";
+    hands?: never;
 }
 interface AuxiliaryReleaseParams {
     weapon: WeaponPF2e<CharacterPF2e>;
-    action: "Release";
-    purpose: "Grip" | "Drop";
+    action: "release";
+    annotation: "grip" | "drop";
     hands: 0 | 1;
 }
-type AuxiliaryActionParams = AuxiliaryInteractParams | AuxiliaryReleaseParams;
-type AuxiliaryActionPurpose = AuxiliaryActionParams["purpose"];
+type AuxiliaryActionParams = AuxiliaryInteractParams | AuxiliaryShieldParams | AuxiliaryReleaseParams;
+type AuxiliaryActionType = AuxiliaryActionParams["action"];
+type AuxiliaryActionPurpose = AuxiliaryActionParams["annotation"];
 /** Create an "auxiliary" action, an Interact or Release action using a weapon */
 declare class WeaponAuxiliaryAction {
     readonly weapon: WeaponPF2e<CharacterPF2e>;
-    readonly action: "Interact" | "Release";
+    readonly action: AuxiliaryActionType;
     readonly actions: ZeroToThree;
     readonly carryType: ItemCarryType | null;
-    readonly hands: ZeroToThree | null;
-    readonly purpose: AuxiliaryActionPurpose;
+    readonly hands: ZeroToTwo | null;
+    readonly annotation: NonNullable<AuxiliaryActionPurpose> | null;
     /** A "full purpose" reflects the options to draw, sheathe, etc. a weapon */
-    readonly fullPurpose: string;
-    constructor({ weapon, action, purpose, hands }: AuxiliaryActionParams);
+    readonly fullAnnotation: string | null;
+    constructor({ weapon, action, annotation, hands }: AuxiliaryActionParams);
     get actor(): CharacterPF2e;
     get label(): string;
     get glyph(): string;

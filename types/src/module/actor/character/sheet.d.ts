@@ -11,6 +11,7 @@ import { ActionCost, Frequency, ItemSourcePF2e } from "@item/base/data/index.ts"
 import { MagicTradition } from "@item/spell/types.ts";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/types.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
+import { ZeroToFour } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { CreatureSheetPF2e } from "../creature/sheet.ts";
@@ -95,6 +96,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     attributeBoostsAllocated: boolean;
     biography: CharacterBiography;
     class: ClassPF2e<CharacterPF2e> | null;
+    numberToRank: Record<ZeroToFour, string>;
     classDCs: {
         dcs: ClassDCSheetData[];
         /** The slug of the character's primary class DC */
@@ -115,6 +117,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     preparationType: Object;
     showPFSTab: boolean;
     spellcastingEntries: SpellcastingSheetData[];
+    hasNormalSpellcasting: boolean;
     tabVisibility: CharacterSheetTabVisibility;
     actions: {
         encounter: Record<"action" | "reaction" | "free", {
@@ -147,8 +150,6 @@ interface ActionSheetData {
 interface ClassDCSheetData extends ClassDCData {
     icon: string;
     hover: string;
-    rankSlug: string;
-    rankName: string;
 }
 interface ElementalBlastSheetConfig extends ElementalBlastConfig {
     damageType: DamageType;

@@ -21,6 +21,6 @@ type TokenImageRuleSchema = RuleElementSchema & {
     /** An optional tint adjustment */
     tint: ColorField;
     /** An optional alpha adjustment */
-    alpha: AlphaField;
+    alpha: AlphaField<false, true, true>;
 };
 export { TokenImageRuleElement };

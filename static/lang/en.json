@@ -128,12 +128,6 @@
         "enabled": "Regain {regain} focus points.<br/>Click <b>ONLY</b> if you have {details} since last Refocus.",
         "one": "one",
         "selectOneActor": "You must select one actor."
-      },
-      "whirlwindStrike": {
-        "starts": "{name} Whirlwind Strike starts!",
-        "ends": "{name} Whirlwind Strike ends after {targets} attacks!",
-        "error": "Select an armed token with Whirlwind Strike and at least one visible non-party target within reach!",
-        "reachAuraNotFound": "No aura found, please put the Reach 'aura' found in the PF2e Workbench Items compendium on the token and adjust the reach as appropriate."
       }
     },
     "modules": {

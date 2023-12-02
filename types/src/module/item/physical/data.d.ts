@@ -2,8 +2,9 @@ import { ActionTrait } from "@item/ability/types.ts";
 import { ArmorTrait } from "@item/armor/types.ts";
 import { ConsumableTrait } from "@item/consumable/data.ts";
 import { EquipmentTrait } from "@item/equipment/data.ts";
+import { ShieldTrait } from "@item/shield/types.ts";
 import { WeaponTrait } from "@item/weapon/types.ts";
-import { Size, TraitsWithRarity, ValuesList } from "@module/data.ts";
+import { Size, TraitsWithRarity, ValuesList, ZeroToTwo } from "@module/data.ts";
 import { MaterialDamageEffect } from "@system/damage/types.ts";
 import { ActionCost, BaseItemSourcePF2e, Frequency, ItemSystemData, ItemSystemSource } from "../base/data/system.ts";
 import type { ITEM_CARRY_TYPES } from "../base/data/values.ts";
@@ -19,25 +20,15 @@ interface PhysicalSystemSource extends ItemSystemSource {
     traits: PhysicalItemTraits;
     quantity: number;
     baseItem: string | null;
+    bulk: {
+        value: number;
+    };
     hp: PhysicalItemHPSource;
     hardness: number;
-    weight: {
-        value: string;
-    };
-    equippedBulk: {
-        value: string | null;
-    };
-    /** This is unused, remove when inventory bulk refactor is complete */
-    unequippedBulk: {
-        value: string;
-    };
     price: PartialPrice;
     equipped: EquippedData;
     identification: IdentificationSource;
     stackGroup: string | null;
-    negateBulk: {
-        value: string;
-    };
     containerId: string | null;
     material: ItemMaterialSource;
     size: Size;
@@ -55,7 +46,6 @@ interface IdentificationSource {
 interface ItemMaterialSource {
     grade: PreciousMaterialGrade | null;
     type: PreciousMaterialType | null;
-    effects?: MaterialDamageEffect[];
 }
 interface PhysicalSystemData extends PhysicalSystemSource, Omit<ItemSystemData, "level"> {
     hp: PhysicalItemHitPoints;
@@ -76,8 +66,6 @@ type Investable<TData extends PhysicalSystemData | PhysicalSystemSource> = TData
 interface BulkData {
     /** Held or stowed bulk */
     heldOrStowed: number;
-    /** Worn bulk, if different than when held or stowed */
-    worn: number | null;
     /** The applicable bulk value between the above two */
     value: number;
     /** The quantity of this item necessary to amount to the above bulk quantities: anything less is negligible */
@@ -93,7 +81,8 @@ interface MystifiedData {
         };
     };
 }
-interface ItemMaterialData extends Required<ItemMaterialSource> {
+interface ItemMaterialData extends ItemMaterialSource {
+    effects: MaterialDamageEffect[];
 }
 type IdentifiedData = DeepPartial<MystifiedData>;
 interface IdentificationData extends IdentificationSource {
@@ -102,10 +91,10 @@ interface IdentificationData extends IdentificationSource {
 type EquippedData = {
     carryType: ItemCarryType;
     inSlot?: boolean;
-    handsHeld?: number;
+    handsHeld?: ZeroToTwo;
     invested?: boolean | null;
 };
-type PhysicalItemTrait = ArmorTrait | ConsumableTrait | EquipmentTrait | WeaponTrait;
+type PhysicalItemTrait = ArmorTrait | ConsumableTrait | EquipmentTrait | ShieldTrait | WeaponTrait;
 interface PhysicalItemTraits<T extends PhysicalItemTrait = PhysicalItemTrait> extends TraitsWithRarity<T> {
     otherTags: string[];
 }

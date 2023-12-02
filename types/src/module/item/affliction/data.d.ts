@@ -34,6 +34,8 @@ interface AfflictionSystemSource extends AbstractEffectSystemSource {
 interface AfflictionSystemData extends Omit<AfflictionSystemSource, "fromSpell">, Omit<AbstractEffectSystemData, "level" | "traits"> {
 }
 interface AfflictionOnset {
+    /** If true, the affliction is currently in its onset phase */
+    active: boolean;
     value: number;
     unit: TimeUnit;
 }

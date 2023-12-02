@@ -59,6 +59,11 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
         initiative: number;
         sendMessage?: boolean;
     }): Promise<void>;
+    /**
+     * Use actor updates (real or otherwise) that propagate down to ephemeral token changes  to provoke canvas object
+     * re-rendering.
+     */
+    simulateUpdate(actorUpdates?: Record<string, unknown>): void;
     /** Toggle token hiding if this token's actor is a loot actor */
     protected _onCreate(data: this["_source"], options: DocumentModificationContext<TParent>, userId: string): void;
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, userId: string): void;

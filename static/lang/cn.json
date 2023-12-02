@@ -679,12 +679,6 @@
         "regainOne": "回复1聚能点。",
         "disabled": "不可用，因为没有能力能回复1点以上的聚能点。",
         "enabled": "回复{regain}聚能点。<br/>仅<b>当</b>你上次再聚能后{details}的情况下才能点击。"
-      },
-      "whirlwindStrike": {
-        "starts": "{name} 开始旋风打击！",
-        "ends": "攻击{targets}后{name}的旋风打击结束！",
-        "error": "选择一个具备旋风打击能力的已武装的指示物，并保证触及范围内至少有一个可见的非盟友目标！",
-        "reachAuraNotFound": "未找到灵光，请将PF2e Workbench Items合集包中的接触‘灵光’拖到指示物上，并根据需求调整半径。"
       }
     }
   }

@@ -3,7 +3,6 @@ import { ActorSizePF2e } from "@actor/data/size.ts";
 import { InventoryBulk } from "@actor/inventory/index.ts";
 import { PhysicalItemPF2e } from "@item";
 import { Coins } from "@item/physical/data.ts";
-import { PhysicalItemType } from "@item/physical/types.ts";
 import { RollOptionToggle } from "@module/rules/synthetics.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 export interface InventoryItem<TItem extends PhysicalItemPF2e = PhysicalItemPF2e> {
@@ -28,11 +27,11 @@ export type CoinageSummary = {
 };
 interface SheetItemList {
     label: string;
-    type: PhysicalItemType;
+    types: string[];
     items: InventoryItem[];
 }
 export interface SheetInventory {
-    sections: Record<Exclude<PhysicalItemType, "book">, SheetItemList>;
+    sections: SheetItemList[];
     bulk: InventoryBulk;
     showValueAlways: boolean;
     showIndividualPricing: boolean;

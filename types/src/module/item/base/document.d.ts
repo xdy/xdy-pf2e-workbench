@@ -1,14 +1,14 @@
 /// <reference types="jquery" resolution-mode="require"/>
 import { ActorPF2e } from "@actor/base.ts";
+import type { PhysicalItemPF2e } from "@item";
 import { ItemOriginFlag } from "@module/chat-message/data.ts";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
-import { UserPF2e } from "@module/user/document.ts";
+import type { UserPF2e } from "@module/user/document.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
-import type { PhysicalItemPF2e } from "../physical/document.ts";
 import { ItemInstances } from "../types.ts";
 import type { ItemFlagsPF2e, ItemSourcePF2e, ItemSummaryData, ItemSystemData, ItemType, TraitChatData } from "./data/index.ts";
-import { ItemSheetPF2e } from "./sheet/base.ts";
+import type { ItemSheetPF2e } from "./sheet/sheet.ts";
 /** The basic `Item` subclass for the system */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     static getDefaultArtwork(itemData: foundry.documents.ItemSource): {
@@ -69,7 +69,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
      */
     protected processChatData<T extends ItemSummaryData>(htmlOptions: EnrichmentOptionsPF2e | undefined, data: T): Promise<T>;
     getChatData(htmlOptions?: EnrichmentOptionsPF2e, _rollOptions?: Record<string, unknown>): Promise<ItemSummaryData>;
-    protected traitChatData(dictionary?: Record<string, string | undefined>): TraitChatData[];
+    protected traitChatData(dictionary?: Record<string, string | undefined>, traits?: import("./data/system.ts").ItemTrait[]): TraitChatData[];
     /** Don't allow the user to create a condition or spellcasting entry from the sidebar. */
     static createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: {
         parent?: TDocument["parent"];

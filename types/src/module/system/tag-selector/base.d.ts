@@ -1,8 +1,8 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor";
-import { ItemPF2e } from "@item";
+import type { ActorPF2e } from "@actor";
+import type { ItemPF2e } from "@item";
 import { SelectableTagField } from "./index.ts";
 interface TagSelectorOptions extends DocumentSheetOptions {
     allowCustom?: boolean;

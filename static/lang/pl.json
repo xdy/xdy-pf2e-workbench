@@ -117,12 +117,6 @@
         "noSpellcastingEntry": "Musisz mieć otwartą i wybraną kartę postaci NPC lub wybrany pojedynczy token NPC. Ponadto wspomniany NPC musi mieć wpis dotyczący rzucania zaklęć.",
         "generatedSpellbookFor": "Wygenerowano księgę zaklęć dla {name}"
       },
-      "whirlwindStrike": {
-        "starts": "{name} rozpoczyna Atak Wichru!",
-        "ends": "{name} Atak Wichru kończy się po {targets} atakach!",
-        "reachAuraNotFound": "Nie znaleziono aury, nałóż na token \"aurę\" zasięgu z kompendium przedmiotów z warsztatu PF2e i odpowiednio dostosuj zasięg.",
-        "error": "Wybierz uzbrojony token z Uderzeniem Wichru i co najmniej jednym widocznym celem spoza drużyny w zasięgu!"
-      }
     },
     "spellCardNotFound": "Nie odnaleziono karty czaru. Użyto {spell} na minimalnym poziomie tego czaru.",
     "effects": {

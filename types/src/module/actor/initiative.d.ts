@@ -20,7 +20,9 @@ declare class ActorInitiative {
     get attribute(): AttributeString | null;
     /** @deprecated */
     get ability(): AttributeString | null;
-    constructor(actor: ActorPF2e);
+    constructor(actor: ActorPF2e, { statistic }: {
+        statistic: string;
+    });
     roll(args?: InitiativeRollParams): Promise<InitiativeRollResult | null>;
     getTraceData(): InitiativeTraceData;
 }

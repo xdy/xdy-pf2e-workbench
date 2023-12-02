@@ -686,12 +686,6 @@
         "one": "un",
         "selectOneActor": "Vous devez sélectionner un acteur.",
         "enabled": "Regagner {regain} des points de focalisation.<br/>Cliquez <b>UNIQUEMENT</b> si vous avez {details} depuis la dernière Refocalisation."
-      },
-      "whirlwindStrike": {
-        "error": "Choisir un jeton avec Frappe tourbillonnante et au moins un cible à portée !",
-        "starts": "Début de la Frappe tourbillonnante de {name} !",
-        "ends": "La Frappe tourbillonnante de {name} après {targets} attaques !",
-        "reachAuraNotFound": "Aucune zone trouvée, veuillez placer la Portée 'aura' trouvée dans le compendium des objets PF2e Workbench sur le jeton et ajustez la portée."
       }
     }
   }

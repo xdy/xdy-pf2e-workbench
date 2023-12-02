@@ -21,7 +21,7 @@ export async function moveSelectedAheadOfCurrent(selectedCombatantId): Promise<v
                 return c.initiative > <number>combat?.combatant?.initiative;
             })?.initiative;
         const current = <number>combat?.combatant?.initiative;
-        const initiative = !previous || previous < current ? current + 2 : <number>((previous + current) / 2);
+        const initiative = !previous || previous < current ? current + 2 : <number>((previous + current) / 2) || 0;
         await combat?.setInitiative(<string>selectedCombatantId, initiative);
     }
 }

@@ -13,7 +13,7 @@ interface SpecialStatisticRuleElement extends RuleElementPF2e<StatisticRESchema>
 type StatisticRESchema = RuleElementSchema & {
     type: StringField<StatisticType, StatisticType, true, false, true>;
     extends: StringField<string, string, true, true, true>;
-    attribute: StringField<AttributeString, AttributeString, true, true, true>;
+    attribute: StringField<AttributeString, AttributeString, false, true, true>;
 };
 type StatisticType = "simple" | "check" | "attack-roll";
 export { SpecialStatisticRuleElement };

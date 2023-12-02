@@ -5,8 +5,8 @@ import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
 import { VehiclePF2e } from "@actor/vehicle/index.ts";
 import { AbilityItemPF2e } from "@item";
 import { ActionCost, Frequency } from "@item/base/data/system.ts";
-import { ActorSheetPF2e } from "../sheet/base.ts";
 import { AdjustedValue } from "@module/sheet/helpers.ts";
+import { ActorSheetPF2e } from "../sheet/base.ts";
 export declare class VehicleSheetPF2e extends ActorSheetPF2e<VehiclePF2e> {
     static get defaultOptions(): ActorSheetOptions;
     getData(): Promise<VehicleSheetData>;

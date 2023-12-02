@@ -1,5 +1,5 @@
 import type { RawDamageDice, RawModifier } from "@actor/modifiers.ts";
-import { ItemType } from "@item/base/data/index.ts";
+import { ItemType, SpellSource } from "@item/base/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { ZeroToTwo } from "@module/data.ts";
 import { RollNoteSource } from "@module/notes.ts";
@@ -11,6 +11,7 @@ type ChatMessageSourcePF2e = foundry.documents.ChatMessageSource & {
     flags: ChatMessageFlagsPF2e;
 };
 export interface ItemOriginFlag {
+    actor?: ActorUUID;
     type: ItemType;
     uuid: string;
     castLevel?: number;
@@ -27,11 +28,11 @@ type ChatMessageFlagsPF2e = ChatMessageFlags & {
         casting?: {
             id: string;
             tradition: MagicTradition;
+            embeddedSpell?: SpellSource;
         } | null;
         modifiers?: RawModifier[];
         dice?: RawDamageDice[];
         preformatted?: "flavor" | "content" | "both";
-        isFromConsumable?: boolean;
         journalEntry?: DocumentUUID;
         appliedDamage?: AppliedDamageFlag | null;
         [key: string]: unknown;

@@ -64,6 +64,7 @@ interface SpellcastingSheetData extends Omit<BaseSpellcastingEntry<ActorPF2e>, "
     isPrepared?: boolean;
     isRitual?: boolean;
     isSpontaneous?: boolean;
+    usesSpellProficiency: boolean;
     showSlotlessLevels?: boolean;
 }
 interface SpellcastingSlotRank {

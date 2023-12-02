@@ -10,7 +10,7 @@ type WeaponSource = BasePhysicalItemSource<"weapon", WeaponSystemSource> & {
 };
 type WeaponFlags = ItemFlagsPF2e & {
     pf2e: {
-        /** Whether this attack is from a battle form */
+        /** Whether this attack is compatible with a battle form */
         battleForm?: boolean;
         comboMeleeUsage: boolean;
         /**
@@ -73,6 +73,7 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     traits: WeaponTraitsSource;
     category: WeaponCategory;
     group: WeaponGroup | null;
+    /** A base shield type can be used for attacks generated from shields */
     baseItem: BaseWeaponType | null;
     bonus: {
         value: number;
@@ -127,7 +128,7 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
 interface WeaponMaterialSource extends ItemMaterialSource {
     type: WeaponMaterialType | null;
 }
-interface WeaponSystemData extends Omit<WeaponSystemSource, "hp" | "identification" | "price" | "temporary">, Omit<Investable<PhysicalSystemData>, "material"> {
+interface WeaponSystemData extends Omit<WeaponSystemSource, "bulk" | "hp" | "identification" | "price" | "temporary">, Omit<Investable<PhysicalSystemData>, "material"> {
     traits: WeaponTraits;
     baseItem: BaseWeaponType | null;
     material: WeaponMaterialData;
@@ -170,4 +171,4 @@ interface ComboWeaponMeleeUsage {
         versatile: DamageType | null;
     };
 }
-export type { ComboWeaponMeleeUsage, WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponPersistentDamage, WeaponPropertyRuneSlot, WeaponRuneData, WeaponSource, WeaponSystemData, WeaponSystemSource, };
+export type { ComboWeaponMeleeUsage, WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponMaterialSource, WeaponPersistentDamage, WeaponPropertyRuneSlot, WeaponRuneData, WeaponSource, WeaponSystemData, WeaponSystemSource, WeaponTraitsSource, };

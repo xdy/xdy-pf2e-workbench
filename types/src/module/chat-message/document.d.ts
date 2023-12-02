@@ -32,8 +32,6 @@ declare class ChatMessagePF2e extends ChatMessage {
     get item(): ItemPF2e<ActorPF2e> | null;
     /** If this message was for a strike, return the strike. Strikes will change in a future release */
     get _strike(): StrikeData | null;
-    /** Get stringified item source from the DOM-rendering of this chat message */
-    getItemFromDOM(): ItemPF2e<ActorPF2e> | null;
     showDetails(): Promise<void>;
     /** Get the token of the speaker if possible */
     get token(): TokenDocumentPF2e<ScenePF2e> | null;

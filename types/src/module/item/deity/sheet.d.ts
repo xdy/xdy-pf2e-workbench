@@ -2,13 +2,13 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { SkillAbbreviation } from "@actor/creature/data.ts";
-import { DeityPF2e } from "@item";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/base/sheet/base.ts";
+import { type DeityPF2e } from "@item";
+import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { DeitySanctification } from "./data.ts";
 export declare class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
-    static get defaultOptions(): DocumentSheetOptions;
-    getData(options?: Partial<DocumentSheetOptions>): Promise<DeitySheetData>;
+    static get defaultOptions(): ItemSheetOptions;
+    getData(options?: Partial<ItemSheetOptions>): Promise<DeitySheetData>;
     activateListeners($html: JQuery): void;
     _onDrop(event: ElementDragEvent): Promise<void>;
     /** Foundry inflexibly considers checkboxes to be booleans: set back to a string tuple for Divine Font */

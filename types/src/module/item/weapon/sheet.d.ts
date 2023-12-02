@@ -1,13 +1,14 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
+import { ItemSheetOptions } from "@item/base/sheet/sheet.ts";
 import { MaterialSheetData, PhysicalItemSheetData, PhysicalItemSheetPF2e, RUNE_DATA } from "@item/physical/index.ts";
 import { OneToFour } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { ComboWeaponMeleeUsage, WeaponPropertyRuneSlot } from "./data.ts";
-import { type WeaponPF2e } from "./document.ts";
+import type { WeaponPF2e } from "./document.ts";
 export declare class WeaponSheetPF2e extends PhysicalItemSheetPF2e<WeaponPF2e> {
-    getData(options?: Partial<DocumentSheetOptions>): Promise<WeaponSheetData>;
+    getData(options?: Partial<ItemSheetOptions>): Promise<WeaponSheetData>;
     activateListeners($html: JQuery): void;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }

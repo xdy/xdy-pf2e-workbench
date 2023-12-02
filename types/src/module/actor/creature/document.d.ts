@@ -4,11 +4,11 @@ import { HitPointsSummary } from "@actor/base.ts";
 import { CreatureSource } from "@actor/data/index.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
 import { MovementType, SaveType, SkillLongForm } from "@actor/types.ts";
-import { ArmorPF2e, ItemPF2e, type PhysicalItemPF2e } from "@item";
+import { ArmorPF2e, ItemPF2e, type PhysicalItemPF2e, type ShieldPF2e } from "@item";
 import { ItemType } from "@item/base/data/index.ts";
 import { ItemCarryType } from "@item/physical/data.ts";
 import type { ActiveEffectPF2e } from "@module/active-effect.ts";
-import { Rarity } from "@module/data.ts";
+import { Rarity, ZeroToTwo } from "@module/data.ts";
 import { RuleElementSynthetics } from "@module/rules/index.ts";
 import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
@@ -50,7 +50,7 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     get isSpellcaster(): boolean;
     get wornArmor(): ArmorPF2e<this> | null;
     /** Get the held shield of most use to the wielder */
-    get heldShield(): ArmorPF2e<this> | null;
+    get heldShield(): ShieldPF2e<this> | null;
     /** Retrieve percpetion and spellcasting statistics */
     getStatistic(slug: SaveType | SkillLongForm | "perception"): Statistic;
     getStatistic(slug: string): Statistic | null;
@@ -70,7 +70,7 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
      */
     adjustCarryType(item: PhysicalItemPF2e<CreaturePF2e>, { carryType, handsHeld, inSlot, }: {
         carryType: ItemCarryType;
-        handsHeld?: number;
+        handsHeld?: ZeroToTwo;
         inSlot?: boolean;
     }): Promise<void>;
     /**

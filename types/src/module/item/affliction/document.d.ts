@@ -13,6 +13,8 @@ declare class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null
     increase(): Promise<void>;
     /** Decreases the affliction stage, deleting if reduced to 0 even if an onset exists */
     decrease(): Promise<void>;
+    /** Returns true if the affliction is currently in the onset phase */
+    get onset(): boolean;
     get onsetDuration(): number;
     get remainingStageDuration(): {
         expired: boolean;

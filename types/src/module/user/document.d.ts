@@ -1,12 +1,14 @@
-import type { ActorPF2e } from "@actor/base.ts";
+import type { ActorPF2e } from "@actor";
 import type { TokenPF2e } from "@module/canvas/index.ts";
-import type { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
+import type { ScenePF2e, TokenDocumentPF2e } from "@scene";
 import { UserFlagsPF2e, UserSourcePF2e } from "./data.ts";
 declare class UserPF2e extends User<ActorPF2e<null>> {
     prepareData(): void;
     /** Set user settings defaults */
     prepareBaseData(): void;
     get settings(): Readonly<UserSettingsPF2e>;
+    /** Get tokens controlled by this user or, failing that, a token of the assigned character. */
+    getActiveTokens(): TokenDocumentPF2e[];
     /** Alternative to calling `#updateTokenTargets()` with no argument or an empty array */
     clearTargets(): void;
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<null>, userId: string): void;
