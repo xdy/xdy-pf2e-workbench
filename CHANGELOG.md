@@ -1,3 +1,10 @@
+## [5.35.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.35.1...v5.35.2) (2023-12-03)
+
+
+### Bug Fixes
+
+* Fix bad json edit. ([e43968e](https://github.com/xdy/xdy-pf2e-workbench/commit/e43968ea3c9fca22ca23c75aa0c4bc013f8c3d99))
+
 ## [5.35.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.35.0...v5.35.1) (2023-12-03)
 
 
