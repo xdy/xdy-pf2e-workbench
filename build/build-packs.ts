@@ -132,6 +132,7 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
                 map.set("Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp");
                 map.set("Marshal Stances", "systems/pf2e/icons/features/feats/dread-marshal-stance.webp");
                 map.set("Modded Countdown Cooldown", "systems/pf2e/icons/spells/time-beacon.webp");
+                map.set("Ooze Split", "systems/pf2e/icons/spells/blackfingers-blades.webp");
                 map.set("Ration Consumer", "systems/pf2e/icons/equipment/adventuring-gear/rations.webp");
                 map.set("Recall Knowledge", "icons/skills/trades/academics-book-study-runes.webp");
                 map.set("Simulate Falling", "systems/pf2e/icons/spells/seal-fate.webp");

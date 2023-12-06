@@ -156,23 +156,13 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     // TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
 
-    const loggedIn =
-        game?.actors
-            ?.filter((x) => x.hasPlayerOwner)
+    const actors =
+        game.actors?.party?.members
             .filter((x) => x.isOfType("character"))
-            .filter((x) => x.alliance === "party")
-            ?.filter((actor) => {
+            .filter((actor) => {
                 return !actor.system.traits?.value.toString().includes("minion");
             })
-            ?.filter((actor) => !actor.system.traits?.value.toString().includes("eidolon"))
-            .filter((x) =>
-                (
-                    game?.users
-                        ?.filter((user) => user.active)
-                        .map((user) => user.character)
-                        .filter((actor) => !!actor) || []
-                ).includes(x),
-            ) || [];
+            ?.filter((actor) => !actor.system.traits?.value.toString().includes("eidolon")) || [];
 
     let checked: number;
     switch (state) {
@@ -180,7 +170,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
             checked = -1;
             break;
         case HPHState.Timeout:
-            checked = loggedIn.length > 0 ? Math.floor(Math.random() * loggedIn.length) : -1;
+            checked = actors.length > 0 ? Math.floor(Math.random() * actors.length) : -1;
             break;
         case HPHState.Check:
             checked = -1;
@@ -232,14 +222,14 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
   )}</label>
   <div class="col-md-4">`;
 
-    for (let i = 0; i < loggedIn.length; i++) {
+    for (let i = 0; i < actors.length; i++) {
         charactersContent += `
     <div class="radio">
         <label for="characters-${i}">
-          <input type="radio" name="characters" id="characters-${i}" value="${loggedIn[i]?.id}" ${
+          <input type="radio" name="characters" id="characters-${i}" value="${actors[i]?.id}" ${
               checked === i ? 'checked="checked"' : ""
           }>
-          ${loggedIn[i]?.name}
+          ${actors[i]?.name}
         </label>
     </div>`;
     }

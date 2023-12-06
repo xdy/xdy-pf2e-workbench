@@ -642,7 +642,7 @@ export function basicActionMacros() {
                 return supportedActorTypes.includes(actor?.type ?? "unknown");
             }) || [];
 
-    const party = actors.filter((x) => x.hasPlayerOwner).filter((x) => x.alliance === "party");
+    const party = game.actors?.party?.members || [];
     const partyIds = party.map((actor) => actor.id) || [];
 
     const allActorsSkills = createMapOfSkillsPerActor(actors);

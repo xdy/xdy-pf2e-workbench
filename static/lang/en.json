@@ -410,7 +410,7 @@
         "add": "Add",
         "addedFor": "1 Hero Point added for {name}",
         "addedToForAll": "{heroPoints} Hero Point(s) added for all",
-        "addOne": "<b>Section 2</b> - Add one Hero Point to selected character from those logged in (defaults to random character when timer expires)",
+        "addOne": "<b>Section 2</b> - Add one Hero Point to selected character from the current members of the active party (defaults to random character when timer expires)",
         "all": "All",
         "defaultTimeoutMinutes": 60,
         "doWhat": "<b>Section 1</b> - Choose what to do to the Hero Points of <em>all</em> characters with the following value",
