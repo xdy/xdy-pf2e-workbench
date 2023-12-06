@@ -1,3 +1,10 @@
+# [5.36.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.35.4...v5.36.0) (2023-12-06)
+
+
+### Features
+
+* Change Heropoint Handler and Basic Action Macros to use the current party members rather than the characters of the currently logged in players (with the hero point handler only including non-minion/eidolon characters.) Change minimum and verified pf2e version to 5.10.3 ([152d0ba](https://github.com/xdy/xdy-pf2e-workbench/commit/152d0ba71250df914549305c956d3a347ed9ba18))
+
 ## [5.35.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.35.3...v5.35.4) (2023-12-05)
 
 
