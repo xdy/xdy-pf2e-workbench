@@ -44,7 +44,9 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                         },
                         rules: [],
                         slug: `xdy-breath-weapon-reminder-${myRandomId()}`,
-                        unidentified: game.settings.get(MODULENAME, "reminderBreathWeaponHidden"),
+                        unidentified:
+                            game.settings.get(MODULENAME, "reminderBreathWeaponHidden") &&
+                            !game.actors?.party?.members.map((m) => m.id).includes(actor.id),
                         traits: {
                             value: [],
                         },

@@ -630,8 +630,8 @@
         "used": "Used "
       },
       "reminderBreathWeaponHidden": {
-        "hint": "Check to hide reminder from players.",
-        "name": "... but hide icon from players."
+        "hint": "Check to hide reminder if cast by a non-party member.",
+        "name": "... but hide non-party reminder."
       },
       "reminderCannotAttack": {
         "dead": "is dead",
