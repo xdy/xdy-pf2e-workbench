@@ -1,3 +1,10 @@
+# [5.37.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.36.0...v5.37.0) (2023-12-06)
+
+
+### Features
+
+* For Breath Weapon Reminder, make party member reminder effects not unidentified even if the setting to hide from players is enabled. (Mainly as a way for players to see their own reminders.) ([49cb227](https://github.com/xdy/xdy-pf2e-workbench/commit/49cb2277f8a1c46ce12d350adb3248a291d366eb))
+
 # [5.36.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.35.4...v5.36.0) (2023-12-06)
 
 
