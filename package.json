@@ -1,6 +1,6 @@
 {
   "name": "xdy-pf2e-workbench",
-  "version": "5.37.1",
+  "version": "5.37.2",
   "description": "Random assortment of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
   "private": true,
   "type": "module",
