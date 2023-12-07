@@ -56,17 +56,10 @@ jobs:
       - name: Get tag
         run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
-      - name: Install playwright
-        run: npx playwright install
-
-      - name: Install foundry-publish
-        run: npm install -g @ghost-fvtt/foundry-publish
-
       - name: Publish to Foundry VTT Repo
         id: publish_foundry_repo
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
-        #run: foundry-publish --useNewPackageAdministrationInterface --deleteObsoleteVersions
-        run: foundry-publish
+        run: npx @ghost-fvtt/foundry-publish
         env:
           FVTT_MANIFEST_PATH: 'static/module.json'
           FVTT_PACKAGE_ID: "xdy-pf2e-workbench"
