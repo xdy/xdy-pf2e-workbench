@@ -69,8 +69,8 @@ jobs:
         run: foundry-publish
         env:
           FVTT_MANIFEST_PATH: 'static/module.json'
-          #FVTT_PACKAGE_ID: 'xdy-pf2e-workbench'
-          FVTT_PACKAGE_ID: ${{ 1702 }}
+          FVTT_PACKAGE_ID: "xdy-pf2e-workbench"
+          FVTT_USE_NEW_PACKAGE_ADMINISTRATION_INTERFACE: true
           FVTT_USERNAME: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
           FVTT_PASSWORD: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
 
