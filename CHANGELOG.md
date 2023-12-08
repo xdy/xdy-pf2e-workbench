@@ -1,3 +1,10 @@
+## [5.37.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.7...v5.37.8) (2023-12-08)
+
+
+### Bug Fixes
+
+* Update test-release.yml ([3cafef1](https://github.com/xdy/xdy-pf2e-workbench/commit/3cafef1c5264220a5ad08dccbab5500a0ca8eb7a))
+
 ## [5.37.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.6...v5.37.7) (2023-12-08)
 
 
