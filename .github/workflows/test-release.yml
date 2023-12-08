@@ -54,7 +54,7 @@ jobs:
         run: npx semantic-release
 
       - name: Get tag
-        run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+        run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> "$GITHUB_ENV"
 
 #      - name: Publish to Foundry VTT Repo
 #        id: publish_foundry_repo
@@ -76,5 +76,5 @@ jobs:
           password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
           module-id: "xdy-pf2e-workbench"
           #manifest-url: https://github.com/${{ github.repository }}/releases/download/${{ env.RELEASE_NAME }}/module.json
-          manifest-url: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.json
+          manifest-url: https://github.com/${{github.repository}}/releases/download/$WORKBENCH_VERSION/module.json
           manifest-file: "static/module.json"
