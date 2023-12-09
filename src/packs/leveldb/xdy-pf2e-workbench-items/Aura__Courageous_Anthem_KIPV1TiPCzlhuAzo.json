@@ -39,7 +39,7 @@
         ],
         "radius": 60,
         "slug": "aura-effect-inspire-courage",
-        "level": "@actor.level"
+        "level": "ceil(@actor.level/2)"
       }
     ],
     "slug": null,
@@ -90,10 +90,10 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.9.3",
+    "systemVersion": "5.10.5",
     "coreVersion": "11.315",
     "createdTime": 1665671947293,
-    "modifiedTime": 1700330985316,
+    "modifiedTime": 1702161239181,
     "lastModifiedBy": "pkVBUO4Y1VpgZhqS"
   },
   "_id": "KIPV1TiPCzlhuAzo",

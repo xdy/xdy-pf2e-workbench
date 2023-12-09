@@ -36,7 +36,7 @@
         ],
         "radius": 60,
         "slug": "aura-effect-inspire-defense",
-        "level": "@actor.level"
+        "level": "ceil(@actor.level/2)"
       }
     ],
     "slug": null,
@@ -87,11 +87,11 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.8.2",
-    "coreVersion": "11.314",
+    "systemVersion": "5.10.5",
+    "coreVersion": "11.315",
     "createdTime": 1665671947292,
-    "modifiedTime": 1699186813059,
-    "lastModifiedBy": "HShcH53gfTrrSBR1"
+    "modifiedTime": 1702161239820,
+    "lastModifiedBy": "pkVBUO4Y1VpgZhqS"
   },
   "_key": "!items!89T07EBAgn78RBbJ"
 }
