@@ -1,3 +1,10 @@
+## [5.37.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.9...v5.37.10) (2023-12-09)
+
+
+### Bug Fixes
+
+* Updated levels of the aura effects. ([080e971](https://github.com/xdy/xdy-pf2e-workbench/commit/080e971e76373a61f74576e0880ea5aa6e6d4dc5))
+
 ## [5.37.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.8...v5.37.9) (2023-12-09)
 
 
