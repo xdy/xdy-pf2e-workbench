@@ -155,14 +155,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 
     // TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
-
-    const actors =
-        game.actors?.party?.members
-            .filter((x) => x.isOfType("character"))
-            .filter((actor) => {
-                return !actor.system.traits?.value.toString().includes("minion");
-            })
-            ?.filter((actor) => !actor.system.traits?.value.toString().includes("eidolon")) || [];
+    const actors = heroes();
 
     let checked: number;
     switch (state) {
@@ -288,10 +281,14 @@ export function calcRemainingMinutes(useDefault: boolean): number {
     return remainingMinutes - Math.floor(passedMillis / ONE_MINUTE_IN_MS);
 }
 
+/**
+ * Retrieves the list of party members that are characters (i.e. have heropoints.)
+ *
+ * @return {Array<Actor>} The list of hero actors.
+ */
 function heroes() {
     return (
-        game?.actors
-            ?.filter((actor) => actor.hasPlayerOwner)
+        game.actors?.party?.members
             .filter((actor) => actor.isOfType("character"))
             .filter((actor) => !actor.system.traits?.value.toString().includes("minion"))
             .filter((actor) => !actor.system.traits?.value.toString().includes("eidolon")) || []
