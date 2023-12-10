@@ -125,7 +125,7 @@
     },
     "spellCardNotFound": "Nie odnaleziono karty czaru. Użyto {spell} na minimalnym poziomie tego czaru.",
     "effects": {
-      "orcFerocityUsed": "Użyto Dzikości Orka",
+      "orcFerocityUsed": "Użyto Orkowej Zaciekłości",
       "deliberateDeathUsed": "Użyto Umyślna śmierć",
       "bounceBackUsed": "Użyto Odbij Się",
       "numbToDeathUsed": "Użyto Odrętwiały na Śmierć"
@@ -478,7 +478,7 @@
         "timerValue": "Wartość timera (zakres 0 - {maxMinutes})",
         "add": "Dodaj",
         "addedToForAll": "{heroPoints} Punktów bohatera dodane dla wszystkich",
-        "addOne": "<b>Sekcja 2</b> - Dodaje jeden punkt bohatera wybranej postaci spośród zalogowanych (domyślnie losowej postaci po wygaśnięciu licznika czasu)",
+        "addOne": "<b>Sekcja 2</b> - Dodaje jeden punkt bohatera wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu).",
         "defaultTimeoutMinutes": 60,
         "doWhat": "<b>Sekcja 1</b> - Wybierz, co zrobić z punktami bohatera <em>wszystkich postaci</em> o następującej wartości",
         "hint": "Opcja obsługi punktów bohatera z opcjonalnym powiązaniem klawiszy, aby otworzyć okno dialogowe, które może zresetować lub dodać punkty bohatera dla wszystkich postaci, dodać jeden punkt bohatera do losowej (lub wybranej) postaci i, co najważniejsze, uruchomić licznik czasu, aby okno dialogowe pojawiło się ponownie po (domyślnie) 60 minutach.",
@@ -636,7 +636,7 @@
       },
       "reminderBreathWeaponHidden": {
         "hint": "Zaznacz, aby ukryć przypomnienie przed graczami.",
-        "name": "... ale ukryć ikonę przed graczami."
+        "name": "... ale ukryj ikonę przed graczami."
       },
       "customPauseRelocation": {
         "hint": "Umieść obraz pauzy na środku ekranu, a nad nim tekst.",
