@@ -45,10 +45,10 @@
       "value": 1
     },
     "duration": {
-      "value": -1,
-      "unit": "unlimited",
-      "expiry": null,
-      "sustained": false
+      "value": 1,
+      "unit": "rounds",
+      "expiry": "turn-start",
+      "sustained": true
     },
     "start": {
       "value": 0,
