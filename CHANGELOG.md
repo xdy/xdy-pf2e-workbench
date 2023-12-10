@@ -1,3 +1,10 @@
+## [5.37.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.10...v5.37.11) (2023-12-10)
+
+
+### Bug Fixes
+
+* Make resetHeroPoints use the party members (that are characters). ([928a29a](https://github.com/xdy/xdy-pf2e-workbench/commit/928a29af6e8a6db7df5bfe05e0c7327ea3d5e033))
+
 ## [5.37.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.9...v5.37.10) (2023-12-09)
 
 
