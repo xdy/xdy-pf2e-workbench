@@ -1,3 +1,10 @@
+## [5.37.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.11...v5.37.12) (2023-12-10)
+
+
+### Bug Fixes
+
+* Give the aura and effect for Dirge of Doom the proper duration. ([bf91484](https://github.com/xdy/xdy-pf2e-workbench/commit/bf914844f36b50ebfd528f20e9a0b0882042d1d9))
+
 ## [5.37.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.10...v5.37.11) (2023-12-10)
 
 
