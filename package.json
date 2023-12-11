@@ -60,7 +60,7 @@
     "jsdom": "^23.0.1",
     "peggy": "^3.0.2",
     "pixi.js": "^7.3.2",
-    "prettier": "^3.1.0",
+    "prettier": "^3.1.1",
     "prompts": "^2.4.2",
     "sass": "^1.69.5",
     "semantic-release": "^22.0.10",
