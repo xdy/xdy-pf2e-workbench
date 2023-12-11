@@ -86,7 +86,7 @@
     "nouislider": "^15.7.1",
     "prosemirror-state": "^1.4.3",
     "prosemirror-transform": "^1.8.0",
-    "prosemirror-view": "^1.32.5",
+    "prosemirror-view": "^1.32.6",
     "remeda": "^1.29.0",
     "sortablejs": "^1.15.1"
   },
