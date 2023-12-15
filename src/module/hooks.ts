@@ -10,7 +10,7 @@ import {
     autoReduceStunned,
     reminderBreathWeapon,
     reminderCannotAttack,
-    reminderTargeting,
+    reminderTargeting
 } from "./feature/reminders/index.js";
 import {
     castPrivateSpell,
@@ -19,13 +19,13 @@ import {
     chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
     damageCardExpand,
-    mystifyNpcItems,
+    mystifyNpcItems
 } from "./feature/qolHandler/index.js";
 import {
     autoRollDamage,
     handleDyingRecoveryRoll,
     persistentDamage,
-    persistentHealing,
+    persistentHealing
 } from "./feature/damageHandler/index.js";
 import {
     autoRemoveDyingAtGreaterThanZeroHp,
@@ -34,12 +34,12 @@ import {
     giveUnconsciousIfDyingRemovedAt0HP,
     giveWoundedWhenDyingRemoved,
     handleDyingOnZeroHP,
-    reduceFrightened,
+    reduceFrightened
 } from "./feature/conditionHandler/index.js";
 import {
     mangleNamesInChatMessage,
     renderNameHud,
-    tokenCreateMystification,
+    tokenCreateMystification
 } from "./feature/tokenMystificationHandler/index.js";
 import { ItemPF2e } from "@item/base/document.js";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
@@ -88,25 +88,28 @@ function collectPrivateCastingValues(message: ChatMessagePF2e) {
     return { hasCastingId, nonNpcCasting, npcCastingAlways, npcCastingIfCtrl };
 }
 
-export function handleDying(dyingCounter: number, originalDyingCounter: number, actor, _effectsToCreate) {
-    // Can't await, so do the math.
-    const defeated = actor.combatant?.defeated;
-    const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !defeated;
-    const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !defeated;
-    if (shouldDie) {
-        actor.combatant?.toggleDefeated().then();
-        // Dead, not dying, so clear the flag.
-        actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
-    } else if (shouldBecomeDying) {
-        actor
-            .increaseCondition("dying", {
+export async function handleDying(dyingCounter: number, originalDyingCounter: number, actor) {
+    // Ignore this if it occurs within last few seconds of the last time we applied dying to avoid race conditions
+    const now = Date.now();
+    const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
+    const tooSoon = flag?.between(now - 4000, now);
+    if (!tooSoon) {
+        const defeated = actor.combatant?.defeated;
+        const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !defeated;
+        const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !defeated;
+        if (shouldDie) {
+            // Dead, not dying, so clear the flag.
+            await actor.unsetFlag(MODULENAME, "dyingLastApplied");
+            await actor.combatant?.toggleDefeated();
+        } else if (shouldBecomeDying) {
+            await actor.setFlag(MODULENAME, "dyingLastApplied", Date.now());
+            await actor.increaseCondition("dying", {
                 value: originalDyingCounter + dyingCounter,
-            })
-            .then();
-        actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
-    } else {
-        actor.decreaseCondition("dying", { forceRemove: true }).then();
-        actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
+            });
+        } else {
+            await actor.unsetFlag(MODULENAME, "dyingLastApplied");
+            await actor.decreaseCondition("dying", { forceRemove: true });
+        }
     }
 }
 
@@ -136,38 +139,26 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
     if (!String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no")) {
         const actor = message.actor;
         if (actor && shouldIHandleThis(actor)) {
-            const now = Date.now();
-            const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
-
             if (message.content?.includes("damage-taken")) {
-                // Ignore this if it occurs within last few seconds of the last time we applied dying
-                // @ts-ignore
-                const notTooSoon = !flag?.between(now - 4000, now);
-                if (notTooSoon) {
-                    const dyingOption = String(
-                        game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
-                    );
-                    const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
-                    let dyingCounter = 0;
-                    if (!dyingOption.startsWith("no") && originalDyingCounter > 0) {
-                        const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption);
+                const dyingOption = String(
+                    game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
+                );
+                const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
+                let dyingCounter = 0;
+                if (!dyingOption.startsWith("no") && originalDyingCounter > 0) {
+                    const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption);
 
-                        if (
-                            dyingOption.endsWith("ForCharacters")
-                                ? ["character", "familiar"].includes(actor.type)
-                                : true
-                        ) {
+                    if (dyingOption.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
+                        dyingCounter = dyingCounter + 1;
+
+                        if (wasCritical) {
                             dyingCounter = dyingCounter + 1;
-
-                            if (wasCritical) {
-                                dyingCounter = dyingCounter + 1;
-                            }
                         }
-                        const effectsToCreate: any[] = [];
-                        handleDying(dyingCounter, originalDyingCounter, actor, effectsToCreate);
-                        if (effectsToCreate.length > 0) {
-                            actor.createEmbeddedDocuments("Item", effectsToCreate);
-                        }
+                    }
+                    const effectsToCreate: any[] = [];
+                    handleDying(dyingCounter, originalDyingCounter, actor).then();
+                    if (effectsToCreate.length > 0) {
+                        actor.createEmbeddedDocuments("Item", effectsToCreate);
                     }
                 }
             }

@@ -192,7 +192,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
     }
 }
 
-export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
+export async function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
     const flavor = message.flavor;
     const token = message.token;
     if (
@@ -238,11 +238,7 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
                 break;
         }
         if (originalDyingCounter > 0 || dyingCounter !== 0) {
-            const effectsToCreate: any[] = [];
-            handleDying(dyingCounter, originalDyingCounter, actor, effectsToCreate);
-            if (actor && effectsToCreate.length > 0) {
-                actor.createEmbeddedDocuments("Item", effectsToCreate);
-            }
+            await handleDying(dyingCounter, originalDyingCounter, actor);
 
             const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
             ChatMessage.create({
