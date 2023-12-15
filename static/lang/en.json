@@ -359,7 +359,7 @@
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Cantrip",
-        "firstPart": "{tokenName} just cast a {type} of the <strong>{traditionString}</strong> tradition",
+        "firstPart": "{tokenName} just cast a {type} of the <strong>{traditionString}</strong> tradition. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "hint": "If casting privately, this setting also posts a public message that a spell has been cast UNLESS you hold SHIFT as well as CTRL while casting.",
         "name": "Post public message that a spell has been cast.",
         "savePart": "<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",

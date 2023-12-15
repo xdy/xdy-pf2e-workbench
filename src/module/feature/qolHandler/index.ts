@@ -119,7 +119,8 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
         }
         const type = message.flags?.pf2e.origin?.type ?? "spell";
         const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
-        const origin: any = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
+        const spellUUID = <string>message.flags?.pf2e.origin?.uuid;
+        const origin: any = await fromUuid(spellUUID);
         let content = "";
         if (origin) {
             content = game.i18n.localize(
@@ -127,6 +128,7 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
                     tokenName: tokenName,
                     type: type,
                     traditionString: traditionString,
+                    spellUUID,
                 }),
             );
 
@@ -204,7 +206,7 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
         if (saveButtons.length === 1) {
             const dataSave = saveButtons.attr("data-save") ?? "";
             const dataDC = saveButtons.attr("data-dc") ?? "";
-            const origin: any = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
+            const origin: any = await fromUuid(spellUUID);
             content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`, {
                 dataSave: dataSave,
                 dataDC: dataDC,
