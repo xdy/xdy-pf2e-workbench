@@ -1,3 +1,10 @@
+# [5.38.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.13...v5.38.0) (2023-12-15)
+
+
+### Features
+
+* When casting spells privately the GM will a link to the spell in the message. ([05fde1e](https://github.com/xdy/xdy-pf2e-workbench/commit/05fde1e7ebeb242b1d103c97276e03a44ef6f25a))
+
 ## [5.37.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.12...v5.37.13) (2023-12-15)
 
 
