@@ -1,3 +1,10 @@
+## [5.38.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.38.0...v5.38.1) (2023-12-15)
+
+
+### Bug Fixes
+
+* Cleaned up the dying handling a bit. ([a7109cc](https://github.com/xdy/xdy-pf2e-workbench/commit/a7109cc5f7d46f7af7b90c325cb099523c594ba4))
+
 # [5.38.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.37.13...v5.38.0) (2023-12-15)
 
 
