@@ -111,6 +111,9 @@ function createButton(action, idx, actor, party, actorSkills) {
 
 type MacroAction = {
     skill: string;
+    // The altSkill stuff should really be more flexible. Maybe look at what SkillActions did for prereqs?
+    altSkill?: string;
+    altSkillRequiredFeat?: string;
     name: string;
     icon: string;
     action: string | Function | string[] | Action;
@@ -556,6 +559,8 @@ export function basicActionMacros() {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TreatWounds`),
             skill: "Medicine",
+            altSkill: "Nature",
+            altSkillRequiredFeat: "natural-medicine",
             action: [
                 "XDY DO_NOT_IMPORT Treat Wounds and Battle Medicine",
                 "xdy-pf2e-workbench.asymonous-benefactor-macros-internal",
@@ -622,14 +627,23 @@ export function basicActionMacros() {
     const actionsToUse = bamActions
         .filter((x) => !x.replacedWith)
         .concat(newStyleActions)
-        .filter(
-            (x) =>
+        .filter((x) => {
+            const hasSkill = selectedActor.skills?.[x.skill.toLocaleLowerCase()]?.rank ?? 0 > 0;
+            const hasAltSkill = (x.altSkill && selectedActor.skills?.[x.altSkill.toLocaleLowerCase()]?.rank) ?? 0 > 0;
+            const hasAltSkillRequiredFeat =
+                !x.altSkillRequiredFeat ||
+                (x.altSkill &&
+                    x.altSkillRequiredFeat &&
+                    selectedActor.itemTypes.feat.find((feat) => feat.slug === x.altSkillRequiredFeat));
+            return (
                 showUnusable ||
                 x.actionType !== "skill_trained" ||
                 (x.actionType === "skill_trained" &&
                     (["npc", "familiar"].includes(selectedActor.type) ||
-                        (selectedActor.skills?.[x.skill.toLocaleLowerCase()]?.rank ?? 0 > 0))),
-        )
+                        hasSkill ||
+                        (hasAltSkill && hasAltSkillRequiredFeat)))
+            );
+        })
         .filter((m) => {
             return m.module ? game.modules.get(m.module)?.active : true;
         })
