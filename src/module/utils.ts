@@ -366,3 +366,24 @@ function _mergeInsert(
     // Insert a key
     (original as Record<string, unknown>)[k] = v;
 }
+
+/**
+ * From foundry
+ * A helper function which searches through an object to retrieve a value by a string key.
+ * The method also supports arrays if the provided key is an integer index of the array.
+ * The string key supports the notation a.b.c which would return object[a][b][c]
+ * @param {object} object   The object to traverse
+ * @param {string} key      An object property with notation a.b.c
+ * @return {*}              The value of the found property
+ */
+export function foundryGetProperty(object, key) {
+    if (!key) return undefined;
+    let target = object;
+    for (const p of key.split(".")) {
+        const t = getType(target);
+        if (!(t === "Object" || t === "Array")) return undefined;
+        if (p in target) target = target[p];
+        else return undefined;
+    }
+    return target;
+}

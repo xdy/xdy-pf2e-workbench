@@ -1,4 +1,5 @@
 import {
+    foundryGetProperty,
     isActuallyDamageRoll,
     logDebug,
     logInfo,
@@ -350,7 +351,7 @@ export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: JQuery, data: 
 }
 
 export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<string, string>) {
-    const updateHp = global.fu.getProperty(update, "system.attributes.hp.value");
+    const updateHp = foundryGetProperty(update, "system.attributes.hp.value");
 
     // All these are only relevant if hp has changed (it's undefined otherwise)
     if (typeof updateHp === "number") {
