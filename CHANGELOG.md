@@ -1,3 +1,10 @@
+## [5.39.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.39.0...v5.39.1) (2023-12-17)
+
+
+### Bug Fixes
+
+* Not really a fix, just notes in the settings that the housepatcher is broken. ([74d57c6](https://github.com/xdy/xdy-pf2e-workbench/commit/74d57c6b4b1a24e2989f7163e33df0d5ac319495))
+
 # [5.39.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.38.4...v5.39.0) (2023-12-17)
 
 
