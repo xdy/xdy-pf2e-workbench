@@ -1,4 +1,12 @@
-import { isActuallyDamageRoll, logDebug, logInfo, pf2eDeepClone, pf2eSetProperty, shouldIHandleThis } from "./utils.js";
+import {
+    isActuallyDamageRoll,
+    logDebug,
+    logInfo,
+    pf2eDeepClone,
+    pf2eMergeObject,
+    pf2eSetProperty,
+    shouldIHandleThis,
+} from "./utils.js";
 import { ActorPF2e } from "@actor";
 import { ActorSystemData } from "@actor/data/base.js";
 import { TokenDocumentPF2e } from "@scene";
@@ -10,7 +18,7 @@ import {
     autoReduceStunned,
     reminderBreathWeapon,
     reminderCannotAttack,
-    reminderTargeting
+    reminderTargeting,
 } from "./feature/reminders/index.js";
 import {
     castPrivateSpell,
@@ -19,13 +27,13 @@ import {
     chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
     damageCardExpand,
-    mystifyNpcItems
+    mystifyNpcItems,
 } from "./feature/qolHandler/index.js";
 import {
     autoRollDamage,
     handleDyingRecoveryRoll,
     persistentDamage,
-    persistentHealing
+    persistentHealing,
 } from "./feature/damageHandler/index.js";
 import {
     autoRemoveDyingAtGreaterThanZeroHp,
@@ -34,12 +42,12 @@ import {
     giveUnconsciousIfDyingRemovedAt0HP,
     giveWoundedWhenDyingRemoved,
     handleDyingOnZeroHP,
-    reduceFrightened
+    reduceFrightened,
 } from "./feature/conditionHandler/index.js";
 import {
     mangleNamesInChatMessage,
     renderNameHud,
-    tokenCreateMystification
+    tokenCreateMystification,
 } from "./feature/tokenMystificationHandler/index.js";
 import { ItemPF2e } from "@item/base/document.js";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
@@ -505,7 +513,7 @@ export async function pf2eSystemReadyHook() {
                     }
 
                     patchData["system"]["traits"]["value"].push("hb_workbenched");
-                    const object = global.fu.mergeObject(original, patchData);
+                    const object = pf2eMergeObject(original, patchData);
                     const unflatten1 = unflatten(object);
                     await document.update(unflatten1);
                 } else if (patch.action === "unlock") {
