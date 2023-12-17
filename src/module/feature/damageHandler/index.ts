@@ -161,11 +161,23 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         if (blind && game.settings.get(MODULENAME, "castPrivateSpellHideName")) {
                             blind = false;
                         }
-                        origin?.rollDamage({
-                            currentTarget: currentTarget,
-                            spellLevel: castLevel,
-                            ctrlKey: blind,
-                        });
+                        if (message.flags?.pf2e?.origin?.variant?.overlays?.length > 0) {
+                            const variant = await origin.loadVariant({
+                                castLevel,
+                                overlayIds: [message.flags.pf2e.origin.variant.overlays[0]],
+                            });
+                            await variant.rollDamage({
+                                currentTarget: currentTarget,
+                                spellLevel: castLevel,
+                                ctrlKey: blind,
+                            });
+                        } else {
+                            await origin?.rollDamage({
+                                currentTarget: currentTarget,
+                                spellLevel: castLevel,
+                                ctrlKey: blind,
+                            });
+                        }
                     }
                 } else if (rollForNonSpellAttack) {
                     const rollOptions = actor?.getRollOptions(["all", "damage-roll"]);
