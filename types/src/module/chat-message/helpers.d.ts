@@ -4,7 +4,7 @@ import { ChatContextFlag, CheckRollContextFlag } from "./data.ts";
 import { ChatMessagePF2e } from "./document.ts";
 declare function isCheckContextFlag(flag?: ChatContextFlag): flag is CheckRollContextFlag;
 /** Create a message with collapsed action description and button to apply an effect */
-declare function createSelfEffectMessage(item: AbilityItemPF2e<ActorPF2e> | FeatPF2e<ActorPF2e>): Promise<ChatMessagePF2e | undefined>;
+declare function createSelfEffectMessage(item: AbilityItemPF2e<ActorPF2e> | FeatPF2e<ActorPF2e>, rollMode?: RollMode | "roll"): Promise<ChatMessagePF2e | undefined>;
 declare function applyDamageFromMessage({ message, multiplier, addend, promptModifier, rollIndex, }: ApplyDamageFromMessageParams): Promise<void>;
 interface ApplyDamageFromMessageParams {
     message: ChatMessagePF2e;

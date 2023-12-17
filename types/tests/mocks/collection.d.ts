@@ -24,10 +24,8 @@ export declare class MockWorldCollection<V extends {
 export declare class MockActors extends MockWorldCollection<ActorPF2e<null>> {
     tokens: Record<string, ActorPF2e | undefined>;
     documentClass: typeof ActorPF2e;
-    constructor(entries?: [string, ActorPF2e<null>][]);
 }
 export declare class MockItems extends MockWorldCollection<ItemPF2e<null>> {
     tokens: Record<string, ActorPF2e | undefined>;
     documentClass: typeof ItemPF2e;
-    constructor(entries?: [string, ItemPF2e<null>][]);
 }

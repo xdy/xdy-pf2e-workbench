@@ -1,11 +1,11 @@
-import { CharacterPF2e } from "@actor";
+import type { CharacterPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
 import { ArmorCategory } from "@item/armor/types.ts";
 import { ProficiencyRank } from "@item/base/data/index.ts";
 import { WeaponCategory } from "@item/weapon/types.ts";
 import { PredicateField, StrictStringField } from "@system/schema-data-fields.ts";
-import { ResolvableValueField } from "./data.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 declare class MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySchema> {
     protected static validActorTypes: ActorType[];
     slug: string;
@@ -13,7 +13,7 @@ declare class MartialProficiencyRuleElement extends RuleElementPF2e<MartialProfi
     constructor(data: RuleElementSource, options: RuleElementOptions);
     onApplyActiveEffects(): void;
 }
-interface MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySchema>, ModelPropsFromSchema<MartialProficiencySchema> {
+interface MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySchema>, ModelPropsFromRESchema<MartialProficiencySchema> {
     get actor(): CharacterPF2e;
 }
 type MartialProficiencySchema = RuleElementSchema & {

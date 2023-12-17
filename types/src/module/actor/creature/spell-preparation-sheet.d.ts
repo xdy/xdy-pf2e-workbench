@@ -1,7 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { CreaturePF2e } from "@actor";
+import { ActorPF2e, CreaturePF2e } from "@actor";
 import { ItemSummaryRenderer } from "@actor/sheet/item-summary-renderer.ts";
 import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
@@ -14,7 +14,7 @@ declare class SpellPreparationSheet<TActor extends CreaturePF2e> extends ActorSh
     #private;
     item: SpellcastingEntryPF2e<TActor>;
     /** Implementation used to handle the toggling and rendering of item summaries */
-    itemRenderer: ItemSummaryRenderer<TActor>;
+    itemRenderer: ItemSummaryRenderer<ActorPF2e<import("../../scene/token-document/document.ts").TokenDocumentPF2e<import("../../scene/document.ts").ScenePF2e | null> | null>, this>;
     constructor(item: SpellcastingEntryPF2e<TActor>, options: Partial<ActorSheetOptions>);
     static get defaultOptions(): ActorSheetOptions;
     /** Avoid conflicting with the real actor sheet */

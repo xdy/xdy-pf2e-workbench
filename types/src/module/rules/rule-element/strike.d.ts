@@ -1,4 +1,4 @@
-import { CharacterPF2e, NPCPF2e } from "@actor";
+import type { CharacterPF2e, NPCPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
 import { AttributeString } from "@actor/types.ts";
 import { NPCAttackTrait } from "@item/melee/data.ts";
@@ -6,8 +6,8 @@ import { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup } from "@it
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import { StrictBooleanField } from "@system/schema-data-fields.ts";
 import type { ArrayField, BooleanField, FilePathField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField } from "./data.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 /**
  * Create an ephemeral strike on an actor
  * @category RuleElement
@@ -36,7 +36,7 @@ declare class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     /** Toggle the modular or versatile trait of this strike's weapon */
     toggleTrait({ trait, selection }: UpdateToggleParams): Promise<void>;
 }
-interface StrikeRuleElement extends RuleElementPF2e<StrikeSchema>, ModelPropsFromSchema<StrikeSchema> {
+interface StrikeRuleElement extends RuleElementPF2e<StrikeSchema>, ModelPropsFromRESchema<StrikeSchema> {
     slug: string;
     fist: boolean;
     options: string[];

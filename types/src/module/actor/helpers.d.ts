@@ -38,7 +38,7 @@ interface MAPData {
 /** Create roll options pertaining to the active encounter and the actor's participant */
 declare function createEncounterRollOptions(actor: ActorPF2e): Record<string, boolean>;
 /** Whether flanking puts this actor off-guard */
-declare function isOffGuardFromFlanking(target: ActorPF2e, origin: ActorPF2e): boolean;
+declare function isOffGuardFromFlanking(target: ActorPF2e, origin: ActorPF2e, originRollOptions: string[]): boolean;
 declare function getStrikeAttackDomains(weapon: WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e>, proficiencyRank: ZeroToFour | null, baseRollOptions: string[] | Set<string>): string[];
 declare function getStrikeDamageDomains(weapon: WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e>, proficiencyRank: ZeroToFour | null): string[];
 /** Create a strike statistic from a melee item: for use by NPCs and Hazards */

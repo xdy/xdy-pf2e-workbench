@@ -40,6 +40,7 @@ interface ArithmeticExpressionData extends RollTermData {
 type ArithmeticOperator = "+" | "-" | "*" | "/" | "%";
 /** A parenthetically-exclosed expression as a single arithmetic term or number */
 declare class Grouping extends RollTerm<GroupingData> {
+    #private;
     term: RollTerm;
     constructor(termData: GroupingData);
     static SERIALIZE_ATTRIBUTES: string[];

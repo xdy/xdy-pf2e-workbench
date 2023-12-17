@@ -34,6 +34,7 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     get showSlotlessLevels(): boolean;
     prepareBaseData(): void;
     prepareSiblingData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
+    prepareActorData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
     /** Prepares the statistic for this spellcasting entry */
     prepareStatistic(): void;
     /** All spells associated with this spellcasting entry on the actor that should also be deleted */

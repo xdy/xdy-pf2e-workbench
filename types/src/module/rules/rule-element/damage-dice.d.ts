@@ -1,7 +1,7 @@
 import { DamageDiceOverride } from "@actor/modifiers.ts";
 import type { ArrayField, BooleanField, ObjectField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
-import { RuleElementOptions, RuleElementPF2e } from "./index.ts";
+import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 declare class DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema> {
     #private;
     static defineSchema(): DamageDiceRuleSchema;
@@ -19,7 +19,7 @@ interface DamageDiceSource extends RuleElementSource {
     category?: unknown;
     damageCategory?: unknown;
 }
-interface DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema>, ModelPropsFromSchema<DamageDiceRuleSchema> {
+interface DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema>, ModelPropsFromRESchema<DamageDiceRuleSchema> {
 }
 type DamageDiceRuleSchema = RuleElementSchema & {
     /** All domains to add a modifier to */

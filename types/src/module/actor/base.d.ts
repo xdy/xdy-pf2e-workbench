@@ -288,6 +288,7 @@ interface HitPointsSummary {
 }
 interface ActorUpdateContext<TParent extends TokenDocumentPF2e | null> extends DocumentUpdateContext<TParent> {
     damageTaken?: number;
+    finePowder?: boolean;
     damageUndo?: boolean;
 }
 /** A `Proxy` to to get Foundry to construct `ActorPF2e` subclasses */

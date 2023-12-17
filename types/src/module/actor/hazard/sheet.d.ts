@@ -2,7 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ActorSheetPF2e } from "@actor/sheet/base.ts";
-import { HazardPF2e } from "./document.ts";
+import type { HazardPF2e } from "./document.ts";
 import { HazardSheetData } from "./types.ts";
 export declare class HazardSheetPF2e extends ActorSheetPF2e<HazardPF2e> {
     #private;

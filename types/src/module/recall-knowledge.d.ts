@@ -1,7 +1,7 @@
 import { NPCPF2e } from "@actor";
 import { SkillLongForm } from "@actor/types.ts";
 import { DCAdjustment, DCOptions } from "./dc.ts";
-declare function creatureIdentificationDCs(creature: NPCPF2e, { proficiencyWithoutLevel }?: DCOptions): CreatureIdentificationData;
+declare function creatureIdentificationDCs(creature: NPCPF2e, { pwol }?: DCOptions): CreatureIdentificationData;
 interface RecallKnowledgeDC {
     dc: number;
     progression: number[];

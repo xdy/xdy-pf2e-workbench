@@ -1,7 +1,8 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
-import { RuleElementOptions, RuleElementPF2e } from "../index.ts";
+import { RuleElementOptions, RuleElementPF2e } from "../base.ts";
+import { ModelPropsFromRESchema } from "../data.ts";
 import { AllowedDropsData, ChoiceSetPackQuery, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet } from "./data.ts";
 /**
  * Present a set of options to the user and assign their selection to an injectable property
@@ -35,6 +36,6 @@ declare class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
     /** Perform a query via predicate testing against compendium items */
     queryCompendium(choices: ChoiceSetPackQuery, actorRollOptions: Set<string>, tempItems: ItemPF2e<ActorPF2e>[]): Promise<PickableThing<string>[]>;
 }
-interface ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema>, ModelPropsFromSchema<ChoiceSetSchema> {
+interface ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema>, ModelPropsFromRESchema<ChoiceSetSchema> {
 }
 export { ChoiceSetRuleElement };

@@ -1,6 +1,7 @@
 import { ActorType } from "@actor/data/index.ts";
 import type { BooleanField, SchemaField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField, RuleElementPF2e, RuleElementSchema } from "./index.ts";
+import { RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema } from "./data.ts";
 /**
  * @category RuleElement
  */
@@ -14,7 +15,7 @@ declare class TempHPRuleElement extends RuleElementPF2e<TempHPRuleSchema> {
     /** Send out a chat message notifying everyone that the actor gained temporary HP */
     broadcast(newQuantity: number, oldQuantity: number): void;
 }
-interface TempHPRuleElement extends RuleElementPF2e<TempHPRuleSchema>, ModelPropsFromSchema<TempHPRuleSchema> {
+interface TempHPRuleElement extends RuleElementPF2e<TempHPRuleSchema>, ModelPropsFromRESchema<TempHPRuleSchema> {
 }
 type TempHPEventsSchema = {
     /** Whether the temporary hit points are immediately applied */

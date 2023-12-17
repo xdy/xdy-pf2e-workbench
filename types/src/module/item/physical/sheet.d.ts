@@ -18,11 +18,12 @@ declare class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e> extends Item
 interface PhysicalItemSheetData<TItem extends PhysicalItemPF2e> extends ItemSheetDataPF2e<TItem> {
     sidebarTemplate: string;
     isPhysical: true;
-    baseLevel: number;
-    basePrice: CoinsPF2e;
-    priceAdjustment: "higher" | "lower" | null;
-    adjustedPriceHint: string | null;
+    bulkAdjustment: string | null;
+    adjustedBulkHint?: string | null;
     adjustedLevelHint: string | null;
+    basePrice: CoinsPF2e;
+    priceAdjustment: string | null;
+    adjustedPriceHint: string | null;
     actionTypes: typeof CONFIG.PF2E.actionTypes;
     actionsNumber: typeof CONFIG.PF2E.actionsNumber;
     bulks: {
@@ -30,7 +31,7 @@ interface PhysicalItemSheetData<TItem extends PhysicalItemPF2e> extends ItemShee
         label: string;
     }[];
     frequencies: typeof CONFIG.PF2E.frequencies;
-    sizes: typeof CONFIG.PF2E.actorSizes;
+    sizes: Omit<typeof CONFIG.PF2E.actorSizes, "sm">;
     usages: typeof CONFIG.PF2E.usages;
     bulkDisabled: boolean;
     activations: {

@@ -18,7 +18,7 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     #private;
     static get defaultOptions(): ActorSheetOptions;
     /** Implementation used to handle the toggling and rendering of item summaries */
-    itemRenderer: ItemSummaryRenderer<TActor>;
+    itemRenderer: ItemSummaryRenderer<TActor, ActorSheetPF2e<TActor>>;
     /** Can non-owning users loot items from this sheet? */
     get isLootSheet(): boolean;
     getData(options?: Partial<ActorSheetOptions>): Promise<ActorSheetDataPF2e<TActor>>;
@@ -28,10 +28,10 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     protected getStrikeFromDOM(button: HTMLElement, readyOnly?: boolean): StrikeData | null;
     activateListeners($html: JQuery): void;
     /** Sheet-wide click listeners for elements selectable as `a[data-action]` */
-    protected activateClickListeners(html: HTMLElement): void;
+    protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
     /** DOM listeners for inventory panel */
     protected activateInventoryListeners(panel: HTMLElement | null): void;
-    protected deleteItem(element: HTMLElement, item: ItemPF2e, event?: MouseEvent): Promise<void>;
+    protected deleteItem(item: ItemPF2e, event?: MouseEvent): Promise<void>;
     protected _canDragStart(selector: string): boolean;
     protected _canDragDrop(selector: string): boolean;
     /** Add support for dropping actions and toggles */
@@ -73,4 +73,5 @@ interface ActorSheetPF2e<TActor extends ActorPF2e> extends ActorSheet<TActor, It
     prepareItems?(sheetData: ActorSheetDataPF2e<TActor>): Promise<void>;
     render(force?: boolean, options?: ActorSheetRenderOptionsPF2e): this | Promise<this>;
 }
-export { ActorSheetPF2e };
+type SheetClickActionHandlers = Record<string, ((event: MouseEvent, actionTarget: HTMLElement) => void | Promise<void>) | undefined>;
+export { ActorSheetPF2e, type SheetClickActionHandlers };

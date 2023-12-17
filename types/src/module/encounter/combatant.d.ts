@@ -23,8 +23,9 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
     }): Promise<void>;
     prepareBaseData(): void;
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
-    toggleDefeated({ to }?: {
+    toggleDefeated({ to, overlayIcon }?: {
         to?: boolean | undefined;
+        overlayIcon?: boolean | undefined;
     }): Promise<void>;
     /**
      * Hide the tracked resource if the combatant represents a non-player-owned actor

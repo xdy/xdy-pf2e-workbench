@@ -78,6 +78,47 @@ interface GamePF2e extends Game<ActorPF2e<null>, ActorsPF2e<ActorPF2e<null>>, Ch
         StatisticModifier: typeof StatisticModifier;
         StatusEffects: typeof StatusEffects;
         TextEditor: typeof TextEditorPF2e;
+        /** Cached values of frequently-checked settings */
+        settings: {
+            /** Campaign feat slots */
+            campaign: {
+                enabled: boolean;
+                sections: FeatGroupOptions[];
+            };
+            /** Encumbrance automation */
+            encumbrance: boolean;
+            /** Immunities, weaknesses, and resistances */
+            iwr: boolean;
+            /** Rules-based vision */
+            rbv: boolean;
+            tokens: {
+                /** Automatic scaling of tokens belong to small actor */
+                autoscale: boolean;
+                /** Token nameplate visibility sets name visibility in encounter tracker */
+                nameVisibility: boolean;
+                /** Nath Mode */
+                nathMode: boolean;
+            };
+            /** Theater-of-the-mind toggles */
+            totm: boolean;
+            /** Variant urles */
+            variants: {
+                /** Automatic Bonus Progression */
+                abp: "noABP" | "ABPFundamentalPotency" | "ABPRulesAsWritten";
+                /** Free Archetype */
+                fa: boolean;
+                /** Gradual Ability Boosts */
+                gab: boolean;
+                /** Proficiency without Level */
+                pwol: {
+                    enabled: boolean;
+                    /** Modifiers for each proficiency rank */
+                    modifiers: [number, number, number, number, number];
+                };
+                /** Stamina */
+                stamina: boolean;
+            };
+        };
     };
 }
 type ConfiguredConfig = Config<AmbientLightDocumentPF2e<ScenePF2e | null>, ActiveEffectPF2e<ActorPF2e | ItemPF2e | null>, ActorPF2e, ActorDeltaPF2e<TokenDocumentPF2e>, ChatLogPF2e, ChatMessagePF2e, EncounterPF2e, CombatantPF2e<EncounterPF2e | null, TokenDocumentPF2e>, EncounterTrackerPF2e<EncounterPF2e | null>, CompendiumDirectoryPF2e, HotbarPF2e, ItemPF2e, MacroPF2e, MeasuredTemplateDocumentPF2e, TileDocumentPF2e, TokenDocumentPF2e, WallDocument<ScenePF2e | null>, ScenePF2e, UserPF2e, EffectsCanvasGroupPF2e>;
@@ -95,6 +136,7 @@ declare global {
     const canvas: CanvasPF2e;
     namespace globalThis {
         var game: GamePF2e;
+        var fu: typeof foundry.utils;
         var ui: FoundryUI<ActorDirectoryPF2e, ItemDirectory<ItemPF2e<null>>, ChatLogPF2e, CompendiumDirectoryPF2e, EncounterTrackerPF2e<EncounterPF2e | null>>;
         interface Math {
             eq: (a: number, b: number) => boolean;

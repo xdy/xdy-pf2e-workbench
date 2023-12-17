@@ -173,7 +173,15 @@
                 "Active": "Active",
                 "ActiveHeader": "Active Activities",
                 "Biography": {
-                    "ToggleVisibility": "Toggle visibility to other players"
+                    "Anathema": {
+                        "Add": "Add Anathema",
+                        "Delete": "Delete Anathema"
+                    },
+                    "ToggleVisibility": "Toggle visibility to other players",
+                    "Edicts": {
+                        "Add": "Add Edict",
+                        "Delete": "Delete Edict"
+                    }
                 },
                 "Blurb": "Level {level} {ancestry} {class}",
                 "ClassDC": {
@@ -209,7 +217,8 @@
                         "Medium": "Medium Armor",
                         "Title": "Defenses",
                         "Unarmored": "Unarmored Defense"
-                    }
+                    },
+                    "HigherUpgrade": "{ability} has upgraded this proficiency's rank to {rank}."
                 },
                 "Rest": {
                     "Label": "Rest for the Night"
@@ -333,7 +342,6 @@
                     "thalassic": "Thalassic",
                     "thassilonian": "Thassilonian",
                     "tien": "Tien",
-                    "undercommon": "Undercommon",
                     "utopian": "Utopian",
                     "vanara": "Vanara",
                     "varisian": "Varisian",
@@ -683,6 +691,7 @@
         "ArmorPropertyRuneModerateDread": "Moderate Dread",
         "ArmorPropertyRunePortable": "Portable",
         "ArmorPropertyRuneQuenching": "Quenching",
+        "ArmorPropertyRuneRaiment": "Raiment",
         "ArmorPropertyRuneReady": "Ready",
         "ArmorPropertyRuneRockBraced": "Rock-Braced",
         "ArmorPropertyRuneShadow": "Shadow",
@@ -734,6 +743,7 @@
         "Biography": "Biography",
         "BiographyAllies": "Allies",
         "BiographyAppearance": "Appearance",
+        "BiographyAnathema": "Anathema",
         "BiographyAttitude": "Attitude",
         "BiographyBackStory": "Backstory",
         "BiographyBeliefs": "Beliefs",
@@ -742,6 +752,7 @@
         "BiographyCampaignNotesHeader": "Campaign",
         "BiographyCatchphrases": "Catchphrases",
         "BiographyDislikes": "Dislikes",
+        "BiographyEdicts": "Edicts",
         "BiographyEnemies": "Enemies",
         "BiographyLikes": "Likes",
         "BiographyOrganizations": "Organizations",
@@ -861,6 +872,7 @@
                 },
                 "Label": "Result: <unadjusted>{unadjusted}</unadjusted> <offset>by {offset}</offset>"
             },
+            "SetAsInitiative": "Set as {actor}'s initiative",
             "Specific": {
                 "Counteract": "Counteract Check",
                 "Perception": {
@@ -875,8 +887,6 @@
         "ClassFeatLevels": "Class Feat Levels",
         "ClassFeatures": "Class Features",
         "ClassHP": "Class HP",
-        "ClickToSetInitiative": "Click to set initiative to selected token(s).",
-        "ClickToSetInitiativeContext": "Set as Initiative",
         "ClipboardNotification": "Copied \"{clipText}\" to the clipboard.",
         "CompendiumBrowser": {
             "AddedItem": "Added {item} to the selected actor(s).",
@@ -981,19 +991,6 @@
             "UseMulti": "Uses {name}, {current} remain",
             "UseSingle": "Uses {name}"
         },
-        "ConsumableTypeAmmo": "Ammunition",
-        "ConsumableTypeDrug": "Drug",
-        "ConsumableTypeElixir": "Elixir",
-        "ConsumableTypeMutagen": "Mutagen",
-        "ConsumableTypeOil": "Oil",
-        "ConsumableTypeOther": "Other",
-        "ConsumableTypePoison": "Poison",
-        "ConsumableTypePotion": "Potion",
-        "ConsumableTypeScroll": "Scroll",
-        "ConsumableTypeSnare": "Snare",
-        "ConsumableTypeTalisman": "Talisman",
-        "ConsumableTypeTool": "Tool",
-        "ConsumableTypeWand": "Wand",
         "CoreSkillsHeader": "Core Skills",
         "Counteractable": "Counteractable",
         "CraftDCTitle": "DC",
@@ -1209,6 +1206,7 @@
             "IncreasedFrom": "Increased from {original} to minimum of 1",
             "Kind": {
                 "Both": {
+                    "Label": "Both",
                     "Roll": {
                         "Noun": "Damage/Healing Roll",
                         "Verb": "Roll Damage/Healing"
@@ -1662,10 +1660,16 @@
                     "heavy-barding": "Heavy Barding",
                     "light-barding": "Light Barding"
                 },
+                "Rune": {
+                    "Resilient": {
+                        "Label": "Resilient Rune"
+                    }
+                },
                 "Specific": {
                     "Hint": "Marking this armor as <i>specific magic armor</i> indicates that it does more than what its material composition and runes allow. The name, level, rarity, and price will no longer be overridden from precious material or runes at the time of marking. Those material and runes will, however, serve as a baseline for level, rarity, and price adjustments from later upgrades.",
                     "Label": "Specific Magic Armor"
-                }
+                },
+                "UnequippedHint": "This armor is bulkier due to not being equipped."
             },
             "CampaignFeature": {
                 "CampaignLabel": "Campaign"
@@ -1681,6 +1685,7 @@
                     },
                     "Dialog": {
                         "Add": "Add Persistent Damage",
+                        "Invalid": "Formula is invalid.",
                         "Remove": "Remove Persistent Damage",
                         "Title": "Persistent Damage ({actor})"
                     },
@@ -1693,11 +1698,34 @@
                 }
             },
             "Consumable": {
+                "Damage": {
+                    "Add": "Add Damage/Healing",
+                    "Label": "Damage/Healing",
+                    "Remove": "Remove Damage/Healing"
+                },
+                "Category": {
+                    "ammo": "Ammunition",
+                    "catalyst": "Catalyst",
+                    "drug": "Drug",
+                    "elixir": "Elixir",
+                    "fulu": "Fulu",
+                    "gadget": "Gadget",
+                    "mutagen": "Mutagen",
+                    "oil": "Oil",
+                    "other": "Other",
+                    "poison": "Poison",
+                    "potion": "Potion",
+                    "scroll": "Scroll",
+                    "snare": "Snare",
+                    "talisman": "Talisman",
+                    "toolkit": "Toolkit",
+                    "wand": "Wand"
+                },
                 "Plural": "Consumables",
                 "Uses": {
-                    "AutoDestroy": "AutoDestroy",
+                    "AutoDestroy": "Destroy on Use",
                     "Label": "Uses",
-                    "None": "No Uses Remaining",
+                    "None": "No Uses Remain",
                     "Use": "Use"
                 }
             },
@@ -2090,6 +2118,11 @@
                         "value": "Fixed Value"
                     }
                 },
+                "Disintegrated": {
+                    "Description": "Maybe it's a treatable condition.",
+                    "Name": "Disintegrated"
+                },
+                "Plural": "Effects",
                 "ShowTokenIcon": "Show token icon?",
                 "Sustained": "Sustained",
                 "Unidentified": "Unidentified?"
@@ -2149,7 +2182,7 @@
                     "ShortLabel": "BT"
                 },
                 "Bulk": {
-                    "HeldOrStowed": "Bulk (Held/Stowed)",
+                    "HeldOrStowed": "Bulk (held/stowed)",
                     "Label": "Bulk",
                     "Light": {
                         "Label": "Light",
@@ -2724,7 +2757,6 @@
             "Weapon": "New Weapon"
         },
         "NoAmmoLabel": "No Ammo",
-        "NoStackGroup": "Does not stack",
         "NoneOption": "None",
         "OK": "OK",
         "OpenActionBrowserTitle": "Open Action Browser",
@@ -2907,9 +2939,6 @@
             },
             "WarnNoHeroPoint": "{name} has no Hero Points"
         },
-        "ResiliencyRuneLabel": "Resilient Rune",
-        "ResistancesExceptionLabel": "Except:",
-        "ResistancesExceptionPlaceholder": "e.g. except silver",
         "ResistancesLabel": "Resistances",
         "ResolvePointsShortLabel": "Resolve",
         "RestoreSpellTitle": "Restore Spell",
@@ -3195,7 +3224,7 @@
                         "ABPRulesAsWritten": "ABP: Disallow Property Runes",
                         "noABP": "Do not use ABP"
                     },
-                    "Hint": "Reload Required: Support for Automatic Bonus Progression variant rules, except skills/apex ability.",
+                    "Hint": "Enable the Automatic Bonus Progression variant rule. Skill potency must currently be managed manually.",
                     "Name": "Automatic Bonus Progression"
                 },
                 "FreeArchetype": {
@@ -3421,11 +3450,9 @@
         "StackGroupBolts": "Bolts",
         "StackGroupCoins": "Coins",
         "StackGroupGems": "Gems",
-        "StackGroupLabel": "Stacks With",
-        "StackGroupRations": "Rations",
+        "StackGroupLabel": "Stack Group",
         "StackGroupRounds10": "Rounds (10)",
         "StackGroupRounds5": "Rounds (5)",
-        "StackGroupSacks": "Sacks",
         "StackGroupSlingBullets": "Sling Bullets",
         "StackGroupSprayPellets": "Spray Pellets",
         "StackGroupWoodenTaws": "Wooden Taws",
@@ -3473,7 +3500,6 @@
         "TabCraftingLabel": "Crafting",
         "TabDescriptionLabel": "Description",
         "TabDetailsLabel": "Details",
-        "TabEffectsLabel": "Effects",
         "TabInventoryLabel": "Inventory",
         "TabManageTabsLabel": "Manage Tabs",
         "TabPathfinderSociety": "Pathfinder Society",
@@ -5064,6 +5090,9 @@
             "dancing": {
                 "Name": "Dancing"
             },
+            "decaying": {
+                "Name": "Decaying"
+            },
             "deathdrinking": {
                 "Name": "Deathdrinking"
             },
@@ -5161,6 +5190,9 @@
                 "Note": {
                     "criticalSuccess": "Your critical hits leave the target @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 2} and @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} until the end of your next turn. @UUID[Compendium.pf2e.equipment-effects.Item.czdEHtLsrUcZxSDx]{Effect: Crushing (Greater)}"
                 }
+            },
+            "greaterDecaying": {
+                "Name": "Greater Decaying"
             },
             "greaterDisrupting": {
                 "Name": "Greater Vitalizing",
@@ -5677,6 +5709,7 @@
             }
         },
         "identification": {
+            "DisplayDetails": "Display Details",
             "Identified": "Identified",
             "Identify": "Identify Item",
             "IdentifyAlchemyDCs": "Identify Alchemy DCs",
@@ -5692,7 +5725,7 @@
             "TraitGMNote": "Note: this trait is hidden from players.",
             "Unidentified": "Unidentified",
             "UnidentifiedDescription": "The nature of this {item} is unclear.",
-            "UnidentifiedHint": "Change the basic display details of this item when unidentified.",
+            "UnidentifiedHint": "Change the basic details seen by players when this item is unidentified.",
             "UnidentifiedItem": "Unusual {item}",
             "UnidentifiedType": {
                 "Amulet": "Amulet",

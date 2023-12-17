@@ -2,8 +2,8 @@ import { SaveType } from "@actor/types.ts";
 import { EffectTrait } from "@item/abstract-effect/data.ts";
 import { DataUnionField, PredicateField, StrictArrayField, StrictBooleanField, StrictNumberField, StrictStringField } from "@system/schema-data-fields.ts";
 import type { AlphaField, ArrayField, BooleanField, ColorField, EmbeddedDataField, SchemaField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField, RuleElementSchema, RuleValue } from "./data.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSource } from "./index.ts";
+import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
 import { ItemAlteration } from "./item-alteration/alteration.ts";
 /** A Pathfinder 2e aura, capable of transmitting effects and with a visual representation on the canvas */
 declare class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
@@ -12,7 +12,7 @@ declare class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
     static defineSchema(): AuraSchema;
     afterPrepareData(): void;
 }
-interface AuraRuleElement extends RuleElementPF2e<AuraSchema>, ModelPropsFromSchema<AuraSchema> {
+interface AuraRuleElement extends RuleElementPF2e<AuraSchema>, ModelPropsFromRESchema<AuraSchema> {
     slug: string;
     effects: AuraEffectREData[];
 }

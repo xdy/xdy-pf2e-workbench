@@ -6,7 +6,7 @@ import { CreatureSheetData } from "@actor/creature/index.ts";
 import { CreatureSheetPF2e } from "@actor/creature/sheet.ts";
 import type { AbilityItemPF2e } from "@item";
 import { StatisticTraceData } from "@system/statistic/index.ts";
-import { FamiliarPF2e } from "./document.ts";
+import type { FamiliarPF2e } from "./document.ts";
 /**
  * @category Actor
  */

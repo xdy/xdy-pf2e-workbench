@@ -42,4 +42,6 @@ declare function htmlQueryAll<E extends HTMLElement = HTMLElement>(parent: Maybe
 declare function htmlClosest<K extends keyof HTMLElementTagNameMap>(parent: MaybeHTML, selectors: K): HTMLElementTagNameMap[K] | null;
 declare function htmlClosest(child: MaybeHTML, selectors: string): HTMLElement | null;
 declare function htmlClosest<E extends HTMLElement = HTMLElement>(parent: MaybeHTML, selectors: string): E | null;
-export { createHTMLElement, htmlClosest, htmlQuery, htmlQueryAll };
+/** Create a reasonably specific selector for an HTML element */
+declare function htmlSelectorFor(element: HTMLElement): string;
+export { createHTMLElement, htmlClosest, htmlQuery, htmlQueryAll, htmlSelectorFor };

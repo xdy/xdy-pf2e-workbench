@@ -12,12 +12,16 @@ interface EquipmentSystemSource extends Investable<PhysicalSystemSource> {
         attribute: AttributeString;
         selected?: boolean;
     };
+    usage: {
+        value: string;
+    };
 }
 interface EquipmentSystemData extends Omit<EquipmentSystemSource, "bulk" | "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<Investable<PhysicalSystemData>, "traits"> {
     apex?: {
         attribute: AttributeString;
         selected: boolean;
     };
+    stackGroup: null;
 }
 interface EquipmentTraits extends PhysicalItemTraits<EquipmentTrait> {
     otherTags: OtherEquipmentTag[];

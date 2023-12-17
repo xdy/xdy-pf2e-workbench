@@ -1,5 +1,5 @@
-import { KingdomAbility, KingdomCHG, KingdomCharter, KingdomGovernment, KingdomLeadershipRole, KingdomSkill } from "./types.ts";
 import { ModifierAdjustment, RawModifier } from "@actor/modifiers.ts";
+import { KingdomAbility, KingdomCHG, KingdomCharter, KingdomGovernment, KingdomLeadershipRole, KingdomSkill } from "./types.ts";
 declare const KINGDOM_ABILITIES: readonly ["culture", "economy", "loyalty", "stability"];
 declare const KINGDOM_LEADERSHIP: readonly ["ruler", "counselor", "general", "emissary", "magister", "treasurer", "viceroy", "warden"];
 declare const KINGDOM_COMMODITIES: readonly ["food", "luxuries", "lumber", "ore", "stone"];
@@ -99,5 +99,5 @@ interface KingdomCHGData {
 }
 /** Returns every single possible charter, heartland, and government */
 declare function getKingdomCHGData(): KingdomCHGData;
-export { CONTROL_DC_BY_LEVEL, getKingdomCHGData, KINGDOM_ABILITIES, KINGDOM_ABILITY_LABELS, KINGDOM_COMMODITIES, KINGDOM_COMMODITY_LABELS, KINGDOM_LEADERSHIP_ABILITIES, KINGDOM_LEADERSHIP, KINGDOM_RUIN_LABELS, KINGDOM_SETTLEMENT_TYPE_DATA, KINGDOM_SETTLEMENT_TYPE_LABELS, KINGDOM_SETTLEMENT_TYPES, KINGDOM_SIZE_DATA, KINGDOM_SKILL_ABILITIES, KINGDOM_SKILL_LABELS, KINGDOM_SKILLS, VACANCY_PENALTIES, };
+export { CONTROL_DC_BY_LEVEL, KINGDOM_ABILITIES, KINGDOM_ABILITY_LABELS, KINGDOM_COMMODITIES, KINGDOM_COMMODITY_LABELS, KINGDOM_LEADERSHIP, KINGDOM_LEADERSHIP_ABILITIES, KINGDOM_RUIN_LABELS, KINGDOM_SETTLEMENT_TYPES, KINGDOM_SETTLEMENT_TYPE_DATA, KINGDOM_SETTLEMENT_TYPE_LABELS, KINGDOM_SIZE_DATA, KINGDOM_SKILLS, KINGDOM_SKILL_ABILITIES, KINGDOM_SKILL_LABELS, VACANCY_PENALTIES, getKingdomCHGData, };
 export type { KingdomCHGData };

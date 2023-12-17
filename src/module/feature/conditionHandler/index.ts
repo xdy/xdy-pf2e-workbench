@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { isFirstGM, shouldIHandleThis } from "../../utils.js";
+import { isFirstGM, pf2eSetProperty, shouldIHandleThis } from "../../utils.js";
 import { CombatantPF2e } from "@module/encounter/index.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorSystemData } from "@actor/data/base.js";
@@ -114,9 +114,9 @@ export function handleOrcFerocity(
     const undyingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "undying-ferocity");
     const rampagingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "rampaging-ferocity");
     if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
-        setProperty(update, "system.attributes.hp.value", 1);
+        pf2eSetProperty(update, "system.attributes.hp.value", 1);
         if (undyingFerocity) {
-            setProperty(update, "system.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
+            pf2eSetProperty(update, "system.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
         }
 
         shouldIncreaseWounded = true;

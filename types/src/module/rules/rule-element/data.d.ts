@@ -27,7 +27,7 @@ type RuleElementSchema = {
     /** An identifying slug for the rule element: its significance and restrictions are determined per RE type */
     slug: SlugField;
     /** A label for use by any rule element for display in an interface */
-    label: StringField<string, string, true, false, false>;
+    label: StringField<string, string, false, false, false>;
     /** The place in order of application (ascending), among an actor's list of rule elements */
     priority: NumberField<number, number, true, false, true>;
     /** A test of whether the rules element is to be applied */
@@ -46,5 +46,6 @@ declare class ResolvableValueField<TRequired extends boolean, TNullable extends 
     protected _cast(value: unknown): unknown;
     protected _cleanType(value: RuleValue): RuleValue;
 }
+type ModelPropsFromRESchema<TSchema extends RuleElementSchema> = Omit<ModelPropsFromSchema<TSchema>, "label">;
 export { ResolvableValueField };
-export type { Bracket, BracketedValue, RuleElementSchema, RuleElementSource, RuleValue };
+export type { Bracket, BracketedValue, ModelPropsFromRESchema, RuleElementSchema, RuleElementSource, RuleValue };

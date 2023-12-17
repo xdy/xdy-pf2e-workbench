@@ -28,11 +28,10 @@ interface PhysicalSystemSource extends ItemSystemSource {
     price: PartialPrice;
     equipped: EquippedData;
     identification: IdentificationSource;
-    stackGroup: string | null;
     containerId: string | null;
     material: ItemMaterialSource;
     size: Size;
-    usage: {
+    usage?: {
         value: string;
     };
     activations?: Record<string, ItemActivation>;
@@ -56,6 +55,7 @@ interface PhysicalSystemData extends PhysicalSystemSource, Omit<ItemSystemData, 
     temporary: boolean;
     identification: IdentificationData;
     usage: UsageDetails;
+    stackGroup: string | null;
 }
 type Investable<TData extends PhysicalSystemData | PhysicalSystemSource> = TData & {
     equipped: {

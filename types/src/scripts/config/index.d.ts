@@ -237,6 +237,7 @@ export declare const PF2ECONFIG: {
         "non-magical": string;
         nonlethal: string;
         "nonlethal-attacks": string;
+        "persistent-damage": string;
         physical: string;
         piercing: string;
         plant: string;
@@ -281,8 +282,6 @@ export declare const PF2ECONFIG: {
         gems: string;
         rounds5: string;
         rounds10: string;
-        rations: string;
-        sacks: string;
         slingBullets: string;
         sprayPellets: string;
         woodenTaws: string;
@@ -312,6 +311,7 @@ export declare const PF2ECONFIG: {
         metal: string;
         "non-magical": string;
         "nonlethal-attacks": string;
+        "persistent-damage": string;
         physical: string;
         piercing: string;
         plant: string;
@@ -322,7 +322,7 @@ export declare const PF2ECONFIG: {
         "salt-water": string;
         slashing: string;
         sonic: string;
-        spells: string; /** Base weapon types that are considered equivalent for all rules purposes */
+        spells: string;
         spirit: string;
         "splash-damage": string;
         "unarmed-attacks": string;
@@ -3309,25 +3309,9 @@ export declare const PF2ECONFIG: {
         skeletal: string;
         wood: string;
     };
-    consumableTypes: {
-        ammo: string;
-        catalyst: string;
-        drug: string;
-        elixir: string;
-        fulu: string;
-        gadget: string;
-        oil: string;
-        other: string;
-        mutagen: string;
-        poison: string;
-        potion: string;
-        scroll: string;
-        snare: string;
-        talisman: string;
-        tool: string;
-        wand: string;
-    };
+    consumableCategories: Record<"poison" | "ammo" | "catalyst" | "drug" | "elixir" | "fulu" | "gadget" | "mutagen" | "oil" | "other" | "potion" | "scroll" | "snare" | "talisman" | "toolkit" | "wand", string>;
     identification: {
+        DisplayDetails: string;
         Identified: string;
         Identify: string;
         IdentifyAlchemyDCs: string;
@@ -3612,7 +3596,7 @@ export declare const PF2ECONFIG: {
         silver: string;
         "cold-iron": string;
     };
-    languages: Record<"anadi" | "goblin" | "goloma" | "grippli" | "halfling" | "kashrishi" | "kitsune" | "nagaji" | "shisk" | "shoony" | "strix" | "tengu" | "vanara" | "fey" | "anugobu" | "boggard" | "caligni" | "formian" | "grioth" | "ikeshti" | "munavri" | "protean" | "samsaran" | "shobhad" | "wyrwood" | "adlet" | "akitonian" | "aklo" | "alghollthu" | "amurrun" | "ancient-osiriani" | "androffan" | "arboreal" | "arcadian" | "azlanti" | "calda" | "chthonian" | "common" | "cyclops" | "daemonic" | "destrachan" | "diabolic" | "draconic" | "drooni" | "dwarven" | "dziriak" | "ekujae" | "elder-thing" | "elven" | "empyrean" | "erutaki" | "garundi" | "girtablilu" | "gnomish" | "hallit" | "hwan" | "iblydan" | "immolis" | "iruxi" | "jistkan" | "jotun" | "jyoti" | "kaava" | "kelish" | "kholo" | "kibwani" | "kovintal" | "lirgeni" | "mahwek" | "migo" | "minaten" | "minkaian" | "muan" | "mwangi" | "mzunu" | "necril" | "ocotan" | "okaiyan" | "orcish" | "orvian" | "osiriani" | "petran" | "pyric" | "rasu" | "ratajin" | "razatlani" | "requian" | "russian" | "sakvroth" | "sasquatch" | "senzar" | "shadowtongue" | "shae" | "shoanti" | "shory" | "skald" | "sphinx" | "sussuran" | "taldane" | "talican" | "tekritanin" | "thalassic" | "thassilonian" | "tien" | "undercommon" | "utopian" | "varisian" | "varki" | "vishkanyan" | "vudrani" | "wildsong" | "xanmba" | "yithian" | "ysoki", string>;
+    languages: Record<"anadi" | "goblin" | "goloma" | "grippli" | "halfling" | "kashrishi" | "kitsune" | "nagaji" | "shisk" | "shoony" | "strix" | "tengu" | "vanara" | "fey" | "anugobu" | "boggard" | "caligni" | "formian" | "grioth" | "ikeshti" | "munavri" | "protean" | "samsaran" | "shobhad" | "wyrwood" | "adlet" | "akitonian" | "aklo" | "alghollthu" | "amurrun" | "ancient-osiriani" | "androffan" | "arboreal" | "arcadian" | "azlanti" | "calda" | "chthonian" | "common" | "cyclops" | "daemonic" | "destrachan" | "diabolic" | "draconic" | "drooni" | "dwarven" | "dziriak" | "ekujae" | "elder-thing" | "elven" | "empyrean" | "erutaki" | "garundi" | "girtablilu" | "gnomish" | "hallit" | "hwan" | "iblydan" | "immolis" | "iruxi" | "jistkan" | "jotun" | "jyoti" | "kaava" | "kelish" | "kholo" | "kibwani" | "kovintal" | "lirgeni" | "mahwek" | "migo" | "minaten" | "minkaian" | "muan" | "mwangi" | "mzunu" | "necril" | "ocotan" | "okaiyan" | "orcish" | "orvian" | "osiriani" | "petran" | "pyric" | "rasu" | "ratajin" | "razatlani" | "requian" | "russian" | "sakvroth" | "sasquatch" | "senzar" | "shadowtongue" | "shae" | "shoanti" | "shory" | "skald" | "sphinx" | "sussuran" | "taldane" | "talican" | "tekritanin" | "thalassic" | "thassilonian" | "tien" | "utopian" | "varisian" | "varki" | "vishkanyan" | "vudrani" | "wildsong" | "xanmba" | "yithian" | "ysoki", string>;
     attackEffects: {
         grab: string;
         "improved-grab": string;

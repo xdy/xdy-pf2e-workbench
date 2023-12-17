@@ -33,6 +33,12 @@ interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
     materials: typeof CONFIG.PF2E.materialDamageEffects;
     damageTypes: Record<DamageType, string>;
     damageSubtypes: Pick<typeof CONFIG.PF2E.damageCategories, DamageCategoryUnique>;
+    damageKinds: Record<string, {
+        value: string[];
+        label: string;
+        selected: boolean;
+        disabled: boolean;
+    }[]>;
     areaSizes: typeof CONFIG.PF2E.areaSizes;
     areaTypes: typeof CONFIG.PF2E.areaTypes;
     heightenIntervals: number[];

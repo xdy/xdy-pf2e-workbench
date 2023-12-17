@@ -165,6 +165,7 @@ declare class Weakness extends IWR<WeaknessType> implements WeaknessSource {
         metal: string;
         "non-magical": string;
         "nonlethal-attacks": string;
+        "persistent-damage": string;
         physical: string;
         piercing: string;
         plant: string;
@@ -239,6 +240,7 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         "non-magical": string;
         nonlethal: string;
         "nonlethal-attacks": string;
+        "persistent-damage": string;
         physical: string;
         piercing: string;
         plant: string;

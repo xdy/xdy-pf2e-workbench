@@ -17,7 +17,7 @@ declare const MetagameSettingsConfig: {
         hint: string;
         default: boolean;
         type: BooleanConstructor;
-        onChange: () => Promise<void>;
+        onChange: (value: unknown) => Promise<void>;
     };
     secretDamage: {
         name: string;

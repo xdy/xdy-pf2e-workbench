@@ -87,11 +87,9 @@ declare global {
         /** For numeric Types, defines the allowable range */
         range?: this["type"] extends NumberConstructor ? { min: number; max: number; step: number } : never;
         /** The default value */
-        default: number | string | boolean | object | Function;
+        default: number | string | boolean | object | (() => number | string | boolean | object);
         /** Executes when the value of this Setting changes */
-        onChange?: (
-            choice: TChoices extends Record<string, unknown> ? keyof TChoices : undefined,
-        ) => void | Promise<void>;
+        onChange?: (choice: TChoices extends object ? keyof TChoices : unknown) => void | Promise<void>;
     }
 
     interface SettingSubmenuConfig {
@@ -127,9 +125,9 @@ declare global {
         /** The default bindings that can be changed by the user. */
         editable?: KeybindingActionBinding[];
         /** A function to execute when a key down event occurs. If True is returned, the event is consumed and no further keybinds execute. */
-        onDown?: (context: KeyboardEventContext) => unknown | void;
+        onDown?: (context: KeyboardEventContext) => unknown;
         /** A function to execute when a key up event occurs. If True is returned, the event is consumed and no further keybinds execute. */
-        onUp?: (context: KeyboardEventContext) => unknown | void;
+        onUp?: (context: KeyboardEventContext) => unknown;
         /** If True, allows Repeat events to execute the Action's onDown. Defaults to false. */
         repeat?: boolean;
         /** If true, only a GM can edit and execute this Action */

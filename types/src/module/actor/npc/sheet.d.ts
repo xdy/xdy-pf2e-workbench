@@ -3,6 +3,7 @@
 /// <reference types="tooltipster" />
 import type { NPCPF2e } from "@actor";
 import { CreatureSheetPF2e } from "@actor/creature/sheet.ts";
+import { SheetClickActionHandlers } from "@actor/sheet/base.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { NPCConfig } from "./config.ts";
 import { NPCSheetData, NPCSpellcastingSheetData } from "./types.ts";
@@ -32,6 +33,7 @@ declare class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
     prepareItems(sheetData: NPCSheetData): Promise<void>;
     protected prepareSpellcasting(): Promise<NPCSpellcastingSheetData[]>;
     activateListeners($html: JQuery): void;
+    protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }
 declare class SimpleNPCSheet extends AbstractNPCSheet<NPCPF2e> {

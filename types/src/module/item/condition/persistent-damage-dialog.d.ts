@@ -1,7 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { DamageType } from "@system/damage/types.ts";
 declare class PersistentDamageDialog extends Application<PersistentDamageDialogOptions> {
     #private;

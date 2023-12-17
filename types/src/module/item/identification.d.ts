@@ -13,6 +13,6 @@ export declare function isMagical(item: PhysicalItemPF2e): boolean;
 interface IdentifyItemOptions extends DCOptions {
     notMatchingTraditionModifier: number;
 }
-export declare function getItemIdentificationDCs(item: PhysicalItemPF2e, { proficiencyWithoutLevel, notMatchingTraditionModifier }: IdentifyItemOptions): GenericIdentifyDCs | IdentifyMagicDCs | IdentifyAlchemyDCs;
+export declare function getItemIdentificationDCs(item: PhysicalItemPF2e, { pwol, notMatchingTraditionModifier }: IdentifyItemOptions): GenericIdentifyDCs | IdentifyMagicDCs | IdentifyAlchemyDCs;
 export declare function getUnidentifiedPlaceholderImage(item: PhysicalItemPF2e): string;
 export {};

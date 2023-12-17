@@ -2,7 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ItemSheetOptions } from "@item/base/sheet/sheet.ts";
-import { CoinsPF2e, MaterialSheetData, PhysicalItemSheetData, PhysicalItemSheetPF2e } from "@item/physical/index.ts";
+import { CoinsPF2e, MaterialSheetData, PhysicalItemSheetData, PhysicalItemSheetPF2e, RUNE_DATA } from "@item/physical/index.ts";
 import { WeaponPropertyRuneType } from "@item/weapon/types.ts";
 import type { ShieldPF2e } from "./document.ts";
 import { BaseShieldType } from "./types.ts";
@@ -23,6 +23,6 @@ interface ShieldSheetData extends PhysicalItemSheetData<ShieldPF2e> {
         readOnly: boolean;
     }[];
     reinforcing: Record<number, string | null>;
-    weaponRunes: object | null;
+    weaponRunes: typeof RUNE_DATA.weapon | null;
 }
 export { ShieldSheetPF2e };

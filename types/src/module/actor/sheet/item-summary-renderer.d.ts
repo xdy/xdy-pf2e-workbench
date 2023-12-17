@@ -8,14 +8,11 @@ import { ItemSummaryData } from "@item/base/data/index.ts";
  * Implementation used to populate item summaries, toggle visibility
  * of item summaries, and save expanded/collapsed state of item summaries.
  */
-export declare class ItemSummaryRenderer<TActor extends ActorPF2e> {
-    protected sheet: Application & {
-        get actor(): TActor;
-    };
-    constructor(sheet: Application & {
-        get actor(): TActor;
-    });
-    activateListeners(html: HTMLElement): void;
+export declare class ItemSummaryRenderer<TActor extends ActorPF2e, TSheet extends Application & {
+    get actor(): TActor;
+}> {
+    protected sheet: TSheet;
+    constructor(sheet: TSheet);
     /**
      * Triggers toggling the visibility of an item summary element,
      * delegating the populating of the item summary to renderItemSummary().
@@ -25,14 +22,16 @@ export declare class ItemSummaryRenderer<TActor extends ActorPF2e> {
         visible?: boolean;
         instant?: boolean;
     }): Promise<void>;
+    /** Retrieves the item from the element that the current toggleable summary is for */
+    protected getItemFromElement(element: HTMLElement): Promise<ClientDocument | null>;
     /**
      * Called when an item summary is expanded and needs to be filled out.
      */
-    renderItemSummary(div: HTMLElement, item: ItemPF2e, chatData: ItemSummaryData): Promise<void>;
+    renderItemSummary(container: HTMLElement, item: ItemPF2e, chatData: ItemSummaryData): Promise<void>;
     /**
      * Executes a callback, performing a save and restore for all item summaries to maintain visual state.
      * Most restorations are driven by a data-item-id attribute, however data-item-summary-id with a custom string
      * can be used to avoid conflicts in areas such as spell preparation.
      */
-    saveAndRestoreState(callback: () => Promise<JQuery<HTMLElement>>): Promise<JQuery<HTMLElement>>;
+    saveAndRestoreState(callback: () => Promise<JQuery>): Promise<JQuery>;
 }

@@ -1,4 +1,4 @@
-import { ContainerPF2e } from "@item";
+import type { ContainerPF2e } from "@item";
 import { PhysicalItemSource } from "@item/base/data/index.ts";
 import { ContainerBulkData } from "@item/container/data.ts";
 import { Rarity } from "@module/data.ts";
@@ -17,7 +17,7 @@ declare function computeLevelRarityPrice(item: PhysicalItemPF2e): {
 declare function generateItemName(item: PhysicalItemPF2e): string;
 /** Validate HP changes to a physical item and also adjust current HP when max HP changes */
 declare function handleHPChange(item: PhysicalItemPF2e, changed: DeepPartial<PhysicalItemSource>): void;
-/**  Convert of scattershot bulk data on a physical item into a single object */
-declare function organizeBulkData<TItem extends PhysicalItemPF2e>(item: TItem): TItem extends ContainerPF2e ? ContainerBulkData : BulkData;
+/** Add and adjust properties on an item's bulk data object */
+declare function prepareBulkData<TItem extends PhysicalItemPF2e>(item: TItem): TItem extends ContainerPF2e ? ContainerBulkData : BulkData;
 export { coinCompendiumIds } from "./coins.ts";
-export { CoinsPF2e, computeLevelRarityPrice, generateItemName, handleHPChange, organizeBulkData };
+export { CoinsPF2e, computeLevelRarityPrice, generateItemName, handleHPChange, prepareBulkData };

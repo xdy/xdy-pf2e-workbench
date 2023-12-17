@@ -1,6 +1,6 @@
 import { BasePhysicalItemSource, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource } from "@item/physical/data.ts";
 import { HeldUsage } from "@item/physical/usage.ts";
-import { WeaponRuneData } from "@item/weapon/data.ts";
+import { WeaponRuneData, WeaponRuneSource } from "@item/weapon/data.ts";
 import { ZeroToSix } from "@module/data.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { BaseShieldType, ShieldTrait } from "./types.ts";
@@ -12,13 +12,13 @@ interface ShieldSystemSource extends PhysicalSystemSource {
     speedPenalty: number;
     /** Data stored at the time of marking a shield as specific */
     specific: SpecificShieldData | null;
+    /** Currently supports reinforcing runes */
     runes: ShieldRuneData;
-    usage: {
-        value: "held-in-one-held";
-    };
+    /** Usage for shields isn't stored. */
+    readonly usage?: never;
 }
 interface IntegratedWeaponSource {
-    runes: Omit<WeaponRuneData, "effects">;
+    runes: WeaponRuneSource;
     versatile: {
         selection: DamageType;
     } | null;
@@ -37,7 +37,9 @@ interface SpecificShieldData extends Pick<ShieldSystemSource, "material" | "rune
 }
 interface ShieldSystemData extends Omit<ShieldSystemSource, "bulk" | "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<PhysicalSystemData, "baseItem" | "traits"> {
     traits: ShieldTraits;
+    /** Shields are always held. */
     usage: HeldUsage;
+    stackGroup: null;
 }
 interface IntegratedWeaponData extends IntegratedWeaponSource {
     damageType: DamageType;

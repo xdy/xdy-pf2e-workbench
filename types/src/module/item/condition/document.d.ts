@@ -37,7 +37,7 @@ declare class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
     rollRecovery(): Promise<void>;
     /** Ensure value.isValued and value.value are in sync */
     prepareBaseData(): void;
-    prepareSiblingData(): void;
+    prepareSiblingData(this: ConditionPF2e<ActorPF2e>): void;
     /** Log self in parent's conditions map */
     prepareActorData(this: ConditionPF2e<ActorPF2e>): void;
     /** Withhold all rule elements if this condition is inactive */

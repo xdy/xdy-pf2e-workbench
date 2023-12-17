@@ -268,3 +268,12 @@ export { Migration899ArmorShieldToShieldShield } from "./899-armor-shields-to-sh
 export { Migration900ClassSpellcastingProficiency } from "./900-class-spellcasting-proficiency.ts";
 export { Migration901ReorganizeBulkData } from "./901-reorganize-bulk-data.ts";
 export { Migration902DuskwoodDawnsilver } from "./902-duskwood-dawnsilver.ts";
+export { Migration903PhysicalNumericData } from "./903-physical-numeric-data.ts";
+export { Migration904UndercommonToSakvroth } from "./904-undercommon-to-sakvroth.ts";
+export { Migration905UnpersistUsage } from "./905-unpersist-usage.ts";
+export { Migration906LimitStackGroup } from "./906-limit-stack-group.ts";
+export { Migration907RestructureArmorWeaponRunes } from "./907-restructure-armor-weapon-runes.ts";
+export { Migration908TrueGangUp } from "./908-true-gang-up.ts";
+export { Migration909RefineConsumableData } from "./909-refine-consumable-data.ts";
+export { Migration910EdictsAnathemaArrays } from "./910-edicts-anathema-arrays.ts";
+export { Migration911CoinBulk } from "./911-coin-bulk.ts";

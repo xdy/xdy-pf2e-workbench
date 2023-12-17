@@ -1,8 +1,7 @@
 import { TokenPF2e } from "../index.ts";
 /** Visual rendering of lines from token to flanking buddies token on highlight */
 declare class FlankingHighlightRenderer {
-    /** Layer graphics object to which flanking highlight lines and text will be drawn */
-    _layer: PIXI.Graphics | null;
+    #private;
     /** The token from which the line is extended */
     token: TokenPF2e;
     /** Text label floating above highlight line */
@@ -18,17 +17,11 @@ declare class FlankingHighlightRenderer {
      * and the token must not be a preview or animating.
      */
     get shouldRender(): boolean;
-    /**
-     * To be valid, token must be selected by owner or be user's character
-     */
+    /** To be valid, token must be selected by owner or be user's character */
     get tokenIsSelectedOrOwn(): boolean;
-    /**
-     * To be valid, this token must not be preview or be animating
-     */
+    /** To be valid, this token must not be preview or be animating */
     get tokenIsReady(): boolean;
-    /**
-     * Draw flanking highlight if conditions are met
-     */
+    /** Draw flanking highlight if conditions are met */
     draw(): void;
     /**
      * For a given target, find flanking buddies and draw flanking highlight lines between token and buddies
@@ -54,7 +47,5 @@ declare class FlankingHighlightRenderer {
     clear(): void;
     /** Alias of `clear` */
     destroy(): void;
-    /** Creates layer graphics object */
-    protected addLayer(): PIXI.Graphics;
 }
 export { FlankingHighlightRenderer };

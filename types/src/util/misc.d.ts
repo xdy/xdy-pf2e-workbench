@@ -9,8 +9,6 @@ import Sortable from "sortablejs";
  * @return
  */
 declare function groupBy<T, R>(array: T[], criterion: (value: T) => R): Map<R, T[]>;
-/** Creates a sorting comparator that sorts by the numerical result of a mapping function */
-declare function sortBy<T, J>(mapping: (value: T) => J): (a: T, b: T) => number;
 /**
  * Given an array, adds a certain amount of elements to it
  * until the desired length is being reached
@@ -18,27 +16,6 @@ declare function sortBy<T, J>(mapping: (value: T) => J): (a: T, b: T) => number;
 declare function padArray<T>(array: T[], requiredLength: number, padWith: T): T[];
 /** Given an object, returns a new object with the same keys, but with each value converted by a function. */
 declare function mapValues<K extends string | number | symbol, V, R>(object: Record<K, V>, mapping: (value: V, key: K) => R): Record<K, R>;
-/**
- * Returns true if the string is null, undefined or only consists of 1..n spaces
- */
-declare function isBlank(text: Maybe<string>): text is null | undefined | "";
-/** Returns a formatted number string with a preceding + if non-negative */
-declare function addSign(number: number): string;
-/**
- * No idea why this isn't built in
- */
-declare function sum(values: number[]): number;
-/**
- * Zip to arrays together based on a given zip function
- * @param a
- * @param b
- * @param zipFunction
- */
-declare function zip<A, B, R>(a: A[], b: B[], zipFunction: (a: A, b: B) => R): R[];
-interface Fraction {
-    numerator: number;
-    denominator: number;
-}
 /**
  * Continually apply a function on the result of itself until times is reached
  *
@@ -58,15 +35,15 @@ declare function objectHasKey<O extends object>(obj: O, key: unknown): key is ke
 declare function tupleHasValue<const A extends readonly unknown[]>(array: A, value: unknown): value is A[number];
 /** Check if an element is present in the provided set. Especially useful for checking against literal sets */
 declare function setHasElement<T extends Set<unknown>>(set: T, value: unknown): value is SetElement<T>;
-/** Returns a subset of an object with explicitly defined keys */
-declare function pick<T extends object, K extends keyof T>(obj: T, keys: Iterable<K>): Pick<T, K>;
 /**
  * Return an integer string of a number, always with sign (+/-)
  * @param value The number to convert to a string
- * @param [emptyStringZero] If the value is zero, return an empty string
+ * @param options.emptyStringZero If the value is zero, return an empty string
+ * @param options.zeroIsNegative Treat zero as a negative value
  */
-declare function signedInteger(value: number, { emptyStringZero }?: {
+declare function signedInteger(value: number, { emptyStringZero, zeroIsNegative }?: {
     emptyStringZero?: boolean | undefined;
+    zeroIsNegative?: boolean | undefined;
 }): string;
 /**
  * The system's sluggification algorithm for labels and other terms.
@@ -125,5 +102,5 @@ declare function isImageFilePath(path: unknown): path is ImageFilePath;
 /** Does the parameter look like a video file path? */
 declare function isVideoFilePath(path: unknown): path is ImageFilePath;
 declare function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath;
-declare const SORTABLE_DEFAULTS: Sortable.Options;
-export { ErrorPF2e, SORTABLE_DEFAULTS, addSign, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isBlank, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinalString, padArray, parseHTML, pick, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortBy, sortLabeledRecord, sortObjByKey, sortStringRecord, sum, tupleHasValue, zip, type Fraction, type SlugCamel, };
+declare const SORTABLE_BASE_OPTIONS: Sortable.Options;
+export { ErrorPF2e, SORTABLE_BASE_OPTIONS, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinalString, padArray, parseHTML, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortLabeledRecord, sortObjByKey, sortStringRecord, tupleHasValue, type SlugCamel, };

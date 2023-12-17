@@ -1,4 +1,6 @@
+import { FeatGroup } from "@actor/character/feats.ts";
 import { Kingdom } from "@actor/party/kingdom/model.ts";
+import { type CampaignFeaturePF2e } from "@item";
 import type { ItemSourcePF2e, ItemType } from "@item/base/data/index.ts";
 import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
@@ -11,6 +13,8 @@ declare class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     scouting: Statistic;
     maneuver: Statistic;
     morale: Statistic;
+    tactics: FeatGroup<ArmyPF2e, CampaignFeaturePF2e>;
+    bonusTactics: FeatGroup<ArmyPF2e, CampaignFeaturePF2e>;
     strikes: Record<string, ArmyStrike | null>;
     get allowedItemTypes(): (ItemType | "physical")[];
     get underRoutThreshold(): boolean;
@@ -21,16 +25,13 @@ declare class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     /** Run rule elements */
     prepareEmbeddedDocuments(): void;
     prepareDerivedData(): void;
+    usePotion(): Promise<void>;
     prepareArmyStrike(type: "melee" | "ranged"): ArmyStrike | null;
-    importBasicActions({ skipDialog }?: {
-        skipDialog?: boolean;
-    }): Promise<void>;
     /** Updates the army's level, scaling all attributes that are intended to scale as the army levels up */
     updateLevel(newLevel: number): Promise<this | undefined>;
     /** Prevent addition of invalid tactic types */
     checkItemValidity(source: PreCreate<ItemSourcePF2e>): boolean;
     getStatistic(slug: string): Statistic | null;
-    _onCreate(data: this["_source"], options: DocumentModificationContext<TParent>, userId: string): void;
     _preUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {

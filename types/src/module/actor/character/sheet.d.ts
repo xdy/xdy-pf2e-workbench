@@ -3,6 +3,7 @@
 /// <reference types="tooltipster" />
 import type { ActorPF2e } from "@actor";
 import { CreatureSheetData } from "@actor/creature/index.ts";
+import { SheetClickActionHandlers } from "@actor/sheet/base.ts";
 import { ActorSheetDataPF2e, InventoryItem } from "@actor/sheet/data-types.ts";
 import { AttributeString, SaveType } from "@actor/types.ts";
 import type { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, PhysicalItemPF2e } from "@item";
@@ -31,16 +32,17 @@ declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureS
     /** Organize and classify Items for Character sheets */
     prepareItems(sheetData: ActorSheetDataPF2e<CharacterPF2e>): Promise<void>;
     protected prepareInventoryItem(item: PhysicalItemPF2e): InventoryItem;
+    /** Overriden to open sub-tabs if requested */
+    protected openTab(name: string): void;
     activateListeners($html: JQuery): void;
-    protected activateInventoryListeners(panel: HTMLElement | null): void;
+    protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
     /** Toggle availability of the roll-initiative link on the sidebar */
     toggleInitiativeLink(link?: HTMLElement | null): void;
     protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
     protected _onDrop(event: ElementDragEvent): Promise<boolean | void>;
     /** Handle a drop event for an existing Owned Item to sort that item */
     protected _onSortItem(event: DragEvent, itemSource: ItemSourcePF2e): Promise<CollectionValue<TActor["items"]>[]>;
-    /** Overriden to open sub-tabs if requested */
-    protected openTab(name: string): void;
+    protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }
 interface CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e<TActor> {
     getStrikeFromDOM(target: HTMLElement): CharacterStrike | null;

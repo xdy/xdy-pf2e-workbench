@@ -27,9 +27,7 @@ declare class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumen
      * weakness or resistance as indication.
      */
     prepareData(): void;
-    protected prepareSaves(): {
-        [K in SaveType]?: Statistic;
-    };
+    private prepareSaves;
 }
 interface HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: HazardSource;

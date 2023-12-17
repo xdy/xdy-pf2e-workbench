@@ -47,6 +47,4 @@ declare function looksLikeDamageRoll(roll: Roll): boolean;
 declare function damageDiceIcon(roll: DamageRoll | DamageInstance, { fixedWidth }?: {
     fixedWidth?: boolean | undefined;
 }): HTMLElement;
-/** Indicate in a term's options that it was multiplied by 2 or 3 */
-declare function markAsCrit(term: RollTerm, multiplier: 2 | 3): void;
-export { DamageCategorization, applyDamageDiceOverrides, damageDiceIcon, deepFindTerms, extractBaseDamage, isFlavoredArithmetic, isSystemDamageTerm, looksLikeDamageRoll, markAsCrit, nextDamageDieSize, renderComponentDamage, simplifyTerm, };
+export { DamageCategorization, applyDamageDiceOverrides, damageDiceIcon, deepFindTerms, extractBaseDamage, isFlavoredArithmetic, isSystemDamageTerm, looksLikeDamageRoll, nextDamageDieSize, renderComponentDamage, simplifyTerm, };

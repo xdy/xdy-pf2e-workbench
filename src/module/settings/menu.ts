@@ -1,4 +1,5 @@
 import { MODULENAME } from "../xdy-pf2e-workbench.js";
+import { pf2eMergeObject } from "../utils.js";
 
 export type PartialSettingsData = Omit<SettingRegistration, "scope" | "config">;
 
@@ -12,6 +13,7 @@ export interface MenuTemplateData extends FormApplicationData {
 }
 
 /** An adjusted copy of the settings menu from core pf2e meant for the module */
+// @ts-ignore
 export class SettingsMenuPF2eWorkbench extends FormApplication {
     static readonly namespace: string;
 
@@ -19,7 +21,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
         const options = super.defaultOptions;
         options.classes.push("settings-menu");
 
-        return mergeObject(options, {
+        return pf2eMergeObject(options, {
             title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
             id: `${this.namespace}-settings`, // lgtm [js/mixed-static-instance-this-access]
             template: `modules/xdy-pf2e-workbench/templates/menu.hbs`,
@@ -76,7 +78,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
                 isText: setting.type === String && !setting.filePicker,
             };
         });
-        return mergeObject(super.getData(), {
+        return <MenuTemplateData>pf2eMergeObject(super.getData(), {
             settings: templateData,
             instructions: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, // lgtm [js/mixed-static-instance-this-access]
         });

@@ -1,4 +1,4 @@
-import { isActuallyDamageRoll, logDebug, logInfo, shouldIHandleThis } from "./utils.js";
+import { isActuallyDamageRoll, logDebug, logInfo, pf2eDeepClone, pf2eSetProperty, shouldIHandleThis } from "./utils.js";
 import { ActorPF2e } from "@actor";
 import { ActorSystemData } from "@actor/data/base.js";
 import { TokenDocumentPF2e } from "@scene";
@@ -342,7 +342,7 @@ export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: JQuery, data: 
 }
 
 export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<string, string>) {
-    const updateHp = getProperty(update, "system.attributes.hp.value");
+    const updateHp = global.fu.getProperty(update, "system.attributes.hp.value");
 
     // All these are only relevant if hp has changed (it's undefined otherwise)
     if (typeof updateHp === "number") {
@@ -366,7 +366,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
                 (String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HP" &&
                     [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
         if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
-            handleDyingOnZeroHP(actor, deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
+            handleDyingOnZeroHP(actor, pf2eDeepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
                 logDebug("Workbench increaseDyingOnZeroHP complete");
                 if (hpRaisedAbove0) {
                     if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {
@@ -420,7 +420,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
 
 export function preUpdateTokenHook(_document, update, options, ..._args) {
     if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x || update.y)) {
-        setProperty(options, "animation", {
+        pf2eSetProperty(options, "animation", {
             movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
         });
     }
@@ -505,7 +505,7 @@ export async function pf2eSystemReadyHook() {
                     }
 
                     patchData["system"]["traits"]["value"].push("hb_workbenched");
-                    const object = mergeObject(original, patchData);
+                    const object = global.fu.mergeObject(original, patchData);
                     const unflatten1 = unflatten(object);
                     await document.update(unflatten1);
                 } else if (patch.action === "unlock") {

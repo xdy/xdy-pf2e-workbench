@@ -1,6 +1,7 @@
 import { ItemType } from "@item/base/data/index.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
-import { RuleElementPF2e, RuleElementSchema } from "../index.ts";
+import { RuleElementPF2e } from "../base.ts";
+import { ModelPropsFromRESchema, RuleElementSchema } from "../data.ts";
 import { ItemAlterationSchema } from "./alteration.ts";
 declare class ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSchema> {
     #private;
@@ -9,7 +10,7 @@ declare class ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRu
     onApplyActiveEffects(): void;
     preCreate({ tempItems }: RuleElementPF2e.PreCreateParams): Promise<void>;
 }
-interface ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSchema>, ModelPropsFromSchema<ItemAlterationRuleSchema> {
+interface ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSchema>, ModelPropsFromRESchema<ItemAlterationRuleSchema> {
 }
 type ItemAlterationRuleSchema = RuleElementSchema & ItemAlterationSchema & {
     /** The type of items to alter */

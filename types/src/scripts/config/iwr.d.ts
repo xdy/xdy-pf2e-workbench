@@ -120,6 +120,7 @@ declare const weaknessTypes: {
     metal: string;
     "non-magical": string;
     "nonlethal-attacks": string;
+    "persistent-damage": string;
     physical: string;
     piercing: string;
     plant: string;
@@ -182,6 +183,7 @@ declare const resistanceTypes: {
     "non-magical": string;
     nonlethal: string;
     "nonlethal-attacks": string;
+    "persistent-damage": string;
     physical: string;
     piercing: string;
     plant: string;

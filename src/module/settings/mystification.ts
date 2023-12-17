@@ -188,7 +188,7 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 default: "...",
                 type: String,
                 onChange: async (choice) => {
-                    if (choice?.length === 0) {
+                    if (!choice) {
                         // Sleep a bit, then set to a sane value...
                         await new Promise((resolve) => setTimeout(resolve, 250));
                         game.settings.set(MODULENAME, "npcMystifierNoMatch", "...");

@@ -1,6 +1,6 @@
 import type { ArrayField, BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "./ae-like.ts";
-import { ResolvableValueField } from "./data.ts";
+import { ModelPropsFromRESchema, ResolvableValueField } from "./data.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 /** Adjust the value of a modifier, change its damage type (in case of damage modifiers) or suppress it entirely */
 declare class AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema> {
@@ -12,7 +12,7 @@ declare class AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSc
     /** Instead of applying the change directly to a property path, defer it to a synthetic */
     beforePrepareData(): void;
 }
-interface AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema>, ModelPropsFromSchema<AdjustModifierSchema> {
+interface AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema>, ModelPropsFromRESchema<AdjustModifierSchema> {
     suppress: boolean;
     maxApplications: number;
 }

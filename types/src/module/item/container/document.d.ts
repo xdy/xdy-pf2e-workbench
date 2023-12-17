@@ -15,7 +15,9 @@ declare class ContainerPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
         value: Bulk;
         max: Bulk;
     };
-    get capacityPercentage(): number;
+    /** The percentage filled of container's bulk capacity: if over 100%, return a value without excess Light units. */
+    get percentFull(): number;
+    get bulkIgnored(): Bulk;
     get bulk(): Bulk;
     /** Reload this container's contents following Actor embedded-document preparation */
     prepareSiblingData(this: ContainerPF2e<ActorPF2e>): void;

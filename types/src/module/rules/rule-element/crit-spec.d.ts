@@ -2,7 +2,8 @@ import { ActorType } from "@actor/data/index.ts";
 import { ModifierType } from "@actor/modifiers.ts";
 import { DamageCategoryUnique, DamageType } from "@system/damage/types.ts";
 import type { BooleanField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField, RuleElementPF2e, RuleElementSchema, RuleValue } from "./index.ts";
+import { RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleValue } from "./data.ts";
 /** Substitute a pre-determined result for a check's D20 roll */
 declare class CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema> {
     #private;
@@ -11,7 +12,7 @@ declare class CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema> {
     static validateJoint(data: SourceFromSchema<CritSpecRuleSchema>): void;
     beforePrepareData(): void;
 }
-interface CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema>, ModelPropsFromSchema<CritSpecRuleSchema> {
+interface CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema>, ModelPropsFromRESchema<CritSpecRuleSchema> {
 }
 type DamageDieFaces = 4 | 6 | 8 | 10 | 12;
 type CritSpecRuleSchema = RuleElementSchema & {

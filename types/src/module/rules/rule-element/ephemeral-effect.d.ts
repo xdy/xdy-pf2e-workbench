@@ -1,6 +1,7 @@
 import type { ArrayField, BooleanField, EmbeddedDataField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, RuleElementSchema } from "./data.ts";
 import { ItemAlteration } from "./item-alteration/alteration.ts";
-import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
 /** An effect that applies ephemerally during a single action, such as a strike */
 declare class EphemeralEffectRuleElement extends RuleElementPF2e<EphemeralEffectSchema> {
     #private;
@@ -8,7 +9,7 @@ declare class EphemeralEffectRuleElement extends RuleElementPF2e<EphemeralEffect
     static validateJoint(data: SourceFromSchema<EphemeralEffectSchema>): void;
     afterPrepareData(): void;
 }
-interface EphemeralEffectRuleElement extends RuleElementPF2e<EphemeralEffectSchema>, ModelPropsFromSchema<EphemeralEffectSchema> {
+interface EphemeralEffectRuleElement extends RuleElementPF2e<EphemeralEffectSchema>, ModelPropsFromRESchema<EphemeralEffectSchema> {
 }
 type EphemeralEffectSchema = RuleElementSchema & {
     affects: StringField<"target" | "origin", "target" | "origin", true, false, true>;

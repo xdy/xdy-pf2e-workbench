@@ -1,3 +1,4 @@
+import { SenseData } from "@actor/creature/data.ts";
 import { ActorAttributes, ActorAttributesSource, ActorDetails, ActorDetailsSource, ActorHitPoints, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, BaseActorSourcePF2e, BaseHitPointsSource } from "@actor/data/base.ts";
 import { ActorSizePF2e } from "@actor/data/size.ts";
 import { ValueAndMax, ValueAndMaybeMax } from "@module/data.ts";
@@ -33,7 +34,6 @@ interface ArmyArmorClass {
 interface ArmyTraitsSource extends Required<ActorTraitsSource<string>> {
     languages?: never;
     type: (typeof ARMY_TYPES)[number];
-    senses?: never;
     alignment: Alignment;
 }
 interface ArmyDetailsSource extends Required<ActorDetailsSource> {
@@ -80,6 +80,7 @@ interface ArmyResourcesData extends ArmyResourcesSource {
 }
 interface ArmyTraits extends ArmyTraitsSource, ActorTraitsData<string> {
     size: ActorSizePF2e;
+    senses: SenseData[];
 }
 interface ArmyDetails extends ArmyDetailsSource, ActorDetails {
 }

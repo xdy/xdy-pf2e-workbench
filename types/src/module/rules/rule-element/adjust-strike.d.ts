@@ -3,7 +3,7 @@ import { PredicateField } from "@system/schema-data-fields.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "./ae-like.ts";
 import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
-import { ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 declare class AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema> {
     protected static validActorTypes: ActorType[];
     constructor(data: AdjustStrikeSource, options: RuleElementOptions);
@@ -14,7 +14,7 @@ declare class AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema
     /** Score the trait value. If it's a dice roll, use the average roll, otherwise just use the number */
     static getTraitScore(traitValue: string): number;
 }
-interface AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema>, ModelPropsFromSchema<AdjustStrikeSchema> {
+interface AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema>, ModelPropsFromRESchema<AdjustStrikeSchema> {
 }
 type AdjustStrikeSchema = RuleElementSchema & {
     mode: StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;

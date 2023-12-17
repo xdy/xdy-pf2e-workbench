@@ -1,2 +1,5 @@
 import { SkillActionOptions } from "../index.ts";
-export declare function forceOpen(options: SkillActionOptions): void;
+import { SingleCheckAction } from "@actor/actions/index.js";
+declare function forceOpen(options: SkillActionOptions): void;
+declare const action: SingleCheckAction;
+export { forceOpen as legacy, action };

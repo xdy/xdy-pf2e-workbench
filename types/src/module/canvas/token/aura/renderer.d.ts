@@ -3,7 +3,6 @@ import { ItemTrait } from "@item/base/data/system.ts";
 import { TokenAuraData } from "@scene/token-document/aura/index.ts";
 import type { EffectAreaSquare } from "../../effect-area-square.ts";
 import type { TokenPF2e } from "../index.ts";
-import { IDestroyOptions } from "pixi.js";
 /** Visual rendering of auras emanated by a token's actor */
 declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     #private;
@@ -34,7 +33,7 @@ declare class AuraRenderer extends PIXI.Graphics implements TokenAuraData {
     repositionTexture(): void;
     /** Highlight the affected grid squares of this aura and indicate the radius */
     highlight(): void;
-    destroy(options?: boolean | IDestroyOptions): void;
+    destroy(options?: boolean | PIXI.IDestroyOptions): void;
 }
 interface AuraRendererParams extends Omit<AuraData, "effects" | "traits"> {
     slug: string;

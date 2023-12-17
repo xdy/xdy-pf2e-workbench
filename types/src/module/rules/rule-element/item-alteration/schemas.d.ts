@@ -38,12 +38,12 @@ declare const ITEM_ALTERATION_VALIDATORS: {
         value: NumberField<number, unknown, true, false, boolean>;
     }>;
     "badge-value": ItemAlterationValidator<{
-        itemType: StringField<"effect" | "condition", ItemType, true, false, false>;
+        itemType: StringField<"condition" | "effect", ItemType, true, false, false>;
         mode: StringField<"upgrade" | "override" | "downgrade" | "add" | "remove" | "subtract", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
         value: NumberField<number, unknown, true, false, boolean>;
     }>;
     bulk: ItemAlterationValidator<{
-        itemType: StringField<"armor" | "backpack", ItemType, true, false, false>;
+        itemType: StringField<"armor" | "shield" | "consumable" | "backpack" | "book" | "equipment" | "treasure" | "weapon", ItemType, true, false, false>;
         mode: StringField<"override", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
         value: StrictNumberField<number, number, true, false, false>;
     }>;
@@ -103,7 +103,7 @@ declare const ITEM_ALTERATION_VALIDATORS: {
         value: StringField<string, unknown, true, false, boolean>;
     }>;
     "other-tags": ItemAlterationValidator<{
-        itemType: StringField<"armor" | "shield" | "consumable" | "ancestry" | "class" | "melee" | "action" | "effect" | "affliction" | "background" | "campaignFeature" | "condition" | "deity" | "feat" | "heritage" | "kit" | "lore" | "spell" | "spellcastingEntry" | "backpack" | "book" | "equipment" | "treasure" | "weapon", ItemType, true, false, false>;
+        itemType: StringField<"armor" | "shield" | "consumable" | "ancestry" | "class" | "background" | "action" | "affliction" | "backpack" | "book" | "campaignFeature" | "condition" | "deity" | "effect" | "equipment" | "feat" | "heritage" | "kit" | "lore" | "melee" | "spell" | "spellcastingEntry" | "treasure" | "weapon", ItemType, true, false, false>;
         mode: StringField<"add" | "remove" | "subtract", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
         value: SlugField<true, false, boolean>;
     }>;
@@ -120,7 +120,7 @@ declare const ITEM_ALTERATION_VALIDATORS: {
     traits: ItemAlterationValidator<{
         itemType: StringField<"armor", ItemType, true, false, false>;
         mode: StringField<"add" | "remove" | "subtract", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
-        value: StringField<"arcane" | "divine" | "occult" | "primal" | "auditory" | "healing" | "holy" | "light" | "magical" | "metal" | "plant" | "unholy" | "water" | "wood" | "air" | "earth" | "fire" | "force" | "adjusted" | "alchemical" | "apex" | "artifact" | "clockwork" | "cursed" | "extradimensional" | "intelligent" | "invested" | "aura" | "aquadynamic" | "bulwark" | "comfort" | "companion" | "entrench-melee" | "entrench-ranged" | "flexible" | "focused" | "hindering" | "inscribed" | "laminar" | "noisy" | "ponderous" | "barding", "arcane" | "divine" | "occult" | "primal" | "auditory" | "healing" | "holy" | "light" | "magical" | "metal" | "plant" | "unholy" | "water" | "wood" | "air" | "earth" | "fire" | "force" | "adjusted" | "alchemical" | "apex" | "artifact" | "clockwork" | "cursed" | "extradimensional" | "intelligent" | "invested" | "aura" | "aquadynamic" | "bulwark" | "comfort" | "companion" | "entrench-melee" | "entrench-ranged" | "flexible" | "focused" | "hindering" | "inscribed" | "laminar" | "noisy" | "ponderous" | "barding", true, false, false>;
+        value: StringField<"arcane" | "divine" | "occult" | "primal" | "auditory" | "healing" | "holy" | "light" | "magical" | "metal" | "plant" | "unholy" | "water" | "wood" | "air" | "earth" | "fire" | "force" | "adjusted" | "alchemical" | "apex" | "artifact" | "clockwork" | "cursed" | "extradimensional" | "intelligent" | "invested" | "aquadynamic" | "aura" | "bulwark" | "comfort" | "companion" | "entrench-melee" | "entrench-ranged" | "flexible" | "focused" | "hindering" | "inscribed" | "laminar" | "noisy" | "ponderous" | "barding", "arcane" | "divine" | "occult" | "primal" | "auditory" | "healing" | "holy" | "light" | "magical" | "metal" | "plant" | "unholy" | "water" | "wood" | "air" | "earth" | "fire" | "force" | "adjusted" | "alchemical" | "apex" | "artifact" | "clockwork" | "cursed" | "extradimensional" | "intelligent" | "invested" | "aquadynamic" | "aura" | "bulwark" | "comfort" | "companion" | "entrench-melee" | "entrench-ranged" | "flexible" | "focused" | "hindering" | "inscribed" | "laminar" | "noisy" | "ponderous" | "barding", true, false, false>;
     }>;
 };
 interface AlterationFieldOptions<TSourceProp extends SourceFromSchema<AlterationSchema>> extends DataFieldOptions<TSourceProp, true, false, false> {

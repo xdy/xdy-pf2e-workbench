@@ -117,6 +117,7 @@
                 "Jaws": "Jaws",
                 "LavaFist": "Lava Fist",
                 "Leaf": "Leaf",
+                "Leaves": "Leaves",
                 "Leg": "Leg",
                 "LightningLash": "Lightning Lash",
                 "Mandibles": "Mandibles",
@@ -164,6 +165,10 @@
             },
             "MonstrosityForm": {
                 "ShroudOfFlame": "Shroud of Flame"
+            },
+            "NatureIncarnate": {
+                "GreenMan": "Green Man",
+                "Kaiju": "Kaiju"
             },
             "Note": {
                 "Grab": "You can spend an action immediately after a hit to @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]{Grab} the target",
@@ -1434,6 +1439,7 @@
                 "ThreeActions": "Three Actions",
                 "TwoActions": "Two Actions"
             },
+            "ActivatedItem": "{item} activated",
             "AdjustDegreeOfSuccess": {
                 "Athletics": {
                     "Climb": {
@@ -2025,6 +2031,16 @@
                 "Prompt": "Treat Cards as darts or daggers?"
             },
             "Feat": {
+                "FeyInfluence": {
+                    "Anteater": "Anteater",
+                    "CatSith": "Cat Sith",
+                    "CursedBluebird": "Cursed Bluebird",
+                    "Dryad": "Dryad",
+                    "Faun": "Faun",
+                    "Gremlin": "Gremlin",
+                    "Monarch": "Monarch",
+                    "Unicorn": "Unicorn"
+                },
                 "Forager": {
                     "Note": "While using Survival to Subsist, if you roll any result worse than a success, you get a success. You can also provide for multiple creatures."
                 }
@@ -2654,6 +2670,7 @@
                 "EnergyType": "Select an energy type.",
                 "EvolutionFeat": "Select a first evolution feat.",
                 "Feat": "Select a feat.",
+                "Feature": "Select a feature.",
                 "FirstImplement": "Select a first implement.",
                 "Form": "Select a form.",
                 "Lesson": "Select a lesson.",
@@ -2710,6 +2727,64 @@
                 }
             },
             "Rogue": {
+                "Debilitation": {
+                    "Bloody": {
+                        "Label": "Bloody",
+                        "Note": "The target takes @Damage[3d6[bleed]] damage."
+                    },
+                    "Clumsy": {
+                        "Label": "Clumsy",
+                        "Note": "The target becomes @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1}."
+                    },
+                    "Critical": {
+                        "Label": "Critical",
+                        "Note": "The target attempts a @Check[type:fortitude|dc:resolve(@actor.system.proficiencies.classDCs.rogue.dc)] save against your class DC with the following effects.<hr><p><strong>Critical Success</strong> The target is unaffected.</p><p><strong>Success</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} until the end of your next turn.</p><p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} until the end of your next turn.</p><p><strong>Critical Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed} until the end of your next turn.</p>"
+                    },
+                    "Enfeebled": {
+                        "Label": "Enfeebled",
+                        "Note": "The target becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1}."
+                    },
+                    "Label": "Debilitation",
+                    "OffGuard": {
+                        "Label": "Off-Guard",
+                        "Note": "The target becomes @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard}."
+                    },
+                    "PrecisionDamage": {
+                        "Label": "Precision Damage",
+                        "Note": "The target takes an additional 2d6 precision damage from your attacks. @UUID[Compendium.pf2e.feat-effects.Item.ZZXIUvZqqIxkMfYa]{Effect: Precise Debilitations}"
+                    },
+                    "PreventFlanking": {
+                        "Label": "Prevent Flanking",
+                        "Note": "The target can't flank or contribute to allies' flanking. @UUID[Compendium.pf2e.feat-effects.Item.JUgx48XHMz4QM4Ir]{Effect: Debilitation (No Flanking)}"
+                    },
+                    "PreventReactions": {
+                        "Label": "Prevent Reactions",
+                        "Note": "The target can't use reactions."
+                    },
+                    "PreventStep": {
+                        "Label": "Prevent Step",
+                        "Note": "The target can't Step"
+                    },
+                    "ReduceCover": {
+                        "Label": "Reduce Cover",
+                        "Note": "The target doesn't gain a circumstance bonus to AC from Raising a Shield, lesser cover, or standard cover; it gains a +2 circumstance bonus to AC only from greater cover or Taking Cover."
+                    },
+                    "SecondLabel": "Second Debilitation",
+                    "SpeedPenalty": {
+                        "Label": "Speed Penalty",
+                        "Note": "The target takes a -10-foot status penalty to its Speeds. @UUID[Compendium.pf2e.feat-effects.Item.yBTASi3FvnReAwHy]{Effect: Debilitating Strike}"
+                    },
+                    "Stupefied": {
+                        "Label": "Stupefied",
+                        "Note": "The target is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}"
+                    },
+                    "Title": "Debilitation <span class=\"action-glyph\">f</span>",
+                    "Trigger": "<strong>Trigger</strong> Your Strike hits an off-guard creature and deals damage.",
+                    "Weakness": {
+                        "Label": "Weakness",
+                        "Note": "The target gains weakness 5 to your choice of bludgeoning, piercing, or slashing damage. @UUID[Compendium.pf2e.feat-effects.Item.Rgt9hH3W1oh9dvku]{Effect: Vicious Debilitations}"
+                    }
+                },
                 "DistractingFeint": {
                     "Text": "While a creature is off-guard by your Feint, it also takes a -2 circumstance penalty to Perception checks and Reflex saves. @UUID[Compendium.pf2e.feat-effects.Item.7hRgBo0fRQBxMK7g]{Effect: Distracting Feint}"
                 },
@@ -2839,6 +2914,9 @@
                 "Insight": "Dream of Insight",
                 "Prompt": "Select a dream.",
                 "Voyaging": "Dream of Voyaging"
+            },
+            "SpellEffectTemptFate": {
+                "Note": "If the saving throw's result is a success, it becomes a critical success. If it's a failure, it becomes a critical failure, and the critical failure can't be reduced by abilities that usually reduce critical failure."
             },
             "SpellEffectThermalRemedy": {
                 "BonusVsDisease": "Bonus vs. Disease",
@@ -3096,6 +3174,11 @@
             "Witch": {
                 "Patron": {
                     "Prompt": "Select a patron."
+                },
+                "WitchsArmaments": {
+                    "EldritchNails": "Eldritch Nails",
+                    "IronTeeth": "Iron Teeth",
+                    "LivingHair": "Living Hair"
                 }
             },
             "Wizard": {

@@ -45,8 +45,8 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
      * Create a chat card for this item and either return the message or send it to the chat log. Many cards contain
      * follow-up options for attack rolls, effect application, etc.
      */
-    toMessage(event?: MouseEvent | JQuery.TriggeredEvent, { rollMode, create, data, }?: {
-        rollMode?: RollMode;
+    toMessage(event?: MouseEvent | JQuery.TriggeredEvent, options?: {
+        rollMode?: RollMode | "roll";
         create?: boolean;
         data?: Record<string, unknown>;
     }): Promise<ChatMessagePF2e | undefined>;
@@ -61,6 +61,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     /** Pull the latest system data from the source compendium and replace this item's with it */
     refreshFromCompendium(options?: {
         name?: boolean;
+        notify?: boolean;
     }): Promise<void>;
     getOriginData(): ItemOriginFlag;
     /**

@@ -1,12 +1,12 @@
-import { ActorPF2e, PartyPF2e } from "@actor";
-import { FeatGroup } from "@actor/character/feats.ts";
+import type { ActorPF2e } from "@actor";
+import type { FeatGroup } from "@actor/character/feats.ts";
 import { ItemPF2e } from "@item";
 import { ActionCost, Frequency } from "@item/base/data/index.ts";
-import { UserPF2e } from "@module/user/index.ts";
+import type { UserPF2e } from "@module/user/index.ts";
 import { CampaignFeatureSource, CampaignFeatureSystemData } from "./data.ts";
-import { BehaviorType, KingmakerCategory, KingmakerTrait } from "./types.ts";
+import type { BehaviorType, KingmakerCategory, KingmakerTrait } from "./types.ts";
 declare class CampaignFeaturePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
-    group: FeatGroup<PartyPF2e, CampaignFeaturePF2e> | null;
+    group: FeatGroup<ActorPF2e, CampaignFeaturePF2e> | null;
     grants: CampaignFeaturePF2e[];
     behavior: BehaviorType;
     levelLabel: string;

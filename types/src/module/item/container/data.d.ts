@@ -7,6 +7,9 @@ interface ContainerSystemSource extends Investable<PhysicalSystemSource> {
     stowing: boolean;
     bulk: ContainerBulkSource;
     collapsed: boolean;
+    usage: {
+        value: string;
+    };
 }
 interface ContainerBulkSource {
     value: number;
@@ -16,7 +19,8 @@ interface ContainerBulkSource {
 }
 interface ContainerSystemData extends Omit<ContainerSystemSource, "bulk" | "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<Investable<PhysicalSystemData>, "traits"> {
     bulk: ContainerBulkData;
+    stackGroup: null;
 }
 interface ContainerBulkData extends ContainerBulkSource, BulkData {
 }
-export type { ContainerSource, ContainerBulkData, ContainerSystemData };
+export type { ContainerBulkData, ContainerSource, ContainerSystemData };

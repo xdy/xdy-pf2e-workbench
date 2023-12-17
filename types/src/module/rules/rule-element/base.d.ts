@@ -18,6 +18,7 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
     .DataModel<ItemPF2e<ActorPF2e>, TSchema> {
     #private;
     protected static _schema: LaxSchemaField<RuleElementSchema> | undefined;
+    label: string;
     sourceIndex: number | null;
     protected suppressWarnings: boolean;
     /** A list of actor types on which this rule element can operate (all unless overridden) */

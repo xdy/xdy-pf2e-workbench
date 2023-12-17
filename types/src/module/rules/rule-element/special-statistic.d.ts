@@ -7,7 +7,7 @@ declare class SpecialStatisticRuleElement extends RuleElementPF2e<StatisticRESch
     static defineSchema(): StatisticRESchema;
     afterPrepareData(): void;
 }
-interface SpecialStatisticRuleElement extends RuleElementPF2e<StatisticRESchema>, ModelPropsFromSchema<StatisticRESchema> {
+interface SpecialStatisticRuleElement extends RuleElementPF2e<StatisticRESchema>, Omit<ModelPropsFromSchema<StatisticRESchema>, "label"> {
     slug: string;
 }
 type StatisticRESchema = RuleElementSchema & {

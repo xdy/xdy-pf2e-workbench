@@ -1,7 +1,7 @@
 import { ActorType } from "@actor/data/index.ts";
 import type { ArrayField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField } from "./data.ts";
-import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
+import { RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema } from "./data.ts";
 /**
  * Rule element to implement fast healing and regeneration.
  * Creates a chat card every round of combat.
@@ -20,7 +20,7 @@ type FastHealingRuleSchema = RuleElementSchema & {
     details: StringField<string, string, false, true, true>;
     deactivatedBy: ArrayField<StringField<string, string, true, false, false>, string[], string[], false, false, false>;
 };
-interface FastHealingRuleElement extends RuleElementPF2e<FastHealingRuleSchema>, ModelPropsFromSchema<FastHealingRuleSchema> {
+interface FastHealingRuleElement extends RuleElementPF2e<FastHealingRuleSchema>, ModelPropsFromRESchema<FastHealingRuleSchema> {
 }
 type FastHealingType = "fast-healing" | "regeneration";
 type FastHealingSource = SourceFromSchema<FastHealingRuleSchema>;

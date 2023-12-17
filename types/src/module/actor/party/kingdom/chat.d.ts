@@ -1,4 +1,4 @@
-import { ChatMessagePF2e } from "@module/chat-message/document.ts";
+import type { ChatMessagePF2e } from "@module/chat-message/document.ts";
 /** Handler for kingdom chat messages. Does nothing if there is no kingdom */
 export declare function handleKingdomChatMessageEvents(options: KingdomChatMessageParams): Promise<void>;
 interface KingdomChatMessageParams {

@@ -10,7 +10,7 @@ import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ZeroToFour } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
-import { ActorSheetPF2e } from "../sheet/base.ts";
+import { ActorSheetPF2e, SheetClickActionHandlers } from "../sheet/base.ts";
 import { CreatureConfig } from "./config.ts";
 import { AbilityData, CreatureSystemData, SaveData, SkillData } from "./data.ts";
 /**
@@ -28,6 +28,7 @@ declare abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Ac
     /** Get the font-awesome icon used to display a certain level of skill proficiency */
     protected getProficiencyIcon(level: ZeroToFour): string;
     activateListeners($html: JQuery): void;
+    protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
     /** Adds support for moving spells between spell levels, spell collections, and spell preparation */
     protected _onSortItem(event: DragEvent, itemSource: ItemSourcePF2e): Promise<CollectionValue<TActor["items"]>[]>;
     /** Handle dragging spells onto spell slots. */

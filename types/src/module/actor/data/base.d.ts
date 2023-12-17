@@ -126,7 +126,9 @@ type GangUpCircumstance =
 /** Requires at least `number` allies within melee reach of the target */
 number
 /** Requires the actor's animal companion to be adjacent to the target */
- | "animal-companion";
+ | "animal-companion"
+/** The Gang Up rogue feat allows allies to flank with the gang-upper */
+ | true;
 /** Data related to actor hitpoints. */
 type HitPointsStatistic = StatisticModifier & ActorHitPoints;
 interface ActorTraitsSource<TTrait extends string> {
