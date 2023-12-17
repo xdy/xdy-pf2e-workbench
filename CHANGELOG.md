@@ -1,3 +1,10 @@
+## [5.40.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.0...v5.40.1) (2023-12-17)
+
+
+### Bug Fixes
+
+* Fallout from updating types, fixes problem with updating actors. ([9dddc3e](https://github.com/xdy/xdy-pf2e-workbench/commit/9dddc3ea563589dc5e15d1874e65dd7bb53a022f))
+
 # [5.40.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.39.2...v5.40.0) (2023-12-17)
 
 
