@@ -1,3 +1,10 @@
+# [5.40.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.39.2...v5.40.0) (2023-12-17)
+
+
+### Features
+
+* Support spell variants when autorolling damage for spells. ([56a0342](https://github.com/xdy/xdy-pf2e-workbench/commit/56a0342ad27ba4f2ea956a7dc4929dc7cebf6621))
+
 ## [5.39.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.39.1...v5.39.2) (2023-12-17)
 
 
