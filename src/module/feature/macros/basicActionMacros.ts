@@ -638,10 +638,10 @@ export function basicActionMacros() {
             return (
                 showUnusable ||
                 x.actionType !== "skill_trained" ||
-                (x.actionType === "skill_trained" &&
-                    (["npc", "familiar"].includes(selectedActor.type) ||
-                        hasSkill ||
-                        (hasAltSkill && hasAltSkillRequiredFeat)))
+                (x.actionType === "skill_trained" && ["npc", "familiar"].includes(selectedActor.type)) ||
+                selectedActor.itemTypes.feat.find((feat) => feat.slug === "clever-improviser") ||
+                hasSkill ||
+                (hasAltSkill && hasAltSkillRequiredFeat)
             );
         })
         .filter((m) => {
