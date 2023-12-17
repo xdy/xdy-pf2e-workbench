@@ -449,8 +449,8 @@
         "name": "... and automatically start Hero Point Handler."
       },
       "housepatcher": {
-        "hint": "(REALLY EXPERIMENTAL) Enter a json array to patch system compendiums. See housepatcher.md on the github for documentation.",
-        "name": "(REALLY EXPERIMENTAL) Housepatcher (patches in house rules). Requires refresh (f5) after changing.",
+        "hint": "(CURRENTLY BROKEN, REALLY EXPERIMENTAL) Enter a json array to patch system compendiums. See housepatcher.md on the github for documentation.",
+        "name": "(CURRENTLY BROKEN, REALLY EXPERIMENTAL) Housepatcher (patches in house rules). Requires refresh (f5) after changing.",
         "notification": "Housepatcher: Applying {count} house rules to items in system compendiums."
       },
       "houseRulesSettings": {
