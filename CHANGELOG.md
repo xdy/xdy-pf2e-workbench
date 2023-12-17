@@ -1,3 +1,10 @@
+## [5.38.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.38.3...v5.38.4) (2023-12-17)
+
+
+### Bug Fixes
+
+* BAM: Show Treat Wounds if Medicine is trained or Nature is trained and the character has the feat Natural Medicine. ([075a4c0](https://github.com/xdy/xdy-pf2e-workbench/commit/075a4c0ebf83d24bf97543c6434bebbf42a7adc2)), closes [#1124](https://github.com/xdy/xdy-pf2e-workbench/issues/1124)
+
 ## [5.38.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.38.2...v5.38.3) (2023-12-17)
 
 
