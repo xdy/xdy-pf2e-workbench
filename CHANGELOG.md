@@ -1,3 +1,10 @@
+# [5.39.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.38.4...v5.39.0) (2023-12-17)
+
+
+### Features
+
+* BAM: When hiding unusable actions, consider the Clever Improviser feat. ([f93ac81](https://github.com/xdy/xdy-pf2e-workbench/commit/f93ac81aa7f240ecc2e643da42ddecb2482f4333)), closes [#1110](https://github.com/xdy/xdy-pf2e-workbench/issues/1110)
+
 ## [5.38.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.38.3...v5.38.4) (2023-12-17)
 
 
