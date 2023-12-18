@@ -1,3 +1,11 @@
+## [5.40.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.2...v5.40.3) (2023-12-18)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([263078b](https://github.com/xdy/xdy-pf2e-workbench/commit/263078b15ce370e0bae3e341561c1024bfadc135))
+* Yet another try at making the wounded/dying handling less wonky. Now with extra logging. (Search for dyingLastApplied in the log if you're trying to figure out what goes wrong.) ([16784fb](https://github.com/xdy/xdy-pf2e-workbench/commit/16784fb9baeca31fc5e3ad78158844abc4501054))
+
 ## [5.40.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.1...v5.40.2) (2023-12-18)
 
 
