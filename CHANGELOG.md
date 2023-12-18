@@ -1,3 +1,11 @@
+## [5.40.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.1...v5.40.2) (2023-12-18)
+
+
+### Bug Fixes
+
+* Revert the latest dying cleanup as it broke handling of dying for some. ([e92de1b](https://github.com/xdy/xdy-pf2e-workbench/commit/e92de1bf87921af984c4582d3fcf614a5d826b97)), closes [#1160](https://github.com/xdy/xdy-pf2e-workbench/issues/1160)
+* Revert the latest dying cleanup as it broke handling of dying for some. ([5f1d856](https://github.com/xdy/xdy-pf2e-workbench/commit/5f1d8568bce76ae760241ab1fadf48e2983344e0)), closes [#1160](https://github.com/xdy/xdy-pf2e-workbench/issues/1160)
+
 ## [5.40.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.0...v5.40.1) (2023-12-17)
 
 
