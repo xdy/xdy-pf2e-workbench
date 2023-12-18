@@ -97,28 +97,25 @@ function collectPrivateCastingValues(message: ChatMessagePF2e) {
     return { hasCastingId, nonNpcCasting, npcCastingAlways, npcCastingIfCtrl };
 }
 
-export async function handleDying(dyingCounter: number, originalDyingCounter: number, actor) {
-    // Ignore this if it occurs within last few seconds of the last time we applied dying to avoid race conditions
-    const now = Date.now();
-    const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
-    const tooSoon = flag?.between(now - 4000, now);
-    if (!tooSoon) {
-        const defeated = actor.combatant?.defeated;
-        const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !defeated;
-        const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !defeated;
-        if (shouldDie) {
-            // Dead, not dying, so clear the flag.
-            await actor.unsetFlag(MODULENAME, "dyingLastApplied");
-            await actor.combatant?.toggleDefeated();
-        } else if (shouldBecomeDying) {
-            await actor.setFlag(MODULENAME, "dyingLastApplied", Date.now());
-            await actor.increaseCondition("dying", {
+export function handleDying(dyingCounter: number, originalDyingCounter: number, actor) {
+    // Can't await, so do the math.
+    const defeated = actor.combatant?.defeated;
+    const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !defeated;
+    const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !defeated;
+    if (shouldDie) {
+        actor.combatant?.toggleDefeated().then();
+        // Dead, not dying, so clear the flag.
+        actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
+    } else if (shouldBecomeDying) {
+        actor
+            .increaseCondition("dying", {
                 value: originalDyingCounter + dyingCounter,
-            });
-        } else {
-            await actor.unsetFlag(MODULENAME, "dyingLastApplied");
-            await actor.decreaseCondition("dying", { forceRemove: true });
-        }
+            })
+            .then();
+        actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
+    } else {
+        actor.decreaseCondition("dying", { forceRemove: true }).then();
+        actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
     }
 }
 
@@ -148,26 +145,34 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
     if (!String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no")) {
         const actor = message.actor;
         if (actor && shouldIHandleThis(actor)) {
+            const now = Date.now();
+            const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
+
             if (message.content?.includes("damage-taken")) {
-                const dyingOption = String(
-                    game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
-                );
-                const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
-                let dyingCounter = 0;
-                if (!dyingOption.startsWith("no") && originalDyingCounter > 0) {
-                    const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption);
+                // Ignore this if it occurs within last few seconds of the last time we applied dying
+                // @ts-ignore
+                const notTooSoon = !flag?.between(now - 4000, now);
+                if (notTooSoon) {
+                    const dyingOption = String(
+                        game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
+                    );
+                    const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
+                    let dyingCounter = 0;
+                    if (!dyingOption.startsWith("no") && originalDyingCounter > 0) {
+                        const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption);
 
-                    if (dyingOption.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
-                        dyingCounter = dyingCounter + 1;
-
-                        if (wasCritical) {
+                        if (
+                            dyingOption.endsWith("ForCharacters")
+                                ? ["character", "familiar"].includes(actor.type)
+                                : true
+                        ) {
                             dyingCounter = dyingCounter + 1;
+
+                            if (wasCritical) {
+                                dyingCounter = dyingCounter + 1;
+                            }
                         }
-                    }
-                    const effectsToCreate: any[] = [];
-                    handleDying(dyingCounter, originalDyingCounter, actor).then();
-                    if (effectsToCreate.length > 0) {
-                        actor.createEmbeddedDocuments("Item", effectsToCreate);
+                        handleDying(dyingCounter, originalDyingCounter, actor);
                     }
                 }
             }

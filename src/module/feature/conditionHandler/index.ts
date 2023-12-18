@@ -254,7 +254,7 @@ export async function handleDyingOnZeroHP(
         }
     }
 
-    await handleDying(dyingCounter, 0, actor);
+    handleDying(dyingCounter, 0, actor, effectsToCreate);
 
     if (effectsToCreate.length > 0) {
         await actor.createEmbeddedDocuments("Item", effectsToCreate);

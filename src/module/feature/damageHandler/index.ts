@@ -204,7 +204,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
     }
 }
 
-export async function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
+export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
     const flavor = message.flavor;
     const token = message.token;
     if (
@@ -250,7 +250,7 @@ export async function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
                 break;
         }
         if (originalDyingCounter > 0 || dyingCounter !== 0) {
-            await handleDying(dyingCounter, originalDyingCounter, actor);
+            handleDying(dyingCounter, originalDyingCounter, actor);
 
             const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
             ChatMessage.create({
