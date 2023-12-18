@@ -37,7 +37,7 @@
     "@types/jquery": "^3.5.29",
     "@types/jsdom": "^21.1.6",
     "@types/luxon": "^3.3.7",
-    "@types/node": "^18.19.3",
+    "@types/node": "20.10.4",
     "@types/prompts": "^2.4.9",
     "@types/sortablejs": "^1.15.7",
     "@types/tooltipster": "^0.0.35",
@@ -72,7 +72,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vite-plugin-checker": "^0.6.2",
-    "vite-plugin-static-copy": "^0.17.1",
+    "vite-plugin-static-copy": "^1.0.0",
     "vite-tsconfig-paths": "^4.2.2",
     "yargs": "^17.7.2"
   },
@@ -88,7 +88,8 @@
     "prosemirror-transform": "^1.8.0",
     "prosemirror-view": "^1.32.6",
     "remeda": "^1.30.0",
-    "sortablejs": "^1.15.1"
+    "sortablejs": "^1.15.1",
+    "uuid": "^9.0.1"
   },
   "homepage": "https://github.com/xdy/xdy-pf2e-workbench",
   "repository": {

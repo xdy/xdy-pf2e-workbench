@@ -11,9 +11,10 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
+    "noErrorTruncation": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
@@ -64,7 +65,7 @@
     "strictFunctionTypes": false,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "es2022",
+    "target": "ES2022",
     "typeRoots": [
       "node_modules/@types",
       "types/types/foundry"
