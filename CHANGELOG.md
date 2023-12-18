@@ -1,3 +1,10 @@
+## [5.40.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.3...v5.40.4) (2023-12-18)
+
+
+### Bug Fixes
+
+* Try to include the latest changelog, not the previous one. ([b8e5aa9](https://github.com/xdy/xdy-pf2e-workbench/commit/b8e5aa91dbf75b507d53d066114112b36e208fa5))
+
 ## [5.40.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.2...v5.40.3) (2023-12-18)
 
 
