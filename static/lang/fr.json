@@ -149,7 +149,7 @@
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Tour de magie",
-        "firstPart": "{tokenName} vient de lancer un {type} de la tradition <strong>{traditionString}</strong>",
+        "firstPart": "{tokenName} vient de lancer un {type} de la tradition <strong>{traditionString}</strong>. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "hint": "S'il est lancé en privé, cela poste néanmoins un message public pour annoncer qu'un sort a été lancé À MOINS que vous ne pressiez également SHIFT ainsi que CTRL lorsque vous incantez.",
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
         "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
@@ -188,7 +188,7 @@
         "add": "Ajouter",
         "addedFor": "1 Point d'héroïsme ajouté à {name}",
         "addedToForAll": "{heroPoints} Point(s) d'héroïsme ajouté(s) à tous",
-        "addOne": "<b>Section 2</b> - Ajouter un point d'héroïsme au personnage choisi de ceux (par défaut à un personnage aléatoire lorsque le minuteur est à 0)",
+        "addOne": "<b>Section 2</b> - Ajouter un point d'héroïsme au personnage choisi des membres actuels du groupe actif (par défaut à un personnage aléatoire lorsque le décompte expire)",
         "all": "Tous",
         "defaultTimeoutMinutes": 60,
         "doWhat": "<b>Section 1</b> - Choisissez quoi faire pour les points d'héroïsme de <em>tous</em> les personnages avec les valeurs suivantes",
@@ -523,8 +523,8 @@
         "hint": "Permet d'appliquer les réglages ci-dessus, que la cible corresponde ou non au jeton sélectionné. (Surtout utile si l'on n'utilise pas le ciblage/l'automatisation)."
       },
       "reminderBreathWeaponHidden": {
-        "name": "... mais cache l'icône aux joueurs.",
-        "hint": "Cochez cette case pour cacher les rappels aux joueurs."
+        "name": "... mais cache les rappel pour les non membres du groupe.",
+        "hint": "Cochez pour cacher le rappel si lancé par un non membre du groupe."
       },
       "heropointHandlerNotification": {
         "name": "... et afficher une notification lorsqu'un point d'héroïsme est distribué.",
