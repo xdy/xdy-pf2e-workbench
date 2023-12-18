@@ -264,18 +264,13 @@ export async function handleDyingOnZeroHP(
 }
 
 export async function autoRemoveDyingAtGreaterThanZeroHp(actor: ActorPF2e, hpAboveZero: boolean): Promise<boolean> {
-    let dying = actor.getCondition("dying");
+    const dying = actor.getCondition("dying");
     if (shouldIHandleThis(actor) && dying && !dying.isLocked && hpAboveZero) {
         const value = dying?.value || 0;
         if (dying && value > 0 && !dying.isLocked) {
             const option = String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP"));
             if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
-                for (let i = 0; i < Math.max(1, value); i++) {
-                    dying = actor.getCondition("dying");
-                    if (dying && !dying.isLocked) {
-                        await actor.decreaseCondition("dying");
-                    }
-                }
+                handleDying(0, 0, actor);
             }
         }
     }

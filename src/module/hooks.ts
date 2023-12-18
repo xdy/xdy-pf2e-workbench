@@ -103,19 +103,35 @@ export function handleDying(dyingCounter: number, originalDyingCounter: number, 
     const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !defeated;
     const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !defeated;
     if (shouldDie) {
-        actor.combatant?.toggleDefeated().then();
-        // Dead, not dying, so clear the flag.
-        actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
+        actor.combatant?.toggleDefeated().then(() => {
+            // Dead, not dying, so clear the flag.
+            actor
+                .unsetFlag(MODULENAME, "dyingLastApplied")
+                .then(() => console.log("dyingLastApplied cleared because dead"));
+        });
     } else if (shouldBecomeDying) {
         actor
             .increaseCondition("dying", {
                 value: originalDyingCounter + dyingCounter,
             })
-            .then();
-        actor.setFlag(MODULENAME, "dyingLastApplied", Date.now()).then();
+            .then(() => {
+                const now = Date.now();
+                return actor
+                    .setFlag(MODULENAME, "dyingLastApplied", now)
+                    .then(() =>
+                        console.log(
+                            `dyingLastApplied set to ${now}, dyingCounter was ${originalDyingCounter} is ${
+                                originalDyingCounter + dyingCounter
+                            }`,
+                        ),
+                    );
+            });
     } else {
-        actor.decreaseCondition("dying", { forceRemove: true }).then();
-        actor.unsetFlag(MODULENAME, "dyingLastApplied").then();
+        actor.decreaseCondition("dying", { forceRemove: true }).then(() => {
+            return actor
+                .unsetFlag(MODULENAME, "dyingLastApplied")
+                .then(() => console.log("dyingLastApplied cleared because not dying"));
+        });
     }
 }
 
@@ -145,10 +161,10 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
     if (!String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no")) {
         const actor = message.actor;
         if (actor && shouldIHandleThis(actor)) {
-            const now = Date.now();
-            const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || Date.now();
-
             if (message.content?.includes("damage-taken")) {
+                const now = Date.now();
+                const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || now;
+                console.log(`dyingLastApplied is ${flag}, now is ${now}`);
                 // Ignore this if it occurs within last few seconds of the last time we applied dying
                 // @ts-ignore
                 const notTooSoon = !flag?.between(now - 4000, now);
@@ -172,6 +188,10 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
                                 dyingCounter = dyingCounter + 1;
                             }
                         }
+                        console.log(
+                            `Before handleDying dyingLastApplied is ${flag}, now is ${now}, dyingCounter was ${originalDyingCounter} will increase by ${dyingCounter}`,
+                        );
+
                         handleDying(dyingCounter, originalDyingCounter, actor);
                     }
                 }
