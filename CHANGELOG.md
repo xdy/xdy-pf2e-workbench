@@ -1,3 +1,10 @@
+# [5.41.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.6...v5.41.0) (2023-12-23)
+
+
+### Features
+
+* Change the 'Cast spell privately' feature so it doesn't cast privately if a party member knows that spell. ([15bc940](https://github.com/xdy/xdy-pf2e-workbench/commit/15bc940d779d6c633d0ea8ef51c9bd7044a7ac5f)), closes [#1174](https://github.com/xdy/xdy-pf2e-workbench/issues/1174)
+
 ## [5.40.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.5...v5.40.6) (2023-12-20)
 
 
