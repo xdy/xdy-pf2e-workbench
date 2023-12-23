@@ -99,6 +99,27 @@ export function damageCardExpand(message: ChatMessagePF2e, html: JQuery) {
 }
 
 export async function castPrivateSpell(data, message: ChatMessagePF2e) {
+    const spellUUID = <string>message.flags?.pf2e.origin?.uuid;
+    const origin: any = await fromUuid(spellUUID);
+
+    if (
+        new Set(
+            game.actors?.party?.members
+                // I assume that if you have a spell item it's because it's either prepared or in your repertoire,
+                ?.map((m) => m.items.filter((i) => i.isOfType("spell")))
+                ?.map((s) => s.filter((i) => i.slug === origin.slug))
+                .flat(),
+        )?.size > 0
+    ) {
+        // // If a party member knows the spell casting privately is pointless
+        // ChatMessage.create({
+        //     content: game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.knownSpell`),
+        //     whisper: message.user ? [message.user.id] : [],
+        // }).then();
+
+        return;
+    }
+
     data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
     data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
     if (!game.user.isGM) {
@@ -119,8 +140,7 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
         }
         const type = message.flags?.pf2e.origin?.type ?? "spell";
         const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
-        const spellUUID = <string>message.flags?.pf2e.origin?.uuid;
-        const origin: any = await fromUuid(spellUUID);
+
         let content = "";
         if (origin) {
             content = game.i18n.localize(
