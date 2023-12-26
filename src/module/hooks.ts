@@ -1,6 +1,7 @@
 import {
     foundryGetProperty,
     isActuallyDamageRoll,
+    isFirstGM,
     logDebug,
     logInfo,
     pf2eDeepClone,
@@ -97,11 +98,15 @@ function collectPrivateCastingValues(message: ChatMessagePF2e) {
     return { hasCastingId, nonNpcCasting, npcCastingAlways, npcCastingIfCtrl };
 }
 
-export function handleDying(dyingCounter: number, originalDyingCounter: number, actor) {
+export function handleDying(
+    dyingCounter: number,
+    originalDyingCounter: number,
+    actor,
+    isDefeated: any = actor.combatant?.defeated,
+) {
     // Can't await, so do the math.
-    const defeated = actor.combatant?.defeated;
-    const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !defeated;
-    const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !defeated;
+    const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !isDefeated;
+    const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !isDefeated;
     if (shouldDie) {
         actor.combatant?.toggleDefeated().then(() => {
             // Dead, not dying, so clear the flag.
@@ -329,6 +334,10 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
 export async function updateItemHook(_item: ItemPF2e, _update: any) {}
 
 export async function deleteItemHook(item: ItemPF2e, _options: {}) {
+    if (isFirstGM() && item.slug === "dying" && item.parent) {
+        handleDying(0, 0, item.parent, false);
+    }
+
     if (
         game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
         game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")
@@ -399,7 +408,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
                 actor.type === CHARACTER_TYPE) ||
                 (String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HP" &&
                     [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
-        if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
+        if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") && TODO FORTSÄTT HÄR item.actor.hasCondition("unconscious")) {
             handleDyingOnZeroHP(actor, pf2eDeepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
                 logDebug("Workbench increaseDyingOnZeroHP complete");
                 if (hpRaisedAbove0) {
