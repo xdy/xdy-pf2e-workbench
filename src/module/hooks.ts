@@ -408,7 +408,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
                 actor.type === CHARACTER_TYPE) ||
                 (String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HP" &&
                     [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
-        if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") && TODO FORTSÄTT HÄR item.actor.hasCondition("unconscious")) {
+        if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
             handleDyingOnZeroHP(actor, pf2eDeepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
                 logDebug("Workbench increaseDyingOnZeroHP complete");
                 if (hpRaisedAbove0) {
