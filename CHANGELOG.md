@@ -1,3 +1,10 @@
+# [5.43.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.42.0...v5.43.0) (2023-12-27)
+
+
+### Features
+
+* Change private spell casting to have a dropdown with none, nonAllies, nonPartymembers and npcs as options for who should always cast privately. (Partymembers effectively can't cast privately as the spell is revealed if any partymember knows it.) ([fc0e5d5](https://github.com/xdy/xdy-pf2e-workbench/commit/fc0e5d502f15c245f64065d434e0440e767d4c65)), closes [#1068](https://github.com/xdy/xdy-pf2e-workbench/issues/1068)
+
 # [5.42.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.41.2...v5.42.0) (2023-12-27)
 
 
