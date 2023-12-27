@@ -64,7 +64,7 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
         proceed = reminderTargeting(message);
     }
 
-    if (String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "cancelAttack") {
+    if (proceed && String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "cancelAttack") {
         proceed = reminderCannotAttack(message, true);
     }
 
@@ -77,7 +77,7 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     ) {
         castPrivateSpell(data, message).then();
     }
-
+ 
     return proceed;
 };
 
