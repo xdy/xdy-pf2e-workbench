@@ -1,3 +1,10 @@
+## [5.43.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.43.0...v5.43.1) (2023-12-27)
+
+
+### Bug Fixes
+
+* As per PC1 page 214 shields are normally strapped, so, change the dropping held items on becoming unconscious feature so that shields and the items attached to them are not dropped, instead they're just set to not be held in any hands (i.e. worn.) ([44fe01d](https://github.com/xdy/xdy-pf2e-workbench/commit/44fe01d08bb8850e3b4acab2ab24162dfa6ce600)), closes [#1079](https://github.com/xdy/xdy-pf2e-workbench/issues/1079)
+
 # [5.43.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.42.0...v5.43.0) (2023-12-27)
 
 
