@@ -1,3 +1,11 @@
+## [5.41.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.41.0...v5.41.1) (2023-12-27)
+
+
+### Bug Fixes
+
+* Better handling when dying is removed manually. ([c65f0cf](https://github.com/xdy/xdy-pf2e-workbench/commit/c65f0cfcff67be83296961496b0c006737307884)), closes [#1172](https://github.com/xdy/xdy-pf2e-workbench/issues/1172)
+* Keeping up with the Macro Faeries. ([a142b95](https://github.com/xdy/xdy-pf2e-workbench/commit/a142b958af8ed7cd264a05aab26f6038361d4645))
+
 # [5.41.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.40.6...v5.41.0) (2023-12-23)
 
 
