@@ -1,3 +1,10 @@
+# [5.42.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.41.2...v5.42.0) (2023-12-27)
+
+
+### Features
+
+* BAM: Changed Climb, Force Open, Jump (Long), Lie, Request and Swim to use new style actions. Changed minimum and verified pf2e version to 5.11.5 ([a88d15f](https://github.com/xdy/xdy-pf2e-workbench/commit/a88d15fc83c2f9350ccfd32b98ace5b7c4319060))
+
 ## [5.41.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.41.1...v5.41.2) (2023-12-27)
 
 
