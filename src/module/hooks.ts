@@ -77,7 +77,7 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     ) {
         castPrivateSpell(data, message).then();
     }
- 
+
     return proceed;
 };
 

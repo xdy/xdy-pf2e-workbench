@@ -179,6 +179,7 @@ export function basicActionMacros() {
             icon: "icons/skills/movement/feet-winged-boots-brown.webp",
         },
         {
+            replacedWith: "climb",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Climb`),
             skill: "Athletics",
@@ -313,6 +314,7 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/spells/favorable-review.webp",
         },
         {
+            replacedWith: "force-open",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.ForceOpen`),
             skill: "Athletics",
@@ -358,6 +360,7 @@ export function basicActionMacros() {
             icon: "icons/skills/movement/arrows-up-trio-red.webp",
         },
         {
+            replacedWith: "long-jump",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.JumpLong`),
             skill: "Athletics",
@@ -365,6 +368,7 @@ export function basicActionMacros() {
             icon: "icons/skills/movement/figure-running-gray.webp",
         },
         {
+            replacedWith: "lie",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Lie`),
             skill: "Deception",
@@ -440,6 +444,7 @@ export function basicActionMacros() {
             icon: "icons/sundries/gaming/chess-pawn-white-pink.webp",
         },
         {
+            replacedWith: "request",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Request`),
             skill: "Diplomacy",
@@ -517,6 +522,7 @@ export function basicActionMacros() {
             icon: "icons/environment/wilderness/camp-improvised.webp",
         },
         {
+            replacedWith: "swim",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Swim`),
             skill: "Athletics",
