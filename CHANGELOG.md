@@ -1,3 +1,10 @@
+## [5.41.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.41.1...v5.41.2) (2023-12-27)
+
+
+### Bug Fixes
+
+* Canceling attacks if targeting reminder option is set to do that should work again. ([6e2660a](https://github.com/xdy/xdy-pf2e-workbench/commit/6e2660ad9d4698702109648eda10e49c6c5fe5ea)), closes [#1175](https://github.com/xdy/xdy-pf2e-workbench/issues/1175)
+
 ## [5.41.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.41.0...v5.41.1) (2023-12-27)
 
 
