@@ -57,6 +57,7 @@ import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import { CreaturePF2e } from "@actor/creature/document.js";
 import { CheckRoll } from "@module/system/check/roll.js";
+import { PhysicalItemPF2e } from "@item/physical/document.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;
@@ -302,15 +303,14 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
 }
 
 function dropHeldItemsOnBecomingUnconscious(actor) {
-    const items = actor.items.filter((item) => {
-        return (
-            // Buckler is excluded because it is strapped to the arm. Other things may also be strapped to an arm, but I have no way of knowing that.
-            item.isHeld && item.handsHeld > 0 && item.system.equipped.carryType === "held" && item.slug !== "buckler"
-        );
-    });
+    const items = <PhysicalItemPF2e[]>actor.items.filter((i) => i.isHeld);
     if (items.length > 0) {
         for (const item of items) {
-            actor.adjustCarryType(item, { carryType: "dropped", handsHeld: 0, inSlot: false });
+            if (item.type === "shield" || item.traits.has("attached-to-shield")) {
+                actor.adjustCarryType(item, { carryType: "worn", handsHeld: 0, inSlot: false });
+            } else {
+                actor.adjustCarryType(item, { carryType: "dropped", handsHeld: 0, inSlot: false });
+            }
         }
         const message = game.i18n.format(`${MODULENAME}.SETTINGS.dropHeldItemsOnBecomingUnconscious.message`, {
             name: game?.scenes?.current?.tokens?.find((t) => t.actor?.id === actor.id)?.name ?? actor.name,

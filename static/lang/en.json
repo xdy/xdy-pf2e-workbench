@@ -196,9 +196,9 @@
         "nonCollapsedDefault": "Expanded by default, click title to collapse."
       },
       "dropHeldItemsOnBecomingUnconscious": {
-        "hint": "Characters automatically drop held items on becoming unconscious.",
+        "hint": "Characters automatically drop held items on becoming unconscious (except shields, that become worn instead of held).",
         "name": "Characters automatically drop held items on becoming unconscious.",
-        "message": "{name} dropped: {items}"
+        "message": "{name} lost their grip on: {items}"
       },
       "autoExpandDamageRolls": {
         "collapsedAll": "All damage rolls collapse (default foundry).",
