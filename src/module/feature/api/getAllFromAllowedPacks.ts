@@ -13,6 +13,17 @@ interface GetAllFromAllowedPacksParams {
     fetch?: boolean;
 }
 
+/**
+ * Retrieves all items from allowed packs based on the provided parameters.
+ *
+ * @param {GetAllFromAllowedPacksParams} [params] - Optional parameters to customize the retrieval.
+ * @param {string} [params.type="equipment"] - The type of items to retrieve.
+ * @param {string[]} [params.fields=[]] - The fields to include in the retrieved items.
+ * @param {Function} [params.filter=null] - A filter function to apply to the retrieved items.
+ * @param {boolean} [params.strictSourcing=true] - Whether to apply strict sourcing rules.
+ * @param {boolean} [params.fetch=false] - Whether to fetch the full documents of the retrieved items.
+ * @return {any[]} - An array of the retrieved items.
+ */
 export async function getAllFromAllowedPacks({
     type = "equipment",
     fields = [],

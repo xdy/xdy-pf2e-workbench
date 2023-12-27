@@ -134,6 +134,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
+        getAllFromAllowedPacks: 
 ```
 
 * New Keybinds in Configure Controls
@@ -189,8 +190,6 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
       need to reimport it manually.
     * Customizable isSpellAvailable. This macro can be used to check if a spell is available for an actor.
       See https://discord.com/channels/880968862240239708/880969304365994034/1161188968424018020
-    * Customizable getAllFromAllowedPacks. This macro can be used to get all items from allowed packs.
-      See https://discord.com/channels/880968862240239708/1116034857907273832/1164695510158946305
 * There are a few more compendiums included with this module with assorted internal utility macros and items that do not
   need to be imported, as indicated by their labels all ending with 'do not import'
 
