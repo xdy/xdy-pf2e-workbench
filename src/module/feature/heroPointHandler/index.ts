@@ -105,7 +105,7 @@ export async function heroPointHandler(state: HPHState) {
 
     const title: any = `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.title`)} (${
         remainingMinutes
-            ? remainingMinutes + " " + game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.minutesLeft`)
+            ? remainingMinutes + " " + game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.minutesLeft`)
             : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noRunningTimer`)
     })`;
 

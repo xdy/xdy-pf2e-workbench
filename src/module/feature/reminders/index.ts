@@ -37,7 +37,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                             expiry: "turn-start",
                         },
                         description: {
-                            value: `<h2>${game.i18n.format(`${MODULENAME}.SETTINGS.reminderBreathWeapon.name`)}</h2>`,
+                            value: `<h2>${game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.name`)}</h2>`,
                         },
                         source: {
                             value: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`),
