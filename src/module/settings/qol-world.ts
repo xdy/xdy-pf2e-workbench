@@ -46,13 +46,21 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
-            castPrivateSpellAlwaysForNPC: {
-                name: `${MODULENAME}.SETTINGS.castPrivateSpellAlwaysForNPC.name`,
-                hint: `${MODULENAME}.SETTINGS.castPrivateSpellAlwaysForNPC.hint`,
+            castPrivateSpellAlwaysFor: {
+                name: `${MODULENAME}.SETTINGS.castPrivateSpellAlwaysFor.name`,
+                hint: `${MODULENAME}.SETTINGS.castPrivateSpellAlwaysFor.hint`,
                 scope: "world",
                 config: true,
-                default: false,
-                type: Boolean,
+                default: "none",
+                type: String,
+                choices: {
+                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellAlwaysFor.none`),
+                    nonAllies: game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellAlwaysFor.nonAllies`),
+                    nonPartymembers: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.castPrivateSpellAlwaysFor.nonPartymembers`,
+                    ),
+                    npcs: game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellAlwaysFor.npcs`),
+                },
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },

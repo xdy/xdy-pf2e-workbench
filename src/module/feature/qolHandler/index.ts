@@ -111,12 +111,7 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
                 .flat(),
         )?.size > 0
     ) {
-        // // If a party member knows the spell casting privately is pointless
-        // ChatMessage.create({
-        //     content: game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.knownSpell`),
-        //     whisper: message.user ? [message.user.id] : [],
-        // }).then();
-
+        // If a party member knows the spell casting privately is pointless
         return;
     }
 

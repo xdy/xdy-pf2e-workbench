@@ -353,9 +353,13 @@
         "hint": "Check to hide the name of a privately cast spell in the damage roll instead of hiding the damage roll.",
         "name": "... and hide the name of a privately cast spell in damage roll."
       },
-      "castPrivateSpellAlwaysForNPC": {
-        "hint": "Check to always cast privately for npcs. (Hold Ctrl to *not* cast privately.)",
-        "name": "... and always cast privately for npcs."
+      "castPrivateSpellAlwaysFor": {
+        "hint": "Check to always cast privately for... (Hold Ctrl to *not* cast privately.)",
+        "name": "... but always cast privately for:",
+        "none": "None",
+        "nonAllies": "Non-allies",
+        "nonPartymembers": "Non-partymembers",
+        "npcs": "NPCs"
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Cantrip",
