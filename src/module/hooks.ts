@@ -60,49 +60,46 @@ import { CheckRoll } from "@module/system/check/roll.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;
-    if (game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget") {
+    const reminderTargetingEnabled = game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget";
+    const reminderCannotAttackEnabled =
+        String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "cancelAttack";
+    const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
+    const ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some(
+        (key) => game?.keyboard.downKeys.has(key),
+    );
+    const privateCast = castPrivately(
+        game.actors?.party?.members?.some((member) => member.id === message.actor?.id) ?? false,
+        message,
+    );
+
+    if (
+        castPrivateSpellEnabled &&
+        message.flags.pf2e?.casting?.id &&
+        ((ctrlHeld && !privateCast) || (!ctrlHeld && privateCast))
+    ) {
+        castPrivateSpell(data, message).then();
+    }
+
+    if (reminderTargetingEnabled) {
         proceed = reminderTargeting(message);
     }
 
-    if (proceed && String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "cancelAttack") {
+    if (proceed && reminderCannotAttackEnabled) {
         proceed = reminderCannotAttack(message, true);
     }
 
-    const downkeys = game?.keyboard.downKeys;
+    return proceed;
+};
 
-    let ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some((key) =>
-        downkeys.has(key),
-    );
-    if (ctrlHeld === undefined) {
-        ctrlHeld = game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
-    }
+function castPrivately(inParty: boolean, message: ChatMessagePF2e) {
     const isNpc = message.actor?.type === NPC_TYPE;
-    const inParty = game.actors?.party?.members?.some((member) => member.id === message.actor?.id);
     const isAlly = message.actor?.alliance === "party";
     const alwaysNpc = game.settings.get(MODULENAME, "castPrivateSpellAlwaysFor") === "npcs";
     const alwaysNonAlly = game.settings.get(MODULENAME, "castPrivateSpellAlwaysFor") === "nonAllies";
     const alwaysNonParty = game.settings.get(MODULENAME, "castPrivateSpellAlwaysFor") === "nonPartymembers";
 
-    const privateBecauseNpc = isNpc && alwaysNpc;
-    const privateBecauseNotAlly = !isAlly && alwaysNonAlly;
-    const privateBecauseNotInParty = !inParty && alwaysNonParty;
-    const privateForRelevantActor = privateBecauseNpc || privateBecauseNotAlly || privateBecauseNotInParty;
-    const flippedByCtrl = (ctrlHeld && !privateForRelevantActor) || (!ctrlHeld && privateForRelevantActor); // ctrlHeld ? !privateForRelevantActor : privateForRelevantActor;
-    // if (ctrlHeld && !privateForRelevantActor) {
-    //     flippedByCtrl = !privateForRelevantActor;
-    // }
-    if (
-        proceed &&
-        game.settings.get(MODULENAME, "castPrivateSpell") &&
-        message.flags.pf2e?.casting?.id &&
-        !inParty &&
-        flippedByCtrl
-    ) {
-        castPrivateSpell(data, message).then();
-    }
-
-    return proceed;
-};
+    return (isNpc && alwaysNpc) || (!isAlly && alwaysNonAlly) || (!inParty && alwaysNonParty);
+}
 
 export function handleDying(
     dyingCounter: number,
