@@ -122,7 +122,7 @@
         "willBeResetIn": "英雄点处理器将在{remainingMinutes}分钟后({time})恢复。",
         "defaultTimeoutMinutes": 60,
         "doWhat": "<b>第一部分</b> - 选择如何处理具有以下值的<em>所有</em>角色的英雄点",
-        "addOne": "<b>第二部分</b> - 从已登录的角色中为所选角色增加1英雄点（计时器到期时默认随机选择）",
+        "addOne": "<b>第二部分</b> - 为所选角色（所选角色应是当前活跃小队的成员）增加1英雄点（计时器到期时默认随机选择）",
         "ignore": "无",
         "noRunningTimer": "没有计时器在运行",
         "none": "无角色",
@@ -262,7 +262,7 @@
         "name": "呼出快捷键页码{page}上第{column}个宏"
       },
       "castPrivateSpell": {
-        "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息。",
+        "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息，*除非*一位队伍成员已经学会此咒语。",
         "name": "Ctrl+单击秘密施法。",
         "aSpell": "法术"
       },
@@ -276,10 +276,10 @@
         "name": "发布一条公开消息表明有法术被施放。",
         "savePart": "<br>该未知法术的豁免为: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
         "they": "他们",
-        "firstPart": "{tokenName}刚刚施放了<strong>{traditionString}</strong>根源中带有{type}特征的法术",
+        "firstPart": "{tokenName}刚刚施放了<strong>{traditionString}</strong>根源中带有{type}特征的法术。<p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "hint": "秘密施法时，此设置还会发布一条公开消息表明有法术被施放，*除非*您在施法时同时按住 SHIFT 和 CTRL。",
-        "secondPartNoRk": ".<br>询问你的GM你是否能自动辨识该法术；如果不能，可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]。或者在你的回合中用一个动作来辨识它（更多细节请咨询你的GM）。",
-        "secondPartRK": ".<br>询问你的GM你是否能自动辨识该法术；如果不能，可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]。或者在你的回合中用一个动作使用@Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]（或花费10分钟使用@Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]）来辨识它"
+        "secondPartNoRk": ".<br>你可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]来辨识法术。或者在你的回合中用一个动作来辨识它（更多细节请咨询你的GM）。",
+        "secondPartRK": ".<br>你可以尝试使用@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]或@UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]来辨识该法术。或者在你的回合中用一个动作使用@Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]（或花费10分钟使用@Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]）来辨识它。"
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "在公开消息中显示法术特征。",
@@ -524,8 +524,8 @@
         "name": "……不论伤害的目标是否为选定指示物。"
       },
       "reminderBreathWeaponHidden": {
-        "hint": "勾选此项，对玩家隐藏提醒器。",
-        "name": "……对玩家隐藏图标。"
+        "hint": "如果非小队成员施放法术，勾选此项可隐藏提醒器。",
+        "name": "……隐藏非小队成员提醒器。"
       },
       "keeleysHeroPointRule": {
         "name": "Keeley 的英雄点规则",
@@ -663,7 +663,9 @@
           "name": "基本动作宏: 显示无法使用的动作。",
           "hint": "是否要显示由于未受训而无法使用的动作。"
         },
-        "exploration": "探索期"
+        "exploration": "探索期",
+        "explorationShort": "E",
+        "downtimeShort": "D"
       },
       "buildNpcSpellbookJournal": {
         "title": "建立NPC法术书日志",
