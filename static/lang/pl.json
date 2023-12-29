@@ -199,7 +199,7 @@
       "castPrivateSpell": {
         "aSpell": "Zaklęcie",
         "name": "Kliknij z wciśniętym klawiszem Ctrl, aby rzucać prywatnie.",
-        "hint": "Zaznacz, aby kliknięcie z wciśniętym klawiszem Ctrl na zaklęciu rzucało je jako szept dla rzucającego zaklęcie i GM-a."
+        "hint": "Zaznacz, aby kliknięcie z wciśniętym klawiszem Ctrl na rzuceniu zaklęcia powodowało rzucenie go jako szept dla rzucającego zaklęcie i MG, chyba że członek drużyny zna zaklęcie."
       },
       "castPrivateSpellWithPublicMessage": {
         "spell": "Zaklęcie",
@@ -208,9 +208,9 @@
         "savePart": "<br>Rzut obronny dla nieznanego zaklęcia to: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
         "hint": "W przypadku rzucania zaklęć prywatnie, ustawienie to wysyła również publiczną wiadomość o rzuceniu zaklęcia, chyba że podczas rzucania zaklęcia przytrzymasz klawisze SHIFT i CTRL.",
         "name": "Publikuje wiadomość o rzuceniu zaklęcia.",
-        "secondPartNoRk": ".<br>Zapytaj swojego GM, czy rozpoznałeś go automatycznie, jeśli nie, możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego GM).",
-        "firstPart": "{tokenName} właśnie rzucił {type} tradycji <strong>{traditionString}</strong>",
-        "secondPartRK": "Zapytaj swojego GMa, czy rozpoznałeś go automatycznie, jeśli nie, możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Lub, w swojej turze, poświęć akcję na próbę zidentyfikowania go za pomocą @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G])"
+        "secondPartNoRk": ".<br>Możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
+        "firstPart": "{tokenName} właśnie rzucił {type} tradycji <strong>{traditionString}</strong><p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
+        "secondPartRK": ".<br>Możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )"
       },
       "applyPersistentDamageRecoveryRoll": {
         "hint": "... a następnie automatycznie przywróci ustawienia fabryczne. Wymaga włączenia powyższego ustawienia.",
@@ -266,9 +266,9 @@
         "removeDyingForCharacters": "Usunięcie stanu Umierania dla postaci + towarzyszy"
       },
       "dropHeldItemsOnBecomingUnconscious": {
-        "hint": "Postacie automatycznie upuszczają trzymane przedmioty po utracie przytomności.",
+        "hint": "Postacie automatycznie upuszczają trzymane przedmioty, gdy tracą przytomność (z wyjątkiem tarcz, które są noszone, a nie trzymane).",
         "name": "Postacie automatycznie upuszczają trzymane przedmioty po utracie przytomności.",
-        "message": "{name} upuszcza: {items}"
+        "message": "{name} stracił kontrolę nad: {items}"
       },
       "autoExpandDamageRolls": {
         "collapsedAll": "Wszystkie rzuty na obrażenia zwinięte (domyślne Foundry).",
@@ -478,7 +478,7 @@
         "timerValue": "Wartość timera (zakres 0 - {maxMinutes})",
         "add": "Dodaj",
         "addedToForAll": "{heroPoints} Punktów bohatera dodane dla wszystkich",
-        "addOne": "<b>Sekcja 2</b> - Dodaje jeden punkt bohatera wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu).",
+        "addOne": "<b>Sekcja 2</b> - Dodaje jeden punkt bohatera wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu)",
         "defaultTimeoutMinutes": 60,
         "doWhat": "<b>Sekcja 1</b> - Wybierz, co zrobić z punktami bohatera <em>wszystkich postaci</em> o następującej wartości",
         "hint": "Opcja obsługi punktów bohatera z opcjonalnym powiązaniem klawiszy, aby otworzyć okno dialogowe, które może zresetować lub dodać punkty bohatera dla wszystkich postaci, dodać jeden punkt bohatera do losowej (lub wybranej) postaci i, co najważniejsze, uruchomić licznik czasu, aby okno dialogowe pojawiło się ponownie po (domyślnie) 60 minutach.",
@@ -673,6 +673,14 @@
         "yesForCharacters": "Tak, dla postaci + towarzyszy",
         "yesForNpcs": "Tak, dla npc",
         "yes": "Tak, dla wszystkich"
+      },
+      "castPrivateSpellAlwaysFor": {
+        "hint": "Zaznacz, aby zawsze rzucać prywatnie dla... (Przytrzymaj Ctrl, aby *nie* rzucać prywatnie)",
+        "name": "... ale zawsze rzucać prywatnie:",
+        "none": "Brak",
+        "nonAllies": "Osoby niebędące sojusznikami",
+        "nonPartymembers": "Osoby niebędące członkami drużyny",
+        "npcs": "Bohaterowie Niezależni"
       }
     },
     "modules": {
