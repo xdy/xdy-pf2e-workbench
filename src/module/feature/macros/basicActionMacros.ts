@@ -111,9 +111,8 @@ function createButton(action, idx, actor, party, actorSkills) {
 
 type MacroAction = {
     skill: string;
-    // The altSkill stuff should really be more flexible. Maybe look at what SkillActions did for prereqs?
-    altSkill?: string;
-    altSkillRequiredFeat?: string;
+    // The altSkillAndFeat stuff should really be more flexible. Maybe look at what SkillActions did for prereqs?
+    altSkillAndFeat?: { skill: string; feat: string }[];
     name: string;
     icon: string;
     action: string | Function | string[] | Action;
@@ -565,8 +564,10 @@ export function basicActionMacros() {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TreatWounds`),
             skill: "Medicine",
-            altSkill: "Nature",
-            altSkillRequiredFeat: "natural-medicine",
+            altSkillAndFeat: [
+                { skill: "Nature", feat: "natural-medicine" },
+                { skill: "Crafting", feat: "chirurgeon" },
+            ],
             action: [
                 "XDY DO_NOT_IMPORT Treat Wounds and Battle Medicine",
                 "xdy-pf2e-workbench.asymonous-benefactor-macros-internal",
@@ -635,19 +636,24 @@ export function basicActionMacros() {
         .concat(newStyleActions)
         .filter((x) => {
             const hasSkill = selectedActor.skills?.[x.skill.toLocaleLowerCase()]?.rank ?? 0 > 0;
-            const hasAltSkill = (x.altSkill && selectedActor.skills?.[x.altSkill.toLocaleLowerCase()]?.rank) ?? 0 > 0;
-            const hasAltSkillRequiredFeat =
-                !x.altSkillRequiredFeat ||
-                (x.altSkill &&
-                    x.altSkillRequiredFeat &&
-                    selectedActor.itemTypes.feat.find((feat) => feat.slug === x.altSkillRequiredFeat));
+            const hasAltSkillAndFeat =
+                x.altSkillAndFeat?.find((y) => selectedActor.skills?.[y.skill.toLocaleLowerCase()]?.rank) &&
+                x.altSkillAndFeat?.find((y) => selectedActor.itemTypes.feat.find((feat) => feat.slug === y.feat));
+            // const hasAltSkill = x.altSkillAndFeat?.find((y) => selectedActor.skills?.[y.skill.toLocaleLowerCase()]?.rank);
+            // const hasAltFeat = x.altSkillAndFeat?.find((y) => selectedActor.itemTypes.feat.find((feat) => feat.slug === y.feat));
+            // const hasAltSkill = (x.altSkill && selectedActor.skills?.[x.altSkill.toLocaleLowerCase()]?.rank) ?? 0 > 0;
+            // const hasAltSkillRequiredFeat =
+            //     !x.altSkillRequiredFeat ||
+            //     (x.altSkill &&
+            //         x.altSkillRequiredFeat &&
+            //         selectedActor.itemTypes.feat.find((feat) => feat.slug === x.altSkillRequiredFeat));
             return (
                 showUnusable ||
                 x.actionType !== "skill_trained" ||
                 (x.actionType === "skill_trained" && ["npc", "familiar"].includes(selectedActor.type)) ||
                 selectedActor.itemTypes.feat.find((feat) => feat.slug === "clever-improviser") ||
                 hasSkill ||
-                (hasAltSkill && hasAltSkillRequiredFeat)
+                hasAltSkillAndFeat
             );
         })
         .filter((m) => {
