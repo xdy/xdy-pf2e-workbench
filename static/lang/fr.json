@@ -568,6 +568,10 @@
         "hint": "(Déprécié) Réglages pour tuer automatiquement en cas de dégâts massifs.",
         "no": "Non",
         "name": "... mais automatiquement tué en cas de dégâts massifs. (Déprécié)"
+      },
+      "castPrivateSpellAlwaysFor": {
+        "hint": "Cochez pour toujours incanter en privé pour... (Pressez Ctrl pour *ne pas* incanter en privé)",
+        "name": "... mais toujours incanter en privé pour :"
       }
     },
     "effects": {
