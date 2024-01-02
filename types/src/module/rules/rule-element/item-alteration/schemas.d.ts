@@ -52,14 +52,24 @@ declare const ITEM_ALTERATION_VALIDATORS: {
         mode: StringField<"override", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
         value: StringField<"light" | "medium" | "heavy", unknown, true, false, boolean>;
     }>;
+    "check-penalty": ItemAlterationValidator<{
+        itemType: StringField<"armor", ItemType, true, false, false>;
+        mode: StringField<"upgrade" | "override" | "downgrade" | "add" | "remove" | "subtract", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
+        value: StrictNumberField<number, unknown, true, false, boolean>;
+    }>;
+    description: ItemAlterationValidator<{
+        itemType: StringField<"armor" | "shield" | "consumable" | "ancestry" | "class" | "background" | "action" | "affliction" | "backpack" | "book" | "campaignFeature" | "condition" | "deity" | "effect" | "equipment" | "feat" | "heritage" | "kit" | "lore" | "melee" | "spell" | "spellcastingEntry" | "treasure" | "weapon", ItemType, true, false, false>;
+        mode: StringField<"add", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
+        value: StringField<string, unknown, true, false, boolean>;
+    }>;
     "dex-cap": ItemAlterationValidator<{
         itemType: StringField<"armor", ItemType, true, false, false>;
         mode: StringField<"upgrade" | "override" | "downgrade" | "add" | "remove" | "subtract", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
         value: StrictNumberField<number, unknown, true, false, boolean>;
     }>;
-    "check-penalty": ItemAlterationValidator<{
-        itemType: StringField<"armor", ItemType, true, false, false>;
-        mode: StringField<"upgrade" | "override" | "downgrade" | "add" | "remove" | "subtract", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
+    "focus-point-cost": ItemAlterationValidator<{
+        itemType: StringField<"spell", ItemType, true, false, false>;
+        mode: StringField<"upgrade" | "override" | "add", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
         value: StrictNumberField<number, unknown, true, false, boolean>;
     }>;
     hardness: ItemAlterationValidator<{
@@ -90,7 +100,7 @@ declare const ITEM_ALTERATION_VALIDATORS: {
     rarity: ItemAlterationValidator<{
         itemType: StringField<"armor" | "shield" | "consumable" | "backpack" | "book" | "equipment" | "treasure" | "weapon", ItemType, true, false, false>;
         mode: StringField<"override", "upgrade" | "override" | "downgrade" | "add" | "remove" | "multiply" | "subtract", true, false, false>;
-        value: StringField<"common" | "rare" | "uncommon" | "unique", unknown, true, false, boolean>;
+        value: StringField<"common" | "uncommon" | "rare" | "unique", unknown, true, false, boolean>;
     }>;
     "frequency-max": ItemAlterationValidator<{
         itemType: StringField<"action" | "feat", ItemType, true, false, false>;

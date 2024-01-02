@@ -3,7 +3,7 @@ import { ModifierPF2e } from "@actor/modifiers.ts";
 import type { ItemPF2e, WeaponPF2e } from "@item";
 import { WeaponTrait } from "@item/weapon/types.ts";
 import { RollNotePF2e } from "@module/notes.ts";
-import type { TokenDocumentPF2e } from "@scene/index.ts";
+import type { TokenDocumentPF2e } from "@scene";
 import { CheckType } from "@system/check/index.ts";
 import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import { CheckContext, CheckContextData, CheckContextOptions, SimpleRollActionCheckOptions } from "./types.ts";

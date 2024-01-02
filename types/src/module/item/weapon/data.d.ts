@@ -1,4 +1,5 @@
 import { AttributeString } from "@actor/types.ts";
+import { PhysicalItemSource } from "@item/base/data/index.ts";
 import { ItemFlagsPF2e } from "@item/base/data/system.ts";
 import { BasePhysicalItemSource, Investable, ItemMaterialData, ItemMaterialSource, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, UsageDetails } from "@item/physical/index.ts";
 import { ZeroToFour, ZeroToThree } from "@module/data.ts";
@@ -57,6 +58,8 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
     specific: SpecificWeaponData | null;
     /** Whether this is an unarmed attack that is a grasping appendage, requiring a free hand for use */
     graspingAppendage?: boolean;
+    /** Doubly-embedded adjustments, attachments, talismans etc. */
+    subitems: PhysicalItemSource[];
     property1: {
         value: string;
         dice: number;
@@ -109,7 +112,7 @@ type WeaponRuneSource = {
     striking: ZeroToThree;
     property: WeaponPropertyRuneType[];
 };
-interface WeaponSystemData extends Omit<WeaponSystemSource, "bulk" | "hp" | "identification" | "price" | "temporary">, Omit<Investable<PhysicalSystemData>, "material"> {
+interface WeaponSystemData extends Omit<WeaponSystemSource, SourceOmission>, Omit<Investable<PhysicalSystemData>, "material"> {
     traits: WeaponTraits;
     baseItem: BaseWeaponType | null;
     material: WeaponMaterialData;
@@ -127,6 +130,7 @@ interface WeaponSystemData extends Omit<WeaponSystemSource, "bulk" | "hp" | "ide
     meleeUsage?: Required<ComboWeaponMeleeUsage>;
     stackGroup: null;
 }
+type SourceOmission = "apex" | "bulk" | "description" | "hp" | "identification" | "price" | "temporary";
 type WeaponUsageDetails = UsageDetails & Required<WeaponSystemSource["usage"]>;
 interface WeaponTraits extends WeaponTraitsSource {
     otherTags: OtherWeaponTag[];

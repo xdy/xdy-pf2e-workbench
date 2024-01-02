@@ -1,10 +1,10 @@
 import { AttributeString } from "@actor/types.ts";
 import { BaseItemSourcePF2e, ItemSystemData, ItemSystemSource, OtherTagsOnly } from "@item/base/data/system.ts";
 import { MagicTradition } from "@item/spell/types.ts";
-import { OneToTen, ZeroToEleven, ZeroToFour } from "@module/data.ts";
+import { OneToTen, ZeroToFour, ZeroToTen } from "@module/data.ts";
 import type { RollNotePF2e } from "@module/notes.ts";
 import { SpellcastingCategory } from "./types.ts";
-type SlotKey = `slot${ZeroToEleven}`;
+type SlotKey = `slot${ZeroToTen}`;
 type SpellcastingEntrySource = BaseItemSourcePF2e<"spellcastingEntry", SpellcastingEntrySystemSource>;
 interface SpellAttackRollModifier {
     breakdown: string;
@@ -59,7 +59,7 @@ interface SpellCollectionTypeSource {
     flexible?: boolean;
     validItems?: "scroll" | "" | null;
 }
-interface SpellcastingEntrySystemData extends SpellcastingEntrySystemSource, Omit<ItemSystemData, "level" | "traits"> {
+interface SpellcastingEntrySystemData extends Omit<SpellcastingEntrySystemSource, "description">, Omit<ItemSystemData, "level" | "traits"> {
     prepared: SpellCollectionTypeData;
 }
 interface SpellCollectionTypeData extends SpellCollectionTypeSource {

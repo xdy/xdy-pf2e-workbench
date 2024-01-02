@@ -1,8 +1,8 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import type { ActorPF2e } from "@actor";
-import { CreatureSheetData } from "@actor/creature/index.ts";
+import { CreatureSheetData, Language } from "@actor/creature/index.ts";
+import type { Sense } from "@actor/creature/sense.ts";
 import { SheetClickActionHandlers } from "@actor/sheet/base.ts";
 import { ActorSheetDataPF2e, InventoryItem } from "@actor/sheet/data-types.ts";
 import { AttributeString, SaveType } from "@actor/types.ts";
@@ -38,10 +38,10 @@ declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureS
     protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
     /** Toggle availability of the roll-initiative link on the sidebar */
     toggleInitiativeLink(link?: HTMLElement | null): void;
-    protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
-    protected _onDrop(event: ElementDragEvent): Promise<boolean | void>;
+    protected _onDropItem(event: DragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
+    protected _onDrop(event: DragEvent): Promise<boolean | void>;
     /** Handle a drop event for an existing Owned Item to sort that item */
-    protected _onSortItem(event: DragEvent, itemSource: ItemSourcePF2e): Promise<CollectionValue<TActor["items"]>[]>;
+    protected _onSortItem(event: DragEvent, itemData: ItemSourcePF2e): Promise<ItemPF2e[]>;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }
 interface CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e<TActor> {
@@ -49,11 +49,6 @@ interface CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheet
 }
 type CharacterSheetOptions = ActorSheetOptions;
 type CharacterSystemSheetData = CharacterSystemData & {
-    attributes: {
-        perception: {
-            rankName: string;
-        };
-    };
     details: CharacterSystemData["details"] & {
         keyability: {
             value: keyof typeof CONFIG.PF2E.abilities;
@@ -113,6 +108,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     hasStamina: boolean;
     /** This actor has actual containers for stowing, rather than just containers serving as a UI convenience */
     hasRealContainers: boolean;
+    languages: LanguageSheetData[];
     magicTraditions: Record<MagicTradition, string>;
     martialProficiencies: Record<"attacks" | "defenses", Record<string, MartialProficiency>>;
     options: CharacterSheetOptions;
@@ -134,6 +130,22 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     };
     feats: FeatGroup[];
     elementalBlasts: ElementalBlastSheetConfig[];
+    senses: Sense[];
+    speeds: SpeedSheetData[];
+}
+type LanguageSheetData = {
+    slug: Language | null;
+    label: string;
+    tooltip: string | null;
+    overLimit: boolean;
+};
+interface SpeedSheetData {
+    slug: string;
+    icon: string;
+    action: string | null;
+    label: string;
+    value: number | null;
+    breakdown: string | null;
 }
 interface ActionSheetData {
     id: string;

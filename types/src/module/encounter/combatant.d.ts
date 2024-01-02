@@ -3,6 +3,8 @@ import type { SkillLongForm } from "@actor/types.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { EncounterPF2e } from "./index.ts";
 declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e | null, TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Combatant<TParent, TTokenDocument> {
+    /** Has this document completed `DataModel` initialization? */
+    initialized: boolean;
     get encounter(): TParent;
     /** The round this combatant last had a turn */
     get roundOfLastTurn(): number | null;
@@ -21,6 +23,9 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
     endTurn(options: {
         round: number;
     }): Promise<void>;
+    protected _initialize(options?: Record<string, unknown>): void;
+    /** If embedded, don't prepare data if the parent's data model hasn't initialized all its properties */
+    prepareData(): void;
     prepareBaseData(): void;
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
     toggleDefeated({ to, overlayIcon }?: {

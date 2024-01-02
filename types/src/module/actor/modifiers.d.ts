@@ -218,7 +218,7 @@ declare class CheckModifier extends StatisticModifier {
      * @param modifiers Additional modifiers to add to this check
      */
     constructor(slug: string, statistic: {
-        modifiers: readonly (ModifierPF2e | RawModifier)[];
+        modifiers: readonly ModifierPF2e[];
     }, modifiers?: ModifierPF2e[], rollOptions?: string[] | Set<string>);
 }
 interface DamageDiceOverride {

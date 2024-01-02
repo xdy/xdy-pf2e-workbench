@@ -1,6 +1,5 @@
-import type { CharacterPF2e, FamiliarPF2e } from "@actor";
-import { SenseAcuity, SenseType } from "@actor/creature/sense.ts";
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorType, CharacterPF2e, FamiliarPF2e } from "@actor";
+import type { SenseAcuity, SenseType } from "@actor/creature/types.ts";
 import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema } from "./data.ts";

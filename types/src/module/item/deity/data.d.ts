@@ -1,6 +1,6 @@
 import { SkillAbbreviation } from "@actor/creature/data.ts";
 import { AttributeString } from "@actor/types.ts";
-import { BaseItemSourcePF2e, ItemSystemSource, OtherTagsOnly } from "@item/base/data/system.ts";
+import { BaseItemSourcePF2e, ItemSystemData, ItemSystemSource, OtherTagsOnly } from "@item/base/data/system.ts";
 import { BaseWeaponType } from "@item/weapon/types.ts";
 import { DeityDomain, Sanctification } from "./types.ts";
 type DeitySource = BaseItemSourcePF2e<"deity", DeitySystemSource>;
@@ -24,5 +24,6 @@ type DeitySanctification = {
     what: Sanctification[];
 };
 type DivineFonts = ["harm"] | ["heal"] | ["harm", "heal"] | never[];
-type DeitySystemData = DeitySystemSource;
+interface DeitySystemData extends Omit<DeitySystemSource, "description">, Omit<ItemSystemData, "level" | "traits"> {
+}
 export type { DeitySanctification, DeitySource, DeitySystemData, DeitySystemSource };

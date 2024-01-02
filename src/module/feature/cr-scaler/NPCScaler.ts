@@ -104,9 +104,9 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
         oldLevel,
         newLevel,
     ).total;
-    updateData["system.attributes.perception.value"] = getLeveledData(
+    updateData["system.perception.value"] = getLeveledData(
         "perception",
-        system.attributes.perception.value ?? 0,
+        system.perception.value ?? 0,
         oldLevel,
         newLevel,
     ).total;

@@ -14,7 +14,7 @@ export declare class DelegatedCollection<V> {
     find(predicate: (value: V) => boolean): V | undefined;
     some(predicate: (value: V) => boolean): boolean;
     filter<T extends V = V>(condition: (value: V) => value is T): T[];
-    filter<T extends V = V>(condition: (value: V) => boolean): T[];
+    filter<T extends V = V>(condition: (value: V) => unknown): T[];
     map<T>(callback: (value: V) => T): T[];
     delete(key: string): boolean;
     clear(): void;

@@ -7,6 +7,7 @@ interface ConsumableTraits extends PhysicalItemTraits<ConsumableTrait> {
     otherTags: OtherConsumableTag[];
 }
 interface ConsumableSystemSource extends PhysicalSystemSource {
+    apex?: never;
     traits: ConsumableTraits;
     category: ConsumableCategory;
     uses: ConsumableUses;
@@ -29,7 +30,9 @@ type ConsumableDamageHealing = {
     type: DamageType;
     kind: DamageKind;
 };
-interface ConsumableSystemData extends Omit<ConsumableSystemSource, "bulk" | "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<PhysicalSystemData, "traits"> {
+interface ConsumableSystemData extends Omit<ConsumableSystemSource, SourceOmission>, Omit<PhysicalSystemData, "traits"> {
+    apex?: never;
     stackGroup: AmmoStackGroup | null;
 }
+type SourceOmission = "bulk" | "description" | "hp" | "identification" | "material" | "price" | "temporary" | "usage";
 export type { ConsumableDamageHealing, ConsumableSource, ConsumableSystemData, ConsumableSystemSource, ConsumableTrait, };

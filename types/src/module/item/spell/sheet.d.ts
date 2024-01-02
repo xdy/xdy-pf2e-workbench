@@ -14,14 +14,11 @@ export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
     get title(): string;
     activateListeners($html: JQuery): void;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
-    protected _onDragStart(event: ElementDragEvent): void;
-    protected _onDrop(event: ElementDragEvent): Promise<void>;
+    protected _onDragStart(event: DragEvent): void;
+    protected _onDrop(event: DragEvent): Promise<void>;
     private getAvailableHeightenLevels;
 }
 interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
-    isCantrip: boolean;
-    isFocusSpell: boolean;
-    isRitual: boolean;
     passiveDefense: string | null;
     isVariant: boolean;
     variants: {

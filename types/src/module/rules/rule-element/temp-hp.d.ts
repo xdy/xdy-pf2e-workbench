@@ -1,4 +1,4 @@
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorType } from "@actor/types.ts";
 import type { BooleanField, SchemaField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema } from "./data.ts";

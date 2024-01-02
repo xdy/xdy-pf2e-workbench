@@ -21,7 +21,7 @@ declare class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     isAffectedBy(): false;
     /** A user can see a loot actor in the actor directory only if they have at least Observer permission */
     get visible(): boolean;
-    /** Anyone with Limited permission can update a loot actor */
+    /** Anyone with Limited ownership can update a loot actor. */
     canUserModify(user: UserPF2e, action: UserAction): boolean;
     transferItemToActor(targetActor: ActorPF2e, item: ItemPF2e<ActorPF2e>, quantity: number, containerId?: string, newStack?: boolean): Promise<PhysicalItemPF2e<ActorPF2e> | null>;
     /** Hide this actor's token(s) when in loot (rather than merchant) mode, empty, and configured thus */

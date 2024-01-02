@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { PrototypeTokenPF2e } from "@actor/data/base.ts";
+import type { PrototypeTokenPF2e } from "@actor/data/base.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import type { ScenePF2e } from "../document.ts";
@@ -7,9 +7,8 @@ import { TokenAura } from "./aura/index.ts";
 import { TokenFlagsPF2e } from "./data.ts";
 import type { TokenConfigPF2e } from "./sheet.ts";
 declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends TokenDocument<TParent> {
-    #private;
-    /** Has this token gone through at least one cycle of data preparation? */
-    private constructed;
+    /** Has this document completed `DataModel` initialization? */
+    initialized: boolean;
     auras: Map<string, TokenAura>;
     /** Returns if the token is in combat, though some actors have different conditions */
     get inCombat(): boolean;
@@ -47,9 +46,8 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
     prepareData(): void;
     /** If rules-based vision is enabled, disable manually configured vision radii */
     prepareBaseData(): void;
-    /** Reset sight defaults if using rules-based vision */
+    /** Set vision and detection modes based on actor data */
     protected _prepareDetectionModes(): void;
-    prepareDerivedData(): void;
     /** Synchronize the token image with the actor image if the token does not currently have an image */
     static assignDefaultImage(token: TokenDocumentPF2e | PrototypeTokenPF2e<ActorPF2e>): void;
     /** Set a TokenData instance's dimensions from actor data. Static so actors can use for their prototypes */

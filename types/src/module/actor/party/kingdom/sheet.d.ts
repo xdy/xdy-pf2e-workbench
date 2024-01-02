@@ -1,7 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e, type PartyPF2e } from "@actor";
+import { ActorPF2e, ArmyPF2e, type PartyPF2e } from "@actor";
 import { FeatGroup } from "@actor/character/feats.ts";
 import { ActorSheetPF2e } from "@actor/sheet/base.ts";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
@@ -9,7 +9,7 @@ import { ItemPF2e, type CampaignFeaturePF2e } from "@item";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ValueAndMax } from "@module/data.ts";
-import { SheetOption, SheetOptions } from "@module/sheet/helpers.ts";
+import { AdjustedValue, SheetOption, SheetOptions } from "@module/sheet/helpers.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { Kingdom } from "./model.ts";
 import { KingdomAbilityData, KingdomData, KingdomLeadershipData, KingdomSettlementData } from "./types.ts";
@@ -29,10 +29,10 @@ declare class KingdomSheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     protected filterActions(trait: string | null, options?: {
         instant?: boolean;
     }): void;
-    protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
+    protected _onDropItem(event: DragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
     /** Handle a drop event for an existing Owned Item to sort that item */
-    protected _onSortItem(event: ElementDragEvent, itemSource: ItemSourcePF2e): Promise<ItemPF2e<PartyPF2e>[]>;
-    protected _onDropActor(event: ElementDragEvent, data: DropCanvasData<"Actor", PartyPF2e>): Promise<false | void>;
+    protected _onSortItem(event: DragEvent, itemData: ItemSourcePF2e): Promise<ItemPF2e[]>;
+    protected _onDropActor(event: DragEvent, data: DropCanvasData<"Actor", PartyPF2e>): Promise<false | void>;
     /** Override to not auto-disable fields on a thing meant to be used by players */
     protected _disableFields(form: HTMLElement): void;
     protected _updateObject(_event: Event, formData: Record<string, unknown>): Promise<void>;
@@ -59,11 +59,17 @@ interface KingdomSheetData extends ActorSheetDataPF2e<PartyPF2e> {
     skills: Statistic[];
     feats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>[];
     actionFilterChoices: SheetOption[];
+    armies: ArmySheetData[];
     settlements: SettlementSheetData[];
     eventText: string;
     settlementTypes: Record<string, string>;
     abilityLabels: Record<string, string>;
     skillLabels: Record<string, string>;
+}
+interface ArmySheetData {
+    link: string;
+    document: ArmyPF2e;
+    consumption: AdjustedValue;
 }
 interface LeaderSheetData extends KingdomLeadershipData {
     actor: ActorPF2e | null;

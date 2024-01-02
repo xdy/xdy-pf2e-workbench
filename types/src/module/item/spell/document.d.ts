@@ -3,7 +3,7 @@ import type { ActorPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import { ItemPF2e } from "@item";
 import { ItemSourcePF2e, ItemSummaryData } from "@item/base/data/index.ts";
-import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
+import { SpellSlotGroupId } from "@item/spellcasting-entry/collection.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
 import { RangeData } from "@item/types.ts";
 import { MeasuredTemplatePF2e } from "@module/canvas/index.ts";
@@ -19,17 +19,12 @@ import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { SpellArea, SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data.ts";
 import { SpellOverlayCollection } from "./overlay.ts";
 import { MagicTradition, SpellTrait } from "./types.ts";
-interface SpellConstructionContext<TParent extends ActorPF2e | null> extends DocumentConstructionContext<TParent> {
-    fromConsumable?: boolean;
-}
 declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly isFromConsumable: boolean;
     /** The original spell. Only exists if this is a variant */
-    original?: SpellPF2e<NonNullable<TParent>>;
+    original?: SpellPF2e<TParent>;
     /** The overlays that were applied to create this variant */
     appliedOverlays?: Map<SpellOverlayType, string>;
-    /** Set if casted with trick magic item. Will be replaced via overriding spellcasting on cast later. */
-    trickMagicEntry: TrickMagicItemEntry<NonNullable<TParent>> | null;
     overlays: SpellOverlayCollection;
     constructor(data: PreCreate<ItemSourcePF2e>, context?: SpellConstructionContext<TParent>);
     /** The id of the override overlay that constitutes this variant */
@@ -42,8 +37,11 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
      * Heightened rank of the spell if heightened, otherwise base.
      * This applies for spontaneous or innate spells usually, but not prepared ones.
      */
-    get rank(): number;
-    /** Legacy getter, though not yet deprecated */
+    get rank(): OneToTen;
+    /**
+     * Legacy getter: only deprecated internally
+     * @deprecated
+     */
     get level(): number;
     get traits(): Set<SpellTrait>;
     get rarity(): Rarity;
@@ -58,7 +56,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     /** @deprecated */
     get ability(): AttributeString;
     /** Whether this spell has unlimited uses */
-    get unlimited(): boolean;
+    get atWill(): boolean;
     get isVariant(): boolean;
     get hasVariants(): boolean;
     get area(): (SpellArea & {
@@ -70,9 +68,9 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get damageKinds(): Set<DamageKind>;
     get uuid(): ItemUUID;
     /** Given a slot level, compute the actual level the spell will be cast at */
-    computeCastRank(slotRank?: number): number;
+    computeCastRank(slotNumber?: number): OneToTen;
     getRollData(rollOptions?: {
-        castLevel?: number | string;
+        castRank?: number | string;
     }): NonNullable<EnrichmentOptions["rollData"]>;
     getDamage(params?: SpellDamageOptions): Promise<SpellDamage | null>;
     /**
@@ -81,10 +79,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
      * This handles heightening as well as alternative cast modes of spells.
      * If there's nothing to apply, returns null.
      */
-    loadVariant(options?: {
-        castLevel?: number;
-        overlayIds?: string[];
-    }): SpellPF2e<NonNullable<TParent>> | null;
+    loadVariant(options?: SpellVariantOptions): this | null;
     getHeightenLayers(rank?: number): SpellHeightenLayer[];
     placeTemplate(message?: ChatMessagePF2e): Promise<MeasuredTemplatePF2e>;
     prepareBaseData(): void;
@@ -92,10 +87,10 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     prepareActorData(): void;
     onPrepareSynthetics(this: SpellPF2e<ActorPF2e>): void;
     getRollOptions(prefix?: string): string[];
-    toMessage(event?: MouseEvent | JQuery.TriggeredEvent, { create, data, rollMode }?: SpellToMessageOptions): Promise<ChatMessagePF2e | undefined>;
+    toMessage(event?: Maybe<MouseEvent | JQuery.TriggeredEvent>, { create, data, rollMode }?: SpellToMessageOptions): Promise<ChatMessagePF2e | undefined>;
     getChatData(this: SpellPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptionsPF2e, rollOptions?: {
-        castLevel?: number | string;
-        slotLevel?: number | string;
+        castRank?: number | string;
+        groupId?: SpellSlotGroupId;
     }): Promise<Omit<ItemSummaryData, "traits">>;
     rollAttack(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, attackNumber?: number, context?: StatisticRollParameters): Promise<void>;
     rollDamage(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, mapIncreases?: ZeroToTwo): Promise<Rolled<DamageRoll> | null>;
@@ -110,6 +105,9 @@ interface SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
     readonly _source: SpellSource;
     system: SpellSystemData;
 }
+interface SpellConstructionContext<TParent extends ActorPF2e | null> extends DocumentConstructionContext<TParent> {
+    fromConsumable?: boolean;
+}
 interface SpellDamage {
     template: SpellDamageTemplate;
     context: DamageRollContext;
@@ -118,12 +116,17 @@ interface SpellToMessageOptions {
     create?: boolean;
     rollMode?: RollMode;
     data?: {
-        castLevel?: number;
+        castRank?: number;
     };
 }
 interface SpellDamageOptions {
     rollMode?: RollMode | "roll";
     skipDialog?: boolean;
     target?: Maybe<TokenDocumentPF2e>;
+}
+interface SpellVariantOptions {
+    castRank?: number;
+    overlayIds?: string[];
+    entryId?: string | null;
 }
 export { SpellPF2e, type SpellToMessageOptions };

@@ -45,8 +45,8 @@ declare class CompendiumBrowser extends Application {
     protected _canDragStart(): boolean;
     protected _canDragDrop(): boolean;
     /** Set drag data and lower opacity of the application window to reveal any tokens */
-    protected _onDragStart(event: ElementDragEvent): void;
-    protected _onDragOver(event: ElementDragEvent): void;
+    protected _onDragStart(event: DragEvent): void;
+    protected _onDragOver(event: DragEvent): void;
     getData(): CompendiumBrowserSheetData;
 }
 type CompendiumBrowserSettings = Omit<TabData<Record<string, PackInfo | undefined>>, "settings">;

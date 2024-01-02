@@ -6,15 +6,19 @@ import { CheckType } from "./types.ts";
 /** A foundry `Roll` subclass representing a Pathfinder 2e check */
 declare class CheckRoll extends Roll {
     static CHAT_TEMPLATE: string;
+    constructor(formula: string, data?: Record<string, unknown>, options?: CheckRollDataPF2e);
     get roller(): UserPF2e | null;
     get type(): CheckType;
     get degreeOfSuccess(): DegreeOfSuccessIndex | null;
     get isReroll(): boolean;
     get isRerollable(): boolean;
     render(this: Rolled<CheckRoll>, options?: RollRenderOptions): Promise<string>;
+    getTooltip(): Promise<string>;
 }
 interface CheckRoll extends Roll {
-    options: CheckRollDataPF2e;
+    options: CheckRollDataPF2e & {
+        showBreakdown: boolean;
+    };
 }
 /** A legacy class kept to allow chat messages to reconstruct rolls */
 declare class StrikeAttackRoll extends CheckRoll {

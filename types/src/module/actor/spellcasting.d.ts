@@ -7,6 +7,7 @@ import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
 import { Statistic } from "@system/statistic/statistic.ts";
 import { DelegatedCollection } from "@util";
 export declare class ActorSpellcasting<TActor extends ActorPF2e> extends DelegatedCollection<BaseSpellcastingEntry<TActor>> {
+    #private;
     readonly actor: TActor;
     /** The base casting proficiency, which spellcasting build off of */
     base: Statistic;
@@ -22,6 +23,8 @@ export declare class ActorSpellcasting<TActor extends ActorPF2e> extends Delegat
      * full fledged spellcasting feature for wands and scrolls.
      */
     get spellcastingFeatures(): SpellcastingEntryPF2e<TActor>[];
+    /** Returns an existing spellcasting entry or trick magic item if given "trick-{skillName}" */
+    get(id: string): BaseSpellcastingEntry<TActor> | undefined;
     canCastConsumable(item: ConsumablePF2e): boolean;
     refocus(options?: {
         all?: boolean;

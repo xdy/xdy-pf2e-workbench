@@ -841,20 +841,20 @@ declare const KINGDOM_SCHEMA: {
         storage: SchemaField<Record<string, import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>>, SourceFromSchema<Record<string, import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>>>, ModelPropsFromSchema<Record<string, import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>>>, true, false, true>;
     }>, true, false, true>, false, false, true>;
     consumption: SchemaField<{
-        base: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         settlement: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         army: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
+        breakdown: StringField<string, unknown, boolean, boolean, boolean>;
     }, SourceFromSchema<{
-        base: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         settlement: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         army: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
+        breakdown: StringField<string, unknown, boolean, boolean, boolean>;
     }>, ModelPropsFromSchema<{
-        base: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         settlement: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         army: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
+        breakdown: StringField<string, unknown, boolean, boolean, boolean>;
     }>, true, false, true>;
     unrest: SchemaField<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;

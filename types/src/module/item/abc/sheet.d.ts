@@ -14,7 +14,7 @@ declare abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e
     }): {
         [key: string]: string;
     };
-    protected _onDrop(event: ElementDragEvent): Promise<void>;
+    protected _onDrop(event: DragEvent): Promise<void>;
     activateListeners($html: JQuery): void;
 }
 interface ABCSheetData<TItem extends ABCItem> extends ItemSheetDataPF2e<TItem> {

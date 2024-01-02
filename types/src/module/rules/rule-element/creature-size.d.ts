@@ -1,5 +1,4 @@
-import type { CreaturePF2e } from "@actor";
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorType, CreaturePF2e } from "@actor";
 import { Size } from "@module/data.ts";
 import { RecordField } from "@system/schema-data-fields.ts";
 import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";

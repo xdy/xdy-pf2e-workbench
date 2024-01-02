@@ -7,7 +7,7 @@ export declare class HeritageSheetPF2e extends ItemSheetPF2e<HeritagePF2e> {
     static get defaultOptions(): ItemSheetOptions;
     getData(options?: Partial<ItemSheetOptions>): Promise<HeritageSheetData>;
     activateListeners($html: JQuery): void;
-    _onDrop(event: ElementDragEvent): Promise<void>;
+    _onDrop(event: DragEvent): Promise<void>;
 }
 interface HeritageSheetData extends ItemSheetDataPF2e<HeritagePF2e> {
     ancestry: AncestryPF2e | null;

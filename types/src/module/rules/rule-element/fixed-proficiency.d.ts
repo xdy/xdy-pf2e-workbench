@@ -1,5 +1,4 @@
-import type { CharacterPF2e } from "@actor";
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorType, CharacterPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "./base.ts";

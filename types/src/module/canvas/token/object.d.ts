@@ -1,5 +1,5 @@
 import type { UserPF2e } from "@module/user/document.ts";
-import type { TokenDocumentPF2e } from "@scene/index.ts";
+import type { TokenDocumentPF2e } from "@scene";
 import { type TokenLayerPF2e } from "../index.ts";
 import { HearingSource } from "../perception/hearing-source.ts";
 import { AuraRenderers } from "./aura/index.ts";
@@ -108,7 +108,7 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     /** Obscure the token's sprite if a hearing or tremorsense detection filter is applied to it */
     render(renderer: PIXI.Renderer): void;
     protected _destroy(): void;
-    /** Players can view the sheets of lootable NPCs */
+    /** Players can view an actor's sheet if the actor is lootable. */
     protected _canView(user: UserPF2e, event: PIXI.FederatedPointerEvent): boolean;
     /** Refresh vision and the `EffectsPanel` */
     protected _onControl(options?: {

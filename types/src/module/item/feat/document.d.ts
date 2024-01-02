@@ -22,8 +22,7 @@ declare class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     /** The maximum number of times this feat can be taken */
     get maxTakable(): number;
     prepareBaseData(): void;
-    /** Set a self roll option for this feat(ure) */
-    prepareActorData(this: FeatPF2e<ActorPF2e>): void;
+    prepareActorData(): void;
     prepareSiblingData(): void;
     onPrepareSynthetics(this: FeatPF2e<ActorPF2e>): void;
     getChatData(this: FeatPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;

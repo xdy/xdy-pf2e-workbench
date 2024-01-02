@@ -2,6 +2,7 @@ import { ActorPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e, ShieldPF2e } from "@item";
 import { ItemSourcePF2e, ItemSummaryData } from "@item/base/data/index.ts";
+import { PhysicalItemConstructionContext } from "@item/physical/document.ts";
 import { IdentificationStatus, MystifiedData } from "@item/physical/index.ts";
 import { RangeData } from "@item/types.ts";
 import { UserPF2e } from "@module/user/index.ts";
@@ -91,7 +92,7 @@ interface WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extend
     system: WeaponSystemData;
     get traits(): Set<WeaponTrait>;
 }
-interface WeaponConstructionContext<TParent extends ActorPF2e | null> extends DocumentConstructionContext<TParent> {
+interface WeaponConstructionContext<TParent extends ActorPF2e | null> extends PhysicalItemConstructionContext<TParent> {
     shield?: ShieldPF2e<TParent>;
 }
 interface WeaponCloneContext extends DocumentCloneContext {

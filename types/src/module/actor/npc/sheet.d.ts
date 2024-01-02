@@ -28,7 +28,6 @@ declare class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
     get template(): string;
     /** Use the token name as the title if showing a lootable NPC sheet */
     get title(): string;
-    get isLootSheet(): boolean;
     getData(options?: Partial<ActorSheetOptions>): Promise<NPCSheetData>;
     prepareItems(sheetData: NPCSheetData): Promise<void>;
     protected prepareSpellcasting(): Promise<NPCSpellcastingSheetData[]>;

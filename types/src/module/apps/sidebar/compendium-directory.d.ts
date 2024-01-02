@@ -19,7 +19,7 @@ declare class CompendiumDirectoryPF2e extends CompendiumDirectory {
     /** Anyone can drag from search results */
     protected _canDragStart(): boolean;
     /** Replicate the functionality of dragging a compendium document from an open `Compendium` */
-    protected _onDragStart(event: ElementDragEvent): void;
+    protected _onDragStart(event: DragEvent): void;
     /** Called by a "ready" hook */
     compileSearchIndex(): void;
 }

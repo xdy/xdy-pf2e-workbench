@@ -5,6 +5,9 @@ import type { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
 import { ThreatRating } from "@scripts/macros/xp/index.ts";
 import type { CombatantPF2e, RolledCombatant } from "./combatant.ts";
 declare class EncounterPF2e extends Combat {
+    /** Has this document completed `DataModel` initialization? */
+    initialized: boolean;
+    /** Threat assessment and XP award of this encounter */
     metrics: EncounterMetrics | null;
     /** Sort combatants by initiative rolls, falling back to tiebreak priority and then finally combatant ID (random) */
     protected _sortCombatants(a: CombatantPF2e<this, TokenDocumentPF2e>, b: CombatantPF2e<this, TokenDocumentPF2e>): number;
@@ -12,6 +15,9 @@ declare class EncounterPF2e extends Combat {
     getCombatantWithHigherInit(a: RolledCombatant<this>, b: RolledCombatant<this>): RolledCombatant<this> | null;
     /** Determine threat rating and XP award for this encounter */
     analyze(): EncounterMetrics | null;
+    protected _initialize(options?: Record<string, unknown>): void;
+    /** Prevent double data preparation */
+    prepareData(): void;
     prepareDerivedData(): void;
     /** Exclude orphaned, loot-actor, and minion tokens from combat */
     createEmbeddedDocuments(embeddedName: "Combatant", data: PreCreate<foundry.documents.CombatantSource>[], context?: DocumentModificationContext<this>): Promise<CombatantPF2e<this, TokenDocumentPF2e<ScenePF2e>>[]>;

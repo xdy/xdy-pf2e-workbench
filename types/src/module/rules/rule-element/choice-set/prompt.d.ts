@@ -23,7 +23,7 @@ declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | object>
     /** Return early if there is only one choice */
     resolveSelection(): Promise<PickableThing<string | number | object> | null>;
     /** Handle a dropped homebrew item */
-    protected _onDrop(event: ElementDragEvent): Promise<void>;
+    protected _onDrop(event: DragEvent): Promise<void>;
     protected _canDragDrop(): boolean;
 }
 interface ChoiceSetPrompt extends PickAThingPrompt<string | number | object> {

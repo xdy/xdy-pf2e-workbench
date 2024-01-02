@@ -2,10 +2,10 @@ import type { ActorPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import { ItemPF2e, PhysicalItemPF2e, type SpellPF2e } from "@item";
 import { MagicTradition } from "@item/spell/types.ts";
-import { ZeroToFour } from "@module/data.ts";
+import { ZeroToFour, ZeroToTen } from "@module/data.ts";
 import type { UserPF2e } from "@module/user/index.ts";
 import { Statistic } from "@system/statistic/index.ts";
-import { SpellCollection } from "./collection.ts";
+import { SpellCollection, type SpellSlotGroupId } from "./collection.ts";
 import { SpellcastingEntrySource, SpellcastingEntrySystemData } from "./data.ts";
 import { SpellcastingCategory, SpellcastingEntry, SpellcastingEntryPF2eCastOptions, SpellcastingSheetData } from "./types.ts";
 declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> implements SpellcastingEntry<TParent> {
@@ -30,8 +30,8 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     get isFocusPool(): boolean;
     /** Ritual spellcasting is handled separately */
     get isRitual(): false;
-    get highestLevel(): number;
-    get showSlotlessLevels(): boolean;
+    get highestRank(): ZeroToTen;
+    get showSlotlessRanks(): boolean;
     prepareBaseData(): void;
     prepareSiblingData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
     prepareActorData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
@@ -45,22 +45,24 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     }): boolean;
     /** Casts the given spell as if it was part of this spellcasting entry */
     cast(spell: SpellPF2e<ActorPF2e>, options?: SpellcastingEntryPF2eCastOptions): Promise<void>;
-    consume(spell: SpellPF2e<ActorPF2e>, rank: number, slot?: number): Promise<boolean>;
+    consume(spell: SpellPF2e<ActorPF2e>, rank: number, slotId?: number): Promise<boolean>;
     /**
      * Adds a spell to this spellcasting entry, either moving it from another one if its the same actor,
      * or creating a new spell if its not.
      */
-    addSpell(spell: SpellPF2e<TParent | null>, options?: {
-        slotLevel?: number;
+    addSpell(spell: SpellPF2e<TParent | null>, { groupId }: {
+        groupId: Maybe<SpellSlotGroupId>;
     }): Promise<SpellPF2e<NonNullable<TParent>> | null>;
     /** Saves the prepared spell slot data to the spellcasting entry  */
-    prepareSpell(spell: SpellPF2e, slotRank: number, spellSlot: number): Promise<Maybe<this>>;
+    prepareSpell(spell: SpellPF2e, groupId: SpellSlotGroupId, spellSlot: number): Promise<Maybe<this>>;
     /** Removes the spell slot and updates the spellcasting entry */
-    unprepareSpell(spellLevel: number, slotRank: number): Promise<Maybe<this>>;
+    unprepareSpell(groupId: SpellSlotGroupId, slotId: number): Promise<Maybe<this>>;
     /** Sets the expended state of a spell slot and updates the spellcasting entry */
-    setSlotExpendedState(slotRank: number, spellSlot: number, isExpended: boolean): Promise<Maybe<this>>;
+    setSlotExpendedState(groupId: SpellSlotGroupId, slotId: number, value: boolean): Promise<Maybe<this>>;
     /** Returns rendering data to display the spellcasting entry in the sheet */
-    getSheetData(): Promise<SpellcastingSheetData>;
+    getSheetData({ prepList }?: {
+        prepList?: boolean | undefined;
+    }): Promise<SpellcastingSheetData>;
     getRollOptions(prefix?: string): string[];
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /**

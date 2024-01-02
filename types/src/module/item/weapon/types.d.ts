@@ -1,7 +1,7 @@
 import { PreciousMaterialType } from "@item/physical/types.ts";
-import { MELEE_WEAPON_GROUPS, WEAPON_CATEGORIES, WEAPON_GROUPS, WEAPON_PROPERTY_RUNE_TYPES, WEAPON_RANGES } from "./values.ts";
+import type { MELEE_WEAPON_GROUPS, WEAPON_CATEGORIES, WEAPON_GROUPS, WEAPON_PROPERTY_RUNE_TYPES, WEAPON_RANGES } from "./values.ts";
 type WeaponPropertyRuneType = SetElement<typeof WEAPON_PROPERTY_RUNE_TYPES>;
-type WeaponCategory = SetElement<typeof WEAPON_CATEGORIES>;
+type WeaponCategory = (typeof WEAPON_CATEGORIES)[number];
 type MeleeWeaponGroup = SetElement<typeof MELEE_WEAPON_GROUPS>;
 type WeaponGroup = SetElement<typeof WEAPON_GROUPS>;
 type BaseWeaponType = keyof typeof CONFIG.PF2E.baseWeaponTypes | keyof typeof CONFIG.PF2E.baseShieldTypes;

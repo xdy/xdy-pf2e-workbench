@@ -1,4 +1,4 @@
-import { ActorPF2e, CreaturePF2e, type FamiliarPF2e } from "@actor";
+import { CreaturePF2e, type ActorPF2e, type FamiliarPF2e } from "@actor";
 import { CreatureSpeeds, LabeledSpeed } from "@actor/creature/data.ts";
 import { CreatureUpdateContext } from "@actor/creature/types.ts";
 import { StrikeData } from "@actor/data/base.ts";
@@ -9,12 +9,12 @@ import type { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, Heri
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { ItemType } from "@item/base/data/index.ts";
 import { ZeroToTwo } from "@module/data.ts";
-import { UserPF2e } from "@module/user/document.ts";
+import type { UserPF2e } from "@module/user/document.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { RollParameters } from "@system/rolls.ts";
 import { Statistic, StatisticCheck } from "@system/statistic/index.ts";
 import { CraftingEntry, CraftingFormula } from "./crafting/index.ts";
-import { BaseWeaponProficiencyKey, CharacterAbilities, CharacterFlags, CharacterSource, CharacterStrike, CharacterSystemData, ClassDCData, WeaponGroupProficiencyKey } from "./data.ts";
+import { BaseWeaponProficiencyKey, CharacterAbilities, CharacterFlags, CharacterSource, CharacterStrike, CharacterSystemData, WeaponGroupProficiencyKey } from "./data.ts";
 import { CharacterFeats } from "./feats.ts";
 import { CharacterHitPointsSummary, CharacterSkills, GuaranteedGetStatisticSlug } from "./types.ts";
 declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
@@ -70,7 +70,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
      */
     prepareDataFromItems(): void;
     prepareDerivedData(): void;
-    private setAttributeModifiers;
+    private prepareBuildData;
     /** Set roll operations for ability scores, proficiency ranks, and number of hands free */
     protected setNumericRollOptions(): void;
     private createArmorStatistic;
@@ -80,7 +80,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     prepareSpeed(movementType: Exclude<MovementType, "land">): (LabeledSpeed & StatisticModifier) | null;
     prepareSpeed(movementType: MovementType): CreatureSpeeds | (LabeledSpeed & StatisticModifier) | null;
     private prepareFeats;
-    prepareClassDC(slug: string, classDC: Pick<ClassDCData, "label" | "ability" | "rank" | "primary">): Statistic;
+    private prepareClassDC;
     /** Prepare this character's strike actions */
     prepareStrikes({ includeBasicUnarmed }?: {
         includeBasicUnarmed?: boolean | undefined;

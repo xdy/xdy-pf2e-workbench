@@ -1,5 +1,6 @@
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
-import { Action, ActionCost, ActionMessageOptions, ActionUseOptions, ActionVariant, ActionVariantUseOptions } from "./types.ts";
+import { Action, ActionCost, ActionMessageOptions, ActionSection, ActionUseOptions, ActionVariant, ActionVariantUseOptions } from "./types.ts";
+import type { ProficiencyRank } from "@item/base/data/index.ts";
 interface BaseActionVariantData {
     cost?: ActionCost;
     description?: string;
@@ -12,6 +13,8 @@ interface BaseActionData<ActionVariantDataType extends BaseActionVariantData = B
     description: string;
     img?: string;
     name: string;
+    sampleTasks?: Partial<Record<ProficiencyRank, string>>;
+    section?: ActionSection;
     slug?: string | null;
     traits?: string[];
     variants?: ActionVariantDataType | ActionVariantDataType[];
@@ -34,6 +37,8 @@ declare abstract class BaseAction<TData extends BaseActionVariantData, TAction e
     readonly description?: string;
     readonly img?: string;
     readonly name: string;
+    readonly sampleTasks?: Partial<Record<ProficiencyRank, string>>;
+    readonly section?: ActionSection;
     readonly slug: string;
     readonly traits: string[];
     protected constructor(data: BaseActionData<TData>);
@@ -41,7 +46,7 @@ declare abstract class BaseAction<TData extends BaseActionVariantData, TAction e
     get variants(): Collection<TAction>;
     protected getDefaultVariant(options?: {
         variant?: string;
-    }): Promise<TAction>;
+    }): TAction;
     toMessage(options?: Partial<ActionMessageOptions>): Promise<ChatMessagePF2e | undefined>;
     use(options?: Partial<ActionUseOptions>): Promise<unknown>;
     protected abstract toActionVariant(data?: TData): TAction;

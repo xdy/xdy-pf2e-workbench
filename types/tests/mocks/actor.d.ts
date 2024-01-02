@@ -13,6 +13,7 @@ export declare class MockActor {
     readonly parent: TokenDocumentPF2e<ScenePF2e | null> | null;
     readonly items: MockCollection<ItemPF2e<ActorPF2e>>;
     readonly effects: MockCollection<ActiveEffectPF2e<ActorPF2e>>;
+    prototypeToken: {};
     _itemGuid: number;
     constructor(data: ActorSourcePF2e, options?: DocumentConstructionContext<null>);
     get id(): string | null;

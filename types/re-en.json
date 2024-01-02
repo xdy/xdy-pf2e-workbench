@@ -585,6 +585,7 @@
         "IWR": {
             "Custom": {
                 "AdamantineBludgeoning": "adamantine bludgeoning",
+                "AllDamageFromSpells": "all damage from spells",
                 "AllDamageFromUndead": "all damage from undead",
                 "AllMagicalDamage": "all magical damage",
                 "AllNonMagicalDamage": "all non-magical damage",
@@ -689,6 +690,12 @@
                 "TwoAllies": "Two allies are within reach of the target"
             },
             "GiantAnimatedStatueBrazier": "Brazier is alight",
+            "Hadrinnex": {
+                "RapidEvolution": {
+                    "EnergyGland": "Rapid Evolution - Energy Gland",
+                    "Husk": "Rapid Evolution - Husk"
+                }
+            },
             "HellboundAttorney": {
                 "OpeningStatementCriticalSuccess": "Opening Statement (Critical Success)"
             },
@@ -1192,6 +1199,7 @@
                 "HideIfDisabled": "Hide (If Disabled)"
             },
             "General": {
+                "Add": "Add",
                 "Brackets": "Brackets",
                 "CriticalBehavior": {
                     "false": "1x Damage on Crit",
@@ -1205,6 +1213,7 @@
                 "Primitive": "Primitive",
                 "PriorityHint": "Priority determines the order in which rule elements are executed. Rule elements with lower priority values are executed first.",
                 "Range": "Range",
+                "Remove": "Remove",
                 "Selector": "Selector",
                 "Slug": "Slug",
                 "Value": "Value"
@@ -1713,6 +1722,9 @@
                 "Prompt": "Select a clan weapon."
             },
             "Cleric": {
+                "CremateUndead": {
+                    "Note": "When you use a <em>heal</em> spell to damage undead, each undead that takes damage also takes @Damage[(@item.rank)[persistent,fire]]."
+                },
                 "DivineRebuttal": {
                     "Note": "If your Strike hits, all your allies gain a +2 circumstance bonus to the triggering saving throw (or a +3 circumstance bonus on a critical hit). @UUID[Compendium.pf2e.feat-effects.Item.jMQi2kDirzGgddti]{Effect: Divine Rebuttal}"
                 },
@@ -1989,6 +2001,14 @@
                 "FightersFork": {
                     "FluidLengthLabel": "Fighter's Fork — Fluid Length"
                 },
+                "FuryCocktail": {
+                    "AnimalisticLabel": "Animalistic",
+                    "DoubleLabel": "Double",
+                    "MournfulLabel": "Mournful",
+                    "SkepticalLabel": "Skeptical",
+                    "TitanicLabel": "Titanic",
+                    "WyrmhideLabel": "Wyrmhide"
+                },
                 "HolyWater": {
                     "Note": "Can damage only creatures with the unholy trait."
                 },
@@ -2171,6 +2191,12 @@
                 "LitLabel": "Golden Blade of Mzali is lit",
                 "PersistentDamageNote": "Unlike normal when taking two types of persistent damage, a creature needs only a single successful flat check to remove both the fire and bleed damage."
             },
+            "GolemGrafter": {
+                "ClayFist": {
+                    "Label": "Clay Fist",
+                    "Note": "When you make an unarmed Strike with your clay fist and hit, your target takes a -2 status penalty to saving throws against curse effects for 1 hour. @UUID[Compendium.pf2e.feat-effects.Item.bvk5rwYSoTtz8QGf]{Effect: Accursed Clay Fist}"
+                }
+            },
             "Gunslinger": {
                 "Way": {
                     "Prompt": "Select a way.",
@@ -2325,6 +2351,7 @@
                     "Note": "The creature you hit is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} to a designated ally on the next attack the ally makes against the creature before the start of your next turn."
                 }
             },
+            "ItemStrike": "{item} Strike",
             "Kineticist": {
                 "GateAttenuator": "Gate Attenuator",
                 "Impulse": {
@@ -2388,7 +2415,10 @@
             "Kobold": {
                 "DragonbloodParagon": {
                     "Dracomancer": "Dracomancer",
-                    "KoboldBreath": "Kobold Breath",
+                    "KoboldBreath": {
+                        "Label": "Kobold Breath",
+                        "Note": "Creatures that critically fail their save against your Kobold Breath take @Damage[3d4[@actor.flags.pf2e.draconicExemplar.damageType,persistent]]."
+                    },
                     "StrongjawKobold": "Strongjaw Kobold",
                     "VenomtailKobold": "Venomtail Kobold"
                 },
@@ -2679,6 +2709,7 @@
                 "LevelOneOrTwoClassFeat": "Select a 1st or 2nd-level class feat.",
                 "Material": "Select a material.",
                 "PathToPerfection": "Select a path to perfection.",
+                "Resistance": "Select a resistance.",
                 "Rune": "Select a Rune.",
                 "Sanctification": "Select a sanctification.",
                 "SecondImplement": "Select a second implement.",
@@ -2932,6 +2963,19 @@
             },
             "SpellmastersResilience": {
                 "Prompt": "Select a magical tradition to gain resistence in."
+            },
+            "SpellRank": {
+                "Eighth": "8th-Rank",
+                "Fifth": "5th-Rank",
+                "First": "1st-Rank",
+                "Fourth": "4th-Rank",
+                "Ninth": "9th-Rank",
+                "Prompt": "Select a spell rank.",
+                "Second": "2nd-Rank",
+                "Seventh": "7th-Rank",
+                "Sixth": "6th-Rank",
+                "Tenth": "10th-Rank",
+                "Third": "3rd-Rank"
             },
             "SpiritPower": {
                 "Love": {

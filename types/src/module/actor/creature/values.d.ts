@@ -1,5 +1,6 @@
+import type { Language, SenseAcuity, SenseType } from "./types.ts";
 declare const ALLIANCES: Set<"party" | "opposition" | null>;
-declare const SAVING_THROW_DEFAULT_ATTRIBUTES: {
+declare const SAVING_THROW_ATTRIBUTES: {
     readonly fortitude: "con";
     readonly reflex: "dex";
     readonly will: "wis";
@@ -13,13 +14,19 @@ declare const SIZE_TO_REACH: {
     readonly huge: 10;
     readonly grg: 15;
 };
+declare const SENSE_TYPES: Set<"darkvision" | "echolocation" | "greater-darkvision" | "infrared-vision" | "lifesense" | "low-light-vision" | "motion-sense" | "scent" | "see-invisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "truesight" | "wavesense">;
 /** Sense types associated with a particular acuities by definition */
 declare const SENSES_WITH_MANDATORY_ACUITIES: {
-    readonly darkvision: "precise";
-    readonly heatsight: "precise";
-    readonly greaterDarkvision: "precise";
-    readonly lowLightVision: "precise";
-    readonly seeInvisibility: "precise";
+    [K in SenseType]?: SenseAcuity;
 };
-declare const LANGUAGES: readonly ["adlet", "akitonian", "aklo", "alghollthu", "amurrun", "anadi", "ancient-osiriani", "androffan", "anugobu", "arboreal", "arcadian", "azlanti", "boggard", "calda", "caligni", "chthonian", "common", "cyclops", "daemonic", "destrachan", "diabolic", "draconic", "drooni", "dwarven", "dziriak", "ekujae", "elder-thing", "elven", "empyrean", "erutaki", "fey", "formian", "garundi", "girtablilu", "gnomish", "goblin", "goloma", "grioth", "grippli", "halfling", "hallit", "hwan", "iblydan", "ikeshti", "immolis", "iruxi", "jistkan", "jotun", "jyoti", "kaava", "kashrishi", "kelish", "kholo", "kibwani", "kitsune", "kovintal", "lirgeni", "mahwek", "migo", "minaten", "minkaian", "muan", "munavri", "mwangi", "mzunu", "nagaji", "necril", "ocotan", "okaiyan", "orcish", "orvian", "osiriani", "petran", "protean", "pyric", "rasu", "ratajin", "razatlani", "requian", "russian", "sakvroth", "samsaran", "sasquatch", "senzar", "shadowtongue", "shae", "shisk", "shoanti", "shobhad", "shoony", "shory", "skald", "sphinx", "strix", "sussuran", "taldane", "talican", "tekritanin", "tengu", "thalassic", "thassilonian", "tien", "utopian", "vanara", "varisian", "varki", "vishkanyan", "vudrani", "wildsong", "wyrwood", "xanmba", "yithian", "ysoki"];
-export { ALLIANCES, LANGUAGES, SAVING_THROW_DEFAULT_ATTRIBUTES, SENSES_WITH_MANDATORY_ACUITIES, SIZE_TO_REACH };
+declare const SENSES_WITH_UNLIMITED_RANGE: readonly ["darkvision", "greater-darkvision", "low-light-vision", "see-invisibility"];
+declare const SENSE_ACUITIES: readonly ["precise", "imprecise", "vague"];
+declare const LANGUAGES_BY_RARITY: {
+    common: readonly ["draconic", "dwarven", "elven", "fey", "gnomish", "goblin", "halfling", "jotun", "orcish", "sakvroth", "taldane"];
+    uncommon: readonly ["adlet", "aklo", "alghollthu", "amurrun", "arboreal", "boggard", "caligni", "chthonian", "cyclops", "daemonic", "diabolic", "empyrean", "grippli", "hallit", "iruxi", "kelish", "kholo", "kitsune", "muan", "mwangi", "nagaji", "necril", "osiriani", "petran", "protean", "pyric", "requian", "shadowtongue", "shoanti", "skald", "sphinx", "sussuran", "tengu", "thalassic", "tien", "utopian", "vanara", "varisian", "vudrani", "ysoki"];
+    rare: readonly ["ancient-osiriani", "akitonian", "anadi", "androffan", "anugobu", "arcadian", "azlanti", "calda", "destrachan", "drooni", "dziriak", "ekujae", "elder-thing", "erutaki", "formian", "garundi", "girtablilu", "goloma", "grioth", "hwan", "iblydan", "ikeshti", "immolis", "jistkan", "jyoti", "kaava", "kashrishi", "kibwani", "kovintal", "lirgeni", "mahwek", "migo", "minaten", "minkaian", "munavri", "mzunu", "ocotan", "okaiyan", "orvian", "rasu", "ratajin", "razatlani", "russian", "samsaran", "sasquatch", "senzar", "shae", "shisk", "shobhad", "shoony", "shory", "strix", "talican", "tekritanin", "thassilonian", "varki", "vishkanyan", "wyrwood", "xanmba", "yithian"];
+    secret: readonly ["wildsong"];
+};
+declare const LANGUAGES: Language[];
+declare const LANGUAGE_RARITIES: readonly ["common", "uncommon", "rare", "secret"];
+export { ALLIANCES, LANGUAGES, LANGUAGES_BY_RARITY, LANGUAGE_RARITIES, SAVING_THROW_ATTRIBUTES, SENSES_WITH_MANDATORY_ACUITIES, SENSES_WITH_UNLIMITED_RANGE, SENSE_ACUITIES, SENSE_TYPES, SIZE_TO_REACH, };

@@ -3,7 +3,7 @@ import { DamageRollFlag } from "@module/chat-message/index.ts";
 import type { UserPF2e } from "@module/user/index.ts";
 import { DegreeOfSuccessIndex } from "@system/degree-of-success.ts";
 import { RollDataPF2e } from "@system/rolls.ts";
-import Peggy from "peggy";
+import type Peggy from "peggy";
 import { InstancePool } from "./terms.ts";
 import { DamageCategory, DamageTemplate, DamageType, MaterialDamageEffect } from "./types.ts";
 declare abstract class AbstractDamageRoll extends Roll {
@@ -22,11 +22,11 @@ declare abstract class AbstractDamageRoll extends Roll {
     protected _evaluateSync(): never;
 }
 declare class DamageRoll extends AbstractDamageRoll {
-    roller: UserPF2e | null;
-    constructor(formula: string, data?: {}, options?: DamageRollData);
     static CHAT_TEMPLATE: string;
     static TOOLTIP_TEMPLATE: string;
     static parse(formula: string, data: Record<string, unknown>): InstancePool[];
+    constructor(formula: string, data?: {}, options?: DamageRollData);
+    get roller(): UserPF2e | null;
     /** Ensure the roll is parsable as `PoolTermData` */
     static validate(formula: string): boolean;
     /** Identify each "DiceTerm" raw object with a non-abstract subclass name */
@@ -57,7 +57,9 @@ declare class DamageRoll extends AbstractDamageRoll {
 }
 interface DamageRoll extends AbstractDamageRoll {
     constructor: typeof DamageRoll;
-    options: DamageRollData;
+    options: DamageRollData & {
+        showBreakdown: boolean;
+    };
 }
 declare class DamageInstance extends AbstractDamageRoll {
     #private;
@@ -66,7 +68,7 @@ declare class DamageInstance extends AbstractDamageRoll {
     persistent: boolean;
     materials: Set<MaterialDamageEffect>;
     critRule: CriticalDoublingRule | null;
-    constructor(formula: string, data?: {}, options?: DamageInstanceData);
+    constructor(formula: string, data?: {}, { flavor, ...options }?: DamageInstanceData);
     static parse(formula: string, data: Record<string, unknown>): RollTerm[];
     static fromData<TRoll extends Roll>(this: ConstructorOf<TRoll>, data: RollJSON): TRoll;
     /** Get the expected, minimum, or maximum value of a term */

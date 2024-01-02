@@ -1,27 +1,37 @@
-import { SenseData } from "./data.ts";
-export declare class CreatureSensePF2e implements SenseData {
-    /** low-light vision, darkvision, scent, etc. */
-    type: SenseType;
-    /** One of "precise", "imprecise", or "vague" */
-    acuity: SenseAcuity;
-    /** The range of the sense, if any */
-    value: string;
-    /** The source of the sense, if any */
-    source?: string;
-    get range(): number;
-    constructor(data: Omit<SenseData, "value"> & {
-        value?: string;
-    });
+import type { ActorPF2e } from "@actor";
+import type { NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { SenseData } from "./data.ts";
+import type { SenseAcuity, SenseType } from "./index.ts";
+declare class Sense extends foundry.abstract.DataModel<ActorPF2e, SenseSchema> {
+    constructor(data: SenseConstructorParams, options: DataModelConstructionOptions<ActorPF2e>);
+    static defineSchema(): SenseSchema;
     /** The localized label of the sense */
     get label(): string | null;
+    /** Whether to emphasize the label when displayed on actor sheets */
+    get emphasizeLabel(): boolean;
     isMoreAcuteThan(sense: {
         acuity: SenseAcuity;
     }): boolean;
-    hasLongerRangeThan(sense: {
-        value: string;
-    }): boolean;
+    toObject(source?: true): this["_source"];
+    toObject(source: false): LabeledSenseData<this>;
+    toObject(source?: boolean): this["_source"] | LabeledSenseData;
 }
-export type SenseAcuity = (typeof SENSE_ACUITIES)[number];
-export type SenseType = SetElement<typeof SENSE_TYPES>;
-export declare const SENSE_ACUITIES: readonly ["precise", "imprecise", "vague"];
-export declare const SENSE_TYPES: Set<"darkvision" | "echolocation" | "greaterDarkvision" | "heatsight" | "lifesense" | "lowLightVision" | "motionsense" | "scent" | "seeInvisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "wavesense">;
+interface Sense extends foundry.abstract.DataModel<ActorPF2e, SenseSchema>, ModelPropsFromSchema<SenseSchema> {
+    range: number;
+}
+type SenseConstructorParams = Partial<Omit<SenseData, "range" | "type">> & {
+    type: SenseType;
+    range?: number | null;
+};
+type SenseSchema = {
+    type: StringField<SenseType, SenseType, true, false, false>;
+    acuity: StringField<SenseAcuity, SenseAcuity, true, false, true>;
+    range: NumberField<number, number, true, true, true>;
+    source: StringField<string, string, false, true, true>;
+};
+type LabeledSenseData<TModel extends Sense = Sense> = RawObject<TModel> & {
+    range: number;
+    label: string | null;
+    emphasizeLabel: boolean;
+};
+export { Sense, type LabeledSenseData };

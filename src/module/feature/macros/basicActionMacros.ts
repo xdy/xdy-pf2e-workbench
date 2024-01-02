@@ -39,7 +39,7 @@ function createMapOfSkillsPerActor(actors) {
 }
 
 function fetchSkills(actor) {
-    return { perception: actor.attributes.perception, ...actor.skills };
+    return { perception: actor.perception, ...actor.skills };
 }
 
 function signedNumber(n) {
@@ -597,12 +597,18 @@ export function basicActionMacros() {
     const newStyleActions: MacroAction[] = Array.from(game.pf2e.actions)
         .filter((x) => bamActions.find((y) => y.replacedWith === x[0]))
         .map((x) => {
+            let statistic = x[1].statistic;
+            if (Array.isArray(statistic)) {
+                // TODO Handle properly. For now, just use the first in the array
+                statistic = x[1].statistic[0];
+            }
+
             // TODO Handle variants
             return {
                 actionType: bamActions.find((y) => y.replacedWith === x[0])?.actionType,
                 name: game.i18n.localize(x[1].name),
-                skill: x[1].statistic
-                    ? x[1].statistic.charAt(0).toUpperCase() + x[1].statistic.slice(1)
+                skill: statistic
+                    ? statistic.charAt(0).toUpperCase() + statistic.slice(1)
                     : bamActions.find((y) => y.replacedWith === x[0])?.skill.toLocaleLowerCase(),
                 icon:
                     x[1].img ??
@@ -639,14 +645,6 @@ export function basicActionMacros() {
             const hasAltSkillAndFeat =
                 x.altSkillAndFeat?.find((y) => selectedActor.skills?.[y.skill.toLocaleLowerCase()]?.rank) &&
                 x.altSkillAndFeat?.find((y) => selectedActor.itemTypes.feat.find((feat) => feat.slug === y.feat));
-            // const hasAltSkill = x.altSkillAndFeat?.find((y) => selectedActor.skills?.[y.skill.toLocaleLowerCase()]?.rank);
-            // const hasAltFeat = x.altSkillAndFeat?.find((y) => selectedActor.itemTypes.feat.find((feat) => feat.slug === y.feat));
-            // const hasAltSkill = (x.altSkill && selectedActor.skills?.[x.altSkill.toLocaleLowerCase()]?.rank) ?? 0 > 0;
-            // const hasAltSkillRequiredFeat =
-            //     !x.altSkillRequiredFeat ||
-            //     (x.altSkill &&
-            //         x.altSkillRequiredFeat &&
-            //         selectedActor.itemTypes.feat.find((feat) => feat.slug === x.altSkillRequiredFeat));
             return (
                 showUnusable ||
                 x.actionType !== "skill_trained" ||

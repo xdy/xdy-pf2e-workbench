@@ -1,2 +1,5 @@
 import { SkillActionOptions } from "../index.ts";
-export declare function lie(options: SkillActionOptions): void;
+import { SingleCheckAction } from "@actor/actions/index.ts";
+declare function lie(options: SkillActionOptions): void;
+declare const action: SingleCheckAction;
+export { lie as legacy, action };

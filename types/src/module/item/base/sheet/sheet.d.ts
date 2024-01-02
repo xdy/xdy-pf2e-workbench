@@ -51,7 +51,7 @@ interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData<TItem>
     enabledRulesUI: boolean;
     ruleEditing: boolean;
     rarity: Rarity | null;
-    rarities: ConfigPF2e["PF2E"]["rarityTraits"];
+    rarities: typeof CONFIG.PF2E.rarityTraits;
     traits: SheetOptions | null;
     traitTagifyData: TraitTagifyEntry[] | null;
     rules: {
@@ -64,7 +64,7 @@ interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData<TItem>
         }[];
     };
     /** Lore only, will be removed later */
-    proficiencies: ConfigPF2e["PF2E"]["proficiencyLevels"];
+    proficiencyRanks: typeof CONFIG.PF2E.proficiencyLevels;
 }
 interface ItemSheetOptions extends DocumentSheetOptions {
     hasSidebar: boolean;

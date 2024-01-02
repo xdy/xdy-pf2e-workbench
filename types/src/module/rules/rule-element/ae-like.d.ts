@@ -30,6 +30,7 @@ declare class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElemen
     afterPrepareData(): void;
     /** Apply the modifications prior to a Check (roll) */
     beforeRoll(_domains: string[], rollOptions: Set<string>): void;
+    static getNewValue(mode: AELikeChangeMode, current: number, change: number, merge?: boolean): number;
     static getNewValue<TCurrent>(mode: AELikeChangeMode, current: TCurrent, change: TCurrent extends (infer TValue)[] ? TValue : TCurrent, merge?: boolean): (TCurrent extends (infer TValue)[] ? TValue : TCurrent) | DataModelValidationFailure;
 }
 interface AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TSchema>, ModelPropsFromRESchema<AELikeSchema> {

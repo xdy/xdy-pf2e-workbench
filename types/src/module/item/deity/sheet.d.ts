@@ -10,7 +10,7 @@ export declare class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
     static get defaultOptions(): ItemSheetOptions;
     getData(options?: Partial<ItemSheetOptions>): Promise<DeitySheetData>;
     activateListeners($html: JQuery): void;
-    _onDrop(event: ElementDragEvent): Promise<void>;
+    _onDrop(event: DragEvent): Promise<void>;
     /** Foundry inflexibly considers checkboxes to be booleans: set back to a string tuple for Divine Font */
     _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }

@@ -26,8 +26,6 @@ interface HazardAttributesSource extends ActorAttributesSource {
         temp: number;
         details: string;
     };
-    perception?: never;
-    initiative?: never;
     hardness: number;
     stealth: {
         value: number | null;
@@ -49,10 +47,11 @@ interface HazardDetailsSource extends ActorDetailsSource {
     readonly alliance?: never;
 }
 interface HazardSystemData extends Omit<HazardSystemSource, "attributes" | "details">, Omit<ActorSystemData, "traits"> {
+    actions: NPCStrike[];
     attributes: HazardAttributes;
     details: HazardDetails;
+    initiative?: InitiativeTraceData;
     traits: HazardTraitsData;
-    actions: NPCStrike[];
 }
 interface HazardTraitsSource extends ActorTraitsSource<HazardTrait> {
     size: {
@@ -72,7 +71,6 @@ interface HazardAttributes extends Omit<HazardAttributesSource, "initiative" | "
     hasHealth: boolean;
     hp: HazardHitPoints;
     hardness: number;
-    initiative?: InitiativeTraceData;
     stealth: {
         value: number | null;
         details: string;

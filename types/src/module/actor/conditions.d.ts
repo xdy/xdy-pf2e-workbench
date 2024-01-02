@@ -1,7 +1,7 @@
-import { ConditionPF2e } from "@item";
-import { ConditionSlug, PersistentDamagePF2e } from "@item/condition/index.ts";
-import { ActorPF2e } from "./base.ts";
+import type { ConditionPF2e } from "@item";
+import type { ConditionSlug, PersistentDamagePF2e } from "@item/condition/index.ts";
 import { DelegatedCollection } from "@util";
+import type { ActorPF2e } from "./base.ts";
 /** A wrapper for collections of conditions on an actor, filterable by whether they're active or stored/temporary */
 declare class ActorConditions<TActor extends ActorPF2e> extends DelegatedCollection<ConditionPF2e<TActor>> {
     #private;
@@ -21,6 +21,10 @@ declare class ActorConditions<TActor extends ActorPF2e> extends DelegatedCollect
     get stunned(): ConditionPF2e<TActor> | null;
     get stupefied(): ConditionPF2e<TActor> | null;
     get wounded(): ConditionPF2e<TActor> | null;
+    /** Whether the actor has a condition of a certain type */
+    hasType(slug: ConditionSlug): boolean;
+    /** Finalize the conditions this actor has, populating #conditionsHad */
+    finalize(): void;
     /** Provide additional options for retrieving a condition */
     get(key: Maybe<string>, options: {
         strict: true;

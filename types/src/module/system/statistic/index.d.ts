@@ -3,3 +3,4 @@ export * from "./data.ts";
 export * from "./statistic.ts";
 export * from "./armor-class.ts";
 export * from "./hit-points.ts";
+export * from "./perception.ts";

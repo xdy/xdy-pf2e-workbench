@@ -21,10 +21,9 @@ declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF
     /** Does this NPC have the Weak adjustment? */
     get isWeak(): boolean;
     get identificationDCs(): CreatureIdentificationData;
-    get isLootable(): boolean;
     /** A user can see an unlinked NPC in the actor directory only if they have at least Observer permission */
     get visible(): boolean;
-    /** Users with limited permission can loot a dead NPC */
+    /** Non-owning users may be able to loot a dead NPC. */
     canUserModify(user: User, action: UserAction): boolean;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */
     prepareBaseData(): void;

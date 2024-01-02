@@ -1,19 +1,7 @@
-import {
-    foundryGetProperty,
-    isActuallyDamageRoll,
-    isFirstGM,
-    logDebug,
-    logInfo,
-    pf2eDeepClone,
-    pf2eMergeObject,
-    pf2eSetProperty,
-    shouldIHandleThis,
-} from "./utils.js";
-import { ActorPF2e } from "@actor";
-import { ActorSystemData } from "@actor/data/base.js";
+import { isActuallyDamageRoll, isFirstGM, logDebug, logInfo, shouldIHandleThis } from "./utils.js";
+import { ActorPF2e, CreaturePF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
-import { ActorSheetPF2e } from "@actor/sheet/base.js";
 import { UserPF2e } from "@module/user/index.js";
 import {
     actionsReminder,
@@ -55,9 +43,10 @@ import { ItemPF2e } from "@item/base/document.js";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
 import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
-import { CreaturePF2e } from "@actor/creature/document.js";
 import { CheckRoll } from "@module/system/check/roll.js";
 import { PhysicalItemPF2e } from "@item/physical/document.js";
+import { ActorSystemData } from "@actor/data/base.js";
+import { ActorSheetPF2e } from "@actor/sheet/base.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;
@@ -251,14 +240,14 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
         if (
             (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault" ||
                 String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) ===
-                "nonCollapsedDefault") &&
+                    "nonCollapsedDefault") &&
             ["weapon", "melee", "spell"].includes(message.item?.type ?? "")
         ) {
             chatAttackCardDescriptionCollapse(html);
         }
         if (
             ((String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) === "collapsedDefault" ||
-                    String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
+                String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
                     "nonCollapsedDefault") &&
                 !message.item) ||
             message.item?.type === "action"
@@ -335,8 +324,7 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
     }
 }
 
-export async function updateItemHook(_item: ItemPF2e, _update: any) {
-}
+export async function updateItemHook(_item: ItemPF2e, _update: any) {}
 
 export async function deleteItemHook(item: ItemPF2e, _options: {}) {
     if (isFirstGM() && item.slug === "dying" && item.parent) {
@@ -390,7 +378,7 @@ export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: JQuery, data: 
 }
 
 export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<string, string>) {
-    const updateHp = foundryGetProperty(update, "system.attributes.hp.value");
+    const updateHp = fu.getProperty(update, "system.attributes.hp.value");
 
     // All these are only relevant if hp has changed (it's undefined otherwise)
     if (typeof updateHp === "number") {
@@ -410,11 +398,11 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
         const automoveIfZeroHP =
             game.combat &&
             ((String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HPCharactersOnly" &&
-                    actor.type === CHARACTER_TYPE) ||
+                actor.type === CHARACTER_TYPE) ||
                 (String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HP" &&
                     [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
         if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
-            handleDyingOnZeroHP(actor, pf2eDeepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
+            handleDyingOnZeroHP(actor, fu.deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
                 logDebug("Workbench increaseDyingOnZeroHP complete");
                 if (hpRaisedAbove0) {
                     if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {
@@ -468,7 +456,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
 
 export function preUpdateTokenHook(_document, update, options, ..._args) {
     if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x || update.y)) {
-        pf2eSetProperty(options, "animation", {
+        fu.setProperty(options, "animation", {
             movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
         });
     }
@@ -517,7 +505,7 @@ export function pf2eRerollHook(
 export async function pf2eSystemReadyHook() {
     function unflatten(object) {
         const result = {};
-        Object.keys(object).forEach(function(k) {
+        Object.keys(object).forEach(function (k) {
             setValue(result, k, object[k]);
         });
         return result;
@@ -527,7 +515,7 @@ export async function pf2eSystemReadyHook() {
         const split = path.split(".");
         const top = split.pop();
 
-        split.reduce(function(o, k, i, kk) {
+        split.reduce(function (o, k, i, kk) {
             return (o[k] = o[k] || (isFinite(i + 1 in kk ? kk[i + 1] : top) ? [] : {}));
         }, object)[top] = value;
     }
@@ -553,7 +541,7 @@ export async function pf2eSystemReadyHook() {
                     }
 
                     patchData["system"]["traits"]["value"].push("hb_workbenched");
-                    const object = pf2eMergeObject(original, patchData);
+                    const object = fu.mergeObject(original, patchData);
                     const unflatten1 = unflatten(object);
                     await document.update(unflatten1);
                 } else if (patch.action === "unlock") {

@@ -15,14 +15,14 @@ interface SingleCheckActionVariantData extends BaseActionVariantData {
     modifiers?: RawModifier[];
     notes?: SingleCheckActionRollNoteData[];
     rollOptions?: string[];
-    statistic?: string;
+    statistic?: string | string[];
 }
 interface SingleCheckActionData extends BaseActionData<SingleCheckActionVariantData> {
     difficultyClass?: CheckDC | DCSlug;
     modifiers?: RawModifier[];
     notes?: SingleCheckActionRollNoteData[];
     rollOptions?: string[];
-    statistic: string;
+    statistic: string | string[];
 }
 interface SingleCheckActionUseOptions extends ActionUseOptions {
     difficultyClass: CheckDC | string;
@@ -39,7 +39,7 @@ declare class SingleCheckActionVariant extends BaseActionVariant {
     get modifiers(): RawModifier[];
     get notes(): RollNoteSource[];
     get rollOptions(): string[];
-    get statistic(): string;
+    get statistic(): string | string[];
     use(options?: Partial<SingleCheckActionUseOptions>): Promise<CheckResultCallback[]>;
     protected checkContext<ItemType extends ItemPF2e<ActorPF2e>>(opts: CheckContextOptions<ItemType>, data: CheckContextData<ItemType>): CheckContext<ItemType> | undefined;
 }
@@ -48,7 +48,7 @@ declare class SingleCheckAction extends BaseAction<SingleCheckActionVariantData,
     readonly modifiers: RawModifier[];
     readonly notes: RollNoteSource[];
     readonly rollOptions: string[];
-    readonly statistic: string;
+    readonly statistic: string | string[];
     constructor(data: SingleCheckActionData);
     protected toActionVariant(data?: SingleCheckActionVariantData): SingleCheckActionVariant;
 }

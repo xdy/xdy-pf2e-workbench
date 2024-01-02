@@ -1,4 +1,4 @@
-import { TokenPF2e } from "../index.ts";
+import type { TokenPF2e } from "../index.ts";
 /** Visual rendering of lines from token to flanking buddies token on highlight */
 declare class FlankingHighlightRenderer {
     #private;
@@ -11,16 +11,6 @@ declare class FlankingHighlightRenderer {
     constructor(token: TokenPF2e);
     /** Get existing layer graphics object or create one if one does not exist */
     get layer(): PIXI.Graphics;
-    /**
-     * Whether the flank highlight should be rendered to the user:
-     * Canvas must be ready with a scene in focus, the user must own or have selected this token,
-     * and the token must not be a preview or animating.
-     */
-    get shouldRender(): boolean;
-    /** To be valid, token must be selected by owner or be user's character */
-    get tokenIsSelectedOrOwn(): boolean;
-    /** To be valid, this token must not be preview or be animating */
-    get tokenIsReady(): boolean;
     /** Draw flanking highlight if conditions are met */
     draw(): void;
     /**

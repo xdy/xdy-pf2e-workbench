@@ -1,4 +1,4 @@
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorType } from "@actor";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { ItemGrantDeleteAction } from "@item/base/data/system.ts";
 import { RuleElementOptions, RuleElementPF2e } from "../base.ts";

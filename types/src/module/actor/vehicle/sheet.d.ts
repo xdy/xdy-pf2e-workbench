@@ -19,6 +19,7 @@ interface VehicleSheetData extends ActorSheetDataPF2e<VehiclePF2e> {
     actorSizes: typeof CONFIG.PF2E.actorSizes;
     actorSize: string;
     ac: AdjustedValue;
+    frequencies: typeof CONFIG.PF2E.frequencies;
     saves: {
         fortitude: AdjustedValue;
     };

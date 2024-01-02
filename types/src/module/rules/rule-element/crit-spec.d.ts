@@ -1,5 +1,5 @@
-import { ActorType } from "@actor/data/index.ts";
 import { ModifierType } from "@actor/modifiers.ts";
+import type { ActorType } from "@actor/types.ts";
 import { DamageCategoryUnique, DamageType } from "@system/damage/types.ts";
 import type { BooleanField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "./base.ts";

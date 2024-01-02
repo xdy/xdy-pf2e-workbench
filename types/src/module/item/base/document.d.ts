@@ -11,6 +11,8 @@ import type { ItemFlagsPF2e, ItemSourcePF2e, ItemSummaryData, ItemSystemData, It
 import type { ItemSheetPF2e } from "./sheet/sheet.ts";
 /** The basic `Item` subclass for the system */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
+    /** Has this document completed `DataModel` initialization? */
+    initialized: boolean;
     static getDefaultArtwork(itemData: foundry.documents.ItemSource): {
         img: ImageFilePath;
     };
@@ -45,7 +47,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
      * Create a chat card for this item and either return the message or send it to the chat log. Many cards contain
      * follow-up options for attack rolls, effect application, etc.
      */
-    toMessage(event?: MouseEvent | JQuery.TriggeredEvent, options?: {
+    toMessage(event?: Maybe<MouseEvent | JQuery.TriggeredEvent>, options?: {
         rollMode?: RollMode | "roll";
         create?: boolean;
         data?: Record<string, unknown>;
@@ -53,7 +55,10 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     /** A shortcut to `item.toMessage(..., { create: true })`, kept for backward compatibility */
     toChat(event?: JQuery.TriggeredEvent): Promise<ChatMessagePF2e | undefined>;
     protected _initialize(options?: Record<string, unknown>): void;
-    /** If embedded, don't prepare data if the parent's data model hasn't initialized all its properties */
+    /**
+     * Never prepare data except as part of `DataModel` initialization. If embedded, don't prepare data if the parent is
+     * not yet initialized. See https://github.com/foundryvtt/foundryvtt/issues/7987
+     */
     prepareData(): void;
     /** Ensure the presence of the pf2e flag scope with default properties and values */
     prepareBaseData(): void;

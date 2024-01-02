@@ -1,3 +1,4 @@
+import { type ArmyPF2e } from "@actor";
 import { FeatGroup } from "@actor/character/feats.ts";
 import { RawModifier } from "@actor/modifiers.ts";
 import { CampaignFeaturePF2e } from "@item";
@@ -15,6 +16,7 @@ declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements Par
     bonusFeats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>;
     skills: Record<KingdomSkill, Statistic>;
     control: Statistic;
+    armies: ArmyPF2e[];
     static defineSchema(): KingdomSchema;
     get actor(): PartyPF2e;
     get extraItemTypes(): ItemType[];
@@ -38,6 +40,8 @@ declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements Par
      * Scoping to system.campaign is necessary for certain sheet listeners such as data-property.
      */
     update(data: DeepPartial<KingdomSource> & Record<string, unknown>): Promise<void>;
+    /** Resets kingdom data preparation and re-renders all party actor sheets, which includes the kingmaker sheet */
+    notifyUpdate: () => void;
     prepareBaseData(): void;
     prepareDerivedData(): void;
     getRollOptions(): string[];

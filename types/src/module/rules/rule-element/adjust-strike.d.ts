@@ -1,4 +1,4 @@
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorType } from "@actor/types.ts";
 import { PredicateField } from "@system/schema-data-fields.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "./ae-like.ts";

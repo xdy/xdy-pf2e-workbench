@@ -62,10 +62,7 @@ type ItemSystemSource = {
     level?: {
         value: number;
     };
-    description: {
-        gm: string;
-        value: string;
-    };
+    description: ItemDescriptionSource;
     traits: ItemTraits | ItemTraitsNoRarity | RarityTraitAndOtherTags | OtherTagsOnly;
     rules: RuleElementSource[];
     slug: string | null;
@@ -79,8 +76,17 @@ type ItemSystemSource = {
         lastMigration: object | null;
     }>;
 };
-type ItemSystemData = ItemSystemSource;
-type FrequencyInterval = keyof ConfigPF2e["PF2E"]["frequencies"];
+interface ItemDescriptionSource {
+    gm: string;
+    value: string;
+}
+interface ItemSystemData extends ItemSystemSource {
+    description: ItemDescriptionData;
+}
+interface ItemDescriptionData extends ItemDescriptionSource {
+    addenda: string[];
+}
+type FrequencyInterval = keyof typeof CONFIG.PF2E.frequencies;
 interface FrequencySource {
     value?: number;
     max: number;

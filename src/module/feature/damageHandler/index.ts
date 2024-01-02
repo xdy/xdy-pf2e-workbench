@@ -1,5 +1,4 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { ActorFlagsPF2e } from "@actor/data/base.js";
 import {
     degreeOfSuccessWithRerollHandling,
     isActuallyDamageRoll,
@@ -8,6 +7,7 @@ import {
 } from "../../utils.ts";
 import { handleDying } from "../../hooks.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
+import { ActorFlagsPF2e } from "@actor/data/base.js";
 
 /**
  * Checks if the given message satisfies the conditions to perform a flat check,
@@ -118,7 +118,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     rollForNonAttackNonSaveSpell ||
                     (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
                 ) {
-                    let castLevel = flags.casting?.level ?? (<any>origin)?.system.level.value;
+                    let castRank = flags.casting?.level ?? (<any>origin)?.system.level.value;
                     // flags.casting?.level isn't always set, unfortunately
                     let levelFromChatCard = flags.casting?.level ?? false;
                     // Try getting from chat as a fallback
@@ -131,7 +131,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                                 const level = spellMessage.content.match(/data-cast-level="(\d+)"/);
                                 if (level && level[1]) {
                                     levelFromChatCard = true;
-                                    castLevel = parseInt(level[1]);
+                                    castRank = parseInt(level[1]);
                                     break;
                                 }
                             }
@@ -161,9 +161,9 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     if (rollDamage) {
                         // Fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
                         const currentTarget = document.createElement("div");
-                        currentTarget.dataset.castLevel = castLevel.toString();
+                        currentTarget.dataset.castRank = castRank.toString();
                         currentTarget.closest = () => {
-                            return { dataset: { castLevel: castLevel } };
+                            return { dataset: { castRank: castRank } };
                         };
                         // Make automatic damageRoll be private if the spell is private, unless hideNameOfPrivateSpell is set.
                         if (blind && game.settings.get(MODULENAME, "castPrivateSpellHideName")) {
@@ -171,18 +171,18 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         }
                         if (message.flags?.pf2e?.origin?.variant?.overlays?.length > 0) {
                             const variant = await origin.loadVariant({
-                                castLevel,
+                                castRank,
                                 overlayIds: [message.flags.pf2e.origin.variant.overlays[0]],
                             });
                             await variant.rollDamage({
                                 currentTarget: currentTarget,
-                                spellLevel: castLevel,
+                                spellLevel: castRank,
                                 ctrlKey: blind,
                             });
                         } else {
                             await origin?.rollDamage({
                                 currentTarget: currentTarget,
-                                spellLevel: castLevel,
+                                spellLevel: castRank,
                                 ctrlKey: blind,
                             });
                         }

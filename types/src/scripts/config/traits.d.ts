@@ -1749,6 +1749,7 @@ declare const equipmentTraits: {
     vishkanya: string;
 };
 declare const shieldTraits: {
+    apex: string;
     "deflecting-bludgeoning": string;
     "deflecting-physical-ranged": string;
     "deflecting-piercing": string;
@@ -1761,6 +1762,7 @@ declare const shieldTraits: {
     "integrated-1d6-p": string;
     "integrated-1d6-s": string;
     "integrated-1d6-s-versatile-p": string;
+    invested: string;
     "launching-dart": string;
     magical: string;
     "shield-throw-20": string;

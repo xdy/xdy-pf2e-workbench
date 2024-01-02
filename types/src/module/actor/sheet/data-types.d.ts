@@ -12,6 +12,8 @@ export interface InventoryItem<TItem extends PhysicalItemPF2e = PhysicalItemPF2e
     editable: boolean;
     isContainer: boolean;
     canBeEquipped: boolean;
+    /** Bulk for each item is shown on an individual basis from merchant sheets */
+    unitBulk: string | null;
     isInvestable: boolean;
     isSellable: boolean;
     hasCharges: boolean;
@@ -34,7 +36,7 @@ export interface SheetInventory {
     sections: SheetItemList[];
     bulk: InventoryBulk;
     showValueAlways: boolean;
-    showIndividualPricing: boolean;
+    showUnitBulkPrice: boolean;
     hasStowingContainers: boolean;
     invested?: {
         value: number;
@@ -42,6 +44,7 @@ export interface SheetInventory {
     } | null;
 }
 export interface ActorSheetDataPF2e<TActor extends ActorPF2e> extends ActorSheetData<TActor> {
+    data: TActor["system"];
     canDistributeCoins?: {
         enabled: boolean;
     } | null;
@@ -49,7 +52,7 @@ export interface ActorSheetDataPF2e<TActor extends ActorPF2e> extends ActorSheet
     inventory: SheetInventory;
     isLootSheet: boolean;
     isTargetFlatFooted: boolean;
-    toggles: RollOptionToggle[];
+    toggles: Record<string, RollOptionToggle[]>;
     totalCoinage: CoinageSummary;
     totalCoinageGold: string;
     totalWealth: Coins;

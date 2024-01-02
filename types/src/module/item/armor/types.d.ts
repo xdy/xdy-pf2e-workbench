@@ -1,9 +1,9 @@
-import type { ARMOR_PROPERTY_RUNE_TYPES } from "./values.ts";
-type ArmorTrait = keyof ConfigPF2e["PF2E"]["armorTraits"];
-type ArmorCategory = keyof ConfigPF2e["PF2E"]["armorCategories"];
-type ArmorGroup = keyof ConfigPF2e["PF2E"]["armorGroups"];
+import type { ARMOR_CATEGORIES, ARMOR_GROUPS, ARMOR_PROPERTY_RUNE_TYPES } from "./values.ts";
+type ArmorCategory = (typeof ARMOR_CATEGORIES)[number];
+type ArmorGroup = (typeof ARMOR_GROUPS)[number];
 type ArmorPropertyRuneType = SetElement<typeof ARMOR_PROPERTY_RUNE_TYPES>;
-type BaseArmorType = keyof ConfigPF2e["PF2E"]["baseArmorTypes"];
-type ResilientRuneType = "" | "resilient" | "greaterResilient" | "majorResilient";
+type ArmorTrait = keyof typeof CONFIG.PF2E.armorTraits;
+type BaseArmorType = keyof typeof CONFIG.PF2E.baseArmorTypes;
 type OtherArmorTag = "shoddy";
+type ResilientRuneType = "" | "resilient" | "greaterResilient" | "majorResilient";
 export type { ArmorCategory, ArmorGroup, ArmorPropertyRuneType, ArmorTrait, BaseArmorType, OtherArmorTag, ResilientRuneType, };

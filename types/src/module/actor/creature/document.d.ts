@@ -1,4 +1,3 @@
-/// <reference types="jquery" resolution-mode="require"/>
 import { ActorPF2e, type PartyPF2e } from "@actor";
 import { HitPointsSummary } from "@actor/base.ts";
 import { CreatureSource } from "@actor/data/index.ts";
@@ -9,13 +8,12 @@ import { ItemType } from "@item/base/data/index.ts";
 import { ItemCarryType } from "@item/physical/data.ts";
 import type { ActiveEffectPF2e } from "@module/active-effect.ts";
 import { Rarity, ZeroToTwo } from "@module/data.ts";
-import { RuleElementSynthetics } from "@module/rules/index.ts";
 import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { CheckRoll } from "@system/check/index.ts";
 import { Statistic, StatisticDifficultyClass, type ArmorStatistic } from "@system/statistic/index.ts";
-import { CreatureSkills, CreatureSpeeds, CreatureSystemData, LabeledSpeed, SenseData, VisionLevel } from "./data.ts";
-import { CreatureSensePF2e } from "./sense.ts";
+import { PerceptionStatistic } from "@system/statistic/perception.ts";
+import { CreatureSkills, CreatureSpeeds, CreatureSystemData, LabeledSpeed, VisionLevel } from "./data.ts";
 import { CreatureTrait, CreatureType, CreatureUpdateContext, GetReachParameters } from "./types.ts";
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
@@ -26,7 +24,7 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     skills: CreatureSkills;
     /** Saving throw rolls for the creature, built during data prep */
     saves: Record<SaveType, Statistic>;
-    perception: Statistic;
+    perception: PerceptionStatistic;
     get allowedItemTypes(): (ItemType | "physical")[];
     /** Types of creatures (as provided by bestiaries 1-3) of which this creature is a member */
     get creatureTypes(): CreatureType[];
@@ -84,9 +82,7 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
      * Roll a Recovery Check
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
      */
-    rollRecovery(event: JQuery.TriggeredEvent): Promise<Rolled<CheckRoll> | null>;
-    /** Prepare derived creature senses from Rules Element synthetics */
-    prepareSenses(data: SenseData[], synthetics: RuleElementSynthetics): CreatureSensePF2e[];
+    rollRecovery(event?: MouseEvent): Promise<Rolled<CheckRoll> | null>;
     prepareSpeed(movementType: "land"): this["system"]["attributes"]["speed"];
     prepareSpeed(movementType: Exclude<MovementType, "land">): (LabeledSpeed & StatisticModifier) | null;
     prepareSpeed(movementType: MovementType): CreatureSpeeds | (LabeledSpeed & StatisticModifier) | null;

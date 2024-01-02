@@ -1,5 +1,4 @@
-import { CharacterPF2e, NPCPF2e } from "@actor";
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorType, CharacterPF2e, NPCPF2e } from "@actor";
 import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import { RecordField } from "@system/schema-data-fields.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";

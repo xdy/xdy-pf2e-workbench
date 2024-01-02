@@ -1,5 +1,5 @@
 import { ArmyPF2e, CharacterPF2e, FamiliarPF2e, HazardPF2e, LootPF2e, NPCPF2e, PartyPF2e, VehiclePF2e } from "@actor";
-import { ActorType } from "@actor/data/index.ts";
+import { SenseAcuity } from "@actor/creature/types.ts";
 import { AbilityItemPF2e, AfflictionPF2e, AncestryPF2e, ArmorPF2e, BackgroundPF2e, BookPF2e, CampaignFeaturePF2e, ClassPF2e, ConditionPF2e, ConsumablePF2e, ContainerPF2e, DeityPF2e, EffectPF2e, EquipmentPF2e, FeatPF2e, HeritagePF2e, KitPF2e, LorePF2e, MeleePF2e, ShieldPF2e, SpellPF2e, SpellcastingEntryPF2e, TreasurePF2e, WeaponPF2e } from "@item";
 import { WeaponReloadTime } from "@item/weapon/types.ts";
 import { JournalSheetPF2e } from "@module/journal-entry/sheet.ts";
@@ -180,7 +180,6 @@ export declare const PF2ECONFIG: {
     damageTypes: Record<"acid" | "bleed" | "bludgeoning" | "cold" | "electricity" | "fire" | "force" | "mental" | "piercing" | "poison" | "slashing" | "sonic" | "spirit" | "vitality" | "void" | "untyped", string>;
     damageRollFlavors: Record<"acid" | "bleed" | "bludgeoning" | "cold" | "electricity" | "fire" | "force" | "mental" | "piercing" | "poison" | "slashing" | "sonic" | "spirit" | "vitality" | "void" | "untyped", string>;
     damageCategories: {
-        alignment: string;
         energy: string;
         physical: string;
         abysium: string;
@@ -350,12 +349,7 @@ export declare const PF2ECONFIG: {
         silver: string;
         "cold-iron": string;
     };
-    weaponCategories: {
-        simple: string;
-        martial: string;
-        advanced: string;
-        unarmed: string;
-    };
+    weaponCategories: Record<"unarmed" | "simple" | "martial" | "advanced", string>;
     weaponGroups: Record<"dart" | "knife" | "axe" | "brawling" | "club" | "flail" | "hammer" | "pick" | "polearm" | "shield" | "spear" | "sword" | "bomb" | "bow" | "crossbow" | "firearm" | "sling", string>;
     meleeWeaponGroups: Record<"dart" | "knife" | "axe" | "brawling" | "club" | "flail" | "hammer" | "pick" | "polearm" | "shield" | "spear" | "sword", string>;
     baseArmorTypes: Record<"armored-cloak" | "armored-coat" | "bastion-plate" | "breastplate" | "buckle-armor" | "ceramic-plate" | "chain-mail" | "chain-shirt" | "coral-armor" | "explorers-clothing" | "fortress-plate" | "full-plate" | "gi" | "half-plate" | "hellknight-breastplate" | "hellknight-half-plate" | "hellknight-plate" | "hide-armor" | "lamellar-breastplate" | "lattice-armor" | "leaf-weave" | "leather-armor" | "leather-lamellar" | "mantis-shell" | "niyahaat" | "o-yoroi" | "padded-armor" | "power-suit" | "quilted-armor" | "sankeit" | "scale-mail" | "scroll-robes" | "splint-mail" | "studded-leather-armor" | "subterfuge-suit" | "wooden-breastplate", string>;
@@ -1367,6 +1361,7 @@ export declare const PF2ECONFIG: {
         vishkanya: string;
     };
     shieldTraits: {
+        apex: string;
         "deflecting-bludgeoning": string;
         "deflecting-physical-ranged": string;
         "deflecting-piercing": string;
@@ -1379,6 +1374,7 @@ export declare const PF2ECONFIG: {
         "integrated-1d6-p": string;
         "integrated-1d6-s": string;
         "integrated-1d6-s-versatile-p": string;
+        invested: string;
         "launching-dart": string;
         magical: string;
         "shield-throw-20": string;
@@ -3292,23 +3288,8 @@ export declare const PF2ECONFIG: {
         5: string;
     };
     weaponReload: Record<WeaponReloadTime, string>;
-    armorCategories: {
-        unarmored: string;
-        light: string;
-        medium: string;
-        heavy: string;
-        "light-barding": string;
-        "heavy-barding": string;
-    };
-    armorGroups: {
-        composite: string;
-        chain: string;
-        cloth: string;
-        leather: string;
-        plate: string;
-        skeletal: string;
-        wood: string;
-    };
+    armorCategories: Record<"light" | "unarmored" | "medium" | "heavy" | "light-barding" | "heavy-barding", string>;
+    armorGroups: Record<"wood" | "chain" | "cloth" | "composite" | "leather" | "plate" | "skeletal", string>;
     consumableCategories: Record<"poison" | "ammo" | "catalyst" | "drug" | "elixir" | "fulu" | "gadget" | "mutagen" | "oil" | "other" | "potion" | "scroll" | "snare" | "talisman" | "toolkit" | "wand", string>;
     identification: {
         DisplayDetails: string;
@@ -3467,14 +3448,16 @@ export declare const PF2ECONFIG: {
         encounter: string;
     };
     proficiencyLevels: readonly ["PF2E.ProficiencyLevel0", "PF2E.ProficiencyLevel1", "PF2E.ProficiencyLevel2", "PF2E.ProficiencyLevel3", "PF2E.ProficiencyLevel4"];
-    actorSizes: Record<"tiny" | "sm" | "med" | "lg" | "huge" | "grg", string>;
-    actorTypes: Record<ActorType, string>;
-    speedTypes: {
-        swim: string;
-        climb: string;
-        fly: string;
-        burrow: string;
+    proficiencyRanks: {
+        readonly untrained: "PF2E.ProficiencyLevel0";
+        readonly trained: "PF2E.ProficiencyLevel1";
+        readonly expert: "PF2E.ProficiencyLevel2";
+        readonly master: "PF2E.ProficiencyLevel3";
+        readonly legendary: "PF2E.ProficiencyLevel4";
     };
+    actorSizes: Record<"tiny" | "sm" | "med" | "lg" | "huge" | "grg", string>;
+    actorTypes: Record<"army" | "character" | "familiar" | "hazard" | "loot" | "npc" | "party" | "vehicle", string>;
+    speedTypes: Record<"land" | "burrow" | "climb" | "fly" | "swim", string>;
     prerequisitePlaceholders: {
         prerequisite1: string;
         prerequisite2: string;
@@ -3482,8 +3465,8 @@ export declare const PF2ECONFIG: {
         prerequisite4: string;
         prerequisite5: string;
     };
-    senses: Record<"darkvision" | "echolocation" | "greaterDarkvision" | "heatsight" | "lifesense" | "lowLightVision" | "motionsense" | "scent" | "seeInvisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "wavesense", string>;
-    senseAcuity: Record<"precise" | "imprecise" | "vague", string>;
+    senses: Record<"darkvision" | "echolocation" | "greater-darkvision" | "infrared-vision" | "lifesense" | "low-light-vision" | "motion-sense" | "scent" | "see-invisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "truesight" | "wavesense", string>;
+    senseAcuities: Record<SenseAcuity, string>;
     conditionTypes: Record<"blinded" | "broken" | "clumsy" | "confused" | "controlled" | "dazzled" | "deafened" | "doomed" | "drained" | "enfeebled" | "fascinated" | "fatigued" | "fleeing" | "frightened" | "grabbed" | "hidden" | "immobilized" | "off-guard" | "paralyzed" | "petrified" | "prone" | "restrained" | "sickened" | "slowed" | "stunned" | "stupefied" | "unconscious" | "wounded" | "concealed" | "dying" | "encumbered" | "friendly" | "helpful" | "hostile" | "indifferent" | "invisible" | "malevolence" | "observed" | "persistent-damage" | "quickened" | "undetected" | "unfriendly" | "unnoticed", string>;
     pfsFactions: {
         EA: string;
@@ -3596,7 +3579,7 @@ export declare const PF2ECONFIG: {
         silver: string;
         "cold-iron": string;
     };
-    languages: Record<"anadi" | "goblin" | "goloma" | "grippli" | "halfling" | "kashrishi" | "kitsune" | "nagaji" | "shisk" | "shoony" | "strix" | "tengu" | "vanara" | "fey" | "anugobu" | "boggard" | "caligni" | "formian" | "grioth" | "ikeshti" | "munavri" | "protean" | "samsaran" | "shobhad" | "wyrwood" | "adlet" | "akitonian" | "aklo" | "alghollthu" | "amurrun" | "ancient-osiriani" | "androffan" | "arboreal" | "arcadian" | "azlanti" | "calda" | "chthonian" | "common" | "cyclops" | "daemonic" | "destrachan" | "diabolic" | "draconic" | "drooni" | "dwarven" | "dziriak" | "ekujae" | "elder-thing" | "elven" | "empyrean" | "erutaki" | "garundi" | "girtablilu" | "gnomish" | "hallit" | "hwan" | "iblydan" | "immolis" | "iruxi" | "jistkan" | "jotun" | "jyoti" | "kaava" | "kelish" | "kholo" | "kibwani" | "kovintal" | "lirgeni" | "mahwek" | "migo" | "minaten" | "minkaian" | "muan" | "mwangi" | "mzunu" | "necril" | "ocotan" | "okaiyan" | "orcish" | "orvian" | "osiriani" | "petran" | "pyric" | "rasu" | "ratajin" | "razatlani" | "requian" | "russian" | "sakvroth" | "sasquatch" | "senzar" | "shadowtongue" | "shae" | "shoanti" | "shory" | "skald" | "sphinx" | "sussuran" | "taldane" | "talican" | "tekritanin" | "thalassic" | "thassilonian" | "tien" | "utopian" | "varisian" | "varki" | "vishkanyan" | "vudrani" | "wildsong" | "xanmba" | "yithian" | "ysoki", string>;
+    languages: Record<import("@actor/creature/types.ts").Language, string>;
     attackEffects: {
         grab: string;
         "improved-grab": string;
@@ -6167,6 +6150,7 @@ export declare const PF2ECONFIG: {
                 vishkanya: string;
             };
             shield: {
+                apex: string;
                 "deflecting-bludgeoning": string;
                 "deflecting-physical-ranged": string;
                 "deflecting-piercing": string;
@@ -6179,6 +6163,7 @@ export declare const PF2ECONFIG: {
                 "integrated-1d6-p": string;
                 "integrated-1d6-s": string;
                 "integrated-1d6-s-versatile-p": string;
+                invested: string;
                 "launching-dart": string;
                 magical: string;
                 "shield-throw-20": string;

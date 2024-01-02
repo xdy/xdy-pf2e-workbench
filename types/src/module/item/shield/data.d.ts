@@ -1,3 +1,4 @@
+import { PhysicalItemSource } from "@item/base/data/index.ts";
 import { BasePhysicalItemSource, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource } from "@item/physical/data.ts";
 import { HeldUsage } from "@item/physical/usage.ts";
 import { WeaponRuneData, WeaponRuneSource } from "@item/weapon/data.ts";
@@ -16,6 +17,8 @@ interface ShieldSystemSource extends PhysicalSystemSource {
     runes: ShieldRuneData;
     /** Usage for shields isn't stored. */
     readonly usage?: never;
+    /** Doubly-embedded adjustments, attachments, talismans etc. */
+    subitems: PhysicalItemSource[];
 }
 interface IntegratedWeaponSource {
     runes: WeaponRuneSource;
@@ -35,12 +38,13 @@ interface SpecificShieldData extends Pick<ShieldSystemSource, "material" | "rune
         runes: Omit<WeaponRuneData, "effects">;
     } | null;
 }
-interface ShieldSystemData extends Omit<ShieldSystemSource, "bulk" | "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<PhysicalSystemData, "baseItem" | "traits"> {
+interface ShieldSystemData extends Omit<ShieldSystemSource, SourceOmission>, Omit<PhysicalSystemData, "baseItem" | "traits"> {
     traits: ShieldTraits;
     /** Shields are always held. */
     usage: HeldUsage;
     stackGroup: null;
 }
+type SourceOmission = "apex" | "bulk" | "description" | "hp" | "identification" | "material" | "price" | "temporary" | "usage";
 interface IntegratedWeaponData extends IntegratedWeaponSource {
     damageType: DamageType;
     versatile: {

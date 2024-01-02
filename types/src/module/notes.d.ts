@@ -1,6 +1,6 @@
 import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
-import { RawPredicate, PredicatePF2e } from "@system/predication.ts";
+import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 import type { RuleElementPF2e } from "./rules/index.ts";
 declare class RollNotePF2e {
     /** The selector used to determine on which rolls the note will be shown for. */
@@ -18,7 +18,8 @@ declare class RollNotePF2e {
     /** The originating rule element of this modifier, if any: used to retrieve "parent" item roll options */
     rule: RuleElementPF2e | null;
     constructor(params: RollNoteParams);
-    static notesToHTML(notes: RollNotePF2e[]): HTMLUListElement;
+    /** Convert an array of notes to a UL element, or null if the array is empty. */
+    static notesToHTML(notes: RollNotePF2e[]): HTMLUListElement | null;
     toHTML(): HTMLLIElement;
     clone(): RollNotePF2e;
     toObject(): RollNoteSource;

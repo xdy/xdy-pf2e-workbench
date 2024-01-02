@@ -1,10 +1,10 @@
+import type { CreatureTrait } from "@actor/creature/index.ts";
+import type { SenseAcuity, SenseType } from "@actor/creature/types.ts";
+import type { RecordField } from "@system/schema-data-fields.ts";
 import type { ArrayField, BooleanField, NumberField, ObjectField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField, RuleElementSchema } from "../data.ts";
-import { RecordField } from "@system/schema-data-fields.ts";
-import { ImmunityRuleElement, ResistanceRuleElement, WeaknessRuleElement } from "../iwr/index.ts";
-import { BattleFormSkills, BattleFormSpeeds, BattleFormStrike } from "./types.ts";
-import { CreatureTrait } from "@actor/creature/index.ts";
-import { SenseAcuity, SenseType } from "@actor/creature/sense.ts";
+import type { ResolvableValueField, RuleElementSchema } from "../data.ts";
+import type { ImmunityRuleElement, ResistanceRuleElement, WeaknessRuleElement } from "../iwr/index.ts";
+import type { BattleFormSkills, BattleFormSpeeds, BattleFormStrike } from "./types.ts";
 type OverrideACSchema = {
     modifier: ResolvableValueField<false, false, true>;
     ignoreCheckPenalty: BooleanField<boolean, boolean, false, false, true>;
@@ -36,4 +36,4 @@ type BattleFormRuleSchema = RuleElementSchema & {
     /** Whether the actor uses its own unarmed attacks while in battle form */
     ownUnarmed: BooleanField<boolean, boolean, false, false, true>;
 };
-export type { BattleFormRuleSchema, BattleFormRuleOverrideSchema };
+export type { BattleFormRuleOverrideSchema, BattleFormRuleSchema };

@@ -1,4 +1,3 @@
-import type { ActorPF2e } from "@actor";
 import type { AbilityItemPF2e, FeatPF2e, SpellPF2e } from "@item";
 import { ItemPF2e } from "@item";
 import type { FeatSheetPF2e } from "@item/feat/sheet.ts";
@@ -28,8 +27,8 @@ interface SelfEffectSheetReference extends SelfEffectReference {
     pack: string | null;
 }
 /** Save data from an effect item dropped on an ability or feat sheet. */
-declare function handleSelfEffectDrop(sheet: AbilitySheetPF2e | FeatSheetPF2e, event: ElementDragEvent): Promise<void>;
+declare function handleSelfEffectDrop(sheet: AbilitySheetPF2e | FeatSheetPF2e, event: DragEvent): Promise<void>;
 declare function createActionRangeLabel(range: Maybe<RangeData>): string | null;
 /**  Add the holy/unholy trait to sanctified actions and spells if the owning actor is also holy/unholy */
-declare function processSanctification(item: AbilityItemPF2e<ActorPF2e> | FeatPF2e<ActorPF2e> | SpellPF2e<ActorPF2e>): void;
+declare function processSanctification(item: AbilityItemPF2e | FeatPF2e | SpellPF2e): void;
 export { activateActionSheetListeners, createActionRangeLabel, createSelfEffectSheetData, handleSelfEffectDrop, normalizeActionChangeData, processSanctification, };

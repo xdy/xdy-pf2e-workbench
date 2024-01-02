@@ -17,10 +17,11 @@ interface ContainerBulkSource {
     capacity: number;
     ignored: number;
 }
-interface ContainerSystemData extends Omit<ContainerSystemSource, "bulk" | "hp" | "identification" | "material" | "price" | "temporary" | "usage">, Omit<Investable<PhysicalSystemData>, "traits"> {
+interface ContainerSystemData extends Omit<ContainerSystemSource, SourceOmission>, Omit<Investable<PhysicalSystemData>, "traits"> {
     bulk: ContainerBulkData;
     stackGroup: null;
 }
+type SourceOmission = "apex" | "bulk" | "description" | "hp" | "identification" | "material" | "price" | "temporary" | "usage";
 interface ContainerBulkData extends ContainerBulkSource, BulkData {
 }
 export type { ContainerBulkData, ContainerSource, ContainerSystemData };

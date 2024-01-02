@@ -3,8 +3,8 @@ import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 /** Replace the "Giant" language with "Jotun" */
 export declare class Migration681GiantLanguageToJotun extends MigrationBase {
+    #private;
     static version: number;
-    private replaceGiant;
-    updateActor(actorSource: ActorSourcePF2e): Promise<void>;
-    updateItem(itemSource: ItemSourcePF2e): Promise<void>;
+    updateActor(source: ActorSourcePF2e): Promise<void>;
+    updateItem(source: ItemSourcePF2e): Promise<void>;
 }

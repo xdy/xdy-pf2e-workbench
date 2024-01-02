@@ -20,7 +20,6 @@ declare class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     currentSummaryView: string;
     static get defaultOptions(): ActorSheetOptions;
     regionTemplates: Record<string, string>;
-    get isLootSheet(): boolean;
     protected _getHeaderButtons(): ApplicationHeaderButton[];
     getData(options?: ActorSheetOptions): Promise<PartySheetData>;
     protected setSummaryView(view: string): void;
@@ -28,9 +27,9 @@ declare class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     /** Overriden to prevent inclusion of campaign-only item types. Those should get added to their own sheet */
     protected _onDropItemCreate(itemData: ItemSourcePF2e | ItemSourcePF2e[]): Promise<Item<PartyPF2e>[]>;
     /** Override to allow divvying/outward transfer of items via party member blocks in inventory members sidebar. */
-    protected _onDropItem(event: ElementDragEvent, data: DropCanvasItemDataPF2e & {
+    protected _onDropItem(event: DragEvent, data: DropCanvasItemDataPF2e & {
         fromInventory?: boolean;
-    }): Promise<ItemPF2e<ActorPF2e | null>[]>;
+    }): Promise<ItemPF2e[]>;
     /** Override to not auto-disable fields on a thing meant to be used by players */
     protected _disableFields(_form: HTMLElement): void;
     render(force?: boolean, options?: PartySheetRenderOptions): Promise<this>;

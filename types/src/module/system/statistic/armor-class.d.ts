@@ -15,5 +15,6 @@ interface ArmorStatisticData extends StatisticData {
 }
 interface ArmorClassTraceData extends StatisticTraceData {
     details: string;
+    slug: "ac";
 }
 export { ArmorStatistic, type ArmorClassTraceData };

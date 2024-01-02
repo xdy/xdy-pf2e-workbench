@@ -19,7 +19,6 @@ interface VehicleAttributesSource extends ActorAttributesSource {
         value: number;
     };
     hardness: number;
-    initiative?: never;
     immunities: ImmunitySource[];
 }
 interface VehicleDetailsSource extends ActorDetailsSource {

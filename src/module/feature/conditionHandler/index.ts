@@ -1,13 +1,13 @@
 import { ActorPF2e } from "@actor";
-import { isFirstGM, pf2eSetProperty, shouldIHandleThis } from "../../utils.js";
+import { isFirstGM, shouldIHandleThis } from "../../utils.js";
 import { CombatantPF2e } from "@module/encounter/index.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { ActorSystemData } from "@actor/data/base.js";
 import { handleDying } from "../../hooks.js";
-import { CreaturePF2e } from "@actor/creature/document.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import { ItemPF2e } from "@item/base/document.js";
 import BaseUser = foundry.documents.BaseUser;
+import { CreaturePF2e } from "@actor/creature/document.js";
+import { ActorSystemData } from "@actor/data/base.js";
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
     if (!combatant || !combatant.actor || (userId !== game.user.id && !shouldIHandleThis(combatant.actor))) {
@@ -114,9 +114,9 @@ export function handleOrcFerocity(
     const undyingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "undying-ferocity");
     const rampagingFerocity = actor.itemTypes.feat.find((feat) => feat.slug === "rampaging-ferocity");
     if (orcFerocity && (!orcFerocityUsed || orcFerocityUsed.isExpired)) {
-        pf2eSetProperty(update, "system.attributes.hp.value", 1);
+        fu.setProperty(update, "system.attributes.hp.value", 1);
         if (undyingFerocity) {
-            pf2eSetProperty(update, "system.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
+            fu.setProperty(update, "system.attributes.hp.temp", Math.max(actor.level, actor.hitPoints?.temp ?? 0));
         }
 
         shouldIncreaseWounded = true;

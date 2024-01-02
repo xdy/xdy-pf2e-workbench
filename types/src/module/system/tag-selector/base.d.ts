@@ -3,13 +3,7 @@
 /// <reference types="tooltipster" />
 import type { ActorPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
-import { SelectableTagField } from "./index.ts";
-interface TagSelectorOptions extends DocumentSheetOptions {
-    allowCustom?: boolean;
-    /** Is the target data property a flat array rather than a values object? */
-    flat?: boolean;
-    customChoices?: Record<string, string>;
-}
+import type { SelectableTagField } from "./index.ts";
 declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e> extends DocumentSheet<TDocument, TagSelectorOptions> {
     #private;
     static get defaultOptions(): TagSelectorOptions;
@@ -24,8 +18,12 @@ declare abstract class BaseTagSelector<TDocument extends ActorPF2e | ItemPF2e> e
     protected abstract get configTypes(): readonly SelectableTagField[];
     getData(options?: Partial<TagSelectorOptions> | undefined): Promise<TagSelectorData<TDocument>>;
     activateListeners($html: JQuery): void;
-    /** Localize and sort choices */
-    protected sortChoices(choices: Record<string, string>): Record<string, string>;
+}
+interface TagSelectorOptions extends DocumentSheetOptions {
+    objectProperty?: string;
+    /** Is the target data property a flat array rather than a `value` object? */
+    flat?: boolean;
+    customChoices?: Record<string, string>;
 }
 interface TagSelectorData<TDocument extends ActorPF2e | ItemPF2e> extends DocumentSheetData<TDocument> {
     documentType: string;
