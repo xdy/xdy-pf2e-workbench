@@ -531,7 +531,7 @@ export async function pf2eSystemReadyHook() {
     }
 
     async function patchObject(patch) {
-        const document = await fromUuid(patch.uuid);
+        const document = fromUuidSync(patch.uuid);
         if (document) {
             const compendium = document?.compendium;
             if (compendium) {

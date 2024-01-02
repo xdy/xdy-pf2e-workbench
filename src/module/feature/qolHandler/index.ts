@@ -100,7 +100,7 @@ export function damageCardExpand(message: ChatMessagePF2e, html: JQuery) {
 
 export async function castPrivateSpell(data, message: ChatMessagePF2e) {
     const spellUUID = <string>message.flags?.pf2e.origin?.uuid;
-    const origin: any = await fromUuid(spellUUID);
+    const origin: any = fromUuidSync(spellUUID);
 
     if (
         new Set(
@@ -221,7 +221,7 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
         if (saveButtons.length === 1) {
             const dataSave = saveButtons.attr("data-save") ?? "";
             const dataDC = saveButtons.attr("data-dc") ?? "";
-            const origin: any = await fromUuid(spellUUID);
+            const origin: any = fromUuidSync(spellUUID);
             content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`, {
                 dataSave: dataSave,
                 dataDC: dataDC,
