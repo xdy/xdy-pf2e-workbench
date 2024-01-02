@@ -1,3 +1,10 @@
+# [5.45.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.44.0...v5.45.0) (2024-01-02)
+
+
+### Features
+
+* Support autorolling damage for Kineticist Elemental Blasts. ([71a1f90](https://github.com/xdy/xdy-pf2e-workbench/commit/71a1f90278a418f13feba665fcb146884c9893b3))
+
 # [5.44.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.43.1...v5.44.0) (2024-01-02)
 
 
