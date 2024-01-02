@@ -387,3 +387,13 @@ export function foundryGetProperty(object, key) {
     }
     return target;
 }
+
+/**
+ * Check if a key is present in a given object in a type safe way
+ *
+ * @param obj The object to check
+ * @param key The key to check
+ */
+export function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
+    return (typeof key === "string" || typeof key === "number") && key in obj;
+}
