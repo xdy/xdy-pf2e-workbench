@@ -98,13 +98,16 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 rollForNonAttackSpell &&
                 (autoRollDamageForSpellWhenNotAnAttack === "nonSaveSpell" ||
                     autoRollDamageForSpellWhenNotAnAttack === "anySpell");
-            console.log(rollForNonAttackSaveSpell + " " + rollForNonAttackNonSaveSpell);
             const rollForAttackSpell =
                 origin?.traits?.has("attack") &&
                 autoRollDamageForSpellAttack &&
                 (Number.isInteger(+(<any>message.item)?.system?.time?.value) ?? true);
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
-            if (actor && (rollForNonAttackSpell || rollForNonSpellAttack || rollForAttackSpell)) {
+            if (
+                degreeOfSuccess.toLowerCase().includes("success") &&
+                actor &&
+                (rollForNonAttackSpell || rollForNonSpellAttack || rollForAttackSpell)
+            ) {
                 if (
                     rollForNonAttackSaveSpell ||
                     rollForNonAttackNonSaveSpell ||
@@ -180,7 +183,31 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         }
                     }
                 } else if (rollForNonSpellAttack) {
-                    const rollOptions = actor?.getRollOptions(["all", "damage-roll"]);
+                    const options = actor?.getRollOptions(["all", "damage-roll"]);
+                    const attackOption = options.find((option) => option.match(/(.*)-attack/));
+                    const damageOption = attackOption?.replace("-attack", "-damage");
+                    if (damageOption) {
+                        options.push(damageOption);
+                    }
+                    const checkContext = message.flags.pf2e.context ?? null;
+
+                    const mapIncreases =
+                        checkContext &&
+                        "mapIncreases" in checkContext &&
+                        [0, 1, 2].includes(<number>checkContext.mapIncreases)
+                            ? checkContext.mapIncreases
+                            : null;
+                    const altUsage = checkContext && "altUsage" in checkContext ? checkContext.altUsage : null;
+                    const target = message.target?.token?.object ?? null;
+                    const rollArgs = {
+                        event,
+                        altUsage,
+                        mapIncreases,
+                        checkContext,
+                        target,
+                        options,
+                    };
+
                     const actions = actor?.system?.actions;
                     if (actions && actions.length > 0) {
                         const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
@@ -189,11 +216,8 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             if (toRoll) {
                                 if (toRoll.type === "strike") {
                                     // TODO Handle other things than strikes
-                                    if (degreeOfSuccess === "success") {
-                                        toRoll?.damage({ options: rollOptions });
-                                    } else if (degreeOfSuccess === "criticalSuccess") {
-                                        toRoll?.critical({ options: rollOptions });
-                                    }
+                                    const method = degreeOfSuccess === "success" ? "damage" : "critical";
+                                    toRoll[method]?.(rollArgs);
                                 }
                             }
                         }
