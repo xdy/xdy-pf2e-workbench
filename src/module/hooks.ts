@@ -251,14 +251,14 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
         if (
             (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault" ||
                 String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) ===
-                    "nonCollapsedDefault") &&
+                "nonCollapsedDefault") &&
             ["weapon", "melee", "spell"].includes(message.item?.type ?? "")
         ) {
             chatAttackCardDescriptionCollapse(html);
         }
         if (
             ((String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) === "collapsedDefault" ||
-                String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
+                    String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
                     "nonCollapsedDefault") &&
                 !message.item) ||
             message.item?.type === "action"
@@ -306,7 +306,8 @@ function dropHeldItemsOnBecomingUnconscious(actor) {
     const items = <PhysicalItemPF2e[]>actor.items.filter((i) => i.isHeld);
     if (items.length > 0) {
         for (const item of items) {
-            if (item.type === "shield" || item.traits.has("attached-to-shield")) {
+            if (item.traits.has("free-hand") || item.type === "shield" || item.traits.has("attached-to-shield")) {
+                // Presumed to strapped to an arm/worn on a hand, so just unreadied instead of dropped
                 actor.adjustCarryType(item, { carryType: "worn", handsHeld: 0, inSlot: false });
             } else {
                 actor.adjustCarryType(item, { carryType: "dropped", handsHeld: 0, inSlot: false });
@@ -334,7 +335,8 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
     }
 }
 
-export async function updateItemHook(_item: ItemPF2e, _update: any) {}
+export async function updateItemHook(_item: ItemPF2e, _update: any) {
+}
 
 export async function deleteItemHook(item: ItemPF2e, _options: {}) {
     if (isFirstGM() && item.slug === "dying" && item.parent) {
@@ -408,7 +410,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
         const automoveIfZeroHP =
             game.combat &&
             ((String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HPCharactersOnly" &&
-                actor.type === CHARACTER_TYPE) ||
+                    actor.type === CHARACTER_TYPE) ||
                 (String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HP" &&
                     [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
         if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
@@ -515,7 +517,7 @@ export function pf2eRerollHook(
 export async function pf2eSystemReadyHook() {
     function unflatten(object) {
         const result = {};
-        Object.keys(object).forEach(function (k) {
+        Object.keys(object).forEach(function(k) {
             setValue(result, k, object[k]);
         });
         return result;
@@ -525,7 +527,7 @@ export async function pf2eSystemReadyHook() {
         const split = path.split(".");
         const top = split.pop();
 
-        split.reduce(function (o, k, i, kk) {
+        split.reduce(function(o, k, i, kk) {
             return (o[k] = o[k] || (isFinite(i + 1 in kk ? kk[i + 1] : top) ? [] : {}));
         }, object)[top] = value;
     }
