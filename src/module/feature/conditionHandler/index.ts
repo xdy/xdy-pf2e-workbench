@@ -91,7 +91,8 @@ export function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: 
         const relevant = getRelevantMessages(actor);
         const lastDamageRoll = relevant.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
         const totalDamage = lastDamageRoll?.rolls?.[0]?.total ?? 0;
-        return (totalDamage >= hp.value && lastDamageRoll?.item?.system?.traits?.value?.includes("nonlethal")) ?? false;
+        const isNonlethal = (lastDamageRoll?.flags?.pf2e?.context?.options ?? []).includes("nonlethal");
+        return (totalDamage >= hp.value && isNonlethal) ?? false;
     }
     return false;
 }
