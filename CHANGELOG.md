@@ -1,3 +1,10 @@
+## [5.45.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.0...v5.45.1) (2024-01-03)
+
+
+### Bug Fixes
+
+* Changed the option "Characters automatically drop held items on becoming unconscious." so that items with the trait "free-hand" (e.g. gauntlets) are treated like strapped shields, e.g. they go from held to worn instead of being dropped. ([54777d5](https://github.com/xdy/xdy-pf2e-workbench/commit/54777d57d2232d3cd2cb1f11b56709695c724997)), closes [#1189](https://github.com/xdy/xdy-pf2e-workbench/issues/1189)
+
 # [5.45.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.44.0...v5.45.0) (2024-01-02)
 
 
