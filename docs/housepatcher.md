@@ -142,6 +142,17 @@ The example below is, not coincidentally, the relevant bits of my current houser
     }
   },
   {
+     "action": "update",
+     "uuid": "Compendium.pf2e.equipment-srd.Item.7JVgLiNTAs4clEW8",
+     "name": "Aim-Aiding Rune",
+     "reason": "Adds pf2e-perception support as per https://github.com/reonZ/pf2e-perception/wiki#alchemist-googles",
+     "data": {
+         "system.rules": [
+             {"key":"PF2ePerception","type":"cover","selector":"ignored","targets":"allies"}
+         ]
+     }
+  },
+  {
     "action": "update",
     "uuid": "Compendium.pf2e.feats-srd.Item.y2XeMe1F18lIyo59",
     "name": "Blind-Fight",
