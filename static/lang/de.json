@@ -287,7 +287,7 @@
         "secondPartRK": ".<br>Frage deinen SL ob du den Zauber automatisch erkennst, ansonsten kannst du versuchen einen hier von @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] oder davon @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] zu nutzen. Oder, während deines Zuges, kannst du eine Aktion verwenden um zu versuchen den Zauber mit @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk} zu identifizieren",
         "name": "Schreibe eine Nachricht wenn ein Zauber gewirkt wurde.",
         "savePart": "<br>Rettungswurf gegen den unbekannten Zauber ist: @Check[type:{dataSave}|SG:{dataDC}|traits:{traits}]",
-        "firstPart": "{tokenName} wirkte grade einen {type} der folgenden <strong>{traditionString}</strong> Tradition",
+        "firstPart": "{tokenName} wirkte grade einen {type} der folgenden <strong>{traditionString}</strong> Tradition. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "they": "Sie",
         "cantrip": "Zaubertrick",
         "hint": "Falls Zauber wirken auf privat steht, wird einen Nachricht gepostet, welche besagt das ein Zauber gewirkt wird, AUßER wenn zusätzlich SHIFT und STRG beim Zaubern gehalten wird.",
@@ -620,6 +620,14 @@
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
         "name": "...wie modifiziert bei diesem Multiplikator",
         "hint": "...wie modifiziert bei diesem Multiplikator (ja, ich weiß, ich sollte den finalen Wert anzeigen)"
+      },
+      "autoKillIfMassiveDamage": {
+        "no": "Nein",
+        "hint": "(Veraltet) Einstellung für das automatische Töten beim erhalten von massiven Schaden.",
+        "name": "Automatisches Töten beim erhalten von massiven Schaden. (Veraltet)",
+        "yesForNpcs": "Ja, für NSC",
+        "yes": "Ja, für alle",
+        "yesForCharacters": "Ja, für Charaktere+Vertraute"
       }
     },
     "npcRoller": {
