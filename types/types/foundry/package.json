@@ -12,8 +12,8 @@
         "@types/jquery": "^3.5.29",
         "@types/node": "^18.11.12",
         "pixi.js": "6.5.2",
-        "socket.io": "^4.7.2",
-        "socket.io-client": "^4.7.2",
+        "socket.io": "^4.7.3",
+        "socket.io-client": "^4.7.3",
         "tinymce": "^6.8.2",
         "typescript": "^4.9.4"
     },
