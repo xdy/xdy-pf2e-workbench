@@ -1,3 +1,10 @@
+## [5.45.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.9...v5.45.10) (2024-01-06)
+
+
+### Bug Fixes
+
+* Deploy problems part infinity ([8114d54](https://github.com/xdy/xdy-pf2e-workbench/commit/8114d543e2ea660812165eaa970bdb6f41cc8bbd))
+
 ## [5.45.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.8...v5.45.9) (2024-01-06)
 
 
