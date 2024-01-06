@@ -58,26 +58,15 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-  tag:
+  publish:
     needs:
       - release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-      - name: Set tag number
-        id: tag
-        run: echo "::set-output name=tag::$(echo $GITHUB_REF | sed -n 's/refs\/tags\/\(.*\)/\1/p')"
-
-      - name: Use tag number
-        run: echo "The tag number is ${{ steps.tag.outputs.tag }}"
-
-  publish:
-    needs:
-      - tag
-    runs-on: ubuntu-latest
-    steps:
       - name: Submit package to FoundryVTT Package Release API
         run: |
           curl -X POST "https://api.foundryvtt.com/e_api/packages/release_version/" \
@@ -87,7 +76,7 @@ jobs:
               "id": "xdy-pf2e-workbench",
               "dry-run": false,
               "release": {
-                "version": "${{ env.VERSION }}",
+                "version": "${{ steps.package-version.outputs.current-version}}",
                 "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
                 "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
                 "compatibility": {
