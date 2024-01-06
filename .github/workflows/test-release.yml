@@ -58,9 +58,9 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-    - name: Print version
-      run: |
-        echo "github.ref_name: ${{ github.ref_name }}"  
+      - name: Print version
+        run: |
+          echo "github.ref_name: ${{ github.ref_name }}"  
 
 #      - name: Install playwright
 #        run: npx playwright install
