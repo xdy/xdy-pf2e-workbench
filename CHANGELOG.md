@@ -1,3 +1,10 @@
+## [5.45.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.10...v5.45.11) (2024-01-06)
+
+
+### Bug Fixes
+
+* Overcomplicating things... ([1f44986](https://github.com/xdy/xdy-pf2e-workbench/commit/1f4498617edafc846546089237c738112d6a3878))
+
 ## [5.45.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.9...v5.45.10) (2024-01-06)
 
 
