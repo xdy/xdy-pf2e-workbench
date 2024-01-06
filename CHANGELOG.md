@@ -1,3 +1,11 @@
+## [5.45.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.6...v5.45.7) (2024-01-06)
+
+
+### Bug Fixes
+
+* Define ref-name ([064b87e](https://github.com/xdy/xdy-pf2e-workbench/commit/064b87e982302806abb60fec6ed76259370c5ddc))
+* Format yaml ([d48f98b](https://github.com/xdy/xdy-pf2e-workbench/commit/d48f98bafc7a6ef5b86a4715395b093603ce8a17))
+
 ## [5.45.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.5...v5.45.6) (2024-01-06)
 
 
