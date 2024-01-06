@@ -1,3 +1,10 @@
+## [5.45.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.12...v5.45.13) (2024-01-06)
+
+
+### Bug Fixes
+
+* Twice more unto the breach... ([15d5343](https://github.com/xdy/xdy-pf2e-workbench/commit/15d5343af970dd3514689fa4bbe8abd65053d800))
+
 ## [5.45.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.11...v5.45.12) (2024-01-06)
 
 
