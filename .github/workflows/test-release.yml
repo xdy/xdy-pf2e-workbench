@@ -58,10 +58,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-      - name: Print version
-        run: |
-          echo "github.ref_name: ${{ github.ref_name }}"  
-
 #      - name: Install playwright
 #        run: npx playwright install
 
@@ -116,14 +112,14 @@ jobs:
     steps:
       - name: Submit package to FoundryVTT Package Release API
         run: |
-          curl -X POST "https://api.foundryvtt.com/_api/packages/release_version/" \
+          curl -X POST "https://api.foundryvtt.com/e_api/packages/release_version/" \
             -H "Content-Type: application/json" \
             -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
             -d '{
               "id": "xdy-pf2e-workbench",
               "dry-run": false,
               "release": {
-                "version": "${{ github.ref_name }}",
+                "version": "${{ git tag --sort=committerdate | grep -E '[0-9]' | tail -1 | cut -b 2-7 }}",
                 "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
                 "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
                 "compatibility": {
