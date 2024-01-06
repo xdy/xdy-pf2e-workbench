@@ -1,3 +1,10 @@
+## [5.45.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.4...v5.45.5) (2024-01-06)
+
+
+### Bug Fixes
+
+* Try curl ([3da835a](https://github.com/xdy/xdy-pf2e-workbench/commit/3da835a52bc6b40faa9f6be08609bf799f48ad64))
+
 ## [5.45.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.3...v5.45.4) (2024-01-06)
 
 
