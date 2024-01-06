@@ -58,6 +58,11 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      - name: Write release version
+        run: |
+          TAG=${{ github.event.release.tag_name }}
+          echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+
   #      - name: Install playwright
   #        run: npx playwright install
 
@@ -110,11 +115,6 @@ jobs:
       - release
     runs-on: ubuntu-latest
     steps:
-      - name: Write release version
-        run: |
-          TAG=${{ github.event.release.tag_name }}
-          echo "VERSION=${TAG#v}" >> $GITHUB_ENV
-
       - name: Submit package to FoundryVTT Package Release API
         run: |
           curl -X POST "https://api.foundryvtt.com/e_api/packages/release_version/" \
