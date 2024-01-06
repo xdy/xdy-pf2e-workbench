@@ -124,7 +124,7 @@ jobs:
                   "id": "xdy-pf2e-workbench",
                   "dry-run": false,
                   "release": {
-                    "version": "${{ VERSION }}",
+                    "version": "${{ env.VERSION }}",
                     "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
                     "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
                     "compatibility": {
