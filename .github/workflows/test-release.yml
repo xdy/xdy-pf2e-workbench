@@ -10,7 +10,7 @@ on:
 env:
   fvtt_minimum: 11.314
   fvtt_verified: 11.315
-  
+
 jobs:
   release:
     # Only release on push to main on xdy/xdy-pf2e-workbench
@@ -57,6 +57,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+
+    - name: Print version
+      run: |
+        echo "github.ref_name: ${{ github.ref_name }}"  
 
 #      - name: Install playwright
 #        run: npx playwright install
