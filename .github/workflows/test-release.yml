@@ -115,21 +115,21 @@ jobs:
           TAG=${{ github.event.release.tag_name }}
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
-          - name: Submit package to FoundryVTT Package Release API
-            run: |
-              curl -X POST "https://api.foundryvtt.com/e_api/packages/release_version/" \
-                -H "Content-Type: application/json" \
-                -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
-                -d '{
-                  "id": "xdy-pf2e-workbench",
-                  "dry-run": false,
-                  "release": {
-                    "version": "${{ env.VERSION }}",
-                    "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
-                    "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
-                    "compatibility": {
-                      "minimum": "${{ env.fvtt_minimum }}",
-                      "verified": "${{ env.fvtt_verified }}"
-                    }
-                  }
-                }'
+      - name: Submit package to FoundryVTT Package Release API
+        run: |
+          curl -X POST "https://api.foundryvtt.com/e_api/packages/release_version/" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
+            -d '{
+              "id": "xdy-pf2e-workbench",
+              "dry-run": false,
+              "release": {
+                "version": "${{ env.VERSION }}",
+                "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
+                "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
+                "compatibility": {
+                  "minimum": "${{ env.fvtt_minimum }}",
+                  "verified": "${{ env.fvtt_verified }}"
+                }
+              }
+            }'
