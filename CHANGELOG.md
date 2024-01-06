@@ -1,3 +1,10 @@
+## [5.45.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.2...v5.45.3) (2024-01-06)
+
+
+### Bug Fixes
+
+* Another try ([61e6be3](https://github.com/xdy/xdy-pf2e-workbench/commit/61e6be3cb627e4735d319fe9844895f1008ca824))
+
 ## [5.45.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.1...v5.45.2) (2024-01-06)
 
 
