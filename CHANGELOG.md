@@ -1,3 +1,10 @@
+## [5.45.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.8...v5.45.9) (2024-01-06)
+
+
+### Bug Fixes
+
+* I don't like yaml formatting. :( ([acd9522](https://github.com/xdy/xdy-pf2e-workbench/commit/acd95225e596293aae41bd90dd2c505a41f1e4fe))
+
 ## [5.45.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.7...v5.45.8) (2024-01-06)
 
 
