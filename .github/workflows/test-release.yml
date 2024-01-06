@@ -53,6 +53,12 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      - name: Install playwright
+        run: npx playwright install
+
+      - name: Install foundry-publish
+        run: npm install -g @ghost-fvtt/foundry-publish
+        
 #      - name: Get tag
 #        run: echo "WORKBENCH_VERSION=$(git describe --tags --abbrev=0)" >> "$GITHUB_ENV"
 
@@ -78,6 +84,8 @@ jobs:
 #          #manifest-url: https://github.com/${{ github.repository }}/releases/download/${{ env.RELEASE_NAME }}/module.json
 #          manifest-url: https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json
 #          manifest-file: "static/module.json"
+
+
 
       # Publish to FoundryVTT
       - name: Publish to Foundry VTT Repo
