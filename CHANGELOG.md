@@ -1,3 +1,10 @@
+## [5.45.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.1...v5.45.2) (2024-01-06)
+
+
+### Bug Fixes
+
+* Another try at using ghost's foundry-publish ([939238d](https://github.com/xdy/xdy-pf2e-workbench/commit/939238de889eef36f72aed8d62bf8eabca5e0ebb))
+
 ## [5.45.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.0...v5.45.1) (2024-01-03)
 
 
