@@ -6,10 +6,11 @@ on:
   push:
     branches: [ main ]
 
-#TODO Parse out fvtt_minimum and fvtt_verified from the module.json, for now they're hardcoded.
+#TODO Parse out these, for now they're hardcoded.
 env:
   fvtt_minimum: 11.314
   fvtt_verified: 11.315
+  fvtt_maximum: 11
 
 jobs:
   release:
