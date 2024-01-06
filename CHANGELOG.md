@@ -1,3 +1,13 @@
+## [5.45.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.7...v5.45.8) (2024-01-06)
+
+
+### Bug Fixes
+
+* Like this then? ([8b5cc04](https://github.com/xdy/xdy-pf2e-workbench/commit/8b5cc044bbf89623dd355d1f7af1577cf06b4bb2))
+* Or, like this? ([9592ec2](https://github.com/xdy/xdy-pf2e-workbench/commit/9592ec23c59f05b9ee6ac10a0ca6a5b7c13d4859))
+* Script the version? ([607c5d9](https://github.com/xdy/xdy-pf2e-workbench/commit/607c5d9244ce391d36811c2c15fc1abf99eee55c))
+* Use the github variable ([0f2cbee](https://github.com/xdy/xdy-pf2e-workbench/commit/0f2cbee81f2d74428debba2b8c2ce0ae2c4beae1))
+
 ## [5.45.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.6...v5.45.7) (2024-01-06)
 
 
