@@ -1,3 +1,10 @@
+## [5.45.14](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.13...v5.45.14) (2024-01-06)
+
+
+### Bug Fixes
+
+* Stupid typos are stupid... ([cfbd20e](https://github.com/xdy/xdy-pf2e-workbench/commit/cfbd20e92af0a31c00c0146cfb147d75a141be4c))
+
 ## [5.45.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.12...v5.45.13) (2024-01-06)
 
 
