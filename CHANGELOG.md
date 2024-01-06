@@ -1,3 +1,10 @@
+## [5.45.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.5...v5.45.6) (2024-01-06)
+
+
+### Bug Fixes
+
+* Typo ([c93b43f](https://github.com/xdy/xdy-pf2e-workbench/commit/c93b43f1538836be234022998576d2bebec08e34))
+
 ## [5.45.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.4...v5.45.5) (2024-01-06)
 
 
