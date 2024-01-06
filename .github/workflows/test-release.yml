@@ -85,7 +85,7 @@ jobs:
         id: publish_foundry_repo
         run: npx @ghost-fvtt/foundry-publish
         env:
-          FVTT_MANIFEST_PATH: "static/system.json"
+          FVTT_MANIFEST_PATH: "static/module.json"
           FVTT_PACKAGE_ID: "xdy-pf2e-workbench"
           FVTT_USERNAME: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
           FVTT_PASSWORD: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
