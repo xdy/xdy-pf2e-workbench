@@ -116,7 +116,7 @@ jobs:
             -H "Content-Type: application/json" \
             -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
             -d '{
-              "id": "twodsix",
+              "id": "xdy-pf2e-workbench",
               "dry-run": false,
               "release": {
                 "version": "${{ github.ref_name }}",
