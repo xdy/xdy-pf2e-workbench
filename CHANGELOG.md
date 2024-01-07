@@ -1,3 +1,10 @@
+## [5.46.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.1...v5.46.2) (2024-01-07)
+
+
+### Bug Fixes
+
+* BAM: Improved handling of attack, downtime and exploration traits. ([e891354](https://github.com/xdy/xdy-pf2e-workbench/commit/e89135478cf14f86364930a88510e9be2d3c6541)), closes [#1112](https://github.com/xdy/xdy-pf2e-workbench/issues/1112)
+
 ## [5.46.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.0...v5.46.1) (2024-01-07)
 
 
