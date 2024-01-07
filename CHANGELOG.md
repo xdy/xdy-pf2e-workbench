@@ -1,3 +1,10 @@
+## [5.46.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.0...v5.46.1) (2024-01-07)
+
+
+### Bug Fixes
+
+* BAM: Added "Create a Diversion - Distracting Words". Changed Administer First Aid, Create A Diversion, Decipher Writing, Performance, Subsist to use new style actions. Added i18n for Reposition. Cleaned up the code. ([2a2ab48](https://github.com/xdy/xdy-pf2e-workbench/commit/2a2ab487563942de41ee95abbd3bf7acc31278ec)), closes [#1195](https://github.com/xdy/xdy-pf2e-workbench/issues/1195)
+
 # [5.46.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.14...v5.46.0) (2024-01-07)
 
 
