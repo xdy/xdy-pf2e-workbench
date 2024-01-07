@@ -274,6 +274,7 @@ export function basicActionMacros() {
             icon: "icons/skills/social/intimidation-impressing.webp",
         },
         {
+            replacedWith: "disarm",
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Disarm`),
             skill: "Athletics",
@@ -299,6 +300,7 @@ export function basicActionMacros() {
             showMAP: true,
         },
         {
+            replacedWith: "feint",
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Feint`),
             skill: "Deception",
@@ -322,6 +324,7 @@ export function basicActionMacros() {
             showMAP: true,
         },
         {
+            replacedWith: "gather-information",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.GatherInformation`),
             skill: "Diplomacy",
@@ -329,6 +332,7 @@ export function basicActionMacros() {
             icon: "icons/skills/social/diplomacy-handshake.webp",
         },
         {
+            replacedWith: "grapple",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Grapple`),
             skill: "Athletics",
@@ -345,6 +349,7 @@ export function basicActionMacros() {
             icon: "systems/pf2e/icons/features/classes/wild.webp",
         },
         {
+            replacedWith: "impersonate",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Impersonate`),
             skill: "Deception",
@@ -352,6 +357,7 @@ export function basicActionMacros() {
             icon: "icons/equipment/head/mask-carved-scream-tan.webp",
         },
         {
+            replacedWith: "high-jump",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.JumpHigh`),
             skill: "Athletics",
@@ -375,6 +381,7 @@ export function basicActionMacros() {
             icon: "icons/magic/control/mouth-smile-deception-purple.webp",
         },
         {
+            replacedWith: "make-an-impression",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.MakeAnImpression`),
             skill: "Diplomacy",
@@ -475,6 +482,7 @@ export function basicActionMacros() {
             icon: "icons/environment/people/commoner.webp",
         },
         {
+            replacedWith: "shove",
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Shove`),
             skill: "Athletics",
