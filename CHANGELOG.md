@@ -1,3 +1,16 @@
+# [5.46.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.14...v5.46.0) (2024-01-07)
+
+
+### Bug Fixes
+
+* BAM: Use new-style actions for Disarm, Feint, Gather Information, Grapple, Impersonate, Jump (High), Make an Impression and Shove. ([cc7a526](https://github.com/xdy/xdy-pf2e-workbench/commit/cc7a526db41c0efe35c356ff6326ae656c2b9559))
+* When handling nonlethal damage, check rollOption instead of item trait. ([dfd9597](https://github.com/xdy/xdy-pf2e-workbench/commit/dfd95977cc134e35cd4e9a50dacb1da1d726ed6c))
+
+
+### Features
+
+* Update types, remove use of deprecated methods. Set minimum and verified pf2e to 5.12.0 ([bfe644c](https://github.com/xdy/xdy-pf2e-workbench/commit/bfe644cad0fdc87cec838ebaf1192dec20ef8105)), closes [#1194](https://github.com/xdy/xdy-pf2e-workbench/issues/1194)
+
 ## [5.45.14](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.45.13...v5.45.14) (2024-01-06)
 
 
