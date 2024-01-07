@@ -120,10 +120,52 @@ type MacroAction = {
     best?: number;
     whoIsBest?: string;
     showMAP?: boolean;
+    showExploration?: boolean;
+    showDowntime?: boolean;
     extra?: string;
     actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
     actionTitle?: string;
 };
+/**
+ * Generates the filtered list of actions to use based on the given bamActions.
+ *
+ * @param {MacroAction[]} bamActions - The list of MacroActions to filter.
+ * @return {MacroAction[]} The filtered list of actions to use.
+ */
+function prepareActions(bamActions: MacroAction[]) {
+    const showUnusable = game.settings.get(MODULENAME, "bamShowUnusable");
+
+    const actionsToUse = bamActions
+        .filter((x) => {
+            const hasSkill = selectedActor.skills?.[x.skill.toLocaleLowerCase()]?.rank ?? 0 > 0;
+            const hasAltSkillAndFeat =
+                x.altSkillAndFeat?.find((y) => selectedActor.skills?.[y.skill.toLocaleLowerCase()]?.rank) &&
+                x.altSkillAndFeat?.find((y) => selectedActor.itemTypes.feat.find((feat) => feat.slug === y.feat));
+
+            return (
+                showUnusable ||
+                x.actionType !== "skill_trained" ||
+                (x.actionType === "skill_trained" && ["npc", "familiar"].includes(selectedActor.type)) ||
+                selectedActor.itemTypes.feat.find((feat) => feat.slug === "clever-improviser") ||
+                hasSkill ||
+                hasAltSkillAndFeat
+            );
+        })
+        .filter((m) => (m.module ? game.modules.get(m.module)?.active : true))
+        .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
+
+    actionsToUse.forEach((x) => {
+        const action =
+            typeof x.action === "string" && x.action.includes("use(") ? eval(x.action.split(".use")[0]) : x.action;
+
+        const traits = action?.traits ?? [];
+        x.showMAP = traits.includes("attack");
+        x.showDowntime = traits.includes("downtime");
+        x.showExploration = traits.includes("exploration");
+    });
+
+    return actionsToUse;
+}
 
 /**
  * This macro opens a dialog containing a list of actions to be used by the selected Actor
@@ -279,7 +321,6 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.get("disarm"),
             icon: "icons/skills/melee/sword-damaged-broken-glow-red.webp",
-            showMAP: true,
         },
         {
             actionType: "skill_trained",
@@ -294,7 +335,6 @@ export function basicActionMacros() {
             skill: "",
             action: game.pf2e.actions.get("escape"),
             icon: "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
-            showMAP: true,
         },
         {
             actionType: "skill_trained",
@@ -316,7 +356,6 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.get("force-open"),
             icon: "icons/equipment/feet/boots-armored-steel.webp",
-            showMAP: true,
         },
         {
             actionType: "skill_untrained",
@@ -331,7 +370,6 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.get("grapple"),
             icon: "icons/skills/melee/unarmed-punch-fist.webp",
-            showMAP: true,
         },
         {
             actionType: "skill_untrained",
@@ -465,7 +503,6 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.get("shove"),
             icon: "systems/pf2e/icons/spells/hydraulic-push.webp",
-            showMAP: true,
         },
         {
             actionType: "skill_untrained",
@@ -557,7 +594,6 @@ export function basicActionMacros() {
             skill: "Athletics",
             action: game.pf2e.actions.get("trip"),
             icon: "icons/skills/wounds/bone-broken-marrow-yellow.webp",
-            showMAP: true,
         },
         {
             actionType: "skill_untrained",
@@ -567,34 +603,6 @@ export function basicActionMacros() {
             icon: "icons/skills/movement/feet-winged-sandals-tan.webp",
         },
     ];
-
-    // @ts-ignore
-    const newStyleActions: MacroAction[] = Array.from(game.pf2e.actions)
-        .filter((x) => bamActions.find((y) => y.actionTitle === x[0]))
-        .map((x) => {
-            let statistic = x[1].statistic;
-            if (Array.isArray(statistic)) {
-                // TODO Handle properly. For now, just use the first in the array
-                statistic = x[1].statistic[0];
-            }
-
-            // TODO Handle variants
-            return {
-                actionType: bamActions.find((y) => y.actionTitle === x[0])?.actionType,
-                name: game.i18n.localize(x[1].name),
-                skill: statistic
-                    ? statistic.charAt(0).toUpperCase() + statistic.slice(1)
-                    : bamActions.find((y) => y.actionTitle === x[0])?.skill.toLocaleLowerCase(),
-                icon:
-                    x[1].img ??
-                    bamActions.find((y) => y.actionTitle === x[0])?.icon ??
-                    "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp",
-                showMAP: x[1].traits?.includes("attack") ?? false,
-                showExploration: x[1].traits?.includes("exploration") ?? false,
-                showDowntime: x[1].traits?.includes("downtime") ?? false,
-                action: x[1],
-            };
-        });
 
     // @ts-ignore
     const actionDialog = window.actionDialog;
@@ -611,28 +619,7 @@ export function basicActionMacros() {
         return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
     }
 
-    const showUnusable = game.settings.get(MODULENAME, "bamShowUnusable");
-    const actionsToUse = bamActions
-        .filter((x) => !x.actionTitle)
-        .concat(newStyleActions)
-        .filter((x) => {
-            const hasSkill = selectedActor.skills?.[x.skill.toLocaleLowerCase()]?.rank ?? 0 > 0;
-            const hasAltSkillAndFeat =
-                x.altSkillAndFeat?.find((y) => selectedActor.skills?.[y.skill.toLocaleLowerCase()]?.rank) &&
-                x.altSkillAndFeat?.find((y) => selectedActor.itemTypes.feat.find((feat) => feat.slug === y.feat));
-            return (
-                showUnusable ||
-                x.actionType !== "skill_trained" ||
-                (x.actionType === "skill_trained" && ["npc", "familiar"].includes(selectedActor.type)) ||
-                selectedActor.itemTypes.feat.find((feat) => feat.slug === "clever-improviser") ||
-                hasSkill ||
-                hasAltSkillAndFeat
-            );
-        })
-        .filter((m) => {
-            return m.module ? game.modules.get(m.module)?.active : true;
-        })
-        .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
+    const actionsToUse = prepareActions(bamActions);
 
     // @ts-ignore
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
