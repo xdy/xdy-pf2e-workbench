@@ -101,28 +101,34 @@ export function handleDying(
     const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !isDefeated;
     const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !isDefeated;
     if (shouldDie) {
-        actor.combatant?.toggleDefeated().then(() => {
-            // Dead, not dying, so clear the flag.
-            actor
-                .unsetFlag(MODULENAME, "dyingLastApplied")
-                .then(() => console.log("dyingLastApplied cleared because dead"));
-        });
+        actor
+            .increaseCondition("dying", {
+                max: actor.system.attributes.dying.max,
+                value: actor.system.attributes.dying.max,
+            })
+            .then(() => {
+                actor.combatant?.toggleDefeated().then(() => {
+                    // Dead, not dying, so clear the flag.
+                    actor
+                        .unsetFlag(MODULENAME, "dyingLastApplied")
+                        .then(() => console.log("dyingLastApplied cleared because dead"));
+                });
+            });
     } else if (shouldBecomeDying) {
         actor
             .increaseCondition("dying", {
-                value: originalDyingCounter + dyingCounter,
+                max: actor.system.attributes.dying.max,
+                value: Math.min(dyingCounter, actor.system.attributes.dying.max),
             })
             .then(() => {
+                const dying = actor.getCondition("dying");
+                console.log(`dyingCounter was ${originalDyingCounter} is ${dying.value}`);
                 const now = Date.now();
-                return actor
-                    .setFlag(MODULENAME, "dyingLastApplied", now)
-                    .then(() =>
-                        console.log(
-                            `dyingLastApplied set to ${now}, dyingCounter was ${originalDyingCounter} is ${
-                                originalDyingCounter + dyingCounter
-                            }`,
-                        ),
+                return actor.setFlag(MODULENAME, "dyingLastApplied", now).then(() => {
+                    console.log(
+                        `dyingLastApplied set to ${now}, dyingCounter was ${originalDyingCounter} is ${dying.value}`,
                     );
+                });
             });
     } else {
         actor.decreaseCondition("dying", { forceRemove: true }).then(() => {
