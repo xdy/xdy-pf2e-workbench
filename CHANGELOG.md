@@ -1,3 +1,10 @@
+## [5.46.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.5...v5.46.6) (2024-01-08)
+
+
+### Bug Fixes
+
+* Another go at fixing dying automation. ([0bfc1ed](https://github.com/xdy/xdy-pf2e-workbench/commit/0bfc1ed320f287ff577709949300660488a90a86))
+
 ## [5.46.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.4...v5.46.5) (2024-01-08)
 
 
