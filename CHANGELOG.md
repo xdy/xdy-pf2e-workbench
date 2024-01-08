@@ -1,3 +1,10 @@
+## [5.46.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.4...v5.46.5) (2024-01-08)
+
+
+### Bug Fixes
+
+* BAM: Support sending shift to action macros again. ([951f554](https://github.com/xdy/xdy-pf2e-workbench/commit/951f554cbb8dd2c565e2e401f5714e22f28d52cc))
+
 ## [5.46.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.3...v5.46.4) (2024-01-08)
 
 
