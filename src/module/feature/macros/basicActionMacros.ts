@@ -178,14 +178,14 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStabilize`),
             skill: "Medicine",
-            action: 'game.pf2e.actions.get("administer-first-aid").use({ variant: "stabilize"})',
+            action: 'game.pf2e.actions.get("administer-first-aid").use({ event, variant: "stabilize"})',
             icon: "systems/pf2e/icons/features/feats/treat-wounds.webp",
         },
         {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStopBleeding`),
             skill: "Medicine",
-            action: 'game.pf2e.actions.get("administer-first-aid").use({ variant: "stop-bleeding"})',
+            action: 'game.pf2e.actions.get("administer-first-aid").use({ event, variant: "stop-bleeding"})',
             icon: "systems/pf2e/icons/conditions/persistent-damage.webp",
         },
         {
@@ -263,49 +263,49 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateADiversionDistractingWords`),
             skill: "Deception",
-            action: 'game.pf2e.actions.get("create-a-diversion").use({ variant: "distracting-words" })',
+            action: 'game.pf2e.actions.get("create-a-diversion").use({ event, variant: "distracting-words" })',
             icon: "icons/skills/social/wave-halt-stop.webp",
         },
         {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateADiversionGesture`),
             skill: "Deception",
-            action: 'game.pf2e.actions.get("create-a-diversion").use({ variant: "gesture" })',
+            action: 'game.pf2e.actions.get("create-a-diversion").use({ event, variant: "gesture" })',
             icon: "icons/skills/social/wave-halt-stop.webp",
         },
         {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateADiversionTrick`),
             skill: "Deception",
-            action: 'game.pf2e.actions.get("create-a-diversion").use({ variant: "trick" })',
+            action: 'game.pf2e.actions.get("create-a-diversion").use({ event, variant: "trick" })',
             icon: "systems/pf2e/icons/spells/charming-words.webp",
         },
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingArcana`),
             skill: "Arcana",
-            action: 'game.pf2e.actions.get("decipher-writing").use({ statistic: "arcana" })',
+            action: 'game.pf2e.actions.get("decipher-writing").use({ event, statistic: "arcana" })',
             icon: "icons/skills/trades/academics-book-study-runes.webp",
         },
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingOccultism`),
             skill: "Occultism",
-            action: 'game.pf2e.actions.get("decipher-writing").use({ statistic: "occultism" })',
+            action: 'game.pf2e.actions.get("decipher-writing").use({ event, statistic: "occultism" })',
             icon: "icons/skills/trades/academics-book-study-purple.webp",
         },
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingReligion`),
             skill: "Religion",
-            action: 'game.pf2e.actions.get("decipher-writing").use({ statistic: "religion" })',
+            action: 'game.pf2e.actions.get("decipher-writing").use({ event, statistic: "religion" })',
             icon: "systems/pf2e/icons/equipment/other/spellbooks/thresholds-of-truth.webp",
         },
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingSociety`),
             skill: "Society",
-            action: 'game.pf2e.actions.get("decipher-writing").use({ statistic: "society" })',
+            action: 'game.pf2e.actions.get("decipher-writing").use({ event, statistic: "society" })',
             icon: "icons/skills/trades/academics-study-reading-book.webp",
         },
         {
@@ -431,7 +431,7 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Perform`),
             skill: "Performance",
-            action: 'game.pf2e.actions.get("perform").use({ variant: "singing" })',
+            action: 'game.pf2e.actions.get("perform").use({ event, variant: "singing" })',
             icon: "icons/skills/trades/music-singing-voice-blue.webp",
         },
         {
@@ -529,14 +529,14 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.SubsistSociety`),
             skill: "Society",
-            action: 'game.pf2e.actions.get("subsist").use({ statistic: "society" })',
+            action: 'game.pf2e.actions.get("subsist").use({ event, statistic: "society" })',
             icon: "icons/environment/settlement/building-rubble.webp",
         },
         {
             actionType: "basic",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.SubsistSurvival`),
             skill: "Survival",
-            action: 'game.pf2e.actions.get("subsist").use({ statistic: "survival" })',
+            action: 'game.pf2e.actions.get("subsist").use({ event, statistic: "survival" })',
             icon: "icons/environment/wilderness/camp-improvised.webp",
         },
         {
@@ -741,7 +741,7 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                                 );
                                 return;
                             }
-                            macro?.execute();
+                            macro?.execute(event);
                         } else {
                             // Ugh
                             eval(current);
@@ -755,7 +755,7 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                                 const macro_data = documents.find((i) => i._source.name === macroName)?.toObject();
                                 if (macro_data) {
                                     const temp_macro = new Macro(macro_data);
-                                    temp_macro.execute();
+                                    temp_macro.execute(event);
                                 } else {
                                     ui.notifications.error(
                                         game.i18n.format(`${MODULENAME}.macros.basicActionMacros.macroNotFound`, {
