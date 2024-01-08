@@ -1,3 +1,10 @@
+## [5.46.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.3...v5.46.4) (2024-01-08)
+
+
+### Bug Fixes
+
+* Made housepatcher ignore items previously patched by it or CCC (i.e. it won't patch anything with the traits "(HOUSEPATCHED)" or "(CCC PATCHED)" ). ([155ef62](https://github.com/xdy/xdy-pf2e-workbench/commit/155ef626b0f25aca7c35eea623fef808841c54fa))
+
 ## [5.46.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.2...v5.46.3) (2024-01-08)
 
 
