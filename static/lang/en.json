@@ -457,7 +457,8 @@
       "housepatcher": {
         "hint": "(REALLY EXPERIMENTAL) Enter a json array to patch system compendiums. See housepatcher.md on the github for documentation.",
         "name": "(REALLY EXPERIMENTAL) Housepatcher (patches in house rules). Requires refresh (f5) after changing.",
-        "notification": "Housepatcher: Applying {count} house rules to items in system compendiums."
+        "notification": "Patched {count} unpatched items in system compendiums.",
+        "error": "Bad housepatcher JSON has been deleted"
       },
       "houseRulesSettings": {
         "hint": "(Experimental) Enable and configure various house rules",

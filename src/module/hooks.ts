@@ -1,4 +1,4 @@
-import { isActuallyDamageRoll, isFirstGM, logDebug, logInfo, shouldIHandleThis } from "./utils.js";
+import { housepatcher, isActuallyDamageRoll, isFirstGM, logDebug, shouldIHandleThis } from "./utils.js";
 import { ActorPF2e, CreaturePF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
@@ -503,81 +503,9 @@ export function pf2eRerollHook(
 }
 
 export async function pf2eSystemReadyHook() {
-    function unflatten(object) {
-        const result = {};
-        Object.keys(object).forEach(function (k) {
-            setValue(result, k, object[k]);
-        });
-        return result;
-    }
-
-    function setValue(object, path, value) {
-        const split = path.split(".");
-        const top = split.pop();
-
-        split.reduce(function (o, k, i, kk) {
-            return (o[k] = o[k] || (isFinite(i + 1 in kk ? kk[i + 1] : top) ? [] : {}));
-        }, object)[top] = value;
-    }
-
-    async function patchObject(patch) {
-        const document = fromUuidSync(patch.uuid);
-        if (document) {
-            const compendium = document?.compendium;
-            if (compendium) {
-                if (patch.action === "update") {
-                    const original = document?.toObject();
-                    const patchData = unflatten(patch.data);
-                    if (!Object.prototype.hasOwnProperty.call(patchData, "system")) {
-                        patchData["system"] = {};
-                    }
-
-                    if (!Object.prototype.hasOwnProperty.call(patchData["system"], "traits")) {
-                        patchData["system"]["traits"] = {};
-                    }
-
-                    if (!Object.prototype.hasOwnProperty.call(patchData["system"]["traits"], "value")) {
-                        patchData["system"]["traits"]["value"] = [];
-                    }
-
-                    patchData["system"]["traits"]["value"].push("hb_workbenched");
-                    const object = fu.mergeObject(original, patchData);
-                    const unflatten1 = unflatten(object);
-                    await document.update(unflatten1);
-                } else if (patch.action === "unlock") {
-                    if (compendium.locked) {
-                        await compendium.configure({ locked: false });
-                    }
-                } else if (patch.action === "lock") {
-                    if (!compendium.locked) {
-                        await compendium.configure({ locked: true });
-                    }
-                } else if (patch.action === "delete") {
-                    await document.delete();
-                    await compendium?.getIndex();
-                }
-            }
-        }
-    }
-
-    if (game.user.isGM && game.settings.get(MODULENAME, "housepatcher") !== "") {
-        try {
-            const text = decodeURI(String(game.settings.get(MODULENAME, "housepatcher")));
-            const json = JSON.parse(text);
-            if (json.length > 0) {
-                const message = game.i18n.format(`${MODULENAME}.SETTINGS.housepatcher.notification`, {
-                    count: json.filter((j) => !j.action.includes("lock")).length,
-                });
-                ui.notifications.info(message);
-                logInfo("Housepatcher: " + JSON.stringify(json, null, 2));
-                for (const patch of json) {
-                    await patchObject(patch);
-                }
-            }
-        } catch (e) {
-            ui.notifications.error("Bad housepatcher JSON has been deleted");
-            game.settings.set(MODULENAME, "housepatcher", "");
-        }
+    const housepatcherSetting = game.settings.get(MODULENAME, "housepatcher");
+    if (game.user.isGM && housepatcherSetting) {
+        await housepatcher(housepatcherSetting);
     }
 }
 

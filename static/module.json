@@ -259,32 +259,32 @@
     "xdy-pf2e-workbench": {
       "pf2e-homebrew": {
         "creatureTraits": {
-          "workbenched": {
-            "label": "Workbenched",
+          "xdy-pf2e-housepatched": {
+            "label": "(HOUSEPATCHED)",
             "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
           }
         },
         "equipmentTraits": {
-          "workbenched": {
-            "label": "Workbenched",
+          "xdy-pf2e-housepatched": {
+            "label": "(HOUSEPATCHED)",
             "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
           }
         },
         "featTraits": {
-          "workbenched": {
-            "label": "Workbenched",
+          "xdy-pf2e-housepatched": {
+            "label": "(HOUSEPATCHED)",
             "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
           }
         },
         "spellTraits": {
-          "workbenched": {
-            "label": "Workbenched",
+          "xdy-pf2e-housepatched": {
+            "label": "(HOUSEPATCHED)",
             "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
           }
         },
         "weaponTraits": {
-          "workbenched": {
-            "label": "Workbenched",
+          "xdy-pf2e-housepatched": {
+            "label": "(HOUSEPATCHED)",
             "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
           }
         }

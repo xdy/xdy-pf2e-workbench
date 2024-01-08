@@ -128,6 +128,80 @@ export function pushNotification(message: any, type: string = "info") {
     game.socket.emit("module." + MODULENAME, { operation: "notification", args: [type, message] });
 }
 
+export function unflatten(object) {
+    const result = {};
+    Object.keys(object).forEach(function (k) {
+        setValue(result, k, object[k]);
+    });
+    return result;
+}
+
+export function setValue(object, path, value) {
+    const split = path.split(".");
+    const top = split.pop();
+
+    split.reduce(function (o, k, i, kk) {
+        return (o[k] = o[k] || (isFinite(i + 1 in kk ? kk[i + 1] : top) ? [] : {}));
+    }, object)[top] = value;
+}
+
+/**
+ * Applies patches to a housepatcher object.
+ *
+ * @param {string} housepatcher - The housepatcher object containing patches.
+ * @return {Promise<void>} A promise that resolves when the patches have been applied.
+ */
+export async function housepatcher(housepatcher) {
+    try {
+        const patches = JSON.parse(decodeURI(String(housepatcher)));
+        let count = 0;
+
+        for (const { uuid, action, data } of patches) {
+            const document = await fromUuid(uuid);
+
+            if (document?.compendium) {
+                const compendium = document.compendium;
+
+                if (action === "update") {
+                    const original: any = document.toObject();
+                    const traits = original?.system?.traits?.value;
+
+                    const housepatchedTrait = "xdy-pf2e-housepatched";
+                    const cccPatchedTrait = "pf2e-ccc-patched";
+                    if (!(traits?.includes(cccPatchedTrait) || traits?.includes(housepatchedTrait))) {
+                        const update: any = unflatten(data);
+                        update.system = update.system ?? {};
+                        update.system.traits = update.system.traits ?? {};
+                        update.system.traits.value = update.system.traits.value ?? [];
+                        update.system.traits.value.push(housepatchedTrait);
+
+                        const merged = fu.mergeObject(original, update);
+                        await document.update(unflatten(merged));
+                        count += 1;
+                    }
+                } else if (action === "unlock") {
+                    if (compendium.locked) {
+                        await compendium.configure({ locked: false });
+                    }
+                } else if (action === "lock") {
+                    if (!compendium.locked) {
+                        await compendium.configure({ locked: true });
+                    }
+                } else if (action === "delete") {
+                    await document.delete();
+                    await compendium.getIndex();
+                }
+            }
+        }
+
+        const message = game.i18n.format(`${MODULENAME}.SETTINGS.housepatcher.notification`, { count });
+        ui.notifications.info(message);
+    } catch (e) {
+        ui.notifications.error(game.i18n.format(`${MODULENAME}.SETTINGS.housepatcher.error`));
+        game.settings.set(MODULENAME, "housepatcher", "");
+    }
+}
+
 // Functions copied from C:\Users\jk\foundryvtt\forks\pf2e\build\lib\foundry-utils.ts
 // Not sure why I can't use directly.
 
