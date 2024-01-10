@@ -77,7 +77,8 @@ jobs:
                 "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
                 "compatibility": {
                   "minimum": "${{ env.fvtt_minimum }}",
-                  "verified": "${{ env.fvtt_verified }}"
+                  "verified": "${{ env.fvtt_verified }}",
+                  "maximum": "${{ env.fvtt_maximum }}"
                 }
               }
             }'
