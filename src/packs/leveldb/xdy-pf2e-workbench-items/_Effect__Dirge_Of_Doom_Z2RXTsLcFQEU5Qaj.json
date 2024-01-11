@@ -57,7 +57,7 @@
       "value": 1,
       "unit": "rounds",
       "expiry": "turn-start",
-      "sustained": true
+      "sustained": false
     },
     "start": {
       "value": 0,
