@@ -1,4 +1,4 @@
-import { housepatcher, isActuallyDamageRoll, isFirstGM, logDebug, shouldIHandleThis } from "./utils.js";
+import { housepatcher, isActuallyDamageRoll, logDebug, shouldIHandleThis } from "./utils.js";
 import { ActorPF2e, CreaturePF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
@@ -19,21 +19,8 @@ import {
     damageCardExpand,
     mystifyNpcItems,
 } from "./feature/qolHandler/index.js";
-import {
-    autoRollDamage,
-    handleDyingRecoveryRoll,
-    persistentDamage,
-    persistentHealing,
-} from "./feature/damageHandler/index.js";
-import {
-    autoRemoveDyingAtGreaterThanZeroHp,
-    autoRemoveUnconsciousAtGreaterThanZeroHP,
-    checkIfLatestDamageMessageIsCriticalHitByEnemy,
-    giveUnconsciousIfDyingRemovedAt0HP,
-    giveWoundedWhenDyingRemoved,
-    handleDyingOnZeroHP,
-    reduceFrightened,
-} from "./feature/conditionHandler/index.js";
+import { autoRollDamage, persistentDamage, persistentHealing } from "./feature/damageHandler/index.js";
+import { reduceFrightened } from "./feature/conditionHandler/index.js";
 import {
     mangleNamesInChatMessage,
     renderNameHud,
@@ -41,12 +28,17 @@ import {
 } from "./feature/tokenMystificationHandler/index.js";
 import { ItemPF2e } from "@item/base/document.js";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
-import { moveOnZeroHP } from "./feature/initiativeHandler/index.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import { CheckRoll } from "@module/system/check/roll.js";
 import { PhysicalItemPF2e } from "@item/physical/document.js";
 import { ActorSystemData } from "@actor/data/base.js";
 import { ActorSheetPF2e } from "@actor/sheet/base.js";
+import {
+    dyingHandlingPreCreateChatMessageHook,
+    dyingHandlingPreUpdateActorHook,
+    itemHandlingItemHook,
+    handleDyingRecoveryRoll,
+} from "./feature/damageHandler/dyingHandling.ts";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;
@@ -91,54 +83,6 @@ function castPrivately(inParty: boolean, message: ChatMessagePF2e) {
     return (isNpc && alwaysNpc) || (!isAlly && alwaysNonAlly) || (!inParty && alwaysNonParty);
 }
 
-export function handleDying(
-    dyingCounter: number,
-    originalDyingCounter: number,
-    actor,
-    isDefeated: any = actor.combatant?.defeated,
-) {
-    // Can't await, so do the math.
-    const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !isDefeated;
-    const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !isDefeated;
-    if (shouldDie) {
-        actor
-            .increaseCondition("dying", {
-                max: actor.system.attributes.dying.max,
-                value: actor.system.attributes.dying.max,
-            })
-            .then(() => {
-                actor.combatant?.toggleDefeated().then(() => {
-                    // Dead, not dying, so clear the flag.
-                    actor
-                        .unsetFlag(MODULENAME, "dyingLastApplied")
-                        .then(() => console.log("dyingLastApplied cleared because dead"));
-                });
-            });
-    } else if (shouldBecomeDying) {
-        actor
-            .increaseCondition("dying", {
-                max: actor.system.attributes.dying.max,
-                value: Math.min(dyingCounter, actor.system.attributes.dying.max),
-            })
-            .then(() => {
-                const dying = actor.getCondition("dying");
-                console.log(`dyingCounter was ${originalDyingCounter} is ${dying.value}`);
-                const now = Date.now();
-                return actor.setFlag(MODULENAME, "dyingLastApplied", now).then(() => {
-                    console.log(
-                        `dyingLastApplied set to ${now}, dyingCounter was ${originalDyingCounter} is ${dying.value}`,
-                    );
-                });
-            });
-    } else {
-        actor.decreaseCondition("dying", { forceRemove: true }).then(() => {
-            return actor
-                .unsetFlag(MODULENAME, "dyingLastApplied")
-                .then(() => console.log("dyingLastApplied cleared because not dying"));
-        });
-    }
-}
-
 export function createChatMessageHook(message: ChatMessagePF2e) {
     if (String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "reminder") {
         reminderCannotAttack(message, false);
@@ -162,45 +106,12 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
             reminderBreathWeapon(message).then();
         }
     }
-    if (!String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no")) {
-        const actor = message.actor;
-        if (actor && shouldIHandleThis(actor)) {
-            if (message.content?.includes("damage-taken")) {
-                const now = Date.now();
-                const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || now;
-                console.log(`dyingLastApplied is ${flag}, now is ${now}`);
-                // Ignore this if it occurs within last few seconds of the last time we applied dying
-                // @ts-ignore
-                const notTooSoon = !flag?.between(now - 4000, now);
-                if (notTooSoon) {
-                    const dyingOption = String(
-                        game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
-                    );
-                    const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
-                    let dyingCounter = 0;
-                    if (!dyingOption.startsWith("no") && originalDyingCounter > 0) {
-                        const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption);
+    dyingHandlingPreCreateChatMessageHook(message);
+}
 
-                        if (
-                            dyingOption.endsWith("ForCharacters")
-                                ? ["character", "familiar"].includes(actor.type)
-                                : true
-                        ) {
-                            dyingCounter = dyingCounter + 1;
-
-                            if (wasCritical) {
-                                dyingCounter = dyingCounter + 1;
-                            }
-                        }
-                        console.log(
-                            `Before handleDying dyingLastApplied is ${flag}, now is ${now}, dyingCounter was ${originalDyingCounter} will increase by ${dyingCounter}`,
-                        );
-
-                        handleDying(dyingCounter, originalDyingCounter, actor);
-                    }
-                }
-            }
-        }
+function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) {
+    if (game.settings.get(MODULENAME, "handleDyingRecoveryRoll")) {
+        handleDyingRecoveryRoll(message);
     }
 }
 
@@ -214,9 +125,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
         persistentDamage(message);
     }
 
-    if (game.settings.get(MODULENAME, "handleDyingRecoveryRoll")) {
-        handleDyingRecoveryRoll(message);
-    }
+    deprecatedDyingHandlingRenderChatMessageHook(message);
 
     // Affects all messages
     const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
@@ -333,27 +242,7 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
 export async function updateItemHook(_item: ItemPF2e, _update: any) {}
 
 export async function deleteItemHook(item: ItemPF2e, _options: {}) {
-    if (isFirstGM() && item.slug === "dying" && item.parent) {
-        handleDying(0, 0, item.parent, false);
-    }
-
-    if (
-        game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
-        game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")
-    ) {
-        if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
-            giveWoundedWhenDyingRemoved(item).then(() => {
-                logDebug("Workbench giveWoundedWhenDyingRemoved complete");
-                if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
-                    giveUnconsciousIfDyingRemovedAt0HP(item).then(() => {
-                        logDebug("Workbench giveUnconsciousIfDyingRemovedAt0HP complete");
-                    });
-                }
-            });
-        } else if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
-            await giveUnconsciousIfDyingRemovedAt0HP(item);
-        }
-    }
+    await itemHandlingItemHook(item);
 }
 
 export function pf2eEndTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string) {
@@ -401,62 +290,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
             await mystifyNpcItems(actor.items);
         }
 
-        const automoveIfZeroHP =
-            game.combat &&
-            ((String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HPCharactersOnly" &&
-                actor.type === CHARACTER_TYPE) ||
-                (String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HP" &&
-                    [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
-        if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
-            handleDyingOnZeroHP(actor, fu.deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
-                logDebug("Workbench increaseDyingOnZeroHP complete");
-                if (hpRaisedAbove0) {
-                    if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {
-                        // Ugh.
-                        new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
-                            autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0 && hpRaisedAbove0).then(
-                                () => {
-                                    logDebug("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
-                                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                                        autoRemoveUnconsciousAtGreaterThanZeroHP(
-                                            actor,
-                                            currentActorHp <= 0 && hpRaisedAbove0,
-                                        ).then();
-                                    }
-                                },
-                            );
-                        });
-                    } else {
-                        if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                            autoRemoveUnconsciousAtGreaterThanZeroHP(
-                                actor,
-                                currentActorHp <= 0 && hpRaisedAbove0,
-                            ).then();
-                        }
-                    }
-                } else {
-                    if (automoveIfZeroHP && currentActorHp > 0 && updateHp <= 0) {
-                        moveOnZeroHP(actor);
-                    }
-                }
-            });
-        } else {
-            if (currentActorHp <= 0 && updateHp > 0) {
-                if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {
-                    autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0).then(() => {
-                        if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                            autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
-                        }
-                    });
-                } else {
-                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
-                    }
-                }
-            } else if (automoveIfZeroHP && currentActorHp > 0 && updateHp <= 0) {
-                moveOnZeroHP(actor);
-            }
-        }
+        dyingHandlingPreUpdateActorHook(actor, update, currentActorHp, updateHp);
     }
 }
 

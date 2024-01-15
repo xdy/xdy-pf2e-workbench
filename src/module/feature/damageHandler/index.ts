@@ -5,7 +5,6 @@ import {
     objectHasKey,
     shouldIHandleThisMessage,
 } from "../../utils.ts";
-import { handleDying } from "../../hooks.js";
 import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import { ActorFlagsPF2e } from "@actor/data/base.js";
 
@@ -251,72 +250,6 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     }
                 }
             }
-        }
-    }
-}
-
-export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
-    const flavor = message.flavor;
-    const token = message.token;
-    if (
-        game.settings.get(MODULENAME, "handleDyingRecoveryRoll") &&
-        shouldIHandleThisMessage(
-            message,
-            ["all", "players"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),
-        ) &&
-        (flavor.includes(game.i18n.localize("PF2E.Recovery.critFailure")) ||
-            flavor.includes(game.i18n.localize("PF2E.Recovery.critSuccess")) ||
-            flavor.includes(game.i18n.localize("PF2E.Recovery.failure")) ||
-            flavor.includes(game.i18n.localize("PF2E.Recovery.success"))) &&
-        message.id === game.messages.contents.pop()?.id &&
-        token &&
-        token.actor &&
-        token.isOwner
-    ) {
-        const outcome = message.flags?.pf2e?.context?.outcome ?? "";
-
-        const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
-        const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
-
-        const originalDyingCounter = token.actor?.getCondition("dying")?.value ?? 0;
-        let dyingCounter = 0;
-        let outcomeString = "";
-        switch (outcome) {
-            case "criticalFailure":
-                dyingCounter = dyingCounter + 2;
-                outcomeString = game.i18n.localize("PF2E.CritFailure");
-                break;
-            case "criticalSuccess":
-                dyingCounter = dyingCounter - 2;
-                outcomeString = game.i18n.localize("PF2E.CritSuccess");
-                break;
-            case "failure":
-                dyingCounter = dyingCounter + 1;
-                outcomeString = game.i18n.localize("PF2E.Failure");
-                break;
-            case "success":
-                outcomeString = game.i18n.localize("PF2E.Success");
-                dyingCounter = dyingCounter - 1;
-                break;
-        }
-        if (originalDyingCounter > 0 || dyingCounter !== 0) {
-            handleDying(dyingCounter, originalDyingCounter, actor);
-
-            const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
-            ChatMessage.create({
-                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.handled`, {
-                    outcome: outcomeString,
-                    defeated: token.combatant?.defeated
-                        ? game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.defeated`, {
-                              name: token.actor?.name ?? "???",
-                          })
-                        : "",
-                    roll: total,
-                }),
-                speaker: message.speaker,
-            }).then();
-            message.delete({ render: false }).then();
         }
     }
 }
