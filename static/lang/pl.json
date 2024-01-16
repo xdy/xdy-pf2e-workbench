@@ -80,7 +80,9 @@
           "AdministerFirstAidStabilize": "Pierwsza pomoc - Stabilizacja",
           "CreateForgery": "Fałszerstwo",
           "Escape": "Wyrwanie się",
-          "AidASE": "Wsparcie (makro ASE)"
+          "AidASE": "Wsparcie (makro ASE)",
+          "CreateADiversionDistractingWords": "Dywersja - Rozpraszające Słowa",
+          "Reposition": "Przemieszczenie"
         },
         "noActorSelected": "Nie wybrano żadnego aktora",
         "cancel": "Anuluj",
@@ -595,7 +597,8 @@
       "housepatcher": {
         "hint": "(NAPRAWDĘ EKSPERYMENTALNE) Wprowadź tablicę json, aby załatać kompendia systemowe. Dokumentacja znajduje się w housepatcher.md na githubie.",
         "name": "(NAPRAWDĘ EKSPERYMENTALNE) Housepatcher (poprawki w zasadach domowych). Wymaga odświeżenia (f5) po zmianie.",
-        "notification": "Housepatcher: Stosowanie {count} zasad domowych do przedmiotów w kompendiach systemowych."
+        "notification": "Naprawiono {count} niezałatanych elementów w kompendiach systemowych.",
+        "error": "Zły plik JSON housepatchera został usunięty"
       },
       "legacyVariantRuleDualClass": {
         "hint": "Wymaga włączenia ustawienia systemowego \"Campaign Feats\". Dodaje sekcję Campaign Feats dla Dual Class, ale *nie* automatycznie przenosi wyczynów z poprzedniej sekcji lub Bonus Feats, musisz także użyć makra Dual Class, aby utworzyć klasę dla postaci.",
