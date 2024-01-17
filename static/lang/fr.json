@@ -511,7 +511,8 @@
       "housepatcher": {
         "hint": "(VRAIMENT EXPÉRIMENTAL) Entrer une suite json pour patcher les compendiums du système. Voir housepatcher.md sur github pour la documentation.",
         "name": "(VRAIMENT EXPÉRIMENTAL) Housepatcher (correctifs des règles maison). Nécessite une réactualisation (f5) après modification.",
-        "notification": "Housepatcher : Application de {count} règles maison aux éléments des compendiums du système."
+        "notification": "Housepatcher : Application de {count} règles maison aux éléments des compendiums du système.",
+        "error": "le mauvais JSON a été supprimé"
       },
       "houseRulesSettings": {
         "hint": "(Expérimental) Activer et configurer diverses règles maison",
@@ -571,7 +572,11 @@
       },
       "castPrivateSpellAlwaysFor": {
         "hint": "Cochez pour toujours incanter en privé pour... (Pressez Ctrl pour *ne pas* incanter en privé)",
-        "name": "... mais toujours incanter en privé pour :"
+        "name": "... mais toujours incanter en privé pour :",
+        "none": "Aucun",
+        "nonAllies": "Non-alliés",
+        "nonPartymembers": "Non membres du groupe",
+        "npcs": "PNJ"
       }
     },
     "effects": {
@@ -657,7 +662,9 @@
           "AdministerFirstAidStopBleeding": "Administrer les premiers secours - Arrêter le saignement",
           "CreateForgery": "Créer une contrefaçon",
           "Escape": "S'Échapper - le plus élevé (??)",
-          "AidASE": "AID (ASE Macro)"
+          "AidASE": "AID (ASE Macro)",
+          "CreateADiversionDistractingWords": "Créer une diversion - Paroles de diversion",
+          "Reposition": "Repositionner"
         },
         "second": "(-5)",
         "third": "(-10)",
