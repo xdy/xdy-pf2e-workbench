@@ -104,9 +104,9 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const rollForAttackSpell = isAttackSpell && autoRollDamageForSpellAttack && hasFixedTime;
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             if (
-                ((isAttackSpell && rollForAttackSpell && degreeOfSuccess.toLowerCase().includes("success")) ||
-                    (isSaveSpell && rollForNonAttackSpell && degreeOfSuccess.toLowerCase().includes("failure")) ||
-                    rollForNonSpellAttack) &&
+                (isAttackSpell && rollForAttackSpell && degreeOfSuccess.toLowerCase().includes("success")) ||
+                (isSaveSpell && rollForNonAttackSpell && degreeOfSuccess.toLowerCase().includes("failure")) ||
+                (rollForNonSpellAttack && degreeOfSuccess.toLowerCase().includes("success")) ||
                 actor
             ) {
                 if (
@@ -145,11 +145,11 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     const originalRollMode = game.settings.get("core", "rollMode");
                     let blind =
                         ((message?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
-                                message?.blind ||
-                                (message?.whisper && message?.whisper.length > 0) ||
-                                spellMessage?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
-                                spellMessage?.blind ||
-                                (spellMessage?.whisper && spellMessage?.whisper.length > 0)) &&
+                            message?.blind ||
+                            (message?.whisper && message?.whisper.length > 0) ||
+                            spellMessage?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
+                            spellMessage?.blind ||
+                            (spellMessage?.whisper && spellMessage?.whisper.length > 0)) &&
                             originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) ??
                         false;
                     const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
@@ -182,13 +182,13 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                             });
                         }
                     }
-                } else if (rollForNonSpellAttack) {
+                } else if (rollForNonSpellAttack && degreeOfSuccess.toLowerCase().includes("success")) {
                     // TODO Clean up this mess.
                     const options = actor?.getRollOptions(["all", "damage-roll"]);
-                    const attackOption = options.find((option) => option.match(/(.*)-attack/));
+                    const attackOption = options?.find((option) => option.match(/(.*)-attack/));
                     const damageOption = attackOption?.replace("-attack", "-damage");
                     if (damageOption) {
-                        options.push(damageOption);
+                        options?.push(damageOption);
                     }
                     const checkContext = message.flags.pf2e.context ?? null;
 
@@ -223,7 +223,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                                 if (roll && actor.isOfType("character")) {
                                     const identifier = <string>roll?.options.identifier;
                                     const [element, damageType, meleeOrRanged, actionCost]: (string | undefined)[] =
-                                    identifier?.split(".") ?? [];
+                                        identifier?.split(".") ?? [];
 
                                     if (
                                         objectHasKey(CONFIG.PF2E.elementTraits, element) &&
