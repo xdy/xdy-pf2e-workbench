@@ -241,7 +241,14 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
         };
 
         const token: any = message.token ? message.token : message.actor?.token;
+        const whisper = game.users
+            .filter((u) => u.active)
+            .filter((u) => u.id !== ChatMessage.getWhisperRecipients("GM").map((u) => u.id)[0])
+            .map((u) => u.id);
+        const user = whisper.length > 0 ? whisper[0] : game.userId;
         ChatMessage.create({
+            whisper,
+            user,
             speaker: ChatMessage.getSpeaker({ token: token }),
             content: content,
             flags,
