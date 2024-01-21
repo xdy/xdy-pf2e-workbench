@@ -1,3 +1,10 @@
+## [5.47.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.47.0...v5.47.1) (2024-01-21)
+
+
+### Bug Fixes
+
+* Rebuild release ([9426049](https://github.com/xdy/xdy-pf2e-workbench/commit/942604981b51433972ce2bb39484fc416192e76f))
+
 # [5.47.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.13...v5.47.0) (2024-01-21)
 
 
