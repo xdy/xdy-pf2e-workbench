@@ -1,3 +1,10 @@
+## [5.46.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.11...v5.46.12) (2024-01-21)
+
+
+### Bug Fixes
+
+* Several Autorolling damage bugs fixed, should work for save spells as well as attack spells. ([292ea26](https://github.com/xdy/xdy-pf2e-workbench/commit/292ea2692397f97978707b5908e9db35a357e8a2)), closes [#1201](https://github.com/xdy/xdy-pf2e-workbench/issues/1201)
+
 ## [5.46.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.10...v5.46.11) (2024-01-20)
 
 
