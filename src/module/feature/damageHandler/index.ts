@@ -83,14 +83,13 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const origin: any = originUuid ? fromUuidSync(originUuid) : null;
             const rollForNonSpellAttack = rollType === "attack-roll" && autoRollDamageForStrike;
 
+            const isAttackSpell = origin?.traits?.has("attack") ?? false;
             const isSaveSpell = origin?.system?.defense?.save ?? false;
+            // Can't remember why I originally added this condition, but, at least it works again...
+            const hasFixedTime = Number.isInteger(parseInt(origin?.system?.time?.value)) ?? false;
 
             const rollForNonAttackSpell =
-                origin !== null &&
-                !origin?.traits?.has("attack") &&
-                flags.casting !== null &&
-                (Number.isInteger(+(<any>message.item?.system)?.time?.value) ?? true) &&
-                origin?.system?.damage;
+                origin !== null && !isAttackSpell && flags.casting !== null && hasFixedTime && origin?.system?.damage;
 
             const rollForNonAttackSaveSpell =
                 isSaveSpell &&
@@ -102,68 +101,66 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 rollForNonAttackSpell &&
                 (autoRollDamageForSpellWhenNotAnAttack === "nonSaveSpell" ||
                     autoRollDamageForSpellWhenNotAnAttack === "anySpell");
-            const rollForAttackSpell =
-                origin?.traits?.has("attack") &&
-                autoRollDamageForSpellAttack &&
-                (Number.isInteger(+(<any>message.item)?.system?.time?.value) ?? true);
+            const rollForAttackSpell = isAttackSpell && autoRollDamageForSpellAttack && hasFixedTime;
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             if (
-                degreeOfSuccess.toLowerCase().includes("success") &&
-                actor &&
-                (rollForNonAttackSpell || rollForNonSpellAttack || rollForAttackSpell)
+                ((isAttackSpell && rollForAttackSpell && degreeOfSuccess.toLowerCase().includes("success")) ||
+                    (isSaveSpell && rollForNonAttackSpell && degreeOfSuccess.toLowerCase().includes("failure")) ||
+                    rollForNonSpellAttack) &&
+                actor
             ) {
                 if (
                     rollForNonAttackSaveSpell ||
                     rollForNonAttackNonSaveSpell ||
                     (rollForAttackSpell && (degreeOfSuccess === "success" || degreeOfSuccess === "criticalSuccess"))
                 ) {
-                    let castRank = flags.casting?.level ?? (<any>origin)?.system.level.value;
-                    // flags.casting?.level isn't always set, unfortunately
-                    let levelFromChatCard = flags.casting?.level ?? false;
+                    let castRank: number = flags.origin?.castRank ? Number(flags.origin?.castRank) : 0;
+                    // flags.casting?.castRank isn't always set, unfortunately
                     // Try getting from chat as a fallback
                     let spellMessage: any;
-                    if (!levelFromChatCard) {
+                    if (castRank === 0) {
                         const chatLength = game.messages?.contents.length ?? 0;
                         for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
                             spellMessage = game.messages?.contents[chatLength - i];
                             if (spellMessage && (<ActorFlagsPF2e>spellMessage.flags.pf2e).origin?.uuid === originUuid) {
                                 const level = spellMessage.content.match(/data-cast-level="(\d+)"/);
                                 if (level && level[1]) {
-                                    levelFromChatCard = true;
                                     castRank = parseInt(level[1]);
                                     break;
                                 }
                             }
                         }
                     }
-                    if (
-                        !levelFromChatCard &&
-                        game.settings.get(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound")
-                    ) {
-                        ui.notifications.info(
-                            game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
-                                spell: origin?.name,
-                            }),
-                        );
+                    if (castRank === 0) {
+                        if (game.settings.get(MODULENAME, "autoRollDamageNotifyOnSpellCardNotFound")) {
+                            ui.notifications.info(
+                                game.i18n.format(`${MODULENAME}.spellCardNotFound`, {
+                                    spell: origin?.name,
+                                }),
+                            );
+                        }
+                        // Give up and use spell level
+                        castRank = origin?.system.level.value ?? 0;
                     }
                     const originalRollMode = game.settings.get("core", "rollMode");
                     let blind =
                         ((message?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
-                            message?.blind ||
-                            (message?.whisper && message?.whisper.length > 0) ||
-                            spellMessage?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
-                            spellMessage?.blind ||
-                            (spellMessage?.whisper && spellMessage?.whisper.length > 0)) &&
+                                message?.blind ||
+                                (message?.whisper && message?.whisper.length > 0) ||
+                                spellMessage?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
+                                spellMessage?.blind ||
+                                (spellMessage?.whisper && spellMessage?.whisper.length > 0)) &&
                             originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) ??
                         false;
                     const rollDamage = await noOrSuccessfulFlatcheck(message); // Can't be inlined
                     if (rollDamage) {
                         // Fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
-                        const currentTarget = document.createElement("div");
-                        currentTarget.dataset.castRank = castRank.toString();
-                        currentTarget.closest = () => {
+                        const target = document.createElement("div");
+                        target.dataset.castRank = castRank.toString();
+                        target.closest = () => {
                             return { dataset: { castRank: castRank } };
                         };
+
                         // Make automatic damageRoll be private if the spell is private, unless hideNameOfPrivateSpell is set.
                         if (blind && game.settings.get(MODULENAME, "castPrivateSpellHideName")) {
                             blind = false;
@@ -171,17 +168,16 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                         if (message.flags?.pf2e?.origin?.variant?.overlays?.length > 0) {
                             const variant = await origin.loadVariant({
                                 castRank,
+                                target,
                                 overlayIds: [message.flags.pf2e.origin.variant.overlays[0]],
                             });
                             await variant.rollDamage({
-                                currentTarget: currentTarget,
-                                spellLevel: castRank,
+                                target,
                                 ctrlKey: blind,
                             });
                         } else {
                             await origin?.rollDamage({
-                                currentTarget: currentTarget,
-                                spellLevel: castRank,
+                                target,
                                 ctrlKey: blind,
                             });
                         }
@@ -227,7 +223,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                                 if (roll && actor.isOfType("character")) {
                                     const identifier = <string>roll?.options.identifier;
                                     const [element, damageType, meleeOrRanged, actionCost]: (string | undefined)[] =
-                                        identifier?.split(".") ?? [];
+                                    identifier?.split(".") ?? [];
 
                                     if (
                                         objectHasKey(CONFIG.PF2E.elementTraits, element) &&
