@@ -63,32 +63,32 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-#      - name: Submit package to FoundryVTT Package Release API
-#        run: |
-#          curl -X POST "https://api.foundryvtt.com/_api/packages/release_version/" \
-#            -H "Content-Type: application/json" \
-#            -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
-#            -d '{
-#              "id": "xdy-pf2e-workbench",
-#              "dry-run": false,
-#              "release": {
-#                "version": "${{ steps.package-version.outputs.current-version}}",
-#                "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
-#                "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
-#                "compatibility": {
-#                  "minimum": "${{ env.fvtt_minimum }}",
-#                  "verified": "${{ env.fvtt_verified }}",
-#                  "maximum": "${{ env.fvtt_maximum }}"
-#                }
-#              }
-#            }'
+      - name: Submit package to FoundryVTT Package Release API
+        run: |
+          curl -X POST "https://api.foundryvtt.com/_api/packages/release_version/" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
+            -d '{
+              "id": "xdy-pf2e-workbench",
+              "dry-run": false,
+              "release": {
+                "version": "${{ steps.package-version.outputs.current-version}}",
+                "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
+                "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
+                "compatibility": {
+                  "minimum": "${{ env.fvtt_minimum }}",
+                  "verified": "${{ env.fvtt_verified }}",
+                  "maximum": "${{ env.fvtt_maximum }}"
+                }
+              }
+            }'
 
-     # Publish the release to FoundryVTT's package repository.
-      - name: Publish Module to FoundryVTT Website
-        uses: Varriount/fvtt-autopublish@v2.0.1
-        with:
-          username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
-          password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
-          module-id: ${{ secrets.FOUNDRY_ADMIN_PACKAGE_ID }}
-          manifest-url: https://github.com/${{ github.repository }}/releases/latest/download/module.json
-          manifest-file: './static/module.json'
+#     # Publish the release to FoundryVTT's package repository.
+#      - name: Publish Module to FoundryVTT Website
+#        uses: Varriount/fvtt-autopublish@v2.0.1
+#        with:
+#          username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
+#          password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
+#          module-id: ${{ secrets.FOUNDRY_ADMIN_PACKAGE_ID }}
+#          manifest-url: https://github.com/${{ github.repository }}/releases/latest/download/module.json
+#          manifest-file: './static/module.json'
