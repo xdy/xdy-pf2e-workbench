@@ -40,10 +40,14 @@
 }
 
 /** Keeley's Hero Point Rule */
-.chat-message .tag.keeley-add-10,
+.chat-message .tags.modifiers .tag.keeley-add-10,
 .chat-message .dice-total.keeley-add-10,
 .chat-message .dice-formula > .keeley-add-10 {
     color: purple;
+}
+
+.chat-message .tags.modifiers .tag.keeley-add-10 {
+    box-shadow: inset 0 0 0 1px rgba(128, 0, 128, 0.3);
 }
 
 /* NPC Roller */
@@ -105,8 +109,6 @@
     background: rgba(0 0 0 / 10%);
 }
 
-.roll-app .roll-app-table tbody td {
-}
 
 .roll-app .roll-app-table tbody button {
     all: revert;
@@ -123,9 +125,6 @@
 
 .roll-app .roll-app-table tbody button:hover {
     font-weight: bold;
-}
-
-.roll-app .roll-app-table button.rollable {
 }
 
 .xdy-pf2e-workbench-rarity-common {

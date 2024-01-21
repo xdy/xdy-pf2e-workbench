@@ -184,14 +184,18 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
     if (lastRoll?.options.keeleyAdd10) {
         const element = html[0];
 
-        const tags = Array.from(element.querySelectorAll(".flavor-text > .tags")).at(-1);
-        const formulaElem = element.querySelector<HTMLElement>(".pf2e-reroll-discard .dice-formula");
-        const newTotalElem = element.querySelector<HTMLElement>(".pf2e-reroll-second .dice-total");
+        const tags = element.querySelector(".flavor-text > .tags.modifiers");
+        const formulaElem = element.querySelector<HTMLElement>(".reroll-discard .dice-formula");
+        const newTotalElem = element.querySelector<HTMLElement>(".reroll-second .dice-total");
         if (tags && formulaElem && newTotalElem) {
             // Add a tag to the list of modifiers
             const newTag = document.createElement("span");
             newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
             newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.keeleysHeroPointRule.bonusTag`);
+            newTag.dataset.slug = "keeley-add-10";
+            if (tags.querySelector<HTMLElement>(".tag")?.dataset.visibility === "gm") {
+                newTag.dataset.visibility = "gm";
+            }
             tags.append(newTag);
 
             // Show +10 in the formula
