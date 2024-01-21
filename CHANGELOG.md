@@ -1,3 +1,10 @@
+## [5.46.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.12...v5.46.13) (2024-01-21)
+
+
+### Bug Fixes
+
+* Fixes more Autorolling damage bugs. Should now work for regular strikes and elemental blasts. ([6bfb565](https://github.com/xdy/xdy-pf2e-workbench/commit/6bfb5652774e7e6dd70ed253e997963988262f9a))
+
 ## [5.46.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.11...v5.46.12) (2024-01-21)
 
 
