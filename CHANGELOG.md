@@ -1,3 +1,10 @@
+# [5.47.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.13...v5.47.0) (2024-01-21)
+
+
+### Features
+
+* If private spellcasting with public message is enabled the public message is whispered to all players, but not the GM. (Unless the gm is alone in the world, in which case the GM does get that message.) ([9b8febe](https://github.com/xdy/xdy-pf2e-workbench/commit/9b8febee0b1bba73c7b583c2d3969ff4a06208f8)), closes [#1199](https://github.com/xdy/xdy-pf2e-workbench/issues/1199)
+
 ## [5.46.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.46.12...v5.46.13) (2024-01-21)
 
 
