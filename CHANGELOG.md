@@ -1,3 +1,10 @@
+# [5.48.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.47.1...v5.48.0) (2024-01-21)
+
+
+### Features
+
+* Add setting to show hero point handler messages in chat (default) or as info notifications. ([5667899](https://github.com/xdy/xdy-pf2e-workbench/commit/56678997af8fe75aab873633efd283140d64d024)), closes [#1202](https://github.com/xdy/xdy-pf2e-workbench/issues/1202)
+
 ## [5.47.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.47.0...v5.47.1) (2024-01-21)
 
 
