@@ -92,6 +92,16 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            heropointHandlerNotificationChat: {
+                name: `${MODULENAME}.SETTINGS.heropointHandlerNotificationChat.name`,
+                hint: `${MODULENAME}.SETTINGS.heropointHandlerNotificationChat.hint`,
+                scope: "world",
+                config: true,
+                default: true,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             heroPointHandlerStartTimerOnReady: {
                 name: `${MODULENAME}.SETTINGS.heroPointHandlerStartTimerOnReady.name`,
                 hint: `${MODULENAME}.SETTINGS.heroPointHandlerStartTimerOnReady.hint`,

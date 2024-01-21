@@ -450,6 +450,10 @@
         "name": "... and post notification when a Hero Point is handed out.",
         "hint": "Check to automatically post a notification when the Hero Point handler has handed out a Hero Point."
       },
+      "heropointHandlerNotificationChat": {
+        "name": "... as chat or info message.",
+        "hint": "Check for the Hero Point handler to notify as chat, otherwise it will be a temporary info message."
+      },
       "heroPointHandlerStartTimerOnReady": {
         "hint": "Check to automatically start the Hero Point handler timer when the game is ready.",
         "name": "... and automatically start Hero Point Handler."

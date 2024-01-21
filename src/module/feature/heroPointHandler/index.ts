@@ -48,6 +48,15 @@ export async function startTimer(remainingMinutes: number) {
     }
 }
 
+/**
+ * Calls the heroPointHandler function with the HPHState.Timeout parameter.
+ *
+ * @return {Promise<any>} The result of the heroPointHandler function.
+ */
+export async function callHeroPointHandler() {
+    return heroPointHandler(HPHState.Timeout);
+}
+
 export function createRemainingTimeMessage(remainingMinutes: number) {
     const message =
         remainingMinutes > 0
@@ -59,22 +68,7 @@ export function createRemainingTimeMessage(remainingMinutes: number) {
                   }),
               })
             : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerStopped`);
-    return ChatMessage.create(
-        {
-            flavor: message,
-            whisper: [game.user?.id as string],
-        },
-        {},
-    );
-}
-
-/**
- * Calls the heroPointHandler function with the HPHState.Timeout parameter.
- *
- * @return {Promise<any>} The result of the heroPointHandler function.
- */
-export async function callHeroPointHandler() {
-    return heroPointHandler(HPHState.Timeout);
+    sendMessage(message, [game.user.id]);
 }
 
 export async function heroPointHandler(state: HPHState) {
@@ -143,7 +137,8 @@ export async function heroPointHandler(state: HPHState) {
                     await stopTimer();
                     break;
             }
-            return await createRemainingTimeMessage(calcRemainingMinutes(false));
+            createRemainingTimeMessage(remainingMinutes);
+            return;
         },
     });
     handlerDialog.render(true);
@@ -357,12 +352,20 @@ function addOneToSelectedCharacterIfAny(actorId: string): void {
             });
         }
         if (message) {
-            ChatMessage.create({ flavor: message }, {}).then();
+            sendMessage(message);
             if (game.settings.get(MODULENAME, "heropointHandlerNotification")) {
                 pushNotification(message);
             }
         }
     });
+}
+
+function sendMessage(message: string, whisper: string[] | undefined = undefined) {
+    if (game.settings.get(MODULENAME, "heropointHandlerNotificationChat")) {
+        ChatMessage.create({ flavor: message, whisper }, {}).then();
+    } else {
+        ui.notifications?.notify(message);
+    }
 }
 
 function handleDialogResponse(html: any) {
@@ -373,19 +376,19 @@ function handleDialogResponse(html: any) {
 
     if (sessionStart === "RESET") {
         resetHeroPoints(heroPoints).then(() => {
-            const resetMessage = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.resetToForAll`, {
+            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.resetToForAll`, {
                 heroPoints: heroPoints,
             });
-            ChatMessage.create({ flavor: resetMessage }, {}).then();
+            sendMessage(message);
             addOneToSelectedCharacterIfAny(actorId);
         });
     } else if (sessionStart === "ADD") {
         addHeroPoints(heroPoints).then(() => {
-            const addMessage = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
+            const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
                 heroPoints: heroPoints,
             });
 
-            ChatMessage.create({ flavor: addMessage }, {}).then();
+            sendMessage(message);
             addOneToSelectedCharacterIfAny(actorId);
         });
     } else if (sessionStart === "IGNORE") {
