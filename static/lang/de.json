@@ -5,8 +5,8 @@
         "gmMustImport": "Der SL muss mit der rechten Maustaste auf das Kompendium xdy-pf2e-workbench-macros klicken und 'Alle Inhalte importieren' wählen und darauf achten, dass er beim Importieren 'Dokument-IDs beibehalten' ankreuzt.",
         "settings": {
           "showBestBonus": {
-            "hint": "Ob im Dialog Grundlegende Aktionsmakros angezeigt werden soll, ob der ausgewählte Akteur den besten Bonus hat",
-            "name": "Anzeigen falls Bester im Basisaktions-Makro"
+            "hint": "Ob im Dialog Basic Action Macro angezeigt werden soll, ob der ausgewählte Akteur den besten Bonus hat",
+            "name": "BAM: Anzeigen falls Bester im Basic Action Makro"
           }
         },
         "actions": {
@@ -66,7 +66,10 @@
           "TreatPoison": "Vergiftung behandeln",
           "TreatWounds": "Wunden versorgen",
           "Trip": "Zu-Fall-Bringen",
-          "TumbleThrough": "Hindurchturnen"
+          "TumbleThrough": "Hindurchturnen",
+          "AidASE": "Helfen (ASE Makro)",
+          "CreateADiversionDistractingWords": "Für Ablenkung sorgen - Ablenkende Worte",
+          "Reposition": "Neu positionieren"
         },
         "macroNotFound": "Makro {macroName} nicht gefunden",
         "title": "Aktionen ({name})",
@@ -77,9 +80,17 @@
         "third": "(-10)",
         "compendiumNotFound": "Kompendium {compendiumName} nicht gefunden",
         "bamActionsPerColumn": {
-          "name": "Ungefähre Anzahl an Aktionen pro Zeile",
+          "name": "BAM: Ungefähre Anzahl an Aktionen pro Zeile",
           "hint": "Ungefähre Anzahl an Aktionen pro Zeile im Basic Aktion Makro Dialog. Die genaue Anzahl an Aktionen wird davon bestimmt, wie viele Aktionen pro Zeile wirklich in den Dialog passen."
-        }
+        },
+        "bamShowUnusable": {
+          "name": "BAM: Aktionen anzeigen, die nicht verwendet werden können.",
+          "hint": "Aktionen anzeigen in denen der Charakter nicht ausgebildet ist und somit nicht ausgeführt werden können."
+        },
+        "downtime": "Auszeit",
+        "exploration": "Erkundungsmodus",
+        "explorationShort": "E",
+        "downtimeShort": "A"
       },
       "buildNpcSpellbookJournal": {
         "noSpellcastingEntry": "Du musst entweder ein NSC-Charakterblatt geöffnet und ausgewählt haben oder ein einzelnes NSC-Token ausgewählt haben. Außerdem muss der NSC einen Eintrag für Zauberei haben.",
@@ -339,7 +350,13 @@
         "unconscious": "ist bewusstlos",
         "dead": "ist tot",
         "hasNoHp": "hat keine TP",
-        "name": "Erinnerung ob ein Angriff mit dem Token nicht möglich ist"
+        "name": "Erinnerung ob ein Angriff mit dem Token nicht möglich ist",
+        "error": "{title} abgebrochen als {actorName} {reason}.",
+        "restrained": "ist gebunden",
+        "no": "Keine Erinnerung",
+        "cancelAttack": "Angriff abbrechen, wenn man nicht angreifen kann",
+        "reminder": "Erinnerung",
+        "info": "Bist du dir sicher ? {title}? {actorName} {reason} , kann deswegen wahrscheinlich nicht angreifen ..."
       },
       "castPrivateSpell": {
         "aSpell": "Ein Zauber",
@@ -519,7 +536,11 @@
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
         "hint": "Client Einstellung um *immer* normalen Schaden zur würfeln für *nicht-Angriffs* Zauber wenn diese gewirkt werden.",
-        "name": "Automatischer Schadenswurf für Zauber welche keine Angriffe sind."
+        "name": "Automatischer Schadenswurf für Zauber welche keine Angriffe sind.",
+        "no": "Nein",
+        "nonSaveSpell": "Für einen Nicht-Angriffs Nicht-Rettungszauber",
+        "saveSpell": "Für einen Nicht-Angriffs Rettungszauber",
+        "anySpell": "Für jeden Nicht-Angriffszauber"
       },
       "autoRollDamageForStrike": {
         "hint": "Client Einstellung für den automatischen Schadenswurf bei Angriffen welche treffen. Beachte das kritische Treffer immer kritischen Schaden würfeln.",
@@ -548,7 +569,7 @@
       },
       "dropHeldItemsOnBecomingUnconscious": {
         "name": "Charaktere lassen automatisch gehaltene Gegenstände fallen wenn sie ohnmächtig werden.",
-        "hint": "Charaktere lassen automatisch gehaltene Gegenstände fallen wenn sie ohnmächtig werden.",
+        "hint": "Charaktere lassen automatisch gehaltene Gegenstände fallen sobald sie ohnmächtig werden. (ausgenommen Schilde, diese werden von Gehalten zu Getragen).",
         "message": "{name} hat {items} fallen gelassen"
       },
       "nonLethalIsNotLethal": {
@@ -584,7 +605,8 @@
       "housepatcher": {
         "name": "(SEHR EXPERIMENTELL) Hausregelpatches (Patches in Hausregeln). Benötigt eine Aktualisierung (F5) nach der Änderung.",
         "notification": "Hauspatcher: Wende {count} Hausregeln auf Gegenstände in den Systemkompendien an.",
-        "hint": "(SEHR EXPERIMENTELL) Ein json-Array hinzufügen um die System-Kompendien zu patchen. Lies in der housepatcher.md Datei auf github für die Dokumentation."
+        "hint": "(SEHR EXPERIMENTELL) Ein json-Array hinzufügen um die System-Kompendien zu patchen. Lies in der housepatcher.md Datei auf github für die Dokumentation.",
+        "error": "Schlechte Hauspatcher JSON wurde gelöscht"
       },
       "keeleysHeroPointRule": {
         "bonusTag": "Niedriger Neuwurf + 10",
@@ -628,6 +650,26 @@
         "yesForNpcs": "Ja, für NSC",
         "yes": "Ja, für alle",
         "yesForCharacters": "Ja, für Charaktere+Vertraute"
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "yes": "Ja, für alle",
+        "name": "... aber automatisch töten, wenn sie genügend Schaden durch einen Todeseffekt erleiden. (Veraltet)",
+        "hint": "(Veraltet) Einstellung für automatischen Tod, wenn man ausreichend Schaden von einer Quelle mit dem Todeseffekt nimmt.",
+        "yesForNpcs": "Ja, für NSC",
+        "no": "Nein",
+        "yesForCharacters": "Ja, für Charaktere + Vertraute"
+      },
+      "heropointHandlerNotificationChat": {
+        "name": "... als Chat oder Infomeldung.",
+        "hint": "Auswahl um den Heldenpunkt Verwalter im Chat anzuzeigen, andernfalls gibt es eine temporäre Infomeldung."
+      },
+      "castPrivateSpellAlwaysFor": {
+        "hint": "Auswählen um Zauber für NSC immer privat zu wirken. (STRG-gedrückt halten um *NICHT* privat zu zaubern.)",
+        "name": "... aber immer Zauber privat zu wirken für:",
+        "none": "Niemand",
+        "nonAllies": "Nicht-Verbündete",
+        "nonPartymembers": "Nicht - Gruppenmitglieder",
+        "npcs": "NSCs"
       }
     },
     "npcRoller": {
