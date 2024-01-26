@@ -684,6 +684,10 @@
         "nonAllies": "Osoby niebędące sojusznikami",
         "nonPartymembers": "Osoby niebędące członkami drużyny",
         "npcs": "Bohaterowie Niezależni"
+      },
+      "heropointHandlerNotificationChat": {
+        "name": "... jako czat lub komunikat informacyjny.",
+        "hint": "Zaznacz, aby obsługa Punktów Bohaterstwa powiadamiała jako czat, w przeciwnym razie będzie to tymczasowa wiadomość informacyjna."
       }
     },
     "modules": {
