@@ -1,3 +1,10 @@
+## [5.49.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.49.0...v5.49.1) (2024-01-27)
+
+
+### Bug Fixes
+
+* Revert to old release workflow ([27d1ef3](https://github.com/xdy/xdy-pf2e-workbench/commit/27d1ef3d931a129f658cbb6a1d095b6ca9b786c4))
+
 # [5.49.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.48.0...v5.49.0) (2024-01-27)
 
 
