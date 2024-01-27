@@ -1,3 +1,15 @@
+# [5.49.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.48.0...v5.49.0) (2024-01-27)
+
+
+### Bug Fixes
+
+* Fix release process ([82448cd](https://github.com/xdy/xdy-pf2e-workbench/commit/82448cda625b2efe5a2596792c74805e58fdf8ca))
+
+
+### Features
+
+* Add option to allow casting privately even if party member knows the spell. ([b0fadb8](https://github.com/xdy/xdy-pf2e-workbench/commit/b0fadb8f7c2cd3d8bf6e833a7bf74887464742ec)), closes [#1208](https://github.com/xdy/xdy-pf2e-workbench/issues/1208)
+
 # [5.48.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.47.1...v5.48.0) (2024-01-21)
 
 
