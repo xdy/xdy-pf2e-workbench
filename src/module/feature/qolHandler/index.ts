@@ -102,16 +102,16 @@ export async function castPrivateSpell(data, message: ChatMessagePF2e) {
     const spellUUID = <string>message.flags?.pf2e.origin?.uuid;
     const origin: any = fromUuidSync(spellUUID);
 
+    const actorsWithSpell = game.actors?.party?.members
+        ?.filter((actor) => actor.items.some((item) => item.isOfType("spell") && item.slug === origin.slug))
+        .map((a) => a.id);
+
     if (
-        new Set(
-            game.actors?.party?.members
-                // I assume that if you have a spell item it's because it's either prepared or in your repertoire,
-                ?.map((m) => m.items.filter((i) => i.isOfType("spell")))
-                ?.map((s) => s.filter((i) => i.slug === origin.slug))
-                .flat(),
-        )?.size > 0
+        actorsWithSpell &&
+        actorsWithSpell?.length > 0 &&
+        game.settings.get(MODULENAME, "castPrivateSpellAutoRevealIfKnown")
     ) {
-        // If a party member knows the spell casting privately is pointless
+        // A party member knows the spell, so just skip casting it privately
         return;
     }
 

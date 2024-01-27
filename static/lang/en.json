@@ -347,9 +347,13 @@
         "name": "Show spell names in rarity colour on actor sheets."
       },
       "castPrivateSpell": {
-        "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM, UNLESS a party member knows the spell.",
+        "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM.",
         "name": "Ctrl-click Cast to cast in private.",
         "aSpell": "A spell"
+      },
+      "castPrivateSpellAutoRevealIfKnown": {
+        "hint": "Check to not cast privately if any party member knows the spell.",
+        "name": "... but don't cast privately if spell known by party."
       },
       "castPrivateSpellHideName": {
         "hint": "Check to hide the name of a privately cast spell in the damage roll instead of hiding the damage roll.",
