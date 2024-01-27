@@ -1,3 +1,10 @@
+## [5.49.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.49.1...v5.49.2) (2024-01-27)
+
+
+### Bug Fixes
+
+* NPC Scaling should scale perception correctly again. ([9f52757](https://github.com/xdy/xdy-pf2e-workbench/commit/9f527573d6b46029d5fe8dccc1795ce0f3af8688)), closes [#1198](https://github.com/xdy/xdy-pf2e-workbench/issues/1198)
+
 ## [5.49.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.49.0...v5.49.1) (2024-01-27)
 
 
