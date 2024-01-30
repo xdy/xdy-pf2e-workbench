@@ -1,3 +1,10 @@
+# [5.50.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.49.3...v5.50.0) (2024-01-30)
+
+
+### Features
+
+* BAM: Add support for Versatile Performance. ([b7f1a18](https://github.com/xdy/xdy-pf2e-workbench/commit/b7f1a181254befea4a6e114e719174db20fe48be))
+
 ## [5.49.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.49.2...v5.49.3) (2024-01-29)
 
 
