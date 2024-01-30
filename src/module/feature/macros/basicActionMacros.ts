@@ -126,6 +126,7 @@ type MacroAction = {
     actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
     actionTitle?: string;
 };
+
 /**
  * Generates the filtered list of actions to use based on the given bamActions.
  *
@@ -228,6 +229,7 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Coerce`),
             skill: "Intimidation",
+            altSkillAndFeat: [{ skill: "Performance", feat: "versatile-performance" }],
             action: game.pf2e.actions.get("coerce"),
             icon: "icons/skills/social/intimidation-impressing.webp",
         },
@@ -382,6 +384,7 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Impersonate`),
             skill: "Deception",
+            altSkillAndFeat: [{ skill: "Performance", feat: "versatile-performance" }],
             action: game.pf2e.actions.get("impersonate"),
             icon: "icons/equipment/head/mask-carved-scream-tan.webp",
         },
@@ -410,6 +413,7 @@ export function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.MakeAnImpression`),
             skill: "Diplomacy",
+            altSkillAndFeat: [{ skill: "Performance", feat: "versatile-performance" }],
             action: game.pf2e.actions.get("make-an-impression"),
             icon: "icons/environment/people/commoner.webp",
         },
