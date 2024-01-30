@@ -1,3 +1,10 @@
+## [5.50.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.50.0...v5.50.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* Revert "feat: BAM: Add support for Versatile Performance." ([4453ba5](https://github.com/xdy/xdy-pf2e-workbench/commit/4453ba58e9d0dd12686903589cd8c48fa2f9d036))
+
 # [5.50.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.49.3...v5.50.0) (2024-01-30)
 
 
