@@ -4,6 +4,7 @@ import { ItemPF2e } from "@item";
 import { Rarity } from "@module/data.ts";
 import { HeritageSource, HeritageSystemData } from "./data.ts";
 declare class HeritagePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
+    static get validTraits(): Record<CreatureTrait, string>;
     get traits(): Set<CreatureTrait>;
     get rarity(): Rarity;
     get isVersatile(): boolean;

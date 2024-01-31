@@ -1,6 +1,6 @@
 import type { ActorType, CharacterPF2e, NPCPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
-import { NPCAttackTrait } from "@item/melee/data.ts";
+import type { NPCAttackTrait } from "@item/melee/types.ts";
 import { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import { StrictBooleanField } from "@system/schema-data-fields.ts";

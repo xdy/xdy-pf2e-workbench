@@ -1,5 +1,5 @@
 import { AbstractEffectSystemData, AbstractEffectSystemSource, DurationData } from "@item/abstract-effect/data.ts";
-import { BaseItemSourcePF2e, OtherTagsOnly } from "@item/base/data/system.ts";
+import { BaseItemSourcePF2e } from "@item/base/data/system.ts";
 import { DamageType } from "@system/damage/index.ts";
 import type { DamageRoll } from "@system/damage/roll.ts";
 import { ConditionSlug } from "./types.ts";
@@ -33,14 +33,13 @@ interface ConditionSystemSource extends AbstractEffectSystemSource {
     overrides: string[];
     context?: never;
     level?: never;
-    traits: OtherTagsOnly;
 }
 interface PersistentSourceData {
     formula: string;
     damageType: DamageType;
     dc: number;
 }
-interface ConditionSystemData extends Omit<ConditionSystemSource, "description" | "fromSpell">, Omit<AbstractEffectSystemData, "level" | "slug" | "traits"> {
+interface ConditionSystemData extends Omit<ConditionSystemSource, "description" | "fromSpell">, Omit<AbstractEffectSystemData, "level" | "slug"> {
     persistent?: PersistentDamageData;
     duration: DurationData;
 }

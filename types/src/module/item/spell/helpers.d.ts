@@ -3,4 +3,7 @@ declare function createSpellRankLabel(spell: SpellPF2e, castRank?: number): stri
 declare function createDescriptionPrepend(spell: SpellPF2e, { includeTraditions }: {
     includeTraditions: boolean;
 }): Promise<string>;
-export { createDescriptionPrepend, createSpellRankLabel };
+declare function getPassiveDefenseLabel(statistic: string, { localize }?: {
+    localize?: boolean | undefined;
+}): string | null;
+export { createDescriptionPrepend, createSpellRankLabel, getPassiveDefenseLabel };

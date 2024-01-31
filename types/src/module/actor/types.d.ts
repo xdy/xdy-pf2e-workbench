@@ -2,12 +2,13 @@ import type * as ActorInstance from "@actor";
 import type { ActorPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
 import type { ActionTrait } from "@item/ability/types.ts";
-import type { EffectTrait } from "@item/abstract-effect/index.ts";
+import type { EffectTrait } from "@item/abstract-effect/types.ts";
 import type { ItemInstances } from "@item/types.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { CheckRollContextFlag } from "@module/chat-message/index.ts";
+import { RollNotePF2e } from "@module/notes.ts";
 import type { ItemAlteration } from "@module/rules/rule-element/item-alteration/alteration.ts";
-import type { TokenDocumentPF2e } from "@scene/index.ts";
+import type { TokenDocumentPF2e } from "@scene";
 import type { immunityTypes, resistanceTypes, weaknessTypes } from "@scripts/config/iwr.ts";
 import type { DamageRoll } from "@system/damage/roll.ts";
 import type { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
@@ -38,7 +39,7 @@ interface ActorDimensions {
     width: number;
     height: number;
 }
-type SkillAbbreviation = SetElement<typeof SKILL_ABBREVIATIONS>;
+type SkillAbbreviation = (typeof SKILL_ABBREVIATIONS)[number];
 type SkillLongForm = SetElement<typeof SKILL_LONG_FORMS>;
 type ActorAlliance = "party" | "opposition" | null;
 type DCSlug = SetElement<typeof DC_SLUGS>;
@@ -156,7 +157,7 @@ interface ApplyDamageParams {
     rollOptions?: Set<string>;
     shieldBlockRequest?: boolean;
     breakdown?: string[];
-    notes?: string[];
+    notes?: RollNotePF2e[];
 }
 type ImmunityType = keyof typeof immunityTypes;
 type WeaknessType = keyof typeof weaknessTypes;

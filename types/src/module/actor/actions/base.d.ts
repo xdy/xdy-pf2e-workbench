@@ -1,12 +1,13 @@
+import type { ActionTrait } from "@item/ability/index.ts";
+import type { ProficiencyRank } from "@item/base/data/index.ts";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import { Action, ActionCost, ActionMessageOptions, ActionSection, ActionUseOptions, ActionVariant, ActionVariantUseOptions } from "./types.ts";
-import type { ProficiencyRank } from "@item/base/data/index.ts";
 interface BaseActionVariantData {
     cost?: ActionCost;
     description?: string;
     name?: string;
     slug?: string;
-    traits?: string[];
+    traits?: ActionTrait[];
 }
 interface BaseActionData<ActionVariantDataType extends BaseActionVariantData = BaseActionVariantData> {
     cost?: ActionCost;
@@ -16,7 +17,7 @@ interface BaseActionData<ActionVariantDataType extends BaseActionVariantData = B
     sampleTasks?: Partial<Record<ProficiencyRank, string>>;
     section?: ActionSection;
     slug?: string | null;
-    traits?: string[];
+    traits?: ActionTrait[];
     variants?: ActionVariantDataType | ActionVariantDataType[];
 }
 declare abstract class BaseActionVariant implements ActionVariant {
@@ -27,7 +28,7 @@ declare abstract class BaseActionVariant implements ActionVariant {
     get description(): string | undefined;
     get glyph(): string;
     get slug(): string;
-    get traits(): string[];
+    get traits(): ActionTrait[];
     toMessage(options?: Partial<ActionMessageOptions>): Promise<ChatMessagePF2e | undefined>;
     abstract use(options?: Partial<ActionVariantUseOptions>): Promise<unknown>;
 }
@@ -40,7 +41,7 @@ declare abstract class BaseAction<TData extends BaseActionVariantData, TAction e
     readonly sampleTasks?: Partial<Record<ProficiencyRank, string>>;
     readonly section?: ActionSection;
     readonly slug: string;
-    readonly traits: string[];
+    readonly traits: ActionTrait[];
     protected constructor(data: BaseActionData<TData>);
     get glyph(): string;
     get variants(): Collection<TAction>;

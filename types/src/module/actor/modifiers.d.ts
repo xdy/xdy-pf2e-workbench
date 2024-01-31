@@ -7,7 +7,7 @@ import { DamageCategoryUnique, DamageDieSize, DamageType } from "@system/damage/
 import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
-declare const MODIFIER_TYPES: Set<"untyped" | "ability" | "circumstance" | "item" | "potency" | "proficiency" | "status">;
+declare const MODIFIER_TYPES: Set<"untyped" | "ability" | "item" | "circumstance" | "potency" | "proficiency" | "status">;
 type ModifierType = SetElement<typeof MODIFIER_TYPES>;
 interface RawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
@@ -260,6 +260,7 @@ declare class DamageDicePF2e {
     enabled: boolean;
     custom: boolean;
     predicate: PredicatePF2e;
+    hideIfDisabled: boolean;
     constructor(params: DamageDiceParameters);
     /** Test the `predicate` against a set of roll options */
     test(options: Set<string>): void;

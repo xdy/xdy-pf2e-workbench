@@ -16,6 +16,7 @@ export declare class DelegatedCollection<V> {
     filter<T extends V = V>(condition: (value: V) => value is T): T[];
     filter<T extends V = V>(condition: (value: V) => unknown): T[];
     map<T>(callback: (value: V) => T): T[];
+    flatMap<U>(callback: (value: V, index: number, array: V[]) => U | readonly U[]): U[];
     delete(key: string): boolean;
     clear(): void;
 }

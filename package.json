@@ -42,8 +42,8 @@
     "@types/sortablejs": "^1.15.7",
     "@types/tooltipster": "^0.0.35",
     "@types/yaireo__tagify": "^4.18.0",
-    "@typescript-eslint/eslint-plugin": "^6.19.1",
-    "@typescript-eslint/parser": "^6.19.1",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
     "classic-level": "^1.4.1",
     "es-jest": "^2.1.0",
     "eslint": "^8.56.0",
@@ -71,7 +71,7 @@
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
-    "vite-plugin-checker": "^0.6.2",
+    "vite-plugin-checker": "^0.6.3",
     "vite-plugin-static-copy": "^1.0.1",
     "vite-tsconfig-paths": "^4.3.1",
     "yargs": "^17.7.2"
@@ -87,7 +87,7 @@
     "prosemirror-state": "^1.4.3",
     "prosemirror-transform": "^1.8.0",
     "prosemirror-view": "^1.32.7",
-    "remeda": "^1.38.0",
+    "remeda": "^1.39.0",
     "sortablejs": "^1.15.2",
     "uuid": "^9.0.1"
   },

@@ -134,6 +134,7 @@ declare const RUNE_DATA: {
             ready: ArmorPropertyRuneData<"ready">;
             rockBraced: ArmorPropertyRuneData<"rockBraced">;
             sinisterKnight: ArmorPropertyRuneData<"sinisterKnight">;
+            sizeChanging: ArmorPropertyRuneData<"sizeChanging">;
             slick: ArmorPropertyRuneData<"slick">;
             soaring: ArmorPropertyRuneData<"soaring">;
             stanching: ArmorPropertyRuneData<"stanching">;

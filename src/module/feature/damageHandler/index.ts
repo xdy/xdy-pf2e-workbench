@@ -5,8 +5,8 @@ import {
     objectHasKey,
     shouldIHandleThisMessage,
 } from "../../utils.ts";
-import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import { ActorFlagsPF2e } from "@actor/data/base.js";
+import { ChatMessagePF2e } from "@module/chat-message/index.js";
 
 /**
  * Checks if the given message satisfies the conditions to perform a flat check,

@@ -19,6 +19,7 @@ interface FamiliarSystemSource extends CreatureSystemSource {
 interface FamiliarAttributesSource {
     hp: {
         value: number;
+        temp: number;
     };
     immunities?: never;
     weaknesses?: never;

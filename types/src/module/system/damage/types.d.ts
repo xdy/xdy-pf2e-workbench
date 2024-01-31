@@ -60,6 +60,7 @@ interface DamageFormulaData {
     kinds?: Set<DamageKind>;
 }
 interface ResolvedDamageFormulaData extends DamageFormulaData {
+    roll?: never;
     formula: Record<DegreeOfSuccessString, string | null>;
     breakdown: Record<DegreeOfSuccessString, string[]>;
 }

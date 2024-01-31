@@ -16,7 +16,7 @@ type OverrideSenseSchema = {
 };
 type BattleFormRuleOverrideSchema = {
     traits: ArrayField<StringField<CreatureTrait, CreatureTrait, true, false, false>>;
-    armorClass: SchemaField<OverrideACSchema, SourceFromSchema<OverrideACSchema>, ModelPropsFromSchema<OverrideACSchema>, false, false, false>;
+    armorClass: SchemaField<OverrideACSchema, SourceFromSchema<OverrideACSchema>, ModelPropsFromSchema<OverrideACSchema>, false, false, true>;
     tempHP: ResolvableValueField<false, true, true>;
     senses: RecordField<StringField<SenseType, SenseType, true, false, false>, SchemaField<OverrideSenseSchema>, false, false, false>;
     size: StringField<string, string, false, true, false>;

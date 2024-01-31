@@ -4,5 +4,5 @@ import { MigrationBase } from "../base.ts";
 /** Update physical item usage and equipped to reflect carry types (held, worn, stowed) */
 export declare class Migration718CarryType extends MigrationBase {
     static version: number;
-    updateItem(itemData: ItemSourcePF2e, actor?: ActorSourcePF2e): Promise<void>;
+    updateItem(source: ItemSourcePF2e, actor?: ActorSourcePF2e): Promise<void>;
 }

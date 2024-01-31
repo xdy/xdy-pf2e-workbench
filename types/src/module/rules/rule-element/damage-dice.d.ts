@@ -18,6 +18,7 @@ interface DamageDiceSource extends RuleElementSource {
     critical?: unknown;
     category?: unknown;
     damageCategory?: unknown;
+    hideIfDisabled?: unknown;
 }
 interface DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema>, ModelPropsFromRESchema<DamageDiceRuleSchema> {
 }
@@ -40,5 +41,7 @@ type DamageDiceRuleSchema = RuleElementSchema & {
     brackets: ResolvableValueField<false, true, false>;
     /** Damage dice override data */
     override: ObjectField<DamageDiceOverride, DamageDiceOverride, false, true, false>;
+    /** Hide this dice change from breakdown tooltips if it is disabled */
+    hideIfDisabled: BooleanField<boolean, boolean, false, false, true>;
 };
 export { DamageDiceRuleElement };

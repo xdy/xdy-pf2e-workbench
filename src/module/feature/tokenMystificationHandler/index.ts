@@ -5,7 +5,7 @@ import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/in
 import { generateNameFromTraits } from "./traits-name-generator.js";
 import { logError } from "../../utils.js";
 import { TokenPF2e } from "@module/canvas/token/object.js";
-import { ChatMessagePF2e } from "@module/chat-message/document.js";
+import { ChatMessagePF2e } from "@module/chat-message/index.js";
 
 function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (

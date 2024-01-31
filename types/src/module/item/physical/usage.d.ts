@@ -11,13 +11,19 @@ interface WornUsage {
     where?: string | null;
     hands?: 0;
 }
+interface AttachedUsage {
+    value: string;
+    type: "attached";
+    where: string;
+    hands?: 0;
+}
 interface CarriedUsage {
     value: "carried";
     type: "carried";
     where?: never;
     hands?: 0;
 }
-type UsageDetails = HeldUsage | WornUsage | CarriedUsage;
+type UsageDetails = HeldUsage | WornUsage | AttachedUsage | CarriedUsage;
 type UsageType = UsageDetails["type"];
 declare function isEquipped(usage: UsageDetails, equipped: EquippedData): boolean;
 declare function getUsageDetails(usage: string): UsageDetails;

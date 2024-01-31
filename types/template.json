@@ -1041,6 +1041,7 @@
         "spell": {
             "templates": [
                 "common",
+                "itemLevel",
                 "traits",
                 "rarity"
             ],
@@ -1178,7 +1179,8 @@
         },
         "condition": {
             "templates": [
-                "common"
+                "common",
+                "traits"
             ],
             "group": null,
             "duration": {
@@ -1200,6 +1202,7 @@
         "effect": {
             "templates": [
                 "common",
+                "itemLevel",
                 "traits"
             ],
             "duration": {

@@ -31,6 +31,8 @@ declare class TextEditorPF2e extends TextEditor {
      * @returns The generated span element, or `null` if no `name` node was found
      */
     static convertXMLNode(html: HTMLElement, name: string, { visible, visibility, whose, tooltip, classes }: ConvertXMLNodeOptions): HTMLElement | null;
+    /** Create roll options with information about the action being used */
+    static createActionOptions(item: Maybe<ItemPF2e>, extra?: string[]): string[];
 }
 interface EnrichmentOptionsPF2e extends EnrichmentOptions {
     rollData?: RollDataPF2e;

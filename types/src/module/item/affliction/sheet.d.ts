@@ -4,7 +4,7 @@
 import { type AfflictionPF2e, type ConditionPF2e } from "@item";
 import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import { DamageCategoryUnique } from "@system/damage/types.ts";
-import { AfflictionConditionData, AfflictionStageData } from "./data.ts";
+import type { AfflictionConditionData, AfflictionStageData } from "./data.ts";
 declare class AfflictionSheetPF2e extends ItemSheetPF2e<AfflictionPF2e> {
     static get defaultOptions(): ItemSheetOptions;
     getData(options?: Partial<ItemSheetOptions>): Promise<AfflictionSheetData>;

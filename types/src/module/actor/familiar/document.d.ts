@@ -19,7 +19,7 @@ declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocum
     reset({ fromMaster }?: {
         fromMaster?: boolean | undefined;
     }): void;
-    /** Set base emphemeral data for later updating by derived-data preparation */
+    /** Set base emphemeral data for later updating by derived-data preparation. */
     prepareBaseData(): void;
     /** Skip rule-element preparation if there is no master */
     protected prepareRuleElements(): RuleElementPF2e[];

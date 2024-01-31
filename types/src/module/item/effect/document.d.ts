@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { EffectBadge, EffectTrait } from "@item/abstract-effect/data.ts";
+import { EffectBadge } from "@item/abstract-effect/data.ts";
 import { AbstractEffectPF2e } from "@item/abstract-effect/index.ts";
 import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
 import { UserPF2e } from "@module/user/index.ts";
@@ -7,7 +7,6 @@ import { EffectFlags, EffectSource, EffectSystemData } from "./data.ts";
 declare class EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     get badge(): EffectBadge | null;
     get level(): number;
-    get traits(): Set<EffectTrait>;
     get isExpired(): boolean;
     /** Whether this effect emits an aura */
     get isAura(): boolean;

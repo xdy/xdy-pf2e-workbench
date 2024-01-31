@@ -28,7 +28,7 @@ import {
 } from "./feature/tokenMystificationHandler/index.js";
 import { ItemPF2e } from "@item/base/document.js";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
-import { ChatMessagePF2e } from "@module/chat-message/document.js";
+import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { CheckRoll } from "@module/system/check/roll.js";
 import { PhysicalItemPF2e } from "@item/physical/document.js";
 import { ActorSystemData } from "@actor/data/base.js";

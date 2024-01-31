@@ -12,6 +12,6 @@ export declare class Migration683FlavorTextToPublicNotes extends MigrationBase {
     static version: number;
     /** Migrate flavorText to public Notes and remove flavorText */
     replaceFlavorTextData(old: NPCSystemDataOld): void;
-    updateActor(actorSource: ActorSourcePF2e): Promise<void>;
+    updateActor(source: ActorSourcePF2e): Promise<void>;
 }
 export {};

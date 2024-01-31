@@ -22,11 +22,11 @@ type RollNoteSchema = RuleElementSchema & {
     /** The main text of the note */
     text: DataUnionField<StrictStringField<string, string, true, false, false> | ResolvableValueField<true, false, false>>;
 };
-interface RollNoteSource extends RuleElementSource {
+interface NoteRESource extends RuleElementSource {
     selector?: unknown;
     outcome?: unknown;
     title?: unknown;
     text?: unknown;
     visibility?: unknown;
 }
-export { RollNoteRuleElement, type RollNoteSource };
+export { RollNoteRuleElement, type NoteRESource };

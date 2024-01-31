@@ -5,6 +5,7 @@ import { InitiativeTraceData } from "@actor/initiative.ts";
 import { NPCStrike } from "@actor/npc/index.ts";
 import { SaveType } from "@actor/types.ts";
 import { PublicationData, Rarity, Size } from "@module/data.ts";
+import { StatisticTraceData } from "@system/statistic/data.ts";
 import { HazardTrait } from "./types.ts";
 /** The stored source data of a hazard actor */
 type HazardSource = BaseActorSourcePF2e<"hazard", HazardSystemSource>;
@@ -71,16 +72,19 @@ interface HazardAttributes extends Omit<HazardAttributesSource, "initiative" | "
     hasHealth: boolean;
     hp: HazardHitPoints;
     hardness: number;
-    stealth: {
-        value: number | null;
-        details: string;
-    };
+    stealth: HazardStealthTraceData;
     /**
      * Whether the hazard emits sound and can therefore be detected via hearing. A value of "encounter" indicates it is
      * silent until an encounter begins.
      */
     emitsSound: boolean | "encounter";
     shield?: never;
+}
+interface HazardStealthTraceData extends Omit<StatisticTraceData, "dc" | "totalModifier" | "value"> {
+    dc: number | null;
+    totalModifier: number | null;
+    value: number | null;
+    details: string;
 }
 interface HazardDetails extends Omit<HazardDetailsSource, "alliance">, ActorDetails {
     alliance: null;

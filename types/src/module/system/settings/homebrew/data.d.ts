@@ -73,8 +73,8 @@ type LanguageRaritiesSchema = {
     rare: LanguageSetField;
     /** "Secret" languages (Wildsong) */
     secret: LanguageSetField;
-    /** Languages hidden from player view in the language selector */
-    hidden: LanguageSetField;
+    /** Languages not available for use on any creature */
+    unavailable: LanguageSetField;
 };
 type LanguageSetField = SetField<StringField<LanguageNotCommon, LanguageNotCommon, true, false, false>, LanguageNotCommon[], Set<LanguageNotCommon>, true, false, true>;
 type RawLanguageRarities<TModel extends LanguageRaritiesData = LanguageRaritiesData> = RawObject<TModel> & {

@@ -7,9 +7,9 @@ import type { UserPF2e } from "@module/user/index.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { SpellCollection, type SpellSlotGroupId } from "./collection.ts";
 import { SpellcastingEntrySource, SpellcastingEntrySystemData } from "./data.ts";
-import { SpellcastingCategory, SpellcastingEntry, SpellcastingEntryPF2eCastOptions, SpellcastingSheetData } from "./types.ts";
+import { CastOptions, SpellcastingCategory, SpellcastingEntry, SpellcastingSheetData } from "./types.ts";
 declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> implements SpellcastingEntry<TParent> {
-    spells: SpellCollection<NonNullable<TParent>, this> | null;
+    spells: SpellCollection<NonNullable<TParent>> | null;
     /** Spellcasting attack and dc data created during actor preparation */
     statistic: Statistic;
     get attribute(): AttributeString;
@@ -30,27 +30,28 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     get isFocusPool(): boolean;
     /** Ritual spellcasting is handled separately */
     get isRitual(): false;
+    get isEphemeral(): false;
     get highestRank(): ZeroToTen;
     get showSlotlessRanks(): boolean;
     prepareBaseData(): void;
-    prepareSiblingData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
-    prepareActorData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
+    prepareSiblingData(this: SpellcastingEntryPF2e<NonNullable<TParent>>): void;
+    prepareActorData(this: SpellcastingEntryPF2e<NonNullable<TParent>>): void;
     /** Prepares the statistic for this spellcasting entry */
     prepareStatistic(): void;
     /** All spells associated with this spellcasting entry on the actor that should also be deleted */
     getLinkedItems(): SpellPF2e<ActorPF2e>[];
-    /** Returns if the spell is valid to cast by this spellcasting entry */
+    /** Whether the spell is valid to cast by this spellcasting entry */
     canCast(spell: SpellPF2e, { origin }?: {
         origin?: PhysicalItemPF2e;
     }): boolean;
-    /** Casts the given spell as if it was part of this spellcasting entry */
-    cast(spell: SpellPF2e<ActorPF2e>, options?: SpellcastingEntryPF2eCastOptions): Promise<void>;
+    /** Cast the given spell as if it was part of this spellcasting entry. */
+    cast(spell: SpellPF2e<ActorPF2e>, options?: CastOptions): Promise<void>;
     consume(spell: SpellPF2e<ActorPF2e>, rank: number, slotId?: number): Promise<boolean>;
     /**
      * Adds a spell to this spellcasting entry, either moving it from another one if its the same actor,
      * or creating a new spell if its not.
      */
-    addSpell(spell: SpellPF2e<TParent | null>, { groupId }: {
+    addSpell(spell: SpellPF2e<NonNullable<TParent>>, { groupId }: {
         groupId: Maybe<SpellSlotGroupId>;
     }): Promise<SpellPF2e<NonNullable<TParent>> | null>;
     /** Saves the prepared spell slot data to the spellcasting entry  */

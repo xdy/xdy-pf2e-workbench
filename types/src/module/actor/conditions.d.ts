@@ -34,7 +34,6 @@ declare class ActorConditions<TActor extends ActorPF2e> extends DelegatedCollect
     get(key: string, options?: ConditionsGetOptions): ConditionPF2e<TActor> | undefined;
     set(id: string, condition: ConditionPF2e<TActor>): this;
     every(condition: (value: ConditionPF2e<TActor>) => boolean): boolean;
-    flatMap<T>(transformer: (value: ConditionPF2e<TActor>) => T | T[] | never[]): T[];
     /** No deletions: a new instance is created every data preparation cycle */
     delete(): false;
     /**

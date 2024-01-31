@@ -43,7 +43,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     /** This PC's ability scores */
     get abilities(): CharacterAbilities;
     get handsFree(): ZeroToTwo;
-    /** The number of hands this PC "really" has free: this is, ignoring allowances for the Free Hand trait */
+    /** The number of hands this PC "really" has free, ignoring allowances for shields and the Free-Hand trait */
     get handsReallyFree(): ZeroToTwo;
     get hitPoints(): CharacterHitPointsSummary;
     get heroPoints(): {

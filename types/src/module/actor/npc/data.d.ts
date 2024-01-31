@@ -1,9 +1,9 @@
 import type { ActorPF2e } from "@actor/base.ts";
-import type { Abilities, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureInitiativeSource, CreatureLanguagesData, CreaturePerceptionData, CreatureResources, CreatureResourcesSource, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsSource, HeldShieldData, LabeledSpeed, SaveData, SenseData } from "@actor/creature/data.ts";
+import type { Abilities, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureHitPointsSource, CreatureInitiativeSource, CreatureLanguagesData, CreaturePerceptionData, CreatureResources, CreatureResourcesSource, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsSource, HeldShieldData, LabeledSpeed, SaveData, SenseData } from "@actor/creature/data.ts";
 import type { ActorAttributesSource, ActorFlagsPF2e, AttributeBasedTraceData, HitPointsStatistic, StrikeData } from "@actor/data/base.ts";
 import { InitiativeTraceData } from "@actor/initiative.ts";
 import type { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
-import type { ActorAlliance, AttributeString, SaveType } from "@actor/types.ts";
+import type { ActorAlliance, SaveType } from "@actor/types.ts";
 import type { MeleePF2e } from "@item";
 import type { PublicationData } from "@module/data.ts";
 type NPCSource = BaseCreatureSource<"npc", NPCSystemSource> & {
@@ -41,12 +41,7 @@ interface NPCAttributesSource extends Required<ActorAttributesSource> {
         details: string;
     };
     adjustment: "elite" | "weak" | null;
-    hp: {
-        value: number;
-        max: number;
-        temp: number;
-        details: string;
-    };
+    hp: NPCHitPointsSource;
     speed: {
         value: number;
         otherSpeeds: LabeledSpeed[];
@@ -55,6 +50,9 @@ interface NPCAttributesSource extends Required<ActorAttributesSource> {
     allSaves: {
         value: string;
     };
+}
+interface NPCHitPointsSource extends Required<CreatureHitPointsSource> {
+    details: string;
 }
 interface NPCPerceptionSource {
     details: string;
@@ -162,7 +160,6 @@ interface NPCStrike extends StrikeData {
 }
 /** Save data with an additional "base" value */
 interface NPCSaveData extends SaveData {
-    ability: AttributeString;
     base?: number;
     saveDetail: string;
 }

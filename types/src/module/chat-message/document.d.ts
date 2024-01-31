@@ -10,7 +10,7 @@ import { ChatMessageFlagsPF2e, ChatMessageSourcePF2e } from "./data.ts";
 declare class ChatMessagePF2e extends ChatMessage {
     #private;
     /** The chat log doesn't wait for data preparation before rendering, so set some data in the constructor */
-    constructor(data?: DeepPartial<ChatMessageSourcePF2e>, context?: DocumentConstructionContext<null>);
+    constructor(data?: DeepPartial<ChatMessageSourcePF2e>, context?: MessageConstructionContext);
     /** Is this a damage (or a manually-inputed non-D20) roll? */
     get isDamageRoll(): boolean;
     /** Get the actor associated with this chat message */
@@ -37,7 +37,7 @@ declare class ChatMessagePF2e extends ChatMessage {
     get token(): TokenDocumentPF2e<ScenePF2e> | null;
     getRollData(): Record<string, unknown>;
     getHTML(): Promise<JQuery>;
-    protected _onCreate(data: this["_source"], options: DocumentModificationContext<null>, userId: string): void;
+    protected _onCreate(data: this["_source"], options: MessageModificationContextPF2e, userId: string): void;
 }
 interface ChatMessagePF2e extends ChatMessage {
     readonly _source: ChatMessageSourcePF2e;
@@ -45,6 +45,11 @@ interface ChatMessagePF2e extends ChatMessage {
     get user(): UserPF2e;
 }
 declare namespace ChatMessagePF2e {
+    function createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], context?: MessageModificationContextPF2e): Promise<TDocument[]>;
     function getSpeakerActor(speaker: foundry.documents.ChatSpeakerData): ActorPF2e | null;
+}
+interface MessageModificationContextPF2e extends ChatMessageModificationContext {
+    /** Whether this is a Rest for the Night message */
+    restForTheNight?: boolean;
 }
 export { ChatMessagePF2e };

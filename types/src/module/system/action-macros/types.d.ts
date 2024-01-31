@@ -75,7 +75,7 @@ interface SimpleRollActionCheckOptions<ItemType extends ItemPF2e<ActorPF2e>> {
     weaponTrait?: WeaponTrait;
     weaponTraitWithPenalty?: WeaponTrait;
     target?: () => {
-        token: TokenDocumentPF2e;
+        token: TokenDocumentPF2e | null;
         actor: ActorPF2e;
     } | null;
 }

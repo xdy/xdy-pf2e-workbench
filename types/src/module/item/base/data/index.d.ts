@@ -1,4 +1,4 @@
-import type { AbilityItemSource } from "@item/ability/data.ts";
+import type { AbilitySource } from "@item/ability/data.ts";
 import type { AfflictionSource } from "@item/affliction/data.ts";
 import type { AncestrySource } from "@item/ancestry/data.ts";
 import type { ArmorSource } from "@item/armor/data.ts";
@@ -24,19 +24,18 @@ import type { SpellcastingEntrySource } from "@item/spellcasting-entry/data.ts";
 import type { TreasureSource } from "@item/treasure/data.ts";
 import type { WeaponSource } from "@item/weapon/data.ts";
 import type { PROFICIENCY_RANKS } from "@module/data.ts";
+import { ItemDescriptionData } from "./system.ts";
 type ProficiencyRank = (typeof PROFICIENCY_RANKS)[number];
 type NonPhysicalItemType = "action" | "affliction" | "ancestry" | "background" | "campaignFeature" | "class" | "condition" | "deity" | "effect" | "feat" | "heritage" | "kit" | "lore" | "melee" | "spell" | "spellcastingEntry";
 type ItemType = NonPhysicalItemType | PhysicalItemType;
 type PhysicalItemSource = ArmorSource | BookSource | ConsumableSource | ContainerSource | EquipmentSource | ShieldSource | TreasureSource | WeaponSource;
-type ItemSourcePF2e = PhysicalItemSource | AbilityItemSource | AfflictionSource | AncestrySource | BackgroundSource | CampaignFeatureSource | ClassSource | ConditionSource | DeitySource | EffectSource | FeatSource | HeritageSource | KitSource | LoreSource | MeleeSource | SpellSource | SpellcastingEntrySource;
+type ItemSourcePF2e = PhysicalItemSource | AbilitySource | AfflictionSource | AncestrySource | BackgroundSource | CampaignFeatureSource | ClassSource | ConditionSource | DeitySource | EffectSource | FeatSource | HeritageSource | KitSource | LoreSource | MeleeSource | SpellSource | SpellcastingEntrySource;
 type MagicItemSource = Exclude<PhysicalItemSource, ConsumableSource | TreasureSource>;
-interface ItemSummaryData {
+interface RawItemChatData {
     [key: string]: unknown;
-    description?: {
-        value: string;
-    };
+    description: ItemDescriptionData;
     traits?: TraitChatData[];
-    properties?: (string | number | null)[];
+    properties?: string[];
 }
 interface TraitChatData {
     value: string;
@@ -45,6 +44,5 @@ interface TraitChatData {
     mystified?: boolean;
     excluded?: boolean;
 }
-export * from "./helpers.ts";
 export type { ActionCost, ActionType, Frequency, FrequencyInterval, FrequencySource, ItemFlagsPF2e, ItemSystemData, } from "./system.ts";
-export type { AbilityItemSource, AncestrySource, ArmorSource, BackgroundSource, BookSource, ClassSource, ConditionSource, ConsumableSource, ContainerSource, DeitySource, EffectSource, EquipmentSource, FeatSource, ItemSourcePF2e, ItemSummaryData, ItemType, KitSource, LoreSource, MagicItemSource, MeleeSource, NonPhysicalItemType, PhysicalItemSource, ProficiencyRank, ShieldSource, SpellSource, SpellcastingEntrySource, TraitChatData, TreasureSource, WeaponSource, };
+export type { AbilitySource, AncestrySource, ArmorSource, BackgroundSource, BookSource, ClassSource, ConditionSource, ConsumableSource, ContainerSource, DeitySource, EffectSource, EquipmentSource, FeatSource, ItemSourcePF2e, ItemType, KitSource, LoreSource, MagicItemSource, MeleeSource, NonPhysicalItemType, PhysicalItemSource, ProficiencyRank, RawItemChatData, ShieldSource, SpellSource, SpellcastingEntrySource, TraitChatData, TreasureSource, WeaponSource, };

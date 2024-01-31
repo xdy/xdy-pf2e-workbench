@@ -1,10 +1,12 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
+import type { ActorPF2e } from "@actor";
+import { ItemPF2e } from "@item";
 import { PickableThing, PickAThingConstructorArgs, PickAThingPrompt, PromptTemplateData } from "@module/apps/pick-a-thing-prompt.ts";
-import { PredicatePF2e } from "@system/predication.ts";
+import type { PredicatePF2e } from "@system/predication.ts";
 /** Prompt the user for a selection among a set of options */
-declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | object> {
+declare class ChoiceSetPrompt extends PickAThingPrompt<ItemPF2e<ActorPF2e>, string | number | object> {
     /** The prompt statement to present the user in this application's window */
     prompt: string;
     /** Does this choice set contain items? If true, an item-drop zone may be added */
@@ -16,22 +18,22 @@ declare class ChoiceSetPrompt extends PickAThingPrompt<string | number | object>
     } | null;
     constructor(data: ChoiceSetPromptData);
     static get defaultOptions(): ApplicationOptions;
-    getData(options?: Partial<ApplicationOptions>): Promise<ChoiceSetTemplateData>;
-    protected getChoices(): PickableThing[];
-    setChoices(choices: PickableThing[]): void;
+    getData(): Promise<ChoiceSetTemplateData>;
     activateListeners($html: JQuery): void;
     /** Return early if there is only one choice */
     resolveSelection(): Promise<PickableThing<string | number | object> | null>;
+    close(options?: {
+        force?: boolean;
+    }): Promise<void>;
     /** Handle a dropped homebrew item */
     protected _onDrop(event: DragEvent): Promise<void>;
     protected _canDragDrop(): boolean;
 }
-interface ChoiceSetPrompt extends PickAThingPrompt<string | number | object> {
-    getSelection: (event: MouseEvent) => ChoiceSetChoice | null;
+interface ChoiceSetPrompt extends PickAThingPrompt<ItemPF2e<ActorPF2e>, string | number | object> {
+    getSelection(event: MouseEvent): ChoiceSetChoice | null;
 }
-interface ChoiceSetPromptData extends PickAThingConstructorArgs<string | number | object> {
+interface ChoiceSetPromptData extends PickAThingConstructorArgs<ItemPF2e<ActorPF2e>, string | number | object> {
     prompt: string;
-    choices?: PickableThing[];
     containsItems: boolean;
     allowedDrops: {
         label: string | null;
@@ -44,6 +46,8 @@ interface ChoiceSetChoice extends PickableThing {
 interface ChoiceSetTemplateData extends PromptTemplateData {
     prompt: string;
     choices: ChoiceSetChoice[];
+    /** Whether to use a select menu instead of a column of buttons */
+    selectMenu: boolean;
     includeDropZone: boolean;
     allowNoSelection: boolean;
     containsItems: boolean;

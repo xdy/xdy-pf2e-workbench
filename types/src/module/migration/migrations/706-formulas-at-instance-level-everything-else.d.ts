@@ -3,6 +3,6 @@ import { Migration702REFormulasAtInstanceLevel } from "./702-re-formulas-at-inst
 /** Change RE formula data replacement to operate at actor and item instance levels */
 export declare class Migration706FormulasAtInstanceLevelEverythingElse extends Migration702REFormulasAtInstanceLevel {
     static version: number;
-    updateItem(itemSource: ItemSourcePF2e): Promise<void>;
+    updateItem(source: ItemSourcePF2e): Promise<void>;
     private replaceInlineRolls;
 }

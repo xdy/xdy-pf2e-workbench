@@ -5,7 +5,7 @@ import { MigrationBase } from "../base.ts";
 export declare class Migration747FixedHeightening extends MigrationBase {
     #private;
     static version: number;
-    updateItem(item: ItemSourcePF2e): Promise<void>;
+    updateItem(source: ItemSourcePF2e): Promise<void>;
     protected overwriteDamage(spell: SpellSource, newSpell: SpellPF2e): void;
     protected loadSpells(): Promise<Record<string, SpellPF2e | undefined>>;
     fixedHeightenSpells: Set<DocumentUUID>;

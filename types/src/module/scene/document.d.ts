@@ -35,7 +35,5 @@ interface ScenePF2e extends Scene {
     readonly tokens: foundry.abstract.EmbeddedCollection<TokenDocumentPF2e<this>>;
     readonly tiles: foundry.abstract.EmbeddedCollection<TileDocumentPF2e<this>>;
     get sheet(): SceneConfigPF2e<this>;
-    createEmbeddedDocuments(embeddedName: "Token", data: PreCreate<foundry.documents.TokenSource>[], context?: DocumentModificationContext<this>): Promise<TokenDocumentPF2e<this>[]>;
-    createEmbeddedDocuments(embeddedName: string, data: object[], context?: DocumentModificationContext<this>): Promise<foundry.abstract.Document[]>;
 }
 export { ScenePF2e };

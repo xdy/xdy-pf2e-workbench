@@ -1,8 +1,8 @@
 import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AuraData, CheckContext, CheckContextParams, DamageRollContextParams, EmbeddedItemInstances, RollContext, RollContextParams, SaveType } from "@actor/types.ts";
-import type { ShieldPF2e } from "@item";
-import { AbstractEffectPF2e, ContainerPF2e, ItemPF2e, PhysicalItemPF2e } from "@item";
-import { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/base/data/index.ts";
-import { ConditionKey, ConditionSlug, ConditionSource, type ConditionPF2e } from "@item/condition/index.ts";
+import type { AbstractEffectPF2e, ConditionPF2e, ContainerPF2e, PhysicalItemPF2e, ShieldPF2e } from "@item";
+import { ItemPF2e } from "@item";
+import type { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/base/data/index.ts";
+import type { ConditionKey, ConditionSlug, ConditionSource } from "@item/condition/index.ts";
 import { EffectSource } from "@item/effect/data.ts";
 import type { ActiveEffectPF2e } from "@module/active-effect.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";

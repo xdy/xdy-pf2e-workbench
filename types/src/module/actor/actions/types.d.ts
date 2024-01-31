@@ -1,5 +1,7 @@
 import type { ActorPF2e } from "@actor";
+import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { ChatMessagePF2e } from "@module/chat-message/document.ts";
+import type { ActionTrait } from "@item/ability/index.ts";
 import { ProficiencyRank } from "@item/base/data/index.ts";
 declare const ACTION_COSTS: readonly ["free", "reaction", 1, 2, 3];
 type ActionCost = (typeof ACTION_COSTS)[number];
@@ -13,7 +15,8 @@ interface ActionMessageOptions {
 interface ActionVariantUseOptions extends Record<string, unknown> {
     actors: ActorPF2e | ActorPF2e[];
     event: Event;
-    traits: string[];
+    traits: ActionTrait[];
+    target: ActorPF2e | TokenPF2e;
 }
 interface ActionVariant {
     cost?: ActionCost;
@@ -21,7 +24,7 @@ interface ActionVariant {
     glyph?: string;
     name?: string;
     slug: string;
-    traits: string[];
+    traits: ActionTrait[];
     toMessage(options?: Partial<ActionMessageOptions>): Promise<ChatMessagePF2e | undefined>;
     use(options?: Partial<ActionVariantUseOptions>): Promise<unknown>;
 }
@@ -37,7 +40,7 @@ interface Action {
     sampleTasks?: Partial<Record<ProficiencyRank, string>>;
     section?: ActionSection;
     slug: string;
-    traits: string[];
+    traits: ActionTrait[];
     variants: Collection<ActionVariant>;
     toMessage(options?: Partial<ActionMessageOptions>): Promise<ChatMessagePF2e | undefined>;
     /** Uses the default variant for this action, which will usually be the first one in the collection. */

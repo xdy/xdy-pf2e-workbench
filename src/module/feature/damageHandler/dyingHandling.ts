@@ -1,11 +1,10 @@
 import { isFirstGM, logDebug, shouldIHandleThis, shouldIHandleThisMessage } from "../../utils.js";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "../../xdy-pf2e-workbench.js";
 import { ItemPF2e } from "@item/base/document.js";
-import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import { ActorPF2e } from "@actor/index.js";
-import { CreaturePF2e } from "@actor/creature/document.js";
 import { ActorSystemData } from "@actor/data/base.js";
 import { moveOnZeroHP } from "../initiativeHandler/index.js";
+import { ChatMessagePF2e } from "@module/chat-message/index.js";
 
 export function dyingHandlingPreUpdateActorHook(
     actor,
@@ -375,7 +374,7 @@ export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], 
 }
 
 export async function handleDyingOnZeroHP(
-    actor: CreaturePF2e,
+    actor,
     update: Record<string, string>,
     hp: number,
     updateHp: number,

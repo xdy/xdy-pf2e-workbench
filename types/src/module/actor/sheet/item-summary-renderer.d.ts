@@ -3,7 +3,7 @@
 /// <reference types="tooltipster" />
 import type { ActorPF2e } from "@actor/base.ts";
 import { ItemPF2e } from "@item";
-import { ItemSummaryData } from "@item/base/data/index.ts";
+import { RawItemChatData } from "@item/base/data/index.ts";
 /**
  * Implementation used to populate item summaries, toggle visibility
  * of item summaries, and save expanded/collapsed state of item summaries.
@@ -27,7 +27,7 @@ export declare class ItemSummaryRenderer<TActor extends ActorPF2e, TSheet extend
     /**
      * Called when an item summary is expanded and needs to be filled out.
      */
-    renderItemSummary(container: HTMLElement, item: ItemPF2e, chatData: ItemSummaryData): Promise<void>;
+    renderItemSummary(container: HTMLElement, item: ItemPF2e, chatData: RawItemChatData): Promise<void>;
     /**
      * Executes a callback, performing a save and restore for all item summaries to maintain visual state.
      * Most restorations are driven by a data-item-id attribute, however data-item-summary-id with a custom string

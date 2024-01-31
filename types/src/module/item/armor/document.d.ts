@@ -1,11 +1,11 @@
 import type { ActorPF2e } from "@actor";
-import { ItemSummaryData } from "@item/base/data/index.ts";
+import { RawItemChatData } from "@item/base/data/index.ts";
 import { PhysicalItemPF2e } from "@item/physical/index.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { ArmorSource, ArmorSystemData } from "./data.ts";
-import { ArmorCategory, ArmorGroup, BaseArmorType } from "./types.ts";
+import { ArmorCategory, ArmorGroup, ArmorTrait, BaseArmorType } from "./types.ts";
 declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
-    isStackableWith(item: PhysicalItemPF2e<TParent>): boolean;
+    static get validTraits(): Record<ArmorTrait, string>;
     get isBarding(): boolean;
     get baseType(): BaseArmorType | null;
     get group(): ArmorGroup | null;
@@ -18,10 +18,11 @@ declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get isSpecific(): boolean;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string): string[];
+    isStackableWith(item: PhysicalItemPF2e<TParent>): boolean;
     prepareBaseData(): void;
     prepareDerivedData(): void;
     prepareActorData(this: ArmorPF2e<ActorPF2e>): void;
-    getChatData(this: ArmorPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<ItemSummaryData>;
+    getChatData(this: ArmorPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<RawItemChatData>;
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;

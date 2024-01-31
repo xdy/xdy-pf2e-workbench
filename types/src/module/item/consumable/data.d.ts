@@ -18,6 +18,7 @@ interface ConsumableSystemSource extends PhysicalSystemSource {
         value: string;
     };
     stackGroup: AmmoStackGroup | null;
+    subitems?: never;
 }
 type ConsumableUses = {
     value: number;
@@ -30,7 +31,7 @@ type ConsumableDamageHealing = {
     type: DamageType;
     kind: DamageKind;
 };
-interface ConsumableSystemData extends Omit<ConsumableSystemSource, SourceOmission>, Omit<PhysicalSystemData, "traits"> {
+interface ConsumableSystemData extends Omit<ConsumableSystemSource, SourceOmission>, Omit<PhysicalSystemData, "subitems" | "traits"> {
     apex?: never;
     stackGroup: AmmoStackGroup | null;
 }

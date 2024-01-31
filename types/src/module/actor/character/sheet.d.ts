@@ -85,6 +85,7 @@ interface CraftingSheetData {
     entries: CraftingEntriesSheetData;
 }
 type CharacterSheetTabVisibility = Record<(typeof CHARACTER_SHEET_TABS)[number], boolean>;
+type SpellcastingTabSlug = "known-spells" | "rituals" | "activations";
 interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> extends CreatureSheetData<TActor> {
     abpEnabled: boolean;
     ancestry: AncestryPF2e<CharacterPF2e> | null;
@@ -114,7 +115,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     options: CharacterSheetOptions;
     preparationType: Object;
     showPFSTab: boolean;
-    spellcastingEntries: SpellcastingSheetData[];
+    spellCollectionGroups: Record<SpellcastingTabSlug, SpellcastingSheetData[]>;
     hasNormalSpellcasting: boolean;
     tabVisibility: CharacterSheetTabVisibility;
     actions: {

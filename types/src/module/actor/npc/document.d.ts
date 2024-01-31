@@ -1,13 +1,13 @@
 import { CreaturePF2e } from "@actor";
-import { Abilities } from "@actor/creature/data.ts";
+import type { Abilities } from "@actor/creature/data.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
-import { MeleePF2e } from "@item";
-import { ItemType } from "@item/base/data/index.ts";
+import type { MeleePF2e } from "@item";
+import type { ItemType } from "@item/base/data/index.ts";
 import { RollNotePF2e } from "@module/notes.ts";
 import { CreatureIdentificationData } from "@module/recall-knowledge.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
-import { NPCFlags, NPCSource, NPCSystemData } from "./data.ts";
-import { VariantCloneParams } from "./types.ts";
+import type { TokenDocumentPF2e } from "@scene";
+import type { NPCFlags, NPCSource, NPCSystemData } from "./data.ts";
+import type { VariantCloneParams } from "./types.ts";
 declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     initiative: ActorInitiative;
     get allowedItemTypes(): (ItemType | "physical")[];

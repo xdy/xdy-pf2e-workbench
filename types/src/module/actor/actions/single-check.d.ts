@@ -1,4 +1,4 @@
-import type { ActorPF2e } from "@actor";
+import { ActorPF2e } from "@actor";
 import { ModifierPF2e, RawModifier } from "@actor/modifiers.ts";
 import { DCSlug } from "@actor/types.ts";
 import type { ItemPF2e } from "@item";
@@ -24,8 +24,19 @@ interface SingleCheckActionData extends BaseActionData<SingleCheckActionVariantD
     rollOptions?: string[];
     statistic: string | string[];
 }
+interface ActionVariantCheckPreviewOptions {
+    actor: ActorPF2e;
+}
+interface ActionCheckPreviewOptions extends ActionVariantCheckPreviewOptions {
+    variant: string;
+}
+interface ActionCheckPreview {
+    label: string;
+    modifier?: number;
+    slug: string;
+}
 interface SingleCheckActionUseOptions extends ActionUseOptions {
-    difficultyClass: CheckDC | string;
+    difficultyClass: CheckDC | DCSlug | number;
     modifiers: ModifierPF2e[];
     multipleAttackPenalty: number;
     notes: SingleCheckActionRollNoteData[];
@@ -40,8 +51,14 @@ declare class SingleCheckActionVariant extends BaseActionVariant {
     get notes(): RollNoteSource[];
     get rollOptions(): string[];
     get statistic(): string | string[];
+    preview(options?: Partial<ActionVariantCheckPreviewOptions>): ActionCheckPreview[];
     use(options?: Partial<SingleCheckActionUseOptions>): Promise<CheckResultCallback[]>;
     protected checkContext<ItemType extends ItemPF2e<ActorPF2e>>(opts: CheckContextOptions<ItemType>, data: CheckContextData<ItemType>): CheckContext<ItemType> | undefined;
+    protected toActionCheckPreview(args: {
+        actor?: ActorPF2e;
+        rollOptions: string[];
+        slug: string;
+    }): ActionCheckPreview | null;
 }
 declare class SingleCheckAction extends BaseAction<SingleCheckActionVariantData, SingleCheckActionVariant> {
     readonly difficultyClass?: CheckDC | DCSlug;
@@ -50,7 +67,8 @@ declare class SingleCheckAction extends BaseAction<SingleCheckActionVariantData,
     readonly rollOptions: string[];
     readonly statistic: string | string[];
     constructor(data: SingleCheckActionData);
+    preview(options?: Partial<ActionCheckPreviewOptions>): ActionCheckPreview[];
     protected toActionVariant(data?: SingleCheckActionVariantData): SingleCheckActionVariant;
 }
 export { SingleCheckAction, SingleCheckActionVariant };
-export type { SingleCheckActionUseOptions, SingleCheckActionVariantData };
+export type { ActionCheckPreview, SingleCheckActionUseOptions, SingleCheckActionVariantData };

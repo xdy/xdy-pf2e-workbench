@@ -11,7 +11,7 @@ declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, Ite
     constructor(item: TItem, options?: Partial<ItemSheetOptions>);
     static get defaultOptions(): ItemSheetOptions;
     get editingRuleElement(): RuleElementSource | null;
-    protected get validTraits(): Record<string, string> | null;
+    protected get validTraits(): Record<string, string>;
     /** An alternative to super.getData() for subclasses that don't need this class's `getData` */
     getData(options?: Partial<ItemSheetOptions>): Promise<ItemSheetDataPF2e<TItem>>;
     protected onTagSelector(anchor: HTMLAnchorElement): void;

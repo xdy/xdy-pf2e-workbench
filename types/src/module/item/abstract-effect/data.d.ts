@@ -1,9 +1,10 @@
-import { AttributeString } from "@actor/types.ts";
-import { ActionTrait } from "@item/ability/types.ts";
-import { ItemSystemData, ItemSystemSource, ItemTraitsNoRarity } from "@item/base/data/system.ts";
-import { MagicTradition, SpellTrait } from "@item/spell/index.ts";
+import type { AttributeString } from "@actor/types.ts";
+import type { ItemSystemData, ItemSystemSource, ItemTraitsNoRarity } from "@item/base/data/system.ts";
+import type { MagicTradition } from "@item/spell/index.ts";
 import type { CheckRoll } from "@system/check/index.ts";
+import type { EffectTrait } from "./types.ts";
 interface AbstractEffectSystemSource extends ItemSystemSource {
+    traits: EffectTraits;
     /** Whether this effect originated from a spell */
     fromSpell?: boolean;
     expired?: boolean;
@@ -31,7 +32,6 @@ interface EffectBadgeCounter extends EffectBadgeCounterSource, EffectBadgeBase {
 }
 interface EffectTraits extends ItemTraitsNoRarity<EffectTrait> {
 }
-type EffectTrait = ActionTrait | SpellTrait;
 /** A static value, including the result of a formula badge */
 interface EffectBadgeValueSource extends EffectBadgeBaseSource {
     type: "value";
@@ -87,4 +87,4 @@ interface DurationData {
     unit: TimeUnit | "unlimited" | "encounter";
     expiry: EffectExpiryType | null;
 }
-export type { AbstractEffectSystemData, AbstractEffectSystemSource, DurationData, EffectAuraData, EffectBadge, EffectBadgeCounter, EffectBadgeFormulaSource, EffectBadgeSource, EffectBadgeValueSource, EffectContextData, EffectExpiryType, EffectTrait, EffectTraits, TimeUnit, };
+export type { AbstractEffectSystemData, AbstractEffectSystemSource, DurationData, EffectAuraData, EffectBadge, EffectBadgeCounter, EffectBadgeFormulaSource, EffectBadgeSource, EffectBadgeValueSource, EffectContextData, EffectExpiryType, EffectTraits, TimeUnit, };

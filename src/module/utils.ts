@@ -1,5 +1,5 @@
+import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
-import { ChatMessagePF2e } from "@module/chat-message/document.js";
 import { ActorFlagsPF2e } from "@actor/data/base.js";
 
 function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
@@ -200,6 +200,10 @@ export async function housepatcher(housepatcher) {
         ui.notifications.error(game.i18n.format(`${MODULENAME}.SETTINGS.housepatcher.error`));
         game.settings.set(MODULENAME, "housepatcher", "");
     }
+}
+
+export function setFlag(doc, flag, value) {
+    return doc.setFlag(MODULENAME, flag, value);
 }
 
 // Functions copied from C:\Users\jk\foundryvtt\forks\pf2e\build\lib\foundry-utils.ts

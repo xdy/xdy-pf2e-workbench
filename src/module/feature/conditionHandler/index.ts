@@ -31,7 +31,7 @@ function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
         // @ts-ignore
         const minionsAndEidolons = <ActorPF2e[]>game.scenes.current?.tokens
             ?.filter(() => !game.user.isGM)
-            ?.filter((token) => token.canUserModify(<BaseUser>game.user, "update"))
+            ?.filter((token) => token.canUserModify(<BaseUser>(<unknown>game.user), "update"))
             ?.map((token) => token.actor)
             ?.filter((x) => x?.traits.has("eidolon") || x?.traits.has("minion"));
         if (minionsAndEidolons && minionsAndEidolons.length > 0) {

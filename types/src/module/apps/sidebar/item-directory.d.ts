@@ -10,4 +10,6 @@ export declare class ItemDirectoryPF2e<TItem extends ItemPF2e<null>> extends Ite
     activateListeners($html: JQuery<HTMLElement>): void;
     /** Include flattened update data so parent method can read nested update keys */
     protected _render(force?: boolean, context?: SidebarDirectoryRenderOptions): Promise<void>;
+    /** Add `EntryContextOption` to attach physical items */
+    protected _getEntryContextOptions(): EntryContextOption[];
 }

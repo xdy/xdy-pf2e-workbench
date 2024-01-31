@@ -1,4 +1,5 @@
 import type { ActorType, CharacterPF2e } from "@actor";
+import { ItemPF2e } from "@item";
 import { PredicateField } from "@system/schema-data-fields.ts";
 import type { ArrayField, BooleanField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementOptions, RuleElementPF2e } from "../base.ts";
@@ -13,18 +14,27 @@ declare class CraftingEntryRuleElement extends RuleElementPF2e<CraftingEntryRule
     beforePrepareData(): void;
 }
 interface CraftingEntryRuleElement extends RuleElementPF2e<CraftingEntryRuleSchema>, ModelPropsFromRESchema<CraftingEntryRuleSchema> {
+    readonly parent: ItemPF2e<CharacterPF2e>;
     get actor(): CharacterPF2e;
 }
 type CraftingEntryRuleSchema = RuleElementSchema & {
     selector: StringField<string, string, true, false, false>;
-    isAlchemical: BooleanField<boolean, boolean, false, false, false>;
-    isDailyPrep: BooleanField<boolean, boolean, false, false, false>;
-    isPrepared: BooleanField<boolean, boolean, false, false, false>;
+    isAlchemical: BooleanField<boolean, boolean, false, false, true>;
+    isDailyPrep: BooleanField<boolean, boolean, false, false, true>;
+    isPrepared: BooleanField<boolean, boolean, false, false, true>;
+    batchSizes: SchemaField<{
+        default: QuantityField;
+        other: ArrayField<SchemaField<{
+            quantity: QuantityField;
+            definition: PredicateField;
+        }>>;
+    }>;
     maxItemLevel: ResolvableValueField<false, false, true>;
     maxSlots: NumberField<number, number, false, false, false>;
-    craftableItems: PredicateField<false, false, false>;
+    craftableItems: PredicateField;
     preparedFormulas: ArrayField<SchemaField<PreparedFormulaSchema>>;
 };
+type QuantityField = NumberField<number, number, true, false, true>;
 type PreparedFormulaSchema = {
     itemUUID: StringField<string, string, true, false, false>;
     quantity: NumberField<number, number, false, false, false>;
@@ -40,6 +50,7 @@ type CraftingEntryRuleData = Omit<SourceFromSchema<CraftingEntryRuleSchema>, "pr
 interface CraftingEntryRuleSource extends RuleElementSource {
     selector?: unknown;
     name?: unknown;
+    batchSizes?: unknown;
     isAlchemical?: unknown;
     isDailyPrep?: unknown;
     isPrepared?: unknown;

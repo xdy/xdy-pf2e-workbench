@@ -10,6 +10,7 @@ interface ContainerSystemSource extends Investable<PhysicalSystemSource> {
     usage: {
         value: string;
     };
+    subitems?: never;
 }
 interface ContainerBulkSource {
     value: number;
@@ -17,7 +18,7 @@ interface ContainerBulkSource {
     capacity: number;
     ignored: number;
 }
-interface ContainerSystemData extends Omit<ContainerSystemSource, SourceOmission>, Omit<Investable<PhysicalSystemData>, "traits"> {
+interface ContainerSystemData extends Omit<ContainerSystemSource, SourceOmission>, Omit<Investable<PhysicalSystemData>, "subitems" | "traits"> {
     bulk: ContainerBulkData;
     stackGroup: null;
 }

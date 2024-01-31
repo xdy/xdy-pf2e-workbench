@@ -1,4 +1,4 @@
-import { AttributeString, SaveType } from "@actor/types.ts";
+import { AttributeString, SaveType, SkillAbbreviation } from "@actor/types.ts";
 import { ABCSystemData, ABCSystemSource } from "@item/abc/data.ts";
 import { BaseItemSourcePF2e, RarityTraitAndOtherTags } from "@item/base/data/system.ts";
 import { ZeroToFour } from "@module/data.ts";
@@ -17,7 +17,7 @@ interface ClassSystemSource extends ABCSystemSource {
     /** Starting proficiency in "spell attack rolls and DCs" */
     spellcasting: ZeroToFour;
     trainedSkills: {
-        value: string[];
+        value: SkillAbbreviation[];
         additional: number;
     };
     ancestryFeatLevels: {

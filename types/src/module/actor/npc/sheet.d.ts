@@ -20,6 +20,7 @@ declare abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends Creature
     /** Players can view the sheets of lootable NPCs. */
     protected _canUserView(user: UserPF2e): boolean;
     activateListeners($html: JQuery<HTMLElement>): void;
+    protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
 }
 declare class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
     #private;

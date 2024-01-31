@@ -1,8 +1,9 @@
 /// <reference types="jquery" resolution-mode="require"/>
 import type { ActorPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
+import type { ConsumablePF2e } from "@item";
 import { ItemPF2e } from "@item";
-import { ItemSourcePF2e, ItemSummaryData } from "@item/base/data/index.ts";
+import { ItemSourcePF2e, RawItemChatData } from "@item/base/data/index.ts";
 import { SpellSlotGroupId } from "@item/spellcasting-entry/collection.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
 import { RangeData } from "@item/types.ts";
@@ -20,13 +21,14 @@ import { SpellArea, SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSyst
 import { SpellOverlayCollection } from "./overlay.ts";
 import { MagicTradition, SpellTrait } from "./types.ts";
 declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
-    readonly isFromConsumable: boolean;
+    readonly parentItem: ConsumablePF2e<TParent> | null;
     /** The original spell. Only exists if this is a variant */
     original?: SpellPF2e<TParent>;
     /** The overlays that were applied to create this variant */
     appliedOverlays?: Map<SpellOverlayType, string>;
     overlays: SpellOverlayCollection;
     constructor(data: PreCreate<ItemSourcePF2e>, context?: SpellConstructionContext<TParent>);
+    static get validTraits(): Record<SpellTrait, string>;
     /** The id of the override overlay that constitutes this variant */
     get variantId(): string | null;
     /** The spell's "base" rank; that is, before heightening */
@@ -47,6 +49,10 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get rarity(): Rarity;
     get traditions(): Set<MagicTradition>;
     get actionGlyph(): string | null;
+    get defense(): {
+        slug: string;
+        label: string;
+    } | null;
     get spellcasting(): BaseSpellcastingEntry<NonNullable<TParent>> | null;
     get isAttack(): boolean;
     get isCantrip(): boolean;
@@ -91,7 +97,7 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     getChatData(this: SpellPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptionsPF2e, rollOptions?: {
         castRank?: number | string;
         groupId?: SpellSlotGroupId;
-    }): Promise<Omit<ItemSummaryData, "traits">>;
+    }): Promise<RawItemChatData>;
     rollAttack(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, attackNumber?: number, context?: StatisticRollParameters): Promise<void>;
     rollDamage(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, mapIncreases?: ZeroToTwo): Promise<Rolled<DamageRoll> | null>;
     /** Roll counteract check */
@@ -106,7 +112,7 @@ interface SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
     system: SpellSystemData;
 }
 interface SpellConstructionContext<TParent extends ActorPF2e | null> extends DocumentConstructionContext<TParent> {
-    fromConsumable?: boolean;
+    parentItem?: Maybe<ConsumablePF2e<TParent>>;
 }
 interface SpellDamage {
     template: SpellDamageTemplate;

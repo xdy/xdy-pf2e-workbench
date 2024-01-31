@@ -1,5 +1,5 @@
 import { SaveType } from "@actor/types.ts";
-import { AbstractEffectSystemData, AbstractEffectSystemSource, DurationData, EffectAuraData, EffectContextData, EffectTraits, TimeUnit } from "@item/abstract-effect/index.ts";
+import { AbstractEffectSystemData, AbstractEffectSystemSource, DurationData, EffectAuraData, EffectContextData, TimeUnit } from "@item/abstract-effect/index.ts";
 import { BaseItemSourcePF2e, ItemFlagsPF2e } from "@item/base/data/system.ts";
 import { ConditionSlug } from "@item/condition/index.ts";
 import { DamageCategoryUnique, DamageType } from "@system/damage/index.ts";
@@ -15,7 +15,6 @@ interface AfflictionSystemSource extends AbstractEffectSystemSource {
     level: {
         value: number;
     };
-    traits: EffectTraits;
     save: {
         type: SaveType;
         value: number;
@@ -31,7 +30,7 @@ interface AfflictionSystemSource extends AbstractEffectSystemSource {
     /** Origin, target, and roll context of the action that spawned this effect */
     context: EffectContextData | null;
 }
-interface AfflictionSystemData extends Omit<AfflictionSystemSource, "description" | "fromSpell">, Omit<AbstractEffectSystemData, "level" | "traits"> {
+interface AfflictionSystemData extends Omit<AfflictionSystemSource, "description" | "fromSpell">, Omit<AbstractEffectSystemData, "level"> {
 }
 interface AfflictionOnset {
     /** If true, the affliction is currently in its onset phase */

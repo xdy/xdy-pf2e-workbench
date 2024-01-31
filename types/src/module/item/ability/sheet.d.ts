@@ -6,6 +6,7 @@ import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/s
 import { SelfEffectReference } from "./data.ts";
 declare class AbilitySheetPF2e extends ItemSheetPF2e<AbilityItemPF2e> {
     static get defaultOptions(): ItemSheetOptions;
+    protected get validTraits(): Record<string, string>;
     getData(options?: Partial<ItemSheetOptions>): Promise<ActionSheetData>;
     activateListeners($html: JQuery<HTMLElement>): void;
     _onDrop(event: DragEvent): Promise<void>;

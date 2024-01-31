@@ -115,7 +115,7 @@ type MacroAction = {
     altSkillAndFeat?: { skill: string; feat: string }[];
     name: string;
     icon: string;
-    action: string | Function | string[] | Action;
+    action: string | Function | string[] | Action | undefined;
     module?: string;
     best?: number;
     whoIsBest?: string;
