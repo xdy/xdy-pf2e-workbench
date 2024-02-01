@@ -135,9 +135,9 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
             port: 30001,
             open: "/game",
             proxy: {
-                "^(?!/modules/xdy-pf2e-workbench/)": "http://localhost:30000/",
+                "^(?!/modules/xdy-pf2e-workbench/)": "http://localhost:32456/",
                 "/socket.io": {
-                    target: "ws://localhost:30000",
+                    target: "ws://localhost:32456",
                     ws: true,
                 },
             },

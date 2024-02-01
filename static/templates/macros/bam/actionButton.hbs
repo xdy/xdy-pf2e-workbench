@@ -14,28 +14,27 @@
     {{/if}}
 {{/inline}}
 {{#*inline "actionName"}}{{action.name}} {{#xdy_ifne skill xdy_undefined}}({{signedInteger
-        bonus}}){{/xdy_ifne}}{{/inline}}
-{{#*inline "actionTooltip"}}{{> actionName}}{{ifThen best
-                                                     (localize "xdy-pf2e-workbench.macros.basicActionMacros.YouAreTheBestInYourParty") ""}}{{/inline}}
+    bonus}}){{/xdy_ifne}}{{/inline}}
+{{#*inline "actionTooltip"}}{{> actionName}} {{ifThen best (localize "xdy-pf2e-workbench.macros.basicActionMacros.YouAreTheBestInYourParty")""}}{{/inline}}
 {{#if action.showMAP}}
     <div class="map-wrapper">
         <button class="action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="0"
-                style="background:{{> colorPalette skill.rank}}" data-tooltip="{{> actionTooltip}}"><img
-                src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24"
-                width="24"
-                alt="{{> actionName}}"/>{{> actionName}}</button>
+                style="background:{{> colorPalette rank=skill.rank}}" data-tooltip="{{> actionTooltip}}"><img
+            src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24"
+            width="24"
+            alt="{{> actionName}}"/>{{> actionName}}</button>
         <button class="action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-5"
-                style="background:{{> colorPalette skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
-                "xdy-pf2e-workbench.macros.basicActionMacros.second"}}">{{localize
-                "xdy-pf2e-workbench.macros.basicActionMacros.second"}}</button>
+                style="background:{{> colorPalette rank=skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
+            "xdy-pf2e-workbench.macros.basicActionMacros.second"}}">{{localize
+            "xdy-pf2e-workbench.macros.basicActionMacros.second"}}</button>
         <button class="action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-10"
-                style="background:{{> colorPalette skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
-                "xdy-pf2e-workbench.macros.basicActionMacros.third"}}">{{localize
-                "xdy-pf2e-workbench.macros.basicActionMacros.third"}}</button>
+                style="background:{{> colorPalette rank=skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
+            "xdy-pf2e-workbench.macros.basicActionMacros.third"}}">{{localize
+            "xdy-pf2e-workbench.macros.basicActionMacros.third"}}</button>
     </div>
 {{else}}
     <button class="action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}"
-            style="background:{{> colorPalette skill.rank}}"
+            style="background:{{> colorPalette rank=skill.rank}}"
             data-tooltip="{{> actionTooltip}}">
         <img src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24"
              alt="{{name}}"/>{{> actionName}}

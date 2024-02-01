@@ -1,3 +1,5 @@
+@use "sass:math";
+
 :root {
     --xdy-pf2e-workbench-pause: "";
     --xdy-pf2e-workbench-pause-background: "initial";
@@ -155,9 +157,11 @@
 .bam-dialog {
     container: bam-dialog / inline-size;
 }
+
 .pf2e-bg .window-content {
     //background: url('/systems/pf2e/assets/sheet/background.webp');
 }
+
 .action-list {
     display: grid;
     flex-wrap: wrap;
@@ -165,7 +169,16 @@
     align-items: center;
     margin-bottom: 8px;
     grid-column-gap: 2px;
+    grid-auto-flow: column;
+    //grid-template-rows: repeat(9, 1fr);
+    button.glow {
+        --color-glow1: 35;
+        --color-glow2: 50;
+        animation: glow2 alternate infinite 2s;
+        z-index: 1;
+    }
 }
+
 .action-btn {
     margin: 1px auto;
     width: 100%;
@@ -186,14 +199,8 @@
     img {
         margin-right: 5px;
     }
-
-    button.glow {
-        --color-glow1: 35;
-        --color-glow2: 50;
-        animation: glow2 alternate infinite 2s;
-        z-index: 1;
-    }
 }
+
 .map-wrapper {
     display: flex;
     gap: 5px;
@@ -202,6 +209,7 @@
 
     button {
         width: unset;
+
         &:first-child {
             flex: 1 1 160px;
         }
@@ -210,8 +218,8 @@
 
 @keyframes glow2 {
     0% {
-        color: hsl(var(--color-glow2), 90%, 50%);
-        box-shadow: 0 0 2px 2px hsl(var(--color-glow2), 100%, 50%);
+        color: hsl(var(--color-glow1), 90%, 50%);
+        box-shadow: 0 0 2px 2px hsl(var(--color-glow1), 100%, 50%);
     }
     100% {
         color: hsl(var(--color-glow2), 90%, 50%);
@@ -223,16 +231,21 @@
     @return 26 + $columns*250px;
 }
 
-@for $i from 1 through 4 {
+@for $i from 1 through 40 {
     @container bam-dialog (width <= #{bamWidth($i+1)}) and (width > #{bamWidth($i)}) {
-        .action-list {
-            grid-template-columns: repeat($i, 1fr);
+        @for $j from 1 through 60 {
+            .action-list[data-bam-count="#{$j}"] {
+                //grid-template-columns: repeat($i, 1fr);
+                grid-template-rows: repeat(#{math.ceil(math.div($j, $i))}, 1fr);
+            }
         }
     }
 }
 
-@container bam-dialog (width > #{bamWidth(5)}) {
-    .action-list {
-        grid-template-columns: repeat(5, 1fr);
+@container bam-dialog (width < #{bamWidth(1)}){
+    @for $j from 1 through 60 {
+        .action-list[data-bam-count="#{$j}"] {
+            grid-template-rows: repeat(#{$j}, 1fr);
+        }
     }
 }

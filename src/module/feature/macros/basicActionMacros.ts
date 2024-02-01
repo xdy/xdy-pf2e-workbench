@@ -603,6 +603,13 @@ export async function basicActionMacros() {
         getBestBonuses(partySkills, partyIds, actionsToUse);
     }
 
+    const columns = 1 + ~~((actionsToUse.length - 1) / 14);
+    const width = 26 + columns * 250;
+    // const height =
+    //     30 + ~~(((30 * actionsToUse.filter((x) => !x.showMAP).length + 1) +
+    //             (64 * actionsToUse.filter((x) => x.showMAP).length + 1)) / columns
+    //     );
+
     const tabView = game.settings.get(MODULENAME, "bamTabview");
 
     const selectedActorSkills = allActorsSkills.get(selectedActor.id) ?? {};
@@ -735,7 +742,7 @@ export async function basicActionMacros() {
                 }
             },
         },
-        {jQuery: false, classes: ["pf2e-bg", "bam-dialog"], width: 1276, popOut: true, resizable: true},
+        {jQuery: false, classes: ["pf2e-bg", "bam-dialog"], width, popOut: true, resizable: true},
     ).render(true) as Dialog;
 }
 
