@@ -438,4 +438,7 @@ function registerHandlebarsHelpers() {
         }
         return false;
     });
+    Handlebars.registerHelper("xdy_count", function (element: any[]) {
+        return element.length;
+    })
 }
