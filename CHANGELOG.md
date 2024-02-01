@@ -1,3 +1,10 @@
+# [5.52.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.51.0...v5.52.0) (2024-02-01)
+
+
+### Features
+
+* Awesome rework of Basic Action Macros, courtesy of [@omegarogue9344](https://github.com/omegarogue9344) ([98e5c80](https://github.com/xdy/xdy-pf2e-workbench/commit/98e5c80ed895c18b781153fa65017531a05d06de))
+
 # [5.51.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.50.1...v5.51.0) (2024-01-31)
 
 
