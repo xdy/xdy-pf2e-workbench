@@ -150,3 +150,89 @@
 .xdy-pf2e-workbench-hide {
     display: none !important;
 }
+
+
+.bam-dialog {
+    container: bam-dialog / inline-size;
+}
+.pf2e-bg .window-content {
+    //background: url('/systems/pf2e/assets/sheet/background.webp');
+}
+.action-list {
+    display: grid;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+    grid-column-gap: 2px;
+}
+.action-btn {
+    margin: 1px auto;
+    width: 100%;
+    height: fit-content;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
+    text-shadow: none;
+    border: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:hover {
+        text-shadow: 0 0 2px #fff;
+    }
+
+    img {
+        margin-right: 5px;
+    }
+
+    button.glow {
+        --color-glow1: 35;
+        --color-glow2: 50;
+        animation: glow2 alternate infinite 2s;
+        z-index: 1;
+    }
+}
+.map-wrapper {
+    display: flex;
+    gap: 5px;
+    margin: 0 auto;
+    width: 100%;
+
+    button {
+        width: unset;
+        &:first-child {
+            flex: 1 1 160px;
+        }
+    }
+}
+
+@keyframes glow2 {
+    0% {
+        color: hsl(var(--color-glow2), 90%, 50%);
+        box-shadow: 0 0 2px 2px hsl(var(--color-glow2), 100%, 50%);
+    }
+    100% {
+        color: hsl(var(--color-glow2), 90%, 50%);
+        box-shadow: 0 0 2px 2px hsl(var(--color-glow2), 100%, 50%);
+    }
+}
+
+@function bamWidth($columns) {
+    @return 26 + $columns*250px;
+}
+
+@for $i from 1 through 4 {
+    @container bam-dialog (width <= #{bamWidth($i+1)}) and (width > #{bamWidth($i)}) {
+        .action-list {
+            grid-template-columns: repeat($i, 1fr);
+        }
+    }
+}
+
+@container bam-dialog (width > #{bamWidth(5)}) {
+    .action-list {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

@@ -2,23 +2,38 @@
 // noinspection CssUnresolvedCustomProperty,CssUnknownTarget
 
 /* eslint-disable no-undef */
-// TODO Fix the ts-ignore and any in this.
 
-import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { ActorPF2e } from "@actor";
-import { Action } from "@actor/actions/types.js";
-import { CharacterSkill } from "@actor/character/types.js";
+import {MODULENAME} from "../../xdy-pf2e-workbench.js";
+import {ActorPF2e} from "@actor";
+import {Action} from "@actor/actions/types.js";
+import {CharacterSkill} from "@actor/character/types.js";
+import {CreatureSkills} from "@actor/creature/data.js";
+import {ModifierPF2e} from "@actor/modifiers.js";
+import {Statistic} from "@system/statistic/statistic.js";
 
-// Ugh. Make this not global...
-let selectedActor: any;
 
-function getBestBonuses(actorSkills, party, actionList) {
+declare global {
+    interface Window {
+        actionDialog: Dialog;
+    }
+}
+
+
+export async function registerBasicActionMacrosHandlebarsTemplates() {
+    await loadTemplates([
+        `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
+        `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
+    ]);
+
+    Handlebars.registerPartial("actionButton", `{{> "modules/${MODULENAME}/templates/macros/bam/actionButton.hbs"}}`);
+}
+function getBestBonuses(actorSkills: Map<string, Partial<CreatureSkills>>, party: string[], actionList: MacroAction[]) {
     for (const actorId of party) {
         const skills = actorSkills.get(actorId);
         for (const action of actionList) {
-            const skill = skills[action.skill?.toLowerCase()];
+            const skill = skills?.[action.skill?.toLowerCase()];
             if (!skill) continue;
-            const bonus = skill.check?.mod ?? skill.totalModifier;
+            const bonus = skill.check?.mod ?? skill.mod;
             if (bonus > (action.best ?? -1)) {
                 action.best = bonus;
                 action.whoIsBest = actorId;
@@ -27,8 +42,8 @@ function getBestBonuses(actorSkills, party, actionList) {
     }
 }
 
-function createMapOfSkillsPerActor(actors) {
-    const map = new Map();
+function createMapOfSkillsPerActor(actors: ActorPF2e[]): Map<string, Partial<CreatureSkills>> {
+    const map = new Map<string, Partial<CreatureSkills>>();
     for (const actor of actors) {
         const skills = fetchSkills(actor);
         if (skills) {
@@ -38,75 +53,23 @@ function createMapOfSkillsPerActor(actors) {
     return map;
 }
 
-function fetchSkills(actor) {
-    return { perception: actor.perception, ...actor.skills };
+function fetchSkills(actor: ActorPF2e): Partial<CreatureSkills> {
+    return {perception: actor.perception, ...actor.skills};
 }
 
-function signedNumber(n) {
-    return n < 0 ? "" + n : "+" + n;
-}
 
-function createButton(action, idx, actor, party, actorSkills) {
-    /**
-     * Color palette to use, representing the rank of skills
-     */
-    const colorPalette = ["#424242", "#171f67", "#3c005e", "#664400", "#5e0000"];
-    /**
-     * Default Icon to be given in case there is no icon parameter in an Action
-     */
-    const defaultIcon = "systems/pf2e/icons/actions/craft/unknown-item.webp";
+
+
+function createButtonData(action: MacroAction, idx: number, actor: ActorPF2e, party: string[], actorSkills: Partial<CreatureSkills>): { bonus: number; skill: Statistic | null | undefined; action: MacroAction; best: boolean; idx: number } {
     const skillName = action.skill?.toLowerCase();
     const skill = skillName ? actorSkills[skillName] : null;
-    const rank = skill?.rank ?? 0;
-    const bonus = skill ? skill.check?.mod ?? skill.totalModifier : -1;
+    const bonus = skill ? skill.check?.mod ?? skill.mod : -1;
     const best = game.settings.get(MODULENAME, "basicActionMacroShowBestBonus")
         ? party.length && party.includes(actor.id)
             ? bonus >= (action.best ?? 0)
             : false
         : false;
-    const name = `${action.name} ${skill ? "(" + signedNumber(bonus) + ")" : ""}`;
-    const tooltip =
-        name +
-        " " +
-        (best ? game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.YouAreTheBestInYourParty`) : "");
-    let button: string;
-    if (action.showMAP) {
-        const second = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.second`);
-        const third = game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.third`);
-        button =
-            `<div class="map-wrapper">
-              <button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="0" style="background:${
-                  colorPalette[rank]
-              }" ${`data-tooltip="${tooltip}"`}> <img src="${
-                  action.icon ?? defaultIcon
-              }" height="24" width="24"   alt="${name}"/>${name}</button>` +
-            `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-5" style="background:${
-                colorPalette[rank]
-            }" ${`data-tooltip="${tooltip} + ${second}"`}>${second}</button>` +
-            `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" data-map="-10" style="background:${
-                colorPalette[rank]
-            }" ${`data-tooltip="${tooltip} + ${third}"`}>${third}</button>
-              </div>`;
-    } else {
-        let tooltipPrefix: string;
-        tooltipPrefix = action.showExploration
-            ? `(${game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.exploration`)}) `
-            : (tooltipPrefix = action.showDowntime
-                  ? `(${game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.downtime`)}) `
-                  : "");
-        let prefix: string;
-        prefix = action.showExploration
-            ? `(${game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.explorationShort`)}) `
-            : (prefix = action.showDowntime
-                  ? `(${game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.downtimeShort`)}) `
-                  : "");
-        button = `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
-            colorPalette[rank]
-        }"
-    ${`data-tooltip="${tooltipPrefix}${tooltip}"`}>
-    <img src="${action.icon ?? defaultIcon}" height="24" alt="${name}"/>${prefix}${name}</button>`;
-    }
-    return button;
+    return {best, idx, action, skill, bonus};
 }
 
 type MacroAction = {
@@ -126,13 +89,15 @@ type MacroAction = {
     actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
     actionTitle?: string;
 };
+
 /**
  * Generates the filtered list of actions to use based on the given bamActions.
  *
+ * @param {ActorPF2e} selectedActor The selected actor.
  * @param {MacroAction[]} bamActions - The list of MacroActions to filter.
  * @return {MacroAction[]} The filtered list of actions to use.
  */
-function prepareActions(bamActions: MacroAction[]) {
+function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): MacroAction[] {
     const showUnusable = game.settings.get(MODULENAME, "bamShowUnusable");
 
     const actionsToUse = bamActions
@@ -172,7 +137,7 @@ function prepareActions(bamActions: MacroAction[]) {
  * If no actor is selected, it selects the user's standard character.
  * If there is no user character, it shows up a warning notification.
  */
-export function basicActionMacros() {
+export async function basicActionMacros() {
     const bamActions: MacroAction[] = [
         {
             actionType: "skill_untrained",
@@ -579,8 +544,8 @@ export function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TreatWounds`),
             skill: "Medicine",
             altSkillAndFeat: [
-                { skill: "Nature", feat: "natural-medicine" },
-                { skill: "Crafting", feat: "chirurgeon" },
+                {skill: "Nature", feat: "natural-medicine"},
+                {skill: "Crafting", feat: "chirurgeon"},
             ],
             action: [
                 "XDY DO_NOT_IMPORT Treat Wounds and Battle Medicine",
@@ -604,7 +569,7 @@ export function basicActionMacros() {
         },
     ];
 
-    // @ts-ignore
+
     const actionDialog = window.actionDialog;
     if (actionDialog?.rendered) {
         return actionDialog.close();
@@ -612,21 +577,21 @@ export function basicActionMacros() {
 
     const controlled = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
     if (controlled.length === 0 && game.user.character) controlled.push(game.user.character);
-    selectedActor = controlled[0];
+    const selectedActor = controlled[0];
 
     const supportedActorTypes = ["character", "npc", "familiar"];
     if (!selectedActor || !supportedActorTypes.includes(selectedActor.type)) {
         return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
     }
 
-    const actionsToUse = prepareActions(bamActions);
+    const actionsToUse = prepareActions(selectedActor, bamActions);
 
-    // @ts-ignore
+
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-            .map((actor) => actor.actor)
-            .filter((actor) => {
-                return supportedActorTypes.includes(actor?.type ?? "unknown");
-            }) || [];
+        .map((actor) => actor.actor)
+        .filter((actor) => {
+            return supportedActorTypes.includes(actor?.type ?? "unknown");
+        }) || [];
 
     const party = game.actors?.party?.members || [];
     const partyIds = party.map((actor) => actor.id) || [];
@@ -638,89 +603,25 @@ export function basicActionMacros() {
         getBestBonuses(partySkills, partyIds, actionsToUse);
     }
 
-    const columns = 1 + ~~((actionsToUse.length - 1) / Number(game.settings.get(MODULENAME, "bamActionsPerColumn")));
-    const width = 26 + columns * 250;
-    const height =
-        30 +
-        ~~(
-            (30 * actionsToUse.filter((x) => !x.showMAP).length +
-                1 +
-                (64 * actionsToUse.filter((x) => x.showMAP).length + 1)) /
-            columns
-        );
+    const tabView = game.settings.get(MODULENAME, "bamTabview");
+
     const selectedActorSkills = allActorsSkills.get(selectedActor.id) ?? {};
-    const content = `
-<style>
-  .pf2e-bg .window-content {
-    background: url('../systems/pf2e/assets/sheet/background.webp');
-  }
-  .action-list {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 8px;
-    max-height: ${height}px;
-  }
-  .action-btn {
-    margin: 1px auto;
-    width: 250px;
-    height: fit-content;
-    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
-    text-shadow: none;
-    border: #000;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .action-btn img {
-    margin-right: 5px;
-  }
-  .action-btn:hover {
-    text-shadow: 0 0 2px #fff;
-  }
-  .action-list button.glow {
-    --color-glow1: 35;
-    --color-glow2: 50;
-    animation: glow2 alternate infinite 2s;
-    z-index: 1;
-}
-  .map-wrapper {
-    display: flex;
-    gap: 5px;
-    margin: 0px;
-    width: 250px;
-}
-  .map-wrapper button {
-    width: unset;
-}
-  .map-wrapper button:first-child {
-    flex: 1 1 160px;
-}
-@keyframes glow2 {
-  0% {
-      color: hsl(var(--color-glow2), 90%, 50%);
-      box-shadow: 0 0 2px 2px hsl(var(--color-glow2), 100%, 50%);
-  }
-  100% {
-      color: hsl(var(--color-glow2), 90%, 50%);
-      box-shadow: 0 0 2px 2px hsl(var(--color-glow2), 100%, 50%);
-  }
-}
-</style>
-<div class="action-list">
-${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, partyIds, selectedActorSkills)).join("")}
-</div>
-`;
-    // @ts-ignore
+    const data = actionsToUse.map((action, idx) => createButtonData(action, idx, selectedActor, partyIds, selectedActorSkills));
+
+    const filteredData = {
+        encounter: data.filter(value => !(value.action.showDowntime || value.action.showExploration)),
+        downtime: data.filter(value => value.action.showDowntime),
+        exploration: data.filter(value => value.action.showExploration),
+        tabView
+    };
+    const content = await renderTemplate("modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs", filteredData);
+
     window.actionDialog = new Dialog(
         {
             title: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.title`, {
                 name: selectedActor.name,
             }),
-            content,
+            content: content,
             buttons: {
                 close: {
                     icon: `<i class="fas fa-times"></i>`,
@@ -785,7 +686,7 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                             })
                             .then();
                     } else {
-                        const skills = getSkills(action.skill);
+                        const skills = getSkills(selectedActor, action.skill);
                         const variant =
                             button.dataset.map && button.dataset.map !== "0"
                                 ? getMapVariant(skills[0], {}, Number.parseInt(button.dataset.map))
@@ -798,8 +699,7 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                                 ...variant?.extra,
                             });
                         } else {
-                            // @ts-ignore
-                            action.action({
+                            (<Function>action.action)({
                                 event,
                                 actors: [selectedActor],
                                 skill: action.skill.toLocaleLowerCase(),
@@ -812,20 +712,32 @@ ${actionsToUse.map((action, idx) => createButton(action, idx, selectedActor, par
                     for (const button of html.querySelectorAll(".action-list button")) {
                         button.addEventListener("click", (event) => action(button, event));
                     }
+                    for (const tabButton of html.querySelectorAll("a.item")) {
+                        tabButton.addEventListener("click", () => {
+                            for(const tab of html.querySelectorAll(".bam-body .tab")) {
+                                if(tabView) {
+                                    if(tab.classList.contains("active")) tab.classList.remove("active");
+                                    // @ts-expect-error
+                                    if (tab.dataset.tab===tabButton.dataset.tab) tab.classList.add("active");
+                                } else {
+                                    // @ts-expect-error
+                                    if (tab.dataset.tab===tabButton.dataset.tab) tab.classList.toggle("active");
+                                }
+                            }
+                        })
+                    }
                 }
             },
         },
-        // @ts-ignore
-        { jQuery: false, width, classes: ["pf2e-bg"], popOut: true, resizable: true },
-    ).render(true);
+        {jQuery: false, classes: ["pf2e-bg", "bam-dialog"], width: 1276, popOut: true, resizable: true},
+    ).render(true) as Dialog;
 }
 
-function getSkills(proficiencyKey: string): CharacterSkill[] {
-    // @ts-ignore
+function getSkills(selectedActor: ActorPF2e, proficiencyKey: string): CharacterSkill[] {
     const skills = selectedActor.skills;
+    if (!skills) return [];
     if (proficiencyKey === "lore") {
-        // @ts-ignore
-        return Object.values(skills).filter((skill) => skill.lore);
+        return Object.values(skills).filter((skill) => skill !== undefined && skill.lore) as CharacterSkill[];
     } else {
         return [skills[proficiencyKey]].filter((s): s is CharacterSkill => !!s);
     }
@@ -837,7 +749,7 @@ function getMapVariant(skill: CharacterSkill, extra: Record<string, unknown> | u
         modifier: map,
         type: "untyped",
     });
-    const label = game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: map });
+    const label = game.i18n.format("PF2E.MAPAbbreviationLabel", {penalty: map});
     return new Variant(label, skill, extra, [modifier]);
 }
 
@@ -845,14 +757,14 @@ export class Variant {
     label: string;
     skill: CharacterSkill;
     extra?: Record<string, unknown>;
-    modifiers: (typeof game.pf2e.Modifier)[];
+    modifiers: ModifierPF2e[];
     assuranceTotal: number;
 
     constructor(
         label: string,
         skill: CharacterSkill,
         extra: Record<string, unknown> | undefined,
-        modifiers: any[] = [], // ModifierPF2e[] = [],
+        modifiers: ModifierPF2e[] = [],
         assuranceTotal = 0,
     ) {
         this.label = label;
