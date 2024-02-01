@@ -111,13 +111,13 @@ export function registerWorkbenchSettings() {
         onChange: () => updateHooks(),
     });
 
-    game.settings.register(MODULENAME, "bamActionsPerColumn", {
-        name: `${MODULENAME}.macros.basicActionMacros.bamActionsPerColumn.name`,
-        hint: `${MODULENAME}.macros.basicActionMacros.bamActionsPerColumn.hint`,
+    game.settings.register(MODULENAME, "bamTabview", {
+        name: `${MODULENAME}.macros.basicActionMacros.bamTabview.name`,
+        hint: `${MODULENAME}.macros.basicActionMacros.bamTabview.hint`,
         scope: "client",
         config: true,
-        default: 14,
-        type: Number,
+        default: true,
+        type: Boolean,
         onChange: () => updateHooks(),
     });
 

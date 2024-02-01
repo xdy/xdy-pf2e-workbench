@@ -31,9 +31,9 @@
         "downtime": "Downtime",
         "explorationShort": "E",
         "downtimeShort": "D",
-        "bamActionsPerColumn": {
-          "name": "BAM: Approximate actions per row",
-          "hint": "Approximate number of actions per row in the Basic Action Macros dialog. The actual number of actions per row will be the closest number of actions per row that will fit in the dialog."
+        "bamTabview": {
+          "name": "BAM: Use tabbed layout",
+          "hint": "Use a tabbed layout for the Basic Action Macros dialog."
         },
         "bamShowUnusable": {
           "name": "BAM: Show actions that cannot be used.",
