@@ -349,7 +349,7 @@ const content = `
 <!--suppress ALL -->
 <style>
   .pf2e-bg .window-content {
-    background: url(../systems/pf2e/assets/sheet/background.webp);
+    background: url(systems/pf2e/assets/sheet/background.webp);
   }
 
   .action-list {
