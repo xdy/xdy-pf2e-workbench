@@ -170,7 +170,8 @@
     margin-bottom: 8px;
     grid-column-gap: 2px;
     grid-auto-flow: column;
-    //grid-template-rows: repeat(9, 1fr);
+    grid-template-rows: repeat(calc(var(--bam-count) / var(--bam-columns)), 1fr);
+    grid-template-columns: repeat(var(--bam-columns), 1fr);
     button.glow {
         --color-glow1: 35;
         --color-glow2: 50;
@@ -233,19 +234,20 @@
 
 @for $i from 1 through 40 {
     @container bam-dialog (width <= #{bamWidth($i+1)}) and (width > #{bamWidth($i)}) {
-        @for $j from 1 through 60 {
-            .action-list[data-bam-count="#{$j}"] {
-                //grid-template-columns: repeat($i, 1fr);
-                grid-template-rows: repeat(#{math.ceil(math.div($j, $i))}, 1fr);
-            }
+        .action-list {
+            --bam-columns:#{$i};
         }
     }
 }
 
 @container bam-dialog (width < #{bamWidth(1)}){
-    @for $j from 1 through 60 {
-        .action-list[data-bam-count="#{$j}"] {
-            grid-template-rows: repeat(#{$j}, 1fr);
-        }
+    .action-list {
+	--bam-columns: 1;
+    }
+}
+
+@container bam-dialog (width > #{bamWidth(41)}) {
+    .action-list {
+        --bam-columns: 41;
     }
 }
