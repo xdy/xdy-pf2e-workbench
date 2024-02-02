@@ -69,7 +69,7 @@
           "TumbleThrough": "Hindurchturnen",
           "AidASE": "Helfen (ASE Makro)",
           "CreateADiversionDistractingWords": "Für Ablenkung sorgen - Ablenkende Worte",
-          "Reposition": "Neu positionieren"
+          "Reposition": "Versetzen"
         },
         "macroNotFound": "Makro {macroName} nicht gefunden",
         "title": "Aktionen ({name})",
