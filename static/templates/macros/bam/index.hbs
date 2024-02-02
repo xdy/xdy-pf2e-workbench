@@ -7,22 +7,22 @@
 {{/if}}
 <section class="bam-body">
     {{#if tabView }}
-        <div class="tab encounter active" data-group="primary" data-tab="encounter">
-            <div class="action-list" data-bam-count="{{xdy_count encounter}}">
+        <div class="tab encounter active" data-group="primary" data-tab="encounter" style="--bam-count:{{encounter.length}};">
+            <div class="action-list">
                 {{#each encounter}}
                     {{> actionButton this}}
                 {{/each}}
             </div>
         </div>
-        <div class="tab exploration" data-group="primary" data-tab="exploration">
-            <div class="action-list" data-bam-count="{{xdy_count exploration}}">
+        <div class="tab exploration" data-group="primary" data-tab="exploration" style="--bam-count:{{exploration.length}};">
+            <div class="action-list">
                 {{#each exploration}}
                     {{> actionButton this}}
                 {{/each}}
             </div>
         </div>
-        <div class="tab downtime" data-group="primary" data-tab="downtime">
-            <div class="action-list" data-bam-count="{{xdy_count downtime}}">
+        <div class="tab downtime" data-group="primary" data-tab="downtime" style="--bam-count:{{downtime.length}};">
+            <div class="action-list">
                 {{#each downtime}}
                     {{> actionButton this}}
                 {{/each}}
@@ -30,24 +30,24 @@
         </div>
     {{else}}
         <h3><a class="item" data-tab="encounter">Encounter</a></h3>
-        <div class="tab encounter active" data-group="primary" data-tab="encounter">
-            <div class="action-list" data-bam-count="{{xdy_count encounter}}">
+        <div class="tab encounter active" data-group="primary" data-tab="encounter" style="--bam-count:{{encounter.length}};">
+            <div class="action-list">
                 {{#each encounter}}
                     {{> actionButton this}}
                 {{/each}}
             </div>
         </div>
         <h3><a class="item" data-tab="exploration">Exploration</a></h3>
-        <div class="tab exploration active" data-group="primary" data-tab="exploration">
-            <div class="action-list" data-bam-count="{{xdy_count exploration}}">
+        <div class="tab exploration active" data-group="primary" data-tab="exploration" style="--bam-count:{{exploration.length}};">
+            <div class="action-list">
                 {{#each exploration}}
                     {{> actionButton this}}
                 {{/each}}
             </div>
         </div>
         <h3><a class="item" data-tab="downtime">Downtime</a></h3>
-        <div class="tab downtime active" data-group="primary" data-tab="downtime">
-            <div class="action-list" data-bam-count="{{xdy_count downtime}}">
+        <div class="tab downtime active" data-group="primary" data-tab="downtime" style="--bam-count:{{downtime.length}};">
+            <div class="action-list">
                 {{#each downtime}}
                     {{> actionButton this}}
                 {{/each}}
