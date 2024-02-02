@@ -38,6 +38,8 @@ profile followed by a brief and incomplete description of what this person has c
 * [Friz](https://github.com/fraserstanton) - Added support for Discordant Voice to Aura: Inspire Courage.
 * [ElvisLiving]() - Contributed several Adjustments for making undead to the 'xdy-pf2e-workbench-items' compendium
 * [Tikael](https://github.com/TikaelSol) - Contributed the Zombie adjustment to the 'xdy-pf2e-workbench-items' compendium.
+* [Kali (OmegaRogue)](https://github.com/OmegaRogue) - Improved BAM.
+* [Trent](https://github.com/xyzzy42) - Improved BAM.
 
 I've probably forgotten someone, if so, please tell me!
 
