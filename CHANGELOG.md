@@ -1,3 +1,10 @@
+## [5.52.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.52.0...v5.52.1) (2024-02-02)
+
+
+### Bug Fixes
+
+* BAM: Add back glow and colors to the buttons, fix the background image. Courtesy of [@omegarogue9344](https://github.com/omegarogue9344) and [@xyzzy42](https://github.com/xyzzy42) ([556b9d2](https://github.com/xdy/xdy-pf2e-workbench/commit/556b9d291822c6a502e8b8f5165a28237dc40729))
+
 # [5.52.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.51.0...v5.52.0) (2024-02-01)
 
 
