@@ -139,6 +139,8 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                 "/socket.io": {
                     target: "ws://localhost:30000",
                     ws: true,
+                    secure: false,
+                    changeOrigin: true,
                 },
             },
         },
