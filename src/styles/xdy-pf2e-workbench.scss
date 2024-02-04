@@ -170,7 +170,7 @@
     margin-bottom: 8px;
     grid-column-gap: 2px;
     grid-auto-flow: column;
-    grid-template-rows: repeat(calc(var(--bam-count) / var(--bam-columns)), 1fr);
+    grid-template-rows: repeat(calc((var(--bam-count) + var(--bam-columns) / 2 - 0.01) / var(--bam-columns)), 1fr);
     grid-template-columns: repeat(var(--bam-columns), 1fr);
     button.glow {
         --color-glow1: 35;
