@@ -46,8 +46,8 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     const reminderCannotAttackEnabled =
         String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "cancelAttack";
     const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
-    const ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some(
-        (key) => game?.keyboard.downKeys.has(key),
+    const ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some((key) =>
+        game?.keyboard.downKeys.has(key),
     );
     const privateCast = castPrivately(
         game.actors?.party?.members?.some((member) => member.id === message.actor?.id) ?? false,

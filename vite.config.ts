@@ -40,6 +40,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                 targets: [
                     { src: "CHANGELOG.md", dest: "." },
                     { src: "README.md", dest: "." },
+                    { src: "CONTRIBUTING.md", dest: "." },
                 ],
             }),
         );
@@ -146,7 +147,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         },
         plugins,
         css: {
-            devSourcemap: true,
+            devSourcemap: buildMode === "development",
         },
     };
 });

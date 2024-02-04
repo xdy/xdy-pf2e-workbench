@@ -11,7 +11,7 @@
     "prettier"
   ],
   "parserOptions": {
-        "ecmaVersion": 2018,
+    "ecmaVersion": 2018,
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
@@ -33,11 +33,27 @@
         "allowForLoopAfterthoughts": true
       }
     ],
-    "spaced-comment": "error",
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true
+      }
+    ],
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "markers": [
+          "/"
+        ]
+      }
+    ],
     "@typescript-eslint/await-thenable": "error",
-    "@typescript-eslint/ban-ts-comment": "off", //Just, nope. Not worth it.
+    "@typescript-eslint/ban-ts-comment": "off",
+    //Just, nope. Not worth it.
     "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off", //TODO Handle later
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    //TODO Handle later
     "@typescript-eslint/lines-between-class-members": [
       "error",
       "always",
@@ -46,6 +62,8 @@
       }
     ],
     "@typescript-eslint/prefer-namespace-keyword": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-namespace": [
       "error",
       {
@@ -56,6 +74,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     // TODO Handle this later
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unsafe-declaration-merging": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/array-type": [
       "error",

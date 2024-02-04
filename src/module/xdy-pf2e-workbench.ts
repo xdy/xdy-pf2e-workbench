@@ -16,7 +16,7 @@ import { debounce, isFirstGM, logInfo } from "./utils.js";
 import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller.js";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.js";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.js";
-import {basicActionMacros, registerBasicActionMacrosHandlebarsTemplates} from "./feature/macros/basicActionMacros.js";
+import { basicActionMacros, registerBasicActionMacrosHandlebarsTemplates } from "./feature/macros/basicActionMacros.js";
 import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal.js";
 import {
     createChatMessageHook,

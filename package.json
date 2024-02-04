@@ -17,7 +17,7 @@
     "clean": "rm -rf dist/*",
     "watch": "npm run build:packs && vite build --watch --mode development",
     "hot": "vite serve",
-    "lint": "npm run lint:ts && npm run lint:json",
+    "lint": "npm run lint:ts && npm run lint:jsonn && npm run prettier:scss",
     "lint:ts": "eslint ./build ./src --ext .ts",
     "lint:json": "eslint ./static --ext .json --no-eslintrc --plugin json --rule \"json/*: error\"",
     "lint:fix": "eslint ./build ./src --ext .ts --fix"
