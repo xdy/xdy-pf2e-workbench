@@ -130,7 +130,11 @@ export function updateHooks(cleanSlate = false) {
         renderChatMessageHook,
     );
 
-    handle("createItem", game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"), createItemHook);
+    handle(
+        "createItem",
+        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"),
+        fu.debounce(createItemHook, 10),
+    );
 
     handle("updateItem", false, updateItemHook);
 
