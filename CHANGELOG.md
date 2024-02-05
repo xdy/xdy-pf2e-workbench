@@ -1,3 +1,10 @@
+## [5.52.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.52.3...v5.52.4) (2024-02-05)
+
+
+### Bug Fixes
+
+* Debounce dropped item handling to avoid an abundantly redundant excess of tautologically repetitive messages in triplicate echoing in the chat. ([2fa8644](https://github.com/xdy/xdy-pf2e-workbench/commit/2fa864452a39cbd77c4a7558ff7aa172273d6a53))
+
 ## [5.52.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.52.2...v5.52.3) (2024-02-05)
 
 
