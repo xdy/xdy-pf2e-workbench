@@ -1,3 +1,10 @@
+## [5.52.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.52.2...v5.52.3) (2024-02-05)
+
+
+### Bug Fixes
+
+* The option to make characters drop their held items when becoming unconscious should now work again. ([6580a89](https://github.com/xdy/xdy-pf2e-workbench/commit/6580a89694a08e0c2f976eca466678a2f7d51915))
+
 ## [5.52.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.52.1...v5.52.2) (2024-02-03)
 
 
