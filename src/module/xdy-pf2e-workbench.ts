@@ -12,7 +12,7 @@ import { preloadTemplates } from "./preloadTemplates.js";
 import { registerWorkbenchKeybindings } from "./keybinds.js";
 import { ActorPF2e } from "@actor";
 
-import { debounce, isFirstGM, logInfo } from "./utils.js";
+import { isFirstGM, logInfo } from "./utils.js";
 import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller.js";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.js";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.js";
@@ -130,11 +130,7 @@ export function updateHooks(cleanSlate = false) {
         renderChatMessageHook,
     );
 
-    handle(
-        "createItem",
-        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"),
-        debounce(createItemHook, 10),
-    );
+    handle("createItem", game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"), createItemHook);
 
     handle("updateItem", false, updateItemHook);
 

@@ -216,9 +216,9 @@ function dropHeldItemsOnBecomingUnconscious(actor) {
         for (const item of items) {
             if (item.traits.has("free-hand") || item.type === "shield" || item.traits.has("attached-to-shield")) {
                 // Presumed to strapped to an arm/worn on a hand, so just unreadied instead of dropped
-                actor.adjustCarryType(item, { carryType: "worn", handsHeld: 0, inSlot: false });
+                actor.changeCarryType(item, { carryType: "worn", handsHeld: 0, inSlot: false });
             } else {
-                actor.adjustCarryType(item, { carryType: "dropped", handsHeld: 0, inSlot: false });
+                actor.changeCarryType(item, { carryType: "dropped", handsHeld: 0, inSlot: false });
             }
         }
         const message = game.i18n.format(`${MODULENAME}.SETTINGS.dropHeldItemsOnBecomingUnconscious.message`, {
