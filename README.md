@@ -9,6 +9,7 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/xdy/xdy-pf2e-workbench/total) ![the latest version zip](https://img.shields.io/github/downloads/xdy/xdy-pf2e-workbench/latest/xdy-pf2e-workbench.zip) ![Forge installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fxdy-pf2e-workbench)
 
 <a href="https://weblate.foundryvtt-hub.com/engage/xdy-pf2e-workbench/"><img src="https://weblate.foundryvtt-hub.com/widgets/xdy-pf2e-workbench/-/multi-auto.svg" alt="Translation status" /></a>
+<a href="https://gitlocalize.com/repo/7104?utm_source=badge"> <img src="https://gitlocalize.com/repo/7104/whole_project/badge.svg" /> </a>
 
 This module is intended to hold a few features for the foundry vtt pf2e system that could well have been separate
 modules and may well be eaten by the system at some point.
