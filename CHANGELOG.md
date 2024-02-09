@@ -1,3 +1,10 @@
+# [5.54.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.53.0...v5.54.0) (2024-02-09)
+
+
+### Features
+
+* Adds option for private casting that if a party member knowing a spell causes it to be cast openly, list those party members in the chat card. ([8113639](https://github.com/xdy/xdy-pf2e-workbench/commit/8113639d49d89147a305a159dd8a3f5744e9056c)), closes [#1231](https://github.com/xdy/xdy-pf2e-workbench/issues/1231)
+
 # [5.53.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.52.5...v5.53.0) (2024-02-09)
 
 
