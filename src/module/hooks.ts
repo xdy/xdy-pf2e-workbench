@@ -3,13 +3,7 @@ import { ActorPF2e, CreaturePF2e } from "@actor";
 import { TokenDocumentPF2e } from "@scene";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
 import { UserPF2e } from "@module/user/index.js";
-import {
-    actionsReminder,
-    autoReduceStunned,
-    reminderBreathWeapon,
-    reminderCannotAttack,
-    reminderTargeting,
-} from "./feature/reminders/index.js";
+import { actionsReminder, autoReduceStunned, reminderTargeting } from "./feature/reminders/index.js";
 import {
     castPrivateSpell,
     castPrivateSpellHideName,
@@ -36,15 +30,16 @@ import { ActorSheetPF2e } from "@actor/sheet/base.js";
 import {
     dyingHandlingPreCreateChatMessageHook,
     dyingHandlingPreUpdateActorHook,
-    itemHandlingItemHook,
     handleDyingRecoveryRoll,
+    itemHandlingItemHook,
 } from "./feature/damageHandler/dyingHandling.ts";
+import { checkAttackValidity } from "./feature/reminders/checkAttackValidity.js";
+import { reminderBreathWeapon } from "./feature/reminders/reminderBreathWeapon.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;
     const reminderTargetingEnabled = game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget";
-    const reminderCannotAttackEnabled =
-        String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "cancelAttack";
+    const reminderCannotAttack = String(game.settings.get(MODULENAME, "reminderCannotAttack"));
     const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
     const ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some((key) =>
         game?.keyboard.downKeys.has(key),
@@ -66,8 +61,8 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
         proceed = reminderTargeting(message);
     }
 
-    if (proceed && reminderCannotAttackEnabled) {
-        proceed = reminderCannotAttack(message, true);
+    if (proceed && reminderCannotAttack === "cancelAttack") {
+        proceed = checkAttackValidity(message, true);
     }
 
     return proceed;
@@ -84,8 +79,9 @@ function castPrivately(inParty: boolean, message: ChatMessagePF2e) {
 }
 
 export function createChatMessageHook(message: ChatMessagePF2e) {
-    if (String(game.settings.get(MODULENAME, "reminderCannotAttack")) === "reminder") {
-        reminderCannotAttack(message, false);
+    const reminderCancelAttack = String(game.settings.get(MODULENAME, "reminderCannotAttack"));
+    if (reminderCancelAttack === "reminder") {
+        checkAttackValidity(message, false);
     }
 
     if (["no", "reminder"].includes(String(game.settings.get(MODULENAME, "reminderTargeting")))) {
