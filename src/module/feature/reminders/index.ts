@@ -15,7 +15,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
 
         const actor = token?.actor;
         if (actor) {
-            const formulaMatch = content.match("1d(4|6) #(rounds|Rounds|recharge|Recharge)");
+            const formulaMatch = content.match("1d(4|6) (rounds|Rounds|recharge|Recharge)");
             const dieSize = formulaMatch ? `1d${formulaMatch[1]}` : "";
 
             if (dieSize) {
