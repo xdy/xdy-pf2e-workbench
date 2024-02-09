@@ -5,8 +5,6 @@ import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
 import { UserPF2e } from "@module/user/index.js";
 import { actionsReminder, autoReduceStunned, reminderTargeting } from "./feature/reminders/index.js";
 import {
-    castPrivateSpell,
-    castPrivateSpellHideName,
     chatActionCardDescriptionCollapse,
     chatAttackCardDescriptionCollapse,
     chatCardDescriptionCollapse,
@@ -35,6 +33,7 @@ import {
 } from "./feature/damageHandler/dyingHandling.ts";
 import { checkAttackValidity } from "./feature/reminders/checkAttackValidity.js";
 import { reminderBreathWeapon } from "./feature/reminders/reminderBreathWeapon.js";
+import { castPrivateSpellHideName, handlePrivateSpellcasting } from "./feature/qolHandler/handlePrivateSpellcasting.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;
@@ -54,7 +53,7 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
         message.flags.pf2e?.casting?.id &&
         ((ctrlHeld && !privateCast) || (!ctrlHeld && privateCast))
     ) {
-        castPrivateSpell(data, message).then();
+        handlePrivateSpellcasting(data, message).then();
     }
 
     if (reminderTargetingEnabled) {
