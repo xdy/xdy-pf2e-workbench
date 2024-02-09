@@ -46,6 +46,16 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            castPrivateSpellAutoRevealPartyMembersThatKnowSpell: {
+                name: `${MODULENAME}.SETTINGS.castPrivateSpellAutoRevealPartyMembersThatKnowSpell.name`,
+                hint: `${MODULENAME}.SETTINGS.castPrivateSpellAutoRevealPartyMembersThatKnowSpell.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             castPrivateSpellHideName: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpellHideName.name`,
                 hint: `${MODULENAME}.SETTINGS.castPrivateSpellHideName.hint`,

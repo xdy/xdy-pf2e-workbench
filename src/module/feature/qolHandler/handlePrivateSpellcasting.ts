@@ -5,9 +5,12 @@ export async function handlePrivateSpellcasting(data: any, message: ChatMessageP
     const spellUUID = <string>message.flags?.pf2e.origin?.uuid;
     const origin: any = fromUuidSync(spellUUID);
 
-    const actorsWithSpell = getActorsWithSpell(origin);
+    const partyMembersWithSpell = findPartyMembersWithSpell(origin);
 
-    if (isAutoRevealActive() && doesActorHaveSpell(actorsWithSpell)) {
+    if (isAutoRevealActive() && partyMembersWithSpell && partyMembersWithSpell.length > 0) {
+        if (game.settings.get(MODULENAME, "castPrivateSpellAutoRevealPartyMembersThatKnowSpell")) {
+            showPartymembersWithSpell(message, partyMembersWithSpell, data);
+        }
         return;
     }
 
@@ -28,6 +31,24 @@ export async function handlePrivateSpellcasting(data: any, message: ChatMessageP
             content,
             flags,
         }).then();
+    }
+}
+
+function showPartymembersWithSpell(message, membersWithSpell, data: any) {
+    const oldContent = message.content;
+    const $editedContent = $(`<div>${oldContent}</div>`);
+
+    $editedContent.find("hr.item-block-divider:first").after(
+        game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.knownBy`, {
+            spellHavers: membersWithSpell?.join(",") ?? "",
+        }),
+    );
+
+    const newContent = $editedContent.html();
+
+    if (newContent !== oldContent) {
+        data.content = newContent;
+        message.updateSource({ content: newContent });
     }
 }
 
@@ -82,10 +103,10 @@ function getDcRkForRarity(rarity: string): number {
 
 const TRADITION_SKILLS = { arcane: "arcana", divine: "religion", occult: "occultism", primal: "nature" };
 
-function getActorsWithSpell(origin: any): string[] | undefined {
+function findPartyMembersWithSpell(origin: any) {
     return game.actors?.party?.members
         ?.filter((actor) => actor.items.some((item) => item.isOfType("spell") && item.slug === origin.slug))
-        .map((actor) => actor.id);
+        .map((actor) => actor.name);
 }
 
 function updateDataAndSource(data: any, message: ChatMessagePF2e): void {
@@ -96,10 +117,6 @@ function updateDataAndSource(data: any, message: ChatMessagePF2e): void {
     }
 
     message.updateSource(data);
-}
-
-function doesActorHaveSpell(actorsWithSpell): boolean {
-    return actorsWithSpell && actorsWithSpell.length > 0;
 }
 
 function isAutoRevealActive(): boolean {

@@ -355,6 +355,10 @@
         "hint": "Check to not cast privately if any party member knows the spell.",
         "name": "... but don't cast privately if spell known by party."
       },
+      "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
+        "hint": "Check to show party members that know the spell in the chat card",
+        "name": "... and list the party members that know it"
+      },
       "castPrivateSpellHideName": {
         "hint": "Check to hide the name of a privately cast spell in the damage roll instead of hiding the damage roll.",
         "name": "... and hide the name of a privately cast spell in damage roll."
@@ -376,7 +380,8 @@
         "secondPartNoRk": ".<br>You can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] to recognize it. Or, on your turn, spend an action to try to identify it (ask your gm for details).",
         "secondPartRK": ".<br>You can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] to recognize it. Or, on your turn, spend an action to try to identify it with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (or 10 minutes with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
         "spell": "Spell",
-        "they": "They"
+        "they": "They",
+        "knownBy": "<div><p><b>Known by: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "Show spell traits in the public message.",
