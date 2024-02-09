@@ -1,3 +1,10 @@
+# [5.53.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.52.5...v5.53.0) (2024-02-09)
+
+
+### Features
+
+* When casting a spell privately with the option to hide the spell name in the damage roll, show the true spell name to the GM. Cleaned up private spell casting. ([b483762](https://github.com/xdy/xdy-pf2e-workbench/commit/b483762618af6045ff58610f07e460fe59f35745))
+
 ## [5.52.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.52.4...v5.52.5) (2024-02-09)
 
 
