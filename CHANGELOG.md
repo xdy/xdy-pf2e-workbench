@@ -1,3 +1,10 @@
+## [5.54.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.54.0...v5.54.1) (2024-02-10)
+
+
+### Bug Fixes
+
+* buildNpcSpellbookJournal now only tries to handle spellcastingentries that contain the spells property (i.e. it avoids item spellcasting entries). ([a08f2fe](https://github.com/xdy/xdy-pf2e-workbench/commit/a08f2fed1138930120e594ff73a8d67ef2610da8))
+
 # [5.54.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.53.0...v5.54.0) (2024-02-09)
 
 
