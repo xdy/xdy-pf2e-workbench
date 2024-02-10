@@ -19,7 +19,8 @@ export async function buildNpcSpellbookJournal() {
         }
     }
 
-    const length = actor.spellcasting.contents.length;
+    const spellcastingEntries = actor?.spellcasting?.contents?.filter((item) => item.spells);
+    const length = spellcastingEntries?.length;
 
     if (!actor || length === 0) {
         ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.buildNpcSpellbookJournal.noSpellcastingEntry`));
@@ -28,9 +29,9 @@ export async function buildNpcSpellbookJournal() {
 
     const spellList: any[] = [];
     for (let i = 0; i < length; i++) {
-        spellList[i] = { entry: actor.spellcasting.contents[i].name, spells: [] };
-        for (let ii = 0; ii < actor.spellcasting.contents[i].spells.contents.length; ii++) {
-            spellList[i].spells.push("@UUID[" + actor.spellcasting.contents[i].spells.contents[ii].sourceId + "]");
+        spellList[i] = { entry: spellcastingEntries[i].name, spells: [] };
+        for (let ii = 0; ii < spellcastingEntries[i]?.spells?.contents?.length; ii++) {
+            spellList[i].spells.push("@UUID[" + spellcastingEntries[i].spells.contents[ii].sourceId + "]");
         }
     }
 
