@@ -1,3 +1,10 @@
+## [5.54.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.54.3...v5.54.4) (2024-02-11)
+
+
+### Bug Fixes
+
+* Improve description of autorevealing privately cast spells. Fix handling of damagerolls with no context options. ([a75c0dc](https://github.com/xdy/xdy-pf2e-workbench/commit/a75c0dc6d16ee830b3177122ffb346ba70b35eaf))
+
 ## [5.54.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.54.2...v5.54.3) (2024-02-11)
 
 
