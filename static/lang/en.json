@@ -352,12 +352,12 @@
         "aSpell": "A spell"
       },
       "castPrivateSpellAutoRevealIfKnown": {
-        "hint": "Check to not cast privately if any party member knows the spell.",
-        "name": "... but don't cast privately if spell known by party."
+        "hint": "Check to autoreveal privately cast spell if any party member knows the spell.",
+        "name": "... but autoreveal spell if it is known by party."
       },
       "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
-        "hint": "Check to show party members that know the spell in the chat card",
-        "name": "... and list the party members that know it"
+        "hint": "Check to, for autorevealed spells, show party members that know the spell in the chat card",
+        "name": "... and list the party members that know the autorevealed spell"
       },
       "castPrivateSpellHideName": {
         "hint": "Check to hide the name of a privately cast spell in the damage roll instead of hiding the damage roll.",

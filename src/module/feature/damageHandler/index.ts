@@ -60,7 +60,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const isFailure = ["criticalFailure", "failure"].includes(degreeOfSuccess);
             const isSuccess = ["criticalSuccess", "success"].includes(degreeOfSuccess);
             const context: any = flags.context;
-            const isBasicSave = context.options.includes("item:defense:basic");
+            const isBasicSave = context?.options?.includes("item:defense:basic");
             if (
                 actor &&
                 (rollForNonAttackNonSaveSpell ||
