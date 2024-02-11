@@ -1,3 +1,10 @@
+## [5.54.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.54.2...v5.54.3) (2024-02-11)
+
+
+### Bug Fixes
+
+* Autorolling damage for save spells now rolls damage on a successful save if it's a basic save. Cleaned up the autorolling damage code. ([db10f26](https://github.com/xdy/xdy-pf2e-workbench/commit/db10f26dd231d22a4fe524b640093585296b17b8))
+
 ## [5.54.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.54.1...v5.54.2) (2024-02-10)
 
 
