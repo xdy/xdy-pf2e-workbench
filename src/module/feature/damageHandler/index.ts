@@ -33,7 +33,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
             const rollType = flags.context?.type;
 
-            const origin: any = originUuid ? fromUuidSync(originUuid) : null;
+            const origin: any = originUuid ? await fromUuid(originUuid) : null;
             const isAttackSpell = origin?.traits?.has("attack") ?? false;
             const isSaveSpell = origin?.system?.defense?.save ?? false;
             const hasFixedTime = Number.isInteger(parseInt(origin?.system?.time?.value)) ?? false;
