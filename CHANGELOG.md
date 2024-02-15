@@ -1,3 +1,10 @@
+# [5.55.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.54.4...v5.55.0) (2024-02-15)
+
+
+### Features
+
+* Add an option to show the public message to the gm also when casting a spell privately. ([2d57c62](https://github.com/xdy/xdy-pf2e-workbench/commit/2d57c624a2eecbb8bd27a517815be660ebfa0d9b)), closes [#1232](https://github.com/xdy/xdy-pf2e-workbench/issues/1232)
+
 ## [5.54.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.54.3...v5.54.4) (2024-02-11)
 
 
