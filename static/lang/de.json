@@ -90,7 +90,11 @@
         "downtime": "Auszeit",
         "exploration": "Erkundungsmodus",
         "explorationShort": "E",
-        "downtimeShort": "A"
+        "downtimeShort": "A",
+        "bamTabview": {
+          "name": "BAM: Nutze Layout mit Tabs",
+          "hint": "Benutze Layout mit Tabs für den Basic Action Makro Dialog."
+        }
       },
       "buildNpcSpellbookJournal": {
         "noSpellcastingEntry": "Du musst entweder ein NSC-Charakterblatt geöffnet und ausgewählt haben oder ein einzelnes NSC-Token ausgewählt haben. Außerdem muss der NSC einen Eintrag für Zauberei haben.",
@@ -303,7 +307,8 @@
         "cantrip": "Zaubertrick",
         "hint": "Falls Zauber wirken auf privat steht, wird einen Nachricht gepostet, welche besagt das ein Zauber gewirkt wird, AUßER wenn zusätzlich SHIFT und STRG beim Zaubern gehalten wird.",
         "secondPartNoRk": ".<br>Frage deinen SL ob du den Zauber automatisch erkennst, ansonsten kannst du versuchen einen hier von @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] oder davon @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] zu nutzen. Oder, während deines Zuges, kannst du eine Aktion verwenden um zu versuchen den Zauber zu identifizieren (sprich mit den SL bezüglich der Details).",
-        "spell": "Zauber"
+        "spell": "Zauber",
+        "knownBy": "<div><p><b>Bekannt von: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
       },
       "npcMystifierBlacklist": {
         "hint": "Füge Wörter hinzu, um den Inhalt dieser kommagetrennten Blockierliste aus dem verschleierten Namen herauszufiltern.",
@@ -670,6 +675,14 @@
         "nonAllies": "Nicht-Verbündete",
         "nonPartymembers": "Nicht - Gruppenmitglieder",
         "npcs": "NSCs"
+      },
+      "castPrivateSpellAutoRevealIfKnown": {
+        "hint": "Auswählen um privat gewirkten Zauber automatisch aufzuzeigen wenn ein Party-Mitglied den Zauber kennt.",
+        "name": "... auf decke automatisch den Zauber auf wenn er von der Party gekannt wird."
+      },
+      "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
+        "hint": "Auswählen um, bei autoaufdecken von Zaubern, das Party Mitglied in der Chat-Karte zeigen, welches den Zauber beherrscht",
+        "name": "... und liste das Party Mitglied auf welche den automatisch aufgedeckten Zauber beherrscht"
       }
     },
     "npcRoller": {
