@@ -19,18 +19,31 @@ export async function handlePrivateSpellcasting(data: any, message: ChatMessageP
     if (isPublicMessageActive() && !isShiftModifierActive()) {
         const { content, flags, token } = await generateMessageData(message, origin, spellUUID, data);
 
-        const whisper = game.users
-            .filter((u) => u.active)
-            .filter((u) => u.id !== ChatMessage.getWhisperRecipients("GM").map((u) => u.id)[0])
-            .map((u) => u.id);
-        const user = whisper.length > 0 ? whisper[0] : game.userId;
-        ChatMessage.create({
-            whisper,
-            user,
-            speaker: ChatMessage.getSpeaker({ token: token }),
-            content,
-            flags,
-        }).then();
+        const showToGM = game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageShowToGM");
+
+        const whisper = showToGM
+            ? []
+            : game.users
+                  .filter((u) => u.active)
+                  .filter((u) => u.id !== ChatMessage.getWhisperRecipients("GM").map((u) => u.id)[0])
+                  .map((u) => u.id);
+        const user = game.userId;
+        if (whisper.length > 0) {
+            await ChatMessage.create({
+                whisper,
+                user,
+                speaker: ChatMessage.getSpeaker({ token: token }),
+                content,
+                flags,
+            });
+        } else {
+            await ChatMessage.create({
+                user,
+                speaker: ChatMessage.getSpeaker({ token: token }),
+                content,
+                flags,
+            });
+        }
     }
 }
 

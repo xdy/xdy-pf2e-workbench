@@ -383,6 +383,10 @@
         "they": "They",
         "knownBy": "<div><p><b>Known by: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
       },
+      "castPrivateSpellWithPublicMessageShowToGM" : {
+        "hint": "Show public message to gm also.",
+        "name": "... and show the public message to the gm also."
+      },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "Show spell traits in the public message.",
         "name": "... and show spell traits in the public message.",

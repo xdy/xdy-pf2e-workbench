@@ -94,6 +94,16 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            castPrivateSpellWithPublicMessageShowToGM: {
+                name: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowToGM.name`,
+                hint: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowToGM.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             castPrivateSpellWithPublicMessageShowTraits: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.name`,
                 hint: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.hint`,
