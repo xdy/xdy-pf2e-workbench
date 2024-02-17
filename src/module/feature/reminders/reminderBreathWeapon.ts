@@ -29,7 +29,7 @@ function getSpeakerToken(message: ChatMessagePF2e): TokenDocumentPF2e {
 
 function retrieveDiceFormulaMatch(messageContent: string): RegExpMatchArray | null {
     // The last one is to support the current format in some third party products.
-    return messageContent.match(/1d([46])( rounds| recharge|<\/a> rounds|)/i);
+    return messageContent.match(/1d([46])( rounds| recharge|<\/a> rounds)/i);
 }
 
 function getEffectDetails(activeActor, messageContent: string, diceValue: string) {
