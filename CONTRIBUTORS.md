@@ -40,6 +40,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [Tikael](https://github.com/TikaelSol) - Contributed the Zombie adjustment to the 'xdy-pf2e-workbench-items' compendium.
 * [Kali (OmegaRogue)](https://github.com/OmegaRogue) - Improved BAM.
 * [Trent](https://github.com/xyzzy42) - Improved BAM.
+* [Kromko](https://github.com/Cuingamehtar) - Bugfix.
 
 I've probably forgotten someone, if so, please tell me!
 
