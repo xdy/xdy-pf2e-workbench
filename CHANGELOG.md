@@ -1,3 +1,10 @@
+# [5.56.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.55.0...v5.56.0) (2024-02-17)
+
+
+### Features
+
+* If the option to automatically reduce stun is enabled it is now handled for minions as long as the owning player is online (the same as for automatically reducing frightened.) ([bb4f086](https://github.com/xdy/xdy-pf2e-workbench/commit/bb4f086b84807a78c2fdaa664a0f97f781e240a7))
+
 # [5.55.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.54.4...v5.55.0) (2024-02-15)
 
 
