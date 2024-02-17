@@ -9,7 +9,7 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
         return;
     }
 
-    const actors: ActorPF2e[] = [combatant.actor, ...getMinionAndEidolons(combatant.actor)];
+    const actors: ActorPF2e[] = [combatant.actor, ...minionsInCurrentScene(combatant.actor)];
 
     for (const actor of actors) {
         const minimumFrightened = <number>(actor?.getFlag(MODULENAME, "condition.frightened.min") ?? 0);
@@ -25,18 +25,11 @@ export async function reduceFrightened(combatant: CombatantPF2e, userId: string)
         }
     }
 }
-function getMinionAndEidolons(actor: ActorPF2e): ActorPF2e[] {
-    const actors: ActorPF2e[] = [];
-    if (actor.isOfType("character")) {
-        // @ts-ignore
-        const minionsAndEidolons = <ActorPF2e[]>game.scenes.current?.tokens
-            ?.filter(() => !game.user.isGM)
-            ?.filter((token) => token.canUserModify(<BaseUser>(<unknown>game.user), "update"))
-            ?.map((token) => token.actor)
-            ?.filter((x) => x?.traits.has("eidolon") || x?.traits.has("minion"));
-        if (minionsAndEidolons && minionsAndEidolons.length > 0) {
-            actors.push(...(<ActorPF2e[]>minionsAndEidolons));
-        }
-    }
-    return actors;
+
+function minionsInCurrentScene(actor: ActorPF2e): ActorPF2e[] {
+    return actor.isOfType("character") ? <ActorPF2e[]>game.scenes.current?.tokens
+              ?.filter(() => !game.user.isGM)
+              ?.filter((token) => token.canUserModify(<BaseUser>(<unknown>game.user), "update"))
+              ?.map((token) => token.actor)
+              ?.filter((x) => x?.traits.has("minion")) : [];
 }
