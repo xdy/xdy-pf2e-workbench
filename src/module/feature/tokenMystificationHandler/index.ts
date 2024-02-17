@@ -216,51 +216,65 @@ export async function doMystification(token: TokenPF2e, active: boolean) {
     });
 }
 
-export function renderNameHud(data: TokenDocumentPF2e, html: JQuery) {
+export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement) {
     let token: TokenPF2e | null;
     if (canvas && canvas.tokens) {
         token = canvas.tokens.get(<string>data._id) ?? null;
 
         const title = isTokenMystified(token) ? "Unmystify" : "Mystify";
-        const toggle = $(
-            `<div class="control-icon toggle ${
-                isTokenMystified(token) ? "active" : ""
-            }" data-action="mystify"> <i class="fas fa-eye-slash" title="${title}"></i></div>`,
-        );
+        const toggle = document.createElement("div");
+        toggle.className = `control-icon toggle ${isTokenMystified(token) ? "active" : ""}`;
+        toggle.setAttribute("data-action", "mystify");
+
+        const icon = document.createElement("i");
+        icon.className = "fas fa-eye-slash";
+        icon.title = title;
+
+        toggle.appendChild(icon);
+
         if (canMystify() && !token?.actor?.hasPlayerOwner) {
-            toggle.on("click", async (e) => {
-                const hudElement = $(e.currentTarget);
-                const active = hudElement.hasClass("active");
+            toggle.addEventListener("click", async (e) => {
+                const hudElement = e.currentTarget as HTMLElement;
+                const active = hudElement.classList.contains("active");
                 if (token !== null && isTokenMystified(token) === active) {
                     await doMystification(token, active);
                 }
-                hudElement.toggleClass("active");
+                hudElement.classList.toggle("active");
             });
-            html.find("div.col.left").append(toggle);
+
+            const column = html.querySelector("div.col.left");
+            if (column) {
+                column.appendChild(toggle);
+            }
         }
     }
 }
 
-export function mangleNamesInChatMessage(message: ChatMessagePF2e, html: JQuery) {
+export function mangleNamesInChatMessage(message: ChatMessagePF2e, html: HTMLElement) {
     const actorId = <string>message?.speaker?.actor;
     const tokenId = message?.speaker?.token;
     const actor = game.actors?.get(actorId);
     const tokens = game.scenes?.active?.tokens ?? game.scenes?.current?.tokens ?? canvas?.scene?.tokens;
     const token = tokens?.get(<string>tokenId);
-    const actionCard = html?.find(".action-card");
-    const speaker = html?.find(".message-sender");
+    const actionCard: Element | null = html.querySelector(".action-card");
+    const speakers: NodeListOf<Element> = html?.querySelectorAll(".message-sender");
 
     const tokenName = token?.name || message.speaker.alias;
     const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
 
     if (tokenNameNoNumber && actor?.prototypeToken.name?.trim() !== tokenNameNoNumber) {
-        if (actionCard.html()) {
-            actionCard.html(actionCard.html().replace(new RegExp(<string>actor?.prototypeToken.name, "gi"), tokenName));
+        if (actionCard && actionCard.innerHTML) {
+            actionCard.innerHTML = actionCard.innerHTML.replace(
+                new RegExp(<string>actor?.prototypeToken.name, "gi"),
+                tokenName,
+            );
         }
-        if (speaker.html()) {
-            speaker.html(speaker.html().replace(message.speaker.alias, tokenName));
-            message.speaker.alias = tokenName;
-        }
+        speakers.forEach((speaker) => {
+            if (speaker.innerHTML) {
+                speaker.innerHTML = speaker.innerHTML.replace(message.speaker.alias, tokenName);
+            }
+        });
+        message.speaker.alias = tokenName;
     }
 }
 

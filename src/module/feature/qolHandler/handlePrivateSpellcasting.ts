@@ -207,24 +207,23 @@ function buildSpellMessage(
     return content;
 }
 
-export function castPrivateSpellHideName(message: ChatMessagePF2e, html: JQuery) {
+export async function castPrivateSpellHideName(message: ChatMessagePF2e, html: HTMLElement) {
     const msg = game.messages.contents
         .reverse()
-        .filter((m) => m.type === CONST.CHAT_MESSAGE_TYPES.WHISPER)
+        .filter((m) => m.type === 4) // Whisper, rollup can't resolve constant
         .filter((m) => m.flags?.pf2e?.casting)
         .filter((m) => m.flags?.pf2e?.origin?.uuid === message.flags?.pf2e?.origin?.uuid)
         .pop();
 
     if (msg) {
-        const flavor = html?.find(".flavor-text");
-        if (flavor.html()) {
-            fromUuid(<string>message.flags?.pf2e.origin?.uuid).then((origin) => {
-                const searchValue = origin?.name ?? "???";
-                const replaceValue =
-                    game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.aSpell`) +
-                    `<p data-visibility="gm">(${searchValue})</p>`;
-                flavor.html(flavor.html().replace(searchValue, replaceValue));
-            });
+        const flavor = html.querySelector(".flavor-text");
+        if (flavor && flavor.innerHTML) {
+            const origin = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
+            const searchValue = origin?.name ?? "???";
+            const replaceValue =
+                game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.aSpell`) +
+                `<p data-visibility="gm">(${searchValue})</p>`;
+            flavor.innerHTML = flavor.innerHTML.replace(searchValue, replaceValue);
         }
     }
 }

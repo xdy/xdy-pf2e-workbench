@@ -34,6 +34,7 @@ import {
 import { checkAttackValidity } from "./feature/reminders/checkAttackValidity.js";
 import { reminderBreathWeapon } from "./feature/reminders/reminderBreathWeapon.js";
 import { castPrivateSpellHideName, handlePrivateSpellcasting } from "./feature/qolHandler/handlePrivateSpellcasting.js";
+import { FeatPF2e } from "@item/feat/document.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;
@@ -110,7 +111,8 @@ function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) 
     }
 }
 
-export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
+export function renderChatMessageHook(message: ChatMessagePF2e, q: JQuery) {
+    const html = <HTMLElement>q.get(0);
     // Only acts on latest message, but can't be in createChatMessageHook as that doesn't get triggered for some reason.
     if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
         persistentHealing(message);
@@ -125,7 +127,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
     // Affects all messages
     const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
     if (!isNaN(minimumUserRoleFlag) && minimumUserRoleFlag > game.user.role) {
-        html.addClass("xdy-pf2e-workbench-hide");
+        html.classList.add("xdy-pf2e-workbench-hide");
     }
 
     if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
@@ -188,7 +190,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, html: JQuery) {
             newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
             newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.keeleysHeroPointRule.bonusTag`);
             newTag.dataset.slug = "keeley-add-10";
-            if (tags.querySelector<HTMLElement>(".tag")?.dataset.visibility === "gm") {
+            if (tags.querySelector(".tag")?.dataset.visibility === "gm") {
                 newTag.dataset.visibility = "gm";
             }
             tags.append(newTag);
@@ -265,8 +267,9 @@ export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: Encou
     // TODO Handle removal of game.combats.active.combatant.defeated/unsetting of deathIcon (are those the same?) for combatants that are neither dying nor have 0 HP.
 }
 
-export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: JQuery, data: any) {
-    if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
+export function renderTokenHUDHook(_app: TokenDocumentPF2e, q: JQuery, data: any) {
+    const html = q.get(0);
+    if (html && game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);
     }
 }
@@ -349,58 +352,56 @@ export async function pf2eSystemReadyHook() {
     }
 }
 
-export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, $html: JQuery) {
+export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery) {
+    const html = <HTMLElement>q.get(0);
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerSpellsRarityColour")) {
-        $html.find(".spell-list").each((_i, e) => {
-            $(e)
-                .find(".item.spell")
-                .each((_n, e) => {
-                    const $e = $(e);
-                    const itemId: string = <string>$e.attr("data-item-id");
-                    const spell: any = sheet.actor?.items?.get(itemId);
-                    if (spell) {
-                        const rarity = spell.system.traits.rarity;
-                        if (rarity) {
-                            $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
-                        }
+        const spellLists = html.querySelectorAll(".spell-list");
+        spellLists.forEach((list) => {
+            list.querySelectorAll(".item.spell").forEach((item) => {
+                const itemId = item.getAttribute("data-item-id");
+                const spell = itemId ? sheet.actor?.items?.get(itemId) : null;
+                if (spell) {
+                    const rarity = spell.system.traits.rarity;
+                    if (rarity) {
+                        const h4Elements = item.querySelectorAll("h4");
+                        h4Elements.forEach((h4) => h4.classList.add(`xdy-pf2e-workbench-rarity-${rarity}`));
                     }
-                });
+                }
+            });
         });
     }
 
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerFeatsRarityColour")) {
-        $html.find(".feats-pane").each((_i, e) => {
-            $(e)
-                .find(".feat-item")
-                .each((_n, e) => {
-                    const $e = $(e);
-                    const itemId: string = <string>$e.attr("data-item-id");
-                    const feat: any = sheet.actor?.items?.get(itemId);
-                    if (feat) {
-                        const rarity = feat.system.traits.rarity;
-                        if (rarity) {
-                            $e.find("h4").addClass(`xdy-pf2e-workbench-rarity-${rarity}`);
-                        }
+        const featLists = html.querySelectorAll(".spell-list");
+        featLists.forEach((list) => {
+            list.querySelectorAll(".item.spell").forEach((item) => {
+                const itemId = item.getAttribute("data-item-id");
+                const feat = itemId ? sheet.actor?.items?.get(itemId) : null;
+                if (feat) {
+                    const rarity = feat.system.traits.rarity;
+                    if (rarity) {
+                        const h4Elements = item.querySelectorAll("h4");
+                        h4Elements.forEach((h4) => h4.classList.add(`xdy-pf2e-workbench-rarity-${rarity}`));
                     }
-                });
+                }
+            });
         });
     }
 
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint")) {
-        $html.find(".feats-pane").each((_i, e) => {
-            $(e)
-                .find(".feat-item")
-                .each((_n, e) => {
-                    const $e = $(e);
-                    const itemId: string = <string>$e.attr("data-item-id");
-                    const feat: any = sheet.actor?.items?.get(itemId);
-                    if (feat) {
-                        const prereqs = feat.system.prerequisites.value.length > 0;
-                        if (prereqs) {
-                            $e.find("h4").append("*");
-                        }
+        const featLists = html.querySelectorAll(".feats-pane");
+        featLists.forEach((list) => {
+            list.querySelectorAll(".item.spell").forEach((item) => {
+                const itemId = <string>item.getAttribute("data-item-id");
+                const feat: FeatPF2e | undefined | null = itemId ? <FeatPF2e>sheet.actor?.items?.get(itemId) : null;
+                if (feat) {
+                    const prereqs = feat.system.prerequisites.value.length > 0;
+                    if (prereqs) {
+                        const h4Elements = item.querySelectorAll("h4");
+                        h4Elements.forEach((h4Element) => (h4Element.innerHTML += "*"));
                     }
-                });
+                }
+            });
         });
     }
 }
