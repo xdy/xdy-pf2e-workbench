@@ -1,3 +1,10 @@
+## [5.56.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.0...v5.56.1) (2024-02-17)
+
+
+### Bug Fixes
+
+* For the Breath Weapon Reminder, support the format of some 3pp products and use the ability title in the icon again. ([1507d6a](https://github.com/xdy/xdy-pf2e-workbench/commit/1507d6a9268c414147d145d342057ec207220379))
+
 # [5.56.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.55.0...v5.56.0) (2024-02-17)
 
 
