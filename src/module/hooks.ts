@@ -286,10 +286,11 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
             game.settings.get("pf2e", "automation.lootableNPCs") &&
             String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems")) === "onZeroHp"
         ) {
-            await mystifyNpcItems(actor.items);
+            await mystifyNpcItems(actor);
         }
 
-        dyingHandlingPreUpdateActorHook(actor, update, currentActorHp, updateHp);
+        const autoGainDying = game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP");
+        dyingHandlingPreUpdateActorHook(actor, update, currentActorHp, updateHp, autoGainDying);
     }
 }
 

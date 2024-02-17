@@ -108,7 +108,7 @@ export function damageCardExpand(message: ChatMessagePF2e, html: JQuery) {
  * @param {number} multiplier - The multiplier to apply to the minimum level. Default is obtained from a game setting.
  */
 export async function mystifyNpcItems(
-    items,
+    actor,
     minimumRarity: string = String(
         game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater"),
     ),
@@ -128,33 +128,36 @@ export async function mystifyNpcItems(
         game.settings.set(
             MODULENAME,
             "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater",
-            game?.actors?.party?.level ??
-                game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater"),
+            game?.actors?.party?.level ?? minimumLevel,
         );
     }
     if (multiplier !== 1 && minimumLevel !== -1) {
         minimumLevel = minimumLevel * multiplier;
     }
+    const itemUpdates: any[] = [];
     const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
     const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
-        items
+        actor.items
             .filter((item) =>
-                ["armor", "backpack", "book", "consumable", "equipment", "treasure", "weapon"].includes(item.type),
+                // Rollup couldn't resolve PHYSICAL_ITEM_TYPES so I copied the values
+                ["armor", "shield", "consumable", "backpack", "book", "equipment", "treasure", "weapon"].includes(
+                    item.type,
+                ),
             )
             .map((item) => <PhysicalItemPF2e>(<unknown>item))
-            .filter((item) => !item.isTemporary)
             .filter((item) => item.isIdentified)
+            .filter((item) => !item.isTemporary)
             .filter((item) => item.level >= minimumLevel)
-            .filter((item) => {
-                return rarityKeys.indexOf(item.rarity) >= rarityKeys.indexOf(minimumRarity);
-            })
+            .filter((item) => rarityKeys.indexOf(item.rarity) >= rarityKeys.indexOf(minimumRarity))
             .filter((item) => item.isMagical || item.isAlchemical),
     );
 
     for (const item of relevantItems ?? []) {
-        await items.get(item.id)?.update({
+        itemUpdates.push({
+            _id: item.id,
             "system.identification.status": "unidentified",
             "system.identification.unidentified": item.getMystifiedData("unidentified"),
         });
     }
+    await actor.updateEmbeddedDocuments("Item", itemUpdates);
 }

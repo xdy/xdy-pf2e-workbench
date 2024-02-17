@@ -11,51 +11,62 @@ export function dyingHandlingPreUpdateActorHook(
     update: Record<string, string>,
     currentActorHp: number,
     updateHp: number,
+    autoGainDying: any,
 ) {
+    const automaticMove = String(game.settings.get(MODULENAME, "enableAutomaticMove"));
     const automoveIfZeroHP =
         game.combat &&
-        ((String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HPCharactersOnly" &&
-            actor.type === CHARACTER_TYPE) ||
-            (String(game.settings.get(MODULENAME, "enableAutomaticMove")) === "reaching0HP" &&
-                [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
-    if (!String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no")) {
-        handleDyingOnZeroHP(actor, fu.deepClone(update), currentActorHp, updateHp).then((hpRaisedAbove0) => {
-            logDebug("Workbench increaseDyingOnZeroHP complete");
-            if (hpRaisedAbove0) {
-                if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {
-                    // Ugh.
-                    new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
-                        autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0 && hpRaisedAbove0).then(() => {
-                            logDebug("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
-                            if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                                autoRemoveUnconsciousAtGreaterThanZeroHP(
-                                    actor,
-                                    currentActorHp <= 0 && hpRaisedAbove0,
-                                ).then();
-                            }
+        ((automaticMove === "reaching0HPCharactersOnly" && actor.type === CHARACTER_TYPE) ||
+            (automaticMove === "reaching0HP" && [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
+    const autoRemoveDying = game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
+    if (!autoGainDying.startsWith("no")) {
+        handleDyingOnZeroHP(actor, fu.deepClone(update), currentActorHp, updateHp, autoGainDying).then(
+            (hpRaisedAbove0) => {
+                logDebug("Workbench increaseDyingOnZeroHP complete");
+                if (hpRaisedAbove0) {
+                    if (!String(autoRemoveDying).startsWith("no")) {
+                        // Ugh.
+                        new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
+                            autoRemoveDyingAtGreaterThanZeroHp(
+                                actor,
+                                currentActorHp <= 0 && hpRaisedAbove0,
+                                autoRemoveDying,
+                            ).then(() => {
+                                logDebug("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
+                                if (autoGainDying) {
+                                    autoRemoveUnconsciousAtGreaterThanZeroHP(
+                                        actor,
+                                        currentActorHp <= 0 && hpRaisedAbove0,
+                                    ).then();
+                                }
+                            });
                         });
-                    });
+                    } else {
+                        if (autoGainDying) {
+                            autoRemoveUnconsciousAtGreaterThanZeroHP(
+                                actor,
+                                currentActorHp <= 0 && hpRaisedAbove0,
+                            ).then();
+                        }
+                    }
                 } else {
-                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
-                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0 && hpRaisedAbove0).then();
+                    if (automoveIfZeroHP && currentActorHp > 0 && updateHp <= 0) {
+                        moveOnZeroHP(actor);
                     }
                 }
-            } else {
-                if (automoveIfZeroHP && currentActorHp > 0 && updateHp <= 0) {
-                    moveOnZeroHP(actor);
-                }
-            }
-        });
+            },
+        );
     } else {
         if (currentActorHp <= 0 && updateHp > 0) {
-            if (!String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no")) {
-                autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0).then(() => {
-                    if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+            const autoRemoveUnconscious = autoGainDying;
+            if (!String(autoRemoveDying).startsWith("no")) {
+                autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0, autoRemoveDying).then(() => {
+                    if (autoRemoveUnconscious) {
                         autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
                     }
                 });
             } else {
-                if (game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP")) {
+                if (autoRemoveUnconscious) {
                     autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
                 }
             }
@@ -70,20 +81,19 @@ export async function itemHandlingItemHook(item: ItemPF2e) {
         handleDying(0, 0, item.parent, false);
     }
 
-    if (
-        game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved") ||
-        game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")
-    ) {
-        if (game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved")) {
+    const giveWounded = game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved");
+    const giveUnconscious = game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP");
+    if (giveWounded || giveUnconscious) {
+        if (giveWounded) {
             giveWoundedWhenDyingRemoved(item).then(() => {
                 logDebug("Workbench giveWoundedWhenDyingRemoved complete");
-                if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
+                if (giveUnconscious) {
                     giveUnconsciousIfDyingRemovedAt0HP(item).then(() => {
                         logDebug("Workbench giveUnconsciousIfDyingRemovedAt0HP complete");
                     });
                 }
             });
-        } else if (game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP")) {
+        } else if (giveUnconscious) {
             await giveUnconsciousIfDyingRemovedAt0HP(item);
         }
     }
@@ -203,13 +213,16 @@ export function handleDying(
     }
 }
 
-export async function autoRemoveDyingAtGreaterThanZeroHp(actor: ActorPF2e, hpAboveZero: boolean): Promise<boolean> {
+export async function autoRemoveDyingAtGreaterThanZeroHp(
+    actor: ActorPF2e,
+    hpAboveZero: boolean,
+    autoRemoveDying,
+): Promise<boolean> {
     const dying = actor.getCondition("dying");
     if (shouldIHandleThis(actor) && dying && !dying.isLocked && hpAboveZero) {
         const value = dying?.value || 0;
         if (dying && value > 0 && !dying.isLocked) {
-            const option = String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP"));
-            if (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
+            if (autoRemoveDying.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
                 handleDying(0, 0, actor);
             }
         }
@@ -378,6 +391,7 @@ export async function handleDyingOnZeroHP(
     update: Record<string, string>,
     hp: number,
     updateHp: number,
+    dyingOption: string,
 ): Promise<boolean> {
     if (!shouldIHandleThis(actor) || hp <= 0 || updateHp > 0) {
         return updateHp > 0;
@@ -388,7 +402,6 @@ export async function handleDyingOnZeroHP(
     let dyingCounter = 0;
     let hpNowAboveZero = false;
     const effectsToCreate: any[] = [];
-    const dyingOption = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));
     const nonlethalOption = String(game.settings.get(MODULENAME, "nonLethalIsNotLethal"));
 
     const __ret = handleOrcFerocity(actor, update, effectsToCreate, name, shouldIncreaseWounded, hpNowAboveZero);
@@ -532,7 +545,8 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
 }
 
 export function dyingHandlingPreCreateChatMessageHook(message: ChatMessagePF2e) {
-    if (!String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no")) {
+    const autoGainDying = String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"));
+    if (!autoGainDying.startsWith("no")) {
         const actor = message.actor;
         if (actor && shouldIHandleThis(actor)) {
             if (message.content?.includes("damage-taken")) {
@@ -543,16 +557,13 @@ export function dyingHandlingPreCreateChatMessageHook(message: ChatMessagePF2e) 
                 // @ts-ignore
                 const notTooSoon = !flag?.between(now - 4000, now);
                 if (notTooSoon) {
-                    const dyingOption = String(
-                        game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
-                    );
                     const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;
                     let dyingCounter = 0;
-                    if (!dyingOption.startsWith("no") && originalDyingCounter > 0) {
-                        const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption);
+                    if (!autoGainDying.startsWith("no") && originalDyingCounter > 0) {
+                        const wasCritical = checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, autoGainDying);
 
                         if (
-                            dyingOption.endsWith("ForCharacters")
+                            autoGainDying.endsWith("ForCharacters")
                                 ? ["character", "familiar"].includes(actor.type)
                                 : true
                         ) {
