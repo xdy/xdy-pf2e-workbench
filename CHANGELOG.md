@@ -1,3 +1,10 @@
+## [5.56.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.1...v5.56.2) (2024-02-17)
+
+
+### Bug Fixes
+
+* Remove empty match in breath weapon reminder. ([8353177](https://github.com/xdy/xdy-pf2e-workbench/commit/8353177fc36106b5f07327ecacda5d44f5d7ee00))
+
 ## [5.56.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.0...v5.56.1) (2024-02-17)
 
 
