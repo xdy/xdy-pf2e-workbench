@@ -28,11 +28,12 @@ function getSpeakerToken(message: ChatMessagePF2e): TokenDocumentPF2e {
 }
 
 function retrieveDiceFormulaMatch(messageContent: string): RegExpMatchArray | null {
-    return messageContent.match("1d(4|6) (rounds|Rounds|recharge|Recharge)");
+    // The last one is to support the current format in some third party products.
+    return messageContent.match(/1d([46])( rounds| recharge|<\/a> rounds|)/i);
 }
 
 function getEffectDetails(activeActor, messageContent: string, diceValue: string) {
-    const titleRetrieved = messageContent.match(/.*title="(.*?)" width.*/);
+    const titleRetrieved = messageContent.match(/>(.*?) <span class="action-glyph"/);
 
     return {
         type: "effect",
