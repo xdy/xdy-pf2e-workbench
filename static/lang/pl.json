@@ -107,7 +107,11 @@
         "exploration": "Eksploracja",
         "downtime": "Przestój",
         "explorationShort": "E",
-        "downtimeShort": "D"
+        "downtimeShort": "D",
+        "bamTabview": {
+          "name": "BAM: Użyj układu z zakładkami",
+          "hint": "Użyj układu kart dla okna dialogowego Makra Akcji Podstawowych."
+        }
       },
       "refocus": {
         "notPsychic": "zużywa przynajmniej {regain} punktów skupienia",
@@ -201,7 +205,7 @@
       "castPrivateSpell": {
         "aSpell": "Zaklęcie",
         "name": "Kliknij z wciśniętym klawiszem Ctrl, aby rzucać prywatnie.",
-        "hint": "Zaznacz, aby kliknięcie z wciśniętym klawiszem Ctrl na rzuceniu zaklęcia powodowało rzucenie go jako szept dla rzucającego zaklęcie i MG, chyba że członek drużyny zna zaklęcie."
+        "hint": "Zaznacz, aby kliknięcie z wciśniętym klawiszem Ctrl na zaklęciu rzucało je jako szept dla rzucającego zaklęcie i MG."
       },
       "castPrivateSpellWithPublicMessage": {
         "spell": "Zaklęcie",
@@ -212,7 +216,8 @@
         "name": "Publikuje wiadomość o rzuceniu zaklęcia.",
         "secondPartNoRk": ".<br>Możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
         "firstPart": "{tokenName} właśnie rzucił {type} tradycji <strong>{traditionString}</strong><p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
-        "secondPartRK": ".<br>Możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )"
+        "secondPartRK": ".<br>Możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
+        "knownBy": "<div><p><b>Znany przez: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
       },
       "applyPersistentDamageRecoveryRoll": {
         "hint": "... a następnie automatycznie przywróci ustawienia fabryczne. Wymaga włączenia powyższego ustawienia.",
@@ -688,6 +693,18 @@
       "heropointHandlerNotificationChat": {
         "name": "... jako czat lub komunikat informacyjny.",
         "hint": "Zaznacz, aby obsługa Punktów Bohaterstwa powiadamiała jako czat, w przeciwnym razie będzie to tymczasowa wiadomość informacyjna."
+      },
+      "castPrivateSpellAutoRevealIfKnown": {
+        "hint": "Zaznacz, aby automatycznie ujawnić prywatnie rzucone zaklęcie, jeśli któryś z członków drużyny je zna.",
+        "name": "... ale automatycznie ujawnia zaklęcie, jeśli jest ono znane stronie."
+      },
+      "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
+        "hint": "Zaznacz, aby w przypadku zaklęć ujawnianych automatycznie na karcie czatu wyświetlani byli członkowie drużyny znający dane zaklęcie",
+        "name": "... i wymień członków drużyny, którzy znają automatycznie ujawnione zaklęcie"
+      },
+      "castPrivateSpellWithPublicMessageShowToGM": {
+        "hint": "Pokaż również publiczną wiadomość do MG.",
+        "name": "... i pokazać publiczną wiadomość również dla MG."
       }
     },
     "modules": {
