@@ -1,6 +1,8 @@
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
 import { ActorFlagsPF2e } from "@actor/data/base.js";
+import { ActorPF2e } from "@actor/index.js";
+import BaseUser from "foundry-types/common/documents/user.js";
 
 function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
     const userId = message.user.id;
@@ -200,6 +202,14 @@ export async function housepatcher(housepatcher) {
         ui.notifications.error(game.i18n.format(`${MODULENAME}.SETTINGS.housepatcher.error`));
         game.settings.set(MODULENAME, "housepatcher", "");
     }
+}
+
+export function minionsInCurrentScene(actor: ActorPF2e): ActorPF2e[] {
+    return actor.isOfType("character") ? <ActorPF2e[]>game.scenes.current?.tokens
+              ?.filter(() => !game.user.isGM)
+              ?.filter((token) => token.canUserModify(<BaseUser>(<unknown>game.user), "update"))
+              ?.map((token) => token.actor)
+              ?.filter((x) => x?.traits.has("minion")) : [];
 }
 
 export function setFlag(doc, flag, value) {

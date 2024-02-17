@@ -1,4 +1,4 @@
-import { isFirstGM, shouldIHandleThis } from "../../utils.js";
+import { minionsInCurrentScene, shouldIHandleThis } from "../../utils.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { CombatantPF2e } from "@module/encounter/index.js";
 import { ActorPF2e } from "@actor/base.js";
@@ -49,17 +49,23 @@ export function hasConditionOrReduction(actor, reduction: number) {
 }
 
 function calculateMaxActions(actor: ActorPF2e) {
-    return 3 + (actor.hasCondition("quickened") ? 1 : 0);
+    return actor.traits?.has("minion") ? 2 : 3 + (actor.hasCondition("quickened") ? 1 : 0);
 }
 
-export async function autoReduceStunned(combatant: CombatantPF2e): Promise<number> {
+export async function autoReduceStunned(combatant, userId: string): Promise<number> {
+    if (!combatant?.actor || (userId !== game.user.id && !shouldIHandleThis(combatant?.actor))) {
+        return 0;
+    }
+
     let stunReduction = 0;
-    if (isFirstGM() && combatant && combatant.actor && combatant.actor.hasCondition("stunned")) {
-        const stunned = combatant.actor.getCondition("stunned")?.value ?? 0;
+    const actors: ActorPF2e[] = [combatant?.actor, ...minionsInCurrentScene(combatant?.actor)];
+
+    for (const actor of actors) {
+        const stunned = actor.getCondition("stunned")?.value ?? 0;
         if (stunned) {
-            stunReduction = Math.min(stunned, calculateMaxActions(combatant.actor));
+            stunReduction = Math.min(stunned, calculateMaxActions(actor));
             for (let i = 0; i < stunReduction; i++) {
-                await combatant.actor?.decreaseCondition("stunned");
+                await actor?.decreaseCondition("stunned");
             }
         }
     }

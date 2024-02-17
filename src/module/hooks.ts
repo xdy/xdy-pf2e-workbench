@@ -250,10 +250,10 @@ export function pf2eEndTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e
     }
 }
 
-export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, _userId: string) {
+export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string) {
     const forWhom = String(game.settings.get(MODULENAME, "actionsReminderAllow"));
     if (game.settings.get(MODULENAME, "autoReduceStunned")) {
-        autoReduceStunned(combatant).then((reduction) => {
+        autoReduceStunned(combatant, userId).then((reduction) => {
             if (forWhom !== "none") {
                 actionsReminder(combatant, reduction);
             }
