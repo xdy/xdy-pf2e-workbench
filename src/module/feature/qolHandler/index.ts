@@ -103,8 +103,7 @@ export function chatAttackCardDescriptionCollapse(html: HTMLElement) {
     }
 }
 
-export function damageCardExpand(message: ChatMessagePF2e, html: HTMLElement) {
-    const expandDmg = String(game.settings.get(MODULENAME, "autoExpandDamageRolls"));
+export function damageCardExpand(message: ChatMessagePF2e, html: HTMLElement, expandDmg: string) {
     const diceTooltips = html.querySelectorAll(".dice-tooltip");
     if (expandDmg === "expandedAll") {
         diceTooltips.forEach((diceTooltip: HTMLElement) => (diceTooltip.style.display = "block"));
@@ -122,7 +121,7 @@ export function damageCardExpand(message: ChatMessagePF2e, html: HTMLElement) {
 /**
  * Mystify NPC items.
  *
- * @param {Array} items - The items to mystify.
+ * @param actor
  * @param {string} minimumRarity - The minimum rarity of items to mystify. Default is obtained from a game setting.
  * @param {any} usingPartyLevel - Whether to use the party level to determine the minimum level of items to mystify. Default is obtained from a game setting.
  * @param {number} minimumLevel - The minimum level of items to mystify. Default is obtained from a game setting.

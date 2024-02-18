@@ -100,11 +100,11 @@ export async function itemHandlingItemHook(item: ItemPF2e) {
     }
 }
 
-export function handleDyingRecoveryRoll(message: ChatMessagePF2e) {
+export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boolean) {
     const flavor = message.flavor;
     const token = message.token;
     if (
-        game.settings.get(MODULENAME, "handleDyingRecoveryRoll") &&
+        enabled &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow"))),

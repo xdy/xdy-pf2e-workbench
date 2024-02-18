@@ -65,9 +65,8 @@ export async function autoReduceStunned(combatant, userId: string): Promise<numb
     return stunReduction;
 }
 
-export function reminderTargeting(message: ChatMessagePF2e): boolean {
+export function reminderTargeting(message: ChatMessagePF2e, setting: string): boolean {
     const context = message?.flags?.pf2e?.context ?? {};
-    const setting = String(game.settings.get(MODULENAME, "reminderTargeting"));
 
     if (
         message.actor &&

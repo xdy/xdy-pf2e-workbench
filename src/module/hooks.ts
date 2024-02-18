@@ -58,7 +58,7 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     }
 
     if (reminderTargetingEnabled) {
-        proceed = reminderTargeting(message);
+        proceed = reminderTargeting(message, String(game.settings.get(MODULENAME, "reminderTargeting")));
     }
 
     if (proceed && reminderCannotAttack === "cancelAttack") {
@@ -84,8 +84,9 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
         checkAttackValidity(message, false);
     }
 
-    if (["no", "reminder"].includes(String(game.settings.get(MODULENAME, "reminderTargeting")))) {
-        reminderTargeting(message);
+    const reminderTargetingSetting = String(game.settings.get(MODULENAME, "reminderTargeting"));
+    if (["no", "reminder"].includes(reminderTargetingSetting)) {
+        reminderTargeting(message, reminderTargetingSetting);
     }
 
     if (!isActuallyDamageRoll(message)) {
@@ -106,17 +107,13 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
 }
 
 function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) {
-    if (game.settings.get(MODULENAME, "handleDyingRecoveryRoll")) {
-        handleDyingRecoveryRoll(message);
-    }
+    handleDyingRecoveryRoll(message, Boolean(game.settings.get(MODULENAME, "handleDyingRecoveryRoll")));
 }
 
 export function renderChatMessageHook(message: ChatMessagePF2e, q: JQuery) {
     const html = <HTMLElement>q.get(0);
     // Only acts on latest message, but can't be in createChatMessageHook as that doesn't get triggered for some reason.
-    if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
-        persistentHealing(message);
-    }
+    persistentHealing(message, Boolean(game.settings.get(MODULENAME, "applyPersistentHealing")));
 
     if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
         persistentDamage(message);
@@ -135,12 +132,9 @@ export function renderChatMessageHook(message: ChatMessagePF2e, q: JQuery) {
     }
 
     if (isActuallyDamageRoll(message)) {
-        if (
-            String(game.settings.get(MODULENAME, "autoExpandDamageRolls")) === "expandedAll" ||
-            String(game.settings.get(MODULENAME, "autoExpandDamageRolls")) === "expandedNew" ||
-            String(game.settings.get(MODULENAME, "autoExpandDamageRolls")) === "expandedNewest"
-        ) {
-            damageCardExpand(message, html);
+        const expandDamageRolls = String(game.settings.get(MODULENAME, "autoExpandDamageRolls"));
+        if (["expandedAll", "expandedNew", "expandedNewest"].includes(expandDamageRolls)) {
+            damageCardExpand(message, html, expandDamageRolls);
         }
     } else {
         if (

@@ -164,14 +164,14 @@ export function persistentDamage(message) {
     }
 }
 
-export function persistentHealing(message) {
+export function persistentHealing(message, enabled: boolean) {
     if (
+        enabled &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
             ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
         ) &&
-        game.settings.get(MODULENAME, "applyPersistentHealing") &&
         message.flavor &&
         message.rolls &&
         game.combats &&
