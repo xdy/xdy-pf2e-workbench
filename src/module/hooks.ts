@@ -292,7 +292,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
             await mystifyNpcItems(actor);
         }
 
-        const autoGainDying = game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP");
+        const autoGainDying = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));
         dyingHandlingPreUpdateActorHook(actor, update, currentActorHp, updateHp, autoGainDying);
     }
 }

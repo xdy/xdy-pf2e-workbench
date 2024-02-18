@@ -11,20 +11,22 @@ export function dyingHandlingPreUpdateActorHook(
     update: Record<string, string>,
     currentActorHp: number,
     updateHp: number,
-    autoGainDying: any,
+    autoGainDying: string,
 ) {
     const automaticMove = String(game.settings.get(MODULENAME, "enableAutomaticMove"));
     const automoveIfZeroHP =
         game.combat &&
         ((automaticMove === "reaching0HPCharactersOnly" && actor.type === CHARACTER_TYPE) ||
             (automaticMove === "reaching0HP" && [CHARACTER_TYPE, NPC_TYPE].includes(actor.type)));
-    const autoRemoveDying = game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP");
-    if (!autoGainDying.startsWith("no")) {
+    const autoRemoveDying = String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP"));
+    const autoRemoveUnconscious = String(game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP"));
+
+    if (autoGainDying && !autoGainDying.startsWith("no")) {
         handleDyingOnZeroHP(actor, fu.deepClone(update), currentActorHp, updateHp, autoGainDying).then(
             (hpRaisedAbove0) => {
                 logDebug("Workbench increaseDyingOnZeroHP complete");
                 if (hpRaisedAbove0) {
-                    if (!String(autoRemoveDying).startsWith("no")) {
+                    if (autoRemoveDying && !autoRemoveDying.startsWith("no")) {
                         // Ugh.
                         new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
                             autoRemoveDyingAtGreaterThanZeroHp(
@@ -33,7 +35,7 @@ export function dyingHandlingPreUpdateActorHook(
                                 autoRemoveDying,
                             ).then(() => {
                                 logDebug("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
-                                if (autoGainDying) {
+                                if (autoRemoveUnconscious) {
                                     autoRemoveUnconsciousAtGreaterThanZeroHP(
                                         actor,
                                         currentActorHp <= 0 && hpRaisedAbove0,
@@ -42,7 +44,7 @@ export function dyingHandlingPreUpdateActorHook(
                             });
                         });
                     } else {
-                        if (autoGainDying) {
+                        if (autoRemoveUnconscious) {
                             autoRemoveUnconsciousAtGreaterThanZeroHP(
                                 actor,
                                 currentActorHp <= 0 && hpRaisedAbove0,
@@ -58,8 +60,7 @@ export function dyingHandlingPreUpdateActorHook(
         );
     } else {
         if (currentActorHp <= 0 && updateHp > 0) {
-            const autoRemoveUnconscious = autoGainDying;
-            if (!String(autoRemoveDying).startsWith("no")) {
+            if (autoRemoveUnconscious && !autoRemoveDying.startsWith("no")) {
                 autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0, autoRemoveDying).then(() => {
                     if (autoRemoveUnconscious) {
                         autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
@@ -391,7 +392,7 @@ export async function handleDyingOnZeroHP(
     update: Record<string, string>,
     hp: number,
     updateHp: number,
-    dyingOption: string,
+    autogainDying: string,
 ): Promise<boolean> {
     if (!shouldIHandleThis(actor) || hp <= 0 || updateHp > 0) {
         return updateHp > 0;
@@ -412,16 +413,16 @@ export async function handleDyingOnZeroHP(
 
     if (
         !hpNowAboveZero &&
-        (dyingOption.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
+        (autogainDying.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
     ) {
-        if (dyingOption?.startsWith("addWoundedLevel")) {
+        if (autogainDying?.startsWith("addWoundedLevel")) {
             dyingCounter = (actor.getCondition("wounded")?.value ?? 0) + 1;
         } else {
             dyingCounter = 1;
         }
     }
 
-    if (checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, dyingOption)) {
+    if (checkIfLatestDamageMessageIsCriticalHitByEnemy(actor, autogainDying)) {
         dyingCounter += 1;
     }
 
