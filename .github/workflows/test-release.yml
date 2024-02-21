@@ -89,32 +89,32 @@ jobs:
         id: get_version
         uses: battila7/get-version-action@v2
 
-      - name: Publish Module to FoundryVTT Website
-        id: publish-to-foundry-website
-        uses: cs96and/FoundryVTT-release-package@v1
-        with:
-          package-token: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}
-          manifest-url: https://github.com/${{github.repository}}/releases/download/${{steps.get_version.outputs.version}}/module.json
+#      - name: Publish Module to FoundryVTT Website
+#        id: publish-to-foundry-website
+#        uses: cs96and/FoundryVTT-release-package@v1
+#        with:
+#          package-token: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}
+#          manifest-url: https://github.com/${{github.repository}}/releases/download/${{steps.get_version.outputs.version}}/module.json
                 
-#      - name: Submit package to FoundryVTT Package Release API
-#        run: |
-#          curl -X POST "https://api.foundryvtt.com/_api/packages/release_version/" \
-#            -H "Content-Type: application/json" \
-#            -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
-#            -d '{
-#              "id": "${{ steps.moduleID.outputs.prop }}",
-#              "dry-run": false,
-#              "release": {
-#                "version": "${{ steps.get_version.outputs.version-without-v }}",
-#                "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
-#                "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
-#                "compatibility": {
-#                  "minimum": "${{ steps.minimum.outputs.prop }}",
-#                  "verified": "${{ steps.verified.outputs.prop }}",
-#                  "maximum": "${{ steps.maximum.outputs.prop }}""
-#                }
-#             }
-#           }'
+      - name: Submit package to FoundryVTT Package Release API
+        run: |
+          curl -X POST "https://api.foundryvtt.com/_api/packages/release_version/" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
+            -d '{
+              "id": "${{ steps.moduleID.outputs.prop }}",
+              "dry-run": false,
+              "release": {
+                "version": "${{ steps.get_version.outputs.version-without-v }}",
+                "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
+                "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
+                "compatibility": {
+                  "minimum": "${{ steps.minimum.outputs.prop }}",
+                  "verified": "${{ steps.verified.outputs.prop }}",
+                  "maximum": "${{ steps.maximum.outputs.prop }}""
+                }
+             }
+           }'
 
 #     # Publish the release to FoundryVTT's package repository.
 #      - name: Publish Module to FoundryVTT Website
