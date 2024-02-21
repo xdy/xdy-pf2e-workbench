@@ -70,7 +70,8 @@ export function chatActionCardDescriptionCollapse(html: HTMLElement) {
                 }
             }
             html.addEventListener("click", (event) => {
-                if ((event.target as HTMLElement).matches("h4.action")) {
+                const target = event.target as HTMLElement;
+                if (target?.matches("h4.action, .fa-eye, .fa-eye-slash, strong")) {
                     event.preventDefault();
                     handleRollNoteToggling(html);
                 }
@@ -89,13 +90,11 @@ export function chatAttackCardDescriptionCollapse(html: HTMLElement) {
                 note["style"].display = "none";
             }
 
-            const actionSiblings = (hasRollNote[0] as HTMLElement).parentElement?.children;
-            if (actionSiblings?.[1]) {
-                actionSiblings[1].insertAdjacentHTML("beforeend", eye);
-            }
+            hasRollNote[0].parentNode?.parentNode?.children[0].insertAdjacentHTML("beforeend", eye);
         }
         html.addEventListener("click", (event) => {
-            if ((event.target as HTMLElement).matches("h4.action")) {
+            const target = event.target as HTMLElement;
+            if (target.matches("h4.action, .fa-eye, .fa-eye-slash, strong")) {
                 event.preventDefault();
                 handleRollNoteToggling(html);
             }
