@@ -60,7 +60,7 @@ export function dyingHandlingPreUpdateActorHook(
         );
     } else {
         if (currentActorHp <= 0 && updateHp > 0) {
-            if (autoRemoveUnconscious && !autoRemoveDying.startsWith("no")) {
+            if (autoRemoveDying && !autoRemoveDying.startsWith("no")) {
                 autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0, autoRemoveDying).then(() => {
                     if (autoRemoveUnconscious) {
                         autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
@@ -547,7 +547,7 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
 
 export function dyingHandlingPreCreateChatMessageHook(message: ChatMessagePF2e) {
     const autoGainDying = String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"));
-    if (!autoGainDying.startsWith("no")) {
+    if (autoGainDying && !autoGainDying.startsWith("no")) {
         const actor = message.actor;
         if (actor && shouldIHandleThis(actor)) {
             if (message.content?.includes("damage-taken")) {
