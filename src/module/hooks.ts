@@ -110,8 +110,8 @@ function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) 
     handleDyingRecoveryRoll(message, Boolean(game.settings.get(MODULENAME, "handleDyingRecoveryRoll")));
 }
 
-export function renderChatMessageHook(message: ChatMessagePF2e, q: JQuery) {
-    const html = <HTMLElement>q.get(0);
+export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
+    const html = <HTMLElement>jq.get(0);
     // Only acts on latest message, but can't be in createChatMessageHook as that doesn't get triggered for some reason.
     persistentHealing(message, Boolean(game.settings.get(MODULENAME, "applyPersistentHealing")));
 
@@ -173,19 +173,19 @@ export function renderChatMessageHook(message: ChatMessagePF2e, q: JQuery) {
     // Alert everyone that Keeley's hero point rule was invoked
     const lastRoll = message.rolls.at(-1);
     if (lastRoll?.options.keeleyAdd10) {
-        const element: HTMLElement | null = html[0];
+        const element: any = jq.get(0);
 
         if (element) {
-            const tags: HTMLElement | null = element.querySelector(".flavor-text > .tags.modifiers");
-            const formulaElem: HTMLElement | null = element.querySelector(".reroll-discard .dice-formula");
-            const newTotalElem: HTMLElement | null = element.querySelector(".reroll-second .dice-total");
+            const tags = element.querySelector(".flavor-text > .tags.modifiers");
+            const formulaElem = element.querySelector(".reroll-discard .dice-formula");
+            const newTotalElem = element.querySelector(".reroll-second .dice-total");
             if (tags && formulaElem && newTotalElem) {
                 // Add a tag to the list of modifiers
                 const newTag = document.createElement("span");
                 newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
                 newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.keeleysHeroPointRule.bonusTag`);
                 newTag.dataset.slug = "keeley-add-10";
-                const querySelector: HTMLElement | null = tags.querySelector(".tag");
+                const querySelector = tags.querySelector(".tag");
                 if (querySelector?.dataset.visibility === "gm") {
                     newTag.dataset.visibility = "gm";
                 }
