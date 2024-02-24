@@ -1,3 +1,10 @@
+## [5.56.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.5...v5.56.6) (2024-02-24)
+
+
+### Bug Fixes
+
+* Use of Keeley's hero point rule should be visible in chat again. ([9e460d0](https://github.com/xdy/xdy-pf2e-workbench/commit/9e460d0039bbee2ba4018d423e3932aba7f6fd67))
+
 ## [5.56.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.4...v5.56.5) (2024-02-24)
 
 
