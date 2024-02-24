@@ -157,7 +157,7 @@ export async function mystifyNpcItems(
     const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
     const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
         actor.items
-            .filter((item) =>
+            ?.filter((item) =>
                 // Rollup couldn't resolve PHYSICAL_ITEM_TYPES so I copied the values
                 ["armor", "shield", "consumable", "backpack", "book", "equipment", "treasure", "weapon"].includes(
                     item.type,

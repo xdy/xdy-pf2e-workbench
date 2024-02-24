@@ -118,7 +118,7 @@ const TRADITION_SKILLS = { arcane: "arcana", divine: "religion", occult: "occult
 
 function findPartyMembersWithSpell(origin: any) {
     return game.actors?.party?.members
-        ?.filter((actor) => actor.items.some((item) => item.isOfType("spell") && item.slug === origin.slug))
+        ?.filter((actor) => actor.items?.some((item) => item.isOfType("spell") && item.slug === origin.slug))
         .map((actor) => actor.name);
 }
 

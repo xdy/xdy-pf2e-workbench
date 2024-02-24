@@ -202,8 +202,8 @@ export function renderChatMessageHook(message: ChatMessagePF2e, q: JQuery) {
 }
 
 function dropHeldItemsOnBecomingUnconscious(actor) {
-    const items = <PhysicalItemPF2e[]>actor.items.filter((i) => i.isHeld);
-    if (items.length > 0) {
+    const items = <PhysicalItemPF2e[]>actor.items?.filter((i) => i.isHeld);
+    if (items && items.length > 0) {
         for (const item of items) {
             if (item.traits.has("free-hand") || item.type === "shield" || item.traits.has("attached-to-shield")) {
                 // Presumed to strapped to an arm/worn on a hand, so just unreadied instead of dropped
