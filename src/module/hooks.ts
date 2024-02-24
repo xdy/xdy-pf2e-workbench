@@ -173,30 +173,33 @@ export function renderChatMessageHook(message: ChatMessagePF2e, q: JQuery) {
     // Alert everyone that Keeley's hero point rule was invoked
     const lastRoll = message.rolls.at(-1);
     if (lastRoll?.options.keeleyAdd10) {
-        const element = html[0];
+        const element: HTMLElement | null = html[0];
 
-        const tags = element.querySelector(".flavor-text > .tags.modifiers");
-        const formulaElem = element.querySelector<HTMLElement>(".reroll-discard .dice-formula");
-        const newTotalElem = element.querySelector<HTMLElement>(".reroll-second .dice-total");
-        if (tags && formulaElem && newTotalElem) {
-            // Add a tag to the list of modifiers
-            const newTag = document.createElement("span");
-            newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
-            newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.keeleysHeroPointRule.bonusTag`);
-            newTag.dataset.slug = "keeley-add-10";
-            if (tags.querySelector(".tag")?.dataset.visibility === "gm") {
-                newTag.dataset.visibility = "gm";
+        if (element) {
+            const tags: HTMLElement | null = element.querySelector(".flavor-text > .tags.modifiers");
+            const formulaElem: HTMLElement | null = element.querySelector(".reroll-discard .dice-formula");
+            const newTotalElem: HTMLElement | null = element.querySelector(".reroll-second .dice-total");
+            if (tags && formulaElem && newTotalElem) {
+                // Add a tag to the list of modifiers
+                const newTag = document.createElement("span");
+                newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
+                newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.keeleysHeroPointRule.bonusTag`);
+                newTag.dataset.slug = "keeley-add-10";
+                const querySelector: HTMLElement | null = tags.querySelector(".tag");
+                if (querySelector?.dataset.visibility === "gm") {
+                    newTag.dataset.visibility = "gm";
+                }
+                tags.append(newTag);
+
+                // Show +10 in the formula
+                const span = document.createElement("span");
+                span.className = "keeley-add-10";
+                span.innerText = " + 10";
+                formulaElem?.append(span);
+
+                // Make the total purple
+                newTotalElem.classList.add("keeley-add-10");
             }
-            tags.append(newTag);
-
-            // Show +10 in the formula
-            const span = document.createElement("span");
-            span.className = "keeley-add-10";
-            span.innerText = " + 10";
-            formulaElem?.append(span);
-
-            // Make the total purple
-            newTotalElem.classList.add("keeley-add-10");
         }
     }
 }

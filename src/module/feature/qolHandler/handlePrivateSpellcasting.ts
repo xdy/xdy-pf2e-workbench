@@ -66,6 +66,8 @@ function showPartymembersWithSpell(message, membersWithSpell, data: any) {
 }
 
 async function generateMessageData(message: ChatMessagePF2e, origin: any, spellUUID: string, data: any) {
+    const token: any = message.token ? message.token : message.actor?.token;
+
     const anonymous = game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.they`);
     const tokenName = game.settings.get("pf2e", "metagame_tokenSetsNameVisibility")
         ? anonymous
@@ -73,7 +75,28 @@ async function generateMessageData(message: ChatMessagePF2e, origin: any, spellU
 
     const type = message.flags?.pf2e.origin?.type ?? "spell";
     const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
-    const content = buildSpellMessage(origin, tokenName, type, traditionString, spellUUID, data);
+    // Opposite of the elite/weak modifier so it doesn't double-dip on the bonus. (Applies to RK and Save DC).
+    let noDoubleDippingAdjustment;
+    switch (message.actor?.attributes["adjustment"]) {
+        case "elite":
+            noDoubleDippingAdjustment = -2;
+            break;
+        case "weak":
+            noDoubleDippingAdjustment = +2;
+            break;
+        default:
+            noDoubleDippingAdjustment = 0;
+    }
+
+    const content = buildSpellMessage(
+        origin,
+        tokenName,
+        type,
+        traditionString,
+        spellUUID,
+        data,
+        noDoubleDippingAdjustment,
+    );
 
     const flags = {
         "xdy-pf2e-workbench": {
@@ -82,8 +105,6 @@ async function generateMessageData(message: ChatMessagePF2e, origin: any, spellU
             },
         },
     };
-
-    const token: any = message.token ? message.token : message.actor?.token;
 
     return { content, flags, token };
 }
@@ -148,10 +169,11 @@ function isShiftModifierActive(): boolean {
 function buildSpellMessage(
     origin: any,
     tokenName: string,
-    type,
+    type: any,
     traditionString: string,
     spellUUID: string,
     data: any,
+    eliteWeakModifier: number,
 ) {
     let content = "";
     if (origin) {
@@ -176,7 +198,8 @@ function buildSpellMessage(
         }
 
         const level = origin.system.level.value;
-        const dcRK = getDcRkForLevel(level) + getDcRkForRarity(origin.system.traits?.rarity ?? "common");
+        const dcRK =
+            getDcRkForLevel(level) + getDcRkForRarity(origin.system.traits?.rarity ?? "common") + eliteWeakModifier;
 
         const skill = TRADITION_SKILLS[traditionString];
 
@@ -193,7 +216,10 @@ function buildSpellMessage(
     const saveButtons = buttons.filter((i) => buttons[i].getAttribute("data-action") === "spell-save");
     if (saveButtons.length === 1) {
         const dataSave = saveButtons.attr("data-save") ?? "";
-        const dataDC = saveButtons.attr("data-dc") ?? "";
+        let dataDC: string = saveButtons.attr("data-dc") ?? "";
+        if (eliteWeakModifier !== 0 && !isNaN(Number(dataDC))) {
+            dataDC = String(Number(dataDC) + eliteWeakModifier);
+        }
         const origin: any = fromUuidSync(spellUUID);
         content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`, {
             dataSave: dataSave,
