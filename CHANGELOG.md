@@ -1,3 +1,10 @@
+## [5.56.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.3...v5.56.4) (2024-02-24)
+
+
+### Bug Fixes
+
+* Not all actors have items. ([fa00db9](https://github.com/xdy/xdy-pf2e-workbench/commit/fa00db99eecf5e1899c09805dd5db5c2ce07d168))
+
 ## [5.56.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.2...v5.56.3) (2024-02-24)
 
 
