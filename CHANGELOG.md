@@ -1,3 +1,10 @@
+## [5.56.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.4...v5.56.5) (2024-02-24)
+
+
+### Bug Fixes
+
+* When npcs cast spells privately, don't doubledip on elite/weak adjustments. ([d5935d1](https://github.com/xdy/xdy-pf2e-workbench/commit/d5935d1333b69dff2bc7f23db2fa6402217e64ad))
+
 ## [5.56.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.3...v5.56.4) (2024-02-24)
 
 
