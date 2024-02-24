@@ -1,3 +1,11 @@
+## [5.56.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.2...v5.56.3) (2024-02-24)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([8501c23](https://github.com/xdy/xdy-pf2e-workbench/commit/8501c23642fe88695dccfb000c0f1cd530d8efa9))
+* When collapsing attack chat cards, make the eye that indicates 'click here to expand' visible again, and make it possible to click anywhere on the title row to expand/collapse. ([9565627](https://github.com/xdy/xdy-pf2e-workbench/commit/9565627f41792e5c52d8b7e75e09699f27245a1e))
+
 ## [5.56.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.1...v5.56.2) (2024-02-17)
 
 
