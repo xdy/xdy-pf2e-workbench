@@ -1,3 +1,10 @@
+## [5.56.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.6...v5.56.7) (2024-02-25)
+
+
+### Bug Fixes
+
+* Show the correct save when casting spells privately (fixes the issues with double-dipping on adjustments by sending the message from the GM rather than the caster.) ([59dfe79](https://github.com/xdy/xdy-pf2e-workbench/commit/59dfe79af838ee01d2271f9066462aa5163e01b5))
+
 ## [5.56.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.5...v5.56.6) (2024-02-24)
 
 
