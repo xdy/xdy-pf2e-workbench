@@ -58,7 +58,7 @@
     "handlebars": "4.7.8",
     "jquery": "^3.7.1",
     "jsdom": "^24.0.0",
-    "peggy": "^3.0.2",
+    "peggy": "^4.0.1",
     "pixi.js": "^7.4.0",
     "prettier": "^3.2.5",
     "prompts": "^2.4.2",
