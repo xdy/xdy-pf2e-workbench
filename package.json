@@ -46,7 +46,7 @@
     "@typescript-eslint/parser": "^6.21.0",
     "classic-level": "^1.4.1",
     "es-jest": "^2.1.0",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
@@ -87,7 +87,7 @@
     "prosemirror-state": "^1.4.3",
     "prosemirror-transform": "^1.8.0",
     "prosemirror-view": "^1.33.1",
-    "remeda": "^1.43.0",
+    "remeda": "^1.44.1",
     "sortablejs": "^1.15.2",
     "uuid": "^9.0.1"
   },

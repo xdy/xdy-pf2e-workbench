@@ -125,7 +125,7 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
 
 export function persistentDamage(message) {
     const flavor = message.flavor;
-    const persistentFlavor = flavor?.startsWith("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent"));
+    const persistentFlavor = flavor?.includes("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent"));
     if (
         shouldIHandleThisMessage(
             message,
