@@ -1,3 +1,10 @@
+## [5.56.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.7...v5.56.8) (2024-02-27)
+
+
+### Bug Fixes
+
+* More robust handling of persistent damage if that option is enabled. ([90bb41a](https://github.com/xdy/xdy-pf2e-workbench/commit/90bb41afc0db42459fc3adf082c1bc684d310222))
+
 ## [5.56.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.6...v5.56.7) (2024-02-25)
 
 
