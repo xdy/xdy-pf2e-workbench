@@ -1,3 +1,10 @@
+## [5.56.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.8...v5.56.9) (2024-02-29)
+
+
+### Bug Fixes
+
+* Colorization of spell and feat rarity options now work again, as well as indication of feat prerequisites. ([d3dd6aa](https://github.com/xdy/xdy-pf2e-workbench/commit/d3dd6aa26090fc5b2c3793baa55a04bbc9802d22))
+
 ## [5.56.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.7...v5.56.8) (2024-02-27)
 
 
