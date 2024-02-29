@@ -351,54 +351,68 @@ export async function pf2eSystemReadyHook() {
 
 export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery) {
     const html = <HTMLElement>q.get(0);
-    if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerSpellsRarityColour")) {
-        const spellLists = html.querySelectorAll(".spell-list");
-        spellLists.forEach((list) => {
-            list.querySelectorAll(".spell").forEach((item) => {
-                const itemId = item.getAttribute("data-item-id");
-                const spell = itemId ? sheet.actor?.items?.get(itemId) : null;
-                if (spell) {
-                    const rarity = spell.system.traits.rarity;
-                    if (rarity) {
-                        const h4Elements = item.querySelectorAll("h4");
-                        h4Elements.forEach((h4) => h4.classList.add(`xdy-pf2e-workbench-rarity-${rarity}`));
-                    }
-                }
-            });
-        });
+
+    function itemFromCompendium(element: Element, qualifiedName: string) {
+        const itemUuid = element.getAttribute(qualifiedName);
+        const item: ItemPF2e | null = itemUuid ? fromUuidSync(itemUuid) : null;
+        return item;
     }
 
-    if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerFeatsRarityColour")) {
-        const featLists = html.querySelectorAll(".feats-pane");
-        featLists.forEach((list) => {
-            list.querySelectorAll(".slot").forEach((item) => {
-                const itemId = item.getAttribute("data-item-id");
-                const feat = itemId ? sheet.actor?.items?.get(itemId) : null;
-                if (feat) {
-                    const rarity = feat.system.traits.rarity;
-                    if (rarity) {
-                        const h4Elements = item.querySelectorAll("h4");
-                        h4Elements.forEach((h4) => h4.classList.add(`xdy-pf2e-workbench-rarity-${rarity}`));
+    function itemFromActor(element: Element, attributeName: string) {
+        const itemId = <string>element.getAttribute(attributeName);
+        return itemId ? <ItemPF2e | null>sheet.actor?.items?.get(itemId) : null;
+    }
+
+    function performColoring(
+        setting: string,
+        listSelector: string,
+        itemSelector: string,
+        fetchItem: (el: Element) => ItemPF2e | null,
+    ) {
+        if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, setting)) {
+            const lists = html.querySelectorAll(listSelector);
+            for (const list of lists) {
+                const elementNodeListOf = list.querySelectorAll(itemSelector);
+                for (const element of elementNodeListOf) {
+                    const item = fetchItem(element);
+                    if (item) {
+                        const rarity = item.system.traits.rarity;
+                        if (rarity) {
+                            const h4Elements = element.querySelectorAll("h4");
+                            h4Elements.forEach((h4) => h4.classList.add(`xdy-pf2e-workbench-rarity-${rarity}`));
+                        }
                     }
                 }
-            });
-        });
+            }
+        }
     }
+
+    performColoring("playerSpellsRarityColour", ".spell-list", ".spell", (element) =>
+        itemFromActor(element, "data-item-id"),
+    );
+
+    performColoring("playerFeatsRarityColour", ".feats-pane", ".slot", (element) =>
+        itemFromActor(element, "data-item-id"),
+    );
+
+    performColoring("playerCraftingRarityColour", ".crafting-pane", ".formula-item", (element) =>
+        itemFromCompendium(element, "data-item-uuid"),
+    );
 
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint")) {
         const featLists = html.querySelectorAll(".feats-pane");
         featLists.forEach((list) => {
-            list.querySelectorAll(".slot").forEach((item) => {
-                const itemId = <string>item.getAttribute("data-item-id");
-                const feat: FeatPF2e | undefined | null = itemId ? <FeatPF2e>sheet.actor?.items?.get(itemId) : null;
+            const elementNodeListOf = list.querySelectorAll(".slot");
+            for (const element of elementNodeListOf) {
+                const feat: FeatPF2e | null = <FeatPF2e | null>itemFromActor(element, "data-item-id");
                 if (feat) {
                     const prereqs = feat.system.prerequisites.value.length > 0;
                     if (prereqs) {
-                        const h4Elements = item.querySelectorAll("h4");
+                        const h4Elements = element.querySelectorAll("h4");
                         h4Elements.forEach((h4Element) => (h4Element.innerHTML += "*"));
                     }
                 }
-            });
+            }
         });
     }
 }

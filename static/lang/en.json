@@ -338,6 +338,10 @@
         "hint": "Client setting to add an asterisk to the name for feats with a prerequisite set.",
         "name": "Add an asterisk to the name for feats with a prerequisite."
       },
+      "playerCraftingRarityColour": {
+        "hint": "Client setting to show formula names in rarity colour on actor sheets.",
+        "name": "Show formula names in rarity colour on actor sheets."
+      },
       "playerFeatsRarityColour": {
         "hint": "Client setting to show feat names in rarity colour on actor sheets.",
         "name": "Show feat names in rarity colour on actor sheets."

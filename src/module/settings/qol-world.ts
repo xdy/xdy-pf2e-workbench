@@ -152,6 +152,15 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => updateHooks(),
             },
+            playerCraftingRarityColour: {
+                name: `${MODULENAME}.SETTINGS.playerCraftingRarityColour.name`,
+                hint: `${MODULENAME}.SETTINGS.playerCraftingRarityColour.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+            },
             playerSpellsRarityColour: {
                 name: `${MODULENAME}.SETTINGS.playerSpellsRarityColour.name`,
                 hint: `${MODULENAME}.SETTINGS.playerSpellsRarityColour.hint`,
