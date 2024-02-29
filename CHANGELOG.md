@@ -1,3 +1,10 @@
+# [5.57.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.9...v5.57.0) (2024-02-29)
+
+
+### Features
+
+* Add option to show rarity color on the crafting tab. Some cleanup of the colorization code. ([97a0da4](https://github.com/xdy/xdy-pf2e-workbench/commit/97a0da4e824d43b2f14e47f39cf0d4fa0de72d35))
+
 ## [5.56.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.56.8...v5.56.9) (2024-02-29)
 
 
