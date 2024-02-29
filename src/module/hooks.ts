@@ -354,7 +354,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerSpellsRarityColour")) {
         const spellLists = html.querySelectorAll(".spell-list");
         spellLists.forEach((list) => {
-            list.querySelectorAll(".item.spell").forEach((item) => {
+            list.querySelectorAll(".spell").forEach((item) => {
                 const itemId = item.getAttribute("data-item-id");
                 const spell = itemId ? sheet.actor?.items?.get(itemId) : null;
                 if (spell) {
@@ -369,9 +369,9 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
     }
 
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerFeatsRarityColour")) {
-        const featLists = html.querySelectorAll(".spell-list");
+        const featLists = html.querySelectorAll(".feats-pane");
         featLists.forEach((list) => {
-            list.querySelectorAll(".item.spell").forEach((item) => {
+            list.querySelectorAll(".slot").forEach((item) => {
                 const itemId = item.getAttribute("data-item-id");
                 const feat = itemId ? sheet.actor?.items?.get(itemId) : null;
                 if (feat) {
@@ -388,7 +388,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
     if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint")) {
         const featLists = html.querySelectorAll(".feats-pane");
         featLists.forEach((list) => {
-            list.querySelectorAll(".item.spell").forEach((item) => {
+            list.querySelectorAll(".slot").forEach((item) => {
                 const itemId = <string>item.getAttribute("data-item-id");
                 const feat: FeatPF2e | undefined | null = itemId ? <FeatPF2e>sheet.actor?.items?.get(itemId) : null;
                 if (feat) {
