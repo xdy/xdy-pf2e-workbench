@@ -705,6 +705,10 @@
       "castPrivateSpellWithPublicMessageShowToGM": {
         "hint": "Pokaż również publiczną wiadomość do MG.",
         "name": "... i pokazać publiczną wiadomość również dla MG."
+      },
+      "playerCraftingRarityColour": {
+        "hint": "Ustawienie klienta, aby nazwy zaklęć były wyświetlane w kolorze rzadkości na kartach postaci.",
+        "name": "Wyświetlaj nazwy formuł w kolorze rzadkości na kartach postaci."
       }
     },
     "modules": {
