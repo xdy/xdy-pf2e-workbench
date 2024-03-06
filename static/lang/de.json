@@ -683,6 +683,14 @@
       "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
         "hint": "Auswählen um, bei autoaufdecken von Zaubern, das Party Mitglied in der Chat-Karte zeigen, welches den Zauber beherrscht",
         "name": "... und liste das Party Mitglied auf welche den automatisch aufgedeckten Zauber beherrscht"
+      },
+      "playerCraftingRarityColour": {
+        "hint": "Client Einstellung um den Namen von Formeln in der Farbe der Seltenheit auf dem Charakterblatt anzuzeigen.",
+        "name": "Zeige den Formelnamen in der Seltenheitsfarbe auf den Akteursblättern an."
+      },
+      "castPrivateSpellWithPublicMessageShowToGM": {
+        "hint": "Öffentliche Nachricht auch SL anzeigen.",
+        "name": "... und zeigen die öffentliche Nachricht auch dem SL."
       }
     },
     "npcRoller": {
