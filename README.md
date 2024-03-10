@@ -244,24 +244,18 @@ versions are not supported. (They probably work, but if they don't, you're on yo
 
 ## Supported pf2e-specific QOL modules
 
-As in, I try to keep the Workbench compatible with these modules (as I use them myself). In general, if the module does
+As in, I try to keep the Workbench compatible with these pf2e qol modules (as I use them myself). In general, if the module does
 something that the Workbench also does, I suggest disabling the Workbench equivalent.
 
-* [PF2e Action Support](https://github.com/reyzor1991/foundry-vtt-pf2e-action-support)
 * [PF2e Dailies](https://github.com/reonZ/pf2e-dailies)
 * [PF2e Dorako UI](https://github.com/Dorako/pf2e-dorako-ui)
 * [PF2e Extempore Effects](https://github.com/shemetz/pf2e-extempore-effects)
-* [PF2e Flat Check](https://github.com/jessev14/pf2-flat-check) (The autoroll damage feature uses it if installed.)
-* [PF2e Hands Management](https://github.com/reyzor1991/foundry-vtt-pf2e-notification)
 * [PF2e Interactive Token Tooltip](https://github.com/reonZ/pf2e-token-hud)
+* [PF2e Item Activations]([https://github.com/reonZ/pf2e-token-hud](https://github.com/ChasarooniZ/pf2e-item-activations))
 * [PF2e Keybind Menagerie](https://github.com/Drental/foundryvtt-pf2e-f-is-for-flatfooted)
 * [PF2e Modifiers Matter](https://github.com/shemetz/pf2e-modifiers-matter)
-* [PF2e Perception]() (not yet released by Idle)
-* [PF2e Ranged Combat](https://github.com/JDCalvert/FVTT-PF2e-Ranged-Combat)
-* [PF2e Reaction Checker](https://github.com/reyzor1991/foundry-vtt-pf2e-reaction)
+* [PF2e Perception] (unreleased, made by Idle)
 * [PF2e Toolbelt](https://github.com/reonZ/pf2e-toolbelt)
-* [PF2e Staves](https://github.com/jessev14/pf2e-staves)
-* [PF2e Target Damage](https://github.com/MrVauxs/PF2e-Target-Damage)
 * [pf2e Utility Buttons](https://github.com/oWave/pf2e-flatcheck-helper)
 
 I do use other modules, and will try to avoid breaking even those I don't use, but they have lower priority.
