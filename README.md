@@ -308,7 +308,7 @@ Open Game License:
 Project Licensing:
 
 * Everything in this project that is not covered by one of the following license exceptions is made available under the
-  Apache License (see [LICENSE](LICENSE)). (Including the types and utility classes generated or copied from the pf2e
+  Apache License (see [LICENSE.md](LICENSE.md)). (Including the types and utility classes generated or copied from the pf2e
   system at https://github.com/foundryvtt/pf2e, also under the Apache License.)
 
 Virtual Table Top Platform Licenses:
