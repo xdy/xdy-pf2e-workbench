@@ -1,3 +1,11 @@
+# [5.58.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.57.2...v5.58.0) (2024-03-10)
+
+
+### Features
+
+* Add option to, when collapsing item chat cards by default, move any effect links to outside the collapsed area so they are always visible. ([dada351](https://github.com/xdy/xdy-pf2e-workbench/commit/dada35185d4ea6d2e4474f18cc38ddb5ff5b6eed))
+* Set verified foundry version to 11.315 and minimum and verified version to 5.14.1, updated pf2e types. ([26986dc](https://github.com/xdy/xdy-pf2e-workbench/commit/26986dcd890c1e26dfe8bb052545d4cfe24d0563))
+
 ## [5.57.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.57.1...v5.57.2) (2024-03-10)
 
 
