@@ -12,7 +12,9 @@ declare class FastHealingRuleElement extends RuleElementPF2e<FastHealingRuleSche
     static defineSchema(): FastHealingRuleSchema;
     static validateJoint(data: SourceFromSchema<FastHealingRuleSchema>): void;
     /** Send a message with a "healing" (damage) roll at the start of its turn */
-    onTurnStart(): Promise<void>;
+    onUpdateEncounter({ event }: {
+        event: "initiative-roll" | "turn-start";
+    }): Promise<void>;
 }
 type FastHealingRuleSchema = RuleElementSchema & {
     value: ResolvableValueField<true, false, false>;

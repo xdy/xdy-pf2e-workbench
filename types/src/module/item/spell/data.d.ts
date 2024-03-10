@@ -2,7 +2,7 @@ import type { SaveType } from "@actor/types.ts";
 import type { BaseItemSourcePF2e, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/base/data/system.ts";
 import type { OneToTen, ValueAndMax, ZeroToThree } from "@module/data.ts";
 import type { DamageCategoryUnique, DamageKind, DamageType, MaterialDamageEffect } from "@system/damage/index.ts";
-import type { EffectAreaSize, EffectAreaType, MagicTradition, SpellTrait } from "./types.ts";
+import type { EffectAreaShape, MagicTradition, SpellTrait } from "./types.ts";
 type SpellSource = BaseItemSourcePF2e<"spell", SpellSystemSource>;
 interface SpellSystemSource extends ItemSystemSource {
     traits: SpellTraits;
@@ -47,8 +47,8 @@ interface SpellTraits extends ItemTraits<SpellTrait> {
     traditions: MagicTradition[];
 }
 interface SpellArea {
-    value: EffectAreaSize;
-    type: EffectAreaType;
+    type: EffectAreaShape;
+    value: number;
     /**
      * Legacy text information about spell effect areas:
      * if present, includes information not representable in a structured way
@@ -64,11 +64,15 @@ interface SpellDamageSource {
     materials: MaterialDamageEffect[];
 }
 interface SpellDefenseSource {
+    passive: {
+        statistic: SpellPassiveDefense;
+    } | null;
     save: {
         statistic: SaveType;
         basic: boolean;
     } | null;
 }
+type SpellPassiveDefense = "ac" | `${SaveType}-dc`;
 interface SpellHeighteningInterval {
     type: "interval";
     interval: number;
@@ -107,7 +111,6 @@ interface SpellDefenseData extends SpellDefenseSource {
         statistic: SpellPassiveDefense;
     } | null;
 }
-type SpellPassiveDefense = "ac" | `${SaveType}-dc`;
 type SpellOverlay = SpellOverlayOverride;
 type SpellOverlayType = SpellOverlay["overlayType"];
 interface RitualData {

@@ -10,7 +10,7 @@ export declare class SceneDarknessAdjuster extends Application {
     getData(options?: Partial<ApplicationOptions>): Promise<object>;
     render(force?: boolean, options?: RenderOptions & {
         scenes?: ScenePF2e[];
-    }): Promise<this>;
+    }): this;
     /** Fade out before closing */
     close(options?: {
         force?: boolean;

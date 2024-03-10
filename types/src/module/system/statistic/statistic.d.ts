@@ -1,4 +1,4 @@
-import type { ActorPF2e } from "@actor";
+import type { ActorPF2e, CreaturePF2e } from "@actor";
 import { TraitViewData } from "@actor/data/base.ts";
 import { ModifierPF2e } from "@actor/modifiers.ts";
 import { AttributeString } from "@actor/types.ts";
@@ -13,7 +13,7 @@ import { CheckDC } from "@system/degree-of-success.ts";
 import { BaseStatistic } from "./base.ts";
 import { StatisticChatData, StatisticCheckData, StatisticData, StatisticDifficultyClassData, StatisticTraceData } from "./data.ts";
 /** A Pathfinder statistic used to perform checks and calculate DCs */
-declare class Statistic extends BaseStatistic {
+declare class Statistic<TActor extends ActorPF2e = ActorPF2e> extends BaseStatistic<TActor> {
     #private;
     attribute: AttributeString | null;
     rank: ZeroToFour | null;
@@ -23,7 +23,7 @@ declare class Statistic extends BaseStatistic {
     /** If this is a skill, returns whether it is a lore skill or not */
     lore?: boolean;
     config: RollOptionConfig;
-    constructor(actor: ActorPF2e, data: StatisticData, config?: RollOptionConfig);
+    constructor(actor: TActor, data: StatisticData, config?: RollOptionConfig);
     /** Get the attribute modifier used with this statistic. Since NPC statistics are contrived, create a new one. */
     get attributeModifier(): ModifierPF2e | null;
     get check(): StatisticCheck<this>;
@@ -42,12 +42,15 @@ declare class Statistic extends BaseStatistic {
         dc?: Partial<StatisticDifficultyClassData>;
         check?: Partial<StatisticCheckData>;
         modifiers?: ModifierPF2e[];
-    }): Statistic;
+    }): this;
     /** Shortcut to `this#check#roll` */
     roll(args?: StatisticRollParameters): Promise<Rolled<CheckRoll> | null>;
     /** Creates view data for sheets and chat messages */
     getChatData(options?: RollOptionConfig): StatisticChatData;
     /** Returns data intended to be merged back into actor data. By default the value is the DC */
+    getTraceData(this: Statistic<CreaturePF2e>, options?: {
+        value?: "dc" | "mod";
+    }): StatisticTraceData<AttributeString>;
     getTraceData(options?: {
         value?: "dc" | "mod";
     }): StatisticTraceData;

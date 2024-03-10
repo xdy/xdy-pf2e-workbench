@@ -37,8 +37,7 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
     protected _canDragDrop(selector: string): boolean;
     /** Add support for dropping actions and toggles */
     protected _onDragStart(event: DragEvent): void;
-    /** Emulate a sheet item drop from the canvas */
-    emulateItemDrop(data: DropCanvasItemDataPF2e): Promise<ItemPF2e<ActorPF2e | null>[]>;
+    _onDrop(event: DragEvent): Promise<boolean | void>;
     protected _onDropItem(event: DragEvent, data: DropCanvasItemDataPF2e & {
         fromInventory?: boolean;
     }): Promise<ItemPF2e[]>;
@@ -81,7 +80,7 @@ declare abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends ActorShe
 }
 interface ActorSheetPF2e<TActor extends ActorPF2e> extends ActorSheet<TActor, ItemPF2e> {
     prepareItems?(sheetData: ActorSheetDataPF2e<TActor>): Promise<void>;
-    render(force?: boolean, options?: ActorSheetRenderOptionsPF2e): this | Promise<this>;
+    render(force?: boolean, options?: ActorSheetRenderOptionsPF2e): this;
 }
 type SheetClickActionHandlers = Record<string, ((event: MouseEvent, actionTarget: HTMLElement) => Promise<void | unknown> | void | unknown) | undefined>;
 export { ActorSheetPF2e, type SheetClickActionHandlers };

@@ -4,7 +4,7 @@
 import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import { TraitTagifyEntry } from "@module/sheet/helpers.ts";
 import { DamageCategoryUnique, DamageType } from "@system/damage/types.ts";
-import type { SpellPF2e, SpellSystemData, SpellSystemSource } from "./index.ts";
+import type { EffectAreaShape, SpellPF2e, SpellSystemData, SpellSystemSource } from "./index.ts";
 export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
     #private;
     static get defaultOptions(): ItemSheetOptions;
@@ -19,7 +19,6 @@ export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
     private getAvailableHeightenLevels;
 }
 interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
-    passiveDefense: string | null;
     isVariant: boolean;
     variants: {
         name: string;
@@ -36,8 +35,7 @@ interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
         selected: boolean;
         disabled: boolean;
     }[]>;
-    areaSizes: typeof CONFIG.PF2E.areaSizes;
-    areaTypes: typeof CONFIG.PF2E.areaTypes;
+    areaShapes: Record<EffectAreaShape, string>;
     heightenIntervals: number[];
     heightenOverlays: SpellSheetHeightenOverlayData[];
     canHeighten: boolean;

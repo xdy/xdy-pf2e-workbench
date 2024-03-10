@@ -1,11 +1,10 @@
 import { type ActorPF2e } from "@actor";
 import type { ItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
-import { CheckRollContextFlag } from "@module/chat-message/index.ts";
 import { ZeroToFour } from "@module/data.ts";
 import { ActorSourcePF2e } from "./data/index.ts";
 import { ModifierPF2e } from "./modifiers.ts";
 import { NPCStrike } from "./npc/data.ts";
-import { AuraEffectData, DamageRollContextParams } from "./types.ts";
+import { AuraEffectData } from "./types.ts";
 /**
  * Reset and rerender a provided list of actors. Omit argument to reset all world and synthetic actors
  * @param [actors] A list of actors to refresh: if none are provided, all world and synthetic actors are retrieved
@@ -30,8 +29,8 @@ declare function setHitPointsRollOptions(actor: ActorPF2e): void;
 declare function calculateMAPs(item: ItemPF2e, { domains, options }: {
     domains: string[];
     options: Set<string> | string[];
-}): MAPData;
-interface MAPData {
+}): MultipleAttackPenaltyData;
+interface MultipleAttackPenaltyData {
     slug: "multiple-attack-penalty";
     label: string;
     map1: number;
@@ -40,7 +39,7 @@ interface MAPData {
 /** Create roll options pertaining to the active encounter and the actor's participant */
 declare function createEncounterRollOptions(actor: ActorPF2e): Record<string, boolean>;
 /** Whether flanking puts this actor off-guard */
-declare function isOffGuardFromFlanking(target: ActorPF2e, origin: ActorPF2e, originRollOptions: string[]): boolean;
+declare function isOffGuardFromFlanking(target: ActorPF2e, origin: ActorPF2e): boolean;
 declare function getStrikeAttackDomains(weapon: WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e>, proficiencyRank: ZeroToFour | null, baseRollOptions: string[] | Set<string>): string[];
 declare function getStrikeDamageDomains(weapon: WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e>, proficiencyRank: ZeroToFour | null): string[];
 /** Create a strike statistic from a melee item: for use by NPCs and Hazards */
@@ -51,6 +50,5 @@ declare function getRangeIncrement(attackItem: ItemPF2e<ActorPF2e>, distance: nu
 declare function calculateRangePenalty(actor: ActorPF2e, increment: number | null, selectors: string[], rollOptions: Set<string>): ModifierPF2e | null;
 /** Whether this actor is of a the "character" type, excluding those from the PF2E Companion Compendia module */
 declare function isReallyPC(actor: ActorPF2e): boolean;
-/** Scan the last three chat messages for a check context to match the to-be-created damage context. */
-declare function findMatchingCheckContext(actor: ActorPF2e, params: DamageRollContextParams): CheckRollContextFlag | null;
-export { auraAffectsActor, calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, findMatchingCheckContext, getRangeIncrement, getStrikeAttackDomains, getStrikeDamageDomains, isOffGuardFromFlanking, isReallyPC, migrateActorSource, resetActors, setHitPointsRollOptions, strikeFromMeleeItem, userColorForActor, };
+export { auraAffectsActor, calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, getRangeIncrement, getStrikeAttackDomains, getStrikeDamageDomains, isOffGuardFromFlanking, isReallyPC, migrateActorSource, resetActors, setHitPointsRollOptions, strikeFromMeleeItem, userColorForActor, };
+export type { MultipleAttackPenaltyData };

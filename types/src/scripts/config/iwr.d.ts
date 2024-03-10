@@ -82,6 +82,10 @@ declare const immunityTypes: {
     water: string;
     wood: string;
     wounded: string;
+    arcane: string;
+    divine: string;
+    occult: string;
+    primal: string;
     holy: string;
     unholy: string;
     abysium: string;
@@ -99,6 +103,7 @@ declare const immunityTypes: {
 declare const weaknessTypes: {
     acid: string;
     air: string;
+    alchemical: string;
     "area-damage": string;
     "arrow-vulnerability": string;
     "axe-vulnerability": string;
@@ -146,6 +151,10 @@ declare const weaknessTypes: {
     weapons: string;
     "weapons-shedding-bright-light": string;
     wood: string;
+    arcane: string;
+    divine: string;
+    occult: string;
+    primal: string;
     holy: string;
     unholy: string;
     abysium: string;
@@ -207,6 +216,10 @@ declare const resistanceTypes: {
     weapons: string;
     "weapons-shedding-bright-light": string;
     wood: string;
+    arcane: string;
+    divine: string;
+    occult: string;
+    primal: string;
     holy: string;
     unholy: string;
     abysium: string;

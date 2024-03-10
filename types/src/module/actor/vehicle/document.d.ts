@@ -11,6 +11,8 @@ declare class VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocume
     /** Vehicle dimensions are specified for all three axes and usually do not form cubes */
     get dimensions(): ActorDimensions;
     get hardness(): number;
+    /** Whether the creature emits sound: overridable by AE-like */
+    get emitsSound(): boolean;
     getTokenDimensions(dimensions?: Omit<ActorDimensions, "height">): TokenDimensions;
     prepareBaseData(): void;
     prepareEmbeddedDocuments(): void;

@@ -7,7 +7,7 @@ declare class FlatModifierForm extends RuleElementForm<FlatModifierSource, FlatM
     get isDamage(): boolean;
     activateListeners(html: HTMLElement): void;
     getData(): Promise<FlatModifierFormSheetData>;
-    updateObject(formData: Partial<FlatModifierSource>): void;
+    updateObject(formData: Partial<FlatModifierSource> & Partial<Record<string, JSONValue>>): void;
 }
 interface FlatModifierFormSheetData extends RuleElementFormSheetData<FlatModifierSource, FlatModifierRuleElement> {
     selectorIsArray: boolean;

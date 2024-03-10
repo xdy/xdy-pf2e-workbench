@@ -3,7 +3,7 @@ import type { CheckModifier } from "@actor/modifiers.ts";
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { DegreeOfSuccessString } from "../degree-of-success.ts";
 import { CheckRoll } from "./roll.ts";
-import { CheckRollContext } from "./types.ts";
+import { CheckCheckContext } from "./types.ts";
 interface RerollOptions {
     heroPoint?: boolean;
     keep?: "new" | "higher" | "lower";
@@ -12,7 +12,7 @@ type CheckRollCallback = (roll: Rolled<CheckRoll>, outcome: DegreeOfSuccessStrin
 declare class CheckPF2e {
     #private;
     /** Roll the given statistic, optionally showing the check modifier dialog if 'Shift' is held down. */
-    static roll(check: CheckModifier, context?: CheckRollContext, event?: JQuery.TriggeredEvent | Event | null, callback?: CheckRollCallback): Promise<Rolled<CheckRoll> | null>;
+    static roll(check: CheckModifier, context?: CheckCheckContext, event?: JQuery.TriggeredEvent | Event | null, callback?: CheckRollCallback): Promise<Rolled<CheckRoll> | null>;
     /** Reroll a rolled check given a chat message. */
     static rerollFromMessage(message: ChatMessagePF2e, { heroPoint, keep }?: RerollOptions): Promise<void>;
     /**

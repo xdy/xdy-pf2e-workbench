@@ -46,6 +46,10 @@ declare class WeaponAuxiliaryAction {
     get label(): string;
     get glyph(): string;
     get options(): SheetOptions | null;
+    /**
+     * Execute an auxiliary action.
+     * [options.selection] A choice of some kind: currently only has meaning for modular trait toggling
+     */
     execute({ selection }?: {
         selection?: string | null;
     }): Promise<void>;

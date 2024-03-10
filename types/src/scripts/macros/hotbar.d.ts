@@ -1,4 +1,4 @@
-import { SkillAbbreviation } from "@actor/creature/data.ts";
+import type { SkillAbbreviation } from "@actor/creature/data.ts";
 import type { ConditionPF2e, EffectPF2e } from "@item";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import type { ElementTrait } from "@scripts/config/traits.ts";
@@ -7,7 +7,7 @@ import type { ElementTrait } from "@scripts/config/traits.ts";
  * Get an existing item macro if one exists, otherwise create a new one.
  * @param itemId
  */
-export declare function rollItemMacro(itemId: string): Promise<ChatMessagePF2e | undefined | void>;
+export declare function rollItemMacro(itemId: string, event?: Event | null): Promise<ChatMessagePF2e | null>;
 export declare function createActionMacro({ actorUUID, actionIndex, elementTrait, slot, }: {
     actorUUID?: ActorUUID;
     elementTrait?: string;

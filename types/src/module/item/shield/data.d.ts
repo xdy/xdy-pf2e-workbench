@@ -23,7 +23,7 @@ interface ShieldSystemSource extends PhysicalSystemSource {
 interface IntegratedWeaponSource {
     runes: WeaponRuneSource;
     versatile: {
-        selection: DamageType;
+        selected: DamageType;
     } | null;
 }
 interface ShieldTraitsSource extends PhysicalItemTraits<ShieldTrait> {
@@ -49,7 +49,7 @@ interface IntegratedWeaponData extends IntegratedWeaponSource {
     damageType: DamageType;
     versatile: {
         options: DamageType[];
-        selection: DamageType;
+        selected: DamageType;
     } | null;
 }
 interface ShieldTraits extends ShieldTraitsSource {

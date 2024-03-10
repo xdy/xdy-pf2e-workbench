@@ -6,13 +6,16 @@ import { RuleElementPF2e } from "../base.ts";
 import { ModelPropsFromRESchema, RuleElementSchema } from "../data.ts";
 import { ItemAlterationSchema } from "./alteration.ts";
 declare class ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSchema> {
+    #private;
     static defineSchema(): ItemAlterationRuleSchema;
     static validateJoint(data: SourceFromSchema<ItemAlterationRuleSchema>): void;
-    onApplyActiveEffects(): void;
     preCreate({ tempItems }: RuleElementPF2e.PreCreateParams): Promise<void>;
+    onApplyActiveEffects(): void;
+    afterPrepareData(): void;
     applyAlteration({ singleItem, additionalItems }?: ApplyAlterationOptions): void;
 }
 interface ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSchema>, ModelPropsFromRESchema<ItemAlterationRuleSchema> {
+    constructor: typeof ItemAlterationRuleElement;
 }
 type ItemAlterationRuleSchema = RuleElementSchema & ItemAlterationSchema & {
     /** The type of items to alter */

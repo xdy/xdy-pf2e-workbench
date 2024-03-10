@@ -17,7 +17,9 @@ declare class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get acBonus(): number;
     get isSpecific(): boolean;
     /** Generate a list of strings for use in predication */
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix?: string, options?: {
+        includeGranter?: boolean;
+    }): string[];
     isStackableWith(item: PhysicalItemPF2e<TParent>): boolean;
     prepareBaseData(): void;
     prepareDerivedData(): void;

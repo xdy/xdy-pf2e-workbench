@@ -9,8 +9,8 @@ import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleEl
  */
 declare class CraftingEntryRuleElement extends RuleElementPF2e<CraftingEntryRuleSchema> {
     protected static validActorTypes: ActorType[];
-    static defineSchema(): CraftingEntryRuleSchema;
     constructor(data: CraftingEntryRuleSource, options: RuleElementOptions);
+    static defineSchema(): CraftingEntryRuleSchema;
     beforePrepareData(): void;
 }
 interface CraftingEntryRuleElement extends RuleElementPF2e<CraftingEntryRuleSchema>, ModelPropsFromRESchema<CraftingEntryRuleSchema> {

@@ -1,10 +1,16 @@
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="jquery" resolution-mode="require"/>
+/// <reference types="tooltipster" />
 import { RawDamageDice, RawModifier } from "@actor/modifiers.ts";
-import { ChatContextFlag, ChatMessagePF2e } from "./index.ts";
+import type { ChatContextFlag, ChatMessagePF2e } from "./index.ts";
 declare class RollInspector extends Application {
-    private message;
-    static get defaultOptions(): ApplicationOptions;
+    message: ChatMessagePF2e;
     constructor(message: ChatMessagePF2e, options?: Partial<ApplicationOptions>);
+    static get defaultOptions(): ApplicationOptions;
+    get dice(): RawDamageDice[];
+    get modifiers(): RawModifier[];
     getData(): ChatRollDetailsData;
+    activateListeners($html: JQuery<HTMLElement>): void;
     /** Roll options search */
     protected _onSearchFilter(_event: KeyboardEvent, query: string, _rgx: RegExp, html: HTMLElement | null): void;
 }

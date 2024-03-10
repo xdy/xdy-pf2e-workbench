@@ -6,7 +6,7 @@ import { BaseSpellcastingEntry, CastOptions, SpellcastingSheetData } from "./typ
 export declare class RitualSpellcasting<TActor extends ActorPF2e> implements BaseSpellcastingEntry<TActor> {
     actor: TActor;
     spells: SpellCollection<TActor>;
-    constructor(actor: TActor, rituals: SpellPF2e<TActor>[]);
+    constructor(actor: TActor);
     get id(): string;
     get name(): string;
     get sort(): number;

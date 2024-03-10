@@ -2,7 +2,7 @@ import type { AbilityItemPF2e, FeatPF2e, SpellPF2e } from "@item";
 import { ItemPF2e } from "@item";
 import type { FeatSheetPF2e } from "@item/feat/sheet.ts";
 import { RangeData } from "@item/types.ts";
-import { AbilitySystemData, SelfEffectReference } from "./data.ts";
+import type { AbilitySystemData, SelfEffectReference } from "./data.ts";
 import type { AbilitySheetPF2e } from "./sheet.ts";
 interface SourceWithActionData {
     system: {

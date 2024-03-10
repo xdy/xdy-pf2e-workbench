@@ -3,7 +3,7 @@ import { ModifierPF2e, RawModifier } from "@actor/modifiers.ts";
 import { DCSlug } from "@actor/types.ts";
 import type { ItemPF2e } from "@item";
 import { RollNoteSource } from "@module/notes.ts";
-import { CheckContext, CheckContextData, CheckContextOptions, CheckResultCallback } from "@system/action-macros/types.ts";
+import { CheckContextData, CheckContextOptions, CheckMacroContext, CheckResultCallback } from "@system/action-macros/types.ts";
 import { CheckDC } from "@system/degree-of-success.ts";
 import { BaseAction, BaseActionData, BaseActionVariant, BaseActionVariantData } from "./base.ts";
 import { ActionUseOptions } from "./types.ts";
@@ -53,7 +53,7 @@ declare class SingleCheckActionVariant extends BaseActionVariant {
     get statistic(): string | string[];
     preview(options?: Partial<ActionVariantCheckPreviewOptions>): ActionCheckPreview[];
     use(options?: Partial<SingleCheckActionUseOptions>): Promise<CheckResultCallback[]>;
-    protected checkContext<ItemType extends ItemPF2e<ActorPF2e>>(opts: CheckContextOptions<ItemType>, data: CheckContextData<ItemType>): CheckContext<ItemType> | undefined;
+    protected checkContext<ItemType extends ItemPF2e<ActorPF2e>>(opts: CheckContextOptions<ItemType>, data: CheckContextData<ItemType>): CheckMacroContext<ItemType> | undefined;
     protected toActionCheckPreview(args: {
         actor?: ActorPF2e;
         rollOptions: string[];

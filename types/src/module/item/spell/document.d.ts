@@ -14,7 +14,7 @@ import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { CheckRoll } from "@system/check/index.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
-import { DamageKind, DamageRollContext, SpellDamageTemplate } from "@system/damage/types.ts";
+import { DamageDamageContext, DamageKind, SpellDamageTemplate } from "@system/damage/types.ts";
 import { StatisticRollParameters } from "@system/statistic/index.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { SpellArea, SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data.ts";
@@ -65,11 +65,16 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get atWill(): boolean;
     get isVariant(): boolean;
     get hasVariants(): boolean;
+    /**
+     * Attempt to parse out range data.
+     * @todo Migrate me.
+     */
+    get range(): RangeData | null;
+    get isMelee(): boolean;
+    get isRanged(): boolean;
     get area(): (SpellArea & {
         label: string;
     }) | null;
-    /** Dummy getter for interface alignment with weapons and actions */
-    get range(): RangeData | null;
     /** Whether the "damage" roll of this spell deals damage or heals (or both, depending on the target) */
     get damageKinds(): Set<DamageKind>;
     get uuid(): ItemUUID;
@@ -92,13 +97,16 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     prepareSiblingData(this: SpellPF2e<ActorPF2e>): void;
     prepareActorData(): void;
     onPrepareSynthetics(this: SpellPF2e<ActorPF2e>): void;
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix?: string, options?: {
+        includeGranter?: boolean;
+        includeVariants?: boolean;
+    }): string[];
     toMessage(event?: Maybe<MouseEvent | JQuery.TriggeredEvent>, { create, data, rollMode }?: SpellToMessageOptions): Promise<ChatMessagePF2e | undefined>;
     getChatData(this: SpellPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptionsPF2e, rollOptions?: {
         castRank?: number | string;
         groupId?: SpellSlotGroupId;
     }): Promise<RawItemChatData>;
-    rollAttack(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, attackNumber?: number, context?: StatisticRollParameters): Promise<void>;
+    rollAttack(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, attackNumber?: number, context?: StatisticRollParameters): Promise<Rolled<CheckRoll> | null>;
     rollDamage(this: SpellPF2e<ActorPF2e>, event: MouseEvent | JQuery.ClickEvent, mapIncreases?: ZeroToTwo): Promise<Rolled<DamageRoll> | null>;
     /** Roll counteract check */
     rollCounteract(event?: MouseEvent | JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
@@ -116,7 +124,7 @@ interface SpellConstructionContext<TParent extends ActorPF2e | null> extends Doc
 }
 interface SpellDamage {
     template: SpellDamageTemplate;
-    context: DamageRollContext;
+    context: DamageDamageContext;
 }
 interface SpellToMessageOptions {
     create?: boolean;

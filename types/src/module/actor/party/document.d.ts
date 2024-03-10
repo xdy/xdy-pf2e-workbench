@@ -46,7 +46,7 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
         actor?: boolean | undefined;
     }): void;
     /** Include campaign statistics in party statistics */
-    getStatistic(slug: string): Statistic | null;
+    getStatistic(slug: string): Statistic<this> | null;
     private _resetAndRerenderDebounced;
     protected _preUpdate(changed: DeepPartial<PartySource>, options: PartyUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Override to inform creatures when they were booted from a party */

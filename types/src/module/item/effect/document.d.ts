@@ -1,10 +1,11 @@
-import { ActorPF2e } from "@actor";
-import { EffectBadge } from "@item/abstract-effect/data.ts";
+import type { ActorPF2e } from "@actor";
+import type { BadgeReevaluationEventType, EffectBadge } from "@item/abstract-effect/data.ts";
 import { AbstractEffectPF2e } from "@item/abstract-effect/index.ts";
-import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
-import { UserPF2e } from "@module/user/index.ts";
-import { EffectFlags, EffectSource, EffectSystemData } from "./data.ts";
+import type { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
+import type { UserPF2e } from "@module/user/index.ts";
+import type { EffectFlags, EffectSource, EffectSystemData } from "./data.ts";
 declare class EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
+    #private;
     get badge(): EffectBadge | null;
     get level(): number;
     get isExpired(): boolean;
@@ -21,18 +22,15 @@ declare class EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     /** Decreases if this is a counter effect, otherwise deletes entirely */
     decrease(): Promise<void>;
     /** Include a trimmed version of the "slug" roll option (e.g., effect:rage instead of effect:effect-rage) */
-    getRollOptions(prefix?: string): string[];
-    /**
-     * Evaluate a formula badge, sending its result to chat.
-     * @returns The resulting value badge
-     */
-    private evaluateFormulaBadge;
+    getRollOptions(prefix?: string, options?: {
+        includeGranter?: boolean;
+    }): string[];
     /** Set the start time and initiative roll of a newly created effect */
     protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
     /** If applicable, reevaluate this effect's badge */
-    onTurnStartEnd(event: "start" | "end"): Promise<void>;
+    onEncounterEvent(event: BadgeReevaluationEventType): Promise<void>;
 }
 interface EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     flags: EffectFlags;

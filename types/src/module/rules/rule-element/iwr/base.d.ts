@@ -9,7 +9,7 @@ import { ModelPropsFromRESchema, RuleElementSchema, RuleElementSource, RuleValue
 /** @category RuleElement */
 declare abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema> {
     #private;
-    abstract value: RuleValue;
+    abstract value: RuleValue | null;
     static get dictionary(): Record<string, string | undefined>;
     static defineSchema(): IWRRuleSchema;
     protected static createExceptionsField<TType extends string>(types?: Record<TType, string>): StrictArrayField<IWRExceptionField<TType>>;

@@ -1,7 +1,9 @@
-import type { DamageDicePF2e } from "@actor/modifiers.ts";
+import type { ActorPF2e } from "@actor";
+import { DamageDicePF2e } from "@actor/modifiers.ts";
+import type { ItemPF2e } from "@item";
 import { DamageInstance, DamageRoll } from "./roll.ts";
 import { ArithmeticExpression, Grouping } from "./terms.ts";
-import { BaseDamageData, DamageCategory, DamageDieSize, DamageType } from "./types.ts";
+import type { BaseDamageData, DamageCategory, DamageDiceFaces, DamageDieSize, DamageType } from "./types.ts";
 declare function nextDamageDieSize(next: {
     upgrade: DamageDieSize;
 }): DamageDieSize;
@@ -19,6 +21,15 @@ declare const DamageCategorization: {
     /** Map a damage category to the set of damage types in it. */
     readonly toDamageTypes: (category: string) => Set<string>;
 };
+/** Create `DamageDicePF2e` and `ModifierPF2e` instances in order to apply damage alterations to base damage data. */
+declare function applyBaseDamageAlterations({ actor, item, base, domains, rollOptions }: ApplyDamageAlterationsParams): void;
+interface ApplyDamageAlterationsParams {
+    base: BaseDamageData[];
+    actor: ActorPF2e;
+    item: ItemPF2e<ActorPF2e>;
+    domains: string[];
+    rollOptions: string[] | Set<string>;
+}
 /** Apply damage dice overrides and upgrades to a non-weapon's damage formula */
 declare function applyDamageDiceOverrides(baseEntries: BaseDamageData[], dice: DamageDicePF2e[], options?: {
     critical?: boolean;
@@ -35,16 +46,19 @@ declare function isSystemDamageTerm(term: RollTerm): term is ArithmeticExpressio
 declare function deepFindTerms(term: RollTerm, { flavor }: {
     flavor: string;
 }): RollTerm[];
+declare function damageDieSizeToFaces(size: DamageDieSize): DamageDiceFaces;
+declare function damageDieSizeToFaces(size: string): DamageDiceFaces | null;
 /**
  * Create or retrieve a simplified term from a more-complex one, given that it can be done without information loss.
  * @returns A simplified term, if possible, or otherwise the original
  */
 declare function simplifyTerm<T extends RollTerm>(term: T): T | Die | NumericTerm;
-declare function isFlavoredArithmetic(term: RollTerm): boolean;
+/** Is the passed term an arithmetic expression that shouldn't be simplified? */
+declare function isUnsimplifableArithmetic(term: RollTerm): boolean;
 /** Check whether a roll has dice terms associated with a damage roll */
 declare function looksLikeDamageRoll(roll: Roll): boolean;
 /** Create a representative Font Awesome icon from a damage roll */
 declare function damageDiceIcon(roll: DamageRoll | DamageInstance, { fixedWidth }?: {
     fixedWidth?: boolean | undefined;
 }): HTMLElement;
-export { DamageCategorization, applyDamageDiceOverrides, damageDiceIcon, deepFindTerms, extractBaseDamage, isFlavoredArithmetic, isSystemDamageTerm, looksLikeDamageRoll, nextDamageDieSize, renderComponentDamage, simplifyTerm, };
+export { DamageCategorization, applyBaseDamageAlterations, applyDamageDiceOverrides, damageDiceIcon, damageDieSizeToFaces, deepFindTerms, extractBaseDamage, isSystemDamageTerm, isUnsimplifableArithmetic, looksLikeDamageRoll, nextDamageDieSize, renderComponentDamage, simplifyTerm, };

@@ -35,11 +35,11 @@ declare class RuleElementForm<TSource extends RuleElementSource = RuleElementSou
      * Helper to update the item with the new rule data.
      * This function exists because array updates in foundry are currently clunky
      */
-    updateItem(updates: Partial<TSource> | Record<string, unknown>): Promise<void>;
+    updateItem(updates: Partial<TSource> | Record<string, JSONValue>): Promise<void>;
     activateListeners(html: HTMLElement): void;
     protected onDrop(event: DragEvent, _element: HTMLElement): Promise<ItemPF2e | null>;
     protected activateTab(html: HTMLElement, tabName: Maybe<string>): void;
-    updateObject(source: TSource & Record<string, unknown>): void;
+    updateObject(source: TSource & Partial<Record<string, JSONValue>>): void;
 }
 interface RuleElementFormSheetData<TSource extends RuleElementSource, TObject extends RuleElementPF2e | null> extends Omit<RuleElementFormOptions<TSource, TObject>, "sheet"> {
     item: ItemPF2e;

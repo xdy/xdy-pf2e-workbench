@@ -11,8 +11,8 @@ import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleEl
 declare class CreatureSizeRuleElement extends RuleElementPF2e<CreatureSizeRuleSchema> {
     #private;
     protected static validActorTypes: ActorType[];
-    static defineSchema(): CreatureSizeRuleSchema;
     constructor(data: RuleElementSource, options: RuleElementOptions);
+    static defineSchema(): CreatureSizeRuleSchema;
     private static wordToAbbreviation;
     private static incrementMap;
     private static decrementMap;

@@ -14,11 +14,11 @@ declare class StrictSchemaField<TDataSchema extends DataSchema> extends fields.S
     protected _cleanType(data: object, options?: CleanFieldOptions): SourceFromSchema<TDataSchema>;
 }
 /** A `StringField` that does not cast the source value */
-declare class StrictStringField<TSourceProp extends string, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = boolean> extends fields.StringField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+declare class StrictStringField<TSourceProp extends string, TModelProp extends NonNullable<JSONValue> = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = false, THasInitial extends boolean = boolean> extends fields.StringField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;
 }
 /** A `NumberField` that does not cast the source value */
-declare class StrictNumberField<TSourceProp extends number, TModelProp = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = true, THasInitial extends boolean = true> extends fields.NumberField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+declare class StrictNumberField<TSourceProp extends number, TModelProp extends NonNullable<JSONValue> = TSourceProp, TRequired extends boolean = false, TNullable extends boolean = true, THasInitial extends boolean = true> extends fields.NumberField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;
 }
 /** A `BooleanField` that does not cast the source value */
@@ -32,7 +32,7 @@ declare class StrictArrayField<TElementField extends DataField, TSourceProp exte
     protected _cleanType(value: unknown): unknown;
     initialize(value: JSONValue, model: ConstructorOf<DataModel>, options: ArrayFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>): MaybeSchemaProp<TModelProp, TRequired, TNullable, THasInitial>;
 }
-declare class StrictObjectField<TSourceProp extends object, TModelProp = TSourceProp, TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ObjectField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+declare class StrictObjectField<TSourceProp extends object, TModelProp extends object = TSourceProp, TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ObjectField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;
 }
 declare class DataUnionField<TField extends DataField, TRequired extends boolean = boolean, TNullable extends boolean = boolean, THasInitial extends boolean = boolean> extends fields.DataField<TField extends DataField<infer TSourceProp> ? TSourceProp : never, TField extends DataField<infer _TSourceProp, infer TModelProp> ? TModelProp : never, TRequired, TNullable, THasInitial> {

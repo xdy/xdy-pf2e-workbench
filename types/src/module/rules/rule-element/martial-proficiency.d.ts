@@ -8,8 +8,8 @@ import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleEl
 declare class MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySchema> {
     protected static validActorTypes: ActorType[];
     slug: string;
-    static defineSchema(): MartialProficiencySchema;
     constructor(data: RuleElementSource, options: RuleElementOptions);
+    static defineSchema(): MartialProficiencySchema;
     onApplyActiveEffects(): void;
 }
 interface MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySchema>, ModelPropsFromRESchema<MartialProficiencySchema> {

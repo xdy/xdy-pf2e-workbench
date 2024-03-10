@@ -1,4 +1,4 @@
-import type { EffectAreaType } from "@item/spell/types.ts";
+import type { EffectAreaShape } from "@item/spell/types.ts";
 import { TokenPF2e, type MeasuredTemplatePF2e } from "./index.ts";
 /**
  * Measure the minimum distance between two rectangles
@@ -12,9 +12,9 @@ declare function measureDistanceCuboid(r0: PIXI.Rectangle, r1: PIXI.Rectangle, {
     target?: TokenPF2e | null;
 }): number;
 /** Highlight grid according to Pathfinder 2e effect-area shapes */
-declare function highlightGrid({ areaType, object, colors, document, collisionType, preview, }: HighlightGridParams): void;
+declare function highlightGrid({ areaShape, object, colors, document, collisionType, preview, }: HighlightGridParams): void;
 interface HighlightGridParams {
-    areaType: EffectAreaType | null;
+    areaShape: EffectAreaShape | null;
     object: MeasuredTemplatePF2e | TokenPF2e;
     /** Border and fill colors in hexadecimal */
     colors: {

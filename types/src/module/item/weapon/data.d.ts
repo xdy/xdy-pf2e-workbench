@@ -4,7 +4,7 @@ import { ItemFlagsPF2e } from "@item/base/data/system.ts";
 import type { BasePhysicalItemSource, Investable, ItemMaterialData, ItemMaterialSource, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, UsageDetails } from "@item/physical/index.ts";
 import { ZeroToFour, ZeroToThree } from "@module/data.ts";
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
-import type { WeaponTraitToggles } from "./helpers.ts";
+import type { WeaponTraitToggles } from "./trait-toggles.ts";
 import type { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponMaterialType, WeaponPropertyRuneType, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types.ts";
 type WeaponSource = BasePhysicalItemSource<"weapon", WeaponSystemSource> & {
     flags: DeepPartial<WeaponFlags>;
@@ -13,6 +13,7 @@ type WeaponFlags = ItemFlagsPF2e & {
     pf2e: {
         /** Whether this attack is compatible with a battle form */
         battleForm?: boolean;
+        /** Whether the weapon is a combination weapon in its melee form */
         comboMeleeUsage: boolean;
         /**
          * Used for NPC attacks generated from strike rule elements: if numeric, it will be used as the NPC attack's
@@ -21,6 +22,8 @@ type WeaponFlags = ItemFlagsPF2e & {
         fixedAttack?: number | null;
         /** A logging of this weapon's attack item bonus, whatever the source (rune, bomb innate item bonus, etc.) */
         attackItemBonus: number;
+        /** A tracking property of whether the damage die size has been upgraded */
+        damageFacesUpgraded: boolean;
     };
 };
 interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
@@ -75,11 +78,14 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
 interface WeaponTraitsSource extends PhysicalItemTraits<WeaponTrait> {
     otherTags: OtherWeaponTag[];
     toggles?: {
+        doubleBarrel?: {
+            selected: boolean;
+        };
         modular?: {
-            selection: DamageType | null;
+            selected: DamageType | null;
         };
         versatile?: {
-            selection: DamageType | null;
+            selected: DamageType | null;
         };
     };
 }

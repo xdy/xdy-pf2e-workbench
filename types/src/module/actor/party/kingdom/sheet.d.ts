@@ -3,7 +3,7 @@
 /// <reference types="tooltipster" />
 import { ActorPF2e, ArmyPF2e, type PartyPF2e } from "@actor";
 import { FeatGroup } from "@actor/character/feats.ts";
-import { ActorSheetPF2e } from "@actor/sheet/base.ts";
+import { ActorSheetPF2e, SheetClickActionHandlers } from "@actor/sheet/base.ts";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
 import { ItemPF2e, type CampaignFeaturePF2e } from "@item";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
@@ -26,6 +26,7 @@ declare class KingdomSheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     protected _getHeaderButtons(): ApplicationHeaderButton[];
     getData(options?: ActorSheetOptions): Promise<KingdomSheetData>;
     activateListeners($html: JQuery<HTMLElement>): void;
+    protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
     protected filterActions(trait: string | null, options?: {
         instant?: boolean;
     }): void;

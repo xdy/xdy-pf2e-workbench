@@ -9,7 +9,9 @@ declare class DeityPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     prepareActorData(this: DeityPF2e<ActorPF2e>): void;
     /** If applicable, set a trained proficiency with this deity's favored weapon */
     setFavoredWeaponRank(this: DeityPF2e<ActorPF2e>): void;
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix?: string, options?: {
+        includeGranter?: boolean;
+    }): string[];
     private getSanctificationRollOptions;
 }
 interface DeityPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {

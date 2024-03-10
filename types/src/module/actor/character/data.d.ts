@@ -343,6 +343,9 @@ interface CharacterStrike extends StrikeData {
     altUsages: CharacterStrike[];
     auxiliaryActions: WeaponAuxiliaryAction[];
     weaponTraits: TraitViewData[];
+    doubleBarrel: {
+        selected: boolean;
+    } | null;
     versatileOptions: VersatileWeaponOption[];
 }
 interface VersatileWeaponOption {

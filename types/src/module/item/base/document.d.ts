@@ -14,6 +14,10 @@ import type { ItemSheetPF2e } from "./sheet/sheet.ts";
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     /** Has this document completed `DataModel` initialization? */
     initialized: boolean;
+    /** Additional item roll options set by rule elements */
+    rollOptions: Set<string>;
+    /** The item that granted this item, if any */
+    grantedBy: ItemPF2e<ActorPF2e> | null;
     static getDefaultArtwork(itemData: foundry.documents.ItemSource): {
         img: ImageFilePath;
     };
@@ -28,8 +32,6 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     /** The recorded schema version of this item, updated after each data migration */
     get schemaVersion(): number | null;
     get description(): string;
-    /** The item that granted this item, if any */
-    get grantedBy(): ItemPF2e<ActorPF2e> | null;
     /** Check whether this item is in-memory-only on an actor rather than being a world item or embedded and stored */
     get inMemoryOnly(): boolean;
     /**
@@ -44,13 +46,15 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     /** Redirect the deletion of any owned items to ActorPF2e#deleteEmbeddedDocuments for a single workflow */
     delete(context?: DocumentModificationContext<TParent>): Promise<this | undefined>;
     /** Generate a list of strings for use in predication */
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix?: string, { includeGranter }?: {
+        includeGranter?: boolean | undefined;
+    }): string[];
     getRollData(): NonNullable<EnrichmentOptionsPF2e["rollData"]>;
     /**
      * Create a chat card for this item and either return the message or send it to the chat log. Many cards contain
      * follow-up options for attack rolls, effect application, etc.
      */
-    toMessage(event?: Maybe<MouseEvent | JQuery.TriggeredEvent>, options?: {
+    toMessage(event?: Maybe<Event | JQuery.TriggeredEvent>, options?: {
         rollMode?: RollMode | "roll";
         create?: boolean;
         data?: Record<string, unknown>;

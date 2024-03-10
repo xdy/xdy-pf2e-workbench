@@ -1,33 +1,32 @@
-import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AuraData, CheckContext, CheckContextParams, DamageRollContextParams, EmbeddedItemInstances, RollContext, RollContextParams, SaveType } from "@actor/types.ts";
+import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AuraData, EmbeddedItemInstances, SaveType } from "@actor/types.ts";
 import type { AbstractEffectPF2e, ConditionPF2e, ContainerPF2e, PhysicalItemPF2e, ShieldPF2e } from "@item";
 import { ItemPF2e } from "@item";
 import type { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/base/data/index.ts";
 import type { ConditionKey, ConditionSlug, ConditionSource } from "@item/condition/index.ts";
-import { EffectSource } from "@item/effect/data.ts";
+import type { EffectSource } from "@item/effect/data.ts";
 import type { ActiveEffectPF2e } from "@module/active-effect.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
-import { AppliedDamageFlag } from "@module/chat-message/index.ts";
-import { Size } from "@module/data.ts";
+import type { AppliedDamageFlag } from "@module/chat-message/index.ts";
+import type { Size } from "@module/data.ts";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
-import { RuleElementSynthetics } from "@module/rules/index.ts";
-import { RuleElementPF2e } from "@module/rules/rule-element/base.ts";
+import type { RuleElementSynthetics } from "@module/rules/index.ts";
+import type { RuleElementPF2e } from "@module/rules/rule-element/base.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { ScenePF2e } from "@scene/document.ts";
 import { TokenDocumentPF2e } from "@scene/token-document/document.ts";
-import { DamageType } from "@system/damage/types.ts";
-import type { ArmorStatistic, PerceptionStatistic, StatisticCheck, StatisticDifficultyClass } from "@system/statistic/index.ts";
-import { Statistic } from "@system/statistic/index.ts";
+import type { DamageType } from "@system/damage/types.ts";
+import type { ArmorStatistic, PerceptionStatistic, Statistic, StatisticDifficultyClass } from "@system/statistic/index.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ActorConditions } from "./conditions.ts";
-import { Abilities, CreatureSkills, VisionLevel } from "./creature/data.ts";
+import { Abilities, VisionLevel } from "./creature/data.ts";
 import { GetReachParameters, ModeOfBeing } from "./creature/types.ts";
-import { ActorFlagsPF2e, ActorSystemData, PrototypeTokenPF2e, RollOptionFlags, StrikeData } from "./data/base.ts";
-import { ActorSourcePF2e } from "./data/index.ts";
+import { ActorFlagsPF2e, ActorSystemData, PrototypeTokenPF2e, RollOptionFlags } from "./data/base.ts";
+import type { ActorSourcePF2e } from "./data/index.ts";
 import type { ActorInitiative } from "./initiative.ts";
 import { ActorInventory } from "./inventory/index.ts";
-import { ActorSheetPF2e } from "./sheet/base.ts";
-import { ActorSpellcasting } from "./spellcasting.ts";
-import { ActorType } from "./types.ts";
+import type { ActorSheetPF2e } from "./sheet/base.ts";
+import type { ActorSpellcasting } from "./spellcasting.ts";
+import type { ActorType } from "./types.ts";
 /**
  * Extend the base Actor class to implement additional logic specialized for PF2e.
  * @category Actor
@@ -43,7 +42,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     inventory: ActorInventory<this>;
     armorClass: StatisticDifficultyClass<ArmorStatistic> | null;
     /** A separate collection of owned spellcasting entries for convenience */
-    spellcasting: ActorSpellcasting<this>;
+    spellcasting: ActorSpellcasting<this> | null;
     /** Rule elements drawn from owned items */
     rules: RuleElementPF2e[];
     synthetics: RuleElementSynthetics;
@@ -57,7 +56,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     conditions: ActorConditions<this>;
     perception?: PerceptionStatistic;
     /** Skill checks for the actor if supported by the actor type */
-    skills?: Partial<CreatureSkills>;
+    skills?: Record<string, Statistic<this>>;
     /** A cached copy of `Actor#itemTypes`, lazily regenerated every data preparation cycle */
     private _itemTypes;
     constructor(data: PreCreate<ActorSourcePF2e>, context?: DocumentConstructionContext<TParent>);
@@ -126,7 +125,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /** Checks if the item can be added to this actor by checking the valid item types. */
     checkItemValidity(source: PreCreate<ItemSourcePF2e>): boolean;
     /** Get (almost) any statistic by slug: handling expands in `ActorPF2e` subclasses */
-    getStatistic(slug: string): Statistic | null;
+    getStatistic(slug: string): Statistic<this> | null;
     /** Get roll options from this actor's effects, traits, and other properties */
     getSelfRollOptions(prefix?: "self" | "target" | "origin"): string[];
     /** The actor's reach: a meaningful implementation is found in `CreaturePF2e` and `HazardPF2e`. */
@@ -171,11 +170,6 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     prepareDerivedData(): void;
     /** Set defaults for this actor's prototype token */
     private preparePrototypeToken;
-    protected getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends ItemPF2e<ActorPF2e> | null>(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
-    /** Calculate attack roll targeting data, including the target's DC. */
-    getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends ItemPF2e<ActorPF2e> | null>(params: CheckContextParams<TStatistic, TItem>): Promise<CheckContext<this, TStatistic, TItem>>;
-    /** Acquire additional data for a damage roll. */
-    getDamageRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends ItemPF2e<ActorPF2e> | null>(params: DamageRollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     /** Toggle the provided roll option (swapping it from true to false or vice versa). */
     toggleRollOption(domain: string, option: string, value?: boolean): Promise<boolean | null>;
     toggleRollOption(domain: string, option: string, itemId?: string | null, value?: boolean, suboption?: string | null): Promise<boolean | null>;
@@ -197,7 +191,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      * @param token The applicable token for this actor
      * @param shieldBlockRequest Whether the user has toggled the Shield Block button
      */
-    applyDamage({ damage, token, item, rollOptions, skipIWR, shieldBlockRequest, breakdown, notes, }: ApplyDamageParams): Promise<this>;
+    applyDamage({ damage, token, item, rollOptions, skipIWR, shieldBlockRequest, breakdown, notes, outcome, final, }: ApplyDamageParams): Promise<this>;
     /** Revert applied actor damage based on the AppliedDamageFlag stored in a damage chat message */
     undoDamage(appliedDamage: AppliedDamageFlag): Promise<void>;
     /** Can a user loot this actor? Same as update modification permission but overridable by subclasses */
@@ -259,7 +253,6 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     protected _onUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, userId: string): void;
     /** Unregister all effects possessed by this actor */
     protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
-    protected _onEmbeddedDocumentChange(): void;
 }
 interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Actor<TParent> {
     flags: ActorFlagsPF2e;

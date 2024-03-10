@@ -3,7 +3,7 @@ import type { CheckModifier, DamageDicePF2e, ModifierPF2e } from "@actor/modifie
 import { ItemPF2e, type WeaponPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
-import { CheckRoll, CheckRollContext } from "@system/check/index.ts";
+import { CheckCheckContext, CheckRoll } from "@system/check/index.ts";
 import { LaxSchemaField } from "@system/schema-data-fields.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { BracketedValue, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
@@ -80,7 +80,7 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
      * @param defaultValue if no value is found, use that one
      * @return the evaluated value
      */
-    resolveValue(value: unknown, defaultValue?: Exclude<RuleValue, BracketedValue>, { evaluate, resolvables, warn }?: ResolveValueParams): number | string | boolean | object | null;
+    resolveValue(value: unknown, defaultValue?: Exclude<RuleValue, BracketedValue> | null, { evaluate, resolvables, warn }?: ResolveValueParams): number | string | boolean | object | null;
     protected isBracketedValue(value: unknown): value is BracketedValue;
 }
 interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abstract.DataModel<ItemPF2e<ActorPF2e>, TSchema>, ModelPropsFromSchema<RuleElementSchema> {
@@ -146,11 +146,15 @@ interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abs
      */
     onCreate?(actorUpdates: Record<string, unknown>): void;
     /**
-     * Run at the start of the actor's turn. Similar to onCreate and onDelete, this provides an opportunity to make
+     * Run at certain encounter events, such as the start of the actor's turn. Similar to onCreate and onDelete, this provides an opportunity to make
      * updates to the actor.
-     * @param actorUpdates A record containing update data for the actor
+     * @param data.event        The type of event that triggered this callback
+     * @param data.actorUpdates A record containing update data for the actor
      */
-    onTurnStart?(actorUpdates: Record<string, unknown>): void | Promise<void>;
+    onUpdateEncounter?(data: {
+        event: "initiative-roll" | "turn-start";
+        actorUpdates: Record<string, unknown>;
+    }): Promise<void>;
     /**
      * Runs after an item holding this rule is removed from an actor. This method is used for cleaning up any values
      * on the actorData or token objects (e.g., removing temp HP).
@@ -188,7 +192,7 @@ declare namespace RuleElementPF2e {
     interface AfterRollParams {
         roll: Rolled<CheckRoll>;
         check: CheckModifier;
-        context: CheckRollContext;
+        context: CheckCheckContext;
         domains: string[];
         rollOptions: Set<string>;
     }
@@ -198,12 +202,10 @@ interface ResolveValueParams {
     resolvables?: Record<string, unknown>;
     warn?: boolean;
 }
-type RuleElementOptions = {
-    parent: ItemPF2e<ActorPF2e>;
-    strict?: boolean;
+interface RuleElementOptions extends ParentedDataModelConstructionOptions<ItemPF2e<ActorPF2e>> {
     /** If created from an item, the index in the source data */
     sourceIndex?: number;
     /** If data validation fails for any reason, do not emit console warnings */
     suppressWarnings?: boolean;
-};
+}
 export { RuleElementPF2e, type RuleElementOptions };

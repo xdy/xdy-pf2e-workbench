@@ -31,7 +31,7 @@ declare class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     updateLevel(newLevel: number): Promise<this | undefined>;
     /** Prevent addition of invalid tactic types */
     checkItemValidity(source: PreCreate<ItemSourcePF2e>): boolean;
-    getStatistic(slug: string): Statistic | null;
+    getStatistic(slug: string): Statistic<this> | null;
     _preUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
 }

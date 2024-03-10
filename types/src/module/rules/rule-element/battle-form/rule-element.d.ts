@@ -7,11 +7,11 @@ import { BattleFormRuleSchema } from "./schema.ts";
 import { BattleFormSource } from "./types.ts";
 declare class BattleFormRuleElement extends RuleElementPF2e<BattleFormRuleSchema> {
     #private;
+    protected static validActorTypes: ActorType[];
     /** The label given to modifiers of AC, skills, and strikes */
     modifierLabel: string;
-    protected static validActorTypes: ActorType[];
-    static defineSchema(): BattleFormRuleSchema;
     constructor(data: BattleFormSource, options: RuleElementOptions);
+    static defineSchema(): BattleFormRuleSchema;
     preCreate({ itemSource, ruleSource }: RuleElementPF2e.PreCreateParams): Promise<void>;
     /** Set temporary hit points */
     onCreate(actorUpdates: Record<string, unknown>): void;

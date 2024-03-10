@@ -3,7 +3,7 @@
 /// <reference types="tooltipster" />
 import type { ActorPF2e, CreaturePF2e } from "@actor";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
-import { type ItemPF2e } from "@item";
+import { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
@@ -25,6 +25,7 @@ declare abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Ac
     protected getProficiencyIcon(level: ZeroToFour): string;
     activateListeners($html: JQuery): void;
     protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
+    protected _onDropItem(event: DragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
     /** Adds support for moving spells between spell levels, spell collections, and spell preparation */
     protected _onSortItem(event: DragEvent, itemData: ItemSourcePF2e): Promise<ItemPF2e[]>;
     /** Handle dragging spells onto spell slots. */

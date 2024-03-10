@@ -10,7 +10,10 @@ declare class TempHPRuleElement extends RuleElementPF2e<TempHPRuleSchema> {
     static defineSchema(): TempHPRuleSchema;
     onCreate(actorUpdates: Record<string, unknown>): void;
     /** Refresh the actor's temporary hit points at the start of its turn */
-    onTurnStart(actorUpdates: Record<string, unknown>): void;
+    onUpdateEncounter(data: {
+        event: "initiative-roll" | "turn-start";
+        actorUpdates: Record<string, unknown>;
+    }): Promise<void>;
     onDelete(actorUpdates: Record<string, unknown>): void;
     /** Send out a chat message notifying everyone that the actor gained temporary HP */
     broadcast(newQuantity: number, oldQuantity: number): void;

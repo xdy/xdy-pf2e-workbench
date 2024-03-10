@@ -9,13 +9,13 @@
         "pathfinder"
     ],
     "devDependencies": {
-        "@types/jquery": "^3.5.29",
+        "@types/jquery": "^3.5.14",
         "@types/node": "^18.11.12",
         "pixi.js": "6.5.2",
-        "socket.io": "^4.7.4",
-        "socket.io-client": "^4.7.4",
-        "tinymce": "^6.8.3",
-        "typescript": "^4.9.4"
+        "socket.io": "^4.5.1",
+        "socket.io-client": "^4.5.1",
+        "tinymce": "^6.1.2",
+        "typescript": "^5.3.3"
     },
     "author": "the pf2e system developers",
     "license": "Apache-2.0",

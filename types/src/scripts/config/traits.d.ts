@@ -14,6 +14,7 @@ declare const ancestryTraits: {
     automaton: string;
     azarketi: string;
     beastkin: string;
+    bugbear: string;
     catfolk: string;
     changeling: string;
     conrasu: string;
@@ -98,8 +99,10 @@ declare const creatureTraits: {
     azata: string;
     beast: string;
     boggard: string;
+    bugbear: string;
     caligni: string;
     celestial: string;
+    centaur: string;
     "charau-ka": string;
     clockwork: string;
     construct: string;
@@ -174,6 +177,7 @@ declare const creatureTraits: {
     sahkil: string;
     samsaran: string;
     "sea-devil": string;
+    sedacthy: string;
     serpentfolk: string;
     seugathi: string;
     shabti: string;
@@ -568,6 +572,7 @@ declare const weaponTraits: {
     automaton: string;
     azarketi: string;
     beastkin: string;
+    bugbear: string;
     catfolk: string;
     changeling: string;
     conrasu: string;
@@ -649,6 +654,7 @@ declare const npcAttackTraits: {
     "reload-1": string;
     "reload-2": string;
     "reload-1-min": string;
+    sanctified: string;
     "range-5": string;
     "range-10": string;
     "range-15": string;
@@ -690,6 +696,7 @@ declare const npcAttackTraits: {
     "range-increment-20": string;
     "range-increment-25": string;
     "range-increment-30": string;
+    "range-increment-35": string;
     "range-increment-40": string;
     "range-increment-50": string;
     "range-increment-60": string;
@@ -895,6 +902,7 @@ declare const npcAttackTraits: {
     automaton: string;
     azarketi: string;
     beastkin: string;
+    bugbear: string;
     catfolk: string;
     changeling: string;
     conrasu: string;
@@ -1100,6 +1108,7 @@ declare const featTraits: {
     automaton: string;
     azarketi: string;
     beastkin: string;
+    bugbear: string;
     catfolk: string;
     changeling: string;
     conrasu: string;
@@ -1492,6 +1501,7 @@ declare const actionTraits: {
     automaton: string;
     azarketi: string;
     beastkin: string;
+    bugbear: string;
     catfolk: string;
     changeling: string;
     conrasu: string;
@@ -1737,6 +1747,7 @@ declare const effectTraits: Omit<{
     automaton: string;
     azarketi: string;
     beastkin: string;
+    bugbear: string;
     catfolk: string;
     changeling: string;
     conrasu: string;
@@ -1781,7 +1792,7 @@ declare const effectTraits: Omit<{
     undine: string;
     vanara: string;
     vishkanya: string;
-}, "splash" | "alchemist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "fighter" | "gunslinger" | "kineticist" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "psychic" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "thaumaturge" | "witch" | "wizard" | "agile" | "propulsive" | "backswing" | "forceful" | "reach" | "sweep" | "thrown" | "volley-20" | "volley-30" | "volley-50" | "clockwork" | "consumable" | "infused" | "aiuvarin" | "anadi" | "android" | "aphorite" | "ardande" | "automaton" | "azarketi" | "beastkin" | "catfolk" | "changeling" | "conrasu" | "dhampir" | "dromaar" | "duskwalker" | "dwarf" | "elf" | "fetchling" | "fleshwarp" | "ganzi" | "geniekin" | "ghoran" | "gnoll" | "gnome" | "goblin" | "goloma" | "grippli" | "halfling" | "hobgoblin" | "human" | "kashrishi" | "kitsune" | "kobold" | "leshy" | "lizardfolk" | "nagaji" | "naari" | "nephilim" | "orc" | "oread" | "poppet" | "ratfolk" | "reflection" | "shisk" | "shoony" | "skeleton" | "sprite" | "strix" | "suli" | "sylph" | "talos" | "tengu" | "undine" | "vanara" | "vishkanya" | "additive1" | "additive2" | "additive3" | "aftermath" | "amp" | "archetype" | "attack" | "beast" | "bottled-breath" | "cantrip" | "catalyst" | "circus" | "class" | "composite" | "composition" | "concentrate" | "dedication" | "deviant" | "eidolon" | "elixir" | "esoterica" | "expandable" | "exploration" | "finisher" | "flourish" | "focus" | "fulu" | "gadget" | "general" | "lineage" | "litany" | "lozenge" | "manipulate" | "missive" | "modification" | "multiclass" | "mutagen" | "oath" | "oil" | "overflow" | "pervasive-magic" | "potion" | "precious" | "press" | "processed" | "rage" | "reckless" | "reincarnated" | "revelation" | "sanctified" | "scroll" | "secret" | "skill" | "snare" | "spellgun" | "structure" | "subtle" | "talisman" | "tandem" | "tea" | "trap" | "unstable" | "vigilante" | "wand">;
+}, "splash" | "alchemist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "fighter" | "gunslinger" | "kineticist" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "psychic" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "thaumaturge" | "witch" | "wizard" | "agile" | "propulsive" | "backswing" | "forceful" | "reach" | "sweep" | "thrown" | "volley-20" | "volley-30" | "volley-50" | "clockwork" | "consumable" | "infused" | "aiuvarin" | "anadi" | "android" | "aphorite" | "ardande" | "automaton" | "azarketi" | "beastkin" | "bugbear" | "catfolk" | "changeling" | "conrasu" | "dhampir" | "dromaar" | "duskwalker" | "dwarf" | "elf" | "fetchling" | "fleshwarp" | "ganzi" | "geniekin" | "ghoran" | "gnoll" | "gnome" | "goblin" | "goloma" | "grippli" | "halfling" | "hobgoblin" | "human" | "kashrishi" | "kitsune" | "kobold" | "leshy" | "lizardfolk" | "nagaji" | "naari" | "nephilim" | "orc" | "oread" | "poppet" | "ratfolk" | "reflection" | "shisk" | "shoony" | "skeleton" | "sprite" | "strix" | "suli" | "sylph" | "talos" | "tengu" | "undine" | "vanara" | "vishkanya" | "additive1" | "additive2" | "additive3" | "aftermath" | "amp" | "archetype" | "attack" | "beast" | "bottled-breath" | "cantrip" | "catalyst" | "circus" | "class" | "composite" | "composition" | "concentrate" | "dedication" | "deviant" | "eidolon" | "elixir" | "esoterica" | "expandable" | "exploration" | "finisher" | "flourish" | "focus" | "fulu" | "gadget" | "general" | "lineage" | "litany" | "lozenge" | "manipulate" | "missive" | "modification" | "multiclass" | "mutagen" | "oath" | "oil" | "overflow" | "pervasive-magic" | "potion" | "precious" | "press" | "processed" | "reckless" | "reincarnated" | "revelation" | "sanctified" | "scroll" | "secret" | "skill" | "snare" | "spellgun" | "structure" | "subtle" | "talisman" | "tandem" | "tea" | "trap" | "unstable" | "vigilante" | "wand">;
 declare const hazardTraits: {
     aberration: string;
     alchemical: string;
@@ -1937,6 +1948,7 @@ declare const equipmentTraits: {
     automaton: string;
     azarketi: string;
     beastkin: string;
+    bugbear: string;
     catfolk: string;
     changeling: string;
     conrasu: string;
@@ -2273,6 +2285,7 @@ declare const kingmakerTraits: {
     automaton: string;
     azarketi: string;
     beastkin: string;
+    bugbear: string;
     catfolk: string;
     changeling: string;
     conrasu: string;
@@ -2521,6 +2534,7 @@ declare const traitDescriptions: {
     "range-increment-20": string;
     "range-increment-25": string;
     "range-increment-30": string;
+    "range-increment-35": string;
     "range-increment-40": string;
     "range-increment-50": string;
     "range-increment-60": string;
@@ -2597,6 +2611,7 @@ declare const traitDescriptions: {
     "bottled-breath": string;
     brace: string;
     brutal: string;
+    bugbear: string;
     bulwark: string;
     cantrip: string;
     "capacity-2": string;

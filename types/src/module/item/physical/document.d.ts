@@ -1,10 +1,11 @@
-import { type ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { ItemPF2e, type ContainerPF2e } from "@item";
-import { ItemSourcePF2e, PhysicalItemSource, RawItemChatData, TraitChatData } from "@item/base/data/index.ts";
-import { Rarity, Size, ZeroToTwo } from "@module/data.ts";
+import type { ItemSourcePF2e, PhysicalItemSource, RawItemChatData, TraitChatData } from "@item/base/data/index.ts";
+import type { Rarity, Size, ZeroToTwo } from "@module/data.ts";
+import type { EffectSpinoff } from "@module/rules/rule-element/effect-spinoff/spinoff.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { Bulk } from "./bulk.ts";
-import { IdentificationStatus, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalSystemData, Price } from "./data.ts";
+import type { IdentificationStatus, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalSystemData, Price } from "./data.ts";
 import { CoinsPF2e } from "./helpers.ts";
 declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     /** The item in which this item is embedded */
@@ -16,6 +17,8 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     private _container;
     /** Doubly-embedded adjustments, attachments, talismans etc. */
     subitems: Collection<PhysicalItemPF2e<TParent>>;
+    /** A map of effect spinoff objects, which can be used to create new effects from using certain items */
+    effectSpinoffs: Map<string, EffectSpinoff>;
     constructor(data: PreCreate<ItemSourcePF2e>, context?: PhysicalItemConstructionContext<TParent>);
     get level(): number;
     get rarity(): Rarity;
@@ -63,7 +66,9 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     /** Whether other items can be attached (or affixed, applied, etc.) to this item */
     acceptsSubitem(candidate: PhysicalItemPF2e): boolean;
     /** Generate a list of strings for use in predication */
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix: string, options?: {
+        includeGranter?: boolean;
+    }): string[];
     protected _initialize(options?: Record<string, unknown>): void;
     prepareBaseData(): void;
     /** Refresh certain derived properties in case of special data preparation from subclasses */

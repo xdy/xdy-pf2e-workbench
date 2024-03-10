@@ -62,6 +62,14 @@ declare const MetagameSettingsConfig: {
         type: BooleanConstructor;
         onChange: (value: unknown) => Promise<void>;
     };
+    secretChecks: {
+        prefix: string;
+        name: string;
+        hint: string;
+        default: false;
+        type: BooleanConstructor;
+        onChange: (value: unknown) => void;
+    };
 };
 declare class MetagameSettings extends SettingsMenuPF2e {
     static namespace: string;

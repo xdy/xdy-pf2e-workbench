@@ -59,6 +59,7 @@ interface AELikeSource extends RuleElementSource {
     mode?: JSONValue;
     path?: JSONValue;
     phase?: JSONValue;
+    value?: JSONValue;
 }
 export { AELikeRuleElement };
 export type { AELikeChangeMode, AELikeDataPrepPhase, AELikeSchema, AELikeSource, AutoChangeEntry };

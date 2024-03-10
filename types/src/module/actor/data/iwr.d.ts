@@ -42,7 +42,7 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         bleed: string;
         blinded: string;
         bludgeoning: string;
-        clumsy: string;
+        clumsy: string; /** A label showing the type, exceptions, and doubleVs but no value (in case of weaknesses and resistances) */
         cold: string;
         confused: string;
         controlled: string;
@@ -118,6 +118,10 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         water: string;
         wood: string;
         wounded: string;
+        arcane: string;
+        divine: string;
+        occult: string;
+        primal: string;
         holy: string;
         unholy: string;
         abysium: string;
@@ -144,6 +148,7 @@ declare class Weakness extends IWR<WeaknessType> implements WeaknessSource {
     protected readonly typeLabels: {
         acid: string;
         air: string;
+        alchemical: string;
         "area-damage": string;
         "arrow-vulnerability": string;
         "axe-vulnerability": string;
@@ -191,6 +196,10 @@ declare class Weakness extends IWR<WeaknessType> implements WeaknessSource {
         weapons: string;
         "weapons-shedding-bright-light": string;
         wood: string;
+        arcane: string;
+        divine: string;
+        occult: string;
+        primal: string;
         holy: string;
         unholy: string;
         abysium: string;
@@ -264,6 +273,10 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         weapons: string;
         "weapons-shedding-bright-light": string;
         wood: string;
+        arcane: string;
+        divine: string;
+        occult: string;
+        primal: string;
         holy: string;
         unholy: string;
         abysium: string;

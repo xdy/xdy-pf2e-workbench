@@ -1,7 +1,8 @@
 import type { CreatureSheetData } from "@actor/creature/sheet.ts";
-import type { HitPointsStatistic } from "@actor/data/base.ts";
+import type { HitPointsStatistic, TraitViewData } from "@actor/data/base.ts";
+import type { AbilityViewData } from "@actor/sheet/data-types.ts";
 import type { MovementType, SaveType, SkillAbbreviation } from "@actor/types.ts";
-import type { AbilityItemPF2e, ItemPF2e } from "@item";
+import type { ItemPF2e } from "@item";
 import type { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import type { ZeroToFour } from "@module/data.ts";
 import type { TraitTagifyEntry } from "@module/sheet/helpers.ts";
@@ -10,7 +11,7 @@ import type { NPCAttributes, NPCPerceptionData, NPCSaveData, NPCSkillData, NPCSy
 import type { NPCPF2e, NPCStrike } from "./index.ts";
 interface ActionsDetails {
     label: string;
-    actions: NPCSheetItemData<AbilityItemPF2e<NPCPF2e>>[];
+    actions: AbilityViewData[];
 }
 interface NPCActionSheetData {
     passive: ActionsDetails;
@@ -38,7 +39,6 @@ type WithRank = {
 };
 type NPCSkillSheetData = NPCSkillData & WithAdjustments & WithRank;
 interface NPCSystemSheetData extends NPCSystemData {
-    actions: NPCStrikeSheetData[];
     perception: NPCPerceptionData & WithAdjustments & WithRank;
     attributes: NPCAttributes & {
         ac: ArmorClassTraceData & WithAdjustments;
@@ -56,9 +56,17 @@ interface NPCSystemSheetData extends NPCSystemData {
     }>;
     skills: Record<SkillAbbreviation, NPCSkillSheetData>;
 }
-interface NPCStrikeSheetData extends NPCStrike {
+interface NPCStrikeSheetData {
+    _id: string;
+    name: string;
+    sort: number;
+    breakdown: string;
+    variants: NPCStrike["variants"];
+    attackType: string;
+    traits: TraitViewData[];
+    description: string | null;
     /** The damage formula of the strike for display on sheets */
-    damageFormula?: string;
+    damageFormula: string | null;
 }
 interface NPCSpellcastingSheetData extends SpellcastingSheetData {
     adjustedHigher?: {
@@ -71,10 +79,11 @@ interface NPCSpellcastingSheetData extends SpellcastingSheetData {
     };
 }
 /** Additional fields added in sheet data preparation */
-interface NPCSheetData<TActor extends NPCPF2e = NPCPF2e> extends CreatureSheetData<TActor> {
+interface NPCSheetData extends CreatureSheetData<NPCPF2e> {
+    attacks: NPCStrikeSheetData[];
     actions: NPCActionSheetData;
     data: NPCSystemSheetData;
-    items: NPCSheetItemData<ItemPF2e<TActor>>[];
+    items: NPCSheetItemData<ItemPF2e<NPCPF2e>>[];
     spellcastingEntries: SpellcastingSheetData[];
     identificationDCs: NPCIdentificationSheetData;
     isNotCommon?: boolean;
@@ -100,12 +109,10 @@ interface NPCSpeedSheetData {
 }
 type NPCSheetItemData<TItem extends ItemPF2e<NPCPF2e>> = Omit<RawObject<TItem>, "traits"> & {
     glyph: string;
-    imageUrl: string;
     traits: {
         label: string;
         description?: string;
     }[];
-    chatData?: unknown;
     system: {
         bonus?: {
             value: number;

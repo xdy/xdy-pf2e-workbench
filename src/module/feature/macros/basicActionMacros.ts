@@ -7,7 +7,6 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
 import { Action } from "@actor/actions/types.js";
 import { CharacterSkill } from "@actor/character/types.js";
-import { CreatureSkills } from "@actor/creature/data.js";
 import { ModifierPF2e } from "@actor/modifiers.js";
 import { Statistic } from "@system/statistic/statistic.js";
 
@@ -25,7 +24,12 @@ export async function registerBasicActionMacrosHandlebarsTemplates() {
 
     Handlebars.registerPartial("actionButton", `{{> "modules/${MODULENAME}/templates/macros/bam/actionButton.hbs"}}`);
 }
-function getBestBonuses(actorSkills: Map<string, Partial<CreatureSkills>>, party: string[], actionList: MacroAction[]) {
+
+function getBestBonuses(
+    actorSkills: Map<string, Partial<Record<string, Statistic>>>,
+    party: string[],
+    actionList: MacroAction[],
+) {
     for (const actorId of party) {
         const skills = actorSkills.get(actorId);
         for (const action of actionList) {
@@ -40,8 +44,8 @@ function getBestBonuses(actorSkills: Map<string, Partial<CreatureSkills>>, party
     }
 }
 
-function createMapOfSkillsPerActor(actors: ActorPF2e[]): Map<string, Partial<CreatureSkills>> {
-    const map = new Map<string, Partial<CreatureSkills>>();
+function createMapOfSkillsPerActor(actors: ActorPF2e[]): Map<string, Partial<Record<string, Statistic>>> {
+    const map = new Map<string, Partial<Record<string, Statistic>>>();
     for (const actor of actors) {
         const skills = fetchSkills(actor);
         if (skills) {
@@ -51,7 +55,7 @@ function createMapOfSkillsPerActor(actors: ActorPF2e[]): Map<string, Partial<Cre
     return map;
 }
 
-function fetchSkills(actor: ActorPF2e): Partial<CreatureSkills> {
+function fetchSkills(actor: ActorPF2e): Partial<Record<string, Statistic>> {
     return { perception: actor.perception, ...actor.skills };
 }
 
@@ -60,7 +64,7 @@ function createButtonData(
     idx: number,
     actor: ActorPF2e,
     party: string[],
-    actorSkills: Partial<CreatureSkills>,
+    actorSkills: Partial<Record<string, Statistic>>,
 ): { bonus: number; skill: Statistic | null | undefined; action: MacroAction; best: boolean; idx: number } {
     const skillName = action.skill?.toLowerCase();
     const skill = skillName ? actorSkills[skillName] : null;
@@ -745,17 +749,17 @@ export async function basicActionMacros() {
     ).render(true) as Dialog;
 }
 
-function getSkills(selectedActor: ActorPF2e, proficiencyKey: string): CharacterSkill[] {
+function getSkills(selectedActor: ActorPF2e, proficiencyKey: string): CharacterSkill<any>[] {
     const skills = selectedActor.skills;
     if (!skills) return [];
     if (proficiencyKey === "lore") {
-        return Object.values(skills).filter((skill) => skill !== undefined && skill.lore) as CharacterSkill[];
+        return Object.values(skills).filter((skill) => skill !== undefined && skill.lore) as CharacterSkill<any>[];
     } else {
-        return [skills[proficiencyKey]].filter((s): s is CharacterSkill => !!s);
+        return [skills[proficiencyKey]].filter((s): s is CharacterSkill<any> => !!s);
     }
 }
 
-function getMapVariant(skill: CharacterSkill, extra: Record<string, unknown> | undefined, map: number): Variant {
+function getMapVariant(skill: CharacterSkill<any>, extra: Record<string, unknown> | undefined, map: number): Variant {
     const modifier = new game.pf2e.Modifier({
         label: game.i18n.localize("PF2E.MultipleAttackPenalty"),
         modifier: map,
@@ -767,14 +771,14 @@ function getMapVariant(skill: CharacterSkill, extra: Record<string, unknown> | u
 
 export class Variant {
     label: string;
-    skill: CharacterSkill;
+    skill: CharacterSkill<any>;
     extra?: Record<string, unknown>;
     modifiers: ModifierPF2e[];
     assuranceTotal: number;
 
     constructor(
         label: string,
-        skill: CharacterSkill,
+        skill: CharacterSkill<any>,
         extra: Record<string, unknown> | undefined,
         modifiers: ModifierPF2e[] = [],
         assuranceTotal = 0,

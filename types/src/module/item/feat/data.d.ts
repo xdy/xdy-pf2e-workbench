@@ -1,19 +1,20 @@
-import { Language, SenseAcuity, SenseType } from "@actor/creature/types.ts";
-import { AttributeString, SaveType } from "@actor/types.ts";
-import { SelfEffectReference, SelfEffectReferenceSource } from "@item/ability/index.ts";
-import { ArmorCategory } from "@item/armor/types.ts";
-import { ActionType, BaseItemSourcePF2e, Frequency, FrequencySource, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/base/data/system.ts";
-import { ClassTrait } from "@item/class/types.ts";
-import { WeaponCategory } from "@item/weapon/types.ts";
-import { OneToFour, OneToThree } from "@module/data.ts";
-import { FeatOrFeatureCategory, FeatTrait } from "./types.ts";
+import type { Language, SenseAcuity, SenseType } from "@actor/creature/types.ts";
+import type { AttributeString, SaveType } from "@actor/types.ts";
+import type { SelfEffectReference, SelfEffectReferenceSource } from "@item/ability/index.ts";
+import type { AbilityTraitToggles } from "@item/ability/trait-toggles.ts";
+import type { ArmorCategory } from "@item/armor/types.ts";
+import type { ActionType, BaseItemSourcePF2e, Frequency, FrequencySource, ItemSystemData, ItemSystemSource, ItemTraits } from "@item/base/data/system.ts";
+import type { ClassTrait } from "@item/class/types.ts";
+import type { WeaponCategory } from "@item/weapon/types.ts";
+import type { OneToFour, OneToThree } from "@module/data.ts";
+import type { FeatOrFeatureCategory, FeatTrait } from "./types.ts";
 type FeatSource = BaseItemSourcePF2e<"feat", FeatSystemSource>;
 interface PrerequisiteTagData {
     value: string;
 }
 interface FeatSystemSource extends ItemSystemSource {
     level: FeatLevelSource;
-    traits: FeatTraits;
+    traits: FeatTraitsSource;
     /** The category of feat or feature of this item */
     category: FeatOrFeatureCategory;
     /** Whether this feat must be taken at character level 1 */
@@ -39,8 +40,16 @@ interface FeatLevelSource {
     value: number;
     taken?: number | null;
 }
-interface FeatSystemData extends Omit<FeatSystemSource, "description" | "maxTaken">, Omit<ItemSystemData, "traits"> {
+interface FeatTraitsSource extends ItemTraits<FeatTrait> {
+    toggles?: {
+        mindshift?: {
+            selected?: boolean;
+        } | null;
+    };
+}
+interface FeatSystemData extends Omit<FeatSystemSource, "description" | "maxTaken">, ItemSystemData {
     level: FeatLevelData;
+    traits: FeatTraits;
     /** `null` is set to `Infinity` during data preparation */
     maxTakable: number;
     frequency?: Frequency;
@@ -49,6 +58,9 @@ interface FeatSystemData extends Omit<FeatSystemSource, "description" | "maxTake
     selfEffect: SelfEffectReference | null;
 }
 interface FeatLevelData extends Required<FeatLevelSource> {
+}
+interface FeatTraits extends FeatTraitsSource {
+    toggles: AbilityTraitToggles;
 }
 interface FeatSubfeatures {
     keyOptions: AttributeString[];
@@ -87,5 +99,4 @@ interface SenseSubfeature {
     };
 }
 type IncreasableProficiency = ArmorCategory | ClassTrait | SaveType | WeaponCategory | "perception" | "spellcasting";
-type FeatTraits = ItemTraits<FeatTrait>;
 export type { FeatSource, FeatSubfeatures, FeatSystemData, FeatSystemSource, FeatTraits, PrerequisiteTagData };

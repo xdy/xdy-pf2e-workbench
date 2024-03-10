@@ -1,7 +1,8 @@
 import type { CreaturePF2e, HazardPF2e, VehiclePF2e } from "@actor";
 import { BaseStatistic } from "./base.ts";
 import { BaseStatisticTraceData } from "./data.ts";
-declare class HitPointsStatistic extends BaseStatistic {
+type HPStatActor = CreaturePF2e | HazardPF2e | VehiclePF2e;
+declare class HitPointsStatistic<TActor extends HPStatActor = HPStatActor> extends BaseStatistic<TActor> {
     #private;
     /** The actor's current hit points */
     value: number;
@@ -15,7 +16,7 @@ declare class HitPointsStatistic extends BaseStatistic {
     unrecoverable: number;
     /** Additional, unstructured information affecting the actor's hit points */
     details: string;
-    constructor(actor: CreaturePF2e | HazardPF2e | VehiclePF2e, { baseMax }?: {
+    constructor(actor: TActor, { baseMax }?: {
         baseMax?: number;
     });
     get breakdown(): string;

@@ -11,7 +11,7 @@ declare class AuraForm extends RuleElementForm<AuraRuleElementSource, AuraRuleEl
     getData(): Promise<AuraSheetData>;
     protected onDrop(event: DragEvent, element: HTMLElement): Promise<ItemPF2e | null>;
     updateItem(updates: Partial<AuraRuleElementSource> | Record<string, unknown>): Promise<void>;
-    updateObject(source: AuraRuleElementSource & Record<string, unknown>): void;
+    updateObject(source: AuraRuleElementSource & Partial<Record<string, JSONValue>>): void;
 }
 interface AuraSheetData extends RuleElementFormSheetData<AuraRuleElementSource, AuraRuleElement> {
     affectsOptions: Record<string, string>;

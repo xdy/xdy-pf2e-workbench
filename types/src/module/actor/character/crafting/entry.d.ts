@@ -39,8 +39,6 @@ declare class CraftingEntry implements CraftingEntryData {
         warn?: boolean | undefined;
     }): boolean;
     unprepareFormula(index: number, itemUUID: string): Promise<void>;
-    increaseFormulaQuantity(index: number, itemUUID: string): Promise<void>;
-    decreaseFormulaQuantity(index: number, itemUUID: string): Promise<void>;
     setFormulaQuantity(index: number, itemUUID: string, value: "increase" | "decrease" | number): Promise<void>;
     toggleFormulaExpended(index: number, itemUUID: string): Promise<void>;
     toggleSignatureItem(itemUUID: string): Promise<void>;

@@ -1,4 +1,4 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 /** Censor enriched HTML according to metagame knowledge settings */
@@ -54,7 +54,7 @@ interface ConvertXMLNodeOptions {
      * Whether this piece of data belongs to the "self" actor or the target: used by UserVisibilityPF2e to
      * determine which actor's ownership to check
      */
-    whose?: "self" | "target" | null;
+    whose?: "self" | "opposer" | null;
     /** Any additional classes to add to the span element */
     classes?: string[];
     /** An optional tooltip to apply to the converted node */

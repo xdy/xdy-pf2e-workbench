@@ -7,7 +7,7 @@ import { SheetClickActionHandlers } from "@actor/sheet/base.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { NPCConfig } from "./config.ts";
 import { NPCSheetData, NPCSpellcastingSheetData } from "./types.ts";
-declare abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends CreatureSheetPF2e<TActor> {
+declare abstract class AbstractNPCSheet extends CreatureSheetPF2e<NPCPF2e> {
     #private;
     protected readonly actorConfigClass: typeof NPCConfig;
     static get defaultOptions(): ActorSheetOptions;
@@ -15,14 +15,14 @@ declare abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends Creature
      * Prepares items in the actor for easier access during sheet rendering.
      * @param sheetData Data from the actor associated to this sheet.
      */
-    prepareItems(sheetData: NPCSheetData<TActor>): Promise<void>;
-    getData(options?: Partial<ActorSheetOptions>): Promise<NPCSheetData<TActor>>;
+    prepareItems(sheetData: NPCSheetData): Promise<void>;
+    getData(options?: Partial<ActorSheetOptions>): Promise<NPCSheetData>;
     /** Players can view the sheets of lootable NPCs. */
     protected _canUserView(user: UserPF2e): boolean;
     activateListeners($html: JQuery<HTMLElement>): void;
     protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
 }
-declare class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
+declare class NPCSheetPF2e extends AbstractNPCSheet {
     #private;
     static get defaultOptions(): ActorSheetOptions;
     /** Show either the actual NPC sheet or a briefened lootable version if the NPC is dead */
@@ -36,7 +36,7 @@ declare class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
     protected activateClickListener(html: HTMLElement): SheetClickActionHandlers;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }
-declare class SimpleNPCSheet extends AbstractNPCSheet<NPCPF2e> {
+declare class SimpleNPCSheet extends AbstractNPCSheet {
     static get defaultOptions(): ActorSheetOptions;
 }
 export { AbstractNPCSheet, NPCSheetPF2e, SimpleNPCSheet };

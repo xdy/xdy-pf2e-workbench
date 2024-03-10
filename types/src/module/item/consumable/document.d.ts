@@ -4,7 +4,6 @@ import { PhysicalItemPF2e } from "@item";
 import { RawItemChatData } from "@item/base/data/index.ts";
 import { TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
 import type { ValueAndMax } from "@module/data.ts";
-import type { RuleElementPF2e } from "@module/rules/index.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { ConsumableSource, ConsumableSystemData } from "./data.ts";
 import type { ConsumableCategory, ConsumableTrait, OtherConsumableTag } from "./types.ts";
@@ -16,16 +15,16 @@ declare class ConsumablePF2e<TParent extends ActorPF2e | null = ActorPF2e | null
     get uses(): ValueAndMax;
     get embeddedSpell(): SpellPF2e<NonNullable<TParent>> | null;
     prepareBaseData(): void;
-    /** Rule elements cannot be executed from consumable items, but they can be used to generate effects */
-    prepareRuleElements(): RuleElementPF2e[];
     getChatData(this: ConsumablePF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions, rollOptions?: Record<string, unknown>): Promise<RawItemChatData>;
     generateUnidentifiedName({ typeOnly }?: {
         typeOnly?: boolean;
     }): string;
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix?: string, options?: {
+        includeGranter?: boolean;
+    }): string[];
     isAmmoFor(weapon: WeaponPF2e): boolean;
     /** Use a consumable item, sending the result to chat */
-    consume(): Promise<void>;
+    consume(thisMany?: number): Promise<void>;
     castEmbeddedSpell(trickMagicItemData?: TrickMagicItemEntry): Promise<void>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }

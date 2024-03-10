@@ -20,7 +20,6 @@ declare class AncestryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> 
     prepareBaseData(): void;
     /** Prepare a character's data derived from their ancestry */
     prepareActorData(this: AncestryPF2e<CharacterPF2e>): void;
-    getRollOptions(prefix?: string): string[];
     /** Ensure certain fields are positive integers. */
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
 }

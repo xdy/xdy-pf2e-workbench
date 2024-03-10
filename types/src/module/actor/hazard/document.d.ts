@@ -8,9 +8,7 @@ import { DamageType } from "@system/damage/index.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { HazardSource, HazardSystemData } from "./data.ts";
 declare class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
-    skills: {
-        stealth: Statistic;
-    };
+    skills: Record<"stealth", Statistic<this>>;
     get allowedItemTypes(): (ItemType | "physical")[];
     get rarity(): Rarity;
     get isComplex(): boolean;

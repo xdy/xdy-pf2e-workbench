@@ -2,6 +2,7 @@ import { ActorPF2e, type PartyPF2e } from "@actor";
 import { HitPointsSummary } from "@actor/base.ts";
 import { CreatureSource } from "@actor/data/index.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
+import { ActorSpellcasting } from "@actor/spellcasting.ts";
 import { MovementType, SaveType, SkillLongForm } from "@actor/types.ts";
 import { ArmorPF2e, ItemPF2e, type PhysicalItemPF2e, type ShieldPF2e } from "@item";
 import { ItemType } from "@item/base/data/index.ts";
@@ -13,15 +14,17 @@ import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { CheckRoll } from "@system/check/index.ts";
 import { Statistic, StatisticDifficultyClass, type ArmorStatistic } from "@system/statistic/index.ts";
 import { PerceptionStatistic } from "@system/statistic/perception.ts";
-import { CreatureSkills, CreatureSpeeds, CreatureSystemData, LabeledSpeed, VisionLevel } from "./data.ts";
+import { CreatureSpeeds, CreatureSystemData, LabeledSpeed, VisionLevel } from "./data.ts";
 import { CreatureTrait, CreatureType, CreatureUpdateContext, GetReachParameters } from "./types.ts";
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
+    /** A separate collection of owned spellcasting entries for convenience */
+    spellcasting: ActorSpellcasting<this>;
     parties: Set<PartyPF2e>;
     /** A creature always has an AC */
     armorClass: StatisticDifficultyClass<ArmorStatistic>;
     /** Skill checks for the creature, built during data prep */
-    skills: CreatureSkills;
+    skills: Record<string, Statistic<this>>;
     /** Saving throw rolls for the creature, built during data prep */
     saves: Record<SaveType, Statistic>;
     perception: PerceptionStatistic;
@@ -50,13 +53,14 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     /** Get the held shield of most use to the wielder */
     get heldShield(): ShieldPF2e<this> | null;
     /** Retrieve percpetion and spellcasting statistics */
-    getStatistic(slug: SaveType | SkillLongForm | "perception"): Statistic;
-    getStatistic(slug: string): Statistic | null;
+    getStatistic(slug: SaveType | SkillLongForm | "perception"): Statistic<this>;
+    getStatistic(slug: string): Statistic<this> | null;
     protected _initialize(options?: Record<string, unknown>): void;
     prepareData(): void;
     /** Setup base ephemeral data to be modified by active effects and derived-data preparation */
     prepareBaseData(): void;
     prepareEmbeddedDocuments(): void;
+    protected prepareDataFromItems(): void;
     prepareDerivedData(): void;
     protected prepareSynthetics(): void;
     /**

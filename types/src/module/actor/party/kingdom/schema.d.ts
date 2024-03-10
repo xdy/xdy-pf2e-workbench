@@ -37,14 +37,14 @@ declare const KINGDOM_SCHEMA: {
     size: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
     level: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
     xp: SchemaField<{
-        value: import("types/foundry/common/data/fields.d.ts").NumberField<number, unknown, boolean, boolean, boolean>;
-        max: import("types/foundry/common/data/fields.d.ts").NumberField<number, unknown, boolean, boolean, boolean>;
+        value: import("types/foundry/common/data/fields.d.ts").NumberField<number, NonNullable<JSONValue>, boolean, boolean, boolean>;
+        max: import("types/foundry/common/data/fields.d.ts").NumberField<number, NonNullable<JSONValue>, boolean, boolean, boolean>;
     }, SourceFromSchema<{
-        value: import("types/foundry/common/data/fields.d.ts").NumberField<number, unknown, boolean, boolean, boolean>;
-        max: import("types/foundry/common/data/fields.d.ts").NumberField<number, unknown, boolean, boolean, boolean>;
+        value: import("types/foundry/common/data/fields.d.ts").NumberField<number, NonNullable<JSONValue>, boolean, boolean, boolean>;
+        max: import("types/foundry/common/data/fields.d.ts").NumberField<number, NonNullable<JSONValue>, boolean, boolean, boolean>;
     }>, ModelPropsFromSchema<{
-        value: import("types/foundry/common/data/fields.d.ts").NumberField<number, unknown, boolean, boolean, boolean>;
-        max: import("types/foundry/common/data/fields.d.ts").NumberField<number, unknown, boolean, boolean, boolean>;
+        value: import("types/foundry/common/data/fields.d.ts").NumberField<number, NonNullable<JSONValue>, boolean, boolean, boolean>;
+        max: import("types/foundry/common/data/fields.d.ts").NumberField<number, NonNullable<JSONValue>, boolean, boolean, boolean>;
     }>, true, false, true>;
     aspiration: StringField<"fame" | "infamy", "fame" | "infamy", true, false, true>;
     abilities: SchemaField<Record<"culture" | "economy" | "loyalty" | "stability", SchemaField<{
@@ -56,7 +56,7 @@ declare const KINGDOM_SCHEMA: {
         }, SourceFromSchema<{
             value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
-        }>, unknown, boolean, boolean, boolean>;
+        }>, NonNullable<JSONValue>, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
     }, SourceFromSchema<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
@@ -67,7 +67,7 @@ declare const KINGDOM_SCHEMA: {
         }, SourceFromSchema<{
             value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
-        }>, unknown, boolean, boolean, boolean>;
+        }>, NonNullable<JSONValue>, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
     }>, ModelPropsFromSchema<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
@@ -78,7 +78,7 @@ declare const KINGDOM_SCHEMA: {
         }, SourceFromSchema<{
             value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
-        }>, unknown, boolean, boolean, boolean>;
+        }>, NonNullable<JSONValue>, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
     }>, true, false, true>>, SourceFromSchema<Record<"culture" | "economy" | "loyalty" | "stability", SchemaField<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
@@ -89,7 +89,7 @@ declare const KINGDOM_SCHEMA: {
         }, SourceFromSchema<{
             value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
-        }>, unknown, boolean, boolean, boolean>;
+        }>, NonNullable<JSONValue>, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
     }, SourceFromSchema<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
@@ -100,7 +100,7 @@ declare const KINGDOM_SCHEMA: {
         }, SourceFromSchema<{
             value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
-        }>, unknown, boolean, boolean, boolean>;
+        }>, NonNullable<JSONValue>, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
     }>, ModelPropsFromSchema<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
@@ -111,7 +111,7 @@ declare const KINGDOM_SCHEMA: {
         }, SourceFromSchema<{
             value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
-        }>, unknown, boolean, boolean, boolean>;
+        }>, NonNullable<JSONValue>, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
     }>, true, false, true>>>, ModelPropsFromSchema<Record<"culture" | "economy" | "loyalty" | "stability", SchemaField<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
@@ -122,7 +122,7 @@ declare const KINGDOM_SCHEMA: {
         }, SourceFromSchema<{
             value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
-        }>, unknown, boolean, boolean, boolean>;
+        }>, NonNullable<JSONValue>, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
     }, SourceFromSchema<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
@@ -133,7 +133,7 @@ declare const KINGDOM_SCHEMA: {
         }, SourceFromSchema<{
             value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
-        }>, unknown, boolean, boolean, boolean>;
+        }>, NonNullable<JSONValue>, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
     }>, ModelPropsFromSchema<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
@@ -144,7 +144,7 @@ declare const KINGDOM_SCHEMA: {
         }, SourceFromSchema<{
             value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
             max: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, true, false, true>;
-        }>, unknown, boolean, boolean, boolean>;
+        }>, NonNullable<JSONValue>, boolean, boolean, boolean>;
         penalty: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
     }>, true, false, true>>>, true, false, true>;
     build: SchemaField<{
@@ -844,17 +844,17 @@ declare const KINGDOM_SCHEMA: {
         settlement: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         army: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
-        breakdown: StringField<string, unknown, boolean, boolean, boolean>;
+        breakdown: StringField<string, NonNullable<JSONValue>, boolean, boolean, boolean>;
     }, SourceFromSchema<{
         settlement: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         army: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
-        breakdown: StringField<string, unknown, boolean, boolean, boolean>;
+        breakdown: StringField<string, NonNullable<JSONValue>, boolean, boolean, boolean>;
     }>, ModelPropsFromSchema<{
         settlement: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         army: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;
-        breakdown: StringField<string, unknown, boolean, boolean, boolean>;
+        breakdown: StringField<string, NonNullable<JSONValue>, boolean, boolean, boolean>;
     }>, true, false, true>;
     unrest: SchemaField<{
         value: import("types/foundry/common/data/fields.d.ts").NumberField<number, number, false, false, true>;

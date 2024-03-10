@@ -9,6 +9,10 @@ export declare class DelegatedCollection<V> {
         strict: true;
     }): T;
     get<T extends V = V>(key: string, options?: CollectionGetOptions): T | undefined;
+    getName<T extends V = V>(name: Maybe<string>, { strict }: {
+        strict: true;
+    }): T;
+    getName<T extends V = V>(name: string, options?: CollectionGetOptions): T | undefined;
     set(key: string, value: V): this;
     has(key: string): boolean;
     find(predicate: (value: V) => boolean): V | undefined;

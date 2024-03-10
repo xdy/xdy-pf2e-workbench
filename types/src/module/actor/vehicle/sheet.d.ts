@@ -11,6 +11,7 @@ export declare class VehicleSheetPF2e extends ActorSheetPF2e<VehiclePF2e> {
     static get defaultOptions(): ActorSheetOptions;
     getData(): Promise<VehicleSheetData>;
     activateListeners($html: JQuery): void;
+    protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }
 interface VehicleSheetData extends ActorSheetDataPF2e<VehiclePF2e> {
     actions: ActionsSheetData;

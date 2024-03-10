@@ -10,7 +10,7 @@ export declare class ConditionManager {
     private static CONDITION_SOURCES?;
     /** Gets a list of condition slugs. */
     static get conditionsSlugs(): string[];
-    static initialize(force?: boolean): Promise<void>;
+    static initialize(): void;
     /**
      * Get a condition using the condition name.
      * @param slug A condition slug

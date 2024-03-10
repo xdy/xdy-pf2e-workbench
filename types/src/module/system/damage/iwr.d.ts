@@ -5,7 +5,7 @@ declare function applyIWR(actor: ActorPF2e, roll: Rolled<DamageRoll>, rollOption
 interface IWRApplicationData {
     finalDamage: number;
     applications: IWRApplication[];
-    persistent: DamageInstance[];
+    persistent: Rolled<DamageInstance>[];
 }
 interface UnaffectedApplication {
     category: "unaffected";

@@ -1,17 +1,21 @@
 import type { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
+import type { ItemPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import type { RollNotePF2e } from "@module/notes.ts";
 import type { RuleElementPF2e } from "@module/rules/index.ts";
+import { DamageAlteration } from "@module/rules/rule-element/damage-alteration/alteration.ts";
 import { DamageCategoryUnique, DamageDieSize, DamageType } from "@system/damage/types.ts";
 import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
-declare const MODIFIER_TYPES: Set<"untyped" | "ability" | "item" | "circumstance" | "potency" | "proficiency" | "status">;
+declare const MODIFIER_TYPES: Set<"untyped" | "ability" | "circumstance" | "item" | "potency" | "proficiency" | "status">;
 type ModifierType = SetElement<typeof MODIFIER_TYPES>;
 interface RawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
     slug?: string;
+    /** The domains of discourse to which this modifier belongs */
+    domains?: string[];
     /** The display name of this modifier; can be a localization key (see en.json). */
     label: string;
     /** The actual numeric benefit/penalty that this modifier provides. */
@@ -64,7 +68,10 @@ interface DeferredValueParams {
     test?: string[] | Set<string>;
 }
 interface TestableDeferredValueParams extends DeferredValueParams {
-    test: Set<string>;
+    test: string[] | Set<string>;
+}
+interface DeferredDamageDiceOptions extends TestableDeferredValueParams {
+    selectors: string[];
 }
 type DeferredValue<T> = (options?: DeferredValueParams) => T | null;
 type DeferredPromise<T> = (options?: DeferredValueParams) => Promise<T | null>;
@@ -73,11 +80,13 @@ declare class ModifierPF2e implements RawModifier {
     #private;
     slug: string;
     label: string;
+    domains: string[];
     /** The value of the modifier */
     modifier: number;
     type: ModifierType;
     ability: AttributeString | null;
     adjustments: ModifierAdjustment[];
+    alterations: DamageAlteration[];
     force: boolean;
     enabled: boolean;
     ignored: boolean;
@@ -111,15 +120,24 @@ declare class ModifierPF2e implements RawModifier {
     get category(): this["damageCategory"];
     get value(): number;
     get signedValue(): string;
+    /**
+     * Apply damage alterations: must be called externally by client code that knows this is a damage modifier.
+     * @param options.item An item (typically a weapon or spell) producing damage as part of an action
+     * @param options.test An `Array` or `Set` of roll options for use in predication testing
+     */
+    applyDamageAlterations(options: {
+        item: ItemPF2e<ActorPF2e>;
+        test: string[] | Set<string>;
+    }): void;
     /** Return a copy of this ModifierPF2e instance */
-    clone(options?: {
+    clone(data?: Partial<ModifierObjectParams>, options?: {
         test?: Set<string> | string[];
     }): ModifierPF2e;
     /**
      * Get roll options for this modifier. The current data structure makes for occasional inability to distinguish
      * bonuses and penalties.
      */
-    getRollOptions(): Set<string>;
+    getRollOptions(): string[];
     /** Sets the ignored property after testing the predicate */
     test(options: string[] | Set<string>): void;
     toObject(): Required<RawModifier>;
@@ -128,6 +146,7 @@ declare class ModifierPF2e implements RawModifier {
 interface ModifierObjectParams extends RawModifier {
     name?: string;
     rule?: RuleElementPF2e | null;
+    alterations?: DamageAlteration[];
 }
 type ModifierOrderedParams = [
     slug: string,
@@ -189,6 +208,8 @@ declare class StatisticModifier {
     breakdown: string;
     /** Optional notes, which are often added to statistic modifiers */
     notes?: RollNotePF2e[];
+    /** Roll-option domains associated with this statistic */
+    domains?: string[];
     /**
      * @param slug The name of this collection of statistic modifiers.
      * @param modifiers All relevant modifiers for this statistic.
@@ -258,16 +279,27 @@ declare class DamageDicePF2e {
     override: DamageDiceOverride | null;
     ignored: boolean;
     enabled: boolean;
-    custom: boolean;
     predicate: PredicatePF2e;
+    alterations: DamageAlteration[];
     hideIfDisabled: boolean;
     constructor(params: DamageDiceParameters);
     /** Test the `predicate` against a set of roll options */
     test(options: Set<string>): void;
+    /** Get roll options for set of dice using a "dice:" prefix. */
+    getRollOptions(): string[];
+    /**
+     * Apply damage alterations: must be called externally by client code that knows this is a damage modifier.
+     * @param options.item An item (typically a weapon or spell) producing damage as part of an action
+     * @param options.test An `Array` or `Set` of roll options for use in predication testing
+     */
+    applyAlterations(options: {
+        item: ItemPF2e<ActorPF2e>;
+        test: string[] | Set<string>;
+    }): void;
     clone(): DamageDicePF2e;
     toObject(): RawDamageDice;
 }
 interface RawDamageDice extends Required<DamageDiceParameters> {
 }
 export { CheckModifier, DamageDicePF2e, MODIFIER_TYPES, ModifierPF2e, PROFICIENCY_RANK_OPTION, StatisticModifier, adjustModifiers, applyStackingRules, createAttributeModifier, createProficiencyModifier, ensureProficiencyOption, };
-export type { DamageDiceOverride, DamageDiceParameters, DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierType, RawDamageDice, RawModifier, TestableDeferredValueParams, };
+export type { DamageDiceOverride, DamageDiceParameters, DeferredDamageDiceOptions, DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierType, RawDamageDice, RawModifier, TestableDeferredValueParams, };

@@ -1,12 +1,12 @@
 import type { ActorPF2e } from "@actor";
-import { AttributeString } from "@actor/types.ts";
+import type { AttributeString } from "@actor/types.ts";
 import type { ConsumablePF2e, MeleePF2e, ShieldPF2e } from "@item";
 import { PhysicalItemPF2e } from "@item";
 import type { ItemSourcePF2e, RawItemChatData } from "@item/base/data/index.ts";
 import type { NPCAttackTrait } from "@item/melee/types.ts";
-import { PhysicalItemConstructionContext } from "@item/physical/document.ts";
+import type { PhysicalItemConstructionContext } from "@item/physical/document.ts";
 import { IdentificationStatus, MystifiedData } from "@item/physical/index.ts";
-import { RangeData } from "@item/types.ts";
+import type { RangeData } from "@item/types.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { WeaponDamage, WeaponFlags, WeaponSource, WeaponSystemData } from "./data.ts";
 import type { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponReloadTime, WeaponTrait } from "./types.ts";
@@ -42,8 +42,8 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     get baseDamage(): WeaponDamage;
     /** Does this weapon deal damage? */
     get dealsDamage(): boolean;
-    /** Does this weapon require ammunition in order to make a strike? */
-    get requiresAmmo(): boolean;
+    /** The number of units of ammunition required to attack with this weapon */
+    get ammoRequired(): number;
     get ammo(): ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e> | null;
     get otherTags(): Set<OtherWeaponTag>;
     acceptsSubitem(candidate: PhysicalItemPF2e): boolean;
@@ -51,11 +51,13 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     /** Whether this weapon can serve as ammunition for another weapon */
     isAmmoFor(weapon: WeaponPF2e): boolean;
     /** Generate a list of strings for use in predication */
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix?: string, options?: {
+        includeGranter?: boolean;
+    }): string[];
     prepareBaseData(): void;
-    prepareDerivedData(): void;
     /** Add the rule elements of this weapon's linked ammunition to its own list */
     prepareSiblingData(): void;
+    onPrepareSynthetics(): void;
     getChatData(this: WeaponPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<RawItemChatData>;
     getMystifiedData(status: IdentificationStatus, { source }?: {
         source?: boolean | undefined;

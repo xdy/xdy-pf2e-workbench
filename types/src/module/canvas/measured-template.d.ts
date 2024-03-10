@@ -1,6 +1,6 @@
 import type { ActorPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
-import type { EffectAreaType } from "@item/spell/types.ts";
+import type { EffectAreaShape } from "@item/spell/types.ts";
 import type { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import type { MeasuredTemplateDocumentPF2e, ScenePF2e } from "@scene";
 import type { TemplateLayerPF2e } from "./index.ts";
@@ -8,7 +8,7 @@ declare class MeasuredTemplatePF2e<TDocument extends MeasuredTemplateDocumentPF2
     get actor(): ActorPF2e | null;
     get item(): ItemPF2e | null;
     get message(): ChatMessagePF2e | null;
-    get areaType(): EffectAreaType | null;
+    get areaShape(): EffectAreaShape | null;
     /** Set the template layer's grid precision appropriately for this measured template's shape. */
     snapForShape(): void;
     highlightGrid(): void;

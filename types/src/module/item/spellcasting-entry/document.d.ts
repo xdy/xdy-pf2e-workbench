@@ -13,6 +13,7 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     /** Spellcasting attack and dc data created during actor preparation */
     statistic: Statistic;
     get attribute(): AttributeString;
+    get counteraction(): Statistic;
     /** @deprecated */
     get ability(): AttributeString;
     /** This entry's magic tradition, null if the spell's tradition should be used instead */
@@ -46,7 +47,7 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     }): boolean;
     /** Cast the given spell as if it was part of this spellcasting entry. */
     cast(spell: SpellPF2e<ActorPF2e>, options?: CastOptions): Promise<void>;
-    consume(spell: SpellPF2e<ActorPF2e>, rank: number, slotId?: number): Promise<boolean>;
+    consume(spell: SpellPF2e<ActorPF2e>, rank: number, slotIndex?: number): Promise<boolean>;
     /**
      * Adds a spell to this spellcasting entry, either moving it from another one if its the same actor,
      * or creating a new spell if its not.

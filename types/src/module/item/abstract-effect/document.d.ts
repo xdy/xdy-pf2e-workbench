@@ -27,7 +27,9 @@ declare abstract class AbstractEffectPF2e<TParent extends ActorPF2e | null = Act
     };
     abstract increase(): Promise<void>;
     abstract decrease(): Promise<void>;
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix: string, options?: {
+        includeGranter?: boolean;
+    }): string[];
     prepareBaseData(): void;
     /** Set a self roll option for this effect */
     prepareActorData(): void;

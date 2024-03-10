@@ -3,7 +3,7 @@
 /// <reference types="tooltipster" />
 import "@yaireo/tagify/src/tagify.scss";
 import { PartialSettingsData, SettingsMenuPF2e } from "../menu.ts";
-import { CustomDamageData, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey, LanguageNotCommon, LanguageRaritiesData, LanguageRaritiesSheetData } from "./data.ts";
+import { CustomDamageData, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey, LanguageNotCommon, LanguageSettings, LanguageSettingsSheetData } from "./data.ts";
 import { ReservedTermsRecord } from "./helpers.ts";
 declare class HomebrewElements extends SettingsMenuPF2e {
     #private;
@@ -47,8 +47,8 @@ declare class LanguagesManager {
     /** A separate list of module-provided languages */
     moduleLanguages: LanguageNotCommon[];
     constructor(menu: HomebrewElements);
-    get data(): LanguageRaritiesData;
-    getSheetData(): LanguageRaritiesSheetData;
+    get data(): LanguageSettings;
+    getSheetData(): LanguageSettingsSheetData;
     activateListeners(html: HTMLElement): void;
     /** Update the language rarities cache, adding and deleting from sets as necessary. */
     onChangeHomebrewLanguages(languages: HomebrewTag<"languages">[]): void;
@@ -56,7 +56,7 @@ declare class LanguagesManager {
 type HomebrewSubmitData = {
     damageTypes: CustomDamageData[];
     languages: HomebrewTag<"languages">[];
-    languageRarities: LanguageRaritiesData;
+    languageRarities: LanguageSettings;
 } & Record<string, unknown> & {
     clear(): void;
 };

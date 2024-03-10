@@ -2,7 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { DegreeOfSuccessIndex } from "@system/degree-of-success.ts";
-import { DamageCategoryUnique, DamageFormulaData, DamageRollContext, DamageType } from "./types.ts";
+import { DamageCategoryUnique, DamageDamageContext, DamageFormulaData, DamageType } from "./types.ts";
 /**
  * Dialog for excluding certain modifiers before rolling damage.
  * @category Other
@@ -10,7 +10,7 @@ import { DamageCategoryUnique, DamageFormulaData, DamageRollContext, DamageType 
 declare class DamageModifierDialog extends Application {
     #private;
     formulaData: DamageFormulaData;
-    context: DamageRollContext;
+    context: DamageDamageContext;
     /** The base damage type of this damage roll */
     baseDamageType: DamageType;
     /** Is this critical damage? */
@@ -33,7 +33,7 @@ declare class DamageModifierDialog extends Application {
 }
 interface DamageDialogParams {
     formulaData: DamageFormulaData;
-    context: DamageRollContext;
+    context: DamageDamageContext;
 }
 interface BaseData {
     idx: number;

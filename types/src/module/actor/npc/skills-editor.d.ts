@@ -11,7 +11,7 @@ export declare class NPCSkillsEditor extends DocumentSheet<NPCPF2e> {
     /** Prepare data to be sent to HTML. */
     getData(options?: Partial<DocumentSheetOptions>): Promise<EditorData>;
     activateListeners($html: JQuery): void;
-    /** Crude maintaining of focus to work around Tagify on NPC sheet stealing it */
+    /** Maintain focus since upstream only operates on named elements */
     protected _render(force?: boolean, options?: RenderOptions): Promise<void>;
 }
 interface EditorData extends DocumentSheetData<NPCPF2e> {

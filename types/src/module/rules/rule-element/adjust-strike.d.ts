@@ -7,12 +7,10 @@ import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleEl
 declare class AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema> {
     protected static validActorTypes: ActorType[];
     constructor(data: AdjustStrikeSource, options: RuleElementOptions);
-    static VALID_PROPERTIES: Set<"traits" | "materials" | "range-increment" | "weapon-traits" | "property-runes">;
+    static VALID_PROPERTIES: Set<"traits" | "materials" | "property-runes" | "range-increment" | "weapon-traits">;
     static defineSchema(): AdjustStrikeSchema;
     /** Instead of applying the change directly to a property path, defer it to a synthetic */
     beforePrepareData(): void;
-    /** Score the trait value. If it's a dice roll, use the average roll, otherwise just use the number */
-    static getTraitScore(traitValue: string): number;
 }
 interface AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema>, ModelPropsFromRESchema<AdjustStrikeSchema> {
 }

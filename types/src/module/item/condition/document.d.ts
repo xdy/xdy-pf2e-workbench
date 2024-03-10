@@ -27,7 +27,9 @@ declare class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
      */
     get readonly(): boolean;
     /** Include damage type and possibly category for persistent-damage conditions */
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix: string, options?: {
+        includeGranter?: boolean;
+    }): string[];
     increase(this: ConditionPF2e<ActorPF2e>): Promise<void>;
     decrease(this: ConditionPF2e<ActorPF2e>): Promise<void>;
     onEndTurn(options?: {

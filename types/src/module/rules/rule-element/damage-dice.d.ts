@@ -4,21 +4,22 @@ import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 declare class DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema> {
     #private;
-    static defineSchema(): DamageDiceRuleSchema;
     constructor(data: DamageDiceSource, options: RuleElementOptions);
+    static defineSchema(): DamageDiceRuleSchema;
     beforePrepareData(): void;
 }
 interface DamageDiceSource extends RuleElementSource {
-    selector?: unknown;
-    name?: unknown;
-    diceNumber?: unknown;
-    dieSize?: unknown;
-    override?: unknown;
-    damageType?: unknown;
-    critical?: unknown;
-    category?: unknown;
-    damageCategory?: unknown;
-    hideIfDisabled?: unknown;
+    selector?: JSONValue;
+    name?: JSONValue;
+    diceNumber?: JSONValue;
+    dieSize?: JSONValue;
+    override?: JSONValue;
+    value?: JSONValue;
+    damageType?: JSONValue;
+    critical?: JSONValue;
+    category?: JSONValue;
+    damageCategory?: JSONValue;
+    hideIfDisabled?: JSONValue;
 }
 interface DamageDiceRuleElement extends RuleElementPF2e<DamageDiceRuleSchema>, ModelPropsFromRESchema<DamageDiceRuleSchema> {
 }

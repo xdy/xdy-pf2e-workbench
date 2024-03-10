@@ -1,11 +1,11 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { ActorPF2e, CreaturePF2e } from "@actor";
+import type { ActorPF2e, CreaturePF2e } from "@actor";
 import { ItemSummaryRenderer } from "@actor/sheet/item-summary-renderer.ts";
-import { ItemPF2e } from "@item";
+import type { ItemPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
-import { SpellcastingEntryPF2e, SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
+import type { SpellcastingEntryPF2e, SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import { ZeroToTen } from "@module/data.ts";
 /**
  * Sheet used to render the the spell list for prepared casting.

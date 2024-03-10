@@ -5,9 +5,9 @@ import { MagicTradition } from "@item/spell/types.ts";
 import type { PredicatePF2e } from "@system/predication.ts";
 import type { Statistic } from "@system/statistic/statistic.ts";
 import { SpellCollection } from "./collection.ts";
-import type { BaseSpellcastingEntry, CastOptions, SpellcastingSheetData } from "./types.ts";
+import type { CastOptions, SpellcastingEntry, SpellcastingSheetData } from "./types.ts";
 /** An in-memory spellcasting entry for items-only spellcasting */
-declare class ItemSpellcasting<TActor extends CreaturePF2e = CreaturePF2e> implements BaseSpellcastingEntry<TActor> {
+declare class ItemSpellcasting<TActor extends CreaturePF2e = CreaturePF2e> implements SpellcastingEntry<TActor> {
     id: string;
     name: string;
     actor: TActor;
@@ -16,6 +16,7 @@ declare class ItemSpellcasting<TActor extends CreaturePF2e = CreaturePF2e> imple
     /** A predicate to test against a physical item to determine whether its contained spell can be cast */
     castPredicate: PredicatePF2e;
     constructor({ id, name, actor, statistic, tradition, castPredicate }: ItemsSpellcastingConstructorParams<TActor>);
+    get counteraction(): Statistic;
     get attribute(): AttributeString;
     get category(): "items";
     get sort(): number;

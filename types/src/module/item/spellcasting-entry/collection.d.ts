@@ -17,12 +17,14 @@ declare class SpellCollection<TActor extends ActorPF2e> extends Collection<Spell
     addSpell(spell: SpellPF2e, options?: {
         groupId?: Maybe<SpellSlotGroupId>;
     }): Promise<SpellPF2e<TActor> | null>;
+    /** Swap positions of two spells in the same spell collection and slot group */
+    swapSlotPositions(groupId: string, slotIndexA: number, slotIndexB: number): Promise<this | null>;
     /** Save the prepared spell slot data to the spellcasting entry  */
-    prepareSpell(spell: SpellPF2e, groupId: SpellSlotGroupId, slotId: number): Promise<this | null>;
+    prepareSpell(spell: SpellPF2e, groupId: SpellSlotGroupId, slotIndex: number): Promise<this | null>;
     /** Clear the spell slot and updates the spellcasting entry */
-    unprepareSpell(groupId: SpellSlotGroupId, slotId: number): Promise<this | null>;
+    unprepareSpell(groupId: SpellSlotGroupId, slotIndex: number): Promise<this | null>;
     /** Sets the expended state of a spell slot and updates the spellcasting entry */
-    setSlotExpendedState(groupId: SpellSlotGroupId, slotId: number, value: boolean): Promise<BaseSpellcastingEntry<TActor> | undefined>;
+    setSlotExpendedState(groupId: SpellSlotGroupId, slotIndex: number, value: boolean): Promise<this | null>;
     getSpellData({ prepList }?: {
         prepList?: boolean | undefined;
     }): Promise<SpellCollectionData>;

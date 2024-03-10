@@ -28,7 +28,9 @@ declare class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     onPrepareSynthetics(this: FeatPF2e<ActorPF2e>): void;
     getChatData(this: FeatPF2e<ActorPF2e>, htmlOptions?: EnrichmentOptions): Promise<RawItemChatData>;
     /** Generate a list of strings for use in predication */
-    getRollOptions(prefix?: string): string[];
+    getRollOptions(prefix?: string, options?: {
+        includeGranter?: boolean;
+    }): string[];
     protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Warn the owning user(s) if this feat was taken despite some restriction */

@@ -10,7 +10,7 @@ declare class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e> extends Item
     /** Show the identified data for editing purposes */
     getData(options?: Partial<ItemSheetOptions>): Promise<PhysicalItemSheetData<TItem>>;
     /** If the item is unidentified, prevent players from opening this sheet. */
-    render(force?: boolean, options?: RenderOptions): this | Promise<this>;
+    render(force?: boolean, options?: RenderOptions): this;
     protected getMaterialSheetData(item: PhysicalItemPF2e, valuationData: MaterialValuationData): MaterialSheetData;
     activateListeners($html: JQuery<HTMLElement>): void;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;

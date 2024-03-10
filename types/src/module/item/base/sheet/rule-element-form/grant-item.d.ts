@@ -4,7 +4,7 @@ import { RuleElementForm, RuleElementFormSheetData } from "./base.ts";
 declare class GrantItemForm extends RuleElementForm<GrantItemSource, GrantItemRuleElement> {
     template: string;
     getData(): Promise<GrantItemFormSheetData>;
-    updateObject(ruleData: DeepPartial<GrantItemSource>): void;
+    updateObject(ruleData: DeepPartial<GrantItemSource> & Partial<Record<string, JSONValue>>): void;
 }
 interface GrantItemFormSheetData extends RuleElementFormSheetData<GrantItemSource, GrantItemRuleElement> {
     granted: ClientDocument | null;

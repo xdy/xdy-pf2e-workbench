@@ -10,13 +10,13 @@ import { HazardTrait } from "./types.ts";
 /** The stored source data of a hazard actor */
 type HazardSource = BaseActorSourcePF2e<"hazard", HazardSystemSource>;
 /** The raw information contained within the actor data object for hazards. */
-interface HazardSystemSource extends ActorSystemSource {
+type HazardSystemSource = Omit<ActorSystemSource, "details" | "attributes" | "saves" | "traits"> & {
     details: HazardDetailsSource;
     attributes: HazardAttributesSource;
     saves: HazardSaves;
     /** Traits, languages, and other information. */
     traits: HazardTraitsSource;
-}
+};
 interface HazardAttributesSource extends ActorAttributesSource {
     ac: {
         value: number;

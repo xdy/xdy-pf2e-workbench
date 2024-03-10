@@ -8,12 +8,12 @@ import { ActorSheetDataPF2e, InventoryItem } from "@actor/sheet/data-types.ts";
 import { AttributeString, SaveType } from "@actor/types.ts";
 import type { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, PhysicalItemPF2e } from "@item";
 import { ItemPF2e } from "@item";
+import { TraitToggleViewData } from "@item/ability/trait-toggles.ts";
 import { ActionCost, Frequency, ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/types.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ZeroToFour } from "@module/data.ts";
-import { SheetOptions } from "@module/sheet/helpers.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { CreatureSheetPF2e } from "../creature/sheet.ts";
 import { CharacterConfig } from "./config.ts";
@@ -39,7 +39,7 @@ declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureS
     /** Toggle availability of the roll-initiative link on the sidebar */
     toggleInitiativeLink(link?: HTMLElement | null): void;
     protected _onDropItem(event: DragEvent, data: DropCanvasItemDataPF2e): Promise<ItemPF2e[]>;
-    protected _onDrop(event: DragEvent): Promise<boolean | void>;
+    _onDrop(event: DragEvent): Promise<boolean | void>;
     /** Handle a drop event for an existing Owned Item to sort that item */
     protected _onSortItem(event: DragEvent, itemData: ItemSourcePF2e): Promise<ItemPF2e[]>;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
@@ -156,7 +156,7 @@ interface ActionSheetData {
     actionCost: ActionCost | null;
     frequency: Frequency | null;
     feat: FeatPF2e | null;
-    traits: SheetOptions;
+    toggles: TraitToggleViewData[];
     exploration?: {
         active: boolean;
     };

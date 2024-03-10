@@ -8,8 +8,8 @@ import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleEl
 declare class BaseSpeedRuleElement extends RuleElementPF2e<BaseSpeedRuleSchema> {
     #private;
     protected static validActorTypes: ActorType[];
-    static defineSchema(): BaseSpeedRuleSchema;
     constructor(data: RuleElementSource, options: RuleElementOptions);
+    static defineSchema(): BaseSpeedRuleSchema;
     beforePrepareData(): void;
 }
 interface BaseSpeedRuleElement extends RuleElementPF2e<BaseSpeedRuleSchema>, ModelPropsFromRESchema<BaseSpeedRuleSchema> {

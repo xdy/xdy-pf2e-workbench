@@ -2,7 +2,6 @@ import { PredicateField, SlugField } from "@system/schema-data-fields.ts";
 import type { BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 type RuleElementSource = {
     key?: JSONValue;
-    value?: JSONValue;
     label?: JSONValue;
     slug?: JSONValue;
     predicate?: JSONValue;
@@ -12,7 +11,7 @@ type RuleElementSource = {
     requiresEquipped?: JSONValue;
     removeUponCreate?: JSONValue;
 };
-type RuleValue = string | number | boolean | object | BracketedValue | null;
+type RuleValue = string | number | boolean | object | BracketedValue;
 interface Bracket<T extends object | number | string> {
     start?: number;
     end?: number;
@@ -38,12 +37,14 @@ type RuleElementSchema = {
     requiresEquipped: BooleanField<boolean, boolean, false, true, false>;
     /** Whether the rule element requires that the parent item (if physical) be invested */
     requiresInvestment: BooleanField<boolean, boolean, false, true, false>;
+    /** A grouping slug to mark a rule as a part of a spinoff effect, which some item types can compose */
+    spinoff: SlugField<false, false, false>;
 };
 declare class ResolvableValueField<TRequired extends boolean, TNullable extends boolean, THasInitial extends boolean = false> extends foundry.data.fields.DataField<RuleValue, RuleValue, TRequired, TNullable, THasInitial> {
     #private;
-    protected _validateType(value: unknown): boolean;
+    protected _validateType(value: JSONValue): boolean;
     /** No casting is applied to this value */
-    protected _cast(value: unknown): unknown;
+    protected _cast(value: JSONValue): JSONValue;
     protected _cleanType(value: RuleValue): RuleValue;
 }
 type ModelPropsFromRESchema<TSchema extends RuleElementSchema> = Omit<ModelPropsFromSchema<TSchema>, "label">;
