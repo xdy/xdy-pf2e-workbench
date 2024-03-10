@@ -110,8 +110,7 @@ jobs:
                 "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
                 "compatibility": {
                   "minimum": "${{ steps.minimum.outputs.prop }}",
-                  "verified": "${{ steps.verified.outputs.prop }}",
-                  "maximum": "${{ steps.maximum.outputs.prop }}""
+                  "verified": "${{ steps.verified.outputs.prop }}"
                 }
              }
            }'
