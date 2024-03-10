@@ -1,5 +1,6 @@
 {
   "xdy-pf2e-workbench": {
+    "effectItem": "Effect Item",
     "npcRoller": {
       "title": "NPC Roller",
       "button-label": "NPC Roller",
@@ -182,6 +183,10 @@
         "name": "Automatically collapse item chat card content.",
         "noCollapse": "Never collapse",
         "nonCollapsedDefault": "Expanded by default, click title to collapse."
+      },
+      "autoCollapseItemChatCardMoveEffectLinks": {
+        "hint": "... but move any links to effect items outside of the collapsed part of the card when collapsed by default",
+        "name": "... but show effect links"
       },
       "autoCollapseItemActionChatCardContent": {
         "collapsedDefault": "Collapsed by default, click title to expand.",
@@ -387,7 +392,7 @@
         "they": "They",
         "knownBy": "<div><p><b>Known by: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
       },
-      "castPrivateSpellWithPublicMessageShowToGM" : {
+      "castPrivateSpellWithPublicMessageShowToGM": {
         "hint": "Show public message to gm also.",
         "name": "... and show the public message to the gm also."
       },

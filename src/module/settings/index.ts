@@ -38,6 +38,16 @@ export function registerWorkbenchSettings() {
         onChange: () => updateHooks(),
     });
 
+    game.settings.register(MODULENAME, "autoCollapseItemChatCardMoveEffectLinks", {
+        name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardMoveEffectLinks.name`,
+        hint: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardMoveEffectLinks.hint`,
+        scope: "client",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => updateHooks(),
+    });
+
     game.settings.register(MODULENAME, "autoCollapseItemActionChatCardContent", {
         name: `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.name`,
         hint: `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.hint`,

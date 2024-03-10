@@ -6,30 +6,48 @@ import { ChatMessagePF2e } from "@module/chat-message/index.js";
 export function chatCardDescriptionCollapse(html: HTMLElement) {
     const hasCardContent = html.querySelectorAll(".card-content");
     if (hasCardContent.length > 0) {
+        const effectItem = game.i18n.localize(`${MODULENAME}.effectItem`);
         if (String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) === "collapsedDefault") {
             hasCardContent.forEach((content) => (content["style"].display = "none"));
             const cardContentSiblings = (hasCardContent[0] as HTMLElement).parentElement?.children;
             if (cardContentSiblings?.[0]) {
                 cardContentSiblings[0].insertAdjacentHTML("beforeend", eye);
             }
-        }
-        html.addEventListener("click", (event) => {
-            const target = (event.target as HTMLElement).closest("h3");
-            if (target) {
-                const content: HTMLElement | undefined | null = target
-                    .closest(".chat-message")
-                    ?.querySelector(".card-content");
-                if (content) {
-                    event.preventDefault();
-                    content.style.display = content.style.display === "none" ? "block" : "none";
-                    if (content.style.display === "none") {
-                        hasCardContent.forEach((content: HTMLElement) => (content.style.display = "none"));
+            if (game.settings.get(MODULENAME, "autoCollapseItemChatCardMoveEffectLinks")) {
+                const linksToMove: any[] = [];
+                const pTags = Array.from(html.getElementsByTagName("p"));
+                for (const pTag of pTags) {
+                    const contentLink = pTag.querySelector("a.content-link");
+                    if (contentLink && contentLink?.getAttribute("data-tooltip")?.includes(effectItem)) {
+                        linksToMove.push(pTag);
                     }
-                    toggleEyes(html);
+                }
+
+                const chatMessageContainer = html.closest(".chat-message");
+                if (chatMessageContainer && linksToMove.length > 0) {
+                    linksToMove[0].classList.add("item-block-line");
+                    // Append all linksToMove to the end of the chatMessageContainer
+                    chatMessageContainer.append(...linksToMove);
                 }
             }
-        });
+        }
     }
+    html.addEventListener("click", (event) => {
+        const target = (event.target as HTMLElement).closest("h3");
+        if (target) {
+            const content: HTMLElement | undefined | null = target
+                .closest(".chat-message")
+                ?.querySelector(".card-content");
+            if (content) {
+                event.preventDefault();
+                content.style.display = content.style.display === "none" ? "block" : "none";
+                if (content.style.display === "none") {
+                    hasCardContent.forEach((content: HTMLElement) => (content.style.display = "none"));
+                }
+                toggleEyes(html);
+            }
+        }
+    });
 }
 
 function toggleEyes(html: HTMLElement) {
