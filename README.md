@@ -254,7 +254,7 @@ something that the Workbench also does, I suggest disabling the Workbench equiva
 * [PF2e Item Activations](https://github.com/ChasarooniZ/pf2e-item-activations)
 * [PF2e Keybind Menagerie](https://github.com/Drental/foundryvtt-pf2e-f-is-for-flatfooted)
 * [PF2e Modifiers Matter](https://github.com/shemetz/pf2e-modifiers-matter)
-* [PF2e Perception] (unreleased, made by Idle)
+* [PF2e Perception]() (unreleased, made by Idle)
 * [PF2e Toolbelt](https://github.com/reonZ/pf2e-toolbelt)
 * [pf2e Utility Buttons](https://github.com/oWave/pf2e-flatcheck-helper)
 
