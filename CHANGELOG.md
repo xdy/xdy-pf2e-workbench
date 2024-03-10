@@ -1,3 +1,10 @@
+## [5.58.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.0...v5.58.1) (2024-03-10)
+
+
+### Bug Fixes
+
+* *Actually* set minimun and verified foundry version to 11.315 and minimum and verified pf2e version to 5.14.1 ([c4c956d](https://github.com/xdy/xdy-pf2e-workbench/commit/c4c956db28643b28715cf337c97804cc19c6d95c))
+
 # [5.58.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.57.2...v5.58.0) (2024-03-10)
 
 
