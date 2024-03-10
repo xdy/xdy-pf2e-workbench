@@ -251,7 +251,7 @@ something that the Workbench also does, I suggest disabling the Workbench equiva
 * [PF2e Dorako UI](https://github.com/Dorako/pf2e-dorako-ui)
 * [PF2e Extempore Effects](https://github.com/shemetz/pf2e-extempore-effects)
 * [PF2e Interactive Token Tooltip](https://github.com/reonZ/pf2e-token-hud)
-* [PF2e Item Activations]([https://github.com/reonZ/pf2e-token-hud](https://github.com/ChasarooniZ/pf2e-item-activations))
+* [PF2e Item Activations](https://github.com/ChasarooniZ/pf2e-item-activations)
 * [PF2e Keybind Menagerie](https://github.com/Drental/foundryvtt-pf2e-f-is-for-flatfooted)
 * [PF2e Modifiers Matter](https://github.com/shemetz/pf2e-modifiers-matter)
 * [PF2e Perception] (unreleased, made by Idle)
