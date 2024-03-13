@@ -14,7 +14,7 @@
         "players": "Jogadores"
       },
       "addUserTargets": {
-        "addFor": "Adicionar",
+        "addFor": "Adicionar Alvos para",
         "clearFor": "Remover",
         "hint": "Marca os tokens selecionados e cujo mouse esteja em cima como alvos do usuário escolhido.",
         "name": "Adicionar Alvos",
@@ -23,7 +23,7 @@
       "applyPersistentAllow": {
         "all": "Todos",
         "gm": "MJ",
-        "hint": "Selecione quem pode definir a opção de aplicar dano ou cura persistente automaticamente. Salve a configuração para mostrar/ocultar as opções nas Automatizações de Cliente.",
+        "hint": "Selecione quem pode definir a opção de aplicar dano ou cura persistente automaticamente. Salve a configuração para mostrar/ocultar as opções nas Automações de Cliente.",
         "name": "Permissão: aplicar dano/cura persistente",
         "none": "Ninguém",
         "players": "Jogadores"
@@ -34,15 +34,15 @@
         "wasDamaged": "{damage} de dano foi aplicado automaticamente"
       },
       "applyPersistentHealing": {
-        "FastHealingLabel": "Recebeu Cura Acelerada",
+        "FastHealingLabel": "Recebeu cura acelerada",
         "hint": "Automaticamente aplica cura persistente. Salve a configuração para mostrar/ocultar opções adicionais.",
         "name": "Aplicar cura persistente",
-        "RegenerationLabel": "Recebeu Regeneração",
+        "RegenerationLabel": "Recebeu regeneração",
         "wasHealed": "{healing} de cura foi aplicado automaticamente."
       },
       "autoCollapseItemChatCardContent": {
         "collapsedDefault": "Recolher por padrão, clicar no título para expandir",
-        "hint": "Recolhe automaticamente o conteúdo de cartões de chat.",
+        "hint": "Recolhe automaticamente o conteúdo de cartões de chat (excluindo ações e ataques).",
         "name": "Recolher conteúdo de cartão de chat de itens",
         "noCollapse": "Nunca recolher",
         "nonCollapsedDefault": "Expandido por padrão, clicar no título para recolher"
@@ -62,17 +62,19 @@
         "addWoundedLevelForCharacters": "Adicionar 1 + nível de Ferido, para personagens e familiares",
         "hint": "Automaticamente aumenta a condição Morrendo quando chegar a 0 PV.",
         "name": "Aumentar Morrendo em 0 PV",
-        "no": "Não"
+        "no": "Não",
+        "deliberateDeathMessage": "{nome} pode, <b>antes de ficar Morrendo</b> como resultado de um ataque ou habilidade de outra criatura, se essa criatura estiver dentro do alcance corpo a corpo, fazer um Golpe corpo a corpo contra a criatura acionadora.<br>Remova o efeito \"Morte Deliberada Usada\" se ele realmente não puder ser usado.",
+        "orcFerocityMessage": "{name} acabou de usar @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] e agora pode usar a ação gratuita: @UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]"
       },
       "automationClientSettings": {
-        "hint": "Habilitar e Configurar automação para jogadores",
-        "label": "Automatizações de Cliente",
-        "name": "Automatizações de Cliente"
+        "hint": "Habilita e configura configurações de automação local, ou seja, configurações que afetam apenas seu próprio cliente.",
+        "label": "Gerenciar Automações de Cliente",
+        "name": "Gerenciar Automações de Cliente"
       },
       "automationWorldSettings": {
-        "hint": "Configura automatizações para o MJ.",
-        "label": "Automatizações de Mundo",
-        "name": "Automatizações de Mundo"
+        "hint": "Habilita e configura automações para o MJ.",
+        "label": "Gerenciar Automações do Mundo",
+        "name": "Automações do Mundo"
       },
       "autoReduceStunned": {
         "hint": "Automaticamente reduz a condição Atordoado no início do turno.",
@@ -92,7 +94,7 @@
       "autoRollDamageAllow": {
         "all": "Todos",
         "gm": "MJ",
-        "hint": "Selecione quem pode definir a opção de rolar dano em um acerto automaticamente. Salve a configuração para mostrar/ocultar as opções nas Automatizações de Cliente.",
+        "hint": "Selecione quem pode definir a opção de rolar dano em um acerto automaticamente. Salve a configuração para mostrar/ocultar as opções nas Automações de Cliente.",
         "name": "Permissão: rolar dano em um acerto automaticamente",
         "none": "Ninguém",
         "players": "Jogadores"
@@ -124,18 +126,18 @@
       },
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Truque mágico",
-        "firstPart": "{tokenName} acabou de conjurar um(a) {type} da tradição <strong>{traditionString}</strong>",
+        "firstPart": "{tokenName} acabou de conjurar um(a) {type} da tradição <strong>{traditionString}</strong>. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "hint": "Se conjurar em segredo, também posta uma mensagem pública informando que uma magia foi conjurada a não ser que você também esteja pressionando Shift.",
         "name": "Publicar que uma magia foi conjurada",
         "savePart": "<br>Salvamento para a magia desconhecida é: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
-        "secondPartNoRk": ".<br>Pergunte ao MJ se você a reconhece automaticamente ou com uma reação. Senão, pergunte ao MJ pelo CD de Recordar Conhecimento se você deseja gastar uma ação em seu turno para tentar identificá-la.",
-        "secondPartRK": ".<br>Pergunte ao MJ se você a reconhece automaticamente ou com uma reação. Senão, você pode gastar uma ação em seu turno para tentar identificá-la: @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk}",
+        "secondPartNoRk": ".<br>Você pode tentar usar @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]{Reconhecer Magia} ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]{Reconhecimento Rápido} para reconhecê-la, ou, em seu turno, gastar uma ação para tentar identificá-la (pergunte ao MJ para mais detalhes).",
+        "secondPartRK": "<br>Você pode tentar usar uma das @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] para reconhecê-la. Ou, em seu turno, gaste uma ação para tentar identificá-la com @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (ou 10 minutos com @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G])",
         "spell": "Magia",
         "they": "O personagem"
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "Mostra os traços da magia na mensagem pública.",
-        "name": "Mostrar traços da magia",
+        "name": "... e mostrar traços de magia na mensagem pública.",
         "traitPart": " com esses traços: <strong>{traits}</strong>"
       },
       "decreaseFrightenedConditionEachTurn": {
@@ -146,7 +148,7 @@
         "hint": "Define quando a posição de iniciativa de um combatente fora de seu próprio turno é movida para imediatamente antes do turno atual (ex.: Nocauteado e Morrendo, Livro Básico pág. 459). Devido a arredondamentos, vários combatentes podem mostrar a mesma iniciativa na lista.",
         "name": "Definir iniciativa para antes do combatente atual",
         "noAutomation": "Nunca",
-        "reaching0HP": "Quando o combatente for reduzido a 0 PV"
+        "reaching0HP": "Quando o PJ ou PDM for reduzido a 0 PV"
       },
       "giveUnconsciousIfDyingRemovedAt0HP": {
         "hint": "Automaticamente aplica a condição Inconsciente se Morrendo for removido enquanto estiver em 0 PV.",
@@ -161,7 +163,7 @@
         "add": "Adicionar",
         "addedFor": "1 Ponto de Heroísmo adicionado para {name}",
         "addedToForAll": "{heroPoints} Ponto(s) de Heroísmo adicionado(s) para todos",
-        "addOne": "<b>Seção 2</b> - Adicionar um Ponto de Heroísmo para personagens selecionados dentre os que estão logados (o padrão é um personagem aleatório quando o temporizador expira)",
+        "addOne": "<b>Seção 2</b> - Adicionar um Ponto de Heroísmo para personagens selecionados do grupo ativo (o padrão é um personagem aleatório quando o temporizador expira)",
         "all": "Todos",
         "defaultTimeoutMinutes": 60,
         "doWhat": "<b>Seção 1</b> - Escolha o que fazer com os Pontos de Heroísmo de <em>todos</em> os personagens com o seguinte valor",
@@ -179,28 +181,28 @@
         "startTimerLabel": "Enviar e iniciar/continuar o temporizador",
         "thisMany": "Esta quantidade",
         "timerStopped": "Temporizador de Pontos de Heroísmo foi parado.",
-        "timerValue": "Tempo do Temporizador (intervalo de 0 a 60)",
+        "timerValue": "Tempo do Temporizador (intervalo de 0 a {maxMinutes})",
         "title": "Gerenciador de Pontos de Heroísmo",
         "willBeResetIn": "O Gerenciador de Pontos de Heroísmo retornará em {remainingMinutes} minutos ({time})."
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
-        "hint": "Define quantos minutos até a próxima vez que o Gerenciador de Pontos de Heroísmo abrirá.",
-        "name": "Temporizador do Gerenciador de Pontos de Heroísmo"
+        "hint": "Define o padrão (e o máximo) para quantos minutos até a próxima vez que o Gerenciador de Pontos de Heroísmo abrirá.",
+        "name": "... Timer do Gerenciador de Pontos de Heroísmo"
       },
       "heroPointHandlerKey": {
         "hint": "Atalho de teclado para abrir o Gerenciador de Pontos de Heroísmo, que permite resetar ou adicionar Pontos de Heroísmo.",
-        "name": "Gerenciador de Pontos de Heroísmo"
+        "name": "Atalho para abrir o Gerenciador de Pontos de Heroísmo"
       },
       "heroPointHandlerStartTimerOnReady": {
         "hint": "Marque para iniciar o temporizador do Gerenciador de Pontos de Heroísmo quando o jogo estiver pronto.",
-        "name": "Iniciar o Gerenciador de Pontos de Heroísmo automaticamente"
+        "name": "... Iniciar o Gerenciador de Pontos de Heroísmo automaticamente"
       },
       "moveBeforeCurrentCombatantContextMenu": {
-        "name": "Mover combatentes para antes do combatente atual"
+        "name": "Mover combatentes selecionados para antes do combatente atual"
       },
       "moveBeforeCurrentCombatantKey": {
         "hint": "Move os combatentes selecionados para imediatamente antes do turno atual (ex.: Nocauteado e Morrendo, Livro Básico pág. 459). Devido a arredondamentos, vários combatentes podem mostrar a mesma iniciativa na lista.",
-        "name": "Mover combatentes para antes do combatente atual"
+        "name": "Atalho para mover combatentes selecionados para antes do combatente atual"
       },
       "mystificationSettings": {
         "hint": "Habilitar e configurar mistificação de PdM",
@@ -249,7 +251,7 @@
         "name": "Texto para não-correspondência"
       },
       "npcMystifierPostfix": {
-        "hint": "Adiciona um sufixo ao novo nome. Se corresponder ao nome de uma tabela de rolagem, um resultado aleatório será usado como sufixo.",
+        "hint": "Adiciona um sufixo ao novo nome. Se corresponder ao nome de uma tabela de rolagem (a tabela padrão é a \"Workbench Adjectives\"), um resultado aleatório será usado como sufixo.",
         "name": "Sufixo: Palavra ou Tabela de Rolagem"
       },
       "npcMystifierPrefix": {
@@ -274,7 +276,7 @@
       },
       "npcMystifierUseMystifiedNameInChat": {
         "hint": "Usa nome mistificado em mensagens de chat, substituindo o nome do ator pelo nome mistificado.",
-        "name": "(Experimental) Mistificar nome em mensagens de chat"
+        "name": "Mistificar nome em mensagens de chat"
       },
       "npcMystifierUseOtherTraits": {
         "hint": "Usa todos os traços de PdM ainda não inclusos pelas configurações acima no nome mistificado.",
@@ -302,15 +304,15 @@
       },
       "qolWorldSettings": {
         "hint": "Configurações de qualidade de vida para o MJ.",
-        "label": "Qualidade de Vida",
+        "label": "Gerenciar Qualidade de Vida",
         "name": "Qualidade de Vida"
       },
       "reminderBreathWeapon": {
         "defaultName": "Sopro",
-        "hint": "Cria um lembrete para o uso de sopros (como os de um dragão).",
-        "name": "Sopros",
+        "hint": "Cria um lembrete para o uso de habilidads de recarga (como os sopros de dragão).",
+        "name": "Lembrete de Recarga",
         "prefix": "Recarga",
-        "source": "Lembrete de Sopro criado pelo PF2e Workbench",
+        "source": "Lembrete de Recarga criado pelo PF2e Workbench",
         "used": "Usou "
       },
       "reminderCannotAttack": {
@@ -357,6 +359,37 @@
       },
       "npcMystifierRandomPropertySkipForUnique": {
         "name": "Pular propriedade persistente para Npcs únicos"
+      },
+      "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
+        "add": "Adicionar Morrendo",
+        "no": "Não",
+        "addForCharacters": "Adicionar Morrendo, para personagens+familiares"
+      },
+      "applyPersistentDamageRecoveryRoll": {
+        "name": "... Rolar Recuperação automaticamente.",
+        "hint": "Rola recuperação automaticamente. Requer que a configuração acima esteja ativada."
+      },
+      "autoCollapseItemChatCardMoveEffectLinks": {
+        "hint": "... mas mova todos os links para itens de efeito para fora da parte recolhida do cartão quando recolhido por padrão",
+        "name": "... mas mostrar links de efeito"
+      },
+      "autoCollapseItemActionChatCardContent": {
+        "name": "Recolha automaticamente o conteúdo da ação.",
+        "hint": "Configuração do cliente para recolher automaticamente o conteúdo da ação no chat.",
+        "noCollapse": "Nunca recolher",
+        "collapsedDefault": "Recolher por padrão, clicar no título para expandir",
+        "nonCollapsedDefault": "Expandido por padrão, clique no título para recolher."
+      },
+      "dropHeldItemsOnBecomingUnconscious": {
+        "name": "Personagens largam itens ao ficarem inconscientes.",
+        "message": "{name} largou: {itens}",
+        "hint": "Personagens automaticamente largam os itens segurados ao ficarem inconscientes (exceto escudos, que se tornam vestidos em vez de segurados)."
+      },
+      "autoCollapseItemAttackChatCardContent": {
+        "noCollapse": "Nunca recolher",
+        "nonCollapsedDefault": "Expandido por padrão, clique no título para recolher.",
+        "collapsedDefault": "Recolher por padrão, clicar no título para expandir",
+        "hint": "Recolhe automaticamente o conteúdo de ataques no chat."
       }
     },
     "npcRoller": {
@@ -446,23 +479,37 @@
           "TumbleThrough": "Atravessar Acrobaticamente",
           "DecipherWritingSociety": "Decifrar Escrita - Sociedade",
           "PickALock": "Abrir uma Fechadura",
-          "TakeCoverToggle": "Obter Cobertura (Lig/Des)"
+          "TakeCoverToggle": "Obter Cobertura (Lig/Des)",
+          "Reposition": "Reposicionar",
+          "Escape": "Escapar - mais alto (??)"
         },
         "macroNotFound": "Macro {macroName} não encontrado",
         "compendiumNotFound": "Compendium {compendiumName} não encontrado",
         "second": "(-5)",
         "YouAreTheBestInYourParty": "Você é o Melhor do Grupo",
-        "noActorSelected": "Nenhum Ator selecionado",
+        "noActorSelected": "Nenhum PJ, PDM ou familiar está selecionado",
         "cancel": "Cancelar",
         "third": "(-10)",
         "settings": {
           "showBestBonus": {
-            "name": "Mostrar se é melhor em macros de ação básicas",
+            "name": "MAB: Mostrar se é melhor na Macro de Ações Básicas",
             "hint": "Mostrar se o ator selecionado tem o melhor bônus na caixa de diálogo Macros de ação básica"
           }
         },
         "title": "Ações ({name})",
-        "gmMustImport": "O GM deve clicar com o botão direito do mouse no compêndio xdy-pf2e-workbench-macros e selecionar 'Importar Todo Conteudo' e certificar-se de marcar 'Manter IDs de documentos' ao importar."
+        "gmMustImport": "O GM deve clicar com o botão direito do mouse no compêndio xdy-pf2e-workbench-macros e selecionar 'Importar Todo Conteudo' e certificar-se de marcar 'Manter IDs de documentos' ao importar.",
+        "bamTabview": {
+          "name": "MAB: Usar layout com abas",
+          "hint": "Usar um layout com abas para a Macro de Ações Básicas."
+        },
+        "bamShowUnusable": {
+          "name": "MAB: Mostrar ações que não podem ser usadas.",
+          "hint": "Se deve mostrar ações que não podem ser usadas porque o personagem não é treinado."
+        },
+        "exploration": "Exploração",
+        "downtime": "Recesso",
+        "explorationShort": "E",
+        "downtimeShort": "R"
       },
       "buildNpcSpellbookJournal": {
         "generatedSpellbookFor": "Grimório gerado para {name}",
@@ -479,6 +526,7 @@
         "regainOne": "Recuperou 1 ponto de foco.",
         "isPsychic": "Pontos de Foco gastos apenas para amplificar truques psi ou alimentar habilidades psíquicas"
       }
-    }
+    },
+    "effectItem": "Item de efeito"
   }
 }
