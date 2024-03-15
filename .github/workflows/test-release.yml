@@ -67,22 +67,29 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
+      - name: echo-json
+        id: echo-json
+        run:  |
+          echo ${{steps.json_properties.outputs.id}}
+          echo ${{steps.json_properties.outputs.compatibility.minimum }}
+          echo "${{steps.json_properties.outputs.compatibility.minimum }}"
+
       - name: Submit package to FoundryVTT Package Release API
         run: |
           curl -X POST "https://api.foundryvtt.com/_api/packages/release_version/" \
             -H "Content-Type: application/json" \
             -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
             -d '{
-              "id": "${{ steps.package-json.outputs.id }}",
+              "id": "${{steps.package-json.outputs.id}}",
               "dry-run": false,
               "release": {
                 "version": "${{ steps.package-version.outputs.current-version}}",
                 "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
                 "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
                 "compatibility": {
-                  "minimum": "${{ steps.package-json.outputs.compatibility.minimum }}",
-                  "verified": "${{ steps.package-json.outputs.compatibility.verified }}",
-                  "maximum": "${{ steps.package-json.outputs.compatibility.maximum }}",
+                  "minimum": "${{steps.package-json.outputs.compatibility.minimum}}",
+                  "verified": "${{steps.package-json.outputs.compatibility.verified}}",
+                  "maximum": "${{steps.package-json.outputs.compatibility.maximum}}",
                 }
              }
            }'
