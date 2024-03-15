@@ -57,22 +57,37 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-      - name: Get package json
-        id: package-json
-        uses: zoexx/github-action-json-file-properties@release
+      - name: Get Module ID
+        id: moduleID
+        uses: notiz-dev/github-action-json-property@release
         with:
-          file_path: "./dist/${{ env.package_type }}.json"
+          path: "./dist/${{ env.package_type }}.json"
+          prop_path: "id"
+
+      - name: Get minimum
+        id: minimum
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "./dist/${{ env.package_type }}.json"
+          prop_path: "compatibility.minimum"
+
+      - name: Get verified
+        id: verified
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "./dist/${{ env.package_type }}.json"
+          prop_path: "compatibility.verified"
+
+      - name: Get maximum
+        id: maximum
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "./dist/${{ env.package_type }}.json"
+          prop_path: "compatibility.maximum"
 
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
-
-      - name: echo-json
-        id: echo-json
-        run:  |
-          echo ${{steps.json_properties.outputs.id}}
-          echo ${{steps.json_properties.outputs.compatibility.minimum }}
-          echo "${{steps.json_properties.outputs.compatibility.minimum }}"
 
       - name: Submit package to FoundryVTT Package Release API
         run: |
@@ -80,16 +95,16 @@ jobs:
             -H "Content-Type: application/json" \
             -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
             -d '{
-              "id": "${{steps.package-json.outputs.id}}",
+              "id": "${{ steps.moduleID.outputs.prop }}",
               "dry-run": false,
               "release": {
                 "version": "${{ steps.package-version.outputs.current-version}}",
                 "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
                 "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
                 "compatibility": {
-                  "minimum": "${{steps.package-json.outputs.compatibility.minimum}}",
-                  "verified": "${{steps.package-json.outputs.compatibility.verified}}",
-                  "maximum": "${{steps.package-json.outputs.compatibility.maximum}}",
+                  "minimum": "${{ steps.minimum.outputs.prop }}",
+                  "verified": "${{ steps.verified.outputs.prop }}",
+                  "maximum": "${{ steps.maximum.outputs.prop }}"
                 }
              }
            }'
