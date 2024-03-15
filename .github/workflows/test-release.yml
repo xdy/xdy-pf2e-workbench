@@ -85,9 +85,9 @@ jobs:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "compatibility.maximum"
 
-      - name: Extract tag version number
-        id: get_version
-        uses: battila7/get-version-action@v2
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
 
 #      - name: Publish Module to FoundryVTT Website
 #        id: publish-to-foundry-website
