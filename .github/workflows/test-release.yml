@@ -57,71 +57,32 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-      - name: Get Module ID
-        id: moduleID
-        uses: notiz-dev/github-action-json-property@release
+      - name: Get package json
+        id: package-json
+        uses: zoexx/github-action-json-file-properties@release
         with:
-          path: "./dist/${{ env.package_type }}.json"
-          prop_path: "id"
-
-      - name: Get mininum
-        id: minimum
-        uses: notiz-dev/github-action-json-property@release
-        with:
-          path: "./dist/${{ env.package_type }}.json"
-          prop_path: "compatibility.minimum"
-
-      - name: Get verified
-        id: verified
-        uses: notiz-dev/github-action-json-property@release
-        with:
-          path: "./dist/${{ env.package_type }}.json"
-          prop_path: "compatibility.verified"
-
-      - name: Get maximum
-        id: maximum
-        uses: notiz-dev/github-action-json-property@release
-        with:
-          path: "./dist/${{ env.package_type }}.json"
-          prop_path: "compatibility.maximum"
+          file_path: "./dist/${{ env.package_type }}.json"
 
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-#      - name: Publish Module to FoundryVTT Website
-#        id: publish-to-foundry-website
-#        uses: cs96and/FoundryVTT-release-package@v1
-#        with:
-#          package-token: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}
-#          manifest-url: https://github.com/${{github.repository}}/releases/download/${{steps.get_version.outputs.version}}/module.json
-                
       - name: Submit package to FoundryVTT Package Release API
         run: |
           curl -X POST "https://api.foundryvtt.com/_api/packages/release_version/" \
             -H "Content-Type: application/json" \
             -H "Authorization: ${{ secrets.FOUNDRYVTT_RELEASE_TOKEN }}" \
             -d '{
-              "id": "${{ steps.moduleID.outputs.prop }}",
+              "id": "${{ steps.package-json.outputs.id }}",
               "dry-run": false,
               "release": {
-                "version": "${{ steps.get_version.outputs.version-without-v }}",
+                "version": "${{ steps.package-version.outputs.current-version}}",
                 "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
                 "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
                 "compatibility": {
-                  "minimum": "${{ steps.minimum.outputs.prop }}",
-                  "verified": "${{ steps.verified.outputs.prop }}",
-                  "maximum": "${{ steps.maximum.outputs.prop }}"
+                  "minimum": "${{ steps.package-json.outputs.compatibility.minimum }}",
+                  "verified": "${{ steps.package-json.outputs.compatibility.verified }}",
+                  "maximum": "${{ steps.package-json.outputs.compatibility.maximum }}",
                 }
              }
            }'
-
-#     # Publish the release to FoundryVTT's package repository.
-#      - name: Publish Module to FoundryVTT Website
-#        uses: Varriount/fvtt-autopublish@v2.0.1
-#        with:
-#          username: ${{ secrets.FOUNDRY_ADMIN_USERNAME }}
-#          password: ${{ secrets.FOUNDRY_ADMIN_PASSWORD }}
-#          module-id: ${{ secrets.FOUNDRY_ADMIN_PACKAGE_ID }}
-#          manifest-url: https://github.com/${{ github.repository }}/releases/latest/download/module.json
-#          manifest-file: './static/module.json'
