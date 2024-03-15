@@ -6,7 +6,7 @@
   "compatibility": {
     "minimum": "11.315",
     "verified": "11.315",
-    "maximum": "11"
+    "maximum": "11.999"
   },
   "relationships": {
     "systems": [
