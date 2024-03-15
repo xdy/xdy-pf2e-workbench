@@ -1,7 +1,7 @@
 {
   "title": "PF2e Workbench",
   "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
-  "version": "5.58.3",
+  "version": "5.58.4",
   "id": "xdy-pf2e-workbench",
   "compatibility": {
     "minimum": "11.315",
@@ -227,7 +227,7 @@
   ],
   "url": "https://github.com/xdy/xdy-pf2e-workbench/",
   "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json",
-  "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/download/v5.58.3/xdy-pf2e-workbench.zip",
+  "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/download/v5.58.4/xdy-pf2e-workbench.zip",
   "license": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/LICENSE.md",
   "readme": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/README.md",
   "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
