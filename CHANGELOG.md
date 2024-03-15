@@ -1,3 +1,10 @@
+## [5.58.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.2...v5.58.3) (2024-03-15)
+
+
+### Bug Fixes
+
+* Test release process ([c4f3312](https://github.com/xdy/xdy-pf2e-workbench/commit/c4f331205eec69b9d977312edade2d4c030e126b))
+
 ## [5.58.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.1...v5.58.2) (2024-03-13)
 
 
