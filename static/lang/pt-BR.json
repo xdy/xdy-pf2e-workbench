@@ -363,7 +363,9 @@
       "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
         "add": "Adicionar Morrendo",
         "no": "Não",
-        "addForCharacters": "Adicionar Morrendo, para personagens+familiares"
+        "addForCharacters": "Adicionar Morrendo, para personagens+familiares",
+        "hint": "Se sofrer um acerto crítico de um ataque de dano direcionado de um ator inimigo, adicione mais um nível de Morrendo. Usa as configurações de \"ferido\" da configuração acima. Requer que a configuração acima esteja ativada.",
+        "name": "... e aumente a condição morrendo se sofrer dano crítico de um inimigo."
       },
       "applyPersistentDamageRecoveryRoll": {
         "name": "... Rolar Recuperação automaticamente.",
@@ -389,7 +391,27 @@
         "noCollapse": "Nunca recolher",
         "nonCollapsedDefault": "Expandido por padrão, clique no título para recolher.",
         "collapsedDefault": "Recolher por padrão, clicar no título para expandir",
-        "hint": "Recolhe automaticamente o conteúdo de ataques no chat."
+        "hint": "Recolhe automaticamente o conteúdo de ataques no chat.",
+        "name": "Recolha automaticamente o conteúdo do ataque."
+      },
+      "autoGainDyingIfTakingDamageWhenAlreadyDying": {
+        "name": "... e aumentar morrendo se estiver receber dano se já estiver morrendo.",
+        "no": "Não",
+        "add": "Adicionar morrendo",
+        "hint": "Se receber dano enquanto já estiver morrendo, aumente morrendo (possivelmente duas vezes em um crítico, se estiver ativado). Usa as configurações de \"ferido\" da configuração acima. Requer que a configuração acima esteja ativada.",
+        "addForCharacters": "Adicionar morrendo, para personagens+familiares"
+      },
+      "nonLethalIsNotLethal": {
+        "unconsciousForCharacters": "Não-letal não mata personagens+familiares",
+        "unconscious": "Dano não-letal não mata",
+        "name": "... dependendo se o último dano foi não-letal.",
+        "hint": "Se o último dano que você sofrer for não-letal, você não morrerá. Em vez disso, você fica inconsciente com 0 PV. Requer que a configuração acima esteja ativada.",
+        "no": "Dano não-letal é apenas um dano"
+      },
+      "autoKillIfMassiveDamage": {
+        "yesForNpcs": "Sim, para npcs",
+        "yes": "Sim, para todos",
+        "yesForCharacters": "Sim, para personagens+familiares"
       }
     },
     "npcRoller": {
@@ -481,7 +503,9 @@
           "PickALock": "Abrir uma Fechadura",
           "TakeCoverToggle": "Obter Cobertura (Lig/Des)",
           "Reposition": "Reposicionar",
-          "Escape": "Escapar - mais alto (??)"
+          "Escape": "Escapar - mais alto (??)",
+          "AidASE": "Auxliar (Macro do ASE)",
+          "CreateADiversionDistractingWords": "Criar uma Distração - Palavras Distrativas"
         },
         "macroNotFound": "Macro {macroName} não encontrado",
         "compendiumNotFound": "Compendium {compendiumName} não encontrado",
