@@ -111,7 +111,7 @@ jobs:
                 "compatibility": {
                   "minimum": "${{ steps.minimum.outputs.prop }}",
                   "verified": "${{ steps.verified.outputs.prop }}",
-                  "maximum": "${{ steps.maximum.outputs.prop }}""
+                  "maximum": "${{ steps.maximum.outputs.prop }}"
                 }
              }
            }'
