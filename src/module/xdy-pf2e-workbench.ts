@@ -210,6 +210,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     // Hooks that always run
     Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
         toggleMenuSettings(html, _settings);
+        _app.setPosition();
     });
 
     // Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
