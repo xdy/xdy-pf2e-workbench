@@ -1,3 +1,10 @@
+## [5.58.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.7...v5.58.8) (2024-03-17)
+
+
+### Bug Fixes
+
+* When checking if a privately cast spell is known by a party member, verify that prepared spells are actually prepared and not just on the spell preparation shortlist. ([0eceedc](https://github.com/xdy/xdy-pf2e-workbench/commit/0eceedc0eb8b91f3c028df4942da6b269ba09ae7)), closes [#1265](https://github.com/xdy/xdy-pf2e-workbench/issues/1265)
+
 ## [5.58.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.6...v5.58.7) (2024-03-15)
 
 
