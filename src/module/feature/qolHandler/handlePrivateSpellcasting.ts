@@ -1,5 +1,6 @@
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { SpellPF2e } from "@item/spell/document.js";
 
 export async function handlePrivateSpellcasting(data: any, message: ChatMessagePF2e) {
     const spellUUID = <string>message.flags?.pf2e.origin?.uuid;
@@ -114,7 +115,21 @@ const TRADITION_SKILLS = { arcane: "arcana", divine: "religion", occult: "occult
 
 function findPartyMembersWithSpell(origin: any) {
     return game.actors?.party?.members
-        ?.filter((actor) => actor.items?.some((item) => item.isOfType("spell") && item.slug === origin.slug))
+        ?.filter((actor) => {
+            return actor.items
+                ?.filter((i) => i.slug === origin.slug)
+                ?.filter((i) => i.isOfType("spell"))
+                ?.filter((i) => (<SpellPF2e>(<unknown>i)).spellcasting)
+                .some((item) => {
+                    const spell = <SpellPF2e>(<unknown>item);
+                    const entry = spell.spellcasting;
+                    return (
+                        !entry?.isPrepared ||
+                        (entry?.isPrepared &&
+                            entry?.system?.slots?.[`slot${spell.rank}`].prepared.some((s) => s.id === spell.id))
+                    );
+                });
+        })
         .map((actor) => actor.name);
 }
 
