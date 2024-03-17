@@ -280,8 +280,8 @@
       "autoExpandDamageRolls": {
         "collapsedAll": "Wszystkie rzuty na obrażenia zwinięte (domyślne Foundry).",
         "expandedAll": "Wszystkie rzuty na obrażenia rozszerzają się.",
-        "expandedNew": "Nowe rzuty obrażeń rozszerzają się (rozszerzają się również trzy ostatnie rzuty obrażeń przy odświeżaniu).",
-        "expandedNewest": "Nowe rzuty na obrażenia rozszerzają się (rozszerza się również ostatni rzut na obrażenia przy odświeżaniu).",
+        "expandedNew": "Nowe rzuty obrażeń rozszerzają się (tak jak trzy ostatnie rzuty obrażeń przy odświeżaniu).",
+        "expandedNewest": "Nowe rzuty na obrażenia rozszerzają się (tak jak ostatni rzut na obrażenia przy odświeżaniu).",
         "name": "Automatycznie rozszerzaj rzuty na obrażenia.",
         "hint": "Ustawienie klienta do automatycznego rozwijania rzutów obrażeń (domyślnie wszystkie rzuty obrażeń są zwinięte). Kliknij rzut kością, aby rozwinąć/zwinąć."
       },
@@ -305,13 +305,13 @@
         "hint": "Włącz, aby zastosować powyższe ustawienia niezależnie od tego, czy cel pasuje do wybranego tokena. (Najbardziej przydatne, jeśli nie używasz targetowania/automatyzacji)"
       },
       "automationClientSettings": {
-        "hint": "Włącz i skonfiguruj lokalne ustawienia automatyzacji, tj. ustawienia, które mają wpływ tylko na Twojego klienta.",
-        "label": "Zarządzanie ustawieniami automatyzacji klienta",
+        "hint": "Włącz i skonfiguruj lokalne ustawienia automatyzacji, które mają wpływ tylko na Twojego klienta.",
+        "label": "Zarządzaj ustawieniami automatyzacji klienta",
         "name": "Ustawienia automatyzacji klienta"
       },
       "automationWorldSettings": {
-        "hint": "Włączanie i konfigurowanie automatyzacji dla GM",
-        "label": "Zarządzanie ustawieniami automatyzacji świata",
+        "hint": "Włączanie i konfigurowanie automatyzacji dla MG",
+        "label": "Zarządzaj ustawieniami automatyzacji świata",
         "name": "Ustawienia automatyzacji świata"
       },
       "autoReduceStunned": {
@@ -435,7 +435,7 @@
         "name": "Eidolony mogą atakować, gdy są martwe"
       },
       "remindersSettings": {
-        "label": "Zarządzanie ustawieniami przypomnień",
+        "label": "Zarządzaj ustawieniami przypomnień",
         "name": "Ustawienia przypomnień",
         "hint": "Włączanie i konfigurowanie różnych przypomnień"
       },
@@ -455,7 +455,7 @@
       "qolWorldSettings": {
         "name": "Ustawienia QoL Świata",
         "hint": "Włączanie i konfigurowanie ustawień Quality of Life dla GMów",
-        "label": "Zarządzanie ustawieniami QoL dla Świata"
+        "label": "Zarządzaj ustawieniami QoL dla Świata"
       },
       "npcMystifierPrefix": {
         "name": "Prefiks słowa lub tabeli rzutu",
@@ -469,7 +469,7 @@
         "onScene": "Utajnianie przedmiotów po dodaniu npc do sceny"
       },
       "mystificationSettings": {
-        "label": "Zarządzanie ustawieniami utajniania NPC",
+        "label": "Zarządzaj ustawieniami utajniania NPC",
         "hint": "Włącz i skonfiguruj utajnianie NPC",
         "name": "Ustawienia utajniania postaci niezależnych"
       },
@@ -504,7 +504,7 @@
         "noTimerLabel": "Prześlij zmiany z <b>bez</b> timera. Zatrzyma <b></b> każdy istniejący licznik czasu."
       },
       "houseRulesSettings": {
-        "label": "Zarządzanie ustawieniami Zasad Domowych",
+        "label": "Zarządzaj ustawieniami Zasad Domowych",
         "hint": "(Eksperymentalne) Włączanie i konfigurowanie różnych zasad domowych",
         "name": "(Eksperymentalne) Ustawienia zasad domowych"
       },
@@ -709,12 +709,17 @@
       "playerCraftingRarityColour": {
         "hint": "Ustawienie klienta, aby nazwy zaklęć były wyświetlane w kolorze rzadkości na kartach postaci.",
         "name": "Wyświetlaj nazwy formuł w kolorze rzadkości na kartach postaci."
+      },
+      "autoCollapseItemChatCardMoveEffectLinks": {
+        "hint": "... ale przenieś wszystkie linki do efektów przedmiotów poza zwiniętą część karty, gdy jest ona domyślnie zwinięta",
+        "name": "... ale pokaż linki do efektów"
       }
     },
     "modules": {
       "pf2e-sheet-skill-actions": "Moduł pf2e-sheet-skill-actions nie jest już utrzymywany, wszystkie jego funkcje są częścią Workbencha, prosimy o jego wyłączenie.",
       "pf2e-toolbox": "Moduł pf2e-toolbox nie jest już utrzymywany, większość jego funkcji jest częścią Workbencha, prosimy o jego wyłączenie.",
       "multilevel-tokens": "Moduł Multilevel Tokens (i prawdopodobnie inne moduły, które teleportują tokeny) mogą mieć problemy z teleportacją, ponieważ włączono opcjonalne ustawienie Workbench, aby zmienić animację tokenów."
-    }
+    },
+    "effectItem": "Efekt Przedmiotu"
   }
 }
