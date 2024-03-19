@@ -79,7 +79,7 @@
   "dependencies": {
     "@codemirror/autocomplete": "^6.15.0",
     "@codemirror/lang-json": "^6.0.1",
-    "@yaireo/tagify": "4.21.2",
+    "@yaireo/tagify": "4.22.1",
     "codemirror": "^6.0.1",
     "luxon": "^3.4.4",
     "minisearch": "^6.3.0",
