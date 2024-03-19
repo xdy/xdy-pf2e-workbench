@@ -344,7 +344,7 @@
         "name": "Versão de migração do Workbench"
       },
       "npcMystifyAllPhysicalMagicalItems": {
-        "name": "Mistificar itens magicos e alquimicos, se Npcs lotiaveis estiver ativado nas configurações do sistema PF2e"
+        "name": "Mistifica itens alquímicos e mágicos se a configuração do sistema \"PdMs são saqueáveis\" estiver ativada"
       },
       "customPauseImage": {
         "name": "Imagem customizada para usar na imagem de Pause."
