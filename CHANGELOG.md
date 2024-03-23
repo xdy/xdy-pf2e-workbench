@@ -1,3 +1,10 @@
+## [5.58.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.8...v5.58.9) (2024-03-23)
+
+
+### Bug Fixes
+
+* Avoid undefined is not iterable error ([1abb7a0](https://github.com/xdy/xdy-pf2e-workbench/commit/1abb7a05a26bbacda9e3fccfe235aaaded856ae8))
+
 ## [5.58.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.7...v5.58.8) (2024-03-17)
 
 
