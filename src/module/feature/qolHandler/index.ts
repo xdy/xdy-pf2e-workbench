@@ -173,6 +173,9 @@ export async function mystifyNpcItems(
     }
     const itemUpdates: any[] = [];
     const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
+    if (!actor || !actor.items) {
+        return;
+    }
     const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
         actor.items
             ?.filter((item) =>
