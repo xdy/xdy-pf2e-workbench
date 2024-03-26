@@ -219,7 +219,7 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
         };
     }
 
-    static override readonly hiddenList = {
+    static override readonly hidelist = {
         autoGainDyingAtZeroHP: {
             type: "select",
             falsy: "no",

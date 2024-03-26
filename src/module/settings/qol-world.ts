@@ -173,7 +173,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
         };
     }
 
-    static override readonly hiddenList = {
+    static override readonly hidelist = {
         castPrivateSpell: {
             list: [
                 "castPrivateSpellAutoRevealIfKnown",
