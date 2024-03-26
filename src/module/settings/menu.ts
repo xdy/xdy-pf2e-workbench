@@ -61,12 +61,12 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
         form.style.display = !boolean ? "none" : "";
     }
 
-    static readonly hiddenList: Object = {} as HideListTemplateData;
+    static readonly hidelist: Object = {} as HideListTemplateData;
 
     // @ts-ignore
     static hook(...args: any): HookCallback<unknown[]> {
         const html = args[1];
-        Object.entries(this.hiddenList).forEach(([k, v]) => {
+        Object.entries(this.hidelist).forEach(([k, v]) => {
             const setting = game.settings.get("xdy-pf2e-workbench", k) !== (v.falsy ?? false);
             const settingCheckbox = html.find(`.form-fields [name="${k}"]`);
             for (const form of v.list) {
