@@ -4,6 +4,12 @@ import { SettingsMenuPF2eWorkbench } from "./menu.js";
 export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "houseRulesSettings";
 
+    static override get defaultOptions() {
+        return fu.mergeObject(super.defaultOptions, {
+            height: "fit-content",
+        });
+    }
+
     public static override get settings(): Record<string, SettingRegistration> {
         return {
             keeleysHeroPointRule: {

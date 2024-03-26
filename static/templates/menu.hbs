@@ -1,7 +1,6 @@
-<form autocomplete="off" onsubmit="event.preventDefault();">
-    <p class="instructions">{{localize instructions}}</p>
+<form class="flexcol" autocomplete="off" onsubmit="event.preventDefault();">
+    <section class="content">
     {{#each settings as |setting|}}
-        <!-- {{setting.key}} -->
         <div class="form-group">
             <label for="{{setting.key}}">{{localize setting.name}}</label>
             <div class="form-fields">
@@ -27,12 +26,11 @@
             <p class="notes">{{localize setting.hint}}</p>
         </div>
     {{/each}}
-    <div class="form-group buttons">
+    </section>
+
+    <footer class="sheet-footer buttons">
         <button type="submit" name="submit">
             <i class="far fa-save"></i> {{localize "SETTINGS.Save"}}
         </button>
-        <button type="reset" name="reset">
-            <i class="fas fa-undo"></i> {{localize "PF2E.SETTINGS.ResetChanges"}}
-        </button>
-    </div>
+    </footer>
 </form>

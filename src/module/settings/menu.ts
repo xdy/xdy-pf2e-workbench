@@ -11,6 +11,14 @@ export interface MenuTemplateData extends FormApplicationData {
     settings: SettingsTemplateData[];
 }
 
+interface HideListTemplateData {
+    [key: string]: {
+        type?: string;
+        falsy?: string;
+        list?: string[];
+    };
+}
+
 /** An adjusted copy of the settings menu from core pf2e meant for the module */
 // @ts-ignore
 export class SettingsMenuPF2eWorkbench extends FormApplication {
@@ -18,14 +26,13 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
 
     static override get defaultOptions() {
         const options = super.defaultOptions;
-        options.classes.push("settings-menu");
-
         return fu.mergeObject(options, {
             title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
             id: `${this.namespace}-settings`, // lgtm [js/mixed-static-instance-this-access]
             template: `modules/xdy-pf2e-workbench/templates/menu.hbs`,
-            width: 650,
-            height: "auto",
+            classes: ["form", "xdy-pf2e-workbench", "settings-menu"],
+            width: 560,
+            height: 680,
             closeOnSubmit: true,
             resizable: true,
         });
@@ -50,6 +57,48 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
         }
     }
 
+    static hideForm(form: HTMLElement, boolean: Boolean): void {
+        form.style.display = !boolean ? "none" : "";
+    }
+
+    static readonly hiddenList: Object = {} as HideListTemplateData;
+
+    // @ts-ignore
+    static hook(...args: any): HookCallback<unknown[]> {
+        const html = args[1];
+        Object.entries(this.hiddenList).forEach(([k, v]) => {
+            const setting = game.settings.get("xdy-pf2e-workbench", k) !== (v.falsy ?? false);
+            const settingCheckbox = html.find(`.form-fields [name="${k}"]`);
+            for (const form of v.list) {
+                const settingForm = html.find(`.form-group:has(.form-fields [name="${form}"])`)[0];
+                this.hideForm(settingForm, setting);
+            }
+            settingCheckbox.on("change", (event) => {
+                for (const form of v.list) {
+                    const settingForm = html.find(`.form-group:has(.form-fields [name="${form}"])`)[0];
+                    let condition = event.target.checked;
+                    switch (v.type) {
+                        case "select":
+                            condition = event.target.value !== v.falsy;
+                            break;
+                        case "input":
+                        default:
+                            break;
+                    }
+                    this.hideForm(settingForm, condition);
+                }
+            });
+        });
+    }
+
+    static setRenderHooks(): void {
+        const hook = this.hook;
+        if (hook) {
+            // @ts-ignore
+            Hooks.on(`render${this.name}`, hook.bind(this));
+        }
+    }
+
     static registerSettingsAndCreateMenu(icon, restricted = true) {
         game.settings.registerMenu(MODULENAME, this.namespace, {
             name: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
@@ -60,6 +109,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
             restricted: restricted,
         });
         this.registerSettings();
+        this.setRenderHooks();
     }
 
     override getData(): MenuTemplateData {

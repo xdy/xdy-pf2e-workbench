@@ -218,4 +218,17 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
             },
         };
     }
+
+    static override readonly hiddenList = {
+        autoGainDyingAtZeroHP: {
+            type: "select",
+            falsy: "no",
+            list: [
+                "nonLethalIsNotLethal",
+                "autoGainDyingAtZeroHPIfCriticallyHitOneMore",
+                "autoGainDyingIfTakingDamageWhenAlreadyDying",
+                "autoGainDyingIgnoresTargeting",
+            ],
+        },
+    };
 }
