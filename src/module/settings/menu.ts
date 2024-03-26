@@ -31,7 +31,7 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
             id: `${this.namespace}-settings`, // lgtm [js/mixed-static-instance-this-access]
             template: `modules/xdy-pf2e-workbench/templates/menu.hbs`,
             classes: ["form", "xdy-pf2e-workbench", "settings-menu"],
-            width: 560,
+            width: 780,
             height: 680,
             closeOnSubmit: true,
             resizable: true,
