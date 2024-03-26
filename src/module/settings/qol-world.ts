@@ -172,4 +172,19 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
             },
         };
     }
+
+    static override readonly hiddenList = {
+        castPrivateSpell: {
+            list: [
+                "castPrivateSpellAutoRevealIfKnown",
+                "castPrivateSpellAutoRevealPartyMembersThatKnowSpell",
+                "castPrivateSpellAutoRevealPartyMembersThatKnowSpell",
+                "castPrivateSpellHideName",
+                "castPrivateSpellAlwaysFor",
+            ],
+        },
+        castPrivateSpellWithPublicMessage: {
+            list: ["castPrivateSpellWithPublicMessageShowToGM", "castPrivateSpellWithPublicMessageShowTraits"],
+        },
+    };
 }

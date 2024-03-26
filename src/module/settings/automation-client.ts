@@ -4,6 +4,12 @@ import { SettingsMenuPF2eWorkbench } from "./menu.js";
 export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "automationClientSettings";
 
+    static override get defaultOptions() {
+        return fu.mergeObject(super.defaultOptions, {
+            height: "fit-content",
+        });
+    }
+
     public static override get settings(): Record<string, SettingRegistration> {
         return {
             // NOTE Do NOT rename this without talking to Symon S, his macros for Spellstrike and Eldritch shot parse for workbench and its settings to avoid double rolling damage.
