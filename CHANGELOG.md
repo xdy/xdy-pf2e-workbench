@@ -1,3 +1,10 @@
+# [5.59.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.9...v5.59.0) (2024-03-26)
+
+
+### Features
+
+* Add conditional visibility of settings on menu forms, courtesy of @Clemente ([fbb8bc0](https://github.com/xdy/xdy-pf2e-workbench/commit/fbb8bc0209c9c0007194cdf4a995736625c99ddb))
+
 ## [5.58.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.8...v5.58.9) (2024-03-23)
 
 
