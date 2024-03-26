@@ -11,6 +11,11 @@ export interface MenuTemplateData extends FormApplicationData {
     settings: SettingsTemplateData[];
 }
 
+/**
+ * @var {string} type   The HTMLElement's type (e.g. "input" or "select"). Defaults to "input".
+ * @var {string} falsy  The falsy value. Useful for select-type elements. Defaults to false.
+ * @var {string[]} list A list with the setting IDs that should be toggled when the setting is changed.
+ */
 interface HideListTemplateData {
     [key: string]: {
         type?: string;
