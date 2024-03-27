@@ -58,43 +58,43 @@ const actionList = [
         name: "Balance",
         skill: "Acrobatics",
         action: game.pf2e.actions.balance,
-        icon: "https://i.imgur.com/q9zXci0.png"
+        icon: "systems/pf2e/icons/spells/efficient-apport.webp",
     },
     {
         name: "Climb",
         skill: "Athletics",
         action: game.pf2e.actions.climb,
-        icon: "icons/sundries/misc/ladder.webp"
+        icon: "icons/sundries/misc/ladder.webp",
     },
     {
         name: "Coerce",
         skill: "Intimidation",
         action: game.pf2e.actions.coerce,
-        icon: "https://i.imgur.com/iIDYVQL.png"
+        icon: "icons/skills/social/intimidation-impressing.webp",
     },
     {
         name: "Command an Animal",
         skill: "Nature",
         action: game.pf2e.actions.commandAnAnimal,
-        icon: "https://i.imgur.com/5EqnTIS.png"
+        icon: "icons/environment/creatures/horse-white.webp",
     },
     {
         name: "Craft",
         skill: "Crafting",
         action: game.pf2e.actions.craft,
-        icon: "https://i.imgur.com/McuTUGb.png"
+        icon: "icons/skills/trades/smithing-anvil-silver-red.webp",
     },
     {
         name: "Create a Diversion - Gesture",
         skill: "Deception",
         action: "game.pf2e.actions.createADiversion({ event: event, variant: 'gesture' });",
-        icon: "https://i.imgur.com/Rc9vnMX.png"
+        icon: "icons/skills/social/wave-halt-stop.webp",
     },
     {
         name: "Create a Diversion - Trick",
         skill: "Deception",
         action: "game.pf2e.actions.createADiversion({ event: event, variant: 'trick' });",
-        icon: "https://i.imgur.com/u9Pt7q1.png"
+        icon: "systems/pf2e/icons/spells/charming-words.webp",
     },
     {
         name: "Demoralize",
@@ -112,7 +112,7 @@ const actionList = [
         name: "Feint",
         skill: "Deception",
         action: game.pf2e.actions.feint,
-        icon: "https://i.imgur.com/EIRuIFp.png"
+        icon: "icons/skills/melee/maneuver-sword-katana-yellow.webp",
     },
     {
         name: "Follow an Expert",
@@ -124,7 +124,7 @@ const actionList = [
         name: "Force Open",
         skill: "Athletics",
         action: game.pf2e.actions.forceOpen,
-        icon: "https://i.imgur.com/BkwG0cZ.png"
+        icon: "icons/equipment/feet/boots-armored-steel.webp",
     },
     {
         name: "Gather Information",
@@ -153,13 +153,13 @@ const actionList = [
         name: "Jump - High",
         skill: "Athletics",
         action: game.pf2e.actions.highJump,
-        icon: "https://i.imgur.com/Ot4sbDt.png"
+        icon: "icons/skills/movement/arrows-up-trio-red.webp",
     },
     {
         name: "Jump - Long",
         skill: "Athletics",
         action: game.pf2e.actions.longJump,
-        icon: "https://i.imgur.com/Ot4sbDt.png"
+        icon: "icons/skills/movement/figure-running-gray.webp",
     },
     {
         name: "Lie",
@@ -183,7 +183,7 @@ const actionList = [
         name: "Pick a Lock",
         skill: "Thievery",
         action: game.pf2e.actions.pickALock,
-        icon: "https://i.imgur.com/cb7ejb2.png"
+        icon: "icons/skills/social/theft-pickpocket-bribery-brown.webp",
     },
     {
         name: "Raise a Shield",
@@ -201,7 +201,7 @@ const actionList = [
         name: "Repair",
         skill: "Crafting",
         action: game.pf2e.actions.repair,
-        icon: "https://i.imgur.com/McuTUGb.png"
+        icon: "icons/tools/smithing/anvil.webp",
     },
     {
         name: "Request",
@@ -213,7 +213,7 @@ const actionList = [
         name: "Seek",
         skill: "Perception",
         action: game.pf2e.actions.seek,
-        icon: "https://i.imgur.com/7mTBOrS.png"
+        icon: "icons/tools/scribal/magnifying-glass.webp",
     },
     {
         name: "Sense Direction",
@@ -225,13 +225,13 @@ const actionList = [
         name: "Sense Motive",
         skill: "Perception",
         action: game.pf2e.actions.senseMotive,
-        icon: "https://i.imgur.com/7mTBOrS.png"
+        icon: "icons/environment/people/commoner.webp",
     },
     {
         name: "Shove",
         skill: "Athletics",
         action: game.pf2e.actions.shove,
-        icon: "https://i.imgur.com/Expmoz8.png"
+        icon: "systems/pf2e/icons/spells/hydraulic-push.webp",
     },
     {
         name: "Sneak",
@@ -243,7 +243,7 @@ const actionList = [
         name: "Squeeze",
         skill: "Acrobatics",
         action: game.pf2e.actions.squeeze,
-        icon: "https://i.imgur.com/sQ6eUA4.png"
+        icon: "icons/commodities/tech/claw-mechanical.webp",
     },
     {
         name: "Swim",
@@ -255,13 +255,13 @@ const actionList = [
         name: "Take Cover",
         skill: "",
         action: "PC0y5A6tHrtJhqVL",
-        icon: "https://i.imgur.com/5TgWEZF.png"
+        icon: "systems/pf2e/icons/equipment/shields/tower-shield.webp",
     },
     {
         name: "Track",
         skill: "Survival",
         action: game.pf2e.actions.track,
-        icon: "https://i.imgur.com/RgHVtlC.png"
+        icon: "systems/pf2e/icons/conditions/observed.webp",
     },
     {
         name: "Treat Disease",
@@ -285,13 +285,13 @@ const actionList = [
         name: "Trip",
         skill: "Athletics",
         action: game.pf2e.actions.trip,
-        icon: "https://i.imgur.com/Sr2Gu19.png"
+        icon: "icons/skills/wounds/bone-broken-marrow-yellow.webp",
     },
     {
         name: "Tumble Through",
         skill: "Acrobatics",
         action: game.pf2e.actions.tumbleThrough,
-        icon: "https://i.imgur.com/33UF9Ok.png"
+        icon: "icons/skills/movement/feet-winged-sandals-tan.webp",
     }
 ].sort((a, b) => -(a.name < b.name));
 
