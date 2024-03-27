@@ -1,3 +1,10 @@
+## [5.59.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.59.0...v5.59.1) (2024-03-27)
+
+
+### Bug Fixes
+
+* Drental pointed out that there were still imgur links in the customizable macros, these have been replaced with the same icons that are in the non customizable macros. ([d0af852](https://github.com/xdy/xdy-pf2e-workbench/commit/d0af8528d3cc24bd4c30e40b65d910276730fbc8))
+
 # [5.59.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.58.9...v5.59.0) (2024-03-26)
 
 
