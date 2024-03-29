@@ -11,6 +11,11 @@
       {
         "key": "Aura",
         "radius": 30,
+        "traits": [
+          "mental",
+          "fear",
+          "emotion"
+        ],
         "slug": "aura-dirge-of-doom",
         "effects": [
           {
