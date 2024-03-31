@@ -1,3 +1,10 @@
+## [5.59.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.59.3...v5.59.4) (2024-03-31)
+
+
+### Bug Fixes
+
+* When casting spells privately with a public message, show whether a spell save is basic or not. ([3fc2f4b](https://github.com/xdy/xdy-pf2e-workbench/commit/3fc2f4b9d73002cfefcb281f41d6344e4d9c95d9))
+
 ## [5.59.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.59.2...v5.59.3) (2024-03-31)
 
 
