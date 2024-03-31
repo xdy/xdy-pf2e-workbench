@@ -126,6 +126,10 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
                 );
                 map.set("Flurry of Blows", "systems/pf2e/icons/features/classes/flurry-of-blows.webp");
                 map.set("Force Barrage", "systems/pf2e/icons/spells/magic-missile.webp");
+                map.set(
+                    "Generate All Scrolls",
+                    "systems/pf2e/icons/equipment/consumables/other-consumables/spell-scroll.webp",
+                );
                 map.set("Group Perception Roller", "systems/pf2e/icons/spells/vision-of-weakness.webp");
                 map.set("Level Based DCs", "systems/pf2e/icons/equipment/held-items/radiant-spark.webp");
                 map.set("Lingering Fortissimo", "systems/pf2e/icons/spells/inspire-heroics.webp");

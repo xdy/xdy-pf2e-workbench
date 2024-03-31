@@ -41,6 +41,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [Kali (OmegaRogue)](https://github.com/OmegaRogue) - Improved BAM.
 * [Trent](https://github.com/xyzzy42) - Improved BAM.
 * [Kromko](https://github.com/Cuingamehtar) - Bugfix.
+* [DocSchlock](https://github.com/DocSchlock) - Improved RE for "Dirge of Doom Aura".
 
 I've probably forgotten someone, if so, please tell me!
 
