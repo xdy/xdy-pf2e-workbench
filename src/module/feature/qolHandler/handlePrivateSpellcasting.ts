@@ -64,7 +64,7 @@ function showPartymembersWithSpell(message, membersWithSpell, data: any) {
     }
 }
 
-async function generateMessageData(message: ChatMessagePF2e, origin: any, spellUUID: string, data: any) {
+async function generateMessageData(message: ChatMessagePF2e, origin, spellUUID: string, data: any) {
     const anonymous = game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.they`);
     const tokenName = game.settings.get("pf2e", "metagame_tokenSetsNameVisibility")
         ? anonymous
@@ -72,7 +72,9 @@ async function generateMessageData(message: ChatMessagePF2e, origin: any, spellU
 
     const type = message.flags?.pf2e.origin?.type ?? "spell";
     const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
-    const content = buildSpellMessage(origin, tokenName, type, traditionString, spellUUID, data);
+    const context = message.flags.pf2e.context;
+    const isBasicSave = context?.options?.includes("item:defense:basic");
+    const content = buildSpellMessage(origin, tokenName, type, traditionString, spellUUID, data, isBasicSave);
 
     const flags = {
         "xdy-pf2e-workbench": {
@@ -156,14 +158,7 @@ function isShiftModifierActive(): boolean {
     return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT);
 }
 
-function buildSpellMessage(
-    origin: any,
-    tokenName: string,
-    type,
-    traditionString: string,
-    spellUUID: string,
-    data: any,
-) {
+function buildSpellMessage(origin, tokenName: string, type, traditionString: string, spellUUID: string, data, basic) {
     let content = "";
     if (origin) {
         content = game.i18n.localize(
@@ -205,7 +200,7 @@ function buildSpellMessage(
     if (saveButtons.length === 1) {
         const dataSave = saveButtons.attr("data-save") ?? "";
         const dataDC = saveButtons.attr("data-dc") ?? "";
-        const origin: any = fromUuidSync(spellUUID);
+
         content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`, {
             dataSave: dataSave,
             dataDC: dataDC,
@@ -213,6 +208,7 @@ function buildSpellMessage(
                 .map((trait: any) => game.pf2e.system.sluggify(trait.valueOf()))
                 .sort()
                 .join(","),
+            basic,
         });
     }
     return content;
