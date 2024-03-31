@@ -1,3 +1,10 @@
+## [5.59.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.59.1...v5.59.2) (2024-03-31)
+
+
+### Bug Fixes
+
+* Add correct traits to Dirge of Doom Aura RE, courtesy of DocSchlock, icon for Generate All Spells macro courtesy of Symon S. ([eb56c45](https://github.com/xdy/xdy-pf2e-workbench/commit/eb56c45c6a8efcdab3dfe06d91b410abe626fbfd))
+
 ## [5.59.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.59.0...v5.59.1) (2024-03-27)
 
 
