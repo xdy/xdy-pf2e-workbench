@@ -26,28 +26,6 @@ declare class StatementValidator {
     static isAtomic(statement: unknown): statement is Atom;
     static isBinaryOp(statement: unknown): statement is BinaryOperation;
     static isCompound(statement: unknown): statement is CompoundStatement;
-    static isAnd(statement: {
-        and?: unknown;
-    }): statement is Conjunction;
-    static isNand(statement: {
-        nand?: unknown;
-    }): statement is AlternativeDenial;
-    static isOr(statement: {
-        or?: unknown;
-    }): statement is Disjunction;
-    static isXor(statement: {
-        xor?: unknown;
-    }): statement is ExclusiveDisjunction;
-    static isNor(statement: {
-        nor?: unknown;
-    }): statement is JointDenial;
-    static isNot(statement: {
-        not?: unknown;
-    }): statement is Negation;
-    static isIf(statement: {
-        if?: unknown;
-        then?: unknown;
-    }): statement is Conditional;
 }
 type EqualTo = {
     eq: [string, string | number];
@@ -88,7 +66,10 @@ type Conditional = {
     if: PredicateStatement;
     then: PredicateStatement;
 };
-type CompoundStatement = Conjunction | Disjunction | ExclusiveDisjunction | AlternativeDenial | JointDenial | Negation | Conditional;
+type Biconditional = {
+    iff: PredicateStatement[];
+};
+type CompoundStatement = Conjunction | Disjunction | ExclusiveDisjunction | AlternativeDenial | JointDenial | Negation | Conditional | Biconditional;
 type PredicateStatement = Atom | CompoundStatement;
 type RawPredicate = PredicateStatement[];
 export { PredicatePF2e, StatementValidator };

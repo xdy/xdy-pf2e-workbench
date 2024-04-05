@@ -9,6 +9,7 @@ import type { TraitTagifyEntry } from "@module/sheet/helpers.ts";
 import type { ArmorClassTraceData } from "@system/statistic/index.ts";
 import type { NPCAttributes, NPCPerceptionData, NPCSaveData, NPCSkillData, NPCSystemData } from "./data.ts";
 import type { NPCPF2e, NPCStrike } from "./index.ts";
+
 interface ActionsDetails {
     label: string;
     actions: AbilityViewData[];
@@ -50,7 +51,6 @@ interface NPCSystemSheetData extends NPCSystemData {
             localizedName?: string;
         };
     };
-    sortedSkills: Record<SkillAbbreviation, NPCSkillSheetData>;
     saves: Record<SaveType, NPCSaveData & WithAdjustments & WithRank & {
         labelShort?: string;
     }>;

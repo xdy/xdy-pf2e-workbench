@@ -5,6 +5,7 @@ import { OtherConsumableTag } from "@item/consumable/types.ts";
 import { PreciousMaterialType } from "@item/physical/types.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { OtherWeaponTag } from "@item/weapon/types.ts";
+
 declare const ancestryTraits: {
     aiuvarin: string;
     anadi: string;
@@ -56,6 +57,7 @@ declare const ancestryTraits: {
     strix: string;
     suli: string;
     sylph: string;
+    tanuki: string;
     talos: string;
     tengu: string;
     undine: string;
@@ -133,6 +135,7 @@ declare const creatureTraits: {
     ghul: string;
     giant: string;
     golem: string;
+    graveknight: string;
     gremlin: string;
     grioth: string;
     hag: string;
@@ -277,6 +280,7 @@ declare const creatureTraits: {
     strix: string;
     suli: string;
     sylph: string;
+    tanuki: string;
     talos: string;
     tengu: string;
     undine: string;
@@ -614,6 +618,7 @@ declare const weaponTraits: {
     strix: string;
     suli: string;
     sylph: string;
+    tanuki: string;
     talos: string;
     tengu: string;
     undine: string;
@@ -944,6 +949,7 @@ declare const npcAttackTraits: {
     strix: string;
     suli: string;
     sylph: string;
+    tanuki: string;
     talos: string;
     tengu: string;
     undine: string;
@@ -1149,6 +1155,7 @@ declare const featTraits: {
     strix: string;
     suli: string;
     sylph: string;
+    tanuki: string;
     talos: string;
     tengu: string;
     undine: string;
@@ -1302,6 +1309,7 @@ declare const consumableTraits: {
     wizard: string;
 };
 declare const actionTraits: {
+    "certain-kill": string;
     summon: string;
     agile: string;
     propulsive: string;
@@ -1541,6 +1549,7 @@ declare const actionTraits: {
     strix: string;
     suli: string;
     sylph: string;
+    tanuki: string;
     talos: string;
     tengu: string;
     undine: string;
@@ -1548,6 +1557,7 @@ declare const actionTraits: {
     vishkanya: string;
 };
 declare const effectTraits: Omit<{
+    "certain-kill": string;
     summon: string;
     agile: string;
     propulsive: string;
@@ -1787,12 +1797,13 @@ declare const effectTraits: Omit<{
     strix: string;
     suli: string;
     sylph: string;
+    tanuki: string;
     talos: string;
     tengu: string;
     undine: string;
     vanara: string;
     vishkanya: string;
-}, "splash" | "alchemist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "fighter" | "gunslinger" | "kineticist" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "psychic" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "thaumaturge" | "witch" | "wizard" | "agile" | "propulsive" | "backswing" | "forceful" | "reach" | "sweep" | "thrown" | "volley-20" | "volley-30" | "volley-50" | "clockwork" | "consumable" | "infused" | "aiuvarin" | "anadi" | "android" | "aphorite" | "ardande" | "automaton" | "azarketi" | "beastkin" | "bugbear" | "catfolk" | "changeling" | "conrasu" | "dhampir" | "dromaar" | "duskwalker" | "dwarf" | "elf" | "fetchling" | "fleshwarp" | "ganzi" | "geniekin" | "ghoran" | "gnoll" | "gnome" | "goblin" | "goloma" | "grippli" | "halfling" | "hobgoblin" | "human" | "kashrishi" | "kitsune" | "kobold" | "leshy" | "lizardfolk" | "nagaji" | "naari" | "nephilim" | "orc" | "oread" | "poppet" | "ratfolk" | "reflection" | "shisk" | "shoony" | "skeleton" | "sprite" | "strix" | "suli" | "sylph" | "talos" | "tengu" | "undine" | "vanara" | "vishkanya" | "additive1" | "additive2" | "additive3" | "aftermath" | "amp" | "archetype" | "attack" | "beast" | "bottled-breath" | "cantrip" | "catalyst" | "circus" | "class" | "composite" | "composition" | "concentrate" | "dedication" | "deviant" | "eidolon" | "elixir" | "esoterica" | "expandable" | "exploration" | "finisher" | "flourish" | "focus" | "fulu" | "gadget" | "general" | "lineage" | "litany" | "lozenge" | "manipulate" | "missive" | "modification" | "multiclass" | "mutagen" | "oath" | "oil" | "overflow" | "pervasive-magic" | "potion" | "precious" | "press" | "processed" | "reckless" | "reincarnated" | "revelation" | "sanctified" | "scroll" | "secret" | "skill" | "snare" | "spellgun" | "structure" | "subtle" | "talisman" | "tandem" | "tea" | "trap" | "unstable" | "vigilante" | "wand">;
+}, "splash" | "alchemist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "fighter" | "gunslinger" | "kineticist" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "psychic" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "thaumaturge" | "witch" | "wizard" | "agile" | "propulsive" | "backswing" | "forceful" | "reach" | "sweep" | "thrown" | "volley-20" | "volley-30" | "volley-50" | "clockwork" | "consumable" | "infused" | "aiuvarin" | "anadi" | "android" | "aphorite" | "ardande" | "automaton" | "azarketi" | "beastkin" | "bugbear" | "catfolk" | "changeling" | "conrasu" | "dhampir" | "dromaar" | "duskwalker" | "dwarf" | "elf" | "fetchling" | "fleshwarp" | "ganzi" | "geniekin" | "ghoran" | "gnoll" | "gnome" | "goblin" | "goloma" | "grippli" | "halfling" | "hobgoblin" | "human" | "kashrishi" | "kitsune" | "kobold" | "leshy" | "lizardfolk" | "nagaji" | "naari" | "nephilim" | "orc" | "oread" | "poppet" | "ratfolk" | "reflection" | "shisk" | "shoony" | "skeleton" | "sprite" | "strix" | "suli" | "sylph" | "tanuki" | "talos" | "tengu" | "undine" | "vanara" | "vishkanya" | "additive1" | "additive2" | "additive3" | "aftermath" | "amp" | "archetype" | "attack" | "beast" | "bottled-breath" | "cantrip" | "catalyst" | "circus" | "class" | "composite" | "composition" | "concentrate" | "dedication" | "deviant" | "eidolon" | "elixir" | "esoterica" | "expandable" | "exploration" | "finisher" | "flourish" | "focus" | "fulu" | "gadget" | "general" | "lineage" | "litany" | "lozenge" | "manipulate" | "missive" | "modification" | "multiclass" | "mutagen" | "oath" | "oil" | "overflow" | "pervasive-magic" | "potion" | "precious" | "press" | "processed" | "reckless" | "reincarnated" | "revelation" | "sanctified" | "scroll" | "secret" | "skill" | "snare" | "spellgun" | "structure" | "subtle" | "talisman" | "tandem" | "tea" | "trap" | "unstable" | "vigilante" | "wand">;
 declare const hazardTraits: {
     aberration: string;
     alchemical: string;
@@ -1990,6 +2001,7 @@ declare const equipmentTraits: {
     strix: string;
     suli: string;
     sylph: string;
+    tanuki: string;
     talos: string;
     tengu: string;
     undine: string;
@@ -2086,6 +2098,7 @@ declare const kingmakerTraits: {
     siege: string;
     skirmisher: string;
     upkeep: string;
+    "certain-kill": string;
     summon: string;
     agile: string;
     propulsive: string;
@@ -2325,6 +2338,7 @@ declare const kingmakerTraits: {
     strix: string;
     suli: string;
     sylph: string;
+    tanuki: string;
     talos: string;
     tengu: string;
     undine: string;
@@ -2621,6 +2635,7 @@ declare const traitDescriptions: {
     catalyst: string;
     catfolk: string;
     censer: string;
+    "certain-kill": string;
     champion: string;
     changeling: string;
     class: string;

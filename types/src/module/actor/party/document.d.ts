@@ -9,6 +9,7 @@ import type { Statistic } from "@system/statistic/index.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { PartySource, PartySystemData } from "./data.ts";
 import { PartyCampaign, PartyUpdateContext } from "./types.ts";
+
 declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     armorClass: null;
     members: CreaturePF2e[];
@@ -25,7 +26,7 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /** Override validation to defer certain properties to the campaign model */
     validate(options?: DataModelValidationOptions): boolean;
     updateSource(data?: Record<string, unknown>, options?: DocumentSourceUpdateContext): DeepPartial<this["_source"]>;
-    /** Only prepare rule elements for non-physical items (in case campaigin items exist) */
+    /** Only prepare rule elements for non-physical items (in case campaign items exist) */
     protected prepareRuleElements(): RuleElementPF2e<RuleElementSchema>[];
     /** Make `system.campaign` non-enumerable to prevent `TokenDocument.getTrackedAttributes` from recursing into it. */
     protected _initialize(options?: Record<string, unknown> | undefined): void;

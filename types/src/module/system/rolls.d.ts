@@ -8,6 +8,7 @@ import type { ZeroToTwo } from "@module/data.ts";
 import type { RollNotePF2e, RollNoteSource } from "@module/notes.ts";
 import type { RollTwiceOption } from "./check/index.ts";
 import type { CheckDC, DEGREE_OF_SUCCESS_STRINGS } from "./degree-of-success.ts";
+
 interface RollDataPF2e extends RollOptions {
     rollerId?: string;
     totalModifier?: number;
@@ -41,7 +42,7 @@ interface AttackRollParams extends RollParameters {
     /** Should this roll be rolled twice? If so, should it keep highest or lowest? */
     rollTwice?: RollTwiceOption;
 }
-interface DamageRollParams extends Omit<AttackRollParams, "consumAmmo" | "rollTwice"> {
+interface DamageRollParams extends Omit<AttackRollParams, "consumeAmmo" | "rollTwice"> {
     mapIncreases?: Maybe<ZeroToTwo>;
     checkContext?: Maybe<CheckContextChatFlag>;
 }

@@ -15,7 +15,7 @@
         "socket.io": "^4.7.5",
         "socket.io-client": "^4.7.5",
         "tinymce": "^6.8.3",
-        "typescript": "^5.4.2"
+        "typescript": "^5.4.4"
     },
     "author": "the pf2e system developers",
     "license": "Apache-2.0",

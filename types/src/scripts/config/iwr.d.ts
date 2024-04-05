@@ -1,6 +1,7 @@
 declare const immunityTypes: {
     acid: string;
     air: string;
+    alchemical: string;
     "area-damage": string;
     auditory: string;
     bleed: string;
@@ -172,6 +173,7 @@ declare const weaknessTypes: {
 declare const resistanceTypes: {
     acid: string;
     air: string;
+    alchemical: string;
     "all-damage": string;
     "area-damage": string;
     bleed: string;

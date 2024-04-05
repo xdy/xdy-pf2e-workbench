@@ -1,6 +1,7 @@
 import { ImmunityType, IWRType, ResistanceType, WeaknessType } from "@actor/types.ts";
 import { IWRException } from "@module/rules/rule-element/iwr/base.ts";
 import { PredicatePF2e, PredicateStatement } from "@system/predication.ts";
+
 declare abstract class IWR<TType extends IWRType> {
     #private;
     readonly type: TType;
@@ -37,12 +38,13 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
     protected readonly typeLabels: {
         acid: string;
         air: string;
+        alchemical: string;
         "area-damage": string;
         auditory: string;
         bleed: string;
         blinded: string;
         bludgeoning: string;
-        clumsy: string; /** A label showing the type, exceptions, and doubleVs but no value (in case of weaknesses and resistances) */
+        clumsy: string;
         cold: string;
         confused: string;
         controlled: string;
@@ -54,7 +56,7 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         "death-effects": string;
         detection: string;
         disease: string;
-        doomed: string;
+        doomed: string; /** A label consisting of just the type */
         drained: string;
         earth: string;
         electricity: string;
@@ -229,6 +231,7 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
     protected readonly typeLabels: {
         acid: string;
         air: string;
+        alchemical: string;
         "all-damage": string;
         "area-damage": string;
         bleed: string;

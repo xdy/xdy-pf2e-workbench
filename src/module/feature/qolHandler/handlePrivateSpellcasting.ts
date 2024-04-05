@@ -197,19 +197,29 @@ function buildSpellMessage(origin, tokenName: string, type, traditionString: str
 
     const buttons = $(data.content).find("button");
     const saveButtons = buttons.filter((i) => buttons[i].getAttribute("data-action") === "spell-save");
+    const targetHelperActive = game.modules.find((s) => s.id === "pf2e-target-helper")?.active;
     if (saveButtons.length === 1) {
         const dataSave = saveButtons.attr("data-save") ?? "";
-        const dataDC = saveButtons.attr("data-dc") ?? "";
+        if (!targetHelperActive) {
+            const dataDC = saveButtons.attr("data-dc") ?? "";
 
-        content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`, {
-            dataSave: dataSave,
-            dataDC: dataDC,
-            traits: Object.values(origin.system.traits.value)
-                .map((trait: any) => game.pf2e.system.sluggify(trait.valueOf()))
-                .sort()
-                .join(","),
-            basic,
-        });
+            content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`, {
+                dataSave: dataSave,
+                dataDC: dataDC,
+                traits: Object.values(origin.system.traits.value)
+                    .map((trait: any) => game.pf2e.system.sluggify(trait.valueOf()))
+                    .sort()
+                    .join(","),
+                basic,
+            });
+        } else {
+            content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.noButtonSavePart`, {
+                dataSave: dataSave,
+                basic: basic
+                    ? game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.basic`)
+                    : "",
+            });
+        }
     }
     return content;
 }

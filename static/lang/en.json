@@ -385,6 +385,8 @@
         "firstPart": "{tokenName} just cast a {type} of the <strong>{traditionString}</strong> tradition. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "hint": "If casting privately, this setting also posts a public message that a spell has been cast UNLESS you hold SHIFT as well as CTRL while casting.",
         "name": "Post public message that a spell has been cast.",
+        "basic": "Basic",
+        "noButtonSavePart": "<br><b>{basic} {dataSave} save</b>",
         "savePart": "<br>Save for the unknown spell is: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}|basic:{basic}}]",
         "secondPartNoRk": ".<br>You can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] to recognize it. Or, on your turn, spend an action to try to identify it (ask your gm for details).",
         "secondPartRK": ".<br>You can try using one of @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] or @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] to recognize it. Or, on your turn, spend an action to try to identify it with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (or 10 minutes with @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",

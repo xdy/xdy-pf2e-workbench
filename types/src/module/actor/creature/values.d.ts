@@ -1,4 +1,5 @@
 import type { Language, SenseAcuity, SenseType } from "./types.ts";
+
 declare const ALLIANCES: Set<"party" | "opposition" | null>;
 declare const SAVING_THROW_ATTRIBUTES: {
     readonly fortitude: "con";
@@ -24,7 +25,7 @@ declare const SENSE_ACUITIES: readonly ["precise", "imprecise", "vague"];
 declare const LANGUAGES_BY_RARITY: {
     common: readonly ["draconic", "dwarven", "elven", "fey", "gnomish", "goblin", "halfling", "jotun", "orcish", "sakvroth", "taldane"];
     uncommon: readonly ["adlet", "aklo", "alghollthu", "amurrun", "arboreal", "boggard", "calda", "caligni", "chthonian", "cyclops", "daemonic", "diabolic", "ekujae", "empyrean", "grippli", "hallit", "iruxi", "kelish", "kholo", "kibwani", "kitsune", "lirgeni", "muan", "mwangi", "mzunu", "nagaji", "necril", "ocotan", "osiriani", "petran", "protean", "pyric", "requian", "shadowtongue", "shoanti", "skald", "sphinx", "sussuran", "tengu", "thalassic", "tien", "utopian", "vanara", "varisian", "vudrani", "xanmba", "ysoki"];
-    rare: readonly ["ancient-osiriani", "akitonian", "anadi", "androffan", "anugobu", "arcadian", "azlanti", "destrachan", "drooni", "dziriak", "elder-thing", "erutaki", "formian", "garundi", "girtablilu", "goloma", "grioth", "hwan", "iblydan", "ikeshti", "immolis", "jistkan", "jyoti", "kaava", "kashrishi", "kovintal", "mahwek", "migo", "minaten", "minkaian", "munavri", "okaiyan", "orvian", "rasu", "ratajin", "razatlani", "russian", "samsaran", "sasquatch", "senzar", "shae", "shisk", "shobhad", "shoony", "shory", "strix", "talican", "tekritanin", "thassilonian", "varki", "vishkanyan", "wyrwood", "yithian"];
+    rare: readonly ["ancient-osiriani", "akitonian", "anadi", "androffan", "anugobu", "arcadian", "azlanti", "destrachan", "drooni", "dziriak", "elder-thing", "erutaki", "formian", "garundi", "girtablilu", "goloma", "grioth", "hwan", "iblydan", "ikeshti", "immolis", "jistkan", "jyoti", "kaava", "kashrishi", "kovintal", "mahwek", "migo", "minaten", "minkaian", "munavri", "okaiyan", "orvian", "rasu", "ratajin", "razatlani", "russian", "samsaran", "sasquatch", "senzar", "shae", "shisk", "shobhad", "shoony", "shory", "strix", "talican", "tanuki", "tekritanin", "thassilonian", "varki", "vishkanyan", "wyrwood", "yithian"];
     secret: readonly ["wildsong"];
 };
 declare const LANGUAGES: Language[];
