@@ -1,3 +1,10 @@
+# [5.60.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.59.4...v5.60.0) (2024-04-05)
+
+
+### Features
+
+* Hide the public message save button (but keep text that shows whether it's a basic save) if PF2e Target Helper is active as that adds it's own save buttons. ([c77eb56](https://github.com/xdy/xdy-pf2e-workbench/commit/c77eb569bd96fbef869bc9e388a1b218b12f5670))
+
 ## [5.59.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.59.3...v5.59.4) (2024-03-31)
 
 
