@@ -25,13 +25,13 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             ["all", "gm"].includes(settings.autoRollDamageAllow),
         )
     ) {
-        const flags = <ActorFlagsPF2e>message.flags.pf2e;
-        const originUuid = <string>flags?.origin?.uuid;
+        const pf2eFlags = <ActorFlagsPF2e>message.flags.pf2e;
+        const originUuid = <string>pf2eFlags?.origin?.uuid;
 
         if (originUuid) {
             const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
             const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
-            const rollType = flags.context?.type;
+            const rollType = pf2eFlags.context?.type;
 
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
             const isAttackSpell = origin?.traits?.has("attack") ?? false;
@@ -40,7 +40,11 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
             const rollForNonSpellAttack = rollType === "attack-roll" && settings.autoRollDamageForStrike;
             const rollForNonAttackSpell =
-                origin !== null && !isAttackSpell && flags.casting !== null && hasFixedTime && origin?.system?.damage;
+                origin !== null &&
+                !isAttackSpell &&
+                pf2eFlags.casting !== null &&
+                hasFixedTime &&
+                origin?.system?.damage;
 
             const rollForNonAttackSaveSpell =
                 isSaveSpell &&
@@ -59,15 +63,26 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             const isFailure = ["criticalFailure", "failure"].includes(degreeOfSuccess);
             const isSuccess = ["criticalSuccess", "success"].includes(degreeOfSuccess);
-            const context: any = flags.context;
+            const context: any = pf2eFlags.context;
             const isBasicSave = context?.options?.includes("item:defense:basic");
+
+            const originMessage = await getLatestChatMessageWithOrigin(5, originUuid);
+            const flags = originMessage?.flags;
+
+            const targetHelperActive = game.modules.get("pf2e-target-helper")?.active;
+            const targetHelperWillAutoroll =
+                game.settings.get("pf2e-target-helper", "multipleTargetRollDamage") !== "no";
+            const letTargetHelperAutorollDamage =
+                (flags["pf2e-target-helper"]?.targets ?? 0) > 1 && targetHelperActive && targetHelperWillAutoroll;
+
             if (
                 actor &&
                 (rollForNonAttackNonSaveSpell ||
                     (rollForNonAttackSaveSpell && (isFailure || (isBasicSave && degreeOfSuccess === "success"))) ||
-                    (rollForAttackSpell && isSuccess))
+                    (rollForAttackSpell && isSuccess)) &&
+                !letTargetHelperAutorollDamage
             ) {
-                await handleSpell(flags, numberOfMessagesToCheck, originUuid, origin, message, degreeOfSuccess);
+                await handleSpell(pf2eFlags, numberOfMessagesToCheck, originUuid, origin, message, degreeOfSuccess);
             } else if (actor && rollForNonSpellAttack && isSuccess) {
                 await handleNonSpell(actor, message, degreeOfSuccess);
             }
@@ -245,16 +260,22 @@ function getActionFromMessage(actions, message: ChatMessagePF2e) {
     }
 }
 
-async function getCastRankFromChat(numberOfMessagesToCheck: number, originUuid: string): Promise<number> {
+async function getLatestChatMessageWithOrigin(numberOfMessagesToCheck: number, originUuid: string) {
     const chatLength = game.messages?.contents.length ?? 0;
     for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
         const spellMessage = game.messages?.contents[chatLength - i];
         if (spellMessage && (<ActorFlagsPF2e>spellMessage.flags.pf2e).origin?.uuid === originUuid) {
-            const level = spellMessage.content.match(/data-cast-level="(\d+)"/);
-            if (level && level[1]) {
-                return parseInt(level[1]);
-            }
+            return spellMessage;
         }
+    }
+    return undefined;
+}
+
+async function getCastRankFromChat(numberOfMessagesToCheck: number, originUuid: string): Promise<number> {
+    const spellMessage = await getLatestChatMessageWithOrigin(numberOfMessagesToCheck, originUuid);
+    const level = spellMessage?.content.match(/data-cast-level="(\d+)"/);
+    if (level && level[1]) {
+        return parseInt(level[1]);
     }
     return 0;
 }
