@@ -1,3 +1,10 @@
+# [5.61.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.60.0...v5.61.0) (2024-04-05)
+
+
+### Features
+
+* Step out of the way if pf2e-target-helper is configured to autoroll damage for save spells. ([15fea28](https://github.com/xdy/xdy-pf2e-workbench/commit/15fea2812df3ec9c28a7c48cbb840ed014f1f334))
+
 # [5.60.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.59.4...v5.60.0) (2024-04-05)
 
 
