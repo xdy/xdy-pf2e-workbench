@@ -217,7 +217,9 @@
         "secondPartNoRk": ".<br>Możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
         "firstPart": "{tokenName} właśnie rzucił {type} tradycji <strong>{traditionString}</strong><p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "secondPartRK": ".<br>Możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
-        "knownBy": "<div><p><b>Znany przez: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
+        "knownBy": "<div><p><b>Znany przez: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">",
+        "basic": "Podstawowy",
+        "noButtonSavePart": "<br><b>{basic} {dataSave} rzut obronny</b>"
       },
       "applyPersistentDamageRecoveryRoll": {
         "hint": "... a następnie automatycznie przywróci ustawienia fabryczne. Wymaga włączenia powyższego ustawienia.",
