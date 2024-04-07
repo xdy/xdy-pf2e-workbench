@@ -4,7 +4,7 @@
   "author": "LyRgQdXNFeeP8bOE",
   "img": "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp",
   "scope": "global",
-  "command": "await game.PF2eWorkbench.basicActionMacros()",
+  "command": "await game.PF2eWorkbench.basicActionMacros();",
   "ownership": {
     "default": 0,
     "LyRgQdXNFeeP8bOE": 3
@@ -16,11 +16,11 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "4.8.2",
-    "coreVersion": "10.291",
+    "systemVersion": "5.15.0",
+    "coreVersion": "11.315",
     "createdTime": 1667835432979,
-    "modifiedTime": 1677531938328,
-    "lastModifiedBy": "wO4u9QNkc6QXAHbx"
+    "modifiedTime": 1712483366329,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ"
   },
   "folder": null,
   "sort": 0,

@@ -4,7 +4,7 @@
   "scope": "global",
   "author": "djBQtIcKM5qubNl2",
   "img": "icons/skills/trades/academics-book-study-runes.webp",
-  "command": "await game.PF2eWorkbench.buildNpcSpellbookJournal()",
+  "command": "await game.PF2eWorkbench.buildNpcSpellbookJournal();",
   "ownership": {
     "default": 0,
     "djBQtIcKM5qubNl2": 3
@@ -16,11 +16,11 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "4.4.2",
-    "coreVersion": "10.290",
+    "systemVersion": "5.15.0",
+    "coreVersion": "11.315",
     "createdTime": 1669546904430,
-    "modifiedTime": 1669549852939,
-    "lastModifiedBy": "djBQtIcKM5qubNl2"
+    "modifiedTime": 1712483370373,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ"
   },
   "folder": null,
   "sort": 0,

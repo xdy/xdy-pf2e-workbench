@@ -147,6 +147,7 @@ of each can be found below:
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
+        refocus: refocus, // await game.PF2eWorkbench.refocus()
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
         getAllFromAllowedPacks: 
@@ -187,6 +188,7 @@ of each can be found below:
           with 'glow' meaning that you are the best in the party. (Thanks ApoAstolov).
         * 'Build Npc Spellbook Journal' that builds a journal with the contents of an npc's spell list. Courtesy of
           Avery (Velara).
+        * Refocus. Adds 1 focus unless the actor has any of the (something)Focus feats, then it adds all focus. (Note that the macro does not handle Crimson Oath Devotion, Major Curse or Psychics.)
 * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
   provided by ApoApostolov and esheyw. They are *intended* to be customized by the user by changing the javascript
   code (such as by adding/removing actions, setting what actors are part of the party, etc.) They are not really

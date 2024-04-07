@@ -1,0 +1,29 @@
+{
+  "name": "Refocus",
+  "type": "script",
+  "_id": "fB97ppfBbC6R5k1T",
+  "author": "O7JRpbplwU9Cx8kQ",
+  "img": "icons/magic/perception/third-eye-blue-red.webp",
+  "scope": "global",
+  "command": "await game.PF2eWorkbench.refocus();",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "O7JRpbplwU9Cx8kQ": 3
+  },
+  "flags": {
+    "core": {
+      "sourceId": "Macro.fB97ppfBbC6R5k1T"
+    }
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "5.15.0",
+    "coreVersion": "11.315",
+    "createdTime": 1712482930275,
+    "modifiedTime": 1712483373593,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ"
+  },
+  "_key": "!macros!fB97ppfBbC6R5k1T"
+}
