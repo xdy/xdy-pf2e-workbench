@@ -1,3 +1,10 @@
+# [5.62.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.61.1...v5.62.0) (2024-04-07)
+
+
+### Features
+
+* Readds remastered Refocus. (Handles the various *Focus feats, but not Psychics, Crimson Oath Devotion, and Oracle curses.) ([5699846](https://github.com/xdy/xdy-pf2e-workbench/commit/56998469565c4a65cdf74e64cbdf0e776aed8362))
+
 ## [5.61.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.61.0...v5.61.1) (2024-04-07)
 
 
