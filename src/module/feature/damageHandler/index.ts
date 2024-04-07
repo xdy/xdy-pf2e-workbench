@@ -71,9 +71,9 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
             const targetHelperActive = game.modules.get("pf2e-target-helper")?.active;
             const targetHelperWillAutoroll =
-                game.settings.get("pf2e-target-helper", "multipleTargetRollDamage") !== "no";
+                targetHelperActive && game.settings.get("pf2e-target-helper", "multipleTargetRollDamage") !== "no";
             const letTargetHelperAutorollDamage =
-                (flags["pf2e-target-helper"]?.targets ?? 0) > 1 && targetHelperActive && targetHelperWillAutoroll;
+                (flags["pf2e-target-helper"]?.targets ?? 0) > 1 && targetHelperWillAutoroll;
 
             if (
                 actor &&
