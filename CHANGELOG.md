@@ -1,3 +1,10 @@
+## [5.61.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.61.0...v5.61.1) (2024-04-07)
+
+
+### Bug Fixes
+
+* Autorolling damage should work again. ([350c165](https://github.com/xdy/xdy-pf2e-workbench/commit/350c1656a6dc89b65afd4fd3bc7e04fb5879bf65))
+
 # [5.61.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.60.0...v5.61.0) (2024-04-05)
 
 
