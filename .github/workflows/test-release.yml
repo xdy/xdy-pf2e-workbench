@@ -28,7 +28,7 @@ jobs:
           git submodule update --init --recursive
           git submodule update --recursive --remote
 
-      - uses: stefanzweifel/git-auto-commit-action@v5.0.0
+      - uses: stefanzweifel/git-auto-commit-action@v5.0.1
         with:
           commit_message: "chore: Update submodules"
 
