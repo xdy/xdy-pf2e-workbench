@@ -82,7 +82,8 @@
           "Escape": "Wyrwanie się",
           "AidASE": "Wsparcie (makro ASE)",
           "CreateADiversionDistractingWords": "Dywersja - Rozpraszające Słowa",
-          "Reposition": "Przemieszczenie"
+          "Reposition": "Przemieszczenie",
+          "AidPF2eMacros": "Wsparcie (Makra PF2e)"
         },
         "noActorSelected": "Nie wybrano żadnego aktora",
         "cancel": "Anuluj",
