@@ -1,3 +1,10 @@
+# [5.63.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.62.2...v5.63.0) (2024-04-13)
+
+
+### Features
+
+* BAM: Add support for the Aid macro from Reyzor's PF2e Macros. ([75cf659](https://github.com/xdy/xdy-pf2e-workbench/commit/75cf6596f192ac56cd10a4e25023353de311aaac))
+
 ## [5.62.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.62.1...v5.62.2) (2024-04-13)
 
 
