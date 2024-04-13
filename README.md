@@ -13,7 +13,6 @@ Translations:
 
 <a href="https://weblate.foundryvtt-hub.com/engage/xdy-pf2e-workbench/"><img src="https://weblate.foundryvtt-hub.com/widgets/xdy-pf2e-workbench/-/multi-auto.svg" alt="Translation status" /></a>
 
-
 This module is intended to hold a few features for the foundry vtt pf2e system that could well have been separate
 modules and may well be eaten by the system at some point.
 
@@ -188,7 +187,8 @@ of each can be found below:
           with 'glow' meaning that you are the best in the party. (Thanks ApoAstolov).
         * 'Build Npc Spellbook Journal' that builds a journal with the contents of an npc's spell list. Courtesy of
           Avery (Velara).
-        * Refocus. Adds 1 focus unless the actor has any of the (something)Focus feats, then it adds all focus. (Note that the macro does not handle Crimson Oath Devotion, Major Curse or Psychics.)
+        * Refocus. Adds 1 focus unless the actor has any of the (something)Focus feats, then it adds all focus. (Note
+          that the macro does not handle Crimson Oath Devotion, Major Curse or Psychics.)
 * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
   provided by ApoApostolov and esheyw. They are *intended* to be customized by the user by changing the javascript
   code (such as by adding/removing actions, setting what actors are part of the party, etc.) They are not really
@@ -219,14 +219,7 @@ of each can be found below:
     * None currently.
 
 * Recently removed features:
-    * Option to automatically handle [Massive Damage](https://2e.aonprd.com/Rules.aspx?ID=384) as well as automatic
-      handling of [Death effects](https://2e.aonprd.com/Rules.aspx?ID=383) as they're handled by the pf2e system.
-    * Option to allow item bonuses when using [ABP](https://2e.aonprd.com/Rules.aspx?ID=1357).
-    * Option to add all skill actions to the character Actions page.
-    * (Experimental) 'Whirlwind Strike' performs a Whirlwind Strike around the selected token if it has the
-      Whirlwind Strike Feat, has the effect "Reach 'aura' (Workbench)' using the first reach weapon, or failing that
-      the first weapon of any type.
-    * A Reach 'aura' used by the (experimental) 'Whirlwind Strike' macro.
+    * None currently
 
 ## Installation
 
@@ -246,7 +239,8 @@ versions are not supported. (They probably work, but if they don't, you're on yo
 
 ## Supported pf2e-specific QOL modules
 
-As in, I try to keep the Workbench compatible with these pf2e qol modules (as I use them myself). In general, if the module does
+As in, I try to keep the Workbench compatible with these pf2e qol modules (as I use them myself). In general, if the
+module does
 something that the Workbench also does, I suggest disabling the Workbench equivalent.
 
 * [PF2e Dailies](https://github.com/reonZ/pf2e-dailies)
@@ -304,7 +298,8 @@ Open Game License:
 Project Licensing:
 
 * Everything in this project that is not covered by one of the following license exceptions is made available under the
-  Apache License (see [LICENSE.md](LICENSE.md)). (Including the types and utility classes generated or copied from the pf2e
+  Apache License (see [LICENSE.md](LICENSE.md)). (Including the types and utility classes generated or copied from the
+  pf2e
   system at https://github.com/foundryvtt/pf2e, also under the Apache License.)
 
 Virtual Table Top Platform Licenses:
@@ -338,4 +333,3 @@ asymonous-benefactor-macros:
 "Workbench Adjectives" table is based on a list
 in [Unique Names Generator](https://github.com/andreasonny83/unique-names-generator/blob/main/src/dictionaries/adjectives.ts)
 and is provided under the [MIT license](https://github.com/andreasonny83/unique-names-generator/blob/main/LICENSE)
-
