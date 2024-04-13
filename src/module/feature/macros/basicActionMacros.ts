@@ -175,6 +175,14 @@ export async function basicActionMacros() {
         },
         {
             actionType: "other",
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidPF2eMacros`),
+            skill: "",
+            action: "game.activemacros.aid(_token.actor)",
+            module: "pf2e-macros",
+            icon: "systems/pf2e/icons/spells/efficient-apport.webp",
+        },
+        {
+            actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AvoidNotice`),
             skill: "Stealth",
             action: game.pf2e.actions.get("avoid-notice"),
