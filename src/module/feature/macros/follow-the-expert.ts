@@ -4,6 +4,7 @@ import type { ChatMessagePF2e } from "@module/chat-message/document.d.ts";
 import type { ActionTrait } from "@item/ability/index.d.ts";
 import type { EffectPF2e } from "@item";
 import type { EffectSource } from "@item/effect/data.d.ts";
+import type { RuleElementSource } from "@module/rules/rule-element/data.d.ts";
 import type { ChoiceSetSource } from "@module/rules/rule-element/choice-set/data.d.ts";
 import type { PickableThing } from "@module/apps/pick-a-thing-prompt.d.ts";
 import type { RawPredicate } from "@system/predication.d.ts";
@@ -97,6 +98,23 @@ class FollowTheExpertAction implements Action {
             } else {
                 choice.predicate = ["disabled"];
             }
+        }
+
+        // Adjust the modifier if the target has something that changes it
+        if (flags?.bonus) {
+            const rankSlugs = Object.keys(CONFIG.PF2E.proficiencyRanks);
+            effect.system.rules.push({
+                key: "AdjustModifier",
+                mode: "upgrade",
+                slug: "follow-the-expert-circumstance",
+                selector: "{item|flags.pf2e.rulesSelections.followTheExpertSkill}",
+                value: {
+                    brackets: rankSlugs
+                        .map((r, i) => ({ start: i, end: i, value: flags.bonus?.[r] }))
+                        .filter((b) => b.value !== undefined),
+                    field: "item|flags.pf2e.rulesSelections.followTheExpertProficiency",
+                },
+            } as RuleElementSource);
         }
     }
 
