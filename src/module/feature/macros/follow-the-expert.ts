@@ -21,6 +21,17 @@ interface ChoiceSetSourceWithChoices extends ChoiceSetSource {
 // seem to be an existing type for the source of a choice.
 type PickableThingSource = Omit<PickableThing, "predicate"> & { predicate?: RawPredicate; sort?: number };
 
+interface FTEFlags {
+    minimum?: number;
+    bonus?: {
+        untrained?: number;
+        trained?: number;
+        expert?: number;
+        master?: number;
+        legendary?: number;
+    };
+}
+
 class FollowTheExpertAction implements Action {
     readonly img: string;
     readonly name: string;
@@ -46,8 +57,10 @@ class FollowTheExpertAction implements Action {
         const expertSkills = expert.skills;
         // Skilless expert? Don't follow them! Typescript complains.
         if (!expertSkills) return;
+
+        const flags = expert.flags.pf2e?.followTheExpert as FTEFlags | undefined;
         // List of Lores that meet FTE minimum proficiency
-        const minLevel = 2;
+        const minLevel = flags?.minimum ?? 2;
         const lores = Object.values(expertSkills)
             .filter((s) => s.lore && (s.rank ?? 0) >= minLevel)
             .map((s) => ({ label: s.label, value: s.slug }));
@@ -59,6 +72,9 @@ class FollowTheExpertAction implements Action {
             (e: ChoiceSetSource) => e.key === "ChoiceSet" && e.flag === "followTheExpertProficiency",
         ) as ChoiceSetSourceWithChoices | null;
         if (!skillRule || !profRule) throw new Error("Effect: FTE did not have expected rules");
+
+        // Add choice for trained if necessary
+        if (minLevel <= 1) profRule.choices.push({ label: "PF2E.ProficiencyLevel1", sort: 0, value: 1 });
 
         // Filter skill choices that don't meet FTE minimum proficiency, default 2 (expert), and add lores
         skillRule.choices = skillRule.choices
