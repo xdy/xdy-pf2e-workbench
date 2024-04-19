@@ -1,3 +1,10 @@
+## [5.64.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.64.0...v5.64.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* Add originCastRank: message.flags.pf2e.origin.castRank instead  ([a7c8ace](https://github.com/xdy/xdy-pf2e-workbench/commit/a7c8acee853cfd39b88850bc1a92ab15af72adb8))
+
 # [5.64.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.63.1...v5.64.0) (2024-04-19)
 
 
