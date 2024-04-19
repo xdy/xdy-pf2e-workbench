@@ -1,3 +1,10 @@
+# [5.64.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.63.1...v5.64.0) (2024-04-19)
+
+
+### Features
+
+* Add flag xdy-pf2e-workbench.privateSpell.originMessageId to the private spellcasting public message. ([dd477b9](https://github.com/xdy/xdy-pf2e-workbench/commit/dd477b94dd9b0adb4a38ef276b827ca4b2024517))
+
 ## [5.63.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.63.0...v5.63.1) (2024-04-14)
 
 
