@@ -354,21 +354,15 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
 
     function itemFromCompendium(element: Element, qualifiedName: string) {
         const itemUuid = element.getAttribute(qualifiedName);
-        const item: ItemPF2e | null = itemUuid ? fromUuidSync(itemUuid) : null;
-        return item;
+        return itemUuid ? fromUuidSync(itemUuid) : null;
     }
 
     function itemFromActor(element: Element, attributeName: string) {
         const itemId = <string>element.getAttribute(attributeName);
-        return itemId ? <ItemPF2e | null>sheet.actor?.items?.get(itemId) : null;
+        return itemId ? sheet.actor?.items?.get(itemId) : null;
     }
 
-    function performColoring(
-        setting: string,
-        listSelector: string,
-        itemSelector: string,
-        fetchItem: (el: Element) => ItemPF2e | null,
-    ) {
+    function performColoring(setting: string, listSelector: string, itemSelector: string, fetchItem) {
         if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, setting)) {
             const lists = html.querySelectorAll(listSelector);
             for (const list of lists) {
