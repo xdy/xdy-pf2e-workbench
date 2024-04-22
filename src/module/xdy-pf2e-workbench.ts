@@ -244,9 +244,10 @@ export function changePauseText() {
 
     const text = game.settings.get(MODULENAME, "customPauseText");
     if (phase >= Phase.READY) {
-        if (text && text !== "") {
+        const element = document.querySelector("#pause.paused figcaption");
+        if (text && text !== "" && element) {
             // @ts-ignore
-            game.i18n.translations.GAME.Paused = text;
+            element.textContent = text;
         }
         const paused = !game.paused;
         game.togglePause(paused, true);
