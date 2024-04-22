@@ -1,3 +1,11 @@
+## [5.64.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.64.1...v5.64.2) (2024-04-22)
+
+
+### Bug Fixes
+
+* Autorolling damage for players should work again. Hopefully without breaking something else. ([a793bfd](https://github.com/xdy/xdy-pf2e-workbench/commit/a793bfdc34fc815d24b98c7b1fcc5b96f96c7db2))
+* Changing pause text should work again. ([2b22585](https://github.com/xdy/xdy-pf2e-workbench/commit/2b22585447bfb5360b832ed24d818304a5bd3f6c))
+
 ## [5.64.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.64.0...v5.64.1) (2024-04-19)
 
 
