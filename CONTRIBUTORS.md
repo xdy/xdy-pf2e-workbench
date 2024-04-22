@@ -39,7 +39,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [ElvisLiving]() - Contributed several Adjustments for making undead to the 'xdy-pf2e-workbench-items' compendium
 * [Tikael](https://github.com/TikaelSol) - Contributed the Zombie adjustment to the 'xdy-pf2e-workbench-items' compendium.
 * [Kali (OmegaRogue)](https://github.com/OmegaRogue) - Improved BAM.
-* [Trent](https://github.com/xyzzy42) - Improved BAM.
+* [Trent](https://github.com/xyzzy42) - Improved BAM and the Follow the Expert macro.
 * [Kromko](https://github.com/Cuingamehtar) - Bugfix.
 * [DocSchlock](https://github.com/DocSchlock) - Improved RE for "Dirge of Doom Aura".
 
