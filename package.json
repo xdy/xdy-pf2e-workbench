@@ -72,7 +72,7 @@
     "typescript": "^5.4.5",
     "vite": "^5.2.9",
     "vite-plugin-checker": "^0.6.4",
-    "vite-plugin-static-copy": "^1.0.2",
+    "vite-plugin-static-copy": "^1.0.3",
     "vite-tsconfig-paths": "^4.3.2",
     "yargs": "^17.7.2"
   },
