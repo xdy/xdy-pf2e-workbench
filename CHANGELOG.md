@@ -1,3 +1,10 @@
+# [5.65.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.64.2...v5.65.0) (2024-04-22)
+
+
+### Features
+
+* New and improved Follow the Expert macro, courtesy of @Trent ([d124cd5](https://github.com/xdy/xdy-pf2e-workbench/commit/d124cd50e79775f9cc33c8ff413f659398b0f378))
+
 ## [5.64.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.64.1...v5.64.2) (2024-04-22)
 
 
