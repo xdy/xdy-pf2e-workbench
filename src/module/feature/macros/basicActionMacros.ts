@@ -9,6 +9,7 @@ import { Action } from "@actor/actions/types.js";
 import { CharacterSkill } from "@actor/character/types.js";
 import { ModifierPF2e } from "@actor/modifiers.js";
 import { Statistic } from "@system/statistic/statistic.js";
+import { followTheExpert } from "./follow-the-expert.ts";
 
 declare global {
     interface Window {
@@ -325,7 +326,7 @@ export async function basicActionMacros() {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.FollowTheExpertToggle`),
             skill: "",
-            action: ["macroEffectFollowTheExpert", "xdy-pf2e-workbench.xdy-internal-utility-macros"],
+            action: followTheExpert,
             icon: "systems/pf2e/icons/spells/favorable-review.webp",
         },
         {
