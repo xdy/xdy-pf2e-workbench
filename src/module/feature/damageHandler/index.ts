@@ -78,7 +78,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             if (
                 actor &&
                 (rollForNonAttackNonSaveSpell ||
-                    (rollForNonAttackSaveSpell && (isFailure || (isBasicSave && degreeOfSuccess === "success"))) ||
+                (rollForNonAttackSaveSpell && (isFailure || (isBasicSave && degreeOfSuccess === "success"))) ||
                     (rollForAttackSpell && isSuccess)) &&
                 !letTargetHelperAutorollDamage
             ) {
@@ -245,11 +245,7 @@ function getActionFromMessage(actions, message: ChatMessagePF2e) {
         const s = `<h4 class="action">(.*?)${strike}: (.*?)<`;
         const strikeName = message.flavor?.match(s);
         if (strikeName && strikeName[2]) {
-            return actions
-                .filter((atk) => {
-                    return atk?.system?.traits.value.includes("attack");
-                })
-                .find((a: { label: string }) => a.label === strikeName[2]);
+            return actions.find((a: { label: string }) => a.label === strikeName[2]);
         } else {
             // If we can't find the strike label, give up.
             return null;
