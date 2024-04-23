@@ -88,7 +88,7 @@
     "prosemirror-state": "^1.4.3",
     "prosemirror-transform": "^1.8.0",
     "prosemirror-view": "^1.33.4",
-    "remeda": "^1.60.1",
+    "remeda": "^1.61.0",
     "sortablejs": "^1.15.2",
     "uuid": "^9.0.1"
   },
