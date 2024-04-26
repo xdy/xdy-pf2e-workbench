@@ -1,3 +1,10 @@
+## [5.65.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.65.0...v5.65.1) (2024-04-26)
+
+
+### Bug Fixes
+
+* Another go at fixing custom pause text. ([bd6164b](https://github.com/xdy/xdy-pf2e-workbench/commit/bd6164b13ec39a6d4dadafde99bae234d2c3e5ef))
+
 # [5.65.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.64.2...v5.65.0) (2024-04-22)
 
 
