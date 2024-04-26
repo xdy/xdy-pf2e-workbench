@@ -194,6 +194,10 @@ export function updateHooks(cleanSlate = false) {
     changePauseText();
 }
 
+Hooks.on("renderPause", (_app, _html, _options) => {
+    changePauseText();
+});
+
 // Initialize module
 Hooks.once("init", async (_actor: ActorPF2e) => {
     logInfo(`${MODULENAME} | Initializing xdy-pf2e-workbench`);
@@ -227,6 +231,10 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 });
 
 export function changePauseText() {
+    if (!document?.querySelector("#pause")?.classList.contains("paused")) {
+        return;
+    }
+
     if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
         // Set css variables for the module
         const path = <string>game.settings.get(MODULENAME, "customPauseImage");
@@ -244,14 +252,18 @@ export function changePauseText() {
 
     const text = game.settings.get(MODULENAME, "customPauseText");
     if (phase >= Phase.READY) {
-        const element = document.querySelector("#pause.paused figcaption");
+        const element = document.querySelector("figcaption");
         if (text && text !== "" && element) {
             // @ts-ignore
             element.textContent = text;
+            const pauseText = game?.i18n?.translations?.GAME["Paused"];
+            if (pauseText) {
+                game.i18n.translations.GAME["Paused"] = text;
+            }
         }
-        const paused = !game.paused;
-        game.togglePause(paused, true);
-        new Promise((resolve) => setTimeout(resolve, 25)).then(() => game.togglePause(!paused, true));
+        // const paused = !game.paused;
+        // game.togglePause(paused, true);
+        // new Promise((resolve) => setTimeout(resolve, 25)).then(() => game.togglePause(!paused, true));
     }
 }
 
