@@ -86,7 +86,7 @@
     "minisearch": "^6.3.0",
     "nouislider": "^15.7.1",
     "prosemirror-state": "^1.4.3",
-    "prosemirror-transform": "^1.8.0",
+    "prosemirror-transform": "^1.9.0",
     "prosemirror-view": "^1.33.6",
     "remeda": "^1.61.0",
     "sortablejs": "^1.15.2",
