@@ -36,7 +36,7 @@ function copyFolder(source: string, target: string) {
     }
 }
 
-function getFolders(path) {
+function getFolders(path: string | Buffer | URL) {
     return fs.readdirSync(path).filter(function (file) {
         return fs.statSync(path + "/" + file).isDirectory();
     });
@@ -131,6 +131,7 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
                     "systems/pf2e/icons/equipment/consumables/other-consumables/spell-scroll.webp",
                 );
                 map.set("Group Perception Roller", "systems/pf2e/icons/spells/vision-of-weakness.webp");
+                map.set("Heroic Recovery", "systems/pf2e/icons/spells/wholeness-of-body.webp");
                 map.set("Level Based DCs", "systems/pf2e/icons/equipment/held-items/radiant-spark.webp");
                 map.set("Lingering Fortissimo", "systems/pf2e/icons/spells/inspire-heroics.webp");
                 map.set("Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp");
