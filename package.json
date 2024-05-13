@@ -42,7 +42,7 @@
     "@types/prompts": "^2.4.9",
     "@types/sortablejs": "^1.15.8",
     "@types/tooltipster": "^0.0.35",
-    "@types/yaireo__tagify": "^4.18.0",
+    "@types/yaireo__tagify": "^4.24.0",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
     "classic-level": "^1.4.1",
@@ -80,7 +80,7 @@
   "dependencies": {
     "@codemirror/autocomplete": "^6.16.0",
     "@codemirror/lang-json": "^6.0.1",
-    "@yaireo/tagify": "4.21.2",
+    "@yaireo/tagify": "4.26.4",
     "codemirror": "^6.0.1",
     "luxon": "^3.4.4",
     "minisearch": "^6.3.0",
