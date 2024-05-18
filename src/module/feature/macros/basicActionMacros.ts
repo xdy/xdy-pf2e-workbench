@@ -91,7 +91,6 @@ type MacroAction = {
     showMAP?: boolean;
     showExploration?: boolean;
     showDowntime?: boolean;
-    extra?: string;
     actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
     actionTitle?: string;
 };
@@ -724,7 +723,6 @@ export async function basicActionMacros() {
                                 event,
                                 actors: [selectedActor],
                                 skill: action.skill.toLocaleLowerCase(),
-                                variant: action.extra,
                             });
                         }
                     }
