@@ -5,7 +5,7 @@
 
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
-import { Action, ActionVariant } from "@actor/actions/types.js";
+import { Action, ActionUseOptions, ActionVariant } from "@actor/actions/types.js";
 import { CharacterSkill } from "@actor/character/types.js";
 import { ModifierPF2e } from "@actor/modifiers.js";
 import { Statistic } from "@system/statistic/statistic.js";
@@ -91,6 +91,8 @@ type MacroAction = {
     showMAP?: boolean;
     showExploration?: boolean;
     showDowntime?: boolean;
+    // Optional parameters for an Action.use() call
+    options?: Partial<ActionUseOptions>;
     actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
     actionTitle?: string;
 };
@@ -125,10 +127,7 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
         .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
     actionsToUse.forEach((x) => {
-        const action =
-            typeof x.action === "string" && x.action.includes("use(") ? eval(x.action.split(".use")[0]) : x.action;
-
-        const traits = action?.traits ?? [];
+        const traits = (x as any)?.action?.traits ?? [];
         x.showMAP = traits.includes("attack");
         x.showDowntime = traits.includes("downtime");
         x.showExploration = traits.includes("exploration");
@@ -262,28 +261,32 @@ export async function basicActionMacros() {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingArcana`),
             skill: "Arcana",
-            action: 'game.pf2e.actions.get("decipher-writing").use({ event, statistic: "arcana" })',
+            action: game.pf2e.actions.get("decipher-writing"),
+            options: { statistic: "arcana" },
             icon: "icons/skills/trades/academics-book-study-runes.webp",
         },
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingOccultism`),
             skill: "Occultism",
-            action: 'game.pf2e.actions.get("decipher-writing").use({ event, statistic: "occultism" })',
+            action: game.pf2e.actions.get("decipher-writing"),
+            options: { statistic: "occultism" },
             icon: "icons/skills/trades/academics-book-study-purple.webp",
         },
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingReligion`),
             skill: "Religion",
-            action: 'game.pf2e.actions.get("decipher-writing").use({ event, statistic: "religion" })',
+            action: game.pf2e.actions.get("decipher-writing"),
+            options: { statistic: "religion" },
             icon: "systems/pf2e/icons/equipment/other/spellbooks/thresholds-of-truth.webp",
         },
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DecipherWritingSociety`),
             skill: "Society",
-            action: 'game.pf2e.actions.get("decipher-writing").use({ event, statistic: "society" })',
+            action: game.pf2e.actions.get("decipher-writing"),
+            options: { statistic: "society" },
             icon: "icons/skills/trades/academics-study-reading-book.webp",
         },
         {
@@ -507,14 +510,16 @@ export async function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.SubsistSociety`),
             skill: "Society",
-            action: 'game.pf2e.actions.get("subsist").use({ event, statistic: "society" })',
+            action: game.pf2e.actions.get("subsist"),
+            options: { statistic: "society" },
             icon: "icons/environment/settlement/building-rubble.webp",
         },
         {
             actionType: "basic",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.SubsistSurvival`),
             skill: "Survival",
-            action: 'game.pf2e.actions.get("subsist").use({ event, statistic: "survival" })',
+            action: game.pf2e.actions.get("subsist"),
+            options: { statistic: "survival" },
             icon: "icons/environment/wilderness/camp-improvised.webp",
         },
         {
@@ -703,6 +708,7 @@ export async function basicActionMacros() {
                                 event,
                                 multipleAttackPenalty: mapValue,
                                 skipDialog: event.skipDialog,
+                                ...action.options,
                             })
                             .then();
                     } else {
