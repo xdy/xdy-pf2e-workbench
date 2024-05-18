@@ -5,7 +5,7 @@
 
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
-import { Action } from "@actor/actions/types.js";
+import { Action, ActionVariant } from "@actor/actions/types.js";
 import { CharacterSkill } from "@actor/character/types.js";
 import { ModifierPF2e } from "@actor/modifiers.js";
 import { Statistic } from "@system/statistic/statistic.js";
@@ -84,7 +84,7 @@ type MacroAction = {
     altSkillAndFeat?: { skill: string; feat: string }[];
     name: string;
     icon: string;
-    action: string | Function | string[] | Action | undefined;
+    action: string | Function | string[] | Action | ActionVariant | undefined;
     module?: string;
     best?: number;
     whoIsBest?: string;
@@ -149,14 +149,14 @@ export async function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStabilize`),
             skill: "Medicine",
-            action: 'game.pf2e.actions.get("administer-first-aid").use({ event, variant: "stabilize"})',
+            action: game.pf2e.actions.get("administer-first-aid")?.variants.get("stabilize"),
             icon: "systems/pf2e/icons/features/feats/treat-wounds.webp",
         },
         {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStopBleeding`),
             skill: "Medicine",
-            action: 'game.pf2e.actions.get("administer-first-aid").use({ event, variant: "stop-bleeding"})',
+            action: game.pf2e.actions.get("administer-first-aid")?.variants.get("stop-bleeding"),
             icon: "systems/pf2e/icons/conditions/persistent-damage.webp",
         },
         {
@@ -242,21 +242,21 @@ export async function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateADiversionDistractingWords`),
             skill: "Deception",
-            action: 'game.pf2e.actions.get("create-a-diversion").use({ event, variant: "distracting-words" })',
+            action: game.pf2e.actions.get("create-a-diversion")?.variants.get("distracting-words"),
             icon: "icons/skills/social/wave-halt-stop.webp",
         },
         {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateADiversionGesture`),
             skill: "Deception",
-            action: 'game.pf2e.actions.get("create-a-diversion").use({ event, variant: "gesture" })',
+            action: game.pf2e.actions.get("create-a-diversion")?.variants.get("gesture"),
             icon: "icons/skills/social/wave-halt-stop.webp",
         },
         {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateADiversionTrick`),
             skill: "Deception",
-            action: 'game.pf2e.actions.get("create-a-diversion").use({ event, variant: "trick" })',
+            action: game.pf2e.actions.get("create-a-diversion")?.variants.get("trick"),
             icon: "systems/pf2e/icons/spells/charming-words.webp",
         },
         {
@@ -410,7 +410,7 @@ export async function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Perform`),
             skill: "Performance",
-            action: 'game.pf2e.actions.get("perform").use({ event, variant: "singing" })',
+            action: game.pf2e.actions.get("perform")?.variants.get("singing"),
             icon: "icons/skills/trades/music-singing-voice-blue.webp",
         },
         {
