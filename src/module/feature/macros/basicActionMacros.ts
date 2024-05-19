@@ -84,7 +84,7 @@ type MacroAction = {
     altSkillAndFeat?: { skill: string; feat: string }[];
     name: string;
     icon: string;
-    action: string | Function | string[] | Action | ActionVariant | undefined;
+    action: Function | string[] | Action | ActionVariant | undefined;
     module?: string;
     best?: number;
     whoIsBest?: string;
@@ -176,7 +176,7 @@ export async function basicActionMacros() {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidPF2eMacros`),
             skill: "",
-            action: "game.activemacros.aid(_token.actor)",
+            action: (options) => game["activemacros"].aid(options.actors?.[0]),
             module: "pf2e-macros",
             icon: "systems/pf2e/icons/spells/efficient-apport.webp",
         },
@@ -658,21 +658,7 @@ export async function basicActionMacros() {
                 const action = (button, event) => {
                     const action = actionsToUse[button.dataset.action];
                     const current = action.action;
-                    if (typeof current === "string") {
-                        if (!current.includes("(")) {
-                            const macro = game.macros.get(current);
-                            if (!macro) {
-                                ui.notifications.error(
-                                    game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.gmMustImport`),
-                                );
-                                return;
-                            }
-                            macro?.execute(event);
-                        } else {
-                            // Ugh
-                            eval(current);
-                        }
-                    } else if (Array.isArray(current)) {
+                    if (Array.isArray(current)) {
                         const macroName = current[0];
                         const compendiumName = current[1];
                         const pack = game.packs.get(compendiumName);
