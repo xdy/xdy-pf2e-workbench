@@ -78,7 +78,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             if (
                 actor &&
                 (rollForNonAttackNonSaveSpell ||
-                (rollForNonAttackSaveSpell && (isFailure || (isBasicSave && degreeOfSuccess === "success"))) ||
+                    (rollForNonAttackSaveSpell && (isFailure || (isBasicSave && degreeOfSuccess === "success"))) ||
                     (rollForAttackSpell && isSuccess)) &&
                 !letTargetHelperAutorollDamage
             ) {

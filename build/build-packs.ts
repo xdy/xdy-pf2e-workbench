@@ -115,6 +115,7 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
                 map.set("Bless", "systems/pf2e/icons/spells/bless.webp");
                 map.set("Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp");
                 map.set("Conditions Manager", "systems/pf2e/icons/conditions/doomed.webp");
+                map.set("Custom Mixed Heritage", "systems/pf2e/icons/spells/chromatic-image.webp");
                 map.set(
                     "Custom Saves and Skill Checks",
                     "systems/pf2e/icons/equipment/held-items/abadars-flawless-scale.webp",
