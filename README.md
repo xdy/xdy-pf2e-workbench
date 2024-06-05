@@ -236,6 +236,7 @@ versions are not supported. (They probably work, but if they don't, you're on yo
 * Use with Foundry 10: https://github.com/xdy/xdy-pf2e-workbench/releases/v4.77.2
 * Use with pf2e 5.2.3 (*no* remaster): https://github.com/xdy/xdy-pf2e-workbench/releases/v5.15.1
 * Use with pf2e 5.8.3 (just before *only* remaster): https://github.com/xdy/xdy-pf2e-workbench/releases/v5.27.9
+* Used with Foundry 11: https://github.com/xdy/xdy-pf2e-workbench/releases/v5.66.0
 
 ## Supported pf2e-specific QOL modules
 
