@@ -3,11 +3,11 @@ import { ConditionPF2e } from "@item";
 import { ConditionSource } from "@item/condition/data.ts";
 import { ConditionSlug } from "@item/condition/types.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
+
 /** A helper class to manage PF2e Conditions */
 export declare class ConditionManager {
     #private;
     static conditions: Map<ConditionSlug | ItemUUID, ConditionPF2e<null>>;
-    private static CONDITION_SOURCES?;
     /** Gets a list of condition slugs. */
     static get conditionsSlugs(): string[];
     static initialize(): void;

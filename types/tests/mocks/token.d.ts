@@ -1,5 +1,6 @@
 import type { ActorPF2e } from "@actor";
 import type { ScenePF2e } from "@scene";
+
 export declare class MockToken {
     actor: ActorPF2e | null;
     readonly parent: ScenePF2e | null;
@@ -11,5 +12,5 @@ export declare class MockToken {
     get id(): string;
     get name(): string;
     get scene(): this["parent"];
-    update(changes: EmbeddedDocumentUpdateData, context?: SceneEmbeddedModificationContext<NonNullable<this["parent"]>>): void;
+    update(changes: EmbeddedDocumentUpdateData, context?: Partial<DatabaseUpdateOperation<NonNullable<this["parent"]>>>): void;
 }

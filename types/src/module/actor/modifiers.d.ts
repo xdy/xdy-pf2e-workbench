@@ -6,7 +6,8 @@ import type { RollNotePF2e } from "@module/notes.ts";
 import type { RuleElementPF2e } from "@module/rules/index.ts";
 import { DamageAlteration } from "@module/rules/rule-element/damage-alteration/alteration.ts";
 import { DamageCategoryUnique, DamageDieSize, DamageType } from "@system/damage/types.ts";
-import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
+import { Predicate, RawPredicate } from "@system/predication.ts";
+
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
 declare const MODIFIER_TYPES: Set<"untyped" | "ability" | "circumstance" | "item" | "potency" | "proficiency" | "status">;
@@ -96,7 +97,7 @@ declare class ModifierPF2e implements RawModifier {
     custom: boolean;
     damageType: DamageType | null;
     damageCategory: DamageCategoryUnique | null;
-    predicate: PredicatePF2e;
+    predicate: Predicate;
     critical: boolean | null;
     traits: string[];
     hideIfDisabled: boolean;
@@ -279,7 +280,7 @@ declare class DamageDicePF2e {
     override: DamageDiceOverride | null;
     ignored: boolean;
     enabled: boolean;
-    predicate: PredicatePF2e;
+    predicate: Predicate;
     alterations: DamageAlteration[];
     hideIfDisabled: boolean;
     constructor(params: DamageDiceParameters);
@@ -301,5 +302,5 @@ declare class DamageDicePF2e {
 }
 interface RawDamageDice extends Required<DamageDiceParameters> {
 }
-export { CheckModifier, DamageDicePF2e, MODIFIER_TYPES, ModifierPF2e, PROFICIENCY_RANK_OPTION, StatisticModifier, adjustModifiers, applyStackingRules, createAttributeModifier, createProficiencyModifier, ensureProficiencyOption, };
+export { adjustModifiers, applyStackingRules, CheckModifier, createAttributeModifier, createProficiencyModifier, DamageDicePF2e, ensureProficiencyOption, MODIFIER_TYPES, ModifierPF2e, PROFICIENCY_RANK_OPTION, StatisticModifier, };
 export type { DamageDiceOverride, DamageDiceParameters, DeferredDamageDiceOptions, DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierType, RawDamageDice, RawModifier, TestableDeferredValueParams, };

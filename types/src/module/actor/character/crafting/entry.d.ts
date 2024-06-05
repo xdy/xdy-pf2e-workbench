@@ -1,7 +1,8 @@
 import type { CharacterPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
-import { PredicatePF2e, RawPredicate } from "@system/predication.ts";
+import { Predicate, RawPredicate } from "@system/predication.ts";
 import { CraftingFormula } from "./formula.ts";
+
 declare class CraftingEntry implements CraftingEntryData {
     #private;
     /** A label for this crafting entry to display on sheets */
@@ -16,13 +17,13 @@ declare class CraftingEntry implements CraftingEntryData {
     isAlchemical: boolean;
     isDailyPrep: boolean;
     isPrepared: boolean;
-    craftableItems: PredicatePF2e;
+    craftableItems: Predicate;
     maxSlots: number;
-    fieldDiscovery: PredicatePF2e | null;
+    fieldDiscovery: Predicate | null;
     batchSizes: {
         default: number;
         other: {
-            definition: PredicatePF2e;
+            definition: Predicate;
             quantity: number;
         }[];
     };

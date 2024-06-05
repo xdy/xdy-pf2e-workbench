@@ -2,6 +2,7 @@ import { SceneFlagsPF2e } from "./data.ts";
 import type { AmbientLightDocumentPF2e, MeasuredTemplateDocumentPF2e, TileDocumentPF2e } from "./index.ts";
 import { TokenDocumentPF2e } from "./index.ts";
 import type { SceneConfigPF2e } from "./sheet.ts";
+
 declare class ScenePF2e extends Scene {
     /** Has this document completed `DataModel` initialization? */
     initialized: boolean;
@@ -22,8 +23,8 @@ declare class ScenePF2e extends Scene {
     /** Toggle Unrestricted Global Vision according to scene darkness level */
     prepareBaseData(): void;
     /** Redraw auras if the scene was activated while being viewed */
-    _onUpdate(changed: DeepPartial<this["_source"]>, options: SceneUpdateContext, userId: string): void;
-    protected _onDeleteDescendantDocuments(parent: this, collection: string, documents: foundry.abstract.Document[], ids: string[], options: DocumentModificationContext<this>, userId: string): void;
+    _onUpdate(changed: DeepPartial<this["_source"]>, operation: SceneUpdateOperation, userId: string): void;
+    protected _onDeleteDescendantDocuments(parent: this, collection: string, documents: foundry.abstract.Document[], ids: string[], operation: DatabaseDeleteOperation<this>, userId: string): void;
 }
 interface ScenePF2e extends Scene {
     flags: SceneFlagsPF2e;

@@ -1,9 +1,31 @@
 import { CraftingEntryData } from "@actor/character/crafting/entry.ts";
 import { CraftingFormulaData } from "@actor/character/crafting/formula.ts";
-import { AbilityData, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureLanguagesData, CreaturePerceptionData, CreatureResources, CreatureSystemData, CreatureSystemSource, HeldShieldData, SaveData, SkillAbbreviation, SkillData } from "@actor/creature/data.ts";
+import {
+    AbilityData,
+    BaseCreatureSource,
+    CreatureAttributes,
+    CreatureDetails,
+    CreatureDetailsSource,
+    CreatureLanguagesData,
+    CreaturePerceptionData,
+    CreatureResources,
+    CreatureSystemData,
+    CreatureSystemSource,
+    HeldShieldData,
+    SaveData,
+    SkillData,
+} from "@actor/creature/data.ts";
 import { CreatureInitiativeSource, CreatureSpeeds, Language } from "@actor/creature/index.ts";
-import { ActorAttributesSource, ActorFlagsPF2e, AttributeBasedTraceData, HitPointsStatistic, InitiativeData, StrikeData, TraitViewData } from "@actor/data/base.ts";
-import { AttributeString, MovementType, SaveType } from "@actor/types.ts";
+import {
+    ActorAttributesSource,
+    ActorFlagsPF2e,
+    AttributeBasedTraceData,
+    HitPointsStatistic,
+    InitiativeData,
+    StrikeData,
+    TraitViewData,
+} from "@actor/data/base.ts";
+import { AttributeString, MovementType, SaveType, SkillSlug } from "@actor/types.ts";
 import type { WeaponPF2e } from "@item";
 import { ArmorCategory } from "@item/armor/types.ts";
 import { ProficiencyRank } from "@item/base/data/index.ts";
@@ -12,10 +34,11 @@ import { DeityDomain } from "@item/deity/types.ts";
 import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
 import { ValueAndMax, ZeroToFour } from "@module/data.ts";
 import { DamageType } from "@system/damage/types.ts";
-import type { PredicatePF2e } from "@system/predication.ts";
+import type { Predicate } from "@system/predication.ts";
 import type { CharacterPF2e } from "./document.ts";
 import type { WeaponAuxiliaryAction } from "./helpers.ts";
 import type { CharacterSheetTabVisibility } from "./sheet.ts";
+
 type CharacterSource = BaseCreatureSource<"character", CharacterSystemSource> & {
     flags: DeepPartial<CharacterFlags>;
 };
@@ -47,6 +70,9 @@ interface CharacterSystemSource extends CreatureSystemSource {
     proficiencies?: {
         attacks?: Record<string, MartialProficiencySource | undefined>;
     };
+    skills: Partial<Record<SkillSlug, {
+        rank: ZeroToFour;
+    }>>;
     resources: CharacterResourcesSource;
     initiative: CreatureInitiativeSource;
     crafting?: {
@@ -234,7 +260,7 @@ interface CharacterSystemData extends Omit<CharacterSystemSource, SourceOmission
         aliases?: Record<string, string | undefined>;
     };
     /** Player skills, used for various skill checks. */
-    skills: Record<SkillAbbreviation, CharacterSkillData>;
+    skills: Record<string, CharacterSkillData>;
     /** Special strikes which the character can take. */
     actions: CharacterStrike[];
     resources: CharacterResources;
@@ -314,7 +340,7 @@ interface CharacterProficiency {
 interface MartialProficiency extends CharacterProficiency {
     label: string;
     /** A predicate to match against weapons and unarmed attacks */
-    definition?: PredicatePF2e;
+    definition?: Predicate;
     /** The category to which this proficiency is linked */
     sameAs?: WeaponCategory | ArmorCategory;
     /** The maximum rank this proficiency can reach */

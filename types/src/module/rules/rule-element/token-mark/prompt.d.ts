@@ -1,5 +1,6 @@
 import type { TokenDocumentPF2e } from "@scene";
-import { PredicatePF2e } from "@system/predication.ts";
+import { Predicate } from "@system/predication.ts";
+
 /** Prompt the user to target a token */
 declare class MarkTargetPrompt {
     #private;
@@ -15,6 +16,6 @@ interface PromptParameters {
 }
 interface TargetRequirements {
     label: string;
-    predicate: PredicatePF2e;
+    predicate: Predicate;
 }
 export { MarkTargetPrompt };

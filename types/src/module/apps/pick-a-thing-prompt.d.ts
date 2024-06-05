@@ -3,8 +3,9 @@
 /// <reference types="tooltipster" />
 import type { ItemPF2e } from "@item";
 import type { UserPF2e } from "@module/user/document.ts";
-import { PredicatePF2e } from "@system/predication.ts";
+import { Predicate } from "@system/predication.ts";
 import Tagify from "@yaireo/tagify";
+
 /** Prompt the user to pick from a number of options */
 declare abstract class PickAThingPrompt<TItem extends ItemPF2e, TThing extends string | number | object> extends Application {
     #private;
@@ -16,7 +17,7 @@ declare abstract class PickAThingPrompt<TItem extends ItemPF2e, TThing extends s
         value: string;
         label: string;
     }>;
-    protected predicate: PredicatePF2e;
+    protected predicate: Predicate;
     protected allowNoSelection: boolean;
     constructor(data: PickAThingConstructorArgs<TItem, TThing>);
     get actor(): TItem["parent"];
@@ -36,7 +37,7 @@ interface PickAThingConstructorArgs<TItem extends ItemPF2e, TThing extends strin
     prompt?: string;
     choices: PickableThing<TThing>[];
     item: TItem;
-    predicate?: PredicatePF2e;
+    predicate?: Predicate;
     allowNoSelection?: boolean;
 }
 interface PickableThing<T extends string | number | object = string | number | object> {
@@ -44,7 +45,7 @@ interface PickableThing<T extends string | number | object = string | number | o
     label: string;
     img?: string;
     domain?: string[];
-    predicate?: PredicatePF2e;
+    predicate?: Predicate;
 }
 interface PromptTemplateData {
     choices: PickableThing[];

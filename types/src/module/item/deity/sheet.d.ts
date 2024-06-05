@@ -1,11 +1,11 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
+import type { SkillSlug } from "@actor/types.ts";
 import { type DeityPF2e } from "@item";
 import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
-import { DeitySanctification } from "./data.ts";
-import { SkillLongForm } from "@actor/types.ts";
+
 export declare class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
     static get defaultOptions(): ItemSheetOptions;
     getData(options?: Partial<ItemSheetOptions>): Promise<DeitySheetData>;
@@ -15,11 +15,9 @@ export declare class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
     _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
 }
 interface DeitySheetData extends ItemSheetDataPF2e<DeityPF2e> {
-    sanctifications: {
-        value: DeitySanctification | null;
-        label: string;
-    }[];
-    skills: Record<SkillLongForm, string>;
+    categories: FormSelectOption[];
+    sanctifications: FormSelectOption[];
+    skills: Record<SkillSlug, string>;
     divineFonts: SheetOptions;
     spells: SpellBrief[];
 }

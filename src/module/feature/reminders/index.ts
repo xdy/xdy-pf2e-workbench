@@ -3,6 +3,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { CombatantPF2e } from "@module/encounter/index.js";
 import { ActorPF2e } from "@actor/base.js";
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
+import { UserPF2e } from "@module/user/document.js";
 
 export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
     const actor = combatant.actor;
@@ -72,10 +73,10 @@ export function reminderTargeting(message: ChatMessagePF2e, setting: string): bo
         message.actor &&
         shouldIHandleThis(message.actor) &&
         message.flags &&
-        message.user &&
+        message.author &&
         ["spell-attack-roll", "attack-roll"].includes(<string>context.type)
     ) {
-        const targets = message.user.targets;
+        const targets = (<UserPF2e>message.author).targets;
         if (!targets || targets.size === 0) {
             const title = context.title;
 

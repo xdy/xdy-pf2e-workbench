@@ -26,19 +26,20 @@ export async function handlePrivateSpellcasting(data: any, message: ChatMessageP
             ? []
             : game.users
                   .filter((u) => u.active)
+
                   .filter((u) => u.id !== ChatMessage.getWhisperRecipients("GM").map((u) => u.id)[0])
                   .map((u) => u.id);
-        const user = game.userId;
+        const author = game.userId;
         if (whisper.length > 0) {
             await ChatMessage.create({
                 whisper,
-                user,
+                author,
                 content,
                 flags,
             });
         } else {
             await ChatMessage.create({
-                user,
+                author,
                 content,
                 flags,
             });
@@ -137,7 +138,7 @@ function findPartyMembersWithSpell(origin: any) {
 }
 
 function updateDataAndSource(data: any, message: ChatMessagePF2e): void {
-    data.type = CONST.CHAT_MESSAGE_TYPES.WHISPER;
+    data.style = CONST.CHAT_MESSAGE_STYLES.OTHER;
     data.whisper = [...ChatMessage.getWhisperRecipients("GM").map((u) => u.id)];
     if (!game.user.isGM) {
         data.whisper.push(game.user.id);
@@ -228,7 +229,8 @@ function buildSpellMessage(origin, tokenName: string, type, traditionString: str
 export async function castPrivateSpellHideName(message: ChatMessagePF2e, html: HTMLElement) {
     const msg = game.messages.contents
         .reverse()
-        .filter((m) => m.type === 4) // Whisper, rollup can't resolve constant
+        // .filter((m) => m.type === 4) // Whisper, rollup can't resolve constant
+        .filter((m) => m.whisper?.length > 0)
         .filter((m) => m.flags?.pf2e?.casting)
         .filter((m) => m.flags?.pf2e?.origin?.uuid === message.flags?.pf2e?.origin?.uuid)
         .pop();

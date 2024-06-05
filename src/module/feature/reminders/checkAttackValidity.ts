@@ -39,7 +39,7 @@ function shouldBeChecked(message: ChatMessagePF2e): boolean {
         shouldIHandleThis(message.actor) &&
         message.flags &&
         game.combats.active &&
-        message.user &&
+        message.author &&
         ["spell-attack-roll", "attack-roll", "skill-check"].includes(
             <string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type,
         ) &&

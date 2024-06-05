@@ -1,7 +1,8 @@
 import { ZeroToThree } from "@module/data.ts";
 import type { CheckRoll } from "./check/roll.ts";
-import type { PredicatePF2e } from "./predication.ts";
+import type { Predicate } from "./predication.ts";
 import type { StatisticDifficultyClass } from "./statistic/index.ts";
+
 /** Get the degree of success from a roll and a difficulty class */
 declare class DegreeOfSuccess {
     #private;
@@ -49,7 +50,7 @@ type DegreeAdjustmentsRecord = {
 };
 interface DegreeOfSuccessAdjustment {
     adjustments: DegreeAdjustmentsRecord;
-    predicate?: PredicatePF2e;
+    predicate?: Predicate;
 }
 interface CheckDC {
     slug?: string | null;

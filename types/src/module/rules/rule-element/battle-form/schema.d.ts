@@ -1,10 +1,18 @@
 import type { CreatureTrait } from "@actor/creature/index.ts";
 import type { SenseAcuity, SenseType } from "@actor/creature/types.ts";
 import type { RecordField } from "@system/schema-data-fields.ts";
-import type { ArrayField, BooleanField, NumberField, ObjectField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type {
+    ArrayField,
+    BooleanField,
+    NumberField,
+    ObjectField,
+    SchemaField,
+    StringField,
+} from "types/foundry/common/data/fields.d.ts";
 import type { ResolvableValueField, RuleElementSchema } from "../data.ts";
 import type { ImmunityRuleElement, ResistanceRuleElement, WeaknessRuleElement } from "../iwr/index.ts";
 import type { BattleFormSkills, BattleFormSpeeds, BattleFormStrike } from "./types.ts";
+
 type OverrideACSchema = {
     modifier: ResolvableValueField<false, false, true>;
     ignoreCheckPenalty: BooleanField<boolean, boolean, false, false, true>;
@@ -18,11 +26,11 @@ type BattleFormRuleOverrideSchema = {
     traits: ArrayField<StringField<CreatureTrait, CreatureTrait, true, false, false>>;
     armorClass: SchemaField<OverrideACSchema, SourceFromSchema<OverrideACSchema>, ModelPropsFromSchema<OverrideACSchema>, false, false, true>;
     tempHP: ResolvableValueField<false, true, true>;
-    senses: RecordField<StringField<SenseType, SenseType, true, false, false>, SchemaField<OverrideSenseSchema>, false, false, false>;
+    senses: RecordField<StringField<SenseType, SenseType, true, false, false>, SchemaField<OverrideSenseSchema>, false, false, true>;
     size: StringField<string, string, false, true, false>;
-    speeds: ObjectField<BattleFormSpeeds, BattleFormSpeeds, false, false, false>;
-    skills: ObjectField<BattleFormSkills, BattleFormSkills, false, false, false>;
-    strikes: ObjectField<Record<string, BattleFormStrike>, Record<string, BattleFormStrike>, false, false, false>;
+    speeds: ObjectField<BattleFormSpeeds, BattleFormSpeeds, false, false, true>;
+    skills: ObjectField<BattleFormSkills, BattleFormSkills, false, false, true>;
+    strikes: ObjectField<Record<string, BattleFormStrike>, Record<string, BattleFormStrike>, false, false, true>;
     immunities: ArrayField<ObjectField<Omit<ImmunityRuleElement["_source"], "key">>>;
     weaknesses: ArrayField<ObjectField<Omit<WeaknessRuleElement["_source"], "key">>>;
     resistances: ArrayField<ObjectField<Omit<ResistanceRuleElement["_source"], "key">>>;

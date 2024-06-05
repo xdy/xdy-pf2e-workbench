@@ -191,11 +191,11 @@ export function updateHooks(cleanSlate = false) {
         renderActorSheetHook,
     );
 
-    changePauseText();
+    // changePauseText();
 }
 
 Hooks.on("renderPause", (_app, _html, _options) => {
-    changePauseText();
+    // changePauseText();
 });
 
 // Initialize module
@@ -230,42 +230,47 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     // Register custom sheets (if any)
 });
 
-export function changePauseText() {
-    if (!document?.querySelector("#pause")?.classList.contains("paused")) {
-        return;
-    }
-
-    if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
-        // Set css variables for the module
-        const path = <string>game.settings.get(MODULENAME, "customPauseImage");
-        const prefix = path.startsWith("http") ? "" : "../../../";
-        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause", "url(" + prefix + path + ")");
-    }
-
-    document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-bottom", "10%");
-    document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "0%");
-    if (game.settings.get(MODULENAME, "customPauseRelocation")) {
-        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-bottom", "calc(50% - 64px)");
-        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "-100%");
-        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-background", "");
-    }
-
-    const text = game.settings.get(MODULENAME, "customPauseText");
-    if (phase >= Phase.READY) {
-        const element = document.querySelector("figcaption");
-        if (text && text !== "" && element) {
-            // @ts-ignore
-            element.textContent = text;
-            const pauseText = game?.i18n?.translations?.GAME["Paused"];
-            if (pauseText) {
-                game.i18n.translations.GAME["Paused"] = text;
-            }
-        }
-        // const paused = !game.paused;
-        // game.togglePause(paused, true);
-        // new Promise((resolve) => setTimeout(resolve, 25)).then(() => game.togglePause(!paused, true));
-    }
-}
+// export function changePauseText() {
+//     if (game.release.generation > 12) {
+//         console.log("PF2e Workbench: Changing pause text is not (yet) supported in foundry 12");
+//         return;
+//     }
+//
+//     if (!document?.querySelector("#pause")?.classList.contains("paused")) {
+//         return;
+//     }
+//
+//     if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
+//         // Set css variables for the module
+//         const path = <string>game.settings.get(MODULENAME, "customPauseImage");
+//         const prefix = path.startsWith("http") ? "" : "../../../";
+//         document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause", "url(" + prefix + path + ")");
+//     }
+//
+//     document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-bottom", "10%");
+//     document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "0%");
+//     if (game.settings.get(MODULENAME, "customPauseRelocation")) {
+//         document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-bottom", "calc(50% - 64px)");
+//         document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "-100%");
+//         document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-background", "");
+//     }
+//
+//     const text = game.settings.get(MODULENAME, "customPauseText");
+//     if (phase >= Phase.READY) {
+//         const element = document.querySelector("figcaption");
+//         if (text && text !== "" && element) {
+//             // @ts-ignore
+//             element.textContent = text;
+//             const pauseText = game?.i18n?.translations?.GAME["Paused"];
+//             if (pauseText) {
+//                 game.i18n.translations.GAME["Paused"] = text;
+//             }
+//         }
+//         // const paused = !game.paused;
+//         // game.togglePause(paused, true);
+//         // new Promise((resolve) => setTimeout(resolve, 25)).then(() => game.togglePause(!paused, true));
+//     }
+// }
 
 // Setup module
 Hooks.once("setup", async () => {

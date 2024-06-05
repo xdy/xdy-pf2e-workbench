@@ -1,4 +1,12 @@
-import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AuraData, EmbeddedItemInstances, SaveType } from "@actor/types.ts";
+import {
+    ActorAlliance,
+    ActorDimensions,
+    ActorInstances,
+    ApplyDamageParams,
+    AuraData,
+    EmbeddedItemInstances,
+    SaveType,
+} from "@actor/types.ts";
 import type { AbstractEffectPF2e, ConditionPF2e, ContainerPF2e, PhysicalItemPF2e, ShieldPF2e } from "@item";
 import { ItemPF2e } from "@item";
 import type { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/base/data/index.ts";
@@ -15,7 +23,12 @@ import type { UserPF2e } from "@module/user/document.ts";
 import type { ScenePF2e } from "@scene/document.ts";
 import { TokenDocumentPF2e } from "@scene/token-document/document.ts";
 import type { DamageType } from "@system/damage/types.ts";
-import type { ArmorStatistic, PerceptionStatistic, Statistic, StatisticDifficultyClass } from "@system/statistic/index.ts";
+import type {
+    ArmorStatistic,
+    PerceptionStatistic,
+    Statistic,
+    StatisticDifficultyClass,
+} from "@system/statistic/index.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ActorConditions } from "./conditions.ts";
 import { Abilities, VisionLevel } from "./creature/data.ts";
@@ -27,6 +40,7 @@ import { ActorInventory } from "./inventory/index.ts";
 import type { ActorSheetPF2e } from "./sheet/base.ts";
 import type { ActorSpellcasting } from "./spellcasting.ts";
 import type { ActorType } from "./types.ts";
+
 /**
  * Extend the base Actor class to implement additional logic specialized for PF2e.
  * @category Actor
@@ -147,8 +161,8 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      * As of Foundry 0.8: All subclasses of ActorPF2e need to use this factory method rather than having their own
      * overrides, since Foundry itself will call `ActorPF2e.create` when a new actor is created from the sidebar.
      */
-    static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], context?: DocumentModificationContext<TDocument["parent"]>): Promise<TDocument[]>;
-    static updateDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, updates?: Record<string, unknown>[], context?: DocumentUpdateContext<TDocument["parent"]>): Promise<TDocument[]>;
+    static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], operation?: Partial<DatabaseCreateOperation<TDocument["parent"]>>): Promise<TDocument[]>;
+    static updateDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, updates?: Record<string, unknown>[], operation?: Partial<DatabaseUpdateOperation<TDocument["parent"]>>): Promise<TDocument[]>;
     /** Set module art if available */
     protected _initializeSource(source: Record<string, unknown>, options?: DocumentConstructionContext<TParent>): this["_source"];
     protected _initialize(options?: Record<string, unknown>): void;
@@ -249,10 +263,10 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     protected _applyDefaultTokenSettings(data: this["_source"], options?: {
         fromCompendium?: boolean;
     }): DeepPartial<this["_source"]>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
-    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: ActorUpdateContext<TParent>, userId: string): void;
+    protected _preUpdate(changed: DeepPartial<ActorSourcePF2e>, operation: ActorUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, operation: ActorUpdateOperation<TParent>, userId: string): void;
     /** Unregister all effects possessed by this actor */
-    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void;
 }
 interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Actor<TParent> {
     flags: ActorFlagsPF2e;
@@ -262,18 +276,18 @@ interface ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
     system: ActorSystemData;
     prototypeToken: PrototypeTokenPF2e<this>;
     get sheet(): ActorSheetPF2e<ActorPF2e>;
-    update(data: Record<string, unknown>, options?: ActorUpdateContext<TParent>): Promise<this | undefined>;
+    update(data: Record<string, unknown>, operation?: Partial<ActorUpdateOperation<TParent>>): Promise<this | undefined>;
     getActiveTokens(linked: boolean | undefined, document: true): TokenDocumentPF2e<ScenePF2e>[];
     getActiveTokens(linked?: boolean | undefined, document?: false): TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
     getActiveTokens(linked?: boolean, document?: boolean): TokenDocumentPF2e<ScenePF2e>[] | TokenPF2e<TokenDocumentPF2e<ScenePF2e>>[];
     /** See implementation in class */
-    createEmbeddedDocuments(embeddedName: "ActiveEffect", data: PreCreate<foundry.documents.ActiveEffectSource>[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[]>;
-    createEmbeddedDocuments(embeddedName: "Item", data: PreCreate<ItemSourcePF2e>[], context?: DocumentModificationContext<this>): Promise<ItemPF2e<this>[]>;
-    createEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", data: PreCreate<foundry.documents.ActiveEffectSource>[] | PreCreate<ItemSourcePF2e>[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
+    createEmbeddedDocuments(embeddedName: "ActiveEffect", data: PreCreate<foundry.documents.ActiveEffectSource>[], operation?: Partial<DatabaseCreateOperation<this>>): Promise<ActiveEffectPF2e<this>[]>;
+    createEmbeddedDocuments(embeddedName: "Item", data: PreCreate<ItemSourcePF2e>[], operation?: Partial<DatabaseCreateOperation<this>>): Promise<ItemPF2e<this>[]>;
+    createEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", data: PreCreate<foundry.documents.ActiveEffectSource>[] | PreCreate<ItemSourcePF2e>[], operation?: Partial<DatabaseCreateOperation<this>>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
     /** See implementation in class */
-    updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[]>;
-    updateEmbeddedDocuments(embeddedName: "Item", updateData: EmbeddedDocumentUpdateData[], options?: EmbeddedItemUpdateContext<this>): Promise<ItemPF2e<this>[]>;
-    updateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", updateData: EmbeddedDocumentUpdateData[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
+    updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData[], operation?: Partial<DatabaseUpdateOperation<this>>): Promise<ActiveEffectPF2e<this>[]>;
+    updateEmbeddedDocuments(embeddedName: "Item", updateData: EmbeddedDocumentUpdateData[], operation?: Partial<EmbeddedItemUpdateOperation<this>>): Promise<ItemPF2e<this>[]>;
+    updateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", updateData: EmbeddedDocumentUpdateData[], operation?: Partial<DatabaseUpdateOperation<this>>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
     /** Added as debounced method */
     checkAreaEffects(): void;
 }
@@ -284,15 +298,15 @@ interface HitPointsSummary {
     unrecoverable: number;
     negativeHealing: boolean;
 }
-interface ActorUpdateContext<TParent extends TokenDocumentPF2e | null> extends DocumentUpdateContext<TParent> {
+interface ActorUpdateOperation<TParent extends TokenDocumentPF2e | null> extends DatabaseUpdateOperation<TParent> {
     damageTaken?: number;
     finePowder?: boolean;
     damageUndo?: boolean;
 }
-interface EmbeddedItemUpdateContext<TParent extends ActorPF2e> extends DocumentUpdateContext<TParent> {
+interface EmbeddedItemUpdateOperation<TParent extends ActorPF2e> extends DatabaseUpdateOperation<TParent> {
     checkHP?: boolean;
 }
 /** A `Proxy` to to get Foundry to construct `ActorPF2e` subclasses */
 declare const ActorProxyPF2e: typeof ActorPF2e;
 export { ActorPF2e, ActorProxyPF2e };
-export type { ActorUpdateContext, HitPointsSummary };
+export type { ActorUpdateOperation, HitPointsSummary };

@@ -108,12 +108,14 @@
                 "CubeFace": "Cube Face",
                 "Fangs": "Fangs",
                 "FireMote": "Fire Mote",
+                "Fist": "Fist",
                 "Foot": "Foot",
                 "Foreleg": "Foreleg",
                 "Gust": "Gust",
                 "HolyMace": "Holy Mace",
                 "Hoof": "Hoof",
                 "Horn": "Horn",
+                "Horns": "Horns",
                 "Jaws": "Jaws",
                 "LavaFist": "Lava Fist",
                 "Leaf": "Leaf",
@@ -123,6 +125,7 @@
                 "Mandibles": "Mandibles",
                 "MetalShard": "Metal Shard",
                 "Moonbeam": "Moonbeam",
+                "Nectar": "Nectar",
                 "PiercingHymn": "Piercing Hymn",
                 "Pincer": "Pincer",
                 "Pseudopod": "Pseudopod",
@@ -588,6 +591,7 @@
             "Custom": {
                 "AdamantineBludgeoning": "adamantine bludgeoning",
                 "AllDamageFromArcaneSpells": "all damage from arcane spells",
+                "AllDamageFromFungus": "all damage from fungus",
                 "AllDamageFromSpells": "all damage from spells",
                 "AllDamageFromUndead": "all damage from undead",
                 "AllMagicalDamage": "all magical damage",
@@ -625,6 +629,14 @@
             },
             "AncientWisp": {
                 "PinpointLight": "Pinpoint Light"
+            },
+            "AsoBerang": {
+                "PhantomFlames": {
+                    "Fire": "Fire",
+                    "None": "None",
+                    "Spirit": "Spirit"
+                },
+                "SpectralFlame": "Spectral Flame"
             },
             "BarghestFeed": "How many times has the Barghest fed?",
             "BladeMagus": {
@@ -702,7 +714,7 @@
                             "Medium": "Medium Water Elemental",
                             "Small": "Small Water Elemental"
                         },
-                         "Wood": {
+                        "Wood": {
                             "Elemental": "Wood Elemental",
                             "Medium": "Medium Wood Elemental",
                             "Small": "Small Wood Elemental"
@@ -824,10 +836,35 @@
             "Falrok": {
                 "LazuriteTerrainSwitch": "In lazurite infused terrain"
             },
+            "FiveColorOrchidMantis": {
+                "ColorShift": {
+                    "Black": "Black - Water",
+                    "Green": "Green - Wood",
+                    "None": "No Color Selected",
+                    "Red": "Red - Fire",
+                    "White": "White - Metal",
+                    "Yellow": "Yellow - Earth"
+                }
+            },
             "GangUp": {
                 "TwoAllies": "Two allies are within reach of the target"
             },
+            "GauChoRong": {
+                "SubsumedTrait": {
+                    "Animal": "Animal",
+                    "Aquatic": "Aquatic",
+                    "Amphibious": "Amphibious",
+                    "Humanoid": "Humanoid",
+                    "NoneOrOther": "Manually Select Resistance, if applicable"
+                }
+            },
             "GiantAnimatedStatueBrazier": "Brazier is alight",
+            "GiantTardigrade": {
+                "TunState": {
+                    "Dry": "Dry",
+                    "Rehydrating": "Rehydrating"
+                }
+            },
             "GrimReaper": {
                 "InfuseWeapon": "If the Grim Reaper Strikes a creature with a weakness to any specific type of damage, the scythe's damage counts as that type of damage, in addition to slashing."
             },
@@ -926,7 +963,7 @@
                 "TargetMurderedPaleStranger": "Target Murdered Pale Stranger",
                 "TargetNeverKilled": "Target has Never Killed"
             },
-            "PlanarScion":{
+            "PlanarScion": {
                 "Duskwalker": {
                     "HuntPrey": {
                         "AC": "Designated Prey attacks the Duskwalker",
@@ -968,6 +1005,9 @@
             "Seugathi": {
                 "MindfogSuppression": "Suppress Mindfog Aura"
             },
+            "Silene": {
+                "LumberjacksBane": "Target is wielding an axe"
+            },
             "Shell": {
                 "BrokenShell": "Broken Shell",
                 "CriticalHit": "Shell Broken by a Critical Hit"
@@ -1001,6 +1041,36 @@
             },
             "Surgeon": {
                 "MedicalMalpracticeCriticalSuccess": "Medical Malpractice (Critical Success)"
+            },
+            "Target": {
+                "GrabbedByNPC": "You have the target grabbed."
+            },
+            "TheGreatFlood": {
+                "LeadingHead": "Leading Head",
+                "LeadingHeadDescription": {
+                    "NoHeadSelected": "During each of the Great Flood's appearances, one head takes the lead once combat begins, chosen by the GM when initiative is rolled. Whichever head is in the lead grants a different action the Great Flood can use during its first turn each round (see Coordinated Actions).",
+                    "Aloof": "The aloof head casts a 5th-rank @UUID[Compendium.pf2e.spells-srd.Item.aIHY2DArKFweIrpf]{Command} (@Check[type:will|dc:42]).",
+                    "Ambitious": "The ambitious head declares a divine position above its station. It gains 100 temporary Hit Points for 1 minute. It also gains a weakness 20 to spirit damage and can't Claim Position again for 1 minute.",
+                    "Assertive": "The Great Flood Swims, then makes a melee Strike.",
+                    "Capricious": "The capricious head counteracts each mental effect on themself as a 10th-rank effect with a [[/r 1d20+32 #Counteract]]{+32} counteract modifier.",
+                    "PeoplePleaser": "The heads discuss and audibly agree on a creature to target. Until they Build Consensus again, their Strikes deal an additional 20 precision damage to that creature.",
+                    "Perfectionist": "The perfectionist head criticizes a creature within their aura. The creature must succeed at a @Check[type:will|dc:42] save or take @Damage[9d6[persistent,mental]] damage.",
+                    "Playful": "The playful head makes an ill-timed quip about the impermanence of life. They attempt to @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{Demoralize} each creature within their aura.",
+                    "Secretive": "The Great Flood is @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible} until the end of their turn and teleports to an open space within their aura.",
+                    "Suspicious": "The Great Flood peers at their surroundings. Until they move, they see through illusions in their aura and the reach of their jaws is increased to 25 feet."
+                },
+                "LeadingHeadName": {
+                    "NoHeadSelected": "None Selected",
+                    "Aloof": "Aloof",
+                    "Ambitious": "Ambitious",
+                    "Assertive": "Assertive",
+                    "Capricious": "Capricious",
+                    "PeoplePleaser": "People Pleaser",
+                    "Perfectionist": "Perfectionist",
+                    "Playful": "Playful",
+                    "Secretive": "Secretive",
+                    "Suspicious": "Suspicious"
+                }
             },
             "TreerazerPlantAttack": "Attack a Plant",
             "Vampire": {
@@ -1413,7 +1483,7 @@
                 "Opacity": "Opacity",
                 "Predicate": "Predicate",
                 "Primitive": "Primitive",
-                "PriorityHint": "Priority determines the order in which rule elements are executed. Rule elements with lower priority values are executed first.",
+                "PriorityHint": "Priority determines the order in which rule elements are executed within the same phase. Rule elements with lower priority values are executed first.",
                 "Range": "Range",
                 "Remove": "Remove",
                 "Selector": "Selector",
@@ -1589,6 +1659,7 @@
             "RecallKnowledge": "To Recall Knowledge",
             "RecallKnowledgeDeadSubject": "To Recall Knowledge about a deceased subject",
             "Rocky": "In Rocky Terrain",
+            "RockyOrBarren": "In Rocky or Barren Terrain",
             "Ruins": "In Ruins",
             "RunningWater": "In Running Water",
             "RustyTerrain": "In Areas of Rusty Objects",
@@ -1737,6 +1808,15 @@
                 "FireNote": "You can't cast fire spells or use actions with the fire trait underwater.",
                 "RangedNote": "Ranged attacks that deal bludgeoning or slashing damage automatically miss if the attacker or target is underwater, and piercing ranged attacks made by an underwater creature or against an underwater target have their range increments halved."
             },
+            "Ardande": {
+                "CausticNectar": {
+                    "Note": "On a critical hit, the target is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}."
+                },
+                "PotentNectar": {
+                    "PersistentDamage": "Persistent Acid Damage",
+                    "SplashDamage": "Acid Splash Damage"
+                }
+            },
             "ArtokussFire": {
                 "Note": "Your Alchemist's Fire deals an additional 1d4 persistent fire damage, and creatures must make two succesful flat checks to end the condition (or one check, if they had assisted recovery that reduces the flat check to DC 10). Your enhanced fire burns underwater, and water does not help to end the persistent damage."
             },
@@ -1791,6 +1871,18 @@
                     "Prompt": "Select a type of energy damage."
                 }
             },
+            "AwakenedAnimal": {
+                "LateAwakener": {
+                    "Prompt": "Choose an awakened animal heritage"
+                },
+                "NaturalSenses": {
+                    "Prompt": "Choose a sense appropriate to your kind of animal"
+                },
+                "SwimmingAnimal": {
+                    "Prompt": "Choose if you are an aquatic or water-dwelling animal",
+                    "WaterDwelling": "Water-dwelling"
+                }
+            },
             "Azarketi": {
                 "PhosphorescentSpots": "Phosphorescent Spots"
             },
@@ -1807,13 +1899,16 @@
                     "Snake": "Snake",
                     "Wolf": "Wolf"
                 },
-                "Elemental": {
-                    "ElementalEvolutionLabel": "Elemental Rage Damage"
+                "Decay": {
+                    "ToggleLabel": "Rotting Rage"
                 },
                 "Dragon": {
                     "NormalRageDamage": "Deal normal rage damage",
                     "ToggleLabel": "Draconic Rage",
                     "Prompt": "Select a dragon."
+                },
+                "Elemental": {
+                    "ElementalEvolutionLabel": "Elemental Rage Damage"
                 },
                 "Giant": {
                     "Prompt": "Select an energy type for Raging Resistance."
@@ -1827,6 +1922,9 @@
                     "CriticalSuccessVirulent": "Each critical success reduces the stage by 2 for a virulent alchemical poison, drug, or addiction.",
                     "Success": "Each of your successful saving throws against an alchemical poison, a drug, or an addiction reduces the stage by 2",
                     "SuccessVirulent": "Each of your successful saving throws against a virulent alchemical poison, a drug, or an addiction reduces the stage by 1"
+                },
+                "Ligneous": {
+                    "ToggleLabel": "Wooden Rage"
                 },
                 "Spirit": {
                     "NegativeDamage": "Void Damage",
@@ -1993,6 +2091,15 @@
                     "AllowedDrops": "1st-level cleric class feature",
                     "Prompt": "Select a doctrine."
                 },
+                "EmblazonAntimagic": {
+                    "WeaponNote": "If you critically hit with the weapon, you can attempt to counteract a spell on your target, using half your level, rounded up, as the counteract level. If you attempt to do so, the emblazoned symbol immediately disappears."
+                },
+                "EmblazonEnergy": {
+                    "MatchingDomainPrompt": "Matching domain?"
+                },
+                "Martyr": {
+                    "Note": "You lose @Damage[(@item.rank)d8] Hit Points, which can't be reduced or mitigated in any way, and your ally regains an equal number of Hit Points."
+                },
                 "RaiseSymbol": {
                     "RollOptionLabel": "Wielding shield as a religious symbol"
                 },
@@ -2011,6 +2118,13 @@
                 },
                 "SharedReplenishment": {
                     "Note": "You can grant the temporary Hit Points from Replenishment of War to an ally within 10 feet instead of gaining them yourself."
+                }
+            },
+            "ConcertFrog": {
+                "Conduct": {
+                    "Blue": "Blue",
+                    "Red": "Red",
+                    "Yellow": "Yellow"
                 }
             },
             "Conditions": {
@@ -2077,6 +2191,10 @@
                     "BoneSpikesReach": "Bone Spikes: Reach",
                     "ConsumeEnergyRange": "Consume Energy: Enhance Range",
                     "ConsumeEnergyStrikes": "Consume Energy: Enhance Strikes",
+                    "DefensiveGrowthExplodingShield": "Defensive Growth: Exploding Shield",
+                    "DefensiveGrowthStrongerShield": "Defensive Growth: Stronger Shield",
+                    "DisperseIntoPetalsBlossomVortex": "Disperse Into Petals: Blossom Vortex",
+                    "DisperseIntoPetalsExtendedFlight": "Disperse Into Petals: Extended Flight",
                     "DistantWanderingFly": "Distant Wandering: Flight",
                     "DistantWanderingQuick": "Distant Wandering: Quickened",
                     "EerieFlickerCompress": "Eerie Flicker: Compress Flicker",
@@ -2087,15 +2205,27 @@
                     "GhostlyGraspPush": "Ghostly Grasp: Push",
                     "HighSpeedRegenerationRecovery": "High-Speed Regeneration: Emergency Regeneration",
                     "HighSpeedRegenerationSpeed": "High-Speed Regeneration: Speed Boost",
+                    "IrradiatePoison": "Irradiate: Poison Damage",
+                    "IrradiateRadiusIncrease": "Irradiate: Increase Radius",
                     "Prompt": "Select an awakening for a deviant feat.",
                     "PropulsiveLeapSpeed": "Propulsive Leap: Speed Increase",
                     "PropulsiveLeapWeapon": "Propulsive Leap: Makeshift Weapon",
+                    "ReleaseSporesSickening": "Release Spores: Sickening Smell",
+                    "ReleaseSporesToxic": "Release Spores: Toxic Spores",
+                    "RottenSlurrySplash": "Rotten Slurry: Splash",
+                    "RottenSlurryPersistent": "Rotten Slurry: Persistent",
+                    "SproutFruitPlentiful": "Sprout Fruit: Plentiful",
+                    "SproutFruitPotent": "Sprout Fruit: Potent",
                     "StormingBreathEscape": "Storming Breath: Speedy Escape",
                     "StormingBreathProne": "Storming Breath: Knock Prone",
                     "TectonicStompStone": "Tectonic Stomp: Stone Cover",
                     "TectonicStompStun": "Tectonic Stomp: Stun Foes",
                     "TitanSwingBleed": "Titan Swing: Bleed",
-                    "TitanSwingProne": "Titan Swing: Knockback"
+                    "TitanSwingProne": "Titan Swing: Knockback",
+                    "UnleashTheBlightDebilitating": "Unleash The Blight: Debilitating",
+                    "UnleashTheBlightInfectious": "Unleash The Blight: Infectious",
+                    "VineLashCone": "Vine Lash: 30-Foot Cone",
+                    "VineLashConstrict": "Vine Lash: Constrict"
                 },
                 "BoneSpikes": {
                     "ReachLabel": "Extend bone spikes",
@@ -2375,6 +2505,10 @@
                 "CharmingLiar": {
                     "Note": "When you get a critical success using the Lie action, the target's attitude toward you improves by one step, as though you'd succeeded at using Diplomacy to Make an Impression."
                 },
+                "ClawdancerDedication": {
+                    "FrenziedClaw": "Frenzied Claw",
+                    "SpinningTalon": "Spinning Talon"
+                },
                 "FeyInfluence": {
                     "Anteater": "Anteater",
                     "CatSith": "Cat Sith",
@@ -2393,6 +2527,9 @@
                 },
                 "RiskySurgery": {
                     "Note": "When you Treat Wounds, you can deal @Damage[1d8[slashing]] damage to your patient just before applying the effects of the Treat Wounds. If you do, gain a +2 circumstance bonus to your Medicine check to Treat Wounds, and if you roll a success, you get a critical success instead."
+                },
+                "ThlipitContestantDedication": {
+                    "Lash": "Lash"
                 }
             },
             "Fetchling": {
@@ -2595,6 +2732,25 @@
                 },
                 "Prompt": "Select a harrow suit."
             },
+            "HeroPointDeck": {
+                "AncestralMight": {
+                    "FirstBoostPrompt": "Select one of your ancestry boosts, or pick any if it only had free boosts.",
+                    "SecondBoostPrompt": "Select another one of your ancestry boosts. Skip if it only had free boosts.",
+                    "SkipChoice": "Skip"
+                },
+                "AuraOfProtection": {
+                    "SpellRankPrompt": "Select the rank of the spell you just cast."
+                },
+                "CalledFoe": {
+                    "Note": "This effect lasts until the end of your next turn or until you critically hit the designated foe, whichever comes first."
+                },
+                "CriticalMoment": {
+                    "Note": "If you still fail this check, you become @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed 1}."
+                },
+                "DesperateSwing": {
+                    "Note": "If the attack fails, you release your weapon, or drop @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone} if you were using an unarmed attack or otherwise can't release your weapon."
+                }
+            },
             "Hobgoblin": {
                 "AgonizingRebuke": {
                     "Note": "When you successfully Demoralize a foe, that foe takes [[/r 1d4[mental]]]{1d4 mental damage} at the start of each of its turns as long as it remains Frightened and continues to engage in combat with you. If you have master proficiency in Intimidation, the damage increases to [[/r 2d4[mental]]]{2d4}, and if you have legendary proficiency, the damage increases to [[/r 3d4[mental]]]{3d4}."
@@ -2700,7 +2856,7 @@
                         "Failure": "The innovation becomes incapable of being used for further unstable actions.",
                         "Label": "Unstable Check"
                     },
-                    "Note": "When you take an unstable action, attempt a @Check[flat|dc:17|options:unstable-check|name:PF2E.SpecificRule.Inventor.Unstable.FlatCheck.Label]{flat check} immediately after applying its effects.",
+                    "Note": "When you take an unstable action, attempt a @Check[flat|dc:15|options:unstable-check|name:PF2E.SpecificRule.Inventor.Unstable.FlatCheck.Label]{flat check} immediately after applying its effects.",
                     "Stable": "Stable"
                 }
             },
@@ -2913,16 +3069,22 @@
                     "spear": "Advanced Spears",
                     "sword": "Advanced Swords"
                 },
+                "AdvancedAthamaruWeapons": "Advanced Athamaru Weapons",
                 "AdvancedHalflingWeapons": "Advanced Halfling Weapons",
                 "AdvancedHobgoblinWeapons": "Advanced Hobgoblin Weapons",
                 "AdvancedKoboldWeapons": "Advanced Kobold Weapons",
+                "AdvancedMerfolkWeapons": "Advanced Merfolk Weapons",
                 "AdvancedOrcWeapons": "Advanced Orc Weapons",
+                "AdvancedSurkiWeapons": "Advanced Surki Weapons",
                 "AdvancedTenguWeapons": "Advanced Tengu Weapons",
                 "AdvancedVanaraWeapons": "Advanced Vanara Weapons",
                 "AdvancedVishkanyaWeapons": "Advanced Vishkanya Weapons",
+                "BayonetsAndReinforcedStocks": "Bayonets and Reinforced Stocks",
+                "MartialAthamaruWeapons": "Martial Athamaru Weapons",
                 "MartialAzarketiWeapons": "Martial Azarketi Weapons",
                 "MartialBombsFirearms": "Martial Bombs & Firearms",
                 "MartialCatfolkWeapons": "Martial Catfolk Weapons",
+                "MartialCentaurWeapons": "Martial Centaur Weapons",
                 "MartialConrasuWeapons": "Martial Conrasu Weapons",
                 "MartialDwarfWeapons": "Martial Dwarven Weapons",
                 "MartialElfWeapons": "Martial Elven Weapons",
@@ -2954,20 +3116,39 @@
                 "MartialHalflingWeapons": "Martial Halfling Weapons",
                 "MartialHobgoblinWeapons": "Martial Hobgoblin Weapons",
                 "MartialKoboldWeapons": "Martial Kobold Weapons",
+                "MartialMerfolkWeapons": "Martial Merfolk Weapons",
                 "MartialOrcWeapons": "Martial Orc Weapons",
+                "MartialSurkiWeapons": "Martial Surki Weapons",
                 "MartialTenguWeapons": "Martial Tengu Weapons",
                 "MartialVanaraWeapons": "Martial Vanara Weapons",
                 "MartialVishkanyaWeapons": "Martial Vishkanya Weapons",
+                "MinotaurWeapons": "Minotaur Weapons",
                 "MonasticArchery": "Monastic Archery",
                 "SimpleBombsFirearms": "Simple Bombs & Firearms",
                 "SimpleFirearmsCrossbows": "Simple Firearms & Crossbows",
                 "SimpleMartialBows": "Simple & Martial Bows",
                 "SimpleMartialTwoHandedMeleeWeapons": "Simple & Martial Two-Handed Melee Weapons"
             },
+            "MechanicalSymbiosis": {
+                "FailureNote": "You become @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}",
+                "CriticalFailureNote": "You become @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 2}"
+            },
             "MechanicalTorch": {
                 "Label": "Mechanical Torch is lit",
                 "LitCone": "Cone",
                 "LitRadius": "Radius"
+            },
+            "Merfolk": {
+                "ReefMerfolk": {
+                    "SuccessNote": "You reduce the stage of the poison by 2.",
+                    "CriticalSuccessNote": "You reduce the stage of the poison by 3.",
+                    "VirulentSuccessNote": "You reduce the stage of the virulent poison by 1.",
+                    "VirulentCriticalSuccessNote": "You reduce the stage of the virulent poison by 2."
+                },
+                "ShieldingWave": {
+                    "Dry": "Dry",
+                    "Wet": "Wet"
+                }
             },
             "Mindmoppet": {
                 "BrokenShell": "Shell is Broken"
@@ -3016,6 +3197,11 @@
                     "CriticalNote": "The target takes [[/r (1+@weapon.system.runes.striking)[persistent,poison]]]{persistent poison damage} equal to the number of weapon damage dice",
                     "HoodedNote": "The target is also @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} until the start of your next turn.",
                     "StrikeLabel": "Venomous Spit"
+                }
+            },
+            "Nephilim": {
+                "Pitborn": {
+                    "AllowedDrops": "1st level Athletics skill feat"
                 }
             },
             "Notes": {
@@ -3100,6 +3286,7 @@
             "Prompt": {
                 "AdvancedMulticlassFeat": "Select a class feat up to half your character level.",
                 "Alignment": "Select an alignment.",
+                "Benefit": "Select a benefit.",
                 "CantripOrNonCantrip": "Select cantrip or non-cantrip spell.",
                 "ClassDCAbilityScore": "Select the class DC's key attribute.",
                 "Color": "Select a Color.",
@@ -3130,6 +3317,7 @@
                 "Sanctification": "Select a sanctification.",
                 "SecondImplement": "Select a second implement.",
                 "Shield": "Select a shield.",
+                "ShieldOrWeapon": "Select shield or weapon.",
                 "Shillelagh": "Select a club or staff.",
                 "Skill": "Select a skill.",
                 "SkillFeat": "Select a skill feat.",
@@ -3500,7 +3688,7 @@
                         "Elemental": "Elemental energy surrounds you or a target. Either you gain a +1 status bonus to Intimidation checks for 1 round, or a target takes @Damage[@item.level[@actor.flags.pf2e.sorcerer.elementalBloodline.damageType]]. The damage is bludgeoning or fire, according to your elemental type (see below). If the spell already deals that type of damage, combine it with the spell's initial damage before determining weaknesses and resistances.",
                         "Fey": "Colorful fey glamours dance around you or one target, causing them to be @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed} for 1 round. Such obvious concealment can't be used to Hide.",
                         "Genie": "Your spellcasting warps reality and distracts your foes. Either you gain a +1 status bonus to Deception checks for 1 round, or a target takes a -1 status penalty to Perception for 1 round.",
-                        "Hag": "Spiteful curses punish your foes. You deal @Damage[@item.level[mental]] (@Check[type:will|basic:true|dc:resolve(@actor.system.attributes.spellDC.value)] save) to the first creature that deals damage to you before the end of your next turn.",
+                        "Hag": "Spiteful curses punish your foes. You deal @Damage[@item.level[mental]] damage (@Check[type:will|basic:true|dc:resolve(@actor.system.attributes.spellDC.value)] save) to the first creature that deals damage to you before the end of your next turn.",
                         "Harrow": "You become enveloped in possibility, represented as multiple versions of yourself from your possible futures overlaid on each other. You gain @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealement} for 1 round, but can't use the concealment to @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide}.",
                         "Imperial": "A surge of ancestral memories grants you or one target a +1 status bonus to skill checks for 1 round.",
                         "Title": "Blood Magic",
@@ -3785,6 +3973,28 @@
                     "Prompt": "Select an element."
                 }
             },
+            "Surki": {
+                "BreakerSurki": {
+                    "DiggingWedgeLabel": "Activate Digging Wedge"
+                },
+                "Evolutions": {
+                    "DampeningField": "Dampening Field",
+                    "DiggingWedge": "Digging Wedge",
+                    "GlowingWings": "Glowing Wings",
+                    "GroundingClawSpikes": "Grounding Claw Spikes",
+                    "LanternBeam": "Lantern Beam",
+                    "LanternStrobe": "Lantern Strobe",
+                    "Prompt": "Select an evolution",
+                    "ResonatingMembranes": "Resonating Membranes",
+                    "StrengthenedCarapace": "Strengthened Carapace"
+                },
+                "LanternSurki": {
+                    "ToggleLabel": "Shed Light"
+                },
+                "SecondaryAdaptation": {
+                    "Prompt": "Select a surki heritage"
+                }
+            },
             "Swashbuckler": {
                 "Finisher": {
                     "Basic": "Basic",
@@ -3842,6 +4052,11 @@
                         "InForestLabel": "Wildwood Ink (In Forest)"
                     }
                 }
+            },
+            "TempestForm": {
+                "Air": "Air",
+                "Mist": "Mist",
+                "Water": "Water"
             },
             "Tengu": {
                 "WeaponFamiliarity": {
@@ -3919,6 +4134,10 @@
                     }
                 }
             },
+            "VenomGlands": {
+                "Note": "On a critical hit, the target is also @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}.",
+                "Label": "Poison Spray"
+            },
             "VirtuosicPerformer": {
                 "Acting": "Acting",
                 "Comedy": "Comedy",
@@ -3965,6 +4184,47 @@
                 "Initiative": "When you roll initiative for a non-trivial combat encounter, as well as in other high-stress situations of the GM's choice, magic wells up within you. Attempt a @Check[type:flat|dc:6|traits:wellspring-magic].",
                 "Success": "You temporarily recover an expended spell slot of a spell rank chosen randomly among your top three ranks of spell slots (or all your ranks of spell slots if you have fewer than three). The slot lasts 3 rounds instead of 1 minute, otherwise you experience a @UUID[Compendium.pf2e.rollable-tables.RollTable.N0pDFNCffTe2Du39]{Wellspring Surge}."
             },
+            "Werecreature": {
+                "Werebat": {
+                    "Description": "You gain a 10ft speed and a 15ft fly speed, and a 1d8 piercing fangs unarmed attack. When Flying due to the fly speed granted by this form, you must begin and end your movement on a solid surface or immediately fall.",
+                    "Label": "Werebat"
+                },
+                "Werebear": {
+                    "Description": "You gain a 25ft speed, a 1d8 piercing jaws unarmed attack, and a 1d6 slashing claw unarmed attack with the agile trait.",
+                    "Label": "Werebear"
+                },
+                "Wereboar": {
+                    "Description": "You gain a 30ft speed, and a 1d8 slashing tusk unarmed attack with the sweep trait.",
+                    "Label": "Wereboar"
+                },
+                "Werecrocodile": {
+                    "Description": "You gain a 25ft speed and a 15ft swim speed, and a 1d8 piercing jaws unarmed attack with the grapple trait. You can hold your breath for 2 hours in animal or hybrid form.",
+                    "Label": "Werecrocodile"
+                },
+                "Weremoose": {
+                    "Description": "You gain a 25ft speed, and a 1d8 piercing antler unarmed attack with the shove trait.",
+                    "Label": "Weremoose"
+                },
+                "Wererat": {
+                    "Description": "You gain a 25ft speed, a 1d6 piercing jaws unarmed attack with the finesse trait, and a 1d4 slashing claw unarmed attack with the agile and finesse traits. Your animal shape is Small in size.",
+                    "Label": "Wererat"
+                },
+                "Wereshark": {
+                    "Description": "You gain a 15ft speed and a 25ft swim speed, and a 1d8 piercing jaws unarmed attack with the grapple trait. Your hybrid shape gains the amphibious swim 25 feet trait. In your animal shape, you lose your land Speed and your Swim speed increases to 35 feet, and you gain the aquatic trait.",
+                    "Label": "Wereshark"
+                },
+                "Weretiger": {
+                    "Description": "You gain a 25ft speed, a 1d8 piercing jaws unarmed attack, and a 1d6 slashing claw unarmed attack with the agile trait.",
+                    "Label": "Weretiger"
+                },
+                "Werewolf": {
+                    "Description": "You gain a 30ft speed, and a 1d8 piercing jaws unarmed attack with the trip trait.",
+                    "Label": "Werewolf"
+                },
+                "ChangeShape": {
+                    "AlterationLabel": "Hybrid and Animal Shape"
+                }
+            },
             "Witch": {
                 "Cauldron": {
                     "CraftingEntry": "Cauldron"
@@ -3973,33 +4233,56 @@
                     "Prompt": "Select a patron.",
                     "FamiliarAbility": {
                         "BalancedLuck": {
-                            "Title": "Familiar of Balanced Luck",
-                            "Description": "When you Cast or Sustain a hex, one creature within 15 feet of your familiar gets your choice of either a +1 status bonus to its AC or a –1 status penalty to its AC until the start of your next turn."
+                            "Description": "When you Cast or Sustain a hex, one creature within 15 feet of your familiar gets your choice of either a +1 status bonus to its AC or a –1 status penalty to its AC until the start of your next turn.",
+                            "Title": "Familiar of Balanced Luck"
                         },
                         "FlowingScript": {
-                            "Title": "Familiar of Flowing Script",
-                            "Description": "When you Cast or Sustain a hex, the letters begin to rapidly change, causing a distraction. Until the start of your next turn, your familiar can provide flanking for you and your allies as though it were able to attack and had a reach of 5 feet; this is a visual effect."
+                            "Description": "When you Cast or Sustain a hex, the letters begin to rapidly change, causing a distraction. Until the start of your next turn, your familiar can provide flanking for you and your allies as though it were able to attack and had a reach of 5 feet; this is a visual effect.",
+                            "Title": "Familiar of Flowing Script"
                         },
                         "FreezingRime": {
-                            "Title": "Familiar of Freezing Rime",
-                            "Description": "Your familiar is cold to the touch, its breath always visible. When you Cast or Sustain a hex, you can cause ice to form in a @Template[type:burst|distance:5] centered on a square of your familiar's space. Those squares are difficult terrain until the start of your next turn."
+                            "Description": "Your familiar is cold to the touch, its breath always visible. When you Cast or Sustain a hex, you can cause ice to form in a @Template[type:burst|distance:5] centered on a square of your familiar's space. Those squares are difficult terrain until the start of your next turn.",
+                            "Title": "Familiar of Freezing Rime"
                         },
                         "KeenSenses": {
-                            "Title": "Familiar of Keen Senses",
-                            "Description": "When you Cast or Sustain a hex, your familiar gains your choice of an imprecise scent, tremorsense, or wavesense, with a range of 60 feet until the start of your next turn, and it can immediately @UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]{Point Out} as a free action."
+                            "Description": "When you Cast or Sustain a hex, your familiar gains your choice of an imprecise scent, tremorsense, or wavesense, with a range of 60 feet until the start of your next turn, and it can immediately @UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]{Point Out} as a free action.",
+                            "Title": "Familiar of Keen Senses"
+                        },
+                        "NimbleFlight": {
+                            "Description": "When you Cast or Sustain a hex, your familiar can Fly up to 15 feet; this movement doesn't trigger reactions.",
+                            "Title": "Familiar of Nimble Flight"
                         },
                         "OngoingMisery": {
-                            "Title": "Familiar of Ongoing Misery",
-                            "Description": "When you Cast or Sustain a hex, your familiar can curse a creature within 15 feet of it, prolonging the duration of any negative conditions affecting it by 1 round. This is a curse effect. This prolongs only conditions with a timed duration (such as '1 round' or 'until the end of your next turn') and doesn't prevent conditions from being removed by other means."
+                            "Description": "When you Cast or Sustain a hex, your familiar can curse a creature within 15 feet of it, prolonging the duration of any negative conditions affecting it by 1 round. This is a curse effect. This prolongs only conditions with a timed duration (such as '1 round' or 'until the end of your next turn') and doesn't prevent conditions from being removed by other means.",
+                            "Title": "Familiar of Ongoing Misery"
+                        },
+                        "OverwhelmingTides": {
+                            "Description": "When you Cast or Sustain a hex, you can cause a small wave to surge forth from your familiar. One creature within 10 feet of your familiar is pushed 5 feet away from your familiar.",
+                            "Title": "Familiar of Overwhelming Tides"
+                        },
+                        "ParasiticMight": {
+                            "Description": "When you Cast or Sustain a hex, one creature within 15 feet of your familiar with less than half of its maximum Hit Points becomes @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} unless it succeeds at a @Check[type:fortitude|dc:resolve(@actor.system.attributes.spellDC.value)] saving throw.",
+                            "Title": "Familiar of Parasitic Might"
                         },
                         "RestoredSpirit": {
-                            "Title": "Familiar of Restored Spirit",
-                            "Description": "When you Cast or Sustain a hex, one willing creature within 15 feet of your familiar gains temporary Hit Points equal to 2 + half your level, which last until the start of your next turn."
+                            "Description": "When you Cast or Sustain a hex, one willing creature within 15 feet of your familiar gains temporary Hit Points equal to 2 + half your level, which last until the start of your next turn.",
+                            "Title": "Familiar of Restored Spirit"
                         },
                         "StalkingNight": {
-                            "Title": "Familiar of Stalking Night",
-                            "Description": "Your familiar is dark of fur or feather, and light seems to disappear into it. When you Cast or Sustain a hex, and your familiar is adjacent to an enemy to which it's @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed}, @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{Hidden}, or undetected, the enemy becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}."
+                            "Description": "When you Cast or Sustain a hex, and your familiar is adjacent to an enemy to which it's @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed}, @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{Hidden}, or undetected, the enemy becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}.",
+                            "Title": "Familiar of Stalking Night"
                         }
+                    }
+                },
+                "WildWitchsArmaments": {
+                    "EldritchNails": {
+                        "RollOptionLabel": "You hit the same enemy with two consecutive nail strikes"
+                    },
+                    "IronTeeth": {
+                        "Note": "A creature that you critically hit with a jaws Strike must succeed at a @Check[type:fortitude|dc:resolve(@actor.system.attributes.classDC.value)] save or become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}."
+                    },
+                    "LivingHair": {
+                        "SrikeLabel": "Quill"
                     }
                 },
                 "WitchsArmaments": {

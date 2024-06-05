@@ -1,35 +1,36 @@
 import * as smooth from "@pixi/graphics-smooth";
 import * as particles from "@pixi/particle-emitter";
 import {
-    ALPHA_MODES,
     AccessibilityManager,
+    ALPHA_MODES,
     AlphaFilter,
     Application,
     BLEND_MODES,
     BlurFilter,
-    CLEAR_MODES,
     Circle,
+    CLEAR_MODES,
+    Color,
     Container,
     DisplayObject,
     Ellipse,
     EventBoundary,
     Extract,
-    FORMATS,
     FederatedEvent,
     FederatedPointerEvent,
     FederatedWheelEvent,
     Filter,
     FilterState,
     FilterSystem,
+    FORMATS,
     Geometry,
     Graphics,
+    Graphics as LegacyGraphics,
     IDestroyOptions,
     ITextStyle,
-    Graphics as LegacyGraphics,
-    MIPMAP_MODES,
-    MSAA_QUALITY,
     Matrix,
     Mesh,
+    MIPMAP_MODES,
+    MSAA_QUALITY,
     ParticleContainer,
     ParticleRenderer,
     Point,
@@ -37,8 +38,8 @@ import {
     Prepare,
     Program,
     Rectangle,
-    RenderTexture,
     Renderer,
+    RenderTexture,
     RoundedRectangle,
     SCALE_MODES,
     Shader,
@@ -54,6 +55,7 @@ import {
 } from "pixi.js";
 import "./board.d.ts";
 import "./core/index.d.ts";
+import "./fog-manager.d.ts";
 import "./groups/index.d.ts";
 import "./layers/index.d.ts";
 import "./perception/index.d.ts";
@@ -73,6 +75,7 @@ declare global {
             BlurFilter,
             CLEAR_MODES,
             Circle,
+            Color,
             Container,
             DisplayObject,
             Ellipse,

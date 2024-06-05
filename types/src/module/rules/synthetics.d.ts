@@ -1,7 +1,14 @@
 import type { ActorPF2e } from "@actor";
 import type { DexterityModifierCapData } from "@actor/character/types.ts";
 import type { LabeledSpeed, SenseData } from "@actor/creature/data.ts";
-import type { DamageDicePF2e, DeferredDamageDiceOptions, DeferredPromise, DeferredValue, ModifierAdjustment, ModifierPF2e } from "@actor/modifiers.ts";
+import type {
+    DamageDicePF2e,
+    DeferredDamageDiceOptions,
+    DeferredPromise,
+    DeferredValue,
+    ModifierAdjustment,
+    ModifierPF2e,
+} from "@actor/modifiers.ts";
 import type { TokenEffect } from "@actor/token-effect.ts";
 import type { MovementType } from "@actor/types.ts";
 import type { MeleePF2e, WeaponPF2e } from "@item";
@@ -12,10 +19,12 @@ import type { WeaponPropertyRuneType } from "@item/weapon/types.ts";
 import type { RollNotePF2e } from "@module/notes.ts";
 import type { MaterialDamageEffect } from "@system/damage/types.ts";
 import type { DegreeOfSuccessAdjustment } from "@system/degree-of-success.ts";
-import type { PredicatePF2e } from "@system/predication.ts";
+import type { Predicate } from "@system/predication.ts";
 import type { Statistic } from "@system/statistic/index.ts";
+import type { TokenSource } from "types/foundry/common/documents/token.d.ts";
 import type { DamageAlteration } from "./rule-element/damage-alteration/alteration.ts";
 import type { Suboption } from "./rule-element/roll-option/data.ts";
+
 /** Defines a list of data provided by rule elements that an actor can pull from during its data preparation lifecycle */
 interface RuleElementSynthetics {
     criticalSpecializations: {
@@ -47,13 +56,13 @@ interface RuleElementSynthetics {
     toggles: Record<string, Record<string, RollOptionToggle>>;
     tokenEffectIcons: TokenEffect[];
     tokenMarks: Map<TokenDocumentUUID, string>;
-    tokenOverrides: DeepPartial<Pick<foundry.documents.TokenSource, "light" | "name" | "alpha">> & {
+    tokenOverrides: DeepPartial<Pick<TokenSource, "light" | "name" | "alpha">> & {
         texture?: {
             src: VideoFilePath;
-            tint?: HexColorString;
+            tint?: Color;
         } | {
             src: VideoFilePath;
-            tint?: HexColorString;
+            tint?: Color;
             scaleX: number;
             scaleY: number;
         };
@@ -86,12 +95,12 @@ interface BaseSpeedSynthetic extends Omit<LabeledSpeed, "label" | "type"> {
 interface MAPSynthetic {
     label: string;
     penalty: number;
-    predicate: PredicatePF2e;
+    predicate: Predicate;
 }
 interface RollSubstitution {
     slug: string;
     label: string;
-    predicate: PredicatePF2e;
+    predicate: Predicate;
     value: number;
     required: boolean;
     selected: boolean;
@@ -111,11 +120,11 @@ interface RollOptionToggle {
 }
 interface RollTwiceSynthetic {
     keep: "higher" | "lower";
-    predicate?: PredicatePF2e;
+    predicate?: Predicate;
 }
 interface SenseSynthetic {
     sense: Required<SenseData>;
-    predicate: PredicatePF2e;
+    predicate: Predicate;
     force: boolean;
 }
 interface StrikeAdjustment {
@@ -128,13 +137,13 @@ interface StrikeAdjustment {
 interface StrikingSynthetic {
     label: string;
     bonus: number;
-    predicate: PredicatePF2e;
+    predicate: Predicate;
 }
 interface PotencySynthetic {
     label: string;
     bonus: number;
     type: "item" | "potency";
-    predicate: PredicatePF2e;
+    predicate: Predicate;
     property?: WeaponPropertyRuneType[];
 }
 export type { BaseSpeedSynthetic, CritSpecEffect, DamageDiceSynthetics, DeferredDamageDice, DeferredEphemeralEffect, DeferredModifier, DeferredMovementType, MAPSynthetic, ModifierAdjustmentSynthetics, ModifierSynthetics, PotencySynthetic, RollOptionToggle, RollSubstitution, RollTwiceSynthetic, RuleElementSynthetics, SenseSynthetic, StrikeAdjustment, StrikingSynthetic, };

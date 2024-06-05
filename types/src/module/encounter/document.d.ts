@@ -1,9 +1,10 @@
 import type { ActorPF2e } from "@actor";
 import { RollInitiativeOptionsPF2e } from "@actor/data/index.ts";
-import { SkillLongForm } from "@actor/types.ts";
+import { SkillSlug } from "@actor/types.ts";
 import type { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
 import { ThreatRating } from "@scripts/macros/xp/index.ts";
 import type { CombatantPF2e, RolledCombatant } from "./combatant.ts";
+
 declare class EncounterPF2e extends Combat {
     /** Has this document completed `DataModel` initialization? */
     initialized: boolean;
@@ -20,7 +21,7 @@ declare class EncounterPF2e extends Combat {
     prepareData(): void;
     prepareDerivedData(): void;
     /** Exclude orphaned, loot-actor, and minion tokens from combat */
-    createEmbeddedDocuments(embeddedName: "Combatant", data: PreCreate<foundry.documents.CombatantSource>[], context?: DocumentModificationContext<this>): Promise<CombatantPF2e<this, TokenDocumentPF2e<ScenePF2e>>[]>;
+    createEmbeddedDocuments(embeddedName: "Combatant", data: PreCreate<foundry.documents.CombatantSource>[], operation?: Partial<DatabaseCreateOperation<this>>): Promise<CombatantPF2e<this, TokenDocumentPF2e<ScenePF2e>>[]>;
     /** Roll initiative for PCs and NPCs using their prepared roll methods */
     rollInitiative(ids: string[], options?: RollInitiativeOptionsPF2e): Promise<this>;
     /** Set the initiative of multiple combatants */
@@ -32,11 +33,11 @@ declare class EncounterPF2e extends Combat {
      */
     resetActors(): Promise<void>;
     /** Enable the initiative button on PC sheets */
-    protected _onCreate(data: this["_source"], options: DocumentModificationContext<null>, userId: string): void;
+    protected _onCreate(data: this["_source"], operation: DatabaseCreateOperation<null>, userId: string): void;
     /** Call onTurnStart for each rule element on the new turn's actor */
-    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<null>, userId: string): void;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<null>, userId: string): void;
     /** Disable the initiative link on PC sheets if this was the only encounter */
-    protected _onDelete(options: DocumentModificationContext<null>, userId: string): void;
+    protected _onDelete(operation: DatabaseDeleteOperation<null>, userId: string): void;
     /**
      * Work around upstream issue present throughout V11
      * https://github.com/foundryvtt/foundryvtt/issues/9718
@@ -67,7 +68,7 @@ interface EncounterMetrics {
 interface SetInitiativeData {
     id: string;
     value: number;
-    statistic?: SkillLongForm | "perception" | null;
+    statistic?: SkillSlug | "perception" | null;
     overridePriority?: number | null;
 }
 export { EncounterPF2e };

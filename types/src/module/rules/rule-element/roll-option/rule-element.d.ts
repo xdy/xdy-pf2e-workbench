@@ -1,6 +1,7 @@
 import { RuleElementOptions, RuleElementPF2e } from "../base.ts";
 import { ModelPropsFromRESchema, RuleElementSource } from "../data.ts";
 import { type RollOptionSchema } from "./data.ts";
+
 /**
  * Set a roll option at a specificed domain
  * @category RuleElement
@@ -48,3 +49,4 @@ interface RollOptionSource extends RuleElementSource {
     removeAfterRoll?: JSONValue;
 }
 export { RollOptionRuleElement };
+export type { RollOptionSource };

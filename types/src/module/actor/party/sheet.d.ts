@@ -12,6 +12,7 @@ import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ValueAndMax, ZeroToFour } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { PartyPF2e } from "./document.ts";
+
 interface PartySheetRenderOptions extends ActorSheetRenderOptionsPF2e {
     actors?: boolean;
 }
@@ -57,6 +58,9 @@ interface PartySheetData extends ActorSheetDataPF2e<PartyPF2e> {
     };
     explorationSummary: {
         speed: number;
+        feetPerMinute: number;
+        milesPerHour: number;
+        milesPerDay: number;
         activities: number;
     };
     /** Unsupported items on the sheet, may occur due to disabled campaign data */

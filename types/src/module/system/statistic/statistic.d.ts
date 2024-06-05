@@ -11,7 +11,14 @@ import type { CheckRoll } from "@system/check/index.ts";
 import { CheckType, RollTwiceOption } from "@system/check/types.ts";
 import { CheckDC } from "@system/degree-of-success.ts";
 import { BaseStatistic } from "./base.ts";
-import { StatisticChatData, StatisticCheckData, StatisticData, StatisticDifficultyClassData, StatisticTraceData } from "./data.ts";
+import {
+    StatisticChatData,
+    StatisticCheckData,
+    StatisticData,
+    StatisticDifficultyClassData,
+    StatisticTraceData,
+} from "./data.ts";
+
 /** A Pathfinder statistic used to perform checks and calculate DCs */
 declare class Statistic<TActor extends ActorPF2e = ActorPF2e> extends BaseStatistic<TActor> {
     #private;
@@ -30,8 +37,6 @@ declare class Statistic<TActor extends ActorPF2e = ActorPF2e> extends BaseStatis
     get dc(): StatisticDifficultyClass<this>;
     /** Convenience getter to the statistic's total modifier */
     get mod(): number;
-    /** @deprecated */
-    get ability(): AttributeString | null;
     createRollOptions(domains?: string[], args?: RollOptionConfig): Set<string>;
     withRollOptions(options?: RollOptionConfig): Statistic;
     /**

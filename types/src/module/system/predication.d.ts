@@ -4,7 +4,7 @@
  * attack could be an option that is not a trait.
  * @category PF2
  */
-declare class PredicatePF2e extends Array<PredicateStatement> {
+declare class Predicate extends Array<PredicateStatement> {
     #private;
     /** Is the predicate data structurally valid? */
     readonly isValid: boolean;
@@ -18,7 +18,7 @@ declare class PredicatePF2e extends Array<PredicateStatement> {
     /** Test this predicate against a domain of discourse */
     test(options: Set<string> | string[]): boolean;
     toObject(): RawPredicate;
-    clone(): PredicatePF2e;
+    clone(): Predicate;
 }
 declare class StatementValidator {
     #private;
@@ -72,5 +72,5 @@ type Biconditional = {
 type CompoundStatement = Conjunction | Disjunction | ExclusiveDisjunction | AlternativeDenial | JointDenial | Negation | Conditional | Biconditional;
 type PredicateStatement = Atom | CompoundStatement;
 type RawPredicate = PredicateStatement[];
-export { PredicatePF2e, StatementValidator };
+export { Predicate, StatementValidator };
 export type { PredicateStatement, RawPredicate };

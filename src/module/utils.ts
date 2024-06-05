@@ -5,7 +5,7 @@ import { ActorPF2e } from "@actor/index.js";
 import BaseUser from "foundry-types/common/documents/user.js";
 
 function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
-    const userId = message.user.id;
+    const userId = message.author.id;
     const amIMessageSender = userId === game.user?.id;
     if (!game.user?.isGM && playerCondition && amIMessageSender) {
         return true;

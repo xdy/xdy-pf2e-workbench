@@ -7,6 +7,7 @@ import { CheckCheckContext, CheckRoll } from "@system/check/index.ts";
 import { LaxSchemaField } from "@system/schema-data-fields.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { BracketedValue, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
+
 /**
  * Rule Elements allow you to modify actorData and tokenData values when present on items. They can be configured
  * in the item's Rules tab which has to be enabled using the "Advanced Rule Element UI" system setting.
@@ -124,13 +125,13 @@ interface RuleElementPF2e<TSchema extends RuleElementSchema> extends foundry.abs
      * alter itself before its parent item is stored on an actor; it can also alter the item source itself in the same
      * manner.
      */
-    preCreate?({ ruleSource, itemSource, pendingItems, context }: RuleElementPF2e.PreCreateParams): Promise<void>;
+    preCreate?({ ruleSource, itemSource, pendingItems, operation }: RuleElementPF2e.PreCreateParams): Promise<void>;
     /**
      * Runs before this rules element's parent item is created. The item is temporarilly constructed. A rule element can
      * alter itself before its parent item is stored on an actor; it can also alter the item source itself in the same
      * manner.
      */
-    preDelete?({ pendingItems, context }: RuleElementPF2e.PreDeleteParams): Promise<void>;
+    preDelete?({ pendingItems, operation }: RuleElementPF2e.PreDeleteParams): Promise<void>;
     /**
      * Runs before this rules element's parent item is updated */
     preUpdate?(changes: DeepPartial<ItemSourcePF2e>): Promise<void>;
@@ -178,8 +179,8 @@ declare namespace RuleElementPF2e {
         pendingItems: ItemSourcePF2e[];
         /** Items temporarily constructed from pending item source */
         tempItems: ItemPF2e<ActorPF2e>[];
-        /** The context object from the `ItemPF2e.createDocuments` call */
-        context: DocumentModificationContext<ActorPF2e | null>;
+        /** The `operation` object from the `ItemPF2e.createDocuments` call */
+        operation: Partial<DatabaseCreateOperation<ActorPF2e | null>>;
         /** Whether this preCreate run is from a pre-update reevaluation */
         reevaluation?: boolean;
     }
@@ -187,7 +188,7 @@ declare namespace RuleElementPF2e {
         /** All items pending deletion in a `ItemPF2e.deleteDocuments` call */
         pendingItems: ItemPF2e<ActorPF2e>[];
         /** The context object from the `ItemPF2e.deleteDocuments` call */
-        context: DocumentModificationContext<ActorPF2e | null>;
+        operation: Partial<DatabaseDeleteOperation<ActorPF2e | null>>;
     }
     interface AfterRollParams {
         roll: Rolled<CheckRoll>;

@@ -1,5 +1,8 @@
+import type { DiceTerm, Die, FunctionTerm, PoolTerm, RollTerm } from "types/foundry/client-esm/dice/terms/module.d.ts";
 import { DamageInstance } from "./roll.ts";
-declare class ArithmeticExpression extends RollTerm<ArithmeticExpressionData> {
+
+declare const terms: typeof foundry.dice.terms;
+declare class ArithmeticExpression extends terms.RollTerm<ArithmeticExpressionData> {
     operator: ArithmeticOperator;
     operands: [RollTerm, RollTerm];
     constructor(termData: ArithmeticExpressionData);
@@ -39,7 +42,7 @@ interface ArithmeticExpressionData extends RollTermData {
 }
 type ArithmeticOperator = "+" | "-" | "*" | "/" | "%";
 /** A parenthetically-exclosed expression as a single arithmetic term or number */
-declare class Grouping extends RollTerm<GroupingData> {
+declare class Grouping extends terms.RollTerm<GroupingData> {
     #private;
     term: RollTerm;
     constructor(termData: GroupingData);
@@ -72,9 +75,9 @@ interface GroupingData extends RollTermData {
  * A `Die` surrogate where the `number` or `faces` were not resolvable to numbers at parse time: serializes itself as a
  * `Die` as soon it is able (guaranteed after evaluation)
  */
-declare class IntermediateDie extends RollTerm<IntermediateDieData> {
-    number: number | MathTerm | Grouping;
-    faces: number | MathTerm | Grouping;
+declare class IntermediateDie extends terms.RollTerm<IntermediateDieData> {
+    number: number | FunctionTerm | Grouping;
+    faces: number | FunctionTerm | Grouping;
     die: Die | null;
     constructor(data: IntermediateDieData);
     static SERIALIZE_ATTRIBUTES: string[];
@@ -91,11 +94,11 @@ declare class IntermediateDie extends RollTerm<IntermediateDieData> {
 }
 interface IntermediateDieData extends RollTermData {
     class?: string;
-    number: number | NumericTermData | MathTermData | GroupingData;
-    faces: number | NumericTermData | MathTermData | GroupingData;
+    number: number | NumericTermData | FunctionTermData | GroupingData;
+    faces: number | NumericTermData | FunctionTermData | GroupingData;
     die?: DieData | null;
 }
-declare class InstancePool extends PoolTerm {
+declare class InstancePool extends terms.PoolTerm {
     /** Work around upstream bug in which method attempts to construct `Roll`s from display formulas */
     static fromRolls<TTerm extends PoolTerm>(this: ConstructorOf<TTerm>, rolls?: Roll[]): TTerm;
 }

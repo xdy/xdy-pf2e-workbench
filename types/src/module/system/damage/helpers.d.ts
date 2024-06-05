@@ -1,9 +1,11 @@
 import type { ActorPF2e } from "@actor";
-import { DamageDicePF2e } from "@actor/modifiers.ts";
+import { DamageDicePF2e, RawDamageDice } from "@actor/modifiers.ts";
 import type { ItemPF2e } from "@item";
+import type { Die, NumericTerm, RollTerm } from "types/foundry/client-esm/dice/terms/module.d.ts";
 import { DamageInstance, DamageRoll } from "./roll.ts";
 import { ArithmeticExpression, Grouping } from "./terms.ts";
 import type { BaseDamageData, DamageCategory, DamageDiceFaces, DamageDieSize, DamageType } from "./types.ts";
+
 declare function nextDamageDieSize(next: {
     upgrade: DamageDieSize;
 }): DamageDieSize;
@@ -61,4 +63,8 @@ declare function looksLikeDamageRoll(roll: Roll): boolean;
 declare function damageDiceIcon(roll: DamageRoll | DamageInstance, { fixedWidth }?: {
     fixedWidth?: boolean | undefined;
 }): HTMLElement;
-export { DamageCategorization, applyBaseDamageAlterations, applyDamageDiceOverrides, damageDiceIcon, damageDieSizeToFaces, deepFindTerms, extractBaseDamage, isSystemDamageTerm, isUnsimplifableArithmetic, looksLikeDamageRoll, nextDamageDieSize, renderComponentDamage, simplifyTerm, };
+declare function getDamageDiceValueLabel(d: DamageDicePF2e | RawDamageDice, props?: {
+    sign?: boolean;
+}): string;
+declare function getDamageDiceOverrideLabel(d: DamageDicePF2e | RawDamageDice): string;
+export { applyBaseDamageAlterations, applyDamageDiceOverrides, DamageCategorization, damageDiceIcon, damageDieSizeToFaces, deepFindTerms, extractBaseDamage, getDamageDiceOverrideLabel, getDamageDiceValueLabel, isSystemDamageTerm, isUnsimplifableArithmetic, looksLikeDamageRoll, nextDamageDieSize, renderComponentDamage, simplifyTerm, };

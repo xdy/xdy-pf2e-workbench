@@ -1,10 +1,31 @@
 import type { SaveType } from "@actor/types.ts";
 import type { EffectTrait } from "@item/abstract-effect/types.ts";
-import { DataUnionField, PredicateField, StrictArrayField, StrictBooleanField, StrictNumberField, StrictStringField } from "@system/schema-data-fields.ts";
-import type { AlphaField, ArrayField, BooleanField, ColorField, EmbeddedDataField, SchemaField } from "types/foundry/common/data/fields.d.ts";
+import {
+    DataUnionField,
+    PredicateField,
+    StrictArrayField,
+    StrictBooleanField,
+    StrictNumberField,
+    StrictStringField,
+} from "@system/schema-data-fields.ts";
+import type {
+    AlphaField,
+    ArrayField,
+    BooleanField,
+    ColorField,
+    EmbeddedDataField,
+    SchemaField,
+} from "types/foundry/common/data/fields.d.ts";
 import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
-import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
+import {
+    ModelPropsFromRESchema,
+    ResolvableValueField,
+    RuleElementSchema,
+    RuleElementSource,
+    RuleValue,
+} from "./data.ts";
 import { ItemAlteration } from "./item-alteration/alteration.ts";
+
 /** A Pathfinder 2e aura, capable of transmitting effects and with a visual representation on the canvas */
 declare class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
     #private;
@@ -68,7 +89,7 @@ type AuraAppearanceSchema = {
         color: "user-color" | HexColorString;
         alpha: number;
     }, {
-        color: "user-color" | HexColorString;
+        color: "user-color" | Color;
         alpha: number;
     }, false, true, true>;
     /** Configuration of the highlight's color and alpha */
@@ -79,7 +100,7 @@ type AuraAppearanceSchema = {
         color: "user-color" | HexColorString;
         alpha: number;
     }, {
-        color: "user-color" | HexColorString;
+        color: "user-color" | Color;
         alpha: number;
     }, false, false, true>;
     /** Configuration for a texture (image or video) drawn as part of the aura */

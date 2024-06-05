@@ -20,6 +20,7 @@ import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { SpellArea, SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data.ts";
 import { SpellOverlayCollection } from "./overlay.ts";
 import { MagicTradition, SpellTrait } from "./types.ts";
+
 declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly parentItem: ConsumablePF2e<TParent> | null;
     /** The original spell. Only exists if this is a variant */
@@ -59,8 +60,6 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     get isFocusSpell(): boolean;
     get isRitual(): boolean;
     get attribute(): AttributeString;
-    /** @deprecated */
-    get ability(): AttributeString;
     /** Whether this spell has unlimited uses */
     get atWill(): boolean;
     get isVariant(): boolean;
@@ -111,9 +110,9 @@ declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
     /** Roll counteract check */
     rollCounteract(event?: MouseEvent | JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null>;
     getOriginData(): ItemOriginFlag;
-    update(data: Record<string, unknown>, options?: DocumentUpdateContext<TParent>): Promise<this | undefined>;
-    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
-    protected _preUpdate(changed: DeepPartial<SpellSource>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    update(data: Record<string, unknown>, operation?: Partial<DatabaseUpdateOperation<TParent>>): Promise<this | undefined>;
+    protected _preCreate(data: this["_source"], operation: DatabaseCreateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<SpellSource>, operation: DatabaseUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly _source: SpellSource;

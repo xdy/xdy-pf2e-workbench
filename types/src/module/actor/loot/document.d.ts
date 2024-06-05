@@ -6,6 +6,7 @@ import { ActiveEffectPF2e } from "@module/active-effect.ts";
 import { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { LootSource, LootSystemData } from "./data.ts";
+
 declare class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     armorClass: null;
     get allowedItemTypes(): (ItemType | "physical")[];
@@ -28,10 +29,10 @@ declare class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     toggleTokenHiding(): Promise<void>;
     /** Never process rules elements on loot actors */
     prepareDerivedData(): void;
-    protected _onCreate(data: LootSource, options: DocumentModificationContext<TParent>, userId: string): void;
-    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, userId: string): void;
-    protected _onCreateDescendantDocuments(parent: this, collection: "effects" | "items", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], result: ActiveEffectPF2e<this>["_source"][] | ItemPF2e<this>["_source"][], options: DocumentModificationContext<this>, userId: string): void;
-    protected _onDeleteDescendantDocuments(parent: this, collection: "items" | "effects", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], ids: string[], options: DocumentModificationContext<this>, userId: string): void;
+    protected _onCreate(data: LootSource, options: DatabaseCreateOperation<TParent>, userId: string): void;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<TParent>, userId: string): void;
+    protected _onCreateDescendantDocuments(parent: this, collection: "effects" | "items", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], result: ActiveEffectPF2e<this>["_source"][] | ItemPF2e<this>["_source"][], operation: DatabaseCreateOperation<this>, userId: string): void;
+    protected _onDeleteDescendantDocuments(parent: this, collection: "items" | "effects", documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[], ids: string[], operation: DatabaseDeleteOperation<this>, userId: string): void;
 }
 interface LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: LootSource;

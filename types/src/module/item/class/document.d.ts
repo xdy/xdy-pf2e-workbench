@@ -5,8 +5,8 @@ import { ABCItemPF2e, FeatPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import { ClassAttackProficiencies, ClassDefenseProficiencies, ClassSource, ClassSystemData } from "./data.ts";
 import { ClassTrait } from "./types.ts";
+
 declare class ClassPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ABCItemPF2e<TParent> {
-    static get validTraits(): Record<ClassTrait, string>;
     get attacks(): ClassAttackProficiencies;
     get defenses(): ClassDefenseProficiencies;
     get hpPerLevel(): number;

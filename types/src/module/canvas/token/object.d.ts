@@ -1,23 +1,20 @@
 import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene";
-import { type TokenLayerPF2e } from "../index.ts";
-import { HearingSource } from "../perception/hearing-source.ts";
 import { AuraRenderers } from "./aura/index.ts";
 import { FlankingHighlightRenderer } from "./flanking-highlight/renderer.ts";
+
 declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
     /** Visual rendering of lines from token to flanking buddy tokens on highlight */
     readonly flankingHighlight: FlankingHighlightRenderer;
-    /** The token's line hearing source */
-    hearing: HearingSource<this>;
     constructor(document: TDocument);
     /** Increase center-to-center point tolerance to be more compliant with 2e rules */
     get isVisible(): boolean;
+    /** A reference to an animation that is currently in progress for this Token, if any */
+    get animation(): Promise<boolean> | null;
     /** Is this token currently animating? */
     get isAnimating(): boolean;
-    /** Is this token emitting light with a negative value */
-    get emitsDarkness(): boolean;
     /** Is rules-based vision enabled, and does this token's actor have low-light vision (inclusive of darkvision)? */
     get hasLowLightVision(): boolean;
     /** Is rules-based vision enabled, and does this token's actor have darkvision vision? */
@@ -74,9 +71,7 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
      * Use border color corresponding with disposition even when the token's actor is player-owned.
      * @see https://github.com/foundryvtt/foundryvtt/issues/9993
      */
-    protected _getBorderColor(options?: {
-        hover?: boolean;
-    }): number | null;
+    protected _getBorderColor(): number;
     /** Overrides _drawBar(k) to also draw pf2e variants of normal resource bars (such as temp health) */
     protected _drawBar(number: number, bar: PIXI.Graphics, data: TokenResourceData): void;
     /** Draw auras along with effect icons */
@@ -99,17 +94,14 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     distanceTo(target: TokenPF2e, { reach }?: {
         reach?: number | null;
     }): number;
-    animate(updateData: Record<string, unknown>, options?: TokenAnimationOptionsPF2e<this>): Promise<void>;
-    /** Hearing should be updated whenever vision is */
-    updateVisionSource({ defer, deleted }?: {
-        defer?: boolean | undefined;
-        deleted?: boolean | undefined;
-    }): void;
+    animate(updateData: Record<string, unknown>, options?: TokenAnimationOptionsPF2e): Promise<void>;
     /** Obscure the token's sprite if a hearing or tremorsense detection filter is applied to it */
     render(renderer: PIXI.Renderer): void;
     protected _destroy(): void;
     /** Players can view an actor's sheet if the actor is lootable. */
     protected _canView(user: UserPF2e, event: PIXI.FederatedPointerEvent): boolean;
+    /** Prevent players from controlling an NPC when it's lootable */
+    protected _canControl(user: UserPF2e, event?: PIXI.FederatedPointerEvent): boolean;
     /** Refresh vision and the `EffectsPanel` */
     protected _onControl(options?: {
         releaseOthers?: boolean;
@@ -120,10 +112,10 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     /** Handle system-specific status effects (upstream handles invisible and blinded) */
     _onApplyStatusEffect(statusId: string, active: boolean): void;
     /** Reset aura renders when token size changes. */
-    _onUpdate(changed: DeepPartial<TDocument["_source"]>, options: DocumentModificationContext<TDocument["parent"]>, userId: string): void;
+    _onUpdate(changed: DeepPartial<TDocument["_source"]>, operation: DatabaseUpdateOperation<TDocument["parent"]>, userId: string): void;
 }
 interface TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
-    get layer(): TokenLayerPF2e<this>;
+    get layer(): TokenLayer<this>;
 }
 type NumericFloatyEffect = {
     name: string;
@@ -136,7 +128,7 @@ type ShowFloatyEffectParams = number | {
 } | {
     delete: NumericFloatyEffect;
 };
-interface TokenAnimationOptionsPF2e<TObject extends TokenPF2e = TokenPF2e> extends TokenAnimationOptions<TObject> {
+interface TokenAnimationOptionsPF2e extends TokenAnimationOptions {
     spin?: boolean;
 }
 export { TokenPF2e };

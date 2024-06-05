@@ -8,7 +8,7 @@ import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { Statistic } from "@system/statistic/index.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { PartySource, PartySystemData } from "./data.ts";
-import { PartyCampaign, PartyUpdateContext } from "./types.ts";
+import { PartyCampaign, PartyUpdateOperation } from "./types.ts";
 
 declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     armorClass: null;
@@ -49,11 +49,11 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /** Include campaign statistics in party statistics */
     getStatistic(slug: string): Statistic<this> | null;
     private _resetAndRerenderDebounced;
-    protected _preUpdate(changed: DeepPartial<PartySource>, options: PartyUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<PartySource>, options: PartyUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Override to inform creatures when they were booted from a party */
-    protected _onUpdate(changed: DeepPartial<PartySource>, options: PartyUpdateContext<TParent>, userId: string): void;
+    protected _onUpdate(changed: DeepPartial<PartySource>, operation: PartyUpdateOperation<TParent>, userId: string): void;
     /** Overriden to inform creatures the party is defunct */
-    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void;
 }
 interface PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: PartySource;

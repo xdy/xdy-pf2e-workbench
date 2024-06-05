@@ -5,6 +5,7 @@ import { PhysicalItemPF2e } from "@item/physical/index.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { ShieldSource, ShieldSystemData } from "./data.ts";
 import { BaseShieldType, ShieldTrait } from "./types.ts";
+
 declare class ShieldPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     static get validTraits(): Record<ShieldTrait, string>;
     get baseType(): BaseShieldType | null;
@@ -31,7 +32,7 @@ declare class ShieldPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     }): string;
     /** Generate a shield bash or other weapon(-like) item from this shield */
     generateWeapon(): WeaponPF2e<TParent> | null;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface ShieldPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     readonly _source: ShieldSource;

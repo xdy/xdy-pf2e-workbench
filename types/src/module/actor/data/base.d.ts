@@ -3,8 +3,8 @@ import type { DexterityModifierCapData } from "@actor/character/types.ts";
 import type { Abilities } from "@actor/creature/data.ts";
 import type { InitiativeTraceData } from "@actor/initiative.ts";
 import type { StatisticModifier } from "@actor/modifiers.ts";
-import type { ActorAlliance, AttributeString, SkillLongForm } from "@actor/types.ts";
-import type { ConsumablePF2e, MeleePF2e, WeaponPF2e } from "@item";
+import type { ActorAlliance, AttributeString, SkillSlug } from "@actor/types.ts";
+import type { MeleePF2e, WeaponPF2e } from "@item";
 import type { ItemSourcePF2e } from "@item/base/data/index.ts";
 import type { MigrationRecord, Rarity, Size, ValueAndMaybeMax, ZeroToTwo } from "@module/data.ts";
 import type { AutoChangeEntry } from "@module/rules/rule-element/ae-like.ts";
@@ -14,6 +14,7 @@ import type { DamageRoll } from "@system/damage/roll.ts";
 import type { StatisticTraceData } from "@system/statistic/data.ts";
 import type { Immunity, ImmunitySource, Resistance, ResistanceSource, Weakness, WeaknessSource } from "./iwr.ts";
 import type { ActorSizePF2e } from "./size.ts";
+
 /** Base interface for all actor data */
 type BaseActorSourcePF2e<TType extends ActorType, TSystemSource extends ActorSystemSource = ActorSystemSource> = foundry.documents.ActorSource<TType, TSystemSource, ItemSourcePF2e> & {
     flags: DeepPartial<ActorFlagsPF2e>;
@@ -115,18 +116,20 @@ interface BaseHitPointsSource {
     /** Any details about hit points. */
     details: string;
 }
-type OffGuardableCircumstance = 
+type OffGuardableCircumstance =
 /** Flat-footable in all flanking situations */
 true
 /** Flat-footable if the flanker's level is less than or equal to the actor's own */
  | number
 /** Never off-guardable */
  | false;
-type GangUpCircumstance = 
+type GangUpCircumstance =
 /** Requires at least `number` allies within melee reach of the target */
 number
 /** Requires the actor's animal companion to be adjacent to the target */
  | "animal-companion"
+/** Requires the actor's eidolon to be adjacent to the target */
+ | "eidolon"
 /** The Gang Up rogue feat allows allies to flank with the gang-upper */
  | true;
 /** Data related to actor hitpoints. */
@@ -156,7 +159,7 @@ interface AttributeBasedTraceData extends StatisticTraceData {
 type RollFunction<T extends RollParameters = RollParameters> = (params: T) => Promise<Rolled<CheckRoll> | null | string | void>;
 type DamageRollFunction = (params?: DamageRollParams) => Promise<string | Rolled<DamageRoll> | null>;
 interface InitiativeData extends StatisticTraceData {
-    statistic: SkillLongForm | "perception";
+    statistic: SkillSlug | "perception";
     /**
      * If a pair of initiative rolls are tied, the next resolution step is the tiebreak priority. A lower value
      * constitutes a higher priority.
@@ -230,8 +233,14 @@ interface StrikeData extends StatisticModifier {
     }[];
     /** Ammunition choices and selected ammo if this is a ammo consuming weapon. */
     ammunition?: {
-        compatible: (ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e>)[];
-        incompatible: (ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e>)[];
+        compatible: {
+            id: string;
+            label: string;
+        }[];
+        incompatible: {
+            id: string;
+            label: string;
+        }[];
         selected: {
             id: string;
             compatible: boolean;
@@ -261,4 +270,4 @@ interface PrototypeTokenPF2e<TParent extends ActorPF2e | null> extends foundry.d
         };
     };
 }
-export type { ActorAttributes, ActorAttributesSource, ActorDetails, ActorDetailsSource, ActorFlagsPF2e, ActorHitPoints, ActorHitPointsSource, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, ArmorClassData, AttributeBasedTraceData, BaseActorSourcePF2e, BaseHitPointsSource, DamageRollFunction, GangUpCircumstance, HitPointsStatistic, InitiativeData, PrototypeTokenPF2e, RollFunction, RollOptionFlags, Rollable, StrikeData, TraitViewData, };
+export type { ActorAttributes, ActorAttributesSource, ActorDetails, ActorDetailsSource, ActorFlagsPF2e, ActorHitPoints, ActorHitPointsSource, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, ArmorClassData, AttributeBasedTraceData, BaseActorSourcePF2e, BaseHitPointsSource, DamageRollFunction, GangUpCircumstance, HitPointsStatistic, InitiativeData, PrototypeTokenPF2e, Rollable, RollFunction, RollOptionFlags, StrikeData, TraitViewData, };

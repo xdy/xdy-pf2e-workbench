@@ -4,6 +4,7 @@ import { AbstractEffectPF2e, EffectBadgeCounter } from "@item/abstract-effect/in
 import { UserPF2e } from "@module/user/index.ts";
 import { AfflictionDamageTemplate, DamageDamageContext } from "@system/damage/index.ts";
 import { AfflictionFlags, AfflictionSource, AfflictionStageData, AfflictionSystemData } from "./data.ts";
+
 declare class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     constructor(source: object, context?: DocumentConstructionContext<TParent>);
     get badge(): EffectBadgeCounter;
@@ -28,10 +29,10 @@ declare class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null
     getLinkedItems(): ItemPF2e<ActorPF2e>[];
     createStageMessage(): Promise<void>;
     /** Set the start time and initiative roll of a newly created effect */
-    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
-    protected _preUpdate(changed: DeepPartial<AfflictionSource>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
-    protected _onCreate(data: AfflictionSource, options: DocumentModificationContext<TParent>, userId: string): void;
-    _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _preCreate(data: this["_source"], operation: DatabaseCreateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<AfflictionSource>, operation: DatabaseUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _onCreate(data: AfflictionSource, operation: DatabaseCreateOperation<TParent>, userId: string): void;
+    _onUpdate(changed: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<TParent>, userId: string): void;
     rollRecovery(): Promise<void>;
     prepareActorData(): void;
 }

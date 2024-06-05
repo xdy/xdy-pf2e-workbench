@@ -2,6 +2,7 @@ import { ActorSourcePF2e } from "@actor/data/index.ts";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "@module/migration/base.ts";
 import type { ScenePF2e, TokenDocumentPF2e } from "@scene";
+
 interface CollectionDiff<T extends foundry.documents.ActiveEffectSource | ItemSourcePF2e> {
     inserted: T[];
     deleted: string[];
@@ -19,6 +20,7 @@ export declare class MigrationRunnerBase {
         9: number;
         10: number;
         11: number;
+        12: number;
     };
     constructor(migrations?: MigrationBase[]);
     needsMigration(currentVersion: number): boolean;

@@ -7,9 +7,17 @@ import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ItemInstances } from "../types.ts";
-import type { ItemFlagsPF2e, ItemSourcePF2e, ItemSystemData, ItemType, RawItemChatData, TraitChatData } from "./data/index.ts";
+import type {
+    ItemFlagsPF2e,
+    ItemSourcePF2e,
+    ItemSystemData,
+    ItemType,
+    RawItemChatData,
+    TraitChatData,
+} from "./data/index.ts";
 import type { ItemTrait } from "./data/system.ts";
 import type { ItemSheetPF2e } from "./sheet/sheet.ts";
+
 /** The basic `Item` subclass for the system */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     /** Has this document completed `DataModel` initialization? */
@@ -44,7 +52,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     isOfType(type: "physical"): this is PhysicalItemPF2e<TParent>;
     isOfType<T extends "physical" | ItemType>(...types: T[]): this is T extends "physical" ? PhysicalItemPF2e<TParent> : T extends ItemType ? ItemInstances<TParent>[T] : never;
     /** Redirect the deletion of any owned items to ActorPF2e#deleteEmbeddedDocuments for a single workflow */
-    delete(context?: DocumentModificationContext<TParent>): Promise<this | undefined>;
+    delete(operation?: Partial<DatabaseDeleteOperation<TParent>>): Promise<this | undefined>;
     /** Generate a list of strings for use in predication */
     getRollOptions(prefix?: string, { includeGranter }?: {
         includeGranter?: boolean | undefined;
@@ -93,17 +101,17 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
         itemType: string;
         [key: string]: unknown;
     };
-    static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], context?: DocumentModificationContext<TDocument["parent"]>): Promise<TDocument[]>;
-    static deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]>): Promise<TDocument[]>;
-    protected _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], operation?: Partial<DatabaseCreateOperation<TDocument["parent"]>>): Promise<TDocument[]>;
+    static deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], operation?: Partial<DatabaseCreateOperation<TDocument["parent"]>>): Promise<TDocument[]>;
+    protected _preCreate(data: this["_source"], options: DatabaseCreateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Keep `TextEditor` and anything else up to no good from setting this item's description to `null` */
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DatabaseUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Call onCreate rule-element hooks */
-    protected _onCreate(data: ItemSourcePF2e, options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onCreate(data: ItemSourcePF2e, operation: DatabaseCreateOperation<TParent>, userId: string): void;
     /** Refresh the Item Directory if this item isn't embedded */
-    protected _onUpdate(data: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onUpdate(data: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<TParent>, userId: string): void;
     /** Call onDelete rule-element hooks */
-    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void;
 }
 interface ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     constructor: typeof ItemPF2e;

@@ -1,5 +1,4 @@
-import type Document from "../abstract/document.d.ts";
-import type { DocumentMetadata } from "../abstract/document.d.ts";
+import type Document, { DocumentMetadata } from "../abstract/document.d.ts";
 import type * as fields from "../data/fields.d.ts";
 import type * as documents from "./module.d.ts";
 
@@ -24,7 +23,7 @@ export default class BaseCard<TParent extends documents.BaseCards | null> extend
     static DEFAULT_ICON: ImageFilePath | VideoFilePath;
 
     /** The allowed set of Card types which may exist */
-    static get TYPES(): string;
+    static get TYPES(): string[];
 
     /* -------------------------------------------- */
     /*  Model Methods                               */

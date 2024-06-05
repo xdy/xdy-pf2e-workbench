@@ -346,9 +346,7 @@ async function determineCastRank(
 function determineBlindStatus(message: any): boolean {
     const originalRollMode = game.settings.get("core", "rollMode");
     return (
-        ((message?.type === CONST.CHAT_MESSAGE_TYPES.WHISPER ||
-            message?.blind ||
-            (message?.whisper && message?.whisper.length > 0)) &&
+        ((message?.blind || (message?.whisper && message?.whisper.length > 0)) &&
             originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) ??
         false
     );

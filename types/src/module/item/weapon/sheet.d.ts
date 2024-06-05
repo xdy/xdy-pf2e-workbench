@@ -6,6 +6,7 @@ import { MaterialSheetData, PhysicalItemSheetData, PhysicalItemSheetPF2e, RUNE_D
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { ComboWeaponMeleeUsage, SpecificWeaponData } from "./data.ts";
 import type { WeaponPF2e } from "./document.ts";
+
 export declare class WeaponSheetPF2e extends PhysicalItemSheetPF2e<WeaponPF2e> {
     protected get validTraits(): Record<string, string>;
     getData(options?: Partial<ItemSheetOptions>): Promise<WeaponSheetData>;
@@ -37,6 +38,7 @@ interface WeaponSheetData extends PhysicalItemSheetData<WeaponPF2e> {
     mandatoryRanged: boolean;
     meleeGroups: typeof CONFIG.PF2E.meleeWeaponGroups;
     meleeUsage: ComboWeaponMeleeUsage | undefined;
+    meleeUsageBaseDamage: FormSelectOption[];
     meleeUsageTraits: SheetOptions;
     otherTags: SheetOptions;
     preciousMaterials: MaterialSheetData;

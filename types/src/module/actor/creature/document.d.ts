@@ -3,7 +3,7 @@ import { HitPointsSummary } from "@actor/base.ts";
 import { CreatureSource } from "@actor/data/index.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
 import { ActorSpellcasting } from "@actor/spellcasting.ts";
-import { MovementType, SaveType, SkillLongForm } from "@actor/types.ts";
+import { MovementType, SaveType, SkillSlug } from "@actor/types.ts";
 import { ArmorPF2e, ItemPF2e, type PhysicalItemPF2e, type ShieldPF2e } from "@item";
 import { ItemType } from "@item/base/data/index.ts";
 import { ItemCarryType } from "@item/physical/data.ts";
@@ -12,10 +12,11 @@ import { Rarity, ZeroToTwo } from "@module/data.ts";
 import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { CheckRoll } from "@system/check/index.ts";
-import { Statistic, StatisticDifficultyClass, type ArmorStatistic } from "@system/statistic/index.ts";
+import { type ArmorStatistic, Statistic, StatisticDifficultyClass } from "@system/statistic/index.ts";
 import { PerceptionStatistic } from "@system/statistic/perception.ts";
 import { CreatureSpeeds, CreatureSystemData, LabeledSpeed, VisionLevel } from "./data.ts";
-import { CreatureTrait, CreatureType, CreatureUpdateContext, GetReachParameters } from "./types.ts";
+import { CreatureTrait, CreatureType, CreatureUpdateOperation, GetReachParameters } from "./types.ts";
+
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     /** A separate collection of owned spellcasting entries for convenience */
@@ -53,7 +54,7 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     /** Get the held shield of most use to the wielder */
     get heldShield(): ShieldPF2e<this> | null;
     /** Retrieve percpetion and spellcasting statistics */
-    getStatistic(slug: SaveType | SkillLongForm | "perception"): Statistic<this>;
+    getStatistic(slug: SaveType | SkillSlug | "perception"): Statistic<this>;
     getStatistic(slug: string): Statistic<this> | null;
     protected _initialize(options?: Record<string, unknown>): void;
     prepareData(): void;
@@ -85,25 +86,25 @@ declare abstract class CreaturePF2e<TParent extends TokenDocumentPF2e | null = T
     prepareSpeed(movementType: Exclude<MovementType, "land">): (LabeledSpeed & StatisticModifier) | null;
     prepareSpeed(movementType: MovementType): CreatureSpeeds | (LabeledSpeed & StatisticModifier) | null;
     /** Remove any features linked to a to-be-deleted ABC item */
-    deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: CreatureUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", ids: string[], operation?: Partial<DatabaseDeleteOperation<this>>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: CreatureUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Overriden to notify the party that an update is required */
-    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void;
 }
 interface CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: CreatureSource;
     system: CreatureSystemData;
     get traits(): Set<CreatureTrait>;
     get hitPoints(): HitPointsSummary;
-    /** Expand DocumentModificationContext for creatures */
-    update(data: Record<string, unknown>, options?: CreatureUpdateContext<TParent>): Promise<this>;
+    /** Extend `DatabaseUpdateOperation` for creatures */
+    update(data: Record<string, unknown>, operation?: Partial<CreatureUpdateOperation<TParent>>): Promise<this | undefined>;
     /** See implementation in class */
-    updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[]>;
-    updateEmbeddedDocuments(embeddedName: "Item", updateData: EmbeddedDocumentUpdateData[], options?: DocumentUpdateContext<this>): Promise<ItemPF2e<this>[]>;
-    updateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", updateData: EmbeddedDocumentUpdateData[], options?: DocumentUpdateContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
-    deleteEmbeddedDocuments(embeddedName: "ActiveEffect", ids: string[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[]>;
-    deleteEmbeddedDocuments(embeddedName: "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<ItemPF2e<this>[]>;
-    deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", ids: string[], context?: DocumentModificationContext<this>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
+    updateEmbeddedDocuments(embeddedName: "ActiveEffect", updateData: EmbeddedDocumentUpdateData[], operation?: Partial<DatabaseUpdateOperation<this>>): Promise<ActiveEffectPF2e<this>[]>;
+    updateEmbeddedDocuments(embeddedName: "Item", updateData: EmbeddedDocumentUpdateData[], operation?: Partial<DatabaseUpdateOperation<this>>): Promise<ItemPF2e<this>[]>;
+    updateEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", updateData: EmbeddedDocumentUpdateData[], operation?: Partial<DatabaseUpdateOperation<this>>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
+    deleteEmbeddedDocuments(embeddedName: "ActiveEffect", ids: string[], operation?: Partial<DatabaseDeleteOperation<this>>): Promise<ActiveEffectPF2e<this>[]>;
+    deleteEmbeddedDocuments(embeddedName: "Item", ids: string[], operation?: Partial<DatabaseDeleteOperation<this>>): Promise<ItemPF2e<this>[]>;
+    deleteEmbeddedDocuments(embeddedName: "ActiveEffect" | "Item", ids: string[], operation?: Partial<DatabaseDeleteOperation<this>>): Promise<ActiveEffectPF2e<this>[] | ItemPF2e<this>[]>;
 }
 interface ChangeCarryTypeOptions {
     /** Whether the item is held, worn, stowed, etc. */

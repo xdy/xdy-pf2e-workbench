@@ -1,7 +1,8 @@
-import { SkillLongForm } from "@actor/types.ts";
+import { SkillSlug } from "@actor/types.ts";
 import { DCOptions } from "../dc.ts";
 import type { PhysicalItemPF2e } from "./physical/index.ts";
-type MagicSkill = Extract<SkillLongForm, "arcana" | "nature" | "religion" | "occultism">;
+
+type MagicSkill = Extract<SkillSlug, "arcana" | "nature" | "religion" | "occultism">;
 type IdentifyMagicDCs = Record<MagicSkill, number>;
 type IdentifyAlchemyDCs = {
     crafting: number;

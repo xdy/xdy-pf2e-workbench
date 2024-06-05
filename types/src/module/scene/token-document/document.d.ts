@@ -6,6 +6,7 @@ import type { ScenePF2e } from "../document.ts";
 import { TokenAura } from "./aura/index.ts";
 import { TokenFlagsPF2e } from "./data.ts";
 import type { TokenConfigPF2e } from "./sheet.ts";
+
 declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends TokenDocument<TParent> {
     /** Has this document completed `DataModel` initialization? */
     initialized: boolean;
@@ -63,10 +64,10 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
      */
     simulateUpdate(actorUpdates?: Record<string, unknown>): void;
     /** Toggle token hiding if this token's actor is a loot actor */
-    protected _onCreate(data: this["_source"], options: DocumentModificationContext<TParent>, userId: string): void;
-    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, userId: string): void;
-    protected _onRelatedUpdate(update?: Record<string, unknown>, options?: DocumentModificationContext<null>): void;
-    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onCreate(data: this["_source"], operation: DatabaseCreateOperation<TParent>, userId: string): void;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, operation: TokenUpdateOperation<TParent>, userId: string): void;
+    protected _onRelatedUpdate(update: Record<string, unknown> | undefined, operation: DatabaseUpdateOperation<null>): void;
+    protected _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void;
 }
 interface TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends TokenDocument<TParent> {
     flags: TokenFlagsPF2e;

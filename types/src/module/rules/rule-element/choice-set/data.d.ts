@@ -1,9 +1,17 @@
 import { ItemType } from "@item/base/data/index.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { RawPredicate } from "@system/predication.ts";
-import type { DataUnionField, PredicateField, StrictArrayField, StrictBooleanField, StrictObjectField, StrictStringField } from "@system/schema-data-fields.ts";
+import type {
+    DataUnionField,
+    PredicateField,
+    StrictArrayField,
+    StrictBooleanField,
+    StrictObjectField,
+    StrictStringField,
+} from "@system/schema-data-fields.ts";
 import type { BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { RuleElementSchema, RuleElementSource } from "../data.ts";
+
 type ChoiceSetSchema = RuleElementSchema & {
     /**
      * The options from which the user can choose. If a string is provided, it is treated as a reference to a record in
@@ -39,6 +47,7 @@ type AllowedDropsData = ModelPropsFromSchema<AllowedDropsSchema>;
 type ChoiceSetObject = ChoiceSetOwnedItems | ChoiceSetAttacks | ChoiceSetPackQuery;
 type UninflatedChoiceSet = string | PickableThing[] | ChoiceSetObject;
 interface ChoiceSetSource extends RuleElementSource {
+    choices?: unknown;
     flag?: unknown;
     prompt?: unknown;
     selection?: unknown;

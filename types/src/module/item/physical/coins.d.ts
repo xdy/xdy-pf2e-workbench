@@ -1,5 +1,6 @@
 import { Size } from "@module/data.ts";
 import { Coins, PartialPrice } from "./data.ts";
+
 /** Coins class that exposes methods to perform operations on coins without side effects */
 declare class CoinsPF2e implements Coins {
     cp: number;
@@ -11,8 +12,6 @@ declare class CoinsPF2e implements Coins {
     get copperValue(): number;
     get goldValue(): number;
     plus(coins: Coins): CoinsPF2e;
-    /** @deprecated */
-    add(coins: Coins): CoinsPF2e;
     /** Multiply by a number and clean up result */
     scale(factor: number): CoinsPF2e;
     /** Increase a price for larger physical-item sizes */

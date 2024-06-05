@@ -1,11 +1,12 @@
-import { IWRSource, Immunity, Resistance, Weakness } from "@actor/data/iwr.ts";
+import { Immunity, IWRSource, Resistance, Weakness } from "@actor/data/iwr.ts";
 import { IWRType } from "@actor/types.ts";
-import type { PredicatePF2e } from "@system/predication.ts";
+import type { Predicate } from "@system/predication.ts";
 import { DataUnionField, PredicateField, StrictArrayField, StrictStringField } from "@system/schema-data-fields.ts";
 import type { ArrayField, BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "../ae-like.ts";
 import { RuleElementPF2e } from "../base.ts";
 import { ModelPropsFromRESchema, RuleElementSchema, RuleElementSource, RuleValue } from "../data.ts";
+
 /** @category RuleElement */
 declare abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema> {
     #private;
@@ -42,7 +43,7 @@ type IWRExceptionField<TType extends string = string> = DataUnionField<StrictStr
     label: StrictStringField<string, string, true, false, false>;
 }>, true, false, false>;
 type IWRException<TType extends IWRType = IWRType> = TType | {
-    definition: PredicatePF2e;
+    definition: Predicate;
     label: string;
 };
 type IWRChangeMode = Extract<AELikeChangeMode, "add" | "remove">;

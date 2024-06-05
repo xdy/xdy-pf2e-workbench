@@ -3,8 +3,14 @@
 /// <reference types="tooltipster" />
 import type { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { PickableThing, PickAThingConstructorArgs, PickAThingPrompt, PromptTemplateData } from "@module/apps/pick-a-thing-prompt.ts";
-import type { PredicatePF2e } from "@system/predication.ts";
+import {
+    PickableThing,
+    PickAThingConstructorArgs,
+    PickAThingPrompt,
+    PromptTemplateData,
+} from "@module/apps/pick-a-thing-prompt.ts";
+import type { Predicate } from "@system/predication.ts";
+
 /** Prompt the user for a selection among a set of options */
 declare class ChoiceSetPrompt extends PickAThingPrompt<ItemPF2e<ActorPF2e>, string | number | object> {
     /** The prompt statement to present the user in this application's window */
@@ -14,7 +20,7 @@ declare class ChoiceSetPrompt extends PickAThingPrompt<ItemPF2e<ActorPF2e>, stri
     /** A predicate validating a dragged & dropped item selection */
     allowedDrops: {
         label: string | null;
-        predicate: PredicatePF2e;
+        predicate: Predicate;
     } | null;
     constructor(data: ChoiceSetPromptData);
     static get defaultOptions(): ApplicationOptions;
@@ -37,7 +43,7 @@ interface ChoiceSetPromptData extends PickAThingConstructorArgs<ItemPF2e<ActorPF
     containsItems: boolean;
     allowedDrops: {
         label: string | null;
-        predicate: PredicatePF2e;
+        predicate: Predicate;
     } | null;
 }
 interface ChoiceSetChoice extends PickableThing {

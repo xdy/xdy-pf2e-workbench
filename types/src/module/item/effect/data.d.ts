@@ -1,5 +1,14 @@
-import { AbstractEffectSystemData, AbstractEffectSystemSource, DurationData, EffectAuraData, EffectBadge, EffectBadgeSource, EffectContextData } from "@item/abstract-effect/index.ts";
+import {
+    AbstractEffectSystemData,
+    AbstractEffectSystemSource,
+    DurationData,
+    EffectAuraData,
+    EffectBadge,
+    EffectBadgeSource,
+    EffectContextData,
+} from "@item/abstract-effect/index.ts";
 import { BaseItemSourcePF2e, ItemFlagsPF2e } from "@item/base/data/system.ts";
+
 type EffectSource = BaseItemSourcePF2e<"effect", EffectSystemSource> & {
     flags: DeepPartial<EffectFlags>;
 };
@@ -28,7 +37,7 @@ interface EffectSystemSource extends AbstractEffectSystemSource {
     /** Origin, target, and roll context of the action that spawned this effect */
     context: EffectContextData | null;
 }
-interface EffectSystemData extends Omit<EffectSystemSource, "description" | "fromSpell">, Omit<AbstractEffectSystemData, "level"> {
+interface EffectSystemData extends Omit<EffectSystemSource, "badge" | "description" | "fromSpell">, Omit<AbstractEffectSystemData, "level"> {
     expired: boolean;
     badge: EffectBadge | null;
     remaining: string;

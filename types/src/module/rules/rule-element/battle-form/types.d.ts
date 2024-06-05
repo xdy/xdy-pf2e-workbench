@@ -1,11 +1,12 @@
-import type { CreatureTrait, SenseAcuity, SenseType, SkillAbbreviation } from "@actor/creature/index.ts";
-import type { AttributeString, MovementType } from "@actor/types.ts";
+import type { CreatureTrait, SenseAcuity, SenseType } from "@actor/creature/index.ts";
+import type { AttributeString, MovementType, SkillSlug } from "@actor/types.ts";
 import type { WeaponDamage } from "@item/weapon/data.ts";
 import type { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponTrait } from "@item/weapon/types.ts";
 import type { Size } from "@module/data.ts";
 import type { RawPredicate } from "@system/predication.ts";
 import type { RuleElementSource } from "../index.ts";
 import type { ImmunityRuleElement, ResistanceRuleElement, WeaknessRuleElement } from "../iwr/index.ts";
+
 interface BattleFormSource extends RuleElementSource {
     overrides?: BattleFormOverrides;
     canCast?: boolean;
@@ -45,7 +46,7 @@ type BattleFormSenses = {
     [K in SenseType]?: BattleFormSense;
 };
 type BattleFormSkills = {
-    [K in SkillAbbreviation]?: BattleFormSkill;
+    [K in SkillSlug]?: BattleFormSkill;
 };
 type BattleFormSpeeds = {
     [K in MovementType]?: number;

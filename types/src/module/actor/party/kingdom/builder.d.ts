@@ -6,6 +6,7 @@ import { PartyPF2e } from "../document.ts";
 import { Kingdom } from "./model.ts";
 import { KingdomAbility, KingdomCHG } from "./types.ts";
 import { KingdomCHGData } from "./values.ts";
+
 declare const KINGDOM_BUILD_CATEGORIES: readonly ["charter", "heartland", "government"];
 type KingdomBuildCategory = (typeof KINGDOM_BUILD_CATEGORIES)[number];
 type CurrentSelections = Record<KingdomBuildCategory, string | null>;
@@ -46,6 +47,7 @@ interface KingdomBuilderSheetData {
     skillLabels: Record<string, string>;
     build: KingdomAbilityBuilderData;
     finished: boolean;
+    aspirationOptions: FormSelectOption[];
 }
 interface CategorySheetData {
     /** The active build entry slug (the one that's been saved) */

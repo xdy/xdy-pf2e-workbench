@@ -5,6 +5,7 @@ import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import { CheckRoll } from "@system/check/index.ts";
 import { Statistic, StatisticRollParameters, StatisticTraceData } from "@system/statistic/index.ts";
 import { AttributeString } from "./types.ts";
+
 interface InitiativeRollResult {
     combatant: CombatantPF2e<EncounterPF2e>;
     roll: Rolled<CheckRoll>;
@@ -25,8 +26,6 @@ declare class ActorInitiative {
     });
     get attribute(): AttributeString | null;
     get mod(): number;
-    /** @deprecated */
-    get ability(): AttributeString | null;
     roll(args?: InitiativeRollParams): Promise<InitiativeRollResult | null>;
     getTraceData(): InitiativeTraceData;
 }

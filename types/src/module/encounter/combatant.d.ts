@@ -1,7 +1,8 @@
 import type { ActorPF2e } from "@actor";
-import type { SkillLongForm } from "@actor/types.ts";
+import type { SkillSlug } from "@actor/types.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { EncounterPF2e } from "./index.ts";
+
 declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e | null, TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Combatant<TParent, TTokenDocument> {
     #private;
     /** Has this document completed `DataModel` initialization? */
@@ -19,7 +20,7 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
     static fromActor(actor: ActorPF2e, render?: boolean, options?: {
         combat?: EncounterPF2e;
     }): Promise<CombatantPF2e<EncounterPF2e> | null>;
-    static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], context?: DocumentModificationContext<TDocument["parent"]>): Promise<TDocument[]>;
+    static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], operation?: Partial<DatabaseCreateOperation<TDocument["parent"]>>): Promise<TDocument[]>;
     startTurn(): Promise<void>;
     endTurn(options: {
         round: number;
@@ -43,15 +44,15 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
     _getInitiativeFormula(): string;
     /** Toggle the visibility of names to players */
     toggleNameVisibility(): Promise<void>;
-    protected _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, userId: string): void;
-    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<TParent>, userId: string): void;
+    protected _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void;
 }
 interface CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e | null, TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Combatant<TParent, TTokenDocument> {
     flags: CombatantFlags;
 }
 interface CombatantFlags extends DocumentFlags {
     pf2e: {
-        initiativeStatistic: SkillLongForm | "perception" | null;
+        initiativeStatistic: SkillSlug | "perception" | null;
         roundOfLastTurn: number | null;
         roundOfLastTurnEnd: number | null;
         overridePriority: Record<number, number | null | undefined>;

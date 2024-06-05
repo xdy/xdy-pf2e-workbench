@@ -4,7 +4,8 @@
 import type { PhysicalItemPF2e } from "@item";
 import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
-import { CoinsPF2e, ItemActivation, MaterialValuationData, PreciousMaterialGrade } from "./index.ts";
+import { CoinsPF2e, ItemActivation, MaterialValuationData } from "./index.ts";
+
 declare class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e> extends ItemSheetPF2e<TItem> {
     static get defaultOptions(): ItemSheetOptions;
     /** Show the identified data for editing purposes */
@@ -35,6 +36,8 @@ interface PhysicalItemSheetData<TItem extends PhysicalItemPF2e> extends ItemShee
     frequencies: typeof CONFIG.PF2E.frequencies;
     sizes: Omit<typeof CONFIG.PF2E.actorSizes, "sm">;
     usages: typeof CONFIG.PF2E.usages;
+    usageOptions: FormSelectOption[];
+    identificationStatusOptions: FormSelectOption[];
     bulkDisabled: boolean;
     activations: {
         action: ItemActivation;
@@ -45,15 +48,13 @@ interface PhysicalItemSheetData<TItem extends PhysicalItemPF2e> extends ItemShee
     }[];
 }
 interface MaterialSheetEntry {
+    value: string;
     label: string;
-    grades: Partial<Record<PreciousMaterialGrade, {
-        value: string;
-        label: string;
-    }>>;
+    group: string;
 }
 interface MaterialSheetData {
     value: string;
-    materials: Record<string, MaterialSheetEntry>;
+    materials: MaterialSheetEntry[];
 }
 export { PhysicalItemSheetPF2e };
 export type { MaterialSheetData, MaterialSheetEntry, PhysicalItemSheetData };

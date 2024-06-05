@@ -9,7 +9,15 @@ import { IdentificationStatus, MystifiedData } from "@item/physical/index.ts";
 import type { RangeData } from "@item/types.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { WeaponDamage, WeaponFlags, WeaponSource, WeaponSystemData } from "./data.ts";
-import type { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponReloadTime, WeaponTrait } from "./types.ts";
+import type {
+    BaseWeaponType,
+    OtherWeaponTag,
+    WeaponCategory,
+    WeaponGroup,
+    WeaponReloadTime,
+    WeaponTrait,
+} from "./types.ts";
+
 declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     shield?: ShieldPF2e<TParent>;
     static get validTraits(): Record<NPCAttackTrait, string>;
@@ -90,9 +98,9 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     }): MeleePF2e<NonNullable<TParent>>[];
     /** Consume a unit of ammunition used by this weapon */
     consumeAmmo(): Promise<void>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Remove links to this weapon from NPC attacks */
-    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void;
 }
 interface WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     flags: WeaponFlags;

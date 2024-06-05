@@ -4,7 +4,8 @@ import type { ClassTrait } from "@item/class/types.ts";
 import { Price } from "@item/physical/data.ts";
 import { Size } from "@module/data.ts";
 import type { UserPF2e } from "@module/user/index.ts";
-import { KitEntryData, KitSource, KitSystemData } from "./data.ts";
+import { type KitEntryData, KitSource, KitSystemData } from "./data.ts";
+
 declare class KitPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     static get validTraits(): Record<ClassTrait, string>;
     get entries(): KitEntryData[];
@@ -15,7 +16,7 @@ declare class KitPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exten
         containerId?: string;
         size?: Size;
     }): Promise<PhysicalItemPF2e<null>[]>;
-    protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: UserPF2e): Promise<boolean | void>;
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface KitPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly _source: KitSource;

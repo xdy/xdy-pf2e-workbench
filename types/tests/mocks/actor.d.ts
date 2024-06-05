@@ -7,6 +7,7 @@ import type { ActiveEffectPF2e } from "@module/active-effect.ts";
 import type { ScenePF2e } from "@scene";
 import type { TokenDocumentPF2e } from "@scene/token-document/document.ts";
 import { MockCollection } from "./collection.ts";
+
 export declare class MockActor {
     options: DocumentConstructionContext<null>;
     _source: ActorSourcePF2e;
@@ -21,11 +22,11 @@ export declare class MockActor {
     get system(): ActorSystemSource;
     prepareData(): void;
     update(changes: Record<string, unknown>): void;
-    static updateDocuments(updates?: Record<string, unknown>[], _context?: DocumentModificationContext<TokenDocumentPF2e<ScenePF2e | null>>): Promise<ActorPF2e[]>;
+    static updateDocuments(updates?: Record<string, unknown>[], _operation?: Partial<DatabaseUpdateOperation<TokenDocumentPF2e<ScenePF2e | null>>>): Promise<ActorPF2e[]>;
     updateEmbeddedDocuments(type: string, data: {
         _id: string;
     }[]): Promise<void>;
-    createEmbeddedDocuments(type: string, data: ItemSourcePF2e[], _context: DocumentModificationContext<ActorPF2e>): Promise<void>;
+    createEmbeddedDocuments(type: string, data: ItemSourcePF2e[], _context: DatabaseCreateOperation<ActorPF2e>): Promise<void>;
     deleteEmbeddedDocuments(type: string, ids: string[]): Promise<void>;
     toObject(): ActorSourcePF2e;
 }

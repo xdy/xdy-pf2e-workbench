@@ -264,7 +264,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 export function calcRemainingMinutes(useDefault: boolean): number {
     const savedTime: number = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.startTime");
     const savedMinutes = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes");
-    const remainingMinutes: number = Math.clamped(
+    const remainingMinutes: number = Math.clamp(
         savedMinutes ??
             (useDefault
                 ? Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))

@@ -1,10 +1,13 @@
-import { CreaturePF2e, type CharacterPF2e } from "@actor";
-import { ItemType } from "@item/base/data/index.ts";
+import { type CharacterPF2e, CreaturePF2e } from "@actor";
+import type { ActorUpdateOperation } from "@actor/base.ts";
+import type { ItemType } from "@item/base/data/index.ts";
 import type { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import type { RuleElementPF2e } from "@module/rules/index.ts";
+import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { Statistic } from "@system/statistic/index.ts";
 import { FamiliarSource, FamiliarSystemData } from "./data.ts";
+
 declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     /** The familiar's attack statistic, for the rare occasion it must make an attack roll */
     attackStatistic: Statistic;
@@ -24,11 +27,18 @@ declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocum
     /** Skip rule-element preparation if there is no master */
     protected prepareRuleElements(): RuleElementPF2e[];
     prepareDerivedData(): void;
+    /** Detect if a familiar is being reassigned from a master */
+    protected _preUpdate(changed: DeepPartial<this["_source"]>, operation: FamiliarUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
+    /** Remove familiar from former master if the master changed */
+    protected _onUpdate(changed: DeepPartial<this["_source"]>, operation: FamiliarUpdateOperation<TParent>, userId: string): void;
     /** Remove the master's reference to this familiar */
-    protected _onDelete(options: DocumentModificationContext<TParent>, userId: string): void;
+    protected _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void;
 }
 interface FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     readonly _source: FamiliarSource;
     system: FamiliarSystemData;
+}
+interface FamiliarUpdateOperation<TParent extends TokenDocumentPF2e | null> extends ActorUpdateOperation<TParent> {
+    previousMaster?: ActorUUID;
 }
 export { FamiliarPF2e };

@@ -1,5 +1,6 @@
 import type { EffectAreaShape } from "@item/spell/types.ts";
-import { TokenPF2e, type MeasuredTemplatePF2e } from "./index.ts";
+import { type MeasuredTemplatePF2e, TokenPF2e } from "./index.ts";
+
 /**
  * Measure the minimum distance between two rectangles
  * @param r0      The origin rectangle
@@ -30,6 +31,7 @@ interface HighlightGridParams {
         direction?: number;
         width: number | null;
     }>;
+    snappingMode?: number;
     collisionType?: WallRestrictionType;
     preview?: boolean;
 }

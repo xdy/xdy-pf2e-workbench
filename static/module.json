@@ -4,9 +4,9 @@
   "version": "5.66.0",
   "id": "xdy-pf2e-workbench",
   "compatibility": {
-    "minimum": "11.315",
-    "verified": "11.315",
-    "maximum": "11.999"
+    "minimum": "12.325",
+    "verified": "12.325",
+    "maximum": "12.999"
   },
   "relationships": {
     "systems": [
@@ -15,8 +15,8 @@
         "type": "system",
         "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
         "compatibility": {
-          "minimum": "5.15.0",
-          "verified": "5.15.0"
+          "minimum": "6.0.0-beta3",
+          "verified": "6.0.0-beta3"
         }
       }
     ]
@@ -254,8 +254,6 @@
         "caption": "PF2e Workbench"
       }
     ],
-    "manifestPlusVersion": "1.2.0",
-    "allowBugReporter": true,
     "xdy-pf2e-workbench": {
       "pf2e-homebrew": {
         "creatureTraits": {
