@@ -1,3 +1,20 @@
+# [6.0.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.66.0...v6.0.0) (2024-06-05)
+
+
+### Features
+
+* PF2e Workbench now requires PF2e version 6.0.0-beta3 or later, and Foundry v12.325 or later. ([2a3f115](https://github.com/xdy/xdy-pf2e-workbench/commit/2a3f115f2732b71db93ed08d1630f1dbf101b73f)), closes [#1338](https://github.com/xdy/xdy-pf2e-workbench/issues/1338)
+
+
+### BREAKING CHANGES
+
+* PF2e Workbench now requires PF2e version 6.0.0-beta3 or later, and Foundry v12.325 or later.
+
+Changing paused text is disabled for now as it is broken, will try to fix later.
+Same goes for Breath Weapon Reminders.
+
+This release has barely been tested, so there is probably more breakage. Please make github issues when you find something that doesn't work, if there isn't already an issue. PR:s with fixes are even more welcome. :)
+
 # [5.66.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.65.11...v5.66.0) (2024-06-05)
 
 
