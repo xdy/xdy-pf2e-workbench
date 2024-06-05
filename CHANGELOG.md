@@ -1,3 +1,12 @@
+# [5.66.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.65.11...v5.66.0) (2024-06-05)
+
+
+### Features
+
+* BAM: Get rid eval() for action variants ([557827c](https://github.com/xdy/xdy-pf2e-workbench/commit/557827c2d80d18d95e1b4234bff30cdbde36f33a))
+* BAM: Get rid of eval for Actions with a statistic ([9e8b92f](https://github.com/xdy/xdy-pf2e-workbench/commit/9e8b92f8f66a303e6f53898c7346c5fccdbde580))
+* BAM: Remove last eval'ed string ([2eee213](https://github.com/xdy/xdy-pf2e-workbench/commit/2eee213180c34aa96455d5ab55d2fa019ce270e0))
+
 ## [5.65.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.65.10...v5.65.11) (2024-06-05)
 
 
