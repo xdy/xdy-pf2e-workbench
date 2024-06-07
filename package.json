@@ -20,7 +20,8 @@
     "lint": "npm run lint:ts && npm run lint:json && npm run prettier:scss",
     "lint:ts": "eslint ./build ./src --ext .ts",
     "lint:json": "eslint ./static --ext .json --no-eslintrc --plugin json --rule \"json/*: error\"",
-    "lint:fix": "eslint ./build ./src --ext .ts --fix"
+    "lint:fix": "eslint ./build ./src --ext .ts --fix && prettier --write src/styles",
+    "prettier:scss": "prettier --check src/styles"
   },
   "license": "./LICENSE",
   "devDependencies": {
