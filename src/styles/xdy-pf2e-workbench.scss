@@ -111,7 +111,6 @@
     background: rgba(0 0 0 / 10%);
 }
 
-
 .roll-app .roll-app-table tbody button {
     all: revert;
     background: unset;
@@ -156,22 +155,21 @@
 .xdy-pf2e-workbench {
     &.settings-menu {
         .window-content {
-          padding: 0;
+            padding: 0;
         }
         form {
             height: 100%;
             section {
-              padding: 1rem;
-              overflow: hidden auto;
+                padding: 1rem;
+                overflow: hidden auto;
             }
             footer {
-              margin: 1rem;
-              flex: 0;
+                margin: 1rem;
+                flex: 0;
             }
         }
     }
 }
-
 
 .bam-dialog {
     container: bam-dialog / inline-size;
@@ -248,20 +246,20 @@
 }
 
 @function bamWidth($columns) {
-    @return 26 + $columns*250px;
+    @return 26 + $columns * 250px;
 }
 
 @for $i from 1 through 40 {
     @container bam-dialog (width <= #{bamWidth($i+1)}) and (width > #{bamWidth($i)}) {
         .action-list {
-            --bam-columns:#{$i};
+            --bam-columns: #{$i};
         }
     }
 }
 
-@container bam-dialog (width < #{bamWidth(1)}){
+@container bam-dialog (width < #{bamWidth(1)}) {
     .action-list {
-	--bam-columns: 1;
+        --bam-columns: 1;
     }
 }
 
