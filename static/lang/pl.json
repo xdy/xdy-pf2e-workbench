@@ -38,7 +38,7 @@
           "Demoralize": "Przestraszenie",
           "DisableDevice": "Unieszkodliwienie urządzenia",
           "Disarm": "Rozbrojenie",
-          "Feint": "Finta",
+          "Feint": "Zmyłka",
           "ForceOpen": "Otwarcie siłą",
           "GatherInformation": "Zbieranie informacji",
           "Grapple": "Złapanie",
@@ -95,7 +95,7 @@
           }
         },
         "compendiumNotFound": "Kompendium {compendiumName} nie znalezione",
-        "macroNotFound": "Macro {macroName} nie znalezione",
+        "macroNotFound": "Makro {macroName} nie znalezione",
         "bamActionsPerColumn": {
           "name": "BAM: Przybliżone akcje na wiersz",
           "hint": "Przybliżona liczba akcji na wiersz w oknie dialogowym Makra akcji podstawowych. Rzeczywista liczba akcji na wiersz będzie najbliższą liczbą akcji na wiersz, która zmieści się w oknie dialogowym."
@@ -122,7 +122,7 @@
         "selectOneActor": "Musisz wybrać jednego aktora.",
         "disabled": "Wyłączona z powodu braku możliwości odzyskania więcej niż 1 punktu skupienia.",
         "one": "jeden",
-        "enabled": "Odzyskaj {regain} punktów skupienia. <br/>Kliknij<b>TYLKO</b> jeśli masz {details} od ostatniego Refocusa."
+        "enabled": "Odzyskaj {regain} punktów skupienia. <br/>Kliknij<b>TYLKO</b> jeśli masz {details} od ostatniego Ponownego Skupienia."
       },
       "buildNpcSpellbookJournal": {
         "title": "Tworzenie dziennika zaklęć NPC",
@@ -166,7 +166,7 @@
         "no": "Obrażenia nieśmiercionośne to po prostu obrażenia",
         "name": "... w zależności od tego, czy ostatnie obrażenia nie były śmiertelne.",
         "unconsciousForCharacters": "Zabójstwa atakami nieśmiercionośnymi nie zabijają postaci + towarzyszy",
-        "hint": "Jeśli ostatnie otrzymane obrażenia nie są śmiertelne, gracz nie umiera. Zamiast tego jest nieprzytomny z 0 PŻ. Wymaga włączenia powyższego ustawienia."
+        "hint": "Jeśli ostatnie otrzymane obrażenia nie są śmiertelne, gracz nie umiera. Zamiast tego jest nieprzytomny z 0 PW. Wymaga włączenia powyższego ustawienia."
       },
       "autoRollDamageAllow": {
         "players": "Gracze",
@@ -257,8 +257,8 @@
         "addOneForCharacters": "Dodaj jeden, dla postaci + chowańców",
         "addWoundedLevelForCharacters": "Dodaj +1 poziomu zranienia dla postaci + towarzyszy",
         "deliberateDeathMessage": "{name} może <b>przed uzyskaniem Umierania</b> w wyniku ataku lub zdolności innej istoty, jeśli ta istota znajduje się w zasięgu walki wręcz, wykonać Atak w walce wręcz przeciwko wywołującej go istocie.<br>Usuń efekt \"Użyto celowej śmierci\", jeśli faktycznie nie można go użyć.",
-        "hint": "Ustaw automatycznie zwiększenie poziomu Umierania przy 0 PŻ.",
-        "name": "Automatycznie zwiększenie poziomu Umierania przy 0 PŻ.",
+        "hint": "Ustaw automatycznie zwiększenie poziomu Umierania przy 0 PW.",
+        "name": "Automatycznie zwiększenie poziomu Umierania przy 0 PW.",
         "addWoundedLevel": "Dodaj +1 poziomu zranienia, dla wszystkich"
       },
       "autoGainDyingIfTakingDamageWhenAlreadyDying": {
@@ -269,8 +269,8 @@
         "addForCharacters": "Dodaj umieranie dla postaci + towarzyszy"
       },
       "autoRemoveDyingAtGreaterThanZeroHP": {
-        "name": "Automatycznie usuwa Umieranie po uzdrowieniu powyżej 0 PŻ.",
-        "hint": "Ustawienie automatycznie usuwające umieranie po wyleczeniu powyżej 0 PŻ.",
+        "name": "Automatycznie usuwa Umieranie po uzdrowieniu powyżej 0 PW.",
+        "hint": "Ustawienie automatycznie usuwające umieranie po wyleczeniu powyżej 0 PW.",
         "no": "Nie",
         "removeDying": "Usuń stan Umierania dla wszystkich",
         "removeDyingForCharacters": "Usunięcie stanu Umierania dla postaci + towarzyszy"
@@ -367,8 +367,8 @@
         "name": "Niestandardowy tekst używany jako tekst pauzy."
       },
       "autoRemoveUnconsciousAtGreaterThanZeroHP": {
-        "hint": "Ustawienie automatycznego usuwania nieprzytomności w przypadku wyleczenia do ponad 0 PŻ.",
-        "name": "Automatycznie usuwa nieprzytomność, jeśli zostanie wyleczona do poziomu wyższego niż 0 PŻ."
+        "hint": "Ustawienie automatycznego usuwania nieprzytomności w przypadku wyleczenia do ponad 0 PW.",
+        "name": "Automatycznie usuwa nieprzytomność, jeśli zostanie wyleczona do poziomu wyższego niż 0 PW."
       },
       "npcMystifier": {
         "hint": "Zaznacz, aby włączyć utajnienie npc, zmieniając nazwy tokenów na aktywnej scenie w oparciu o ich cechy, jeśli podczas dodawania do sceny zostanie kliknięty klawisz Ctrl (konfigurowalny). Zapisz ustawienia, aby pokazać/ukryć dodatkowe opcje.",
@@ -484,23 +484,23 @@
         "ignore": "Nic",
         "all": "Wszyscy",
         "none": "Brak postaci",
-        "addedFor": "Dodano 1 punkt bohatera dla {name}",
+        "addedFor": "Dodano 1 Punkt Bohaterstwa dla {name}",
         "timerValue": "Wartość timera (zakres 0 - {maxMinutes})",
         "add": "Dodaj",
-        "addedToForAll": "{heroPoints} Punktów bohatera dodane dla wszystkich",
-        "addOne": "<b>Sekcja 2</b> - Dodaje jeden punkt bohatera wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu)",
+        "addedToForAll": "{heroPoints} Punktów bohaterstwa dodane dla wszystkich",
+        "addOne": "<b>Sekcja 2</b> - Dodaje jeden Punkt Bohaterstwa wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu)",
         "defaultTimeoutMinutes": 60,
         "doWhat": "<b>Sekcja 1</b> - Wybierz, co zrobić z punktami bohatera <em>wszystkich postaci</em> o następującej wartości",
         "hint": "Opcja obsługi punktów bohatera z opcjonalnym powiązaniem klawiszy, aby otworzyć okno dialogowe, które może zresetować lub dodać punkty bohatera dla wszystkich postaci, dodać jeden punkt bohatera do losowej (lub wybranej) postaci i, co najważniejsze, uruchomić licznik czasu, aby okno dialogowe pojawiło się ponownie po (domyślnie) 60 minutach.",
         "instructions": "Należy pamiętać, że licznik czasu jest wstrzymany, gdy to okno dialogowe jest otwarte. Zamknij to okno dialogowe bez naciskania żadnego z tych przycisków, aby wyłączyć wstrzymanie licznika czasu, lub naciśnij odpowiedni przycisk, aby wykonać jego polecenie.",
         "minutesLeft": "minut pozostałych na bieżącym liczniku",
         "name": "Włącz obsługę Punktów Bohaterstwa.",
-        "resetToForAll": "Punkty bohatera zresetowane do {heroPoints} dla wszystkich",
+        "resetToForAll": "Punkty bohaterstwa zresetowane do {heroPoints} dla wszystkich",
         "showAfter": "Pokaż okno dialogowe ponownie po tylu minutach",
         "startTimerLabel": "Zapisywanie zmian i uruchamianie/kontynuowanie odliczania czasu",
         "thisMany": "Tak wielu",
-        "timerStopped": "Licznik punktów bohatera został zatrzymany.",
-        "title": "Obsługa Punktów Bohatera",
+        "timerStopped": "Licznik punktów bohaterstwa został zatrzymany.",
+        "title": "Obsługa Punktów Bohaterstwa",
         "willBeResetIn": "Obsługa Punktów Bohatera powraca za {remainingMinutes} minut ({time}).",
         "resetTo": "Reset do",
         "noRunningTimer": "Brak uruchomionego licznika",
@@ -535,7 +535,7 @@
       },
       "keeleysHeroPointRule": {
         "hint": "Zasada domowa preferowana przez pewnego dewelopera Paizo: jeśli naturalny wynik ponownego rzutu na punkty bohatera wynosi 10 lub mniej, po fakcie stosowana jest premia w wysokości 10.",
-        "name": "Reguła punktów bohatera Keeleya",
+        "name": "Reguła punktów bohaterstwa Keeleya",
         "bonusTag": "Niższy wynik przerzutu +10"
       },
       "enableAutomaticMove": {
@@ -577,8 +577,8 @@
         "name": "Użyj innych cech"
       },
       "heroPointHandlerKey": {
-        "hint": "Naciśnięcie klawisza otwiera okno dialogowe obsługi punktów bohatera, które umożliwia resetowanie i dodawanie punktów bohatera z cogodzinnym przypomnieniem.",
-        "name": "Przycisk otwiera okno dialogowe obsługi punktu bohatera."
+        "hint": "Naciśnięcie klawisza otwiera okno dialogowe obsługi punktów bohatera, które umożliwia resetowanie i dodawanie punktów bohaterstwa z cogodzinnym przypomnieniem.",
+        "name": "Przycisk otwiera okno dialogowe obsługi Punktów Bohaterstwa."
       },
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
         "hint": "Utajniaj przedmioty tylko wtedy, gdy są tego poziomu lub wyższego.",
@@ -600,7 +600,7 @@
       },
       "heroPointHandlerStartTimerOnReady": {
         "hint": "Zaznacz, aby automatycznie uruchomić licznik czasu obsługi Punktów Bohaterów, gdy gra będzie gotowa.",
-        "name": "... i automatycznie uruchomi Obsługę Punktów Bohatera."
+        "name": "... i automatycznie uruchomi Obsługę Punktów Bohaterstwa."
       },
       "housepatcher": {
         "hint": "(NAPRAWDĘ EKSPERYMENTALNE) Wprowadź tablicę json, aby załatać kompendia systemowe. Dokumentacja znajduje się w housepatcher.md na githubie.",
@@ -654,12 +654,12 @@
         "name": "Wyśrodkuj obraz pauzy z tekstem nad nim."
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
-        "name": "... przez tyle minut, aż otworzy się okno dialogowe Obsługi Punktów Bohatera.",
-        "hint": "Ustaw domyślną (i maksymalną) liczbę minut do następnego otwarcia obsługi Punktów Bohatera."
+        "name": "... przez tyle minut, aż otworzy się okno dialogowe Obsługi Punktów Bohaterstwa.",
+        "hint": "Ustaw domyślną (i maksymalną) liczbę minut do następnego otwarcia obsługi Punktów Bohaterstwa."
       },
       "heropointHandlerNotification": {
-        "name": "... i wysłać powiadomienie o przyznaniu Punktu Bohatera.",
-        "hint": "Zaznacz, aby automatycznie wysyłać powiadomienie, gdy osoba otrzyma Punkt Bohatera."
+        "name": "... i wysłać powiadomienie o przyznaniu Punktów Bohaterstwa.",
+        "hint": "Zaznacz, aby automatycznie wysyłać powiadomienie, gdy osoba otrzyma Punkt Bohaterstwa."
       },
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
         "hint": "...zmodyfikowany przez ten mnożnik (tak, wiem, powinienem pokazać ostateczną wartość)",
