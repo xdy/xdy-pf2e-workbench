@@ -92,16 +92,16 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
     ) {
         const pack = game.packs.get(compendiumName);
         if (pack) {
-            const macro_data = (await pack.getDocuments()).find((i) => i.name === macroName)?.toObject();
-            if (macro_data) {
-                const temp_macro = new Macro(macro_data);
-                temp_macro.permission.default = CONST.DOCUMENT_PERMISSION_LEVELS.OWNER;
-                temp_macro.execute();
+            let macro = (await pack.getDocuments({name: macroName}))?.[0];
+            if (macro) {
+                if (!macro.canExecute)
+                    macro = new macro.constructor(foundry.utils.mergeObject(macro.toObject(), {"-=_id": null, "ownership.default": CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER}, {performDeletions: true, inplace: true}));
+                macro.execute();
             } else {
-                ui.notifications.error("Macro " + macroName + " not found");
+                ui.notifications.error(\`Macro \${macroName} not found\`);
             }
         } else {
-            ui.notifications.error("Compendium " + compendiumName + " not found");
+            ui.notifications.error(\`Compendium \${compendiumName} not found\`);
         }
     }
     _executeMacroByName('XDY DO_NOT_IMPORT ${macroName}');
