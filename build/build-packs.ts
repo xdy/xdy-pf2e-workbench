@@ -95,7 +95,7 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
             const macro_data = (await pack.getDocuments()).find((i) => i.name === macroName)?.toObject();
             if (macro_data) {
                 const temp_macro = new Macro(macro_data);
-                temp_macro.permission.default = CONST.DOCUMENT_PERMISSION_LEVELS.OWNER;
+                temp_macro.permission.default = CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER .OWNER;
                 temp_macro.execute();
             } else {
                 ui.notifications.error("Macro " + macroName + " not found");
