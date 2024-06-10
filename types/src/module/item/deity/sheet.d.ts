@@ -5,7 +5,6 @@ import type { SkillSlug } from "@actor/types.ts";
 import { type DeityPF2e } from "@item";
 import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
-
 export declare class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
     static get defaultOptions(): ItemSheetOptions;
     getData(options?: Partial<ItemSheetOptions>): Promise<DeitySheetData>;

@@ -4,7 +4,6 @@
 import type { ActorPF2e } from "@actor";
 import { Immunity, IWRSource, Resistance, Weakness } from "@actor/data/iwr.ts";
 import { ImmunityType, ResistanceType, WeaknessType } from "@actor/types.ts";
-
 declare class IWREditor<TActor extends ActorPF2e> extends DocumentSheet<TActor, IWREditorOptions> {
     #private;
     category: ListCategory;

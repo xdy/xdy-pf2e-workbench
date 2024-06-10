@@ -5,7 +5,6 @@ import { OtherConsumableTag } from "@item/consumable/types.ts";
 import { PreciousMaterialType } from "@item/physical/types.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { OtherWeaponTag } from "@item/weapon/types.ts";
-
 declare const ancestryTraits: {
     aiuvarin: string;
     anadi: string;
@@ -544,6 +543,7 @@ declare const weaponTraits: {
     "two-hand-d12": string;
     unarmed: string;
     vehicular: string;
+    venomous: string;
     "versatile-acid": string;
     "versatile-b": string;
     "versatile-cold": string;
@@ -658,6 +658,7 @@ declare const npcAttackTraits: {
     "deadly-2d12": string;
     "deadly-3d12": string;
     "deadly-4d12": string;
+    illusion: string;
     incorporeal: string;
     radiation: string;
     "reach-0": string;
@@ -881,6 +882,7 @@ declare const npcAttackTraits: {
     "two-hand-d12": string;
     unarmed: string;
     vehicular: string;
+    venomous: string;
     "versatile-acid": string;
     "versatile-b": string;
     "versatile-cold": string;
@@ -2575,6 +2577,7 @@ declare const traitDescriptions: {
     vanara: string;
     vishkanya: string;
     vehicular: string;
+    venomous: string;
     "versatile-acid": string;
     "versatile-b": string;
     "versatile-cold": string;

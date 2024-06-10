@@ -1,4 +1,5 @@
-import type BaseEffectSource, { BaseEffectSourceData } from "./base-effect-source.d.ts";
+import type BaseEffectSource from "./base-effect-source.d.ts";
+import type { BaseEffectSourceData } from "./base-effect-source.d.ts";
 import type BaseLightSource from "./base-light-source.d.ts";
 import type RenderedEffectSource from "./rendered-effect-source.d.ts";
 

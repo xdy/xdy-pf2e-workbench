@@ -1,7 +1,6 @@
 import type { DataSchema } from "../data/fields.d.ts";
 import type * as packages from "../packages/module.d.ts";
 import type * as abstract from "./module.d.ts";
-
 /**
  * A specialized subclass of DataModel, intended to represent a Document's type-specific data.
  * Systems or Modules that provide DataModel implementations for sub-types of Documents (such as Actors or Items)

@@ -1,28 +1,15 @@
 import type { CombatantPF2e } from "@module/encounter/combatant.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { ScenePF2e, TokenDocumentPF2e } from "@scene";
-import type {
-    AdjustDarknessLevelRegionBehaviorSchema,
-} from "types/foundry/client-esm/data/region-behaviors/adjust-darkness-level.d.ts";
-import type {
-    ExecuteMacroRegionBehaviorTypeSchema,
-} from "types/foundry/client-esm/data/region-behaviors/execute-macro.d.ts";
-import type {
-    ExecuteScriptRegionBehaviorTypeSchema,
-} from "types/foundry/client-esm/data/region-behaviors/execute-script.d.ts";
+import type { AdjustDarknessLevelRegionBehaviorSchema } from "types/foundry/client-esm/data/region-behaviors/adjust-darkness-level.d.ts";
+import type { ExecuteMacroRegionBehaviorTypeSchema } from "types/foundry/client-esm/data/region-behaviors/execute-macro.d.ts";
+import type { ExecuteScriptRegionBehaviorTypeSchema } from "types/foundry/client-esm/data/region-behaviors/execute-script.d.ts";
 import type { PauseGameRegionBehaviorTypeSchema } from "types/foundry/client-esm/data/region-behaviors/pause-game.d.ts";
-import type {
-    SuppressWeatherRegionBehaviorTypeSchema,
-} from "types/foundry/client-esm/data/region-behaviors/suppress-weather.d.ts";
-import type {
-    TeleportTokenRegionBehaviorTypeSchema,
-} from "types/foundry/client-esm/data/region-behaviors/teleport-token.d.ts";
-import type {
-    ToggleBehaviorRegionBehaviorTypeSchema,
-} from "types/foundry/client-esm/data/region-behaviors/toggle-behavior.d.ts";
+import type { SuppressWeatherRegionBehaviorTypeSchema } from "types/foundry/client-esm/data/region-behaviors/suppress-weather.d.ts";
+import type { TeleportTokenRegionBehaviorTypeSchema } from "types/foundry/client-esm/data/region-behaviors/teleport-token.d.ts";
+import type { ToggleBehaviorRegionBehaviorTypeSchema } from "types/foundry/client-esm/data/region-behaviors/toggle-behavior.d.ts";
 import type { RegionBehaviorPF2e } from "./document.ts";
 import type { EnvironmentTypeData } from "./environment.ts";
-
 type RegionEventPF2e = RegionEvent<TokenDocumentPF2e, UserPF2e, CombatantPF2e, RegionDocument<ScenePF2e | null>>;
 interface BaseRegionBehavior<TParent extends RegionDocument = RegionDocument> extends RegionBehaviorPF2e<TParent> {
     get scene(): ScenePF2e | null;

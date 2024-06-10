@@ -1,6 +1,5 @@
 import type { TokenDocumentPF2e } from "@scene";
 import { Predicate } from "@system/predication.ts";
-
 /** Prompt the user to target a token */
 declare class MarkTargetPrompt {
     #private;

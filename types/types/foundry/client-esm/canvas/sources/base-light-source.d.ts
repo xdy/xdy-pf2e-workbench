@@ -1,4 +1,5 @@
-import type RenderedEffectSource, { RenderedEffectSourceData } from "./rendered-effect-source.d.ts";
+import type RenderedEffectSource from "./rendered-effect-source.d.ts";
+import type { RenderedEffectSourceData } from "./rendered-effect-source.d.ts";
 
 /**
  * A specialized subclass of the PointSource abstraction which is used to control the rendering of light sources.

@@ -1,7 +1,6 @@
 import type { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
 import { UserVisibility } from "@scripts/ui/user-visibility.ts";
-
 /** Censor enriched HTML according to metagame knowledge settings */
 declare class TextEditorPF2e extends TextEditor {
     #private;

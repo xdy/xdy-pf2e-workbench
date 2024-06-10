@@ -176,6 +176,7 @@ declare const resistanceTypes: {
     alchemical: string;
     "all-damage": string;
     "area-damage": string;
+    axes: string;
     bleed: string;
     bludgeoning: string;
     cold: string;

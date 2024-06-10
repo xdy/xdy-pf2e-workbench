@@ -2,7 +2,6 @@ import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { AuraRenderers } from "./aura/index.ts";
 import { FlankingHighlightRenderer } from "./flanking-highlight/renderer.ts";
-
 declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
@@ -25,8 +24,6 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     get highlightId(): string;
     /** Bounds used for mechanics, such as flanking and drawing auras */
     get mechanicalBounds(): PIXI.Rectangle;
-    /** Short-circuit calculation for long sight ranges */
-    get sightRange(): number;
     isAdjacentTo(token: TokenPF2e): boolean;
     /**
      * Determine whether this token can flank another—given that they have a flanking buddy on the opposite side

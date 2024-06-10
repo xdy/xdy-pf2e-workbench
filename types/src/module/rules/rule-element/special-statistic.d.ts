@@ -6,7 +6,6 @@ import { PredicateField } from "@system/schema-data-fields.ts";
 import type { NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "../index.ts";
 import type { RuleElementSchema } from "./data.ts";
-
 /** Create a special-purpose statistic for use in checks and as a DC */
 declare class SpecialStatisticRuleElement extends RuleElementPF2e<SpecialStatisticSchema> {
     static validActorTypes: ("character" | "npc")[];

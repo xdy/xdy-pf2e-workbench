@@ -3,7 +3,6 @@ import type { ItemSystemData, ItemSystemSource, ItemTraitsNoRarity } from "@item
 import type { MagicTradition } from "@item/spell/index.ts";
 import type { CheckRoll } from "@system/check/index.ts";
 import type { EffectTrait } from "./types.ts";
-
 interface AbstractEffectSystemSource extends ItemSystemSource {
     traits: EffectTraits;
     /** Whether this effect originated from a spell */

@@ -1,6 +1,5 @@
 import type { ActorPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
-
 /** The size property of creatures and equipment */
 declare const SIZES: readonly ["tiny", "sm", "med", "lg", "huge", "grg"];
 declare const SIZE_SLUGS: readonly ["tiny", "small", "medium", "large", "huge", "gargantuan"];

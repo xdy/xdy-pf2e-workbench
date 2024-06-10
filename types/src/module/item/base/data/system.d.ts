@@ -4,7 +4,6 @@ import type { Predicate } from "@system/predication.ts";
 import type * as fields from "types/foundry/common/data/fields.d.ts";
 import type { ItemTrait } from "../types.ts";
 import type { ItemType } from "./index.ts";
-
 type BaseItemSourcePF2e<TType extends ItemType, TSystemSource extends ItemSystemSource = ItemSystemSource> = foundry.documents.ItemSource<TType, TSystemSource> & {
     flags: ItemSourceFlagsPF2e;
 };

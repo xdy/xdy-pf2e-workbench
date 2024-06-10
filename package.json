@@ -1,6 +1,6 @@
 {
   "name": "xdy-pf2e-workbench",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "Random assortment of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
   "private": true,
   "type": "module",
@@ -20,7 +20,8 @@
     "lint": "npm run lint:ts && npm run lint:json && npm run prettier:scss",
     "lint:ts": "eslint ./build ./src --ext .ts",
     "lint:json": "eslint ./static --ext .json --no-eslintrc --plugin json --rule \"json/*: error\"",
-    "lint:fix": "eslint ./build ./src --ext .ts --fix"
+    "lint:fix": "eslint ./build ./src --ext .ts --fix && prettier --write src/styles",
+    "prettier:scss": "prettier --check src/styles"
   },
   "license": "./LICENSE",
   "devDependencies": {
@@ -73,9 +74,9 @@
     "socket.io-client": "^4.7.5",
     "tinymce": "^7.1.2",
     "tsconfig-paths": "^4.2.0",
-    "tsx": "^4.11.2",
+    "tsx": "^4.15.1",
     "typescript": "^5.4.5",
-    "vite": "^5.2.12",
+    "vite": "^5.2.13",
     "vite-plugin-checker": "^0.6.4",
     "vite-plugin-static-copy": "^1.0.5",
     "vite-tsconfig-paths": "^4.3.2",

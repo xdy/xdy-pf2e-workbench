@@ -1,6 +1,5 @@
 import type { ActorPF2e } from "@actor";
 import type { ScenePF2e } from "@scene";
-
 export declare class MockToken {
     actor: ActorPF2e | null;
     readonly parent: ScenePF2e | null;

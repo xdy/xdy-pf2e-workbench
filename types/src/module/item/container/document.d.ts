@@ -5,7 +5,6 @@ import { Bulk } from "@item/physical/bulk.ts";
 import { PhysicalItemPF2e } from "@item/physical/document.ts";
 import type { UserPF2e } from "@module/user/index.ts";
 import type { ContainerSource, ContainerSystemData } from "./data.ts";
-
 declare class ContainerPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     static get validTraits(): Record<EquipmentTrait, string>;
     /** This container's contents, reloaded every data preparation cycle */

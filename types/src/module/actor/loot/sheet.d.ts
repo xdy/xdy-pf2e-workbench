@@ -5,7 +5,6 @@ import type { LootPF2e } from "@actor";
 import type { ActorSheetDataPF2e, InventoryItem, SheetInventory } from "@actor/sheet/data-types.ts";
 import type { PhysicalItemPF2e } from "@item";
 import { ActorSheetPF2e } from "../sheet/base.ts";
-
 export declare class LootSheetPF2e<TActor extends LootPF2e> extends ActorSheetPF2e<TActor> {
     static get defaultOptions(): ActorSheetOptions;
     get template(): string;

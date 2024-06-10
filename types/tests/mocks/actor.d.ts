@@ -7,7 +7,6 @@ import type { ActiveEffectPF2e } from "@module/active-effect.ts";
 import type { ScenePF2e } from "@scene";
 import type { TokenDocumentPF2e } from "@scene/token-document/document.ts";
 import { MockCollection } from "./collection.ts";
-
 export declare class MockActor {
     options: DocumentConstructionContext<null>;
     _source: ActorSourcePF2e;

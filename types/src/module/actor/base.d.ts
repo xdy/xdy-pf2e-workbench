@@ -1,12 +1,4 @@
-import {
-    ActorAlliance,
-    ActorDimensions,
-    ActorInstances,
-    ApplyDamageParams,
-    AuraData,
-    EmbeddedItemInstances,
-    SaveType,
-} from "@actor/types.ts";
+import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AuraData, EmbeddedItemInstances, SaveType } from "@actor/types.ts";
 import type { AbstractEffectPF2e, ConditionPF2e, ContainerPF2e, PhysicalItemPF2e, ShieldPF2e } from "@item";
 import { ItemPF2e } from "@item";
 import type { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/base/data/index.ts";
@@ -23,12 +15,7 @@ import type { UserPF2e } from "@module/user/document.ts";
 import type { ScenePF2e } from "@scene/document.ts";
 import { TokenDocumentPF2e } from "@scene/token-document/document.ts";
 import type { DamageType } from "@system/damage/types.ts";
-import type {
-    ArmorStatistic,
-    PerceptionStatistic,
-    Statistic,
-    StatisticDifficultyClass,
-} from "@system/statistic/index.ts";
+import type { ArmorStatistic, PerceptionStatistic, Statistic, StatisticDifficultyClass } from "@system/statistic/index.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ActorConditions } from "./conditions.ts";
 import { Abilities, VisionLevel } from "./creature/data.ts";
@@ -40,7 +27,6 @@ import { ActorInventory } from "./inventory/index.ts";
 import type { ActorSheetPF2e } from "./sheet/base.ts";
 import type { ActorSpellcasting } from "./spellcasting.ts";
 import type { ActorType } from "./types.ts";
-
 /**
  * Extend the base Actor class to implement additional logic specialized for PF2e.
  * @category Actor
@@ -218,7 +204,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
      * @param containerId Id of the container that will contain the item.
      * @return The target item, if the transfer is successful, or otherwise `null`.
      */
-    transferItemToActor(targetActor: ActorPF2e, item: ItemPF2e<ActorPF2e>, quantity: number, containerId?: string, newStack?: boolean): Promise<PhysicalItemPF2e<ActorPF2e> | null>;
+    transferItemToActor(targetActor: ActorPF2e, item: ItemPF2e<ActorPF2e>, quantity: number, containerId?: string, newStack?: boolean, isPurchase?: boolean | null): Promise<PhysicalItemPF2e<ActorPF2e> | null>;
     addToInventory(itemSource: PhysicalItemSource, container?: ContainerPF2e<this>, newStack?: boolean): Promise<PhysicalItemPF2e<this> | null>;
     /** Move an item into the inventory into or out of a container */
     stowOrUnstow(item: PhysicalItemPF2e<this>, container?: ContainerPF2e<this>): Promise<void>;

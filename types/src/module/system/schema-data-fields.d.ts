@@ -1,23 +1,8 @@
 import { Predicate, PredicateStatement, RawPredicate } from "@system/predication.ts";
 import { SlugCamel } from "@util";
 import type DataModel from "types/foundry/common/abstract/data.d.ts";
-import type {
-    ArrayFieldOptions,
-    CleanFieldOptions,
-    DataField,
-    DataFieldOptions,
-    DataFieldValidationOptions,
-    DataSchema,
-    MaybeSchemaProp,
-    ModelPropFromDataField,
-    NumberField,
-    ObjectFieldOptions,
-    SourcePropFromDataField,
-    StringField,
-    StringFieldOptions,
-} from "types/foundry/common/data/fields.d.ts";
+import type { ArrayFieldOptions, CleanFieldOptions, DataField, DataFieldOptions, DataFieldValidationOptions, DataSchema, MaybeSchemaProp, ModelPropFromDataField, NumberField, ObjectFieldOptions, SourcePropFromDataField, StringField, StringFieldOptions } from "types/foundry/common/data/fields.d.ts";
 import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.d.ts";
-
 declare const fields: typeof foundry.data.fields;
 /** A `SchemaField` that preserves fields not declared in its `DataSchema` */
 declare class LaxSchemaField<TDataSchema extends DataSchema> extends fields.SchemaField<TDataSchema> {
@@ -46,6 +31,10 @@ declare class StrictArrayField<TElementField extends DataField, TSourceProp exte
     /** Parent method assumes array-wrapping: pass through unchanged */
     protected _cleanType(value: unknown): unknown;
     initialize(value: JSONValue, model: ConstructorOf<DataModel>, options: ArrayFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>): MaybeSchemaProp<TModelProp, TRequired, TNullable, THasInitial>;
+}
+/** An array field that will prune invalid elements without complaint */
+declare class LaxArrayField<TElementField extends DataField, TSourceProp extends Partial<SourcePropFromDataField<TElementField>>[] = SourcePropFromDataField<TElementField>[], TModelProp extends object = ModelPropFromDataField<TElementField>[], TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ArrayField<TElementField, TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+    protected _validateElements(value: unknown[], options?: DataFieldValidationOptions): void | DataModelValidationFailure;
 }
 declare class StrictObjectField<TSourceProp extends object, TModelProp extends object = TSourceProp, TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true> extends fields.ObjectField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
     protected _cast(value: unknown): unknown;
@@ -85,7 +74,7 @@ declare class PredicateField<TRequired extends boolean = true, TNullable extends
     initialize(value: RawPredicate, model: ConstructorOf<foundry.abstract.DataModel>, options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>): MaybeSchemaProp<Predicate, TRequired, TNullable, THasInitial>;
 }
 type RecordFieldModelProp<TKeyField extends StringField<string, string, true, false, false> | NumberField<number, number, true, false, false>, TValueField extends DataField, TDense extends boolean = false> = TDense extends true ? Record<ModelPropFromDataField<TKeyField>, ModelPropFromDataField<TValueField>> : TDense extends false ? Partial<Record<ModelPropFromDataField<TKeyField>, ModelPropFromDataField<TValueField>>> : Record<ModelPropFromDataField<TKeyField>, ModelPropFromDataField<TValueField>> | Partial<Record<ModelPropFromDataField<TKeyField>, ModelPropFromDataField<TValueField>>>;
-type RecordFieldSourceProp<TKeyField extends StringField<string, string, true, false, false> | NumberField<number, number, true, false, false>, TValueField extends DataField,
+type RecordFieldSourceProp<TKeyField extends StringField<string, string, true, false, false> | NumberField<number, number, true, false, false>, TValueField extends DataField, 
 /** Whether this is to be treated as a "dense" record; i.e., any valid key should return a value */
 TDense extends boolean = false> = TDense extends true ? Record<SourcePropFromDataField<TKeyField>, SourcePropFromDataField<TValueField>> : TDense extends false ? Partial<Record<SourcePropFromDataField<TKeyField>, SourcePropFromDataField<TValueField>>> : Record<SourcePropFromDataField<TKeyField>, SourcePropFromDataField<TValueField>> | Partial<Record<SourcePropFromDataField<TKeyField>, SourcePropFromDataField<TValueField>>>;
 declare class RecordField<TKeyField extends StringField<string, string, true, false, false> | NumberField<number, number, true, false, false>, TValueField extends DataField, TRequired extends boolean = true, TNullable extends boolean = false, THasInitial extends boolean = true, TDense extends boolean = false> extends fields.ObjectField<RecordFieldSourceProp<TKeyField, TValueField, TDense>, RecordFieldModelProp<TKeyField, TValueField, TDense>, TRequired, TNullable, THasInitial> {
@@ -104,4 +93,4 @@ declare class NullField extends fields.DataField<null, null, true, true, true> {
     constructor();
     protected _cast(): null;
 }
-export { DataUnionField, LaxSchemaField, NullField, PredicateField, RecordField, SlugField, StrictArrayField, StrictBooleanField, StrictNumberField, StrictObjectField, StrictSchemaField, StrictStringField, };
+export { DataUnionField, LaxArrayField, LaxSchemaField, NullField, PredicateField, RecordField, SlugField, StrictArrayField, StrictBooleanField, StrictNumberField, StrictObjectField, StrictSchemaField, StrictStringField, };

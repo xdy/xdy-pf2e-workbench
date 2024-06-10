@@ -1,16 +1,4 @@
-import type {
-    ActorAttributes,
-    ActorAttributesSource,
-    ActorDetailsSource,
-    ActorHitPoints,
-    ActorHitPointsSource,
-    ActorSystemData,
-    ActorSystemSource,
-    ActorTraitsSource,
-    AttributeBasedTraceData,
-    BaseActorSourcePF2e,
-    StrikeData,
-} from "@actor/data/base.ts";
+import type { ActorAttributes, ActorAttributesSource, ActorDetailsSource, ActorHitPoints, ActorHitPointsSource, ActorSystemData, ActorSystemSource, ActorTraitsSource, AttributeBasedTraceData, BaseActorSourcePF2e, StrikeData } from "@actor/data/base.ts";
 import type { ActorSizePF2e } from "@actor/data/size.ts";
 import type { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import type { AttributeString, MovementType, SaveType, SkillSlug } from "@actor/types.ts";
@@ -18,7 +6,6 @@ import type { LabeledNumber, Size, ValueAndMax, ZeroToThree } from "@module/data
 import type { ArmorClassTraceData } from "@system/statistic/index.ts";
 import type { PerceptionTraceData } from "@system/statistic/perception.ts";
 import type { CreatureActorType, CreatureTrait, Language, SenseAcuity, SenseType, SpecialVisionType } from "./types.ts";
-
 type BaseCreatureSource<TType extends CreatureActorType, TSystemSource extends CreatureSystemSource> = BaseActorSourcePF2e<TType, TSystemSource>;
 /** Skill and Lore statistics for rolling. */
 interface CreatureSystemSource extends ActorSystemSource {

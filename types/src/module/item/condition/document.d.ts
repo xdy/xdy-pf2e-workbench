@@ -6,7 +6,6 @@ import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { ConditionSource, ConditionSystemData, PersistentDamageData } from "./data.ts";
 import { ConditionKey, ConditionSlug } from "./types.ts";
-
 declare class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     active: boolean;
     get badge(): EffectBadge | null;

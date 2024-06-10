@@ -1,14 +1,7 @@
 import type { ActorPF2e } from "@actor";
 import type { DexterityModifierCapData } from "@actor/character/types.ts";
 import type { LabeledSpeed, SenseData } from "@actor/creature/data.ts";
-import type {
-    DamageDicePF2e,
-    DeferredDamageDiceOptions,
-    DeferredPromise,
-    DeferredValue,
-    ModifierAdjustment,
-    ModifierPF2e,
-} from "@actor/modifiers.ts";
+import type { DamageDicePF2e, DeferredDamageDiceOptions, DeferredPromise, DeferredValue, ModifierAdjustment, ModifierPF2e } from "@actor/modifiers.ts";
 import type { TokenEffect } from "@actor/token-effect.ts";
 import type { MovementType } from "@actor/types.ts";
 import type { MeleePF2e, WeaponPF2e } from "@item";
@@ -24,7 +17,6 @@ import type { Statistic } from "@system/statistic/index.ts";
 import type { TokenSource } from "types/foundry/common/documents/token.d.ts";
 import type { DamageAlteration } from "./rule-element/damage-alteration/alteration.ts";
 import type { Suboption } from "./rule-element/roll-option/data.ts";
-
 /** Defines a list of data provided by rule elements that an actor can pull from during its data preparation lifecycle */
 interface RuleElementSynthetics {
     criticalSpecializations: {

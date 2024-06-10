@@ -5,7 +5,6 @@ import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/s
 import { TraitTagifyEntry } from "@module/sheet/helpers.ts";
 import { DamageCategoryUnique, DamageType } from "@system/damage/types.ts";
 import type { EffectAreaShape, SpellPF2e, SpellSystemData, SpellSystemSource } from "./index.ts";
-
 export declare class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
     #private;
     static get defaultOptions(): ItemSheetOptions;

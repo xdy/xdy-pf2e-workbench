@@ -3,18 +3,9 @@ import type { ItemSourcePF2e, ItemType } from "@item/base/data/index.ts";
 import type { ItemTrait } from "@item/base/types.ts";
 import { type DamageType } from "@system/damage/types.ts";
 import { PredicateField, SlugField, StrictNumberField } from "@system/schema-data-fields.ts";
-import type {
-    ArrayField,
-    BooleanField,
-    DataField,
-    DataFieldOptions,
-    NumberField,
-    SchemaField,
-    StringField,
-} from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, BooleanField, DataField, DataFieldOptions, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.d.ts";
 import type { AELikeChangeMode } from "../ae-like.ts";
-
 declare const fields: typeof foundry.data.fields;
 /** A `SchemaField` reappropriated for validation of specific item alterations */
 declare class ItemAlterationValidator<TSchema extends AlterationSchema> extends fields.SchemaField<TSchema> {

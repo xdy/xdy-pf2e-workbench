@@ -3,7 +3,6 @@ import { ZeroToFour } from "@module/data.ts";
 import { DataUnionField, RecordField, StrictBooleanField, StrictStringField } from "@system/schema-data-fields.ts";
 import type { ArrayField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { KingdomAbility } from "./types.ts";
-
 declare const KINGDOM_SETTLEMENT_SCHEMA: {
     name: StringField<string, string, true, false, true>;
     type: StringField<"village" | "town" | "city" | "metropolis", "village" | "town" | "city" | "metropolis", false, false, true>;

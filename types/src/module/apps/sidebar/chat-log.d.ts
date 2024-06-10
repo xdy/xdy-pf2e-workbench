@@ -2,7 +2,6 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
-
 declare class ChatLogPF2e extends ChatLog<ChatMessagePF2e> {
     #private;
     activateListeners($html: JQuery<HTMLElement>): void;

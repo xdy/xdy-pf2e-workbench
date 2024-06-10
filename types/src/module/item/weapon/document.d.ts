@@ -7,19 +7,14 @@ import type { NPCAttackTrait } from "@item/melee/types.ts";
 import type { PhysicalItemConstructionContext } from "@item/physical/document.ts";
 import { IdentificationStatus, MystifiedData } from "@item/physical/index.ts";
 import type { RangeData } from "@item/types.ts";
+import { StrikeRuleElement } from "@module/rules/rule-element/strike.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { WeaponDamage, WeaponFlags, WeaponSource, WeaponSystemData } from "./data.ts";
-import type {
-    BaseWeaponType,
-    OtherWeaponTag,
-    WeaponCategory,
-    WeaponGroup,
-    WeaponReloadTime,
-    WeaponTrait,
-} from "./types.ts";
-
+import type { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponReloadTime, WeaponTrait } from "./types.ts";
 declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     shield?: ShieldPF2e<TParent>;
+    /** The rule element that generated this weapon, if applicable */
+    rule?: StrikeRuleElement;
     static get validTraits(): Record<NPCAttackTrait, string>;
     constructor(data: PreCreate<ItemSourcePF2e>, context?: WeaponConstructionContext<TParent>);
     /** Given this weapon is an alternative usage, whether it is melee or thrown */

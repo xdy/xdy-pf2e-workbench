@@ -2,7 +2,6 @@ import type { CharacterPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
 import { Predicate, RawPredicate } from "@system/predication.ts";
 import { CraftingFormula } from "./formula.ts";
-
 declare class CraftingEntry implements CraftingEntryData {
     #private;
     /** A label for this crafting entry to display on sheets */

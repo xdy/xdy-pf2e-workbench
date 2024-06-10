@@ -5,7 +5,6 @@ import type { PhysicalItemPF2e } from "@item";
 import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { CoinsPF2e, ItemActivation, MaterialValuationData } from "./index.ts";
-
 declare class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e> extends ItemSheetPF2e<TItem> {
     static get defaultOptions(): ItemSheetOptions;
     /** Show the identified data for editing purposes */
