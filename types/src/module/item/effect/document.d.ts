@@ -4,7 +4,6 @@ import { AbstractEffectPF2e } from "@item/abstract-effect/index.ts";
 import type { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
 import type { UserPF2e } from "@module/user/index.ts";
 import type { EffectFlags, EffectSource, EffectSystemData } from "./data.ts";
-
 declare class EffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     #private;
     get badge(): EffectBadge | null;

@@ -5,7 +5,7 @@ import { ActorPF2e, ArmyPF2e, type PartyPF2e } from "@actor";
 import { FeatGroup } from "@actor/character/feats.ts";
 import { ActorSheetPF2e, SheetClickActionHandlers } from "@actor/sheet/base.ts";
 import { ActorSheetDataPF2e } from "@actor/sheet/data-types.ts";
-import { type CampaignFeaturePF2e, ItemPF2e } from "@item";
+import { ItemPF2e, type CampaignFeaturePF2e } from "@item";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ValueAndMax } from "@module/data.ts";
@@ -13,7 +13,6 @@ import { AdjustedValue, SheetOption, SheetOptions } from "@module/sheet/helpers.
 import { Statistic } from "@system/statistic/index.ts";
 import { Kingdom } from "./model.ts";
 import { KingdomAbilityData, KingdomData, KingdomLeadershipData, KingdomSettlementData } from "./types.ts";
-
 declare class KingdomSheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     #private;
     /** The current selected activity filter, which doubles as an active kingdom phase */

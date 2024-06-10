@@ -6,7 +6,6 @@ import type { EffectSource, EffectSystemData } from "@item/effect/data.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { EffectBadge } from "./data.ts";
 import type { EffectTrait } from "./types.ts";
-
 /** Base effect type for all PF2e effects including conditions and afflictions */
 declare abstract class AbstractEffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     /** A normalized version of the slug that shows in roll options, removing certain prefixes */

@@ -5,7 +5,6 @@ import type { ItemPF2e } from "@item";
 import type { UserPF2e } from "@module/user/document.ts";
 import { Predicate } from "@system/predication.ts";
 import Tagify from "@yaireo/tagify";
-
 /** Prompt the user to pick from a number of options */
 declare abstract class PickAThingPrompt<TItem extends ItemPF2e, TThing extends string | number | object> extends Application {
     #private;

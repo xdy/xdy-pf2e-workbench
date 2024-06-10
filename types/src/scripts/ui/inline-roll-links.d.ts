@@ -1,6 +1,5 @@
 import { ActorPF2e } from "@actor";
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
-
 export declare const InlineRollLinks: {
     injectRepostElement: (links: HTMLElement[], foundryDoc: ClientDocument | null) => void;
     listen: (html: HTMLElement, foundryDoc?: ClientDocument | null) => void;

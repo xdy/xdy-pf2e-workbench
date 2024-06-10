@@ -1,4 +1,5 @@
-import type Document, { DocumentMetadata } from "../abstract/document.d.ts";
+import type Document from "../abstract/document.d.ts";
+import type { DocumentMetadata } from "../abstract/document.d.ts";
 import type * as fields from "../data/fields.d.ts";
 import type * as documents from "./module.d.ts";
 

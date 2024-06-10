@@ -8,7 +8,6 @@ import { Statistic } from "@system/statistic/index.ts";
 import { SpellCollection, type SpellSlotGroupId } from "./collection.ts";
 import { SpellcastingEntrySource, SpellcastingEntrySystemData } from "./data.ts";
 import { CastOptions, SpellcastingCategory, SpellcastingEntry, SpellcastingSheetData } from "./types.ts";
-
 declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> implements SpellcastingEntry<TParent> {
     spells: SpellCollection<NonNullable<TParent>> | null;
     /** Spellcasting attack and dc data created during actor preparation */

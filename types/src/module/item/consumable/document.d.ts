@@ -7,7 +7,6 @@ import type { ValueAndMax } from "@module/data.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { ConsumableSource, ConsumableSystemData } from "./data.ts";
 import type { ConsumableCategory, ConsumableTrait, OtherConsumableTag } from "./types.ts";
-
 declare class ConsumablePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     static get validTraits(): Record<ConsumableTrait, string>;
     get otherTags(): Set<OtherConsumableTag>;

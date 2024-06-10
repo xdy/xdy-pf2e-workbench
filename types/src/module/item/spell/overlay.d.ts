@@ -1,7 +1,6 @@
 import type { ActorPF2e } from "@actor";
 import type { SpellOverlay, SpellOverlayType, SpellSource } from "./data.ts";
 import type { SpellPF2e } from "./document.ts";
-
 declare class SpellOverlayCollection extends Collection<SpellOverlay> {
     readonly spell: SpellPF2e;
     constructor(spell: SpellPF2e, entries?: Record<string, SpellOverlay>);

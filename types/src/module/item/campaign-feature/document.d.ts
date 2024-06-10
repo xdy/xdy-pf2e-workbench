@@ -5,7 +5,6 @@ import { ActionCost, Frequency } from "@item/base/data/index.ts";
 import type { UserPF2e } from "@module/user/index.ts";
 import { CampaignFeatureSource, CampaignFeatureSystemData } from "./data.ts";
 import type { BehaviorType, KingmakerCategory, KingmakerTrait } from "./types.ts";
-
 declare class CampaignFeaturePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     group: FeatGroup<ActorPF2e, CampaignFeaturePF2e> | null;
     grants: CampaignFeaturePF2e[];

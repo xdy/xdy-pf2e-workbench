@@ -12,7 +12,6 @@ import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ValueAndMax, ZeroToFour } from "@module/data.ts";
 import { SheetOptions } from "@module/sheet/helpers.ts";
 import { PartyPF2e } from "./document.ts";
-
 interface PartySheetRenderOptions extends ActorSheetRenderOptionsPF2e {
     actors?: boolean;
 }

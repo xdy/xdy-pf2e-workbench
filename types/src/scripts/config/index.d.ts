@@ -1,34 +1,8 @@
 import { ArmyPF2e, CharacterPF2e, FamiliarPF2e, HazardPF2e, LootPF2e, NPCPF2e, PartyPF2e, VehiclePF2e } from "@actor";
 import { SenseAcuity } from "@actor/creature/types.ts";
-import {
-    AbilityItemPF2e,
-    AfflictionPF2e,
-    AncestryPF2e,
-    ArmorPF2e,
-    BackgroundPF2e,
-    BookPF2e,
-    CampaignFeaturePF2e,
-    ClassPF2e,
-    ConditionPF2e,
-    ConsumablePF2e,
-    ContainerPF2e,
-    DeityPF2e,
-    EffectPF2e,
-    EquipmentPF2e,
-    FeatPF2e,
-    HeritagePF2e,
-    KitPF2e,
-    LorePF2e,
-    MeleePF2e,
-    ShieldPF2e,
-    SpellcastingEntryPF2e,
-    SpellPF2e,
-    TreasurePF2e,
-    WeaponPF2e,
-} from "@item";
+import { AbilityItemPF2e, AfflictionPF2e, AncestryPF2e, ArmorPF2e, BackgroundPF2e, BookPF2e, CampaignFeaturePF2e, ClassPF2e, ConditionPF2e, ConsumablePF2e, ContainerPF2e, DeityPF2e, EffectPF2e, EquipmentPF2e, FeatPF2e, HeritagePF2e, KitPF2e, LorePF2e, MeleePF2e, ShieldPF2e, SpellPF2e, SpellcastingEntryPF2e, TreasurePF2e, WeaponPF2e } from "@item";
 import { WeaponReloadTime } from "@item/weapon/types.ts";
 import { JournalSheetPF2e } from "@module/journal-entry/sheet.ts";
-
 export type StatusEffectIconTheme = "default" | "blackWhite";
 export declare const PF2ECONFIG: {
     defaultPartyId: string;
@@ -214,6 +188,7 @@ export declare const PF2ECONFIG: {
         alchemical: string;
         "all-damage": string;
         "area-damage": string;
+        axes: string;
         bleed: string;
         bludgeoning: string;
         cold: string;
@@ -1543,7 +1518,7 @@ export declare const PF2ECONFIG: {
         graft: string;
         grimoire: string;
         "harrow-court": string;
-        healing: string;
+        healing: string; /** Max speed for number of hexploration activities */
         incapacitation: string;
         incorporeal: string;
         infused: string;
@@ -2206,6 +2181,7 @@ export declare const PF2ECONFIG: {
         "deadly-2d12": string;
         "deadly-3d12": string;
         "deadly-4d12": string;
+        illusion: string;
         incorporeal: string;
         radiation: string;
         "reach-0": string;
@@ -2429,6 +2405,7 @@ export declare const PF2ECONFIG: {
         "two-hand-d12": string;
         unarmed: string;
         vehicular: string;
+        venomous: string;
         "versatile-acid": string;
         "versatile-b": string;
         "versatile-cold": string;
@@ -2801,6 +2778,7 @@ export declare const PF2ECONFIG: {
         "two-hand-d12": string;
         unarmed: string;
         vehicular: string;
+        venomous: string;
         "versatile-acid": string;
         "versatile-b": string;
         "versatile-cold": string;
@@ -3051,6 +3029,7 @@ export declare const PF2ECONFIG: {
         vanara: string;
         vishkanya: string;
         vehicular: string;
+        venomous: string;
         "versatile-acid": string;
         "versatile-b": string;
         "versatile-cold": string;

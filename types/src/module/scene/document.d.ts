@@ -2,7 +2,6 @@ import { SceneFlagsPF2e } from "./data.ts";
 import type { AmbientLightDocumentPF2e, MeasuredTemplateDocumentPF2e, TileDocumentPF2e } from "./index.ts";
 import { TokenDocumentPF2e } from "./index.ts";
 import type { SceneConfigPF2e } from "./sheet.ts";
-
 declare class ScenePF2e extends Scene {
     /** Has this document completed `DataModel` initialization? */
     initialized: boolean;

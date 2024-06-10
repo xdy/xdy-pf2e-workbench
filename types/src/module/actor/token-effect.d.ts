@@ -1,6 +1,5 @@
 import { AbstractEffectPF2e } from "@item";
 import { ActorPF2e } from "./base.ts";
-
 export declare class TokenEffect implements TemporaryEffect {
     #private;
     tint: Color | null;

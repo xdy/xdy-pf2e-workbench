@@ -3,7 +3,6 @@ import type { CREATURE_ACTOR_TYPES } from "@actor/values.ts";
 import type { AbilityItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { LANGUAGES_BY_RARITY, SENSE_TYPES } from "./values.ts";
-
 /** A `CreaturePF2e` subtype string */
 type CreatureActorType = (typeof CREATURE_ACTOR_TYPES)[number];
 type CreatureTrait = keyof typeof CONFIG.PF2E.creatureTraits;

@@ -4,7 +4,6 @@ import type { TokenDocumentPF2e } from "@scene";
 import type { Statistic } from "@system/statistic/index.ts";
 import type DataModel from "types/foundry/common/abstract/data.d.ts";
 import type { PartyPF2e } from "./document.ts";
-
 interface PartyUpdateOperation<TParent extends TokenDocumentPF2e | null> extends ActorUpdateOperation<TParent> {
     removedMembers?: string[];
 }

@@ -7,7 +7,6 @@ import { type ItemPF2e } from "@item";
 import type { UserPF2e } from "@module/user/index.ts";
 import type { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
 import { ChatMessageFlagsPF2e, ChatMessageSourcePF2e } from "./data.ts";
-
 declare class ChatMessagePF2e extends ChatMessage {
     #private;
     /** The chat log doesn't wait for data preparation before rendering, so set some data in the constructor */

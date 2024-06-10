@@ -1,4 +1,5 @@
-import type BaseEffectSource, { BaseEffectSourceData } from "./base-effect-source.d.ts";
+import type BaseEffectSource from "./base-effect-source.d.ts";
+import type { BaseEffectSourceData } from "./base-effect-source.d.ts";
 
 /**
  * An abstract class which extends the base PointSource to provide common functionality for rendering.

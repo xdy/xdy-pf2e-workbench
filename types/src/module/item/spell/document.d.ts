@@ -20,7 +20,6 @@ import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { SpellArea, SpellHeightenLayer, SpellOverlayType, SpellSource, SpellSystemData } from "./data.ts";
 import { SpellOverlayCollection } from "./overlay.ts";
 import { MagicTradition, SpellTrait } from "./types.ts";
-
 declare class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly parentItem: ConsumablePF2e<TParent> | null;
     /** The original spell. Only exists if this is a variant */

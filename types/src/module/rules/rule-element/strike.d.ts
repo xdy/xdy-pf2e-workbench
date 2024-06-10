@@ -3,17 +3,9 @@ import type { NPCAttackTrait } from "@item/melee/types.ts";
 import type { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
 import type { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import { StrictBooleanField } from "@system/schema-data-fields.ts";
-import type {
-    ArrayField,
-    BooleanField,
-    FilePathField,
-    NumberField,
-    SchemaField,
-    StringField,
-} from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, BooleanField, FilePathField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
-
 /**
  * Create an ephemeral strike on an actor
  * @category RuleElement

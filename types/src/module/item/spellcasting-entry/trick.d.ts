@@ -4,7 +4,6 @@ import { SpellPF2e } from "@item";
 import { MagicTradition } from "@item/spell/types.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { CastOptions, SpellcastingEntry, SpellcastingSheetData } from "./types.ts";
-
 declare const TRICK_MAGIC_SKILLS: readonly ["arcana", "nature", "occultism", "religion"];
 type TrickMagicItemSkill = (typeof TRICK_MAGIC_SKILLS)[number];
 declare const traditionSkills: {

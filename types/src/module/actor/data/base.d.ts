@@ -14,7 +14,6 @@ import type { DamageRoll } from "@system/damage/roll.ts";
 import type { StatisticTraceData } from "@system/statistic/data.ts";
 import type { Immunity, ImmunitySource, Resistance, ResistanceSource, Weakness, WeaknessSource } from "./iwr.ts";
 import type { ActorSizePF2e } from "./size.ts";
-
 /** Base interface for all actor data */
 type BaseActorSourcePF2e<TType extends ActorType, TSystemSource extends ActorSystemSource = ActorSystemSource> = foundry.documents.ActorSource<TType, TSystemSource, ItemSourcePF2e> & {
     flags: DeepPartial<ActorFlagsPF2e>;
@@ -116,14 +115,14 @@ interface BaseHitPointsSource {
     /** Any details about hit points. */
     details: string;
 }
-type OffGuardableCircumstance =
+type OffGuardableCircumstance = 
 /** Flat-footable in all flanking situations */
 true
 /** Flat-footable if the flanker's level is less than or equal to the actor's own */
  | number
 /** Never off-guardable */
  | false;
-type GangUpCircumstance =
+type GangUpCircumstance = 
 /** Requires at least `number` allies within melee reach of the target */
 number
 /** Requires the actor's animal companion to be adjacent to the target */

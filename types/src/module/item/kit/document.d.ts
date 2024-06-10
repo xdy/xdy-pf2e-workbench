@@ -4,8 +4,7 @@ import type { ClassTrait } from "@item/class/types.ts";
 import { Price } from "@item/physical/data.ts";
 import { Size } from "@module/data.ts";
 import type { UserPF2e } from "@module/user/index.ts";
-import { type KitEntryData, KitSource, KitSystemData } from "./data.ts";
-
+import { KitSource, KitSystemData, type KitEntryData } from "./data.ts";
 declare class KitPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     static get validTraits(): Record<ClassTrait, string>;
     get entries(): KitEntryData[];

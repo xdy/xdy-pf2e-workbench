@@ -2,7 +2,8 @@ import type * as CONST from "../constants.d.ts";
 import type { DataField, DataSchema } from "../data/fields.d.ts";
 import type * as documents from "../documents/module.d.ts";
 import type BaseUser from "../documents/user.d.ts";
-import type DataModel, { DataModelValidationOptions } from "./data.d.ts";
+import type DataModel from "./data.d.ts";
+import type { DataModelValidationOptions } from "./data.d.ts";
 import type EmbeddedCollection from "./embedded-collection.d.ts";
 import type * as abstract from "./module.d.ts";
 

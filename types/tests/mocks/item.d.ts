@@ -2,7 +2,6 @@ import type { ActorPF2e } from "@actor/index.ts";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { ItemSystemSource } from "@item/base/data/system.ts";
 import type { ItemPF2e } from "@item/index.ts";
-
 export declare class MockItem {
     options: DocumentConstructionContext<ActorPF2e | null>;
     readonly _source: ItemSourcePF2e;

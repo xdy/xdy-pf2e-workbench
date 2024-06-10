@@ -2,7 +2,6 @@ import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import { Predicate, RawPredicate } from "@system/predication.ts";
 import type { RuleElementPF2e } from "./rules/index.ts";
-
 declare class RollNotePF2e {
     /** The selector used to determine on which rolls the note will be shown for. */
     selector: string;

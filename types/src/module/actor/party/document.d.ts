@@ -9,7 +9,6 @@ import type { Statistic } from "@system/statistic/index.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { PartySource, PartySystemData } from "./data.ts";
 import { PartyCampaign, PartyUpdateOperation } from "./types.ts";
-
 declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     armorClass: null;
     members: CreaturePF2e[];

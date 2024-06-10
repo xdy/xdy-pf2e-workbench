@@ -1,1 +1,2 @@
-export declare function monkeyPatchFoundry(): void;
+declare function monkeyPatchFoundry(): void;
+export { monkeyPatchFoundry };

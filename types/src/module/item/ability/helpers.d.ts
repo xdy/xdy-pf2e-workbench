@@ -5,7 +5,6 @@ import type { FeatSheetPF2e } from "@item/feat/sheet.ts";
 import { RangeData } from "@item/types.ts";
 import type { AbilitySystemData, SelfEffectReference } from "./data.ts";
 import type { AbilitySheetPF2e } from "./sheet.ts";
-
 interface SourceWithActionData {
     system: {
         actionType: AbilitySystemData["actionType"];

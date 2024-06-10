@@ -1,7 +1,6 @@
 import { SkillSlug } from "@actor/types.ts";
 import { DCOptions } from "../dc.ts";
 import type { PhysicalItemPF2e } from "./physical/index.ts";
-
 type MagicSkill = Extract<SkillSlug, "arcana" | "nature" | "religion" | "occultism">;
 type IdentifyMagicDCs = Record<MagicSkill, number>;
 type IdentifyAlchemyDCs = {

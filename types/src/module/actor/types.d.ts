@@ -10,16 +10,7 @@ import type { immunityTypes, resistanceTypes, weaknessTypes } from "@scripts/con
 import type { DamageRoll } from "@system/damage/roll.ts";
 import type { DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import type { Predicate } from "@system/predication.ts";
-import type {
-    ACTOR_TYPES,
-    ATTRIBUTE_ABBREVIATIONS,
-    DC_SLUGS,
-    MOVEMENT_TYPES,
-    SAVE_TYPES,
-    SKILL_SLUGS,
-    UNAFFECTED_TYPES,
-} from "./values.ts";
-
+import type { ACTOR_TYPES, ATTRIBUTE_ABBREVIATIONS, DC_SLUGS, MOVEMENT_TYPES, SAVE_TYPES, SKILL_SLUGS, UNAFFECTED_TYPES } from "./values.ts";
 type ActorType = (typeof ACTOR_TYPES)[number];
 /** Used exclusively to resolve `ActorPF2e#isOfType` */
 interface ActorInstances<TParent extends TokenDocumentPF2e | null> {

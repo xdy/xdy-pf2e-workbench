@@ -13,18 +13,9 @@ import { TokenDocumentPF2e } from "@scene/index.ts";
 import { RollParameters } from "@system/rolls.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { CraftingEntry, CraftingFormula } from "./crafting/index.ts";
-import {
-    BaseWeaponProficiencyKey,
-    CharacterAbilities,
-    CharacterFlags,
-    CharacterSource,
-    CharacterStrike,
-    CharacterSystemData,
-    WeaponGroupProficiencyKey,
-} from "./data.ts";
+import { BaseWeaponProficiencyKey, CharacterAbilities, CharacterFlags, CharacterSource, CharacterStrike, CharacterSystemData, WeaponGroupProficiencyKey } from "./data.ts";
 import { CharacterFeats } from "./feats.ts";
 import { CharacterHitPointsSummary, CharacterSkills, GuaranteedGetStatisticSlug } from "./types.ts";
-
 declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     /** Core singular embeds for PCs */
     ancestry: AncestryPF2e<this> | null;

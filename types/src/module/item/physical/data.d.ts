@@ -8,7 +8,6 @@ import type { ITEM_CARRY_TYPES } from "../base/data/values.ts";
 import type { CoinsPF2e } from "./helpers.ts";
 import type { PhysicalItemTrait, PhysicalItemType, PreciousMaterialGrade, PreciousMaterialType } from "./types.ts";
 import type { UsageDetails } from "./usage.ts";
-
 type ItemCarryType = (typeof ITEM_CARRY_TYPES)[number];
 type BasePhysicalItemSource<TType extends PhysicalItemType, TSystemSource extends PhysicalSystemSource = PhysicalSystemSource> = BaseItemSourcePF2e<TType, TSystemSource>;
 interface PhysicalSystemSource extends ItemSystemSource {
