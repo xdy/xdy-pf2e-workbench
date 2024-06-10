@@ -1,3 +1,10 @@
+# [6.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.0.1...v6.1.0) (2024-06-10)
+
+
+### Features
+
+* Fixes calling Symon's macros (individual macros may still be broken in v12). NOTE! As this is a change in the calling macro, you need to reimport all previously imported macros. (Or, edit them yourself to replace the string DOCUMENT_PERMISSION_LEVELS with DOCUMENT_OWNERSHIP_LEVELS in all the imported macros.) ([6d2f593](https://github.com/xdy/xdy-pf2e-workbench/commit/6d2f5937a0e43a59a2ea8829ec737b73a8269f20))
+
 ## [6.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.0.0...v6.0.1) (2024-06-10)
 
 
