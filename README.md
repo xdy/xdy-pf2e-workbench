@@ -334,3 +334,4 @@ asymonous-benefactor-macros:
 "Workbench Adjectives" table is based on a list
 in [Unique Names Generator](https://github.com/andreasonny83/unique-names-generator/blob/main/src/dictionaries/adjectives.ts)
 and is provided under the [MIT license](https://github.com/andreasonny83/unique-names-generator/blob/main/LICENSE)
+
