@@ -1,3 +1,10 @@
+# [6.2.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.1.0...v6.2.0) (2024-06-10)
+
+
+### Features
+
+* Messed up previous fix. Thankfully, Trent had just submitted a better fix. So, update and reimport. ([b876039](https://github.com/xdy/xdy-pf2e-workbench/commit/b87603966e6b0978b7ab5e11695b9c3523a3ba86))
+
 # [6.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.0.1...v6.1.0) (2024-06-10)
 
 
