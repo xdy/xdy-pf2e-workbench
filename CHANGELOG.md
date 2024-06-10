@@ -1,3 +1,10 @@
+## [6.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.0.0...v6.0.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. (And require pf2e 6.0.1 and foundry 12.327) ([5b20001](https://github.com/xdy/xdy-pf2e-workbench/commit/5b200017249580322391135b605f5b462029cab3))
+
 # [6.0.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v5.66.0...v6.0.0) (2024-06-05)
 
 
