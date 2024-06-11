@@ -133,7 +133,7 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
                 );
                 map.set("Group Perception Roller", "systems/pf2e/icons/spells/vision-of-weakness.webp");
                 map.set("Heroic Recovery", "systems/pf2e/icons/spells/wholeness-of-body.webp");
-                map.set("Hunt Double Shared Triple Prey", "cons/creatures/eyes/humanoid-single-red-brown.webp");
+                map.set("Hunt Double Shared Triple Prey", "systems/pf2e/icons/creatures/eyes/humanoid-single-red-brown.webp");
                 map.set("Level Based DCs", "systems/pf2e/icons/equipment/held-items/radiant-spark.webp");
                 map.set("Lingering Fortissimo", "systems/pf2e/icons/spells/inspire-heroics.webp");
                 map.set("Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp");
