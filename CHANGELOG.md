@@ -1,3 +1,10 @@
+## [6.2.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.2.1...v6.2.2) (2024-06-12)
+
+
+### Bug Fixes
+
+* Changing pause image and text should now work again courtesy of 7H3LaughingMan. ([933e840](https://github.com/xdy/xdy-pf2e-workbench/commit/933e8403c4009eb4aa9d33f5124e2dd865339495))
+
 ## [6.2.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.2.0...v6.2.1) (2024-06-11)
 
 
