@@ -1,3 +1,15 @@
+# [6.3.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.2.2...v6.3.0) (2024-06-14)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([d66d23e](https://github.com/xdy/xdy-pf2e-workbench/commit/d66d23edbfd3e8f3ab988a1e6f30c8cd948444e7))
+
+
+### Features
+
+* Added flag to actor after stun has been reduced in combat, for use by other modules. ([cb306d1](https://github.com/xdy/xdy-pf2e-workbench/commit/cb306d1b3f8088082551280647ee601cf081c870))
+
 ## [6.2.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.2.1...v6.2.2) (2024-06-12)
 
 
