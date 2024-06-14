@@ -61,6 +61,12 @@ export async function autoReduceStunned(combatant, userId: string): Promise<numb
             for (let i = 0; i < stunReduction; i++) {
                 await actor?.decreaseCondition("stunned");
             }
+            const combat = combatant?.combat;
+            await actor?.setFlag(MODULENAME, "stunReduction", {
+                combat: combat.id,
+                round: combat.round,
+                reducedBy: stunReduction,
+            });
         }
     }
     return stunReduction;
