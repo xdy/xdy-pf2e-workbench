@@ -1,3 +1,11 @@
+## [6.3.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.3.0...v6.3.1) (2024-06-15)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([3c43644](https://github.com/xdy/xdy-pf2e-workbench/commit/3c436440d7599d3252e59b24a72cf8f8ffec1a47))
+* Re-fix icons path. ([3ac6525](https://github.com/xdy/xdy-pf2e-workbench/commit/3ac65258aa3cc58c1cbc6e5bd32185019c7fbcda))
+
 # [6.3.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.2.2...v6.3.0) (2024-06-14)
 
 
