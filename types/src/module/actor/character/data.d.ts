@@ -255,7 +255,7 @@ interface CharacterSkillData extends SkillData {
     /** Is this skill a Lore skill? */
     lore?: boolean;
     /** If this is a lore skill, what item it came from */
-    itemID: string | null;
+    itemID?: string;
 }
 interface CharacterAbilityData extends AbilityData {
     /** An ability score prior to modification by items */

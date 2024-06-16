@@ -265,7 +265,6 @@ export declare const PF2ECONFIG: {
         acid: string;
         air: string;
         alchemical: string;
-        "all-damage": string;
         "area-damage": string;
         "arrow-vulnerability": string;
         "axe-vulnerability": string;

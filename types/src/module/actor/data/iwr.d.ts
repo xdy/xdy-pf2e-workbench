@@ -150,7 +150,6 @@ declare class Weakness extends IWR<WeaknessType> implements WeaknessSource {
         acid: string;
         air: string;
         alchemical: string;
-        "all-damage": string;
         "area-damage": string;
         "arrow-vulnerability": string;
         "axe-vulnerability": string;
@@ -258,7 +257,7 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         physical: string;
         piercing: string;
         plant: string;
-        poison: string;
+        poison: string; /** Construct an object argument for Localization#format (see also PF2E.Actor.IWR.CompositeLabel in en.json) */
         precision: string;
         "protean-anatomy": string;
         radiation: string;

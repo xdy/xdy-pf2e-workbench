@@ -66,4 +66,4 @@ declare function getDamageDiceValueLabel(d: DamageDicePF2e | RawDamageDice, prop
     sign?: boolean;
 }): string;
 declare function getDamageDiceOverrideLabel(d: DamageDicePF2e | RawDamageDice): string;
-export { DamageCategorization, applyBaseDamageAlterations, applyDamageDiceOverrides, damageDiceIcon, damageDieSizeToFaces, deepFindTerms, extractBaseDamage, getDamageDiceOverrideLabel, getDamageDiceValueLabel, isSystemDamageTerm, isUnsimplifableArithmetic, looksLikeDamageRoll, nextDamageDieSize, renderComponentDamage, simplifyTerm, };
+export { applyBaseDamageAlterations, applyDamageDiceOverrides, DamageCategorization, damageDiceIcon, damageDieSizeToFaces, deepFindTerms, extractBaseDamage, getDamageDiceOverrideLabel, getDamageDiceValueLabel, isSystemDamageTerm, isUnsimplifableArithmetic, looksLikeDamageRoll, nextDamageDieSize, renderComponentDamage, simplifyTerm, };
