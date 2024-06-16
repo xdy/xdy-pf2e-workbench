@@ -72,7 +72,7 @@ declare class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e>
     /** Overrides _drawBar(k) to also draw pf2e variants of normal resource bars (such as temp health) */
     protected _drawBar(number: number, bar: PIXI.Graphics, data: TokenResourceData): void;
     /** Draw auras along with effect icons */
-    drawEffects(): Promise<void>;
+    _drawEffects(): Promise<void>;
     /** Emulate a pointer hover ("pointerover") event */
     emitHoverIn(nativeEvent: MouseEvent | PointerEvent): void;
     /** Emulate a pointer hover ("pointerout") event */
