@@ -3,13 +3,10 @@
 
 /* eslint-disable no-undef */
 
-import * as R from "remeda";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
 import { Action, ActionUseOptions, ActionVariant } from "@actor/actions/types.js";
-import type { ActionTrait } from "@item/ability/index.d.ts";
 import { CharacterSkill } from "@actor/character/types.js";
-import type { MacroPF2e } from "@module/macro.d.ts";
 import { ModifierPF2e } from "@actor/modifiers.js";
 import { Statistic } from "@system/statistic/statistic.js";
 import { followTheExpert } from "./follow-the-expert.ts";
@@ -87,7 +84,7 @@ type MacroAction = {
     altSkillAndFeat?: { skill: string; feat: string }[];
     name: string;
     icon: string;
-    action: Function | Action | ActionVariant | undefined;
+    action: Function | string[] | Action | ActionVariant | undefined;
     module?: string;
     best?: number;
     whoIsBest?: string;
@@ -139,49 +136,6 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
     return actionsToUse;
 }
 
-// Class to wrap a macro into an object that supports the ActionVariant
-// interface, which is what most of the system actions use.
-class MacroActionVariant implements ActionVariant {
-    traits: ActionTrait[] = [];
-    #macro: string;
-    #compendium: string;
-
-    get slug() {
-        return this.#macro.slugify();
-    }
-
-    constructor(macro: string, compendium: string) {
-        this.#macro = macro;
-        this.#compendium = compendium;
-    }
-
-    async use(options: ActionUseOptions): Promise<undefined> {
-        const pack = game.packs.get(this.#compendium);
-        if (pack) {
-            const macros = (await pack.getDocuments({ name: this.#macro })) as MacroPF2e[];
-            if (macros.length > 0) {
-                await macros[0].execute(R.pick(options, ["event"]));
-            } else {
-                ui.notifications.error(
-                    game.i18n.format(`${MODULENAME}.macros.basicActionMacros.macroNotFound`, {
-                        macroName: this.#macro,
-                    }),
-                );
-            }
-        } else {
-            ui.notifications.error(
-                game.i18n.format(`${MODULENAME}.macros.basicActionMacros.compendiumNotFound`, {
-                    compendiumName: this.#compendium,
-                }),
-            );
-        }
-    }
-
-    async toMessage(): Promise<undefined> {
-        // Required by interface, but not used by this module
-    }
-}
-
 /**
  * This macro opens a dialog containing a list of actions to be used by the selected Actor
  * If no actor is selected, it selects the user's standard character.
@@ -207,14 +161,14 @@ export async function basicActionMacros() {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidToggle`),
             skill: "",
-            action: new MacroActionVariant("macroEffectAid", "xdy-pf2e-workbench.xdy-internal-utility-macros"),
+            action: ["macroEffectAid", "xdy-pf2e-workbench.xdy-internal-utility-macros"],
             icon: "systems/pf2e/icons/spells/efficient-apport.webp",
         },
         {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidASE`),
             skill: "",
-            action: new MacroActionVariant("Aid", "pf2e-action-support-engine-macros.action-support-engine-macros"),
+            action: ["Aid", "pf2e-action-support-engine-macros.action-support-engine-macros"],
             module: "pf2e-action-support-engine",
             icon: "systems/pf2e/icons/spells/efficient-apport.webp",
         },
@@ -339,10 +293,7 @@ export async function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Demoralize`),
             skill: "Intimidation",
-            action: new MacroActionVariant(
-                "XDY DO_NOT_IMPORT Demoralize",
-                "xdy-pf2e-workbench.asymonous-benefactor-macros-internal",
-            ),
+            action: ["XDY DO_NOT_IMPORT Demoralize", "xdy-pf2e-workbench.asymonous-benefactor-macros-internal"],
             icon: "icons/skills/social/intimidation-impressing.webp",
         },
         {
@@ -482,10 +433,7 @@ export async function basicActionMacros() {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.RecallKnowledge`),
             skill: "",
-            action: new MacroActionVariant(
-                "XDY DO_NOT_IMPORT Recall_Knowledge",
-                "xdy-pf2e-workbench.asymonous-benefactor-macros-internal",
-            ),
+            action: ["XDY DO_NOT_IMPORT Recall_Knowledge", "xdy-pf2e-workbench.asymonous-benefactor-macros-internal"],
             icon: "icons/skills/trades/academics-study-reading-book.webp",
         },
         {
@@ -617,10 +565,10 @@ export async function basicActionMacros() {
                 { skill: "Nature", feat: "natural-medicine" },
                 { skill: "Crafting", feat: "chirurgeon" },
             ],
-            action: new MacroActionVariant(
+            action: [
                 "XDY DO_NOT_IMPORT Treat Wounds and Battle Medicine",
                 "xdy-pf2e-workbench.asymonous-benefactor-macros-internal",
-            ),
+            ],
             icon: "icons/skills/wounds/injury-stapled-flesh-tan.webp",
         },
         {
@@ -710,7 +658,32 @@ export async function basicActionMacros() {
                 const action = (button, event) => {
                     const action = actionsToUse[button.dataset.action];
                     const current = action.action;
-                    if (typeof current === "object") {
+                    if (Array.isArray(current)) {
+                        const macroName = current[0];
+                        const compendiumName = current[1];
+                        const pack = game.packs.get(compendiumName);
+                        if (pack) {
+                            pack.getDocuments().then((documents) => {
+                                const macro_data = documents.find((i) => i._source.name === macroName)?.toObject();
+                                if (macro_data) {
+                                    const temp_macro = new Macro(macro_data);
+                                    temp_macro.execute(event);
+                                } else {
+                                    ui.notifications.error(
+                                        game.i18n.format(`${MODULENAME}.macros.basicActionMacros.macroNotFound`, {
+                                            macroName,
+                                        }),
+                                    );
+                                }
+                            });
+                        } else {
+                            ui.notifications.error(
+                                game.i18n.format(`${MODULENAME}.macros.basicActionMacros.compendiumNotFound`, {
+                                    compendiumName,
+                                }),
+                            );
+                        }
+                    } else if (typeof current === "object") {
                         // TODO Handle other variants than map
                         const mapValue =
                             button.dataset.map && button.dataset.map !== "0"
