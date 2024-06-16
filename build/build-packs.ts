@@ -112,7 +112,6 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
                 map.set("Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp");
                 map.set("Advanced Countdown", "systems/pf2e/icons/spells/time-beacon.webp");
                 map.set("Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp");
-                map.set("Automatic Arcane Cascade", "systems/pf2e/icons/features/classes/arcane-cascade.webp");
                 map.set("Bless", "systems/pf2e/icons/spells/bless.webp");
                 map.set("Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp");
                 map.set("Conditions Manager", "systems/pf2e/icons/conditions/doomed.webp");
