@@ -95,6 +95,7 @@
                 "AqueousFist": "Aqueous Fist",
                 "Beak": "Beak",
                 "Beard": "Beard",
+                "BigClaw": "Big Claw",
                 "Bite": "Bite",
                 "Blade": "Blade",
                 "Body": "Body",
@@ -589,6 +590,7 @@
         },
         "IWR": {
             "Custom": {
+                "AcidAndSpellsThatCauseRust": "acid and spells that cause rust",
                 "AdamantineBludgeoning": "adamantine bludgeoning",
                 "AllDamageFromArcaneSpells": "all damage from arcane spells",
                 "AllDamageFromFungus": "all damage from fungus",
@@ -740,8 +742,10 @@
                     "Keketar": "Keketar",
                     "LamiaMatriarch": "Lamia Matriarch",
                     "Leshy": "Leshy",
+                    "LeshyMob": "Leshy Mob",
                     "Lizard": "Lizard",
                     "Mantis": "Mantis",
+                    "Moose": "Moose",
                     "Morrigna": "Morrigna",
                     "Mushroom": "Mushroom",
                     "NaiadQueen": "Naiad Queen",
@@ -750,12 +754,14 @@
                     "Octopus": "Octopus",
                     "Oni": "Oni",
                     "Owlbear": "Owlbear",
+                    "Plant": "Plant",
                     "PorcupineGiant": "Giant Porcupine",
                     "Pukwudgie": "Pukwudgie",
                     "Raktavarna": "Raktavarna",
                     "RajaKrodha": "Raja-Krodha",
                     "Rat": "Rat",
                     "Scorpion": "Scorpion",
+                    "Shark": "Shark",
                     "Succubus": "Succubus",
                     "Tree": "Tree",
                     "Unicorn": "Unicorn",
@@ -986,6 +992,9 @@
             "RaptorGuardWight": {
                 "TerrorMaster": "The Raptor Guard is wearing their dinosaur-skull helm."
             },
+            "RebornDevotee":{
+                "RebornDevoteeFocusedAssault": "Number of Stalks"
+            },
             "RuneGiant": {
                 "InvokeRune": {
                     "Prompt": "Select a rune.",
@@ -1000,6 +1009,12 @@
                         "Label": "Rune of Smiting",
                         "Text": "When the weapon hits, the giant can @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.t6cx9FOODmeZQNYl]{Push} the target back 10 feet, or 20 feet on a critical hit."
                     }
+                }
+            },
+            "Scroungefeather": {
+                "GrabDebris": {
+                    "BrokenBlade": "Broken Blade",
+                    "MagicBolt": "Magic Bolt"
                 }
             },
             "Seugathi": {
@@ -1035,6 +1050,21 @@
                 "InspireEnvoyEffectAttack": "Bonus to Attack",
                 "InspireEnvoyEffectChoice": "Granted Effect",
                 "InspireEnvoyEffectPercWillCha": "Bonus to Will, Perception and Charisma-based skill checks"
+            },
+            "StargutHydra": {
+                "SkymetalMetamorphosis": {
+                    "Djezet": {
+                        "Label": "Skymetal Metamorphosis (Djezet)"
+                    },
+                    "Noqual": {
+                        "Label": "Skymetal Metamorphosis (Noqual)"
+                    },
+                    "Siccatite": {
+                        "Chilled": "Chilled",
+                        "Label": "Skymetal Metamorphosis (Siccatite)",
+                        "Superheated": "Superheated"
+                    }
+                }
             },
             "StoneSpider": {
                 "StoneFangs": "Stone Fangs"
@@ -1073,6 +1103,9 @@
                 }
             },
             "TreerazerPlantAttack": "Attack a Plant",
+            "Tyrafdir": {
+                "DeceptiveJaws": "Deceptive Jaws"
+            },
             "Vampire": {
                 "JiangShi": {
                     "StanceOfDeath": {
@@ -1596,6 +1629,7 @@
             "Escape": "To Escape",
             "EscapeForceOpenOrLift": "To Escape, Force Open, or Lift Heavy Objects",
             "Feint": "To Feint",
+            "Fly": "To Fly",
             "ForceOpenGrappleShoveOrTrip": "To Force Open, Grapple, Shove, or Trip",
             "Forests": "In Forests",
             "ForestsOrGrasslands": "In Forests or Grasslands",
@@ -1792,8 +1826,12 @@
                 "Canine": "Canine",
                 "Cat": "Cat",
                 "Centipede": "Centipede",
+                "Crab": "Crab",
+                "Crocodile": "Crocodile",
                 "Deer": "Deer",
                 "Frog": "Frog",
+                "Orca": "Orca",
+                "Seal": "Seal",
                 "Shark": "Shark",
                 "Snake": "Snake",
                 "Toad": "Toad",
@@ -1888,15 +1926,29 @@
             },
             "Barbarian": {
                 "Animal": {
+                    "Ankylosaurus": "Ankylosaurus",
+                    "Ant": "Ant",
                     "Ape": "Ape",
+                    "Bat": "Bat",
                     "Bear": "Bear",
+                    "Bird": "Bird",
+                    "Brontosaurus": "Brontosaurus",
                     "Bull": "Bull",
                     "Cat": "Cat",
+                    "Crab": "Crab",
+                    "Crocodile": "Crocodile",
                     "Deer": "Deer",
                     "Frog": "Frog",
+                    "Orca": "Orca",
                     "Prompt": "Select an animal.",
+                    "Scorpion": "Scorpion",
+                    "Seal": "Seal",
                     "Shark": "Shark",
                     "Snake": "Snake",
+                    "Spider": "Spider",
+                    "Tyrannosaurus": "Tyrannosaurus",
+                    "Wasp": "Wasp",
+                    "WebNote": "<p>The spider's web attack deals no damage, but the target takes a –10-foot circumstance penalty to its Speeds for 1 round on a hit.</p><p>@UUID[Compendium.pf2e.feat-effects.Item.tCMVyxQhzYCjBQtK]</p><p>If a target is hit a second time by the same character's web attack while they have this penalty, they're instead @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} until they succeed at a check to @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escape} against your class DC.</p>",
                     "Wolf": "Wolf"
                 },
                 "Decay": {
@@ -2378,6 +2430,15 @@
                     "InsultedLabel": "The Boastful Hunter is Insulted",
                     "MisfireNote": "All attacks with an insulted <em>boastful hunter</em> incur a @Check[type:flat|dc:5] misfire chance until the weapon is appeased."
                 },
+                "Bomb": {
+                    "Choice": "Type of Bomb",
+                    "Type": {
+                        "Greater": "Greater",
+                        "Lesser": "Lesser",
+                        "Major": "Major",
+                        "Moderate": "Moderate"
+                    }
+                },
                 "BravosBrew": {
                     "Greater": {
                         "FearLabel": "Greater Bravo's Brew (Vs. Fear)"
@@ -2582,6 +2643,9 @@
                     "spear": "Simple & Martial Spears",
                     "sword": "Simple & Martial Swords"
                 }
+            },
+            "FireShield": { 
+                "DefendingAgainstWaterLabel": "Defending against a water effect"
             },
             "Fleshwarp": {
                 "CoatingOfSlime": {
