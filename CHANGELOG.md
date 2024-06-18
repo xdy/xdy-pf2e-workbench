@@ -1,3 +1,11 @@
+# [6.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.3.1...v6.4.0) (2024-06-18)
+
+
+### Features
+
+* Add image to Automatic Arcance Cascade macro ([735bbf2](https://github.com/xdy/xdy-pf2e-workbench/commit/735bbf2bb9ed21c6d86f68866d8e4db92e7f081f))
+* BAM: Wrap macros in a class ([56675bb](https://github.com/xdy/xdy-pf2e-workbench/commit/56675bbf223b8847d0934465dc0c2baff3a80fda)), closes [#878](https://github.com/xdy/xdy-pf2e-workbench/issues/878)
+
 ## [6.3.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.3.0...v6.3.1) (2024-06-15)
 
 
