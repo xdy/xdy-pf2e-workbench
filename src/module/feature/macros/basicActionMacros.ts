@@ -6,6 +6,7 @@
 import * as R from "remeda";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
+import type { SkillSlug } from "@actor/types.ts";
 import { Action, ActionUseOptions, ActionVariant } from "@actor/actions/types.js";
 import type { ActionTrait } from "@item/ability/index.d.ts";
 import type { MacroPF2e } from "@module/macro.d.ts";
@@ -18,6 +19,9 @@ declare global {
     }
 }
 
+// PF2e system uses this for statistic slugs but doesn't make it a type
+type StatisticSlug = SkillSlug | "perception";
+
 export async function registerBasicActionMacrosHandlebarsTemplates() {
     await loadTemplates([
         `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
@@ -28,7 +32,7 @@ export async function registerBasicActionMacrosHandlebarsTemplates() {
 }
 
 function getBestBonuses(
-    actorSkills: Map<string, Partial<Record<string, Statistic>>>,
+    actorSkills: Map<string, Partial<Record<StatisticSlug, Statistic>>>,
     party: string[],
     actionList: MacroAction[],
 ) {
@@ -46,8 +50,8 @@ function getBestBonuses(
     }
 }
 
-function createMapOfSkillsPerActor(actors: ActorPF2e[]): Map<string, Partial<Record<string, Statistic>>> {
-    const map = new Map<string, Partial<Record<string, Statistic>>>();
+function createMapOfSkillsPerActor(actors: ActorPF2e[]): Map<string, Partial<Record<StatisticSlug, Statistic>>> {
+    const map = new Map<string, Partial<Record<StatisticSlug, Statistic>>>();
     for (const actor of actors) {
         const skills = fetchSkills(actor);
         if (skills) {
@@ -57,7 +61,7 @@ function createMapOfSkillsPerActor(actors: ActorPF2e[]): Map<string, Partial<Rec
     return map;
 }
 
-function fetchSkills(actor: ActorPF2e): Partial<Record<string, Statistic>> {
+function fetchSkills(actor: ActorPF2e): Partial<Record<StatisticSlug, Statistic>> {
     return { perception: actor.perception, ...actor.skills };
 }
 
@@ -66,7 +70,7 @@ function createButtonData(
     idx: number,
     actor: ActorPF2e,
     party: string[],
-    actorSkills: Partial<Record<string, Statistic>>,
+    actorSkills: Partial<Record<StatisticSlug, Statistic>>,
 ): { bonus: number; skill: Statistic | null | undefined; action: MacroAction; best: boolean; idx: number } {
     const skillName = action.skill;
     const skill = skillName ? actorSkills[skillName] : null;
@@ -80,9 +84,9 @@ function createButtonData(
 }
 
 type MacroAction = {
-    skill: string;
+    skill: StatisticSlug | "";
     // The altSkillAndFeat stuff should really be more flexible. Maybe look at what SkillActions did for prereqs?
-    altSkillAndFeat?: { skill: string; feat: string }[];
+    altSkillAndFeat?: { skill: StatisticSlug; feat: string }[];
     name: string;
     icon: string;
     action: Function | Action | ActionVariant | undefined;
