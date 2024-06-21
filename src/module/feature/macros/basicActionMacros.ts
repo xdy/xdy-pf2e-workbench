@@ -8,9 +8,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
 import { Action, ActionUseOptions, ActionVariant } from "@actor/actions/types.js";
 import type { ActionTrait } from "@item/ability/index.d.ts";
-import { CharacterSkill } from "@actor/character/types.js";
 import type { MacroPF2e } from "@module/macro.d.ts";
-import { ModifierPF2e } from "@actor/modifiers.js";
 import { Statistic } from "@system/statistic/statistic.js";
 import { followTheExpert } from "./follow-the-expert.ts";
 
@@ -719,38 +717,19 @@ export async function basicActionMacros() {
                     const current = action.action;
                     if (typeof current === "object") {
                         // TODO Handle other variants than map
-                        const mapValue =
-                            button.dataset.map && button.dataset.map !== "0"
-                                ? -(Number.parseInt(button.dataset.map) / 5)
-                                : 0;
-                        current
-                            .use({
-                                event,
-                                multipleAttackPenalty: mapValue,
-                                skipDialog: event.skipDialog,
-                                ...action.options,
-                            })
-                            .then();
-                    } else {
-                        const skills = getSkills(selectedActor, action.skill);
-                        const variant =
-                            button.dataset.map && button.dataset.map !== "0"
-                                ? getMapVariant(skills[0], {}, Number.parseInt(button.dataset.map))
-                                : null;
-                        if (variant) {
-                            (<Function>action.action)({
-                                event,
-                                actors: [selectedActor],
-                                modifiers: variant?.modifiers,
-                                ...variant?.extra,
-                            });
-                        } else {
-                            (<Function>action.action)({
-                                event,
-                                actors: [selectedActor],
-                                skill: action.skill,
-                            });
-                        }
+                        const mapValue = button.dataset.map ? -(Number.parseInt(button.dataset.map) / 5) : 0;
+                        current.use({
+                            event,
+                            multipleAttackPenalty: mapValue,
+                            skipDialog: event.skipDialog,
+                            ...action.options,
+                        });
+                    } else if (current) {
+                        current({
+                            event,
+                            actors: [selectedActor],
+                            skill: action.skill,
+                        });
                     }
                 };
                 if ("querySelectorAll" in html) {
@@ -780,48 +759,6 @@ export async function basicActionMacros() {
         },
         { jQuery: false, classes: ["pf2e-bg", "bam-dialog"], width, popOut: true, resizable: true },
     ).render(true) as Dialog;
-}
-
-function getSkills(selectedActor: ActorPF2e, proficiencyKey: string): CharacterSkill<any>[] {
-    const skills = selectedActor.skills;
-    if (!skills) return [];
-    if (proficiencyKey === "lore") {
-        return Object.values(skills).filter((skill) => skill !== undefined && skill.lore) as CharacterSkill<any>[];
-    } else {
-        return [skills[proficiencyKey]].filter((s): s is CharacterSkill<any> => !!s);
-    }
-}
-
-function getMapVariant(skill: CharacterSkill<any>, extra: Record<string, unknown> | undefined, map: number): Variant {
-    const modifier = new game.pf2e.Modifier({
-        label: game.i18n.localize("PF2E.MultipleAttackPenalty"),
-        modifier: map,
-        type: "untyped",
-    });
-    const label = game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: map });
-    return new Variant(label, skill, extra, [modifier]);
-}
-
-export class Variant {
-    label: string;
-    skill: CharacterSkill<any>;
-    extra?: Record<string, unknown>;
-    modifiers: ModifierPF2e[];
-    assuranceTotal: number;
-
-    constructor(
-        label: string,
-        skill: CharacterSkill<any>,
-        extra: Record<string, unknown> | undefined,
-        modifiers: ModifierPF2e[] = [],
-        assuranceTotal = 0,
-    ) {
-        this.label = label;
-        this.skill = skill;
-        this.extra = extra;
-        this.modifiers = modifiers;
-        this.assuranceTotal = assuranceTotal;
-    }
 }
 
 // basicActionsMacros();
