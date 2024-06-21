@@ -287,18 +287,12 @@ async function handleSpell(
     degreeOfSuccess: string,
 ) {
     const castRank = await determineCastRank(origin.name, flags, numberOfMessagesToCheck, originUuid, origin.system);
-    let blind = determineBlindStatus(message);
     const rollDamage = await noOrSuccessfulFlatcheck(message);
 
     if (rollDamage) {
         // Fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
         const target = constructTargetElement(castRank);
 
-        // Make automatic damageRoll be private if the spell is private, unless hideNameOfPrivateSpell is set.
-        const shouldHideName = blind && game.settings.get(MODULENAME, "castPrivateSpellHideName");
-        if (shouldHideName) {
-            blind = false;
-        }
         if (message.flags?.pf2e?.origin?.variant?.overlays?.length > 0) {
             const variant = origin.loadVariant({
                 castRank,
@@ -309,14 +303,12 @@ async function handleSpell(
             await variant.rollDamage({
                 outcome: degreeOfSuccess,
                 target,
-                ctrlKey: blind,
             });
         } else {
             // @ts-ignore
             await origin?.rollDamage({
                 outcome: degreeOfSuccess,
                 target,
-                ctrlKey: blind,
             });
         }
     }
@@ -341,15 +333,6 @@ async function determineCastRank(
         castRank = system.level.value ?? 0;
     }
     return castRank;
-}
-
-function determineBlindStatus(message: any): boolean {
-    const originalRollMode = game.settings.get("core", "rollMode");
-    return (
-        ((message?.blind || (message?.whisper && message?.whisper.length > 0)) &&
-            originalRollMode !== CONST.DICE_ROLL_MODES.PRIVATE) ??
-        false
-    );
 }
 
 function constructTargetElement(castRank: number): HTMLDivElement {

@@ -226,10 +226,9 @@ function buildSpellMessage(origin, tokenName: string, type, traditionString: str
     return content;
 }
 
-export async function castPrivateSpellHideName(message: ChatMessagePF2e, html: HTMLElement) {
+export async function hideSpellNameInDamageroll(message: ChatMessagePF2e, html: HTMLElement) {
     const msg = game.messages.contents
         .reverse()
-        // .filter((m) => m.type === 4) // Whisper, rollup can't resolve constant
         .filter((m) => m.whisper?.length > 0)
         .filter((m) => m.flags?.pf2e?.casting)
         .filter((m) => m.flags?.pf2e?.origin?.uuid === message.flags?.pf2e?.origin?.uuid)
