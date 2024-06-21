@@ -1,3 +1,10 @@
+# [6.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.4.0...v6.5.0) (2024-06-21)
+
+
+### Features
+
+* Instead of hiding autorolled damage rolls of privately cast spells (or, optionally, obfuscating the name of the spell) always show the damage roll with an obfuscated spell name. ([51511df](https://github.com/xdy/xdy-pf2e-workbench/commit/51511df49c0ae66031452ef63d4e78a95881f2ef))
+
 # [6.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.3.1...v6.4.0) (2024-06-18)
 
 
