@@ -65,21 +65,27 @@ function fetchSkills(actor: ActorPF2e): Partial<Record<StatisticSlug, Statistic>
     return { perception: actor.perception, ...actor.skills };
 }
 
+type ButtonData = {
+    action: MacroAction;
+    skill: Statistic | undefined;
+    bonus: number;
+    best: boolean;
+    idx: number;
+};
+
 function createButtonData(
     action: MacroAction,
     idx: number,
     actor: ActorPF2e,
     party: string[],
     actorSkills: Partial<Record<StatisticSlug, Statistic>>,
-): { bonus: number; skill: Statistic | null | undefined; action: MacroAction; best: boolean; idx: number } {
-    const skillName = action.skill;
-    const skill = skillName ? actorSkills[skillName] : null;
-    const bonus = skill ? skill.check?.mod ?? skill.mod : -1;
-    const best = game.settings.get(MODULENAME, "basicActionMacroShowBestBonus")
-        ? party.length && party.includes(actor.id)
-            ? bonus >= (action.best ?? 0)
-            : false
-        : false;
+): ButtonData {
+    const skill: Statistic | undefined = actorSkills[action.skill];
+    const bonus = skill?.mod ?? -1;
+    const best =
+        !!game.settings.get(MODULENAME, "basicActionMacroShowBestBonus") &&
+        party.includes(actor.id) &&
+        bonus >= (action.best ?? 0);
     return { best, idx, action, skill, bonus };
 }
 
