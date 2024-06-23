@@ -473,6 +473,13 @@ export async function basicActionMacros() {
         },
         {
             actionType: "other",
+            name: game.i18n.localize("PF2E.Actions.PointOut.Title"),
+            skill: "",
+            action: game.pf2e.actions.get("point-out"),
+            icon: "systems/pf2e/icons/conditions/observed.webp",
+        },
+        {
+            actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.RaiseAShieldToggle`),
             skill: "",
             action: game.pf2e.actions.raiseAShield,
