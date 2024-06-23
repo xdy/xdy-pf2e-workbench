@@ -1,3 +1,10 @@
+# [6.6.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.5.0...v6.6.0) (2024-06-23)
+
+
+### Features
+
+* Add Point-Out to BAM ([d3059e0](https://github.com/xdy/xdy-pf2e-workbench/commit/d3059e04f8c90323eaadf1c3a0929dcadfe0910c))
+
 # [6.5.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.4.0...v6.5.0) (2024-06-21)
 
 
