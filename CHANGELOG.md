@@ -1,3 +1,10 @@
+## [6.6.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.0...v6.6.1) (2024-06-28)
+
+
+### Bug Fixes
+
+* BAM: Use lowercase skill names ([930cd20](https://github.com/xdy/xdy-pf2e-workbench/commit/930cd20c63cc81741eb9d1dcf01f115a6b5a1a51))
+
 # [6.6.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.5.0...v6.6.0) (2024-06-23)
 
 
