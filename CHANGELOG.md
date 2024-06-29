@@ -1,3 +1,10 @@
+## [6.6.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.1...v6.6.2) (2024-06-29)
+
+
+### Bug Fixes
+
+* Don't show modifier (-1) for BAM actions with no skill ([142ef7e](https://github.com/xdy/xdy-pf2e-workbench/commit/142ef7e48afd1a2a7ff3d0e5db029bd46c6ad6b5))
+
 ## [6.6.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.0...v6.6.1) (2024-06-28)
 
 
