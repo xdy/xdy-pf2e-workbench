@@ -69,7 +69,8 @@
           "TumbleThrough": "Hindurchturnen",
           "AidASE": "Helfen (ASE Makro)",
           "CreateADiversionDistractingWords": "Für Ablenkung sorgen - Ablenkende Worte",
-          "Reposition": "Versetzen"
+          "Reposition": "Versetzen",
+          "AidPF2eMacros": "Hilfe (PF2e Makros)"
         },
         "macroNotFound": "Makro {macroName} nicht gefunden",
         "title": "Aktionen ({name})",
@@ -301,14 +302,16 @@
       "castPrivateSpellWithPublicMessage": {
         "secondPartRK": ".<br>Frage deinen SL ob du den Zauber automatisch erkennst, ansonsten kannst du versuchen einen hier von @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] oder davon @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] zu nutzen. Oder, während deines Zuges, kannst du eine Aktion verwenden um zu versuchen den Zauber mit @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk} zu identifizieren",
         "name": "Schreibe eine Nachricht wenn ein Zauber gewirkt wurde.",
-        "savePart": "<br>Rettungswurf gegen den unbekannten Zauber ist: @Check[type:{dataSave}|SG:{dataDC}|traits:{traits}]",
+        "savePart": "<br>Rettungswurf gegen den unbekannten Zauber ist: @Check[type:{dataSave}|SG:{dataDC}|traits:{traits}|basic:{basic}}]",
         "firstPart": "{tokenName} wirkte grade einen {type} der folgenden <strong>{traditionString}</strong> Tradition. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "they": "Sie",
         "cantrip": "Zaubertrick",
         "hint": "Falls Zauber wirken auf privat steht, wird einen Nachricht gepostet, welche besagt das ein Zauber gewirkt wird, AUßER wenn zusätzlich SHIFT und STRG beim Zaubern gehalten wird.",
         "secondPartNoRk": ".<br>Frage deinen SL ob du den Zauber automatisch erkennst, ansonsten kannst du versuchen einen hier von @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] oder davon @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] zu nutzen. Oder, während deines Zuges, kannst du eine Aktion verwenden um zu versuchen den Zauber zu identifizieren (sprich mit den SL bezüglich der Details).",
         "spell": "Zauber",
-        "knownBy": "<div><p><b>Bekannt von: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
+        "knownBy": "<div><p><b>Bekannt von: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">",
+        "basic": "Basis",
+        "noButtonSavePart": "<br><b>{basic} {dataSave} Rettungswurf</b>"
       },
       "npcMystifierBlacklist": {
         "hint": "Füge Wörter hinzu, um den Inhalt dieser kommagetrennten Blockierliste aus dem verschleierten Namen herauszufiltern.",
@@ -691,6 +694,10 @@
       "castPrivateSpellWithPublicMessageShowToGM": {
         "hint": "Öffentliche Nachricht auch SL anzeigen.",
         "name": "... und zeigen die öffentliche Nachricht auch dem SL."
+      },
+      "autoCollapseItemChatCardMoveEffectLinks": {
+        "name": "... aber zeige die Effekt Verlinkungen",
+        "hint": "... aber verschiebe alle Verlinkungen von Effekten außerhalb des zusammengeklappten Teils der Chatkarte, wenn diese als Standard zusammengeklappt ist"
       }
     },
     "npcRoller": {
@@ -716,6 +723,7 @@
       "bounceBackUsed": "Dem Tod von der Schippe genutzt",
       "numbToDeathUsed": "Abgestumpft genutzt",
       "deliberateDeathUsed": "Freiwilliger Tod genutzt"
-    }
+    },
+    "effectItem": "Effekt Gegenstand"
   }
 }
