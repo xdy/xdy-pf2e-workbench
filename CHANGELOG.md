@@ -1,3 +1,10 @@
+## [6.6.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.3...v6.6.4) (2024-06-30)
+
+
+### Bug Fixes
+
+* Avoid triggering Breath Weapon reminder on Dragon Form (and other polymorph abilities that include action descriptions). ([a203f4c](https://github.com/xdy/xdy-pf2e-workbench/commit/a203f4cdd7b00e4068a731f034b0c0443c07290c))
+
 ## [6.6.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.2...v6.6.3) (2024-06-30)
 
 
