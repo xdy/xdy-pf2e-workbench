@@ -17,7 +17,8 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                 if (matches && matches.length > 1) {
                     rounds = Number(matches[1]);
                 }
-            } else {
+                // Skip dragon form and the like
+            } else if (!message.flags?.pf2e?.origin?.rollOptions?.includes("polymorph")) {
                 let diceValue: any;
                 const diceFormulaMatch = messageContent.match(/1d([46])( rounds| recharge|<\/a> rounds)/i);
                 if (diceFormulaMatch && diceFormulaMatch[1]) {
