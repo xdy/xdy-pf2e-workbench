@@ -44,7 +44,7 @@
     "@types/showdown": "^2.0.6",
     "@types/sortablejs": "^1.15.8",
     "@types/tooltipster": "^0.0.35",
-    "@types/uuid": "^9.0.8",
+    "@types/uuid": "^10.0.0",
     "@types/yaireo__tagify": "^4.24.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
@@ -92,7 +92,7 @@
     "nouislider": "^15.8.1",
     "remeda": "^2.2.1",
     "sortablejs": "^1.15.2",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   },
   "homepage": "https://github.com/xdy/xdy-pf2e-workbench",
   "repository": {
