@@ -545,7 +545,7 @@ export async function giveUnconsciousIfDyingRemovedAt0HP(item: ItemPF2e) {
     }
 }
 
-export function dyingHandlingPreCreateChatMessageHook(message: ChatMessagePF2e) {
+export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e) {
     const autoGainDying = String(game.settings.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"));
     if (autoGainDying && !autoGainDying.startsWith("no")) {
         const actor = message.actor;

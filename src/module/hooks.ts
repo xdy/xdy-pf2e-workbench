@@ -26,7 +26,7 @@ import { PhysicalItemPF2e } from "@item/physical/document.js";
 import { ActorSystemData } from "@actor/data/base.js";
 import { ActorSheetPF2e } from "@actor/sheet/base.js";
 import {
-    dyingHandlingPreCreateChatMessageHook,
+    dyingHandlingCreateChatMessageHook,
     dyingHandlingPreUpdateActorHook,
     handleDyingRecoveryRoll,
     itemHandlingItemHook,
@@ -101,12 +101,11 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
         ) {
             autoRollDamage(message).then();
         }
-
         if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
             reminderBreathWeapon(message).then();
         }
     }
-    dyingHandlingPreCreateChatMessageHook(message);
+    dyingHandlingCreateChatMessageHook(message);
 }
 
 function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) {
@@ -116,13 +115,15 @@ function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) 
 export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
     const html = <HTMLElement>jq.get(0);
     // Only acts on latest message, but can't be in createChatMessageHook as that doesn't get triggered for some reason.
-    persistentHealing(message, Boolean(game.settings.get(MODULENAME, "applyPersistentHealing")));
+    if (!game.messages.contents.slice(-Math.min(1, game.messages.size)).filter((x) => x._id === message.id)) {
+        persistentHealing(message, Boolean(game.settings.get(MODULENAME, "applyPersistentHealing")));
 
-    if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-        persistentDamage(message);
+        if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
+            persistentDamage(message);
+        }
+
+        deprecatedDyingHandlingRenderChatMessageHook(message);
     }
-
-    deprecatedDyingHandlingRenderChatMessageHook(message);
 
     // Affects all messages
     const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
