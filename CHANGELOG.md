@@ -1,3 +1,10 @@
+## [6.6.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.4...v6.6.5) (2024-07-01)
+
+
+### Bug Fixes
+
+* Made Breath Weapon reminder a bit more robust. ([7552f37](https://github.com/xdy/xdy-pf2e-workbench/commit/7552f376d3d2b4e51e8c2f5f22a44d98fb03aca5)), closes [#1381](https://github.com/xdy/xdy-pf2e-workbench/issues/1381)
+
 ## [6.6.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.3...v6.6.4) (2024-06-30)
 
 
