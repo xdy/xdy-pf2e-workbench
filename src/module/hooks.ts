@@ -115,15 +115,13 @@ function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) 
 export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
     const html = <HTMLElement>jq.get(0);
     // Only acts on latest message, but can't be in createChatMessageHook as that doesn't get triggered for some reason.
-    if (!game.messages.contents.slice(-Math.min(1, game.messages.size)).filter((x) => x._id === message.id)) {
-        persistentHealing(message, Boolean(game.settings.get(MODULENAME, "applyPersistentHealing")));
+    persistentHealing(message, Boolean(game.settings.get(MODULENAME, "applyPersistentHealing")));
 
-        if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
-            persistentDamage(message);
-        }
-
-        deprecatedDyingHandlingRenderChatMessageHook(message);
+    if (game.settings.get(MODULENAME, "applyPersistentDamage")) {
+        persistentDamage(message);
     }
+
+    deprecatedDyingHandlingRenderChatMessageHook(message);
 
     // Affects all messages
     const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
