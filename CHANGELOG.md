@@ -1,3 +1,10 @@
+## [6.6.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.5...v6.6.6) (2024-07-04)
+
+
+### Bug Fixes
+
+* Applying Persistent Damage and/or Persistent Healing works again. ([137500e](https://github.com/xdy/xdy-pf2e-workbench/commit/137500e6c8886a599763cb3f883ce0637ca804ed))
+
 ## [6.6.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.4...v6.6.5) (2024-07-01)
 
 
