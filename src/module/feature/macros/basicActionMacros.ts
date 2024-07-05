@@ -743,7 +743,7 @@ export async function basicActionMacros() {
                     }
                 };
                 if ("querySelectorAll" in html) {
-                    for (const button of html.querySelectorAll(".action-list button")) {
+                    for (const button of html.querySelectorAll(".bam-action-list button")) {
                         button.addEventListener("click", (event) => action(button, event));
                     }
                     for (const tabButton of html.querySelectorAll("a.item")) {

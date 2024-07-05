@@ -334,7 +334,7 @@ const createButton = (action, idx) => {
     const rank = skill?.rank ?? 0;
     const bonus = skill ? skill.check?.mod ?? skill.totalModifier : -1;
     const best = party.length && party.includes(actor.id) ? bonus >= (action.best ?? 0) : false;
-    return `<button class="action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
+    return `<button class="bam-action-btn ${best ? "glow" : ""}" data-action="${idx}" style="background:${
         colorPallete[rank]
     }"
     ${best ? `data-tooltip="${tooltip}"` : ""}>
@@ -352,7 +352,7 @@ const content = `
     background: url(systems/pf2e/assets/sheet/background.webp);
   }
 
-  .action-list {
+  .bam-action-list {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -362,7 +362,7 @@ const content = `
     max-height: ${height}px;
   }
 
-  .action-btn {
+  .bam-action-btn {
     margin: 1px auto;
     width: 250px;
     height: fit-content;
@@ -374,15 +374,15 @@ const content = `
     align-items: center;
   }
 
-  .action-btn img {
+  .bam-action-btn img {
     margin-right: 5px;
   }
 
-  .action-btn:hover {
+  .bam-action-btn:hover {
     text-shadow: 0 0 2px #fff;
   }
 
-  .action-list button.glow {
+  .bam-action-list button.glow {
     --color-glow1: 35;
     --color-glow2: 50;
     animation: glow2 alternate infinite 2s;
@@ -406,7 +406,7 @@ const content = `
 
 
 </style>
-<div class="action-list">
+<div class="bam-action-list">
 ${actionList.map((action, idx) => createButton(action, idx)).join("")}
 </div>
 `;
@@ -428,7 +428,7 @@ window.actionDialog = new Dialog(
                 if (typeof action.action === "string") game.macros.get(action.action)?.execute();
                 else action.action({ actors: [actor] });
             };
-            html.querySelectorAll(".action-list button").forEach((button) =>
+            html.querySelectorAll(".bam-action-list button").forEach((button) =>
                 button.addEventListener("click", () => action(button))
             );
         }

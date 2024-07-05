@@ -17,23 +17,23 @@
     bonus}}){{/xdy_ifne}}{{/inline}}
 {{#*inline "actionTooltip"}}{{> actionName}} {{ifThen best (localize "xdy-pf2e-workbench.macros.basicActionMacros.YouAreTheBestInYourParty")""}}{{/inline}}
 {{#if action.showMAP}}
-    <div class="map-wrapper">
-        <button class="action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="0"
+    <div class="bam-map-wrapper">
+        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="0"
                 style="background:{{> colorPalette rank=skill.rank}}" data-tooltip="{{> actionTooltip}}"><img
             src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24"
             width="24"
             alt="{{> actionName}}"/>{{> actionName}}</button>
-        <button class="action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-5"
+        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-5"
                 style="background:{{> colorPalette rank=skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
             "xdy-pf2e-workbench.macros.basicActionMacros.second"}}">{{localize
             "xdy-pf2e-workbench.macros.basicActionMacros.second"}}</button>
-        <button class="action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-10"
+        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-10"
                 style="background:{{> colorPalette rank=skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
             "xdy-pf2e-workbench.macros.basicActionMacros.third"}}">{{localize
             "xdy-pf2e-workbench.macros.basicActionMacros.third"}}</button>
     </div>
 {{else}}
-    <button class="action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}"
+    <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}"
             style="background:{{> colorPalette rank=skill.rank}}"
             data-tooltip="{{> actionTooltip}}">
         <img src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24"

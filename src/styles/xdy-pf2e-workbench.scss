@@ -179,7 +179,7 @@
     //background: url('/systems/pf2e/assets/sheet/background.webp');
 }
 
-.action-list {
+.bam-action-list {
     display: grid;
     flex-wrap: wrap;
     flex-direction: column;
@@ -197,7 +197,7 @@
     }
 }
 
-.action-btn {
+.bam-action-btn {
     margin: 1px auto;
     width: 100%;
     height: fit-content;
@@ -219,7 +219,7 @@
     }
 }
 
-.map-wrapper {
+.bam-map-wrapper {
     display: flex;
     gap: 5px;
     margin: 0 auto;
@@ -251,20 +251,20 @@
 
 @for $i from 1 through 40 {
     @container bam-dialog (width <= #{bamWidth($i+1)}) and (width > #{bamWidth($i)}) {
-        .action-list {
+        .bam-action-list {
             --bam-columns: #{$i};
         }
     }
 }
 
 @container bam-dialog (width < #{bamWidth(1)}) {
-    .action-list {
+    .bam-action-list {
         --bam-columns: 1;
     }
 }
 
 @container bam-dialog (width > #{bamWidth(41)}) {
-    .action-list {
+    .bam-action-list {
         --bam-columns: 41;
     }
 }
