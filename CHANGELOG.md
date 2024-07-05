@@ -1,3 +1,10 @@
+## [6.6.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.6...v6.6.7) (2024-07-05)
+
+
+### Bug Fixes
+
+* Deep and arcane css black magic. (I.e. search and replace a couple of names so as to hopefully not conflict with Nikolaj's new module.) ([4f29015](https://github.com/xdy/xdy-pf2e-workbench/commit/4f29015a63055e43fe8b26f5c8de88d944dc7111))
+
 ## [6.6.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.5...v6.6.6) (2024-07-04)
 
 
