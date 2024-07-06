@@ -1,3 +1,10 @@
+## [6.6.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.7...v6.6.8) (2024-07-06)
+
+
+### Bug Fixes
+
+* Use system code to see who should handle a hooked event. ([1a31207](https://github.com/xdy/xdy-pf2e-workbench/commit/1a31207b74243091786eb3ebeecfd171f0ee7d3c))
+
 ## [6.6.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.6...v6.6.7) (2024-07-05)
 
 
