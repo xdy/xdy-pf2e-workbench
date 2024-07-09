@@ -114,7 +114,16 @@ export function debounce(callback, wait) {
 }
 
 export function shouldIHandleThis(actor) {
-    return actor?.primaryUpdater === game.user;
+    if (!actor) return null;
+    const currentUser = game.users.current;
+    const activePlayers = game.users.players.filter((u) => u.active);
+    const assignedUser = activePlayers.find((u) => u.character === actor);
+    const anyoneWithPermission = activePlayers.find((u) => actor.canUserModify(u, "update"));
+    const updater =
+        currentUser?.active && actor.canUserModify(currentUser, "update")
+            ? currentUser
+            : assignedUser ?? game.users.activeGM ?? anyoneWithPermission ?? null;
+    return game.user.id === updater?.id;
 }
 
 export function pushNotification(message: any, type: string = "info") {
