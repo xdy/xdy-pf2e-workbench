@@ -73,8 +73,7 @@ async function generateMessageData(message: ChatMessagePF2e, origin, spellUUID: 
 
     const type = message.flags?.pf2e.origin?.type ?? "spell";
     const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
-    const context = message.flags.pf2e.context;
-    const isBasicSave = context?.options?.includes("item:defense:basic");
+    const isBasicSave = message.flags.pf2e.context?.options?.includes("item:defense:basic");
     const content = buildSpellMessage(origin, tokenName, type, traditionString, spellUUID, data, isBasicSave);
 
     const flags = {
@@ -160,7 +159,15 @@ function isShiftModifierActive(): boolean {
     return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT);
 }
 
-function buildSpellMessage(origin, tokenName: string, type, traditionString: string, spellUUID: string, data, basic) {
+function buildSpellMessage(
+    origin,
+    tokenName: string,
+    type,
+    traditionString: string,
+    spellUUID: string,
+    data,
+    isBasicSave,
+) {
     let content = "";
     if (origin) {
         content = game.i18n.localize(
@@ -212,12 +219,12 @@ function buildSpellMessage(origin, tokenName: string, type, traditionString: str
                     .map((trait: any) => game.pf2e.system.sluggify(trait.valueOf()))
                     .sort()
                     .join(","),
-                basic,
+                basic: isBasicSave ? "|basic:true" : "",
             });
         } else {
             content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.noButtonSavePart`, {
                 dataSave: dataSave,
-                basic: basic
+                basic: isBasicSave
                     ? game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.basic`)
                     : "",
             });

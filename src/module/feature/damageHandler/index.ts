@@ -25,7 +25,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             ["all", "gm"].includes(settings.autoRollDamageAllow),
         )
     ) {
-        const pf2eFlags = <ActorFlagsPF2e>message.flags.pf2e;
+        const pf2eFlags = message.flags.pf2e;
         const originUuid = <string>pf2eFlags?.origin?.uuid;
 
         if (originUuid) {
@@ -63,8 +63,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             const isFailure = ["criticalFailure", "failure"].includes(degreeOfSuccess);
             const isSuccess = ["criticalSuccess", "success"].includes(degreeOfSuccess);
-            const context: any = pf2eFlags.context;
-            const isBasicSave = context?.options?.includes("item:defense:basic");
+            const isBasicSave = pf2eFlags.context?.options?.includes("item:defense:basic");
 
             const originMessage = await getLatestChatMessageWithOrigin(5, originUuid);
             const flags = originMessage?.flags;
