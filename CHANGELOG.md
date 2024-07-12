@@ -1,3 +1,10 @@
+## [6.6.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.10...v6.6.11) (2024-07-12)
+
+
+### Bug Fixes
+
+* When casting spells privately should now show properly whether a save is basic or not. ([f78b8ca](https://github.com/xdy/xdy-pf2e-workbench/commit/f78b8ca17e3e5f4cd10afc735ac5ff975440d229))
+
 ## [6.6.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.9...v6.6.10) (2024-07-12)
 
 
