@@ -95,7 +95,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
             value: getMinMaxData("weakness", weakness.value, oldLevel, newLevel).toString(),
         });
     }
-    updateData["system.attributes.vulnerabilities"] = dvData;
+    updateData["system.attributes.weaknesses"] = dvData;
 
     // parse simple modifiers
     updateData["system.attributes.ac.value"] = getLeveledData(
