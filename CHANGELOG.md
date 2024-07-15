@@ -1,3 +1,11 @@
+## [6.6.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.12...v6.6.13) (2024-07-15)
+
+
+### Bug Fixes
+
+* Update of auto apply persistent damage and recovery roll ([47e1cdb](https://github.com/xdy/xdy-pf2e-workbench/commit/47e1cdbd5ec389556237bd18703123c315def32d))
+* Update of auto apply persistent healing similar to how auto apply persistent damage is done. ([59070ba](https://github.com/xdy/xdy-pf2e-workbench/commit/59070ba9d42676c70a7c19b1f95bc34647c30961))
+
 ## [6.6.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.11...v6.6.12) (2024-07-15)
 
 
