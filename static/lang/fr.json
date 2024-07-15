@@ -698,6 +698,7 @@
         "selectOneActor": "Vous devez sélectionner un acteur.",
         "enabled": "Regagner {regain} des points de focalisation.<br/>Cliquez <b>UNIQUEMENT</b> si vous avez {details} depuis la dernière Refocalisation."
       }
-    }
+    },
+    "effectItem": "Effet objet"
   }
 }
