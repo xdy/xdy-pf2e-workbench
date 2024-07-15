@@ -69,7 +69,7 @@ async function generateMessageData(message: ChatMessagePF2e, origin, spellUUID: 
     const anonymous = game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.they`);
     const tokenName = game.settings.get("pf2e", "metagame_tokenSetsNameVisibility")
         ? anonymous
-        : message.alias ?? message.token?.name ?? message.actor?.name ?? anonymous;
+        : (message.alias ?? message.token?.name ?? message.actor?.name ?? anonymous);
 
     const type = message.flags?.pf2e.origin?.type ?? "spell";
     const traditionString = message.flags?.pf2e.casting?.tradition ?? "";

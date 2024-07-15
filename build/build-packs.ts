@@ -37,7 +37,7 @@ function copyFolder(source: string, target: string) {
 }
 
 function getFolders(path: string | Buffer | URL) {
-    return fs.readdirSync(path).filter(function(file) {
+    return fs.readdirSync(path).filter(function (file) {
         return fs.statSync(path + "/" + file).isDirectory();
     });
 }

@@ -122,7 +122,7 @@ export function shouldIHandleThis(actor) {
     const updater =
         currentUser?.active && actor.canUserModify(currentUser, "update")
             ? currentUser
-            : assignedUser ?? game.users.activeGM ?? anyoneWithPermission ?? null;
+            : (assignedUser ?? game.users.activeGM ?? anyoneWithPermission ?? null);
     return game.user.id === updater?.id;
 }
 
