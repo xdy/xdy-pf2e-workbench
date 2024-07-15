@@ -64,6 +64,10 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
         persistentDamage(message);
     }
 
+    if (game.settings.get(MODULENAME, "applyPersistentHealing")) {
+        persistentHealing(message);
+    }
+
     if (reminderTargetingEnabled) {
         proceed = reminderTargeting(message, String(game.settings.get(MODULENAME, "reminderTargeting")));
     }
@@ -118,8 +122,6 @@ function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) 
 
 export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
     const html = <HTMLElement>jq.get(0);
-    // Only acts on latest message, but can't be in createChatMessageHook as that doesn't get triggered for some reason.
-    persistentHealing(message, Boolean(game.settings.get(MODULENAME, "applyPersistentHealing")));
 
     deprecatedDyingHandlingRenderChatMessageHook(message);
 

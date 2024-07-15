@@ -165,25 +165,15 @@ export function persistentDamage(message: ChatMessagePF2e) {
     }
 }
 
-export function persistentHealing(message, enabled: boolean) {
+export function persistentHealing(message) {
     if (
-        enabled &&
-        shouldIHandleThisMessage(
-            message,
-            ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
-        ) &&
-        message.flavor &&
-        message.rolls &&
-        game.combats &&
-        game.combats.active &&
-        game.combats.active.combatant &&
-        game.combats.active.combatant.actor &&
-        message.id === game.messages.contents.slice(-1, game.messages.size)[0].id &&
-        (message.getFlag(MODULENAME, "persistentHandled") ?? true)
+        game.ready &&
+        game.settings.get(MODULENAME, "applyPersistentAllow") !== "none" &&
+        message.token &&
+        message.isDamageRoll &&
+        (message.rolls[0] as Rolled<DamageRoll>)?.instances.some((i) => i.kinds.some((k) => k === "healing"))
     ) {
-        const token = game.combats.active.combatant.token;
-        if (token && token.isOwner) {
+        if (message.token && message.token.isOwner) {
             const fastHealingLabel = game.i18n.localize(
                 `${MODULENAME}.SETTINGS.applyPersistentHealing.FastHealingLabel`,
             );
@@ -192,12 +182,10 @@ export function persistentHealing(message, enabled: boolean) {
             );
             if ([fastHealingLabel, regenerationLabel].some((text) => message.flavor?.includes(text))) {
                 const healing = message.rolls.reduce((sum, current) => sum + (current.total || 1), 0) * -1;
-                token.actor
-                    ?.applyDamage({
-                        damage: healing,
-                        token: token.actor?.getActiveTokens()[0].document,
-                    })
-                    .then(() => message.setFlag(MODULENAME, "persistentHandled", true).then());
+                message.token.actor?.applyDamage({
+                    damage: healing,
+                    token: message.token,
+                });
             }
         }
     }
