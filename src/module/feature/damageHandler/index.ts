@@ -8,6 +8,8 @@ import {
 import { ActorFlagsPF2e, RollOptionFlags } from "@actor/data/base.js";
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { SpellPF2e } from "@item/spell/document.js";
+import type { ConditionPF2e } from "@item";
+import type { DamageRoll } from "@system/damage/roll.d.ts";
 
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 10;
@@ -137,42 +139,29 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
     return rollDamage;
 }
 
-export function persistentDamage(message) {
+export function persistentDamage(message: ChatMessagePF2e) {
     if (
-        shouldIHandleThisMessage(
-            message,
-            ["all", "players"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
-            ["all", "gm"].includes(String(game.settings.get(MODULENAME, "applyPersistentAllow"))),
-        ) &&
-        message.flavor &&
-        message.flavor?.includes("<strong>" + game.i18n.localize("PF2E.ConditionTypePersistent")) &&
-        message.speaker.token &&
-        message.rolls &&
-        message.rolls.length > 0 &&
-        message.id === game.messages.contents.slice(-1, game.messages.size)[0].id &&
-        game.actors &&
-        (message.getFlag(MODULENAME, "persistentHandled") ?? true)
+        game.ready &&
+        game.settings.get(MODULENAME, "applyPersistentAllow") !== "none" &&
+        message.token &&
+        message.isDamageRoll &&
+        (message.rolls[0] as Rolled<DamageRoll>)?.instances.some((i) => i.persistent && i.options.evaluatePersistent)
     ) {
-        const token = canvas.tokens?.get(message.speaker.token);
-        if (token && token.isOwner) {
-            // Should only be one roll, either way, only use the first.
-            token?.actor
-                ?.applyDamage({
-                    damage: message.rolls[0],
-                    token: token.document,
-                })
-                .then(() => message.setFlag(MODULENAME, "persistentHandled", true).then());
-        }
-        const actor = token?.actor;
-        if (actor && game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
-            const condition = actor.conditions
-                .filter((condition) => condition.slug === "persistent-damage")
-                .find((condition) => message.flavor.includes(condition.name));
-            if (condition) {
-                // TODO Update the message to remove the recovery roll button, instead include the result in the message (and remove the message the following line creates.)
-                condition.rollRecovery().then();
-            }
-        }
+        // Use .then() here so the damage taken message is in chat before the recovery roll.  It works without, but the order
+        // of the messages will be undetermined.
+        message.actor
+            ?.applyDamage({
+                damage: message.rolls[0] as Rolled<DamageRoll>,
+                token: message.token,
+            })
+            .then(() => {
+                if (game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
+                    (
+                        fromUuidSync(message.getFlag("pf2e", "origin.uuid") as string) as ConditionPF2e | null
+                    )?.rollRecovery();
+                }
+            });
+        // TODO Update the message to remove the recovery roll button, instead include the result in the message (and remove the message the following line creates.)
     }
 }
 

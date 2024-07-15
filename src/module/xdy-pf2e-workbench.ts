@@ -108,7 +108,8 @@ export function updateHooks(cleanSlate = false) {
         "preCreateChatMessage",
         gs.get(MODULENAME, "castPrivateSpell") ||
             gs.get(MODULENAME, "reminderTargeting") !== "no" ||
-            gs.get(MODULENAME, "reminderCannotAttack") === "cancelAttack",
+            gs.get(MODULENAME, "reminderCannotAttack") === "cancelAttack" ||
+            gs.get(MODULENAME, "applyPersistentDamage"),
         preCreateChatMessageHook,
     );
 
