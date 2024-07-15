@@ -1,3 +1,10 @@
+## [6.6.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.11...v6.6.12) (2024-07-15)
+
+
+### Bug Fixes
+
+* Scale To Level now handles weakness right, courtesy of FelixSteffen. ([260b049](https://github.com/xdy/xdy-pf2e-workbench/commit/260b0498940acc5f46ee3e077b18dce0b8cc769f))
+
 ## [6.6.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.10...v6.6.11) (2024-07-12)
 
 
