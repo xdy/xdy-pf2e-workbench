@@ -88,7 +88,7 @@
     "@yaireo/tagify": "^4.27.0",
     "codemirror": "^6.0.1",
     "luxon": "^3.4.4",
-    "minisearch": "^6.3.0",
+    "minisearch": "^7.0.0",
     "nouislider": "^15.8.1",
     "remeda": "^2.5.0",
     "sortablejs": "^1.15.2",
