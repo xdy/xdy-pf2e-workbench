@@ -1,0 +1,22 @@
+{
+  "name": "Auras",
+  "sorting": "a",
+  "folder": null,
+  "type": "Item",
+  "_id": "EAnrqTQqTri4NwlI",
+  "description": "",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "pf2e",
+    "systemVersion": "6.0.4",
+    "createdTime": 1721420371696,
+    "modifiedTime": 1721420391080,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ"
+  },
+  "_key": "!folders!EAnrqTQqTri4NwlI"
+}

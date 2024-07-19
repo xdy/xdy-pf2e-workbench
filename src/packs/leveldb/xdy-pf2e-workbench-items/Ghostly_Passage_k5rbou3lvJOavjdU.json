@@ -10,8 +10,13 @@
     "rules": [],
     "slug": null,
     "_migration": {
-      "version": 0.879,
-      "lastMigration": null
+      "version": 0.932,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.879,
+        "foundry": "12.329",
+        "system": "6.0.4"
+      }
     },
     "traits": {
       "otherTags": [],
@@ -30,16 +35,16 @@
     "actions": {
       "value": 1
     },
+    "deathNote": false,
     "requirements": {
       "value": ""
     },
     "trigger": {
       "value": ""
-    },
-    "deathNote": false
+    }
   },
   "img": "systems/pf2e/icons/default-icons/action.svg",
-  "folder": "Cb1rA7RiXqSvVP3P",
+  "folder": "owikMtjfAzsm3tqk",
   "ownership": {
     "default": 0,
     "HShcH53gfTrrSBR1": 3
@@ -59,11 +64,13 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.8.2",
-    "coreVersion": "11.314",
+    "systemVersion": "6.0.4",
+    "coreVersion": "12.329",
     "createdTime": 1699180445824,
-    "modifiedTime": 1699192450746,
-    "lastModifiedBy": "HShcH53gfTrrSBR1"
+    "modifiedTime": 1721420436286,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "k5rbou3lvJOavjdU",
   "sort": 100000,

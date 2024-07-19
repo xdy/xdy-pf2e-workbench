@@ -34,12 +34,12 @@
     ],
     "slug": "spell-effect-inspire-defense",
     "_migration": {
-      "version": 0.878,
+      "version": 0.932,
       "lastMigration": null,
       "previous": {
-        "schema": 0.794,
-        "foundry": "11.313",
-        "system": "5.7.2"
+        "schema": 0.878,
+        "foundry": "12.329",
+        "system": "6.0.4"
       }
     },
     "traits": {
@@ -80,11 +80,13 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.7.2",
-    "coreVersion": "11.313",
+    "systemVersion": "6.0.4",
+    "coreVersion": "12.329",
     "createdTime": 1665672173271,
-    "modifiedTime": 1697627227109,
-    "lastModifiedBy": "DOWEqCUlVbrjhTnT"
+    "modifiedTime": 1721420031379,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+    "compendiumSource": "Compendium.pf2e.spell-effects.Item.DLwTvjjnqs2sNGuG",
+    "duplicateSource": null
   },
   "_key": "!items!2E5JafDDAXtZAQOU"
 }

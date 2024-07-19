@@ -1,0 +1,22 @@
+{
+  "name": "Effects",
+  "sorting": "a",
+  "folder": null,
+  "type": "Item",
+  "_id": "3k9ymrOLXRMPWQkb",
+  "description": "",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "pf2e",
+    "systemVersion": "6.0.4",
+    "createdTime": 1721420358221,
+    "modifiedTime": 1721420398392,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ"
+  },
+  "_key": "!folders!3k9ymrOLXRMPWQkb"
+}

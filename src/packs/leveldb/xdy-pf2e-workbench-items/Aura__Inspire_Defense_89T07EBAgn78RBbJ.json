@@ -4,7 +4,7 @@
   "type": "effect",
   "img": "systems/pf2e/icons/spells/inspire-defense.webp",
   "effects": [],
-  "folder": "YTpgfVBBSf6gGvub",
+  "folder": "EAnrqTQqTri4NwlI",
   "sort": 500000,
   "flags": {
     "core": {
@@ -41,12 +41,12 @@
     ],
     "slug": null,
     "_migration": {
-      "version": 0.878,
+      "version": 0.932,
       "lastMigration": null,
       "previous": {
-        "schema": 0.794,
-        "foundry": "11.313",
-        "system": "5.7.2"
+        "schema": 0.878,
+        "foundry": "12.329",
+        "system": "6.0.4"
       }
     },
     "traits": {
@@ -87,11 +87,13 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.10.5",
-    "coreVersion": "11.315",
+    "systemVersion": "6.0.4",
+    "coreVersion": "12.329",
     "createdTime": 1665671947292,
-    "modifiedTime": 1702161239820,
-    "lastModifiedBy": "pkVBUO4Y1VpgZhqS"
+    "modifiedTime": 1721420383562,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+    "compendiumSource": "Item.QRgj7jrEnit1ROJw",
+    "duplicateSource": null
   },
   "_key": "!items!89T07EBAgn78RBbJ"
 }

@@ -1,0 +1,22 @@
+{
+  "name": "Adjustment Parts",
+  "sorting": "a",
+  "folder": "X9lmub3SCrcwWFzb",
+  "type": "Item",
+  "_id": "owikMtjfAzsm3tqk",
+  "description": "",
+  "sort": 100000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "pf2e",
+    "systemVersion": "6.0.4",
+    "createdTime": 1721420413377,
+    "modifiedTime": 1721420419866,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ"
+  },
+  "_key": "!folders!owikMtjfAzsm3tqk"
+}

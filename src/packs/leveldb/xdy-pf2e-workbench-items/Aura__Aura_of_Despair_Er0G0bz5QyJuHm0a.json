@@ -32,12 +32,12 @@
     ],
     "slug": null,
     "_migration": {
-      "version": 0.878,
+      "version": 0.932,
       "lastMigration": null,
       "previous": {
-        "schema": 0.845,
-        "foundry": "11.313",
-        "system": "5.7.2"
+        "schema": 0.878,
+        "foundry": "12.329",
+        "system": "6.0.4"
       }
     },
     "traits": {
@@ -72,7 +72,7 @@
     "unidentified": false
   },
   "img": "systems/pf2e/icons/spells/destructive-aura.webp",
-  "folder": "YTpgfVBBSf6gGvub",
+  "folder": "EAnrqTQqTri4NwlI",
   "ownership": {
     "default": 0,
     "CDcnMrFoRGrkHShM": 3
@@ -82,11 +82,13 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.8.2",
-    "coreVersion": "11.314",
+    "systemVersion": "6.0.4",
+    "coreVersion": "12.329",
     "createdTime": 1688213276995,
-    "modifiedTime": 1699130351103,
-    "lastModifiedBy": "HShcH53gfTrrSBR1"
+    "modifiedTime": 1721420375729,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "Er0G0bz5QyJuHm0a",
   "sort": 100000,

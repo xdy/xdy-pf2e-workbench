@@ -27,15 +27,19 @@
           "mental",
           "divine",
           "emotion",
-          "enchantment",
           "fear"
         ]
       }
     ],
     "slug": null,
     "_migration": {
-      "version": 0.879,
-      "lastMigration": null
+      "version": 0.932,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.879,
+        "foundry": "12.329",
+        "system": "6.0.4"
+      }
     },
     "traits": {
       "otherTags": [],
@@ -43,7 +47,6 @@
         "aura",
         "divine",
         "emotion",
-        "enchantment",
         "fear",
         "mental"
       ]
@@ -61,16 +64,16 @@
     "actions": {
       "value": null
     },
+    "deathNote": false,
     "requirements": {
       "value": ""
     },
     "trigger": {
       "value": ""
-    },
-    "deathNote": false
+    }
   },
   "img": "systems/pf2e/icons/default-icons/action.svg",
-  "folder": "Cb1rA7RiXqSvVP3P",
+  "folder": "owikMtjfAzsm3tqk",
   "ownership": {
     "default": 0,
     "HShcH53gfTrrSBR1": 3
@@ -90,11 +93,13 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.8.2",
-    "coreVersion": "11.314",
+    "systemVersion": "6.0.4",
+    "coreVersion": "12.329",
     "createdTime": 1699187595754,
-    "modifiedTime": 1699192826196,
-    "lastModifiedBy": "HShcH53gfTrrSBR1"
+    "modifiedTime": 1721420437467,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "E4PkAKqJYCyHrY3U",
   "sort": 200000,

@@ -4,7 +4,7 @@
   "type": "effect",
   "img": "systems/pf2e/icons/spells/bane.webp",
   "effects": [],
-  "folder": "YTpgfVBBSf6gGvub",
+  "folder": "EAnrqTQqTri4NwlI",
   "sort": 200000,
   "flags": {
     "core": {
@@ -37,12 +37,12 @@
     ],
     "slug": null,
     "_migration": {
-      "version": 0.878,
+      "version": 0.932,
       "lastMigration": null,
       "previous": {
-        "schema": 0.794,
-        "foundry": "11.313",
-        "system": "5.7.2"
+        "schema": 0.878,
+        "foundry": "12.329",
+        "system": "6.0.4"
       }
     },
     "traits": {
@@ -86,11 +86,13 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.9.3",
-    "coreVersion": "11.315",
+    "systemVersion": "6.0.4",
+    "coreVersion": "12.329",
     "createdTime": 1665671947294,
-    "modifiedTime": 1700393836305,
-    "lastModifiedBy": "pkVBUO4Y1VpgZhqS"
+    "modifiedTime": 1721420377449,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+    "compendiumSource": "Item.QRgj7jrEnit1ROJw",
+    "duplicateSource": null
   },
   "_key": "!items!YcyN7BDbL0Nt3CFN"
 }

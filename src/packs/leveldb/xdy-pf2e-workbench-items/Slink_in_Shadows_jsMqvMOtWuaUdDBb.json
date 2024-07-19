@@ -9,9 +9,13 @@
     "rules": [],
     "slug": null,
     "_migration": {
-      "version": 0.879,
+      "version": 0.932,
       "lastMigration": null,
-      "previous": null
+      "previous": {
+        "schema": 0.879,
+        "foundry": "12.329",
+        "system": "6.0.4"
+      }
     },
     "traits": {
       "otherTags": [],
@@ -31,20 +35,20 @@
     "actions": {
       "value": null
     },
+    "deathNote": false,
     "requirements": {
       "value": ""
     },
     "trigger": {
       "value": ""
     },
-    "deathNote": false,
     "weapon": {
       "value": ""
     }
   },
   "type": "action",
   "effects": [],
-  "folder": "Cb1rA7RiXqSvVP3P",
+  "folder": "owikMtjfAzsm3tqk",
   "ownership": {
     "default": 0,
     "HShcH53gfTrrSBR1": 3
@@ -54,13 +58,15 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.8.2",
-    "coreVersion": "11.314",
+    "systemVersion": "6.0.4",
+    "coreVersion": "12.329",
     "createdTime": 1699192759148,
-    "modifiedTime": 1699192841860,
-    "lastModifiedBy": "HShcH53gfTrrSBR1"
+    "modifiedTime": 1721420439274,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "jsMqvMOtWuaUdDBb",
-  "sort": 0,
+  "sort": 150000,
   "_key": "!items!jsMqvMOtWuaUdDBb"
 }

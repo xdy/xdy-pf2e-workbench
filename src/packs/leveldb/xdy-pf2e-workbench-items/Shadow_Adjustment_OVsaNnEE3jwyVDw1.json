@@ -38,8 +38,11 @@
       {
         "key": "ActiveEffectLike",
         "mode": "add",
-        "path": "system.traits.languages.value",
-        "value": "necril"
+        "path": "system.build.languages.granted",
+        "value": {
+          "slug": "necril",
+          "source": "{item|name}"
+        }
       },
       {
         "key": "Weakness",
@@ -57,12 +60,12 @@
     ],
     "slug": null,
     "_migration": {
-      "version": 0.879,
+      "version": 0.932,
       "lastMigration": null,
       "previous": {
-        "schema": 0.878,
-        "foundry": "11.313",
-        "system": "5.8.0"
+        "schema": 0.879,
+        "foundry": "12.329",
+        "system": "6.0.4"
       }
     },
     "traits": {
@@ -82,16 +85,16 @@
     "actions": {
       "value": null
     },
+    "deathNote": false,
     "requirements": {
       "value": ""
     },
     "trigger": {
       "value": ""
-    },
-    "deathNote": false
+    }
   },
   "img": "systems/pf2e/icons/default-icons/action.svg",
-  "folder": "gb7DDfzvB7w2cK7C",
+  "folder": "X9lmub3SCrcwWFzb",
   "ownership": {
     "default": 0,
     "HShcH53gfTrrSBR1": 3
@@ -111,13 +114,15 @@
   },
   "_stats": {
     "systemId": "pf2e",
-    "systemVersion": "5.8.2",
-    "coreVersion": "11.314",
+    "systemVersion": "6.0.4",
+    "coreVersion": "12.329",
     "createdTime": 1682735407923,
-    "modifiedTime": 1699192870420,
-    "lastModifiedBy": "HShcH53gfTrrSBR1"
+    "modifiedTime": 1721420430670,
+    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "OVsaNnEE3jwyVDw1",
-  "sort": 0,
+  "sort": 112500,
   "_key": "!items!OVsaNnEE3jwyVDw1"
 }
