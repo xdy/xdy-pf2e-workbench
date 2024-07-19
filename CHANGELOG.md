@@ -1,3 +1,10 @@
+## [6.6.14](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.13...v6.6.14) (2024-07-19)
+
+
+### Bug Fixes
+
+* Set required foundry version to 12.329, update and rebuild all compendiums. ([58dbc2c](https://github.com/xdy/xdy-pf2e-workbench/commit/58dbc2c8d13b755fbce31cfac3d075ff46b6d405))
+
 ## [6.6.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.12...v6.6.13) (2024-07-15)
 
 
