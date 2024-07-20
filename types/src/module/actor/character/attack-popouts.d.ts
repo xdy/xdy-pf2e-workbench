@@ -1,10 +1,11 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import type { ElementTrait } from "@scripts/config/traits.ts";
 import type { CharacterStrike } from "./data.ts";
 import type { CharacterPF2e } from "./document.ts";
-import { CharacterSheetPF2e, type CharacterSheetData } from "./sheet.ts";
+import { type CharacterSheetData, CharacterSheetPF2e } from "./sheet.ts";
+import { EffectTrait } from "@item/abstract-effect/types.ts";
+
 declare class AttackPopout<TActor extends CharacterPF2e> extends CharacterSheetPF2e<TActor> {
     #private;
     type: "strike" | "blast";
@@ -27,7 +28,7 @@ interface StrikePopoutOptions extends BaseAttackPopoutOptions {
 }
 interface BlastPopoutOptions extends BaseAttackPopoutOptions {
     type: "blast";
-    elementTrait?: ElementTrait;
+    elementTrait?: EffectTrait;
 }
 type AttackPopoutOptions = StrikePopoutOptions | BlastPopoutOptions;
 interface AttackPopoutData<TActor extends CharacterPF2e> extends CharacterSheetData<TActor> {

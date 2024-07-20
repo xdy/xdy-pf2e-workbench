@@ -10,7 +10,15 @@ import type { immunityTypes, resistanceTypes, weaknessTypes } from "@scripts/con
 import type { DamageRoll } from "@system/damage/roll.ts";
 import type { DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import type { Predicate } from "@system/predication.ts";
-import type { ACTOR_TYPES, ATTRIBUTE_ABBREVIATIONS, DC_SLUGS, MOVEMENT_TYPES, SAVE_TYPES, SKILL_SLUGS, UNAFFECTED_TYPES } from "./values.ts";
+import type {
+    ACTOR_TYPES,
+    ATTRIBUTE_ABBREVIATIONS,
+    CORE_SKILL_SLUGS,
+    MOVEMENT_TYPES,
+    SAVE_TYPES,
+    UNAFFECTED_TYPES,
+} from "./values.ts";
+
 type ActorType = (typeof ACTOR_TYPES)[number];
 /** Used exclusively to resolve `ActorPF2e#isOfType` */
 interface ActorInstances<TParent extends TokenDocumentPF2e | null> {
@@ -33,10 +41,10 @@ interface ActorDimensions {
     width: number;
     height: number;
 }
-type SkillSlug = SetElement<typeof SKILL_SLUGS>;
+type SkillSlug = SetElement<typeof CORE_SKILL_SLUGS>;
 type ActorAlliance = "party" | "opposition" | null;
-type DCSlug = SetElement<typeof DC_SLUGS>;
 type SaveType = (typeof SAVE_TYPES)[number];
+type DCSlug = "ac" | "armor" | "perception" | SaveType | SkillSlug;
 type MovementType = (typeof MOVEMENT_TYPES)[number];
 interface AuraData {
     slug: string;

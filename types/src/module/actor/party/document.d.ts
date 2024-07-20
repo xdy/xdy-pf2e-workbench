@@ -9,6 +9,7 @@ import type { Statistic } from "@system/statistic/index.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { PartySource, PartySystemData } from "./data.ts";
 import { PartyCampaign, PartyUpdateOperation } from "./types.ts";
+
 declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     armorClass: null;
     members: CreaturePF2e[];
@@ -30,8 +31,6 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /** Make `system.campaign` non-enumerable to prevent `TokenDocument.getTrackedAttributes` from recursing into it. */
     protected _initialize(options?: Record<string, unknown> | undefined): void;
     prepareBaseData(): void;
-    /** Run rule elements (which may occur if it contains a kingdom) */
-    prepareEmbeddedDocuments(): void;
     prepareDerivedData(): void;
     addMembers(...membersToAdd: CreaturePF2e[]): Promise<void>;
     removeMembers(...remove: (ActorUUID | CreaturePF2e)[]): Promise<void>;
@@ -48,6 +47,7 @@ declare class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /** Include campaign statistics in party statistics */
     getStatistic(slug: string): Statistic<this> | null;
     private _resetAndRerenderDebounced;
+    protected _preCreate(data: this["_source"], options: DatabaseCreateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
     protected _preUpdate(changed: DeepPartial<PartySource>, options: PartyUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
     /** Override to inform creatures when they were booted from a party */
     protected _onUpdate(changed: DeepPartial<PartySource>, operation: PartyUpdateOperation<TParent>, userId: string): void;

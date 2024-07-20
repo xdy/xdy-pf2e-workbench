@@ -1,6 +1,7 @@
-import type { AlphaField, ColorField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, RuleElementSchema } from "./data.ts";
+import fields = foundry.data.fields;
+
 /**
  * Change the image representing an actor's token
  * @category RuleElement
@@ -14,12 +15,29 @@ interface TokenImageRuleElement extends RuleElementPF2e<TokenImageRuleSchema>, M
 }
 type TokenImageRuleSchema = RuleElementSchema & {
     /** An image or video path */
-    value: StringField<string, string, true, false, false>;
+    value: fields.StringField<string, string, true, false, false>;
     /** An optional scale adjustment */
-    scale: NumberField<number, number, false, true, true>;
+    scale: fields.NumberField<number, number, false, true, true>;
     /** An optional tint adjustment */
-    tint: ColorField;
+    tint: fields.ColorField;
     /** An optional alpha adjustment */
-    alpha: AlphaField<false, true, true>;
+    alpha: fields.AlphaField<false, true, true>;
+    /** Animation options for when the image is applied */
+    animation: fields.SchemaField<{
+        duration: fields.NumberField<number, number, false, false, false>;
+        transition: fields.StringField<TextureTransitionType, TextureTransitionType, false, false, false>;
+        easing: fields.StringField<string, string, false, false, false>;
+        name: fields.StringField<string, string, false, false, false>;
+    }, {
+        duration: number | undefined;
+        transition: TextureTransitionType | undefined;
+        easing: string | undefined;
+        name: string | undefined;
+    }, {
+        duration: number | undefined;
+        transition: TextureTransitionType | undefined;
+        easing: string | undefined;
+        name: string | undefined;
+    }, false, true, true>;
 };
 export { TokenImageRuleElement };

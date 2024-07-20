@@ -1,4 +1,3 @@
-import { AttributeString, SkillSlug } from "@actor/types.ts";
 declare const ATTRIBUTE_ABBREVIATIONS: Set<"str" | "dex" | "con" | "int" | "wis" | "cha">;
 declare const CREATURE_ACTOR_TYPES: readonly ["character", "npc", "familiar"];
 declare const ACTOR_TYPES: readonly ["army", "character", "familiar", "hazard", "loot", "npc", "party", "vehicle"];
@@ -7,13 +6,9 @@ declare const IMMUNITY_TYPES: Set<"arcane" | "divine" | "occult" | "primal" | "a
 declare const WEAKNESS_TYPES: Set<"arcane" | "divine" | "occult" | "primal" | "abysium" | "adamantine" | "alchemical" | "dawnsilver" | "djezet" | "duskwood" | "emotion" | "energy" | "glass" | "holy" | "inubrix" | "light" | "magical" | "metal" | "non-magical" | "noqual" | "orichalcum" | "physical" | "plant" | "radiation" | "salt" | "siccatite" | "silver" | "spells" | "unholy" | "vorpal" | "water" | "weapons" | "wood" | "acid" | "air" | "bleed" | "bludgeoning" | "cold" | "earth" | "electricity" | "fire" | "force" | "mental" | "piercing" | "poison" | "precision" | "slashing" | "sonic" | "spirit" | "vitality" | "void" | "cold-iron" | "persistent-damage" | "custom" | "area-damage" | "critical-hits" | "nonlethal-attacks" | "salt-water" | "unarmed-attacks" | "all-damage" | "arrow-vulnerability" | "axe-vulnerability" | "ghost-touch" | "splash-damage" | "vampire-weaknesses" | "vorpal-fear" | "vulnerable-to-sunlight" | "weapons-shedding-bright-light">;
 declare const RESISTANCE_TYPES: Set<"arcane" | "divine" | "occult" | "primal" | "abysium" | "adamantine" | "alchemical" | "axes" | "dawnsilver" | "djezet" | "duskwood" | "energy" | "holy" | "inubrix" | "light" | "magical" | "metal" | "non-magical" | "nonlethal" | "noqual" | "orichalcum" | "physical" | "plant" | "radiation" | "salt" | "siccatite" | "silver" | "spells" | "unholy" | "vorpal" | "water" | "weapons" | "wood" | "acid" | "air" | "bleed" | "bludgeoning" | "cold" | "earth" | "electricity" | "fire" | "force" | "mental" | "piercing" | "poison" | "precision" | "slashing" | "sonic" | "spirit" | "vitality" | "void" | "cold-iron" | "persistent-damage" | "custom" | "area-damage" | "critical-hits" | "nonlethal-attacks" | "salt-water" | "unarmed-attacks" | "all-damage" | "ghost-touch" | "weapons-shedding-bright-light" | "damage-from-spells" | "protean-anatomy" | "vorpal-adamantine">;
 declare const UNAFFECTED_TYPES: Set<"bleed" | "spirit" | "vitality" | "void" | "chaotic" | "evil" | "good" | "lawful">;
-declare const SKILL_SLUGS: Set<"athletics" | "deception" | "stealth" | "nature" | "acrobatics" | "arcana" | "crafting" | "diplomacy" | "intimidation" | "medicine" | "occultism" | "performance" | "religion" | "society" | "survival" | "thievery">;
-declare const DC_SLUGS: Set<"armor" | "athletics" | "deception" | "fortitude" | "perception" | "reflex" | "stealth" | "will" | "nature" | "acrobatics" | "arcana" | "crafting" | "diplomacy" | "intimidation" | "medicine" | "occultism" | "performance" | "religion" | "society" | "survival" | "thievery" | "ac">;
-interface SkillExpanded {
-    attribute: AttributeString;
-}
-declare const SKILL_EXPANDED: Record<SkillSlug, SkillExpanded>;
+/** All skill slugs that are part of the core system. Used for validation. */
+declare const CORE_SKILL_SLUGS: Set<"athletics" | "deception" | "stealth" | "nature" | "acrobatics" | "arcana" | "crafting" | "diplomacy" | "intimidation" | "medicine" | "occultism" | "performance" | "religion" | "society" | "survival" | "thievery">;
 declare const MOVEMENT_TYPES: readonly ["land", "burrow", "climb", "fly", "swim"];
 /** Actor types that are valid for token size linking */
 declare const SIZE_LINKABLE_ACTOR_TYPES: Set<string>;
-export { ACTOR_TYPES, ATTRIBUTE_ABBREVIATIONS, CREATURE_ACTOR_TYPES, DC_SLUGS, IMMUNITY_TYPES, MOVEMENT_TYPES, RESISTANCE_TYPES, SAVE_TYPES, SIZE_LINKABLE_ACTOR_TYPES, SKILL_EXPANDED, SKILL_SLUGS, UNAFFECTED_TYPES, WEAKNESS_TYPES, };
+export { ACTOR_TYPES, ATTRIBUTE_ABBREVIATIONS, CORE_SKILL_SLUGS, CREATURE_ACTOR_TYPES, IMMUNITY_TYPES, MOVEMENT_TYPES, RESISTANCE_TYPES, SAVE_TYPES, SIZE_LINKABLE_ACTOR_TYPES, UNAFFECTED_TYPES, WEAKNESS_TYPES, };

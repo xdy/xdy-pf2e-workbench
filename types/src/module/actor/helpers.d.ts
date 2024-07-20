@@ -1,10 +1,11 @@
 import { type ActorPF2e } from "@actor";
-import type { ItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
+import type { ItemPF2e, MeleePF2e, PhysicalItemPF2e, WeaponPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import { ActorSourcePF2e } from "./data/index.ts";
 import { ModifierPF2e } from "./modifiers.ts";
 import { NPCStrike } from "./npc/data.ts";
 import { AuraEffectData } from "./types.ts";
+
 /**
  * Reset and rerender a provided list of actors. Omit argument to reset all world and synthetic actors
  * @param [actors] A list of actors to refresh: if none are provided, all world and synthetic actors are retrieved
@@ -52,5 +53,7 @@ declare function getRangeIncrement(attackItem: ItemPF2e<ActorPF2e>, distance: nu
 declare function calculateRangePenalty(actor: ActorPF2e, increment: number | null, selectors: string[], rollOptions: Set<string>): ModifierPF2e | null;
 /** Whether this actor is of a the "character" type, excluding those from the PF2E Companion Compendia module */
 declare function isReallyPC(actor: ActorPF2e): boolean;
-export { auraAffectsActor, calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, createEnvironmentRollOptions, getRangeIncrement, getStrikeAttackDomains, getStrikeDamageDomains, isOffGuardFromFlanking, isReallyPC, migrateActorSource, resetActors, setHitPointsRollOptions, strikeFromMeleeItem, userColorForActor, };
+/** Recursive generator function to iterate over all items and their sub items */
+declare function iterateAllItems<T extends ActorPF2e>(document: T | PhysicalItemPF2e<T>): Generator<ItemPF2e<T>>;
+export { auraAffectsActor, calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, createEnvironmentRollOptions, getRangeIncrement, getStrikeAttackDomains, getStrikeDamageDomains, isOffGuardFromFlanking, isReallyPC, iterateAllItems, migrateActorSource, resetActors, setHitPointsRollOptions, strikeFromMeleeItem, userColorForActor, };
 export type { MultipleAttackPenaltyData };

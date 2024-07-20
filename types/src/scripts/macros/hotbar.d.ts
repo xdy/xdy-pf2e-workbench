@@ -1,6 +1,7 @@
 import type { ConditionPF2e, EffectPF2e } from "@item";
+import { EffectTrait } from "@item/abstract-effect/types.ts";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
-import type { ElementTrait } from "@scripts/config/traits.ts";
+
 /**
  * Create a Macro from an Item drop.
  * Get an existing item macro if one exists, otherwise create a new one.
@@ -19,7 +20,7 @@ interface RollActionMacroParams {
     actorUUID?: ActorUUID;
     itemId?: string;
     slug?: string;
-    elementTrait?: ElementTrait;
+    elementTrait?: EffectTrait;
     type?: "blast" | "strike";
 }
 export {};

@@ -1,5 +1,6 @@
 import { ActionCost } from "@item/base/data/system.ts";
 import Sortable from "sortablejs";
+
 /**
  * Given an array and a key function, create a map where the key is the value that
  * gets returned when each item is pushed into the function. Accumulate
@@ -72,6 +73,16 @@ declare function ordinalString(value: number): string;
 declare function localizeList(items: string[], { conjunction }?: {
     conjunction?: "and" | "or";
 }): string;
+/**
+ * Split and sanitize a list in string form. The empty string is always excluded from the resulting array.
+ * @param [options.delimiter] The delimiter by which to split (default of ",")
+ * @param [options.unique]    Whether to ensure the uniqueness of the resulting array's elements (default of true)
+ */
+declare function splitListString(str: string, { delimiter, unique }?: SplitListStringOptions): string[];
+interface SplitListStringOptions {
+    delimiter?: string | RegExp;
+    unique?: boolean;
+}
 /** Generate and return an HTML element for a FontAwesome icon */
 type FontAwesomeStyle = "solid" | "regular" | "duotone";
 declare function fontAwesomeIcon(glyph: string, { style, fixedWidth }?: {
@@ -103,4 +114,4 @@ declare function isImageFilePath(path: unknown): path is ImageFilePath;
 declare function isVideoFilePath(path: unknown): path is ImageFilePath;
 declare function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath;
 declare const SORTABLE_BASE_OPTIONS: Sortable.Options;
-export { ErrorPF2e, SORTABLE_BASE_OPTIONS, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinalString, padArray, parseHTML, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortLabeledRecord, sortObjByKey, sortStringRecord, tupleHasValue, type SlugCamel, };
+export { ErrorPF2e, SORTABLE_BASE_OPTIONS, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinalString, padArray, parseHTML, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortLabeledRecord, sortObjByKey, sortStringRecord, splitListString, tupleHasValue, type SlugCamel, };

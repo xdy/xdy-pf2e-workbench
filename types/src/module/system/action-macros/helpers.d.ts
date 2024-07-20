@@ -6,7 +6,13 @@ import { RollNotePF2e } from "@module/notes.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { CheckType } from "@system/check/index.ts";
 import type { DegreeOfSuccessString } from "@system/degree-of-success.ts";
-import type { CheckContextData, CheckContextOptions, CheckMacroContext, SimpleRollActionCheckOptions } from "./types.ts";
+import type {
+    CheckContextData,
+    CheckContextOptions,
+    CheckMacroContext,
+    SimpleRollActionCheckOptions,
+} from "./types.ts";
+
 declare class ActionMacroHelpers {
     #private;
     static resolveStat(stat: string): {
@@ -25,6 +31,8 @@ declare class ActionMacroHelpers {
     };
     static getWeaponPotencyModifier(item: WeaponPF2e<ActorPF2e>, selector: string): ModifierPF2e | null;
     static getApplicableEquippedWeapons(actor: ActorPF2e, trait: WeaponTrait): WeaponPF2e<ActorPF2e>[];
+    /** Attempts to get the label for the given statistic using a slug */
+    static getSimpleCheckLabel(slug: string): string | null;
 }
 declare class CheckContextError extends Error {
     actor: ActorPF2e;

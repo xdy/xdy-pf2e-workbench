@@ -2,6 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import { ActorPF2e } from "@actor";
+
 /** Extend ActorDirectory to show more information */
 declare class ActorDirectoryPF2e extends ActorDirectory<ActorPF2e<null>> {
     #private;
@@ -18,8 +19,6 @@ declare class ActorDirectoryPF2e extends ActorDirectory<ActorPF2e<null>> {
     protected _handleDroppedEntry(target: HTMLElement, data: ActorSidebarDropData): Promise<void>;
     /** Inject parties without having to alter a core template */
     protected _renderInner(data: object): Promise<JQuery>;
-    /** Include flattened update data so parent method can read nested update keys */
-    protected _render(force?: boolean, context?: SidebarDirectoryRenderOptions): Promise<void>;
     protected _contextMenu($html: JQuery<HTMLElement>): void;
     protected _getEntryContextOptions(): EntryContextOption[];
     protected _getPartyContextOptions(): EntryContextOption[];

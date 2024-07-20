@@ -6,6 +6,7 @@ import { Rarity } from "@module/data.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import { SheetOptions, TraitTagifyEntry } from "@module/sheet/helpers.ts";
 import type * as TinyMCE from "tinymce";
+
 declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOptions> {
     #private;
     constructor(item: TItem, options?: Partial<ItemSheetOptions>);
@@ -25,12 +26,9 @@ declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, Ite
         remove?: boolean;
     }): Record<string, ProseMirror.Plugin>;
     activateListeners($html: JQuery): void;
-    protected _getSubmitData(updateData?: Record<string, unknown> | null): Record<string, unknown>;
     /** Add button to refresh from compendium if setting is enabled. */
     protected _getHeaderButtons(): ApplicationHeaderButton[];
     protected _canDragDrop(_selector: string): boolean;
-    /** Tagify sets an empty input field to "" instead of "[]", which later causes the JSON parse to throw an error */
-    protected _onSubmit(event: Event, { updateData, preventClose, preventRender }?: OnSubmitFormOptions): Promise<Record<string, unknown> | false>;
     protected _updateObject(event: Event, formData: Record<string, unknown>): Promise<void>;
     /** Overriden _render to maintain focus on tagify elements */
     protected _render(force?: boolean, options?: RenderOptions): Promise<void>;

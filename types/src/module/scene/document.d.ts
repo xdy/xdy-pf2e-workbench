@@ -1,7 +1,13 @@
 import { SceneFlagsPF2e } from "./data.ts";
-import type { AmbientLightDocumentPF2e, MeasuredTemplateDocumentPF2e, TileDocumentPF2e } from "./index.ts";
+import type {
+    AmbientLightDocumentPF2e,
+    MeasuredTemplateDocumentPF2e,
+    RegionDocumentPF2e,
+    TileDocumentPF2e,
+} from "./index.ts";
 import { TokenDocumentPF2e } from "./index.ts";
 import type { SceneConfigPF2e } from "./sheet.ts";
+
 declare class ScenePF2e extends Scene {
     /** Has this document completed `DataModel` initialization? */
     initialized: boolean;
@@ -29,11 +35,11 @@ interface ScenePF2e extends Scene {
     flags: SceneFlagsPF2e;
     /** Check for auras containing newly-placed or moved tokens (added as a debounced method) */
     checkAuras(): void;
-    _sheet: SceneConfigPF2e<this> | null;
     readonly lights: foundry.abstract.EmbeddedCollection<AmbientLightDocumentPF2e<this>>;
+    readonly regions: foundry.abstract.EmbeddedCollection<RegionDocumentPF2e<this>>;
     readonly templates: foundry.abstract.EmbeddedCollection<MeasuredTemplateDocumentPF2e<this>>;
-    readonly tokens: foundry.abstract.EmbeddedCollection<TokenDocumentPF2e<this>>;
     readonly tiles: foundry.abstract.EmbeddedCollection<TileDocumentPF2e<this>>;
+    readonly tokens: foundry.abstract.EmbeddedCollection<TokenDocumentPF2e<this>>;
     get sheet(): SceneConfigPF2e<this>;
 }
 export { ScenePF2e };

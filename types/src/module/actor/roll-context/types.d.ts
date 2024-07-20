@@ -7,6 +7,7 @@ import type { CheckContextChatFlag } from "@module/chat-message/data.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import type { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import type { Statistic } from "@system/statistic/statistic.ts";
+
 interface OpposingActorConstructorData<TActor extends ActorPF2e | null = ActorPF2e | null, TStatistic extends Statistic | StrikeData | null = Statistic | StrikeData | null, TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null> {
     actor?: TActor;
     /** The statistic used for the roll */
@@ -80,7 +81,7 @@ interface ConstructorParamsSelfIsTarget<TSelf extends ActorPF2e = ActorPF2e, TSt
 }
 type RollContextConstructorParams<TSelf extends ActorPF2e = ActorPF2e, TStatistic extends Statistic | StrikeData = Statistic | StrikeData, TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null> = ConstructorParamsSelfIsOrigin<TSelf, TStatistic, TItem> | ConstructorParamsSelfIsTarget<TSelf, TStatistic, TItem>;
 type CheckContextConstructorParams<TSelf extends ActorPF2e = ActorPF2e, TStatistic extends Statistic | StrikeData = Statistic | StrikeData, TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null> = RollContextConstructorParams<TSelf, TStatistic, TItem> & {
-    against?: string;
+    against?: string | null;
 };
 type DamageContextConstructorParams<TSelf extends ActorPF2e = ActorPF2e, TStatistic extends Statistic | StrikeData = Statistic | StrikeData, TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null> = RollContextConstructorParams<TSelf, TStatistic, TItem> & {
     /** The context object of the preceding check roll */

@@ -7,6 +7,7 @@ import { CheckCheckContext } from "@system/check/index.ts";
 import { DamageDamageContext } from "@system/damage/types.ts";
 import { DegreeAdjustmentsRecord, DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import type { ChatMessageFlags } from "types/foundry/common/documents/chat-message.d.ts";
+
 type ChatMessageSourcePF2e = foundry.documents.ChatMessageSource & {
     flags: ChatMessageFlagsPF2e;
 };
@@ -36,11 +37,14 @@ type ChatMessageFlagsPF2e = ChatMessageFlags & {
         preformatted?: "flavor" | "content" | "both";
         journalEntry?: DocumentUUID;
         appliedDamage?: AppliedDamageFlag | null;
+        treatWoundsMacroFlag?: {
+            bonus: number;
+        };
         [key: string]: unknown;
     };
     core: NonNullable<ChatMessageFlags["core"]>;
 };
-type ChatContextFlag = CheckContextChatFlag | DamageDamageContextFlag | SpellCastContextFlag | SelfEffectContextFlag;
+type ChatContextFlag = CheckContextChatFlag | DamageDamageContextFlag | SpellCastContextFlag | SelfEffectContextFlag | DamageTakenContextFlag;
 interface DamageRollFlag {
     outcome: DegreeOfSuccessString;
     total: number;
@@ -92,6 +96,12 @@ interface SelfEffectContextFlag {
     item: string;
     domains?: never;
     options?: never;
+    outcome?: never;
+}
+interface DamageTakenContextFlag {
+    type: "damage-taken";
+    domains?: never;
+    options?: string[];
     outcome?: never;
 }
 interface AppliedDamageFlag {

@@ -1,4 +1,4 @@
-import { CreaturePF2e, type CharacterPF2e } from "@actor";
+import { type CharacterPF2e, CreaturePF2e } from "@actor";
 import type { ActorUpdateOperation } from "@actor/base.ts";
 import type { ItemType } from "@item/base/data/index.ts";
 import type { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
@@ -7,12 +7,14 @@ import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { Statistic } from "@system/statistic/index.ts";
 import { FamiliarSource, FamiliarSystemData } from "./data.ts";
+
 declare class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     /** The familiar's attack statistic, for the rare occasion it must make an attack roll */
     attackStatistic: Statistic;
     get allowedItemTypes(): (ItemType | "physical")[];
     /** The familiar's master, if selected */
     get master(): CharacterPF2e | null;
+    /** Returns attribute modifier value from the master, or 0 if no attribute */
     get masterAttributeModifier(): number;
     /** @deprecated for internal use but not rule elements referencing it until a migration is in place. */
     get masterAbilityModifier(): number;

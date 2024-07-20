@@ -1,8 +1,34 @@
 import { ArmyPF2e, CharacterPF2e, FamiliarPF2e, HazardPF2e, LootPF2e, NPCPF2e, PartyPF2e, VehiclePF2e } from "@actor";
 import { SenseAcuity } from "@actor/creature/types.ts";
-import { AbilityItemPF2e, AfflictionPF2e, AncestryPF2e, ArmorPF2e, BackgroundPF2e, BookPF2e, CampaignFeaturePF2e, ClassPF2e, ConditionPF2e, ConsumablePF2e, ContainerPF2e, DeityPF2e, EffectPF2e, EquipmentPF2e, FeatPF2e, HeritagePF2e, KitPF2e, LorePF2e, MeleePF2e, ShieldPF2e, SpellPF2e, SpellcastingEntryPF2e, TreasurePF2e, WeaponPF2e } from "@item";
+import {
+    AbilityItemPF2e,
+    AfflictionPF2e,
+    AncestryPF2e,
+    ArmorPF2e,
+    BackgroundPF2e,
+    BookPF2e,
+    CampaignFeaturePF2e,
+    ClassPF2e,
+    ConditionPF2e,
+    ConsumablePF2e,
+    ContainerPF2e,
+    DeityPF2e,
+    EffectPF2e,
+    EquipmentPF2e,
+    FeatPF2e,
+    HeritagePF2e,
+    KitPF2e,
+    LorePF2e,
+    MeleePF2e,
+    ShieldPF2e,
+    SpellcastingEntryPF2e,
+    SpellPF2e,
+    TreasurePF2e,
+    WeaponPF2e,
+} from "@item";
 import { WeaponReloadTime } from "@item/weapon/types.ts";
 import { JournalSheetPF2e } from "@module/journal-entry/sheet.ts";
+
 export type StatusEffectIconTheme = "default" | "blackWhite";
 export declare const PF2ECONFIG: {
     defaultPartyId: string;
@@ -1099,6 +1125,14 @@ export declare const PF2ECONFIG: {
         ooze: string;
         oread: string;
         paaridar: string;
+        "persona-flirt": string;
+        "persona-guardian": string;
+        "persona-leader": string;
+        "persona-scholar": string;
+        "persona-scoundrel": string;
+        "persona-underdog": string;
+        "persona-warrior": string;
+        "persona-wildcard": string;
         petitioner: string;
         phantom: string;
         plant: string;
@@ -1519,7 +1553,8 @@ export declare const PF2ECONFIG: {
         graft: string;
         grimoire: string;
         "harrow-court": string;
-        healing: string; /** Max speed for number of hexploration activities */
+        healing: string;
+        illusion: string;
         incapacitation: string;
         incorporeal: string;
         infused: string;
@@ -2720,6 +2755,7 @@ export declare const PF2ECONFIG: {
         grapple: string;
         hampering: string;
         healing: string;
+        illusion: string;
         infused: string;
         inhaled: string;
         injection: string;
@@ -3431,6 +3467,14 @@ export declare const PF2ECONFIG: {
         overflow: string;
         parry: string;
         peachwood: string;
+        "persona-flirt": string;
+        "persona-guardian": string;
+        "persona-leader": string;
+        "persona-scholar": string;
+        "persona-scoundrel": string;
+        "persona-underdog": string;
+        "persona-warrior": string;
+        "persona-wildcard": string;
         phantom: string;
         plant: string;
         poison: string;
@@ -3543,6 +3587,14 @@ export declare const PF2ECONFIG: {
         ooze: string;
         oread: string;
         paaridar: string;
+        "persona-flirt": string;
+        "persona-guardian": string;
+        "persona-leader": string;
+        "persona-scholar": string;
+        "persona-scoundrel": string;
+        "persona-underdog": string;
+        "persona-warrior": string;
+        "persona-wildcard": string;
         petitioner: string;
         phantom: string;
         plant: string;
@@ -3765,25 +3817,72 @@ export declare const PF2ECONFIG: {
         friendly: string;
         helpful: string;
     };
-    skillList: {
-        acrobatics: string;
-        arcana: string;
-        athletics: string;
-        crafting: string;
-        deception: string;
-        diplomacy: string;
-        intimidation: string;
-        medicine: string;
-        nature: string;
-        occultism: string;
-        performance: string;
-        religion: string;
-        society: string;
-        stealth: string;
-        survival: string;
-        thievery: string;
-        lore: string;
-    };
+    skills: Readonly<{
+        acrobatics: {
+            label: string;
+            attribute: "dex";
+        };
+        arcana: {
+            label: string;
+            attribute: "int";
+        };
+        athletics: {
+            label: string;
+            attribute: "str";
+        };
+        crafting: {
+            label: string;
+            attribute: "int";
+        };
+        deception: {
+            label: string;
+            attribute: "cha";
+        };
+        diplomacy: {
+            label: string;
+            attribute: "cha";
+        };
+        intimidation: {
+            label: string;
+            attribute: "cha";
+        };
+        medicine: {
+            label: string;
+            attribute: "wis";
+        };
+        nature: {
+            label: string;
+            attribute: "wis";
+        };
+        occultism: {
+            label: string;
+            attribute: "int";
+        };
+        performance: {
+            label: string;
+            attribute: "cha";
+        };
+        religion: {
+            label: string;
+            attribute: "wis";
+        };
+        society: {
+            label: string;
+            attribute: "int";
+        };
+        stealth: {
+            label: string;
+            attribute: "dex";
+        };
+        survival: {
+            label: string;
+            attribute: "wis";
+        };
+        thievery: {
+            label: string;
+            attribute: "dex";
+        };
+    }>;
     featCategories: Record<"curse" | "class" | "general" | "skill" | "ancestry" | "bonus" | "ancestryfeature" | "classfeature" | "deityboon" | "pfsboon", string>;
     actionTypes: {
         action: string;

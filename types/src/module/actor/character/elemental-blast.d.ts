@@ -1,14 +1,21 @@
 import type { AbilityItemPF2e } from "@item";
+import { EffectTrait } from "@item/abstract-effect/types.ts";
 import { RangeData } from "@item/types.ts";
 import { WeaponTrait } from "@item/weapon/types.ts";
-import { ElementTrait } from "@scripts/config/traits.ts";
 import { CheckRoll } from "@system/check/index.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { AttackRollParams, DamageRollParams } from "@system/rolls.ts";
 import { Statistic } from "@system/statistic/index.ts";
-import type { ArrayField, FilePathField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type {
+    ArrayField,
+    FilePathField,
+    NumberField,
+    SchemaField,
+    StringField,
+} from "types/foundry/common/data/fields.d.ts";
 import type { CharacterPF2e } from "./document.ts";
+
 declare class ElementalBlast {
     #private;
     actor: CharacterPF2e;
@@ -31,25 +38,25 @@ declare class ElementalBlast {
     damage(params: BlastDamageParams): Promise<Rolled<DamageRoll> | string | null>;
     /** Set damage type according to the user's selection on the PC sheet */
     setDamageType({ element, damageType }: {
-        element: ElementTrait;
+        element: EffectTrait;
         damageType: DamageType;
     }): Promise<void>;
 }
 interface BlastAttackParams extends AttackRollParams {
     mapIncreases: number;
-    element: ElementTrait;
+    element: EffectTrait;
     damageType: DamageType;
     melee: boolean;
 }
 interface BlastDamageParams extends DamageRollParams {
-    element: ElementTrait;
+    element: EffectTrait;
     damageType: DamageType;
     melee: boolean;
     actionCost?: number;
     outcome?: "success" | "criticalSuccess";
 }
 type BlastConfigSchema = {
-    element: StringField<ElementTrait, ElementTrait, true, false, false>;
+    element: StringField<EffectTrait, EffectTrait, true, false, false>;
     label: StringField<string, string, true, false, false>;
     img: FilePathField<ImageFilePath, ImageFilePath, true, false, true>;
     damageTypes: ArrayField<StringField<DamageType, DamageType, true, false, false>>;

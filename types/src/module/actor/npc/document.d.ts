@@ -1,13 +1,16 @@
 import { CreaturePF2e } from "@actor";
 import type { Abilities } from "@actor/creature/data.ts";
+import type { CreatureUpdateOperation } from "@actor/creature/index.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import type { MeleePF2e } from "@item";
 import type { ItemType } from "@item/base/data/index.ts";
 import { RollNotePF2e } from "@module/notes.ts";
 import { CreatureIdentificationData } from "@module/recall-knowledge.ts";
+import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import type { NPCFlags, NPCSource, NPCSystemData } from "./data.ts";
 import type { VariantCloneParams } from "./types.ts";
+
 declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     initiative: ActorInitiative;
     get allowedItemTypes(): (ItemType | "physical")[];
@@ -42,6 +45,7 @@ declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF
         save: true;
     }): Promise<this>;
     variantClone(params: VariantCloneParams): this | Promise<this>;
+    protected _preUpdate(changed: DeepPartial<NPCSource>, operation: CreatureUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
 }
 interface NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     flags: NPCFlags;

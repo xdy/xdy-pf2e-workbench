@@ -24,6 +24,9 @@
     "prettier:scss": "prettier --check src/styles"
   },
   "license": "./LICENSE",
+  "engines": {
+    "node": ">=20.15.0"
+  },
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "^1.0.3",
     "@pixi/graphics-smooth": "^1.1.0",

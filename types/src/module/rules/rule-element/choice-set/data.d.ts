@@ -1,9 +1,17 @@
 import { ItemType } from "@item/base/data/index.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { RawPredicate } from "@system/predication.ts";
-import type { DataUnionField, PredicateField, StrictArrayField, StrictBooleanField, StrictObjectField, StrictStringField } from "@system/schema-data-fields.ts";
+import type {
+    DataUnionField,
+    PredicateField,
+    StrictArrayField,
+    StrictBooleanField,
+    StrictObjectField,
+    StrictStringField,
+} from "@system/schema-data-fields.ts";
 import type { BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { RuleElementSchema, RuleElementSource } from "../data.ts";
+
 type ChoiceSetSchema = RuleElementSchema & {
     /**
      * The options from which the user can choose. If a string is provided, it is treated as a reference to a record in
@@ -36,7 +44,7 @@ type AllowedDropsSchema = {
     predicate: PredicateField;
 };
 type AllowedDropsData = ModelPropsFromSchema<AllowedDropsSchema>;
-type ChoiceSetObject = ChoiceSetOwnedItems | ChoiceSetAttacks | ChoiceSetPackQuery;
+type ChoiceSetObject = ChoiceSetOwnedItems | ChoiceSetAttacks | ChoiceSetPackQuery | ChoiceSetConfig;
 type UninflatedChoiceSet = string | PickableThing[] | ChoiceSetObject;
 interface ChoiceSetSource extends RuleElementSource {
     choices?: unknown;
@@ -58,6 +66,7 @@ interface ChoiceSetOwnedItems {
     predicate: RawPredicate;
     attacks?: never;
     unarmedAttacks?: never;
+    config?: never;
     types: (ItemType | "physical")[];
 }
 interface ChoiceSetAttacks {
@@ -68,6 +77,7 @@ interface ChoiceSetAttacks {
     /** The filter to apply the actor's own weapons/unarmed attacks */
     predicate: RawPredicate;
     ownedItems?: never;
+    config?: never;
 }
 interface ChoiceSetPackQuery {
     /** A system item type: defaults to "feat" */
@@ -81,5 +91,15 @@ interface ChoiceSetPackQuery {
     ownedItems?: never;
     attacks?: never;
     unarmedAttacks?: never;
+    config?: never;
 }
-export type { AllowedDropsData, ChoiceSetAttacks, ChoiceSetObject, ChoiceSetOwnedItems, ChoiceSetPackQuery, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet, };
+interface ChoiceSetConfig {
+    /** The config path to pull this choice set from */
+    config: string;
+    /** The filter to apply to the config options */
+    predicate: RawPredicate;
+    ownedItems?: never;
+    attacks?: never;
+    unarmedAttacks?: never;
+}
+export type { AllowedDropsData, ChoiceSetAttacks, ChoiceSetConfig, ChoiceSetObject, ChoiceSetOwnedItems, ChoiceSetPackQuery, ChoiceSetSchema, ChoiceSetSource, UninflatedChoiceSet, };

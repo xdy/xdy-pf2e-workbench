@@ -1,8 +1,12 @@
 /** Prepare form options on an item or actor sheet */
-declare function createSheetOptions(options: Record<string, string>, selections?: SheetSelections, { selected }?: {
+declare function createSheetOptions(options: Record<string, string | {
+    label: string;
+}>, selections?: SheetSelections, { selected }?: {
     selected?: boolean | undefined;
 }): SheetOptions;
-declare function createSheetTags(options: Record<string, string>, selections: SheetSelections): SheetOptions;
+declare function createSheetTags(options: Record<string, string | {
+    label: string;
+}>, selections: SheetSelections): SheetOptions;
 declare function createTagifyTraits(traits: Iterable<string>, { sourceTraits, record }: TagifyTraitOptions): {
     id: string;
     value: string;

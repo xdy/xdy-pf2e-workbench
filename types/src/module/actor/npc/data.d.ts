@@ -1,11 +1,39 @@
 import type { ActorPF2e } from "@actor/base.ts";
-import type { Abilities, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureHitPointsSource, CreatureInitiativeSource, CreatureLanguagesData, CreaturePerceptionData, CreatureResources, CreatureResourcesSource, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsSource, HeldShieldData, LabeledSpeed, SaveData, SenseData } from "@actor/creature/data.ts";
-import type { ActorAttributesSource, ActorFlagsPF2e, AttributeBasedTraceData, HitPointsStatistic, StrikeData } from "@actor/data/base.ts";
+import type {
+    Abilities,
+    BaseCreatureSource,
+    CreatureAttributes,
+    CreatureDetails,
+    CreatureDetailsSource,
+    CreatureHitPointsSource,
+    CreatureInitiativeSource,
+    CreatureLanguagesData,
+    CreaturePerceptionData,
+    CreatureResources,
+    CreatureResourcesSource,
+    CreatureSpeeds,
+    CreatureSystemData,
+    CreatureSystemSource,
+    CreatureTraitsSource,
+    HeldShieldData,
+    LabeledSpeed,
+    SaveData,
+    SenseData,
+} from "@actor/creature/data.ts";
+import type {
+    ActorAttributesSource,
+    ActorFlagsPF2e,
+    AttributeBasedTraceData,
+    HitPointsStatistic,
+    StrikeData,
+} from "@actor/data/base.ts";
 import { InitiativeTraceData } from "@actor/initiative.ts";
 import type { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
-import type { ActorAlliance, SaveType } from "@actor/types.ts";
+import type { ActorAlliance, SaveType, SkillSlug } from "@actor/types.ts";
 import type { MeleePF2e } from "@item";
 import type { PublicationData } from "@module/data.ts";
+import type { RawPredicate } from "@system/predication.ts";
+
 type NPCSource = BaseCreatureSource<"npc", NPCSystemSource> & {
     flags: DeepPartial<NPCFlags>;
 };
@@ -20,6 +48,7 @@ interface NPCSystemSource extends CreatureSystemSource {
     abilities: Abilities;
     /** Any special attributes for this NPC, such as AC or health. */
     attributes: NPCAttributesSource;
+    skills: Partial<Record<SkillSlug, NPCSkillSource>>;
     /** Modifier of the perception statistic */
     perception: NPCPerceptionSource;
     initiative: CreatureInitiativeSource;
@@ -34,6 +63,20 @@ interface NPCSystemSource extends CreatureSystemSource {
         };
     };
     resources: CreatureResourcesSource;
+}
+interface NPCSkillSource {
+    base: number;
+    /** Any special restriction or clarification */
+    note?: string;
+    /** All saved special skill modifiers */
+    special?: NPCSpecialSkillSource[];
+}
+/** Source data for special skill modifiers (such as +9 to climb) */
+interface NPCSpecialSkillSource {
+    label: string;
+    base: number;
+    /** A predicate that will automatically enable this variant if satisfied */
+    predicate?: RawPredicate;
 }
 interface NPCAttributesSource extends Required<ActorAttributesSource> {
     ac: {
@@ -172,19 +215,21 @@ interface NPCSaves {
 interface NPCHitPoints extends HitPointsStatistic {
     base?: number;
 }
-/** Skill data with a "base" value and whether the skill should be rendered (visible) */
-interface NPCSkillData extends AttributeBasedTraceData {
-    base: number;
-    itemId: string | null;
-    lore: boolean;
+/** System Data for skill special modifiers (such as +9 to climb) */
+interface NPCSpecialSkill extends NPCSpecialSkillSource {
     mod: number;
-    variants: {
-        label: string;
-        options: string;
-    }[];
+}
+/** Skill data with a "base" value and whether the skill should be rendered (visible) */
+interface NPCSkillData extends NPCSkillSource, AttributeBasedTraceData {
+    mod: number;
     visible: boolean;
+    /** Is this skill a Lore skill? */
+    lore?: boolean;
+    /** If this is a lore skill, what item it came from */
+    itemId?: string;
+    special: NPCSpecialSkill[];
 }
 interface NPCSpeeds extends CreatureSpeeds {
     details: string;
 }
-export type { NPCAttributes, NPCAttributesSource, NPCFlags, NPCHitPoints, NPCPerceptionData, NPCPerceptionSource, NPCSaveData, NPCSkillData, NPCSource, NPCStrike, NPCSystemData, NPCSystemSource, NPCTraitsSource, };
+export type { NPCAttributes, NPCAttributesSource, NPCFlags, NPCHitPoints, NPCPerceptionData, NPCPerceptionSource, NPCSaveData, NPCSkillData, NPCSkillSource, NPCSource, NPCSpecialSkillSource, NPCStrike, NPCSystemData, NPCSystemSource, NPCTraitsSource, };

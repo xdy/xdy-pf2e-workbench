@@ -5,6 +5,7 @@ import { OtherConsumableTag } from "@item/consumable/types.ts";
 import { PreciousMaterialType } from "@item/physical/types.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { OtherWeaponTag } from "@item/weapon/types.ts";
+
 declare const ancestryTraits: {
     aiuvarin: string;
     anadi: string;
@@ -173,6 +174,14 @@ declare const creatureTraits: {
     ooze: string;
     oread: string;
     paaridar: string;
+    "persona-flirt": string;
+    "persona-guardian": string;
+    "persona-leader": string;
+    "persona-scholar": string;
+    "persona-scoundrel": string;
+    "persona-underdog": string;
+    "persona-warrior": string;
+    "persona-wildcard": string;
     petitioner: string;
     phantom: string;
     plant: string;
@@ -484,6 +493,7 @@ declare const weaponTraits: {
     grapple: string;
     hampering: string;
     healing: string;
+    illusion: string;
     infused: string;
     inhaled: string;
     injection: string;
@@ -1946,6 +1956,7 @@ declare const equipmentTraits: {
     grimoire: string;
     "harrow-court": string;
     healing: string;
+    illusion: string;
     incapacitation: string;
     incorporeal: string;
     infused: string;
@@ -2978,6 +2989,14 @@ declare const traitDescriptions: {
     overflow: string;
     parry: string;
     peachwood: string;
+    "persona-flirt": string;
+    "persona-guardian": string;
+    "persona-leader": string;
+    "persona-scholar": string;
+    "persona-scoundrel": string;
+    "persona-underdog": string;
+    "persona-warrior": string;
+    "persona-wildcard": string;
     phantom: string;
     plant: string;
     poison: string;

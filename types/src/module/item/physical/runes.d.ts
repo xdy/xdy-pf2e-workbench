@@ -1,5 +1,5 @@
 import { CreatureTrait } from "@actor/creature/index.ts";
-import { DamageDicePF2e, DamageDiceParameters, ModifierAdjustment } from "@actor/modifiers.ts";
+import { DamageDiceParameters, DamageDicePF2e, ModifierAdjustment } from "@actor/modifiers.ts";
 import { ResistanceType } from "@actor/types.ts";
 import type { ArmorPF2e, PhysicalItemPF2e, WeaponPF2e } from "@item";
 import { ArmorPropertyRuneType, ResilientRuneType } from "@item/armor/types.ts";
@@ -9,6 +9,7 @@ import { OneToFour, Rarity, ZeroToFour, ZeroToSix, ZeroToThree } from "@module/d
 import { RollNoteSource } from "@module/notes.ts";
 import { StrikeAdjustment } from "@module/rules/synthetics.ts";
 import { DegreeOfSuccessAdjustment } from "@system/degree-of-success.ts";
+
 declare function getPropertyRuneSlots(item: WeaponPF2e | ArmorPF2e): ZeroToFour;
 /** Remove duplicate and lesser versions from an array of property runes */
 declare function prunePropertyRunes<T extends string>(runes: (string | null)[], validTypes: Record<T, unknown>): T[];
@@ -68,7 +69,7 @@ interface WeaponPropertyRuneData<TSlug extends WeaponPropertyRuneType> extends P
          */
         ignoredResistances?: {
             type: ResistanceType;
-            max: number | null;
+            max: number;
         }[];
     };
     strikeAdjustments?: Pick<StrikeAdjustment, "adjustTraits" | "adjustWeapon">[];

@@ -1,14 +1,21 @@
 import type { ActorPF2e } from "@actor";
 import type { DexterityModifierCapData } from "@actor/character/types.ts";
 import type { LabeledSpeed, SenseData } from "@actor/creature/data.ts";
-import type { DamageDicePF2e, DeferredDamageDiceOptions, DeferredPromise, DeferredValue, ModifierAdjustment, ModifierPF2e } from "@actor/modifiers.ts";
-import type { TokenEffect } from "@actor/token-effect.ts";
+import type {
+    DamageDicePF2e,
+    DeferredDamageDiceOptions,
+    DeferredPromise,
+    DeferredValue,
+    ModifierAdjustment,
+    ModifierPF2e,
+} from "@actor/modifiers.ts";
 import type { MovementType } from "@actor/types.ts";
 import type { MeleePF2e, WeaponPF2e } from "@item";
 import type { ActionTrait } from "@item/ability/index.ts";
 import type { ConditionSource, EffectSource } from "@item/base/data/index.ts";
 import type { WeaponRuneSource } from "@item/weapon/data.ts";
 import type { WeaponPropertyRuneType } from "@item/weapon/types.ts";
+import type { ActiveEffectPF2e } from "@module/active-effect.ts";
 import type { RollNotePF2e } from "@module/notes.ts";
 import type { MaterialDamageEffect } from "@system/damage/types.ts";
 import type { DegreeOfSuccessAdjustment } from "@system/degree-of-success.ts";
@@ -17,8 +24,9 @@ import type { Statistic } from "@system/statistic/index.ts";
 import type { TokenSource } from "types/foundry/common/documents/token.d.ts";
 import type { DamageAlteration } from "./rule-element/damage-alteration/alteration.ts";
 import type { Suboption } from "./rule-element/roll-option/data.ts";
+
 /** Defines a list of data provided by rule elements that an actor can pull from during its data preparation lifecycle */
-interface RuleElementSynthetics {
+interface RuleElementSynthetics<TActor extends ActorPF2e = ActorPF2e> {
     criticalSpecializations: {
         standard: CritSpecSynthetic[];
         alternate: CritSpecSynthetic[];
@@ -46,18 +54,20 @@ interface RuleElementSynthetics {
     strikes: DeferredStrike[];
     striking: Record<string, StrikingSynthetic[]>;
     toggles: Record<string, Record<string, RollOptionToggle>>;
-    tokenEffectIcons: TokenEffect[];
+    tokenEffectIcons: ActiveEffectPF2e<TActor>[];
     tokenMarks: Map<TokenDocumentUUID, string>;
-    tokenOverrides: DeepPartial<Pick<TokenSource, "light" | "name" | "alpha">> & {
+    tokenOverrides: DeepPartial<Pick<TokenSource, "light" | "name">> & {
+        alpha?: number | null;
         texture?: {
             src: VideoFilePath;
-            tint?: Color;
+            tint?: Color | null;
         } | {
             src: VideoFilePath;
-            tint?: Color;
+            tint?: Color | null;
             scaleX: number;
             scaleY: number;
         };
+        animation?: TokenAnimationOptions;
     };
     weaponPotency: Record<string, PotencySynthetic[]>;
 }

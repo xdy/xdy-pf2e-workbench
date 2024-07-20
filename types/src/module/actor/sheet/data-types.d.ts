@@ -3,9 +3,11 @@ import type { TraitViewData } from "@actor/data/base.ts";
 import type { ActorSizePF2e } from "@actor/data/size.ts";
 import type { InventoryBulk } from "@actor/inventory/index.ts";
 import type { PhysicalItemPF2e } from "@item";
+import type { Frequency } from "@item/base/data/index.ts";
 import type { Coins } from "@item/physical/data.ts";
 import type { RollOptionToggle } from "@module/rules/synthetics.ts";
 import type { SheetOptions } from "@module/sheet/helpers.ts";
+
 interface InventoryItem<TItem extends PhysicalItemPF2e = PhysicalItemPF2e> {
     item: TItem;
     /** Item size if it causes any weight difference relative to the actor */
@@ -39,6 +41,7 @@ interface SheetInventory {
     bulk: InventoryBulk;
     showValueAlways: boolean;
     showUnitBulkPrice: boolean;
+    hasStowedWeapons: boolean;
     hasStowingContainers: boolean;
     invested?: {
         value: number;
@@ -70,6 +73,7 @@ interface AbilityViewData {
     name: string;
     traits: TraitViewData[];
     glyph: string | null;
+    frequency: Frequency | null;
     has: {
         aura: boolean;
         deathNote: boolean;

@@ -15,8 +15,8 @@
         "type": "system",
         "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
         "compatibility": {
-          "minimum": "6.0.4",
-          "verified": "6.0.4"
+          "minimum": "6.1.0",
+          "verified": "6.1.0"
         }
       }
     ]
@@ -34,6 +34,7 @@
     {
       "name": "PF2E Workbench",
       "sorting": "m",
+      "color": "#5e0000",
       "ownership": {
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
@@ -42,6 +43,7 @@
         {
           "name": "Internal, do not import",
           "sorting": "m",
+          "color": "#5e0000",
           "ownership": {
             "PLAYER": "LIMITED",
             "ASSISTANT": "OWNER"

@@ -7,6 +7,7 @@ import { CheckCheckContext, CheckRoll } from "@system/check/index.ts";
 import { LaxSchemaField } from "@system/schema-data-fields.ts";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { BracketedValue, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
+
 /**
  * Rule Elements allow you to modify actorData and tokenData values when present on items. They can be configured
  * in the item's Rules tab which has to be enabled using the "Advanced Rule Element UI" system setting.
@@ -63,6 +64,7 @@ declare abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleE
      * @return the looked up value on the specific object
      */
     resolveInjectedProperties<T extends string | number | object | null | undefined>(source: T, options?: {
+        injectables?: Record<string, unknown>;
         warn?: boolean;
     }): T;
     /**

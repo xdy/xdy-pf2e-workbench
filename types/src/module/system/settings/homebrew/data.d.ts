@@ -1,10 +1,13 @@
 import type { Language } from "@actor/creature/index.ts";
+import { AttributeString } from "@actor/types.ts";
 import type { BaseWeaponType } from "@item/weapon/types.ts";
 import type { SetField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { MenuTemplateData, SettingsTemplateData } from "../menu.ts";
+
 declare const HOMEBREW_TRAIT_KEYS: readonly ["creatureTraits", "featTraits", "languages", "spellTraits", "weaponCategories", "weaponGroups", "baseWeapons", "weaponTraits", "equipmentTraits", "environmentTypes"];
 /** Homebrew elements from some of the above records are propagated to related records */
 declare const TRAIT_PROPAGATIONS: {
+    readonly actionTraits: readonly ["effectTraits"];
     readonly creatureTraits: readonly ["ancestryTraits"];
     readonly equipmentTraits: readonly ["armorTraits", "consumableTraits"];
     readonly featTraits: readonly ["actionTraits"];
@@ -79,9 +82,18 @@ type LanguageSettingsSchema = {
     unavailable: LanguageSetField;
 };
 type LanguageSetField = SetField<StringField<LanguageNotCommon, LanguageNotCommon, true, false, false>, LanguageNotCommon[], Set<LanguageNotCommon>, true, false, true>;
+interface ModuleHomebrewData {
+    additionalSkills: Record<string, {
+        label: string;
+        attribute: AttributeString;
+    }>;
+    damageTypes: Record<string, CustomDamageData>;
+    traits: Record<HomebrewTraitKey, HomebrewTag[]>;
+    traitDescriptions: Record<string, string>;
+}
 type RawLanguageSettings<TModel extends LanguageSettings = LanguageSettings> = RawObject<TModel> & {
     common: LanguageNotCommon[];
     homebrew: LanguageNotCommon[];
 };
 export { HOMEBREW_TRAIT_KEYS, LanguageSettings, TRAIT_PROPAGATIONS };
-export type { CustomDamageData, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey, HomebrewTraitSettingsKey, LanguageNotCommon, LanguageSettingsSheetData, };
+export type { CustomDamageData, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey, HomebrewTraitSettingsKey, LanguageNotCommon, LanguageSettingsSheetData, ModuleHomebrewData, };

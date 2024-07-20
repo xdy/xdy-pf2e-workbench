@@ -7,9 +7,17 @@ import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ItemInstances } from "../types.ts";
-import type { ItemFlagsPF2e, ItemSourcePF2e, ItemSystemData, ItemType, RawItemChatData, TraitChatData } from "./data/index.ts";
+import type {
+    ItemFlagsPF2e,
+    ItemSourcePF2e,
+    ItemSystemData,
+    ItemType,
+    RawItemChatData,
+    TraitChatData,
+} from "./data/index.ts";
 import type { ItemTrait } from "./data/system.ts";
 import type { ItemSheetPF2e } from "./sheet/sheet.ts";
+
 /** The basic `Item` subclass for the system */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     /** Has this document completed `DataModel` initialization? */
@@ -84,6 +92,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     static createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: {
         parent?: TDocument["parent"];
         pack?: Collection<TDocument> | null;
+        types?: ItemType[];
     } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;

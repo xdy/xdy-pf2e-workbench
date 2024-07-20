@@ -1,5 +1,6 @@
 import type { ActorPF2e } from "@actor";
 import { DamageInstance, DamageRoll } from "./roll.ts";
+
 /** Apply an actor's IWR applications to an evaluated damage roll's instances */
 declare function applyIWR(actor: ActorPF2e, roll: Rolled<DamageRoll>, rollOptions: Set<string>): IWRApplicationData;
 interface IWRApplicationData {
@@ -27,6 +28,7 @@ interface ResistanceApplication {
     type: string;
     adjustment: number;
     ignored: boolean;
+    redirect?: string;
 }
 /** Post-IWR reductions from various sources (e.g., hardness) */
 interface DamageReductionApplication {
