@@ -53,8 +53,6 @@
         "name": "添加用户目标"
       },
       "applyPersistentHealing": {
-        "FastHealingLabel": "获得快速愈合",
-        "RegenerationLabel": "获得再生",
         "wasHealed": "{healing}治疗已自动生效。",
         "name": "系统掷出的持续治疗自动生效。",
         "hint": "是否让系统掷出的持续治疗自动生效的客户端设置。保存设置以显示/隐藏其他选项。"

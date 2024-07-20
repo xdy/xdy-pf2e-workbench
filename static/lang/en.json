@@ -172,10 +172,8 @@
         "name": "... and automatically roll recovery after that."
       },
       "applyPersistentHealing": {
-        "FastHealingLabel": "Received fast healing",
         "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
         "name": "Automatically apply persistent healing rolled by the system.",
-        "RegenerationLabel": "Received regeneration",
         "wasHealed": "{healing} healing was automatically applied."
       },
       "autoCollapseItemChatCardContent": {

@@ -34,10 +34,8 @@
         "wasDamaged": "{damage} de dano foi aplicado automaticamente"
       },
       "applyPersistentHealing": {
-        "FastHealingLabel": "Recebeu cura acelerada",
         "hint": "Automaticamente aplica cura persistente. Salve a configuração para mostrar/ocultar opções adicionais.",
         "name": "Aplicar cura persistente",
-        "RegenerationLabel": "Recebeu regeneração",
         "wasHealed": "{healing} de cura foi aplicado automaticamente."
       },
       "autoCollapseItemChatCardContent": {
