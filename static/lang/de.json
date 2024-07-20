@@ -273,10 +273,8 @@
         "name": "Ziele des Benutzers hinzufügen"
       },
       "applyPersistentHealing": {
-        "FastHealingLabel": "Schnelle Heilung erhalten",
         "hint": "Client-Einstellung um anhaltende Heilung automatisch vom System anwenden zu lassen. Einstellungen speichern um zusätzliche Optionen ein- bzw. auszublenden.",
         "name": "Automatisches anwenden von anhaltender Heilung, welche vom System ausgewürfelt wird.",
-        "RegenerationLabel": "Regeneration erhalten",
         "wasHealed": "{healing} Heilung wurde automatisch angewendet."
       },
       "customPauseImage": {

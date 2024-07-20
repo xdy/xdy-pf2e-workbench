@@ -177,11 +177,9 @@
         "hint": "Wybierz, kto może ustawić opcję automatycznego naliczania obrażeń przy trafieniu. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta."
       },
       "applyPersistentHealing": {
-        "RegenerationLabel": "Otrzymana regeneracja",
         "wasHealed": "Leczenie {healing} zostało zastosowane automatycznie.",
         "name": "Automatycznie zastosuj trwałe leczenie używane przez system.",
         "hint": "Ustawienie klienta w celu automatycznego stosowania trwałego leczenia przez system. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje.",
-        "FastHealingLabel": "Otrzymał szybkie uzdrowienie"
       },
       "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
         "no": "Nie",

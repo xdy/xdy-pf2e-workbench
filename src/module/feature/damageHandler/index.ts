@@ -8,7 +8,6 @@ import {
 import { ActorFlagsPF2e, RollOptionFlags } from "@actor/data/base.js";
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { SpellPF2e } from "@item/spell/document.js";
-import type { ConditionPF2e } from "@item";
 import type { DamageRoll } from "@system/damage/roll.d.ts";
 
 export async function autoRollDamage(message: ChatMessagePF2e) {
@@ -139,55 +138,51 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
     return rollDamage;
 }
 
-export function persistentDamage(message: ChatMessagePF2e) {
+export function persistentDamageHealing(message: ChatMessagePF2e) {
+    if (!game.ready || !message.token || !message.actor || !message.isDamageRoll) return;
+
+    const rolls = message.rolls as Rolled<DamageRoll>[];
+
+    let dtype: "Damage" | "Healing" | undefined;
     if (
-        game.ready &&
         game.settings.get(MODULENAME, "applyPersistentAllow") !== "none" &&
-        message.token &&
-        message.isDamageRoll &&
-        (message.rolls[0] as Rolled<DamageRoll>)?.instances.some((i) => i.persistent && i.options.evaluatePersistent)
+        rolls[0]?.instances.some((i) => i.persistent && i.options.evaluatePersistent)
     ) {
-        // Use .then() here so the damage taken message is in chat before the recovery roll.  It works without, but the order
-        // of the messages will be undetermined.
-        message.actor
-            ?.applyDamage({
-                damage: message.rolls[0] as Rolled<DamageRoll>,
-                token: message.token,
-            })
-            .then(() => {
-                if (game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
-                    (
-                        fromUuidSync(message.getFlag("pf2e", "origin.uuid") as string) as ConditionPF2e | null
-                    )?.rollRecovery();
+        dtype = "Damage";
+    } else if (
+        game.settings.get(MODULENAME, "applyPersistentAllow") !== "none" &&
+        rolls.some((r) => r.kinds.has("healing")) &&
+        (message.flavor?.includes(
+            game.i18n.localize("PF2E.Encounter.Broadcast.FastHealing.fast-healing.ReceivedMessage"),
+        ) ||
+            message.flavor?.includes(
+                game.i18n.localize("PF2E.Encounter.Broadcast.FastHealing.regeneration.ReceivedMessage"),
+            ))
+    ) {
+        dtype = "Healing";
+    }
+
+    if (dtype && game.settings.get(MODULENAME, `applyPersistent${dtype}`)) {
+        const itemOptions = message.item?.getRollOptions("item") ?? [];
+        const rollOptions = new Set([...itemOptions, ...message.actor.getSelfRollOptions()]);
+        const damage = dtype === "Damage" ? rolls[0] : -rolls.reduce((sum, current) => sum + (current.total || 1), 0);
+        const apply = message.actor.applyDamage({
+            damage,
+            token: message.token,
+            item: message.item,
+            rollOptions,
+            skipIWR: dtype === "Healing",
+        });
+        if (dtype === "Damage" && game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
+            // Use .then() here so the damage taken message is in chat before the recovery roll.  It works without, but the order
+            // of the messages will be undetermined.
+            apply.then(() => {
+                if (message.item?.isOfType("condition")) {
+                    message.item.rollRecovery();
                 }
             });
-        // TODO Update the message to remove the recovery roll button, instead include the result in the message (and remove the message the following line creates.)
-    }
-}
-
-export function persistentHealing(message) {
-    if (
-        game.ready &&
-        game.settings.get(MODULENAME, "applyPersistentAllow") !== "none" &&
-        message.token &&
-        message.isDamageRoll &&
-        (message.rolls[0] as Rolled<DamageRoll>)?.instances.some((i) => i.kinds.some((k) => k === "healing"))
-    ) {
-        if (message.token && message.token.isOwner) {
-            const fastHealingLabel = game.i18n.localize(
-                `${MODULENAME}.SETTINGS.applyPersistentHealing.FastHealingLabel`,
-            );
-            const regenerationLabel = game.i18n.localize(
-                `${MODULENAME}.SETTINGS.applyPersistentHealing.RegenerationLabel`,
-            );
-            if ([fastHealingLabel, regenerationLabel].some((text) => message.flavor?.includes(text))) {
-                const healing = message.rolls.reduce((sum, current) => sum + (current.total || 1), 0) * -1;
-                message.token.actor?.applyDamage({
-                    damage: healing,
-                    token: message.token,
-                });
-            }
         }
+        // TODO Update the message to remove the recovery roll button, instead include the result in the message (and remove the message the following line creates.)
     }
 }
 

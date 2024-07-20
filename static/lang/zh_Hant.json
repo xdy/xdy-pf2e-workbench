@@ -188,10 +188,8 @@
         "wasDamaged": "{damage}傷害已自動生效"
       },
       "applyPersistentHealing": {
-        "FastHealingLabel": "獲得快速癒合",
         "hint": "是否讓系統擲出的持續治療自動生效的客戶端設定。儲存設定以顯示/隱藏其他選項。",
         "name": "系統擲出的持續治療自動生效。",
-        "RegenerationLabel": "獲得再生",
         "wasHealed": "{healing}治療已自動生效。"
       },
       "autoCollapseItemChatCardContent": {
