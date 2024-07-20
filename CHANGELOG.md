@@ -1,3 +1,10 @@
+# [6.7.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.15...v6.7.0) (2024-07-20)
+
+
+### Features
+
+* Support pf2e 6.1.0 ([78f05f7](https://github.com/xdy/xdy-pf2e-workbench/commit/78f05f7fbb7f815fbbf426e913e2ac4f1f6e1f87))
+
 ## [6.6.15](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.14...v6.6.15) (2024-07-20)
 
 
