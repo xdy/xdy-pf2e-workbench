@@ -1,3 +1,10 @@
+## [6.7.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.0...v6.7.1) (2024-07-22)
+
+
+### Bug Fixes
+
+* Unify apply persistent damage/healing, add roll options ([bbcfbc8](https://github.com/xdy/xdy-pf2e-workbench/commit/bbcfbc897eeaf4b83222833d9212293402d547d4))
+
 # [6.7.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.6.15...v6.7.0) (2024-07-20)
 
 
