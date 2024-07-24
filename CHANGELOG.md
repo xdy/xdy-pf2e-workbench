@@ -1,3 +1,10 @@
+## [6.7.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.1...v6.7.2) (2024-07-24)
+
+
+### Bug Fixes
+
+* De-OGL:ing the Workbench part 1 of n ([a36a549](https://github.com/xdy/xdy-pf2e-workbench/commit/a36a5494513b34446f707f03a70183c2570be64d))
+
 ## [6.7.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.0...v6.7.1) (2024-07-22)
 
 
