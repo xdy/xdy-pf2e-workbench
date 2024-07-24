@@ -1,3 +1,10 @@
+## [6.7.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.2...v6.7.3) (2024-07-24)
+
+
+### Bug Fixes
+
+* Re-add spirit to creature traits. ([195156c](https://github.com/xdy/xdy-pf2e-workbench/commit/195156c38c8a747b966f545aba949db0142d5a67))
+
 ## [6.7.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.1...v6.7.2) (2024-07-24)
 
 
