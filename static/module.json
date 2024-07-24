@@ -50,7 +50,6 @@
           },
           "packs": [
             "asymonous-benefactor-macros-internal",
-            "asymonous-benefactor-effects",
             "xdy-internal-utility-macros",
             "xdy-internal-tables"
           ]
@@ -90,19 +89,6 @@
       "type": "Macro",
       "flags": {},
       "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
-    },
-    {
-      "name": "asymonous-benefactor-effects",
-      "label": "asymonous-benefactor-effects, do not import",
-      "system": "pf2e",
-      "path": "packs/asymonous-benefactor-effects",
-      "type": "Item",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "LIMITED",
-        "ASSISTANT": "OWNER"
-      }
     },
     {
       "name": "xdy-customizable-macros",

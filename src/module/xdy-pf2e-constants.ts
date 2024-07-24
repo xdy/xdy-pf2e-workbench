@@ -15,14 +15,13 @@ export const AON_CREATURE_TYPES: string[] = [
     "giant",
     "humanoid",
     "monitor",
-    "negative",
     "ooze",
-    "petitioner",
     "plant",
-    "positive",
-    "spirit",
+    "shade",
     "time",
     "undead",
+    "vitality",
+    "void",
 ];
 
 export const ELITE_WEAK: string[] = ["elite", "weak"];

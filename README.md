@@ -112,13 +112,14 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
     * Option to automate the results of the dying recovery roll button being clicked. (I.e. it does not automatically
       roll to try recover the dying character.)
     * Option to automatically reduce the Frightened condition at the end of each turn. See the included effect '
-      Effect:
-      Minimum Frightened' for how to set a minimum frightened level that the module won't reduce below.
+      Effect: Minimum Frightened' for how to set a minimum frightened level that the module won't reduce below.
 
 * House Rules
     * Option to enable Keeley's Hero Point Rule (if reroll die is 10 or less, get a +10 bonus). Courtesy of stwlam
-    * Option to add Ancestry Paragon feat slots as campaign feat slots (i.e. requires campaign feats to enabled.)
-    * Option to add Dual Class feat slots as campaign feat slots (i.e. requires campaign feats to enabled.)
+    * Option to add an extra set of ancestry feat slots as campaign feat slots (i.e. requires campaign feats to
+      enabled.)
+    * Option to add feat slots for characters that have more than one class at the same time as campaign feat slots (
+      i.e. requires campaign feats to enabled.)
     * REALLY experimental option to use json to potentially brick your world. (Or,
       see [docs/housepatcher.md](docs/housepatcher.md) for more details.)
 
@@ -162,16 +163,16 @@ of each can be found below:
       to help players having problems with targeting.
 
 * Assorted other features
-    * The latest versions of all V11-compatible macros
+    * The latest versions of all V12-compatible macros
       from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e are included in each Workbench release.
       They can be found in the compendium "Symon-provided macros (asymonous-benefactor-macros)", with the express
       permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor. What documentation exists
       can be found towards the start of the macro. If you have issues with these macros, report them
       here: https://gitlab.com/symonsch/my-foundryvtt-macros/-/issues
     * The compendium "PF2e Workbench Items (xdy-pf2e-workbench-items)" contains a few useful effects and items:
-        * Aura effects for Aura of Despair, Inspire Courage and Inspire Defense that automatically
+        * Aura effects for Courageous Anthem and Rallying Anthem that automatically
           apply the effect to tokens within the aura. (Technically these not all these should be auras, but, close
-          enough... Inspire Courage and Inspire Defense's effect can pass through walls that allow sound to pass)
+          enough... Courageous Anthem and Rallying Anthem's effect can pass through walls that allow sound to pass)
         * Effect for Dirge of Doom that you can give to targets to give them frightened and not let the automated
           frightened removal reduce frightened below 1.
         * Effect: Minium Frightened that you can give to targets to not let the automated frightened removal reduce
@@ -287,10 +288,10 @@ It is by caffeine alone I set my mind in motion
 
 ### Licenses
 
-This module uses trademarks and/or copyrights owned by Paizo Inc., used
-under [Paizo's Community Use Policy (paizo.com/communityuse)](paizo.com/communityuse). We are expressly prohibited from
-charging you to use or access this content. This module is not published, endorsed, or specifically approved by Paizo.
-For more information about Paizo Inc. and Paizo products, visit [paizo.com](paizo.com).
+This module uses trademarks and/or copyrights owned by Paizo Inc., used under
+Paizo's Fan Content Policy (paizo.com/licenses/fancontent). This module is not
+published, endorsed, or specifically approved by Paizo. For more information about Paizo Inc. and Paizo products, visit
+paizo.com.
 
 Open Game License:
 
@@ -300,8 +301,7 @@ Project Licensing:
 
 * Everything in this project that is not covered by one of the following license exceptions is made available under the
   Apache License (see [LICENSE.md](LICENSE.md)). (Including the types and utility classes generated or copied from the
-  pf2e
-  system at https://github.com/foundryvtt/pf2e, also under the Apache License.)
+  pf2e system at https://github.com/foundryvtt/pf2e, also under the Apache License.)
 
 Virtual Table Top Platform Licenses:
 

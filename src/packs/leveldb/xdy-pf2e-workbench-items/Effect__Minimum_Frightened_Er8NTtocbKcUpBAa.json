@@ -32,8 +32,8 @@
     "publication": {
       "title": "",
       "authors": "",
-      "license": "OGL",
-      "remaster": false
+      "license": "ORC",
+      "remaster": true
     },
     "level": {
       "value": 1
