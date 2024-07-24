@@ -18,6 +18,7 @@ export const AON_CREATURE_TYPES: string[] = [
     "ooze",
     "plant",
     "shade",
+    "spirit",
     "time",
     "undead",
     "vitality",
