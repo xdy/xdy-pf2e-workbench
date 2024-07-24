@@ -1,4 +1,4 @@
-export const AON_CREATURE_TYPES: string[] = [
+export const CREATURE_IDENTIFICATION_TRAITS: string[] = [
     "aberration",
     "animal",
     "astral",
@@ -12,7 +12,6 @@ export const AON_CREATURE_TYPES: string[] = [
     "fey",
     "fiend",
     "fungus",
-    "giant",
     "humanoid",
     "monitor",
     "ooze",
@@ -21,8 +20,6 @@ export const AON_CREATURE_TYPES: string[] = [
     "spirit",
     "time",
     "undead",
-    "vitality",
-    "void",
 ];
 
 export const ELITE_WEAK: string[] = ["elite", "weak"];
