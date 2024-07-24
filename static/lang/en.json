@@ -589,8 +589,8 @@
         "name": "Use creature traits."
       },
       "npcMystifierUseCreatureTypesTraits": {
-        "hint": "Check to use creature type traits (see https://2e.aonprd.com/Traits.aspx) in the mystified name.",
-        "name": "Use creature type traits"
+        "hint": "Check to use creature identification traits (see https://2e.aonprd.com/Rules.aspx?ID=2641) in the mystified name.",
+        "name": "Use creature identification traits"
       },
       "npcMystifierUseEliteWeak": {
         "hint": "Check to use elite/weak in the mystified name.",

@@ -83,9 +83,11 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
         }
     }
 
-    let aonCreatureTypes: string[] = [];
+    let creatureIdentificationTraits: string[] = [];
     if (game.settings.get(MODULENAME, "npcMystifierUseCreatureTypesTraits")) {
-        aonCreatureTypes = traitsList.filter((trait: string) => TRAITS.CREATURE_IDENTIFICATION_TRAITS.includes(trait));
+        creatureIdentificationTraits = traitsList.filter((trait: string) =>
+            TRAITS.CREATURE_IDENTIFICATION_TRAITS.includes(trait),
+        );
     }
 
     let pf2eCreatureTraits: string[] = [];
@@ -111,7 +113,7 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
                 .concat(eliteWeak)
                 .concat(rarities)
                 .concat(others)
-                .concat(aonCreatureTypes)
+                .concat(creatureIdentificationTraits)
                 .concat(pf2eCreatureTraits)
                 .concat([postfix]),
         ).values(),
