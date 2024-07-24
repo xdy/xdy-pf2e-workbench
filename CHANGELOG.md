@@ -1,3 +1,10 @@
+## [6.7.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.3...v6.7.4) (2024-07-24)
+
+
+### Bug Fixes
+
+* Use the traits listed for creature identification skills for mystification. ([cfb25bc](https://github.com/xdy/xdy-pf2e-workbench/commit/cfb25bcca69c2ea80263b08317edc0047070ef8e))
+
 ## [6.7.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.2...v6.7.3) (2024-07-24)
 
 
