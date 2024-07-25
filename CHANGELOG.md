@@ -1,3 +1,10 @@
+## [6.7.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.4...v6.7.5) (2024-07-25)
+
+
+### Bug Fixes
+
+* require pf2e 6.1.2 and foundry 12.330, update types ([b5449f0](https://github.com/xdy/xdy-pf2e-workbench/commit/b5449f0db045b34ba604b654f2f0ec7efbab7915))
+
 ## [6.7.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.3...v6.7.4) (2024-07-24)
 
 
