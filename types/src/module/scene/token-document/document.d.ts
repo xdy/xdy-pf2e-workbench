@@ -2,7 +2,7 @@ import { ActorPF2e } from "@actor";
 import type { PrototypeTokenPF2e } from "@actor/data/base.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
-import { RegionDocumentPF2e } from "@scene";
+import { DifficultTerrainGrade, RegionDocumentPF2e } from "@scene";
 import type { ScenePF2e } from "../document.ts";
 import { TokenAura } from "./aura/index.ts";
 import { TokenFlagsPF2e } from "./data.ts";
@@ -15,15 +15,6 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
     auras: Map<string, TokenAura>;
     /** Returns if the token is in combat, though some actors have different conditions */
     get inCombat(): boolean;
-    /** Check actor for effects found in `CONFIG.specialStatusEffects` */
-    hasStatusEffect(statusId: string): boolean;
-    /** Filter trackable attributes for relevance and avoidance of circular references */
-    static getTrackedAttributes(data?: Record<string, unknown>, _path?: string[]): TrackedAttributesDescription;
-    static getTrackedAttributeChoices(attributes?: TrackedAttributesDescription): TrackedAttributesDescription;
-    /** Make stamina, resolve, and shield HP editable despite not being present in template.json */
-    getBarAttribute(barName: string, options?: {
-        alternative?: string;
-    }): TokenResourceData | null;
     /** This should be in Foundry core, but ... */
     get scene(): this["parent"];
     /** Is this token emitting light with a negative value */
@@ -44,6 +35,17 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
     get mechanicalBounds(): PIXI.Rectangle;
     /** The pixel-coordinate pair constituting this token's center */
     get center(): Point;
+    /** The grade of difficult terrain at this token's position */
+    get difficultTerrain(): DifficultTerrainGrade;
+    /** Check actor for effects found in `CONFIG.specialStatusEffects` */
+    hasStatusEffect(statusId: string): boolean;
+    /** Filter trackable attributes for relevance and avoidance of circular references */
+    static getTrackedAttributes(data?: Record<string, unknown>, _path?: string[]): TrackedAttributesDescription;
+    static getTrackedAttributeChoices(attributes?: TrackedAttributesDescription): TrackedAttributesDescription;
+    /** Make stamina, resolve, and shield HP editable despite not being present in template.json */
+    getBarAttribute(barName: string, options?: {
+        alternative?: string;
+    }): TokenResourceData | null;
     protected _initialize(options?: Record<string, unknown>): void;
     /** If embedded, don't prepare data if the parent's data model hasn't initialized all its properties */
     prepareData(): void;

@@ -1,6 +1,6 @@
 declare const DIFFICULT_TERRAIN_GRADES: {
-    NONE: number;
-    DIFFICULT: number;
-    GREATER: number;
+    readonly NONE: 0;
+    readonly DIFFICULT: 1;
+    readonly GREATER: 2;
 };
 export { DIFFICULT_TERRAIN_GRADES };

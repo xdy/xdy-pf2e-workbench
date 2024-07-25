@@ -17,6 +17,7 @@ interface ImmunityApplication {
     category: "immunity";
     type: string;
     adjustment: number;
+    redirect?: string;
 }
 interface WeaknessApplication {
     category: "weakness";

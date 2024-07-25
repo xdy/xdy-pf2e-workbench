@@ -1146,7 +1146,10 @@
                 "ApplicationBreakdown": {
                     "ignored": "Resistance to {type} ignored!",
                     "immunity": "Immune to {type}: {adjustment}",
-                    "redirect": "Resistant to {type} (treated as {redirect}): {adjustment}",
+                    "redirect": {
+                        "immunity": "Immune to {type} (treated as {redirect}): {adjustment}",
+                        "resistance": "Resistant to {type} (treated as {redirect}): {adjustment}"
+                    },
                     "reduction": "Reduced by {type}: {adjustment}",
                     "resistance": "Resistant to {type}: {adjustment}",
                     "unaffected": "Unaffected by {type}: {adjustment}",
@@ -3312,7 +3315,7 @@
             "DragMeasurement": {
                 "Always": "Always",
                 "Encounters": "During Encounters",
-                "Hint": "Measure distance traveled when dragging a token without the need for holding down another key. Waypoints are placed by pressing the \"{key}\" key.",
+                "Hint": "Measure distance traveled when dragging a token without the need for holding down another key. Waypoints are placed by pressing the \"{key}\" key and removed by right-clicking.",
                 "Name": "Drag Measurement",
                 "Never": "Never"
             },

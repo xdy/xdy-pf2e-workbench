@@ -64,6 +64,7 @@ interface DamageIRBypassData {
     immunity: {
         ignore: ImmunityType[];
         downgrade: DowngradedImmunity[];
+        redirect: RedirectedImmunity[];
     };
     resistance: {
         ignore: IgnoredResistance[];
@@ -78,6 +79,11 @@ interface DowngradedImmunity {
 interface IgnoredResistance {
     type: ResistanceType;
     max: number;
+}
+/** A damage type to check against instead if the target would resist the actual damage type */
+interface RedirectedImmunity {
+    from: ImmunityType;
+    to: ImmunityType;
 }
 /** A damage type to check against instead if the target would resist the actual damage type */
 interface RedirectedResistance {
@@ -127,4 +133,4 @@ interface SpellDamageTemplate extends BaseDamageTemplate {
 type AfflictionDamageTemplate = SpellDamageTemplate;
 type SimpleDamageTemplate = SpellDamageTemplate;
 type DamageTemplate = WeaponDamageTemplate | SpellDamageTemplate | AfflictionDamageTemplate | SimpleDamageTemplate;
-export type { AfflictionDamageTemplate, BaseDamageData, CriticalInclusion, DamageCategory, DamageCategoryRenderData, DamageCategoryUnique, DamageDamageContext, DamageDiceFaces, DamageDieSize, DamageFormulaData, DamageIRBypassData, DamageKind, DamagePartialTerm, DamageRollRenderData, DamageTemplate, DamageType, DamageTypeRenderData, MaterialDamageEffect, RedirectedResistance, SimpleDamageTemplate, SpellDamageTemplate, WeaponBaseDamageData, WeaponDamageTemplate, };
+export type { AfflictionDamageTemplate, BaseDamageData, CriticalInclusion, DamageCategory, DamageCategoryRenderData, DamageCategoryUnique, DamageDamageContext, DamageDiceFaces, DamageDieSize, DamageFormulaData, DamageIRBypassData, DamageKind, DamagePartialTerm, DamageRollRenderData, DamageTemplate, DamageType, DamageTypeRenderData, MaterialDamageEffect, RedirectedImmunity, RedirectedResistance, SimpleDamageTemplate, SpellDamageTemplate, WeaponBaseDamageData, WeaponDamageTemplate, };

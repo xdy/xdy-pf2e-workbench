@@ -6,5 +6,5 @@ export declare class TemplateLayerPF2e<TObject extends MeasuredTemplatePF2e = Me
     /** Overriden to snap according to the dragged template's type */
     getSnappedPoint(point: Point): Point;
     protected _onDragLeftMove(event: PlaceablesLayerPointerEvent<TObject>): void;
-    protected _onMouseWheel(event: WheelEvent): Promise<TObject["document"] | undefined> | void;
+    protected _onMouseWheel(event: WheelEvent): Promise<TObject> | void;
 }

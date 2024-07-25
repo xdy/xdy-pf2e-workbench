@@ -1,10 +1,10 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
+import type { EffectTrait } from "@item/abstract-effect/types.ts";
 import type { CharacterStrike } from "./data.ts";
 import type { CharacterPF2e } from "./document.ts";
 import { type CharacterSheetData, CharacterSheetPF2e } from "./sheet.ts";
-import { EffectTrait } from "@item/abstract-effect/types.ts";
 
 declare class AttackPopout<TActor extends CharacterPF2e> extends CharacterSheetPF2e<TActor> {
     #private;

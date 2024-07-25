@@ -4,6 +4,7 @@ import type { TokenPF2e } from "./token/object.ts";
 declare class RulerPF2e<TToken extends TokenPF2e | null = TokenPF2e | null> extends Ruler<TToken, UserPF2e> {
     #private;
     static get canMeasure(): boolean;
+    static get hasModuleConflict(): boolean;
     get dragMeasurement(): boolean;
     get isMeasuring(): boolean;
     /** Add a waypoint at the currently-drawn destination. */
@@ -13,6 +14,11 @@ declare class RulerPF2e<TToken extends TokenPF2e | null = TokenPF2e | null> exte
      * @param [exactDestination] The coordinates of the dragged token preview, if any
      */
     finishDragMeasurement(exactDestination?: Point | null): Promise<boolean | void>;
+    /** Acquire the token's footprint for drag measurement. */
+    measure(destination: Point, options?: {
+        snap?: boolean;
+        force?: boolean;
+    }): void | RulerMeasurementSegment[];
     /** Allow GMs to move tokens through walls when drag-measuring. */
     protected _canMove(token: TToken): boolean;
     /** Prevent inclusion of a token when using the ruler tool. */
@@ -22,10 +28,10 @@ declare class RulerPF2e<TToken extends TokenPF2e | null = TokenPF2e | null> exte
     }): void;
     /** Calculate cost as an addend to distance due to difficult terrain. */
     protected _getCostFunction(): GridMeasurePathCostFunction | undefined;
-    protected _getMeasurementOrigin(point: Point, { snap }?: {
-        snap?: boolean | undefined;
+    protected _getMeasurementOrigin(point: Point, options?: {
+        snap?: boolean;
     }): Point;
-    protected _getMeasurementDestination(point: Point, { snap }?: {
+    protected _getMeasurementDestination(point: Point, options?: {
         snap?: boolean;
     }): Point;
     /** Widen the ruler when measuring with larger tokens. */
