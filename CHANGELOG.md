@@ -1,3 +1,10 @@
+## [6.7.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.6...v6.7.7) (2024-07-28)
+
+
+### Bug Fixes
+
+* Token animation speed now works when dragging to 0,0 ([c499d18](https://github.com/xdy/xdy-pf2e-workbench/commit/c499d1867ba83430f3a222c9f2571214f9dc33b7))
+
 ## [6.7.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.5...v6.7.6) (2024-07-28)
 
 
