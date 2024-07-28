@@ -298,7 +298,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
 }
 
 export function preUpdateTokenHook(_document, update, options, ..._args) {
-    if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x || update.y)) {
+    if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x !== null || update.y !== null)) {
         fu.setProperty(options, "animation", {
             movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
         });
