@@ -232,7 +232,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 });
 
 export function changePauseText() {
-    if (game.release.generation > 12) {
+    if (game.release.generation >= 12) {
         console.log("PF2e Workbench: Changing pause text is not (yet) supported in foundry 12");
         return;
     }
@@ -256,20 +256,16 @@ export function changePauseText() {
         document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-background", "");
     }
 
-    const text = game.settings.get(MODULENAME, "customPauseText");
     if (phase >= Phase.READY) {
-        const element = document.querySelector("figcaption");
-        if (text && text !== "" && element) {
-            // @ts-ignore
+        const element = document.querySelector<HTMLElement>("figcaption");
+
+        const gameTranslations = game?.i18n?.translations?.GAME;
+        const text = gameTranslations?.["Paused"] ?? undefined;
+
+        if (text && element) {
             element.textContent = text;
-            const pauseText = game?.i18n?.translations?.GAME["Paused"];
-            if (pauseText) {
-                game.i18n.translations.GAME["Paused"] = text;
-            }
+            gameTranslations["Paused"] = text;
         }
-        // const paused = !game.paused;
-        // game.togglePause(paused, true);
-        // new Promise((resolve) => setTimeout(resolve, 25)).then(() => game.togglePause(!paused, true));
     }
 }
 
