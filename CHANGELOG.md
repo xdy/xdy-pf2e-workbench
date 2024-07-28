@@ -1,3 +1,10 @@
+## [6.7.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.5...v6.7.6) (2024-07-28)
+
+
+### Bug Fixes
+
+* Actually turn off changing the paused text in v12. (Not sure it'll return.) ([87783ba](https://github.com/xdy/xdy-pf2e-workbench/commit/87783bab675164d8a143efa4d5992e2b5ffe7da1))
+
 ## [6.7.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.4...v6.7.5) (2024-07-25)
 
 
