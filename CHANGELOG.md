@@ -1,3 +1,10 @@
+## [6.7.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.9...v6.7.10) (2024-07-31)
+
+
+### Bug Fixes
+
+* Another try at making pause text work. ([1f55cca](https://github.com/xdy/xdy-pf2e-workbench/commit/1f55cca5e697573c253f4d3362d9fb5a37977296))
+
 ## [6.7.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.8...v6.7.9) (2024-07-31)
 
 
