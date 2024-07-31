@@ -232,39 +232,34 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 });
 
 export function changePauseText() {
-    if (game.release.generation >= 12) {
-        console.log("PF2e Workbench: Changing pause text is not (yet) supported in foundry 12");
-        return;
-    }
-
     if (!document?.querySelector("#pause")?.classList.contains("paused")) {
         return;
     }
 
+    const style = document.documentElement.style;
     if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
         // Set css variables for the module
         const path = <string>game.settings.get(MODULENAME, "customPauseImage");
         const prefix = path.startsWith("http") ? "" : "../../../";
-        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause", "url(" + prefix + path + ")");
+        style.setProperty("--xdy-pf2e-workbench-pause", "url(" + prefix + path + ")");
     }
 
-    document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-bottom", "10%");
-    document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "0%");
     if (game.settings.get(MODULENAME, "customPauseRelocation")) {
-        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-bottom", "calc(50% - 64px)");
-        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "-100%");
-        document.documentElement.style.setProperty("--xdy-pf2e-workbench-pause-background", "");
+        style.setProperty("--xdy-pf2e-workbench-pause-bottom", "calc(50% - 64px)");
+        style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "-100%");
+        style.setProperty("--xdy-pf2e-workbench-pause-background", "");
+    } else {
+        style.setProperty("--xdy-pf2e-workbench-pause-bottom", "10%");
+        style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "0%");
     }
 
     if (phase >= Phase.READY) {
         const element = document.querySelector<HTMLElement>("figcaption");
 
-        const gameTranslations = game?.i18n?.translations?.GAME;
-        const text = gameTranslations?.["Paused"] ?? undefined;
+        const text = <string>game.settings.get(MODULENAME, "customPauseText");
 
         if (text && element) {
             element.textContent = text;
-            gameTranslations["Paused"] = text;
         }
     }
 }
