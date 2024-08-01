@@ -1,3 +1,10 @@
+## [6.7.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.10...v6.7.11) (2024-08-01)
+
+
+### Bug Fixes
+
+* Make pause image url handling more robust. ([7078d86](https://github.com/xdy/xdy-pf2e-workbench/commit/7078d86b1084d7081642d1c0b145799d4da73e6a))
+
 ## [6.7.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.9...v6.7.10) (2024-07-31)
 
 
