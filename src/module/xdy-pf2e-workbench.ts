@@ -237,11 +237,19 @@ export function changePauseText() {
     }
 
     const style = document.documentElement.style;
-    if (game.settings.get(MODULENAME, "customPauseImage") !== "") {
-        // Set css variables for the module
-        const path = <string>game.settings.get(MODULENAME, "customPauseImage");
-        const prefix = path.startsWith("http") ? "" : "../../../";
-        style.setProperty("--xdy-pf2e-workbench-pause", "url(" + prefix + path + ")");
+
+    const imagePath = <string>game.settings.get(MODULENAME, "customPauseImage");
+
+    if (imagePath !== "") {
+        let url: string;
+        if (/^https?:/i.test(imagePath)) {
+            const imageUrl = new URL(imagePath);
+            imageUrl.pathname = encodeURIComponent(imageUrl.pathname.split("/")[1] ?? imageUrl.pathname);
+            url = `url("${imageUrl}")`;
+        } else {
+            url = `url("../../../${encodeURIComponent(imagePath)}")`;
+        }
+        style.setProperty("--xdy-pf2e-workbench-pause", url);
     }
 
     if (game.settings.get(MODULENAME, "customPauseRelocation")) {
