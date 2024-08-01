@@ -362,7 +362,7 @@ export declare const PF2ECONFIG: {
     meleeWeaponGroups: Record<"axe" | "brawling" | "club" | "dart" | "flail" | "hammer" | "knife" | "pick" | "polearm" | "shield" | "spear" | "sword", string>;
     baseArmorTypes: Record<"armored-cloak" | "armored-coat" | "bastion-plate" | "breastplate" | "buckle-armor" | "ceramic-plate" | "chain-mail" | "chain-shirt" | "coral-armor" | "explorers-clothing" | "fortress-plate" | "full-plate" | "gi" | "half-plate" | "hellknight-breastplate" | "hellknight-half-plate" | "hellknight-plate" | "hide-armor" | "lamellar-breastplate" | "lattice-armor" | "leaf-weave" | "leather-armor" | "leather-lamellar" | "mantis-shell" | "niyahaat" | "o-yoroi" | "padded-armor" | "power-suit" | "quilted-armor" | "sankeit" | "scale-mail" | "scroll-robes" | "splint-mail" | "studded-leather-armor" | "subterfuge-suit" | "wooden-breastplate", string>;
     baseShieldTypes: Record<"buckler" | "casters-targe" | "dart-shield" | "fortress-shield" | "gauntlet-buckler" | "harnessed-shield" | "heavy-rondache" | "hide-shield" | "klar" | "meteor-shield" | "razor-disc" | "salvo-shield" | "steel-shield" | "swordstealer-shield" | "tower-shield" | "wooden-shield", string>;
-    baseWeaponTypes: Record<"club" | "crossbow" | "dart" | "flail" | "pick" | "sling" | "spear" | "adze" | "air-repeater" | "aklys" | "alchemical-bomb" | "alchemical-crossbow" | "aldori-dueling-sword" | "arbalest" | "arquebus" | "asp-coil" | "atlatl" | "axe-musket" | "barricade-buster" | "bastard-sword" | "battle-axe" | "battle-lute" | "battle-saddle" | "bec-de-corbin" | "big-boom-gun" | "black-powder-knuckle-dusters" | "bladed-diabolo" | "bladed-gauntlet" | "bladed-hoop" | "bladed-scarf" | "blowgun" | "blowgun-darts" | "blunderbuss" | "bo-staff" | "boarding-axe" | "boarding-pike" | "bola" | "boomerang" | "bow-staff" | "breaching-pike" | "broadspear" | "butchering-axe" | "butterfly-sword" | "buugeng" | "cane-pistol" | "chain-sword" | "chakram" | "chakri" | "clan-dagger" | "clan-pistol" | "claw" | "claw-blade" | "coat-pistol" | "combat-grapnel" | "combat-lure" | "composite-longbow" | "composite-shortbow" | "corset-knife" | "crescent-cross" | "dagger" | "dagger-pistol" | "daikyu" | "dancers-spear" | "dandpatta" | "dogslicer" | "donchak" | "double-barreled-musket" | "double-barreled-pistol" | "dragon-mouth-pistol" | "dueling-pistol" | "dueling-spear" | "dwarven-dorn-dergar" | "dwarven-scattergun" | "dwarven-war-axe" | "earthbreaker" | "elven-branched-spear" | "elven-curve-blade" | "explosive-dogslicer" | "exquisite-sword-cane" | "exquisite-sword-cane-sheath" | "falcata" | "falchion" | "fangwire" | "fauchard" | "feng-huo-lun" | "fighting-fan" | "fighting-stick" | "filchers-fork" | "fire-lance" | "fire-poi" | "fist" | "flingflenser" | "flintlock-musket" | "flintlock-pistol" | "flying-talon" | "flyssa" | "forked-bipod" | "frying-pan" | "gada" | "gaff" | "gakgung" | "gauntlet" | "gauntlet-bow" | "gill-hook" | "glaive" | "gnome-amalgam-musket" | "gnome-flickmace" | "gnome-hooked-hammer" | "greataxe" | "greatclub" | "greatpick" | "greatsword" | "griffon-cane" | "guisarme" | "gun-sword" | "halberd" | "halfling-sling-staff" | "hammer-gun" | "hand-adze" | "hand-cannon" | "hand-crossbow" | "harmona-gun" | "harpoon" | "hatchet" | "heavy-crossbow" | "hongali-hornbow" | "hook-sword" | "horsechopper" | "injection-spear" | "javelin" | "jaws" | "jezail" | "jiu-huan-dao" | "juggling-club" | "kalis" | "kama" | "karambit" | "katana" | "katar" | "khakkhara" | "khopesh" | "knuckle-duster" | "kris" | "kukri" | "kusarigama" | "lance" | "lancer" | "leiomano" | "light-hammer" | "light-mace" | "light-pick" | "lion-scythe" | "long-air-repeater" | "long-hammer" | "longbow" | "longspear" | "longsword" | "mace" | "mace-multipistol" | "machete" | "main-gauche" | "mambele" | "maul" | "meteor-hammer" | "mikazuki" | "mithral-tree" | "monkeys-fist" | "morningstar" | "naginata" | "nightstick" | "nodachi" | "nunchaku" | "ogre-hook" | "orc-knuckle-dagger" | "orc-necksplitter" | "panabas" | "pepperbox" | "phalanx-piercer" | "piercing-wind" | "piranha-kiss" | "poi" | "polytool" | "probing-cane" | "ranseur" | "rapier" | "rapier-pistol" | "reinforced-wheels" | "reinforced-stock" | "repeating-crossbow" | "repeating-hand-crossbow" | "repeating-heavy-crossbow" | "rhoka-sword" | "rope-dart" | "rotary-bow" | "rungu" | "sai" | "sansetsukon" | "sap" | "sawtooth-saber" | "scimitar" | "scizore" | "scorpion-whip" | "scourge" | "scythe" | "shauth-lash" | "shears" | "shield-bash" | "shield-boss" | "shield-bow" | "shield-pistol" | "shield-spikes" | "shobhad-longrifle" | "shortbow" | "shortsword" | "shuriken" | "sickle" | "sickle-saber" | "slide-pistol" | "sling-bullets" | "spiked-chain" | "spiked-gauntlet" | "spiral-rapier" | "spoon-gun" | "spraysling" | "staff" | "starknife" | "stiletto-pen" | "sukgung" | "sun-sling" | "switchscythe" | "sword-cane" | "talwar" | "tamchal-chakram" | "taw-launcher" | "tekko-kagi" | "temple-sword" | "tengu-gale-blade" | "tetsubo" | "thorn-whip" | "three-peaked-tree" | "three-section-naginata" | "throwing-knife" | "thunder-sling" | "thundermace" | "tonfa" | "tri-bladed-katar" | "tricky-pick" | "trident" | "triggerbrand" | "urumi" | "visap" | "wakizashi" | "war-flail" | "war-lance" | "war-razor" | "warhammer" | "wheel-blades" | "wheel-spikes" | "whip" | "whip-claw" | "whip-staff" | "wish-blade" | "wish-knife" | "wooden-taws" | "wrecker" | "wrist-launcher" | "zulfikar", string>;
+    baseWeaponTypes: Record<"club" | "crossbow" | "dart" | "flail" | "pick" | "sling" | "spear" | "adze" | "air-repeater" | "aklys" | "alchemical-bomb" | "alchemical-crossbow" | "aldori-dueling-sword" | "arbalest" | "arquebus" | "asp-coil" | "atlatl" | "axe-musket" | "barricade-buster" | "bastard-sword" | "battle-axe" | "battle-lute" | "battle-saddle" | "bec-de-corbin" | "big-boom-gun" | "black-powder-knuckle-dusters" | "bladed-diabolo" | "bladed-gauntlet" | "bladed-hoop" | "bladed-scarf" | "blowgun" | "blowgun-darts" | "blunderbuss" | "bo-staff" | "boarding-axe" | "boarding-pike" | "bola" | "boomerang" | "bow-staff" | "breaching-pike" | "broadspear" | "butchering-axe" | "butterfly-sword" | "buugeng" | "cane-pistol" | "capturing-spetum" | "chain-sword" | "chakram" | "chakri" | "clan-dagger" | "clan-pistol" | "claw" | "claw-blade" | "coat-pistol" | "combat-grapnel" | "combat-lure" | "composite-longbow" | "composite-shortbow" | "corset-knife" | "crescent-cross" | "dagger" | "dagger-pistol" | "daikyu" | "dancers-spear" | "dandpatta" | "dogslicer" | "donchak" | "double-barreled-musket" | "double-barreled-pistol" | "dragon-mouth-pistol" | "dueling-pistol" | "dueling-spear" | "dwarven-dorn-dergar" | "dwarven-scattergun" | "dwarven-war-axe" | "earthbreaker" | "elven-branched-spear" | "elven-curve-blade" | "explosive-dogslicer" | "exquisite-sword-cane" | "exquisite-sword-cane-sheath" | "falcata" | "falchion" | "fangwire" | "fauchard" | "feng-huo-lun" | "fighting-fan" | "fighting-stick" | "filchers-fork" | "fire-lance" | "fire-poi" | "fist" | "flingflenser" | "flintlock-musket" | "flintlock-pistol" | "flying-talon" | "flyssa" | "forked-bipod" | "frying-pan" | "gada" | "gaff" | "gakgung" | "gauntlet" | "gauntlet-bow" | "gill-hook" | "glaive" | "gnome-amalgam-musket" | "gnome-flickmace" | "gnome-hooked-hammer" | "greataxe" | "greatclub" | "greatpick" | "greatsword" | "griffon-cane" | "guisarme" | "gun-sword" | "halberd" | "halfling-sling-staff" | "hammer-gun" | "hand-adze" | "hand-cannon" | "hand-crossbow" | "harmona-gun" | "harpoon" | "hatchet" | "heavy-crossbow" | "hongali-hornbow" | "hook-sword" | "horsechopper" | "injection-spear" | "javelin" | "jaws" | "jezail" | "jiu-huan-dao" | "juggling-club" | "kalis" | "kama" | "karambit" | "katana" | "katar" | "khakkhara" | "khopesh" | "knuckle-duster" | "kris" | "kukri" | "kusarigama" | "lance" | "lancer" | "leiomano" | "light-hammer" | "light-mace" | "light-pick" | "lion-scythe" | "long-air-repeater" | "long-hammer" | "longbow" | "longspear" | "longsword" | "mace" | "mace-multipistol" | "machete" | "main-gauche" | "mambele" | "maul" | "meteor-hammer" | "mikazuki" | "mithral-tree" | "monkeys-fist" | "morningstar" | "naginata" | "nightstick" | "nodachi" | "nunchaku" | "ogre-hook" | "orc-knuckle-dagger" | "orc-necksplitter" | "panabas" | "pepperbox" | "phalanx-piercer" | "piercing-wind" | "piranha-kiss" | "poi" | "polytool" | "probing-cane" | "ranseur" | "rapier" | "rapier-pistol" | "reinforced-wheels" | "reinforced-stock" | "repeating-crossbow" | "repeating-hand-crossbow" | "repeating-heavy-crossbow" | "rhoka-sword" | "rope-dart" | "rotary-bow" | "rungu" | "sai" | "sansetsukon" | "sap" | "sawtooth-saber" | "scimitar" | "scizore" | "scorpion-whip" | "scourge" | "scythe" | "shauth-lash" | "shears" | "shield-bash" | "shield-boss" | "shield-bow" | "shield-pistol" | "shield-spikes" | "shobhad-longrifle" | "shortbow" | "shortsword" | "shuriken" | "sickle" | "sickle-saber" | "slide-pistol" | "sling-bullets" | "spiked-chain" | "spiked-gauntlet" | "spiral-rapier" | "spirit-thresher" | "spoon-gun" | "spraysling" | "staff" | "starknife" | "stiletto-pen" | "sukgung" | "sun-sling" | "switchscythe" | "sword-cane" | "talwar" | "tamchal-chakram" | "taw-launcher" | "tekko-kagi" | "temple-sword" | "tengu-gale-blade" | "tetsubo" | "thorn-whip" | "three-peaked-tree" | "three-section-naginata" | "throwing-knife" | "thunder-sling" | "thundermace" | "tonfa" | "tri-bladed-katar" | "tricky-pick" | "trident" | "triggerbrand" | "urumi" | "visap" | "wakizashi" | "war-flail" | "war-lance" | "war-razor" | "warhammer" | "wheel-blades" | "wheel-spikes" | "whip" | "whip-claw" | "whip-staff" | "wish-blade" | "wish-knife" | "wooden-taws" | "wrecker" | "wrist-launcher" | "zulfikar", string>;
     equivalentWeapons: {
         readonly "composite-longbow": "longbow";
         readonly "composite-shortbow": "shortbow";
@@ -679,6 +679,7 @@ export declare const PF2ECONFIG: {
         aftermath: string;
         archetype: string;
         artifact: string;
+        bravado: string;
         circus: string;
         class: string;
         composite: string;
@@ -729,6 +730,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -791,6 +793,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -1214,6 +1217,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -1416,6 +1420,7 @@ export declare const PF2ECONFIG: {
         aftermath: string;
         archetype: string;
         artifact: string;
+        bravado: string;
         circus: string;
         class: string;
         composite: string;
@@ -1466,6 +1471,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -1510,7 +1516,7 @@ export declare const PF2ECONFIG: {
         undine: string;
         vanara: string;
         vishkanya: string;
-    }, "splash" | "alchemist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "fighter" | "gunslinger" | "kineticist" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "psychic" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "thaumaturge" | "witch" | "wizard" | "agile" | "propulsive" | "backswing" | "forceful" | "reach" | "sweep" | "thrown" | "volley-20" | "volley-30" | "volley-50" | "clockwork" | "consumable" | "infused" | "aiuvarin" | "anadi" | "android" | "aphorite" | "ardande" | "athamaru" | "automaton" | "awakened-animal" | "azarketi" | "beastkin" | "bugbear" | "catfolk" | "centaur" | "changeling" | "conrasu" | "dhampir" | "dromaar" | "duskwalker" | "dwarf" | "elf" | "fetchling" | "fleshwarp" | "ganzi" | "geniekin" | "ghoran" | "gnoll" | "gnome" | "goblin" | "goloma" | "grippli" | "halfling" | "hobgoblin" | "human" | "kashrishi" | "kitsune" | "kobold" | "leshy" | "lizardfolk" | "merfolk" | "minotaur" | "nagaji" | "naari" | "nephilim" | "orc" | "oread" | "poppet" | "ratfolk" | "reflection" | "shisk" | "shoony" | "skeleton" | "sprite" | "strix" | "suli" | "surki" | "sylph" | "tanuki" | "talos" | "tengu" | "undine" | "vanara" | "vishkanya" | "additive1" | "additive2" | "additive3" | "aftermath" | "amp" | "archetype" | "attack" | "beast" | "bottled-breath" | "cantrip" | "catalyst" | "circus" | "class" | "composite" | "composition" | "concentrate" | "dedication" | "deviant" | "eidolon" | "elixir" | "esoterica" | "expandable" | "exploration" | "finisher" | "flourish" | "focus" | "fulu" | "gadget" | "general" | "lineage" | "litany" | "lozenge" | "manipulate" | "missive" | "modification" | "multiclass" | "mutagen" | "oath" | "oil" | "overflow" | "pervasive-magic" | "potion" | "precious" | "press" | "processed" | "reckless" | "reincarnated" | "revelation" | "sanctified" | "scroll" | "secret" | "skill" | "snare" | "spellgun" | "structure" | "subtle" | "talisman" | "tandem" | "tea" | "trap" | "unstable" | "vigilante" | "wand">;
+    }, "splash" | "alchemist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "fighter" | "gunslinger" | "kineticist" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "psychic" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "thaumaturge" | "witch" | "wizard" | "agile" | "propulsive" | "backswing" | "forceful" | "reach" | "sweep" | "thrown" | "volley-20" | "volley-30" | "volley-50" | "clockwork" | "consumable" | "infused" | "aiuvarin" | "anadi" | "android" | "aphorite" | "ardande" | "athamaru" | "automaton" | "awakened-animal" | "azarketi" | "beastkin" | "bugbear" | "catfolk" | "centaur" | "changeling" | "conrasu" | "dhampir" | "dragonblood" | "dromaar" | "duskwalker" | "dwarf" | "elf" | "fetchling" | "fleshwarp" | "ganzi" | "geniekin" | "ghoran" | "gnoll" | "gnome" | "goblin" | "goloma" | "grippli" | "halfling" | "hobgoblin" | "human" | "kashrishi" | "kitsune" | "kobold" | "leshy" | "lizardfolk" | "merfolk" | "minotaur" | "nagaji" | "naari" | "nephilim" | "orc" | "oread" | "poppet" | "ratfolk" | "reflection" | "shisk" | "shoony" | "skeleton" | "sprite" | "strix" | "suli" | "surki" | "sylph" | "tanuki" | "talos" | "tengu" | "undine" | "vanara" | "vishkanya" | "additive1" | "additive2" | "additive3" | "aftermath" | "amp" | "archetype" | "attack" | "beast" | "bottled-breath" | "cantrip" | "catalyst" | "circus" | "class" | "composite" | "composition" | "concentrate" | "dedication" | "deviant" | "eidolon" | "elixir" | "esoterica" | "expandable" | "exploration" | "finisher" | "flourish" | "focus" | "fulu" | "gadget" | "general" | "lineage" | "litany" | "lozenge" | "manipulate" | "missive" | "modification" | "multiclass" | "mutagen" | "oath" | "oil" | "overflow" | "pervasive-magic" | "potion" | "precious" | "press" | "processed" | "reckless" | "reincarnated" | "revelation" | "sanctified" | "scroll" | "secret" | "skill" | "snare" | "spellgun" | "structure" | "subtle" | "talisman" | "tandem" | "tea" | "trap" | "unstable" | "vigilante" | "wand">;
     elementTraits: {
         air: string;
         earth: string;
@@ -1625,6 +1631,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -1682,6 +1689,7 @@ export declare const PF2ECONFIG: {
         artifact: string;
         auditory: string;
         aura: string;
+        bravado: string;
         circus: string;
         class: string;
         composite: string;
@@ -1839,6 +1847,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -2111,6 +2120,7 @@ export declare const PF2ECONFIG: {
         aftermath: string;
         archetype: string;
         artifact: string;
+        bravado: string;
         circus: string;
         class: string;
         composite: string;
@@ -2161,6 +2171,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -2494,6 +2505,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -2868,6 +2880,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -3306,6 +3319,7 @@ export declare const PF2ECONFIG: {
         "double-barrel": string;
         downtime: string;
         dragon: string;
+        dragonblood: string;
         dromaar: string;
         drug: string;
         druid: string;
@@ -3676,6 +3690,7 @@ export declare const PF2ECONFIG: {
         changeling: string;
         conrasu: string;
         dhampir: string;
+        dragonblood: string;
         dromaar: string;
         duskwalker: string;
         dwarf: string;
@@ -3941,7 +3956,7 @@ export declare const PF2ECONFIG: {
     };
     senses: Record<"darkvision" | "echolocation" | "greater-darkvision" | "infrared-vision" | "lifesense" | "low-light-vision" | "motion-sense" | "scent" | "see-invisibility" | "spiritsense" | "thoughtsense" | "tremorsense" | "truesight" | "wavesense", string>;
     senseAcuities: Record<SenseAcuity, string>;
-    conditionTypes: Record<"blinded" | "broken" | "clumsy" | "confused" | "controlled" | "dazzled" | "deafened" | "doomed" | "drained" | "enfeebled" | "fascinated" | "fatigued" | "fleeing" | "frightened" | "grabbed" | "hidden" | "immobilized" | "off-guard" | "paralyzed" | "petrified" | "prone" | "restrained" | "sickened" | "slowed" | "stunned" | "stupefied" | "unconscious" | "wounded" | "concealed" | "dying" | "encumbered" | "friendly" | "helpful" | "hostile" | "indifferent" | "invisible" | "malevolence" | "observed" | "persistent-damage" | "quickened" | "undetected" | "unfriendly" | "unnoticed", string>;
+    conditionTypes: Record<"blinded" | "broken" | "clumsy" | "confused" | "controlled" | "dazzled" | "deafened" | "doomed" | "drained" | "enfeebled" | "fascinated" | "fatigued" | "fleeing" | "frightened" | "grabbed" | "hidden" | "immobilized" | "off-guard" | "paralyzed" | "petrified" | "prone" | "restrained" | "sickened" | "slowed" | "stunned" | "stupefied" | "unconscious" | "wounded" | "cursebound" | "concealed" | "dying" | "encumbered" | "friendly" | "helpful" | "hostile" | "indifferent" | "invisible" | "malevolence" | "observed" | "persistent-damage" | "quickened" | "undetected" | "unfriendly" | "unnoticed", string>;
     pfsFactions: {
         EA: string;
         GA: string;

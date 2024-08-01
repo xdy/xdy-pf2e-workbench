@@ -64,11 +64,11 @@ interface DamageIRBypassData {
     immunity: {
         ignore: ImmunityType[];
         downgrade: DowngradedImmunity[];
-        redirect: RedirectedImmunity[];
+        redirect: ImmunityRedirect[];
     };
     resistance: {
         ignore: IgnoredResistance[];
-        redirect: RedirectedResistance[];
+        redirect: ResistanceRedirect[];
     };
 }
 interface DowngradedImmunity {
@@ -81,14 +81,14 @@ interface IgnoredResistance {
     max: number;
 }
 /** A damage type to check against instead if the target would resist the actual damage type */
-interface RedirectedImmunity {
-    from: ImmunityType;
-    to: ImmunityType;
+interface ImmunityRedirect {
+    from: Exclude<DamageType, "untyped">;
+    to: Exclude<DamageType, "untyped">;
 }
 /** A damage type to check against instead if the target would resist the actual damage type */
-interface RedirectedResistance {
-    from: ResistanceType;
-    to: ResistanceType;
+interface ResistanceRedirect {
+    from: Exclude<DamageType, "untyped">;
+    to: Exclude<DamageType, "untyped">;
 }
 interface ResolvedDamageFormulaData extends DamageFormulaData {
     roll?: never;
@@ -133,4 +133,4 @@ interface SpellDamageTemplate extends BaseDamageTemplate {
 type AfflictionDamageTemplate = SpellDamageTemplate;
 type SimpleDamageTemplate = SpellDamageTemplate;
 type DamageTemplate = WeaponDamageTemplate | SpellDamageTemplate | AfflictionDamageTemplate | SimpleDamageTemplate;
-export type { AfflictionDamageTemplate, BaseDamageData, CriticalInclusion, DamageCategory, DamageCategoryRenderData, DamageCategoryUnique, DamageDamageContext, DamageDiceFaces, DamageDieSize, DamageFormulaData, DamageIRBypassData, DamageKind, DamagePartialTerm, DamageRollRenderData, DamageTemplate, DamageType, DamageTypeRenderData, MaterialDamageEffect, RedirectedImmunity, RedirectedResistance, SimpleDamageTemplate, SpellDamageTemplate, WeaponBaseDamageData, WeaponDamageTemplate, };
+export type { AfflictionDamageTemplate, BaseDamageData, CriticalInclusion, DamageCategory, DamageCategoryRenderData, DamageCategoryUnique, DamageDamageContext, DamageDiceFaces, DamageDieSize, DamageFormulaData, DamageIRBypassData, DamageKind, DamagePartialTerm, DamageRollRenderData, DamageTemplate, DamageType, DamageTypeRenderData, ImmunityRedirect, MaterialDamageEffect, ResistanceRedirect, SimpleDamageTemplate, SpellDamageTemplate, WeaponBaseDamageData, WeaponDamageTemplate, };

@@ -21,7 +21,6 @@ declare class ScenePF2e extends Scene {
     get isBright(): boolean;
     get isDimlyLit(): boolean;
     get isDark(): boolean;
-    get hasHexGrid(): boolean;
     /** Whether this scene is "in focus": the active scene, or the viewed scene if only a single GM is logged in */
     get isInFocus(): boolean;
     protected _initialize(options?: Record<string, unknown>): void;

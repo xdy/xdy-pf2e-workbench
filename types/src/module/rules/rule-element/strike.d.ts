@@ -1,7 +1,7 @@
 import type { ActorType, CharacterPF2e, NPCPF2e } from "@actor";
 import type { NPCAttackTrait } from "@item/melee/types.ts";
 import { BaseShieldType } from "@item/shield/types.ts";
-import type { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
+import type { BaseWeaponType, OtherWeaponTag, WeaponCategory } from "@item/weapon/types.ts";
 import type { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import { StrictBooleanField } from "@system/schema-data-fields.ts";
 import type {
@@ -43,7 +43,7 @@ type StrikeSchema = RuleElementSchema & {
     /** A weapon category */
     category: StringField<WeaponCategory, WeaponCategory, true, false, true>;
     /** A weapon group */
-    group: StringField<WeaponGroup, WeaponGroup, true, true, true>;
+    group: StringField<string, string, true, true, true>;
     /** A weapon base type */
     baseType: StringField<NonShieldWeaponType, NonShieldWeaponType, true, true, true>;
     /** Permit NPC attack traits to sneak in for battle forms */

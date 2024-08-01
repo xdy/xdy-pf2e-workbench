@@ -13,11 +13,6 @@ declare function createTagifyTraits(traits: Iterable<string>, { sourceTraits, re
     readonly: boolean;
 }[];
 /**
- * Process tagify elements in a form, converting their data into something the pf2e system can handle.
- * This method is meant to be called in _getSubmitData().
- */
-declare function processTagifyInSubmitData(form: HTMLFormElement, data: Record<string, unknown>): void;
-/**
  * Get a CSS class for an adjusted value
  * @param value A value from prepared/derived data
  * @param base A value from base/source data
@@ -57,5 +52,5 @@ interface TraitTagifyEntry {
     value: string;
     readonly: boolean;
 }
-export { createSheetOptions, createSheetTags, createTagifyTraits, getAdjustedValue, getAdjustment, maintainFocusInRender, processTagifyInSubmitData, };
+export { createSheetOptions, createSheetTags, createTagifyTraits, getAdjustedValue, getAdjustment, maintainFocusInRender, };
 export type { AdjustedValue, SheetOption, SheetOptions, TraitTagifyEntry };

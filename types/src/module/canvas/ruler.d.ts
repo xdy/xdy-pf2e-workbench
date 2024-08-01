@@ -13,7 +13,7 @@ declare class RulerPF2e<TToken extends TokenPF2e | null = TokenPF2e | null> exte
     /**
      * @param [exactDestination] The coordinates of the dragged token preview, if any
      */
-    finishDragMeasurement(exactDestination?: Point | null): Promise<boolean | void>;
+    finishDragMeasurement(event: TokenPointerEvent<NonNullable<TToken>>, exactDestination?: Point | null): Promise<boolean | void>;
     /** Acquire the token's footprint for drag measurement. */
     measure(destination: Point, options?: {
         snap?: boolean;

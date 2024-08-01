@@ -1,10 +1,11 @@
 import { ActorPF2e } from "@actor";
 import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
-import { MeleePF2e, WeaponPF2e } from "@item";
+import type { MeleePF2e, WeaponPF2e } from "@item";
 import type { NPCAttackDamage } from "@item/melee/data.ts";
 import type { WeaponDamage } from "@item/weapon/data.ts";
 import { PotencySynthetic } from "@module/rules/synthetics.ts";
 import { DamageCategoryUnique, DamageDamageContext, WeaponDamageTemplate } from "./types.ts";
+
 declare class WeaponDamagePF2e {
     #private;
     static fromNPCAttack({ attack, actor, context, }: NPCStrikeCalculateParams): Promise<WeaponDamageTemplate | null>;

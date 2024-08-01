@@ -1,7 +1,7 @@
-import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.d.ts";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
+
 /**
  * Make a numeric modification to an arbitrary property in a similar way as `ActiveEffect`s
  * @category RuleElement
@@ -41,17 +41,22 @@ interface AutoChangeEntry {
     value: boolean | number | string | null;
     mode: AELikeChangeMode;
 }
+
+import fields = foundry.data.fields;
+
 type AELikeSchema = RuleElementSchema & {
     /** How to apply the `value` at the `path` */
-    mode: StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
+    mode: fields.StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
     /** The data property path to modify on the parent item's actor */
-    path: StringField<string, string, true, false, false>;
+    path: fields.StringField<string, string, true, false, false>;
     /** Which phase of data preparation to run in */
-    phase: StringField<AELikeDataPrepPhase, AELikeDataPrepPhase, false, false, true>;
+    phase: fields.StringField<AELikeDataPrepPhase, AELikeDataPrepPhase, false, false, true>;
     /** The value to applied at the `path` */
     value: ResolvableValueField<true, boolean, boolean>;
+    /** A list of additional domains to include in predicate testing */
+    testDomains: fields.ArrayField<fields.StringField<string, string, true, false, false>, string[], string[], false, false, true>;
     /** Whether to merge two objects given a `mode` of "override" */
-    merge: BooleanField<boolean, boolean, false, false, false>;
+    merge: fields.BooleanField<boolean, boolean, false, false, false>;
 };
 type AELikeChangeMode = keyof typeof AELikeRuleElement.CHANGE_MODE_DEFAULT_PRIORITIES;
 type AELikeDataPrepPhase = (typeof AELikeRuleElement.PHASES)[number];
