@@ -1,3 +1,10 @@
+## [6.7.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.11...v6.7.12) (2024-08-01)
+
+
+### Bug Fixes
+
+* Require pf2e 6.2.0, updated types. ([5262e87](https://github.com/xdy/xdy-pf2e-workbench/commit/5262e8796c82d8e8ea52d16bb058afd7cedecec9))
+
 ## [6.7.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.10...v6.7.11) (2024-08-01)
 
 
