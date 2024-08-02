@@ -1,3 +1,10 @@
+## [6.7.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.12...v6.7.13) (2024-08-02)
+
+
+### Bug Fixes
+
+* Make BAM work with Dorako UI ([41c1588](https://github.com/xdy/xdy-pf2e-workbench/commit/41c15889e40cc375e01265d7ead95d778074d01d))
+
 ## [6.7.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.11...v6.7.12) (2024-08-01)
 
 
