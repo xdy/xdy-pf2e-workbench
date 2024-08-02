@@ -189,47 +189,65 @@
     grid-auto-flow: column;
     grid-template-rows: repeat(calc((var(--bam-count) + var(--bam-columns) / 2 - 0.01) / var(--bam-columns)), 1fr);
     grid-template-columns: repeat(var(--bam-columns), 1fr);
-    button.glow {
-        --color-glow1: 35;
-        --color-glow2: 50;
-        animation: glow2 alternate infinite 2s;
-        z-index: 1;
-    }
-}
 
-.bam-action-btn {
-    margin: 1px auto;
-    width: 100%;
-    height: fit-content;
-    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
-    text-shadow: none;
-    border: #000;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
+    .bam-map-wrapper {
+        display: flex;
+        gap: 5px;
+        margin: 0 auto;
+        width: 100%;
 
-    &:hover {
-        text-shadow: 0 0 2px #fff;
+        button {
+            width: unset;
+
+            &:first-child {
+                flex: 1 1 160px;
+            }
+        }
     }
 
-    img {
-        margin-right: 5px;
-    }
-}
+    button.bam-action-btn {
+        margin: 1px auto;
+        height: fit-content;
+        box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
+        text-shadow: none;
+        border: #000;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
 
-.bam-map-wrapper {
-    display: flex;
-    gap: 5px;
-    margin: 0 auto;
-    width: 100%;
+        &:hover {
+            text-shadow: 0 0 2px #fff;
+        }
+        &:glow {
+            --color-glow1: 35;
+            --color-glow2: 50;
+            animation: glow2 alternate infinite 2s;
+            z-index: 1;
+        }
+        &[data-rank="0"], &[data-rank] {
+            background: var(--color-proficiency-untrained);
+            color: var(--text-light);
+        }
+        &[data-rank="1"] {
+            background: var(--color-proficiency-trained);
+            color: var(--text-light);
+        }
+        &[data-rank="2"] {
+            background: var(--color-proficiency-expert);
+            color: var(--text-light);
+        }
+        &[data-rank="3"] {
+            background: var(--color-proficiency-master);
+            color: var(--text-light);
+        }
+        &[data-rank="4"] {
+            background: var(--color-proficiency-legendary);
+            color: var(--text-light);
+        }
 
-    button {
-        width: unset;
-
-        &:first-child {
-            flex: 1 1 160px;
+        img {
+            margin-right: 5px;
         }
     }
 }
