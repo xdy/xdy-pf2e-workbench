@@ -244,7 +244,13 @@ export function changePauseText() {
         let url: string;
         if (/^https?:/i.test(imagePath)) {
             const imageUrl = new URL(imagePath);
-            imageUrl.pathname = encodeURIComponent(imageUrl.pathname.split("/")[1] ?? imageUrl.pathname);
+            const strings = imageUrl.pathname.split("/");
+            strings.forEach((str, index) => {
+                strings[index] = encodeURIComponent(str);
+            });
+            imageUrl.pathname = strings.join("/");
+
+
             url = `url("${imageUrl}")`;
         } else {
             url = `url("../../../${encodeURIComponent(imagePath)}")`;
