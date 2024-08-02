@@ -1,3 +1,10 @@
+## [6.7.14](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.13...v6.7.14) (2024-08-02)
+
+
+### Bug Fixes
+
+* Better pause image fix ([140e1d6](https://github.com/xdy/xdy-pf2e-workbench/commit/140e1d6c807cee7834ae02aa6feff9acb3e35301))
+
 ## [6.7.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.12...v6.7.13) (2024-08-02)
 
 
