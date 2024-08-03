@@ -1,3 +1,10 @@
+## [6.7.15](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.14...v6.7.15) (2024-08-03)
+
+
+### Bug Fixes
+
+* Stop double-encoding pause image path, courtesy of oWave ([ab68bb4](https://github.com/xdy/xdy-pf2e-workbench/commit/ab68bb458d5a968091108cc185739cd9c418967a))
+
 ## [6.7.14](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.13...v6.7.14) (2024-08-02)
 
 
