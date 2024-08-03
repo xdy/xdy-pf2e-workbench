@@ -232,6 +232,16 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
 });
 
 export function changePauseText() {
+    function encode(text: string) {
+        try {
+            const isEncoded = text !== decodeURIComponent(text);
+            return isEncoded ? text : encodeURIComponent(text);
+        } catch {
+            // text contains a raw % sign
+            return encodeURIComponent(text);
+        }
+    }
+
     if (!document?.querySelector("#pause")?.classList.contains("paused")) {
         return;
     }
@@ -246,14 +256,13 @@ export function changePauseText() {
             const imageUrl = new URL(imagePath);
             const strings = imageUrl.pathname.split("/");
             strings.forEach((str, index) => {
-                strings[index] = encodeURIComponent(str);
+                strings[index] = encode(str);
             });
             imageUrl.pathname = strings.join("/");
 
-
             url = `url("${imageUrl}")`;
         } else {
-            url = `url("../../../${encodeURIComponent(imagePath)}")`;
+            url = `url("../../../${encode(imagePath)}")`;
         }
         style.setProperty("--xdy-pf2e-workbench-pause", url);
     }
