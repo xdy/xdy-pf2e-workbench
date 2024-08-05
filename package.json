@@ -89,7 +89,7 @@
     "@codemirror/lang-json": "^6.0.1",
     "@yaireo/tagify": "^4.27.0",
     "codemirror": "^6.0.1",
-    "luxon": "^3.4.4",
+    "luxon": "^3.5.0",
     "minisearch": "^7.1.0",
     "nouislider": "^15.8.1",
     "remeda": "^2.7.0",
