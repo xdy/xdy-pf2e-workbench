@@ -153,14 +153,6 @@
         "clearFor": "Wyczyść cele dla",
         "hint": "Powiązanie klawiszy w celu dodania wybranych i najechanych tokenów do celów wybranego użytkownika."
       },
-      "applyPersistentAllow": {
-        "all": "Wszyscy",
-        "gm": "MG",
-        "name": "Kto może ustawić opcję automatycznego stosowania trwałych obrażeń/leczenia.",
-        "hint": "Wybierz, kto może ustawić opcję automatycznego stosowania trwałych obrażeń/leczenia. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta.",
-        "none": "Nikt",
-        "players": "Gracze"
-      },
       "nonLethalIsNotLethal": {
         "unconscious": "Nieśmiercionośne obrażenia nie zabijają",
         "no": "Obrażenia nieśmiercionośne to po prostu obrażenia",

@@ -174,14 +174,6 @@
         "name": "新增使用者目標",
         "title": "選擇要為其新增目標的使用者"
       },
-      "applyPersistentAllow": {
-        "all": "所有",
-        "gm": "GM",
-        "hint": "誰可以變更是否自動應用持續傷害/治療。儲存設定以顯示/隱藏客戶端自動化設定菜單上的其他選項。",
-        "name": "誰可以變更是否自動應用持續傷害/治療。",
-        "none": "無",
-        "players": "玩家"
-      },
       "applyPersistentDamage": {
         "hint": "設定Persistent Damage模組骰出的持續傷害是否自動生效。",
         "name": "Persistent Damage模組骰出的持續傷害自動生效。",

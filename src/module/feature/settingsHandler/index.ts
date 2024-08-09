@@ -40,16 +40,6 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
             //     html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
             // }
 
-            // Disable all dependent persistentDamage settings
-            if (settingName !== "applyPersistentAllow" && settingName.startsWith("applyPersistent")) {
-                const applyToggle = !(
-                    game.settings.get(MODULENAME, "applyPersistentAllow") === "none" ||
-                    (game.user?.isGM
-                        ? game.settings.get(MODULENAME, "applyPersistentAllow") === "players"
-                        : game.settings.get(MODULENAME, "applyPersistentAllow") === "gm")
-                );
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
-            }
             if (settingName !== `handleDyingRecoveryRollAllow` && settingName.startsWith("handleDyingRecoveryRoll")) {
                 const applyToggle = !(
                     game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow") === "none" ||

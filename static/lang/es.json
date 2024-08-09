@@ -55,12 +55,6 @@
         "clearFor": "Limpiar objetivos para",
         "name": "Agregar los objetivos del usuario"
       },
-      "applyPersistentAllow": {
-        "all": "Todos",
-        "gm": "MJ",
-        "players": "Jugadores",
-        "none": "Ninguno"
-      },
       "applyPersistentDamage": {
         "wasDamaged": "{damage} daño fue aplicado automáticamente"
       },

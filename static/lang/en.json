@@ -155,16 +155,8 @@
         "name": "Add user targets",
         "title": "Select user to add targets for"
       },
-      "applyPersistentAllow": {
-        "all": "All",
-        "gm": "GM",
-        "hint": "Select who is allowed to set the option to automatically apply persistent damage/healing. Save settings to show/hide additional options on the client automation setting menu.",
-        "name": "Who is allowed to set the option to automatically apply persistent damage/healing.",
-        "none": "None",
-        "players": "Players"
-      },
       "applyPersistentDamage": {
-        "hint": "Client setting to automatically apply persistent damage.",
+        "hint": "World setting to automatically apply persistent damage.",
         "name": "Automatically apply persistent damage."
       },
       "applyPersistentDamageRecoveryRoll": {
@@ -172,7 +164,7 @@
         "name": "... and automatically roll recovery after that."
       },
       "applyPersistentHealing": {
-        "hint": "Client setting to automatically apply persistent healing rolled by the system. Save settings to show/hide additional options.",
+        "hint": "World setting to automatically apply persistent healing rolled by the system.",
         "name": "Automatically apply persistent healing rolled by the system.",
         "wasHealed": "{healing} healing was automatically applied."
       },

@@ -237,17 +237,9 @@
         "numberPostfix": "Zahl als Suffix",
         "wordPrefix": "Wort als Präfix"
       },
-      "applyPersistentAllow": {
-        "none": "Keiner",
-        "gm": "SL",
-        "name": "Wer hat die Erlaubnis die Option zum automatischen anwenden von bleibenden Schaden/Heilung zu setzen.",
-        "players": "Spieler",
-        "all": "Alle",
-        "hint": "Auswählen wer die Erlaubnis hat um die Option zum automatischen anwenden von bleibenden Schaden/Heilung zu setzen. Speichern um die zusätzlichen Menüpunkte im Menü Client-Automatisierung ein- bzw. auszublenden."
-      },
       "applyPersistentDamage": {
         "name": "Automatisches anwenden von anhaltenden Schaden.",
-        "hint": "Client-Einstellung um automatisch anhaltenden Schaden anzuwenden.",
+        "hint": "Welt Einstellung um automatisch anhaltenden Schaden anzuwenden.",
         "wasDamaged": "{damage} Schaden wurde automatisch angewendet"
       },
       "autoCollapseItemChatCardContent": {
@@ -273,7 +265,7 @@
         "name": "Ziele des Benutzers hinzufügen"
       },
       "applyPersistentHealing": {
-        "hint": "Client-Einstellung um anhaltende Heilung automatisch vom System anwenden zu lassen. Einstellungen speichern um zusätzliche Optionen ein- bzw. auszublenden.",
+        "hint": "Welt Einstellung um anhaltende Heilung automatisch vom System anwenden zu lassen.",
         "name": "Automatisches anwenden von anhaltender Heilung, welche vom System ausgewürfelt wird.",
         "wasHealed": "{healing} Heilung wurde automatisch angewendet."
       },
