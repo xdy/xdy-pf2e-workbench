@@ -1,3 +1,10 @@
+## [6.7.16](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.15...v6.7.16) (2024-08-09)
+
+
+### Bug Fixes
+
+* Remove settings for client control of auto apply persistent ([d758aaf](https://github.com/xdy/xdy-pf2e-workbench/commit/d758aaf3c1cfd969aec869c895132528e62ebc2b))
+
 ## [6.7.15](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.14...v6.7.15) (2024-08-03)
 
 
