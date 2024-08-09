@@ -33,14 +33,6 @@
         "name": "Ajouter les cibles de l'utilisateur",
         "title": "Choisissez l'utilisateur pour lui ajouter les cibles"
       },
-      "applyPersistentAllow": {
-        "all": "Tous",
-        "gm": "MJ",
-        "hint": "Choisissez qui est autorisé à régler l'option pour appliquer automatiquement les dégâts/soins persistants. Sauvegarder les réglages pour montrer/cacher les options supplémentaires sur le menu des réglages de l'automatisation du client.",
-        "name": "Qui est autorisé à régler l'option pour appliquer automatiquement les dégâts/soins persistants.",
-        "none": "Aucun",
-        "players": "Joueurs"
-      },
       "applyPersistentDamage": {
         "hint": "Paramètre du client permettant d'appliquer automatiquement des dégâts persistants.",
         "name": "Appliquer automatiquement les dégâts persistants.",

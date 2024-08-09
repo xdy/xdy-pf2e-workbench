@@ -32,14 +32,6 @@
         "name": "谁会被提醒动作",
         "players": "玩家"
       },
-      "applyPersistentAllow": {
-        "all": "所有",
-        "players": "玩家",
-        "gm": "GM",
-        "hint": "谁可以变更是否自动应用持续伤害/治疗。保存设置以显示/隐藏客户端自动化设置菜单上的其他选项。",
-        "name": "谁可以变更是否自动应用持续伤害/治疗。",
-        "none": "无"
-      },
       "applyPersistentDamage": {
         "name": "持续伤害自动生效。",
         "hint": "设置持续伤害是否自动生效。",

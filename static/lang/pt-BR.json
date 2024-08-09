@@ -20,14 +20,6 @@
         "name": "Adicionar Alvos",
         "title": "Selecione o usuário que marcará os alvos"
       },
-      "applyPersistentAllow": {
-        "all": "Todos",
-        "gm": "MJ",
-        "hint": "Selecione quem pode definir a opção de aplicar dano ou cura persistente automaticamente. Salve a configuração para mostrar/ocultar as opções nas Automações de Cliente.",
-        "name": "Permissão: aplicar dano/cura persistente",
-        "none": "Ninguém",
-        "players": "Jogadores"
-      },
       "applyPersistentDamage": {
         "hint": "Automaticamente aplica dano persistente.",
         "name": "Aplicar dano persistente",
