@@ -1,3 +1,10 @@
+## [6.7.17](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.16...v6.7.17) (2024-08-12)
+
+
+### Bug Fixes
+
+* Npc scaler should now handle resistance and weakness values correctly. Update types and set minimum pf2e system version to 6.2.1 ([f3bf422](https://github.com/xdy/xdy-pf2e-workbench/commit/f3bf422cc745379519c9a2f6cfe51f0398940590))
+
 ## [6.7.16](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.15...v6.7.16) (2024-08-09)
 
 
