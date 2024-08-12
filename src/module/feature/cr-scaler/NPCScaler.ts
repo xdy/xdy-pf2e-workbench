@@ -35,6 +35,11 @@ export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number
     }
 }
 
+function extractLabel(label) {
+    const match = label.match(/^(.*?)(?:\s+\d+)?$/);
+    return match ? match[1] : label;
+}
+
 export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     const rootFolder = getFolder("cr-scaler");
 
@@ -72,7 +77,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
         const resistance = resistances[i];
 
         drData.push({
-            label: resistance.label,
+            label: extractLabel(resistance.label),
             type: resistance.type,
             exceptions: resistance.exceptions ?? "",
             value: getMinMaxData("resistance", resistance.value, oldLevel, newLevel),
@@ -89,7 +94,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
         const weakness = weaknesses[i];
 
         dvData.push({
-            label: weakness.label,
+            label: extractLabel(weakness.label),
             type: weakness.type,
             exceptions: weakness.exceptions ?? [],
             value: getMinMaxData("weakness", weakness.value, oldLevel, newLevel),
