@@ -1,3 +1,10 @@
+## [6.7.18](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.17...v6.7.18) (2024-08-12)
+
+
+### Bug Fixes
+
+* Improve label handling for npc scaler. ([76304fe](https://github.com/xdy/xdy-pf2e-workbench/commit/76304fe35af8e8785b6b43d262e96233db3ba5f8))
+
 ## [6.7.17](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.16...v6.7.17) (2024-08-12)
 
 
