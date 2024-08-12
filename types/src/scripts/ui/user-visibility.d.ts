@@ -1,5 +1,4 @@
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
-
 declare class UserVisibilityPF2e {
     /** Edits HTML live based on permission settings. Used to hide certain blocks and values */
     static process(html: HTMLElement, options?: ProcessOptions): void;

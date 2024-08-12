@@ -1,34 +1,8 @@
 import { ArmyPF2e, CharacterPF2e, FamiliarPF2e, HazardPF2e, LootPF2e, NPCPF2e, PartyPF2e, VehiclePF2e } from "@actor";
 import { SenseAcuity } from "@actor/creature/types.ts";
-import {
-    AbilityItemPF2e,
-    AfflictionPF2e,
-    AncestryPF2e,
-    ArmorPF2e,
-    BackgroundPF2e,
-    BookPF2e,
-    CampaignFeaturePF2e,
-    ClassPF2e,
-    ConditionPF2e,
-    ConsumablePF2e,
-    ContainerPF2e,
-    DeityPF2e,
-    EffectPF2e,
-    EquipmentPF2e,
-    FeatPF2e,
-    HeritagePF2e,
-    KitPF2e,
-    LorePF2e,
-    MeleePF2e,
-    ShieldPF2e,
-    SpellcastingEntryPF2e,
-    SpellPF2e,
-    TreasurePF2e,
-    WeaponPF2e,
-} from "@item";
+import { AbilityItemPF2e, AfflictionPF2e, AncestryPF2e, ArmorPF2e, BackgroundPF2e, BookPF2e, CampaignFeaturePF2e, ClassPF2e, ConditionPF2e, ConsumablePF2e, ContainerPF2e, DeityPF2e, EffectPF2e, EquipmentPF2e, FeatPF2e, HeritagePF2e, KitPF2e, LorePF2e, MeleePF2e, ShieldPF2e, SpellPF2e, SpellcastingEntryPF2e, TreasurePF2e, WeaponPF2e } from "@item";
 import { WeaponReloadTime } from "@item/weapon/types.ts";
 import { JournalSheetPF2e } from "@module/journal-entry/sheet.ts";
-
 export type StatusEffectIconTheme = "default" | "blackWhite";
 export declare const PF2ECONFIG: {
     defaultPartyId: string;
@@ -586,6 +560,7 @@ export declare const PF2ECONFIG: {
         sleep: string;
         spellshape: string;
         stance: string;
+        structure: string;
         subtle: string;
         summoned: string;
         teleportation: string;
@@ -670,7 +645,6 @@ export declare const PF2ECONFIG: {
         snare: string;
         spellgun: string;
         splash: string;
-        structure: string;
         talisman: string;
         tea: string;
         trap: string;
@@ -1327,6 +1301,7 @@ export declare const PF2ECONFIG: {
         sleep: string;
         spellshape: string;
         stance: string;
+        structure: string;
         subtle: string;
         summoned: string;
         teleportation: string;
@@ -1411,7 +1386,6 @@ export declare const PF2ECONFIG: {
         snare: string;
         spellgun: string;
         splash: string;
-        structure: string;
         talisman: string;
         tea: string;
         trap: string;
@@ -1548,7 +1522,7 @@ export declare const PF2ECONFIG: {
         detection: string;
         eidolon: string;
         emotion: string;
-        expandable: string;
+        expandable: string; /** Max speed for number of hexploration activities */
         extradimensional: string;
         fear: string;
         figurehead: string;
@@ -1781,6 +1755,7 @@ export declare const PF2ECONFIG: {
         shadow: string;
         sleep: string;
         spellshape: string;
+        structure: string;
         subtle: string;
         summon: string;
         summoned: string;
@@ -2027,6 +2002,7 @@ export declare const PF2ECONFIG: {
         sleep: string;
         spellshape: string;
         stance: string;
+        structure: string;
         subtle: string;
         summoned: string;
         teleportation: string;
@@ -2111,7 +2087,6 @@ export declare const PF2ECONFIG: {
         snare: string;
         spellgun: string;
         splash: string;
-        structure: string;
         talisman: string;
         tea: string;
         trap: string;
@@ -2654,6 +2629,7 @@ export declare const PF2ECONFIG: {
         sleep: string;
         spellshape: string;
         stance: string;
+        structure: string;
         subtle: string;
         summon: string;
         summoned: string;
@@ -4221,48 +4197,6 @@ export declare const PF2ECONFIG: {
                 both: string;
             };
             lootableNPCs: {
-                name: string;
-                hint: string;
-            };
-        };
-        homebrew: {
-            creatureTraits: {
-                name: string;
-                hint: string;
-            };
-            featTraits: {
-                name: string;
-                hint: string;
-            };
-            languages: {
-                name: string;
-                hint: string;
-            };
-            spellTraits: {
-                name: string;
-                hint: string;
-            };
-            weaponCategories: {
-                name: string;
-                hint: string;
-            };
-            weaponGroups: {
-                name: string;
-                hint: string;
-            };
-            baseWeapons: {
-                name: string;
-                hint: string;
-            };
-            weaponTraits: {
-                name: string;
-                hint: string;
-            };
-            equipmentTraits: {
-                name: string;
-                hint: string;
-            };
-            environmentTypes: {
                 name: string;
                 hint: string;
             };

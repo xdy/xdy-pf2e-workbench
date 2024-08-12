@@ -1,4 +1,3 @@
-import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, RuleElementSchema } from "./data.ts";
 /** Roll Twice and keep either the higher or lower result */
@@ -9,10 +8,11 @@ declare class RollTwiceRuleElement extends RuleElementPF2e<RollTwiceRuleSchema> 
 }
 interface RollTwiceRuleElement extends RuleElementPF2e<RollTwiceRuleSchema>, ModelPropsFromRESchema<RollTwiceRuleSchema> {
 }
+import fields = foundry.data.fields;
 type RollTwiceRuleSchema = RuleElementSchema & {
-    selector: StringField<string, string, true, false, false>;
-    keep: StringField<"higher" | "lower", "higher" | "lower", true, false, false>;
+    selector: fields.ArrayField<fields.StringField<string, string, true, false, false>, string[], string[], true, false, true>;
+    keep: fields.StringField<"higher" | "lower", "higher" | "lower", true, false, false>;
     /** If the hosting item is an effect, remove or expire it after a matching roll is made */
-    removeAfterRoll: BooleanField<boolean, boolean, false, false, false>;
+    removeAfterRoll: fields.BooleanField<boolean, boolean, false, false, false>;
 };
 export { RollTwiceRuleElement };

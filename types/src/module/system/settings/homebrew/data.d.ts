@@ -1,10 +1,10 @@
 import type { Language } from "@actor/creature/index.ts";
 import { AttributeString } from "@actor/types.ts";
+import { BaseArmorType } from "@item/armor/types.ts";
 import type { BaseWeaponType } from "@item/weapon/types.ts";
 import type { SetField, StringField } from "types/foundry/common/data/fields.d.ts";
-import type { MenuTemplateData, SettingsTemplateData } from "../menu.ts";
-
-declare const HOMEBREW_TRAIT_KEYS: readonly ["creatureTraits", "featTraits", "languages", "spellTraits", "weaponCategories", "weaponGroups", "baseWeapons", "weaponTraits", "equipmentTraits", "environmentTypes"];
+import type { MenuTemplateData } from "../menu.ts";
+declare const HOMEBREW_ELEMENT_KEYS: readonly ["languages", "armorGroups", "baseArmors", "weaponCategories", "weaponGroups", "baseWeapons", "creatureTraits", "featTraits", "spellTraits", "weaponTraits", "shieldTraits", "equipmentTraits"];
 /** Homebrew elements from some of the above records are propagated to related records */
 declare const TRAIT_PROPAGATIONS: {
     readonly actionTraits: readonly ["effectTraits"];
@@ -13,11 +13,11 @@ declare const TRAIT_PROPAGATIONS: {
     readonly featTraits: readonly ["actionTraits"];
     readonly weaponTraits: readonly ["npcAttackTraits"];
 };
-type HomebrewTraitKey = (typeof HOMEBREW_TRAIT_KEYS)[number];
+type HomebrewTraitKey = (typeof HOMEBREW_ELEMENT_KEYS)[number];
 type HomebrewKey = HomebrewTraitKey | "damageTypes" | "languageRarities";
 type HomebrewTraitSettingsKey = `homebrew.${HomebrewTraitKey}`;
 interface HomebrewTag<T extends HomebrewTraitKey = HomebrewTraitKey> {
-    id: T extends "baseWeapons" ? BaseWeaponType : T extends "languages" ? LanguageNotCommon : T extends Exclude<HomebrewTraitKey, "baseWeapons" | "languages"> ? keyof (typeof CONFIG.PF2E)[T] : never;
+    id: T extends "baseArmors" ? BaseArmorType : T extends "baseWeapons" ? BaseWeaponType : T extends "languages" ? LanguageNotCommon : T extends Exclude<HomebrewTraitKey, "baseArmors" | "baseWeapons" | "languages"> ? keyof (typeof CONFIG.PF2E)[T] : never;
     value: string;
 }
 type MainDamageCategories = "physical" | "energy";
@@ -27,8 +27,6 @@ interface CustomDamageData {
     icon: string | null;
 }
 interface HomebrewElementsSheetData extends MenuTemplateData {
-    campaignSettings: Record<string, SettingsTemplateData>;
-    traitSettings: Record<string, SettingsTemplateData>;
     languageRarities: LanguageSettingsSheetData;
     damageCategories: Record<MainDamageCategories, string>;
     customDamageTypes: CustomDamageData[];
@@ -83,7 +81,7 @@ type LanguageSettingsSchema = {
 };
 type LanguageSetField = SetField<StringField<LanguageNotCommon, LanguageNotCommon, true, false, false>, LanguageNotCommon[], Set<LanguageNotCommon>, true, false, true>;
 interface ModuleHomebrewData {
-    additionalSkills: Record<string, {
+    skills: Record<string, {
         label: string;
         attribute: AttributeString;
     }>;
@@ -95,5 +93,5 @@ type RawLanguageSettings<TModel extends LanguageSettings = LanguageSettings> = R
     common: LanguageNotCommon[];
     homebrew: LanguageNotCommon[];
 };
-export { HOMEBREW_TRAIT_KEYS, LanguageSettings, TRAIT_PROPAGATIONS };
+export { HOMEBREW_ELEMENT_KEYS, LanguageSettings, TRAIT_PROPAGATIONS };
 export type { CustomDamageData, HomebrewElementsSheetData, HomebrewKey, HomebrewTag, HomebrewTraitKey, HomebrewTraitSettingsKey, LanguageNotCommon, LanguageSettingsSheetData, ModuleHomebrewData, };

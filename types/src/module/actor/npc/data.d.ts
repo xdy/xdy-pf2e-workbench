@@ -1,39 +1,12 @@
 import type { ActorPF2e } from "@actor/base.ts";
-import type {
-    Abilities,
-    BaseCreatureSource,
-    CreatureAttributes,
-    CreatureDetails,
-    CreatureDetailsSource,
-    CreatureHitPointsSource,
-    CreatureInitiativeSource,
-    CreatureLanguagesData,
-    CreaturePerceptionData,
-    CreatureResources,
-    CreatureResourcesSource,
-    CreatureSpeeds,
-    CreatureSystemData,
-    CreatureSystemSource,
-    CreatureTraitsSource,
-    HeldShieldData,
-    LabeledSpeed,
-    SaveData,
-    SenseData,
-} from "@actor/creature/data.ts";
-import type {
-    ActorAttributesSource,
-    ActorFlagsPF2e,
-    AttributeBasedTraceData,
-    HitPointsStatistic,
-    StrikeData,
-} from "@actor/data/base.ts";
+import type { Abilities, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureHitPointsSource, CreatureInitiativeSource, CreatureLanguagesData, CreaturePerceptionData, CreatureResources, CreatureResourcesSource, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsSource, HeldShieldData, LabeledSpeed, SaveData, SenseData } from "@actor/creature/data.ts";
+import type { ActorAttributesSource, ActorFlagsPF2e, AttributeBasedTraceData, HitPointsStatistic, StrikeData } from "@actor/data/base.ts";
 import { InitiativeTraceData } from "@actor/initiative.ts";
 import type { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
 import type { ActorAlliance, SaveType, SkillSlug } from "@actor/types.ts";
 import type { MeleePF2e } from "@item";
 import type { PublicationData } from "@module/data.ts";
 import type { RawPredicate } from "@system/predication.ts";
-
 type NPCSource = BaseCreatureSource<"npc", NPCSystemSource> & {
     flags: DeepPartial<NPCFlags>;
 };

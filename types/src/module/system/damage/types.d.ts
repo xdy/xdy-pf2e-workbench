@@ -6,7 +6,6 @@ import type { DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import type { BaseRollContext } from "@system/rolls.ts";
 import type { DamageRoll } from "./roll.ts";
 import type { DAMAGE_CATEGORIES_UNIQUE, DAMAGE_DICE_FACES, DAMAGE_DIE_SIZES, DAMAGE_TYPES } from "./values.ts";
-
 type DamageCategoryUnique = SetElement<typeof DAMAGE_CATEGORIES_UNIQUE>;
 type DamageCategory = keyof typeof CONFIG.PF2E.damageCategories;
 type DamageDiceFaces = (typeof DAMAGE_DICE_FACES)[number];

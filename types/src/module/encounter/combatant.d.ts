@@ -6,6 +6,11 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
     #private;
     /** Has this document completed `DataModel` initialization? */
     initialized: boolean;
+    static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], operation?: Partial<DatabaseCreateOperation<TDocument["parent"]>>): Promise<TDocument[]>;
+    /** Get the active Combatant for the given actor, creating one if necessary */
+    static fromActor(actor: ActorPF2e, render?: boolean, options?: {
+        combat?: EncounterPF2e;
+    }): Promise<CombatantPF2e<EncounterPF2e> | null>;
     get encounter(): TParent;
     /** The round this combatant last had a turn */
     get roundOfLastTurn(): number | null;
@@ -15,11 +20,6 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
     hasHigherInitiative(this: RolledCombatant<NonNullable<TParent>>, { than }: {
         than: RolledCombatant<NonNullable<TParent>>;
     }): boolean;
-    /** Get the active Combatant for the given actor, creating one if necessary */
-    static fromActor(actor: ActorPF2e, render?: boolean, options?: {
-        combat?: EncounterPF2e;
-    }): Promise<CombatantPF2e<EncounterPF2e> | null>;
-    static createDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: (TDocument | PreCreate<TDocument["_source"]>)[], operation?: Partial<DatabaseCreateOperation<TDocument["parent"]>>): Promise<TDocument[]>;
     startTurn(): Promise<void>;
     endTurn(options: {
         round: number;

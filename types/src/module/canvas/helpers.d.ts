@@ -1,5 +1,4 @@
 import type { TokenPF2e } from "./index.ts";
-
 /**
  * Measure the minimum distance between two rectangles
  * @param r0      The origin rectangle

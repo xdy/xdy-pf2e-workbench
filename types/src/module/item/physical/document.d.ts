@@ -1,23 +1,12 @@
 import type { ActorPF2e } from "@actor";
-import { type ContainerPF2e, ItemPF2e } from "@item";
+import { ItemPF2e, type ContainerPF2e } from "@item";
 import type { ItemSourcePF2e, PhysicalItemSource, RawItemChatData, TraitChatData } from "@item/base/data/index.ts";
 import type { Rarity, Size, ZeroToTwo } from "@module/data.ts";
 import type { EffectSpinoff } from "@module/rules/rule-element/effect-spinoff/spinoff.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { Bulk } from "./bulk.ts";
-import type {
-    IdentificationStatus,
-    ItemActivation,
-    ItemCarryType,
-    ItemMaterialData,
-    MystifiedData,
-    PhysicalItemHitPoints,
-    PhysicalItemTrait,
-    PhysicalSystemData,
-    Price,
-} from "./data.ts";
+import type { IdentificationStatus, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalSystemData, Price } from "./data.ts";
 import { CoinsPF2e } from "./helpers.ts";
-
 declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     /** The item in which this item is embedded */
     parentItem: PhysicalItemPF2e | null;

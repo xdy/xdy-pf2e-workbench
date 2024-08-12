@@ -10,7 +10,6 @@ import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import type { NPCFlags, NPCSource, NPCSystemData } from "./data.ts";
 import type { VariantCloneParams } from "./types.ts";
-
 declare class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     initiative: ActorInitiative;
     get allowedItemTypes(): (ItemType | "physical")[];

@@ -4,7 +4,6 @@ import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "./ae-like.ts";
 import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
-
 declare class AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema> {
     protected static validActorTypes: ActorType[];
     constructor(data: AdjustStrikeSource, options: RuleElementOptions);

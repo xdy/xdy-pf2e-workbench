@@ -1,6 +1,5 @@
 import { ActionCost } from "@item/base/data/system.ts";
 import Sortable from "sortablejs";
-
 /**
  * Given an array and a key function, create a map where the key is the value that
  * gets returned when each item is pushed into the function. Accumulate

@@ -7,15 +7,8 @@ import { DamageRoll } from "@system/damage/roll.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { AttackRollParams, DamageRollParams } from "@system/rolls.ts";
 import { Statistic } from "@system/statistic/index.ts";
-import type {
-    ArrayField,
-    FilePathField,
-    NumberField,
-    SchemaField,
-    StringField,
-} from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, FilePathField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { CharacterPF2e } from "./document.ts";
-
 declare class ElementalBlast {
     #private;
     actor: CharacterPF2e;

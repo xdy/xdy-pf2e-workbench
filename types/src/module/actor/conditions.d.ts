@@ -11,6 +11,7 @@ declare class ActorConditions<TActor extends ActorPF2e> extends DelegatedCollect
     get stored(): ConditionPF2e<TActor>[];
     /** Convenience getters for active badged conditions, especially for use by @actor resolvables in rule elements */
     get clumsy(): ConditionPF2e<TActor> | null;
+    get cursebound(): ConditionPF2e<TActor> | null;
     get doomed(): ConditionPF2e<TActor> | null;
     get drained(): ConditionPF2e<TActor> | null;
     get dying(): ConditionPF2e<TActor> | null;

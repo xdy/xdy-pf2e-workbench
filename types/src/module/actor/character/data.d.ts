@@ -1,30 +1,8 @@
 import { CraftingEntryData } from "@actor/character/crafting/entry.ts";
 import { CraftingFormulaData } from "@actor/character/crafting/formula.ts";
-import {
-    AbilityData,
-    BaseCreatureSource,
-    CreatureAttributes,
-    CreatureDetails,
-    CreatureDetailsSource,
-    CreatureLanguagesData,
-    CreaturePerceptionData,
-    CreatureResources,
-    CreatureSystemData,
-    CreatureSystemSource,
-    HeldShieldData,
-    SaveData,
-    SkillData,
-} from "@actor/creature/data.ts";
+import { AbilityData, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureLanguagesData, CreaturePerceptionData, CreatureResources, CreatureSystemData, CreatureSystemSource, HeldShieldData, SaveData, SkillData } from "@actor/creature/data.ts";
 import { CreatureInitiativeSource, CreatureSpeeds, Language } from "@actor/creature/index.ts";
-import {
-    ActorAttributesSource,
-    ActorFlagsPF2e,
-    AttributeBasedTraceData,
-    HitPointsStatistic,
-    InitiativeData,
-    StrikeData,
-    TraitViewData,
-} from "@actor/data/base.ts";
+import { ActorAttributesSource, ActorFlagsPF2e, AttributeBasedTraceData, HitPointsStatistic, InitiativeData, StrikeData, TraitViewData } from "@actor/data/base.ts";
 import { AttributeString, MovementType, SaveType, SkillSlug } from "@actor/types.ts";
 import type { WeaponPF2e } from "@item";
 import { ArmorCategory } from "@item/armor/types.ts";
@@ -38,7 +16,6 @@ import type { Predicate } from "@system/predication.ts";
 import type { CharacterPF2e } from "./document.ts";
 import type { WeaponAuxiliaryAction } from "./helpers.ts";
 import type { CharacterSheetTabVisibility } from "./sheet.ts";
-
 type CharacterSource = BaseCreatureSource<"character", CharacterSystemSource> & {
     flags: DeepPartial<CharacterFlags>;
 };

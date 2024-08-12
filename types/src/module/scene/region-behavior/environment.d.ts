@@ -2,7 +2,6 @@ import type { RegionEventType } from "types/foundry/client-esm/data/region-behav
 import type { SetField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RegionBehaviorPF2e } from "./document.ts";
 import { RegionEventPF2e } from "./types.ts";
-
 declare class EnvironmentBehaviorType extends foundry.data.regionBehaviors.RegionBehaviorType<EnvironmentTypeSchema, RegionBehaviorPF2e | null> {
     events: Set<RegionEventType>;
     static defineSchema(): EnvironmentTypeSchema;

@@ -5,7 +5,6 @@ import { OtherConsumableTag } from "@item/consumable/types.ts";
 import { PreciousMaterialType } from "@item/physical/types.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { OtherWeaponTag } from "@item/weapon/types.ts";
-
 declare const ancestryTraits: {
     aiuvarin: string;
     anadi: string;
@@ -388,6 +387,7 @@ declare const spellTraits: {
     sleep: string;
     spellshape: string;
     stance: string;
+    structure: string;
     subtle: string;
     summon: string;
     summoned: string;
@@ -1098,6 +1098,7 @@ declare const featTraits: {
     shadow: string;
     sleep: string;
     spellshape: string;
+    structure: string;
     subtle: string;
     summon: string;
     summoned: string;
@@ -1425,6 +1426,7 @@ declare const actionTraits: {
     sleep: string;
     spellshape: string;
     stance: string;
+    structure: string;
     subtle: string;
     summoned: string;
     teleportation: string;
@@ -1509,7 +1511,6 @@ declare const actionTraits: {
     snare: string;
     spellgun: string;
     splash: string;
-    structure: string;
     talisman: string;
     tea: string;
     trap: string;
@@ -1682,6 +1683,7 @@ declare const effectTraits: Omit<{
     sleep: string;
     spellshape: string;
     stance: string;
+    structure: string;
     subtle: string;
     summoned: string;
     teleportation: string;
@@ -1766,7 +1768,6 @@ declare const effectTraits: Omit<{
     snare: string;
     spellgun: string;
     splash: string;
-    structure: string;
     talisman: string;
     tea: string;
     trap: string;
@@ -2266,6 +2267,7 @@ declare const kingmakerTraits: {
     sleep: string;
     spellshape: string;
     stance: string;
+    structure: string;
     subtle: string;
     summoned: string;
     teleportation: string;
@@ -2350,7 +2352,6 @@ declare const kingmakerTraits: {
     snare: string;
     spellgun: string;
     splash: string;
-    structure: string;
     talisman: string;
     tea: string;
     trap: string;

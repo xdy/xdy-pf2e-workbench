@@ -75,7 +75,7 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
             label: resistance.label,
             type: resistance.type,
             exceptions: resistance.exceptions ?? "",
-            value: getMinMaxData("resistance", resistance.value, oldLevel, newLevel).toString(),
+            value: getMinMaxData("resistance", resistance.value, oldLevel, newLevel),
             doubleVs: resistance.doubleVs ?? "",
         });
     }
@@ -91,8 +91,8 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
         dvData.push({
             label: weakness.label,
             type: weakness.type,
-            exceptions: weakness.exceptions ?? "",
-            value: getMinMaxData("weakness", weakness.value, oldLevel, newLevel).toString(),
+            exceptions: weakness.exceptions ?? [],
+            value: getMinMaxData("weakness", weakness.value, oldLevel, newLevel),
         });
     }
     updateData["system.attributes.weaknesses"] = dvData;

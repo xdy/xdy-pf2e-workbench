@@ -36,6 +36,15 @@ declare class Statistic<TActor extends ActorPF2e = ActorPF2e> extends BaseStatis
      * Extend this statistic into a new cloned statistic with additional data.
      * Combines all domains and modifier lists.
      */
+    clone(data: Omit<DeepPartial<StatisticData>, "check" | "dc" | "modifiers"> & {
+        dc?: Partial<StatisticDifficultyClassData>;
+        check?: Partial<StatisticCheckData>;
+        modifiers?: ModifierPF2e[];
+    }): this;
+    /**
+     * Extend this statistic into a new cloned statistic with additional data.
+     * Combines all domains and modifier lists, and sets the new statistic to be the base of the other
+     */
     extend(data: Omit<DeepPartial<StatisticData>, "check" | "dc" | "modifiers"> & {
         dc?: Partial<StatisticDifficultyClassData>;
         check?: Partial<StatisticCheckData>;

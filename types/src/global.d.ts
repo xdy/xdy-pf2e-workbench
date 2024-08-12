@@ -8,20 +8,11 @@ import type { ItemPF2e, PhysicalItemPF2e } from "@item";
 import type { ConditionSource } from "@item/condition/data.ts";
 import type { CoinsPF2e } from "@item/physical/helpers.ts";
 import type { ActiveEffectPF2e } from "@module/active-effect.ts";
-import type {
-    CompendiumBrowser,
-    CompendiumBrowserSettings,
-    CompendiumBrowserSources,
-} from "@module/apps/compendium-browser/index.ts";
+import type { CompendiumBrowser, CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/index.ts";
 import type { EffectsPanel } from "@module/apps/effects-panel.ts";
 import type { HotbarPF2e } from "@module/apps/hotbar.ts";
 import type { LicenseViewer } from "@module/apps/license-viewer/app.ts";
-import type {
-    ActorDirectoryPF2e,
-    ChatLogPF2e,
-    CompendiumDirectoryPF2e,
-    EncounterTrackerPF2e,
-} from "@module/apps/sidebar/index.ts";
+import type { ActorDirectoryPF2e, ChatLogPF2e, CompendiumDirectoryPF2e, EncounterTrackerPF2e } from "@module/apps/sidebar/index.ts";
 import type { WorldClock } from "@module/apps/world-clock/app.ts";
 import type { CanvasPF2e, EffectsCanvasGroupPF2e } from "@module/canvas/index.ts";
 import type { StatusEffects } from "@module/canvas/status-effects.ts";
@@ -31,45 +22,21 @@ import type { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import type { MacroPF2e } from "@module/macro.ts";
 import type { RuleElementPF2e, RuleElements } from "@module/rules/index.ts";
 import type { UserPF2e } from "@module/user/index.ts";
-import type {
-    AmbientLightDocumentPF2e,
-    MeasuredTemplateDocumentPF2e,
-    RegionBehaviorPF2e,
-    RegionDocumentPF2e,
-    ScenePF2e,
-    TileDocumentPF2e,
-    TokenDocumentPF2e,
-} from "@scene";
+import type { AmbientLightDocumentPF2e, MeasuredTemplateDocumentPF2e, RegionBehaviorPF2e, RegionDocumentPF2e, ScenePF2e, TileDocumentPF2e, TokenDocumentPF2e } from "@scene";
 import type { ActorDeltaPF2e } from "@scene/token-document/actor-delta.ts";
 import type { PF2ECONFIG, StatusEffectIconTheme } from "@scripts/config/index.ts";
 import type { DicePF2e } from "@scripts/dice.ts";
-import type {
-    calculateXP,
-    checkPrompt,
-    editPersistent,
-    launchTravelSheet,
-    perceptionForSelected,
-    rollActionMacro,
-    rollItemMacro,
-    stealthForSelected,
-    xpFromEncounter,
-} from "@scripts/macros/index.ts";
+import type { calculateXP, checkPrompt, editPersistent, launchTravelSheet, perceptionForSelected, rollActionMacro, rollItemMacro, stealthForSelected, xpFromEncounter } from "@scripts/macros/index.ts";
 import type { remigrate } from "@scripts/system/remigrate.ts";
 import type { CheckPF2e } from "@system/check/index.ts";
 import type { ConditionManager } from "@system/conditions/manager.ts";
 import type { EffectTracker } from "@system/effect-tracker.ts";
 import type { ModuleArt } from "@system/module-art.ts";
 import type { Predicate } from "@system/predication.ts";
-import type {
-    CustomDamageData,
-    HomebrewTag,
-    HomebrewTraitSettingsKey,
-    LanguageSettings,
-} from "@system/settings/homebrew/index.ts";
+import type { CustomDamageData, HomebrewTag, HomebrewTraitSettingsKey, LanguageSettings } from "@system/settings/homebrew/index.ts";
 import type { TextEditorPF2e } from "@system/text-editor.ts";
 import type { sluggify } from "@util";
 import type EnJSON from "static/lang/en.json";
-
 interface GamePF2e extends Game<ActorPF2e<null>, ActorsPF2e<ActorPF2e<null>>, ChatMessagePF2e, EncounterPF2e, ItemPF2e<null>, MacroPF2e, ScenePF2e, UserPF2e> {
     pf2e: {
         actions: Record<string, Function> & Collection<Action>;

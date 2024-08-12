@@ -1,7 +1,6 @@
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, RuleElementSchema } from "./data.ts";
 import fields = foundry.data.fields;
-
 /**
  * Change the image representing an actor's token
  * @category RuleElement

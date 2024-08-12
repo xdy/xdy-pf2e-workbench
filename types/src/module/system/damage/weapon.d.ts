@@ -5,7 +5,6 @@ import type { NPCAttackDamage } from "@item/melee/data.ts";
 import type { WeaponDamage } from "@item/weapon/data.ts";
 import { PotencySynthetic } from "@module/rules/synthetics.ts";
 import { DamageCategoryUnique, DamageDamageContext, WeaponDamageTemplate } from "./types.ts";
-
 declare class WeaponDamagePF2e {
     #private;
     static fromNPCAttack({ attack, actor, context, }: NPCStrikeCalculateParams): Promise<WeaponDamageTemplate | null>;

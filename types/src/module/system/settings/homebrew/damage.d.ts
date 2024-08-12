@@ -1,5 +1,4 @@
 import { CustomDamageData } from "./data.ts";
-
 /**
  * To update all custom damage types in the system, we need to ensure that all collections are added to and cleaned.
  * This reduces the scope of all damage related operations so that its easier to identify when something goes wrong.

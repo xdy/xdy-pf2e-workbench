@@ -6,13 +6,7 @@ import { RollNotePF2e } from "@module/notes.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { CheckType } from "@system/check/index.ts";
 import type { DegreeOfSuccessString } from "@system/degree-of-success.ts";
-import type {
-    CheckContextData,
-    CheckContextOptions,
-    CheckMacroContext,
-    SimpleRollActionCheckOptions,
-} from "./types.ts";
-
+import type { CheckContextData, CheckContextOptions, CheckMacroContext, SimpleRollActionCheckOptions } from "./types.ts";
 declare class ActionMacroHelpers {
     #private;
     static resolveStat(stat: string): {

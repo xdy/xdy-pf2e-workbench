@@ -6,7 +6,6 @@ import { Rarity } from "@module/data.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import { SheetOptions, TraitTagifyEntry } from "@module/sheet/helpers.ts";
 import type * as TinyMCE from "tinymce";
-
 declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOptions> {
     #private;
     constructor(item: TItem, options?: Partial<ItemSheetOptions>);

@@ -1,18 +1,10 @@
 import type { CreatureTrait } from "@actor/creature/index.ts";
 import type { SenseAcuity, SenseType } from "@actor/creature/types.ts";
 import type { RecordField } from "@system/schema-data-fields.ts";
-import type {
-    ArrayField,
-    BooleanField,
-    NumberField,
-    ObjectField,
-    SchemaField,
-    StringField,
-} from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, BooleanField, NumberField, ObjectField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { ResolvableValueField, RuleElementSchema } from "../data.ts";
 import type { ImmunityRuleElement, ResistanceRuleElement, WeaknessRuleElement } from "../iwr/index.ts";
 import type { BattleFormSkills, BattleFormSpeeds, BattleFormStrike } from "./types.ts";
-
 type OverrideACSchema = {
     modifier: ResolvableValueField<false, false, true>;
     ignoreCheckPenalty: BooleanField<boolean, boolean, false, false, true>;

@@ -15,6 +15,9 @@ interface ActionMessageOptions {
 interface ActionVariantUseOptions extends Record<string, unknown> {
     actors: ActorPF2e | ActorPF2e[];
     event: Event;
+    message: {
+        create?: boolean;
+    };
     traits: ActionTrait[];
     target: ActorPF2e | TokenPF2e;
 }

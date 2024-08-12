@@ -1,6 +1,5 @@
 import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenPF2e } from "./token/object.ts";
-
 declare class RulerPF2e<TToken extends TokenPF2e | null = TokenPF2e | null> extends Ruler<TToken, UserPF2e> {
     #private;
     static get canMeasure(): boolean;
