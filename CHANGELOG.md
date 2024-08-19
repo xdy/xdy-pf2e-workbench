@@ -1,3 +1,10 @@
+## [6.7.19](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.18...v6.7.19) (2024-08-19)
+
+
+### Bug Fixes
+
+* Be a bit more defensive about reaching into party. I somehow got a null party member in a game this weekend. ([a7e3f0f](https://github.com/xdy/xdy-pf2e-workbench/commit/a7e3f0fa6df0d54d3be7fe07cb8654ef4fa3f76a))
+
 ## [6.7.18](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.17...v6.7.18) (2024-08-12)
 
 
