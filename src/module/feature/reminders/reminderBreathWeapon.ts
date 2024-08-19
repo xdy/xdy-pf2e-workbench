@@ -64,7 +64,7 @@ async function getEffectDetails(activeActor, messageContent: string, diceValue) 
             slug: `xdy-breath-weapon-reminder-${myRandomId()}`,
             unidentified:
                 game.settings.get(MODULENAME, "reminderBreathWeaponHidden") &&
-                !game.actors?.party?.members.map((m) => m.id).includes(activeActor.id),
+                !game.actors?.party?.members.map((m) => m?.id).includes(activeActor.id),
             traits: {
                 value: [],
             },

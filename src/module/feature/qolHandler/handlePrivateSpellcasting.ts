@@ -119,7 +119,7 @@ const TRADITION_SKILLS = { arcane: "arcana", divine: "religion", occult: "occult
 function findPartyMembersWithSpell(origin: any) {
     return game.actors?.party?.members
         ?.filter((actor) => {
-            return actor.items
+            return actor?.items
                 ?.filter((i) => i.slug === origin.slug)
                 ?.filter((i) => i.isOfType("spell"))
                 ?.filter((i) => (<SpellPF2e>(<unknown>i)).spellcasting)
@@ -133,7 +133,7 @@ function findPartyMembersWithSpell(origin: any) {
                     );
                 });
         })
-        .map((actor) => actor.name);
+        .map((actor) => actor?.name);
 }
 
 function updateDataAndSource(data: any, message: ChatMessagePF2e): void {

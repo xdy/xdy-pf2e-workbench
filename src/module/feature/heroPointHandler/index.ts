@@ -284,9 +284,9 @@ export function calcRemainingMinutes(useDefault: boolean): number {
 function heroes() {
     return (
         game.actors?.party?.members
-            .filter((actor) => actor.isOfType("character"))
-            .filter((actor) => !actor.system.traits?.value.toString().includes("minion"))
-            .filter((actor) => !actor.system.traits?.value.toString().includes("eidolon")) || []
+            .filter((actor) => actor?.isOfType("character"))
+            .filter((actor) => !actor?.system.traits?.value.toString().includes("minion"))
+            .filter((actor) => !actor?.system.traits?.value.toString().includes("eidolon")) || []
     );
 }
 

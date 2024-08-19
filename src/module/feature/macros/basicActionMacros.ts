@@ -677,7 +677,7 @@ export async function basicActionMacros() {
             }) || [];
 
     const party = game.actors?.party?.members || [];
-    const partyIds = party.map((actor) => actor.id) || [];
+    const partyIds = party.map((actor) => actor?.id) || [];
 
     const allActorsSkills = createMapOfSkillsPerActor(actors);
 
