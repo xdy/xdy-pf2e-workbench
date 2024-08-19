@@ -48,7 +48,7 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
         game?.keyboard.downKeys.has(key),
     );
     const privateCast = castPrivately(
-        game.actors?.party?.members?.some((member) => member.id === message.actor?.id) ?? false,
+        game.actors?.party?.members?.some((member) => member?.id === message?.actor?.id) ?? false,
         message,
     );
 
