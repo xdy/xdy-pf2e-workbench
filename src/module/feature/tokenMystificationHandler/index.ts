@@ -151,7 +151,9 @@ export async function tokenCreateMystification(token: any) {
         (key === "ALWAYS" || isMystifyModifierKeyPressed()) &&
         (!game.keyboard?.downKeys.has("V") || game.keyboard?.downKeys.has("Insert"))
     ) {
-        await doMystification(token, false);
+        if (Hooks.call(`${MODULENAME}.tokenCreateMystification`, token)) {
+            await doMystification(token, false);
+        }
     }
 }
 
