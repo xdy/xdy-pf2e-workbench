@@ -33,6 +33,9 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
           can also be added after the postfix, and optionally be kept when demystifying the creature. E.g. 'Skeletal
           Champion' could become 'Jack the Mindless Undead Skeleton 23'. Note that player owned tokens will not be
           mystified.
+        * There is a hook called `xdy-pf2e-workbench.tokenCreateMystification` that other modules can use. This is
+          triggered when a token is being created and is going to be mystified. If a module returns `false` the
+          token's name will not by mystified.
     * Option to use the mystified name in chat messages created from that npc (actions/spells). Relies on the original
       actor name being present in the text. Only works if the original npc name is actually used and correctly spelled
       in the message.
