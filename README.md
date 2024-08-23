@@ -154,10 +154,10 @@ of each can be found below:
         getAllFromAllowedPacks: 
 ```
 HOOKS (for other modules to use):
-```
+
         * `xdy-pf2e-workbench.moduleReady`: Triggered when the Workbench is Ready (i.e. has processed the 'ready' hook once.)
         * `xdy-pf2e-workbench.tokenCreateMystification`: Triggered when a token is being created and is going to be mystified. If a module returns `false` the token's name will not by mystified.
-```
+
 
 * New Keybinds in Configure Controls
     * Optional keybind to mystify a creature.
