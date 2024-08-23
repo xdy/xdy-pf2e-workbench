@@ -138,19 +138,20 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     updateData["system.attributes.hp.max"] = hp;
     updateData["system.attributes.hp.value"] = hp;
 
+    for (const [key, attr] of Object.entries(system.skills).filter(([, attr]) => attr.base > 0)) {
+        const mod = getLeveledData("skill", parseInt((attr as any).mod), oldLevel, newLevel).total;
+        const value = getLeveledData("skill", parseInt((attr as any).value), oldLevel, newLevel).total;
+        const base = getLeveledData("skill", parseInt((attr as any).base), oldLevel, newLevel).total;
+
+        updateData[`system.skills.${key}`] = { ...{ ...attr, mod: mod, value: value, base: base } };
+    }
+
     let itemUpdates: IDataUpdates[] = [];
     const items: any = actor.items;
     for (const itemId of items.keys()) {
         const item: any = items.get(itemId);
 
-        if ((item.type as IHandledItemType) === "lore") {
-            const oldValue = parseInt(item.system.mod.value);
-            const newValue = getLeveledData("skill", oldValue, oldLevel, newLevel).total;
-            itemUpdates.push({
-                _id: item.id,
-                ["system.mod.value"]: newValue,
-            });
-        } else if ((item.type as IHandledItemType) === "spellcastingEntry") {
+        if ((item.type as IHandledItemType) === "spellcastingEntry") {
             const oldAttack = parseInt(item.system.spelldc.value);
             const newAttack = getLeveledData("spell", oldAttack, oldLevel, newLevel).total;
 
