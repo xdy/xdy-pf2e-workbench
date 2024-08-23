@@ -180,9 +180,13 @@ function buildSpellMessage(
         );
 
         if (game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageShowTraits")) {
+            const traits = Object.values(origin.system.traits.value);
+            if (game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageFilterTraits")) {
+            }
+
             content += game.i18n.localize(
                 game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.traitPart`, {
-                    traits: Object.values(origin.system.traits.value)
+                    traits: traits
                         .map((trait: any) => trait.valueOf())
                         .sort()
                         .join(", "),
