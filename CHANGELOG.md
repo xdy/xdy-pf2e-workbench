@@ -1,3 +1,10 @@
+# [6.8.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.21...v6.8.0) (2024-08-23)
+
+
+### Features
+
+* Adds hook to npc mystification courtesy of 7H3LaughingMan ([1e02176](https://github.com/xdy/xdy-pf2e-workbench/commit/1e021764649990a0310d38d6ce0e42aac5c92254)), closes [#1438](https://github.com/xdy/xdy-pf2e-workbench/issues/1438)
+
 ## [6.7.21](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.20...v6.7.21) (2024-08-23)
 
 
