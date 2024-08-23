@@ -1,3 +1,10 @@
+## [6.7.21](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.20...v6.7.21) (2024-08-23)
+
+
+### Bug Fixes
+
+* NPC Scaler now scales skills. ([b5c24ee](https://github.com/xdy/xdy-pf2e-workbench/commit/b5c24eea2435b5bc7932b9d89dbd77678d11e06a))
+
 ## [6.7.20](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.19...v6.7.20) (2024-08-19)
 
 
