@@ -125,11 +125,22 @@ function findPartyMembersWithSpell(origin: any) {
                 .some((item) => {
                     const spell = <SpellPF2e>(<unknown>item);
                     const entry = spell.spellcasting;
-                    return (
-                        !entry?.isPrepared ||
-                        (entry?.isPrepared &&
-                            entry?.system?.slots?.[`slot${spell.rank}`].prepared.some((s) => s.id === spell.id))
-                    );
+
+                    if (!entry?.isPrepared) {
+                        return true;
+                    } else {
+                        if (!entry?.system?.slots) {
+                            return false;
+                        }
+
+                        for (const [_, group] of Object.entries(entry.system.slots)) {
+                            if (group.prepared.some((s) => s.id === spell.id)) {
+                                return true;
+                            }
+                        }
+
+                        return false;
+                    }
                 });
         })
         .map((actor) => actor?.name);
