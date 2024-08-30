@@ -26,7 +26,6 @@ export async function handlePrivateSpellcasting(data: any, message: ChatMessageP
             ? []
             : game.users
                   .filter((u) => u.active)
-
                   .filter((u) => u.id !== ChatMessage.getWhisperRecipients("GM").map((u) => u.id)[0])
                   .map((u) => u.id);
         const author = game.userId;
