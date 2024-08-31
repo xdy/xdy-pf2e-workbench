@@ -42,6 +42,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [Trent](https://github.com/xyzzy42) - Improved BAM and the Follow the Expert macro.
 * [Kromko](https://github.com/Cuingamehtar) - Bugfix.
 * [DocSchlock](https://github.com/DocSchlock) - Improved RE for "Dirge of Doom Aura".
+* [7H3LaughingMan](https://github.com/7H3LaughingMan) - Various bugfixes.
 
 I've probably forgotten someone, if so, please tell me!
 
