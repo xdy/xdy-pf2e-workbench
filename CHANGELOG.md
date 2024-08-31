@@ -1,3 +1,10 @@
+## [6.8.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.8.0...v6.8.1) (2024-08-31)
+
+
+### Bug Fixes
+
+* Private Spellcasting now checks all prepared slots, courtesy of 7H3LaughingMan. ([6886c64](https://github.com/xdy/xdy-pf2e-workbench/commit/6886c6453acd9c15f6015a1c2fe8d81718c68490))
+
 # [6.8.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.7.21...v6.8.0) (2024-08-23)
 
 
