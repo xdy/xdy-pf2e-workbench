@@ -25,7 +25,7 @@ function hasRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
 }
 
 async function fetchRandomWordPrefix(): Promise<string> {
-    const fixSetting = String(game.settings.get(MODULENAME, "npcMystifierRandomWordPrefixRollTable"));
+    const fixSetting = String(game.settings.get(MODULENAME, "npcMystifierRandomWordPrefixRollTable")).trim();
 
     // "null" check is due to a previous bug that may have left invalid data in text fields
     if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
