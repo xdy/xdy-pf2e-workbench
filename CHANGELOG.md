@@ -1,3 +1,11 @@
+## [6.8.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.8.1...v6.8.2) (2024-09-02)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([db6cc0f](https://github.com/xdy/xdy-pf2e-workbench/commit/db6cc0f121d1fde95050559d498068d45b9b313f))
+* Trim the mystification rolltable setting to avoid errors when loading table. ([fc4f6ee](https://github.com/xdy/xdy-pf2e-workbench/commit/fc4f6ee24c883e69a233d1afd347a008ea3ee833))
+
 ## [6.8.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.8.0...v6.8.1) (2024-08-31)
 
 
