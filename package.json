@@ -93,7 +93,7 @@
     "minisearch": "^7.1.0",
     "nouislider": "^15.8.1",
     "remeda": "^2.11.0",
-    "sortablejs": "^1.15.2",
+    "sortablejs": "^1.15.3",
     "uuid": "^10.0.0"
   },
   "homepage": "https://github.com/xdy/xdy-pf2e-workbench",
