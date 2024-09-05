@@ -171,7 +171,7 @@
       "applyPersistentHealing": {
         "wasHealed": "Leczenie {healing} zostało zastosowane automatycznie.",
         "name": "Automatycznie zastosuj trwałe leczenie używane przez system.",
-        "hint": "Ustawienie klienta w celu automatycznego stosowania trwałego leczenia przez system. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje."
+        "hint": "Ustawienie świata, aby automatycznie stosować trwałe leczenie rzucane przez system."
       },
       "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
         "no": "Nie",
@@ -332,7 +332,7 @@
         "name": "Pokazuj nazwy atutów w kolorze rzadkości na kartach aktorów."
       },
       "applyPersistentDamage": {
-        "hint": "Ustawienie klienta, aby automatycznie stosować trwałe obrażenia.",
+        "hint": "Ustawienia świata, aby automatycznie stosować trwałe obrażenia.",
         "name": "Automatycznie stosuj trwałe obrażenia."
       },
       "autoCollapseItemChatCardContent": {
