@@ -51,6 +51,16 @@ const macroIcons = new Map<string, string>([
     ["Use Scroll or Wand", "systems/pf2e/icons/equipment/wands/magic-wands/magic-wand.webp"],
     ["Versatile Performance", "systems/pf2e/icons/spells/summon-instrument.webp"],
     ["Wand and Scroll Generator", "systems/pf2e/icons/equipment/wands/specialty-wands/wand-of-continuation.webp"],
+
+    // xdy-customizable-macros
+    ["customizableBasicActionMacros", "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp"],
+    ["customizableProceduralChecks", "systems/pf2e/icons/default-icons/party.svg"],
+    ["customizableRefocusPremaster", "icons/magic/perception/third-eye-blue-red.webp"],
+
+    // xdy-internal-utility-macros
+    ["Macro: Effect: Aid", "systems/pf2e/icons/spells/efficient-apport.webp"],
+    ["Macro: Effect: Cover", "systems/pf2e/icons/conditions-2/status_acup.webp"],
+    ["Macro: Effect: Follow The Expert", "systems/pf2e/icons/spells/favorable-review.webp"],
 ]);
 
 function myRandomId() {
@@ -65,8 +75,6 @@ const outDir = <string>fs.mkdirSync(path.resolve(".", "temporary"), { recursive:
 if (!outDir) {
     throw new Error("Could not create output directory");
 }
-
-fs.mkdirsSync(path.resolve(outDir, "packs/data"));
 
 async function buildAsymonousPack() {
     const submod = "submodules/my-foundryvtt-macros";
@@ -158,73 +166,52 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
     await compilePack(macrosImport, importPack, { log: true });
 }
 
-function buildCustomizableMacrosPack() {
-    const folderPath = "./src/packs/data/xdy-customizable-macros";
-    const lines: string[] = [];
+// Pack "*.macro" files into a compendium
+// Argument is both the directory in src/packs/data with source as well the the compendium name in outDir/packs/generated
+async function buildMacrosPack(packName: string) {
+    const folderPath = path.resolve("src/packs/data", packName);
+    const baseMacro = {
+        author: null,
+        flags: {},
+        permission: { default: 1 },
+        scope: "global",
+        type: "script",
+    };
+    const baseMacroStats = { systemId: "pf2e", createdTime: Date.now(), modifiedTime: Date.now() };
+    const macros: object[] = [];
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
         const filePath = path.join(folderPath, file);
         if (!filePath.endsWith(".macro")) {
             continue;
         }
-
-        try {
-            const macroName = path.parse(file).name;
-            const contents = fs.readFileSync(filePath, { encoding: "utf8" });
-            const map = new Map<string, string>();
-            map.set("customizableBasicActionMacros", "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp");
-            map.set("customizableProceduralChecks", "systems/pf2e/icons/default-icons/party.svg");
-            map.set("customizableRefocusPremaster", "icons/magic/perception/third-eye-blue-red.webp");
-            const img = map.get(macroName) || "icons/svg/dice-target.svg";
-
-            // eslint-disable-next-line
-            let json = `{"_id": "${myRandomId()}", "actorIds": [], "author": "${myRandomId()}", "command": ${JSON.stringify(
-                contents,
-            )},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
-            lines.push(json);
-        } catch (err) {
-            console.error(`Failed to read JSON file ${filePath}`, err);
-        }
+        const macroName = path.parse(file).name;
+        const contents = fs.readFileSync(filePath, { encoding: "utf8" });
+        const id = myRandomId();
+        macros.push({
+            _key: `!macros!${id}`,
+            _id: id,
+            _stats: { compendiumSource: compendiumUuid(packName, "Macro", id), ...baseMacroStats },
+            command: contents,
+            img: macroIcons.get(macroName) || "icons/svg/dice-target.svg",
+            name: macroName,
+            ...baseMacro,
+        });
     }
-    const file1 = path.resolve(outDir, "./packs/data/xdy-customizable-macros" + ".db");
-    // console.log(file1);
-    fs.writeFileSync(file1, lines.join("\n"), "utf8");
+    const pack = path.resolve(outDir, "packs", "generated", packName);
+    await compilePack(macros, pack, { log: true });
 }
 
-function buildInternalUtilityMacrosPack() {
-    const folderPath = "./src/packs/data/xdy-internal-utility-macros";
-    const lines: string[] = [];
-    const files = fs.readdirSync(folderPath);
-    for (const file of files) {
-        const filePath = path.join(folderPath, file);
-        if (!filePath.endsWith(".macro")) {
-            continue;
-        }
-
-        try {
-            const macroName = path.parse(file).name;
-            const contents = fs.readFileSync(filePath, { encoding: "utf8" });
-            const map = new Map<string, string>();
-            map.set("Macro: Effect: Aid", "systems/pf2e/icons/spells/efficient-apport.webp");
-            map.set("Macro: Effect: Cover", "systems/pf2e/icons/conditions-2/status_acup.webp");
-            map.set("Macro: Effect: Follow The Expert", "systems/pf2e/icons/spells/favorable-review.webp");
-            const img = map.get(macroName) || "icons/svg/dice-target.svg";
-
-            // eslint-disable-next-line
-            let json = `{"_id": "${myRandomId()}", "actorIds": [], "author": "${myRandomId()}", "command": ${JSON.stringify(
-                contents,
-            )},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
-            lines.push(json);
-        } catch (err) {
-            console.error(`Failed to read JSON file ${filePath}`, err);
-        }
-    }
-    const file1 = path.resolve(outDir, "./packs/data/xdy-internal-utility-macros" + ".db");
-    fs.writeFileSync(file1, lines.join("\n"), "utf8");
+async function buildCustomizableMacrosPack() {
+    await buildMacrosPack("xdy-customizable-macros");
 }
 
-buildCustomizableMacrosPack();
-buildInternalUtilityMacrosPack();
+async function buildInternalUtilityMacrosPack() {
+    await buildMacrosPack("xdy-internal-utility-macros");
+}
+
+await buildCustomizableMacrosPack();
+await buildInternalUtilityMacrosPack();
 await buildAsymonousPack();
 fs.ensureDirSync("dist");
 fs.rmSync("./dist/packs", { recursive: true, force: true });
