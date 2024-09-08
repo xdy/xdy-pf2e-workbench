@@ -4,15 +4,36 @@
 import fs from "fs-extra";
 import path from "path";
 import { compilePack } from "@foundryvtt/foundryvtt-cli";
+import type { MacroSource } from "common/documents/macro.d.ts";
+import type { DocumentStatsData } from "common/data/fields.d.ts";
 
 // We can't import this from xdy-pf2e-workbench.ts because nodejs can't run that file
 const MODULENAME = "xdy-pf2e-workbench";
+
+type MacroPackSource = Partial<MacroSource> & { _key: string }; // Need _key, but some fields can be omitted.
+const module = JSON.parse(fs.readFileSync("static/module.json", { encoding: "utf8" }));
+const baseMacro: Partial<MacroSource> = {
+    author: null,
+    flags: {},
+    ownership: { default: 1 },
+    scope: "global",
+    type: "script",
+};
+const baseMacroStats: Omit<DocumentStatsData, "compendiumSource"> = {
+    systemId: "pf2e",
+    systemVersion: module.relationships.systems.find((s) => s.id === "pf2e").compatibility.minimum,
+    coreVersion: module.compatibility.minimum,
+    createdTime: Date.now(),
+    modifiedTime: Date.now(),
+    lastModifiedBy: null,
+    duplicateSource: null,
+};
 
 function compendiumUuid(compendium: string, type: CompendiumDocumentType, id: string): CompendiumUUID {
     return `Compendium.${MODULENAME}.${compendium}.${type}.${id}`;
 }
 
-const macroIcons = new Map<string, string>([
+const macroIcons = new Map<string, ImageFilePath>([
     ["Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp"],
     ["Advanced Countdown", "systems/pf2e/icons/spells/time-beacon.webp"],
     ["Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp"],
@@ -81,20 +102,12 @@ async function buildAsymonousPack() {
     const asymonousSource = ["PF2e", "PF2e/Contributions by others"];
     const packNameInternal = "asymonous-benefactor-macros-internal";
     const packNameImport = "asymonous-benefactor-macros";
-    const baseMacro = {
-        author: null,
-        flags: {},
-        permission: { default: 1 },
-        scope: "global",
-        type: "script",
-    };
-    const baseMacroStats = { systemId: "pf2e", createdTime: Date.now(), modifiedTime: Date.now() };
 
     fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameInternal));
     fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameImport));
 
-    const macrosImport: object[] = [];
-    const macrosInternal: object[] = [];
+    const macrosImport: MacroPackSource[] = [];
+    const macrosInternal: MacroPackSource[] = [];
     for (const folderPath of asymonousSource) {
         const files = fs.readdirSync(path.join(submod, folderPath));
         for (const file of files) {
@@ -170,15 +183,7 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
 // Argument is both the directory in src/packs/data with source as well the the compendium name in outDir/packs/generated
 async function buildMacrosPack(packName: string) {
     const folderPath = path.resolve("src/packs/data", packName);
-    const baseMacro = {
-        author: null,
-        flags: {},
-        permission: { default: 1 },
-        scope: "global",
-        type: "script",
-    };
-    const baseMacroStats = { systemId: "pf2e", createdTime: Date.now(), modifiedTime: Date.now() };
-    const macros: object[] = [];
+    const macros: MacroPackSource[] = [];
     const files = fs.readdirSync(folderPath);
     for (const file of files) {
         const filePath = path.join(folderPath, file);
