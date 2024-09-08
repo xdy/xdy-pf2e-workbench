@@ -68,7 +68,7 @@
       "name": "asymonous-benefactor-macros",
       "label": "Symon-provided macros (asymonous-benefactor-macros)",
       "system": "pf2e",
-      "path": "packs/generated/asymonous-benefactor-macros.db",
+      "path": "packs/generated/asymonous-benefactor-macros",
       "type": "Macro",
       "flags": {},
       "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
@@ -81,7 +81,7 @@
       "name": "asymonous-benefactor-macros-internal",
       "label": "asymonous-benefactor-macros-internal, do not import",
       "system": "pf2e",
-      "path": "packs/generated/asymonous-benefactor-macros-internal.db",
+      "path": "packs/generated/asymonous-benefactor-macros-internal",
       "ownership": {
         "PLAYER": "LIMITED",
         "ASSISTANT": "OWNER"
