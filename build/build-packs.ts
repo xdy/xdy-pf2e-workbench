@@ -3,6 +3,55 @@
 
 import fs from "fs-extra";
 import path from "path";
+import { compilePack } from "@foundryvtt/foundryvtt-cli";
+
+// We can't import this from xdy-pf2e-workbench.ts because nodejs can't run that file
+const MODULENAME = "xdy-pf2e-workbench";
+
+function compendiumUuid(compendium: string, type: CompendiumDocumentType, id: string): CompendiumUUID {
+    return `Compendium.${MODULENAME}.${compendium}.${type}.${id}`;
+}
+
+const macroIcons = new Map<string, string>([
+    ["Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp"],
+    ["Advanced Countdown", "systems/pf2e/icons/spells/time-beacon.webp"],
+    ["Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp"],
+    ["Automatic Arcane Cascade", "systems/pf2e/icons/features/classes/arcane-cascade.webp"],
+    ["Bless", "systems/pf2e/icons/spells/bless.webp"],
+    ["Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp"],
+    ["Conditions Manager", "systems/pf2e/icons/conditions/doomed.webp"],
+    ["Custom Mixed Heritage", "systems/pf2e/icons/spells/chromatic-image.webp"],
+    ["Custom Saves and Skill Checks", "systems/pf2e/icons/equipment/held-items/abadars-flawless-scale.webp"],
+    ["Dual Class", "systems/pf2e/icons/spells/guidance.webp"],
+    ["Eldritch Shot", "systems/pf2e/icons/equipment/consumables/ammunition/spellstrike-ammunition.webp"],
+    ["Flurry of Blows", "systems/pf2e/icons/features/classes/flurry-of-blows.webp"],
+    ["Force Barrage", "systems/pf2e/icons/spells/magic-missile.webp"],
+    ["Generate All Scrolls", "systems/pf2e/icons/equipment/consumables/other-consumables/spell-scroll.webp"],
+    ["Group Perception Roller", "systems/pf2e/icons/spells/vision-of-weakness.webp"],
+    ["Heroic Recovery", "systems/pf2e/icons/spells/wholeness-of-body.webp"],
+    ["Hunt Double Shared Triple Prey", "icons/creatures/eyes/humanoid-single-red-brown.webp"],
+    ["Level Based DCs", "systems/pf2e/icons/equipment/held-items/radiant-spark.webp"],
+    ["Lingering Fortissimo", "systems/pf2e/icons/spells/inspire-heroics.webp"],
+    ["Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp"],
+    ["Marshal Stances", "systems/pf2e/icons/features/feats/dread-marshal-stance.webp"],
+    ["Mass Initiative Roller", "systems/pf2e/icons/equipment/held-items/games.webp"],
+    ["Modded Countdown Cooldown", "systems/pf2e/icons/spells/time-beacon.webp"],
+    ["Ooze Split", "systems/pf2e/icons/spells/blackfingers-blades.webp"],
+    ["Let Fate Decide", "icons/magic/control/energy-stream-link-white.webp"],
+    ["Random Encounter Builder", "systems/pf2e/icons/equipment/held-items/games.webp"],
+    ["Ration Consumer", "systems/pf2e/icons/equipment/adventuring-gear/rations.webp"],
+    ["Recall Knowledge", "icons/skills/trades/academics-book-study-runes.webp"],
+    ["Simulate Falling", "systems/pf2e/icons/spells/seal-fate.webp"],
+    ["Spell DCs by Rank", "systems/pf2e/icons/features/classes/conflux-spells.webp"],
+    ["Spellsling", "systems/pf2e/icons/equipment/consumables/ammunition/energized-cartridge-electricity.webp"],
+    ["Spellstrike", "systems/pf2e/icons/features/classes/spellstrike.webp"],
+    ["Target tokens within a template", "icons/skills/targeting/crosshair-bars-yellow.webp"],
+    ["Treat Wounds and Battle Medicine", "systems/pf2e/icons/conditions/wounded.webp"],
+    ["Update Aura Radius", "systems/pf2e/icons/spells/destructive-aura.webp"],
+    ["Use Scroll or Wand", "systems/pf2e/icons/equipment/wands/magic-wands/magic-wand.webp"],
+    ["Versatile Performance", "systems/pf2e/icons/spells/summon-instrument.webp"],
+    ["Wand and Scroll Generator", "systems/pf2e/icons/equipment/wands/specialty-wands/wand-of-continuation.webp"],
+]);
 
 function myRandomId() {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -19,76 +68,46 @@ if (!outDir) {
 
 fs.mkdirsSync(path.resolve(outDir, "packs/data"));
 
-function copyFolder(source: string, target: string) {
-    for (const file of fs.readdirSync(source).filter((file) => file.endsWith(".js"))) {
-        const sourcePath = decodeURIComponent(path.join(source, file));
-        const targetPath = decodeURIComponent(path.join(target, file));
-        fs.copyFileSync(sourcePath, targetPath);
-        console.debug(`Copied ${path.normalize(sourcePath)} to ${path.normalize(targetPath)}`);
-        // eslint-disable-next-line
-        fs.appendFileSync(
-            targetPath,
-            `\n/* # source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${path.basename(
-                path.dirname(sourcePath),
-            )}/${file}" - Fetched on ${new Date().toISOString()} */
-                `,
-        );
-    }
-}
+async function buildAsymonousPack() {
+    const submod = "submodules/my-foundryvtt-macros";
+    const asymonousSource = ["PF2e", "PF2e/Contributions by others"];
+    const packNameInternal = "asymonous-benefactor-macros-internal";
+    const packNameImport = "asymonous-benefactor-macros";
+    const baseMacro = {
+        author: null,
+        flags: {},
+        permission: { default: 1 },
+        scope: "global",
+        type: "script",
+    };
+    const baseMacroStats = { systemId: "pf2e", createdTime: Date.now(), modifiedTime: Date.now() };
 
-function getFolders(path: string | Buffer | URL) {
-    return fs.readdirSync(path).filter(function (file) {
-        return fs.statSync(path + "/" + file).isDirectory();
-    });
-}
+    fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameInternal));
+    fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameImport));
 
-function buildAsymonousPack() {
-    const asymonousSource = [
-        "submodules/my-foundryvtt-macros/PF2e",
-        "submodules/my-foundryvtt-macros/PF2e/Contributions by others",
-    ];
-
-    fs.ensureDirSync("../generated/asymonous-benefactor-macros");
-    fs.ensureDirSync(path.resolve(outDir, "packs/generated/asymonous-benefactor-macros"));
-
-    copyFolder(
-        path.resolve(".", asymonousSource[0]),
-        path.resolve(path.resolve(outDir, "packs/generated/asymonous-benefactor-macros")),
-    );
-    copyFolder(
-        path.resolve(".", asymonousSource[1]),
-        path.resolve(path.resolve(outDir, "packs/generated/asymonous-benefactor-macros")),
-    );
-
-    const folders = getFolders(path.resolve(outDir, "packs/generated"))
-        .filter((folder) => folder.startsWith("asymonous-"))
-        .map((folder) => {
-            return path.resolve(outDir, "packs/generated", folder);
-        });
-    for (const folderPath of folders) {
-        const lines: string[] = [];
-        const linesInternal: string[] = [];
-
-        const files = fs.readdirSync(folderPath);
+    const macrosImport: object[] = [];
+    const macrosInternal: object[] = [];
+    for (const folderPath of asymonousSource) {
+        const files = fs.readdirSync(path.join(submod, folderPath));
         for (const file of files) {
-            const filePath = path.join(folderPath, file);
-            if (!filePath.endsWith(".js")) {
+            if (!file.endsWith(".js")) {
                 continue;
             }
-
-            const contents = fs.readFileSync(filePath, { encoding: "utf8" });
+            const filePath = path.join(submod, folderPath, file);
+            let contents = fs.readFileSync(filePath, { encoding: "utf8" });
             const documentation = contents.match(/\/\*[\s\S]*?\*\//);
 
-            try {
-                const macroName = path.parse(file).name;
-                const importMacro = `/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
+            contents += `\n/* # source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${folderPath}/${file}" - Fetched on ${new Date().toISOString()} */`;
+
+            const macroName = path.parse(file).name;
+            const importMacro = `/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
 /* Start of documentation from the original macro: */
 ${documentation ? documentation[0] : "/* There is no documentation in the macro. */"}
 /* End of original macro documentation. */
 
     async function _executeMacroByName(
         macroName,
-        compendiumName = "xdy-pf2e-workbench.asymonous-benefactor-macros-internal"
+        compendiumName = "${MODULENAME}.${packNameInternal}"
     ) {
         const pack = game.packs.get(compendiumName);
         if (pack) {
@@ -108,82 +127,35 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
 
     /* This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274; and modified by Mark Pearce https://discord.com/channels/880968862240239708/880969174661353484/972962446098702376 */
     `;
-                const map = new Map<string, string>();
-                map.set("Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp");
-                map.set("Advanced Countdown", "systems/pf2e/icons/spells/time-beacon.webp");
-                map.set("Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp");
-                map.set("Automatic Arcane Cascade", "systems/pf2e/icons/features/classes/arcane-cascade.webp");
-                map.set("Bless", "systems/pf2e/icons/spells/bless.webp");
-                map.set("Casters Spellbook", "systems/pf2e/icons/equipment/held-items/possibility-tome.webp");
-                map.set("Conditions Manager", "systems/pf2e/icons/conditions/doomed.webp");
-                map.set("Custom Mixed Heritage", "systems/pf2e/icons/spells/chromatic-image.webp");
-                map.set(
-                    "Custom Saves and Skill Checks",
-                    "systems/pf2e/icons/equipment/held-items/abadars-flawless-scale.webp",
-                );
-                map.set("Dual Class", "systems/pf2e/icons/spells/guidance.webp");
-                map.set(
-                    "Eldritch Shot",
-                    "systems/pf2e/icons/equipment/consumables/ammunition/spellstrike-ammunition.webp",
-                );
-                map.set("Flurry of Blows", "systems/pf2e/icons/features/classes/flurry-of-blows.webp");
-                map.set("Force Barrage", "systems/pf2e/icons/spells/magic-missile.webp");
-                map.set(
-                    "Generate All Scrolls",
-                    "systems/pf2e/icons/equipment/consumables/other-consumables/spell-scroll.webp",
-                );
-                map.set("Group Perception Roller", "systems/pf2e/icons/spells/vision-of-weakness.webp");
-                map.set("Heroic Recovery", "systems/pf2e/icons/spells/wholeness-of-body.webp");
-                map.set("Hunt Double Shared Triple Prey", "icons/creatures/eyes/humanoid-single-red-brown.webp");
-                map.set("Level Based DCs", "systems/pf2e/icons/equipment/held-items/radiant-spark.webp");
-                map.set("Lingering Fortissimo", "systems/pf2e/icons/spells/inspire-heroics.webp");
-                map.set("Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp");
-                map.set("Marshal Stances", "systems/pf2e/icons/features/feats/dread-marshal-stance.webp");
-                map.set("Mass Initiative Roller", "systems/pf2e/icons/equipment/held-items/games.webp");
-                map.set("Modded Countdown Cooldown", "systems/pf2e/icons/spells/time-beacon.webp");
-                map.set("Ooze Split", "systems/pf2e/icons/spells/blackfingers-blades.webp");
-                map.set("Let Fate Decide", "icons/magic/control/energy-stream-link-white.webp");
-                map.set("Random Encounter Builder", "systems/pf2e/icons/equipment/held-items/games.webp");
-                map.set("Ration Consumer", "systems/pf2e/icons/equipment/adventuring-gear/rations.webp");
-                map.set("Recall Knowledge", "icons/skills/trades/academics-book-study-runes.webp");
-                map.set("Simulate Falling", "systems/pf2e/icons/spells/seal-fate.webp");
-                map.set("Spell DCs by Rank", "systems/pf2e/icons/features/classes/conflux-spells.webp");
-                map.set(
-                    "Spellsling",
-                    "systems/pf2e/icons/equipment/consumables/ammunition/energized-cartridge-electricity.webp",
-                );
-                map.set("Spellstrike", "systems/pf2e/icons/features/classes/spellstrike.webp");
-                map.set("Target tokens within a template", "icons/skills/targeting/crosshair-bars-yellow.webp");
-                map.set("Treat Wounds and Battle Medicine", "systems/pf2e/icons/conditions/wounded.webp");
-                map.set("Update Aura Radius", "systems/pf2e/icons/spells/destructive-aura.webp");
-                map.set("Use Scroll or Wand", "systems/pf2e/icons/equipment/wands/magic-wands/magic-wand.webp");
-                map.set("Versatile Performance", "systems/pf2e/icons/spells/summon-instrument.webp");
-                map.set(
-                    "Wand and Scroll Generator",
-                    "systems/pf2e/icons/equipment/wands/specialty-wands/wand-of-continuation.webp",
-                );
-                const img = map.get(macroName) || "icons/svg/dice-target.svg";
 
-                // eslint-disable-next-line
-                let jsonInternal = `{"_id": "${myRandomId()}", "actorIds": [], "author": "${myRandomId()}", "command": ${JSON.stringify(
-                    contents,
-                )},"flags": {},"img":"icons/svg/trap.svg","name": "XDY DO_NOT_IMPORT ${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
-                linesInternal.push(jsonInternal);
-                // eslint-disable-next-line
-                let json = `{"_id": "${myRandomId()}", "actorIds": [], "author": "${myRandomId()}", "command": ${JSON.stringify(
-                    importMacro,
-                )},"flags": {},"img":"${img}","name": "${macroName}","permission": {"default": 1},"scope": "global","type": "script"}`;
-                lines.push(json);
-            } catch (err) {
-                console.error(`Failed to read JSON file ${filePath}`, err);
-            }
+            const img = macroIcons.get(macroName) || "icons/svg/dice-target.svg";
+
+            const idInternal = myRandomId();
+            macrosInternal.push({
+                _key: `!macros!${idInternal}`,
+                _id: idInternal,
+                _stats: { compendiumSource: compendiumUuid(packNameInternal, "Macro", idInternal), ...baseMacroStats },
+                command: contents,
+                img: "icons/svg/trap.svg",
+                name: `XDY DO_NOT_IMPORT ${macroName}`,
+                ...baseMacro,
+            });
+            const idImport = myRandomId();
+            macrosImport.push({
+                _key: `!macros!${idImport}`,
+                _id: idImport,
+                _stats: { compendiumSource: compendiumUuid(packNameImport, "Macro", idImport), ...baseMacroStats },
+                command: importMacro,
+                img: img,
+                name: macroName,
+                ...baseMacro,
+            });
         }
-        const dir = path.resolve(outDir, "packs", "generated", path.basename(folderPath) + ".db");
-        fs.writeFileSync(dir, lines.join("\n"), "utf8");
-        const dir2 = path.resolve(outDir, "packs", "generated", path.basename(folderPath) + "-internal.db");
-        fs.writeFileSync(dir2, linesInternal.join("\n"), "utf8");
     }
-    fs.rmSync(path.resolve(outDir, "./packs/generated/asymonous-benefactor-macros/"), { recursive: true });
+    const internalPack = path.resolve(outDir, "packs", "generated", packNameInternal);
+    await compilePack(macrosInternal, internalPack, { log: true });
+    const importPack = path.resolve(outDir, "packs", "generated", packNameImport);
+    await compilePack(macrosImport, importPack, { log: true });
 }
 
 function buildCustomizableMacrosPack() {
@@ -253,8 +225,8 @@ function buildInternalUtilityMacrosPack() {
 
 buildCustomizableMacrosPack();
 buildInternalUtilityMacrosPack();
-buildAsymonousPack();
-fs.rmSync("./dist", { recursive: true, force: true });
-fs.mkdirsSync(path.resolve("dist/packs"));
-fs.copySync(outDir, "./dist");
+await buildAsymonousPack();
+fs.ensureDirSync("dist");
+fs.rmSync("./dist/packs", { recursive: true, force: true });
+fs.renameSync(path.resolve(outDir, "packs"), "dist/packs");
 fs.rmSync(outDir, { recursive: true, force: true });
