@@ -139,6 +139,7 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
                 map.set("Lingering Fortissimo", "systems/pf2e/icons/spells/inspire-heroics.webp");
                 map.set("Loot Generator", "systems/pf2e/icons/equipment/held-items/earthsight-box.webp");
                 map.set("Marshal Stances", "systems/pf2e/icons/features/feats/dread-marshal-stance.webp");
+                map.set("Mass Initiative Roller", "systems/pf2e/icons/equipment/held-items/games.webp");
                 map.set("Modded Countdown Cooldown", "systems/pf2e/icons/spells/time-beacon.webp");
                 map.set("Ooze Split", "systems/pf2e/icons/spells/blackfingers-blades.webp");
                 map.set("Let Fate Decide", "icons/magic/control/energy-stream-link-white.webp");
