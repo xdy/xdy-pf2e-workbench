@@ -123,6 +123,15 @@
         "noSpellcastingEntry": "You must have either an NPC character sheet open and selected, or a single NPC token selected. Also, said NPC must have a spellcasting entry.",
         "generatedSpellbookFor": "Generated spellbook for {name}"
       },
+      "recallKnowledge": {
+        "breakdown": {
+          "name": "Recall Knowledge: Show roll breakdowns",
+          "hint": "Show a breakdown of the modifiers applied to each skill on a line below the result.",
+          "all": "All modifiers",
+          "extra": "Extra modifiers; omit skill and proficiency",
+          "none": "Don't show any modifiers"
+        }
+      },
       "refocus": {
         "regains": "Regains {focus} focus points.",
         "notPsychic": "spent at least {regain} focus points",

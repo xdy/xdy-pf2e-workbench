@@ -131,6 +131,20 @@ export function registerWorkbenchSettings() {
         onChange: () => updateHooks(),
     });
 
+    game.settings.register(MODULENAME, "rkBreakdown", {
+        name: `${MODULENAME}.macros.recallKnowledge.breakdown.name`,
+        hint: `${MODULENAME}.macros.recallKnowledge.breakdown.hint`,
+        scope: "world",
+        config: true,
+        default: "all",
+        type: String,
+        choices: {
+            all: game.i18n.localize(`${MODULENAME}.macros.recallKnowledge.breakdown.all`),
+            extra: game.i18n.localize(`${MODULENAME}.macros.recallKnowledge.breakdown.extra`),
+            none: game.i18n.localize(`${MODULENAME}.macros.recallKnowledge.breakdown.none`),
+        },
+    });
+
     game.settings.register(MODULENAME, "customPauseImage", {
         name: `${MODULENAME}.SETTINGS.customPauseImage.name`,
         hint: `${MODULENAME}.SETTINGS.customPauseImage.hint`,
