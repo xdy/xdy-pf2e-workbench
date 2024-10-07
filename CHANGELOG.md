@@ -1,3 +1,10 @@
+## [6.8.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.8.9...v6.8.10) (2024-10-07)
+
+
+### Bug Fixes
+
+* Remove the feature that tried to mystify speaker and use of name in chat messages, it caused too many problems. ([ed03da9](https://github.com/xdy/xdy-pf2e-workbench/commit/ed03da9a06c7f1a8a628ca9196125fd07d13550e))
+
 ## [6.8.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.8.8...v6.8.9) (2024-10-06)
 
 
