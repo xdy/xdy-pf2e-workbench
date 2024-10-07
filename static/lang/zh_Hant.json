@@ -364,10 +364,6 @@
         "hint": "勾選此項，神秘化名稱使用精英/弱化。",
         "name": "使用精英/弱化狀態"
       },
-      "npcMystifierUseMystifiedNameInChat": {
-        "hint": "(實驗功能) 勾選此項，在聊天中用神秘化名稱替換原本人名。",
-        "name": "(實驗功能) 聊天資訊使用神秘化名稱。"
-      },
       "npcMystifierUseOtherTraits": {
         "hint": "勾選此項，在神秘化名稱中使用以上設定中未囊括的所有NPC特徵。",
         "name": "使用其他特徵"

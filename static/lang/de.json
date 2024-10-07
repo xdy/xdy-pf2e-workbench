@@ -428,10 +428,6 @@
         "hint": "Auswählen um Elite/Schwach im verschleierten Namen zu benutzen.",
         "name": "Nutze Elite/Schwach Status"
       },
-      "npcMystifierUseMystifiedNameInChat": {
-        "name": "Versuche den Sprecher und die Namensnutzung in Chat-Nachrichten zu verschleiern.",
-        "hint": "Auswählen, um zu versuchen, den verschleierten Namen sowohl für den Sprecher als auch innerhalb von Chat-Nachrichten zu verwenden, indem Sie den Namen des Akteurs durch den verschleierten Namen ersetzen. Beachte dass der Text in der Nachricht nicht ersetzt wird, wenn er nicht den gleichen Namen wie der Akteur verwendet oder falsch geschrieben ist."
-      },
       "reminderBreathWeapon": {
         "name": "Wiederaufladungserninnerung (z.B. Odemwaffen)",
         "hint": "Auswählen um eine Erinnerung für die Nutzung von Fähigkeiten, mit einer Aufladezeit, zu erhalten (z.B. Odemwaffen).",

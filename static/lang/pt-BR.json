@@ -264,10 +264,6 @@
         "hint": "Usa os termos de ajuste Elite ou Fraco no nome mistificado.",
         "name": "Usar Elite ou Fraco"
       },
-      "npcMystifierUseMystifiedNameInChat": {
-        "hint": "Usa nome mistificado em mensagens de chat, substituindo o nome do ator pelo nome mistificado.",
-        "name": "Mistificar nome em mensagens de chat"
-      },
       "npcMystifierUseOtherTraits": {
         "hint": "Usa todos os traços de PdM ainda não inclusos pelas configurações acima no nome mistificado.",
         "name": "Usar outros traços"

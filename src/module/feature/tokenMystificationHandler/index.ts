@@ -5,7 +5,6 @@ import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/in
 import { generateNameFromTraits } from "./traits-name-generator.js";
 import { logError } from "../../utils.js";
 import { TokenPF2e } from "@module/canvas/token/object.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
 
 function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
     return (
@@ -249,34 +248,6 @@ export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement) {
                 column.appendChild(toggle);
             }
         }
-    }
-}
-
-export function mangleNamesInChatMessage(message: ChatMessagePF2e, html: HTMLElement) {
-    const actorId = <string>message?.speaker?.actor;
-    const tokenId = message?.speaker?.token;
-    const actor = game.actors?.get(actorId);
-    const tokens = game.scenes?.active?.tokens ?? game.scenes?.current?.tokens ?? canvas?.scene?.tokens;
-    const token = tokens?.get(<string>tokenId);
-    const actionCard: Element | null = html.querySelector(".action-card");
-    const speakers: NodeListOf<Element> = html?.querySelectorAll(".message-sender");
-
-    const tokenName = token?.name || message.speaker.alias;
-    const tokenNameNoNumber = tokenName?.replace(/\d+$/, "").trim();
-
-    if (tokenNameNoNumber && actor?.prototypeToken.name?.trim() !== tokenNameNoNumber) {
-        if (actionCard && actionCard.innerHTML) {
-            actionCard.innerHTML = actionCard.innerHTML.replace(
-                new RegExp(<string>actor?.prototypeToken.name, "gi"),
-                tokenName,
-            );
-        }
-        speakers.forEach((speaker) => {
-            if (speaker.innerHTML) {
-                speaker.innerHTML = speaker.innerHTML.replace(message.speaker.alias, tokenName);
-            }
-        });
-        message.speaker.alias = tokenName;
     }
 }
 

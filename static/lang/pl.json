@@ -392,10 +392,6 @@
         "hint": "Zaznacz, aby użyć nazwy elitarny/słaby w nazwie mistyfikatora.",
         "name": "Użyj statusu elitarny/słaby"
       },
-      "npcMystifierUseMystifiedNameInChat": {
-        "name": "Próba zmylenia rozmówcy i użycie utajnionej nazwy imienia w wiadomościach na czacie.",
-        "hint": "Zaznacz, aby spróbować użyć utajnionej nazwy dla mówcy, a także w wiadomościach czatu, zastępując nazwę aktora utajnioną nazwą. Zwróć uwagę, że jeśli tekst w wiadomości nie używa tej samej nazwy co aktor lub jest błędnie napisany, nie zostanie zastąpiony."
-      },
       "npcMystifierUseRaritiesReplacement": {
         "hint": "W tym polu tekstowym wprowadź słowo, którym chcesz zastąpić rzadkości większe niż Common (np. \"Unusual\"). Jeśli pole jest puste, nie zmienia wyświetlanej rzadkości.",
         "name": "Zastąp rzadkości rzadsze niż pospolite"

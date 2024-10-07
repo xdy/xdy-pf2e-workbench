@@ -13,11 +13,7 @@ import {
 } from "./feature/qolHandler/index.js";
 import { autoRollDamage, persistentDamageHealing } from "./feature/damageHandler/index.js";
 import { reduceFrightened } from "./feature/conditionHandler/index.js";
-import {
-    mangleNamesInChatMessage,
-    renderNameHud,
-    tokenCreateMystification,
-} from "./feature/tokenMystificationHandler/index.js";
+import { renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler/index.js";
 import { ItemPF2e } from "@item/base/document.js";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
@@ -128,10 +124,6 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
     const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
     if (!isNaN(minimumUserRoleFlag) && minimumUserRoleFlag > game.user.role) {
         html.classList.add("xdy-pf2e-workbench-hide");
-    }
-
-    if (game.settings.get(MODULENAME, "npcMystifierUseMystifiedNameInChat")) {
-        mangleNamesInChatMessage(message, html);
     }
 
     if (isActuallyDamageRoll(message)) {

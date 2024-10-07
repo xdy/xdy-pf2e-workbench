@@ -212,13 +212,6 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                     mystifyModifierKey = <string>key;
                 },
             },
-            npcMystifierUseMystifiedNameInChat: {
-                name: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifierUseMystifiedNameInChat.hint`,
-                scope: "world",
-                default: false,
-                type: Boolean,
-            },
         };
     }
 
