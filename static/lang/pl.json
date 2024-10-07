@@ -205,9 +205,9 @@
         "savePart": "<br>Rzut obronny dla nieznanego zaklęcia to: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}{basic}}]",
         "hint": "W przypadku rzucania zaklęć prywatnie, ustawienie to wysyła również publiczną wiadomość o rzuceniu zaklęcia, chyba że podczas rzucania zaklęcia przytrzymasz klawisze SHIFT i CTRL.",
         "name": "Publikuje wiadomość o rzuceniu zaklęcia.",
-        "secondPartNoRk": ".<br>Możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
-        "firstPart": "{tokenName} właśnie rzucił {type} tradycji <strong>{traditionString}</strong><p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
-        "secondPartRK": ".<br>Możesz spróbować użyć jednego z @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
+        "secondPartNoRk": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
+        "firstPart": "Rzucono {type} tradycji <strong>{traditionString}</strong> z aktora {tokenName} <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
+        "secondPartRK": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą testu @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
         "knownBy": "<div><p><b>Znany przez: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">",
         "basic": "Podstawowy",
         "noButtonSavePart": "<br><b>{basic} {dataSave} rzut obronny</b>"
@@ -343,10 +343,10 @@
         "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
       },
       "handleDyingRecoveryRoll": {
-        "hint": "Ustawienie klienta, aby automatycznie obsługiwać rzuty odzyskiwania po kliknięciu przycisku odzyskiwania.",
+        "hint": "Ustawienie klienta, aby automatycznie obsługiwać rzuty na stabilizację po kliknięciu przycisku rzutu na stabilizację.",
         "handled": "Rzut odzyskiwania {roll} {outcome} wykonany automatycznie. {defeated}.",
         "defeated": "{name} został pokonany",
-        "name": "Automatycznie obsługuje rzuty odzyskiwania po kliknięciu przycisku odzyskiwania."
+        "name": "Automatycznie obsługuje rzut na umieranie po kliknięciu przycisku rzutu na umieranie."
       },
       "playerFeatsPrerequisiteHint": {
         "hint": "Ustawienie klienta dodające gwiazdkę do nazwy atutów z ustawionym warunkiem wstępnym.",
