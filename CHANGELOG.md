@@ -1,3 +1,15 @@
+# [6.9.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.8.10...v6.9.0) (2024-10-13)
+
+
+### Bug Fixes
+
+* Get rid of deprecation warning on settings submenus ([4e91e36](https://github.com/xdy/xdy-pf2e-workbench/commit/4e91e36f15f376aeeae4e0a6009e05fb29c914a9))
+
+
+### Features
+
+* Add option for Recall Knowledge breakdown style ([5ff4468](https://github.com/xdy/xdy-pf2e-workbench/commit/5ff4468d097cecf0498492f8c97d00282ef02354))
+
 ## [6.8.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.8.9...v6.8.10) (2024-10-07)
 
 
