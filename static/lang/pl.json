@@ -128,6 +128,15 @@
         "title": "Tworzenie dziennika zaklęć NPC",
         "noSpellcastingEntry": "Musisz mieć otwartą i wybraną kartę postaci NPC lub wybrany pojedynczy token NPC. Ponadto wspomniany NPC musi mieć wpis dotyczący rzucania zaklęć.",
         "generatedSpellbookFor": "Wygenerowano księgę zaklęć dla {name}"
+      },
+      "recallKnowledge": {
+        "breakdown": {
+          "hint": "Pokaż podział modyfikatorów zastosowanych do każdej umiejętności w wierszu poniżej wyniku.",
+          "name": "Przywołanie Wiedzy: Pokaż podziały rzutów",
+          "all": "Wszystkie modyfikatory",
+          "extra": "Dodatkowe modyfikatory; pomiń umiejętności i biegłość",
+          "none": "Nie pokazuj żadnych modyfikatorów"
+        }
       }
     },
     "spellCardNotFound": "Nie odnaleziono karty czaru. Użyto {spell} na minimalnym poziomie tego czaru.",
