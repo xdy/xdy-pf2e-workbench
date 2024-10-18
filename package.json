@@ -52,7 +52,7 @@
     "@types/uuid": "^10.0.0",
     "@types/yaireo__tagify": "^4.27.0",
     "@typescript-eslint/eslint-plugin": "^8.8.1",
-    "@typescript-eslint/parser": "^8.8.1",
+    "@typescript-eslint/parser": "^8.10.0",
     "classic-level": "^1.4.1",
     "es-jest": "^2.1.0",
     "eslint": "^9.12.0",
