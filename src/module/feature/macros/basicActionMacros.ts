@@ -121,15 +121,17 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
     const actionsToUse = bamActions
         .filter((x) => {
             const hasSkill = selectedActor.skills?.[x.skill]?.rank ?? 0 > 0;
-            const hasAltSkillAndFeat =
-                x.altSkillAndFeat?.find((y) => selectedActor.skills?.[y.skill]?.rank) &&
-                x.altSkillAndFeat?.find((y) => selectedActor.itemTypes.feat.find((feat) => feat.slug === y.feat));
+            const hasAltSkillAndFeat = x.altSkillAndFeat?.some(
+                (y) =>
+                    selectedActor.skills?.[y.skill].rank &&
+                    selectedActor.itemTypes.feat.some((feat) => feat.slug === y.feat),
+            );
 
             return (
                 showUnusable ||
                 x.actionType !== "skill_trained" ||
                 (x.actionType === "skill_trained" && ["npc", "familiar"].includes(selectedActor.type)) ||
-                selectedActor.itemTypes.feat.find((feat) => feat.slug === "clever-improviser") ||
+                selectedActor.itemTypes.feat.some((feat) => feat.slug === "clever-improviser") ||
                 hasSkill ||
                 hasAltSkillAndFeat
             );
