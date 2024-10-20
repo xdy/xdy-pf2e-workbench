@@ -1,3 +1,11 @@
+## [6.9.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.9.1...v6.9.2) (2024-10-20)
+
+
+### Bug Fixes
+
+* Don't hide crafting item information ([b015494](https://github.com/xdy/xdy-pf2e-workbench/commit/b01549471e0b6e4121f27551341bfb65c73b9f6b))
+* Fix logic for alt skills with feat in BAM ([698988b](https://github.com/xdy/xdy-pf2e-workbench/commit/698988bdf34aa59e6daa07b08ff090ede2d98666))
+
 ## [6.9.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.9.0...v6.9.1) (2024-10-15)
 
 
