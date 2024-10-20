@@ -4,7 +4,7 @@ import { PhysicalItemPF2e } from "@item";
 import { ChatMessagePF2e } from "@module/chat-message/index.js";
 
 export function chatCardDescriptionCollapse(html: HTMLElement) {
-    const hasCardContent = html.querySelectorAll(".card-content");
+    const hasCardContent = html.querySelectorAll(".card-content:not(span.flavor-text *)");
     if (hasCardContent.length > 0) {
         const effectItem = game.i18n.localize(`${MODULENAME}.effectItem`);
         if (String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) === "collapsedDefault") {
