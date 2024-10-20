@@ -31,23 +31,23 @@ export function chatCardDescriptionCollapse(html: HTMLElement) {
                 }
             }
         }
-    }
-    html.addEventListener("click", (event) => {
-        const target = (event.target as HTMLElement).closest("h3");
-        if (target) {
-            const content: HTMLElement | undefined | null = target
-                .closest(".chat-message")
-                ?.querySelector(".card-content");
-            if (content) {
+
+        // Add listener for hide/unhide click
+        const header = html.querySelector(".card-header");
+        if (header instanceof HTMLElement) {
+            header.addEventListener("click", (event) => {
                 event.preventDefault();
-                content.style.display = content.style.display === "none" ? "block" : "none";
-                if (content.style.display === "none") {
-                    hasCardContent.forEach((content: HTMLElement) => (content.style.display = "none"));
-                }
-                toggleEyes(html);
-            }
+                header
+                    .closest(".chat-message")
+                    ?.querySelectorAll(".card-content")
+                    ?.forEach((content) => {
+                        if (content instanceof HTMLElement)
+                            content.style.display = content.style.display === "none" ? "block" : "none";
+                    });
+                toggleEyes(header);
+            });
         }
-    });
+    }
 }
 
 function toggleEyes(html: HTMLElement) {
