@@ -105,7 +105,6 @@ type MacroAction = {
     // Optional parameters for an Action.use() call
     options?: Partial<ActionUseOptions>;
     actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
-    actionTitle?: string;
 };
 
 /**
