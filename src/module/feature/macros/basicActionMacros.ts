@@ -653,6 +653,13 @@ export async function basicActionMacros() {
             action: game.pf2e.actions.get("tumble-through"),
             icon: "icons/skills/movement/feet-winged-sandals-tan.webp",
         },
+        {
+            actionType: "basic",
+            name: game.i18n.localize("PF2E.Actions.DropProne.Title"),
+            skill: "",
+            action: game.pf2e.actions.get("drop-prone"),
+            icon: "systems/pf2e/icons/conditions/prone.webp",
+        },
     ];
 
     const actionDialog = window.actionDialog;
