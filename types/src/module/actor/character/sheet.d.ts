@@ -4,12 +4,21 @@
 import { CreatureSheetData, Language } from "@actor/creature/index.ts";
 import type { Sense } from "@actor/creature/sense.ts";
 import { SheetClickActionHandlers } from "@actor/sheet/base.ts";
-import { ActorSheetDataPF2e, InventoryItem } from "@actor/sheet/data-types.ts";
+import { AbilityViewData, ActorSheetDataPF2e, InventoryItem } from "@actor/sheet/data-types.ts";
 import { AttributeString, SaveType } from "@actor/types.ts";
-import type { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e, PhysicalItemPF2e } from "@item";
+import type {
+    AncestryPF2e,
+    BackgroundPF2e,
+    ClassPF2e,
+    DeityPF2e,
+    FeatPF2e,
+    HeritagePF2e,
+    PhysicalItemPF2e,
+} from "@item";
 import { ItemPF2e } from "@item";
 import { TraitToggleViewData } from "@item/ability/trait-toggles.ts";
-import { ActionCost, Frequency, ItemSourcePF2e } from "@item/base/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
+import { CoinsPF2e } from "@item/physical/coins.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/types.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
@@ -17,12 +26,20 @@ import { ZeroToFour } from "@module/data.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { CreatureSheetPF2e } from "../creature/sheet.ts";
 import { CharacterConfig } from "./config.ts";
-import { CraftingEntry, CraftingFormula } from "./crafting/index.ts";
-import { CharacterBiography, CharacterSaveData, CharacterStrike, CharacterSystemData, ClassDCData, MartialProficiency } from "./data.ts";
+import type { CraftingAbilitySheetData } from "./crafting/ability.ts";
+import {
+    CharacterBiography,
+    CharacterSaveData,
+    CharacterStrike,
+    CharacterSystemData,
+    ClassDCData,
+    MartialProficiency,
+} from "./data.ts";
 import { CharacterPF2e } from "./document.ts";
 import { ElementalBlastConfig } from "./elemental-blast.ts";
-import { FeatGroup } from "./feats.ts";
+import type { FeatGroup } from "./feats/index.ts";
 import { CHARACTER_SHEET_TABS } from "./values.ts";
+
 declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e<TActor> {
     #private;
     protected readonly actorConfigClass: typeof CharacterConfig;
@@ -66,23 +83,29 @@ type CharacterSystemSheetData = CharacterSystemData & {
         short?: string;
     }>;
 };
-export interface CraftingEntriesSheetData {
-    dailyCrafting: boolean;
-    other: CraftingEntry[];
-    alchemical: {
-        entries: CraftingEntry[];
-        totalReagentCost: number;
-        infusedReagents: {
-            value: number;
-            max: number;
-        };
-    };
+interface FormulaSheetData {
+    uuid: string;
+    item: ItemPF2e;
+    dc: number;
+    batchSize: number;
+    cost: CoinsPF2e;
 }
 interface CraftingSheetData {
     noCost: boolean;
     hasQuickAlchemy: boolean;
-    knownFormulas: Record<number, CraftingFormula[]>;
-    entries: CraftingEntriesSheetData;
+    hasDailyCrafting: boolean;
+    knownFormulas: Record<number, FormulaSheetData[]>;
+    abilities: {
+        prepared: CraftingAbilitySheetData[];
+        alchemical: {
+            entries: CraftingAbilitySheetData[];
+            totalReagentCost: number;
+            infusedReagents: {
+                value: number;
+                max: number;
+            };
+        };
+    };
 }
 type CharacterSheetTabVisibility = Record<(typeof CHARACTER_SHEET_TABS)[number], boolean>;
 type SpellcastingTabSlug = "known-spells" | "rituals" | "activations";
@@ -113,7 +136,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     magicTraditions: Record<MagicTradition, string>;
     martialProficiencies: Record<"attacks" | "defenses", Record<string, MartialProficiency>>;
     options: CharacterSheetOptions;
-    preparationType: Object;
+    preparationType: object;
     showPFSTab: boolean;
     spellCollectionGroups: Record<SpellcastingTabSlug, SpellcastingSheetData[]>;
     hasNormalSpellcasting: boolean;
@@ -121,13 +144,13 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     actions: {
         encounter: Record<"action" | "reaction" | "free", {
             label: string;
-            actions: ActionSheetData[];
+            actions: CharacterAbilityViewData[];
         }>;
         exploration: {
-            active: ActionSheetData[];
-            other: ActionSheetData[];
+            active: CharacterAbilityViewData[];
+            other: CharacterAbilityViewData[];
         };
-        downtime: ActionSheetData[];
+        downtime: CharacterAbilityViewData[];
     };
     feats: FeatGroup[];
     elementalBlasts: ElementalBlastSheetConfig[];
@@ -148,19 +171,12 @@ interface SpeedSheetData {
     value: number | null;
     breakdown: string | null;
 }
-interface ActionSheetData {
-    id: string;
-    name: string;
-    img: string;
-    glyph: string | null;
-    actionCost: ActionCost | null;
-    frequency: Frequency | null;
+interface CharacterAbilityViewData extends AbilityViewData {
     feat: FeatPF2e | null;
     toggles: TraitToggleViewData[];
     exploration?: {
         active: boolean;
     };
-    hasEffect: boolean;
 }
 interface ClassDCSheetData extends ClassDCData {
     icon: string;

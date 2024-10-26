@@ -1,17 +1,14 @@
 import type { CharacterPF2e } from "@actor";
-import type { ItemPF2e } from "@item";
 import { Predicate, RawPredicate } from "@system/predication.ts";
-import { CraftingFormula } from "./formula.ts";
-declare class CraftingEntry implements CraftingEntryData {
+import { CraftingFormula, PreparedFormula, PreparedFormulaData } from "./types.ts";
+
+declare class CraftingAbility implements CraftingAbilityData {
     #private;
     /** A label for this crafting entry to display on sheets */
-    name: string;
-    selector: string;
-    /** This crafting entry's parent item */
-    parent: ItemPF2e<CharacterPF2e>;
-    /** All formulas relevant to this crafting known by the grandparent actor */
-    knownFormulas: CraftingFormula[];
-    preparedCraftingFormulas: PreparedCraftingFormula[];
+    label: string;
+    slug: string;
+    /** This crafting ability's parent actor */
+    actor: CharacterPF2e;
     preparedFormulaData: PreparedFormulaData[];
     isAlchemical: boolean;
     isDailyPrep: boolean;
@@ -28,12 +25,11 @@ declare class CraftingEntry implements CraftingEntryData {
     };
     fieldDiscoveryBatchSize: number;
     maxItemLevel: number;
-    constructor(knownFormulas: CraftingFormula[], data: CraftingEntryData);
-    get item(): ItemPF2e<CharacterPF2e>;
-    get actor(): CharacterPF2e;
-    get formulas(): (PreparedFormulaSheetData | null)[];
-    get reagentCost(): number;
-    static isValid(data: Maybe<Partial<CraftingEntryData>>): data is CraftingEntryData;
+    constructor(actor: CharacterPF2e, data: CraftingAbilityData);
+    getPreparedCraftingFormulas(): Promise<PreparedFormula[]>;
+    getSheetData(): Promise<CraftingAbilitySheetData>;
+    /** Computes reagent cost. Will go away once updated to PC2 */
+    calculateReagentCost(): Promise<number>;
     prepareFormula(formula: CraftingFormula): Promise<void>;
     checkEntryRequirements(formula: CraftingFormula, { warn }?: {
         warn?: boolean | undefined;
@@ -44,10 +40,9 @@ declare class CraftingEntry implements CraftingEntryData {
     toggleSignatureItem(itemUUID: string): Promise<void>;
     updateFormulas(formulas: PreparedFormulaData[]): Promise<void>;
 }
-interface CraftingEntryData {
-    selector: string;
-    name: string;
-    item: ItemPF2e<CharacterPF2e>;
+interface CraftingAbilityData {
+    slug: string;
+    label: string;
     isAlchemical: boolean;
     isDailyPrep: boolean;
     isPrepared: boolean;
@@ -62,29 +57,19 @@ interface CraftingEntryData {
         }[];
     };
     fieldDiscoveryBatchSize?: number;
-    maxItemLevel: number;
+    maxItemLevel?: number | null;
     preparedFormulaData?: PreparedFormulaData[];
 }
-interface PreparedFormulaData {
-    itemUUID: string;
-    quantity?: number;
-    expended?: boolean;
-    isSignatureItem?: boolean;
-    sort?: number;
+interface CraftingAbilitySheetData {
+    slug: string;
+    label: string;
+    isAlchemical: boolean;
+    isPrepared: boolean;
+    isDailyPrep: boolean;
+    maxSlots: number;
+    maxItemLevel: number;
+    reagentCost: number;
+    prepared: (PreparedFormula | null)[];
 }
-interface PreparedCraftingFormula extends CraftingFormula {
-    quantity: number;
-    expended: boolean;
-    isSignatureItem: boolean;
-    sort: number;
-}
-interface PreparedFormulaSheetData {
-    uuid: string;
-    expended: boolean;
-    img: ImageFilePath;
-    name: string;
-    quantity: number;
-    isSignatureItem: boolean;
-}
-export { CraftingEntry };
-export type { CraftingEntryData, PreparedFormulaData };
+export { CraftingAbility };
+export type { CraftingAbilityData, CraftingAbilitySheetData, PreparedFormulaData };

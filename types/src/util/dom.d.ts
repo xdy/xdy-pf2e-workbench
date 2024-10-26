@@ -17,7 +17,7 @@ declare function createHTMLElement<K extends keyof HTMLElementTagNameMap>(nodeNa
 declare function createHTMLElement<K extends keyof HTMLElementTagNameMap>(nodeName: K, options?: CreateHTMLElementOptionsWithNeither): HTMLElementTagNameMap[K];
 interface CreateHTMLElementOptions {
     classes?: string[];
-    dataset?: Record<string, string | number | boolean | null | undefined>;
+    dataset?: Record<string, Maybe<string | number | boolean>>;
     children?: (HTMLElement | string)[];
     innerHTML?: string;
 }

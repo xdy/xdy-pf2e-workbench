@@ -2,7 +2,7 @@ import type { ActorPF2e } from "@actor";
 import type { Action } from "@actor/actions/index.ts";
 import type { AutomaticBonusProgression } from "@actor/character/automatic-bonus-progression.ts";
 import type { ElementalBlast } from "@actor/character/elemental-blast.ts";
-import type { FeatGroupOptions } from "@actor/character/feats.ts";
+import type { FeatGroupData } from "@actor/character/feats/index.ts";
 import type { CheckModifier, ModifierPF2e, ModifierType, StatisticModifier } from "@actor/modifiers.ts";
 import type { ItemPF2e, PhysicalItemPF2e } from "@item";
 import type { ConditionSource } from "@item/condition/data.ts";
@@ -91,7 +91,7 @@ interface GamePF2e extends Game<ActorPF2e<null>, ActorsPF2e<ActorPF2e<null>>, Ch
             campaign: {
                 feats: {
                     enabled: boolean;
-                    sections: FeatGroupOptions[];
+                    sections: FeatGroupData[];
                 };
                 languages: LanguageSettings;
             };
@@ -211,7 +211,7 @@ declare global {
         get(module: "pf2e", setting: "worldClock.timeConvention"): 24 | 12;
         get(module: "pf2e", setting: "worldClock.worldCreatedOn"): string;
         get(module: "pf2e", setting: "campaignFeats"): boolean;
-        get(module: "pf2e", setting: "campaignFeatSections"): FeatGroupOptions[];
+        get(module: "pf2e", setting: "campaignFeatSections"): FeatGroupData[];
         get(module: "pf2e", setting: "campaignType"): string;
         get(module: "pf2e", setting: "activeParty"): string;
         get(module: "pf2e", setting: "activePartyFolderState"): boolean;

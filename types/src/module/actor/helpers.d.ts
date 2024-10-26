@@ -4,7 +4,8 @@ import { ZeroToFour } from "@module/data.ts";
 import { ActorSourcePF2e } from "./data/index.ts";
 import { ModifierPF2e } from "./modifiers.ts";
 import { NPCStrike } from "./npc/data.ts";
-import { AuraEffectData } from "./types.ts";
+import { ActorCommitData, AuraEffectData } from "./types.ts";
+
 /**
  * Reset and rerender a provided list of actors. Omit argument to reset all world and synthetic actors
  * @param [actors] A list of actors to refresh: if none are provided, all world and synthetic actors are retrieved
@@ -54,5 +55,14 @@ declare function calculateRangePenalty(actor: ActorPF2e, increment: number | nul
 declare function isReallyPC(actor: ActorPF2e): boolean;
 /** Recursive generator function to iterate over all items and their sub items */
 declare function iterateAllItems<T extends ActorPF2e>(document: T | PhysicalItemPF2e<T>): Generator<ItemPF2e<T>>;
-export { auraAffectsActor, calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, createEnvironmentRollOptions, getRangeIncrement, getStrikeAttackDomains, getStrikeDamageDomains, isOffGuardFromFlanking, isReallyPC, iterateAllItems, migrateActorSource, resetActors, setHitPointsRollOptions, strikeFromMeleeItem, userColorForActor, };
+/**
+ * Transfer a list of items between actors, stacking equivalent helpers. Temporary until a proper inventory method exists
+ * @param source the source actor
+ * @param dest the destination actor
+ * @param [itemFilterFn] an optional filter function called for each inventory item
+ */
+declare function transferItemsBetweenActors(source: ActorPF2e, dest: ActorPF2e, itemFilterFn?: (item: PhysicalItemPF2e) => boolean): Promise<void>;
+/** Applies multiple batched updates to the actor, delaying rendering till the end */
+declare function applyActorUpdate<T extends ActorPF2e>(actor: T, data: ActorCommitData<T>): Promise<void>;
+export { applyActorUpdate, auraAffectsActor, calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, createEnvironmentRollOptions, getRangeIncrement, getStrikeAttackDomains, getStrikeDamageDomains, isOffGuardFromFlanking, isReallyPC, iterateAllItems, migrateActorSource, resetActors, setHitPointsRollOptions, strikeFromMeleeItem, transferItemsBetweenActors, userColorForActor, };
 export type { MultipleAttackPenaltyData };

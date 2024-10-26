@@ -242,7 +242,7 @@ async function getCastRankFromChat(numberOfMessagesToCheck: number, originUuid: 
 }
 
 async function handleSpell(
-    flags: foundry.documents.ActorFlags & {
+    flags: ActorFlagsPF2e & {
         pf2e: { rollOptions: RollOptionFlags; trackedItems: Record<string, string>; [p: string]: unknown };
     },
     numberOfMessagesToCheck: number,

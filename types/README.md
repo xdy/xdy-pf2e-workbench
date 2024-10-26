@@ -6,3 +6,7 @@ npm run clean && npm ci && npm run build && node_modules/.bin/tsc --declaration 
 
 It also has these files and directories taken as-is from the pf2e system:
 * foundryvtt/forks/pf2e/types/foundry/** -> types/types/foundry
+
+Fix any problems indicated by this, then build as usual.
+```npx tsc --noEmit --skipLibCheck
+```

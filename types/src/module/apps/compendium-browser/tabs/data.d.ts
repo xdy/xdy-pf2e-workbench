@@ -1,11 +1,12 @@
 import { CreatureTrait } from "@actor/creature/types.ts";
 import { HazardTrait } from "@actor/hazard/types.ts";
-import { ActionTrait } from "@item/ability/index.ts";
+import { AbilityTrait } from "@item/ability/index.ts";
 import { KingmakerTrait } from "@item/campaign-feature/types.ts";
 import { FeatTrait } from "@item/feat/types.ts";
 import { PhysicalItemTrait } from "@item/physical/data.ts";
 import type { SearchResult } from "minisearch";
 import { SortDirection } from "../data.ts";
+
 type CheckboxOptions = Record<string, {
     label: string;
     selected: boolean;
@@ -75,7 +76,7 @@ interface ActionFilters extends BaseFilterData {
         source: CheckboxData;
     };
     multiselects: {
-        traits: MultiselectData<ActionTrait>;
+        traits: MultiselectData<AbilityTrait>;
     };
 }
 interface BestiaryFilters extends BaseFilterData {

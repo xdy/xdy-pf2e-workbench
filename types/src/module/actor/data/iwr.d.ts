@@ -1,6 +1,7 @@
 import { ImmunityType, IWRType, ResistanceType, WeaknessType } from "@actor/types.ts";
 import { IWRException } from "@module/rules/rule-element/iwr/base.ts";
 import { Predicate, PredicateStatement } from "@system/predication.ts";
+
 declare abstract class IWR<TType extends IWRType> {
     #private;
     readonly type: TType;
@@ -68,6 +69,7 @@ declare class Immunity extends IWR<ImmunityType> implements ImmunitySource {
         fire: string;
         fleeing: string;
         force: string;
+        "fortune-effects": string;
         frightened: string;
         grabbed: string;
         healing: string;
@@ -265,7 +267,7 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         salt: string;
         "salt-water": string;
         slashing: string;
-        sonic: string;
+        sonic: string; /** Construct an object argument for Localization#format (see also PF2E.Actor.IWR.CompositeLabel in en.json) */
         spells: string;
         spirit: string;
         "unarmed-attacks": string;

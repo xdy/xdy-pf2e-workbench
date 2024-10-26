@@ -1,11 +1,24 @@
-import type { ActorAttributes, ActorAttributesSource, ActorDetailsSource, ActorHitPoints, ActorHitPointsSource, ActorSystemData, ActorSystemSource, ActorTraitsSource, AttributeBasedTraceData, BaseActorSourcePF2e, StrikeData } from "@actor/data/base.ts";
+import type {
+    ActorAttributes,
+    ActorAttributesSource,
+    ActorDetailsSource,
+    ActorHitPoints,
+    ActorHitPointsSource,
+    ActorSystemData,
+    ActorSystemSource,
+    ActorTraitsSource,
+    AttributeBasedTraceData,
+    BaseActorSourcePF2e,
+    StrikeData,
+} from "@actor/data/base.ts";
 import type { ActorSizePF2e } from "@actor/data/size.ts";
 import type { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import type { AttributeString, MovementType, SaveType, SkillSlug } from "@actor/types.ts";
-import type { LabeledNumber, Size, ValueAndMax, ZeroToThree } from "@module/data.ts";
+import type { LabeledNumber, Size, ValueAndMax, ValueAndMaybeMax, ZeroToThree } from "@module/data.ts";
 import type { ArmorClassTraceData } from "@system/statistic/index.ts";
 import type { PerceptionTraceData } from "@system/statistic/perception.ts";
 import type { CreatureActorType, CreatureTrait, Language, SenseAcuity, SenseType, SpecialVisionType } from "./types.ts";
+
 type BaseCreatureSource<TType extends CreatureActorType, TSystemSource extends CreatureSystemSource> = BaseActorSourcePF2e<TType, TSystemSource>;
 /** Skill and Lore statistics for rolling. */
 interface CreatureSystemSource extends ActorSystemSource {
@@ -36,10 +49,7 @@ interface CreatureLanguagesData {
 interface CreatureTraitsSource extends ActorTraitsSource<CreatureTrait> {
 }
 interface CreatureResourcesSource {
-    focus?: {
-        value: number;
-        max?: number;
-    };
+    focus?: ValueAndMaybeMax;
 }
 interface CreatureSystemData extends Omit<CreatureSystemSource, "attributes">, ActorSystemData {
     abilities?: Abilities;
@@ -57,7 +67,7 @@ interface CreatureSystemData extends Omit<CreatureSystemSource, "attributes">, A
     saves: CreatureSaves;
     skills: Record<string, SkillData>;
     actions?: StrikeData[];
-    resources?: CreatureResources;
+    resources: CreatureResources;
 }
 type SenseData = {
     type: SpecialVisionType;
@@ -147,11 +157,10 @@ interface CreatureInitiativeSource {
 }
 interface CreatureResources extends CreatureResourcesSource {
     /** The current number of focus points and pool size */
-    focus: {
-        value: number;
-        max: number;
+    focus?: ValueAndMax & {
         cap: number;
     };
+    [key: string]: ValueAndMax | undefined;
 }
 declare enum VisionLevels {
     BLINDED = 0,

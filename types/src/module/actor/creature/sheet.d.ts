@@ -11,6 +11,7 @@ import { ZeroToFour } from "@module/data.ts";
 import { ActorSheetPF2e, SheetClickActionHandlers } from "../sheet/base.ts";
 import { CreatureConfig } from "./config.ts";
 import { Language } from "./index.ts";
+
 /**
  * Base class for NPC and character sheets
  * @category Actor
@@ -50,5 +51,11 @@ interface CreatureSheetData<TActor extends CreaturePF2e> extends ActorSheetDataP
         remainingDying: number;
         remainingWounded: number;
     };
+    specialResources: {
+        slug: string;
+        label: string;
+        value: number;
+        max: number;
+    }[];
 }
 export { CreatureSheetPF2e, type CreatureSheetData };

@@ -6,16 +6,25 @@ import { StatisticModifier } from "@actor/modifiers.ts";
 import { AttributeString, MovementType } from "@actor/types.ts";
 import type { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, FeatPF2e, HeritagePF2e } from "@item";
 import { WeaponPF2e } from "@item";
-import { ItemType } from "@item/base/data/index.ts";
+import type { ItemType } from "@item/base/data/index.ts";
 import { ZeroToTwo } from "@module/data.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { RollParameters } from "@system/rolls.ts";
 import { Statistic } from "@system/statistic/index.ts";
-import { CraftingEntry, CraftingFormula } from "./crafting/index.ts";
-import { BaseWeaponProficiencyKey, CharacterAbilities, CharacterFlags, CharacterSource, CharacterStrike, CharacterSystemData, WeaponGroupProficiencyKey } from "./data.ts";
-import { CharacterFeats } from "./feats.ts";
+import { CharacterCrafting, CraftingFormula } from "./crafting/index.ts";
+import {
+    BaseWeaponProficiencyKey,
+    CharacterAbilities,
+    CharacterFlags,
+    CharacterSource,
+    CharacterStrike,
+    CharacterSystemData,
+    WeaponGroupProficiencyKey,
+} from "./data.ts";
+import { CharacterFeats } from "./feats/index.ts";
 import { CharacterHitPointsSummary, CharacterSkills, GuaranteedGetStatisticSlug } from "./types.ts";
+
 declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     /** Core singular embeds for PCs */
     ancestry: AncestryPF2e<this> | null;
@@ -35,6 +44,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     /** Skills for the character, built during data prep */
     skills: CharacterSkills<this>;
     initiative: ActorInitiative;
+    crafting: CharacterCrafting;
     get allowedItemTypes(): (ItemType | "physical")[];
     get keyAttribute(): AttributeString;
     /** This PC's ability scores */
@@ -50,9 +60,9 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     /** Retrieve lore skills, class statistics, and tradition-specific spellcasting */
     getStatistic(slug: GuaranteedGetStatisticSlug): Statistic<this>;
     getStatistic(slug: string): Statistic<this> | null;
+    /** Will be deprecated/removed after PC2 alchemist is complete */
     getCraftingFormulas(): Promise<CraftingFormula[]>;
-    getCraftingEntries(formulas?: CraftingFormula[]): Promise<CraftingEntry[]>;
-    getCraftingEntry(selector: string): Promise<CraftingEntry | null>;
+    /** Will be deprecated/removed after PC2 alchemist is complete */
     performDailyCrafting(): Promise<void>;
     protected _initialize(options?: Record<string, unknown>): void;
     /** If one exists, prepare this character's familiar */

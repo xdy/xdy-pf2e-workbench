@@ -2,11 +2,12 @@ import type { ActorPF2e } from "@actor";
 import type { StrikeData } from "@actor/data/base.ts";
 import type { ModifierPF2e } from "@actor/modifiers.ts";
 import type { ItemPF2e } from "@item";
-import type { ActionTrait } from "@item/ability/types.ts";
+import type { AbilityTrait } from "@item/ability/types.ts";
 import type { CheckContextChatFlag } from "@module/chat-message/data.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import type { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import type { Statistic } from "@system/statistic/statistic.ts";
+
 interface OpposingActorConstructorData<TActor extends ActorPF2e | null = ActorPF2e | null, TStatistic extends Statistic | StrikeData | null = Statistic | StrikeData | null, TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null> {
     actor?: TActor;
     /** The statistic used for the roll */
@@ -51,7 +52,7 @@ interface RollContextData<TActor extends ActorPF2e | null = ActorPF2e | null, TS
     options: Set<string>;
     origin: RollOrigin<TActor, TStatistic, TItem> | null;
     target: RollTarget | null;
-    traits: ActionTrait[];
+    traits: AbilityTrait[];
 }
 interface CheckContextData<TActor extends ActorPF2e = ActorPF2e, TStatistic extends Statistic | StrikeData = Statistic | StrikeData, TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null> extends RollContextData<TActor, TStatistic, TItem> {
     dc: CheckDC | null;
@@ -68,7 +69,7 @@ interface BaseConstructorParams<TSelf extends ActorPF2e, TStatistic extends Stat
     /** Whether the request is for display in a sheet view. If so, targets are not considered */
     viewOnly?: boolean;
     /** Action traits associated with the roll */
-    traits?: ActionTrait[];
+    traits?: AbilityTrait[];
 }
 interface ConstructorParamsSelfIsOrigin<TSelf extends ActorPF2e = ActorPF2e, TStatistic extends Statistic | StrikeData = Statistic | StrikeData, TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null> extends BaseConstructorParams<TSelf, TStatistic, TItem> {
     origin: OpposingActorConstructorData<TSelf, TStatistic, TItem>;

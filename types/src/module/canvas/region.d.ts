@@ -1,4 +1,5 @@
 import type { RegionDocumentPF2e } from "@scene/region-document/document.ts";
+
 /** Add support for drag/drop repositioning of regions. */
 declare class RegionPF2e<TDocument extends RegionDocumentPF2e = RegionDocumentPF2e> extends Region<TDocument> {
     static RENDER_FLAGS: {
@@ -10,8 +11,8 @@ declare class RegionPF2e<TDocument extends RegionDocumentPF2e = RegionDocumentPF
             propagate: ["refreshState", "refreshBorder"];
             alias: boolean;
         };
-        refreshState: {};
-        refreshBorder: {};
+        refreshState: object;
+        refreshBorder: object;
     };
     getSnappedPosition(position?: Point): Point;
     protected _canDrag(user: User, event: PIXI.FederatedPointerEvent): boolean;

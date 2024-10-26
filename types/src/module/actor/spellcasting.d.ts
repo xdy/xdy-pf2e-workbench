@@ -2,11 +2,13 @@ import type { ActorPF2e } from "@actor";
 import type { ConsumablePF2e, SpellPF2e } from "@item";
 import { SpellcastingEntryPF2e } from "@item";
 import { SpellCollection } from "@item/spellcasting-entry/collection.ts";
-import { SpellcastingEntrySource } from "@item/spellcasting-entry/index.ts";
 import { RitualSpellcasting } from "@item/spellcasting-entry/rituals.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
 import { Statistic } from "@system/statistic/statistic.ts";
 import { DelegatedCollection } from "@util";
+import { CreatureSource } from "./data/index.ts";
+import { ActorCommitData } from "./types.ts";
+
 export declare class ActorSpellcasting<TActor extends ActorPF2e> extends DelegatedCollection<BaseSpellcastingEntry<TActor>> {
     #private;
     readonly actor: TActor;
@@ -31,19 +33,10 @@ export declare class ActorSpellcasting<TActor extends ActorPF2e> extends Delegat
     canCastConsumable(item: ConsumablePF2e): boolean;
     refocus(options?: {
         all?: boolean;
-    }): {
-        "system.resources.focus.value": number;
-    } | null;
+    }): DeepPartial<CreatureSource> | null;
     /**
      * Recharges all spellcasting entries based on the type of entry it is
      * @todo Support a timespan property of some sort and handle 1/hour innate spells
      */
-    recharge(): {
-        itemUpdates: ((Record<string, unknown> | Partial<SpellcastingEntrySource>) & {
-            _id: string;
-        })[];
-        actorUpdates: {
-            "system.resources.focus.value": number;
-        } | null;
-    };
+    recharge(): ActorCommitData<TActor>;
 }

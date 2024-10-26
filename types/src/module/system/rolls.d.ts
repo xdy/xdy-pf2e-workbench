@@ -1,7 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 import type { ModifierPF2e } from "@actor/modifiers.ts";
 import type { RollOrigin, RollTarget } from "@actor/roll-context/types.ts";
-import type { ActionTrait } from "@item/ability/types.ts";
+import type { AbilityTrait } from "@item/ability/types.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { CheckContextChatFlag } from "@module/chat-message/index.ts";
 import type { ZeroToTwo } from "@module/data.ts";
@@ -23,7 +23,7 @@ interface RollParameters {
     /** Optional DC data for the roll */
     dc?: CheckDC | null;
     /** Callback called when the roll occurs. */
-    callback?: (roll: Rolled<Roll>) => void;
+    callback?: (roll: Rolled<Roll>) => void | Promise<void>;
     /** Additional modifiers */
     modifiers?: ModifierPF2e[];
     /** Whether to create a message from the roll */
@@ -57,7 +57,7 @@ interface BaseRollContext {
     /** Targeting data for the check, if applicable */
     target?: RollTarget | null;
     /** Action traits associated with the roll */
-    traits?: ActionTrait[];
+    traits?: AbilityTrait[];
     /** The outcome a roll (usually relevant only to rerolls) */
     outcome?: (typeof DEGREE_OF_SUCCESS_STRINGS)[number] | null;
     /** The outcome prior to being changed by abilities raising or lowering degree of success */

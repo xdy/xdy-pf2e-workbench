@@ -2,8 +2,9 @@ import { ActorPF2e } from "@actor";
 import { SpellPF2e } from "@item";
 import { SpellConsumableItemType } from "@item/consumable/spell-consumables.ts";
 import { OneToTen } from "@module/data.ts";
+
 interface FormInputData extends FormApplicationData<ActorPF2e> {
-    itemTypeOptions?: Object;
+    itemTypeOptions?: object;
     validLevels?: number[];
     itemType?: SpellConsumableItemType;
     level?: OneToTen;

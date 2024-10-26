@@ -2,9 +2,10 @@ import type { ActorPF2e } from "@actor";
 import { AbilityItemPF2e, FeatPF2e } from "@item";
 import { ChatContextFlag, CheckContextChatFlag } from "./data.ts";
 import { ChatMessagePF2e } from "./document.ts";
+
 declare function isCheckContextFlag(flag?: ChatContextFlag): flag is CheckContextChatFlag;
 /** Create a message with collapsed action description and button to apply an effect */
-declare function createSelfEffectMessage(item: AbilityItemPF2e<ActorPF2e> | FeatPF2e<ActorPF2e>, rollMode?: RollMode | "roll"): Promise<ChatMessagePF2e | null>;
+declare function createUseActionMessage(item: AbilityItemPF2e<ActorPF2e> | FeatPF2e<ActorPF2e>, rollMode?: RollMode | "roll"): Promise<ChatMessagePF2e | null>;
 declare function applyDamageFromMessage({ message, multiplier, addend, promptModifier, rollIndex, }: ApplyDamageFromMessageParams): Promise<void>;
 interface ApplyDamageFromMessageParams {
     message: ChatMessagePF2e;
@@ -18,4 +19,4 @@ interface ApplyDamageFromMessageParams {
  * The button will be shown if templates are placed and the user has ownership; otherwise it will be hidden.
  */
 declare function toggleClearTemplatesButton(message: ChatMessagePF2e | null): void;
-export { applyDamageFromMessage, createSelfEffectMessage, isCheckContextFlag, toggleClearTemplatesButton };
+export { applyDamageFromMessage, createUseActionMessage, isCheckContextFlag, toggleClearTemplatesButton };

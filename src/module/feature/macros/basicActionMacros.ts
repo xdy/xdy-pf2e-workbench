@@ -8,10 +8,10 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e } from "@actor";
 import type { SkillSlug } from "@actor/types.ts";
 import { Action, ActionUseOptions, ActionVariant } from "@actor/actions/types.js";
-import type { ActionTrait } from "@item/ability/index.d.ts";
 import type { MacroPF2e } from "@module/macro.d.ts";
 import { Statistic } from "@system/statistic/statistic.js";
 import { followTheExpert } from "./follow-the-expert.ts";
+import { AbilityTrait } from "@item/ability/types.js";
 
 declare global {
     interface Window {
@@ -151,7 +151,7 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
 // Class to wrap a macro into an object that supports the ActionVariant
 // interface, which is what most of the system actions use.
 class MacroActionVariant implements ActionVariant {
-    traits: ActionTrait[] = [];
+    traits: AbilityTrait[] = [];
     #macro: string;
     #compendium: string;
 
@@ -679,10 +679,10 @@ export async function basicActionMacros() {
     const actionsToUse = prepareActions(selectedActor, bamActions);
 
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-            .map((actor) => actor.actor)
-            .filter((actor) => {
-                return supportedActorTypes.includes(actor?.type ?? "unknown");
-            }) || [];
+        .map((actor) => actor.actor)
+        .filter((actor) => {
+            return supportedActorTypes.includes(actor?.type ?? "unknown");
+        }) || [];
 
     const party = game.actors?.party?.members || [];
     const partyIds = party.map((actor) => actor?.id) || [];

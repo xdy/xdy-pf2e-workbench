@@ -9,7 +9,7 @@ import type { ItemSourcePF2e } from "@item/base/data/index.ts";
 import type { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { AdjustedValue } from "@module/sheet/helpers.ts";
 import type { ArmyPF2e } from "./document.ts";
-import type { Alignment } from "./types.ts";
+
 declare class ArmySheetPF2e extends ActorSheetPF2e<ArmyPF2e> {
     #private;
     /** Basic war actions are sheet data. Note that they cannot ever work with rule elements */
@@ -39,7 +39,6 @@ interface ArmySheetData extends ActorSheetDataPF2e<ArmyPF2e> {
         routThreshold: AdjustedValue;
     };
     linked: boolean;
-    alignments: Iterable<Alignment>;
     armyTypes: Record<string, string>;
     rarityTraits: Record<string, string>;
     saves: ArmySaveSheetData[];

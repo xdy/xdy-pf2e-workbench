@@ -6,6 +6,7 @@ import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { ConditionSource, ConditionSystemData, PersistentDamageData } from "./data.ts";
 import { ConditionKey, ConditionSlug } from "./types.ts";
+
 declare class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends AbstractEffectPF2e<TParent> {
     active: boolean;
     get badge(): EffectBadge | null;
@@ -27,7 +28,7 @@ declare class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
      */
     get readonly(): boolean;
     /** Include damage type and possibly category for persistent-damage conditions */
-    getRollOptions(prefix: string, options?: {
+    getRollOptions(prefix?: string, options?: {
         includeGranter?: boolean;
     }): string[];
     increase(this: ConditionPF2e<ActorPF2e>): Promise<void>;

@@ -5,6 +5,7 @@ import type { FeatSheetPF2e } from "@item/feat/sheet.ts";
 import { RangeData } from "@item/types.ts";
 import type { AbilitySystemData, SelfEffectReference } from "./data.ts";
 import type { AbilitySheetPF2e } from "./sheet.ts";
+
 interface SourceWithActionData {
     system: {
         actionType: AbilitySystemData["actionType"];
@@ -24,7 +25,7 @@ declare function getActionCostRollOptions(prefix: string, item: {
     actionCost?: ActionCost | null;
 }): string[];
 /** Create data for the "self-applied effect" drop zone on an ability or feat sheet. */
-declare function createSelfEffectSheetData(data: SelfEffectReference | null): SelfEffectSheetReference | null;
+declare function createSelfEffectSheetData(data: Maybe<SelfEffectReference>): SelfEffectSheetReference | null;
 interface SelfEffectSheetReference extends SelfEffectReference {
     id: string | null;
     type: string | null;

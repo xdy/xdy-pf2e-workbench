@@ -1,7 +1,6 @@
-import type { Action, ActionVariant, ActionUseOptions, ActionMessageOptions } from "@actor/actions/types.d.ts";
+import type { Action, ActionMessageOptions, ActionUseOptions, ActionVariant } from "@actor/actions/types.d.ts";
 import type { ActorPF2e } from "@actor";
 import type { ChatMessagePF2e } from "@module/chat-message/document.d.ts";
-import type { ActionTrait } from "@item/ability/index.d.ts";
 import type { EffectPF2e } from "@item";
 import type { EffectSource } from "@item/effect/data.d.ts";
 import type { RuleElementSource } from "@module/rules/rule-element/data.d.ts";
@@ -9,6 +8,7 @@ import type { ChoiceSetSource } from "@module/rules/rule-element/choice-set/data
 import type { PickableThing } from "@module/apps/pick-a-thing-prompt.d.ts";
 import type { RawPredicate } from "@system/predication.d.ts";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import { AbilityTrait } from "@item/ability/types.js";
 
 // IDK why choices isn't in ChoiceSetSource
 interface ChoiceSetSourceWithChoices extends ChoiceSetSource {
@@ -37,7 +37,7 @@ class FollowTheExpertAction implements Action {
     readonly img: string;
     readonly name: string;
     readonly slug: string;
-    readonly traits: ActionTrait[];
+    readonly traits: AbilityTrait[];
     // variants is required for the interface, but this action has no variants.
     // Since nothing in this module uses them, an empty collection satifies the
     // requirements with the least code.

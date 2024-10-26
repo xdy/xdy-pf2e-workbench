@@ -1,10 +1,11 @@
 import type { ActorPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
-import { ItemType } from "@item/base/data/index.ts";
+import type { ItemType } from "@item/base/data/index.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "../base.ts";
-import { ModelPropsFromRESchema, RuleElementSchema } from "../data.ts";
+import type { ModelPropsFromRESchema, RuleElementSchema } from "../data.ts";
 import { ItemAlterationSchema } from "./alteration.ts";
+
 declare class ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSchema> {
     #private;
     static defineSchema(): ItemAlterationRuleSchema;

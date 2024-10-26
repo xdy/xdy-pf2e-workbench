@@ -32,6 +32,7 @@ declare const immunityTypes: {
     fire: string;
     fleeing: string;
     force: string;
+    "fortune-effects": string;
     frightened: string;
     grabbed: string;
     healing: string;

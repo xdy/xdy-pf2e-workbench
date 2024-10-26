@@ -2,6 +2,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
 import MiniSearch from "minisearch";
+
 /** Extend CompendiumDirectory to support a search bar */
 declare class CompendiumDirectoryPF2e extends CompendiumDirectory {
     #private;
@@ -28,5 +29,6 @@ interface CompendiumDirectoryPF2e extends CompendiumDirectory {
 }
 interface CompendiumDirectoryDataPF2e extends CompendiumDirectoryData {
     searchContents: boolean;
+    isV13: boolean;
 }
 export { CompendiumDirectoryPF2e };

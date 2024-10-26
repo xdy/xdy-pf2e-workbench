@@ -1,8 +1,29 @@
-import { CraftingEntryData } from "@actor/character/crafting/entry.ts";
-import { CraftingFormulaData } from "@actor/character/crafting/formula.ts";
-import { AbilityData, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureLanguagesData, CreaturePerceptionData, CreatureResources, CreatureSystemData, CreatureSystemSource, HeldShieldData, SaveData, SkillData } from "@actor/creature/data.ts";
+import type { CraftingAbilityData, CraftingFormulaData } from "@actor/character/crafting/index.ts";
+import {
+    AbilityData,
+    BaseCreatureSource,
+    CreatureAttributes,
+    CreatureDetails,
+    CreatureDetailsSource,
+    CreatureLanguagesData,
+    CreaturePerceptionData,
+    CreatureResources,
+    CreatureSystemData,
+    CreatureSystemSource,
+    HeldShieldData,
+    SaveData,
+    SkillData,
+} from "@actor/creature/data.ts";
 import { CreatureInitiativeSource, CreatureSpeeds, Language } from "@actor/creature/index.ts";
-import { ActorAttributesSource, ActorFlagsPF2e, AttributeBasedTraceData, HitPointsStatistic, InitiativeData, StrikeData, TraitViewData } from "@actor/data/base.ts";
+import {
+    ActorAttributesSource,
+    ActorFlagsPF2e,
+    AttributeBasedTraceData,
+    HitPointsStatistic,
+    InitiativeData,
+    StrikeData,
+    TraitViewData,
+} from "@actor/data/base.ts";
 import { AttributeString, MovementType, SaveType, SkillSlug } from "@actor/types.ts";
 import type { WeaponPF2e } from "@item";
 import { ArmorCategory } from "@item/armor/types.ts";
@@ -16,6 +37,7 @@ import type { Predicate } from "@system/predication.ts";
 import type { CharacterPF2e } from "./document.ts";
 import type { WeaponAuxiliaryAction } from "./helpers.ts";
 import type { CharacterSheetTabVisibility } from "./sheet.ts";
+
 type CharacterSource = BaseCreatureSource<"character", CharacterSystemSource> & {
     flags: DeepPartial<CharacterFlags>;
 };
@@ -359,18 +381,22 @@ interface VersatileWeaponOption {
 }
 interface CharacterCraftingData {
     formulas: CraftingFormulaData[];
-    entries: Record<string, Partial<CraftingEntryData>>;
+    entries: Record<string, Partial<CraftingAbilityData>>;
 }
-interface CharacterResources extends CreatureResources {
+type CharacterResources = CreatureResources & {
     /** The current and maximum number of hero points */
     heroPoints: ValueAndMax;
+    /** The current number of focus points and pool size */
+    focus: ValueAndMax & {
+        cap: number;
+    };
     /** The current and maximum number of invested items */
     investiture: ValueAndMax;
     crafting: {
         infusedReagents: ValueAndMax;
     };
     resolve?: ValueAndMax;
-}
+};
 interface CharacterPerceptionData extends CreaturePerceptionData {
     rank: ZeroToFour;
 }

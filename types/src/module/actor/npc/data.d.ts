@@ -1,12 +1,39 @@
 import type { ActorPF2e } from "@actor/base.ts";
-import type { Abilities, BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureHitPointsSource, CreatureInitiativeSource, CreatureLanguagesData, CreaturePerceptionData, CreatureResources, CreatureResourcesSource, CreatureSpeeds, CreatureSystemData, CreatureSystemSource, CreatureTraitsSource, HeldShieldData, LabeledSpeed, SaveData, SenseData } from "@actor/creature/data.ts";
-import type { ActorAttributesSource, ActorFlagsPF2e, AttributeBasedTraceData, HitPointsStatistic, StrikeData } from "@actor/data/base.ts";
+import type {
+    Abilities,
+    BaseCreatureSource,
+    CreatureAttributes,
+    CreatureDetails,
+    CreatureDetailsSource,
+    CreatureHitPointsSource,
+    CreatureInitiativeSource,
+    CreatureLanguagesData,
+    CreaturePerceptionData,
+    CreatureResources,
+    CreatureResourcesSource,
+    CreatureSpeeds,
+    CreatureSystemData,
+    CreatureSystemSource,
+    CreatureTraitsSource,
+    HeldShieldData,
+    LabeledSpeed,
+    SaveData,
+    SenseData,
+} from "@actor/creature/data.ts";
+import type {
+    ActorAttributesSource,
+    ActorFlagsPF2e,
+    AttributeBasedTraceData,
+    HitPointsStatistic,
+    StrikeData,
+} from "@actor/data/base.ts";
 import { InitiativeTraceData } from "@actor/initiative.ts";
 import type { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
 import type { ActorAlliance, SaveType, SkillSlug } from "@actor/types.ts";
 import type { MeleePF2e } from "@item";
-import type { PublicationData } from "@module/data.ts";
+import type { PublicationData, ValueAndMax } from "@module/data.ts";
 import type { RawPredicate } from "@system/predication.ts";
+
 type NPCSource = BaseCreatureSource<"npc", NPCSystemSource> & {
     flags: DeepPartial<NPCFlags>;
 };
@@ -25,7 +52,7 @@ interface NPCSystemSource extends CreatureSystemSource {
     /** Modifier of the perception statistic */
     perception: NPCPerceptionSource;
     initiative: CreatureInitiativeSource;
-    /** Details about this actor, such as alignment or ancestry. */
+    /** Details about this actor, such as alliance or level. */
     details: NPCDetailsSource;
     /** The three saves for NPCs. NPC saves have a 'base' score which is the score before applying custom modifiers. */
     saves: NPCSavesSource;
@@ -112,7 +139,7 @@ interface NPCSystemData extends Omit<NPCSystemSource, "attributes" | "perception
     skills: Record<string, NPCSkillData>;
     /** Special strikes which the creature can take. */
     actions: NPCStrike[];
-    resources: CreatureResources;
+    resources: NPCResources;
     spellcasting: {
         rituals: {
             dc: number;
@@ -204,5 +231,11 @@ interface NPCSkillData extends NPCSkillSource, AttributeBasedTraceData {
 }
 interface NPCSpeeds extends CreatureSpeeds {
     details: string;
+}
+interface NPCResources extends CreatureResources {
+    /** The current number of focus points and pool size */
+    focus: ValueAndMax & {
+        cap: number;
+    };
 }
 export type { NPCAttributes, NPCAttributesSource, NPCFlags, NPCHitPoints, NPCPerceptionData, NPCPerceptionSource, NPCSaveData, NPCSkillData, NPCSkillSource, NPCSource, NPCSpecialSkillSource, NPCStrike, NPCSystemData, NPCSystemSource, NPCTraitsSource, };

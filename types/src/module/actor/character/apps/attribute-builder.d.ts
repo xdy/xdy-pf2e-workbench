@@ -4,6 +4,7 @@
 import { CharacterPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e } from "@item";
+
 declare class AttributeBuilder extends Application {
     #private;
     actor: CharacterPF2e;

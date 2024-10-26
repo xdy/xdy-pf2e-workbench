@@ -1,8 +1,8 @@
 import { ConsumablePF2e, type SpellPF2e } from "@item";
 import { ConsumableSource } from "@item/base/data/index.ts";
 import { DCOptions } from "@module/dc.ts";
-declare const SPELL_CONSUMABLE_ITEM_TYPE: Set<"scroll" | "wand" | "cantripDeck5">;
-type SpellConsumableItemType = SetElement<typeof SPELL_CONSUMABLE_ITEM_TYPE>;
+
+type SpellConsumableItemType = "cantripDeck5" | "scroll" | "wand";
 declare function isSpellConsumable(itemId: string): boolean;
 declare function createConsumableFromSpell(spell: SpellPF2e, { type, heightenedLevel, mystified, }: {
     type: SpellConsumableItemType;

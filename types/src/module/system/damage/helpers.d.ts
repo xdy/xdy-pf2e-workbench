@@ -5,6 +5,7 @@ import type { Die, NumericTerm, RollTerm } from "types/foundry/client-esm/dice/t
 import { DamageInstance, DamageRoll } from "./roll.ts";
 import { ArithmeticExpression, Grouping } from "./terms.ts";
 import type { BaseDamageData, DamageCategory, DamageDiceFaces, DamageDieSize, DamageType } from "./types.ts";
+
 declare function nextDamageDieSize(next: {
     upgrade: DamageDieSize;
 }): DamageDieSize;
@@ -29,7 +30,7 @@ interface ApplyDamageAlterationsParams {
     actor: ActorPF2e;
     item: ItemPF2e<ActorPF2e>;
     domains: string[];
-    rollOptions: string[] | Set<string>;
+    rollOptions: Set<string>;
 }
 /** Apply damage dice overrides and upgrades to a non-weapon's damage formula */
 declare function applyDamageDiceOverrides(baseEntries: BaseDamageData[], dice: DamageDicePF2e[], options?: {

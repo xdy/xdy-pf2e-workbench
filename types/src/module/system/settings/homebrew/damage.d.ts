@@ -1,10 +1,13 @@
 import { CustomDamageData } from "./data.ts";
+
 /**
  * To update all custom damage types in the system, we need to ensure that all collections are added to and cleaned.
  * This reduces the scope of all damage related operations so that its easier to identify when something goes wrong.
  */
 export declare class DamageTypeManager {
     collections: {
+        physicalConfig: Record<string, string>;
+        energyConfig: Record<string, string>;
         physical: string[];
         energy: string[];
         DAMAGE_TYPES: Set<"acid" | "bleed" | "bludgeoning" | "cold" | "electricity" | "fire" | "force" | "mental" | "piercing" | "poison" | "slashing" | "sonic" | "spirit" | "vitality" | "void" | "untyped">;

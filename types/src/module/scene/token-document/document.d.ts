@@ -7,6 +7,7 @@ import type { ScenePF2e } from "../document.ts";
 import { TokenAura } from "./aura/index.ts";
 import { TokenFlagsPF2e } from "./data.ts";
 import type { TokenConfigPF2e } from "./sheet.ts";
+
 declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | null> extends TokenDocument<TParent> {
     #private;
     /** Has this document completed `DataModel` initialization? */
@@ -46,7 +47,10 @@ declare class TokenDocumentPF2e<TParent extends ScenePF2e | null = ScenePF2e | n
         alternative?: string;
     }): TokenResourceData | null;
     protected _initialize(options?: Record<string, unknown>): void;
-    /** If embedded, don't prepare data if the parent's data model hasn't initialized all its properties */
+    /**
+     * If embedded, don't prepare data if the parent hasn't finished initializing.
+     * @removeme in V13
+     */
     prepareData(): void;
     /** If rules-based vision is enabled, disable manually configured vision radii */
     prepareBaseData(): void;

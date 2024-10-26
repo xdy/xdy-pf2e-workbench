@@ -5,10 +5,11 @@ import type { MovementType, SaveType, SkillSlug } from "@actor/types.ts";
 import type { ItemPF2e } from "@item";
 import type { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import type { ZeroToFour } from "@module/data.ts";
-import type { TraitTagifyEntry } from "@module/sheet/helpers.ts";
+import type { TagifyEntry } from "@module/sheet/helpers.ts";
 import type { ArmorClassTraceData } from "@system/statistic/index.ts";
 import type { NPCAttributes, NPCPerceptionData, NPCSaveData, NPCSkillData, NPCSystemData } from "./data.ts";
 import type { NPCPF2e, NPCStrike } from "./index.ts";
+
 interface ActionsDetails {
     label: string;
     actions: AbilityViewData[];
@@ -46,9 +47,6 @@ interface NPCSystemSheetData extends NPCSystemData {
     };
     details: NPCSystemData["details"] & {
         level: NPCSystemData["details"]["level"] & WithAdjustments;
-        alignment: {
-            localizedName?: string;
-        };
     };
     saves: Record<SaveType, NPCSaveData & WithAdjustments & WithRank & {
         labelShort?: string;
@@ -56,7 +54,7 @@ interface NPCSystemSheetData extends NPCSystemData {
     skills: Record<SkillSlug, NPCSkillSheetData>;
 }
 interface NPCStrikeSheetData {
-    _id: string;
+    id: string;
     name: string;
     sort: number;
     breakdown: string;
@@ -95,7 +93,7 @@ interface NPCSheetData extends CreatureSheetData<NPCPF2e> {
     hasShield?: boolean;
     hasHardness?: boolean;
     configLootableNpc?: boolean;
-    traitTagifyData: TraitTagifyEntry[];
+    traitTagifyData: TagifyEntry[];
     speeds: Record<"land", NPCSpeedSheetData & {
         details: string;
     }> & Record<Exclude<MovementType, "land">, NPCSpeedSheetData | null>;

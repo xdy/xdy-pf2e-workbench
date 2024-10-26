@@ -7,6 +7,7 @@ import type { RuleElementPF2e } from "@module/rules/index.ts";
 import { DamageAlteration } from "@module/rules/rule-element/damage-alteration/alteration.ts";
 import type { DamageCategoryUnique, DamageDiceFaces, DamageDieSize, DamageType } from "@system/damage/types.ts";
 import { Predicate, RawPredicate } from "@system/predication.ts";
+
 declare const PROFICIENCY_RANK_OPTION: readonly ["proficiency:untrained", "proficiency:trained", "proficiency:expert", "proficiency:master", "proficiency:legendary"];
 declare function ensureProficiencyOption(options: Set<string>, rank: number): void;
 declare const MODIFIER_TYPES: Set<"untyped" | "ability" | "circumstance" | "item" | "potency" | "proficiency" | "status">;
@@ -131,7 +132,7 @@ declare class ModifierPF2e implements RawModifier {
     }): void;
     /** Return a copy of this ModifierPF2e instance */
     clone(data?: Partial<ModifierObjectParams>, options?: {
-        test?: Set<string> | string[];
+        test?: Set<string> | string[] | null;
     }): ModifierPF2e;
     /**
      * Get roll options for this modifier. The current data structure makes for occasional inability to distinguish

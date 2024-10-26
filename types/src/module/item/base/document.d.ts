@@ -7,9 +7,17 @@ import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ItemInstances } from "../types.ts";
-import type { ItemFlagsPF2e, ItemSourcePF2e, ItemSystemData, ItemType, RawItemChatData, TraitChatData } from "./data/index.ts";
+import type {
+    ItemFlagsPF2e,
+    ItemSourcePF2e,
+    ItemSystemData,
+    ItemType,
+    RawItemChatData,
+    TraitChatData,
+} from "./data/index.ts";
 import type { ItemTrait } from "./data/system.ts";
 import type { ItemSheetPF2e } from "./sheet/sheet.ts";
+
 /** The basic `Item` subclass for the system */
 declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     /** Has this document completed `DataModel` initialization? */
@@ -27,7 +35,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     rules: RuleElementPF2e[];
     /** The sluggified name of the item **/
     get slug(): string | null;
-    /** The compendium source ID of the item **/
+    /** The UUID of the item from which this one was copied (or is identical to if a compendium item) **/
     get sourceId(): ItemUUID | null;
     /** The recorded schema version of this item, updated after each data migration */
     get schemaVersion(): number | null;
@@ -65,6 +73,7 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     /**
      * Never prepare data except as part of `DataModel` initialization. If embedded, don't prepare data if the parent is
      * not yet initialized. See https://github.com/foundryvtt/foundryvtt/issues/7987
+     * @todo remove in V13
      */
     prepareData(): void;
     /** Ensure the presence of the pf2e flag scope with default properties and values */
@@ -105,6 +114,9 @@ declare class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> exte
     protected _onUpdate(data: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<TParent>, userId: string): void;
     /** Call onDelete rule-element hooks */
     protected _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void;
+    /** To be overridden by subclasses to extend the HTML string that will become part of the embed */
+    protected embedHTMLString(_config: DocumentHTMLEmbedConfig, _options: EnrichmentOptions): string;
+    _buildEmbedHTML(config: DocumentHTMLEmbedConfig, options: EnrichmentOptions): Promise<HTMLCollection>;
 }
 interface ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     constructor: typeof ItemPF2e;

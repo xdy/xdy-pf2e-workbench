@@ -1,7 +1,6 @@
 import { DamageRollFunction, RollFunction } from "@actor/data/base.ts";
-import { ALIGNMENTS } from "./values.ts";
 import { AttackRollParams } from "@system/rolls.ts";
-type Alignment = SetElement<typeof ALIGNMENTS>;
+
 /** Data for an army strike. Deals 1 damage on a hit, 2 on a crit (usually) */
 interface ArmyStrike {
     slug: string;
@@ -17,4 +16,4 @@ interface ArmyStrike {
     damage: DamageRollFunction;
     critical: DamageRollFunction;
 }
-export type { Alignment, ArmyStrike };
+export type { ArmyStrike };

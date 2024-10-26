@@ -2,6 +2,7 @@ import type { ActorPF2e } from "@actor";
 import type { SkillSlug } from "@actor/types.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { EncounterPF2e } from "./index.ts";
+
 declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e | null, TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends Combatant<TParent, TTokenDocument> {
     #private;
     /** Has this document completed `DataModel` initialization? */
@@ -25,7 +26,10 @@ declare class CombatantPF2e<TParent extends EncounterPF2e | null = EncounterPF2e
         round: number;
     }): Promise<void>;
     protected _initialize(options?: Record<string, unknown>): void;
-    /** If embedded, don't prepare data if the parent's data model hasn't initialized all its properties */
+    /**
+     * If embedded, don't prepare data if the parent hasn't finished initializing.
+     * @todo remove in V13
+     */
     prepareData(): void;
     prepareBaseData(): void;
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */

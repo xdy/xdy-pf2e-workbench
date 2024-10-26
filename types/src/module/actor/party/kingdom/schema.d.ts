@@ -3,6 +3,7 @@ import { ZeroToFour } from "@module/data.ts";
 import { DataUnionField, RecordField, StrictBooleanField, StrictStringField } from "@system/schema-data-fields.ts";
 import type { ArrayField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { KingdomAbility } from "./types.ts";
+
 declare const KINGDOM_SETTLEMENT_SCHEMA: {
     name: StringField<string, string, true, false, true>;
     type: StringField<"village" | "town" | "city" | "metropolis", "village" | "town" | "city" | "metropolis", false, false, true>;
@@ -32,7 +33,7 @@ declare const KINGDOM_SCHEMA: {
     type: StringField<"kingmaker", "kingmaker", true, false, true>;
     active: DataUnionField<StrictStringField<"building", "building", false, false, boolean> | StrictBooleanField<boolean, boolean, true>, false, false, boolean>;
     name: StringField<string, string, true, false, true>;
-    img: foundry.data.fields.FilePathField<`${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.svg` | `${string}.tiff` | `${string}.webp`, `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.svg` | `${string}.tiff` | `${string}.webp`, true, false, true>;
+    img: foundry.data.fields.FilePathField<`${string}.svg` | `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.tiff` | `${string}.webp`, `${string}.svg` | `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.tiff` | `${string}.webp`, true, false, true>;
     capital: StringField<"", "", true, false, true>;
     size: foundry.data.fields.NumberField<number, number, true, false, true>;
     level: foundry.data.fields.NumberField<number, number, true, false, true>;

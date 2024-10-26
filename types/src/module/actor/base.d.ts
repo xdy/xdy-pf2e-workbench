@@ -1,4 +1,12 @@
-import { ActorAlliance, ActorDimensions, ActorInstances, ApplyDamageParams, AuraData, EmbeddedItemInstances, SaveType } from "@actor/types.ts";
+import {
+    ActorAlliance,
+    ActorDimensions,
+    ActorInstances,
+    ApplyDamageParams,
+    AuraData,
+    EmbeddedItemInstances,
+    SaveType,
+} from "@actor/types.ts";
 import type { AbstractEffectPF2e, ConditionPF2e, ContainerPF2e, PhysicalItemPF2e, ShieldPF2e } from "@item";
 import { ItemPF2e } from "@item";
 import type { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/base/data/index.ts";
@@ -15,7 +23,12 @@ import type { UserPF2e } from "@module/user/document.ts";
 import type { ScenePF2e } from "@scene/document.ts";
 import { TokenDocumentPF2e } from "@scene/token-document/document.ts";
 import type { DamageType } from "@system/damage/types.ts";
-import type { ArmorStatistic, PerceptionStatistic, Statistic, StatisticDifficultyClass } from "@system/statistic/index.ts";
+import type {
+    ArmorStatistic,
+    PerceptionStatistic,
+    Statistic,
+    StatisticDifficultyClass,
+} from "@system/statistic/index.ts";
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ActorConditions } from "./conditions.ts";
 import { Abilities, VisionLevel } from "./creature/data.ts";
@@ -26,7 +39,8 @@ import type { ActorInitiative } from "./initiative.ts";
 import { ActorInventory } from "./inventory/index.ts";
 import type { ActorSheetPF2e } from "./sheet/base.ts";
 import type { ActorSpellcasting } from "./spellcasting.ts";
-import type { ActorType } from "./types.ts";
+import type { ActorRechargeData, ActorType } from "./types.ts";
+
 /**
  * Extend the base Actor class to implement additional logic specialized for PF2e.
  * @category Actor
@@ -71,7 +85,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     get allowedItemTypes(): (ItemType | "physical")[];
     /** Returns true if this actor allows synthetic tokens to be created */
     get allowSynthetics(): boolean;
-    /** The compendium source ID of the actor **/
+    /** The UUID of the actor from which this one was copied (or is identical to if a compendium actor) **/
     get sourceId(): ActorUUID | null;
     /** The recorded schema version of this actor, updated after each data migration */
     get schemaVersion(): number | null;
@@ -139,6 +153,8 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
         actor: ActorPF2e;
         token: TokenDocumentPF2e;
     }): Promise<void>;
+    /** Recharges all abilities after some time has elapsed. */
+    recharge(options: RechargeOptions): Promise<ActorRechargeData<this>>;
     /** Don't allow the user to create in-development actor types. */
     static createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: {
         parent?: TDocument["parent"];
@@ -157,6 +173,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     /**
      * Never prepare data except as part of `DataModel` initialization. If embedded, don't prepare data if the parent is
      * not yet initialized. See https://github.com/foundryvtt/foundryvtt/issues/7987
+     * @todo remove in V13
      */
     prepareData(): void;
     /** Prepare baseline ephemeral data applicable to all actor types */
@@ -300,6 +317,11 @@ interface ActorUpdateOperation<TParent extends TokenDocumentPF2e | null> extends
 }
 interface EmbeddedItemUpdateOperation<TParent extends ActorPF2e> extends DatabaseUpdateOperation<TParent> {
     checkHP?: boolean;
+}
+interface RechargeOptions {
+    /** How much time elapsed as a delta operation */
+    duration: "turn" | "round" | "day";
+    commit?: boolean;
 }
 /** A `Proxy` to to get Foundry to construct `ActorPF2e` subclasses */
 declare const ActorProxyPF2e: typeof ActorPF2e;

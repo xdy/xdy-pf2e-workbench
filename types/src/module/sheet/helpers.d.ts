@@ -7,11 +7,7 @@ declare function createSheetOptions(options: Record<string, string | {
 declare function createSheetTags(options: Record<string, string | {
     label: string;
 }>, selections: SheetSelections): SheetOptions;
-declare function createTagifyTraits(traits: Iterable<string>, { sourceTraits, record }: TagifyTraitOptions): {
-    id: string;
-    value: string;
-    readonly: boolean;
-}[];
+declare function createTagifyTraits(traits: Iterable<string>, { sourceTraits, record }: TagifyTraitOptions): TagifyEntry[];
 /**
  * Get a CSS class for an adjusted value
  * @param value A value from prepared/derived data
@@ -45,12 +41,18 @@ type SheetSelections = {
 });
 interface TagifyTraitOptions {
     sourceTraits?: Iterable<string>;
-    record: Record<string, string>;
+    record?: Record<string, string>;
 }
-interface TraitTagifyEntry {
+interface TagifyEntry {
     id: string;
     value: string;
+    /** If true, the tag will exist in tagify but unremovable. */
     readonly: boolean;
+    /**
+     * If true, it will be hidden from tagify itself but exist in submit data.
+     * Tagify treats any value as true, even false or null.
+     */
+    hidden?: true;
 }
 export { createSheetOptions, createSheetTags, createTagifyTraits, getAdjustedValue, getAdjustment, maintainFocusInRender, };
-export type { AdjustedValue, SheetOption, SheetOptions, TraitTagifyEntry };
+export type { AdjustedValue, SheetOption, SheetOptions, TagifyEntry };

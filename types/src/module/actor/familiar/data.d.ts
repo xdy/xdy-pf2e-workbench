@@ -1,6 +1,14 @@
-import { BaseCreatureSource, CreatureAttributes, CreatureDetails, CreatureDetailsSource, CreatureSystemData, CreatureSystemSource } from "@actor/creature/data.ts";
+import {
+    BaseCreatureSource,
+    CreatureAttributes,
+    CreatureDetails,
+    CreatureDetailsSource,
+    CreatureSystemData,
+    CreatureSystemSource,
+} from "@actor/creature/data.ts";
 import { AttributeString } from "@actor/types.ts";
 import { StatisticTraceData } from "@system/statistic/index.ts";
+
 type FamiliarSource = BaseCreatureSource<"familiar", FamiliarSystemSource>;
 interface FamiliarSystemSource extends CreatureSystemSource {
     details: FamiliarDetailsSource;
@@ -45,7 +53,7 @@ interface FamiliarSystemData extends Omit<FamiliarSystemSource, SourceOmission>,
     actions?: never;
     initiative?: never;
 }
-type SourceOmission = "attributes" | "customModifiers" | "details" | "perception" | "toggles" | "resources" | "saves" | "skills" | "traits";
+type SourceOmission = "attributes" | "customModifiers" | "details" | "perception" | "resources" | "saves" | "skills" | "traits";
 interface FamiliarDetails extends CreatureDetails {
     creature: {
         value: string;

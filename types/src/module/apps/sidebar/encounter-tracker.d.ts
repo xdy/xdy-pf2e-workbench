@@ -4,6 +4,7 @@
 import type { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import Sortable from "sortablejs";
+
 export declare class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> extends CombatTracker<TEncounter> {
     #private;
     sortable: Sortable;
@@ -12,7 +13,7 @@ export declare class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | nul
     /** Make the combatants sortable */
     activateListeners($html: JQuery): void;
     /** Refresh the list of users targeting a combatant's token as well as the active state of the target toggle */
-    refreshTargetDisplay(combatantOrToken: CombatantPF2e | TokenDocumentPF2e): void;
+    refreshTargetDisplay(combatantOrToken: CombatantPF2e | TokenDocumentPF2e, trackers?: HTMLElement[]): void;
     /** Allow CTRL-clicking to make the rolls blind */
     protected _onCombatControl(event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>): Promise<void>;
     /** Allow CTRL-clicking to make the roll blind */

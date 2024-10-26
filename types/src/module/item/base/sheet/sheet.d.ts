@@ -4,8 +4,9 @@
 import type { ItemPF2e } from "@item";
 import { Rarity } from "@module/data.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
-import { SheetOptions, TraitTagifyEntry } from "@module/sheet/helpers.ts";
+import { SheetOptions, TagifyEntry } from "@module/sheet/helpers.ts";
 import type * as TinyMCE from "tinymce";
+
 declare class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOptions> {
     #private;
     constructor(item: TItem, options?: Partial<ItemSheetOptions>);
@@ -42,6 +43,9 @@ interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData<TItem>
     detailsTemplate: string;
     item: TItem;
     data: TItem["system"];
+    /** The leading part of IDs used for label-input/select matching */
+    fieldRootId: string;
+    /** Legacy value of the above */
     fieldIdPrefix: string;
     enrichedContent: Record<string, string>;
     isPhysical: boolean;
@@ -53,7 +57,8 @@ interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData<TItem>
     rarity: Rarity | null;
     rarities: typeof CONFIG.PF2E.rarityTraits;
     traits: SheetOptions | null;
-    traitTagifyData: TraitTagifyEntry[] | null;
+    traitTagifyData: TagifyEntry[] | null;
+    otherTagsTagifyData: TagifyEntry[] | null;
     rules: {
         selection: {
             selected: string | null;
