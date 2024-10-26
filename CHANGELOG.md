@@ -1,3 +1,15 @@
+# [6.10.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.9.2...v6.10.0) (2024-10-26)
+
+
+### Bug Fixes
+
+* Keeping up with the Macro Faeries. ([01b159b](https://github.com/xdy/xdy-pf2e-workbench/commit/01b159bda5ba4d2e44a183e2cf85a71c19a9475c))
+
+
+### Features
+
+* Add Drop Prone to BAM ([350a620](https://github.com/xdy/xdy-pf2e-workbench/commit/350a620785d540fc33ec0b2aeb3a4685c9fea4f1))
+
 ## [6.9.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.9.1...v6.9.2) (2024-10-20)
 
 
