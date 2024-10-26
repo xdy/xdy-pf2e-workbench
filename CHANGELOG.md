@@ -1,3 +1,10 @@
+# [6.11.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.10.0...v6.11.0) (2024-10-26)
+
+
+### Features
+
+* Set foundry verified version to 12.331 and maximum to 13, minimum and verified pf2e version to 6.5.0. Update types. ([2133b84](https://github.com/xdy/xdy-pf2e-workbench/commit/2133b8477edbe4d144475c6874882fae306f3332))
+
 # [6.10.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.9.2...v6.10.0) (2024-10-26)
 
 
