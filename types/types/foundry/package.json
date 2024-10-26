@@ -9,11 +9,11 @@
         "pathfinder"
     ],
     "devDependencies": {
-        "@types/jquery": "^3.5.31",
+        "@types/jquery": "^3.5.32",
         "@types/node": "^18.11.12",
         "pixi.js": "6.5.2",
-        "socket.io": "^4.8.0",
-        "socket.io-client": "^4.8.0",
+        "socket.io": "^4.8.1",
+        "socket.io-client": "^4.8.1",
         "tinymce": "^6.1.2",
         "typescript": "^5.6.3"
     },
