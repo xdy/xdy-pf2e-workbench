@@ -90,7 +90,7 @@
   "dependencies": {
     "@codemirror/autocomplete": "^6.18.1",
     "@codemirror/lang-json": "^6.0.1",
-    "@yaireo/tagify": "^4.31.5",
+    "@yaireo/tagify": "^4.31.6",
     "codemirror": "^6.0.1",
     "luxon": "^3.5.0",
     "minisearch": "^7.1.0",
