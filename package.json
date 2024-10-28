@@ -97,7 +97,7 @@
     "nouislider": "^15.8.1",
     "remeda": "^2.16.0",
     "sortablejs": "^1.15.3",
-    "uuid": "^10.0.0"
+    "uuid": "^11.0.1"
   },
   "homepage": "https://github.com/xdy/xdy-pf2e-workbench",
   "repository": {
