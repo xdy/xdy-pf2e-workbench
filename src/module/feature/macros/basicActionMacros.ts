@@ -90,21 +90,31 @@ function createButtonData(
 }
 
 type MacroAction = {
+    // These are supplied for each supported action
+    actionType: "basic" | "skill_untrained" | "skill_trained" | "other";
+    // Skill name or blank for non-skill actions
     skill: StatisticSlug | "";
     // The altSkillAndFeat stuff should really be more flexible. Maybe look at what SkillActions did for prereqs?
     altSkillAndFeat?: { skill: StatisticSlug; feat: string }[];
+    // Localized name to appear in menu
     name: string;
+    // Path to icon
     icon: string;
+    // Object to use when action is selected
     action: Function | Action | ActionVariant | undefined;
+    // Optional parameters for an Action.use() call for Action or ActionVariant type actions
+    options?: Partial<ActionUseOptions>;
+    // Module needed for action to be present (external macros)
     module?: string;
+    // Feat needed to for action to be present
+    feat?: string;
+
+    // These are all filled in based on the action and actor data
     best?: number;
     whoIsBest?: string;
     showMAP?: boolean;
     showExploration?: boolean;
     showDowntime?: boolean;
-    // Optional parameters for an Action.use() call
-    options?: Partial<ActionUseOptions>;
-    actionType?: "basic" | "skill_untrained" | "skill_trained" | "other";
 };
 
 /**
@@ -116,15 +126,16 @@ type MacroAction = {
  */
 function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): MacroAction[] {
     const showUnusable = game.settings.get(MODULENAME, "bamShowUnusable");
+    const hasFeat = (slug: string) => selectedActor.itemTypes.feat.some((feat) => feat.slug === slug);
 
     const actionsToUse = bamActions
         .filter((x) => {
             const hasSkill = selectedActor.skills?.[x.skill]?.rank ?? 0 > 0;
             const hasAltSkillAndFeat = x.altSkillAndFeat?.some(
-                (y) =>
-                    selectedActor.skills?.[y.skill].rank &&
-                    selectedActor.itemTypes.feat.some((feat) => feat.slug === y.feat),
+                (y) => selectedActor.skills?.[y.skill].rank && hasFeat(y.feat),
             );
+            if (x.module && !game.modules.get(x.module)?.active) return false;
+            if (x.feat && !hasFeat(x.feat)) return false;
 
             return (
                 showUnusable ||
@@ -135,7 +146,6 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
                 hasAltSkillAndFeat
             );
         })
-        .filter((m) => (m.module ? game.modules.get(m.module)?.active : true))
         .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
     actionsToUse.forEach((x) => {
@@ -451,6 +461,18 @@ export async function basicActionMacros() {
             skill: "diplomacy",
             action: game.pf2e.actions.get("make-an-impression"),
             icon: "icons/environment/people/commoner.webp",
+        },
+        {
+            actionType: "skill_trained",
+            name:
+                game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.MakeAnImpression`) +
+                " - " +
+                game.i18n.localize("PF2E.Skill.Performance"),
+            skill: "performance",
+            action: game.pf2e.actions.get("make-an-impression"),
+            options: { statistic: "performance" },
+            icon: "icons/environment/people/commoner.webp",
+            feat: "impressive-performance",
         },
         {
             actionType: "skill_trained",
