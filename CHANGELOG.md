@@ -1,3 +1,10 @@
+## [6.11.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.11.0...v6.11.1) (2024-10-31)
+
+
+### Bug Fixes
+
+* Don't autoroll damage due to a damage-taken message... ([2b9c3cb](https://github.com/xdy/xdy-pf2e-workbench/commit/2b9c3cb29103f1b3de8ca7ac0a8893865a713e0f))
+
 # [6.11.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.10.0...v6.11.0) (2024-10-26)
 
 
