@@ -53,7 +53,7 @@
     "@types/yaireo__tagify": "^4.27.0",
     "@typescript-eslint/eslint-plugin": "^8.12.2",
     "@typescript-eslint/parser": "^8.12.2",
-    "classic-level": "^1.4.1",
+    "classic-level": "^2.0.0",
     "es-jest": "^2.1.0",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
