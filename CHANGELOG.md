@@ -1,3 +1,10 @@
+# [6.12.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.11.1...v6.12.0) (2024-10-31)
+
+
+### Features
+
+* Add Make an Impression with Performance to BAM ([9e69692](https://github.com/xdy/xdy-pf2e-workbench/commit/9e69692561a7dc50c3b9fa51994e7279b2105bf2))
+
 ## [6.11.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.11.0...v6.11.1) (2024-10-31)
 
 
