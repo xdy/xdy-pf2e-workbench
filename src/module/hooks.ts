@@ -95,7 +95,11 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
         reminderTargeting(message, reminderTargetingSetting);
     }
 
-    if (!isActuallyDamageRoll(message)) {
+    function isDamageTaken(message: ChatMessagePF2e) {
+        return message.flags?.pf2e?.context?.type === "damage-taken";
+    }
+
+    if (!isActuallyDamageRoll(message) && !isDamageTaken(message)) {
         if (
             game.settings.get(MODULENAME, "autoRollDamageAllow") &&
             (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
