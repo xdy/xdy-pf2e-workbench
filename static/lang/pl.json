@@ -3,7 +3,7 @@
     "npcRoller": {
       "nav-labels": {
         "save": "Rzuty obronne",
-        "spell": "Czar",
+        "spell": "Zaklęcie",
         "dc": "ST",
         "abilityScore": "Wartość Atrybutów",
         "skill": "Umiejętności",
@@ -11,7 +11,7 @@
         "damage": "Obrażenia",
         "hp": "Punkty Wytrzymałości",
         "perception": "Percepcja",
-        "strike": "Uderzenia",
+        "strike": "Ataki",
         "areaDamage": "Obrażenia obszarowe"
       },
       "title": "Tworzenie NPC",
@@ -24,11 +24,11 @@
         "third": "(-10)",
         "actions": {
           "AidToggle": "Wsparcie (aktywuj)",
-          "AvoidNotice": "Unikanie wykrycia",
+          "AvoidNotice": "Unikanie Wykrycia",
           "Balance": "Balansowanie",
           "Climb": "Wspinanie",
           "Coerce": "Przymuszenie",
-          "CommandAnAnimal": "Rozkazywanie zwierzęciu",
+          "CommandAnAnimal": "Rozkazywanie Zwierzęciu",
           "Craft": "Wytwarzanie",
           "CreateADiversionGesture": "Dywersja - Gest",
           "CreateADiversionTrick": "Dywersja - Podstęp",
@@ -39,7 +39,7 @@
           "DisableDevice": "Unieszkodliwienie urządzenia",
           "Disarm": "Rozbrojenie",
           "Feint": "Finta",
-          "ForceOpen": "Otwarcie siłą",
+          "ForceOpen": "Siłowe Otwarcie",
           "GatherInformation": "Zbieranie informacji",
           "Grapple": "Chwytanie",
           "Hide": "Ukrywanie",
@@ -52,7 +52,7 @@
           "Perform": "Występowanie",
           "PickALock": "Otwieranie zamków",
           "RaiseAShieldToggle": "Podniesienie tarczy (aktywuj)",
-          "RecallKnowledge": "Przywołanie wiedzy",
+          "RecallKnowledge": "Przywołanie Wiedzy",
           "Repair": "Naprawa",
           "Request": "Prośba",
           "Seek": "Szukanie",
@@ -85,13 +85,13 @@
           "Reposition": "Przemieszczenie",
           "AidPF2eMacros": "Wsparcie (Makra PF2e)"
         },
-        "noActorSelected": "Nie wybrano żadnego aktora",
+        "noActorSelected": "Nie wybrano postaci, npc ani chowańca",
         "cancel": "Anuluj",
         "YouAreTheBestInYourParty": "Najwyższy wynik w drużynie",
         "settings": {
           "showBestBonus": {
-            "name": "BAM: Pokazuj czy to najlepszy wynik w drużynie w Basic Action Macros",
-            "hint": "Wyświetlanie informacji o tym, czy wybrany aktor ma najlepszy wynik w oknie dialogowym Makra akcji podstawowych"
+            "name": "BAM: Pokazuj czy to najlepszy wynik w drużynie w Makra Akcji Podstawowych",
+            "hint": "Wyświetlanie informacji o tym, czy wybrany aktor ma najlepszy wynik w oknie dialogowym Makra Akcji Podstawowych"
           }
         },
         "compendiumNotFound": "Kompendium {compendiumName} nie znalezione",
@@ -103,7 +103,7 @@
         "gmMustImport": "MG musi kliknąć prawym przyciskiem myszy na kompendium xdy-pf2e-workbench-macros i wybrać opcję \"Importuj całą zawartość\" i upewnić się, że podczas importowania zaznaczona jest opcja \"Zachowaj identyfikatory dokumentów\".",
         "bamShowUnusable": {
           "name": "BAM: Pokaż akcje, których nie można użyć.",
-          "hint": "Czy pokazywać akcje, których nie można użyć, ponieważ postać nie jest wyszkolona."
+          "hint": "Czy pokazać akcje, których nie można użyć, ponieważ postać nie jest w nich wytrenowana."
         },
         "exploration": "Eksploracja",
         "downtime": "Przestój",
@@ -115,14 +115,14 @@
         }
       },
       "refocus": {
-        "notPsychic": "zużywa przynajmniej {regain} punktów skupienia",
-        "regains": "Odzyskuje {focus} punktów skupienia.",
-        "regainOne": "Odzyskaj 1 punkt skupienia.",
-        "isPsychic": "zużywa punkty skupienia wyłącznie by wzmocnić sztuczki psi lub zasilić psioniczne zdolności",
+        "notPsychic": "zużywa przynajmniej {regain} Punktów Skupienia",
+        "regains": "Odzyskuje {focus} Punktów Skupienia.",
+        "regainOne": "Odzyskaj 1 Punkt Skupienia.",
+        "isPsychic": "zużywa Punkty Skupienia wyłącznie by amplifikować sztuczki psi lub zasilić psioniczne zdolności",
         "selectOneActor": "Musisz wybrać jednego aktora.",
-        "disabled": "Wyłączona z powodu braku możliwości odzyskania więcej niż 1 punktu skupienia.",
+        "disabled": "Wyłączona z powodu braku możliwości odzyskania więcej niż 1 Punktu Skupienia.",
         "one": "jeden",
-        "enabled": "Odzyskaj {regain} punktów skupienia. <br/>Kliknij<b>TYLKO</b> jeśli masz {details} od ostatniego Ponownego Skupienia."
+        "enabled": "Odzyskaj {regain} Punktów Skupienia. <br/>Kliknij<b>TYLKO</b> jeśli masz {details} od ostatniego Ponownego Skupienia."
       },
       "buildNpcSpellbookJournal": {
         "title": "Tworzenie dziennika zaklęć NPC",
@@ -139,11 +139,11 @@
         }
       }
     },
-    "spellCardNotFound": "Nie odnaleziono karty czaru. Użyto {spell} na minimalnym poziomie tego czaru.",
+    "spellCardNotFound": "Nie odnaleziono karty zaklęcia. Użyto {spell} na minimalnym poziomie tego zaklęcia.",
     "effects": {
       "orcFerocityUsed": "Użyto Orkowej Zaciekłości",
-      "deliberateDeathUsed": "Użyto Umyślna śmierć",
-      "bounceBackUsed": "Użyto Odbij Się",
+      "deliberateDeathUsed": "Użyto Przemyślana Śmierć",
+      "bounceBackUsed": "Użyto Dojście do Siebie",
       "numbToDeathUsed": "Użyto Odrętwiały na Śmierć"
     },
     "SETTINGS": {
@@ -165,9 +165,9 @@
       "nonLethalIsNotLethal": {
         "unconscious": "Nieśmiercionośne obrażenia nie zabijają",
         "no": "Obrażenia nieśmiercionośne to po prostu obrażenia",
-        "name": "... w zależności od tego, czy ostatnie obrażenia nie były śmiertelne.",
-        "unconsciousForCharacters": "Zabójstwa atakami nieśmiercionośnymi nie zabijają postaci + towarzyszy",
-        "hint": "Jeśli ostatnie otrzymane obrażenia nie są śmiertelne, gracz nie umiera. Zamiast tego jest nieprzytomny z 0 PW. Wymaga włączenia powyższego ustawienia."
+        "name": "... w zależności od tego, czy ostatnie obrażenia były nieśmiercionośne.",
+        "unconsciousForCharacters": "Zabójstwa atakami nieśmiercionośnymi nie zabijają postaci + chowańców",
+        "hint": "Jeśli ostatnie otrzymane obrażenia są nieśmiercionośne, gracz nie umiera. Zamiast tego gracz traci przytomność i ma 0 PW. Wymaga włączenia powyższego ustawienia."
       },
       "autoRollDamageAllow": {
         "players": "Gracze",
@@ -184,14 +184,14 @@
       },
       "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
         "no": "Nie",
-        "name": "... i dodać jeszcze jeden poziom umierania, jeśli otrzyma obrażenia krytyczne przez wroga.",
-        "hint": "Jeśli zostanie trafiony krytycznie celnym atakiem zadającym obrażenia przez wrogiego bohatera, dodaje jeden poziom Umierania więcej. Używa ustawień \"ranny\" z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
+        "name": "... i dodać jeszcze jeden do Umierania w przypadku krytycznych obrażeń zadanych przez wroga.",
+        "hint": "Jeśli zostanie trafiony krytycznie celnym atakiem zadającym obrażenia przez wrogą postać, dodaje jeden poziom Umierania więcej. Używa ustawień „Ranny” z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
         "add": "Dodaj umieranie",
-        "addForCharacters": "Dodaj umieranie dla postaci + towarzyszy"
+        "addForCharacters": "Dodaj umieranie dla postaci + chowańców"
       },
       "playerSpellsRarityColour": {
-        "name": "Pokaż nazwy zaklęć w kolorze rzadkości na kartach aktorów.",
-        "hint": "Ustawienie klienta, aby nazwy zaklęć były wyświetlane w kolorze rzadkości na arkuszach aktorów."
+        "name": "Pokaż nazwy zaklęć w kolorze rzadkości na kartach postaci.",
+        "hint": "Ustawienie klienta, aby nazwy zaklęć były wyświetlane w kolorze rzadkości na kartach postaci."
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "Pokaż cechy zaklęcia w wiadomości publicznej.",
@@ -214,24 +214,24 @@
         "savePart": "<br>Rzut obronny dla nieznanego zaklęcia to: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}{basic}}]",
         "hint": "W przypadku rzucania zaklęć prywatnie, ustawienie to wysyła również publiczną wiadomość o rzuceniu zaklęcia, chyba że podczas rzucania zaklęcia przytrzymasz klawisze SHIFT i CTRL.",
         "name": "Publikuje wiadomość o rzuceniu zaklęcia.",
-        "secondPartNoRk": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
+        "secondPartNoRk": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]{Rozpoznanie Zaklęcia} lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]{Szybkie Rozpoznanie} aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
         "firstPart": "Rzucono {type} tradycji <strong>{traditionString}</strong> z aktora {tokenName} <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
-        "secondPartRK": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą testu @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
+        "secondPartRK": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]{Rozpoznanie Zaklęcia} lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]{Szybkie Rozpoznanie} aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą testu @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{Przywołanie Wiedzy} (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]{Identyfikacja Magii})",
         "knownBy": "<div><p><b>Znany przez: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">",
         "basic": "Podstawowy",
         "noButtonSavePart": "<br><b>{basic} {dataSave} rzut obronny</b>"
       },
       "applyPersistentDamageRecoveryRoll": {
-        "hint": "... a następnie automatycznie przywróci ustawienia fabryczne. Wymaga włączenia powyższego ustawienia.",
-        "name": "... a następnie automatycznie przywrócić ustawienia fabryczne."
+        "hint": "... a następnie automatycznie rzuci test trwałych obrażeń. Wymaga włączenia powyższego ustawienia.",
+        "name": "... a następnie automatycznie rzuci test trwałych obrażeń."
       },
       "handleDyingRecoveryRollAllow": {
         "all": "Wszyscy",
-        "name": "Kto może ustawić opcję automatycznej obsługi rzutów odzyskiwania po kliknięciu przycisku odzyskiwania.",
+        "name": "Kto może ustawić opcję automatycznej obsługi rzutów stabilizacji umierających postaci po kliknięciu przez właściciela przycisku rzutu na karcie postaci.",
         "none": "Nikt",
         "players": "Gracze",
         "gm": "MG",
-        "hint": "Wybierz, kto może ustawić opcję automatycznej obsługi rzutów regeneracji umierających postaci po kliknięciu przez właściciela przycisku odzyskiwania na karcie postaci. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta."
+        "hint": "Wybierz, kto może ustawić opcję automatycznej obsługi rzutów stabilizacji umierających postaci po kliknięciu przez właściciela przycisku rzutu na karcie postaci. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta."
       },
       "autoRollDamageForStrike": {
         "name": "Automatyczne rzucanie obrażeń za trafione ataki.",
@@ -251,28 +251,28 @@
       },
       "autoGainDyingAtZeroHP": {
         "no": "Nie",
-        "orcFerocityMessage": "{name} właśnie użył @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] i może teraz użyć darmowej akcji:@UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]",
+        "orcFerocityMessage": "{name} właśnie użył @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] i może teraz użyć darmowej akcji: @UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]",
         "addOne": "Dodaj jeden",
         "addOneForCharacters": "Dodaj jeden, dla postaci + chowańców",
-        "addWoundedLevelForCharacters": "Dodaj +1 poziomu zranienia dla postaci + towarzyszy",
-        "deliberateDeathMessage": "{name} może <b>przed uzyskaniem Umierania</b> w wyniku ataku lub zdolności innej istoty, jeśli ta istota znajduje się w zasięgu walki wręcz, wykonać Atak w walce wręcz przeciwko wywołującej go istocie.<br>Usuń efekt \"Użyto celowej śmierci\", jeśli faktycznie nie można go użyć.",
+        "addWoundedLevelForCharacters": "Dodaj +1 poziomu Ranny dla postaci + chowańców",
+        "deliberateDeathMessage": "{name} może <b>przed uzyskaniem Umierania</b> w wyniku ataku lub zdolności innej istoty, jeśli ta istota znajduje się w zasięgu walki wręcz, wykonać Atak w walce wręcz przeciwko wywołującej go istocie.<br>Usuń efekt \"Użyto Przemyślanej Śmierci\", jeśli faktycznie nie można go użyć.",
         "hint": "Ustaw automatycznie zwiększenie poziomu Umierania przy 0 PW.",
         "name": "Automatycznie zwiększenie poziomu Umierania przy 0 PW.",
-        "addWoundedLevel": "Dodaj +1 poziomu zranienia, dla wszystkich"
+        "addWoundedLevel": "Dodaj +1 poziomu Ranny, dla wszystkich"
       },
       "autoGainDyingIfTakingDamageWhenAlreadyDying": {
         "no": "Nie",
-        "hint": "Jeśli otrzymujesz obrażenia, gdy już umierasz, dodaj jeszcze jedno umieranie (lub ewentualnie dwa, jeśli włączone jest dodatkowe umieranie przy trafieniu krytycznym). Używa ustawień \"ranny\" z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
+        "hint": "W przypadku otrzymania obrażeń podczas Umierania, dodaje jeszcze jedno Umieranie (lub ewentualnie dwa, jeśli włączono dodatkowe Umieranie przy trafieniu krytycznym). Używa ustawień „Ranny” z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
         "add": "Dodaj umieranie",
-        "name": "... i dodać dodatkowe poziomy umierania, jeśli otrzymujesz obrażenia podczas umierania.",
-        "addForCharacters": "Dodaj umieranie dla postaci + towarzyszy"
+        "name": "... i dodać dodatkowy poziom lub poziomy Umierania, jeśli otrzymujesz obrażenia podczas Umierania.",
+        "addForCharacters": "Dodaj umieranie dla postaci + chowańców"
       },
       "autoRemoveDyingAtGreaterThanZeroHP": {
         "name": "Automatycznie usuwa Umieranie po uzdrowieniu powyżej 0 PW.",
-        "hint": "Ustawienie automatycznie usuwające umieranie po wyleczeniu powyżej 0 PW.",
+        "hint": "Ustawienie automatycznie usuwające Umieranie po wyleczeniu powyżej 0 PW.",
         "no": "Nie",
         "removeDying": "Usuń stan Umierania dla wszystkich",
-        "removeDyingForCharacters": "Usunięcie stanu Umierania dla postaci + towarzyszy"
+        "removeDyingForCharacters": "Usunięcie stanu Umierania dla postaci + chowańców"
       },
       "dropHeldItemsOnBecomingUnconscious": {
         "hint": "Postacie automatycznie upuszczają trzymane przedmioty, gdy tracą przytomność (z wyjątkiem tarcz, które są noszone, a nie trzymane).",
@@ -307,7 +307,7 @@
         "hint": "Włącz, aby zastosować powyższe ustawienia niezależnie od tego, czy cel pasuje do wybranego tokena. (Najbardziej przydatne, jeśli nie używasz targetowania/automatyzacji)"
       },
       "automationClientSettings": {
-        "hint": "Włącz i skonfiguruj lokalne ustawienia automatyzacji, które mają wpływ tylko na Twojego klienta.",
+        "hint": "Włącz i skonfiguruj lokalne ustawienia automatyzacji, tj. ustawienia, które mają wpływ tylko na Twojego klienta.",
         "label": "Zarządzaj ustawieniami automatyzacji klienta",
         "name": "Ustawienia automatyzacji klienta"
       },
@@ -317,8 +317,8 @@
         "name": "Ustawienia automatyzacji świata"
       },
       "autoReduceStunned": {
-        "name": "Automatyczna redukcja ogłuszenia przy starcie tury",
-        "hint": "Ustawienie klienta, aby automatycznie redukować ogłuszenie przy rozpoczęciu tury."
+        "name": "Automatyczna redukcja Ogłuszenia przy starcie tury",
+        "hint": "Ustawienie klienta, aby automatycznie redukować Ogłuszenie przy rozpoczęciu tury."
       },
       "autoRollDamageForSpellAttack": {
         "hint": "Ustawienie klienta do automatycznego rzucania obrażeń dla trafionych ataków zaklęć. Należy pamiętać, że trafienia krytyczne zawsze zadają normalne obrażenia.",
@@ -337,12 +337,12 @@
         "name": "Wywołanie makra paska skrótów na stronie {page} pozycja {column}"
       },
       "playerFeatsRarityColour": {
-        "hint": "Ustawienie klienta, aby nazwy atutów były wyświetlane w kolorze rzadkości na arkuszach aktorów.",
-        "name": "Pokazuj nazwy atutów w kolorze rzadkości na kartach aktorów."
+        "hint": "Ustawienie klienta, aby nazwy atutów były wyświetlane w kolorze rzadkości na kartach postaci.",
+        "name": "Pokazuj nazwy atutów w kolorze rzadkości na kartach postaci."
       },
       "applyPersistentDamage": {
-        "hint": "Ustawienia świata, aby automatycznie stosować trwałe obrażenia.",
-        "name": "Automatycznie stosuj trwałe obrażenia."
+        "hint": "Ustawienie świata do automatycznego nakładania trwałych obrażeń.",
+        "name": "Automatyczne nakładanie trwałych obrażeń."
       },
       "autoCollapseItemChatCardContent": {
         "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
@@ -353,9 +353,9 @@
       },
       "handleDyingRecoveryRoll": {
         "hint": "Ustawienie klienta, aby automatycznie obsługiwać rzuty na stabilizację po kliknięciu przycisku rzutu na stabilizację.",
-        "handled": "Rzut odzyskiwania {roll} {outcome} wykonany automatycznie. {defeated}.",
+        "handled": "Rzut na stabilizację {roll} {outcome} wykonany automatycznie. {defeated}.",
         "defeated": "{name} został pokonany",
-        "name": "Automatycznie obsługuje rzut na umieranie po kliknięciu przycisku rzutu na umieranie."
+        "name": "Automatycznie obsługuje rzut na stabilizację po kliknięciu przycisku rzutu na stabilizację."
       },
       "playerFeatsPrerequisiteHint": {
         "hint": "Ustawienie klienta dodające gwiazdkę do nazwy atutów z ustawionym warunkiem wstępnym.",
@@ -403,7 +403,7 @@
       },
       "npcMystifierUseRaritiesReplacement": {
         "hint": "W tym polu tekstowym wprowadź słowo, którym chcesz zastąpić rzadkości większe niż Common (np. \"Unusual\"). Jeśli pole jest puste, nie zmienia wyświetlanej rzadkości.",
-        "name": "Zastąp rzadkości rzadsze niż pospolite"
+        "name": "Zastąp rzadkości rzadsze niż powszechne"
       },
       "reminderBreathWeapon": {
         "hint": "Zaznacz, aby ustawić przypomnienie o użyciu umiejętności doładowania (np. broni oddechowej).",
@@ -423,7 +423,7 @@
         "dead": "nie żyje",
         "error": "{title} anulowany przez {actorName} z powodu {reason}.",
         "info": "Czy jesteś pewien tego {title}? {actorName} {reason}, a więc raczej nie będzie w stanie zaatakować...",
-        "restrained": "jest ograniczony",
+        "restrained": "jest obezwładniony",
         "cancelAttack": "Anuluj atak, jeśli nie możesz zaatakować",
         "reminder": "Przypomnienie",
         "no": "Nie przypominaj"
@@ -452,7 +452,7 @@
       },
       "qolWorldSettings": {
         "name": "Ustawienia QoL Świata",
-        "hint": "Włączanie i konfigurowanie ustawień Quality of Life dla GMów",
+        "hint": "Włączanie i konfigurowanie ustawień Quality of Life dla MG",
         "label": "Zarządzaj ustawieniami QoL dla Świata"
       },
       "npcMystifierPrefix": {
@@ -460,7 +460,7 @@
         "hint": "Dodaje tekst do prefiksu nowej nazwy (infix, jeśli powyżej wybrano losową właściwość słowa), domyślnie '' (przykład: 'Unknown'), jeśli pasuje do nazwy tabeli rzutu, losowy wynik tekstowy z tej tabeli zostanie użyty jako prefiks.  Zostanie on dodany *po* dowolnym postfiksie właściwości losowej (patrz również opcja prefiksu)"
       },
       "npcMystifyAllPhysicalMagicalItems": {
-        "onZeroHp": "Utajnianie przedmiotów na npc osiągającym 0 hp",
+        "onZeroHp": "Utajnianie przedmiotów na npc osiągającym 0 PW",
         "no": "Brak mistyfikacji przedmiotów",
         "name": "Utajnia alchemiczne i magiczne przedmioty na npc, jeśli ustawienie systemu PF2e \"NPC są łupem\" jest włączone.",
         "hint": "Automatycznie utajnia wszelkie nietrwałe przedmioty fizyczne, które są alchemiczne lub magiczne, zgodnie z tym, co wybrano w rozwijanym menu, jeśli włączone jest ustawienie systemu PF2e \"NPC są łupem\".",
@@ -480,26 +480,26 @@
         "all": "Wszyscy",
         "none": "Brak postaci",
         "addedFor": "Dodano 1 Punkt Bohaterstwa dla {name}",
-        "timerValue": "Wartość timera (zakres 0 - {maxMinutes})",
+        "timerValue": "Wartość licznika (zakres 0 - {maxMinutes})",
         "add": "Dodaj",
-        "addedToForAll": "{heroPoints} Punktów bohaterstwa dodane dla wszystkich",
+        "addedToForAll": "{heroPoints} Punktów Bohaterstwa dodane dla wszystkich",
         "addOne": "<b>Sekcja 2</b> - Dodaje jeden Punkt Bohaterstwa wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu)",
         "defaultTimeoutMinutes": 60,
-        "doWhat": "<b>Sekcja 1</b> - Wybierz, co zrobić z punktami bohatera <em>wszystkich postaci</em> o następującej wartości",
-        "hint": "Opcja obsługi punktów bohatera z opcjonalnym powiązaniem klawiszy, aby otworzyć okno dialogowe, które może zresetować lub dodać punkty bohatera dla wszystkich postaci, dodać jeden punkt bohatera do losowej (lub wybranej) postaci i, co najważniejsze, uruchomić licznik czasu, aby okno dialogowe pojawiło się ponownie po (domyślnie) 60 minutach.",
+        "doWhat": "<b>Sekcja 1</b> - Wybierz, co zrobić z Punktami Bohatera <em>wszystkich postaci</em> o następującej wartości",
+        "hint": "Opcja obsługi Punktów Bohatera z opcjonalnym powiązaniem klawiszy, aby otworzyć okno dialogowe, które może zresetować lub dodać Punkty Bohatera dla wszystkich postaci, dodać jeden Punkt Bohatera do losowej (lub wybranej) postaci i, co najważniejsze, uruchomić licznik czasu, aby okno dialogowe pojawiło się ponownie po (domyślnie) 60 minutach.",
         "instructions": "Należy pamiętać, że licznik czasu jest wstrzymany, gdy to okno dialogowe jest otwarte. Zamknij to okno dialogowe bez naciskania żadnego z tych przycisków, aby wyłączyć wstrzymanie licznika czasu, lub naciśnij odpowiedni przycisk, aby wykonać jego polecenie.",
         "minutesLeft": "minut pozostałych na bieżącym liczniku",
         "name": "Włącz obsługę Punktów Bohatera.",
-        "resetToForAll": "Punkty bohaterstwa zresetowane do {heroPoints} dla wszystkich",
+        "resetToForAll": "Punkty Bohaterstwa zresetowane do {heroPoints} dla wszystkich",
         "showAfter": "Pokaż okno dialogowe ponownie po tylu minutach",
         "startTimerLabel": "Zapisywanie zmian i uruchamianie/kontynuowanie odliczania czasu",
         "thisMany": "Tak wielu",
-        "timerStopped": "Licznik punktów bohaterstwa został zatrzymany.",
+        "timerStopped": "Licznik Punktów Bohaterstwa został zatrzymany.",
         "title": "Obsługa Punktów Bohatera",
         "willBeResetIn": "Obsługa Punktów Bohatera powraca za {remainingMinutes} minut ({time}).",
         "resetTo": "Reset do",
         "noRunningTimer": "Brak uruchomionego licznika",
-        "noTimerLabel": "Prześlij zmiany z <b>bez</b> timera. Zatrzyma <b></b> każdy istniejący licznik czasu."
+        "noTimerLabel": "Prześlij zmiany <b>bez</b> licznika. Zatrzyma <b></b> każdy istniejący licznik czasu."
       },
       "houseRulesSettings": {
         "label": "Zarządzaj ustawieniami Zasad Domowych",
@@ -542,14 +542,14 @@
       },
       "legacyVariantRuleAncestryParagon": {
         "title": "Atuty Ancestry Paragon",
-        "hint": "Wymaga włączenia ustawienia systemowego \"Campaign Feats\". Dodaje sekcję \"Atuty Kampanii\" dla Ancestry Paragon, ale *nie* automatycznie przenosi zdolności z poprzedniej sekcji lub Bonusowych Atutów.",
+        "hint": "Wymaga włączenia ustawienia systemowego \"Atuty Kampanii\". Dodaje sekcję \"Atuty Kampanii\" dla Ancestry Paragon, ale *nie* automatycznie przenosi atutów z poprzedniej sekcji lub Bonusowych Atutów.",
         "name": "Dodaje sloty na atuty Ancestry Paragon. Wymaga odświeżenia (f5) po zmianie."
       },
       "moveBeforeCurrentCombatantContextMenu": {
-        "name": "Przesunięcie wybranego tokena przed bieżącego tokena."
+        "name": "Przesunięcie wybranego walczącego przed bieżącego walczącego."
       },
       "notifications": {
-        "cantMystify": "Nie możesz utajnić tego tokena. Czy jest na aktywnej scenie i czy jesteś GMem?"
+        "cantMystify": "Nie możesz utajnić tego tokena. Czy jest na aktywnej scenie i czy jesteś MG?"
       },
       "npcMystifierBlacklist": {
         "hint": "Dodaj słowa, aby odfiltrować zawartość tej oddzielonej przecinkami listy bloków z utajnianej nazwy.",
@@ -572,7 +572,7 @@
         "name": "Użyj innych cech"
       },
       "heroPointHandlerKey": {
-        "hint": "Naciśnięcie klawisza otwiera okno dialogowe obsługi punktów bohatera, które umożliwia resetowanie i dodawanie punktów bohaterstwa z cogodzinnym przypomnieniem.",
+        "hint": "Naciśnięcie klawisza otwiera okno dialogowe obsługi Punktów Bohatera, które umożliwia resetowanie i dodawanie Punktów Bohaterstwa z cogodzinnym przypomnieniem.",
         "name": "Przycisk otwiera okno dialogowe obsługi Punktów Bohaterstwa."
       },
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
@@ -581,7 +581,7 @@
       },
       "decreaseFrightenedConditionEachTurn": {
         "name": "Automatycznie zmniejsza stan przerażenia co turę.",
-        "hint": "Ustawienie klienta automatycznie zmniejszające stan przerażenia co turę dla postaci, NPC i postaci rodzinnych."
+        "hint": "Ustawienie klienta automatycznie zmniejszające stan przerażenia co turę dla postaci, NPC i chowańców."
       },
       "giveUnconsciousIfDyingRemovedAt0HP": {
         "hint": "Ustawienie automatycznej utraty przytomności w przypadku usunięcia stanu Umierania przy 0 PW.",
@@ -604,13 +604,13 @@
         "error": "Zły plik JSON housepatchera został usunięty"
       },
       "legacyVariantRuleDualClass": {
-        "hint": "Wymaga włączenia ustawienia systemowego \"Campaign Feats\". Dodaje sekcję Campaign Feats dla Dual Class, ale *nie* automatycznie przenosi wyczynów z poprzedniej sekcji lub Bonus Feats, musisz także użyć makra Dual Class, aby utworzyć klasę dla postaci.",
-        "name": "Dodaje miejsca na atuty dwóch klas. Wymaga odświeżenia (f5) po zmianie.",
-        "title": "Atuty Dwóch Klas"
+        "hint": "Wymaga włączenia ustawienia systemowego \"Atuty Kampanii\". Dodaje sekcję Atuty Kampanii dla Dual Class, ale *nie* automatycznie przenosi atutów z poprzedniej sekcji lub Bonusowych Atutów, musisz także użyć makra Dual Class, aby utworzyć klasę dla postaci.",
+        "name": "Dodaje miejsca na atuty Dual Class. Wymaga odświeżenia (f5) po zmianie.",
+        "title": "Atuty Dual Class"
       },
       "moveBeforeCurrentCombatantKey": {
-        "hint": "Powiązanie klawiszy świata do przeniesienia wybranego wojownika przed bieżącego wojownika, zwykle dlatego, że bieżący wojownik zabił wybranego wojownika. Ze względu na zaokrąglanie, kilku walczących może wykazywać tę samą inicjatywę na liście.",
-        "name": "(Świat), aby przesunąć wybranego wojownika przed bieżącego wojownika."
+        "hint": "Powiązanie klawiszy świata do przeniesienia wybranego walczącego przed bieżącego walczącego, zwykle dlatego, że bieżący walczący zabił wybranego walczącego. Ze względu na zaokrąglanie, kilku walczących może wykazywać tę samą inicjatywę na liście.",
+        "name": "(Świat), aby przesunąć wybranego walczącego przed bieżącego walczącego."
       },
       "npcMystifierUseCreatureTraits": {
         "hint": "Zaznacz, aby użyć wszystkich \"cech stworzenia\" zdefiniowanych w systemie pf2e w utajnianej nazwie.",
@@ -667,16 +667,16 @@
       "autoKillIfMassiveDamage": {
         "name": "... ale automatycznie zabija po otrzymaniu Ogromnych Obrażeń. (Przestarzałe)",
         "yes": "Tak, dla wszystkich",
-        "yesForCharacters": "Tak, dla postaci + towarzyszy",
+        "yesForCharacters": "Tak, dla postaci + chowańców",
         "yesForNpcs": "Tak, dla npc",
         "no": "Nie",
-        "hint": "(Przestarzałe) Ustawienie automatycznego zabijania po otrzymaniu ogromnych obrażeń."
+        "hint": "(Przestarzałe) Ustawienie automatycznego zabijania po otrzymaniu Ogromnych Obrażeń."
       },
       "autoKillIfDamageHasDeathTrait": {
         "name": "... ale automatycznie zabija po otrzymaniu wystarczających obrażeń od efektu Śmierci. (Przestarzałe)",
         "hint": "(Przestarzałe) Ustawienie automatycznego zabijania po otrzymaniu wystarczających obrażeń od źródła z cechą Śmierć.",
         "no": "Nie",
-        "yesForCharacters": "Tak, dla postaci + towarzyszy",
+        "yesForCharacters": "Tak, dla postaci + chowańców",
         "yesForNpcs": "Tak, dla npc",
         "yes": "Tak, dla wszystkich"
       },
@@ -694,7 +694,7 @@
       },
       "castPrivateSpellAutoRevealIfKnown": {
         "hint": "Zaznacz, aby automatycznie ujawnić prywatnie rzucone zaklęcie, jeśli któryś z członków drużyny je zna.",
-        "name": "... ale automatycznie ujawnia zaklęcie, jeśli jest ono znane stronie."
+        "name": "... ale automatycznie ujawnia zaklęcie, jeśli jest ono znane drużynie."
       },
       "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
         "hint": "Zaznacz, aby w przypadku zaklęć ujawnianych automatycznie na karcie czatu wyświetlani byli członkowie drużyny znający dane zaklęcie",
