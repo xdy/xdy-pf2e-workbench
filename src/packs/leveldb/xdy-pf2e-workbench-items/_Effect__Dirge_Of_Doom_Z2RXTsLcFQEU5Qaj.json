@@ -1,16 +1,11 @@
 {
   "_id": "Z2RXTsLcFQEU5Qaj",
-  "name": "[Effect] Dirge Of Doom",
+  "name": "Effect: Dirge Of Doom",
   "type": "effect",
   "img": "systems/pf2e/icons/spells/dirge-of-doom.webp",
   "effects": [],
   "folder": "3k9ymrOLXRMPWQkb",
   "sort": 100000,
-  "flags": {
-    "core": {
-      "sourceId": "Item.7rD5LtJVU6ZVEzqB"
-    }
-  },
   "system": {
     "description": {
       "gm": "",
@@ -26,7 +21,11 @@
       {
         "key": "GrantItem",
         "uuid": "Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL",
-        "allowDuplicate": false
+        "allowDuplicate": true,
+        "inMemoryOnly": true,
+        "onDeleteActions": {
+          "grantee": "restrict"
+        }
       }
     ],
     "slug": null,
@@ -72,8 +71,7 @@
     "unidentified": false
   },
   "ownership": {
-    "default": 0,
-    "4PfYOttbS0OMIfVw": 3
+    "default": 0
   },
   "_stats": {
     "systemId": "pf2e",
@@ -81,8 +79,8 @@
     "coreVersion": "12.329",
     "createdTime": 1665671947295,
     "modifiedTime": 1721420361678,
-    "lastModifiedBy": "O7JRpbplwU9Cx8kQ",
-    "compendiumSource": "Item.7rD5LtJVU6ZVEzqB",
+    "lastModifiedBy": null,
+    "compendiumSource": "Compendium.xdy-pf2e-workbench.xdy-pf2e-workbench-items.Item.Z2RXTsLcFQEU5Qaj",
     "duplicateSource": null
   },
   "_key": "!items!Z2RXTsLcFQEU5Qaj"
