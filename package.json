@@ -73,7 +73,7 @@
     "prompts": "^2.4.2",
     "prosemirror-commands": "^1.6.2",
     "prosemirror-view": "^1.35.0",
-    "sass": "^1.80.5",
+    "sass": "^1.80.7",
     "semantic-release": "^24.2.0",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
