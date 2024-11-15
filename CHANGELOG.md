@@ -1,3 +1,10 @@
+## [6.12.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.12.3...v6.12.4) (2024-11-15)
+
+
+### Bug Fixes
+
+* Dirge of Doom effect didn't apply Frightened ([aed76b7](https://github.com/xdy/xdy-pf2e-workbench/commit/aed76b76c261173b203cdbb38f876cd8754cb5f0))
+
 ## [6.12.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.12.2...v6.12.3) (2024-11-09)
 
 
