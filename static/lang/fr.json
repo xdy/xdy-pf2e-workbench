@@ -563,6 +563,10 @@
         "nonAllies": "Non-alliés",
         "nonPartymembers": "Non membres du groupe",
         "npcs": "PNJ"
+      },
+      "playerCraftingRarityColour": {
+        "hint": "Paramétrage par le client de l'affichage des noms de formules dans la couleur de rareté sur les fiches d'acteurs.",
+        "name": "Montrer les noms des formules dans la couleur de leur rareté sur les fiches d'acteurs."
       }
     },
     "effects": {
@@ -650,7 +654,8 @@
           "Escape": "S'Échapper - le plus élevé (??)",
           "AidASE": "AID (ASE Macro)",
           "CreateADiversionDistractingWords": "Créer une diversion - Paroles de diversion",
-          "Reposition": "Repositionner"
+          "Reposition": "Repositionner",
+          "AidPF2eMacros": "Aider (Macros PF2e)"
         },
         "second": "(-5)",
         "third": "(-10)",
@@ -667,7 +672,11 @@
         },
         "exploration": "Exploration",
         "downtime": "Intermède",
-        "downtimeShort": "I"
+        "downtimeShort": "I",
+        "bamTabview": {
+          "hint": "Utiliser les onglets pour la boîte de dialogue de Basic Actions Macro.",
+          "name": "BAM : Utiliser les onglets"
+        }
       },
       "buildNpcSpellbookJournal": {
         "title": "Construire le grimoire de sorts du PNJ",
@@ -683,6 +692,15 @@
         "one": "un",
         "selectOneActor": "Vous devez sélectionner un acteur.",
         "enabled": "Regagner {regain} des points de focalisation.<br/>Cliquez <b>UNIQUEMENT</b> si vous avez {details} depuis la dernière Refocalisation."
+      },
+      "recallKnowledge": {
+        "breakdown": {
+          "name": "Se Souvenir : Montrer la décomposition des jets",
+          "hint": "Montre la décomposition des modificateurs appliqués à chaque compétence sur une ligne située sous le résultat.",
+          "all": "Tous les modificateurs",
+          "extra": "Modificateurs supplémentaires sans ceux de maîtrise et de compétence",
+          "none": "Ne montrer aucun modificateur"
+        }
       }
     },
     "effectItem": "Effet objet"
