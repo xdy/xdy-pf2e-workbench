@@ -235,7 +235,7 @@
       },
       "autoRollDamageForStrike": {
         "name": "Automatyczne rzucanie obrażeń za trafione ataki.",
-        "strike": "Ataki",
+        "strike": "Atak",
         "hint": "Ustawienie klienta do automatycznego naliczania obrażeń dla ataków. Należy pamiętać, że trafienia krytyczne zadają obrażenia krytyczne."
       },
       "autoRollDamageNotifyOnSpellCardNotFound": {
@@ -705,7 +705,7 @@
         "name": "... i pokazać publiczną wiadomość również dla MG."
       },
       "playerCraftingRarityColour": {
-        "hint": "Ustawienie klienta, aby nazwy zaklęć były wyświetlane w kolorze rzadkości na kartach postaci.",
+        "hint": "Ustawienie klienta umożliwiające wyświetlanie nazw formuł w kolorze rzadkości na kartach aktorów.",
         "name": "Wyświetlaj nazwy formuł w kolorze rzadkości na kartach postaci."
       },
       "autoCollapseItemChatCardMoveEffectLinks": {
