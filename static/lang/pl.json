@@ -115,8 +115,8 @@
         }
       },
       "refocus": {
-        "notPsychic": "zużywa przynajmniej {regain} Punktów Skupienia",
-        "regains": "Odzyskuje {focus} Punktów Skupienia.",
+        "notPsychic": "zużywa przynajmniej {regain} Punkty Skupienia",
+        "regains": "Odzyskuje {focus} Punkty Skupienia.",
         "regainOne": "Odzyskaj 1 Punkt Skupienia.",
         "isPsychic": "zużywa Punkty Skupienia wyłącznie by amplifikować sztuczki psi lub zasilić psioniczne zdolności",
         "selectOneActor": "Musisz wybrać jednego aktora.",
