@@ -3,21 +3,23 @@
     "npcRoller": {
       "nav-labels": {
         "dc": "CD",
-        "spell": "Hechizo",
+        "spell": "Conjuro",
         "ac": "Clase de Armadura",
         "damage": "Daño",
         "strike": "Golpes",
-        "save": "Salvación",
+        "save": "Salvaciones",
         "perception": "Percepción",
         "skill": "Habilidades",
         "hp": "Puntos de Golpe",
-        "areaDamage": "Daño de Área",
-        "abilityScore": "Puntuaciones de Característica"
-      }
+        "areaDamage": "Daño de área",
+        "abilityScore": "Puntuaciones de característica"
+      },
+      "title": "Lanzador de PNJ",
+      "button-label": "Lanzador de PNJ"
     },
     "macros": {
       "basicActionMacros": {
-        "noActorSelected": "Ningún actor seleccionado",
+        "noActorSelected": "Ningún actor PJ, PNJ o familiar seleccionado",
         "cancel": "Cancelar",
         "title": "Acciones ({name})",
         "actions": {
@@ -31,56 +33,683 @@
           "JumpHigh": "Salto - Altura",
           "JumpLong": "Salto - Longitud",
           "Demoralize": "Desmoralizar",
-          "Request": "Solicitar"
+          "Request": "Solicitar",
+          "AidPF2eMacros": "Ayudar (PF2e Macros)",
+          "Coerce": "Obligar",
+          "Craft": "Elaborar",
+          "CreateADiversionDistractingWords": "Crear una distracción - Palabras distractoras",
+          "DecipherWritingOccultism": "Descifrar escritura - Ocultismo",
+          "DecipherWritingReligion": "Descifrar escritura - Religión",
+          "DecipherWritingSociety": "Descifrar escritura - Sociedad",
+          "Hide": "Esconderse",
+          "MakeAnImpression": "Causar impresión",
+          "RecallKnowledge": "Recordar conocimiento",
+          "Reposition": "Reposicionar",
+          "Seek": "Buscar",
+          "SenseMotive": "Averiguar intenciones",
+          "Shove": "Empujar",
+          "Sneak": "Movimiento furtivo",
+          "Squeeze": "Escurrirse",
+          "Steal": "Sustraer",
+          "SubsistSociety": "Subsistir - Sociedad",
+          "SubsistSurvival": "Subsistir - Supervivencia",
+          "TakeCoverToggle": "Ponerse a cubierto (alternar)",
+          "Track": "Cubrir rastro",
+          "TreatDisease": "Tratar enfermedad",
+          "TreatPoison": "Tratar veneno",
+          "TreatWounds": "Tratar heridas",
+          "Trip": "Derribar",
+          "TumbleThrough": "Pasar haciendo acrobacias",
+          "PickALock": "Forzar una cerradura",
+          "Perform": "Interpretar",
+          "ConcealAnObject": "Ocultar un objeto",
+          "ManeuverInFlight": "Maniobrar en vuelo",
+          "PalmAnObject": "Hurtar un objeto",
+          "SenseDirection": "Sentir la dirección",
+          "Escape": "Huir - mayor (??)",
+          "Impersonate": "Imitar",
+          "DisableDevice": "Inutilizar mecanismo",
+          "DecipherWritingArcana": "Descifrar escritura - Arcanos",
+          "Feint": "Finta",
+          "AvoidNotice": "Evitar ser visto",
+          "Balance": "Mantener el equilibrio",
+          "CreateForgery": "Falsificar",
+          "CreateADiversionTrick": "Crear una distracción - Truco",
+          "AdministerFirstAidStabilize": "Administrar primeros auxilios - Estabilizar",
+          "AdministerFirstAidStopBleeding": "Administrar primeros auxilios - Detener sangrado",
+          "AidToggle": "Ayudar (alternar)",
+          "AidASE": "Ayudar (ASE macro)",
+          "Grapple": "Presa",
+          "FollowTheExpertToggle": "Seguir al experto (alternar)",
+          "ForceOpen": "Abrir por la fuerza",
+          "GatherInformation": "Reunir información",
+          "RaiseAShieldToggle": "Alzar un escudo (alternar)"
         },
-        "gmMustImport": "El MJ debe hacer click derecho en el compendio xdy-pf2e-workbench-macros y seleccionar \"Importar todo el contenido\" y asegurarse de marcar \"Conservar los IDs de los documentos\" al importar."
+        "gmMustImport": "El DJ debe hacer click derecho en el compendio xdy-pf2e-workbench-macros y seleccionar \"Importar todo el contenido\" y asegurarse de marcar \"Conservar los IDs de los documentos\" al importar.",
+        "third": "(-10)",
+        "second": "(-5)",
+        "settings": {
+          "showBestBonus": {
+            "name": "BAM: Mostrar si es el mejor en Basic Action Macros",
+            "hint": "Mostrar si el actor seleccionado tiene la mejor bonificación en el cuadro de diálogo de Basic Action Macros"
+          }
+        },
+        "macroNotFound": "Macro {macroName} no encontrada",
+        "YouAreTheBestInYourParty": "Eres el mejor en tu grupo",
+        "compendiumNotFound": "Compendio {compendiumName} no encontrado",
+        "bamTabview": {
+          "name": "BAM: Usar diseño de pestañas",
+          "hint": "Utilice un diseño con pestañas para el cuadro de diálogo Basic Action Macros."
+        },
+        "bamShowUnusable": {
+          "name": "BAM: Usar acciones que no pueden ser usadas.",
+          "hint": "Mostrar acciones que no se pueden usar porque el personaje no está entrenado."
+        },
+        "exploration": "Exploración",
+        "downtime": "Tiempo libre",
+        "explorationShort": "E",
+        "downtimeShort": "TL"
       },
       "refocus": {
         "selectOneActor": "Debes seleccionar un actor.",
         "one": "uno",
         "regainOne": "Recupera 1 punto de enfoque.",
-        "enabled": "Recuperar {regain} puntos de enfoque.<br/>Hacer clic <b>SOLO</b> si haz {details} desde la ultima Reenfocada."
+        "enabled": "Recuperar {regain} puntos de enfoque.<br/>Hacer clic <b>SOLO</b> si tienes {details} desde la ultima reenfocada.",
+        "regains": "Recupera {focus} puntos de enfoque.",
+        "disabled": "Deshabilitado porque no hay posibilidad de recuperar más de 1 punto de enfoque.",
+        "notPsychic": "gastar al menos {regain} puntos de enfoque",
+        "isPsychic": "gastar puntos de enfoque sólo para amplificar los trucos psi o para suministrar habilidades psíquicas"
+      },
+      "buildNpcSpellbookJournal": {
+        "title": "Construir Libro de conjuros PNJ",
+        "noSpellcastingEntry": "Debes tener una hoja de personaje PNJ abierta y seleccionada, o una ficha de PNJ seleccionada. Además, dicho PNJ debe tener una entrada de lanzamiento de conjuros.",
+        "generatedSpellbookFor": "Libro de conjuros generado para {name}"
+      },
+      "recallKnowledge": {
+        "breakdown": {
+          "name": "Recordar conocimiento: Mostrar desglose de lanzamientos",
+          "hint": "Mostrar los modificadores aplicados desglosados de cada habilidad en una línea bajo el resultado.",
+          "all": "Todos los modificadores",
+          "extra": "Modificadores extra; omitir habilidad y competencia",
+          "none": "No mostrar ningún modificador"
+        }
       }
     },
     "SETTINGS": {
       "actionsReminderAllow": {
         "name": "Quien recibe un recordatorio de las acciones",
         "players": "Jugadores",
-        "gm": "MJ",
+        "gm": "DJ",
         "hint": "Marca para mostrar recordatorio de numero de acciones en la conversación.",
-        "all": "Todas",
-        "none": "Ninguna"
+        "all": "Todos",
+        "none": "Ninguno"
       },
       "addUserTargets": {
         "clearFor": "Limpiar objetivos para",
-        "name": "Agregar los objetivos del usuario"
+        "name": "Agregar los objetivos del usuario",
+        "title": "Seleccionar el usuario al que desea agregar objetivos",
+        "addFor": "Añadir objetivos para",
+        "hint": "Atajo de teclado para agregar las fichas seleccionadas y sobre las que se pase el cursor a los objetivos del usuario elegido."
       },
       "applyPersistentDamage": {
-        "wasDamaged": "{damage} daño fue aplicado automáticamente"
+        "wasDamaged": "{damage} daño fue aplicado automáticamente",
+        "hint": "Configuración global para aplicar automáticamente daño persistente.",
+        "name": "Aplicar automáticamente daño persistente."
       },
       "autoCollapseItemChatCardContent": {
-        "collapsedDefault": "Colapsado por defecto, haga clic en el título para expandirlo.",
-        "noCollapse": "Nunca colapsar",
-        "nonCollapsedDefault": "Expandido por defecto, haga clic en el título para colapsarlo."
+        "collapsedDefault": "Contraído por defecto, haga clic en el título para expandirlo.",
+        "noCollapse": "Nunca contraer",
+        "nonCollapsedDefault": "Expandido por defecto, haga clic en el título para contraerlo.",
+        "name": "Contraer automáticamente el contenido de la tarjeta de chat de objeto.",
+        "hint": "Configuración del cliente para contraer automáticamente el contenido de la tarjeta de chat de objeto (excluyendo acciones y ataques, miré debajo para esos)."
       },
       "autoCollapseItemActionChatCardContent": {
-        "noCollapse": "Nunca colapsar",
-        "nonCollapsedDefault": "Expandido por defecto, haga clic en el título para colapsarlo.",
-        "collapsedDefault": "Colapsado por defecto, haga clic en el título para expandirlo."
+        "noCollapse": "Nunca contraer",
+        "nonCollapsedDefault": "Expandido por defecto, haga clic en el título para contraerlo.",
+        "collapsedDefault": "Contraído por defecto, haga clic en el título para expandirlo.",
+        "name": "Contraer automáticamente el contenido de la tarjeta de chat de acción.",
+        "hint": "Configuración del cliente para contraer automáticamente el contenido de la tarjeta de chat de acción."
       },
       "autoCollapseItemAttackChatCardContent": {
-        "collapsedDefault": "Colapsado por defecto, haga clic en el título para expandirlo.",
-        "noCollapse": "Nunca colapsar",
-        "nonCollapsedDefault": "Expandido por defecto, haga clic en el título para colapsarlo."
+        "collapsedDefault": "Contraído por defecto, haga clic en el título para expandirlo.",
+        "noCollapse": "Nunca contraer",
+        "nonCollapsedDefault": "Expandido por defecto, haga clic en el título para contraerlo.",
+        "name": "Contraer automáticamente el contenido de la tarjeta de chat de ataque.",
+        "hint": "Configuración del cliente para contraer automáticamente el contenido de la tarjeta de chat de ataque."
       },
       "applyPersistentHealing": {
-        "wasHealed": "{healing} fue aplicado automáticamente."
+        "wasHealed": "{healing} fue aplicado automáticamente.",
+        "hint": "Configuración global para aplicar automáticamente la curación persistente lanzada por el sistema.",
+        "name": "Aplicar automáticamente la curación persistente lanzada por el sistema."
+      },
+      "nonLethalIsNotLethal": {
+        "no": "El daño no letal es simplemente daño",
+        "unconscious": "El daño no letal no mata",
+        "name": "... dependiendo de si el último daño fue no letal.",
+        "hint": "Si el último daño que recibes no es letal, no te vuelves moribundo, sino que quedarás inconsciente y con 0 puntos de golpe. Requiere que la configuración anterior esté habilitada.",
+        "unconsciousForCharacters": "El daño no letal no mata personajes ni familiares"
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "name": "... pero mata automáticamente al recibir suficiente daño de un efecto de muerte. (Obsoleto)",
+        "yes": "Si, para todos",
+        "yesForCharacters": "Si, para personajes y familiares",
+        "yesForNpcs": "Si, para PNJ",
+        "no": "No",
+        "hint": "(Obsoleto) Configuración para matar automáticamente al recibir suficiente daño de una fuente con el rasgo Muerte."
+      },
+      "callHotbarMacro": {
+        "hint": "Llamar a la macro de la barra de acceso rápido en la página {page} posición {column}",
+        "name": "Llamar a la macro de la barra de acceso rápido en la página {page} posición {column}"
+      },
+      "heroPointHandler": {
+        "none": "Ningún personaje",
+        "name": "Habilitar el controlador de puntos de héroe.",
+        "title": "Controlador de puntos de héroe",
+        "resetToForAll": "Los puntos de héroe se restablecen a {heroPoints} para todos",
+        "thisMany": "Tantos",
+        "minutesLeft": "minutos restantes en el temporizador actual",
+        "hint": "Marque para habilitar la función de controlador de puntos de héroe con una combinación de teclas opcional para abrir un cuadro de diálogo que puede restablecer o agregar puntos de héroe para todos los personajes, agregar un punto de héroe a un personaje aleatorio (o seleccionado) y, lo más importante, iniciar un temporizador para hacer que el cuadro de diálogo reaparecerá después (de forma predeterminada) de 60 minutos.",
+        "ignore": "Nada",
+        "showAfter": "Mostrar el diálogo nuevamente después de tantos minutos",
+        "startTimerLabel": "Enviar cambios e iniciar/continuar el temporizador",
+        "addedToForAll": "{heroPoints} Punto(s) de héroe añadido(s) a todos",
+        "doWhat": "<b>Sección 1</b> - Elige qué hacer con los puntos de héroe de <em>todos</em> los personajes con el siguiente valor",
+        "timerStopped": "Temporizador de puntos de héroe detenido.",
+        "timerValue": "Valor del temporizador (range 0 - {maxMinutes})",
+        "addOne": "<b>Sección 2</b> - Agrega un punto de héroe al personaje seleccionado de los miembros actuales del grupo activo (el valor predeterminado es un personaje aleatorio cuando expira el temporizador)",
+        "defaultTimeoutMinutes": 60,
+        "noRunningTimer": "Ningún temporizador activo",
+        "resetTo": "Resetear a",
+        "addedFor": "1 punto de héroe añadido a {name}",
+        "add": "Añadir",
+        "noTimerLabel": "Envíe cambios sin <b>ningún</b> temporizador. <b>Detendrá</b> cualquier temporizador existente.",
+        "all": "Todos",
+        "instructions": "Tenga en cuenta que el temporizador está en pausa mientras este cuadro de diálogo está abierto. Cierre este cuadro de diálogo sin presionar ninguno de estos botones para reanudar la pausa del temporizador, o presione el botón apropiado para hacer lo que dice el botón.",
+        "willBeResetIn": "Controlador de puntos de héroe vuelve en {remainingMinutes} minutos ({time})."
+      },
+      "npcMystifierMystifyKey": {
+        "name": "Atajo de teclado para mistificar las fichas seleccionadas",
+        "hint": "Configure el atajo de teclado para mistificar las fichas seleccionadas."
+      },
+      "npcMystifierUseCreatureTraits": {
+        "name": "Usa rasgos de criatura.",
+        "hint": "Marque para usar todos los 'rasgos de criatura' tal como se definen en el sistema pf2e en el nombre mistificado."
+      },
+      "npcMystifierUseSize": {
+        "name": "Usar tamaño de actor",
+        "hint": "Marque para usar el tamaño del actor en el nombre mistificado"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
+        "name": "Mistifica los elementos sólo si son de este nivel o superior.",
+        "hint": "Mistifica los elementos sólo si son de este nivel o superior."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
+        "name": "... modificado por este multiplicador",
+        "hint": "...modificado por este multiplicador (sí, lo sé, debería mostrar el valor final)"
+      },
+      "reminderBreathWeaponHidden": {
+        "name": "... pero oculta el recordatorio que no es del grupo.",
+        "hint": "Marque para ocultar el recordatorio si lo emite un miembro que no pertenece al grupo."
+      },
+      "workbenchVersion": {
+        "name": "Versión de migración de Workbench",
+        "hint": "Versión en la que se ejecutó la última migración. Puede ser una versión anterior a la del módulo. No la modifiques a menos que sepas lo que estás haciendo."
+      },
+      "reminderCannotAttack": {
+        "dead": "está muerto",
+        "hint": "Marque esta opción para mostrar un recordatorio si ataca con una ficha que no puede atacar debido a que está inconsciente/muerta/derrotada/sin puntos de golpe/etc...",
+        "info": "¿Estás seguro de {title}? {actorName} está {reason}, y por lo tanto no es probable que pueda atacar...",
+        "no": "No recordar",
+        "cancelAttack": "Cancelar ataque si no puede atacar",
+        "error": "{title} cancelado porque {actorName} está {reason}.",
+        "defeated": "ha sido derrotado",
+        "hasNoHp": "no tiene puntos de golpe",
+        "name": "Recordar si se ataca con ficha que no puede atacar",
+        "petrified": "está petrificado",
+        "restrained": "está neutralizado",
+        "unconscious": "está inconsciente",
+        "reminder": "Recordar"
+      },
+      "heropointHandlerNotification": {
+        "hint": "Marque para mandar automáticamente una notificación cuando el controlador de puntos de héroe haya entregado un punto de héroe.",
+        "name": "... y mandar una notificación cuando se entregue un punto de héroe."
+      },
+      "legacyVariantRuleDualClass": {
+        "name": "Agrega espacios para dotes de clase dual. Actualizar con F5 después de cambiar.",
+        "hint": "Requiere que la configuración del sistema 'Dotes de campaña' esté habilitada. Agrega una sección de dotes de campaña para clase dual, pero *no* migra automáticamente las dotes de la sección anterior o dotes adicionales; también necesitas usar la macro de clase dual para crear la clase que usará el personaje.",
+        "title": "Dotes de clase dual"
+      },
+      "logLevel": {
+        "hint": "Nivel de registro",
+        "trace": "Trazas",
+        "error": "Error",
+        "off": "Apagado",
+        "debug": "Depurar",
+        "info": "Información",
+        "warn": "Advertir",
+        "name": "Nivel de registro"
+      },
+      "moveBeforeCurrentCombatantContextMenu": {
+        "name": "Mueve al combatiente seleccionado antes que el combatiente actual."
+      },
+      "npcMystifierAddRandomProperty": {
+        "none": "Ninguna",
+        "name": "Agregar propiedad aleatoria del tipo elegido al nombre",
+        "numberPostfix": "Número como sufijo",
+        "wordPrefix": "Palabra como prefijo",
+        "hint": "Seleccione un tipo de propiedad aleatoria para agregar al mistificar a los pnj que opcionalmente se pueden conservar."
+      },
+      "npcMystifierModifierKey": {
+        "alt": "Alt",
+        "always": "Siempre",
+        "control": "Control",
+        "meta": "Meta/⌘ (command)/⊞ (windows)",
+        "hint": "Seleccione para habilitar la configuración de qué tecla mantener presionada para mistificar a la criatura mientras es arrastrada a la escena activa. Tenga en cuenta que si elige Alt (no el valor predeterminado), también oculta el pnj.",
+        "name": "Tecla para mistificar al arrastrar a la escena",
+        "disabled": "Deshabilitado"
+      },
+      "npcMystifier": {
+        "name": "Habilita el mistificador de pnj.",
+        "hint": "Marque para habilitar el mistificador de pnj, cambiando el nombre de las fichas en la escena activa según sus rasgos si se hace clic en Ctrl (configurable) al agregar a la escena. Guarde la configuración para mostrar/ocultar opciones adicionales."
+      },
+      "npcMystifierUseRaritiesReplacement": {
+        "name": "Reemplazar rarezas mayores que las comunes",
+        "hint": "Ingrese la palabra para reemplazar rarezas mayores que común con (por ejemplo, 'Inusual') en este campo de texto. Si está vacío, no cambie la rareza mostrada."
+      },
+      "npcMystifierUseRarities": {
+        "name": "Usar rareza",
+        "hint": "Marque para usar rarezas en el nombre mistificado."
+      },
+      "npcMystifierWordPrefix": {
+        "name": "Agregue una palabra aleatoria de la tabla de lanzamiento dada",
+        "hint": "Agrega una palabra aleatoria de la tabla de lista dada como prefijo si se elige 'Prefijo de palabra')."
+      },
+      "npcMystifyAllPhysicalMagicalItems": {
+        "onZeroHp": "Mistificar elementos en pnj que alcanzan 0 puntos de golpe",
+        "name": "Mistifica los objetos alquímicos y mágicos de los PNJ, si la configuración del sistema PF2e \"Los PNJ se pueden saquear\" está habilitada.",
+        "no": "Sin objetos mistificados",
+        "hint": "Mistifica automáticamente cualquier elemento físico no temporal que sea alquímico o mágico según lo seleccionado en el menú desplegable, si la configuración del sistema PF2e \"Los PNJ son saqueables\" está habilitada.",
+        "onScene": "Mistificar elementos cuando se agrega pnj a la escena"
+      },
+      "customPauseImage": {
+        "hint": "Imagen personalizada para usar en la pausa. Déjelo vacío para usar el ícono predeterminado.",
+        "name": "Imagen personalizada para usar en la pausa."
+      },
+      "applyPersistentDamageRecoveryRoll": {
+        "name": "... y lanzar automáticamente la tirada de recuperación después de eso.",
+        "hint": "... y luego realizar la tirada de recuperación automáticamente. Requiere que la configuración anterior esté habilitada."
+      },
+      "autoCollapseItemChatCardMoveEffectLinks": {
+        "name": "... pero muestra enlaces de efectos",
+        "hint": "... pero mueve todos los enlaces a objetos de efecto fuera de la parte contraída de la tarjeta cuando esté contraída de manera predeterminada"
+      },
+      "dropHeldItemsOnBecomingUnconscious": {
+        "hint": "Los personajes sueltan automáticamente los objetos que sostienen al quedar inconscientes (excepto los escudos, que se portan en lugar de sostenerse).",
+        "name": "Los personajes sueltan automáticamente los objetos que sostienen al quedar inconscientes.",
+        "message": "{name} soltó: {items}"
+      },
+      "autoExpandDamageRolls": {
+        "collapsedAll": "Todos las tiradas de daño se contraen (predeterminado de Foundry).",
+        "expandedAll": "Todas las tiradas de daño se expanden.",
+        "name": "Expande automáticamente las tiradas de daño.",
+        "hint": "Configuración del cliente para expandir automáticamente las tiradas de daño (la opción predeterminada de Foundry es que todas las tiradas de daño estén contraídas). Haz clic en la tirada de dados para expandir o contraer.",
+        "expandedNew": "Las nuevas tiradas de daño se expanden (también expanden las últimas tres tiradas de daño al actualizar).",
+        "expandedNewest": "Las nuevas tiradas de daño se expanden (también expande la última tirada de daño al actualizar)."
+      },
+      "autoGainDyingAtZeroHP": {
+        "addOneForCharacters": "Añadir uno, para personajes y familiares",
+        "addWoundedLevel": "Añadir 1 nivel de herido, para todos",
+        "orcFerocityMessage": "{name} acaba de usar @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] y ahora puede usar la acción gratuita:@UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]",
+        "hint": "Configuración para aumentar automáticamente la condición moribundo a 0 puntos de golpe.",
+        "deliberateDeathMessage": "{name} puede <b>antes de obtener moribundo</b> como resultado del ataque o habilidad de otra criatura, si esa criatura está dentro del alcance cuerpo a cuerpo, realizar un ataque cuerpo a cuerpo contra la criatura que lo generó.<br>Elimina el efecto \"Muerte deliberada utilizada\" si en realidad no se puede usar.",
+        "no": "No",
+        "addOne": "Añadir uno",
+        "addWoundedLevelForCharacters": "Añadir 1 nivel de herido, para personajes y familiares",
+        "name": "Aumenta automáticamente la condición moribundo a 0 puntos de golpe."
+      },
+      "autoKillIfMassiveDamage": {
+        "yesForCharacters": "Si, para personajes y familiares",
+        "yesForNpcs": "Si, para PNJ",
+        "no": "No",
+        "yes": "Si, para todos",
+        "hint": "(Obsoleto) Configuración para matar automáticamente al recibir daño masivo.",
+        "name": "... pero muere automáticamente al recibir daño masivo. (Obsoleto)"
+      },
+      "autoGainDyingIgnoresTargeting": {
+        "name": "... independientemente de si el daño estaba dirigido o no a la ficha seleccionada.",
+        "hint": "Habilitar para aplicar las configuraciones anteriores independientemente de si el objetivo coincide o no con la ficha seleccionada. (Es muy útil si no se utiliza objetivos automatizados)"
+      },
+      "autoRollDamageForStrike": {
+        "name": "Tirar automáticamente por golpes que impactan.",
+        "strike": "Golpe",
+        "hint": "Configuración del cliente para tirar automáticamente daño en los golpes que impactan. Ten en cuenta que los golpes críticos generan daño crítico."
+      },
+      "automationWorldSettings": {
+        "name": "Configuración de automatización global",
+        "hint": "Habilitar y configurar la automatización para DJ",
+        "label": "Administrar la configuración de automatización global"
+      },
+      "autoRollDamageNotifyOnSpellCardNotFound": {
+        "name": "Notificar cuando se lanza un ataque de conjuro y no se encuentra ninguna carta de conjuro.",
+        "hint": "Configuración del cliente para notificar cuando se lanza un ataque de conjuro y no se encuentra ninguna carta de conjuro para la que lanzar daño."
+      },
+      "handleDyingRecoveryRollAllow": {
+        "all": "Todos",
+        "hint": "Selecciona quién tiene permiso para configurar la opción para gestionar automáticamente los resultados de la tirada de recuperación tras morir después de que el propietario haya hecho clic en el botón de recuperación de la hoja de personaje. Guarda la configuración para mostrar u ocultar opciones adicionales en el menú de configuración de automatización del cliente.",
+        "name": "¿Quién tiene permitido configurar la opción para manejar automáticamente los resultados de la tirada de recuperación al morir después de hacer clic en el botón de recuperación?.",
+        "none": "Nadie",
+        "gm": "DJ",
+        "players": "Jugadores"
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "name": "... y mostrar rasgos de conjuro en el mensaje público.",
+        "hint": "Mostrar rasgos de conjuro en el mensaje público.",
+        "traitPart": " con estos rasgos: <strong>{traits}</strong>"
+      },
+      "decreaseFrightenedConditionEachTurn": {
+        "hint": "Configuración del cliente para disminuir automáticamente la condición de asustado en cada turno para personajes, pnj y familiares.",
+        "name": "Disminuye automáticamente la condición de asustado en cada turno."
+      },
+      "heropointHandlerNotificationChat": {
+        "name": "... como chat o mensaje de información.",
+        "hint": "Verifique que el controlador de puntos de héroe notifique como chat; de lo contrario, será un mensaje de información temporal."
+      },
+      "legacyVariantRuleAncestryParagon": {
+        "hint": "Requiere que la configuración del sistema 'Dotes de campaña' esté habilitada. Agrega una sección de dotes de campaña para \"Ancestry Paragon\" pero *no* migra automáticamente las dotes de la sección anterior o dotes adicionales.",
+        "name": "Agrega espacios para dotes de \"Ancestry Paragon\". Actualizar con F5 después de cambiar.",
+        "title": "Dotes \"Ancestry Paragon\""
+      },
+      "moveBeforeCurrentCombatantKey": {
+        "name": "Atajo de teclado (global) para mover al combatiente seleccionado antes que al combatiente actual.",
+        "hint": "Atajo de teclado global para mover al combatiente seleccionado antes que el combatiente actual, normalmente porque el combatiente actual ha matado al combatiente seleccionado. Debido al redondeo, varios combatientes pueden mostrar la misma iniciativa en la lista."
+      },
+      "tokenAnimationSpeed": {
+        "hint": "Cambie para alterar la velocidad de la animación de movimiento de la ficha.",
+        "name": "Cambie para alterar la velocidad de la animación de movimiento de la ficha."
+      },
+      "reminderTargeting": {
+        "hint": "Marque para mostrar un recordatorio de objetivo en combate.",
+        "error": "{title} cancelado ya que debes seleccionar un objetivo antes de atacar.",
+        "mustTarget": "Cancelar ataque sin objetivo",
+        "no": "No recordar",
+        "reminder": "Recordar",
+        "info": "Por favor, seleccione un objetivo antes de atacar.",
+        "name": "Recordatorio de objetivo"
+      },
+      "tokenAnimation": {
+        "name": "Habilitar para alterar la animación de movimiento de la ficha.",
+        "hint": "Habilite para modificar la animación del movimiento de fichas. Esto puede causar problemas con el módulo Multilevel Tokens."
+      },
+      "npcMystifierUseOtherTraits": {
+        "name": "Usar otros rasgos",
+        "hint": "Marque para utilizar todos los rasgos de pnj que no estén incluidos en ninguna de las configuraciones anteriores en el nombre mistificado."
+      },
+      "giveUnconsciousIfDyingRemovedAt0HP": {
+        "no": "No",
+        "hint": "Configuración para dejar inconsciente automáticamente si se elimina la condición moribundo mientras tienes 0 puntos de golpe.",
+        "name": "Aplica la condición inconsciente automáticamente si se elimina la condición moribundo a 0 puntos de golpe."
+      },
+      "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
+        "no": "No",
+        "add": "Añadir moribundo",
+        "name": "... y agrega un nivel mas de moribundo si recibe daño crítico de un enemigo.",
+        "hint": "Si recibe un golpe crítico de un ataque dañino dirigido por un actor enemigo, agrega un nivel más de moribundo. Utiliza la configuración \"herido\" del menú desplegable que se encuentra arriba. Requiere que la configuración anterior esté habilitada.",
+        "addForCharacters": "Añadir moribundo, para personajes y familiares"
+      },
+      "automationClientSettings": {
+        "name": "Configuración de automatización del cliente",
+        "label": "Administrar la configuración de automatización del cliente",
+        "hint": "Habilitar y configurar los ajustes de automatización local, es decir, ajustes que solo afectan a su propio cliente."
+      },
+      "playerFeatsPrerequisiteHint": {
+        "name": "Añade un asterisco al nombre de las dotes con un prerrequisito.",
+        "hint": "Configuración del cliente para agregar un asterisco al nombre de las dotes con un conjunto de requisitos previos."
+      },
+      "castPrivateSpellAlwaysFor": {
+        "nonAllies": "No-aliados",
+        "nonPartymembers": "No-miembros del grupo",
+        "npcs": "PNJ",
+        "name": "... pero siempre lanzando de forma privada para:",
+        "none": "Nadie",
+        "hint": "Marque para lanzar siempre de forma privada para... (Mantenga presionada la tecla Ctrl para *no* lanzar de forma privada)"
+      },
+      "castPrivateSpellWithPublicMessage": {
+        "cantrip": "Truco",
+        "savePart": "<br>La salvación para el conjuro desconocido es: @Check[type:{dataSave}|cd:{dataDC}|traits:{traits}{basic}}]",
+        "basic": "Básico",
+        "noButtonSavePart": "<br><b>{basic} {dataSave} Salvación</b>",
+        "they": "Ellos",
+        "firstPart": "{tokenName} acaba de lanzar un {type} de la tradición <strong>{traditionString}</strong>. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
+        "secondPartRK": ".<br>Puedes intentar usar uno de @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] o @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] para reconocerlo. O, en tu turno, gastar una acción para intentar identificarlo con @Check[type:{skill}|cd:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (o 10 minutos con @Check[type:{skill}|cd:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
+        "secondPartNoRk": ".<br>Puedes intentar usar uno de @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] o @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] para reconocerlo. O, en tu turno, gastar una acción para intentar identificarlo (pregunta al MJ para más detalles).",
+        "name": "Mandar un mensaje público de que se ha lanzado un conjuro.",
+        "hint": "Si se lanza de forma privada, esta configuración también manda un mensaje público de que se ha lanzado un conjuro A MENOS que mantenga presionadas las teclas MAYÚS y CTRL mientras lo lanza.",
+        "knownBy": "<div><p><b>Conocido por: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">",
+        "spell": "Conjuro"
+      },
+      "customPauseText": {
+        "hint": "Texto personalizado para usar en la pausa. Déjelo vacío para usar el predeterminado.",
+        "name": "Texto personalizado para usar en la pausa."
+      },
+      "castPrivateSpell": {
+        "hint": "Marca esta opción para habilitar la función Ctrl+clic en \"Lanzar un conjuro\" para lanzarlo como un susurro al lanzador y al DJ.",
+        "name": "Ctrl+clic en \"Lanzar\" para lanzar en privado.",
+        "aSpell": "Un conjuro"
+      },
+      "customPauseRelocation": {
+        "name": "Centrar imagen de pausa con texto encima.",
+        "hint": "Coloque la imagen de pausa en el medio de la pantalla, con el texto encima."
+      },
+      "enableAutomaticMove": {
+        "noAutomation": "Nunca",
+        "hint": "Seleccione para habilitar la configuración de la iniciativa del combatiente fuera de su propio turno justo antes del combatiente actual, normalmente porque el combatiente actual ha matado al combatiente seleccionado. Debido al redondeo, varios combatientes pueden mostrar la misma iniciativa en la lista.",
+        "name": "Establecer la iniciativa justo antes del combatiente actual.",
+        "reaching0HP": "Cuando un personaje o pnj llega a 0 puntos de golpe.",
+        "reaching0HPCharactersOnly": "Cuando un personaje combatiente llega a 0 puntos de golpe."
+      },
+      "giveWoundedWhenDyingRemoved": {
+        "hint": "Configuración para otorgar automáticamente la condición de herido cuando se elimina la condición de moribundo.",
+        "numbToDeathMessage": "{name} ha activado @UUID[Compendium.pf2e.feats-srd.gfMP2aMs3YGONVeB]. Aplica la curación manualmente.",
+        "name": "Otorga la condición herido automáticamente cuando se elimina la condición moribundo."
+      },
+      "heroPointHandlerDefaultTimeoutMinutes": {
+        "name": "... con tantos minutos hasta que se abra el cuadro de diálogo del controlador de puntos de héroe.",
+        "hint": "Establezca el valor predeterminado (y máximo) de cuántos minutos hasta la próxima vez que se abra el controlador de puntos de héroe."
+      },
+      "heroPointHandlerKey": {
+        "name": "Atajo de teclado para abrir el cuadro de diálogo del controlador de puntos de héroe.",
+        "hint": "Atajo de teclado para abrir el cuadro de diálogo del controlador de puntos de héroe que permite restablecer y agregar puntos de héroe con un recordatorio cada hora."
+      },
+      "housepatcher": {
+        "notification": "Se han parcheado {count} elementos sin parches en los compendios del sistema.",
+        "error": "Se ha eliminado el JSON incorrecto de housepatcher",
+        "hint": "(REALMENTE EXPERIMENTAL) Ingrese una matriz json para parchear los compendios del sistema. Consulte housepatcher.md en github para obtener documentación.",
+        "name": "(REALMENTE EXPERIMENTAL) Housepatcher (parches en las reglas de la casa). Requiere actualización (f5) después del cambio."
+      },
+      "mystificationSettings": {
+        "label": "Administrar la configuración de mistificación de PNJ",
+        "name": "Configuración de mistificación de PNJ",
+        "hint": "Habilitar y configurar la mistificación de PNJ"
+      },
+      "npcMystifierBlacklist": {
+        "name": "Rasgos de la lista de bloqueo que nunca se deben agregar",
+        "hint": "Agregue palabras para filtrar el contenido de esta lista de bloqueo separada por comas del nombre mistificado."
+      },
+      "npcMystifierKeepRandomProperty": {
+        "name": "Mantenga el prefijo/sufijo al mistificar/aclarar.",
+        "hint": "Marque para mantener el sufijo numérico/prefijo de palabra *en el mismo formato configurado actualmente en este módulo* (si corresponde) como sufijo/prefijo del nombre al mistificar/aclarar a los pnj."
+      },
+      "npcMystifierPostfix": {
+        "name": "Sufijo de palabra o tabla de lanzamiento",
+        "hint": "Agregue texto al nuevo nombre con sufijo, el valor predeterminado es '' (ejemplo: 'Criatura'), si coincide con el nombre de una tabla de lanzamiento (el valor predeterminado es la tabla incluida 'Workbench Adjectives'), se obtendrá un resultado de texto aleatorio de esta tabla. utilizado como sufijo en su lugar. Esto se agregará *antes* de cualquier prefijo de propiedad aleatoria (consulte también la opción de prefijo.)"
+      },
+      "autoRollDamageAllow": {
+        "none": "Nadie",
+        "gm": "DJ",
+        "all": "Todos",
+        "players": "Jugadores",
+        "name": "¿A quién se le permite configurar la opción de daño automático en un golpe?.",
+        "hint": "Selecciona quién puede configurar la opción de daño automático al golpear. Guarda la configuración para mostrar u ocultar opciones adicionales en el menú de configuración de automatización del cliente."
+      },
+      "npcMystifierPrefix": {
+        "name": "Prefijo de palabra o tabla de lanzamiento",
+        "hint": "Agregue texto al prefijo del nuevo nombre (infijo si se elige una propiedad de palabra aleatoria arriba), el valor predeterminado es '' (ejemplo: 'Desconocido'), si coincide con el nombre de una tabla de lanzamiento, se usará un resultado de texto aleatorio de esta tabla. como prefijo en su lugar. Esto se agregará *después* de cualquier sufijo de propiedad aleatoria (consulte también la opción de prefijo.)"
+      },
+      "npcMystifierRandomPropertySkipForUnique": {
+        "hint": "Marque para omitir agregar una propiedad aleatoria al mistificar a PNJ únicos. (Es decir, se conserva cuando aclaras al pnj.)",
+        "name": "Omite la propiedad persistente aleatoria para pnj únicos."
+      },
+      "reminderCannotAttackIgnoreDeadEidolon": {
+        "hint": "Marca para permitir que los eidolones muertos/sin puntos de golpe ataquen sin un recordatorio.",
+        "name": "Los eidolones muertos pueden atacar"
+      },
+      "remindersSettings": {
+        "name": "Configuración de recordatorios",
+        "label": "Administrar la configuración de recordatorios",
+        "hint": "Habilitar y configurar varios recordatorios"
+      },
+      "castPrivateSpellHideName": {
+        "hint": "Marque para ocultar el nombre de un conjuro lanzado de forma privada en la tirada de daño en lugar de ocultar la tirada de daño.",
+        "name": "... y ocultar el nombre de un conjuro lanzado de forma privada en la tirada de daño."
+      },
+      "notifications": {
+        "cantMystify": "No puedes mistificar esta ficha. ¿Está en la escena activa y eres un DJ?"
+      },
+      "keeleysHeroPointRule": {
+        "hint": "Una regla interna favorecida por cierto desarrollador de Paizo: si el resultado natural de una nueva tirada de puntos de héroe es 10 o menos, se aplica una bonificación de 10 después del hecho.",
+        "bonusTag": "Bajo relanzamiento +10",
+        "name": "Regla de puntos de héroe de Keeley"
+      },
+      "npcMystifierUseCreatureTypesTraits": {
+        "hint": "Marque para usar rasgos de identificación de criatura (consulte https://2e.aonprd.com/Rules.aspx?ID=2641) en el nombre mistificado.",
+        "name": "Usa rasgos de identificación de criaturas"
+      },
+      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+        "hint": "Marque para que toda la mistificación actúe en todas las fichas basadas en el mismo actor.",
+        "name": "Aclarar todas las fichas del actor"
+      },
+      "npcMystifierNoMatch": {
+        "hint": "Texto que se utilizará cuando no se encuentre ningún rasgo coincidente, por lo que el nombre estaría vacío. (La cadena vacía aquí se establecerá en '...')",
+        "name": "Sin texto coincidente"
+      },
+      "handleDyingRecoveryRoll": {
+        "handled": "La tirada de recuperación al morir {roll} {outcome} se maneja automáticamente. {defeated}.",
+        "defeated": "{name} fue derrotado",
+        "name": "Maneja automáticamente los resultados de la tirada de recuperación al morir después de hacer clic en el botón de recuperación.",
+        "hint": "Configuración del cliente para manejar automáticamente los resultados de la tirada de recuperación al morir después de hacer clic en el botón de recuperación."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
+        "name": "Mistifica los elementos solo si son iguales o superiores al nivel del grupo.",
+        "hint": "Mistifica los elementos solo si son iguales o superiores al nivel del grupo. Anula la entrada manual."
+      },
+      "reminderBreathWeapon": {
+        "hint": "Marque para configurar un recordatorio para el uso de habilidades de recarga (por ejemplo, armas de aliento).",
+        "name": "Recordatorio de recarga (por ejemplo, armas de aliento)",
+        "source": "Recordatorio de recarga creado por PF2e Workbench",
+        "used": "Usado ",
+        "defaultName": "Aliento"
+      },
+      "autoGainDyingIfTakingDamageWhenAlreadyDying": {
+        "name": "... y agrega niveles de moribundo si recibes daño al estar moribundo.",
+        "addForCharacters": "Añadir moribundo, para personajes y familiares",
+        "hint": "Si recibe daño mientras ya está moribundo, agrega un nivel más de moribundo (o posiblemente dos si moribundo adicional por golpe crítico está habilitado). Usa la configuración \"herido\" del menú desplegable que se encuentra arriba. Requiere que la configuración anterior esté habilitada.",
+        "add": "Añadir moribundo",
+        "no": "No"
+      },
+      "qolWorldSettings": {
+        "hint": "Habilitar y configurar ajustes de calidad de vida para DJ",
+        "label": "Administrar la configuración de calidad de vida global",
+        "name": "Configuración de calidad de vida global"
+      },
+      "npcScaler": {
+        "name": "Permitir escalar PNJ",
+        "hint": "Marque para permitir escalar PNJ"
+      },
+      "playerFeatsRarityColour": {
+        "name": "Muestra los nombres de las dotes en color de rareza en las hojas de los actores.",
+        "hint": "Configuración del cliente para mostrar los nombres de las dotes en color de rareza en las hojas de actor."
+      },
+      "playerSpellsRarityColour": {
+        "hint": "Configuración del cliente para mostrar los nombres de los conjuros en color de rareza en las hojas de actor.",
+        "name": "Muestra los nombres de los conjuros en color de rareza en las hojas de los actores."
+      },
+      "houseRulesSettings": {
+        "label": "Administrar la configuración de las reglas de la casa",
+        "name": "(Experimental) Configuración de reglas de la casa",
+        "hint": "(Experimental) Habilita y configura varias reglas de la casa"
+      },
+      "castPrivateSpellAutoRevealIfKnown": {
+        "name": "... pero revela automáticamente el conjuro si el grupo lo conoce.",
+        "hint": "Marque esta opción para revelar automáticamente el conjuro lanzado de forma privada si algún miembro del grupo conoce el conjuro."
+      },
+      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
+        "name": "Elimina automáticamente la condición inconsciente si se es curado a más de 0 puntos de golpe.",
+        "hint": "Configuración para eliminar automáticamente la condición inconsciente si se es curado por encima de 0 puntos de golpe."
+      },
+      "autoRollDamageForSpellAttack": {
+        "name": "Daño automático por ataques de conjuros que impactan.",
+        "hint": "Configuración del cliente para generar automáticamente daño para ataques de conjuros que impactan. Ten en cuenta que los golpes críticos siempre generan daño normal."
+      },
+      "autoRemoveDyingAtGreaterThanZeroHP": {
+        "removeDyingForCharacters": "Elimina la condición moribundo, para personajes y familiares",
+        "hint": "Configuración para eliminar automáticamente la condición moribundo cuando la curación llega a más de 0 puntos de golpe.",
+        "name": "Elimina automáticamente la condición moribundo cuando se cura por encima de 0 puntos de golpe.",
+        "removeDying": "Elimina la condición moribundo para todos",
+        "no": "No"
+      },
+      "heroPointHandlerStartTimerOnReady": {
+        "hint": "Márcalo para iniciar automáticamente el temporizador del controlador de puntos de héroe cuando el juego esté listo.",
+        "name": "... e iniciar automáticamente el controlador de puntos de héroe."
+      },
+      "autoReduceStunned": {
+        "hint": "Configuración del cliente para reducir automáticamente el aturdimiento al iniciar el turno.",
+        "name": "Reduce automáticamente el aturdimiento al iniciar el turno"
+      },
+      "autoRollDamageForSpellWhenNotAnAttack": {
+        "hint": "Configuración del cliente para que se realice automáticamente la tirada de daño normal de los hechizos *que no sean de ataque* cuando se lanzan. Ten en cuenta que la tirada de daño se realizará antes de que se realice una tirada de salvación (si la hay).",
+        "no": "No",
+        "anySpell": "Para cualquier conjuro que no sea de ataque",
+        "saveSpell": "Para un conjuro que no sea de ataque con salvación",
+        "nonSaveSpell": "Para un conjuro que no sea de ataque sin salvación",
+        "name": "Daño automático por lanzamiento de hechizos que no sean ataques."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
+        "hint": "Mistifica los objetos solo si son de esta rareza o superior.",
+        "name": "Mistifica los objetos solo si son de esta rareza o superior."
+      },
+      "npcMystifierUseEliteWeak": {
+        "name": "Usar estado élite/débil",
+        "hint": "Marque para usar élite/débil en el nombre mistificado."
+      },
+      "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
+        "hint": "Marque para (con conjuros revelados automáticamente) mostrar a los miembros del grupo que conocen el conjuro en la tarjeta de chat",
+        "name": "... y lista los miembros del grupo que conocen el conjuro auto-revelado"
+      },
+      "npcRoller": {
+        "name": "Habilitar la utilidad de lanzamiento de PNJ",
+        "hint": "Marque para habilitar la utilidad de lanzamiento rápido de PNJ."
+      },
+      "castPrivateSpellWithPublicMessageShowToGM": {
+        "name": "... y mostrar el mensaje público también al DJ.",
+        "hint": "Mostrar mensaje público también al DJ."
+      },
+      "playerCraftingRarityColour": {
+        "name": "Mostrar los nombres de las fórmulas en color de rareza en las hojas de los actores.",
+        "hint": "Configuración del cliente para mostrar los nombres de las fórmulas en color de rareza en las hojas de actor."
       }
     },
     "modules": {
-      "pf2e-toolbox": "El modulo pf2e-toolbox ya no es mantenido, la mayoría de sus funciones son parte de Workbench, favor de desactivarlo.",
-      "multilevel-tokens": "El modulo Multilevel Tokens (y probablemente otros módulos que teletransportan fichas) podría tener problemas con la teletransportación si tienes activada la configuración opcional de Workbench para el cambio de animacion de fichas.",
+      "pf2e-toolbox": "El modulo pf2e-toolbox ya no es mantenido, la mayoría de sus funciones son parte de Workbench, por favor desactivalo.",
+      "multilevel-tokens": "El modulo Multilevel Tokens (y probablemente otros módulos que teletransportan fichas) podría tener problemas con la teletransportación si tienes activada la configuración opcional de Workbench para el cambio de animación de fichas.",
       "pf2e-sheet-skill-actions": "El modulo pf2e-sheet-skill-actions ya no es mantenido, todas sus funciones son parte de Workbench, favor de desactivarlo."
-    }
+    },
+    "spellCardNotFound": "No se pudo encontrar la carta del conjuro. Lanzando {spell} al nivel mínimo para ese conjuro.",
+    "effects": {
+      "numbToDeathUsed": "Entumecido hasta la muerte usado",
+      "orcFerocityUsed": "Ferocidad de orco usado",
+      "bounceBackUsed": "Rebotar usado",
+      "deliberateDeathUsed": "Muerte deliberada usado"
+    },
+    "effectItem": "Efecto de objeto"
   }
 }
