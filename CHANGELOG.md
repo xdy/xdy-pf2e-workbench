@@ -1,3 +1,10 @@
+# [6.13.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.12.10...v6.13.0) (2024-12-20)
+
+
+### Features
+
+* Set minimum and verified pf2e version to 6.8.0. Update types. ([0cb2722](https://github.com/xdy/xdy-pf2e-workbench/commit/0cb2722199c39f4bdca90ff8cfbce6f6411231f8))
+
 ## [6.12.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.12.9...v6.12.10) (2024-12-19)
 
 
