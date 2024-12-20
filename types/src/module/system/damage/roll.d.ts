@@ -3,9 +3,11 @@ import type { UserPF2e } from "@module/user/index.ts";
 import { DegreeOfSuccessIndex } from "@system/degree-of-success.ts";
 import { RollDataPF2e } from "@system/rolls.ts";
 import type Peggy from "peggy";
+import type { RollParseNode } from "types/foundry/client-esm/dice/_types.d.mts";
 import type { DiceTerm, RollTerm } from "types/foundry/client-esm/dice/terms/module.d.ts";
 import { InstancePool } from "./terms.ts";
 import { DamageCategory, DamageIRBypassData, DamageTemplate, DamageType, MaterialDamageEffect } from "./types.ts";
+
 declare abstract class AbstractDamageRoll extends Roll {
     static parser: Peggy.Parser;
     /** Strip out parentheses enclosing constants */
@@ -46,7 +48,7 @@ declare class DamageRoll extends AbstractDamageRoll {
     get maximumValue(): number;
     static fromData<TRoll extends Roll>(this: AbstractConstructorOf<TRoll>, data: RollJSON): TRoll;
     /** Increase total to 1 if evaluating to 0 or less */
-    protected _evaluateTotal(): number;
+    protected _evaluateASTAsync(node: RollParseNode | RollTerm, options?: EvaluateRollParams): Promise<string | number>;
     getTooltip(): Promise<string>;
     /** Work around upstream issue in which display base formula is used for chat messages instead of display formula */
     render({ flavor, template, isPrivate, }?: RollRenderOptions): Promise<string>;

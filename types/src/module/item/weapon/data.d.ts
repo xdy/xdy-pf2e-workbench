@@ -1,11 +1,32 @@
 import { AttributeString } from "@actor/types.ts";
 import type { PhysicalItemSource } from "@item/base/data/index.ts";
 import { ItemFlagsPF2e } from "@item/base/data/system.ts";
-import type { BasePhysicalItemSource, Investable, ItemMaterialData, ItemMaterialSource, PhysicalItemTraits, PhysicalSystemData, PhysicalSystemSource, UsageDetails } from "@item/physical/index.ts";
-import { ZeroToFour, ZeroToThree } from "@module/data.ts";
+import type {
+    BasePhysicalItemSource,
+    Investable,
+    ItemMaterialData,
+    ItemMaterialSource,
+    PhysicalItemTraits,
+    PhysicalSystemData,
+    PhysicalSystemSource,
+    UsageDetails,
+} from "@item/physical/index.ts";
+import { ZeroToFour } from "@module/data.ts";
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import type { WeaponTraitToggles } from "./trait-toggles.ts";
-import type { BaseWeaponType, MeleeWeaponGroup, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponMaterialType, WeaponPropertyRuneType, WeaponRangeIncrement, WeaponReloadTime, WeaponTrait } from "./types.ts";
+import type {
+    BaseWeaponType,
+    MeleeWeaponGroup,
+    OtherWeaponTag,
+    WeaponCategory,
+    WeaponGroup,
+    WeaponMaterialType,
+    WeaponPropertyRuneType,
+    WeaponRangeIncrement,
+    WeaponReloadTime,
+    WeaponTrait,
+} from "./types.ts";
+
 type WeaponSource = BasePhysicalItemSource<"weapon", WeaponSystemSource> & {
     flags: DeepPartial<WeaponFlags>;
 };
@@ -117,7 +138,7 @@ interface WeaponMaterialSource extends ItemMaterialSource {
 }
 type WeaponRuneSource = {
     potency: ZeroToFour;
-    striking: ZeroToThree;
+    striking: ZeroToFour;
     property: WeaponPropertyRuneType[];
 };
 interface WeaponSystemData extends Omit<WeaponSystemSource, SourceOmission>, Omit<Investable<PhysicalSystemData>, "material" | "subitems"> {

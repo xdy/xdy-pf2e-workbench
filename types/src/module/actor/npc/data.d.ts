@@ -237,5 +237,6 @@ interface NPCResources extends CreatureResources {
     focus: ValueAndMax & {
         cap: number;
     };
+    mythicPoints: ValueAndMax;
 }
 export type { NPCAttributes, NPCAttributesSource, NPCFlags, NPCHitPoints, NPCPerceptionData, NPCPerceptionSource, NPCSaveData, NPCSkillData, NPCSkillSource, NPCSource, NPCSpecialSkillSource, NPCStrike, NPCSystemData, NPCSystemSource, NPCTraitsSource, };

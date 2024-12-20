@@ -5,6 +5,7 @@ import { ActiveEffectPF2e } from "@module/active-effect.ts";
 import { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { LootSource, LootSystemData } from "./data.ts";
+
 declare class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     armorClass: null;
     get allowedItemTypes(): (ItemType | "physical")[];
@@ -24,6 +25,8 @@ declare class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentP
     canUserModify(user: UserPF2e, action: UserAction): boolean;
     /** Hide this actor's token(s) when in loot (rather than merchant) mode, empty, and configured thus */
     toggleTokenHiding(): Promise<void>;
+    /** Set base emphemeral data for later updating by derived-data preparation. */
+    prepareBaseData(): void;
     /** Never process rules elements on loot actors */
     prepareDerivedData(): void;
     protected _onCreate(data: LootSource, options: DatabaseCreateOperation<TParent>, userId: string): void;

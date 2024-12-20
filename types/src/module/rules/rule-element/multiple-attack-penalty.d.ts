@@ -1,6 +1,7 @@
-import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema } from "./data.ts";
+import fields = foundry.data.fields;
+
 /**
  * @category RuleElement
  */
@@ -11,7 +12,7 @@ declare class MultipleAttackPenaltyRuleElement extends RuleElementPF2e<MAPRuleSc
 interface MultipleAttackPenaltyRuleElement extends RuleElementPF2e<MAPRuleSchema>, ModelPropsFromRESchema<MAPRuleSchema> {
 }
 type MAPRuleSchema = RuleElementSchema & {
-    selector: StringField<string, string, true, false, false>;
+    selector: fields.StringField<string, string, true, false, false>;
     value: ResolvableValueField<true, false, false>;
 };
 export { MultipleAttackPenaltyRuleElement };

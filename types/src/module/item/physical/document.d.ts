@@ -1,12 +1,23 @@
 import type { ActorPF2e } from "@actor";
-import { ItemPF2e, type ContainerPF2e } from "@item";
+import { type ContainerPF2e, ItemPF2e } from "@item";
 import type { ItemSourcePF2e, PhysicalItemSource, RawItemChatData, TraitChatData } from "@item/base/data/index.ts";
 import type { Rarity, Size, ZeroToTwo } from "@module/data.ts";
 import type { EffectSpinoff } from "@module/rules/rule-element/effect-spinoff/spinoff.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { Bulk } from "./bulk.ts";
-import type { IdentificationStatus, ItemActivation, ItemCarryType, ItemMaterialData, MystifiedData, PhysicalItemHitPoints, PhysicalItemTrait, PhysicalSystemData, Price } from "./data.ts";
+import type {
+    IdentificationStatus,
+    ItemActivation,
+    ItemCarryType,
+    ItemMaterialData,
+    MystifiedData,
+    PhysicalItemHitPoints,
+    PhysicalItemTrait,
+    PhysicalSystemData,
+    Price,
+} from "./data.ts";
 import { CoinsPF2e } from "./helpers.ts";
+
 declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     /** The item in which this item is embedded */
     parentItem: PhysicalItemPF2e | null;
@@ -118,7 +129,7 @@ declare abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = Actor
     /** Updates this container's cache while also resolving cyclical references. Skips if already cached */
     protected updateContainerCache(seen?: string[]): void;
     /** Include mystification-related rendering instructions for views that will display this data. */
-    protected traitChatData(dictionary: Record<string, string>): TraitChatData[];
+    traitChatData(dictionary?: Record<string, string>): TraitChatData[];
     /** Redirect subitem updates to the parent item */
     update(data: Record<string, unknown>, operation?: Partial<DatabaseUpdateOperation<TParent>>): Promise<this | undefined>;
     /** Redirect subitem deletes to parent-item updates */

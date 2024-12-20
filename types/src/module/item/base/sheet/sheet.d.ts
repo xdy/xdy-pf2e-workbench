@@ -1,7 +1,7 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import type { ItemPF2e } from "@item";
+import { ItemPF2e } from "@item";
 import { Rarity } from "@module/data.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import { SheetOptions, TagifyEntry } from "@module/sheet/helpers.ts";

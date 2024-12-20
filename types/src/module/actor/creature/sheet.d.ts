@@ -10,7 +10,7 @@ import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ZeroToFour } from "@module/data.ts";
 import { ActorSheetPF2e, SheetClickActionHandlers } from "../sheet/base.ts";
 import { CreatureConfig } from "./config.ts";
-import { Language } from "./index.ts";
+import { Language, ResourceData } from "./index.ts";
 
 /**
  * Base class for NPC and character sheets
@@ -51,11 +51,6 @@ interface CreatureSheetData<TActor extends CreaturePF2e> extends ActorSheetDataP
         remainingDying: number;
         remainingWounded: number;
     };
-    specialResources: {
-        slug: string;
-        label: string;
-        value: number;
-        max: number;
-    }[];
+    specialResources: ResourceData[];
 }
 export { CreatureSheetPF2e, type CreatureSheetData };

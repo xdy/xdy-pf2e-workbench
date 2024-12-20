@@ -1,5 +1,7 @@
 import { RuleElementPF2e } from "./base.ts";
-import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema } from "./data.ts";
+import { ModelPropsFromRESchema, RuleElementSchema } from "./data.ts";
+import fields = foundry.data.fields;
+
 /**
  * Change the name representing an actor's token
  * @category RuleElement
@@ -11,6 +13,6 @@ declare class TokenNameRuleElement extends RuleElementPF2e<TokenNameRuleSchema> 
 interface TokenNameRuleElement extends RuleElementPF2e<TokenNameRuleSchema>, ModelPropsFromRESchema<TokenNameRuleSchema> {
 }
 type TokenNameRuleSchema = RuleElementSchema & {
-    value: ResolvableValueField<true, false, false>;
+    value: fields.StringField<string, string, true, false, false>;
 };
 export { TokenNameRuleElement };

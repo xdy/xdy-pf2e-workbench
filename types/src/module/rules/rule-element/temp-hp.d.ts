@@ -1,7 +1,8 @@
 import type { ActorType } from "@actor/types.ts";
-import type { BooleanField, SchemaField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema } from "./data.ts";
+import fields = foundry.data.fields;
+
 /**
  * @category RuleElement
  */
@@ -22,14 +23,14 @@ interface TempHPRuleElement extends RuleElementPF2e<TempHPRuleSchema>, ModelProp
 }
 type TempHPEventsSchema = {
     /** Whether the temporary hit points are immediately applied */
-    onCreate: BooleanField<boolean, boolean, false, false, false>;
+    onCreate: fields.BooleanField;
     /** Whether the temporary hit points renew each round */
-    onTurnStart: BooleanField<boolean, boolean, false, false, false>;
+    onTurnStart: fields.BooleanField;
 };
 type TempHPRuleSchema = RuleElementSchema & {
     /** The quantity of temporary hit points to add */
     value: ResolvableValueField<true, false, false>;
     /** World events in which temporary HP is added or renewed */
-    events: SchemaField<TempHPEventsSchema, SourceFromSchema<TempHPEventsSchema>, ModelPropsFromSchema<TempHPEventsSchema>, true, false, true>;
+    events: fields.SchemaField<TempHPEventsSchema, SourceFromSchema<TempHPEventsSchema>, ModelPropsFromSchema<TempHPEventsSchema>, true, false, true>;
 };
 export { TempHPRuleElement };

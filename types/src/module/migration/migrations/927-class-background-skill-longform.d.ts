@@ -1,5 +1,6 @@
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
+
 export declare class Migration927ClassBackgroundBattleFormSkillLongform extends MigrationBase {
     #private;
     static version: number;
@@ -24,4 +25,4 @@ export declare const SKILL_DICTIONARY: {
     readonly thi: "thievery";
 };
 export type SkillAbbreviation = keyof typeof SKILL_DICTIONARY;
-export declare const SKILL_ABBREVIATIONS: ("med" | "soc" | "arc" | "acr" | "ath" | "cra" | "dec" | "dip" | "itm" | "nat" | "occ" | "prf" | "rel" | "ste" | "sur" | "thi")[];
+export declare const SKILL_ABBREVIATIONS: ("med" | "acr" | "arc" | "ath" | "cra" | "dec" | "dip" | "itm" | "nat" | "occ" | "prf" | "rel" | "soc" | "ste" | "sur" | "thi")[];

@@ -41,6 +41,6 @@ interface MenuTemplateData extends FormApplicationData {
 interface SettingsMenuOptions extends FormApplicationOptions {
     highlightSetting?: string;
 }
-declare function settingsToSheetData(settings: Record<string, PartialSettingsData>, cache: Record<string, unknown>): Record<string, SettingsTemplateData>;
+declare function settingsToSheetData(settings: Record<string, PartialSettingsData>, cache?: Record<string, unknown>): Record<string, SettingsTemplateData>;
 export { SettingsMenuPF2e, settingsToSheetData };
 export type { MenuTemplateData, PartialSettingsData, SettingsMenuOptions, SettingsTemplateData };

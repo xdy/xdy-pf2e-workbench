@@ -1,9 +1,11 @@
 import { ModifierType } from "@actor/modifiers.ts";
 import type { ActorType } from "@actor/types.ts";
 import { DamageCategoryUnique, DamageType } from "@system/damage/types.ts";
-import type { BooleanField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { SchemaField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleValue } from "./data.ts";
+import fields = foundry.data.fields;
+
 /** Substitute a pre-determined result for a check's D20 roll */
 declare class CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema> {
     #private;
@@ -17,15 +19,15 @@ interface CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema>, Model
 type DamageDieFaces = 4 | 6 | 8 | 10 | 12;
 type CritSpecRuleSchema = RuleElementSchema & {
     /** Whether this critical specialization note substitutes for the standard one of a given weapon group */
-    alternate: BooleanField;
+    alternate: fields.BooleanField;
     /** Alternative note text: if not provided, the standard one for a given weapon group is used */
-    text: StringField<string, string, false, true, true>;
+    text: fields.StringField<string, string, false, true, true>;
     /** Alternative damage dice */
     damageDice: SchemaField<{
         number: ResolvableValueField<true, false, false>;
-        faces: NumberField<DamageDieFaces, DamageDieFaces, true, false, false>;
-        damageType: StringField<DamageType, DamageType, false, true, true>;
-        category: StringField<DamageCategoryUnique, DamageCategoryUnique, false, true, true>;
+        faces: fields.NumberField<DamageDieFaces, DamageDieFaces, true, false, false>;
+        damageType: fields.StringField<DamageType, DamageType, false, true, true>;
+        category: fields.StringField<DamageCategoryUnique, DamageCategoryUnique, false, true, true>;
     }, {
         number: RuleValue;
         faces: DamageDieFaces;
@@ -38,10 +40,10 @@ type CritSpecRuleSchema = RuleElementSchema & {
         category: DamageCategoryUnique | null;
     }, false, true, true>;
     /** Alternative modifier */
-    modifier: SchemaField<{
-        type: StringField<ModifierType, ModifierType, true, false, true>;
-        damageType: StringField<DamageType, DamageType, false, true, true>;
-        category: StringField<DamageCategoryUnique, DamageCategoryUnique, false, true, true>;
+    modifier: fields.SchemaField<{
+        type: fields.StringField<ModifierType, ModifierType, true, false, true>;
+        damageType: fields.StringField<DamageType, DamageType, false, true, true>;
+        category: fields.StringField<DamageCategoryUnique, DamageCategoryUnique, false, true, true>;
         value: ResolvableValueField<true, false, false>;
     }, {
         type: ModifierType;

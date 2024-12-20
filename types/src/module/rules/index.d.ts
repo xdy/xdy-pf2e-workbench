@@ -15,4 +15,4 @@ declare class RuleElements {
 type RuleElementConstructor = {
     schema: LaxSchemaField<RuleElementSchema>;
 } & (new (data: RuleElementSource, options: RuleElementOptions) => RuleElementPF2e);
-export { RuleElementOptions, RuleElementPF2e, RuleElements, RuleElementSource };
+export { RuleElementOptions, RuleElementPF2e, RuleElementSource, RuleElements };

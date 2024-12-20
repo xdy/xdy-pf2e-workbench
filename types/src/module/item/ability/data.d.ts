@@ -1,4 +1,4 @@
-import { ItemSystemModel, ItemSystemSchema } from "@item/base/data/schema.ts";
+import { ItemSystemModel, ItemSystemSchema } from "@item/base/data/model.ts";
 import type { ActionType, BaseItemSourcePF2e, FrequencyInterval, ItemSystemSource } from "@item/base/data/system.ts";
 import type { OneToThree } from "@module/data.ts";
 import { SlugField } from "@system/schema-data-fields.ts";

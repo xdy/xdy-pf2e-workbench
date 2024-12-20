@@ -10,7 +10,15 @@ import type { RangeData } from "@item/types.ts";
 import type { StrikeRuleElement } from "@module/rules/rule-element/strike.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { WeaponDamage, WeaponFlags, WeaponSource, WeaponSystemData } from "./data.ts";
-import type { BaseWeaponType, OtherWeaponTag, WeaponCategory, WeaponGroup, WeaponReloadTime, WeaponTrait } from "./types.ts";
+import type {
+    BaseWeaponType,
+    OtherWeaponTag,
+    WeaponCategory,
+    WeaponGroup,
+    WeaponReloadTime,
+    WeaponTrait,
+} from "./types.ts";
+
 declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     shield?: ShieldPF2e<TParent>;
     /** The rule element that generated this weapon, if applicable */
@@ -50,7 +58,7 @@ declare class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
     get ammo(): ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e> | null;
     get otherTags(): Set<OtherWeaponTag>;
     acceptsSubitem(candidate: PhysicalItemPF2e): boolean;
-    isStackableWith(item: PhysicalItemPF2e<TParent>): boolean;
+    isStackableWith(item: PhysicalItemPF2e): boolean;
     /** Whether this weapon can serve as ammunition for another weapon */
     isAmmoFor(weapon: WeaponPF2e): boolean;
     /** Generate a list of strings for use in predication */

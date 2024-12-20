@@ -6,6 +6,7 @@ import { SelfEffectReference } from "@item/ability/index.ts";
 import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import type { FeatPF2e } from "@item/feat/document.ts";
 import { OneToFour } from "@module/data.ts";
+
 declare class FeatSheetPF2e extends ItemSheetPF2e<FeatPF2e> {
     #private;
     static get defaultOptions(): ItemSheetOptions;
@@ -35,6 +36,11 @@ interface FeatSheetData extends ItemSheetDataPF2e<FeatPF2e> {
     selfEffect: SelfEffectReference | null;
     senses: SenseOption[];
     showPrerequisites: boolean;
+    suppressedFeatures: {
+        uuid: string;
+        name: string;
+        img: string;
+    }[];
 }
 interface LanguageOptions {
     slots: number;

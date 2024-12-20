@@ -1,11 +1,11 @@
-import { SkillSlug } from "@actor/types.ts";
-import { AttributeString } from "@actor/types.ts";
+import { AttributeString, SkillSlug } from "@actor/types.ts";
 import { BaseItemSourcePF2e, ItemSystemData, ItemSystemSource, OtherTagsOnly } from "@item/base/data/system.ts";
 import { BaseWeaponType } from "@item/weapon/types.ts";
 import { DeityDomain, Sanctification } from "./types.ts";
+
 type DeitySource = BaseItemSourcePF2e<"deity", DeitySystemSource>;
 type DeitySystemSource = ItemSystemSource & {
-    category: "deity" | "pantheon" | "philosophy";
+    category: DeityCategory;
     sanctification: DeitySanctification | null;
     domains: {
         primary: DeityDomain[];
@@ -19,6 +19,7 @@ type DeitySystemSource = ItemSystemSource & {
     level?: never;
     traits: OtherTagsOnly;
 };
+type DeityCategory = "deity" | "pantheon" | "covenant" | "philosophy";
 type DeitySanctification = {
     modal: "can" | "must";
     what: Sanctification[];
@@ -26,4 +27,4 @@ type DeitySanctification = {
 type DivineFonts = ["harm"] | ["heal"] | ["harm", "heal"] | never[];
 interface DeitySystemData extends Omit<DeitySystemSource, "description">, Omit<ItemSystemData, "level" | "traits"> {
 }
-export type { DeitySanctification, DeitySource, DeitySystemData, DeitySystemSource };
+export type { DeityCategory, DeitySanctification, DeitySource, DeitySystemData, DeitySystemSource };

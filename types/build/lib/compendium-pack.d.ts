@@ -1,10 +1,11 @@
 import type { ActorSourcePF2e } from "@actor/data/index.ts";
-import { ItemSourcePF2e } from "@item/base/data/index.ts";
-import { RuleElementSource } from "@module/rules/index.ts";
+import type { ItemSourcePF2e } from "@item/base/data/index.ts";
+import type { RuleElementSource } from "@module/rules/index.ts";
 import "./foundry-utils.ts";
 import { PackError } from "./helpers.ts";
 import { DBFolder } from "./level-database.ts";
 import { PackEntry } from "./types.ts";
+
 interface PackMetadata {
     system: string;
     name: string;

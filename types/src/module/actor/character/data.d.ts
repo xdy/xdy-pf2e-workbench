@@ -43,6 +43,8 @@ type CharacterSource = BaseCreatureSource<"character", CharacterSystemSource> & 
 };
 type CharacterFlags = ActorFlagsPF2e & {
     pf2e: {
+        /** Has daily preparation crafting been completed for the day */
+        dailyCraftingComplete?: boolean;
         /** If applicable, the character's proficiency rank in their deity's favored weapon */
         favoredWeaponRank: number;
         /** The highest number of damage dice among the character's equipped weapons and available unarmed attacks */
@@ -57,6 +59,8 @@ type CharacterFlags = ActorFlagsPF2e & {
         sheetTabs: CharacterSheetTabVisibility;
         /** Whether the basic unarmed attack is shown on the Actions tab */
         showBasicUnarmed: boolean;
+        /** The limit for each feat group that supports a custom limit. */
+        featLimits: Record<string, number>;
     };
 };
 interface CharacterSystemSource extends CreatureSystemSource {
@@ -381,7 +385,7 @@ interface VersatileWeaponOption {
 }
 interface CharacterCraftingData {
     formulas: CraftingFormulaData[];
-    entries: Record<string, Partial<CraftingAbilityData>>;
+    entries: Record<string, CraftingAbilityData>;
 }
 type CharacterResources = CreatureResources & {
     /** The current and maximum number of hero points */
@@ -396,6 +400,7 @@ type CharacterResources = CreatureResources & {
         infusedReagents: ValueAndMax;
     };
     resolve?: ValueAndMax;
+    mythicPoints: ValueAndMax;
 };
 interface CharacterPerceptionData extends CreaturePerceptionData {
     rank: ZeroToFour;

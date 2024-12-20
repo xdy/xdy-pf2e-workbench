@@ -3,6 +3,7 @@ import type { BaseItemSourcePF2e, ItemSystemData, ItemSystemSource, ItemTraits }
 import type { OneToTen, ValueAndMax, ZeroToThree } from "@module/data.ts";
 import type { DamageCategoryUnique, DamageKind, DamageType, MaterialDamageEffect } from "@system/damage/index.ts";
 import type { EffectAreaShape, MagicTradition, SpellTrait } from "./types.ts";
+
 type SpellSource = BaseItemSourcePF2e<"spell", SpellSystemSource>;
 interface SpellSystemSource extends ItemSystemSource {
     traits: SpellTraits;
@@ -76,6 +77,7 @@ type SpellPassiveDefense = "ac" | `${SaveType}-dc`;
 interface SpellHeighteningInterval {
     type: "interval";
     interval: number;
+    area: number;
     damage: Record<string, string>;
 }
 interface SpellHeighteningFixed {
@@ -124,4 +126,4 @@ interface RitualData {
         casters: number;
     };
 }
-export type { SpellArea, SpellDamage, SpellDamageSource, SpellHeightenLayer, SpellHeighteningInterval, SpellOverlay, SpellOverlayOverride, SpellOverlayType, SpellPassiveDefense, SpellSource, SpellSystemData, SpellSystemSource, };
+export type { SpellArea, SpellDamage, SpellDamageSource, SpellHeighteningInterval, SpellHeightenLayer, SpellOverlay, SpellOverlayOverride, SpellOverlayType, SpellPassiveDefense, SpellSource, SpellSystemData, SpellSystemSource, };

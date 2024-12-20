@@ -1,15 +1,9 @@
 import type { ActorType, CharacterPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { PredicateField, SlugField } from "@system/schema-data-fields.ts";
-import type {
-    ArrayField,
-    BooleanField,
-    DocumentUUIDField,
-    NumberField,
-    SchemaField,
-} from "types/foundry/common/data/fields.d.ts";
+import { PredicateField } from "@system/schema-data-fields.ts";
 import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
+import fields = foundry.data.fields;
 
 /**
  * @category RuleElement
@@ -18,36 +12,37 @@ declare class CraftingAbilityRuleElement extends RuleElementPF2e<CraftingAbility
     protected static validActorTypes: ActorType[];
     constructor(data: CraftingAbilityRuleSource, options: RuleElementOptions);
     static defineSchema(): CraftingAbilityRuleSchema;
-    beforePrepareData(): void;
+    onApplyActiveEffects(): void;
+    /** Attach the crafting ability to the feat or ability if not prepared */
+    afterPrepareData(): void;
 }
 interface CraftingAbilityRuleElement extends RuleElementPF2e<CraftingAbilityRuleSchema>, ModelPropsFromRESchema<CraftingAbilityRuleSchema> {
     readonly parent: ItemPF2e<CharacterPF2e>;
     slug: string;
     get actor(): CharacterPF2e;
 }
-type CraftingAbilityRuleSchema = Omit<RuleElementSchema, "slug"> & {
-    slug: SlugField<true, false, false>;
-    isAlchemical: BooleanField<boolean, boolean, false, false, true>;
-    isDailyPrep: BooleanField<boolean, boolean, false, false, true>;
-    isPrepared: BooleanField<boolean, boolean, false, false, true>;
-    batchSizes: SchemaField<{
-        default: QuantityField;
-        other: ArrayField<SchemaField<{
-            quantity: QuantityField;
+type CraftingAbilityRuleSchema = RuleElementSchema & {
+    resource: fields.StringField<string, string, false, true, true>;
+    isAlchemical: fields.BooleanField<boolean, boolean, false, false, true>;
+    isDailyPrep: fields.BooleanField<boolean, boolean, false, false, true>;
+    isPrepared: fields.BooleanField<boolean, boolean, false, false, true>;
+    batchSizes: fields.SchemaField<{
+        default: fields.NumberField<number, number, false, false, false>;
+        other: fields.ArrayField<fields.SchemaField<{
+            quantity: fields.NumberField<number, number, true, false, true>;
             definition: PredicateField;
         }>>;
     }>;
     maxItemLevel: ResolvableValueField<false, false, true>;
-    maxSlots: NumberField<number, number, false, false, false>;
+    maxSlots: ResolvableValueField<false, false, true>;
     craftableItems: PredicateField;
-    prepared: ArrayField<SchemaField<PreparedFormulaSchema>>;
+    prepared: fields.ArrayField<fields.SchemaField<PreparedFormulaSchema>>;
 };
-type QuantityField = NumberField<number, number, true, false, true>;
 type PreparedFormulaSchema = {
-    uuid: DocumentUUIDField<ItemUUID, true, false, false>;
-    quantity: NumberField<number, number, false, false, false>;
-    expended: BooleanField<boolean, boolean, false, false, false>;
-    isSignatureItem: BooleanField<boolean, boolean, false, false, false>;
+    uuid: fields.DocumentUUIDField<ItemUUID, true, false, false>;
+    quantity: fields.NumberField<number, number, false, false, false>;
+    expended: fields.BooleanField<boolean, boolean, false, false, false>;
+    isSignatureItem: fields.BooleanField<boolean, boolean, false, false, false>;
 };
 type CraftingAbilityRuleData = Omit<SourceFromSchema<CraftingAbilityRuleSchema>, "preparedFormulas"> & {
     prepared: (Partial<SourceFromSchema<PreparedFormulaSchema>> & {
@@ -55,6 +50,7 @@ type CraftingAbilityRuleData = Omit<SourceFromSchema<CraftingAbilityRuleSchema>,
     })[];
 };
 interface CraftingAbilityRuleSource extends RuleElementSource {
+    resource?: unknown;
     batchSizes?: unknown;
     isAlchemical?: unknown;
     isDailyPrep?: unknown;

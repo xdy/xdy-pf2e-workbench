@@ -1,5 +1,5 @@
-import type { ApplicationFormConfiguration, ApplicationRenderOptions } from "../_types.js";
-import type ApplicationV2 from "./application.js";
+import type { ApplicationFormConfiguration, ApplicationRenderOptions } from "../_types.d.ts";
+import type ApplicationV2 from "./application.d.ts";
 
 /** Augment an Application class with [Handlebars](https://handlebarsjs.com) template rendering behavior. */
 /* eslint-disable @typescript-eslint/no-unused-expressions, no-unused-expressions */
@@ -149,7 +149,7 @@ export interface HandlebarsTemplatePart {
      * be persisted during a re-render operation. A blank string is used
      * to denote that the root level of the part is scrollable.
      */
-    scrollable?: boolean[];
+    scrollable?: string[];
 
     /** A registry of forms selectors and submission handlers. */
     forms?: Record<string, ApplicationFormConfiguration>;

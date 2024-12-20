@@ -1,10 +1,10 @@
 import type { ActorPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
 import type { ItemType } from "@item/base/data/index.ts";
-import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementPF2e } from "../base.ts";
 import type { ModelPropsFromRESchema, RuleElementSchema } from "../data.ts";
 import { ItemAlterationSchema } from "./alteration.ts";
+import fields = foundry.data.fields;
 
 declare class ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSchema> {
     #private;
@@ -20,9 +20,9 @@ interface ItemAlterationRuleElement extends RuleElementPF2e<ItemAlterationRuleSc
 }
 type ItemAlterationRuleSchema = RuleElementSchema & ItemAlterationSchema & {
     /** The type of items to alter */
-    itemType: StringField<ItemType, ItemType, false, false, false>;
+    itemType: fields.StringField<ItemType, ItemType, false, false, false>;
     /** As an alternative to specifying item types, an exact item ID can be provided */
-    itemId: StringField<string, string, false, false, false>;
+    itemId: fields.StringField<string, string, false, false, false>;
 };
 interface ApplyAlterationOptions {
     /** A single item to on which to run alterations instead of all qualifying items owned by the actor */

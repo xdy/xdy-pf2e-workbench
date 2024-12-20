@@ -1,5 +1,7 @@
 import { ModifierAdjustment, RawModifier } from "@actor/modifiers.ts";
-import { KingdomAbility, KingdomCHG, KingdomCharter, KingdomGovernment, KingdomLeadershipRole, KingdomSkill } from "./types.ts";
+import { KingdomCharter, KingdomGovernment, KingdomHeartland } from "./schema.ts";
+import { KingdomAbility, KingdomLeadershipRole, KingdomSkill } from "./types.ts";
+
 declare const KINGDOM_ABILITIES: readonly ["culture", "economy", "loyalty", "stability"];
 declare const KINGDOM_LEADERSHIP: readonly ["ruler", "counselor", "general", "emissary", "magister", "treasurer", "viceroy", "warden"];
 declare const KINGDOM_COMMODITIES: readonly ["food", "luxuries", "lumber", "ore", "stone"];
@@ -93,9 +95,9 @@ type VacancyPenalty = {
 };
 declare const VACANCY_PENALTIES: Record<KingdomLeadershipRole, () => VacancyPenalty>;
 interface KingdomCHGData {
-    charter: Record<string, KingdomCharter | undefined>;
-    heartland: Record<string, KingdomCHG | undefined>;
-    government: Record<string, KingdomGovernment | undefined>;
+    charter: Record<string, Omit<KingdomCharter, "id"> | undefined>;
+    heartland: Record<string, Omit<KingdomHeartland, "id"> | undefined>;
+    government: Record<string, Omit<KingdomGovernment, "id"> | undefined>;
 }
 /** Returns every single possible charter, heartland, and government */
 declare function getKingdomCHGData(): KingdomCHGData;

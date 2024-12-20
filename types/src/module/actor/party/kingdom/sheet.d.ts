@@ -12,7 +12,7 @@ import { ValueAndMax } from "@module/data.ts";
 import { AdjustedValue, SheetOption, SheetOptions } from "@module/sheet/helpers.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { Kingdom } from "./model.ts";
-import { KingdomAbilityData, KingdomData, KingdomLeadershipData, KingdomSettlementData } from "./types.ts";
+import type { KingdomAbilityData, KingdomData, KingdomLeadershipData, KingdomSettlementData } from "./schema.ts";
 
 declare class KingdomSheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     #private;

@@ -6,9 +6,9 @@ import { TagifyEntry } from "@module/sheet/helpers.ts";
  */
 declare class HTMLTagifyTagsElement extends foundry.applications.elements.AbstractFormInputElement<TagifyEntry[] | string[], string> {
     static tagName: string;
-    /** The input elmement that the `Tagify` instance is bound to */
-    input: HTMLInputElement;
     constructor();
+    protected _primaryInput: HTMLInputElement;
+    get input(): HTMLInputElement;
     protected _buildElements(): HTMLElement[];
     /** Overwritten so that submit data receives a string array */
     protected _getValue(): string[];

@@ -3,10 +3,10 @@ import type { NPCAttackTrait } from "@item/melee/types.ts";
 import { BaseShieldType } from "@item/shield/types.ts";
 import type { BaseWeaponType, OtherWeaponTag, WeaponCategory } from "@item/weapon/types.ts";
 import type { DamageDieSize, DamageType } from "@system/damage/index.ts";
-import { StrictBooleanField } from "@system/schema-data-fields.ts";
-import type { ArrayField, BooleanField, FilePathField, NumberField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
+import fields = foundry.data.fields;
+
 /**
  * Create an ephemeral strike on an actor
  * @category RuleElement
@@ -33,16 +33,16 @@ interface StrikeRuleElement extends RuleElementPF2e<StrikeSchema>, ModelPropsFro
 type NonShieldWeaponType = Exclude<BaseWeaponType, BaseShieldType>;
 type StrikeSchema = RuleElementSchema & {
     /** A weapon category */
-    category: StringField<WeaponCategory, WeaponCategory, true, false, true>;
+    category: fields.StringField<WeaponCategory, WeaponCategory, true, false, true>;
     /** A weapon group */
-    group: StringField<string, string, true, true, true>;
+    group: fields.StringField<string, string, true, true, true>;
     /** A weapon base type */
-    baseType: StringField<NonShieldWeaponType, NonShieldWeaponType, true, true, true>;
+    baseType: fields.StringField<NonShieldWeaponType, NonShieldWeaponType, true, true, true>;
     /** Permit NPC attack traits to sneak in for battle forms */
-    traits: ArrayField<StringField<NPCAttackTrait, NPCAttackTrait, true, false, false>>;
-    traitToggles: SchemaField<{
-        modular: StringField<DamageType, DamageType, true, true, true>;
-        versatile: StringField<DamageType, DamageType, true, true, true>;
+    traits: fields.ArrayField<fields.StringField<NPCAttackTrait, NPCAttackTrait, true, false, false>>;
+    traitToggles: fields.SchemaField<{
+        modular: fields.StringField<DamageType, DamageType, true, true, true>;
+        versatile: fields.StringField<DamageType, DamageType, true, true, true>;
     }, {
         modular: DamageType | null;
         versatile: DamageType | null;
@@ -50,15 +50,15 @@ type StrikeSchema = RuleElementSchema & {
         modular: DamageType | null;
         versatile: DamageType | null;
     }, true, false, true>;
-    otherTags: ArrayField<StringField<OtherWeaponTag, OtherWeaponTag, true, false, false>, OtherWeaponTag[], OtherWeaponTag[], false, false, true>;
+    otherTags: fields.ArrayField<fields.StringField<OtherWeaponTag, OtherWeaponTag, true, false, false>, OtherWeaponTag[], OtherWeaponTag[], false, false, true>;
     /**
      * A fixed attack modifier: usable only if the strike is generated for an NPC
      * Also causes the damage to not be recalculated when converting the resulting weapon to an NPC attack
      */
-    attackModifier: NumberField<number, number, false, true, true>;
-    range: SchemaField<{
-        increment: NumberField<number, number, false, true, true>;
-        max: NumberField<number, number, false, true, true>;
+    attackModifier: fields.NumberField<number, number, false, true, true>;
+    range: fields.SchemaField<{
+        increment: fields.NumberField<number, number, false, true, true>;
+        max: fields.NumberField<number, number, false, true, true>;
     }, {
         increment: number | null;
         max: number | null;
@@ -66,28 +66,28 @@ type StrikeSchema = RuleElementSchema & {
         increment: number | null;
         max: number | null;
     }, false, true, true>;
-    damage: SchemaField<{
-        base: SchemaField<{
-            damageType: StringField<string, string, true, false, true>;
+    damage: fields.SchemaField<{
+        base: fields.SchemaField<{
+            damageType: fields.StringField<string, string, true, false, true>;
             dice: ResolvableValueField<true, false, true>;
-            die: StringField<DamageDieSize, DamageDieSize, true, false, true>;
-            modifier: NumberField<number, number, false, false, true>;
+            die: fields.StringField<DamageDieSize, DamageDieSize, true, false, true>;
+            modifier: fields.NumberField<number, number, false, false, true>;
         }>;
     }>;
-    ability: StringField<string, string, false, true, true>;
+    ability: fields.StringField<string, string, false, true, true>;
     /** A representative icon for the strike */
-    img: FilePathField<ImageFilePath, ImageFilePath, true, false, true>;
+    img: fields.FilePathField<ImageFilePath, ImageFilePath, true, false, true>;
     /** Whether to replace all other strike actions */
-    replaceAll: BooleanField<boolean, boolean, false, false, false>;
+    replaceAll: fields.BooleanField<boolean, boolean, false, false, false>;
     /** Whether to replace the "basic unarmed" strike action */
-    replaceBasicUnarmed: BooleanField<boolean, boolean, false, false, false>;
+    replaceBasicUnarmed: fields.BooleanField<boolean, boolean, false, false, false>;
     /** Whether this attack is from a battle form */
-    battleForm: BooleanField<boolean, boolean, false, false, true>;
-    options: ArrayField<StringField<string, string, true, false, false>, string[], string[], false, false, false>;
+    battleForm: fields.BooleanField<boolean, boolean, false, false, true>;
+    options: fields.ArrayField<fields.StringField<string, string, true, false, false>, string[], string[], false, false, false>;
     /** Whether this was a request for a standard fist attack */
-    fist: BooleanField<boolean, boolean, false, false, true>;
+    fist: fields.BooleanField<boolean, boolean, false, false, true>;
     /** Whether the unarmed attack is a grasping appendage */
-    graspingAppendage: StrictBooleanField<false, false, false>;
+    graspingAppendage: fields.BooleanField<boolean, boolean, false, false, false>;
 };
 interface StrikeSource extends RuleElementSource {
     img?: unknown;

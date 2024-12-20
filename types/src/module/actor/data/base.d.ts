@@ -31,15 +31,12 @@ type ActorFlagsPF2e = DocumentFlags & {
 };
 type ActorSystemSource = {
     details?: ActorDetailsSource;
-    attributes: ActorAttributesSource;
+    attributes?: ActorAttributesSource;
     traits?: ActorTraitsSource<string>;
     /** A record of this actor's current world schema version as well a log of the last migration to occur */
     _migration: MigrationRecord;
     /** Legacy location of `MigrationRecord` */
-    schema?: Readonly<{
-        version: number | null;
-        lastMigration: object | null;
-    }>;
+    schema?: object;
 };
 interface ActorAttributesSource {
     hp?: ActorHitPointsSource;
@@ -82,16 +79,17 @@ interface ActorAttributes extends ActorAttributesSource {
         broken: boolean;
         itemId: string | null;
     };
-    flanking: {
-        /** Whether the actor can flank at all */
-        canFlank: boolean;
-        /** Given the actor can flank, the conditions under which it can do so without an ally opposite the target */
-        canGangUp: GangUpCircumstance[];
-        /** Whether the actor can be flanked at all */
-        flankable: boolean;
-        /** Given the actor is flankable, whether it is off-guard when flanked */
-        offGuardable: OffGuardableCircumstance;
-    };
+    flanking: FlankingData;
+}
+interface FlankingData {
+    /** Whether the actor can flank at all */
+    canFlank: boolean;
+    /** Given the actor can flank, the conditions under which it can do so without an ally opposite the target */
+    canGangUp: GangUpCircumstance[];
+    /** Whether the actor can be flanked at all */
+    flankable: boolean;
+    /** Given the actor is flankable, whether it is off-guard when flanked */
+    offGuardable: OffGuardableCircumstance;
 }
 interface ActorHitPoints extends Required<BaseHitPointsSource> {
     unrecoverable: number;
@@ -272,4 +270,4 @@ interface PrototypeTokenPF2e<TParent extends ActorPF2e | null> extends foundry.d
         };
     };
 }
-export type { ActorAttributes, ActorAttributesSource, ActorDetails, ActorDetailsSource, ActorFlagsPF2e, ActorHitPoints, ActorHitPointsSource, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, ArmorClassData, AttributeBasedTraceData, BaseActorSourcePF2e, BaseHitPointsSource, DamageRollFunction, GangUpCircumstance, HitPointsStatistic, InitiativeData, PrototypeTokenPF2e, RollFunction, RollOptionFlags, Rollable, StrikeData, TraitViewData, };
+export type { ActorAttributes, ActorAttributesSource, ActorDetails, ActorDetailsSource, ActorFlagsPF2e, ActorHitPoints, ActorHitPointsSource, ActorSystemData, ActorSystemSource, ActorTraitsData, ActorTraitsSource, ArmorClassData, AttributeBasedTraceData, BaseActorSourcePF2e, BaseHitPointsSource, DamageRollFunction, FlankingData, GangUpCircumstance, HitPointsStatistic, InitiativeData, PrototypeTokenPF2e, Rollable, RollFunction, RollOptionFlags, StrikeData, TraitViewData, };

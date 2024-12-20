@@ -41,11 +41,6 @@ declare class EncounterPF2e extends Combat {
     protected _onUpdate(changed: DeepPartial<this["_source"]>, operation: DatabaseUpdateOperation<null>, userId: string): void;
     /** Disable the initiative link on PC sheets if this was the only encounter */
     protected _onDelete(operation: DatabaseDeleteOperation<null>, userId: string): void;
-    /**
-     * Work around upstream issue present throughout V11
-     * https://github.com/foundryvtt/foundryvtt/issues/9718
-     */
-    protected _manageTurnEvents(adjustedTurn?: number): Promise<void>;
 }
 interface EncounterPF2e extends Combat {
     readonly combatants: foundry.abstract.EmbeddedCollection<CombatantPF2e<this, TokenDocumentPF2e | null>>;

@@ -63,6 +63,8 @@ declare function iterateAllItems<T extends ActorPF2e>(document: T | PhysicalItem
  */
 declare function transferItemsBetweenActors(source: ActorPF2e, dest: ActorPF2e, itemFilterFn?: (item: PhysicalItemPF2e) => boolean): Promise<void>;
 /** Applies multiple batched updates to the actor, delaying rendering till the end */
-declare function applyActorUpdate<T extends ActorPF2e>(actor: T, data: ActorCommitData<T>): Promise<void>;
+declare function applyActorUpdate<T extends ActorPF2e>(actor: T, data: Partial<ActorCommitData<T>>, { render }?: {
+    render?: boolean;
+}): Promise<void>;
 export { applyActorUpdate, auraAffectsActor, calculateMAPs, calculateRangePenalty, checkAreaEffects, createEncounterRollOptions, createEnvironmentRollOptions, getRangeIncrement, getStrikeAttackDomains, getStrikeDamageDomains, isOffGuardFromFlanking, isReallyPC, iterateAllItems, migrateActorSource, resetActors, setHitPointsRollOptions, strikeFromMeleeItem, transferItemsBetweenActors, userColorForActor, };
 export type { MultipleAttackPenaltyData };

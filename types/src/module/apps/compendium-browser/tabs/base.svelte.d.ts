@@ -1,29 +1,32 @@
 import MiniSearch from "minisearch";
+import { CompendiumBrowser, CompendiumBrowserOpenTabOptions } from "../browser.ts";
 import { BrowserTabs, ContentTabName } from "../data.ts";
-import { CompendiumBrowser } from "../index.ts";
-import { BrowserFilter, CheckboxOptions, CompendiumBrowserIndexData, MultiselectData, RangesInputData } from "./data.ts";
+import type { BrowserFilter, CheckboxOptions, CompendiumBrowserIndexData, RangesInputData, TraitData } from "./data.ts";
+
 export declare abstract class CompendiumBrowserTab {
     #private;
     /** A reference to the parent CompendiumBrowser */
     protected browser: CompendiumBrowser;
     /** The filter schema for this tab; The tabs filters are rendered based on this.*/
-    abstract filterData: BrowserFilter;
+    filterData?: BrowserFilter;
+    /** Current results. These are automatically refreshed when the filter changes */
+    results: CompendiumBrowserIndexData[];
+    /** The maximum number of items shown in the result list element */
+    resultLimit: number;
     /** An unmodified copy of this.filterData */
     defaultFilterData: this["filterData"];
     /** The full CompendiumIndex of this tab */
     protected indexData: CompendiumBrowserIndexData[];
-    /** The filtered CompendiumIndex */
-    protected currentIndex: CompendiumBrowserIndexData[];
     /** Is this tab initialized? */
     isInitialized: boolean;
     /** The total count of items in the currently filtered index */
     totalItemCount: number;
-    /** The initial display limit for this tab; Scrolling is currently hardcoded to +100 */
-    scrollLimit: number;
     /** The name of this tab */
     abstract tabName: ContentTabName;
-    /** The path to the result list template of this tab */
-    abstract templatePath: string;
+    /** The label for this tab. Can be a translation string */
+    protected abstract tabLabel: string;
+    /** Whether this tab is visible in the browser */
+    visible: boolean;
     /** Minisearch */
     searchEngine: MiniSearch<CompendiumBrowserIndexData>;
     /** Names of the document fields to be indexed. */
@@ -31,15 +34,17 @@ export declare abstract class CompendiumBrowserTab {
     /** Names of fields to store, so that search results would include them.
      *  By default none, so resuts would only contain the id field. */
     storeFields: string[];
+    /** The localized label for this tab */
+    get label(): string;
+    /** Whether this tab is only visible to a GM */
+    get isGMOnly(): boolean;
     constructor(browser: CompendiumBrowser);
     /** Initialize this tab */
-    init(): Promise<void>;
+    init(force?: boolean): Promise<void>;
     /** Open this tab
      * @param filter An optional initial filter for this tab
      */
-    open(filter?: BrowserFilter): Promise<void>;
-    /** Filter indexData and return slice based on current scrollLimit */
-    getIndexData(start: number): CompendiumBrowserIndexData[];
+    open(options?: CompendiumBrowserOpenTabOptions): Promise<void>;
     /** Returns a clean copy of the filterData for this tab. Initializes the tab if necessary. */
     getFilterData(): Promise<this["filterData"]>;
     /** Reset all filters */
@@ -52,8 +57,7 @@ export declare abstract class CompendiumBrowserTab {
     protected abstract prepareFilterData(): this["filterData"];
     /** Filter indexData */
     protected abstract filterIndexData(entry: CompendiumBrowserIndexData): boolean;
-    protected filterTraits(traits: string[], selected: MultiselectData["selected"], condition: MultiselectData["conjunction"]): boolean;
-    renderResults(start: number): Promise<HTMLLIElement[]>;
+    protected filterTraits(traits: string[], selected: TraitData["selected"], condition: TraitData["conjunction"]): boolean;
     /** Sort result array by name, level or price */
     protected sortResult(result: CompendiumBrowserIndexData[]): CompendiumBrowserIndexData[];
     /** Return new range filter values based on input */

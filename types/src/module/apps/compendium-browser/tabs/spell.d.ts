@@ -1,11 +1,12 @@
+import { CompendiumBrowser } from "../browser.ts";
 import { ContentTabName } from "../data.ts";
-import { CompendiumBrowser } from "../index.ts";
-import { CompendiumBrowserTab } from "./base.ts";
+import { CompendiumBrowserTab } from "./base.svelte.ts";
 import { CompendiumBrowserIndexData, SpellFilters } from "./data.ts";
+
 export declare class CompendiumBrowserSpellTab extends CompendiumBrowserTab {
     tabName: ContentTabName;
+    tabLabel: string;
     filterData: SpellFilters;
-    templatePath: string;
     searchFields: string[];
     storeFields: string[];
     constructor(browser: CompendiumBrowser);

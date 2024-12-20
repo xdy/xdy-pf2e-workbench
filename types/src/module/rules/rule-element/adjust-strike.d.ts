@@ -1,9 +1,9 @@
 import type { ActorType } from "@actor/types.ts";
 import { PredicateField } from "@system/schema-data-fields.ts";
-import type { StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "./ae-like.ts";
 import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
+import fields = foundry.data.fields;
 
 declare class AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema> {
     protected static validActorTypes: ActorType[];
@@ -16,9 +16,9 @@ declare class AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema
 interface AdjustStrikeRuleElement extends RuleElementPF2e<AdjustStrikeSchema>, ModelPropsFromRESchema<AdjustStrikeSchema> {
 }
 type AdjustStrikeSchema = RuleElementSchema & {
-    mode: StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
+    mode: fields.StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
     /** The property of the strike to adjust */
-    property: StringField<AdjustStrikeProperty, AdjustStrikeProperty, true, false, false>;
+    property: fields.StringField<AdjustStrikeProperty, AdjustStrikeProperty, true, false, false>;
     /** The definition of the strike in terms of its item (weapon) roll options */
     definition: PredicateField;
     value: ResolvableValueField<true, false, false>;

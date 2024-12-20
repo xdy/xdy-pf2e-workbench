@@ -1,10 +1,11 @@
 import type { KitPF2e } from "@item";
-import { ItemSystemModel, ItemSystemSchema } from "@item/base/data/schema.ts";
+import { ItemSystemModel, ItemSystemSchema } from "@item/base/data/model.ts";
 import type { BaseItemSourcePF2e, ItemSystemSource } from "@item/base/data/system.ts";
 import type { ClassTrait } from "@item/class/types.ts";
 import { PriceField } from "@item/physical/schema.ts";
 import { NullField, RecordField, SlugField } from "@system/schema-data-fields.ts";
 import fields = foundry.data.fields;
+
 declare class KitEntriesField extends RecordField<fields.StringField<string, string, true, false, false>, fields.SchemaField<KitEntryValueSchema>, true, false, true, true> {
     /**
      * @param depth The recursion depth of this field:must be between 0 and 2

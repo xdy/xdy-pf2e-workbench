@@ -1,64 +1,54 @@
 import type { CharacterPF2e } from "@actor";
-import { Predicate, RawPredicate } from "@system/predication.ts";
-import { CraftingFormula, PreparedFormula, PreparedFormulaData } from "./types.ts";
+import { ResourceData } from "@actor/creature/index.ts";
+import { PhysicalItemPF2e } from "@item";
+import { PhysicalItemSource } from "@item/base/data/index.ts";
+import { Predicate } from "@system/predication.ts";
+import type {
+    CraftableItemDefinition,
+    CraftingAbilityData,
+    CraftingFormula,
+    PreparedFormula,
+    PreparedFormulaData,
+} from "./types.ts";
 
 declare class CraftingAbility implements CraftingAbilityData {
     #private;
-    /** A label for this crafting entry to display on sheets */
-    label: string;
-    slug: string;
     /** This crafting ability's parent actor */
     actor: CharacterPF2e;
+    slug: string;
+    /** A label for this crafting entry to display on sheets */
+    label: string;
+    resource: string | null;
     preparedFormulaData: PreparedFormulaData[];
     isAlchemical: boolean;
     isDailyPrep: boolean;
     isPrepared: boolean;
-    craftableItems: Predicate;
     maxSlots: number;
     fieldDiscovery: Predicate | null;
-    batchSizes: {
-        default: number;
-        other: {
-            definition: Predicate;
-            quantity: number;
-        }[];
-    };
     fieldDiscoveryBatchSize: number;
+    batchSize: number;
     maxItemLevel: number;
-    constructor(actor: CharacterPF2e, data: CraftingAbilityData);
+    /** All craftable item definitions, sorted from biggest batch to smallest batch size */
+    craftableItems: CraftableItemDefinition[];
+    constructor(actor: CharacterPF2e);
+    /** Initializes this crafting ability with data. Call during actor data preparation. */
+    initialize(data: CraftingAbilityData): void;
     getPreparedCraftingFormulas(): Promise<PreparedFormula[]>;
     getSheetData(): Promise<CraftingAbilitySheetData>;
-    /** Computes reagent cost. Will go away once updated to PC2 */
-    calculateReagentCost(): Promise<number>;
-    prepareFormula(formula: CraftingFormula): Promise<void>;
-    checkEntryRequirements(formula: CraftingFormula, { warn }?: {
+    calculateResourceCost(): Promise<number>;
+    /** Returns true if the item can be created by this ability, which requires it to pass predication and be of sufficient level */
+    canCraft(item: PhysicalItemPF2e, { warn }?: {
         warn?: boolean | undefined;
     }): boolean;
-    unprepareFormula(index: number, itemUUID: string): Promise<void>;
-    setFormulaQuantity(index: number, itemUUID: string, value: "increase" | "decrease" | number): Promise<void>;
-    toggleFormulaExpended(index: number, itemUUID: string): Promise<void>;
+    prepareFormula(formula: CraftingFormula): Promise<void>;
+    unprepareFormula(indexOrUuid: number | ItemUUID): Promise<void>;
+    setFormulaQuantity(index: number, value: "increase" | "decrease" | number): Promise<void>;
+    toggleFormulaExpended(index: number, value?: boolean): Promise<void>;
     toggleSignatureItem(itemUUID: string): Promise<void>;
-    updateFormulas(formulas: PreparedFormulaData[]): Promise<void>;
-}
-interface CraftingAbilityData {
-    slug: string;
-    label: string;
-    isAlchemical: boolean;
-    isDailyPrep: boolean;
-    isPrepared: boolean;
-    maxSlots?: number;
-    craftableItems: RawPredicate;
-    fieldDiscovery?: RawPredicate | null;
-    batchSizes?: {
-        default: number;
-        other: {
-            definition: RawPredicate;
-            quantity: number;
-        }[];
-    };
-    fieldDiscoveryBatchSize?: number;
-    maxItemLevel?: number | null;
-    preparedFormulaData?: PreparedFormulaData[];
+    updateFormulas(formulas: PreparedFormulaData[], operation?: Partial<DatabaseUpdateOperation<CharacterPF2e>> | undefined): Promise<void>;
+    craft(itemOrUUIDOrIndex: PhysicalItemPF2e | ItemUUID | number, { consume, destination }?: CraftParameters): Promise<PhysicalItemPF2e | null>;
+    /** Returns what items should be created by this ability during daily preparation, and what the resource expenditure should be */
+    calculateDailyCrafting(): Promise<DailyCraftingResult>;
 }
 interface CraftingAbilitySheetData {
     slug: string;
@@ -66,10 +56,28 @@ interface CraftingAbilitySheetData {
     isAlchemical: boolean;
     isPrepared: boolean;
     isDailyPrep: boolean;
+    /** This is true if we do not have sufficient slots or resources to craft this ability */
+    insufficient: boolean;
     maxSlots: number;
     maxItemLevel: number;
-    reagentCost: number;
-    prepared: (PreparedFormula | null)[];
+    resource: ResourceData | null;
+    resourceCost: number;
+    remainingSlots: number;
+    prepared: PreparedFormula[];
+}
+interface DailyCraftingResult {
+    items: PreCreate<PhysicalItemSource>[];
+    resource: {
+        slug: string;
+        cost: number;
+    } | null;
+    /** True if this item is internally insufficient. It does not compare with other crafting abilties */
+    insufficient: boolean;
+}
+interface CraftParameters {
+    /** If set to true, will craft by consuming the required resource */
+    consume?: boolean;
+    destination?: "hand";
 }
 export { CraftingAbility };
-export type { CraftingAbilityData, CraftingAbilitySheetData, PreparedFormulaData };
+export type { CraftingAbilitySheetData, PreparedFormulaData };

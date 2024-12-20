@@ -5,6 +5,7 @@ import { OtherConsumableTag } from "@item/consumable/types.ts";
 import { PreciousMaterialType } from "@item/physical/types.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { OtherWeaponTag } from "@item/weapon/types.ts";
+
 declare const ancestryTraits: {
     aiuvarin: string;
     anadi: string;
@@ -160,6 +161,7 @@ declare const creatureTraits: {
     incorporeal: string;
     inevitable: string;
     kami: string;
+    kaiju: string;
     kovintus: string;
     light: string;
     lilu: string;
@@ -174,6 +176,7 @@ declare const creatureTraits: {
     mummy: string;
     munavri: string;
     mutant: string;
+    mythic: string;
     nindoru: string;
     nymph: string;
     oni: string;
@@ -383,6 +386,7 @@ declare const spellTraits: {
     misfortune: string;
     morph: string;
     move: string;
+    mythic: string;
     nonlethal: string;
     olfactory: string;
     plant: string;
@@ -391,6 +395,7 @@ declare const spellTraits: {
     possession: string;
     prediction: string;
     psyche: string;
+    rage: string;
     revelation: string;
     sanctified: string;
     scrying: string;
@@ -430,11 +435,13 @@ declare const spellTraits: {
     force: string;
     sonic: string;
     alchemist: string;
+    animist: string;
     barbarian: string;
     bard: string;
     champion: string;
     cleric: string;
     druid: string;
+    exemplar: string;
     fighter: string;
     gunslinger: string;
     kineticist: string;
@@ -512,13 +519,17 @@ declare const weaponTraits: {
     injection: string;
     intelligent: string;
     invested: string;
+    "jousting-d4": string;
     "jousting-d6": string;
+    "jousting-d8": string;
+    "jousting-d10": string;
     kickback: string;
     light: string;
     magical: string;
     mental: string;
     modular: string;
     monk: string;
+    mythic: string;
     nonlethal: string;
     olfactory: string;
     parry: string;
@@ -544,6 +555,7 @@ declare const weaponTraits: {
     splash: string;
     staff: string;
     sweep: string;
+    tearing: string;
     tech: string;
     teleportation: string;
     tethered: string;
@@ -794,12 +806,14 @@ declare const npcAttackTraits: {
     silver: string;
     "cold-iron": string;
     dragonhide: string;
+    dreamweb: string;
     "grisantian-pelt": string;
     "keep-stone": string;
     peachwood: string;
     sisterstone: string;
     "sisterstone-dusk": string;
     "sisterstone-scarlet": string;
+    sloughstone: string;
     "sovereign-steel": string;
     warpglass: string;
     adjusted: string;
@@ -859,13 +873,17 @@ declare const npcAttackTraits: {
     injection: string;
     intelligent: string;
     invested: string;
+    "jousting-d4": string;
     "jousting-d6": string;
+    "jousting-d8": string;
+    "jousting-d10": string;
     kickback: string;
     light: string;
     magical: string;
     mental: string;
     modular: string;
     monk: string;
+    mythic: string;
     nonlethal: string;
     olfactory: string;
     parry: string;
@@ -891,6 +909,7 @@ declare const npcAttackTraits: {
     splash: string;
     staff: string;
     sweep: string;
+    tearing: string;
     tech: string;
     teleportation: string;
     tethered: string;
@@ -1028,17 +1047,20 @@ declare const featTraits: {
     additive3: string;
     aftermath: string;
     alchemical: string;
+    apparition: string;
     archetype: string;
     artifact: string;
     auditory: string;
     aura: string;
     bravado: string;
+    calling: string;
     circus: string;
     class: string;
     coagulant: string;
     composite: string;
     concentrate: string;
     dedication: string;
+    destiny: string;
     detection: string;
     deviant: string;
     downtime: string;
@@ -1051,6 +1073,7 @@ declare const featTraits: {
     flourish: string;
     fortune: string;
     general: string;
+    ikon: string;
     impulse: string;
     infusion: string;
     injury: string;
@@ -1079,12 +1102,14 @@ declare const featTraits: {
     talisman: string;
     tandem: string;
     time: string;
+    transcendence: string;
     "true-name": string;
     unstable: string;
     vigilante: string;
     virulent: string;
     vitality: string;
     void: string;
+    wandering: string;
     amp: string;
     attack: string;
     beast: string;
@@ -1114,6 +1139,7 @@ declare const featTraits: {
     litany: string;
     misfortune: string;
     morph: string;
+    mythic: string;
     nonlethal: string;
     plant: string;
     polymorph: string;
@@ -1155,11 +1181,13 @@ declare const featTraits: {
     force: string;
     sonic: string;
     alchemist: string;
+    animist: string;
     barbarian: string;
     bard: string;
     champion: string;
     cleric: string;
     druid: string;
+    exemplar: string;
     fighter: string;
     gunslinger: string;
     kineticist: string;
@@ -1336,10 +1364,12 @@ declare const consumableTraits: {
     litany: string;
     manipulate: string;
     move: string;
+    mythic: string;
     nonlethal: string;
     plant: string;
     prediction: string;
     psyche: string;
+    rage: string;
     revelation: string;
     sanctified: string;
     shadow: string;
@@ -1372,11 +1402,13 @@ declare const consumableTraits: {
     force: string;
     sonic: string;
     alchemist: string;
+    animist: string;
     barbarian: string;
     bard: string;
     champion: string;
     cleric: string;
     druid: string;
+    exemplar: string;
     fighter: string;
     gunslinger: string;
     kineticist: string;
@@ -1448,6 +1480,7 @@ declare const actionTraits: {
     misfortune: string;
     morph: string;
     move: string;
+    mythic: string;
     nonlethal: string;
     olfactory: string;
     plant: string;
@@ -1456,6 +1489,7 @@ declare const actionTraits: {
     possession: string;
     prediction: string;
     psyche: string;
+    rage: string;
     revelation: string;
     sanctified: string;
     scrying: string;
@@ -1494,11 +1528,13 @@ declare const actionTraits: {
     force: string;
     sonic: string;
     alchemist: string;
+    animist: string;
     barbarian: string;
     bard: string;
     champion: string;
     cleric: string;
     druid: string;
+    exemplar: string;
     fighter: string;
     gunslinger: string;
     kineticist: string;
@@ -1556,13 +1592,16 @@ declare const actionTraits: {
     virulent: string;
     wand: string;
     aftermath: string;
+    apparition: string;
     archetype: string;
     artifact: string;
     bravado: string;
+    calling: string;
     circus: string;
     class: string;
     composite: string;
     dedication: string;
+    destiny: string;
     deviant: string;
     downtime: string;
     evolution: string;
@@ -1570,6 +1609,7 @@ declare const actionTraits: {
     finisher: string;
     flourish: string;
     general: string;
+    ikon: string;
     impulse: string;
     infusion: string;
     lineage: string;
@@ -1580,7 +1620,6 @@ declare const actionTraits: {
     overflow: string;
     "pervasive-magic": string;
     press: string;
-    rage: string;
     reckless: string;
     reincarnated: string;
     reflection: string;
@@ -1591,8 +1630,10 @@ declare const actionTraits: {
     stamina: string;
     tandem: string;
     time: string;
+    transcendence: string;
     unstable: string;
     vigilante: string;
+    wandering: string;
     aiuvarin: string;
     anadi: string;
     android: string;
@@ -1714,6 +1755,7 @@ declare const effectTraits: Omit<{
     misfortune: string;
     morph: string;
     move: string;
+    mythic: string;
     nonlethal: string;
     olfactory: string;
     plant: string;
@@ -1722,6 +1764,7 @@ declare const effectTraits: Omit<{
     possession: string;
     prediction: string;
     psyche: string;
+    rage: string;
     revelation: string;
     sanctified: string;
     scrying: string;
@@ -1760,11 +1803,13 @@ declare const effectTraits: Omit<{
     force: string;
     sonic: string;
     alchemist: string;
+    animist: string;
     barbarian: string;
     bard: string;
     champion: string;
     cleric: string;
     druid: string;
+    exemplar: string;
     fighter: string;
     gunslinger: string;
     kineticist: string;
@@ -1822,13 +1867,16 @@ declare const effectTraits: Omit<{
     virulent: string;
     wand: string;
     aftermath: string;
+    apparition: string;
     archetype: string;
     artifact: string;
     bravado: string;
+    calling: string;
     circus: string;
     class: string;
     composite: string;
     dedication: string;
+    destiny: string;
     deviant: string;
     downtime: string;
     evolution: string;
@@ -1836,6 +1884,7 @@ declare const effectTraits: Omit<{
     finisher: string;
     flourish: string;
     general: string;
+    ikon: string;
     impulse: string;
     infusion: string;
     lineage: string;
@@ -1846,7 +1895,6 @@ declare const effectTraits: Omit<{
     overflow: string;
     "pervasive-magic": string;
     press: string;
-    rage: string;
     reckless: string;
     reincarnated: string;
     reflection: string;
@@ -1857,8 +1905,10 @@ declare const effectTraits: Omit<{
     stamina: string;
     tandem: string;
     time: string;
+    transcendence: string;
     unstable: string;
     vigilante: string;
+    wandering: string;
     aiuvarin: string;
     anadi: string;
     android: string;
@@ -1926,7 +1976,7 @@ declare const effectTraits: Omit<{
     wayang: string;
     yaksha: string;
     yaoguai: string;
-}, "splash" | "alchemist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "fighter" | "gunslinger" | "kineticist" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "psychic" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "thaumaturge" | "witch" | "wizard" | "agile" | "propulsive" | "backswing" | "forceful" | "reach" | "sweep" | "thrown" | "volley-20" | "volley-30" | "volley-50" | "volley-60" | "clockwork" | "consumable" | "infused" | "aiuvarin" | "anadi" | "android" | "aphorite" | "ardande" | "athamaru" | "automaton" | "awakened-animal" | "azarketi" | "beastkin" | "bugbear" | "catfolk" | "centaur" | "changeling" | "conrasu" | "dhampir" | "dragonblood" | "dromaar" | "duskwalker" | "dwarf" | "elf" | "fetchling" | "fleshwarp" | "ganzi" | "geniekin" | "ghoran" | "gnoll" | "gnome" | "goblin" | "goloma" | "grippli" | "halfling" | "hobgoblin" | "human" | "hungerseed" | "kashrishi" | "kitsune" | "kobold" | "leshy" | "lizardfolk" | "merfolk" | "minotaur" | "nagaji" | "naari" | "nephilim" | "orc" | "oread" | "poppet" | "ratfolk" | "reflection" | "samsaran" | "sarangay" | "shisk" | "shoony" | "skeleton" | "sprite" | "strix" | "suli" | "surki" | "sylph" | "tanuki" | "talos" | "tengu" | "undine" | "vanara" | "vishkanya" | "wayang" | "yaksha" | "yaoguai" | "additive" | "additive1" | "additive2" | "additive3" | "aftermath" | "amp" | "archetype" | "attack" | "beast" | "bottled-breath" | "cantrip" | "catalyst" | "circus" | "class" | "coagulant" | "composite" | "composition" | "concentrate" | "dedication" | "deviant" | "eidolon" | "elixir" | "esoterica" | "expandable" | "exploration" | "finisher" | "flourish" | "focus" | "fulu" | "gadget" | "general" | "lineage" | "litany" | "lozenge" | "manipulate" | "missive" | "modification" | "multiclass" | "mutagen" | "oath" | "oil" | "overflow" | "pervasive-magic" | "potion" | "precious" | "press" | "processed" | "reckless" | "reincarnated" | "revelation" | "sanctified" | "scroll" | "secret" | "skill" | "snare" | "spellgun" | "structure" | "subtle" | "talisman" | "tandem" | "tea" | "trap" | "unstable" | "vigilante" | "wand">;
+}, "splash" | "alchemist" | "animist" | "barbarian" | "bard" | "champion" | "cleric" | "druid" | "exemplar" | "fighter" | "gunslinger" | "kineticist" | "inventor" | "investigator" | "magus" | "monk" | "oracle" | "psychic" | "ranger" | "rogue" | "sorcerer" | "summoner" | "swashbuckler" | "thaumaturge" | "witch" | "wizard" | "agile" | "propulsive" | "backswing" | "forceful" | "reach" | "sweep" | "thrown" | "volley-20" | "volley-30" | "volley-50" | "volley-60" | "clockwork" | "consumable" | "infused" | "aiuvarin" | "anadi" | "android" | "aphorite" | "ardande" | "athamaru" | "automaton" | "awakened-animal" | "azarketi" | "beastkin" | "bugbear" | "catfolk" | "centaur" | "changeling" | "conrasu" | "dhampir" | "dragonblood" | "dromaar" | "duskwalker" | "dwarf" | "elf" | "fetchling" | "fleshwarp" | "ganzi" | "geniekin" | "ghoran" | "gnoll" | "gnome" | "goblin" | "goloma" | "grippli" | "halfling" | "hobgoblin" | "human" | "hungerseed" | "kashrishi" | "kitsune" | "kobold" | "leshy" | "lizardfolk" | "merfolk" | "minotaur" | "nagaji" | "naari" | "nephilim" | "orc" | "oread" | "poppet" | "ratfolk" | "reflection" | "samsaran" | "sarangay" | "shisk" | "shoony" | "skeleton" | "sprite" | "strix" | "suli" | "surki" | "sylph" | "tanuki" | "talos" | "tengu" | "undine" | "vanara" | "vishkanya" | "wayang" | "yaksha" | "yaoguai" | "additive" | "additive1" | "additive2" | "additive3" | "aftermath" | "amp" | "archetype" | "attack" | "beast" | "bottled-breath" | "cantrip" | "catalyst" | "circus" | "class" | "coagulant" | "composite" | "composition" | "concentrate" | "dedication" | "deviant" | "eidolon" | "elixir" | "esoterica" | "expandable" | "exploration" | "finisher" | "flourish" | "focus" | "fulu" | "gadget" | "general" | "lineage" | "litany" | "lozenge" | "manipulate" | "missive" | "modification" | "multiclass" | "mutagen" | "oath" | "oil" | "overflow" | "pervasive-magic" | "potion" | "precious" | "press" | "processed" | "reckless" | "reincarnated" | "revelation" | "sanctified" | "scroll" | "secret" | "skill" | "snare" | "spellgun" | "structure" | "subtle" | "talisman" | "tandem" | "tea" | "trap" | "unstable" | "vigilante" | "wand">;
 declare const hazardTraits: {
     alchemical: string;
     auditory: string;
@@ -2045,6 +2095,7 @@ declare const hazardTraits: {
     mummy: string;
     munavri: string;
     mutant: string;
+    mythic: string;
     nindoru: string;
     nymph: string;
     oni: string;
@@ -2222,6 +2273,7 @@ declare const equipmentTraits: {
     misfortune: string;
     morph: string;
     mounted: string;
+    mythic: string;
     nonlethal: string;
     plant: string;
     poison: string;
@@ -2402,12 +2454,14 @@ declare const armorTraits: {
     flexible: string;
     healing: string;
     hindering: string;
+    illusion: string;
     inscribed: string;
     intelligent: string;
     invested: string;
     laminar: string;
     light: string;
     magical: string;
+    mythic: string;
     noisy: string;
     plant: string;
     ponderous: string;
@@ -2501,6 +2555,7 @@ declare const kingmakerTraits: {
     misfortune: string;
     morph: string;
     move: string;
+    mythic: string;
     nonlethal: string;
     olfactory: string;
     plant: string;
@@ -2509,6 +2564,7 @@ declare const kingmakerTraits: {
     possession: string;
     prediction: string;
     psyche: string;
+    rage: string;
     revelation: string;
     sanctified: string;
     scrying: string;
@@ -2547,11 +2603,13 @@ declare const kingmakerTraits: {
     force: string;
     sonic: string;
     alchemist: string;
+    animist: string;
     barbarian: string;
     bard: string;
     champion: string;
     cleric: string;
     druid: string;
+    exemplar: string;
     fighter: string;
     gunslinger: string;
     kineticist: string;
@@ -2609,13 +2667,16 @@ declare const kingmakerTraits: {
     virulent: string;
     wand: string;
     aftermath: string;
+    apparition: string;
     archetype: string;
     artifact: string;
     bravado: string;
+    calling: string;
     circus: string;
     class: string;
     composite: string;
     dedication: string;
+    destiny: string;
     deviant: string;
     downtime: string;
     evolution: string;
@@ -2623,6 +2684,7 @@ declare const kingmakerTraits: {
     finisher: string;
     flourish: string;
     general: string;
+    ikon: string;
     impulse: string;
     infusion: string;
     lineage: string;
@@ -2633,7 +2695,6 @@ declare const kingmakerTraits: {
     overflow: string;
     "pervasive-magic": string;
     press: string;
-    rage: string;
     reckless: string;
     reincarnated: string;
     reflection: string;
@@ -2644,8 +2705,10 @@ declare const kingmakerTraits: {
     stamina: string;
     tandem: string;
     time: string;
+    transcendence: string;
     unstable: string;
     vigilante: string;
+    wandering: string;
     aiuvarin: string;
     anadi: string;
     android: string;
@@ -2721,6 +2784,7 @@ declare const traitDescriptions: {
     duskwood: string;
     djezet: string;
     dragonhide: string;
+    dreamweb: string;
     "grisantian-pelt": string;
     inubrix: string;
     dawnsilver: string;
@@ -2731,6 +2795,7 @@ declare const traitDescriptions: {
     sisterstone: string;
     "sisterstone-dusk": string;
     "sisterstone-scarlet": string;
+    sloughstone: string;
     "sovereign-steel": string;
     warpglass: string;
     "ranged-trip": string;
@@ -2818,6 +2883,7 @@ declare const traitDescriptions: {
     tane: string;
     tattoo: string;
     tea: string;
+    tearing: string;
     tech: string;
     telepathy: string;
     teleportation: string;
@@ -2839,6 +2905,7 @@ declare const traitDescriptions: {
     tiefling: string;
     time: string;
     training: string;
+    transcendence: string;
     trap: string;
     trip: string;
     troll: string;
@@ -2882,6 +2949,7 @@ declare const traitDescriptions: {
     "volley-50": string;
     "volley-60": string;
     wand: string;
+    wandering: string;
     water: string;
     werecreature: string;
     wight: string;
@@ -2988,8 +3056,10 @@ declare const traitDescriptions: {
     android: string;
     angel: string;
     animal: string;
+    animist: string;
     apex: string;
     aphorite: string;
+    apparition: string;
     aquadynamic: string;
     aquatic: string;
     arcane: string;
@@ -3023,6 +3093,7 @@ declare const traitDescriptions: {
     bugbear: string;
     bulwark: string;
     caligni: string;
+    calling: string;
     cantrip: string;
     "capacity-2": string;
     "capacity-3": string;
@@ -3090,6 +3161,7 @@ declare const traitDescriptions: {
     dedication: string;
     demon: string;
     dero: string;
+    destiny: string;
     detection: string;
     deviant: string;
     devil: string;
@@ -3121,6 +3193,7 @@ declare const traitDescriptions: {
     esoterica: string;
     ethereal: string;
     evolution: string;
+    exemplar: string;
     expandable: string;
     experiment: string;
     exploration: string;
@@ -3173,7 +3246,10 @@ declare const traitDescriptions: {
     gunslinger: string;
     hag: string;
     halfling: string;
+    "jousting-d4": string;
     "jousting-d6": string;
+    "jousting-d8": string;
+    "jousting-d10": string;
     hampering: string;
     harnessed: string;
     haunt: string;
@@ -3187,6 +3263,7 @@ declare const traitDescriptions: {
     human: string;
     humanoid: string;
     naari: string;
+    ikon: string;
     illusion: string;
     impulse: string;
     incapacitation: string;
@@ -3246,6 +3323,7 @@ declare const traitDescriptions: {
     mummy: string;
     mutagen: string;
     mutant: string;
+    mythic: string;
     nagaji: string;
     nephilim: string;
     nindoru: string;

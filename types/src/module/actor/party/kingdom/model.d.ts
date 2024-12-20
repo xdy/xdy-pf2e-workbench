@@ -1,24 +1,17 @@
-import { type ArmyPF2e } from "@actor";
+import { type ArmyPF2e, type PartyPF2e } from "@actor";
 import { FeatGroup } from "@actor/character/feats/index.ts";
 import { RawModifier } from "@actor/modifiers.ts";
 import { CampaignFeaturePF2e } from "@item";
-import { ItemType } from "@item/base/data/index.ts";
+import type { ItemType } from "@item/base/data/index.ts";
 import { Statistic } from "@system/statistic/index.ts";
-import type { PartyPF2e } from "../document.ts";
+import { PartySystemData } from "../data.ts";
 import { PartyCampaign } from "../types.ts";
-import {
-    KingdomCharter,
-    KingdomCHG,
-    KingdomGovernment,
-    KingdomNationType,
-    KingdomSchema,
-    KingdomSkill,
-    KingdomSource,
-} from "./types.ts";
+import { KingdomCharter, KingdomCHG, KingdomData, KingdomGovernment, KingdomSchema, KingdomSource } from "./schema.ts";
+import type { KingdomNationType, KingdomSkill } from "./types.ts";
+import DataModel = foundry.abstract.DataModel;
 
-declare const DataModel: typeof foundry.abstract.DataModel;
 /** Model for the Kingmaker campaign data type, which represents a Kingdom */
-declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements PartyCampaign {
+declare class Kingdom extends DataModel<PartySystemData, KingdomSchema> implements PartyCampaign {
     nationType: KingdomNationType;
     features: FeatGroup<PartyPF2e, CampaignFeaturePF2e>;
     feats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>;
@@ -67,6 +60,6 @@ declare class Kingdom extends DataModel<PartyPF2e, KingdomSchema> implements Par
     }): void;
     _preUpdate(changed: DeepPartial<KingdomSource>): void;
 }
-interface Kingdom extends ModelPropsFromSchema<KingdomSchema> {
+interface Kingdom extends DataModel<PartySystemData, KingdomSchema>, KingdomData {
 }
 export { Kingdom };

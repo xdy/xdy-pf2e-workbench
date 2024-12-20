@@ -1,12 +1,9 @@
-import type { ConditionPF2e, EffectPF2e } from "@item";
+import { type ConditionPF2e, type EffectPF2e } from "@item";
 import { EffectTrait } from "@item/abstract-effect/types.ts";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
-/**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param itemId
- */
-export declare function rollItemMacro(itemId: string, event?: Event | null): Promise<ChatMessagePF2e | null>;
+
+/** Given an item's id or uuid, retrieves the item and uses it.  */
+export declare function rollItemMacro(itemIdOrUuid: string, event?: Event | null): Promise<ChatMessagePF2e | null>;
 export declare function createActionMacro({ actorUUID, actionIndex, elementTrait, slot, }: {
     actorUUID?: ActorUUID;
     elementTrait?: string;

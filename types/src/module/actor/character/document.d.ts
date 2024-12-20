@@ -1,6 +1,6 @@
 import { CreaturePF2e, type FamiliarPF2e } from "@actor";
 import { CreatureSpeeds, LabeledSpeed } from "@actor/creature/data.ts";
-import { CreatureUpdateOperation } from "@actor/creature/types.ts";
+import { CreatureUpdateOperation, ResourceData } from "@actor/creature/types.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
 import { AttributeString, MovementType } from "@actor/types.ts";
@@ -12,7 +12,7 @@ import type { UserPF2e } from "@module/user/document.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { RollParameters } from "@system/rolls.ts";
 import { Statistic } from "@system/statistic/index.ts";
-import { CharacterCrafting, CraftingFormula } from "./crafting/index.ts";
+import { CharacterCrafting } from "./crafting/index.ts";
 import {
     BaseWeaponProficiencyKey,
     CharacterAbilities,
@@ -36,7 +36,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     familiar: FamiliarPF2e | null;
     feats: CharacterFeats<this>;
     pfsBoons: FeatPF2e<this>[];
-    deityBoonsCurses: FeatPF2e<this>[];
+    divineIntercessions: FeatPF2e<this>[];
     /** The primary class DC */
     classDC: Statistic | null;
     /** All class DCs, including the primary */
@@ -60,10 +60,6 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
     /** Retrieve lore skills, class statistics, and tradition-specific spellcasting */
     getStatistic(slug: GuaranteedGetStatisticSlug): Statistic<this>;
     getStatistic(slug: string): Statistic<this> | null;
-    /** Will be deprecated/removed after PC2 alchemist is complete */
-    getCraftingFormulas(): Promise<CraftingFormula[]>;
-    /** Will be deprecated/removed after PC2 alchemist is complete */
-    performDailyCrafting(): Promise<void>;
     protected _initialize(options?: Record<string, unknown>): void;
     /** If one exists, prepare this character's familiar */
     prepareData(): void;
@@ -99,7 +95,7 @@ declare class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocu
         criticalSuccess: string;
         success: string;
     };
-    consumeAmmo(weapon: WeaponPF2e<this>, params: RollParameters): boolean;
+    consumeAmmo(weapon: WeaponPF2e<CharacterPF2e>, params: RollParameters): boolean;
     /** Prepare stored and synthetic martial proficiencies */
     prepareMartialProficiencies(): void;
     /** Toggle the invested state of an owned magical item */
@@ -112,5 +108,7 @@ interface CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     flags: CharacterFlags;
     readonly _source: CharacterSource;
     system: CharacterSystemData;
+    getResource(resource: "hero-points" | "mythic-points" | "focus" | "investiture" | "infused-reagents"): ResourceData;
+    getResource(resource: string): ResourceData | null;
 }
 export { CharacterPF2e };

@@ -32,7 +32,7 @@ import type {
 import { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ActorConditions } from "./conditions.ts";
 import { Abilities, VisionLevel } from "./creature/data.ts";
-import { GetReachParameters, ModeOfBeing } from "./creature/types.ts";
+import type { GetReachParameters, ModeOfBeing, ResourceData } from "./creature/types.ts";
 import { ActorFlagsPF2e, ActorSystemData, PrototypeTokenPF2e, RollOptionFlags } from "./data/base.ts";
 import type { ActorSourcePF2e } from "./data/index.ts";
 import type { ActorInitiative } from "./initiative.ts";
@@ -127,7 +127,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     get alliance(): ActorAlliance;
     get combatant(): CombatantPF2e<EncounterPF2e> | null;
     /** Add effect icons from effect items and rule elements */
-    get temporaryEffects(): ActiveEffect<this>[];
+    get temporaryEffects(): ActiveEffectPF2e<this>[];
     /** A means of checking this actor's type without risk of circular import references */
     isOfType<T extends "creature" | ActorType>(...types: T[]): this is ActorInstances<TParent>[T];
     /** Whether this actor is an ally of the provided actor */
@@ -142,6 +142,8 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     checkItemValidity(source: PreCreate<ItemSourcePF2e>): boolean;
     /** Get (almost) any statistic by slug: handling expands in `ActorPF2e` subclasses */
     getStatistic(slug: string): Statistic<this> | null;
+    /** Returns a resource by slug or by key */
+    getResource(_resource: string): ResourceData | null;
     /** Get roll options from this actor's effects, traits, and other properties */
     getSelfRollOptions(prefix?: "self" | "target" | "origin"): string[];
     /** The actor's reach: a meaningful implementation is found in `CreaturePF2e` and `HazardPF2e`. */
@@ -269,7 +271,7 @@ declare class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocument
     toggleStatusEffect(statusId: string, options?: {
         active?: boolean;
         overlay?: boolean;
-    }): Promise<boolean | void | ActiveEffect<this>>;
+    }): Promise<boolean | void | ActiveEffectPF2e<this>>;
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
     importFromJSON(json: string): Promise<this>;
     protected _applyDefaultTokenSettings(data: this["_source"], options?: {

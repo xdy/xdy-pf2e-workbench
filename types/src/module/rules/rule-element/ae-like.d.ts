@@ -1,6 +1,8 @@
 import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.d.ts";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
+import fields = foundry.data.fields;
+
 /**
  * Make a numeric modification to an arbitrary property in a similar way as `ActiveEffect`s
  * @category RuleElement
@@ -40,7 +42,6 @@ interface AutoChangeEntry {
     value: boolean | number | string | null;
     mode: AELikeChangeMode;
 }
-import fields = foundry.data.fields;
 type AELikeSchema = RuleElementSchema & {
     /** How to apply the `value` at the `path` */
     mode: fields.StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;

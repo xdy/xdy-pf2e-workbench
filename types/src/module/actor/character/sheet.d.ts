@@ -1,10 +1,10 @@
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="jquery" resolution-mode="require"/>
 /// <reference types="tooltipster" />
-import { CreatureSheetData, Language } from "@actor/creature/index.ts";
+import { CreatureSheetData, Language, ResourceData } from "@actor/creature/index.ts";
 import type { Sense } from "@actor/creature/sense.ts";
 import { SheetClickActionHandlers } from "@actor/sheet/base.ts";
-import { AbilityViewData, ActorSheetDataPF2e, InventoryItem } from "@actor/sheet/data-types.ts";
+import { AbilityViewData, InventoryItem, SheetInventory } from "@actor/sheet/data-types.ts";
 import { AttributeString, SaveType } from "@actor/types.ts";
 import type {
     AncestryPF2e,
@@ -22,7 +22,7 @@ import { CoinsPF2e } from "@item/physical/coins.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/types.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
-import { ZeroToFour } from "@module/data.ts";
+import { LabeledValueAndMax, ZeroToFour } from "@module/data.ts";
 import { DamageType } from "@system/damage/types.ts";
 import { CreatureSheetPF2e } from "../creature/sheet.ts";
 import { CharacterConfig } from "./config.ts";
@@ -46,8 +46,8 @@ declare class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureS
     static get defaultOptions(): ActorSheetOptions;
     get template(): string;
     getData(options?: ActorSheetOptions): Promise<CharacterSheetData<TActor>>;
-    /** Organize and classify Items for Character sheets */
-    prepareItems(sheetData: ActorSheetDataPF2e<CharacterPF2e>): Promise<void>;
+    protected _onSearchFilter(event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement | null): void;
+    protected prepareInventory(): SheetInventory;
     protected prepareInventoryItem(item: PhysicalItemPF2e): InventoryItem;
     /** Overriden to open sub-tabs if requested */
     protected openTab(name: string): void;
@@ -72,12 +72,6 @@ type CharacterSystemSheetData = CharacterSystemData & {
             singleOption: boolean;
         };
     };
-    resources: {
-        heroPoints: {
-            icon: string;
-            hover: string;
-        };
-    };
     saves: Record<SaveType, CharacterSaveData & {
         rankName?: string;
         short?: string;
@@ -90,20 +84,23 @@ interface FormulaSheetData {
     batchSize: number;
     cost: CoinsPF2e;
 }
+interface FormulaByLevel {
+    level: string;
+    formulas: FormulaSheetData[];
+}
 interface CraftingSheetData {
     noCost: boolean;
     hasQuickAlchemy: boolean;
     hasDailyCrafting: boolean;
-    knownFormulas: Record<number, FormulaSheetData[]>;
+    dailyCraftingComplete: boolean;
+    knownFormulas: FormulaByLevel[];
     abilities: {
+        spontaneous: CraftingAbilitySheetData[];
         prepared: CraftingAbilitySheetData[];
         alchemical: {
             entries: CraftingAbilitySheetData[];
-            totalReagentCost: number;
-            infusedReagents: {
-                value: number;
-                max: number;
-            };
+            resource: ResourceData;
+            resourceCost: number;
         };
     };
 }
@@ -132,6 +129,11 @@ interface CharacterSheetData<TActor extends CharacterPF2e = CharacterPF2e> exten
     hasStamina: boolean;
     /** This actor has actual containers for stowing, rather than just containers serving as a UI convenience */
     hasRealContainers: boolean;
+    /** The resource to display in the header, usually hero points */
+    headerResource: LabeledValueAndMax & {
+        slug: string;
+        icon: string;
+    };
     languages: LanguageSheetData[];
     magicTraditions: Record<MagicTradition, string>;
     martialProficiencies: Record<"attacks" | "defenses", Record<string, MartialProficiency>>;

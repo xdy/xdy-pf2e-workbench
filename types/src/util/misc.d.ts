@@ -1,5 +1,6 @@
-import { ActionCost } from "@item/base/data/system.ts";
-import Sortable from "sortablejs";
+import type { ActionCost } from "@item/base/data/system.ts";
+import type Sortable from "sortablejs";
+
 /**
  * Given an array and a key function, create a map where the key is the value that
  * gets returned when each item is pushed into the function. Accumulate
@@ -110,7 +111,7 @@ declare function configFromLocalization<T extends Record<string, TranslationDict
 /** Does the parameter look like an image file path? */
 declare function isImageFilePath(path: unknown): path is ImageFilePath;
 /** Does the parameter look like a video file path? */
-declare function isVideoFilePath(path: unknown): path is ImageFilePath;
+declare function isVideoFilePath(path: unknown): path is VideoFilePath;
 declare function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath;
 declare const SORTABLE_BASE_OPTIONS: Sortable.Options;
 export { ErrorPF2e, SORTABLE_BASE_OPTIONS, applyNTimes, configFromLocalization, fontAwesomeIcon, getActionGlyph, getActionIcon, getActionTypeLabel, groupBy, isImageFilePath, isImageOrVideoPath, isObject, isVideoFilePath, localizeList, localizer, mapValues, objectHasKey, ordinalString, padArray, parseHTML, recursiveReplaceString, setHasElement, signedInteger, sluggify, sortLabeledRecord, sortObjByKey, sortStringRecord, splitListString, tupleHasValue, type SlugCamel, };

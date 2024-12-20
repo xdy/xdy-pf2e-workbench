@@ -1,7 +1,8 @@
-import type { ArrayField, BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "./ae-like.ts";
 import { ModelPropsFromRESchema, ResolvableValueField } from "./data.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import fields = foundry.data.fields;
+
 /** Adjust the value of a modifier, change its damage type (in case of damage modifiers) or suppress it entirely */
 declare class AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema> {
     /** The number of times this adjustment has been applied */
@@ -17,16 +18,16 @@ interface AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema
     maxApplications: number;
 }
 type AdjustModifierSchema = RuleElementSchema & {
-    mode: StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
+    mode: fields.StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
     /** An optional relabeling of the adjusted modifier */
-    relabel: StringField<string, string, false, true, true>;
-    selector: StringField<string, string, false, false, false>;
-    selectors: ArrayField<StringField<string, string, true, false, false>>;
-    damageType: StringField<string, string, false, true, true>;
+    relabel: fields.StringField<string, string, false, true, true>;
+    selector: fields.StringField<string, string, false, false, false>;
+    selectors: fields.ArrayField<fields.StringField<string, string, true, false, false>>;
+    damageType: fields.StringField<string, string, false, true, true>;
     /** Rather than changing a modifier's value, ignore it entirely */
-    suppress: BooleanField<boolean, boolean, false, false, true>;
+    suppress: fields.BooleanField<boolean, boolean, false, false, true>;
     /** The maximum number of times this adjustment can be applied */
-    maxApplications: NumberField<number, number, false, true, true>;
+    maxApplications: fields.NumberField<number, number, false, true, true>;
     value: ResolvableValueField<false, true, true>;
 };
 interface AdjustModifierSource extends RuleElementSource {

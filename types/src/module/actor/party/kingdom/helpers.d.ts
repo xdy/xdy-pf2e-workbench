@@ -1,7 +1,9 @@
 import type { ActorPF2e } from "@actor";
 import type { ItemPF2e } from "@item";
 import type { Kingdom } from "./model.ts";
-import { KingdomAbility, KingdomCHG, KingdomCommodity } from "./types.ts";
+import type { KingdomCHG } from "./schema.ts";
+import type { KingdomAbility, KingdomCommodity } from "./types.ts";
+
 /** Resolves boosts using kingmaker rules. Free boosts cannot be the granted ability nor the flaw */
 declare function resolveKingdomBoosts(entry: KingdomCHG, choices: KingdomAbility[]): KingdomAbility[];
 /** Assemble what will be collected during the kingdom's upkeep phase */

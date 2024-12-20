@@ -8,6 +8,7 @@ import { Statistic } from "@system/statistic/index.ts";
 import { SpellCollection, type SpellSlotGroupId } from "./collection.ts";
 import { SpellcastingEntrySource, SpellcastingEntrySystemData } from "./data.ts";
 import { CastOptions, SpellcastingCategory, SpellcastingEntry, SpellcastingSheetData } from "./types.ts";
+
 declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> implements SpellcastingEntry<TParent> {
     spells: SpellCollection<NonNullable<TParent>> | null;
     /** Spellcasting attack and dc data created during actor preparation */
@@ -33,8 +34,8 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     get highestRank(): ZeroToTen;
     get showSlotlessRanks(): boolean;
     prepareBaseData(): void;
-    prepareSiblingData(this: SpellcastingEntryPF2e<NonNullable<TParent>>): void;
-    prepareActorData(this: SpellcastingEntryPF2e<NonNullable<TParent>>): void;
+    prepareSiblingData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
+    prepareActorData(this: SpellcastingEntryPF2e<ActorPF2e>): void;
     /** Prepares the statistic for this spellcasting entry */
     prepareStatistic(): void;
     /** All spells associated with this spellcasting entry on the actor that should also be deleted */
@@ -66,7 +67,6 @@ declare class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e
     getRollOptions(prefix?: string): string[];
     protected _preUpdate(changed: DeepPartial<this["_source"]>, options: DatabaseUpdateOperation<TParent>, user: UserPF2e): Promise<boolean | void>;
     /**
-     * To prevent (or delay) console spam, will send out a deprecation notice in a later release
      * @deprecated
      */
     getSpellData(): Promise<SpellcastingSheetData>;

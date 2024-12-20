@@ -127,6 +127,7 @@ declare const weaknessTypes: {
     magical: string;
     mental: string;
     metal: string;
+    mythic: string;
     "non-magical": string;
     "nonlethal-attacks": string;
     "persistent-damage": string;
@@ -195,6 +196,7 @@ declare const resistanceTypes: {
     magical: string;
     mental: string;
     metal: string;
+    mythic: string;
     "non-magical": string;
     nonlethal: string;
     "nonlethal-attacks": string;

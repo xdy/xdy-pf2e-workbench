@@ -173,6 +173,7 @@ declare class Weakness extends IWR<WeaknessType> implements WeaknessSource {
         magical: string;
         mental: string;
         metal: string;
+        mythic: string;
         "non-magical": string;
         "nonlethal-attacks": string;
         "persistent-damage": string;
@@ -253,6 +254,7 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         magical: string;
         mental: string;
         metal: string;
+        mythic: string;
         "non-magical": string;
         nonlethal: string;
         "nonlethal-attacks": string;
@@ -267,7 +269,7 @@ declare class Resistance extends IWR<ResistanceType> implements ResistanceSource
         salt: string;
         "salt-water": string;
         slashing: string;
-        sonic: string; /** Construct an object argument for Localization#format (see also PF2E.Actor.IWR.CompositeLabel in en.json) */
+        sonic: string;
         spells: string;
         spirit: string;
         "unarmed-attacks": string;

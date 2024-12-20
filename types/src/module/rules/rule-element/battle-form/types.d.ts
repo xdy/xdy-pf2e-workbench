@@ -6,6 +6,7 @@ import type { Size } from "@module/data.ts";
 import type { RawPredicate } from "@system/predication.ts";
 import type { RuleElementSource } from "../index.ts";
 import type { ImmunityRuleElement, ResistanceRuleElement, WeaknessRuleElement } from "../iwr/index.ts";
+
 interface BattleFormSource extends RuleElementSource {
     overrides?: BattleFormOverrides;
     canCast?: boolean;
@@ -62,8 +63,10 @@ interface BattleFormStrike {
     modifier: string | number;
     damage: WeaponDamage;
     ownIfHigher?: boolean;
-    range?: number | null;
-    maxRange?: number | null;
+    range?: {
+        increment?: number | null;
+        max?: number | null;
+    };
 }
 interface BattleFormStrikeQuery {
     pack: string;
