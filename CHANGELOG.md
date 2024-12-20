@@ -1,3 +1,18 @@
+# [6.14.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.13.0...v6.14.0) (2024-12-20)
+
+
+### Bug Fixes
+
+* Add typescript types for the macro source ([e4de2eb](https://github.com/xdy/xdy-pf2e-workbench/commit/e4de2eb3bca011efba13554010ff754284e9c478))
+* No need to install fvtt or build modules in workflow ([0bcb0fc](https://github.com/xdy/xdy-pf2e-workbench/commit/0bcb0fc285eff4c17e9cee019b279a86aa7bdc1e))
+
+
+### Features
+
+* Build compendium pack for macros as leveldb ([7d8ffb3](https://github.com/xdy/xdy-pf2e-workbench/commit/7d8ffb3d0f1160139b2104ad3cfd47e25c672ea3))
+* Build leveldb files for xdy-customizable-macros and xdy-internal-utility-macros ([c1ee923](https://github.com/xdy/xdy-pf2e-workbench/commit/c1ee923fe9ebdf6dfd3bafef373e12cc81a65287))
+* Get foundryvtt-cli from fork on github ([d62b796](https://github.com/xdy/xdy-pf2e-workbench/commit/d62b79694eacfc4829a76906491efcca2bd2975d))
+
 # [6.13.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.12.10...v6.13.0) (2024-12-20)
 
 
