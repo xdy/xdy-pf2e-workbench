@@ -329,14 +329,14 @@ export function pf2eRerollHook(
     if (!heroPoint || keep !== "new") return;
 
     // @ts-ignore
-    const die = newRoll.dice.find((d) => d instanceof Die && d.number === 1 && d.faces === 20);
+    const die = newRoll.dice.find((d) => d instanceof foundry.dice.terms.Die && d.number === 1 && d.faces === 20);
     const result = die?.results.find((r) => r.active && r.result <= 10);
     if (die && result) {
         newRoll.terms.push(
             // @ts-ignore
-            OperatorTerm.fromData({ class: "OperatorTerm", operator: "+", evaluated: true }),
+            foundry.dice.terms.OperatorTerm.fromData({ class: "OperatorTerm", operator: "+", evaluated: true }),
             // @ts-ignore
-            NumericTerm.fromData({ class: "NumericTerm", number: 10, evaluated: true }),
+            foundry.dice.terms.NumericTerm.fromData({ class: "NumericTerm", number: 10, evaluated: true }),
         );
         // @ts-ignore It's protected. Meh.
         newRoll._total += 10;
