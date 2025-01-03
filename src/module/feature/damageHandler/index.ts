@@ -138,13 +138,15 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
     return rollDamage;
 }
 
-export function persistentDamageHealing(message: ChatMessagePF2e) {
-    if (!game.ready || !message.token || !message.actor || !message.isDamageRoll) return;
+export function persistentDamageHealing(message: ChatMessagePF2e): void {
+    if (!message || !game.ready || !message.token || !message.actor || !message.isDamageRoll) return;
 
-    const rolls = message.rolls as Rolled<DamageRoll>[];
+    const rolls = Array.isArray(message.rolls) ? (message.rolls as Rolled<DamageRoll>[]) : null;
+    if (!rolls) return;
 
     let dtype: "Damage" | "Healing" | undefined;
-    if (rolls[0]?.instances.some((i) => i.persistent && i.options.evaluatePersistent)) {
+    if (rolls.length === 0) return;
+    if (rolls[0]?.instances?.some((i) => i.persistent && i.options.evaluatePersistent)) {
         dtype = "Damage";
     } else if (
         rolls.some((r) => r.kinds.has("healing")) &&
@@ -161,7 +163,7 @@ export function persistentDamageHealing(message: ChatMessagePF2e) {
     if (dtype && game.settings.get(MODULENAME, `applyPersistent${dtype}`)) {
         const itemOptions = message.item?.getRollOptions("item") ?? [];
         const rollOptions = new Set([...itemOptions, ...message.actor.getSelfRollOptions()]);
-        const damage = dtype === "Damage" ? rolls[0] : -rolls.reduce((sum, current) => sum + (current.total || 1), 0);
+        const damage = dtype === "Damage" ? rolls[0] : -rolls.reduce((sum, current) => sum + (current.total ?? 1), 0);
         const apply = message.actor.applyDamage({
             damage,
             token: message.token,
@@ -172,11 +174,13 @@ export function persistentDamageHealing(message: ChatMessagePF2e) {
         if (dtype === "Damage" && game.settings.get(MODULENAME, "applyPersistentDamageRecoveryRoll")) {
             // Use .then() here so the damage taken message is in chat before the recovery roll.  It works without, but the order
             // of the messages will be undetermined.
-            apply.then(() => {
-                if (message.item?.isOfType("condition")) {
-                    message.item.rollRecovery();
-                }
-            });
+            apply
+                .then(() => {
+                    if (message.item?.isOfType("condition")) {
+                        message.item.rollRecovery();
+                    }
+                })
+                .catch((error) => console.error("Error applying persistent healing/damage:", error));
         }
         // TODO Update the message to remove the recovery roll button, instead include the result in the message (and remove the message the following line creates.)
     }
@@ -342,7 +346,7 @@ async function handleNonSpell(actor, message, degreeOfSuccess: string) {
 }
 
 async function handleElementalBlastAttack(actor, message, degreeOfSuccess, checkContext) {
-    const roll = message.rolls.find((r) => r.options?.action === "elemental-blast");
+    const roll = message.rolls?.find((r) => r.options?.action === "elemental-blast");
     if (roll && actor.isOfType("character")) {
         const identifier = <string>roll?.options.identifier;
         const [element, damageType, meleeOrRanged, actionCost]: (string | undefined)[] = identifier?.split(".") ?? [];
