@@ -1,3 +1,10 @@
+## [6.14.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.14.3...v6.14.4) (2025-01-03)
+
+
+### Bug Fixes
+
+* Improve persistent damage handling safety checks ([35654c9](https://github.com/xdy/xdy-pf2e-workbench/commit/35654c9fc1e88cf052205b8bce8110174d95450b))
+
 ## [6.14.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.14.2...v6.14.3) (2025-01-03)
 
 
