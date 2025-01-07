@@ -1,3 +1,10 @@
+## [6.15.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.15.0...v6.15.1) (2025-01-07)
+
+
+### Bug Fixes
+
+* Re-adds "Aura: Aura of Despair" to Workbench items compendium. ([d0d289a](https://github.com/xdy/xdy-pf2e-workbench/commit/d0d289ad846f50221263ca72a7a4c2be43871801))
+
 # [6.15.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.14.6...v6.15.0) (2025-01-07)
 
 
