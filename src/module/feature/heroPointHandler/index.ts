@@ -144,6 +144,42 @@ export async function heroPointHandler(state: HPHState) {
     handlerDialog.render(true);
 }
 
+// Constants
+const PARTY_MEMBERS_FLAG_KEY = "partymembersThatHaveGottenHeropoints";
+
+/**
+ * Selects a random party member index from the provided list of actors,
+ * ensuring the same actor is not repeatedly selected until all have been selected.
+ *
+ * @param {CreaturePF2e[]} actors - The list of party members to select from.
+ * @return {Promise<number>} The index of the selected actor in the input array, or -1 if the input array is empty.
+ */
+async function randomPartymemberThatHasNotReceivedAHeropoint(actors): Promise<number> {
+    if (actors.length === 0) {
+        await game.actors?.party?.unsetFlag(MODULENAME, PARTY_MEMBERS_FLAG_KEY);
+        return -1;
+    }
+
+    const existingFlagValue = String(game.actors?.party?.getFlag(MODULENAME, PARTY_MEMBERS_FLAG_KEY));
+    const hasReceivedHP: Set<string> = existingFlagValue ? new Set(existingFlagValue.split(",")) : new Set();
+    if (hasReceivedHP.size === actors.length) {
+        hasReceivedHP.clear();
+    }
+
+    const noHPYet = actors.filter((actor) => !hasReceivedHP.has(actor.id));
+    if (noHPYet.length === 0) {
+        hasReceivedHP.clear();
+        noHPYet.push(...actors);
+    }
+    const randomIndex: number = Math.floor(Math.random() * noHPYet.length);
+    const selectedActorId: string = noHPYet[randomIndex]?.id || actors[Math.floor(Math.random() * actors.length)]?.id;
+    hasReceivedHP.add(selectedActorId);
+
+    await game.actors?.party?.setFlag(MODULENAME, PARTY_MEMBERS_FLAG_KEY, [...hasReceivedHP].join(","));
+
+    return actors.findIndex((actor) => actor.id === selectedActorId);
+}
+
 async function buildHtml(remainingMinutes: number, state: HPHState) {
     // TODO How to start using bootstrap? (I use bootstrap classes in the html).
     // TODO Extract to a handlebars template
@@ -151,15 +187,25 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
     // TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
     const actors = heroes();
-
     let checked: number;
     switch (state) {
         case HPHState.Start:
             checked = -1;
             break;
-        case HPHState.Timeout:
-            checked = actors.length > 0 ? Math.floor(Math.random() * actors.length) : -1;
+        case HPHState.Timeout: {
+            let selectedActor = -1;
+            switch (game.settings.get(MODULENAME, "heropointHandlerRandomization")) {
+                case "none":
+                    break;
+                case "random":
+                    selectedActor = Math.floor(Math.random() * actors.length);
+                    break;
+                case "randomPartymemberThatHasNotReceivedAHeropoint":
+                    selectedActor = await randomPartymemberThatHasNotReceivedAHeropoint(actors);
+            }
+            checked = actors.length > 0 ? selectedActor : -1;
             break;
+        }
         case HPHState.Check:
             checked = -1;
             break;

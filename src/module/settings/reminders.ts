@@ -132,6 +132,21 @@ export class WorkbenchRemindersSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            heropointHandlerRandomization: {
+                name: `${MODULENAME}.SETTINGS.heropointHandlerRandomization.name`,
+                hint: `${MODULENAME}.SETTINGS.heropointHandlerRandomization.hint`,
+                scope: "world",
+                config: true,
+                default: "random",
+                type: String,
+                choices: {
+                    none: game.i18n.localize(`${MODULENAME}.SETTINGS.heropointHandlerRandomization.none`),
+                    random: game.i18n.localize(`${MODULENAME}.SETTINGS.heropointHandlerRandomization.random`),
+                    randomPartymemberThatHasNotReceivedAHeropoint: game.i18n.localize(`${MODULENAME}.SETTINGS.heropointHandlerRandomization.randomPartymemberThatHasNotReceivedAHeropoint`),
+                },
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
         };
     }
 }

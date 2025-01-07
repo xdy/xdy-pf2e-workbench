@@ -482,6 +482,13 @@
         "hint": "Check to automatically start the Hero Point handler timer when the game is ready.",
         "name": "... and automatically start Hero Point Handler."
       },
+      "heropointHandlerRandomization": {
+        "hint": "How to select player to get random heropoint",
+        "name": "... how to select player to get random heropoint.",
+        "none": "No one",
+        "random": "A random partymember",
+        "randomPartymemberThatHasNotReceivedAHeropoint": "A partymember that hasn't gotten one yet."
+      },
       "housepatcher": {
         "hint": "(REALLY EXPERIMENTAL) Enter a json array to patch system compendiums. See housepatcher.md on the github for documentation.",
         "name": "(REALLY EXPERIMENTAL) Housepatcher (patches in house rules). Requires refresh (f5) after changing.",
