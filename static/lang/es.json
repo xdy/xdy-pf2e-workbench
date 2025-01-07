@@ -293,7 +293,7 @@
         "name": "Mueve al combatiente seleccionado antes que el combatiente actual."
       },
       "npcMystifierAddRandomProperty": {
-        "none": "Ninguna",
+        "none": "Ninguno",
         "name": "Agregar propiedad aleatoria del tipo elegido al nombre",
         "numberPostfix": "Número como sufijo",
         "wordPrefix": "Palabra como prefijo",
@@ -397,7 +397,7 @@
         "all": "Todos",
         "hint": "Selecciona quién tiene permiso para configurar la opción para gestionar automáticamente los resultados de la tirada de recuperación tras morir después de que el propietario haya hecho clic en el botón de recuperación de la hoja de personaje. Guarda la configuración para mostrar u ocultar opciones adicionales en el menú de configuración de automatización del cliente.",
         "name": "¿Quién tiene permitido configurar la opción para manejar automáticamente los resultados de la tirada de recuperación al morir después de hacer clic en el botón de recuperación?.",
-        "none": "Nadie",
+        "none": "Ninguno",
         "gm": "DJ",
         "players": "Jugadores"
       },
@@ -470,7 +470,7 @@
         "nonPartymembers": "No-miembros del grupo",
         "npcs": "PNJ",
         "name": "... pero siempre lanzando de forma privada para:",
-        "none": "Nadie",
+        "none": "Ninguno",
         "hint": "Marque para lanzar siempre de forma privada para... (Mantenga presionada la tecla Ctrl para *no* lanzar de forma privada)"
       },
       "castPrivateSpellWithPublicMessage": {
@@ -544,7 +544,7 @@
         "hint": "Agregue texto al nuevo nombre con sufijo, el valor predeterminado es '' (ejemplo: 'Criatura'), si coincide con el nombre de una tabla de lanzamiento (el valor predeterminado es la tabla incluida 'Workbench Adjectives'), se obtendrá un resultado de texto aleatorio de esta tabla. utilizado como sufijo en su lugar. Esto se agregará *antes* de cualquier prefijo de propiedad aleatoria (consulte también la opción de prefijo.)"
       },
       "autoRollDamageAllow": {
-        "none": "Nadie",
+        "none": "Ninguno",
         "gm": "DJ",
         "all": "Todos",
         "players": "Jugadores",
@@ -696,6 +696,13 @@
       "playerCraftingRarityColour": {
         "name": "Mostrar los nombres de las fórmulas en color de rareza en las hojas de los actores.",
         "hint": "Configuración del cliente para mostrar los nombres de las fórmulas en color de rareza en las hojas de actor."
+      },
+      "heropointHandlerRandomization": {
+        "name": "... cómo seleccionar un jugador para obtener puntos de héroe aleatorios.",
+        "none": "Nadie",
+        "random": "Un miembro del grupo al azar",
+        "randomPartymemberThatHasNotReceivedAHeropoint": "Un miembro del grupo que aún no ha conseguido uno.",
+        "hint": "Cómo seleccionar un jugador para obtener puntos de héroe aleatorios"
       }
     },
     "modules": {
