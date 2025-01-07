@@ -1,3 +1,10 @@
+# [6.15.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.14.6...v6.15.0) (2025-01-07)
+
+
+### Features
+
+* Add hero point handler randomization settings: no selection, random party member, or party member who hasn't received a point. Defaults to random (i.e. the way it used to work). ([0c7a612](https://github.com/xdy/xdy-pf2e-workbench/commit/0c7a612bc1091618f6e9d0105bd21fbb0da7d9ae))
+
 ## [6.14.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.14.5...v6.14.6) (2025-01-04)
 
 
