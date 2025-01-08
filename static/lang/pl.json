@@ -153,7 +153,7 @@
         "all": "Wszystko",
         "hint": "Zaznacz, aby wyświetlić liczbę przypomnień o działaniach jako wiadomość czatu.",
         "name": "Kto otrzymuje przypomnienie o działaniach",
-        "none": "Nikt"
+        "none": "Brak"
       },
       "addUserTargets": {
         "addFor": "Dodaj cele dla",
@@ -174,7 +174,7 @@
         "all": "Wszyscy",
         "gm": "MG",
         "name": "Kto może ustawić opcję automatycznego naliczania obrażeń przy trafieniu.",
-        "none": "Nikt",
+        "none": "Brak",
         "hint": "Wybierz, kto może ustawić opcję automatycznego naliczania obrażeń przy trafieniu. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta."
       },
       "applyPersistentHealing": {
@@ -228,7 +228,7 @@
       "handleDyingRecoveryRollAllow": {
         "all": "Wszyscy",
         "name": "Kto może ustawić opcję automatycznej obsługi rzutów stabilizacji umierających postaci po kliknięciu przez właściciela przycisku rzutu na karcie postaci.",
-        "none": "Nikt",
+        "none": "Brak",
         "players": "Gracze",
         "gm": "MG",
         "hint": "Wybierz, kto może ustawić opcję automatycznej obsługi rzutów stabilizacji umierających postaci po kliknięciu przez właściciela przycisku rzutu na karcie postaci. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta."
@@ -711,6 +711,13 @@
       "autoCollapseItemChatCardMoveEffectLinks": {
         "hint": "... ale przenieś wszystkie linki do efektów przedmiotów poza zwiniętą część karty, gdy jest ona domyślnie zwinięta",
         "name": "... ale pokaż linki do efektów"
+      },
+      "heropointHandlerRandomization": {
+        "hint": "Sposób wybrania gracza, który otrzyma losowy punkt bohatera",
+        "name": "... sposób wybrania gracza, który otrzyma losowy punkt bohatera.",
+        "none": "Nikt",
+        "random": "Losowy członek drużyny",
+        "randomPartymemberThatHasNotReceivedAHeropoint": "Członek drużyny, który jeszcze go nie otrzymał."
       }
     },
     "modules": {
