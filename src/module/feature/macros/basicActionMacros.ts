@@ -757,6 +757,7 @@ export async function basicActionMacros() {
                         const mapValue = button.dataset.map ? -(Number.parseInt(button.dataset.map) / 5) : 0;
                         current.use({
                             event,
+                            actors: [selectedActor],
                             multipleAttackPenalty: mapValue,
                             skipDialog: event.skipDialog,
                             ...action.options,
