@@ -152,6 +152,7 @@ export function registerWorkbenchSettings() {
         config: true,
         default: "",
         type: String,
+        // @ts-ignore TODO FIX (pr to foundry-pf2e)
         filePicker: "image",
         onChange: () => updateHooks(),
     });

@@ -1,6 +1,5 @@
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
+import { ChatMessagePF2e, SpellPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { SpellPF2e } from "@item/spell/document.js";
 
 export async function handlePrivateSpellcasting(data: any, message: ChatMessagePF2e) {
     const spellUUID = <string>message.flags?.pf2e.origin?.uuid;
@@ -79,7 +78,7 @@ async function generateMessageData(message: ChatMessagePF2e, origin, spellUUID: 
         "xdy-pf2e-workbench": {
             privateSpell: {
                 originUuid: message.flags?.pf2e.origin?.uuid,
-                originCastRank: message.flags.pf2e.origin.castRank,
+                originCastRank: message.flags?.pf2e?.origin?.castRank,
             },
         },
     };

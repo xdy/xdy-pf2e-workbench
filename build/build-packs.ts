@@ -4,8 +4,8 @@
 import fs from "fs-extra";
 import path from "path";
 import { compilePack } from "@foundryvtt/foundryvtt-cli";
-import type { MacroSource } from "common/documents/macro.d.ts";
-import type { DocumentStatsData } from "common/data/fields.d.ts";
+import { MacroSource } from "foundry-pf2e/foundry/common/documents/macro.js";
+import { DocumentStatsData } from "foundry-pf2e/foundry/common/data/fields.js";
 
 // We can't import this from xdy-pf2e-workbench.ts because nodejs can't run that file
 const MODULENAME = "xdy-pf2e-workbench";

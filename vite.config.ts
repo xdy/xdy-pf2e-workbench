@@ -5,7 +5,7 @@ import * as Vite from "vite";
 import checker from "vite-plugin-checker";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
-import packageJSON from "./package.json" assert { type: "json" };
+import packageJSON from "./package.json";
 
 const EN_JSON = JSON.parse(fs.readFileSync("./static/lang/en.json", { encoding: "utf-8" }));
 

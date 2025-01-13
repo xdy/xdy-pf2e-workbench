@@ -1,6 +1,5 @@
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
 import { isFirstGM, myRandomId } from "../../utils.js";
-import { TokenDocumentPF2e } from "@scene/index.js";
+import { ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {

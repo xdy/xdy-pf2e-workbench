@@ -1,10 +1,7 @@
 import { isFirstGM, logDebug, shouldIHandleThis, shouldIHandleThisMessage } from "../../utils.js";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "../../xdy-pf2e-workbench.js";
-import { ItemPF2e } from "@item/base/document.js";
-import { ActorPF2e } from "@actor/index.js";
-import { ActorSystemData } from "@actor/data/base.js";
+import { ActorPF2e, ActorSystemData, ChatMessagePF2e, ItemPF2e } from "foundry-pf2e";
 import { moveOnZeroHP } from "../initiativeHandler/index.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
 
 export function dyingHandlingPreUpdateActorHook(
     actor,
@@ -253,6 +250,7 @@ function filterMessagesByContextType(messages: ChatMessagePF2e[], contextType: s
 }
 
 function filterMessagesByStrikeDamaging(messages: ChatMessagePF2e[]): ChatMessagePF2e[] {
+    // @ts-ignore TODO Add to types
     return messages.filter((message) => message.flags.pf2e.strike?.damaging);
 }
 

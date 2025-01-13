@@ -1,7 +1,5 @@
-import { TokenDocumentPF2e } from "@scene";
 import { CREATURE_IDENTIFICATION_TRAITS, ELITE_WEAK } from "../../xdy-pf2e-constants.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { TokenPF2e } from "@module/canvas/token/object.js";
 
 let TRAITS: {
     SIZES: string[];
@@ -128,13 +126,13 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
  */
 export async function generateNameFromTraitsForToken(tokenId: string) {
     // @ts-ignore
-    const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));
+    const token = game.scenes?.current?.tokens?.get(tokenId);
     if (token) {
         return generateNameFromTraits(token);
     }
 }
 
-export async function generateNameFromTraits(token: TokenPF2e | TokenDocumentPF2e) {
+export async function generateNameFromTraits(token) {
     let result: any;
     const traits = token?.actor?.system?.traits;
     if (!TRAITS) {

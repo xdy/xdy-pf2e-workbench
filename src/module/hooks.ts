@@ -1,8 +1,20 @@
 import { housepatcher, isActuallyDamageRoll, logDebug, shouldIHandleThis } from "./utils.js";
-import { ActorPF2e, CreaturePF2e } from "@actor";
-import { TokenDocumentPF2e } from "@scene";
+import {
+    ActorPF2e,
+    ActorSheetPF2e,
+    ActorSystemData,
+    ChatMessagePF2e,
+    CheckRoll,
+    CombatantPF2e,
+    CreaturePF2e,
+    EncounterPF2e,
+    FeatPF2e,
+    ItemPF2e,
+    PhysicalItemPF2e,
+    TokenDocumentPF2e,
+    UserPF2e,
+} from "foundry-pf2e";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
-import { UserPF2e } from "@module/user/index.js";
 import { actionsReminder, autoReduceStunned, reminderTargeting } from "./feature/reminders/index.js";
 import {
     chatActionCardDescriptionCollapse,
@@ -14,13 +26,6 @@ import {
 import { autoRollDamage, persistentDamageHealing } from "./feature/damageHandler/index.js";
 import { reduceFrightened } from "./feature/conditionHandler/index.js";
 import { renderNameHud, tokenCreateMystification } from "./feature/tokenMystificationHandler/index.js";
-import { ItemPF2e } from "@item/base/document.js";
-import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
-import { CheckRoll } from "@module/system/check/roll.js";
-import { PhysicalItemPF2e } from "@item/physical/document.js";
-import { ActorSystemData } from "@actor/data/base.js";
-import { ActorSheetPF2e } from "@actor/sheet/base.js";
 import {
     dyingHandlingCreateChatMessageHook,
     dyingHandlingPreUpdateActorHook,
@@ -33,7 +38,6 @@ import {
     handlePrivateSpellcasting,
     hideSpellNameInDamageroll,
 } from "./feature/qolHandler/handlePrivateSpellcasting.js";
-import { FeatPF2e } from "@item/feat/document.js";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;

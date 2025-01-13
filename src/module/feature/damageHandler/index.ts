@@ -5,10 +5,8 @@ import {
     objectHasKey,
     shouldIHandleThisMessage,
 } from "../../utils.ts";
-import { ActorFlagsPF2e, RollOptionFlags } from "@actor/data/base.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
-import { SpellPF2e } from "@item/spell/document.js";
-import type { DamageRoll } from "@system/damage/roll.d.ts";
+import type { DamageRoll } from "foundry-pf2e";
+import { ActorFlagsPF2e, ChatMessagePF2e, RollOptionFlags, SpellPF2e } from "foundry-pf2e";
 
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 10;
@@ -73,6 +71,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const targetHelperWillAutoroll =
                 targetHelperActive && game.settings.get("pf2e-target-helper", "multipleTargetRollDamage") !== "no";
             const letTargetHelperAutorollDamage =
+                // @ts-ignore TODO FIX
                 (flags["pf2e-target-helper"]?.targets ?? 0) > 1 && targetHelperWillAutoroll;
 
             if (
@@ -82,6 +81,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                     (rollForAttackSpell && isSuccess)) &&
                 !letTargetHelperAutorollDamage
             ) {
+                // @ts-ignore TODO FIX
                 await handleSpell(pf2eFlags, numberOfMessagesToCheck, originUuid, origin, message, degreeOfSuccess);
             } else if (actor && rollForNonSpellAttack && isSuccess) {
                 await handleNonSpell(actor, message, degreeOfSuccess);

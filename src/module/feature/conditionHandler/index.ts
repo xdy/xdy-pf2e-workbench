@@ -1,6 +1,5 @@
-import { ActorPF2e } from "@actor";
+import { ActorPF2e, CombatantPF2e } from "foundry-pf2e";
 import { minionsInCurrentScene, shouldIHandleThis } from "../../utils.js";
-import { CombatantPF2e } from "@module/encounter/index.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
 export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {

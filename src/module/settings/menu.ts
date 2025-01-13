@@ -62,11 +62,11 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
         }
     }
 
-    static hideForm(form: HTMLElement, boolean: Boolean): void {
+    static hideForm(form: HTMLElement, boolean: boolean): void {
         form.style.display = !boolean ? "none" : "";
     }
 
-    static readonly hidelist: Object = {} as HideListTemplateData;
+    static readonly hidelist: object = {} as HideListTemplateData;
 
     // @ts-ignore
     static hook(...args: any): HookCallback<unknown[]> {
@@ -126,9 +126,11 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
                 key,
                 value,
                 isCheckbox: setting.type === Boolean,
+                // @ts-ignore TODO FIX (pr to foundry-pf2e)
                 isFilepicker: setting.type === String && setting.filePicker,
                 isNumber: setting.type === Number,
                 isSelect: !!setting.choices,
+                // @ts-ignore TODO FIX (pr to foundry-pf2e)
                 isText: setting.type === String && !setting.filePicker,
             };
         });

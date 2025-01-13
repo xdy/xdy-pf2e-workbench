@@ -1,9 +1,6 @@
 import { minionsInCurrentScene, shouldIHandleThis } from "../../utils.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { CombatantPF2e } from "@module/encounter/index.js";
-import { ActorPF2e } from "@actor/base.js";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
-import { UserPF2e } from "@module/user/document.js";
+import { ActorPF2e, ChatContextFlag, ChatMessagePF2e, CombatantPF2e, UserPF2e } from "foundry-pf2e";
 
 export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
     const actor = combatant.actor;
@@ -73,7 +70,7 @@ export async function autoReduceStunned(combatant, userId: string): Promise<numb
 }
 
 export function reminderTargeting(message: ChatMessagePF2e, setting: string): boolean {
-    const context = message?.flags?.pf2e?.context ?? {};
+    const context: ChatContextFlag = <ChatContextFlag>message?.flags?.pf2e?.context;
 
     if (
         message.actor &&
@@ -84,7 +81,8 @@ export function reminderTargeting(message: ChatMessagePF2e, setting: string): bo
     ) {
         const targets = (<UserPF2e>message.author).targets;
         if (!targets || targets.size === 0) {
-            const title = context.title;
+            // @ts-ignore TODO FIX
+            const title = context?.title;
 
             if (setting === "reminder") {
                 const info = game.i18n.format(`${MODULENAME}.SETTINGS.reminderTargeting.info`, { title });

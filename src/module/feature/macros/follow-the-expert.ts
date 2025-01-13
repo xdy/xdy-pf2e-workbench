@@ -1,14 +1,19 @@
-import type { Action, ActionMessageOptions, ActionUseOptions, ActionVariant } from "@actor/actions/types.d.ts";
-import type { ActorPF2e } from "@actor";
-import type { ChatMessagePF2e } from "@module/chat-message/document.d.ts";
-import type { EffectPF2e } from "@item";
-import type { EffectSource } from "@item/effect/data.d.ts";
-import type { RuleElementSource } from "@module/rules/rule-element/data.d.ts";
-import type { ChoiceSetSource } from "@module/rules/rule-element/choice-set/data.d.ts";
-import type { PickableThing } from "@module/apps/pick-a-thing-prompt.d.ts";
-import type { RawPredicate } from "@system/predication.d.ts";
+import type {
+    Action,
+    ActionMessageOptions,
+    ActionUseOptions,
+    ActionVariant,
+    ActorPF2e,
+    ChatMessagePF2e,
+    ChoiceSetSource,
+    EffectPF2e,
+    EffectSource,
+    PickableThing,
+    RawPredicate,
+    RuleElementSource,
+} from "foundry-pf2e";
+import { AbilityTrait } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { AbilityTrait } from "@item/ability/types.js";
 
 // IDK why choices isn't in ChoiceSetSource
 interface ChoiceSetSourceWithChoices extends ChoiceSetSource {
