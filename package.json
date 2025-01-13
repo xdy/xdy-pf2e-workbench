@@ -80,7 +80,7 @@
     "tinymce": "^7.6.0",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2",
+    "typescript": "=5.3.3",
     "vite": "^6.0.7",
     "vite-plugin-checker": "^0.8.0",
     "vite-plugin-static-copy": "^2.2.0",

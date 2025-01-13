@@ -11,8 +11,8 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "preserve",
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
     "noErrorTruncation": true,
     "noFallthroughCasesInSwitch": true,
@@ -65,7 +65,7 @@
     "strictFunctionTypes": false,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "ES2023",
+    "target": "ESNext",
     "typeRoots": [
       "node_modules/@types",
       "types/types/foundry"
