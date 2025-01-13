@@ -3,7 +3,6 @@ import { MODULENAME } from "./xdy-pf2e-workbench.js";
 import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler/index.js";
 import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler/index.js";
 import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js";
-import { TokenPF2e } from "@module/canvas/token/object.js";
 
 export function registerWorkbenchKeybindings() {
     logInfo(`${MODULENAME} | registerKeybindings`);
@@ -35,10 +34,10 @@ export function registerWorkbenchKeybindings() {
                 content,
                 buttons: {
                     addFor: {
-                        icon: '<i class="fas fa-users"></i>',
+                        icon: "<i class=\"fas fa-users\"></i>",
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
                         callback: async (html) => {
-                            const targets: TokenPF2e[] = <TokenPF2e[]>(
+                            const targets: any[] = <any[]>(
                                 Array.from(canvas.tokens?.controlled).concat(
                                     canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1),
                                 )
@@ -55,7 +54,7 @@ export function registerWorkbenchKeybindings() {
                         },
                     },
                     clearFor: {
-                        icon: '<i class="fas fa-users-slash"></i>',
+                        icon: "<i class=\"fas fa-users-slash\"></i>",
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
                         callback: async (html: JQuery) => {
                             const user: any = game.users.find(

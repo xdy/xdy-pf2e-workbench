@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { ActorPF2e } from "@actor";
+import { ActorPF2e } from "foundry-pf2e";
 
 export function getFolder(name: string) {
     return game.folders?.getName(name);

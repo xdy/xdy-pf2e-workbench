@@ -15,19 +15,18 @@
         "type": "system",
         "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
         "compatibility": {
-          "minimum": "6.8.0",
-          "verified": "6.8.0"
+          "minimum": "6.8.1",
+          "verified": "6.8.1"
         }
       }
     ]
   },
   "esmodules": [
-    "vendor.mjs",
-    "xdy-pf2e-workbench.mjs"
+    "xdy-pf2e-workbench.js"
   ],
   "scripts": [],
   "styles": [
-    "styles/xdy-pf2e-workbench.css"
+    "xdy-pf2e-workbench.css"
   ],
   "socket": true,
   "packFolders": [

@@ -1,7 +1,6 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { isActuallyDamageRoll } from "../../utils.js";
-import { PhysicalItemPF2e } from "@item";
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
+import { ChatMessagePF2e, PhysicalItemPF2e } from "foundry-pf2e";
 
 export function chatCardDescriptionCollapse(html: HTMLElement) {
     const hasCardContent = html.querySelectorAll(".card-content:not(span.flavor-text *)");

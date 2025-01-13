@@ -1,19 +1,17 @@
-import { ScenePF2e, TokenDocumentPF2e } from "@scene";
+import { ActorSystemData, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { ActorSystemData } from "@actor/data/base.js";
 import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/index.js";
 import { generateNameFromTraits } from "./traits-name-generator.js";
 import { logError } from "../../utils.js";
-import { TokenPF2e } from "@module/canvas/token/object.js";
 
-function shouldSkipRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
+function shouldSkipRandomProperty(token) {
     return (
         game.settings.get(MODULENAME, "npcMystifierRandomPropertySkipForUnique") &&
         (<ActorSystemData>token?.actor?.system)?.traits?.rarity === "unique"
     );
 }
 
-function hasRandomProperty(token: TokenPF2e | TokenDocumentPF2e) {
+function hasRandomProperty(token) {
     switch (mystifyRandomPropertyType) {
         case "numberPostfix":
         case "wordPrefix":
@@ -59,7 +57,7 @@ async function fetchRandomWordPrefix(): Promise<string> {
 }
 
 export async function buildTokenName(
-    token: TokenPF2e | TokenDocumentPF2e | null,
+    token,
     isMystified: boolean,
 ): Promise<string> {
     let tokenName = "";
@@ -156,7 +154,7 @@ export async function tokenCreateMystification(token: any) {
     }
 }
 
-export function isTokenMystified(token: TokenPF2e | TokenDocumentPF2e | null): boolean {
+export function isTokenMystified(token): boolean {
     const tokenName = token?.name;
     const prototypeTokenName = token?.actor?.prototypeToken.name ?? "";
 
@@ -179,7 +177,7 @@ export async function doMystificationFromToken(tokenId: string, active: boolean)
     }
 }
 
-export async function doMystification(token: TokenPF2e, active: boolean) {
+export async function doMystification(token, active: boolean) {
     if (!token?.actor) {
         return;
     }
@@ -218,7 +216,7 @@ export async function doMystification(token: TokenPF2e, active: boolean) {
 }
 
 export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement) {
-    let token: TokenPF2e | null;
+    let token;
     if (canvas && canvas.tokens) {
         token = canvas.tokens.get(<string>data._id) ?? null;
 

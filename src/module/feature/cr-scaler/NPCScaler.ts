@@ -17,8 +17,7 @@
 import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes.js";
 import { getActor, getFolder, getFolderInFolder } from "./Utilities.js";
 import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil.js";
-import { ActorPF2e, NPCPF2e } from "@actor";
-import { NPCSystemData } from "@actor/npc/data.js";
+import { ActorPF2e, NPCPF2e, NPCSystemData } from "foundry-pf2e";
 import { logDebug } from "../../utils.js";
 
 /**

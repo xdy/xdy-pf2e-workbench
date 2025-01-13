@@ -1,4 +1,4 @@
-import { ActorPF2e } from "@actor";
+import { ActorPF2e } from "foundry-pf2e";
 import { shouldIHandleThis } from "../../utils.js";
 
 /**

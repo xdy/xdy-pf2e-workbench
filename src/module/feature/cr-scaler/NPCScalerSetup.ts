@@ -15,7 +15,7 @@
  */
 
 import { scaleNPCToLevel } from "./NPCScaler.js";
-import { ActorPF2e } from "@actor";
+import { ActorPF2e } from "foundry-pf2e";
 
 export function onScaleNPCContextHook(_html, buttons: any[]) {
     if (game.user?.isGM) {

@@ -5,13 +5,9 @@
 
 import * as R from "remeda";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { ActorPF2e } from "@actor";
-import type { SkillSlug } from "@actor/types.ts";
-import { Action, ActionUseOptions, ActionVariant } from "@actor/actions/types.js";
-import type { MacroPF2e } from "@module/macro.d.ts";
-import { Statistic } from "@system/statistic/statistic.js";
+import type { MacroPF2e, SkillSlug } from "foundry-pf2e";
+import { AbilityTrait, Action, ActionUseOptions, ActionVariant, ActorPF2e, Statistic } from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
-import { AbilityTrait } from "@item/ability/types.js";
 
 declare global {
     interface Window {
@@ -101,6 +97,7 @@ type MacroAction = {
     // Path to icon
     icon: string;
     // Object to use when action is selected
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type TODO FIX
     action: Function | Action | ActionVariant | undefined;
     // Optional parameters for an Action.use() call for Action or ActionVariant type actions
     options?: Partial<ActionUseOptions>;
@@ -701,10 +698,10 @@ export async function basicActionMacros() {
     const actionsToUse = prepareActions(selectedActor, bamActions);
 
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-        .map((actor) => actor.actor)
-        .filter((actor) => {
-            return supportedActorTypes.includes(actor?.type ?? "unknown");
-        }) || [];
+            .map((actor) => actor.actor)
+            .filter((actor) => {
+                return supportedActorTypes.includes(actor?.type ?? "unknown");
+            }) || [];
 
     const party = game.actors?.party?.members || [];
     const partyIds = party.map((actor) => actor?.id) || [];

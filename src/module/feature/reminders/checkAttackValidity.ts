@@ -1,8 +1,6 @@
-import { ChatMessagePF2e } from "@module/chat-message/index.js";
-import { TokenDocumentPF2e } from "@scene/index.js";
+import { ActorFlagsPF2e, ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { shouldIHandleThis } from "../../utils.js";
-import { ActorFlagsPF2e } from "@actor/data/base.js";
 
 function ignoreDeadEidolon(actor) {
     return actor?.traits.has("eidolon") && game.settings.get(MODULENAME, "reminderCannotAttackIgnoreDeadEidolon");
@@ -15,10 +13,12 @@ export function checkAttackValidity(message: ChatMessagePF2e, cancelAttack: bool
 
     const reason = getAttackReason(
         token,
+        // @ts-ignore TODO Fix
         message?.flags?.pf2e?.context?.options.filter((o) => o.startsWith("action:")),
     );
 
     if (reason) {
+        // @ts-ignore TODO FIX
         notifyUser(token, reason, message?.flags?.pf2e?.context?.title, cancelAttack);
         return false;
     }
@@ -32,6 +32,7 @@ function getSpeakerToken(message: ChatMessagePF2e): TokenDocumentPF2e {
 
 function shouldBeChecked(message: ChatMessagePF2e): boolean {
     const context = message?.flags?.pf2e?.context ?? {};
+    // @ts-ignore TODO FIX
     const traits = context?.traits;
 
     return (

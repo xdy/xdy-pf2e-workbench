@@ -10,7 +10,7 @@
 // TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
 import { preloadTemplates } from "./preloadTemplates.js";
 import { registerWorkbenchKeybindings } from "./keybinds.js";
-import { ActorPF2e } from "@actor";
+import { ActorPF2e } from "foundry-pf2e";
 
 import { isFirstGM, logInfo } from "./utils.js";
 import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller.js";
