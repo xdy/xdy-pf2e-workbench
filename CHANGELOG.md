@@ -1,3 +1,10 @@
+## [6.15.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.15.1...v6.15.2) (2025-01-15)
+
+
+### Bug Fixes
+
+* Improved randomPartymemberThatHasNotReceivedAHeropoint method. ([b7f502c](https://github.com/xdy/xdy-pf2e-workbench/commit/b7f502ca96a02ca3db9d802be9b33f4e8f78282f))
+
 ## [6.15.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.15.0...v6.15.1) (2025-01-07)
 
 
