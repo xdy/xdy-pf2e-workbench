@@ -160,21 +160,19 @@ async function randomPartymemberThatHasNotReceivedAHeropoint(actors): Promise<nu
         return -1;
     }
 
-    const existingFlagValue = String(game.actors?.party?.getFlag(MODULENAME, PARTY_MEMBERS_FLAG_KEY));
+    const existingFlagValue =
+        <string | null | undefined>game.actors?.party?.getFlag(MODULENAME, PARTY_MEMBERS_FLAG_KEY) ?? "";
+    console.log("existingFlagValue: " + existingFlagValue);
     const hasReceivedHP: Set<string> = existingFlagValue ? new Set(existingFlagValue.split(",")) : new Set();
-    if (hasReceivedHP.size === actors.length) {
-        hasReceivedHP.clear();
-    }
-
     const noHPYet = actors.filter((actor) => !hasReceivedHP.has(actor.id));
+
     if (noHPYet.length === 0) {
         hasReceivedHP.clear();
         noHPYet.push(...actors);
     }
     const randomIndex: number = Math.floor(Math.random() * noHPYet.length);
-    const selectedActorId: string = noHPYet[randomIndex]?.id || actors[Math.floor(Math.random() * actors.length)]?.id;
+    const selectedActorId: string = noHPYet[randomIndex]?.id ?? -1;
     hasReceivedHP.add(selectedActorId);
-
     await game.actors?.party?.setFlag(MODULENAME, PARTY_MEMBERS_FLAG_KEY, [...hasReceivedHP].join(","));
 
     return actors.findIndex((actor) => actor.id === selectedActorId);
