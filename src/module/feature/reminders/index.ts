@@ -77,6 +77,8 @@ export function reminderTargeting(message: ChatMessagePF2e, setting: string): bo
         shouldIHandleThis(message.actor) &&
         message.flags &&
         message.author &&
+        context &&
+        context.type &&
         ["spell-attack-roll", "attack-roll"].includes(<string>context.type)
     ) {
         const targets = (<UserPF2e>message.author).targets;
