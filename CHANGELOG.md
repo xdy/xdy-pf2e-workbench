@@ -1,3 +1,10 @@
+## [6.15.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.15.3...v6.15.4) (2025-01-19)
+
+
+### Bug Fixes
+
+* For targeting reminder, ignore messages without context type. ([020b734](https://github.com/xdy/xdy-pf2e-workbench/commit/020b7348cc95931c37672d748d31d3bb2f22e0b6))
+
 ## [6.15.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.15.2...v6.15.3) (2025-01-19)
 
 
