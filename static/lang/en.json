@@ -355,6 +355,11 @@
         "hint": "Client setting to show spell names in rarity colour on actor sheets.",
         "name": "Show spell names in rarity colour on actor sheets."
       },
+      "playerSpellsChangeSendToChat": {
+        "hint": "World setting to make sending a spell to chat send a link to the spell item.",
+        "name": "Make sending a spell to chat send a link to the spell item rather than the full spell.",
+        "text": "Spell was sent to chat: "
+      },
       "castPrivateSpell": {
         "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM.",
         "name": "Ctrl-click Cast to cast in private.",

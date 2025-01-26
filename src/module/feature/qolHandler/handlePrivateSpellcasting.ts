@@ -125,6 +125,7 @@ function findPartyMembersWithSpell(origin: any) {
                     const spell = <SpellPF2e>(<unknown>item);
                     const entry = spell.spellcasting;
 
+                    // @ts-ignore
                     if (!entry?.isPrepared) {
                         return true;
                     } else {

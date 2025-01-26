@@ -160,6 +160,15 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => updateHooks(),
             },
+            playerSpellsChangeSendToChat: {
+                name: `${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.name`,
+                hint: `${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+            }
         };
     }
 

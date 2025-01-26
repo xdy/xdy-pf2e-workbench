@@ -229,7 +229,7 @@ function dropHeldItemsOnBecomingUnconscious(actor) {
     }
 }
 
-export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
+export async function createItemHook(item: ItemPF2e, _options: any, _id: any) {
     if (
         item.actor?.isOfType(CHARACTER_TYPE) &&
         item.actor.hasCondition("unconscious") &&
@@ -242,7 +242,7 @@ export async function createItemHook(item: ItemPF2e, _options: {}, _id: any) {
 
 export async function updateItemHook(_item: ItemPF2e, _update: any) {}
 
-export async function deleteItemHook(item: ItemPF2e, _options: {}) {
+export async function deleteItemHook(item: ItemPF2e, _options: any) {
     await itemHandlingItemHook(item);
 }
 
@@ -399,20 +399,61 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
         itemFromCompendium(element, "data-item-uuid"),
     );
 
-    if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint")) {
-        const featLists = html.querySelectorAll(".feats-pane");
-        featLists.forEach((list) => {
-            const elementNodeListOf = list.querySelectorAll(".slot");
-            for (const element of elementNodeListOf) {
-                const feat: FeatPF2e | null = <FeatPF2e | null>itemFromActor(element, "data-item-id");
-                if (feat) {
-                    const prereqs = feat.system.prerequisites.value.length > 0;
-                    if (prereqs) {
-                        const h4Elements = element.querySelectorAll("h4");
-                        h4Elements.forEach((h4Element) => (h4Element.innerHTML += "*"));
+    if (sheet.actor?.type === CHARACTER_TYPE) {
+        if (game.settings.get(MODULENAME, "playerFeatsPrerequisiteHint")) {
+            const featLists = html.querySelectorAll(".feats-pane");
+            featLists.forEach((list) => {
+                const elementNodeListOf = list.querySelectorAll(".slot");
+                for (const element of elementNodeListOf) {
+                    const feat: FeatPF2e | null = <FeatPF2e | null>itemFromActor(element, "data-item-id");
+                    if (feat) {
+                        const prereqs = feat.system.prerequisites.value.length > 0;
+                        if (prereqs) {
+                            const h4Elements = element.querySelectorAll("h4");
+                            h4Elements.forEach((h4Element) => (h4Element.innerHTML += "*"));
+                        }
                     }
                 }
+            });
+        }
+
+        function processSpells() {
+            const spellElements = document.querySelectorAll("li.spell");
+            spellElements.forEach((spellElement) => {
+                const itemNameElements = spellElement.querySelectorAll("div.item-name");
+                itemNameElements.forEach((itemNameElement) => {
+                    const actionElement = itemNameElement.querySelector('[data-action="item-to-chat"]');
+                    if (actionElement) {
+                        actionElement.setAttribute("data-action", "workbench-spell-to-chat");
+                    }
+                });
+            });
+
+            document.addEventListener("click", handleSpellClick);
+        }
+
+        async function handleSpellClick(event: MouseEvent) {
+            const target = event.target as HTMLElement;
+            const element = target?.closest('[data-action="workbench-spell-to-chat"]')?.parentElement?.parentElement;
+
+            if (element) {
+                const item = <ItemPF2e>itemFromActor(element, "data-item-id");
+                if (item && item.type === "spell") {
+                    const source = item.sourceId;
+
+                    await ChatMessage.create({
+                        style: CONST.CHAT_MESSAGE_STYLES.OOC,
+                        speaker: ChatMessage.getSpeaker(),
+                        flavor:
+                            game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`) +
+                            `<em>@UUID[${source}]</em></p>`,
+                    });
+                }
             }
-        });
+        }
+
+        if (game.settings.get(MODULENAME, "playerSpellsChangeSendToChat")) {
+            processSpells();
+        }
     }
 }
