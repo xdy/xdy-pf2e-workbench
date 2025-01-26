@@ -1,3 +1,10 @@
+# [6.16.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.15.4...v6.16.0) (2025-01-26)
+
+
+### Features
+
+* Add qol option to change the send to chat of spells to send a link to the spell item rather than the whole spell. ([31697b4](https://github.com/xdy/xdy-pf2e-workbench/commit/31697b42cc29655a04b9142b2c8662fb216c9521))
+
 ## [6.15.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.15.3...v6.15.4) (2025-01-19)
 
 
