@@ -435,19 +435,20 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
         async function handleSpellClick(event: MouseEvent) {
             const target = event.target as HTMLElement;
             const element = target?.closest('[data-action="workbench-spell-to-chat"]')?.parentElement?.parentElement;
+            if (shouldIHandleThis(sheet.actor)) {
+                if (element) {
+                    const item = <ItemPF2e>itemFromActor(element, "data-item-id");
+                    if (item && item.type === "spell") {
+                        const source = item.sourceId;
 
-            if (element) {
-                const item = <ItemPF2e>itemFromActor(element, "data-item-id");
-                if (item && item.type === "spell") {
-                    const source = item.sourceId;
-
-                    await ChatMessage.create({
-                        style: CONST.CHAT_MESSAGE_STYLES.OOC,
-                        speaker: ChatMessage.getSpeaker(),
-                        flavor:
-                            game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`) +
-                            `<em>@UUID[${source}]</em></p>`,
-                    });
+                        await ChatMessage.create({
+                            style: CONST.CHAT_MESSAGE_STYLES.OOC,
+                            speaker: ChatMessage.getSpeaker(),
+                            flavor:
+                                game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`) +
+                                `<em>@UUID[${source}]</em></p>`,
+                        });
+                    }
                 }
             }
         }
