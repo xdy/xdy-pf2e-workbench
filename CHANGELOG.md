@@ -1,3 +1,10 @@
+## [6.16.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.1...v6.16.2) (2025-01-28)
+
+
+### Bug Fixes
+
+* Only *one* person should handle icon click ([9990d27](https://github.com/xdy/xdy-pf2e-workbench/commit/9990d271afd6f4512824b400937b0beadbf88ee9))
+
 ## [6.16.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.0...v6.16.1) (2025-01-27)
 
 
