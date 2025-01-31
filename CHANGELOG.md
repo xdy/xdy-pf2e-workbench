@@ -1,3 +1,10 @@
+## [6.16.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.2...v6.16.3) (2025-01-31)
+
+
+### Bug Fixes
+
+* Reverts the previous "fix: Reducing frightened value should now reduce all non-locked frightened conditions on a character above the minimum frightened value by the appropriate amount." ([f417e29](https://github.com/xdy/xdy-pf2e-workbench/commit/f417e29a110ee6092c9a53cd72f3407de8f22842))
+
 ## [6.16.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.1...v6.16.2) (2025-01-28)
 
 
