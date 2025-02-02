@@ -417,40 +417,41 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
             });
         }
 
-        function processSpells() {
-            const spellElements = document.querySelectorAll("li.spell");
-            spellElements.forEach((spellElement) => {
-                const itemNameElements = spellElement.querySelectorAll("div.item-name");
-                itemNameElements.forEach((itemNameElement) => {
-                    const actionElement = itemNameElement.querySelector('[data-action="item-to-chat"]');
-                    if (actionElement) {
-                        actionElement.setAttribute("data-action", "workbench-spell-to-chat");
-                    }
-                });
-            });
+        const WORKBENCH_SPELL_TO_CHAT = "workbench-spell-to-chat";
 
-            document.addEventListener("click", handleSpellClick);
+        function processSpells() {
+            document.querySelectorAll("li.spell").forEach((spellElement) => processSpellElement(spellElement));
         }
 
-        async function handleSpellClick(event: MouseEvent) {
-            const target = event.target as HTMLElement;
-            const element = target?.closest('[data-action="workbench-spell-to-chat"]')?.parentElement?.parentElement;
-            if (shouldIHandleThis(sheet.actor)) {
-                if (element) {
-                    const item = <ItemPF2e>itemFromActor(element, "data-item-id");
-                    if (item && item.type === "spell") {
-                        const source = item.sourceId;
+        function processSpellElement(spellElement: Element) {
+            spellElement.querySelectorAll("div.item-name").forEach((itemNameDiv) => {
+                const actionElement = itemNameDiv.querySelector<HTMLElement>('[data-action="item-to-chat"]');
+                if (!actionElement) return;
 
-                        await ChatMessage.create({
-                            style: CONST.CHAT_MESSAGE_STYLES.OOC,
-                            speaker: ChatMessage.getSpeaker(),
-                            flavor:
-                                game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`) +
-                                `<em>@UUID[${source}]</em></p>`,
-                        });
-                    }
-                }
-            }
+                const currentAction = actionElement.getAttribute("data-action");
+                if (currentAction === WORKBENCH_SPELL_TO_CHAT) return;
+
+                actionElement.setAttribute("data-action", WORKBENCH_SPELL_TO_CHAT);
+                actionElement.onclick = handleSpellClick;
+            });
+        }
+
+        function handleSpellClick(event: MouseEvent) {
+            const target = event.target as HTMLElement;
+            const spellContainer = target?.closest('[data-action="workbench-spell-to-chat"]')?.parentElement
+                ?.parentElement;
+
+            if (!shouldIHandleThis(sheet.actor) || !spellContainer) return;
+
+            const item = <ItemPF2e>itemFromActor(spellContainer, "data-item-id");
+            if (!item || item.type !== "spell") return;
+
+            const flavor = `${game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`)}<em>@UUID[${item.sourceId}]</em></p>`;
+            ChatMessage.create({
+                style: CONST.CHAT_MESSAGE_STYLES.OOC,
+                speaker: ChatMessage.getSpeaker(),
+                flavor,
+            }).then();
         }
 
         if (game.settings.get(MODULENAME, "playerSpellsChangeSendToChat")) {
