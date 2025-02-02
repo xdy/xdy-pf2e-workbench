@@ -1,3 +1,10 @@
+## [6.16.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.3...v6.16.4) (2025-02-02)
+
+
+### Bug Fixes
+
+* Avoids sending the same item to chat multiple times (listener was added once per time the sheet was opened...) ([ff1d9e2](https://github.com/xdy/xdy-pf2e-workbench/commit/ff1d9e254cab84881ffc3391f3ce5c011b19d637))
+
 ## [6.16.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.2...v6.16.3) (2025-01-31)
 
 
