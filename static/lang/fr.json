@@ -34,12 +34,12 @@
         "title": "Choisissez l'utilisateur pour lui ajouter les cibles"
       },
       "applyPersistentDamage": {
-        "hint": "Paramètre du client permettant d'appliquer automatiquement des dégâts persistants.",
+        "hint": "Paramètre du monde pour permettre d'appliquer automatiquement des dégâts persistants.",
         "name": "Appliquer automatiquement les dégâts persistants.",
         "wasDamaged": "{damage} dégâts ont été automatiquement appliqués"
       },
       "applyPersistentHealing": {
-        "hint": "Appliquer automatiquement les soins persistants lancés par le système. Sauvegarder les réglages pour afficher/cacher des options supplémentaires.",
+        "hint": "Paramètre du monde pour appliquer automatiquement les soins persistants lancés par le système.",
         "name": "Appliquer automatiquement les soins persistants lancés par le système.",
         "wasHealed": "{healing} de soins ont été appliqués automatiquement."
       },
@@ -142,11 +142,14 @@
         "firstPart": "{tokenName} vient de lancer un {type} de la tradition <strong>{traditionString}</strong>. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "hint": "S'il est lancé en privé, cela poste néanmoins un message public pour annoncer qu'un sort a été lancé À MOINS que vous ne pressiez également SHIFT ainsi que CTRL lorsque vous incantez.",
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
-        "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}]",
-        "secondPartNoRk": ".<br>Demandez à votre MJ si vous l'avez reconnu automatiquement. Si ce n'est pas le cas, vous pouvez essayer d'utiliser une @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou une @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Ou, lors de votre tour, dépensez une action pour l'identifier (demandez à votre MJ les détails).",
-        "secondPartRK": ".<br>Demandez à votre MJ si vous l'avez reconnu automatiquement. Si ce n'est pas le cas, vous pouvez utiliser soit @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] soit @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r]. Ou, lors de votre tour, dépensez une action pour l'identifier avec @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{Se souvenir} @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (ou 10 minutes avec @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
+        "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}{basic}]",
+        "secondPartNoRk": ".<br>Vous pouvez essayer d'utiliser @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, lors de votre tour, dépensez une action pour tenter de l'identifier (demandez à votre MJ les détails).",
+        "secondPartRK": ".<br>Vous pouvez essayer d'utiliser @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, lors de votre tour, dépensez une action pour tenter de l'identifier avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (ou 10 minutes avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
         "spell": "Sort",
-        "they": "Ils"
+        "they": "Ils",
+        "basic": "basique",
+        "noButtonSavePart": "<br><b>jet de {dataSave} {basic}</b>",
+        "knownBy": "<div><p><b>Connu par : </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
         "hint": "Montrer les traits du sort dans le message public.",
@@ -288,8 +291,8 @@
         "name": "Utiliser les traits de créature."
       },
       "npcMystifierUseCreatureTypesTraits": {
-        "hint": "Cliquez pour utiliser les traits du type de créature (voir les traits du système PF2e) dans le nom mystifié.",
-        "name": "Utiliser les traits du type de créature"
+        "hint": "Vérifiez que vous utilisez les traits d'identification de la créature dans le nom mystifié.",
+        "name": "Utiliser les traits d'identification d'une créature"
       },
       "npcMystifierUseEliteWeak": {
         "hint": "Cliquez pour utiliser élite/faible dans le nom mystifié.",
@@ -465,9 +468,9 @@
         "hint": "Cochez pour cacher le nom d'un sort lancé en privé dans le jet de dégât au lieu de cacher le jet de dégâts."
       },
       "dropHeldItemsOnBecomingUnconscious": {
-        "hint": "Les personnages lâchent automatiquement les objets tenus en devenant inconscient.",
+        "hint": "Les personnages lâchent automatiquement les objets tenus en devenant inconscient (sauf les boucliers qui deviennent portés et plus tenus).",
         "name": "Les personnages lâchent automatiquement les objets tenus en devenant inconscient.",
-        "message": "{name} a lâché : {items}"
+        "message": "{name} a perdu sa prise sur : {items}"
       },
       "nonLethalIsNotLethal": {
         "unconsciousForCharacters": "Les dégâts non létaux ne tuent pas les PJ+familiers",
@@ -497,7 +500,7 @@
       "housepatcher": {
         "hint": "(VRAIMENT EXPÉRIMENTAL) Entrer une suite json pour patcher les compendiums du système. Voir housepatcher.md sur github pour la documentation.",
         "name": "(VRAIMENT EXPÉRIMENTAL) Housepatcher (correctifs des règles maison). Nécessite une réactualisation (f5) après modification.",
-        "notification": "Housepatcher : Application de {count} règles maison aux éléments des compendiums du système.",
+        "notification": "{count} objets réparés non réparés dans les compendiums du système.",
         "error": "le mauvais JSON a été supprimé"
       },
       "houseRulesSettings": {
@@ -567,6 +570,33 @@
       "playerCraftingRarityColour": {
         "hint": "Paramétrage par le client de l'affichage des noms de formules dans la couleur de rareté sur les fiches d'acteurs.",
         "name": "Montrer les noms des formules dans la couleur de leur rareté sur les fiches d'acteurs."
+      },
+      "autoCollapseItemChatCardMoveEffectLinks": {
+        "name": "... mais montrer les liens des effets",
+        "hint": "... mais déplacer tous les liens vers les objets d'effet à l'extérieure de la partie réduite de la carte lorsqu'elle est réduite par défaut"
+      },
+      "heropointHandlerNotificationChat": {
+        "name": "... comme un message dans la conversation ou d'information.",
+        "hint": "Vérifier que le gestionnaire de point d'héroïsme notifie dans la conversation, sinon il s'agira d'un message d'information temporaire."
+      },
+      "castPrivateSpellAutoRevealIfKnown": {
+        "hint": "Test de révélation automatique d'un sort lancé en privé si l'un des membres du groupe connaît le sort.",
+        "name": "... mais révéler automatiquement le sort s'il est connu par le groupe."
+      },
+      "heropointHandlerRandomization": {
+        "name": "... comment sélectionner aléatoirement un joueur pour qu'il obtienne un point d'héroïsme.",
+        "none": "Pas un seul",
+        "random": "Un membre du groupe quelconque",
+        "randomPartymemberThatHasNotReceivedAHeropoint": "Un membre du groupe qui n'en a pas encore reçu.",
+        "hint": "Comment sélectionner aléatoirement un joueur pour qu'il obtienne un point d'héroïsme"
+      },
+      "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
+        "name": "... et la liste des membres du groupe qui connaissent le sort révélé automatiquement",
+        "hint": "Vérifier que, pour les sorts révélés automatiquement, les membres du groupe qui connaissent le sort sont affichés dans la carte de la conversation."
+      },
+      "castPrivateSpellWithPublicMessageShowToGM": {
+        "hint": "Afficher le message public pour le MJ également.",
+        "name": "... et montrer le message public au MJ également."
       }
     },
     "effects": {
