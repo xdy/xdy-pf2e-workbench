@@ -718,6 +718,11 @@
         "none": "Nikt",
         "random": "Losowy członek drużyny",
         "randomPartymemberThatHasNotReceivedAHeropoint": "Członek drużyny, który jeszcze go nie otrzymał."
+      },
+      "playerSpellsChangeSendToChat": {
+        "text": "Zaklęcie zostało wysłane na czat: ",
+        "hint": "Ustawienie świata sprawiające, że wysłanie zaklęcia na czat powoduje wysłanie linku do elementu zaklęcia.",
+        "name": "Aby wysyłanie zaklęcia na czat powodowało wysłanie linku do elementu zaklęcia, a nie pełnego zaklęcia."
       }
     },
     "modules": {
