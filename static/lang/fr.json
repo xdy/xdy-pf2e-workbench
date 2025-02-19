@@ -129,7 +129,7 @@
         "name": "Appeler la barre des macros sur la page {page} en {column}e position"
       },
       "castPrivateSpell": {
-        "hint": "Cliquez pour activer le Lancement du sort sur un Ctrl+clic en envoyant un message discret au lanceur et au MJ.",
+        "hint": "Cliquez pour activer qu'au Lancement du sort, sur un Ctrl+clic, cela envoie un message discret au lanceur et au MJ.",
         "name": "Ctrl+clic pour Lancer un sort en privé.",
         "aSpell": "Un sort"
       },
@@ -142,12 +142,12 @@
         "firstPart": "{tokenName} vient de lancer un {type} de la tradition <strong>{traditionString}</strong>. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "hint": "S'il est lancé en privé, cela poste néanmoins un message public pour annoncer qu'un sort a été lancé À MOINS que vous ne pressiez également SHIFT ainsi que CTRL lorsque vous incantez.",
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
-        "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}{basic}]",
+        "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type :{dataSave}|dc :{dataDC}|traits :{traits}{basic}]",
         "secondPartNoRk": ".<br>Vous pouvez essayer d'utiliser @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, lors de votre tour, dépensez une action pour tenter de l'identifier (demandez à votre MJ les détails).",
         "secondPartRK": ".<br>Vous pouvez essayer d'utiliser @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, lors de votre tour, dépensez une action pour tenter de l'identifier avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (ou 10 minutes avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
         "spell": "Sort",
         "they": "Ils",
-        "basic": "basique",
+        "basic": "Basique",
         "noButtonSavePart": "<br><b>jet de {dataSave} {basic}</b>",
         "knownBy": "<div><p><b>Connu par : </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
       },
@@ -597,6 +597,11 @@
       "castPrivateSpellWithPublicMessageShowToGM": {
         "hint": "Afficher le message public pour le MJ également.",
         "name": "... et montrer le message public au MJ également."
+      },
+      "playerSpellsChangeSendToChat": {
+        "text": "Le sort a été envoyé dans la conversation : ",
+        "hint": "Paramètre du monde pour que l'envoi d'un sort dans la conversation envoie un lien vers l'objet du sort.",
+        "name": "Permet d'envoyer un Sort vers la conversation et d'envoyer un lien vers l'objet du sort plutôt que d'afficher le sort complet."
       }
     },
     "effects": {
