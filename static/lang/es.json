@@ -703,6 +703,11 @@
         "random": "Un miembro del grupo al azar",
         "randomPartymemberThatHasNotReceivedAHeropoint": "Un miembro del grupo que aún no ha conseguido uno.",
         "hint": "Cómo seleccionar un jugador para obtener puntos de héroe aleatorios"
+      },
+      "playerSpellsChangeSendToChat": {
+        "text": "El conjuro fue enviado al chat: ",
+        "name": "Hace que al enviar un conjuro al chat envíe un enlace al elemento del conjuro en lugar del conjuro completo.",
+        "hint": "Configuración de mundo para que al enviar un conjuro al chat envíe un enlace al elemento del conjuro."
       }
     },
     "modules": {
