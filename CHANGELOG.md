@@ -1,3 +1,10 @@
+## [6.16.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.6...v6.16.7) (2025-03-02)
+
+
+### Bug Fixes
+
+* buildNpcSpellbookJournal works again, courtesy of @Freeze ([abe141d](https://github.com/xdy/xdy-pf2e-workbench/commit/abe141d589d71191d5258dfc76f53b4c1dd3ab57))
+
 ## [6.16.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.5...v6.16.6) (2025-02-21)
 
 
