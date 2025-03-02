@@ -34,26 +34,26 @@ export async function buildNpcSpellbookJournal() {
             spellList[i].spells.push("@UUID[" + spellcastingEntries[i].spells.contents[ii].sourceId + "]");
         }
     }
-
-    const updates = {
-        name: game.i18n.format(`${MODULENAME}.macros.buildNpcSpellbookJournal.generatedSpellbookFor`, {
-            name: actor.name,
-        }),
-        content: `<table class="pf2-table">
-    <tr>
-       <th>Entry</th>
-       <th>Spells</th>
-    </tr>`,
-    };
+    let content = `<table class="pf2-table">
+<tr>
+   <th>Entry</th>
+   <th>Spells</th>
+</tr>`;
 
     for (let ff = 0; ff < spellList.length; ff++) {
-        updates.content += `
-    <tr>
-        <td>${spellList[ff].entry}</td>
-        <td><div style="display: flex; gap:3px; flex-wrap: wrap; align-items: center;justify-content: center;">${spellList[ff].spells}</div></td>
-</tr>
-`;
+        content += `
+  <tr>
+  <td>${spellList[ff].entry}</td>
+  <td><div style="display: flex; gap:3px; flex-wrap: wrap; align-items: center;justify-content: center;">${spellList[ff].spells}</div></td>
+  </tr>
+  `;
     }
+    const updates: any = {
+        name: game.i18n.format(`xdy-pf2e-workbench.macros.buildNpcSpellbookJournal.generatedSpellbookFor`, {
+            name: actor.name,
+        }),
+        pages: [{ name: "Spell book", text: { content } }],
+    };
     updates.content += `</table>`;
 
     const journal = game.journal.getName(updates.name);
