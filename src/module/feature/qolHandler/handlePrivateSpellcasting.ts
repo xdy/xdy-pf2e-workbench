@@ -79,6 +79,7 @@ async function generateMessageData(message: ChatMessagePF2e, origin, spellUUID: 
             privateSpell: {
                 originUuid: message.flags?.pf2e.origin?.uuid,
                 originCastRank: message.flags?.pf2e?.origin?.castRank,
+                originMessageUuid: message.uuid,
             },
         },
     };
