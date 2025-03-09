@@ -1,3 +1,10 @@
+## [6.16.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.7...v6.16.8) (2025-03-09)
+
+
+### Bug Fixes
+
+* Add originMessageUuid to privateSpell flag. ([e40a828](https://github.com/xdy/xdy-pf2e-workbench/commit/e40a8288549ec311cfe44f8f2bd3d8d51a26bbf8))
+
 ## [6.16.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.6...v6.16.7) (2025-03-02)
 
 
