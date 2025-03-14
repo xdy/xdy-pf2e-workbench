@@ -1,4 +1,4 @@
-import { ActorSystemData, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
+import { ActorSystemData, ScenePF2e, TokenDocumentPF2e, TokenPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/index.js";
 import { generateNameFromTraits } from "./traits-name-generator.js";
@@ -56,11 +56,20 @@ async function fetchRandomWordPrefix(): Promise<string> {
     return "";
 }
 
-export async function buildTokenName(
-    token,
-    isMystified: boolean,
-): Promise<string> {
+export async function buildTokenName(token: TokenDocumentPF2e<ScenePF2e>, isMystified: boolean): Promise<string> {
     let tokenName = "";
+
+    function getTokenName(): string {
+        const useOriginalTokenName = game.settings.get(MODULENAME, "npcMystifierDemystifyToOriginalTokenName");
+        if (useOriginalTokenName) {
+            const originalTokenName = String(token.getFlag(MODULENAME, "originalTokenName"));
+            if (originalTokenName) {
+                return originalTokenName ?? "";
+            }
+        }
+        return token.actor?.prototypeToken.name ?? "";
+    }
+
     if (token && token.actor) {
         tokenName = token.name;
         const keep = game.settings.get(MODULENAME, "npcMystifierKeepRandomProperty");
@@ -68,20 +77,23 @@ export async function buildTokenName(
             if (keep && !shouldSkipRandomProperty(token)) {
                 switch (mystifyRandomPropertyType) {
                     case "numberPostfix":
-                        tokenName = `${token.actor.prototypeToken.name} ${tokenName.match(/\d+$/)?.[0] ?? ""}`.trim();
+                        tokenName = `${getTokenName()} ${tokenName.match(/\d+$/)?.[0] ?? ""}`.trim();
                         break;
                     case "wordPrefix":
-                        tokenName = `${(tokenName.match(/\b([a-zA-Z0-9_-]+)\b/) ?? [""])[0]} ${
-                            token.actor.prototypeToken.name
-                        }`.trim();
+                        tokenName = `${(tokenName.match(/\b([a-zA-Z0-9_-]+)\b/) ?? [""])[0]} ${getTokenName()}`.trim();
                         break;
                     default:
-                        tokenName = token.actor.prototypeToken.name;
+                        tokenName = getTokenName();
                 }
             } else {
-                tokenName = token.actor.prototypeToken.name;
+                tokenName = getTokenName();
             }
         } else {
+            // Store the original name before mystifying
+            if (!token.getFlag(MODULENAME, "originalTokenName")) {
+                await token.setFlag(MODULENAME, "originalTokenName", token.name);
+            }
+
             switch (game.settings.get(MODULENAME, "npcMystifierUseOtherTraits")) {
                 default:
                     tokenName = await generateNameFromTraits(token);
@@ -96,7 +108,7 @@ export async function buildTokenName(
                         tokenName = `${(token.name.match(/\b([a-zA-Z0-9_-]+)\b/) ?? [""])[0]} ${tokenName}`.trim();
                         break;
                     default:
-                        tokenName = token.actor.prototypeToken.name;
+                        tokenName = getTokenName();
                 }
             } else {
                 if (!shouldSkipRandomProperty(token)) {
@@ -170,14 +182,13 @@ export function isTokenMystified(token): boolean {
  * @return {Promise<void>} A promise that resolves when the mystification is complete.
  */
 export async function doMystificationFromToken(tokenId: string, active: boolean) {
-    // @ts-ignore
-    const token = <TokenPF2e>(<unknown>game.scenes?.current?.tokens?.get(tokenId));
+    const token = game.scenes?.current?.tokens?.get(tokenId);
     if (token) {
         return doMystification(token, active);
     }
 }
 
-export async function doMystification(token, active: boolean) {
+export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | undefined, active: boolean) {
     if (!token?.actor) {
         return;
     }
@@ -193,7 +204,8 @@ export async function doMystification(token, active: boolean) {
     const scene: ScenePF2e | null = canvas?.scene;
     const allOfActor = game.settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor");
     if (game.user?.isGM && isTokenMystified(token) && allOfActor) {
-        for (const sceneToken of scene?.tokens
+        let sceneToken: TokenDocumentPF2e<ScenePF2e>;
+        for (sceneToken of scene?.tokens
             ?.filter((t) => t.actor?.id === token?.actor?.id)
             ?.filter((x) => isTokenMystified(x)) || []) {
             updates.push({
@@ -216,7 +228,7 @@ export async function doMystification(token, active: boolean) {
 }
 
 export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement) {
-    let token;
+    let token: TokenPF2e<TokenDocumentPF2e<ScenePF2e>> | null;
     if (canvas && canvas.tokens) {
         token = canvas.tokens.get(<string>data._id) ?? null;
 
@@ -236,7 +248,7 @@ export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement) {
                 const hudElement = e.currentTarget as HTMLElement;
                 const active = hudElement.classList.contains("active");
                 if (token !== null && isTokenMystified(token) === active) {
-                    await doMystification(token, active);
+                    await doMystification(token?.document, active);
                 }
                 hudElement.classList.toggle("active");
             });

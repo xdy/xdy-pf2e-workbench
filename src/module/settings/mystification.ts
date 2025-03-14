@@ -212,6 +212,13 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                     mystifyModifierKey = <string>key;
                 },
             },
+            npcMystifierDemystifyToOriginalTokenName: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierDemystifyToOriginalTokenName.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierDemystifyToOriginalTokenName.hint`,
+                scope: "world",
+                type: Boolean,
+                default: false,
+            },
         };
     }
 

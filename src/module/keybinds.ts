@@ -116,7 +116,7 @@ export function registerWorkbenchKeybindings() {
             if (game.settings.get(MODULENAME, "npcMystifier")) {
                 if (canMystify()) {
                     for (const token of canvas?.tokens?.controlled.filter((t) => !t.actor?.hasPlayerOwner) || []) {
-                        doMystification(token, isTokenMystified(token)).then();
+                        doMystification(token?.document, isTokenMystified(token)).then();
                     }
                 } else {
                     ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));
