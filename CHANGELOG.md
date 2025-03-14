@@ -1,3 +1,13 @@
+# [6.17.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.8...v6.17.0) (2025-03-14)
+
+
+### Features
+
+* Adds hero point house rule option "Keep the best roll". If you had Keeley's selected previously you will need to reselect it in the dropdown. ([14e2f4c](https://github.com/xdy/xdy-pf2e-workbench/commit/14e2f4c070b4cec457339a04e3da76b8500643c5)), closes [#1595](https://github.com/xdy/xdy-pf2e-workbench/issues/1595)
+* Adds the option when mystifing tokens to exclude actor types by adding to a comma-separated list. The possible values are army,character,familiar,hazard,loot,npc,party,vehicle. (Party members are always excluded from being possible to mystify.) ([b74aba2](https://github.com/xdy/xdy-pf2e-workbench/commit/b74aba2c07f02a59a53c3d574e44d824ceff5d60)), closes [#1562](https://github.com/xdy/xdy-pf2e-workbench/issues/1562)
+* Adds the option when mystifing tokens to remember the original token name rather than the actor name and restore that when demystifiying. (The old behaviour to instead remember the prototype token's name is the default.) ([150bdc0](https://github.com/xdy/xdy-pf2e-workbench/commit/150bdc0ef32f4a1f2774c69ca25a29b305d5fb4b)), closes [#1590](https://github.com/xdy/xdy-pf2e-workbench/issues/1590)
+* Make it clearer that token mystification always excludes party members from being mystified, regardless of actor type. ([a36b05e](https://github.com/xdy/xdy-pf2e-workbench/commit/a36b05e07373c6573f910a60c97f9f21d8cecced)), closes [#1537](https://github.com/xdy/xdy-pf2e-workbench/issues/1537)
+
 ## [6.16.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.7...v6.16.8) (2025-03-09)
 
 
