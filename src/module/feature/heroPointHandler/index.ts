@@ -4,7 +4,7 @@
 // * Timeout, recalc timeout, ignore on the first, random on the second
 
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { pushNotification } from "../../utils.js";
+import { heroes, pushNotification } from "../../utils.js";
 
 export enum HPHState {
     Start,
@@ -318,20 +318,6 @@ export function calcRemainingMinutes(useDefault: boolean): number {
     );
     const passedMillis = game.time.serverTime - (savedTime ?? game.time.serverTime);
     return remainingMinutes - Math.floor(passedMillis / ONE_MINUTE_IN_MS);
-}
-
-/**
- * Retrieves the list of party members that are characters (i.e. have heropoints.)
- *
- * @return {Array<Actor>} The list of hero actors.
- */
-function heroes() {
-    return (
-        game.actors?.party?.members
-            .filter((actor) => actor?.isOfType("character"))
-            .filter((actor) => !actor?.system.traits?.value.toString().includes("minion"))
-            .filter((actor) => !actor?.system.traits?.value.toString().includes("eidolon")) || []
-    );
 }
 
 /**

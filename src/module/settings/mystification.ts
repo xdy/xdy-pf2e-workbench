@@ -219,6 +219,13 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 default: false,
             },
+            npcMystifierExcludeActorTypes: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierExcludeActorTypes.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierExcludeActorTypes.hint`,
+                scope: "world",
+                type: String,
+                default: "",
+            },
         };
     }
 

@@ -214,6 +214,21 @@ export function setFlag(doc, flag, value) {
     return doc.setFlag(MODULENAME, flag, value);
 }
 
+/**
+ * Retrieves the list of party members that are characters
+ *
+ * @return {Array<Actor>} The list of hero actors.
+ */
+export function heroes() {
+    return (
+        game.actors?.party?.members
+            .filter((actor) => actor?.isOfType("character"))
+            .filter((actor) => !actor?.system.traits?.value.toString().includes("minion"))
+            .filter((actor) => !actor?.system.traits?.value.toString().includes("eidolon")) || []
+    );
+}
+
+
 // Functions copied from C:\Users\jk\foundryvtt\forks\pf2e\build\lib\foundry-utils.ts
 // Not sure why I can't use directly.
 
@@ -226,3 +241,4 @@ export function setFlag(doc, flag, value) {
 export function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
     return (typeof key === "string" || typeof key === "number") && key in obj;
 }
+

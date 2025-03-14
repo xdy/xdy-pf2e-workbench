@@ -34,7 +34,7 @@ export function registerWorkbenchKeybindings() {
                 content,
                 buttons: {
                     addFor: {
-                        icon: "<i class=\"fas fa-users\"></i>",
+                        icon: '<i class="fas fa-users"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
                         callback: async (html) => {
                             const targets: any[] = <any[]>(
@@ -54,7 +54,7 @@ export function registerWorkbenchKeybindings() {
                         },
                     },
                     clearFor: {
-                        icon: "<i class=\"fas fa-users-slash\"></i>",
+                        icon: '<i class="fas fa-users-slash"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
                         callback: async (html: JQuery) => {
                             const user: any = game.users.find(
@@ -115,7 +115,7 @@ export function registerWorkbenchKeybindings() {
         onDown: () => {
             if (game.settings.get(MODULENAME, "npcMystifier")) {
                 if (canMystify()) {
-                    for (const token of canvas?.tokens?.controlled.filter((t) => !t.actor?.hasPlayerOwner) || []) {
+                    for (const token of canvas?.tokens?.controlled ?? []) {
                         doMystification(token?.document, isTokenMystified(token)).then();
                     }
                 } else {

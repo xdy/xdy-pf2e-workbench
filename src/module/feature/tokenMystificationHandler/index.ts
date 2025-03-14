@@ -1,8 +1,8 @@
-import { ActorSystemData, ScenePF2e, TokenDocumentPF2e, TokenPF2e } from "foundry-pf2e";
+import { ActorSystemData, CreaturePF2e, ScenePF2e, TokenDocumentPF2e, TokenPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/index.js";
 import { generateNameFromTraits } from "./traits-name-generator.js";
-import { logError } from "../../utils.js";
+import { heroes, logError } from "../../utils.js";
 
 function shouldSkipRandomProperty(token) {
     return (
@@ -190,6 +190,16 @@ export async function doMystificationFromToken(tokenId: string, active: boolean)
 
 export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | undefined, active: boolean) {
     if (!token?.actor) {
+        return;
+    }
+
+    if (
+        heroes().includes(<CreaturePF2e>token.actor) ||
+        String(game.settings.get(MODULENAME, "npcMystifierExcludeActorTypes"))
+            .split(",")
+            .map((t) => t.trim())
+            .includes(token.actor?.type)
+    ) {
         return;
     }
 

@@ -572,6 +572,10 @@
         "hint": "When demystifying a token, restore its original name rather than using the actor's prototype token name.",
         "name": "Restore original token name when demystifying"
       },
+      "npcMystifierExcludeActorTypes": {
+        "hint": "Comma-separated list of actor types to exclude from mystification (i.e. one or more of army,character,familiar,hazard,loot,npc,party,vehicle)",
+        "name": "Actor types to exclude from mystification"
+      },
       "npcMystifierKeepRandomProperty": {
         "hint": "Check to keep number postfix/word prefix *in the same format as currently configured in this module* (if any) as a postfix/prefix to the name when mystifying/demystifying npcs.",
         "name": "Keep prefix/postfix when mystifying/demystifying."
