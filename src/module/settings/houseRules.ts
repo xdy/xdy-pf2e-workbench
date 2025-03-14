@@ -1,4 +1,4 @@
-import { MODULENAME } from "../xdy-pf2e-workbench.js";
+import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
 import { SettingsMenuPF2eWorkbench } from "./menu.js";
 
 export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
@@ -12,13 +12,23 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
-            keeleysHeroPointRule: {
-                name: `${MODULENAME}.SETTINGS.keeleysHeroPointRule.name`,
-                hint: `${MODULENAME}.SETTINGS.keeleysHeroPointRule.hint`,
+            heroPointRules: {
+                name: `${MODULENAME}.SETTINGS.heroPointRules.name`,
+                hint: `${MODULENAME}.SETTINGS.heroPointRules.hint`,
                 scope: "world",
-                config: true,
-                default: false,
-                type: Boolean,
+                default: "no",
+                type: String,
+                choices: {
+                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.no`),
+                    keeleysHeroPointRule: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.heroPointRules.keeleysHeroPointRule`,
+                    ),
+                    useHighestHeroPointRoll: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.heroPointRules.useHighestHeroPointRoll`,
+                    ),
+                },
+                onChange: () => updateHooks(),
+                requiresReload: true,
             },
             legacyVariantRuleAncestryParagon: {
                 name: `${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.name`,

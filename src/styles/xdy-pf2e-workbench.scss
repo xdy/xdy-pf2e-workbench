@@ -48,6 +48,13 @@
     color: purple;
 }
 
+/** Use Highest Roll Hero Point Rule */
+.chat-message .tags.modifiers .tag.use-highest-roll,
+.chat-message .dice-total.use-highest-roll,
+.chat-message .dice-formula > .use-highest-roll {
+    color: blue;
+}
+
 .chat-message .tags.modifiers .tag.keeley-add-10 {
     box-shadow: inset 0 0 0 1px rgba(128, 0, 128, 0.3);
 }

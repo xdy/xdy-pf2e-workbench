@@ -149,14 +149,14 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
         if (
             (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault" ||
                 String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) ===
-                    "nonCollapsedDefault") &&
+                "nonCollapsedDefault") &&
             ["weapon", "melee", "spell"].includes(message.item?.type ?? "")
         ) {
             chatAttackCardDescriptionCollapse(html);
         }
         if (
             ((String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) === "collapsedDefault" ||
-                String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
+                    String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
                     "nonCollapsedDefault") &&
                 !message.item) ||
             message.item?.type === "action"
@@ -186,7 +186,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
                 // Add a tag to the list of modifiers
                 const newTag = document.createElement("span");
                 newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
-                newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.keeleysHeroPointRule.bonusTag`);
+                newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagKeeleys`);
                 newTag.dataset.slug = "keeley-add-10";
                 const querySelector = tags.querySelector(".tag");
                 if (querySelector?.dataset.visibility === "gm") {
@@ -202,6 +202,32 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
 
                 // Make the total purple
                 newTotalElem.classList.add("keeley-add-10");
+            }
+        }
+    }
+
+    // Alert everyone that use highest roll hero point rule was invoked
+    if (lastRoll?.options.useHighestRoll) {
+        const element: any = jq.get(0);
+
+        if (element) {
+            const tags = element.querySelector(".flavor-text > .tags.modifiers");
+            const formulaElem = element.querySelector(".reroll-discard .dice-formula");
+            const newTotalElem = element.querySelector(".reroll-second .dice-total");
+            if (tags && formulaElem && newTotalElem) {
+                const newTag = document.createElement("span");
+                newTag.classList.add("tag", "tag_transparent", "use-highest-roll");
+                newTag.innerText = game.i18n.localize(
+                    `${MODULENAME}.SETTINGS.heroPointRules.bonusTagUseHighestRoll`,
+                );
+                newTag.dataset.slug = "use-highest-roll";
+                const querySelector = tags.querySelector(".tag");
+                if (querySelector?.dataset.visibility === "gm") {
+                    newTag.dataset.visibility = "gm";
+                }
+                tags.append(newTag);
+
+                newTotalElem.classList.add("use-highest-roll");
             }
         }
     }
@@ -240,7 +266,8 @@ export async function createItemHook(item: ItemPF2e, _options: any, _id: any) {
     }
 }
 
-export async function updateItemHook(_item: ItemPF2e, _update: any) {}
+export async function updateItemHook(_item: ItemPF2e, _update: any) {
+}
 
 export async function deleteItemHook(item: ItemPF2e, _options: any) {
     await itemHandlingItemHook(item);
@@ -323,9 +350,9 @@ export async function createTokenHook(token: TokenDocumentPF2e, ..._args) {
     }
 }
 
-/** Keeley's Hero Point Rule */
+/** Hero Point variant rules */
 export function pf2eRerollHook(
-    _oldRoll: Rolled<CheckRoll>,
+    oldRoll: Rolled<CheckRoll>,
     newRoll: Rolled<CheckRoll>,
     heroPoint: boolean,
     keep: "new" | "higher" | "lower",
@@ -335,7 +362,9 @@ export function pf2eRerollHook(
     // @ts-ignore
     const die = newRoll.dice.find((d) => d instanceof foundry.dice.terms.Die && d.number === 1 && d.faces === 20);
     const result = die?.results.find((r) => r.active && r.result <= 10);
-    if (die && result) {
+
+    // Handle Keeley's Hero Point Rule
+    if (die && result && game.settings.get(MODULENAME, "heroPointRules") === "keeleysHeroPointRule") {
         newRoll.terms.push(
             // @ts-ignore
             foundry.dice.terms.OperatorTerm.fromData({ class: "OperatorTerm", operator: "+", evaluated: true }),
@@ -345,6 +374,24 @@ export function pf2eRerollHook(
         // @ts-ignore It's protected. Meh.
         newRoll._total += 10;
         newRoll.options.keeleyAdd10 = true;
+    } else if (game.settings.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll") {
+        // Handle useHighestHeroPointRoll setting
+        const oldDie = oldRoll.dice.find(
+            (d) => d instanceof foundry.dice.terms.Die && d.number === 1 && d.faces === 20,
+        );
+        const oldResult = oldDie?.results.find((r) => r.active)?.result ?? 0;
+        const newResult = die?.results.find((r) => r.active)?.result ?? 0;
+
+        if (oldResult > newResult) {
+            // Replace the new roll's d20 result with the old roll's result
+            if (die && die.results.length > 0) {
+                die.results[0].result = oldResult;
+                // @ts-ignore It's protected. Meh.
+                newRoll._total = newRoll.options.keeleyAdd10 ? oldRoll._total + 10 : oldRoll._total;
+                newRoll.options.useHighestRoll = true;
+            }
+        }
+        return;
     }
 }
 
@@ -425,7 +472,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
 
         function processSpellElement(spellElement: Element) {
             spellElement.querySelectorAll("div.item-name").forEach((itemNameDiv) => {
-                const actionElement = itemNameDiv.querySelector<HTMLElement>('[data-action="item-to-chat"]');
+                const actionElement = itemNameDiv.querySelector<HTMLElement>("[data-action=\"item-to-chat\"]");
                 if (!actionElement) return;
 
                 const currentAction = actionElement.getAttribute("data-action");
@@ -438,7 +485,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
 
         function handleSpellClick(event: MouseEvent) {
             const target = event.target as HTMLElement;
-            const spellContainer = target?.closest('[data-action="workbench-spell-to-chat"]')?.parentElement
+            const spellContainer = target?.closest("[data-action=\"workbench-spell-to-chat\"]")?.parentElement
                 ?.parentElement;
 
             if (!shouldIHandleThis(sheet.actor) || !spellContainer) return;
