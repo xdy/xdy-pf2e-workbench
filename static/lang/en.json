@@ -550,11 +550,11 @@
         "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
       },
       "npcMystifier": {
-        "hint": "Check to enable npc mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene. Save settings to show/hide additional options.",
+        "hint": "Check to enable token mystifier, renaming tokens on the active scene based on their traits if Ctrl (configurable) is clicked when adding to scene. Save settings to show/hide additional options. Will always exclude party members.",
         "name": "Enable npc mystifier."
       },
       "npcMystifierAddRandomProperty": {
-        "hint": "Select a type of random property to add when mystifying npcs that can optionally be kept.",
+        "hint": "Select a type of random property to add when mystifying tokens that can optionally be kept.",
         "name": "Add random property of chosen type to name",
         "none": "None",
         "numberPostfix": "Number as postfix",
@@ -577,7 +577,7 @@
         "name": "Actor types to exclude from mystification"
       },
       "npcMystifierKeepRandomProperty": {
-        "hint": "Check to keep number postfix/word prefix *in the same format as currently configured in this module* (if any) as a postfix/prefix to the name when mystifying/demystifying npcs.",
+        "hint": "Check to keep number postfix/word prefix *in the same format as currently configured in this module* (if any) as a postfix/prefix to the name when mystifying/demystifying tokens.",
         "name": "Keep prefix/postfix when mystifying/demystifying."
       },
       "npcMystifierModifierKey": {
@@ -586,7 +586,7 @@
         "control": "Control",
         "meta": "Meta/⌘ (command)/⊞ (windows)",
         "disabled": "Disabled",
-        "hint": "Select to enable setting which key to hold to mystify creature as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the npc.",
+        "hint": "Select to enable setting which key to hold to mystify token as it's dragged out to the active scene. Note that if you choose Alt (not the default) it also hides the token.",
         "name": "Key to mystify on drag to scene"
       },
       "npcMystifierMystifyKey": {
@@ -606,8 +606,8 @@
         "name": "Word or rollable table prefix"
       },
       "npcMystifierRandomPropertySkipForUnique": {
-        "hint": "Check to skip adding a random property when mystifying unique npcs. (I.e. it's kept when you demystify the npc.)",
-        "name": "Skip random persistent property for unique npcs."
+        "hint": "Check to skip adding a random property when mystifying unique tokens. (I.e. it's kept when you demystify the token.)",
+        "name": "Skip random persistent property for unique tokens."
       },
       "npcMystifierUseCreatureTraits": {
         "hint": "Check to use all 'creature traits' as defined in the pf2e system in the mystified name.",
@@ -622,7 +622,7 @@
         "name": "Use elite/weak status"
       },
       "npcMystifierUseOtherTraits": {
-        "hint": "Check to use all npc traits not already included by any of the above settings in the mystified name.",
+        "hint": "Check to use all token traits not already included by any of the above settings in the mystified name.",
         "name": "Use other traits"
       },
       "npcMystifierUseRarities": {
