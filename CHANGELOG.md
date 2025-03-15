@@ -1,3 +1,10 @@
+# [6.20.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.19.0...v6.20.0) (2025-03-15)
+
+
+### Features
+
+* Add option to auto-sheathe held items at end of encounter if they are of the configured item types (normally 'weapon'). ([ed025dc](https://github.com/xdy/xdy-pf2e-workbench/commit/ed025dc58c3238196ded8d2a21f3f8f8edd21706)), closes [#639](https://github.com/xdy/xdy-pf2e-workbench/issues/639)
+
 # [6.19.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.18.0...v6.19.0) (2025-03-15)
 
 
