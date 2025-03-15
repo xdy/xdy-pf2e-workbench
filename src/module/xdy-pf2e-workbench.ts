@@ -119,7 +119,6 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "autoRollDamageForStrike") ||
             gs.get(MODULENAME, "autoRollDamageForSpellAttack") ||
             gs.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") !== "no" ||
-            gs.get(MODULENAME, "automatedAnimationOn") ||
             gs.get(MODULENAME, "reminderBreathWeapon") ||
             gs.get(MODULENAME, "reminderCannotAttack") === "reminder" ||
             gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
@@ -128,7 +127,21 @@ export function updateHooks(cleanSlate = false) {
 
     handle(
         "renderChatMessage",
-        true, // Due to support for minimumUserRole, this hook is always on
+        game.settings.get(MODULENAME, "castPrivateSpell") ||
+            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
+            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault" ||
+            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
+            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
+            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
+            gs.get(MODULENAME, "applyPersistentHealing") ||
+            gs.get(MODULENAME, "applyPersistentDamage") ||
+            gs.get(MODULENAME, "castPrivateSpell") ||
+            gs.get(MODULENAME, "handleDyingRecoveryRoll") /* Deprecated */ ||
+            gs.get(MODULENAME, "heroPointRules") !== "no",
         renderChatMessageHook,
     );
 
@@ -189,11 +202,11 @@ export function updateHooks(cleanSlate = false) {
 
     handle(
         "renderActorSheet",
-        // gs.get(MODULENAME, "playerFeatsRarityColour") ||
-        //     gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
-        //     gs.get(MODULENAME, "playerSpellsRarityColour") ||
-        //     gs.get(MODULENAME, "castPrivateSpell") ||
-        true, // Due to legacy variant rules this hook is always on
+        gs.get(MODULENAME, "playerFeatsRarityColour") ||
+            gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
+            gs.get(MODULENAME, "playerSpellsRarityColour") ||
+            gs.get(MODULENAME, "castPrivateSpell") ||
+            gs.get(MODULENAME, "playerSpellsChangeSendToChat"),
         renderActorSheetHook,
     );
 

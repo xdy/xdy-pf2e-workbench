@@ -14,13 +14,6 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
         if (settingElement && settingElement["key"]) {
             const settingName = settingElement["key"];
 
-            // if (settingName !== `automatedAnimationOn` && settingName.startsWith(`automatedAnimation`)) {
-            //     const valueFunction = !game.settings.get(MODULENAME, "automatedAnimationOn");
-            //
-            //     html.find(`input[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-            //     html.find(`select[name="${settingName}"]`).parent().parent().toggle(!valueFunction);
-            // }
-            //
             // // Disable all dependent actionsReminder settings
             // if (settingName !== `actionsReminderAllow` && settingName.startsWith(`actionsReminder`)) {
             //     const applyToggle = !(

@@ -128,12 +128,6 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
 
     deprecatedDyingHandlingRenderChatMessageHook(message);
 
-    // Affects all messages
-    const minimumUserRoleFlag: any = message.getFlag(MODULENAME, "minimumUserRole");
-    if (!isNaN(minimumUserRoleFlag) && minimumUserRoleFlag > game.user.role) {
-        html.classList.add("xdy-pf2e-workbench-hide");
-    }
-
     if (isActuallyDamageRoll(message)) {
         const expandDamageRolls = String(game.settings.get(MODULENAME, "autoExpandDamageRolls"));
         if (["expandedAll", "expandedNew", "expandedNewest"].includes(expandDamageRolls)) {
@@ -149,14 +143,14 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
         if (
             (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault" ||
                 String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) ===
-                "nonCollapsedDefault") &&
+                    "nonCollapsedDefault") &&
             ["weapon", "melee", "spell"].includes(message.item?.type ?? "")
         ) {
             chatAttackCardDescriptionCollapse(html);
         }
         if (
             ((String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) === "collapsedDefault" ||
-                    String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
+                String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
                     "nonCollapsedDefault") &&
                 !message.item) ||
             message.item?.type === "action"
@@ -217,9 +211,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
             if (tags && formulaElem && newTotalElem) {
                 const newTag = document.createElement("span");
                 newTag.classList.add("tag", "tag_transparent", "use-highest-roll");
-                newTag.innerText = game.i18n.localize(
-                    `${MODULENAME}.SETTINGS.heroPointRules.bonusTagUseHighestRoll`,
-                );
+                newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagUseHighestRoll`);
                 newTag.dataset.slug = "use-highest-roll";
                 const querySelector = tags.querySelector(".tag");
                 if (querySelector?.dataset.visibility === "gm") {
@@ -266,8 +258,7 @@ export async function createItemHook(item: ItemPF2e, _options: any, _id: any) {
     }
 }
 
-export async function updateItemHook(_item: ItemPF2e, _update: any) {
-}
+export async function updateItemHook(_item: ItemPF2e, _update: any) {}
 
 export async function deleteItemHook(item: ItemPF2e, _options: any) {
     await itemHandlingItemHook(item);
@@ -472,7 +463,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
 
         function processSpellElement(spellElement: Element) {
             spellElement.querySelectorAll("div.item-name").forEach((itemNameDiv) => {
-                const actionElement = itemNameDiv.querySelector<HTMLElement>("[data-action=\"item-to-chat\"]");
+                const actionElement = itemNameDiv.querySelector<HTMLElement>('[data-action="item-to-chat"]');
                 if (!actionElement) return;
 
                 const currentAction = actionElement.getAttribute("data-action");
@@ -485,7 +476,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
 
         function handleSpellClick(event: MouseEvent) {
             const target = event.target as HTMLElement;
-            const spellContainer = target?.closest("[data-action=\"workbench-spell-to-chat\"]")?.parentElement
+            const spellContainer = target?.closest('[data-action="workbench-spell-to-chat"]')?.parentElement
                 ?.parentElement;
 
             if (!shouldIHandleThis(sheet.actor) || !spellContainer) return;
