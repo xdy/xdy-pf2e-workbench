@@ -408,6 +408,10 @@
         "name": "... and show spell traits in the public message.",
         "traitPart": " with these traits: <strong>{traits}</strong>"
       },
+      "castPrivateSpellWithPublicMessageTraitsBlocklist": {
+        "hint": "Comma-separated list of traits to exclude from the public message (e.g. 'mental, illusion')",
+        "name": "... but exclude these traits from the public message"
+      },
       "customPauseImage": {
         "hint": "Custom image to use for the pause image. Leave empty to use the default clockwork icon.",
         "name": "Custom image to use for the pause image."

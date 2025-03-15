@@ -104,6 +104,16 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            castPrivateSpellWithPublicMessageTraitsBlocklist: {
+                name: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageTraitsBlocklist.name`,
+                hint: `${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageTraitsBlocklist.hint`,
+                scope: "world",
+                config: true,
+                default: "",
+                type: String,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             tokenAnimation: {
                 name: `${MODULENAME}.SETTINGS.tokenAnimation.name`,
                 hint: `${MODULENAME}.SETTINGS.tokenAnimation.hint`,
@@ -183,6 +193,9 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
         },
         castPrivateSpellWithPublicMessage: {
             list: ["castPrivateSpellWithPublicMessageShowToGM", "castPrivateSpellWithPublicMessageShowTraits"],
+        },
+        castPrivateSpellWithPublicMessageShowTraits: {
+            list: ["castPrivateSpellWithPublicMessageTraitsBlocklist"],
         },
     };
 }

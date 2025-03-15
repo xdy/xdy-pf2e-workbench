@@ -192,11 +192,16 @@ function buildSpellMessage(
 
         if (game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageShowTraits")) {
             const traits = Object.values(origin.system.traits.value);
+            const blocklist = String(game.settings.get(MODULENAME, "castPrivateSpellWithPublicMessageTraitsBlocklist"))
+                .split(",")
+                .map((t) => t.trim())
+                .filter((t) => t);
 
             content += game.i18n.localize(
                 game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessageShowTraits.traitPart`, {
                     traits: traits
                         .map((trait: any) => trait.valueOf())
+                        .filter((trait: string) => !blocklist.includes(trait))
                         .sort()
                         .join(", "),
                 }),
