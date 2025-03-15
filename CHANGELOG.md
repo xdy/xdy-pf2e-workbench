@@ -1,3 +1,10 @@
+# [6.19.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.18.0...v6.19.0) (2025-03-15)
+
+
+### Features
+
+* Add option to, when autorevealing a privately cast spell, always override the roll mode for that message to public. ([0e22f6c](https://github.com/xdy/xdy-pf2e-workbench/commit/0e22f6c76cdadaeb3063b8f041454e9433f3b348))
+
 # [6.18.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.17.0...v6.18.0) (2025-03-15)
 
 
