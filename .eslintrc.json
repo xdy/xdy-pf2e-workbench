@@ -27,12 +27,7 @@
     "import/no-default-export": "error",
     "prettier/prettier": "error",
     "no-console": "off",
-    "no-plusplus": [
-      "error",
-      {
-        "allowForLoopAfterthoughts": true
-      }
-    ],
+    "no-plusplus": "off",
     "no-unused-expressions": [
       "error",
       {

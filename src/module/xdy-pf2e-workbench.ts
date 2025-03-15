@@ -56,6 +56,8 @@ import { getAllFromAllowedPacks } from "./feature/api/getAllFromAllowedPacks.js"
 
 import "../styles/xdy-pf2e-workbench.scss";
 import { refocus } from "./feature/macros/refocus.js";
+import { followTheExpert } from "./feature/macros/follow-the-expert.js";
+import { hypercognition } from "./feature/macros/hypercognition.js";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 export const NPC_TYPE = "npc";
@@ -399,6 +401,8 @@ Hooks.once("ready", () => {
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
         basicActionMacros: basicActionMacros, // await game.PF2eWorkbench.basicActionMacros()
         refocus: refocus, // await game.PF2eWorkbench.refocus()
+        followTheExpert: followTheExpert, // await game.PF2eWorkbench.followTheExpert()
+        hypercognition: hypercognition, // await game.PF2eWorkbench.followTheExpert()
         buildNpcSpellbookJournal: buildNpcSpellbookJournal, // await game.PF2eWorkbench.buildNpcSpellbookJournal()
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
