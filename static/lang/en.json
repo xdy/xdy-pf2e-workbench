@@ -369,6 +369,10 @@
         "hint": "Check to autoreveal privately cast spell if any party member knows the spell.",
         "name": "... but autoreveal spell if it is known by party."
       },
+      "castPrivateSpellAutoRevealOverrideGMRollMode": {
+        "hint": "Override the GM's selected roll mode to public. If disabled, the GM's selected roll mode (public/private/blind/self) will be used.",
+        "name": "... and always autoreveal spells as a public message."
+      },
       "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
         "hint": "Check to, for autorevealed spells, show party members that know the spell in the chat card",
         "name": "... and list the party members that know the autorevealed spell"

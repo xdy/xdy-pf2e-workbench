@@ -11,6 +11,9 @@ export async function handlePrivateSpellcasting(data: any, message: ChatMessageP
         if (game.settings.get(MODULENAME, "castPrivateSpellAutoRevealPartyMembersThatKnowSpell")) {
             showPartymembersWithSpell(message, partyMembersWithSpell, data);
         }
+        if (game.settings.get(MODULENAME, "castPrivateSpellAutoRevealOverrideGMRollMode")) {
+            message.applyRollMode("publicroll");
+        }
         return;
     }
 

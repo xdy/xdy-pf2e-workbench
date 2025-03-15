@@ -46,6 +46,16 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            castPrivateSpellAutoRevealOverrideGMRollMode: {
+                name: `${MODULENAME}.SETTINGS.castPrivateSpellAutoRevealOverrideGMRollMode.name`,
+                hint: `${MODULENAME}.SETTINGS.castPrivateSpellAutoRevealOverrideGMRollMode.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             castPrivateSpellAutoRevealPartyMembersThatKnowSpell: {
                 name: `${MODULENAME}.SETTINGS.castPrivateSpellAutoRevealPartyMembersThatKnowSpell.name`,
                 hint: `${MODULENAME}.SETTINGS.castPrivateSpellAutoRevealPartyMembersThatKnowSpell.hint`,
@@ -178,7 +188,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 default: false,
                 type: Boolean,
                 onChange: () => updateHooks(),
-            }
+            },
         };
     }
 
@@ -189,6 +199,7 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 "castPrivateSpellAutoRevealPartyMembersThatKnowSpell",
                 "castPrivateSpellAutoRevealPartyMembersThatKnowSpell",
                 "castPrivateSpellAlwaysFor",
+                "castPrivateSpellAutoRevealOverrideGMRollMode",
             ],
         },
         castPrivateSpellWithPublicMessage: {
