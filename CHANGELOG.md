@@ -1,3 +1,10 @@
+# [6.21.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.20.0...v6.21.0) (2025-03-15)
+
+
+### Features
+
+* Adds the hypercognition macro which has basic support for Hypercognition, True Hypercognition and Incredible Recollection using the Symon-provided Recall_Knowledge macro. ([e248e50](https://github.com/xdy/xdy-pf2e-workbench/commit/e248e50de9e0ccdcd58987d31f4e7d9de8d1202b))
+
 # [6.20.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.19.0...v6.20.0) (2025-03-15)
 
 
