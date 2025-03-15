@@ -1,3 +1,15 @@
+# [6.18.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.17.0...v6.18.0) (2025-03-15)
+
+
+### Bug Fixes
+
+* Remove unused minimumUserRole macro flag along with .xdy-pf2e-workbench-hide css class. Small cleanup of hook handling. ([3877274](https://github.com/xdy/xdy-pf2e-workbench/commit/38772748ae81ceb3a9b22c80b57c7f68a560ead2)), closes [#782](https://github.com/xdy/xdy-pf2e-workbench/issues/782)
+
+
+### Features
+
+* Option to hide or reveal traits from Spell Mystification public message. ([5f81011](https://github.com/xdy/xdy-pf2e-workbench/commit/5f81011fb74de570200abcaab371d73f15307230)), closes [#1387](https://github.com/xdy/xdy-pf2e-workbench/issues/1387)
+
 # [6.17.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.16.8...v6.17.0) (2025-03-14)
 
 
