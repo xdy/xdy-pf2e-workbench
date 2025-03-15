@@ -22,6 +22,7 @@ import {
     createChatMessageHook,
     createItemHook,
     createTokenHook,
+    deleteCombatHook,
     deleteItemHook,
     pf2eEndTurnHook,
     pf2eRerollHook,
@@ -209,6 +210,8 @@ export function updateHooks(cleanSlate = false) {
             gs.get(MODULENAME, "playerSpellsChangeSendToChat"),
         renderActorSheetHook,
     );
+
+    handle("deleteCombat", gs.get(MODULENAME, "sheatheHeldItemsAfterEncounter"), deleteCombatHook);
 
     changePauseText();
 }

@@ -230,6 +230,26 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            sheatheHeldItemsAfterEncounter: {
+                name: `${MODULENAME}.SETTINGS.sheatheHeldItemsAfterEncounter.name`,
+                hint: `${MODULENAME}.SETTINGS.sheatheHeldItemsAfterEncounter.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
+            sheatheHeldItemsAfterEncounterTypes: {
+                name: `${MODULENAME}.SETTINGS.sheatheHeldItemsAfterEncounterTypes.name`,
+                hint: `${MODULENAME}.SETTINGS.sheatheHeldItemsAfterEncounterTypes.hint`,
+                scope: "world",
+                config: true,
+                default: "weapon",
+                type: String,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
         };
     }
 

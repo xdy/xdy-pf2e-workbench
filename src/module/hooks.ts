@@ -247,6 +247,36 @@ function dropHeldItemsOnBecomingUnconscious(actor) {
     }
 }
 
+function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
+    async function sheatheHeldItems(actor) {
+        const items = <PhysicalItemPF2e[]>actor.items?.filter((i) => i.isHeld);
+        if (items && items.length > 0) {
+            const itemTypes = String(game.settings.get(MODULENAME, "sheatheHeldItemsAfterEncounterTypes"))
+                .split(",")
+                .map((t) => t.trim())
+                .filter((t) => t);
+            const itemsToSheathe = items.filter((i) => itemTypes.includes(i.type));
+            if (itemsToSheathe.length > 0) {
+                for (const item of itemsToSheathe) {
+                    await actor.changeCarryType(item, { carryType: "worn", handsHeld: 0, inSlot: false });
+                }
+                const message = game.i18n.format(`${MODULENAME}.SETTINGS.sheatheHeldItemsAfterEncounter.message`, {
+                    name: game?.scenes?.current?.tokens?.find((t) => t.actor?.id === actor.id)?.name ?? actor.name,
+                    items: itemsToSheathe.map((i) => i.name).join(", "),
+                });
+                ChatMessage.create({
+                    flavor: message,
+                    speaker: ChatMessage.getSpeaker({ actor }),
+                }).then();
+            }
+        }
+    }
+
+    encounter.combatants.forEach(async (combatant) => {
+        await sheatheHeldItems(combatant.actor);
+    });
+}
+
 export async function createItemHook(item: ItemPF2e, _options: any, _id: any) {
     if (
         item.actor?.isOfType(CHARACTER_TYPE) &&
@@ -390,6 +420,12 @@ export async function pf2eSystemReadyHook() {
     const housepatcherSetting = game.settings.get(MODULENAME, "housepatcher");
     if (game.user.isGM && housepatcherSetting) {
         await housepatcher(housepatcherSetting);
+    }
+}
+
+export async function deleteCombatHook(encounter: EncounterPF2e, _options: any) {
+    if (game.settings.get(MODULENAME, "sheatheHeldItemsAfterEncounter")) {
+        sheatheHeldItemsAfterEncounter(encounter);
     }
 }
 

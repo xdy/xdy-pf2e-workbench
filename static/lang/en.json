@@ -207,6 +207,15 @@
         "name": "Characters automatically drop held items on becoming unconscious.",
         "message": "{name} lost their grip on: {items}"
       },
+      "sheatheHeldItemsAfterEncounter": {
+        "hint": "Characters automatically sheathe held weapons after encounters.",
+        "name": "Characters automatically sheathe held weapons after encounters.",
+        "message": "{name} sheathed: {items}"
+      },
+      "sheatheHeldItemsAfterEncounterTypes": {
+        "hint": "Comma-separated list of item types to sheathe after encounters (e.g. 'armor,backpack,book,consumable,equipment,shield,treasure,weapon')",
+        "name": "... but only for these item types"
+      },
       "autoExpandDamageRolls": {
         "collapsedAll": "All damage rolls collapse (default foundry).",
         "expandedAll": "All damage rolls expand.",

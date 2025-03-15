@@ -208,5 +208,8 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
         castPrivateSpellWithPublicMessageShowTraits: {
             list: ["castPrivateSpellWithPublicMessageTraitsBlocklist"],
         },
+        sheatheHeldItemsAfterEncounter: {
+            list: ["sheatheHeldItemsAfterEncounterTypes"],
+        },
     };
 }
