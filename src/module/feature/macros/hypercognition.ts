@@ -37,12 +37,6 @@ export async function hypercognition(token: TokenPF2e) {
         criticalFailure: { count: 0, rolls: [] },
     };
 
-    // Store original roll mode setting
-    const originalRollMode = game.settings.get("core", "rollMode");
-
-    // Set messages to be GM whispered and blind
-    await game.settings.set("core", "rollMode", "blindroll");
-
     // Find the Recall Knowledge macro
     const recallKnowledgeMacro = game.macros.find((m) => m.name === "Recall_Knowledge");
     if (!recallKnowledgeMacro) {
@@ -206,13 +200,6 @@ export async function hypercognition(token: TokenPF2e) {
         }
     }
 
-    // Restore original roll mode setting
-    try {
-        await game.settings.set("core", "rollMode", originalRollMode);
-    } catch (error) {
-        console.warn("Could not restore roll mode:", error);
-    }
-
     // Create a summary message with skill information
     const RANK_NAMES = ["UNTRAINED", "TRAINED", "EXPERT", "MASTER", "LEGENDARY"];
     const RANK_COLORS = ["#443730", "#171f69", "#3c005e", "#5e4000", "#5e0000"];
@@ -223,7 +210,8 @@ export async function hypercognition(token: TokenPF2e) {
         return `<span style="color:${DOS_COLORS[colorIndex]}">${category}: ${result.count} (Rolls: ${result.rolls.join(", ")})</span>`;
     };
 
-    let summary = `<strong>Instant Recall Knowledge Uses (${numberOfUses} rolls)</strong><br>
+    let summary = `<italic>${token.name}</italic> ponders the true nature of <strong>${game.user.targets?.first()?.name}</strong> (${numberOfUses} Recall Knowledge rolls)<br>
+<div data-visibility="gm" style="display: block">
         ${formatResultLine("Critical Successes", results.criticalSuccess, 3)}<br>
         ${formatResultLine("Successes", results.success, 2)}<br>
         ${formatResultLine("Failures", results.failure, 1)}<br>
@@ -234,7 +222,7 @@ export async function hypercognition(token: TokenPF2e) {
     if (usedPrimarySkills.length > 0) {
         summary += "<strong>Used Skills:</strong><br>";
         summary +=
-            "<table style=\"border-collapse: collapse; width: 100%;\"><tr><th>Skill</th><th>Proficiency</th><th>Modifier</th></tr>";
+            '<table style="border-collapse: collapse; width: 100%;"><tr><th>Skill</th><th>Proficiency</th><th>Modifier</th></tr>';
         for (const skill of usedPrimarySkills) {
             const modifier = skill.actualModifier !== null ? skill.actualModifier : skill.modifier;
             // @ts-ignore
@@ -248,17 +236,16 @@ export async function hypercognition(token: TokenPF2e) {
     if (usedLoreSkills.length > 0) {
         summary += "<strong>Used Lore Skills:</strong><br>";
         summary +=
-            "<table style=\"border-collapse: collapse; width: 100%;\"><tr><th>Lore</th><th>Proficiency</th><th>Modifier</th></tr>";
+            '<table style="border-collapse: collapse; width: 100%;"><tr><th>Lore</th><th>Proficiency</th><th>Modifier</th></tr>';
         for (const lore of usedLoreSkills) {
             const modifier = lore.actualModifier !== null ? lore.actualModifier : lore.modifier;
             summary += `<tr><td>${lore.name}</td><td class="tags"><div class="tag" style="background-color: ${RANK_COLORS[lore.rank]}; white-space:nowrap">${RANK_NAMES[lore.rank]}</div></td><td>${modifier !== null ? (modifier >= 0 ? "+" : "") + modifier : ""}</td></tr>`;
         }
-        summary += "</table>";
+        summary += "</table></div>";
     }
 
     await ChatMessage.create({
         content: summary,
-        whisper: ChatMessage.getWhisperRecipients("GM"),
     });
 }
 
