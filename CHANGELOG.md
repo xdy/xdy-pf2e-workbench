@@ -1,3 +1,10 @@
+## [6.21.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.21.1...v6.21.2) (2025-03-22)
+
+
+### Bug Fixes
+
+* Removed stray tag. ([6ecd562](https://github.com/xdy/xdy-pf2e-workbench/commit/6ecd562ec0b01062f38e0fc303b4f24cc28126ff))
+
 ## [6.21.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.21.0...v6.21.1) (2025-03-22)
 
 
