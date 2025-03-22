@@ -1,3 +1,10 @@
+## [6.21.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.21.0...v6.21.1) (2025-03-22)
+
+
+### Bug Fixes
+
+* Improved Hypercognition macro. (Shows target, shows summary in a gm text block.) ([72d41e7](https://github.com/xdy/xdy-pf2e-workbench/commit/72d41e7078f782e4952bc1f5a6da4789a9552273))
+
 # [6.21.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.20.0...v6.21.0) (2025-03-15)
 
 
