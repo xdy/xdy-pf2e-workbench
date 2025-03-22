@@ -210,7 +210,7 @@ export async function hypercognition(token: TokenPF2e) {
         return `<span style="color:${DOS_COLORS[colorIndex]}">${category}: ${result.count} (Rolls: ${result.rolls.join(", ")})</span>`;
     };
 
-    let summary = `<italic>${token.name}</italic> ponders the true nature of <strong>${game.user.targets?.first()?.name}</strong> (${numberOfUses} Recall Knowledge rolls)<br>
+    let summary = `${token.name} ponders the true nature of <strong>${game.user.targets?.first()?.name}</strong> (${numberOfUses} Recall Knowledge rolls)<br>
 <div data-visibility="gm" style="display: block">
         ${formatResultLine("Critical Successes", results.criticalSuccess, 3)}<br>
         ${formatResultLine("Successes", results.success, 2)}<br>
