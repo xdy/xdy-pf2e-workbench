@@ -1,3 +1,11 @@
+## [6.21.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.21.2...v6.21.3) (2025-03-25)
+
+
+### Bug Fixes
+
+* Allow hazards with 0 hit points to attack. Handle token without actor when checking attack validity. ([ad3ada2](https://github.com/xdy/xdy-pf2e-workbench/commit/ad3ada293a0e7a1f989f990bbd45c1e0f4d93f9a))
+* Keeping up with the Macro Faeries. ([fa81946](https://github.com/xdy/xdy-pf2e-workbench/commit/fa819464c7a019b3a429f31255ca5cecdbb50924))
+
 ## [6.21.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.21.1...v6.21.2) (2025-03-22)
 
 
