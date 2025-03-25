@@ -49,7 +49,8 @@ function shouldBeChecked(message: ChatMessagePF2e): boolean {
 }
 
 function getAttackReason(token: TokenDocumentPF2e, actions: string[]): string {
-    const actor = token.actor;
+    const actor = token?.actor;
+    if (!actor) return "";
     const conditionReasons = {
         dead: `${MODULENAME}.SETTINGS.reminderCannotAttack.dead`,
         hasNoHp: `${MODULENAME}.SETTINGS.reminderCannotAttack.hasNoHp`,
@@ -61,7 +62,7 @@ function getAttackReason(token: TokenDocumentPF2e, actions: string[]): string {
 
     if (actor?.isDead && !ignoreDeadEidolon(actor)) {
         return conditionReasons.dead;
-    } else if ((actor?.hitPoints?.value ?? 0) <= 0 && !ignoreDeadEidolon(actor)) {
+    } else if ((actor?.hitPoints?.value ?? 0) <= 0 && !ignoreDeadEidolon(actor) && actor?.type !== "hazard") {
         return conditionReasons.hasNoHp;
     } else if (game.combats.active?.combatant?.token === token && game.combats.active.combatant.defeated) {
         return conditionReasons.defeated;
