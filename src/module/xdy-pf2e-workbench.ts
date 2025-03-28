@@ -301,11 +301,18 @@ export function changePauseText() {
 
     if (phase >= Phase.READY) {
         const element = document.querySelector<HTMLElement>("figcaption");
+        const pauseImage = document.querySelector("figure img");
 
         const text = <string>game.settings.get(MODULENAME, "customPauseText");
 
         if (text && element) {
             element.textContent = text;
+        }
+
+        if (game.settings.get(MODULENAME, "pauseImageNoSpin")) {
+            pauseImage?.classList.remove("fa-spin");
+        } else {
+            pauseImage?.classList.add("fa-spin");
         }
     }
 }

@@ -365,7 +365,7 @@
         "name": "Show spell names in rarity colour on actor sheets."
       },
       "playerSpellsChangeSendToChat": {
-        "hint": "World setting to make sending a spell to chat send a link to the spell item.",
+        "hint": "World setting to make sending a spell to chat send a link to the spell item rather than the full spell.",
         "name": "Make sending a spell to chat send a link to the spell item rather than the full spell.",
         "text": "Spell was sent to chat: "
       },
@@ -749,6 +749,10 @@
       "workbenchVersion": {
         "hint": "Version that the latest migration ran on. Can be lower than the module version. Don't modify this unless you know what you are doing.",
         "name": "Workbench migration version"
+      },
+      "pauseImageNoSpin": {
+        "hint": "Stop the pause image from spinning.",
+        "name": "Stop pause image from spinning"
       }
     }
   }

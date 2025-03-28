@@ -177,6 +177,16 @@ export function registerWorkbenchSettings() {
         onChange: () => updateHooks(),
     });
 
+    game.settings.register(MODULENAME, "pauseImageNoSpin", {
+        name: `${MODULENAME}.SETTINGS.pauseImageNoSpin.name`,
+        hint: `${MODULENAME}.SETTINGS.pauseImageNoSpin.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: () => updateHooks(),
+    });
+
     game.settings.register(MODULENAME, "logLevel", {
         name: `${MODULENAME}.SETTINGS.logLevel.name`,
         hint: `${MODULENAME}.SETTINGS.logLevel.hint`,
