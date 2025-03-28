@@ -1,3 +1,10 @@
+# [6.22.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.21.3...v6.22.0) (2025-03-28)
+
+
+### Features
+
+* Add setting to stop pause image from spinning. ([64a74af](https://github.com/xdy/xdy-pf2e-workbench/commit/64a74afe64bceb408e0d60392d54daa98ef35c20))
+
 ## [6.21.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.21.2...v6.21.3) (2025-03-25)
 
 
