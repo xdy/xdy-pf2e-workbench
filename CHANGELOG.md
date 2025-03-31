@@ -1,3 +1,10 @@
+# [6.23.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.22.1...v6.23.0) (2025-03-31)
+
+
+### Features
+
+* For autorolling spell damage, add the setting "For all spells" ([dfec985](https://github.com/xdy/xdy-pf2e-workbench/commit/dfec985d1e6ff4de0a3cd325e93c253dd35b0daa))
+
 ## [6.22.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.22.0...v6.22.1) (2025-03-31)
 
 
