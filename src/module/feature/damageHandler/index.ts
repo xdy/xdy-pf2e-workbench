@@ -74,11 +74,18 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 // @ts-ignore TODO FIX
                 (flags["pf2e-target-helper"]?.targets ?? 0) > 1 && targetHelperWillAutoroll;
 
+            const rollForAllSpells =
+                game.settings.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") === "allSpells" &&
+                (rollForNonSpellAttack ||
+                    rollForNonAttackSaveSpell ||
+                    rollForNonAttackNonSaveSpell ||
+                    rollForAttackSpell);
             if (
                 actor &&
                 (rollForNonAttackNonSaveSpell ||
                     (rollForNonAttackSaveSpell && (isFailure || (isBasicSave && degreeOfSuccess === "success"))) ||
-                    (rollForAttackSpell && isSuccess)) &&
+                    (rollForAttackSpell && isSuccess) ||
+                    rollForAllSpells) &&
                 !letTargetHelperAutorollDamage &&
                 // Whyzo spell. Don't roll.
                 !(isAttackSpell && isSaveSpell)

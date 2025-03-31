@@ -51,6 +51,9 @@ export class WorkbenchClientAutomationSettings extends SettingsMenuPF2eWorkbench
                     nonSaveSpell: game.i18n.localize(
                         `${MODULENAME}.SETTINGS.autoRollDamageForSpellWhenNotAnAttack.nonSaveSpell`,
                     ),
+                    allSpells: game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.autoRollDamageForSpellWhenNotAnAttack.allSpells`,
+                    ),
                 },
                 onChange: () => updateHooks(),
                 requiresReload: true,

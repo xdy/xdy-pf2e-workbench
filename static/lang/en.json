@@ -319,7 +319,8 @@
         "no": "No",
         "anySpell": "For any non-attack spell",
         "saveSpell": "For a non-attack save spell",
-        "nonSaveSpell": "For a non-attack non-save spell"
+        "nonSaveSpell": "For a non-attack non-save spell",
+        "allSpells": "For all spells"
       },
       "autoRollDamageForStrike": {
         "hint": "Client setting to autoroll damage for strikes that hit. Note that critical hits roll critical damage.",
