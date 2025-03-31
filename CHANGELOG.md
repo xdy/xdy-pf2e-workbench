@@ -1,3 +1,10 @@
+## [6.22.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.22.0...v6.22.1) (2025-03-31)
+
+
+### Bug Fixes
+
+* If autorolling damage is enabled, don't autoroll if a spell is both a save spell and an attack spell (e.g. Disintegrate). Clarify setting hint. ([0decc9e](https://github.com/xdy/xdy-pf2e-workbench/commit/0decc9ef9b2603d12d4be463d1e6be28b3371372))
+
 # [6.22.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.21.3...v6.22.0) (2025-03-28)
 
 
