@@ -314,7 +314,7 @@
         "name": "Autoroll damage for spell attacks that hit."
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
-        "hint": "Client setting to autoroll normal damage for *non-attack* spells when they are cast. Note that the damage roll will happen before a save (if any) is rolled.",
+        "hint": "Client setting to autoroll normal damage for *non-attack* spells when they are cast. If the message includes save results it'll autoroll if it's a failure, and for basic saves if it's a success. For attacks it'll autoroll if it's a success. If it's both an attack and a save spell it won't autoroll (e.g. Disintegrate).",
         "name": "Autoroll damage for cast spells that are not attacks.",
         "no": "No",
         "anySpell": "For any non-attack spell",

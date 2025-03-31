@@ -79,7 +79,9 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 (rollForNonAttackNonSaveSpell ||
                     (rollForNonAttackSaveSpell && (isFailure || (isBasicSave && degreeOfSuccess === "success"))) ||
                     (rollForAttackSpell && isSuccess)) &&
-                !letTargetHelperAutorollDamage
+                !letTargetHelperAutorollDamage &&
+                // Whyzo spell. Don't roll.
+                !(isAttackSpell && isSaveSpell)
             ) {
                 // @ts-ignore TODO FIX
                 await handleSpell(pf2eFlags, numberOfMessagesToCheck, originUuid, origin, message, degreeOfSuccess);
@@ -151,8 +153,8 @@ export function persistentDamageHealing(message: ChatMessagePF2e): void {
     } else if (
         rolls.some((r) => r.kinds.has("healing")) &&
         (message.flavor?.includes(
-            game.i18n.localize("PF2E.Encounter.Broadcast.FastHealing.fast-healing.ReceivedMessage"),
-        ) ||
+                game.i18n.localize("PF2E.Encounter.Broadcast.FastHealing.fast-healing.ReceivedMessage"),
+            ) ||
             message.flavor?.includes(
                 game.i18n.localize("PF2E.Encounter.Broadcast.FastHealing.regeneration.ReceivedMessage"),
             ))
