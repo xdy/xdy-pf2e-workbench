@@ -110,6 +110,7 @@ type MacroAction = {
     best?: number;
     whoIsBest?: string;
     showMAP?: boolean;
+    showMAPAgile?: boolean;
     showExploration?: boolean;
     showDowntime?: boolean;
 };
@@ -148,6 +149,7 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
     actionsToUse.forEach((x) => {
         const traits = (x as any)?.action?.traits ?? [];
         x.showMAP = traits.includes("attack");
+		x.showMAPAgile = traits.includes("agile") && traits.includes("attack")
         x.showDowntime = traits.includes("downtime");
         x.showExploration = traits.includes("exploration");
     });
