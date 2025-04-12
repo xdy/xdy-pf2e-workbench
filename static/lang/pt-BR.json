@@ -500,6 +500,9 @@
         "noActorSelected": "Nenhum PJ, PDM ou familiar está selecionado",
         "cancel": "Cancelar",
         "third": "(-10)",
+        "secondAgile": "(-4)",
+        "thirdAgile": "(-8)",
+        "agileTrait": "(Ágil)",
         "settings": {
           "showBestBonus": {
             "name": "MAB: Mostrar se é melhor na Macro de Ações Básicas",

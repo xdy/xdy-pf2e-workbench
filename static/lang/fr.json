@@ -694,6 +694,9 @@
         },
         "second": "(-5)",
         "third": "(-10)",
+        "secondAgile": "(-4)",
+        "thirdAgile": "(-8)",
+        "agileTrait": "(Agile)",
         "macroNotFound": "Macro {macroName} non trouvée",
         "compendiumNotFound": "Compendium {compendiumName} non trouvé",
         "bamActionsPerColumn": {

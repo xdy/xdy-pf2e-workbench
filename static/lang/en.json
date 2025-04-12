@@ -48,6 +48,7 @@
         "third": "(-10)",
         "secondAgile": "(-4)",
         "thirdAgile": "(-8)",
+        "agileTrait": "(Agile)",
         "settings": {
           "showBestBonus": {
             "name": "BAM: Show if best in Basic Action Macros",

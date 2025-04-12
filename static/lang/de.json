@@ -79,6 +79,9 @@
         "noActorSelected": "Kein SC, NSC oder Vertrauten Akteur ausgewählt",
         "cancel": "Abbruch",
         "third": "(-10)",
+        "secondAgile": "(-4)",
+        "thirdAgile": "(-8)",
+        "agileTrait": "(Agil)",
         "compendiumNotFound": "Kompendium {compendiumName} nicht gefunden",
         "bamActionsPerColumn": {
           "name": "BAM: Ungefähre Anzahl an Aktionen pro Zeile",

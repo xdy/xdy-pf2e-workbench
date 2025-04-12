@@ -1,6 +1,6 @@
 {{#*inline "actionName"}}{{action.name}} {{#xdy_ifne skill xdy_undefined}}({{signedInteger
     bonus}}){{/xdy_ifne}}{{/inline}}
-{{#*inline "actionNameAgile"}}{{action.name}} (Agile) {{#xdy_ifne skill xdy_undefined}}({{signedInteger
+{{#*inline "actionNameAgile"}}{{action.name}} {{localize "xdy-pf2e-workbench.macros.basicActionMacros.agileTrait"}} {{#xdy_ifne skill xdy_undefined}}({{signedInteger
     bonus}}){{/xdy_ifne}}{{/inline}}
 {{#*inline "actionTooltip"}}{{> actionName}} {{ifThen best (localize "xdy-pf2e-workbench.macros.basicActionMacros.YouAreTheBestInYourParty")""}}{{/inline}}
 {{#*inline "actionTooltipAgile"}}{{> actionNameAgile}} {{ifThen best (localize "xdy-pf2e-workbench.macros.basicActionMacros.YouAreTheBestInYourParty")""}}{{/inline}}
