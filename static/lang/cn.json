@@ -638,6 +638,9 @@
         },
         "second": "(-5)",
         "third": "(-10)",
+        "secondAgile": "(-4)",
+        "thirdAgile": "(-8)",
+        "agileTrait": "(敏捷)",
         "compendiumNotFound": "未找到合集包 {compendiumName}",
         "macroNotFound": "未找到{macroName}宏",
         "bamActionsPerColumn": {

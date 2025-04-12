@@ -7,6 +7,11 @@
         "gmMustImport": "GM必須在合集包「xdy-pf2e-workbench-macros」上右鍵並選擇「匯入全部內容」並確保匯入時選擇了「保留文件ID？」。",
         "cancel": "取消",
         "YouAreTheBestInYourParty": "你是你小隊里最擅長這項技能的",
+        "second": "(-5)",
+        "third": "(-10)",
+        "secondAgile": "(-4)",
+        "thirdAgile": "(-8)",
+        "agileTrait": "(敏捷)",
         "settings": {
           "showBestBonus": {
             "name": "基本動作宏顯示最高加值",
