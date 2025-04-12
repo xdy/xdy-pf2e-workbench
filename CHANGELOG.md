@@ -1,3 +1,10 @@
+## [6.23.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.23.0...v6.23.1) (2025-04-12)
+
+
+### Bug Fixes
+
+* BAM Athletics Actions (Other than Escape) now have an Agile button in addition to normal button ([ad5c9b6](https://github.com/xdy/xdy-pf2e-workbench/commit/ad5c9b622fcf05e29be64e12b715c1b29912ccb1))
+
 # [6.23.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.22.1...v6.23.0) (2025-03-31)
 
 
