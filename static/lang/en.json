@@ -46,6 +46,8 @@
         "YouAreTheBestInYourParty": "You are the best in your party",
         "second": "(-5)",
         "third": "(-10)",
+        "secondAgile": "(-4)",
+        "thirdAgile": "(-8)",
         "settings": {
           "showBestBonus": {
             "name": "BAM: Show if best in Basic Action Macros",
