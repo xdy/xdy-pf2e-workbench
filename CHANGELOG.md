@@ -1,3 +1,10 @@
+# [6.24.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.23.5...v6.24.0) (2025-04-30)
+
+
+### Features
+
+* Add support for changing the npc mystification icon. Change to fa 6 classes everywhere while I was at it. ([afab78d](https://github.com/xdy/xdy-pf2e-workbench/commit/afab78d926402723656e00171a14456a4171b8a4))
+
 ## [6.23.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.23.4...v6.23.5) (2025-04-30)
 
 
