@@ -21,7 +21,7 @@ export function onScaleNPCContextHook(_html, buttons: any[]) {
     if (game.user?.isGM) {
         buttons.unshift({
             name: "Scale to Level",
-            icon: '<i class="fas fa-level-up-alt"></i>',
+            icon: '<i class="fa-solid fa-level-up-alt"></i>',
             condition: (li: JQuery<HTMLLIElement>) => {
                 const id = li.data("document-id") as string;
                 const actor = game.actors?.get(id) as ActorPF2e;
@@ -44,7 +44,7 @@ export function onScaleNPCContextHook(_html, buttons: any[]) {
                         `<div class="form-group"><label>Max Level</label><input id="endLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>`,
                     buttons: {
                         scale: {
-                            icon: '<i class="fas fa-level-up-alt"></i>',
+                            icon: '<i class="fa-solid fa-level-up-alt"></i>',
                             label: "Scale",
                             callback: async (html: JQuery) => {
                                 ui.notifications?.info(`Scaling NPC... please wait.`);

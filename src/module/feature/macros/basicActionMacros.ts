@@ -745,7 +745,7 @@ export async function basicActionMacros() {
             content: content,
             buttons: {
                 close: {
-                    icon: `<i class="fas fa-times"></i>`,
+                    icon: `<i class="fa-solid fa-times"></i>`,
                     label: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.cancel`),
                 },
             },

@@ -111,7 +111,7 @@ export async function heroPointHandler(state: HPHState) {
         content,
         buttons: {
             timer: {
-                icon: '<i class="fas fa-hourglass"></i>',
+                icon: '<i class="fa-solid fa-hourglass"></i>',
                 label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`)}`,
                 callback: async (html: any) => {
                     remainingMinutes = handleDialogResponse(html);

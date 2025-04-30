@@ -597,6 +597,10 @@
         "hint": "Comma-separated list of actor types to exclude from mystification (i.e. one or more of army,character,familiar,hazard,loot,npc,party,vehicle)",
         "name": "Actor types to exclude from mystification"
       },
+      "npcMystifierIcon": {
+        "hint": "The Font Awesome icon to use for the mystification toggle. Must be a valid Font Awesome icon class (e.g. `fa-solid fa-eye-slash` or `fa-solid fa-user-secret`).",
+        "name": "Mystification Icon"
+      },
       "npcMystifierKeepRandomProperty": {
         "hint": "Check to keep number postfix/word prefix *in the same format as currently configured in this module* (if any) as a postfix/prefix to the name when mystifying/demystifying tokens.",
         "name": "Keep prefix/postfix when mystifying/demystifying."

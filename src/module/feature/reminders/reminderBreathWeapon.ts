@@ -8,11 +8,11 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     if (isFirstGM() && messageContent && game.combats && game.combats.active && token?.actor) {
         let rounds;
         if (
-            messageContent.includes("fas fa-dice-d20") &&
+            messageContent.includes("fa-solid fa-dice-d20") &&
             messageContent.includes("data-roll") &&
             messageContent.includes("data-tooltip")
         ) {
-            const regex = /<i class="fas fa-dice-d20"><\/i>(\d).* rounds/;
+            const regex = /<i class="fa-solid fa-dice-d20"><\/i>(\d).* rounds/;
             const matches = messageContent.match(regex);
             if (matches && matches.length > 1) {
                 rounds = Number(matches[1]);

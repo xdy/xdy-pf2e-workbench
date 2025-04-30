@@ -226,6 +226,13 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 type: String,
                 default: "",
             },
+            npcMystifierIcon: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierIcon.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierIcon.hint`,
+                scope: "world",
+                type: String,
+                default: "fa-solid fa-eye-slash",
+            },
         };
     }
 

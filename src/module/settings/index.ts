@@ -12,12 +12,12 @@ export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification.j
 export function registerWorkbenchSettings() {
     logInfo(`${MODULENAME} | registerSettings`);
 
-    WorkbenchMystificationSettings.registerSettingsAndCreateMenu("fas fa-eye-slash");
-    WorkbenchRemindersSettings.registerSettingsAndCreateMenu("fas fa-bell");
-    WorkbenchQolWorldSettings.registerSettingsAndCreateMenu("fas fa-smile");
-    WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fas fa-robot");
-    WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fas fa-magic", false);
-    WorkbenchHouseRulesSettings.registerSettingsAndCreateMenu("fas fa-house");
+    WorkbenchMystificationSettings.registerSettingsAndCreateMenu("fa-solid fa-eye-slash");
+    WorkbenchRemindersSettings.registerSettingsAndCreateMenu("fa-solid fa-bell");
+    WorkbenchQolWorldSettings.registerSettingsAndCreateMenu("fa-solid fa-smile");
+    WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fa-solid fa-robot");
+    WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fa-solid fa-magic", false);
+    WorkbenchHouseRulesSettings.registerSettingsAndCreateMenu("fa-solid fa-house");
 
     game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
         name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,

@@ -248,7 +248,7 @@ export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement) {
         toggle.setAttribute("data-action", "mystify");
 
         const icon = document.createElement("i");
-        icon.className = "fas fa-eye-slash";
+        icon.className = String(game.settings.get(MODULENAME, "npcMystifierIcon"));
         icon.title = title;
 
         toggle.appendChild(icon);
