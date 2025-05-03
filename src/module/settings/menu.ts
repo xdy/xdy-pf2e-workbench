@@ -55,15 +55,20 @@ export class SettingsMenuPF2eWorkbench extends FormApplication {
     static registerSettings(): void {
         const settings = this.settings;
         for (const setting of Object.keys(settings)) {
+            const spreadElements = { ...settings[setting] };
             game.settings.register(MODULENAME, setting, {
-                ...settings[setting],
+                ...spreadElements,
                 config: false,
             });
         }
     }
 
-    static hideForm(form: HTMLElement, boolean: boolean): void {
-        form.style.display = !boolean ? "none" : "";
+    static hideForm(form: HTMLElement | null | undefined, condition: boolean): void {
+        // form.style.display = !boolean ? "none" : "";
+        if (form === null || form === undefined) {
+            return;
+        }
+        form.style.display = !condition ? "none" : "";
     }
 
     static readonly hidelist: object = {} as HideListTemplateData;

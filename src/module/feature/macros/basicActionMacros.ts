@@ -19,10 +19,19 @@ declare global {
 type StatisticSlug = SkillSlug | "perception";
 
 export async function registerBasicActionMacrosHandlebarsTemplates() {
-    await loadTemplates([
-        `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
-        `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
-    ]);
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        // @ts-expect-error
+        await foundry.applications.handlebars.loadTemplates([
+            `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
+            `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
+        ]);
+    } else {
+        // v12 remove later
+        await loadTemplates([
+            `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
+            `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
+        ]);
+    }
 
     Handlebars.registerPartial("actionButton", `{{> "modules/${MODULENAME}/templates/macros/bam/actionButton.hbs"}}`);
 }
