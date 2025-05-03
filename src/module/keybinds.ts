@@ -77,24 +77,41 @@ export function registerWorkbenchKeybindings() {
     });
 
     keybindings.register(MODULENAME, "heroPointHandler", {
-        name: `${MODULENAME}.SETTINGS.heroPointHandlerKey.name`,
-        hint: `${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`,
-        restricted: true,
-        editable: [],
+        name: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandlerKey.name`),
+        hint: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`),
+        uneditable: [],
+        editable: [{ key: "KeyH", modifiers: [] }],
         onDown: () => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
                 heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start).then();
             }
             return true;
         },
+        onUp: () => {},
+        restricted: true,
+        reservedModifiers: [],
+        precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
+
+
+    // keybindings.register(MODULENAME, "heroPointHandler", {
+    //     name: `${MODULENAME}.SETTINGS.heroPointHandlerKey.name`,
+    //     hint: `${MODULENAME}.SETTINGS.heroPointHandlerKey.hint`,
+    //     restricted: true,
+    //     editable: [{ key: "KeyH", modifiers: [] }],
+    //     onDown: () => {
+    //         if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
+    //             heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start).then();
+    //         }
+    //         return true;
+    //     },
+    // });
 
     // Move combatant
     keybindings.register(MODULENAME, "moveBeforeCurrentCombatantKey", {
         name: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.name`,
         hint: `${MODULENAME}.SETTINGS.moveBeforeCurrentCombatantKey.hint`,
         restricted: true,
-        editable: [],
         onDown: () => {
             if (game.user?.isGM) {
                 const combatantByToken: any = game?.combat?.getCombatantByToken(
@@ -111,7 +128,7 @@ export function registerWorkbenchKeybindings() {
         name: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.name`,
         hint: `${MODULENAME}.SETTINGS.npcMystifierMystifyKey.hint`,
         restricted: true,
-        editable: [],
+        editable: [{ key: "KeyM", modifiers: ["Shift"] }],
         onDown: () => {
             if (game.settings.get(MODULENAME, "npcMystifier")) {
                 if (canMystify()) {
@@ -137,7 +154,6 @@ export function registerWorkbenchKeybindings() {
                 name: game.i18n.format(`${MODULENAME}.SETTINGS.callHotbarMacro.name`, { page: page, column: column }),
                 hint: game.i18n.format(`${MODULENAME}.SETTINGS.callHotbarMacro.hint`, { page: page, column: column }),
                 restricted: false,
-                editable: [],
                 onDown: () => {
                     game.user?.getHotbarMacros(page)?.[column - 1]["macro"].execute();
                     return true;

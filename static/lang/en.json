@@ -694,8 +694,8 @@
         "name": "Enable NPC roller utility"
       },
       "npcScaler": {
-        "hint": "Check to allow scaling NPCs",
-        "name": "Allow scaling NPCs"
+        "hint": "Check to allow scaling NPCs (does not work in foundry v13 yet)",
+        "name": "Allow scaling NPCs (foundry v12)"
       },
       "qolWorldSettings": {
         "hint": "Enable and configure quality of life settings for GMs",

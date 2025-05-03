@@ -104,47 +104,53 @@ export function updateHooks(cleanSlate = false) {
 
     const gs = game.settings;
 
-    handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        // Doesn't work. Don't know how to add button to new context menu.
+        // handle("renderActorDirectory", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
+    } else {
+        // v12 remove later
+        handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
+    }
     handle("renderJournalDirectory", gs.get(MODULENAME, "npcRoller"), enableNpcRollerButton);
 
     handle(
         "preCreateChatMessage",
         gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "reminderTargeting") !== "no" ||
-            gs.get(MODULENAME, "reminderCannotAttack") === "cancelAttack" ||
-            gs.get(MODULENAME, "applyPersistentDamage"),
+        gs.get(MODULENAME, "reminderTargeting") !== "no" ||
+        gs.get(MODULENAME, "reminderCannotAttack") === "cancelAttack" ||
+        gs.get(MODULENAME, "applyPersistentDamage"),
         preCreateChatMessageHook,
     );
 
     handle(
         "createChatMessage",
         gs.get(MODULENAME, "autoRollDamageAllow") ||
-            gs.get(MODULENAME, "autoRollDamageForStrike") ||
-            gs.get(MODULENAME, "autoRollDamageForSpellAttack") ||
-            gs.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") !== "no" ||
-            gs.get(MODULENAME, "reminderBreathWeapon") ||
-            gs.get(MODULENAME, "reminderCannotAttack") === "reminder" ||
-            gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
+        gs.get(MODULENAME, "autoRollDamageForStrike") ||
+        gs.get(MODULENAME, "autoRollDamageForSpellAttack") ||
+        gs.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") !== "no" ||
+        gs.get(MODULENAME, "reminderBreathWeapon") ||
+        gs.get(MODULENAME, "reminderCannotAttack") === "reminder" ||
+        gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
         createChatMessageHook,
     );
 
     handle(
         "renderChatMessage",
         game.settings.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
-            gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault" ||
-            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
-            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
-            gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
-            gs.get(MODULENAME, "applyPersistentHealing") ||
-            gs.get(MODULENAME, "applyPersistentDamage") ||
-            gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "handleDyingRecoveryRoll") /* Deprecated */ ||
-            gs.get(MODULENAME, "heroPointRules") !== "no",
+        gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "collapsedDefault" ||
+        gs.get(MODULENAME, "autoCollapseItemChatCardContent") === "nonCollapsedDefault" ||
+        gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "collapsedDefault" ||
+        gs.get(MODULENAME, "autoCollapseItemActionChatCardContent") === "nonCollapsedDefault" ||
+        gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "collapsedDefault" ||
+        gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent") === "nonCollapsedDefault" ||
+        gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedAll" ||
+        gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNew" ||
+        gs.get(MODULENAME, "autoExpandDamageRolls") === "expandedNewest" ||
+        gs.get(MODULENAME, "applyPersistentHealing") ||
+        gs.get(MODULENAME, "applyPersistentDamage") ||
+        gs.get(MODULENAME, "castPrivateSpell") ||
+        gs.get(MODULENAME, "handleDyingRecoveryRoll") /* Deprecated */ ||
+        gs.get(MODULENAME, "heroPointRules") !== "no",
         renderChatMessageHook,
     );
 
@@ -175,7 +181,7 @@ export function updateHooks(cleanSlate = false) {
     handle(
         "pf2e.reroll",
         gs.get(MODULENAME, "heroPointRules") === "keeleysHeroPointRule" ||
-            gs.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll",
+        gs.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll",
         pf2eRerollHook,
     );
 
@@ -184,12 +190,12 @@ export function updateHooks(cleanSlate = false) {
     handle(
         "preUpdateActor",
         (<string>gs.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
-            !String(gs.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") ||
-            !String(gs.get(MODULENAME, "nonLethalIsNotLethal")).startsWith("no") ||
-            !String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no") ||
-            gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
-            (gs.get("pf2e", "automation.lootableNPCs") &&
-                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
+        !String(gs.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") ||
+        !String(gs.get(MODULENAME, "nonLethalIsNotLethal")).startsWith("no") ||
+        !String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no") ||
+        gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
+        (gs.get("pf2e", "automation.lootableNPCs") &&
+            gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
         preUpdateActorHook,
     );
 
@@ -198,18 +204,18 @@ export function updateHooks(cleanSlate = false) {
     handle(
         "createToken",
         gs.get(MODULENAME, "npcMystifier") ||
-            (gs.get("pf2e", "automation.lootableNPCs") &&
-                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
+        (gs.get("pf2e", "automation.lootableNPCs") &&
+            gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
         createTokenHook,
     );
 
     handle(
         "renderActorSheet",
         gs.get(MODULENAME, "playerFeatsRarityColour") ||
-            gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
-            gs.get(MODULENAME, "playerSpellsRarityColour") ||
-            gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "playerSpellsChangeSendToChat"),
+        gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
+        gs.get(MODULENAME, "playerSpellsRarityColour") ||
+        gs.get(MODULENAME, "castPrivateSpell") ||
+        gs.get(MODULENAME, "playerSpellsChangeSendToChat"),
         renderActorSheetHook,
     );
 
@@ -228,6 +234,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     phase = Phase.INIT;
 
     registerWorkbenchSettings();
+    registerWorkbenchKeybindings();
 
     await preloadTemplates();
     registerNpcRollerHandlebarsTemplates().then();
@@ -322,8 +329,6 @@ Hooks.once("setup", async () => {
     logInfo(`${MODULENAME} | Setting up`);
     phase = Phase.SETUP;
     // Do anything after initialization but before ready
-
-    registerWorkbenchKeybindings();
 
     // General module setup
 });
@@ -470,23 +475,23 @@ Hooks.once("ready", () => {
 });
 
 function registerHandlebarsHelpers() {
-    Handlebars.registerHelper("xdy_includes", function (array: any[], value: any, options: any) {
+    Handlebars.registerHelper("xdy_includes", function(array: any[], value: any, options: any) {
         if (array.includes(value)) {
             return options.fn(this);
         } else {
             return options.inverse(this);
         }
     });
-    Handlebars.registerHelper("xdy_ifeq", function (v1, v2, options) {
+    Handlebars.registerHelper("xdy_ifeq", function(v1, v2, options) {
         if (v1 === v2) return options.fn(this);
         else return options.inverse();
     });
-    Handlebars.registerHelper("xdy_ifne", function (v1, v2, options) {
+    Handlebars.registerHelper("xdy_ifne", function(v1, v2, options) {
         if (v1 !== v2) return options.fn(this);
         else return options.inverse();
     });
 
-    Handlebars.registerHelper("xdy_isNaN", function (context, options) {
+    Handlebars.registerHelper("xdy_isNaN", function(context, options) {
         if (isNaN(context) && !(typeof context === "string")) {
             return options.fn(this);
         } else {
@@ -494,11 +499,11 @@ function registerHandlebarsHelpers() {
         }
     });
 
-    Handlebars.registerHelper("xdy_undefined", function () {
+    Handlebars.registerHelper("xdy_undefined", function() {
         return undefined;
     });
 
-    Handlebars.registerHelper("xdy_hasKey", function (context, key) {
+    Handlebars.registerHelper("xdy_hasKey", function(context, key) {
         for (const prop of context) {
             if (Object.getOwnPropertyDescriptor(prop, key)) {
                 return true;

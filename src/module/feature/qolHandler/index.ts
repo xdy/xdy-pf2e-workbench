@@ -3,6 +3,10 @@ import { isActuallyDamageRoll } from "../../utils.js";
 import { ChatMessagePF2e, PhysicalItemPF2e } from "foundry-pf2e";
 
 export function chatCardDescriptionCollapse(html: HTMLElement) {
+    if (!(html instanceof HTMLElement)) {
+        return;
+    }
+
     const hasCardContent = html.querySelectorAll(".card-content:not(span.flavor-text *)");
     if (hasCardContent.length > 0) {
         const effectItem = game.i18n.localize(`${MODULENAME}.effectItem`);

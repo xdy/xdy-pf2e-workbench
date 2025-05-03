@@ -315,8 +315,14 @@ export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: Encou
     // TODO Handle removal of game.combats.active.combatant.defeated/unsetting of deathIcon (are those the same?) for combatants that are neither dying nor have 0 HP.
 }
 
-export function renderTokenHUDHook(_app: TokenDocumentPF2e, q: JQuery, data: any) {
-    const html = q.get(0);
+export function renderTokenHUDHook(_app: TokenDocumentPF2e, q: JQuery | HTMLElement, data: any) {
+    let html: any;
+    if (!foundry.utils.isNewerVersion(game.version, 13)) {
+        // v12 remove later
+        // @ts-expect-error
+        html = q.get(0);
+    }
+
     if (html && game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);
     }
@@ -450,7 +456,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
                 for (const element of elementNodeListOf) {
                     const item = fetchItem(element);
                     if (item) {
-                        const rarity = item.system.traits.rarity;
+                        const rarity = item.system?.traits?.rarity;
                         if (rarity) {
                             const h4Elements = element.querySelectorAll("h4");
                             h4Elements.forEach((h4) => h4.classList.add(`xdy-pf2e-workbench-rarity-${rarity}`));

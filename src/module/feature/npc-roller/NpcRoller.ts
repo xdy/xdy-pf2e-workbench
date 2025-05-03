@@ -2,11 +2,21 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { SCALE_APP_DATA } from "../NPCScaleData.js";
 
 export async function registerNpcRollerHandlebarsTemplates() {
-    await loadTemplates([
-        `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
-        `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
-        `modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs`,
-    ]);
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        // @ts-expect-error
+        await foundry.applications.handlebars.loadTemplates([
+            `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
+            `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
+            `modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs`,
+        ]);
+    } else {
+        // v12 remove later
+        await loadTemplates([
+            `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
+            `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
+            `modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs`,
+        ]);
+    }
 
     Handlebars.registerPartial("rollAppTable", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/table.hbs"}}`);
     Handlebars.registerPartial("rollAppCell", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs"}}`);
@@ -18,17 +28,38 @@ export async function setupNpcRoller() {
     await registerNpcRollerHandlebarsTemplates();
 }
 
-export function enableNpcRollerButton(_app, html: JQuery) {
-    const button = $(
-        `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}</button>`,
-    );
-    button.on("click", () => {
-        new NpcRoller().render(true);
-    });
+export function enableNpcRollerButton(_app: unknown, html: JQuery | HTMLElement) {
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        // Create the button element
+        const button = document.createElement("button");
+        button.innerHTML = `<i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}`;
+        button.addEventListener("click", () => {
+            new NpcRoller().render(true); // Handle button click
+        });
 
-    const footer = html.find(".directory-footer.action-buttons");
-    if (footer.length > 0) {
-        footer.append(button);
+        // Locate the footer using querySelector
+        // @ts-expect-error
+        const footer = html.querySelector(".directory-footer.action-buttons");
+        if (footer) {
+            footer.appendChild(button); // Append the button to the footer
+        } else {
+            console.warn("enableNpcRollerButton: Footer element not found.");
+        }
+    } else {
+        // v12 remove later
+        const button = $(
+            `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}</button>`,
+        );
+        button.on("click", () => {
+            new NpcRoller().render(true);
+        });
+
+        // @ts-expect-error
+        const footer = html.find(".directory-footer.action-buttons");
+        if (footer.length > 0) {
+            footer.append(button);
+        }
+
     }
 }
 
@@ -88,9 +119,16 @@ class NpcRoller extends Application {
         const secret = <boolean>game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
 
         if (formula) {
+            let roll: ConstructorOf<Roll> | undefined;
             const formulaString = formula.toString();
-
-            await new Roll(formulaString).toMessage(
+            const lowerCase = rollName.toLowerCase();
+            if (lowerCase.includes("damage")) {
+                roll = CONFIG.Dice.rolls.find((r) => r.name === "DamageRoll");
+            } else {
+                roll = Roll;
+            }
+            // @ts-ignore
+            await new roll(formulaString).toMessage(
                 {
                     speaker: ChatMessage.getSpeaker({ token: <any>token?.document }),
                     flavor: rollName,

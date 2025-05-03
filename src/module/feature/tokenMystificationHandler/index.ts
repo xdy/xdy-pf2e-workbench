@@ -36,7 +36,13 @@ async function fetchRandomWordPrefix(): Promise<string> {
                     const document = await pack?.getDocument(id);
                     const draw = await (<RollTable>document).draw({ displayChat: false });
                     if (draw && draw?.results[0]) {
-                        return draw?.results[0].getChatText();
+                        if (foundry.utils.isNewerVersion(game.version, 13)) {
+                            // @ts-expect-error
+                            return await draw?.results[0].getHtml();
+                        } else {
+                            // v12 remove later
+                            return draw?.results[0].getChatText();
+                        }
                     } else {
                         return <string>fixSetting;
                     }
@@ -45,7 +51,13 @@ async function fetchRandomWordPrefix(): Promise<string> {
         }
         const draw = await table?.draw({ displayChat: false });
         if (draw && draw?.results[0]) {
-            return draw?.results[0].getChatText();
+            if (foundry.utils.isNewerVersion(game.version, 13)) {
+                // @ts-expect-error
+                return await draw?.results[0].getHtml();
+            } else {
+                // v12 remove later
+                return draw?.results[0].getChatText();
+            }
         } else {
             return <string>fixSetting;
         }

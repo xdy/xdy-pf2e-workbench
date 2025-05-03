@@ -5,7 +5,7 @@
   "id": "xdy-pf2e-workbench",
   "compatibility": {
     "minimum": "12.331",
-    "verified": "12.331",
+    "verified": "13.340",
     "maximum": "13"
   },
   "relationships": {
@@ -15,8 +15,8 @@
         "type": "system",
         "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
         "compatibility": {
-          "minimum": "6.9.0",
-          "verified": "6.10.2"
+          "minimum": "6.12.1",
+          "verified": "7.0.4-alpha"
         }
       }
     ]
