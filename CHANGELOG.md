@@ -1,3 +1,10 @@
+## [6.25.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.0...v6.25.1) (2025-05-05)
+
+
+### Bug Fixes
+
+* Update verified version ([6a8af0e](https://github.com/xdy/xdy-pf2e-workbench/commit/6a8af0e340f61138835db9787ffbff0002000fa7))
+
 # [6.25.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.24.0...v6.25.0) (2025-05-05)
 
 
