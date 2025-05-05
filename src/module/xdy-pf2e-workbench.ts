@@ -307,8 +307,8 @@ export function changePauseText() {
     }
 
     if (phase >= Phase.READY) {
-        const element = document.querySelector<HTMLElement>("figcaption");
-        const pauseImage = document.querySelector("figure img");
+        const element = document.querySelector<HTMLElement>("#pause > figcaption");
+        const pauseImage = document.querySelector("#pause > img");
 
         const text = <string>game.settings.get(MODULENAME, "customPauseText");
 
