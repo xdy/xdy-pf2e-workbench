@@ -1,3 +1,15 @@
+# [6.25.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.24.0...v6.25.0) (2025-05-05)
+
+
+### Bug Fixes
+
+* Better css for pause image courtesy of monax3 ([32a3d14](https://github.com/xdy/xdy-pf2e-workbench/commit/32a3d147b8c37f58c12a39d49d3469441d0ae43c)), closes [#1602](https://github.com/xdy/xdy-pf2e-workbench/issues/1602)
+
+
+### Features
+
+* Add basic support for pf2e 7 alpha/foundry v13 ([9c4913a](https://github.com/xdy/xdy-pf2e-workbench/commit/9c4913a6d7a96204fd2bb672243f277a96fecee3))
+
 # [6.24.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.23.5...v6.24.0) (2025-04-30)
 
 
