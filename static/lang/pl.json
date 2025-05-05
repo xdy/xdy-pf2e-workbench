@@ -329,11 +329,12 @@
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
         "name": "Obrażenia zadawane automatycznie przy rzucaniu zaklęć, które nie są atakami.",
-        "hint": "Ustawienie klienta, aby *zawsze* automatycznie rzucać normalne obrażenia dla zaklęć *nieatakujących* podczas ich rzucania.",
+        "hint": "Ustawienie klienta, które powoduje automatyczne rzucanie normalnych obrażeń dla zaklęć *nieatakujących* podczas ich rzucania. Jeśli komunikat zawiera wyniki rzutu obronnego, zostanie on automatycznie rzucony, jeśli zakończy się porażką, a w przypadku podstawowego rzutu obronnego – jeśli zakończy się sukcesem. W przypadku ataków zostanie on automatycznie rzucony, jeśli zakończy się sukcesem. Jeśli jest to zarówno zaklęcie atakujące, jak i rzucające rzut obronny, nie zostanie ono automatycznie rzucone (np. Dezintegracja).",
         "no": "Nie",
         "anySpell": "Dla każdego zaklęcia niebędącego atakiem",
         "nonSaveSpell": "Dla zaklęcia niewymagającego rzutu obronnego, niebędącego atakiem",
-        "saveSpell": "Dla zaklęcia wymagającego rzutu obronnego, niebędącego atakiem"
+        "saveSpell": "Dla zaklęcia wymagającego rzutu obronnego, niebędącego atakiem",
+        "allSpells": "Dla wszystkich zaklęć"
       },
       "callHotbarMacro": {
         "hint": "Wywołanie makra paska skrótów na stronie {page} pozycja {column}",
@@ -373,18 +374,18 @@
         "name": "Automatycznie usuwa nieprzytomność, jeśli zostanie wyleczona do poziomu wyższego niż 0 PW."
       },
       "npcMystifier": {
-        "hint": "Zaznacz, aby włączyć utajnienie npc, zmieniając nazwy tokenów na aktywnej scenie w oparciu o ich cechy, jeśli podczas dodawania do sceny zostanie kliknięty klawisz Ctrl (konfigurowalny). Zapisz ustawienia, aby pokazać/ukryć dodatkowe opcje.",
+        "hint": "Zaznacz, aby włączyć funkcję zamiany tokenów, zmieniającą nazwy tokenów w aktywnej scenie na podstawie ich cech, jeśli podczas dodawania do sceny zostanie kliknięty klawisz Ctrl (konfigurowalny). Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje. Zawsze wyklucza członków drużyny.",
         "name": "Włącz utajnienie npc."
       },
       "npcMystifierAddRandomProperty": {
         "none": "Brak",
-        "hint": "Wybierz typ losowej właściwości dodawanej podczas utajniania npc, którą można opcjonalnie zachować.",
+        "hint": "Wybierz typ losowej właściwości, którą chcesz dodać podczas mistyfikacji tokenów, które opcjonalnie można zachować.",
         "name": "Dodaj losową właściwość wybranego typu do nazwy",
         "numberPostfix": "Liczba jako przedrostek",
         "wordPrefix": "Słowo jako przedrostek"
       },
       "npcMystifierModifierKey": {
-        "hint": "Wybierz, aby włączyć ustawienie klawisza, który należy przytrzymać, aby mistyfikacja stworzenia została przeciągnięta do aktywnej sceny. Zauważ, że jeśli wybierzesz Alt (nie domyślnie), ukryje to również npc.",
+        "hint": "Wybierz, aby włączyć ustawienie, które klawisze należy przytrzymać, aby ukryć token podczas przeciągania go do aktywnej sceny. Pamiętaj, że jeśli wybierzesz Alt (nie jest to ustawienie domyślne), token zostanie również ukryty.",
         "name": "Klucz do utajniania podczas przeciągania do sceny",
         "always": "Zawsze",
         "disabled": "Wyłączony",
@@ -495,14 +496,14 @@
         "name": "Włącz obsługę Punktów Bohatera.",
         "resetToForAll": "Punkty Bohaterstwa zresetowane do {heroPoints} dla wszystkich",
         "showAfter": "Pokaż okno dialogowe ponownie po tylu minutach",
-        "startTimerLabel": "Zapisywanie zmian i uruchamianie/kontynuowanie odliczania czasu",
+        "startTimerLabel": "Prześlij zmiany i uruchom/wznów licznik czasu",
         "thisMany": "Tak wielu",
         "timerStopped": "Licznik Punktów Bohaterstwa został zatrzymany.",
         "title": "Obsługa Punktów Bohatera",
         "willBeResetIn": "Obsługa Punktów Bohatera powraca za {remainingMinutes} minut ({time}).",
         "resetTo": "Reset do",
         "noRunningTimer": "Brak uruchomionego licznika",
-        "noTimerLabel": "Prześlij zmiany <b>bez</b> licznika. Zatrzyma <b></b> każdy istniejący licznik czasu."
+        "noTimerLabel": "Prześlij zmiany. <b>Wyłącz</b> licznik. <b>Zatrzyma każdy </b> istniejący licznik czasu."
       },
       "houseRulesSettings": {
         "label": "Zarządzaj ustawieniami Zasad Domowych",
@@ -520,8 +521,8 @@
         "warn": "Ostrzeżenie"
       },
       "npcMystifierRandomPropertySkipForUnique": {
-        "hint": "Zaznacz, aby pominąć dodawanie losowej właściwości podczas utajniania unikalnych npc (tj. jest ona zachowywana podczas okrywania npc)",
-        "name": "Pomiń losową właściwość trwałą dla unikalnych npc."
+        "hint": "Zaznacz, aby pominąć dodawanie losowej właściwości podczas mistyfikacji unikalnych tokenów. (Tzn. zostanie zachowana po demistyfikacji tokenu)",
+        "name": "Pomiń losową trwałą cechę dla unikalnych tokenów."
       },
       "npcMystifierUseRarities": {
         "hint": "Zaznacz, aby używać rzadkości w utajnionej nazwie.",
@@ -564,14 +565,14 @@
       },
       "npcMystifierKeepRandomProperty": {
         "name": "Zachowaj prefiks/postfiks podczas utajniania/odkrywania.",
-        "hint": "Zaznacz, aby zachować postfiks/prefiks słowa numeru *w tym samym formacie, co obecnie skonfigurowany w tym module* (jeśli istnieje) jako postfiks/przedrostek do nazwy podczas utajniania/odkrywania npc."
+        "hint": "Zaznacz, aby zachować numer postfix/prefiks słowa *w tym samym formacie, co obecnie skonfigurowano w tym module* (jeśli istnieje) jako postfix/prefiks nazwy podczas mistyfikacji/demistyfikacji tokenów."
       },
       "npcMystifierPostfix": {
         "name": "Postfiks słowa lub tabeli rzutu",
         "hint": "Dodaje tekst do postfiksu nowej nazwy, domyślnie '' (przykład: 'Creature'), jeśli pasuje do nazwy tabeli rzutów (domyślnie jest to dołączona tabela 'Workbench Adjectives'), losowy wynik tekstowy z tej tabeli zostanie użyty jako postfiks. Zostanie on dodany *przed* dowolnym losowym prefiksem właściwości (patrz również opcja prefiksu)"
       },
       "npcMystifierUseOtherTraits": {
-        "hint": "Zaznacz, aby użyć wszystkich cech npc, które nie zostały jeszcze uwzględnione w żadnym z powyższych ustawień w utajnionej nazwie.",
+        "hint": "Sprawdź, czy używane są wszystkie cechy tokenów, które nie zostały uwzględnione w żadnym z powyższych ustawień w nazwie mistyfikacji.",
         "name": "Użyj innych cech"
       },
       "heroPointHandlerKey": {
@@ -724,8 +725,50 @@
       },
       "playerSpellsChangeSendToChat": {
         "text": "Zaklęcie zostało wysłane na czat: ",
-        "hint": "Ustawienie świata sprawiające, że wysłanie zaklęcia na czat powoduje wysłanie linku do elementu zaklęcia.",
+        "hint": "Ustawienie globalne, dzięki któremu wysłanie zaklęcia na czat powoduje wysłanie linku do przedmiotu zaklęcia zamiast pełnego zaklęcia.",
         "name": "Aby wysyłanie zaklęcia na czat powodowało wysłanie linku do elementu zaklęcia, a nie pełnego zaklęcia."
+      },
+      "sheatheHeldItemsAfterEncounter": {
+        "message": "{name} schował: {items}",
+        "hint": "Postacie automatycznie chowają broń po zakończeniu walki.",
+        "name": "Postacie automatycznie chowają broń po zakończeniu walki."
+      },
+      "sheatheHeldItemsAfterEncounterTypes": {
+        "hint": "Rozdzielona przecinkami lista typów przedmiotów, które należy schować po napotkaniu (np. 'armor,backpack,book,consumable,equipment,shield,treasure,weapon')",
+        "name": "... ale tylko dla tych typów przedmiotów"
+      },
+      "castPrivateSpellAutoRevealOverrideGMRollMode": {
+        "hint": "Zastąp wybrany przez MG tryb rzutu na publiczny. Jeśli opcja jest wyłączona, zostanie użyty tryb rzutu wybrany przez MG (publiczny/rzut do mg/ukryty/dla siebie).",
+        "name": "... i zawsze automatycznie ujawniaj zaklęcia jako wiadomość publiczną."
+      },
+      "castPrivateSpellWithPublicMessageTraitsBlocklist": {
+        "name": "... ale wyklucz te cechy z publicznej wiadomości",
+        "hint": "Rozdzielona przecinkami lista cech, które mają zostać wykluczone z wiadomości publicznej (np. 'mental, illusion')"
+      },
+      "heroPointRules": {
+        "name": "Zasady domowe dotyczące Punktów Bohaterstwa",
+        "no": "Normalne zasady (użyj ostatniego rzutu)",
+        "keeleysHeroPointRule": "Zasada Punktów Bohaterskich Keeleya (+10, jeśli ponowny rzut jest mniejszy niż 10).",
+        "useHighestHeroPointRoll": "Użyj najwyższego wyniku.",
+        "bonusTagKeeleys": "Niższy przerzut +10",
+        "bonusTagUseHighestRoll": "Użyto najwyższego rzutu",
+        "hint": "Zasada punktu bohatera Keeleya, użyj najwyższego wyniku lub, oczywiście, normalna zasada ostatniego wyniku."
+      },
+      "npcMystifierDemystifyToOriginalTokenName": {
+        "name": "Przywróć oryginalną nazwę tokenu podczas demistyfikacji",
+        "hint": "Podczas demistyfikacji tokenu przywróć jego oryginalną nazwę zamiast używać nazwy prototypowego tokenu aktora."
+      },
+      "npcMystifierExcludeActorTypes": {
+        "name": "Typy aktorów, których należy wykluczyć z mistyfikacji",
+        "hint": "Rozdzielona przecinkami lista typów aktorów, które mają zostać wykluczone z mistyfikacji (tj. jeden lub więcej z następujących typów: army,character,familiar,hazard,loot,npc,party,vehicle)"
+      },
+      "npcMystifierIcon": {
+        "name": "Ikona Mistyfikacji",
+        "hint": "Ikona Font Awesome, która ma być używana do przełączania trybu ukrywania. Musi to być prawidłowa klasa ikony Font Awesome (np. `fa-solid fa-eye-slash` lub `fa-solid fa-user-secret`)."
+      },
+      "pauseImageNoSpin": {
+        "name": "Zatrzymaj obracanie się obrazu w trybie pauzy",
+        "hint": "Zatrzymaj obracanie się obrazu pauzy."
       }
     },
     "modules": {
