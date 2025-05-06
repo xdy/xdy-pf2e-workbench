@@ -107,12 +107,13 @@
         "name": "Lancer automatiquement les dégâts en cas de succès d'une attaque de sort."
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
-        "hint": "Réglage du client pour \"toujours\" lancer les dégâts normaux pour les sorts \"non attaque\" lorsqu'ils sont lancés.",
+        "hint": "Réglage du client pour lancer automatiquement les dégâts normaux pour les sorts *non attaque* lorsqu'ils sont lancés. Si le message inclut les résultats d'un jet de sauvegarde, il les lancera automatiquement si c'est un échec et pour les jets basiques, si c'est un succès. Pour les attaques il les lancera automatiquement si c'est un succès. Pour les attaques, il les lancera automatiquement si c'est un succès. Si c'est à la fois une attaque et un sort à jet de sauvegarde, ils ne se lancerons pas automatiquement (ex : Désintégration).",
         "name": "Lancez automatiquement les dégâts pour les sorts lancés qui ne sont pas des attaques.",
         "no": "Non",
         "anySpell": "Pour tout sort qui n'est pas une attaque",
         "nonSaveSpell": "Pour tout sort qui n'est pas une attaque et n'a pas de jet de sauvegarde",
-        "saveSpell": "Pour tout sort avec un jet de sauvegarde qui n'est pas une attaque"
+        "saveSpell": "Pour tout sort avec un jet de sauvegarde qui n'est pas une attaque",
+        "allSpells": "Pour tous les sorts"
       },
       "autoRollDamageForStrike": {
         "hint": "Réglage du client pour lancer les dégâts automatiquement en cas de succès sur la Frappe. Notez que les coups critiques lancent les dégâts critiques.",
@@ -144,7 +145,7 @@
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
         "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type :{dataSave}|dc :{dataDC}|traits :{traits}{basic}]",
         "secondPartNoRk": ".<br>Vous pouvez essayer d'utiliser @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, lors de votre tour, dépensez une action pour tenter de l'identifier (demandez à votre MJ les détails).",
-        "secondPartRK": ".<br>Vous pouvez essayer d'utiliser @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, lors de votre tour, dépensez une action pour tenter de l'identifier avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (ou 10 minutes avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
+        "secondPartRK": ".<br>Vous pouvez essayer d'utiliser soit @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln], soit @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, à votre tour, dépensez une action pour tenter de l'identifier avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (ou en passant 10 minutes avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
         "spell": "Sort",
         "they": "Ils",
         "basic": "Basique",
@@ -231,11 +232,11 @@
         "cantMystify": "Vous ne pouvez pas mystifier ce jeton. S'il est sur une scène active, êtes vous un MJ ?"
       },
       "npcMystifier": {
-        "hint": "Activer la mystification des PNJ en renommant les jetons sur la scène active en fonction de leurs traits si vous appuyez sur Ctrl (configurable) lorsque vous ajoutez la scène. Sauvegardez pour montrer/cacher les options supplémentaires.",
+        "hint": "Activer la mystification des tokens en renommant les jetons sur la scène active en fonction de leurs traits si vous appuyez sur Ctrl (configurable) lorsque vous les ajoutez à la scène. Sauvegardez pour montrer/cacher les options supplémentaires. Exclura toujours les membres du groupe.",
         "name": "Activer la mystification des PNJ."
       },
       "npcMystifierAddRandomProperty": {
-        "hint": "Cliquez pour ajouter un nombre aléatoire lorsque vous mystifiez les PNJ.",
+        "hint": "Choisissez un type de propriété aléatoire à ajouter lorsque vous mystifiez les jetons qui peut être optionnellement conservé.",
         "name": "Ajouter un nombre aléatoire au nom",
         "none": "Aucun",
         "numberPostfix": "Nombre comme suffixe",
@@ -250,7 +251,7 @@
         "name": "Démystifier tous les jetons de l'acteur"
       },
       "npcMystifierKeepRandomProperty": {
-        "hint": "Cliquez pour conserver le propriété du jeton *dans le même format que celui ajouté par ce module* à la fin du nom (s'il y en a) lorsque vous mystifiez/démystifiez les PNJ.",
+        "hint": "Cliquez pour conserver le nombre adossé au jeton *dans le même format que celui ajouté par ce module* (s'il y en a) en préfixe ou suffixe au nom lorsque vous mystifiez/démystifiez les jetons.",
         "name": "Garder le propriété du jeton lorsque vous mystifiez/démystifiez."
       },
       "npcMystifierModifierKey": {
@@ -258,7 +259,7 @@
         "always": "Toujours",
         "control": "Control",
         "disabled": "Désactivé",
-        "hint": "Choisissez d'activer le choix de la touche à maintenir pressée pour mystifier la créature lorsqu'elle est glissée sur la scène active. Notez que si vous choisissez Alt (pas par défaut) cela cache aussi le PNJ.",
+        "hint": "Choisissez pour activer le réglage de la touche à garder pressée pour mystifier un jeton lorsqu'il est glissé sur la scène active. Notez que si vous choisissez Alt (pas par défaut) cela cache aussi le jeton.",
         "name": "Touche pour mystifier en glissant sur la scène",
         "meta": "Meta/⌘ (commande)/⊞ (fenêtres)"
       },
@@ -279,8 +280,8 @@
         "name": "Mot ou table aléatoire préfixe"
       },
       "npcMystifierRandomPropertySkipForUnique": {
-        "hint": "Cochez pour éviter d'ajouter une propriété aléatoire lorsque vous démystifiez les PNJ uniques. (ex : il est conservé lorsque vous démystifiez le PNJ)",
-        "name": "Éviter la propriété aléatoire pour les PNJ uniques."
+        "hint": "Cochez pour éviter d'ajouter une propriété aléatoire lorsque vous mystifiez les jetons uniques. (ex : il est conservé lorsque vous démystifiez le jeton)",
+        "name": "Éviter la propriété aléatoire pour les jetons uniques."
       },
       "npcMystifierSkipRandomPropertyForUnique": {
         "hint": "Cliquez pour éviter d'accoler un propriété aléatoire lorsque vous mystifiez des PNJ uniques.",
@@ -299,7 +300,7 @@
         "name": "Utiliser le statut élite/faible"
       },
       "npcMystifierUseOtherTraits": {
-        "hint": "Cliquez pour utiliser les traits des PNJ qui n'appartiennent pas aux types ci-dessus dans le nom mystifié.",
+        "hint": "Cliquez pour utiliser les traits des jetons qui ne sont pas déja inclus dans l'un des réglages ci-dessus dans le nom mystifié.",
         "name": "Utiliser d'autres traits"
       },
       "npcMystifierUseRarities": {
@@ -592,7 +593,7 @@
       },
       "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
         "name": "... et la liste des membres du groupe qui connaissent le sort révélé automatiquement",
-        "hint": "Vérifier que, pour les sorts révélés automatiquement, les membres du groupe qui connaissent le sort sont affichés dans la carte de la conversation."
+        "hint": "Cochez de manière à ce que les membres du groupe qui connaissent le sort révélé automatiquement, voient s'afficher la carte dans la conversation."
       },
       "castPrivateSpellWithPublicMessageShowToGM": {
         "hint": "Afficher le message public pour le MJ également.",
@@ -600,8 +601,50 @@
       },
       "playerSpellsChangeSendToChat": {
         "text": "Le sort a été envoyé dans la conversation : ",
-        "hint": "Paramètre du monde pour que l'envoi d'un sort dans la conversation envoie un lien vers l'objet du sort.",
+        "hint": "Paramètre du monde pour faire en sorte qu'envoyer un sort dans la conversation envoie un lien vers l'objet du sort au lieu du sort complet.",
         "name": "Permet d'envoyer un Sort vers la conversation et d'envoyer un lien vers l'objet du sort plutôt que d'afficher le sort complet."
+      },
+      "sheatheHeldItemsAfterEncounter": {
+        "hint": "Les personnages rengainent automatiquement les armes qu'ils tiennent après les rencontres.",
+        "name": "Les personnages dégainent automatiquement les armes qu'ils tiennent après les rencontres.",
+        "message": "{name} rengaine : {items}"
+      },
+      "sheatheHeldItemsAfterEncounterTypes": {
+        "hint": "liste de types d'objet séparés par des virgules à rengainer après les rencontres (ex : 'armor,backpack,book,consumable,equipment,shield,treasure,weapon')",
+        "name": "... mais seulement pour ce type d'objets"
+      },
+      "castPrivateSpellAutoRevealOverrideGMRollMode": {
+        "hint": "Remplacer le mode de jeu sélectionné par le MJ par le mode public. S'il est désactivé, le mode de jeu sélectionné par le MJ (public/privé/aveugle/soi-même) sera utilisé.",
+        "name": "... et toujours révéler automatiquement les sorts comme un message public."
+      },
+      "castPrivateSpellWithPublicMessageTraitsBlocklist": {
+        "hint": "liste de traits séparée par des virgules pour qu'ils soient exclus des messages publics (ex. 'mental,illusion')",
+        "name": "... mais exclut ces traits des messages publics"
+      },
+      "heroPointRules": {
+        "hint": "Règle du point d'héroïsme de Keeley : utiliser le jet le plus élevé ou, bien sûr, utiliser le dernier jet comme à l'ordinaire.",
+        "name": "Variantes de règles maison de Point d'héroïsme",
+        "no": "Règles normales (dernier jet utilisé)",
+        "keeleysHeroPointRule": "Règle de Point d'héroïsme de Keeley (+10 si la relance est inférieure à 10).",
+        "useHighestHeroPointRoll": "Utiliser le jet le plus élevé.",
+        "bonusTagKeeleys": "Relance faible +10",
+        "bonusTagUseHighestRoll": "A utilisé le jet le plus élevé"
+      },
+      "npcMystifierDemystifyToOriginalTokenName": {
+        "name": "Restaurer le nom original du jeton lorsqu'il est démystifié",
+        "hint": "Lorsque vous démystifiez un jeton, restaure son nom d'origine au lieu d'utiliser le nom du prototype d'acteur du jeton."
+      },
+      "npcMystifierExcludeActorTypes": {
+        "hint": "Liste séparée par une virgule des types d'acteur à exclure de la mystification (ex au moins un parmi army,character,familiar,hazard,loot,npc,party,vehicle)",
+        "name": "Types d'acteur à exclure de la mystification"
+      },
+      "npcMystifierIcon": {
+        "name": "Icône de mystification",
+        "hint": "L'icône de la police *Awesome icon* à utiliser pour le déclencheur de la mystification. Il doit s'agir d'une classe de la police Awesome icon valide ( ex : `fa-solid fa-eye-slash` or `fa-solid fa-user-secret`)."
+      },
+      "pauseImageNoSpin": {
+        "name": "Arrête la rotation de l'image de pause",
+        "hint": "Arrêter la rotation de l'image de pause."
       }
     },
     "effects": {
@@ -696,7 +739,7 @@
         "third": "(-10)",
         "secondAgile": "(-4)",
         "thirdAgile": "(-8)",
-        "agileTrait": "(Agile)",
+        "agileTrait": "(agile)",
         "macroNotFound": "Macro {macroName} non trouvée",
         "compendiumNotFound": "Compendium {compendiumName} non trouvé",
         "bamActionsPerColumn": {
