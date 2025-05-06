@@ -300,20 +300,20 @@
         "name": "Agregar propiedad aleatoria del tipo elegido al nombre",
         "numberPostfix": "Número como sufijo",
         "wordPrefix": "Palabra como prefijo",
-        "hint": "Seleccione un tipo de propiedad aleatoria para agregar al mistificar a los pnj que opcionalmente se pueden conservar."
+        "hint": "Seleccione un tipo de propiedad aleatoria para agregar al mistificar las fichas que opcionalmente se pueden conservar."
       },
       "npcMystifierModifierKey": {
         "alt": "Alt",
         "always": "Siempre",
         "control": "Control",
         "meta": "Meta/⌘ (command)/⊞ (windows)",
-        "hint": "Seleccione para habilitar la configuración de qué tecla mantener presionada para mistificar a la criatura mientras es arrastrada a la escena activa. Tenga en cuenta que si elige Alt (no el valor predeterminado), también oculta el pnj.",
+        "hint": "Seleccione para habilitar la configuración de qué tecla mantener presionada para mistificar a la ficha mientras es arrastrada a la escena activa. Tenga en cuenta que si elige Alt (no el valor predeterminado), también oculta la ficha.",
         "name": "Tecla para mistificar al arrastrar a la escena",
         "disabled": "Deshabilitado"
       },
       "npcMystifier": {
         "name": "Habilita el mistificador de pnj.",
-        "hint": "Marque para habilitar el mistificador de pnj, cambiando el nombre de las fichas en la escena activa según sus rasgos si se hace clic en Ctrl (configurable) al agregar a la escena. Guarde la configuración para mostrar/ocultar opciones adicionales."
+        "hint": "Marque para habilitar el mistificador de ficha, cambiando el nombre de las fichas en la escena activa según sus rasgos si se hace clic en Ctrl (configurable) al agregar a la escena. Guarde la configuración para mostrar/ocultar opciones adicionales. Siempre excluirá a los miembros del grupo."
       },
       "npcMystifierUseRaritiesReplacement": {
         "name": "Reemplazar rarezas mayores que las comunes",
@@ -445,7 +445,7 @@
       },
       "npcMystifierUseOtherTraits": {
         "name": "Usar otros rasgos",
-        "hint": "Marque para utilizar todos los rasgos de pnj que no estén incluidos en ninguna de las configuraciones anteriores en el nombre mistificado."
+        "hint": "Marque para utilizar todos los rasgos de la ficha que no estén incluidas en ninguna de las configuraciones anteriores en el nombre mistificado."
       },
       "giveUnconsciousIfDyingRemovedAt0HP": {
         "no": "No",
@@ -540,7 +540,7 @@
       },
       "npcMystifierKeepRandomProperty": {
         "name": "Mantenga el prefijo/sufijo al mistificar/aclarar.",
-        "hint": "Marque para mantener el sufijo numérico/prefijo de palabra *en el mismo formato configurado actualmente en este módulo* (si corresponde) como sufijo/prefijo del nombre al mistificar/aclarar a los pnj."
+        "hint": "Marque para mantener el sufijo numérico/prefijo de palabra *en el mismo formato configurado actualmente en este módulo* (si corresponde) como sufijo/prefijo del nombre al mistificar/aclarar a las fichas."
       },
       "npcMystifierPostfix": {
         "name": "Sufijo de palabra o tabla de lanzamiento",
@@ -559,8 +559,8 @@
         "hint": "Agregue texto al prefijo del nuevo nombre (infijo si se elige una propiedad de palabra aleatoria arriba), el valor predeterminado es '' (ejemplo: 'Desconocido'), si coincide con el nombre de una tabla de lanzamiento, se usará un resultado de texto aleatorio de esta tabla. como prefijo en su lugar. Esto se agregará *después* de cualquier sufijo de propiedad aleatoria (consulte también la opción de prefijo.)"
       },
       "npcMystifierRandomPropertySkipForUnique": {
-        "hint": "Marque para omitir agregar una propiedad aleatoria al mistificar a PNJ únicos. (Es decir, se conserva cuando aclaras al pnj.)",
-        "name": "Omite la propiedad persistente aleatoria para pnj únicos."
+        "hint": "Marque para omitir agregar una propiedad aleatoria al mistificar fichas únicas. (Es decir, se conserva cuando aclaras la ficha.)",
+        "name": "Omite la propiedad persistente aleatoria para fichas únicas."
       },
       "reminderCannotAttackIgnoreDeadEidolon": {
         "hint": "Marca para permitir que los eidolones muertos/sin puntos de golpe ataquen sin un recordatorio.",
@@ -669,12 +669,13 @@
         "name": "Reduce automáticamente el aturdimiento al iniciar el turno"
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
-        "hint": "Configuración del cliente para que se realice automáticamente la tirada de daño normal de los hechizos *que no sean de ataque* cuando se lanzan. Ten en cuenta que la tirada de daño se realizará antes de que se realice una tirada de salvación (si la hay).",
+        "hint": "Configuración del cliente para que se realice automáticamente la tirada de daño normal de los hechizos *que no sean de ataque* cuando se lanzan. Si el mensaje incluye resultados de una tirada de salvación, se activará automáticamente si falla y para tiradas de salvación básicas, si tiene éxito. Para ataques, se activará automáticamente si tiene éxito. Si se trata de un hechizo de ataque y de salvación, no se activará automáticamente (p. ej., Desintegrar).",
         "no": "No",
         "anySpell": "Para cualquier conjuro que no sea de ataque",
         "saveSpell": "Para un conjuro que no sea de ataque con salvación",
         "nonSaveSpell": "Para un conjuro que no sea de ataque sin salvación",
-        "name": "Daño automático por lanzamiento de hechizos que no sean ataques."
+        "name": "Daño automático por lanzamiento de hechizos que no sean ataques.",
+        "allSpells": "Para todos los conjuros"
       },
       "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
         "hint": "Mistifica los objetos solo si son de esta rareza o superior.",
@@ -710,7 +711,49 @@
       "playerSpellsChangeSendToChat": {
         "text": "El conjuro fue enviado al chat: ",
         "name": "Hace que al enviar un conjuro al chat envíe un enlace al elemento del conjuro en lugar del conjuro completo.",
-        "hint": "Configuración de mundo para que al enviar un conjuro al chat envíe un enlace al elemento del conjuro."
+        "hint": "Configuración de mundo para que al enviar un conjuro al chat envíe un enlace al elemento del conjuro en vez del conjuro completo."
+      },
+      "sheatheHeldItemsAfterEncounter": {
+        "hint": "Los personajes envainan automáticamente las armas que llevan después de los encuentros.",
+        "message": "{name} envainó: {items}",
+        "name": "Los personajes envainan automáticamente las armas que llevan después de los encuentros."
+      },
+      "sheatheHeldItemsAfterEncounterTypes": {
+        "hint": "Lista separada por comas de tipos de objetos para envainar después de los encuentros (p. ej., 'armadura, mochila, libro, consumible, equipo, escudo, tesoro, arma')",
+        "name": "... pero sólo para estos tipos de objetos"
+      },
+      "castPrivateSpellAutoRevealOverrideGMRollMode": {
+        "hint": "Anular el modo de lanzamiento público seleccionado por el MJ. Si está deshabilitado, se usará el modo de lanzamiento seleccionado por el MJ (público/privado/ciego/propio).",
+        "name": "... y auto-revelar siempre los conjuros como un mensaje público."
+      },
+      "castPrivateSpellWithPublicMessageTraitsBlocklist": {
+        "name": "... pero excluir estos rasgos del mensaje público",
+        "hint": "Lista separada por comas de rasgos que se excluirán del mensaje público (por ejemplo, 'mental, ilusión')"
+      },
+      "heroPointRules": {
+        "name": "Regla de la casa de puntos de héroe variantes",
+        "no": "Reglas normales (usar el último lanzamiento)",
+        "keeleysHeroPointRule": "Regla de puntos de héroe de Keeley (+10 si el resultado de la repetición es menor a 10).",
+        "useHighestHeroPointRoll": "Usar el lanzamiento más alto.",
+        "bonusTagKeeleys": "Relanzamiento bajo +10",
+        "bonusTagUseHighestRoll": "Usar el lanzamiento más alto",
+        "hint": "Regla de puntos de héroe de Keeley: utilizar el lanzamiento más alto o, por supuesto, la regla normal de utilizar el último lanzamiento."
+      },
+      "npcMystifierExcludeActorTypes": {
+        "hint": "Lista separada por comas de tipos de actores a excluir de la aclaración (es decir, uno o más de: ejército, personaje, familiar, peligro, botín, PNJ, grupo, vehículo)",
+        "name": "Tipos de actores a excluir de la aclaración"
+      },
+      "npcMystifierIcon": {
+        "hint": "El icono de \"Font Awesome\" que se usará para activar o desactivar la mistificación. Debe ser una clase de icono de \"Font Awesome\" válida (p. ej., \"fa-solid fa-eye-slash\" o \"fa-solid fa-user-secret\").",
+        "name": "Icono de mistificación"
+      },
+      "pauseImageNoSpin": {
+        "hint": "Detener la rotación de la imagen de pausa.",
+        "name": "Detener la rotación de la imagen de pausa"
+      },
+      "npcMystifierDemystifyToOriginalTokenName": {
+        "hint": "Al aclarar un token, restaure su nombre original en lugar de utilizar el nombre de la ficha prototipo del actor.",
+        "name": "Al aclarar una ficha, restaure su nombre original en lugar de utilizar el nombre de la ficha prototipo del actor"
       }
     },
     "modules": {
