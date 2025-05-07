@@ -324,8 +324,8 @@
         "name": "Activer le générateur rapide de PNJ"
       },
       "npcScaler": {
-        "hint": "Cliquez pour permettre l'évolution des PNJ",
-        "name": "Permettre l'évolution des PNJ"
+        "hint": "Cliquez pour permettre la mise à l'échelle des PNJ (ne fonctionne pas encore sur la V13 de Foundry)",
+        "name": "Permettre la mise à l'échelle des PNJ (foundry V12)"
       },
       "qolWorldSettings": {
         "hint": "Activer et configurer les réglages de la qualité de vie pour les MJ",
