@@ -625,8 +625,8 @@
         "name": "Configuración de calidad de vida global"
       },
       "npcScaler": {
-        "name": "Permitir escalar PNJ",
-        "hint": "Marque para permitir escalar PNJ"
+        "name": "Permitir escalar PNJ (foundry 12)",
+        "hint": "Marque para permitir escalar PNJ (Todavía no funciona en foundry v13)"
       },
       "playerFeatsRarityColour": {
         "name": "Muestra los nombres de las dotes en color de rareza en las hojas de los actores.",

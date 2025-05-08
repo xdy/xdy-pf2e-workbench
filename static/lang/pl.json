@@ -637,8 +637,8 @@
         "name": "Włącz narzędzie NPC do szybkiego rzutu"
       },
       "npcScaler": {
-        "name": "Zezwól na skalowanie postaci niezależnych",
-        "hint": "Zaznacz, aby zezwolić na skalowanie postaci niezależnych"
+        "name": "Zezwól na skalowanie postaci niezależnych (foundry v12)",
+        "hint": "Zaznacz, aby zezwolić na skalowanie postaci niezależnych (nie działa jeszcze w Foundry v13)"
       },
       "workbenchVersion": {
         "hint": "Wersja, na której przeprowadzono ostatnią migrację. Może być niższa niż wersja modułu. Nie modyfikuj tego, chyba że wiesz, co robisz.",
