@@ -106,44 +106,72 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
  * @param {ChatMessagePF2e} message - The chat message to check.
  * @return {Promise<boolean>} - A boolean indicating whether to roll the damage.
  */
+// Cache for flat check results to avoid repeated searches
+const flatCheckResultCache = new Map<string, boolean>();
+
+// Clear cache when new messages are added
+Hooks.on("createChatMessage", () => {
+    // Only keep cache for current session to avoid memory leaks
+    if (flatCheckResultCache.size > 100) {
+        flatCheckResultCache.clear();
+    }
+});
+
 export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
-    if (game.modules.get("pf2-flat-check")?.active) {
-        const actorFlat =
-            message.actor?.itemTypes.condition.filter((x) => ["blinded", "dazzled"].includes(x.slug)) ?? [];
-        const targetFlat =
-            message.target?.actor.itemTypes.condition.filter((x) =>
-                ["concealed", "hidden", "invisible", "undetected"].includes(x.slug),
-            ) ?? [];
-        if (actorFlat?.length > 0 || targetFlat?.length > 0) {
-            const { token, actor } = message;
-            let { item } = message;
-            const match = message.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/);
-            if (!item && match && match[1] === "xxPF2ExUNARMEDxx") {
-                item = { type: "weapon", data: {} } as any;
-            }
-            if (token && item && actor) {
-                if (
-                    // Reverse of the check in the pf2-flat-check module
-                    !isActuallyDamageRoll(message)
-                ) {
-                    await new Promise((resolve) => setTimeout(resolve, 150)); // Sleep to wait for flat check message
-                    const array = Array.from(game.messages);
-                    const messageIndex = array.findIndex((msg) => msg.id === message.id);
-                    if (messageIndex > -1) {
-                        rollDamage = !array
-                            .slice(messageIndex)
-                            .reverse()
-                            .find((msg) => {
-                                return msg.content.includes("dice-result flat-check-failure");
-                            });
-                    }
-                }
-            }
-        } else {
-            return rollDamage;
-        }
+    if (!game.modules.get("pf2-flat-check")?.active) {
+        return rollDamage;
     }
+
+    // Check if we need to do a flat check at all
+    const actorFlat =
+        message.actor?.itemTypes.condition.filter((x) => ["blinded", "dazzled"].includes(x.slug)) ?? [];
+    const targetFlat =
+        message.target?.actor?.itemTypes.condition.filter((x) =>
+            ["concealed", "hidden", "invisible", "undetected"].includes(x.slug),
+        ) ?? [];
+
+    if (actorFlat?.length === 0 && targetFlat?.length === 0) {
+        return rollDamage;
+    }
+
+    const { token, actor } = message;
+    let { item } = message;
+    const match = message.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/);
+    if (!item && match && match[1] === "xxPF2ExUNARMEDxx") {
+        item = { type: "weapon", data: {} } as any;
+    }
+
+    if (!token || !item || !actor || isActuallyDamageRoll(message)) {
+        return rollDamage;
+    }
+
+    // Check cache first
+    const cacheKey = `${message.id}`;
+    if (flatCheckResultCache.has(cacheKey)) {
+        return flatCheckResultCache.get(cacheKey) as boolean;
+    }
+
+    // Wait a short time for flat check message to be created
+    await new Promise((resolve) => setTimeout(resolve, 150));
+
+    // Look for flat check failure messages, but only search recent messages
+    const array = Array.from(game.messages);
+    const messageIndex = array.findIndex((msg) => msg.id === message.id);
+
+    if (messageIndex > -1) {
+        // Only search up to 5 messages after the current one
+        const searchLimit = Math.min(5, array.length - messageIndex);
+        const recentMessages = array.slice(messageIndex, messageIndex + searchLimit);
+
+        rollDamage = !recentMessages.some(msg =>
+            msg.content.includes("dice-result flat-check-failure")
+        );
+
+        // Store in cache for future lookups
+        flatCheckResultCache.set(cacheKey, rollDamage);
+    }
+
     return rollDamage;
 }
 
@@ -234,11 +262,29 @@ function getActionFromMessage(actions, message: ChatMessagePF2e) {
     }
 }
 
+// Cache for origin messages to avoid repeated searches
+const originMessageCache = new Map<string, ChatMessagePF2e>();
+
+// Clear cache when new messages are added
+Hooks.on("createChatMessage", () => {
+    // Only keep cache for current session to avoid memory leaks
+    if (originMessageCache.size > 100) {
+        originMessageCache.clear();
+    }
+});
+
 async function getLatestChatMessageWithOrigin(numberOfMessagesToCheck: number, originUuid: string) {
+    // Check cache first
+    if (originMessageCache.has(originUuid)) {
+        return originMessageCache.get(originUuid);
+    }
+
     const chatLength = game.messages?.contents.length ?? 0;
     for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
         const spellMessage = game.messages?.contents[chatLength - i];
         if (spellMessage && (<ActorFlagsPF2e>spellMessage.flags.pf2e).origin?.uuid === originUuid) {
+            // Store in cache for future lookups
+            originMessageCache.set(originUuid, spellMessage);
             return spellMessage;
         }
     }

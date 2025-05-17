@@ -123,18 +123,51 @@ export function chatAttackCardDescriptionCollapse(html: HTMLElement) {
     }
 }
 
+// Cache for recent damage messages to avoid filtering all messages repeatedly
+const recentDamageMessages = new Set<string>();
+const MAX_RECENT_MESSAGES = 10;
+
+// Update recent damage messages when a new message is created
+Hooks.on("createChatMessage", (message: ChatMessagePF2e) => {
+    if (isActuallyDamageRoll(message)) {
+        // Add to recent damage messages
+        recentDamageMessages.add(message.id);
+
+        // Keep only the most recent messages
+        if (recentDamageMessages.size > MAX_RECENT_MESSAGES) {
+            const toRemove = Array.from(recentDamageMessages)[0];
+            recentDamageMessages.delete(toRemove);
+        }
+    }
+});
+
 export function damageCardExpand(message: ChatMessagePF2e, html: HTMLElement, expandDmg: string) {
     const diceTooltips = html.querySelectorAll(".dice-tooltip");
+
+    // If no dice tooltips, nothing to do
+    if (diceTooltips.length === 0) return;
+
+    // Always expand if setting is "expandedAll"
     if (expandDmg === "expandedAll") {
         diceTooltips.forEach((diceTooltip: HTMLElement) => (diceTooltip.style.display = "block"));
-    } else if (
-        expandDmg.startsWith("expandedNew") &&
-        game.messages.contents
-            .filter(isActuallyDamageRoll)
-            .slice(-Math.min(expandDmg.endsWith("est") ? 1 : 3, game.messages.size))
-            .filter((m) => m.id === message.id).length > 0
-    ) {
-        diceTooltips.forEach((diceTooltip: HTMLElement) => (diceTooltip.style.display = "block"));
+        return;
+    }
+
+    // For "expandedNew" settings, check if this message is in the recent damage messages
+    if (expandDmg.startsWith("expandedNew")) {
+        // For "expandedNewest", only expand the most recent message
+        if (expandDmg.endsWith("est")) {
+            // Get the most recent damage message
+            const mostRecentMessage = Array.from(recentDamageMessages).pop();
+            if (message.id === mostRecentMessage) {
+                diceTooltips.forEach((diceTooltip: HTMLElement) => (diceTooltip.style.display = "block"));
+            }
+        } else {
+            // For "expandedNew", expand if message is in recent damage messages
+            if (recentDamageMessages.has(message.id)) {
+                diceTooltips.forEach((diceTooltip: HTMLElement) => (diceTooltip.style.display = "block"));
+            }
+        }
     }
 }
 

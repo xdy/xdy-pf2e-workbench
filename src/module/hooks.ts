@@ -41,36 +41,37 @@ import {
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;
-    const reminderTargetingEnabled = game.settings.get(MODULENAME, "reminderTargeting") === "mustTarget";
+
+    const reminderTargetingEnabled = String(game.settings.get(MODULENAME, "reminderTargeting")) === "mustTarget";
     const reminderCannotAttack = String(game.settings.get(MODULENAME, "reminderCannotAttack"));
     const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
-    const ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some((key) =>
-        game?.keyboard.downKeys.has(key),
-    );
-    const privateCast = castPrivately(
-        game.actors?.party?.members?.some((member) => member?.id === message?.actor?.id) ?? false,
-        message,
-    );
 
-    if (
-        castPrivateSpellEnabled &&
-        message.flags.pf2e?.casting?.id &&
-        ((ctrlHeld && !privateCast) || (!ctrlHeld && privateCast))
-    ) {
-        handlePrivateSpellcasting(data, message).then();
+    // Handle private spellcasting
+    if (castPrivateSpellEnabled && message.flags.pf2e?.casting?.id) {
+        const ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some(
+            (key) => game?.keyboard.downKeys.has(key),
+        );
+        const inParty = game.actors?.party?.members?.some((member) => member?.id === message?.actor?.id) ?? false;
+        const privateCast = castPrivately(inParty, message);
+
+        if ((ctrlHeld && !privateCast) || (!ctrlHeld && privateCast)) {
+            handlePrivateSpellcasting(data, message).then();
+        }
     }
 
-    if (
-        game.settings.get(MODULENAME, "applyPersistentDamage") ||
-        game.settings.get(MODULENAME, "applyPersistentHealing")
-    ) {
+    // Handle persistent damage/healing
+    const applyPersistentDamage = game.settings.get(MODULENAME, "applyPersistentDamage");
+    const applyPersistentHealing = game.settings.get(MODULENAME, "applyPersistentHealing");
+    if (applyPersistentDamage || applyPersistentHealing) {
         persistentDamageHealing(message);
     }
 
+    // Handle targeting reminders
     if (reminderTargetingEnabled) {
         proceed = reminderTargeting(message, String(game.settings.get(MODULENAME, "reminderTargeting")));
     }
 
+    // Handle attack validity
     if (proceed && reminderCannotAttack === "cancelAttack") {
         proceed = checkAttackValidity(message, true);
     }
@@ -99,23 +100,40 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
         reminderTargeting(message, reminderTargetingSetting);
     }
 
+    // Early return for damage rolls or damage taken messages
     function isDamageTaken(message: ChatMessagePF2e) {
         return message.flags?.pf2e?.context?.type === "damage-taken";
     }
 
-    if (!isActuallyDamageRoll(message) && !isDamageTaken(message)) {
-        if (
-            game.settings.get(MODULENAME, "autoRollDamageAllow") &&
-            (game.settings.get(MODULENAME, "autoRollDamageForStrike") ||
-                game.settings.get(MODULENAME, "autoRollDamageForSpellAttack") ||
-                game.settings.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") !== "no")
-        ) {
+    const isDamageRoll = isActuallyDamageRoll(message);
+    const isDamage = isDamageRoll || isDamageTaken(message);
+
+    if (!isDamage) {
+        // Check if we need to auto roll damage
+        const autoRollDamageAllow = game.settings.get(MODULENAME, "autoRollDamageAllow");
+        const autoRollDamageForStrike = game.settings.get(MODULENAME, "autoRollDamageForStrike");
+        const autoRollDamageForSpellAttack = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
+        const autoRollDamageForSpellWhenNotAnAttack = game.settings.get(
+            MODULENAME,
+            "autoRollDamageForSpellWhenNotAnAttack",
+        );
+
+        const shouldAutoRollDamage =
+            autoRollDamageAllow &&
+            (autoRollDamageForStrike || autoRollDamageForSpellAttack || autoRollDamageForSpellWhenNotAnAttack !== "no");
+
+        if (shouldAutoRollDamage) {
             autoRollDamage(message).then();
         }
-        if (game.settings.get(MODULENAME, "reminderBreathWeapon")) {
+
+        // Check if we need to remind about breath weapon
+        const reminderBreathWeaponEnabled = game.settings.get(MODULENAME, "reminderBreathWeapon");
+        if (reminderBreathWeaponEnabled) {
             reminderBreathWeapon(message).then();
         }
     }
+
+    // Always process dying handling
     dyingHandlingCreateChatMessageHook(message);
 }
 
@@ -126,110 +144,134 @@ function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) 
 export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
     const html = <HTMLElement>jq.get(0);
 
+    // Early return if html is not valid
+    if (!html) return;
+
     deprecatedDyingHandlingRenderChatMessageHook(message);
 
-    if (isActuallyDamageRoll(message)) {
+    const isDamageRoll = isActuallyDamageRoll(message);
+
+    if (isDamageRoll) {
         const expandDamageRolls = String(game.settings.get(MODULENAME, "autoExpandDamageRolls"));
         if (["expandedAll", "expandedNew", "expandedNewest"].includes(expandDamageRolls)) {
             damageCardExpand(message, html, expandDamageRolls);
         }
     } else {
-        if (
-            String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) === "collapsedDefault" ||
-            String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) === "nonCollapsedDefault"
-        ) {
+        // Get settings
+        const collapseItemContent = String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent"));
+        const collapseItemAttackContent = String(
+            game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent"),
+        );
+        const collapseItemActionContent = String(
+            game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent"),
+        );
+
+        // Check if we need to do any collapsing
+        const needsCollapsing =
+            collapseItemContent === "collapsedDefault" ||
+            collapseItemContent === "nonCollapsedDefault" ||
+            collapseItemAttackContent === "collapsedDefault" ||
+            collapseItemAttackContent === "nonCollapsedDefault" ||
+            collapseItemActionContent === "collapsedDefault" ||
+            collapseItemActionContent === "nonCollapsedDefault";
+
+        if (!needsCollapsing) return;
+
+        // Only process if needed
+        if (collapseItemContent === "collapsedDefault" || collapseItemContent === "nonCollapsedDefault") {
             chatCardDescriptionCollapse(html);
         }
+
+        const itemType = message.item?.type ?? "";
         if (
-            (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault" ||
-                String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) ===
-                    "nonCollapsedDefault") &&
-            ["weapon", "melee", "spell"].includes(message.item?.type ?? "")
+            (collapseItemAttackContent === "collapsedDefault" || collapseItemAttackContent === "nonCollapsedDefault") &&
+            ["weapon", "melee", "spell"].includes(itemType)
         ) {
             chatAttackCardDescriptionCollapse(html);
         }
+
         if (
-            ((String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) === "collapsedDefault" ||
-                String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) ===
-                    "nonCollapsedDefault") &&
+            ((collapseItemActionContent === "collapsedDefault" ||
+                collapseItemActionContent === "nonCollapsedDefault") &&
                 !message.item) ||
-            message.item?.type === "action"
+            itemType === "action"
         ) {
             chatActionCardDescriptionCollapse(html);
         }
     }
 
-    if (
-        game.settings.get(MODULENAME, "castPrivateSpell") &&
-        message?.flags?.pf2e?.origin?.type === "spell" &&
-        isActuallyDamageRoll(message)
-    ) {
+    // Check if we need to handle private spells
+    const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
+    if (castPrivateSpellEnabled && message?.flags?.pf2e?.origin?.type === "spell" && isDamageRoll) {
         hideSpellNameInDamageroll(message, html);
     }
 
-    function handleVariantHeroPointRules() {
-        // Alert everyone that Keeley's hero point rule was invoked
-        const lastRoll = message.rolls.at(-1);
-        if (lastRoll?.options.keeleyAdd10) {
-            const element: any = jq.get(0);
+    // Check if we need to handle hero point rules
+    const heroPointRules = String(game.settings.get(MODULENAME, "heroPointRules"));
+    if (heroPointRules !== "no") {
+        handleVariantHeroPointRules(message, jq);
+    }
+}
 
-            if (element) {
-                const tags = element.querySelector(".flavor-text > .tags.modifiers");
-                const formulaElem = element.querySelector(".reroll-discard .dice-formula");
-                const newTotalElem = element.querySelector(".reroll-second .dice-total");
-                if (tags && formulaElem && newTotalElem) {
-                    // Add a tag to the list of modifiers
-                    const newTag = document.createElement("span");
-                    newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
-                    newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagKeeleys`);
-                    newTag.dataset.slug = "keeley-add-10";
-                    const querySelector = tags.querySelector(".tag");
-                    if (querySelector?.dataset.visibility === "gm") {
-                        newTag.dataset.visibility = "gm";
-                    }
-                    tags.append(newTag);
+// Extracted to separate function to improve readability
+function handleVariantHeroPointRules(message: ChatMessagePF2e, jq: JQuery) {
+    const lastRoll = message.rolls.at(-1);
+    if (!lastRoll) return;
 
-                    // Show +10 in the formula
-                    const span = document.createElement("span");
-                    span.className = "keeley-add-10";
-                    span.innerText = " + 10";
-                    formulaElem?.append(span);
+    const element: any = jq.get(0);
+    if (!element) return;
 
-                    // Make the total purple
-                    newTotalElem.classList.add("keeley-add-10");
-                }
+    // Handle Keeley's hero point rule
+    if (lastRoll.options.keeleyAdd10) {
+        const tags = element.querySelector(".flavor-text > .tags.modifiers");
+        const formulaElem = element.querySelector(".reroll-discard .dice-formula");
+        const newTotalElem = element.querySelector(".reroll-second .dice-total");
+
+        if (tags && formulaElem && newTotalElem) {
+            // Add a tag to the list of modifiers
+            const newTag = document.createElement("span");
+            newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
+            newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagKeeleys`);
+            newTag.dataset.slug = "keeley-add-10";
+
+            const querySelector = tags.querySelector(".tag");
+            if (querySelector?.dataset.visibility === "gm") {
+                newTag.dataset.visibility = "gm";
             }
-        }
 
-        // Alert everyone that use highest roll hero point rule was invoked
-        if (lastRoll?.options.useHighestRoll) {
-            const element: any = jq.get(0);
+            tags.append(newTag);
 
-            if (element) {
-                const tags = element.querySelector(".flavor-text > .tags.modifiers");
-                const formulaElem = element.querySelector(".reroll-discard .dice-formula");
-                const newTotalElem = element.querySelector(".reroll-second .dice-total");
-                if (tags && formulaElem && newTotalElem) {
-                    const newTag = document.createElement("span");
-                    newTag.classList.add("tag", "tag_transparent", "use-highest-roll");
-                    newTag.innerText = game.i18n.localize(
-                        `${MODULENAME}.SETTINGS.heroPointRules.bonusTagUseHighestRoll`,
-                    );
-                    newTag.dataset.slug = "use-highest-roll";
-                    const querySelector = tags.querySelector(".tag");
-                    if (querySelector?.dataset.visibility === "gm") {
-                        newTag.dataset.visibility = "gm";
-                    }
-                    tags.append(newTag);
+            // Show +10 in the formula
+            const span = document.createElement("span");
+            span.className = "keeley-add-10";
+            span.innerText = " + 10";
+            formulaElem?.append(span);
 
-                    newTotalElem.classList.add("use-highest-roll");
-                }
-            }
+            // Make the total purple
+            newTotalElem.classList.add("keeley-add-10");
         }
     }
 
-    if (String(game.settings.get(MODULENAME, "heroPointRules")) !== "no") {
-        handleVariantHeroPointRules();
+    // Handle use highest roll hero point rule
+    if (lastRoll.options.useHighestRoll) {
+        const tags = element.querySelector(".flavor-text > .tags.modifiers");
+        const formulaElem = element.querySelector(".reroll-discard .dice-formula");
+        const newTotalElem = element.querySelector(".reroll-second .dice-total");
+
+        if (tags && formulaElem && newTotalElem) {
+            const newTag = document.createElement("span");
+            newTag.classList.add("tag", "tag_transparent", "use-highest-roll");
+            newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagUseHighestRoll`);
+            newTag.dataset.slug = "use-highest-roll";
+
+            const querySelector = tags.querySelector(".tag");
+            if (querySelector?.dataset.visibility === "gm") {
+                newTag.dataset.visibility = "gm";
+            }
+
+            tags.append(newTag);
+            newTotalElem.classList.add("use-highest-roll");
+        }
     }
 }
 
