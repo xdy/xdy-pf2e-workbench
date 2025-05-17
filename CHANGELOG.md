@@ -1,3 +1,10 @@
+## [6.25.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.1...v6.25.2) (2025-05-17)
+
+
+### Bug Fixes
+
+* Update hook handling. ([f27ae52](https://github.com/xdy/xdy-pf2e-workbench/commit/f27ae522fb282ad25114fcb0fe9a67d02a3a2174))
+
 ## [6.25.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.0...v6.25.1) (2025-05-05)
 
 
