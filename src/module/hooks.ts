@@ -167,61 +167,69 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
         hideSpellNameInDamageroll(message, html);
     }
 
-    // Alert everyone that Keeley's hero point rule was invoked
-    const lastRoll = message.rolls.at(-1);
-    if (lastRoll?.options.keeleyAdd10) {
-        const element: any = jq.get(0);
+    function handleVariantHeroPointRules() {
+        // Alert everyone that Keeley's hero point rule was invoked
+        const lastRoll = message.rolls.at(-1);
+        if (lastRoll?.options.keeleyAdd10) {
+            const element: any = jq.get(0);
 
-        if (element) {
-            const tags = element.querySelector(".flavor-text > .tags.modifiers");
-            const formulaElem = element.querySelector(".reroll-discard .dice-formula");
-            const newTotalElem = element.querySelector(".reroll-second .dice-total");
-            if (tags && formulaElem && newTotalElem) {
-                // Add a tag to the list of modifiers
-                const newTag = document.createElement("span");
-                newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
-                newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagKeeleys`);
-                newTag.dataset.slug = "keeley-add-10";
-                const querySelector = tags.querySelector(".tag");
-                if (querySelector?.dataset.visibility === "gm") {
-                    newTag.dataset.visibility = "gm";
+            if (element) {
+                const tags = element.querySelector(".flavor-text > .tags.modifiers");
+                const formulaElem = element.querySelector(".reroll-discard .dice-formula");
+                const newTotalElem = element.querySelector(".reroll-second .dice-total");
+                if (tags && formulaElem && newTotalElem) {
+                    // Add a tag to the list of modifiers
+                    const newTag = document.createElement("span");
+                    newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
+                    newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagKeeleys`);
+                    newTag.dataset.slug = "keeley-add-10";
+                    const querySelector = tags.querySelector(".tag");
+                    if (querySelector?.dataset.visibility === "gm") {
+                        newTag.dataset.visibility = "gm";
+                    }
+                    tags.append(newTag);
+
+                    // Show +10 in the formula
+                    const span = document.createElement("span");
+                    span.className = "keeley-add-10";
+                    span.innerText = " + 10";
+                    formulaElem?.append(span);
+
+                    // Make the total purple
+                    newTotalElem.classList.add("keeley-add-10");
                 }
-                tags.append(newTag);
+            }
+        }
 
-                // Show +10 in the formula
-                const span = document.createElement("span");
-                span.className = "keeley-add-10";
-                span.innerText = " + 10";
-                formulaElem?.append(span);
+        // Alert everyone that use highest roll hero point rule was invoked
+        if (lastRoll?.options.useHighestRoll) {
+            const element: any = jq.get(0);
 
-                // Make the total purple
-                newTotalElem.classList.add("keeley-add-10");
+            if (element) {
+                const tags = element.querySelector(".flavor-text > .tags.modifiers");
+                const formulaElem = element.querySelector(".reroll-discard .dice-formula");
+                const newTotalElem = element.querySelector(".reroll-second .dice-total");
+                if (tags && formulaElem && newTotalElem) {
+                    const newTag = document.createElement("span");
+                    newTag.classList.add("tag", "tag_transparent", "use-highest-roll");
+                    newTag.innerText = game.i18n.localize(
+                        `${MODULENAME}.SETTINGS.heroPointRules.bonusTagUseHighestRoll`,
+                    );
+                    newTag.dataset.slug = "use-highest-roll";
+                    const querySelector = tags.querySelector(".tag");
+                    if (querySelector?.dataset.visibility === "gm") {
+                        newTag.dataset.visibility = "gm";
+                    }
+                    tags.append(newTag);
+
+                    newTotalElem.classList.add("use-highest-roll");
+                }
             }
         }
     }
 
-    // Alert everyone that use highest roll hero point rule was invoked
-    if (lastRoll?.options.useHighestRoll) {
-        const element: any = jq.get(0);
-
-        if (element) {
-            const tags = element.querySelector(".flavor-text > .tags.modifiers");
-            const formulaElem = element.querySelector(".reroll-discard .dice-formula");
-            const newTotalElem = element.querySelector(".reroll-second .dice-total");
-            if (tags && formulaElem && newTotalElem) {
-                const newTag = document.createElement("span");
-                newTag.classList.add("tag", "tag_transparent", "use-highest-roll");
-                newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagUseHighestRoll`);
-                newTag.dataset.slug = "use-highest-roll";
-                const querySelector = tags.querySelector(".tag");
-                if (querySelector?.dataset.visibility === "gm") {
-                    newTag.dataset.visibility = "gm";
-                }
-                tags.append(newTag);
-
-                newTotalElem.classList.add("use-highest-roll");
-            }
-        }
+    if (String(game.settings.get(MODULENAME, "heroPointRules")) !== "no") {
+        handleVariantHeroPointRules();
     }
 }
 
