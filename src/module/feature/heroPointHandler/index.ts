@@ -279,14 +279,21 @@ async function buildHtml(remainingMinutes: number, state: HPHState) {
 </div>
 
 <hr>
-<script>$("#timerTextId").on("input", function () {
-    const value = $(this).val();
-    if ((value !== "") && (value.indexOf(".") === -1)) {
-        $(this).val(Math.max(Math.min(value, ${Number.parseInt(
-            String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")),
-        )}), 0));
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const timerInput = document.getElementById("timerTextId");
+    if (timerInput) {
+        timerInput.addEventListener("input", function() {
+            const value = this.value;
+            if ((value !== "") && (value.indexOf(".") === -1)) {
+                this.value = Math.max(Math.min(parseInt(value), ${Number.parseInt(
+                    String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")),
+                )}), 0);
+            }
+        });
     }
-});</script>
+});
+</script>
 <div class="form-group">
   <div class="col-md-4">
     <div class="input-group">
@@ -399,10 +406,20 @@ function sendMessage(message: string, whisper: string[] | undefined = undefined)
 }
 
 function handleDialogResponse(html: any) {
-    const sessionStart = html.find('input[name="sessionStart"]:checked').val();
-    const heroPoints = parseInt(html.find('input[name="heropoints"]').val());
-    const actorId = html.find('input[name="characters"]:checked').val();
-    const remainingMinutes = parseInt(html.find('input[name="timerText"]').val());
+    // Convert jQuery object to HTMLElement if needed
+    const element = html instanceof jQuery ? html[0] : html;
+
+    const sessionStartEl = element.querySelector('input[name="sessionStart"]:checked');
+    const sessionStart = sessionStartEl ? sessionStartEl.value : "IGNORE";
+
+    const heroPointsEl = element.querySelector('input[name="heropoints"]');
+    const heroPoints = heroPointsEl ? parseInt(heroPointsEl.value) : 1;
+
+    const actorIdEl = element.querySelector('input[name="characters"]:checked');
+    const actorId = actorIdEl ? actorIdEl.value : "NONE";
+
+    const remainingMinutesEl = element.querySelector('input[name="timerText"]');
+    const remainingMinutes = remainingMinutesEl ? parseInt(remainingMinutesEl.value) : 0;
 
     if (sessionStart === "RESET") {
         resetHeroPoints(heroPoints).then(() => {

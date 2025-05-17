@@ -50,15 +50,29 @@ export async function handlePrivateSpellcasting(data: any, message: ChatMessageP
 
 function showPartymembersWithSpell(message, membersWithSpell, data: any) {
     const oldContent = message.content;
-    const $editedContent = $(`<div>${oldContent}</div>`);
 
-    $editedContent.find("hr.item-block-divider:first").after(
-        game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.knownBy`, {
+    // Create a temporary DOM element
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = oldContent;
+
+    // Find the first divider
+    const firstDivider = tempDiv.querySelector("hr.item-block-divider");
+
+    if (firstDivider) {
+        // Create the new content to insert
+        const knownByText = game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.knownBy`, {
             spellHavers: membersWithSpell?.join(",") ?? "",
-        }),
-    );
+        });
 
-    const newContent = $editedContent.html();
+        // Create a new element to hold the text
+        const knownByElement = document.createElement("div");
+        knownByElement.innerHTML = knownByText;
+
+        // Insert after the divider
+        firstDivider.insertAdjacentElement("afterend", knownByElement);
+    }
+
+    const newContent = tempDiv.innerHTML;
 
     if (newContent !== oldContent) {
         data.content = newContent;
@@ -225,13 +239,21 @@ function buildSpellMessage(
         content += game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.secondPartNoRK`);
     }
 
-    const buttons = $(data.content).find("button");
-    const saveButtons = buttons.filter((i) => buttons[i].getAttribute("data-action") === "spell-save");
+    // Create a temporary DOM element to parse the content
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = data.content;
+
+    // Find all buttons
+    const buttons = tempDiv.querySelectorAll("button");
+
+    // Filter buttons to find save buttons
+    const saveButtons = Array.from(buttons).filter((button) => button.getAttribute("data-action") === "spell-save");
+
     const targetHelperActive = game.modules.find((s) => s.id === "pf2e-target-helper")?.active;
     if (saveButtons.length === 1) {
-        const dataSave = saveButtons.attr("data-save") ?? "";
+        const dataSave = saveButtons[0].getAttribute("data-save") ?? "";
         if (!targetHelperActive) {
-            const dataDC = saveButtons.attr("data-dc") ?? "";
+            const dataDC = saveButtons[0].getAttribute("data-dc") ?? "";
 
             content += game.i18n.format(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.savePart`, {
                 dataSave: dataSave,
