@@ -1,3 +1,12 @@
+## [6.25.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.2...v6.25.3) (2025-05-26)
+
+
+### Bug Fixes
+
+* Exit early in a few more places. Cache chat messages in a few places. ([025fd93](https://github.com/xdy/xdy-pf2e-workbench/commit/025fd933ca0a5c056952f648d9525225df8f0485))
+* Keeping up with the Macro Faeries. ([4f98540](https://github.com/xdy/xdy-pf2e-workbench/commit/4f985400e58f507c5aecfefdfebc424accc73d7d))
+* Reduce jquery use. ([9f4d18c](https://github.com/xdy/xdy-pf2e-workbench/commit/9f4d18c92a75d241aed4a0d62c662a223b587c4d))
+
 ## [6.25.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.1...v6.25.2) (2025-05-17)
 
 
