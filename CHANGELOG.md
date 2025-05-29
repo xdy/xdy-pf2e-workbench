@@ -1,3 +1,10 @@
+## [6.25.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.3...v6.25.4) (2025-05-29)
+
+
+### Bug Fixes
+
+* Make basic action macros use dialogv2. ([fb2a576](https://github.com/xdy/xdy-pf2e-workbench/commit/fb2a5769bb3c7f36f8455e9ca2d336ca13b0ef5a))
+
 ## [6.25.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.2...v6.25.3) (2025-05-26)
 
 
