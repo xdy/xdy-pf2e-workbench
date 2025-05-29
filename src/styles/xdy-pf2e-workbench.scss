@@ -178,6 +178,23 @@
     container: bam-dialog / inline-size;
 }
 
+.bam-body > h3 {
+    display: inline-block;
+    margin-right: 8px;
+    margin-top: 0;
+    margin-bottom: 3px;
+    line-height: 1;
+}
+
+.bam-body {
+    padding-top: 2px;
+}
+
+.bam-body .tab {
+    margin-top: 0;
+    padding-top: 0;
+}
+
 .pf2e-bg .window-content {
     //background: url('/systems/pf2e/assets/sheet/background.webp');
 }
@@ -195,7 +212,7 @@
 
     .bam-map-wrapper {
         display: flex;
-        gap: 5px;
+        gap: 2px;
         margin: 0 auto;
         width: 100%;
 
@@ -203,7 +220,11 @@
             width: unset;
 
             &:first-child {
-                flex: 1 1 160px;
+                flex: 1 1 auto;
+            }
+
+            &:not(:first-child) {
+                flex: 0 0 40px;
             }
         }
     }
@@ -211,18 +232,20 @@
     button.bam-action-btn {
         margin: 1px auto;
         height: fit-content;
+        width: 100%;
         box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
         text-shadow: none;
         border: #000;
         display: flex;
         align-items: center;
+        justify-content: flex-start;
         white-space: nowrap;
         overflow: hidden;
 
         &:hover {
             text-shadow: 0 0 2px #fff;
         }
-        &:glow {
+        &.glow {
             --color-glow1: 35;
             --color-glow2: 50;
             animation: glow2 alternate infinite 2s;
@@ -253,6 +276,10 @@
             margin-right: 5px;
         }
     }
+}
+
+.bam-tabs {
+    align-items: baseline;
 }
 
 @keyframes glow2 {
