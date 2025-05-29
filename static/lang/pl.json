@@ -128,7 +128,7 @@
         "enabled": "Odzyskaj {regain} Punktów Skupienia. <br/>Kliknij<b>TYLKO</b> jeśli masz {details} od ostatniego Ponownego Skupienia."
       },
       "buildNpcSpellbookJournal": {
-        "title": "Tworzenie dziennika zaklęć NPC",
+        "title": "Tworzenie księgi zaklęć NPC",
         "noSpellcastingEntry": "Musisz mieć otwartą i wybraną kartę postaci NPC lub wybrany pojedynczy token NPC. Ponadto wspomniany NPC musi mieć wpis dotyczący rzucania zaklęć.",
         "generatedSpellbookFor": "Wygenerowano księgę zaklęć dla {name}"
       },
@@ -307,7 +307,7 @@
       },
       "autoGainDyingIgnoresTargeting": {
         "name": "... niezależnie od tego, czy obrażenia zostały wycelowane w wybrany token.",
-        "hint": "Włącz, aby zastosować powyższe ustawienia niezależnie od tego, czy cel pasuje do wybranego tokena. (Najbardziej przydatne, jeśli nie używasz targetowania/automatyzacji)"
+        "hint": "Włącz, aby zastosować powyższe ustawienia niezależnie od tego, czy cel pasuje do wybranego tokena. (Najbardziej przydatne, jeśli nie używasz celowania/automatyzacji)"
       },
       "automationClientSettings": {
         "hint": "Włącz i skonfiguruj lokalne ustawienia automatyzacji, tj. ustawienia, które mają wpływ tylko na Twojego klienta.",
@@ -357,7 +357,7 @@
       },
       "handleDyingRecoveryRoll": {
         "hint": "Ustawienie klienta, aby automatycznie obsługiwać rzuty na stabilizację po kliknięciu przycisku rzutu na stabilizację.",
-        "handled": "Rzut na stabilizację {roll} {outcome} wykonany automatycznie. {defeated}.",
+        "handled": "Rzut na umieranie {roll} {outcome} wykonany automatycznie. {defeated}.",
         "defeated": "{name} został pokonany",
         "name": "Automatycznie obsługuje rzut na stabilizację po kliknięciu przycisku rzutu na stabilizację."
       },
@@ -486,7 +486,7 @@
         "addedFor": "Dodano 1 Punkt Bohaterstwa dla {name}",
         "timerValue": "Wartość licznika (zakres 0 - {maxMinutes})",
         "add": "Dodaj",
-        "addedToForAll": "{heroPoints} Punktów Bohaterstwa dodane dla wszystkich",
+        "addedToForAll": "Dodano wszystkim {heroPoints} Punktów Bohaterstwa",
         "addOne": "<b>Sekcja 2</b> - Dodaje jeden Punkt Bohaterstwa wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu)",
         "defaultTimeoutMinutes": 60,
         "doWhat": "<b>Sekcja 1</b> - Wybierz, co zrobić z Punktami Bohatera <em>wszystkich postaci</em> o następującej wartości",
@@ -494,7 +494,7 @@
         "instructions": "Należy pamiętać, że licznik czasu jest wstrzymany, gdy to okno dialogowe jest otwarte. Zamknij to okno dialogowe bez naciskania żadnego z tych przycisków, aby wyłączyć wstrzymanie licznika czasu, lub naciśnij odpowiedni przycisk, aby wykonać jego polecenie.",
         "minutesLeft": "minut pozostałych na bieżącym liczniku",
         "name": "Włącz obsługę Punktów Bohatera.",
-        "resetToForAll": "Punkty Bohaterstwa zresetowane do {heroPoints} dla wszystkich",
+        "resetToForAll": "Zresetowano Punkty Bohaterstwa dla wszystkich do {heroPoints}",
         "showAfter": "Pokaż okno dialogowe ponownie po tylu minutach",
         "startTimerLabel": "Prześlij zmiany i uruchom/wznów licznik czasu",
         "thisMany": "Tak wielu",
@@ -503,7 +503,7 @@
         "willBeResetIn": "Obsługa Punktów Bohatera powraca za {remainingMinutes} minut ({time}).",
         "resetTo": "Reset do",
         "noRunningTimer": "Brak uruchomionego licznika",
-        "noTimerLabel": "Prześlij zmiany. <b>Wyłącz</b> licznik. <b>Zatrzyma każdy </b> istniejący licznik czasu."
+        "noTimerLabel": "Zastosuj. <b>Wyłącz</b> licznik. <b>Zatrzyma każdy </b> istniejący licznik czasu."
       },
       "houseRulesSettings": {
         "label": "Zarządzaj ustawieniami Zasad Domowych",
@@ -595,7 +595,7 @@
       "giveWoundedWhenDyingRemoved": {
         "hint": "Ustawienie automatycznego zwiększenia stanu Ranny po usunięciu stanu Umierający.",
         "name": "Automatycznie ustawia stan Ranny po usunięciu Umierania.",
-        "numbToDeathMessage": "{name} właśnie uruchomił @UUID[Compendium.pf2e.feats-srd.gfMP2aMs3YGONVeB]. Zastosuj leczenie ręcznie."
+        "numbToDeathMessage": "{name} właśnie wyzwolił @UUID[Compendium.pf2e.feats-srd.gfMP2aMs3YGONVeB]. Zastosuj leczenie ręcznie."
       },
       "heroPointHandlerStartTimerOnReady": {
         "hint": "Zaznacz, aby automatycznie uruchomić licznik czasu obsługi Punktów Bohaterów, gdy gra będzie gotowa.",
