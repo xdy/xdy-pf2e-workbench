@@ -26,8 +26,9 @@
     "node": ">=20.15.0"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.9",
     "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.11.1",
+    "@eslint/js": "^9.27.0",
     "@foundryvtt/foundryvtt-cli": "github:xyzzy42/foundryvtt-cli#objects",
     "@pixi/graphics-smooth": "^1.1.1",
     "@pixi/particle-emitter": "5.0.8",
@@ -65,6 +66,7 @@
     "eslint-plugin-prettier": "^5.4.1",
     "foundry-types": "file:types/types/foundry",
     "fs-extra": "^11.3.0",
+    "globals": "^16.2.0",
     "gsap": "^3.13.0",
     "handlebars": "4.7.8",
     "jquery": "^3.7.1",
