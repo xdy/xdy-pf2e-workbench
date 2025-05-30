@@ -1,8 +1,6 @@
 // Originally from ApoApostolov#4622, modified by me. Included with permission.
 // noinspection CssUnresolvedCustomProperty,CssUnknownTarget
 
-/* eslint-disable no-undef */
-
 import * as R from "remeda";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import type { MacroPF2e, SkillSlug } from "foundry-pf2e";
@@ -709,10 +707,10 @@ export async function basicActionMacros() {
     const actionsToUse = prepareActions(selectedActor, bamActions);
 
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-        .map((actor) => actor.actor)
-        .filter((actor) => {
-            return supportedActorTypes.includes(actor?.type ?? "unknown");
-        }) || [];
+            .map((actor) => actor.actor)
+            .filter((actor) => {
+                return supportedActorTypes.includes(actor?.type ?? "unknown");
+            }) || [];
 
     const party = game.actors?.party?.members || [];
     const partyIds = party.map((actor) => actor?.id) || [];
@@ -767,24 +765,22 @@ export async function basicActionMacros() {
                 default: true,
             },
         ],
-        render: (_event, dialog) => {
-            // @ts-expect-error
-            const html = dialog.element;
-            const action = (button, event) => {
+        render: (_event, html) => {
+            const action = (event: Event) => {
                 // Prevent the dialog from closing
                 event.preventDefault();
                 event.stopPropagation();
-
+                const button = event.currentTarget;
+                if (!(button instanceof HTMLButtonElement) || typeof button.dataset.action !== "string") return;
                 const action = actionsToUse[button.dataset.action];
                 const current = action.action;
                 if (typeof current === "object") {
                     // TODO Handle other variants than map
-                    const mapValue = button.dataset.map ? -(Number.parseInt(button.dataset.map) / 5) : 0;
+                    const mapValue = -(Number.parseInt(button.dataset.map ?? "0") / 5);
                     current.use({
                         event,
                         actors: [selectedActor],
                         multipleAttackPenalty: mapValue,
-                        skipDialog: event.skipDialog,
                         ...action.options,
                     });
                 } else if (current) {
@@ -795,23 +791,15 @@ export async function basicActionMacros() {
                     });
                 }
             };
-            if ("querySelectorAll" in html) {
-                for (const button of html.querySelectorAll(".bam-action-list button")) {
-                    button.addEventListener("click", (event) => action(button, event));
-                }
-                for (const tabButton of html.querySelectorAll("a.item")) {
+            html.querySelectorAll(".bam-action-list button").forEach((button) =>
+                button.addEventListener("click", action),
+            );
+            if (tabView) {
+                for (const tabButton of html.querySelectorAll("a.item") as NodeListOf<HTMLElement>) {
                     tabButton.addEventListener("click", () => {
-                        if (!tabView) {
-                            for (const tab of html.querySelectorAll(".bam-body .tab")) {
-                                if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.toggle("active");
-                            }
-                        } else {
-                            for (const active of html.querySelectorAll(".active")) {
-                                active.classList.remove("active");
-                            }
-                            for (const active of html.querySelectorAll(`[data-tab=${tabButton.dataset.tab}]`)) {
-                                active.classList.add("active");
-                            }
+                        for (const tab of html.querySelectorAll("div.tab") as NodeListOf<HTMLElement>) {
+                            if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.add("active");
+                            else tab.classList.remove("active");
                         }
                     });
                 }
