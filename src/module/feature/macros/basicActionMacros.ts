@@ -709,10 +709,10 @@ export async function basicActionMacros() {
     const actionsToUse = prepareActions(selectedActor, bamActions);
 
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-        .map((actor) => actor.actor)
-        .filter((actor) => {
-            return supportedActorTypes.includes(actor?.type ?? "unknown");
-        }) || [];
+            .map((actor) => actor.actor)
+            .filter((actor) => {
+                return supportedActorTypes.includes(actor?.type ?? "unknown");
+            }) || [];
 
     const party = game.actors?.party?.members || [];
     const partyIds = party.map((actor) => actor?.id) || [];
@@ -746,78 +746,151 @@ export async function basicActionMacros() {
     };
     const content = await renderTemplate("modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs", filteredData);
 
-    const { DialogV2 } = foundry.applications.api;
-    window.actionDialog = await DialogV2.wait({
-        position: {
-            width,
-        },
-        window: {
-            title: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.title`, {
-                name: selectedActor.name,
-            }),
-            contentClasses: ["pf2e-bg", "bam-dialog"],
-            resizable: true,
-        },
-        content,
-        buttons: [
+    async function renderDialogV12() {
+        window.actionDialog = new Dialog(
             {
-                action: "close",
-                icon: "fa-solid fa-times",
-                label: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.cancel`),
-                default: true,
-            },
-        ],
-        render: (_event, dialog) => {
-            // @ts-expect-error
-            const html = dialog.element;
-            const action = (button, event) => {
-                // Prevent the dialog from closing
-                event.preventDefault();
-                event.stopPropagation();
-
-                const action = actionsToUse[button.dataset.action];
-                const current = action.action;
-                if (typeof current === "object") {
-                    // TODO Handle other variants than map
-                    const mapValue = button.dataset.map ? -(Number.parseInt(button.dataset.map) / 5) : 0;
-                    current.use({
-                        event,
-                        actors: [selectedActor],
-                        multipleAttackPenalty: mapValue,
-                        skipDialog: event.skipDialog,
-                        ...action.options,
-                    });
-                } else if (current) {
-                    current({
-                        event,
-                        actors: [selectedActor],
-                        skill: action.skill,
-                    });
-                }
-            };
-            if ("querySelectorAll" in html) {
-                for (const button of html.querySelectorAll(".bam-action-list button")) {
-                    button.addEventListener("click", (event) => action(button, event));
-                }
-                for (const tabButton of html.querySelectorAll("a.item")) {
-                    tabButton.addEventListener("click", () => {
-                        if (!tabView) {
-                            for (const tab of html.querySelectorAll(".bam-body .tab")) {
-                                if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.toggle("active");
-                            }
-                        } else {
-                            for (const active of html.querySelectorAll(".active")) {
-                                active.classList.remove("active");
-                            }
-                            for (const active of html.querySelectorAll(`[data-tab=${tabButton.dataset.tab}]`)) {
-                                active.classList.add("active");
-                            }
+                title: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.title`, {
+                    name: selectedActor.name,
+                }),
+                content: content,
+                buttons: {
+                    close: {
+                        icon: `<i class="fa-solid fa-times"></i>`,
+                        label: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.cancel`),
+                    },
+                },
+                default: "close",
+                render: (html) => {
+                    const action = (button, event) => {
+                        const action = actionsToUse[button.dataset.action];
+                        const current = action.action;
+                        if (typeof current === "object") {
+                            // TODO Handle other variants than map
+                            const mapValue = button.dataset.map ? -(Number.parseInt(button.dataset.map) / 5) : 0;
+                            current.use({
+                                event,
+                                actors: [selectedActor],
+                                multipleAttackPenalty: mapValue,
+                                skipDialog: event.skipDialog,
+                                ...action.options,
+                            });
+                        } else if (current) {
+                            current({
+                                event,
+                                actors: [selectedActor],
+                                skill: action.skill,
+                            });
                         }
-                    });
+                    };
+                    if ("querySelectorAll" in html) {
+                        for (const button of html.querySelectorAll(".bam-action-list button")) {
+                            button.addEventListener("click", (event) => action(button, event));
+                        }
+                        for (const tabButton of html.querySelectorAll("a.item")) {
+                            tabButton.addEventListener("click", () => {
+                                if (!tabView) {
+                                    for (const tab of html.querySelectorAll(".bam-body .tab")) {
+                                        // @ts-expect-error
+                                        if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.toggle("active");
+                                    }
+                                } else {
+                                    for (const active of html.querySelectorAll(".active")) {
+                                        active.classList.remove("active");
+                                    }
+                                    // @ts-expect-error
+                                    for (const active of html.querySelectorAll(`[data-tab=${tabButton.dataset.tab}]`)) {
+                                        active.classList.add("active");
+                                    }
+                                }
+                            });
+                        }
+                    }
+                },
+            },
+            { jQuery: false, classes: ["pf2e-bg", "bam-dialog"], width, popOut: true, resizable: true },
+        ).render(true) as Dialog;
+    }
+
+    async function renderDialogV13() {
+        const { DialogV2 } = foundry.applications.api;
+        window.actionDialog = await DialogV2.wait({
+            position: {
+                width,
+            },
+            window: {
+                title: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.title`, {
+                    name: selectedActor.name,
+                }),
+                contentClasses: ["pf2e-bg", "bam-dialog"],
+                resizable: true,
+            },
+            content,
+            buttons: [
+                {
+                    action: "close",
+                    icon: "fa-solid fa-times",
+                    label: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.cancel`),
+                    default: true,
+                },
+            ],
+            render: (_event, dialog) => {
+                // @ts-expect-error
+                const html = dialog.element;
+                const action = (button, event) => {
+                    // Prevent the dialog from closing
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    const action = actionsToUse[button.dataset.action];
+                    const current = action.action;
+                    if (typeof current === "object") {
+                        // TODO Handle other variants than map
+                        const mapValue = button.dataset.map ? -(Number.parseInt(button.dataset.map) / 5) : 0;
+                        current.use({
+                            event,
+                            actors: [selectedActor],
+                            multipleAttackPenalty: mapValue,
+                            skipDialog: event.skipDialog,
+                            ...action.options,
+                        });
+                    } else if (current) {
+                        current({
+                            event,
+                            actors: [selectedActor],
+                            skill: action.skill,
+                        });
+                    }
+                };
+                if ("querySelectorAll" in html) {
+                    for (const button of html.querySelectorAll(".bam-action-list button")) {
+                        button.addEventListener("click", (event) => action(button, event));
+                    }
+                    for (const tabButton of html.querySelectorAll("a.item")) {
+                        tabButton.addEventListener("click", () => {
+                            if (!tabView) {
+                                for (const tab of html.querySelectorAll(".bam-body .tab")) {
+                                    if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.toggle("active");
+                                }
+                            } else {
+                                for (const active of html.querySelectorAll(".active")) {
+                                    active.classList.remove("active");
+                                }
+                                for (const active of html.querySelectorAll(`[data-tab=${tabButton.dataset.tab}]`)) {
+                                    active.classList.add("active");
+                                }
+                            }
+                        });
+                    }
                 }
-            }
-        },
-    });
+            },
+        });
+    }
+
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        await renderDialogV13();
+    } else {
+        await renderDialogV12();
+    }
 }
 
 // basicActionsMacros();
