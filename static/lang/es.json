@@ -86,10 +86,6 @@
           "RaiseAShieldToggle": "Alzar un escudo (alternar)"
         },
         "gmMustImport": "El DJ debe hacer clic derecho en el compendio xdy-pf2e-workbench-macros y seleccionar \"Importar todo el contenido\" y asegurarse de marcar \"Conservar los IDs de los documentos\" al importar.",
-        "third": "(-10)",
-        "second": "(-5)",
-        "secondAgile": "(-4)",
-        "thirdAgile": "(-8)",
         "agileTrait": "(Ágil)",
         "settings": {
           "showBestBonus": {

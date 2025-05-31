@@ -495,13 +495,9 @@
         },
         "macroNotFound": "Macro {macroName} não encontrado",
         "compendiumNotFound": "Compendium {compendiumName} não encontrado",
-        "second": "(-5)",
         "YouAreTheBestInYourParty": "Você é o Melhor do Grupo",
         "noActorSelected": "Nenhum PJ, PDM ou familiar está selecionado",
         "cancel": "Cancelar",
-        "third": "(-10)",
-        "secondAgile": "(-4)",
-        "thirdAgile": "(-8)",
         "agileTrait": "(Ágil)",
         "settings": {
           "showBestBonus": {

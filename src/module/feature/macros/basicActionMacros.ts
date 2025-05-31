@@ -117,9 +117,9 @@ type MacroAction = {
     best?: number;
     whoIsBest?: string;
     showMAP?: boolean;
-    isEscape?: boolean;
     showExploration?: boolean;
     showDowntime?: boolean;
+    MAP?: [number, number];
 };
 
 /**
@@ -133,35 +133,41 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
     const showUnusable = game.settings.get(MODULENAME, "bamShowUnusable");
     const hasFeat = (slug: string) => selectedActor.itemTypes.feat.some((feat) => feat.slug === slug);
 
-    const actionsToUse = bamActions
-        .filter((x) => {
-            const hasSkill = selectedActor.skills?.[x.skill]?.rank ?? 0 > 0;
-            const hasAltSkillAndFeat = x.altSkillAndFeat?.some(
-                (y) => selectedActor.skills?.[y.skill].rank && hasFeat(y.feat),
-            );
-            if (x.module && !game.modules.get(x.module)?.active) return false;
-            if (x.feat && !hasFeat(x.feat)) return false;
+    const actionsToUse = bamActions.filter((x) => {
+        const hasSkill = selectedActor.skills?.[x.skill]?.rank ?? 0 > 0;
+        const hasAltSkillAndFeat = x.altSkillAndFeat?.some(
+            (y) => selectedActor.skills?.[y.skill].rank && hasFeat(y.feat),
+        );
+        if (x.module && !game.modules.get(x.module)?.active) return false;
+        if (x.feat && !hasFeat(x.feat)) return false;
 
-            return (
-                showUnusable ||
-                x.actionType !== "skill_trained" ||
-                (x.actionType === "skill_trained" && ["npc", "familiar"].includes(selectedActor.type)) ||
-                selectedActor.itemTypes.feat.some((feat) => feat.slug === "clever-improviser") ||
-                hasSkill ||
-                hasAltSkillAndFeat
-            );
-        })
-        .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
+        return (
+            showUnusable ||
+            x.actionType !== "skill_trained" ||
+            (x.actionType === "skill_trained" && ["npc", "familiar"].includes(selectedActor.type)) ||
+            selectedActor.itemTypes.feat.some((feat) => feat.slug === "clever-improviser") ||
+            hasSkill ||
+            hasAltSkillAndFeat
+        );
+    });
 
     actionsToUse.forEach((x) => {
         const traits = (x as any)?.action?.traits ?? [];
         x.showMAP = traits.includes("attack");
         x.showDowntime = traits.includes("downtime");
         x.showExploration = traits.includes("exploration");
-        x.isEscape = x.name.includes("Escape");
+        if (x.showMAP) {
+            x.MAP = [-5, -10];
+            if (x.skill === "athletics")
+                actionsToUse.push({
+                    ...x,
+                    name: `${x.name} (${game.i18n.localize("PF2E.TraitAgile")})`,
+                    MAP: [-4, -8],
+                });
+        }
     });
 
-    return actionsToUse;
+    return actionsToUse.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 }
 
 // Class to wrap a macro into an object that supports the ActionVariant

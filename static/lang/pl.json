@@ -20,10 +20,6 @@
     "macros": {
       "basicActionMacros": {
         "title": "Akcje ({name})",
-        "second": "(-5)",
-        "third": "(-10)",
-        "secondAgile": "(-4)",
-        "thirdAgile": "(-8)",
         "agileTrait": "(Zwinny)",
         "actions": {
           "AidToggle": "Wsparcie (aktywuj)",
