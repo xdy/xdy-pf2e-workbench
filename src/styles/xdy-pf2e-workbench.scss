@@ -225,7 +225,8 @@
             }
 
             &:not(:first-child) {
-                flex: 0 0 40px;
+                flex: 0 0 4ch;
+                justify-content: center;
             }
         }
     }

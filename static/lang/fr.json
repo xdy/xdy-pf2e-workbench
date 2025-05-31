@@ -735,10 +735,6 @@
           "Reposition": "Repositionner",
           "AidPF2eMacros": "Aider (Macros PF2e)"
         },
-        "second": "(-5)",
-        "third": "(-10)",
-        "secondAgile": "(-4)",
-        "thirdAgile": "(-8)",
         "agileTrait": "(agile)",
         "macroNotFound": "Macro {macroName} non trouvée",
         "compendiumNotFound": "Compendium {compendiumName} non trouvé",

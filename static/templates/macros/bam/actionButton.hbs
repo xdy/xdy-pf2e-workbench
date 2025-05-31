@@ -1,65 +1,27 @@
-{{#*inline "actionName"}}{{action.name}} {{#xdy_ifne skill xdy_undefined}}({{signedInteger
-    bonus}}){{/xdy_ifne}}{{/inline}}
-{{#*inline "actionNameAgile"}}{{action.name}} {{localize "xdy-pf2e-workbench.macros.basicActionMacros.agileTrait"}} {{#xdy_ifne skill xdy_undefined}}({{signedInteger
-    bonus}}){{/xdy_ifne}}{{/inline}}
-{{#*inline "actionTooltip"}}{{> actionName}} {{ifThen best (localize "xdy-pf2e-workbench.macros.basicActionMacros.YouAreTheBestInYourParty")""}}{{/inline}}
-{{#*inline "actionTooltipAgile"}}{{> actionNameAgile}} {{ifThen best (localize "xdy-pf2e-workbench.macros.basicActionMacros.YouAreTheBestInYourParty")""}}{{/inline}}
-{{#if action.isEscape}}
-    <div class="bam-map-wrapper">
-        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="0" 
-                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltip}}"><img
-            src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24"
-            width="24"
-            alt="{{> actionName}}"/>{{> actionName}}</button>
-        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-5"
-                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.second"}}">{{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.second"}}</button>
-        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-10"
-                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.third"}}">{{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.third"}}</button>
-    </div>
-{{else}}
+{{#*inline "actionName"}}
+    {{action.name}} {{#xdy_ifne skill xdy_undefined}}({{signedInteger bonus}}){{/xdy_ifne}}
+{{/inline}}
+{{#*inline "actionTooltip"}}
+    {{> actionName}} {{ifThen best (localize "xdy-pf2e-workbench.macros.basicActionMacros.YouAreTheBestInYourParty")""}}
+{{/inline}}
 {{#if action.showMAP}}
     <div class="bam-map-wrapper">
         <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="0" 
-                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltip}}"><img
-            src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24"
-            width="24"
-            alt="{{> actionName}}"/>{{> actionName}}</button>
-        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-5"
-                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.second"}}">{{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.second"}}</button>
-        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-10"
-                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltip}} {{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.third"}}">{{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.third"}}</button>
+                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltip}}">
+            <img src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24" width="24" alt="{{> actionName}}"/>
+            {{> actionName}}
+        </button>
+        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="{{action.MAP.[0]}}" data-rank="{{skill.rank}}">
+            {{action.MAP.[0]}}
+        </button>
+        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="{{action.MAP.[1]}}" data-rank="{{skill.rank}}">
+            {{action.MAP.[1]}}
+        </button>
     </div>
-{{#if action.showMAP}}
-    <div class="bam-map-wrapper">
-        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="0" 
-                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltipAgile}}"><img
-            src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24"
-            width="24"
-            alt="{{> actionNameAgile}}"/>{{> actionNameAgile}}</button>
-        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-4"
-                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltipAgile}} {{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.secondAgile"}}">{{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.secondAgile"}}</button>
-        <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-map="-8"
-                data-rank="{{skill.rank}}" data-tooltip="{{> actionTooltipAgile}} {{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.thirdAgile"}}">{{localize
-            "xdy-pf2e-workbench.macros.basicActionMacros.thirdAgile"}}</button>
-    </div>
-{{/if}}
 {{else}}
     <button class="bam-action-btn{{#if best}} glow{{/if}}" data-action="{{idx}}" data-rank="{{skill.rank}}"
             data-tooltip="{{> actionTooltip}}">
-        <img src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24"
-             alt="{{name}}"/>{{> actionName}}
+        <img src="{{coalesce action.icon "systems/pf2e/icons/actions/craft/unknown-item.webp"}}" height="24" alt="{{name}}"/>
+        {{> actionName}}
     </button>
-
-{{/if}}
 {{/if}}

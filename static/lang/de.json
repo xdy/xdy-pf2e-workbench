@@ -74,13 +74,9 @@
         },
         "macroNotFound": "Makro {macroName} nicht gefunden",
         "title": "Aktionen ({name})",
-        "second": "(-5)",
         "YouAreTheBestInYourParty": "Du bist der Beste in der Gruppe",
         "noActorSelected": "Kein SC, NSC oder Vertrauten Akteur ausgewählt",
         "cancel": "Abbruch",
-        "third": "(-10)",
-        "secondAgile": "(-4)",
-        "thirdAgile": "(-8)",
         "agileTrait": "(Agil)",
         "compendiumNotFound": "Kompendium {compendiumName} nicht gefunden",
         "bamActionsPerColumn": {
