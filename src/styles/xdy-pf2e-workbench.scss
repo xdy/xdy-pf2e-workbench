@@ -176,13 +176,14 @@
 
 .bam-dialog {
     container: bam-dialog / inline-size;
+    .standard-form {
+        gap: initial;
+    }
 }
 
-.bam-body > h3 {
+.bam-tabs h3 {
     display: inline-block;
-    margin-right: 8px;
-    margin-top: 0;
-    margin-bottom: 3px;
+    margin: 0 0 0.5rem;
     line-height: 1;
 }
 
@@ -251,7 +252,8 @@
             animation: glow2 alternate infinite 2s;
             z-index: 1;
         }
-        &[data-rank="0"], &[data-rank] {
+        &[data-rank="0"],
+        &[data-rank] {
             background: var(--color-proficiency-untrained);
             color: var(--text-light);
         }
@@ -276,10 +278,6 @@
             margin-right: 5px;
         }
     }
-}
-
-.bam-tabs {
-    align-items: baseline;
 }
 
 @keyframes glow2 {
