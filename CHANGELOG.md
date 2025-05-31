@@ -1,3 +1,17 @@
+## [6.25.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.5...v6.25.6) (2025-05-31)
+
+
+### Bug Fixes
+
+* Fix damage from agile actions, improve formatting ([a0fc51c](https://github.com/xdy/xdy-pf2e-workbench/commit/a0fc51c12dd7a627bbd71a341a2ce97d4d2075a1))
+* Fix style of tab headers in BAM ([6355846](https://github.com/xdy/xdy-pf2e-workbench/commit/6355846ca2031b9774cf760b8f2d4cc43c19d1e1))
+* Make BAM work on v12/13 and fix non-tabview section headers ([ad8263c](https://github.com/xdy/xdy-pf2e-workbench/commit/ad8263c5e9de3ef9f06512842a57241d3c44d5be))
+
+
+### Reverts
+
+* Revert "fix: Make BAM work on v12 again." ([caddac1](https://github.com/xdy/xdy-pf2e-workbench/commit/caddac19e05ec40f3728ac84db6737911b9a5c3a))
+
 ## [6.25.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.4...v6.25.5) (2025-05-30)
 
 
