@@ -633,7 +633,7 @@
           "CreateForgery": "伪造文书",
           "AdministerFirstAidStabilize": "进行急救 - 稳定伤势",
           "AdministerFirstAidStopBleeding": "进行急救 - 止血",
-          "Escape": "逃脱 - 最高加值 (??)",
+          "Escape": "逃脱",
           "AidASE": "协助（ASE宏）"
         },
         "agileTrait": "(敏捷)",

@@ -1,5 +1,5 @@
 {{#*inline "actionName"}}
-    {{action.name}} {{#xdy_ifne skill xdy_undefined}}({{signedInteger bonus}}){{/xdy_ifne}}
+    {{action.name}} {{#if bonus includeZero=true}}({{signedInteger bonus}}){{/if}}
 {{/inline}}
 {{#*inline "actionTooltip"}}
     {{> actionName}} {{ifThen best (localize "xdy-pf2e-workbench.macros.basicActionMacros.YouAreTheBestInYourParty")""}}
