@@ -1,3 +1,10 @@
+## [6.25.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.6...v6.25.7) (2025-06-02)
+
+
+### Bug Fixes
+
+* Make BAM work for v13 again. ([fea69ad](https://github.com/xdy/xdy-pf2e-workbench/commit/fea69ad1324f4904e6501c24a7155d371e3ea986))
+
 ## [6.25.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.5...v6.25.6) (2025-05-31)
 
 
