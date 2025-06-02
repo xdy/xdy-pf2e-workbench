@@ -6,6 +6,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import type { MacroPF2e, SkillSlug } from "foundry-pf2e";
 import { AbilityTrait, Action, ActionUseOptions, ActionVariant, ActorPF2e, Statistic } from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
+import type { DialogV2 } from "foundry-pf2e/foundry/client-esm/applications/api/module.d.ts";
 
 declare global {
     interface Window {
@@ -713,10 +714,10 @@ export async function basicActionMacros() {
     const actionsToUse = prepareActions(selectedActor, bamActions);
 
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-            .map((actor) => actor.actor)
-            .filter((actor) => {
-                return supportedActorTypes.includes(actor?.type ?? "unknown");
-            }) || [];
+        .map((actor) => actor.actor)
+        .filter((actor) => {
+            return supportedActorTypes.includes(actor?.type ?? "unknown");
+        }) || [];
 
     const party = game.actors?.party?.members || [];
     const partyIds = party.map((actor) => actor?.id) || [];
@@ -771,7 +772,8 @@ export async function basicActionMacros() {
                 default: true,
             },
         ],
-        render: (_event, html) => {
+        render: (_event, htmlOrDialog) => {
+            const html = htmlOrDialog instanceof HTMLDialogElement ? htmlOrDialog : (htmlOrDialog as DialogV2).element;
             const action = (event: Event) => {
                 // Prevent the dialog from closing
                 event.preventDefault();
