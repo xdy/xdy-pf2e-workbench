@@ -751,8 +751,7 @@ export async function basicActionMacros() {
     };
     const content = await renderTemplate("modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs", filteredData);
 
-    const { DialogV2 } = foundry.applications.api;
-    window.actionDialog = await DialogV2.wait({
+    window.actionDialog = await foundry.applications.api.DialogV2.wait({
         position: {
             width,
         },
@@ -809,6 +808,10 @@ export async function basicActionMacros() {
                             if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.add("active");
                             else tab.classList.remove("active");
                         }
+                        for (const otherButton of html.querySelectorAll("a.item.active")) {
+                            if (otherButton !== tabButton) otherButton.classList.remove("active");
+                        }
+                        tabButton.classList.add("active");
                     });
                 }
             }

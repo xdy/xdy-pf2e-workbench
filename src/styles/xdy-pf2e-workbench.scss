@@ -181,14 +181,21 @@
     }
 }
 
-.bam-tabs h3 {
-    display: inline-block;
-    margin: 0 0 0.5rem;
-    line-height: 1;
+.bam-tabs.tabs h3 {
+    margin: 0.5rem 0 0.5rem 0;
+    a.active {
+        text-decoration: underline;
+    }
 }
 
 .bam-body {
     padding-top: 2px;
+    h3 {
+        margin: 1rem 0 0.5rem 0;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
 }
 
 .bam-body .tab {
@@ -213,7 +220,7 @@
 
     .bam-map-wrapper {
         display: flex;
-        gap: 2px;
+        gap: 1px;
         margin: 0 auto;
         width: 100%;
 
@@ -234,6 +241,7 @@
     button.bam-action-btn {
         margin: 1px auto;
         height: fit-content;
+        min-height: 28px;
         width: 100%;
         box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
         text-shadow: none;
