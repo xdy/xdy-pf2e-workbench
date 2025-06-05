@@ -56,11 +56,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Post a notification when a Hero Point is handed out
 
 * Quality of Life section
-    * Option to add an npc scaler feature when right clicking on an npc (This feature has been taken over from the
-      delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox#npc-scaler) module. Thanks DJ! At some
-      point Avery will
-      have the time to add it to the system, until then I'll maintain it.)
-    * Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc
+    * (foundry v12 only, it is a macro on v13) Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc
       using the suggested values from the GMG (This feature has been taken over from the
       delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox#quick-roller) module. Thanks DJ!)
     * Option to hold CTRL while casting a spell to cast it as a whispered chat message. Separate option to output a
@@ -153,7 +149,8 @@ of each can be found below:
         hypercognition: hypercognition, // await game.PF2eWorkbench.hypercognition(token)
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
-        getAllFromAllowedPacks: 
+        getAllFromAllowedPacks: getAllFromAllowedPacks, // await game.PF2eWorkbench.getAllFromAllowedPacks({ type, fields, filter, strictSourcing, fetch})        
+        npcScaler: npcScaler, // await game.PF2eWorkbench.npcScaler()
 ```
 
 HOOKS (for other modules to use):
@@ -204,6 +201,9 @@ HOOKS (for other modules to use):
         * Hypercognition. If the selected token has Hypercognition, True Hypercognition or Incredible Recall it uses the
           macro Recall_Knowledge (must have been imported from the "Symon-provided macros" compendium) to roll the
           appropriate number of times and summarize the results.
+        * Call the npc scaler feature by selecting an npc and running this macro (This feature has been taken over from
+          the delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox#npc-scaler) module. Thanks DJ!
+
 * The compendium "PF2e Workbench Customizable Macros (xdy-customizable-macros)" contains customizable macros
   provided by ApoApostolov and esheyw. They are *intended* to be customized by the user by changing the javascript
   code (such as by adding/removing actions, setting what actors are part of the party, etc.) They are not really

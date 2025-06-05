@@ -10,8 +10,8 @@ import {
     ActionUseOptions,
     ActionVariant,
     ActorPF2e,
-    Statistic,
     SingleCheckAction,
+    Statistic,
 } from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
 import type { DialogV2 } from "foundry-pf2e/foundry/client-esm/applications/api/module.d.ts";
@@ -846,4 +846,4 @@ export async function basicActionMacros() {
     });
 }
 
-// basicActionsMacros();
+// basicActionMacros();

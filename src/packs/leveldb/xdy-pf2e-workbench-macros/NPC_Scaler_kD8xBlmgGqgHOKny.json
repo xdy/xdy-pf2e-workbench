@@ -1,0 +1,28 @@
+{
+  "name": "NPC Scaler",
+  "type": "script",
+  "author": "TGE1zKyafLPFHM9r",
+  "img": "icons/skills/social/trading-injustice-scale-gray.webp",
+  "scope": "global",
+  "command": "await await game.PF2eWorkbench.npcScaler()",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "TGE1zKyafLPFHM9r": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.344",
+    "systemId": "pf2e",
+    "systemVersion": "7.1.1",
+    "createdTime": 1749151328751,
+    "modifiedTime": 1749151397134,
+    "lastModifiedBy": "TGE1zKyafLPFHM9r"
+  },
+  "_id": "kD8xBlmgGqgHOKny",
+  "sort": 200000,
+  "_key": "!macros!kD8xBlmgGqgHOKny"
+}
