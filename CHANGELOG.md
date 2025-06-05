@@ -1,3 +1,10 @@
+# [6.26.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.8...v6.26.0) (2025-06-05)
+
+
+### Features
+
+* Update verified versions to foundry 13.344 and pf2e 7.1.1. ([e64b12e](https://github.com/xdy/xdy-pf2e-workbench/commit/e64b12ee5fd089a96dceef10dec043ce542dfc01))
+
 ## [6.25.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.7...v6.25.8) (2025-06-05)
 
 
