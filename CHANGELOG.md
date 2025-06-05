@@ -1,3 +1,11 @@
+## [6.25.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.7...v6.25.8) (2025-06-05)
+
+
+### Bug Fixes
+
+* BAM: Show current tab, adjust spacing ([fc12b8e](https://github.com/xdy/xdy-pf2e-workbench/commit/fc12b8e606de3f065f11ec49cd8094e3250b751e))
+* Update eslint config so it works with current version ([9eb0c43](https://github.com/xdy/xdy-pf2e-workbench/commit/9eb0c436230eb09c7afb6136d5e137b9153a2e65))
+
 ## [6.25.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.6...v6.25.7) (2025-06-02)
 
 
