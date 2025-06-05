@@ -4,7 +4,15 @@
 import * as R from "remeda";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import type { MacroPF2e, SkillSlug } from "foundry-pf2e";
-import { AbilityTrait, Action, ActionUseOptions, ActionVariant, ActorPF2e, Statistic } from "foundry-pf2e";
+import {
+    AbilityTrait,
+    Action,
+    ActionUseOptions,
+    ActionVariant,
+    ActorPF2e,
+    Statistic,
+    SingleCheckAction,
+} from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
 import type { DialogV2 } from "foundry-pf2e/foundry/client-esm/applications/api/module.d.ts";
 
@@ -16,6 +24,12 @@ declare global {
 
 // PF2e system uses this for statistic slugs but doesn't make it a type
 type StatisticSlug = SkillSlug | "perception";
+
+// Since SingleCheckAction is only exported as a type we can't just use instanceof
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+function isSingleCheckAction(action: Action | Function | ActionVariant): action is SingleCheckAction {
+    return foundry.utils.hasProperty(action, "preview");
+}
 
 export async function registerBasicActionMacrosHandlebarsTemplates() {
     if (foundry.utils.isNewerVersion(game.version, 13)) {
@@ -72,7 +86,7 @@ function fetchSkills(actor: ActorPF2e): Partial<Record<StatisticSlug, Statistic>
 type ButtonData = {
     action: MacroAction;
     skill: Statistic | undefined;
-    bonus: number;
+    bonus?: number;
     best: boolean;
     idx: number;
 };
@@ -85,11 +99,11 @@ function createButtonData(
     actorSkills: Partial<Record<StatisticSlug, Statistic>>,
 ): ButtonData {
     const skill: Statistic | undefined = actorSkills[action.skill];
-    const bonus = skill?.mod ?? -1;
+    const bonus = action.bonus ?? skill?.mod;
     const best =
         !!game.settings.get(MODULENAME, "basicActionMacroShowBestBonus") &&
         party.includes(actor.id) &&
-        bonus >= (action.best ?? 0);
+        (bonus ?? -100) >= (action.best ?? 0);
     return { best, idx, action, skill, bonus };
 }
 
@@ -121,6 +135,7 @@ type MacroAction = {
     showExploration?: boolean;
     showDowntime?: boolean;
     MAP?: [number, number];
+    bonus?: number;
 };
 
 /**
@@ -153,6 +168,18 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
     });
 
     actionsToUse.forEach((x) => {
+        const action = x.action;
+        if (x.skill === "" && action && isSingleCheckAction(action)) {
+            const skillUsed = action
+                .preview({ actor: selectedActor })
+                .reduce((highest, current) =>
+                    (highest?.modifier ?? -100) > (current.modifier ?? 0) ? highest : current,
+                );
+            x.bonus = skillUsed.modifier;
+            x.skill = skillUsed.slug as StatisticSlug;
+            x.name += ` (${skillUsed.label})`;
+        }
+
         const traits = (x as any)?.action?.traits ?? [];
         x.showMAP = traits.includes("attack");
         x.showDowntime = traits.includes("downtime");

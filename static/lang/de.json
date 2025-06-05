@@ -11,7 +11,7 @@
         },
         "actions": {
           "ConcealAnObject": "Ein Objekt verstecken",
-          "Escape": "Entkommen - höchste (??)",
+          "Escape": "Entkommen",
           "GatherInformation": "Informationen sammeln",
           "Hide": "Verstecke",
           "PickALock": "Schloss knacken",
