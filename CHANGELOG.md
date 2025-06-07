@@ -1,3 +1,10 @@
+## [6.26.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.26.0...v6.26.1) (2025-06-07)
+
+
+### Bug Fixes
+
+* Remove setting for autorolling damage for 'All spells' as it doesn't work. If you had that selected, select another option in the dropdown. ([aacf58c](https://github.com/xdy/xdy-pf2e-workbench/commit/aacf58c0dc973d5bf884d8edcebd7d49b8e3d868))
+
 # [6.26.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.25.8...v6.26.0) (2025-06-05)
 
 
