@@ -112,8 +112,7 @@
         "no": "Non",
         "anySpell": "Pour tout sort qui n'est pas une attaque",
         "nonSaveSpell": "Pour tout sort qui n'est pas une attaque et n'a pas de jet de sauvegarde",
-        "saveSpell": "Pour tout sort avec un jet de sauvegarde qui n'est pas une attaque",
-        "allSpells": "Pour tous les sorts"
+        "saveSpell": "Pour tout sort avec un jet de sauvegarde qui n'est pas une attaque"
       },
       "autoRollDamageForStrike": {
         "hint": "Réglage du client pour lancer les dégâts automatiquement en cas de succès sur la Frappe. Notez que les coups critiques lancent les dégâts critiques.",

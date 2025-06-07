@@ -74,18 +74,11 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 // @ts-ignore TODO FIX
                 (flags["pf2e-target-helper"]?.targets ?? 0) > 1 && targetHelperWillAutoroll;
 
-            const rollForAllSpells =
-                game.settings.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") === "allSpells" &&
-                (rollForNonSpellAttack ||
-                    rollForNonAttackSaveSpell ||
-                    rollForNonAttackNonSaveSpell ||
-                    rollForAttackSpell);
             if (
                 actor &&
                 (rollForNonAttackNonSaveSpell ||
                     (rollForNonAttackSaveSpell && (isFailure || (isBasicSave && degreeOfSuccess === "success"))) ||
-                    (rollForAttackSpell && isSuccess) ||
-                    rollForAllSpells) &&
+                    (rollForAttackSpell && isSuccess)) &&
                 !letTargetHelperAutorollDamage &&
                 // Whyzo spell. Don't roll.
                 !(isAttackSpell && isSaveSpell)
@@ -165,7 +158,7 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
         const recentMessages = array.slice(messageIndex, messageIndex + searchLimit);
 
         rollDamage = !recentMessages.some(msg =>
-            msg.content.includes("dice-result flat-check-failure")
+            msg.content.includes("dice-result flat-check-failure"),
         );
 
         // Store in cache for future lookups

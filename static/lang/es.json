@@ -670,8 +670,7 @@
         "anySpell": "Para cualquier conjuro que no sea de ataque",
         "saveSpell": "Para un conjuro que no sea de ataque con salvación",
         "nonSaveSpell": "Para un conjuro que no sea de ataque sin salvación",
-        "name": "Daño automático por lanzamiento de hechizos que no sean ataques.",
-        "allSpells": "Para todos los conjuros"
+        "name": "Daño automático por lanzamiento de hechizos que no sean ataques."
       },
       "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
         "hint": "Mistifica los objetos solo si son de esta rareza o superior.",

@@ -329,8 +329,7 @@
         "no": "Nie",
         "anySpell": "Dla każdego zaklęcia niebędącego atakiem",
         "nonSaveSpell": "Dla zaklęcia niewymagającego rzutu obronnego, niebędącego atakiem",
-        "saveSpell": "Dla zaklęcia wymagającego rzutu obronnego, niebędącego atakiem",
-        "allSpells": "Dla wszystkich zaklęć"
+        "saveSpell": "Dla zaklęcia wymagającego rzutu obronnego, niebędącego atakiem"
       },
       "callHotbarMacro": {
         "hint": "Wywołanie makra paska skrótów na stronie {page} pozycja {column}",

@@ -233,8 +233,7 @@
                 "nonSaveSpell": "所有非攻击非豁免法术",
                 "saveSpell": "所有非攻击的豁免法术",
                 "no": "否",
-                "anySpell": "所有非攻击法术",
-                "allSpells": "所有法术"
+                "anySpell": "所有非攻击法术"
             },
             "autoRollDamageForStrike": {
                 "hint": "客户端设置打击命中时是否自动掷伤害骰。注意，重击时会骰重击的伤害骰。",
