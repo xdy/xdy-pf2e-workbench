@@ -76,7 +76,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
 
             const rollForAllSpells =
                 game.settings.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") === "allSpells" &&
-                (rollForNonSpellAttack ||
+                (rollForNonAttackSpell ||
                     rollForNonAttackSaveSpell ||
                     rollForNonAttackNonSaveSpell ||
                     rollForAttackSpell);
