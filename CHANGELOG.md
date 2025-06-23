@@ -1,3 +1,11 @@
+## [6.26.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.26.2...v6.26.3) (2025-06-23)
+
+
+### Bug Fixes
+
+* Removing the setting to center pause image (already default in v13) and move text above the image (not possible in v13 it seems.) ([00bc5fd](https://github.com/xdy/xdy-pf2e-workbench/commit/00bc5fd51e41270f49cbd6f93fa8828761a28562))
+* Stop breaking the npc mystification button on the token hud... ([14666d9](https://github.com/xdy/xdy-pf2e-workbench/commit/14666d934422078893dbc92cd0fe2e4d2b03d8c0))
+
 ## [6.26.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.26.1...v6.26.2) (2025-06-13)
 
 
