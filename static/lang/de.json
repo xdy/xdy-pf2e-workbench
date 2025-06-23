@@ -276,10 +276,6 @@
         "hint": "Eigenen Text für den Pausentext nutzen. Leer lassen um das Standard-Text 'Game Paused' zu nutzen.",
         "name": "Eigenen Text für den Pausentext nutzen."
       },
-      "customPauseRelocation": {
-        "hint": "Pausenbild in die Mitte des Bildschirm verschieben, mit dem Text darüber.",
-        "name": "Pausenbild zentrieren, mit dem Text darüber."
-      },
       "autoRollDamageNotifyOnSpellCardNotFound": {
         "name": "Benachrichtigen wenn ein Zauberangriff gewürfelt wird und keine Zauberkarte für den Schaden gefunden wurde.",
         "hint": "Client Einstellung zum benachrichtigen wenn ein Zauberangriff gewürfelt wird und keine Zauberkarte für den Schaden gefunden wurde."

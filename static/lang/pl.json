@@ -643,10 +643,6 @@
         "hint": "Zaznacz, aby ukryć przypomnienie przed graczami.",
         "name": "... ale ukryj ikonę przed graczami."
       },
-      "customPauseRelocation": {
-        "hint": "Umieść obraz pauzy na środku ekranu, a nad nim tekst.",
-        "name": "Wyśrodkuj obraz pauzy z tekstem nad nim."
-      },
       "heroPointHandlerDefaultTimeoutMinutes": {
         "name": "... przez tyle minut, aż otworzy się okno dialogowe Obsługi Punktów Bohaterstwa.",
         "hint": "Ustaw domyślną (i maksymalną) liczbę minut do następnego otwarcia obsługi Punktów Bohaterstwa."

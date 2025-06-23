@@ -296,15 +296,6 @@ export function changePauseText() {
         style.setProperty("--xdy-pf2e-workbench-pause", url);
     }
 
-    if (game.settings.get(MODULENAME, "customPauseRelocation")) {
-        style.setProperty("--xdy-pf2e-workbench-pause-bottom", "calc(50% - 64px)");
-        style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "-100%");
-        style.setProperty("--xdy-pf2e-workbench-pause-background", "");
-    } else {
-        style.setProperty("--xdy-pf2e-workbench-pause-bottom", "10%");
-        style.setProperty("--xdy-pf2e-workbench-pause-figcaption-top", "0%");
-    }
-
     if (phase >= Phase.READY) {
         const element = document.querySelector<HTMLElement>("#pause > figcaption");
         const pauseImage = document.querySelector("#pause > img");

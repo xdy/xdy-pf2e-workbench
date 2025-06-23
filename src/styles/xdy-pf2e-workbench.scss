@@ -2,13 +2,11 @@
 
 :root {
     --xdy-pf2e-workbench-pause: "";
-    --xdy-pf2e-workbench-pause-background: "initial";
     --xdy-pf2e-workbench-pause-bottom: 10%;
     --xdy-pf2e-workbench-pause-figcaption-top: 0%;
 }
 
 #pause {
-    background: var(--xdy-pf2e-workbench-pause-background);
     bottom: var(--xdy-pf2e-workbench-pause-bottom);
 }
 

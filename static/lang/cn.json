@@ -371,10 +371,6 @@
                 "name": "使用精英/弱化状态",
                 "hint": "勾选此项，神秘化名称使用精英/弱化。"
             },
-            "customPauseRelocation": {
-                "hint": "将暂停图标放置在屏幕正中央，提示信息放在图标上方。",
-                "name": "将暂停图标放置在屏幕中央，提示信息放在图标上方。"
-            },
             "reminderCannotAttack": {
                 "dead": "已死亡",
                 "defeated": "已被击败",

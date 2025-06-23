@@ -495,10 +495,6 @@
         "name": "Ctrl+clic en \"Lanzar\" para lanzar en privado.",
         "aSpell": "Un conjuro"
       },
-      "customPauseRelocation": {
-        "name": "Centrar imagen de pausa con texto encima.",
-        "hint": "Coloque la imagen de pausa en el medio de la pantalla, con el texto encima."
-      },
       "enableAutomaticMove": {
         "noAutomation": "Nunca",
         "hint": "Seleccione para habilitar la configuración de la iniciativa del combatiente fuera de su propio turno justo antes del combatiente actual, normalmente porque el combatiente actual ha matado al combatiente seleccionado. Debido al redondeo, varios combatientes pueden mostrar la misma iniciativa en la lista.",

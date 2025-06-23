@@ -167,16 +167,6 @@ export function registerWorkbenchSettings() {
         onChange: () => updateHooks(),
     });
 
-    game.settings.register(MODULENAME, "customPauseRelocation", {
-        name: `${MODULENAME}.SETTINGS.customPauseRelocation.name`,
-        hint: `${MODULENAME}.SETTINGS.customPauseRelocation.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-        onChange: () => updateHooks(),
-    });
-
     game.settings.register(MODULENAME, "pauseImageNoSpin", {
         name: `${MODULENAME}.SETTINGS.pauseImageNoSpin.name`,
         hint: `${MODULENAME}.SETTINGS.pauseImageNoSpin.hint`,
