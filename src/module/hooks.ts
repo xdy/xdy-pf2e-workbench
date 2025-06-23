@@ -371,6 +371,8 @@ export function renderTokenHUDHook(_app: TokenDocumentPF2e, q: JQuery | HTMLElem
         // v12 remove later
         // @ts-expect-error
         html = q.get(0);
+    } else {
+        html = q;
     }
 
     if (html && game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
