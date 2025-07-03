@@ -1,3 +1,11 @@
+## [6.26.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.26.3...v6.26.4) (2025-07-03)
+
+
+### Bug Fixes
+
+* 'Fix' macro keybind setting descriptions by removing localization. I.e. it's english only, but at least the column and page is visible now. ([ee9b238](https://github.com/xdy/xdy-pf2e-workbench/commit/ee9b2381cd001cc2e5c397eaf25c4623dac52643))
+* Mystify should work from hud again. ([ff74b32](https://github.com/xdy/xdy-pf2e-workbench/commit/ff74b32045ef34de27791f4d9926de47c9001333))
+
 ## [6.26.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.26.2...v6.26.3) (2025-06-23)
 
 
