@@ -124,10 +124,6 @@
         "hint": "Réglage du client pour notifier lorsqu'une attaque de sort est lancée et qu'aucune carte de sort n'a été trouvée pour lancer les dégâts.",
         "name": "Notifier lorsqu'une attaque de sort est lancée et qu'aucune carte de sort n'est trouvée."
       },
-      "callHotbarMacro": {
-        "hint": "Appeler la barre de macro sur la page {page} en {column}e position",
-        "name": "Appeler la barre des macros sur la page {page} en {column}e position"
-      },
       "castPrivateSpell": {
         "hint": "Cliquez pour activer qu'au Lancement du sort, sur un Ctrl+clic, cela envoie un message discret au lanceur et au MJ.",
         "name": "Ctrl+clic pour Lancer un sort en privé.",

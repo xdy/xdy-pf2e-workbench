@@ -132,8 +132,8 @@ export function registerWorkbenchKeybindings() {
     for (let page = 1; page <= 5; page++) {
         for (let column = 1; column <= 10; column++) {
             keybindings.register(MODULENAME, `callHotbarPage${page}Macro${column}`, {
-                name: game.i18n.format(`${MODULENAME}.SETTINGS.callHotbarMacro.name`, { page: page, column: column }),
-                hint: game.i18n.format(`${MODULENAME}.SETTINGS.callHotbarMacro.hint`, { page: page, column: column }),
+                name: `Call hotbar macro on page ${page} position ${column}`,
+                hint: `Call hotbar macro on page ${page} position ${column}`,
                 restricted: false,
                 onDown: () => {
                     game.user?.getHotbarMacros(page)?.[column - 1]["macro"].execute();

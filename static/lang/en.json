@@ -329,10 +329,6 @@
         "hint": "Client setting to notify when a spell attack is rolled and no spell card was found to roll damage for.",
         "name": "Notify when a spell attack is rolled and no spell card was found."
       },
-      "callHotbarMacro": {
-        "hint": "Call hotbar macro on page {page} position {column}",
-        "name": "Call hotbar macro on page {page} position {column}"
-      },
       "handleDyingRecoveryRollAllow": {
         "all": "All",
         "gm": "GM",
