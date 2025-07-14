@@ -5,7 +5,9 @@ import fs from "fs-extra";
 import checker from "vite-plugin-checker";
 
 const EN_JSON = JSON.parse(fs.readFileSync("./static/lang/en.json", { encoding: "utf-8" }));
-const plugins = [checker({ typescript: true }), tsconfigPaths(),
+const plugins = [
+    checker({ typescript: true }),
+    tsconfigPaths(),
     ...viteStaticCopy({
         targets: [
             { src: "CHANGELOG.md", dest: "." },

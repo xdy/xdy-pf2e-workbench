@@ -24,7 +24,7 @@ break any relevant (or irrelevant) law...
 
 ## To contribute translations
 To help translate an existing language, or to add support for a new language, do one of the following:
-* Use the Workbench [weblate]([https://gitlocalize.com/repo/7104](https://weblate.foundryvtt-hub.com/projects/xdy-pf2e-workbench/)) to translate the project into your language. [See their instructions]([https://docs.gitlocalize.com/how_to_contribute.html](https://weblate.foundryvtt-hub.com/)) or for a new language, ask for it to be added on the discord so you can translate it on gitlocalize.
+* Use the Pf2e Workbench [gitlocalize]([https://gitlocalize.com/repo/7104](https://weblate.foundryvtt-hub.com/projects/xdy-pf2e-workbench/)) to translate the project into your language. [See their instructions]([https://docs.gitlocalize.com/how_to_contribute.html](https://weblate.foundryvtt-hub.com/)) or for a new language, ask for it to be added on the discord so you can translate it on gitlocalize.
 * Send me a completed translation file for your language and ask me to add it to the system (e.g. by copying en.json to xx.json (replacing xx with the language code of the language you want to translate to), and translating only the text to the right of the colon for each line)
 * If you are comfortable with Github, after translating, instead of just sending the file, make a Pull Request, making sure to also add your system to "languages" in system.json before you do the Pull Request. (See below for instructions).
 
@@ -59,7 +59,7 @@ Or, if you prefer to do it as a separate module, make sure to ping me so I can l
 1. Do the following each time you have updated your fork and want to test your code:
 1. Builds the prerequisites
    `npm install`
-1. Runs the system in 'developer mode', watching for changes in the code as they happen
+1. Runs the module in 'developer mode', watching for changes in the code as they happen
    `npm run build:dev`
 
 ## Coding conventions

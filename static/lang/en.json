@@ -738,7 +738,7 @@
         "name": "Enable to alter token movement animation."
       },
       "tokenAnimationSpeed": {
-        "hint": "Change to alter token movement animation speed.",
+        "hint": "Change to alter token movement animation speed (default is 6).",
         "name": "Change to alter token movement animation speed."
       },
       "workbenchVersion": {

@@ -35,7 +35,7 @@ If applicable, add screenshots to help explain your problem.
 - OS and browser: [e.g. 'Windows 10' or 'Ubuntu 20.04']
 - How you run Foundry [e.g. 'Foundry client' or 'Chrome']
 - Foundry version [e.g. 0.8.8]
-- System and version [e.g. Twodsix, 0.8.10]
+- System and version [e.g. Pf2e, 0.8.10]
 - Module version [e.g. 0.0.1]
 - Other installed modules [e.g. None]
 
