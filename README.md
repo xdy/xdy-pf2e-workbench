@@ -170,7 +170,7 @@ HOOKS (for other modules to use):
       to help players having problems with targeting.
 
 * Assorted other features
-    * The latest versions of all V12-compatible macros
+    * The latest versions of all V13-compatible macros
       from https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e are included in each Workbench release.
       They can be found in the compendium "Symon-provided macros (asymonous-benefactor-macros)", with the express
       permission of said asymonous^H^H^H^H^H^H^H^H^Hanonymous (and colorless) benefactor. What documentation exists
