@@ -1,3 +1,10 @@
+# [6.27.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.26.4...v6.27.0) (2025-07-29)
+
+
+### Features
+
+* Customizable macros and the internal utility macros have been removed from the module for now. (They can still be found here if needed: https://github.com/xdy/xdy-pf2e-workbench/tree/main/src/packs/data/xdy-customizable-macros and https://github.com/xdy/xdy-pf2e-workbench/tree/main/src/packs/data/xdy-internal-utility-macros). ([8aa51ca](https://github.com/xdy/xdy-pf2e-workbench/commit/8aa51cac6daa61350da564b7191bd94ed0bf56be))
+
 ## [6.26.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.26.3...v6.26.4) (2025-07-03)
 
 
