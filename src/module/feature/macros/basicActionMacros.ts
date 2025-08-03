@@ -722,12 +722,14 @@ export async function basicActionMacros() {
         return actionDialog.close();
     }
 
+    
     const controlled = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
-    if (controlled.length === 0 && game.user.character) controlled.push(game.user.character);
-    const selectedActor = controlled[0];
+    controlled.push(game.user.character);
 
     const supportedActorTypes = ["character", "npc", "familiar"];
-    if (!selectedActor || !supportedActorTypes.includes(selectedActor.type)) {
+    const selectedActor = controlled.filter((actor) => supportedActorTypes.includes(actor.type))[0];
+
+    if (!selectedActor) {
         return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
     }
 
