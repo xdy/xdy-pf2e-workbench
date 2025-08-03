@@ -13,6 +13,7 @@ import {
     PhysicalItemPF2e,
     TokenDocumentPF2e,
     UserPF2e,
+    ResourceData,
 } from "foundry-pf2e";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
 import { actionsReminder, autoReduceStunned, reminderTargeting } from "./feature/reminders/index.js";
@@ -156,6 +157,12 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
         if (["expandedAll", "expandedNew", "expandedNewest"].includes(expandDamageRolls)) {
             damageCardExpand(message, html, expandDamageRolls);
         }
+
+        // Check if we need to handle private spells
+        const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
+        if (castPrivateSpellEnabled && message?.flags?.pf2e?.origin?.type === "spell") {
+            hideSpellNameInDamageroll(message, html);
+        }
     } else {
         // Get settings
         const collapseItemContent = String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent"));
@@ -167,43 +174,22 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
         );
 
         // Check if we need to do any collapsing
-        const needsCollapsing =
-            collapseItemContent === "collapsedDefault" ||
-            collapseItemContent === "nonCollapsedDefault" ||
-            collapseItemAttackContent === "collapsedDefault" ||
-            collapseItemAttackContent === "nonCollapsedDefault" ||
-            collapseItemActionContent === "collapsedDefault" ||
-            collapseItemActionContent === "nonCollapsedDefault";
-
-        if (!needsCollapsing) return;
+        const needsCollapsing = (setting: string): boolean =>
+            setting === "collapsedDefault" || setting === "nonCollapsedDefault";
 
         // Only process if needed
-        if (collapseItemContent === "collapsedDefault" || collapseItemContent === "nonCollapsedDefault") {
+        if (needsCollapsing(collapseItemContent)) {
             chatCardDescriptionCollapse(html);
         }
 
         const itemType = message.item?.type ?? "";
-        if (
-            (collapseItemAttackContent === "collapsedDefault" || collapseItemAttackContent === "nonCollapsedDefault") &&
-            ["weapon", "melee", "spell"].includes(itemType)
-        ) {
+        if (needsCollapsing(collapseItemAttackContent) && ["weapon", "melee", "spell"].includes(itemType)) {
             chatAttackCardDescriptionCollapse(html);
         }
 
-        if (
-            ((collapseItemActionContent === "collapsedDefault" ||
-                collapseItemActionContent === "nonCollapsedDefault") &&
-                !message.item) ||
-            itemType === "action"
-        ) {
+        if (needsCollapsing(collapseItemActionContent) && (itemType === "action" || !message.item)) {
             chatActionCardDescriptionCollapse(html);
         }
-    }
-
-    // Check if we need to handle private spells
-    const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
-    if (castPrivateSpellEnabled && message?.flags?.pf2e?.origin?.type === "spell" && isDamageRoll) {
-        hideSpellNameInDamageroll(message, html);
     }
 
     // Check if we need to handle hero point rules
@@ -433,10 +419,12 @@ export async function createTokenHook(token: TokenDocumentPF2e, ..._args) {
 export function pf2eRerollHook(
     oldRoll: Rolled<CheckRoll>,
     newRoll: Rolled<CheckRoll>,
-    heroPoint: boolean,
-    keep: "new" | "higher" | "lower",
+    resource: ResourceData | boolean,
+    keep: "new" | "higher" | "lower" = "new",
 ) {
-    if (!heroPoint || keep !== "new") return;
+    // For compat with older system, where resource:ResourceData was heroPoint:boolean
+    const heroPoints = typeof resource === "boolean" ? resource : resource.slug === "hero-points";
+    if (!heroPoints || keep !== "new") return;
 
     // @ts-ignore
     const die = newRoll.dice.find((d) => d instanceof foundry.dice.terms.Die && d.number === 1 && d.faces === 20);
