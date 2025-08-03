@@ -729,8 +729,9 @@ export async function basicActionMacros() {
         return actionDialog.close();
     }
 
-    
+
     const controlled = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
+    // @ts-ignore
     controlled.push(game.user.character);
 
     const supportedActorTypes = ["character", "npc", "familiar"];
