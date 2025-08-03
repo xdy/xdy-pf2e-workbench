@@ -23,7 +23,7 @@
   },
   "license": "./LICENSE",
   "engines": {
-    "node": ">=20.15.0"
+    "node": ">=20.15.0 <22.0.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.9",
