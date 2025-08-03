@@ -1,3 +1,10 @@
+## [6.27.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.27.1...v6.27.2) (2025-08-03)
+
+
+### Bug Fixes
+
+* Ran lint ([94e8930](https://github.com/xdy/xdy-pf2e-workbench/commit/94e89302da51eba36bdbf522b45db865b4059c32))
+
 ## [6.27.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.27.0...v6.27.1) (2025-08-03)
 
 
