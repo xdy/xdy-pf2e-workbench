@@ -59,7 +59,6 @@ export function enableNpcRollerButton(_app: unknown, html: JQuery | HTMLElement)
         if (footer.length > 0) {
             footer.append(button);
         }
-
     }
 }
 

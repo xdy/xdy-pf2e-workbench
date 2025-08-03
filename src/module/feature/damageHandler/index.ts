@@ -117,8 +117,7 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
     }
 
     // Check if we need to do a flat check at all
-    const actorFlat =
-        message.actor?.itemTypes.condition.filter((x) => ["blinded", "dazzled"].includes(x.slug)) ?? [];
+    const actorFlat = message.actor?.itemTypes.condition.filter((x) => ["blinded", "dazzled"].includes(x.slug)) ?? [];
     const targetFlat =
         message.target?.actor?.itemTypes.condition.filter((x) =>
             ["concealed", "hidden", "invisible", "undetected"].includes(x.slug),
@@ -157,9 +156,7 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
         const searchLimit = Math.min(5, array.length - messageIndex);
         const recentMessages = array.slice(messageIndex, messageIndex + searchLimit);
 
-        rollDamage = !recentMessages.some(msg =>
-            msg.content.includes("dice-result flat-check-failure"),
-        );
+        rollDamage = !recentMessages.some((msg) => msg.content.includes("dice-result flat-check-failure"));
 
         // Store in cache for future lookups
         flatCheckResultCache.set(cacheKey, rollDamage);
@@ -181,8 +178,8 @@ export function persistentDamageHealing(message: ChatMessagePF2e): void {
     } else if (
         rolls.some((r) => r.kinds.has("healing")) &&
         (message.flavor?.includes(
-                game.i18n.localize("PF2E.Encounter.Broadcast.FastHealing.fast-healing.ReceivedMessage"),
-            ) ||
+            game.i18n.localize("PF2E.Encounter.Broadcast.FastHealing.fast-healing.ReceivedMessage"),
+        ) ||
             message.flavor?.includes(
                 game.i18n.localize("PF2E.Encounter.Broadcast.FastHealing.regeneration.ReceivedMessage"),
             ))

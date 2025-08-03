@@ -169,7 +169,6 @@ export async function hypercognition(token: TokenPF2e) {
         if (bestResult && d20Roll !== null) {
             switch (bestResult) {
                 case "CrSuc":
-                    // eslint-disable-next-line no-plusplus
                     results.criticalSuccess.count++;
                     // @ts-ignore
                     results.criticalSuccess.rolls.push(d20Roll);

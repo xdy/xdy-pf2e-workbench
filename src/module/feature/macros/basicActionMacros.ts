@@ -729,7 +729,6 @@ export async function basicActionMacros() {
         return actionDialog.close();
     }
 
-
     const controlled = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
     // @ts-ignore
     controlled.push(game.user.character);
@@ -744,10 +743,10 @@ export async function basicActionMacros() {
     const actionsToUse = prepareActions(selectedActor, bamActions);
 
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-        .map((actor) => actor.actor)
-        .filter((actor) => {
-            return supportedActorTypes.includes(actor?.type ?? "unknown");
-        }) || [];
+            .map((actor) => actor.actor)
+            .filter((actor) => {
+                return supportedActorTypes.includes(actor?.type ?? "unknown");
+            }) || [];
 
     const party = game.actors?.party?.members || [];
     const partyIds = party.map((actor) => actor?.id) || [];

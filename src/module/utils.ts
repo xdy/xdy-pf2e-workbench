@@ -17,7 +17,7 @@ function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
     const flags = <ActorFlagsPF2e>message.flags.pf2e;
     let degreeOfSuccess = <string>flags.context?.outcome ?? "";
     if (flags?.context?.isReroll) {
-        const match = message.flavor?.match("Result: <span .*? class=\"(.*?)\"");
+        const match = message.flavor?.match('Result: <span .*? class="(.*?)"');
         if (match && match[1]) {
             degreeOfSuccess = match[1];
         }
@@ -130,7 +130,7 @@ export function pushNotification(message: any, type: string = "info") {
 
 export function unflatten(object) {
     const result = {};
-    Object.keys(object).forEach(function(k) {
+    Object.keys(object).forEach(function (k) {
         setValue(result, k, object[k]);
     });
     return result;
@@ -140,7 +140,7 @@ export function setValue(object, path, value) {
     const split = path.split(".");
     const top = split.pop();
 
-    split.reduce(function(o, k, i, kk) {
+    split.reduce(function (o, k, i, kk) {
         return (o[k] = o[k] || (isFinite(i + 1 in kk ? kk[i + 1] : top) ? [] : {}));
     }, object)[top] = value;
 }
@@ -204,10 +204,10 @@ export async function housepatcher(housepatcher) {
 
 export function minionsInCurrentScene(actor: ActorPF2e): ActorPF2e[] {
     return actor.isOfType("character") ? <ActorPF2e[]>game.scenes.current?.tokens
-        ?.filter(() => !game.user.isGM)
-        ?.filter((token) => token.canUserModify(<BaseUser>(<unknown>game.user), "update"))
-        ?.map((token) => token.actor)
-        ?.filter((x) => x?.traits.has("minion")) : [];
+              ?.filter(() => !game.user.isGM)
+              ?.filter((token) => token.canUserModify(<BaseUser>(<unknown>game.user), "update"))
+              ?.map((token) => token.actor)
+              ?.filter((x) => x?.traits.has("minion")) : [];
 }
 
 export function setFlag(doc, flag, value) {
@@ -228,7 +228,6 @@ export function heroes() {
     );
 }
 
-
 // Functions copied from C:\Users\jk\foundryvtt\forks\pf2e\build\lib\foundry-utils.ts
 // Not sure why I can't use directly.
 
@@ -241,4 +240,3 @@ export function heroes() {
 export function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
     return (typeof key === "string" || typeof key === "number") && key in obj;
 }
-

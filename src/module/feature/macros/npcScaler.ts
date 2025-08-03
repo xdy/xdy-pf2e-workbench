@@ -18,7 +18,7 @@ export async function npcScaler() {
 
     await foundry.applications.api.DialogV2.wait({
         window: {
-            title: "Scale NPC"
+            title: "Scale NPC",
         },
         content:
             `<p>Scale a creature to a range of levels, creating the creature at each level in the range. The min level must be less than or ` +
@@ -27,7 +27,7 @@ export async function npcScaler() {
             `<div class="form-group"><label>Max Level</label><input id="endLevel" name="endLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>`,
         buttons: [
             {
-                icon: "<i class=\"fa-solid fa-level-up-alt\"></i>",
+                icon: '<i class="fa-solid fa-level-up-alt"></i>',
                 label: "Scale",
                 action: "scale",
                 default: true,
