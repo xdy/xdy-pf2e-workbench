@@ -1,3 +1,16 @@
+## [6.27.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.27.0...v6.27.1) (2025-08-03)
+
+
+### Bug Fixes
+
+* 'Fix' build by adding a ts-ignore ([28efc7c](https://github.com/xdy/xdy-pf2e-workbench/commit/28efc7c220d9180e0f544a22c967e8e2b2f28ccf))
+* Reverts build change (bringing back compendiums removed in previous version) and enforces that node must be less than 22 when building (node 22 gets this error: "ModuleError: Iterator is not open: cannot call all() after close()") ([508a0d3](https://github.com/xdy/xdy-pf2e-workbench/commit/508a0d3fad58bf1135b2ddf0a1d71c7282ce0f4c))
+
+
+### Reverts
+
+* Revert "feat: Customizable macros and the internal utility macros have been removed from the module for now. (They can still be found here if needed: https://github.com/xdy/xdy-pf2e-workbench/tree/main/src/packs/data/xdy-customizable-macros and https://github.com/xdy/xdy-pf2e-workbench/tree/main/src/packs/data/xdy-internal-utility-macros)." ([a84b2ba](https://github.com/xdy/xdy-pf2e-workbench/commit/a84b2baf7b79e747fe5481e0bfa74c308f1050e9))
+
 # [6.27.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.26.4...v6.27.0) (2025-07-29)
 
 
