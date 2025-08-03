@@ -264,6 +264,13 @@ export async function basicActionMacros() {
         },
         {
             actionType: "other",
+            name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidToggle`),
+            skill: "",
+            action: new MacroActionVariant("macroEffectAid", "xdy-pf2e-workbench.xdy-internal-utility-macros"),
+            icon: "systems/pf2e/icons/spells/efficient-apport.webp",
+        },
+        {
+            actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidASE`),
             skill: "",
             action: new MacroActionVariant("Aid", "pf2e-action-support-engine-macros.action-support-engine-macros"),
