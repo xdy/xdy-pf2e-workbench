@@ -1,3 +1,10 @@
+## [6.27.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.27.3...v6.27.4) (2025-08-04)
+
+
+### Bug Fixes
+
+* Fix Basic Action Macros for gms (who don't have a set character). ([c1c4357](https://github.com/xdy/xdy-pf2e-workbench/commit/c1c4357813b773e29d2d109c88c6971753da5e38))
+
 ## [6.27.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.27.2...v6.27.3) (2025-08-04)
 
 
