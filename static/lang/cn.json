@@ -244,10 +244,6 @@
                 "name": "当法术攻击检定后但无法找到法术卡时通知我。",
                 "hint": "客户端设置当进行了法术攻击检定但无法找到可掷伤害骰的法术卡时如何通知。"
             },
-            "callHotbarMacro": {
-                "hint": "呼出快捷键页码{page}上第{column}个宏",
-                "name": "呼出快捷键页码{page}上第{column}个宏"
-            },
             "castPrivateSpell": {
                 "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息。",
                 "name": "Ctrl+单击秘密施法。",
@@ -391,7 +387,7 @@
                 "name": "启用以更改指示物移动动画。"
             },
             "tokenAnimationSpeed": {
-                "hint": "更改此项，调整指示物移动动画速度。",
+                "hint": "更改此项，调整指示物移动动画速度（默认为6）。",
                 "name": "更改此项，调整指示物移动动画速度。"
             },
             "autoCollapseItemActionChatCardContent": {
