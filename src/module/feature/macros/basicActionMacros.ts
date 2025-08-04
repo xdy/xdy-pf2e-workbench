@@ -730,8 +730,9 @@ export async function basicActionMacros() {
     }
 
     const controlled = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
-    // @ts-ignore
-    controlled.push(game.user.character);
+    if (game.user.character) {
+        controlled.push(game.user.character);
+    }
 
     const supportedActorTypes = ["character", "npc", "familiar"];
     const selectedActor = controlled.filter((actor) => supportedActorTypes.includes(actor.type))[0];
