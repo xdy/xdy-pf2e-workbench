@@ -47,7 +47,7 @@ import {
 } from "./feature/heroPointHandler/index.js";
 import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js";
 import { doMystificationFromToken } from "./feature/tokenMystificationHandler/index.js";
-import { noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.js";
+import { autoRollDamage, noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.js";
 import { registerWorkbenchSettings } from "./settings/index.js";
 import { SettingsMenuPF2eWorkbench } from "./settings/menu.js";
 import { toggleMenuSettings } from "./feature/settingsHandler/index.js";
@@ -410,6 +410,7 @@ Hooks.once("ready", () => {
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
         getAllFromAllowedPacks: getAllFromAllowedPacks, // await game.PF2eWorkbench.getAllFromAllowedPacks({ type, fields, filter, strictSourcing, fetch})
         npcScaler: npcScaler, // await game.PF2eWorkbench.npcScaler()
+        autoRollDamage: autoRollDamage, // await await game.PF2eWorkbench.autoRollDamage(message)
     };
 
     if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
