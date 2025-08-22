@@ -17,7 +17,14 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
         autoRollDamageForSpellWhenNotAnAttack: game.settings.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack"),
     };
 
+    const shouldAutoRollDamage =
+        settings.autoRollDamageAllow &&
+        (settings.autoRollDamageForStrike ||
+            settings.autoRollDamageForSpellAttack ||
+            settings.autoRollDamageForSpellWhenNotAnAttack !== "no");
+
     if (
+        shouldAutoRollDamage &&
         shouldIHandleThisMessage(
             message,
             ["all", "players"].includes(settings.autoRollDamageAllow),
