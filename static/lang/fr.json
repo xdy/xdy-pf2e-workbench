@@ -404,7 +404,7 @@
         "secondPartNoRk": ".<br>Vous pouvez essayer d'utiliser @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, lors de votre tour, dépensez une action pour tenter de l'identifier (demandez à votre MJ les détails).",
         "secondPartRK": ".<br>Vous pouvez essayer d'utiliser soit @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln], soit @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, à votre tour, dépensez une action pour tenter de l'identifier avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (ou en passant 10 minutes avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
         "spell": "Sort",
-        "they": "Ils",
+        "they": "On",
         "knownBy": "<div><p><b>Connu par : </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
       },
       "castPrivateSpellWithPublicMessageShowToGM": {
