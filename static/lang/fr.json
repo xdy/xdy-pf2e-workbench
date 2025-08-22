@@ -7,7 +7,7 @@
       "nav-labels": {
         "strike": "Frappes",
         "damage": "Dégâts",
-        "ac": "Classe d’Armure",
+        "ac": "Classe d'Armure",
         "save": "Jet de Sauvegarde",
         "hp": "Points de Vie",
         "spell": "Sort",
@@ -228,7 +228,7 @@
         "addOneForCharacters": "Ajouter 1, pour les personnages + familiers",
         "addWoundedLevel": "Ajouter 1 + niveau Blessé, pour tous",
         "addWoundedLevelForCharacters": "Ajouter 1 + niveau Blessé, pour les personnages + familiers",
-        "deliberateDeathMessage": "{name} peut <b>avant d'être mourant en jeu</b> du fait d'une attaque ou d'une capacité d'une autre créature, si cette créature est à portée d'attaque au corps-à-corps, porter une Frappe au corps-à-corps contre la créature déclencheuse.<br>Supprimer l'effet 'Mort délivéré utilisée' si il ne peut pas être actuellement utilisé.",
+        "deliberateDeathMessage": "{name} peut <b>avant d'être mourant en jeu</b> du fait d'une attaque ou d'une capacité d'une autre créature, si cette créature est à portée d'attaque au corps-à-corps, porter une Frappe au corps-à-corps contre la créature déclencheuse.<br>Supprimer l'effet 'Mort délibérée utilisée' si il ne peut pas être actuellement utilisé.",
         "hint": "Réglage pour automatiquement augmenter mourant à 0 PV.",
         "name": "Automatiquement augmenter Mourant à 0 PV.",
         "no": "Non",
@@ -340,7 +340,7 @@
       "handleDyingRecoveryRoll": {
         "hint": "Paramètre du client permettant de traiter automatiquement les résultats des tests de récupération après avoir cliqué sur le bouton de récupération.",
         "name": "Automatiser le traitement des tests de récupération après avoir cliqué sur le bouton récupération.",
-        "handled": "Jet de récupération {roll} {outcome} géré automatiquement. {défeated}.",
+        "handled": "Jet de récupération {roll} {outcome} géré automatiquement. {defeated}.",
         "defeated": "{name} a été vaincu"
       },
       "playerFeatsPrerequisiteHint": {
@@ -400,7 +400,7 @@
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
         "basic": "Basique",
         "noButtonSavePart": "<br><b>jet de {dataSave} {basic}</b>",
-        "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type :{dataSave}|dc :{dataDC}|traits :{traits}{basic}]",
+        "savePart": "<br>Le jet de sauvegarde du sort inconnu est : @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}{basic}]",
         "secondPartNoRk": ".<br>Vous pouvez essayer d'utiliser @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] ou @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, lors de votre tour, dépensez une action pour tenter de l'identifier (demandez à votre MJ les détails).",
         "secondPartRK": ".<br>Vous pouvez essayer d'utiliser soit @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln], soit @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] pour le reconnaître. Ou, à votre tour, dépensez une action pour tenter de l'identifier avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (ou en passant 10 minutes avec un test de @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G] )",
         "spell": "Sort",
