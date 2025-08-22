@@ -110,20 +110,8 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
     const isDamage = isDamageRoll || isDamageTaken(message);
 
     if (!isDamage) {
-        // Check if we need to auto roll damage
-        const autoRollDamageAllow = game.settings.get(MODULENAME, "autoRollDamageAllow");
-        const autoRollDamageForStrike = game.settings.get(MODULENAME, "autoRollDamageForStrike");
-        const autoRollDamageForSpellAttack = game.settings.get(MODULENAME, "autoRollDamageForSpellAttack");
-        const autoRollDamageForSpellWhenNotAnAttack = game.settings.get(
-            MODULENAME,
-            "autoRollDamageForSpellWhenNotAnAttack",
-        );
-
-        const shouldAutoRollDamage =
-            autoRollDamageAllow &&
-            (autoRollDamageForStrike || autoRollDamageForSpellAttack || autoRollDamageForSpellWhenNotAnAttack !== "no");
-
-        if (shouldAutoRollDamage) {
+        const skipAutoRoll = message.getFlag(MODULENAME, "noAutoDamageRoll");
+        if (!skipAutoRoll) {
             autoRollDamage(message).then();
         }
 
