@@ -151,6 +151,7 @@ of each can be found below:
         mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
         getAllFromAllowedPacks: getAllFromAllowedPacks, // await game.PF2eWorkbench.getAllFromAllowedPacks({ type, fields, filter, strictSourcing, fetch})        
         npcScaler: npcScaler, // await game.PF2eWorkbench.npcScaler()
+        autoRollDamage: autoRollDamage, // await game.PF2eWorkbench.autoRollDamage
 ```
 
 HOOKS (for other modules to use):
@@ -158,6 +159,9 @@ HOOKS (for other modules to use):
 * `xdy-pf2e-workbench.moduleReady`: Triggered when the Workbench is Ready (i.e. has processed the 'ready' hook once.)
 * `xdy-pf2e-workbench.tokenCreateMystification`: Triggered when a token is being created and is going to be mystified.
   If a module returns `false` the token's name will not by mystified.
+
+FLAGS (for other modules to use):
+`xdy-pf2e-workbench.noAutoDamageRoll` can be added to messages by macros or other other modules to turn off the auto damage roll for that message. Can be set when the message is created (for macros) or in the preCreate/create message hooks.
 
 
 * New Keybinds in Configure Controls
