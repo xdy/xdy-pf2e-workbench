@@ -1,3 +1,10 @@
+# [6.28.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.27.6...v6.28.0) (2025-08-24)
+
+
+### Features
+
+* Message flag to skip damage rolls and expose autoRollDamage ([3a946fc](https://github.com/xdy/xdy-pf2e-workbench/commit/3a946fc99b8655ac4d74321e37eb55e89c9b1c96))
+
 ## [6.27.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.27.5...v6.27.6) (2025-08-14)
 
 
