@@ -208,7 +208,7 @@
       },
       "sheatheHeldItemsAfterEncounter": {
         "hint": "Les personnages rengainent automatiquement les armes qu'ils tiennent après les rencontres.",
-        "name": "Les personnages dégainent automatiquement les armes qu'ils tiennent après les rencontres.",
+        "name": "Les personnages rengainent automatiquement les armes qu'ils tiennent après les rencontres.",
         "message": "{name} rengaine : {items}"
       },
       "sheatheHeldItemsAfterEncounterTypes": {
