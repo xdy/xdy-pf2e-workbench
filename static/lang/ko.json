@@ -318,7 +318,7 @@
         "no": "아니요",
         "anySpell": "모든 비공격 주문",
         "saveSpell": "비공격 내성 주문",
-        "nonSaveSpell": "비공격 비내성 주문",
+        "nonSaveSpell": "비공격 비내성 주문"
       },
       "autoRollDamageForStrike": {
         "hint": "공격이 성공할 때 피해를 자동으로 굴리는 클라이언트 설정입니다. 치명적 타격은 치명적 피해를 굴립니다.",
