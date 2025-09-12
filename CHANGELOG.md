@@ -1,3 +1,10 @@
+## [6.29.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.29.0...v6.29.1) (2025-09-12)
+
+
+### Bug Fixes
+
+* Oops. Forgot to check json. ([94ec722](https://github.com/xdy/xdy-pf2e-workbench/commit/94ec722669c7c62bd4fb7e70b98454d14047fc46))
+
 # [6.29.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.28.1...v6.29.0) (2025-09-12)
 
 
