@@ -1,3 +1,10 @@
+# [6.29.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.28.1...v6.29.0) (2025-09-12)
+
+
+### Features
+
+* Add korean translation, courtesy of Rutz179 ([b07d134](https://github.com/xdy/xdy-pf2e-workbench/commit/b07d134de0781cbcfc593de91c89abf596ff3b25))
+
 ## [6.28.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.28.0...v6.28.1) (2025-09-02)
 
 
