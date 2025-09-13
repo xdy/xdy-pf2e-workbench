@@ -85,7 +85,7 @@ function fetchSkills(actor: ActorPF2e): Partial<Record<StatisticSlug, Statistic>
 
 type ButtonData = {
     action: MacroAction;
-    skill: Statistic | undefined;
+    rank: number;
     bonus?: number;
     best: boolean;
     idx: number;
@@ -99,12 +99,13 @@ function createButtonData(
     actorSkills: Partial<Record<StatisticSlug, Statistic>>,
 ): ButtonData {
     const skill: Statistic | undefined = actorSkills[action.skill];
+    const rank: number = skill?.rank ?? (skill?.proficient ? 1 : 0);
     const bonus = action.bonus ?? skill?.mod;
     const best =
         !!game.settings.get(MODULENAME, "basicActionMacroShowBestBonus") &&
         party.includes(actor.id) &&
         (bonus ?? -100) >= (action.best ?? 0);
-    return { best, idx, action, skill, bonus };
+    return { best, idx, action, rank, bonus };
 }
 
 type MacroAction = {
@@ -148,22 +149,25 @@ type MacroAction = {
 function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): MacroAction[] {
     const showUnusable = game.settings.get(MODULENAME, "bamShowUnusable");
     const hasFeat = (slug: string) => selectedActor.itemTypes.feat.some((feat) => feat.slug === slug);
+    const cleverImproviser = hasFeat("clever-improviser");
+    const getSkill = (skill: StatisticSlug): Statistic | undefined =>
+        skill === "perception" ? selectedActor.perception : selectedActor.skills?.[skill];
+    const proficient = (skill: StatisticSlug | ""): boolean =>
+        skill === "" ? true : (getSkill(skill)?.proficient ?? false);
 
     const actionsToUse = bamActions.filter((x) => {
-        const hasSkill = selectedActor.skills?.[x.skill]?.rank ?? 0 > 0;
-        const hasAltSkillAndFeat = x.altSkillAndFeat?.some(
-            (y) => selectedActor.skills?.[y.skill].rank && hasFeat(y.feat),
-        );
         if (x.module && !game.modules.get(x.module)?.active) return false;
         if (x.feat && !hasFeat(x.feat)) return false;
 
+        // Has the skill, or an alt skill if any
+        const hasSkill = proficient(x.skill) || x.altSkillAndFeat?.some((y) => proficient(y.skill) && hasFeat(y.feat));
+
         return (
-            showUnusable ||
             x.actionType !== "skill_trained" ||
-            (x.actionType === "skill_trained" && ["npc", "familiar"].includes(selectedActor.type)) ||
-            selectedActor.itemTypes.feat.some((feat) => feat.slug === "clever-improviser") ||
+            showUnusable ||
             hasSkill ||
-            hasAltSkillAndFeat
+            cleverImproviser ||
+            selectedActor.type === "familiar"
         );
     });
 
