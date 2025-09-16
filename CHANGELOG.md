@@ -1,3 +1,10 @@
+# [6.30.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.29.1...v6.30.0) (2025-09-16)
+
+
+### Features
+
+* Use NPC skill proficiency for BAM actions ([d7a31d0](https://github.com/xdy/xdy-pf2e-workbench/commit/d7a31d044e205859fbe57f57cdabce3556e410c8))
+
 ## [6.29.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.29.0...v6.29.1) (2025-09-12)
 
 
