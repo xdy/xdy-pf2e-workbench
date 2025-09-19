@@ -93,7 +93,7 @@ jobs:
               "release": {
                 "version": "${{ steps.package-version.outputs.current-version}}",
                 "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
-                "notes": "https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md",
+                "notes": "https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md",
                 "compatibility": {
                   "minimum": "${{ steps.minimum.outputs.prop }}",
                   "verified": "${{ steps.verified.outputs.prop }}",
