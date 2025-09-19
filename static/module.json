@@ -227,7 +227,7 @@
   "media": [
     {
       "type": "cover",
-      "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/master/static/assets/media/pf2e_workbench_cover_compressed.webp",
+      "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/static/assets/media/pf2e_workbench_cover_compressed.webp",
       "caption": "PF2e Workbench",
       "loop": false,
       "flags": {}
@@ -242,7 +242,7 @@
     "media": [
       {
         "type": "cover",
-        "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/master/static/assets/media/pf2e_workbench_cover_compressed.webp",
+        "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/static/assets/media/pf2e_workbench_cover_compressed.webp",
         "caption": "PF2e Workbench"
       }
     ],
