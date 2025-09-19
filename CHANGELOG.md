@@ -1,3 +1,10 @@
+## [6.30.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.30.0...v6.30.1) (2025-09-19)
+
+
+### Bug Fixes
+
+* Update module.json so it points to the right branch ([0a43cb4](https://github.com/xdy/xdy-pf2e-workbench/commit/0a43cb4aaf9c277b2516ff630166e440e2bc926b))
+
 # [6.30.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.29.1...v6.30.0) (2025-09-16)
 
 
