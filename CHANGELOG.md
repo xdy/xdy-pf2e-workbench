@@ -1,3 +1,10 @@
+## [6.30.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.30.1...v6.30.2) (2025-09-19)
+
+
+### Bug Fixes
+
+* Update test-release.yml to have changelog point to the right branch ([67b142b](https://github.com/xdy/xdy-pf2e-workbench/commit/67b142b52251c7a6664a6c62b590fc42a39b2496))
+
 ## [6.30.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.30.0...v6.30.1) (2025-09-19)
 
 
