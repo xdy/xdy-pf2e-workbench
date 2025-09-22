@@ -20,7 +20,7 @@ import { basicActionMacros, registerBasicActionMacrosHandlebarsTemplates } from 
 import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal.js";
 import {
     createChatMessageHook,
-    createItemHook,
+    preCreateItemHook,
     createTokenHook,
     deleteCombatHook,
     deleteItemHook,
@@ -153,11 +153,7 @@ export function updateHooks(cleanSlate = false) {
         renderChatMessageHook,
     );
 
-    handle(
-        "createItem",
-        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"),
-        fu.debounce(createItemHook, 10),
-    );
+    handle("preCreateItem", game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"), preCreateItemHook);
 
     handle("updateItem", false, updateItemHook);
 

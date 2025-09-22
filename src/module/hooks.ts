@@ -249,8 +249,8 @@ function handleVariantHeroPointRules(message: ChatMessagePF2e, jq: JQuery) {
     }
 }
 
-function dropHeldItemsOnBecomingUnconscious(actor) {
-    const items = <PhysicalItemPF2e[]>actor.items?.filter((i) => i.isHeld);
+function dropHeldItemsOnBecomingUnconscious(actor: CreaturePF2e) {
+    const items = actor.inventory.filter((i) => i.isHeld);
     if (items && items.length > 0) {
         for (const item of items) {
             if (item.traits.has("free-hand") || item.type === "shield" || item.traits.has("attached-to-shield")) {
@@ -267,7 +267,7 @@ function dropHeldItemsOnBecomingUnconscious(actor) {
         ChatMessage.create({
             flavor: message,
             speaker: ChatMessage.getSpeaker({ actor }),
-        }).then();
+        });
     }
 }
 
@@ -301,12 +301,12 @@ function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
     });
 }
 
-export async function createItemHook(item: ItemPF2e, _options: any, _id: any) {
+export async function preCreateItemHook(item: ItemPF2e, _data: object, _options: any, _id: string) {
     if (
+        item.type === "condition" &&
+        item.slug === "unconscious" &&
         item.actor?.isOfType(CHARACTER_TYPE) &&
-        item.actor.hasCondition("unconscious") &&
-        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious") &&
-        shouldIHandleThis(item.actor)
+        game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious")
     ) {
         dropHeldItemsOnBecomingUnconscious(item.actor);
     }
