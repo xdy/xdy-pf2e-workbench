@@ -1,3 +1,10 @@
+## [6.30.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.30.2...v6.30.3) (2025-09-23)
+
+
+### Bug Fixes
+
+* Don't drop items multiple times on unconscious ([c4a6dcd](https://github.com/xdy/xdy-pf2e-workbench/commit/c4a6dcd9975f53216858792a53ece54841dad648))
+
 ## [6.30.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.30.1...v6.30.2) (2025-09-19)
 
 
