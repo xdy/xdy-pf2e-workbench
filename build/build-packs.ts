@@ -77,6 +77,7 @@ const macroIcons = new Map<string, ImageFilePath>([
     ["customizableBasicActionMacros", "modules/xdy-pf2e-workbench/assets/icons/cc0/bam.webp"],
     ["customizableProceduralChecks", "systems/pf2e/icons/default-icons/party.svg"],
     ["customizableRefocusPremaster", "icons/magic/perception/third-eye-blue-red.webp"],
+    ["customizableSearchAndInvestigateChecks", "icons/svg/eye.svg"],
 
     // xdy-internal-utility-macros
     ["Macro: Effect: Aid", "systems/pf2e/icons/spells/efficient-apport.webp"],

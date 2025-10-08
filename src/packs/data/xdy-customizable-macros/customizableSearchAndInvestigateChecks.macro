@@ -1,0 +1,66 @@
+/**
+ * This macro rolls secret perception and Recall Knowledge checks for all party members that have their exploration activities set to Search and Investigate respectively.
+ * If they user is not the GM, it shows a warning notification.
+ * If no party members are using one of the handled exploration activities, it shows a warning notification.
+ * If the Recall Knowledge macro could not be found or could not be executed, it shows a warning notification.
+ */
+
+// Show a warning notification if the user is not a GM
+if (!game.user.isGM) {
+    return ui.notifications.warn("You do not have permission to run this macro.")
+}
+
+// Get the most recent version of the Recall Knowledge macro from the compendium
+let recallKnowledgeMacro = await _getRecallKnowledgeMacro()
+
+let handledActivityWasFound = false
+for (const actor of game.actors?.party?.members ?? []) /* Iterate through each party member */ {
+    for (const explorationActivityId of actor?.system?.exploration ?? []) /* Iterate through each actors exploration activities */ {
+        const explorationActivity = actor.items?.get?.(explorationActivityId)
+        if (explorationActivity?.slug === 'search') {
+            // Roll a secret perception check
+            actor.perception?.roll({
+                rollMode: 'blindroll',
+                skipDialog: true,
+            })
+            handledActivityWasFound = true
+        } else if (explorationActivity?.slug === 'investigate' && recallKnowledgeMacro !== null) {
+            // Roll a recall knowledge check
+            recallKnowledgeMacro.execute({
+                actor: actor,
+                token: actor?.token,
+            })
+            handledActivityWasFound = true
+        }
+    }
+}
+
+if (!handledActivityWasFound) {
+    return ui.notifications.warn("No party members are using Search or Investigate activities")
+}
+
+/**
+ * This function attempts to find the internal Recall Knowledge macro and return it to the caller on a success.
+ * It returns null if the macro could not be found.
+ * @param {string} macroName name of the macro in the compendium
+ * @param {string?} compendiumName name of the compendium that contains the macro
+ */
+async function _getRecallKnowledgeMacro() {
+    const pack = game.packs.get("xdy-pf2e-workbench.asymonous-benefactor-macros-internal")
+    if (!pack) {
+        ui.notifications.error(`Compendium xdy-pf2e-workbench.asymonous-benefactor-macros-internal not found`)
+        return null
+    }
+
+    let macro = (await pack.getDocuments({name: "XDY DO_NOT_IMPORT Recall_Knowledge"}))?.[0]
+    if (!macro) {
+        ui.notifications.error("Macro XDY DO_NOT_IMPORT Recall_Knowledge not found")
+        return null
+    }
+
+    if (!macro.canExecute) {
+        macro = new macro.constructor(foundry.utils.mergeObject(macro.toObject(), {"-=_id": null, "ownership.default": CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER}, {performDeletions: true, inplace: true}))
+    }
+
+    return macro
+}
