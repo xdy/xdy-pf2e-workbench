@@ -17,12 +17,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v5.0.0
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          node-version: 20.x
-          cache: 'pnpm'
+          submodules: 'true'
 
         # Not sure this is the right way to do it, but, eh, it works.
       - name: Pull & update submodules recursively
@@ -30,9 +28,15 @@ jobs:
           git submodule update --init --recursive
           git submodule update --recursive --remote
 
-      - uses: stefanzweifel/git-auto-commit-action@v5.2.0
+      - uses: stefanzweifel/git-auto-commit-action@v6.0.1
         with:
           commit_message: "chore: Update submodules"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: 20.x
+          #cache: 'pnpm'
 
       - name: Enable Corepack
         run: corepack enable
@@ -42,6 +46,9 @@ jobs:
 
       - name: Build
         run: pnpm run build
+
+      - name: Make release script executable
+        run: chmod +x ./.release.sh
 
       - name: Release
         env:
@@ -77,6 +84,13 @@ jobs:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "compatibility.maximum"
 
+      - name: Get current version
+        id: version
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: "./dist/${{ env.package_type }}.json"
+          prop_path: "version"
+
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
@@ -90,7 +104,7 @@ jobs:
               "id": "${{ steps.moduleID.outputs.prop }}",
               "dry-run": false,
               "release": {
-                "version": "${{ steps.package-version.outputs.current-version}}",
+                "version": "${{ steps.version.outputs.prop}}",
                 "manifest": "https://github.com/${{ github.repository }}/releases/latest/download/module.json",
                 "notes": "https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md",
                 "compatibility": {
