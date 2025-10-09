@@ -56,7 +56,8 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Post a notification when a Hero Point is handed out
 
 * Quality of Life section
-    * (foundry v12 only, it is a macro on v13) Option to add a quick roller button to the journal directory, enabling improvised npc rolls with no actual npc
+    * (foundry v12 only, it is a macro on v13) Option to add a quick roller button to the journal directory, enabling
+      improvised npc rolls with no actual npc
       using the suggested values from the GMG (This feature has been taken over from the
       delisted [PF2e Toolbox](https://github.com/Djphoenix719/FVTT-PF2EToolbox#quick-roller) module. Thanks DJ!)
     * Option to hold CTRL while casting a spell to cast it as a whispered chat message. Separate option to output a
@@ -161,8 +162,9 @@ HOOKS (for other modules to use):
   If a module returns `false` the token's name will not by mystified.
 
 FLAGS (for other modules to use):
-`xdy-pf2e-workbench.noAutoDamageRoll` can be added to messages by macros or other other modules to turn off the auto damage roll for that message. Can be set when the message is created (for macros) or in the preCreate/create message hooks.
-
+`xdy-pf2e-workbench.noAutoDamageRoll` can be added to messages by macros or other other modules to turn off the auto
+damage roll for that message. Can be set when the message is created (for macros) or in the preCreate/create message
+hooks.
 
 * New Keybinds in Configure Controls
     * Optional keybind to mystify a creature.
@@ -226,8 +228,15 @@ FLAGS (for other modules to use):
       need to reimport it manually.
     * Customizable isSpellAvailable. This macro can be used to check if a spell is available for an actor.
       See https://discord.com/channels/880968862240239708/880969304365994034/1161188968424018020
-* There are a few more compendiums included with this module with assorted internal utility macros and items that do not
-  need to be imported, as indicated by their labels all ending with 'do not import'
+    * Customizable GM macro for search and investigate activities. Search and Investigate are two common exploration
+      activities that require the GM to repeatedly roll secret checks for Perception and Recall Knowledge. Making each
+      roll individually for each room that the party enters takes time that quickly builds up during the course of a
+      campaign. This macro gives a GM the option to execute it once as the party is entering the room and consult the
+      results with whatever documentation or guidelines they have for the area. The macro can be accessed from the PF2e
+      Workbench Customizable Macros compendium and uses a similar function to get the most recent version of the Recall
+      Knowledge macro.
+    * There are a few more compendiums included with this module with assorted internal utility
+      macros and items that do not need to be imported, as indicated by their labels all ending with 'do not import'
 
 * Experimental features:
     * If a feature name starts with mentioning that it's experimental, use with caution. It's probably barely tested and
