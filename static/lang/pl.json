@@ -1,43 +1,85 @@
 {
   "xdy-pf2e-workbench": {
+    "effectItem": "Efekt Przedmiotu",
     "npcRoller": {
+      "title": "Tworzenie NPC",
+      "button-label": "Tworzenie NPC",
       "nav-labels": {
+        "strike": "Ataki",
+        "damage": "Obrażenia",
+        "ac": "Klasa Pancerza",
         "save": "Rzuty obronne",
+        "hp": "Punkty Wytrzymałości",
         "spell": "Zaklęcie",
         "dc": "ST",
-        "abilityScore": "Wartość Atrybutów",
-        "skill": "Umiejętności",
-        "ac": "Klasa Pancerza",
-        "damage": "Obrażenia",
-        "hp": "Punkty Wytrzymałości",
+        "areaDamage": "Obrażenia obszarowe",
         "perception": "Percepcja",
-        "strike": "Ataki",
-        "areaDamage": "Obrażenia obszarowe"
-      },
-      "title": "Tworzenie NPC",
-      "button-label": "Tworzenie NPC"
+        "abilityScore": "Wartość Atrybutów",
+        "skill": "Umiejętności"
+      }
+    },
+    "spellCardNotFound": "Nie odnaleziono karty zaklęcia. Użyto {spell} na minimalnym poziomie tego zaklęcia.",
+    "effects": {
+      "orcFerocityUsed": "Użyto Orkowej Zaciekłości",
+      "bounceBackUsed": "Użyto Dojście do Siebie",
+      "numbToDeathUsed": "Użyto Odrętwiały na Śmierć",
+      "deliberateDeathUsed": "Użyto Przemyślana Śmierć"
     },
     "macros": {
       "basicActionMacros": {
         "title": "Akcje ({name})",
+        "exploration": "Eksploracja",
+        "downtime": "Przestój",
+        "explorationShort": "E",
+        "downtimeShort": "D",
+        "bamTabview": {
+          "name": "BAM: Użyj układu z zakładkami",
+          "hint": "Użyj układu kart dla okna dialogowego Makra Akcji Podstawowych."
+        },
+        "bamShowUnusable": {
+          "name": "BAM: Pokaż akcje, których nie można użyć.",
+          "hint": "Czy pokazać akcje, których nie można użyć, ponieważ postać nie jest w nich wytrenowana."
+        },
+        "noActorSelected": "Nie wybrano postaci, npc ani chowańca",
+        "gmMustImport": "MG musi kliknąć prawym przyciskiem myszy na kompendium xdy-pf2e-workbench-macros i wybrać opcję \"Importuj całą zawartość\" i upewnić się, że podczas importowania zaznaczona jest opcja \"Zachowaj identyfikatory dokumentów\".",
+        "cancel": "Anuluj",
+        "YouAreTheBestInYourParty": "Najwyższy wynik w drużynie",
         "agileTrait": "(Zwinny)",
+        "settings": {
+          "showBestBonus": {
+            "name": "BAM: Pokazuj czy to najlepszy wynik w drużynie w Makra Akcji Podstawowych",
+            "hint": "Wyświetlanie informacji o tym, czy wybrany aktor ma najlepszy wynik w oknie dialogowym Makra Akcji Podstawowych"
+          }
+        },
+        "macroNotFound": "Makro {macroName} nie znalezione",
+        "compendiumNotFound": "Kompendium {compendiumName} nie znalezione",
         "actions": {
+          "AdministerFirstAidStabilize": "Pierwsza pomoc - Stabilizacja",
+          "AdministerFirstAidStopBleeding": "Pierwsza pomoc - Krwotok",
           "AidToggle": "Wsparcie (aktywuj)",
+          "AidASE": "Wsparcie (makro ASE)",
+          "AidPF2eMacros": "Wsparcie (Makra PF2e)",
           "AvoidNotice": "Unikanie Wykrycia",
           "Balance": "Balansowanie",
           "Climb": "Wspinanie",
           "Coerce": "Przymuszenie",
           "CommandAnAnimal": "Rozkazywanie Zwierzęciu",
+          "ConcealAnObject": "Ukrycie przedmiotu",
           "Craft": "Wytwarzanie",
+          "CreateADiversionDistractingWords": "Dywersja - Rozpraszające słowa",
           "CreateADiversionGesture": "Dywersja - Gest",
           "CreateADiversionTrick": "Dywersja - Podstęp",
+          "CreateForgery": "Fałszerstwo",
+          "DecipherWritingArcana": "Rozszyfrowanie pisma - Arkana",
           "DecipherWritingOccultism": "Rozszyfrowanie pisma - Okultyzm",
           "DecipherWritingReligion": "Rozszyfrowanie pisma - Religia",
           "DecipherWritingSociety": "Rozszyfrowanie pisma - Społeczeństwo",
           "Demoralize": "Demoralizacja",
           "DisableDevice": "Unieszkodliwienie urządzenia",
           "Disarm": "Rozbrojenie",
+          "Escape": "Ucieczka",
           "Feint": "Finta",
+          "FollowTheExpertToggle": "Podążanie za ekspertem (aktywuj)",
           "ForceOpen": "Siłowe Otwarcie",
           "GatherInformation": "Zbieranie informacji",
           "Grapple": "Chwytanie",
@@ -48,11 +90,13 @@
           "Lie": "Kłamstwo",
           "MakeAnImpression": "Wywarcie wrażenia",
           "ManeuverInFlight": "Manewr w locie",
+          "PalmAnObject": "Ukrycie w dłoni",
           "Perform": "Występowanie",
           "PickALock": "Otwieranie zamków",
           "RaiseAShieldToggle": "Podniesienie tarczy (aktywuj)",
           "RecallKnowledge": "Przywołanie Wiedzy",
           "Repair": "Naprawa",
+          "Reposition": "Przemieszczenie",
           "Request": "Prośba",
           "Seek": "Szukanie",
           "SenseDirection": "Wyczucie kierunku",
@@ -60,68 +104,18 @@
           "Shove": "Pchnięcie",
           "Sneak": "Skradanie się",
           "Squeeze": "Przeciskanie się",
+          "Steal": "Kradzież",
           "SubsistSociety": "Przeżycie - Społeczeństwo",
           "SubsistSurvival": "Przeżycie - Natura",
           "Swim": "Pływanie",
+          "TakeCoverToggle": "Znajdź osłonę (aktywuj)",
           "Track": "Tropienie",
           "TreatDisease": "Leczenie choroby",
           "TreatPoison": "Leczenie trucizny",
           "TreatWounds": "Leczenie ran",
           "Trip": "Przewracanie",
-          "DecipherWritingArcana": "Rozszyfrowanie pisma - Arkana",
-          "FollowTheExpertToggle": "Podążanie za ekspertem (aktywuj)",
-          "TakeCoverToggle": "Znajdź osłonę (aktywuj)",
-          "TumbleThrough": "Przedzieranie się",
-          "ConcealAnObject": "Ukrycie przedmiotu",
-          "PalmAnObject": "Ukrycie w dłoni",
-          "Steal": "Kradzież",
-          "AdministerFirstAidStopBleeding": "Pierwsza pomoc - Krwotok",
-          "AdministerFirstAidStabilize": "Pierwsza pomoc - Stabilizacja",
-          "CreateForgery": "Fałszerstwo",
-          "Escape": "Ucieczka",
-          "AidASE": "Wsparcie (makro ASE)",
-          "CreateADiversionDistractingWords": "Dywersja - Rozpraszające słowa",
-          "Reposition": "Przemieszczenie",
-          "AidPF2eMacros": "Wsparcie (Makra PF2e)"
-        },
-        "noActorSelected": "Nie wybrano postaci, npc ani chowańca",
-        "cancel": "Anuluj",
-        "YouAreTheBestInYourParty": "Najwyższy wynik w drużynie",
-        "settings": {
-          "showBestBonus": {
-            "name": "BAM: Pokazuj czy to najlepszy wynik w drużynie w Makra Akcji Podstawowych",
-            "hint": "Wyświetlanie informacji o tym, czy wybrany aktor ma najlepszy wynik w oknie dialogowym Makra Akcji Podstawowych"
-          }
-        },
-        "compendiumNotFound": "Kompendium {compendiumName} nie znalezione",
-        "macroNotFound": "Makro {macroName} nie znalezione",
-        "bamActionsPerColumn": {
-          "name": "BAM: Przybliżone akcje na wiersz",
-          "hint": "Przybliżona liczba akcji na wiersz w oknie dialogowym Makra akcji podstawowych. Rzeczywista liczba akcji na wiersz będzie najbliższą liczbą akcji na wiersz, która zmieści się w oknie dialogowym."
-        },
-        "gmMustImport": "MG musi kliknąć prawym przyciskiem myszy na kompendium xdy-pf2e-workbench-macros i wybrać opcję \"Importuj całą zawartość\" i upewnić się, że podczas importowania zaznaczona jest opcja \"Zachowaj identyfikatory dokumentów\".",
-        "bamShowUnusable": {
-          "name": "BAM: Pokaż akcje, których nie można użyć.",
-          "hint": "Czy pokazać akcje, których nie można użyć, ponieważ postać nie jest w nich wytrenowana."
-        },
-        "exploration": "Eksploracja",
-        "downtime": "Przestój",
-        "explorationShort": "E",
-        "downtimeShort": "D",
-        "bamTabview": {
-          "name": "BAM: Użyj układu z zakładkami",
-          "hint": "Użyj układu kart dla okna dialogowego Makra Akcji Podstawowych."
+          "TumbleThrough": "Przedzieranie się"
         }
-      },
-      "refocus": {
-        "notPsychic": "zużywa przynajmniej {regain} Punkty Skupienia",
-        "regains": "Odzyskuje {focus} Punkty Skupienia.",
-        "regainOne": "Odzyskaj 1 Punkt Skupienia.",
-        "isPsychic": "zużywa Punkty Skupienia wyłącznie by amplifikować sztuczki psi lub zasilić psioniczne zdolności",
-        "selectOneActor": "Musisz wybrać jednego aktora.",
-        "disabled": "Wyłączona z powodu braku możliwości odzyskania więcej niż 1 Punktu Skupienia.",
-        "one": "jeden",
-        "enabled": "Odzyskaj {regain} Punktów Skupienia. <br/>Kliknij<b>TYLKO</b> jeśli masz {details} od ostatniego Ponownego Skupienia."
       },
       "buildNpcSpellbookJournal": {
         "title": "Tworzenie księgi zaklęć NPC",
@@ -130,176 +124,152 @@
       },
       "recallKnowledge": {
         "breakdown": {
-          "hint": "Pokaż podział modyfikatorów zastosowanych do każdej umiejętności w wierszu poniżej wyniku.",
           "name": "Przywołanie Wiedzy: Pokaż podziały rzutów",
+          "hint": "Pokaż podział modyfikatorów zastosowanych do każdej umiejętności w wierszu poniżej wyniku.",
           "all": "Wszystkie modyfikatory",
           "extra": "Dodatkowe modyfikatory; pomiń umiejętności i biegłość",
           "none": "Nie pokazuj żadnych modyfikatorów"
         }
+      },
+      "refocus": {
+        "regains": "Odzyskuje {focus} Punkty Skupienia.",
+        "notPsychic": "zużywa przynajmniej {regain} Punkty Skupienia",
+        "isPsychic": "zużywa Punkty Skupienia wyłącznie by amplifikować sztuczki psi lub zasilić psioniczne zdolności",
+        "regainOne": "Odzyskaj 1 Punkt Skupienia.",
+        "disabled": "Wyłączona z powodu braku możliwości odzyskania więcej niż 1 Punktu Skupienia.",
+        "enabled": "Odzyskaj {regain} Punktów Skupienia. <br/>Kliknij<b>TYLKO</b> jeśli masz {details} od ostatniego Ponownego Skupienia.",
+        "one": "jeden",
+        "selectOneActor": "Musisz wybrać jednego aktora."
       }
     },
-    "spellCardNotFound": "Nie odnaleziono karty zaklęcia. Użyto {spell} na minimalnym poziomie tego zaklęcia.",
-    "effects": {
-      "orcFerocityUsed": "Użyto Orkowej Zaciekłości",
-      "deliberateDeathUsed": "Użyto Przemyślana Śmierć",
-      "bounceBackUsed": "Użyto Dojście do Siebie",
-      "numbToDeathUsed": "Użyto Odrętwiały na Śmierć"
+    "modules": {
+      "pf2e-sheet-skill-actions": "Moduł pf2e-sheet-skill-actions nie jest już utrzymywany, wszystkie jego funkcje są częścią Workbencha, prosimy o jego wyłączenie.",
+      "pf2e-toolbox": "Moduł pf2e-toolbox nie jest już utrzymywany, większość jego funkcji jest częścią Workbencha, prosimy o jego wyłączenie.",
+      "multilevel-tokens": "Moduł Multilevel Tokens (i prawdopodobnie inne moduły, które teleportują tokeny) mogą mieć problemy z teleportacją, ponieważ włączono opcjonalne ustawienie Workbench, aby zmienić animację tokenów."
     },
     "SETTINGS": {
       "actionsReminderAllow": {
-        "gm": "MG",
-        "players": "Gracze",
         "all": "Wszystko",
+        "gm": "MG",
         "hint": "Zaznacz, aby wyświetlić liczbę przypomnień o działaniach jako wiadomość czatu.",
         "name": "Kto otrzymuje przypomnienie o działaniach",
-        "none": "Brak"
+        "none": "Brak",
+        "players": "Gracze"
       },
       "addUserTargets": {
         "addFor": "Dodaj cele dla",
-        "name": "Dodaj cele użytkownika",
-        "title": "Wybierz użytkownika, dla którego chcesz dodać cele",
         "clearFor": "Wyczyść cele dla",
-        "hint": "Powiązanie klawiszy w celu dodania wybranych i najechanych tokenów do celów wybranego użytkownika."
+        "hint": "Powiązanie klawiszy w celu dodania wybranych i najechanych tokenów do celów wybranego użytkownika.",
+        "name": "Dodaj cele użytkownika",
+        "title": "Wybierz użytkownika, dla którego chcesz dodać cele"
       },
-      "nonLethalIsNotLethal": {
-        "unconscious": "Nieśmiercionośne obrażenia nie zabijają",
-        "no": "Obrażenia nieśmiercionośne to po prostu obrażenia",
-        "name": "... w zależności od tego, czy ostatnie obrażenia były nieśmiercionośne.",
-        "unconsciousForCharacters": "Zabójstwa atakami nieśmiercionośnymi nie zabijają postaci + chowańców",
-        "hint": "Jeśli ostatnie otrzymane obrażenia są nieśmiercionośne, gracz nie umiera. Zamiast tego gracz traci przytomność i ma 0 PW. Wymaga włączenia powyższego ustawienia."
-      },
-      "autoRollDamageAllow": {
-        "players": "Gracze",
-        "all": "Wszyscy",
-        "gm": "MG",
-        "name": "Kto może ustawić opcję automatycznego naliczania obrażeń przy trafieniu.",
-        "none": "Brak",
-        "hint": "Wybierz, kto może ustawić opcję automatycznego naliczania obrażeń przy trafieniu. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta."
-      },
-      "applyPersistentHealing": {
-        "wasHealed": "Leczenie {healing} zostało zastosowane automatycznie.",
-        "name": "Automatycznie zastosuj trwałe leczenie używane przez system.",
-        "hint": "Ustawienie świata, aby automatycznie stosować trwałe leczenie rzucane przez system."
-      },
-      "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
-        "no": "Nie",
-        "name": "... i dodać jeszcze jeden do Umierania w przypadku krytycznych obrażeń zadanych przez wroga.",
-        "hint": "Jeśli zostanie trafiony krytycznie celnym atakiem zadającym obrażenia przez wrogą postać, dodaje jeden poziom Umierania więcej. Używa ustawień „Ranny” z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
-        "add": "Dodaj umieranie",
-        "addForCharacters": "Dodaj umieranie dla postaci + chowańców"
-      },
-      "playerSpellsRarityColour": {
-        "name": "Pokaż nazwy zaklęć w kolorze rzadkości na kartach postaci.",
-        "hint": "Ustawienie klienta, aby nazwy zaklęć były wyświetlane w kolorze rzadkości na kartach postaci."
-      },
-      "castPrivateSpellWithPublicMessageShowTraits": {
-        "hint": "Pokaż cechy zaklęcia w wiadomości publicznej.",
-        "traitPart": " z tymi cechami: <strong>{traits}</strong>",
-        "name": "... i pokazać cechy zaklęcia w wiadomości publicznej."
-      },
-      "customPauseImage": {
-        "hint": "Niestandardowy obraz używany jako obraz pauzy. Pozostaw puste, aby użyć domyślnej ikony zegara.",
-        "name": "Niestandardowy obraz używany jako obraz pauzy."
-      },
-      "castPrivateSpell": {
-        "aSpell": "Zaklęcie",
-        "name": "Kliknij z wciśniętym klawiszem Ctrl, aby rzucać prywatnie.",
-        "hint": "Zaznacz, aby kliknięcie z wciśniętym klawiszem Ctrl na zaklęciu rzucało je jako szept dla rzucającego zaklęcie i MG."
-      },
-      "castPrivateSpellWithPublicMessage": {
-        "spell": "Zaklęcie",
-        "they": "Oni",
-        "cantrip": "Sztuczka",
-        "savePart": "<br>Rzut obronny dla nieznanego zaklęcia to: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}{basic}}]",
-        "hint": "W przypadku rzucania zaklęć prywatnie, ustawienie to wysyła również publiczną wiadomość o rzuceniu zaklęcia, chyba że podczas rzucania zaklęcia przytrzymasz klawisze SHIFT i CTRL.",
-        "name": "Publikuje wiadomość o rzuceniu zaklęcia.",
-        "secondPartNoRk": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
-        "firstPart": "Rzucono {type} tradycji <strong>{traditionString}</strong> z aktora {tokenName} <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
-        "secondPartRK": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą testu @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G])",
-        "knownBy": "<div><p><b>Znany przez: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">",
-        "basic": "Podstawowy",
-        "noButtonSavePart": "<br><b>{basic} {dataSave} rzut obronny</b>"
+      "applyPersistentDamage": {
+        "hint": "Ustawienie świata do automatycznego nakładania trwałych obrażeń.",
+        "name": "Automatyczne nakładanie trwałych obrażeń."
       },
       "applyPersistentDamageRecoveryRoll": {
         "hint": "... a następnie automatycznie rzuci test trwałych obrażeń. Wymaga włączenia powyższego ustawienia.",
         "name": "... a następnie automatycznie rzuci test trwałych obrażeń."
       },
-      "handleDyingRecoveryRollAllow": {
-        "all": "Wszyscy",
-        "name": "Kto może ustawić opcję automatycznej obsługi rzutów stabilizacji umierających postaci po kliknięciu przez właściciela przycisku rzutu na karcie postaci.",
-        "none": "Brak",
-        "players": "Gracze",
-        "gm": "MG",
-        "hint": "Wybierz, kto może ustawić opcję automatycznej obsługi rzutów stabilizacji umierających postaci po kliknięciu przez właściciela przycisku rzutu na karcie postaci. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta."
+      "applyPersistentHealing": {
+        "hint": "Ustawienie świata, aby automatycznie stosować trwałe leczenie rzucane przez system.",
+        "name": "Automatycznie zastosuj trwałe leczenie używane przez system.",
+        "wasHealed": "Leczenie {healing} zostało zastosowane automatycznie."
       },
-      "autoRollDamageForStrike": {
-        "name": "Automatyczne rzucanie obrażeń za trafione ataki.",
-        "strike": "Atak",
-        "hint": "Ustawienie klienta do automatycznego naliczania obrażeń dla ataków. Należy pamiętać, że trafienia krytyczne zadają obrażenia krytyczne."
-      },
-      "autoRollDamageNotifyOnSpellCardNotFound": {
-        "hint": "Ustawienie klienta informujące o rzuceniu ataku zaklęciem, dla którego nie znaleziono karty zaklęcia do rzucenia obrażeń.",
-        "name": "Powiadamia, gdy rzucono atak zaklęciem i nie znaleziono żadnej karty zaklęcia."
-      },
-      "autoCollapseItemAttackChatCardContent": {
-        "noCollapse": "Nigdy się nie zwijaj",
-        "name": "Automatycznie zwijaj zawartość karty czatu ataku.",
+      "autoCollapseItemChatCardContent": {
         "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
-        "hint": "Ustawienie klienta, aby automatycznie zwijać zawartość karty czatu ataku.",
+        "hint": "Ustawienie klienta, aby automatycznie zwijać zawartość karty czatu przedmiotu (z wyjątkiem akcji i ataków, patrz poniżej).",
+        "name": "Automatycznie zwijaj zawartość karty czatu elementu.",
+        "noCollapse": "Nigdy się nie zwijaj",
         "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
       },
-      "autoGainDyingAtZeroHP": {
-        "no": "Nie",
-        "orcFerocityMessage": "{name} właśnie użył @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] i może teraz użyć darmowej akcji: @UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]",
-        "addOne": "Dodaj jeden",
-        "addOneForCharacters": "Dodaj jeden, dla postaci + chowańców",
-        "addWoundedLevelForCharacters": "Dodaj +1 poziomu Ranny dla postaci + chowańców",
-        "deliberateDeathMessage": "{name} może <b>przed uzyskaniem Umierania</b> w wyniku ataku lub zdolności innej istoty, jeśli ta istota znajduje się w zasięgu walki wręcz, wykonać Atak w walce wręcz przeciwko wywołującej go istocie.<br>Usuń efekt \"Użyto Przemyślanej Śmierci\", jeśli faktycznie nie można go użyć.",
-        "hint": "Ustaw automatycznie zwiększenie poziomu Umierania przy 0 PW.",
-        "name": "Automatycznie zwiększenie poziomu Umierania przy 0 PW.",
-        "addWoundedLevel": "Dodaj +1 poziomu Ranny, dla wszystkich"
+      "autoCollapseItemChatCardMoveEffectLinks": {
+        "hint": "... ale przenieś wszystkie linki do efektów przedmiotów poza zwiniętą część karty, gdy jest ona domyślnie zwinięta",
+        "name": "... ale pokaż linki do efektów"
       },
-      "autoGainDyingIfTakingDamageWhenAlreadyDying": {
-        "no": "Nie",
-        "hint": "W przypadku otrzymania obrażeń podczas Umierania, dodaje jeszcze jedno Umieranie (lub ewentualnie dwa, jeśli włączono dodatkowe Umieranie przy trafieniu krytycznym). Używa ustawień „Ranny” z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
-        "add": "Dodaj umieranie",
-        "name": "... i dodać dodatkowy poziom lub poziomy Umierania, jeśli otrzymujesz obrażenia podczas Umierania.",
-        "addForCharacters": "Dodaj umieranie dla postaci + chowańców"
+      "autoCollapseItemActionChatCardContent": {
+        "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
+        "hint": "Ustawienie klienta, aby automatycznie zwijać zawartość karty czatu akcji.",
+        "name": "Automatycznie zwijaj zawartość karty czatu akcji.",
+        "noCollapse": "Nigdy się nie zwijaj",
+        "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
       },
-      "autoRemoveDyingAtGreaterThanZeroHP": {
-        "name": "Automatycznie usuwa Umieranie po uzdrowieniu powyżej 0 PW.",
-        "hint": "Ustawienie automatycznie usuwające Umieranie po wyleczeniu powyżej 0 PW.",
-        "no": "Nie",
-        "removeDying": "Usuń stan Umierania dla wszystkich",
-        "removeDyingForCharacters": "Usunięcie stanu Umierania dla postaci + chowańców"
+      "autoCollapseItemAttackChatCardContent": {
+        "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
+        "hint": "Ustawienie klienta, aby automatycznie zwijać zawartość karty czatu ataku.",
+        "name": "Automatycznie zwijaj zawartość karty czatu ataku.",
+        "noCollapse": "Nigdy się nie zwijaj",
+        "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
       },
       "dropHeldItemsOnBecomingUnconscious": {
         "hint": "Postacie automatycznie upuszczają trzymane przedmioty, gdy tracą przytomność (z wyjątkiem tarcz, które są noszone, a nie trzymane).",
         "name": "Postacie automatycznie upuszczają trzymane przedmioty po utracie przytomności.",
         "message": "{name} stracił kontrolę nad: {items}"
       },
+      "sheatheHeldItemsAfterEncounter": {
+        "hint": "Postacie automatycznie chowają broń po zakończeniu walki.",
+        "name": "Postacie automatycznie chowają broń po zakończeniu walki.",
+        "message": "{name} schował: {items}"
+      },
+      "sheatheHeldItemsAfterEncounterTypes": {
+        "hint": "Rozdzielona przecinkami lista typów przedmiotów, które należy schować po napotkaniu (np. 'armor,backpack,book,consumable,equipment,shield,treasure,weapon')",
+        "name": "... ale tylko dla tych typów przedmiotów"
+      },
       "autoExpandDamageRolls": {
         "collapsedAll": "Wszystkie rzuty na obrażenia zwinięte (domyślne Foundry).",
         "expandedAll": "Wszystkie rzuty na obrażenia rozszerzają się.",
         "expandedNew": "Nowe rzuty obrażeń rozszerzają się (tak jak trzy ostatnie rzuty obrażeń)",
         "expandedNewest": "Nowe rzuty na obrażenia rozszerzają się (tak jak ostatni rzut na obrażenia)",
-        "name": "Automatycznie rozszerzaj rzuty na obrażenia.",
-        "hint": "Ustawienie klienta do automatycznego rozwijania rzutów obrażeń (domyślnie wszystkie rzuty obrażeń są zwinięte). Kliknij rzut kością, aby rozwinąć/zwinąć."
+        "hint": "Ustawienie klienta do automatycznego rozwijania rzutów obrażeń (domyślnie wszystkie rzuty obrażeń są zwinięte). Kliknij rzut kością, aby rozwinąć/zwinąć.",
+        "name": "Automatycznie rozszerzaj rzuty na obrażenia."
       },
-      "castPrivateSpellHideName": {
-        "name": "... i ukryć nazwę prywatnie rzuconego zaklęcia w rzucie na obrażenia.",
-        "hint": "Zaznacz, aby ukryć nazwę prywatnie rzuconego zaklęcia w rzucie na obrażenia zamiast ukrywać rzut na obrażenia."
+      "autoGainDyingAtZeroHP": {
+        "addOne": "Dodaj jeden",
+        "addOneForCharacters": "Dodaj jeden, dla postaci + chowańców",
+        "addWoundedLevel": "Dodaj +1 poziomu Ranny, dla wszystkich",
+        "addWoundedLevelForCharacters": "Dodaj +1 poziomu Ranny dla postaci + chowańców",
+        "deliberateDeathMessage": "{name} może <b>przed uzyskaniem Umierania</b> w wyniku ataku lub zdolności innej istoty, jeśli ta istota znajduje się w zasięgu walki wręcz, wykonać Atak w walce wręcz przeciwko wywołującej go istocie.<br>Usuń efekt \"Użyto Przemyślanej Śmierci\", jeśli faktycznie nie można go użyć.",
+        "hint": "Ustaw automatycznie zwiększenie poziomu Umierania przy 0 PW.",
+        "name": "Automatycznie zwiększenie poziomu Umierania przy 0 PW.",
+        "no": "Nie",
+        "orcFerocityMessage": "{name} właśnie użył @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] i może teraz użyć darmowej akcji: @UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]"
       },
-      "castPrivateSpellAlwaysForNPC": {
-        "name": "... i zawsze rzucać prywatnie dla npc.",
-        "hint": "Zaznacz, aby zawsze rzucać prywatnie dla npc (przytrzymaj Ctrl, aby *nie* rzucać prywatnie)"
+      "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
+        "no": "Nie",
+        "add": "Dodaj umieranie",
+        "addForCharacters": "Dodaj umieranie dla postaci + chowańców",
+        "hint": "Jeśli zostanie trafiony krytycznie celnym atakiem zadającym obrażenia przez wrogą postać, dodaje jeden poziom Umierania więcej. Używa ustawień „Ranny” z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
+        "name": "... i dodać jeszcze jeden do Umierania w przypadku krytycznych obrażeń zadanych przez wroga."
       },
-      "autoCollapseItemActionChatCardContent": {
-        "hint": "Ustawienie klienta, aby automatycznie zwijać zawartość karty czatu akcji.",
-        "name": "Automatycznie zwijaj zawartość karty czatu akcji.",
-        "noCollapse": "Nigdy się nie zwijaj",
-        "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
-        "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
+      "autoGainDyingIfTakingDamageWhenAlreadyDying": {
+        "no": "Nie",
+        "add": "Dodaj umieranie",
+        "addForCharacters": "Dodaj umieranie dla postaci + chowańców",
+        "hint": "W przypadku otrzymania obrażeń podczas Umierania, dodaje jeszcze jedno Umieranie (lub ewentualnie dwa, jeśli włączono dodatkowe Umieranie przy trafieniu krytycznym). Używa ustawień „Ranny” z menu rozwijanego powyżej. Wymaga włączenia powyższego ustawienia.",
+        "name": "... i dodać dodatkowy poziom lub poziomy Umierania, jeśli otrzymujesz obrażenia podczas Umierania."
+      },
+      "nonLethalIsNotLethal": {
+        "no": "Obrażenia nieśmiercionośne to po prostu obrażenia",
+        "unconscious": "Nieśmiercionośne obrażenia nie zabijają",
+        "unconsciousForCharacters": "Zabójstwa atakami nieśmiercionośnymi nie zabijają postaci + chowańców",
+        "hint": "Jeśli ostatnie otrzymane obrażenia są nieśmiercionośne, gracz nie umiera. Zamiast tego gracz traci przytomność i ma 0 PW. Wymaga włączenia powyższego ustawienia.",
+        "name": "... w zależności od tego, czy ostatnie obrażenia były nieśmiercionośne."
+      },
+      "autoKillIfMassiveDamage": {
+        "yes": "Tak, dla wszystkich",
+        "yesForCharacters": "Tak, dla postaci + chowańców",
+        "yesForNpcs": "Tak, dla npc",
+        "hint": "(Przestarzałe) Ustawienie automatycznego zabijania po otrzymaniu Ogromnych Obrażeń.",
+        "name": "... ale automatycznie zabija po otrzymaniu Ogromnych Obrażeń. (Przestarzałe)",
+        "no": "Nie"
+      },
+      "autoKillIfDamageHasDeathTrait": {
+        "yes": "Tak, dla wszystkich",
+        "yesForCharacters": "Tak, dla postaci + chowańców",
+        "yesForNpcs": "Tak, dla npc",
+        "hint": "(Przestarzałe) Ustawienie automatycznego zabijania po otrzymaniu wystarczających obrażeń od źródła z cechą Śmierć.",
+        "name": "... ale automatycznie zabija po otrzymaniu wystarczających obrażeń od efektu Śmierci. (Przestarzałe)",
+        "no": "Nie"
       },
       "autoGainDyingIgnoresTargeting": {
         "name": "... niezależnie od tego, czy obrażenia zostały wycelowane w wybrany token.",
@@ -316,221 +286,151 @@
         "name": "Ustawienia automatyzacji świata"
       },
       "autoReduceStunned": {
-        "name": "Automatyczna redukcja Ogłuszenia przy starcie tury",
-        "hint": "Ustawienie klienta, aby automatycznie redukować Ogłuszenie przy rozpoczęciu tury."
+        "hint": "Ustawienie klienta, aby automatycznie redukować Ogłuszenie przy rozpoczęciu tury.",
+        "name": "Automatyczna redukcja Ogłuszenia przy starcie tury"
+      },
+      "autoRemoveDyingAtGreaterThanZeroHP": {
+        "hint": "Ustawienie automatycznie usuwające Umieranie po wyleczeniu powyżej 0 PW.",
+        "name": "Automatycznie usuwa Umieranie po uzdrowieniu powyżej 0 PW.",
+        "no": "Nie",
+        "removeDying": "Usuń stan Umierania dla wszystkich",
+        "removeDyingForCharacters": "Usunięcie stanu Umierania dla postaci + chowańców"
+      },
+      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
+        "hint": "Ustawienie automatycznego usuwania nieprzytomności w przypadku wyleczenia do ponad 0 PW.",
+        "name": "Automatycznie usuwa nieprzytomność, jeśli zostanie wyleczona do poziomu wyższego niż 0 PW."
+      },
+      "autoRollDamageAllow": {
+        "all": "Wszyscy",
+        "gm": "MG",
+        "hint": "Wybierz, kto może ustawić opcję automatycznego naliczania obrażeń przy trafieniu. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta.",
+        "name": "Kto może ustawić opcję automatycznego naliczania obrażeń przy trafieniu.",
+        "none": "Brak",
+        "players": "Gracze"
       },
       "autoRollDamageForSpellAttack": {
         "hint": "Ustawienie klienta do automatycznego rzucania obrażeń dla trafionych ataków zaklęć. Należy pamiętać, że trafienia krytyczne zawsze zadają normalne obrażenia.",
         "name": "Automatyczne rzucanie obrażeń za trafione ataki zaklęciami."
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
-        "name": "Obrażenia zadawane automatycznie przy rzucaniu zaklęć, które nie są atakami.",
         "hint": "Ustawienie klienta, które powoduje automatyczne rzucanie normalnych obrażeń dla zaklęć *nieatakujących* podczas ich rzucania. Jeśli komunikat zawiera wyniki rzutu obronnego, zostanie on automatycznie rzucony, jeśli zakończy się porażką, a w przypadku podstawowego rzutu obronnego – jeśli zakończy się sukcesem. W przypadku ataków zostanie on automatycznie rzucony, jeśli zakończy się sukcesem. Jeśli jest to zarówno zaklęcie atakujące, jak i rzucające rzut obronny, nie zostanie ono automatycznie rzucone (np. Dezintegracja).",
+        "name": "Obrażenia zadawane automatycznie przy rzucaniu zaklęć, które nie są atakami.",
         "no": "Nie",
         "anySpell": "Dla każdego zaklęcia niebędącego atakiem",
-        "nonSaveSpell": "Dla zaklęcia niewymagającego rzutu obronnego, niebędącego atakiem",
-        "saveSpell": "Dla zaklęcia wymagającego rzutu obronnego, niebędącego atakiem"
+        "saveSpell": "Dla zaklęcia wymagającego rzutu obronnego, niebędącego atakiem",
+        "nonSaveSpell": "Dla zaklęcia niewymagającego rzutu obronnego, niebędącego atakiem"
       },
-      "callHotbarMacro": {
-        "hint": "Wywołanie makra paska skrótów na stronie {page} pozycja {column}",
-        "name": "Wywołanie makra paska skrótów na stronie {page} pozycja {column}"
+      "autoRollDamageForStrike": {
+        "hint": "Ustawienie klienta do automatycznego naliczania obrażeń dla ataków. Należy pamiętać, że trafienia krytyczne zadają obrażenia krytyczne.",
+        "name": "Automatyczne rzucanie obrażeń za trafione ataki.",
+        "strike": "Atak"
       },
-      "playerFeatsRarityColour": {
-        "hint": "Ustawienie klienta, aby nazwy atutów były wyświetlane w kolorze rzadkości na kartach postaci.",
-        "name": "Pokazuj nazwy atutów w kolorze rzadkości na kartach postaci."
+      "autoRollDamageNotifyOnSpellCardNotFound": {
+        "hint": "Ustawienie klienta informujące o rzuceniu ataku zaklęciem, dla którego nie znaleziono karty zaklęcia do rzucenia obrażeń.",
+        "name": "Powiadamia, gdy rzucono atak zaklęciem i nie znaleziono żadnej karty zaklęcia."
       },
-      "applyPersistentDamage": {
-        "hint": "Ustawienie świata do automatycznego nakładania trwałych obrażeń.",
-        "name": "Automatyczne nakładanie trwałych obrażeń."
-      },
-      "autoCollapseItemChatCardContent": {
-        "collapsedDefault": "Domyślnie zwinięte, kliknij tytuł, aby rozwinąć.",
-        "hint": "Ustawienie klienta, aby automatycznie zwijać zawartość karty czatu przedmiotu (z wyjątkiem akcji i ataków, patrz poniżej).",
-        "name": "Automatycznie zwijaj zawartość karty czatu elementu.",
-        "noCollapse": "Nigdy się nie zwijaj",
-        "nonCollapsedDefault": "Domyślnie rozwinięty, kliknij tytuł, aby zwinąć."
+      "handleDyingRecoveryRollAllow": {
+        "all": "Wszyscy",
+        "gm": "MG",
+        "hint": "Wybierz, kto może ustawić opcję automatycznej obsługi rzutów stabilizacji umierających postaci po kliknięciu przez właściciela przycisku rzutu na karcie postaci. Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje w menu ustawień automatyzacji klienta.",
+        "name": "Kto może ustawić opcję automatycznej obsługi rzutów stabilizacji umierających postaci po kliknięciu przez właściciela przycisku rzutu na karcie postaci.",
+        "none": "Brak",
+        "players": "Gracze"
       },
       "handleDyingRecoveryRoll": {
         "hint": "Ustawienie klienta, aby automatycznie obsługiwać rzuty na stabilizację po kliknięciu przycisku rzutu na stabilizację.",
+        "name": "Automatycznie obsługuje rzut na stabilizację po kliknięciu przycisku rzutu na stabilizację.",
         "handled": "Rzut na umieranie {roll} {outcome} wykonany automatycznie. {defeated}.",
-        "defeated": "{name} został pokonany",
-        "name": "Automatycznie obsługuje rzut na stabilizację po kliknięciu przycisku rzutu na stabilizację."
+        "defeated": "{name} został pokonany"
       },
       "playerFeatsPrerequisiteHint": {
         "hint": "Ustawienie klienta dodające gwiazdkę do nazwy atutów z ustawionym warunkiem wstępnym.",
         "name": "Dodaj gwiazdkę do nazwy atutów z warunkiem wstępnym."
       },
+      "playerCraftingRarityColour": {
+        "hint": "Ustawienie klienta umożliwiające wyświetlanie nazw formuł w kolorze rzadkości na kartach aktorów.",
+        "name": "Wyświetlaj nazwy formuł w kolorze rzadkości na kartach postaci."
+      },
+      "playerFeatsRarityColour": {
+        "hint": "Ustawienie klienta, aby nazwy atutów były wyświetlane w kolorze rzadkości na kartach postaci.",
+        "name": "Pokazuj nazwy atutów w kolorze rzadkości na kartach postaci."
+      },
+      "playerSpellsRarityColour": {
+        "hint": "Ustawienie klienta, aby nazwy zaklęć były wyświetlane w kolorze rzadkości na kartach postaci.",
+        "name": "Pokaż nazwy zaklęć w kolorze rzadkości na kartach postaci."
+      },
+      "playerSpellsChangeSendToChat": {
+        "hint": "Ustawienie globalne, dzięki któremu wysłanie zaklęcia na czat powoduje wysłanie linku do przedmiotu zaklęcia zamiast pełnego zaklęcia.",
+        "name": "Aby wysyłanie zaklęcia na czat powodowało wysłanie linku do elementu zaklęcia, a nie pełnego zaklęcia.",
+        "text": "Zaklęcie zostało wysłane na czat: "
+      },
+      "castPrivateSpell": {
+        "hint": "Zaznacz, aby kliknięcie z wciśniętym klawiszem Ctrl na zaklęciu rzucało je jako szept dla rzucającego zaklęcie i MG.",
+        "name": "Kliknij z wciśniętym klawiszem Ctrl, aby rzucać prywatnie.",
+        "aSpell": "Zaklęcie"
+      },
+      "castPrivateSpellAutoRevealIfKnown": {
+        "hint": "Zaznacz, aby automatycznie ujawnić prywatnie rzucone zaklęcie, jeśli któryś z członków drużyny je zna.",
+        "name": "... ale automatycznie ujawnia zaklęcie, jeśli jest ono znane drużynie."
+      },
+      "castPrivateSpellAutoRevealOverrideGMRollMode": {
+        "hint": "Zastąp wybrany przez MG tryb rzutu na publiczny. Jeśli opcja jest wyłączona, zostanie użyty tryb rzutu wybrany przez MG (publiczny/rzut do mg/ukryty/dla siebie).",
+        "name": "... i zawsze automatycznie ujawniaj zaklęcia jako wiadomość publiczną."
+      },
+      "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
+        "hint": "Zaznacz, aby w przypadku zaklęć ujawnianych automatycznie na karcie czatu wyświetlani byli członkowie drużyny znający dane zaklęcie",
+        "name": "... i wymień członków drużyny, którzy znają automatycznie ujawnione zaklęcie"
+      },
+      "castPrivateSpellHideName": {
+        "hint": "Zaznacz, aby ukryć nazwę prywatnie rzuconego zaklęcia w rzucie na obrażenia zamiast ukrywać rzut na obrażenia.",
+        "name": "... i ukryć nazwę prywatnie rzuconego zaklęcia w rzucie na obrażenia."
+      },
+      "castPrivateSpellAlwaysFor": {
+        "hint": "Zaznacz, aby zawsze rzucać prywatnie dla... (Przytrzymaj Ctrl, aby *nie* rzucać prywatnie)",
+        "name": "... ale zawsze rzucać prywatnie:",
+        "none": "Brak",
+        "nonAllies": "Osoby niebędące sojusznikami",
+        "nonPartymembers": "Osoby niebędące członkami drużyny",
+        "npcs": "Bohaterowie Niezależni"
+      },
+      "castPrivateSpellWithPublicMessage": {
+        "cantrip": "Sztuczka",
+        "firstPart": "Postać {tokenName} rzuciła zaklęcie <span data-visibility=\"gm\">@UUID[{spellUUID}]</span> z tradycji <strong>{traditionString}</strong>",
+        "hint": "W przypadku rzucania zaklęć prywatnie, ustawienie to wysyła również publiczną wiadomość o rzuceniu zaklęcia, chyba że podczas rzucania zaklęcia przytrzymasz klawisze SHIFT i CTRL.",
+        "name": "Publikuje wiadomość o rzuceniu zaklęcia.",
+        "basic": "Podstawowy",
+        "noButtonSavePart": "<br><b>{basic} {dataSave} rzut obronny</b>",
+        "savePart": "<br>Rzut obronny dla nieznanego zaklęcia to: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}{basic}}]",
+        "secondPartNoRk": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
+        "secondPartRK": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą testu @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G])",
+        "spell": "Zaklęcie",
+        "they": "Oni",
+        "knownBy": "<div><p><b>Znany przez: </b>{spellHavers}</p></div><hr class=\"item-block-divider\">"
+      },
+      "castPrivateSpellWithPublicMessageShowToGM": {
+        "hint": "Pokaż również publiczną wiadomość do MG.",
+        "name": "... i pokazać publiczną wiadomość również dla MG."
+      },
+      "castPrivateSpellWithPublicMessageShowTraits": {
+        "hint": "Pokaż cechy zaklęcia w wiadomości publicznej.",
+        "name": "... i pokazać cechy zaklęcia w wiadomości publicznej.",
+        "traitPart": " z tymi cechami: <strong>{traits}</strong>"
+      },
+      "castPrivateSpellWithPublicMessageTraitsBlocklist": {
+        "hint": "Rozdzielona przecinkami lista cech, które mają zostać wykluczone z wiadomości publicznej (np. 'mental, illusion')",
+        "name": "... ale wyklucz te cechy z publicznej wiadomości"
+      },
+      "customPauseImage": {
+        "hint": "Niestandardowy obraz używany jako obraz pauzy. Pozostaw puste, aby użyć domyślnej ikony zegara.",
+        "name": "Niestandardowy obraz używany jako obraz pauzy."
+      },
       "customPauseText": {
         "hint": "Niestandardowy tekst używany jako tekst pauzy. Pozostaw pusty, aby użyć domyślnego \"Gra wstrzymana\".",
         "name": "Niestandardowy tekst używany jako tekst pauzy."
       },
-      "autoRemoveUnconsciousAtGreaterThanZeroHP": {
-        "hint": "Ustawienie automatycznego usuwania nieprzytomności w przypadku wyleczenia do ponad 0 PW.",
-        "name": "Automatycznie usuwa nieprzytomność, jeśli zostanie wyleczona do poziomu wyższego niż 0 PW."
-      },
-      "npcMystifier": {
-        "hint": "Zaznacz, aby włączyć funkcję zamiany tokenów, zmieniającą nazwy tokenów w aktywnej scenie na podstawie ich cech, jeśli podczas dodawania do sceny zostanie kliknięty klawisz Ctrl (konfigurowalny). Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje. Zawsze wyklucza członków drużyny.",
-        "name": "Włącz utajnienie npc."
-      },
-      "npcMystifierAddRandomProperty": {
-        "none": "Brak",
-        "hint": "Wybierz typ losowej właściwości, którą chcesz dodać podczas mistyfikacji tokenów, które opcjonalnie można zachować.",
-        "name": "Dodaj losową właściwość wybranego typu do nazwy",
-        "numberPostfix": "Liczba jako przedrostek",
-        "wordPrefix": "Słowo jako przedrostek"
-      },
-      "npcMystifierModifierKey": {
-        "hint": "Wybierz, aby włączyć ustawienie, które klawisze należy przytrzymać, aby ukryć token podczas przeciągania go do aktywnej sceny. Pamiętaj, że jeśli wybierzesz Alt (nie jest to ustawienie domyślne), token zostanie również ukryty.",
-        "name": "Klucz do utajniania podczas przeciągania do sceny",
-        "always": "Zawsze",
-        "disabled": "Wyłączony",
-        "alt": "Alt",
-        "control": "Control",
-        "meta": "⌘ (Mac)/⊞ (windows)"
-      },
-      "npcMystifierMystifyKey": {
-        "hint": "Ustawienie powiązania klawiszy w celu utajniania wybranych tokenów.",
-        "name": "Skrót do utajniania wybranych tokenów"
-      },
-      "npcMystifierNoMatch": {
-        "hint": "Tekst do użycia, gdy nie znaleziono pasującej cechy, więc nazwa byłaby pusta (pusty ciąg zostanie ustawiony na \"...\")",
-        "name": "Brak pasującego tekstu"
-      },
-      "npcMystifierUseEliteWeak": {
-        "hint": "Zaznacz, aby użyć nazwy elitarny/słaby w nazwie mistyfikatora.",
-        "name": "Użyj statusu elitarny/słaby"
-      },
-      "npcMystifierUseRaritiesReplacement": {
-        "hint": "W tym polu tekstowym wprowadź słowo, którym chcesz zastąpić rzadkości większe niż Common (np. \"Unusual\"). Jeśli pole jest puste, nie zmienia wyświetlanej rzadkości.",
-        "name": "Zastąp rzadkości rzadsze niż powszechne"
-      },
-      "reminderBreathWeapon": {
-        "hint": "Zaznacz, aby ustawić przypomnienie o użyciu umiejętności doładowania (np. broni oddechowej).",
-        "source": "Przypomnienie o doładowaniu utworzone przez PF2e Workbench",
-        "defaultName": "Zionięcie",
-        "name": "Przypomnienie o doładowaniu (np. broni oddechowej)",
-        "used": "Użyty "
-      },
-      "reminderCannotAttack": {
-        "defeated": "jest pokonany",
-        "hasNoHp": "nie ma PW",
-        "note": "Czy jesteś pewien tego ataku? {actorName} {reason}, a więc prawdopodobnie nie będzie w stanie zaatakować...",
-        "petrified": "jest skamieniały",
-        "unconscious": "jest nieprzytomny",
-        "name": "Przypomnienie, jeśli atakowanie tokenem nie jest możliwe",
-        "hint": "Zaznacz aby pokazać przypomnienie jeśli atakujesz tokenem, który nie może atakować z powodu bycia nieprzytomnym/martwym/pokonanym/brak PW/itd.",
-        "dead": "nie żyje",
-        "error": "{title} anulowany przez {actorName} z powodu {reason}.",
-        "info": "Czy jesteś pewien tego {title}? {actorName} {reason}, a więc raczej nie będzie w stanie zaatakować...",
-        "restrained": "jest obezwładniony",
-        "cancelAttack": "Anuluj atak, jeśli nie możesz zaatakować",
-        "reminder": "Przypomnienie",
-        "no": "Nie przypominaj"
-      },
-      "reminderCannotAttackIgnoreDeadEidolon": {
-        "hint": "Zaznacz, aby eidolony, które są martwe/nie mają PW, mogły atakować bez przypomnienia.",
-        "name": "Eidolony mogą atakować, gdy są martwe"
-      },
-      "remindersSettings": {
-        "label": "Zarządzaj ustawieniami przypomnień",
-        "name": "Ustawienia przypomnień",
-        "hint": "Włączanie i konfigurowanie różnych przypomnień"
-      },
-      "reminderTargeting": {
-        "hint": "Zaznacz, aby wyświetlić przypomnienie o celowaniu w walce.",
-        "name": "Przypomnienie o celowaniu",
-        "info": "Wyceluj, zanim zaatakujesz.",
-        "mustTarget": "Anulowanie nieukierunkowanego ataku",
-        "no": "Brak przypomnienia",
-        "reminder": "Przypomnienie",
-        "error": "{title} anulowane, ponieważ musisz namierzyć cel przed atakiem."
-      },
-      "tokenAnimation": {
-        "hint": "Włącz, aby zmienić animację ruchu tokenów. Może to powodować problemy z modułem Multilevel Tokens.",
-        "name": "Włącz, aby zmienić animację ruchu tokena."
-      },
-      "qolWorldSettings": {
-        "name": "Ustawienia QoL Świata",
-        "hint": "Włączanie i konfigurowanie ustawień Quality of Life dla MG",
-        "label": "Zarządzaj ustawieniami QoL dla Świata"
-      },
-      "npcMystifierPrefix": {
-        "name": "Prefiks słowa lub tabeli rzutu",
-        "hint": "Dodaje tekst do prefiksu nowej nazwy (infix, jeśli powyżej wybrano losową właściwość słowa), domyślnie '' (przykład: 'Unknown'), jeśli pasuje do nazwy tabeli rzutu, losowy wynik tekstowy z tej tabeli zostanie użyty jako prefiks.  Zostanie on dodany *po* dowolnym postfiksie właściwości losowej (patrz również opcja prefiksu)"
-      },
-      "npcMystifyAllPhysicalMagicalItems": {
-        "onZeroHp": "Utajnianie przedmiotów na npc osiągającym 0 PW",
-        "no": "Brak mistyfikacji przedmiotów",
-        "name": "Utajnia alchemiczne i magiczne przedmioty na npc, jeśli ustawienie systemu PF2e \"NPC są łupem\" jest włączone.",
-        "hint": "Automatycznie utajnia wszelkie nietrwałe przedmioty fizyczne, które są alchemiczne lub magiczne, zgodnie z tym, co wybrano w rozwijanym menu, jeśli włączone jest ustawienie systemu PF2e \"NPC są łupem\".",
-        "onScene": "Utajnianie przedmiotów po dodaniu npc do sceny"
-      },
-      "mystificationSettings": {
-        "label": "Zarządzaj ustawieniami utajniania NPC",
-        "hint": "Włącz i skonfiguruj utajnianie NPC",
-        "name": "Ustawienia utajniania postaci niezależnych"
-      },
-      "npcMystifierWordPrefix": {
-        "hint": "Dodaje losowe słowo z podanej tabeli rzutów jako prefiks, jeśli wybrano opcję \"Prefiks słowa\").",
-        "name": "Dodaj losowe słowo z podanej tabeli rzutów"
-      },
-      "heroPointHandler": {
-        "ignore": "Nic",
-        "all": "Wszyscy",
-        "none": "Brak postaci",
-        "addedFor": "Dodano 1 Punkt Bohaterstwa dla {name}",
-        "timerValue": "Wartość licznika (zakres 0 - {maxMinutes})",
-        "add": "Dodaj",
-        "addedToForAll": "Dodano wszystkim {heroPoints} Punktów Bohaterstwa",
-        "addOne": "<b>Sekcja 2</b> - Dodaje jeden Punkt Bohaterstwa wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu)",
-        "defaultTimeoutMinutes": 60,
-        "doWhat": "<b>Sekcja 1</b> - Wybierz, co zrobić z Punktami Bohatera <em>wszystkich postaci</em> o następującej wartości",
-        "hint": "Opcja obsługi Punktów Bohatera z opcjonalnym powiązaniem klawiszy, aby otworzyć okno dialogowe, które może zresetować lub dodać Punkty Bohatera dla wszystkich postaci, dodać jeden Punkt Bohatera do losowej (lub wybranej) postaci i, co najważniejsze, uruchomić licznik czasu, aby okno dialogowe pojawiło się ponownie po (domyślnie) 60 minutach.",
-        "instructions": "Należy pamiętać, że licznik czasu jest wstrzymany, gdy to okno dialogowe jest otwarte. Zamknij to okno dialogowe bez naciskania żadnego z tych przycisków, aby wyłączyć wstrzymanie licznika czasu, lub naciśnij odpowiedni przycisk, aby wykonać jego polecenie.",
-        "minutesLeft": "minut pozostałych na bieżącym liczniku",
-        "name": "Włącz obsługę Punktów Bohatera.",
-        "resetToForAll": "Zresetowano Punkty Bohaterstwa dla wszystkich do {heroPoints}",
-        "showAfter": "Pokaż okno dialogowe ponownie po tylu minutach",
-        "startTimerLabel": "Prześlij zmiany i uruchom/wznów licznik czasu",
-        "thisMany": "Tak wielu",
-        "timerStopped": "Licznik Punktów Bohaterstwa został zatrzymany.",
-        "title": "Obsługa Punktów Bohatera",
-        "willBeResetIn": "Obsługa Punktów Bohatera powraca za {remainingMinutes} minut ({time}).",
-        "resetTo": "Reset do",
-        "noRunningTimer": "Brak uruchomionego licznika",
-        "noTimerLabel": "Zastosuj. <b>Wyłącz</b> licznik. <b>Zatrzyma każdy </b> istniejący licznik czasu."
-      },
-      "houseRulesSettings": {
-        "label": "Zarządzaj ustawieniami Zasad Domowych",
-        "hint": "(Eksperymentalne) Włączanie i konfigurowanie różnych zasad domowych",
-        "name": "(Eksperymentalne) Ustawienia zasad domowych"
-      },
-      "logLevel": {
-        "info": "Info",
-        "name": "Poziom logów",
-        "trace": "Trasa",
-        "debug": "Debugowanie",
-        "off": "Wyłączony",
-        "hint": "Poziom logów",
-        "error": "Błąd",
-        "warn": "Ostrzeżenie"
-      },
-      "npcMystifierRandomPropertySkipForUnique": {
-        "hint": "Zaznacz, aby pominąć dodawanie losowej właściwości podczas mistyfikacji unikalnych tokenów. (Tzn. zostanie zachowana po demistyfikacji tokenu)",
-        "name": "Pomiń losową trwałą cechę dla unikalnych tokenów."
-      },
-      "npcMystifierUseRarities": {
-        "hint": "Zaznacz, aby używać rzadkości w utajnionej nazwie.",
-        "name": "Użyj rzadkości"
-      },
-      "tokenAnimationSpeed": {
-        "name": "Zmiana prędkości animacji ruchu tokena.",
-        "hint": "Zmiana prędkości animacji ruchu tokena."
-      },
-      "keeleysHeroPointRule": {
-        "hint": "Zasada domowa preferowana przez pewnego dewelopera Paizo: jeśli naturalny wynik ponownego rzutu na punkty bohatera wynosi 10 lub mniej, po fakcie stosowana jest premia w wysokości 10.",
-        "name": "Reguła punktów bohaterstwa Keeleya",
-        "bonusTag": "Niższy wynik przerzutu +10"
+      "decreaseFrightenedConditionEachTurn": {
+        "hint": "Ustawienie klienta automatycznie zmniejszające stan przerażenia co turę dla postaci, NPC i chowańców.",
+        "name": "Automatycznie zmniejsza stan przerażenia co turę."
       },
       "enableAutomaticMove": {
         "hint": "Wybierz, aby umożliwić ustawienie inicjatywy walczącego poza własną turą tuż przed bieżącym walczącym, zazwyczaj dlatego, że bieżący walczący zabił wybranego uczestnika. Ze względu na zaokrąglanie kilku uczestników może mieć taką samą inicjatywę na liście.",
@@ -538,49 +438,6 @@
         "noAutomation": "Nigdy",
         "reaching0HP": "Gdy postać lub npc osiągnie 0 PW.",
         "reaching0HPCharactersOnly": "Gdy postać walcząca osiągnie 0 PW."
-      },
-      "legacyVariantRuleAncestryParagon": {
-        "title": "Atuty Ancestry Paragon",
-        "hint": "Wymaga włączenia ustawienia systemowego \"Atuty Kampanii\". Dodaje sekcję \"Atuty Kampanii\" dla Ancestry Paragon, ale *nie* automatycznie przenosi atutów z poprzedniej sekcji lub Bonusowych Atutów.",
-        "name": "Dodaje sloty na atuty Ancestry Paragon. Wymaga odświeżenia (f5) po zmianie."
-      },
-      "moveBeforeCurrentCombatantContextMenu": {
-        "name": "Przesunięcie wybranego walczącego przed bieżącego walczącego."
-      },
-      "notifications": {
-        "cantMystify": "Nie możesz utajnić tego tokena. Czy jest na aktywnej scenie i czy jesteś MG?"
-      },
-      "npcMystifierBlacklist": {
-        "hint": "Dodaj słowa, aby odfiltrować zawartość tej oddzielonej przecinkami listy bloków z utajnianej nazwy.",
-        "name": "Lista blokowanych cech, których nigdy nie należy dodawać"
-      },
-      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
-        "hint": "Sprawdź, czy wszystkie utajnienia działają na wszystkie tokeny oparte na tym samym aktorze.",
-        "name": "Odkrywanie wszystkich tokenów aktora"
-      },
-      "npcMystifierKeepRandomProperty": {
-        "name": "Zachowaj prefiks/postfiks podczas utajniania/odkrywania.",
-        "hint": "Zaznacz, aby zachować numer postfix/prefiks słowa *w tym samym formacie, co obecnie skonfigurowano w tym module* (jeśli istnieje) jako postfix/prefiks nazwy podczas mistyfikacji/demistyfikacji tokenów."
-      },
-      "npcMystifierPostfix": {
-        "name": "Postfiks słowa lub tabeli rzutu",
-        "hint": "Dodaje tekst do postfiksu nowej nazwy, domyślnie '' (przykład: 'Creature'), jeśli pasuje do nazwy tabeli rzutów (domyślnie jest to dołączona tabela 'Workbench Adjectives'), losowy wynik tekstowy z tej tabeli zostanie użyty jako postfiks. Zostanie on dodany *przed* dowolnym losowym prefiksem właściwości (patrz również opcja prefiksu)"
-      },
-      "npcMystifierUseOtherTraits": {
-        "hint": "Sprawdź, czy używane są wszystkie cechy tokenów, które nie zostały uwzględnione w żadnym z powyższych ustawień w nazwie mistyfikacji.",
-        "name": "Użyj innych cech"
-      },
-      "heroPointHandlerKey": {
-        "hint": "Naciśnięcie klawisza otwiera okno dialogowe obsługi Punktów Bohatera, które umożliwia resetowanie i dodawanie Punktów Bohaterstwa z cogodzinnym przypomnieniem.",
-        "name": "Przycisk otwiera okno dialogowe obsługi Punktów Bohaterstwa."
-      },
-      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
-        "hint": "Utajniaj przedmioty tylko wtedy, gdy są tego poziomu lub wyższego.",
-        "name": "Utajniaj przedmioty tylko wtedy, gdy są tego poziomu lub wyższego."
-      },
-      "decreaseFrightenedConditionEachTurn": {
-        "name": "Automatycznie zmniejsza stan przerażenia co turę.",
-        "hint": "Ustawienie klienta automatycznie zmniejszające stan przerażenia co turę dla postaci, NPC i chowańców."
       },
       "giveUnconsciousIfDyingRemovedAt0HP": {
         "hint": "Ustawienie automatycznej utraty przytomności w przypadku usunięcia stanu Umierania przy 0 PW.",
@@ -592,9 +449,58 @@
         "name": "Automatycznie ustawia stan Ranny po usunięciu Umierania.",
         "numbToDeathMessage": "{name} właśnie wyzwolił @UUID[Compendium.pf2e.feats-srd.gfMP2aMs3YGONVeB]. Zastosuj leczenie ręcznie."
       },
+      "heroPointHandler": {
+        "add": "Dodaj",
+        "addedFor": "Dodano 1 Punkt Bohaterstwa dla {name}",
+        "addedToForAll": "Dodano wszystkim {heroPoints} Punktów Bohaterstwa",
+        "addOne": "<b>Sekcja 2</b> - Dodaje jeden Punkt Bohaterstwa wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu)",
+        "all": "Wszyscy",
+        "defaultTimeoutMinutes": 60,
+        "doWhat": "<b>Sekcja 1</b> - Wybierz, co zrobić z Punktami Bohatera <em>wszystkich postaci</em> o następującej wartości",
+        "hint": "Opcja obsługi Punktów Bohatera z opcjonalnym powiązaniem klawiszy, aby otworzyć okno dialogowe, które może zresetować lub dodać Punkty Bohatera dla wszystkich postaci, dodać jeden Punkt Bohatera do losowej (lub wybranej) postaci i, co najważniejsze, uruchomić licznik czasu, aby okno dialogowe pojawiło się ponownie po (domyślnie) 60 minutach.",
+        "ignore": "Nic",
+        "instructions": "Należy pamiętać, że licznik czasu jest wstrzymany, gdy to okno dialogowe jest otwarte. Zamknij to okno dialogowe bez naciskania żadnego z tych przycisków, aby wyłączyć wstrzymanie licznika czasu, lub naciśnij odpowiedni przycisk, aby wykonać jego polecenie.",
+        "minutesLeft": "minut pozostałych na bieżącym liczniku",
+        "name": "Włącz obsługę Punktów Bohatera.",
+        "none": "Brak postaci",
+        "noRunningTimer": "Brak uruchomionego licznika",
+        "noTimerLabel": "Zastosuj. <b>Wyłącz</b> licznik. <b>Zatrzyma każdy </b> istniejący licznik czasu.",
+        "resetTo": "Reset do",
+        "resetToForAll": "Zresetowano Punkty Bohaterstwa dla wszystkich do {heroPoints}",
+        "showAfter": "Pokaż okno dialogowe ponownie po tylu minutach",
+        "startTimerLabel": "Prześlij zmiany i uruchom/wznów licznik czasu",
+        "thisMany": "Tak wielu",
+        "timerStopped": "Licznik Punktów Bohaterstwa został zatrzymany.",
+        "timerValue": "Wartość licznika (zakres 0 - {maxMinutes})",
+        "title": "Obsługa Punktów Bohatera",
+        "willBeResetIn": "Obsługa Punktów Bohatera powraca za {remainingMinutes} minut ({time})."
+      },
+      "heroPointHandlerDefaultTimeoutMinutes": {
+        "hint": "Ustaw domyślną (i maksymalną) liczbę minut do następnego otwarcia obsługi Punktów Bohaterstwa.",
+        "name": "... przez tyle minut, aż otworzy się okno dialogowe Obsługi Punktów Bohaterstwa."
+      },
+      "heroPointHandlerKey": {
+        "hint": "Naciśnięcie klawisza otwiera okno dialogowe obsługi Punktów Bohatera, które umożliwia resetowanie i dodawanie Punktów Bohaterstwa z cogodzinnym przypomnieniem.",
+        "name": "Przycisk otwiera okno dialogowe obsługi Punktów Bohaterstwa."
+      },
+      "heropointHandlerNotification": {
+        "name": "... i wysłać powiadomienie o przyznaniu Punktów Bohaterstwa.",
+        "hint": "Zaznacz, aby automatycznie wysyłać powiadomienie, gdy osoba otrzyma Punkt Bohaterstwa."
+      },
+      "heropointHandlerNotificationChat": {
+        "name": "... jako czat lub komunikat informacyjny.",
+        "hint": "Zaznacz, aby obsługa Punktów Bohaterstwa powiadamiała jako czat, w przeciwnym razie będzie to tymczasowa wiadomość informacyjna."
+      },
       "heroPointHandlerStartTimerOnReady": {
         "hint": "Zaznacz, aby automatycznie uruchomić licznik czasu obsługi Punktów Bohaterów, gdy gra będzie gotowa.",
         "name": "... i automatycznie uruchomi Obsługę Punktów Bohaterstwa."
+      },
+      "heropointHandlerRandomization": {
+        "hint": "Sposób wybrania gracza, który otrzyma losowy punkt bohatera",
+        "name": "... sposób wybrania gracza, który otrzyma losowy punkt bohatera.",
+        "none": "Nikt",
+        "random": "Losowy członek drużyny",
+        "randomPartymemberThatHasNotReceivedAHeropoint": "Członek drużyny, który jeszcze go nie otrzymał."
       },
       "housepatcher": {
         "hint": "(NAPRAWDĘ EKSPERYMENTALNE) Wprowadź tablicę json, aby załatać kompendia systemowe. Dokumentacja znajduje się w housepatcher.md na githubie.",
@@ -602,14 +508,118 @@
         "notification": "Naprawiono {count} niezałatanych elementów w kompendiach systemowych.",
         "error": "Zły plik JSON housepatchera został usunięty"
       },
+      "houseRulesSettings": {
+        "hint": "(Eksperymentalne) Włączanie i konfigurowanie różnych zasad domowych",
+        "label": "Zarządzaj ustawieniami Zasad Domowych",
+        "name": "(Eksperymentalne) Ustawienia zasad domowych"
+      },
+      "heroPointRules": {
+        "hint": "Zasada punktu bohatera Keeleya, użyj najwyższego wyniku lub, oczywiście, normalna zasada ostatniego wyniku.",
+        "name": "Zasady domowe dotyczące Punktów Bohaterstwa",
+        "no": "Normalne zasady (użyj ostatniego rzutu)",
+        "keeleysHeroPointRule": "Zasada Punktów Bohaterskich Keeleya (+10, jeśli ponowny rzut jest mniejszy niż 10).",
+        "useHighestHeroPointRoll": "Użyj najwyższego wyniku.",
+        "bonusTagKeeleys": "Niższy przerzut +10",
+        "bonusTagUseHighestRoll": "Użyto najwyższego rzutu"
+      },
+      "legacyVariantRuleAncestryParagon": {
+        "hint": "Wymaga włączenia ustawienia systemowego \"Atuty Kampanii\". Dodaje sekcję \"Atuty Kampanii\" dla Ancestry Paragon, ale *nie* automatycznie przenosi atutów z poprzedniej sekcji lub Bonusowych Atutów.",
+        "name": "Dodaje sloty na atuty Ancestry Paragon. Wymaga odświeżenia (f5) po zmianie.",
+        "title": "Atuty Ancestry Paragon"
+      },
       "legacyVariantRuleDualClass": {
         "hint": "Wymaga włączenia ustawienia systemowego \"Atuty Kampanii\". Dodaje sekcję Atuty Kampanii dla Dual Class, ale *nie* automatycznie przenosi atutów z poprzedniej sekcji lub Bonusowych Atutów, musisz także użyć makra Dual Class, aby utworzyć klasę dla postaci.",
         "name": "Dodaje miejsca na atuty Dual Class. Wymaga odświeżenia (f5) po zmianie.",
         "title": "Atuty Dual Class"
       },
+      "logLevel": {
+        "name": "Poziom logów",
+        "hint": "Poziom logów",
+        "trace": "Trasa",
+        "debug": "Debugowanie",
+        "info": "Info",
+        "warn": "Ostrzeżenie",
+        "error": "Błąd",
+        "off": "Wyłączony"
+      },
+      "moveBeforeCurrentCombatantContextMenu": {
+        "name": "Przesunięcie wybranego walczącego przed bieżącego walczącego."
+      },
       "moveBeforeCurrentCombatantKey": {
         "hint": "Powiązanie klawiszy świata do przeniesienia wybranego walczącego przed bieżącego walczącego, zwykle dlatego, że bieżący walczący zabił wybranego walczącego. Ze względu na zaokrąglanie, kilku walczących może wykazywać tę samą inicjatywę na liście.",
         "name": "(Świat), aby przesunąć wybranego walczącego przed bieżącego walczącego."
+      },
+      "mystificationSettings": {
+        "hint": "Włącz i skonfiguruj utajnianie NPC",
+        "label": "Zarządzaj ustawieniami utajniania NPC",
+        "name": "Ustawienia utajniania postaci niezależnych"
+      },
+      "notifications": {
+        "cantMystify": "Nie możesz utajnić tego tokena. Czy jest na aktywnej scenie i czy jesteś MG?"
+      },
+      "npcMystifier": {
+        "hint": "Zaznacz, aby włączyć funkcję zamiany tokenów, zmieniającą nazwy tokenów w aktywnej scenie na podstawie ich cech, jeśli podczas dodawania do sceny zostanie kliknięty klawisz Ctrl (konfigurowalny). Zapisz ustawienia, aby wyświetlić/ukryć dodatkowe opcje. Zawsze wyklucza członków drużyny.",
+        "name": "Włącz utajnienie npc."
+      },
+      "npcMystifierAddRandomProperty": {
+        "hint": "Wybierz typ losowej właściwości, którą chcesz dodać podczas mistyfikacji tokenów, które opcjonalnie można zachować.",
+        "name": "Dodaj losową właściwość wybranego typu do nazwy",
+        "none": "Brak",
+        "numberPostfix": "Liczba jako przedrostek",
+        "wordPrefix": "Słowo jako przedrostek"
+      },
+      "npcMystifierBlacklist": {
+        "hint": "Dodaj słowa, aby odfiltrować zawartość tej oddzielonej przecinkami listy bloków z utajnianej nazwy.",
+        "name": "Lista blokowanych cech, których nigdy nie należy dodawać"
+      },
+      "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
+        "hint": "Sprawdź, czy wszystkie utajnienia działają na wszystkie tokeny oparte na tym samym aktorze.",
+        "name": "Odkrywanie wszystkich tokenów aktora"
+      },
+      "npcMystifierDemystifyToOriginalTokenName": {
+        "hint": "Podczas demistyfikacji tokenu przywróć jego oryginalną nazwę zamiast używać nazwy prototypowego tokenu aktora.",
+        "name": "Przywróć oryginalną nazwę tokenu podczas demistyfikacji"
+      },
+      "npcMystifierExcludeActorTypes": {
+        "hint": "Rozdzielona przecinkami lista typów aktorów, które mają zostać wykluczone z mistyfikacji (tj. jeden lub więcej z następujących typów: army,character,familiar,hazard,loot,npc,party,vehicle)",
+        "name": "Typy aktorów, których należy wykluczyć z mistyfikacji"
+      },
+      "npcMystifierIcon": {
+        "hint": "Ikona Font Awesome, która ma być używana do przełączania trybu ukrywania. Musi to być prawidłowa klasa ikony Font Awesome (np. `fa-solid fa-eye-slash` lub `fa-solid fa-user-secret`).",
+        "name": "Ikona Mistyfikacji"
+      },
+      "npcMystifierKeepRandomProperty": {
+        "hint": "Zaznacz, aby zachować numer postfix/prefiks słowa *w tym samym formacie, co obecnie skonfigurowano w tym module* (jeśli istnieje) jako postfix/prefiks nazwy podczas mistyfikacji/demistyfikacji tokenów.",
+        "name": "Zachowaj prefiks/postfiks podczas utajniania/odkrywania."
+      },
+      "npcMystifierModifierKey": {
+        "alt": "Alt",
+        "always": "Zawsze",
+        "control": "Control",
+        "meta": "⌘ (Mac)/⊞ (windows)",
+        "disabled": "Wyłączony",
+        "hint": "Wybierz, aby włączyć ustawienie, które klawisze należy przytrzymać, aby ukryć token podczas przeciągania go do aktywnej sceny. Pamiętaj, że jeśli wybierzesz Alt (nie jest to ustawienie domyślne), token zostanie również ukryty.",
+        "name": "Klucz do utajniania podczas przeciągania do sceny"
+      },
+      "npcMystifierMystifyKey": {
+        "hint": "Ustawienie powiązania klawiszy w celu utajniania wybranych tokenów.",
+        "name": "Skrót do utajniania wybranych tokenów"
+      },
+      "npcMystifierNoMatch": {
+        "hint": "Tekst do użycia, gdy nie znaleziono pasującej cechy, więc nazwa byłaby pusta (pusty ciąg zostanie ustawiony na \"...\")",
+        "name": "Brak pasującego tekstu"
+      },
+      "npcMystifierPostfix": {
+        "hint": "Dodaje tekst do postfiksu nowej nazwy, domyślnie '' (przykład: 'Creature'), jeśli pasuje do nazwy tabeli rzutów (domyślnie jest to dołączona tabela 'Workbench Adjectives'), losowy wynik tekstowy z tej tabeli zostanie użyty jako postfiks. Zostanie on dodany *przed* dowolnym losowym prefiksem właściwości (patrz również opcja prefiksu)",
+        "name": "Postfiks słowa lub tabeli rzutu"
+      },
+      "npcMystifierPrefix": {
+        "hint": "Dodaje tekst do prefiksu nowej nazwy (infix, jeśli powyżej wybrano losową właściwość słowa), domyślnie '' (przykład: 'Unknown'), jeśli pasuje do nazwy tabeli rzutu, losowy wynik tekstowy z tej tabeli zostanie użyty jako prefiks.  Zostanie on dodany *po* dowolnym postfiksie właściwości losowej (patrz również opcja prefiksu)",
+        "name": "Prefiks słowa lub tabeli rzutu"
+      },
+      "npcMystifierRandomPropertySkipForUnique": {
+        "hint": "Zaznacz, aby pominąć dodawanie losowej właściwości podczas mistyfikacji unikalnych tokenów. (Tzn. zostanie zachowana po demistyfikacji tokenu)",
+        "name": "Pomiń losową trwałą cechę dla unikalnych tokenów."
       },
       "npcMystifierUseCreatureTraits": {
         "hint": "Zaznacz, aby użyć wszystkich \"cech stworzenia\" zdefiniowanych w systemie pf2e w utajnianej nazwie.",
@@ -619,154 +629,126 @@
         "hint": "Sprawdź, czy używasz cech identyfikacji stworzeń (patrz https://2e.aonprd.com/Rules.aspx?ID=2641) w ukrytej nazwie.",
         "name": "Używanie cech identyfikacyjnych stworzeń"
       },
+      "npcMystifierUseEliteWeak": {
+        "hint": "Zaznacz, aby użyć nazwy elitarny/słaby w nazwie mistyfikatora.",
+        "name": "Użyj statusu elitarny/słaby"
+      },
+      "npcMystifierUseOtherTraits": {
+        "hint": "Sprawdź, czy używane są wszystkie cechy tokenów, które nie zostały uwzględnione w żadnym z powyższych ustawień w nazwie mistyfikacji.",
+        "name": "Użyj innych cech"
+      },
+      "npcMystifierUseRarities": {
+        "hint": "Zaznacz, aby używać rzadkości w utajnionej nazwie.",
+        "name": "Użyj rzadkości"
+      },
+      "npcMystifierUseRaritiesReplacement": {
+        "hint": "W tym polu tekstowym wprowadź słowo, którym chcesz zastąpić rzadkości większe niż Common (np. \"Unusual\"). Jeśli pole jest puste, nie zmienia wyświetlanej rzadkości.",
+        "name": "Zastąp rzadkości rzadsze niż powszechne"
+      },
       "npcMystifierUseSize": {
         "hint": "Zaznacz, aby użyć rozmiaru aktora w utajnionej nazwie",
         "name": "Użyj rozmiaru aktora"
       },
+      "npcMystifierWordPrefix": {
+        "hint": "Dodaje losowe słowo z podanej tabeli rzutów jako prefiks, jeśli wybrano opcję \"Prefiks słowa\").",
+        "name": "Dodaj losowe słowo z podanej tabeli rzutów"
+      },
+      "npcMystifyAllPhysicalMagicalItems": {
+        "hint": "Automatycznie utajnia wszelkie nietrwałe przedmioty fizyczne, które są alchemiczne lub magiczne, zgodnie z tym, co wybrano w rozwijanym menu, jeśli włączone jest ustawienie systemu PF2e \"NPC są łupem\".",
+        "name": "Utajnia alchemiczne i magiczne przedmioty na npc, jeśli ustawienie systemu PF2e \"NPC są łupem\" jest włączone.",
+        "no": "Brak mistyfikacji przedmiotów",
+        "onScene": "Utajnianie przedmiotów po dodaniu npc do sceny",
+        "onZeroHp": "Utajnianie przedmiotów na npc osiągającym 0 PW"
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
+        "hint": "Utajniaj przedmioty tylko wtedy, gdy są tego poziomu lub wyższego.",
+        "name": "Utajniaj przedmioty tylko wtedy, gdy są tego poziomu lub wyższego."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
+        "hint": "Utajniaj przedmioty tylko wtedy, gdy są równe lub wyższe niż poziom drużyny. Zastępuje ręczne wprowadzanie.",
+        "name": "Utajniaj przedmioty tylko wtedy, gdy ich poziom jest równy lub wyższy od poziomu drużyny."
+      },
+      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
+        "hint": "...zmodyfikowany przez ten mnożnik (tak, wiem, powinienem pokazać ostateczną wartość)",
+        "name": "...zmodyfikowany przez ten mnożnik"
+      },
       "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
-        "name": "Utajniaj przedmioty tylko wtedy, gdy są tej lub wyższej rzadkości.",
-        "hint": "Utajniaj przedmioty tylko wtedy, gdy są tej lub wyższej rzadkości."
+        "hint": "Utajniaj przedmioty tylko wtedy, gdy są tej lub wyższej rzadkości.",
+        "name": "Utajniaj przedmioty tylko wtedy, gdy są tej lub wyższej rzadkości."
       },
       "npcRoller": {
         "hint": "Zaznacz, aby włączyć narzędzie NPC do szybkiego rzutu.",
         "name": "Włącz narzędzie NPC do szybkiego rzutu"
       },
       "npcScaler": {
-        "name": "Zezwól na skalowanie postaci niezależnych (foundry v12)",
-        "hint": "Zaznacz, aby zezwolić na skalowanie postaci niezależnych (nie działa jeszcze w Foundry v13)"
+        "hint": "Zaznacz, aby zezwolić na skalowanie postaci niezależnych (nie działa jeszcze w Foundry v13)",
+        "name": "Zezwól na skalowanie postaci niezależnych (foundry v12)"
       },
-      "workbenchVersion": {
-        "hint": "Wersja, na której przeprowadzono ostatnią migrację. Może być niższa niż wersja modułu. Nie modyfikuj tego, chyba że wiesz, co robisz.",
-        "name": "Wersja migracyjna Workbench"
+      "qolWorldSettings": {
+        "hint": "Włączanie i konfigurowanie ustawień Quality of Life dla MG",
+        "label": "Zarządzaj ustawieniami QoL dla Świata",
+        "name": "Ustawienia QoL Świata"
+      },
+      "reminderBreathWeapon": {
+        "defaultName": "Zionięcie",
+        "hint": "Zaznacz, aby ustawić przypomnienie o użyciu umiejętności doładowania (np. broni oddechowej).",
+        "name": "Przypomnienie o doładowaniu (np. broni oddechowej)",
+        "source": "Przypomnienie o doładowaniu utworzone przez PF2e Workbench",
+        "used": "Użyty "
       },
       "reminderBreathWeaponHidden": {
         "hint": "Zaznacz, aby ukryć przypomnienie przed graczami.",
         "name": "... ale ukryj ikonę przed graczami."
       },
-      "heroPointHandlerDefaultTimeoutMinutes": {
-        "name": "... przez tyle minut, aż otworzy się okno dialogowe Obsługi Punktów Bohaterstwa.",
-        "hint": "Ustaw domyślną (i maksymalną) liczbę minut do następnego otwarcia obsługi Punktów Bohaterstwa."
+      "reminderCannotAttack": {
+        "dead": "nie żyje",
+        "defeated": "jest pokonany",
+        "hasNoHp": "nie ma PW",
+        "hint": "Zaznacz aby pokazać przypomnienie jeśli atakujesz tokenem, który nie może atakować z powodu bycia nieprzytomnym/martwym/pokonanym/brak PW/itd.",
+        "name": "Przypomnienie, jeśli atakowanie tokenem nie jest możliwe",
+        "info": "Czy jesteś pewien tego {title}? {actorName} {reason}, a więc raczej nie będzie w stanie zaatakować...",
+        "error": "{title} anulowany przez {actorName} z powodu {reason}.",
+        "petrified": "jest skamieniały",
+        "restrained": "jest obezwładniony",
+        "unconscious": "jest nieprzytomny",
+        "no": "Nie przypominaj",
+        "reminder": "Przypomnienie",
+        "cancelAttack": "Anuluj atak, jeśli nie możesz zaatakować"
       },
-      "heropointHandlerNotification": {
-        "name": "... i wysłać powiadomienie o przyznaniu Punktów Bohaterstwa.",
-        "hint": "Zaznacz, aby automatycznie wysyłać powiadomienie, gdy osoba otrzyma Punkt Bohaterstwa."
+      "reminderCannotAttackIgnoreDeadEidolon": {
+        "hint": "Zaznacz, aby eidolony, które są martwe/nie mają PW, mogły atakować bez przypomnienia.",
+        "name": "Eidolony mogą atakować, gdy są martwe"
       },
-      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
-        "hint": "...zmodyfikowany przez ten mnożnik (tak, wiem, powinienem pokazać ostateczną wartość)",
-        "name": "...zmodyfikowany przez ten mnożnik"
+      "remindersSettings": {
+        "hint": "Włączanie i konfigurowanie różnych przypomnień",
+        "label": "Zarządzaj ustawieniami przypomnień",
+        "name": "Ustawienia przypomnień"
       },
-      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
-        "hint": "Utajniaj przedmioty tylko wtedy, gdy są równe lub wyższe niż poziom drużyny. Zastępuje ręczne wprowadzanie.",
-        "name": "Utajniaj przedmioty tylko wtedy, gdy ich poziom jest równy lub wyższy od poziomu drużyny."
+      "reminderTargeting": {
+        "hint": "Zaznacz, aby wyświetlić przypomnienie o celowaniu w walce.",
+        "name": "Przypomnienie o celowaniu",
+        "info": "Wyceluj, zanim zaatakujesz.",
+        "error": "{title} anulowane, ponieważ musisz namierzyć cel przed atakiem.",
+        "no": "Brak przypomnienia",
+        "reminder": "Przypomnienie",
+        "mustTarget": "Anulowanie nieukierunkowanego ataku"
       },
-      "autoKillIfMassiveDamage": {
-        "name": "... ale automatycznie zabija po otrzymaniu Ogromnych Obrażeń. (Przestarzałe)",
-        "yes": "Tak, dla wszystkich",
-        "yesForCharacters": "Tak, dla postaci + chowańców",
-        "yesForNpcs": "Tak, dla npc",
-        "no": "Nie",
-        "hint": "(Przestarzałe) Ustawienie automatycznego zabijania po otrzymaniu Ogromnych Obrażeń."
+      "tokenAnimation": {
+        "hint": "Włącz, aby zmienić animację ruchu tokenów. Może to powodować problemy z modułem Multilevel Tokens.",
+        "name": "Włącz, aby zmienić animację ruchu tokena."
       },
-      "autoKillIfDamageHasDeathTrait": {
-        "name": "... ale automatycznie zabija po otrzymaniu wystarczających obrażeń od efektu Śmierci. (Przestarzałe)",
-        "hint": "(Przestarzałe) Ustawienie automatycznego zabijania po otrzymaniu wystarczających obrażeń od źródła z cechą Śmierć.",
-        "no": "Nie",
-        "yesForCharacters": "Tak, dla postaci + chowańców",
-        "yesForNpcs": "Tak, dla npc",
-        "yes": "Tak, dla wszystkich"
+      "tokenAnimationSpeed": {
+        "hint": "Zmiana prędkości animacji ruchu tokenu (domyślna wartość to 6).",
+        "name": "Zmiana prędkości animacji ruchu tokena."
       },
-      "castPrivateSpellAlwaysFor": {
-        "hint": "Zaznacz, aby zawsze rzucać prywatnie dla... (Przytrzymaj Ctrl, aby *nie* rzucać prywatnie)",
-        "name": "... ale zawsze rzucać prywatnie:",
-        "none": "Brak",
-        "nonAllies": "Osoby niebędące sojusznikami",
-        "nonPartymembers": "Osoby niebędące członkami drużyny",
-        "npcs": "Bohaterowie Niezależni"
-      },
-      "heropointHandlerNotificationChat": {
-        "name": "... jako czat lub komunikat informacyjny.",
-        "hint": "Zaznacz, aby obsługa Punktów Bohaterstwa powiadamiała jako czat, w przeciwnym razie będzie to tymczasowa wiadomość informacyjna."
-      },
-      "castPrivateSpellAutoRevealIfKnown": {
-        "hint": "Zaznacz, aby automatycznie ujawnić prywatnie rzucone zaklęcie, jeśli któryś z członków drużyny je zna.",
-        "name": "... ale automatycznie ujawnia zaklęcie, jeśli jest ono znane drużynie."
-      },
-      "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
-        "hint": "Zaznacz, aby w przypadku zaklęć ujawnianych automatycznie na karcie czatu wyświetlani byli członkowie drużyny znający dane zaklęcie",
-        "name": "... i wymień członków drużyny, którzy znają automatycznie ujawnione zaklęcie"
-      },
-      "castPrivateSpellWithPublicMessageShowToGM": {
-        "hint": "Pokaż również publiczną wiadomość do MG.",
-        "name": "... i pokazać publiczną wiadomość również dla MG."
-      },
-      "playerCraftingRarityColour": {
-        "hint": "Ustawienie klienta umożliwiające wyświetlanie nazw formuł w kolorze rzadkości na kartach aktorów.",
-        "name": "Wyświetlaj nazwy formuł w kolorze rzadkości na kartach postaci."
-      },
-      "autoCollapseItemChatCardMoveEffectLinks": {
-        "hint": "... ale przenieś wszystkie linki do efektów przedmiotów poza zwiniętą część karty, gdy jest ona domyślnie zwinięta",
-        "name": "... ale pokaż linki do efektów"
-      },
-      "heropointHandlerRandomization": {
-        "hint": "Sposób wybrania gracza, który otrzyma losowy punkt bohatera",
-        "name": "... sposób wybrania gracza, który otrzyma losowy punkt bohatera.",
-        "none": "Nikt",
-        "random": "Losowy członek drużyny",
-        "randomPartymemberThatHasNotReceivedAHeropoint": "Członek drużyny, który jeszcze go nie otrzymał."
-      },
-      "playerSpellsChangeSendToChat": {
-        "text": "Zaklęcie zostało wysłane na czat: ",
-        "hint": "Ustawienie globalne, dzięki któremu wysłanie zaklęcia na czat powoduje wysłanie linku do przedmiotu zaklęcia zamiast pełnego zaklęcia.",
-        "name": "Aby wysyłanie zaklęcia na czat powodowało wysłanie linku do elementu zaklęcia, a nie pełnego zaklęcia."
-      },
-      "sheatheHeldItemsAfterEncounter": {
-        "message": "{name} schował: {items}",
-        "hint": "Postacie automatycznie chowają broń po zakończeniu walki.",
-        "name": "Postacie automatycznie chowają broń po zakończeniu walki."
-      },
-      "sheatheHeldItemsAfterEncounterTypes": {
-        "hint": "Rozdzielona przecinkami lista typów przedmiotów, które należy schować po napotkaniu (np. 'armor,backpack,book,consumable,equipment,shield,treasure,weapon')",
-        "name": "... ale tylko dla tych typów przedmiotów"
-      },
-      "castPrivateSpellAutoRevealOverrideGMRollMode": {
-        "hint": "Zastąp wybrany przez MG tryb rzutu na publiczny. Jeśli opcja jest wyłączona, zostanie użyty tryb rzutu wybrany przez MG (publiczny/rzut do mg/ukryty/dla siebie).",
-        "name": "... i zawsze automatycznie ujawniaj zaklęcia jako wiadomość publiczną."
-      },
-      "castPrivateSpellWithPublicMessageTraitsBlocklist": {
-        "name": "... ale wyklucz te cechy z publicznej wiadomości",
-        "hint": "Rozdzielona przecinkami lista cech, które mają zostać wykluczone z wiadomości publicznej (np. 'mental, illusion')"
-      },
-      "heroPointRules": {
-        "name": "Zasady domowe dotyczące Punktów Bohaterstwa",
-        "no": "Normalne zasady (użyj ostatniego rzutu)",
-        "keeleysHeroPointRule": "Zasada Punktów Bohaterskich Keeleya (+10, jeśli ponowny rzut jest mniejszy niż 10).",
-        "useHighestHeroPointRoll": "Użyj najwyższego wyniku.",
-        "bonusTagKeeleys": "Niższy przerzut +10",
-        "bonusTagUseHighestRoll": "Użyto najwyższego rzutu",
-        "hint": "Zasada punktu bohatera Keeleya, użyj najwyższego wyniku lub, oczywiście, normalna zasada ostatniego wyniku."
-      },
-      "npcMystifierDemystifyToOriginalTokenName": {
-        "name": "Przywróć oryginalną nazwę tokenu podczas demistyfikacji",
-        "hint": "Podczas demistyfikacji tokenu przywróć jego oryginalną nazwę zamiast używać nazwy prototypowego tokenu aktora."
-      },
-      "npcMystifierExcludeActorTypes": {
-        "name": "Typy aktorów, których należy wykluczyć z mistyfikacji",
-        "hint": "Rozdzielona przecinkami lista typów aktorów, które mają zostać wykluczone z mistyfikacji (tj. jeden lub więcej z następujących typów: army,character,familiar,hazard,loot,npc,party,vehicle)"
-      },
-      "npcMystifierIcon": {
-        "name": "Ikona Mistyfikacji",
-        "hint": "Ikona Font Awesome, która ma być używana do przełączania trybu ukrywania. Musi to być prawidłowa klasa ikony Font Awesome (np. `fa-solid fa-eye-slash` lub `fa-solid fa-user-secret`)."
+      "workbenchVersion": {
+        "hint": "Wersja, na której przeprowadzono ostatnią migrację. Może być niższa niż wersja modułu. Nie modyfikuj tego, chyba że wiesz, co robisz.",
+        "name": "Wersja migracyjna Workbench"
       },
       "pauseImageNoSpin": {
-        "name": "Zatrzymaj obracanie się obrazu w trybie pauzy",
-        "hint": "Zatrzymaj obracanie się obrazu pauzy."
+        "hint": "Zatrzymaj obracanie się obrazu pauzy.",
+        "name": "Zatrzymaj obracanie się obrazu w trybie pauzy"
       }
-    },
-    "modules": {
-      "pf2e-sheet-skill-actions": "Moduł pf2e-sheet-skill-actions nie jest już utrzymywany, wszystkie jego funkcje są częścią Workbencha, prosimy o jego wyłączenie.",
-      "pf2e-toolbox": "Moduł pf2e-toolbox nie jest już utrzymywany, większość jego funkcji jest częścią Workbencha, prosimy o jego wyłączenie.",
-      "multilevel-tokens": "Moduł Multilevel Tokens (i prawdopodobnie inne moduły, które teleportują tokeny) mogą mieć problemy z teleportacją, ponieważ włączono opcjonalne ustawienie Workbench, aby zmienić animację tokenów."
-    },
-    "effectItem": "Efekt Przedmiotu"
+    }
   }
 }
