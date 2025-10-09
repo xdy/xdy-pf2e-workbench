@@ -1,3 +1,10 @@
+## [6.31.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.31.0...v6.31.1) (2025-10-09)
+
+
+### Bug Fixes
+
+* Update verified foundry to 13.350, verified pf2e to 7.5.2, update README.md and CONTRIBUTORS.md to add new contributions/contributors. ([34b9eef](https://github.com/xdy/xdy-pf2e-workbench/commit/34b9eef7d22f277c870e8335d5e72ac7a704d264))
+
 # [6.31.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.30.3...v6.31.0) (2025-10-09)
 
 
