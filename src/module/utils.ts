@@ -2,7 +2,7 @@ import { ActorFlagsPF2e, ActorPF2e, ChatMessagePF2e } from "foundry-pf2e";
 import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
 import BaseUser from "foundry-pf2e/foundry/common/documents/user.js";
 
-function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true) {
+function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true): boolean {
     const amIMessageSender = message.author?.id === game.user?.id;
     if (!game.user?.isGM && playerCondition && amIMessageSender) {
         return true;
@@ -25,18 +25,18 @@ function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
     return degreeOfSuccess;
 }
 
-function isFirstGM() {
+function isFirstGM(): boolean {
     return game.users.activeGM === game.user;
 }
 
-function myRandomId() {
+function myRandomId(): string {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     return Array.from(Array(16).keys())
         .map(() => letters[Math.floor(Math.random() * letters.length)])
         .join("");
 }
 
-function isActuallyDamageRoll(message) {
+function isActuallyDamageRoll(message): boolean {
     // TODO Anything using this should probably hook into Hooks.call(`pf2e.damageRoll`, rollData) instead...
     const isPhysicalDamageroll =
         message.rolls?.length !== 0 &&
@@ -51,30 +51,29 @@ function isActuallyDamageRoll(message) {
 
 export { shouldIHandleThisMessage, degreeOfSuccessWithRerollHandling, isFirstGM, myRandomId, isActuallyDamageRoll };
 
-export function logTrace(...args) {
+export function logTrace(...args): void {
     log(0, ...args);
 }
 
-export function logDebug(...args) {
+export function logDebug(...args): void {
     log(1, ...args);
 }
 
-export function logInfo(...args) {
+export function logInfo(...args): void {
     log(2, ...args);
 }
 
-export function logWarn(...args) {
+export function logWarn(...args): void {
     log(3, ...args);
 }
 
-export function logError(...args) {
+export function logError(...args): void {
     log(4, ...args);
 }
 
 function log(logLevel = 2, ...args) {
     let number = 2;
     if (phase >= Phase.READY) {
-        // eslint-disable-next-line no-constant-binary-expression
         number = Number(game.settings.get(MODULENAME, "logLevel")) ?? 2;
     }
 
@@ -101,9 +100,9 @@ function log(logLevel = 2, ...args) {
     }
 }
 
-export function debounce(callback, wait) {
+export function debounce(callback, wait: number) {
     let timeout;
-    return (...args) => {
+    return (...args: any[]): void => {
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         const context = this;
         clearTimeout(timeout);
@@ -111,7 +110,7 @@ export function debounce(callback, wait) {
     };
 }
 
-export function shouldIHandleThis(actor) {
+export function shouldIHandleThis(actor): boolean | null {
     if (!actor) return null;
     const currentUser = game.users.current;
     const activePlayers = game.users.players.filter((u) => u.active);
@@ -124,7 +123,7 @@ export function shouldIHandleThis(actor) {
     return game.user.id === updater?.id;
 }
 
-export function pushNotification(message: any, type: string = "info") {
+export function pushNotification(message: any, type: string = "info"): void {
     game.socket.emit("module." + MODULENAME, { operation: "notification", args: [type, message] });
 }
 
@@ -136,7 +135,7 @@ export function unflatten(object) {
     return result;
 }
 
-export function setValue(object, path, value) {
+export function setValue(object, path, value): void {
     const split = path.split(".");
     const top = split.pop();
 
@@ -151,7 +150,7 @@ export function setValue(object, path, value) {
  * @param {string} housepatcher - The housepatcher object containing patches.
  * @return {Promise<void>} A promise that resolves when the patches have been applied.
  */
-export async function housepatcher(housepatcher) {
+export async function housepatcher(housepatcher): Promise<void> {
     try {
         const patches = JSON.parse(decodeURI(String(housepatcher)));
         let count = 0;
@@ -210,7 +209,7 @@ export function minionsInCurrentScene(actor: ActorPF2e): ActorPF2e[] {
               ?.filter((x) => x?.traits.has("minion")) : [];
 }
 
-export function setFlag(doc, flag, value) {
+export function setFlag(doc, flag, value): Promise<any> {
     return doc.setFlag(MODULENAME, flag, value);
 }
 
@@ -219,7 +218,7 @@ export function setFlag(doc, flag, value) {
  *
  * @return {Array<Actor>} The list of hero actors.
  */
-export function heroes() {
+export function heroes(): any {
     return (
         game.actors?.party?.members
             .filter((actor) => actor?.isOfType("character"))

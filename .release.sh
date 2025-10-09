@@ -11,7 +11,7 @@ sed -i -r s"~${DOWNLOAD_SEARCH_PATTERN}~${VERSION_MAIN_REPLACE}~" static/module.
 cp static/module.json dist &&
 cp CHANGELOG.md dist &&
 sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$1\"/" package.json &&
-npm install &&
+pnpm install &&
 cd dist || exit &&
 zip -r xdy-pf2e-workbench.zip ./* &&
 cd ..

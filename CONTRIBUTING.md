@@ -58,9 +58,9 @@ Or, if you prefer to do it as a separate module, make sure to ping me so I can l
       ```
 1. Do the following each time you have updated your fork and want to test your code:
 1. Builds the prerequisites
-   `npm install`
+   `pnpm install`
 1. Runs the module in 'developer mode', watching for changes in the code as they happen
-   `npm run build:dev`
+   `pnpm run build:dev`
 
 ## Coding conventions
 

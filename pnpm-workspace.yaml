@@ -1,0 +1,5 @@
+ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - classic-level
+  - esbuild
+  - unrs-resolver
