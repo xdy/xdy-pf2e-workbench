@@ -36,13 +36,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-          #cache: 'pnpm'
+          cache: 'pnpm'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.16.1
-          run_install: false
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install
         run: pnpm install --frozen-lockfile=false
@@ -54,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm dlx semantic-release
+        run: npx semantic-release
 
       - name: Get Module ID
         id: moduleID
