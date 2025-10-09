@@ -1,3 +1,10 @@
+# [6.31.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.30.3...v6.31.0) (2025-10-09)
+
+
+### Features
+
+* add GM macro for search and investigate rolls ([4333d4b](https://github.com/xdy/xdy-pf2e-workbench/commit/4333d4b661982541fc4cea81e1c45e5d4d575c76))
+
 ## [6.30.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.30.2...v6.30.3) (2025-09-23)
 
 
