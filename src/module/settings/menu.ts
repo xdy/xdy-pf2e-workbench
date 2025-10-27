@@ -124,7 +124,7 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
         this.setRenderHooks();
     }
 
-    override getData(): MenuTemplateData {
+    override async getData(): Promise<MenuTemplateData> {
         const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
         const templateData: SettingsTemplateData[] = Object.entries(settings).map(([key, setting]) => {
             const value = game.settings.get(MODULENAME, key);
@@ -141,9 +141,8 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
                 isText: setting.type === String && !setting.filePicker,
             };
         });
-        return <MenuTemplateData>fu.mergeObject(super.getData(), {
+        return fu.mergeObject(await super.getData(), {
             settings: templateData,
-            instructions: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, // lgtm [js/mixed-static-instance-this-access]
         });
     }
 
