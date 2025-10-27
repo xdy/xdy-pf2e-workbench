@@ -127,10 +127,10 @@ class NpcRoller extends foundry.appv1.api.Application {
             const lowerCase = rollName.toLowerCase();
             if (lowerCase.includes("damage")) {
                 roll = CONFIG.Dice.rolls.find((r) => r.name === "DamageRoll");
+                if (!roll) throw new Error("DamageRoll doesn't exist‽");
             } else {
                 roll = Roll;
             }
-            // @ts-ignore
             await new roll(formulaString).toMessage(
                 {
                     speaker: ChatMessage.getSpeaker({ token: <any>token?.document }),
