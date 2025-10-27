@@ -15,54 +15,70 @@
  */
 
 import { scaleNPCToLevel } from "./NPCScaler.js";
-import { ActorPF2e } from "foundry-pf2e";
+import { ActorDirectoryPF2e } from "foundry-pf2e";
+import { ContextMenuEntry } from "foundry/client/applications/ux/context-menu.mts";
 
-// v12 remove later
-export function onScaleNPCContextHook(_html, buttons: any[]) {
-    if (game.user?.isGM) {
-        buttons.unshift({
-            name: "Scale to Level",
-            icon: '<i class="fa-solid fa-level-up-alt"></i>',
-            condition: (li: JQuery<HTMLLIElement>) => {
-                const id = li.data("document-id") as string;
-                const actor = game.actors?.get(id) as ActorPF2e;
+function condition(li: HTMLElement): boolean {
+    return game.actors.get(li.dataset.entryId, { strict: true })?.isOfType("npc");
+}
 
-                return actor.isOfType("npc");
+function callback(li: HTMLElement) {
+    const actor = game.actors.get(li.dataset.entryId, { strict: true });
+    const oldLevel = actor.level;
+    if (!actor.isOfType("npc")) return;
+
+    new foundry.applications.api.DialogV2({
+        window: { title: "Scale NPC" },
+        content: `
+            <p>Scale a creature to a range of levels, creating the creature at each level in the range. The min level must be less than or
+            equal to the max level. To only scale to a single level, set both equal to the desired level.</p>
+            <div class="form-group"><label>Min Level</label><input id="startLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>
+            <div class="form-group"><label>Max Level</label><input id="endLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>`,
+        buttons: [
+            {
+                action: "scale",
+                default: true,
+                icon: '<i class="fa-solid fa-level-up-alt"></i>',
+                label: "Scale",
+                callback: async (
+                    _event: PointerEvent | SubmitEvent,
+                    button: HTMLButtonElement,
+                    _dialog: HTMLDialogElement,
+                ) => {
+                    ui.notifications.info(`Scaling NPC... please wait.`);
+                    const elements = button.form?.elements as HTMLFormControlsCollection & {
+                        startLevel: HTMLInputElement;
+                        endLevel: HTMLInputElement;
+                    };
+                    const startLevel = parseInt(elements.startLevel.value);
+                    const endLevel = parseInt(elements.endLevel.value);
+
+                    for (let i = startLevel; i <= endLevel; i++) {
+                        await scaleNPCToLevel(actor, i);
+                    }
+                    ui.notifications.info(`Scaled ${actor.name} to levels ${startLevel} - ${endLevel}.`);
+                },
             },
-            callback: async (li: JQuery<HTMLLIElement>) => {
-                const id = li.data("document-id") as string;
-                const actor: any = game.actors?.get(id);
+        ],
+    }).render({ force: true });
+}
 
-                // const oldLevel = actor.system.details.level.value;
-                const oldLevel = 24;
+export function onScaleNPCContextHook(_actors: ActorDirectoryPF2e, menuItems: ContextMenuEntry[]) {
+    if (!game.user.isGM) return;
+    menuItems.push({
+        name: "Scale to Level",
+        icon: '<i class="fa-solid fa-level-up-alt"></i>',
+        condition,
+        callback,
+    });
+}
 
-                const d = new Dialog({
-                    title: "Scale NPC",
-                    content:
-                        `<p>Scale a creature to a range of levels, creating the creature at each level in the range. The min level must be less than or ` +
-                        `equal to the max level. To only scale to a single level, set both equal to the desired level.</p>` +
-                        `<div class="form-group"><label>Min Level</label><input id="startLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>` +
-                        `<div class="form-group"><label>Max Level</label><input id="endLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>`,
-                    buttons: {
-                        scale: {
-                            icon: '<i class="fa-solid fa-level-up-alt"></i>',
-                            label: "Scale",
-                            callback: async (html: JQuery) => {
-                                ui.notifications?.info(`Scaling NPC... please wait.`);
-                                const startLevel = parseInt(<string>html.find("#startLevel").val());
-                                const endLevel = parseInt(<string>html.find("#endLevel").val());
-
-                                for (let i = startLevel; i <= endLevel; i++) {
-                                    await scaleNPCToLevel(actor, i);
-                                }
-                                ui.notifications?.info(`Scaled ${actor.name} to levels ${startLevel} - ${endLevel}.`);
-                            },
-                        },
-                    },
-                    default: "scale",
-                });
-                d.render(true);
-            },
-        });
-    }
+export function onScaleNPCContextHookV12(_html, buttons: any[]) {
+    if (!game.user.isGM) return;
+    buttons.push({
+        name: "Scale to Level",
+        icon: '<i class="fa-solid fa-level-up-alt"></i>',
+        condition: (li: JQuery<HTMLLIElement>) => condition(li[0]),
+        callback: (li: JQuery<HTMLLIElement>) => callback(li[0]),
+    });
 }
