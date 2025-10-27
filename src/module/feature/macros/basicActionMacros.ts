@@ -785,7 +785,14 @@ export async function basicActionMacros() {
         exploration: data.filter((value) => value.action.showExploration),
         tabView,
     };
-    const content = await renderTemplate("modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs", filteredData);
+    const content = foundry.utils.isNewerVersion(game.version, 13)
+        ? await foundry.applications.handlebars.renderTemplate(
+              "modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs",
+              filteredData,
+          )
+        : // v12 remove later
+          // @ts-expect-error
+          await renderTemplate("modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs", filteredData);
 
     window.actionDialog = await foundry.applications.api.DialogV2.wait({
         position: {
