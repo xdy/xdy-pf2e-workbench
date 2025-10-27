@@ -36,7 +36,7 @@ import {
     renderTokenHUDHook,
     updateItemHook,
 } from "./hooks.js";
-import { onScaleNPCContextHook } from "./feature/cr-scaler/NPCScalerSetup.js";
+import { onScaleNPCContextHook, onScaleNPCContextHookV12 } from "./feature/cr-scaler/NPCScalerSetup.js";
 import {
     addHeroPoints,
     calcRemainingMinutes,
@@ -105,9 +105,11 @@ export function updateHooks(cleanSlate = false) {
 
     const gs = game.settings;
 
-    if (!foundry.utils.isNewerVersion(game.version, 13)) {
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        handle("getActorContextOptions", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
+    } else {
         // v12 remove later
-        handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
+        handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHookV12);
     }
     handle("renderJournalDirectory", gs.get(MODULENAME, "npcRoller"), enableNpcRollerButton);
 
