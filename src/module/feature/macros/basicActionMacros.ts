@@ -794,7 +794,7 @@ export async function basicActionMacros() {
           // @ts-expect-error
           await renderTemplate("modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs", filteredData);
 
-    window.actionDialog = await foundry.applications.api.DialogV2.wait({
+    window.actionDialog = await new foundry.applications.api.DialogV2({
         position: {
             width,
         },
@@ -859,7 +859,7 @@ export async function basicActionMacros() {
                 }
             }
         },
-    });
+    }).render(true);
 }
 
 // basicActionMacros();
