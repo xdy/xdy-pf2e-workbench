@@ -73,7 +73,7 @@ export function createRemainingTimeMessage(remainingMinutes: number) {
 
 export async function heroPointHandler(state: HPHState) {
     if (
-        Object.values(ui.windows).find((w: Application) =>
+        Object.values(ui.windows).find((w: foundry.appv1.api.Application) =>
             w.title.includes(`${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.title`)}`),
         )
     ) {
@@ -106,7 +106,11 @@ export async function heroPointHandler(state: HPHState) {
     const content = await buildHtml(remainingMinutes, state);
 
     let button: string | null = null;
-    const handlerDialog = new Dialog({
+    const dialog = foundry.utils.isNewerVersion(game.version, 13)
+        ? foundry.appv1.api.Dialog
+        : // @ts-expect-error
+          Dialog;
+    const handlerDialog = new dialog({
         title: title,
         content,
         buttons: {
@@ -401,7 +405,7 @@ function sendMessage(message: string, whisper: string[] | undefined = undefined)
     if (game.settings.get(MODULENAME, "heropointHandlerNotificationChat")) {
         ChatMessage.create({ flavor: message, whisper }, {}).then();
     } else {
-        ui.notifications?.notify(message);
+        ui.notifications.info(message);
     }
 }
 

@@ -65,6 +65,7 @@
     "eslint-import-resolver-typescript": "^3.10.1",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.4",
+    "foundry-pf2e": "github:7H3LaughingMan/foundry-pf2e#v13",
     "fs-extra": "^11.3.2",
     "globals": "^16.4.0",
     "gsap": "^3.13.0",
@@ -93,7 +94,6 @@
   "dependencies": {
     "@yaireo/tagify": "^4.35.4",
     "codemirror": "^6.0.2",
-    "foundry-pf2e": "github:7H3LaughingMan/foundry-pf2e#c9d78388e776f63876966844730cb36f9be4efe0",
     "jiti": "^2.6.1",
     "luxon": "^3.7.2",
     "minisearch": "^7.2.0",

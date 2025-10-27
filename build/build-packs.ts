@@ -4,15 +4,16 @@
 import fs from "fs-extra";
 import path from "path";
 import { compilePack } from "@foundryvtt/foundryvtt-cli";
-import { MacroSource } from "foundry-pf2e/foundry/common/documents/macro.js";
-import { DocumentStatsData } from "foundry-pf2e/foundry/common/data/fields.js";
+import { DocumentStatsData } from "foundry/common/data/fields.mjs";
+import { CompendiumDocumentType, CompendiumUUID } from "foundry/client/utils/helpers.mjs";
+import { ImageFilePath } from "foundry/common/constants.mjs";
 
 // We can't import this from xdy-pf2e-workbench.ts because nodejs can't run that file
 const MODULENAME = "xdy-pf2e-workbench";
 
-type MacroPackSource = Partial<MacroSource> & { _key: string }; // Need _key, but some fields can be omitted.
+type MacroPackSource = Partial<foundry.documents.MacroSource> & { _key: string }; // Need _key, but some fields can be omitted.
 const module = JSON.parse(fs.readFileSync("static/module.json", { encoding: "utf8" }));
-const baseMacro: Partial<MacroSource> = {
+const baseMacro: Partial<foundry.documents.MacroSource> = {
     author: null,
     flags: {},
     ownership: { default: 1 },

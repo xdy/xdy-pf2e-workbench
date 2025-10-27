@@ -29,7 +29,11 @@ export function registerWorkbenchKeybindings() {
             }
             content += `</div></select>`;
 
-            const d = new Dialog({
+            const dialog = foundry.utils.isNewerVersion(game.version, 13)
+                ? foundry.appv1.api.Dialog
+                : // @ts-expect-error
+                  Dialog;
+            const d = new dialog({
                 title: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.title`),
                 content,
                 buttons: {

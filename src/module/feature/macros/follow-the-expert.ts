@@ -1,4 +1,5 @@
 import type {
+    AbilityTrait,
     Action,
     ActionMessageOptions,
     ActionUseOptions,
@@ -12,7 +13,7 @@ import type {
     RawPredicate,
     RuleElementSource,
 } from "foundry-pf2e";
-import { AbilityTrait } from "foundry-pf2e";
+import { ItemUUID } from "foundry/common/documents/_module.mts";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
 // IDK why choices isn't in ChoiceSetSource
@@ -46,7 +47,7 @@ class FollowTheExpertAction implements Action {
     // variants is required for the interface, but this action has no variants.
     // Since nothing in this module uses them, an empty collection satifies the
     // requirements with the least code.
-    readonly variants: Collection<ActionVariant>;
+    readonly variants: Collection<string, ActionVariant>;
 
     readonly effect: ItemUUID;
 

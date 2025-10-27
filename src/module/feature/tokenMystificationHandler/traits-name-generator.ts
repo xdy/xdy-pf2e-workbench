@@ -24,6 +24,7 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
                     const document = await pack?.getDocument(id);
                     const draw = await (<RollTable>document).draw({ displayChat: false });
                     if (draw && draw?.results[0]) {
+                        // @ts-expect-error getChatText is deprecated and not in types
                         return draw?.results[0].getChatText();
                     }
                 }
@@ -31,6 +32,7 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
         } else {
             const draw = await table?.draw({ displayChat: false });
             if (draw && draw?.results[0]) {
+                // @ts-expect-error getChatText is deprecated and not in types
                 return draw?.results[0].getChatText();
             }
         }

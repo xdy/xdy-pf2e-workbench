@@ -184,7 +184,11 @@ function isPublicMessageActive(): boolean {
 
 function isShiftModifierActive(): boolean {
     // TODO Doesn't work on mac?
-    return game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.SHIFT);
+    const keyboardManager = foundry.utils.isNewerVersion(game.version, 13)
+        ? foundry.helpers.interaction.KeyboardManager
+        : // @ts-expect-error v12 remove later
+          keyboardManager;
+    return game.keyboard.isModifierActive(keyboardManager.MODIFIER_KEYS.SHIFT);
 }
 
 function buildSpellMessage(

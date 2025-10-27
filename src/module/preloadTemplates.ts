@@ -4,10 +4,10 @@ export async function preloadTemplates(): Promise<void> {
     ];
 
     if (foundry.utils.isNewerVersion(game.version, 13)) {
-        // @ts-expect-error
         await foundry.applications.handlebars.loadTemplates(templatePaths);
     } else {
         // v12 remove later
+        // @ts-expect-error
         await loadTemplates(templatePaths);
     }
 }

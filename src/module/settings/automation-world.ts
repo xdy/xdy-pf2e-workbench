@@ -1,5 +1,6 @@
 import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
 import { SettingsMenuPF2eWorkbench } from "./menu.js";
+import { SettingRegistration } from "foundry/client/helpers/client-settings.mts";
 
 export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench {
     static override namespace = "automationWorldSettings";

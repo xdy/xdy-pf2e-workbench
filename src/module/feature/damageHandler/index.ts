@@ -7,6 +7,7 @@ import {
 } from "../../utils.ts";
 import type { DamageRoll } from "foundry-pf2e";
 import { ActorFlagsPF2e, ChatMessagePF2e, RollOptionFlags, SpellPF2e } from "foundry-pf2e";
+import { Rolled } from "foundry/client/dice/roll.mts";
 
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 10;
@@ -155,7 +156,7 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
     await new Promise((resolve) => setTimeout(resolve, 150));
 
     // Look for flat check failure messages, but only search recent messages
-    const array = Array.from(game.messages);
+    const array = game.messages.contents;
     const messageIndex = array.findIndex((msg) => msg.id === message.id);
 
     if (messageIndex > -1) {
