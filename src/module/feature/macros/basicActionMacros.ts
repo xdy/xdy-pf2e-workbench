@@ -730,7 +730,8 @@ export async function basicActionMacros() {
 
     const actionDialog = window.actionDialog;
     if (actionDialog?.rendered) {
-        return actionDialog.close();
+        actionDialog.close();
+        return;
     }
 
     const controlled = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
@@ -742,7 +743,8 @@ export async function basicActionMacros() {
     const selectedActor = controlled.filter((actor) => supportedActorTypes.includes(actor.type))[0];
 
     if (!selectedActor) {
-        return ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
+        ui.notifications.warn(game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.noActorSelected`));
+        return;
     }
 
     const actionsToUse = prepareActions(selectedActor, bamActions);
