@@ -1,4 +1,5 @@
 import { MODULENAME } from "../xdy-pf2e-workbench.js";
+import { SettingRegistration } from "foundry/client/helpers/client-settings.mts";
 
 export type PartialSettingsData = Omit<SettingRegistration, "scope" | "config">;
 
@@ -7,7 +8,8 @@ interface SettingsTemplateData extends PartialSettingsData {
     value: unknown;
 }
 
-export interface MenuTemplateData extends FormApplicationData {
+// Note, this type is not quite the same as MenuTemplateData from the pf2e settings menu
+export interface MenuTemplateData extends foundry.appv1.api.FormApplicationData {
     settings: SettingsTemplateData[];
 }
 
@@ -26,7 +28,7 @@ interface HideListTemplateData {
 
 /** An adjusted copy of the settings menu from core pf2e meant for the module */
 // @ts-ignore
-export class SettingsMenuPF2eWorkbench extends FormApplication {
+export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication {
     static readonly namespace: string;
 
     static override get defaultOptions() {

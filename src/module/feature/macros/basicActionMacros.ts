@@ -14,11 +14,11 @@ import {
     Statistic,
 } from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
-import type { DialogV2 } from "foundry-pf2e/foundry/client-esm/applications/api/module.d.ts";
+type DialogV2 = foundry.applications.api.DialogV2;
 
 declare global {
     interface Window {
-        actionDialog: Dialog;
+        actionDialog: DialogV2;
     }
 }
 
@@ -33,13 +33,13 @@ function isSingleCheckAction(action: Action | Function | ActionVariant): action 
 
 export async function registerBasicActionMacrosHandlebarsTemplates() {
     if (foundry.utils.isNewerVersion(game.version, 13)) {
-        // @ts-expect-error
         await foundry.applications.handlebars.loadTemplates([
             `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
             `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
         ]);
     } else {
         // v12 remove later
+        // @ts-expect-error
         await loadTemplates([
             `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
             `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,

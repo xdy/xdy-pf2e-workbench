@@ -39,6 +39,7 @@ import {
     handlePrivateSpellcasting,
     hideSpellNameInDamageroll,
 } from "./feature/qolHandler/handlePrivateSpellcasting.js";
+import { Rolled } from "foundry/client/dice/roll.mts";
 
 export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
     let proceed = true;

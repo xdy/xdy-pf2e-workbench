@@ -1,6 +1,6 @@
 import { ActorFlagsPF2e, ActorPF2e, ChatMessagePF2e } from "foundry-pf2e";
 import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
-import BaseUser from "foundry-pf2e/foundry/common/documents/user.js";
+import BaseUser from "foundry/common/documents/user.mjs";
 
 function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true): boolean {
     const amIMessageSender = message.author?.id === game.user?.id;
@@ -157,9 +157,9 @@ export async function housepatcher(housepatcher): Promise<void> {
 
         for (const { uuid, action, data } of patches) {
             const document = await fromUuid(uuid);
-
-            if (document?.compendium) {
-                const compendium = document.compendium;
+            if (document?.inCompendium) {
+                // @ts-expect-error  I think Document#get compendium is missing from the types
+                const compendium: CompendiumCollection = document.compendium;
 
                 if (action === "update") {
                     const original: any = document.toObject();

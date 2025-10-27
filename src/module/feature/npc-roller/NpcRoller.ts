@@ -3,7 +3,6 @@ import { SCALE_APP_DATA } from "../NPCScaleData.js";
 
 export async function registerNpcRollerHandlebarsTemplates() {
     if (foundry.utils.isNewerVersion(game.version, 13)) {
-        // @ts-expect-error
         await foundry.applications.handlebars.loadTemplates([
             `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
             `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
@@ -11,6 +10,7 @@ export async function registerNpcRollerHandlebarsTemplates() {
         ]);
     } else {
         // v12 remove later
+        // @ts-expect-error
         await loadTemplates([
             `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
             `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
@@ -62,14 +62,14 @@ export function enableNpcRollerButton(_app: unknown, html: JQuery | HTMLElement)
     }
 }
 
-class NpcRoller extends Application {
-    public constructor(options?: ApplicationOptions) {
+class NpcRoller extends foundry.appv1.api.Application {
+    public constructor(options?: foundry.appv1.api.ApplicationV1Options) {
         super(options);
 
         Hooks.on("controlToken", this.#onControlToken.bind(this));
     }
 
-    static override get defaultOptions(): ApplicationOptions {
+    static override get defaultOptions(): foundry.appv1.api.ApplicationV1Options {
         const options = super.defaultOptions;
         return {
             ...options,
@@ -115,7 +115,11 @@ class NpcRoller extends Application {
         const rollName = target.data("rollname") as string;
         const token = canvas.tokens?.controlled[0];
         const formula = target.data("formula") as string | number | undefined;
-        const secret = <boolean>game?.keyboard?.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
+        const keyboardManager = foundry.utils.isNewerVersion(game.version, 13)
+            ? foundry.helpers.interaction.KeyboardManager
+            : // @ts-expect-error v12 remove later
+              keyboardManager;
+        const secret = game.keyboard.isModifierActive(keyboardManager.MODIFIER_KEYS.CONTROL);
 
         if (formula) {
             let roll: ConstructorOf<Roll> | undefined;

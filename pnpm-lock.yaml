@@ -14,9 +14,6 @@ importers:
       codemirror:
         specifier: ^6.0.2
         version: 6.0.2
-      foundry-pf2e:
-        specifier: github:7H3LaughingMan/foundry-pf2e#c9d78388e776f63876966844730cb36f9be4efe0
-        version: https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/c9d78388e776f63876966844730cb36f9be4efe0(@pixi/constants@7.4.3)(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/graphics@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))))(@pixi/math@7.4.3)(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3)))(@pixi/ticker@7.4.3)
       jiti:
         specifier: ^2.6.1
         version: 2.6.1
@@ -153,6 +150,9 @@ importers:
       eslint-plugin-prettier:
         specifier: ^5.5.4
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@9.1.2(eslint@9.37.0(jiti@2.6.1)))(eslint@9.37.0(jiti@2.6.1))(prettier@3.6.2)
+      foundry-pf2e:
+        specifier: github:7H3LaughingMan/foundry-pf2e#v13
+        version: https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/68aca8b6d64707172b920e8d7fb8ae8d41a83240(@pixi/assets@7.4.3(@pixi/core@7.4.3))(@pixi/compressed-textures@7.4.3(@pixi/assets@7.4.3(@pixi/core@7.4.3))(@pixi/core@7.4.3))(@pixi/constants@7.4.3)(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/graphics@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))))(@pixi/math@7.4.3)(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3)))(@pixi/ticker@7.4.3)
       fs-extra:
         specifier: ^11.3.2
         version: 11.3.2
@@ -2127,8 +2127,8 @@ packages:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
     engines: {node: '>= 0.4'}
 
-  foundry-pf2e@https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/c9d78388e776f63876966844730cb36f9be4efe0:
-    resolution: {tarball: https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/c9d78388e776f63876966844730cb36f9be4efe0}
+  foundry-pf2e@https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/68aca8b6d64707172b920e8d7fb8ae8d41a83240:
+    resolution: {tarball: https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/68aca8b6d64707172b920e8d7fb8ae8d41a83240}
     version: 1.0.0
 
   from2@2.3.0:
@@ -5922,7 +5922,7 @@ snapshots:
     dependencies:
       is-callable: 1.2.7
 
-  foundry-pf2e@https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/c9d78388e776f63876966844730cb36f9be4efe0(@pixi/constants@7.4.3)(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/graphics@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))))(@pixi/math@7.4.3)(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3)))(@pixi/ticker@7.4.3):
+  foundry-pf2e@https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/68aca8b6d64707172b920e8d7fb8ae8d41a83240(@pixi/assets@7.4.3(@pixi/core@7.4.3))(@pixi/compressed-textures@7.4.3(@pixi/assets@7.4.3(@pixi/core@7.4.3))(@pixi/core@7.4.3))(@pixi/constants@7.4.3)(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/graphics@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))))(@pixi/math@7.4.3)(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3)))(@pixi/ticker@7.4.3):
     dependencies:
       '@pixi/graphics-smooth': 1.1.1(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/graphics@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))))
       '@pixi/particle-emitter': 5.0.8(@pixi/constants@7.4.3)(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/math@7.4.3)(@pixi/sprite@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3)))(@pixi/ticker@7.4.3)

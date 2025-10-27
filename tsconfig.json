@@ -34,7 +34,7 @@
     "target": "ESNext",
     "typeRoots": [
       "node_modules/@types",
-      "types/types/foundry"
+      "node_modules/foundry-pf2e/types"
     ],
     "types": [
       "jquery",
