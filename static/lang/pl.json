@@ -401,7 +401,7 @@
         "basic": "Podstawowy",
         "noButtonSavePart": "<br><b>{basic} {dataSave} rzut obronny</b>",
         "savePart": "<br>Rzut obronny dla nieznanego zaklęcia to: @Check[type:{dataSave}|dc:{dataDC}|traits:{traits}{basic}}]",
-        "secondPartNoRk": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
+        "secondPartNoRk": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby je rozpoznać. Możesz też w swojej turze wydać akcję, aby spróbować go zidentyfikować (o szczegóły zapytaj swojego MG).",
         "secondPartRK": ".<br>Możesz spróbować użyć jednej z akcji @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] lub @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] aby go rozpoznać. Możesz też, w swojej turze, wydać akcję, aby spróbować go zidentyfikować za pomocą testu @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge] @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo] (lub 10 minut z @Check[type:{skill}|dc:{dcRK}|traits:secret,action:identify-magic] @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G])",
         "spell": "Zaklęcie",
         "they": "Oni",
