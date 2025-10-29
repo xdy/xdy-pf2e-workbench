@@ -281,22 +281,19 @@ function buildSpellMessage(
 }
 
 export async function hideSpellNameInDamageroll(message: ChatMessagePF2e, html: HTMLElement) {
-    const msg = game.messages.contents
-        .reverse()
-        .filter((m) => m.whisper?.length > 0)
-        .filter((m) => m.flags?.pf2e?.casting)
-        .filter((m) => m.flags?.pf2e?.origin?.uuid === message.flags?.pf2e?.origin?.uuid)
-        .pop();
+    const uuid = message.flags?.pf2e.origin?.uuid;
+    if (!uuid) return;
 
-    if (msg) {
+    // Look for the most recent casting of this specific spell
+    const msg = game.messages.contents.findLast((m) => m.flags.pf2e?.casting && m.flags.pf2e.origin?.uuid === uuid);
+    // If we find one, check if it's a whisper and hide the spell name if it is
+    if (msg && msg.item && msg.whisper.length > 0) {
         const flavor = html.querySelector(".flavor-text");
-        if (flavor && flavor.innerHTML) {
-            const origin = await fromUuid(<string>message.flags?.pf2e.origin?.uuid);
-            const searchValue = origin?.name ?? "???";
+        if (flavor?.innerHTML) {
             const replaceValue =
                 game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpell.aSpell`) +
-                `<p data-visibility="gm">(${searchValue})</p>`;
-            flavor.innerHTML = flavor.innerHTML.replace(searchValue, replaceValue);
+                '<p data-visibility="gm">($&)</p>';
+            flavor.innerHTML = flavor.innerHTML.replace(msg.item.name, replaceValue);
         }
     }
 }
