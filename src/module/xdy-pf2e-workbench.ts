@@ -219,6 +219,11 @@ export function updateHooks(cleanSlate = false) {
     changePauseText();
 }
 
+// "renderGamePause" is the AppV2 equivalent to "renderPause", used in Foundry v13+
+Hooks.on("renderGamePause", (_app, _html, _options) => {
+    changePauseText();
+});
+
 Hooks.on("renderPause", (_app, _html, _options) => {
     changePauseText();
 });
