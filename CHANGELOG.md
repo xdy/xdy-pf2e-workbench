@@ -1,3 +1,10 @@
+## [6.31.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.31.1...v6.31.2) (2025-11-02)
+
+
+### Bug Fixes
+
+* add "renderGamePause" hook that mirrors use of "renderPause" for compatibility with v12 and v13 ([788853f](https://github.com/xdy/xdy-pf2e-workbench/commit/788853f9b9f0ad5b646e96af7ae5fbb540a400bd))
+
 ## [6.31.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.31.0...v6.31.1) (2025-10-09)
 
 
