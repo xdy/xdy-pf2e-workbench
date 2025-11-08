@@ -195,7 +195,7 @@ export async function doMystificationFromToken(tokenId: string, active: boolean)
 }
 
 export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | undefined, active: boolean) {
-    if (!token?.actor) {
+    if (!token?.actor || !canvas.scene) {
         return;
     }
 
@@ -212,34 +212,30 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
     // define array of objects to be updated
     const updates = [
         {
-            _id: <string>token.id,
+            _id: token.id,
             name: await buildTokenName(token, active),
         },
     ];
 
-    const scene: ScenePF2e | null = canvas?.scene;
     const allOfActor = game.settings.get(MODULENAME, "npcMystifierDemystifyAllTokensBasedOnTheSameActor");
-    if (game.user?.isGM && isTokenMystified(token) && allOfActor) {
-        let sceneToken: TokenDocumentPF2e<ScenePF2e>;
-        for (sceneToken of scene?.tokens
-            ?.filter((t) => t.actor?.id === token?.actor?.id)
-            ?.filter((x) => isTokenMystified(x)) || []) {
-            updates.push({
-                _id: <string>sceneToken.id,
-                name: await buildTokenName(sceneToken, active),
-            });
+    if (active && game.user?.isGM && isTokenMystified(token) && allOfActor) {
+        for (const t of canvas.scene.tokens) {
+            if (t.id !== token.id && t.actor?.id === token.actor.id && isTokenMystified(t)) {
+                updates.push({
+                    _id: t.id,
+                    name: await buildTokenName(t, active),
+                });
+            }
         }
     }
-    scene?.updateEmbeddedDocuments("Token", updates, {}).then(() => {
-        if (game.combat) {
-            new Promise((resolve) => setTimeout(resolve, 50)).then(() => {
-                ui.combat?.render(true);
-                ui.combat.combats
-                    .filter((x) => x.combatants.filter((c) => c.actor?.id === token.actor?.id).length > 0)
-                    .forEach((c) => c.updateSource({}, { render: true }));
-            });
+    await canvas.scene.updateEmbeddedDocuments("Token", updates, { render: true });
+    for (const combat of game.combats) {
+        // The combat tracker doesn't update the combatant names when the token names change
+        const ids = combat.combatants.filter((c) => c.actor?.id === token.actor?.id).map((c) => ({ _id: c.id }));
+        if (ids.length > 0) {
+            combat.updateEmbeddedDocuments("Combatant", ids, { diff: false, render: true });
         }
-    });
+    }
 }
 
 export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement) {
