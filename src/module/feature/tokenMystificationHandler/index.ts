@@ -36,6 +36,7 @@ async function fetchRandomWordPrefix(): Promise<string> {
                     const document = await pack?.getDocument(id);
                     const draw = await (<RollTable>document).draw({ displayChat: false });
                     if (draw && draw?.results[0]) {
+                        // @ts-expect-error getChatText is deprecated and not in types
                         return draw?.results[0].getChatText();
                     } else {
                         return <string>fixSetting;
@@ -45,6 +46,7 @@ async function fetchRandomWordPrefix(): Promise<string> {
         }
         const draw = await table?.draw({ displayChat: false });
         if (draw && draw?.results[0]) {
+            // @ts-expect-error getChatText is deprecated and not in types
             return draw?.results[0].getChatText();
         } else {
             return <string>fixSetting;
@@ -138,6 +140,8 @@ export async function buildTokenName(token: TokenDocumentPF2e<ScenePF2e>, isMyst
 }
 
 function isMystifyModifierKeyPressed() {
+    // @ts-ignore
+    const keyboardManager = foundry.helpers.interaction.KeyboardManager;
     switch (mystifyModifierKey) {
         case "ALT":
             return game.keyboard.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
