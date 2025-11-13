@@ -4,7 +4,7 @@
   "version": "6.32.0",
   "id": "xdy-pf2e-workbench",
   "compatibility": {
-    "minimum": "12.341",
+    "minimum": "13.350",
     "verified": "13.350",
     "maximum": "13"
   },
