@@ -1,3 +1,21 @@
+# [6.32.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.31.4...v6.32.0) (2025-11-13)
+
+
+### Bug Fixes
+
+* BAM was supposed to have just one dialog open ([7f63f56](https://github.com/xdy/xdy-pf2e-workbench/commit/7f63f566a4258b8d4725887e7af8f2db5b902159))
+* basicActionMacros() was returning different types on different lines ([0dfa2ff](https://github.com/xdy/xdy-pf2e-workbench/commit/0dfa2ff6524c13177b8b600538607ed7c4a9b2f9))
+* Fix and speed up spell damage name hiding ([a9422e2](https://github.com/xdy/xdy-pf2e-workbench/commit/a9422e2cb83c827e9e3e08f898a8261b5ae7776a))
+* Handle DamageRoll doesn't exist and then get rid of ts-ignore ([2de9995](https://github.com/xdy/xdy-pf2e-workbench/commit/2de999563415b78d2c233a8e2f4a65de704ab934))
+* Support both v12/v13 path for renderTemplate ([88b9b7f](https://github.com/xdy/xdy-pf2e-workbench/commit/88b9b7f1738b9b41d3a29ebd4391da83b03f05ee))
+* The document getData method is possibly async ([b5428c0](https://github.com/xdy/xdy-pf2e-workbench/commit/b5428c083971d53a3af1d00a1455f2bc8f76e7ab))
+* Un/Mystifying NPCs didn't update combat tracker ([23d08d7](https://github.com/xdy/xdy-pf2e-workbench/commit/23d08d79afcd183c815b8a1c14bfe1672c8c9e16))
+
+
+### Features
+
+* Port NPC Scaler to V13 context menu and DialogV2 ([a02f433](https://github.com/xdy/xdy-pf2e-workbench/commit/a02f433d993f1e0ea975d29ba87425f14c427cbf))
+
 ## [6.31.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.31.3...v6.31.4) (2025-11-13)
 
 
