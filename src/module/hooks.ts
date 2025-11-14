@@ -340,10 +340,7 @@ export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: Encou
     // TODO Handle removal of game.combats.active.combatant.defeated/unsetting of deathIcon (are those the same?) for combatants that are neither dying nor have 0 HP.
 }
 
-export function renderTokenHUDHook(_app: TokenDocumentPF2e, q: JQuery | HTMLElement, data: any) {
-    let html: any;
-    html = q;
-
+export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: HTMLElement, data: any) {
     if (html && game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);
     }

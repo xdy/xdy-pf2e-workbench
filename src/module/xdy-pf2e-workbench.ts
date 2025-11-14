@@ -390,7 +390,7 @@ Hooks.once("ready", () => {
 
     // Make some functions available for macros
     // noinspection JSUnusedGlobalSymbols
-    // @ts-ignore
+    // @ts-expect-error Adding new field to game global
     game.PF2eWorkbench = {
         resetHeroPoints: resetHeroPoints, // game.PF2eWorkbench.resetHeroPoints(1)
         addHeroPoints: addHeroPoints, // game.PF2eWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
