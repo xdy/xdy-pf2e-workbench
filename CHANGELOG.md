@@ -1,3 +1,10 @@
+## [6.32.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.32.1...v6.32.2) (2025-11-14)
+
+
+### Bug Fixes
+
+* BAM should work again. Redux. (Might even be true this time. Pro tip. Don't test the wrong version...) ([0c4ca6c](https://github.com/xdy/xdy-pf2e-workbench/commit/0c4ca6c2ac7ea6e9f7f21a9110ddd4c73bd910ed))
+
 ## [6.32.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.32.0...v6.32.1) (2025-11-14)
 
 
