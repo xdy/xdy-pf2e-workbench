@@ -14,6 +14,7 @@ import {
     Statistic,
 } from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
+
 type DialogV2 = foundry.applications.api.DialogV2;
 
 declare global {
@@ -814,6 +815,7 @@ export async function basicActionMacros() {
                 default: true,
             },
         ],
+        // @ts-expect-error
         render: (_event, htmlOrDialog) => {
             const html = htmlOrDialog instanceof HTMLDialogElement ? htmlOrDialog : (htmlOrDialog as DialogV2).element;
             const action = (event: Event) => {

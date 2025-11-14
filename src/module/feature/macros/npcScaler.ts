@@ -17,6 +17,7 @@ export async function npcScaler() {
     const oldLevel = 24;
 
     await foundry.applications.api.DialogV2.wait({
+        // @ts-expect-error
         window: {
             title: "Scale NPC",
         },
