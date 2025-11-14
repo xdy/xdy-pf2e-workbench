@@ -31,5 +31,5 @@ export function getFolderInFolder(name: string, parentName?: string) {
 }
 
 export function getActor(name: string, folder: string): ActorPF2e | undefined {
-    return game.actors?.find((a) => a.name === name && a.folder?.name === folder) as any;
+    return game.actors?.find((a) => a.name === name && a.folder?.name === folder);
 }

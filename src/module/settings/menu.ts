@@ -27,7 +27,6 @@ interface HideListTemplateData {
 }
 
 /** An adjusted copy of the settings menu from core pf2e meant for the module */
-// @ts-ignore
 export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication {
     static readonly namespace: string;
 
