@@ -1,3 +1,15 @@
+## [6.32.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.32.0...v6.32.1) (2025-11-14)
+
+
+### Bug Fixes
+
+* BAM should work again. ([04713c0](https://github.com/xdy/xdy-pf2e-workbench/commit/04713c09017eac827b62a238950c777e1e009c1d))
+
+
+### Reverts
+
+* Revert "chore: Does this fix the build? Can't build locally, so just guessing really." ([fb5a84c](https://github.com/xdy/xdy-pf2e-workbench/commit/fb5a84c73f6b422afe5e6f6a22a443a25ace16a2))
+
 # [6.32.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.31.4...v6.32.0) (2025-11-13)
 
 
