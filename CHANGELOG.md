@@ -1,3 +1,10 @@
+# [6.33.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.32.2...v6.33.0) (2025-11-14)
+
+
+### Features
+
+* Remove support for foundry v12 and pf2e v6. Minimum foundry is now 13.351 and minimum pf2e system version is 7.7.1 ([3f6dcd3](https://github.com/xdy/xdy-pf2e-workbench/commit/3f6dcd3478844416a06606a42b50e9809f523591))
+
 ## [6.32.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.32.1...v6.32.2) (2025-11-14)
 
 
