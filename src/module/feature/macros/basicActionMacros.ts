@@ -795,10 +795,12 @@ export async function basicActionMacros() {
           // @ts-expect-error
           await renderTemplate("modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs", filteredData);
 
-    window.actionDialog = await new foundry.applications.api.DialogV2({
+    // @ts-expect-error
+    window.actionDialog = await foundry.applications.api.DialogV2.wait({
         position: {
             width,
         },
+        // @ts-expect-error
         window: {
             title: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.title`, {
                 name: selectedActor.name,
@@ -815,7 +817,6 @@ export async function basicActionMacros() {
                 default: true,
             },
         ],
-        // @ts-expect-error
         render: (_event, htmlOrDialog) => {
             const html = htmlOrDialog instanceof HTMLDialogElement ? htmlOrDialog : (htmlOrDialog as DialogV2).element;
             const action = (event: Event) => {
@@ -861,7 +862,7 @@ export async function basicActionMacros() {
                 }
             }
         },
-    }).render(true);
+    });
 }
 
 // basicActionMacros();
