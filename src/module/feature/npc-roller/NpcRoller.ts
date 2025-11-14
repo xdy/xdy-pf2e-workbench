@@ -2,11 +2,21 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { SCALE_APP_DATA } from "../NPCScaleData.js";
 
 export async function registerNpcRollerHandlebarsTemplates() {
-    await foundry.applications.handlebars.loadTemplates([
-        `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
-        `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
-        `modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs`,
-    ]);
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        await foundry.applications.handlebars.loadTemplates([
+            `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
+            `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
+            `modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs`,
+        ]);
+    } else {
+        // v12 remove later
+        // @ts-expect-error
+        await loadTemplates([
+            `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
+            `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
+            `modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs`,
+        ]);
+    }
 
     Handlebars.registerPartial("rollAppTable", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/table.hbs"}}`);
     Handlebars.registerPartial("rollAppCell", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs"}}`);
@@ -19,20 +29,36 @@ export async function setupNpcRoller() {
 }
 
 export function enableNpcRollerButton(_app: unknown, html: JQuery | HTMLElement) {
-    // Create the button element
-    const button = document.createElement("button");
-    button.innerHTML = `<i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}`;
-    button.addEventListener("click", () => {
-        new NpcRoller().render(true); // Handle button click
-    });
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        // Create the button element
+        const button = document.createElement("button");
+        button.innerHTML = `<i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}`;
+        button.addEventListener("click", () => {
+            new NpcRoller().render(true); // Handle button click
+        });
 
-    // Locate the footer using querySelector
-    // @ts-expect-error
-    const footer = html.querySelector(".directory-footer.action-buttons");
-    if (footer) {
-        footer.appendChild(button); // Append the button to the footer
+        // Locate the footer using querySelector
+        // @ts-expect-error
+        const footer = html.querySelector(".directory-footer.action-buttons");
+        if (footer) {
+            footer.appendChild(button); // Append the button to the footer
+        } else {
+            console.warn("enableNpcRollerButton: Footer element not found.");
+        }
     } else {
-        console.warn("enableNpcRollerButton: Footer element not found.");
+        // v12 remove later
+        const button = $(
+            `<button><i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}</button>`,
+        );
+        button.on("click", () => {
+            new NpcRoller().render(true);
+        });
+
+        // @ts-expect-error
+        const footer = html.find(".directory-footer.action-buttons");
+        if (footer.length > 0) {
+            footer.append(button);
+        }
     }
 }
 
@@ -89,7 +115,10 @@ class NpcRoller extends foundry.appv1.api.Application {
         const rollName = target.data("rollname") as string;
         const token = canvas.tokens?.controlled[0];
         const formula = target.data("formula") as string | number | undefined;
-        const keyboardManager = foundry.helpers.interaction.KeyboardManager;
+        const keyboardManager = foundry.utils.isNewerVersion(game.version, 13)
+            ? foundry.helpers.interaction.KeyboardManager
+            : // @ts-expect-error v12 remove later
+              keyboardManager;
         const secret = game.keyboard.isModifierActive(keyboardManager.MODIFIER_KEYS.CONTROL);
 
         if (formula) {

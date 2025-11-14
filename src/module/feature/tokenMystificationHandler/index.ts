@@ -36,6 +36,7 @@ async function fetchRandomWordPrefix(): Promise<string> {
                     const document = await pack?.getDocument(id);
                     const draw = await (<RollTable>document).draw({ displayChat: false });
                     if (draw && draw?.results[0]) {
+                        // @ts-expect-error getChatText is deprecated and not in types
                         return draw?.results[0].getChatText();
                     } else {
                         return <string>fixSetting;
@@ -45,6 +46,7 @@ async function fetchRandomWordPrefix(): Promise<string> {
         }
         const draw = await table?.draw({ displayChat: false });
         if (draw && draw?.results[0]) {
+            // @ts-expect-error getChatText is deprecated and not in types
             return draw?.results[0].getChatText();
         } else {
             return <string>fixSetting;
@@ -138,11 +140,15 @@ export async function buildTokenName(token: TokenDocumentPF2e<ScenePF2e>, isMyst
 }
 
 function isMystifyModifierKeyPressed() {
+    const keyboardManager = foundry.utils.isNewerVersion(game.version, 13)
+        ? foundry.helpers.interaction.KeyboardManager
+        : // @ts-expect-error v12 remove later
+          keyboardManager;
     switch (mystifyModifierKey) {
         case "ALT":
-            return game.keyboard.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
+            return game.keyboard.isModifierActive(keyboardManager.MODIFIER_KEYS.ALT);
         case "CONTROL":
-            return game.keyboard.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
+            return game.keyboard.isModifierActive(keyboardManager.MODIFIER_KEYS.CONTROL);
         case "META":
             return game.keyboard.downKeys.has("MetaLeft") || game.keyboard.downKeys.has("MetaRight");
         default:

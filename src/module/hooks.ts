@@ -11,9 +11,9 @@ import {
     FeatPF2e,
     ItemPF2e,
     PhysicalItemPF2e,
-    ResourceData,
     TokenDocumentPF2e,
     UserPF2e,
+    ResourceData,
 } from "foundry-pf2e";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
 import { actionsReminder, autoReduceStunned, reminderTargeting } from "./feature/reminders/index.js";
@@ -342,7 +342,13 @@ export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: Encou
 
 export function renderTokenHUDHook(_app: TokenDocumentPF2e, q: JQuery | HTMLElement, data: any) {
     let html: any;
-    html = q;
+    if (!foundry.utils.isNewerVersion(game.version, 13)) {
+        // v12 remove later
+        // @ts-expect-error
+        html = q.get(0);
+    } else {
+        html = q;
+    }
 
     if (html && game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
         renderNameHud(data, html);

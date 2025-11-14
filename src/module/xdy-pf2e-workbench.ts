@@ -20,6 +20,7 @@ import { basicActionMacros, registerBasicActionMacrosHandlebarsTemplates } from 
 import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal.js";
 import {
     createChatMessageHook,
+    preCreateItemHook,
     createTokenHook,
     deleteCombatHook,
     deleteItemHook,
@@ -28,7 +29,6 @@ import {
     pf2eStartTurnHook,
     pf2eSystemReadyHook,
     preCreateChatMessageHook,
-    preCreateItemHook,
     preUpdateActorHook,
     preUpdateTokenHook,
     renderActorSheetHook,
@@ -36,7 +36,7 @@ import {
     renderTokenHUDHook,
     updateItemHook,
 } from "./hooks.js";
-import { onScaleNPCContextHook } from "./feature/cr-scaler/NPCScalerSetup.js";
+import { onScaleNPCContextHook, onScaleNPCContextHookV12 } from "./feature/cr-scaler/NPCScalerSetup.js";
 import {
     addHeroPoints,
     calcRemainingMinutes,
@@ -105,7 +105,12 @@ export function updateHooks(cleanSlate = false) {
 
     const gs = game.settings;
 
-    handle("getActorContextOptions", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        handle("getActorContextOptions", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
+    } else {
+        // v12 remove later
+        handle("getActorDirectoryEntryContext", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHookV12);
+    }
     handle("renderJournalDirectory", gs.get(MODULENAME, "npcRoller"), enableNpcRollerButton);
 
     handle(

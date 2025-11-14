@@ -106,7 +106,11 @@ export async function heroPointHandler(state: HPHState) {
     const content = await buildHtml(remainingMinutes, state);
 
     let button: string | null = null;
-    const handlerDialog = new foundry.appv1.api.Dialog({
+    const dialog = foundry.utils.isNewerVersion(game.version, 13)
+        ? foundry.appv1.api.Dialog
+        : // @ts-expect-error
+          Dialog;
+    const handlerDialog = new dialog({
         title: title,
         content,
         buttons: {

@@ -14,7 +14,6 @@ import {
     Statistic,
 } from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
-
 type DialogV2 = foundry.applications.api.DialogV2;
 
 declare global {
@@ -33,10 +32,19 @@ function isSingleCheckAction(action: Action | Function | ActionVariant): action 
 }
 
 export async function registerBasicActionMacrosHandlebarsTemplates() {
-    await foundry.applications.handlebars.loadTemplates([
-        `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
-        `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
-    ]);
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        await foundry.applications.handlebars.loadTemplates([
+            `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
+            `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
+        ]);
+    } else {
+        // v12 remove later
+        // @ts-expect-error
+        await loadTemplates([
+            `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
+            `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
+        ]);
+    }
 
     Handlebars.registerPartial("actionButton", `{{> "modules/${MODULENAME}/templates/macros/bam/actionButton.hbs"}}`);
 }
