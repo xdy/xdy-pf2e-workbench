@@ -144,9 +144,9 @@ function isMystifyModifierKeyPressed() {
     const keyboardManager = foundry.helpers.interaction.KeyboardManager;
     switch (mystifyModifierKey) {
         case "ALT":
-            return game.keyboard.isModifierActive(keyboardManager.MODIFIER_KEYS.ALT);
+            return game.keyboard.isModifierActive(KeyboardManager.MODIFIER_KEYS.ALT);
         case "CONTROL":
-            return game.keyboard.isModifierActive(keyboardManager.MODIFIER_KEYS.CONTROL);
+            return game.keyboard.isModifierActive(KeyboardManager.MODIFIER_KEYS.CONTROL);
         case "META":
             return game.keyboard.downKeys.has("MetaLeft") || game.keyboard.downKeys.has("MetaRight");
         default:
