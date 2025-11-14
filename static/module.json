@@ -4,8 +4,8 @@
   "version": "6.32.2",
   "id": "xdy-pf2e-workbench",
   "compatibility": {
-    "minimum": "12.341",
-    "verified": "13.350",
+    "minimum": "13.351",
+    "verified": "13.351",
     "maximum": "13"
   },
   "relationships": {
@@ -15,8 +15,8 @@
         "type": "system",
         "manifest": "https://github.com/foundryvtt/pf2e/releases/download/latest/system.json",
         "compatibility": {
-          "minimum": "6.12.4",
-          "verified": "7.5.2"
+          "minimum": "7.7.1",
+          "verified": "7.7.1"
         }
       }
     ]

@@ -33,19 +33,10 @@ function isSingleCheckAction(action: Action | Function | ActionVariant): action 
 }
 
 export async function registerBasicActionMacrosHandlebarsTemplates() {
-    if (foundry.utils.isNewerVersion(game.version, 13)) {
-        await foundry.applications.handlebars.loadTemplates([
-            `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
-            `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
-        ]);
-    } else {
-        // v12 remove later
-        // @ts-expect-error
-        await loadTemplates([
-            `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
-            `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
-        ]);
-    }
+    await foundry.applications.handlebars.loadTemplates([
+        `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
+        `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
+    ]);
 
     Handlebars.registerPartial("actionButton", `{{> "modules/${MODULENAME}/templates/macros/bam/actionButton.hbs"}}`);
 }
@@ -751,10 +742,10 @@ export async function basicActionMacros() {
     const actionsToUse = prepareActions(selectedActor, bamActions);
 
     const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-            .map((actor) => actor.actor)
-            .filter((actor) => {
-                return supportedActorTypes.includes(actor?.type ?? "unknown");
-            }) || [];
+        .map((actor) => actor.actor)
+        .filter((actor) => {
+            return supportedActorTypes.includes(actor?.type ?? "unknown");
+        }) || [];
 
     const party = game.actors?.party?.members || [];
     const partyIds = party.map((actor) => actor?.id) || [];
@@ -786,14 +777,10 @@ export async function basicActionMacros() {
         exploration: data.filter((value) => value.action.showExploration),
         tabView,
     };
-    const content = foundry.utils.isNewerVersion(game.version, 13)
-        ? await foundry.applications.handlebars.renderTemplate(
-              "modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs",
-              filteredData,
-          )
-        : // v12 remove later
-          // @ts-expect-error
-          await renderTemplate("modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs", filteredData);
+    const content = await foundry.applications.handlebars.renderTemplate(
+        "modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs",
+        filteredData,
+    );
 
     // @ts-expect-error
     window.actionDialog = await foundry.applications.api.DialogV2.wait({

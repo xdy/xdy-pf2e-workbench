@@ -140,10 +140,8 @@ export async function buildTokenName(token: TokenDocumentPF2e<ScenePF2e>, isMyst
 }
 
 function isMystifyModifierKeyPressed() {
-    const keyboardManager = foundry.utils.isNewerVersion(game.version, 13)
-        ? foundry.helpers.interaction.KeyboardManager
-        : // @ts-expect-error v12 remove later
-          keyboardManager;
+    // @ts-ignore
+    const keyboardManager = foundry.helpers.interaction.KeyboardManager;
     switch (mystifyModifierKey) {
         case "ALT":
             return game.keyboard.isModifierActive(keyboardManager.MODIFIER_KEYS.ALT);
