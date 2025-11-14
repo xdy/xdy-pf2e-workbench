@@ -741,14 +741,13 @@ export async function basicActionMacros() {
 
     const actionsToUse = prepareActions(selectedActor, bamActions);
 
-    const actors: ActorPF2e[] = <ActorPF2e[]>game?.scenes?.current?.tokens
-        .map((actor) => actor.actor)
-        .filter((actor) => {
-            return supportedActorTypes.includes(actor?.type ?? "unknown");
-        }) || [];
-
-    const party = game.actors?.party?.members || [];
-    const partyIds = party.map((actor) => actor?.id) || [];
+    const actors =
+        game.scenes.current?.tokens
+            .map((t) => t.actor)
+            .filter((a) => a !== null)
+            .filter((a) => supportedActorTypes.includes(a.type)) || [];
+    const party = game.actors.party?.members || [];
+    const partyIds = party.map((actor) => actor.id);
 
     const allActorsSkills = createMapOfSkillsPerActor(actors);
 
@@ -782,12 +781,10 @@ export async function basicActionMacros() {
         filteredData,
     );
 
-    // @ts-expect-error
-    window.actionDialog = await foundry.applications.api.DialogV2.wait({
+    const dialog = new foundry.applications.api.DialogV2({
         position: {
             width,
         },
-        // @ts-expect-error
         window: {
             title: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.title`, {
                 name: selectedActor.name,
@@ -804,52 +801,52 @@ export async function basicActionMacros() {
                 default: true,
             },
         ],
-        render: (_event, htmlOrDialog) => {
-            const html = htmlOrDialog instanceof HTMLDialogElement ? htmlOrDialog : (htmlOrDialog as DialogV2).element;
-            const action = (event: Event) => {
-                // Prevent the dialog from closing
-                event.preventDefault();
-                event.stopPropagation();
-                const button = event.currentTarget;
-                if (!(button instanceof HTMLButtonElement) || typeof button.dataset.action !== "string") return;
-                const action = actionsToUse[button.dataset.action];
-                const current = action.action;
-                if (typeof current === "object") {
-                    // TODO Handle other variants than map
-                    const mapValue = -(Number.parseInt(button.dataset.map ?? "0") / 5);
-                    current.use({
-                        event,
-                        actors: [selectedActor],
-                        multipleAttackPenalty: mapValue,
-                        ...action.options,
-                    });
-                } else if (current) {
-                    current({
-                        event,
-                        actors: [selectedActor],
-                        skill: action.skill,
-                    });
-                }
-            };
-            html.querySelectorAll(".bam-action-list button").forEach((button) =>
-                button.addEventListener("click", action),
-            );
-            if (tabView) {
-                for (const tabButton of html.querySelectorAll("a.item") as NodeListOf<HTMLElement>) {
-                    tabButton.addEventListener("click", () => {
-                        for (const tab of html.querySelectorAll("div.tab") as NodeListOf<HTMLElement>) {
-                            if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.add("active");
-                            else tab.classList.remove("active");
-                        }
-                        for (const otherButton of html.querySelectorAll("a.item.active")) {
-                            if (otherButton !== tabButton) otherButton.classList.remove("active");
-                        }
-                        tabButton.classList.add("active");
-                    });
-                }
-            }
-        },
     });
+    dialog.addEventListener("render", (_event) => {
+        const html = dialog.element;
+        const action = (event: Event) => {
+            // Prevent the dialog from closing
+            event.preventDefault();
+            event.stopPropagation();
+            const button = event.currentTarget;
+            if (!(button instanceof HTMLButtonElement) || typeof button.dataset.action !== "string") return;
+            const action = actionsToUse[button.dataset.action];
+            const current = action.action;
+            if (typeof current === "object") {
+                // TODO Handle other variants than map
+                const mapValue = -(Number.parseInt(button.dataset.map ?? "0") / 5);
+                current.use({
+                    event,
+                    actors: [selectedActor],
+                    multipleAttackPenalty: mapValue,
+                    ...action.options,
+                });
+            } else if (current) {
+                current({
+                    event,
+                    actors: [selectedActor],
+                    skill: action.skill,
+                });
+            }
+        };
+        html.querySelectorAll(".bam-action-list button").forEach((button) => button.addEventListener("click", action));
+        if (tabView) {
+            for (const tabButton of html.querySelectorAll("a.item") as NodeListOf<HTMLElement>) {
+                tabButton.addEventListener("click", () => {
+                    for (const tab of html.querySelectorAll("div.tab") as NodeListOf<HTMLElement>) {
+                        if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.add("active");
+                        else tab.classList.remove("active");
+                    }
+                    for (const otherButton of html.querySelectorAll("a.item.active")) {
+                        if (otherButton !== tabButton) otherButton.classList.remove("active");
+                    }
+                    tabButton.classList.add("active");
+                });
+            }
+        }
+    });
+    await dialog.render({ force: true });
+    window.actionDialog = dialog;
 }
 
 // basicActionMacros();

@@ -140,7 +140,6 @@ export async function buildTokenName(token: TokenDocumentPF2e<ScenePF2e>, isMyst
 }
 
 function isMystifyModifierKeyPressed() {
-    // @ts-ignore
     const keyboardManager = foundry.helpers.interaction.KeyboardManager;
     switch (mystifyModifierKey) {
         case "ALT":

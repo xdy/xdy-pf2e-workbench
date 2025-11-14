@@ -17,7 +17,7 @@
 import { IDataUpdates, IHandledItemType } from "./NPCScalerTypes.js";
 import { getActor, getFolder, getFolderInFolder } from "./Utilities.js";
 import { getAreaDamageData, getDamageData, getHPData, getLeveledData, getMinMaxData } from "./NPCScalerUtil.js";
-import { ActorPF2e, NPCPF2e, NPCSystemData } from "foundry-pf2e";
+import { NPCPF2e, NPCSystemData } from "foundry-pf2e";
 import { logDebug } from "../../utils.js";
 
 /**
@@ -27,7 +27,7 @@ import { logDebug } from "../../utils.js";
  * @param {number} newLevel - The new level to scale the NPC to.
  * @return {Promise<void>} A promise that resolves when the scaling is complete.
  */
-export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number) {
+export async function scaleNPCToLevelFromActor(actorId: string, newLevel: number): Promise<void> {
     const actor = <NPCPF2e>(<unknown>game.actors.get(actorId));
     if (actor) {
         await scaleNPCToLevel(actor, newLevel);
@@ -39,7 +39,7 @@ function extractLabel(label) {
     return match ? match[1] : label;
 }
 
-export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
+export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number): Promise<void> {
     const rootFolder = getFolder("cr-scaler");
 
     const folderName = `Level ${newLevel}`;
@@ -87,7 +87,6 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
 
     // parse weaknesses
     const dvData: any[] = [];
-    // @ts-ignore
     const weaknesses = system.attributes.weaknesses;
     for (let i = 0; i < weaknesses.length; i++) {
         const weakness = weaknesses[i];
@@ -200,13 +199,11 @@ export async function scaleNPCToLevel(actor: NPCPF2e, newLevel: number) {
     }
     logDebug(itemUpdates);
 
-    let newActor = <any>getActor(actor.name as string, folder.name);
+    let newActor = getActor(actor.name, folder.name);
     if (newActor !== undefined) {
         await newActor.update(updateData);
     } else {
-        newActor = actor.clone(updateData);
-        // @ts-ignore
-        newActor = (await Actor.create(newActor?._source as any)) as ActorPF2e;
+        newActor = (await Actor.create(actor.clone(updateData)._source)) as typeof actor;
     }
 
     await newActor.updateEmbeddedDocuments("Item", itemUpdates);
