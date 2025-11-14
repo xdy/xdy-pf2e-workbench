@@ -13,35 +13,28 @@ export async function npcScaler() {
         return;
     }
 
-    const oldLevel = actor.level;
+    // const oldLevel = actor.system.details.level.value;
+    const oldLevel = 24;
 
-    new foundry.applications.api.DialogV2({
+    await foundry.applications.api.DialogV2.wait({
         window: {
             title: "Scale NPC",
         },
         content:
             `<p>Scale a creature to a range of levels, creating the creature at each level in the range. The min level must be less than or ` +
             `equal to the max level. To only scale to a single level, set both equal to the desired level.</p>` +
-            `<div class="form-group"><label>Min Level</label><input id="startLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>` +
-            `<div class="form-group"><label>Max Level</label><input id="endLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>`,
+            `<div class="form-group"><label>Min Level</label><input id="startLevel" name="startLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>` +
+            `<div class="form-group"><label>Max Level</label><input id="endLevel" name="endLevel" type="number" value="${oldLevel}" min="-1" max="24"></div>`,
         buttons: [
             {
-                action: "scale",
-                default: true,
                 icon: '<i class="fa-solid fa-level-up-alt"></i>',
                 label: "Scale",
-                callback: async (
-                    _event: PointerEvent | SubmitEvent,
-                    button: HTMLButtonElement,
-                    _dialog: HTMLDialogElement,
-                ) => {
+                action: "scale",
+                default: true,
+                callback: async (_event, button, _dialog) => {
                     ui.notifications?.info(`Scaling NPC... please wait.`);
-                    const elements = button.form?.elements as HTMLFormControlsCollection & {
-                        startLevel: HTMLInputElement;
-                        endLevel: HTMLInputElement;
-                    };
-                    const startLevel = parseInt(elements.startLevel.value);
-                    const endLevel = parseInt(elements.endLevel.value);
+                    const startLevel = parseInt(button?.form?.elements["startLevel"].value);
+                    const endLevel = parseInt(button?.form?.elements["endLevel"].value);
 
                     for (let i = startLevel; i <= endLevel; i++) {
                         await scaleNPCToLevel(actor, i);
@@ -50,7 +43,7 @@ export async function npcScaler() {
                 },
             },
         ],
-    }).render({ force: true });
+    });
 }
 
 // npcScaler();

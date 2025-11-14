@@ -794,7 +794,7 @@ export async function basicActionMacros() {
           // @ts-expect-error
           await renderTemplate("modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs", filteredData);
 
-    const dialog = new foundry.applications.api.DialogV2({
+    window.actionDialog = await new foundry.applications.api.DialogV2({
         position: {
             width,
         },
@@ -814,65 +814,52 @@ export async function basicActionMacros() {
                 default: true,
             },
         ],
-    });
-
-    // Store the instance globally as before
-    window.actionDialog = dialog as unknown as DialogV2;
-
-    // Render and then attach listeners when the element is available
-    dialog.render({ force: true });
-
-    // After rendering, the element should be available immediately; if not, queue a microtask
-    const attach = () => {
-        const html = dialog.element;
-        if (!html) return; // Safety: nothing to attach to
-        const clickHandler = (event: Event) => {
-            // Prevent the dialog from closing
-            event.preventDefault();
-            event.stopPropagation();
-            const button = event.currentTarget;
-            if (!(button instanceof HTMLButtonElement) || typeof button.dataset.action !== "string") return;
-            const action = actionsToUse[button.dataset.action];
-            const current = action.action;
-            if (typeof current === "object") {
-                // TODO Handle other variants than map
-                const mapValue = -(Number.parseInt(button.dataset.map ?? "0") / 5);
-                current.use({
-                    event,
-                    actors: [selectedActor],
-                    multipleAttackPenalty: mapValue,
-                    ...action.options,
-                });
-            } else if (current) {
-                current({
-                    event,
-                    actors: [selectedActor],
-                    skill: action.skill,
-                });
+        render: (_event, htmlOrDialog) => {
+            const html = htmlOrDialog instanceof HTMLDialogElement ? htmlOrDialog : (htmlOrDialog as DialogV2).element;
+            const action = (event: Event) => {
+                // Prevent the dialog from closing
+                event.preventDefault();
+                event.stopPropagation();
+                const button = event.currentTarget;
+                if (!(button instanceof HTMLButtonElement) || typeof button.dataset.action !== "string") return;
+                const action = actionsToUse[button.dataset.action];
+                const current = action.action;
+                if (typeof current === "object") {
+                    // TODO Handle other variants than map
+                    const mapValue = -(Number.parseInt(button.dataset.map ?? "0") / 5);
+                    current.use({
+                        event,
+                        actors: [selectedActor],
+                        multipleAttackPenalty: mapValue,
+                        ...action.options,
+                    });
+                } else if (current) {
+                    current({
+                        event,
+                        actors: [selectedActor],
+                        skill: action.skill,
+                    });
+                }
+            };
+            html.querySelectorAll(".bam-action-list button").forEach((button) =>
+                button.addEventListener("click", action),
+            );
+            if (tabView) {
+                for (const tabButton of html.querySelectorAll("a.item") as NodeListOf<HTMLElement>) {
+                    tabButton.addEventListener("click", () => {
+                        for (const tab of html.querySelectorAll("div.tab") as NodeListOf<HTMLElement>) {
+                            if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.add("active");
+                            else tab.classList.remove("active");
+                        }
+                        for (const otherButton of html.querySelectorAll("a.item.active")) {
+                            if (otherButton !== tabButton) otherButton.classList.remove("active");
+                        }
+                        tabButton.classList.add("active");
+                    });
+                }
             }
-        };
-        html.querySelectorAll(".bam-action-list button").forEach((button) =>
-            button.addEventListener("click", clickHandler),
-        );
-        if (tabView) {
-            for (const tabButton of html.querySelectorAll("a.item") as NodeListOf<HTMLElement>) {
-                tabButton.addEventListener("click", () => {
-                    for (const tab of html.querySelectorAll("div.tab") as NodeListOf<HTMLElement>) {
-                        if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.add("active");
-                        else tab.classList.remove("active");
-                    }
-                    for (const otherButton of html.querySelectorAll("a.item.active")) {
-                        if (otherButton !== tabButton) otherButton.classList.remove("active");
-                    }
-                    tabButton.classList.add("active");
-                });
-            }
-        }
-    };
-
-    // Try immediately, and also schedule in case rendering is async
-    attach();
-    queueMicrotask(attach);
+        },
+    }).render(true);
 }
 
 // basicActionMacros();
