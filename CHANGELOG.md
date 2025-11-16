@@ -1,3 +1,10 @@
+## [6.33.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.33.0...v6.33.1) (2025-11-16)
+
+
+### Bug Fixes
+
+* More cleanups for V13 types ([4ab0624](https://github.com/xdy/xdy-pf2e-workbench/commit/4ab06245805ccf5dcfa0295ac8afeddb94344364))
+
 # [6.33.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.32.2...v6.33.0) (2025-11-14)
 
 
