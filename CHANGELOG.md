@@ -1,3 +1,10 @@
+## [6.33.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.33.2...v6.33.3) (2025-12-28)
+
+
+### Bug Fixes
+
+* NPC scaler was breaking compendium list right click ([7fec60b](https://github.com/xdy/xdy-pf2e-workbench/commit/7fec60b90b682aa2d3649f5d5b8e8a316250698b))
+
 ## [6.33.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.33.1...v6.33.2) (2025-11-22)
 
 
