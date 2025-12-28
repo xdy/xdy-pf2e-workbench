@@ -19,7 +19,7 @@ import { ActorDirectoryPF2e } from "foundry-pf2e";
 import { ContextMenuEntry } from "foundry/client/applications/ux/context-menu.mts";
 
 function condition(li: HTMLElement): boolean {
-    return game.actors.get(li.dataset.entryId, { strict: true })?.isOfType("npc");
+    return li.dataset.entryId !== undefined && (game.actors.get(li.dataset.entryId)?.isOfType("npc") ?? false);
 }
 
 function callback(li: HTMLElement) {
