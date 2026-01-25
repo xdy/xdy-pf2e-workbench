@@ -8,7 +8,7 @@ on:
 
 env:
   package_type: module
-  node_version: 20
+  node_version: 22
 
 jobs:
   test:
@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: 'true'
 
@@ -28,9 +28,9 @@ jobs:
           git submodule update --recursive --remote
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4.4.0
+        uses: actions/setup-node@v6
         with:
-          node-version: 20.x
+          node-version: 22.x
 
       - name: Enable Corepack
         run: corepack enable
@@ -58,14 +58,14 @@ jobs:
           git submodule update --init --recursive
           git submodule update --recursive --remote
 
-      - uses: stefanzweifel/git-auto-commit-action@v6.0.1
+      - uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "chore: Update submodules"
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4.4.0
+        uses: actions/setup-node@v6
         with:
-          node-version: 20.x
+          node-version: 22.x
           #cache: 'pnpm'
 
       - name: Enable Corepack
