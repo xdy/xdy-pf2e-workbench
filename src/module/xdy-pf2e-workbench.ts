@@ -13,6 +13,7 @@ import { registerWorkbenchKeybindings } from "./keybinds.js";
 import { ActorPF2e } from "foundry-pf2e";
 
 import { isFirstGM, logInfo } from "./utils.js";
+import * as systems from "../utils/systems.js";
 import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller.js";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.js";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.js";
@@ -186,7 +187,7 @@ export function updateHooks(cleanSlate = false) {
             !String(gs.get(MODULENAME, "nonLethalIsNotLethal")).startsWith("no") ||
             !String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no") ||
             gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
-            (gs.get("pf2e", "automation.lootableNPCs") &&
+            (systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
                 gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
         preUpdateActorHook,
     );
@@ -196,7 +197,7 @@ export function updateHooks(cleanSlate = false) {
     handle(
         "createToken",
         gs.get(MODULENAME, "npcMystifier") ||
-            (gs.get("pf2e", "automation.lootableNPCs") &&
+            (systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
                 gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
         createTokenHook,
     );
@@ -327,7 +328,7 @@ function handleCampaignFeatSection() {
 
     // Add campaign feat sections if enabled
     if (legacyVariantRuleDualClass || legacyVariantRuleAncestryParagon) {
-        const campaignFeatSections = game.settings.get("pf2e", "campaignFeatSections");
+        const campaignFeatSections = systems.getSetting<any[]>("campaignFeatSections");
         if (legacyVariantRuleAncestryParagon) {
             if (!campaignFeatSections.find((section) => section.id === "xdy_ancestryparagon")) {
                 campaignFeatSections.push({
@@ -350,10 +351,10 @@ function handleCampaignFeatSection() {
             }
         }
 
-        game.settings.set("pf2e", "campaignFeatSections", campaignFeatSections);
+        systems.setSetting("campaignFeatSections", campaignFeatSections);
     }
 
-    const campaignFeatSections = game.settings.get("pf2e", "campaignFeatSections");
+    const campaignFeatSections = systems.getSetting<any[]>("campaignFeatSections");
     // ... or remove it if disabled.
     if (
         campaignFeatSections &&
@@ -364,7 +365,7 @@ function handleCampaignFeatSection() {
             campaignFeatSections.findIndex((section) => section.id === "xdy_dualclass"),
             1,
         );
-        game.settings.set("pf2e", "campaignFeatSections", campaignFeatSections);
+        systems.setSetting("campaignFeatSections", campaignFeatSections);
     }
 
     if (
@@ -376,7 +377,7 @@ function handleCampaignFeatSection() {
             campaignFeatSections.findIndex((section) => section.id === "xdy_ancestryparagon"),
             1,
         );
-        game.settings.set("pf2e", "campaignFeatSections", campaignFeatSections);
+        systems.setSetting("campaignFeatSections", campaignFeatSections);
     }
 }
 
@@ -502,3 +503,4 @@ function registerHandlebarsHelpers() {
         return false;
     });
 }
+

@@ -14,9 +14,11 @@ Translations:
 <a href="https://weblate.foundryvtt-hub.com/engage/xdy-pf2e-workbench/"><img src="https://weblate.foundryvtt-hub.com/widgets/xdy-pf2e-workbench/-/multi-auto.svg" alt="Translation status" /></a>
 
 This module is intended to hold a few features for the foundry vtt pf2e system that could well have been separate
-modules and may well be eaten by the system at some point.
+modules and may well be eaten by the system at some point (or by other modules).
 
-My current ideas (as in, no guarantee they'll ever actually get done) can be seen [here](featureIdeas.md)
+Note: This module now includes basic support for the Starfinder 2e (sf2e) system. This support is experimental and has
+barely been tested. Most features are designed for PF2e and may not work as expected in SF2e. Some features may require
+additional configuration or adjustments for optimal performance in SF2e.
 
 ## Current features (order by setting section)
 

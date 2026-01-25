@@ -20,15 +20,19 @@ const baseMacro: Partial<foundry.documents.MacroSource> = {
     scope: "global",
     type: "script",
 };
-const baseMacroStats: Omit<DocumentStatsData, "compendiumSource"> = {
-    systemId: "pf2e",
-    systemVersion: module.relationships.systems.find((s) => s.id === "pf2e").compatibility.minimum,
-    coreVersion: module.compatibility.minimum,
-    createdTime: Date.now(),
-    modifiedTime: Date.now(),
-    lastModifiedBy: null,
-    duplicateSource: null,
-};
+
+// Helper function to create system-specific macro stats
+function createBaseMacroStats(systemId: "pf2e" | "sf2e"): Omit<DocumentStatsData, "compendiumSource"> {
+    return {
+        systemId: systemId,
+        systemVersion: module.relationships.systems.find((s) => s.id === systemId).compatibility.minimum,
+        coreVersion: module.compatibility.minimum,
+        createdTime: Date.now(),
+        modifiedTime: Date.now(),
+        lastModifiedBy: null,
+        duplicateSource: null,
+    };
+}
 
 function compendiumUuid(compendium: string, type: CompendiumDocumentType, id: string): CompendiumUUID {
     return `Compendium.${MODULENAME}.${compendium}.${type}.${id}`;
@@ -94,7 +98,8 @@ function myRandomId() {
 }
 
 fs.rmSync("temporary", { recursive: true, force: true });
-const outDir = <string>fs.mkdirSync(path.resolve(".", "temporary"), { recursive: true });
+const outDir = path.resolve(".", "temporary");
+fs.mkdirSync(outDir, { recursive: true });
 if (!outDir) {
     throw new Error("Could not create output directory");
 }
@@ -102,28 +107,34 @@ if (!outDir) {
 async function buildAsymonousPack() {
     const submod = "submodules/my-foundryvtt-macros";
     const asymonousSource = ["PF2e", "PF2e/Contributions by others"];
-    const packNameInternal = "asymonous-benefactor-macros-internal";
-    const packNameImport = "asymonous-benefactor-macros";
 
-    fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameInternal));
-    fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameImport));
+    // Build for both systems
+    // For backwards compatibility, PF2e packs keep original names (no -pf2e suffix)
+    for (const systemId of ["pf2e", "sf2e"] as const) {
+        const suffix = systemId === "pf2e" ? "" : `-${systemId}`;
+        const packNameInternal = `asymonous-benefactor-macros-internal${suffix}`;
+        const packNameImport = `asymonous-benefactor-macros${suffix}`;
+        const baseMacroStats = createBaseMacroStats(systemId);
 
-    const macrosImport: MacroPackSource[] = [];
-    const macrosInternal: MacroPackSource[] = [];
-    for (const folderPath of asymonousSource) {
-        const files = fs.readdirSync(path.join(submod, folderPath));
-        for (const file of files) {
-            if (!file.endsWith(".js")) {
-                continue;
-            }
-            const filePath = path.join(submod, folderPath, file);
-            let contents = fs.readFileSync(filePath, { encoding: "utf8" });
-            const documentation = contents.match(/\/\*[\s\S]*?\*\//);
+        fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameInternal));
+        fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameImport));
 
-            contents += `\n/* # source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${folderPath}/${file}" - Fetched on ${new Date().toISOString()} */`;
+        const macrosImport: MacroPackSource[] = [];
+        const macrosInternal: MacroPackSource[] = [];
+        for (const folderPath of asymonousSource) {
+            const files = fs.readdirSync(path.join(submod, folderPath));
+            for (const file of files) {
+                if (!file.endsWith(".js")) {
+                    continue;
+                }
+                const filePath = path.join(submod, folderPath, file);
+                let contents = fs.readFileSync(filePath, { encoding: "utf8" });
+                const documentation = contents.match(/\/\*[\s\S]*?\*\//);
 
-            const macroName = path.parse(file).name;
-            const importMacro = `/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
+                contents += `\n/* # source "https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/${folderPath}/${file}" - Fetched on ${new Date().toISOString()} */`;
+
+                const macroName = path.parse(file).name;
+                const importMacro = `/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
 /* Start of documentation from the original macro: */
 ${documentation ? documentation[0] : "/* There is no documentation in the macro. */"}
 /* End of original macro documentation. */
@@ -151,62 +162,74 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
     /* This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274; and modified by Mark Pearce https://discord.com/channels/880968862240239708/880969174661353484/972962446098702376 */
     `;
 
-            const img = macroIcons.get(macroName) || "icons/svg/dice-target.svg";
+                const img = macroIcons.get(macroName) || "icons/svg/dice-target.svg";
 
-            const idInternal = myRandomId();
-            macrosInternal.push({
-                _key: `!macros!${idInternal}`,
-                _id: idInternal,
-                _stats: { compendiumSource: compendiumUuid(packNameInternal, "Macro", idInternal), ...baseMacroStats },
-                command: contents,
-                img: "icons/svg/trap.svg",
-                name: `XDY DO_NOT_IMPORT ${macroName}`,
-                ...baseMacro,
-            });
-            const idImport = myRandomId();
-            macrosImport.push({
-                _key: `!macros!${idImport}`,
-                _id: idImport,
-                _stats: { compendiumSource: compendiumUuid(packNameImport, "Macro", idImport), ...baseMacroStats },
-                command: importMacro,
-                img: img,
-                name: macroName,
-                ...baseMacro,
-            });
+                const idInternal = myRandomId();
+                macrosInternal.push({
+                    _key: `!macros!${idInternal}`,
+                    _id: idInternal,
+                    _stats: {
+                        compendiumSource: compendiumUuid(packNameInternal, "Macro", idInternal),
+                        ...baseMacroStats,
+                    },
+                    command: contents,
+                    img: "icons/svg/trap.svg",
+                    name: `XDY DO_NOT_IMPORT ${macroName}`,
+                    ...baseMacro,
+                });
+                const idImport = myRandomId();
+                macrosImport.push({
+                    _key: `!macros!${idImport}`,
+                    _id: idImport,
+                    _stats: { compendiumSource: compendiumUuid(packNameImport, "Macro", idImport), ...baseMacroStats },
+                    command: importMacro,
+                    img: img,
+                    name: macroName,
+                    ...baseMacro,
+                });
+            }
         }
+        const internalPack = path.resolve(outDir, "packs", "generated", packNameInternal);
+        await compilePack(macrosInternal, internalPack, { log: true });
+        const importPack = path.resolve(outDir, "packs", "generated", packNameImport);
+        await compilePack(macrosImport, importPack, { log: true });
     }
-    const internalPack = path.resolve(outDir, "packs", "generated", packNameInternal);
-    await compilePack(macrosInternal, internalPack, { log: true });
-    const importPack = path.resolve(outDir, "packs", "generated", packNameImport);
-    await compilePack(macrosImport, importPack, { log: true });
 }
 
 // Pack "*.macro" files into a compendium
 // Argument is both the directory in src/packs/data with source as well the the compendium name in outDir/packs/generated
-async function buildMacrosPack(packName: string) {
-    const folderPath = path.resolve("src/packs/data", packName);
-    const macros: MacroPackSource[] = [];
-    const files = fs.readdirSync(folderPath);
-    for (const file of files) {
-        const filePath = path.join(folderPath, file);
-        if (!filePath.endsWith(".macro")) {
-            continue;
+async function buildMacrosPack(packBaseName: string) {
+    const folderPath = path.resolve("src/packs/data", packBaseName);
+
+    // Build for both systems
+    // For backwards compatibility, PF2e packs keep original names (no -pf2e suffix)
+    for (const systemId of ["pf2e", "sf2e"] as const) {
+        const suffix = systemId === "pf2e" ? "" : `-${systemId}`;
+        const packName = `${packBaseName}${suffix}`;
+        const baseMacroStats = createBaseMacroStats(systemId);
+        const macros: MacroPackSource[] = [];
+        const files = fs.readdirSync(folderPath);
+        for (const file of files) {
+            const filePath = path.join(folderPath, file);
+            if (!filePath.endsWith(".macro")) {
+                continue;
+            }
+            const macroName = path.parse(file).name;
+            const contents = fs.readFileSync(filePath, { encoding: "utf8" });
+            const id = myRandomId();
+            macros.push({
+                _key: `!macros!${id}`,
+                _id: id,
+                _stats: { compendiumSource: compendiumUuid(packName, "Macro", id), ...baseMacroStats },
+                command: contents,
+                img: macroIcons.get(macroName) || "icons/svg/dice-target.svg",
+                name: macroName,
+                ...baseMacro,
+            });
         }
-        const macroName = path.parse(file).name;
-        const contents = fs.readFileSync(filePath, { encoding: "utf8" });
-        const id = myRandomId();
-        macros.push({
-            _key: `!macros!${id}`,
-            _id: id,
-            _stats: { compendiumSource: compendiumUuid(packName, "Macro", id), ...baseMacroStats },
-            command: contents,
-            img: macroIcons.get(macroName) || "icons/svg/dice-target.svg",
-            name: macroName,
-            ...baseMacro,
-        });
+        const pack = path.resolve(outDir, "packs", "generated", packName);
+        await compilePack(macros, pack, { log: true });
     }
-    const pack = path.resolve(outDir, "packs", "generated", packName);
-    await compilePack(macros, pack, { log: true });
 }
 
 async function buildCustomizableMacrosPack() {

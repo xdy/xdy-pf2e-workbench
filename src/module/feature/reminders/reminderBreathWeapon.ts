@@ -1,6 +1,7 @@
 import { isFirstGM, myRandomId } from "../../utils.js";
 import { ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import * as systems from "../../../utils/systems.ts";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e) {
     const messageContent = message.content;
@@ -18,7 +19,7 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
                 rounds = Number(matches[1]);
             }
             // Skip dragon form and the like
-        } else if (!message.flags?.pf2e?.origin?.rollOptions?.includes("polymorph")) {
+        } else if (!systems.getFlag<string[]>(message, "origin.rollOptions")?.includes("polymorph")) {
             const diceFormulaMatch = messageContent.match(/1d([46])( rounds| recharge|<\/a> rounds)/i);
             if (diceFormulaMatch && diceFormulaMatch[1]) {
                 const formula = `1d${diceFormulaMatch[1]}`;
@@ -44,7 +45,7 @@ async function getEffectDetails(activeActor, messageContent: string, diceValue) 
             ? game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.used`) + titleRetrieved[1]
             : game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.used`) +
               game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`),
-        img: "systems/pf2e/icons/spells/dragon-breath.webp",
+        img: `systems/${game.system.id}/icons/spells/dragon-breath.webp`,
         system: {
             tokenIcon: { show: true },
             duration: {
@@ -75,3 +76,4 @@ async function getEffectDetails(activeActor, messageContent: string, diceValue) 
         },
     };
 }
+

@@ -1,4 +1,3 @@
-/* eslint-env node */
 import { existsSync, readFileSync } from "node:fs";
 import { rmdir, symlink } from "node:fs/promises";
 import * as path from "path";

@@ -3,6 +3,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/index.js";
 import { generateNameFromTraits } from "./traits-name-generator.js";
 import { heroes, logError } from "../../utils.js";
+import * as systems from "../../../utils/systems.ts";
 
 function shouldSkipRandomProperty(token) {
     return (
@@ -28,7 +29,8 @@ async function fetchRandomWordPrefix(): Promise<string> {
     if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
         const table = game?.tables?.find((t) => t.name === fixSetting);
         if (!table) {
-            const pack = game.packs.get("xdy-pf2e-workbench.xdy-internal-tables");
+            const packId = systems.getModulePackId("xdy-internal-tables");
+            const pack = game.packs.get(packId);
             if (pack) {
                 const index = await pack.getIndex();
                 const id = index.find((e) => e.name.includes(<string>fixSetting))?._id;
@@ -272,3 +274,4 @@ export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement) {
 export function canMystify() {
     return game.user?.isGM && canvas && canvas.tokens;
 }
+

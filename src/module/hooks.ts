@@ -16,6 +16,7 @@ import {
     UserPF2e,
 } from "foundry-pf2e";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
+import * as systems from "../utils/systems.js";
 import { actionsReminder, autoReduceStunned, reminderTargeting } from "./feature/reminders/index.js";
 import {
     chatActionCardDescriptionCollapse,
@@ -49,7 +50,7 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
 
     // Handle private spellcasting
-    if (castPrivateSpellEnabled && message.flags.pf2e?.casting?.id) {
+    if (castPrivateSpellEnabled && systems.getFlag(message, "casting.id")) {
         const ctrlHeld = ["ControlLeft", "ControlRight", "MetaLeft", "MetaRight", "Meta", "OsLeft", "OsRight"].some(
             (key) => game?.keyboard.downKeys.has(key),
         );
@@ -104,7 +105,7 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
 
     // Early return for damage rolls or damage taken messages
     function isDamageTaken(message: ChatMessagePF2e) {
-        return message.flags?.pf2e?.context?.type === "damage-taken";
+        return systems.getFlag(message, "context.type") === "damage-taken";
     }
 
     const isDamageRoll = isActuallyDamageRoll(message);
@@ -149,7 +150,7 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
 
         // Check if we need to handle private spells
         const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
-        if (castPrivateSpellEnabled && message?.flags?.pf2e?.origin?.type === "spell") {
+        if (castPrivateSpellEnabled && systems.getFlag(message, "origin.type") === "spell") {
             hideSpellNameInDamageroll(message, html);
         }
     } else {
@@ -358,7 +359,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
             actor?.items?.size > 0 &&
             currentActorHp > 0 &&
             updateHp <= 0 &&
-            game.settings.get("pf2e", "automation.lootableNPCs") &&
+            systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
             String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems")) === "onZeroHp"
         ) {
             await mystifyNpcItems(actor);
@@ -384,7 +385,7 @@ export async function createTokenHook(token: TokenDocumentPF2e, ..._args) {
 
     if (
         game.user?.isGM &&
-        game.settings.get("pf2e", "automation.lootableNPCs") &&
+        systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
         String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems")) === "onScene" &&
         token.actor &&
         token.actor.isOfType(NPC_TYPE) &&
@@ -559,3 +560,4 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
         }
     }
 }
+

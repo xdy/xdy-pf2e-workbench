@@ -8,7 +8,7 @@ async function increaseFocusPoints(actor, value) {
     await ChatMessage.create({
         style: CONST.CHAT_MESSAGE_STYLES.EMOTE,
         speaker: ChatMessage.getSpeaker(actor),
-        flavor: '<strong><img src="systems/pf2e/icons/actions/Passive.webp" width="10" height="10" style="border: 0; margin-right: 3px;" alt="Passive">Refocus</strong>',
+        flavor: `<strong><img src="systems/${game.system.id}/icons/actions/Passive.webp" width="10" height="10" style="border: 0; margin-right: 3px;" alt="Passive">Refocus</strong>`,
         content: game.i18n.format(`${MODULENAME}.macros.refocus.regains`, { focus: result - current }),
     });
 }

@@ -2,6 +2,7 @@ import { isFirstGM, logDebug, shouldIHandleThis, shouldIHandleThisMessage } from
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e, ActorSystemData, ChatMessagePF2e, ItemPF2e } from "foundry-pf2e";
 import { moveOnZeroHP } from "../initiativeHandler/index.js";
+import * as systems from "../../../utils/systems.ts";
 
 export function dyingHandlingPreUpdateActorHook(
     actor,
@@ -116,7 +117,7 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
         token.actor &&
         token.isOwner
     ) {
-        const outcome = message.flags?.pf2e?.context?.outcome ?? "";
+        const outcome = systems.getFlag(message, "context.outcome") ?? "";
 
         const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
         const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
@@ -246,12 +247,12 @@ export function getRelevantMessages(actor: ActorPF2e): ChatMessagePF2e[] {
 }
 
 function filterMessagesByContextType(messages: ChatMessagePF2e[], contextType: string): ChatMessagePF2e[] {
-    return messages.filter((message) => message.flags.pf2e.context?.type === contextType);
+    return messages.filter((message) => systems.getFlag(message, "context.type") === contextType);
 }
 
 function filterMessagesByStrikeDamaging(messages: ChatMessagePF2e[]): ChatMessagePF2e[] {
     // @ts-ignore TODO Add to types
-    return messages.filter((message) => message.flags.pf2e.strike?.damaging);
+    return messages.filter((message) => systems.getFlag(message, "strike.damaging"));
 }
 
 function filterMessagesByActorEnemy(messages: ChatMessagePF2e[]): ChatMessagePF2e[] {
@@ -288,7 +289,7 @@ export function checkIfLatestDamageMessageIsCriticalHitByEnemy(actor: ActorPF2e,
 }
 
 function filterMessagesByCriticalSuccess(messages: ChatMessagePF2e[]): ChatMessagePF2e[] {
-    return messages.filter((message) => message.flags.pf2e.context?.outcome === "criticalSuccess");
+    return messages.filter((message) => systems.getFlag(message, "context.outcome") === "criticalSuccess");
 }
 
 export function handleOrcFerocity(
@@ -315,7 +316,7 @@ export function handleOrcFerocity(
         const effect: any = {
             type: "effect",
             name: game.i18n.localize(`${MODULENAME}.effects.orcFerocityUsed`),
-            img: "systems/pf2e/icons/default-icons/alternatives/ancestries/orc.svg",
+            img: `systems/${game.system.id}/icons/default-icons/alternatives/ancestries/orc.svg`,
             system: {
                 slug: "orc-ferocity-used",
                 tokenIcon: {
@@ -338,7 +339,7 @@ export function handleOrcFerocity(
                 }),
                 speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
                 whisper:
-                    game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
+                    systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                         : [],
             }).then();
@@ -378,7 +379,7 @@ export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], 
             }),
             speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
             whisper:
-                game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
+                systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
                     ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                     : [],
         }).then();
@@ -496,7 +497,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 }),
                 speaker: ChatMessage.getSpeaker({ token: <any>actor.token }),
                 whisper:
-                    game.settings.get("pf2e", "metagame_secretDamage") && !actor?.hasPlayerOwner
+                    systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
                         ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
                         : [],
             }).then();
@@ -594,10 +595,15 @@ export function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: 
         (option.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true)
     ) {
         const relevant = getRelevantMessages(actor);
-        const lastDamageRoll = relevant.findLast((message) => message.flags.pf2e.context?.type === "damage-roll");
+        const lastDamageRoll = relevant.findLast(
+            (message) => systems.getFlag(message, "context.type") === "damage-roll",
+        );
         const totalDamage = lastDamageRoll?.rolls?.[0]?.total ?? 0;
-        const isNonlethal = (lastDamageRoll?.flags?.pf2e?.context?.options ?? []).includes("nonlethal");
+        const isNonlethal = lastDamageRoll
+            ? (systems.getFlag<string[]>(lastDamageRoll, "context.options") ?? []).includes("nonlethal")
+            : false;
         return (totalDamage >= hp.value && isNonlethal) ?? false;
     }
     return false;
 }
+

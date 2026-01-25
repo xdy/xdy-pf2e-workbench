@@ -17,7 +17,6 @@ export async function npcScaler() {
     const oldLevel = 24;
 
     await foundry.applications.api.DialogV2.wait({
-        // @ts-expect-error Bug in types (requires all properties), see https://github.com/7H3LaughingMan/foundry-pf2e/issues/611
         window: {
             title: "Scale NPC",
         },

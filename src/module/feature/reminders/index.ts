@@ -1,6 +1,7 @@
 import { minionsInCurrentScene, shouldIHandleThis } from "../../utils.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e, ChatContextFlag, ChatMessagePF2e, CombatantPF2e, UserPF2e } from "foundry-pf2e";
+import * as systems from "../../../utils/systems.ts";
 
 export function actionsReminder(combatant: CombatantPF2e, reduction = 0) {
     const actor = combatant.actor;
@@ -70,7 +71,7 @@ export async function autoReduceStunned(combatant, userId: string): Promise<numb
 }
 
 export function reminderTargeting(message: ChatMessagePF2e, setting: string): boolean {
-    const context: ChatContextFlag = <ChatContextFlag>message?.flags?.pf2e?.context;
+    const context: ChatContextFlag = <ChatContextFlag>systems.getFlag(message, "context");
 
     if (
         message.actor &&
@@ -98,3 +99,4 @@ export function reminderTargeting(message: ChatMessagePF2e, setting: string): bo
     }
     return true;
 }
+

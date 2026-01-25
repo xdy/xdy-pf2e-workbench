@@ -1,8 +1,9 @@
 import { ChatMessagePF2e, SpellPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import * as systems from "../../../utils/systems.js";
 
 export async function handlePrivateSpellcasting(data: any, message: ChatMessagePF2e) {
-    const spellUUID = <string>message.flags?.pf2e.origin?.uuid;
+    const spellUUID = <string>systems.getFlag(message, "origin.uuid");
     const origin: any = fromUuidSync(spellUUID);
 
     const partyMembersWithSpell = findPartyMembersWithSpell(origin);
@@ -82,20 +83,20 @@ function showPartymembersWithSpell(message, membersWithSpell, data: any) {
 
 async function generateMessageData(message: ChatMessagePF2e, origin, spellUUID: string, data: any) {
     const anonymous = game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.they`);
-    const tokenName = game.settings.get("pf2e", "metagame_tokenSetsNameVisibility")
+    const tokenName = systems.getSystemSetting<boolean>("metagame", "tokenSetsNameVisibility")
         ? anonymous
         : (message.alias ?? message.token?.name ?? message.actor?.name ?? anonymous);
 
-    const type = message.flags?.pf2e.origin?.type ?? "spell";
-    const traditionString = message.flags?.pf2e.casting?.tradition ?? "";
-    const isBasicSave = message.flags.pf2e.context?.options?.includes("item:defense:basic");
+    const type = systems.getFlag<string>(message, "origin.type") ?? "spell";
+    const traditionString = systems.getFlag<string>(message, "casting.tradition") ?? "";
+    const isBasicSave = systems.getFlag<string[]>(message, "context.options")?.includes("item:defense:basic");
     const content = buildSpellMessage(origin, tokenName, type, traditionString, spellUUID, data, isBasicSave);
 
     const flags = {
         "xdy-pf2e-workbench": {
             privateSpell: {
-                originUuid: message.flags?.pf2e.origin?.uuid,
-                originCastRank: message.flags?.pf2e?.origin?.castRank,
+                originUuid: systems.getFlag(message, "origin.uuid"),
+                originCastRank: systems.getFlag(message, "origin.castRank"),
                 originMessageUuid: message.uuid,
             },
         },
@@ -278,11 +279,13 @@ function buildSpellMessage(
 }
 
 export async function hideSpellNameInDamageroll(message: ChatMessagePF2e, html: HTMLElement) {
-    const uuid = message.flags?.pf2e.origin?.uuid;
+    const uuid = systems.getFlag(message, "origin.uuid");
     if (!uuid) return;
 
     // Look for the most recent casting of this specific spell
-    const msg = game.messages.contents.findLast((m) => m.flags.pf2e?.casting && m.flags.pf2e.origin?.uuid === uuid);
+    const msg = game.messages.contents.findLast(
+        (m) => systems.getFlag(m, "casting") && systems.getFlag(m, "origin.uuid") === uuid,
+    );
     // If we find one, check if it's a whisper and hide the spell name if it is
     if (msg && msg.item && msg.whisper.length > 0) {
         const flavor = html.querySelector(".flavor-text");
@@ -294,3 +297,4 @@ export async function hideSpellNameInDamageroll(message: ChatMessagePF2e, html: 
         }
     }
 }
+

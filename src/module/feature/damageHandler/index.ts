@@ -6,8 +6,9 @@ import {
     shouldIHandleThisMessage,
 } from "../../utils.ts";
 import type { DamageRoll } from "foundry-pf2e";
-import { ActorFlagsPF2e, ChatMessagePF2e, RollOptionFlags, SpellPF2e } from "foundry-pf2e";
+import { ActorFlagsPF2e, ChatContextFlag, ChatMessagePF2e, RollOptionFlags, SpellPF2e } from "foundry-pf2e";
 import { Rolled } from "foundry/client/dice/roll.mts";
+import * as systems from "../../../utils/systems.ts";
 
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 10;
@@ -32,13 +33,12 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             ["all", "gm"].includes(settings.autoRollDamageAllow),
         )
     ) {
-        const pf2eFlags = message.flags.pf2e;
-        const originUuid = <string>pf2eFlags?.origin?.uuid;
+        const originUuid = <string>systems.getFlag(message, "origin.uuid");
 
         if (originUuid) {
             const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
             const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
-            const rollType = pf2eFlags.context?.type;
+            const rollType = systems.getFlag(message, "context.type");
 
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
             const isAttackSpell = origin?.traits?.has("attack") ?? false;
@@ -49,7 +49,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const rollForNonAttackSpell =
                 origin !== null &&
                 !isAttackSpell &&
-                pf2eFlags.casting !== null &&
+                systems.getFlag(message, "casting") !== null &&
                 hasFixedTime &&
                 origin?.system?.damage;
 
@@ -70,7 +70,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
             const isFailure = ["criticalFailure", "failure"].includes(degreeOfSuccess);
             const isSuccess = ["criticalSuccess", "success"].includes(degreeOfSuccess);
-            const isBasicSave = pf2eFlags.context?.options?.includes("item:defense:basic");
+            const isBasicSave = systems.getFlag<string[]>(message, "context.options")?.includes("item:defense:basic");
 
             const originMessage = await getLatestChatMessageWithOrigin(5, originUuid);
             const flags = originMessage?.flags;
@@ -137,7 +137,7 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
 
     const { token, actor } = message;
     let { item } = message;
-    const match = message.flags.pf2e?.origin?.uuid?.match(/Item.(\w+)/);
+    const match = systems.getFlag<string>(message, "origin.uuid")?.match(/Item.(\w+)/);
     if (!item && match && match[1] === "xxPF2ExUNARMEDxx") {
         item = { type: "weapon", data: {} } as any;
     }
@@ -280,7 +280,7 @@ async function getLatestChatMessageWithOrigin(numberOfMessagesToCheck: number, o
     const chatLength = game.messages?.contents.length ?? 0;
     for (let i = 1; i <= Math.min(numberOfMessagesToCheck + 1, chatLength); i++) {
         const spellMessage = game.messages?.contents[chatLength - i];
-        if (spellMessage && (<ActorFlagsPF2e>spellMessage.flags.pf2e).origin?.uuid === originUuid) {
+        if (spellMessage && systems.getFlag(spellMessage, "origin.uuid") === originUuid) {
             // Store in cache for future lookups
             originMessageCache.set(originUuid, spellMessage);
             return spellMessage;
@@ -315,11 +315,12 @@ async function handleSpell(
         // Fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
         const target = constructTargetElement(castRank);
 
-        if (message.flags?.pf2e?.origin?.variant?.overlays?.length > 0) {
+        if ((systems.getFlag<string[]>(message, "origin.variant.overlays")?.length ?? 0) > 0) {
+            const overlays = systems.getFlag<string[]>(message, "origin.variant.overlays");
             const variant = origin.loadVariant({
                 castRank,
                 // target,
-                overlayIds: [message.flags.pf2e.origin.variant.overlays[0]],
+                overlayIds: overlays?.[0] ? [overlays[0]] : [],
             });
             // @ts-ignore
             await variant.rollDamage({
@@ -373,7 +374,7 @@ async function handleNonSpell(actor, message, degreeOfSuccess: string) {
 
     options?.push(damageOption);
 
-    const checkContext = message.flags.pf2e.context ?? null;
+    const checkContext = systems.getFlag<ChatContextFlag>(message, "context") ?? null;
 
     const mapIncreases =
         checkContext && "mapIncreases" in checkContext && [0, 1, 2].includes(<number>checkContext.mapIncreases)
@@ -419,3 +420,4 @@ async function handleElementalBlastAttack(actor, message, degreeOfSuccess, check
     }
     return;
 }
+

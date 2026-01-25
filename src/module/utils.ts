@@ -1,6 +1,7 @@
-import { ActorFlagsPF2e, ActorPF2e, ChatMessagePF2e } from "foundry-pf2e";
+import { ActorPF2e, ChatMessagePF2e } from "foundry-pf2e";
 import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
 import BaseUser from "foundry/common/documents/user.mjs";
+import * as systems from "../utils/systems.ts";
 
 function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true): boolean {
     const amIMessageSender = message.author?.id === game.user?.id;
@@ -14,9 +15,9 @@ function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = tr
 
 // TODO Can this be reworked to not parse the message?
 function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
-    const flags = <ActorFlagsPF2e>message.flags.pf2e;
-    let degreeOfSuccess = <string>flags.context?.outcome ?? "";
-    if (flags?.context?.isReroll) {
+    const context = systems.getFlag<any>(message, "context");
+    let degreeOfSuccess = <string>context?.outcome ?? "";
+    if (context?.isReroll) {
         const match = message.flavor?.match('Result: <span .*? class="(.*?)"');
         if (match && match[1]) {
             degreeOfSuccess = match[1];
@@ -239,3 +240,4 @@ export function heroes(): any {
 export function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
     return (typeof key === "string" || typeof key === "number") && key in obj;
 }
+

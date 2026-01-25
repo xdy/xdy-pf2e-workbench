@@ -1,13 +1,12 @@
 // @ts-check
 
 import ts from "@typescript-eslint/eslint-plugin";
-import prettier from "eslint-plugin-prettier";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
     { ignores: ["dist/**/*", "packs/**/*", "static/lib/**/*", "*.mjs"] },
-    { plugins: { prettier, "@typescript-eslint": ts } },
+    { plugins: { "@typescript-eslint": ts } },
     {
         files: ["**/*.ts"],
         languageOptions: {
@@ -22,7 +21,6 @@ export default tseslint.config(
         rules: {
             ...ts.configs["recommended"].rules,
             eqeqeq: "error",
-            "prettier/prettier": "error",
             "no-console": "off",
             "no-plusplus": ["warn", { allowForLoopAfterthoughts: true }],
             "no-unused-expressions": ["error", { allowShortCircuit: true }],
@@ -53,5 +51,13 @@ export default tseslint.config(
     {
         files: ["tests/**/*"],
         rules: { "global-require": "off" },
+    },
+    {
+        files: ["build/**/*.ts"],
+        languageOptions: {
+            globals: {
+                ...globals.node,
+            },
+        },
     },
 );

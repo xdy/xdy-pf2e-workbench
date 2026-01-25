@@ -1,5 +1,6 @@
 import { CREATURE_IDENTIFICATION_TRAITS, ELITE_WEAK } from "../../xdy-pf2e-constants.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import * as systems from "../../../utils/systems.ts";
 
 let TRAITS: {
     SIZES: string[];
@@ -16,7 +17,8 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
     if (fixSetting !== null && fixSetting !== "null" && fixSetting !== "") {
         const table = game?.tables?.find((t) => t.name === fixSetting);
         if (!table) {
-            const pack = game.packs.get("xdy-pf2e-workbench.xdy-internal-tables");
+            const packId = systems.getModulePackId("xdy-internal-tables");
+            const pack = game.packs.get(packId);
             if (pack) {
                 const index = await pack.getIndex();
                 const id = index.find((e) => e.name.includes(<string>fixSetting))?._id;
@@ -196,3 +198,4 @@ export async function generateNameFromTraits(token) {
     }
     return result;
 }
+

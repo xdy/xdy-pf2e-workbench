@@ -1,6 +1,7 @@
-import { ActorFlagsPF2e, ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
+import { ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { shouldIHandleThis } from "../../utils.js";
+import * as systems from "../../../utils/systems.ts";
 
 function ignoreDeadEidolon(actor) {
     return actor?.traits.has("eidolon") && game.settings.get(MODULENAME, "reminderCannotAttackIgnoreDeadEidolon");
@@ -14,12 +15,12 @@ export function checkAttackValidity(message: ChatMessagePF2e, cancelAttack: bool
     const reason = getAttackReason(
         token,
         // @ts-ignore TODO Fix
-        message?.flags?.pf2e?.context?.options.filter((o) => o.startsWith("action:")),
+        systems.getFlag(message, "context.options")?.filter((o) => o.startsWith("action:")),
     );
 
     if (reason) {
         // @ts-ignore TODO FIX
-        notifyUser(token, reason, message?.flags?.pf2e?.context?.title, cancelAttack);
+        notifyUser(token, reason, systems.getFlag(message, "context.title"), cancelAttack);
         return false;
     }
 
@@ -31,19 +32,18 @@ function getSpeakerToken(message: ChatMessagePF2e): TokenDocumentPF2e {
 }
 
 function shouldBeChecked(message: ChatMessagePF2e): boolean {
-    const context = message?.flags?.pf2e?.context ?? {};
+    const context = systems.getFlag(message, "context") ?? {};
     // @ts-ignore TODO FIX
     const traits = context?.traits;
 
+    const flag = <string>systems.getFlag(message, "context.type");
     return (
         message.actor &&
         shouldIHandleThis(message.actor) &&
         message.flags &&
         game.combats.active &&
         message.author &&
-        ["spell-attack-roll", "attack-roll", "skill-check"].includes(
-            <string>(<ActorFlagsPF2e>message.flags.pf2e).context?.type,
-        ) &&
+        ["spell-attack-roll", "attack-roll", "skill-check"].includes(flag) &&
         traits?.some((t) => t === "attack")
     );
 }
@@ -93,3 +93,4 @@ function generateNotificationMessage(title: string, actorName: string, reason: s
         reason: game.i18n.localize(reason),
     });
 }
+

@@ -14,6 +14,7 @@ import {
     Statistic,
 } from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
+import * as systems from "../../../utils/systems.ts";
 
 type DialogV2 = foundry.applications.api.DialogV2;
 
@@ -205,9 +206,14 @@ class MacroActionVariant implements ActionVariant {
         return this.#macro.slugify();
     }
 
-    constructor(macro: string, compendium: string) {
+    constructor(macro: string, compendiumId: string) {
         this.#macro = macro;
-        this.#compendium = compendium;
+        if (compendiumId.startsWith("xdy-pf2e-workbench.")) {
+            const packBaseName = compendiumId.replace("xdy-pf2e-workbench.", "");
+            this.#compendium = systems.getModulePackId(packBaseName);
+        } else {
+            this.#compendium = compendiumId;
+        }
     }
 
     async use(options: ActionUseOptions): Promise<undefined> {
@@ -249,21 +255,21 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStabilize`),
             skill: "medicine",
             action: game.pf2e.actions.get("administer-first-aid")?.variants.get("stabilize"),
-            icon: "systems/pf2e/icons/features/feats/treat-wounds.webp",
+            icon: `systems/${game.system.id}/icons/features/feats/treat-wounds.webp`,
         },
         {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AdministerFirstAidStopBleeding`),
             skill: "medicine",
             action: game.pf2e.actions.get("administer-first-aid")?.variants.get("stop-bleeding"),
-            icon: "systems/pf2e/icons/conditions/persistent-damage.webp",
+            icon: `systems/${game.system.id}/icons/conditions/persistent-damage.webp`,
         },
         {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AidToggle`),
             skill: "",
             action: new MacroActionVariant("macroEffectAid", "xdy-pf2e-workbench.xdy-internal-utility-macros"),
-            icon: "systems/pf2e/icons/spells/efficient-apport.webp",
+            icon: `systems/${game.system.id}/icons/spells/efficient-apport.webp`,
         },
         {
             actionType: "other",
@@ -271,7 +277,7 @@ export async function basicActionMacros() {
             skill: "",
             action: new MacroActionVariant("Aid", "pf2e-action-support-engine-macros.action-support-engine-macros"),
             module: "pf2e-action-support-engine",
-            icon: "systems/pf2e/icons/spells/efficient-apport.webp",
+            icon: `systems/${game.system.id}/icons/spells/efficient-apport.webp`,
         },
         {
             actionType: "other",
@@ -279,14 +285,14 @@ export async function basicActionMacros() {
             skill: "",
             action: (options) => game["activemacros"].aid(options.actors?.[0]),
             module: "pf2e-macros",
-            icon: "systems/pf2e/icons/spells/efficient-apport.webp",
+            icon: `systems/${game.system.id}/icons/spells/efficient-apport.webp`,
         },
         {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.AvoidNotice`),
             skill: "stealth",
             action: game.pf2e.actions.get("avoid-notice"),
-            icon: "systems/pf2e/icons/features/classes/surprice-attack.webp",
+            icon: `systems/${game.system.id}/icons/features/classes/surprice-attack.webp`,
         },
         {
             actionType: "skill_untrained",
@@ -321,7 +327,7 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.ConcealAnObject`),
             skill: "stealth",
             action: game.pf2e.actions.get("conceal-an-object"),
-            icon: "systems/pf2e/icons/equipment/adventuring-gear/wax-key-blank.webp",
+            icon: `systems/${game.system.id}/icons/equipment/adventuring-gear/wax-key-blank.webp`,
         },
         {
             actionType: "skill_trained",
@@ -335,7 +341,7 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateForgery`),
             skill: "society",
             action: game.pf2e.actions.get("create-forgery"),
-            icon: "systems/pf2e/icons/spells/transcribe-moment.webp",
+            icon: `systems/${game.system.id}/icons/spells/transcribe-moment.webp`,
         },
         {
             actionType: "skill_untrained",
@@ -356,7 +362,7 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.CreateADiversionTrick`),
             skill: "deception",
             action: game.pf2e.actions.get("create-a-diversion")?.variants.get("trick"),
-            icon: "systems/pf2e/icons/spells/charming-words.webp",
+            icon: `systems/${game.system.id}/icons/spells/charming-words.webp`,
         },
         {
             actionType: "skill_trained",
@@ -380,7 +386,7 @@ export async function basicActionMacros() {
             skill: "religion",
             action: game.pf2e.actions.get("decipher-writing"),
             options: { statistic: "religion" },
-            icon: "systems/pf2e/icons/equipment/other/spellbooks/thresholds-of-truth.webp",
+            icon: `systems/${game.system.id}/icons/equipment/other/spellbooks/thresholds-of-truth.webp`,
         },
         {
             actionType: "skill_trained",
@@ -412,7 +418,7 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.DisableDevice`),
             skill: "thievery",
             action: game.pf2e.actions.get("disable-device"),
-            icon: "systems/pf2e/icons/equipment/adventuring-gear/thieves-tools.webp",
+            icon: `systems/${game.system.id}/icons/equipment/adventuring-gear/thieves-tools.webp`,
         },
         {
             actionType: "skill_untrained",
@@ -433,7 +439,7 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.FollowTheExpertToggle`),
             skill: "",
             action: followTheExpert,
-            icon: "systems/pf2e/icons/spells/favorable-review.webp",
+            icon: `systems/${game.system.id}/icons/spells/favorable-review.webp`,
         },
         {
             actionType: "skill_untrained",
@@ -461,7 +467,7 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Hide`),
             skill: "stealth",
             action: game.pf2e.actions.get("hide"),
-            icon: "systems/pf2e/icons/features/classes/wild.webp",
+            icon: `systems/${game.system.id}/icons/features/classes/wild.webp`,
         },
         {
             actionType: "skill_untrained",
@@ -543,14 +549,14 @@ export async function basicActionMacros() {
             name: game.i18n.localize("PF2E.Actions.PointOut.Title"),
             skill: "",
             action: game.pf2e.actions.get("point-out"),
-            icon: "systems/pf2e/icons/conditions/observed.webp",
+            icon: `systems/${game.system.id}/icons/conditions/observed.webp`,
         },
         {
             actionType: "other",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.RaiseAShieldToggle`),
             skill: "",
             action: game.pf2e.actions.raiseAShield,
-            icon: "systems/pf2e/icons/actions/raise-a-shield.webp",
+            icon: `systems/${game.system.id}/icons/actions/raise-a-shield.webp`,
         },
         {
             actionType: "skill_untrained",
@@ -609,14 +615,14 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Shove`),
             skill: "athletics",
             action: game.pf2e.actions.get("shove"),
-            icon: "systems/pf2e/icons/spells/hydraulic-push.webp",
+            icon: `systems/${game.system.id}/icons/spells/hydraulic-push.webp`,
         },
         {
             actionType: "skill_untrained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Sneak`),
             skill: "stealth",
             action: game.pf2e.actions.get("sneak"),
-            icon: "systems/pf2e/icons/conditions/unnoticed.webp",
+            icon: `systems/${game.system.id}/icons/conditions/unnoticed.webp`,
         },
         {
             actionType: "skill_trained", // Technically not, but... See https://discord.com/channels/613968515677814784/738122137943932958/1175650650575605870
@@ -660,14 +666,14 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TakeCoverToggle`),
             skill: "",
             action: game.pf2e.actions.get("take-cover"),
-            icon: "systems/pf2e/icons/equipment/shields/tower-shield.webp",
+            icon: `systems/${game.system.id}/icons/equipment/shields/tower-shield.webp`,
         },
         {
             actionType: "skill_trained",
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.Track`),
             skill: "survival",
             action: game.pf2e.actions.get("track"),
-            icon: "systems/pf2e/icons/conditions/observed.webp",
+            icon: `systems/${game.system.id}/icons/conditions/observed.webp`,
         },
         {
             actionType: "skill_trained",
@@ -681,7 +687,7 @@ export async function basicActionMacros() {
             name: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.actions.TreatPoison`),
             skill: "medicine",
             action: game.pf2e.actions.get("treat-poison"),
-            icon: "systems/pf2e/icons/effects/treat-poison.webp",
+            icon: `systems/${game.system.id}/icons/effects/treat-poison.webp`,
         },
         {
             actionType: "skill_trained",
@@ -716,7 +722,7 @@ export async function basicActionMacros() {
             name: game.i18n.localize("PF2E.Actions.DropProne.Title"),
             skill: "",
             action: game.pf2e.actions.get("drop-prone"),
-            icon: "systems/pf2e/icons/conditions/prone.webp",
+            icon: `systems/${game.system.id}/icons/conditions/prone.webp`,
         },
     ];
 
@@ -850,3 +856,4 @@ export async function basicActionMacros() {
 }
 
 // basicActionMacros();
+

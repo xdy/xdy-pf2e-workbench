@@ -15,6 +15,7 @@ import type {
 } from "foundry-pf2e";
 import { ItemUUID } from "foundry/common/documents/_module.mts";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
+import * as systems from "../../../utils/systems.ts";
 
 // IDK why choices isn't in ChoiceSetSource
 interface ChoiceSetSourceWithChoices extends ChoiceSetSource {
@@ -52,7 +53,7 @@ class FollowTheExpertAction implements Action {
     readonly effect: ItemUUID;
 
     public constructor() {
-        this.img = "systems/pf2e/icons/spells/favorable-review.webp";
+        this.img = `systems/${game.system.id}/icons/spells/favorable-review.webp`;
         this.name = `${MODULENAME}.macros.basicActionMacros.actions.FollowTheExpertToggle`;
         this.slug = "follow-the-expert";
         this.traits = ["exploration"];
@@ -65,7 +66,7 @@ class FollowTheExpertAction implements Action {
         // Skilless expert? Don't follow them! Typescript complains.
         if (!expertSkills) return;
 
-        const flags = expert.flags.pf2e?.followTheExpert as FTEFlags | undefined;
+        const flags = systems.getFlag(expert, "followTheExpert") as FTEFlags | undefined;
         // List of Lores that meet FTE minimum proficiency
         const minLevel = flags?.minimum ?? 2;
         const lores = Object.values(expertSkills)
@@ -168,3 +169,4 @@ Hooks.once("setup", () => {
 });
 
 export { followTheExpert };
+
