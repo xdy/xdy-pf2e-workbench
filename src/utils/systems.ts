@@ -72,7 +72,7 @@ export async function setSetting(key: string, value: unknown): Promise<unknown> 
 
 export function getPackName(baseName: string): string {
     const systemId = getSystemId();
-    return `${baseName}-${systemId}`;
+    return systemId === GameSystem.SF2E ? `${baseName}-sf2e` : baseName;
 }
 
 export function getModulePackId(packBaseName: string, moduleId = "xdy-pf2e-workbench"): string {
