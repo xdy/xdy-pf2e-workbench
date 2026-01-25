@@ -1,3 +1,15 @@
+# [6.34.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.33.3...v6.34.0) (2026-01-25)
+
+
+### Bug Fixes
+
+* Update github actions ([9f150c9](https://github.com/xdy/xdy-pf2e-workbench/commit/9f150c90557c2dcfa37bc8c4e77fc22011e5e86d))
+
+
+### Features
+
+* First shot at some sf2e compatibility. Not well tested. ([f6ad742](https://github.com/xdy/xdy-pf2e-workbench/commit/f6ad7423a21386d46c19b45aabe4997263e53189))
+
 ## [6.33.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.33.2...v6.33.3) (2025-12-28)
 
 
