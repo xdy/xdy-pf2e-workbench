@@ -1,3 +1,10 @@
+## [6.34.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.34.0...v6.34.1) (2026-01-25)
+
+
+### Bug Fixes
+
+* Packname suffix should only be added for sf2e. ([83d3bbf](https://github.com/xdy/xdy-pf2e-workbench/commit/83d3bbf8bd0c19646b72b8f0481184253add81b6)), closes [#1666](https://github.com/xdy/xdy-pf2e-workbench/issues/1666)
+
 # [6.34.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.33.3...v6.34.0) (2026-01-25)
 
 
