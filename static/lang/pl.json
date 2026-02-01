@@ -452,7 +452,7 @@
       "heroPointHandler": {
         "add": "Dodaj",
         "addedFor": "Dodano 1 Punkt Bohaterstwa dla {name}",
-        "addedToForAll": "Dodano wszystkim {heroPoints} Punktów Bohaterstwa",
+        "addedToForAll": "Dodano wszystkim {heroPoints} Punkty Bohaterstwa",
         "addOne": "<b>Sekcja 2</b> - Dodaje jeden Punkt Bohaterstwa wybranej postaci spośród zalogowanych członków aktywnej drużyny (domyślnie losowej postaci po upływie czasu)",
         "all": "Wszyscy",
         "defaultTimeoutMinutes": 60,
@@ -469,10 +469,10 @@
         "resetToForAll": "Zresetowano Punkty Bohaterstwa dla wszystkich do {heroPoints}",
         "showAfter": "Pokaż okno dialogowe ponownie po tylu minutach",
         "startTimerLabel": "Prześlij zmiany i uruchom/wznów licznik czasu",
-        "thisMany": "Tak wielu",
+        "thisMany": "Tak wiele",
         "timerStopped": "Licznik Punktów Bohaterstwa został zatrzymany.",
         "timerValue": "Wartość licznika (zakres 0 - {maxMinutes})",
-        "title": "Obsługa Punktów Bohatera",
+        "title": "Punkty Bohaterstwa",
         "willBeResetIn": "Obsługa Punktów Bohatera powraca za {remainingMinutes} minut ({time})."
       },
       "heroPointHandlerDefaultTimeoutMinutes": {
