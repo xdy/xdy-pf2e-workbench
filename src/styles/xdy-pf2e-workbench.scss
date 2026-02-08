@@ -179,9 +179,9 @@
     }
 }
 
-.bam-tabs.tabs h3 {
+.bam-tabs.tabs {
     margin: 0.5rem 0 0.5rem 0;
-    a.active {
+    a.active > span {
         text-decoration: underline;
     }
 }
