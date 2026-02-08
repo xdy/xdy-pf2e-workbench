@@ -1,3 +1,10 @@
+## [6.34.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.34.2...v6.34.3) (2026-02-08)
+
+
+### Bug Fixes
+
+* BAM is now a v2 app courtesy of Freeze. Private spellcasting error should be gone (fixes [#1668](https://github.com/xdy/xdy-pf2e-workbench/issues/1668)) ([8bec84a](https://github.com/xdy/xdy-pf2e-workbench/commit/8bec84ac3c8c6b42ab7a677239b39ca75ae06b17))
+
 ## [6.34.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.34.1...v6.34.2) (2026-02-08)
 
 
