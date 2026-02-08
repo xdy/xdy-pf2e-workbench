@@ -83,7 +83,7 @@ function showPartymembersWithSpell(message, membersWithSpell, data: any) {
 
 async function generateMessageData(message: ChatMessagePF2e, origin, spellUUID: string, data: any) {
     const anonymous = game.i18n.localize(`${MODULENAME}.SETTINGS.castPrivateSpellWithPublicMessage.they`);
-    const tokenName = systems.getSystemSetting<boolean>("metagame", "tokenSetsNameVisibility")
+    const tokenName = game.pf2e.settings.tokens.nameVisibility
         ? anonymous
         : (message.alias ?? message.token?.name ?? message.actor?.name ?? anonymous);
 
