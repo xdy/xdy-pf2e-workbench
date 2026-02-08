@@ -45,6 +45,7 @@ profile followed by a brief and incomplete description of what this person has c
 * [7H3LaughingMan](https://github.com/7H3LaughingMan) - Various bugfixes.
 * [Aozora](https://github.com/Aozora-the-Dev) - Added GM macro for search and investigate rolls to Customizable Macros
 * [Lioheart](https://github.com/Lioheart) - Contributed to Polish translation
+* [Freeze](https://github.com/Freeze023) - Improved BAM
 
 I've probably forgotten someone, if so, please tell me!
 
