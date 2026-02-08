@@ -1,3 +1,10 @@
+## [6.34.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.34.3...v6.34.4) (2026-02-08)
+
+
+### Bug Fixes
+
+* Now with style! (I.e. I forgot to add some changes from Freeze) ([083367c](https://github.com/xdy/xdy-pf2e-workbench/commit/083367c0add3f1ccd35c5bf94363cbd98edec3f8))
+
 ## [6.34.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.34.2...v6.34.3) (2026-02-08)
 
 
