@@ -9,7 +9,7 @@ import { WorkbenchHouseRulesSettings } from "./houseRules.js";
 
 export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification.js";
 
-export function registerWorkbenchSettings() {
+export function registerWorkbenchSettings(): void {
     logInfo(`${MODULENAME} | registerSettings`);
 
     WorkbenchMystificationSettings.registerSettingsAndCreateMenu("fa-solid fa-eye-slash");
@@ -152,7 +152,7 @@ export function registerWorkbenchSettings() {
         config: true,
         default: "",
         type: String,
-        // @ts-ignore TODO FIX (pr to foundry-pf2e)
+        // @ts-expect-error - filePicker property not yet in foundry-pf2e types
         filePicker: "image",
         onChange: () => updateHooks(),
     });

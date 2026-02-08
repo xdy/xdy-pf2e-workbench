@@ -2,7 +2,7 @@ import { scaleNPCToLevel } from "../cr-scaler/NPCScaler.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { NPCPF2e } from "foundry-pf2e";
 
-export async function npcScaler() {
+export async function npcScaler(): Promise<void> {
     const controlled = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
     if (controlled.length === 0 && game.user.character) controlled.push(game.user.character);
     const actor = <NPCPF2e>controlled[0];

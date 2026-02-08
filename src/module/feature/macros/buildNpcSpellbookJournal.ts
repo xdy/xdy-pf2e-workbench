@@ -6,8 +6,8 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
  *
  * @return {Promise<void>} Returns a promise that resolves when the journal is created.
  */
-export async function buildNpcSpellbookJournal() {
-    // @ts-ignore
+export async function buildNpcSpellbookJournal(): Promise<void> {
+    // @ts-expect-error - ui.activeWindow is not fully typed
     const activeWindow = ui.activeWindow;
     let actor;
     if (activeWindow?.constructor.name === "NPCSheetPF2e") {
@@ -27,7 +27,7 @@ export async function buildNpcSpellbookJournal() {
         return;
     }
 
-    const spellList: any[] = [];
+    const spellList: { entry: string; spells: string[] }[] = [];
     for (let i = 0; i < length; i++) {
         spellList[i] = { entry: spellcastingEntries[i].name, spells: [] };
         for (let ii = 0; ii < spellcastingEntries[i]?.spells?.contents?.length; ii++) {
@@ -48,7 +48,7 @@ export async function buildNpcSpellbookJournal() {
   </tr>
   `;
     }
-    const updates: any = {
+    const updates: { name: string; pages: { name: string; text: { content: string } }[]; content?: string } = {
         name: game.i18n.format(`xdy-pf2e-workbench.macros.buildNpcSpellbookJournal.generatedSpellbookFor`, {
             name: actor.name,
         }),

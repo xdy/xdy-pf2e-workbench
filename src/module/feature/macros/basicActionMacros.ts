@@ -33,7 +33,7 @@ function isSingleCheckAction(action: Action | Function | ActionVariant): action 
     return foundry.utils.hasProperty(action, "preview");
 }
 
-export async function registerBasicActionMacrosHandlebarsTemplates() {
+export async function registerBasicActionMacrosHandlebarsTemplates(): Promise<void> {
     await foundry.applications.handlebars.loadTemplates([
         `modules/${MODULENAME}/templates/macros/bam/index.hbs`,
         `modules/${MODULENAME}/templates/macros/bam/actionButton.hbs`,
@@ -177,7 +177,7 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
             x.name += ` (${skillUsed.label})`;
         }
 
-        const traits = (x as any)?.action?.traits ?? [];
+        const traits = (x.action && typeof x.action === "object" && "traits" in x.action) ? x.action.traits : [];
         x.showMAP = traits.includes("attack");
         x.showDowntime = traits.includes("downtime");
         x.showExploration = traits.includes("exploration");
@@ -248,7 +248,7 @@ class MacroActionVariant implements ActionVariant {
  * If no actor is selected, it selects the user's standard character.
  * If there is no user character, it shows up a warning notification.
  */
-export async function basicActionMacros() {
+export async function basicActionMacros(): Promise<void> {
     const bamActions: MacroAction[] = [
         {
             actionType: "skill_untrained",
@@ -725,10 +725,8 @@ export async function basicActionMacros() {
             icon: `systems/${game.system.id}/icons/conditions/prone.webp`,
         },
     ];
-
-    const actionDialog = window.actionDialog;
-    if (actionDialog?.rendered) {
-        actionDialog.close();
+    if (foundry.applications.instances.get("xdy-pf2e-workbench-BAM-app")?.rendered) {
+        foundry.applications.instances.get("xdy-pf2e-workbench-BAM-app")?.close();
         return;
     }
 
@@ -763,12 +761,11 @@ export async function basicActionMacros() {
     }
 
     const columns = 1 + ~~((actionsToUse.length - 1) / 14);
-    const width = 26 + columns * 250;
+    const width = 26 + columns * 260;
     // const height =
     //     30 + ~~(((30 * actionsToUse.filter((x) => !x.showMAP).length + 1) +
     //             (64 * actionsToUse.filter((x) => x.showMAP).length + 1)) / columns
     //     );
-
     const tabView = game.settings.get(MODULENAME, "bamTabview");
 
     const selectedActorSkills = allActorsSkills.get(selectedActor.id) ?? {};
@@ -782,41 +779,76 @@ export async function basicActionMacros() {
         exploration: data.filter((value) => value.action.showExploration),
         tabView,
     };
-    const content = await foundry.applications.handlebars.renderTemplate(
-        "modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs",
-        filteredData,
-    );
+    const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
-    const dialog = new foundry.applications.api.DialogV2({
-        position: {
-            width,
-        },
-        window: {
-            title: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.title`, {
-                name: selectedActor.name,
-            }),
-            contentClasses: ["pf2e-bg", "bam-dialog"],
-            resizable: true,
-        },
-        content,
-        buttons: [
-            {
-                action: "close",
-                icon: "fa-solid fa-times",
-                label: game.i18n.localize(`${MODULENAME}.macros.basicActionMacros.cancel`),
-                default: true,
+    class BAMapp extends HandlebarsApplicationMixin(ApplicationV2) {
+        static override DEFAULT_OPTIONS = {
+            tag: "form",
+            id: "xdy-pf2e-workbench-BAM-app",
+            position: { width },
+            window: {
+                title: game.i18n.format(`${MODULENAME}.macros.basicActionMacros.title`, { name: selectedActor.name }),
+                contentClasses: ["pf2e-bg", "bam-dialog", "standard-form"],
+                resizable: true,
             },
-        ],
-    });
-    dialog.addEventListener("render", (_event) => {
-        const html = dialog.element;
-        const action = (event: Event) => {
-            // Prevent the dialog from closing
-            event.preventDefault();
-            event.stopPropagation();
-            const button = event.currentTarget;
-            if (!(button instanceof HTMLButtonElement) || typeof button.dataset.action !== "string") return;
-            const action = actionsToUse[button.dataset.action];
+            form: {
+                handler: BAMapp.handler,
+                closeOnSubmit: false,
+                submitOnChange: false,
+            },
+            actions: Object.fromEntries(new Map(actionsToUse.map((_e, i) => ([i, BAMapp.use])))),
+        };
+        static override PARTS = {
+            index: { template: "modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs" },
+            footer: { template: "templates/generic/form-footer.hbs" },
+        };
+        static override TABS = {
+            primary: {
+                tabs: [{
+                    id: "encounter", label: "Encounter",
+                }, {
+                    id: "exploration", label: "Exploration",
+                }, {
+                    id: "downtime", label: "Downtime",
+                }],
+                initial: "encounter",
+            },
+        };
+
+        override async _prepareContext(options) {
+            const context = await super._prepareContext(options);
+            foundry.utils.mergeObject(context, filteredData);
+            return context;
+        }
+
+        override async _preparePartContext(partId, context, options) {
+            context = await super._preparePartContext(partId, context, options);
+            switch (partId) {
+                case "footer":
+                    context.buttons = [{
+                        type: "cancel", action: "cancel", icon: "fa-solid fa-xmark", label: "Cancel",
+                    }];
+                    break;
+                case "index":
+                    context.tabs = this._prepareTabs("primary");
+                    break;
+                default:
+                    break;
+            }
+            return context;
+        }
+
+        static async handler(event, _form, _formData) {
+            const ev = event.submitter;
+            if (ev.dataset.action === "cancel") {
+                const app = foundry.applications.instances.get("xdy-pf2e-workbench-BAM-app");
+                app?.close();
+            }
+        }
+
+        static use(event, button) {
+            const idx = button.dataset.action;
+            const action = actionsToUse[idx];
             const current = action.action;
             if (typeof current === "object") {
                 // TODO Handle other variants than map
@@ -834,25 +866,10 @@ export async function basicActionMacros() {
                     skill: action.skill,
                 });
             }
-        };
-        html.querySelectorAll(".bam-action-list button").forEach((button) => button.addEventListener("click", action));
-        if (tabView) {
-            for (const tabButton of html.querySelectorAll("a.item") as NodeListOf<HTMLElement>) {
-                tabButton.addEventListener("click", () => {
-                    for (const tab of html.querySelectorAll("div.tab") as NodeListOf<HTMLElement>) {
-                        if (tab.dataset.tab === tabButton.dataset.tab) tab.classList.add("active");
-                        else tab.classList.remove("active");
-                    }
-                    for (const otherButton of html.querySelectorAll("a.item.active")) {
-                        if (otherButton !== tabButton) otherButton.classList.remove("active");
-                    }
-                    tabButton.classList.add("active");
-                });
-            }
         }
-    });
-    await dialog.render({ force: true });
-    window.actionDialog = dialog;
+    }
+
+    new BAMapp().render({ force: true });
 }
 
 // basicActionMacros();

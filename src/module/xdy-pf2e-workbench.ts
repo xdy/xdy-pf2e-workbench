@@ -96,7 +96,7 @@ function handle(hookName, shouldBeOn, hookFunction, once = false) {
     }
 }
 
-export function updateHooks(cleanSlate = false) {
+export function updateHooks(cleanSlate = false): void {
     if (phase > Phase.SETUP && game.user.isGM) {
         game.socket.emit("module." + MODULENAME, { operation: "updateHooks" });
     }
@@ -242,7 +242,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     registerHandlebarsHelpers();
 
     // Hooks that always run
-    Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: any, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
+    Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: SettingsMenuPF2eWorkbench, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
         toggleMenuSettings(html, _settings);
         _app.setPosition();
     });
@@ -259,8 +259,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     // Register custom sheets (if any)
 });
 
-export function changePauseText() {
-    function encode(text: string) {
+export function changePauseText(): void {
+    function encode(text: string): string {
         try {
             const isEncoded = text !== decodeURIComponent(text);
             return isEncoded ? text : encodeURIComponent(text);
@@ -322,13 +322,13 @@ Hooks.once("setup", async () => {
     // General module setup
 });
 
-function handleCampaignFeatSection() {
+function handleCampaignFeatSection(): void {
     const legacyVariantRuleAncestryParagon = game.settings.get(MODULENAME, "legacyVariantRuleAncestryParagon");
     const legacyVariantRuleDualClass = game.settings.get(MODULENAME, "legacyVariantRuleDualClass");
 
     // Add campaign feat sections if enabled
     if (legacyVariantRuleDualClass || legacyVariantRuleAncestryParagon) {
-        const campaignFeatSections = systems.getSetting<any[]>("campaignFeatSections");
+        const campaignFeatSections = systems.getSetting<{ id: string; label: string; supported: string[]; slots: number[] }[]>("campaignFeatSections");
         if (legacyVariantRuleAncestryParagon) {
             if (!campaignFeatSections.find((section) => section.id === "xdy_ancestryparagon")) {
                 campaignFeatSections.push({
@@ -354,7 +354,7 @@ function handleCampaignFeatSection() {
         systems.setSetting("campaignFeatSections", campaignFeatSections);
     }
 
-    const campaignFeatSections = systems.getSetting<any[]>("campaignFeatSections");
+    const campaignFeatSections = systems.getSetting<{ id: string; label: string; supported: string[]; slots: number[] }[]>("campaignFeatSections");
     // ... or remove it if disabled.
     if (
         campaignFeatSections &&

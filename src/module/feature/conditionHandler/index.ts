@@ -2,7 +2,7 @@ import { ActorPF2e, CombatantPF2e } from "foundry-pf2e";
 import { minionsInCurrentScene, shouldIHandleThis } from "../../utils.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
-export async function reduceFrightened(combatant: CombatantPF2e, userId: string) {
+export async function reduceFrightened(combatant: CombatantPF2e, userId: string): Promise<void> {
     if (!combatant || !combatant.actor || (userId !== game.user.id && !shouldIHandleThis(combatant.actor))) {
         return;
     }
