@@ -98,7 +98,7 @@
     "luxon": "^3.7.2",
     "minisearch": "^7.2.0",
     "nouislider": "^15.8.1",
-    "remeda": "^2.33.5",
+    "remeda": "^2.33.6",
     "sortablejs": "^1.15.6",
     "typescript-eslint": "^8.54.0",
     "uuid": "^13.0.0"
