@@ -1,3 +1,10 @@
+# [6.35.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.34.4...v6.35.0) (2026-02-24)
+
+
+### Features
+
+* Add support for sf2e's Heroic Reroll (the low die roll is set to 10) ([5c623bf](https://github.com/xdy/xdy-pf2e-workbench/commit/5c623bf08351748e2e1c45984bb0fd626307f120))
+
 ## [6.34.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.34.3...v6.34.4) (2026-02-08)
 
 
