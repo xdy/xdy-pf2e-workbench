@@ -27,6 +27,7 @@ export class WorkbenchHouseRulesSettings extends SettingsMenuPF2eWorkbench {
                     useHighestHeroPointRoll: game.i18n.localize(
                         `${MODULENAME}.SETTINGS.heroPointRules.useHighestHeroPointRoll`,
                     ),
+                    heroicRerolls: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.heroicRerolls`),
                 },
                 onChange: () => updateHooks(),
                 requiresReload: true,

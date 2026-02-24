@@ -53,6 +53,16 @@
     color: blue;
 }
 
+/** Heroic Rerolls Hero Point Rule */
+.chat-message .tags.modifiers .tag.heroic-reroll,
+.chat-message .dice-total.heroic-reroll {
+    color: teal;
+}
+
+.chat-message .tags.modifiers .tag.heroic-reroll {
+    box-shadow: inset 0 0 0 1px rgba(0, 128, 128, 0.3);
+}
+
 .chat-message .tags.modifiers .tag.keeley-add-10 {
     box-shadow: inset 0 0 0 1px rgba(128, 0, 128, 0.3);
 }

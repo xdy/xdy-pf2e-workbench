@@ -249,6 +249,27 @@ function handleVariantHeroPointRules(message: ChatMessagePF2e, jq: JQuery) {
             newTotalElem.classList.add("use-highest-roll");
         }
     }
+
+    // Handle heroic rerolls hero point rule
+    if (lastRoll.options.heroicReroll) {
+        const tags = element.querySelector(".flavor-text > .tags.modifiers");
+        const newTotalElem = element.querySelector(".reroll-second .dice-total");
+
+        if (tags && newTotalElem) {
+            const newTag = document.createElement("span");
+            newTag.classList.add("tag", "tag_transparent", "heroic-reroll");
+            newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagHeroicRerolls`);
+            newTag.dataset.slug = "heroic-reroll";
+
+            const querySelector = tags.querySelector(".tag");
+            if (querySelector?.dataset.visibility === "gm") {
+                newTag.dataset.visibility = "gm";
+            }
+
+            tags.append(newTag);
+            newTotalElem.classList.add("heroic-reroll");
+        }
+    }
 }
 
 function dropHeldItemsOnBecomingUnconscious(actor: CreaturePF2e) {
@@ -422,6 +443,13 @@ export function pf2eRerollHook(
         // @ts-ignore It's protected. Meh.
         newRoll._total += 10;
         newRoll.options.keeleyAdd10 = true;
+    } else if (die && result && game.settings.get(MODULENAME, "heroPointRules") === "heroicRerolls") {
+        // Handle Heroic Rerolls: if d20 result < 10, set it to 10
+        const oldResult = result.result;
+        result.result = 10;
+        // @ts-ignore It's protected. Meh.
+        newRoll._total = newRoll._total - oldResult + 10;
+        newRoll.options.heroicReroll = true;
     } else if (game.settings.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll") {
         // Handle useHighestHeroPointRoll setting
         const oldDie = oldRoll.dice.find(

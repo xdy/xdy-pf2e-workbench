@@ -514,13 +514,15 @@
         "name": "(Experimental) House Rules Settings"
       },
       "heroPointRules": {
-        "hint": "Keeley's Hero Point Rule, Use Highest Roll, or, of course, the normal Use Last Roll.",
+        "hint": "Keeley's Hero Point Rule, Use Highest Roll, Heroic Rerolls, or, of course, the normal Use Last Roll.",
         "name": "Variant Hero Point house rules",
         "no": "Normal rules (use last roll)",
         "keeleysHeroPointRule": "Keeley's Hero Point Rule (+10 if reroll is less than 10).",
         "useHighestHeroPointRoll": "Use highest roll.",
+        "heroicRerolls": "Heroic Rerolls (result less than 10 becomes 10).",
         "bonusTagKeeleys": "Low Reroll +10",
-        "bonusTagUseHighestRoll": "Used highest roll"
+        "bonusTagUseHighestRoll": "Used highest roll",
+        "bonusTagHeroicRerolls": "Low Reroll is set to 10"
       },
       "legacyVariantRuleAncestryParagon": {
         "hint": "Requires the system setting 'Campaign Feats' to be enabled. Adds a Campaign Feats section for Ancestry Paragon but does *not* automatically migrate feats from the previous section or Bonus Feats.",

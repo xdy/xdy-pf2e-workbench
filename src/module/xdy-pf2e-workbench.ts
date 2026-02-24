@@ -174,7 +174,8 @@ export function updateHooks(cleanSlate = false): void {
     handle(
         "pf2e.reroll",
         gs.get(MODULENAME, "heroPointRules") === "keeleysHeroPointRule" ||
-            gs.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll",
+            gs.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll" ||
+            gs.get(MODULENAME, "heroPointRules") === "heroicRerolls",
         pf2eRerollHook,
     );
 
