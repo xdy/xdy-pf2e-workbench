@@ -1,5 +1,12 @@
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - classic-level
-  - esbuild
   - unrs-resolver
+
+onlyBuiltDependencies:
+    - esbuild
+
+minimumReleaseAge: 4320
+blockExoticSubdeps: true
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 10080
