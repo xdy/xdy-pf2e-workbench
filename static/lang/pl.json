@@ -514,13 +514,15 @@
         "name": "(Eksperymentalne) Ustawienia zasad domowych"
       },
       "heroPointRules": {
-        "hint": "Zasada punktu bohatera Keeleya, użyj najwyższego wyniku lub, oczywiście, normalna zasada ostatniego wyniku.",
+        "hint": "Zasada punktów bohatera Keeleya, użycie najwyższego rzutu, ponowne rzuty bohaterskie lub, oczywiście, normalne użycie ostatniego rzutu.",
         "name": "Zasady domowe dotyczące Punktów Bohaterstwa",
         "no": "Normalne zasady (użyj ostatniego rzutu)",
         "keeleysHeroPointRule": "Zasada Punktów Bohaterskich Keeleya (+10, jeśli ponowny rzut jest mniejszy niż 10).",
         "useHighestHeroPointRoll": "Użyj najwyższego wyniku.",
+        "heroicRerolls": "Ponowne rzuty bohaterskie (wynik poniżej 10 staje się 10).",
         "bonusTagKeeleys": "Niższy przerzut +10",
-        "bonusTagUseHighestRoll": "Użyto najwyższego rzutu"
+        "bonusTagUseHighestRoll": "Użyto najwyższego rzutu",
+        "bonusTagHeroicRerolls": "Niskie powtórne rzuty ustawione na 10"
       },
       "legacyVariantRuleAncestryParagon": {
         "hint": "Wymaga włączenia ustawienia systemowego \"Atuty Kampanii\". Dodaje sekcję \"Atuty Kampanii\" dla Ancestry Paragon, ale *nie* automatycznie przenosi atutów z poprzedniej sekcji lub Bonusowych Atutów.",
