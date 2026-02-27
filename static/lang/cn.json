@@ -569,13 +569,15 @@
                 "name": "…但若队伍有人知晓该法术，则自动揭示法术内容。"
             },
             "heroPointRules": {
-                "hint": "Keeley的英雄点规则，使用最高骰值或正常使用最后骰值。",
+                "hint": "Keeley的英雄点规则，使用最高骰值，英雄重骰，或是如常使用最后骰值。",
                 "name": "英雄点变体房规",
                 "no": "正常规则（使用最后骰值）",
                 "useHighestHeroPointRoll": "使用最高骰值。",
-                "bonusTagKeeleys": "低值+10",
+                "bonusTagKeeleys": "低重骰值+10",
                 "bonusTagUseHighestRoll": "使用最高骰值",
-                "keeleysHeroPointRule": "Keeley的英雄点规则（若d20重骰值低于10，则结果自动+10）。"
+                "keeleysHeroPointRule": "Keeley的英雄点规则（若d20重骰值低于10，则结果自动+10）。",
+                "bonusTagHeroicRerolls": "低重骰值改为10",
+                "heroicRerolls": "英雄重骰（骰值结果低于10则改为10）。"
             },
             "npcMystifierIcon": {
                 "hint": "用于开关神秘化的Font Awesome图标。必须是一个有效的Font Awesome图标类型（如`fa-solid fa-eye-slash`或`fa-solid fa-user-secret`）。",
