@@ -514,13 +514,15 @@
         "name": "(Expérimental) Réglages des règles maison"
       },
       "heroPointRules": {
-        "hint": "Règle du point d'héroïsme de Keeley : utiliser le jet le plus élevé ou, bien sûr, utiliser le dernier jet comme à l'ordinaire.",
+        "hint": "Règle des points héroïque de Keeley : utiliser le meilleur résultat, les relances héroïques ou, bien sûr, la règle normale d'utiliser le dernier jet.",
         "name": "Variantes de règles maison de Point d'héroïsme",
         "no": "Règles normales (dernier jet utilisé)",
         "keeleysHeroPointRule": "Règle de Point d'héroïsme de Keeley (+10 si la relance est inférieure à 10).",
         "useHighestHeroPointRoll": "Utiliser le jet le plus élevé.",
+        "heroicRerolls": "Relances héroïques (un résultat inférieur à 10 devient 10).",
         "bonusTagKeeleys": "Relance faible +10",
-        "bonusTagUseHighestRoll": "A utilisé le jet le plus élevé"
+        "bonusTagUseHighestRoll": "A utilisé le jet le plus élevé",
+        "bonusTagHeroicRerolls": "La relance minimale est fixée à 10."
       },
       "legacyVariantRuleAncestryParagon": {
         "hint": "Nécessite d'activer le réglage du système 'Dons de campagne'. Ajoute une section dons de campagne pour Parangon ancestral mais *ne migre pas* automatiquement les dons provenant de la section précédente ou des dons bonus.",
