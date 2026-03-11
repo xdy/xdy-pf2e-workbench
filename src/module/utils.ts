@@ -15,7 +15,7 @@ function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = tr
 
 // TODO Can this be reworked to not parse the message?
 function degreeOfSuccessWithRerollHandling(message: ChatMessagePF2e): string {
-    const context = systems.getFlag<any>(message, "context");
+    const context = systems.getFlag<Record<string, unknown>>(message, "context");
     let degreeOfSuccess = <string>context?.outcome ?? "";
     if (context?.isReroll) {
         const match = message.flavor?.match('Result: <span .*? class="(.*?)"');
@@ -37,11 +37,11 @@ function myRandomId(): string {
         .join("");
 }
 
-function isActuallyDamageRoll(message): boolean {
+function isActuallyDamageRoll(message: ChatMessagePF2e): boolean {
     // TODO Anything using this should probably hook into Hooks.call(`pf2e.damageRoll`, rollData) instead...
     const isPhysicalDamageroll =
         message.rolls?.length !== 0 &&
-        ["ancestry", "effect", "feat", "melee", "weapon"].includes(message.item?.type) &&
+        (message.item?.type ?? "") && ["ancestry", "effect", "feat", "melee", "weapon"].includes(message.item?.type ?? "") &&
         (!message.isRoll || message.isDamageRoll);
     const isSpellDamageRoll = message.item?.type === "spell" && message.isDamageRoll;
     return (
@@ -52,27 +52,27 @@ function isActuallyDamageRoll(message): boolean {
 
 export { shouldIHandleThisMessage, degreeOfSuccessWithRerollHandling, isFirstGM, myRandomId, isActuallyDamageRoll };
 
-export function logTrace(...args): void {
+export function logTrace(...args: unknown[]): void {
     log(0, ...args);
 }
 
-export function logDebug(...args): void {
+export function logDebug(...args: unknown[]): void {
     log(1, ...args);
 }
 
-export function logInfo(...args): void {
+export function logInfo(...args: unknown[]): void {
     log(2, ...args);
 }
 
-export function logWarn(...args): void {
+export function logWarn(...args: unknown[]): void {
     log(3, ...args);
 }
 
-export function logError(...args): void {
+export function logError(...args: unknown[]): void {
     log(4, ...args);
 }
 
-function log(logLevel = 2, ...args) {
+function log(logLevel = 2, ...args: unknown[]): void {
     let number = 2;
     if (phase >= Phase.READY) {
         number = Number(game.settings.get(MODULENAME, "logLevel")) ?? 2;
@@ -101,9 +101,9 @@ function log(logLevel = 2, ...args) {
     }
 }
 
-export function debounce(callback, wait: number) {
-    let timeout;
-    return (...args: any[]): void => {
+export function debounce(callback: (...args: unknown[]) => void, wait: number): (...args: unknown[]) => void {
+    let timeout: NodeJS.Timeout | undefined;
+    return (...args: unknown[]): void => {
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         const context = this;
         clearTimeout(timeout);
@@ -111,7 +111,7 @@ export function debounce(callback, wait: number) {
     };
 }
 
-export function shouldIHandleThis(actor): boolean | null {
+export function shouldIHandleThis(actor: ActorPF2e | null): boolean | null {
     if (!actor) return null;
     const currentUser = game.users.current;
     const activePlayers = game.users.players.filter((u) => u.active);
@@ -124,25 +124,27 @@ export function shouldIHandleThis(actor): boolean | null {
     return game.user.id === updater?.id;
 }
 
-export function pushNotification(message: any, type: string = "info"): void {
+export function pushNotification(message: string, type: string = "info"): void {
     game.socket.emit("module." + MODULENAME, { operation: "notification", args: [type, message] });
 }
 
-export function unflatten(object) {
-    const result = {};
+export function unflatten(object: Record<string, unknown>): Record<string, unknown> {
+    const result: Record<string, unknown> = {};
     Object.keys(object).forEach(function (k) {
         setValue(result, k, object[k]);
     });
     return result;
 }
 
-export function setValue(object, path, value): void {
+export function setValue(object: Record<string, unknown>, path: string, value: unknown): void {
     const split = path.split(".");
     const top = split.pop();
 
-    split.reduce(function (o, k, i, kk) {
-        return (o[k] = o[k] || (isFinite(i + 1 in kk ? kk[i + 1] : top) ? [] : {}));
-    }, object)[top] = value;
+    if (top !== undefined) {
+        split.reduce(function (o, k, i, kk) {
+            return (o[k] = o[k] || (isFinite(i + 1 in kk ? Number(kk[i + 1]) : Number(top)) ? [] : {}));
+        }, object)[top] = value;
+    }
 }
 
 /**
@@ -151,7 +153,7 @@ export function setValue(object, path, value): void {
  * @param {string} housepatcher - The housepatcher object containing patches.
  * @return {Promise<void>} A promise that resolves when the patches have been applied.
  */
-export async function housepatcher(housepatcher): Promise<void> {
+export async function housepatcher(housepatcher: unknown): Promise<void> {
     try {
         const patches = JSON.parse(decodeURI(String(housepatcher)));
         let count = 0;
@@ -163,17 +165,19 @@ export async function housepatcher(housepatcher): Promise<void> {
                 const compendium: CompendiumCollection = document.compendium;
 
                 if (action === "update") {
-                    const original: any = document.toObject();
-                    const traits = original?.system?.traits?.value;
+                    const original: Record<string, unknown> = document.toObject();
+                    const system = original?.system as Record<string, unknown> | undefined;
+                    const traitsObj = system?.traits as Record<string, unknown> | undefined;
+                    const traits = traitsObj?.value as string[] | undefined;
 
                     const housepatchedTrait = "xdy-pf2e-housepatched";
                     const cccPatchedTrait = "pf2e-ccc-patched";
                     if (!(traits?.includes(cccPatchedTrait) || traits?.includes(housepatchedTrait))) {
-                        const update: any = unflatten(data);
-                        update.system = update.system ?? {};
-                        update.system.traits = update.system.traits ?? {};
-                        update.system.traits.value = update.system.traits.value ?? [];
-                        update.system.traits.value.push(housepatchedTrait);
+                        const update = unflatten(data) as Record<string, unknown>;
+                        const updateSystem = (update.system ??= {}) as Record<string, unknown>;
+                        const updateTraits = (updateSystem.traits ??= {}) as Record<string, unknown>;
+                        const updateValue = (updateTraits.value ??= []) as string[];
+                        updateValue.push(housepatchedTrait);
 
                         const merged = fu.mergeObject(original, update);
                         await document.update(unflatten(merged));
@@ -196,7 +200,7 @@ export async function housepatcher(housepatcher): Promise<void> {
 
         const message = game.i18n.format(`${MODULENAME}.SETTINGS.housepatcher.notification`, { count });
         ui.notifications.info(message);
-    } catch (e) {
+    } catch {
         ui.notifications.error(game.i18n.format(`${MODULENAME}.SETTINGS.housepatcher.error`));
         game.settings.set(MODULENAME, "housepatcher", "");
     }
@@ -210,7 +214,7 @@ export function minionsInCurrentScene(actor: ActorPF2e): ActorPF2e[] {
               ?.filter((x) => x?.traits.has("minion")) : [];
 }
 
-export function setFlag(doc, flag, value): Promise<any> {
+export function setFlag(doc: foundry.abstract.Document, flag: string, value: unknown): Promise<unknown> {
     return doc.setFlag(MODULENAME, flag, value);
 }
 
@@ -219,7 +223,7 @@ export function setFlag(doc, flag, value): Promise<any> {
  *
  * @return {Array<Actor>} The list of hero actors.
  */
-export function heroes(): any {
+export function heroes(): ActorPF2e[] {
     return (
         game.actors?.party?.members
             .filter((actor) => actor?.isOfType("character"))

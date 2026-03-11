@@ -4,7 +4,7 @@ import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMy
 import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler/index.js";
 import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js";
 
-export function registerWorkbenchKeybindings() {
+export function registerWorkbenchKeybindings(): void {
     logInfo(`${MODULENAME} | registerKeybindings`);
 
     const keybindings = game.keybindings;
@@ -37,13 +37,11 @@ export function registerWorkbenchKeybindings() {
                     addFor: {
                         icon: '<i class="fa-solid fa-users"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
-                        callback: async (html) => {
-                            const targets: any[] = <any[]>(
-                                Array.from(canvas.tokens?.controlled).concat(
-                                    canvas.tokens.placeables.filter((it) => it.mouseInteractionManager.state === 1),
-                                )
+                        callback: async (html: JQuery<HTMLElement>) => {
+                            const targets = Array.from(canvas.tokens?.controlled ?? []).concat(
+                                canvas.tokens?.placeables.filter((it) => it.mouseInteractionManager.state === 1) ?? [],
                             );
-                            const user: any = game.users.find(
+                            const user: User | undefined = game.users?.find(
                                 (u) => u.id === (html.find("#dialogUserId").val() as string),
                             );
                             if (game.user?.isGM && targets && user) {
@@ -57,8 +55,8 @@ export function registerWorkbenchKeybindings() {
                     clearFor: {
                         icon: '<i class="fa-solid fa-users-slash"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
-                        callback: async (html: JQuery) => {
-                            const user: any = game.users.find(
+                        callback: async (html: JQuery<HTMLElement>) => {
+                            const user: User | undefined = game.users?.find(
                                 (u) => u.id === (html.find("#dialogUserId").val() as string),
                             );
                             if (game.user?.isGM && user) {
@@ -96,10 +94,12 @@ export function registerWorkbenchKeybindings() {
         restricted: true,
         onDown: () => {
             if (game.user?.isGM) {
-                const combatantByToken: any = game?.combat?.getCombatantByToken(
+                const combatantByToken: Combatant | undefined = game?.combat?.getCombatantByToken(
                     <string>canvas?.tokens?.controlled[0].id,
                 );
-                moveSelectedAheadOfCurrent(combatantByToken).then();
+                if (combatantByToken) {
+                    moveSelectedAheadOfCurrent(combatantByToken.id).then();
+                }
             }
             return true;
         },
@@ -125,7 +125,6 @@ export function registerWorkbenchKeybindings() {
             return false;
         },
         reservedModifiers: [],
-        // @ts-ignore
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
     });
 

@@ -4,7 +4,16 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import fs from "fs-extra";
 import checker from "vite-plugin-checker";
 
-const EN_JSON = JSON.parse(fs.readFileSync("./static/lang/en.json", { encoding: "utf-8" }));
+function readJson(path: string) {
+    try {
+        return JSON.parse(fs.readFileSync(path, { encoding: "utf-8" }));
+    } catch (error) {
+        throw new Error(`Failed to parse JSON file \`${path}\`: ${error instanceof Error ? error.message : String(error)}`);
+    }
+}
+
+const EN_JSON = readJson("./static/lang/en.json");
+
 const plugins = [
     checker({ typescript: true }),
     tsconfigPaths(),

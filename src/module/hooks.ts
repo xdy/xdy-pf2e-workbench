@@ -42,7 +42,7 @@ import {
 } from "./feature/qolHandler/handlePrivateSpellcasting.js";
 import { Rolled } from "foundry/client/dice/roll.mts";
 
-export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _options, _user: UserPF2e) => {
+export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: Record<string, unknown>, _options: unknown, _user: UserPF2e): boolean => {
     let proceed = true;
 
     const reminderTargetingEnabled = String(game.settings.get(MODULENAME, "reminderTargeting")) === "mustTarget";
@@ -82,7 +82,7 @@ export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: any, _o
     return proceed;
 };
 
-function castPrivately(inParty: boolean, message: ChatMessagePF2e) {
+function castPrivately(inParty: boolean, message: ChatMessagePF2e): boolean {
     const isNpc = message.actor?.type === NPC_TYPE;
     const isAlly = message.actor?.alliance === "party";
     const alwaysNpc = game.settings.get(MODULENAME, "castPrivateSpellAlwaysFor") === "npcs";
@@ -92,7 +92,7 @@ function castPrivately(inParty: boolean, message: ChatMessagePF2e) {
     return (isNpc && alwaysNpc) || (!isAlly && alwaysNonAlly) || (!inParty && alwaysNonParty);
 }
 
-export function createChatMessageHook(message: ChatMessagePF2e) {
+export function createChatMessageHook(message: ChatMessagePF2e): void {
     const reminderCancelAttack = String(game.settings.get(MODULENAME, "reminderCannotAttack"));
     if (reminderCancelAttack === "reminder") {
         checkAttackValidity(message, false);
@@ -104,7 +104,7 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
     }
 
     // Early return for damage rolls or damage taken messages
-    function isDamageTaken(message: ChatMessagePF2e) {
+    function isDamageTaken(message: ChatMessagePF2e): boolean {
         return systems.getFlag(message, "context.type") === "damage-taken";
     }
 
@@ -128,11 +128,11 @@ export function createChatMessageHook(message: ChatMessagePF2e) {
     dyingHandlingCreateChatMessageHook(message);
 }
 
-function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e) {
+function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e): void {
     handleDyingRecoveryRoll(message, Boolean(game.settings.get(MODULENAME, "handleDyingRecoveryRoll")));
 }
 
-export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
+export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery): void {
     const html = <HTMLElement>jq.get(0);
 
     // Early return if html is not valid
@@ -190,11 +190,11 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery) {
 }
 
 // Extracted to separate function to improve readability
-function handleVariantHeroPointRules(message: ChatMessagePF2e, jq: JQuery) {
+function handleVariantHeroPointRules(message: ChatMessagePF2e, jq: JQuery): void {
     const lastRoll = message.rolls.at(-1);
     if (!lastRoll) return;
 
-    const element: any = jq.get(0);
+    const element: HTMLElement | undefined = jq.get(0);
     if (!element) return;
 
     // Handle Keeley's hero point rule
@@ -210,7 +210,7 @@ function handleVariantHeroPointRules(message: ChatMessagePF2e, jq: JQuery) {
             newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagKeeleys`);
             newTag.dataset.slug = "keeley-add-10";
 
-            const querySelector = tags.querySelector(".tag");
+            const querySelector = tags.querySelector(".tag") as HTMLElement;
             if (querySelector?.dataset.visibility === "gm") {
                 newTag.dataset.visibility = "gm";
             }
@@ -240,7 +240,7 @@ function handleVariantHeroPointRules(message: ChatMessagePF2e, jq: JQuery) {
             newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagUseHighestRoll`);
             newTag.dataset.slug = "use-highest-roll";
 
-            const querySelector = tags.querySelector(".tag");
+            const querySelector = tags.querySelector(".tag") as HTMLElement;
             if (querySelector?.dataset.visibility === "gm") {
                 newTag.dataset.visibility = "gm";
             }
@@ -261,7 +261,7 @@ function handleVariantHeroPointRules(message: ChatMessagePF2e, jq: JQuery) {
             newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagHeroicRerolls`);
             newTag.dataset.slug = "heroic-reroll";
 
-            const querySelector = tags.querySelector(".tag");
+            const querySelector = tags.querySelector(".tag") as HTMLElement;
             if (querySelector?.dataset.visibility === "gm") {
                 newTag.dataset.visibility = "gm";
             }
@@ -324,7 +324,7 @@ function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
     });
 }
 
-export async function preCreateItemHook(item: ItemPF2e, _data: object, _options: any, _id: string) {
+export async function preCreateItemHook(item: ItemPF2e, _data: object, _options: object, _id: string): Promise<void> {
     if (
         item.type === "condition" &&
         item.slug === "unconscious" &&
@@ -335,19 +335,19 @@ export async function preCreateItemHook(item: ItemPF2e, _data: object, _options:
     }
 }
 
-export async function updateItemHook(_item: ItemPF2e, _update: any) {}
+export async function updateItemHook(_item: ItemPF2e, _update: object): Promise<void> {}
 
-export async function deleteItemHook(item: ItemPF2e, _options: any) {
+export async function deleteItemHook(item: ItemPF2e, _options: object): Promise<void> {
     await itemHandlingItemHook(item);
 }
 
-export function pf2eEndTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string) {
+export function pf2eEndTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string): void {
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
         reduceFrightened(combatant, userId).then(() => logDebug("Workbench reduceFrightened complete"));
     }
 }
 
-export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string) {
+export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string): Promise<void> {
     const forWhom = String(game.settings.get(MODULENAME, "actionsReminderAllow"));
     if (game.settings.get(MODULENAME, "autoReduceStunned")) {
         autoReduceStunned(combatant, userId).then((reduction) => {
@@ -362,13 +362,13 @@ export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: Encou
     // TODO Handle removal of game.combats.active.combatant.defeated/unsetting of deathIcon (are those the same?) for combatants that are neither dying nor have 0 HP.
 }
 
-export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: HTMLElement, data: any) {
+export function renderTokenHUDHook(_app: TokenDocumentPF2e, html: HTMLElement, data: { token: TokenDocumentPF2e }): void {
     if (html && game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
-        renderNameHud(data, html);
+        renderNameHud(data.token, html);
     }
 }
 
-export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<string, string>) {
+export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<string, string>): Promise<void> {
     const updateHp = fu.getProperty(update, "system.attributes.hp.value");
 
     // All these are only relevant if hp has changed (it's undefined otherwise)
@@ -391,7 +391,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
     }
 }
 
-export function preUpdateTokenHook(_document, update, options, ..._args) {
+export function preUpdateTokenHook(_document: unknown, update: { x?: number | null; y?: number | null }, options: object, ..._args: unknown[]): void {
     if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x !== null || update.y !== null)) {
         fu.setProperty(options, "animation", {
             movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
@@ -399,7 +399,7 @@ export function preUpdateTokenHook(_document, update, options, ..._args) {
     }
 }
 
-export async function createTokenHook(token: TokenDocumentPF2e, ..._args) {
+export async function createTokenHook(token: TokenDocumentPF2e, ..._args: unknown[]): Promise<void> {
     if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
         tokenCreateMystification(token).then();
     }
@@ -423,31 +423,28 @@ export function pf2eRerollHook(
     newRoll: Rolled<CheckRoll>,
     resource: ResourceData | boolean,
     keep: "new" | "higher" | "lower" = "new",
-) {
+): void {
     // For compat with older system, where resource:ResourceData was heroPoint:boolean
     const heroPoints = typeof resource === "boolean" ? resource : resource.slug === "hero-points";
     if (!heroPoints || keep !== "new") return;
 
-    // @ts-ignore
     const die = newRoll.dice.find((d) => d instanceof foundry.dice.terms.Die && d.number === 1 && d.faces === 20);
     const result = die?.results.find((r) => r.active && r.result <= 10);
 
     // Handle Keeley's Hero Point Rule
     if (die && result && game.settings.get(MODULENAME, "heroPointRules") === "keeleysHeroPointRule") {
         newRoll.terms.push(
-            // @ts-ignore
             foundry.dice.terms.OperatorTerm.fromData({ class: "OperatorTerm", operator: "+", evaluated: true }),
-            // @ts-ignore
             foundry.dice.terms.NumericTerm.fromData({ class: "NumericTerm", number: 10, evaluated: true }),
         );
-        // @ts-ignore It's protected. Meh.
+        // @ts-expect-error It's protected. Meh.
         newRoll._total += 10;
         newRoll.options.keeleyAdd10 = true;
     } else if (die && result && game.settings.get(MODULENAME, "heroPointRules") === "heroicRerolls") {
         // Handle Heroic Rerolls: if d20 result < 10, set it to 10
         const oldResult = result.result;
         result.result = 10;
-        // @ts-ignore It's protected. Meh.
+        // @ts-expect-error It's protected. Meh.
         newRoll._total = newRoll._total - oldResult + 10;
         newRoll.options.heroicReroll = true;
     } else if (game.settings.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll") {
@@ -462,7 +459,7 @@ export function pf2eRerollHook(
             // Replace the new roll's d20 result with the old roll's result
             if (die && die.results.length > 0) {
                 die.results[0].result = oldResult;
-                // @ts-ignore It's protected. Meh.
+                // @ts-expect-error It's protected. Meh.
                 newRoll._total = newRoll.options.keeleyAdd10 ? oldRoll._total + 10 : oldRoll._total;
                 newRoll.options.useHighestRoll = true;
             }
@@ -471,20 +468,20 @@ export function pf2eRerollHook(
     }
 }
 
-export async function pf2eSystemReadyHook() {
+export async function pf2eSystemReadyHook(): Promise<void> {
     const housepatcherSetting = game.settings.get(MODULENAME, "housepatcher");
     if (game.user.isGM && housepatcherSetting) {
         await housepatcher(housepatcherSetting);
     }
 }
 
-export async function deleteCombatHook(encounter: EncounterPF2e, _options: any) {
+export async function deleteCombatHook(encounter: EncounterPF2e, _options: object): Promise<void> {
     if (game.settings.get(MODULENAME, "sheatheHeldItemsAfterEncounter")) {
         sheatheHeldItemsAfterEncounter(encounter);
     }
 }
 
-export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery) {
+export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery): void {
     const html = <HTMLElement>q.get(0);
 
     function itemFromCompendium(element: Element, qualifiedName: string) {

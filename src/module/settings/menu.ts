@@ -30,7 +30,7 @@ interface HideListTemplateData {
 export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication {
     static readonly namespace: string;
 
-    static override get defaultOptions() {
+    static override get defaultOptions(): foundry.appv1.api.FormApplicationOptions {
         const options = super.defaultOptions;
         return fu.mergeObject(options, {
             title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
@@ -74,9 +74,9 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
 
     static readonly hidelist: object = {} as HideListTemplateData;
 
-    // @ts-ignore
-    static hook(...args: any): HookCallback<unknown[]> {
-        const html = args[1];
+    // @ts-expect-error Foundry HTML utility typing
+    static hook(...args: unknown[]): HookCallback<unknown[]> {
+        const html = args[1] as JQuery<HTMLElement>;
         Object.entries(this.hidelist).forEach(([k, v]) => {
             const setting = game.settings.get("xdy-pf2e-workbench", k) !== (v.falsy ?? false);
             const settingCheckbox = html.find(`.form-fields [name="${k}"]`);
@@ -87,10 +87,10 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
             settingCheckbox.on("change", (event) => {
                 for (const form of v.list) {
                     const settingForm = html.find(`.form-group:has(.form-fields [name="${form}"])`)[0];
-                    let condition = event.target.checked;
+                    let condition = (event.target as HTMLInputElement).checked;
                     switch (v.type) {
                         case "select":
-                            condition = event.target.value !== v.falsy;
+                            condition = (event.target as HTMLSelectElement).value !== v.falsy;
                             break;
                         case "input":
                         default:
@@ -105,12 +105,11 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
     static setRenderHooks(): void {
         const hook = this.hook;
         if (hook) {
-            // @ts-ignore
             Hooks.on(`render${this.name}`, hook.bind(this));
         }
     }
 
-    static registerSettingsAndCreateMenu(icon, restricted = true) {
+    static registerSettingsAndCreateMenu(icon: string, restricted = true): void {
         game.settings.registerMenu(MODULENAME, this.namespace, {
             name: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
             label: `${MODULENAME}.SETTINGS.${this.namespace}.label`, // lgtm [js/mixed-static-instance-this-access]
@@ -132,11 +131,11 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
                 key,
                 value,
                 isCheckbox: setting.type === Boolean,
-                // @ts-ignore TODO FIX (pr to foundry-pf2e)
+                // @ts-expect-error filePicker is not typed in SettingRegistration
                 isFilepicker: setting.type === String && setting.filePicker,
                 isNumber: setting.type === Number,
                 isSelect: !!setting.choices,
-                // @ts-ignore TODO FIX (pr to foundry-pf2e)
+                // @ts-expect-error filePicker is not typed in SettingRegistration
                 isText: setting.type === String && !setting.filePicker,
             };
         });

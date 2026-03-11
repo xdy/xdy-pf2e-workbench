@@ -1,3 +1,4 @@
+import { ActorPF2e, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { CREATURE_IDENTIFICATION_TRAITS, ELITE_WEAK } from "../../xdy-pf2e-constants.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import * as systems from "../../../utils/systems.ts";
@@ -128,17 +129,17 @@ function filterTraitList(traitsList: string[], prefix: string, postfix: string):
  * @param {string} tokenId - The ID of the token.
  * @returns {Promise<void>} A promise that resolves with the generated name from traits.
  */
-export async function generateNameFromTraitsForToken(tokenId: string) {
-    // @ts-ignore
+export async function generateNameFromTraitsForToken(tokenId: string): Promise<string | undefined> {
     const token = game.scenes?.current?.tokens?.get(tokenId);
     if (token) {
-        return generateNameFromTraits(token);
+        return generateNameFromTraits(token as TokenDocumentPF2e<ScenePF2e>);
     }
+    return undefined;
 }
 
-export async function generateNameFromTraits(token) {
-    let result: any;
-    const traits = token?.actor?.system?.traits;
+export async function generateNameFromTraits(token: TokenDocumentPF2e<ScenePF2e>): Promise<string> {
+    let result = "";
+    const traits = (token?.actor as ActorPF2e | null)?.system?.traits;
     if (!TRAITS) {
         fillTraits();
     }
@@ -146,7 +147,7 @@ export async function generateNameFromTraits(token) {
     if (traits) {
         let traitsList = <string[]>traits["value"];
         if (traitsList) {
-            const tokenRarities: any = traits.rarity;
+            const tokenRarities: string | undefined = traits.rarity;
             if (tokenRarities) {
                 traitsList = traitsList.concat(tokenRarities);
             }
@@ -156,9 +157,10 @@ export async function generateNameFromTraits(token) {
                 traitsList.push(size);
             }
 
-            const actor: any = token.actor;
-            if (actor.system?.attributes?.adjustment) {
-                traitsList.push(actor.system?.attributes?.adjustment);
+            const actor: ActorPF2e | null = token.actor;
+            const adjustment = (actor?.system?.attributes as unknown as Record<string, unknown>)?.adjustment;
+            if (adjustment) {
+                traitsList.push(String(adjustment));
             }
 
             const prefix = (await fixesPreAndPost("npcMystifierPrefix")) || "";
@@ -187,14 +189,14 @@ export async function generateNameFromTraits(token) {
                         return game.i18n.localize(CONFIG.PF2E.actorSizes[lowercaseTrait]);
                     }
 
-                    const translations: any = game.i18n.translations.PF2E ?? {};
-                    return (trait !== prefix && trait !== postfix ? translations[`Trait${trait}`] : trait) ?? trait;
+                    const translations: Record<string, unknown> = (game.i18n.translations.PF2E as Record<string, unknown>) ?? {};
+                    return (trait !== prefix && trait !== postfix ? (translations[`Trait${trait}`] as string | undefined) : trait) ?? trait;
                 })
                 .join(" ");
         }
     } else {
         // Shouldn't happen. But, just in case...
-        result = <string>game.settings.get(MODULENAME, "npcMystifierNoMatch");
+        result = String(game.settings.get(MODULENAME, "npcMystifierNoMatch"));
     }
     return result;
 }
