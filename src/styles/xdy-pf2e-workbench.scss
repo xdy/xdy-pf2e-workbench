@@ -189,6 +189,49 @@
     }
 }
 
+.hero-point-handler-dialog {
+    .form-group {
+        display: block;
+    }
+
+    .control-label,
+    .col-md-4 {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
+    .col-md-4 {
+        margin-top: 0.25rem;
+    }
+
+    .radio + .radio {
+        margin-top: 0.25rem;
+    }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .input-group-addon {
+        flex: 0 0 auto;
+    }
+
+    .input-group .form-control {
+        flex: 1 1 auto;
+    }
+
+    .help-block {
+        margin: 0.25rem 0 0;
+    }
+
+    .hero-point-handler-note {
+        margin-bottom: 0.5rem;
+    }
+}
+
 .bam-tabs.tabs {
     margin: 0.5rem 0 0.5rem 0;
     a.active > span {
