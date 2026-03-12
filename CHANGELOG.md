@@ -1,3 +1,10 @@
+## [6.35.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.0...v6.35.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* Move heropoint handler to dialog v2. With uglier layout as an added bonus. :) ([5d4b04f](https://github.com/xdy/xdy-pf2e-workbench/commit/5d4b04fe703ce50053e0fc7d20148e621d21e9b2))
+
 # [6.35.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.34.4...v6.35.0) (2026-02-24)
 
 
