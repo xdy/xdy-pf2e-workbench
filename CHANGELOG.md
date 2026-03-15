@@ -1,3 +1,10 @@
+## [6.35.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.1...v6.35.2) (2026-03-15)
+
+
+### Bug Fixes
+
+* Restore mystification button on hud ([3a3bd5a](https://github.com/xdy/xdy-pf2e-workbench/commit/3a3bd5a624a5637b856d71084728fa21fd62f00b))
+
 ## [6.35.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.0...v6.35.1) (2026-03-12)
 
 
