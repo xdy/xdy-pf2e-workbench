@@ -1,6 +1,5 @@
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
 import fs from "fs-extra";
 import checker from "vite-plugin-checker";
 
@@ -14,53 +13,56 @@ function readJson(path: string) {
 
 const EN_JSON = readJson("./static/lang/en.json");
 
-const plugins = [
-    checker({ typescript: true }),
-    tsconfigPaths(),
-    ...viteStaticCopy({
-        targets: [
-            { src: "CHANGELOG.md", dest: "." },
-            { src: "README.md", dest: "." },
-            { src: "CONTRIBUTING.md", dest: "." },
-        ],
-    }),
-];
+export default defineConfig(({ command }) => {
+    const plugins = [
+        ...(command === "serve" ? [checker({ typescript: true })] : []),
+        ...viteStaticCopy({
+            targets: [
+                { src: "CHANGELOG.md", dest: "." },
+                { src: "README.md", dest: "." },
+                { src: "CONTRIBUTING.md", dest: "." },
+            ],
+        }),
+    ];
 
-export default defineConfig({
-    publicDir: "static",
-    define: {
-        EN_JSON: JSON.stringify(EN_JSON),
-        fu: "foundry.utils",
-    },
-    esbuild: { keepNames: true },
-    build: {
-        emptyOutDir: false,
-        outDir: "dist",
-        minify: true,
-        sourcemap: true,
-        lib: {
-            name: "xdy-pf2e-workbench",
-            entry: "src/module/xdy-pf2e-workbench.ts",
-            formats: ["es"],
-            fileName: "xdy-pf2e-workbench",
+    return {
+        publicDir: "static",
+        define: {
+            EN_JSON: JSON.stringify(EN_JSON),
+            fu: "foundry.utils",
         },
-        rollupOptions: {
-            watch: { buildDelay: 100 },
+        build: {
+            emptyOutDir: false,
+            outDir: "dist",
+            minify: true,
+            sourcemap: true,
+            lib: {
+                name: "xdy-pf2e-workbench",
+                entry: "src/module/xdy-pf2e-workbench.ts",
+                formats: ["es"],
+                fileName: "xdy-pf2e-workbench",
+            },
+            rolldownOptions: {
+                watch: { buildDelay: 100 },
+            },
+            target: "esnext",
         },
-        target: "ESNext",
-    },
-    server: {
-        port: 30001,
-        open: "/game",
-        proxy: {
-            "^(?!/modules/xdy-pf2e-workbench/)": "http://localhost:30000/",
-            "/socket.io": {
-                target: "ws://localhost:30000",
-                ws: true,
-                secure: false,
-                changeOrigin: true,
+        server: {
+            port: 30001,
+            open: "/game",
+            proxy: {
+                "^(?!/modules/xdy-pf2e-workbench/)": "http://localhost:30000/",
+                "/socket.io": {
+                    target: "ws://localhost:30000",
+                    ws: true,
+                    secure: false,
+                    changeOrigin: true,
+                },
             },
         },
-    },
-    plugins,
+        resolve: {
+            tsconfigPaths: true,
+        },
+        plugins,
+    };
 });
