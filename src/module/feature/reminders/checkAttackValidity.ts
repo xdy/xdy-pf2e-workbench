@@ -14,12 +14,12 @@ export function checkAttackValidity(message: ChatMessagePF2e, cancelAttack: bool
 
     const reason = getAttackReason(
         token,
-        // @ts-ignore TODO Fix
+        // @ts-expect-error TODO Fix typing
         systems.getFlag(message, "context.options")?.filter((o) => o.startsWith("action:")),
     );
 
     if (reason) {
-        // @ts-ignore TODO FIX
+        // @ts-expect-error TODO Fix typing
         notifyUser(token, reason, systems.getFlag(message, "context.title"), cancelAttack);
         return false;
     }
@@ -33,7 +33,7 @@ function getSpeakerToken(message: ChatMessagePF2e): TokenDocumentPF2e {
 
 function shouldBeChecked(message: ChatMessagePF2e): boolean {
     const context = systems.getFlag(message, "context") ?? {};
-    // @ts-ignore TODO FIX
+    // @ts-expect-error TODO Fix typing
     const traits = context?.traits;
 
     const flag = <string>systems.getFlag(message, "context.type");

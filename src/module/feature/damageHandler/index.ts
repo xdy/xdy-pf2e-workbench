@@ -79,7 +79,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const targetHelperWillAutoroll =
                 targetHelperActive && game.settings.get("pf2e-target-helper", "multipleTargetRollDamage") !== "no";
             const letTargetHelperAutorollDamage =
-                // @ts-ignore TODO FIX
+                // @ts-expect-error module-specific flag
                 (flags["pf2e-target-helper"]?.targets ?? 0) > 1 && targetHelperWillAutoroll;
 
             if (
@@ -91,7 +91,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 // Whyzo spell. Don't roll.
                 !(isAttackSpell && isSaveSpell)
             ) {
-                // @ts-ignore TODO FIX
+                // @ts-expect-error TODO fix typing
                 await handleSpell(pf2eFlags, numberOfMessagesToCheck, originUuid, origin, message, degreeOfSuccess);
             } else if (actor && rollForNonSpellAttack && isSuccess) {
                 await handleNonSpell(actor, message, degreeOfSuccess);
@@ -322,13 +322,13 @@ async function handleSpell(
                 // target,
                 overlayIds: overlays?.[0] ? [overlays[0]] : [],
             });
-            // @ts-ignore
+            // @ts-expect-error TODO fix typing
             await variant.rollDamage({
                 outcome: degreeOfSuccess,
                 target,
             });
         } else {
-            // @ts-ignore
+            // @ts-expect-error TODO fix typing
             await origin?.rollDamage({
                 outcome: degreeOfSuccess,
                 target,

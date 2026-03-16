@@ -27,7 +27,7 @@ export function enableNpcRollerButton(_app: unknown, html: JQuery | HTMLElement)
     });
 
     // Locate the footer using querySelector
-    // @ts-expect-error
+    // @ts-expect-error jquery workaround
     const footer = html.querySelector(".directory-footer.action-buttons");
     if (footer) {
         footer.appendChild(button); // Append the button to the footer

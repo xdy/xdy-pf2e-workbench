@@ -251,7 +251,6 @@ function filterMessagesByContextType(messages: ChatMessagePF2e[], contextType: s
 }
 
 function filterMessagesByStrikeDamaging(messages: ChatMessagePF2e[]): ChatMessagePF2e[] {
-    // @ts-ignore TODO Add to types
     return messages.filter((message) => systems.getFlag(message, "strike.damaging"));
 }
 
@@ -554,7 +553,6 @@ export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e) {
                 const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || now;
                 console.log(`dyingLastApplied is ${flag}, now is ${now}`);
                 // Ignore this if it occurs within last few seconds of the last time we applied dying
-                // @ts-ignore
                 const notTooSoon = !flag?.between(now - 4000, now);
                 if (notTooSoon) {
                     const originalDyingCounter = actor?.getCondition("dying")?.value ?? 0;

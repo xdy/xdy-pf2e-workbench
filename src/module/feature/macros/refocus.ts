@@ -18,12 +18,12 @@ async function increaseFocusPoints(actor, value) {
  *
  * @return {Promise<void>} - A promise that resolves when the action is complete.
  */
-export async function refocus(actors: any = canvas.tokens.controlled.map((token) => token.actor) ?? []) {
+export async function refocus(actors: any = canvas.tokens.controlled.map((token) => token.actor) ?? []): Promise<void> {
     if (actors.length === 1) {
         const actor = canvas.tokens.controlled[0].actor;
         let regain = 1;
         if (actor) {
-            // @ts-ignore
+            // @ts-expect-error iterable in pf2e, but not typed to allow map
             const feats = actor.feats?.map((x) => x.feats).flat();
             if (
                 feats?.find((i) => {

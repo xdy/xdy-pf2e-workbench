@@ -30,7 +30,12 @@ export async function hypercognition(token: TokenPF2e) {
         return;
     }
 
-    const results = {
+    const results: {
+        criticalSuccess: { count: number; rolls: any[] };
+        success: { count: number; rolls: any[] };
+        failure: { count: number; rolls: any[] };
+        criticalFailure: { count: number; rolls: any[] }
+    } = {
         criticalSuccess: { count: 0, rolls: [] },
         success: { count: 0, rolls: [] },
         failure: { count: 0, rolls: [] },
@@ -58,7 +63,7 @@ export async function hypercognition(token: TokenPF2e) {
     });
 
     // Get lore skill information
-    // @ts-ignore
+    // @ts-expect-error actor.skills index signature not typed to allow arbitrary lore skill keys
     const loreInfo: any = Object.values(actor.skills)
         .filter((s: any) => s.lore)
         .map((skill: any) => ({
@@ -169,23 +174,23 @@ export async function hypercognition(token: TokenPF2e) {
         if (bestResult && d20Roll !== null) {
             switch (bestResult) {
                 case "CrSuc":
+                    // eslint-disable-next-line no-plusplus
                     results.criticalSuccess.count++;
-                    // @ts-ignore
                     results.criticalSuccess.rolls.push(d20Roll);
                     break;
                 case "Suc":
+                    // eslint-disable-next-line no-plusplus
                     results.success.count++;
-                    // @ts-ignore
                     results.success.rolls.push(d20Roll);
                     break;
                 case "Fail":
+                    // eslint-disable-next-line no-plusplus
                     results.failure.count++;
-                    // @ts-ignore
                     results.failure.rolls.push(d20Roll);
                     break;
                 case "CrFail":
+                    // eslint-disable-next-line no-plusplus
                     results.criticalFailure.count++;
-                    // @ts-ignore
                     results.criticalFailure.rolls.push(d20Roll);
                     break;
             }
@@ -221,10 +226,10 @@ export async function hypercognition(token: TokenPF2e) {
     if (usedPrimarySkills.length > 0) {
         summary += "<strong>Used Skills:</strong><br>";
         summary +=
-            '<table style="border-collapse: collapse; width: 100%;"><tr><th>Skill</th><th>Proficiency</th><th>Modifier</th></tr>';
+            "<table style=\"border-collapse: collapse; width: 100%;\"><tr><th>Skill</th><th>Proficiency</th><th>Modifier</th></tr>";
         for (const skill of usedPrimarySkills) {
             const modifier = skill.actualModifier !== null ? skill.actualModifier : skill.modifier;
-            // @ts-ignore
+            // @ts-expect-error TODO Fix typing
             summary += `<tr><td>${skill.name}</td><td class="tags"><div class="tag" style="background-color: ${RANK_COLORS[skill.rank]}; white-space:nowrap">${RANK_NAMES[skill.rank]}</div></td><td>${modifier !== null ? (modifier >= 0 ? "+" : "") + modifier : ""}</td></tr>`;
         }
         summary += "</table><br>";
@@ -235,7 +240,7 @@ export async function hypercognition(token: TokenPF2e) {
     if (usedLoreSkills.length > 0) {
         summary += "<strong>Used Lore Skills:</strong><br>";
         summary +=
-            '<table style="border-collapse: collapse; width: 100%;"><tr><th>Lore</th><th>Proficiency</th><th>Modifier</th></tr>';
+            "<table style=\"border-collapse: collapse; width: 100%;\"><tr><th>Lore</th><th>Proficiency</th><th>Modifier</th></tr>";
         for (const lore of usedLoreSkills) {
             const modifier = lore.actualModifier !== null ? lore.actualModifier : lore.modifier;
             summary += `<tr><td>${lore.name}</td><td class="tags"><div class="tag" style="background-color: ${RANK_COLORS[lore.rank]}; white-space:nowrap">${RANK_NAMES[lore.rank]}</div></td><td>${modifier !== null ? (modifier >= 0 ? "+" : "") + modifier : ""}</td></tr>`;

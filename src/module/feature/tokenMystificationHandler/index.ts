@@ -122,7 +122,6 @@ export async function buildTokenName(token: TokenDocumentPF2e<ScenePF2e>, isMyst
                         case "numberPostfix":
                             rolled = Math.floor(Math.random() * 100) + 1;
                             // Retry once if the number is already used, can't be bothered to roll until unique or keep track of used numbers
-                            // @ts-ignore
                             if (canvas?.scene?.tokens?.find((t) => t.name.endsWith(` ${rolled}`))) {
                                 rolled = Math.floor(Math.random() * 100) + 1;
                             }

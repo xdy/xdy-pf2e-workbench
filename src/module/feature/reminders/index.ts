@@ -84,7 +84,7 @@ export function reminderTargeting(message: ChatMessagePF2e, setting: string): bo
     ) {
         const targets = (<UserPF2e>message.author).targets;
         if (!targets || targets.size === 0) {
-            // @ts-ignore TODO FIX
+            // @ts-expect-error TODO Fix typing
             const title = context?.title;
 
             if (setting === "reminder") {
