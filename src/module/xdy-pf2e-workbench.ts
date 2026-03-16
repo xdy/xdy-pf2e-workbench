@@ -243,8 +243,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     registerHandlebarsHelpers();
 
     // Hooks that always run
-    Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: SettingsMenuPF2eWorkbench, html: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
-        toggleMenuSettings(html, _settings);
+    Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: SettingsMenuPF2eWorkbench, jq: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
+        toggleMenuSettings(jq[0], _settings);
         _app.setPosition();
     });
 

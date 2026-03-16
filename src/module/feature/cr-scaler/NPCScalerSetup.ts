@@ -73,12 +73,3 @@ export function onScaleNPCContextHook(_actors: ActorDirectoryPF2e, menuItems: Co
     });
 }
 
-export function onScaleNPCContextHookV12(_html, buttons: any[]) {
-    if (!game.user.isGM) return;
-    buttons.push({
-        name: "Scale to Level",
-        icon: '<i class="fa-solid fa-level-up-alt"></i>',
-        condition: (li: JQuery<HTMLLIElement>) => condition(li[0]),
-        callback: (li: JQuery<HTMLLIElement>) => callback(li[0]),
-    });
-}

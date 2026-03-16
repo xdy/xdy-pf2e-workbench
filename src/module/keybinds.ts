@@ -37,12 +37,12 @@ export function registerWorkbenchKeybindings(): void {
                     addFor: {
                         icon: '<i class="fa-solid fa-users"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
-                        callback: async (html: JQuery<HTMLElement>) => {
+                        callback: async (jq: JQuery<HTMLElement>) => {
                             const targets = Array.from(canvas.tokens?.controlled ?? []).concat(
                                 canvas.tokens?.placeables.filter((it) => it.mouseInteractionManager.state === 1) ?? [],
                             );
                             const user: User | undefined = game.users?.find(
-                                (u) => u.id === (html.find("#dialogUserId").val() as string),
+                                (u) => u.id === (jq[0].querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? ""),
                             );
                             if (game.user?.isGM && targets && user) {
                                 for (const t of targets) {
@@ -55,9 +55,9 @@ export function registerWorkbenchKeybindings(): void {
                     clearFor: {
                         icon: '<i class="fa-solid fa-users-slash"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
-                        callback: async (html: JQuery<HTMLElement>) => {
+                        callback: async (jq: JQuery<HTMLElement>) => {
                             const user: User | undefined = game.users?.find(
-                                (u) => u.id === (html.find("#dialogUserId").val() as string),
+                                (u) => u.id === (jq[0].querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? ""),
                             );
                             if (game.user?.isGM && user) {
                                 const targets = user.targets;

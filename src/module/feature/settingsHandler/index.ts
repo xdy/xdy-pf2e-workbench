@@ -1,14 +1,19 @@
 import { PartialSettingsData, SettingsMenuPF2eWorkbench } from "../../settings/menu.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 
-export function toggleSettings(_html: JQuery) {
+export function toggleSettings(_html: HTMLElement) {
     const settings: [string, any][] = Array.from(game.settings.settings.entries());
     settings.forEach((_setting: [string, any]) => {
         // None right now
     });
 }
 
-export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkbench) {
+function setFormGroupVisibility(html: HTMLElement, selector: string, visible: boolean) {
+    const el = html.querySelector<HTMLElement>(selector)?.closest<HTMLElement>(".form-group");
+    if (el) el.style.display = visible ? "" : "none";
+}
+
+export function toggleMenuSettings(html: HTMLElement, settings: SettingsMenuPF2eWorkbench) {
     for (const key in settings["settings"]) {
         const settingElement: PartialSettingsData = settings["settings"][key];
         if (settingElement && settingElement["key"]) {
@@ -40,7 +45,7 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                         ? game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow") === "players"
                         : game.settings.get(MODULENAME, "handleDyingRecoveryRollAllow") === "gm")
                 );
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
+                setFormGroupVisibility(html, `input[name="${settingName}"]`, applyToggle);
             }
             if (settingName !== `autoRollDamageAllow` && settingName.startsWith(`autoRollDamage`)) {
                 // const valueFunction = game.settings.get(MODULENAME, "autoRollDamage") === "none";
@@ -51,8 +56,8 @@ export function toggleMenuSettings(html: JQuery, settings: SettingsMenuPF2eWorkb
                         : game.settings.get(MODULENAME, "autoRollDamageAllow") === "gm")
                 );
 
-                html.find(`input[name="${settingName}"]`).parent().parent().toggle(applyToggle);
-                html.find(`select[name="${settingName}"]`).parent().parent().toggle(applyToggle);
+                setFormGroupVisibility(html, `input[name="${settingName}"]`, applyToggle);
+                setFormGroupVisibility(html, `select[name="${settingName}"]`, applyToggle);
             }
 
             // if (settingName !== `reminderCannotAttack` && settingName.startsWith(`reminderCannotAttack`)) {

@@ -76,17 +76,17 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
 
     // @ts-expect-error Foundry HTML utility typing
     static hook(...args: unknown[]): HookCallback<unknown[]> {
-        const html = args[1] as JQuery<HTMLElement>;
+        const html = (args[1] as JQuery<HTMLElement>)[0];
         Object.entries(this.hidelist).forEach(([k, v]) => {
             const setting = game.settings.get("xdy-pf2e-workbench", k) !== (v.falsy ?? false);
-            const settingCheckbox = html.find(`.form-fields [name="${k}"]`);
+            const settingCheckbox = html.querySelector<HTMLInputElement | HTMLSelectElement>(`.form-fields [name="${k}"]`);
             for (const form of v.list) {
-                const settingForm = html.find(`.form-group:has(.form-fields [name="${form}"])`)[0];
+                const settingForm = html.querySelector<HTMLElement>(`.form-group:has(.form-fields [name="${form}"])`);
                 this.hideForm(settingForm, setting);
             }
-            settingCheckbox.on("change", (event) => {
+            settingCheckbox?.addEventListener("change", (event) => {
                 for (const form of v.list) {
-                    const settingForm = html.find(`.form-group:has(.form-fields [name="${form}"])`)[0];
+                    const settingForm = html.querySelector<HTMLElement>(`.form-group:has(.form-fields [name="${form}"])`);
                     let condition = (event.target as HTMLInputElement).checked;
                     switch (v.type) {
                         case "select":

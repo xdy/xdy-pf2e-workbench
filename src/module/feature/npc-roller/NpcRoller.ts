@@ -18,7 +18,7 @@ export async function setupNpcRoller() {
     await registerNpcRollerHandlebarsTemplates();
 }
 
-export function enableNpcRollerButton(_app: unknown, html: JQuery | HTMLElement) {
+export function enableNpcRollerButton(_app: unknown, html: HTMLElement) {
     // Create the button element
     const button = document.createElement("button");
     button.innerHTML = `<i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}`;
@@ -27,7 +27,6 @@ export function enableNpcRollerButton(_app: unknown, html: JQuery | HTMLElement)
     });
 
     // Locate the footer using querySelector
-    // @ts-expect-error jquery workaround
     const footer = html.querySelector(".directory-footer.action-buttons");
     if (footer) {
         footer.appendChild(button); // Append the button to the footer
@@ -77,18 +76,20 @@ class NpcRoller extends foundry.appv1.api.Application {
     override activateListeners(html: JQuery<HTMLElement>): void {
         super.activateListeners(html);
 
-        html.find("button.rollable").on("click", this.#handleRollButtonClick);
+        html[0].querySelectorAll("button.rollable").forEach((btn) =>
+            btn.addEventListener("click", (event) => this.#handleRollButtonClick(event)),
+        );
     }
 
     #onControlToken() {
         setTimeout(this.render.bind(this), 0);
     }
 
-    async #handleRollButtonClick(event): Promise<void> {
-        const target = $(event.target);
-        const rollName = target.data("rollname") as string;
+    async #handleRollButtonClick(event: Event): Promise<void> {
+        const target = event.currentTarget as HTMLButtonElement;
+        const rollName = target.dataset.rollname as string;
         const token = canvas.tokens?.controlled[0];
-        const formula = target.data("formula") as string | number | undefined;
+        const formula = target.dataset.formula as string | number | undefined;
         const keyboardManager = foundry.helpers.interaction.KeyboardManager;
         const secret = game.keyboard.isModifierActive(keyboardManager.MODIFIER_KEYS.CONTROL);
 

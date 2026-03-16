@@ -185,17 +185,14 @@ export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery): voi
     // Check if we need to handle hero point rules
     const heroPointRules = String(game.settings.get(MODULENAME, "heroPointRules"));
     if (heroPointRules !== "no") {
-        handleVariantHeroPointRules(message, jq);
+        handleVariantHeroPointRules(message, html);
     }
 }
 
 // Extracted to separate function to improve readability
-function handleVariantHeroPointRules(message: ChatMessagePF2e, jq: JQuery): void {
+function handleVariantHeroPointRules(message: ChatMessagePF2e, element: HTMLElement): void {
     const lastRoll = message.rolls.at(-1);
     if (!lastRoll) return;
-
-    const element: HTMLElement | undefined = jq.get(0);
-    if (!element) return;
 
     // Handle Keeley's hero point rule
     if (lastRoll.options.keeleyAdd10) {
