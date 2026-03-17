@@ -29,20 +29,24 @@ export function registerWorkbenchKeybindings(): void {
             }
             content += `</div></select>`;
 
-            const dialog = foundry.appv1.api.Dialog;
-            const d = new dialog({
-                title: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.title`),
+            foundry.applications.api.DialogV2.wait({
+                window: { title: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.title`) },
                 content,
-                buttons: {
-                    addFor: {
-                        icon: '<i class="fa-solid fa-users"></i>',
+                buttons: [
+                    {
+                        icon: "<i class=\"fa-solid fa-users\"></i>",
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
-                        callback: async (jq: JQuery<HTMLElement>) => {
+                        action: "addFor",
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        callback: async (_event: Event, _button: HTMLButtonElement, dialog: any) => {
                             const targets = Array.from(canvas.tokens?.controlled ?? []).concat(
                                 canvas.tokens?.placeables.filter((it) => it.mouseInteractionManager.state === 1) ?? [],
                             );
                             const user: User | undefined = game.users?.find(
-                                (u) => u.id === (jq[0].querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? ""),
+                                (u) =>
+                                    u.id ===
+                                    // @ts-expect-error TODO Fix typing
+                                    (dialog.element.querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? ""),
                             );
                             if (game.user?.isGM && targets && user) {
                                 for (const t of targets) {
@@ -52,12 +56,17 @@ export function registerWorkbenchKeybindings(): void {
                             }
                         },
                     },
-                    clearFor: {
-                        icon: '<i class="fa-solid fa-users-slash"></i>',
+                    {
+                        icon: "<i class=\"fa-solid fa-users-slash\"></i>",
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
-                        callback: async (jq: JQuery<HTMLElement>) => {
+                        action: "clearFor",
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        callback: async (_event: Event, _button: HTMLButtonElement, dialog: any) => {
                             const user: User | undefined = game.users?.find(
-                                (u) => u.id === (jq[0].querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? ""),
+                                (u) =>
+                                    u.id ===
+                                    // @ts-expect-error TODO Fix typing
+                                    (dialog.element.querySelector<HTMLSelectElement>("#dialogUserId")?.value ?? ""),
                             );
                             if (game.user?.isGM && user) {
                                 const targets = user.targets;
@@ -67,10 +76,11 @@ export function registerWorkbenchKeybindings(): void {
                             }
                         },
                     },
-                },
+                ],
+                // @ts-expect-error TODO Fix typing
                 default: "addFor",
+                rejectClose: false,
             });
-            d.render(true);
             return true;
         },
     });

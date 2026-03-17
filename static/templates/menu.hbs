@@ -1,32 +1,24 @@
-<form class="flexcol" autocomplete="off" onsubmit="event.preventDefault();">
-    <section class="content">
-    {{#each settings as |setting|}}
-        <div class="form-group">
-            <label for="{{setting.key}}">{{localize setting.name}}</label>
-            <div class="form-fields">
-                {{#if setting.isSelect}}
-                    <select name="{{setting.key}}">
-                        {{selectOptions setting.choices selected=setting.value}}
-                    </select>
-                {{else if setting.isCheckbox}}
-                    <input type="checkbox" name="{{setting.key}}" {{checked setting.value}} />
-                {{else if setting.isNumber}}
-                    <input type="number" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
-                {{else if setting.isText}}
-                    <input type="text" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
-                {{else if setting.isFilepicker}}
-                    {{filePicker target=setting.name type="imagevideo"}}
-                    <input class="image" type="text" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
-                {{/if}}
-            </div>
-            <p class="notes">{{localize setting.hint}}</p>
+<section class="content">
+{{#each settings as |setting|}}
+    <div class="form-group">
+        <label for="{{setting.key}}">{{localize setting.name}}</label>
+        <div class="form-fields">
+            {{#if setting.isSelect}}
+                <select name="{{setting.key}}">
+                    {{selectOptions setting.choices selected=setting.value}}
+                </select>
+            {{else if setting.isCheckbox}}
+                <input type="checkbox" name="{{setting.key}}" {{checked setting.value}} />
+            {{else if setting.isNumber}}
+                <input type="number" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
+            {{else if setting.isText}}
+                <input type="text" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
+            {{else if setting.isFilepicker}}
+                {{filePicker target=setting.name type="imagevideo"}}
+                <input class="image" type="text" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
+            {{/if}}
         </div>
-    {{/each}}
-    </section>
-
-    <footer class="sheet-footer buttons">
-        <button type="submit" name="submit">
-            <i class="far fa-save"></i> {{localize "SETTINGS.Save"}}
-        </button>
-    </footer>
-</form>
+        <p class="hint">{{localize setting.hint}}</p>
+    </div>
+{{/each}}
+</section>

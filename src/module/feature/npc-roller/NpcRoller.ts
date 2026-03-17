@@ -1,7 +1,7 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { SCALE_APP_DATA } from "../NPCScaleData.js";
 
-export async function registerNpcRollerHandlebarsTemplates() {
+export async function registerNpcRollerHandlebarsTemplates(): Promise<void> {
     await foundry.applications.handlebars.loadTemplates([
         `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
         `modules/${MODULENAME}/templates/feature/npc-roller/table.hbs`,
@@ -12,18 +12,18 @@ export async function registerNpcRollerHandlebarsTemplates() {
     Handlebars.registerPartial("rollAppCell", `{{> "modules/${MODULENAME}/templates/feature/npc-roller/cell.hbs"}}`);
 }
 
-export async function setupNpcRoller() {
+export async function setupNpcRoller(): Promise<void> {
     Hooks.on("renderJournalDirectory", enableNpcRollerButton);
 
     await registerNpcRollerHandlebarsTemplates();
 }
 
-export function enableNpcRollerButton(_app: unknown, html: HTMLElement) {
+export function enableNpcRollerButton(_app: unknown, html: HTMLElement): void {
     // Create the button element
     const button = document.createElement("button");
     button.innerHTML = `<i class="fa fa-dice"></i> ${game.i18n.localize(`${MODULENAME}.npcRoller.button-label`)}`;
     button.addEventListener("click", () => {
-        new NpcRoller().render(true); // Handle button click
+        new NpcRoller().render({ force: true }); // Handle button click
     });
 
     // Locate the footer using querySelector
@@ -35,54 +35,109 @@ export function enableNpcRollerButton(_app: unknown, html: HTMLElement) {
     }
 }
 
-class NpcRoller extends foundry.appv1.api.Application {
-    public constructor(options?: foundry.appv1.api.ApplicationV1Options) {
-        super(options);
-
-        Hooks.on("controlToken", this.#onControlToken.bind(this));
-    }
-
-    static override get defaultOptions(): foundry.appv1.api.ApplicationV1Options {
-        const options = super.defaultOptions;
-        return {
-            ...options,
-            title: game.i18n.localize(`${MODULENAME}.npcRoller.title`),
-            template: `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs`,
-            tabs: [
-                {
-                    navSelector: `.roll-app-nav`,
-                    contentSelector: `.roll-app-body`,
-                    initial: `.roll-app-attacks`,
-                },
-            ],
-            width: 800,
-            height: "auto",
+class NpcRoller extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    static override DEFAULT_OPTIONS: Record<string, any> = {
+        id: "xdy-pf2e-workbench-npc-roller",
+        window: {
             resizable: true,
+        },
+        position: { width: 800, height: "auto" },
+    };
+
+    override get title(): string {
+        return game.i18n.localize(`${MODULENAME}.npcRoller.title`);
+    }
+
+    static override get PARTS() {
+        return {
+            index: { template: `modules/${MODULENAME}/templates/feature/npc-roller/index.hbs` },
         };
     }
 
-    override getData(options?: any): any {
-        const data = super.getData(options);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    static override TABS: Record<string, any> = {
+        primary: {
+            tabs: [
+                { id: "roll-app-strike" },
+                { id: "roll-app-damage" },
+                { id: "roll-app-ac" },
+                { id: "roll-app-save" },
+                { id: "roll-app-hp" },
+                { id: "roll-app-spell" },
+                { id: "roll-app-dc" },
+                { id: "roll-app-areaDamage" },
+                { id: "roll-app-perception" },
+                { id: "roll-app-skill" },
+                { id: "roll-app-abilityScore" },
+            ],
+            initial: "roll-app-strike",
+        },
+    };
 
-        data["data"] = {
-            levels: fu.deepClone(SCALE_APP_DATA),
-        };
+    #boundOnControlToken!: () => void;
 
-        data["data"]["selected"] = canvas.tokens?.controlled.map((token) => token.actor?.system["details"].level.value);
-
-        return data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public constructor(options?: any) {
+        super(options);
+        this.#boundOnControlToken = this.#onControlToken.bind(this);
+        Hooks.on("controlToken", this.#boundOnControlToken);
     }
 
-    override activateListeners(html: JQuery<HTMLElement>): void {
-        super.activateListeners(html);
+    override async _prepareContext(options?: object): Promise<object> {
+        // @ts-expect-error TODO Fix typing
+        const context = await super._prepareContext(options);
+        return foundry.utils.mergeObject(context, {
+            data: {
+                levels: fu.deepClone(SCALE_APP_DATA),
+                selected: canvas.tokens?.controlled.map((token) => token.actor?.system["details"].level.value),
+            },
+        });
+    }
 
-        html[0].querySelectorAll("button.rollable").forEach((btn) =>
+    override async _preparePartContext(partId: string, context: object, options?: object): Promise<object> {
+        // @ts-expect-error TODO Fix typing
+        context = await super._preparePartContext(partId, context, options);
+        if (partId === "index") {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (context as any).tabs = this._prepareTabs("primary");
+        }
+        return context;
+    }
+
+    // @ts-expect-error TODO Fix typing
+    override _onRender(_context: object, _options: object): void {
+        const tabButtons = Array.from(
+            this.element.querySelectorAll<HTMLElement>("[role='tab'][data-tab]"),
+        );
+        const tabPanels = Array.from(
+            this.element.querySelectorAll<HTMLElement>(".tab[data-tab]:not([role='tab'])"),
+        );
+        tabButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const tabId = btn.dataset.tab!;
+                const group = btn.dataset.group ?? "primary";
+                this.tabGroups[group] = tabId;
+                tabButtons
+                    .filter((b) => b.dataset.group === group)
+                    .forEach((b) => b.classList.toggle("active", b.dataset.tab === tabId));
+                tabPanels
+                    .filter((p) => p.dataset.group === group)
+                    .forEach((p) => p.classList.toggle("active", p.dataset.tab === tabId));
+            });
+        });
+
+        this.element.querySelectorAll("button.rollable").forEach((btn) =>
             btn.addEventListener("click", (event) => this.#handleRollButtonClick(event)),
         );
     }
 
-    #onControlToken() {
-        setTimeout(this.render.bind(this), 0);
+    override _onClose(_options?: object): void {
+        Hooks.off("controlToken", this.#boundOnControlToken);
+    }
+
+    #onControlToken(): void {
+        this.render({ force: true });
     }
 
     async #handleRollButtonClick(event: Event): Promise<void> {
@@ -115,11 +170,5 @@ class NpcRoller extends foundry.appv1.api.Application {
                 },
             );
         }
-    }
-
-    override close(): Promise<void> {
-        Hooks.off("controlToken", this.#onControlToken.bind(this));
-
-        return super.close();
     }
 }

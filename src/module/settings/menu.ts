@@ -1,5 +1,6 @@
 import { MODULENAME } from "../xdy-pf2e-workbench.js";
 import { SettingRegistration } from "foundry/client/helpers/client-settings.mts";
+import { toggleMenuSettings } from "../feature/settingsHandler/index.js";
 
 export type PartialSettingsData = Omit<SettingRegistration, "scope" | "config">;
 
@@ -9,8 +10,9 @@ interface SettingsTemplateData extends PartialSettingsData {
 }
 
 // Note, this type is not quite the same as MenuTemplateData from the pf2e settings menu
-export interface MenuTemplateData extends foundry.appv1.api.FormApplicationData {
+export interface MenuTemplateData {
     settings: SettingsTemplateData[];
+    buttons: object[];
 }
 
 /**
@@ -27,21 +29,40 @@ interface HideListTemplateData {
 }
 
 /** An adjusted copy of the settings menu from core pf2e meant for the module */
-export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication {
+export class SettingsMenuPF2eWorkbench extends foundry.applications.api.HandlebarsApplicationMixin(
+    foundry.applications.api.ApplicationV2,
+) {
     static readonly namespace: string;
 
-    static override get defaultOptions(): foundry.appv1.api.FormApplicationOptions {
-        const options = super.defaultOptions;
-        return fu.mergeObject(options, {
-            title: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
-            id: `${this.namespace}-settings`, // lgtm [js/mixed-static-instance-this-access]
-            template: `modules/xdy-pf2e-workbench/templates/menu.hbs`,
-            classes: ["form", "xdy-pf2e-workbench", "settings-menu"],
-            width: 780,
-            height: 680,
-            closeOnSubmit: true,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    static override DEFAULT_OPTIONS: Record<string, any> = {
+        tag: "form",
+        window: {
+            contentClasses: ["form", "xdy-pf2e-workbench", "settings-menu", "standard-form"],
             resizable: true,
-        });
+        },
+        position: { width: 780, height: 680 },
+        form: {
+            handler: SettingsMenuPF2eWorkbench.formHandler,
+            closeOnSubmit: true,
+        },
+    };
+
+    static override get PARTS() {
+        return {
+            content: { template: `modules/${MODULENAME}/templates/menu.hbs` },
+            footer: { template: "templates/generic/form-footer.hbs" },
+        };
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    constructor(options?: any) {
+        const cls = new.target as typeof SettingsMenuPF2eWorkbench;
+        super(fu.mergeObject({ id: `${cls.namespace}-settings` }, options ?? {}));
+    }
+
+    override get title(): string {
+        return game.i18n.localize(`${MODULENAME}.SETTINGS.${this.namespace}.name`);
     }
 
     get namespace(): string {
@@ -65,7 +86,6 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
     }
 
     static hideForm(form: HTMLElement | null | undefined, condition: boolean): void {
-        // form.style.display = !boolean ? "none" : "";
         if (form === null || form === undefined) {
             return;
         }
@@ -74,55 +94,21 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
 
     static readonly hidelist: object = {} as HideListTemplateData;
 
-    // @ts-expect-error Foundry HTML utility typing
-    static hook(...args: unknown[]): HookCallback<unknown[]> {
-        const html = (args[1] as JQuery<HTMLElement>)[0];
-        Object.entries(this.hidelist).forEach(([k, v]) => {
-            const setting = game.settings.get("xdy-pf2e-workbench", k) !== (v.falsy ?? false);
-            const settingCheckbox = html.querySelector<HTMLInputElement | HTMLSelectElement>(`.form-fields [name="${k}"]`);
-            for (const form of v.list) {
-                const settingForm = html.querySelector<HTMLElement>(`.form-group:has(.form-fields [name="${form}"])`);
-                this.hideForm(settingForm, setting);
-            }
-            settingCheckbox?.addEventListener("change", (event) => {
-                for (const form of v.list) {
-                    const settingForm = html.querySelector<HTMLElement>(`.form-group:has(.form-fields [name="${form}"])`);
-                    let condition = (event.target as HTMLInputElement).checked;
-                    switch (v.type) {
-                        case "select":
-                            condition = (event.target as HTMLSelectElement).value !== v.falsy;
-                            break;
-                        case "input":
-                        default:
-                            break;
-                    }
-                    this.hideForm(settingForm, condition);
-                }
-            });
-        });
-    }
-
-    static setRenderHooks(): void {
-        const hook = this.hook;
-        if (hook) {
-            Hooks.on(`render${this.name}`, hook.bind(this));
-        }
-    }
-
     static registerSettingsAndCreateMenu(icon: string, restricted = true): void {
         game.settings.registerMenu(MODULENAME, this.namespace, {
             name: `${MODULENAME}.SETTINGS.${this.namespace}.name`, // lgtm [js/mixed-static-instance-this-access]
             label: `${MODULENAME}.SETTINGS.${this.namespace}.label`, // lgtm [js/mixed-static-instance-this-access]
             hint: `${MODULENAME}.SETTINGS.${this.namespace}.hint`, // lgtm [js/mixed-static-instance-this-access]
             icon: icon,
+            // @ts-expect-error TODO Fix typing
             type: this,
             restricted: restricted,
         });
         this.registerSettings();
-        this.setRenderHooks();
     }
 
-    override async getData(): Promise<MenuTemplateData> {
+    // @ts-expect-error TODO Fix typing
+    override async _prepareContext(_options?: object): Promise<MenuTemplateData> {
         const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
         const templateData: SettingsTemplateData[] = Object.entries(settings).map(([key, setting]) => {
             const value = game.settings.get(MODULENAME, key);
@@ -139,12 +125,51 @@ export class SettingsMenuPF2eWorkbench extends foundry.appv1.api.FormApplication
                 isText: setting.type === String && !setting.filePicker,
             };
         });
-        return fu.mergeObject(await super.getData(), {
+        return {
             settings: templateData,
+            buttons: [{ type: "submit", icon: "fa-solid fa-save", label: "SETTINGS.Save" }],
+        };
+    }
+
+    // @ts-expect-error TODO Fix typing
+    override _onRender(_context: object, _options: object): void {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        toggleMenuSettings(this.element, _context as any);
+        const hidelist = (this.constructor as typeof SettingsMenuPF2eWorkbench).hidelist as HideListTemplateData;
+        Object.entries(hidelist).forEach(([k, v]) => {
+            const setting = game.settings.get("xdy-pf2e-workbench", k) !== (v.falsy ?? false);
+            const settingCheckbox = this.element.querySelector<HTMLInputElement | HTMLSelectElement>(
+                `.form-fields [name="${k}"]`,
+            );
+            for (const form of v.list ?? []) {
+                const settingForm = this.element.querySelector<HTMLElement>(
+                    `.form-group:has(.form-fields [name="${form}"])`,
+                );
+                SettingsMenuPF2eWorkbench.hideForm(settingForm, setting);
+            }
+            settingCheckbox?.addEventListener("change", (event) => {
+                for (const form of v.list ?? []) {
+                    const settingForm = this.element.querySelector<HTMLElement>(
+                        `.form-group:has(.form-fields [name="${form}"])`,
+                    );
+                    let condition = (event.target as HTMLInputElement).checked;
+                    switch (v.type) {
+                        case "select":
+                            condition = (event.target as HTMLSelectElement).value !== v.falsy;
+                            break;
+                        case "input":
+                        default:
+                            break;
+                    }
+                    SettingsMenuPF2eWorkbench.hideForm(settingForm, condition);
+                }
+            });
         });
     }
 
-    protected override async _updateObject(_event: Event, data: Record<string, unknown>): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    static async formHandler(_event: Event, _form: HTMLFormElement, formData: any): Promise<void> {
+        const data = foundry.utils.expandObject(formData.object) as Record<string, unknown>;
         for (const key of Object.keys(data)) {
             let datum = data[key];
             // "null" check is due to a previous bug that may have left invalid data in text fields

@@ -74,6 +74,10 @@
     grid-template-columns: 128px 1fr;
 }
 
+.roll-app .roll-app-body .tab:not(.active) {
+    display: none;
+}
+
 .roll-app nav.roll-app-nav {
     display: flex;
     flex-direction: column;
@@ -165,19 +169,19 @@
 
 .xdy-pf2e-workbench {
     &.settings-menu {
-        .window-content {
-            padding: 0;
+        padding: 0;
+        overflow: hidden;
+
+        section.content {
+            flex: 1 1 auto;
+            min-height: 0;
+            padding: 1rem;
+            overflow: hidden auto;
         }
-        form {
-            height: 100%;
-            section {
-                padding: 1rem;
-                overflow: hidden auto;
-            }
-            footer {
-                margin: 1rem;
-                flex: 0;
-            }
+
+        .form-footer {
+            flex: 0 0 auto;
+            padding: 0.5rem 1rem;
         }
     }
 }

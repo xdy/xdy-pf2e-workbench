@@ -50,8 +50,6 @@ import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js
 import { doMystificationFromToken } from "./feature/tokenMystificationHandler/index.js";
 import { autoRollDamage, noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.js";
 import { registerWorkbenchSettings } from "./settings/index.js";
-import { SettingsMenuPF2eWorkbench } from "./settings/menu.js";
-import { toggleMenuSettings } from "./feature/settingsHandler/index.js";
 import { mystifyNpcItems } from "./feature/qolHandler/index.js";
 import { getAllFromAllowedPacks } from "./feature/api/getAllFromAllowedPacks.js";
 
@@ -112,10 +110,10 @@ export function updateHooks(cleanSlate = false): void {
     handle(
         "preCreateChatMessage",
         gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "reminderTargeting") !== "no" ||
-            gs.get(MODULENAME, "reminderCannotAttack") === "cancelAttack" ||
-            gs.get(MODULENAME, "applyPersistentDamage") ||
-            gs.get(MODULENAME, "applyPersistentHealing"),
+        gs.get(MODULENAME, "reminderTargeting") !== "no" ||
+        gs.get(MODULENAME, "reminderCannotAttack") === "cancelAttack" ||
+        gs.get(MODULENAME, "applyPersistentDamage") ||
+        gs.get(MODULENAME, "applyPersistentHealing"),
         preCreateChatMessageHook,
     );
 
@@ -125,29 +123,29 @@ export function updateHooks(cleanSlate = false): void {
             (gs.get(MODULENAME, "autoRollDamageForStrike") ||
                 gs.get(MODULENAME, "autoRollDamageForSpellAttack") ||
                 gs.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") !== "no")) ||
-            gs.get(MODULENAME, "reminderBreathWeapon") ||
-            gs.get(MODULENAME, "reminderCannotAttack") === "reminder" ||
-            !String(gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no"),
+        gs.get(MODULENAME, "reminderBreathWeapon") ||
+        gs.get(MODULENAME, "reminderCannotAttack") === "reminder" ||
+        !String(gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no"),
         createChatMessageHook,
     );
 
     handle(
         "renderChatMessage",
         game.settings.get(MODULENAME, "castPrivateSpell") ||
-            ["collapsedDefault", "nonCollapsedDefault"].includes(
-                String(gs.get(MODULENAME, "autoCollapseItemChatCardContent")),
-            ) ||
-            ["collapsedDefault", "nonCollapsedDefault"].includes(
-                String(gs.get(MODULENAME, "autoCollapseItemActionChatCardContent")),
-            ) ||
-            ["collapsedDefault", "nonCollapsedDefault"].includes(
-                String(gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent")),
-            ) ||
-            ["expandedAll", "expandedNew", "expandedNewest"].includes(
-                String(gs.get(MODULENAME, "autoExpandDamageRolls")),
-            ) ||
-            gs.get(MODULENAME, "handleDyingRecoveryRoll") /* Deprecated */ ||
-            gs.get(MODULENAME, "heroPointRules") !== "no",
+        ["collapsedDefault", "nonCollapsedDefault"].includes(
+            String(gs.get(MODULENAME, "autoCollapseItemChatCardContent")),
+        ) ||
+        ["collapsedDefault", "nonCollapsedDefault"].includes(
+            String(gs.get(MODULENAME, "autoCollapseItemActionChatCardContent")),
+        ) ||
+        ["collapsedDefault", "nonCollapsedDefault"].includes(
+            String(gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent")),
+        ) ||
+        ["expandedAll", "expandedNew", "expandedNewest"].includes(
+            String(gs.get(MODULENAME, "autoExpandDamageRolls")),
+        ) ||
+        gs.get(MODULENAME, "handleDyingRecoveryRoll") /* Deprecated */ ||
+        gs.get(MODULENAME, "heroPointRules") !== "no",
         renderChatMessageHook,
     );
 
@@ -174,8 +172,8 @@ export function updateHooks(cleanSlate = false): void {
     handle(
         "pf2e.reroll",
         gs.get(MODULENAME, "heroPointRules") === "keeleysHeroPointRule" ||
-            gs.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll" ||
-            gs.get(MODULENAME, "heroPointRules") === "heroicRerolls",
+        gs.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll" ||
+        gs.get(MODULENAME, "heroPointRules") === "heroicRerolls",
         pf2eRerollHook,
     );
 
@@ -184,12 +182,12 @@ export function updateHooks(cleanSlate = false): void {
     handle(
         "preUpdateActor",
         (<string>gs.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
-            !String(gs.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") ||
-            !String(gs.get(MODULENAME, "nonLethalIsNotLethal")).startsWith("no") ||
-            !String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no") ||
-            gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
-            (systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
-                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
+        !String(gs.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") ||
+        !String(gs.get(MODULENAME, "nonLethalIsNotLethal")).startsWith("no") ||
+        !String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no") ||
+        gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
+        (systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
+            gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
         preUpdateActorHook,
     );
 
@@ -198,18 +196,18 @@ export function updateHooks(cleanSlate = false): void {
     handle(
         "createToken",
         gs.get(MODULENAME, "npcMystifier") ||
-            (systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
-                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
+        (systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
+            gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
         createTokenHook,
     );
 
     handle(
         "renderActorSheet",
         gs.get(MODULENAME, "playerFeatsRarityColour") ||
-            gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
-            gs.get(MODULENAME, "playerSpellsRarityColour") ||
-            gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "playerSpellsChangeSendToChat"),
+        gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
+        gs.get(MODULENAME, "playerSpellsRarityColour") ||
+        gs.get(MODULENAME, "castPrivateSpell") ||
+        gs.get(MODULENAME, "playerSpellsChangeSendToChat"),
         renderActorSheetHook,
     );
 
@@ -243,14 +241,7 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     registerHandlebarsHelpers();
 
     // Hooks that always run
-    Hooks.on("renderSettingsMenuPF2eWorkbench", (_app: SettingsMenuPF2eWorkbench, jq: JQuery, _settings: SettingsMenuPF2eWorkbench) => {
-        toggleMenuSettings(jq[0], _settings);
-        _app.setPosition();
-    });
-
-    // Hooks.on("renderSettingsConfig", (_app: any, html: JQuery) => {
-    //     toggleSettings(html);
-    // });
+    // None currently
 
     // Hooks that run once, if a setting is enabled. Manual refresh will still be needed for these.
 
@@ -329,7 +320,12 @@ function handleCampaignFeatSection(): void {
 
     // Add campaign feat sections if enabled
     if (legacyVariantRuleDualClass || legacyVariantRuleAncestryParagon) {
-        const campaignFeatSections = systems.getSetting<{ id: string; label: string; supported: string[]; slots: number[] }[]>("campaignFeatSections");
+        const campaignFeatSections = systems.getSetting<{
+            id: string;
+            label: string;
+            supported: string[];
+            slots: number[]
+        }[]>("campaignFeatSections");
         if (legacyVariantRuleAncestryParagon) {
             if (!campaignFeatSections.find((section) => section.id === "xdy_ancestryparagon")) {
                 campaignFeatSections.push({
@@ -355,7 +351,12 @@ function handleCampaignFeatSection(): void {
         systems.setSetting("campaignFeatSections", campaignFeatSections);
     }
 
-    const campaignFeatSections = systems.getSetting<{ id: string; label: string; supported: string[]; slots: number[] }[]>("campaignFeatSections");
+    const campaignFeatSections = systems.getSetting<{
+        id: string;
+        label: string;
+        supported: string[];
+        slots: number[]
+    }[]>("campaignFeatSections");
     // ... or remove it if disabled.
     if (
         campaignFeatSections &&
@@ -467,23 +468,23 @@ Hooks.once("ready", () => {
 });
 
 function registerHandlebarsHelpers() {
-    Handlebars.registerHelper("xdy_includes", function (array: any[], value: any, options: any) {
+    Handlebars.registerHelper("xdy_includes", function(array: any[], value: any, options: any) {
         if (array.includes(value)) {
             return options.fn(this);
         } else {
             return options.inverse(this);
         }
     });
-    Handlebars.registerHelper("xdy_ifeq", function (v1, v2, options) {
+    Handlebars.registerHelper("xdy_ifeq", function(v1, v2, options) {
         if (v1 === v2) return options.fn(this);
         else return options.inverse();
     });
-    Handlebars.registerHelper("xdy_ifne", function (v1, v2, options) {
+    Handlebars.registerHelper("xdy_ifne", function(v1, v2, options) {
         if (v1 !== v2) return options.fn(this);
         else return options.inverse();
     });
 
-    Handlebars.registerHelper("xdy_isNaN", function (context, options) {
+    Handlebars.registerHelper("xdy_isNaN", function(context, options) {
         if (isNaN(context) && !(typeof context === "string")) {
             return options.fn(this);
         } else {
@@ -491,11 +492,11 @@ function registerHandlebarsHelpers() {
         }
     });
 
-    Handlebars.registerHelper("xdy_undefined", function () {
+    Handlebars.registerHelper("xdy_undefined", function() {
         return undefined;
     });
 
-    Handlebars.registerHelper("xdy_hasKey", function (context, key) {
+    Handlebars.registerHelper("xdy_hasKey", function(context, key) {
         for (const prop of context) {
             if (Object.getOwnPropertyDescriptor(prop, key)) {
                 return true;

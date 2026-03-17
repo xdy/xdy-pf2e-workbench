@@ -132,9 +132,9 @@ function deprecatedDyingHandlingRenderChatMessageHook(message: ChatMessagePF2e):
     handleDyingRecoveryRoll(message, Boolean(game.settings.get(MODULENAME, "handleDyingRecoveryRoll")));
 }
 
-export function renderChatMessageHook(message: ChatMessagePF2e, jq: JQuery): void {
-    const html = <HTMLElement>jq.get(0);
-
+export function renderChatMessageHook(message: ChatMessagePF2e, element: unknown): void {
+    const html: HTMLElement | undefined =
+        element instanceof HTMLElement ? element : (element as ArrayLike<HTMLElement>)[0];
     // Early return if html is not valid
     if (!html) return;
 
@@ -332,7 +332,8 @@ export async function preCreateItemHook(item: ItemPF2e, _data: object, _options:
     }
 }
 
-export async function updateItemHook(_item: ItemPF2e, _update: object): Promise<void> {}
+export async function updateItemHook(_item: ItemPF2e, _update: object): Promise<void> {
+}
 
 export async function deleteItemHook(item: ItemPF2e, _options: object): Promise<void> {
     await itemHandlingItemHook(item);
@@ -388,7 +389,10 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
     }
 }
 
-export function preUpdateTokenHook(_document: unknown, update: { x?: number | null; y?: number | null }, options: object, ..._args: unknown[]): void {
+export function preUpdateTokenHook(_document: unknown, update: {
+    x?: number | null;
+    y?: number | null
+}, options: object, ..._args: unknown[]): void {
     if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x !== null || update.y !== null)) {
         fu.setProperty(options, "animation", {
             movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
@@ -478,8 +482,9 @@ export async function deleteCombatHook(encounter: EncounterPF2e, _options: objec
     }
 }
 
-export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery): void {
-    const html = <HTMLElement>q.get(0);
+export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: unknown): void {
+    const html: HTMLElement | undefined =
+        element instanceof HTMLElement ? element : (element as ArrayLike<HTMLElement>)[0];
 
     function itemFromCompendium(element: Element, qualifiedName: string) {
         const itemUuid = element.getAttribute(qualifiedName);
@@ -493,7 +498,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
 
     function performColoring(setting: string, listSelector: string, itemSelector: string, fetchItem) {
         if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, setting)) {
-            const lists = html.querySelectorAll(listSelector);
+            const lists = html?.querySelectorAll(listSelector) || [];
             for (const list of lists) {
                 const elementNodeListOf = list.querySelectorAll(itemSelector);
                 for (const element of elementNodeListOf) {
@@ -548,7 +553,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
 
         function processSpellElement(spellElement: Element) {
             spellElement.querySelectorAll("div.item-name").forEach((itemNameDiv) => {
-                const actionElement = itemNameDiv.querySelector<HTMLElement>('[data-action="item-to-chat"]');
+                const actionElement = itemNameDiv.querySelector<HTMLElement>("[data-action=\"item-to-chat\"]");
                 if (!actionElement) return;
 
                 const currentAction = actionElement.getAttribute("data-action");
@@ -561,7 +566,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, q: JQuery
 
         function handleSpellClick(event: MouseEvent) {
             const target = event.target as HTMLElement;
-            const spellContainer = target?.closest('[data-action="workbench-spell-to-chat"]')?.parentElement
+            const spellContainer = target?.closest("[data-action=\"workbench-spell-to-chat\"]")?.parentElement
                 ?.parentElement;
 
             if (!shouldIHandleThis(sheet.actor) || !spellContainer) return;
