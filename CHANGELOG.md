@@ -1,3 +1,10 @@
+## [6.35.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.3...v6.35.4) (2026-03-22)
+
+
+### Bug Fixes
+
+*  Show current number of Hero Points in the Hero Point Handler ([83c8465](https://github.com/xdy/xdy-pf2e-workbench/commit/83c8465e6d4a92a8e073fa5c041c88b70e6d2412)), closes [#1661](https://github.com/xdy/xdy-pf2e-workbench/issues/1661)
+
 ## [6.35.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.2...v6.35.3) (2026-03-22)
 
 
