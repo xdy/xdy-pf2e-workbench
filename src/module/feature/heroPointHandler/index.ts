@@ -275,13 +275,16 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
   <div class="col-md-4">`;
 
     for (let i = 0; i < actors.length; i++) {
+        const actor = actors[i];
+        const currentHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.value : 0;
+        const maxHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.max : 3;
         charactersContent += `
     <div class="radio">
         <label for="characters-${i}">
-          <input type="radio" name="characters" id="characters-${i}" value="${actors[i]?.id}" ${
+          <input type="radio" name="characters" id="characters-${i}" value="${actor?.id}" ${
               checked === i ? 'checked="checked"' : ""
           }>
-          ${actors[i]?.name}
+          ${actor?.name} [${currentHeroPoints}/${maxHeroPoints}]
         </label>
     </div>`;
     }
