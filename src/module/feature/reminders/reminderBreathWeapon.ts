@@ -3,7 +3,7 @@ import { ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import * as systems from "../../../utils/systems.ts";
 
-export async function reminderBreathWeapon(message: ChatMessagePF2e) {
+export async function reminderBreathWeapon(message: ChatMessagePF2e): Promise<void> {
     const messageContent = message.content;
     const token: TokenDocumentPF2e = <TokenDocumentPF2e>canvas?.scene?.tokens.get(<string>message.speaker.token);
     if (isFirstGM() && messageContent && game.combats && game.combats.active && token?.actor) {
@@ -20,12 +20,22 @@ export async function reminderBreathWeapon(message: ChatMessagePF2e) {
             }
             // Skip dragon form and the like
         } else if (!systems.getFlag<string[]>(message, "origin.rollOptions")?.includes("polymorph")) {
-            const diceFormulaMatch = messageContent.match(/1d([46])( rounds| recharge|<\/a> rounds)/i);
-            if (diceFormulaMatch && diceFormulaMatch[1]) {
-                const formula = `1d${diceFormulaMatch[1]}`;
+            const gmRollTagMatch = messageContent.match(/<a\b[^>]*class="inline-roll gmroll"[^>]*>/);
+            const gmRollFormulaMatch = gmRollTagMatch?.[0]?.match(/data-formula="(1d\d+)"/);
+            if (gmRollFormulaMatch?.[1]) {
+                const formula = gmRollFormulaMatch[1];
                 if (Roll.validate(formula)) {
                     const roll = await new Roll(formula).roll();
                     rounds = roll.total;
+                }
+            } else {
+                const diceFormulaMatch = messageContent.match(/1d([46])( rounds| recharge|<\/a> rounds)/i);
+                if (diceFormulaMatch?.[1]) {
+                    const formula = `1d${diceFormulaMatch[1]}`;
+                    if (Roll.validate(formula)) {
+                        const roll = await new Roll(formula).roll();
+                        rounds = roll.total;
+                    }
                 }
             }
         }
