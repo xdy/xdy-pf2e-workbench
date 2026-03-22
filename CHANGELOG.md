@@ -1,3 +1,10 @@
+## [6.35.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.2...v6.35.3) (2026-03-22)
+
+
+### Bug Fixes
+
+* Breath weapon reminder should work again. ([621e9fa](https://github.com/xdy/xdy-pf2e-workbench/commit/621e9fa831d71c33d0e290097bbd702b0fd0e8ff)), closes [#1692](https://github.com/xdy/xdy-pf2e-workbench/issues/1692)
+
 ## [6.35.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.1...v6.35.2) (2026-03-15)
 
 
