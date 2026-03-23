@@ -204,10 +204,9 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
     // TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
     const actors = heroes();
-    let checked: number;
+    const checkedSet = new Set<number>();
     switch (state) {
         case HPHState.Start:
-            checked = -1;
             break;
         case HPHState.Timeout: {
             let selectedActor = -1;
@@ -220,11 +219,12 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
                 case "randomPartymemberThatHasNotReceivedAHeropoint":
                     selectedActor = await randomPartymemberThatHasNotReceivedAHeropoint(actors);
             }
-            checked = actors.length > 0 ? selectedActor : -1;
+            if (actors.length > 0 && selectedActor >= 0) {
+                checkedSet.add(selectedActor);
+            }
             break;
         }
         case HPHState.Check:
-            checked = -1;
             break;
     }
 
@@ -279,10 +279,10 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
         const currentHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.value : 0;
         const maxHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.max : 3;
         charactersContent += `
-    <div class="radio">
+    <div class="checkbox">
         <label for="characters-${i}">
-          <input type="radio" name="characters" id="characters-${i}" value="${actor?.id}" ${
-              checked === i ? 'checked="checked"' : ""
+          <input type="checkbox" name="characters" id="characters-${i}" value="${actor?.id}" ${
+              checkedSet.has(i) ? 'checked="checked"' : ""
           }>
           ${actor?.name} [${currentHeroPoints}/${maxHeroPoints}]
         </label>
@@ -291,14 +291,6 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
 
     const maxMinutes = Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")));
     const remainingContent = `
-  <div class="radio">
-    <label for="characters-NONE">
-      <input type="radio" name="characters" id="characters-NONE" value="NONE" ${
-          checked === -1 ? 'checked="checked"' : ""
-      }>
-      ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.none`)}
-    </label>
-  </div>
 </div>
 </div>
 
@@ -388,26 +380,21 @@ export async function addHeroPoints(heropoints: number, actorId: HeroPointRecipi
     }
 }
 
-function addOneToSelectedCharacterIfAny(actorId: HeroPointRecipient): void {
-    addHeroPoints(1, actorId).then(() => {
-        const name = game?.actors?.find((actor) => actor.id === actorId)?.name;
-        let message: string | undefined;
-        if (actorId === "ALL") {
-            message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedToForAll`, {
-                heroPoints: 1,
-            });
-        } else if (name) {
-            message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedFor`, {
-                name: name,
-            });
-        }
-        if (message) {
-            sendMessage(message);
-            if (game.settings.get(MODULENAME, "heropointHandlerNotification")) {
-                pushNotification(message);
+function addOneToSelectedCharactersIfAny(actorIds: string[]): void {
+    for (const actorId of actorIds) {
+        addHeroPoints(1, actorId).then(() => {
+            const name = game?.actors?.find((actor) => actor.id === actorId)?.name;
+            if (name) {
+                const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedFor`, {
+                    name: name,
+                });
+                sendMessage(message);
+                if (game.settings.get(MODULENAME, "heropointHandlerNotification")) {
+                    pushNotification(message);
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 function sendMessage(message: string, whisper: string[] | undefined = undefined) {
@@ -429,8 +416,8 @@ function handleDialogResponse(element: ParentNode | null): number {
     const heroPointsEl = element.querySelector<HTMLInputElement>('input[name="heropoints"]');
     const heroPoints = heroPointsEl ? Number.parseInt(heroPointsEl.value) : 1;
 
-    const actorIdEl = element.querySelector<HTMLInputElement>('input[name="characters"]:checked');
-    const actorId: HeroPointRecipient = actorIdEl ? actorIdEl.value : "NONE";
+    const actorIdEls = element.querySelectorAll<HTMLInputElement>('input[name="characters"]:checked');
+    const actorIds: string[] = Array.from(actorIdEls).map((el) => el.value);
 
     const remainingMinutesEl = element.querySelector<HTMLInputElement>('input[name="timerText"]');
     const maxMinutes = Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")));
@@ -446,7 +433,7 @@ function handleDialogResponse(element: ParentNode | null): number {
                 heroPoints: heroPoints,
             });
             sendMessage(message);
-            addOneToSelectedCharacterIfAny(actorId);
+            addOneToSelectedCharactersIfAny(actorIds);
         });
     } else if (sessionStart === "ADD") {
         addHeroPoints(heroPoints).then(() => {
@@ -455,10 +442,10 @@ function handleDialogResponse(element: ParentNode | null): number {
             });
 
             sendMessage(message);
-            addOneToSelectedCharacterIfAny(actorId);
+            addOneToSelectedCharactersIfAny(actorIds);
         });
     } else if (sessionStart === "IGNORE") {
-        addOneToSelectedCharacterIfAny(actorId);
+        addOneToSelectedCharactersIfAny(actorIds);
     }
 
     return remainingMinutes;
