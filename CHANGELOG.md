@@ -1,3 +1,12 @@
+## [6.35.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.4...v6.35.5) (2026-03-23)
+
+
+### Bug Fixes
+
+* Add user name in parantheses to actor names ([fbdb45f](https://github.com/xdy/xdy-pf2e-workbench/commit/fbdb45f5841bd64700f392906da15591796aa5c8))
+* Don't mystify a party ([a12a1ab](https://github.com/xdy/xdy-pf2e-workbench/commit/a12a1ab0f12f4aaf017e4cb598dae6720c644d12))
+* Use radio-buttons so you can select multiple actors at once to give Hero Points to ([5542e5e](https://github.com/xdy/xdy-pf2e-workbench/commit/5542e5e90b7d0608c3557d43059abbd25422afbb))
+
 ## [6.35.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.3...v6.35.4) (2026-03-22)
 
 
