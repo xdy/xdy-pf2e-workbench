@@ -154,7 +154,7 @@ function isMystifyModifierKeyPressed() {
     }
 }
 
-export async function tokenCreateMystification(token: any) {
+export async function tokenCreateMystification(token: any): Promise<void> {
     const key = String(game.settings.get(MODULENAME, "npcMystifierModifierKey"));
     if (
         game.user?.isGM &&
@@ -185,15 +185,19 @@ export function isTokenMystified(token): boolean {
  * @param {boolean} active - Whether the mystification should be active or not.
  * @return {Promise<void>} A promise that resolves when the mystification is complete.
  */
-export async function doMystificationFromToken(tokenId: string, active: boolean) {
+export async function doMystificationFromToken(tokenId: string, active: boolean): Promise<void> {
     const token = game.scenes?.current?.tokens?.get(tokenId);
     if (token) {
         return doMystification(token, active);
     }
 }
 
-export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | undefined, active: boolean) {
+export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | undefined, active: boolean): Promise<void> {
     if (!token?.actor || !canvas.scene) {
+        return;
+    }
+
+    if ("party" === token.actor.type) {
         return;
     }
 
@@ -236,7 +240,7 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
     }
 }
 
-export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement) {
+export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement): void {
     let token: TokenPF2e<TokenDocumentPF2e<ScenePF2e>> | null;
     if (canvas && canvas.tokens) {
         token = canvas.tokens.get(<string>data._id) ?? null;
