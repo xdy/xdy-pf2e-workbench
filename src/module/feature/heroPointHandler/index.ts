@@ -201,7 +201,6 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
     // TODO How to start using bootstrap? (I use bootstrap classes in the html).
     // TODO Extract to a handlebars template
 
-    // TODO Get user name, add within parentheses after actor name
     let charactersContent = "";
     const actors = heroes();
     const checkedSet = new Set<number>();
@@ -278,13 +277,17 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
         const actor = actors[i];
         const currentHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.value : 0;
         const maxHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.max : 3;
+        const ownerName =
+            game.users?.find((u) => !u.isGM && actor?.ownership[u.id] === CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
+                ?.name ?? "";
+        const ownerSuffix = ownerName ? ` (${ownerName})` : "";
         charactersContent += `
     <div class="checkbox">
         <label for="characters-${i}">
           <input type="checkbox" name="characters" id="characters-${i}" value="${actor?.id}" ${
               checkedSet.has(i) ? 'checked="checked"' : ""
           }>
-          ${actor?.name} [${currentHeroPoints}/${maxHeroPoints}]
+          ${actor?.name}${ownerSuffix} [${currentHeroPoints}/${maxHeroPoints}]
         </label>
     </div>`;
     }
