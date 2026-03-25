@@ -1,6 +1,8 @@
+import { MODULENAME } from "./xdy-pf2e-workbench.js";
+
 export async function preloadTemplates(): Promise<void> {
     const templatePaths: string[] = [
-        // Add paths to "modules/xdy-pf2e-workbench/templates"
+        `modules/${MODULENAME}/templates/feature/heropoint-handler/index.hbs`,
     ];
 
     await foundry.applications.handlebars.loadTemplates(templatePaths);

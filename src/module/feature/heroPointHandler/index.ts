@@ -24,6 +24,34 @@ type HeroPointHandlerResult = {
     remainingMinutes: number;
 };
 
+type HeroPointHandlerTemplateActor = {
+    id: string;
+    name: string;
+    radioId: string;
+    checked: boolean;
+};
+
+type HeroPointHandlerTemplateData = {
+    instructions: string;
+    doWhat: string;
+    resetTo: string;
+    addLabel: string;
+    ignore: string;
+    thisMany: string;
+    addOne: string;
+    actors: HeroPointHandlerTemplateActor[];
+    timerValue: string;
+    timerMinutes: number;
+    maxMinutes: number;
+    showAfter: string;
+    submitShortLabel: string;
+    stopShortLabel: string;
+};
+
+function getHeroPointHandlerTemplatePath(): string {
+    return `modules/${MODULENAME}/templates/feature/heropoint-handler/index.hbs`;
+}
+
 async function stopTimer(): Promise<void> {
     await game.user?.unsetFlag(MODULENAME, "heroPointHandler.startTime");
     await game.user?.unsetFlag(MODULENAME, "heroPointHandler.remainingMinutes");
@@ -71,12 +99,12 @@ export function createRemainingTimeMessage(remainingMinutes: number): void {
     const message =
         remainingMinutes > 0
             ? game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.willBeResetIn`, {
-                  remainingMinutes: remainingMinutes,
-                  time: new Date(Date.now() + remainingMinutes * ONE_MINUTE_IN_MS).toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                  }),
-              })
+                remainingMinutes: remainingMinutes,
+                time: new Date(Date.now() + remainingMinutes * ONE_MINUTE_IN_MS).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                }),
+            })
             : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerStopped`);
     sendMessage(message, [game.user.id]);
 }
@@ -114,14 +142,62 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
 
         const content = await buildHtml(remainingMinutes, state);
 
+        const submitTooltip = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`);
+        const stopTooltip = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noTimerLabel`);
+        const dialogWidth = 375;
+        const dialogHeight = 660;
+
+        const renderHookId = Hooks.on("renderDialogV2", (app: foundry.applications.api.DialogV2) => {
+            if (!app.options.window.contentClasses?.includes("hero-point-handler-window")) {
+                return;
+            }
+            Hooks.off("renderDialogV2", renderHookId);
+
+            const el: HTMLElement = app.element;
+            el.style.top = `${Math.round((window.innerHeight - dialogHeight) / 2)}px`;
+            el.style.left = `${Math.round((window.innerWidth - dialogWidth) / 2)}px`;
+            el.style.width = `${dialogWidth}px`;
+            el.style.height = `${dialogHeight}px`;
+
+            const titleEl = el.querySelector<HTMLElement>(".window-title");
+            if (titleEl) {
+                titleEl.innerHTML = title;
+            }
+
+            const footerButtons = el.querySelectorAll<HTMLButtonElement>("footer button[data-action]");
+            for (const footerButton of footerButtons) {
+                switch (footerButton.dataset.action) {
+                    case "timer":
+                        footerButton.title = submitTooltip;
+                        footerButton.setAttribute("aria-label", submitTooltip);
+                        break;
+                    case "noTimer":
+                        footerButton.title = stopTooltip;
+                        footerButton.setAttribute("aria-label", stopTooltip);
+                        break;
+                }
+            }
+        });
+
         const result = <HeroPointHandlerResult | null>await foundry.applications.api.DialogV2.wait({
-            window: { title },
+            position: {
+                top: Math.round((window.innerHeight - dialogHeight) / 2),
+                left: Math.round((window.innerWidth - dialogWidth) / 2),
+                width: dialogWidth,
+                height: dialogHeight,
+            },
+            window: {
+                title,
+                resizable: true,
+                positioned: true,
+                contentClasses: ["hero-point-handler-window"],
+                icon: "fa-solid fa-hourglass",
+            },
             content,
             buttons: [
                 {
                     action: "timer",
-                    icon: "fa-solid fa-hourglass",
-                    label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`)}`,
+                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.submitShortLabel`),
                     default: true,
                     callback: async (_event, button, _dialog) => {
                         return {
@@ -132,7 +208,7 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
                 },
                 {
                     action: "noTimer",
-                    label: `${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noTimerLabel`)}`,
+                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.stopShortLabel`),
                     callback: async (_event, button, _dialog) => {
                         handleDialogResponse(button.form ?? button.closest("form"));
                         return {
@@ -142,6 +218,9 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
                     },
                 },
             ],
+            close: () => {
+                Hooks.off("renderDialogV2", renderHookId);
+            },
         });
 
         if (!result) {
@@ -198,10 +277,6 @@ async function randomPartymemberThatHasNotReceivedAHeropoint(actors: ActorPF2e[]
 }
 
 async function buildHtml(remainingMinutes: number, state: HPHState): Promise<string> {
-    // TODO How to start using bootstrap? (I use bootstrap classes in the html).
-    // TODO Extract to a handlebars template
-
-    let charactersContent = "";
     const actors = heroes();
     const checkedSet = new Set<number>();
     switch (state) {
@@ -227,93 +302,41 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
             break;
     }
 
-    const startContent = `
-<div class="hero-point-handler-dialog">
-<div class="hero-point-handler-note">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.instructions`)}</div>
-<hr>
-<div class="form-group">
-  <label class="col-md-4 control-label" for="radios">${game.i18n.localize(
-      `${MODULENAME}.SETTINGS.heroPointHandler.doWhat`,
-  )}</label>
-  <div class="col-md-4">
-      <div class="radio">
-        <label for="sessionStart-0">
-          <input type="radio" name="sessionStart" id="sessionStart-0" value="RESET">
-          ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.resetTo`)}
-        </label>
-      </div>
-      <div class="radio">
-        <label for="sessionStart-1">
-          <input type="radio" name="sessionStart" id="sessionStart-1" value="ADD">
-          ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.add`)}
-        </label>
-      </div>
-      <div class="radio">
-        <label for="sessionStart-2">
-          <input type="radio" name="sessionStart" id="sessionStart-2" value="IGNORE" checked="checked">
-          ${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.ignore`)}
-        </label>
-      </div>
-  </div>
-</div>
-
-<div class="form-group">
-  <label class="col-md-4 control-label" for="heropoints">${game.i18n.localize(
-      `${MODULENAME}.SETTINGS.heroPointHandler.thisMany`,
-  )}</label>
-  <div class="col-md-4">
-    <input id="heropoints" name="heropoints" type="number" value="1" class="form-control input-md">
-  </div>
-</div>
-
-<hr>
-<div class="form-group">
-  <label class="col-md-4 control-label" for="characters">${game.i18n.localize(
-      `${MODULENAME}.SETTINGS.heroPointHandler.addOne`,
-  )}</label>
-  <div class="col-md-4">`;
-
-    for (let i = 0; i < actors.length; i++) {
-        const actor = actors[i];
-        const currentHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.value : 0;
-        const maxHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.max : 3;
-        const ownerName =
-            game.users?.find((u) => !u.isGM && actor?.ownership[u.id] === CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
-                ?.name ?? "";
-        const ownerSuffix = ownerName ? ` (${ownerName})` : "";
-        charactersContent += `
-    <div class="checkbox">
-        <label for="characters-${i}">
-          <input type="checkbox" name="characters" id="characters-${i}" value="${actor?.id}" ${
-              checkedSet.has(i) ? 'checked="checked"' : ""
-          }>
-          ${actor?.name}${ownerSuffix} [${currentHeroPoints}/${maxHeroPoints}]
-        </label>
-    </div>`;
-    }
-
     const maxMinutes = Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")));
-    const remainingContent = `
-</div>
-</div>
+    const templateData: HeroPointHandlerTemplateData = {
+        instructions: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.instructions`),
+        doWhat: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.doWhat`),
+        resetTo: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.resetTo`),
+        addLabel: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.add`),
+        ignore: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.ignore`),
+        thisMany: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.thisMany`),
+        addOne: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.addOne`),
+        actors: actors.map((actor, index) => {
+            const currentHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.value : 0;
+            const maxHeroPoints = actor?.isOfType("character") ? actor.system.resources.heroPoints.max : 3;
+            const ownerName =
+                game.users?.find((u) => !u.isGM && actor?.ownership[u.id] === CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
+                    ?.name ?? "";
+            const ownerSuffix = ownerName ? ` (${ownerName})` : "";
+            return {
+                id: actor.id,
+                name: `${actor.name}${ownerSuffix} [${currentHeroPoints}/${maxHeroPoints}]`,
+                radioId: `characters-${index}`,
+                checked: checkedSet.has(index),
+            };
+        }),
+        timerValue: game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`, {
+            maxMinutes,
+        }),
+        timerMinutes: remainingMinutes || maxMinutes,
+        maxMinutes,
+        showAfter: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`),
+        submitShortLabel: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.submitShortLabel`),
+        stopShortLabel: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.stopShortLabel`),
+    };
 
-<hr>
-<div class="form-group">
-  <div class="col-md-4">
-    <div class="input-group">
-      <span class="input-group-addon">${game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.timerValue`, {
-          maxMinutes: maxMinutes,
-      })}</span>
-      <input id="timerTextId" name="timerText" class="form-control" value="${
-          remainingMinutes || maxMinutes
-      }" type="number" min="0" max="${maxMinutes}">
-    </div>
-    <p class="help-block">${game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`)}</p>
-  </div>
-</div>
-`;
-
-    return startContent + charactersContent + remainingContent + "</div>";
+    // @ts-expect-error TODO Fix typing
+    return renderTemplate(getHeroPointHandlerTemplatePath(), templateData);
 }
 
 export function calcRemainingMinutes(useDefault: boolean): number {
@@ -321,9 +344,9 @@ export function calcRemainingMinutes(useDefault: boolean): number {
     const savedMinutes = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes");
     const remainingMinutes: number = Math.clamp(
         savedMinutes ??
-            (useDefault
-                ? Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
-                : 0),
+        (useDefault
+            ? Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
+            : 0),
         0,
         Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))),
     );
@@ -413,16 +436,16 @@ function handleDialogResponse(element: ParentNode | null): number {
         return 0;
     }
 
-    const sessionStartEl = element.querySelector<HTMLInputElement>('input[name="sessionStart"]:checked');
+    const sessionStartEl = element.querySelector<HTMLInputElement>("input[name=\"sessionStart\"]:checked");
     const sessionStart = sessionStartEl ? sessionStartEl.value : "IGNORE";
 
-    const heroPointsEl = element.querySelector<HTMLInputElement>('input[name="heropoints"]');
+    const heroPointsEl = element.querySelector<HTMLInputElement>("input[name=\"heropoints\"]");
     const heroPoints = heroPointsEl ? Number.parseInt(heroPointsEl.value) : 1;
 
-    const actorIdEls = element.querySelectorAll<HTMLInputElement>('input[name="characters"]:checked');
+    const actorIdEls = element.querySelectorAll<HTMLInputElement>("input[name=\"characters\"]:checked");
     const actorIds: string[] = Array.from(actorIdEls).map((el) => el.value);
 
-    const remainingMinutesEl = element.querySelector<HTMLInputElement>('input[name="timerText"]');
+    const remainingMinutesEl = element.querySelector<HTMLInputElement>("input[name=\"timerText\"]");
     const maxMinutes = Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")));
     const remainingMinutes = Math.clamp(
         remainingMinutesEl ? Number.parseInt(remainingMinutesEl.value) || 0 : 0,

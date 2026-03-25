@@ -1,0 +1,72 @@
+<div class="hero-point-handler-dialog">
+    <div class="hero-point-handler-note">{{instructions}}</div>
+
+    <hr>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="sessionStart-0">{{{doWhat}}}</label>
+        <div class="col-md-4">
+            <div class="radio">
+                <label for="sessionStart-0">
+                    <input type="radio" name="sessionStart" id="sessionStart-0" value="RESET" />
+                    {{resetTo}}
+                </label>
+            </div>
+            <div class="radio">
+                <label for="sessionStart-1">
+                    <input type="radio" name="sessionStart" id="sessionStart-1" value="ADD" />
+                    {{addLabel}}
+                </label>
+            </div>
+            <div class="radio">
+                <label for="sessionStart-2">
+                    <input type="radio" name="sessionStart" id="sessionStart-2" value="IGNORE" checked="checked" />
+                    {{ignore}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="heropoints">{{thisMany}}</label>
+        <div class="col-md-4">
+            <input id="heropoints" name="heropoints" type="number" value="1" class="form-control input-md" />
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="characters">{{{addOne}}}</label>
+        <div class="col-md-4">
+            {{#each actors}}
+                <div class="checkbox">
+                    <label for="{{radioId}}">
+                        <input type="checkbox" name="characters" id="{{radioId}}" value="{{id}}" {{#if checked}}checked="checked"{{/if}} />
+                        {{name}}
+                    </label>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-addon">{{timerValue}}</span>
+                <input
+                    id="timerTextId"
+                    name="timerText"
+                    class="form-control"
+                    value="{{timerMinutes}}"
+                    type="number"
+                    min="0"
+                    max="{{maxMinutes}}"
+                />
+            </div>
+            <p class="help-block">{{showAfter}}</p>
+        </div>
+    </div>
+</div>

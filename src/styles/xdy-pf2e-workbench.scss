@@ -209,6 +209,13 @@
         margin-top: 0.25rem;
     }
 
+    .hero-point-handler-note,
+    .control-label {
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
     .radio + .radio {
         margin-top: 0.25rem;
     }
