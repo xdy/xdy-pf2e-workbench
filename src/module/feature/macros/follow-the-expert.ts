@@ -15,7 +15,7 @@ import type {
 } from "foundry-pf2e";
 import { ItemUUID } from "foundry/common/documents/_module.mts";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import * as systems from "../../../utils/systems.ts";
+import * as systems from "../../utils/systems.ts";
 
 // IDK why choices isn't in ChoiceSetSource
 interface ChoiceSetSourceWithChoices extends ChoiceSetSource {
@@ -169,4 +169,3 @@ Hooks.once("setup", () => {
 });
 
 export { followTheExpert };
-

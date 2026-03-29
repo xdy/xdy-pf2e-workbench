@@ -14,7 +14,7 @@ import {
     Statistic,
 } from "foundry-pf2e";
 import { followTheExpert } from "./follow-the-expert.ts";
-import * as systems from "../../../utils/systems.ts";
+import * as systems from "../../utils/systems.ts";
 
 type DialogV2 = foundry.applications.api.DialogV2;
 
@@ -177,7 +177,7 @@ function prepareActions(selectedActor: ActorPF2e, bamActions: MacroAction[]): Ma
             x.name += ` (${skillUsed.label})`;
         }
 
-        const traits = (x.action && typeof x.action === "object" && "traits" in x.action) ? x.action.traits : [];
+        const traits = x.action && typeof x.action === "object" && "traits" in x.action ? x.action.traits : [];
         x.showMAP = traits.includes("attack");
         x.showDowntime = traits.includes("downtime");
         x.showExploration = traits.includes("exploration");
@@ -796,7 +796,7 @@ export async function basicActionMacros(): Promise<void> {
                 closeOnSubmit: false,
                 submitOnChange: false,
             },
-            actions: Object.fromEntries(new Map(actionsToUse.map((_e, i) => ([i, BAMapp.use])))),
+            actions: Object.fromEntries(new Map(actionsToUse.map((_e, i) => [i, BAMapp.use]))),
         };
         static override PARTS = {
             index: { template: "modules/xdy-pf2e-workbench/templates/macros/bam/index.hbs" },
@@ -804,13 +804,20 @@ export async function basicActionMacros(): Promise<void> {
         };
         static override TABS = {
             primary: {
-                tabs: [{
-                    id: "encounter", label: "Encounter",
-                }, {
-                    id: "exploration", label: "Exploration",
-                }, {
-                    id: "downtime", label: "Downtime",
-                }],
+                tabs: [
+                    {
+                        id: "encounter",
+                        label: "Encounter",
+                    },
+                    {
+                        id: "exploration",
+                        label: "Exploration",
+                    },
+                    {
+                        id: "downtime",
+                        label: "Downtime",
+                    },
+                ],
                 initial: "encounter",
             },
         };
@@ -825,9 +832,14 @@ export async function basicActionMacros(): Promise<void> {
             context = await super._preparePartContext(partId, context, options);
             switch (partId) {
                 case "footer":
-                    context.buttons = [{
-                        type: "cancel", action: "cancel", icon: "fa-solid fa-xmark", label: "Cancel",
-                    }];
+                    context.buttons = [
+                        {
+                            type: "cancel",
+                            action: "cancel",
+                            icon: "fa-solid fa-xmark",
+                            label: "Cancel",
+                        },
+                    ];
                     break;
                 case "index":
                     context.tabs = this._prepareTabs("primary");
@@ -873,4 +885,3 @@ export async function basicActionMacros(): Promise<void> {
 }
 
 // basicActionMacros();
-

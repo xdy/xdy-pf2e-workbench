@@ -1,6 +1,6 @@
 import { ChatMessagePF2e, SpellPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import * as systems from "../../../utils/systems.js";
+import * as systems from "../../utils/systems.ts";
 
 export async function handlePrivateSpellcasting(data: any, message: ChatMessagePF2e) {
     const spellUUID = <string>systems.getFlag(message, "origin.uuid");
@@ -297,4 +297,3 @@ export async function hideSpellNameInDamageroll(message: ChatMessagePF2e, html: 
         }
     }
 }
-

@@ -1,7 +1,7 @@
 import { ActorPF2e, ChatMessagePF2e } from "foundry-pf2e";
 import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
 import BaseUser from "foundry/common/documents/user.mjs";
-import * as systems from "../utils/systems.ts";
+import * as systems from "./utils/systems.ts";
 
 function shouldIHandleThisMessage(message: ChatMessagePF2e, playerCondition = true, gmCondition = true): boolean {
     const amIMessageSender = message.author?.id === game.user?.id;
@@ -41,7 +41,8 @@ function isActuallyDamageRoll(message: ChatMessagePF2e): boolean {
     // TODO Anything using this should probably hook into Hooks.call(`pf2e.damageRoll`, rollData) instead...
     const isPhysicalDamageroll =
         message.rolls?.length !== 0 &&
-        (message.item?.type ?? "") && ["ancestry", "effect", "feat", "melee", "weapon"].includes(message.item?.type ?? "") &&
+        (message.item?.type ?? "") &&
+        ["ancestry", "effect", "feat", "melee", "weapon"].includes(message.item?.type ?? "") &&
         (!message.isRoll || message.isDamageRoll);
     const isSpellDamageRoll = message.item?.type === "spell" && message.isDamageRoll;
     return (
@@ -244,4 +245,3 @@ export function heroes(): ActorPF2e[] {
 export function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
     return (typeof key === "string" || typeof key === "number") && key in obj;
 }
-

@@ -1,7 +1,7 @@
 import { isFirstGM, myRandomId } from "../../utils.js";
 import { ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import * as systems from "../../../utils/systems.ts";
+import * as systems from "../../utils/systems.ts";
 
 export async function reminderBreathWeapon(message: ChatMessagePF2e): Promise<void> {
     const messageContent = message.content;
@@ -86,4 +86,3 @@ async function getEffectDetails(activeActor, messageContent: string, diceValue) 
         },
     };
 }
-

@@ -1,7 +1,7 @@
 import { ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { shouldIHandleThis } from "../../utils.js";
-import * as systems from "../../../utils/systems.ts";
+import * as systems from "../../utils/systems.ts";
 
 function ignoreDeadEidolon(actor) {
     return actor?.traits.has("eidolon") && game.settings.get(MODULENAME, "reminderCannotAttackIgnoreDeadEidolon");
@@ -93,4 +93,3 @@ function generateNotificationMessage(title: string, actorName: string, reason: s
         reason: game.i18n.localize(reason),
     });
 }
-

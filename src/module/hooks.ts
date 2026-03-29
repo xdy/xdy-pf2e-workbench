@@ -16,7 +16,7 @@ import {
     UserPF2e,
 } from "foundry-pf2e";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "./xdy-pf2e-workbench.js";
-import * as systems from "../utils/systems.js";
+import * as systems from "./utils/systems.ts";
 import { actionsReminder, autoReduceStunned, reminderTargeting } from "./feature/reminders/index.js";
 import {
     chatActionCardDescriptionCollapse,
@@ -42,7 +42,12 @@ import {
 } from "./feature/qolHandler/handlePrivateSpellcasting.js";
 import { Rolled } from "foundry/client/dice/roll.mts";
 
-export const preCreateChatMessageHook = (message: ChatMessagePF2e, data: Record<string, unknown>, _options: unknown, _user: UserPF2e): boolean => {
+export const preCreateChatMessageHook = (
+    message: ChatMessagePF2e,
+    data: Record<string, unknown>,
+    _options: unknown,
+    _user: UserPF2e,
+): boolean => {
     let proceed = true;
 
     const reminderTargetingEnabled = String(game.settings.get(MODULENAME, "reminderTargeting")) === "mustTarget";
@@ -332,8 +337,7 @@ export async function preCreateItemHook(item: ItemPF2e, _data: object, _options:
     }
 }
 
-export async function updateItemHook(_item: ItemPF2e, _update: object): Promise<void> {
-}
+export async function updateItemHook(_item: ItemPF2e, _update: object): Promise<void> {}
 
 export async function deleteItemHook(item: ItemPF2e, _options: object): Promise<void> {
     await itemHandlingItemHook(item);
@@ -345,7 +349,11 @@ export function pf2eEndTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e
     }
 }
 
-export async function pf2eStartTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string): Promise<void> {
+export async function pf2eStartTurnHook(
+    combatant: CombatantPF2e,
+    _combat: EncounterPF2e,
+    userId: string,
+): Promise<void> {
     const forWhom = String(game.settings.get(MODULENAME, "actionsReminderAllow"));
     if (game.settings.get(MODULENAME, "autoReduceStunned")) {
         autoReduceStunned(combatant, userId).then((reduction) => {
@@ -389,10 +397,15 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
     }
 }
 
-export function preUpdateTokenHook(_document: unknown, update: {
-    x?: number | null;
-    y?: number | null
-}, options: object, ..._args: unknown[]): void {
+export function preUpdateTokenHook(
+    _document: unknown,
+    update: {
+        x?: number | null;
+        y?: number | null;
+    },
+    options: object,
+    ..._args: unknown[]
+): void {
     if (game.settings.get(MODULENAME, "tokenAnimation") && (update.x !== null || update.y !== null)) {
         fu.setProperty(options, "animation", {
             movementSpeed: game.settings.get(MODULENAME, "tokenAnimationSpeed"),
@@ -553,7 +566,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
 
         function processSpellElement(spellElement: Element) {
             spellElement.querySelectorAll("div.item-name").forEach((itemNameDiv) => {
-                const actionElement = itemNameDiv.querySelector<HTMLElement>("[data-action=\"item-to-chat\"]");
+                const actionElement = itemNameDiv.querySelector<HTMLElement>('[data-action="item-to-chat"]');
                 if (!actionElement) return;
 
                 const currentAction = actionElement.getAttribute("data-action");
@@ -566,7 +579,7 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
 
         function handleSpellClick(event: MouseEvent) {
             const target = event.target as HTMLElement;
-            const spellContainer = target?.closest("[data-action=\"workbench-spell-to-chat\"]")?.parentElement
+            const spellContainer = target?.closest('[data-action="workbench-spell-to-chat"]')?.parentElement
                 ?.parentElement;
 
             if (!shouldIHandleThis(sheet.actor) || !spellContainer) return;
@@ -587,4 +600,3 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
         }
     }
 }
-

@@ -8,7 +8,7 @@ import {
 import type { DamageRoll } from "foundry-pf2e";
 import { ActorFlagsPF2e, ChatContextFlag, ChatMessagePF2e, RollOptionFlags, SpellPF2e } from "foundry-pf2e";
 import { Rolled } from "foundry/client/dice/roll.mts";
-import * as systems from "../../../utils/systems.ts";
+import * as systems from "../../utils/systems.ts";
 
 export async function autoRollDamage(message: ChatMessagePF2e) {
     const numberOfMessagesToCheck = 10;
@@ -420,4 +420,3 @@ async function handleElementalBlastAttack(actor, message, degreeOfSuccess, check
     }
     return;
 }
-

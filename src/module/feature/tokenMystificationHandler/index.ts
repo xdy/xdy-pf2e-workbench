@@ -3,7 +3,7 @@ import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { mystifyModifierKey, mystifyRandomPropertyType } from "../../settings/index.js";
 import { generateNameFromTraits } from "./traits-name-generator.js";
 import { heroes, logError } from "../../utils.js";
-import * as systems from "../../../utils/systems.ts";
+import * as systems from "../../utils/systems.ts";
 
 function shouldSkipRandomProperty(token) {
     return (
@@ -277,4 +277,3 @@ export function renderNameHud(data: TokenDocumentPF2e, html: HTMLElement): void 
 export function canMystify() {
     return game.user?.isGM && canvas && canvas.tokens;
 }
-

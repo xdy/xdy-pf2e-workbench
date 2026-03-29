@@ -2,7 +2,7 @@ import { isFirstGM, logDebug, shouldIHandleThis, shouldIHandleThisMessage } from
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e, ActorSystemData, ChatMessagePF2e, ItemPF2e } from "foundry-pf2e";
 import { moveOnZeroHP } from "../initiativeHandler/index.js";
-import * as systems from "../../../utils/systems.ts";
+import * as systems from "../../utils/systems.ts";
 
 export function dyingHandlingPreUpdateActorHook(
     actor,
@@ -604,4 +604,3 @@ export function checkIfLatestDamageMessageIsNonlethal(actor: ActorPF2e, option: 
     }
     return false;
 }
-

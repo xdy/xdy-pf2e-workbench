@@ -1,7 +1,7 @@
 import { ActorPF2e, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { CREATURE_IDENTIFICATION_TRAITS, ELITE_WEAK } from "../../xdy-pf2e-constants.js";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import * as systems from "../../../utils/systems.ts";
+import * as systems from "../../utils/systems.ts";
 
 let TRAITS: {
     SIZES: string[];
@@ -189,8 +189,13 @@ export async function generateNameFromTraits(token: TokenDocumentPF2e<ScenePF2e>
                         return game.i18n.localize(CONFIG.PF2E.actorSizes[lowercaseTrait]);
                     }
 
-                    const translations: Record<string, unknown> = (game.i18n.translations.PF2E as Record<string, unknown>) ?? {};
-                    return (trait !== prefix && trait !== postfix ? (translations[`Trait${trait}`] as string | undefined) : trait) ?? trait;
+                    const translations: Record<string, unknown> =
+                        (game.i18n.translations.PF2E as Record<string, unknown>) ?? {};
+                    return (
+                        (trait !== prefix && trait !== postfix
+                            ? (translations[`Trait${trait}`] as string | undefined)
+                            : trait) ?? trait
+                    );
                 })
                 .join(" ");
         }
@@ -200,4 +205,3 @@ export async function generateNameFromTraits(token: TokenDocumentPF2e<ScenePF2e>
     }
     return result;
 }
-
