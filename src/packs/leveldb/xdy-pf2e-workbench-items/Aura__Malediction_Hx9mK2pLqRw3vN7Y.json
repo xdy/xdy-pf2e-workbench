@@ -1,0 +1,91 @@
+{
+  "_id": "Hx9mK2pLqRw3vN7Y",
+  "name": "Aura: Malediction",
+  "type": "effect",
+  "img": "icons/magic/light/explosion-glow-spiral-yellow.webp",
+  "effects": [],
+  "folder": "EAnrqTQqTri4NwlI",
+  "sort": 175000,
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": {
+      "gm": "",
+      "value": "<p>A 'good enough' aura for @UUID[Compendium.pf2e.spells-srd.Item.AdZ2rWJStZ5unxzq]{Malediction}.</p>\n<p>Base radius is 10 feet. Increase the <strong>badge</strong> to add 10 feet per step (sustain-style). This does not run Will saves for you.</p>"
+    },
+    "rules": [
+      {
+        "effects": [
+          {
+            "uuid": "Compendium.pf2e.spell-effects.Item.1jX8W0eyMPJ0MFKY",
+            "affects": "enemies",
+            "includesSelf": false
+          }
+        ],
+        "key": "Aura",
+        "radius": "@item.badge.value*10",
+        "slug": "aura-effect-malediction",
+        "traits": ["mental", "aura"]
+      }
+    ],
+    "slug": null,
+    "_migration": {
+      "version": 0.932,
+      "lastMigration": null,
+      "previous": {
+        "schema": 0.878,
+        "foundry": "13.351",
+        "system": "7.12.2"
+      }
+    },
+    "traits": {
+      "otherTags": [],
+      "value": [],
+      "rarity": "common"
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "ORC",
+      "remaster": true
+    },
+    "level": {
+      "value": 1
+    },
+    "duration": {
+      "value": 1,
+      "unit": "minutes",
+      "expiry": "turn-start",
+      "sustained": false
+    },
+    "start": {
+      "value": 0,
+      "initiative": null
+    },
+    "tokenIcon": {
+      "show": true
+    },
+    "badge": {
+      "type": "counter",
+      "value": 1
+    },
+    "context": null,
+    "target": null,
+    "unidentified": false
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "pf2e",
+    "systemVersion": "6.0.4",
+    "coreVersion": "12.329",
+    "createdTime": 1775462400000,
+    "modifiedTime": 1775462400000,
+    "lastModifiedBy": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "_key": "!items!Hx9mK2pLqRw3vN7Y"
+}
