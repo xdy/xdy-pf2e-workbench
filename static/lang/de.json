@@ -110,6 +110,14 @@
         "regainOne": "Erneuert 1 Fokuspunkt.",
         "disabled": "Deaktiviert, da keine Fähigkeit gelernt wurde um mehr als 1 Fokuspunkt zu erneuern.",
         "selectOneActor": "Es muss ein Akteur ausgewählt werden."
+      },
+      "recallKnowledge": {
+        "breakdown": {
+          "all": "Alle Modifikatoren",
+          "name": "Wissen abrufen: Aufschlüsselung der Würfelwürfe anzeigen",
+          "hint": "Zeige eine Aufschlüsselung der auf jede Fertigkeit angewendeten Modifikatoren in einer Zeile unterhalb des Ergebnisses an.",
+          "none": "Keine Modifikatoren anzeigen"
+        }
       }
     },
     "modules": {
@@ -287,7 +295,7 @@
       "castPrivateSpellWithPublicMessage": {
         "secondPartRK": ".<br>Frage deinen SL ob du den Zauber automatisch erkennst, ansonsten kannst du versuchen einen hier von @UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln] oder davon @UUID[Compendium.pf2e.feats-srd.2rSyTfPgAmNAo01r] zu nutzen. Oder, während deines Zuges, kannst du eine Aktion verwenden um zu versuchen den Zauber mit @Check[type:{skill}|dc:{dcRK}|traits:secret,action:recall-knowledge]{rk} zu identifizieren",
         "name": "Schreibe eine Nachricht wenn ein Zauber gewirkt wurde.",
-        "savePart": "<br>Rettungswurf gegen den unbekannten Zauber ist: @Check[type:{dataSave}|SG:{dataDC}|traits:{traits}|basic:{basic}}]",
+        "savePart": "<br>Rettungswurf gegen den unbekannten Zauber ist: @Check[type:{dataSave}|SG:{dataDC}|traits:{traits}|{basic}}]",
         "firstPart": "{tokenName} wirkte grade einen {type} der folgenden <strong>{traditionString}</strong> Tradition. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
         "they": "Sie",
         "cantrip": "Zaubertrick",
@@ -385,7 +393,7 @@
       },
       "npcMystifier": {
         "name": "Aktiviert die NSC Verschleierung.",
-        "hint": "Aktivieren um die NSC Verschleierung zu aktivieren, umbenennen der Token auf der aktiven Szenen, basierend auf ihren Kategorien falls STRG (konfigurierbar) gedrückt wird wenn es zur Szene hinzugefügt wird. Speichere die Einstellung um weitere Optionen ein-/auszublenden."
+        "hint": "Aktivieren um die NSC Verschleierung zu aktivieren, umbenennen der Token auf der aktiven Szenen, basierend auf ihren Kategorien falls STRG (konfigurierbar) gedrückt wird wenn es zur Szene hinzugefügt wird. Speichere die Einstellung um weitere Optionen ein-/auszublenden. Partymitglieder werden immer ausgeschlossen."
       },
       "notifications": {
         "cantMystify": "Du kannst dieses Token nicht verschleiern. Ist es auf der aktiven Szene und bist du ein SL?"
@@ -524,7 +532,7 @@
         "name": "... und verstecke den Namen des privat gewirkten Zaubers im Schadenswurf."
       },
       "autoRollDamageForSpellWhenNotAnAttack": {
-        "hint": "Client Einstellung um *immer* normalen Schaden zur würfeln für *nicht-Angriffs* Zauber wenn diese gewirkt werden.",
+        "hint": "Client-Einstellung, die den normalen Schaden für *Nicht-Angriffs-*Zauber beim Wirken automatisch auswürfelt. Enthält die Meldung Rettungswurf-Ergebnisse, wird bei einem Fehlschlag automatisch gewürfelt; bei einfachen Rettungswürfen erfolgt dies bei einem Erfolg. Bei Angriffen wird bei einem Erfolg automatisch gewürfelt. Handelt es sich um einen Zauber, der sowohl einen Angriff als auch einen Rettungswurf beinhaltet, wird nicht automatisch gewürfelt (z. B. „Auflösung“).",
         "name": "Automatischer Schadenswurf für Zauber welche keine Angriffe sind.",
         "no": "Nein",
         "nonSaveSpell": "Für einen Nicht-Angriffs Nicht-Rettungszauber",
@@ -679,6 +687,40 @@
       "autoCollapseItemChatCardMoveEffectLinks": {
         "name": "... aber zeige die Effekt Verlinkungen",
         "hint": "... aber verschiebe alle Verlinkungen von Effekten außerhalb des zusammengeklappten Teils der Chatkarte, wenn diese als Standard zusammengeklappt ist"
+      },
+      "sheatheHeldItemsAfterEncounter": {
+        "hint": "Charaktere stecken ihre Waffen nach Kämpfen automatisch weg.",
+        "name": "Charaktere stecken ihre Waffen nach Kämpfen automatisch weg.",
+        "message": "{name} verstaut: {items}"
+      },
+      "castPrivateSpellAutoRevealOverrideGMRollMode": {
+        "hint": "Den vom Spielleiter gewählten Würfelmodus auf „öffentlich“ zurücksetzen. Ist diese Option deaktiviert, wird der vom Spielleiter gewählte Würfelmodus (öffentlich/privat/blind/selbst) verwendet.",
+        "name": "... und Zaubersprüche immer als öffentliche Nachricht anzeigen."
+      },
+      "castPrivateSpellWithPublicMessageTraitsBlocklist": {
+        "hint": "Durch Kommas getrennte Liste von Merkmalen, die aus der öffentlichen Nachricht ausgeschlossen werden sollen (z. B. „mental, illusion“)",
+        "name": "... diese Merkmale jedoch aus der öffentlichen Mitteilung herausnehmen"
+      },
+      "heroPointRules": {
+        "no": "Normale Regeln (letzter Wurf gilt)",
+        "keeleysHeroPointRule": "Keeleys Heldenpunkt-Regel (+10, wenn der erneute Wurf unter 10 liegt).",
+        "useHighestHeroPointRoll": "Den höchsten Würfelwurf verwenden.",
+        "bonusTagUseHighestRoll": "Höchster gewürfelter Wert"
+      },
+      "pauseImageNoSpin": {
+        "hint": "Pausenbild während der Pause nicht drehen.",
+        "name": "Pausenbild während der Pause nicht drehen"
+      },
+      "heropointHandlerRandomization": {
+        "none": "Niemand",
+        "hint": "So wählst du einen Spieler aus, um zufällige Heldenpunkte zu erhalten",
+        "name": "... wie man einen Spieler auswählt, um zufällige Heldenpunkte zu erhalten.",
+        "randomPartymemberThatHasNotReceivedAHeropoint": "Ein Gruppenmitglied, das noch keinen bekommen hat.",
+        "random": "Ein zufälliges Gruppenmitglied"
+      },
+      "playerSpellsChangeSendToChat": {
+        "hint": "Eine Systemeinstellung, die bewirkt, dass beim Senden eines Zaubers im Chat ein Link zum Zaubergegenstand statt des vollständigen Zaubers gesendet wird.",
+        "name": "Wenn ein Zauber im Chat gesendet wird, soll ein Link zum Zauber-Gegenstand statt zum vollständigen Zauber gesendet werden."
       }
     },
     "npcRoller": {
