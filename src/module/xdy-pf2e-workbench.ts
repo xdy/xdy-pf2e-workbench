@@ -14,7 +14,11 @@ import { ActorPF2e } from "foundry-pf2e";
 
 import { isFirstGM, logInfo } from "./utils.js";
 import * as systems from "./utils/systems.ts";
-import { enableNpcRollerButton, registerNpcRollerHandlebarsTemplates } from "./feature/npc-roller/NpcRoller.js";
+import {
+    enableNpcRollerButton,
+    NpcRoller,
+    registerNpcRollerHandlebarsTemplates,
+} from "./feature/npc-roller/NpcRoller.js";
 import { scaleNPCToLevelFromActor } from "./feature/cr-scaler/NPCScaler.js";
 import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHandler/traits-name-generator.js";
 import { basicActionMacros, registerBasicActionMacrosHandlebarsTemplates } from "./feature/macros/basicActionMacros.js";
@@ -104,114 +108,142 @@ export function updateHooks(cleanSlate = false): void {
 
     const gs = game.settings;
 
-    handle("getActorContextOptions", gs.get(MODULENAME, "npcScaler"), onScaleNPCContextHook);
-    handle("renderJournalDirectory", gs.get(MODULENAME, "npcRoller"), enableNpcRollerButton);
+    const autoRollDamageAllow = gs.get(MODULENAME, "autoRollDamageAllow");
+    const autoRollDamageForStrike = gs.get(MODULENAME, "autoRollDamageForStrike");
+    const autoRollDamageForSpellAttack = gs.get(MODULENAME, "autoRollDamageForSpellAttack");
+    const autoRollDamageForSpellWhenNotAnAttack = gs.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack");
+    const castPrivateSpell = gs.get(MODULENAME, "castPrivateSpell");
+    const reminderTargeting = gs.get(MODULENAME, "reminderTargeting");
+    const reminderCannotAttack = gs.get(MODULENAME, "reminderCannotAttack");
+    const applyPersistentDamage = gs.get(MODULENAME, "applyPersistentDamage");
+    const applyPersistentHealing = gs.get(MODULENAME, "applyPersistentHealing");
+    const reminderBreathWeapon = gs.get(MODULENAME, "reminderBreathWeapon");
+    const autoGainDyingIfTakingDamageWhenAlreadyDying = String(
+        gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying"),
+    );
+    const autoCollapseItemChatCardContent = String(gs.get(MODULENAME, "autoCollapseItemChatCardContent"));
+    const autoCollapseItemActionChatCardContent = String(gs.get(MODULENAME, "autoCollapseItemActionChatCardContent"));
+    const autoCollapseItemAttackChatCardContent = String(gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent"));
+    const autoExpandDamageRolls = String(gs.get(MODULENAME, "autoExpandDamageRolls"));
+    const heroPointRules = gs.get(MODULENAME, "heroPointRules");
+    const npcScaler = gs.get(MODULENAME, "npcScaler");
+    const npcRoller = gs.get(MODULENAME, "npcRoller");
+    const dropHeldItemsOnBecomingUnconscious = gs.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious");
+    const housepatcher = gs.get(MODULENAME, "housepatcher");
+    const decreaseFrightenedConditionEachTurn = gs.get(MODULENAME, "decreaseFrightenedConditionEachTurn");
+    const actionsReminderAllow = gs.get(MODULENAME, "actionsReminderAllow");
+    const autoReduceStunned = gs.get(MODULENAME, "autoReduceStunned");
+    const npcMystifier = gs.get(MODULENAME, "npcMystifier");
+    const enableAutomaticMove = String(gs.get(MODULENAME, "enableAutomaticMove"));
+    const autoGainDyingAtZeroHP = String(gs.get(MODULENAME, "autoGainDyingAtZeroHP"));
+    const nonLethalIsNotLethal = String(gs.get(MODULENAME, "nonLethalIsNotLethal"));
+    const autoRemoveDyingAtGreaterThanZeroHP = String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP"));
+    const autoRemoveUnconsciousAtGreaterThanZeroHP = gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP");
+    const npcMystifyAllPhysicalMagicalItems = gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems");
+    const tokenAnimation = gs.get(MODULENAME, "tokenAnimation");
+    const playerFeatsRarityColour = gs.get(MODULENAME, "playerFeatsRarityColour");
+    const playerFeatsPrerequisiteHint = gs.get(MODULENAME, "playerFeatsPrerequisiteHint");
+    const playerSpellsRarityColour = gs.get(MODULENAME, "playerSpellsRarityColour");
+    const playerSpellsChangeSendToChat = gs.get(MODULENAME, "playerSpellsChangeSendToChat");
+    const sheatheHeldItemsAfterEncounter = gs.get(MODULENAME, "sheatheHeldItemsAfterEncounter");
+
+    const handleDyingRecoveryRoll = gs.get(MODULENAME, "handleDyingRecoveryRoll");
+    const giveWoundedWhenDyingRemoved = gs.get(MODULENAME, "giveWoundedWhenDyingRemoved");
+    const giveUnconsciousIfDyingRemovedAt0HP = gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP");
+
+    handle("getActorContextOptions", npcScaler, onScaleNPCContextHook);
+    handle("renderJournalDirectory", npcRoller, enableNpcRollerButton);
+    handle("controlToken", npcRoller, NpcRoller.onControlToken);
 
     handle(
         "preCreateChatMessage",
-        gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "reminderTargeting") !== "no" ||
-            gs.get(MODULENAME, "reminderCannotAttack") === "cancelAttack" ||
-            gs.get(MODULENAME, "applyPersistentDamage") ||
-            gs.get(MODULENAME, "applyPersistentHealing"),
+        castPrivateSpell ||
+            reminderTargeting !== "no" ||
+            reminderCannotAttack === "cancelAttack" ||
+            applyPersistentDamage ||
+            applyPersistentHealing,
         preCreateChatMessageHook,
     );
 
     handle(
         "createChatMessage",
-        (gs.get(MODULENAME, "autoRollDamageAllow") &&
-            (gs.get(MODULENAME, "autoRollDamageForStrike") ||
-                gs.get(MODULENAME, "autoRollDamageForSpellAttack") ||
-                gs.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack") !== "no")) ||
-            gs.get(MODULENAME, "reminderBreathWeapon") ||
-            gs.get(MODULENAME, "reminderCannotAttack") === "reminder" ||
-            !String(gs.get(MODULENAME, "autoGainDyingIfTakingDamageWhenAlreadyDying")).startsWith("no"),
+        (autoRollDamageAllow &&
+            (autoRollDamageForStrike ||
+                autoRollDamageForSpellAttack ||
+                autoRollDamageForSpellWhenNotAnAttack !== "no")) ||
+            reminderBreathWeapon ||
+            reminderCannotAttack === "reminder" ||
+            !autoGainDyingIfTakingDamageWhenAlreadyDying.startsWith("no"),
         createChatMessageHook,
     );
 
     handle(
         "renderChatMessage",
-        game.settings.get(MODULENAME, "castPrivateSpell") ||
-            ["collapsedDefault", "nonCollapsedDefault"].includes(
-                String(gs.get(MODULENAME, "autoCollapseItemChatCardContent")),
-            ) ||
-            ["collapsedDefault", "nonCollapsedDefault"].includes(
-                String(gs.get(MODULENAME, "autoCollapseItemActionChatCardContent")),
-            ) ||
-            ["collapsedDefault", "nonCollapsedDefault"].includes(
-                String(gs.get(MODULENAME, "autoCollapseItemAttackChatCardContent")),
-            ) ||
-            ["expandedAll", "expandedNew", "expandedNewest"].includes(
-                String(gs.get(MODULENAME, "autoExpandDamageRolls")),
-            ) ||
-            gs.get(MODULENAME, "handleDyingRecoveryRoll") /* Deprecated */ ||
-            gs.get(MODULENAME, "heroPointRules") !== "no",
+        castPrivateSpell ||
+            ["collapsedDefault", "nonCollapsedDefault"].includes(autoCollapseItemChatCardContent) ||
+            ["collapsedDefault", "nonCollapsedDefault"].includes(autoCollapseItemActionChatCardContent) ||
+            ["collapsedDefault", "nonCollapsedDefault"].includes(autoCollapseItemAttackChatCardContent) ||
+            ["expandedAll", "expandedNew", "expandedNewest"].includes(autoExpandDamageRolls) ||
+            handleDyingRecoveryRoll /* Deprecated */ ||
+            heroPointRules !== "no",
         renderChatMessageHook,
     );
 
-    handle("preCreateItem", game.settings.get(MODULENAME, "dropHeldItemsOnBecomingUnconscious"), preCreateItemHook);
+    handle("preCreateItem", dropHeldItemsOnBecomingUnconscious, preCreateItemHook);
 
     handle("updateItem", false, updateItemHook);
 
-    handle(
-        "deleteItem",
-        gs.get(MODULENAME, "giveWoundedWhenDyingRemoved") || gs.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP"),
-        deleteItemHook,
-    );
+    handle("deleteItem", giveWoundedWhenDyingRemoved || giveUnconsciousIfDyingRemovedAt0HP, deleteItemHook);
 
-    handle("pf2e.systemReady", gs.get(MODULENAME, "housepatcher") !== "", pf2eSystemReadyHook, true);
+    handle("pf2e.systemReady", housepatcher !== "", pf2eSystemReadyHook, true);
 
-    handle("pf2e.endTurn", gs.get(MODULENAME, "decreaseFrightenedConditionEachTurn"), pf2eEndTurnHook);
+    handle("pf2e.endTurn", decreaseFrightenedConditionEachTurn, pf2eEndTurnHook);
 
-    handle(
-        "pf2e.startTurn",
-        gs.get(MODULENAME, "actionsReminderAllow") !== "none" || gs.get(MODULENAME, "autoReduceStunned"),
-        pf2eStartTurnHook,
-    );
+    handle("pf2e.startTurn", actionsReminderAllow !== "none" || autoReduceStunned, pf2eStartTurnHook);
 
     handle(
         "pf2e.reroll",
-        gs.get(MODULENAME, "heroPointRules") === "keeleysHeroPointRule" ||
-            gs.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll" ||
-            gs.get(MODULENAME, "heroPointRules") === "heroicRerolls",
+        heroPointRules === "keeleysHeroPointRule" ||
+            heroPointRules === "useHighestHeroPointRoll" ||
+            heroPointRules === "heroicRerolls",
         pf2eRerollHook,
     );
 
-    handle("renderTokenHUD", gs.get(MODULENAME, "npcMystifier"), renderTokenHUDHook);
+    handle("renderTokenHUD", npcMystifier, renderTokenHUDHook);
 
     handle(
         "preUpdateActor",
-        (<string>gs.get(MODULENAME, "enableAutomaticMove")).startsWith("reaching0HP") ||
-            !String(gs.get(MODULENAME, "autoGainDyingAtZeroHP")).startsWith("no") ||
-            !String(gs.get(MODULENAME, "nonLethalIsNotLethal")).startsWith("no") ||
-            !String(gs.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP")).startsWith("no") ||
-            gs.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP") ||
+        enableAutomaticMove.startsWith("reaching0HP") ||
+            !autoGainDyingAtZeroHP.startsWith("no") ||
+            !nonLethalIsNotLethal.startsWith("no") ||
+            !autoRemoveDyingAtGreaterThanZeroHP.startsWith("no") ||
+            autoRemoveUnconsciousAtGreaterThanZeroHP ||
             (systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
-                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onZeroHp"),
+                npcMystifyAllPhysicalMagicalItems === "onZeroHp"),
         preUpdateActorHook,
     );
 
-    handle("preUpdateToken", gs.get(MODULENAME, "tokenAnimation"), preUpdateTokenHook);
+    handle("preUpdateToken", tokenAnimation, preUpdateTokenHook);
 
     handle(
         "createToken",
-        gs.get(MODULENAME, "npcMystifier") ||
+        npcMystifier ||
             (systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
-                gs.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems") === "onScene"),
+                npcMystifyAllPhysicalMagicalItems === "onScene"),
         createTokenHook,
     );
 
     handle(
         "renderActorSheet",
-        gs.get(MODULENAME, "playerFeatsRarityColour") ||
-            gs.get(MODULENAME, "playerFeatsPrerequisiteHint") ||
-            gs.get(MODULENAME, "playerSpellsRarityColour") ||
-            gs.get(MODULENAME, "castPrivateSpell") ||
-            gs.get(MODULENAME, "playerSpellsChangeSendToChat"),
+        playerFeatsRarityColour ||
+            playerFeatsPrerequisiteHint ||
+            playerSpellsRarityColour ||
+            castPrivateSpell ||
+            playerSpellsChangeSendToChat,
         renderActorSheetHook,
     );
 
-    handle("deleteCombat", gs.get(MODULENAME, "sheatheHeldItemsAfterEncounter"), deleteCombatHook);
+    handle("deleteCombat", sheatheHeldItemsAfterEncounter, deleteCombatHook);
 
     changePauseText();
 }

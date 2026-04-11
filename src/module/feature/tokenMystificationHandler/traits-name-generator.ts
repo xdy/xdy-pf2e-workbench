@@ -27,16 +27,16 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
                     const document = await pack?.getDocument(id);
                     const draw = await (<RollTable>document).draw({ displayChat: false });
                     if (draw && draw?.results[0]) {
-                        // @ts-expect-error getChatText is deprecated and not in types
-                        return draw?.results[0].getChatText();
+                        // @ts-expect-error name works but not in the types it seems
+                        return draw?.results[0].name;
                     }
                 }
             }
         } else {
             const draw = await table?.draw({ displayChat: false });
             if (draw && draw?.results[0]) {
-                // @ts-expect-error getChatText is deprecated and not in types
-                return draw?.results[0].getChatText();
+                // @ts-expect-error name works but not in the types it seems
+                return draw?.results[0].name;
             }
         }
         return <string>fixSetting;
@@ -186,6 +186,7 @@ export async function generateNameFromTraits(token: TokenDocumentPF2e<ScenePF2e>
                                 return game.i18n.localize("PF2E.NPC.Adjustment.WeakLabel");
                         }
                     } else if (TRAITS.SIZES.includes(lowercaseTrait)) {
+                        // @ts-ignore
                         return game.i18n.localize(CONFIG.PF2E.actorSizes[lowercaseTrait]);
                     }
 

@@ -7,7 +7,9 @@ function readJson(path: string) {
     try {
         return JSON.parse(fs.readFileSync(path, { encoding: "utf-8" }));
     } catch (error) {
-        throw new Error(`Failed to parse JSON file \`${path}\`: ${error instanceof Error ? error.message : String(error)}`);
+        throw new Error(
+            `Failed to parse JSON file \`${path}\`: ${error instanceof Error ? error.message : String(error)}`,
+        );
     }
 }
 
@@ -27,6 +29,9 @@ export default defineConfig(({ command }) => {
 
     return {
         publicDir: "static",
+        resolve: {
+            tsconfigPaths: true,
+        },
         define: {
             EN_JSON: JSON.stringify(EN_JSON),
             fu: "foundry.utils",
@@ -59,9 +64,6 @@ export default defineConfig(({ command }) => {
                     changeOrigin: true,
                 },
             },
-        },
-        resolve: {
-            tsconfigPaths: true,
         },
         plugins,
     };

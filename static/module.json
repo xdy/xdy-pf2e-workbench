@@ -1,423 +1,419 @@
 {
-  "title": "PF2e Workbench",
-  "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
-  "version": "6.35.7",
-  "id": "xdy-pf2e-workbench",
-  "compatibility": {
-    "minimum": "13.351",
-    "verified": "13.351",
-    "maximum": "13"
-  },
-  "relationships": {
-    "systems": [
-      {
-        "id": "pf2e",
-        "type": "system",
-        "compatibility": {
-          "minimum": "7.9.1"
-        }
-      },
-      {
-        "id": "sf2e",
-        "type": "system",
-        "compatibility": {
-          "minimum": "0.0.3"
-        }
-      }
-    ]
-  },
-  "esmodules": [
-    "xdy-pf2e-workbench.js"
-  ],
-  "scripts": [],
-  "styles": [
-    "xdy-pf2e-workbench.css"
-  ],
-  "socket": true,
-  "packFolders": [
-    {
-      "name": "PF2E Workbench",
-      "sorting": "m",
-      "color": "#5e0000",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "folders": [
-        {
-          "name": "PF2e Packs",
-          "sorting": "m",
-          "color": "#5e0000",
-          "ownership": {
-            "PLAYER": "OBSERVER",
-            "ASSISTANT": "OWNER"
-          },
-          "folders": [
+    "title": "PF2e Workbench",
+    "description": "Random and assorted collection of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
+    "version": "6.35.6",
+    "id": "xdy-pf2e-workbench",
+    "compatibility": {
+        "minimum": "14.360",
+        "verified": "14.360",
+        "maximum": "14"
+    },
+    "relationships": {
+        "systems": [
             {
-              "name": "Internal, do not import",
-              "sorting": "m",
-              "color": "#5e0000",
-              "ownership": {
-                "PLAYER": "LIMITED",
-                "ASSISTANT": "OWNER"
-              },
-              "packs": [
-                "asymonous-benefactor-macros-internal",
-                "xdy-internal-utility-macros",
-                "xdy-internal-tables"
-              ]
-            }
-          ],
-          "packs": [
-            "asymonous-benefactor-macros",
-            "xdy-customizable-macros",
-            "xdy-pf2e-workbench-items",
-            "xdy-pf2e-workbench-macros"
-          ]
-        },
-        {
-          "name": "SF2e Packs",
-          "sorting": "m",
-          "color": "#0000aa",
-          "ownership": {
-            "PLAYER": "OBSERVER",
-            "ASSISTANT": "OWNER"
-          },
-          "folders": [
+                "id": "pf2e",
+                "type": "system",
+                "compatibility": {
+                    "minimum": "8.0.0"
+                }
+            },
             {
-              "name": "Internal, do not import",
-              "sorting": "m",
-              "color": "#0000aa",
-              "ownership": {
-                "PLAYER": "LIMITED",
-                "ASSISTANT": "OWNER"
-              },
-              "packs": [
-                "asymonous-benefactor-macros-internal-sf2e",
-                "xdy-internal-utility-macros-sf2e",
-                "xdy-internal-tables-sf2e"
-              ]
+                "id": "sf2e",
+                "type": "system",
+                "compatibility": {
+                    "minimum": "1.0.0"
+                }
             }
-          ],
-          "packs": [
-            "asymonous-benefactor-macros-sf2e",
-            "xdy-customizable-macros-sf2e",
-            "xdy-pf2e-workbench-items-sf2e",
-            "xdy-pf2e-workbench-macros-sf2e"
-          ]
+        ]
+    },
+    "esmodules": ["xdy-pf2e-workbench.js"],
+    "scripts": [],
+    "styles": ["xdy-pf2e-workbench.css"],
+    "socket": true,
+    "packFolders": [
+        {
+            "name": "PF2E Workbench",
+            "sorting": "m",
+            "color": "#5e0000",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "folders": [
+                {
+                    "name": "PF2e Packs",
+                    "sorting": "m",
+                    "color": "#5e0000",
+                    "ownership": {
+                        "PLAYER": "OBSERVER",
+                        "ASSISTANT": "OWNER"
+                    },
+                    "folders": [
+                        {
+                            "name": "Internal, do not import",
+                            "sorting": "m",
+                            "color": "#5e0000",
+                            "ownership": {
+                                "PLAYER": "LIMITED",
+                                "ASSISTANT": "OWNER"
+                            },
+                            "packs": [
+                                "asymonous-benefactor-macros-internal",
+                                "xdy-internal-utility-macros",
+                                "xdy-internal-tables"
+                            ]
+                        }
+                    ],
+                    "packs": [
+                        "asymonous-benefactor-macros",
+                        "xdy-customizable-macros",
+                        "xdy-pf2e-workbench-items",
+                        "xdy-pf2e-workbench-macros"
+                    ]
+                },
+                {
+                    "name": "SF2e Packs",
+                    "sorting": "m",
+                    "color": "#0000aa",
+                    "ownership": {
+                        "PLAYER": "OBSERVER",
+                        "ASSISTANT": "OWNER"
+                    },
+                    "folders": [
+                        {
+                            "name": "Internal, do not import",
+                            "sorting": "m",
+                            "color": "#0000aa",
+                            "ownership": {
+                                "PLAYER": "LIMITED",
+                                "ASSISTANT": "OWNER"
+                            },
+                            "packs": [
+                                "asymonous-benefactor-macros-internal-sf2e",
+                                "xdy-internal-utility-macros-sf2e",
+                                "xdy-internal-tables-sf2e"
+                            ]
+                        }
+                    ],
+                    "packs": [
+                        "asymonous-benefactor-macros-sf2e",
+                        "xdy-customizable-macros-sf2e",
+                        "xdy-pf2e-workbench-items-sf2e",
+                        "xdy-pf2e-workbench-macros-sf2e"
+                    ]
+                }
+            ],
+            "packs": []
         }
-      ],
-      "packs": []
-    }
-  ],
-  "packs": [
-    {
-      "name": "asymonous-benefactor-macros",
-      "label": "Symon-provided macros (asymonous-benefactor-macros)",
-      "system": "pf2e",
-      "path": "packs/generated/asymonous-benefactor-macros",
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "asymonous-benefactor-macros-internal",
-      "label": "asymonous-benefactor-macros-internal, do not import",
-      "system": "pf2e",
-      "path": "packs/generated/asymonous-benefactor-macros-internal",
-      "ownership": {
-        "PLAYER": "LIMITED",
-        "ASSISTANT": "OWNER"
-      },
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
-    },
-    {
-      "name": "xdy-customizable-macros",
-      "label": "PF2e Workbench Customizable Macros (xdy-customizable-macros)",
-      "system": "pf2e",
-      "path": "packs/generated/xdy-customizable-macros",
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "LIMITED",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "xdy-pf2e-workbench-items",
-      "label": "PF2e Workbench Items (xdy-pf2e-workbench-items)",
-      "system": "pf2e",
-      "path": "packs/xdy-pf2e-workbench-items",
-      "type": "Item",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "xdy-pf2e-workbench-macros",
-      "label": "PF2e Workbench Macros (xdy-pf2e-workbench-macros)",
-      "system": "pf2e",
-      "path": "packs/xdy-pf2e-workbench-macros",
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "xdy-internal-utility-macros",
-      "label": "xdy-internal-utility-macros, do not import",
-      "system": "pf2e",
-      "path": "packs/generated/xdy-internal-utility-macros",
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "LIMITED",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "xdy-internal-tables",
-      "label": "xdy-internal-tables, do not import",
-      "system": "pf2e",
-      "path": "packs/xdy-internal-tables",
-      "type": "RollTable",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "LIMITED",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "asymonous-benefactor-macros-sf2e",
-      "label": "Symon-provided macros (asymonous-benefactor-macros) (sf2e)",
-      "system": "sf2e",
-      "path": "packs/generated/asymonous-benefactor-macros-sf2e",
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "asymonous-benefactor-macros-internal-sf2e",
-      "label": "asymonous-benefactor-macros-internal, do not import (sf2e)",
-      "system": "sf2e",
-      "path": "packs/generated/asymonous-benefactor-macros-internal-sf2e",
-      "ownership": {
-        "PLAYER": "LIMITED",
-        "ASSISTANT": "OWNER"
-      },
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
-    },
-    {
-      "name": "xdy-customizable-macros-sf2e",
-      "label": "PF2e Workbench Customizable Macros (xdy-customizable-macros) (sf2e)",
-      "system": "sf2e",
-      "path": "packs/generated/xdy-customizable-macros-sf2e",
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "LIMITED",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "xdy-pf2e-workbench-items-sf2e",
-      "label": "PF2e Workbench Items (xdy-pf2e-workbench-items) (sf2e)",
-      "system": "sf2e",
-      "path": "packs/xdy-pf2e-workbench-items-sf2e",
-      "type": "Item",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "xdy-pf2e-workbench-macros-sf2e",
-      "label": "PF2e Workbench Macros (xdy-pf2e-workbench-macros) (sf2e)",
-      "system": "sf2e",
-      "path": "packs/xdy-pf2e-workbench-macros-sf2e",
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "xdy-internal-utility-macros-sf2e",
-      "label": "xdy-internal-utility-macros, do not import (sf2e)",
-      "system": "sf2e",
-      "path": "packs/generated/xdy-internal-utility-macros-sf2e",
-      "type": "Macro",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "LIMITED",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "xdy-internal-tables-sf2e",
-      "label": "xdy-internal-tables, do not import (sf2e)",
-      "system": "sf2e",
-      "path": "packs/xdy-internal-tables-sf2e",
-      "type": "RollTable",
-      "flags": {},
-      "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
-      "ownership": {
-        "PLAYER": "LIMITED",
-        "ASSISTANT": "OWNER"
-      }
-    }
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json",
-      "flags": {}
-    },
-    {
-      "lang": "fr",
-      "name": "Français",
-      "path": "lang/fr.json",
-      "flags": {}
-    },
-    {
-      "lang": "pt-BR",
-      "name": "Português (Brasil)",
-      "path": "lang/pt-BR.json"
-    },
-    {
-      "lang": "cn",
-      "name": "中文（简体）",
-      "path": "lang/cn.json"
-    },
-    {
-      "lang": "de",
-      "name": "Deutsch",
-      "path": "lang/de.json"
-    },
-    {
-      "lang": "zh-Hant",
-      "name": "漢語（正體字）",
-      "path": "lang/zh_Hant.json"
-    },
-    {
-      "lang": "zh-tw",
-      "name": "正體中文",
-      "path": "lang/zh_Hant.json"
-    },
-    {
-      "lang": "es",
-      "name": "Español",
-      "path": "lang/es.json"
-    },
-    {
-      "lang": "pl",
-      "name": "polski",
-      "path": "lang/pl.json"
-    },
-    {
-      "lang": "ko",
-      "name": "Korean",
-      "path": "lang/ko.json"
-    }
-  ],
-  "authors": [
-    {
-      "name": "Jonas Karlsson (xdy)",
-      "url": "https://gnu.xdy.se/home",
-      "discord": "xdy#3735",
-      "flags": {}
-    }
-  ],
-  "url": "https://github.com/xdy/xdy-pf2e-workbench/",
-  "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json",
-  "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/download/v6.35.7/xdy-pf2e-workbench.zip",
-  "license": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/LICENSE.md",
-  "readme": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/README.md",
-  "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
-  "changelog": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/CHANGELOG.md",
-  "media": [
-    {
-      "type": "cover",
-      "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/static/assets/media/pf2e_workbench_cover_compressed.webp",
-      "caption": "PF2e Workbench",
-      "loop": false,
-      "flags": {}
-    },
-    {
-      "type": "setup",
-      "caption": "PF2e Workbench",
-      "thumbnail": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
-    }
-  ],
-  "flags": {
-    "media": [
-      {
-        "type": "cover",
-        "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/static/assets/media/pf2e_workbench_cover_compressed.webp",
-        "caption": "PF2e Workbench"
-      }
     ],
-    "xdy-pf2e-workbench": {
-      "pf2e-homebrew": {
-        "creatureTraits": {
-          "xdy-pf2e-housepatched": {
-            "label": "(HOUSEPATCHED)",
-            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
-          }
+    "packs": [
+        {
+            "name": "asymonous-benefactor-macros",
+            "label": "Symon-provided macros (asymonous-benefactor-macros)",
+            "system": "pf2e",
+            "path": "packs/generated/asymonous-benefactor-macros",
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            }
         },
-        "equipmentTraits": {
-          "xdy-pf2e-housepatched": {
-            "label": "(HOUSEPATCHED)",
-            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
-          }
+        {
+            "name": "asymonous-benefactor-macros-internal",
+            "label": "asymonous-benefactor-macros-internal, do not import",
+            "system": "pf2e",
+            "path": "packs/generated/asymonous-benefactor-macros-internal",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
         },
-        "featTraits": {
-          "xdy-pf2e-housepatched": {
-            "label": "(HOUSEPATCHED)",
-            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
-          }
+        {
+            "name": "xdy-customizable-macros",
+            "label": "PF2e Workbench Customizable Macros (xdy-customizable-macros)",
+            "system": "pf2e",
+            "path": "packs/generated/xdy-customizable-macros",
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            }
         },
-        "spellTraits": {
-          "xdy-pf2e-housepatched": {
-            "label": "(HOUSEPATCHED)",
-            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
-          }
+        {
+            "name": "xdy-pf2e-workbench-items",
+            "label": "PF2e Workbench Items (xdy-pf2e-workbench-items)",
+            "system": "pf2e",
+            "path": "packs/xdy-pf2e-workbench-items",
+            "type": "Item",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            }
         },
-        "weaponTraits": {
-          "xdy-pf2e-housepatched": {
-            "label": "(HOUSEPATCHED)",
-            "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
-          }
+        {
+            "name": "xdy-pf2e-workbench-macros",
+            "label": "PF2e Workbench Macros (xdy-pf2e-workbench-macros)",
+            "system": "pf2e",
+            "path": "packs/xdy-pf2e-workbench-macros",
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            }
+        },
+        {
+            "name": "xdy-internal-utility-macros",
+            "label": "xdy-internal-utility-macros, do not import",
+            "system": "pf2e",
+            "path": "packs/generated/xdy-internal-utility-macros",
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            }
+        },
+        {
+            "name": "xdy-internal-tables",
+            "label": "xdy-internal-tables, do not import",
+            "system": "pf2e",
+            "path": "packs/xdy-internal-tables",
+            "type": "RollTable",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            }
+        },
+        {
+            "name": "asymonous-benefactor-macros-sf2e",
+            "label": "Symon-provided macros (asymonous-benefactor-macros) (sf2e)",
+            "system": "sf2e",
+            "path": "packs/generated/asymonous-benefactor-macros-sf2e",
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            }
+        },
+        {
+            "name": "asymonous-benefactor-macros-internal-sf2e",
+            "label": "asymonous-benefactor-macros-internal, do not import (sf2e)",
+            "system": "sf2e",
+            "path": "packs/generated/asymonous-benefactor-macros-internal-sf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
+        },
+        {
+            "name": "xdy-customizable-macros-sf2e",
+            "label": "PF2e Workbench Customizable Macros (xdy-customizable-macros) (sf2e)",
+            "system": "sf2e",
+            "path": "packs/generated/xdy-customizable-macros-sf2e",
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            }
+        },
+        {
+            "name": "xdy-pf2e-workbench-items-sf2e",
+            "label": "PF2e Workbench Items (xdy-pf2e-workbench-items) (sf2e)",
+            "system": "sf2e",
+            "path": "packs/xdy-pf2e-workbench-items-sf2e",
+            "type": "Item",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            }
+        },
+        {
+            "name": "xdy-pf2e-workbench-macros-sf2e",
+            "label": "PF2e Workbench Macros (xdy-pf2e-workbench-macros) (sf2e)",
+            "system": "sf2e",
+            "path": "packs/xdy-pf2e-workbench-macros-sf2e",
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            }
+        },
+        {
+            "name": "xdy-internal-utility-macros-sf2e",
+            "label": "xdy-internal-utility-macros, do not import (sf2e)",
+            "system": "sf2e",
+            "path": "packs/generated/xdy-internal-utility-macros-sf2e",
+            "type": "Macro",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            }
+        },
+        {
+            "name": "xdy-internal-tables-sf2e",
+            "label": "xdy-internal-tables, do not import (sf2e)",
+            "system": "sf2e",
+            "path": "packs/xdy-internal-tables-sf2e",
+            "type": "RollTable",
+            "flags": {},
+            "banner": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            }
         }
-      }
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json",
+            "flags": {}
+        },
+        {
+            "lang": "fr",
+            "name": "Français",
+            "path": "lang/fr.json",
+            "flags": {}
+        },
+        {
+            "lang": "pt-BR",
+            "name": "Português (Brasil)",
+            "path": "lang/pt-BR.json"
+        },
+        {
+            "lang": "cn",
+            "name": "中文（简体）",
+            "path": "lang/cn.json"
+        },
+        {
+            "lang": "de",
+            "name": "Deutsch",
+            "path": "lang/de.json"
+        },
+        {
+            "lang": "zh-Hant",
+            "name": "漢語（正體字）",
+            "path": "lang/zh_Hant.json"
+        },
+        {
+            "lang": "zh-tw",
+            "name": "正體中文",
+            "path": "lang/zh_Hant.json"
+        },
+        {
+            "lang": "es",
+            "name": "Español",
+            "path": "lang/es.json"
+        },
+        {
+            "lang": "pl",
+            "name": "polski",
+            "path": "lang/pl.json"
+        },
+        {
+            "lang": "ko",
+            "name": "Korean",
+            "path": "lang/ko.json"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Jonas Karlsson (xdy)",
+            "url": "https://gnu.xdy.se/home",
+            "discord": "xdy#3735",
+            "flags": {}
+        }
+    ],
+    "url": "https://github.com/xdy/xdy-pf2e-workbench/",
+    "manifest": "https://github.com/xdy/xdy-pf2e-workbench/releases/latest/download/module.json",
+    "download": "https://github.com/xdy/xdy-pf2e-workbench/releases/download/v6.35.6/xdy-pf2e-workbench.zip",
+    "license": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/LICENSE.md",
+    "readme": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/README.md",
+    "bugs": "https://github.com/xdy/xdy-pf2e-workbench/issues",
+    "changelog": "https://github.com/xdy/xdy-pf2e-workbench/blob/main/CHANGELOG.md",
+    "media": [
+        {
+            "type": "cover",
+            "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/static/assets/media/pf2e_workbench_cover_compressed.webp",
+            "caption": "PF2e Workbench",
+            "loop": false,
+            "flags": {}
+        },
+        {
+            "type": "setup",
+            "caption": "PF2e Workbench",
+            "thumbnail": "modules/xdy-pf2e-workbench/assets/media/pf2e_workbench_cover_compressed.webp"
+        }
+    ],
+    "flags": {
+        "media": [
+            {
+                "type": "cover",
+                "url": "https://raw.githubusercontent.com/xdy/xdy-pf2e-workbench/main/static/assets/media/pf2e_workbench_cover_compressed.webp",
+                "caption": "PF2e Workbench"
+            }
+        ],
+        "xdy-pf2e-workbench": {
+            "pf2e-homebrew": {
+                "creatureTraits": {
+                    "xdy-pf2e-housepatched": {
+                        "label": "(HOUSEPATCHED)",
+                        "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+                    }
+                },
+                "equipmentTraits": {
+                    "xdy-pf2e-housepatched": {
+                        "label": "(HOUSEPATCHED)",
+                        "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+                    }
+                },
+                "featTraits": {
+                    "xdy-pf2e-housepatched": {
+                        "label": "(HOUSEPATCHED)",
+                        "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+                    }
+                },
+                "spellTraits": {
+                    "xdy-pf2e-housepatched": {
+                        "label": "(HOUSEPATCHED)",
+                        "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+                    }
+                },
+                "weaponTraits": {
+                    "xdy-pf2e-housepatched": {
+                        "label": "(HOUSEPATCHED)",
+                        "description": "Houseruled using the PF2e Workbench's Housepatcher feature."
+                    }
+                }
+            }
+        }
     }
-  }
 }

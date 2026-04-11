@@ -41,7 +41,6 @@ function shouldBeChecked(message: ChatMessagePF2e): boolean {
         message.actor &&
         shouldIHandleThis(message.actor) &&
         message.flags &&
-        game.combats.active &&
         message.author &&
         ["spell-attack-roll", "attack-roll", "skill-check"].includes(flag) &&
         traits?.some((t) => t === "attack")
@@ -56,6 +55,7 @@ function getAttackReason(token: TokenDocumentPF2e, actions: string[]): string {
         hasNoHp: `${MODULENAME}.SETTINGS.reminderCannotAttack.hasNoHp`,
         defeated: `${MODULENAME}.SETTINGS.reminderCannotAttack.defeated`,
         unconscious: `${MODULENAME}.SETTINGS.reminderCannotAttack.unconscious`,
+        dying: `${MODULENAME}.SETTINGS.reminderCannotAttack.dying`,
         petrified: `${MODULENAME}.SETTINGS.reminderCannotAttack.petrified`,
         restrained: `${MODULENAME}.SETTINGS.reminderCannotAttack.restrained`,
     };
@@ -64,6 +64,8 @@ function getAttackReason(token: TokenDocumentPF2e, actions: string[]): string {
         return conditionReasons.dead;
     } else if ((actor?.hitPoints?.value ?? 0) <= 0 && !ignoreDeadEidolon(actor) && actor?.type !== "hazard") {
         return conditionReasons.hasNoHp;
+    } else if (actor?.hasCondition("dying") && !ignoreDeadEidolon(actor)) {
+        return conditionReasons.dying;
     } else if (game.combats.active?.combatant?.token === token && game.combats.active.combatant.defeated) {
         return conditionReasons.defeated;
     } else if (actor?.hasCondition("unconscious")) {

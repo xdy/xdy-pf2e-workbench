@@ -427,7 +427,7 @@ export async function createTokenHook(token: TokenDocumentPF2e, ..._args: unknow
         token.actor.items &&
         token.actor.items.size > 0
     ) {
-        await mystifyNpcItems(token.actor.items);
+        await mystifyNpcItems(token.actor);
     }
 }
 

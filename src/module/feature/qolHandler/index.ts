@@ -1,8 +1,8 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { isActuallyDamageRoll } from "../../utils.js";
-import { ChatMessagePF2e, PhysicalItemPF2e } from "foundry-pf2e";
+import { ChatMessagePF2e, CreaturePF2e, PhysicalItemPF2e, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 
-export function chatCardDescriptionCollapse(html: HTMLElement) {
+export function chatCardDescriptionCollapse(html: HTMLElement): void {
     if (!(html instanceof HTMLElement)) {
         return;
     }
@@ -11,6 +11,7 @@ export function chatCardDescriptionCollapse(html: HTMLElement) {
     if (hasCardContent.length > 0) {
         const effectItem = game.i18n.localize(`${MODULENAME}.effectItem`);
         if (String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent")) === "collapsedDefault") {
+            // @ts-expect-error TODO fix
             hasCardContent.forEach((content) => (content["style"].display = "none"));
             const cardContentSiblings = (hasCardContent[0] as HTMLElement).parentElement?.children;
             if (cardContentSiblings?.[0]) {
@@ -70,18 +71,20 @@ function handleRollNoteToggling(html: HTMLElement) {
     let note;
     const hasNote = html.querySelectorAll(".roll-note");
     for (note of Array.from(hasNote)) {
+        // @ts-expect-error TODO fix
         note.style.display = note.style.display === "none" ? "block" : "none";
     }
     toggleEyes(html);
 }
 
-export function chatActionCardDescriptionCollapse(html: HTMLElement) {
+export function chatActionCardDescriptionCollapse(html: HTMLElement): void {
     const hasAction = html.querySelectorAll(".action");
     if (hasAction.length > 0) {
         const rollNotes = html.querySelectorAll(".roll-note");
         if (rollNotes.length > 0) {
             if (String(game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent")) === "collapsedDefault") {
                 for (const note of Array.from(rollNotes)) {
+                    // @ts-expect-error TODO fix
                     note["style"].display = "none";
                 }
 
@@ -103,11 +106,12 @@ export function chatActionCardDescriptionCollapse(html: HTMLElement) {
 
 const eye = ' <i style="font-size: small; max-width: min-content" class="fa-solid fa-eye-slash">';
 
-export function chatAttackCardDescriptionCollapse(html: HTMLElement) {
+export function chatAttackCardDescriptionCollapse(html: HTMLElement): void {
     const hasRollNote = html.querySelectorAll(".roll-note");
     if (hasRollNote.length > 0) {
         if (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault") {
             for (const note of hasRollNote) {
+                // @ts-ignore
                 note["style"].display = "none";
             }
 
@@ -141,7 +145,7 @@ Hooks.on("createChatMessage", (message: ChatMessagePF2e) => {
     }
 });
 
-export function damageCardExpand(message: ChatMessagePF2e, html: HTMLElement, expandDmg: string) {
+export function damageCardExpand(message: ChatMessagePF2e, html: HTMLElement, expandDmg: string): void {
     const diceTooltips = html.querySelectorAll(".dice-tooltip");
 
     // If no dice tooltips, nothing to do
@@ -181,11 +185,11 @@ export function damageCardExpand(message: ChatMessagePF2e, html: HTMLElement, ex
  * @param {number} multiplier - The multiplier to apply to the minimum level. Default is obtained from a game setting.
  */
 export async function mystifyNpcItems(
-    actor,
+    actor: CreaturePF2e<TokenDocumentPF2e<ScenePF2e | null> | null>,
     minimumRarity: string = String(
         game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater"),
     ),
-    usingPartyLevel: any = game.settings.get(
+    usingPartyLevel = game.settings.get(
         MODULENAME,
         "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel",
     ),
@@ -195,7 +199,7 @@ export async function mystifyNpcItems(
     multiplier: number = Number.parseFloat(
         String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier")),
     ),
-) {
+): Promise<void> {
     // Kind of ugly, but, feeling lazy...
     if (usingPartyLevel) {
         game.settings.set(

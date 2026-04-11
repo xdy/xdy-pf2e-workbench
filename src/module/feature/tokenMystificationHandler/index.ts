@@ -5,6 +5,7 @@ import { generateNameFromTraits } from "./traits-name-generator.js";
 import { heroes, logError } from "../../utils.js";
 import * as systems from "../../utils/systems.ts";
 
+// @ts-expect-error TODO fix
 function shouldSkipRandomProperty(token) {
     return (
         game.settings.get(MODULENAME, "npcMystifierRandomPropertySkipForUnique") &&
@@ -12,6 +13,7 @@ function shouldSkipRandomProperty(token) {
     );
 }
 
+// @ts-expect-error TODO fix
 function hasRandomProperty(token) {
     switch (mystifyRandomPropertyType) {
         case "numberPostfix":
@@ -38,8 +40,8 @@ async function fetchRandomWordPrefix(): Promise<string> {
                     const document = await pack?.getDocument(id);
                     const draw = await (<RollTable>document).draw({ displayChat: false });
                     if (draw && draw?.results[0]) {
-                        // @ts-expect-error getChatText is deprecated and not in types
-                        return draw?.results[0].getChatText();
+                        // @ts-expect-error name works but not in the types it seems
+                        return draw?.results[0].name;
                     } else {
                         return <string>fixSetting;
                     }
@@ -48,8 +50,8 @@ async function fetchRandomWordPrefix(): Promise<string> {
         }
         const draw = await table?.draw({ displayChat: false });
         if (draw && draw?.results[0]) {
-            // @ts-expect-error getChatText is deprecated and not in types
-            return draw?.results[0].getChatText();
+            // @ts-expect-error name works but not in the types it seems
+            return draw?.results[0].name;
         } else {
             return <string>fixSetting;
         }
@@ -170,6 +172,7 @@ export async function tokenCreateMystification(token: any): Promise<void> {
     }
 }
 
+// @ts-expect-error TODO fix
 export function isTokenMystified(token): boolean {
     const tokenName = token?.name;
     const prototypeTokenName = token?.actor?.prototypeToken.name ?? "";

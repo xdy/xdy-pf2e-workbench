@@ -1,3 +1,4 @@
 {
-  "dataPath": "/absolute/path/to/your/FoundryVTT/Data"
+    "dataPath": "/absolute/path/to/your/FoundryVTT/Data",
+    "installPath": "/Users/YourUsername/Applications/FoundryVTT"
 }

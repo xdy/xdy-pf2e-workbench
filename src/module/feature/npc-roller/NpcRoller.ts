@@ -35,7 +35,9 @@ export function enableNpcRollerButton(_app: unknown, html: HTMLElement): void {
     }
 }
 
-class NpcRoller extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
+export class NpcRoller extends foundry.applications.api.HandlebarsApplicationMixin(
+    foundry.applications.api.ApplicationV2,
+) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     static override DEFAULT_OPTIONS: Record<string, any> = {
         id: "xdy-pf2e-workbench-npc-roller",
@@ -75,17 +77,12 @@ class NpcRoller extends foundry.applications.api.HandlebarsApplicationMixin(foun
         },
     };
 
-    #boundOnControlToken!: () => void;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public constructor(options?: any) {
         super(options);
-        this.#boundOnControlToken = this.#onControlToken.bind(this);
-        Hooks.on("controlToken", this.#boundOnControlToken);
     }
 
     override async _prepareContext(options?: object): Promise<object> {
-        // @ts-expect-error TODO Fix typing
+        // @ts-expect-error TODO fix
         const context = await super._prepareContext(options);
         return foundry.utils.mergeObject(context, {
             data: {
@@ -96,7 +93,7 @@ class NpcRoller extends foundry.applications.api.HandlebarsApplicationMixin(foun
     }
 
     override async _preparePartContext(partId: string, context: object, options?: object): Promise<object> {
-        // @ts-expect-error TODO Fix typing
+        // @ts-expect-error TODO fix
         context = await super._preparePartContext(partId, context, options);
         if (partId === "index") {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -105,14 +102,10 @@ class NpcRoller extends foundry.applications.api.HandlebarsApplicationMixin(foun
         return context;
     }
 
-    // @ts-expect-error TODO Fix typing
+    // @ts-expect-error TODO fix
     override _onRender(_context: object, _options: object): void {
-        const tabButtons = Array.from(
-            this.element.querySelectorAll<HTMLElement>("[role='tab'][data-tab]"),
-        );
-        const tabPanels = Array.from(
-            this.element.querySelectorAll<HTMLElement>(".tab[data-tab]:not([role='tab'])"),
-        );
+        const tabButtons = Array.from(this.element.querySelectorAll<HTMLElement>("[role='tab'][data-tab]"));
+        const tabPanels = Array.from(this.element.querySelectorAll<HTMLElement>(".tab[data-tab]:not([role='tab'])"));
         tabButtons.forEach((btn) => {
             btn.addEventListener("click", () => {
                 const tabId = btn.dataset.tab!;
@@ -127,17 +120,17 @@ class NpcRoller extends foundry.applications.api.HandlebarsApplicationMixin(foun
             });
         });
 
-        this.element.querySelectorAll("button.rollable").forEach((btn) =>
-            btn.addEventListener("click", (event) => this.#handleRollButtonClick(event)),
-        );
+        this.element
+            .querySelectorAll("button.rollable")
+            .forEach((btn) => btn.addEventListener("click", (event) => this.#handleRollButtonClick(event)));
     }
 
-    override _onClose(_options?: object): void {
-        Hooks.off("controlToken", this.#boundOnControlToken);
-    }
-
-    #onControlToken(): void {
-        this.render({ force: true });
+    static onControlToken(): void {
+        // @ts-expect-error TODO fix
+        const roller = Object.values(ui.windows).find((w) => w.id === "xdy-pf2e-workbench-npc-roller") as NpcRoller;
+        if (roller) {
+            roller.render({ force: true });
+        }
     }
 
     async #handleRollButtonClick(event: Event): Promise<void> {
@@ -158,6 +151,7 @@ class NpcRoller extends foundry.applications.api.HandlebarsApplicationMixin(foun
             } else {
                 roll = Roll;
             }
+            // @ts-expect-error TODO fix
             await new roll(formulaString).toMessage(
                 {
                     speaker: ChatMessage.getSpeaker({ token: <any>token?.document }),
@@ -165,7 +159,7 @@ class NpcRoller extends foundry.applications.api.HandlebarsApplicationMixin(foun
                     whisper: ChatMessage.getWhisperRecipients("GM").map((u) => u.id),
                 },
                 {
-                    rollMode: secret ? CONST.DICE_ROLL_MODES.PRIVATE : game.settings.get("core", "rollMode"),
+                    messageMode: secret ? CONST.DICE_ROLL_MODES.PRIVATE : game.settings.get("core", "messageMode"),
                     create: true,
                 },
             );

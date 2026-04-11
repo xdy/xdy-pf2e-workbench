@@ -5,12 +5,12 @@ import { moveOnZeroHP } from "../initiativeHandler/index.js";
 import * as systems from "../../utils/systems.ts";
 
 export function dyingHandlingPreUpdateActorHook(
-    actor,
+    actor: any,
     update: Record<string, string>,
     currentActorHp: number,
     updateHp: number,
     autoGainDying: string,
-) {
+): void {
     const automaticMove = String(game.settings.get(MODULENAME, "enableAutomaticMove"));
     const automoveIfZeroHP =
         game.combat &&
@@ -167,9 +167,9 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
 export function handleDying(
     dyingCounter: number,
     originalDyingCounter: number,
-    actor,
-    isDefeated: any = actor.combatant?.defeated,
-) {
+    actor: any,
+    isDefeated = actor.combatant?.defeated,
+): void {
     // Can't await, so do the math.
     const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !isDefeated;
     const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !isDefeated;
@@ -204,18 +204,25 @@ export function handleDying(
                 });
             });
     } else {
-        actor.decreaseCondition("dying", { forceRemove: true }).then(() => {
-            return actor
+        const dyingCondition = actor.getCondition("dying");
+        if (dyingCondition) {
+            actor.decreaseCondition("dying", { forceRemove: true }).then(() => {
+                return actor
+                    .unsetFlag(MODULENAME, "dyingLastApplied")
+                    .then(() => console.log("dyingLastApplied cleared because not dying"));
+            });
+        } else {
+            actor
                 .unsetFlag(MODULENAME, "dyingLastApplied")
-                .then(() => console.log("dyingLastApplied cleared because not dying"));
-        });
+                .then(() => console.log("dyingLastApplied cleared because dying already removed"));
+        }
     }
 }
 
 export async function autoRemoveDyingAtGreaterThanZeroHp(
     actor: ActorPF2e,
     hpAboveZero: boolean,
-    autoRemoveDying,
+    autoRemoveDying: string,
 ): Promise<boolean> {
     const dying = actor.getCondition("dying");
     if (shouldIHandleThis(actor) && dying && !dying.isLocked && hpAboveZero) {
@@ -386,7 +393,7 @@ export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], 
 }
 
 export async function handleDyingOnZeroHP(
-    actor,
+    actor: any,
     update: Record<string, string>,
     hp: number,
     updateHp: number,
@@ -463,10 +470,10 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
             numbToDeath: any = false,
             numbToDeathUsed: any = false;
         if (items) {
-            bounceBack = items.find((feat) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
+            bounceBack = items.find((feat: { slug: string }) => feat.slug === "bounce-back"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1441
             bounceBackUsed = actor.itemTypes.effect.find((effect) => effect.slug === "bounce-back-used") ?? false;
 
-            numbToDeath = items.find((feat) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
+            numbToDeath = items.find((feat: { slug: string }) => feat.slug === "numb-to-death"); // TODO https://2e.aonprd.com/Feats.aspx?ID=1182
             numbToDeathUsed = actor.itemTypes.effect.find((effect) => effect.slug === "numb-to-death-used") ?? false;
         }
         const name = `${actor.token?.name ?? actor.name}`;

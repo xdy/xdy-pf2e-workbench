@@ -99,12 +99,12 @@ export function createRemainingTimeMessage(remainingMinutes: number): void {
     const message =
         remainingMinutes > 0
             ? game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.willBeResetIn`, {
-                remainingMinutes: remainingMinutes,
-                time: new Date(Date.now() + remainingMinutes * ONE_MINUTE_IN_MS).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                }),
-            })
+                  remainingMinutes: remainingMinutes,
+                  time: new Date(Date.now() + remainingMinutes * ONE_MINUTE_IN_MS).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                  }),
+              })
             : game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.timerStopped`);
     sendMessage(message, [game.user.id]);
 }
@@ -145,7 +145,7 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
         const submitTooltip = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`);
         const stopTooltip = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noTimerLabel`);
         const dialogWidth = 375;
-        const dialogHeight = 660;
+        const dialogHeight = 785;
 
         const renderHookId = Hooks.on("renderDialogV2", (app: foundry.applications.api.DialogV2) => {
             if (!app.options.window.contentClasses?.includes("hero-point-handler-window")) {
@@ -335,8 +335,7 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
         stopShortLabel: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.stopShortLabel`),
     };
 
-    // @ts-expect-error TODO Fix typing
-    return renderTemplate(getHeroPointHandlerTemplatePath(), templateData);
+    return foundry.applications.handlebars.renderTemplate(getHeroPointHandlerTemplatePath(), templateData);
 }
 
 export function calcRemainingMinutes(useDefault: boolean): number {
@@ -344,9 +343,9 @@ export function calcRemainingMinutes(useDefault: boolean): number {
     const savedMinutes = <number>game.user?.getFlag(MODULENAME, "heroPointHandler.remainingMinutes");
     const remainingMinutes: number = Math.clamp(
         savedMinutes ??
-        (useDefault
-            ? Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
-            : 0),
+            (useDefault
+                ? Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")))
+                : 0),
         0,
         Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes"))),
     );
@@ -436,16 +435,16 @@ function handleDialogResponse(element: ParentNode | null): number {
         return 0;
     }
 
-    const sessionStartEl = element.querySelector<HTMLInputElement>("input[name=\"sessionStart\"]:checked");
+    const sessionStartEl = element.querySelector<HTMLInputElement>('input[name="sessionStart"]:checked');
     const sessionStart = sessionStartEl ? sessionStartEl.value : "IGNORE";
 
-    const heroPointsEl = element.querySelector<HTMLInputElement>("input[name=\"heropoints\"]");
+    const heroPointsEl = element.querySelector<HTMLInputElement>('input[name="heropoints"]');
     const heroPoints = heroPointsEl ? Number.parseInt(heroPointsEl.value) : 1;
 
-    const actorIdEls = element.querySelectorAll<HTMLInputElement>("input[name=\"characters\"]:checked");
+    const actorIdEls = element.querySelectorAll<HTMLInputElement>('input[name="characters"]:checked');
     const actorIds: string[] = Array.from(actorIdEls).map((el) => el.value);
 
-    const remainingMinutesEl = element.querySelector<HTMLInputElement>("input[name=\"timerText\"]");
+    const remainingMinutesEl = element.querySelector<HTMLInputElement>('input[name="timerText"]');
     const maxMinutes = Number.parseInt(String(game.settings.get(MODULENAME, "heroPointHandlerDefaultTimeoutMinutes")));
     const remainingMinutes = Math.clamp(
         remainingMinutesEl ? Number.parseInt(remainingMinutesEl.value) || 0 : 0,
