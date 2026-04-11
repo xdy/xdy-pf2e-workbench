@@ -1,3 +1,17 @@
+# [7.0.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.7...v7.0.0) (2026-04-11)
+
+
+### Features
+
+* PF2e Workbench now requires Foundry v14.360 or later and one of PF2e version 8.0.0 or later or SF2e version 1.0.0 or later. ([164aef0](https://github.com/xdy/xdy-pf2e-workbench/commit/164aef0023397f9c96c8c827a5e480baa4effde7))
+
+
+### BREAKING CHANGES
+
+* PF2e Workbench now requires Foundry v14.360 or later and one of PF2e version 8.0.0 or later or SF2e version 1.0.0 or later.
+
+I'm sure there are bugs (other than the annoying double-removing dying that I'm sure I'll get around to figuring out one of these years... Or remove entirely... For now, just handle it manually) but, what I've tested Works For Me(tm).
+
 ## [6.35.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.6...v6.35.7) (2026-04-06)
 
 
