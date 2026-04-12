@@ -1,3 +1,10 @@
+## [7.0.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.1...v7.0.2) (2026-04-12)
+
+
+### Bug Fixes
+
+* Fix dying handling. Make async handling and logging more robust. Extract shared utilities. ([4d745f2](https://github.com/xdy/xdy-pf2e-workbench/commit/4d745f2c48b92ec1aa8ad23ee4d0a9af7a15ba82))
+
 ## [7.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.0...v7.0.1) (2026-04-12)
 
 
