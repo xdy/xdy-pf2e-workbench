@@ -1,3 +1,10 @@
+## [7.0.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.0...v7.0.1) (2026-04-12)
+
+
+### Bug Fixes
+
+* Scale hero point handler dialog height based on party members. Add an optional reason for individual hero points. ([d985da5](https://github.com/xdy/xdy-pf2e-workbench/commit/d985da569e1a150dae740443fe16addec8a85e8d))
+
 # [7.0.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v6.35.7...v7.0.0) (2026-04-11)
 
 
