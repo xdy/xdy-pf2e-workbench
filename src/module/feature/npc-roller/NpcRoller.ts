@@ -1,5 +1,6 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { SCALE_APP_DATA } from "../NPCScaleData.js";
+import { logWarn } from "../../utils.js";
+import SCALE_APP_DATA from "../npc-scale-data.json" with { type: "json" };
 
 export async function registerNpcRollerHandlebarsTemplates(): Promise<void> {
     await foundry.applications.handlebars.loadTemplates([
@@ -31,7 +32,7 @@ export function enableNpcRollerButton(_app: unknown, html: HTMLElement): void {
     if (footer) {
         footer.appendChild(button); // Append the button to the footer
     } else {
-        console.warn("enableNpcRollerButton: Footer element not found.");
+        logWarn("enableNpcRollerButton: Footer element not found.");
     }
 }
 

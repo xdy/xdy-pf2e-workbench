@@ -30,13 +30,6 @@ function isFirstGM(): boolean {
     return game.users.activeGM === game.user;
 }
 
-function myRandomId(): string {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    return Array.from(Array(16).keys())
-        .map(() => letters[Math.floor(Math.random() * letters.length)])
-        .join("");
-}
-
 function isActuallyDamageRoll(message: ChatMessagePF2e): boolean {
     // TODO Anything using this should probably hook into Hooks.call(`pf2e.damageRoll`, rollData) instead...
     const isPhysicalDamageroll =
@@ -51,7 +44,28 @@ function isActuallyDamageRoll(message: ChatMessagePF2e): boolean {
     );
 }
 
-export { shouldIHandleThisMessage, degreeOfSuccessWithRerollHandling, isFirstGM, myRandomId, isActuallyDamageRoll };
+/**
+ * Resolves the actor from a chat message's speaker, preferring the token's actor.
+ */
+function getActorFromMessage(message: ChatMessagePF2e): ActorPF2e | null {
+    const messageToken = canvas?.scene?.tokens.get(message.speaker.token as string);
+    return messageToken?.actor ?? game.actors?.get(message.speaker.actor as string) ?? null;
+}
+
+export {
+    shouldIHandleThisMessage,
+    degreeOfSuccessWithRerollHandling,
+    isFirstGM,
+    isActuallyDamageRoll,
+    getActorFromMessage,
+};
+
+/**
+ * Fire-and-forget a promise with error logging. Use instead of bare `.then()`.
+ */
+export function handleAsync(promise: Promise<unknown>, context: string): void {
+    promise.catch((error) => logError(`${MODULENAME} | ${context}:`, error));
+}
 
 export function logTrace(...args: unknown[]): void {
     log(0, ...args);

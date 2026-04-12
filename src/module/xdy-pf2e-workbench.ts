@@ -12,7 +12,7 @@ import { preloadTemplates } from "./preloadTemplates.js";
 import { registerWorkbenchKeybindings } from "./keybinds.js";
 import { ActorPF2e } from "foundry-pf2e";
 
-import { isFirstGM, logInfo } from "./utils.js";
+import { handleAsync, isFirstGM, logInfo } from "./utils.js";
 import * as systems from "./utils/systems.ts";
 import {
     enableNpcRollerButton,
@@ -39,7 +39,6 @@ import {
     renderActorSheetHook,
     renderChatMessageHook,
     renderTokenHUDHook,
-    updateItemHook,
 } from "./hooks.js";
 import { onScaleNPCContextHook } from "./feature/cr-scaler/NPCScalerSetup.js";
 import {
@@ -191,8 +190,6 @@ export function updateHooks(cleanSlate = false): void {
 
     handle("preCreateItem", dropHeldItemsOnBecomingUnconscious, preCreateItemHook);
 
-    handle("updateItem", false, updateItemHook);
-
     handle("deleteItem", giveWoundedWhenDyingRemoved || giveUnconsciousIfDyingRemovedAt0HP, deleteItemHook);
 
     handle("pf2e.systemReady", housepatcher !== "", pf2eSystemReadyHook, true);
@@ -266,9 +263,9 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     registerWorkbenchKeybindings();
 
     await preloadTemplates();
-    registerNpcRollerHandlebarsTemplates().then();
+    handleAsync(registerNpcRollerHandlebarsTemplates(), "registerNpcRollerHandlebarsTemplates");
 
-    registerBasicActionMacrosHandlebarsTemplates().then();
+    handleAsync(registerBasicActionMacrosHandlebarsTemplates(), "registerBasicActionMacrosHandlebarsTemplates");
 
     registerHandlebarsHelpers();
 
@@ -434,7 +431,7 @@ Hooks.once("ready", () => {
         resetHeroPoints: resetHeroPoints, // game.PF2eWorkbench.resetHeroPoints(1)
         addHeroPoints: addHeroPoints, // game.PF2eWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
         scaleNPCToLevelFromActor: scaleNPCToLevelFromActor, // game.PF2eWorkbench.scaleNPCToLevelFromActor(_token.actor.id, 24);
-        moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
+        moveSelectedAheadOfCurrent: moveSelectedAheadOfCurrent, // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantsByToken(_token.id)[0].id)
         doMystificationFromToken: doMystificationFromToken, // await game.PF2eWorkbench.doMystificationFromToken(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromToken(_token.id, false)
         generateNameFromTraitsFromTokenId: generateNameFromTraitsForToken, // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
         noOrSuccessfulFlatcheck: noOrSuccessfulFlatcheck, // await game.PF2eWorkbench.noOrSuccessfulFlatcheck(game.messages.get("messageId"))
@@ -534,7 +531,7 @@ function registerHandlebarsHelpers() {
 
     Handlebars.registerHelper("xdy_hasKey", function (context, key) {
         for (const prop of context) {
-            if (Object.getOwnPropertyDescriptor(prop, key)) {
+            if (Object.hasOwn(prop, key)) {
                 return true;
             }
         }

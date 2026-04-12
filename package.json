@@ -1,6 +1,6 @@
 {
     "name": "xdy-pf2e-workbench",
-  "version": "7.0.1",
+    "version": "7.0.1",
     "description": "Random assortment of possibly useful doodads, thingumabobs and whatchamacallits for the foundry vtt pf2e system.",
     "private": true,
     "type": "module",
@@ -80,7 +80,7 @@
         "tsx": "^4.21.0",
         "typescript": "^6.0.2",
         "typescript-eslint": "^8.58.1",
-        "vite": "^8.0.7",
+        "vite": "^8.0.8",
         "vite-plugin-checker": "^0.12.0",
         "vite-plugin-static-copy": "^4.0.1",
         "yargs": "^18.0.0"

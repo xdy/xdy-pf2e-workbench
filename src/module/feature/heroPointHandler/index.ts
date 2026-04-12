@@ -5,7 +5,7 @@
 
 import type { ActorPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { heroes, logDebug, pushNotification } from "../../utils.js";
+import { handleAsync, heroes, logDebug, pushNotification } from "../../utils.js";
 
 export enum HPHState {
     Start,
@@ -434,7 +434,7 @@ function addOneToSelectedCharactersIfAny(actorIds: string[], reason: string = ""
 
 function sendMessage(message: string, whisper: string[] | undefined = undefined) {
     if (game.settings.get(MODULENAME, "heropointHandlerNotificationChat")) {
-        ChatMessage.create({ flavor: message, whisper }, {}).then();
+        handleAsync(ChatMessage.create({ flavor: message, whisper }, {}), "heroPointHandler ChatMessage");
     } else {
         ui.notifications.info(message);
     }

@@ -5112,7 +5112,7 @@ Also fixed a couple of bugs/added features, see https://github.com/jamespdaily/p
 game.PF2eWorkbench.resetHeroPoints // game.PF2EWorkbench.resetHeroPoints(1)
 game.PF2eWorkbench.addHeroPoints // game.PF2EWorkbench.addHeroPoints(1, "ALL") OR game.PF2eWorkbench.addHeroPoints(1, _token.actor.id)
 game.PF2eWorkbench.scaleNPCToLevelFromActorId scaleNPCToLevelFromActorId // await game.PF2eWorkbench.scaleNPCToLevelFromActorId(_token.actor.id, 24);
-game.PF2eWorkbench.moveSelectedAheadOfCurrent moveSelectedAheadOfCurrent // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantByToken(_token.id).id)
+game.PF2eWorkbench.moveSelectedAheadOfCurrent moveSelectedAheadOfCurrent // await game.PF2eWorkbench.moveSelectedAheadOfCurrent(await game.combat?.getCombatantsByToken(_token.id)[0].id)
 game.PF2eWorkbench.doMystificationFromTokenId // await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, true) OR await game.PF2eWorkbench.doMystificationFromTokenId(_token.id, false)
 game.PF2eWorkbench.generateNameFromTraitsForToken // await game.PF2eWorkbench.generateNameFromTraitsFromTokenId(_token.id)
 ```

@@ -1,6 +1,7 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import {
     degreeOfSuccessWithRerollHandling,
+    getActorFromMessage,
     isActuallyDamageRoll,
     objectHasKey,
     shouldIHandleThisMessage,
@@ -36,8 +37,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
         const originUuid = <string>systems.getFlag(message, "origin.uuid");
 
         if (originUuid) {
-            const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
-            const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
+            const actor = getActorFromMessage(message);
             const rollType = systems.getFlag(message, "context.type");
 
             const origin: any = originUuid ? await fromUuid(originUuid) : null;
@@ -92,7 +92,7 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
                 !(isAttackSpell && isSaveSpell)
             ) {
                 // @ts-expect-error TODO fix typing
-                await handleSpell(pf2eFlags, numberOfMessagesToCheck, originUuid, origin, message, degreeOfSuccess);
+                await handleSpell(flags, numberOfMessagesToCheck, originUuid, origin, message, degreeOfSuccess);
             } else if (actor && rollForNonSpellAttack && isSuccess) {
                 await handleNonSpell(actor, message, degreeOfSuccess);
             }

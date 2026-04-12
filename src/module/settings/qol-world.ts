@@ -198,7 +198,6 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
             list: [
                 "castPrivateSpellAutoRevealIfKnown",
                 "castPrivateSpellAutoRevealPartyMembersThatKnowSpell",
-                "castPrivateSpellAutoRevealPartyMembersThatKnowSpell",
                 "castPrivateSpellAlwaysFor",
                 "castPrivateSpellAutoRevealOverrideGMRollMode",
             ],

@@ -186,7 +186,7 @@ export async function generateNameFromTraits(token: TokenDocumentPF2e<ScenePF2e>
                                 return game.i18n.localize("PF2E.NPC.Adjustment.WeakLabel");
                         }
                     } else if (TRAITS.SIZES.includes(lowercaseTrait)) {
-                        // @ts-ignore
+                        // @ts-expect-error actorSizes indexing not fully typed
                         return game.i18n.localize(CONFIG.PF2E.actorSizes[lowercaseTrait]);
                     }
 

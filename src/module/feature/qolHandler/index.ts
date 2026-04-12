@@ -111,8 +111,7 @@ export function chatAttackCardDescriptionCollapse(html: HTMLElement): void {
     if (hasRollNote.length > 0) {
         if (String(game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent")) === "collapsedDefault") {
             for (const note of hasRollNote) {
-                // @ts-ignore
-                note["style"].display = "none";
+                (note as HTMLElement).style.display = "none";
             }
 
             hasRollNote[0].parentNode?.parentNode?.children[0].insertAdjacentHTML("beforeend", eye);

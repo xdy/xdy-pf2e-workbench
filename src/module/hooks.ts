@@ -1,4 +1,4 @@
-import { housepatcher, isActuallyDamageRoll, logDebug, shouldIHandleThis } from "./utils.js";
+import { handleAsync, housepatcher, isActuallyDamageRoll, shouldIHandleThis } from "./utils.js";
 import {
     ActorPF2e,
     ActorSheetPF2e,
@@ -63,7 +63,7 @@ export const preCreateChatMessageHook = (
         const privateCast = castPrivately(inParty, message);
 
         if ((ctrlHeld && !privateCast) || (!ctrlHeld && privateCast)) {
-            handlePrivateSpellcasting(data, message).then();
+            handleAsync(handlePrivateSpellcasting(data, message), "handlePrivateSpellcasting");
         }
     }
 
@@ -119,13 +119,13 @@ export function createChatMessageHook(message: ChatMessagePF2e): void {
     if (!isDamage) {
         const skipAutoRoll = message.getFlag(MODULENAME, "noAutoDamageRoll");
         if (!skipAutoRoll) {
-            autoRollDamage(message).then();
+            handleAsync(autoRollDamage(message), "autoRollDamage");
         }
 
         // Check if we need to remind about breath weapon
         const reminderBreathWeaponEnabled = game.settings.get(MODULENAME, "reminderBreathWeapon");
         if (reminderBreathWeaponEnabled) {
-            reminderBreathWeapon(message).then();
+            handleAsync(reminderBreathWeapon(message), "reminderBreathWeapon");
         }
     }
 
@@ -194,83 +194,48 @@ export function renderChatMessageHook(message: ChatMessagePF2e, element: unknown
     }
 }
 
-// Extracted to separate function to improve readability
+function addHeroPointTag(element: HTMLElement, slug: string, localeKey: string): boolean {
+    const tags = element.querySelector(".flavor-text > .tags.modifiers");
+    const newTotalElem = element.querySelector(".reroll-second .dice-total");
+    if (!tags || !newTotalElem) return false;
+
+    const newTag = document.createElement("span");
+    newTag.classList.add("tag", "tag_transparent", slug);
+    newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.${localeKey}`);
+    newTag.dataset.slug = slug;
+
+    const existingTag = tags.querySelector(".tag") as HTMLElement;
+    if (existingTag?.dataset.visibility === "gm") {
+        newTag.dataset.visibility = "gm";
+    }
+
+    tags.append(newTag);
+    newTotalElem.classList.add(slug);
+    return true;
+}
+
 function handleVariantHeroPointRules(message: ChatMessagePF2e, element: HTMLElement): void {
     const lastRoll = message.rolls.at(-1);
     if (!lastRoll) return;
 
-    // Handle Keeley's hero point rule
     if (lastRoll.options.keeleyAdd10) {
-        const tags = element.querySelector(".flavor-text > .tags.modifiers");
-        const formulaElem = element.querySelector(".reroll-discard .dice-formula");
-        const newTotalElem = element.querySelector(".reroll-second .dice-total");
-
-        if (tags && formulaElem && newTotalElem) {
-            // Add a tag to the list of modifiers
-            const newTag = document.createElement("span");
-            newTag.classList.add("tag", "tag_transparent", "keeley-add-10");
-            newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagKeeleys`);
-            newTag.dataset.slug = "keeley-add-10";
-
-            const querySelector = tags.querySelector(".tag") as HTMLElement;
-            if (querySelector?.dataset.visibility === "gm") {
-                newTag.dataset.visibility = "gm";
+        if (addHeroPointTag(element, "keeley-add-10", "bonusTagKeeleys")) {
+            const formulaElem = element.querySelector(".reroll-discard .dice-formula");
+            if (formulaElem) {
+                const span = document.createElement("span");
+                span.className = "keeley-add-10";
+                span.innerText = " + 10";
+                formulaElem.append(span);
             }
-
-            tags.append(newTag);
-
-            // Show +10 in the formula
-            const span = document.createElement("span");
-            span.className = "keeley-add-10";
-            span.innerText = " + 10";
-            formulaElem?.append(span);
-
-            // Make the total purple
-            newTotalElem.classList.add("keeley-add-10");
         }
     }
 
-    // Handle use highest roll hero point rule
     if (lastRoll.options.useHighestRoll) {
-        const tags = element.querySelector(".flavor-text > .tags.modifiers");
-        const formulaElem = element.querySelector(".reroll-discard .dice-formula");
-        const newTotalElem = element.querySelector(".reroll-second .dice-total");
-
-        if (tags && formulaElem && newTotalElem) {
-            const newTag = document.createElement("span");
-            newTag.classList.add("tag", "tag_transparent", "use-highest-roll");
-            newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagUseHighestRoll`);
-            newTag.dataset.slug = "use-highest-roll";
-
-            const querySelector = tags.querySelector(".tag") as HTMLElement;
-            if (querySelector?.dataset.visibility === "gm") {
-                newTag.dataset.visibility = "gm";
-            }
-
-            tags.append(newTag);
-            newTotalElem.classList.add("use-highest-roll");
-        }
+        addHeroPointTag(element, "use-highest-roll", "bonusTagUseHighestRoll");
     }
 
-    // Handle heroic rerolls hero point rule
     if (lastRoll.options.heroicReroll) {
-        const tags = element.querySelector(".flavor-text > .tags.modifiers");
-        const newTotalElem = element.querySelector(".reroll-second .dice-total");
-
-        if (tags && newTotalElem) {
-            const newTag = document.createElement("span");
-            newTag.classList.add("tag", "tag_transparent", "heroic-reroll");
-            newTag.innerText = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointRules.bonusTagHeroicRerolls`);
-            newTag.dataset.slug = "heroic-reroll";
-
-            const querySelector = tags.querySelector(".tag") as HTMLElement;
-            if (querySelector?.dataset.visibility === "gm") {
-                newTag.dataset.visibility = "gm";
-            }
-
-            tags.append(newTag);
-            newTotalElem.classList.add("heroic-reroll");
-        }
+        addHeroPointTag(element, "heroic-reroll", "bonusTagHeroicRerolls");
     }
 }
 
@@ -296,7 +261,7 @@ function dropHeldItemsOnBecomingUnconscious(actor: CreaturePF2e) {
     }
 }
 
-function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
+async function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
     async function sheatheHeldItems(actor) {
         const items = <PhysicalItemPF2e[]>actor.items?.filter((i) => i.isHeld);
         if (items && items.length > 0) {
@@ -313,17 +278,17 @@ function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
                     name: game?.scenes?.current?.tokens?.find((t) => t.actor?.id === actor.id)?.name ?? actor.name,
                     items: itemsToSheathe.map((i) => i.name).join(", "),
                 });
-                ChatMessage.create({
+                handleAsync(ChatMessage.create({
                     flavor: message,
                     speaker: ChatMessage.getSpeaker({ actor }),
-                }).then();
+                }), "sheatheHeldItems ChatMessage");
             }
         }
     }
 
-    encounter.combatants.forEach(async (combatant) => {
+    for (const combatant of encounter.combatants) {
         await sheatheHeldItems(combatant.actor);
-    });
+    }
 }
 
 export async function preCreateItemHook(item: ItemPF2e, _data: object, _options: object, _id: string): Promise<void> {
@@ -337,15 +302,13 @@ export async function preCreateItemHook(item: ItemPF2e, _data: object, _options:
     }
 }
 
-export async function updateItemHook(_item: ItemPF2e, _update: object): Promise<void> {}
-
 export async function deleteItemHook(item: ItemPF2e, _options: object): Promise<void> {
     await itemHandlingItemHook(item);
 }
 
 export function pf2eEndTurnHook(combatant: CombatantPF2e, _combat: EncounterPF2e, userId: string): void {
     if (game.settings.get(MODULENAME, "decreaseFrightenedConditionEachTurn")) {
-        reduceFrightened(combatant, userId).then(() => logDebug("Workbench reduceFrightened complete"));
+        handleAsync(reduceFrightened(combatant, userId), "reduceFrightened");
     }
 }
 
@@ -356,11 +319,10 @@ export async function pf2eStartTurnHook(
 ): Promise<void> {
     const forWhom = String(game.settings.get(MODULENAME, "actionsReminderAllow"));
     if (game.settings.get(MODULENAME, "autoReduceStunned")) {
-        autoReduceStunned(combatant, userId).then((reduction) => {
-            if (forWhom !== "none") {
-                actionsReminder(combatant, reduction);
-            }
-        });
+        const reduction = await autoReduceStunned(combatant, userId);
+        if (forWhom !== "none") {
+            actionsReminder(combatant, reduction);
+        }
     } else if (forWhom !== "none") {
         actionsReminder(combatant, 0);
     }
@@ -415,7 +377,7 @@ export function preUpdateTokenHook(
 
 export async function createTokenHook(token: TokenDocumentPF2e, ..._args: unknown[]): Promise<void> {
     if (game.user?.isGM && game.settings.get(MODULENAME, "npcMystifier")) {
-        tokenCreateMystification(token).then();
+        handleAsync(tokenCreateMystification(token), "tokenCreateMystification");
     }
 
     if (
@@ -588,11 +550,11 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
             if (!item || item.type !== "spell") return;
 
             const flavor = `${game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`)}<em>@UUID[${item.sourceId}]</em></p>`;
-            ChatMessage.create({
+            handleAsync(ChatMessage.create({
                 style: CONST.CHAT_MESSAGE_STYLES.OOC,
                 speaker: ChatMessage.getSpeaker(),
                 flavor,
-            }).then();
+            }), "playerSpellsChange ChatMessage");
         }
 
         if (game.settings.get(MODULENAME, "playerSpellsChangeSendToChat")) {

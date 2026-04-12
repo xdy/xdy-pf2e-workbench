@@ -1,4 +1,4 @@
-import { isFirstGM, myRandomId } from "../../utils.js";
+import { isFirstGM } from "../../utils.js";
 import { ChatMessagePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import * as systems from "../../utils/systems.ts";
@@ -71,7 +71,7 @@ async function getEffectDetails(activeActor, messageContent: string, diceValue) 
                 value: game.i18n.localize(`${MODULENAME}.SETTINGS.reminderBreathWeapon.defaultName`),
             },
             rules: [],
-            slug: `xdy-breath-weapon-reminder-${myRandomId()}`,
+            slug: `xdy-breath-weapon-reminder-${fu.randomID()}`,
             unidentified:
                 game.settings.get(MODULENAME, "reminderBreathWeaponHidden") &&
                 !game.actors?.party?.members.map((m) => m?.id).includes(activeActor.id),

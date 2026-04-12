@@ -14,7 +14,7 @@
  */
 
 import { IDicePool } from "./NPCScalerTypes.js";
-import { SCALE_APP_DATA } from "../NPCScaleData.js";
+import SCALE_APP_DATA from "../npc-scale-data.json" with { type: "json" };
 
 export function parseDamage(value: string): IDicePool {
     const [diceString, bonusString] = value.split("+");

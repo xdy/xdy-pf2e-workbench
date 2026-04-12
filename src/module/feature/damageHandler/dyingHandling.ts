@@ -1,8 +1,17 @@
-import { isFirstGM, logDebug, shouldIHandleThis, shouldIHandleThisMessage } from "../../utils.js";
+import {
+    getActorFromMessage,
+    handleAsync,
+    isFirstGM,
+    logDebug,
+    shouldIHandleThis,
+    shouldIHandleThisMessage,
+} from "../../utils.js";
 import { CHARACTER_TYPE, MODULENAME, NPC_TYPE } from "../../xdy-pf2e-workbench.js";
 import { ActorPF2e, ActorSystemData, ChatMessagePF2e, ItemPF2e } from "foundry-pf2e";
 import { moveOnZeroHP } from "../initiativeHandler/index.js";
 import * as systems from "../../utils/systems.ts";
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export function dyingHandlingPreUpdateActorHook(
     actor: any,
@@ -19,86 +28,71 @@ export function dyingHandlingPreUpdateActorHook(
     const autoRemoveDying = String(game.settings.get(MODULENAME, "autoRemoveDyingAtGreaterThanZeroHP"));
     const autoRemoveUnconscious = String(game.settings.get(MODULENAME, "autoRemoveUnconsciousAtGreaterThanZeroHP"));
 
+    const isHealed = currentActorHp <= 0 && updateHp > 0;
+
     if (autoGainDying && !autoGainDying.startsWith("no")) {
-        handleDyingOnZeroHP(actor, fu.deepClone(update), currentActorHp, updateHp, autoGainDying).then(
-            (hpRaisedAbove0) => {
+        handleAsync(
+            (async () => {
+                const hpRaisedAbove0 = await handleDyingOnZeroHP(
+                    actor,
+                    fu.deepClone(update),
+                    currentActorHp,
+                    updateHp,
+                    autoGainDying,
+                );
                 logDebug("Workbench increaseDyingOnZeroHP complete");
-                if (hpRaisedAbove0) {
+                if (hpRaisedAbove0 || isHealed) {
                     if (autoRemoveDying && !autoRemoveDying.startsWith("no")) {
-                        // Ugh.
-                        new Promise((resolve) => setTimeout(resolve, 250)).then(() => {
-                            autoRemoveDyingAtGreaterThanZeroHp(
-                                actor,
-                                currentActorHp <= 0 && hpRaisedAbove0,
-                                autoRemoveDying,
-                            ).then(() => {
-                                logDebug("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
-                                if (autoRemoveUnconscious) {
-                                    autoRemoveUnconsciousAtGreaterThanZeroHP(
-                                        actor,
-                                        currentActorHp <= 0 && hpRaisedAbove0,
-                                    ).then();
-                                }
-                            });
-                        });
-                    } else {
-                        if (autoRemoveUnconscious) {
-                            autoRemoveUnconsciousAtGreaterThanZeroHP(
-                                actor,
-                                currentActorHp <= 0 && hpRaisedAbove0,
-                            ).then();
-                        }
+                        await delay(250);
+                        await autoRemoveDyingAtGreaterThanZeroHp(actor, true, autoRemoveDying);
+                        logDebug("Workbench autoRemoveDyingAtGreaterThanZeroHP complete");
                     }
-                } else {
-                    if (automoveIfZeroHP && currentActorHp > 0 && updateHp <= 0) {
-                        moveOnZeroHP(actor);
+                    if (autoRemoveUnconscious) {
+                        await autoRemoveUnconsciousAtGreaterThanZeroHP(actor, true);
                     }
+                } else if (automoveIfZeroHP && currentActorHp > 0 && updateHp <= 0) {
+                    moveOnZeroHP(actor);
                 }
-            },
+            })(),
+            "dyingHandlingPreUpdateActorHook",
         );
     } else {
-        if (currentActorHp <= 0 && updateHp > 0) {
-            if (autoRemoveDying && !autoRemoveDying.startsWith("no")) {
-                autoRemoveDyingAtGreaterThanZeroHp(actor, currentActorHp <= 0, autoRemoveDying).then(() => {
-                    if (autoRemoveUnconscious) {
-                        autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
+        if (isHealed) {
+            handleAsync(
+                (async () => {
+                    if (autoRemoveDying && !autoRemoveDying.startsWith("no")) {
+                        await autoRemoveDyingAtGreaterThanZeroHp(actor, true, autoRemoveDying);
                     }
-                });
-            } else {
-                if (autoRemoveUnconscious) {
-                    autoRemoveUnconsciousAtGreaterThanZeroHP(actor, currentActorHp <= 0).then();
-                }
-            }
+                    if (autoRemoveUnconscious) {
+                        await autoRemoveUnconsciousAtGreaterThanZeroHP(actor, true);
+                    }
+                })(),
+                "dyingHandlingPreUpdateActorHook (hp restored)",
+            );
         } else if (automoveIfZeroHP && currentActorHp > 0 && updateHp <= 0) {
             moveOnZeroHP(actor);
         }
     }
 }
 
-export async function itemHandlingItemHook(item: ItemPF2e) {
+export async function itemHandlingItemHook(item: ItemPF2e): Promise<void> {
     if (isFirstGM() && item.slug === "dying" && item.parent) {
-        handleDying(0, 0, item.parent, false);
+        handleAsync(handleDying(0, 0, <ActorPF2e>item.parent, false), "itemHandlingItemHook handleDying");
     }
 
     const giveWounded = game.settings.get(MODULENAME, "giveWoundedWhenDyingRemoved");
     const giveUnconscious = game.settings.get(MODULENAME, "giveUnconsciousIfDyingRemovedAt0HP");
-    if (giveWounded || giveUnconscious) {
-        if (giveWounded) {
-            giveWoundedWhenDyingRemoved(item).then(() => {
-                logDebug("Workbench giveWoundedWhenDyingRemoved complete");
-                if (giveUnconscious) {
-                    giveUnconsciousIfDyingRemovedAt0HP(item).then(() => {
-                        logDebug("Workbench giveUnconsciousIfDyingRemovedAt0HP complete");
-                    });
-                }
-            });
-        } else if (giveUnconscious) {
-            await giveUnconsciousIfDyingRemovedAt0HP(item);
-        }
+    if (giveWounded) {
+        await giveWoundedWhenDyingRemoved(item);
+        logDebug("Workbench giveWoundedWhenDyingRemoved complete");
+    }
+    if (giveUnconscious) {
+        await giveUnconsciousIfDyingRemovedAt0HP(item);
+        logDebug("Workbench giveUnconsciousIfDyingRemovedAt0HP complete");
     }
 }
 
-export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boolean) {
+export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boolean): void {
     const flavor = message.flavor;
     const token = message.token;
     if (
@@ -119,8 +113,7 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
     ) {
         const outcome = systems.getFlag(message, "context.outcome") ?? "";
 
-        const messageToken = canvas?.scene?.tokens.get(<string>message.speaker.token);
-        const actor = messageToken?.actor ? messageToken?.actor : game.actors?.get(<string>message.speaker.actor);
+        const actor = getActorFromMessage(message);
 
         const originalDyingCounter = token.actor?.getCondition("dying")?.value ?? 0;
         let dyingCounter = 0;
@@ -144,77 +137,68 @@ export function handleDyingRecoveryRoll(message: ChatMessagePF2e, enabled: boole
                 break;
         }
         if (originalDyingCounter > 0 || dyingCounter !== 0) {
-            handleDying(dyingCounter, originalDyingCounter, actor);
+            handleAsync(handleDying(dyingCounter, originalDyingCounter, actor), "handleDyingRecoveryRoll handleDying");
 
             const total = message.rolls.reduce((total, roll) => total + roll.total, 0);
-            ChatMessage.create({
-                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.handled`, {
-                    outcome: outcomeString,
-                    defeated: token.combatant?.defeated
-                        ? game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.defeated`, {
-                              name: token.actor?.name ?? "???",
-                          })
-                        : "",
-                    roll: total,
+            handleAsync(
+                ChatMessage.create({
+                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.handled`, {
+                        outcome: outcomeString,
+                        defeated: token.combatant?.defeated
+                            ? game.i18n.format(`${MODULENAME}.SETTINGS.handleDyingRecoveryRoll.defeated`, {
+                                  name: token.actor?.name ?? "???",
+                              })
+                            : "",
+                        roll: total,
+                    }),
+                    speaker: message.speaker,
                 }),
-                speaker: message.speaker,
-            }).then();
-            message.delete({ render: false }).then();
+                "handleDyingRecoveryRoll ChatMessage",
+            );
+            handleAsync(message.delete({ render: false }), "handleDyingRecoveryRoll delete");
         }
     }
 }
 
-export function handleDying(
+export async function handleDying(
     dyingCounter: number,
     originalDyingCounter: number,
-    actor: any,
+    actor: ActorPF2e,
     isDefeated = actor.combatant?.defeated,
-): void {
-    // Can't await, so do the math.
-    const shouldDie = originalDyingCounter + dyingCounter >= actor.system.attributes.dying.max && !isDefeated;
+): Promise<void> {
+    // @ts-expect-error TODO Is this the right place to look for it?
+    const dyingMax = actor.system.attributes.dying?.max;
+    const shouldDie = originalDyingCounter + dyingCounter >= (dyingMax ?? 4) && !isDefeated;
     const shouldBecomeDying = originalDyingCounter + dyingCounter > 0 && !isDefeated;
     if (shouldDie) {
-        actor
-            .increaseCondition("dying", {
-                max: actor.system.attributes.dying.max,
-                value: actor.system.attributes.dying.max,
-            })
-            .then(() => {
-                actor.combatant?.toggleDefeated().then(() => {
-                    // Dead, not dying, so clear the flag.
-                    actor
-                        .unsetFlag(MODULENAME, "dyingLastApplied")
-                        .then(() => console.log("dyingLastApplied cleared because dead"));
-                });
-            });
+        await actor.increaseCondition("dying", {
+            max: dyingMax ?? 4,
+            value: dyingMax ?? 4,
+        });
+        await actor.combatant?.toggleDefeated();
+        await actor.unsetFlag(MODULENAME, "dyingLastApplied");
+        logDebug("dyingLastApplied cleared because dead");
     } else if (shouldBecomeDying) {
-        actor
-            .increaseCondition("dying", {
-                max: actor.system.attributes.dying.max,
-                value: Math.min(dyingCounter, actor.system.attributes.dying.max),
-            })
-            .then(() => {
-                const dying = actor.getCondition("dying");
-                console.log(`dyingCounter was ${originalDyingCounter} is ${dying.value}`);
-                const now = Date.now();
-                return actor.setFlag(MODULENAME, "dyingLastApplied", now).then(() => {
-                    console.log(
-                        `dyingLastApplied set to ${now}, dyingCounter was ${originalDyingCounter} is ${dying.value}`,
-                    );
-                });
-            });
+        await actor.increaseCondition("dying", {
+            max: dyingMax ?? 4,
+            value: Math.min(dyingCounter, dyingMax ?? 4),
+        });
+        const dying = actor.getCondition("dying");
+        if (dying) {
+            logDebug(`dyingCounter was ${originalDyingCounter} is ${dying.value}`);
+            const now = Date.now();
+            await actor.setFlag(MODULENAME, "dyingLastApplied", now);
+            logDebug(`dyingLastApplied set to ${now}, dyingCounter was ${originalDyingCounter} is ${dying.value}`);
+        }
     } else {
         const dyingCondition = actor.getCondition("dying");
         if (dyingCondition) {
-            actor.decreaseCondition("dying", { forceRemove: true }).then(() => {
-                return actor
-                    .unsetFlag(MODULENAME, "dyingLastApplied")
-                    .then(() => console.log("dyingLastApplied cleared because not dying"));
-            });
+            await actor.decreaseCondition("dying", { forceRemove: true });
+            await actor.unsetFlag(MODULENAME, "dyingLastApplied");
+            logDebug("dyingLastApplied cleared because not dying");
         } else {
-            actor
-                .unsetFlag(MODULENAME, "dyingLastApplied")
-                .then(() => console.log("dyingLastApplied cleared because dying already removed"));
+            await actor.unsetFlag(MODULENAME, "dyingLastApplied");
+            logDebug("handleDying (clear flag, dying already removed)");
         }
     }
 }
@@ -229,7 +213,7 @@ export async function autoRemoveDyingAtGreaterThanZeroHp(
         const value = dying?.value || 0;
         if (dying && value > 0 && !dying.isLocked) {
             if (autoRemoveDying.endsWith("ForCharacters") ? ["character", "familiar"].includes(actor.type) : true) {
-                handleDying(0, 0, actor);
+                await handleDying(0, 0, actor);
             }
         }
     }
@@ -339,16 +323,19 @@ export function handleOrcFerocity(
         effectsToCreate.push(effect);
 
         if (rampagingFerocity) {
-            ChatMessage.create({
-                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
-                    name: name,
+            handleAsync(
+                ChatMessage.create({
+                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.orcFerocityMessage`, {
+                        name: name,
+                    }),
+                    speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
+                    whisper:
+                        systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
+                            ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                            : [],
                 }),
-                speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
-                whisper:
-                    systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
-                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                        : [],
-            }).then();
+                "handleOrcFerocity ChatMessage",
+            );
         }
 
         hpNowAboveZero = true;
@@ -379,16 +366,19 @@ export function handleDeliberateDeath(actor: ActorPF2e, effectsToCreate: any[], 
         };
         effectsToCreate.push(effect);
 
-        ChatMessage.create({
-            flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.deliberateDeathMessage`, {
-                name: name,
+        handleAsync(
+            ChatMessage.create({
+                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.autoGainDyingAtZeroHP.deliberateDeathMessage`, {
+                    name: name,
+                }),
+                speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
+                whisper:
+                    systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
+                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                        : [],
             }),
-            speaker: ChatMessage.getSpeaker({ actor: <any>actor }),
-            whisper:
-                systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
-                    ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                    : [],
-        }).then();
+            "handleDeliberateDeath ChatMessage",
+        );
     }
 }
 
@@ -452,7 +442,7 @@ export async function handleDyingOnZeroHP(
         }
     }
 
-    handleDying(dyingCounter, 0, actor);
+    handleAsync(handleDying(dyingCounter, 0, actor), "handleDyingOnZeroHP handleDying");
 
     if (effectsToCreate.length > 0) {
         await actor.createEmbeddedDocuments("Item", effectsToCreate);
@@ -478,7 +468,7 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
         }
         const name = `${actor.token?.name ?? actor.name}`;
 
-        if (numbToDeath && (!numbToDeathUsed || bounceBackUsed.isExpired)) {
+        if (numbToDeath && (!numbToDeathUsed || numbToDeathUsed.isExpired)) {
             const effect: any = {
                 type: "effect",
                 name: game.i18n.localize(`${MODULENAME}.effects.numbToDeathUsed`),
@@ -497,16 +487,19 @@ export async function giveWoundedWhenDyingRemoved(item: ItemPF2e) {
                 },
             };
 
-            ChatMessage.create({
-                flavor: game.i18n.format(`${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
-                    name: name,
+            handleAsync(
+                ChatMessage.create({
+                    flavor: game.i18n.format(`${MODULENAME}.SETTINGS.giveWoundedWhenDyingRemoved.numbToDeathMessage`, {
+                        name: name,
+                    }),
+                    speaker: ChatMessage.getSpeaker({ token: <any>actor.token }),
+                    whisper:
+                        systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
+                            ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
+                            : [],
                 }),
-                speaker: ChatMessage.getSpeaker({ token: <any>actor.token }),
-                whisper:
-                    systems.getSystemSetting<boolean>("metagame", "secretDamage") && !actor?.hasPlayerOwner
-                        ? ChatMessage.getWhisperRecipients("GM").map((u) => u.id)
-                        : [],
-            }).then();
+                "giveWoundedWhenDyingRemoved ChatMessage",
+            );
 
             await actor.createEmbeddedDocuments("Item", [effect]);
         } else if (bounceBack && (!bounceBackUsed || bounceBackUsed.isExpired)) {
@@ -558,7 +551,7 @@ export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e) {
             if (message.content?.includes("damage-taken")) {
                 const now = Date.now();
                 const flag = <number>actor.getFlag(MODULENAME, "dyingLastApplied") || now;
-                console.log(`dyingLastApplied is ${flag}, now is ${now}`);
+                logDebug(`dyingLastApplied is ${flag}, now is ${now}`);
                 // Ignore this if it occurs within last few seconds of the last time we applied dying
                 const notTooSoon = !flag?.between(now - 4000, now);
                 if (notTooSoon) {
@@ -578,11 +571,14 @@ export function dyingHandlingCreateChatMessageHook(message: ChatMessagePF2e) {
                                 dyingCounter = dyingCounter + 1;
                             }
                         }
-                        console.log(
+                        logDebug(
                             `Before handleDying dyingLastApplied is ${flag}, now is ${now}, dyingCounter was ${originalDyingCounter} will increase by ${dyingCounter}`,
                         );
 
-                        handleDying(dyingCounter, originalDyingCounter, actor);
+                        handleAsync(
+                            handleDying(dyingCounter, originalDyingCounter, actor),
+                            "dyingHandlingCreateChatMessageHook handleDying",
+                        );
                     }
                 }
             }

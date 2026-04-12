@@ -1,4 +1,4 @@
-import { logInfo } from "./utils.js";
+import { handleAsync, logInfo } from "./utils.js";
 import { MODULENAME } from "./xdy-pf2e-workbench.js";
 import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler/index.js";
 import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler/index.js";
@@ -34,7 +34,7 @@ export function registerWorkbenchKeybindings(): void {
                 content,
                 buttons: [
                     {
-                        icon: "<i class=\"fa-solid fa-users\"></i>",
+                        icon: '<i class="fa-solid fa-users"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.addFor`),
                         action: "addFor",
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -57,7 +57,7 @@ export function registerWorkbenchKeybindings(): void {
                         },
                     },
                     {
-                        icon: "<i class=\"fa-solid fa-users-slash\"></i>",
+                        icon: '<i class="fa-solid fa-users-slash"></i>',
                         label: game.i18n.localize(`${MODULENAME}.SETTINGS.addUserTargets.clearFor`),
                         action: "clearFor",
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -91,7 +91,10 @@ export function registerWorkbenchKeybindings(): void {
         restricted: true,
         onDown: () => {
             if (game.user?.isGM && game.settings.get(MODULENAME, "heroPointHandler")) {
-                heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start).then();
+                handleAsync(
+                    heroPointHandler(calcRemainingMinutes(false) > 0 ? HPHState.Check : HPHState.Start),
+                    "heroPointHandler",
+                );
             }
             return true;
         },
@@ -104,11 +107,11 @@ export function registerWorkbenchKeybindings(): void {
         restricted: true,
         onDown: () => {
             if (game.user?.isGM) {
-                const combatantByToken: Combatant | undefined = game?.combat?.getCombatantByToken(
+                const combatantByToken: Combatant | undefined = game?.combat?.getCombatantsByToken(
                     <string>canvas?.tokens?.controlled[0].id,
-                );
+                )[0];
                 if (combatantByToken) {
-                    moveSelectedAheadOfCurrent(combatantByToken.id).then();
+                    handleAsync(moveSelectedAheadOfCurrent(combatantByToken.id), "moveSelectedAheadOfCurrent");
                 }
             }
             return true;
@@ -125,7 +128,7 @@ export function registerWorkbenchKeybindings(): void {
             if (game.settings.get(MODULENAME, "npcMystifier")) {
                 if (canMystify()) {
                     for (const token of canvas?.tokens?.controlled ?? []) {
-                        doMystification(token?.document, isTokenMystified(token)).then();
+                        handleAsync(doMystification(token?.document, isTokenMystified(token)), "doMystification");
                     }
                 } else {
                     ui.notifications?.warn(game.i18n.localize(`${MODULENAME}.SETTINGS.notifications.cantMystify`));

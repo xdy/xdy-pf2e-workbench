@@ -2,6 +2,7 @@
 // This macro runs Recall Knowledge multiple times and analyzes the results
 
 import { TokenPF2e } from "foundry-pf2e";
+import { logWarn } from "../../utils.js";
 
 export async function hypercognition(token: TokenPF2e) {
     // Verify we have a target and get the actor
@@ -200,7 +201,7 @@ export async function hypercognition(token: TokenPF2e) {
         try {
             await latestMessage.delete();
         } catch (error) {
-            console.warn("Could not delete message:", error);
+            logWarn("Could not delete message:", error);
         }
     }
 

@@ -9,6 +9,14 @@ import { WorkbenchHouseRulesSettings } from "./houseRules.js";
 
 export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification.js";
 
+function collapseChoices(settingKey: string): Record<string, string> {
+    return {
+        noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.${settingKey}.noCollapse`),
+        collapsedDefault: game.i18n.localize(`${MODULENAME}.SETTINGS.${settingKey}.collapsedDefault`),
+        nonCollapsedDefault: game.i18n.localize(`${MODULENAME}.SETTINGS.${settingKey}.nonCollapsedDefault`),
+    };
+}
+
 export function registerWorkbenchSettings(): void {
     logInfo(`${MODULENAME} | registerSettings`);
 
@@ -19,24 +27,22 @@ export function registerWorkbenchSettings(): void {
     WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fa-solid fa-magic", false);
     WorkbenchHouseRulesSettings.registerSettingsAndCreateMenu("fa-solid fa-house");
 
-    game.settings.register(MODULENAME, "autoCollapseItemChatCardContent", {
-        name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.name`,
-        hint: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.hint`,
-        scope: "client",
-        config: true,
-        default: "noCollapse",
-        type: String,
-        choices: {
-            noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.noCollapse`),
-            collapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.collapsedDefault`,
-            ),
-            nonCollapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemChatCardContent.nonCollapsedDefault`,
-            ),
-        },
-        onChange: () => updateHooks(),
-    });
+    for (const key of [
+        "autoCollapseItemChatCardContent",
+        "autoCollapseItemActionChatCardContent",
+        "autoCollapseItemAttackChatCardContent",
+    ] as const) {
+        game.settings.register(MODULENAME, key, {
+            name: `${MODULENAME}.SETTINGS.${key}.name`,
+            hint: `${MODULENAME}.SETTINGS.${key}.hint`,
+            scope: "client",
+            config: true,
+            default: "noCollapse",
+            type: String,
+            choices: collapseChoices(key),
+            onChange: () => updateHooks(),
+        });
+    }
 
     game.settings.register(MODULENAME, "autoCollapseItemChatCardMoveEffectLinks", {
         name: `${MODULENAME}.SETTINGS.autoCollapseItemChatCardMoveEffectLinks.name`,
@@ -45,44 +51,6 @@ export function registerWorkbenchSettings(): void {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => updateHooks(),
-    });
-
-    game.settings.register(MODULENAME, "autoCollapseItemActionChatCardContent", {
-        name: `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.name`,
-        hint: `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.hint`,
-        scope: "client",
-        config: true,
-        default: "noCollapse",
-        type: String,
-        choices: {
-            noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.noCollapse`),
-            collapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.collapsedDefault`,
-            ),
-            nonCollapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemActionChatCardContent.nonCollapsedDefault`,
-            ),
-        },
-        onChange: () => updateHooks(),
-    });
-
-    game.settings.register(MODULENAME, "autoCollapseItemAttackChatCardContent", {
-        name: `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.name`,
-        hint: `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.hint`,
-        scope: "client",
-        config: true,
-        default: "noCollapse",
-        type: String,
-        choices: {
-            noCollapse: game.i18n.localize(`${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.noCollapse`),
-            collapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.collapsedDefault`,
-            ),
-            nonCollapsedDefault: game.i18n.localize(
-                `${MODULENAME}.SETTINGS.autoCollapseItemAttackChatCardContent.nonCollapsedDefault`,
-            ),
-        },
         onChange: () => updateHooks(),
     });
 
