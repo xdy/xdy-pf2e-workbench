@@ -1,3 +1,10 @@
+## [7.0.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.2...v7.0.3) (2026-04-12)
+
+
+### Bug Fixes
+
+* Use the proper URL for FoundryVTT package release ([f576812](https://github.com/xdy/xdy-pf2e-workbench/commit/f5768121fe49da866eebe3070f9ee1802200caa3))
+
 ## [7.0.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.1...v7.0.2) (2026-04-12)
 
 
