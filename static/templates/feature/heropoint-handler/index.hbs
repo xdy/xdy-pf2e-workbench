@@ -38,11 +38,21 @@
 
     <div class="form-group">
         <label class="col-md-4 control-label" for="characters">{{{addOne}}}</label>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="reason">{{reasonLabel}}</label>
+            <div class="col-md-4">
+                <input id="reason" name="reason" type="text" placeholder="{{reasonPlaceholder}}"
+                       class="form-control input-md" />
+            </div>
+        </div>
+
         <div class="col-md-4">
             {{#each actors}}
                 <div class="checkbox">
                     <label for="{{radioId}}">
-                        <input type="checkbox" name="characters" id="{{radioId}}" value="{{id}}" {{#if checked}}checked="checked"{{/if}} />
+                        <input type="checkbox" name="characters" id="{{radioId}}" value="{{id}}"
+                               {{#if checked}}checked="checked"{{/if}} />
                         {{name}}
                     </label>
                 </div>

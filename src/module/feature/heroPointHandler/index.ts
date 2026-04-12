@@ -22,6 +22,7 @@ type HeroPointRecipient = "ALL" | "NONE" | string;
 type HeroPointHandlerResult = {
     button: HeroPointHandlerButton;
     remainingMinutes: number;
+    reason: string;
 };
 
 type HeroPointHandlerTemplateActor = {
@@ -39,6 +40,8 @@ type HeroPointHandlerTemplateData = {
     ignore: string;
     thisMany: string;
     addOne: string;
+    reasonLabel: string;
+    reasonPlaceholder: string;
     actors: HeroPointHandlerTemplateActor[];
     timerValue: string;
     timerMinutes: number;
@@ -145,7 +148,6 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
         const submitTooltip = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.startTimerLabel`);
         const stopTooltip = game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.noTimerLabel`);
         const dialogWidth = 375;
-        const dialogHeight = 785;
 
         const renderHookId = Hooks.on("renderDialogV2", (app: foundry.applications.api.DialogV2) => {
             if (!app.options.window.contentClasses?.includes("hero-point-handler-window")) {
@@ -154,10 +156,11 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
             Hooks.off("renderDialogV2", renderHookId);
 
             const el: HTMLElement = app.element;
-            el.style.top = `${Math.round((window.innerHeight - dialogHeight) / 2)}px`;
+            const top = Math.round((window.innerHeight - el.offsetHeight) / 2);
+            el.style.top = `${top}px`;
+            app.position.top = top;
             el.style.left = `${Math.round((window.innerWidth - dialogWidth) / 2)}px`;
             el.style.width = `${dialogWidth}px`;
-            el.style.height = `${dialogHeight}px`;
 
             const titleEl = el.querySelector<HTMLElement>(".window-title");
             if (titleEl) {
@@ -181,10 +184,9 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
 
         const result = <HeroPointHandlerResult | null>await foundry.applications.api.DialogV2.wait({
             position: {
-                top: Math.round((window.innerHeight - dialogHeight) / 2),
                 left: Math.round((window.innerWidth - dialogWidth) / 2),
                 width: dialogWidth,
-                height: dialogHeight,
+                height: "auto",
             },
             window: {
                 title,
@@ -200,9 +202,11 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
                     label: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.submitShortLabel`),
                     default: true,
                     callback: async (_event, button, _dialog) => {
+                        const response = handleDialogResponse(button.form ?? button.closest("form"));
                         return {
                             button: "timer",
-                            remainingMinutes: handleDialogResponse(button.form ?? button.closest("form")),
+                            remainingMinutes: response.remainingMinutes,
+                            reason: response.reason,
                         };
                     },
                 },
@@ -214,6 +218,7 @@ export async function heroPointHandler(state: HPHState): Promise<void> {
                         return {
                             button: "noTimer",
                             remainingMinutes: 0,
+                            reason: "",
                         };
                     },
                 },
@@ -330,6 +335,8 @@ async function buildHtml(remainingMinutes: number, state: HPHState): Promise<str
         }),
         timerMinutes: remainingMinutes || maxMinutes,
         maxMinutes,
+        reasonLabel: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.reasonLabel`),
+        reasonPlaceholder: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.reasonPlaceholder`),
         showAfter: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.showAfter`),
         submitShortLabel: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.submitShortLabel`),
         stopShortLabel: game.i18n.localize(`${MODULENAME}.SETTINGS.heroPointHandler.stopShortLabel`),
@@ -405,14 +412,17 @@ export async function addHeroPoints(heropoints: number, actorId: HeroPointRecipi
     }
 }
 
-function addOneToSelectedCharactersIfAny(actorIds: string[]): void {
+function addOneToSelectedCharactersIfAny(actorIds: string[], reason: string = ""): void {
     for (const actorId of actorIds) {
         addHeroPoints(1, actorId).then(() => {
             const name = game?.actors?.find((actor) => actor.id === actorId)?.name;
             if (name) {
-                const message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedFor`, {
+                let message = game.i18n.format(`${MODULENAME}.SETTINGS.heroPointHandler.addedFor`, {
                     name: name,
                 });
+                if (reason) {
+                    message += ` (${reason})`;
+                }
                 sendMessage(message);
                 if (game.settings.get(MODULENAME, "heropointHandlerNotification")) {
                     pushNotification(message);
@@ -430,9 +440,9 @@ function sendMessage(message: string, whisper: string[] | undefined = undefined)
     }
 }
 
-function handleDialogResponse(element: ParentNode | null): number {
+function handleDialogResponse(element: ParentNode | null): { remainingMinutes: number; reason: string } {
     if (!element) {
-        return 0;
+        return { remainingMinutes: 0, reason: "" };
     }
 
     const sessionStartEl = element.querySelector<HTMLInputElement>('input[name="sessionStart"]:checked');
@@ -440,6 +450,9 @@ function handleDialogResponse(element: ParentNode | null): number {
 
     const heroPointsEl = element.querySelector<HTMLInputElement>('input[name="heropoints"]');
     const heroPoints = heroPointsEl ? Number.parseInt(heroPointsEl.value) : 1;
+
+    const reasonEl = element.querySelector<HTMLInputElement>('input[name="reason"]');
+    const reason = reasonEl ? reasonEl.value : "";
 
     const actorIdEls = element.querySelectorAll<HTMLInputElement>('input[name="characters"]:checked');
     const actorIds: string[] = Array.from(actorIdEls).map((el) => el.value);
@@ -458,7 +471,7 @@ function handleDialogResponse(element: ParentNode | null): number {
                 heroPoints: heroPoints,
             });
             sendMessage(message);
-            addOneToSelectedCharactersIfAny(actorIds);
+            addOneToSelectedCharactersIfAny(actorIds, reason);
         });
     } else if (sessionStart === "ADD") {
         addHeroPoints(heroPoints).then(() => {
@@ -467,11 +480,11 @@ function handleDialogResponse(element: ParentNode | null): number {
             });
 
             sendMessage(message);
-            addOneToSelectedCharactersIfAny(actorIds);
+            addOneToSelectedCharactersIfAny(actorIds, reason);
         });
     } else if (sessionStart === "IGNORE") {
-        addOneToSelectedCharactersIfAny(actorIds);
+        addOneToSelectedCharactersIfAny(actorIds, reason);
     }
 
-    return remainingMinutes;
+    return { remainingMinutes, reason };
 }

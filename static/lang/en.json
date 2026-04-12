@@ -465,6 +465,8 @@
                 "none": "No character",
                 "noRunningTimer": "No timer running",
                 "noTimerLabel": "Discard and STOP timer.",
+                "reasonLabel": "Reason for awarding Hero Point (optional)",
+                "reasonPlaceholder": "Good RP!, Creative thinking!, etc.",
                 "resetTo": "Reset to",
                 "resetToForAll": "Hero Points reset to {heroPoints} for all",
                 "showAfter": "Show dialog again after this many minutes",
