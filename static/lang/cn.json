@@ -93,7 +93,7 @@
             },
             "heroPointHandler": {
                 "thisMany": "这些",
-                "timerStopped": "英雄点计时器已停止。",
+                "timerStopped": "英雄点计时器已终止。",
                 "timerValue": "时间（范围0-{maxMinutes}）",
                 "title": "英雄点处理器",
                 "add": "增加",
@@ -101,7 +101,7 @@
                 "minutesLeft": "当前计时器剩余时间",
                 "addedFor": "{name}的英雄点增加1",
                 "addedToForAll": "所有人的英雄点增加了{heroPoints}",
-                "instructions": "注意，此对话框开启时计时器暂停。<br>关闭此对话框后，计时器将继续计时。",
+                "instructions": "注意，此对话框存在时，计时器暂停。<br>关闭此对话框后，计时器将继续计时。",
                 "name": "启用英雄点处理器。",
                 "noTimerLabel": "清除并终止计时器。",
                 "resetTo": "重置为",
@@ -115,7 +115,11 @@
                 "ignore": "无",
                 "noRunningTimer": "没有计时器在运行",
                 "none": "无角色",
-                "hint": "勾选以启用英雄点处理功能，可设置绑定键开启对话框，该对话框可以重置或增加所有角色的英雄点，为随机（或选定角色）增加1英雄点，以及最重要的，开始计时，默认60分钟后该对话框将重新出现。"
+                "hint": "勾选以启用英雄点处理功能，可设置绑定键开启对话框，该对话框可以重置或增加所有角色的英雄点，为随机（或选定角色）增加1英雄点，以及最重要的，开始计时，默认60分钟后该对话框将重新出现。",
+                "stopShortLabel": "终止",
+                "submitShortLabel": "提交",
+                "reasonLabel": "获得英雄点的原因（可选）",
+                "reasonPlaceholder": "完美的扮演！充满创意的想法！诸如此类"
             },
             "npcMystifierPrefix": {
                 "name": "单词或随机表前缀",
@@ -380,7 +384,8 @@
                 "info": "你确定要{title}吗？{actorName}{reason}，因此没有能力攻击…",
                 "no": "无需提醒",
                 "reminder": "提醒",
-                "cancelAttack": "角色无法攻击时取消攻击"
+                "cancelAttack": "角色无法攻击时取消攻击",
+                "dying": "陷入濒死"
             },
             "tokenAnimation": {
                 "hint": "启用此项更改指示物的移动动画。如有Multilevel Tokens模组，可能会引发问题。",
@@ -449,7 +454,7 @@
                 "off": "关闭"
             },
             "castPrivateSpellHideName": {
-                "name": "…且在伤害骰信息里隐藏被秘密施放的法术的法术名。",
+                "name": "…且在伤害掷骰消息里隐藏被秘密施放的法术的法术名。",
                 "hint": "启用此项以在伤害骰里隐藏被隐蔽着施放的法术的法术名，而不是隐藏整个伤害骰。"
             },
             "nonLethalIsNotLethal": {
@@ -544,8 +549,8 @@
                 "name": "在角色表中显示配方稀有度颜色。"
             },
             "castPrivateSpellWithPublicMessageTraitsBlocklist": {
-                "hint": "不显示于公开信息中的特征，以逗号分隔（如'mental, illusion'）",
-                "name": "…但不在公开信息中显示以下特征"
+                "hint": "不显示于公开消息中的特征，以逗号分隔（如'mental, illusion'）",
+                "name": "…但不在公开消息中显示以下特征"
             },
             "castPrivateSpellAlwaysFor": {
                 "hint": "勾选默认秘密施法的对象（按住Crtl键来*不*秘密施法）",
@@ -593,7 +598,7 @@
                 "hint": "遭遇结束后收起的物品种类，以逗号分隔（如'armor,backpack,book,consumable,equipment,shield,treasure,weapon'）"
             },
             "castPrivateSpellAutoRevealOverrideGMRollMode": {
-                "name": "…且始终将自动揭示的法术内容作为公开信息发送。",
+                "name": "…且始终将自动揭示的法术内容作为公开消息发送。",
                 "hint": "强制覆盖GM设置为公开掷骰。如果关闭，GM选择的掷骰模式（公开/暗骰/盲骰/自骰）将正常应用。"
             },
             "castPrivateSpellAutoRevealPartyMembersThatKnowSpell": {
@@ -601,8 +606,8 @@
                 "name": "…并且列出知晓此被自动揭示法术的队伍成员"
             },
             "castPrivateSpellWithPublicMessageShowToGM": {
-                "hint": "同时向GM显示公开信息。",
-                "name": "…并且同时向GM显示公开信息。"
+                "hint": "同时向GM显示公开消息。",
+                "name": "…并且同时向GM显示公开消息。"
             },
             "heropointHandlerNotificationChat": {
                 "name": "…作为聊天消息或信息发送。",
