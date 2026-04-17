@@ -14,14 +14,14 @@
                 "id": "pf2e",
                 "type": "system",
                 "compatibility": {
-                    "minimum": "8.0.1"
+                    "minimum": "8.0.2"
                 }
             },
             {
                 "id": "sf2e",
                 "type": "system",
                 "compatibility": {
-                    "minimum": "1.0.1"
+                    "minimum": "1.0.2"
                 }
             }
         ]

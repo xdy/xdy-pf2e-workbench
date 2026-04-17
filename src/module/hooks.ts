@@ -278,10 +278,13 @@ async function sheatheHeldItemsAfterEncounter(encounter: EncounterPF2e) {
                     name: game?.scenes?.current?.tokens?.find((t) => t.actor?.id === actor.id)?.name ?? actor.name,
                     items: itemsToSheathe.map((i) => i.name).join(", "),
                 });
-                handleAsync(ChatMessage.create({
-                    flavor: message,
-                    speaker: ChatMessage.getSpeaker({ actor }),
-                }), "sheatheHeldItems ChatMessage");
+                handleAsync(
+                    ChatMessage.create({
+                        flavor: message,
+                        speaker: ChatMessage.getSpeaker({ actor }),
+                    }),
+                    "sheatheHeldItems ChatMessage",
+                );
             }
         }
     }
@@ -393,16 +396,18 @@ export async function createTokenHook(token: TokenDocumentPF2e, ..._args: unknow
     }
 }
 
+/** Matches `pf2e.reroll` / `pf2e.preReroll` 4th argument on pf2e v14-dev (`Check.rerollFromMessage`). */
+type Pf2eRerollHookOptions = { keep?: "new" | "higher" | "lower" };
+
 /** Hero Point variant rules */
 export function pf2eRerollHook(
     oldRoll: Rolled<CheckRoll>,
     newRoll: Rolled<CheckRoll>,
-    resource: ResourceData | boolean,
-    keep: "new" | "higher" | "lower" = "new",
+    resource: ResourceData | null,
+    hookOptions: Pf2eRerollHookOptions,
 ): void {
-    // For compat with older system, where resource:ResourceData was heroPoint:boolean
-    const heroPoints = typeof resource === "boolean" ? resource : resource.slug === "hero-points";
-    if (!heroPoints || keep !== "new") return;
+    const keep = hookOptions.keep ?? "new";
+    if (resource?.slug !== "hero-points" || keep !== "new") return;
 
     const die = newRoll.dice.find((d) => d instanceof foundry.dice.terms.Die && d.number === 1 && d.faces === 20);
     const result = die?.results.find((r) => r.active && r.result <= 10);
@@ -415,6 +420,7 @@ export function pf2eRerollHook(
         );
         // @ts-expect-error It's protected. Meh.
         newRoll._total += 10;
+        newRoll.reroll();
         newRoll.options.keeleyAdd10 = true;
     } else if (die && result && game.settings.get(MODULENAME, "heroPointRules") === "heroicRerolls") {
         // Handle Heroic Rerolls: if d20 result < 10, set it to 10
@@ -550,11 +556,14 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
             if (!item || item.type !== "spell") return;
 
             const flavor = `${game.i18n.localize(`${MODULENAME}.SETTINGS.playerSpellsChangeSendToChat.text`)}<em>@UUID[${item.sourceId}]</em></p>`;
-            handleAsync(ChatMessage.create({
-                style: CONST.CHAT_MESSAGE_STYLES.OOC,
-                speaker: ChatMessage.getSpeaker(),
-                flavor,
-            }), "playerSpellsChange ChatMessage");
+            handleAsync(
+                ChatMessage.create({
+                    style: CONST.CHAT_MESSAGE_STYLES.OOC,
+                    speaker: ChatMessage.getSpeaker(),
+                    flavor,
+                }),
+                "playerSpellsChange ChatMessage",
+            );
         }
 
         if (game.settings.get(MODULENAME, "playerSpellsChangeSendToChat")) {
