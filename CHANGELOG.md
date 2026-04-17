@@ -1,3 +1,10 @@
+## [7.0.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.3...v7.0.4) (2026-04-17)
+
+
+### Bug Fixes
+
+* Unbork reroll handling for latest pf2e ([a031fc3](https://github.com/xdy/xdy-pf2e-workbench/commit/a031fc3a5871210a701e961534d2c1d1aca3d658))
+
 ## [7.0.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.2...v7.0.3) (2026-04-12)
 
 
