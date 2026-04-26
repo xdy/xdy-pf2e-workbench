@@ -1,3 +1,11 @@
+## [7.0.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.4...v7.0.5) (2026-04-26)
+
+
+### Bug Fixes
+
+* Correct scaling NPC help text ([6ba92a2](https://github.com/xdy/xdy-pf2e-workbench/commit/6ba92a27de889572ed6c99bec384f637718c141d)), closes [#1707](https://github.com/xdy/xdy-pf2e-workbench/issues/1707)
+* Keeping up with the Macro Faeries. ([c94471e](https://github.com/xdy/xdy-pf2e-workbench/commit/c94471e0cf0e4e317824ad0ad3f79931a5639215))
+
 ## [7.0.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.3...v7.0.4) (2026-04-17)
 
 
