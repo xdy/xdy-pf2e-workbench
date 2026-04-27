@@ -1,1 +1,19 @@
-{}
+{
+  "xdy-pf2e-workbench": {
+    "npcRoller": {
+      "title": "Rullo PNG",
+      "button-label": "Rullo PNG",
+      "nav-labels": {
+        "strike": "Colpi",
+        "damage": "Danno",
+        "save": "Tiri salvezza",
+        "hp": "Punti Ferita",
+        "spell": "Incantesimo",
+        "dc": "CD",
+        "areaDamage": "Area di Danno",
+        "ac": "Classe Armatura"
+      }
+    },
+    "effectItem": "Effetto Oggetto"
+  }
+}
