@@ -342,6 +342,11 @@
             "lang": "ko",
             "name": "Korean",
             "path": "lang/ko.json"
+        },
+        {
+            "lang": "it",
+            "name": "Italian",
+            "path": "lang/it.json"
         }
     ],
     "authors": [
