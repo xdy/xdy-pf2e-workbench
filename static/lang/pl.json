@@ -77,7 +77,7 @@
           "Demoralize": "Demoralizacja",
           "DisableDevice": "Unieszkodliwienie urządzenia",
           "Disarm": "Rozbrojenie",
-          "Escape": "Ucieczka",
+          "Escape": "Uwolnienie",
           "Feint": "Finta",
           "FollowTheExpertToggle": "Podążanie za ekspertem (aktywuj)",
           "ForceOpen": "Siłowe Otwarcie",
@@ -687,8 +687,8 @@
         "name": "Włącz narzędzie NPC do szybkiego rzutu"
       },
       "npcScaler": {
-        "hint": "Zaznacz, aby zezwolić na skalowanie postaci niezależnych (nie działa jeszcze w Foundry v13)",
-        "name": "Zezwól na skalowanie postaci niezależnych (foundry v12)"
+        "hint": "Zaznacz, aby zezwolić na skalowanie postaci niezależnych",
+        "name": "Zezwól na skalowanie postaci niezależnych"
       },
       "qolWorldSettings": {
         "hint": "Włączanie i konfigurowanie ustawień Quality of Life dla MG",
