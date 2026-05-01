@@ -92,7 +92,7 @@
         "luxon": "^3.7.2",
         "minisearch": "^7.2.0",
         "nouislider": "^15.8.1",
-        "remeda": "^2.33.7",
+        "remeda": "^2.34.0",
         "sortablejs": "^1.15.7",
         "uuid": "^14.0.0"
     },
