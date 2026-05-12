@@ -1,3 +1,10 @@
+## [7.0.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.6...v7.0.7) (2026-05-12)
+
+
+### Bug Fixes
+
+* Set hookOptions to keep higher roll ([e10510b](https://github.com/xdy/xdy-pf2e-workbench/commit/e10510b316e1d8e38528af163de13e9ac7161e4e))
+
 ## [7.0.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.5...v7.0.6) (2026-04-30)
 
 
