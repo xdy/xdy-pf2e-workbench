@@ -15,31 +15,28 @@ jobs:
     # Run tests on pull requests
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
 
     steps:
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@v6
         with:
           submodules: 'true'
 
       - name: Pull & update submodules recursively
         run: |
           git submodule update --init --recursive
-          git submodule update --recursive
+          git submodule update --recursive --remote
 
       - name: Setup Node.js
-        uses: actions/setup-node@1d429da2778838620445d9bc075ad2e03ad81d12 # v4.1.0
+        uses: actions/setup-node@v6
         with:
           node-version: 24.x
-          cache: 'pnpm'
 
       - name: Enable Corepack
         run: corepack enable
 
       - name: Install
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile=false
 
       - name: Build
         run: pnpm run build
@@ -48,13 +45,10 @@ jobs:
     # Only release on push to main on xdy/xdy-pf2e-workbench
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: read
 
     steps:
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@v6
         with:
           submodules: 'true'
 
@@ -62,24 +56,23 @@ jobs:
       - name: Pull & update submodules recursively
         run: |
           git submodule update --init --recursive
-          git submodule update --recursive
+          git submodule update --recursive --remote
 
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee723069e5d99b247fedf060 # v5.1.0
+      - uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "chore: Update submodules"
 
       - name: Setup Node.js
-        uses: actions/setup-node@1d429da2778838620445d9bc075ad2e03ad81d12 # v4.1.0
+        uses: actions/setup-node@v6
         with:
           node-version: 24.x
-          cache: 'pnpm'
+          #cache: 'pnpm'
 
       - name: Enable Corepack
         run: corepack enable
 
       - name: Install
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile=false
 
       - name: Build
         run: pnpm run build
@@ -95,42 +88,42 @@ jobs:
 
       - name: Get Module ID
         id: moduleID
-        uses: notiz-dev/github-action-json-property@72607ca7a2a0953a743152504859f925b4df2c3b # v1.1.0
+        uses: notiz-dev/github-action-json-property@release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "id"
 
       - name: Get minimum
         id: minimum
-        uses: notiz-dev/github-action-json-property@72607ca7a2a0953a743152504859f925b4df2c3b # v1.1.0
+        uses: notiz-dev/github-action-json-property@release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "compatibility.minimum"
 
       - name: Get verified
         id: verified
-        uses: notiz-dev/github-action-json-property@72607ca7a2a0953a743152504859f925b4df2c3b # v1.1.0
+        uses: notiz-dev/github-action-json-property@release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "compatibility.verified"
 
       - name: Get maximum
         id: maximum
-        uses: notiz-dev/github-action-json-property@72607ca7a2a0953a743152504859f925b4df2c3b # v1.1.0
+        uses: notiz-dev/github-action-json-property@release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "compatibility.maximum"
 
       - name: Get current version
         id: version
-        uses: notiz-dev/github-action-json-property@72607ca7a2a0953a743152504859f925b4df2c3b # v1.1.0
+        uses: notiz-dev/github-action-json-property@release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "version"
 
       - name: get-npm-version
         id: package-version
-        uses: martinbeentjes/npm-get-version-action@3cf273033e0dec4120ca25e2e4643039659b8637 # v1.3.1
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
 
       - name: Submit package to FoundryVTT Package Release API
         run: |
