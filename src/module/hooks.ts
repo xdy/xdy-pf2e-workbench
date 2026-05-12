@@ -431,22 +431,7 @@ export function pf2eRerollHook(
         newRoll.options.heroicReroll = true;
     } else if (game.settings.get(MODULENAME, "heroPointRules") === "useHighestHeroPointRoll") {
         // Handle useHighestHeroPointRoll setting
-        const oldDie = oldRoll.dice.find(
-            (d) => d instanceof foundry.dice.terms.Die && d.number === 1 && d.faces === 20,
-        );
-        const oldResult = oldDie?.results.find((r) => r.active)?.result ?? 0;
-        const newResult = die?.results.find((r) => r.active)?.result ?? 0;
-
-        if (oldResult > newResult) {
-            // Replace the new roll's d20 result with the old roll's result
-            if (die && die.results.length > 0) {
-                die.results[0].result = oldResult;
-                // @ts-expect-error It's protected. Meh.
-                newRoll._total = newRoll.options.keeleyAdd10 ? oldRoll._total + 10 : oldRoll._total;
-                newRoll.options.useHighestRoll = true;
-            }
-        }
-        return;
+        hookOptions.keep = "higher";
     }
 }
 
