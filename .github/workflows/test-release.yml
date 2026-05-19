@@ -10,6 +10,9 @@ env:
   package_type: module
   node_version: 24
 
+permissions:
+  contents: read
+
 jobs:
   test:
     # Run tests on pull requests
@@ -18,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: 'true'
 
@@ -28,7 +31,7 @@ jobs:
           git submodule update --recursive --remote
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.x
 
@@ -46,9 +49,12 @@ jobs:
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main') && github.repository == 'xdy/xdy-pf2e-workbench'
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: 'true'
 
@@ -58,12 +64,12 @@ jobs:
           git submodule update --init --recursive
           git submodule update --recursive --remote
 
-      - uses: stefanzweifel/git-auto-commit-action@v7
+      - uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7
         with:
           commit_message: "chore: Update submodules"
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24.x
           #cache: 'pnpm'
@@ -88,42 +94,42 @@ jobs:
 
       - name: Get Module ID
         id: moduleID
-        uses: notiz-dev/github-action-json-property@release
+        uses: notiz-dev/github-action-json-property@a5a9c668b16513c737c3e1f8956772c99c73f6e8 # release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "id"
 
       - name: Get minimum
         id: minimum
-        uses: notiz-dev/github-action-json-property@release
+        uses: notiz-dev/github-action-json-property@a5a9c668b16513c737c3e1f8956772c99c73f6e8 # release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "compatibility.minimum"
 
       - name: Get verified
         id: verified
-        uses: notiz-dev/github-action-json-property@release
+        uses: notiz-dev/github-action-json-property@a5a9c668b16513c737c3e1f8956772c99c73f6e8 # release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "compatibility.verified"
 
       - name: Get maximum
         id: maximum
-        uses: notiz-dev/github-action-json-property@release
+        uses: notiz-dev/github-action-json-property@a5a9c668b16513c737c3e1f8956772c99c73f6e8 # release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "compatibility.maximum"
 
       - name: Get current version
         id: version
-        uses: notiz-dev/github-action-json-property@release
+        uses: notiz-dev/github-action-json-property@a5a9c668b16513c737c3e1f8956772c99c73f6e8 # release
         with:
           path: "./dist/${{ env.package_type }}.json"
           prop_path: "version"
 
       - name: get-npm-version
         id: package-version
-        uses: martinbeentjes/npm-get-version-action@v1.3.1
+        uses: martinbeentjes/npm-get-version-action@3cf273023a0dda27efcd3164bdfb51908dd46a5b # v1.3.1
 
       - name: Submit package to FoundryVTT Package Release API
         run: |
