@@ -697,7 +697,7 @@ packages:
         optional: true
 
   '@foundryvtt/foundryvtt-cli@https://codeload.github.com/xyzzy42/foundryvtt-cli/tar.gz/ccb58ccc99e7a034cdac90b0f857cf6eb2293cab':
-    resolution: {tarball: https://codeload.github.com/xyzzy42/foundryvtt-cli/tar.gz/ccb58ccc99e7a034cdac90b0f857cf6eb2293cab}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/xyzzy42/foundryvtt-cli/tar.gz/ccb58ccc99e7a034cdac90b0f857cf6eb2293cab}
     version: 0.0.5
     engines: {node: '>17.0.0'}
     hasBin: true
@@ -2121,7 +2121,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   foundry-pf2e@https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/78aa843c39a59e06ede407a45ed1fd627169b5a3:
-    resolution: {tarball: https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/78aa843c39a59e06ede407a45ed1fd627169b5a3}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/7H3LaughingMan/foundry-pf2e/tar.gz/78aa843c39a59e06ede407a45ed1fd627169b5a3}
     version: 1.0.0
 
   fs-extra@11.3.5:
