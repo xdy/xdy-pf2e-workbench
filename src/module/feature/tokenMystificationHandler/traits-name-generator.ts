@@ -27,16 +27,16 @@ async function fixesPreAndPost(settingkey: string): Promise<string> {
                     const document = await pack?.getDocument(id);
                     const draw = await (<RollTable>document).draw({ displayChat: false });
                     if (draw && draw?.results[0]) {
-                        // @ts-expect-error name works but not in the types it seems
-                        return draw?.results[0].name;
+                        // @ts-expect-error description works but not in the types it seems
+                        return draw?.results[0].description;
                     }
                 }
             }
         } else {
             const draw = await table?.draw({ displayChat: false });
             if (draw && draw?.results[0]) {
-                // @ts-expect-error name works but not in the types it seems
-                return draw?.results[0].name;
+                // @ts-expect-error description works but not in the types it seems
+                return draw?.results[0].description;
             }
         }
         return <string>fixSetting;
