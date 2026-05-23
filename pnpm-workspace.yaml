@@ -1,16 +1,9 @@
-ignoredBuiltDependencies:
-  - '@parcel/watcher'
-  - classic-level
-  - unrs-resolver
-
-onlyBuiltDependencies:
-  - esbuild
-
 minimumReleaseAge: 4320
 blockExoticSubdeps: true
 trustPolicy: no-downgrade
 trustPolicyIgnoreAfter: 10080
 allowBuilds:
-  '@parcel/watcher': false
-  classic-level: false
-  esbuild: false
+    '@parcel/watcher': false
+    classic-level: false
+    esbuild: false
+    unrs-resolver: false
