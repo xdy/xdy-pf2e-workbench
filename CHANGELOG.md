@@ -1,3 +1,11 @@
+## [7.0.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.7...v7.0.8) (2026-05-24)
+
+
+### Bug Fixes
+
+* NPC Mystification prefix/postfix from tables (e.g. Workbench Adjectives) works again. ([5e2c3ee](https://github.com/xdy/xdy-pf2e-workbench/commit/5e2c3eedaf8c1c81585efc837ca91aeddb556823))
+* NPC Mystification prefix/postfix from tables (e.g. Workbench Adjectives) works again. ([0106d05](https://github.com/xdy/xdy-pf2e-workbench/commit/0106d05e636947d76b89c309211a443a7acc81e5))
+
 ## [7.0.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.6...v7.0.7) (2026-05-12)
 
 
