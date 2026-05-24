@@ -199,6 +199,15 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => updateHooks(),
             },
+            showItemLicenseTags: {
+                name: `${MODULENAME}.SETTINGS.showItemLicenseTags.name`,
+                hint: `${MODULENAME}.SETTINGS.showItemLicenseTags.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+            },
         };
     }
 

@@ -38,6 +38,7 @@ import {
     preUpdateTokenHook,
     renderActorSheetHook,
     renderChatMessageHook,
+    renderItemSheetHook,
     renderTokenHUDHook,
 } from "./hooks.js";
 import { onScaleNPCContextHook } from "./feature/cr-scaler/NPCScalerSetup.js";
@@ -146,6 +147,7 @@ export function updateHooks(cleanSlate = false): void {
     const playerAbcdRarityColour = gs.get(MODULENAME, "playerAbcdRarityColour");
     const playerSpellsChangeSendToChat = gs.get(MODULENAME, "playerSpellsChangeSendToChat");
     const sheatheHeldItemsAfterEncounter = gs.get(MODULENAME, "sheatheHeldItemsAfterEncounter");
+    const showItemLicenseTags = gs.get(MODULENAME, "showItemLicenseTags");
 
     const handleDyingRecoveryRoll = gs.get(MODULENAME, "handleDyingRecoveryRoll");
     const giveWoundedWhenDyingRemoved = gs.get(MODULENAME, "giveWoundedWhenDyingRemoved");
@@ -243,6 +245,8 @@ export function updateHooks(cleanSlate = false): void {
     );
 
     handle("deleteCombat", sheatheHeldItemsAfterEncounter, deleteCombatHook);
+
+    handle("renderItemSheet", showItemLicenseTags, renderItemSheetHook);
 
     changePauseText();
 }

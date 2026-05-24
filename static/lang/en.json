@@ -368,6 +368,10 @@
                 "name": "Make sending a spell to chat send a link to the spell item rather than the full spell.",
                 "text": "Spell was sent to chat: "
             },
+            "showItemLicenseTags": {
+                "hint": "World setting to show a LICENSE:ORC or LICENSE:OGL tag in the details section of item sheets.",
+                "name": "Show license tags on item sheets."
+            },
             "castPrivateSpell": {
                 "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM.",
                 "name": "Ctrl-click Cast to cast in private.",
