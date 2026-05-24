@@ -462,7 +462,13 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
         return itemId ? sheet.actor?.items?.get(itemId) : null;
     }
 
-    function performColoring(setting: string, listSelector: string, itemSelector: string, fetchItem) {
+    function performColoring(
+        setting: string,
+        listSelector: string,
+        itemSelector: string,
+        fetchItem,
+        headingSelector: string = "h4",
+    ) {
         if (sheet.actor?.type === CHARACTER_TYPE && game.settings.get(MODULENAME, setting)) {
             const lists = html?.querySelectorAll(listSelector) || [];
             for (const list of lists) {
@@ -472,8 +478,10 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
                     if (item) {
                         const rarity = item.system?.traits?.rarity;
                         if (rarity) {
-                            const h4Elements = element.querySelectorAll("h4");
-                            h4Elements.forEach((h4) => h4.classList.add(`xdy-pf2e-workbench-rarity-${rarity}`));
+                            const headingElements = element.querySelectorAll(headingSelector);
+                            headingElements.forEach((heading) =>
+                                heading.classList.add(`xdy-pf2e-workbench-rarity-${rarity}`),
+                            );
                         }
                     }
                 }
@@ -491,6 +499,15 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
 
     performColoring("playerCraftingRarityColour", ".crafting-pane", ".formula-item", (element) =>
         itemFromCompendium(element, "data-item-uuid"),
+    );
+
+    // Colorize Ancestry, Background, Class, and Deity on the character sheet
+    performColoring(
+        "playerAbcdRarityColour",
+        ".abcd",
+        ".detail",
+        (element) => itemFromActor(element.querySelector(".detail-item-control") ?? element, "data-item-id"),
+        "h3",
     );
 
     if (sheet.actor?.type === CHARACTER_TYPE) {

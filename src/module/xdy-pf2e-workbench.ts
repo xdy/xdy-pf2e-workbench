@@ -143,6 +143,7 @@ export function updateHooks(cleanSlate = false): void {
     const playerFeatsRarityColour = gs.get(MODULENAME, "playerFeatsRarityColour");
     const playerFeatsPrerequisiteHint = gs.get(MODULENAME, "playerFeatsPrerequisiteHint");
     const playerSpellsRarityColour = gs.get(MODULENAME, "playerSpellsRarityColour");
+    const playerAbcdRarityColour = gs.get(MODULENAME, "playerAbcdRarityColour");
     const playerSpellsChangeSendToChat = gs.get(MODULENAME, "playerSpellsChangeSendToChat");
     const sheatheHeldItemsAfterEncounter = gs.get(MODULENAME, "sheatheHeldItemsAfterEncounter");
 
@@ -235,6 +236,7 @@ export function updateHooks(cleanSlate = false): void {
         playerFeatsRarityColour ||
             playerFeatsPrerequisiteHint ||
             playerSpellsRarityColour ||
+            playerAbcdRarityColour ||
             castPrivateSpell ||
             playerSpellsChangeSendToChat,
         renderActorSheetHook,
