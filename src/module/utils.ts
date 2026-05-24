@@ -1,4 +1,4 @@
-import { ActorPF2e, ChatMessagePF2e } from "foundry-pf2e";
+import { ActorPF2e, ChatMessagePF2e, PhysicalItemPF2e } from "foundry-pf2e";
 import { MODULENAME, Phase, phase } from "./xdy-pf2e-workbench.js";
 import BaseUser from "foundry/common/documents/user.mjs";
 import * as systems from "./utils/systems.ts";
@@ -50,6 +50,29 @@ function isActuallyDamageRoll(message: ChatMessagePF2e): boolean {
 function getActorFromMessage(message: ChatMessagePF2e): ActorPF2e | null {
     const messageToken = canvas?.scene?.tokens.get(message.speaker.token as string);
     return messageToken?.actor ?? game.actors?.get(message.speaker.actor as string) ?? null;
+}
+
+export function extractHtmlElement(element: unknown): HTMLElement | undefined {
+    return element instanceof HTMLElement ? element : (element as ArrayLike<HTMLElement>)[0];
+}
+
+export function sendHeldItemChatMessage(
+    actor: ActorPF2e,
+    items: PhysicalItemPF2e[],
+    i18nKey: string,
+    context: string,
+): void {
+    const message = game.i18n.format(i18nKey, {
+        name: game?.scenes?.current?.tokens?.find((t) => t.actor?.id === actor.id)?.name ?? actor.name,
+        items: items.map((i) => i.name).join(", "),
+    });
+    handleAsync(
+        ChatMessage.create({
+            flavor: message,
+            speaker: ChatMessage.getSpeaker({ actor }),
+        }),
+        context,
+    );
 }
 
 export {
@@ -119,10 +142,9 @@ function log(logLevel = 2, ...args: unknown[]): void {
 export function debounce(callback: (...args: unknown[]) => void, wait: number): (...args: unknown[]) => void {
     let timeout: NodeJS.Timeout | undefined;
     return (...args: unknown[]): void => {
-        // eslint-disable-next-line @typescript-eslint/no-this-alias
-        const context = this;
         clearTimeout(timeout);
-        timeout = setTimeout(() => callback.apply(context, args), wait);
+        // @ts-expect-error TODO fix typing
+        timeout = setTimeout(() => callback.apply(this, args), wait);
     };
 }
 
@@ -156,6 +178,7 @@ export function setValue(object: Record<string, unknown>, path: string, value: u
     const top = split.pop();
 
     if (top !== undefined) {
+        // @ts-expect-error TODO fix typing
         split.reduce(function (o, k, i, kk) {
             return (o[k] = o[k] || (isFinite(i + 1 in kk ? Number(kk[i + 1]) : Number(top)) ? [] : {}));
         }, object)[top] = value;

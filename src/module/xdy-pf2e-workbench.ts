@@ -5,10 +5,12 @@
  * Software License: Apache 2.0
  */
 
+import { preloadTemplates } from "./preloadTemplates.js";
+import "../styles/xdy-pf2e-workbench.scss";
+
 // TODO Make it so holding shift pops up a dialog where one can change the name of the mystified creature
 // TODO Add an option to have the 'demystify' button post a message to chat/pop up a dialog with demystification details (e.g. pretty much the recall knowledge macro), with the chat button doing the actual demystification.
 // TODO Make the button post a chat message with a properly set up RK roll that players can click, as well as a gm-only button on the message that the gm can use to actually unmystify.
-import { preloadTemplates } from "./preloadTemplates.js";
 import { registerWorkbenchKeybindings } from "./keybinds.js";
 import { ActorPF2e } from "foundry-pf2e";
 
@@ -36,8 +38,10 @@ import {
     preCreateItemHook,
     preUpdateActorHook,
     preUpdateTokenHook,
+    readyHook,
     renderActorSheetHook,
     renderChatMessageHook,
+    renderGamePauseHook,
     renderItemSheetHook,
     renderTokenHUDHook,
 } from "./hooks.js";
@@ -57,11 +61,11 @@ import { registerWorkbenchSettings } from "./settings/index.js";
 import { mystifyNpcItems } from "./feature/qolHandler/index.js";
 import { getAllFromAllowedPacks } from "./feature/api/getAllFromAllowedPacks.js";
 
-import "../styles/xdy-pf2e-workbench.scss";
 import { refocus } from "./feature/macros/refocus.js";
 import { followTheExpert } from "./feature/macros/follow-the-expert.js";
 import { hypercognition } from "./feature/macros/hypercognition.js";
 import { npcScaler } from "./feature/macros/npcScaler.js";
+import { registerHandlebarsHelpers } from "./utils/handlebarsHelpers.ts";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 export const NPC_TYPE = "npc";
@@ -80,6 +84,7 @@ export enum Phase {
 
 export let phase: Phase = Phase.DOWN;
 
+// @ts-expect-error TODO fix typing
 function handle(hookName, shouldBeOn, hookFunction, once = false) {
     if (!activeHooks.has(hookName)) {
         if (shouldBeOn) {
@@ -250,17 +255,22 @@ export function updateHooks(cleanSlate = false): void {
 
     handle("renderItemSheet", showItemLicenseTags, renderItemSheetHook);
 
-    changePauseText();
+    const customPauseImage = gs.get(MODULENAME, "customPauseImage");
+    const customPauseText = gs.get(MODULENAME, "customPauseText");
+    const pauseImageNoSpin = gs.get(MODULENAME, "pauseImageNoSpin");
+    handle(
+        "renderGamePause",
+        customPauseImage !== "" || customPauseText !== "" || pauseImageNoSpin,
+        renderGamePauseHook,
+    );
+
+    handle(
+        "ready",
+        gs.get(MODULENAME, "legacyVariantRuleAncestryParagon") || gs.get(MODULENAME, "legacyVariantRuleDualClass"),
+        readyHook,
+        true,
+    );
 }
-
-// "renderGamePause" is the AppV2 equivalent to "renderPause", used in Foundry v13+
-Hooks.on("renderGamePause", (_app, _html, _options) => {
-    changePauseText();
-});
-
-Hooks.on("renderPause", (_app, _html, _options) => {
-    changePauseText();
-});
 
 // Initialize module
 Hooks.once("init", async (_actor: ActorPF2e) => {
@@ -288,60 +298,6 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     // Register custom sheets (if any)
 });
 
-export function changePauseText(): void {
-    function encode(text: string): string {
-        try {
-            const isEncoded = text !== decodeURIComponent(text);
-            return isEncoded ? text : encodeURIComponent(text);
-        } catch {
-            // text contains a raw % sign
-            return encodeURIComponent(text);
-        }
-    }
-
-    if (!document?.querySelector("#pause")?.classList.contains("paused")) {
-        return;
-    }
-
-    const style = document.documentElement.style;
-
-    const imagePath = <string>game.settings.get(MODULENAME, "customPauseImage");
-
-    if (imagePath !== "") {
-        let url: string;
-        if (/^https?:/i.test(imagePath)) {
-            const imageUrl = new URL(imagePath);
-            const strings = imageUrl.pathname.split("/");
-            strings.forEach((str, index) => {
-                strings[index] = encode(str);
-            });
-            imageUrl.pathname = strings.join("/");
-
-            url = `url("${imageUrl}")`;
-        } else {
-            url = `url("../../../${encode(imagePath)}")`;
-        }
-        style.setProperty("--xdy-pf2e-workbench-pause", url);
-    }
-
-    if (phase >= Phase.READY) {
-        const element = document.querySelector<HTMLElement>("#pause > figcaption");
-        const pauseImage = document.querySelector("#pause > img");
-
-        const text = <string>game.settings.get(MODULENAME, "customPauseText");
-
-        if (text && element) {
-            element.textContent = text;
-        }
-
-        if (game.settings.get(MODULENAME, "pauseImageNoSpin")) {
-            pauseImage?.classList.remove("fa-spin");
-        } else {
-            pauseImage?.classList.add("fa-spin");
-        }
-    }
-}
-
 // Setup module
 Hooks.once("setup", async () => {
     logInfo(`${MODULENAME} | Setting up`);
@@ -350,79 +306,6 @@ Hooks.once("setup", async () => {
 
     // General module setup
 });
-
-function handleCampaignFeatSection(): void {
-    const legacyVariantRuleAncestryParagon = game.settings.get(MODULENAME, "legacyVariantRuleAncestryParagon");
-    const legacyVariantRuleDualClass = game.settings.get(MODULENAME, "legacyVariantRuleDualClass");
-
-    // Add campaign feat sections if enabled
-    if (legacyVariantRuleDualClass || legacyVariantRuleAncestryParagon) {
-        const campaignFeatSections = systems.getSetting<
-            {
-                id: string;
-                label: string;
-                supported: string[];
-                slots: number[];
-            }[]
-        >("campaignFeatSections");
-        if (legacyVariantRuleAncestryParagon) {
-            if (!campaignFeatSections.find((section) => section.id === "xdy_ancestryparagon")) {
-                campaignFeatSections.push({
-                    id: "xdy_ancestryparagon",
-                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleAncestryParagon.title`),
-                    supported: ["ancestry"],
-                    slots: [1, 3, 7, 11, 15, 19],
-                });
-            }
-        }
-
-        if (legacyVariantRuleDualClass) {
-            if (!campaignFeatSections.find((section) => section.id === "xdy_dualclass")) {
-                campaignFeatSections.push({
-                    id: "xdy_dualclass",
-                    label: game.i18n.localize(`${MODULENAME}.SETTINGS.legacyVariantRuleDualClass.title`),
-                    supported: ["class"],
-                    slots: [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
-                });
-            }
-        }
-
-        systems.setSetting("campaignFeatSections", campaignFeatSections);
-    }
-
-    const campaignFeatSections = systems.getSetting<
-        {
-            id: string;
-            label: string;
-            supported: string[];
-            slots: number[];
-        }[]
-    >("campaignFeatSections");
-    // ... or remove it if disabled.
-    if (
-        campaignFeatSections &&
-        !legacyVariantRuleDualClass &&
-        campaignFeatSections.find((section) => section.id === "xdy_dualclass")
-    ) {
-        campaignFeatSections.splice(
-            campaignFeatSections.findIndex((section) => section.id === "xdy_dualclass"),
-            1,
-        );
-        systems.setSetting("campaignFeatSections", campaignFeatSections);
-    }
-
-    if (
-        campaignFeatSections &&
-        !legacyVariantRuleAncestryParagon &&
-        campaignFeatSections.find((section) => section.id === "xdy_ancestryparagon")
-    ) {
-        campaignFeatSections.splice(
-            campaignFeatSections.findIndex((section) => section.id === "xdy_ancestryparagon"),
-            1,
-        );
-        systems.setSetting("campaignFeatSections", campaignFeatSections);
-    }
-}
 
 // When ready
 Hooks.once("ready", () => {
@@ -502,47 +385,6 @@ Hooks.once("ready", () => {
         }
     });
 
-    handleCampaignFeatSection();
-
     phase = Phase.ACTIVE;
     Hooks.callAll(`${MODULENAME}.moduleReady`);
 });
-
-function registerHandlebarsHelpers() {
-    Handlebars.registerHelper("xdy_includes", function (array: any[], value: any, options: any) {
-        if (array.includes(value)) {
-            return options.fn(this);
-        } else {
-            return options.inverse(this);
-        }
-    });
-    Handlebars.registerHelper("xdy_ifeq", function (v1, v2, options) {
-        if (v1 === v2) return options.fn(this);
-        else return options.inverse();
-    });
-    Handlebars.registerHelper("xdy_ifne", function (v1, v2, options) {
-        if (v1 !== v2) return options.fn(this);
-        else return options.inverse();
-    });
-
-    Handlebars.registerHelper("xdy_isNaN", function (context, options) {
-        if (isNaN(context) && !(typeof context === "string")) {
-            return options.fn(this);
-        } else {
-            return options.inverse(this);
-        }
-    });
-
-    Handlebars.registerHelper("xdy_undefined", function () {
-        return undefined;
-    });
-
-    Handlebars.registerHelper("xdy_hasKey", function (context, key) {
-        for (const prop of context) {
-            if (Object.hasOwn(prop, key)) {
-                return true;
-            }
-        }
-        return false;
-    });
-}
