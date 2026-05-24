@@ -42,6 +42,7 @@ import {
     hideSpellNameInDamageroll,
 } from "./feature/qolHandler/handlePrivateSpellcasting.js";
 import { Rolled } from "foundry/client/dice/roll.mts";
+import { addOglTagToCharacterSheet } from "./feature/characterOglContent/index.js";
 
 export const preCreateChatMessageHook = (
     message: ChatMessagePF2e,
@@ -572,6 +573,11 @@ export function renderActorSheetHook(sheet: ActorSheetPF2e<ActorPF2e>, element: 
         if (game.settings.get(MODULENAME, "playerSpellsChangeSendToChat")) {
             processSpells();
         }
+    }
+
+    // Add OGL tag to character sheet if setting enabled
+    if (html && sheet.actor && game.settings.get(MODULENAME, "showCharacterOglTag")) {
+        addOglTagToCharacterSheet(html, sheet.actor);
     }
 }
 

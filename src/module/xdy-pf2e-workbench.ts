@@ -148,6 +148,7 @@ export function updateHooks(cleanSlate = false): void {
     const playerSpellsChangeSendToChat = gs.get(MODULENAME, "playerSpellsChangeSendToChat");
     const sheatheHeldItemsAfterEncounter = gs.get(MODULENAME, "sheatheHeldItemsAfterEncounter");
     const showItemLicenseTags = gs.get(MODULENAME, "showItemLicenseTags");
+    const showCharacterOglTag = gs.get(MODULENAME, "showCharacterOglTag");
 
     const handleDyingRecoveryRoll = gs.get(MODULENAME, "handleDyingRecoveryRoll");
     const giveWoundedWhenDyingRemoved = gs.get(MODULENAME, "giveWoundedWhenDyingRemoved");
@@ -240,7 +241,8 @@ export function updateHooks(cleanSlate = false): void {
             playerSpellsRarityColour ||
             playerAbcdRarityColour ||
             castPrivateSpell ||
-            playerSpellsChangeSendToChat,
+            playerSpellsChangeSendToChat ||
+            showCharacterOglTag,
         renderActorSheetHook,
     );
 

@@ -39,11 +39,33 @@
     color: #54166e;
 }
 
-/** License tags on item sheets */
-.xdy-pf2e-workbench-license-tag {
+/** License tags on item sheets and OGL tag on character sheets */
+.xdy-pf2e-workbench-license-tag,
+.xdy-pf2e-workbench-ogl-char-tag {
     color: #888;
     border-color: #aaa;
     background: #eee;
+}
+
+.xdy-pf2e-workbench-ogl-char-tag {
+    cursor: pointer;
+}
+
+.xdy-pf2e-workbench-ogl-char-tag:hover {
+    color: #666;
+    border-color: #888;
+    background: #ddd;
+}
+
+/** OGL items list in dialog */
+.xdy-pf2e-workbench-ogl-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5em 0;
+}
+
+.xdy-pf2e-workbench-ogl-list li {
+    padding: 0.25em 0;
 }
 
 /** Keeley's Hero Point Rule */

@@ -372,6 +372,14 @@
                 "hint": "World setting to show a LICENSE:ORC or LICENSE:OGL tag in the details section of item sheets.",
                 "name": "Show license tags on item sheets."
             },
+            "showCharacterOglTag": {
+                "hint": "World setting to show a LICENSE:OGL tag on character sheets if the character has any OGL-licensed items. Clicking the tag opens a list of OGL items.",
+                "name": "Show OGL tag on character sheets.",
+                "title": "OGL Content",
+                "clickToView": "Click to view OGL-licensed items",
+                "noOglContent": "This character has no OGL-licensed content.",
+                "oglItemsFound": "This character has {count} OGL-licensed item(s):"
+            },
             "castPrivateSpell": {
                 "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM.",
                 "name": "Ctrl-click Cast to cast in private.",

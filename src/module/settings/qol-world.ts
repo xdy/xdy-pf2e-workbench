@@ -208,6 +208,15 @@ export class WorkbenchQolWorldSettings extends SettingsMenuPF2eWorkbench {
                 type: Boolean,
                 onChange: () => updateHooks(),
             },
+            showCharacterOglTag: {
+                name: `${MODULENAME}.SETTINGS.showCharacterOglTag.name`,
+                hint: `${MODULENAME}.SETTINGS.showCharacterOglTag.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+            },
         };
     }
 
