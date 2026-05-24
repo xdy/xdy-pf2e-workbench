@@ -1,3 +1,18 @@
+# [7.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.8...v7.1.0) (2026-05-24)
+
+
+### Bug Fixes
+
+* Bug fixes and cleanup. ([4115a93](https://github.com/xdy/xdy-pf2e-workbench/commit/4115a93196f535868014b535f5125a00742d5c1f))
+
+
+### Features
+
+* Add setting to colorize abcd based on selected item rarity. ([affbb86](https://github.com/xdy/xdy-pf2e-workbench/commit/affbb862bfce58d822575d52b02458e21d775673))
+* Add setting to only mystify creatures of a certain rarity or rarer, and/or of a certain level or higher, similar to item mystification. Split npc mystification and item mystification into separate setting submenus. ([3bdaefe](https://github.com/xdy/xdy-pf2e-workbench/commit/3bdaefe0bc80f2a736831b6eac560703e23bdea6))
+* Add setting to show an item's license (ORC or OGL) on the details tab. ([0ce919b](https://github.com/xdy/xdy-pf2e-workbench/commit/0ce919b888b570b1470929ffb52034493b60161d))
+* Add setting to show if a character has any ogl-licensed items in the trait tags list, as a clickable link that opens a dialog with the ogl-licensed items. ([8f7ff0f](https://github.com/xdy/xdy-pf2e-workbench/commit/8f7ff0feb0e330e3c080274269b4aad72a924ee0))
+
 ## [7.0.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.7...v7.0.8) (2026-05-24)
 
 
