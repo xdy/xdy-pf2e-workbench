@@ -5,59 +5,11 @@ import { SettingRegistration } from "foundry/client/helpers/client-settings.mts"
 export let mystifyRandomPropertyType: string;
 export let mystifyModifierKey: string;
 
-export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
-    static override namespace = "mystificationSettings";
+export class WorkbenchNpcMystificationSettings extends SettingsMenuPF2eWorkbench {
+    static override namespace = "npcMystificationSettings";
 
     public static override get settings(): Record<string, SettingRegistration> {
         return {
-            npcMystifyAllPhysicalMagicalItems: {
-                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.hint`,
-                scope: "world",
-                default: "no",
-                type: String,
-                choices: {
-                    no: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.no`),
-                    onScene: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.onScene`),
-                    onZeroHp: game.i18n.localize(`${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItems.onZeroHp`),
-                },
-                onChange: () => updateHooks(),
-                requiresReload: true,
-            },
-            npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater: {
-                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater.hint`,
-                scope: "world",
-                default: -1,
-                type: Number,
-            },
-            npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel: {
-                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel.hint`,
-                scope: "world",
-                default: false,
-                type: Boolean,
-            },
-            npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier: {
-                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier.hint`,
-                scope: "world",
-                default: "1.0",
-                type: String,
-            },
-            npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater: {
-                name: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater.name`,
-                hint: `${MODULENAME}.SETTINGS.npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater.hint`,
-                scope: "world",
-                default: "common",
-                type: String,
-                choices: {
-                    common: game.i18n.localize("PF2E.TraitCommon"),
-                    uncommon: game.i18n.localize("PF2E.TraitUncommon"),
-                    rare: game.i18n.localize("PF2E.TraitRare"),
-                    unique: game.i18n.localize("PF2E.TraitUnique"),
-                },
-            },
             npcMystifier: {
                 name: `${MODULENAME}.SETTINGS.npcMystifier.name`,
                 hint: `${MODULENAME}.SETTINGS.npcMystifier.hint`,
@@ -110,6 +62,33 @@ export class WorkbenchMystificationSettings extends SettingsMenuPF2eWorkbench {
                 hint: `${MODULENAME}.SETTINGS.npcMystifierRandomPropertySkipForUnique.hint`,
                 scope: "world",
                 default: true,
+                type: Boolean,
+            },
+            npcMystifierIncludeCreaturesOfThisRarityOrGreater: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierIncludeCreaturesOfThisRarityOrGreater.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierIncludeCreaturesOfThisRarityOrGreater.hint`,
+                scope: "world",
+                default: "common",
+                type: String,
+                choices: {
+                    common: game.i18n.localize("PF2E.TraitCommon"),
+                    uncommon: game.i18n.localize("PF2E.TraitUncommon"),
+                    rare: game.i18n.localize("PF2E.TraitRare"),
+                    unique: game.i18n.localize("PF2E.TraitUnique"),
+                },
+            },
+            npcMystifierIncludeCreaturesOfThisLevelOrGreater: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierIncludeCreaturesOfThisLevelOrGreater.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierIncludeCreaturesOfThisLevelOrGreater.hint`,
+                scope: "world",
+                default: -1,
+                type: Number,
+            },
+            npcMystifierIncludeCreaturesOfThisLevelOrGreaterUsingPartyLevel: {
+                name: `${MODULENAME}.SETTINGS.npcMystifierIncludeCreaturesOfThisLevelOrGreaterUsingPartyLevel.name`,
+                hint: `${MODULENAME}.SETTINGS.npcMystifierIncludeCreaturesOfThisLevelOrGreaterUsingPartyLevel.hint`,
+                scope: "world",
+                default: false,
                 type: Boolean,
             },
             npcMystifierPrefix: {

@@ -1,5 +1,6 @@
 import { MODULENAME, updateHooks } from "../xdy-pf2e-workbench.js";
-import { WorkbenchMystificationSettings } from "./mystification.js";
+import { WorkbenchNpcMystificationSettings } from "./npc-mystification.js";
+import { WorkbenchItemMystificationSettings } from "./item-mystification.js";
 import { WorkbenchRemindersSettings } from "./reminders.js";
 import { WorkbenchWorldAutomationSettings } from "./automation-world.js";
 import { WorkbenchClientAutomationSettings } from "./automation-client.js";
@@ -7,7 +8,7 @@ import { WorkbenchQolWorldSettings } from "./qol-world.js";
 import { logInfo } from "../utils.js";
 import { WorkbenchHouseRulesSettings } from "./houseRules.js";
 
-export { mystifyModifierKey, mystifyRandomPropertyType } from "./mystification.js";
+export { mystifyModifierKey, mystifyRandomPropertyType } from "./npc-mystification.js";
 
 function collapseChoices(settingKey: string): Record<string, string> {
     return {
@@ -20,7 +21,8 @@ function collapseChoices(settingKey: string): Record<string, string> {
 export function registerWorkbenchSettings(): void {
     logInfo(`${MODULENAME} | registerSettings`);
 
-    WorkbenchMystificationSettings.registerSettingsAndCreateMenu("fa-solid fa-eye-slash");
+    WorkbenchNpcMystificationSettings.registerSettingsAndCreateMenu("fa-solid fa-eye-slash");
+    WorkbenchItemMystificationSettings.registerSettingsAndCreateMenu("fa-solid fa-mask");
     WorkbenchRemindersSettings.registerSettingsAndCreateMenu("fa-solid fa-bell");
     WorkbenchQolWorldSettings.registerSettingsAndCreateMenu("fa-solid fa-smile");
     WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fa-solid fa-robot");

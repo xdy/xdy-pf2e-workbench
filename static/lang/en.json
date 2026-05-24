@@ -555,10 +555,15 @@
                 "hint": "World keybind for moving selected combatant to before the current combatant, normally because the current combatant has killed the selected combatant. Due to rounding several combatants may show the same initiative in the list.",
                 "name": "(World) keybind to move selected combatant before current combatant."
             },
-            "mystificationSettings": {
-                "hint": "Enable and configure NPC mystification",
-                "label": "Manage NPC Mystification Settings",
-                "name": "NPC Mystification Settings"
+            "npcMystificationSettings": {
+                "hint": "Enable and configure NPC token mystification",
+                "label": "Manage NPC Token Mystification Settings",
+                "name": "NPC Token Mystification Settings"
+            },
+            "itemMystificationSettings": {
+                "hint": "Configure NPC item mystification",
+                "label": "Manage NPC Item Mystification Settings",
+                "name": "NPC Item Mystification Settings"
             },
             "notifications": {
                 "cantMystify": "You cannot mystify this token. Is it on the active scene, and, are you a GM?"
@@ -681,6 +686,18 @@
             "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
                 "hint": "Mystify items only if they are of this rarity or greater.",
                 "name": "Mystify items only if they are of this rarity or greater."
+            },
+            "npcMystifierIncludeCreaturesOfThisRarityOrGreater": {
+                "hint": "Use trait-based name generation (settings below) only for creatures of this rarity or greater. All creatures are still mystified — those below this threshold get a simpler name without trait-based components.",
+                "name": "Only use trait-based names for creatures of this rarity or greater"
+            },
+            "npcMystifierIncludeCreaturesOfThisLevelOrGreater": {
+                "hint": "Use trait-based name generation (settings below) only for creatures of this level or greater. -1 disables. All creatures are still mystified.",
+                "name": "Only use trait-based names for creatures of this level or greater"
+            },
+            "npcMystifierIncludeCreaturesOfThisLevelOrGreaterUsingPartyLevel": {
+                "hint": "Use party level to determine the minimum creature level for trait-based name generation. Overrides manual entry.",
+                "name": "Only use trait-based names for creatures of party level or greater"
             },
             "npcRoller": {
                 "hint": "Check to enable the NPC quick roller utility.",

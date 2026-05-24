@@ -62,7 +62,11 @@ async function fetchRandomWordPrefix(): Promise<string> {
     return "";
 }
 
-export async function buildTokenName(token: TokenDocumentPF2e<ScenePF2e>, isMystified: boolean): Promise<string> {
+export async function buildTokenName(
+    token: TokenDocumentPF2e<ScenePF2e>,
+    isMystified: boolean,
+    useFullTraitName = true,
+): Promise<string> {
     let tokenName = "";
 
     function getTokenName(): string {
@@ -100,9 +104,10 @@ export async function buildTokenName(token: TokenDocumentPF2e<ScenePF2e>, isMyst
                 await token.setFlag(MODULENAME, "originalTokenName", token.name);
             }
 
-            switch (game.settings.get(MODULENAME, "npcMystifierUseOtherTraits")) {
-                default:
-                    tokenName = await generateNameFromTraits(token);
+            if (useFullTraitName) {
+                tokenName = await generateNameFromTraits(token);
+            } else {
+                tokenName = getTokenName();
             }
 
             if (hasRandomProperty(token) && keep && !shouldSkipRandomProperty(token)) {
@@ -195,6 +200,26 @@ export async function doMystificationFromToken(tokenId: string, active: boolean)
     }
 }
 
+function rarityIndex(rarity: string): number {
+    const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
+    const idx = rarityKeys.indexOf(rarity);
+    return idx >= 0 ? idx : 0;
+}
+
+function shouldUseFullTraitName(token: TokenDocumentPF2e<ScenePF2e>): boolean {
+    const includeRarity = String(game.settings.get(MODULENAME, "npcMystifierIncludeCreaturesOfThisRarityOrGreater"));
+    const creatureRarity = (<ActorSystemData>token.actor?.system)?.traits?.rarity ?? "common";
+    const eligibleForRarity = rarityIndex(creatureRarity) >= rarityIndex(includeRarity);
+
+    let includeLevel = Number(game.settings.get(MODULENAME, "npcMystifierIncludeCreaturesOfThisLevelOrGreater"));
+    if (game.settings.get(MODULENAME, "npcMystifierIncludeCreaturesOfThisLevelOrGreaterUsingPartyLevel")) {
+        includeLevel = game?.actors?.party?.level ?? includeLevel;
+    }
+    const eligibleForLevel = includeLevel === -1 || (token.actor as CreaturePF2e).level >= includeLevel;
+
+    return eligibleForRarity && eligibleForLevel;
+}
+
 export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | undefined, active: boolean): Promise<void> {
     if (!token?.actor || !canvas.scene) {
         return;
@@ -204,8 +229,11 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
         return;
     }
 
+    if (heroes().includes(<CreaturePF2e>token.actor)) {
+        return;
+    }
+
     if (
-        heroes().includes(<CreaturePF2e>token.actor) ||
         String(game.settings.get(MODULENAME, "npcMystifierExcludeActorTypes"))
             .split(",")
             .map((t) => t.trim())
@@ -214,11 +242,13 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
         return;
     }
 
+    const useFullTraitName = shouldUseFullTraitName(token);
+
     // define array of objects to be updated
     const updates = [
         {
             _id: token.id,
-            name: await buildTokenName(token, active),
+            name: await buildTokenName(token, active, useFullTraitName),
         },
     ];
 
@@ -228,7 +258,7 @@ export async function doMystification(token: TokenDocumentPF2e<ScenePF2e> | unde
             if (t.id !== token.id && t.actor?.id === token.actor.id && isTokenMystified(t)) {
                 updates.push({
                     _id: t.id,
-                    name: await buildTokenName(t, active),
+                    name: await buildTokenName(t, active, useFullTraitName),
                 });
             }
         }
