@@ -1,3 +1,11 @@
+## [7.1.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.1.0...v7.1.1) (2026-05-25)
+
+
+### Bug Fixes
+
+* Exclude lore and spellcastingEntry from ogl content list, change layout of ogl content dialog. ([1798650](https://github.com/xdy/xdy-pf2e-workbench/commit/1798650925bd21034c8d75712325a863a5c8e8be))
+* Exclude lore and spellcastingEntry from ogl content list, change layout of ogl content dialog. ([9277802](https://github.com/xdy/xdy-pf2e-workbench/commit/9277802ee4d041dca99a6188f83bed93ce41c67f))
+
 # [7.1.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.0.8...v7.1.0) (2026-05-24)
 
 
