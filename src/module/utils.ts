@@ -83,6 +83,14 @@ export {
     getActorFromMessage,
 };
 
+export function capitalize(s: string): string {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+export const NOT_MYSTIFIED_VALUE = "999";
+
+export const MAX_ABSOLUTE_LEVEL = 20;
+
 /**
  * Fire-and-forget a promise with error logging. Use instead of bare `.then()`.
  */

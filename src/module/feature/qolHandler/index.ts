@@ -1,5 +1,5 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import { isActuallyDamageRoll } from "../../utils.js";
+import { isActuallyDamageRoll, NOT_MYSTIFIED_VALUE } from "../../utils.js";
 import { ChatMessagePF2e, CreaturePF2e, PhysicalItemPF2e, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 
 export function chatCardDescriptionCollapse(html: HTMLElement): void {
@@ -174,23 +174,109 @@ export function damageCardExpand(message: ChatMessagePF2e, html: HTMLElement, ex
     }
 }
 
+const RARITY_THRESHOLD_SUFFIXES = {
+    common: "Common",
+    uncommon: "Uncommon",
+    rare: "Rare",
+    unique: "Unique",
+} as const;
+
+type RarityKey = keyof typeof RARITY_THRESHOLD_SUFFIXES;
+const RARITY_KEYS: RarityKey[] = ["common", "uncommon", "rare", "unique"];
+
+function getThresholdSettingKey(rarity: RarityKey, usingPartyLevel: boolean): `mystifyThreshold${string}${string}` {
+    const suffix = usingPartyLevel ? "Pl" : "Abs";
+    return `mystifyThreshold${RARITY_THRESHOLD_SUFFIXES[rarity]}${suffix}`;
+}
+
+const PHYSICAL_ITEM_TYPES = new Set([
+    "armor",
+    "shield",
+    "consumable",
+    "backpack",
+    "book",
+    "equipment",
+    "treasure",
+    "weapon",
+]);
+
 /**
- * Mystify NPC items.
+ * Mystify NPC items using per-rarity level thresholds.
  *
- * @param actor
- * @param {string} minimumRarity - The minimum rarity of items to mystify. Default is obtained from a game setting.
- * @param {any} usingPartyLevel - Whether to use the party level to determine the minimum level of items to mystify. Default is obtained from a game setting.
- * @param {number} minimumLevel - The minimum level of items to mystify. Default is obtained from a game setting.
- * @param {number} multiplier - The multiplier to apply to the minimum level. Default is obtained from a game setting.
+ * Thresholds are read from settings (or passed as override). When usingPartyLevel is true, thresholds are
+ * offsets from party level; when false, they are absolute item levels.
+ * Unique items with threshold -1 are always mystified.
+ *
+ * @param actor - The NPC actor whose items to mystify.
+ * @param usingPartyLevel - Whether thresholds are party-level offsets. Defaults to the setting.
+ * @param thresholds - Optional per-rarity threshold overrides. Defaults to settings.
+ */
+export async function mystifyNpcItemsByRarity(
+    actor: CreaturePF2e<TokenDocumentPF2e<ScenePF2e | null> | null>,
+    usingPartyLevel: boolean = Boolean(
+        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel"),
+    ),
+    thresholds: Partial<Record<string, number>> = {},
+): Promise<void> {
+    if (!actor?.items) {
+        return;
+    }
+
+    const baseLevel = usingPartyLevel ? (game.actors?.party?.level ?? 0) : 0;
+
+    const resolvedThresholds: Record<string, number> = {};
+    for (const rarity of RARITY_KEYS) {
+        resolvedThresholds[rarity] =
+            thresholds[rarity] ??
+            Number.parseInt(String(game.settings.get(MODULENAME, getThresholdSettingKey(rarity, usingPartyLevel))));
+    }
+
+    const itemUpdates: {
+        _id: string;
+        "system.identification.status": string;
+        "system.identification.unidentified": unknown;
+    }[] = [];
+
+    for (const item of actor.items) {
+        if (!PHYSICAL_ITEM_TYPES.has(item.type)) continue;
+
+        const physicalItem = item as unknown as PhysicalItemPF2e;
+        if (
+            !physicalItem.isIdentified ||
+            physicalItem.isTemporary ||
+            !(physicalItem.isMagical || physicalItem.isAlchemical)
+        )
+            continue;
+
+        const threshold = resolvedThresholds[physicalItem.rarity];
+        if (threshold === undefined || threshold === Number(NOT_MYSTIFIED_VALUE)) continue;
+
+        const effectiveThreshold = baseLevel + threshold;
+        if (physicalItem.level < effectiveThreshold) continue;
+
+        itemUpdates.push({
+            _id: item.id,
+            "system.identification.status": "unidentified",
+            "system.identification.unidentified": physicalItem.getMystifiedData("unidentified"),
+        });
+    }
+
+    if (itemUpdates.length > 0) {
+        await actor.updateEmbeddedDocuments("Item", itemUpdates);
+    }
+}
+
+/**
+ * @deprecated Use {@link mystifyNpcItemsByRarity} instead. This wrapper converts the old
+ * minimumRarity/minimumLevel/multiplier parameters to per-rarity thresholds for backward compatibility.
  */
 export async function mystifyNpcItems(
     actor: CreaturePF2e<TokenDocumentPF2e<ScenePF2e | null> | null>,
     minimumRarity: string = String(
-        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater"),
+        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater") ?? "common",
     ),
-    usingPartyLevel = game.settings.get(
-        MODULENAME,
-        "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel",
+    usingPartyLevel: boolean = Boolean(
+        game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel"),
     ),
     minimumLevel: number = Number.parseInt(
         String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater")),
@@ -199,44 +285,24 @@ export async function mystifyNpcItems(
         String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier")),
     ),
 ): Promise<void> {
-    // Kind of ugly, but, feeling lazy...
     if (usingPartyLevel) {
-        game.settings.set(
-            MODULENAME,
-            "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater",
-            game?.actors?.party?.level ?? minimumLevel,
-        );
+        minimumLevel = game.actors?.party?.level ?? minimumLevel;
     }
     if (multiplier !== 1 && minimumLevel !== -1) {
         minimumLevel = minimumLevel * multiplier;
     }
-    const itemUpdates: any[] = [];
-    const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
-    if (!actor || !actor.items) {
-        return;
-    }
-    const relevantItems: PhysicalItemPF2e[] = <PhysicalItemPF2e[]>Array.from(
-        actor.items
-            ?.filter((item) =>
-                // Rollup couldn't resolve PHYSICAL_ITEM_TYPES so I copied the values
-                ["armor", "shield", "consumable", "backpack", "book", "equipment", "treasure", "weapon"].includes(
-                    item.type,
-                ),
-            )
-            .map((item) => <PhysicalItemPF2e>(<unknown>item))
-            .filter((item) => item.isIdentified)
-            .filter((item) => !item.isTemporary)
-            .filter((item) => item.level >= minimumLevel)
-            .filter((item) => rarityKeys.indexOf(item.rarity) >= rarityKeys.indexOf(minimumRarity))
-            .filter((item) => item.isMagical || item.isAlchemical),
-    );
 
-    for (const item of relevantItems ?? []) {
-        itemUpdates.push({
-            _id: item.id,
-            "system.identification.status": "unidentified",
-            "system.identification.unidentified": item.getMystifiedData("unidentified"),
-        });
+    const rarityKeys = Object.keys(CONFIG.PF2E.rarityTraits);
+    const minimumRarityIndex = rarityKeys.indexOf(minimumRarity);
+
+    // Convert legacy params to per-rarity thresholds
+    const derivedThresholds: Record<string, number> = {};
+    for (const rarity of RARITY_KEYS) {
+        const rarityIndex = rarityKeys.indexOf(rarity);
+        if (rarityIndex >= minimumRarityIndex) {
+            derivedThresholds[rarity] = minimumLevel;
+        }
     }
-    await actor.updateEmbeddedDocuments("Item", itemUpdates);
+
+    return mystifyNpcItemsByRarity(actor, usingPartyLevel, derivedThresholds);
 }

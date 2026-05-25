@@ -687,21 +687,31 @@
                 "onScene": "Mystify items when npc added to scene",
                 "onZeroHp": "Mystify items on npc reaching 0 hp"
             },
-            "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
-                "hint": "Mystify items only if they are of this level or greater.",
-                "name": "Mystify items only if they are of this level or greater."
-            },
             "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
-                "hint": "Mystify items only if equal to or greater than party level. Overrides manual entry.",
-                "name": "Mystify items only if equal to or greater than party level."
+                "hint": "When checked, shows PL-offset dropdowns (e.g. \"PL+3\" = party level + 3). When unchecked, shows absolute-level dropdowns (0-20).",
+                "name": "Use party level as base for per-rarity thresholds"
             },
-            "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
-                "hint": "...as modified by this multiplier (yeah, I know, I should show the final value)",
-                "name": "...as modified by this multiplier"
-            },
-            "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
-                "hint": "Mystify items only if they are of this rarity or greater.",
-                "name": "Mystify items only if they are of this rarity or greater."
+            "mystifyThreshold": {
+                "namePlCommon": "Mystify threshold (party-relative): Common",
+                "namePlUncommon": "Mystify threshold (party-relative): Uncommon",
+                "namePlRare": "Mystify threshold (party-relative): Rare",
+                "namePlUnique": "Mystify threshold (party-relative): Unique",
+                "nameAbsCommon": "Mystify threshold (absolute): Common",
+                "nameAbsUncommon": "Mystify threshold (absolute): Uncommon",
+                "nameAbsRare": "Mystify threshold (absolute): Rare",
+                "nameAbsUnique": "Mystify threshold (absolute): Unique",
+                "hintPl": "Offset from party level. Item mystified when item level >= party level + offset.",
+                "hintAbs": "Absolute item level. Item mystified when item level >= this value.",
+                "notMystified": "Not mystified",
+                "plus4": "PL+4",
+                "plus3": "PL+3",
+                "plus2": "PL+2",
+                "plus1": "PL+1",
+                "plus0": "PL",
+                "minus1": "PL-1",
+                "minus2": "PL-2",
+                "minus3": "PL-3",
+                "minus4": "PL-4"
             },
             "npcMystifierIncludeCreaturesOfThisRarityOrGreater": {
                 "hint": "Use trait-based name generation (settings below) only for creatures of this rarity or greater. All creatures are still mystified — those below this threshold get a simpler name without trait-based components.",

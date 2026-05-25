@@ -2,7 +2,7 @@ import { ActorSystemData, CreaturePF2e } from "foundry-pf2e";
 import { MODULENAME, NPC_TYPE } from "../xdy-pf2e-workbench.js";
 import * as systems from "../utils/systems.js";
 import { dyingHandlingPreUpdateActorHook } from "../feature/damageHandler/dyingHandling.js";
-import { mystifyNpcItems } from "../feature/qolHandler/index.js";
+import { mystifyNpcItemsByRarity } from "../feature/qolHandler/index.js";
 
 export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<string, string>): Promise<void> {
     const updateHp = fu.getProperty(update, "system.attributes.hp.value");
@@ -19,7 +19,7 @@ export async function preUpdateActorHook(actor: CreaturePF2e, update: Record<str
             systems.getSystemSetting<boolean>("automation", "lootableNPCs") &&
             String(game.settings.get(MODULENAME, "npcMystifyAllPhysicalMagicalItems")) === "onZeroHp"
         ) {
-            await mystifyNpcItems(actor);
+            await mystifyNpcItemsByRarity(actor);
         }
 
         const autoGainDying = String(game.settings.get(MODULENAME, "autoGainDyingAtZeroHP"));

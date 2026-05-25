@@ -58,7 +58,7 @@ import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js
 import { doMystificationFromToken } from "./feature/tokenMystificationHandler/index.js";
 import { autoRollDamage, noOrSuccessfulFlatcheck } from "./feature/damageHandler/index.js";
 import { registerWorkbenchSettings } from "./settings/index.js";
-import { mystifyNpcItems } from "./feature/qolHandler/index.js";
+import { mystifyNpcItems, mystifyNpcItemsByRarity } from "./feature/qolHandler/index.js";
 import { getAllFromAllowedPacks } from "./feature/api/getAllFromAllowedPacks.js";
 
 import { refocus } from "./feature/macros/refocus.js";
@@ -332,7 +332,8 @@ Hooks.once("ready", () => {
         hypercognition: hypercognition, // await game.PF2eWorkbench.followTheExpert()
         buildNpcSpellbookJournal: buildNpcSpellbookJournal, // await game.PF2eWorkbench.buildNpcSpellbookJournal()
         callHeroPointHandler: callHeroPointHandler, // await game.PF2eWorkbench.callHeroPointHandler()
-        mystifyNpcItems: mystifyNpcItems, // await game.PF2eWorkbench.mystifyNpcItems() OR await game.PF2eWorkbench.mystifyNpcItems(items, minimumRarity, usingPartyLevel, minimumLevel, multiplier)
+        mystifyNpcItems: mystifyNpcItems, // @deprecated — use mystifyNpcItemsByRarity instead
+        mystifyNpcItemsByRarity: mystifyNpcItemsByRarity, // await game.PF2eWorkbench.mystifyNpcItemsByRarity(actor, usingPartyLevel?, thresholds?)
         getAllFromAllowedPacks: getAllFromAllowedPacks, // await game.PF2eWorkbench.getAllFromAllowedPacks({ type, fields, filter, strictSourcing, fetch})
         npcScaler: npcScaler, // await game.PF2eWorkbench.npcScaler()
         autoRollDamage: autoRollDamage, // await await game.PF2eWorkbench.autoRollDamage(message)
