@@ -154,8 +154,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       sass:
-        specifier: ^1.99.0
-        version: 1.99.0
+        specifier: ^1.100.0
+        version: 1.100.0
       semantic-release:
         specifier: ^25.0.3
         version: 25.0.3(typescript@6.0.3)
@@ -182,16 +182,16 @@ importers:
         version: 8.59.4(eslint@10.4.0(jiti@2.7.0))(typescript@6.0.3)
       vite:
         specifier: ^8.0.14
-        version: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3)
+        version: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3)
       vite-plugin-checker:
         specifier: ^0.13.0
-        version: 0.13.0(eslint@10.4.0(jiti@2.7.0))(meow@13.2.0)(optionator@0.9.4)(typescript@6.0.3)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3))
+        version: 0.13.0(eslint@10.4.0(jiti@2.7.0))(meow@13.2.0)(optionator@0.9.4)(typescript@6.0.3)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3))
       vite-plugin-static-copy:
         specifier: ^4.1.0
-        version: 4.1.0(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3))
+        version: 4.1.0(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3))
       vitest:
         specifier: ^4.1.7
-        version: 4.1.7(@types/node@25.9.1)(jsdom@29.1.1)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3))
+        version: 4.1.7(@types/node@25.9.1)(jsdom@29.1.1)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3))
       yargs:
         specifier: ^18.0.0
         version: 18.0.0
@@ -1702,6 +1702,10 @@ packages:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
 
+  chokidar@5.0.0:
+    resolution: {integrity: sha512-TQMmc3w+5AxjpL8iIiwebF73dRDF4fBIieAqGn9RGCWaEVwQ6Fb2cGe31Yns0RRIzii5goJ1Y7xbMwo1TxMplw==}
+    engines: {node: '>= 20.19.0'}
+
   classic-level@1.4.1:
     resolution: {integrity: sha512-qGx/KJl3bvtOHrGau2WklEZuXhS3zme+jf+fsu6Ej7W7IP/C49v7KNlWIsT1jZu0YnfzSIYDGcEWpCa1wKGWXQ==}
     engines: {node: '>=12'}
@@ -3178,6 +3182,10 @@ packages:
     resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
     engines: {node: '>= 14.18.0'}
 
+  readdirp@5.0.0:
+    resolution: {integrity: sha512-9u/XQ1pvrQtYyMpZe7DXKv2p5CNvyVwzUB6uhLAnQwHMSgKMBR62lc7AHljaeteeHXn11XTAaLLUVZYVZyuRBQ==}
+    engines: {node: '>= 20.19.0'}
+
   registry-auth-token@5.1.1:
     resolution: {integrity: sha512-P7B4+jq8DeD2nMsAcdfaqHbssgHtZ7Z5+++a5ask90fvmJ8p5je4mOa+wzu+DB4vQ5tdJV/xywY+UnVFeQLV5Q==}
     engines: {node: '>=14'}
@@ -3220,9 +3228,9 @@ packages:
     resolution: {integrity: sha512-x/+Cz4YrimQxQccJf5mKEbIa1NzeCRNI5Ecl/ekmlYaampdNLPalVyIcCZNNH3MvmqBugV5TMYZXv0ljslUlaw==}
     engines: {node: '>= 0.4'}
 
-  sass@1.99.0:
-    resolution: {integrity: sha512-kgW13M54DUB7IsIRM5LvJkNlpH+WhMpooUcaWGFARkF1Tc82v9mIWkCbCYf+MBvpIUBSeSOTilpZjEPr2VYE6Q==}
-    engines: {node: '>=14.0.0'}
+  sass@1.100.0:
+    resolution: {integrity: sha512-B5j0rYMlinhhOo9tjQebMVVn0TfyXAF+wB3b2ggZUuJ/is/Y+7+JGjirAMxHZ9Z3hIP98NPfamlAkBHa1lAaXQ==}
+    engines: {node: '>=20.19.0'}
     hasBin: true
 
   saxes@6.0.0:
@@ -5060,13 +5068,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.7(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3))':
+  '@vitest/mocker@4.1.7(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3))':
     dependencies:
       '@vitest/spy': 4.1.7
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3)
+      vite: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3)
 
   '@vitest/pretty-format@4.1.7':
     dependencies:
@@ -5294,6 +5302,10 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
+
+  chokidar@5.0.0:
+    dependencies:
+      readdirp: 5.0.0
 
   classic-level@1.4.1:
     dependencies:
@@ -6813,6 +6825,8 @@ snapshots:
 
   readdirp@4.1.2: {}
 
+  readdirp@5.0.0: {}
+
   registry-auth-token@5.1.1:
     dependencies:
       '@pnpm/npm-conf': 3.0.2
@@ -6860,9 +6874,9 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.2.1
 
-  sass@1.99.0:
+  sass@1.100.0:
     dependencies:
-      chokidar: 4.0.3
+      chokidar: 5.0.0
       immutable: 5.1.5
       source-map-js: 1.2.1
     optionalDependencies:
@@ -7306,7 +7320,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite-plugin-checker@0.13.0(eslint@10.4.0(jiti@2.7.0))(meow@13.2.0)(optionator@0.9.4)(typescript@6.0.3)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3)):
+  vite-plugin-checker@0.13.0(eslint@10.4.0(jiti@2.7.0))(meow@13.2.0)(optionator@0.9.4)(typescript@6.0.3)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3)):
     dependencies:
       '@babel/code-frame': 7.29.0
       chokidar: 4.0.3
@@ -7316,7 +7330,7 @@ snapshots:
       proper-lockfile: 4.1.2
       tiny-invariant: 1.3.3
       tinyglobby: 0.2.16
-      vite: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3)
+      vite: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3)
       vscode-uri: 3.1.0
     optionalDependencies:
       eslint: 10.4.0(jiti@2.7.0)
@@ -7324,15 +7338,15 @@ snapshots:
       optionator: 0.9.4
       typescript: 6.0.3
 
-  vite-plugin-static-copy@4.1.0(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3)):
+  vite-plugin-static-copy@4.1.0(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3)):
     dependencies:
       chokidar: 3.6.0
       p-map: 7.0.4
       picocolors: 1.1.1
       tinyglobby: 0.2.16
-      vite: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3)
+      vite: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3)
 
-  vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3):
+  vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -7344,13 +7358,13 @@ snapshots:
       esbuild: 0.28.0
       fsevents: 2.3.3
       jiti: 2.7.0
-      sass: 1.99.0
+      sass: 1.100.0
       tsx: 4.22.3
 
-  vitest@4.1.7(@types/node@25.9.1)(jsdom@29.1.1)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3)):
+  vitest@4.1.7(@types/node@25.9.1)(jsdom@29.1.1)(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3)):
     dependencies:
       '@vitest/expect': 4.1.7
-      '@vitest/mocker': 4.1.7(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3))
+      '@vitest/mocker': 4.1.7(vite@8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3))
       '@vitest/pretty-format': 4.1.7
       '@vitest/runner': 4.1.7
       '@vitest/snapshot': 4.1.7
@@ -7367,7 +7381,7 @@ snapshots:
       tinyexec: 1.1.2
       tinyglobby: 0.2.16
       tinyrainbow: 3.1.0
-      vite: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.99.0)(tsx@4.22.3)
+      vite: 8.0.14(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(sass@1.100.0)(tsx@4.22.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 25.9.1

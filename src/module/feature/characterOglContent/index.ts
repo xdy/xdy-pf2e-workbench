@@ -1,4 +1,4 @@
-import type { ActorPF2e, ItemPF2e } from "foundry-pf2e";
+import type { ActorPF2e } from "foundry-pf2e";
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
 import { logError } from "../../utils.js";
 
@@ -8,98 +8,95 @@ interface OglItemEntry {
     type: string;
 }
 
-function getOglItems(actor: ActorPF2e): OglItemEntry[] {
-    const oglItems: OglItemEntry[] = [];
-    for (const item of actor.items) {
-        const pf2eItem = item as ItemPF2e;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const license = (pf2eItem.system as any)?.publication?.license as string | undefined;
-        if (license === "OGL") {
-            oglItems.push({
-                name: pf2eItem.name,
-                uuid: pf2eItem.uuid,
-                type: pf2eItem.type,
-            });
-        }
-    }
-    return oglItems;
+const SKIPPED_ITEM_TYPES = new Set(["lore", "spellcastingEntry"]);
+
+const OGL_LICENSE = "OGL";
+
+let activeOglDialog: foundry.applications.api.DialogV2 | null = null;
+
+function isOglItem(item: { type: string; system: { publication?: { license?: unknown } } }): boolean {
+    if (SKIPPED_ITEM_TYPES.has(item.type)) return false;
+    return (item.system.publication?.license as string | undefined) === OGL_LICENSE;
 }
+
+function getOglItems(actor: ActorPF2e): OglItemEntry[] {
+    return actor.items.filter(isOglItem).map((item) => ({
+        name: item.name,
+        uuid: item.uuid,
+        type: item.type,
+    }));
+}
+
+function buildOglDialogContent(oglItems: OglItemEntry[]): string {
+    const grouped = Map.groupBy(oglItems, (item) => item.type);
+    const sortedTypes = [...grouped.keys()].sort();
+
+    const sections = sortedTypes
+        .map((type) => {
+            const items = (grouped.get(type) ?? [])
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((item) => `<li>@UUID[${item.uuid}]{${item.name}}</li>`)
+                .join("\n");
+            const localizedType = game.i18n.localize(`TYPES.Item.${type}`);
+            return `<h4>${localizedType}</h4>\n<ul class="xdy-pf2e-workbench-ogl-list">\n${items}\n</ul>`;
+        })
+        .join("\n");
+
+    return `
+        <div class="xdy-pf2e-workbench-ogl-dialog">
+            <p>${game.i18n.format(`${MODULENAME}.SETTINGS.showCharacterOglTag.oglItemsFound`, { count: oglItems.length })}</p>
+            ${sections}
+        </div>
+    `;
+}
+
+const dialogLifecycle = {
+    render: (_event: unknown, dialog: foundry.applications.api.DialogV2) => {
+        activeOglDialog = dialog;
+    },
+    close: () => {
+        activeOglDialog = null;
+    },
+};
 
 export async function showCharacterOglItemsDialog(actor: ActorPF2e): Promise<void> {
     const oglItems = getOglItems(actor);
+    const title = `${game.i18n.localize(`${MODULENAME}.SETTINGS.showCharacterOglTag.title`)}: ${actor.name}`;
 
-    if (oglItems.length === 0) {
-        foundry.applications.api.DialogV2.wait({
-            window: {
-                title: game.i18n.localize(`${MODULENAME}.SETTINGS.showCharacterOglTag.title`),
-            },
-            content: `<p>${game.i18n.localize(`${MODULENAME}.SETTINGS.showCharacterOglTag.noOglContent`)}</p>`,
-            buttons: [
-                {
-                    action: "ok",
-                    label: game.i18n.localize("OK"),
-                    default: true,
-                },
-            ],
-        });
-        return;
+    if (activeOglDialog) {
+        await activeOglDialog.close();
+        activeOglDialog = null;
     }
 
-    const itemsText = oglItems
-        .map((item) => `<li>@UUID[${item.uuid}]{${item.name}} <em>(${item.type})</em></li>`)
-        .join("\n");
-
-    const rawContent = `
-        <p>${game.i18n.format(`${MODULENAME}.SETTINGS.showCharacterOglTag.oglItemsFound`, { count: oglItems.length })}</p>
-        <ul class="xdy-pf2e-workbench-ogl-list">
-            ${itemsText}
-        </ul>
-    `;
-
     // @ts-expect-error TextEditor is a Foundry global
-    const content = await TextEditor.enrichHTML(rawContent);
+    const content = await TextEditor.enrichHTML(buildOglDialogContent(oglItems));
 
     await foundry.applications.api.DialogV2.wait({
-        window: {
-            title: game.i18n.localize(`${MODULENAME}.SETTINGS.showCharacterOglTag.title`),
-            resizable: true,
-        },
+        window: { title, resizable: true },
         content,
-        buttons: [
-            {
-                action: "close",
-                label: game.i18n.localize("Close"),
-                default: true,
-            },
-        ],
+        buttons: [{ action: "close", label: game.i18n.localize("Close"), default: true }],
+        ...dialogLifecycle,
     });
 }
 
-/**
- * Returns true if the actor has any OGL-licensed items.
- */
 export function actorHasOglContent(actor: ActorPF2e): boolean {
-    return getOglItems(actor).length > 0;
+    return actor.items.some(isOglItem);
 }
 
 export function addOglTagToCharacterSheet(html: HTMLElement, actor: ActorPF2e): boolean {
     if (!actorHasOglContent(actor)) return false;
 
-    const abcdDiv = html.querySelector(".abcd");
-    if (!abcdDiv) return false;
-
-    const traitsUl = abcdDiv.querySelector("ul.tags.traits");
+    const traitsUl = html.querySelector<HTMLUListElement>(".abcd ul.tags.traits");
     if (!traitsUl) return false;
 
-    // Avoid adding a duplicate tag
     if (traitsUl.querySelector(".xdy-pf2e-workbench-ogl-char-tag")) return false;
 
-    const clickToView = game.i18n.localize(`${MODULENAME}.SETTINGS.showCharacterOglTag.clickToView`);
+    const tooltipText = game.i18n.localize(`${MODULENAME}.SETTINGS.showCharacterOglTag.clickToView`);
 
     const oglTag = document.createElement("li");
     oglTag.classList.add("tag", "xdy-pf2e-workbench-ogl-char-tag");
     oglTag.textContent = "OGL CONTENT";
-    oglTag.title = clickToView;
+    oglTag.title = tooltipText;
 
     oglTag.addEventListener("click", () => {
         showCharacterOglItemsDialog(actor).catch((err) => logError(`${MODULENAME} | showCharacterOglDialog`, err));
