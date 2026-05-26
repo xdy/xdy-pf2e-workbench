@@ -51,7 +51,7 @@ async function fetchRandomWordPrefix(): Promise<string> {
         const draw = await table?.draw({ displayChat: false });
         if (draw && draw?.results[0]) {
             // @ts-expect-error description works but not in the types it seems
-            return draw?.results[0].desription;
+            return draw?.results[0].description;
         } else {
             return <string>fixSetting;
         }
