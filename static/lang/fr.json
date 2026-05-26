@@ -347,6 +347,10 @@
         "hint": "Réglage du client pour ajouter un astérisque au nom pour les dons avec un prérequis.",
         "name": "Ajoute un astérisque au nom pour les dons avec un prérequis."
       },
+      "playerAbcdRarityColour": {
+        "hint": "Paramètre client permettant d'afficher l'ascendance, l'historique, la classe et le nom de la divinité dans une couleur fonction de la rareté sur la fiche de personnage.",
+        "name": "Afficher l'ascendance, l'historique, la classe et le nom de la divinité dans une couleur correspondant à sa rareté sur la fiche de personnage."
+      },
       "playerCraftingRarityColour": {
         "hint": "Paramétrage par le client de l'affichage des noms de formules dans la couleur de rareté sur les fiches d'acteurs.",
         "name": "Montrer les noms des formules dans la couleur de leur rareté sur les fiches d'acteurs."
@@ -363,6 +367,18 @@
         "hint": "Paramètre du monde pour faire en sorte qu'envoyer un sort dans la conversation envoie un lien vers l'objet du sort au lieu du sort complet.",
         "name": "Permet d'envoyer un Sort vers la conversation et d'envoyer un lien vers l'objet du sort plutôt que d'afficher le sort complet.",
         "text": "Le sort a été envoyé dans la conversation : "
+      },
+      "showItemLicenseTags": {
+        "hint": "Paramètre du monde permettant d'afficher une étiquette fonction de la LICENCE : ORC ou OGL dans la partie détails des fiches d'objets.",
+        "name": "Afficher les étiquettes de licence sur les fiches des objets."
+      },
+      "showCharacterOglTag": {
+        "hint": "Ce paramètre du monde permet d'afficher la mention « LICENCE:OGL » sur la fiche de personnage si celui-ci possède des objets sous licence OGL. Cliquer sur cette étiquette ouvre une liste d'objets OGL.",
+        "name": "Afficher l'étiquette OGL sur les fiches de personnage.",
+        "title": "Contenu OGL",
+        "clickToView": "Cliquez pour afficher les objets sous licence OGL",
+        "noOglContent": "Ce personnage ne dispose d'aucun contenu sous licence OGL.",
+        "oglItemsFound": "Ce personnage possède {count} élément(s) sous licence OGL :"
       },
       "castPrivateSpell": {
         "hint": "Cliquez pour activer qu'au Lancement du sort, sur un Ctrl+clic, cela envoie un message discret au lanceur et au MJ.",
@@ -555,10 +571,15 @@
         "hint": "Définir la touche permettant de déplacer le combattant sélectionné avant le combattant actuel, normalement parce que le combattant actuel a tué le combattant sélectionné. En raison des règles d'arrondis, plusieurs combattants pourraient avoir la même initiative dans la liste.",
         "name": "(Monde) Touche liée pour déplacer le combattant sélectionné avant le combattant actuel."
       },
-      "mystificationSettings": {
-        "hint": "Autoriser et configurer la mystification des PNJ",
-        "label": "Régler les paramètres de mystification des PNJ",
-        "name": "Réglages de la mystification des PNJ"
+      "npcMystificationSettings": {
+        "hint": "Activer et configurer la mystification des jetons des PNJ",
+        "label": "Gérer les paramètres de mystification des jetons des PNJ",
+        "name": "Paramètres de mystification des jetons des PNJ"
+      },
+      "itemMystificationSettings": {
+        "hint": "Configurer la mystification des objets des PNJ",
+        "label": "Gérer les paramètres de mystification des objets des PNJ",
+        "name": "Paramètres de mystification des objets des PNJ"
       },
       "notifications": {
         "cantMystify": "Vous ne pouvez pas mystifier ce jeton. S'il est sur une scène active, êtes vous un MJ ?"
@@ -681,6 +702,18 @@
       "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
         "hint": "Mystifiez les objets seulement s'ils sont de cette rareté ou supérieur.",
         "name": "Mystifiez les objets seulement s'ils sont de cette rareté ou supérieur."
+      },
+      "npcMystifierIncludeCreaturesOfThisRarityOrGreater": {
+        "hint": "Utiliser la génération de noms basée sur les traits (paramètres ci-dessous) uniquement pour les créatures de cette rareté ou supérieure. Toutes les créatures restent toujours mystérieuses. Celles dont la rareté est inférieure à ce seuil reçoivent un nom plus simple, sans éléments liés aux traits.",
+        "name": "Utilisez les noms basés sur les traits uniquement pour les créatures dotée de cette rareté ou supérieure."
+      },
+      "npcMystifierIncludeCreaturesOfThisLevelOrGreater": {
+        "hint": "Utiliser la génération de noms basée sur les traits (paramètres ci-dessous) uniquement pour les créatures de ce niveau ou supérieur. -1 désactive cette option. Toutes les créatures restent mystifiées.",
+        "name": "Utiliser les noms basés sur les traits uniquement pour les créatures de ce niveau ou supérieur."
+      },
+      "npcMystifierIncludeCreaturesOfThisLevelOrGreaterUsingPartyLevel": {
+        "hint": "Utiliser le niveau du groupe pour déterminer le niveau minimum de créature pour la génération de noms basés sur ses traits. Remplace la saisie manuelle.",
+        "name": "Utiliser les noms basés sur les traits que pour les créatures de niveau supérieur ou égal à celui du groupe."
       },
       "npcRoller": {
         "hint": "Cliquez pour activer l'utilitaire générateur rapide de PNJ.",
