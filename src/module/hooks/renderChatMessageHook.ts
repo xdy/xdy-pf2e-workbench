@@ -9,7 +9,7 @@ import {
     damageCardExpand,
 } from "../feature/qolHandler/index.js";
 import { handleDyingRecoveryRoll } from "../feature/damageHandler/dyingHandling.js";
-import { hideSpellNameInDamageroll } from "../feature/qolHandler/handlePrivateSpellcasting.js";
+import { hideSpellNameInDamageroll } from "../feature/qolHandler/hidePrivateSpellName.js";
 
 function needsCollapsing(setting: string): boolean {
     return setting === "collapsedDefault" || setting === "nonCollapsedDefault";
@@ -29,13 +29,11 @@ export function renderChatMessageHook(message: ChatMessagePF2e, element: unknown
             damageCardExpand(message, html, expandDamageRolls);
         }
 
-        // Check if we need to handle private spells
         const castPrivateSpellEnabled = game.settings.get(MODULENAME, "castPrivateSpell");
         if (castPrivateSpellEnabled && systems.getFlag(message, "origin.type") === "spell") {
             hideSpellNameInDamageroll(message, html);
         }
     } else {
-        // Get settings
         const collapseItemContent = String(game.settings.get(MODULENAME, "autoCollapseItemChatCardContent"));
         const collapseItemAttackContent = String(
             game.settings.get(MODULENAME, "autoCollapseItemAttackChatCardContent"),
@@ -44,7 +42,6 @@ export function renderChatMessageHook(message: ChatMessagePF2e, element: unknown
             game.settings.get(MODULENAME, "autoCollapseItemActionChatCardContent"),
         );
 
-        // Only process if needed
         if (needsCollapsing(collapseItemContent)) {
             chatCardDescriptionCollapse(html);
         }
@@ -59,7 +56,6 @@ export function renderChatMessageHook(message: ChatMessagePF2e, element: unknown
         }
     }
 
-    // Check if we need to handle hero point rules
     const heroPointRules = String(game.settings.get(MODULENAME, "heroPointRules"));
     if (heroPointRules !== "no") {
         handleVariantHeroPointRules(message, html);
