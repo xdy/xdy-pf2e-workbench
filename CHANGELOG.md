@@ -1,3 +1,15 @@
+# [7.2.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.1.1...v7.2.0) (2026-05-26)
+
+
+### Bug Fixes
+
+* Spelling is difficlut... diffficult... dfficult... Hard. :) ([44be484](https://github.com/xdy/xdy-pf2e-workbench/commit/44be4843995c46bb96a00c96479eb0cd861ea097))
+
+
+### Features
+
+* Make item mystification settings more flexible (different level thresholds per rarity.) Fixes [#1665](https://github.com/xdy/xdy-pf2e-workbench/issues/1665) ([8b605c2](https://github.com/xdy/xdy-pf2e-workbench/commit/8b605c2720e3e6e6b4b9f518c164a0b98b03fcd5))
+
 ## [7.1.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.1.0...v7.1.1) (2026-05-25)
 
 
