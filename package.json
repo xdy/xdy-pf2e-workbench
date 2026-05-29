@@ -63,7 +63,7 @@
         "@types/tooltipster": "^0.0.35",
         "@types/yaireo__tagify": "^4.27.0",
         "@typescript-eslint/eslint-plugin": "^8.59.4",
-        "@typescript-eslint/parser": "^8.59.4",
+        "@typescript-eslint/parser": "^8.60.0",
         "classic-level": "^3.0.0",
         "es-jest": "^2.1.0",
         "eslint": "^10.4.0",
