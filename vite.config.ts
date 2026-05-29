@@ -55,6 +55,9 @@ export default defineConfig(({ command }) => {
         server: {
             port: 30001,
             open: "/game",
+            watch: {
+                ignored: ["**/vendored/**"],
+            },
             proxy: {
                 "^(?!/modules/xdy-pf2e-workbench/)": "http://localhost:30000/",
                 "/socket.io": {

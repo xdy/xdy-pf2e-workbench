@@ -1,53 +1,40 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "allowImportingTsExtensions": true,
-    "allowUnusedLabels": false,
-    "baseUrl": ".",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "lib": [
-      "ESNext",
-      "DOM",
-      "dom.iterable"
-    ],
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "rewriteRelativeImportExtensions": true,
-    "noEmit": true,
-    "noErrorTruncation": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "dist",
-    "removeComments": false,
-    "resolveJsonModule": true,
-    "rootDir": ".",
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strictBindCallApply": true,
-    "strictFunctionTypes": false,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "target": "ESNext",
-    "typeRoots": [
-      "node_modules/@types",
-      "node_modules/foundry-pf2e/types"
-    ],
-    "types": [
-      "jquery",
-      "node",
-      "tooltipster"
-    ],
-    "useDefineForClassFields": true
-  },
-  "watchOptions": {
-    "excludeDirectories": [
-      "packs/data/",
-      "static/packs/"
-    ]
-  }
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "allowImportingTsExtensions": true,
+        "allowUnusedLabels": false,
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "lib": ["ESNext", "DOM", "dom.iterable"],
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "rewriteRelativeImportExtensions": true,
+        "noEmit": true,
+        "noErrorTruncation": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "outDir": "dist",
+        "removeComments": false,
+        "resolveJsonModule": true,
+        "rootDir": ".",
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": false,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true,
+        "target": "ESNext",
+        "typeRoots": ["node_modules/@types", "node_modules/foundry-pf2e/types"],
+        "types": ["jquery", "node", "tooltipster"],
+        "useDefineForClassFields": true
+    },
+    "watchOptions": {
+        "excludeDirectories": ["packs/data/", "static/packs/", "vendored/"]
+    },
+    "exclude": ["vendored"]
 }

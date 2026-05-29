@@ -1,4 +1,5 @@
 {
     "dataPath": "/absolute/path/to/your/FoundryVTT/Data",
-    "installPath": "/Users/YourUsername/Applications/FoundryVTT"
+    "installPath": "/Users/YourUsername/Applications/FoundryVTT",
+    "pf2eSourcePath": ""
 }

@@ -36,7 +36,7 @@ main.bundle.js
 static/packs/
 foundryconfig.json
 
-/foundry/
+/vendored/
 
 # Playwright
 test-results/
