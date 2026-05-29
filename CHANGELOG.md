@@ -1,3 +1,11 @@
+## [7.2.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.2.0...v7.2.1) (2026-05-29)
+
+
+### Bug Fixes
+
+* Localize traits and traditions for private spell messages. Cleanup. Fixes [#1430](https://github.com/xdy/xdy-pf2e-workbench/issues/1430) ([1516e0b](https://github.com/xdy/xdy-pf2e-workbench/commit/1516e0bb4aa8a4657d27dd5c7324133079a58418))
+* Read castRank from the right flag in damageHandler. Eslint fixes. ([b94922c](https://github.com/xdy/xdy-pf2e-workbench/commit/b94922c08cda6d023669c0b23b6eddc30df0b338))
+
 # [7.2.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.1.1...v7.2.0) (2026-05-26)
 
 
