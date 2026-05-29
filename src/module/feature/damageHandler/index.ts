@@ -6,12 +6,12 @@ import {
     objectHasKey,
     shouldIHandleThisMessage,
 } from "../../utils.ts";
-import type { DamageRoll } from "foundry-pf2e";
+import type { ActorPF2e, CharacterPF2e, DamageRoll, ScenePF2e, TokenDocumentPF2e } from "foundry-pf2e";
 import { ActorFlagsPF2e, ChatContextFlag, ChatMessagePF2e, RollOptionFlags, SpellPF2e } from "foundry-pf2e";
 import { Rolled } from "foundry/client/dice/roll.mts";
 import * as systems from "../../utils/systems.ts";
 
-export async function autoRollDamage(message: ChatMessagePF2e) {
+export async function autoRollDamage(message: ChatMessagePF2e): Promise<void> {
     const numberOfMessagesToCheck = 10;
     const settings = {
         autoRollDamageAllow: String(game.settings.get(MODULENAME, "autoRollDamageAllow")),
@@ -40,10 +40,10 @@ export async function autoRollDamage(message: ChatMessagePF2e) {
             const actor = getActorFromMessage(message);
             const rollType = systems.getFlag(message, "context.type");
 
-            const origin: any = originUuid ? await fromUuid(originUuid) : null;
+            const origin: SpellPF2e | null = originUuid ? ((await fromUuid(originUuid)) as SpellPF2e) : null;
             const isAttackSpell = origin?.traits?.has("attack") ?? false;
             const isSaveSpell = origin?.system?.defense?.save ?? false;
-            const hasFixedTime = Number.isInteger(parseInt(origin?.system?.time?.value)) ?? false;
+            const hasFixedTime = Number.isInteger(parseInt(origin?.system?.time?.value ?? "")) ?? false;
 
             const rollForNonSpellAttack = rollType === "attack-roll" && settings.autoRollDamageForStrike;
             const rollForNonAttackSpell =
@@ -139,7 +139,7 @@ export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise
     let { item } = message;
     const match = systems.getFlag<string>(message, "origin.uuid")?.match(/Item.(\w+)/);
     if (!item && match && match[1] === "xxPF2ExUNARMEDxx") {
-        item = { type: "weapon", data: {} } as any;
+        item = { type: "weapon", data: {} } as unknown as NonNullable<typeof item>;
     }
 
     if (!token || !item || !actor || isActuallyDamageRoll(message)) {
@@ -221,7 +221,7 @@ export function persistentDamageHealing(message: ChatMessagePF2e): void {
     }
 }
 
-function getActionFromMessage(actions, message: ChatMessagePF2e) {
+function getActionFromMessage(actions: any[], message: ChatMessagePF2e) {
     const attackAbilities = actions
         .filter((atk) => {
             return atk?.system?.traits.value.includes("attack");
@@ -305,10 +305,16 @@ async function handleSpell(
     numberOfMessagesToCheck: number,
     originUuid: string,
     origin: SpellPF2e,
-    message: any,
+    message: ChatMessagePF2e,
     degreeOfSuccess: string,
 ) {
-    const castRank = await determineCastRank(origin.name, flags, numberOfMessagesToCheck, originUuid, origin.system);
+    const castRank = await determineCastRank(
+        origin.name,
+        flags,
+        numberOfMessagesToCheck,
+        originUuid,
+        origin.system.level.value,
+    );
     const rollDamage = await noOrSuccessfulFlatcheck(message);
 
     if (rollDamage) {
@@ -339,12 +345,15 @@ async function handleSpell(
 
 async function determineCastRank(
     spellName: string,
-    flags: any,
+    flags: ActorFlagsPF2e & {
+        pf2e: { rollOptions: RollOptionFlags; trackedItems: Record<string, string>; [p: string]: unknown };
+    },
     numberOfMessagesToCheck: number,
     originUuid: string,
-    system,
+    value: number,
 ): Promise<number> {
-    let castRank: number = flags.origin?.castRank ? Number(flags.origin?.castRank) : 0;
+    // @ts-expect-error TODO fix typing
+    let castRank: number = flags.pf2e.origin?.castRank ? Number(flags.pf2e.origin?.castRank) : 0;
     if (castRank === 0) {
         castRank = await getCastRankFromChat(numberOfMessagesToCheck, originUuid);
     }
@@ -353,7 +362,7 @@ async function determineCastRank(
             ui.notifications.info(game.i18n.format(`${MODULENAME}.spellCardNotFound`, { spell: spellName }));
         }
         // Give up and use spell level
-        castRank = system.level.value ?? 0;
+        castRank = value ?? 0;
     }
     return castRank;
 }
@@ -367,12 +376,20 @@ function constructTargetElement(castRank: number): HTMLDivElement {
     return target;
 }
 
-async function handleNonSpell(actor, message, degreeOfSuccess: string) {
+async function handleNonSpell(
+    actor:
+        | ActorPF2e<TokenDocumentPF2e<ScenePF2e | null> | null>
+        | CharacterPF2e<TokenDocumentPF2e<ScenePF2e | null> | null>,
+    message: ChatMessagePF2e,
+    degreeOfSuccess: string,
+) {
     const options = actor?.getRollOptions(["all", "damage-roll"]);
     const attackOption = options?.find((option) => option.match(/(.*)-attack/));
     const damageOption = attackOption?.replace("-attack", "-damage");
 
-    options?.push(damageOption);
+    if (damageOption) {
+        options?.push(damageOption);
+    }
 
     const checkContext = systems.getFlag<ChatContextFlag>(message, "context") ?? null;
 
@@ -399,14 +416,21 @@ async function handleNonSpell(actor, message, degreeOfSuccess: string) {
     await handleElementalBlastAttack(actor, message, degreeOfSuccess, checkContext);
 }
 
-async function handleElementalBlastAttack(actor, message, degreeOfSuccess, checkContext) {
-    const roll = message.rolls?.find((r) => r.options?.action === "elemental-blast");
+async function handleElementalBlastAttack(
+    actor:
+        | ActorPF2e<TokenDocumentPF2e<ScenePF2e | null> | null>
+        | CharacterPF2e<TokenDocumentPF2e<ScenePF2e | null> | null>,
+    message: { rolls: any[] },
+    degreeOfSuccess: string,
+    checkContext: ChatContextFlag | null,
+) {
+    const roll = message.rolls?.find((r: { options: { action: string } }) => r.options?.action === "elemental-blast");
     if (roll && actor.isOfType("character")) {
         const identifier = <string>roll?.options.identifier;
         const [element, damageType, meleeOrRanged, actionCost]: (string | undefined)[] = identifier?.split(".") ?? [];
 
         if (objectHasKey(CONFIG.PF2E.elementTraits, element) && objectHasKey(CONFIG.PF2E.damageTypes, damageType)) {
-            const params: any = {
+            const params: Record<string, unknown> = {
                 element,
                 damageType,
                 melee: meleeOrRanged === "melee",
@@ -415,6 +439,7 @@ async function handleElementalBlastAttack(actor, message, degreeOfSuccess, check
                 outcome: degreeOfSuccess,
                 event,
             };
+            // @ts-expect-error TODO fix typing
             await new game.pf2e.ElementalBlast(actor).damage(params);
         }
     }
