@@ -1,3 +1,10 @@
+# [7.3.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.2.1...v7.3.0) (2026-05-31)
+
+
+### Features
+
+* Experimental support for integration with PF2e Toolbelt's Target Helper for autorolling damage for save spells. ([3b60cfd](https://github.com/xdy/xdy-pf2e-workbench/commit/3b60cfd04aecb1ea31497799baf05937929af021))
+
 ## [7.2.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.2.0...v7.2.1) (2026-05-29)
 
 
