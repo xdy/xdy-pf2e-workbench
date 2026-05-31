@@ -1,3 +1,10 @@
+## [7.3.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.3.0...v7.3.1) (2026-05-31)
+
+
+### Bug Fixes
+
+* Use renderChatMessageHTML rather than renderChatMessage ([51b6a4d](https://github.com/xdy/xdy-pf2e-workbench/commit/51b6a4d4b32b66219d315f1d720262f99c93a14b))
+
 # [7.3.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.2.1...v7.3.0) (2026-05-31)
 
 
