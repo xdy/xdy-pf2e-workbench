@@ -1,3 +1,10 @@
+## [7.3.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.3.1...v7.3.2) (2026-05-31)
+
+
+### Bug Fixes
+
+* Race condition fix. ([512ab10](https://github.com/xdy/xdy-pf2e-workbench/commit/512ab10f14204237000158c5923875402546098d))
+
 ## [7.3.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.3.0...v7.3.1) (2026-05-31)
 
 
