@@ -1,7 +1,7 @@
 import { ChatMessagePF2e } from "foundry-pf2e";
 import { MODULENAME } from "../xdy-pf2e-workbench.js";
 import * as systems from "../utils/systems.js";
-import { extractHtmlElement, isActuallyDamageRoll } from "../utils.js";
+import { isActuallyDamageRoll } from "../utils.js";
 import {
     chatActionCardDescriptionCollapse,
     chatAttackCardDescriptionCollapse,
@@ -15,10 +15,7 @@ function needsCollapsing(setting: string): boolean {
     return setting === "collapsedDefault" || setting === "nonCollapsedDefault";
 }
 
-export function renderChatMessageHook(message: ChatMessagePF2e, element: unknown): void {
-    const html = extractHtmlElement(element);
-    if (!html) return;
-
+export function renderChatMessageHook(message: ChatMessagePF2e, html: HTMLElement): void {
     deprecatedDyingHandlingRenderChatMessageHook(message);
 
     const isDamageRoll = isActuallyDamageRoll(message);

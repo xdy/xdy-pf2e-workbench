@@ -205,7 +205,7 @@ export function updateHooks(cleanSlate = false): void {
     handle("renderTokenHUD", npcMystifier, renderTokenHUDHook);
 
     handle(
-        "renderChatMessage",
+        "renderChatMessageHTML",
         castPrivateSpell ||
             ["collapsedDefault", "nonCollapsedDefault"].includes(autoCollapseItemChatCardContent) ||
             ["collapsedDefault", "nonCollapsedDefault"].includes(autoCollapseItemActionChatCardContent) ||
