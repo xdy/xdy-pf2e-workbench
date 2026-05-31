@@ -40,6 +40,16 @@ export class WorkbenchWorldAutomationSettings extends SettingsMenuPF2eWorkbench 
                 onChange: () => updateHooks(),
                 requiresReload: true,
             },
+            experimentalToolbeltSaveIntegration: {
+                name: `${MODULENAME}.SETTINGS.experimentalToolbeltSaveIntegration.name`,
+                hint: `${MODULENAME}.SETTINGS.experimentalToolbeltSaveIntegration.hint`,
+                scope: "world",
+                config: true,
+                default: false,
+                type: Boolean,
+                onChange: () => updateHooks(),
+                requiresReload: true,
+            },
             applyPersistentDamage: {
                 name: `${MODULENAME}.SETTINGS.applyPersistentDamage.name`,
                 hint: `${MODULENAME}.SETTINGS.applyPersistentDamage.hint`,

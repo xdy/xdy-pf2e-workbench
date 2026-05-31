@@ -2,7 +2,7 @@ import { ChatMessagePF2e } from "foundry-pf2e";
 import { MODULENAME } from "../xdy-pf2e-workbench.js";
 import * as systems from "../utils/systems.js";
 import { handleAsync, isActuallyDamageRoll } from "../utils.js";
-import { autoRollDamage } from "../feature/damageHandler/index.js";
+import { autoRollDamage, evictDamageHandlerCaches } from "../feature/damageHandler/index.js";
 import { dyingHandlingCreateChatMessageHook } from "../feature/damageHandler/dyingHandling.js";
 import { checkAttackValidity } from "../feature/reminders/checkAttackValidity.js";
 import { reminderTargeting } from "../feature/reminders/index.js";
@@ -13,6 +13,7 @@ function isDamageTaken(message: ChatMessagePF2e): boolean {
 }
 
 export function createChatMessageHook(message: ChatMessagePF2e): void {
+    evictDamageHandlerCaches();
     const reminderCancelAttack = String(game.settings.get(MODULENAME, "reminderCannotAttack"));
     if (reminderCancelAttack === "reminder") {
         checkAttackValidity(message, false);

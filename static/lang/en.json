@@ -308,6 +308,10 @@
                 "none": "None",
                 "players": "Players"
             },
+            "experimentalToolbeltSaveIntegration": {
+                "hint": "Experimental: Enable integration with PF2e Toolbelt Target Helper for save-spell autoroll damage. (Requires that you have PF2e Toolbelt's Target Helper enabled and have enabled the  workbench client setting to autoroll damage for save spells.)",
+                "name": "Experimental: Enable PF2e Toolbelt save integration"
+            },
             "autoRollDamageForSpellAttack": {
                 "hint": "Client setting to autoroll damage for spell attacks that hit. Note that critical hits always roll normal damage.",
                 "name": "Autoroll damage for spell attacks that hit."

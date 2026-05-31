@@ -1,61 +1,82 @@
-### Active Modules
-Archetypes+ v1.0.0
-Barbarians+ v1.1.1
-Battlezoo Ancestries: Dragons for Pathfinder 2e by Roll for Combat v1.4.2
-Battlezoo Ancestries: Dungeons for Pathfinder 2e by Roll for Combat v1.2
-Battlezoo Ancestries: Year of Legends Devils for Pathfinder 2e by Roll for Combat v1.0.1
-Battlezoo Ancestries: Year of Legends for Pathfinder 2e by Roll for Combat v3.0
-Battlezoo Ancestries: Year of Monsters for Pathfinder 2e by Roll for Combat v12.01
-Battlezoo Bestiary for Pathfinder 2e by Roll For Combat v2.5
-Battlezoo Bestiary: Strange and Unusual for Pathfinder 2e by Roll For Combat v1.0.3
-Battlezoo Jewel of the Indigo Isles for Pathfinder 2e by Roll for Combat v3.1.1
-Battlezoo — World of Battlezoo: Indigo Isles for Pathfinder 2e v1.1.2
-Clerics+ v1.0.6
-Dice So Nice! v4.6.10 [Bugs URL](https://gitlab.com/riccisi/foundryvtt-dice-so-nice/-/issues)
-Disable Mouse Wheel Control for Sliders v2.0.0
-Easy Target v2.16
-Elevation Ruler v0.8.9
-Find the culprit v1.4.6 [Bugs URL](https://github.com/Moerill/fvtt-find-the-culprit/issues)
-Force Client Controls v1.1.0 [Bugs URL](https://gitlab.com/kimitsu_desu/force-client-controls/-/issues)
-Force Client Settings v2.4.1 [Bugs URL](https://gitlab.com/kimitsu_desu/force-client-settings/-/issues)
-Image Hover v3.0.3 [Bugs URL](https://github.com/Eriku33/Foundry-VTT-Image-Hover/issues)
-Indigo Isles Character Guide for Pathfinder 2e by Roll For Combat v1.5
-Keyboard Layout v1.3.0 [Bugs URL](https://github.com/ghost-fvtt/keyboard-layout/issues)
-lib - Color Settings v3.0.2
-Forien's Copy Environment vv2.2.0 [Bugs URL](https://github.com/League-of-Foundry-Developers/foundryvtt-forien-copy-environment/issues)
-libWrapper v1.12.13.0 [Bugs URL](https://github.com/ruipin/fvtt-lib-wrapper/issues)
-Loading Progress v1.2.1.4 [Bugs URL](https://gitlab.com/mkahvi/fvtt-micro-modules/-/issues)
-Please Wait v1.0.1 [Bugs URL](https://gitlab.com/mkahvi/fvtt-micro-modules/-/issues)
-socketlib v1.0.13 [Bugs URL](https://github.com/manuelVo/foundryvtt-socketlib/issues)
-Macro Grid v1.0.3
-Module Management+ v2.2.3 [Bugs URL](https://github.com/mouse0270/module-credits/issues)
-Monk's Combat Details v11.12 [Bugs URL](https://github.com/ironmonk88/monks-combat-details/issues)
-Monk's Combat Marker v11.05 [Bugs URL](https://github.com/ironmonk88/monks-combat-marker/issues)
-Monk's TokenBar v11.15 [Bugs URL](https://github.com/ironmonk88/monks-tokenbar/issues)
-Oracles+ v1.1.0
-Ownership Viewer v11.5 [Bugs URL](https://github.com/mclemente/fvtt-module-permission-viewer/issues)
-Pathfinder Token Pack: Bestiaries v1.0.7
-PF2e Companion Compendia v6.1
-Pf2e Crowdsourced Community Corrections v0.3.1 [Bugs URL](https://github.com/shemetz/pf2e-crowdsourced-community-corrections/issues)
-PF2e Dailies v2.24.0 [Bugs URL](https://github.com/reonZ/pf2e-dailies/issues)
-PF2e Dorako UX v1.3.2 [Bugs URL](https://github.com/Dorako/pf2e-dorako-ux/issues)
-pf2E Extempore Effects v1.8.3 [Bugs URL](https://github.com/shemetz/pf2e-extempore-effects/issues)
-PF2e Interactive Token Tooltip v1.63.0 [Bugs URL](https://github.com/reonZ/pf2e-token-hud/issues)
-PF2e Item Activations v11.0.47
-PF2e Item Revitalizer v1.24.0 [Bugs URL](https://github.com/robinsving/pf2e-item-revitalizer/issues)
-PF2e Keybind Menagerie v5.3.2
-PF2e Mercenary Marketplace Volume 1 v3.0.5
-Pf2E Modifiers Matter v1.9.1 [Bugs URL](https://github.com/shemetz/pf2e-modifiers-matter/issues)
-PF2e Perception v0.38.0 [Bugs URL](https://github.com/reonZ/pf2e-perception/issues)
-PF2e Toolbelt v1.41.0 [Bugs URL](https://github.com/reonZ/pf2e-toolbelt/issues)
-PF2e Tweaks by Ustin v0.7.2
-PF2e Use all module tokens v1.4
-pf2e Utility Buttons v0.7.3
-PF2e Workbench v5.57.1 [Bugs URL](https://github.com/xdy/xdy-pf2e-workbench/issues)
-Pinned chat message v2.2.0
-PopOut! v2.16 [Bugs URL](https://github.com/League-of-Foundry-Developers/fvtt-module-popout/issues)
-Quick Insert - Search Widget v2.8.5 [Bugs URL](https://gitlab.com/fvtt-modules-lab/quick-insert/-/issues)
-Roll Tracker v2.0.1
-PF2e Dorako UI v3.3.17 [Bugs URL](https://github.com/Dorako/pf2e-dorako-ui/issues)
-User Latency v2.0.5 [Bugs URL](https://github.com/mawburn/foundry-user-latency/issues)
-Witches+ Remaster v1.0.0
+Core Version: 14.363
+
+System: pf2e 8.1.2 (The PF2e System Developers)
+
+Modules:
+CautiousGamemastersPack 1.12.1 (Alan Davies, Shoyu Vanilla)
+battlezoo-ancestries-demigods 1.5 (Mark Seifter)
+battlezoo-ancestries-dungeons-pf2e 1.4 (Mark Seifter)
+battlezoo-ancestries-fusions 1.2 (Mark Seifter)
+clerics-remaster 1.0.0 (Tony S, Derryzumi, Ruben Salazar (Lyon))
+connection-monitor 1.8.0 (Alan Davies)
+find-the-culprit 3.3.0 (Moerill, Emmanuel Wineberg)
+firebrands 1.0.1 (Derryzumi, Tony S, Ruben Salazar (Lyon))
+forien-copy-environment v3.0.0 (Blair McMillan, Forien)
+fvtt-pf2e-incapacitation-variants 1.4.0 (Tyrie Vella)
+illandril-token-hud-scale 4.0.0 (Joe Spandrusyszyn (illandril))
+lib-wrapper 1.13.5.1 (Rui Pinheiro)
+pf2-flat-check V4.0.0 (Liathan)
+pf2e-afflictioner 3.3.3 (RoiLeaf)
+pf2e-alchemist-remaster-ducttape 14.0.1 (TheJoester)
+pf2e-animal-companions 7.5.1 (Tikael)
+pf2e-ap222-hellbreakers 14.0.0 (Paizo)
+pf2e-auto-action-tracker 0.18.0 (Warder)
+pf2e-aztecs-template-wizard 1.0.0 (Aztec)
+pf2e-bestiary-tracking 1.3.9 (HarryBoy)
+pf2e-crowdsourced-community-corrections 0.5.5 (shemetz)
+pf2e-dailies 4.18.1 (Idle)
+pf2e-effects-halo 8.0.0 (7H3LaughingMan)
+pf2e-extempore-effects 1.13.1 (shemetz)
+pf2e-f-is-for-flatfooted 14.0.1 (DrentalBot)
+pf2e-feat-filter 0.6.0 (kromko)
+pf2e-flatcheck-helper 0.21.0 (oWave)
+pf2e-hud 2.49.0 (Idle)
+pf2e-item-activations 14.0.3 (chasarooniZ)
+pf2e-leveler 3.4.37 (RoiLeaf)
+pf2e-modifiers-matter 1.16.6 (shemetz)
+pf2e-point-tracker 1.2.1 (Author 1)
+pf2e-region-helper-stopgap 0.3.0 (chasarooniZ)
+pf2e-smart-action-icons 1.0.0 (ai-studio)
+pf2e-specific-familiars 14.1.3 (Sasane)
+pf2e-subsystem-theming 0.9.5 (HarryBoy)
+pf2e-subsystems 0.8.9 (HarryBoy)
+pf2e-summoners-plus 1.2.2 (Derry Luttrell, Tony Saunders, MrVauxs)
+pf2e-sustain-reminder 1.1.0 (Lank)
+pf2e-team-plus-archetypes 2.1.1 (Derryzumi, Tony S, Kristian Brucaj, Ruben Salazar (Lyon), Cerapter, Vauxs)
+pf2e-team-plus-barbarians 1.1.2 (Derry Luttrell, Tony Saunders, Vauxs)
+pf2e-team-plus-feats 2.0.0 (Tikael, Cerapter, Derry Luttrell, Tony Saunders, Vauxs)
+pf2e-team-plus-inventors 2.0.3 (Derryzumi, Tony Saunders, Ruben Salazar (Lyon), Vauxs)
+pf2e-team-plus-magic 1.1.6 (Derryzumi, Tony Saunders, Vauxs)
+pf2e-team-plus-oracles-remastered 1.0 (Derryzumi, Tony Saunders, Cerapter)
+pf2e-team-plus-tian-xia 1.0.0 (Derry Lutterell, Tony Saunders, Ruben "Lyon" Salazar)
+pf2e-team-plus-wizards 1.1.3 (Derry Lutterell, Tony Saunders, Ruben "Lyon" Salazar, Vauxs)
+pf2e-technicolor-traits 1.1.1 (shemetz)
+pf2e-tokens-bestiaries 1.3.0 (Ian Hildebrandt, Viviane Charlier, Shane Martland)
+pf2e-tokens-characters 1.3.0 (Ian Hildebrandt, Viviane Charlier, Richard Simões)
+pf2e-tokens-draconic-codex 14.1.0 (Paizo)
+pf2e-tokens-monster-core 14.1.0 (Paizo)
+pf2e-tokens-monster-core-2 14.1.0 (Paizo)
+pf2e-tokens-myth-and-magic 1.0.1 (Ian Hildebrandt, Viviane Charlier)
+pf2e-tokens-npc-core 14.1.0 (Paizo)
+pf2e-toolbelt 3.49.0 (Idle)
+pf2e-trigger-trove 2.1.0 (Pedro Grullo)
+pf2e-unified-spellbook 2.5.4 (Rowiz49)
+pf2e-usage-updater 4.0.2 (chasarooniZ)
+pf2e-visioner 8.3.0 (RoiLeaf)
+pf2e-xp-tool 1.7.3 (Taka)
+pinned-chat-message 2.3.0 (Jideon)
+player-status-tracker 1.0.1 (Celstra)
+preload-tracker 2.1.0 (TheJoester)
+remote-highlight-ui 2.3.6 (shemetz)
+sf2e-anachronism 2.1.0 (The PF2e/SF2e System Developers)
+sf2e-anachronism-automation 3.2.2 (Tacti)
+sf2e-tokens-alien-core 14.1.0 (Paizo)
+socketlib v1.1.4 (Farling, Manuel Vögele)
+sundry 1.2.7 (chasarooniZ)
+tcal 1.2.0 (Dan Brown)
+tokenizer-2 1.1.0 (MrPrimate)
+trigger-engine 1.9.0 (Idle)
+wayfinder 14.0.1 (7H3LaughingMan)
+xdy-pf2e-workbench 7.2.1 (Jonas Karlsson (xdy))
+
+List generated with Forien's Copy Environment: https://github.com/League-of-Foundry-Developers/foundryvtt-forien-copy-environment

@@ -1,9 +1,11 @@
+export { combatStartHook } from "./hooks/combatStartHook.js";
 export { createChatMessageHook } from "./hooks/createChatMessageHook.js";
 export { createTokenHook } from "./hooks/createTokenHook.js";
 export { deleteCombatHook } from "./hooks/deleteCombatHook.js";
 export { deleteItemHook } from "./hooks/deleteItemHook.js";
 export { pf2eEndTurnHook } from "./hooks/pf2eEndTurnHook.js";
 export { pf2eRerollHook } from "./hooks/pf2eRerollHook.js";
+export { pf2eToolbeltRollSaveHook } from "./hooks/pf2eToolbeltRollSaveHook.js";
 export { pf2eStartTurnHook } from "./hooks/pf2eStartTurnHook.js";
 export { pf2eSystemReadyHook } from "./hooks/pf2eSystemReadyHook.js";
 export { preCreateChatMessageHook } from "./hooks/preCreateChatMessageHook.js";
@@ -16,3 +18,4 @@ export { renderChatMessageHook } from "./hooks/renderChatMessageHook.js";
 export { renderGamePauseHook } from "./hooks/renderGamePauseHook.js";
 export { renderItemSheetHook } from "./hooks/renderItemSheetHook.js";
 export { renderTokenHUDHook } from "./hooks/renderTokenHUDHook.js";
+export { updateCombatHook } from "./hooks/updateCombatHook.js";

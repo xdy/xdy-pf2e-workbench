@@ -107,6 +107,7 @@ A demo video of most features: https://www.youtube.com/watch?v=WzDq2N1X07s
         * Non-attack spells that deal damage (rolled when spell is cast, before saves, so targets need to manually apply
           the correct amount of damage based on save.) On a critical success it rolls normal damage, use the 'double
           damage' button on the damage card.
+            * Supports Toolbelt's Target Helper for save spells
     * Optional settings to (if the GM allows it) automatically applying persistent damage, fast healing and
       regeneration (with an optional extra debug chat message), inspired by @Jamz' code.
     * Option to automate the results of the dying recovery roll button being clicked. (I.e. it does not automatically
@@ -277,13 +278,10 @@ module does
 something that the Workbench also does, I suggest disabling the Workbench equivalent.
 
 * [PF2e Dailies](https://github.com/reonZ/pf2e-dailies)
-* [PF2e Dorako UI](https://github.com/Dorako/pf2e-dorako-ui)
 * [PF2e Extempore Effects](https://github.com/shemetz/pf2e-extempore-effects)
-* [PF2e Interactive Token Tooltip](https://github.com/reonZ/pf2e-token-hud)
+* [PF2e HUD](https://github.com/reonZ/pf2e-hud)
 * [PF2e Item Activations](https://github.com/ChasarooniZ/pf2e-item-activations)
-* [PF2e Keybind Menagerie](https://github.com/Drental/foundryvtt-pf2e-f-is-for-flatfooted)
 * [PF2e Modifiers Matter](https://github.com/shemetz/pf2e-modifiers-matter)
-* [PF2e Perception]() (unreleased, made by Idle)
 * [PF2e Toolbelt](https://github.com/reonZ/pf2e-toolbelt)
 * [pf2e Utility Buttons](https://github.com/oWave/pf2e-flatcheck-helper)
 

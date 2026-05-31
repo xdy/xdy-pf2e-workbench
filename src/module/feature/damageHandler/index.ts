@@ -3,6 +3,7 @@ import {
     degreeOfSuccessWithRerollHandling,
     getActorFromMessage,
     isActuallyDamageRoll,
+    isFirstGM,
     objectHasKey,
     shouldIHandleThisMessage,
 } from "../../utils.ts";
@@ -10,8 +11,15 @@ import type { ActorPF2e, CharacterPF2e, DamageRoll, ScenePF2e, TokenDocumentPF2e
 import { ActorFlagsPF2e, ChatContextFlag, ChatMessagePF2e, RollOptionFlags, SpellPF2e } from "foundry-pf2e";
 import { Rolled } from "foundry/client/dice/roll.mts";
 import * as systems from "../../utils/systems.ts";
+import {
+    AutoRollDamageOptions,
+    getEffectiveToolbeltTargetHelperData,
+    isExperimentalToolbeltSaveIntegrationEnabled,
+    pendingToolbeltDamageInjections,
+    shouldWaitForToolbeltTargetHelper,
+} from "./toolbeltIntegration.ts";
 
-export async function autoRollDamage(message: ChatMessagePF2e): Promise<void> {
+export async function autoRollDamage(message: ChatMessagePF2e, options: AutoRollDamageOptions = {}): Promise<void> {
     const numberOfMessagesToCheck = 10;
     const settings = {
         autoRollDamageAllow: String(game.settings.get(MODULENAME, "autoRollDamageAllow")),
@@ -26,14 +34,15 @@ export async function autoRollDamage(message: ChatMessagePF2e): Promise<void> {
             settings.autoRollDamageForSpellAttack ||
             settings.autoRollDamageForSpellWhenNotAnAttack !== "no");
 
-    if (
-        shouldAutoRollDamage &&
-        shouldIHandleThisMessage(
-            message,
-            ["all", "players"].includes(settings.autoRollDamageAllow),
-            ["all", "gm"].includes(settings.autoRollDamageAllow),
-        )
-    ) {
+    const shouldHandle = options.forceSaveSpellRoll
+        ? isFirstGM()
+        : shouldIHandleThisMessage(
+              message,
+              ["all", "players"].includes(settings.autoRollDamageAllow),
+              ["all", "gm"].includes(settings.autoRollDamageAllow),
+          );
+
+    if (shouldAutoRollDamage && shouldHandle) {
         const originUuid = <string>systems.getFlag(message, "origin.uuid");
 
         if (originUuid) {
@@ -59,6 +68,10 @@ export async function autoRollDamage(message: ChatMessagePF2e): Promise<void> {
                 (settings.autoRollDamageForSpellWhenNotAnAttack === "saveSpell" ||
                     settings.autoRollDamageForSpellWhenNotAnAttack === "anySpell");
 
+            if (shouldWaitForToolbeltTargetHelper(message, rollForNonAttackSaveSpell, options)) {
+                return;
+            }
+
             const rollForNonAttackNonSaveSpell =
                 !isSaveSpell &&
                 rollForNonAttackSpell &&
@@ -67,10 +80,11 @@ export async function autoRollDamage(message: ChatMessagePF2e): Promise<void> {
 
             const rollForAttackSpell = isAttackSpell && settings.autoRollDamageForSpellAttack && hasFixedTime;
 
-            const degreeOfSuccess = degreeOfSuccessWithRerollHandling(message);
+            const degreeOfSuccess = options.forcedDegreeOfSuccess ?? degreeOfSuccessWithRerollHandling(message);
             const isFailure = ["criticalFailure", "failure"].includes(degreeOfSuccess);
             const isSuccess = ["criticalSuccess", "success"].includes(degreeOfSuccess);
             const isBasicSave = systems.getFlag<string[]>(message, "context.options")?.includes("item:defense:basic");
+            const shouldRollForcedSaveSpell = options.forceSaveSpellRoll && rollForNonAttackSaveSpell;
 
             const originMessage = await getLatestChatMessageWithOrigin(5, originUuid);
             const flags = originMessage?.flags;
@@ -85,6 +99,7 @@ export async function autoRollDamage(message: ChatMessagePF2e): Promise<void> {
             if (
                 actor &&
                 (rollForNonAttackNonSaveSpell ||
+                    shouldRollForcedSaveSpell ||
                     (rollForNonAttackSaveSpell && (isFailure || (isBasicSave && degreeOfSuccess === "success"))) ||
                     (rollForAttackSpell && isSuccess)) &&
                 !letTargetHelperAutorollDamage &&
@@ -109,14 +124,6 @@ export async function autoRollDamage(message: ChatMessagePF2e): Promise<void> {
  */
 // Cache for flat check results to avoid repeated searches
 const flatCheckResultCache = new Map<string, boolean>();
-
-// Clear cache when new messages are added
-Hooks.on("createChatMessage", () => {
-    // Only keep cache for current session to avoid memory leaks
-    if (flatCheckResultCache.size > 100) {
-        flatCheckResultCache.clear();
-    }
-});
 
 export async function noOrSuccessfulFlatcheck(message: ChatMessagePF2e): Promise<boolean> {
     let rollDamage = true;
@@ -263,13 +270,14 @@ function getActionFromMessage(actions: any[], message: ChatMessagePF2e) {
 // Cache for origin messages to avoid repeated searches
 const originMessageCache = new Map<string, ChatMessagePF2e>();
 
-// Clear cache when new messages are added
-Hooks.on("createChatMessage", () => {
-    // Only keep cache for current session to avoid memory leaks
+export function evictDamageHandlerCaches(): void {
+    if (flatCheckResultCache.size > 100) {
+        flatCheckResultCache.clear();
+    }
     if (originMessageCache.size > 100) {
         originMessageCache.clear();
     }
-});
+}
 
 async function getLatestChatMessageWithOrigin(numberOfMessagesToCheck: number, originUuid: string) {
     // Check cache first
@@ -321,6 +329,17 @@ async function handleSpell(
         // Fakes the event.closest function that pf2e uses to parse spell level for heightening damage rolls.
         const target = constructTargetElement(castRank);
 
+        const toolbeltTargetHelperData = getEffectiveToolbeltTargetHelperData(message);
+        const isToolbeltManaged =
+            isExperimentalToolbeltSaveIntegrationEnabled() && toolbeltTargetHelperData?.type === "spell";
+
+        if (isToolbeltManaged) {
+            pendingToolbeltDamageInjections.set(originUuid, {
+                targetHelperData: toolbeltTargetHelperData,
+                createdAt: Date.now(),
+            });
+        }
+
         if ((systems.getFlag<string[]>(message, "origin.variant.overlays")?.length ?? 0) > 0) {
             const overlays = systems.getFlag<string[]>(message, "origin.variant.overlays");
             const variant = origin.loadVariant({
@@ -339,6 +358,10 @@ async function handleSpell(
                 outcome: degreeOfSuccess,
                 target,
             });
+        }
+
+        if (isToolbeltManaged) {
+            await message.setFlag("pf2e-toolbelt", "targetHelper", null);
         }
     }
 }

@@ -26,6 +26,7 @@ import { generateNameFromTraitsForToken } from "./feature/tokenMystificationHand
 import { basicActionMacros, registerBasicActionMacrosHandlebarsTemplates } from "./feature/macros/basicActionMacros.js";
 import { buildNpcSpellbookJournal } from "./feature/macros/buildNpcSpellbookJournal.js";
 import {
+    combatStartHook,
     createChatMessageHook,
     createTokenHook,
     deleteCombatHook,
@@ -34,6 +35,7 @@ import {
     pf2eRerollHook,
     pf2eStartTurnHook,
     pf2eSystemReadyHook,
+    pf2eToolbeltRollSaveHook,
     preCreateChatMessageHook,
     preCreateItemHook,
     preUpdateActorHook,
@@ -44,6 +46,7 @@ import {
     renderGamePauseHook,
     renderItemSheetHook,
     renderTokenHUDHook,
+    updateCombatHook,
 } from "./hooks.js";
 import { onScaleNPCContextHook } from "./feature/cr-scaler/NPCScalerSetup.js";
 import {
@@ -66,6 +69,7 @@ import { followTheExpert } from "./feature/macros/follow-the-expert.js";
 import { hypercognition } from "./feature/macros/hypercognition.js";
 import { npcScaler } from "./feature/macros/npcScaler.js";
 import { registerHandlebarsHelpers } from "./utils/handlebarsHelpers.ts";
+import { registerToolbeltWrappers } from "./feature/damageHandler/toolbeltIntegration.ts";
 
 export const MODULENAME = "xdy-pf2e-workbench";
 export const NPC_TYPE = "npc";
@@ -114,6 +118,7 @@ export function updateHooks(cleanSlate = false): void {
     const gs = game.settings;
 
     const autoRollDamageAllow = gs.get(MODULENAME, "autoRollDamageAllow");
+    const experimentalToolbeltSaveIntegration = gs.get(MODULENAME, "experimentalToolbeltSaveIntegration");
     const autoRollDamageForStrike = gs.get(MODULENAME, "autoRollDamageForStrike");
     const autoRollDamageForSpellAttack = gs.get(MODULENAME, "autoRollDamageForSpellAttack");
     const autoRollDamageForSpellWhenNotAnAttack = gs.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack");
@@ -185,6 +190,20 @@ export function updateHooks(cleanSlate = false): void {
         createChatMessageHook,
     );
 
+    const toolbeltSaveSpellActive =
+        experimentalToolbeltSaveIntegration &&
+        autoRollDamageAllow &&
+        ["saveSpell", "anySpell"].includes(String(autoRollDamageForSpellWhenNotAnAttack)) &&
+        !!game.modules.get("pf2e-toolbelt")?.active;
+
+    handle("pf2e-toolbelt.rollSave", toolbeltSaveSpellActive, pf2eToolbeltRollSaveHook);
+
+    handle("combatStart", toolbeltSaveSpellActive, combatStartHook);
+    handle("updateCombat", toolbeltSaveSpellActive, updateCombatHook);
+    handle("deleteCombat", sheatheHeldItemsAfterEncounter || toolbeltSaveSpellActive, deleteCombatHook);
+
+    handle("renderTokenHUD", npcMystifier, renderTokenHUDHook);
+
     handle(
         "renderChatMessage",
         castPrivateSpell ||
@@ -250,8 +269,6 @@ export function updateHooks(cleanSlate = false): void {
             showCharacterOglTag,
         renderActorSheetHook,
     );
-
-    handle("deleteCombat", sheatheHeldItemsAfterEncounter, deleteCombatHook);
 
     handle("renderItemSheet", showItemLicenseTags, renderItemSheetHook);
 
@@ -338,6 +355,11 @@ Hooks.once("ready", () => {
         npcScaler: npcScaler, // await game.PF2eWorkbench.npcScaler()
         autoRollDamage: autoRollDamage, // await await game.PF2eWorkbench.autoRollDamage(message)
     };
+
+    const autoRollSpell = game.settings.get(MODULENAME, "autoRollDamageForSpellWhenNotAnAttack");
+    if (game.modules.get("pf2e-toolbelt")?.active && (autoRollSpell === "anySpell" || autoRollSpell === "saveSpell")) {
+        registerToolbeltWrappers();
+    }
 
     if (game.modules.get("pf2e-sheet-skill-actions")?.active) {
         ui.notifications.error(game.i18n.localize(`${MODULENAME}.modules.pf2e-sheet-skill-actions`));
