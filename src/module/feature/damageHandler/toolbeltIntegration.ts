@@ -112,7 +112,14 @@ export function getCachedToolbeltTargetHelperData(messageId: string): ToolbeltTa
 }
 
 export function getEffectiveToolbeltTargetHelperData(message: ChatMessagePF2e): ToolbeltTargetHelperData | null {
-    return getCachedToolbeltTargetHelperData(message.id) ?? getToolbeltTargetHelperData(message);
+    const cached = getCachedToolbeltTargetHelperData(message.id);
+    const fromFlags = getToolbeltTargetHelperData(message);
+
+    if (!cached && !fromFlags) {
+        return null;
+    }
+
+    return { ...cached, ...fromFlags };
 }
 
 function collectSaveEntries(data: ToolbeltTargetHelperData | null): [string, ToolbeltTargetHelperSaveData][] {
@@ -279,6 +286,8 @@ export async function handlePf2eToolbeltRollSave(payload: ToolbeltRollSaveHookPa
     state.completed = true;
 
     if (shouldRollToolbeltSaveSpellDamage(state)) {
+        // Wait a bit for toolbelt to do it's stuff
+        await new Promise((resolve) => setTimeout(resolve, 100));
         await autoRollDamage(message, {
             ignoreToolbeltTargetHelperWait: true,
             forceSaveSpellRoll: true,
