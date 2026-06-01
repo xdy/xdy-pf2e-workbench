@@ -1,21 +1,21 @@
 {
     "xdy-pf2e-workbench": {
         "npcRoller": {
-            "button-label": "NPC投骰",
+            "button-label": "NPC掷骰",
             "nav-labels": {
                 "strike": "打击",
-                "ac": "AC",
+                "ac": "护甲等级",
                 "save": "豁免",
                 "hp": "生命值",
                 "dc": "DC",
-                "areaDamage": "范围伤害",
+                "areaDamage": "区域伤害",
                 "perception": "察觉",
                 "skill": "技能",
                 "damage": "伤害",
                 "spell": "法术",
                 "abilityScore": "属性值"
             },
-            "title": "NPC投骰"
+            "title": "NPC掷骰"
         },
         "effects": {
             "orcFerocityUsed": "兽人凶猛已使用",
@@ -34,7 +34,7 @@
             },
             "applyPersistentDamage": {
                 "name": "自动应用持续伤害。",
-                "hint": "自动应用持续伤害的世界设置。"
+                "hint": "自动应用持续伤害（世界设置）。"
             },
             "addUserTargets": {
                 "addFor": "添加目标",
@@ -45,31 +45,31 @@
             },
             "applyPersistentHealing": {
                 "wasHealed": "{healing}治疗已自动应用。",
-                "name": "系统骰出的持续治疗自动应用。",
-                "hint": "系统骰出的持续治疗自动应用的世界设置。"
+                "name": "自动应用系统掷骰的持续治疗。",
+                "hint": "自动应用系统掷骰的持续治疗（世界设置）。"
             },
             "autoCollapseItemChatCardContent": {
                 "nonCollapsedDefault": "默认展开，点击标题折叠。",
                 "collapsedDefault": "默认折叠，点击标题展开。",
-                "hint": "自动折叠道具对话框内容的客户端设置（除了动作和攻击，选项见下）。",
-                "name": "自动折叠道具对话框的内容。",
+                "hint": "自动折叠物品聊天卡片内容（客户端设置，除了动作和攻击，选项见下）。",
+                "name": "自动折叠物品聊天卡片的内容。",
                 "noCollapse": "从不折叠"
             },
             "autoExpandDamageRolls": {
-                "collapsedAll": "折叠显示所有伤害掷骰（Foundry默认）。",
+                "collapsedAll": "折叠所有伤害掷骰（Foundry默认）。",
                 "expandedAll": "展开所有伤害掷骰。",
                 "name": "自动展开伤害掷骰。",
-                "hint": "自动展开伤害掷骰的客户端设置（Foundry默认为折叠所有伤害掷骰）。单击掷骰卡片以展开/折叠。",
+                "hint": "自动展开伤害掷骰（客户端设置，Foundry默认折叠所有伤害掷骰）。单击掷骰卡片以展开/折叠。",
                 "expandedNewest": "新伤害掷骰展开（刷新时展开最近一次伤害掷骰）。",
-                "expandedNew": "新伤害掷骰展开（刷新时展开最近3次伤害掷骰）。"
+                "expandedNew": "新伤害掷骰展开（刷新时展开最近三次伤害掷骰）。"
             },
             "autoGainDyingAtZeroHP": {
                 "addOne": "增加1",
                 "addOneForCharacters": "为玩家角色和魔宠增加1",
-                "addWoundedLevel": "为所有人增加1+受伤值",
-                "addWoundedLevelForCharacters": "为玩家角色和魔宠增加1+受伤值",
-                "hint": "设置是否在0HP时自动增加濒死值。",
-                "name": "在0HP时自动增加濒死值。",
+                "addWoundedLevel": "为所有人增加1+受伤状态值",
+                "addWoundedLevelForCharacters": "为玩家角色和魔宠增加1+受伤状态值",
+                "hint": "是否在0点生命值时自动增加濒死状态值。",
+                "name": "在0点生命值时自动增加濒死状态值。",
                 "orcFerocityMessage": "{name}刚刚使用了@UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K]，现在可以使用自由动作：@UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]",
                 "no": "否",
                 "deliberateDeathMessage": "如果该生物在近战触及范围内，{name}可以在因该生物的攻击或能力<b>陷入濒死状态前</b>对触发生物进行一次近战打击。<br>如果无法使用“凶杀致死”，则移除“凶杀致死已使用”的效果。"
@@ -110,8 +110,8 @@
                 "startTimerLabel": "提交更改并开始计时",
                 "willBeResetIn": "英雄点处理器将在{remainingMinutes}分钟后({time})恢复。",
                 "defaultTimeoutMinutes": 60,
-                "doWhat": "<b>第一部分</b>- 如何处理<em>全体</em>团队成员的英雄点",
-                "addOne": "<b>第二部分</b> - 为所选团队成员添加1英雄点</b>（计时器到期时默认随机选择）",
+                "doWhat": "<b>第一部分</b>- 如何处理<em>全体</em>队伍成员的英雄点",
+                "addOne": "<b>第二部分</b> - 为所选队伍成员添加1英雄点</b>（计时器到期时默认随机选择）",
                 "ignore": "无",
                 "noRunningTimer": "没有计时器在运行",
                 "none": "无角色",
@@ -159,14 +159,14 @@
                 "info": "请在攻击前先选定目标。"
             },
             "npcMystifierBlacklist": {
-                "hint": "添加黑名单词汇，以逗号分隔，它们将从神秘化名称列表中剔除。",
-                "name": "永不添加的黑名单词汇"
+                "hint": "添加黑名单词汇，以半角逗号分隔，它们将从神秘化名称中被剔除。",
+                "name": "永不添加的黑名单特征"
             },
             "npcMystifierModifierKey": {
                 "control": "Ctrl",
                 "alt": "Alt",
                 "always": "永远",
-                "disabled": "停用",
+                "disabled": "禁用",
                 "hint": "勾选此项，设置按住哪个键拖动生物到激活场景中时神秘化。注意如果你选择Alt键（非默认设置），指示物还会被隐藏。",
                 "name": "拖进场景时神秘化的快捷键",
                 "meta": "Meta/⌘ (command)/⊞ (windows)"
@@ -184,7 +184,7 @@
                 "name": "自定义暂停图标。"
             },
             "giveUnconsciousIfDyingRemovedAt0HP": {
-                "hint": "设置在濒死状态被移除，但HP仍为0时自动赋予失去意识状态。",
+                "hint": "设置在濒死状态被移除，但生命值仍为0时自动赋予失去意识状态。",
                 "name": "濒死状态被移除，但HP仍为0时自动赋予失去意识状态。",
                 "no": "否"
             },
@@ -209,7 +209,7 @@
                 "hint": "设置谁可以在命中时自动掷伤害骰。保存设置以显示/隐藏客户端自动化设置菜单上的其他选项。"
             },
             "autoReduceStunned": {
-                "hint": "客户端设置在回合开始时自动减少震慑状态值。",
+                "hint": "在回合开始时自动减少震慑状态值（客户端设置）。",
                 "name": "回合开始时自动减少震慑状态值"
             },
             "autoRemoveDyingAtGreaterThanZeroHP": {
@@ -221,7 +221,7 @@
             },
             "decreaseFrightenedConditionEachTurn": {
                 "name": "每回合自动减少惊惧状态值。",
-                "hint": "客户端设置在玩家角色、NPC和魔宠每回合结束时自动减少惊惧状态值。"
+                "hint": "在玩家角色、NPC和魔宠每回合结束时自动降低惊惧状态值（客户端设置）。"
             },
             "autoRemoveUnconsciousAtGreaterThanZeroHP": {
                 "hint": "设置当生命值恢复到0以上时自动移除失去意识状态。",
@@ -232,7 +232,7 @@
                 "hint": "设置在法术攻击命中时自动掷伤害骰。请注意，重击时永远只骰普通伤害。"
             },
             "autoRollDamageForSpellWhenNotAnAttack": {
-                "hint": "客户端设置在施放*非攻击*的法术时自动掷普通伤害骰。如果消息包含了失败的豁免结果，其会自动骰。如果是基础豁免则成功就会自动骰。攻击的话需要成功才会自动骰。如果是攻击且需要豁免的法术，则不会自动骰（比如解离术）。",
+                "hint": "在施放*非攻击*的法术时自动掷普通伤害骰（客户端设置）。如果消息包含了失败的豁免结果，其会自动掷骰。如果是基础豁免则成功就会自动掷骰。攻击的话需要成功才会自动掷骰。如果是攻击且需要豁免的法术，则不会自动掷骰（例如解离术）。",
                 "name": "施放非攻击的法术时自动掷伤害骰。",
                 "nonSaveSpell": "所有非攻击非豁免法术",
                 "saveSpell": "所有非攻击的豁免法术",
@@ -240,13 +240,13 @@
                 "anySpell": "所有非攻击法术"
             },
             "autoRollDamageForStrike": {
-                "hint": "客户端设置打击命中时是否自动掷伤害骰。注意，重击时会骰重击的伤害骰。",
+                "hint": "打击命中时是否自动掷伤害骰（客户端设置）。注意，重击时会骰重击的伤害骰。",
                 "name": "打击命中时自动骰伤害骰。",
                 "strike": "打击"
             },
             "autoRollDamageNotifyOnSpellCardNotFound": {
                 "name": "当法术攻击检定后但无法找到法术卡时通知我。",
-                "hint": "客户端设置当进行了法术攻击检定但无法找到可掷伤害骰的法术卡时如何通知。"
+                "hint": "当已骰掷法术攻击检定，但无法找到可掷伤害骰的法术卡片时如何通知（客户端设置）。"
             },
             "castPrivateSpell": {
                 "hint": "勾选此项后，使用Ctrl+单击施法时会私聊施法者和GM法术信息。",
@@ -306,11 +306,6 @@
                 "hint": "设置绑定键移动选定参战者的先攻位置到当前回合参战者之前，这通常是由于当前参战者杀死了他。由于四舍五入，先攻表中可能有多个参战者显示相同的先攻值。",
                 "name": "（世界）设置绑定键将选定参战者的先攻位置移到当前参战者之前。"
             },
-            "mystificationSettings": {
-                "label": "管理NPC神秘化设置",
-                "name": "NPC神秘化设置",
-                "hint": "启用并配置NPC神秘化功能"
-            },
             "npcMystifierDemystifyAllTokensBasedOnTheSameActor": {
                 "hint": "勾选此项，该角色对应的所有指示物都会神秘化。",
                 "name": "解除该角色所有指示物的神秘化"
@@ -333,7 +328,7 @@
             },
             "npcMystifier": {
                 "name": "启用NPC神秘化工具。",
-                "hint": "勾选此项开启指示物神秘化，开启后按住Ctrl（按键可自定义）将NPC添加到已激活场景中时，将根据其特征重命名指示物。保存设置以显示/隐藏更多选项。此功能永远不对小队成员生效。"
+                "hint": "勾选此项开启指示物神秘化，开启后按住Ctrl（按键可自定义）将NPC添加到已激活场景中时，将根据其特征重命名指示物。保存设置以显示/隐藏更多选项。此功能永远不对队伍成员生效。"
             },
             "npcMystifierUseCreatureTypesTraits": {
                 "hint": "勾选此项，神秘化名称中将使用生物类别特征（详见https://2e.aonprd.com/Traits.aspx）。",
@@ -385,7 +380,7 @@
                 "no": "无需提醒",
                 "reminder": "提醒",
                 "cancelAttack": "角色无法攻击时取消攻击",
-                "dying": "陷入濒死"
+                "dying": "陷入濒死状态"
             },
             "tokenAnimation": {
                 "hint": "启用此项更改指示物的移动动画。如有Multilevel Tokens模组，可能会引发问题。",
@@ -398,57 +393,49 @@
             "autoCollapseItemActionChatCardContent": {
                 "nonCollapsedDefault": "默认展开，点击标题折叠。",
                 "noCollapse": "永不折叠",
-                "name": "自动折叠动作对话框内容。",
+                "name": "自动折叠动作聊天卡片内容。",
                 "collapsedDefault": "默认折叠，点击标题展开。",
-                "hint": "自动折叠动作对话框内容的客户端设置。"
+                "hint": "自动折叠动作聊天卡片内容（客户端设置）。"
             },
             "autoCollapseItemAttackChatCardContent": {
                 "collapsedDefault": "默认折叠，点击标题展开。",
-                "name": "自动折叠攻击对话框内容。",
+                "name": "自动折叠攻击聊天卡片内容。",
                 "nonCollapsedDefault": "默认展开，点击标题折叠。",
-                "hint": "自动折叠攻击对话框内容的客户端设置。",
+                "hint": "自动折叠攻击聊天卡片内容（客户端设置）。",
                 "noCollapse": "永不折叠"
             },
             "playerFeatsPrerequisiteHint": {
-                "hint": "客户端设置在拥有先决条件的专长名前标注星号。",
+                "hint": "在拥有先决条件的专长名前标注星号（客户端设置）。",
                 "name": "在拥有先决条件的专长名前标注星号。"
             },
             "playerFeatsRarityColour": {
-                "name": "在人物卡中用稀有度颜色显示专长名。",
-                "hint": "客户端设置在人物卡中用稀有度颜色显示专长名。"
+                "name": "在角色卡中用稀有度颜色显示专长名。",
+                "hint": "在角色卡中用稀有度颜色显示专长名（客户端设置）。"
             },
             "playerSpellsRarityColour": {
-                "hint": "客户端设置在人物卡中用稀有度颜色显示法术名。",
-                "name": "在人物卡中用稀有度颜色显示法术名。"
-            },
-            "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
-                "hint": "仅在物品等级不低于此数值时将其神秘化。",
-                "name": "仅在物品等级不低于此数值时将其神秘化。"
-            },
-            "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
-                "hint": "仅在物品不低于此稀有度时将其神秘化。",
-                "name": "仅在物品不低于此稀有度时将其神秘化。"
+                "hint": "在角色卡中用稀有度颜色显示法术名（客户端设置）。",
+                "name": "在角色卡中用稀有度颜色显示法术名。"
             },
             "autoGainDyingAtZeroHPIfCriticallyHitOneMore": {
-                "name": "…如果被敌人造成重击伤害，濒死值额外增加1点。",
-                "hint": "如果被敌人角色选为目标并被重击，濒死值额外增加1点。使用上方“受伤”选项中的设置，需要先启用“受伤”设置。",
+                "name": "…如果被敌人造成重击伤害，濒死状态值额外增加1点。",
+                "hint": "如果被敌人角色选为目标并被重击，濒死状态值额外增加1点。使用上方“受伤”选项中的设置，需要先启用“受伤”设置。",
                 "no": "否",
-                "add": "添加濒死",
-                "addForCharacters": "为玩家角色和魔宠添加濒死"
+                "add": "添加濒死状态",
+                "addForCharacters": "为玩家角色和魔宠添加濒死状态"
             },
             "autoGainDyingIfTakingDamageWhenAlreadyDying": {
-                "name": "…如果在濒死状态下承受伤害，额外增加濒死值。",
-                "hint": "如果在已有濒死状态的情况下受到伤害，濒死值增加1点（若启用重击时额外增加濒死值，则为2点）。使用上方“受伤”设置，需要先启用“受伤”设置。",
+                "name": "…如果在濒死状态下承受伤害，额外增加濒死状态值。",
+                "hint": "如果在已有濒死状态的情况下受到伤害，濒死状态值增加1点（若启用重击时额外增加濒死状态值，则为2点）。使用上方“受伤”设置，需要先启用“受伤”设置。",
                 "no": "否",
-                "add": "添加濒死",
-                "addForCharacters": "为玩家角色和魔宠添加濒死"
+                "add": "添加濒死状态",
+                "addForCharacters": "为玩家角色和魔宠添加濒死状态"
             },
             "logLevel": {
                 "error": "错误",
                 "name": "日志等级",
                 "hint": "日志等级",
                 "trace": "追踪",
-                "debug": "排错",
+                "debug": "调试",
                 "info": "信息",
                 "warn": "警告",
                 "off": "关闭"
@@ -462,7 +449,7 @@
                 "no": "非致命伤害变得跟正常伤害一样",
                 "unconsciousForCharacters": "非致命伤害不会杀死角色和魔宠",
                 "name": "…取决于最后受到的伤害是否是非致命伤害。",
-                "hint": "如果你最后受到的伤害是非致命伤害，你不会陷入濒死。你变成0点HP且失去意识。需要先启用上方的设置。"
+                "hint": "如果你最后受到的伤害是非致命伤害，你不会陷入濒死。你变成0点生命值且失去意识。需要先启用上方的设置。"
             },
             "handleDyingRecoveryRollAllow": {
                 "all": "所有人",
@@ -483,7 +470,7 @@
             },
             "handleDyingRecoveryRoll": {
                 "handled": "已自动进行濒死复苏检定{roll} {outcome}。{defeated}。",
-                "hint": "客户端设置在点击复苏按钮后自动进行濒死复苏检定。",
+                "hint": "在点击复苏按钮后，自动进行濒死复苏检定（客户端设置）。",
                 "name": "在点击复苏按钮后自动进行濒死复苏检定。",
                 "defeated": "{name}被击败"
             },
@@ -503,8 +490,8 @@
                 "name": "…不论伤害的目标是否为选定指示物。"
             },
             "reminderBreathWeaponHidden": {
-                "hint": "勾选此项，隐藏非小队成员施放的法术的提醒器。",
-                "name": "…隐藏非小队成员提醒器。"
+                "hint": "勾选此项，隐藏非队伍成员施放的法术的提醒器。",
+                "name": "…隐藏非队伍成员提醒器。"
             },
             "heropointHandlerNotification": {
                 "hint": "当英雄点处理期将一个英雄点分发出去时，将自动弹出一条提示消息。",
@@ -521,32 +508,28 @@
                 "title": "双职业专长"
             },
             "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
-                "hint": "仅在物品等级等于或大于队伍等级时才会使物品神秘化。覆盖手动设置。",
-                "name": "仅在物品等级等于或大于队伍等级时才会使物品神秘化。"
-            },
-            "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
-                "hint": "…根据这个乘数修改（好吧，我知道，我应该显示最终值）",
-                "name": "…根据这个乘数修改"
+                "hint": "勾选后，显示队伍等级调整下拉列表。取消勾选，则显示固定等级下拉列表（0-20级）。",
+                "name": "使用队伍等级作为各个稀有度阈值的基础"
             },
             "autoKillIfDamageHasDeathTrait": {
                 "yes": "是，所有角色",
                 "yesForCharacters": "是，所有玩家角色+魔宠",
                 "yesForNpcs": "是，所有NPC",
                 "no": "否",
-                "hint": "（已废弃的功能）从带有死亡特征的来源处受到足够伤害时自动杀死角色的设置。",
-                "name": "…从死亡效果中受到足够伤害时自动杀死角色。（已废弃的功能）"
+                "hint": "（已废弃）从带有死亡特征的来源处受到足够伤害时自动杀死角色的设置。",
+                "name": "…从死亡效果中受到足够伤害时自动杀死角色。（已废弃）"
             },
             "autoKillIfMassiveDamage": {
                 "yes": "是，所有角色",
                 "yesForCharacters": "是，仅玩家角色+魔宠",
                 "yesForNpcs": "是，仅NPC",
-                "hint": "（已废弃的功能）在遭受重创时自动杀死角色的设置。",
+                "hint": "（已废弃）在遭受重创时自动杀死角色。",
                 "no": "否",
-                "name": "…遭受重创时自动杀死角色。（已废弃的功能）"
+                "name": "…但在遭受重创时自动杀死角色。（已废弃）"
             },
             "playerCraftingRarityColour": {
-                "hint": "客户端设置使角色表内的配方名称显示对应稀有度颜色。",
-                "name": "在角色表中显示配方稀有度颜色。"
+                "hint": "使角色卡内的配方名称显示对应稀有度颜色（客户端设置）。",
+                "name": "在角色卡中显示配方稀有度颜色。"
             },
             "castPrivateSpellWithPublicMessageTraitsBlocklist": {
                 "hint": "不显示于公开消息中的特征，以逗号分隔（如'mental, illusion'）",
@@ -561,9 +544,9 @@
                 "name": "…默认秘密施法："
             },
             "playerSpellsChangeSendToChat": {
-                "hint": "世界设置将发送至聊天栏的法术改为发送法术物品链接而非完整法术。",
-                "name": "将发送至聊天栏的法术全文改为发送法术物品链接而非完整法术。",
-                "text": "法术已被发送至聊天栏： "
+                "hint": "将发送至聊天的法术改为发送法术资源链接而非完整法术（世界设置）。",
+                "name": "将发送至聊天的法术全文改为发送法术物品链接而非完整法术。",
+                "text": "法术已被发送至聊天： "
             },
             "autoCollapseItemChatCardMoveEffectLinks": {
                 "hint": "…但是当聊天卡片默认折叠时，将任意效果链接移动到折叠部分外",
@@ -611,7 +594,7 @@
             },
             "heropointHandlerNotificationChat": {
                 "name": "…作为聊天消息或信息发送。",
-                "hint": "勾选使英雄点处理器通过聊天栏进行通知，否则它将处理为临时信息。"
+                "hint": "勾选使英雄点处理器通过聊天进行通知，否则它将处理为临时信息。"
             },
             "heropointHandlerRandomization": {
                 "hint": "随机选择玩家发放英雄点的方式",
@@ -631,6 +614,70 @@
             "pauseImageNoSpin": {
                 "hint": "禁止暂停图标旋转。",
                 "name": "禁止暂停图标旋转"
+            },
+            "playerAbcdRarityColour": {
+                "hint": "使角色卡中的族裔，背景，职业和神祇名称显示对应的稀有度颜色（客户端设置）。",
+                "name": "在角色卡中用稀有度颜色显示族裔，背景，职业与神祇名。"
+            },
+            "showItemLicenseTags": {
+                "hint": "在物品卡的详情部分显示“LICENSE:ORC”或“LICENSE:OGL”标签（世界设置）。",
+                "name": "在物品卡内显示许可标签。"
+            },
+            "showCharacterOglTag": {
+                "hint": "若角色拥有任何OGL许可资源，则会在角色卡内显示“OGL资源”标签。点击该标签会打开一个OGL资源列表（世界设置）。",
+                "name": "在角色卡内显示OGL标签。",
+                "title": "OGL资源",
+                "clickToView": "点击查看OGL许可资源",
+                "noOglContent": "该角色未拥有任何OGL许可资源。",
+                "oglItemsFound": "该角色拥有{count}项OGL许可资源："
+            },
+            "npcMystificationSettings": {
+                "hint": "启用和配置NPC指示物神秘化",
+                "label": "管理NPC指示物神秘化设置",
+                "name": "NPC指示物神秘化设置"
+            },
+            "itemMystificationSettings": {
+                "hint": "配置NPC物品神秘化",
+                "label": "管理NPC物品神秘化设置",
+                "name": "NPC物品神秘化设置"
+            },
+            "npcMystifierIncludeCreaturesOfThisRarityOrGreater": {
+                "hint": "仅对该稀有度及以上的生物使用基于特征的名称生成（见下方设置）。但所有生物依旧被神秘化，该稀有度以下的生物将获得更简单的名称，其不含基于特征的名称部分。",
+                "name": "仅对该稀有度及以上生物赋予基于特征的名称"
+            },
+            "npcMystifierIncludeCreaturesOfThisLevelOrGreater": {
+                "hint": "仅对该等级及以上生物使用基于特征的名称生成（见下方设置）。选择-1则禁用该功能。但所有生物依旧被神秘化。",
+                "name": "仅对该等级及以上生物赋予基于特征的名称"
+            },
+            "npcMystifierIncludeCreaturesOfThisLevelOrGreaterUsingPartyLevel": {
+                "hint": "以队伍等级确定，使用基于特征的名称生成的最低生物等级。该设置覆盖手动设置。",
+                "name": "仅对大于等于队伍等级的生物赋予基于特征的名称"
+            },
+            "mystifyThreshold": {
+                "namePlCommon": "神秘化阈值（关联队伍）：常见",
+                "namePlUncommon": "神秘化阈值（关联队伍）：罕见",
+                "namePlRare": "神秘化阈值（关联队伍）：稀有",
+                "namePlUnique": "神秘化阈值（关联队伍）：独特",
+                "nameAbsCommon": "神秘化阈值（固定）：常见",
+                "nameAbsUncommon": "神秘化阈值（固定）：罕见",
+                "nameAbsRare": "神秘化阈值（固定）：稀有",
+                "nameAbsUnique": "神秘化阈值（固定）：独特",
+                "hintPl": "队伍等级调整。当物品等级 >= 队伍等级+调整值时，使物品神秘化。",
+                "hintAbs": "固定物品等级。当物品等级 >= 设定值时，使物品神秘化。",
+                "notMystified": "不神秘化",
+                "plus4": "队伍等级+4",
+                "plus3": "队伍等级+3",
+                "plus2": "队伍等级+2",
+                "plus1": "队伍等级+1",
+                "plus0": "队伍等级",
+                "minus1": "队伍等级-1",
+                "minus2": "队伍等级-2",
+                "minus3": "队伍等级-3",
+                "minus4": "队伍等级-4"
+            },
+            "experimentalToolbeltSaveIntegration": {
+                "hint": "实验性功能：启用PF2e Toolbelt - 目标助手功能集成，以便自动骰掷豁免法术的伤害。（需要你启用PF2e Toolbelt的目标助手功能，同时启用Workbench自动骰掷豁免法术伤害功能的客户端设置。）",
+                "name": "实验性功能：启用PF2e Toolbelt豁免集成"
             }
         },
         "spellCardNotFound": "找不到法术卡。以最低环级施放{spell}。",
@@ -647,11 +694,11 @@
                 "gmMustImport": "GM必须在合集包“xdy-pf2e-workbench-macros”上右键并选择“导入全部内容”并确保导入时选择了“保留文档ID？”。",
                 "settings": {
                     "showBestBonus": {
-                        "name": "基本动作宏：显示最高加值",
-                        "hint": "若选中人物在基本动作宏对话中有更高加值，是否显示"
+                        "name": "基础动作宏：显示最高加值",
+                        "hint": "若选中人物在基础动作宏对话中有更高加值，是否显示"
                     }
                 },
-                "YouAreTheBestInYourParty": "你是你小队里最擅长这项技能的",
+                "YouAreTheBestInYourParty": "你是队伍里最擅长这项技能的",
                 "actions": {
                     "AidToggle": "协助（选项）",
                     "AvoidNotice": "避人耳目",
@@ -720,27 +767,27 @@
                 "macroNotFound": "未找到{macroName}宏",
                 "downtime": "休整期",
                 "bamShowUnusable": {
-                    "name": "基本动作宏：显示无法使用的动作。",
+                    "name": "基础动作宏：显示无法使用的动作。",
                     "hint": "是否要显示由于未受训而无法使用的动作。"
                 },
                 "exploration": "探索期",
                 "explorationShort": "E",
                 "downtimeShort": "D",
                 "bamTabview": {
-                    "hint": "在基本动作宏对话框使用选项卡布局。",
-                    "name": "基本动作宏：使用选项卡布局"
+                    "hint": "在基础动作宏对话框使用选项卡布局。",
+                    "name": "基础动作宏：使用选项卡布局"
                 }
             },
             "buildNpcSpellbookJournal": {
                 "title": "建立NPC法术书日志",
-                "noSpellcastingEntry": "你须打开并选择一个NPC的人物卡，或者选中一个NPC的指示物。另外，该NPC必须有某种施法能力。",
+                "noSpellcastingEntry": "你须打开并选择一个NPC的角色卡，或者选中一个NPC的指示物。另外，该NPC必须有某种施法能力。",
                 "generatedSpellbookFor": "为{name}生成法术书"
             },
             "refocus": {
                 "regains": "恢复{focus}聚能点。",
                 "one": "1",
-                "selectOneActor": "你必须选择一个人物。",
-                "isPsychic": "仅为增幅心能戏法或心能能力使用聚能点",
+                "selectOneActor": "你必须选择一个角色。",
+                "isPsychic": "仅为增幅心能戏法或强化心力能力使用聚能点",
                 "notPsychic": "已消耗至少{regain}聚能点",
                 "regainOne": "回复1点聚能点。",
                 "disabled": "不可用，因为没有能力能回复1点以上的聚能点。",
