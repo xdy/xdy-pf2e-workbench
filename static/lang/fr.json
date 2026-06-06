@@ -308,6 +308,10 @@
         "none": "Aucun",
         "players": "Joueurs"
       },
+      "experimentalToolbeltSaveIntegration": {
+        "hint": "Expérimental : Activation de l’intégration de l'aide au viblage de PF2e Toolbelt pour le calcul automatique des dégâts lors des jets de sauvegarde contre les sorts. (Nécessite l’activation de l'aide au ciblage dans PF2e Toolbelt et l’activation du calcul automatique des dégâts pour les jets de sauvegarde contre les sorts dans le paramètrage du client dans le Workbench.)",
+        "name": "Expérimental : Activation de l’intégration des jet de sauvegarde de PF2e Toolbelt"
+      },
       "autoRollDamageForSpellAttack": {
         "hint": "Réglage du client pour lancer automatiquement les dégâts pour les attaques de sort qui touchent. Notez que les coups critiques lancent toujours les dégâts normaux.",
         "name": "Lancer automatiquement les dégâts en cas de succès d'une attaque de sort."
@@ -687,21 +691,31 @@
         "onScene": "Mystifier les objets lorsque les PNJ sont ajoutés à la scène",
         "onZeroHp": "Mystifier les objets lorsque les PNJ sont à 0 pv"
       },
-      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreater": {
-        "hint": "Mystifiez les objets seulement s'ils sont de ce niveau ou supérieur.",
-        "name": "Mystifiez les objets seulement s'ils sont de ce niveau ou supérieur."
-      },
       "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterUsingPartyLevel": {
-        "hint": "Mystifier les objets de niveau égal ou supérieur au niveau du groupe. Prend le pas sur l'entrée manuelle.",
-        "name": "Mystifie seulement les objets de niveau égal ou supérieur au niveau groupe."
+        "hint": "Lorsqu'elle est cochée, cette option affiche les listes déroulantes au regard du NG (ex. « NG+3 » = Niveau du Groupe + 3). Lorsqu'elle est décochée, elle affiche les listes déroulantes de niveau absolu (0-20).",
+        "name": "Utiliser le niveau du groupe comme base pour les seuils de rareté."
       },
-      "npcMystifyAllPhysicalMagicalItemsOfThisLevelOrGreaterMultiplier": {
-        "hint": "...modifié par ce multiplicateur (ouaip, je sais, je devrais montrer la valeur finale)",
-        "name": "...modifié par ce multiplicateur"
-      },
-      "npcMystifyAllPhysicalMagicalItemsOfThisRarityOrGreater": {
-        "hint": "Mystifiez les objets seulement s'ils sont de cette rareté ou supérieur.",
-        "name": "Mystifiez les objets seulement s'ils sont de cette rareté ou supérieur."
+      "mystifyThreshold": {
+        "namePlCommon": "Seuil de mystification (par rapport au groupe) : Courant",
+        "namePlUncommon": "Seuil de mystification (par rapport au groupe) : Peu courant",
+        "namePlRare": "Seuil de mystification (par rapport au groupe) : Rare",
+        "namePlUnique": "Seuil de mystification (par rapport au groupe) : Unique",
+        "nameAbsCommon": "Seuil de mystification (absolu) : Courant",
+        "nameAbsUncommon": "Seuil de mystification (absolu) : Peu courant",
+        "nameAbsRare": "Seuil de mystification (absolu) : Rare",
+        "nameAbsUnique": "Seuil de mystification (absolu) : Unique",
+        "hintPl": "Décalage par rapport au niveau du groupe. L'objet est mystifié lorsque le niveau de l'objet est >= au niveau du groupe + décalage.",
+        "hintAbs": "Niveau d'objet absolu. Objet mystifié lorsque le niveau de l'objet est >= cette valeur.",
+        "notMystified": "Pas mystifié",
+        "plus4": "NG+4",
+        "plus3": "NG+3",
+        "plus2": "NG+2",
+        "plus1": "NG+1",
+        "plus0": "NG",
+        "minus1": "NG-1",
+        "minus2": "NG-2",
+        "minus3": "NG-3",
+        "minus4": "NG-4"
       },
       "npcMystifierIncludeCreaturesOfThisRarityOrGreater": {
         "hint": "Utiliser la génération de noms basée sur les traits (paramètres ci-dessous) uniquement pour les créatures de cette rareté ou supérieure. Toutes les créatures restent toujours mystérieuses. Celles dont la rareté est inférieure à ce seuil reçoivent un nom plus simple, sans éléments liés aux traits.",
