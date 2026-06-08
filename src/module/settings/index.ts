@@ -165,6 +165,35 @@ export function registerWorkbenchSettings(): void {
         onChange: () => updateHooks(),
     });
 
+    game.settings.register(MODULENAME, "canvasPointer", {
+        name: `${MODULENAME}.SETTINGS.canvasPointer.name`,
+        hint: `${MODULENAME}.SETTINGS.canvasPointer.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register(MODULENAME, "canvasPointerIcon", {
+        name: `${MODULENAME}.SETTINGS.canvasPointerIcon.name`,
+        hint: `${MODULENAME}.SETTINGS.canvasPointerIcon.hint`,
+        scope: "world",
+        config: true,
+        default: "fa-regular fa-hand-point-down",
+        type: String,
+    });
+
+    game.settings.register(MODULENAME, "canvasPointerBroadcastInterval", {
+        name: `${MODULENAME}.SETTINGS.canvasPointerBroadcastInterval.name`,
+        hint: `${MODULENAME}.SETTINGS.canvasPointerBroadcastInterval.hint`,
+        scope: "world",
+        config: true,
+        default: 10,
+        type: Number,
+        // @ts-expect-error TODO Fix typing
+        range: { min: 1, max: 1000, step: 1 },
+    });
+
     game.settings.register(MODULENAME, "workbenchVersion", {
         name: `${MODULENAME}.SETTINGS.workbenchVersion.name`,
         hint: `${MODULENAME}.SETTINGS.workbenchVersion.hint`,

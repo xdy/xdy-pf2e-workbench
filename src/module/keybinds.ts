@@ -3,6 +3,8 @@ import { MODULENAME } from "./xdy-pf2e-workbench.js";
 import { canMystify, doMystification, isTokenMystified } from "./feature/tokenMystificationHandler/index.js";
 import { calcRemainingMinutes, heroPointHandler, HPHState } from "./feature/heroPointHandler/index.js";
 import { moveSelectedAheadOfCurrent } from "./feature/initiativeHandler/index.js";
+import { activateCanvasPointer, deactivateCanvasPointer } from "./feature/canvas-pointer/index.js";
+import { DEFAULT_POINTER_ICON } from "./feature/canvas-pointer/constants.js";
 
 export function registerWorkbenchKeybindings(): void {
     logInfo(`${MODULENAME} | registerKeybindings`);
@@ -136,6 +138,24 @@ export function registerWorkbenchKeybindings(): void {
                 return true;
             }
             return false;
+        },
+        reservedModifiers: [],
+        precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,
+    });
+
+    // Canvas pointer
+    keybindings.register(MODULENAME, "canvasPointer", {
+        name: game.i18n.localize(`${MODULENAME}.SETTINGS.canvasPointerKey.name`),
+        hint: game.i18n.localize(`${MODULENAME}.SETTINGS.canvasPointerKey.hint`),
+        restricted: false,
+        editable: [{ key: "KeyX", modifiers: [] }],
+        onDown: () => {
+            if (!game.settings.get(MODULENAME, "canvasPointer")) return false;
+            const iconClass = game.settings.get(MODULENAME, "canvasPointerIcon") as string;
+            return activateCanvasPointer(iconClass || DEFAULT_POINTER_ICON);
+        },
+        onUp: () => {
+            return deactivateCanvasPointer();
         },
         reservedModifiers: [],
         precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL,

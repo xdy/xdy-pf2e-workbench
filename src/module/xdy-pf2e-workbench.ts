@@ -68,6 +68,7 @@ import { refocus } from "./feature/macros/refocus.js";
 import { followTheExpert } from "./feature/macros/follow-the-expert.js";
 import { hypercognition } from "./feature/macros/hypercognition.js";
 import { npcScaler } from "./feature/macros/npcScaler.js";
+import { initCanvasPointer } from "./feature/canvas-pointer/index.js";
 import { registerHandlebarsHelpers } from "./utils/handlebarsHelpers.ts";
 import { registerToolbeltWrappers } from "./feature/damageHandler/toolbeltIntegration.ts";
 
@@ -303,6 +304,8 @@ Hooks.once("init", async (_actor: ActorPF2e) => {
     handleAsync(registerBasicActionMacrosHandlebarsTemplates(), "registerBasicActionMacrosHandlebarsTemplates");
 
     registerHandlebarsHelpers();
+
+    initCanvasPointer();
 
     // Hooks that always run
     // None currently

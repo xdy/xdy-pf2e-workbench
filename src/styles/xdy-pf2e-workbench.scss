@@ -233,6 +233,7 @@
 
 .bam-dialog {
     container: bam-dialog / inline-size;
+
     .standard-form {
         gap: initial;
     }
@@ -298,6 +299,7 @@
 
 .bam-tabs.tabs {
     margin: 0.5rem 0 0.5rem 0;
+
     a.active > span {
         text-decoration: underline;
     }
@@ -305,8 +307,10 @@
 
 .bam-body {
     padding-top: 2px;
+
     h3 {
         margin: 1rem 0 0.5rem 0;
+
         &:first-child {
             margin-top: 0;
         }
@@ -370,29 +374,35 @@
         &:hover {
             text-shadow: 0 0 2px #fff;
         }
+
         &.glow {
             --color-glow1: 35;
             --color-glow2: 50;
             animation: glow2 alternate infinite 2s;
             z-index: 1;
         }
+
         &[data-rank="0"],
         &[data-rank] {
             background: var(--color-proficiency-untrained);
             color: var(--text-light);
         }
+
         &[data-rank="1"] {
             background: var(--color-proficiency-trained);
             color: var(--text-light);
         }
+
         &[data-rank="2"] {
             background: var(--color-proficiency-expert);
             color: var(--text-light);
         }
+
         &[data-rank="3"] {
             background: var(--color-proficiency-master);
             color: var(--text-light);
         }
+
         &[data-rank="4"] {
             background: var(--color-proficiency-legendary);
             color: var(--text-light);
@@ -437,4 +447,27 @@
     .bam-action-list {
         --bam-columns: 41;
     }
+}
+
+#xdy-pf2e-workbench-pointer-overlay,
+.xdy-pf2e-workbench-pointer-remote {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    font-size: 48px;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.9),
+    0 0 12px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.05s ease;
+    will-change: left, top;
+}
+
+.xdy-pf2e-workbench-pointer-active #board {
+    cursor: none !important;
+}
+
+.xdy-pf2e-workbench-pointer-active canvas,
+.xdy-pf2e-workbench-pointer-active .token,
+.xdy-pf2e-workbench-pointer-active .tile {
+    cursor: none !important;
 }
