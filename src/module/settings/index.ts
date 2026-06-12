@@ -7,6 +7,7 @@ import { WorkbenchClientAutomationSettings } from "./automation-client.js";
 import { WorkbenchQolWorldSettings } from "./qol-world.js";
 import { logInfo } from "../utils.js";
 import { WorkbenchHouseRulesSettings } from "./houseRules.js";
+import { WorkbenchCanvasFeaturesSettings } from "./canvas-features.js";
 
 export { mystifyModifierKey, mystifyRandomPropertyType } from "./npc-mystification.js";
 
@@ -28,6 +29,7 @@ export function registerWorkbenchSettings(): void {
     WorkbenchWorldAutomationSettings.registerSettingsAndCreateMenu("fa-solid fa-robot");
     WorkbenchClientAutomationSettings.registerSettingsAndCreateMenu("fa-solid fa-magic", false);
     WorkbenchHouseRulesSettings.registerSettingsAndCreateMenu("fa-solid fa-house");
+    WorkbenchCanvasFeaturesSettings.registerSettingsAndCreateMenu("fa-solid fa-compass");
 
     for (const key of [
         "autoCollapseItemChatCardContent",
@@ -115,38 +117,6 @@ export function registerWorkbenchSettings(): void {
         },
     });
 
-    game.settings.register(MODULENAME, "customPauseImage", {
-        name: `${MODULENAME}.SETTINGS.customPauseImage.name`,
-        hint: `${MODULENAME}.SETTINGS.customPauseImage.hint`,
-        scope: "world",
-        config: true,
-        default: "",
-        type: String,
-        // @ts-expect-error - filePicker property not yet in foundry-pf2e types
-        filePicker: "image",
-        onChange: () => updateHooks(),
-    });
-
-    game.settings.register(MODULENAME, "customPauseText", {
-        name: `${MODULENAME}.SETTINGS.customPauseText.name`,
-        hint: `${MODULENAME}.SETTINGS.customPauseText.hint`,
-        scope: "world",
-        config: true,
-        default: "",
-        type: String,
-        onChange: () => updateHooks(),
-    });
-
-    game.settings.register(MODULENAME, "pauseImageNoSpin", {
-        name: `${MODULENAME}.SETTINGS.pauseImageNoSpin.name`,
-        hint: `${MODULENAME}.SETTINGS.pauseImageNoSpin.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-        onChange: () => updateHooks(),
-    });
-
     game.settings.register(MODULENAME, "logLevel", {
         name: `${MODULENAME}.SETTINGS.logLevel.name`,
         hint: `${MODULENAME}.SETTINGS.logLevel.hint`,
@@ -163,35 +133,6 @@ export function registerWorkbenchSettings(): void {
             5: game.i18n.localize(`${MODULENAME}.SETTINGS.logLevel.off`),
         },
         onChange: () => updateHooks(),
-    });
-
-    game.settings.register(MODULENAME, "canvasPointer", {
-        name: `${MODULENAME}.SETTINGS.canvasPointer.name`,
-        hint: `${MODULENAME}.SETTINGS.canvasPointer.hint`,
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-    });
-
-    game.settings.register(MODULENAME, "canvasPointerIcon", {
-        name: `${MODULENAME}.SETTINGS.canvasPointerIcon.name`,
-        hint: `${MODULENAME}.SETTINGS.canvasPointerIcon.hint`,
-        scope: "world",
-        config: true,
-        default: "fa-regular fa-hand-point-down",
-        type: String,
-    });
-
-    game.settings.register(MODULENAME, "canvasPointerBroadcastInterval", {
-        name: `${MODULENAME}.SETTINGS.canvasPointerBroadcastInterval.name`,
-        hint: `${MODULENAME}.SETTINGS.canvasPointerBroadcastInterval.hint`,
-        scope: "world",
-        config: true,
-        default: 10,
-        type: Number,
-        // @ts-expect-error TODO Fix typing
-        range: { min: 1, max: 1000, step: 1 },
     });
 
     game.settings.register(MODULENAME, "workbenchVersion", {

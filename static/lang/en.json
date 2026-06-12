@@ -811,6 +811,27 @@
                 "hint": "Hold this key over the canvas to display the configured icon. Release to restore the normal cursor. Default: X.",
                 "name": "Canvas pointer key"
             },
+            "canvasPointerPingMode": {
+                "hint": "What happens when you click while the pointer is active.",
+                "name": "Ping mode",
+                "none": "No ping",
+                "visual": "Visible ping",
+                "sound": "Sound ping",
+                "visualAndSound": "Sound + visible ping"
+            },
+            "canvasPointerPingSound": {
+                "hint": "The audio file to play when pinging. Leave empty to only show the visual ping.",
+                "name": "Ping sound file"
+            },
+            "canvasPointerPingVolume": {
+                "hint": "Volume for the ping sound (0 to 1). Default: 0.2.",
+                "name": "Ping sound volume"
+            },
+            "canvasFeaturesSettings": {
+                "hint": "Canvas pointer, pings, token animation speed, and pause screen customization.",
+                "label": "Manage Canvas Features Settings",
+                "name": "Canvas Features Settings"
+            },
             "workbenchVersion": {
                 "hint": "Version that the latest migration ran on. Can be lower than the module version. Don't modify this unless you know what you are doing.",
                 "name": "Workbench migration version"

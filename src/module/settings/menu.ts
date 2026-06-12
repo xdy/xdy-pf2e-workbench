@@ -112,6 +112,7 @@ export class SettingsMenuPF2eWorkbench extends foundry.applications.api.Handleba
         const settings = (this.constructor as typeof SettingsMenuPF2eWorkbench).settings;
         const templateData: SettingsTemplateData[] = Object.entries(settings).map(([key, setting]) => {
             const value = game.settings.get(MODULENAME, key);
+            const hasRange = setting.type === Number && setting.range;
             return {
                 ...setting,
                 key,
@@ -119,7 +120,8 @@ export class SettingsMenuPF2eWorkbench extends foundry.applications.api.Handleba
                 isCheckbox: setting.type === Boolean,
                 // @ts-expect-error filePicker is not typed in SettingRegistration
                 isFilepicker: setting.type === String && setting.filePicker,
-                isNumber: setting.type === Number,
+                isNumber: setting.type === Number && !hasRange,
+                isRange: hasRange,
                 isSelect: !!setting.choices,
                 // @ts-expect-error filePicker is not typed in SettingRegistration
                 isText: setting.type === String && !setting.filePicker,

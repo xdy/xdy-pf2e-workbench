@@ -1,5 +1,5 @@
-import type { PointerStopPayload, PointerSyncPayload } from "./constants.ts";
-import { OP_STOP, OP_SYNC, REMOTE_CLASS, SOCKET_NAME } from "./constants.ts";
+import type { PointerPingPayload, PointerStopPayload, PointerSyncPayload } from "./constants.ts";
+import { OP_PING, OP_STOP, OP_SYNC, REMOTE_CLASS, SOCKET_NAME } from "./constants.ts";
 
 export function worldToScreen(wx: number, wy: number): { screenX: number; screenY: number } {
     if (!canvas?.ready) return { screenX: 0, screenY: 0 };
@@ -19,6 +19,19 @@ export function sendPosition(iconClass: string, userColor: string): void {
         color: userColor,
     } satisfies PointerSyncPayload;
     game.socket.emit(SOCKET_NAME, payload);
+}
+
+export function sendPing(soundSrc: string, volume: number): void {
+    if (!canvas?.ready) return;
+    const mp = canvas.mousePosition;
+    game.socket.emit(SOCKET_NAME, {
+        operation: OP_PING,
+        userId: game.user?.id,
+        wx: Math.round(mp.x),
+        wy: Math.round(mp.y),
+        soundSrc,
+        volume,
+    } satisfies PointerPingPayload);
 }
 
 export function sendStop(userId: string): void {

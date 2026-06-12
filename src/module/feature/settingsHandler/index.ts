@@ -41,4 +41,20 @@ export function toggleMenuSettings(html: HTMLElement, settings: SettingsMenuPF2e
             }
         }
     }
+
+    const pingMode = game.settings.get(MODULENAME, "canvasPointerPingMode") as string;
+    const showSoundSettings = pingMode === "sound" || pingMode === "visualAndSound";
+    setFormGroupVisibility(html, `[name="canvasPointerPingSound"]`, showSoundSettings);
+    setFormGroupVisibility(html, `[name="canvasPointerPingVolume"]`, showSoundSettings);
+
+    const pingModeSelect = html.querySelector<HTMLSelectElement>(`[name="canvasPointerPingMode"]`);
+    if (pingModeSelect && !pingModeSelect.dataset.pingListenerAttached) {
+        pingModeSelect.dataset.pingListenerAttached = "true";
+        pingModeSelect.addEventListener("change", () => {
+            const mode = pingModeSelect.value;
+            const showSettings = mode === "sound" || mode === "visualAndSound";
+            setFormGroupVisibility(html, `[name="canvasPointerPingSound"]`, showSettings);
+            setFormGroupVisibility(html, `[name="canvasPointerPingVolume"]`, showSettings);
+        });
+    }
 }

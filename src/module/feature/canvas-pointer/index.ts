@@ -1,9 +1,10 @@
 import { MODULENAME } from "../../xdy-pf2e-workbench.js";
-import type { PointerPayload, PointerSyncPayload } from "./constants.ts";
-import { DEFAULT_POINTER_COLOR, OP_SYNC, SOCKET_NAME } from "./constants.ts";
+import type { PointerPayload, PointerPingPayload, PointerSyncPayload } from "./constants.ts";
+import { DEFAULT_POINTER_COLOR, OP_PING, OP_SYNC, SOCKET_NAME } from "./constants.ts";
 import {
     getOrCreateRemoteElement,
     removeRemoteElement,
+    sendPing,
     sendPosition,
     sendStop,
     updateRemoteElement,
@@ -27,6 +28,8 @@ export function initCanvasPointer(): void {
     game.socket.on(SOCKET_NAME, (payload: PointerPayload) => {
         if (payload.operation === OP_SYNC) {
             handleRemoteSync(payload);
+        } else if (payload.operation === OP_PING) {
+            handleRemotePing(payload);
         } else {
             handleRemoteStop(payload);
         }
@@ -53,6 +56,7 @@ export function activateCanvasPointer(faIconClass: string): boolean {
     document.body.classList.add("xdy-pf2e-workbench-pointer-active");
     document.addEventListener("mousemove", onMouseMove, { passive: true });
     document.addEventListener("visibilitychange", onVisibilityChange);
+    document.addEventListener("mousedown", onMouseDown);
     return true;
 }
 
@@ -65,6 +69,7 @@ export function deactivateCanvasPointer(): boolean {
     document.body.classList.remove("xdy-pf2e-workbench-pointer-active");
     document.removeEventListener("mousemove", onMouseMove);
     document.removeEventListener("visibilitychange", onVisibilityChange);
+    document.removeEventListener("mousedown", onMouseDown);
 
     if (overlay) {
         overlay.style.display = "none";
@@ -130,4 +135,28 @@ function onMouseMove(event: MouseEvent): void {
     if (!overlay) return;
     overlay.style.left = `${event.clientX}px`;
     overlay.style.top = `${event.clientY}px`;
+}
+
+function onMouseDown(_event: MouseEvent): void {
+    if (!canvas?.ready) return;
+    const pingMode = game.settings.get(MODULENAME, "canvasPointerPingMode") as string;
+    if (pingMode === "sound" || pingMode === "visualAndSound") {
+        const src = game.settings.get(MODULENAME, "canvasPointerPingSound") as string;
+        const volume = game.settings.get(MODULENAME, "canvasPointerPingVolume") as number;
+        if (src) {
+            game.audio.play(src, { volume });
+            sendPing(src, volume);
+        }
+    }
+    if (pingMode === "visual" || pingMode === "visualAndSound") {
+        canvas.ping(canvas.mousePosition);
+    }
+}
+
+function handleRemotePing(payload: PointerPingPayload): void {
+    if (!canvas?.ready) return;
+    if (payload.userId === game.user?.id) return;
+    if (payload.soundSrc) {
+        game.audio.play(payload.soundSrc, { volume: payload.volume });
+    }
 }

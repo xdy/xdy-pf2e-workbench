@@ -11,11 +11,14 @@
                 <input type="checkbox" name="{{setting.key}}" {{checked setting.value}} />
             {{else if setting.isNumber}}
                 <input type="number" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
+            {{else if setting.isRange}}
+                {{rangePicker name=setting.key value=setting.value min=setting.range.min max=setting.range.max
+                              step=setting.range.step}}
             {{else if setting.isText}}
                 <input type="text" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
             {{else if setting.isFilepicker}}
-                {{filePicker target=setting.name type="imagevideo"}}
-                <input class="image" type="text" name="{{setting.key}}" value="{{setting.value}}" data-dtype="{{setting.type}}"/>
+                <file-picker name="{{setting.key}}" value="{{setting.value}}"
+                             type="{{setting.filePicker}}"></file-picker>
             {{/if}}
         </div>
         <p class="hint">{{localize setting.hint}}</p>

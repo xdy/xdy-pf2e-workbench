@@ -1,5 +1,6 @@
 export const OP_SYNC = "canvasPointerSync" as const;
 export const OP_STOP = "canvasPointerStop" as const;
+export const OP_PING = "canvasPointerPing" as const;
 
 export interface PointerSyncPayload {
     operation: typeof OP_SYNC;
@@ -15,7 +16,16 @@ export interface PointerStopPayload {
     userId: string;
 }
 
-export type PointerPayload = PointerSyncPayload | PointerStopPayload;
+export interface PointerPingPayload {
+    operation: typeof OP_PING;
+    userId: string;
+    wx: number;
+    wy: number;
+    soundSrc: string;
+    volume: number;
+}
+
+export type PointerPayload = PointerSyncPayload | PointerStopPayload | PointerPingPayload;
 
 export const REMOTE_CLASS = "xdy-pf2e-workbench-pointer-remote";
 export const DEFAULT_POINTER_COLOR = "#ffffff";
