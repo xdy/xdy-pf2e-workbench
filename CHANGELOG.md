@@ -1,3 +1,10 @@
+## [7.4.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.0...v7.4.1) (2026-06-12)
+
+
+### Bug Fixes
+
+* Add a dropdown to select 'visible ping' (foundry ping) when pressing the key, 'sound ping' which plays a sound file of your choosing when the key is pressed, 'visible + sound ping' which does both, or, of course, 'none', which - not surprisingly - does neither. (No sound files included.) ([2f6da4f](https://github.com/xdy/xdy-pf2e-workbench/commit/2f6da4f57dd031f7dcf0b1d5a2abfe886a1232b2))
+
 # [7.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.3.3...v7.4.0) (2026-06-12)
 
 
