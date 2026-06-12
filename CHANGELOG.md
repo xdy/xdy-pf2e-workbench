@@ -1,3 +1,10 @@
+# [7.4.0](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.3.3...v7.4.0) (2026-06-12)
+
+
+### Features
+
+* Add a 'press key to point to canvas' feature (similar to the pnp module). ([aaa5356](https://github.com/xdy/xdy-pf2e-workbench/commit/aaa5356c534d8d16ca6bdea3cbff44716b3d0cfc))
+
 ## [7.3.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.3.2...v7.3.3) (2026-06-04)
 
 
