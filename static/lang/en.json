@@ -207,7 +207,7 @@
                 "message": "{name} lost their grip on: {items}"
             },
             "sheatheHeldItemsAfterEncounter": {
-                "hint": "Characters automatically sheathe held weapons after encounters.",
+                "hint": "Characters automatically sheathe held weapons after encounters. When active, additional settings will appear.",
                 "name": "Characters automatically sheathe held weapons after encounters.",
                 "message": "{name} sheathed: {items}"
             },
@@ -229,7 +229,7 @@
                 "addWoundedLevel": "Add 1 + Wounded level, for all",
                 "addWoundedLevelForCharacters": "Add 1 + Wounded level, for characters+familiars",
                 "deliberateDeathMessage": "{name} can <b>before gaining Dying</b> as a result of another creature's attack or ability, if that creature is within melee reach, make a melee Strike against the triggering creature.<br>Remove 'Deliberate Death Used' effect if it actually can't be used.",
-                "hint": "Setting to automatically increase Dying at 0 HP.",
+                "hint": "Setting to automatically increase Dying at 0 HP.  When active, additional settings will appear.",
                 "name": "Automatically increase Dying at 0 HP.",
                 "no": "No",
                 "orcFerocityMessage": "{name} has just used @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] and can now use the free action:@UUID[Compendium.pf2e.actionspf2e.FkfWKq9jhhPzKAbb]"
@@ -303,7 +303,7 @@
             "autoRollDamageAllow": {
                 "all": "All",
                 "gm": "GM",
-                "hint": "Select who is allowed to set the option to Autoroll damage on a hit. Save settings to show/hide additional options on the client automation setting menu.",
+                "hint": "Select who is allowed to set the option to Autoroll damage on a hit. When active, additional settings will appear.",
                 "name": "Who is allowed to set the option to Autoroll damage on a hit.",
                 "none": "None",
                 "players": "Players"
@@ -336,7 +336,7 @@
             "handleDyingRecoveryRollAllow": {
                 "all": "All",
                 "gm": "GM",
-                "hint": "Select who is allowed to set the option to automatically handle dying recovery roll results after the owner has clicked the recovery button the character sheet. Save settings to show/hide additional options on the client automation setting menu.",
+                "hint": "Select who is allowed to set the option to automatically handle dying recovery roll results after the owner has clicked the recovery button the character sheet. When active, additional settings will appear.",
                 "name": "Who is allowed to set the option to automatically handle dying recovery roll results after clicking recovery button.",
                 "none": "None",
                 "players": "Players"
@@ -385,7 +385,7 @@
                 "oglItemsFound": "This character has {count} OGL-licensed item(s):"
             },
             "castPrivateSpell": {
-                "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM.",
+                "hint": "Check to enabling ctrl-clicking Cast on a spell to cast it as a whisper to caster and GM. When active, additional settings will appear.",
                 "name": "Ctrl-click Cast to cast in private.",
                 "aSpell": "A spell"
             },
@@ -416,7 +416,7 @@
             "castPrivateSpellWithPublicMessage": {
                 "cantrip": "Cantrip",
                 "firstPart": "{tokenName} just cast a {type} of the <strong>{traditionString}</strong> tradition. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
-                "hint": "If casting privately, this setting also posts a public message that a spell has been cast UNLESS you hold SHIFT as well as CTRL while casting.",
+                "hint": "If casting privately, this setting also posts a public message that a spell has been cast UNLESS you hold SHIFT as well as CTRL while casting. When active, additional settings will appear.",
                 "name": "Post public message that a spell has been cast.",
                 "basic": "Basic",
                 "noButtonSavePart": "<br><b>{basic} {dataSave} save</b>",
@@ -432,7 +432,7 @@
                 "name": "... and show the public message to the gm also."
             },
             "castPrivateSpellWithPublicMessageShowTraits": {
-                "hint": "Show spell traits in the public message.",
+                "hint": "Show spell traits in the public message. When active, additional settings will appear.",
                 "name": "... and show spell traits in the public message.",
                 "traitPart": " with these traits: <strong>{traits}</strong>"
             },
@@ -812,7 +812,7 @@
                 "name": "Canvas pointer key"
             },
             "canvasPointerPingMode": {
-                "hint": "What happens when you click while the pointer is active.",
+                "hint": "What happens when you click while the pointer is active. When active, additional settings will appear.",
                 "name": "Ping mode",
                 "none": "No ping",
                 "visual": "Visible ping",
