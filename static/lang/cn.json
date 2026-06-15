@@ -678,6 +678,43 @@
             "experimentalToolbeltSaveIntegration": {
                 "hint": "实验性功能：启用PF2e Toolbelt - 目标助手功能集成，以便自动骰掷豁免法术的伤害。（需要你启用PF2e Toolbelt的目标助手功能，同时启用Workbench自动骰掷豁免法术伤害功能的客户端设置。）",
                 "name": "实验性功能：启用PF2e Toolbelt豁免集成"
+            },
+            "canvasPointer": {
+                "hint": "若启用，在画布上长按画布指示标绑定键会显示巨大的Font Awesome图标，而非常规光标。",
+                "name": "启用画布指示标"
+            },
+            "canvasPointerIcon": {
+                "hint": "当画布指示标激活时显示的Font Awesome图标类型（例如：fa-regular fa-hand-point-down，fa-solid fa-arrow-pointer）。",
+                "name": "画布指示标类型"
+            },
+            "canvasPointerBroadcastInterval": {
+                "hint": "向其他客户端广播指示标位置的频率（以毫秒为单位）。数值越低，移动越平滑，但网络流量消耗越大。默认：10ms。",
+                "name": "画布指示标广播间隔（ms）"
+            },
+            "canvasPointerKey": {
+                "hint": "在画布上长按此键显示已配置好的图标，放开恢复为正常光标。默认键：X。",
+                "name": "画布指示标绑定键"
+            },
+            "canvasPointerPingMode": {
+                "hint": "当你在指示标激活时点击画布会发生什么。",
+                "name": "高亮信号模式",
+                "none": "无高亮信号",
+                "visual": "视觉高亮信号",
+                "sound": "声音高亮信号",
+                "visualAndSound": "声音+视觉高亮信号"
+            },
+            "canvasPointerPingSound": {
+                "hint": "发送高亮信号时播放的音频文件。留空则仅显示视觉高亮信号。",
+                "name": "高亮音频文件"
+            },
+            "canvasPointerPingVolume": {
+                "hint": "声音高亮信号的音量（0-1）。默认：0.2。",
+                "name": "高亮信号音量"
+            },
+            "canvasFeaturesSettings": {
+                "hint": "画布指示标，高亮信号，指示物移动动画速度与暂停界面自定义。",
+                "label": "管理画布功能设置",
+                "name": "画布功能设置"
             }
         },
         "spellCardNotFound": "找不到法术卡。以最低环级施放{spell}。",
