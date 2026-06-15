@@ -57,7 +57,7 @@
         "@types/jquery": "^4.0.1",
         "@types/jsdom": "^28.0.3",
         "@types/luxon": "^3.7.1",
-        "@types/node": "^25.9.2",
+        "@types/node": "^25.9.3",
         "@types/prompts": "^2.4.9",
         "@types/showdown": "^2.0.6",
         "@types/sortablejs": "^1.15.9",
