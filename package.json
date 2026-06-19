@@ -46,7 +46,7 @@
         "@foundryvtt/foundryvtt-cli": "github:xyzzy42/foundryvtt-cli#objects",
         "@pixi/graphics-smooth": "^1.1.1",
         "@pixi/particle-emitter": "5.0.10",
-        "@playwright/test": "^1.60.0",
+        "@playwright/test": "^1.61.0",
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/commit-analyzer": "^13.0.1",
         "@semantic-release/exec": "^7.1.0",
