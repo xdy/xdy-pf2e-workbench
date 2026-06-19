@@ -63,7 +63,7 @@
         "@types/sortablejs": "^1.15.9",
         "@types/tooltipster": "^0.0.35",
         "@types/yaireo__tagify": "^4.27.0",
-        "@typescript-eslint/eslint-plugin": "^8.61.0",
+        "@typescript-eslint/eslint-plugin": "^8.61.1",
         "@typescript-eslint/parser": "^8.61.0",
         "classic-level": "^3.0.0",
         "es-jest": "^2.1.0",
