@@ -1,3 +1,10 @@
+## [7.4.4](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.3...v7.4.4) (2026-06-20)
+
+
+### Bug Fixes
+
+* Don't do the remaining steps if no release was made by semantic-release ([b90facb](https://github.com/xdy/xdy-pf2e-workbench/commit/b90facb3b1e2e0588ab36b367ed5f7aa92bf7751))
+
 ## [7.4.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.2...v7.4.3) (2026-06-20)
 
 
