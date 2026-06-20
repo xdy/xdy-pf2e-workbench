@@ -1,7 +1,6 @@
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import { defineConfig } from "vite";
 import fs from "fs-extra";
-import checker from "vite-plugin-checker";
 
 function readJson(path: string) {
     try {
@@ -15,9 +14,10 @@ function readJson(path: string) {
 
 const EN_JSON = readJson("./static/lang/en.json");
 
-export default defineConfig(({ command }) => {
+// @ts-expect-error Vite's type definitions don't support async config functions, but it works
+export default defineConfig(async ({ command }) => {
     const plugins = [
-        ...(command === "serve" ? [checker({ typescript: true })] : []),
+        ...(command === "serve" ? [(await import("vite-plugin-checker")).default({ typescript: true })] : []),
         ...viteStaticCopy({
             targets: [
                 { src: "CHANGELOG.md", dest: "." },
