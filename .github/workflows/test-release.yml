@@ -35,30 +35,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
-          submodules: ${{ inputs.use-submodules }}
+          submodules: ${{ env.use_submodules }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version: lts/*
 
-      - name: Enable Corepack
-        run: corepack enable
+      - run: corepack enable
 
-      - name: Install
-        run: pnpm install
+      - run: pnpm install
 
-      - name: Build
-        run: pnpm run build
+      - run: pnpm run build
 
-      - name: Lint
-        run: pnpm run lint
+      - run: pnpm run lint
 
-      - name: Unit tests
-        run: pnpm run test:unit
+      - run: pnpm run test:unit
 
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'xdy/xdy-pf2e-workbench'
@@ -73,15 +66,13 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
-          submodules: ${{ inputs.use-submodules }}
+          submodules: ${{ env.use_submodules }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version: lts/*
 
       - name: Enable Corepack
         run: corepack enable
