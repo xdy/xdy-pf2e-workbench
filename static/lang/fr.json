@@ -207,7 +207,7 @@
         "message": "{name} a perdu sa prise sur : {items}"
       },
       "sheatheHeldItemsAfterEncounter": {
-        "hint": "Les personnages rengainent automatiquement les armes qu'ils tiennent après les rencontres.",
+        "hint": "Les personnages rengainent automatiquement leurs armes après les rencontres. En cas d'activation, des paramètres supplémentaires apparaîtront.",
         "name": "Les personnages rengainent automatiquement les armes qu'ils tiennent après les rencontres.",
         "message": "{name} rengaine : {items}"
       },
@@ -229,7 +229,7 @@
         "addWoundedLevel": "Ajouter 1 + niveau Blessé, pour tous",
         "addWoundedLevelForCharacters": "Ajouter 1 + niveau Blessé, pour les personnages + familiers",
         "deliberateDeathMessage": "{name} peut <b>avant d'être mourant en jeu</b> du fait d'une attaque ou d'une capacité d'une autre créature, si cette créature est à portée d'attaque au corps-à-corps, porter une Frappe au corps-à-corps contre la créature déclencheuse.<br>Supprimer l'effet 'Mort délibérée utilisée' si il ne peut pas être actuellement utilisé.",
-        "hint": "Réglage pour automatiquement augmenter mourant à 0 PV.",
+        "hint": "Paramètre permettant d'augmenter automatiquement Mourant à 0 PV. En cas d'activation, des paramètres supplémentaires s'afficheront.",
         "name": "Automatiquement augmenter Mourant à 0 PV.",
         "no": "Non",
         "orcFerocityMessage": "{name} vient juste d'utiliser @UUID[Compendium.pf2e.feats-srd.PlhPpdwIV0rIAJ8K] et peut désormais utiliser l'action gratuite :@Compendium[pf2e.actionspf2e.FkfWKq9jhhPzKAbb]"
@@ -303,7 +303,7 @@
       "autoRollDamageAllow": {
         "all": "Tous",
         "gm": "MJ",
-        "hint": "Choisissez qui est autorisé à régler l'option pour lancer les dégâts automatiquement. Sauvegarder les réglages pour montrer/cacher les options de réglage de l'automatisation sur le menu du client.",
+        "hint": "Sélectionnez les personnes autorisées à activer l'option de dégâts automatiques si elles touchent. En cas d'activation, des paramètres supplémentaires s'afficheront.",
         "name": "Qui est autorisé à régler l'option pour lancer les dégâts automatiquement en cas de succès.",
         "none": "Aucun",
         "players": "Joueurs"
@@ -336,7 +336,7 @@
       "handleDyingRecoveryRollAllow": {
         "all": "Tous",
         "gm": "MJ",
-        "hint": "Choisissez les personnes autorisées à régler l'option pour le traitement automatique des résultats du jet de récupération pour les mourants lorsque le propriétaire a cliqué sur le bouton de la feuille de personnage. Enregistrer les paramètres pour afficher/masquer des options supplémentaires des réglages de l'automatisation dans le menu du client.",
+        "hint": "Sélectionnez les personnes autorisées à activer l'option de gestion automatique des résultats du test de récupération pour gérer l'état mourant, une fois que le propriétaire a cliqué sur le bouton de récupération de la fiche de personnage. En cas d'activation, des paramètres supplémentaires s'afficheront.",
         "name": "Qui est autorisé à définir l'option permettant de traiter automatiquement les résultats des jets de récupération après avoir appuyé sur le bouton récupération.",
         "none": "Personne",
         "players": "Joueurs"
@@ -385,7 +385,7 @@
         "oglItemsFound": "Ce personnage possède {count} élément(s) sous licence OGL :"
       },
       "castPrivateSpell": {
-        "hint": "Cliquez pour activer qu'au Lancement du sort, sur un Ctrl+clic, cela envoie un message discret au lanceur et au MJ.",
+        "hint": "Cochez pour activer Ctrl+clic pour lancer des sorts comme un message au lanceur et au MJ. En cas d'activation, des paramètres supplémentaires s'afficheront.",
         "name": "Ctrl+clic pour Lancer un sort en privé.",
         "aSpell": "Un sort"
       },
@@ -416,7 +416,7 @@
       "castPrivateSpellWithPublicMessage": {
         "cantrip": "Tour de magie",
         "firstPart": "{tokenName} vient de lancer un {type} de la tradition <strong>{traditionString}</strong>. <p data-visibility=\"gm\"> (@UUID[{spellUUID}]) </p>",
-        "hint": "S'il est lancé en privé, cela poste néanmoins un message public pour annoncer qu'un sort a été lancé À MOINS que vous ne pressiez également SHIFT ainsi que CTRL lorsque vous incantez.",
+        "hint": "Si vous lancez un sort en privé, ce paramètre publie également un message public indiquant qu'un sort a été lancé, SAUF si vous maintenez les touches MAJ et CTRL enfoncées pendant l'incantation. En cas d'activation, des options supplémentaires s'afficheront.",
         "name": "Poste un message public pour dire qu'un sort a été lancé.",
         "basic": "Basique",
         "noButtonSavePart": "<br><b>jet de {dataSave} {basic}</b>",
@@ -432,7 +432,7 @@
         "name": "... et montrer le message public au MJ également."
       },
       "castPrivateSpellWithPublicMessageShowTraits": {
-        "hint": "Montrer les traits du sort dans le message public.",
+        "hint": "Afficher les traits du sort dans le message public. En cas d'activation, des paramètres supplémentaires s'afficheront.",
         "name": "... et montre les traits du sort dans le message public.",
         "traitPart": " avec ces traits : <strong>{traits}</strong>"
       },
@@ -794,6 +794,43 @@
       "tokenAnimationSpeed": {
         "hint": "Changer pour altérer la vitesse de l'animation de déplacement du jeton (6 par défaut).",
         "name": "Changer pour modifier la vitesse d'animation du déplacement du jeton."
+      },
+      "canvasPointer": {
+        "hint": "En cas d'activation, appuyer la touche de pointeur du canevas sur celui-ci affiche une grande icône Font Awesome à la place du curseur normal.",
+        "name": "Activer le pointeur de canevas"
+      },
+      "canvasPointerIcon": {
+        "hint": "La ou les classes d'icônes Font Awesome à afficher lorsque le pointeur du canevas est actif (par exemple fa-regular fa-hand-point-down, fa-solid fa-arrow-pointer).",
+        "name": "classe d'icône de pointeur du canevas"
+      },
+      "canvasPointerBroadcastInterval": {
+        "hint": "Fréquence (en millisecondes) de diffusion de la position du pointeur vers les autres clients. Plus la valeur est faible, plus le mouvement est fluide, mais plus le trafic réseau est important. Par défaut : 10.",
+        "name": "Intervalle de diffusion du pointeur de canevas (ms)"
+      },
+      "canvasPointerKey": {
+        "hint": "Maintenez cette touche enfoncée au-dessus du canevas pour afficher l'icône configurée. Relâchez-la pour rétablir le curseur normal. Par défaut : X.",
+        "name": "Touche pour le pointeur du canevas"
+      },
+      "canvasPointerPingMode": {
+        "hint": "Que se passe-t-il lorsque vous cliquez alors que le pointeur est actif ? Lorsque le pointeur est actif, des paramètres supplémentaires s’affichent.",
+        "name": "Mode ping",
+        "none": "Aucun ping",
+        "visual": "Ping visible",
+        "sound": "Ping sonore",
+        "visualAndSound": "Ping visuel & sonore"
+      },
+      "canvasPointerPingSound": {
+        "hint": "Fichier audio entendu lors du ping. Laisser vide pour n'afficher que le ping visuel.",
+        "name": "Fichier du ping sonore"
+      },
+      "canvasPointerPingVolume": {
+        "hint": "Volume sonore du ping (0 à 1). Valeur par défaut : 0,2.",
+        "name": "Volume sonore du ping"
+      },
+      "canvasFeaturesSettings": {
+        "hint": "Personnalisation du pointeur de canevas, des pings, de la vitesse d'animation des jetons et de l'écran de pause.",
+        "label": "Gérer les paramètres des fonctionnalités du canevas",
+        "name": "Paramètres des fonctionnalités du canevas"
       },
       "workbenchVersion": {
         "hint": "Version que la dernière migration utilise. Peut être inférieure à la version du module. Ne modifiez pas cela à moins que vous ne sachiez ce que vous faites.",
