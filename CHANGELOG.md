@@ -1,3 +1,10 @@
+## [7.4.3](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.2...v7.4.3) (2026-06-20)
+
+
+### Bug Fixes
+
+* More cleanup of release and build process ([d7782e3](https://github.com/xdy/xdy-pf2e-workbench/commit/d7782e390d59135600ad0a2fca88d16af7385182))
+
 ## [7.4.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.1...v7.4.2) (2026-06-20)
 
 
