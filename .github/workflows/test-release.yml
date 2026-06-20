@@ -35,10 +35,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ./.github/actions/build
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
-          node-version: lts/*
-          use-submodules: ${{ env.use_submodules }}
+          submodules: ${{ inputs.use-submodules }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
 
       - name: Lint
         run: pnpm run lint
@@ -59,10 +73,24 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: ./.github/actions/build
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
-          node-version: lts/*
-          use-submodules: ${{ env.use_submodules }}
+          submodules: ${{ inputs.use-submodules }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
 
       - name: Audit (non-blocking)
         run: pnpm audit --prod --audit-level=high
