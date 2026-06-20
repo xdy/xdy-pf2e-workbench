@@ -31,7 +31,7 @@ concurrency:
 
 jobs:
   test:
-    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == format('refs/heads/{0}', env.branch_name) && github.repository == env.repo_name)
+    if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'xdy/xdy-pf2e-workbench')
     runs-on: ubuntu-latest
 
     steps:
@@ -47,7 +47,7 @@ jobs:
         run: pnpm run test:unit
 
   release:
-    if: github.event_name == 'push' && github.ref == format('refs/heads/{0}', env.branch_name) && github.repository == env.repo_name
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'xdy/xdy-pf2e-workbench'
 
     runs-on: ubuntu-latest
     needs: [ test ]
