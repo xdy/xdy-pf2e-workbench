@@ -1,3 +1,14 @@
+## [7.4.2](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.1...v7.4.2) (2026-06-20)
+
+
+### Bug Fixes
+
+* No actual changes, just updated dependencies and cleanup of the build and release process ([b39452f](https://github.com/xdy/xdy-pf2e-workbench/commit/b39452fecb78173a392fc355e3734627d3e07c83))
+* No actual changes, just updated dependencies and cleanup of the build and release process ([ee8c420](https://github.com/xdy/xdy-pf2e-workbench/commit/ee8c4200dff751c1e9f461469456cb5bebd544f5))
+* No actual changes, just updated dependencies and cleanup of the build and release process ([ae17cf8](https://github.com/xdy/xdy-pf2e-workbench/commit/ae17cf81dc087baf62ddef051edb3530ecbcb0df))
+* No actual changes, just updated dependencies and cleanup of the build and release process ([234c664](https://github.com/xdy/xdy-pf2e-workbench/commit/234c66434cd181dcfda2a677bb6491db353ae088))
+* No actual changes, just updated dependencies and cleanup of the build and release process ([83a6071](https://github.com/xdy/xdy-pf2e-workbench/commit/83a60715193bd785ab3e9cf60841c481c22b97a1))
+
 ## [7.4.1](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.0...v7.4.1) (2026-06-12)
 
 
