@@ -30,7 +30,7 @@
         "strictPropertyInitialization": true,
         "target": "ESNext",
         "typeRoots": ["node_modules/@types", "node_modules/foundry-pf2e/types"],
-        "types": ["jquery", "node", "tooltipster"],
+        "types": ["jquery", "node"],
         "useDefineForClassFields": true
     },
     "watchOptions": {

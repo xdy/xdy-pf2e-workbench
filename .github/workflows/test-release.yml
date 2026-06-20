@@ -1,17 +1,16 @@
 name: Test and release
 
+# Required secrets:
+#   GITHUB_TOKEN, NPM_TOKEN, FOUNDRYVTT_RELEASE_TOKEN
+# Optional secrets:
+#   DISCORD_WEBHOOK_URL
+
 # Run the workflow when a Pull Request is opened or when changes are pushed to main on the repo below (i.e. don't run on forks)
+
 on:
   pull_request:
   push:
     branches: [ main ]
-
-# Required secrets:
-#   GITHUB_TOKEN             — provided automatically by GitHub
-#   NPM_TOKEN                — for semantic-release npm publishing
-#   FOUNDRYVTT_RELEASE_TOKEN — FoundryVTT Package Release API authorization token
-# Optional secrets:
-#   WEBHOOK_URL              — Discord webhook URL for release notifications
 
 permissions:
   contents: read
@@ -21,7 +20,7 @@ env:
   repo_name: xdy/xdy-pf2e-workbench
   branch_name: main
   package_type: module
-  set_maximum: "false" # Whether to set compatibility maximum from manifest (true) or leave unset (false)
+  set_maximum_from_manifest: "false" # Whether to set compatibility maximum from manifest (true) or leave unset (false)
   use_submodules: "true" # Whether to check out git submodules during build
 
 # Serialize releases to prevent concurrent pushes to the same branch
@@ -88,9 +87,6 @@ jobs:
         continue-on-error: true
         timeout-minutes: 5
 
-      - name: Make release script executable
-        run: chmod +x ./.release.sh
-
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -98,15 +94,15 @@ jobs:
         run: pnpm exec semantic-release
         timeout-minutes: 10
 
-      - name: Send Webhook Notification
+      - name: Send Discord Notification
         env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
-          if [ -z "$WEBHOOK_URL" ]; then
-            echo "WEBHOOK_URL not set, skipping notification"
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "DISCORD_WEBHOOK_URL not set, skipping notification"
             exit 0
           fi
-          bash scripts/build/discord.sh -- "$WEBHOOK_URL"
+          bash scripts/build/discord.sh -- "$DISCORD_WEBHOOK_URL"
         timeout-minutes: 2
 
       - name: Read manifest values
@@ -125,10 +121,10 @@ jobs:
           MANIFEST_URL: https://github.com/${{ github.repository }}/releases/download/${{ steps.manifest.outputs.tag }}/${{ env.package_type }}.json
           NOTES_URL: https://github.com/${{ github.repository }}/blob/${{ env.branch_name }}/CHANGELOG.md
         run: |
-          if [ '${{ env.set_maximum }}' = 'true' ]; then
-            EFFECTIVE_MAX='${{ steps.manifest.outputs.maximum }}'
+          if [ '${{ env.set_maximum_from_manifest }}' = 'true' ]; then
+            MAXIMUM_VERSION='${{ steps.manifest.outputs.maximum }}'
           else
-            EFFECTIVE_MAX=''
+            MAXIMUM_VERSION=''
           fi
           PAYLOAD=$(jq -n \
             --arg id '${{ steps.manifest.outputs.id }}' \
@@ -137,7 +133,7 @@ jobs:
             --arg notes "$NOTES_URL" \
             --arg minimum '${{ steps.manifest.outputs.minimum }}' \
             --arg verified '${{ steps.manifest.outputs.verified }}' \
-            --arg maximum "$EFFECTIVE_MAX" \
+            --arg maximum "$MAXIMUM_VERSION" \
             '{
               id: $id,
               "dry-run": false,

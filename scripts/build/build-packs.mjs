@@ -3,18 +3,12 @@
 
 import fs from "fs-extra";
 import path from "path";
-// @ts-expect-error ide complains, but it works
 import { compilePack } from "@foundryvtt/foundryvtt-cli";
-import { DocumentStatsData } from "foundry/common/data/fields.mjs";
-import { CompendiumDocumentType, CompendiumUUID } from "foundry/client/utils/helpers.mjs";
-import { ImageFilePath } from "foundry/common/constants.mjs";
 
-// We can't import this from xdy-pf2e-workbench.ts because nodejs can't run that file
-const MODULENAME = "xdy-pf2e-workbench";
-
-type MacroPackSource = Partial<foundry.documents.MacroSource> & { _key: string }; // Need _key, but some fields can be omitted.
 const module = JSON.parse(fs.readFileSync("static/module.json", { encoding: "utf8" }));
-const baseMacro: Partial<foundry.documents.MacroSource> = {
+// We can't import this from xdy-pf2e-workbench.ts because nodejs can't run that file
+const MODULENAME = module.id;
+const baseMacro = {
     author: null,
     flags: {},
     ownership: { default: 1 },
@@ -23,10 +17,9 @@ const baseMacro: Partial<foundry.documents.MacroSource> = {
 };
 
 // Helper function to create system-specific macro stats
-function createBaseMacroStats(systemId: "pf2e" | "sf2e"): Omit<DocumentStatsData, "compendiumSource"> {
+function createBaseMacroStats(systemId) {
     return {
         systemId: systemId,
-        // @ts-expect-error build script
         systemVersion: module.relationships.systems.find((s) => s.id === systemId).compatibility.minimum,
         coreVersion: module.compatibility.minimum,
         createdTime: Date.now(),
@@ -36,11 +29,11 @@ function createBaseMacroStats(systemId: "pf2e" | "sf2e"): Omit<DocumentStatsData
     };
 }
 
-function compendiumUuid(compendium: string, type: CompendiumDocumentType, id: string): CompendiumUUID {
+function compendiumUuid(compendium, type, id) {
     return `Compendium.${MODULENAME}.${compendium}.${type}.${id}`;
 }
 
-const macroIcons = new Map<string, ImageFilePath>([
+const macroIcons = new Map([
     ["Adjust Merchant Prices", "icons/commodities/currency/coins-assorted-mix-copper.webp"],
     ["Advanced Countdown", "systems/pf2e/icons/spells/time-beacon.webp"],
     ["Assign Standby Spell", "systems/pf2e/icons/spells/abyssal-pact.webp"],
@@ -112,7 +105,7 @@ async function buildAsymonousPack() {
 
     // Build for both systems
     // For backwards compatibility, PF2e packs keep original names (no -pf2e suffix)
-    for (const systemId of ["pf2e", "sf2e"] as const) {
+    for (const systemId of ["pf2e", "sf2e"]) {
         const suffix = systemId === "pf2e" ? "" : `-${systemId}`;
         const packNameInternal = `asymonous-benefactor-macros-internal${suffix}`;
         const packNameImport = `asymonous-benefactor-macros${suffix}`;
@@ -121,8 +114,8 @@ async function buildAsymonousPack() {
         fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameInternal));
         fs.ensureDirSync(path.resolve(outDir, "packs/generated", packNameImport));
 
-        const macrosImport: MacroPackSource[] = [];
-        const macrosInternal: MacroPackSource[] = [];
+        const macrosImport = [];
+        const macrosInternal = [];
         for (const folderPath of asymonousSource) {
             const files = fs.readdirSync(path.join(submod, folderPath));
             for (const file of files) {
@@ -200,16 +193,16 @@ ${documentation ? documentation[0] : "/* There is no documentation in the macro.
 
 // Pack "*.macro" files into a compendium
 // Argument is both the directory in src/packs/data with source as well the the compendium name in outDir/packs/generated
-async function buildMacrosPack(packBaseName: string) {
+async function buildMacrosPack(packBaseName) {
     const folderPath = path.resolve("src/packs/data", packBaseName);
 
     // Build for both systems
     // For backwards compatibility, PF2e packs keep original names (no -pf2e suffix)
-    for (const systemId of ["pf2e", "sf2e"] as const) {
+    for (const systemId of ["pf2e", "sf2e"]) {
         const suffix = systemId === "pf2e" ? "" : `-${systemId}`;
         const packName = `${packBaseName}${suffix}`;
         const baseMacroStats = createBaseMacroStats(systemId);
-        const macros: MacroPackSource[] = [];
+        const macros = [];
         const files = fs.readdirSync(folderPath);
         for (const file of files) {
             const filePath = path.join(folderPath, file);

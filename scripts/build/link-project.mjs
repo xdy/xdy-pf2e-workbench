@@ -1,9 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { rmdir, symlink } from "node:fs/promises";
 import * as path from "path";
-// @ts-expect-error ide complains, but it works
 import yargs from "yargs";
-// @ts-expect-error ide complains, but it works
 import { hideBin } from "yargs/helpers";
 
 /** Link build to User Data folder */
@@ -16,7 +14,7 @@ const argv = await yargs(hideBin(process.argv))
     .help()
     .parse();
 const config = JSON.parse(readFileSync("foundryconfig.json", "utf-8"));
-const name = "xdy-pf2e-workbench";
+const moduleId = JSON.parse(readFileSync("static/module.json", "utf-8")).id;
 const destDir = "modules";
 
 let linkDir;
@@ -25,7 +23,7 @@ if (config.dataPath) {
         throw Error("User Data path invalid, no Data directory found");
     }
 
-    linkDir = path.join(config.dataPath, "Data", destDir, name);
+    linkDir = path.join(config.dataPath, "Data", destDir, moduleId);
 } else {
     throw Error("No User Data path defined in foundryconfig.json");
 }

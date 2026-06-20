@@ -29,9 +29,6 @@ export default defineConfig(async ({ command }) => {
 
     return {
         publicDir: "static",
-        resolve: {
-            tsconfigPaths: true,
-        },
         define: {
             EN_JSON: JSON.stringify(EN_JSON),
             fu: "foundry.utils",
