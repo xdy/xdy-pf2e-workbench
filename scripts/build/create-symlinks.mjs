@@ -58,21 +58,19 @@ if (fs.existsSync("foundryconfig.json")) {
     if (!foundryConfig.installPath) {
         fatal(
             "installPath not specified in foundryconfig.json",
-            "Please copy foundryconfig.example.json to foundryconfig.json and set your Foundry installation path."
+            "Please copy foundryconfig.example.json to foundryconfig.json and set your Foundry installation path.",
         );
     }
 
     // The Node install is *not* nested but Electron installs *are*
     const nested = fs.existsSync(path.join(foundryConfig.installPath, "resources", "app"));
-    const fileRoot = nested
-        ? path.join(foundryConfig.installPath, "resources", "app")
-        : foundryConfig.installPath;
+    const fileRoot = nested ? path.join(foundryConfig.installPath, "resources", "app") : foundryConfig.installPath;
     console.log(`Detected ${nested ? "Electron" : "Node.js"} install at: ${fileRoot}`);
 
     if (!fs.existsSync(fileRoot)) {
         fatal(
             `Foundry install path does not exist: ${fileRoot}`,
-            "Please verify the installPath in foundryconfig.json is correct."
+            "Please verify the installPath in foundryconfig.json is correct.",
         );
     }
 
@@ -86,7 +84,7 @@ if (fs.existsSync("foundryconfig.json")) {
     await createSymlink(
         path.join(fileRoot, "public", "lang"),
         path.join("vendored", "foundry", "lang"),
-        "vendored/foundry/lang"
+        "vendored/foundry/lang",
     );
 
     if (foundryConfig.pf2eSourcePath) {
@@ -94,7 +92,11 @@ if (fs.existsSync("foundryconfig.json")) {
             console.warn(`pf2eSourcePath does not exist: ${foundryConfig.pf2eSourcePath} — skipping pf2e symlink.`);
         } else {
             await ensureDir("vendored/pf2e");
-            await createSymlink(foundryConfig.pf2eSourcePath, path.join("vendored", "pf2e", "src"), "vendored/pf2e/src");
+            await createSymlink(
+                foundryConfig.pf2eSourcePath,
+                path.join("vendored", "pf2e", "src"),
+                "vendored/pf2e/src",
+            );
         }
     } else {
         console.log("pf2eSourcePath not set in foundryconfig.json — skipping pf2e symlink.");

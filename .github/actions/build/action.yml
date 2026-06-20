@@ -1,0 +1,36 @@
+name: Build
+description: Checkout, install dependencies, and build the project
+
+inputs:
+  node-version:
+    required: true
+    description: Node.js version to use
+  use-submodules:
+    required: false
+    default: "true"
+    description: Whether to check out git submodules
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+      with:
+        submodules: ${{ inputs.use-submodules }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Enable Corepack
+      shell: bash
+      run: corepack enable
+
+    - name: Install
+      shell: bash
+      run: pnpm install
+
+    - name: Build
+      shell: bash
+      run: pnpm run build

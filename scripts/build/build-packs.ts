@@ -3,6 +3,7 @@
 
 import fs from "fs-extra";
 import path from "path";
+// @ts-expect-error ide complains, but it works
 import { compilePack } from "@foundryvtt/foundryvtt-cli";
 import { DocumentStatsData } from "foundry/common/data/fields.mjs";
 import { CompendiumDocumentType, CompendiumUUID } from "foundry/client/utils/helpers.mjs";
@@ -25,6 +26,7 @@ const baseMacro: Partial<foundry.documents.MacroSource> = {
 function createBaseMacroStats(systemId: "pf2e" | "sf2e"): Omit<DocumentStatsData, "compendiumSource"> {
     return {
         systemId: systemId,
+        // @ts-expect-error build script
         systemVersion: module.relationships.systems.find((s) => s.id === systemId).compatibility.minimum,
         coreVersion: module.compatibility.minimum,
         createdTime: Date.now(),

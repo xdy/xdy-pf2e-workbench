@@ -53,7 +53,7 @@ export default tseslint.config(
         rules: { "global-require": "off" },
     },
     {
-        files: ["build/**/*.ts"],
+        files: ["scripts/build/**/*.ts"],
         languageOptions: {
             globals: {
                 ...globals.node,

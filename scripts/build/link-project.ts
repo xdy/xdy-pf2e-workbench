@@ -1,7 +1,9 @@
 import { existsSync, readFileSync } from "node:fs";
 import { rmdir, symlink } from "node:fs/promises";
 import * as path from "path";
+// @ts-expect-error ide complains, but it works
 import yargs from "yargs";
+// @ts-expect-error ide complains, but it works
 import { hideBin } from "yargs/helpers";
 
 /** Link build to User Data folder */

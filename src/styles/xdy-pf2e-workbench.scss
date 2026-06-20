@@ -456,8 +456,9 @@
     z-index: 99999;
     font-size: 48px;
     transform: translate(-50%, -50%);
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.9),
-    0 0 12px rgba(0, 0, 0, 0.6);
+    text-shadow:
+        0 0 6px rgba(0, 0, 0, 0.9),
+        0 0 12px rgba(0, 0, 0, 0.6);
     transition: opacity 0.05s ease;
     will-change: left, top;
 }
