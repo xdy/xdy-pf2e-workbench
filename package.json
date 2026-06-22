@@ -67,7 +67,7 @@
         "typescript": "^6.0.3",
         "typescript-eslint": "^8.61.1",
         "vite": "^8.0.16",
-        "vite-plugin-checker": "^0.14.3",
+        "vite-plugin-checker": "^0.14.4",
         "vite-plugin-static-copy": "^4.1.1",
         "vitest": "^4.1.9",
         "yargs": "^18.0.0"
