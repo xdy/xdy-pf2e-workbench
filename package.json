@@ -54,7 +54,7 @@
         "@types/fs-extra": "^11.0.4",
         "@types/jquery": "^4.0.1",
         "@types/luxon": "^3.7.1",
-        "@types/node": "^25.9.3",
+        "@types/node": "^26.0.1",
         "@typescript-eslint/eslint-plugin": "^8.61.1",
         "@typescript-eslint/parser": "^8.61.1",
         "eslint": "^10.5.0",
