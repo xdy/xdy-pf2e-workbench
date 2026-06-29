@@ -1,3 +1,10 @@
+## [7.4.6](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.5...v7.4.6) (2026-06-29)
+
+
+### Bug Fixes
+
+* Revert dependency changes. ([cf91808](https://github.com/xdy/xdy-pf2e-workbench/commit/cf918088d67e95603e19c59e49b92b3a9ddeb48b))
+
 ## [7.4.5](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.4...v7.4.5) (2026-06-29)
 
 
