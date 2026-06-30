@@ -57,7 +57,7 @@
         "@types/node": "^25.9.3",
         "@typescript-eslint/eslint-plugin": "^8.61.1",
         "@typescript-eslint/parser": "^8.61.1",
-        "eslint": "^10.5.0",
+        "eslint": "^10.6.0",
         "foundry-pf2e": "github:7H3LaughingMan/foundry-pf2e#v13",
         "fs-extra": "^11.3.5",
         "globals": "^17.6.0",
