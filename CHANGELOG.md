@@ -1,3 +1,12 @@
+## [7.4.10](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.9...v7.4.10) (2026-07-02)
+
+
+### Bug Fixes
+
+* Double sigh. ([d278ae5](https://github.com/xdy/xdy-pf2e-workbench/commit/d278ae5033ce920bdd831ba638f7f4499ffaf3d3))
+* Or not. Try older node as a workaround. ([485e259](https://github.com/xdy/xdy-pf2e-workbench/commit/485e2599afb3a26becefa23633cb2de0d86840c3))
+* Sigh. ([ded5c02](https://github.com/xdy/xdy-pf2e-workbench/commit/ded5c0296f6de9f02c1334918f690e4227a0079c))
+
 ## [7.4.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.8...v7.4.9) (2026-07-02)
 
 
