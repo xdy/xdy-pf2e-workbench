@@ -7,5 +7,3 @@ allowBuilds:
     classic-level: false
     esbuild: false
     unrs-resolver: false
-minimumReleaseAgeExclude:
-    - '@semantic-release/github@12.0.9'
