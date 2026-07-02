@@ -1,3 +1,10 @@
+## [7.4.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.11...v7.4.12) (2026-07-02)
+
+
+### Bug Fixes
+
+* 24.16.0 was the one that worked in the original issue, so, let's try that one. ([b2f34a1](https://github.com/xdy/xdy-pf2e-workbench/commit/b2f34a1ac76c06a1066685637f6f175d62b6f62f))
+
 ## [7.4.11](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.10...v7.4.11) (2026-07-02)
 
 
