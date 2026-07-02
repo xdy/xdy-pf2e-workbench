@@ -1,3 +1,15 @@
+## [7.4.9](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.8...v7.4.9) (2026-07-02)
+
+
+### Bug Fixes
+
+* Release issues should now be fixed (updated sematic-release due to fix of bug https://github.com/semantic-release/github/issues/1224 which caused broken releases) ([3179782](https://github.com/xdy/xdy-pf2e-workbench/commit/3179782b0aa2f5736b78119066143d8cee327a72))
+
+
+### Reverts
+
+* Revert "fix: Revert "fix: Don't do the remaining steps if no release was made by semantic-release"" ([b2630e2](https://github.com/xdy/xdy-pf2e-workbench/commit/b2630e2d4368bf9d6c89a4a8941bf28defe9e1f8))
+
 ## [7.4.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.7...v7.4.8) (2026-07-02)
 
 
