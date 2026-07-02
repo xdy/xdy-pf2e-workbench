@@ -87,6 +87,10 @@ jobs:
         continue-on-error: true
         timeout-minutes: 5
 
+      - name: Get current tag before release
+        id: pre_tag
+        run: echo "tag=$(git describe --tags --abbrev=0 2>/dev/null || echo '')" >> "$GITHUB_OUTPUT"
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -94,7 +98,19 @@ jobs:
         run: pnpm exec semantic-release
         timeout-minutes: 10
 
+      - name: Check if release was published
+        id: release_check
+        run: |
+          NEW_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo '')
+          if [ -n "$NEW_TAG" ] && [ "$NEW_TAG" != "${{ steps.pre_tag.outputs.tag }}" ]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "new_tag=$NEW_TAG" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Send Discord Notification
+        if: steps.release_check.outputs.published == 'true'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
@@ -106,6 +122,7 @@ jobs:
         timeout-minutes: 2
 
       - name: Read manifest values
+        if: steps.release_check.outputs.published == 'true'
         id: manifest
         run: |
           echo "id=$(jq -r .id ./dist/${{ env.package_type }}.json)" >> "$GITHUB_OUTPUT"
@@ -114,9 +131,10 @@ jobs:
           echo "verified=$(jq -r '."compatibility"."verified"' ./dist/${{ env.package_type }}.json)" >> "$GITHUB_OUTPUT"
           echo "maximum=$(jq -r '."compatibility"."maximum" // empty' ./dist/${{ env.package_type }}.json)" >> "$GITHUB_OUTPUT"
           echo "package-version=$(jq -r .version ./package.json)" >> "$GITHUB_OUTPUT"
-          echo "tag=$(git describe --tags --abbrev=0 2>/dev/null || echo '')" >> "$GITHUB_OUTPUT"
+          echo "tag=${{ steps.release_check.outputs.new_tag }}" >> "$GITHUB_OUTPUT"
 
       - name: Submit package to FoundryVTT Package Release API
+        if: steps.release_check.outputs.published == 'true'
         env:
           MANIFEST_URL: https://github.com/${{ github.repository }}/releases/download/${{ steps.manifest.outputs.tag }}/${{ env.package_type }}.json
           NOTES_URL: https://github.com/${{ github.repository }}/blob/${{ env.branch_name }}/CHANGELOG.md
