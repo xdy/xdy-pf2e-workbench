@@ -1,3 +1,10 @@
+## [7.4.8](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.7...v7.4.8) (2026-07-02)
+
+
+### Bug Fixes
+
+* Revert "fix: Don't do the remaining steps if no release was made by semantic-release" ([7144521](https://github.com/xdy/xdy-pf2e-workbench/commit/7144521afd52f05bd260aea313e16e2ec293ca4b))
+
 ## [7.4.7](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.6...v7.4.7) (2026-07-02)
 
 
