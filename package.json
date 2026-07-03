@@ -59,7 +59,7 @@
         "@typescript-eslint/parser": "^8.62.1",
         "eslint": "^10.6.0",
         "foundry-pf2e": "github:7H3LaughingMan/foundry-pf2e#v13",
-        "fs-extra": "^11.3.5",
+        "fs-extra": "^11.3.6",
         "globals": "^17.7.0",
         "prettier": "^3.9.3",
         "sass": "^1.101.0",
