@@ -1,3 +1,10 @@
+## [7.4.13](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.12...v7.4.13) (2026-07-05)
+
+
+### Bug Fixes
+
+* Update dependencies ([9d1fa86](https://github.com/xdy/xdy-pf2e-workbench/commit/9d1fa860edd3dd6d424c73d05cc411252f0edee1))
+
 ## [7.4.12](https://github.com/xdy/xdy-pf2e-workbench/compare/v7.4.11...v7.4.12) (2026-07-02)
 
 
